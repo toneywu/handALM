@@ -1,0 +1,44 @@
+<?php
+
+$mod_strings['LBL_ASSIGNED_TO_ID'] = '負責人編號';
+$mod_strings['LBL_ASSIGNED_TO_NAME'] = '用戶';
+$mod_strings['LBL_ID'] = '編號';
+$mod_strings['LBL_DATE_ENTERED'] = '創建日期';
+$mod_strings['LBL_DATE_MODIFIED'] = '修改日期';
+$mod_strings['LBL_MODIFIED'] = '修改人';
+$mod_strings['LBL_MODIFIED_ID'] = '修改人編號';
+$mod_strings['LBL_MODIFIED_NAME'] = '修改者';
+$mod_strings['LBL_CREATED'] = '創建人';
+$mod_strings['LBL_CREATED_ID'] = '創建人編號';
+$mod_strings['LBL_DESCRIPTION'] = '描述';
+$mod_strings['LBL_DELETED'] = '已刪除';
+$mod_strings['LBL_NAME'] = '名稱';
+$mod_strings['LBL_CREATED_USER'] = '創建人';
+$mod_strings['LBL_MODIFIED_USER'] = '修改人';
+$mod_strings['LBL_LIST_NAME'] = '名稱';
+$mod_strings['LBL_LIST_FORM_TITLE'] = 'Markers List';
+$mod_strings['LBL_MODULE_NAME'] = '標記';
+$mod_strings['LBL_MODULE_TITLE'] = '標記';
+$mod_strings['LBL_HOMEPAGE_TITLE'] = 'My Markers';
+$mod_strings['LNK_NEW_RECORD'] = 'Create Markers';
+$mod_strings['LNK_LIST'] = 'View Markers';
+$mod_strings['LNK_IMPORT_JJWG_MARKERS'] = 'Import Markers';
+$mod_strings['LBL_SEARCH_FORM_TITLE'] = 'Search Markers';
+$mod_strings['LBL_HISTORY_SUBPANEL_TITLE'] = '歷史';
+$mod_strings['LBL_ACTIVITIES_SUBPANEL_TITLE'] = '活動';
+$mod_strings['LBL_JJWG_MARKERS_SUBPANEL_TITLE'] = '標記';
+$mod_strings['LBL_NEW_FORM_TITLE'] = 'New Markers';
+$mod_strings['LBL_CITY'] = '城市';
+$mod_strings['LBL_STATE'] = '省份';
+$mod_strings['LBL_COUNTRY'] = '國家';
+$mod_strings['LBL_JJWG_MAPS_LAT'] = '緯度';
+$mod_strings['LBL_JJWG_MAPS_LNG'] = '經度';
+$mod_strings['LBL_MARKER_IMAGE'] = 'Marker Image Type';
+$mod_strings['LBL_LIST_ASSIGNED_USER'] = '負責人ID';
+$mod_strings['LBL_MARKER_MAP'] = 'Marker Map';
+
+$mod_strings['LBL_MARKER_MARKER_POSITION'] = 'Marker Position (Latitude, Longitude):';
+$mod_strings['LBL_MARKER_CLOSEST_MATCHING_ADDRESS'] = 'Closest Matching Address:';
+$mod_strings['LBL_MARKER_MARKER_STATUS'] = 'Marker Status';
+$mod_strings['LBL_MARKER_EDIT_DESCRIPTION'] = 'Click and drag the marker.';
+$mod_strings['LBL_JJWG_MAPS_JJWG_MARKERS_FROM_JJWG_MAPS_TITLE'] = '地圖';

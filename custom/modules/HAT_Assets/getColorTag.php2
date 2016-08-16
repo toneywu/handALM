@@ -1,0 +1,29 @@
+<?php
+
+	if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+    class getColorTag {
+        /**
+         * @param $bean
+         * @param $event
+         * @param $arguments
+         */
+	
+	//自定义字段
+	//REF:https://suitecrm.com/community/suitecrm-7-0-discussion/4845-the-customcode-dont-work-in-dashletviewdefs-php-subpanel-relationname-php
+	//显示Dropdown的值
+	//REFhttp://developer.sugarcrm.com/2012/12/04/get-the-display-value-of-a-dropdown-field-in-a-logic-hook/
+	   
+	   public function getAssetStatusColor($bean, $event, $arguments) {
+
+		    $c = BeanFactory::getBean('HAT_Assets',$bean->id);
+		   //because that field is not included in my list view. By using the $bean id to retrieve a copy of the full bean (which I called $c)
+		   //Ref:http://developer.sugarcrm.com/2012/10/15/conditional-formatting-on-cases-list-view-and-dashlets/
+		    $val = translate($c->field_defs['asset_status']['options'],'', $c->asset_status);
+			$bean->asset_status_displayed = "<span class='color_tag color_asset_status_{$c->asset_status}'>{$val}</span>";
+
+	   }	  
+	}
+			
+	
+
+	?>

@@ -1,0 +1,37 @@
+<?php
+
+$mod_strings['LBL_ASSIGNED_TO_ID'] = '負責人編號';
+$mod_strings['LBL_ASSIGNED_TO_NAME'] = '指派給';
+$mod_strings['LBL_ID'] = '編號';
+$mod_strings['LBL_DATE_ENTERED'] = '創建日期';
+$mod_strings['LBL_DATE_MODIFIED'] = '修改日期';
+$mod_strings['LBL_MODIFIED'] = '修改人';
+$mod_strings['LBL_MODIFIED_ID'] = '修改人編號';
+$mod_strings['LBL_MODIFIED_NAME'] = '修改者';
+$mod_strings['LBL_CREATED'] = '創建人';
+$mod_strings['LBL_CREATED_ID'] = '創建人編號';
+$mod_strings['LBL_DESCRIPTION'] = '描述';
+$mod_strings['LBL_DELETED'] = '已刪除';
+$mod_strings['LBL_NAME'] = '地址';
+$mod_strings['LBL_CREATED_USER'] = '創建人';
+$mod_strings['LBL_MODIFIED_USER'] = '修改人';
+$mod_strings['LBL_LIST_NAME'] = '地址';
+$mod_strings['LBL_LIST_FORM_TITLE'] = 'Address Cache List';
+$mod_strings['LBL_MODULE_NAME'] = '位址快取';
+$mod_strings['LBL_MODULE_TITLE'] = '位址快取';
+$mod_strings['LBL_HOMEPAGE_TITLE'] = 'My Address Cache';
+$mod_strings['LNK_NEW_RECORD'] = 'Create Address Cache';
+$mod_strings['LNK_LIST'] = 'View Address Cache';
+$mod_strings['LNK_IMPORT_JJWG_ADRESS_CACHE'] = 'Import Address Cache';
+$mod_strings['LBL_SEARCH_FORM_TITLE'] = 'Search Address Cache';
+$mod_strings['LBL_HISTORY_SUBPANEL_TITLE'] = '歷史';
+$mod_strings['LBL_ACTIVITIES_SUBPANEL_TITLE'] = '活動';
+$mod_strings['LBL_JJWG_ADRESS_CACHE_SUBPANEL_TITLE'] = '位址快取';
+$mod_strings['LBL_NEW_FORM_TITLE'] = 'New Address Cache';
+$mod_strings['LBL_LAT'] = '緯度';
+$mod_strings['LBL_LNG'] = '經度';
+$mod_strings['LBL_GEOCODE_STATUS'] = '地理編碼狀態';
+$mod_strings['LBL_CURRENT_USER_FILTER'] = 'My Items';
+$mod_strings['LBL_ASSIGNED_TO'] = '負責人姓名';
+$mod_strings['LNK_IMPORT_JJWG_ADDRESS_CACHE'] = 'Import Address Cache';
+$mod_strings['LBL_JJWG_ADDRESS_CACHE_SUBPANEL_TITLE'] = '位址快取';

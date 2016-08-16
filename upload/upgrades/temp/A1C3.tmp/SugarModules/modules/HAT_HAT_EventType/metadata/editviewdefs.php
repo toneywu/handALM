@@ -1,0 +1,136 @@
+<?php
+$module_name = 'HAT_HAT_EventType';
+$viewdefs [$module_name] = 
+array (
+  'EditView' => 
+  array (
+    'templateMeta' => 
+    array (
+      'maxColumns' => '2',
+      'widths' => 
+      array (
+        0 => 
+        array (
+          'label' => '10',
+          'field' => '30',
+        ),
+        1 => 
+        array (
+          'label' => '10',
+          'field' => '30',
+        ),
+      ),
+      'useTabs' => false,
+      'tabDefs' => 
+      array (
+        'DEFAULT' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+      ),
+      'syncDetailEditViews' => true,
+    ),
+    'panels' => 
+    array (
+      'default' => 
+      array (
+        0 => 
+        array (
+          0 => 'name',
+          1 => 
+          array (
+            'name' => 'basic_type',
+            'studio' => 'visible',
+            'label' => 'LBL_BASIC_TYPE',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_status',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_STATUS',
+          ),
+          1 => '',
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_organization',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_ORGANIZATION',
+          ),
+          1 => 
+          array (
+            'name' => 'change_oranization_le',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_ORANIZATION_LE',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'processing_asset_status',
+            'studio' => 'visible',
+            'label' => 'LBL_PROCESSING_ASSET_STATUS',
+          ),
+          1 => 
+          array (
+            'name' => 'target_asset_status',
+            'studio' => 'visible',
+            'label' => 'LBL_TARGET_ASSET_STATUS',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_contact',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_CONTACT',
+          ),
+          1 => '',
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_location',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_LOCATION',
+          ),
+          1 => 
+          array (
+            'name' => 'change_location_desc',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_LOCATION_DESC',
+          ),
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'require_approval_workflow',
+            'studio' => 'visible',
+            'label' => 'LBL_REQUIRE_APPROVAL_WORKFLOW',
+          ),
+          1 => 
+          array (
+            'name' => 'require_confirmation',
+            'studio' => 'visible',
+            'label' => 'LBL_REQUIRE_CONFIRMATION',
+          ),
+        ),
+        7 => 
+        array (
+          0 => 'description',
+        ),
+      ),
+    ),
+  ),
+);
+?>

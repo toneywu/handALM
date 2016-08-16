@@ -1,0 +1,26 @@
+{
+	"name"		: "ip-subnet-calculator",
+
+	"main"		: "lib/ip-subnet-calculator.js",
+	"keywords"	: [ "ip", "subnet", "network", "netmask", "calculator" ],
+	"authors"	: [ "Aleksi Asikainen" ],
+	"homepage"	: "https://github.com/franksrevenge/IPSubnetCalculator",
+	"license"	: "MIT",
+
+	"repository"			: {
+			"type"	: "git",
+			"url"	: "git://github.com/franksrevenge/IPSubnetCalculator.git"
+	},
+
+	"ignore"	: [
+			"resources",
+			".gitignore",
+			"bower.json",
+			"index.html",
+			"package.json",
+			"README.md"
+			],
+
+	"dependencies"		: {},
+	"devDependencies"	: {}
+}

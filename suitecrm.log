@@ -1,0 +1,1148 @@
+07/07/16 12:06:34 [7192][1][FATAL] Executing repair query:  Query Failed: ALTER TABLE hat_asset_qual   add COLUMN last_qual_result_passed bool  DEFAULT '0' NULL ,  add COLUMN last_qual_result_desc text  NULL: MySQL error 1060: Duplicate column name 'last_qual_result_passed'
+07/07/16 12:08:10 [7192][1][FATAL] Executing repair query:  Query Failed: ALTER TABLE hat_asset_qual   add COLUMN last_qual_result_passed bool  DEFAULT '0' NULL ,  add COLUMN last_qual_result_desc text  NULL: MySQL error 1060: Duplicate column name 'last_qual_result_passed'
+07/07/16 12:20:19 [7192][1][ERROR] Unable to get proper side for link contact
+07/07/16 12:20:19 [7192][1][ERROR] Unable to get proper side for link assigned_user_link
+07/07/16 12:20:19 [7192][1][ERROR] Unable to find relationship projects_quotes
+07/07/16 12:20:19 [7192][1][FATAL] quotes for projects_quotes failed to load
+
+07/07/16 12:20:19 [7192][1][ERROR] Unable to get proper side for link project_name_link
+07/07/16 12:20:19 [7192][1][ERROR] Unable to find relationship users_holidays
+07/07/16 12:20:19 [7192][1][FATAL] holidays for users_holidays failed to load
+
+07/07/16 12:20:19 [7192][1][ERROR] Unable to find relationship projects_users_resources
+07/07/16 12:20:19 [7192][1][FATAL] project_resource for projects_users_resources failed to load
+
+07/07/16 12:20:19 [7192][1][ERROR] Unable to find relationship projects_contacts_resources
+07/07/16 12:20:19 [7192][1][FATAL] project_resource for projects_contacts_resources failed to load
+
+07/07/16 12:20:19 [7192][1][ERROR] Unable to get proper side for link campaign_link
+07/07/16 12:20:19 [7192][1][ERROR] Unable to find relationship users_holidays
+07/07/16 12:20:19 [7192][1][FATAL] holidays for users_holidays failed to load
+
+07/07/16 12:20:19 [7192][1][ERROR] Unable to find relationship projects_users_resources
+07/07/16 12:20:19 [7192][1][FATAL] project_resource for projects_users_resources failed to load
+
+07/07/16 12:20:19 [7192][1][ERROR] Unable to find relationship tracker_user_id
+07/07/16 12:20:19 [7192][1][FATAL] assigned_user_link for tracker_user_id failed to load
+
+07/07/16 12:20:19 [7192][1][FATAL] Class Connectors does not exist, unable to rename.
+07/07/16 12:20:19 [7192][1][FATAL] Class CustomFields does not exist, unable to rename.
+07/07/16 12:20:20 [7192][1][FATAL] Class Audit does not exist, unable to rename.
+07/07/16 12:20:20 [7192][1][ERROR] Unable to get proper side for link calls
+07/07/16 12:20:20 [7192][1][ERROR] Unable to get proper side for link meetings
+07/07/16 12:20:20 [7192][1][ERROR] Unable to get proper side for link contacts_sync
+07/07/16 12:20:20 [7192][1][ERROR] Unable to get proper side for link email_addresses
+07/07/16 12:20:20 [7192][1][ERROR] Unable to get proper side for link email_addresses_primary
+07/07/16 12:20:20 [7192][1][ERROR] Unable to get proper side for link prospect_lists
+07/07/16 12:20:20 [7192][1][ERROR] Unable to get proper side for link emails_users
+07/07/16 12:20:20 [7192][1][ERROR] Unable to find relationship users_holidays
+07/07/16 12:20:20 [7192][1][FATAL] holidays for users_holidays failed to load
+
+07/07/16 12:20:20 [7192][1][ERROR] Unable to get proper side for link eapm
+07/07/16 12:20:20 [7192][1][ERROR] Unable to find relationship projects_users_resources
+07/07/16 12:20:20 [7192][1][FATAL] project_resource for projects_users_resources failed to load
+
+07/07/16 12:20:20 [7192][1][ERROR] Unable to get proper side for link project_users_1
+07/07/16 12:20:20 [7192][1][ERROR] Unable to get proper side for link SecurityGroups
+07/07/16 12:20:20 [7192][1][ERROR] Unable to find relationship ham_sr_fp_event_locations
+07/07/16 12:20:20 [7192][1][FATAL] ham_sr_fp_event_locations for ham_sr_fp_event_locations failed to load
+
+07/07/16 12:20:20 [7192][1][ERROR] Unable to find relationship aor_report_aor_fields
+07/07/16 12:20:20 [7192][1][FATAL] aor_reports for aor_report_aor_fields failed to load
+
+07/07/16 12:20:20 [7192][1][ERROR] Unable to find relationship aor_report_aor_conditions
+07/07/16 12:20:20 [7192][1][FATAL] aor_reports for aor_report_aor_conditions failed to load
+
+07/07/16 12:20:20 [7192][1][ERROR] Unable to find relationship aos_contracts_tasks
+07/07/16 12:20:20 [7192][1][FATAL] tasks for aos_contracts_tasks failed to load
+
+07/07/16 12:20:20 [7192][1][ERROR] Unable to find relationship aos_contracts_notes
+07/07/16 12:20:20 [7192][1][FATAL] notes for aos_contracts_notes failed to load
+
+07/07/16 12:20:20 [7192][1][ERROR] Unable to find relationship aos_contracts_meetings
+07/07/16 12:20:20 [7192][1][FATAL] meetings for aos_contracts_meetings failed to load
+
+07/07/16 12:20:20 [7192][1][ERROR] Unable to find relationship aos_contracts_calls
+07/07/16 12:20:20 [7192][1][FATAL] calls for aos_contracts_calls failed to load
+
+07/07/16 12:20:20 [7192][1][ERROR] Unable to find relationship emails_aos_contracts_rel
+07/07/16 12:20:20 [7192][1][FATAL] emails for emails_aos_contracts_rel failed to load
+
+07/07/16 12:20:20 [7192][1][ERROR] Unable to find relationship aos_products_purchases
+07/07/16 12:20:20 [7192][1][FATAL] aos_products_purchases for aos_products_purchases failed to load
+
+07/07/16 12:20:21 [7192][1][ERROR] Class Connectors does not exist, unable to rename.
+07/07/16 12:20:21 [7192][1][ERROR] Class CustomFields does not exist, unable to rename.
+07/07/16 12:20:21 [7192][1][ERROR] Class Audit does not exist, unable to rename.
+07/07/16 14:07:28 [7192][1][ERROR] Unable to get proper side for link contact
+07/07/16 14:07:28 [7192][1][ERROR] Unable to get proper side for link assigned_user_link
+07/07/16 14:07:29 [7192][1][ERROR] Unable to find relationship projects_quotes
+07/07/16 14:07:29 [7192][1][FATAL] quotes for projects_quotes failed to load
+
+07/07/16 14:07:29 [7192][1][ERROR] Unable to get proper side for link project_name_link
+07/07/16 14:07:29 [7192][1][ERROR] Unable to find relationship users_holidays
+07/07/16 14:07:29 [7192][1][FATAL] holidays for users_holidays failed to load
+
+07/07/16 14:07:29 [7192][1][ERROR] Unable to find relationship projects_users_resources
+07/07/16 14:07:29 [7192][1][FATAL] project_resource for projects_users_resources failed to load
+
+07/07/16 14:07:29 [7192][1][ERROR] Unable to find relationship projects_contacts_resources
+07/07/16 14:07:29 [7192][1][FATAL] project_resource for projects_contacts_resources failed to load
+
+07/07/16 14:07:29 [7192][1][ERROR] Unable to get proper side for link campaign_link
+07/07/16 14:07:29 [7192][1][ERROR] Unable to find relationship users_holidays
+07/07/16 14:07:29 [7192][1][FATAL] holidays for users_holidays failed to load
+
+07/07/16 14:07:29 [7192][1][ERROR] Unable to find relationship projects_users_resources
+07/07/16 14:07:29 [7192][1][FATAL] project_resource for projects_users_resources failed to load
+
+07/07/16 14:07:29 [7192][1][ERROR] Unable to find relationship tracker_user_id
+07/07/16 14:07:29 [7192][1][FATAL] assigned_user_link for tracker_user_id failed to load
+
+07/07/16 14:07:29 [7192][1][FATAL] Class Connectors does not exist, unable to rename.
+07/07/16 14:07:29 [7192][1][FATAL] Class CustomFields does not exist, unable to rename.
+07/07/16 14:07:29 [7192][1][FATAL] Class Audit does not exist, unable to rename.
+07/07/16 14:07:29 [7192][1][ERROR] Unable to get proper side for link calls
+07/07/16 14:07:29 [7192][1][ERROR] Unable to get proper side for link meetings
+07/07/16 14:07:29 [7192][1][ERROR] Unable to get proper side for link contacts_sync
+07/07/16 14:07:29 [7192][1][ERROR] Unable to get proper side for link email_addresses
+07/07/16 14:07:29 [7192][1][ERROR] Unable to get proper side for link email_addresses_primary
+07/07/16 14:07:29 [7192][1][ERROR] Unable to get proper side for link prospect_lists
+07/07/16 14:07:29 [7192][1][ERROR] Unable to get proper side for link emails_users
+07/07/16 14:07:29 [7192][1][ERROR] Unable to find relationship users_holidays
+07/07/16 14:07:29 [7192][1][FATAL] holidays for users_holidays failed to load
+
+07/07/16 14:07:29 [7192][1][ERROR] Unable to get proper side for link eapm
+07/07/16 14:07:29 [7192][1][ERROR] Unable to find relationship projects_users_resources
+07/07/16 14:07:29 [7192][1][FATAL] project_resource for projects_users_resources failed to load
+
+07/07/16 14:07:29 [7192][1][ERROR] Unable to get proper side for link project_users_1
+07/07/16 14:07:29 [7192][1][ERROR] Unable to get proper side for link SecurityGroups
+07/07/16 14:07:30 [7192][1][ERROR] Unable to find relationship ham_sr_fp_event_locations
+07/07/16 14:07:30 [7192][1][FATAL] ham_sr_fp_event_locations for ham_sr_fp_event_locations failed to load
+
+07/07/16 14:07:30 [7192][1][ERROR] Unable to find relationship aor_report_aor_fields
+07/07/16 14:07:30 [7192][1][FATAL] aor_reports for aor_report_aor_fields failed to load
+
+07/07/16 14:07:30 [7192][1][ERROR] Unable to find relationship aor_report_aor_conditions
+07/07/16 14:07:30 [7192][1][FATAL] aor_reports for aor_report_aor_conditions failed to load
+
+07/07/16 14:07:30 [7192][1][ERROR] Unable to find relationship aos_contracts_tasks
+07/07/16 14:07:30 [7192][1][FATAL] tasks for aos_contracts_tasks failed to load
+
+07/07/16 14:07:30 [7192][1][ERROR] Unable to find relationship aos_contracts_notes
+07/07/16 14:07:30 [7192][1][FATAL] notes for aos_contracts_notes failed to load
+
+07/07/16 14:07:30 [7192][1][ERROR] Unable to find relationship aos_contracts_meetings
+07/07/16 14:07:30 [7192][1][FATAL] meetings for aos_contracts_meetings failed to load
+
+07/07/16 14:07:30 [7192][1][ERROR] Unable to find relationship aos_contracts_calls
+07/07/16 14:07:30 [7192][1][FATAL] calls for aos_contracts_calls failed to load
+
+07/07/16 14:07:30 [7192][1][ERROR] Unable to find relationship emails_aos_contracts_rel
+07/07/16 14:07:30 [7192][1][FATAL] emails for emails_aos_contracts_rel failed to load
+
+07/07/16 14:07:30 [7192][1][ERROR] Unable to find relationship aos_products_purchases
+07/07/16 14:07:30 [7192][1][FATAL] aos_products_purchases for aos_products_purchases failed to load
+
+07/07/16 14:07:32 [7192][1][ERROR] Class Connectors does not exist, unable to rename.
+07/07/16 14:07:32 [7192][1][ERROR] Class CustomFields does not exist, unable to rename.
+07/07/16 14:07:32 [7192][1][ERROR] Class Audit does not exist, unable to rename.
+07/07/16 15:08:33 [4512][1][FATAL] IP Address mismatch: SESSION IP: 127.0.0.1 CLIENT IP: ::1
+07/07/16 18:57:34 [4512][1][ERROR] Unable to get proper side for link rack_allocation_link
+07/07/16 18:58:30 [4512][1][ERROR] Unable to get proper side for link rack_allocation_link
+07/07/16 18:58:49 [4512][1][ERROR] Unable to get proper side for link rack_allocation_link
+07/07/16 19:42:58 [7004][1][ERROR] Unable to get proper side for link rack_allocation_link
+07/07/16 19:46:04 [7004][1][ERROR] Unable to get proper side for link rack_allocation_link
+07/07/16 19:46:15 [7004][1][ERROR] Unable to get proper side for link rack_allocation_link
+07/07/16 20:04:51 [7004][1][FATAL] Executing repair query:  Query Failed: ALTER TABLE hit_rack_allocations   modify COLUMN placeholder booLBL_PLACEHOLDERl  DEFAULT '0' NULL: MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'booLBL_PLACEHOLDERl  DEFAULT '0' NULL' at line 1
+07/07/16 20:09:14 [7004][1][ERROR] Unable to get proper side for link rack_allocation_link
+07/07/16 20:09:52 [7004][1][ERROR] Unable to get proper side for link rack_allocation_link
+07/07/16 20:12:41 [7004][1][ERROR] Unable to get proper side for link rack_allocation_link
+07/07/16 20:18:09 [7004][1][ERROR] Unable to get proper side for link rack_allocation_link
+07/07/16 20:18:38 [7004][1][ERROR] Unable to get proper side for link rack_allocation_link
+07/07/16 21:06:36 [7004][1][ERROR] Unable to get proper side for link rack_allocation_link
+07/07/16 21:06:46 [7004][1][ERROR] Unable to get proper side for link rack_allocation_link
+07/07/16 21:10:14 [7004][1][ERROR] Unable to get proper side for link rack_allocation_link
+07/07/16 21:10:47 [7004][1][ERROR] Unable to get proper side for link rack_allocation_link
+07/07/16 21:11:07 [7004][1][ERROR] Unable to get proper side for link rack_allocation_link
+07/07/16 21:15:27 [7004][1][ERROR] Unable to get proper side for link rack_allocation_link
+07/07/16 21:18:11 [7004][1][ERROR] Unable to get proper side for link rack_allocation_link
+07/08/16 07:00:26 [7004][1][ERROR] Unable to get proper side for link contact
+07/08/16 07:00:26 [7004][1][ERROR] Unable to get proper side for link assigned_user_link
+07/08/16 07:00:26 [7004][1][ERROR] Unable to find relationship projects_quotes
+07/08/16 07:00:26 [7004][1][FATAL] quotes for projects_quotes failed to load
+
+07/08/16 07:00:26 [7004][1][ERROR] Unable to get proper side for link project_name_link
+07/08/16 07:00:26 [7004][1][ERROR] Unable to find relationship users_holidays
+07/08/16 07:00:26 [7004][1][FATAL] holidays for users_holidays failed to load
+
+07/08/16 07:00:26 [7004][1][ERROR] Unable to find relationship projects_users_resources
+07/08/16 07:00:26 [7004][1][FATAL] project_resource for projects_users_resources failed to load
+
+07/08/16 07:00:26 [7004][1][ERROR] Unable to find relationship projects_contacts_resources
+07/08/16 07:00:26 [7004][1][FATAL] project_resource for projects_contacts_resources failed to load
+
+07/08/16 07:00:27 [7004][1][ERROR] Unable to get proper side for link campaign_link
+07/08/16 07:00:27 [7004][1][ERROR] Unable to find relationship users_holidays
+07/08/16 07:00:27 [7004][1][FATAL] holidays for users_holidays failed to load
+
+07/08/16 07:00:27 [7004][1][ERROR] Unable to find relationship projects_users_resources
+07/08/16 07:00:27 [7004][1][FATAL] project_resource for projects_users_resources failed to load
+
+07/08/16 07:00:27 [7004][1][ERROR] Unable to find relationship tracker_user_id
+07/08/16 07:00:27 [7004][1][FATAL] assigned_user_link for tracker_user_id failed to load
+
+07/08/16 07:00:27 [7004][1][FATAL] Class Connectors does not exist, unable to rename.
+07/08/16 07:00:27 [7004][1][FATAL] Class CustomFields does not exist, unable to rename.
+07/08/16 07:00:27 [7004][1][FATAL] Class Audit does not exist, unable to rename.
+07/08/16 07:00:27 [7004][1][ERROR] Unable to get proper side for link calls
+07/08/16 07:00:27 [7004][1][ERROR] Unable to get proper side for link meetings
+07/08/16 07:00:27 [7004][1][ERROR] Unable to get proper side for link contacts_sync
+07/08/16 07:00:27 [7004][1][ERROR] Unable to get proper side for link email_addresses
+07/08/16 07:00:27 [7004][1][ERROR] Unable to get proper side for link email_addresses_primary
+07/08/16 07:00:27 [7004][1][ERROR] Unable to get proper side for link prospect_lists
+07/08/16 07:00:27 [7004][1][ERROR] Unable to get proper side for link emails_users
+07/08/16 07:00:27 [7004][1][ERROR] Unable to find relationship users_holidays
+07/08/16 07:00:27 [7004][1][FATAL] holidays for users_holidays failed to load
+
+07/08/16 07:00:27 [7004][1][ERROR] Unable to get proper side for link eapm
+07/08/16 07:00:27 [7004][1][ERROR] Unable to find relationship projects_users_resources
+07/08/16 07:00:27 [7004][1][FATAL] project_resource for projects_users_resources failed to load
+
+07/08/16 07:00:27 [7004][1][ERROR] Unable to get proper side for link project_users_1
+07/08/16 07:00:27 [7004][1][ERROR] Unable to get proper side for link SecurityGroups
+07/08/16 07:00:27 [7004][1][ERROR] Unable to find relationship ham_sr_fp_event_locations
+07/08/16 07:00:27 [7004][1][FATAL] ham_sr_fp_event_locations for ham_sr_fp_event_locations failed to load
+
+07/08/16 07:00:27 [7004][1][ERROR] Unable to find relationship aor_report_aor_fields
+07/08/16 07:00:27 [7004][1][FATAL] aor_reports for aor_report_aor_fields failed to load
+
+07/08/16 07:00:27 [7004][1][ERROR] Unable to find relationship aor_report_aor_conditions
+07/08/16 07:00:27 [7004][1][FATAL] aor_reports for aor_report_aor_conditions failed to load
+
+07/08/16 07:00:28 [7004][1][ERROR] Unable to find relationship aos_contracts_tasks
+07/08/16 07:00:28 [7004][1][FATAL] tasks for aos_contracts_tasks failed to load
+
+07/08/16 07:00:28 [7004][1][ERROR] Unable to find relationship aos_contracts_notes
+07/08/16 07:00:28 [7004][1][FATAL] notes for aos_contracts_notes failed to load
+
+07/08/16 07:00:28 [7004][1][ERROR] Unable to find relationship aos_contracts_meetings
+07/08/16 07:00:28 [7004][1][FATAL] meetings for aos_contracts_meetings failed to load
+
+07/08/16 07:00:28 [7004][1][ERROR] Unable to find relationship aos_contracts_calls
+07/08/16 07:00:28 [7004][1][FATAL] calls for aos_contracts_calls failed to load
+
+07/08/16 07:00:28 [7004][1][ERROR] Unable to find relationship emails_aos_contracts_rel
+07/08/16 07:00:28 [7004][1][FATAL] emails for emails_aos_contracts_rel failed to load
+
+07/08/16 07:00:28 [7004][1][ERROR] Unable to find relationship aos_products_purchases
+07/08/16 07:00:28 [7004][1][FATAL] aos_products_purchases for aos_products_purchases failed to load
+
+07/08/16 07:00:30 [7004][1][ERROR] Class Connectors does not exist, unable to rename.
+07/08/16 07:00:30 [7004][1][ERROR] Class CustomFields does not exist, unable to rename.
+07/08/16 07:00:30 [7004][1][ERROR] Class Audit does not exist, unable to rename.
+07/08/16 07:56:51 [7004][1][FATAL] Bad subpanel definition, it has incorrect value for get_subpanel_data property hat_meters
+07/08/16 07:59:23 [7004][1][FATAL] Error running count query for HAT_Asset_Locations List:  Query Failed: ( SELECT count(*) c FROM hat_meters  INNER JOIN  hat_asset_location hat_meters_hat_asset_locations_link_rel ON hat_meters.hat_asset_location_id=hat_meters_hat_asset_locations_link_rel.id AND hat_meters_hat_asset_locations_link_rel.deleted=0
+
+ where ( hat_meters.hat_asset_location_id='LOCATION-NJXWGJZX-B2-F3-531') AND hat_meters.deleted=0 ): MySQL error 1146: Table 'suitecrm.hat_asset_location' doesn't exist
+07/17/16 19:58:24 [5252][1][FATAL] 错误: Module HAT_Asset_Location 不存在.
+07/17/16 21:25:22 [5252][1][FATAL] 错误: Module HAT_Asset_Location 不存在.
+07/17/16 22:23:26 [5252][1][FATAL]  Query Failed: SELECT
+                                        hat_assets.id asset_id,
+                                        hat_assets.name asset_name,
+                                        hat_assets.asset_desc,
+                                        hat_asset_locations.id location_id,
+                                        hat_asset_locations.name location_name,
+                                        hat_asset_locations.location_title location_title,
+                                        hat_assets.location_desc,
+                                        ham_maint_sites.id site_id,
+                                        ham_maint_sites.name site_name,
+                                        hat_assets.hat_domains_id domain_id,
+                                        hat_domains.name domain_name
+                                    FROM
+                                        hat_domains,
+                                        hat_assets
+                                            LEFT JOIN
+                                        (hat_asset_locations, hat_asset_locations_hat_assets_c, ham_maint_sites) ON (hat_assets.id = hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_assets_idb
+                                            AND hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_asset_locations_ida = hat_asset_locations.id
+                                            AND ham_maint_sites.id = hat_asset_locations.ham_maint_sites_id
+                                            AND hat_asset_locations_hat_assets_c.deleted = 0
+                                            AND ham_maint_sites.deleted = 0
+                                            AND hat_asset_locations.deleted = 0)
+                                    WHERE
+                                        hat_assets.deleted = 0
+                                        hat_domains.deleted = 0
+                                        hat_domains.id = hat_assets.hat_domains_id
+                    and hat_assets.id = '543b8dc4-02e7-09e8-428e-57676a04069b': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'hat_domains.deleted = 0
+                                        hat_domains.id =' at line 25
+07/17/16 22:23:43 [5252][1][FATAL]  Query Failed: SELECT
+                                        hat_assets.id asset_id,
+                                        hat_assets.name asset_name,
+                                        hat_assets.asset_desc,
+                                        hat_asset_locations.id location_id,
+                                        hat_asset_locations.name location_name,
+                                        hat_asset_locations.location_title location_title,
+                                        hat_assets.location_desc,
+                                        ham_maint_sites.id site_id,
+                                        ham_maint_sites.name site_name,
+                                        hat_assets.hat_domains_id domain_id,
+                                        hat_domains.name domain_name
+                                    FROM
+                                        hat_domains,
+                                        hat_assets
+                                            LEFT JOIN
+                                        (hat_asset_locations, hat_asset_locations_hat_assets_c, ham_maint_sites) ON (hat_assets.id = hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_assets_idb
+                                            AND hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_asset_locations_ida = hat_asset_locations.id
+                                            AND ham_maint_sites.id = hat_asset_locations.ham_maint_sites_id
+                                            AND hat_asset_locations_hat_assets_c.deleted = 0
+                                            AND ham_maint_sites.deleted = 0
+                                            AND hat_asset_locations.deleted = 0)
+                                    WHERE
+                                        hat_assets.deleted = 0
+                                        hat_domains.deleted = 0
+                                        hat_domains.id = hat_assets.hat_domains_id
+                    and hat_assets.id = '543b8dc4-02e7-09e8-428e-57676a04069b': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'hat_domains.deleted = 0
+                                        hat_domains.id =' at line 25
+07/17/16 22:24:14 [5252][1][FATAL]  Query Failed: SELECT
+                                        hat_assets.id asset_id,
+                                        hat_assets.name asset_name,
+                                        hat_assets.asset_desc,
+                                        hat_asset_locations.id location_id,
+                                        hat_asset_locations.name location_name,
+                                        hat_asset_locations.location_title location_title,
+                                        hat_assets.location_desc,
+                                        ham_maint_sites.id site_id,
+                                        ham_maint_sites.name site_name,
+                                        hat_assets.hat_domains_id domain_id,
+                                        hat_domains.name domain_name
+                                    FROM
+                                        hat_domains,
+                                        hat_assets
+                                            LEFT JOIN
+                                        (hat_asset_locations, hat_asset_locations_hat_assets_c, ham_maint_sites) ON (hat_assets.id = hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_assets_idb
+                                            AND hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_asset_locations_ida = hat_asset_locations.id
+                                            AND ham_maint_sites.id = hat_asset_locations.ham_maint_sites_id
+                                            AND hat_asset_locations_hat_assets_c.deleted = 0
+                                            AND ham_maint_sites.deleted = 0
+                                            AND hat_asset_locations.deleted = 0)
+                                    WHERE
+                                        hat_assets.deleted = 0
+                                        hat_domains.deleted = 0
+                                        hat_domains.id = hat_assets.hat_domains_id
+                    and hat_assets.id = '543b8dc4-02e7-09e8-428e-57676a04069b': MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'hat_domains.deleted = 0
+                                        hat_domains.id =' at line 25
+07/19/16 21:01:12 [8656][1][FATAL] Bad subpanel definition, it has incorrect value for get_subpanel_data property hat_counting_lines_hat_counting_batchs
+07/22/16 21:14:49 [9056][1][ERROR] Unable to locate language string file for source ext_rest_filepickerio
+07/22/16 21:14:56 [9056][1][ERROR] Unable to locate language string file for source ext_rest_filepickerio
+07/24/16 22:43:19 [8952][1][ERROR] Unable to get proper side for link contact
+07/24/16 22:43:19 [8952][1][ERROR] Unable to get proper side for link assigned_user_link
+07/24/16 22:43:19 [8952][1][ERROR] Unable to find relationship projects_quotes
+07/24/16 22:43:19 [8952][1][FATAL] quotes for projects_quotes failed to load
+
+07/24/16 22:43:19 [8952][1][ERROR] Unable to get proper side for link project_name_link
+07/24/16 22:43:19 [8952][1][ERROR] Unable to find relationship users_holidays
+07/24/16 22:43:19 [8952][1][FATAL] holidays for users_holidays failed to load
+
+07/24/16 22:43:19 [8952][1][ERROR] Unable to find relationship projects_users_resources
+07/24/16 22:43:19 [8952][1][FATAL] project_resource for projects_users_resources failed to load
+
+07/24/16 22:43:19 [8952][1][ERROR] Unable to find relationship projects_contacts_resources
+07/24/16 22:43:19 [8952][1][FATAL] project_resource for projects_contacts_resources failed to load
+
+07/24/16 22:43:20 [8952][1][ERROR] Unable to get proper side for link campaign_link
+07/24/16 22:43:20 [8952][1][ERROR] Unable to find relationship users_holidays
+07/24/16 22:43:20 [8952][1][FATAL] holidays for users_holidays failed to load
+
+07/24/16 22:43:20 [8952][1][ERROR] Unable to find relationship projects_users_resources
+07/24/16 22:43:20 [8952][1][FATAL] project_resource for projects_users_resources failed to load
+
+07/24/16 22:43:20 [8952][1][ERROR] Unable to find relationship tracker_user_id
+07/24/16 22:43:20 [8952][1][FATAL] assigned_user_link for tracker_user_id failed to load
+
+07/24/16 22:43:20 [8952][1][FATAL] Class Connectors does not exist, unable to rename.
+07/24/16 22:43:20 [8952][1][FATAL] Class CustomFields does not exist, unable to rename.
+07/24/16 22:43:20 [8952][1][FATAL] Class Audit does not exist, unable to rename.
+07/24/16 22:43:20 [8952][1][ERROR] Unable to get proper side for link calls
+07/24/16 22:43:20 [8952][1][ERROR] Unable to get proper side for link meetings
+07/24/16 22:43:20 [8952][1][ERROR] Unable to get proper side for link contacts_sync
+07/24/16 22:43:20 [8952][1][ERROR] Unable to get proper side for link email_addresses
+07/24/16 22:43:20 [8952][1][ERROR] Unable to get proper side for link email_addresses_primary
+07/24/16 22:43:20 [8952][1][ERROR] Unable to get proper side for link prospect_lists
+07/24/16 22:43:20 [8952][1][ERROR] Unable to get proper side for link emails_users
+07/24/16 22:43:20 [8952][1][ERROR] Unable to find relationship users_holidays
+07/24/16 22:43:20 [8952][1][FATAL] holidays for users_holidays failed to load
+
+07/24/16 22:43:20 [8952][1][ERROR] Unable to get proper side for link eapm
+07/24/16 22:43:20 [8952][1][ERROR] Unable to find relationship projects_users_resources
+07/24/16 22:43:20 [8952][1][FATAL] project_resource for projects_users_resources failed to load
+
+07/24/16 22:43:20 [8952][1][ERROR] Unable to get proper side for link project_users_1
+07/24/16 22:43:20 [8952][1][ERROR] Unable to get proper side for link SecurityGroups
+07/24/16 22:43:20 [8952][1][ERROR] Unable to find relationship ham_sr_fp_event_locations
+07/24/16 22:43:20 [8952][1][FATAL] ham_sr_fp_event_locations for ham_sr_fp_event_locations failed to load
+
+07/24/16 22:43:20 [8952][1][ERROR] Unable to find relationship aor_report_aor_fields
+07/24/16 22:43:20 [8952][1][FATAL] aor_reports for aor_report_aor_fields failed to load
+
+07/24/16 22:43:20 [8952][1][ERROR] Unable to find relationship aor_report_aor_conditions
+07/24/16 22:43:20 [8952][1][FATAL] aor_reports for aor_report_aor_conditions failed to load
+
+07/24/16 22:43:20 [8952][1][ERROR] Unable to find relationship aos_contracts_tasks
+07/24/16 22:43:20 [8952][1][FATAL] tasks for aos_contracts_tasks failed to load
+
+07/24/16 22:43:20 [8952][1][ERROR] Unable to find relationship aos_contracts_notes
+07/24/16 22:43:20 [8952][1][FATAL] notes for aos_contracts_notes failed to load
+
+07/24/16 22:43:20 [8952][1][ERROR] Unable to find relationship aos_contracts_meetings
+07/24/16 22:43:20 [8952][1][FATAL] meetings for aos_contracts_meetings failed to load
+
+07/24/16 22:43:20 [8952][1][ERROR] Unable to find relationship aos_contracts_calls
+07/24/16 22:43:20 [8952][1][FATAL] calls for aos_contracts_calls failed to load
+
+07/24/16 22:43:20 [8952][1][ERROR] Unable to find relationship emails_aos_contracts_rel
+07/24/16 22:43:20 [8952][1][FATAL] emails for emails_aos_contracts_rel failed to load
+
+07/24/16 22:43:20 [8952][1][ERROR] Unable to find relationship aos_products_purchases
+07/24/16 22:43:20 [8952][1][FATAL] aos_products_purchases for aos_products_purchases failed to load
+
+07/24/16 22:43:22 [8952][1][ERROR] Class Connectors does not exist, unable to rename.
+07/24/16 22:43:22 [8952][1][ERROR] Class CustomFields does not exist, unable to rename.
+07/24/16 22:43:22 [8952][1][ERROR] Class Audit does not exist, unable to rename.
+07/24/16 22:43:43 [8952][1][FATAL] Missing relationship definition ham_workcenter_res. skipping work_center_res subpanel
+07/24/16 22:51:42 [8952][-none-][FATAL] FAILED LOGIN:attempts[1] - admin
+07/25/16 07:11:28 [4232][-none-][FATAL] FAILED LOGIN:attempts[1] - admin
+07/25/16 13:21:51 [9508][1][FATAL] IP Address mismatch: SESSION IP: 127.0.0.1 CLIENT IP: ::1
+07/25/16 16:59:58 [9508][1][FATAL] Executing repair query:  Query Failed: ALTER TABLE haa_qual   add COLUMN attribute6 varchar(255)  NULL ,  add COLUMN attribute7 varchar(255)  NULL ,  add COLUMN attribute8 varchar(255)  NULL ,  add COLUMN attribute9 varchar(255)  NULL: MySQL error 1060: Duplicate column name 'attribute6'
+07/25/16 23:13:25 [9508][1][FATAL] Bad subpanel definition, it has incorrect value for get_subpanel_data property haa_qual
+07/25/16 23:14:59 [9508][1][FATAL] Bad subpanel definition, it has incorrect value for get_subpanel_data property haa_qual
+07/25/16 23:19:16 [9508][1][FATAL] Bad subpanel definition, it has incorrect value for get_subpanel_data property haa_qual
+07/25/16 23:22:31 [9508][1][FATAL] Bad subpanel definition, it has incorrect value for get_subpanel_data property haa_qual
+07/25/16 23:25:06 [9508][1][FATAL] Bad subpanel definition, it has incorrect value for get_subpanel_data property haa_qual
+07/26/16 08:53:59 [6436][1][FATAL] Bad subpanel definition, it has incorrect value for get_subpanel_data property haa_qual
+07/26/16 08:57:33 [6436][1][FATAL] Bad subpanel definition, it has incorrect value for get_subpanel_data property haa_qual
+07/26/16 08:58:25 [6436][1][FATAL] Bad subpanel definition, it has incorrect value for get_subpanel_data property haa_qual
+07/26/16 09:09:32 [6436][1][FATAL] Missing relationship definition haa_qual. skipping haa_qual subpanel
+07/26/16 10:36:03 [6436][1][FATAL] Bad subpanel definition, it has incorrect value for get_subpanel_data property haa_qual
+07/26/16 10:56:59 [6436][1][FATAL] Bad subpanel definition, it has incorrect value for get_subpanel_data property haa_qual
+08/01/16 08:32:18 [10976][1][ERROR] Unable to get proper side for link project_name_link
+08/01/16 08:32:18 [10976][1][ERROR] Unable to get proper side for link project_name_link
+08/01/16 14:28:49 [7720][1][FATAL] Missing relationship definition ham_wo_line. skipping wo_line subpanel
+08/01/16 14:29:06 [7720][1][FATAL] Missing relationship definition ham_wo_line. skipping wo_line subpanel
+08/01/16 23:09:13 [972][-none-][FATAL] FAILED LOGIN:attempts[1] - admin
+08/03/16 14:40:24 [796][1][FATAL]  Query Failed:  SELECT  hat_assets.*  , jt0.user_name modified_by_name , jt0.created_by modified_by_name_owner  , 'Users' modified_by_name_mod , jt1.user_name created_by_name , jt1.created_by created_by_name_owner  , 'Users' created_by_name_mod , jt2.user_name assigned_user_name , jt2.created_by assigned_user_name_owner  , 'Users' assigned_user_name_mod, jt3.name linear_reference_method , jt4.name asset_group , jt5.name asset_category , jt6.name warranty_type , jt7.name parent_asset , jt8.name supplier_org , jt9.name hit_racks , LTRIM(RTRIM(CONCAT(IFNULL(jt10.first_name,''),' ',IFNULL(jt10.last_name,'')))) using_person , LTRIM(RTRIM(CONCAT(IFNULL(jt11.first_name,''),' ',IFNULL(jt11.last_name,'')))) owning_person , jt12.name using_org , jt13.name owning_org , jt14.name domain , '                                                                                                                                                                                                                                                              ' hat_assets_accounts_name , '                                    '  hat_assets_accountsaccounts_ida , '                                                                                                                                                                                                                                                              ' hat_assets_contacts_name , '                                    '  hat_assets_contactscontacts_ida , '                                                                                                                                                                                                                                                              ' hat_asset_locations_hat_assets_name , '                                    '  hat_asset_locations_hat_assetshat_asset_locations_ida  FROM hat_assets   LEFT JOIN  users jt0 ON hat_assets.modified_user_id=jt0.id AND jt0.deleted=0
+
+ AND jt0.deleted=0  LEFT JOIN  users jt1 ON hat_assets.created_by=jt1.id AND jt1.deleted=0
+
+ AND jt1.deleted=0  LEFT JOIN  users jt2 ON hat_assets.assigned_user_id=jt2.id AND jt2.deleted=0
+
+ AND jt2.deleted=0 LEFT JOIN hat_linear_reference_methods jt3 ON hat_assets.linear_reference_method_id = jt3.id AND jt3.deleted=0  LEFT JOIN aos_products jt4 ON hat_assets.aos_products_id = jt4.id AND jt4.deleted=0  LEFT JOIN aos_product_categories jt5 ON hat_assets.aos_product_categories_id = jt5.id AND jt5.deleted=0  LEFT JOIN hat_warranty_types jt6 ON hat_assets.warranty_type_id = jt6.id AND jt6.deleted=0  LEFT JOIN hat_assets jt7 ON hat_assets.parent_asset_id = jt7.id AND jt7.deleted=0  LEFT JOIN accounts jt8 ON hat_assets.supplier_org_id = jt8.id AND jt8.deleted=0  LEFT JOIN hit_racks jt9 ON hat_assets.hit_racks_id = jt9.id AND jt9.deleted=0  LEFT JOIN contacts jt10 ON hat_assets.using_person_id = jt10.id AND jt10.deleted=0  LEFT JOIN contacts jt11 ON hat_assets.owning_person_id = jt11.id AND jt11.deleted=0  LEFT JOIN accounts jt12 ON hat_assets.using_org_id = jt12.id AND jt12.deleted=0  LEFT JOIN accounts jt13 ON hat_assets.owning_org_id = jt13.id AND jt13.deleted=0  LEFT JOIN hat_domains jt14 ON hat_assets.hat_domains_id = jt14.id AND jt14.deleted=0  where (1=1) AND hat_assets.deleted=0: MySQL error 1054: Unknown column 'hat_assets.hit_racks_id' in 'on clause'
+08/03/16 14:41:56 [796][1][FATAL]  Query Failed:  SELECT  hat_assets.*  , jt0.user_name modified_by_name , jt0.created_by modified_by_name_owner  , 'Users' modified_by_name_mod , jt1.user_name created_by_name , jt1.created_by created_by_name_owner  , 'Users' created_by_name_mod , jt2.user_name assigned_user_name , jt2.created_by assigned_user_name_owner  , 'Users' assigned_user_name_mod, jt3.name linear_reference_method , jt4.name asset_group , jt5.name asset_category , jt6.name warranty_type , jt7.name parent_asset , jt8.name supplier_org , jt9.name hit_racks , LTRIM(RTRIM(CONCAT(IFNULL(jt10.first_name,''),' ',IFNULL(jt10.last_name,'')))) using_person , LTRIM(RTRIM(CONCAT(IFNULL(jt11.first_name,''),' ',IFNULL(jt11.last_name,'')))) owning_person , jt12.name using_org , jt13.name owning_org , jt14.name domain , '                                                                                                                                                                                                                                                              ' hat_assets_accounts_name , '                                    '  hat_assets_accountsaccounts_ida , '                                                                                                                                                                                                                                                              ' hat_assets_contacts_name , '                                    '  hat_assets_contactscontacts_ida , '                                                                                                                                                                                                                                                              ' hat_asset_locations_hat_assets_name , '                                    '  hat_asset_locations_hat_assetshat_asset_locations_ida  FROM hat_assets   LEFT JOIN  users jt0 ON hat_assets.modified_user_id=jt0.id AND jt0.deleted=0
+
+ AND jt0.deleted=0  LEFT JOIN  users jt1 ON hat_assets.created_by=jt1.id AND jt1.deleted=0
+
+ AND jt1.deleted=0  LEFT JOIN  users jt2 ON hat_assets.assigned_user_id=jt2.id AND jt2.deleted=0
+
+ AND jt2.deleted=0 LEFT JOIN hat_linear_reference_methods jt3 ON hat_assets.linear_reference_method_id = jt3.id AND jt3.deleted=0  LEFT JOIN aos_products jt4 ON hat_assets.aos_products_id = jt4.id AND jt4.deleted=0  LEFT JOIN aos_product_categories jt5 ON hat_assets.aos_product_categories_id = jt5.id AND jt5.deleted=0  LEFT JOIN hat_warranty_types jt6 ON hat_assets.warranty_type_id = jt6.id AND jt6.deleted=0  LEFT JOIN hat_assets jt7 ON hat_assets.parent_asset_id = jt7.id AND jt7.deleted=0  LEFT JOIN accounts jt8 ON hat_assets.supplier_org_id = jt8.id AND jt8.deleted=0  LEFT JOIN hit_racks jt9 ON hat_assets.hit_racks_id = jt9.id AND jt9.deleted=0  LEFT JOIN contacts jt10 ON hat_assets.using_person_id = jt10.id AND jt10.deleted=0  LEFT JOIN contacts jt11 ON hat_assets.owning_person_id = jt11.id AND jt11.deleted=0  LEFT JOIN accounts jt12 ON hat_assets.using_org_id = jt12.id AND jt12.deleted=0  LEFT JOIN accounts jt13 ON hat_assets.owning_org_id = jt13.id AND jt13.deleted=0  LEFT JOIN hat_domains jt14 ON hat_assets.hat_domains_id = jt14.id AND jt14.deleted=0  where (1=1) AND hat_assets.deleted=0: MySQL error 1054: Unknown column 'hat_assets.hit_racks_id' in 'on clause'
+08/03/16 14:42:15 [796][1][FATAL]  Query Failed:  SELECT  hat_assets.*  , jt0.user_name modified_by_name , jt0.created_by modified_by_name_owner  , 'Users' modified_by_name_mod , jt1.user_name created_by_name , jt1.created_by created_by_name_owner  , 'Users' created_by_name_mod , jt2.user_name assigned_user_name , jt2.created_by assigned_user_name_owner  , 'Users' assigned_user_name_mod, jt3.name linear_reference_method , jt4.name asset_group , jt5.name asset_category , jt6.name warranty_type , jt7.name parent_asset , jt8.name supplier_org , jt9.name hit_racks , LTRIM(RTRIM(CONCAT(IFNULL(jt10.first_name,''),' ',IFNULL(jt10.last_name,'')))) using_person , LTRIM(RTRIM(CONCAT(IFNULL(jt11.first_name,''),' ',IFNULL(jt11.last_name,'')))) owning_person , jt12.name using_org , jt13.name owning_org , jt14.name domain , '                                                                                                                                                                                                                                                              ' hat_assets_accounts_name , '                                    '  hat_assets_accountsaccounts_ida , '                                                                                                                                                                                                                                                              ' hat_assets_contacts_name , '                                    '  hat_assets_contactscontacts_ida , '                                                                                                                                                                                                                                                              ' hat_asset_locations_hat_assets_name , '                                    '  hat_asset_locations_hat_assetshat_asset_locations_ida  FROM hat_assets   LEFT JOIN  users jt0 ON hat_assets.modified_user_id=jt0.id AND jt0.deleted=0
+
+ AND jt0.deleted=0  LEFT JOIN  users jt1 ON hat_assets.created_by=jt1.id AND jt1.deleted=0
+
+ AND jt1.deleted=0  LEFT JOIN  users jt2 ON hat_assets.assigned_user_id=jt2.id AND jt2.deleted=0
+
+ AND jt2.deleted=0 LEFT JOIN hat_linear_reference_methods jt3 ON hat_assets.linear_reference_method_id = jt3.id AND jt3.deleted=0  LEFT JOIN aos_products jt4 ON hat_assets.aos_products_id = jt4.id AND jt4.deleted=0  LEFT JOIN aos_product_categories jt5 ON hat_assets.aos_product_categories_id = jt5.id AND jt5.deleted=0  LEFT JOIN hat_warranty_types jt6 ON hat_assets.warranty_type_id = jt6.id AND jt6.deleted=0  LEFT JOIN hat_assets jt7 ON hat_assets.parent_asset_id = jt7.id AND jt7.deleted=0  LEFT JOIN accounts jt8 ON hat_assets.supplier_org_id = jt8.id AND jt8.deleted=0  LEFT JOIN hit_racks jt9 ON hat_assets.hit_racks_id = jt9.id AND jt9.deleted=0  LEFT JOIN contacts jt10 ON hat_assets.using_person_id = jt10.id AND jt10.deleted=0  LEFT JOIN contacts jt11 ON hat_assets.owning_person_id = jt11.id AND jt11.deleted=0  LEFT JOIN accounts jt12 ON hat_assets.using_org_id = jt12.id AND jt12.deleted=0  LEFT JOIN accounts jt13 ON hat_assets.owning_org_id = jt13.id AND jt13.deleted=0  LEFT JOIN hat_domains jt14 ON hat_assets.hat_domains_id = jt14.id AND jt14.deleted=0  where (1=1) AND hat_assets.deleted=0: MySQL error 1054: Unknown column 'hat_assets.hit_racks_id' in 'on clause'
+08/03/16 14:44:52 [796][1][FATAL]  Query Failed:  SELECT  hat_assets.*  , jt0.user_name modified_by_name , jt0.created_by modified_by_name_owner  , 'Users' modified_by_name_mod , jt1.user_name created_by_name , jt1.created_by created_by_name_owner  , 'Users' created_by_name_mod , jt2.user_name assigned_user_name , jt2.created_by assigned_user_name_owner  , 'Users' assigned_user_name_mod, jt3.name linear_reference_method , jt4.name asset_group , jt5.name asset_category , jt6.name warranty_type , jt7.name parent_asset , jt8.name supplier_org , jt9.name hit_racks , LTRIM(RTRIM(CONCAT(IFNULL(jt10.first_name,''),' ',IFNULL(jt10.last_name,'')))) using_person , LTRIM(RTRIM(CONCAT(IFNULL(jt11.first_name,''),' ',IFNULL(jt11.last_name,'')))) owning_person , jt12.name using_org , jt13.name owning_org , jt14.name domain , '                                                                                                                                                                                                                                                              ' hat_assets_accounts_name , '                                    '  hat_assets_accountsaccounts_ida , '                                                                                                                                                                                                                                                              ' hat_assets_contacts_name , '                                    '  hat_assets_contactscontacts_ida , '                                                                                                                                                                                                                                                              ' hat_asset_locations_hat_assets_name , '                                    '  hat_asset_locations_hat_assetshat_asset_locations_ida  FROM hat_assets   LEFT JOIN  users jt0 ON hat_assets.modified_user_id=jt0.id AND jt0.deleted=0
+
+ AND jt0.deleted=0  LEFT JOIN  users jt1 ON hat_assets.created_by=jt1.id AND jt1.deleted=0
+
+ AND jt1.deleted=0  LEFT JOIN  users jt2 ON hat_assets.assigned_user_id=jt2.id AND jt2.deleted=0
+
+ AND jt2.deleted=0 LEFT JOIN hat_linear_reference_methods jt3 ON hat_assets.linear_reference_method_id = jt3.id AND jt3.deleted=0  LEFT JOIN aos_products jt4 ON hat_assets.aos_products_id = jt4.id AND jt4.deleted=0  LEFT JOIN aos_product_categories jt5 ON hat_assets.aos_product_categories_id = jt5.id AND jt5.deleted=0  LEFT JOIN hat_warranty_types jt6 ON hat_assets.warranty_type_id = jt6.id AND jt6.deleted=0  LEFT JOIN hat_assets jt7 ON hat_assets.parent_asset_id = jt7.id AND jt7.deleted=0  LEFT JOIN accounts jt8 ON hat_assets.supplier_org_id = jt8.id AND jt8.deleted=0  LEFT JOIN hit_racks jt9 ON hat_assets.hit_racks_id = jt9.id AND jt9.deleted=0  LEFT JOIN contacts jt10 ON hat_assets.using_person_id = jt10.id AND jt10.deleted=0  LEFT JOIN contacts jt11 ON hat_assets.owning_person_id = jt11.id AND jt11.deleted=0  LEFT JOIN accounts jt12 ON hat_assets.using_org_id = jt12.id AND jt12.deleted=0  LEFT JOIN accounts jt13 ON hat_assets.owning_org_id = jt13.id AND jt13.deleted=0  LEFT JOIN hat_domains jt14 ON hat_assets.hat_domains_id = jt14.id AND jt14.deleted=0  where (1=1) AND hat_assets.deleted=0: MySQL error 1054: Unknown column 'hat_assets.hit_racks_id' in 'on clause'
+08/03/16 14:45:02 [796][1][FATAL]  Query Failed:  SELECT  hat_assets.*  , jt0.user_name modified_by_name , jt0.created_by modified_by_name_owner  , 'Users' modified_by_name_mod , jt1.user_name created_by_name , jt1.created_by created_by_name_owner  , 'Users' created_by_name_mod , jt2.user_name assigned_user_name , jt2.created_by assigned_user_name_owner  , 'Users' assigned_user_name_mod, jt3.name linear_reference_method , jt4.name asset_group , jt5.name asset_category , jt6.name warranty_type , jt7.name parent_asset , jt8.name supplier_org , jt9.name hit_racks , LTRIM(RTRIM(CONCAT(IFNULL(jt10.first_name,''),' ',IFNULL(jt10.last_name,'')))) using_person , LTRIM(RTRIM(CONCAT(IFNULL(jt11.first_name,''),' ',IFNULL(jt11.last_name,'')))) owning_person , jt12.name using_org , jt13.name owning_org , jt14.name domain , '                                                                                                                                                                                                                                                              ' hat_assets_accounts_name , '                                    '  hat_assets_accountsaccounts_ida , '                                                                                                                                                                                                                                                              ' hat_assets_contacts_name , '                                    '  hat_assets_contactscontacts_ida , '                                                                                                                                                                                                                                                              ' hat_asset_locations_hat_assets_name , '                                    '  hat_asset_locations_hat_assetshat_asset_locations_ida  FROM hat_assets   LEFT JOIN  users jt0 ON hat_assets.modified_user_id=jt0.id AND jt0.deleted=0
+
+ AND jt0.deleted=0  LEFT JOIN  users jt1 ON hat_assets.created_by=jt1.id AND jt1.deleted=0
+
+ AND jt1.deleted=0  LEFT JOIN  users jt2 ON hat_assets.assigned_user_id=jt2.id AND jt2.deleted=0
+
+ AND jt2.deleted=0 LEFT JOIN hat_linear_reference_methods jt3 ON hat_assets.linear_reference_method_id = jt3.id AND jt3.deleted=0  LEFT JOIN aos_products jt4 ON hat_assets.aos_products_id = jt4.id AND jt4.deleted=0  LEFT JOIN aos_product_categories jt5 ON hat_assets.aos_product_categories_id = jt5.id AND jt5.deleted=0  LEFT JOIN hat_warranty_types jt6 ON hat_assets.warranty_type_id = jt6.id AND jt6.deleted=0  LEFT JOIN hat_assets jt7 ON hat_assets.parent_asset_id = jt7.id AND jt7.deleted=0  LEFT JOIN accounts jt8 ON hat_assets.supplier_org_id = jt8.id AND jt8.deleted=0  LEFT JOIN hit_racks jt9 ON hat_assets.hit_racks_id = jt9.id AND jt9.deleted=0  LEFT JOIN contacts jt10 ON hat_assets.using_person_id = jt10.id AND jt10.deleted=0  LEFT JOIN contacts jt11 ON hat_assets.owning_person_id = jt11.id AND jt11.deleted=0  LEFT JOIN accounts jt12 ON hat_assets.using_org_id = jt12.id AND jt12.deleted=0  LEFT JOIN accounts jt13 ON hat_assets.owning_org_id = jt13.id AND jt13.deleted=0  LEFT JOIN hat_domains jt14 ON hat_assets.hat_domains_id = jt14.id AND jt14.deleted=0  where (1=1) AND hat_assets.deleted=0: MySQL error 1054: Unknown column 'hat_assets.hit_racks_id' in 'on clause'
+08/03/16 14:45:29 [796][1][FATAL]  Query Failed:  SELECT  hat_assets.*  , jt0.user_name modified_by_name , jt0.created_by modified_by_name_owner  , 'Users' modified_by_name_mod , jt1.user_name created_by_name , jt1.created_by created_by_name_owner  , 'Users' created_by_name_mod , jt2.user_name assigned_user_name , jt2.created_by assigned_user_name_owner  , 'Users' assigned_user_name_mod, jt3.name linear_reference_method , jt4.name asset_group , jt5.name asset_category , jt6.name warranty_type , jt7.name parent_asset , jt8.name supplier_org , jt9.name hit_racks , LTRIM(RTRIM(CONCAT(IFNULL(jt10.first_name,''),' ',IFNULL(jt10.last_name,'')))) using_person , LTRIM(RTRIM(CONCAT(IFNULL(jt11.first_name,''),' ',IFNULL(jt11.last_name,'')))) owning_person , jt12.name using_org , jt13.name owning_org , jt14.name domain , '                                                                                                                                                                                                                                                              ' hat_assets_accounts_name , '                                    '  hat_assets_accountsaccounts_ida , '                                                                                                                                                                                                                                                              ' hat_assets_contacts_name , '                                    '  hat_assets_contactscontacts_ida , '                                                                                                                                                                                                                                                              ' hat_asset_locations_hat_assets_name , '                                    '  hat_asset_locations_hat_assetshat_asset_locations_ida  FROM hat_assets   LEFT JOIN  users jt0 ON hat_assets.modified_user_id=jt0.id AND jt0.deleted=0
+
+ AND jt0.deleted=0  LEFT JOIN  users jt1 ON hat_assets.created_by=jt1.id AND jt1.deleted=0
+
+ AND jt1.deleted=0  LEFT JOIN  users jt2 ON hat_assets.assigned_user_id=jt2.id AND jt2.deleted=0
+
+ AND jt2.deleted=0 LEFT JOIN hat_linear_reference_methods jt3 ON hat_assets.linear_reference_method_id = jt3.id AND jt3.deleted=0  LEFT JOIN aos_products jt4 ON hat_assets.aos_products_id = jt4.id AND jt4.deleted=0  LEFT JOIN aos_product_categories jt5 ON hat_assets.aos_product_categories_id = jt5.id AND jt5.deleted=0  LEFT JOIN hat_warranty_types jt6 ON hat_assets.warranty_type_id = jt6.id AND jt6.deleted=0  LEFT JOIN hat_assets jt7 ON hat_assets.parent_asset_id = jt7.id AND jt7.deleted=0  LEFT JOIN accounts jt8 ON hat_assets.supplier_org_id = jt8.id AND jt8.deleted=0  LEFT JOIN hit_racks jt9 ON hat_assets.hit_racks_id = jt9.id AND jt9.deleted=0  LEFT JOIN contacts jt10 ON hat_assets.using_person_id = jt10.id AND jt10.deleted=0  LEFT JOIN contacts jt11 ON hat_assets.owning_person_id = jt11.id AND jt11.deleted=0  LEFT JOIN accounts jt12 ON hat_assets.using_org_id = jt12.id AND jt12.deleted=0  LEFT JOIN accounts jt13 ON hat_assets.owning_org_id = jt13.id AND jt13.deleted=0  LEFT JOIN hat_domains jt14 ON hat_assets.hat_domains_id = jt14.id AND jt14.deleted=0  where (1=1) AND hat_assets.deleted=0: MySQL error 1054: Unknown column 'hat_assets.hit_racks_id' in 'on clause'
+08/03/16 14:46:08 [796][1][FATAL]  Query Failed:  SELECT  hat_assets.*  , jt0.user_name modified_by_name , jt0.created_by modified_by_name_owner  , 'Users' modified_by_name_mod , jt1.user_name created_by_name , jt1.created_by created_by_name_owner  , 'Users' created_by_name_mod , jt2.user_name assigned_user_name , jt2.created_by assigned_user_name_owner  , 'Users' assigned_user_name_mod, jt3.name linear_reference_method , jt4.name asset_group , jt5.name asset_category , jt6.name warranty_type , jt7.name parent_asset , jt8.name supplier_org , jt9.name hit_racks , LTRIM(RTRIM(CONCAT(IFNULL(jt10.first_name,''),' ',IFNULL(jt10.last_name,'')))) using_person , LTRIM(RTRIM(CONCAT(IFNULL(jt11.first_name,''),' ',IFNULL(jt11.last_name,'')))) owning_person , jt12.name using_org , jt13.name owning_org , jt14.name domain , '                                                                                                                                                                                                                                                              ' hat_assets_accounts_name , '                                    '  hat_assets_accountsaccounts_ida , '                                                                                                                                                                                                                                                              ' hat_assets_contacts_name , '                                    '  hat_assets_contactscontacts_ida , '                                                                                                                                                                                                                                                              ' hat_asset_locations_hat_assets_name , '                                    '  hat_asset_locations_hat_assetshat_asset_locations_ida  FROM hat_assets   LEFT JOIN  users jt0 ON hat_assets.modified_user_id=jt0.id AND jt0.deleted=0
+
+ AND jt0.deleted=0  LEFT JOIN  users jt1 ON hat_assets.created_by=jt1.id AND jt1.deleted=0
+
+ AND jt1.deleted=0  LEFT JOIN  users jt2 ON hat_assets.assigned_user_id=jt2.id AND jt2.deleted=0
+
+ AND jt2.deleted=0 LEFT JOIN hat_linear_reference_methods jt3 ON hat_assets.linear_reference_method_id = jt3.id AND jt3.deleted=0  LEFT JOIN aos_products jt4 ON hat_assets.aos_products_id = jt4.id AND jt4.deleted=0  LEFT JOIN aos_product_categories jt5 ON hat_assets.aos_product_categories_id = jt5.id AND jt5.deleted=0  LEFT JOIN hat_warranty_types jt6 ON hat_assets.warranty_type_id = jt6.id AND jt6.deleted=0  LEFT JOIN hat_assets jt7 ON hat_assets.parent_asset_id = jt7.id AND jt7.deleted=0  LEFT JOIN accounts jt8 ON hat_assets.supplier_org_id = jt8.id AND jt8.deleted=0  LEFT JOIN hit_racks jt9 ON hat_assets.hit_racks_id = jt9.id AND jt9.deleted=0  LEFT JOIN contacts jt10 ON hat_assets.using_person_id = jt10.id AND jt10.deleted=0  LEFT JOIN contacts jt11 ON hat_assets.owning_person_id = jt11.id AND jt11.deleted=0  LEFT JOIN accounts jt12 ON hat_assets.using_org_id = jt12.id AND jt12.deleted=0  LEFT JOIN accounts jt13 ON hat_assets.owning_org_id = jt13.id AND jt13.deleted=0  LEFT JOIN hat_domains jt14 ON hat_assets.hat_domains_id = jt14.id AND jt14.deleted=0  where (1=1) AND hat_assets.deleted=0: MySQL error 1054: Unknown column 'hat_assets.hit_racks_id' in 'on clause'
+08/03/16 14:47:03 [796][1][FATAL]  Query Failed:  SELECT  hat_assets.*  , jt0.user_name modified_by_name , jt0.created_by modified_by_name_owner  , 'Users' modified_by_name_mod , jt1.user_name created_by_name , jt1.created_by created_by_name_owner  , 'Users' created_by_name_mod , jt2.user_name assigned_user_name , jt2.created_by assigned_user_name_owner  , 'Users' assigned_user_name_mod, jt3.name linear_reference_method , jt4.name asset_group , jt5.name asset_category , jt6.name warranty_type , jt7.name parent_asset , jt8.name supplier_org , jt9.name hit_racks , LTRIM(RTRIM(CONCAT(IFNULL(jt10.first_name,''),' ',IFNULL(jt10.last_name,'')))) using_person , LTRIM(RTRIM(CONCAT(IFNULL(jt11.first_name,''),' ',IFNULL(jt11.last_name,'')))) owning_person , jt12.name using_org , jt13.name owning_org , jt14.name domain , '                                                                                                                                                                                                                                                              ' hat_assets_accounts_name , '                                    '  hat_assets_accountsaccounts_ida , '                                                                                                                                                                                                                                                              ' hat_assets_contacts_name , '                                    '  hat_assets_contactscontacts_ida , '                                                                                                                                                                                                                                                              ' hat_asset_locations_hat_assets_name , '                                    '  hat_asset_locations_hat_assetshat_asset_locations_ida  FROM hat_assets   LEFT JOIN  users jt0 ON hat_assets.modified_user_id=jt0.id AND jt0.deleted=0
+
+ AND jt0.deleted=0  LEFT JOIN  users jt1 ON hat_assets.created_by=jt1.id AND jt1.deleted=0
+
+ AND jt1.deleted=0  LEFT JOIN  users jt2 ON hat_assets.assigned_user_id=jt2.id AND jt2.deleted=0
+
+ AND jt2.deleted=0 LEFT JOIN hat_linear_reference_methods jt3 ON hat_assets.linear_reference_method_id = jt3.id AND jt3.deleted=0  LEFT JOIN aos_products jt4 ON hat_assets.aos_products_id = jt4.id AND jt4.deleted=0  LEFT JOIN aos_product_categories jt5 ON hat_assets.aos_product_categories_id = jt5.id AND jt5.deleted=0  LEFT JOIN hat_warranty_types jt6 ON hat_assets.warranty_type_id = jt6.id AND jt6.deleted=0  LEFT JOIN hat_assets jt7 ON hat_assets.parent_asset_id = jt7.id AND jt7.deleted=0  LEFT JOIN accounts jt8 ON hat_assets.supplier_org_id = jt8.id AND jt8.deleted=0  LEFT JOIN hit_racks jt9 ON hat_assets.hit_racks_id = jt9.id AND jt9.deleted=0  LEFT JOIN contacts jt10 ON hat_assets.using_person_id = jt10.id AND jt10.deleted=0  LEFT JOIN contacts jt11 ON hat_assets.owning_person_id = jt11.id AND jt11.deleted=0  LEFT JOIN accounts jt12 ON hat_assets.using_org_id = jt12.id AND jt12.deleted=0  LEFT JOIN accounts jt13 ON hat_assets.owning_org_id = jt13.id AND jt13.deleted=0  LEFT JOIN hat_domains jt14 ON hat_assets.hat_domains_id = jt14.id AND jt14.deleted=0  where (1=1) AND hat_assets.deleted=0: MySQL error 1054: Unknown column 'hat_assets.hit_racks_id' in 'on clause'
+08/03/16 14:47:46 [796][1][FATAL]  Query Failed:  SELECT  hat_assets.*  , jt0.user_name modified_by_name , jt0.created_by modified_by_name_owner  , 'Users' modified_by_name_mod , jt1.user_name created_by_name , jt1.created_by created_by_name_owner  , 'Users' created_by_name_mod , jt2.user_name assigned_user_name , jt2.created_by assigned_user_name_owner  , 'Users' assigned_user_name_mod, jt3.name linear_reference_method , jt4.name asset_group , jt5.name asset_category , jt6.name warranty_type , jt7.name parent_asset , jt8.name supplier_org , jt9.name hit_racks , LTRIM(RTRIM(CONCAT(IFNULL(jt10.first_name,''),' ',IFNULL(jt10.last_name,'')))) using_person , LTRIM(RTRIM(CONCAT(IFNULL(jt11.first_name,''),' ',IFNULL(jt11.last_name,'')))) owning_person , jt12.name using_org , jt13.name owning_org , jt14.name domain , '                                                                                                                                                                                                                                                              ' hat_assets_accounts_name , '                                    '  hat_assets_accountsaccounts_ida , '                                                                                                                                                                                                                                                              ' hat_assets_contacts_name , '                                    '  hat_assets_contactscontacts_ida , '                                                                                                                                                                                                                                                              ' hat_asset_locations_hat_assets_name , '                                    '  hat_asset_locations_hat_assetshat_asset_locations_ida  FROM hat_assets   LEFT JOIN  users jt0 ON hat_assets.modified_user_id=jt0.id AND jt0.deleted=0
+
+ AND jt0.deleted=0  LEFT JOIN  users jt1 ON hat_assets.created_by=jt1.id AND jt1.deleted=0
+
+ AND jt1.deleted=0  LEFT JOIN  users jt2 ON hat_assets.assigned_user_id=jt2.id AND jt2.deleted=0
+
+ AND jt2.deleted=0 LEFT JOIN hat_linear_reference_methods jt3 ON hat_assets.linear_reference_method_id = jt3.id AND jt3.deleted=0  LEFT JOIN aos_products jt4 ON hat_assets.aos_products_id = jt4.id AND jt4.deleted=0  LEFT JOIN aos_product_categories jt5 ON hat_assets.aos_product_categories_id = jt5.id AND jt5.deleted=0  LEFT JOIN hat_warranty_types jt6 ON hat_assets.warranty_type_id = jt6.id AND jt6.deleted=0  LEFT JOIN hat_assets jt7 ON hat_assets.parent_asset_id = jt7.id AND jt7.deleted=0  LEFT JOIN accounts jt8 ON hat_assets.supplier_org_id = jt8.id AND jt8.deleted=0  LEFT JOIN hit_racks jt9 ON hat_assets.hit_racks_id = jt9.id AND jt9.deleted=0  LEFT JOIN contacts jt10 ON hat_assets.using_person_id = jt10.id AND jt10.deleted=0  LEFT JOIN contacts jt11 ON hat_assets.owning_person_id = jt11.id AND jt11.deleted=0  LEFT JOIN accounts jt12 ON hat_assets.using_org_id = jt12.id AND jt12.deleted=0  LEFT JOIN accounts jt13 ON hat_assets.owning_org_id = jt13.id AND jt13.deleted=0  LEFT JOIN hat_domains jt14 ON hat_assets.hat_domains_id = jt14.id AND jt14.deleted=0  where (1=1) AND hat_assets.deleted=0: MySQL error 1054: Unknown column 'hat_assets.hit_racks_id' in 'on clause'
+08/03/16 14:48:28 [796][1][FATAL]  Query Failed:  SELECT  hat_assets.*  , jt0.user_name modified_by_name , jt0.created_by modified_by_name_owner  , 'Users' modified_by_name_mod , jt1.user_name created_by_name , jt1.created_by created_by_name_owner  , 'Users' created_by_name_mod , jt2.user_name assigned_user_name , jt2.created_by assigned_user_name_owner  , 'Users' assigned_user_name_mod, jt3.name linear_reference_method , jt4.name asset_group , jt5.name asset_category , jt6.name warranty_type , jt7.name parent_asset , jt8.name supplier_org , jt9.name hit_racks , LTRIM(RTRIM(CONCAT(IFNULL(jt10.first_name,''),' ',IFNULL(jt10.last_name,'')))) using_person , LTRIM(RTRIM(CONCAT(IFNULL(jt11.first_name,''),' ',IFNULL(jt11.last_name,'')))) owning_person , jt12.name using_org , jt13.name owning_org , jt14.name domain , '                                                                                                                                                                                                                                                              ' hat_assets_accounts_name , '                                    '  hat_assets_accountsaccounts_ida , '                                                                                                                                                                                                                                                              ' hat_assets_contacts_name , '                                    '  hat_assets_contactscontacts_ida , '                                                                                                                                                                                                                                                              ' hat_asset_locations_hat_assets_name , '                                    '  hat_asset_locations_hat_assetshat_asset_locations_ida  FROM hat_assets   LEFT JOIN  users jt0 ON hat_assets.modified_user_id=jt0.id AND jt0.deleted=0
+
+ AND jt0.deleted=0  LEFT JOIN  users jt1 ON hat_assets.created_by=jt1.id AND jt1.deleted=0
+
+ AND jt1.deleted=0  LEFT JOIN  users jt2 ON hat_assets.assigned_user_id=jt2.id AND jt2.deleted=0
+
+ AND jt2.deleted=0 LEFT JOIN hat_linear_reference_methods jt3 ON hat_assets.linear_reference_method_id = jt3.id AND jt3.deleted=0  LEFT JOIN aos_products jt4 ON hat_assets.aos_products_id = jt4.id AND jt4.deleted=0  LEFT JOIN aos_product_categories jt5 ON hat_assets.aos_product_categories_id = jt5.id AND jt5.deleted=0  LEFT JOIN hat_warranty_types jt6 ON hat_assets.warranty_type_id = jt6.id AND jt6.deleted=0  LEFT JOIN hat_assets jt7 ON hat_assets.parent_asset_id = jt7.id AND jt7.deleted=0  LEFT JOIN accounts jt8 ON hat_assets.supplier_org_id = jt8.id AND jt8.deleted=0  LEFT JOIN hit_racks jt9 ON hat_assets.hit_racks_id = jt9.id AND jt9.deleted=0  LEFT JOIN contacts jt10 ON hat_assets.using_person_id = jt10.id AND jt10.deleted=0  LEFT JOIN contacts jt11 ON hat_assets.owning_person_id = jt11.id AND jt11.deleted=0  LEFT JOIN accounts jt12 ON hat_assets.using_org_id = jt12.id AND jt12.deleted=0  LEFT JOIN accounts jt13 ON hat_assets.owning_org_id = jt13.id AND jt13.deleted=0  LEFT JOIN hat_domains jt14 ON hat_assets.hat_domains_id = jt14.id AND jt14.deleted=0  where (1=1) AND hat_assets.deleted=0: MySQL error 1054: Unknown column 'hat_assets.hit_racks_id' in 'on clause'
+08/03/16 14:50:04 [796][1][FATAL]  Query Failed:  SELECT  hat_assets.*  , jt0.user_name modified_by_name , jt0.created_by modified_by_name_owner  , 'Users' modified_by_name_mod , jt1.user_name created_by_name , jt1.created_by created_by_name_owner  , 'Users' created_by_name_mod , jt2.user_name assigned_user_name , jt2.created_by assigned_user_name_owner  , 'Users' assigned_user_name_mod, jt3.name linear_reference_method , jt4.name asset_group , jt5.name asset_category , jt6.name warranty_type , jt7.name parent_asset , jt8.name supplier_org , jt9.name hit_racks , LTRIM(RTRIM(CONCAT(IFNULL(jt10.first_name,''),' ',IFNULL(jt10.last_name,'')))) using_person , LTRIM(RTRIM(CONCAT(IFNULL(jt11.first_name,''),' ',IFNULL(jt11.last_name,'')))) owning_person , jt12.name using_org , jt13.name owning_org , jt14.name domain , '                                                                                                                                                                                                                                                              ' hat_assets_accounts_name , '                                    '  hat_assets_accountsaccounts_ida , '                                                                                                                                                                                                                                                              ' hat_assets_contacts_name , '                                    '  hat_assets_contactscontacts_ida , '                                                                                                                                                                                                                                                              ' hat_asset_locations_hat_assets_name , '                                    '  hat_asset_locations_hat_assetshat_asset_locations_ida  FROM hat_assets   LEFT JOIN  users jt0 ON hat_assets.modified_user_id=jt0.id AND jt0.deleted=0
+
+ AND jt0.deleted=0  LEFT JOIN  users jt1 ON hat_assets.created_by=jt1.id AND jt1.deleted=0
+
+ AND jt1.deleted=0  LEFT JOIN  users jt2 ON hat_assets.assigned_user_id=jt2.id AND jt2.deleted=0
+
+ AND jt2.deleted=0 LEFT JOIN hat_linear_reference_methods jt3 ON hat_assets.linear_reference_method_id = jt3.id AND jt3.deleted=0  LEFT JOIN aos_products jt4 ON hat_assets.aos_products_id = jt4.id AND jt4.deleted=0  LEFT JOIN aos_product_categories jt5 ON hat_assets.aos_product_categories_id = jt5.id AND jt5.deleted=0  LEFT JOIN hat_warranty_types jt6 ON hat_assets.warranty_type_id = jt6.id AND jt6.deleted=0  LEFT JOIN hat_assets jt7 ON hat_assets.parent_asset_id = jt7.id AND jt7.deleted=0  LEFT JOIN accounts jt8 ON hat_assets.supplier_org_id = jt8.id AND jt8.deleted=0  LEFT JOIN hit_racks jt9 ON hat_assets.hit_racks_id = jt9.id AND jt9.deleted=0  LEFT JOIN contacts jt10 ON hat_assets.using_person_id = jt10.id AND jt10.deleted=0  LEFT JOIN contacts jt11 ON hat_assets.owning_person_id = jt11.id AND jt11.deleted=0  LEFT JOIN accounts jt12 ON hat_assets.using_org_id = jt12.id AND jt12.deleted=0  LEFT JOIN accounts jt13 ON hat_assets.owning_org_id = jt13.id AND jt13.deleted=0  LEFT JOIN hat_domains jt14 ON hat_assets.hat_domains_id = jt14.id AND jt14.deleted=0  where (1=1) AND hat_assets.deleted=0: MySQL error 1054: Unknown column 'hat_assets.hit_racks_id' in 'on clause'
+08/03/16 14:53:43 [796][1][FATAL]  Query Failed:  SELECT  hat_assets.*  , jt0.user_name modified_by_name , jt0.created_by modified_by_name_owner  , 'Users' modified_by_name_mod , jt1.user_name created_by_name , jt1.created_by created_by_name_owner  , 'Users' created_by_name_mod , jt2.user_name assigned_user_name , jt2.created_by assigned_user_name_owner  , 'Users' assigned_user_name_mod, jt3.name linear_reference_method , jt4.name asset_group , jt5.name asset_category , jt6.name warranty_type , jt7.name parent_asset , jt8.name supplier_org , jt9.name hit_racks , LTRIM(RTRIM(CONCAT(IFNULL(jt10.first_name,''),' ',IFNULL(jt10.last_name,'')))) using_person , LTRIM(RTRIM(CONCAT(IFNULL(jt11.first_name,''),' ',IFNULL(jt11.last_name,'')))) owning_person , jt12.name using_org , jt13.name owning_org , jt14.name domain , '                                                                                                                                                                                                                                                              ' hat_assets_accounts_name , '                                    '  hat_assets_accountsaccounts_ida , '                                                                                                                                                                                                                                                              ' hat_assets_contacts_name , '                                    '  hat_assets_contactscontacts_ida , '                                                                                                                                                                                                                                                              ' hat_asset_locations_hat_assets_name , '                                    '  hat_asset_locations_hat_assetshat_asset_locations_ida  FROM hat_assets   LEFT JOIN  users jt0 ON hat_assets.modified_user_id=jt0.id AND jt0.deleted=0
+
+ AND jt0.deleted=0  LEFT JOIN  users jt1 ON hat_assets.created_by=jt1.id AND jt1.deleted=0
+
+ AND jt1.deleted=0  LEFT JOIN  users jt2 ON hat_assets.assigned_user_id=jt2.id AND jt2.deleted=0
+
+ AND jt2.deleted=0 LEFT JOIN hat_linear_reference_methods jt3 ON hat_assets.linear_reference_method_id = jt3.id AND jt3.deleted=0  LEFT JOIN aos_products jt4 ON hat_assets.aos_products_id = jt4.id AND jt4.deleted=0  LEFT JOIN aos_product_categories jt5 ON hat_assets.aos_product_categories_id = jt5.id AND jt5.deleted=0  LEFT JOIN hat_warranty_types jt6 ON hat_assets.warranty_type_id = jt6.id AND jt6.deleted=0  LEFT JOIN hat_assets jt7 ON hat_assets.parent_asset_id = jt7.id AND jt7.deleted=0  LEFT JOIN accounts jt8 ON hat_assets.supplier_org_id = jt8.id AND jt8.deleted=0  LEFT JOIN hit_racks jt9 ON hat_assets.hit_racks_id = jt9.id AND jt9.deleted=0  LEFT JOIN contacts jt10 ON hat_assets.using_person_id = jt10.id AND jt10.deleted=0  LEFT JOIN contacts jt11 ON hat_assets.owning_person_id = jt11.id AND jt11.deleted=0  LEFT JOIN accounts jt12 ON hat_assets.using_org_id = jt12.id AND jt12.deleted=0  LEFT JOIN accounts jt13 ON hat_assets.owning_org_id = jt13.id AND jt13.deleted=0  LEFT JOIN hat_domains jt14 ON hat_assets.hat_domains_id = jt14.id AND jt14.deleted=0  where (1=1) AND hat_assets.deleted=0: MySQL error 1054: Unknown column 'hat_assets.hit_racks_id' in 'on clause'
+08/03/16 14:54:43 [796][1][FATAL]  Query Failed:  SELECT  hat_assets.*  , jt0.user_name modified_by_name , jt0.created_by modified_by_name_owner  , 'Users' modified_by_name_mod , jt1.user_name created_by_name , jt1.created_by created_by_name_owner  , 'Users' created_by_name_mod , jt2.user_name assigned_user_name , jt2.created_by assigned_user_name_owner  , 'Users' assigned_user_name_mod, jt3.name linear_reference_method , jt4.name asset_group , jt5.name asset_category , jt6.name warranty_type , jt7.name parent_asset , jt8.name supplier_org , jt9.name hit_racks , LTRIM(RTRIM(CONCAT(IFNULL(jt10.first_name,''),' ',IFNULL(jt10.last_name,'')))) using_person , LTRIM(RTRIM(CONCAT(IFNULL(jt11.first_name,''),' ',IFNULL(jt11.last_name,'')))) owning_person , jt12.name using_org , jt13.name owning_org , jt14.name domain , '                                                                                                                                                                                                                                                              ' hat_assets_accounts_name , '                                    '  hat_assets_accountsaccounts_ida , '                                                                                                                                                                                                                                                              ' hat_assets_contacts_name , '                                    '  hat_assets_contactscontacts_ida , '                                                                                                                                                                                                                                                              ' hat_asset_locations_hat_assets_name , '                                    '  hat_asset_locations_hat_assetshat_asset_locations_ida  FROM hat_assets   LEFT JOIN  users jt0 ON hat_assets.modified_user_id=jt0.id AND jt0.deleted=0
+
+ AND jt0.deleted=0  LEFT JOIN  users jt1 ON hat_assets.created_by=jt1.id AND jt1.deleted=0
+
+ AND jt1.deleted=0  LEFT JOIN  users jt2 ON hat_assets.assigned_user_id=jt2.id AND jt2.deleted=0
+
+ AND jt2.deleted=0 LEFT JOIN hat_linear_reference_methods jt3 ON hat_assets.linear_reference_method_id = jt3.id AND jt3.deleted=0  LEFT JOIN aos_products jt4 ON hat_assets.aos_products_id = jt4.id AND jt4.deleted=0  LEFT JOIN aos_product_categories jt5 ON hat_assets.aos_product_categories_id = jt5.id AND jt5.deleted=0  LEFT JOIN hat_warranty_types jt6 ON hat_assets.warranty_type_id = jt6.id AND jt6.deleted=0  LEFT JOIN hat_assets jt7 ON hat_assets.parent_asset_id = jt7.id AND jt7.deleted=0  LEFT JOIN accounts jt8 ON hat_assets.supplier_org_id = jt8.id AND jt8.deleted=0  LEFT JOIN hit_racks jt9 ON hat_assets.hit_racks_id = jt9.id AND jt9.deleted=0  LEFT JOIN contacts jt10 ON hat_assets.using_person_id = jt10.id AND jt10.deleted=0  LEFT JOIN contacts jt11 ON hat_assets.owning_person_id = jt11.id AND jt11.deleted=0  LEFT JOIN accounts jt12 ON hat_assets.using_org_id = jt12.id AND jt12.deleted=0  LEFT JOIN accounts jt13 ON hat_assets.owning_org_id = jt13.id AND jt13.deleted=0  LEFT JOIN hat_domains jt14 ON hat_assets.hat_domains_id = jt14.id AND jt14.deleted=0  where (1=1) AND hat_assets.deleted=0: MySQL error 1054: Unknown column 'hat_assets.hit_racks_id' in 'on clause'
+08/03/16 16:44:02 [796][1][FATAL]  Query Failed: SELECT
+                            id, name, location_title, location_icon
+                        FROM
+                            hat_asset_locations
+                        WHERE
+                            hat_asset_locations.deleted = 0parent_location_id = '' ORDER BY name: MySQL error 1054: Unknown column '0parent_location_id' in 'where clause'
+08/03/16 16:44:21 [796][1][FATAL]  Query Failed: SELECT
+                            id, name, location_title, location_icon
+                        FROM
+                            hat_asset_locations
+                        WHERE
+                            hat_asset_locations.deleted = 0parent_location_id = '' ORDER BY name: MySQL error 1054: Unknown column '0parent_location_id' in 'where clause'
+08/03/16 16:44:54 [796][1][FATAL]  Query Failed: SELECT
+                            id, name, location_title, location_icon
+                        FROM
+                            hat_asset_locations
+                        WHERE
+                            hat_asset_locations.deleted = 0AND parent_location_id = '' ORDER BY name: MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'parent_location_id = '' ORDER BY name' at line 6
+08/03/16 16:50:01 [796][1][FATAL]  Query Failed: SELECT
+                            id, name, location_title, location_icon
+                        FROM
+                            hat_asset_locations
+                        WHERE
+                            hat_asset_locations.deleted = 0AND parent_location_id = '' ORDER BY name: MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'parent_location_id = '' ORDER BY name' at line 6
+08/03/16 16:50:12 [796][1][FATAL]  Query Failed: SELECT
+                            id, name, location_title, location_icon
+                        FROM
+                            hat_asset_locations
+                        WHERE
+                            hat_asset_locations.deleted = 0AND parent_location_id = '' ORDER BY name: MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'parent_location_id = '' ORDER BY name' at line 6
+08/03/16 16:50:25 [796][1][FATAL]  Query Failed: SELECT
+                            id, name, location_title, location_icon
+                        FROM
+                            hat_asset_locations
+                        WHERE
+                            hat_asset_locations.deleted = 0AND parent_location_id = '' ORDER BY name: MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'parent_location_id = '' ORDER BY name' at line 6
+08/04/16 12:25:18 [4568][1][FATAL] IP Address mismatch: SESSION IP: 127.0.0.1 CLIENT IP: ::1
+08/05/16 22:42:07 [8304][1][FATAL]  Query Failed: SELECT
+	                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon
+	                    FROM
+	                        hat_assets,
+	                        accounts
+	                    WHERE
+	                        accounts.id = hat_assets.using_org_id
+	                            AND accounts.deleted = 0
+	                            AND hat_assets.deleted = 0
+	                            AND hat_assets.parent_asset_id = ''
+	                            AND accounts.id ='UNASSIGNED''
+	                    ORDER BY hat_assets.name: MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''UNASSIGNED''
+	                    ORDER BY hat_assets.name' at line 11
+08/05/16 22:43:13 [8304][1][FATAL]  Query Failed: SELECT
+	                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon
+	                    FROM
+	                        hat_assets,
+	                        accounts
+	                    WHERE
+	                        accounts.id = hat_assets.using_org_id
+	                            AND accounts.deleted = 0
+	                            AND hat_assets.deleted = 0
+	                            AND hat_assets.parent_asset_id = ''
+	                            AND accounts.id ='UNASSIGNED''
+	                    ORDER BY hat_assets.name: MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''UNASSIGNED''
+	                    ORDER BY hat_assets.name' at line 11
+08/05/16 22:43:22 [8304][1][FATAL]  Query Failed: SELECT
+	                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon
+	                    FROM
+	                        hat_assets,
+	                        accounts
+	                    WHERE
+	                        accounts.id = hat_assets.using_org_id
+	                            AND accounts.deleted = 0
+	                            AND hat_assets.deleted = 0
+	                            AND hat_assets.parent_asset_id = ''
+	                            AND accounts.id ='UNASSIGNED''
+	                    ORDER BY hat_assets.name: MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''UNASSIGNED''
+	                    ORDER BY hat_assets.name' at line 11
+08/05/16 22:43:45 [8304][1][FATAL]  Query Failed: SELECT
+	                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon
+	                    FROM
+	                        hat_assets,
+	                        accounts
+	                    WHERE
+	                        accounts.id = hat_assets.using_org_id
+	                            AND accounts.deleted = 0
+	                            AND hat_assets.deleted = 0
+	                            AND hat_assets.parent_asset_id = ''
+	                            AND accounts.id ='UNASSIGNED''
+	                    ORDER BY hat_assets.name: MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''UNASSIGNED''
+	                    ORDER BY hat_assets.name' at line 11
+08/05/16 22:44:08 [8304][1][FATAL]  Query Failed: SELECT
+	                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon
+	                    FROM
+	                        hat_assets,
+	                        accounts
+	                    WHERE
+	                        accounts.id = hat_assets.using_org_id
+	                            AND accounts.deleted = 0
+	                            AND hat_assets.deleted = 0
+	                            AND hat_assets.parent_asset_id = ''
+	                            AND accounts.id ='UNASSIGNED''
+	                    ORDER BY hat_assets.name: MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''UNASSIGNED''
+	                    ORDER BY hat_assets.name' at line 11
+08/05/16 22:44:54 [8304][1][FATAL]  Query Failed: SELECT
+	                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon
+	                    FROM
+	                        hat_assets,
+	                        accounts
+	                    WHERE
+	                        accounts.id = hat_assets.using_org_id
+	                            AND accounts.deleted = 0
+	                            AND hat_assets.deleted = 0
+	                            AND hat_assets.parent_asset_id = ''
+	                            AND accounts.id ='UNASSIGNED''
+	                    ORDER BY hat_assets.name: MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''UNASSIGNED''
+	                    ORDER BY hat_assets.name' at line 11
+08/05/16 22:45:01 [8304][1][FATAL]  Query Failed: SELECT
+	                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon
+	                    FROM
+	                        hat_assets,
+	                        accounts
+	                    WHERE
+	                        accounts.id = hat_assets.using_org_id
+	                            AND accounts.deleted = 0
+	                            AND hat_assets.deleted = 0
+	                            AND hat_assets.parent_asset_id = ''
+	                            AND accounts.id ='UNASSIGNED''
+	                    ORDER BY hat_assets.name: MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''UNASSIGNED''
+	                    ORDER BY hat_assets.name' at line 11
+08/05/16 22:47:50 [8304][1][FATAL]  Query Failed: SELECT
+	                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon
+	                    FROM
+	                        hat_assets,
+	                        accounts
+	                    WHERE
+	                        accounts.id = hat_assets.using_org_id
+	                            AND accounts.deleted = 0
+	                            AND hat_assets.deleted = 0
+	                            AND hat_assets.parent_asset_id = ''
+	                            AND accounts.id ='b74aa0af-e3c7-1929-0aa9-57676a632414''
+	                    ORDER BY hat_assets.name: MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''b74aa0af-e3c7-1929-0aa9-57676a632414''
+	                    ORDER BY hat_asset' at line 11
+08/06/16 08:32:02 [8304][1][FATAL]  Query Failed: SELECT id,NAME FROM haa_codes WHERE code_type=‘account_business_type’ AND deleted=0
+					 ORDER BY name: MySQL error 1054: Unknown column '‘account_business_type’' in 'where clause'
+08/06/16 08:32:20 [8304][1][FATAL]  Query Failed: SELECT id,NAME FROM haa_codes WHERE code_type=‘account_business_type’ AND deleted=0
+					 ORDER BY name: MySQL error 1054: Unknown column '‘account_business_type’' in 'where clause'
+08/06/16 08:32:54 [8304][1][FATAL]  Query Failed: SELECT id,NAME FROM haa_codes WHERE code_type=‘account_business_type’ AND deleted=0
+					 ORDER BY name: MySQL error 1054: Unknown column '‘account_business_type’' in 'where clause'
+08/06/16 08:34:05 [8304][1][FATAL]  Query Failed: SELECT id,NAME FROM haa_codes WHERE code_type=‘account_business_type’ AND deleted=0
+					 ORDER BY name: MySQL error 1054: Unknown column '‘account_business_type’' in 'where clause'
+08/06/16 22:18:24 [8304][1][FATAL]  Query Failed: SELECT
+	                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon
+	                    FROM
+	                        hat_assets,
+	                        accounts
+	                    WHERE
+	                        accounts.id = hat_assets.product_category_id
+	                            AND accounts.deleted = 0
+	                            AND hat_assets.deleted = 0
+	                            AND hat_assets.parent_asset_id = ''
+	                            AND accounts.id ='b27e210f-18e1-b842-7103-57655d9d4f08'
+	                    ORDER BY hat_assets.name: MySQL error 1054: Unknown column 'hat_assets.product_category_id' in 'where clause'
+08/06/16 22:18:28 [8304][1][FATAL]  Query Failed: SELECT
+	                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon
+	                    FROM
+	                        hat_assets,
+	                        accounts
+	                    WHERE
+	                        accounts.id = hat_assets.product_category_id
+	                            AND accounts.deleted = 0
+	                            AND hat_assets.deleted = 0
+	                            AND hat_assets.parent_asset_id = ''
+	                            AND accounts.id ='d03c5ba0-39f4-c3b4-587a-575e054dbec4'
+	                    ORDER BY hat_assets.name: MySQL error 1054: Unknown column 'hat_assets.product_category_id' in 'where clause'
+08/06/16 22:18:36 [8304][1][FATAL]  Query Failed: SELECT
+	                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon
+	                    FROM
+	                        hat_assets,
+	                        accounts
+	                    WHERE
+	                        accounts.id = hat_assets.product_category_id
+	                            AND accounts.deleted = 0
+	                            AND hat_assets.deleted = 0
+	                            AND hat_assets.parent_asset_id = ''
+	                            AND accounts.id ='4072698e-166b-1b70-2d15-5781d04d313f'
+	                    ORDER BY hat_assets.name: MySQL error 1054: Unknown column 'hat_assets.product_category_id' in 'where clause'
+08/06/16 22:25:11 [8304][1][FATAL]  Query Failed: SELECT
+	                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon
+	                    FROM
+	                        hat_assets,
+	                        accounts
+	                    WHERE
+	                        accounts.id = hat_assets.product_category_id
+	                            AND accounts.deleted = 0
+	                            AND hat_assets.deleted = 0
+	                            AND hat_assets.parent_asset_id = ''
+	                            AND accounts.id ='a9b1f5be-aa2d-60fc-42ce-572b2222852e'
+	                    ORDER BY hat_assets.name: MySQL error 1054: Unknown column 'hat_assets.product_category_id' in 'where clause'
+08/06/16 22:25:13 [8304][1][FATAL]  Query Failed: SELECT
+	                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon
+	                    FROM
+	                        hat_assets,
+	                        accounts
+	                    WHERE
+	                        accounts.id = hat_assets.product_category_id
+	                            AND accounts.deleted = 0
+	                            AND hat_assets.deleted = 0
+	                            AND hat_assets.parent_asset_id = ''
+	                            AND accounts.id ='b9890811-8338-416f-e50f-56b618d2366d'
+	                    ORDER BY hat_assets.name: MySQL error 1054: Unknown column 'hat_assets.product_category_id' in 'where clause'
+08/06/16 22:25:19 [8304][1][FATAL]  Query Failed: SELECT
+	                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon
+	                    FROM
+	                        hat_assets,
+	                        accounts
+	                    WHERE
+	                        accounts.id = hat_assets.product_category_id
+	                            AND accounts.deleted = 0
+	                            AND hat_assets.deleted = 0
+	                            AND hat_assets.parent_asset_id = ''
+	                            AND accounts.id ='d03c5ba0-39f4-c3b4-587a-575e054dbec4'
+	                    ORDER BY hat_assets.name: MySQL error 1054: Unknown column 'hat_assets.product_category_id' in 'where clause'
+08/06/16 22:29:49 [8304][1][FATAL]  Query Failed: SELECT
+	                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon
+	                    FROM
+	                        hat_assets,
+	                        accounts
+	                    WHERE
+	                        accounts.id = hat_assets.product_category_id
+	                            AND accounts.deleted = 0
+	                            AND hat_assets.deleted = 0
+	                            AND hat_assets.parent_asset_id = ''
+	                            AND accounts.id ='765a65f0-5dc5-c021-ce2d-57a5f33b7b97'
+	                    ORDER BY hat_assets.name: MySQL error 1054: Unknown column 'hat_assets.product_category_id' in 'where clause'
+08/06/16 22:29:51 [8304][1][FATAL]  Query Failed: SELECT
+	                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon
+	                    FROM
+	                        hat_assets,
+	                        accounts
+	                    WHERE
+	                        accounts.id = hat_assets.product_category_id
+	                            AND accounts.deleted = 0
+	                            AND hat_assets.deleted = 0
+	                            AND hat_assets.parent_asset_id = ''
+	                            AND accounts.id ='aaee00d2-06df-28d3-a734-57a5f31ff486'
+	                    ORDER BY hat_assets.name: MySQL error 1054: Unknown column 'hat_assets.product_category_id' in 'where clause'
+08/06/16 22:29:54 [8304][1][FATAL]  Query Failed: SELECT
+	                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon
+	                    FROM
+	                        hat_assets,
+	                        accounts
+	                    WHERE
+	                        accounts.id = hat_assets.product_category_id
+	                            AND accounts.deleted = 0
+	                            AND hat_assets.deleted = 0
+	                            AND hat_assets.parent_asset_id = ''
+	                            AND accounts.id ='cfeeeeb0-52c6-6f38-00cb-57a5f377461d'
+	                    ORDER BY hat_assets.name: MySQL error 1054: Unknown column 'hat_assets.product_category_id' in 'where clause'
+08/06/16 22:30:03 [8304][1][FATAL]  Query Failed: SELECT
+	                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon
+	                    FROM
+	                        hat_assets,
+	                        accounts
+	                    WHERE
+	                        accounts.id = hat_assets.product_category_id
+	                            AND accounts.deleted = 0
+	                            AND hat_assets.deleted = 0
+	                            AND hat_assets.parent_asset_id = ''
+	                            AND accounts.id ='b9890811-8338-416f-e50f-56b618d2366d'
+	                    ORDER BY hat_assets.name: MySQL error 1054: Unknown column 'hat_assets.product_category_id' in 'where clause'
+08/06/16 22:30:20 [8304][1][FATAL]  Query Failed: SELECT
+	                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon
+	                    FROM
+	                        hat_assets,
+	                        accounts
+	                    WHERE
+	                        accounts.id = hat_assets.product_category_id
+	                            AND accounts.deleted = 0
+	                            AND hat_assets.deleted = 0
+	                            AND hat_assets.parent_asset_id = ''
+	                            AND accounts.id ='b27e210f-18e1-b842-7103-57655d9d4f08'
+	                    ORDER BY hat_assets.name: MySQL error 1054: Unknown column 'hat_assets.product_category_id' in 'where clause'
+08/08/16 07:18:42 [912][1][FATAL]  Query Failed: SELECT 
+  					id,name 
+  					FROM hat_assets 
+  					WHERE hat_assets.`deleted`=0 AND hat_assets.`aos_products_id` '6faf26fd-8837-1b90-d282-57456a2c8f48'
+					 ORDER BY name: MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''6faf26fd-8837-1b90-d282-57456a2c8f48'
+					 ORDER BY name' at line 4
+08/08/16 07:18:55 [912][1][FATAL]  Query Failed: SELECT 
+  					id,name 
+  					FROM hat_assets 
+  					WHERE hat_assets.`deleted`=0 AND hat_assets.`aos_products_id` '808043a8-3a12-ef82-10f5-56b61a26bbc3'
+					 ORDER BY name: MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''808043a8-3a12-ef82-10f5-56b61a26bbc3'
+					 ORDER BY name' at line 4
+08/08/16 07:19:45 [912][1][FATAL]  Query Failed: SELECT 
+  					id,name 
+  					FROM hat_assets 
+  					WHERE hat_assets.`deleted`=0 AND hat_assets.`aos_products_id` 'd488e02f-0d16-40c4-6abd-577dff1119e2'
+					 ORDER BY name: MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''d488e02f-0d16-40c4-6abd-577dff1119e2'
+					 ORDER BY name' at line 4
+08/08/16 07:20:24 [912][1][FATAL]  Query Failed: SELECT 
+  					id,name 
+  					FROM hat_assets 
+  					WHERE hat_assets.`deleted`=0 AND hat_assets.`aos_products_id` 'd488e02f-0d16-40c4-6abd-577dff1119e2'
+					 ORDER BY name: MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''d488e02f-0d16-40c4-6abd-577dff1119e2'
+					 ORDER BY name' at line 4
+08/08/16 07:21:03 [912][1][FATAL]  Query Failed: SELECT 
+  					id,name 
+  					FROM hat_assets 
+  					WHERE hat_assets.`deleted`=0 AND hat_assets.`aos_products_id` 'd488e02f-0d16-40c4-6abd-577dff1119e2'
+					 ORDER BY name: MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''d488e02f-0d16-40c4-6abd-577dff1119e2'
+					 ORDER BY name' at line 4
+08/08/16 07:57:55 [912][1][FATAL]  Query Failed: SELECT 
+											  contacts.id, contacts.`first_name`,contacts.`last_name`
+											FROM
+											  contacts 
+											WHERE contacts.id IN 
+											  (SELECT 
+											    owning_person_id 
+											  FROM
+											    hat_assets,
+											    accounts
+											  WHERE accounts.id = hat_assets.owning_org_id 
+											    AND accounts.deleted = 0 
+											    AND hat_assets.deleted = 0 
+											    AND hat_assets.parent_asset_id = '' 
+		                            			AND accounts.owning_org_id ='UNASSIGNED'
+											  GROUP BY hat_assets.owning_person_id) ''
+	                    ORDER BY contacts.first_name,contacts.last_name: MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '''
+	                    ORDER BY contacts.first_name,contacts.last_name' at line 16
+08/08/16 07:58:44 [912][1][FATAL]  Query Failed: SELECT 
+                        contacts.id, contacts.`first_name`,contacts.`last_name`
+                      FROM
+                        contacts 
+                      WHERE contacts.id IN 
+                        (SELECT 
+                          owning_person_id 
+                        FROM
+                          hat_assets,
+                          accounts
+                        WHERE accounts.id = hat_assets.owning_org_id 
+                          AND accounts.deleted = 0 
+                          AND hat_assets.deleted = 0 
+                          AND hat_assets.parent_asset_id = '' 
+                                      AND accounts.owning_org_id ='82e0bfa9-bdb2-b843-9fd5-56b84e839738'
+                        GROUP BY hat_assets.owning_person_id) ''
+                      ORDER BY contacts.first_name,contacts.last_name: MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '''
+                      ORDER BY contacts.first_name,contacts.last_name' at line 16
+08/08/16 07:58:59 [912][1][FATAL]  Query Failed: SELECT 
+                        contacts.id, contacts.`first_name`,contacts.`last_name`
+                      FROM
+                        contacts 
+                      WHERE contacts.id IN 
+                        (SELECT 
+                          owning_person_id 
+                        FROM
+                          hat_assets,
+                          accounts
+                        WHERE accounts.id = hat_assets.owning_org_id 
+                          AND accounts.deleted = 0 
+                          AND hat_assets.deleted = 0 
+                          AND hat_assets.parent_asset_id = '' 
+                                      AND accounts.owning_org_id ='a521a9bf-d549-650c-0d62-56b88fa4d617'
+                        GROUP BY hat_assets.owning_person_id) ''
+                      ORDER BY contacts.first_name,contacts.last_name: MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '''
+                      ORDER BY contacts.first_name,contacts.last_name' at line 16
+08/08/16 07:59:18 [912][1][FATAL]  Query Failed: SELECT 
+                        contacts.id, contacts.`first_name`,contacts.`last_name`
+                      FROM
+                        contacts 
+                      WHERE contacts.id IN 
+                        (SELECT 
+                          owning_person_id 
+                        FROM
+                          hat_assets,
+                          accounts
+                        WHERE accounts.id = hat_assets.owning_org_id 
+                          AND accounts.deleted = 0 
+                          AND hat_assets.deleted = 0 
+                          AND hat_assets.parent_asset_id = '' 
+                                      AND accounts.owning_org_id ='a521a9bf-d549-650c-0d62-56b88fa4d617'
+                        GROUP BY hat_assets.owning_person_id) ''
+                      ORDER BY contacts.first_name,contacts.last_name: MySQL error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '''
+                      ORDER BY contacts.first_name,contacts.last_name' at line 16
+08/08/16 08:00:18 [912][1][FATAL]  Query Failed: SELECT 
+                        contacts.id, contacts.`first_name`,contacts.`last_name`
+                      FROM
+                        contacts 
+                      WHERE contacts.id IN 
+                        (SELECT 
+                          owning_person_id 
+                        FROM
+                          hat_assets,
+                          accounts
+                        WHERE accounts.id = hat_assets.owning_org_id 
+                          AND accounts.deleted = 0 
+                          AND hat_assets.deleted = 0 
+                          AND hat_assets.parent_asset_id = '' 
+                                      AND accounts.owning_org_id ='a521a9bf-d549-650c-0d62-56b88fa4d617'
+                        GROUP BY hat_assets.owning_person_id)
+                      ORDER BY contacts.first_name, contacts.last_name: MySQL error 1054: Unknown column 'accounts.owning_org_id' in 'where clause'
+08/09/16 19:38:49 [7864][1][FATAL] hat_meters_hat_meter_readings had an unknown type many-to-one 
+08/09/16 19:38:49 [7864][1][FATAL] hat_meters_hat_meter_readings for hat_meters_hat_meter_readings failed to load
+
+08/09/16 19:42:16 [7864][1][FATAL] hat_meters_hat_meter_readings had an unknown type many-to-one 
+08/09/16 19:42:16 [7864][1][FATAL] hat_meters_hat_meter_readings for hat_meters_hat_meter_readings failed to load
+
+08/09/16 19:44:14 [7864][1][FATAL] hat_meters_hat_meter_readings had an unknown type many-to-one 
+08/09/16 19:44:14 [7864][1][FATAL] hat_meters_hat_meter_readings for hat_meters_hat_meter_readings failed to load
+
+08/09/16 19:44:19 [7864][1][FATAL] hat_meters_hat_meter_readings had an unknown type many-to-one 
+08/09/16 19:44:20 [7864][1][FATAL] hat_meters_hat_meter_readings for hat_meters_hat_meter_readings failed to load
+
+08/09/16 19:44:52 [7864][1][FATAL] hat_meters_hat_meter_readings had an unknown type many-to-one 
+08/09/16 19:44:52 [7864][1][FATAL] hat_meters_hat_meter_readings for hat_meters_hat_meter_readings failed to load
+
+08/09/16 19:48:59 [7864][1][FATAL] hat_meters_hat_meter_readings had an unknown type many-to-one 
+08/09/16 19:48:59 [7864][1][FATAL] hat_meters_hat_meter_readings for hat_meters_hat_meter_readings failed to load
+
+08/09/16 19:50:59 [7864][1][FATAL] hat_meters_hat_meter_readings had an unknown type many-to-one 
+08/09/16 19:50:59 [7864][1][FATAL] hat_meters_hat_meter_readings for hat_meters_hat_meter_readings failed to load
+
+08/10/16 11:13:00 [5696][-none-][FATAL] FAILED LOGIN:attempts[1] - admin
+08/10/16 11:29:21 [5696][1][FATAL]  Query Failed: SELECT 
+                    hat_assets.id,
+                    hat_assets.name,
+                    hat_assets.asset_desc,
+                    aos_products.id asset_group_id,
+                    aos_products.name asset_group,
+                    aos_product_categories.id category_id,
+                    aos_product_categories.name asset_category,
+                    hat_assets.asset_icon,
+                    hat_assets.asset_status,
+                    hat_assets.asset_name,
+                    hat_assets.asset_number,
+                    hat_assets.serial_number,
+                    hat_assets.vin,
+                    hat_assets.engine_num,
+                    hat_assets.tracking_number,
+                    hat_assets.brand,
+                    hat_assets.model,
+                    hat_assets.maintainable,
+                    hat_assets.enable_it_rack,
+                    hat_asset_locations.id location_id,
+                    hat_asset_locations.name location_name,
+                    ham_maint_sites.id site_id,
+                    ham_maint_sites.name site_name,
+                    hat_assets.location_desc,
+                    hat_domains.name domain_name,
+                    accounts_u.id using_org_id,
+                    accounts_u.name using_org_name,
+                    contacts_o.id using_person_id,
+                    contacts_o.last_name using_person_name,
+                    accounts_o.id owning_org_id,
+                    accounts_o.name owning_org_name,
+                    contacts_o.id owning_person_id,
+                    contacts_o.`last_name` owning_person_name
+                FROM
+                    aos_products,
+                    aos_product_categories,
+                    hat_domains,
+                    hat_assets
+                        LEFT JOIN
+                    accounts accounts_u ON (hat_assets.`using_org_id` = accounts.id
+                        AND accounts.deleted = 0)
+                        LEFT JOIN
+                    contacts contacts_u ON (hat_assets.`using_person_id` = contacts.id
+                        AND contacts.deleted = 0)
+                        LEFT JOIN
+                    accounts accounts_o ON (hat_assets.`using_org_id` = accounts_o.id
+                        AND accounts_o.deleted = 0)
+                        LEFT JOIN
+                    contacts contacts_o ON (hat_assets.`using_person_id` = contacts_o.id
+                        AND contacts_o.deleted = 0)
+                        LEFT JOIN
+                    (hat_asset_locations_hat_assets_c, hat_asset_locations, ham_maint_sites) ON (hat_assets.id = hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_assets_idb
+                        AND hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_asset_locations_ida = hat_asset_locations.id
+                        AND hat_asset_locations.ham_maint_sites_id = ham_maint_sites.id
+                        AND hat_asset_locations.deleted = 0
+                        AND hat_asset_locations_hat_assets_c.deleted = 0
+                        AND ham_maint_sites.deleted = 0)
+                WHERE
+                    hat_assets.aos_products_id = aos_products.id
+                        AND hat_assets.aos_product_categories_id = aos_product_categories.id
+                        AND hat_assets.hat_domains_id = hat_domains.id
+                        AND hat_assets.deleted = 0
+                        AND hat_domains.deleted = 0
+                        AND aos_products.deleted = 0
+                        AND aos_product_categories.deleted = 0
+                        AND hat_assets.id = 'b15f7275-6458-eee2-3d15-57261706a2bd': MySQL error 1054: Unknown column 'accounts.id' in 'on clause'
+08/10/16 11:29:32 [5696][1][FATAL]  Query Failed: SELECT 
+                    hat_assets.id,
+                    hat_assets.name,
+                    hat_assets.asset_desc,
+                    aos_products.id asset_group_id,
+                    aos_products.name asset_group,
+                    aos_product_categories.id category_id,
+                    aos_product_categories.name asset_category,
+                    hat_assets.asset_icon,
+                    hat_assets.asset_status,
+                    hat_assets.asset_name,
+                    hat_assets.asset_number,
+                    hat_assets.serial_number,
+                    hat_assets.vin,
+                    hat_assets.engine_num,
+                    hat_assets.tracking_number,
+                    hat_assets.brand,
+                    hat_assets.model,
+                    hat_assets.maintainable,
+                    hat_assets.enable_it_rack,
+                    hat_asset_locations.id location_id,
+                    hat_asset_locations.name location_name,
+                    ham_maint_sites.id site_id,
+                    ham_maint_sites.name site_name,
+                    hat_assets.location_desc,
+                    hat_domains.name domain_name,
+                    accounts_u.id using_org_id,
+                    accounts_u.name using_org_name,
+                    contacts_o.id using_person_id,
+                    contacts_o.last_name using_person_name,
+                    accounts_o.id owning_org_id,
+                    accounts_o.name owning_org_name,
+                    contacts_o.id owning_person_id,
+                    contacts_o.`last_name` owning_person_name
+                FROM
+                    aos_products,
+                    aos_product_categories,
+                    hat_domains,
+                    hat_assets
+                        LEFT JOIN
+                    accounts accounts_u ON (hat_assets.`using_org_id` = accounts.id
+                        AND accounts.deleted = 0)
+                        LEFT JOIN
+                    contacts contacts_u ON (hat_assets.`using_person_id` = contacts.id
+                        AND contacts.deleted = 0)
+                        LEFT JOIN
+                    accounts accounts_o ON (hat_assets.`using_org_id` = accounts_o.id
+                        AND accounts_o.deleted = 0)
+                        LEFT JOIN
+                    contacts contacts_o ON (hat_assets.`using_person_id` = contacts_o.id
+                        AND contacts_o.deleted = 0)
+                        LEFT JOIN
+                    (hat_asset_locations_hat_assets_c, hat_asset_locations, ham_maint_sites) ON (hat_assets.id = hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_assets_idb
+                        AND hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_asset_locations_ida = hat_asset_locations.id
+                        AND hat_asset_locations.ham_maint_sites_id = ham_maint_sites.id
+                        AND hat_asset_locations.deleted = 0
+                        AND hat_asset_locations_hat_assets_c.deleted = 0
+                        AND ham_maint_sites.deleted = 0)
+                WHERE
+                    hat_assets.aos_products_id = aos_products.id
+                        AND hat_assets.aos_product_categories_id = aos_product_categories.id
+                        AND hat_assets.hat_domains_id = hat_domains.id
+                        AND hat_assets.deleted = 0
+                        AND hat_domains.deleted = 0
+                        AND aos_products.deleted = 0
+                        AND aos_product_categories.deleted = 0
+                        AND hat_assets.id = 'b15f7275-6458-eee2-3d15-57261706a2bd': MySQL error 1054: Unknown column 'accounts.id' in 'on clause'
+08/10/16 11:29:46 [5696][1][FATAL]  Query Failed: SELECT 
+                    hat_assets.id,
+                    hat_assets.name,
+                    hat_assets.asset_desc,
+                    aos_products.id asset_group_id,
+                    aos_products.name asset_group,
+                    aos_product_categories.id category_id,
+                    aos_product_categories.name asset_category,
+                    hat_assets.asset_icon,
+                    hat_assets.asset_status,
+                    hat_assets.asset_name,
+                    hat_assets.asset_number,
+                    hat_assets.serial_number,
+                    hat_assets.vin,
+                    hat_assets.engine_num,
+                    hat_assets.tracking_number,
+                    hat_assets.brand,
+                    hat_assets.model,
+                    hat_assets.maintainable,
+                    hat_assets.enable_it_rack,
+                    hat_asset_locations.id location_id,
+                    hat_asset_locations.name location_name,
+                    ham_maint_sites.id site_id,
+                    ham_maint_sites.name site_name,
+                    hat_assets.location_desc,
+                    hat_domains.name domain_name,
+                    accounts_u.id using_org_id,
+                    accounts_u.name using_org_name,
+                    contacts_o.id using_person_id,
+                    contacts_o.last_name using_person_name,
+                    accounts_o.id owning_org_id,
+                    accounts_o.name owning_org_name,
+                    contacts_o.id owning_person_id,
+                    contacts_o.`last_name` owning_person_name
+                FROM
+                    aos_products,
+                    aos_product_categories,
+                    hat_domains,
+                    hat_assets
+                        LEFT JOIN
+                    accounts accounts_u ON (hat_assets.`using_org_id` = accounts.id
+                        AND accounts.deleted = 0)
+                        LEFT JOIN
+                    contacts contacts_u ON (hat_assets.`using_person_id` = contacts.id
+                        AND contacts.deleted = 0)
+                        LEFT JOIN
+                    accounts accounts_o ON (hat_assets.`using_org_id` = accounts_o.id
+                        AND accounts_o.deleted = 0)
+                        LEFT JOIN
+                    contacts contacts_o ON (hat_assets.`using_person_id` = contacts_o.id
+                        AND contacts_o.deleted = 0)
+                        LEFT JOIN
+                    (hat_asset_locations_hat_assets_c, hat_asset_locations, ham_maint_sites) ON (hat_assets.id = hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_assets_idb
+                        AND hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_asset_locations_ida = hat_asset_locations.id
+                        AND hat_asset_locations.ham_maint_sites_id = ham_maint_sites.id
+                        AND hat_asset_locations.deleted = 0
+                        AND hat_asset_locations_hat_assets_c.deleted = 0
+                        AND ham_maint_sites.deleted = 0)
+                WHERE
+                    hat_assets.aos_products_id = aos_products.id
+                        AND hat_assets.aos_product_categories_id = aos_product_categories.id
+                        AND hat_assets.hat_domains_id = hat_domains.id
+                        AND hat_assets.deleted = 0
+                        AND hat_domains.deleted = 0
+                        AND aos_products.deleted = 0
+                        AND aos_product_categories.deleted = 0
+                        AND hat_assets.id = 'b15f7275-6458-eee2-3d15-57261706a2bd': MySQL error 1054: Unknown column 'accounts.id' in 'on clause'
+08/12/16 14:34:00 [2712][1][FATAL] Missing relationship definition hat_counting_tasks_hat_counting_batch. skipping hat_counting_tasks subpanel
+08/12/16 14:34:00 [2712][1][FATAL] Bad subpanel definition, it has incorrect value for get_subpanel_data property hat_counting_lines_hat_counting_batchs

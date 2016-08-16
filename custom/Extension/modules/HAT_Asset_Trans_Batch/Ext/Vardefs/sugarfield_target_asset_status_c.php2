@@ -1,0 +1,8 @@
+<?php
+ // created: 2016-02-20 23:35:31
+$dictionary['HAT_Asset_Trans_Batch']['fields']['target_asset_status_c']['inline_edit']='';
+$dictionary['HAT_Asset_Trans_Batch']['fields']['target_asset_status_c']['labelValue']='Target Asset Status';
+$dictionary['HAT_Asset_Trans_Batch']['fields']['target_asset_status_c']['source']='non-db';
+
+
+ ?>

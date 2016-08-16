@@ -1,0 +1,183 @@
+<?php
+$module_name = 'HAT_Asset_QUAL';
+$viewdefs [$module_name] = 
+array (
+  'EditView' => 
+  array (
+    'templateMeta' => 
+    array (
+      'maxColumns' => '2',
+      'widths' => 
+      array (
+        0 => 
+        array (
+          'label' => '10',
+          'field' => '30',
+        ),
+        1 => 
+        array (
+          'label' => '10',
+          'field' => '30',
+        ),
+      ),
+      'useTabs' => false,
+      'tabDefs' => 
+      array (
+        'DEFAULT' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_EDITVIEW_PANEL2' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_EDITVIEW_PANEL1' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+      ),
+    ),
+    'panels' => 
+    array (
+      'default' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'asset',
+            'studio' => 'visible',
+            'label' => 'LBL_ASSET',
+          ),
+          1 => 
+          array (
+            'name' => 'asset_desc',
+            'studio' => 'visible',
+            'label' => 'LBL_ASSET_DESC',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 'name',
+          1 => 
+          array (
+            'name' => 'interval_dates',
+            'label' => 'LBL_INTERVAL_DATES',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'qual_range',
+            'label' => 'LBL_QUAL_RANGE',
+          ),
+          1 => 
+          array (
+            'name' => 'measure_precision',
+            'label' => 'LBL_MEASURE_PRESION',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'delicated',
+            'label' => 'LBL_DELICATED',
+          ),
+          1 => 
+          array (
+            'name' => 'enforced',
+            'label' => 'LBL_ENFORCED',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'standard',
+            'label' => 'LBL_STANDARD',
+          ),
+          1 => 
+          array (
+            'name' => 'mgmt_criticality',
+            'studio' => 'visible',
+            'label' => 'LBL_MGMT_CRITICALITY',
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'on_site_service',
+            'label' => 'LBL_ON_SITE_SERVICE',
+          ),
+          1 => '',
+        ),
+        6 => 
+        array (
+          0 => 'description',
+          1 => '',
+        ),
+      ),
+      'lbl_editview_panel2' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'lastest_qual_org',
+            'studio' => 'visible',
+            'label' => 'LBL_LASTEST_QUAL_ORG',
+          ),
+          1 => 
+          array (
+            'name' => 'latest_qual_date',
+            'label' => 'LBL_LATEST_QUAL_DATE',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'latest_effective_date',
+            'label' => 'LBL_LATEST_EFFECTIVE_DATE',
+          ),
+          1 => '',
+        ),
+      ),
+      'lbl_editview_panel1' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'first_qual_org',
+            'studio' => 'visible',
+            'label' => 'LBL_FIRST_QUAL_ORG',
+          ),
+          1 => 
+          array (
+            'name' => 'second_qual_org',
+            'studio' => 'visible',
+            'label' => 'LBL_SECOND_QUAL_ORG',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'third_qual_org',
+            'studio' => 'visible',
+            'label' => 'LBL_THIRD_QUAL_ORG',
+          ),
+          1 => '',
+        ),
+      ),
+    ),
+  ),
+);
+?>

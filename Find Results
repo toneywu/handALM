@@ -1,0 +1,457 @@
+Searching 22337 files for "get_full_list"
+
+D:\xampp\htdocs\suite\cache\include\javascript\sugar_grp_jsolait.js:
+   56  index++;}
+   57  return timehash;}
+   58: SugarVCalClient.parseResults=SugarVCalClient.prototype.parseResults;SugarRPCClient.allowed_methods=['retrieve','query','save','set_accept_status','get_objects_from_module','email','get_user_array','get_full_list'];SugarClass.inherit("SugarRPCClient","SugarClass");function SugarRPCClient(){this.init();}
+   59  SugarRPCClient.prototype.allowed_methods=['retrieve','query','get_objects_from_module'];SugarRPCClient.prototype.init=function(){this._showError=function(e){alert("ERROR CONNECTING to: ./index.php?entryPoint=json_server, ERROR:"+e);}
+   60  this.serviceURL='./index.php?entryPoint=json_server';}
+
+D:\xampp\htdocs\suite\cache\include\javascript\sugar_grp_quickcomp.js:
+   56  index++;}
+   57  return timehash;}
+   58: SugarVCalClient.parseResults=SugarVCalClient.prototype.parseResults;SugarRPCClient.allowed_methods=['retrieve','query','save','set_accept_status','get_objects_from_module','email','get_user_array','get_full_list'];SugarClass.inherit("SugarRPCClient","SugarClass");function SugarRPCClient(){this.init();}
+   59  SugarRPCClient.prototype.allowed_methods=['retrieve','query','get_objects_from_module'];SugarRPCClient.prototype.init=function(){this._showError=function(e){alert("ERROR CONNECTING to: ./index.php?entryPoint=json_server, ERROR:"+e);}
+   60  this.serviceURL='./index.php?entryPoint=json_server';}
+
+D:\xampp\htdocs\suite\data\SugarBean.php:
+ 3081      * @param int $show_deleted show deleted records. defaults to 0
+ 3082      */
+ 3083:     function get_full_list($order_by = "", $where = "", $check_dates=false, $show_deleted = 0)
+ 3084      {
+ 3085:         $GLOBALS['log']->debug("get_full_list:  order_by = '$order_by' and where = '$where'");
+ 3086          if(isset($_SESSION['show_deleted']))
+ 3087          {
+
+D:\xampp\htdocs\suite\include\generic\SugarWidgets\SugarWidgetFieldcurrency_id.php:
+   54          {
+   55              $currency = new Currency();
+   56:             $list = $currency->get_full_list('name');
+   57              $currency->retrieve('-99');
+   58              if (is_array($list))
+
+D:\xampp\htdocs\suite\include\javascript\jsclass_async.js:
+   62  index++;}
+   63  return timehash;}
+   64: SugarVCalClient.parseResults=SugarVCalClient.prototype.parseResults;SugarRPCClient.allowed_methods=['retrieve','query','save','set_accept_status','get_objects_from_module','email','get_user_array','get_full_list'];SugarClass.inherit("SugarRPCClient","SugarClass");function SugarRPCClient(){this.init();}
+   65  SugarRPCClient.prototype.allowed_methods=['retrieve','query','get_objects_from_module'];SugarRPCClient.prototype.init=function(){this._showError=function(e){alert("ERROR CONNECTING to: ./index.php?entryPoint=json_server, ERROR:"+e);}
+   66  this.serviceURL='./index.php?entryPoint=json_server';}
+
+D:\xampp\htdocs\suite\jssource\src_files\include\javascript\jsclass_async.js:
+  206  //
+  207  //////////////////////////////////////////////////
+  208: SugarRPCClient.allowed_methods = ['retrieve','query','save','set_accept_status','get_objects_from_module', 'email', 'get_user_array', 'get_full_list'];
+  209  
+  210  SugarClass.inherit("SugarRPCClient","SugarClass");
+
+D:\xampp\htdocs\suite\modules\Accounts\Account.php:
+  230  			$camp = new Campaign();
+  231  		    $where = "campaigns.id='{$this->campaign_id}'";
+  232: 		    $campaign_list = $camp->get_full_list("campaigns.name", $where, true);
+  233  		    $this->campaign_name = $campaign_list[0]->name;
+  234  		}
+
+D:\xampp\htdocs\suite\modules\Activities\OpenListView.php:
+  117  
+  118  	$meeting->disable_row_level_security = true;
+  119: 	$focus_meetings_list = $meeting->get_full_list("time_start", $where);
+  120  }
+  121  
+  ...
+  148  
+  149  	$call->disable_row_level_security = true;
+  150: 	$focus_calls_list = $call->get_full_list("time_start", $where);
+  151  }
+  152  
+
+D:\xampp\htdocs\suite\modules\Alerts\controller.php:
+   46  
+   47          $this->view_object_map['Flash'] = '';
+   48:         $this->view_object_map['Results'] = $bean->get_full_list("alerts.date_entered","alerts.assigned_user_id = '".$current_user->id."' AND is_read != '1'");
+   49          if($this->view_object_map['Results'] == '') {
+   50              $this->view_object_map['Flash'] =$app_strings['LBL_NOTIFICATIONS_NONE'];
+   ..
+   94          if(isset($_POST)) {
+   95              $bean = BeanFactory::getBean('Alerts');
+   96:             $result = $bean->get_full_list("","alerts.assigned_user_id = '".$current_user->id."' AND url_redirect = '".$_POST['url_redirect']."' AND is_read != 1");
+   97              if(empty($result)) {
+   98                  $bean = BeanFactory::newBean('Alerts');
+
+D:\xampp\htdocs\suite\modules\AOD_Index\AOD_Index.php:
+  214      	global $timedate;
+  215          $indexEventBean = BeanFactory::getBean("AOD_IndexEvent");
+  216:         $indexEvents = $indexEventBean->get_full_list('',"aod_indexevent.record_id = '".$beanId."' AND aod_indexevent.record_module = '".$module."'");
+  217          if($indexEvents){
+  218              $indexEvent = $indexEvents[0];
+
+D:\xampp\htdocs\suite\modules\AOW_Actions\actions\actionSendEmail.php:
+  338          if($template->id != ''){
+  339              $note_bean = new Note();
+  340:             $notes = $note_bean->get_full_list('',"parent_type = 'Emails' AND parent_id = '".$template->id."'");
+  341  
+  342              if($notes != null){
+
+D:\xampp\htdocs\suite\modules\AOW_WorkFlow\AOW_WorkFlow.php:
+  106       */
+  107  	function run_flows(){
+  108: 		$flows = AOW_WorkFlow::get_full_list(''," aow_workflow.status = 'Active'  AND (aow_workflow.run_when = 'Always' OR aow_workflow.run_when = 'In_Scheduler' OR aow_workflow.run_when = 'Create') ");
+  109  
+  110          foreach($flows as $flow){
+
+D:\xampp\htdocs\suite\modules\Calendar\CalendarActivity.php:
+  235  				$where .= $completedTasks;
+  236  
+  237: 				$focus_tasks_list = $task->get_full_list("", $where, true);
+  238  
+  239  				if(!isset($focus_tasks_list)) {
+
+D:\xampp\htdocs\suite\modules\Charts\Dashlets\CampaignROIChartDashlet\CampaignROIChartDashlet.php:
+   60          $this->getSeedBean()->disable_row_level_security = false;
+   61  
+   62:         $campaigns = $this->getSeedBean()->get_full_list("","");
+   63          if ( $campaigns != null )
+   64              foreach ($campaigns as $c)
+
+D:\xampp\htdocs\suite\modules\Contacts\Contact.php:
+  388  			$camp = new Campaign();
+  389  		    $where = "campaigns.id='{$this->campaign_id}'";
+  390: 		    $campaign_list = $camp->get_full_list("campaigns.name", $where, true);
+  391  		    $this->campaign_name = $campaign_list[0]->name;
+  392  		}
+
+D:\xampp\htdocs\suite\modules\Currencies\ListCurrency.php:
+   48  		
+   49  		$this->focus = new Currency();
+   50: 		$this->list = $this->focus->get_full_list('name');
+   51  		$this->focus->retrieve('-99');
+   52  	  	if(is_array($this->list)){
+
+D:\xampp\htdocs\suite\modules\Emails\DetailView.php:
+  486      $where = "notes.parent_id='{$macro_values['email_template_id']}'";
+  487  }
+  488: $notes_list = $note->get_full_list("notes.name", $where, true);
+  489  
+  490  if(! isset($notes_list)) {
+
+D:\xampp\htdocs\suite\modules\Emails\EditView.php:
+  625  	$note = new Note();
+  626  	$where = "notes.parent_id='{$focusId}' AND notes.filename IS NOT NULL";
+  627: 	$notes_list = $note->get_full_list("", $where,true);
+  628  
+  629  	if(!isset($notes_list)) {
+
+D:\xampp\htdocs\suite\modules\Emails\Email.php:
+ 1757      			$note = new Note();
+ 1758      			$where = "notes.parent_id='{$this->id}'";
+ 1759:     			$notes_list = $note->get_full_list("", $where, true);
+ 1760      		}
+ 1761      		$this->attachments = array_merge($this->attachments, $notes_list);
+
+D:\xampp\htdocs\suite\modules\Emails\EmailUI.php:
+ 1486  		    $where = "notes.parent_id='{$macro_values['email_template_id']}'";
+ 1487  		}
+ 1488: 		$notes_list = $note->get_full_list("notes.name", $where, true);
+ 1489  
+ 1490  		if(! isset($notes_list)) {
+
+D:\xampp\htdocs\suite\modules\Emails\EmailUIAjax.php:
+  246              $order = "";
+  247              $seed = new Note();
+  248:             $fullList = $seed->get_full_list($order, $where, '');
+  249              $all_fields = array_merge($seed->column_fields, $seed->additional_column_fields);
+  250  
+
+D:\xampp\htdocs\suite\modules\EmailTemplates\DetailView.php:
+  173  $note = new Note();
+  174  $where = "notes.parent_id='{$focus->id}'";
+  175: $notes_list = $note->get_full_list("notes.name", $where,true);
+  176  
+  177  if(! isset($notes_list)) {
+
+D:\xampp\htdocs\suite\modules\EmailTemplates\EditView.php:
+  276          $note = new Note();
+  277          $where = "notes.parent_id='{$etid}' AND notes.filename IS NOT NULL";
+  278:         $notes_list = $note->get_full_list("", $where, true);
+  279  
+  280          if (!isset($notes_list)) {
+
+D:\xampp\htdocs\suite\modules\EmailTemplates\EmailTemplateFormBase.php:
+  214  				$where .= " OR notes.parent_id='".htmlspecialchars($_REQUEST['old_id'], ENT_QUOTES)."'";
+  215  			}
+  216: 			$notes_list = $note->get_full_list("", $where, true);
+  217  		}
+  218  
+
+D:\xampp\htdocs\suite\modules\FP_events\controller.php:
+  424                  //get attachments
+  425                  $attachmentBean = new Note();
+  426:                 $attachment_list = $attachmentBean->get_full_list('',"parent_type = 'Emails' AND parent_id = '".$event->invite_templates."'");
+  427  
+  428                  $attachments = array();
+  ...
+  483                  //get attachments
+  484                  $attachmentBean = new Note();
+  485:                 $attachment_list = $attachmentBean->get_full_list('',"parent_type = 'Emails' AND parent_id = '".$event->invite_templates."'");
+  486  
+  487                  $attachments = array();
+  ...
+  542                  //get attachments
+  543                  $attachmentBean = new Note();
+  544:                 $attachment_list = $attachmentBean->get_full_list('',"parent_type = 'Emails' AND parent_id = '".$event->invite_templates."'");
+  545  
+  546                  $attachments = array();
+
+D:\xampp\htdocs\suite\modules\Home\Dashlets\HAA_OrgSelectorDashlet\HAA_OrgSelectorDashlet.php:
+   93  
+   94          $domainBean = BeanFactory::getBean('HAT_Domains');
+   95: 		$domainBeanList = $domainBean->get_full_list(); //Order by the accounts name
+   96          $ss->assign('domainBeanList', $domainBeanList);
+   97  
+
+D:\xampp\htdocs\suite\modules\iCals\iCal.php:
+  351              "AND (project_task.date_start IS NULL OR " . CalendarActivity::get_occurs_within_where_clause('project_task', '', $start_date_time, $end_date_time, 'date_start', 'month') . ")";
+  352          $seedProjectTask = new ProjectTask();
+  353:         $projectTaskList = $seedProjectTask->get_full_list("", $where);
+  354          if (is_array($projectTaskList))
+  355          {
+  ...
+  366                  "AND (tasks.date_start IS NULL OR " . CalendarActivity::get_occurs_within_where_clause('tasks', '', $start_date_time, $end_date_time, 'date_start', 'month') . ")";
+  367              $seedTask = new Task();
+  368:             $taskList = $seedTask->get_full_list("", $where);
+  369              if (is_array($taskList))
+  370              {
+
+D:\xampp\htdocs\suite\modules\Leads\Lead.php:
+  282  			$camp = new Campaign();
+  283  			$where = "campaigns.id='$this->campaign_id'";
+  284: 			$campaign_list = $camp->get_full_list("campaigns.name", $where, true);
+  285  			if(!empty($campaign_list))
+  286  				$this->campaign_name = $campaign_list[0]->name;	
+
+D:\xampp\htdocs\suite\modules\Project\controller.php:
+   38          //Get project tasks
+   39          $Task = BeanFactory::getBean('ProjectTask');
+   40:         $tasks = $Task->get_full_list("order_number", "project_task.project_id = '".$project->id."'");
+   41          //Get the start and end date of the project in database format
+   42          $query = "SELECT estimated_start_date FROM project WHERE id = '{$project->id}'";
+   ..
+  194          //Get project tasks
+  195          $Task = BeanFactory::getBean('ProjectTask');
+  196:         $tasks = $Task->get_full_list("order_number", "project_task.project_id = '".$project->id."'");
+  197          echo '<option rel="0" value="0">None</option>';
+  198          foreach ($tasks as $task) {
+  ...
+  332          {  //get each users associated project tasks
+  333              $Task = BeanFactory::getBean('ProjectTask');
+  334:             $tasks = $Task->get_full_list("date_start", "project_task.assigned_user_id = '".$row['id']."'");
+  335              //put users tasks in an array
+  336              $taskarr = array();
+  ...
+  380  
+  381          $Task = BeanFactory::getBean('ProjectTask');
+  382:         $tasks = $Task->get_full_list("date_start", "project_task.assigned_user_id = '".$resource_id."' AND project_task.date_start <= '".$start_date."' AND project_task.date_finish >= '".$start_date."'");
+  383  
+  384          echo '<table class="qtip_table">';
+
+D:\xampp\htdocs\suite\modules\Project\delete_project_tasks.php:
+   28          global $db;
+   29          $Task = BeanFactory::getBean('ProjectTask');
+   30:         $tasks = $Task->get_full_list("order_number", "project_task.project_id = '".$bean->id."'");
+   31  
+   32          foreach($tasks as $task){
+
+D:\xampp\htdocs\suite\modules\ProjectTask\updateDependencies.php:
+   44          //Get all tasks that are dependant on the current task being saved.
+   45          $Task = BeanFactory::getBean('ProjectTask');
+   46:         $tasks = $Task->get_full_list("", "project_task.project_id = '".$bean->project_id."' AND project_task.predecessors = '".$bean->project_task_id."'");
+   47  
+   48          if($bean->date_finish != $bean->fetched_row['date_finish']){ //if the end date of a current task is changed
+
+D:\xampp\htdocs\suite\modules\Reminders\Reminder.php:
+  119              Reminder_Invitee::saveRemindersInviteesData($reminderId, $reminderData->invitees);
+  120          }
+  121:         $reminders = BeanFactory::getBean('Reminders')->get_full_list("", "reminders.related_event_module = '$eventModule' AND reminders.related_event_module_id = '$eventModuleId'");
+  122          if ($reminders) {
+  123              foreach ($reminders as $reminder) {
+  ...
+  164          if (!isset(self::$remindersData[$eventModule][$eventModuleId]) || !$eventModuleId || $isDuplicate) {
+  165              $ret = array();
+  166:             $reminders = BeanFactory::getBean('Reminders')->get_full_list("reminders.date_entered", "reminders.related_event_module = '$eventModule' AND reminders.related_event_module_id = '$eventModuleId'");
+  167              if ($reminders) {
+  168                  foreach ($reminders as $reminder) {
+  ...
+  214          $event = BeanFactory::getBean($eventModule, $eventModuleId);
+  215          if ($event && (!isset($event->status) || $event->status != 'Held')) {
+  216:             $invitees = BeanFactory::getBean('Reminders_Invitees')->get_full_list('', "reminders_invitees.reminder_id = '$reminderId'");
+  217              foreach ($invitees as $invitee) {
+  218                  $inviteeModule = $invitee->related_invitee_module;
+  ...
+  239          global $db;
+  240          $reminders = array();
+  241:         $reminderBeans = BeanFactory::getBean('Reminders')->get_full_list('', "reminders.email = 1 AND reminders.email_sent = 0");
+  242          if (!empty($reminderBeans)) {
+  243              foreach ($reminderBeans as $reminderBean) {
+  ...
+  304          ///////////////////////////////////////////////////////////////////////
+  305  
+  306:         $popupReminders = BeanFactory::getBean('Reminders')->get_full_list('', "reminders.popup = 1");
+  307  
+  308          if ($popupReminders) {
+  ...
+  315                  ) {
+  316                      // The original popup/alert reminders check the accept_status field in related users/leads/contacts etc. and filtered these users who not decline this event.
+  317:                     $invitees = BeanFactory::getBean('Reminders_Invitees')->get_full_list('', "reminders_invitees.reminder_id = '{$popupReminder->id}' AND reminders_invitees.related_invitee_module_id = '{$current_user->id}'");
+  318                      if ($invitees) {
+  319                          foreach ($invitees as $invitee) {
+  ...
+  507      private static function upgradeRestoreReminders()
+  508      {
+  509:         if ($reminders = BeanFactory::getBean('Reminders')->get_full_list('', 'reminders.deleted = 1')) {
+  510              foreach ($reminders as $reminder) {
+  511                  $reminder->deleted = 0;
+  ...
+  513              }
+  514          }
+  515:         if ($reminderInvitees = BeanFactory::getBean('Reminders_Invitees')->get_full_list('', 'reminders_invitees.deleted = 1')) {
+  516              foreach ($reminderInvitees as $invitee) {
+  517                  $invitee->deleted = 0;
+  ...
+  551  
+  552          $eventBean = BeanFactory::getBean($eventModule);
+  553:         $events = BeanFactory::getBean($eventModule)->get_full_list('', "{$eventBean->table_name}.date_start >  '2015-11-01 00:00:00' AND ({$eventBean->table_name}.reminder_time != -1 OR ({$eventBean->table_name}.email_reminder_time != -1 AND {$eventBean->table_name}.email_reminder_sent != 1))");
+  554          if ($events) {
+  555              foreach ($events as $event) {
+
+D:\xampp\htdocs\suite\modules\Reminders_Invitees\Reminder_Invitee.php:
+   87              }
+   88              else {
+   89:                 $addedInvitees = BeanFactory::getBean('Reminders_Invitees')->get_full_list("", "reminders_invitees.id != '{$inviteeData->id}' AND reminders_invitees.reminder_id = '{$reminderInviteeBean->reminder_id}' AND reminders_invitees.related_invitee_module = '{$reminderInviteeBean->related_invitee_module}' AND reminders_invitees.related_invitee_module_id = '{$reminderInviteeBean->related_invitee_module_id}'");
+   90                  if (!$addedInvitees) {
+   91                      $reminderInviteeBean->save();
+   ..
+  108  		$ret = array();
+  109  		$reminderInviteeBeen = new Reminder_Invitee();
+  110: 		$reminderInvitees = $reminderInviteeBeen->get_full_list("reminders_invitees.date_entered", "reminders_invitees.reminder_id = '$reminderId'");
+  111          if($reminderInvitees) {
+  112              foreach ($reminderInvitees as $reminderInvitee) {
+  ...
+  155  	 */
+  156      public static function deleteRemindersInviteesMultiple($reminderId, $inviteeIds = array()) {
+  157:         $invitees = BeanFactory::getBean('Reminders_Invitees')->get_full_list("", "reminders_invitees.reminder_id = '$reminderId'");
+  158          if($invitees) {
+  159              foreach ($invitees as $invitee) {
+
+D:\xampp\htdocs\suite\modules\Schedulers\_AddJobsHere.php:
+  725      require_once 'include/SugarQueue/SugarJobQueue.php';
+  726      $date = new DateTime();//Ensure we check all schedules at the same instant
+  727:     foreach (BeanFactory::getBean('AOR_Scheduled_Reports')->get_full_list() as $scheduledReport) {
+  728  
+  729          if ($scheduledReport->status == 'active' && $scheduledReport->shouldRun($date)) {
+
+D:\xampp\htdocs\suite\modules\Schedulers\Scheduler.php:
+  182  	public function checkPendingJobs($queue)
+  183  	{
+  184: 		$allSchedulers = $this->get_full_list('', "schedulers.status='Active' AND NOT EXISTS(SELECT id FROM {$this->job_queue_table} WHERE scheduler_id=schedulers.id AND status!='".SchedulersJob::JOB_STATUS_DONE."')");
+  185  
+  186  		$GLOBALS['log']->info('-----> Scheduler found [ '.count($allSchedulers).' ] ACTIVE jobs');
+
+D:\xampp\htdocs\suite\soap\SoapDeprecated.php:
+  531  		return $output_list;
+  532  	}
+  533:     $userList = $seed_user->get_full_list();
+  534  
+  535  
+
+D:\xampp\htdocs\suite\upload\upgrades\patch\SuiteCRM-Upgrade-7.5.x-to-7.5.2-restore\data\SugarBean.php:
+ 3080      * @param int $show_deleted show deleted records. defaults to 0
+ 3081      */
+ 3082:     function get_full_list($order_by = "", $where = "", $check_dates=false, $show_deleted = 0)
+ 3083      {
+ 3084:         $GLOBALS['log']->debug("get_full_list:  order_by = '$order_by' and where = '$where'");
+ 3085          if(isset($_SESSION['show_deleted']))
+ 3086          {
+
+D:\xampp\htdocs\suite\upload\upgrades\patch\SuiteCRM-Upgrade-7.5.x-to-7.5.2-restore\modules\AOD_Index\AOD_Index.php:
+  213      private function getIndexEvent($module, $beanId){
+  214          $indexEventBean = BeanFactory::getBean("AOD_IndexEvent");
+  215:         $indexEvents = $indexEventBean->get_full_list('',"aod_indexevent.record_id = '".$beanId."' AND aod_indexevent.record_module = '".$module."'");
+  216          if($indexEvents){
+  217              $indexEvent = $indexEvents[0];
+
+D:\xampp\htdocs\suite\upload\upgrades\patch\SuiteCRM-Upgrade-7.5.x-to-7.5.2-restore\modules\Charts\Dashlets\CampaignROIChartDashlet\CampaignROIChartDashlet.php:
+   60          $this->getSeedBean()->disable_row_level_security = false;
+   61  
+   62:         $campaigns = $this->getSeedBean()->get_full_list("","");
+   63          if ( $campaigns != null )
+   64              foreach ($campaigns as $c)
+
+D:\xampp\htdocs\suite\upload\upgrades\patch\SuiteCRM-Upgrade-7.5.x-to-7.5.2-restore\modules\Emails\DetailView.php:
+  477      $where = "notes.parent_id='{$macro_values['email_template_id']}'";
+  478  }
+  479: $notes_list = $note->get_full_list("notes.name", $where, true);
+  480  
+  481  if(! isset($notes_list)) {
+
+D:\xampp\htdocs\suite\upload\upgrades\patch\SuiteCRM-Upgrade-7.5.x-to-7.5.2-restore\modules\Reminders\Reminder.php:
+  114              Reminder_Invitee::saveRemindersInviteesData($reminderId, $reminderData->invitees);
+  115          }
+  116:         $reminders = BeanFactory::getBean('Reminders')->get_full_list("", "reminders.related_event_module = '$eventModule' AND reminders.related_event_module_id = '$eventModuleId'");
+  117          if($reminders) {
+  118              foreach ($reminders as $reminder) {
+  ...
+  157  		if(!isset(self::$remindersData[$eventModule][$eventModuleId]) || !$eventModuleId || $isDuplicate) {
+  158  			$ret = array();
+  159: 			$reminders = BeanFactory::getBean('Reminders')->get_full_list("reminders.date_entered", "reminders.related_event_module = '$eventModule' AND reminders.related_event_module_id = '$eventModuleId'");
+  160  			if ($reminders) {
+  161  				foreach ($reminders as $reminder) {
+  ...
+  205  		$event = BeanFactory::getBean($eventModule, $eventModuleId);
+  206  		if(!isset($event->status) || $event->status != 'Held') {
+  207: 			$invitees = BeanFactory::getBean('Reminders_Invitees')->get_full_list('', "reminders_invitees.reminder_id = '$reminderId'");
+  208  			foreach($invitees as $invitee) {
+  209  				$inviteeModule = $invitee->related_invitee_module;
+  ...
+  229          global $db;
+  230  		$reminders = array();
+  231: 		$reminderBeans = BeanFactory::getBean('Reminders')->get_full_list('', "reminders.email = 1 AND reminders.email_sent = 0");
+  232  		foreach($reminderBeans as $reminderBean) {
+  233  			$eventBean = BeanFactory::getBean($reminderBean->related_event_module, $reminderBean->related_event_module_id);
+  ...
+  291  		///////////////////////////////////////////////////////////////////////
+  292  		
+  293: 		$popupReminders = BeanFactory::getBean('Reminders')->get_full_list('', "reminders.popup = 1");
+  294  
+  295  		if($popupReminders) {
+  ...
+  302  				) {
+  303  					// The original popup/alert reminders check the accept_status field in related users/leads/contacts etc. and filtered these users who not decline this event.
+  304: 					$invitees = BeanFactory::getBean('Reminders_Invitees')->get_full_list('', "reminders_invitees.reminder_id = '{$popupReminder->id}' AND reminders_invitees.related_invitee_module_id = '{$current_user->id}'");
+  305  					if($invitees) {
+  306  						foreach($invitees as $invitee) {
+  ...
+  485  
+  486  	private static function upgradeRestoreReminders() {
+  487: 		if($reminders = BeanFactory::getBean('Reminders')->get_full_list('', 'reminders.deleted = 1')) {
+  488  			foreach($reminders as $reminder) {
+  489  				$reminder->deleted = 0;
+  ...
+  491  			}
+  492  		}
+  493: 		if($reminderInvitees = BeanFactory::getBean('Reminders_Invitees')->get_full_list('', 'reminders_invitees.deleted = 1')) {
+  494  			foreach($reminderInvitees as $invitee) {
+  495  				$invitee->deleted = 0;
+  ...
+  527  
+  528  		$eventBean = BeanFactory::getBean($eventModule);
+  529: 		$events = BeanFactory::getBean($eventModule)->get_full_list('', "{$eventBean->table_name}.date_start >  '2015-11-01 00:00:00' AND ({$eventBean->table_name}.reminder_time != -1 OR ({$eventBean->table_name}.email_reminder_time != -1 AND {$eventBean->table_name}.email_reminder_sent != 1))");
+  530  		if ($events) {
+  531  			foreach ($events as $event) {
+
+D:\xampp\htdocs\suite\upload\upgrades\patch\SuiteCRM-Upgrade-7.5.x-to-7.5.2-restore\modules\Schedulers\_AddJobsHere.php:
+  718      require_once 'include/SugarQueue/SugarJobQueue.php';
+  719      $date = new DateTime();//Ensure we check all schedules at the same instant
+  720:     foreach (BeanFactory::getBean('AOR_Scheduled_Reports')->get_full_list() as $scheduledReport) {
+  721  
+  722          if ($scheduledReport->status == 'active' && $scheduledReport->shouldRun($date)) {
+
+70 matches across 42 files

@@ -1,0 +1,276 @@
+<?php
+if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+/*********************************************************************************
+ * SugarCRM Community Edition is a customer relationship management program developed by
+ * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
+ *
+ * SuiteCRM is an extension to SugarCRM Community Edition developed by Salesagility Ltd.
+ * Copyright (C) 2011 - 2016 Salesagility Ltd.
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Affero General Public License version 3 as published by the
+ * Free Software Foundation with the addition of the following permission added
+ * to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
+ * IN WHICH THE COPYRIGHT IS OWNED BY SUGARCRM, SUGARCRM DISCLAIMS THE WARRANTY
+ * OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License along with
+ * this program; if not, see http://www.gnu.org/licenses or write to the Free
+ * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301 USA.
+ *
+ * You can contact SugarCRM, Inc. headquarters at 10050 North Wolfe Road,
+ * SW2-130, Cupertino, CA 95014, USA. or at email address contact@sugarcrm.com.
+ *
+ * The interactive user interfaces in modified source and object code versions
+ * of this program must display Appropriate Legal Notices, as required under
+ * Section 5 of the GNU Affero General Public License version 3.
+ *
+ * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
+ * these Appropriate Legal Notices must retain the display of the "Powered by
+ * SugarCRM" logo and "Supercharged by SuiteCRM" logo. If the display of the logos is not
+ * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
+ * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
+ ********************************************************************************/
+
+/*********************************************************************************
+ * Description:  Defines the English language pack for the base application.
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
+ * All Rights Reserved.
+ * Contributor(s): ______________________________________..
+ ********************************************************************************/
+
+$mod_strings = array(
+    //DON'T CONVERT THESE THEY ARE MAPPINGS
+    'db_last_name' => 'LBL_LIST_LAST_NAME',
+    'db_first_name' => 'LBL_LIST_FIRST_NAME',
+    'db_title' => 'LBL_LIST_TITLE',
+    'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
+    'db_account_name' => 'LBL_LIST_ACCOUNT_NAME',
+    'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
+
+    //END DON'T CONVERT
+    'ERR_DELETE_RECORD' => '要刪除潛在客戶必須指定記錄編號。',
+    'LBL_ACCOUNT_DESCRIPTION' => '客戶說明',
+    'LBL_ACCOUNT_ID' => '客戶編號',
+    'LBL_ACCOUNT_NAME' => '客戶名稱:',
+    'LBL_ACTIVITIES_SUBPANEL_TITLE' => '活動',
+    'LBL_ADD_BUSINESSCARD' => '增加名片',
+    'LBL_ADDRESS_INFORMATION' => '地址信息',
+    'LBL_ALT_ADDRESS_CITY' => '[其它住址]城市',
+    'LBL_ALT_ADDRESS_COUNTRY' => '[其他地址]國家',
+    'LBL_ALT_ADDRESS_POSTALCODE' => '[其它地址]郵編',
+    'LBL_ALT_ADDRESS_STATE' => '[其它地址]省份',
+    'LBL_ALT_ADDRESS_STREET_2' => '[其它地址]街道2',
+    'LBL_ALT_ADDRESS_STREET_3' => '[其它地址]街道3',
+    'LBL_ALT_ADDRESS_STREET' => '[其它地址]街道',
+    'LBL_ALTERNATE_ADDRESS' => '其它地址:',
+    'LBL_ALT_ADDRESS' => '其它地址:',
+    'LBL_ANY_ADDRESS' => '任何地址:',
+    'LBL_ANY_EMAIL' => '任何電子郵件:',
+    'LBL_ANY_PHONE' => '任何電話:',
+    'LBL_ASSIGNED_TO_NAME' => '負責人姓名',
+    'LBL_ASSIGNED_TO_ID' => '負責人:',
+    'LBL_BACKTOLEADS' => '返回潛在客戶',
+    'LBL_BUSINESSCARD' => '轉換潛在客戶',
+    'LBL_CITY' => '城市:',
+    'LBL_CONTACT_ID' => '聯繫人編號',
+    'LBL_CONTACT_INFORMATION' => '潛在客戶信息',
+    'LBL_CONTACT_NAME' => '潛在客戶姓名:',
+    'LBL_CONTACT_OPP_FORM_TITLE' => '潛在客戶-商業機會:',
+    'LBL_CONTACT_ROLE' => '角色:',
+    'LBL_CONTACT' => '潛在客戶:',
+    'LBL_CONVERTED_ACCOUNT' => '已轉換的客戶:',
+    'LBL_CONVERTED_CONTACT' => '已轉換的聯繫人:',
+    'LBL_CONVERTED_OPP' => '已轉換的商業機會:',
+    'LBL_CONVERTED' => '已轉換',
+    'LBL_CONVERTLEAD_BUTTON_KEY' => 'V',
+    'LBL_CONVERTLEAD_TITLE' => '轉換潛在客戶[Alt+V]',
+    'LBL_CONVERTLEAD' => '轉換潛在客戶',
+    'LBL_CONVERTLEAD_WARNING' => '警告: 您正在轉化的潛在客戶的狀態是"Converted"。 客戶或者聯繫人的記錄可能已經通過這個潛在客戶創建過了。 如果您希望繼續轉化，請單擊保持按鈕。如果不進行轉化，請單擊取消按鈕。',
+    'LBL_CONVERTLEAD_WARNING_INTO_RECORD' => ' 相關聯繫人: ',
+    'LBL_COUNTRY' => '國家:',
+    'LBL_CREATED_NEW' => '創建了新紀錄 ',
+    'LBL_CREATED_ACCOUNT' => '新增的客戶',
+    'LBL_CREATED_CALL' => '新增的電話',
+    'LBL_CREATED_CONTACT' => '新增的聯繫人',
+    'LBL_CREATED_MEETING' => '新增的會議',
+    'LBL_CREATED_OPPORTUNITY' => '新增的商業機會',
+    'LBL_DEFAULT_SUBPANEL_TITLE' => '潛在客戶',
+    'LBL_DEPARTMENT' => '部門:',
+    'LBL_DESCRIPTION_INFORMATION' => '說明信息',
+    'LBL_DESCRIPTION' => '說明:',
+    'LBL_DO_NOT_CALL' => '不推薦電話:',
+    'LBL_DUPLICATE' => '可能有重覆的潛在客戶',
+    'LBL_EMAIL_ADDRESS' => '電子郵件:',
+    'LBL_EMAIL_OPT_OUT' => '退出郵件列表:',
+    'LBL_EXISTING_ACCOUNT' => '使用了一個已經存在的客戶',
+    'LBL_EXISTING_CONTACT' => '使用了一個已經存在的聯繫人',
+    'LBL_EXISTING_OPPORTUNITY' => '使用了一個已經存在的商業機會',
+    'LBL_FAX_PHONE' => '傳真:',
+    'LBL_FIRST_NAME' => '名:',
+    'LBL_FULL_NAME' => '姓名:',
+    'LBL_HISTORY_SUBPANEL_TITLE' => '歷史記錄',
+    'LBL_HOME_PHONE' => '家庭電話:',
+    'LBL_IMPORT_VCARD' => '導入vCard',
+    'LBL_VCARD' => 'vCard',
+    'LBL_IMPORT_VCARDTEXT' => '通過導入vCard，自動新增潛在客戶。',
+    'LBL_INVALID_EMAIL' => '無效的電子郵件:',
+    'LBL_INVITEE' => '直接報告人',
+    'LBL_LAST_NAME' => '姓:',
+    'LBL_LEAD_SOURCE_DESCRIPTION' => '潛在客戶來源說明:',
+    'LBL_LEAD_SOURCE' => '潛在客戶來源:',
+    'LBL_LIST_ACCEPT_STATUS' => '接受狀態',
+    'LBL_LIST_ACCOUNT_NAME' => '客戶名稱',
+    'LBL_LIST_CONTACT_NAME' => '潛在客戶姓名',
+    'LBL_LIST_CONTACT_ROLE' => '角色',
+    'LBL_LIST_DATE_ENTERED' => '創建日期',
+    'LBL_LIST_EMAIL_ADDRESS' => '電子郵件',
+    'LBL_LIST_FIRST_NAME' => '名',
+    'LBL_VIEW_FORM_TITLE' => '潛在客戶視圖',
+    'LBL_LIST_FORM_TITLE' => '潛在客戶列表',
+    'LBL_LIST_LAST_NAME' => '姓',
+    'LBL_LIST_LEAD_SOURCE_DESCRIPTION' => '潛在客戶來源說明',
+    'LBL_LIST_LEAD_SOURCE' => '潛在客戶',
+    'LBL_LIST_MY_LEADS' => '我的潛在客戶',
+    'LBL_LIST_NAME' => '姓名',
+    'LBL_LIST_PHONE' => '辦公電話',
+    'LBL_LIST_REFERED_BY' => '推薦人',
+    'LBL_LIST_STATUS' => '狀態',
+    'LBL_LIST_TITLE' => '職稱',
+    'LBL_MOBILE_PHONE' => '行動電話:',
+    'LBL_MODULE_NAME' => '潛在客戶',
+    'LBL_MODULE_TITLE' => '潛在客戶:首頁',
+    'LBL_NAME' => '名稱:',
+    'LBL_NEW_FORM_TITLE' => '新增潛在客戶',
+    'LBL_NEW_PORTAL_PASSWORD' => '新增門戶網站密碼:',
+    'LBL_OFFICE_PHONE' => '辦公電話:',
+    'LBL_OPP_NAME' => '商業機會名稱:',
+    'LBL_OPPORTUNITY_AMOUNT' => '商業機會金額:',
+    'LBL_OPPORTUNITY_ID' => '商業機會編號',
+    'LBL_OPPORTUNITY_NAME' => '商業機會名稱:',
+    'LBL_OTHER_EMAIL_ADDRESS' => '其它電子郵件:',
+    'LBL_OTHER_PHONE' => '其它電話:',
+    'LBL_PHONE' => '電話:',
+    'LBL_PORTAL_ACTIVE' => '啟用門戶網站:',
+    'LBL_PORTAL_APP' => '門戶網站應用程序',
+    'LBL_PORTAL_INFORMATION' => '門戶網站信息',
+    'LBL_PORTAL_NAME' => '門戶網站名稱:',
+    'LBL_PORTAL_PASSWORD_ISSET' => '門戶網站密碼已設置:',
+    'LBL_POSTAL_CODE' => '郵編:',
+    'LBL_STREET' => '街道',
+    'LBL_PRIMARY_ADDRESS_CITY' => '[主要住址]城市',
+    'LBL_PRIMARY_ADDRESS_COUNTRY' => '[主要住址]國家',
+    'LBL_PRIMARY_ADDRESS_POSTALCODE' => '[主要住址]郵編',
+    'LBL_PRIMARY_ADDRESS_STATE' => '[主要住址]省份',
+    'LBL_PRIMARY_ADDRESS_STREET_2' => '[主要住址]街道2',
+    'LBL_PRIMARY_ADDRESS_STREET_3' => '[主要住址]街道3',
+    'LBL_PRIMARY_ADDRESS_STREET' => '[主要住址]街道',
+    'LBL_PRIMARY_ADDRESS' => '主要地址:',
+    'LBL_REFERED_BY' => '推薦人:',
+    'LBL_REPORTS_TO_ID' => '經理',
+    'LBL_REPORTS_TO' => '經理:',
+    'LBL_REPORTS_FROM' => '來自於:',
+    'LBL_SALUTATION' => '稱謂',
+    'LBL_MODIFIED' => '修改人',
+    'LBL_MODIFIED_ID' => '修改編號',
+    'LBL_CREATED' => '創建人',
+    'LBL_CREATED_ID' => '創建人編號',
+    'LBL_SEARCH_FORM_TITLE' => '查找潛在客戶',
+    'LBL_SELECT_CHECKED_BUTTON_LABEL' => '選擇打勾的潛在客戶',
+    'LBL_SELECT_CHECKED_BUTTON_TITLE' => '選擇打勾的潛在客戶',
+    'LBL_STATE' => '省份:',
+    'LBL_STATUS_DESCRIPTION' => '狀態說明:',
+    'LBL_STATUS' => '狀態:',
+    'LBL_TITLE' => '職稱:',
+    'LNK_IMPORT_VCARD' => '從vCard新增',
+    'LNK_LEAD_LIST' => '潛在客戶',
+    'LNK_NEW_ACCOUNT' => '新增客戶',
+    'LNK_NEW_APPOINTMENT' => '新增約會',
+    'LNK_NEW_CONTACT' => '新增聯繫人',
+    'LNK_NEW_LEAD' => '新增潛在客戶',
+    'LNK_NEW_NOTE' => '新增備忘錄',
+    'LNK_NEW_TASK' => '創建任務',
+    'LNK_NEW_CASE' => '創建客戶反饋',
+    'LNK_NEW_CALL' => '記錄呼叫',
+    'LNK_NEW_MEETING' => '安排會議',
+    'LNK_NEW_OPPORTUNITY' => '新增商業機會',
+    'LNK_SELECT_ACCOUNTS' => ' <b>或者</b> 選擇客戶',
+    'LNK_SELECT_CONTACTS' => ' <b>OR</b> Select Contact',
+    'NTC_COPY_ALTERNATE_ADDRESS' => '將備用地址複製到主地址',
+    'NTC_COPY_PRIMARY_ADDRESS' => '將主地址內容複製到備用地址',
+    'NTC_DELETE_CONFIRMATION' => '您確定要刪除這條記錄?',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '新增新商業機會需要一個客戶\n請新增一個新的或是選擇一個已經存在的',
+    'NTC_REMOVE_CONFIRMATION' => '您確定要從這個客戶反饋移除這個潛在客戶?',
+    'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => '您確定要將此記錄從直接報告人處刪除嗎?',
+    'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE' => '市場活動',
+    'LBL_TARGET_OF_CAMPAIGNS' => '成功的市場活動:',
+    'LBL_TARGET_BUTTON_LABEL' => '已定目標',
+    'LBL_TARGET_BUTTON_TITLE' => '已定目標',
+    'LBL_TARGET_BUTTON_KEY' => 'T',
+    'LBL_CAMPAIGN' => '市場活動:',
+    'LBL_LIST_ASSIGNED_TO_NAME' => '負責人',
+    'LBL_PROSPECT_LIST' => '目標列表',
+    'LBL_CAMPAIGN_LEAD' => '潛在客戶',
+    'LBL_BIRTHDATE' => '生日:',
+    'LBL_THANKS_FOR_SUBMITTING_LEAD' => '謝謝您的意見。',
+    'LBL_SERVER_IS_CURRENTLY_UNAVAILABLE' => '很抱歉，目前伺服器不可用，請稍後再試。',
+    'LBL_ASSISTANT_PHONE' => '助理電話',
+    'LBL_ASSISTANT' => '助理',
+    'LBL_REGISTRATION' => '註冊',
+    'LBL_MESSAGE' => '請在下麵錄入您的信息。 信息和/或帳號將被簡歷以待審核.',
+    'LBL_SAVED' => '感謝您的註冊。 您的帳號將被建立,其他人很快就能聯絡上你。',
+    'LBL_CLICK_TO_RETURN' => '返回門戶',
+    'LBL_CREATED_USER' => '創建人',
+    'LBL_MODIFIED_USER' => '修改人',
+    'LBL_CAMPAIGNS' => '市場活動',
+    'LBL_CAMPAIGNS_SUBPANEL_TITLE' => '營銷活動',
+    'LBL_CONVERT_MODULE_NAME' => '模塊',
+    'LBL_CONVERT_REQUIRED' => '必選',
+    'LBL_CONVERT_SELECT' => '允許選項',
+    'LBL_CONVERT_COPY' => '拷貝數據',
+    'LBL_CONVERT_EDIT' => '編輯',
+    'LBL_CONVERT_DELETE' => '刪除',
+    'LBL_CONVERT_ADD_MODULE' => '添加模塊',
+    'LBL_CREATE' => '創建',
+    'LBL_SELECT' => ' <b>或者</b> 選擇',
+    'LBL_WEBSITE' => '網站',
+    'LNK_IMPORT_LEADS' => '導入潛在客戶',
+    'LBL_NOTICE_OLD_LEAD_CONVERT_OVERRIDE' => '註意: 當前轉化界麵包含自定義欄位。當你在工作室中定製轉化潛在客戶界面時，你必須加入這些地定義欄位。否則這些自定義欄位不會出現在導入後的記錄里。',
+//Convert lead tooltips
+    'LBL_MODULE_TIP' => '將創建記錄的模塊。',
+    'LBL_REQUIRED_TIP' => '在轉化潛在客戶前，必須先創建或者選擇這些模塊。',
+    'LBL_COPY_TIP' => '選中該選項，在創建新紀錄時，將把欄位名相同的數據從潛在客戶複製到目標模塊。',
+    'LBL_SELECTION_TIP' => '轉化的過程中模塊中的聯繫人關聯欄位，將首先嘗試查找而不是創建新聯繫人。',
+    'LBL_EDIT_TIP' => '修改轉化潛在客戶界面。',
+    'LBL_DELETE_TIP' => '把模塊從轉化界面中移除。',
+
+    'LBL_ACTIVITIES_MOVE' => '把活動轉移到',
+    'LBL_ACTIVITIES_COPY' => '把活動複製到',
+    'LBL_ACTIVITIES_MOVE_HELP' => "選擇要轉移的紀錄。任務、電話、會議、備忘錄和Email都會被轉移到選中的紀錄下。",
+    'LBL_ACTIVITIES_COPY_HELP' => "選擇要複製的紀錄。任務、電話、會議、備忘錄都會被複製到選中的紀錄下。 Email會關聯到選中的紀錄下。",
+    //For export labels
+    'LBL_PHONE_HOME' => '家庭電話',
+    'LBL_PHONE_MOBILE' => '手機',
+    'LBL_PHONE_WORK' => '公司電話',
+    'LBL_PHONE_OTHER' => '其他電話',
+    'LBL_PHONE_FAX' => '傳真',
+    'LBL_CAMPAIGN_ID' => '市場活動ID',
+    'LBL_EXPORT_ASSIGNED_USER_NAME' => '用戶',
+    'LBL_EXPORT_ASSIGNED_USER_ID' => '分配給的用戶ID',
+    'LBL_EXPORT_MODIFIED_USER_ID' => '修改人ID',
+    'LBL_EXPORT_CREATED_BY' => '創建人ID',
+    'LBL_EXPORT_PHONE_MOBILE' => '手機',
+    'LBL_EXPORT_EMAIL2' => '其他Email地址',
+    'LBL_EDITLAYOUT' => '編輯佈局' /*for 508 compliance fix*/,
+    'LBL_ENTERDATE' => '輸入日期' /*for 508 compliance fix*/,
+    'LBL_LOADING' => '載入中' /*for 508 compliance fix*/,
+    'LBL_EDIT_INLINE' => '編輯' /*for 508 compliance fix*/,
+    'LBL_FP_EVENTS_LEADS_1_FROM_FP_EVENTS_TITLE' => '事件',
+);
+?>
