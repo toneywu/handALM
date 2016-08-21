@@ -1,5 +1,5 @@
 <?php
-// created: 2016-08-14 21:19:59
+// created: 2016-08-21 10:54:41
 $mod_strings = array (
   'LBL_MODULE_TITLE' => '我保存的查找',
   'LBL_SEARCH_FORM_TITLE' => '我保存的查找:查找',

@@ -64,12 +64,33 @@ $dictionary['HFA_Fixed_Assets'] = array(
     'len' => 36,
     'size' => '20',
   ),
-  'related_assets' => 
+  'haa_frameworks_id' => 
   array (
     'required' => false,
+    'name' => 'haa_frameworks_id',
+    'vname' => 'LBL_HAA_FRAMEWORKS_ID',
+    'type' => 'id',
+    'massupdate' => 0,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'true',
+    'duplicate_merge' => 'disabled',
+    'duplicate_merge_dom_value' => 0,
+    'audited' => false,
+    'inline_edit' => true,
+    'reportable' => false,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'len' => 36,
+    'size' => '20',
+  ),
+  'related_domains' => 
+  array (
+    'required' => true,
     'source' => 'non-db',
-    'name' => 'related_assets',
-    'vname' => 'LBL_RELATED_ASSETS',
+    'name' => 'related_domains',
+    'vname' => 'LBL_RELATED_DOMAINS',
     'type' => 'relate',
     'massupdate' => 0,
     'no_default' => false,
@@ -85,33 +106,12 @@ $dictionary['HFA_Fixed_Assets'] = array(
     'merge_filter' => 'disabled',
     'len' => '255',
     'size' => '20',
-    'id_name' => 'hat_assets_id_c',
-    'ext2' => 'HAT_Assets',
-    'module' => 'HAT_Assets',
+    'id_name' => 'haa_frameworks_id',
+    'ext2' => 'HAA_Frameworks',
+    'module' => 'HAA_Frameworks',
     'rname' => 'name',
     'quicksearch' => 'enabled',
     'studio' => 'visible',
-  ),
-  'asset_num' => 
-  array (
-    'required' => false,
-    'name' => 'asset_num',
-    'vname' => 'LBL_ASSET_NUM',
-    'type' => 'varchar',
-    'massupdate' => 0,
-    'no_default' => false,
-    'comments' => '',
-    'help' => '',
-    'importable' => 'true',
-    'duplicate_merge' => 'disabled',
-    'duplicate_merge_dom_value' => '0',
-    'audited' => false,
-    'inline_edit' => true,
-    'reportable' => true,
-    'unified_search' => false,
-    'merge_filter' => 'disabled',
-    'len' => '255',
-    'size' => '20',
   ),
   'owning_dept' => 
   array (
@@ -158,6 +158,7 @@ $dictionary['HFA_Fixed_Assets'] = array(
   'original_value' => 
   array (
     'required' => false,
+    'source' => 'non-db',
     'name' => 'original_value',
     'vname' => 'LBL_ORIGINAL_VALUE',
     'type' => 'currency',
@@ -209,6 +210,7 @@ $dictionary['HFA_Fixed_Assets'] = array(
   'current_value' => 
   array (
     'required' => false,
+    'source' => 'non-db',
     'name' => 'current_value',
     'vname' => 'LBL_CURRENT_VALUE',
     'type' => 'currency',
@@ -232,6 +234,7 @@ $dictionary['HFA_Fixed_Assets'] = array(
   'ytd_depre' => 
   array (
     'required' => false,
+    'source' => 'non-db',
     'name' => 'ytd_depre',
     'vname' => 'LBL_YTD_DEPRE',
     'type' => 'currency',
@@ -255,6 +258,7 @@ $dictionary['HFA_Fixed_Assets'] = array(
   'accumulated_depre' => 
   array (
     'required' => false,
+    'source' => 'non-db',
     'name' => 'accumulated_depre',
     'vname' => 'LBL_ACCUMULATED_DEPRE',
     'type' => 'currency',
@@ -278,6 +282,7 @@ $dictionary['HFA_Fixed_Assets'] = array(
   'net_value' => 
   array (
     'required' => false,
+    'source' => 'non-db',
     'name' => 'net_value',
     'vname' => 'LBL_NET_VALUE',
     'type' => 'currency',
@@ -301,6 +306,7 @@ $dictionary['HFA_Fixed_Assets'] = array(
   'salvage_value' => 
   array (
     'required' => false,
+    'source' => 'non-db',
     'name' => 'salvage_value',
     'vname' => 'LBL_SALVAGE_VALUE',
     'type' => 'currency',
@@ -324,6 +330,7 @@ $dictionary['HFA_Fixed_Assets'] = array(
   'depreciation_prep' => 
   array (
     'required' => false,
+    'source' => 'non-db',
     'name' => 'depreciation_prep',
     'vname' => 'LBL_DEPRECIATION_PREP',
     'type' => 'currency',
@@ -349,7 +356,7 @@ $dictionary['HFA_Fixed_Assets'] = array(
     'required' => false,
     'name' => 'fixed_asset_type',
     'vname' => 'LBL_FIXED_ASSET_TYPE',
-    'type' => 'enum',
+    'type' => 'varchar',
     'massupdate' => 0,
     'no_default' => false,
     'comments' => '',
@@ -417,7 +424,7 @@ $dictionary['HFA_Fixed_Assets'] = array(
     'required' => false,
     'name' => 'book_name',
     'vname' => 'LBL_BOOK_NAME',
-    'type' => 'enum',
+    'type' => 'varchar',
     'massupdate' => 0,
     'no_default' => false,
     'comments' => '',
@@ -436,9 +443,33 @@ $dictionary['HFA_Fixed_Assets'] = array(
     'studio' => 'visible',
     'dependency' => false,
   ),
+  'fa_value_link' =>
+      array(
+        'name' => 'fa_value_link',
+        'type' => 'link',
+        'relationship' => 'hfa_fa_value',
+        'vname' => 'LBL_FAVALUE_SUBPANEL_TITLE',
+        'link_type' => 'many',
+        'module' => 'HFA_FA_Value',
+        'bean_name' => 'HFA_FA_Value',
+        'source' => 'non-db',
+        ),
 ),
-	'relationships'=>array (
-),
+
+    'relationships'=>array (
+ 
+    'hfa_fa_value' =>
+    array (
+      'lhs_module' => 'HFA_Fixed_Assets',
+      'lhs_table' => 'hfa_fixed_assets',
+      'lhs_key'   => 'id',
+      'rhs_module' => 'HFA_FA_Value',
+      'rhs_table' => 'hfa_fa_value',
+      'rhs_key'   => 'hfa_fixed_assets_id',
+      'relationship_type' => 'one-to-many',
+      ),
+    ),
+   
 	'optimistic_locking'=>true,
 		'unified_search'=>true,
 	);

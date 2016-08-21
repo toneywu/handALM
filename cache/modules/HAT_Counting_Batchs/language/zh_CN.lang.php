@@ -1,5 +1,5 @@
 <?php
-// created: 2016-08-14 21:20:00
+// created: 2016-08-21 10:54:44
 $mod_strings = array (
   'LBL_ID' => '编号',
   'LBL_DATE_ENTERED' => '创建日期',
@@ -42,7 +42,7 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL1' => '范围',
   'LBL_SNAPSHOT_DATE' => '快照日期',
   'LBL_ADJUST_POSTED' => '已经完成调整',
-  'LBL_DOMAIN_HAT_DOMAINS_ID' => 'Domain (related 资产运营区域 ID)',
+  'LBL_DOMAIN_HAA_FRAMEWORKS_ID' => 'Domain (related 资产运营区域 ID)',
   'LBL_DOMAIN' => 'Domain',
   'LBL_OBJECTS_TYPE' => '盘点对象类型',
   'LBL_ORG_DRILLDOWN' => 'Including child-Oranizations',

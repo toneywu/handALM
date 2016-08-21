@@ -1,5 +1,5 @@
 <?php
-// created: 2016-08-14 21:20:12
+// created: 2016-08-21 10:55:26
 $mod_strings = array (
   'LBL_ASSIGNED_TO_ID' => 'Assigned User Id',
   'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
@@ -41,7 +41,7 @@ $mod_strings = array (
   'LBL_ORANIZATION' => 'Oranization',
   'LBL_SNAPSHOT_DATE' => 'Snapshot Date',
   'LBL_ADJUST_POSTED' => 'Adjust Posted',
-  'LBL_DOMAIN_HAT_DOMAINS_ID' => 'Domain (related 资产运营区域 ID)',
+  'LBL_DOMAIN_HAA_FRAMEWORKS_ID' => 'Domain (related 资产运营区域 ID)',
   'LBL_DOMAIN' => 'Domain',
   'LBL_OBJECTS_TYPE' => 'Objects Type',
   'LBL_ORG_DRILLDOWN' => 'Including Child-Oranizations',

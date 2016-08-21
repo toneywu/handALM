@@ -449,10 +449,10 @@
       'quicksearch' => 'enabled',
       'studio' => 'visible',
     ),
-    'hat_domains_id' => 
+    'haa_frameworks_id' => 
     array (
       'required' => false,
-      'name' => 'hat_domains_id',
+      'name' => 'haa_frameworks_id',
       'vname' => 'LBL_DOMAIN_ID',
       'type' => 'id',
       'massupdate' => 0,
@@ -491,9 +491,9 @@
       'merge_filter' => 'disabled',
       'len' => '255',
       'size' => '20',
-      'id_name' => 'hat_domains_id',
-      'ext2' => 'HAT_Domains',
-      'module' => 'HAT_Domains',
+      'id_name' => 'haa_frameworks_id',
+      'ext2' => 'HAA_Frameworks',
+      'module' => 'HAA_Frameworks',
       'rname' => 'name',
       'quicksearch' => 'enabled',
       'studio' => 'visible',

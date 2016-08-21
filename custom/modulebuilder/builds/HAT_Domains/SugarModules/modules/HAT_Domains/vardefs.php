@@ -37,8 +37,8 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
-$dictionary['HAT_Domains'] = array(
-	'table'=>'hat_domains',
+$dictionary['HAA_Frameworks'] = array(
+	'table'=>'haa_frameworks',
 	'audited'=>true,
     'inline_edit'=>true,
 		'duplicate_merge'=>true,
@@ -126,4 +126,4 @@ $dictionary['HAT_Domains'] = array(
 if (!class_exists('VardefManager')){
         require_once('include/SugarObjects/VardefManager.php');
 }
-VardefManager::createVardef('HAT_Domains','HAT_Domains', array('basic','assignable','security_groups'));
+VardefManager::createVardef('HAA_Frameworks','HAA_Frameworks', array('basic','assignable','security_groups'));

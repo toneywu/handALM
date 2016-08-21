@@ -1,5 +1,5 @@
 <?php
-// created: 2016-08-14 21:20:12
+// created: 2016-08-21 10:55:25
 $mod_strings = array (
   'LBL_ASSIGNED_TO_ID' => 'Assigned User Id',
   'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
@@ -61,7 +61,7 @@ $mod_strings = array (
   'LBL_ASSET_NUM_PADDING' => 'Sequence Padding',
   'LBL_EDITVIEW_PANEL2' => 'Asset Tracking Rule',
   'LBL_IS_ASSET_GROUP' => 'Is Asset Group?',
-  'LBL_DOMAIN_HAT_DOMAINS_ID' => 'Domain (related  ID)',
+  'LBL_DOMAIN_HAA_FRAMEWORKS_ID' => 'Domain (related  ID)',
   'LBL_DOMAIN' => 'Domain',
   'LBL_FLEXFORM_HAA_FF_ID' => 'FlexForm (related  ID)',
   'LBL_FLEXFORM' => 'FlexForm',

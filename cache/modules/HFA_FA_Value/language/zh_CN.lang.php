@@ -1,5 +1,5 @@
 <?php
-// created: 2016-08-14 21:20:01
+// created: 2016-08-21 10:54:44
 $mod_strings = array (
   'LBL_ID' => '编号',
   'LBL_DATE_ENTERED' => '创建日期',
@@ -11,7 +11,7 @@ $mod_strings = array (
   'LBL_CREATED_ID' => '创建人编号',
   'LBL_DESCRIPTION' => '描述',
   'LBL_DELETED' => '已删除',
-  'LBL_NAME' => '名称',
+  'LBL_NAME' => '资产编号',
   'LBL_CREATED_USER' => '用户创建',
   'LBL_MODIFIED_USER' => '用户修改',
   'LBL_LIST_NAME' => '名称',
@@ -35,9 +35,9 @@ $mod_strings = array (
   'LBL_NEW_FORM_TITLE' => '新建 FA_Value_Chage_History',
   'LBL_FIXED_ASSETS_HFA_FIXED_ASSETS_ID' => 'Fixed Assets (related  ID)',
   'LBL_FIXED_ASSETS' => 'Fixed Assets',
-  'LBL_PERIOD' => 'Period',
-  'LBL_TYPE' => 'Type',
+  'LBL_PERIOD' => '期间',
+  'LBL_TYPE' => '类型',
   'LBL_PERIOD_NAME' => 'Period Name',
-  'LBL_VALUE_CHANGED' => 'Value Changed',
+  'LBL_VALUE_CHANGED' => '价值变动',
   'LBL_PERIOD_NAME_HFA_PERIODS_ID' => 'Period Name (related  ID)',
 );

@@ -105,7 +105,7 @@ $GLOBALS['tabStructure'] = array (
     'modules' => 
     array (
       0 => 'HAA_Numbering_Rule',
-      1 => 'HAT_Domains',
+      1 => 'HAA_Frameworks',
       2 => 'HAM_Maint_Sites',
       3 => 'HAM_Work_Centers',
       4 => 'HAT_Systems',

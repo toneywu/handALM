@@ -203,7 +203,7 @@ D:\xampp\htdocs\suite\modules\FP_events\controller.php:
 
 D:\xampp\htdocs\suite\modules\Home\Dashlets\HAA_OrgSelectorDashlet\HAA_OrgSelectorDashlet.php:
    93  
-   94          $domainBean = BeanFactory::getBean('HAT_Domains');
+   94          $domainBean = BeanFactory::getBean('HAA_Frameworks');
    95: 		$domainBeanList = $domainBean->get_full_list(); //Order by the accounts name
    96          $ss->assign('domainBeanList', $domainBeanList);
    97  

@@ -1,5 +1,5 @@
 <?php
-// created: 2016-08-14 21:19:58
+// created: 2016-08-21 10:54:40
 $mod_strings = array (
   'LBL_ASSIGNED_TO_ID' => '分配用户编号',
   'LBL_ASSIGNED_TO_NAME' => '分配用户',

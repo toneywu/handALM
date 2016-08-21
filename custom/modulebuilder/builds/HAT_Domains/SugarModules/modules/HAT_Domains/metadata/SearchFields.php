@@ -38,7 +38,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
-$module_name = 'HAT_Domains';
+$module_name = 'HAA_Frameworks';
 $searchFields[$module_name] = 
 	array (
 		'name' => array( 'query_type'=>'default'),

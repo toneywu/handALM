@@ -421,11 +421,11 @@ $dictionary['HAT_Counting_Tasks'] = array(
     'len' => '255',
     'size' => '20',
   ),
-  'hat_domains_id_c' => 
+  'haa_frameworks_id_c' => 
   array (
     'required' => true,
-    'name' => 'hat_domains_id_c',
-    'vname' => 'LBL_DOMAIN_HAT_DOMAINS_ID',
+    'name' => 'haa_frameworks_id_c',
+    'vname' => 'LBL_DOMAIN_HAA_FRAMEWORKS_ID',
     'type' => 'id',
     'massupdate' => 0,
     'no_default' => false,
@@ -463,9 +463,9 @@ $dictionary['HAT_Counting_Tasks'] = array(
     'merge_filter' => 'disabled',
     'len' => '255',
     'size' => '20',
-    'id_name' => 'hat_domains_id_c',
-    'ext2' => 'HAT_Domains',
-    'module' => 'HAT_Domains',
+    'id_name' => 'haa_frameworks_id_c',
+    'ext2' => 'HAA_Frameworks',
+    'module' => 'HAA_Frameworks',
     'rname' => 'name',
     'quicksearch' => 'enabled',
     'studio' => 'visible',

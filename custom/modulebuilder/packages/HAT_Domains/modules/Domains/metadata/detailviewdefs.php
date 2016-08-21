@@ -1,5 +1,5 @@
 <?php
-$module_name = 'HAT_Domains';
+$module_name = 'HAA_Frameworks';
 $viewdefs [$module_name] = 
 array (
   'DetailView' => 

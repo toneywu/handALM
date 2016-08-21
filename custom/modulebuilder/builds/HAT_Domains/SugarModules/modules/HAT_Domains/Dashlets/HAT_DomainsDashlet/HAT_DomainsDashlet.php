@@ -47,20 +47,20 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  ********************************************************************************/
 
 require_once('include/Dashlets/DashletGeneric.php');
-require_once('modules/HAT_Domains/HAT_Domains.php');
+require_once('modules/HAA_Frameworks/HAA_Frameworks.php');
 
-class HAT_DomainsDashlet extends DashletGeneric { 
+class HAA_FrameworksDashlet extends DashletGeneric { 
     function __construct($id, $def = null) {
 		global $current_user, $app_strings;
-		require('modules/HAT_Domains/metadata/dashletviewdefs.php');
+		require('modules/HAA_Frameworks/metadata/dashletviewdefs.php');
 
         parent::__construct($id, $def);
 
-        if(empty($def['title'])) $this->title = translate('LBL_HOMEPAGE_TITLE', 'HAT_Domains');
+        if(empty($def['title'])) $this->title = translate('LBL_HOMEPAGE_TITLE', 'HAA_Frameworks');
 
-        $this->searchFields = $dashletData['HAT_DomainsDashlet']['searchFields'];
-        $this->columns = $dashletData['HAT_DomainsDashlet']['columns'];
+        $this->searchFields = $dashletData['HAA_FrameworksDashlet']['searchFields'];
+        $this->columns = $dashletData['HAA_FrameworksDashlet']['columns'];
 
-        $this->seedBean = new HAT_Domains();        
+        $this->seedBean = new HAA_Frameworks();        
     }
 }

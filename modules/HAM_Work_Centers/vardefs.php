@@ -97,11 +97,11 @@ $dictionary['HAM_Work_Centers'] = array(
   ),
   
   
-'sr_hat_domains_rule_id' => 
+'sr_haa_frameworks_rule_id' => 
     array (
       'required' => false,
-      'name' => 'sr_hat_domains_rule_id',
-      'vname' => 'SR_HAT_DOMAINS_RULE_ID',
+      'name' => 'sr_haa_frameworks_rule_id',
+      'vname' => 'SR_HAA_FRAMEWORKS_RULE_ID',
       'type' => 'id',
       'massupdate' => 0,
       'no_default' => false,
@@ -119,12 +119,12 @@ $dictionary['HAM_Work_Centers'] = array(
       'size' => '20',
       ),
   
-'sr_hat_domains_rule' => //资产运营区域
+'sr_haa_frameworks_rule' => //资产运营区域
     array (
       'required' => true,
       'source' => 'non-db',
-      'name' => 'sr_hat_domains_rule',
-      'vname' => 'LBL_SR_HAT_DOMAINS_RULE',
+      'name' => 'sr_haa_frameworks_rule',
+      'vname' => 'LBL_SR_HAA_FRAMEWORKS_RULE',
       'type' => 'relate',
       'massupdate' => 0,
       'no_default' => false,
@@ -140,9 +140,9 @@ $dictionary['HAM_Work_Centers'] = array(
       'merge_filter' => 'disabled',
       'len' => '255',
       'size' => '20',
-      'id_name' => 'sr_hat_domains_rule_id',
-      'ext2' => 'HAT_Domains',
-      'module' => 'HAT_Domains',
+      'id_name' => 'sr_haa_frameworks_rule_id',
+      'ext2' => 'HAA_Frameworks',
+      'module' => 'HAA_Frameworks',
       'rname' => 'name',
       'quicksearch' => 'enabled',
       'studio' => 'visible',

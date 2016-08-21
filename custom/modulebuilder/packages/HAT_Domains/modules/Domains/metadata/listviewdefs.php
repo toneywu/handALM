@@ -41,7 +41,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 
-$module_name = 'HAT_Domains';
+$module_name = 'HAA_Frameworks';
 $listViewDefs[$module_name] = array(
 	'NAME' => array(
 		'width' => '32', 

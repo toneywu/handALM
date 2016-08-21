@@ -1,7 +1,7 @@
 <?php 
  //WARNING: The contents of this file are auto-generated
-$beanList['HAT_Domains'] = 'HAT_Domains';
-$beanFiles['HAT_Domains'] = 'modules/HAT_Domains/HAT_Domains.php';
-$moduleList[] = 'HAT_Domains';
+$beanList['HAA_Frameworks'] = 'HAA_Frameworks';
+$beanFiles['HAA_Frameworks'] = 'modules/HAA_Frameworks/HAA_Frameworks.php';
+$moduleList[] = 'HAA_Frameworks';
 
 ?>

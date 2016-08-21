@@ -49,7 +49,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 require_once('include/Dashlets/DashletGeneric.php');
 require_once('modules/HAT_Domain/HAT_Domain.php');
 
-class HAT_DomainsDashlet extends DashletGeneric { 
+class HAA_FrameworksDashlet extends DashletGeneric { 
     function __construct($id, $def = null) {
 		global $current_user, $app_strings;
 		require('modules/HAT_Domain/metadata/dashletviewdefs.php');
@@ -58,8 +58,8 @@ class HAT_DomainsDashlet extends DashletGeneric {
 
         if(empty($def['title'])) $this->title = translate('LBL_HOMEPAGE_TITLE', 'HAT_Domain');
 
-        $this->searchFields = $dashletData['HAT_DomainsDashlet']['searchFields'];
-        $this->columns = $dashletData['HAT_DomainsDashlet']['columns'];
+        $this->searchFields = $dashletData['HAA_FrameworksDashlet']['searchFields'];
+        $this->columns = $dashletData['HAA_FrameworksDashlet']['columns'];
 
         $this->seedBean = new HAT_Domain();        
     }

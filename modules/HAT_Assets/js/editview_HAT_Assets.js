@@ -129,6 +129,31 @@ $(document).ready(function(){
 	});
 
 
+	var isgv = $("#use_location_gis").attr("checked");
+	if(isgv == 'checked'){
+		$("#map_type").closest('td').toggle();
+		$("#map_type_label").toggle();
+	}
+	$("[name=use_location_gis]").click(function () {
+			 var crval = $(this).attr("checked");
+			if(crval == 'checked'){
+				$(this).attr("checked",false);
+			}else{
+				$(this).attr("checked",true);
+			}
+			$("#map_type").closest('td').toggle();
+			$("#map_type_label").toggle();
+
+		}
+	);
+	$("#use_location_gis").change(function(){
+			if($("[name=use_location_gis]").val() == 0){
+				$("#map_type").val("NONE");
+				$("#map_type").trigger("change");
+			}
+		}
+	);
+
 	//$("#detailpanel_2").switchClass("collapsed","expanded");
 
 /*	SUGAR.util.doWhen("typeof $('#detailpanel_2') != 'undefined'", function(){

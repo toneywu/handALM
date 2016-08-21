@@ -62,7 +62,7 @@ $manifest = array (
   'description' => '',
   'icon' => '',
   'is_uninstallable' => true,
-  'name' => 'HAT_Domains',
+  'name' => 'HAA_Frameworks',
   'published_date' => '2016-03-16 04:10:35',
   'type' => 'module',
   'version' => 1458101437,
@@ -71,14 +71,14 @@ $manifest = array (
 
 
 $installdefs = array (
-  'id' => 'HAT_Domains',
+  'id' => 'HAA_Frameworks',
   'beans' => 
   array (
     0 => 
     array (
-      'module' => 'HAT_Domains',
-      'class' => 'HAT_Domains',
-      'path' => 'modules/HAT_Domains/HAT_Domains.php',
+      'module' => 'HAA_Frameworks',
+      'class' => 'HAA_Frameworks',
+      'path' => 'modules/HAA_Frameworks/HAA_Frameworks.php',
       'tab' => true,
     ),
   ),
@@ -93,8 +93,8 @@ $installdefs = array (
   array (
     0 => 
     array (
-      'from' => '<basepath>/SugarModules/modules/HAT_Domains',
-      'to' => 'modules/HAT_Domains',
+      'from' => '<basepath>/SugarModules/modules/HAA_Frameworks',
+      'to' => 'modules/HAA_Frameworks',
     ),
   ),
   'language' => 

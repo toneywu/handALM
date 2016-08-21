@@ -1,5 +1,5 @@
 <?php
-// created: 2016-08-14 21:20:12
+// created: 2016-08-21 10:55:26
 $mod_strings = array (
   'LBL_MODULE_NAME' => '主页',
   'LBL_MODULES_TO_SEARCH' => '搜索模块',

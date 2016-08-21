@@ -20,17 +20,17 @@ array (
           'field' => '30',
         ),
       ),
-      'useTabs' => false,
+      'useTabs' => true,
       'tabDefs' => 
       array (
         'DEFAULT' => 
         array (
-          'newTab' => false,
+          'newTab' => true,
           'panelDefault' => 'expanded',
         ),
         'LBL_EDITVIEW_PANEL3' => 
         array (
-          'newTab' => false,
+          'newTab' => true,
           'panelDefault' => 'expanded',
         ),
         'LBL_EDITVIEW_PANEL1' => 
@@ -39,6 +39,7 @@ array (
           'panelDefault' => 'expanded',
         ),
       ),
+      'syncDetailEditViews' => true,
     ),
     'panels' => 
     array (
@@ -71,6 +72,12 @@ array (
         2 => 
         array (
           0 => 'description',
+          1 => 
+          array (
+            'name' => 'related_domains',
+            'studio' => 'visible',
+            'label' => 'LBL_RELATED_DOMAINS',
+          ),
         ),
         3 => 
         array (

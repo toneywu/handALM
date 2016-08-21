@@ -71,7 +71,7 @@ $bean_locations = $db->query($sel_location); //无如是Location还是asset来�
                     ham_maint_sites.id site_id,
                     ham_maint_sites.name site_name,
                     hat_assets.location_desc,
-                    hat_domains.name domain_name,
+                    haa_frameworks.name domain_name,
                     accounts.id account_id,
                     accounts.name account_name,
                     contacts.id contact_id,
@@ -83,7 +83,7 @@ $bean_locations = $db->query($sel_location); //无如是Location还是asset来�
                 FROM
                     aos_products,
                     aos_product_categories,
-                    hat_domains,
+                    haa_frameworks,
                     hat_assets
                         LEFT JOIN
                     accounts ON (hat_assets.`using_org_id` = accounts.id
@@ -107,9 +107,9 @@ $bean_locations = $db->query($sel_location); //无如是Location还是asset来�
                 WHERE
                     hat_assets.aos_products_id = aos_products.id
                         AND hat_assets.aos_product_categories_id = aos_product_categories.id
-                        AND hat_assets.hat_domains_id = hat_domains.id
+                        AND hat_assets.haa_frameworks_id = haa_frameworks.id
                         AND hat_assets.deleted = 0
-                        AND hat_domains.deleted = 0
+                        AND haa_frameworks.deleted = 0
                         AND aos_products.deleted = 0
                         AND aos_product_categories.deleted = 0
                         AND hat_assets.id = '".$_GET['id']."'";

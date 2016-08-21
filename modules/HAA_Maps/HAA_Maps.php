@@ -42,32 +42,39 @@
  */
 require_once('modules/HAA_Maps/HAA_Maps_sugar.php');
 class HAA_Maps extends HAA_Maps_sugar {
-	
+
 	function __construct(){
 		parent::__construct();
 	}
 
 	function save($check_notify=false){
 		global $sugar_config,$mod_strings;
-		
+
 		if (isset($_POST['deleteAttachment']) && $_POST['deleteAttachment']=='1') {
 			$this->map_file = '';
 		}
-	
+
 		require_once('include/upload_file.php');
 		$GLOBALS['log']->debug('UPLOADING MAP IMAGE');
 		$upload_file = new UploadFile('uploadfile');
 
 		if (isset($_FILES['uploadimage']['tmp_name'])&&$_FILES['uploadimage']['tmp_name']!=""){
 
-            if($_FILES['uploadimage']['size'] > $sugar_config['upload_maxsize']) {
-                die($mod_strings['LBL_IMAGE_UPLOAD_FAIL'].$sugar_config['upload_maxsize']);
-
-            }
-            else {
-                $this->map_file=$sugar_config['site_url'].'/'.$sugar_config['upload_dir'].'maps/'.$_FILES['uploadimage']['name'];
-                move_uploaded_file($_FILES['uploadimage']['tmp_name'], $sugar_config['upload_dir'].'maps/'.$_FILES['uploadimage']['name']);
-            }
+			if($_FILES['uploadimage']['size'] > $sugar_config['upload_maxsize']) {
+				die($mod_strings['LBL_IMAGE_UPLOAD_FAIL'].$sugar_config['upload_maxsize']);
+			} else {
+            	//如果当前尺寸（只验证了文件大小，没有验证长宽尺寸）为许可范围，则开始上传
+            	$upload_path = $sugar_config['upload_dir'].'haa_maps/'; //文件上传的路径
+            	if (empty($this->id)){
+	            	$this->id = create_guid();//来自己分配一个GUID
+	            	$this->new_with_id = true;//以此处的ID进行数据保存
+	            }
+	            $upload_filename = $this->id.substr($_FILES['uploadimage']['name'],-4); 
+            	//文件名这个例子中用当前模型对象名称作为文件名，substr($_FILES['uploadimage']['name'],-4)j是为了取得当前文件后缀名
+            	//如果需要以上传文件名，可引用$_FILES['uploadimage']['name']
+	            $this->logo_image=$upload_path.$upload_filename;
+	            move_uploaded_file($_FILES['uploadimage']['tmp_name'], $upload_path.$upload_filename);
+	        }
 	    }
 
 	    parent::save($check_notify);

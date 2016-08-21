@@ -1,0 +1,41 @@
+<?php
+
+	if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+    class getLocationGIS {
+        /**
+         * @param $bean
+         * @param $event
+         * @param $arguments
+         */
+	
+	//REF:http://developer.sugarcrm.com/2012/03/13/howto-grab-fields-from-a-related-record-without-sugar-logic/comment-page-1/#comment-31637
+	//REF:https://suitecrm.com/forum/developer-help/3689-showing-fields-from-related-module-in-detail-view#14530 by Webber
+	
+	   public function get_LocationGIS($focus, $event, $arguments) {
+			// Move on only if the field is not empy, so that it's not overwritten if set
+			
+			// Move on only if the field is not empy, so that it's not overwritten if set
+			
+			//if (empty($focus->fetched_row['location_maps_lat_c'])) {
+			  // this will retrieve a record from ModuleB into $bean corresponding to the ID of the desired record in ModuleB
+			  $bean_location = BeanFactory::getBean('HAT_Asset_Locations', $focus->hat_asset_locations_hat_assetshat_asset_locations_ida); // $module, $record_id
+			  if ($bean_location) { // test if $bean_location was loaded successfully
+				// this is only necessary if you'll need custom fields from ModuleB
+				//$bean_location->custom_fields->retrieve();
+				// now set some variables of current record on ModuleA to values retrieved from the related record on ModuleB
+				$focus->map_lat = isset($bean_location->map_lat)?$bean_location->map_lat:''; 
+				$focus->map_lng = isset($bean_location->map_lng)?$bean_location->map_lng:''; //$bean_location->map_lng;
+				$focus->map_address = isset($bean_location->map_address)?$bean_location->map_address:'';//$bean_location->map_address;
+				$focus->map_zoom = isset($bean_location->map_zoom)?$bean_location->map_zoom:'';//$bean_location->map_zoom;
+
+			}
+			/*	foreach($bean_location as $a=>$v){
+				echo print("</BR>".$a."=".$v);}
+			  
+			//}*/
+			
+			
+	  }		
+    }
+
+	?>

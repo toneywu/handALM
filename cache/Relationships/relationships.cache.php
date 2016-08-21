@@ -17371,54 +17371,54 @@
     'rhs_key' => 'hat_asset_counting_task_id',
     'relationship_type' => 'one-to-many',
   ),
-  'hat_domains_modified_user' => 
+  'haa_frameworks_modified_user' => 
   array (
-    'name' => 'hat_domains_modified_user',
+    'name' => 'haa_frameworks_modified_user',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'HAT_Domains',
-    'rhs_table' => 'hat_domains',
+    'rhs_module' => 'HAA_Frameworks',
+    'rhs_table' => 'haa_frameworks',
     'rhs_key' => 'modified_user_id',
     'relationship_type' => 'one-to-many',
   ),
-  'hat_domains_created_by' => 
+  'haa_frameworks_created_by' => 
   array (
-    'name' => 'hat_domains_created_by',
+    'name' => 'haa_frameworks_created_by',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'HAT_Domains',
-    'rhs_table' => 'hat_domains',
+    'rhs_module' => 'HAA_Frameworks',
+    'rhs_table' => 'haa_frameworks',
     'rhs_key' => 'created_by',
     'relationship_type' => 'one-to-many',
   ),
-  'hat_domains_assigned_user' => 
+  'haa_frameworks_assigned_user' => 
   array (
-    'name' => 'hat_domains_assigned_user',
+    'name' => 'haa_frameworks_assigned_user',
     'lhs_module' => 'Users',
     'lhs_table' => 'users',
     'lhs_key' => 'id',
-    'rhs_module' => 'HAT_Domains',
-    'rhs_table' => 'hat_domains',
+    'rhs_module' => 'HAA_Frameworks',
+    'rhs_table' => 'haa_frameworks',
     'rhs_key' => 'assigned_user_id',
     'relationship_type' => 'one-to-many',
   ),
-  'securitygroups_hat_domains' => 
+  'securitygroups_haa_frameworks' => 
   array (
-    'name' => 'securitygroups_hat_domains',
+    'name' => 'securitygroups_haa_frameworks',
     'lhs_module' => 'SecurityGroups',
     'lhs_table' => 'securitygroups',
     'lhs_key' => 'id',
-    'rhs_module' => 'HAT_Domains',
-    'rhs_table' => 'hat_domains',
+    'rhs_module' => 'HAA_Frameworks',
+    'rhs_table' => 'haa_frameworks',
     'rhs_key' => 'id',
     'relationship_type' => 'many-to-many',
     'join_table' => 'securitygroups_records',
     'join_key_lhs' => 'securitygroup_id',
     'join_key_rhs' => 'record_id',
     'relationship_role_column' => 'module',
-    'relationship_role_column_value' => 'HAT_Domains',
+    'relationship_role_column_value' => 'HAA_Frameworks',
     'fields' => 
     array (
       0 => 
@@ -19051,6 +19051,17 @@
         'default' => '0',
       ),
     ),
+  ),
+  'hfa_fa_value' => 
+  array (
+    'name' => 'hfa_fa_value',
+    'lhs_module' => 'HFA_Fixed_Assets',
+    'lhs_table' => 'hfa_fixed_assets',
+    'lhs_key' => 'id',
+    'rhs_module' => 'HFA_FA_Value',
+    'rhs_table' => 'hfa_fa_value',
+    'rhs_key' => 'hfa_fixed_assets_id',
+    'relationship_type' => 'one-to-many',
   ),
   'hfa_fa_trans_modified_user' => 
   array (

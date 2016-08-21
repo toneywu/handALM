@@ -48,8 +48,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  
 global $app_strings;
 
-$dashletMeta['HAT_DomainsDashlet'] = array('module'		=> 'HAT_Domains',
-										  'title'       => translate('LBL_HOMEPAGE_TITLE', 'HAT_Domains'), 
-                                          'description' => 'A customizable view into HAT_Domains',
-                                          'icon'        => 'icon_HAT_Domains_32.gif',
+$dashletMeta['HAA_FrameworksDashlet'] = array('module'		=> 'HAA_Frameworks',
+										  'title'       => translate('LBL_HOMEPAGE_TITLE', 'HAA_Frameworks'), 
+                                          'description' => 'A customizable view into HAA_Frameworks',
+                                          'icon'        => 'icon_HAA_Frameworks_32.gif',
                                           'category'    => 'Module Views');

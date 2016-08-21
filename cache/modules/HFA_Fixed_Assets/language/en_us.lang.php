@@ -1,5 +1,5 @@
 <?php
-// created: 2016-08-14 21:20:12
+// created: 2016-08-21 11:16:42
 $mod_strings = array (
   'LBL_ASSIGNED_TO_ID' => 'Assigned User Id',
   'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
@@ -51,6 +51,8 @@ $mod_strings = array (
   'LBL_BOOK_NAME' => 'Book Name',
   'LBL_EDITVIEW_PANEL1' => 'Value info',
   'LBL_EDITVIEW_PANEL3' => 'Related',
+  'LBL_HAA_FRAMEWORKS_ID' => 'FA_Domains_ID',
+  'LBL_RELATED_DOMAINS' => 'FA_Domains',
   'LBL_DETAILVIEW_PANEL1' => 'New Panel 1',
   'LBL_HFA_FIXED_ASSETS_HFA_FA_VALUE_FROM_HFA_FA_VALUE_TITLE' => 'FA_Value_Chage_History',
   'LBL_HFA_FIXED_ASSETS_HFA_FA_TRANS_FROM_HFA_FA_TRANS_TITLE' => 'HandALM_FA_Trans_History',

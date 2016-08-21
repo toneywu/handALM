@@ -70,10 +70,10 @@ class HAT_MetersViewEdit extends ViewEdit
                                         hat_assets.location_desc,
                                         ham_maint_sites.id site_id,
                                         ham_maint_sites.name site_name,
-                                        hat_assets.hat_domains_id domain_id,
-                                        hat_domains.name domain_name
+                                        hat_assets.haa_frameworks_id domain_id,
+                                        haa_frameworks.name domain_name
                                     FROM
-                                        hat_domains,
+                                        haa_frameworks,
                                         hat_assets
                                             LEFT JOIN
                                         (hat_asset_locations, hat_asset_locations_hat_assets_c, ham_maint_sites) ON (hat_assets.id = hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_assets_idb
@@ -84,8 +84,8 @@ class HAT_MetersViewEdit extends ViewEdit
                                             AND hat_asset_locations.deleted = 0)
                                     WHERE
                                         hat_assets.deleted = 0
-                                        AND hat_domains.deleted = 0 
-                                        AND hat_domains.id = hat_assets.hat_domains_id
+                                        AND haa_frameworks.deleted = 0 
+                                        AND haa_frameworks.id = hat_assets.haa_frameworks_id
                     and hat_assets.id = '".$_REQUEST['hat_assets_id']."'";
 
             //echo($sel_current_asset);
@@ -99,7 +99,7 @@ class HAT_MetersViewEdit extends ViewEdit
                 $this->bean->hat_asset_location = $resule_asset['location_name'];
                 $this->bean->location_title = $resule_asset['location_title'];
                 //$this->bean->location_desc = $resule_asset['location_desc'];
-                $this->bean->hat_domains_id = $resule_asset['domain_id'];
+                $this->bean->haa_frameworks_id = $resule_asset['domain_id'];
                 $this->bean->domain = $resule_asset['domain_name'];
                 //$this->bean->site = $resule_asset['site_name'];
                 //$this->bean->ham_maint_sites_id = $resule_asset['site_id'];

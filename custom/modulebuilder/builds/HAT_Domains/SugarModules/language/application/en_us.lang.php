@@ -38,7 +38,7 @@
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['HAT_Domains'] = 'Asset Opt. Domains';
+$app_list_strings['moduleList']['HAA_Frameworks'] = 'Asset Opt. Domains';
 $app_list_strings['hat_owner_tracking_rule_list'][0] = 'by comment field';
 $app_list_strings['hat_owner_tracking_rule_list'][1] = 'All assets must be allocated to an owner';
 $app_list_strings['hat_owner_tracking_rule_list'][2] = 'Non-Public assets should be allocated to an owner';

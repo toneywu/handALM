@@ -1,5 +1,5 @@
 <?php
-// created: 2016-08-14 21:20:14
+// created: 2016-08-21 11:16:42
 $dashletsFiles = array (
   'ABP_BPM_ActionsDashlet' => 
   array (
@@ -257,6 +257,12 @@ $dashletsFiles = array (
     'meta' => 'modules/HAA_FF_Fields/Dashlets/HAA_FF_FieldsDashlet/HAA_FF_FieldsDashlet.meta.php',
     'module' => 'HAA_FF_Fields',
   ),
+  'HAT_DomainsDashlet' => 
+  array (
+    'file' => 'modules/HAA_Frameworks/Dashlets/HAA_FrameworksDashlet/HAT_DomainsDashlet.php',
+    'class' => 'HAT_DomainsDashlet',
+    'meta' => 'modules/HAA_Frameworks/Dashlets/HAA_FrameworksDashlet/HAT_DomainsDashlet.meta.php',
+  ),
   'HAA_MapsDashlet' => 
   array (
     'file' => 'modules/HAA_Maps/Dashlets/HAA_MapsDashlet/HAA_MapsDashlet.php',
@@ -452,13 +458,6 @@ $dashletsFiles = array (
     'class' => 'HAT_Counting_TasksDashlet',
     'meta' => 'modules/HAT_Counting_Tasks/Dashlets/HAT_Counting_TasksDashlet/HAT_Counting_TasksDashlet.meta.php',
     'module' => 'HAT_Counting_Tasks',
-  ),
-  'HAT_DomainsDashlet' => 
-  array (
-    'file' => 'modules/HAT_Domains/Dashlets/HAT_DomainsDashlet/HAT_DomainsDashlet.php',
-    'class' => 'HAT_DomainsDashlet',
-    'meta' => 'modules/HAT_Domains/Dashlets/HAT_DomainsDashlet/HAT_DomainsDashlet.meta.php',
-    'module' => 'HAT_Domains',
   ),
   'HAT_EventTypeDashlet' => 
   array (

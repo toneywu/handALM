@@ -20,7 +20,7 @@ array (
         array (
           'file' => 'modules/HAT_Assets/js/editview_HAT_Assets.js',
         ),
-         3 =>
+         /*3 =>
               array (
                   'file' => 'modules/HAT_Assets/js/editview_icon_picker.js',
               ),
@@ -31,7 +31,7 @@ array (
           5 =>
               array (
                   'file' => 'modules/HAT_Asset_Locations/js/HAT_Asset_Locations_editview.js',
-          ),
+          ),*/
       ),
       'maxColumns' => '2',
       'widths' =>
@@ -85,11 +85,16 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_EDITVIEW_PANEL_GIS' =>
+        'LBL_EDITVIEW_PANEL1' =>
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+       'LBL_EDITVIEW_PANEL_GIS' =>
+          array (
+              'newTab' => false,
+              'panelDefault' => 'collapsed',
+          ),
       ),
       'syncDetailEditViews' => false,
     ),

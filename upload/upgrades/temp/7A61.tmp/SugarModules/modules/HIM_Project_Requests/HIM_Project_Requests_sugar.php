@@ -68,7 +68,7 @@ class HIM_Project_Requests_sugar extends Basic {
 	var $assigned_user_name;
 	var $assigned_user_link;
 	var $SecurityGroups;
-	var $hat_domains_id;
+	var $haa_frameworks_id;
 	var $domain;
 	var $organization_id;
 	var $organization;

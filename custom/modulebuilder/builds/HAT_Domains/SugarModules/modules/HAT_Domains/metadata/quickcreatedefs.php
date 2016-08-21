@@ -37,7 +37,7 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
-$module_name = 'HAT_Domains';
+$module_name = 'HAA_Frameworks';
 $viewdefs[$module_name]['QuickCreate'] = array(
     'templateMeta' => array('maxColumns' => '2', 
                             'widths' => array(

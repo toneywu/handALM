@@ -43,7 +43,7 @@
  * To change the template for this generated file go to
  * Window - Preferences - PHPeclipse - PHP - Code Templates
  */
-$module_name = 'HAT_Domains';
+$module_name = 'HAA_Frameworks';
   $searchdefs[$module_name] = array(
 					'templateMeta' => array(
 							'maxColumns' => '3',

@@ -7,6 +7,16 @@ class HAT_AssetsViewEdit extends ViewEdit
 {
 
 	function Display() {
+        //关联地图图层
+        if(!$this->bean->use_location_gis){
+            $this->bean->map_type = $this->bean->asset_map_type;
+            $this->bean->map_lat = $this->bean->asset_map_lat;
+            $this->bean->map_lng = $this->bean->asset_map_lng;
+            $this->bean->map_zoom = $this->bean->asset_map_zoom;
+            $this->bean->map_marker_type = $this->bean->asset_map_marker_type;
+            $this->bean->map_marker_data = $this->bean->asset_map_marker_data;
+            $this->bean->map_layer_id = $this->bean->asset_map_layer_id;
+        }
 
 
 		if(isset($this->bean->aos_products_id) && ($this->bean->aos_products_id)!=""){

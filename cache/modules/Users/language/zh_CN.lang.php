@@ -1,5 +1,5 @@
 <?php
-// created: 2016-08-14 21:20:07
+// created: 2016-08-21 10:54:57
 $mod_strings = array (
   'LBL_DELETE_USER_CONFIRM' => 'When the User record is deleted, the corresponding Employee record will also be deleted. After the user is deleted, any workflow definitions and reports involving the user might need to be updated.<br/><br/>Deleting a User record cannot be undone.',
   'LBL_DELETE_GROUP_CONFIRM' => '您确定要删除这个组用户吗？ 如果是，请点击确定<br/>如果删除组用户，您将不能重新分配这个组用户的记录给其他用户。',

@@ -1,5 +1,5 @@
 <?php
-// created: 2016-08-14 21:19:59
+// created: 2016-08-21 10:54:42
 $mod_strings = array (
   'LBL_ID' => '编号',
   'LBL_DATE_ENTERED' => '创建时间',

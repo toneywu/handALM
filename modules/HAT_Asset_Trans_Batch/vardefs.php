@@ -115,6 +115,28 @@ $dictionary['HAT_Asset_Trans_Batch'] = array(
 			'dependency' => false,
 			'default' => 'DRAFT',
 			),
+		'planned_complete_date' => 
+		array (
+			'required' => false,
+			'name' => 'planned_complete_date',
+			'vname' => 'LBL_PLANNED_COMPLETE_DATE',
+			'type' => 'date',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'size' => '20',
+			'enable_range_search' => false,
+			'dbType' => 'datetime',
+			),
 		'planned_execution_date' => 
 		array (
 			'required' => false,
@@ -281,10 +303,10 @@ $dictionary['HAT_Asset_Trans_Batch'] = array(
 			  //'options' => 'dom_int_bool',
 			  ),		
 
-		'hat_domains_id' => 
+		'haa_frameworks_id' => 
 		array (
 			'required' => false,
-			'name' => 'hat_domains_id',
+			'name' => 'haa_frameworks_id',
 			'vname' => 'LBL_DOMAIN_ID',
 			'type' => 'id',
 			'massupdate' => 0,
@@ -323,9 +345,9 @@ $dictionary['HAT_Asset_Trans_Batch'] = array(
 			'merge_filter' => 'disabled',
 			'len' => '255',
 			'size' => '20',
-			'id_name' => 'hat_domains_id',
-			'ext2' => 'HAT_Domains',
-			'module' => 'HAT_Domains',
+			'id_name' => 'haa_frameworks_id',
+			'ext2' => 'HAA_Frameworks',
+			'module' => 'HAA_Frameworks',
 			'rname' => 'name',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',

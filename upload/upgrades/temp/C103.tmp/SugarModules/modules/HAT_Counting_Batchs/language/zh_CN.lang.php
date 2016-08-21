@@ -79,6 +79,6 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL1' => '范围',
   'LBL_SNAPSHOT_DATE' => 'Snapshot Date',
   'LBL_ADJUST_POSTED' => 'Adjust Posted',
-  'LBL_DOMAIN_HAT_DOMAINS_ID' => 'Domain (related 资产运营区域 ID)',
+  'LBL_DOMAIN_HAA_FRAMEWORKS_ID' => 'Domain (related 资产运营区域 ID)',
   'LBL_DOMAIN' => 'Domain',
 );

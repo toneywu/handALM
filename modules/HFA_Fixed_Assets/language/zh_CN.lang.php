@@ -1,47 +1,6 @@
 <?php
-/*********************************************************************************
- * SugarCRM Community Edition is a customer relationship management program developed by
- * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
-
- * SuiteCRM is an extension to SugarCRM Community Edition developed by Salesagility Ltd.
- * Copyright (C) 2011 - 2014 Salesagility Ltd.
- *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU Affero General Public License version 3 as published by the
- * Free Software Foundation with the addition of the following permission added
- * to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
- * IN WHICH THE COPYRIGHT IS OWNED BY SUGARCRM, SUGARCRM DISCLAIMS THE WARRANTY
- * OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
- * details.
- *
- * You should have received a copy of the GNU Affero General Public License along with
- * this program; if not, see http://www.gnu.org/licenses or write to the Free
- * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
- * 02110-1301 USA.
- *
- * You can contact SugarCRM, Inc. headquarters at 10050 North Wolfe Road,
- * SW2-130, Cupertino, CA 95014, USA. or at email address contact@sugarcrm.com.
- *
- * The interactive user interfaces in modified source and object code versions
- * of this program must display Appropriate Legal Notices, as required under
- * Section 5 of the GNU Affero General Public License version 3.
- *
- * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
- * these Appropriate Legal Notices must retain the display of the "Powered by
- * SugarCRM" logo and "Supercharged by SuiteCRM" logo. If the display of the logos is not
- * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
- * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
- ********************************************************************************/
-
+// created: 2016-08-15 22:18:44
 $mod_strings = array (
-  'LBL_ASSIGNED_TO_ID' => '分配用户编号',
-  'LBL_ASSIGNED_TO_NAME' => '分配用户',
-  'LBL_SECURITYGROUPS' => '查看用户组',
-  'LBL_SECURITYGROUPS_SUBPANEL_TITLE' => '查看用户组',
   'LBL_ID' => '编号',
   'LBL_DATE_ENTERED' => '创建日期',
   'LBL_DATE_MODIFIED' => '修改日期',
@@ -58,6 +17,10 @@ $mod_strings = array (
   'LBL_LIST_NAME' => '名称',
   'LBL_EDIT_BUTTON' => '编辑',
   'LBL_REMOVE' => '移除',
+  'LBL_ASSIGNED_TO_ID' => '分配用户编号',
+  'LBL_ASSIGNED_TO_NAME' => '分配用户',
+  'LBL_SECURITYGROUPS' => '查看用户组',
+  'LBL_SECURITYGROUPS_SUBPANEL_TITLE' => '查看用户组',
   'LBL_LIST_FORM_TITLE' => 'Fixed_Assets 列表',
   'LBL_MODULE_NAME' => 'Fixed_Assets',
   'LBL_MODULE_TITLE' => 'Fixed_Assets',
@@ -73,17 +36,19 @@ $mod_strings = array (
   'LBL_RELATED_ASSETS_HAT_ASSETS_ID' => 'Related Assets (related  ID)',
   'LBL_RELATED_ASSETS' => 'Related Assets',
   'LBL_ASSET_NUM' => 'Asset Num',
-  'LBL_OWNING_DEPT' => 'Owning Dept',
-  'LBL_LOCATION' => 'Location',
-  'LBL_ORIGINAL_VALUE' => 'Original Value',
-  'LBL_CURRENT_VALUE' => 'Current Value',
-  'LBL_YTD_DEPRE' => 'YTD Depre',
-  'LBL_ACCUMULATED_DEPRE' => 'Accumulated Depre',
-  'LBL_NET_VALUE' => 'Net Value',
-  'LBL_SALVAGE_VALUE' => 'salvage Value',
-  'LBL_DEPRECIATION_PREP' => 'depreciation prep',
-  'LBL_FIXED_ASSET_TYPE' => 'Fixed Asset Type',
-  'LBL_DATE_IN_SERVICE' => 'Date In Service',
-  'LBL_SERVICE_YEAR' => 'Service Year',
-  'LBL_BOOK_NAME' => 'Book Name',
+  'LBL_OWNING_DEPT' => '主管部门',
+  'LBL_LOCATION' => '地点',
+  'LBL_ORIGINAL_VALUE' => '原始价值',
+  'LBL_CURRENT_VALUE' => '当前价值',
+  'LBL_YTD_DEPRE' => 'YTD 折旧',
+  'LBL_ACCUMULATED_DEPRE' => '累计折旧',
+  'LBL_NET_VALUE' => '净值',
+  'LBL_SALVAGE_VALUE' => '残值',
+  'LBL_DEPRECIATION_PREP' => '减值准备',
+  'LBL_FIXED_ASSET_TYPE' => '资产类别',
+  'LBL_DATE_IN_SERVICE' => '启用日期',
+  'LBL_SERVICE_YEAR' => '使用年限',
+  'LBL_BOOK_NAME' => '资产账簿',
+  'LBL_HAA_FRAMEWORKS_ID' => '资产运营域ID',
+  'LBL_RELATED_DOMAINS' => '资产运营域',
 );

@@ -39,7 +39,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  ********************************************************************************/
 
 
-$module_name='HAT_Domains';
+$module_name='HAA_Frameworks';
 $subpanel_layout = array(
 	'top_buttons' => array(
 		array('widget_class' => 'SubPanelTopCreateButton'),

@@ -89,7 +89,7 @@ class HAA_OrgSelectorDashlet extends Dashlet {
         $ss->assign('domainLbl', $this->dashletStrings['LBL_DOMAIN']);
         $ss->assign('siteLbl', $this->dashletStrings['LBL_SITE']);
 
-		$domainBean_list = BeanFactory::getBean('HAT_Domains')->get_full_list('name'); //Order by the accounts name
+		$domainBean_list = BeanFactory::getBean('HAA_Frameworks')->get_full_list('name'); //Order by the accounts name
         $domain_field = "";
         foreach ($domainBean_list as $d) {
             $domain_field .= "<option value='".$d->id."'>".$d->name."</option>";

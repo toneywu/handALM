@@ -40,8 +40,8 @@
 /**
  * THIS CLASS IS FOR DEVELOPERS TO MAKE CUSTOMIZATIONS IN
  */
-require_once('modules/HAT_Domains/HAT_Domains_sugar.php');
-class HAT_Domains extends HAT_Domains_sugar {
+require_once('modules/HAA_Frameworks/HAA_Frameworks_sugar.php');
+class HAA_Frameworks extends HAA_Frameworks_sugar {
 	
 	function __construct(){
 		parent::__construct();

@@ -1,5 +1,5 @@
 <?php
-// created: 2016-08-14 21:20:12
+// created: 2016-08-21 10:55:27
 $mod_strings = array (
   'LBL_CAPTCHA_HELP_TEXT' => 'Captcha 是一种验证码。 请从 reCAPTCHA (http://recaptcha.net/) 获取一个公有密匙与私有密匙。',
   'CAPTCHA' => 'Captcha 验证',

@@ -74,6 +74,6 @@ $mod_strings = array (
   'LBL_AT_NUMBERING_RULE_HAA_NUMBERING_RULE_ID' => 'AT Numbering Rule (related Numbering Rule ID)',
   'LBL_OWNER_TRACKING_RULE' => 'Owner Tracking Rule',
   'LBL_EDITVIEW_PANEL1' => 'Rules',
-  'LNK_IMPORT_HAT_DOMAINS' => 'Import Asset Opt. Domains',
-  'LBL_HAT_DOMAINS_SUBPANEL_TITLE' => 'Asset Opt. Domains',
+  'LNK_IMPORT_HAA_FRAMEWORKS' => 'Import Asset Opt. Domains',
+  'LBL_HAA_FRAMEWORKS_SUBPANEL_TITLE' => 'Asset Opt. Domains',
 );

@@ -30,7 +30,7 @@ array (
     'type' => 'relate',
     'studio' => 'visible',
     'label' => 'LBL_DOMAIN',
-    'id' => 'HAT_DOMAINS_ID',
+    'id' => 'HAA_FRAMEWORKS_ID',
     'link' => true,
     'width' => '10%',
     'default' => true,
