@@ -10,7 +10,7 @@ function initMap() {
         //设置CoordMapType  样式属性
         CoordMapType.prototype.tileSize = new qq.maps.Size(32, 32);
         CoordMapType.prototype.maxZoom = 19;
-        
+
         //创建div样式元素
         CoordMapType.prototype.getTile = function (coord, zoom, ownerDocument) {
         	var div = ownerDocument.createElement('div');
@@ -24,7 +24,7 @@ function initMap() {
             div.style.backgroundColor = '#E5E3DF';
             return div;
         };
-        
+
         CoordMapType.prototype.name = '网格';
         CoordMapType.prototype.alt = '显示自定义网格';
         var coordinateMapType = new CoordMapType();
@@ -51,18 +51,22 @@ function loadMapScript() {
 	var script = document.createElement("script");
 	script.type = "text/javascript";
 	script.src = "http://map.qq.com/api/js?v=2.exp&callback=initMap";
-					  $("#cuxMap").css("height","250px");//style="height:250px";
-					  $("#cuxMap").css("width","100%");
-					  document.body.appendChild(script);
-					}
+    $("#cuxMap").css({  "margin":"0",
+                        "padding":"0",
+                        "height":"100%",
+                        "min-height":"250px",
+                        "width":"100%"
+                    });
+	document.body.appendChild(script);
+}
 
 
 $(document).ready(function(){
-	loadMapScript(); 
+	loadMapScript();
 
 	//ref:http://jsfiddle.net/T4St6/82/
 	//
-	$('#cuxMap').after('<div style="margin:5px;height:3px;background-Color:#CBCBCB;text-align:center;cursor:s-resize;" id="drag_down"></div>');
+	$('#cuxMap').after('<div style="margin:0px;height:10px;background-Color:#efefef;text-align:center;cursor:s-resize;border:1px solid #cbcbcb;" id="drag_down"></div>');
 	var cuxMap = $('#cuxMap'),
         handle = $('#drag_down');
 
@@ -74,20 +78,17 @@ $(document).ready(function(){
     });
 
  	handle.on('mousemove', function (e) {
-        handle.css('height', '10px');
-        handle.css('background-Color', '#ffffff');
-        handle.css('border-top', '4px solid #3C8DBC');
-        handle.css('border-bottom', '2px dotted #3C8DBC');
+        handle.css('background-Color', '#cccccc');
+        handle.css('border', '1px solid #000');
     });
  	handle.on('mouseout', function (e) {
-        handle.css('height', '3px');
-        handle.css('background-Color', '#CBCBCB');        
-        handle.css('border', '0px none #3C8DBC');
+        handle.css('background-Color', '#efefef');
+        handle.css('border', '1px solid #cbcbcb');
     });
 
     $(document).on('mousemove', function (e) {
         // we don't want to do anything if we aren't resizing.
-        if (!isResizing) 
+        if (!isResizing)
             return;
         var offsetHeight = lastHeight+(e.clientY - lastDownY);//-cuxMap.height()
         //alert(e.clientY - lastDownY);

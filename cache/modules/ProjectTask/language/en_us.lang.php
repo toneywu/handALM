@@ -1,6 +1,8 @@
 <?php
-// created: 2016-08-21 11:16:42
+// created: 2016-08-23 14:14:34
 $mod_strings = array (
+  'LBL_SECURITYGROUPS' => 'Security Groups',
+  'LBL_SECURITYGROUPS_SUBPANEL_TITLE' => 'Security Groups',
   'LBL_MODULE_NAME' => 'Project Tasks',
   'LBL_MODULE_TITLE' => 'Project Task: Home',
   'LBL_SEARCH_FORM_TITLE' => 'Project Task Search',

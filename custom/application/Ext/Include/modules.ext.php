@@ -3,13 +3,6 @@
 
  
  //WARNING: The contents of this file are auto-generated
-$beanList['CUX_Demo'] = 'CUX_Demo';
-$beanFiles['CUX_Demo'] = 'modules/CUX_Demo/CUX_Demo.php';
-$moduleList[] = 'CUX_Demo';
-
-
- 
- //WARNING: The contents of this file are auto-generated
 $beanList['HAA_FF_Labels'] = 'HAA_FF_Labels';
 $beanFiles['HAA_FF_Labels'] = 'modules/HAA_FF_Labels/HAA_FF_Labels.php';
 $modules_exempt_from_availability_check['HAA_FF_Labels'] = 'HAA_FF_Labels';
@@ -227,13 +220,6 @@ $moduleList[] = 'HAA_Frameworks';
 
  
  //WARNING: The contents of this file are auto-generated
-$beanList['HAT_FA'] = 'HAT_FA';
-$beanFiles['HAT_FA'] = 'modules/HAT_FA/HAT_FA.php';
-$moduleList[] = 'HAT_FA';
-
-
- 
- //WARNING: The contents of this file are auto-generated
 $beanList['HAT_Linear_Elements'] = 'HAT_Linear_Elements';
 $beanFiles['HAT_Linear_Elements'] = 'modules/HAT_Linear_Elements/HAT_Linear_Elements.php';
 $moduleList[] = 'HAT_Linear_Elements';
@@ -310,15 +296,6 @@ $moduleList[] = 'HFA_FA_Value';
 $beanList['HFA_Fixed_Assets'] = 'HFA_Fixed_Assets';
 $beanFiles['HFA_Fixed_Assets'] = 'modules/HFA_Fixed_Assets/HFA_Fixed_Assets.php';
 $moduleList[] = 'HFA_Fixed_Assets';
-
-$beanList['HFA_FA_Trans'] = 'HFA_FA_Trans';
-$beanFiles['HFA_FA_Trans'] = 'modules/HFA_FA_Trans/HFA_FA_Trans.php';
-$moduleList[] = 'HFA_FA_Trans';
-
-$beanList['HFA_Periods'] = 'HFA_Periods';
-$beanFiles['HFA_Periods'] = 'modules/HFA_Periods/HFA_Periods.php';
-$moduleList[] = 'HFA_Periods';
-
 
  
  //WARNING: The contents of this file are auto-generated

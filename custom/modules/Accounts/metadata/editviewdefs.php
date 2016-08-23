@@ -91,6 +91,12 @@ array (
         array (
           0 => 
           array (
+            'name' => 'frame_c',
+            'studio' => 'visible',
+            'label' => 'LBL_FRAME',
+          ),
+          1 => 
+          array (
             'name' => 'business_type_c',
             'studio' => 'visible',
             'label' => 'LBL_BUSINESS_TYPE',
@@ -106,7 +112,6 @@ array (
               'call_back_function' => 'setBusinessTypePopupReturn',
             ),
           ),
-          1 => '',
         ),
       ),
       'lbl_editview_panel5' => 
@@ -154,7 +159,6 @@ array (
               'initial_filter' => '&code_type_advanced=accounts_level',
             ),
           ),
-          1 => '',
         ),
         3 => 
         array (
@@ -201,7 +205,6 @@ array (
             'name' => 'responsible_person_c',
             'label' => 'LBL_RESPONSIBLE_PERSON',
           ),
-          1 => '',
         ),
         1 => 
         array (
@@ -226,12 +229,11 @@ array (
             'name' => 'customer_classs_c',
             'studio' => 'visible',
             'label' => 'LBL_CUSTOMER_CLASSS',
-                        'displayParams' => 
+            'displayParams' => 
             array (
               'initial_filter' => '&code_type_advanced=account_customer_class',
             ),
           ),
-          1 => '',
         ),
         1 => 
         array (
@@ -243,24 +245,39 @@ array (
           ),
           1 => 
           array (
-            'name' => 'sales_responsible_person_c',
+            'name' => 'service_org_c',
             'studio' => 'visible',
-            'label' => 'LBL_SALES_RESPONSIBLE_PERSON',
+            'label' => 'LBL_SERVICE_ORG',
           ),
         ),
         2 => 
         array (
           0 => 
           array (
-            'name' => 'service_org_c',
+            'name' => 'sales_responsible_person_c',
             'studio' => 'visible',
-            'label' => 'LBL_SERVICE_ORG',
+            'label' => 'LBL_SALES_RESPONSIBLE_PERSON',
           ),
           1 => 
           array (
             'name' => 'service_responsible_person_c',
             'studio' => 'visible',
             'label' => 'LBL_SERVICE_RESPONSIBLE_PERSON',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'sales_note_c',
+            'studio' => 'visible',
+            'label' => 'LBL_SALES_NOTE',
+          ),
+          1 => 
+          array (
+            'name' => 'service_note_c',
+            'studio' => 'visible',
+            'label' => 'LBL_SERVICE_NOTE',
           ),
         ),
       ),

@@ -59,7 +59,7 @@ array (
         ),
         2 => 
         array (
-          1 => 
+          0 => 
           array (
             'name' => 'asset_access_profile_c',
             'studio' => 'visible',
@@ -91,11 +91,11 @@ array (
         ),
         4 => 
         array (
-          1 => 'phone_fax',
+          0 => 'phone_fax',
         ),
         5 => 
         array (
-          1 => 'phone_home',
+          0 => 'phone_home',
         ),
         6 => 
         array (

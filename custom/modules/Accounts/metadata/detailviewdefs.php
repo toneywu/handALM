@@ -96,7 +96,6 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_BUSINESS_TYPE',
           ),
-          1 => '',
         ),
         1 => 
         array (
@@ -134,7 +133,6 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_ORGANIZATION_LEVEL',
           ),
-          1 => '',
         ),
         4 => 
         array (
@@ -185,7 +183,6 @@ array (
             'name' => 'responsible_person_c',
             'label' => 'LBL_RESPONSIBLE_PERSON',
           ),
-          1 => '',
         ),
         1 => 
         array (
@@ -211,7 +208,6 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_CUSTOMER_CLASSS',
           ),
-          1 => '',
         ),
         1 => 
         array (

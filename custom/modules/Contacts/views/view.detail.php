@@ -125,8 +125,6 @@ class ContactsViewDetail extends ViewDetail
                             unset($subpanel->subpanel_definitions->layout_defs['subpanel_setup'][$subpanelKey]);
                         }
                     }
-                
-  
                 echo $subpanel->display();
             }
         }

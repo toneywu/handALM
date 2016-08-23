@@ -1,2 +1,6 @@
 08/21/16 10:55:37 [5024][1][ERROR] image_name:1
 08/21/16 10:56:58 [5024][1][ERROR] image_name:1
+08/21/16 17:40:29 [5936][1][FATAL] Bad subpanel definition, it has incorrect value for get_subpanel_data property woop
+08/21/16 17:40:36 [5936][1][FATAL] Bad subpanel definition, it has incorrect value for get_subpanel_data property woop
+08/21/16 18:27:13 [5936][1][FATAL] Bad subpanel definition, it has incorrect value for get_subpanel_data property woop
+08/22/16 19:30:25 [7788][1][ERROR] Unable to get proper side for link rack_allocation_link

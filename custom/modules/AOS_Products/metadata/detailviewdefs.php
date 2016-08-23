@@ -6,17 +6,12 @@ array (
   array (
     'templateMeta' => 
     array (
-
       'includes' => 
       array (
         0 => 
         array (
           'file' => 'modules/HAT_Assets/js/editview_icon_picker.js',
         ),
-/*        1 => 
-        array (
-          'file' => 'custom/modules/AOS_Products/js/products_detailview.js',
-        ),*/
       ),
       'form' => 
       array (
@@ -74,7 +69,6 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_DOMAIN',
           ),
-          1 => '',
         ),
         1 => 
         array (
@@ -150,7 +144,6 @@ array (
             'label' => 'LBL_PRODUCT_IMAGE',
             'customCode' => '<img src="{$fields.product_image.value}"/>',
           ),
-          1 => '',
         ),
         7 => 
         array (
@@ -228,7 +221,7 @@ array (
           array (
             'name' => 'icon_c',
             'label' => 'LBL_ICON',
-            'customCode'=>'<i class="{$fields.icon_c.value} icon-hc-lg"></i>'
+            'customCode' => '<i class="{$fields.icon_c.value} icon-hc-lg"></i>',
           ),
         ),
         1 => 
@@ -252,7 +245,6 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_FLEXFORM',
           ),
-          1 => '',
         ),
       ),
     ),

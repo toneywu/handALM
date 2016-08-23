@@ -124,6 +124,12 @@ $dictionary['Account']['fields']['duns_number_c']['labelValue']='DUNS Number';
 
  
 
+ // created: 2016-08-21 18:28:31
+$dictionary['Account']['fields']['frame_c']['inline_edit']='';
+$dictionary['Account']['fields']['frame_c']['labelValue']='frame';
+
+ 
+
  // created: 2016-02-16 20:55:43
 $dictionary['Account']['fields']['full_name_c']['inline_edit']='1';
 $dictionary['Account']['fields']['full_name_c']['labelValue']='Full Name';
@@ -142,6 +148,11 @@ $dictionary['Account']['fields']['haa_codes_id2_c']['inline_edit']=1;
 
  // created: 2016-06-16 16:47:57
 $dictionary['Account']['fields']['haa_codes_id_c']['inline_edit']=1;
+
+ 
+
+ // created: 2016-08-21 18:28:30
+$dictionary['Account']['fields']['haa_frameworks_id_c']['inline_edit']=1;
 
  
 
@@ -255,9 +266,21 @@ $dictionary['Account']['fields']['responsible_person_note_c']['labelValue']='Res
 
  
 
+ // created: 2016-08-21 18:30:43
+$dictionary['Account']['fields']['sales_note_c']['inline_edit']='';
+$dictionary['Account']['fields']['sales_note_c']['labelValue']='sales note';
+
+ 
+
  // created: 2016-06-16 16:59:36
 $dictionary['Account']['fields']['sales_org_c']['inline_edit']='';
 $dictionary['Account']['fields']['sales_org_c']['labelValue']='Sales Org. /Dept.';
+
+ 
+
+ // created: 2016-08-21 18:30:09
+$dictionary['Account']['fields']['sales_person_desc_c']['inline_edit']='';
+$dictionary['Account']['fields']['sales_person_desc_c']['labelValue']='sales person desc';
 
  
 
@@ -267,9 +290,21 @@ $dictionary['Account']['fields']['sales_responsible_person_c']['labelValue']='Sa
 
  
 
+ // created: 2016-08-21 18:32:01
+$dictionary['Account']['fields']['service_note_c']['inline_edit']='';
+$dictionary['Account']['fields']['service_note_c']['labelValue']='service note';
+
+ 
+
  // created: 2016-06-16 17:00:03
 $dictionary['Account']['fields']['service_org_c']['inline_edit']='';
 $dictionary['Account']['fields']['service_org_c']['labelValue']='Service Org. /Dept.';
+
+ 
+
+ // created: 2016-08-21 18:31:16
+$dictionary['Account']['fields']['service_person_desc_c']['inline_edit']='';
+$dictionary['Account']['fields']['service_person_desc_c']['labelValue']='service person desc';
 
  
 

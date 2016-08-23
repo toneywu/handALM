@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.29, created on 2016-08-14 21:21:06
+<?php /* Smarty version 2.6.29, created on 2016-08-23 14:15:28
          compiled from modules/SavedSearch/SavedSearchForm.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'sugar_translate', 'modules/SavedSearch/SavedSearchForm.tpl', 55, false),array('modifier', 'default', 'modules/SavedSearch/SavedSearchForm.tpl', 78, false),)), $this); ?>

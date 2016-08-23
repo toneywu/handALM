@@ -83,7 +83,6 @@ array (
               ),
             ),
           ),
-          1 => '',
         ),
         1 => 
         array (
@@ -245,7 +244,6 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_FLEXFORM',
           ),
-          1 => '',
         ),
       ),
     ),

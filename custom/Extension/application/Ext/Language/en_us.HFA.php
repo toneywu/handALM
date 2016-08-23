@@ -38,10 +38,8 @@
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['HFA_Periods'] = 'FA Periods';
 $app_list_strings['moduleList']['HFA_FA_Value'] = 'FA Value';
 $app_list_strings['moduleList']['HFA_Fixed_Assets'] = 'Fixed Assets (FA)';
-$app_list_strings['moduleList']['HFA_FA_Trans'] = 'FA Trans';
 $app_list_strings['fixed_asset_type_list'][''] = '';
 $app_list_strings['fixed_asset_type_list']['IT'] = 'IT';
 $app_list_strings['fixed_asset_type_list']['Vehicle'] = 'Vehicle';
@@ -49,9 +47,6 @@ $app_list_strings['fixed_asset_type_list']['Intangible'] = 'Intangible';
 $app_list_strings['type_list']['Add'] = 'Add';
 $app_list_strings['type_list']['Addition'] = 'Addition';
 $app_list_strings['type_list']['Depreciation'] = 'Depreciation';
-$app_list_strings['period_name_list'][201601] = '2016-01';
-$app_list_strings['period_name_list'][201602] = '2016-02';
 $app_list_strings['fa_trans_type_list']['Transfer'] = 'Transfer';
 $app_list_strings['fa_trans_type_list']['Allocation'] = 'Allocation';
 $app_list_strings['fa_trans_type_list']['Retirement'] = 'Retirement';
-$app_list_strings['book_name_list']['SZA'] = 'SZA';

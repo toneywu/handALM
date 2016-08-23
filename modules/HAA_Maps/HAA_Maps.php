@@ -72,7 +72,7 @@ class HAA_Maps extends HAA_Maps_sugar {
 	            $upload_filename = $this->id.substr($_FILES['uploadimage']['name'],-4); 
             	//文件名这个例子中用当前模型对象名称作为文件名，substr($_FILES['uploadimage']['name'],-4)j是为了取得当前文件后缀名
             	//如果需要以上传文件名，可引用$_FILES['uploadimage']['name']
-	            $this->logo_image=$upload_path.$upload_filename;
+	            $this->map_file=$upload_path.$upload_filename;
 	            move_uploaded_file($_FILES['uploadimage']['tmp_name'], $upload_path.$upload_filename);
 	        }
 	    }

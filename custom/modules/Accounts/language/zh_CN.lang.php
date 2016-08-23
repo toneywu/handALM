@@ -1,5 +1,5 @@
 <?php
-// created: 2016-08-02 20:55:48
+// created: 2016-08-21 18:36:36
 $mod_strings = array (
   'LNK_NEW_ACCOUNT' => '新增组织',
   'LNK_ACCOUNT_LIST' => '组织',
@@ -9,7 +9,7 @@ $mod_strings = array (
   'LBL_LIST_FORM_TITLE' => '组织列表',
   'LBL_SEARCH_FORM_TITLE' => '查找组织',
   'LBL_MEMBER_OF' => '上级单位:',
-  'LBL_MEMBERS' => 'Members',
+  'LBL_MEMBERS' => '下属组织单位',
   'LBL_MEMBER_ORG_SUBPANEL_TITLE' => '下级组织',
   'LBL_HOMEPAGE_TITLE' => '我的组织',
   'LBL_ACCOUNT_INFORMATION' => '组织基本信息',
@@ -75,4 +75,10 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL5' => '基础信息',
   'LBL_CUSTOMER_CLASSS_HAA_CODES_ID' => '客户级别 (related ID)',
   'LBL_CUSTOMER_CLASSS' => '客户级别',
+  'LBL_FRAME_HAA_FRAMEWORKS_ID' => '业务框架(related ID)',
+  'LBL_FRAME' => '业务框架',
+  'LBL_SALES_PERSON_DESC' => '销售人员说明',
+  'LBL_SALES_NOTE' => '销售方备注',
+  'LBL_SERVICE_PERSON_DESC' => '售后服务人员说明',
+  'LBL_SERVICE_NOTE' => '售后服务备注',
 );

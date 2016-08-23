@@ -1,10 +1,6 @@
 <?php
-// created: 2016-08-15 22:19:03
+// created: 2016-08-18 22:49:48
 $mod_strings = array (
-  'LBL_ASSIGNED_TO_ID' => 'Assigned User Id',
-  'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
-  'LBL_SECURITYGROUPS' => 'Security Groups',
-  'LBL_SECURITYGROUPS_SUBPANEL_TITLE' => 'Security Groups',
   'LBL_ID' => 'ID',
   'LBL_DATE_ENTERED' => 'Date Created',
   'LBL_DATE_MODIFIED' => 'Date Modified',
@@ -21,6 +17,10 @@ $mod_strings = array (
   'LBL_LIST_NAME' => 'Name',
   'LBL_EDIT_BUTTON' => 'Edit',
   'LBL_REMOVE' => 'Remove',
+  'LBL_ASSIGNED_TO_ID' => 'Assigned User Id',
+  'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
+  'LBL_SECURITYGROUPS' => 'Security Groups',
+  'LBL_SECURITYGROUPS_SUBPANEL_TITLE' => 'Security Groups',
   'LBL_LIST_FORM_TITLE' => 'Fixed_Assets List',
   'LBL_MODULE_NAME' => 'Fixed_Assets',
   'LBL_MODULE_TITLE' => 'Fixed_Assets',
@@ -51,9 +51,11 @@ $mod_strings = array (
   'LBL_BOOK_NAME' => 'Book Name',
   'LBL_EDITVIEW_PANEL1' => 'Value info',
   'LBL_EDITVIEW_PANEL3' => 'Related',
-  'LBL_HAA_FRAMEWORKS_ID' => 'FA_Domains_ID',
-  'LBL_RELATED_DOMAINS' => 'FA_Domains',
+  'LBL_HAA_FRAMEWORKS_ID' => 'Business Framework(ID)',
+  'LBL_HAA_FRAMEWORK' => 'Business Framework',
   'LBL_DETAILVIEW_PANEL1' => 'New Panel 1',
+  'LBL_RECOVERABLE_AMOUNT' => 'Recoverable_Amount',
+  'LBL_FAVALUE_SUBPANEL_TITLE' => 'FA_Value_Chage_History',
   'LBL_HFA_FIXED_ASSETS_HFA_FA_VALUE_FROM_HFA_FA_VALUE_TITLE' => 'FA_Value_Chage_History',
   'LBL_HFA_FIXED_ASSETS_HFA_FA_TRANS_FROM_HFA_FA_TRANS_TITLE' => 'HandALM_FA_Trans_History',
 );

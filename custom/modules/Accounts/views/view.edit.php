@@ -45,13 +45,19 @@ class AccountsViewEdit extends ViewEdit
 
 	function Display() {
 
-
-
 		parent::Display();
 
 
+		//*********************处理业务框架，以及业务框架下销售及服务人员是List或是Text START********************
+
+
+
+		//*********************处理业务框架，以及业务框架下销售及服务人员是List或是Text END********************
+
+
+		//*********************处理FF界面 START********************
 		if(isset($this->bean->haa_codes_id1_c) && ($this->bean->haa_codes_id1_c)!=""){
-            //判断是否已经设置有产品，如果有产品，则进一步的加载产品对应的FlexForm
+            //判断是否已经设置有组织的业务类型，如果有组织的业务类型，则进一步的加载产品对应的FlexForm
 
 			$haa_codes_id1_c = $this->bean->haa_codes_id1_c;
 			$bean_business_type = BeanFactory::getBean('HAA_Codes',$haa_codes_id1_c);
@@ -70,7 +76,7 @@ class AccountsViewEdit extends ViewEdit
          } else {
             	echo '<script>$(".expanded").switchClass("expanded","collapsed");</script>';
          }
-
+		//*********************处理FF界面 END********************
 }
 
 

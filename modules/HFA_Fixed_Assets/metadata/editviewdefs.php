@@ -25,12 +25,7 @@ array (
       array (
         'DEFAULT' => 
         array (
-          'newTab' => true,
-          'panelDefault' => 'expanded',
-        ),
-        'LBL_EDITVIEW_PANEL3' => 
-        array (
-          'newTab' => true,
+          'newTab' => false,
           'panelDefault' => 'expanded',
         ),
         'LBL_EDITVIEW_PANEL1' => 
@@ -49,35 +44,30 @@ array (
         array (
           0 => 
           array (
+            'name' => 'haa_framework',
+            'studio' => 'visible',
+            'label' => 'LBL_HAA_FRAMEWORK',
+          ),
+          1 => 'name',
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
             'name' => 'book_name',
             'studio' => 'visible',
             'label' => 'LBL_BOOK_NAME',
           ),
           1 => 
           array (
-            'name' => 'asset_num',
-            'label' => 'LBL_ASSET_NUM',
-          ),
-        ),
-        1 => 
-        array (
-          0 => 
-          array (
             'name' => 'fixed_asset_type',
             'studio' => 'visible',
             'label' => 'LBL_FIXED_ASSET_TYPE',
           ),
-          1 => 'name',
         ),
         2 => 
         array (
           0 => 'description',
-          1 => 
-          array (
-            'name' => 'related_domains',
-            'studio' => 'visible',
-            'label' => 'LBL_RELATED_DOMAINS',
-          ),
         ),
         3 => 
         array (
@@ -106,71 +96,7 @@ array (
           ),
         ),
       ),
-      'lbl_editview_panel3' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            'name' => 'related_assets',
-            'studio' => 'visible',
-            'label' => 'LBL_RELATED_ASSETS',
-          ),
-          1 => '',
-        ),
-      ),
-      'lbl_editview_panel1' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            'name' => 'original_value',
-            'label' => 'LBL_ORIGINAL_VALUE',
-          ),
-          1 => 
-          array (
-            'name' => 'current_value',
-            'label' => 'LBL_CURRENT_VALUE',
-          ),
-        ),
-        1 => 
-        array (
-          0 => 
-          array (
-            'name' => 'accumulated_depre',
-            'label' => 'LBL_ACCUMULATED_DEPRE',
-          ),
-          1 => 
-          array (
-            'name' => 'ytd_depre',
-            'label' => 'LBL_YTD_DEPRE',
-          ),
-        ),
-        2 => 
-        array (
-          0 => 
-          array (
-            'name' => 'depreciation_prep',
-            'label' => 'LBL_DEPRECIATION_PREP',
-          ),
-          1 => '',
-        ),
-        3 => 
-        array (
-          0 => 
-          array (
-            'name' => 'net_value',
-            'label' => 'LBL_NET_VALUE',
-          ),
-          1 => 
-          array (
-            'name' => 'salvage_value',
-            'label' => 'LBL_SALVAGE_VALUE',
-          ),
-        ),
       ),
     ),
-  ),
 );
 ?>

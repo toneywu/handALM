@@ -38,11 +38,6 @@ array (
           'newTab' => true,
           'panelDefault' => 'expanded',
         ),
-        'LBL_EDITVIEW_PANEL3' => 
-        array (
-          'newTab' => true,
-          'panelDefault' => 'expanded',
-        ),
         'LBL_EDITVIEW_PANEL1' => 
         array (
           'newTab' => false,
@@ -59,35 +54,30 @@ array (
         array (
           0 => 
           array (
+            'name' => 'haa_framework',
+            'studio' => 'visible',
+            'label' => 'LBL_HAA_FRAMEWORK',
+          ),
+          1 => 'name',
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
             'name' => 'book_name',
             'studio' => 'visible',
             'label' => 'LBL_BOOK_NAME',
           ),
           1 => 
           array (
-            'name' => 'asset_num',
-            'label' => 'LBL_ASSET_NUM',
-          ),
-        ),
-        1 => 
-        array (
-          0 => 
-          array (
             'name' => 'fixed_asset_type',
             'studio' => 'visible',
             'label' => 'LBL_FIXED_ASSET_TYPE',
           ),
-          1 => 'name',
         ),
         2 => 
         array (
           0 => 'description',
-          1 => 
-          array (
-            'name' => 'related_domains',
-            'studio' => 'visible',
-            'label' => 'LBL_RELATED_DOMAINS',
-          ),
         ),
         3 => 
         array (
@@ -114,19 +104,6 @@ array (
             'name' => 'date_in_service',
             'label' => 'LBL_DATE_IN_SERVICE',
           ),
-        ),
-      ),
-      'lbl_editview_panel3' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            'name' => 'related_assets',
-            'studio' => 'visible',
-            'label' => 'LBL_RELATED_ASSETS',
-          ),
-          1 => '',
         ),
       ),
       'lbl_editview_panel1' => 
@@ -164,7 +141,11 @@ array (
             'name' => 'depreciation_prep',
             'label' => 'LBL_DEPRECIATION_PREP',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'recoverable_amount',
+            'label' => 'LBL_RECOVERABLE_AMOUNT',
+          ),
         ),
         3 => 
         array (

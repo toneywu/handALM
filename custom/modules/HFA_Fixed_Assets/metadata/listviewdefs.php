@@ -2,11 +2,12 @@
 $module_name = 'HFA_Fixed_Assets';
 $listViewDefs [$module_name] = 
 array (
-  'ASSET_NUM' => 
+  'BOOK_NAME' => 
   array (
-    'type' => 'varchar',
-    'label' => 'LBL_ASSET_NUM',
-    'width' => '25%',
+    'type' => 'enum',
+    'studio' => 'visible',
+    'label' => 'LBL_BOOK_NAME',
+    'width' => '10%',
     'default' => true,
   ),
   'NAME' => 
@@ -53,14 +54,6 @@ array (
     'label' => 'LBL_SERVICE_YEAR',
     'width' => '10%',
     'default' => true,
-  ),
-  'BOOK_NAME' => 
-  array (
-    'type' => 'enum',
-    'studio' => 'visible',
-    'label' => 'LBL_BOOK_NAME',
-    'width' => '10%',
-    'default' => false,
   ),
   'OWNING_DEPT' => 
   array (

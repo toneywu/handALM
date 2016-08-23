@@ -2,22 +2,6 @@
 $module_name = 'HFA_FA_Value';
 $listViewDefs [$module_name] = 
 array (
-  'HFA_FIXED_ASSETS_HFA_FA_VALUE_NAME' => 
-  array (
-    'type' => 'relate',
-    'link' => true,
-    'label' => 'LBL_HFA_FIXED_ASSETS_HFA_FA_VALUE_FROM_HFA_FIXED_ASSETS_TITLE',
-    'id' => 'HFA_FIXED_ASSETS_HFA_FA_VALUEHFA_FIXED_ASSETS_IDA',
-    'width' => '10%',
-    'default' => true,
-  ),
-  'NAME' => 
-  array (
-    'width' => '32%',
-    'label' => 'LBL_NAME',
-    'default' => true,
-    'link' => true,
-  ),
   'TYPE' => 
   array (
     'type' => 'enum',
@@ -51,6 +35,22 @@ array (
     'module' => 'Employees',
     'id' => 'ASSIGNED_USER_ID',
     'default' => false,
+  ),
+  'HFA_FIXED_ASSETS_HFA_FA_VALUE_NAME' => 
+  array (
+    'type' => 'relate',
+    'link' => true,
+    'label' => 'LBL_HFA_FIXED_ASSETS_HFA_FA_VALUE_FROM_HFA_FIXED_ASSETS_TITLE',
+    'id' => 'HFA_FIXED_ASSETS_HFA_FA_VALUEHFA_FIXED_ASSETS_IDA',
+    'width' => '10%',
+    'default' => false,
+  ),
+  'NAME' => 
+  array (
+    'width' => '32%',
+    'label' => 'LBL_NAME',
+    'default' => false,
+    'link' => true,
   ),
 );
 ?>

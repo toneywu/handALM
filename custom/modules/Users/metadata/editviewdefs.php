@@ -209,11 +209,11 @@ array (
         ),
         4 => 
         array (
-          1 => 'phone_fax',
+          0 => 'phone_fax',
         ),
         5 => 
         array (
-          1 => 'phone_home',
+          0 => 'phone_home',
         ),
         6 => 
         array (

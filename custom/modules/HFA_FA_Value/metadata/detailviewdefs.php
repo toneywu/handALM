@@ -39,6 +39,7 @@ array (
           'panelDefault' => 'expanded',
         ),
       ),
+      'syncDetailEditViews' => true,
     ),
     'panels' => 
     array (
@@ -46,12 +47,16 @@ array (
       array (
         0 => 
         array (
-          0 => 'name',
+          0 => 
+          array (
+            'name' => 'fixed_assets',
+            'studio' => 'visible',
+            'label' => 'LBL_FIXED_ASSETS',
+          ),
           1 => 
           array (
-            'name' => 'period_name',
-            'studio' => 'visible',
-            'label' => 'LBL_PERIOD_NAME',
+            'name' => 'period',
+            'label' => 'LBL_PERIOD',
           ),
         ),
         1 => 
@@ -74,12 +79,7 @@ array (
           array (
             'name' => 'hfa_fixed_assets_hfa_fa_value_name',
           ),
-          1 => 
-          array (
-            'name' => 'fixed_assets',
-            'studio' => 'visible',
-            'label' => 'LBL_FIXED_ASSETS',
-          ),
+          1 => '',
         ),
         3 => 
         array (

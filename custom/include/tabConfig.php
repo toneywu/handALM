@@ -1,5 +1,5 @@
 <?php
-// created: 2016-07-25 22:23:21
+// created: 2016-08-23 13:59:34
 $GLOBALS['tabStructure'] = array (
   'LBL_TABGROUP_SALES' => 
   array (
@@ -9,13 +9,14 @@ $GLOBALS['tabStructure'] = array (
       0 => 'Accounts',
       1 => 'Contacts',
       2 => 'HAA_QUAL',
-      3 => 'AOS_Products',
-      4 => 'HAT_Assets',
-      5 => 'HAT_Asset_Locations',
-      6 => 'HMM_Locators',
-      7 => 'HAT_Warranty_Types',
-      8 => 'HAT_Meters',
-      9 => 'HAT_Meter_Types',
+      3 => 'HFA_Fixed_Assets',
+      4 => 'AOS_Products',
+      5 => 'HAT_Assets',
+      6 => 'HAT_Asset_Locations',
+      7 => 'HMM_Locators',
+      8 => 'HAT_Warranty_Types',
+      9 => 'HAT_Meters',
+      10 => 'HAT_Meter_Types',
     ),
   ),
   'LBL_GROUPTAB1_1454774981' => 
@@ -24,15 +25,14 @@ $GLOBALS['tabStructure'] = array (
     'modules' => 
     array (
       0 => 'HAT_Assets',
-      1 => 'HAT_FA',
-      2 => 'HAT_Properties',
-      3 => 'HIT_Racks',
-      4 => 'HAT_Asset_QUAL',
-      5 => 'HAT_Asset_QUAL_Details',
-      6 => 'HAT_Meter_Readings',
-      7 => 'HAT_Asset_Trans_Batch',
-      8 => 'HAT_Counting_Batchs',
-      9 => 'HAA_Maps',
+      1 => 'HAT_Properties',
+      2 => 'HIT_Racks',
+      3 => 'HAT_Asset_QUAL',
+      4 => 'HAT_Asset_QUAL_Details',
+      5 => 'HAT_Meter_Readings',
+      6 => 'HAT_Asset_Trans_Batch',
+      7 => 'HAT_Counting_Batchs',
+      8 => 'HAA_Maps',
     ),
   ),
   'LBL_GROUPTAB2_1466152419' => 

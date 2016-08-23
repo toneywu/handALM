@@ -1,10 +1,6 @@
 <?php
-// created: 2016-08-21 11:16:42
+// created: 2016-08-23 14:14:35
 $mod_strings = array (
-  'LBL_TEAM' => 'Team',
-  'LBL_TEAM_ID' => 'Team Id',
-  'LBL_ASSIGNED_TO_ID' => 'Assigned User Id',
-  'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
   'LBL_ID' => 'ID',
   'LBL_DATE_ENTERED' => 'Date Created',
   'LBL_DATE_MODIFIED' => 'Date Modified',
@@ -16,10 +12,17 @@ $mod_strings = array (
   'LBL_DESCRIPTION' => 'Description',
   'LBL_DELETED' => 'Deleted',
   'LBL_NAME' => 'Name',
-  'LBL_SAVING' => 'Saving...',
-  'LBL_SAVED' => 'Saved',
   'LBL_CREATED_USER' => 'Created by User',
   'LBL_MODIFIED_USER' => 'Modified by User',
+  'LBL_LIST_NAME' => 'Name',
+  'LBL_EDIT_BUTTON' => 'Edit',
+  'LBL_REMOVE' => 'Remove',
+  'LBL_ASSIGNED_TO_ID' => 'Assigned User Id',
+  'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
+  'LBL_TEAM' => 'Team',
+  'LBL_TEAM_ID' => 'Team Id',
+  'LBL_SAVING' => 'Saving...',
+  'LBL_SAVED' => 'Saved',
   'LBL_LIST_FORM_TITLE' => 'Feed List',
   'LBL_MODULE_NAME' => 'Activity Streams',
   'LBL_MODULE_TITLE' => 'Activity Streams',

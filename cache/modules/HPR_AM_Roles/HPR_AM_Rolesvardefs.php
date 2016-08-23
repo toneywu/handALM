@@ -250,6 +250,16 @@
       'len' => '255',
       'size' => '20',
     ),
+    'hpr_am_catelog_link' => 
+    array (
+      'name' => 'hpr_am_catelog_link',
+      'type' => 'link',
+      'relationship' => 'hpr_am_catelog',
+      'link_type' => 'many',
+      'module' => 'HPR_AM_Catelog',
+      'bean_name' => 'HPR_AM_Catelog',
+      'source' => 'non-db',
+    ),
     'hpr_am_roles_contacts' => 
     array (
       'name' => 'hpr_am_roles_contacts',
@@ -291,6 +301,16 @@
       'rhs_module' => 'HPR_AM_Roles',
       'rhs_table' => 'hpr_am_roles',
       'rhs_key' => 'assigned_user_id',
+      'relationship_type' => 'one-to-many',
+    ),
+    'hpr_am_catelog' => 
+    array (
+      'lhs_module' => 'HPR_AM_Roles',
+      'lhs_table' => 'hpr_am_roles',
+      'lhs_key' => 'id',
+      'rhs_module' => 'HPR_AM_Catelog',
+      'rhs_table' => 'hpr_am_catelog',
+      'rhs_key' => 'hpr_am_roles_id',
       'relationship_type' => 'one-to-many',
     ),
   ),

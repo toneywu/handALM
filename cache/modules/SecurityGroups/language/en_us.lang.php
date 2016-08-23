@@ -1,9 +1,6 @@
 <?php
-// created: 2016-08-21 10:55:26
+// created: 2016-08-23 14:14:36
 $mod_strings = array (
-  'LBL_ALL_MODULES' => 'All',
-  'LBL_ASSIGNED_TO_ID' => 'Assigned User Id',
-  'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
   'LBL_ID' => 'ID',
   'LBL_DATE_ENTERED' => 'Date Created',
   'LBL_DATE_MODIFIED' => 'Date Modified',
@@ -14,11 +11,17 @@ $mod_strings = array (
   'LBL_CREATED_ID' => 'Created By Id',
   'LBL_DESCRIPTION' => 'Description',
   'LBL_DELETED' => 'Deleted',
-  'LBL_NONINHERITABLE' => 'Not Inheritable',
-  'LBL_LIST_NONINHERITABLE' => 'Not Inheritable',
   'LBL_NAME' => 'Name',
   'LBL_CREATED_USER' => 'Created by User',
   'LBL_MODIFIED_USER' => 'Modified by User',
+  'LBL_LIST_NAME' => 'Name',
+  'LBL_EDIT_BUTTON' => 'Edit',
+  'LBL_REMOVE' => 'Remove',
+  'LBL_ASSIGNED_TO_ID' => 'Assigned User Id',
+  'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
+  'LBL_ALL_MODULES' => 'All',
+  'LBL_NONINHERITABLE' => 'Not Inheritable',
+  'LBL_LIST_NONINHERITABLE' => 'Not Inheritable',
   'LBL_LIST_FORM_TITLE' => 'Security Groups',
   'LBL_MODULE_NAME' => 'Security Groups Management',
   'LBL_MODULE_TITLE' => 'Security Groups Management',
@@ -58,7 +61,6 @@ $mod_strings = array (
   'LBL_MODULE' => 'Module:',
   'LBL_MASS_ASSIGN' => 'Security Groups: Mass Assign',
   'LBL_ASSIGN' => 'Assign',
-  'LBL_REMOVE' => 'Remove',
   'LBL_ASSIGN_CONFIRM' => 'Are you sure that you want to add this group to the ',
   'LBL_REMOVE_CONFIRM' => 'Are you sure that you want to remove this group from the ',
   'LBL_CONFIRM_END' => ' selected record(s)?',
