@@ -56,4 +56,12 @@ $mod_strings = array (
   'LBL_DURATION_TARGET'=> 'Target Duration',
   'LBL_DURATION_ACTUAL'=> 'Actual Duration',
   'LBL_ACT_MODULE'=>'Action Module',
+  'LBL_NEXT_WOOP'=>'Next Woop',
+  'LBL_NEXT_WOOP_NAME'=>'Next Woop Name',
+  'LBL_NEXT_WORK_CENTER'=>'Next Work Center',
+  'LBL_NEXT_WORK_CENTER_RES'=>'Next Work Center Resource',
+  'LBL_NEXT_WORK_CENTER_PEOPLE'=>'Next Work Center People',
+  'LBL_AUTOOPEN_NEXT_TASK'=>'Auto Open Next Task',
+  'LBL_BTN_ASSIGN_BUTTON_LABEL'=>'Operating Assign',
+  'LBL_WOOP_ACTION'=>'Operating Assign',
 );

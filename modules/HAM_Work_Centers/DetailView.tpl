@@ -43,20 +43,20 @@ SUGAR.util.doWhen(function(){
 <tr>
 {counter name="fieldsUsed"}
 <td width='12.5%' scope="col">
-{if !$fields.sr_haa_frameworks_rule.hidden}
-{capture name="label" assign="label"}{sugar_translate label='LBL_SR_HAA_FRAMEWORKS_RULE' module='HAM_Work_Centers'}{/capture}
+{if !$fields.sr_hat_domains_rule.hidden}
+{capture name="label" assign="label"}{sugar_translate label='LBL_SR_HAT_DOMAINS_RULE' module='HAM_Work_Centers'}{/capture}
 {$label|strip_semicolon}:
 {/if}
 </td>
-<td class="" type="relate" field="sr_haa_frameworks_rule" width='37.5%'  >
-{if !$fields.sr_haa_frameworks_rule.hidden}
+<td class="" type="relate" field="sr_hat_domains_rule" width='37.5%'  >
+{if !$fields.sr_hat_domains_rule.hidden}
 {counter name="panelFieldCount"}
 
-{if !empty($fields.sr_haa_frameworks_rule_id.value)}
-{capture assign="detail_url"}index.php?module=HAA_Frameworks&action=DetailView&record={$fields.sr_haa_frameworks_rule_id.value}{/capture}
+{if !empty($fields.sr_hat_domains_rule_id.value)}
+{capture assign="detail_url"}index.php?module=HAT_Domains&action=DetailView&record={$fields.sr_hat_domains_rule_id.value}{/capture}
 <a href="{sugar_ajax_url url=$detail_url}">{/if}
-<span id="sr_haa_frameworks_rule_id" class="sugar_field" data-id-value="{$fields.sr_haa_frameworks_rule_id.value}">{$fields.sr_haa_frameworks_rule.value}</span>
-{if !empty($fields.sr_haa_frameworks_rule_id.value)}</a>{/if}
+<span id="sr_hat_domains_rule_id" class="sugar_field" data-id-value="{$fields.sr_hat_domains_rule_id.value}">{$fields.sr_hat_domains_rule.value}</span>
+{if !empty($fields.sr_hat_domains_rule_id.value)}</a>{/if}
 {/if}
 </td>
 {counter name="fieldsUsed"}

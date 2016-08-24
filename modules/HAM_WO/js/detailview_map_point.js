@@ -48,12 +48,11 @@ function loadMapScript() {
 		
 	
 $(document).ready(function(){
-
 		if($("#map_enabled").is(':checked')) {
-			$("#detailpanel_3").show();
+			$("#detailpanel_4").show();
 			loadMapScript(); 
 			//alert(document.getElementById("map_lat").innerHTML);
 		} else {
-			$("#detailpanel_3").hide();
+			$("#detailpanel_4").hide();
 		}	
 	});

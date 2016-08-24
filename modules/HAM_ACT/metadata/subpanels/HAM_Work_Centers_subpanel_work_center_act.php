@@ -34,18 +34,18 @@ $subpanel_layout['list_fields'] = array (
     'target_module' => 'HAM_Maint_Sites',
     'target_record_key' => 'sr_ham_maint_sites_rule_id',
   ),
-  'sr_haa_frameworks_rule' => 
+  'sr_hat_domains_rule' => 
   array (
     'type' => 'relate',
     'studio' => 'visible',
-    'vname' => 'LBL_SR_HAA_FRAMEWORKS_RULE',
-    'id' => 'SR_HAA_FRAMEWORKS_RULE_ID',
+    'vname' => 'LBL_SR_HAT_DOMAINS_RULE',
+    'id' => 'SR_HAT_DOMAINS_RULE_ID',
     'link' => true,
     'width' => '10%',
     'default' => true,
     'widget_class' => 'SubPanelDetailViewLink',
-    'target_module' => 'HAA_Frameworks',
-    'target_record_key' => 'sr_haa_frameworks_rule_id',
+    'target_module' => 'HAT_Domains',
+    'target_record_key' => 'sr_hat_domains_rule_id',
   ),
   'description' => 
   array (

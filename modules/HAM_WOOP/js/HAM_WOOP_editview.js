@@ -1,7 +1,87 @@
-﻿
+﻿function require_field(){
+	var woop_status = $("#woop_status").val();
+	if(woop_status!="COMPLETED"){
+		mark_field_enabled("date_actual_start",true);
+		mark_field_enabled("date_actual_finish",true);
+	}else{
+		mark_field_enabled("date_actual_start",false);
+		mark_field_enabled("date_actual_finish",false);
+	}
+}
+
+/**
+ * 设置不可输入
+ */
+//设置字段不可更新
+function mark_field_disabled(field_name, hide_bool, keep_position=false) {
+	  mark_obj = $("#"+field_name);
+	  mark_obj_lable = $("#"+field_name+"_label");
+
+	  if(hide_bool==true) {
+	  	if (keep_position==false) {
+	    	mark_obj.closest('td').css({"display":"none"});
+	    	mark_obj_lable.css({"display":"none"});
+		}else{
+	    	mark_obj.closest('td').css({"display":"table-column"});
+	    	mark_obj_lable.css({"display":"table-column"});
+		}
+	  }else{
+	  	mark_obj.closest('td').css({"display":""});
+	    mark_obj_lable.css({"display":""});
+		mark_obj.css({"color":"inherit","background-Color":"#efefef;"});
+	  	mark_obj.attr("readonly",true);
+	  	mark_obj_lable.css({"color":"#aaaaaa"});
+	  }
+	  if (typeof validate != "undefined" && typeof validate['EditView'] != "undefined") {
+	    removeFromValidate('EditView',field_name); // 去除必须验证
+	  }
+	  $("#"+field_name+"_label .required").hide();
+
+	  if  (typeof $("#btn_"+field_name)!= 'undefined') {
+	    $("#btn_"+field_name).css({"visibility":"hidden"});
+	  }
+	  if  (typeof $("#btn_clr_"+field_name)!= 'undefined') {
+	    $("#btn_clr_"+field_name).css({"visibility":"hidden"});
+	  }
+	}
+
+/**
+ * 设置必输
+ */
+function mark_field_enabled(field_name,not_required_bool) {
+  //field_name = 字段名，不需要jquery select标志，直接写名字
+  //not_required_bool如果为空或没有明确定义为true的话，字段为必须输入。如果=true则为非必须
+  //alert(not_required_bool);
+  $("#"+field_name).css({"color":"#000000","background-Color":"#ffffff"});
+  $("#"+field_name).attr("readonly",false);
+  $("#"+field_name+"_label").css({"color":"#000000","text-decoration":"none"})
+
+  if(typeof not_required_bool == "undefined" || not_required_bool==false || not_required_bool=="") {
+      addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());//将当前字段标记为必须验证
+      //打上必须星标
+      if  ($("#"+field_name+"_label .required").text()!='*') {//如果没有星标，则打上星标
+        $("#"+field_name+"_label").html($("#"+field_name+"_label").text()+"<span class='required'>*</span>");//打上星标
+      } else {//如果已经有星标了，则显示出来
+        $("#"+field_name+"_label .required").show();
+      }
+  } else { //如果不是必须的，则不显示星标
+    //直接Remove有时会出错，所有先设置为Validate再Remove
+    addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());
+    removeFromValidate('EditView',field_name);
+     //去除必须验证
+    $("#"+field_name+"_label .required").hide();
+  }
+  if  (typeof $("#btn_"+field_name)!= 'undefined') {//移除选择按钮
+    $("#btn_"+field_name).css({"visibility":"visible"});
+  }
+  if  (typeof $("#btn_clr_"+field_name)!= 'undefined') {//移除清空按钮
+    $("#btn_clr_"+field_name).css({"visibility":"visible"});
+  }
+}
 
 
 $(document).ready(function(){
+	
 	
 function stringToTime(string){
     var f = string.split(' ', 2);
@@ -16,27 +96,51 @@ function stringToTime(string){
     parseInt(t[2], 10) || null
     )).getTime();
 } 
-	
 
+
+	mark_field_disabled("next_woop_name",false);
+	mark_field_disabled("next_woop",false);
+	mark_field_disabled("next_work_center",false);
+	// mark_field_disabled("next_work_center_people",false);
+	// mark_field_disabled("next_work_center_res",false);
+	
+	var woop_status_code = $("#woop_status").val();
+	// 从View.edit.php里面定义的变量来的wo_status,next_woop_assignment
+	// 为批准、等待物料、等待计划安排、等待作业条件、进行中、等待前序
+	//alert(next_woop_assignment);
+	if(woop_status_code!="DRAFT"&&next_woop_assignment=="1"&&last_woop_number_flag!="Y"&&(wo_status=="APPROVED"||wo_status=="WMATL"||wo_status=="WSCH"||wo_status=="WPCOND"||wo_status=="INPRG"||wo_status=="WPREV")){
+		
+	}else{
+		 mark_field_disabled("next_work_center_people",false);
+		 mark_field_disabled("next_work_center_res",false);
+	}
+	
+	if(woop_status_code=="COMPLETED"){
+		mark_field_enabled("date_actual_start");
+		mark_field_enabled("date_actual_finish");
+	}
+	
+	
+	
 /**
- * 对Date的扩展，将 Date 转化为指定格式的String
- * 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
- * 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)
- * 例子：
- * (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
- * (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
- * @param fmt string
+ * 对Date的扩展，将 Date 转化为指定格式的String 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
+ * 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字) 例子： (new
+ * Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423 (new
+ * Date()).Format("yyyy-M-d h:m:s.S") ==> 2006-7-2 8:9:4.18
+ * 
+ * @param fmt
+ *            string
  * @return string
- * */
-Date.prototype.format = function(fmt){ //author: meizz
+ */
+Date.prototype.format = function(fmt){ // author: meizz
     var o = {
-        "M+": this.getMonth() + 1, //月份
-        "d+": this.getDate(), //日
-        "h+": this.getHours(), //小时
-        "m+": this.getMinutes(), //分
-        "s+": this.getSeconds(), //秒
-        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-        "S": this.getMilliseconds() //毫秒
+        "M+": this.getMonth() + 1, // 月份
+        "d+": this.getDate(), // 日
+        "h+": this.getHours(), // 小时
+        "m+": this.getMinutes(), // 分
+        "s+": this.getSeconds(), // 秒
+        "q+": Math.floor((this.getMonth() + 3) / 3), // 季度
+        "S": this.getMilliseconds() // 毫秒
     };
     if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
     for (var k in o)
@@ -47,7 +151,7 @@ Date.prototype.format = function(fmt){ //author: meizz
 
 
 
-//时长
+// 时长
 function duration_change(){	
 
 	 if($('#duration_schedualed').val()!=null&&$('#duration_schedualed').val()!=""){
@@ -77,64 +181,64 @@ function duration_change(){
 		 } 
 	 }
 
-	//var time2=new Date(parseInt(1420184730)*1000).format('yyyy-M-d');
-	//alert(time2);	 
-	//1>计划时长
+	// var time2=new Date(parseInt(1420184730)*1000).format('yyyy-M-d');
+	// alert(time2);
+	// 1>计划时长
 	var $duration_schedualed_str = $("#duration_schedualed").val();
 	var $date_schedualed_start_str = $("#date_schedualed_start").val();
 	var $date_schedualed_finish_str = $("#date_schedualed_finish").val();
 	var $duration_schedualed_nums = parseInt($duration_schedualed_str)*1000*3600;
 	
-	//如果目标完成时间没有填写，目标时长有值 则自动更新目标完成时间
+	// 如果目标完成时间没有填写，目标时长有值 则自动更新目标完成时间
 	if($duration_schedualed_str!=null&&$duration_schedualed_str!=""&&$date_schedualed_start_str!=null&&$date_schedualed_start_str!=""){
-		//alert("1");
+		// alert("1");
 		var $total_num =stringToTime($date_schedualed_start_str)+$duration_schedualed_nums;
 		var time2=new Date(parseInt($total_num)).format('yyyy-M-d hh:m');
 		$("#date_schedualed_finish").val(time2);
 	}else if($duration_schedualed_str!=null&&$duration_schedualed_str!=""&&$date_schedualed_finish_str!=null&&$date_schedualed_finish_str!=""){
-	//如果目标完成时间有，没有填写目标开始，自动更新目标开始时间
-		//alert("2");
+	// 如果目标完成时间有，没有填写目标开始，自动更新目标开始时间
+		// alert("2");
 		var $total_num =stringToTime($date_schedualed_finish_str)-$duration_schedualed_nums;
 		var time2=new Date(parseInt($total_num)).format('yyyy-M-d hh:m');
 		$("#date_schedualed_start").val(time2);	
 	}
 	
-	//2>目标时长
+	// 2>目标时长
 	var $duration_target_str = $("#duration_target").val();
-	//目标开始时间
+	// 目标开始时间
 	var $date_target_start_str = $("#date_target_start").val();
 	var $date_target_finish_str = $("#date_target_finish").val();
 	var $duration_target_nums = parseInt($duration_target_str)*1000*3600;
-	//如果目标完成时间没有填写，目标时长有值 则自动更新目标完成时间
+	// 如果目标完成时间没有填写，目标时长有值 则自动更新目标完成时间
 	if($duration_target_str!=null&&$duration_target_str!=""&&$date_target_start_str!=null&&$date_target_start_str!=""){
-		//alert("3");
+		// alert("3");
 		var $total_num =stringToTime($date_target_start_str)+$duration_target_nums;
 		var time2=new Date(parseInt($total_num)).format('yyyy-M-d hh:m');
 		$("#date_target_finish").val(time2);
 	}else if($duration_target_str!=null&&$duration_target_str!=""&&$date_target_finish_str!=null&&$date_target_finish_str!=""){
-	//如果目标完成时间有，没有填写目标开始，自动更新目标开始时间
-		//alert("4");
+	// 如果目标完成时间有，没有填写目标开始，自动更新目标开始时间
+		// alert("4");
 		var $total_num =stringToTime($date_target_finish_str)-$duration_target_nums;
 		var time2=new Date(parseInt($total_num)).format('yyyy-M-d hh:m');
 		$("#date_target_start").val(time2);	
 	}
 	
-	//3>实际时长
+	// 3>实际时长
 	var $duration_actual_str = $("#duration_actual").val();
-	//实际开始时间
+	// 实际开始时间
 	var $date_actual_start_str = $("#date_actual_start").val();
 	var $duration_actual_nums = parseInt($duration_actual_str)*1000*3600;
 	var $date_actual_finish_str = $("#date_actual_finish").val();
-	//如果目标完成时间没有填写，目标时长有值 则自动更新目标完成时间
+	// 如果目标完成时间没有填写，目标时长有值 则自动更新目标完成时间
 	if($duration_actual_str!=null&&$duration_actual_str!=""&&$date_actual_start_str!=null&&$date_actual_start_str!=""){
-		//alert("5"+$duration_actual_str);
+		// alert("5"+$duration_actual_str);
 		
 		var $total_num =stringToTime($date_actual_start_str)+$duration_actual_nums;
 		var time2=new Date(parseInt($total_num)).format('yyyy-M-d hh:m');
 		$("#date_actual_finish").val(time2);
 	}else if($duration_actual_str!=null&&$duration_actual_str!=""&&$date_actual_finish_str!=null&&$date_actual_finish_str!=""){
-	//如果目标完成时间有，没有填写目标开始，自动更新目标开始时间
-		//alert("6");
+	// 如果目标完成时间有，没有填写目标开始，自动更新目标开始时间
+		// alert("6");
 		var $total_num =stringToTime($date_actual_finish_str)-$duration_actual_nums;
 		var time2=new Date(parseInt($total_num)).format('yyyy-M-d hh:m');
 		$("#date_actual_start").val(time2);	
@@ -142,15 +246,15 @@ function duration_change(){
 }
 	
 	
-//开始日期
+// 开始日期
 function date_start_change(){
-	//计划开始日期
+	// 计划开始日期
 	var $date_schedualed_start_str = $("#date_schedualed_start").val();
 	var $date_schedualed_start_date;
 	$date_schedualed_start_date = (stringToTime($date_schedualed_start_str)/1000/3600);
-	//alert($("#date_schedualed_finish").val());
+	// alert($("#date_schedualed_finish").val());
 	if($("#date_schedualed_finish").val()!=null&&$("#date_schedualed_finish").val()!=""){
-		//1）如果计划完成时间有填写，自动更新计划时长。
+		// 1）如果计划完成时间有填写，自动更新计划时长。
 		$date_schedualed_finish_date = (stringToTime($("#date_schedualed_finish").val())/1000/3600);
 		var $differentHour = $date_schedualed_finish_date-$date_schedualed_start_date;
 		if($differentHour>0){
@@ -159,7 +263,7 @@ function date_start_change(){
 			alert("计划完成日期必须大于等于计划开始日期！");
 		}
 	}else if($date_schedualed_start_str!=null&&$date_schedualed_start_str!=""&&$("#duration_schedualed").val()!=null&&$("#duration_schedualed").val()!=""){
-		//如果开始时间 加时长不为空 完成时间为空 那么更新完成时间
+		// 如果开始时间 加时长不为空 完成时间为空 那么更新完成时间
 		var $duration_schedualed_str = $("#duration_schedualed").val();
 		var $duration_schedualed_nums = parseInt($duration_schedualed_str)*1000*3600;
 		var $total_num =stringToTime($date_schedualed_start_str)+$duration_schedualed_nums;
@@ -167,12 +271,12 @@ function date_start_change(){
 		$("#date_schedualed_finish").val(time2);	
 	}
 	
-	//目标开始日期
+	// 目标开始日期
 	var $date_target_start_str = $("#date_target_start").val();
 	var $date_target_start_date;
 	$date_target_start_date = (stringToTime($date_target_start_str)/1000/3600);
 	if($("#date_target_finish").val()!=null&&$("#date_target_finish").val()!=""){
-		//1）如果计划完成时间有填写，自动更新计划时长。
+		// 1）如果计划完成时间有填写，自动更新计划时长。
 		$date_target_finish_date = (stringToTime($("#date_target_finish").val())/1000/3600);
 		var $differentHour = $date_target_finish_date-$date_target_start_date;
 		if($differentHour>0){
@@ -181,7 +285,7 @@ function date_start_change(){
 			alert("目标完成日期必须大于等于计划开始日期！");
 		}
 	}else if($date_target_start_str!=null&&$date_target_start_str!=""&&$("#duration_target").val()!=null&&$("#duration_target").val()!=""){
-		//如果开始时间 加时长不为空 完成时间为空 那么更新完成时间
+		// 如果开始时间 加时长不为空 完成时间为空 那么更新完成时间
 		var $duration_target_str = $("#duration_target").val();
 		var $duration_target_nums = parseInt($duration_target_str)*1000*3600;
 		var $total_num =stringToTime($date_target_start_str)+$duration_target_nums;
@@ -190,11 +294,11 @@ function date_start_change(){
 	}
 	 
 
-	//实际开始日期
+	// 实际开始日期
 	var $date_actual_start_str = $("#date_actual_start").val();
 	var $date_actual_start_date = (stringToTime($date_actual_start_str)/1000/3600);
 	if($("#date_actual_finish").val()!=null&&$("#date_actual_finish").val()!=""){
-		//1）如果计划完成时间有填写，自动更新计划时长。
+		// 1）如果计划完成时间有填写，自动更新计划时长。
 		$date_actual_finish_date = (stringToTime($("#date_actual_finish").val())/1000/3600);
 		var $differentHour = $date_actual_finish_date-$date_actual_start_date;
 		if($differentHour>0){
@@ -203,7 +307,7 @@ function date_start_change(){
 			alert("实际完成日期必须大于等于计划开始日期！");
 		}
 	}else if($date_actual_start_str!=null&&$date_actual_start_str!=""&&$("#duration_actual").val()!=null&&$("#duration_actual").val()!=""){
-		//如果开始时间 加时长不为空 完成时间为空 那么更新完成时间
+		// 如果开始时间 加时长不为空 完成时间为空 那么更新完成时间
 		var $duration_actual_str = $("#duration_actual").val();
 		var $duration_actual_nums = parseInt($duration_actual_str)*1000*3600;
 		var $total_num =stringToTime($date_actual_start_str)+$duration_actual_nums;
@@ -213,11 +317,11 @@ function date_start_change(){
 }
 
 
-//完成时间
+// 完成时间
 function date_finish_change(){
-	//1）如果计划完成时间有填写，自动更新计划时长。
-	//2）如果目标完成时间没有填写，目标时长有值，则自动更新目标完成时间
-		//1>计划完成日期
+	// 1）如果计划完成时间有填写，自动更新计划时长。
+	// 2）如果目标完成时间没有填写，目标时长有值，则自动更新目标完成时间
+		// 1>计划完成日期
 		var $date_schedualed_start_str = $("#date_schedualed_start").val();
 		var $date_schedualed_start_date;
 		if($date_schedualed_start_str==null||$date_schedualed_start_str==""){
@@ -238,7 +342,7 @@ function date_finish_change(){
 			var duration_schedualed_str =  $("#duration_schedualed").val();	
 		}
 		
-		//2>目标完成日期
+		// 2>目标完成日期
 		var $date_target_start_str = $("#date_target_start").val();
 		var $date_target_start_date;
 		if($date_target_start_str==null||$date_target_start_str==""){
@@ -259,7 +363,7 @@ function date_finish_change(){
 			var duration_target_str =  $("#duration_schedualed").val();	
 		}
 		
-		//3>实际完成日期
+		// 3>实际完成日期
 		var $date_actual_start_str = $("#date_actual_start").val();
 		var $date_actual_start_date;
 		if($date_actual_start_str==null||$date_actual_start_str==""){
@@ -279,7 +383,6 @@ function date_finish_change(){
 			var duration_actual_str =  $("#duration_actual").val();	
 		}
 }
-		
 		
 
 	$("#date_schedualed_start").change(function(){
@@ -307,8 +410,6 @@ function date_finish_change(){
 		date_finish_change();
 	});
 	
-	
-	
 	$("#duration_schedualed").change(function(){
 		duration_change();
 	});
@@ -321,7 +422,172 @@ function date_finish_change(){
 		duration_change();
 	});
 	
+	$("#woop_status").change(function(){
+		require_field();
+	});
 
+	
+	initTransHeaderStatus()
+
+	function initTransHeaderStatus() {
+	    
+	    var current_header_status = $("#woop_status").val();
+	    if (current_header_status=="DRAFT") {//可以DRAFT和SUBMIT
+	        $("#woop_status option[value='APPROVED']").remove();
+	        $("#woop_status option[value='RELEASED']").remove();
+	        $("#woop_status option[value='REJECTED']").remove();
+	        $("#woop_status option[value='CANCELED']").remove();
+	        $("#woop_status option[value='COMPLETED']").remove();
+	        $("#woop_status option[value='TRANSACTED']").remove();
+	        $("#woop_status option[value='WSCH']").remove();
+	        $("#woop_status option[value='WMATL']").remove();
+	        $("#woop_status option[value='WPCOND']").remove();
+	        $("#woop_status option[value='INPRG']").remove();
+	        $("#woop_status option[value='REWORK']").remove();
+	    } else if (current_header_status=="SUBMITTED") { //可以CANCEL和SUBMIT
+	        $("#woop_status option[value='APPROVED']").remove();
+	        $("#woop_status option[value='REJECTED']").remove();
+	        $("#woop_status option[value='WORKING']").remove();
+	        $("#woop_status option[value='CLOSED']").remove();
+	        $("#woop_status option[value='TRANSACTED']").remove();
+	        $("#woop_status option[value='COMPLETED']").remove();
+	        $("#woop_status option[value='WSCH']").remove();
+	        $("#woop_status option[value='WMATL']").remove();
+	        $("#woop_status option[value='WPCOND']").remove();
+	        $("#woop_status option[value='INPRG']").remove();
+	        $("#woop_status option[value='DRAFT']").remove();
+	        $("#woop_status option[value='RELEASED']").remove();
+	        $("#woop_status option[value='CANCELED']").remove();
+	        $("#woop_status option[value='REWORK']").remove();
+	        setEditViewReadonly ();
+	    } else if ((current_header_status=="APPROVED")||(current_header_status=="RELEASED")) { //可以CANCEL,COMPLETED
+	        /*$("#wo_status option[value='SUBMITTED']").remove();
+	        $("#wo_status option[value='REJECTED']").remove();
+	        $("#wo_status option[value='RELEASED']").remove();        
+	        $("#wo_status option[value='DRAFT']").remove();
+	        $("#wo_status option[value='CLOSED']").remove();
+	        $("#wo_status option[value='TRANSACTED']").remove();*/
+	    	$("#woop_status option[value='RELEASED']").remove();        
+	    	$("#woop_status option[value='REJECTED']").remove();
+	    	$("#woop_status option[value='DRAFT']").remove();
+	    	$("#woop_status option[value='SUBMITTED']").remove();
+	    	$("#woop_status option[value='CLOSED']").remove();
+	    	$("#woop_status option[value='REWORK']").remove();
+	        setEditViewReadonly ();
+	    } else if ((current_header_status=="CANCELED")) { //什么也不能做
+	        $("#woop_status option[value='SUBMITTED']").remove();
+	        $("#woop_status option[value='REJECTED']").remove();
+	        $("#woop_status option[value='DRAFT']").remove();
+	        $("#woop_status option[value='RELEASED']").remove();
+	        $("#woop_status option[value='APPROVED']").remove();
+	        $("#woop_status option[value='CLOSED']").remove();
+	        $("#woop_status option[value='TRANSACTED']").remove();
+	        $("#woop_status option[value='COMPLETED']").remove();
+	        $("#SAVE_HEADER,#save_and_continue,#SAVE_FOOTER").hide();
+	        
+	      //add by yuan.chen 2016-08-11
+	        $("#woop_status option[value='WSCH']").remove();
+	        $("#woop_status option[value='WMATL']").remove();
+	        $("#woop_status option[value='WPCOND']").remove();
+	        $("#woop_status option[value='INPRG']").remove();
+	        //end 
+	        
+	        setEditViewReadonly ();
+	    }else if ((current_header_status=="CLOSED")) { //什么也不能做，同Canceled
+	    	$("#woop_status option[value='SUBMITTED']").remove();
+	        $("#woop_status option[value='REJECTED']").remove();
+	        $("#woop_status option[value='DRAFT']").remove();
+	        $("#woop_status option[value='RELEASED']").remove();        
+	        $("#woop_status option[value='APPROVED']").remove();
+	        $("#woop_status option[value='CANCELED']").remove();
+	        $("#woop_status option[value='TRANSACTED']").remove();
+	        $("#woop_status option[value='WSCH']").remove();
+	        $("#woop_status option[value='WMATL']").remove();
+	        $("#woop_status option[value='WPCOND']").remove();
+	        $("#woop_status option[value='INPRG']").remove();
+	        $("#woop_status option[value='COMPLETED']").remove();
+	        $("#woop_status option[value='REWORK']").remove();
+	        $("#SAVE_HEADER,#save_and_continue,#SAVE_FOOTER").hide();
+	      
+	        $("#wo_status option[value='WSCH']").remove();
+	        $("#wo_status option[value='WMATL']").remove();
+	        $("#wo_status option[value='WPCOND']").remove();
+	        $("#wo_status option[value='INPRG']").remove();
+	        setEditViewReadonly ();
+	    }else if ((current_header_status=="COMPLETED")) { 
+	    	$("#woop_status option[value='SUBMITTED']").remove();
+	        $("#woop_status option[value='REJECTED']").remove();
+	        $("#woop_status option[value='DRAFT']").remove();
+	        $("#woop_status option[value='RELEASED']").remove();        
+	        $("#woop_status option[value='APPROVED']").remove();
+	        $("#woop_status option[value='CANCELED']").remove();
+	        $("#woop_status option[value='TRANSACTED']").remove();
+	        $("#woop_status option[value='WSCH']").remove();
+	        $("#woop_status option[value='WMATL']").remove();
+	        $("#woop_status option[value='WPCOND']").remove();
+	        $("#woop_status option[value='INPRG']").remove();
+	        $("#woop_status option[value='REWORK']").remove();
+	        //$("#SAVE_HEADER,#save_and_continue,#SAVE_FOOTER").hide();
+	      
+	        $("#wo_status option[value='WSCH']").remove();
+	        $("#wo_status option[value='WMATL']").remove();
+	        $("#wo_status option[value='WPCOND']").remove();
+	        $("#wo_status option[value='INPRG']").remove();
+	        setEditViewReadonly ();
+	    }else if((current_header_status=="WSCH")){//等待计划安排 WSCH WMATL WPCOND INPRG CANCELED
+	    	$("#woop_status option[value='DRAFT']").remove();
+	    	$("#woop_status option[value='SUBMITTED']").remove();
+	    	$("#woop_status option[value='APPROVED']").remove();
+	    	$("#woop_status option[value='CLOSED']").remove();
+	    	$("#woop_status option[value='REJECTED']").remove();
+	    	$("#woop_status option[value='RELEASED']").remove(); 
+	    	$("#woop_status option[value='REWORK']").remove(); 
+	    	setEditViewReadonly ();
+	    }else if((current_header_status=="WMATL")){//等待物料 WMATL WSCH WPCOND INPRG CANCELED
+	    	$("#woop_status option[value='DRAFT']").remove();
+	    	$("#woop_status option[value='SUBMITTED']").remove();
+	    	$("#woop_status option[value='APPROVED']").remove();
+	    	$("#woop_status option[value='CLOSED']").remove();
+	    	$("#woop_status option[value='REJECTED']").remove();
+	    	$("#woop_status option[value='RELEASED']").remove(); 
+	    	$("#woop_status option[value='REWORK']").remove(); 
+	    	setEditViewReadonly ();
+	    }else if((current_header_status=="WPCOND")){//等待作业条件 WMATL WSCH WPCOND INPRG CANCELED
+	    	$("#woop_status option[value='DRAFT']").remove();
+	    	$("#woop_status option[value='SUBMITTED']").remove();
+	    	$("#woop_status option[value='APPROVED']").remove();
+	    	$("#woop_status option[value='CLOSED']").remove();
+	    	$("#woop_status option[value='REJECTED']").remove();
+	    	$("#woop_status option[value='RELEASED']").remove(); 
+	    	$("#woop_status option[value='REWORK']").remove(); 
+	    }else if((current_header_status=="INPRG")){//正在执行中 WMATL WSCH WPCOND INPRG CANCELED
+	    	$("#woop_status option[value='DRAFT']").remove();
+	    	$("#woop_status option[value='SUBMITTED']").remove();
+	    	$("#woop_status option[value='APPROVED']").remove();
+	    	$("#woop_status option[value='CLOSED']").remove();
+	    	$("#woop_status option[value='REJECTED']").remove();
+	    	$("#woop_status option[value='RELEASED']").remove(); 
+	    	$("#woop_status option[value='REWORK']").remove(); 
+	    }else if((current_header_status=="WPREV")){//正在执行中 WMATL WSCH WPCOND INPRG CANCELED
+	    	$("#woop_status option[value='DRAFT']").remove();
+	    	$("#woop_status option[value='SUBMITTED']").remove();
+	    	$("#woop_status option[value='APPROVED']").remove();
+	    	$("#woop_status option[value='CLOSED']").remove();
+	    	$("#woop_status option[value='REJECTED']").remove();
+	    	$("#woop_status option[value='RELEASED']").remove(); 
+	    	$("#woop_status option[value='REWORK']").remove();  
+	    	$("#woop_status option[value='REWORK']").remove(); 
+	    }else if((current_header_status=="REWORK")){//正在执行中 WMATL WSCH WPCOND INPRG CANCELED
+	    	$("#woop_status option[value='DRAFT']").remove();
+	    	$("#woop_status option[value='SUBMITTED']").remove();
+	    	$("#woop_status option[value='APPROVED']").remove();
+	    	$("#woop_status option[value='CLOSED']").remove();
+	    	$("#woop_status option[value='REJECTED']").remove();
+	    	$("#woop_status option[value='RELEASED']").remove(); 
+	    	$("#woop_status option[value='WPREV']").remove(); 
+	    }
+	    
+	}
 
 
 });

@@ -6,7 +6,7 @@ array (
   array (
     'templateMeta' => 
     array (
-    'includes' => 
+      'includes' => 
       array (
         0 => 
         array (
@@ -23,7 +23,6 @@ array (
           3 => 'FIND_DUPLICATES',
         ),
       ),
-      
       'maxColumns' => '2',
       'widths' => 
       array (
@@ -52,6 +51,11 @@ array (
           'panelDefault' => 'expanded',
         ),
         'LBL_EDITVIEW_PANEL2' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_EDITVIEW_PANEL3' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
@@ -205,6 +209,53 @@ array (
             'name' => 'act_module',
             'studio' => 'visible',
             'label' => 'LBL_ACT_MODULE',
+          ),
+        ),
+      ),
+      'lbl_editview_panel3' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'next_woop',
+            'studio' => 'visible',
+            'label' => 'LBL_NEXT_WOOP',
+          ),
+          1 => 
+          array (
+            'name' => 'next_woop_name',
+            'studio' => 'visible',
+            'label' => 'LBL_NEXT_WOOP_NAME',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'next_work_center',
+            'studio' => 'visible',
+            'label' => 'LBL_NEXT_WORK_CENTER',
+          ),
+          1 => 
+          array (
+            'name' => 'next_work_center_res',
+            'studio' => 'visible',
+            'label' => 'LBL_NEXT_WORK_CENTER_RES',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'next_work_center_people',
+            'studio' => 'visible',
+            'label' => 'LBL_NEXT_WORK_CENTER_PEOPLE',
+          ),
+          1 => 
+          array (
+            'name' => 'autoopen_next_task',
+            'label' => 'LBL_AUTOOPEN_NEXT_TASK',
           ),
         ),
       ),

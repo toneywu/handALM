@@ -169,7 +169,7 @@ $dictionary['HAM_ACT_OP'] = array(
 #工作中心
 'sr_work_center_rule_id' => 
     array (
-      'required' => false,
+      'required' => true,
       'name' => 'sr_work_center_rule_id',
       'vname' => 'SR_SR_WORK_CENTER_RULE_ID',
       'type' => 'id',
@@ -312,7 +312,7 @@ $dictionary['HAM_ACT_OP'] = array(
  #工作中心资源-->人员
 'work_center_res_id' => 
   array (
-    'required' => false,
+    'required' => true,
     'name' => 'work_center_res_id',
     'vname' => 'LBL_WORK_CENTER_RES_ID',
     'type' => 'id',
@@ -334,7 +334,7 @@ $dictionary['HAM_ACT_OP'] = array(
 
 'ham_work_center_res_name' => 
   array (
-    'required' => false,
+    'required' => true,
     'source' => 'non-db',
     'name' => 'ham_work_center_res_name',
     'vname' => 'LBL_HAM_WORK_CENTER_RES_NAME',

@@ -1,20 +1,22 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+if (!defined('sugarEntry') || !sugarEntry)
+	die('Not A Valid Entry Point');
 
-require_once('include/MVC/View/views/view.detail.php');
+require_once ('include/MVC/View/views/view.detail.php');
 
-class HAM_WOViewDetail extends ViewDetail
-{
+class HAM_WOViewDetail extends ViewDetail {
 
-    function Display() {
+	function Display() {
 
-        //Ö®Ç°¿ÉÒÔÓÐÐí¶àÄÚÈÝ£¬ÔÚ´Ë²»ÔÚÏÔÊ¾
-        /*echo "ViewDetail";
-        foreach ($this->bean as $key => $value) {
-            echo '</br>'.$key;
-        }*/
-        parent::Display();//µ÷ÓÃ¸¸Àà·½·¨
+		//Ö®Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½Ú´Ë²ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾
+		/*echo "ViewDetail";
+		foreach ($this->bean as $key => $value) {
+		    echo '</br>'.$key;
+		}*/
+		parent :: Display(); //ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½à·½ï¿½ï¿½
 
-    }
+	}
+
+	
 
 }

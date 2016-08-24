@@ -1,8 +1,8 @@
 <?php
 // created: 2016-07-17 17:47:09
 $mod_strings = array (
-  'LBL_SR_HAA_FRAMEWORKS_RULE_HAA_FRAMEWORKS_ID' => '资产运营区域 (related 资产运营区域 ID)',
-  'LBL_SR_HAA_FRAMEWORKS_RULE' => '资产运营区域',
+  'LBL_SR_HAT_DOMAINS_RULE_HAT_DOMAINS_ID' => '资产运营区域 (related 资产运营区域 ID)',
+  'LBL_SR_HAT_DOMAINS_RULE' => '资产运营区域',
   'LBL_SR_HAM_MAINT_SITES_RULE__ID' => '维护区域 (related  ID)',
   'SR_HAM_MAINT_SITES_RULE' => '维护区域',
   'LBL_EDITVIEW_PANEL1' => '新建面板 1',

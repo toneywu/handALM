@@ -110,10 +110,10 @@ $(document).ready(function(){
 	//$("#map_c_label").hide();
 	$('#map_enabled').change(function(){
 		if( $(this).is(':checked')) {
-			$("#detailpanel_3").show();
+			$("#detailpanel_4").show();
 			loadMapScript();
 		} else {
-			$("#detailpanel_3").hide();
+			$("#detailpanel_4").hide();
 		}
 	});
 

@@ -32,9 +32,105 @@ function setHamActivityReturn(popupReplyData){
 		$("#ham_priority_id").val($("#wo_priority_id").val());
 	}
 }
-   
+
+function setWorkCenterPopupReturn(popupReplyData){
+	set_return(popupReplyData);
+	$("#work_center_res").val("");
+	$("#work_center_res_id").val("");
+	$("#work_center_people").val("");
+	$("#work_center_people_id").val("");
+}
+
+function setWorkCenterResPopupReturn(popupReplyData){
+	set_return(popupReplyData);
+}
+
+/**
+ * 点击按钮 调用Ajax请求 获取权限
+ * @param name
+ */
+function checkAccess(id){
+		$.ajax({
+			url: 'index.php?to_pdf=true&module=HAM_WO&action=checkAccess&id=' + id,
+			success: function (data) {
+				//alert(data);
+				if(data!="Y"){
+					window.location.href = "index.php?module=HAM_WO&action=DetailView&record="+id;
+				}
+			},
+			error: function () { //失败
+				alert('Error loading document');
+			}
+		});
+};
+
+//设置字段不可更新
+function mark_field_disabled(field_name, hide_bool, keep_position=false) {
+	  mark_obj = $("#"+field_name);
+	  mark_obj_lable = $("#"+field_name+"_label");
+
+	  if(hide_bool==true) {
+	  	if (keep_position==false) {
+	    	mark_obj.closest('td').css({"display":"none"});
+	    	mark_obj_lable.css({"display":"none"});
+		}else{
+	    	mark_obj.closest('td').css({"display":"table-column"});
+	    	mark_obj_lable.css({"display":"table-column"});
+		}
+	  }else{
+	  	mark_obj.closest('td').css({"display":""});
+	    mark_obj_lable.css({"display":""});
+		mark_obj.css({"color":"inherit","background-Color":"#efefef;"});
+	  	mark_obj.attr("readonly",true);
+	  	mark_obj_lable.css({"color":"#aaaaaa"});
+	  }
+	  if (typeof validate != "undefined" && typeof validate['EditView'] != "undefined") {
+	    removeFromValidate('EditView',field_name); // 去除必须验证
+	  }
+	  $("#"+field_name+"_label .required").hide();
+
+	  if  (typeof $("#btn_"+field_name)!= 'undefined') {
+	    $("#btn_"+field_name).css({"visibility":"hidden"});
+	  }
+	  if  (typeof $("#btn_clr_"+field_name)!= 'undefined') {
+	    $("#btn_clr_"+field_name).css({"visibility":"hidden"});
+	  }
+	}
 
 $(document).ready(function(){
+		
+	/**
+	 * checkAccess 
+	 * 工作单状态为其它状态时（包括已批准、等待XX、正在执行中及未来可能扩展的状态），以下字段不可编辑：
+     * 工单编号、维护区域、标准作业活动、工作单类型、位置、设备/资产、合同、目标开始时间、目标完成时间、
+     * 工作单来源信息面板下的所有字段    
+     * 
+	 */
+	checkAccess($("input[name='record']").val());
+	//权限满足后 字段不可编辑：
+	var wo_status = $("#wo_status").val();
+	if(wo_status=="APPROVED"||wo_status=="WSCH"||wo_status=="WMATL"||wo_status=="WPCOND"||wo_status=="INPRG"){
+		mark_field_disabled("ham_act_id_rule",false);
+		mark_field_disabled("site",false);
+		mark_field_disabled("event_type",false);
+		mark_field_disabled("location",false);
+		mark_field_disabled("asset",false);
+		mark_field_disabled("contract",false);
+		mark_field_disabled("date_target_start",false);
+		mark_field_disabled("date_target_finish",false);
+		mark_field_disabled("reporter",false);
+		mark_field_disabled("reporter_org",false);
+		mark_field_disabled("reported_date",false);
+		mark_field_disabled("priority",false);
+		mark_field_disabled("source_type",false);
+		mark_field_disabled("source_reference",false);
+	}
+	if(wo_status!="DRAFT"){
+		mark_field_disabled("ham_act_id_rule",false);
+		mark_field_disabled("location",false);
+		mark_field_disabled("asset",false);
+		mark_field_disabled("event_type",false);
+	}
 	
 	var currentDate = new Date();
 	var yearStr = currentDate.getFullYear();
@@ -49,13 +145,6 @@ $(document).ready(function(){
 //这时obj就是触发事件的对象，可以使用它的各个属性
 //还可以将obj转换成jquery对象，方便选用其他元素
 
-	//创建人字段标识的不可修改
-/*	$("#created_by_name").attr("readonly",true);
-	$("#created_by_name").css("background-Color","#efefef");
-    $("#btn_created_by_name,#btn_clr_created_by_name").hide();*/
-    //自动编号字段
-	
-	
 	/*alert(SUGAR.language.get('HAM_WO', 'LBL_AUTONUM'));
 	for(i in SUGAR){
 		alert(i);
@@ -69,7 +158,7 @@ $(document).ready(function(){
         $("#wo_number").hide();
     }
 
-    if($("#source_type")=='SR') {
+    if($("#source_type").val()=='SR') {
         $("#reported_date").attr("type","text");
         $("#site,#LBL_EDITVIEW_PANEL4 input,#LBL_EDITVIEW_PANEL4 select").attr("readonly",true);
         $("#site,#LBL_EDITVIEW_PANEL4 input,#LBL_EDITVIEW_PANEL4 select").css("background-Color","#efefef");
@@ -104,9 +193,16 @@ function initTransHeaderStatus() {
         $("#wo_status option[value='REJECTED']").remove();
         $("#wo_status option[value='CANCELED']").remove();
          $("#wo_status option[value='COMPLETED']").remove();
-        $("#wo_status option[value='CLOSED']").remove();
+        //$("#wo_status option[value='CLOSED']").remove();
         $("#wo_status option[value='TRANSACTED']").remove();
-
+        //add by yuan.chen 2016-08-11
+        $("#wo_status option[value='WSCH']").remove();
+        $("#wo_status option[value='WMATL']").remove();
+        $("#wo_status option[value='WPCOND']").remove();
+        $("#wo_status option[value='INPRG']").remove();
+        $("#wo_status option[value='WPREV']").remove();
+        $("#wo_status option[value='REWORK']").remove(); 
+        //end 
     } else if (current_header_status=="SUBMITTED") { //可以CANCEL和SUBMIT
         $("#wo_status option[value='APPROVED']").remove();
         $("#wo_status option[value='REJECTED']").remove();
@@ -114,14 +210,29 @@ function initTransHeaderStatus() {
         $("#wo_status option[value='CLOSED']").remove();
         $("#wo_status option[value='TRANSACTED']").remove();
         $("#wo_status option[value='COMPLETED']").remove();
+        
+        //add by yuan.chen 2016-08-11
+        $("#wo_status option[value='WSCH']").remove();
+        $("#wo_status option[value='WMATL']").remove();
+        $("#wo_status option[value='WPCOND']").remove();
+        $("#wo_status option[value='INPRG']").remove();
+        //end 
+        $("#wo_status option[value='WPREV']").remove();
         setEditViewReadonly ();
-    } else if ((current_header_status=="APPROVED")||(current_header_status=="RELEASED")) { //可以CANCEL,COMPLETED
-        $("#wo_status option[value='SUBMITTED']").remove();
+    } else if ((current_header_status=="APPROVED")||(current_header_status=="RELEASED")||(current_header_status=="REWORK")) { //可以CANCEL,COMPLETED
+        /*$("#wo_status option[value='SUBMITTED']").remove();
         $("#wo_status option[value='REJECTED']").remove();
         $("#wo_status option[value='RELEASED']").remove();        
         $("#wo_status option[value='DRAFT']").remove();
         $("#wo_status option[value='CLOSED']").remove();
-        $("#wo_status option[value='TRANSACTED']").remove();
+        $("#wo_status option[value='TRANSACTED']").remove();*/
+    	$("#wo_status option[value='RELEASED']").remove();        
+    	$("#wo_status option[value='REJECTED']").remove();
+    	$("#wo_status option[value='DRAFT']").remove();
+    	$("#wo_status option[value='SUBMITTED']").remove();
+    	$("#wo_status option[value='COMPLETED']").remove();
+    	$("#wo_status option[value='CLOSED']").remove();
+    	$("#wo_status option[value='WPREV']").remove();
         setEditViewReadonly ();
     } else if ((current_header_status=="CANCELED")) { //什么也不能做
         $("#wo_status option[value='SUBMITTED']").remove();
@@ -133,8 +244,17 @@ function initTransHeaderStatus() {
         $("#wo_status option[value='TRANSACTED']").remove();
         $("#wo_status option[value='COMPLETED']").remove();
         $("#SAVE_HEADER,#save_and_continue,#SAVE_FOOTER").hide();
+        
+      //add by yuan.chen 2016-08-11
+        $("#wo_status option[value='WSCH']").remove();
+        $("#wo_status option[value='WMATL']").remove();
+        $("#wo_status option[value='WPCOND']").remove();
+        $("#wo_status option[value='INPRG']").remove();
+        //end 
+        $("#wo_status option[value='WPREV']").remove();
         setEditViewReadonly ();
     }else if ((current_header_status=="CLOSED")) { //什么也不能做，同Canceled
+    	
         $("#wo_status option[value='SUBMITTED']").remove();
         $("#wo_status option[value='REJECTED']").remove();
         $("#wo_status option[value='DRAFT']").remove();
@@ -143,9 +263,78 @@ function initTransHeaderStatus() {
         $("#wo_status option[value='CANCELED']").remove();
         $("#wo_status option[value='TRANSACTED']").remove();
         $("#wo_status option[value='COMPLETED']").remove();
+        //$("#SAVE_HEADER,#save_and_continue,#SAVE_FOOTER").hide();
+      //add by yuan.chen 2016-08-11
+        $("#wo_status option[value='WSCH']").remove();
+        $("#wo_status option[value='WMATL']").remove();
+        $("#wo_status option[value='WPCOND']").remove();
+        $("#wo_status option[value='INPRG']").remove();
+        $("#wo_status option[value='WPREV']").remove();
+        //end 
+        //setEditViewReadonly ();
+    }else if ((current_header_status=="COMPLETED")) { 
+    	//add by yuan.chen 2016-08-11
+    	$("#wo_status option[value='SUBMITTED']").remove();
+        $("#wo_status option[value='REJECTED']").remove();
+        $("#wo_status option[value='DRAFT']").remove();
+        $("#wo_status option[value='RELEASED']").remove();        
+        $("#wo_status option[value='APPROVED']").remove();
+        $("#wo_status option[value='CANCELED']").remove();
+        $("#wo_status option[value='TRANSACTED']").remove();
+        $("#wo_status option[value='COMPLETED']").remove();
         $("#SAVE_HEADER,#save_and_continue,#SAVE_FOOTER").hide();
+      
+        $("#wo_status option[value='WSCH']").remove();
+        $("#wo_status option[value='WMATL']").remove();
+        $("#wo_status option[value='WPCOND']").remove();
+        $("#wo_status option[value='INPRG']").remove();
+        $("#wo_status option[value='WPREV']").remove();
         setEditViewReadonly ();
+      //end 
+    }else if((current_header_status=="WSCH")){//等待计划安排 WSCH WMATL WPCOND INPRG CANCELED
+    	$("#wo_status option[value='DRAFT']").remove();
+    	$("#wo_status option[value='SUBMITTED']").remove();
+    	$("#wo_status option[value='APPROVED']").remove();
+    	$("#wo_status option[value='COMPLETED']").remove();
+    	$("#wo_status option[value='CLOSED']").remove();
+    	$("#wo_status option[value='REJECTED']").remove();
+    	$("#wo_status option[value='RELEASED']").remove(); 
+    	$("#wo_status option[value='REWORK']").remove(); 
+    	$("#wo_status option[value='WPREV']").remove();
+    	setEditViewReadonly ();
+    }else if((current_header_status=="WMATL")){//等待物料 WMATL WSCH WPCOND INPRG CANCELED
+    	$("#wo_status option[value='DRAFT']").remove();
+    	$("#wo_status option[value='SUBMITTED']").remove();
+    	$("#wo_status option[value='APPROVED']").remove();
+    	$("#wo_status option[value='COMPLETED']").remove();
+    	$("#wo_status option[value='CLOSED']").remove();
+    	$("#wo_status option[value='REJECTED']").remove();
+    	$("#wo_status option[value='RELEASED']").remove(); 
+    	$("#wo_status option[value='REWORK']").remove(); 
+    	$("#wo_status option[value='WPREV']").remove();
+    	setEditViewReadonly ();
+    }else if((current_header_status=="WPCOND")){//等待作业条件 WMATL WSCH WPCOND INPRG CANCELED
+    	$("#wo_status option[value='DRAFT']").remove();
+    	$("#wo_status option[value='SUBMITTED']").remove();
+    	$("#wo_status option[value='APPROVED']").remove();
+    	$("#wo_status option[value='COMPLETED']").remove();
+    	$("#wo_status option[value='CLOSED']").remove();
+    	$("#wo_status option[value='REJECTED']").remove();
+    	$("#wo_status option[value='RELEASED']").remove(); 
+    	$("#wo_status option[value='REWORK']").remove(); 
+    	$("#wo_status option[value='WPREV']").remove();
+    }else if((current_header_status=="INPRG")){//正在执行中 WMATL WSCH WPCOND INPRG CANCELED
+    	$("#wo_status option[value='DRAFT']").remove();
+    	$("#wo_status option[value='SUBMITTED']").remove();
+    	$("#wo_status option[value='APPROVED']").remove();
+    	$("#wo_status option[value='COMPLETED']").remove();
+    	$("#wo_status option[value='CLOSED']").remove();
+    	$("#wo_status option[value='REJECTED']").remove();
+    	$("#wo_status option[value='RELEASED']").remove(); 
+    	$("#wo_status option[value='REWORK']").remove(); 
+    	$("#wo_status option[value='WPREV']").remove();
     }
+    
 }
 
 function setEditViewReadonly () { //如果当前头状态为Submitted、Approved、Canceled、Closed需要将字段变为只读
@@ -153,6 +342,5 @@ function setEditViewReadonly () { //如果当前头状态为Submitted、Approved
     $("#tabcontent0 button").attr("readonly",true);
     $("#tabcontent0 input").attr("style","background-Color:#efefef");
 }
-
 
 });

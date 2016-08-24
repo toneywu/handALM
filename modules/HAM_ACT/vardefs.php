@@ -119,11 +119,11 @@ $dictionary['HAM_ACT'] = array(
             'studio' => 'visible',
             ),
 			
-'sr_haa_frameworks_rule_id' => 
+'sr_hat_domains_rule_id' => 
     array (
       'required' => false,
-      'name' => 'sr_haa_frameworks_rule_id',
-      'vname' => 'LBL_SR_HAA_FRAMEWORKS_RULE_ID',
+      'name' => 'sr_hat_domains_rule_id',
+      'vname' => 'LBL_SR_HAT_DOMAINS_RULE_ID',
       'type' => 'id',
       'massupdate' => 0,
       'no_default' => false,
@@ -140,12 +140,12 @@ $dictionary['HAM_ACT'] = array(
       'len' => 36,
       'size' => '20',
       ),
-'sr_haa_frameworks_rule' => 
+'sr_hat_domains_rule' => 
     array (
       'required' => true,
       'source' => 'non-db',
-      'name' => 'sr_haa_frameworks_rule',
-      'vname' => 'LBL_SR_HAA_FRAMEWORKS_RULE',
+      'name' => 'sr_hat_domains_rule',
+      'vname' => 'LBL_SR_HAT_DOMAINS_RULE',
       'type' => 'relate',
       'massupdate' => 0,
       'no_default' => false,
@@ -161,9 +161,9 @@ $dictionary['HAM_ACT'] = array(
       'merge_filter' => 'disabled',
       'len' => '255',
       'size' => '20',
-      'id_name' => 'sr_haa_frameworks_rule_id',
-      'ext2' => 'HAA_Frameworks',
-      'module' => 'HAA_Frameworks',
+      'id_name' => 'sr_hat_domains_rule_id',
+      'ext2' => 'HAT_Domains',
+      'module' => 'HAT_Domains',
       'rname' => 'name',
       'quicksearch' => 'enabled',
       'studio' => 'visible',

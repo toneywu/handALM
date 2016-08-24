@@ -1,5 +1,5 @@
 <?php
-// created: 2016-08-01 23:14:02
+// created: 2016-08-24 11:24:49
 $subpanel_layout['list_fields'] = array (
   'woop_number' => 
   array (
@@ -12,7 +12,7 @@ $subpanel_layout['list_fields'] = array (
   array (
     'vname' => 'LBL_NAME',
     'widget_class' => 'SubPanelDetailViewLink',
-    'width' => '25%',
+    'width' => '15%',
     'default' => true,
   ),
   'woop_status' => 
@@ -75,6 +75,15 @@ $subpanel_layout['list_fields'] = array (
     'widget_class' => 'SubPanelDetailViewLink',
     'target_module' => 'HAM_Work_Center_People',
     'target_record_key' => 'work_center_people_id',
+  ),
+  'woop_action' => 
+  array (
+    'type' => 'varchar',
+    'studio' => 'visible',
+    'vname' => 'LBL_WOOP_ACTION',
+    'width' => '10%',
+    'default' => true,
+	'sortable' => false,
   ),
   'edit_button' => 
   array (

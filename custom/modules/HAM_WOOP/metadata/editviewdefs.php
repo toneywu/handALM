@@ -2,28 +2,17 @@
 $module_name = 'HAM_WOOP';
 $viewdefs [$module_name] = 
 array (
-  'DetailView' => 
+  'EditView' => 
   array (
     'templateMeta' => 
     array (
-    'includes' => 
+      'includes' => 
       array (
         0 => 
         array (
-          'file' => 'modules/HAM_WOOP/js/HAM_WOOP_detailview.js',
+          'file' => 'modules/HAM_WOOP/js/HAM_WOOP_editview.js',
         ),
       ),
-      'form' => 
-      array (
-        'buttons' => 
-        array (
-          0 => 'EDIT',
-          1 => 'DUPLICATE',
-          2 => 'DELETE',
-          3 => 'FIND_DUPLICATES',
-        ),
-      ),
-      
       'maxColumns' => '2',
       'widths' => 
       array (
@@ -56,6 +45,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_EDITVIEW_PANEL3' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
       ),
       'syncDetailEditViews' => true,
     ),
@@ -70,6 +64,7 @@ array (
             'name' => 'wo_number',
             'studio' => 'visible',
             'label' => 'LBL_WO_NUMBER',
+            'customCode' => '<input type="hidden" name="ham_wo_id" id="ham_wo_id" value="{$fields.ham_wo_id.value}">{$fields.wo_number.value}',
           ),
           1 => 
           array (
@@ -205,6 +200,53 @@ array (
             'name' => 'act_module',
             'studio' => 'visible',
             'label' => 'LBL_ACT_MODULE',
+          ),
+        ),
+      ),
+      'lbl_editview_panel3' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'next_woop',
+            'studio' => 'visible',
+            'label' => 'LBL_NEXT_WOOP',
+          ),
+          1 => 
+          array (
+            'name' => 'next_woop_name',
+            'studio' => 'visible',
+            'label' => 'LBL_NEXT_WOOP_NAME',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'next_work_center',
+            'studio' => 'visible',
+            'label' => 'LBL_NEXT_WORK_CENTER',
+          ),
+          1 => 
+          array (
+            'name' => 'next_work_center_res',
+            'studio' => 'visible',
+            'label' => 'LBL_NEXT_WORK_CENTER_RES',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'next_work_center_people',
+            'studio' => 'visible',
+            'label' => 'LBL_NEXT_WORK_CENTER_PEOPLE',
+          ),
+          1 => 
+          array (
+            'name' => 'autoopen_next_task',
+            'label' => 'LBL_AUTOOPEN_NEXT_TASK',
           ),
         ),
       ),

@@ -52,4 +52,12 @@ $mod_strings = array (
   'LBL_HAM_WORK_CENTER_PEOPLE' => '负责人',
   'LBL_WORK_CENTER_RES_HAM_WORK_CENTER_RES_ID' => '资源/工种 (related  ID)',
   'LBL_WORK_CENTER_RES' => '资源/工种',
+  'LBL_NEXT_WOOP'=>'序号',
+  'LBL_NEXT_WOOP_NAME'=>'后序任务',
+  'LBL_NEXT_WORK_CENTER'=>'工作中心',
+  'LBL_NEXT_WORK_CENTER_RES'=>'资源/工种',
+  'LBL_NEXT_WORK_CENTER_PEOPLE'=>'人员',
+  'LBL_AUTOOPEN_NEXT_TASK'=>'完工后打开下道工序',
+  'LBL_BTN_ASSIGN_BUTTON_LABEL'=>'工序认领',
+  'LBL_WOOP_ACTION'=>'工序认领',
 );

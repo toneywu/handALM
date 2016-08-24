@@ -105,12 +105,10 @@ class HAM_WOViewEdit extends ViewEdit
                                         hat_asset_locations.id ='".$this->bean->hat_asset_locations_id."'";
             //echo($sel_current_location);
             $resule_locations =  $db->query($sel_current_location);
-
             while ( $resule_asset = $db->fetchByAssoc($resule_locations) ) {
                 $this->bean->location_title = $resule_asset['location_title'];
             }
        }
-
            if ((isset($this->bean->hat_assets_id)==false || $this->bean->hat_assets_id=="") && (isset($_REQUEST['hat_assets_id']) && $_REQUEST['hat_assets_id']!="")) { //如果没有资产，并且有资产传传入，则加载资产
 
                  $sel_current_asset ="SELECT

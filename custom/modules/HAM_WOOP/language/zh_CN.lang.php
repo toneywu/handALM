@@ -1,5 +1,5 @@
 <?php
-// created: 2016-07-19 14:34:25
+// created: 2016-08-17 16:00:46
 $mod_strings = array (
   'LBL_WORK_CENTER_HAM_WORK_CENTERS_ID' => '工作中心 (related 工作中心 ID)',
   'LBL_WORK_CENTER' => '工作中心',
@@ -20,4 +20,5 @@ $mod_strings = array (
   'LBL_HAM_WORK_CENTER_PEOPLE' => '负责人',
   'LBL_WORK_CENTER_RES_HAM_WORK_CENTER_RES_ID' => '资源/工种 (related  ID)',
   'LBL_WORK_CENTER_RES' => '资源/工种',
+  'LBL_EDITVIEW_PANEL3' => '后序工序',
 );
