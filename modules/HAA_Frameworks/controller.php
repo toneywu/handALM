@@ -3,7 +3,7 @@ require_once('include/MVC/Controller/SugarController.php');
 
 class HAA_FrameworksController extends SugarController
 {
-	function action_setFramework(){
+	function action_setframework(){
 		if (isset($_REQUEST['framework_id'])){
 			$_SESSION["current_framework"]=$_REQUEST['framework_id'];
 			//将当前的framework_id写入Session
@@ -22,13 +22,19 @@ class HAA_FrameworksController extends SugarController
 
 	}
 
-		function action_setSite(){
+	function action_setsite(){
 		if (isset($_REQUEST['site_id'])){
 			$_SESSION["current_site"]=$_REQUEST['site_id'];
 			//将当前的site_id写入Session
     	}
 
 	}
+
+	function action_test(){
+		echo("hello");
+
+	}
+
 }
 
 ?>

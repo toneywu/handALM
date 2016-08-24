@@ -4,11 +4,11 @@ if(typeof OrgSelector == 'undefined') { //如果有多个Selector，只有一个
 	     ajaxStatus.showStatus('{/literal}{$saving}{literal}'); // show that AJAX call is happening
 	     //alert("clicked");
 	     	$.ajax({
-					url: 'index.php?to_pdf=true&module=haa_frameworks&action=setFramework&framework_id='+framework_id,
+					url: 'index.php?to_pdf=true&module=HAA_Frameworks&action=setframework&framework_id='+framework_id,
 					success: function (data) {
 						//将当前Framework写入Session,同时Data返回当前Framework对应的Sites列表
 						//如果Framework正确加载，则进一步加载MaintSites
-						//console.log('index.php?to_pdf=true&module=haa_frameworks&action=setFramework&framework_id='+framework_id);
+						console.log('index.php?to_pdf=true&module=HAA_Frameworks&action=setframework&framework_id='+framework_id);
 						//console.log(data);
 						$("#site_selector_{/literal}{$id}{literal}").html(data);
 						$("#site_selector_{/literal}{$id}{literal}").change();
@@ -26,7 +26,7 @@ if(typeof OrgSelector == 'undefined') { //如果有多个Selector，只有一个
 
 	function Set_Site(site_id) {
 			     	$.ajax({
-					url: 'index.php?to_pdf=true&module=haa_frameworks&action=setSite&site_id='+site_id,
+					url: 'index.php?to_pdf=true&module=HAA_Frameworks&action=setsite&site_id='+site_id,
 					success: function (data) {
 						//将当前Site写入Session
 					},
