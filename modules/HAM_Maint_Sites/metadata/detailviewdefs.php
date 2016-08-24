@@ -57,7 +57,7 @@ array (
       array (
         0 => 
         array (
-          0 => 'name',
+          0 => 'haa_framework',
           1 => 
           array (
             'name' => 'title',
@@ -72,6 +72,7 @@ array (
             'comment' => 'Full text of the note',
             'label' => 'LBL_DESCRIPTION',
           ),
+          1=>'name'
         ),
       ),
       'lbl_editview_panel1' => 

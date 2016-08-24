@@ -258,7 +258,7 @@
       'merge_filter' => 'disabled',
       'len' => '255',
       'size' => '20',
-      'id_name' => 'haa_framework',
+      'id_name' => 'haa_frameworks_id',
       'ext2' => 'HAA_Frameworks',
       'module' => 'HAA_Frameworks',
       'rname' => 'name',

@@ -47,7 +47,7 @@ array (
       array (
         0 =>
         array (
-          0 => 'name',
+          0 => 'haa_framework',
           1 =>
           array (
             'name' => 'title',
@@ -56,7 +56,8 @@ array (
           ),
         1 =>
         array (
-          0 => 'description',
+          0=>'description',
+          1 => 'name',
           ),
         ),
       'lbl_editview_panel1' =>

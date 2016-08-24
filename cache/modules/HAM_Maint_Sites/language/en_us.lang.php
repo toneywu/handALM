@@ -1,5 +1,5 @@
 <?php
-// created: 2016-08-23 14:14:37
+// created: 2016-08-24 09:44:50
 $mod_strings = array (
   'LBL_ID' => 'ID',
   'LBL_DATE_ENTERED' => 'Date Created',
@@ -45,4 +45,6 @@ $mod_strings = array (
   'LBL_PROJECT_CONTROL' => 'Project Control',
   'LBL_EDITVIEW_PANEL1' => 'Maintenance Option',
   'LBL_EDITVIEW_PANEL2' => 'Inventory Option',
+  'LBL_HAA_FRAMEWORK' => 'Business Framewrok',
+  'LBL_HAA_FRAMEWORKS_ID' => 'Business Framewrok(ID)',
 );

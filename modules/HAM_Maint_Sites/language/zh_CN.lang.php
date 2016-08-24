@@ -69,8 +69,10 @@ $mod_strings = array (
   'LBL_HAM_MAINT_SITES_SUBPANEL_TITLE' => '维护区域',
   'LBL_NEW_FORM_TITLE' => '新建 维护区域',
   'LBL_TITLE' => '标题',
-    'LBL_SR_HAA_NUMBERING_RULE' => '工作申请SR 编号规则',
+  'LBL_SR_HAA_NUMBERING_RULE' => '工作申请SR 编号规则',
   'LBL_WO_HAA_NUMBERING_RULE' => '工作单WO 编号规则',
   'LBL_LOCATOR_CODING_MASK'=>'库存货位掩码',
-  'LBL_LOCATOR_CODING_MASK_DESC'=>'库存货位编码说明'  
+  'LBL_LOCATOR_CODING_MASK_DESC'=>'库存货位编码说明',
+  'LBL_HAA_FRAMEWORK'=>'业务框架',
+  'LBL_HAA_FRAMEWORKS_ID'=>'业务框架(ID)',
 );

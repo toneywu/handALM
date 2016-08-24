@@ -89,4 +89,8 @@ $mod_strings = array (
   'LBL_SALES_PERSON_FIELD_RULE'=>'Sales Person Filed Rule',
   'LBL_SERVICE_PERSON_FIELD_RULE'=>'Service Person Filed Rule',
   'LBL_LOGO_IMAGE'=>'Logo Image',
+  'LBL_ERR_NO_BUSINESS_FRAMEWORK'=>'ERROR： No Business Framework has been defined or assigned to you. Please ask your system admin for help',
+  'LBL_ERR_NO_BUSINESS_FRAMEWORK_CREATOR'=>'ERROR： No Business Framework has been defined or assigned to you. You can define a new Business Framework',
+    'LBL_CODE'=>'Framework Code',
+
 );

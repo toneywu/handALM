@@ -80,4 +80,6 @@ $mod_strings = array (
   'LBL_PROJECT_CONTROL'=>'Project Control',
   'LBL_EDITVIEW_PANEL1' => 'Maintenance Option',
   'LBL_EDITVIEW_PANEL2' => 'Inventory Option',
+  'LBL_HAA_FRAMEWORK'=>'Business Framewrok',
+  'LBL_HAA_FRAMEWORKS_ID'=>'Business Framewrok(ID)',
 );
