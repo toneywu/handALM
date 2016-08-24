@@ -335,7 +335,7 @@
     ),
     'sr_work_center_rule_id' => 
     array (
-      'required' => false,
+      'required' => true,
       'name' => 'sr_work_center_rule_id',
       'vname' => 'SR_SR_WORK_CENTER_RULE_ID',
       'type' => 'id',
@@ -467,7 +467,7 @@
     ),
     'work_center_res_id' => 
     array (
-      'required' => false,
+      'required' => true,
       'name' => 'work_center_res_id',
       'vname' => 'LBL_WORK_CENTER_RES_ID',
       'type' => 'id',
@@ -488,7 +488,7 @@
     ),
     'ham_work_center_res_name' => 
     array (
-      'required' => false,
+      'required' => true,
       'source' => 'non-db',
       'name' => 'ham_work_center_res_name',
       'vname' => 'LBL_HAM_WORK_CENTER_RES_NAME',

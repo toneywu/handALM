@@ -1,6 +1,8 @@
 <?php
-// created: 2016-08-24 09:44:48
+// created: 2016-08-24 16:10:19
 $mod_strings = array (
+  'LBL_ASSIGNED_TO_ID' => 'Assigned User Id',
+  'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
   'LBL_ID' => 'ID',
   'LBL_DATE_ENTERED' => 'Date Created',
   'LBL_DATE_MODIFIED' => 'Date Modified',
@@ -10,6 +12,7 @@ $mod_strings = array (
   'LBL_CREATED' => 'Created By',
   'LBL_CREATED_ID' => 'Created By Id',
   'LBL_DESCRIPTION' => 'Body',
+  'LBL_ADDITIONAL_INFO' => 'Resolution',
   'LBL_DELETED' => 'Deleted',
   'LBL_NAME' => 'Title',
   'LBL_CREATED_USER' => 'Created by User',
@@ -17,11 +20,6 @@ $mod_strings = array (
   'LBL_LIST_NAME' => 'Name',
   'LBL_EDIT_BUTTON' => 'Edit',
   'LBL_REMOVE' => 'Remove',
-  'LBL_ASSIGNED_TO_ID' => 'Assigned User Id',
-  'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
-  'LBL_SECURITYGROUPS' => 'Security Groups',
-  'LBL_SECURITYGROUPS_SUBPANEL_TITLE' => 'Security Groups',
-  'LBL_ADDITIONAL_INFO' => 'Resolution',
   'LBL_LIST_FORM_TITLE' => 'Knowledge Base List',
   'LBL_MODULE_NAME' => 'Knowledge Base',
   'LBL_MODULE_TITLE' => 'Knowledge Base',

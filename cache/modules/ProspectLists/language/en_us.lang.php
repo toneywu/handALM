@@ -1,10 +1,6 @@
 <?php
-// created: 2016-08-24 09:44:48
+// created: 2016-08-24 16:10:19
 $mod_strings = array (
-  'LBL_ASSIGNED_TO_ID' => 'Assigned User Id',
-  'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
-  'LBL_SECURITYGROUPS' => 'Security Groups',
-  'LBL_SECURITYGROUPS_SUBPANEL_TITLE' => 'Security Groups',
   'LBL_MODULE_NAME' => 'Target Lists',
   'LBL_MODULE_ID' => 'Target Lists',
   'LBL_MODULE_TITLE' => 'Target Lists: Home',

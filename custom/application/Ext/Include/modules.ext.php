@@ -29,6 +29,13 @@ $modInvisList[] = 'HAA_FF_Fields';
 
  
  //WARNING: The contents of this file are auto-generated
+$beanList['HAA_Frameworks'] = 'HAA_Frameworks';
+$beanFiles['HAA_Frameworks'] = 'modules/HAA_Frameworks/HAA_Frameworks.php';
+$moduleList[] = 'HAA_Frameworks';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
 $beanList['HAA_Maps'] = 'HAA_Maps';
 $beanFiles['HAA_Maps'] = 'modules/HAA_Maps/HAA_Maps.php';
 $moduleList[] = 'HAA_Maps';
@@ -209,13 +216,6 @@ $moduleList[] = 'HAT_Counting_Results';
 $beanList['HAT_Counting_Tasks'] = 'HAT_Counting_Tasks';
 $beanFiles['HAT_Counting_Tasks'] = 'modules/HAT_Counting_Tasks/HAT_Counting_Tasks.php';
 $moduleList[] = 'HAT_Counting_Tasks';
-
-
- 
- //WARNING: The contents of this file are auto-generated
-$beanList['HAA_Frameworks'] = 'HAA_Frameworks';
-$beanFiles['HAA_Frameworks'] = 'modules/HAA_Frameworks/HAA_Frameworks.php';
-$moduleList[] = 'HAA_Frameworks';
 
 
  

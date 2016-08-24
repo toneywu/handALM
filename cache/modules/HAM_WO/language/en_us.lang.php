@@ -1,6 +1,8 @@
 <?php
-// created: 2016-08-24 09:44:50
+// created: 2016-08-24 16:10:18
 $mod_strings = array (
+  'LBL_ASSIGNED_TO_ID' => 'Assigned User Id',
+  'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
   'LBL_ID' => 'ID',
   'LBL_DATE_ENTERED' => 'Date Created',
   'LBL_DATE_MODIFIED' => 'Date Modified',
@@ -17,10 +19,6 @@ $mod_strings = array (
   'LBL_LIST_NAME' => 'Name',
   'LBL_EDIT_BUTTON' => 'Edit',
   'LBL_REMOVE' => 'Remove',
-  'LBL_ASSIGNED_TO_ID' => 'Assigned User Id',
-  'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
-  'LBL_SECURITYGROUPS' => 'Security Groups',
-  'LBL_SECURITYGROUPS_SUBPANEL_TITLE' => 'Security Groups',
   'LBL_LIST_FORM_TITLE' => 'Work Orders List',
   'LBL_MODULE_NAME' => 'Work Orders',
   'LBL_MODULE_TITLE' => 'Work Orders',
@@ -90,4 +88,13 @@ $mod_strings = array (
   'LBL_PLAN_FIXED' => 'Plan Fixed',
   'LBL_WO_LINE_SUBPANEL_TITLE' => 'WO Object Lines',
   'HAM_ACT_ID_RULE' => 'Std.Activity',
+  'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL' => 'WO Status Modify',
+  'LBL_BTN_SAVE_BUTTON_LABEL' => 'Save Button',
+  'LBL_BTN_CANCEL_BUTTON_LABEL' => 'Cancel Button',
+  'LBL_WORK_CENTER' => 'Work Center',
+  'LBL_WORK_CENTER_RES' => 'Work Center Resource',
+  'LBL_WORK_CENTER_PEOPLE' => 'Work Center People',
+  'LBL_WORK_ORDER_ACCESS' => 'Work Order Access',
+  'LBL_NEXT_WOOP_ASSIGNMENT' => 'Next Wo Order Operation Assignment',
+  'LBL_BTN_ASSIGN_BUTTON_LABEL' => 'Operating Assign',
 );

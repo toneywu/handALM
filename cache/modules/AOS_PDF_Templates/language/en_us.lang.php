@@ -1,6 +1,8 @@
 <?php
-// created: 2016-08-24 09:44:49
+// created: 2016-08-24 16:10:19
 $mod_strings = array (
+  'LBL_ASSIGNED_TO_ID' => 'Assigned User Id',
+  'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
   'LBL_ID' => 'ID',
   'LBL_DATE_ENTERED' => 'Date Created',
   'LBL_DATE_MODIFIED' => 'Date Modified',
@@ -10,19 +12,12 @@ $mod_strings = array (
   'LBL_CREATED' => 'Created By',
   'LBL_CREATED_ID' => 'Created By Id',
   'LBL_DESCRIPTION' => 'Body',
+  'LBL_HEADER' => 'Header',
+  'LBL_FOOTER' => 'Footer',
   'LBL_DELETED' => 'Deleted',
   'LBL_NAME' => 'Name',
   'LBL_CREATED_USER' => 'Created by User',
   'LBL_MODIFIED_USER' => 'Modified by User',
-  'LBL_LIST_NAME' => 'Name',
-  'LBL_EDIT_BUTTON' => 'Edit',
-  'LBL_REMOVE' => 'Remove',
-  'LBL_ASSIGNED_TO_ID' => 'Assigned User Id',
-  'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
-  'LBL_SECURITYGROUPS' => 'Security Groups',
-  'LBL_SECURITYGROUPS_SUBPANEL_TITLE' => 'Security Groups',
-  'LBL_HEADER' => 'Header',
-  'LBL_FOOTER' => 'Footer',
   'LBL_LIST_FORM_TITLE' => 'PDF Templates List',
   'LBL_MODULE_NAME' => 'PDF Templates',
   'LBL_MODULE_TITLE' => 'PDF Templates: Home',

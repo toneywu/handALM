@@ -1,6 +1,10 @@
 <?php
-// created: 2016-08-24 09:44:50
+// created: 2016-08-24 16:10:19
 $mod_strings = array (
+  'LBL_ASSIGNED_TO_ID' => 'Assigned User Id',
+  'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
+  'LBL_SECURITYGROUPS' => 'Security Groups',
+  'LBL_SECURITYGROUPS_SUBPANEL_TITLE' => 'Security Groups',
   'LBL_ID' => 'ID',
   'LBL_DATE_ENTERED' => 'Date Created',
   'LBL_DATE_MODIFIED' => 'Date Modified',
@@ -17,10 +21,6 @@ $mod_strings = array (
   'LBL_LIST_NAME' => 'Name',
   'LBL_EDIT_BUTTON' => 'Edit',
   'LBL_REMOVE' => 'Remove',
-  'LBL_ASSIGNED_TO_ID' => 'Assigned User Id',
-  'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
-  'LBL_SECURITYGROUPS' => 'Security Groups',
-  'LBL_SECURITYGROUPS_SUBPANEL_TITLE' => 'Security Groups',
   'LBL_LIST_FORM_TITLE' => 'WO Operations List',
   'LBL_MODULE_NAME' => 'WO Operations',
   'LBL_MODULE_TITLE' => 'WO Operations',
@@ -56,4 +56,12 @@ $mod_strings = array (
   'LBL_DURATION_TARGET' => 'Target Duration',
   'LBL_DURATION_ACTUAL' => 'Actual Duration',
   'LBL_ACT_MODULE' => 'Action Module',
+  'LBL_NEXT_WOOP' => 'Next Woop',
+  'LBL_NEXT_WOOP_NAME' => 'Next Woop Name',
+  'LBL_NEXT_WORK_CENTER' => 'Next Work Center',
+  'LBL_NEXT_WORK_CENTER_RES' => 'Next Work Center Resource',
+  'LBL_NEXT_WORK_CENTER_PEOPLE' => 'Next Work Center People',
+  'LBL_AUTOOPEN_NEXT_TASK' => 'Auto Open Next Task',
+  'LBL_BTN_ASSIGN_BUTTON_LABEL' => 'Operating Assign',
+  'LBL_WOOP_ACTION' => 'Operating Assign',
 );
