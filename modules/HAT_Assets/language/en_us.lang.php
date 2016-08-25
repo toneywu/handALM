@@ -129,5 +129,6 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL_GIS' => 'MAP/GIS',
   'LBL_MAP_LAT_LNG' => 'Latitude-Longitude',
   'LBL_MAP_MARKER_TYPE' => 'Marker Type',
+  'LBL_MAP_TYPE'=>'Map Type',
 
 );

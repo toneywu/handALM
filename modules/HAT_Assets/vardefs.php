@@ -1349,20 +1349,16 @@ $dictionary['HAT_Assets'] = array(
       'studio' => 'visible'
       ),
 
-    //location -non-db
     'map_type' =>
     array (
             'source' => 'non-db', //Location
             'name' => 'map_type',
+            'default'=>'NONE',
             'vname' => 'LBL_MAP_TYPE',
             'type' => 'enum',
             'reportable' => true,
             'studio' => 'visible',
             'options' => 'cux_map_type_list',
-            'id_name' => 'asset_map_type',
-            'ext2' => 'HAT_Assets',
-            'module' => 'HAT_Assets',
-            'rname' => 'name',
             ),
     'asset_map_type' =>
           array (
@@ -1394,12 +1390,7 @@ $dictionary['HAT_Assets'] = array(
             'reportable' => true,
             'studio' => 'visible',
             'precision' => '8',
-            'id_name' => 'asset_map_lat',
-            'ext2' => 'HAT_Assets',
-            'module' => 'HAT_Assets',
-            'rname' => 'name',
             ),
-
     'asset_map_lat' =>
           array (
               'required' => true,
@@ -1433,10 +1424,6 @@ $dictionary['HAT_Assets'] = array(
             'reportable' => true,
             'studio' => 'visible',
             'precision' => '8',
-            'id_name' => 'asset_map_lng',
-            'ext2' => 'HAT_Assets',
-            'module' => 'HAT_Assets',
-            'rname' => 'name',
             ),
       'asset_map_lng' =>
           array (
@@ -1470,10 +1457,6 @@ $dictionary['HAT_Assets'] = array(
             'type' => 'int',
             'reportable' => true,
             'studio' => 'visible',
-            'id_name' => 'asset_map_zoom',
-            'ext2' => 'HAT_Assets',
-            'module' => 'HAT_Assets',
-            'rname' => 'name',
             ),
     'asset_map_zoom' =>
           array (
@@ -1503,10 +1486,6 @@ $dictionary['HAT_Assets'] = array(
               'reportable' => true,
               'studio' => 'visible',
               'options' => 'hat_map_marker_type_list',
-              'id_name' => 'asset_map_marker_type',
-              'ext2' => 'HAT_Assets',
-              'module' => 'HAT_Assets',
-              'rname' => 'name',
               ),
       'asset_map_marker_type' =>
           array (
@@ -1536,10 +1515,6 @@ $dictionary['HAT_Assets'] = array(
               'type' => 'relate',
               'reportable' => true,
               'studio' => 'visible',
-              'id_name' => 'asset_map_marker_data',
-              'ext2' => 'HAT_Assets',
-              'module' => 'HAT_Assets',
-              'rname' => 'name',
           ),
       'asset_map_marker_data' =>
           array (
@@ -1569,7 +1544,6 @@ $dictionary['HAT_Assets'] = array(
           'source' => 'non-db',
           'type' => 'varchar',
           'massupdate' => 0,
-
       ),
     'map_display_area' =>
     array (
@@ -1588,10 +1562,6 @@ $dictionary['HAT_Assets'] = array(
           'type' => 'relate',
           'reportable' => true,
           'studio' => 'visible',
-          'id_name' => 'asset_map_layer_id',
-          'ext2' => 'HAT_Assets',
-          'module' => 'HAT_Assets',
-          'rname' => 'name',
       ),
     'asset_map_layer_id' =>
           array (
@@ -1635,7 +1605,7 @@ $dictionary['HAT_Assets'] = array(
               'merge_filter' => 'disabled',
               'len' => '255',
               'size' => '20',
-              'id_name' => 'map_layer_id',
+              'id_name' => 'asset_map_layer_id',
               'ext2' => 'HAA_Maps',
               'module' => 'HAA_Maps',
               'rname' => 'name',

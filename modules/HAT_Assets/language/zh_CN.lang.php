@@ -131,5 +131,6 @@ $mod_strings = array (
   'LBL_MAP_SEARCH_AREA' => '搜索',
   'LBL_MAP_LAT_LNG' => '经度-纬度（Lat.-Lng.）',
   'LBL_MAP_MARKER_TYPE' => '标记方式',
+  'LBL_MAP_TYPE'=>'地图类型'
 
 );

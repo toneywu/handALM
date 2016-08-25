@@ -62,7 +62,7 @@ function initMap() { //被loadMapScript调用
 		if(marker_data != "") {
 			if(maker_type == "POINT"){
 				var Ob = JSON.parse(marker_data);
-				console.log(Ob.data);
+				//console.log(Ob.data);
 				var lnglat = Ob.data.split(",");
 				var position = new qq.maps.LatLng(lnglat[0],lnglat[1]);
 				var marker = new qq.maps.Marker({
@@ -510,37 +510,6 @@ function initMap() { //被loadMapScript调用
 		}
 	}
 
-	//加载点选的地图点
-	/*var markerPicking=new qq.maps.Marker({
-		//position:event.latLng,
-		animation:qq.maps.MarkerAnimation.BOUNCE,
-		map:map,
-		//ZIndex:1
-	});*/
-
-	//加载点击定位事件
-	/*qq.maps.event.addListener(map, 'click', function(event) {
-		geocoder = new qq.maps.Geocoder({
-			complete:function(result){
-
-				if($("#map_type").val()=='TENCENT') {
-					$("#map_search_text").val(result.detail.address);
-					if($("#chk_rewrite_address").is(':checked')) { //如果返写将地址返回文本框
-						$("#map_address").val($("#map_search_text").val());
-					}
-				}
-
-				map.setCenter(event.latLng);
-				map.panTo(event.latLng);
-
-			}
-		});
-		geocoder.getAddress(event.latLng);
-		$("#map_lat").val((event.latLng.getLat()).toFixed(5));//保留5位小数
-		$("#map_lng").val((event.latLng.getLng()).toFixed(5));
-		markerPicking.setPosition(event.latLng);
-
-	}); */
 
 	if ($("#map_type").val()=='TENCENT') {
 		//加载搜索事件
@@ -607,8 +576,7 @@ $(document).ready(function(){
 
 
 
-	map_type.change(function(){ //每次变更地图类型都会将定位清空
-
+	$("#map_type").change(function(){ //每次变更地图类型都会将定位清空
 		map_lat.val("0");
 		map_lng.val("0");
 		map_zoom.val("15");
