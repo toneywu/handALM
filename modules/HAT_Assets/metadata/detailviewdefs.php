@@ -8,7 +8,7 @@ array (
     array (
       'includes' => 
       array (
-        0 => 
+        0 =>
         array (
           'file' => 'modules/HAT_Assets/js/detailview_map_point.js',
         ),
@@ -436,56 +436,66 @@ array (
           ),
           1 => '',
         ),
-        1 => 
-        array (
-          0 => 
+      1 =>
           array (
-            'name' => 'map_address',
-            'studio' => 'visible',
-            'label' => 'LBL_MAP_ADDRESS',
+              0 =>
+                  array (
+                      'name' => 'map_search_area',
+                      'label' => 'LBL_MAP_SEARCH_AREA',
+                  ),
           ),
-          1 => 
+      2 =>
           array (
-            'name' => 'map_zoom',
-            'studio' => 'visible',
-            'label' => 'LBL_MAP_ZOOM',
+              0 => 'map_layer',
+              1 =>
+                  array (
+                      'name' => 'map_layer_url',
+                      'studio' => 'visible',
+                      'label' => 'LBL_MAP_LAYER_URL',
+                  ),
           ),
-        ),
-        2 => 
-        array (
-          0 => 
+      3 =>
           array (
-            'name' => 'map_lat',
-            'studio' => 'visible',
-            'label' => 'LBL_MAP_LAT',
+              0 =>
+                  array (
+                      'name' => 'map_zoom',
+                      'label' => 'LBL_MAP_ZOOM',
+                  ),
+              1 =>
+                  array (
+                      'name' => 'map_lat',
+                      'label' => 'LBL_MAP_LAT',
+                      'customCode' => '<input type="hidden" name="map_marker_data" id="map_marker_data"  value="{$fields.map_marker_data.value}" >',
+                  ),
           ),
-          1 => 
+      4 =>
           array (
-            'name' => 'map_lng',
-            'studio' => 'visible',
-            'label' => 'LBL_MAP_LNG',
+              0 =>
+                  array (
+                      'name' => 'map_type',
+                      'label' => 'LBL_MAP_TYPE',
+                  ),
+              1 =>
+                  array (
+                      'name' => 'map_marker_type',
+                      'label' => 'LBL_MAP_MARKER_TYPE',
+                  ),
           ),
-        ),
-        3 => 
-        array (
-          0 => 
+      5 =>
           array (
-            'name' => 'map_display_area',
-            'label' => 'LBL_MAP_DISPLAY_AREA',
-            'customCode' => '<div id="cuxMap" style="background-color: #efefef; height: 20px; width: 80%;">map will be loaded here</div>',
+              0 =>
+                  array (
+                      'name' => 'map_display_area',
+                      'label' => 'LBL_MAP_DISPLAY_AREA',
+                      'customCode' => '<div id="cuxMap" style="background-color: #efefef; height: 20px; width: 80%;">map will be loaded here</div><input type="hidden" name="map_layer_url" id="map_layer_url" value="{$fields.map_layer_url.value}">',
+                  ),
           ),
-        ),
       ),
       'lbl_detailview_panel1' => 
       array (
         0 => 
         array (
-          0 => 
-          array (
-            'name' => 'domain',
-            'studio' => 'visible',
-            'label' => 'LBL_DOMAIN',
-          ),
+          0 => 'framework'
           1 => '',
         ),
         1 => 

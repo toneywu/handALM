@@ -17,8 +17,9 @@ function icon_edit_init(icon_field_obj) {
 	icon_field_obj.after('<button class="btn btn-default"  id="target_iconpicker" role="iconpicker"></button>');
 
 	//SUGAR.util.doWhen("typeof(iconpicker) != 'undefined'", function(){
-	$.getScript("custom/resources/bootstrap-iconpicker/bootstrap-iconpicker/js/bootstrap-iconpicker.js",
-	function () {
+/*	$.getScript("custom/resources/bootstrap-iconpicker/bootstrap-iconpicker/js/bootstrap-iconpicker.js",
+	function () {*/
+	SUGAR.util.doWhen("typeof iconpicker != 'undefined'", function() {
 			$('#target_iconpicker').iconpicker();
 			$('#target_iconpicker').iconpicker('setCols', 9);
 			$('#target_iconpicker').iconpicker('setIconset', 'materialdesign');

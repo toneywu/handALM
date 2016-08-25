@@ -79,7 +79,8 @@ $mod_strings = array (
   'LBL_TRANSATION_SUBPANEL' => 'Asset Transactions',
   'LBL_SR_SUBPANEL' => 'Service Requests',
   'LBL_WO_SUBPANEL' => 'Work Orders',
-  'LBL_DOMAIN' => 'Asset Opt.Domain',
+  'LBL_FRAMEWORK' => 'Business Framework',
+  'LBL_FRAMEWORK_ID' => 'Business Framework(ID)',
   'LBL_ICON'=>'Asset Icon',
   'LBL_ASSET_NAME'=>'Product Name',
   'LBL_ASSET_NAME_RULE'=>'Asset Naming Rule',
@@ -123,5 +124,10 @@ $mod_strings = array (
   'LBL_ATTRIBUTE8'=>'Extra Attribute8',
   'LBL_ATTRIBUTE9'=>'Extra Attribute9',
   'LBL_ATTRIBUTE10'=>'Extra Attribute10',
-  'LBL_METERS_SUBPANEL'=>'Measuring Points / Meters'
+  'LBL_METERS_SUBPANEL'=>'Measuring Points / Meters',
+  'LBL_DETAILVIEW_PANEL_GIS' => 'MAP/GIS',
+  'LBL_EDITVIEW_PANEL_GIS' => 'MAP/GIS',
+  'LBL_MAP_LAT_LNG' => 'Latitude-Longitude',
+  'LBL_MAP_MARKER_TYPE' => 'Marker Type',
+
 );

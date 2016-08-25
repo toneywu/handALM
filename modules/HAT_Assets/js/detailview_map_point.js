@@ -1,61 +1,208 @@
+
 function initMap() {
-        //∂®“Âmap±‰¡ø µ˜”√ qq.maps.Map() ππ‘Ï∫Ø ˝   ªÒ»°µÿÕºœ‘ æ»›∆˜
+	//var myLatlng = new qq.maps.LatLng(-34.397, 150.644);
 	var default_zoom_level;
+	var maker_type = '';
+	var maker_data = '';
+	maker_type = $("#map_marker_type").val();
+	marker_data = $("#map_marker_data").val();
 	default_zoom_level=parseInt($("#map_zoom").text());
-	if(default_zoom_level==""){
-		$("#map_zoom").val(15);
-		default_zoom_level=15
+	if(isNaN(default_zoom_level)||default_zoom_level==""){
+		//$("#map_zoom").val(15);
+		default_zoom_level=15;
 	}
-					  var myOptions = {
-						zoom: default_zoom_level,
-						mapTypeId: qq.maps.MapTypeId.ROADMAP
-					  };
-					  var map = new qq.maps.Map(document.getElementById("cuxMap"), myOptions);
-		
-		var current_lat=$("#map_lat").text();
-		var current_lng=$("#map_lng").text();
-		
-		if ((current_lat!="") && (current_lng!="")) {	
-			var current_latlng = new qq.maps.LatLng(current_lat,current_lng);
-			map.setCenter(current_latlng);
-			map.panTo(current_latlng);
-			
-			var marker=new qq.maps.Marker({
-                position:(current_latlng),
-				animation:qq.maps.MarkerAnimation.DROP,
-				map:map
-			});			
-		} else {
-			//ªÒ»°≥« –¡–±ÌΩ”ø⁄…Ë÷√÷––ƒµ„
+//alert(default_zoom_level);
+	if ($("#map_type").val()=='TENCENT') {
+
+		var myOptions = {
+			zoom: default_zoom_level,
+			mapTypeId: qq.maps.MapTypeId.ROADMAP
+		};
+		map = new qq.maps.Map(document.getElementById("cuxMap"), myOptions);
+		if(marker_data != "") {
+			if(maker_type == "POINT"){
+				var Ob = JSON.parse(marker_data);
+				console.log(Ob.data);
+				var lnglat = Ob.data.split(",");
+				var position = new qq.maps.LatLng(lnglat[0],lnglat[1]);
+				var marker = new qq.maps.Marker({
+					position: position,
+					map: map
+				});
+			}else if(maker_type == "CIRCLE"){
+				var Ob = JSON.parse(marker_data);
+				var lnglat = Ob.center.split(",");
+				var position = new qq.maps.LatLng(lnglat[0],lnglat[1]);
+				var circle=new qq.maps.Circle({
+					map:map,
+					center:position,
+					radius:parseFloat(Ob.radius),
+					strokeWeight:2
+				});
+			}else{
+				var larr = new Array();
+				var path = new Array();
+				var Ob = JSON.parse(marker_data);
+				larr = Ob.data.split("|");
+				for(var i=0;i<larr.length;i++){
+					var lnglat = larr[i].split(",");
+					path[i] = new qq.maps.LatLng(lnglat[0],lnglat[1]);
+				}
+				//console.log(path);
+				if(maker_type == "POLYLINE") {
+					var polyline = new qq.maps.Polyline({
+						path: path,
+						strokeColor: '#D00',
+						strokeWeight: 2,
+						editable: false,
+						map: map
+					});
+				}else{
+					var polygon = new qq.maps.Polygon({
+						path:path,
+						strokeColor: '#D00',
+						strokeWeight: 2,
+						map: map
+					});
+				}
+			}
+		}
+
+	} else if ($("#map_type").val()=='CUX') {
+		//ËÆæÁΩÆCoordMapType  Ê†∑ÂºèÂ±ûÊÄß
+		function CoordMapType() {
+		}
+		CoordMapType.prototype.tileSize = new qq.maps.Size(256, 256);
+		CoordMapType.prototype.maxZoom = 19;
+		CoordMapType.prototype.opacity = 0.5;
+		//ÂàõÂª∫divÊ†∑ÂºèÂÖÉÁ¥†
+		CoordMapType.prototype.getTile = function (coord, zoom, ownerDocument) {
+			var div = ownerDocument.createElement('div');
+			//iv.innerHTML = coord;
+			div.style.width = this.tileSize.width + 'px';
+			div.style.height = this.tileSize.height + 'px';
+			div.style.fontSize = '10';
+			div.style.borderStyle = 'solid';
+			div.style.borderWidth = '1px';
+			div.style.borderColor = '#AAAAAA';
+			div.style.backgroundColor = '#E5E3DF';
+			return div;
+		};
+
+		CoordMapType.prototype.name = 'ÁΩëÊ†º';
+		CoordMapType.prototype.alt = 'ÊòæÁ§∫Ëá™ÂÆö‰πâÁΩëÊ†º';
+		var coordinateMapType = new CoordMapType();
+
+		var center = new qq.maps.LatLng(0,0);
+		var map = new qq.maps.Map(document.getElementById('cuxMap'),{
+			center: center,
+			zoom: default_zoom_level,
+			mapTypeId: 'coordinate',
+
+		});
+		if(marker_data != "") {
+			if(maker_type == "POINT"){
+				var Ob = JSON.parse(marker_data);
+				console.log(Ob.data);
+				var lnglat = Ob.data.split(",");
+				var position = new qq.maps.LatLng(lnglat[0],lnglat[1]);
+				var marker = new qq.maps.Marker({
+					position: position,
+					map: map
+				});
+			}else if(maker_type == "CIRCLE"){
+				var Ob = JSON.parse(marker_data);
+				var lnglat = Ob.center.split(",");
+				var position = new qq.maps.LatLng(lnglat[0],lnglat[1]);
+				var circle=new qq.maps.Circle({
+					map:map,
+					center:position,
+					radius:parseFloat(Ob.radius),
+					strokeWeight:2
+				});
+			}else{
+				var larr = new Array();
+				var path = new Array();
+				var Ob = JSON.parse(marker_data);
+				larr = Ob.data.split("|");
+				for(var i=0;i<larr.length;i++){
+					var lnglat = larr[i].split(",");
+					path[i] = new qq.maps.LatLng(lnglat[0],lnglat[1]);
+				}
+				//console.log(path);
+				if(maker_type == "POLYLINE") {
+					var polyline = new qq.maps.Polyline({
+						path: path,
+						strokeColor: '#D00',
+						strokeWeight: 2,
+						editable: false,
+						map: map
+					});
+				}else{
+					var polygon = new qq.maps.Polygon({
+						path:path,
+						strokeColor: '#D00',
+						strokeWeight: 2,
+						map: map
+					});
+				}
+			}
+		}
+		//map.overlayMapTypes.insertAt(0, coordinateMapType);
+		map.mapTypes.set('coordinate', coordinateMapType);
+		//ÂàõÂª∫Áü©ÂΩ¢Âè†Âä†Â±Ç
+		var groundOverlay = new qq.maps.GroundOverlay({
+			map:map,
+			imageUrl:$("#map_layer_url").val(),//e.g. http://localhost/suite/upload/maps/cux_map.png
+			bounds:new qq.maps.LatLngBounds(new qq.maps.LatLng(-0.03,-0.04),new qq.maps.LatLng(0.03, 0.04)),
+			opacity:0.8,
+			//ZIndex:0
+		});
+	}
+
+	//Âä†ËΩΩÂú∞ÂõæÂÆåÊàêÂêéÔºåÂºÄÂßãÂä†ËΩΩÂÆö‰ΩçÁÇπ
+	var current_lat=$("#map_lat").text();
+	var current_lng=$("#map_lng").text();
+	var current_latlng = new qq.maps.LatLng(current_lat,current_lng);
+
+	if ((current_lat!="") && (current_lng!="")) {
+		map.setCenter(current_latlng);
+		map.panTo(current_latlng);
+
+		var marker=new qq.maps.Marker({
+			position:(current_latlng),
+			animation:qq.maps.MarkerAnimation.DROP,
+			map:map
+		});
+	} else { //if lat and lng is empty, load current city as the default position on map
+		if ($("#map_type").val()=="TENCENT") {
 			citylocation = new qq.maps.CityService({
 				complete : function(result){
 					map.setCenter(result.detail.latLng);
 				}
 			});
-			citylocation.searchLocalCity();//µ˜”√searchLocalCity();∑Ω∑®    ∏˘æ›”√ªßIP≤È—Ø≥« ––≈œ¢°£
-			
+			citylocation.searchLocalCity();
 		}
-		
-	}
 
+	}
+}
 
 function loadMapScript() {
-			var script = document.createElement("script");
-			script.type = "text/javascript";
-			script.src = "http://map.qq.com/api/js?v=2.exp&callback=initMap";
-			$("#cuxMap").css("height","250px");
-			document.body.appendChild(script);
-		}
-		
-
+	var script = document.createElement("script");
+	script.type = "text/javascript";
+	script.src = "http://map.qq.com/api/js?v=2.exp&callback=initMap";
+	$("#cuxMap").css("height","250px");//style="height:250px";
+	$("#cuxMap").css("width","100%");
+	document.body.appendChild(script);
+}
 
 $(document).ready(function(){
-		if($("#map_lat").text()!="") {
+	loadMapScript();
+		/*if($("#map_lat").text()!="") {
 			$("#detailpanel_2").show();
-			loadMapScript(); 
-			//alert("loaded 3");
-			//alert($("#location_maps_lat_c").text());
+			alert("loaded 3");
+			alert($("#location_maps_lat_c").text());
 		} else {
 			$("#detailpanel_2").hide();
-		}	
+		}*/
 	});

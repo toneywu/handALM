@@ -1467,7 +1467,7 @@ $dictionary['HAT_Assets'] = array(
             'source' => 'non-db', //Location
             'name' => 'map_zoom',
             'vname' => 'LBL_MAPS_ZOOM',
-            'type' => 'relate',
+            'type' => 'int',
             'reportable' => true,
             'studio' => 'visible',
             'id_name' => 'asset_map_zoom',
@@ -1925,7 +1925,7 @@ $dictionary['HAT_Assets'] = array(
     array (
       'required' => false,
       'name' => 'haa_frameworks_id',
-      'vname' => 'LBL_DOMAIN_ID',
+      'vname' => 'LBL_FRAMEWORK_ID',
       'type' => 'id',
       'massupdate' => 0,
       'no_default' => false,
@@ -1942,12 +1942,12 @@ $dictionary['HAT_Assets'] = array(
       'len' => 36,
       'size' => '20',
       ),
-    'domain' =>
+    'framework' =>
     array (
       'required' => true,
       'source' => 'non-db',
-      'name' => 'domain',
-      'vname' => 'LBL_DOMAIN',
+      'name' => 'framework',
+      'vname' => 'LBL_FRAMEWORK',
       'type' => 'relate',
       'massupdate' => 0,
       'no_default' => false,

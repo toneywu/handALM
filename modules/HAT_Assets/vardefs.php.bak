@@ -1681,10 +1681,10 @@ $dictionary['HAT_Assets'] = array(
       'quicksearch' => 'enabled',
       'studio' => 'visible',
       ),
-    'haa_frameworks_id' =>
+    'hat_domains_id' =>
     array (
       'required' => false,
-      'name' => 'haa_frameworks_id',
+      'name' => 'hat_domains_id',
       'vname' => 'LBL_DOMAIN_ID',
       'type' => 'id',
       'massupdate' => 0,
@@ -1723,9 +1723,9 @@ $dictionary['HAT_Assets'] = array(
       'merge_filter' => 'disabled',
       'len' => '255',
       'size' => '20',
-      'id_name' => 'haa_frameworks_id',
-      'ext2' => 'HAA_Frameworks',
-      'module' => 'HAA_Frameworks',
+      'id_name' => 'hat_domains_id',
+      'ext2' => 'HAT_Domains',
+      'module' => 'HAT_Domains',
       'rname' => 'name',
       'quicksearch' => 'enabled',
       'studio' => 'visible',

@@ -23,18 +23,29 @@ class HAT_AssetsViewDetail extends ViewDetail
     	}
 
 
-		$bean_location = BeanFactory::getBean('HAT_Asset_Locations', $this->bean->hat_asset_locations_hat_assetshat_asset_locations_ida); 
-		if ($bean_location) { // test if $bean_location was loaded successfully
-				// this is only necessary if you'll need custom fields from ModuleB
-				//$bean_location->custom_fields->retrieve();
-				// now set some variables of current record on ModuleA to values retrieved from the related record on ModuleB
-				$this->bean->map_lat = isset($bean_location->map_lat)?$bean_location->map_lat:''; 
-				$this->bean->map_lng = isset($bean_location->map_lng)?$bean_location->map_lng:''; //$bean_location->map_lng;
-				$this->bean->map_address = isset($bean_location->map_address)?$bean_location->map_address:'';//$bean_location->map_address;
-				$this->bean->map_zoom = isset($bean_location->map_zoom)?$bean_location->map_zoom:'';//$bean_location->map_zoom;
-		}
-		$this->bean->map_zoom = isset($bean_location->map_zoom)?$bean_location->map_zoom:'';//$bean_location->map_zoom;
+        //var_dump($bean_location);
 
+        if(!$this->bean->use_location_gis){
+            $this->bean->map_type = $this->bean->asset_map_type;
+            $this->bean->map_lat = $this->bean->asset_map_lat;
+            $this->bean->map_lng = $this->bean->asset_map_lng;
+            $this->bean->map_zoom = $this->bean->asset_map_zoom;
+            $this->bean->map_marker_type = $this->bean->asset_map_marker_type;
+            $this->bean->map_marker_data = $this->bean->asset_map_marker_data;
+            $this->bean->map_layer_id = $this->bean->asset_map_layer_id;
+        }else{
+            $bean_location = BeanFactory::getBean('HAT_Asset_Locations', $this->bean->hat_asset_locations_hat_assetshat_asset_locations_ida);
+            if ($bean_location) { // test if $bean_location was loaded successfully
+                $this->bean->map_type =  isset($bean_location->map_type)?$bean_location->map_type:'NONE';
+                $this->bean->map_lat = isset($bean_location->map_lat)?$bean_location->map_lat:'';
+                $this->bean->map_lng = isset($bean_location->map_lng)?$bean_location->map_lng:'';
+                $this->bean->map_address = isset($bean_location->map_address)?$bean_location->map_address:'';
+                $this->bean->map_zoom = isset($bean_location->map_zoom)?$bean_location->map_zoom:'';
+                $this->bean->map_marker_type = isset($bean_location->map_marker_type)?$bean_location->map_marker_type:'';;
+                $this->bean->map_marker_data = isset($bean_location->map_marker_data)?$bean_location->map_marker_data:'';;
+                $this->bean->map_layer_id = isset($bean_location->map_layer_id)?$bean_location->map_layer_id:'';;
+            }
+        }
 /*
 		if (isset($this->bean->asset_status))
 			$this->bean->asset_status = "<span class='color_tag color_asset_status_".$this->bean->asset_status."'>".$app_list_strings['asset_status_list'][$this->bean->asset_status]."</span>";
