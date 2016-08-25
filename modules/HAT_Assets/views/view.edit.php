@@ -7,16 +7,18 @@ class HAT_AssetsViewEdit extends ViewEdit
 {
 
 	function Display() {
-        //从Session加载Business Framework字段的值
-        $beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
 
-        $html="";
-        if(isset($beanFramework)) {
-            $this->bean->hat_framework_id = $_SESSION["current_framework"];
-            $this->bean->framework = $beanFramework->name;
-            //当前字段由Relate类型变为只读，不可修改
-            $html ='<input type="hidden" name="hat_framework_id" value="'.$this->bean->hat_framework_id .'"><input type="hidden" name="framework" value="'.$this->bean->framework .'">'. $this->bean->framework;
+        if (empty($this->bean->hat_framework_id)) {
+            //从Session加载Business Framework字段的值
+            $beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
+
+            if(isset($beanFramework)) {
+                $this->bean->hat_framework_id = $_SESSION["current_framework"];
+                $this->bean->framework = $beanFramework->name;
+            }
         }
+        //当前字段由Relate类型变为只读，不可修改
+        $html ='<input type="hidden" name="hat_framework_id" value="'.$this->bean->hat_framework_id .'"><input type="hidden" name="framework" value="'.$this->bean->framework .'">'. $this->bean->framework;
         $this->ss->assign('FRAMEWORK',$html);
 
         //关联地图图层
