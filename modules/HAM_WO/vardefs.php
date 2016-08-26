@@ -1215,12 +1215,12 @@ $dictionary['HAM_WO'] = array (
 		),
 		#工单修改权限
 	'work_order_access' => array (
-			'required' => true,
+			'required' => false,
 			'name' => 'work_order_access',
 			'vname' => 'LBL_WORK_ORDER_ACCESS',
 			'type' => 'enum',
 			'massupdate' => 0,
-			'default' => 'WORKCENTER',
+			'no_default' => false,
 			'comments' => '',
 			'help' => '',
 			'importable' => 'true',
