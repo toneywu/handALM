@@ -62,9 +62,20 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 		$sql = "select woop_status from ham_woop where ham_woop.id='" . $id . "'";
 		$results = $db->query($sql);
 		$current_db_status = "";
+	
 		while ($result = $db->fetchByAssoc($results)) {
 			$current_db_status = $result['woop_status'];
 		}
+		
+		//没什么特殊的，就是工序在APPROVED之后可以手工变为WSCH、WMATL、WPCOND。 如果是这3个状态，同时同步工单状态=Y，就去修改工作单状态
+		if($current_db_status=="APPROVED"&&($this->woop_status=="WSCH"||$this->woop_status=="WMATL"||$this->woop_status=="WPCOND")&&$this->syn_wo_status=="Y"){
+			
+			$wo_bean = BeanFactory::getBean("HAM_WO",$this->ham_wo_id);
+			$wo_bean->wo_stauts=$this->woop_status;
+			$wo_bean->saveWO(false,'O',$this->woop_status);
+		}
+		
+		//die();
 
 		$next_woop = "SELECT woop_number
 													    FROM ham_woop

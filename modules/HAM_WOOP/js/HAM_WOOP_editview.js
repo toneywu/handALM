@@ -444,6 +444,7 @@ function date_finish_change(){
 	        $("#woop_status option[value='WPCOND']").remove();
 	        $("#woop_status option[value='INPRG']").remove();
 	        $("#woop_status option[value='REWORK']").remove();
+	        $("#woop_status option[value='SUBMITTED']").remove();
 	    } else if (current_header_status=="SUBMITTED") { //可以CANCEL和SUBMIT
 	        $("#woop_status option[value='APPROVED']").remove();
 	        $("#woop_status option[value='REJECTED']").remove();

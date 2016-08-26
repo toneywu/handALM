@@ -6,7 +6,15 @@
  */
 require_once ('modules/HAM_WO/HAM_WO_sugar.php');
 class HAM_WO extends HAM_WO_sugar {
-
+	
+	function saveWO($check_notify=false,$onlySave,$wo_status) {
+		if($onlySave=="O"){
+			$this->wo_status=$wo_status;
+			parent :: save($check_notify); //保存WO主体
+		}
+	}
+	
+	
 	function save($check_notify = false) {
 
 		//在保存之前通过getNumbering生成WO编号
@@ -50,7 +58,7 @@ class HAM_WO extends HAM_WO_sugar {
 			/*echo 'db_act_id = ' . $db_act_id . "<br>";
 			echo 'activity = ' . $this->activity . "<br>";
 			echo 'id = ' . $this->id . "<br>";*/
-			if ($this->wo_status == "DRAFT" && $db_bean[0]->activity!=null&&$db_bean[0]->activity != $this->activity) {
+			if ($this->wo_status == "DRAFT" && $db_bean[0]->activity != null && $db_bean[0]->activity != $this->activity) {
 				$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('', "ham_woop.ham_wo_id ='" . $this->id . "'");
 				if (!empty ($ham_woops)) {
 					foreach ($ham_woops as $ham_woop) {
@@ -61,6 +69,50 @@ class HAM_WO extends HAM_WO_sugar {
 				}
 			}
 		}
+
+		//工作单审批通过时（APPROVED）会将工单下第一道工序状态变为已批准（APPROVED）。其余工序状态变为等待前序（WPREV）。
+		//这里的第一道工序、以及后序工序不包括已经删除、取消或结束的工序
+		
+		if ($this->wo_status == "SUBMITTED"||$this->wo_status=="APPROVED") {
+			//遍历工序  
+			
+			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('WOOP_NUMBER', "ham_woop.woop_status not in ('CLOSED','CANCELED') and ham_wo_id='" . $this->id . "'");
+			if (!empty ($ham_woops)) {
+				
+				foreach ($ham_woops as $key => $value) {
+					if ($key == 0) {
+						
+						$ham_woops[0]->woop_status = "APPROVED";
+						
+					} else {
+						$ham_woops[$key]->woop_status = "WPREV";
+					}
+					$ham_woops[$key]->save();
+				}
+				
+			}
+		}elseif ( $this->wo_status == "CANCELED" ) {
+			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('WOOP_NUMBER', "ham_woop.woop_status not in ('COMPLETED','CLOSED') and ham_wo_id='" . $this->id . "'");
+			if (!empty ($ham_woops)) {
+				
+				foreach ($ham_woops as $key => $value) {
+					$ham_woops[$key]->woop_status = "CANCELED";
+					$ham_woops[$key]->save();
+				}
+				
+			}
+		}elseif ( $this->wo_status == "COMPLETED"|| $this->wo_status == "CLOSED") {
+			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('WOOP_NUMBER', "ham_wo_id='" . $this->id . "'");
+			if (!empty ($ham_woops)) {
+				
+				foreach ($ham_woops as $key => $value) {
+					$ham_woops[$key]->woop_status =$this->wo_status;
+					$ham_woops[$key]->save();
+				}
+			}
+		}
+		
+		//die();
 		parent :: save($check_notify); //保存WO主体
 		//add by yuan.chen@2016-07-22
 		$bean_id = $this->activity;

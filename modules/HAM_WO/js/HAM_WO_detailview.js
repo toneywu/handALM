@@ -47,7 +47,8 @@ function save(id,status_code){
 		$.ajax({
 			url: 'index.php?to_pdf=true&module=HAM_WO&action=saveBean&id=' + id+"&status_code="+status_code,
 			success: function (data) {
-				//alert(data);
+				
+			//	alert(data);
 				//$("#wo_status").after(data);
 				window.location.href = "index.php?module=HAM_WO&action=DetailView&record="+id;
 			},
