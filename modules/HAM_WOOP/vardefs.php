@@ -765,6 +765,25 @@ $dictionary['HAM_WOOP'] = array (
 			'merge_filter' => 'disabled',
 			
 		),
+		
+		#同步工单状态
+	'syn_wo_status' => array (
+			'required' => false,
+			'name' => 'syn_wo_status',
+			'vname' => 'LBL_SYN_WO_STATUS',
+			'type' => 'bool',
+			'massupdate' => 0,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => false,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+		),
 
 		#认领工单
 	'woop_action' => array (
