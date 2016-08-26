@@ -8,6 +8,13 @@ class HAT_AssetsViewEdit extends ViewEdit
 
 	function Display() {
 
+        //本函数完成以下事项
+        //1、初始化Framework
+        //2、初始化GIS信息
+        //3、加载基于AOS_Products的动态界面模板（FF）
+        //4、正常Display
+        //5、基于FF判断是否展开界面
+
         if (empty($this->bean->hat_framework_id)) {
             //从Session加载Business Framework字段的值
             $beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
@@ -52,11 +59,11 @@ class HAT_AssetsViewEdit extends ViewEdit
 	    //如果已经选择产品，无论是否产品对应的FlexForm有值，值将界面展开。
 	    //（如果没有产品，则界面保持折叠状态。）
 		if(isset($this->bean->aos_products_id) && ($this->bean->aos_products_id)!=""){
-                	echo '<script>$(".collapsed").switchClass("collapsed","expanded");</script>';
+            echo '<script>$(".collapsed").switchClass("collapsed","expanded");</script>';
          } else {
-            	echo '<script>$(".expanded").switchClass("expanded","collapsed");</script>';
+            echo '<script>$(".expanded").switchClass("expanded","collapsed");</script>';
          }
-/******************************
+            /******************************
             我们尝试使用以下语句在Display之前进行Panel属性的变更，但无法生效。属性变更了，依然还是会展开，所有采用JS的方式在加载后进行批量处理。
 			可以尝试在TPL模板中进行优化。目前可以实现功能，但打开数据时会有先展开但收缩的过程
 			foreach($this->ev->defs['templateMeta']['tabDefs'] as $tab_key => $tab_field ) {
@@ -69,6 +76,6 @@ class HAT_AssetsViewEdit extends ViewEdit
                 */
 
 
-}
+    }
 
 }//end class

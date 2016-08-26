@@ -1,5 +1,3 @@
-//$.getScript("modules/HAA_FF/ff_include.js")
-
 function trimStr(str){return str.replace(/(^\s*)|(\s*$)/g,"");}
 
 function setProductPopupReturn(popupReplyData){//选择完产品后的动作
@@ -17,7 +15,7 @@ function setProductPopupReturn(popupReplyData){//选择完产品后的动作
 	//开始建立flexFields
 	triger_setFF($("#haa_ff_id_c").val(),"HAT_Assets")
 	$(".expandLink").click();
-	$('#target_iconpicker').iconpicker('setIcon', $("#asset_icon").val());
+	$('#target_iconpicker').iconpicker('setIcon', $("#asset_icon"));
 	//图标显示
 
 }
@@ -72,6 +70,7 @@ function resetAssetName() { //自动生成资产铭牌号
 $(document).ready(function(){
 
 	//加载图标选择器，从modules\HAT_Assets\js\editview_icon_picker.js
+
 	SUGAR.util.doWhen("typeof icon_edit_init == 'function'", function(){
 		icon_edit_init($("#asset_icon"));
 	});
@@ -89,7 +88,7 @@ $(document).ready(function(){
 		resetAssetName();
 	});
 
-	$('#enable_vehicle_mgmt').change(function(){
+	$('#enable_vehicle_mgmt').change(function(){//针对是否启用车辆管理，显示对应字段
 		if( $(this).is(':checked')) {
 			mark_field_enabled('vin');
 			mark_field_enabled('engine_num');

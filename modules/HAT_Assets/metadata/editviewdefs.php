@@ -24,10 +24,10 @@ array (
         array (
           'file' => 'modules/HAT_Asset_Locations/js/editview_map_point.js',
           ),
-        4 => 
+/*        4 => 
         array (
           'file' => 'modules/HAT_Asset_Locations/js/HAT_Asset_Locations_editview.js',
-          ),
+          ),*/
         ),
       'maxColumns' => '2',
       'widths' => 
