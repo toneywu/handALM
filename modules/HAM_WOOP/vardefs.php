@@ -783,7 +783,6 @@ $dictionary['HAM_WOOP'] = array (
 			'reportable' => true,
 			'unified_search' => false,
 			'merge_filter' => 'disabled',
-			
 		),
 
 		#认领工单
