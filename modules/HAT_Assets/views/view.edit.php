@@ -13,7 +13,8 @@ class HAT_AssetsViewEdit extends ViewEdit
         //2、初始化GIS信息
         //3、加载基于AOS_Products的动态界面模板（FF）
         //4、正常Display
-        //5、基于FF判断是否展开界面
+        //5、处理Framework中的相关字段
+        //6、基于FF判断是否展开界面
 
         //1、初始化Framework
         if (empty($this->bean->hat_framework_id)) {
@@ -57,6 +58,24 @@ class HAT_AssetsViewEdit extends ViewEdit
 		}
 
 		parent::Display();
+
+        //处理Framework中的相关字段
+        if(isset($beanFramework)) {
+            if($beanFramework->owning_person_field_rule=='TEXT'){
+                $current_owning_person = isset($this->bean->owning_person)?($this->bean->owning_person):"";
+                $current_owning_person_id=isset($this->bean->owning_person_id)?$this->bean->owning_person_id:"";
+                $current_owning_person_desc_c=isset($this->bean->owning_person_desc_c)?$this->bean->owning_person_desc_c:"";
+                echo ('<script>$("#owning_person").parent().html(\'<input type="hidden" name="owning_person" id="owning_person" value="'.$current_owning_person.'"/><input type="hidden" name="owning_person_id" id="owning_person_id" value="'.$current_owning_person_id.'"/><input type="text" name="owning_person_desc_c" id="owning_person_desc_c" value="'.$current_owning_person_desc_c.'"/>\');</script>');
+            }
+
+
+            if($beanFramework->using_person_field_rule=='TEXT'){
+                $current_using_person = isset($this->bean->using_person)?($this->bean->using_person):"";
+                $current_using_person_id=isset($this->bean->using_person_id)?$this->bean->using_person_id:"";
+                $current_using_person_desc_c=isset($this->bean->using_person_desc_c)?$this->bean->using_person_desc_c:"";
+                echo ('<script>$("#using_person").parent().html(\'<input type="hidden" name="using_person" id="using_person" value="'.$current_using_person.'"/><input type="hidden" name="using_person_id" id="using_person_id" value="'.$current_using_person_id.'"/><input type="text" name="using_person_desc_c" id="using_person_desc_c" value="'.$current_using_person_desc_c.'"/>\');</script>');
+            }
+        }
 
 	    //如果已经选择产品，无论是否产品对应的FlexForm有值，值将界面展开。
 	    //（如果没有产品，则界面保持折叠状态。）
