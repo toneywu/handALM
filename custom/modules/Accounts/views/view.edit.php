@@ -45,9 +45,9 @@ class AccountsViewEdit extends ViewEdit
 
 	function Display() {
 		//1、业务框架
-		//2、读取Frame中销售及服务人员字段
-		//3、处理FF
-		//4、Display
+		//2、处理FF
+		//3、Display
+		//4、读取Frame中销售及服务人员字段
 		//5、处理FF展开
 
 		//*********************处理业务框架，以及业务框架下销售及服务人员是List或是Text START********************
