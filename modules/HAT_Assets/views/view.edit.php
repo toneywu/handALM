@@ -15,6 +15,7 @@ class HAT_AssetsViewEdit extends ViewEdit
         //4、正常Display
         //5、基于FF判断是否展开界面
 
+        //1、初始化Framework
         if (empty($this->bean->hat_framework_id)) {
             //从Session加载Business Framework字段的值
             $beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
@@ -28,7 +29,8 @@ class HAT_AssetsViewEdit extends ViewEdit
         $html ='<input type="hidden" name="hat_framework_id" value="'.$this->bean->hat_framework_id .'"><input type="hidden" name="framework" value="'.$this->bean->framework .'">'. $this->bean->framework;
         $this->ss->assign('FRAMEWORK',$html);
 
-        //关联地图图层
+        //2、初始化GIS信息
+        ////关联地图图层
         if(!$this->bean->use_location_gis){
             $this->bean->map_type = $this->bean->asset_map_type;
             $this->bean->map_lat = $this->bean->asset_map_lat;

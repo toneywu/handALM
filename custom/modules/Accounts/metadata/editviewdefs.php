@@ -91,9 +91,10 @@ array (
         array (
           0 => 
           array (
-            'name' => 'frame_c',
+            'name' => 'framework_c',
             'studio' => 'visible',
             'label' => 'LBL_FRAME',
+            'customCode' => '{$FRAMEWORK_C}',
           ),
           1 => 
           array (
@@ -257,12 +258,14 @@ array (
             'name' => 'sales_responsible_person_c',
             'studio' => 'visible',
             'label' => 'LBL_SALES_RESPONSIBLE_PERSON',
+            /*'customCode' => '{$SALES_RESPONSIBLE_PERSON_C}',*/
           ),
           1 => 
           array (
             'name' => 'service_responsible_person_c',
             'studio' => 'visible',
             'label' => 'LBL_SERVICE_RESPONSIBLE_PERSON',
+            /*'customCode' => '{$SERVICE_RESPONSIBLE_PERSON_C}',*/
           ),
         ),
         3 => 

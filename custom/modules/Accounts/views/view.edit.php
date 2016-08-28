@@ -44,15 +44,29 @@ class AccountsViewEdit extends ViewEdit
 {
 
 	function Display() {
-
-		parent::Display();
-
+		//1、业务框架
+		//2、读取Frame中销售及服务人员字段
+		//3、处理FF
+		//4、Display
+		//5、处理FF展开
 
 		//*********************处理业务框架，以及业务框架下销售及服务人员是List或是Text START********************
+        if (empty($this->bean->haa_frameworks_id_c)) {
+            //从Session加载Business Framework字段的值
+            $beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
 
+            if(isset($beanFramework)) {
+                $this->bean->haa_frameworks_id_c = $_SESSION["current_framework"];
+                $this->bean->framework_c = $beanFramework->name;
+            }
+        }
+        //当前字段由Relate类型变为只读，不可修改
+        $html ='<input type="hidden" name="hat_framework_id" value="'.$this->bean->haa_frameworks_id_c .'"><input type="hidden" name="framework" value="'.$this->bean->framework_c .'">'. $this->bean->framework_c;
+        $this->ss->assign('FRAMEWORK_C',$html);
 
 
 		//*********************处理业务框架，以及业务框架下销售及服务人员是List或是Text END********************
+
 
 
 		//*********************处理FF界面 START********************
@@ -68,6 +82,26 @@ class AccountsViewEdit extends ViewEdit
 		}
         $ff_id_field = '<input id=haa_ff_id name=haa_ff_id type=hidden '.(isset($ff_id)?'value='.$ff_id:'').'>';
         echo '<script>if($("#haa_ff_id").length==0) { $("#EditView").append("'.$ff_id_field.'");}</script>';
+
+		parent::Display();
+
+
+        if(isset($beanFramework)) {
+            if($beanFramework->sales_person_field_rule=='TEXT'){
+	        	$current_sales_responsible_person_c = isset($this->bean->sales_responsible_person_c)?($this->bean->sales_responsible_person_c):"";
+    	    	$current_contact_id_c=isset($this->bean->contact_id_c)?$this->bean->contact_id_c:"";
+        		$current_sales_person_desc_c=isset($this->bean->sales_person_desc_c)?$this->bean->sales_person_desc_c:"";
+                echo ('<script>$("#sales_responsible_person_c").parent().html(\'<input type="hidden" name="sales_responsible_person_c" id="sales_responsible_person_c" value="'.$current_sales_responsible_person_c.'"/><input type="hidden" name="contact_id_c" id="contact_id_c" value="'.$current_contact_id_c.'"/><input type="text" name="sales_person_desc_c" id="sales_person_desc_c" value="'.$current_sales_person_desc_c.'"/>\');</script>');
+            }
+
+
+            if($beanFramework->service_person_field_rule=='TEXT'){
+        		$current_service_responsible_person_c = isset($this->bean->service_responsible_person_c)?($this->bean->service_responsible_person_c):"";
+        		$current_contact_id1_c=isset($this->bean->contact_id1_c)?$this->bean->contact_id1_c:"";
+        		$current_service_person_desc_c=isset($this->bean->service_person_desc_c)?$this->bean->service_person_desc_c:"";
+        	    echo ('<script>$("#service_responsible_person_c").parent().html(\'<input type="hidden" name="service_responsible_person_c" id="service_responsible_person_c" value="'.$current_service_responsible_person_c.'"/><input type="hidden" name="contact_id1_c" id="contact_id1_c" value="'.$current_contact_id1_c.'"/><input type="text" name="service_person_desc_c" id="service_person_desc_c" value="'.$current_service_person_desc_c.'"/>\');</script>');
+            }
+        }
 
 		//如果已经选择business_type，无论是否business_type对应的FlexForm有值，值将界面展开。
 	    //（如果没有产品，则界面保持折叠状态。）

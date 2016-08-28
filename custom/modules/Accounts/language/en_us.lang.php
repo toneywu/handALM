@@ -1,18 +1,18 @@
 <?php
-// created: 2016-08-02 20:52:05
+// created: 2016-08-27 07:36:25
 $mod_strings = array (
-  'LNK_NEW_ACCOUNT' => 'Create Organization / Customer / Supplier',
+  'LNK_NEW_ACCOUNT' => 'Create Organization',
   'LNK_ACCOUNT_LIST' => 'View Organizations',
   'LNK_IMPORT_ACCOUNTS' => 'Import Organizations',
-  'MSG_SHOW_DUPLICATES' => 'The organization / customer / supplier record you are about to create might be a duplicate of an organization / customer / supplier record that already exists. Organization / Customer / Supplier records containing similar names are listed below.Click Save to continue creating this new organization / customer / supplier, or click Cancel to return to the module without creating the organization / customer / supplier.',
-  'LBL_SAVE_ACCOUNT' => 'Save Organization / Customer / Supplier',
-  'LBL_LIST_FORM_TITLE' => 'Organization / Customer / Supplier List',
-  'LBL_SEARCH_FORM_TITLE' => 'Organization / Customer / Supplier Search',
+  'MSG_SHOW_DUPLICATES' => 'The organization record you are about to create might be a duplicate of an organization record that already exists. Organization records containing similar names are listed below.Click Save to continue creating this new organization, or click Cancel to return to the module without creating the organization.',
+  'LBL_SAVE_ACCOUNT' => 'Save Organization',
+  'LBL_LIST_FORM_TITLE' => 'Organization List',
+  'LBL_SEARCH_FORM_TITLE' => 'Organization Search',
   'LBL_MEMBER_OF' => 'Member of (Select the Parent Org)',
   'LBL_MEMBERS' => 'Members',
   'LBL_MEMBER_ORG_SUBPANEL_TITLE' => 'Member Organizations',
   'LBL_HOMEPAGE_TITLE' => 'My Organizations',
-  'LBL_PARENT_ACCOUNT_ID' => 'Parent Organization / Customer / Supplier ID',
+  'LBL_PARENT_ACCOUNT_ID' => 'Parent Organization ID',
   'LBL_MODULE_NAME' => 'Organizations',
   'LBL_IS_LE' => 'Company/Legal Entity?',
   'LBL_IS_COOPERATION_GROUP' => 'Cooperation Group?',
@@ -69,4 +69,12 @@ $mod_strings = array (
   'LBL_ATTRIBUTE5' => 'Attribute 5',
   'LBL_HAA_QUAL_SUBPANEL' => 'Qualification / License',
   'LBL_EDITVIEW_PANEL5' => 'Basic Information',
+  'LBL_FRAME_HAA_FRAMEWORKS_ID' => 'Business Framework (related Business Framework ID)',
+  'LBL_FRAME' => 'Business Framework',
+  'LBL_SALES_NOTE' => 'Sales Note',
+  'LBL_SERVICE_NOTE' => 'Service Note',
+  'LBL_SALES_PERSON_DESC' => 'Sales Person Desc',
+  'LBL_SERVICE_PERSON_DESC' => 'Service Person Desc',
+  'LBL_CUSTOMER_CLASSS_HAA_CODES_ID' => 'Customer Class (related ID)',
+  'LBL_CUSTOMER_CLASSS' => 'Customer Class',
 );
