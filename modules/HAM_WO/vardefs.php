@@ -25,7 +25,6 @@ $dictionary['HAM_WO'] = array (
 			'len' => 36,
 			'size' => '20',
 
-			
 		),
 		'site' => array (
 			'required' => true,
@@ -1210,17 +1209,15 @@ $dictionary['HAM_WO'] = array (
 			'rname' => 'name',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
-
-			
 		),
 		#工单修改权限
 	'work_order_access' => array (
-			'required' => false,
+			'required' => true,
 			'name' => 'work_order_access',
 			'vname' => 'LBL_WORK_ORDER_ACCESS',
 			'type' => 'enum',
 			'massupdate' => 0,
-			'no_default' => false,
+			'default' => 'WORKCENTER',
 			'comments' => '',
 			'help' => '',
 			'importable' => 'true',
@@ -1236,7 +1233,6 @@ $dictionary['HAM_WO'] = array (
 			'options' => 'ham_wo_access_right_list',
 			'studio' => 'visible',
 			'dependency' => false,
-			
 		),
 
 		#工序完工时可指派后续人员

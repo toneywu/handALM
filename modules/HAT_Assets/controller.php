@@ -18,6 +18,14 @@ class HAT_AssetsController extends SugarController {
              $this->bean->asset_map_marker_type = $this->bean->map_marker_type;
              $this->bean->asset_map_marker_data = $this->bean->map_marker_data;
              $this->bean->asset_map_layer_id = $this->bean->map_layer_id;
+        } else {
+             $this->bean->asset_map_type = "NONE";
+             $this->bean->asset_map_lat = "";
+             $this->bean->asset_map_lng = "";
+             $this->bean->asset_map_zoom = "";
+             $this->bean->asset_map_marker_type ="";
+             $this->bean->asset_map_marker_data = "";
+             $this->bean->asset_map_layer_id = "";
         }
         parent::action_save();
     }

@@ -51,7 +51,7 @@ array (
           array (
             'name' => 'sr_hat_domains_rule',
             'studio' => 'visible',
-            'label' => 'LBL_SR_HAT_DOMAINS_RULE',
+            'label' => 'LBL_SR_HAA_FRAMEWORKS_RULE',
           ),
           1 => 'name',
         ),

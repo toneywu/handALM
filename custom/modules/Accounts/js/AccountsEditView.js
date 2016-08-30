@@ -16,27 +16,27 @@ function DocumentReady() {
             $("#detailpanel_5").hide();
             mark_field_disabled("registration_id_c")
         }
-    }); 
+    });
     $('#is_customer_c').change(function(){ //是否是客户，如果是显示客服信息
         if( $(this).is(':checked')) {
             $("#detailpanel_4").show();
         } else {
             $("#detailpanel_4").hide();
         }
-    }); 
+    });
     $('#is_cooperation_group_c').change(function(){ //是否是客户，如果是显示客服信息
         if( $(this).is(':checked')) {
             mark_field_disabled("parent_name")
         } else {
             mark_field_enabled("parent_name",true);
         }
-    }); 
+    });
 
-
-    $('#is_le_c').change();
-    $('#is_customer_c').change();
-    $('#is_cooperation_group_c').change();
-
+    SUGAR.util.doWhen("typeof mark_field_disabled == 'function'", function(){
+        $('#is_le_c').change();
+        $('#is_customer_c').change();
+        $('#is_cooperation_group_c').change();
+    })
 }
 
 

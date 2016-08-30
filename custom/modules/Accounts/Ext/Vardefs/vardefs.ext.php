@@ -124,9 +124,9 @@ $dictionary['Account']['fields']['duns_number_c']['labelValue']='DUNS Number';
 
  
 
- // created: 2016-08-21 18:28:31
-$dictionary['Account']['fields']['frame_c']['inline_edit']='';
-$dictionary['Account']['fields']['frame_c']['labelValue']='frame';
+ // created: 2016-08-27 07:20:05
+$dictionary['Account']['fields']['framework_c']['inline_edit']='';
+$dictionary['Account']['fields']['framework_c']['labelValue']='Frame';
 
  
 
@@ -151,7 +151,7 @@ $dictionary['Account']['fields']['haa_codes_id_c']['inline_edit']=1;
 
  
 
- // created: 2016-08-21 18:28:30
+ // created: 2016-08-27 07:20:05
 $dictionary['Account']['fields']['haa_frameworks_id_c']['inline_edit']=1;
 
  
@@ -266,9 +266,9 @@ $dictionary['Account']['fields']['responsible_person_note_c']['labelValue']='Res
 
  
 
- // created: 2016-08-21 18:30:43
+ // created: 2016-08-27 07:32:17
 $dictionary['Account']['fields']['sales_note_c']['inline_edit']='';
-$dictionary['Account']['fields']['sales_note_c']['labelValue']='sales note';
+$dictionary['Account']['fields']['sales_note_c']['labelValue']='Sales Note';
 
  
 
@@ -278,9 +278,9 @@ $dictionary['Account']['fields']['sales_org_c']['labelValue']='Sales Org. /Dept.
 
  
 
- // created: 2016-08-21 18:30:09
+ // created: 2016-08-27 07:33:40
 $dictionary['Account']['fields']['sales_person_desc_c']['inline_edit']='';
-$dictionary['Account']['fields']['sales_person_desc_c']['labelValue']='sales person desc';
+$dictionary['Account']['fields']['sales_person_desc_c']['labelValue']='Sales Person Desc';
 
  
 
@@ -290,9 +290,9 @@ $dictionary['Account']['fields']['sales_responsible_person_c']['labelValue']='Sa
 
  
 
- // created: 2016-08-21 18:32:01
+ // created: 2016-08-27 07:33:03
 $dictionary['Account']['fields']['service_note_c']['inline_edit']='';
-$dictionary['Account']['fields']['service_note_c']['labelValue']='service note';
+$dictionary['Account']['fields']['service_note_c']['labelValue']='Service Note';
 
  
 
@@ -302,9 +302,9 @@ $dictionary['Account']['fields']['service_org_c']['labelValue']='Service Org. /D
 
  
 
- // created: 2016-08-21 18:31:16
+ // created: 2016-08-27 07:34:07
 $dictionary['Account']['fields']['service_person_desc_c']['inline_edit']='';
-$dictionary['Account']['fields']['service_person_desc_c']['labelValue']='service person desc';
+$dictionary['Account']['fields']['service_person_desc_c']['labelValue']='Service Person Desc';
 
  
 

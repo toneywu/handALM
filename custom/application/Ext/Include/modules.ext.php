@@ -29,6 +29,13 @@ $modInvisList[] = 'HAA_FF_Fields';
 
  
  //WARNING: The contents of this file are auto-generated
+$beanList['HAA_Frameworks'] = 'HAA_Frameworks';
+$beanFiles['HAA_Frameworks'] = 'modules/HAA_Frameworks/HAA_Frameworks.php';
+$moduleList[] = 'HAA_Frameworks';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
 $beanList['HAA_Maps'] = 'HAA_Maps';
 $beanFiles['HAA_Maps'] = 'modules/HAA_Maps/HAA_Maps.php';
 $moduleList[] = 'HAA_Maps';
@@ -90,6 +97,27 @@ $moduleList[] = 'HAM_Maint_Sites';
 $beanList['HAM_Work_Centers'] = 'HAM_Work_Centers';
 $beanFiles['HAM_Work_Centers'] = 'modules/HAM_Work_Centers/HAM_Work_Centers.php';
 $moduleList[] = 'HAM_Work_Centers';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+$beanList['HAM_SR'] = 'HAM_SR';
+$beanFiles['HAM_SR'] = 'modules/HAM_SR/HAM_SR.php';
+$moduleList[] = 'HAM_SR';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+$beanList['HAM_WO'] = 'HAM_WO';
+$beanFiles['HAM_WO'] = 'modules/HAM_WO/HAM_WO.php';
+$moduleList[] = 'HAM_WO';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+$beanList['HAM_WOOP'] = 'HAM_WOOP';
+$beanFiles['HAM_WOOP'] = 'modules/HAM_WOOP/HAM_WOOP.php';
+$moduleList[] = 'HAM_WOOP';
 
 
  
@@ -197,6 +225,13 @@ $moduleList[] = 'HPR_AM_Roles';
 
  
  //WARNING: The contents of this file are auto-generated
+$beanList['HAT_Asset_Sources'] = 'HAT_Asset_Sources';
+$beanFiles['HAT_Asset_Sources'] = 'modules/HAT_Asset_Sources/HAT_Asset_Sources.php';
+$moduleList[] = 'HAT_Asset_Sources';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
 $beanList['HAT_Counting_Batchs'] = 'HAT_Counting_Batchs';
 $beanFiles['HAT_Counting_Batchs'] = 'modules/HAT_Counting_Batchs/HAT_Counting_Batchs.php';
 $moduleList[] = 'HAT_Counting_Batchs';
@@ -209,13 +244,6 @@ $moduleList[] = 'HAT_Counting_Results';
 $beanList['HAT_Counting_Tasks'] = 'HAT_Counting_Tasks';
 $beanFiles['HAT_Counting_Tasks'] = 'modules/HAT_Counting_Tasks/HAT_Counting_Tasks.php';
 $moduleList[] = 'HAT_Counting_Tasks';
-
-
- 
- //WARNING: The contents of this file are auto-generated
-$beanList['HAA_Frameworks'] = 'HAA_Frameworks';
-$beanFiles['HAA_Frameworks'] = 'modules/HAA_Frameworks/HAA_Frameworks.php';
-$moduleList[] = 'HAA_Frameworks';
 
 
  

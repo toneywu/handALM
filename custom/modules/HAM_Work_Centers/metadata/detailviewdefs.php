@@ -49,9 +49,9 @@ array (
         array (
           0 => 
           array (
-            'name' => 'sr_hat_domains_rule',
+            'name' => 'sr_haa_frameworks_rule',
             'studio' => 'visible',
-            'label' => 'LBL_SR_HAT_DOMAINS_RULE',
+            'label' => 'LBL_SR_HAA_FRAMEWORKS_RULE',
           ),
           1 => 
           array (

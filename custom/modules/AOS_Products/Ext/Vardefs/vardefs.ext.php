@@ -51,20 +51,25 @@ $dictionary['AOS_Products']['fields']['data_source_reference_c']['labelValue']='
 
  
 
- // created: 2016-05-25 18:03:04
-$dictionary['AOS_Products']['fields']['domain_c']['inline_edit']='';
-$dictionary['AOS_Products']['fields']['domain_c']['labelValue']='Domain';
-
- 
-
  // created: 2016-07-04 00:31:25
 $dictionary['AOS_Products']['fields']['flexform_c']['inline_edit']='';
 $dictionary['AOS_Products']['fields']['flexform_c']['labelValue']='FlexForm';
 
  
 
+ // created: 2016-05-25 18:03:04
+$dictionary['AOS_Products']['fields']['framework_c']['inline_edit']='';
+$dictionary['AOS_Products']['fields']['framework_c']['labelValue']='LBL_FRAMEWORK';
+
+ 
+
  // created: 2016-07-04 00:31:25
 $dictionary['AOS_Products']['fields']['haa_ff_id_c']['inline_edit']=1;
+
+ 
+
+ // created: 2016-05-25 18:03:04
+$dictionary['AOS_Products']['fields']['haa_frameworks_id_c']['inline_edit']=1;
 
  
 
@@ -75,11 +80,6 @@ $dictionary['AOS_Products']['fields']['haa_uom_id1_c']['inline_edit']=1;
 
  // created: 2016-04-22 09:08:02
 $dictionary['AOS_Products']['fields']['haa_uom_id_c']['inline_edit']=1;
-
- 
-
- // created: 2016-05-25 18:03:04
-$dictionary['AOS_Products']['fields']['haa_frameworks_id_c']['inline_edit']=1;
 
  
 

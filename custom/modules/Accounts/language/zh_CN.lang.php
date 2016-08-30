@@ -81,4 +81,6 @@ $mod_strings = array (
   'LBL_SALES_NOTE' => '销售方备注',
   'LBL_SERVICE_PERSON_DESC' => '售后服务人员说明',
   'LBL_SERVICE_NOTE' => '售后服务备注',
-);
+  'LBL_FRAME_HAA_FRAMEWORKS_ID' => '业务框架 (ID)',
+  'LBL_FRAME' => '业务框架',
+  );

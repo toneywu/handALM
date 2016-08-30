@@ -64,4 +64,9 @@ $mod_strings = array (
   'LBL_AUTOOPEN_NEXT_TASK'=>'Auto Open Next Task',
   'LBL_BTN_ASSIGN_BUTTON_LABEL'=>'Operating Assign',
   'LBL_WOOP_ACTION'=>'Operating Assign',
+  'LBL_SYN_WO_STATUS'=>'Synchronous WO Status',
+  'LBL_SITE'=>'Site',
+  'LBL_PRIORITY'=>'PRIORITY',
+  'LBL_LOCATION'=>'LOCATION',
+  'LBL_WO_STATUS'=>'WO_STATUS',
 );

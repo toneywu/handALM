@@ -1,5 +1,3 @@
-//$.getScript("modules/HAA_FF/ff_include.js")
-
 function trimStr(str){return str.replace(/(^\s*)|(\s*$)/g,"");}
 
 function setProductPopupReturn(popupReplyData){//选择完产品后的动作
@@ -17,7 +15,7 @@ function setProductPopupReturn(popupReplyData){//选择完产品后的动作
 	//开始建立flexFields
 	triger_setFF($("#haa_ff_id_c").val(),"HAT_Assets")
 	$(".expandLink").click();
-	$('#target_iconpicker').iconpicker('setIcon', $("#asset_icon").val());
+	$('#target_iconpicker').iconpicker('setIcon', $("#asset_icon"));
 	//图标显示
 
 }
@@ -72,6 +70,7 @@ function resetAssetName() { //自动生成资产铭牌号
 $(document).ready(function(){
 
 	//加载图标选择器，从modules\HAT_Assets\js\editview_icon_picker.js
+
 	SUGAR.util.doWhen("typeof icon_edit_init == 'function'", function(){
 		icon_edit_init($("#asset_icon"));
 	});
@@ -89,7 +88,7 @@ $(document).ready(function(){
 		resetAssetName();
 	});
 
-	$('#enable_vehicle_mgmt').change(function(){
+	$('#enable_vehicle_mgmt').change(function(){//针对是否启用车辆管理，显示对应字段
 		if( $(this).is(':checked')) {
 			mark_field_enabled('vin');
 			mark_field_enabled('engine_num');
@@ -114,7 +113,16 @@ $(document).ready(function(){
 		}
 	});
 
-
+	$('#enable_fa').change(function(){ //针对是否对固定资产进行同步，决定了是否必须要提供固定资产编号字段
+		if( $(this).is(':checked')) {
+			//如果启用固定资产同步则必须有固定资产信息
+			mark_field_enabled('fixed_asset',false);
+		} else {
+			//如果没有启用固定资产同步，则显示固定资产字段（不隐藏），但可以不必须输入
+			//为防止出错，先加上必须输入的验证，再去除。
+			mark_field_enabled('fixed_asset',true);
+		}
+	});
 
 	$("#linear_start_measure,#linear_end_measure").change(function(){ //自动计算线性长度
 		//if ($.isNumeric($("#linear_start_measure").val())&&$.isNumeric($("#linear_end_measure").val())) {
@@ -122,14 +130,8 @@ $(document).ready(function(){
 		//};
 	});
 
-	SUGAR.util.doWhen("typeof mark_field_disabled == 'function'", function(){
-		$('#enable_vehicle_mgmt').change();
-		$('#enable_linear').change();
-		$('#linear_start_measure').change();
-	});
 
-
-	var isgv = $("#use_location_gis").attr("checked");
+/*	var isgv = $("#use_location_gis").attr("checked");
 	if(isgv == 'checked'){
 		$("#map_type").closest('td').toggle();
 		$("#map_type_label").toggle();
@@ -145,21 +147,33 @@ $(document).ready(function(){
 			$("#map_type_label").toggle();
 
 		}
-	);
+	);*/
 	$("#use_location_gis").change(function(){
-			if($("[name=use_location_gis]").val() == 0){
-				$("#map_type").val("NONE");
-				$("#map_type").trigger("change");
-			}
+		$("#map_type select").val("NONE");//set seleted by value
+		if(document.getElementById('use_location_gis').checked){
+			//如果当前资产跟随地点的GIS信息，则不显示地图类型字段。
+			mark_field_disabled('map_type');//基于HAA_FF/ff_include.js
+		} else {
+			//如果资产没有启用跟随地点的GIS信息，则可以在资产层定义，因此显示出当前的地图类型字段@20160825 ToneyWu
+			mark_field_enabled('map_type');
 		}
-	);
 
-	//$("#detailpanel_2").switchClass("collapsed","expanded");
+		SUGAR.util.doWhen("typeof initMap == 'function'", function(){
+			//确保HAT_Asset_Locations中的JS加载完成
+			$("#map_type").trigger("change");//基于地图类型，对面板进行初始化
+		});
+	});
 
-/*	SUGAR.util.doWhen("typeof $('#detailpanel_2') != 'undefined'", function(){
-		//alert("expanded");
-		$(".expandLink").click();
-	})*/
+
+	SUGAR.util.doWhen("typeof mark_field_disabled == 'function'", function(){
+		$('#enable_vehicle_mgmt').change();
+		$('#enable_linear').change();
+		$('#linear_start_measure').change();
+		$("#use_location_gis").change();
+		$('#enable_fa').change();
+	});
+
+
 
 });
 

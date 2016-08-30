@@ -60,4 +60,5 @@ $mod_strings = array (
   'LBL_AUTOOPEN_NEXT_TASK'=>'完工后打开下道工序',
   'LBL_BTN_ASSIGN_BUTTON_LABEL'=>'工序认领',
   'LBL_WOOP_ACTION'=>'工序认领',
+  'LBL_SYN_WO_STATUS'=>'同步工单状态',
 );

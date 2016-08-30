@@ -1,6 +1,6 @@
 <?php
- // created: 2016-08-21 18:28:31
-$dictionary['Account']['fields']['frame_c']['inline_edit']='';
-$dictionary['Account']['fields']['frame_c']['labelValue']='frame';
+ // created: 2016-08-27 07:20:05
+$dictionary['Account']['fields']['framework_c']['inline_edit']='';
+$dictionary['Account']['fields']['framework_c']['labelValue']='Frame';
 
  ?>

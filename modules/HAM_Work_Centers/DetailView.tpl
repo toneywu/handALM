@@ -44,7 +44,7 @@ SUGAR.util.doWhen(function(){
 {counter name="fieldsUsed"}
 <td width='12.5%' scope="col">
 {if !$fields.sr_hat_domains_rule.hidden}
-{capture name="label" assign="label"}{sugar_translate label='LBL_SR_HAT_DOMAINS_RULE' module='HAM_Work_Centers'}{/capture}
+{capture name="label" assign="label"}{sugar_translate label='LBL_SR_HAA_FRAMEWORKS_RULE' module='HAM_Work_Centers'}{/capture}
 {$label|strip_semicolon}:
 {/if}
 </td>
@@ -53,7 +53,7 @@ SUGAR.util.doWhen(function(){
 {counter name="panelFieldCount"}
 
 {if !empty($fields.sr_hat_domains_rule_id.value)}
-{capture assign="detail_url"}index.php?module=HAT_Domains&action=DetailView&record={$fields.sr_hat_domains_rule_id.value}{/capture}
+{capture assign="detail_url"}index.php?module=HAA_Frameworks&action=DetailView&record={$fields.sr_hat_domains_rule_id.value}{/capture}
 <a href="{sugar_ajax_url url=$detail_url}">{/if}
 <span id="sr_hat_domains_rule_id" class="sugar_field" data-id-value="{$fields.sr_hat_domains_rule_id.value}">{$fields.sr_hat_domains_rule.value}</span>
 {if !empty($fields.sr_hat_domains_rule_id.value)}</a>{/if}

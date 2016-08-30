@@ -6,15 +6,15 @@
  */
 require_once ('modules/HAM_WO/HAM_WO_sugar.php');
 class HAM_WO extends HAM_WO_sugar {
-	
+
 	function saveWO($check_notify=false,$onlySave,$wo_status) {
 		if($onlySave=="O"){
 			$this->wo_status=$wo_status;
 			parent :: save($check_notify); //保存WO主体
 		}
 	}
-	
-	
+
+
 	function save($check_notify = false) {
 
 		//在保存之前通过getNumbering生成WO编号
@@ -111,11 +111,12 @@ class HAM_WO extends HAM_WO_sugar {
 				}
 			}
 		}
-		
+
 		//die();
 		parent :: save($check_notify); //保存WO主体
 		//add by yuan.chen@2016-07-22
 		$bean_id = $this->activity;
+		//echo "activity=".$this->activity;
 		//活动头
 		$ham_act = BeanFactory :: getBean('HAM_ACT', $bean_id);
 
@@ -124,10 +125,10 @@ class HAM_WO extends HAM_WO_sugar {
 
 		$checkBean = BeanFactory :: getBean("HAM_WOOP");
 		$ham_woops = $checkBean->get_full_list('', "ham_woop.ham_wo_id ='" . $this->id . "'");
-
+		echo 'ham_woops='.count($ham_woops);
 		if (count($ham_woops) == 0) {
 			//<1>.引用标准作业动力
-			if ($ham_act_ops != null) {
+			if (count($ham_act_ops)>0&&$bean_id!=null) {
 				$index = 1;
 				$pre_date_target_finish = null;
 				$pre_date_schedualed_finish = null;
@@ -182,8 +183,8 @@ class HAM_WO extends HAM_WO_sugar {
 				//系统会基于工作单的负责人相关信息。自动建立一道10工序（工序号=10%，复制工作单的工作中心、
 				//资源、负责人、工作单状态、目标开始时间、目标完成时间、计划开始时间、计划完成时间，工序标题=默认工序（LBL_DEFAULT_WOOP_NAME））
 				//你可以继续完成其它工序的添加
-				$ham_woop_bean = BeanFactory :: newBean("Ham_WOOP");
-				$ham_woop_bean->woop_number = "10%";
+				$ham_woop_bean = BeanFactory :: newBean("HAM_WOOP");
+				$ham_woop_bean->woop_number = "10";
 				$ham_woop_bean->ham_wo_id = $this->id;
 				$ham_woop_bean->ham_work_center_id = $this->work_center_id;
 				$ham_woop_bean->work_center_res_id = $this->work_center_res_id;
@@ -229,7 +230,7 @@ class HAM_WO extends HAM_WO_sugar {
 				}
 			}
 		}
-
+		//die();
 		//工作单保存之后，将对应的SR关联到工作单上
 		//TODO：SR状态可能是WORKING或是完成
 		if ($this->source_type == "SR" & !empty ($this->source_id)) { //将对应的SR进行关联

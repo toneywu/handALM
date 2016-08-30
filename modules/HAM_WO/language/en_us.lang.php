@@ -95,6 +95,8 @@ $mod_strings = array (
   'LBL_WORK_CENTER_RES'=>'Work Center Resource',
   'LBL_WORK_CENTER_PEOPLE'=>'Work Center People',
   'LBL_WORK_ORDER_ACCESS'=>'Work Order Access',
-  'LBL_NEXT_WOOP_ASSIGNMENT'=>'Next Wo Order Operation Assignment',
+  'LBL_NEXT_WOOP_ASSIGNMENT'=>'Next Operation Assignment canbe changed?',
   'LBL_BTN_ASSIGN_BUTTON_LABEL'=>'Operating Assign',
+  'LBL_COMPLETE_BY_LAST_WOOP'=>'WO canbe completed by last Operation?',
+  'LBL_EDITVIEW_PANEL5'=>'Ownership',
 );
