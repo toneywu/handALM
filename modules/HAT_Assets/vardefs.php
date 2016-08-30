@@ -584,10 +584,10 @@ $dictionary['HAT_Assets'] = array(
       'len' => '255',
       'size' => '20',
       ),
-    'source_type' =>
+    'asset_source_type' =>
     array (
       'required' => true,
-      'name' => 'source_type',
+      'name' => 'asset_source_type',
       'vname' => 'LBL_SOURCE_TYPE',
       'type' => 'enum',
       'massupdate' => '1',
@@ -609,10 +609,10 @@ $dictionary['HAT_Assets'] = array(
       'studio' => 'visible',
       'dependency' => false,
       ),
-    'source_ref' =>
+    'asset_source_ref' =>
     array (
       'required' => false,
-      'name' => 'source_ref',
+      'name' => 'asset_source_ref',
       'vname' => 'LBL_SOURCE_REF',
       'type' => 'varchar',
       'massupdate' => 0,
@@ -630,10 +630,10 @@ $dictionary['HAT_Assets'] = array(
       'len' => '255',
       'size' => '20',
       ),
-    'source_details' =>
+    'asset_source_details' =>
     array (
       'required' => false,
-      'name' => 'source_details',
+      'name' => 'asset_source_details',
       'vname' => 'LBL_SOURCE_DETAILS',
       'type' => 'varchar',
       'massupdate' => 0,

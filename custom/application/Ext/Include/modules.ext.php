@@ -225,6 +225,13 @@ $moduleList[] = 'HPR_AM_Roles';
 
  
  //WARNING: The contents of this file are auto-generated
+$beanList['HAT_Asset_Sources'] = 'HAT_Asset_Sources';
+$beanFiles['HAT_Asset_Sources'] = 'modules/HAT_Asset_Sources/HAT_Asset_Sources.php';
+$moduleList[] = 'HAT_Asset_Sources';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
 $beanList['HAT_Counting_Batchs'] = 'HAT_Counting_Batchs';
 $beanFiles['HAT_Counting_Batchs'] = 'modules/HAT_Counting_Batchs/HAT_Counting_Batchs.php';
 $moduleList[] = 'HAT_Counting_Batchs';

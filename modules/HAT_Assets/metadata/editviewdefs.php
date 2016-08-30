@@ -384,13 +384,13 @@ array (
         array (
           0 => 
           array (
-            'name' => 'source_type',
+            'name' => 'asset_source_type',
             'studio' => 'visible',
             'label' => 'LBL_SOURCE_TYPE',
           ),
           1 => 
           array (
-            'name' => 'source_ref',
+            'name' => 'asset_source_ref',
             'label' => 'LBL_SOURCE_REF',
           ),
         ),
@@ -404,7 +404,7 @@ array (
           ),
           1 => 
           array (
-            'name' => 'source_details',
+            'name' => 'asset_source_details',
             'label' => 'LBL_SOURCE_DETAILS',
           ),
         ),

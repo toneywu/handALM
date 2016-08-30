@@ -64,16 +64,23 @@ class HAT_AssetsViewEdit extends ViewEdit
             if($beanFramework->owning_person_field_rule=='TEXT'){
                 $current_owning_person = isset($this->bean->owning_person)?($this->bean->owning_person):"";
                 $current_owning_person_id=isset($this->bean->owning_person_id)?$this->bean->owning_person_id:"";
-                $current_owning_person_desc_c=isset($this->bean->owning_person_desc_c)?$this->bean->owning_person_desc_c:"";
-                echo ('<script>$("#owning_person").parent().html(\'<input type="hidden" name="owning_person" id="owning_person" value="'.$current_owning_person.'"/><input type="hidden" name="owning_person_id" id="owning_person_id" value="'.$current_owning_person_id.'"/><input type="text" name="owning_person_desc_c" id="owning_person_desc_c" value="'.$current_owning_person_desc_c.'"/>\');</script>');
+                $current_owning_person_desc=isset($this->bean->owning_person_desc)?$this->bean->owning_person_desc:"";
+                echo ('<script>$("#owning_person").parent().html(\'<input type="hidden" name="owning_person" id="owning_person" value="'.$current_owning_person.'"/><input type="hidden" name="owning_person_id" id="owning_person_id" value="'.$current_owning_person_id.'"/><input type="text" name="owning_person_desc" id="owning_person_desc" value="'.$current_owning_person_desc.'"/>\');</script>');
             }
 
 
             if($beanFramework->using_person_field_rule=='TEXT'){
                 $current_using_person = isset($this->bean->using_person)?($this->bean->using_person):"";
                 $current_using_person_id=isset($this->bean->using_person_id)?$this->bean->using_person_id:"";
-                $current_using_person_desc_c=isset($this->bean->using_person_desc_c)?$this->bean->using_person_desc_c:"";
-                echo ('<script>$("#using_person").parent().html(\'<input type="hidden" name="using_person" id="using_person" value="'.$current_using_person.'"/><input type="hidden" name="using_person_id" id="using_person_id" value="'.$current_using_person_id.'"/><input type="text" name="using_person_desc_c" id="using_person_desc_c" value="'.$current_using_person_desc_c.'"/>\');</script>');
+                $current_using_person_desc=isset($this->bean->using_person_desc)?$this->bean->using_person_desc:"";
+                echo ('<script>$("#using_person").parent().html(\'<input type="hidden" name="using_person" id="using_person" value="'.$current_using_person.'"/><input type="hidden" name="using_person_id" id="using_person_id" value="'.$current_using_person_id.'"/><input type="text" name="using_person_desc" id="using_person_desc" value="'.$current_using_person_desc.'"/>\');</script>');
+            }
+
+            if($beanFramework->supplier_field_rule=='TEXT'){
+                $current_supplier_org = isset($this->bean->supplier_org)?($this->bean->supplier_org):"";
+                $current_supplier_org_id=isset($this->bean->supplier_org_id)?$this->bean->supplier_org_id:"";
+                $current_supplier_desc=isset($this->bean->supplier_desc)?$this->bean->supplier_desc:"";
+                echo ('<script>$("#supplier_org").parent().html(\'<input type="hidden" name="supplier_org" id="supplier_org" value="'.$current_supplier_org.'"/><input type="hidden" name="supplier_org_id" id="supplier_org_id" value="'.$current_supplier_org_id.'"/><input type="text" name="supplier_desc" id="supplier_desc" value="'.$current_supplier_desc.'"/>\');</script>');
             }
         }
 
