@@ -65,7 +65,7 @@ array (
         array (
           0 => 
           array (
-            'name' => 'domain_c',
+            'name' => 'framework_c',
             'studio' => 'visible',
             'label' => 'LBL_DOMAIN',
           ),

@@ -15,7 +15,6 @@ global $current_user;
 global $db;
 
 $current_id = $_GET['id'];
-
 if (!empty($current_id)) {
 
 	$ham_wo_bean = BeanFactory :: getBean('HAM_WO', $current_id);
@@ -29,7 +28,7 @@ if (!empty($current_id)) {
 						LEFT   JOIN ham_work_centers w
 						ON     r.work_center_id = w.id
 						WHERE  u.contact_id ='" . $current_user->contact_id_c . "'";
-
+	
 	$show_flag = "N";
 	$work_center_id = $ham_wo_bean->work_center_id;
 	$work_center_res_id = $ham_wo_bean->work_center_res_id;
@@ -49,10 +48,10 @@ if (!empty($current_id)) {
 		$sql = $sql . " and (r.id='" . $work_center_res_id . "'" . " or " . $work_center_res_id . " is null)";
 
 	}
-	elseif ($access_code == "WORKCENTER") {
+	elseif ($access_code == "WORKCENTER"||$access_code =="") {
 		$sql = $sql . " and (w.id='" . $work_center_id . "'" . " or " . $work_center_id . " is null)";
 	}
-	if ($access_code == "RESOURCE" or $access_code == "WORKCENTER") {
+	if ($access_code == "RESOURCE" or $access_code == "WORKCENTER"or $access_code == "") {
 		while ($result_record = $db->fetchByAssoc($result_records)) {
 			if($result_record["cnt_num"]>0){
 				$show_flag = "Y";
@@ -63,7 +62,6 @@ if (!empty($current_id)) {
 	if ($wo_status=="CANCELED"||$wo_status=="SUBMITTED"||$wo_status=="CLOSED"||$wo_status=="COMPLETED"){
 		$show_flag="N";
 	}
-	
 	echo "$show_flag";
 }else{
 	echo "Y";

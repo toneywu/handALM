@@ -23,8 +23,8 @@ $mod_strings = array (
   'LBL_DATA_SOURCE_CODE' => '数据来源',
   'LBL_DATA_SOURCE_ID' => '数据来源ID',
   'LBL_DATA_SOURCE_REFERENCE' => '数据来源参考',
-  'LBL_DOMAIN' => '运营域',
-  'LBL_DOMAIN_HAA_FRAMEWORKS_ID' => '运营域 (related  ID)',
-  'LBL_FLEXFORM_HAA_FF_ID' => '动态界面模板(related  ID)',
+  'LBL_FRAMEWORK' => '业务框架',
+  'LBL_HAA_FRAMEWORKS_ID' => '业务框架 (ID)',
+  'LBL_FLEXFORM_HAA_FF_ID' => '动态界面模板(ID)',
   'LBL_ICON' => '资产图标',
 );

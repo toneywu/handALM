@@ -101,6 +101,27 @@ $moduleList[] = 'HAM_Work_Centers';
 
  
  //WARNING: The contents of this file are auto-generated
+$beanList['HAM_SR'] = 'HAM_SR';
+$beanFiles['HAM_SR'] = 'modules/HAM_SR/HAM_SR.php';
+$moduleList[] = 'HAM_SR';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+$beanList['HAM_WO'] = 'HAM_WO';
+$beanFiles['HAM_WO'] = 'modules/HAM_WO/HAM_WO.php';
+$moduleList[] = 'HAM_WO';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+$beanList['HAM_WOOP'] = 'HAM_WOOP';
+$beanFiles['HAM_WOOP'] = 'modules/HAM_WOOP/HAM_WOOP.php';
+$moduleList[] = 'HAM_WOOP';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
 $beanList['HAM_Work_Center_People'] = 'HAM_Work_Center_People';
 $beanFiles['HAM_Work_Center_People'] = 'modules/HAM_Work_Center_People/HAM_Work_Center_People.php';
 $moduleList[] = 'HAM_Work_Center_People';

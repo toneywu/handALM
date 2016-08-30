@@ -584,7 +584,7 @@ $relationships = array (
     'is_custom' => false,
     'from_studio' => false,
   ),
-  'hat_assets_accounts' => 
+/*  'hat_assets_accounts' => 
   array (
     'id' => '8754a506-4035-5e40-9d48-579620dee01d',
     'relationship_name' => 'hat_assets_accounts',
@@ -609,5 +609,5 @@ $relationships = array (
     'relationship_only' => false,
     'for_activities' => false,
     'from_studio' => false,
-  ),
+  ),*/
 );

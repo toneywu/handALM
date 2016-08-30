@@ -38,13 +38,13 @@ $subpanel_layout['list_fields'] = array (
   array (
     'type' => 'relate',
     'studio' => 'visible',
-    'vname' => 'LBL_SR_HAT_DOMAINS_RULE',
-    'id' => 'SR_HAT_DOMAINS_RULE_ID',
+    'vname' => 'LBL_SR_HAA_FRAMEWORKS_RULE',
+    'id' => 'SR_HAA_FRAMEWORKS_RULE_ID',
     'link' => true,
     'width' => '10%',
     'default' => true,
     'widget_class' => 'SubPanelDetailViewLink',
-    'target_module' => 'HAT_Domains',
+    'target_module' => 'HAA_Frameworks',
     'target_record_key' => 'sr_hat_domains_rule_id',
   ),
   'description' => 

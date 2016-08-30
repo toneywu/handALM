@@ -258,6 +258,15 @@ array (
             'label' => 'LBL_AUTOOPEN_NEXT_TASK',
           ),
         ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'syn_wo_status',
+            'label' => 'LBL_SYN_WO_STATUS',
+          ),
+          1 => '',
+        ),
       ),
     ),
   ),

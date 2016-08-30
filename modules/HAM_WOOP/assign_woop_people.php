@@ -36,12 +36,16 @@ if (!empty ($current_id)) {
 								ON     r.work_center_id = w.id
 								WHERE  u.contact_id ='" . $current_user->contact_id_c . "'";
 	if ($current_bean->work_center_people_id == null) {
-		$sql = $sql . " and (w.id='" . $current_bean->ham_work_center_id . "'" . " or " . $current_bean->ham_work_center_id . " is null)";
-		$sql = $sql . " and (r.id='" . $current_bean->work_center_res_id . "'" . " or " . $current_bean->work_center_res_id . " is null)";
-
+		if ($current_bean->ham_work_center_id!=null){
+		$sql = $sql . " and (w.id='" . $current_bean->ham_work_center_id ."')";
+		}
+		if($current_bean->work_center_res_id!=null){
+		$sql = $sql . " and (r.id='" . $current_bean->work_center_res_id . "')";
+		}
 		$bean_resource_people_list = $db->query($sql);
 		$people_name = "";
 		$people_id = "";
+		//echo "$sql";
 		while ($last_resource_people = $db->fetchByAssoc($bean_resource_people_list)) {
 			$people_name = $last_resource_people['resource_people_name'];
 			$people_id = $last_resource_people['resource_people_id'];

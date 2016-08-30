@@ -188,6 +188,10 @@ array (
           ),
           1 => '',
         ),
+                8=> array(
+          0=>'enable_fa',
+          1=>'fixed_asset'
+        ),
       ),
       'lbl_detailview_panel7' => 
       array (
@@ -495,7 +499,7 @@ array (
       array (
         0 => 
         array (
-          0 => 'framework'
+          0 => 'framework',
           1 => '',
         ),
         1 => 

@@ -113,7 +113,16 @@ $(document).ready(function(){
 		}
 	});
 
-
+	$('#enable_fa').change(function(){ //针对是否对固定资产进行同步，决定了是否必须要提供固定资产编号字段
+		if( $(this).is(':checked')) {
+			//如果启用固定资产同步则必须有固定资产信息
+			mark_field_enabled('fixed_asset',false);
+		} else {
+			//如果没有启用固定资产同步，则显示固定资产字段（不隐藏），但可以不必须输入
+			//为防止出错，先加上必须输入的验证，再去除。
+			mark_field_enabled('fixed_asset',true);
+		}
+	});
 
 	$("#linear_start_measure,#linear_end_measure").change(function(){ //自动计算线性长度
 		//if ($.isNumeric($("#linear_start_measure").val())&&$.isNumeric($("#linear_end_measure").val())) {
@@ -161,6 +170,7 @@ $(document).ready(function(){
 		$('#enable_linear').change();
 		$('#linear_start_measure').change();
 		$("#use_location_gis").change();
+		$('#enable_fa').change();
 	});
 
 

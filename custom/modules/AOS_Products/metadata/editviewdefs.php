@@ -69,14 +69,14 @@ array (
         array (
           0 => 
           array (
-            'name' => 'domain_c',
+            'name' => 'framework_c',
             'studio' => 'visible',
-            'label' => 'LBL_DOMAIN',
+            'label' => 'LBL_FRAMEWORK',
             'displayParams' => 
             array (
               'field_to_name_array' => 
               array (
-                'name' => 'domain_c',
+                'name' => 'framework_c',
                 'id' => 'haa_frameworks_id_c',
                 'default_product_uom' => 'primary_uom_c',
                 'default_product_uom_id' => 'haa_uom_id_c',
