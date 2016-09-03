@@ -30,11 +30,6 @@ class HAA_FrameworksController extends SugarController
 
 	}
 
-	function action_test(){
-		echo("hello");
-
-	}
-
 }
 
 ?>

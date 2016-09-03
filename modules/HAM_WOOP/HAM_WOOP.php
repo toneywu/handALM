@@ -47,16 +47,6 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 
 	function save($check_notify = false) {
 
-		//		foreach ($this as $key => $value) {
-		//			if(is_string($value)){
-		//				echo "key = " . $key . ",value = " . $value . "<br>";
-		//			}elseif(is_object($value)){
-		//				echo var_dump($value)."<br>";
-		//				
-		//			}
-		//			
-		//		}
-
 		global $db;
 		$id = $this->id;
 		$sql = "select woop_status from ham_woop where ham_woop.id='" . $id . "'";
@@ -108,15 +98,20 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 		//			echo "current_db_status=".$current_db_status."<br>";
 		//		}
 		//完工的动作
+		echo "current_db_status=".$current_db_status."<br>";
+		echo "show_status=".$show_status."<br>";
 		if ($current_db_status <> $show_status && ($show_status == "COMPLETED" || $show_status == "CLOSED")) {
 			//非最后一道工序
 			if ($last_woop_number <> $this->woop_number) {
 				if ($this->autoopen_next_task == "Y" && $next_woop_bean[0]->woop_status = "WPREV") {
-					$next_woop_bean[0]->status = "APPROVED";
+					$next_woop_bean[0]->woop_status = "APPROVED";
 				}
+				//echo "autoopen_next_task=".$this->autoopen_next_task."<br>";
+				//echo "next woop_status=".$next_woop_bean[0]->woop_status."<br>";
+				
 				$next_woop_bean[0]->work_center_res_id = $this->work_center_res_id;
 				$next_woop_bean[0]->work_center_people_id = $this->work_center_people_id;
-				$next_woop_bean->save();
+				$next_woop_bean[0]->save();
 			} else {
 				//最后一道工序 在工序完成后，立刻跳转到工作单完工界面中。 
 			}
