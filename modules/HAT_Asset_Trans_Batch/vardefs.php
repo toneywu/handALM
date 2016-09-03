@@ -307,7 +307,7 @@ $dictionary['HAT_Asset_Trans_Batch'] = array(
 		array (
 			'required' => false,
 			'name' => 'haa_frameworks_id',
-			'vname' => 'LBL_DOMAIN_ID',
+			'vname' => 'LBL_FRAMEWORKS_ID',
 			'type' => 'id',
 			'massupdate' => 0,
 			'no_default' => false,
@@ -324,12 +324,12 @@ $dictionary['HAT_Asset_Trans_Batch'] = array(
 			'len' => 36,
 			'size' => '20',
 			),
-		'domain' => 
+		'framework' => 
 		array (
 			'required' => true,
 			'source' => 'non-db',
-			'name' => 'domain',
-			'vname' => 'LBL_DOMAIN',
+			'name' => 'framework',
+			'vname' => 'LBL_FRAMEWORKS',
 			'type' => 'relate',
 			'massupdate' => 0,
 			'no_default' => false,

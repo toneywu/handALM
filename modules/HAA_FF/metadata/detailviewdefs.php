@@ -61,9 +61,8 @@ array (
         array (
           0 => 
           array (
-            'name' => 'domain',
+            'name' => 'framework',
             'studio' => 'visible',
-            'label' => 'LBL_DOMAIN',
           ),
           1 => 'name',
         ),

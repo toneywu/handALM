@@ -517,7 +517,7 @@ $dictionary['HAM_WO'] = array (
 			
 		),
 		'event_type' => array (
-			'required' => false,
+			'required' => true,
 			'source' => 'non-db',
 			'name' => 'event_type',
 			'vname' => 'LBL_EVENT_TYPE',
@@ -542,8 +542,6 @@ $dictionary['HAM_WO'] = array (
 			'rname' => 'name',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
-
-			
 		),
 		'hat_asset_locations_id' => array (
 			'required' => false,
@@ -564,8 +562,6 @@ $dictionary['HAM_WO'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
-
-			
 		),
 		'location' => array (
 			'required' => true,

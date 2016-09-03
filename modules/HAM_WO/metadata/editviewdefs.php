@@ -83,6 +83,7 @@ array (
             'name' => 'site',
             'studio' => 'visible',
             'label' => 'LBL_SITE',
+            'customCode'=>'{$MAINT_SITE}',
           ),
         ),
         1 => 
@@ -143,7 +144,7 @@ array (
             'label' => 'LBL_LOCATION',
             'displayParams' => 
             array (
-              'initial_filter' => '&maint_site_advanced="+encodeURIComponent(document.getElementById("site").value)+"',
+              'initial_filter' => '&maint_site_advanced="+encodeURIComponent($("#site_select option:selected").text())+"',
               'field_to_name_array' => 
               array (
                 'name' => 'location',

@@ -27,14 +27,14 @@ $subpanel_layout['list_fields'] = array (
   array (
     'type' => 'datetimecombo',
     'vname' => 'LBL_SCHEDUALED_START_DATE',
-    'width' => '13%',
+    'width' => '7%',
     'default' => true,
   ),
   'date_schedualed_finish' => 
   array (
     'type' => 'datetimecombo',
     'vname' => 'LBL_SCHEDUALED_FINISH_DATE',
-    'width' => '13%',
+    'width' => '7%',
     'default' => true,
   ),
   'work_center' => 
@@ -76,15 +76,26 @@ $subpanel_layout['list_fields'] = array (
     'target_module' => 'HAM_Work_Center_People',
     'target_record_key' => 'work_center_people_id',
   ),
+
+  'act_module' => 
+  array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'vname' => 'LBL_ACT_MODULE',
+    'width' => '15%',
+    'default' => false,
+    'sortable' => false,
+  ),
+/*
   'woop_action' => 
   array (
     'type' => 'varchar',
     'studio' => 'visible',
     'vname' => 'LBL_WOOP_ACTION',
-    'width' => '10%',
+    'width' => '20%',
     'default' => true,
 	'sortable' => false,
-  ),
+  ),*/
   'edit_button' => 
   array (
     'vname' => 'LBL_EDIT_BUTTON',

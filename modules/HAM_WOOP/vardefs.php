@@ -368,7 +368,6 @@ $dictionary['HAM_WOOP'] = array (
 			'len' => 36,
 			'size' => '20',
 
-			
 		),
 		'owner' => array (
 			'required' => false,
@@ -397,7 +396,6 @@ $dictionary['HAM_WOOP'] = array (
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
 
-			
 		),
 
 		'work_center_res_id' => array (
@@ -420,7 +418,6 @@ $dictionary['HAM_WOOP'] = array (
 			'len' => 36,
 			'size' => '20',
 
-			
 		),
 
 		'work_center_res' => array (
@@ -450,7 +447,6 @@ $dictionary['HAM_WOOP'] = array (
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
 
-			
 		),
 
 		'work_center_people_id' => array (
@@ -472,8 +468,6 @@ $dictionary['HAM_WOOP'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
-
-			
 		),
 
 		'work_center_people' => array (
@@ -577,8 +571,6 @@ $dictionary['HAM_WOOP'] = array (
 			'size' => '20',
 			'enable_range_search' => false,
 			'precision' => '8',
-
-			
 		),
 
 		'act_module' => array (
@@ -600,11 +592,10 @@ $dictionary['HAM_WOOP'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 100,
 			'size' => '20',
-			'options' => 'moduleList',
+			'options' => 'ham_woop_moduleList',
 			'studio' => 'visible',
 			'dependency' => false,
 
-			
 		),
 
 		#序号     

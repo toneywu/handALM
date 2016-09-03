@@ -50,39 +50,13 @@ class AccountsViewEdit extends ViewEdit
 		//4、读取Frame中销售及服务人员字段
 		//5、处理FF展开
 
-		//*********************处理业务框架，以及业务框架下销售及服务人员是List或是Text START********************
-        if (empty($this->bean->haa_frameworks_id_c)) {
-            //如果没有记录的framework(多半是因为正在处于新增记录)就从Session中加载默认的业务框架，如果当前Session还没有值，就跳转到业务框架的选择界面，选择后返回
-            if (empty($_SESSION["current_framework"])) {
-                    //如果当前没有Sersion就直接跳转选Business Framework
-                    //注意在Sugar中无法直接用php标准的header进行跳转，用以下方法
-                    //ref:https://developer.sugarcrm.com/2013/01/18/redirecting-to-another-page-inside-a-php-script-in-sugar/
-                    $queryParams = array(
-                        'module' => 'HAA_Frameworks',
-                        'action' => 'orgSelector',
-                        'return_module'=>'Accounts',
-                        'return_action'=>'EditView',
-                        /*'record' => $recordId,*/
-                    );
-                    SugarApplication::redirect('index.php?' . http_build_query($queryParams));
-                    //这里的逻辑是因数只有新增时才会找不到业务框架，所以返回时只要返回对应的模块即可，不需要有对应的记录ID
-            } else {
-                //从Session加载Business Framework字段的值
-                $beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
-                //注意这个$beanFramework对象在DISPLAY之后还要被调用，以用于按照Framework中的规则去限定页面上的字段
-                if(isset($beanFramework)) {
-                    $this->bean->haa_frameworks_id_c = $_SESSION["current_framework"];
-                    $this->bean->framework_c = $beanFramework->name;
-                }
-            }
-        } else {
-            $beanFramework = BeanFactory::getBean('HAA_Frameworks', $this->bean->haa_frameworks_id_c);
-            //如果已经有framework在记录中，则直接加载
-            //注意这个$beanFramework对象在DISPLAY之后还要被调用，以用于按照Framework中的规则去限定页面上的字段
-        }
-        //当前字段由Relate类型变为只读，不可修改
-        $html ='<input type="hidden" name="hat_framework_id" value="'.$this->bean->haa_frameworks_id_c .'"><input type="hidden" name="framework" value="'.$this->bean->framework_c .'">'. $this->bean->framework_c;
-        $this->ss->assign('FRAMEWORK_C',$html);
+        //1、初始化Framework
+        require_once('modules/HAA_Frameworks/orgSelector_class.php');
+        $current_framework_id = empty($this->bean->hat_framework_id)?"":$this->bean->hat_framework_id;
+        $current_module = $this->module;
+        $current_action = $this->action;
+        $this->ss->assign('FRAMEWORK_C',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_framework_id_c'));
+
 
 
 		//*********************处理业务框架，以及业务框架下销售及服务人员是List或是Text END********************
@@ -106,6 +80,7 @@ class AccountsViewEdit extends ViewEdit
 		parent::Display();
 
 
+        $beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
         if(isset($beanFramework)) {
             if($beanFramework->sales_person_field_rule=='TEXT'){
 	        	$current_sales_responsible_person_c = isset($this->bean->sales_responsible_person_c)?($this->bean->sales_responsible_person_c):"";

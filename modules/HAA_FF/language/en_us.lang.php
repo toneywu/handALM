@@ -70,8 +70,9 @@ $mod_strings = array (
   'LBL_ACTIVITIES_SUBPANEL_TITLE' => 'Activities',
   'LBL_HAA_FF_SUBPANEL_TITLE' => 'Flexible Forms',
   'LBL_NEW_FORM_TITLE' => 'New Flexible Forms',
-  'LBL_DOMAIN' => 'Opt.Domain',
+  'LBL_FRAMEWORK' => 'Business Framework',
   'LBL_CONDITION_LINES' => 'Condition',
   'LBL_FIELD_LINES'=>'Modified Fields',
   'LBL_ADD_FIELD'=>'Add Field Line',
+  'LBL_EDITVIEW_PANEL2'=> 'Detailed Lines',
 );

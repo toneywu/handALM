@@ -15,6 +15,15 @@ class HAM_SRViewEdit extends ViewEdit
             echo '</br>'.$key ." = ".$value;
         }*/
 
+        //1、初始化Framework-Site信息
+        require_once('modules/HAA_Frameworks/orgSelector_class.php');
+        $current_site_id = empty($this->bean->ham_maint_sites_id)?"":$this->bean->ham_maint_sites_id;
+        $current_module = $this->module;
+        $current_action = $this->action;
+        $this->ss->assign('MAINT_SITE',set_site_selector($current_site_id,$current_module,$current_action));
+
+
+
        if ((isset($this->bean->hat_asset_locationss_id)==false || $this->bean->hat_asset_locationss_id=="") && (isset($_REQUEST['location_id']) && $_REQUEST['location_id']!="")&& (isset($_REQUEST['hat_assets_id'])==false || $_REQUEST['hat_assets_id']!="")) { 
             //如果没有地点记录，并且传入了地点参数，并且没有资产参数时，从地点进行读取
             //如果有资产参数也同样跳过本段，从后续的资产数据中带出地点

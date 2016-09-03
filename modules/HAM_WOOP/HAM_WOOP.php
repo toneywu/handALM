@@ -59,12 +59,12 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 		
 		//没什么特殊的，就是工序在APPROVED之后可以手工变为WSCH、WMATL、WPCOND。 如果是这3个状态，同时同步工单状态=Y，就去修改工作单状态
 		if($current_db_status=="APPROVED"&&($this->woop_status=="WSCH"||$this->woop_status=="WMATL"||$this->woop_status=="WPCOND")&&$this->syn_wo_status=="Y"){
-			
+
 			$wo_bean = BeanFactory::getBean("HAM_WO",$this->ham_wo_id);
 			$wo_bean->wo_stauts=$this->woop_status;
 			$wo_bean->saveWO(false,'O',$this->woop_status);
 		}
-		
+
 		//die();
 
 		$next_woop = "SELECT woop_number
@@ -108,7 +108,7 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 				}
 				//echo "autoopen_next_task=".$this->autoopen_next_task."<br>";
 				//echo "next woop_status=".$next_woop_bean[0]->woop_status."<br>";
-				
+
 				$next_woop_bean[0]->work_center_res_id = $this->work_center_res_id;
 				$next_woop_bean[0]->work_center_people_id = $this->work_center_people_id;
 				$next_woop_bean[0]->save();
@@ -128,9 +128,13 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 		$woop_fields = $this->get_list_view_array();
 		$ham_wo_id = $_GET['record'];
 		if (empty ($this->work_center_people)){
-			//$WO_fields['WOOP_ACTION'] = '<a href="index.php?to_pdf=true&module=HAM_WOOP&action=assign_woop_people&id="'.$this->id.'>工单认领</a>';
-			$woop_fields['WOOP_ACTION'] = '<a href="#" onclick=assignWoop("'.$this->id.'","'.$ham_wo_id.'")>工单认领</a>';
+			//$woop_fields['WOOP_ACTION'] = '<a href="#" class="button" 8onclick=assignWoop("'.$this->id.'","'.$ham_wo_id.'")>工单认领</a>';
+			$woop_fields['WORK_CENTER_PEOPLE'] = '<a href="#" class="button" onclick=assignWoop("'.$this->id.'","'.$ham_wo_id.'")>工单认领</a>';
 			//$WO_fields['WOOP_ACTION'] = $assign_btn;
+		}
+
+		if (isset($this->act_module) && $this->act_module!=""){
+			$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=takeWoopActionModule("'.$this->act_module.'","'.$this->id.'")>'.$app_list_strings['ham_woop_moduleList'][$this->act_module].'</a>';
 		}
 		return $woop_fields;
 	}

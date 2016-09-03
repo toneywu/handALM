@@ -6,21 +6,20 @@ array (
   array (
     'templateMeta' => 
     array (
-        'includes' =>
-            array (
-                0 =>
-                    array (
-                        'file' => 'custom/modules/HAT_Asset_Trans_Batch/js/HAT_Asset_Trans_Batch_detailview.js',
-                    ),
-            ),
-    'form' =>
+      'includes' => 
+      array (
+        0 => 
+        array (
+          'file' => 'custom/modules/HAT_Asset_Trans_Batch/js/HAT_Asset_Trans_Batch_detailview.js',
+        ),
+      ),
+      'form' => 
       array (
         'buttons' => 
         array (
           0 => 'EDIT',
           1 => 'DUPLICATE',
           2 => 'DELETE',
-         // 3 => 'FIND_DUPLICATES',
         ),
       ),
       'maxColumns' => '2',
@@ -83,7 +82,6 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_CURRENT_ORGANIZATION',
           ),
-          1 => '',
         ),
         3 => 
         array (

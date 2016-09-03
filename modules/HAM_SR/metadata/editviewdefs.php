@@ -83,6 +83,7 @@ array (
             'name' => 'site',
             'studio' => 'visible',
             'label' => 'LBL_SITE',
+            'customCode'=>'{$MAINT_SITE}',
           ),
         ),
         2 =>

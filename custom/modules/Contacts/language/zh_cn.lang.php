@@ -1,5 +1,5 @@
 <?php
-// created: 2016-06-12 21:16:31
+// created: 2016-09-03 17:55:34
 $mod_strings = array (
   'LBL_ACCOUNT_NAME' => '组织 Name:',
   'LBL_ACCOUNT_ID' => '组织 ID:',
@@ -14,7 +14,28 @@ $mod_strings = array (
   'LBL_SAVE_CONTACT' => '保存联系人',
   'LBL_LIST_FORM_TITLE' => '联系人列表',
   'LBL_SEARCH_FORM_TITLE' => '查找联系人',
-  'LBL_REPORTS_TO' => 'Reports To:',
-  'LBL_DIRECT_REPORTS' => 'Direct Reports',
+  'LBL_REPORTS_TO' => '直接领导：',
+  'LBL_DIRECT_REPORTS' => '直接领导',
   'LBL_DIRECT_REPORTS_SUBPANEL_TITLE' => '直接下属',
+  'LBL_ATTRIBUTE1' => '附加属性 1',
+  'LBL_ATTRIBUTE2' => '附加属性 2',
+  'LBL_ATTRIBUTE3' => '附加属性 3',
+  'LBL_ATTRIBUTE4' => '附加属性 4',
+  'LBL_ATTRIBUTE5' => '附加属性 5',
+  'LBL_CHINESE_NAME' => '中文姓名',
+  'LBL_EMPLOYEE_NUMBER' => '员工工号',
+  'LBL_FRAMEWORK' => '业务框架',
+  'LBL_FRAMEWORK_HAA_FRAMEWORKS_ID' => '业务框架(ID)',
+  'LBL_ID_NUMBER' => '身份证件号',
+  'LBL_ID_TYPE' => '身份证件类型',
+  'LBL_ID_TYPE_HAA_CODES_ID' => '高价证件类型（ID）',
+  'LBL_LINKED_USER' => '关联的用户账户',
+  'LBL_LINKED_USER_USER_ID' => '关联的用户账户（ID）',
+  'LBL_SALUTATION_C' => '称呼',
+  'LBL_STATUS' => '人员状态',
+  'LBL_STATUS_HAA_CODES_ID' => '人员状态（ID）',
+  'LBL_SYNC_USER_C' => '同步人员信息',
+  'LBL_DATA_SOURCE_CODE' => '数据来源',
+  'LBL_DATA_SOURCE_ID' => '数据来源ID',
+  'LBL_DATA_SOURCE_REFERENCE' => '数据来源参考',
 );

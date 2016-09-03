@@ -27,14 +27,14 @@ $subpanel_layout['list_fields'] = array (
   array (
     'type' => 'datetimecombo',
     'vname' => 'LBL_SCHEDUALED_START_DATE',
-    'width' => '13%',
+    'width' => '7%',
     'default' => true,
   ),
   'date_schedualed_finish' => 
   array (
     'type' => 'datetimecombo',
     'vname' => 'LBL_SCHEDUALED_FINISH_DATE',
-    'width' => '13%',
+    'width' => '7%',
     'default' => true,
   ),
   'work_center' => 

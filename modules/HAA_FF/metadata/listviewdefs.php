@@ -25,11 +25,11 @@ array (
     'label' => 'LBL_STATUS',
     'width' => '10%',
   ),
-  'DOMAIN' => 
+  'FRAMEWORK' => 
   array (
     'type' => 'relate',
     'studio' => 'visible',
-    'label' => 'LBL_DOMAIN',
+    'label' => 'LBL_FRAMEWORK',
     'id' => 'HAA_FRAMEWORKS_ID',
     'link' => true,
     'width' => '10%',
