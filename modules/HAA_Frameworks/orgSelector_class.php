@@ -92,11 +92,11 @@ function set_site_selector($bean_site_id,$current_module,$current_action,$vardef
                 $html .="</select>";
 
             }
-            $html .='<input type="hidden" name="'.$vardef_site_id_name.'" id="'.$vardef_site_id_name.'" value="'.$current_site .'">';
+            $html .='<input type="hidden" name="'.$vardef_site_id_name.'" id="'.$vardef_site_id_name.'" value="'.$bean_site_id .'">';
             $html .='<script>$("#site_select").change(function(){$("#'.$vardef_site_id_name.'").val($(this).val())})</script>';
         } else {
-            $beanSite = BeanFactory::getBean('HAM_Maint_Sites',$current_site);
-            $html .='<input type="hidden" name="'.$vardef_site_id_name.'" id="'.$vardef_site_id_name.'" value="'.$current_site .'">';
+            $beanSite = BeanFactory::getBean('HAM_Maint_Sites',$bean_site_id);
+            $html .='<input type="hidden" name="'.$vardef_site_id_name.'" id="'.$vardef_site_id_name.'" value="'.$bean_site_id .'">';
             $html .=$beanSite->name;
         }
 

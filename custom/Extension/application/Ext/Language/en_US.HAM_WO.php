@@ -36,7 +36,28 @@
  * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
+
+
+$app_list_strings['moduleListSingular']['HAM_WO']='Work Order';
+
 $app_list_strings['ham_wo_access_right_list']['PUCBLIC']='Public';
 $app_list_strings['ham_wo_access_right_list']['WORKCENTER']='Workcenter';
 $app_list_strings['ham_wo_access_right_list']['RESOURCE']='Resource';
 $app_list_strings['ham_wo_access_right_list']['OWNER']='Owner';
+
+$app_list_strings['ham_wo_status_list']=array (
+  'DRAFT' => 'Draft',
+  'SUBMITTED' => 'Submitted',
+  'APPROVED' => 'Approved',
+  'WSCH'=>'Waiting on Scheduling',
+  'WMATL'=>'Waiting on Material',
+  'WPCOND'=>'Waiting on Condition',
+  'REJECTED' => 'Rejected',
+/*  'RELEASED' => 'Released',*/
+  'INPRG'=>'In Progress',
+  'CANCELED' => 'Canceled',
+  'COMPLETED' => 'Completed',
+  'CLOSED' => 'Closed',
+  'REWORK'=>'Rework',
+  'WPREV'=>'Waiting on Previous'
+);

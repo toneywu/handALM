@@ -390,7 +390,7 @@ array (
           ),
           1 => 
           array (
-            'name' => 'asset_source_ref',
+            'name' => 'asset_source',
             'label' => 'LBL_SOURCE_REF',
           ),
         ),

@@ -1,5 +1,5 @@
 <?php
-// created: 2016-08-23 13:59:34
+// created: 2016-09-04 17:46:57
 $GLOBALS['tabStructure'] = array (
   'LBL_TABGROUP_SALES' => 
   array (
@@ -17,6 +17,7 @@ $GLOBALS['tabStructure'] = array (
       8 => 'HAT_Warranty_Types',
       9 => 'HAT_Meters',
       10 => 'HAT_Meter_Types',
+      11 => 'HAT_Asset_Sources',
     ),
   ),
   'LBL_GROUPTAB1_1454774981' => 

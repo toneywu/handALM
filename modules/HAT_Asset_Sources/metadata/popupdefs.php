@@ -5,23 +5,37 @@ $popupMeta = array (
     'orderBy' => 'hat_asset_sources.name',
     'whereClauses' => array (
   'name' => 'hat_asset_sources.name',
+  'source_type' => 'hat_asset_sources.source_type',
+  'description' => 'hat_asset_sources.description',
 ),
     'searchInputs' => array (
-  0 => 'hat_asset_sources_number',
   1 => 'name',
-  2 => 'priority',
-  3 => 'status',
+  4 => 'source_type',
+  5 => 'description',
+),
+    'searchdefs' => array (
+  'source_type' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_SOURCE_TYPE',
+    'width' => '10%',
+    'name' => 'source_type',
+  ),
+  'name' => 
+  array (
+    'name' => 'name',
+    'width' => '10%',
+  ),
+  'description' => 
+  array (
+    'type' => 'text',
+    'label' => 'LBL_DESCRIPTION',
+    'sortable' => false,
+    'width' => '10%',
+    'name' => 'description',
+  ),
 ),
     'listviewdefs' => array (
-  'TYPE' => 
-  array (
-    'type' => 'enum',
-    'default' => true,
-    'studio' => 'visible',
-    'label' => 'LBL_TYPE',
-    'width' => '10%',
-    'name' => 'type',
-  ),
   'NAME' => 
   array (
     'width' => '32%',
@@ -38,6 +52,15 @@ $popupMeta = array (
     'width' => '40%',
     'default' => true,
     'name' => 'description',
+  ),
+  'TYPE' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_TYPE',
+    'width' => '10%',
+    'name' => 'type',
   ),
 ),
 );

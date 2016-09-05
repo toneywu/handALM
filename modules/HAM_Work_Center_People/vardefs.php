@@ -164,12 +164,12 @@ $dictionary['HAM_Work_Center_People'] = array(
             'len' => 36,
             'size' => '20',
             ),
-'perople' => 
+'people' => 
       array (
             'required' => false,
             'source' => 'non-db',
-            'name' => 'perople',
-            'vname' => 'LBL_PEROPLE',
+            'name' => 'people',
+            'vname' => 'LBL_PEOPLE',
             'type' => 'relate',
             'massupdate' => 0,
             'no_default' => false,

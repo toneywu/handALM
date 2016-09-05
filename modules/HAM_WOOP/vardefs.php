@@ -25,8 +25,6 @@ $dictionary['HAM_WOOP'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
-
-			
 		),
 		'wo_number' => array (
 			'required' => false,
@@ -54,8 +52,6 @@ $dictionary['HAM_WOOP'] = array (
 			'rname' => 'wo_number',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
-
-			
 		),
 
 		'woop_number' => array (
@@ -77,8 +73,6 @@ $dictionary['HAM_WOOP'] = array (
 			'merge_filter' => 'disabled',
 			'len' => '255',
 			'size' => '20',
-
-			
 		),
 		'date_target_start' => array (
 			'required' => true,
@@ -101,8 +95,6 @@ $dictionary['HAM_WOOP'] = array (
 			'enable_range_search' => false,
 			'dbType' => 'datetime',
 			//'display_default' => 'now&12:00am',
-
-	
 		),
 		'date_target_finish' => array (
 			'required' => true,
@@ -125,8 +117,6 @@ $dictionary['HAM_WOOP'] = array (
 			'enable_range_search' => false,
 			'dbType' => 'datetime',
 			// 'display_default' => 'now&12:00am',
-
-	
 		),
 		'date_actual_start' => array (
 			'required' => false,
@@ -149,8 +139,6 @@ $dictionary['HAM_WOOP'] = array (
 			'enable_range_search' => false,
 			'dbType' => 'datetime',
 			// 'display_default' => 'now&12:00am',
-
-	
 		),
 		'date_actual_finish' => array (
 			'required' => false,

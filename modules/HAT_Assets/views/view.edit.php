@@ -77,6 +77,13 @@ class HAT_AssetsViewEdit extends ViewEdit
                 $current_supplier_desc=isset($this->bean->supplier_desc)?$this->bean->supplier_desc:"";
                 echo ('<script>$("#supplier_org").parent().html(\'<input type="hidden" name="supplier_org" id="supplier_org" value="'.$current_supplier_org.'"/><input type="hidden" name="supplier_org_id" id="supplier_org_id" value="'.$current_supplier_org_id.'"/><input type="text" name="supplier_desc" id="supplier_desc" value="'.$current_supplier_desc.'"/>\');</script>');
             }
+
+            if($beanFramework->source_reference_field_rule=='TEXT'){
+                $current_source_reference = isset($this->bean->asset_source)?($this->bean->asset_source):"";
+                $current_source_reference_id=isset($this->bean->asset_source_id)?$this->bean->asset_source_id:"";
+                $current_source_reference_desc=isset($this->bean->asset_source_ref)?$this->bean->asset_source_ref:"";
+                echo ('<script>$("#asset_source").parent().html(\'<input type="hidden" name="asset_source" id="asset_source" value="'.$current_source_reference.'"/><input type="hidden" name="asset_source_id" id="asset_source_id" value="'.$current_source_reference_id.'"/><input type="text" name="asset_source_ref" id="asset_source_ref" value="'.$current_source_reference_desc.'"/>\');</script>');
+            }
         }
 
 	    //如果已经选择产品，无论是否产品对应的FlexForm有值，值将界面展开。

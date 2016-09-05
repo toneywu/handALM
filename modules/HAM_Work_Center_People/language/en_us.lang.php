@@ -33,4 +33,5 @@ $mod_strings = array (
   'LBL_ACTIVITIES_SUBPANEL_TITLE' => 'Activities',
   'LBL_HAM_WORK_CENTER_PEOPLE_SUBPANEL_TITLE' => 'Work_Center_People',
   'LBL_NEW_FORM_TITLE' => 'New Work_Center_People',
+  ''
 );

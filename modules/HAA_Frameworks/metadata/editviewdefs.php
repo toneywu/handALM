@@ -146,7 +146,8 @@ array (
         3=>
         array (
           0=>'supplier_field_rule',
-          1=>'')
+          1=>'source_reference_field_rule'
+          )
         ),
       'lbl_editview_panel3' => 
       array (

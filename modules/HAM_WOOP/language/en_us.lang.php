@@ -69,5 +69,6 @@ $mod_strings = array (
   'LBL_PRIORITY'=>'PRIORITY',
   'LBL_LOCATION'=>'LOCATION',
   'LBL_WO_STATUS'=>'WO_STATUS',
-  'LBL_EDITVIEW_PANEL3'=>'Next Operatoin'
+  'LBL_EDITVIEW_PANEL3'=>'Next Operation',
+  'LBL_TAKE_OWNERSHIP'=>'Take it'
 );

@@ -124,18 +124,23 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 	function get_list_view_data() {
 		//refer to the task module as an example
 		//or refer to the asset module as the first customzation module with this feature
+
 		global $app_list_strings, $timedate;
 		$woop_fields = $this->get_list_view_array();
 		$ham_wo_id = $_GET['record'];
-		if (empty ($this->work_center_people)){
-			//$woop_fields['WOOP_ACTION'] = '<a href="#" class="button" 8onclick=assignWoop("'.$this->id.'","'.$ham_wo_id.'")>工单认领</a>';
-			$woop_fields['WORK_CENTER_PEOPLE'] = '<a href="#" class="button" onclick=assignWoop("'.$this->id.'","'.$ham_wo_id.'")>工单认领</a>';
-			//$WO_fields['WOOP_ACTION'] = $assign_btn;
-		}
+		$woop_status =$this->woop_status;
 
-		if (isset($this->act_module) && $this->act_module!=""){
-			$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=takeWoopActionModule("'.$this->act_module.'","'.$this->id.'")>'.$app_list_strings['ham_woop_moduleList'][$this->act_module].'</a>';
-		}
+		if (($woop_status=="APPROVED"||$woop_status=="WSCH"||$woop_status=="WMATL"||$woop_status=="WPCOND"||$woop_status=="INPRG"||$woop_status=="REWORK") && (empty($this->action) || $this->action != 'Popup')) {
+				if ( empty ($this->work_center_people)){
+					$woop_fields['WORK_CENTER_PEOPLE'] = '<a href="#" class="button" onclick=assignWoop("'.$this->id.'","'.$ham_wo_id.'")>'. translate('LBL_TAKE_OWNERSHIP','HAM_WOOP').'</a>';
+					//$WO_fields['WOOP_ACTION'] = $assign_btn;
+				}
+
+				if (!empty($this->act_module) && !empty($this->work_center_people)){
+					//有动作模块，并且已经有人员分配
+					$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=takeWoopActionModule("'.$this->act_module.'","'.$this->id.'")>'.$app_list_strings['ham_woop_moduleList'][$this->act_module].'</a>';
+				}
+			}
 		return $woop_fields;
 	}
 

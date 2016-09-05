@@ -54,7 +54,7 @@ array (
         array (
           0 => 
           array (
-            'name' => 'event_type_c',
+            'name' => 'event_type',
             'studio' => 'visible',
             'label' => 'LBL_EVENT_TYPE',
           ),

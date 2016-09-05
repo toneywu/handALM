@@ -73,9 +73,7 @@ $mod_strings = array (
   'LBL_CHANGE_STATUS' => '可修改资产状态',
   'LBL_CHANGE_LOCATION' => '可修改资产地点',
   'LBL_PROCESSING_ASSET_STATUS' => '过程中资产状态',
-  'LBL_CHANGE_ORGANIZATION' => '可修改资产组织',
-  'LBL_CHANGE_CONTACT' => '可修改资产使用人',
-  'LBL_CHANGE_ORANIZATION_LE' => '更改组织时，跨法人单位',
+  'LBL_CHANGE_ORANIZATION_LE' => '更改所属组织时，跨法人单位',
   'LBL_CHANGE_LOCATION_DESC' => '可修改资产地点说明',
   'LBL_REQUIRE_APPROVAL_WORKFLOW' => '需要审批流',
   'LBL_REQUIRE_CONFIRMATION' => '需要2步确认',
@@ -86,4 +84,10 @@ $mod_strings = array (
   'LNK_IMPORT_HAT_EVENTTYPE' => '导入 资产事件类型',
   'LBL_HAT_EVENTTYPE_SUBPANEL_TITLE' => '资产事件类型',
   
+  'LBL_CHANGE_OWNING_ORG'=>'可修改所属组织',
+  'LBL_CHANGE_OWNING_PERSON'=>'可修改所属负责人',
+  'LBL_CHANGE_USING_ORG'=>'可修改使用组织',
+  'LBL_CHANGE_USING_PERSON'=>'可修改使用人',
+  'LBL_CHANGE_PARENT'=>'可修改父资产关系',
+  'LBL_CHANGE_RACK_POSITION'=>'可修改IT机柜内位置',
 );

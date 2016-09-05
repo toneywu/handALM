@@ -63,7 +63,7 @@ array (
         array (
           0 => 
           array (
-            'name' => 'perople',
+            'name' => 'people',
             'studio' => 'visible',
             'label' => 'LBL_PEROPLE',
           ),

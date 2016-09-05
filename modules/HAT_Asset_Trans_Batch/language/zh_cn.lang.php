@@ -72,4 +72,14 @@ $mod_strings = array (
   'LBL_ENVENT_TYPE_CONFIRM' => '请确认您选择的“事件类型”是正确的。之后若重新选择事件类型会重置整个页面中的数据，从而丢失您已经填写的数据。并且“事件类型”在单据保存后将禁止再个性。<br/><br/> 点击 - 是的 - 确认您的选择（并重置其它字段）。<br/> 点击 - 否 - 放弃您的选择。',
     'LBL_FRAMEWORKS'=>'业务框架',
     'LBL_FRAMEWORKS_ID'=>'业务框架(ID)'
+      'LBL_SOURCE_WOOP'=>'来源工单工序',
+  'LBL_SOURCE_WO'=>'来源工单',
+  'LBL_OWNER'=>'负责人',
+    'LBL_CURRENT_OWNING_ORG_ID' => '所属组织 (ID)',
+  'LBL_CURRENT_OWNING_ORG' => '所属组织',
+  'LBL_TARGET_OWNING_ORG_ID' => '目标所属组织 (ID)',
+  'LBL_TARGET_OWNING_ORG' => '目标所属组织',
+  'LBL_TARGET_USING_ORG_ID' => '目标使用组织 (ID)',
+  'LBL_TARGET_USING_ORG' => '目标使用组织',
+  'LBL_PLANNED_COMPLETE_DATE'=>'计划完成日期',
 );

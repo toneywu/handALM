@@ -93,6 +93,7 @@ $mod_strings = array (
   'LBL_ERR_NO_BUSINESS_FRAMEWORK_CREATOR'=>'ERROR： No Business Framework has been defined or assigned to you. You can define a new Business Framework',
     'LBL_CODE'=>'Framework Code',
   'LBL_EDITVIEW_PANEL3'=>'Customer Tracking Rules',
-  'LBL_SUPPLIER_FIELD_RULE'=>'Supplier/Provider Field Type'
+  'LBL_SUPPLIER_FIELD_RULE'=>'Supplier/Provider Field Type',
+  'LBL_SOURCE_REFERENCE_FIELD_RULE'=>'Source Reference Field Type',
 
 );
