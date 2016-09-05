@@ -95,5 +95,5 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL3'=>'Customer Tracking Rules',
   'LBL_SUPPLIER_FIELD_RULE'=>'Supplier/Provider Field Type',
   'LBL_SOURCE_REFERENCE_FIELD_RULE'=>'Source Reference Field Type',
-
+'LBL_ITRACK_ASSET_GROUP'=>'Asset Group for Server-Rack'
 );

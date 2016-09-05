@@ -6,7 +6,7 @@ array (
   array (
     'type' => 'varchar',
     'label' => 'LBL_WO_NUMBER',
-    'width' => '10%',
+    'width' => '5%',
     'default' => true,
   ),
   'WORK_CENTER' => 
@@ -48,7 +48,7 @@ array (
     'type' => 'enum',
     'studio' => 'visible',
     'label' => 'LBL_WOOP_STATUS',
-    'width' => '10%',
+    'width' => '12%',
     'default' => true,
   ),
   'DATE_SCHEDUALED_START' => 
@@ -65,13 +65,13 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-  'DESCRIPTION' => 
+/*  'DESCRIPTION' => 
   array (
     'type' => 'text',
     'label' => 'LBL_DESCRIPTION',
     'sortable' => false,
     'width' => '10%',
     'default' => true,
-  ),
+  ),*/
 );
 ?>

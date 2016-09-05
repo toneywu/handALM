@@ -85,6 +85,38 @@ class HIT_Racks extends HIT_Racks_sugar {
 	}
 
 
+
+    function save($check_notify = false) {
+        //在保存之前，先创建一个资产
+        if (empty($this->hat_assets_id)) {
+            $asset = BeanFactory::getBean('HAT_Assets'); //新增资产
+            $asset->id = create_guid();
+            $asset->new_with_id = true;
+        } else {
+            $asset = BeanFactory::getBean('HAT_Assets',$this->hat_assets_id); //更新已有资产信息
+        }
+
+        $asset->haa_frameworks_id = $this->haa_frameworks_id;
+        $asset->name = $this->asset;
+        $asset->asset_desc = $this->name;
+        $asset->aos_products_id = $this->aos_products_id;
+        $asset->supplier_org_id = $this->supplier_org_id;
+        $asset->asset_source_id = $this->asset_source_id;
+        $asset->asset_status = $this->asset_status;
+        $asset->using_org_id = $this->using_org_id;
+        $asset->using_details = $this->using_person;
+        $asset->owning_org_id = $this->owning_org_id;
+        $asset->owning_details = $this->owning_person;
+        $asset->using_person_id = $this->using_person_id;
+        $asset->owning_person_id = $this->owning_person_id;
+        $asset->enable_it_rack = true;
+        $asset->start_date = $this->start_date;
+        $asset->save();
+
+        $this->hat_assets_id = $asset->id;
+        parent :: save($check_notify); //保存WO主体
+    }
+
 	function __construct(){
 		parent::__construct();
 	}

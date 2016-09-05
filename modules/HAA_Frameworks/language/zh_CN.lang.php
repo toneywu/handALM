@@ -94,5 +94,7 @@ $mod_strings = array (
   'LBL_ERR_NO_BUSINESS_FRAMEWORK_CREATOR'=>'错误：找不到合同的业务框架，你有些功能将无法正确使用。你可以定义一个新的业务框架',
   'LBL_CODE'=>'业务框架代码',
   'LBL_SUPPLIER_FIELD_RULE'=>'供应商字段输入类型',
-  'LBL_SOURCE_REFERENCE_FIELD_RULE'=>'来源参考字段输入类型'
+  'LBL_SOURCE_REFERENCE_FIELD_RULE'=>'来源参考字段输入类型',
+  'LBL_ITRACK_ASSET_GROUP'=>'服务器机柜默认资产组',
+
 );

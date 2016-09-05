@@ -112,6 +112,7 @@ array (
             'name' => 'wo_status',
             'studio' => 'visible',
             'label' => 'LBL_WO_STATUS',
+            'customCode'=>'{$WO_STATUS_TAGED}',
           ),
           1 => 'event_type',
         ),

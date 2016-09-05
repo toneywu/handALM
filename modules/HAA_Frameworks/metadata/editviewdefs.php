@@ -147,7 +147,12 @@ array (
         array (
           0=>'supplier_field_rule',
           1=>'source_reference_field_rule'
-          )
+          ),
+        4=>
+        array (
+          0=>'itrack_asset_group',
+          1=>''
+          ),
         ),
       'lbl_editview_panel3' => 
       array (

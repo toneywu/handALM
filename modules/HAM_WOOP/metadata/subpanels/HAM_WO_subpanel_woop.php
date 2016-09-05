@@ -5,7 +5,7 @@ $subpanel_layout['list_fields'] = array (
   array (
     'type' => 'varchar',
     'vname' => 'LBL_WOOP_NUMBER',
-    'width' => '7%',
+    'width' => '5%',
     'default' => true,
   ),
   'name' => 
@@ -20,7 +20,7 @@ $subpanel_layout['list_fields'] = array (
     'type' => 'enum',
     'studio' => 'visible',
     'vname' => 'LBL_WOOP_STATUS',
-    'width' => '10%',
+    'width' => '14%',
     'default' => true,
   ),
   'date_schedualed_start' => 

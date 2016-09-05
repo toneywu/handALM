@@ -8,15 +8,13 @@ class HAM_WOViewDetail extends ViewDetail {
 
 	function Display() {
 
-		//֮ǰ������������ݣ��ڴ˲�����ʾ
-		/*echo "ViewDetail";
-		foreach ($this->bean as $key => $value) {
-		    echo '</br>'.$key;
-		}*/
-		parent :: Display(); //���ø��෽��
+		global $app_list_strings;
+
+		if (isset($this->bean->wo_status))
+			//$this->bean->wo_status = "<span class='color_tag color_doc_status_{$this->wo_status}'>" . $app_list_strings['ham_wo_status_list'][$this->wo_status] . "</span>";
+		    $this->ss->assign('WO_STATUS_TAGED',"<span class='color_tag color_doc_status_{$this->bean->wo_status}'>" . $app_list_strings['ham_wo_status_list'][$this->bean->wo_status] . "</span>");
+			parent :: Display();
 
 	}
-
-	
 
 }

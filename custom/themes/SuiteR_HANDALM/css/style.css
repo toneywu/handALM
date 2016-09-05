@@ -422,7 +422,7 @@ input[type=text], select{
 .color_doc_status_APPROVED {
 	background-color: #91E9ED;/*亮蓝*/
 }
-.color_doc_status_WORKING {
+.color_doc_status_INPRG {
 	background-color: #BEEECC;/*淡绿*/
 }
 .color_doc_status_REJECTED {
@@ -432,7 +432,25 @@ input[type=text], select{
 	background-color: #d7d7d7;/*灰*/
 }
 .color_doc_status_CLOSED {
-	background-color: #7BBE98;/*中绿*/
+	background-color: #009688;/*深绿*/
+}
+.color_doc_status_WSCH {
+	background-color: #b4a775;/*淡黄*/
+}
+.color_doc_status_WMATL {
+	background-color: #b4a775;/*淡黄*/
+}
+.color_doc_status_WPCOND {
+	background-color: #b4a775;/*淡黄*/
+}
+.color_doc_status_WPREV {
+	background-color: #add1d5;/*蓝*/
+}
+.color_doc_status_COMPLETED {
+	background-color: #7BBE98;/*淡黄*/
+}
+.color_doc_status_REWORK {
+	background-color: #aeadd5;/*灰*/
 }
 
 

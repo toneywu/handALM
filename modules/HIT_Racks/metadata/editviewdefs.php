@@ -39,8 +39,8 @@ array (
         array (
           0 => 
           array (
-            'name' => 'asset',
-            'displayParams' => 
+            'name' => 'asset_number',
+/*            'displayParams' => 
             array (
               //'initial_filter' => '&maint_site_advanced="+encodeURIComponent(document.getElementById("site").value)+"',
               'field_to_name_array' => 
@@ -50,7 +50,7 @@ array (
                 'asset_desc' => 'name',
               ),
               //'call_back_function' => 'setLocationPopupReturn',
-            ),
+*/            ),
           ),
           1 => 'name',
         ),
