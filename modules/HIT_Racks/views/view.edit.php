@@ -16,27 +16,33 @@ class HIT_RacksViewEdit extends ViewEdit
 
         $beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
             if (isset($beanFramework->itrack_aos_products_id) && empty($this->bean->aos_products_id)) {
-              //从Framework默认机械的资产组
+              //如果当前机柜还没有资产组信息，则从Framework默认机柜的资产组
+              //否则的话不对产品进行任意复制，系统会自动读取记录的值
                 $this->bean->aos_products_id = $beanFramework->itrack_aos_products_id;
                 $this->bean->asset_group     = $beanFramework->itrack_asset_group;
             }
 
         if (isset($this->bean->hat_assets_id)) {
-            //echo '))))))))))))))))))))))))'.$this->bean->hat_assets_id;
+        	//如果当前数据有ID号，也就是说当前是在编辑修改模式，而不是新增模式下
             $asset = BeanFactory::getBean('HAT_Assets',$this->bean->hat_assets_id); //更新已有资产信息
+
             $this->bean->asset_number = $asset->asset_number;
+            $this->bean->asset_location_id = $asset->hat_asset_locations_hat_assetshat_asset_locations_ida;
+            $this->bean->asset_location = $asset->hat_asset_locations_hat_assets_name;
+
             $this->bean->aos_products_id = $asset->aos_products_id ;
             $this->bean->supplier_org_id = $asset->supplier_org_id;
             $this->bean->asset_source_id = $asset->asset_source_id ;
+            $this->bean->supplier_desc = $asset->supplier_desc;
+            $this->bean->asset_source_type = $asset->asset_source_type;
+            $this->bean->asset_source_ref= $asset->asset_source_ref;
             $this->bean->asset_status = $asset->asset_status;
             $this->bean->using_org_id = $asset->using_org_id;
             $this->bean->owning_org_id = $asset->owning_org_id;
             $this->bean->using_person_id = $asset->using_person_id ;
             $this->bean->owning_person_id = $asset->owning_person_id ;
-            $this->bean->using_person = $asset->using_person;
-            $this->bean->owning_person= $asset->owning_person;
-            $this->bean->using_details = $asset->using_person;
-            $this->bean->owning_details= $asset->owning_person;
+            $this->bean->using_person_desc = $asset->using_person_desc;
+            $this->bean->owning_person_desc= $asset->owning_person_desc;
             $this->bean->using_org = $asset->using_org;
             $this->bean->owning_org= $asset->owning_org;
             $this->bean->start_date = $asset->start_date ;

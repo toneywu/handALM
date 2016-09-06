@@ -103,4 +103,6 @@ $mod_strings = array (
   'LBL_OWNING_PERSON'=>'所属负责人',
   'LBL_USING_ORG'=>'使用组织',
   'LBL_USING_PERSON'=>'使用人',
+    'LBL_SOURCE_REF'=>'来源参考说明',
+  'LBL_OWING_ORG_USING'=>'使用单位所有',
 );

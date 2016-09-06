@@ -76,15 +76,20 @@ class HIT_Racks extends HIT_Racks_sugar {
         if(!empty($this->hat_assets_id)) {
             $bean_asset = BeanFactory::getBean('HAT_Assets',$this->hat_assets_id);
             $HIT_Racks_fields['STATUS'] = "<span class='color_tag color_asset_status_".$bean_asset->asset_status."'>".$app_list_strings['asset_status_list'][$bean_asset->asset_status]."</span>";
-            $HIT_Racks_fields['HAT_ASSETS_ACCOUNTS_ID'] = $bean_asset->hat_assets_accountsaccounts_ida;
+/*            $HIT_Racks_fields['HAT_ASSETS_ACCOUNTS_ID'] = $bean_asset->hat_assets_accountsaccounts_ida;
             $HIT_Racks_fields['HAT_ASSETS_ACCOUNTS_NAME']= $bean_asset->hat_assets_accounts_name;
-            $HIT_Racks_fields['HAT_ASSET_LOCATIONS_ID'] = $bean_asset->hat_asset_locations_hat_assetshat_asset_locations_ida;
+*/          $HIT_Racks_fields['HAT_ASSET_LOCATIONS_ID'] = $bean_asset->hat_asset_locations_hat_assetshat_asset_locations_ida;
             $HIT_Racks_fields['HAT_ASSET_LOCATIONS'] = $bean_asset->hat_asset_locations_hat_assets_name;
+            $HIT_Racks_fields['HAT_ASSET_USING_ORG'] = $bean_asset->using_org;
+            $HIT_Racks_fields['HAT_ASSET_USING_ORG_ID'] = $bean_asset->using_org_id;
+
+
+            if(isset($bean_asset->using_org_id) && ($bean_asset->owning_org_id==$bean_asset->using_org_id))
+                $HIT_Racks_fields['HAT_ASSET_OWNING_ORG_USING'] =  translate('LBL_SEARCH_DROPDOWN_YES','app_list_strings');
+
         }
 		return $HIT_Racks_fields;
 	}
-
-
 
     function save($check_notify = false) {
         //在保存之前，先创建一个资产
@@ -97,24 +102,39 @@ class HIT_Racks extends HIT_Racks_sugar {
         }
 
         $asset->haa_frameworks_id = $this->haa_frameworks_id;
-        $asset->name = $this->asset;
+        $asset->name = $this->asset_number;//asset_tag
+        $asset->asset_number = $this->asset_number;//asset_number
         $asset->asset_desc = $this->name;
         $asset->aos_products_id = $this->aos_products_id;
+
+        $asset->hat_asset_locations_hat_assetshat_asset_locations_ida = $this->asset_location_id;
+
         $asset->supplier_org_id = $this->supplier_org_id;
+        $asset->supplier_desc = $this->supplier_desc;
+        $asset->asset_source_type = $this->asset_source_type;
+
         $asset->asset_source_id = $this->asset_source_id;
+        $asset->asset_source_ref = $this->asset_source_ref;
+
         $asset->asset_status = $this->asset_status;
+
         $asset->using_org_id = $this->using_org_id;
-        $asset->using_details = $this->using_person;
         $asset->owning_org_id = $this->owning_org_id;
-        $asset->owning_details = $this->owning_person;
-        $asset->using_person_id = $this->using_person_id;
+
+        $asset->owning_person_desc = $this->owning_person_desc;
         $asset->owning_person_id = $this->owning_person_id;
+
+        $asset->using_person_desc = $this->using_person_desc;
+        $asset->using_person_id = $this->using_person_id;
+
         $asset->enable_it_rack = true;
         $asset->start_date = $this->start_date;
         $asset->save();
 
+        //将当前的机柜对应到新创建的设备资产上
         $this->hat_assets_id = $asset->id;
-        parent :: save($check_notify); //保存WO主体
+
+        parent :: save($check_notify); //保存RACK
     }
 
 	function __construct(){

@@ -12,14 +12,34 @@ class HIT_RACKSViewDetail extends ViewDetail
         global $db,$app_list_strings,$mod_strings;
 
         //读取资产相关的字段
-        if(!empty($this->bean->hat_assets_id)) {
-            $bean_asset = BeanFactory::getBean('HAT_Assets',$this->bean->hat_assets_id);
-            $this->bean->asset_desc = $bean_asset->asset_desc;
-            $this->bean->asset_status = "<span class='color_tag color_asset_status_".$bean_asset->asset_status."'>".$app_list_strings['asset_status_list'][$bean_asset->asset_status]."</span>";
-            $this->bean->hat_assets_accounts_id = $bean_asset->using_org_id;
-            $this->bean->hat_assets_accounts_name = $bean_asset->using_org;
-            $this->bean->hat_asset_locations_id = $bean_asset->hat_asset_locations_hat_assetshat_asset_locations_ida;
-            $this->bean->hat_asset_locations = $bean_asset->hat_asset_locations_hat_assets_name;
+        if (isset($this->bean->hat_assets_id)) {
+          //如果当前数据有ID号，也就是说当前是在编辑修改模式，而不是新增模式下
+            $asset = BeanFactory::getBean('HAT_Assets',$this->bean->hat_assets_id); //更新已有资产信息
+
+            $this->bean->asset_number = $asset->asset_number;
+            $this->bean->asset_location_id = $asset->hat_asset_locations_hat_assetshat_asset_locations_ida;
+            $this->bean->asset_location = $asset->hat_asset_locations_hat_assets_name;
+
+            $this->bean->aos_products_id = $asset->aos_products_id ;
+            $this->bean->asset_group = $asset->asset_group ;
+
+            $this->bean->supplier_org_id = $asset->supplier_org_id;
+            $this->bean->supplier_org = (empty($asset->supplier_desc))?$asset->supplier_org:$asset->supplier_desc;
+            $this->bean->asset_source_id = $asset->asset_source_id ;
+            $this->bean->supplier_desc = $asset->supplier_desc;
+            $this->bean->asset_source_type = $asset->asset_source_type;
+            $this->bean->asset_source_ref= $asset->asset_source_ref;
+            $this->bean->asset_status = $asset->asset_status;
+            //$this->bean->asset_status = "<span class='color_tag color_asset_status_".$asset->asset_status."'>".$app_list_strings['asset_status_list'][$asset->asset_status]."</span>";
+            $this->bean->using_org_id = $asset->using_org_id;
+            $this->bean->owning_org_id = $asset->owning_org_id;
+            $this->bean->using_person_id = $asset->using_person_id ;
+            $this->bean->owning_person_id = $asset->owning_person_id ;
+            $this->bean->using_person_desc = $asset->using_person_desc;
+            $this->bean->owning_person_desc= $asset->owning_person_desc;
+            $this->bean->using_org = $asset->using_org;
+            $this->bean->owning_org= $asset->owning_org;
+            $this->bean->start_date = $asset->start_date ;
 
         //画出机柜图
             $position_html = "";
