@@ -54,6 +54,9 @@ if (!empty ($current_id)) {
 		if ($people_name != null || $people_id == null) {
 			$current_bean->work_center_people = $people_name;
 			$current_bean->work_center_people_id = $people_id;
+			//如果这里Owner有值。把Owner对应的User-id写到HAM_WOOP对应的assigned_user_id字段
+			$res_people_bean = BeanFactory :: getBean('HAM_Work_Center_People', $people_id);
+			$current_bean->assign_user_id = $res_people_bean->created_by;
 			$current_bean->save();
 		}
 	}
