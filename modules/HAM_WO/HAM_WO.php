@@ -7,13 +7,12 @@
 require_once ('modules/HAM_WO/HAM_WO_sugar.php');
 class HAM_WO extends HAM_WO_sugar {
 
-	function saveWO($check_notify=false,$onlySave,$wo_status) {
-		if($onlySave=="O"){
-			$this->wo_status=$wo_status;
+	function saveWO($check_notify = false, $onlySave, $wo_status) {
+		if ($onlySave == "O") {
+			$this->wo_status = $wo_status;
 			parent :: save($check_notify); //保存WO主体
 		}
 	}
-
 
 	function save($check_notify = false) {
 
@@ -41,7 +40,9 @@ class HAM_WO extends HAM_WO_sugar {
 				$bean_numbering->save();
 			}
 		}
-
+		
+		
+		
 		// 在资产事务处理保存时判断，如果事务处理的行状态达标，则更新资产状态
 		$focus_wo_status = $this->wo_status;
 		if ($focus_wo_status == 'SUBMITTED') {
@@ -72,47 +73,63 @@ class HAM_WO extends HAM_WO_sugar {
 
 		//工作单审批通过时（APPROVED）会将工单下第一道工序状态变为已批准（APPROVED）。其余工序状态变为等待前序（WPREV）。
 		//这里的第一道工序、以及后序工序不包括已经删除、取消或结束的工序
-		
-		if ($this->wo_status == "SUBMITTED"||$this->wo_status=="APPROVED") {
+
+		if ($this->wo_status == "SUBMITTED" || $this->wo_status == "APPROVED") {
 			//遍历工序  
-			
+
 			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('WOOP_NUMBER', "ham_woop.woop_status not in ('CLOSED','CANCELED') and ham_wo_id='" . $this->id . "'");
 			if (!empty ($ham_woops)) {
-				
+
 				foreach ($ham_woops as $key => $value) {
 					if ($key == 0) {
-						
+
 						$ham_woops[0]->woop_status = "APPROVED";
-						
+
 					} else {
 						$ham_woops[$key]->woop_status = "WPREV";
 					}
 					$ham_woops[$key]->save();
 				}
-				
+
 			}
-		}elseif ( $this->wo_status == "CANCELED" ) {
+		}
+		elseif ($this->wo_status == "CANCELED") {
 			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('WOOP_NUMBER', "ham_woop.woop_status not in ('COMPLETED','CLOSED') and ham_wo_id='" . $this->id . "'");
 			if (!empty ($ham_woops)) {
-				
+
 				foreach ($ham_woops as $key => $value) {
 					$ham_woops[$key]->woop_status = "CANCELED";
 					$ham_woops[$key]->save();
 				}
-				
+
 			}
-		}elseif ( $this->wo_status == "COMPLETED"|| $this->wo_status == "CLOSED") {
+		}
+		elseif ($this->wo_status == "COMPLETED" || $this->wo_status == "CLOSED") {
 			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('WOOP_NUMBER', "ham_wo_id='" . $this->id . "'");
 			if (!empty ($ham_woops)) {
-				
+
 				foreach ($ham_woops as $key => $value) {
-					$ham_woops[$key]->woop_status =$this->wo_status;
+					$ham_woops[$key]->woop_status = $this->wo_status;
 					$ham_woops[$key]->save();
 				}
 			}
 		}
-
-		//die();
+		
+		if (isset ($this->source_type) && $this->source_type != "") {
+			$this->source_type="";
+			//1 通过合同找合同条目 
+			//2将合同条目插入到工单对象行里面去
+			$contract_product_beans = BeanFactory :: getBean('AOS_Products_Quotes')->get_full_list('', "aos_products_quotes.parent_id = '{$this->contract_id}'");
+			foreach ($contract_product_beans as $contract_product_bean) {
+				$ham_wo_line_bean = BeanFactory :: newBean("HAM_WO_Lines");
+				$ham_wo_line_bean->ham_wo_id = $this->id;
+				$ham_wo_line_bean->product_id = $contract_product_bean->product_id;
+				$ham_wo_line_bean->quantity = $contract_product_bean->product_qty;
+				$ham_wo_line_bean->contract_id = $this->contract_id;
+				$ham_wo_line_bean->save();
+			}
+		}
+		
 		parent :: save($check_notify); //保存WO主体
 		//add by yuan.chen@2016-07-22
 		$bean_id = $this->activity;
@@ -125,10 +142,10 @@ class HAM_WO extends HAM_WO_sugar {
 
 		$checkBean = BeanFactory :: getBean("HAM_WOOP");
 		$ham_woops = $checkBean->get_full_list('', "ham_woop.ham_wo_id ='" . $this->id . "'");
-		echo 'ham_woops='.count($ham_woops);
+		//echo 'ham_woops='.count($ham_woops);
 		if (count($ham_woops) == 0) {
 			//<1>.引用标准作业动力
-			if (count($ham_act_ops)>0&&$bean_id!=null) {
+			if (count($ham_act_ops) > 0 && $bean_id != null) {
 				$index = 1;
 				$pre_date_target_finish = null;
 				$pre_date_schedualed_finish = null;
@@ -137,7 +154,7 @@ class HAM_WO extends HAM_WO_sugar {
 
 					$ham_woop = BeanFactory :: getBean('HAM_WOOP');
 					$ham_woop->name = $ham_act_op->name;
-					echo 'activity_status=' . $ham_act_op->activity_status;
+					//echo 'activity_status=' . $ham_act_op->activity_status;
 					$ham_woop->woop_status = $ham_act_op->activity_status;
 					$ham_woop->ham_work_center_id = $ham_act_op->sr_work_center_rule_id;
 					$ham_woop->work_center_res_id = $ham_act_op->work_center_res_id;
@@ -274,6 +291,24 @@ class HAM_WO extends HAM_WO_sugar {
 
 	function __construct() {
 		parent :: __construct();
+	}
+
+	function saveContracts($check_notify) {
+		echo "ready to save" . $this->contract_id;
+		//1 通过合同找合同条目 
+		//2将合同条目插入到工单对象行里面去
+		$contract_product_beans = BeanFactory :: getBean('AOS_Products_Quotes')->get_full_list('', "aos_products_quotes.parent_id = '{$this->contract_id}'");
+
+		foreach ($contract_product_beans as $key => $value) {
+			$ham_wo_line_bean = BeanFactory :: newBean("HAM_WO_Lines");
+			$ham_wo_line_bean->ham_wo_id = $this->id;
+			$ham_wo_line_bean->product_id = $contract_product_beans->product_id;
+			$ham_wo_line_bean->quantity = $contract_product_beans->product_qty;
+			$ham_wo_line_bean->contract_id = $this->contract_id;
+			$ham_wo_line_bean->save();
+		}
+		parent :: save($check_notify); //保存WO主体
+
 	}
 
 }
