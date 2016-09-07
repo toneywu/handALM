@@ -59,20 +59,18 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 		
 		//没什么特殊的，就是工序在APPROVED之后可以手工变为WSCH、WMATL、WPCOND。 如果是这3个状态，同时同步工单状态=Y，就去修改工作单状态
 		if($current_db_status=="APPROVED"&&($this->woop_status=="WSCH"||$this->woop_status=="WMATL"||$this->woop_status=="WPCOND")&&$this->syn_wo_status=="Y"){
-
+			
 			$wo_bean = BeanFactory::getBean("HAM_WO",$this->ham_wo_id);
 			$wo_bean->wo_stauts=$this->woop_status;
 			$wo_bean->saveWO(false,'O',$this->woop_status);
 		}
-
-		//die();
-
+		
 		$next_woop = "SELECT woop_number
 													    FROM ham_woop
 														WHERE ham_woop.deleted =0 AND ham_wo_id = '" . $this->ham_wo_id . "' and woop_number>" . $this->woop_number . "
 														ORDER BY ham_woop.woop_number ASC
 														LIMIT 0 , 1";
-		$next_woop_bean = BeanFactory :: getBean("HAM_WOOP")->get_full_list("woop_number ASC", "HAM_WOOP.ham_wo_id ='" . $this->ham_wo_id . "' and woop_number>" . $this->woop_number, "", "0");
+		$next_woop_bean = BeanFactory :: getBean("HAM_WOOP")->get_full_list("woop_number ASC", "ham_woop.ham_wo_id ='" . $this->ham_wo_id . "' and woop_number>" . $this->woop_number, "", "0");
 
 		$show_status = $this->woop_status;
 		$sel = "SELECT woop_number
@@ -98,8 +96,8 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 		//			echo "current_db_status=".$current_db_status."<br>";
 		//		}
 		//完工的动作
-		echo "current_db_status=".$current_db_status."<br>";
-		echo "show_status=".$show_status."<br>";
+		//echo "current_db_status=".$current_db_status."<br>";
+		//echo "show_status=".$show_status."<br>";
 		if ($current_db_status <> $show_status && ($show_status == "COMPLETED" || $show_status == "CLOSED")) {
 			//非最后一道工序
 			if ($last_woop_number <> $this->woop_number) {
@@ -108,10 +106,13 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 				}
 				//echo "autoopen_next_task=".$this->autoopen_next_task."<br>";
 				//echo "next woop_status=".$next_woop_bean[0]->woop_status."<br>";
-
+				//echo "work_center_res_id=".$this->work_center_res_id."<br>";
+				//echo "work_center_people_id=".$this->work_center_people_id."<br>";
+				
 				$next_woop_bean[0]->work_center_res_id = $this->work_center_res_id;
 				$next_woop_bean[0]->work_center_people_id = $this->work_center_people_id;
 				$next_woop_bean[0]->save();
+				
 			} else {
 				//最后一道工序 在工序完成后，立刻跳转到工作单完工界面中。 
 			}
@@ -124,31 +125,14 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 	function get_list_view_data() {
 		//refer to the task module as an example
 		//or refer to the asset module as the first customzation module with this feature
-
 		global $app_list_strings, $timedate;
 		$woop_fields = $this->get_list_view_array();
 		$ham_wo_id = $_GET['record'];
-		$woop_status =isset($this->woop_status)?$this->woop_status:"";
-
-		if (($woop_status=="APPROVED"||$woop_status=="WSCH"||$woop_status=="WMATL"||$woop_status=="WPCOND"||$woop_status=="INPRG"||$woop_status=="REWORK") && (empty($this->action) || $this->action != 'Popup')) {
-				if ( empty ($this->work_center_people)){
-					$woop_fields['WORK_CENTER_PEOPLE'] = '<a href="#" class="button" onclick=assignWoop("'.$this->id.'","'.$ham_wo_id.'")>'. translate('LBL_TAKE_OWNERSHIP','HAM_WOOP').'</a>';
-					//$WO_fields['WOOP_ACTION'] = $assign_btn;
-				}
-
-				if (!empty($this->act_module) && !empty($this->work_center_people)){
-					//有动作模块，并且已经有人员分配
-					$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=takeWoopActionModule("'.$this->act_module.'","'.$this->id.'")>'.$app_list_strings['ham_woop_moduleList'][$this->act_module].'</a>';
-				}
-			}
-
-
-		$WO_fields = $this->get_list_view_array();
-		//为工作单的状态着色
-		if (!empty ($woop_status))
-			$woop_fields['WOOP_STATUS'] = "<span class='color_tag color_doc_status_".$woop_status."'>" . $app_list_strings['ham_wo_status_list'][$woop_status]. "</span>";
-
-
+		if (empty ($this->work_center_people)){
+			//$WO_fields['WOOP_ACTION'] = '<a href="index.php?to_pdf=true&module=HAM_WOOP&action=assign_woop_people&id="'.$this->id.'>工单认领</a>';
+			$woop_fields['WOOP_ACTION'] = '<a href="#" onclick=assignWoop("'.$this->id.'","'.$ham_wo_id.'")>工单认领</a>';
+			//$WO_fields['WOOP_ACTION'] = $assign_btn;
+		}
 		return $woop_fields;
 	}
 
