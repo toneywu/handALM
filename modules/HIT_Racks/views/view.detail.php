@@ -39,8 +39,9 @@ class HIT_RACKSViewDetail extends ViewDetail
             $this->bean->owning_person_desc= $asset->owning_person_desc;
             $this->bean->using_org = $asset->using_org;
             $this->bean->owning_org= $asset->owning_org;
-            $this->bean->start_date = $asset->start_date ;
-
+            $this->bean->start_date = $asset->start_date;
+            $this->bean->received_date = $asset->received_date;
+            $this->bean->dismiss_date = $asset->dismiss_date;
         //画出机柜图
             $position_html = "";
             $total_hight= $this->bean->height;

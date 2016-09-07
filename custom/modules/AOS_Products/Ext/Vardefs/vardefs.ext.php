@@ -15,6 +15,12 @@ $dictionary["AOS_Products"]["fields"]["aos_products_haa_uom_conversions_1"] = ar
 );
 
 
+ // created: 2016-09-06 20:26:41
+$dictionary['AOS_Products']['fields']['asset_criticality_c']['inline_edit']='1';
+$dictionary['AOS_Products']['fields']['asset_criticality_c']['labelValue']='asset criticality';
+
+ 
+
  // created: 2016-05-02 19:48:36
 $dictionary['AOS_Products']['fields']['asset_name_rule_c']['inline_edit']='';
 $dictionary['AOS_Products']['fields']['asset_name_rule_c']['labelValue']='Asset Name Rule';
@@ -48,6 +54,12 @@ $dictionary['AOS_Products']['fields']['data_source_id_c']['labelValue']='Source 
  // created: 2016-08-02 14:10:04
 $dictionary['AOS_Products']['fields']['data_source_reference_c']['inline_edit']='';
 $dictionary['AOS_Products']['fields']['data_source_reference_c']['labelValue']='Source reference';
+
+ 
+
+ // created: 2016-09-06 20:25:20
+$dictionary['AOS_Products']['fields']['enable_fa_c']['inline_edit']='';
+$dictionary['AOS_Products']['fields']['enable_fa_c']['labelValue']='enable fa';
 
  
 

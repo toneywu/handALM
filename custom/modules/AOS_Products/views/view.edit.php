@@ -1,4 +1,6 @@
 <?php
+if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
@@ -37,49 +39,36 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_ASSIGNED_TO_ID' => '分配用户编号',
-  'LBL_ASSIGNED_TO_NAME' => '分配用户',
-  'LBL_SECURITYGROUPS' => '查看用户组',
-  'LBL_SECURITYGROUPS_SUBPANEL_TITLE' => '查看用户组',
-  'LBL_ID' => '编号',
-  'LBL_DATE_ENTERED' => '创建日期',
-  'LBL_DATE_MODIFIED' => '修改日期',
-  'LBL_MODIFIED' => '修改人',
-  'LBL_MODIFIED_ID' => '修改人编号',
-  'LBL_MODIFIED_NAME' => '修改人姓名',
-  'LBL_CREATED' => '创建人',
-  'LBL_CREATED_ID' => '创建人编号',
-  'LBL_DESCRIPTION' => '描述',
-  'LBL_DELETED' => '已删除',
-  'LBL_NAME' => '名称',
-  'LBL_CREATED_USER' => '用户创建',
-  'LBL_MODIFIED_USER' => '用户修改',
-  'LBL_LIST_NAME' => '名称',
-  'LBL_EDIT_BUTTON' => '编辑',
-  'LBL_REMOVE' => '移除',
-  'LBL_LIST_FORM_TITLE' => '资产来源 列表',
-  'LBL_MODULE_NAME' => '资产来源',
-  'LBL_MODULE_TITLE' => '资产来源',
-  'LBL_HOMEPAGE_TITLE' => '我的 资产来源',
-  'LNK_NEW_RECORD' => '创建 资产来源',
-  'LNK_LIST' => '查看 资产来源',
-  'LNK_IMPORT_HAT_ASSET_SOURCES' => 'Import 资产来源',
-  'LBL_SEARCH_FORM_TITLE' => '查找 资产来源',
-  'LBL_HISTORY_SUBPANEL_TITLE' => '历史',
-  'LBL_ACTIVITIES_SUBPANEL_TITLE' => '销售活动',
-  'LBL_HAT_ASSET_SOURCES_SUBPANEL_TITLE' => '资产来源',
-  'LBL_NEW_FORM_TITLE' => '新建 资产来源',
-  'LBL_FRAMEWORK'=>'业务框架',
-  'LBL_TYPE'=>'类型',
-  'LBL_HEADER_NUM'=>'头编号',
-  'LBL_LINE_NUM'=>'行编号',
-  'LBL_ITEM_NUM'=>'物料编码',
-  'LBL_SUPPLIER_ORG'=>'供应商',
-  'LBL_LINE_QTY'=>'数量',
-  'LBL_LINE_PRICE'=>'单价',
-  'LBL_SOURCE_TYPE'=>'来源类型',
-  'LBL_SOURCE_REFERENCE'=>'来源参考',
-  'LBL_SOURCE_ID'=>'来源ID',
-  'LBL_RECEIVED_DATE'=>'接收日期',
-);
+
+class AOS_ProductsViewEdit extends ViewEdit
+{
+
+	function Display() {
+
+        //1、初始化Framework
+        require_once('modules/HAA_Frameworks/orgSelector_class.php');
+        $current_framework_id = empty($this->bean->hat_framework_id)?"":$this->bean->hat_framework_id;
+        $current_module = $this->module;
+        $current_action = $this->action;
+        $this->ss->assign('FRAMEWORK_C',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_framework_id_c'));
+
+        $beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
+        //从业务框架中复制默认的物料单位
+        if(isset($beanFramework)&&empty($this->bean->default_product_uom_id)) {
+           $this->bean->primary_uom_c = $beanFramework->default_product_uom;
+           $this->bean->haa_uom_id_c = $beanFramework->default_product_uom_id;
+        }
+		//*********************处理业务框架，以及业务框架下销售及服务人员是List或是Text END********************
+
+		parent::Display();
+    }
+
+
+ 	public function __construct()
+ 	{
+ 		parent::ViewEdit();
+ 		$this->useForSubpanel = true;
+ 		$this->useModuleQuickCreateTemplate = true;
+ 	}
+
+}

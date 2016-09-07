@@ -95,6 +95,7 @@ $mod_strings = array (
   'LBL_CODE'=>'业务框架代码',
   'LBL_SUPPLIER_FIELD_RULE'=>'供应商字段输入类型',
   'LBL_SOURCE_REFERENCE_FIELD_RULE'=>'来源参考字段输入类型',
-  'LBL_ITRACK_ASSET_GROUP'=>'服务器机柜默认资产组',
+  'LBL_ITRACK_ASSET_GROUP'=>'IT服务器机柜默认资产组',
+  'LBL_EDITVIEW_PANEL3'=>'客户信息跟踪规则',
 
 );

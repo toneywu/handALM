@@ -159,6 +159,21 @@ array (
             'name' => 'asset_source',
             'studio' => 'visible',
             'label' => 'LBL_ASSET_SOURCE',
+            'displayParams' => 
+            array (
+              //'initial_filter' => '&type_advanced=Good',
+              'field_to_name_array' => 
+              array (
+                'name' => 'asset_source',
+                'id' => 'asset_source_id',
+                'received_date' => 'received_date',
+                'line_price' => 'original_cost',
+                'currency_id' => 'currency_id',
+                'supplier_org' => 'supplier_org',
+                'supplier_org_id' => 'supplier_org_id',
+                'supplier_desc'=>'supplier_desc',
+              ),
+             ),
           ),
         ),
         10 => 
@@ -175,12 +190,16 @@ array (
         array (
           0 =>
           array (
-            'name' => 'start_date',
+            'name' => 'received_date',
           ),
+          1 => 'start_date'
+        ),
+        12 =>
+        array (
+          0 => 'dismiss_date',
           1 => ''
         ),
-
-        12 => 
+        13 => 
         array (
           0 => 
           array (
@@ -195,7 +214,7 @@ array (
             'label' => 'LBL_OWNING_PERSON',
           ),
         ),
-        13 => 
+        14 => 
         array (
           0 => 
           array (

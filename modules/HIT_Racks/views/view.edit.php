@@ -45,7 +45,9 @@ class HIT_RacksViewEdit extends ViewEdit
             $this->bean->owning_person_desc= $asset->owning_person_desc;
             $this->bean->using_org = $asset->using_org;
             $this->bean->owning_org= $asset->owning_org;
-            $this->bean->start_date = $asset->start_date ;
+            $this->bean->start_date = $asset->start_date;
+            $this->bean->received_date = $asset->received_date;
+            $this->bean->dismiss_date = $asset->dismiss_date;
         }
         parent::Display();
 

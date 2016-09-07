@@ -95,6 +95,20 @@ array (
             'label' => 'LBL_LINE_PRICE',
           ),
         ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'received_date',
+            'label' => 'LBL_RECEIVED_DATE',
+          ),
+          1 => 
+          array (
+            'name' => 'currency_id',
+            'studio' => 'visible',
+            'label' => 'LBL_CURRENCY',
+          ),
+        ),
       ),
     ),
   ),

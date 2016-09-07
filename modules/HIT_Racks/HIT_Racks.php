@@ -112,23 +112,30 @@ class HIT_Racks extends HIT_Racks_sugar {
         $asset->supplier_org_id = $this->supplier_org_id;
         $asset->supplier_desc = $this->supplier_desc;
         $asset->asset_source_type = $this->asset_source_type;
-
         $asset->asset_source_id = $this->asset_source_id;
         $asset->asset_source_ref = $this->asset_source_ref;
-
         $asset->asset_status = $this->asset_status;
-
         $asset->using_org_id = $this->using_org_id;
         $asset->owning_org_id = $this->owning_org_id;
-
         $asset->owning_person_desc = $this->owning_person_desc;
         $asset->owning_person_id = $this->owning_person_id;
-
         $asset->using_person_desc = $this->using_person_desc;
         $asset->using_person_id = $this->using_person_id;
-
         $asset->enable_it_rack = true;
+        $asset->maintainable = true;
         $asset->start_date = $this->start_date;
+        $asset->received_date = $this->received_date;
+        $asset->dismiss_date = $this->dismiss_date;
+
+        if (isset($asset->aos_products_id)) {
+            //以下数据更新只进行一次，如果保存后确定了资产组关系后，就不再更新。
+            //也就是说用户可以在资产上更新这些字段，而需要永远与资产组保持一致
+            $asset_group = BeanFactory::getBean('AOS_Products',$asset->aos_products_id); //将分类等值直接从Product上进行复制
+            $asset->aos_product_categories_id = $asset_group->aos_product_category_id;//产品分类
+            $asset->enable_fa = $asset_group->enable_fa_c;//FA标志
+            $asset->asset_criticality = $asset_group->asset_criticality_c;//重要性
+        }
+
         $asset->save();
 
         //将当前的机柜对应到新创建的设备资产上

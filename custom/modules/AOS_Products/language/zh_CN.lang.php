@@ -1,5 +1,5 @@
 <?php
-// created: 2016-08-02 16:22:43
+// created: 2016-09-06 20:29:32
 $mod_strings = array (
   'LBL_CONTACT' => '人员',
   'LBL_PRIMARY_UOM_HAA_UOM_ID' => '计计量单位  (related  ID)',
@@ -27,4 +27,6 @@ $mod_strings = array (
   'LBL_HAA_FRAMEWORKS_ID' => '业务框架 (ID)',
   'LBL_FLEXFORM_HAA_FF_ID' => '动态界面模板(ID)',
   'LBL_ICON' => '资产图标',
+  'LBL_ENABLE_FA' => '与财务固定资产同步',
+  'LBL_ASSET_CRITICALITY' => '资产重要性',
 );
