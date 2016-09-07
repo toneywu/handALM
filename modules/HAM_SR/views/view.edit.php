@@ -153,6 +153,10 @@ class HAM_SRViewEdit extends ViewEdit
             $resule_contacts =  $db->query($sel_current_contact);
 
             while ( $resule_contact = $db->fetchByAssoc($resule_contacts) ) {
+                //将当前用户默认到跟踪人信息
+                $this->bean->owned_by = $resule_contact['contact_name'];
+                $this->bean->owned_by_id = $resule_contact['contact_id'];
+                //将当前用户默认到报告人信息
                 $this->bean->reporter = $resule_contact['contact_name'];
                 $this->bean->contact_id_c = $resule_contact['contact_id'];
                 $this->bean->work_phone = $resule_contact['phone_work'];

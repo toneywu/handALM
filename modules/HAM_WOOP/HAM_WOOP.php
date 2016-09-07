@@ -52,7 +52,7 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 		$sql = "select woop_status from ham_woop where ham_woop.id='" . $id . "'";
 		$results = $db->query($sql);
 		$current_db_status = "";
-	
+		
 		while ($result = $db->fetchByAssoc($results)) {
 			$current_db_status = $result['woop_status'];
 		}
@@ -66,18 +66,18 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 		}
 		
 		$next_woop = "SELECT woop_number
-													    FROM ham_woop
-														WHERE ham_woop.deleted =0 AND ham_wo_id = '" . $this->ham_wo_id . "' and woop_number>" . $this->woop_number . "
-														ORDER BY ham_woop.woop_number ASC
-														LIMIT 0 , 1";
+		FROM ham_woop
+		WHERE ham_woop.deleted =0 AND ham_wo_id = '" . $this->ham_wo_id . "' and woop_number>" . $this->woop_number . "
+		ORDER BY ham_woop.woop_number ASC
+		LIMIT 0 , 1";
 		$next_woop_bean = BeanFactory :: getBean("HAM_WOOP")->get_full_list("woop_number ASC", "ham_woop.ham_wo_id ='" . $this->ham_wo_id . "' and woop_number>" . $this->woop_number, "", "0");
 
 		$show_status = $this->woop_status;
 		$sel = "SELECT woop_number
-													    FROM ham_woop
-														WHERE ham_woop.deleted =0 AND ham_wo_id = '" . $this->ham_wo_id . "'
-														ORDER BY ham_woop.woop_number DESC
-														LIMIT 0 , 1";
+		FROM ham_woop
+		WHERE ham_woop.deleted =0 AND ham_wo_id = '" . $this->ham_wo_id . "'
+		ORDER BY ham_woop.woop_number DESC
+		LIMIT 0 , 1";
 
 		$bean_woop_list = $db->query($sel);
 		$last_woop_number = 0;
@@ -128,11 +128,26 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 		global $app_list_strings, $timedate;
 		$woop_fields = $this->get_list_view_array();
 		$ham_wo_id = $_GET['record'];
-		if (empty ($this->work_center_people)){
-			//$WO_fields['WOOP_ACTION'] = '<a href="index.php?to_pdf=true&module=HAM_WOOP&action=assign_woop_people&id="'.$this->id.'>工单认领</a>';
-			$woop_fields['WOOP_ACTION'] = '<a href="#" onclick=assignWoop("'.$this->id.'","'.$ham_wo_id.'")>工单认领</a>';
-			//$WO_fields['WOOP_ACTION'] = $assign_btn;
+		$woop_status =isset($this->woop_status)?$this->woop_status:"";
+
+		if (($woop_status=="APPROVED"||$woop_status=="WSCH"||$woop_status=="WMATL"||$woop_status=="WPCOND"||$woop_status=="INPRG"||$woop_status=="REWORK") && (empty($this->action) || $this->action != 'Popup')) {
+			if ( empty ($this->work_center_people)){
+				$woop_fields['WORK_CENTER_PEOPLE'] = '<a href="#" class="button" onclick=assignWoop("'.$this->id.'","'.$ham_wo_id.'")>'. translate('LBL_TAKE_OWNERSHIP','HAM_WOOP').'</a>';
+					//$WO_fields['WOOP_ACTION'] = $assign_btn;
+			}
+
+			if (!empty($this->act_module) && !empty($this->work_center_people)){
+					//有动作模块，并且已经有人员分配
+				$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=takeWoopActionModule("'.$this->act_module.'","'.$this->id.'")>'.$app_list_strings['ham_woop_moduleList'][$this->act_module].'</a>';
+			}
 		}
+
+
+		$WO_fields = $this->get_list_view_array();
+		//为工作单的状态着色
+		if (!empty ($woop_status))
+			$woop_fields['WOOP_STATUS'] = "<span class='color_tag color_doc_status_".$woop_status."'>" . $app_list_strings['ham_wo_status_list'][$woop_status]. "</span>";
+
 		return $woop_fields;
 	}
 
