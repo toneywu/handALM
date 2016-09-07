@@ -45,15 +45,19 @@ if (!empty ($current_id)) {
 		$bean_resource_people_list = $db->query($sql);
 		$people_name = "";
 		$people_id = "";
-		//echo "$sql";
 		while ($last_resource_people = $db->fetchByAssoc($bean_resource_people_list)) {
 			$people_name = $last_resource_people['resource_people_name'];
 			$people_id = $last_resource_people['resource_people_id'];
 		}
-
 		if ($people_name != null || $people_id == null) {
 			$current_bean->work_center_people = $people_name;
 			$current_bean->work_center_people_id = $people_id;
+			//如果这里Owner有值。把Owner对应的User-id写到HAM_WOOP对应的assigned_user_id字段
+			$res_people_bean = BeanFactory :: getBean('HAM_Work_Center_People', $people_id);
+			if(!empty($res_people_bean->contact_id)){
+				$contact_bean = BeanFactory :: getBean('Contacts', $res_people_bean->contact_id);
+				$current_bean->assign_user_id = $contact_bean->user_id_c;
+			}
 			$current_bean->save();
 		}
 	}
