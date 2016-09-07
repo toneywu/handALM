@@ -69,19 +69,11 @@ $popupMeta = array (
     'listviewdefs' => array (
   'NAME' => 
   array (
-    'width' => '15%',
+    'width' => '30%',
     'label' => 'LBL_LIST_ACCOUNT_NAME',
     'link' => true,
     'default' => true,
     'name' => 'name',
-  ),
-  'FULL_NAME_C' => 
-  array (
-    'type' => 'varchar',
-    'default' => true,
-    'label' => 'LBL_FULL_NAME',
-    'width' => '30%',
-    'name' => 'full_name_c',
   ),
   'ORG_TYPE_C' => 
   array (
@@ -98,7 +90,7 @@ $popupMeta = array (
     'link' => true,
     'label' => 'LBL_MEMBER_OF',
     'id' => 'PARENT_ID',
-    'width' => '15%',
+    'width' => '25%',
     'default' => true,
     'name' => 'parent_name',
   ),

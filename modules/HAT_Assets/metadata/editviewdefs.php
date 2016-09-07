@@ -390,8 +390,23 @@ array (
           ),
           1 => 
           array (
-            'name' => 'asset_source_ref',
+            'name' => 'asset_source',
             'label' => 'LBL_SOURCE_REF',
+            'displayParams' => 
+            array (
+              //'initial_filter' => '&type_advanced=Good',
+              'field_to_name_array' => 
+              array (
+                'name' => 'asset_source',
+                'id' => 'asset_source_id',
+                'received_date' => 'received_date',
+                'line_price' => 'original_cost',
+                'currency_id' => 'currency_id',
+                'supplier_org' => 'supplier_org',
+                'supplier_org_id' => 'supplier_org_id',
+                'supplier_desc'=>'supplier_desc',
+              ),
+             ),
           ),
         ),
         1 => 

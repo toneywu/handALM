@@ -17,7 +17,7 @@
 			
 			if (!empty($focus->fetched_row['id'])) {
 			  // this will retrieve a record from ModuleB into $bean corresponding to the ID of the desired record in ModuleB
-			  $bean = BeanFactory::getBean('HAT_EventType', $focus->hat_eventtype_id_c); // $module, $record_id
+			  $bean = BeanFactory::getBean('HAT_EventType', $focus->hat_eventtype_id); // $module, $record_id
 			  if ($bean) { // test if $bean was loaded successfully
 				// this is only necessary if you'll need custom fields from ModuleB
 				//$bean->custom_fields->retrieve();

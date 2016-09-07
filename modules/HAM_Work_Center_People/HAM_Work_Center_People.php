@@ -52,16 +52,16 @@ class HAM_Work_Center_People extends HAM_Work_Center_People_sugar {
 		//or refer to the asset module as the first customzation module with this feature
 		 global $app_list_strings, $timedate;
 
-			$WO_fields = $this->get_list_view_array();
+			$View_fields = $this->get_list_view_array();
 			
-			/*foreach($WO_fields as $x=>$x_value)
+			/*foreach($View_fields as $x=>$x_value)
 				  {
 				  echo "Key=" . $x . ", Value=" . $x_value;
 				  echo "<br>";
 				  }
 
-			if(!empty($WO_fields['CONTACT_ID'])){
-				$bean_contact = BeanFactory::getBean('Contacts', $WO_fields['CONTACT_ID']);
+			if(!empty($View_fields['CONTACT_ID'])){
+				$bean_contact = BeanFactory::getBean('Contacts', $View_fields['CONTACT_ID']);
 				echo 'id = '.$bean_contact->contact_id;
 				echo 'id = '.$bean_contact->linked_user_c;
 				echo 'account_name = '.$bean_contact->account_name;
@@ -69,11 +69,12 @@ class HAM_Work_Center_People extends HAM_Work_Center_People_sugar {
 			
 			//为工作单的状态着色
 			if (!empty($this->contact_id))
-				$bean_contact = BeanFactory::getBean('Contacts', $WO_fields['CONTACT_ID']);
-				$WO_fields['ORGANIZATION_NAME'] = $this->bean->organization_name = isset($bean_contact->account_name)?$bean_contact->account_name:''; //将bean中的数据复制到@this->bean->map_lat }
-				$WO_fields['USER_NAME'] = $this->bean->user_name = isset($bean_contact->linked_user_c)?$bean_contact->linked_user_c:''; //将bean中的数据复制到@this->bean->map_lat }
-			    //$WO_fields['WO_STATUS'] = "<span class='color_tag color_doc_status_{$this->organization_name}'>".$app_list_strings['organization_name'][$this->organization_name]."</span>";
-			return $WO_fields;
+				$bean_contact = BeanFactory::getBean('Contacts', $View_fields['CONTACT_ID']);
+				if (isset ($bean_contact)) {
+					$View_fields['ORGANIZATION_NAME'] = isset($bean_contact->account_name)?$bean_contact->account_name:''; //将bean中的数据复制到@this->bean->map_lat }
+					$View_fields['USER_NAME'] = isset($bean_contact->linked_user_c)?$bean_contact->linked_user_c:''; //
+				}
+			return $View_fields;
 	}
 }
 ?>

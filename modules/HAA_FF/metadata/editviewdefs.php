@@ -55,9 +55,10 @@ array (
         array (
           0 => 
           array (
-            'name' => 'domain',
+            'name' => 'framework',
             'studio' => 'visible',
-            'label' => 'LBL_DOMAIN',
+            'label' => 'LBL_FRAMEWORK',
+            'customCode'=>'{$FRAMEWORK}'
           ),
           1 => 'name',
         ),

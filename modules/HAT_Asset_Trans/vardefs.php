@@ -162,6 +162,28 @@ $dictionary['HAT_Asset_Trans'] = array(
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
 			),
+		'planned_execution_date' => 
+		array (
+			'required' => true,
+			'name' => 'planned_execution_date',
+			'vname' => 'LBL_PLANNED_EXECUTION_DATE',
+			'type' => 'datetimecombo',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'size' => '20',
+			'enable_range_search' => false,
+			'dbType' => 'datetime',
+			),
 		'planned_complete_date' => 
 		array (
 			'required' => true,
@@ -581,11 +603,11 @@ $dictionary['HAT_Asset_Trans'] = array(
 			'len' => '255',
 			'size' => '20',
 			),
-		'use_location_gis' =>
+		'target_follow_location_gis' =>
 		array (
 			'required' => false,
-			'name' => 'use_location_gis',
-			'vname' => 'LBL_USE_LOCATION_GIS',
+			'name' => 'target_follow_location_gis',
+			'vname' => 'LBL_TARGET_FOLLOW_LOCATION_GIS',
 			'type' => 'bool',
 			'massupdate' => 0,
 			'default' => '1',
@@ -741,6 +763,48 @@ $dictionary['HAT_Asset_Trans'] = array(
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
 			),
+		'target_using_person_desc' => 
+		array (
+			'required' => false,
+			'name' => 'target_using_person_desc',
+			'vname' => 'LBL_TARGET_USING_PERSON_DESC',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+			),
+		'target_owning_person_desc' => 
+		array (
+			'required' => false,
+			'name' => 'target_owning_person_desc',
+			'vname' => 'LBL_TARGET_OWNING_PERSON_DESC',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+			),
 		'planned_execution_date' => 
 		array (
 			'required' => false,
@@ -763,7 +827,7 @@ $dictionary['HAT_Asset_Trans'] = array(
 			'enable_range_search' => false,
 			'dbType' => 'datetime',
 			),
-		'trans_status' => 
+		'asset_trans_status' => 
 		array (
 			'required' => false,
 			'name' => 'trans_status',

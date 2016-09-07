@@ -10,7 +10,6 @@ class HAM_WOViewEdit extends ViewEdit
 
         global $current_user;
         global $db;
-		
 		/*echo "ViewEdit";
         foreach ($this->bean as $key => $value) {
             echo '</br>'.$key;
@@ -18,10 +17,18 @@ class HAM_WOViewEdit extends ViewEdit
 		/*
 		echo "<br/>";
 		echo 'location = '.$this->bean->location;
-		
+
 		foreach ($this->bean->name as $key => $value) {
             echo '</br>'.$key.'value = '.$value;
         }*/
+
+        //1、初始化Framework-Site信息
+        require_once('modules/HAA_Frameworks/orgSelector_class.php');
+        $current_site_id = empty($this->bean->ham_maint_sites_id)?"":$this->bean->ham_maint_sites_id;
+        $current_module = $this->module;
+        $current_action = $this->action;
+        $this->ss->assign('MAINT_SITE',set_site_selector($current_site_id,$current_module,$current_action));
+
 
         if(isset($_GET['sr_id']) && $_GET['sr_id'] !="") {
             //如果有SR关联(由SR创建 WO时)

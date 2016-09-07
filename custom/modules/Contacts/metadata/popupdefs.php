@@ -6,12 +6,14 @@ $popupMeta = array (
     'whereClauses' => array (
   'last_name' => 'contacts.last_name',
   'account_name' => 'accounts.name',
-  'users_contacts_1_name' => 'contacts.users_contacts_1_name',
+  'people_type_c' => 'contacts.people_type_c',
+  'status_c' => 'contacts.status_c',
 ),
     'searchInputs' => array (
   1 => 'last_name',
   2 => 'account_name',
-  3 => 'users_contacts_1_name',
+  4 => 'people_type_c',
+  5 => 'status_c',
 ),
     'create' => array (
   'formBase' => 'ContactFormBase.php',
@@ -25,10 +27,30 @@ $popupMeta = array (
   'createButton' => 'LNK_NEW_CONTACT',
 ),
     'searchdefs' => array (
+  'people_type_c' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'label' => 'LBL_PEOPLE_TYPE',
+    'id' => 'HAA_CODES_ID_C',
+    'link' => true,
+    'width' => '10%',
+    'name' => 'people_type_c',
+  ),
   'last_name' => 
   array (
     'name' => 'last_name',
     'width' => '10%',
+  ),
+  'status_c' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'label' => 'LBL_STATUS',
+    'id' => 'HAA_CODES_ID1_C',
+    'link' => true,
+    'width' => '10%',
+    'name' => 'status_c',
   ),
   'account_name' => 
   array (

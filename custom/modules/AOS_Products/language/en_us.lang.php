@@ -25,4 +25,6 @@ $mod_strings = array (
   'LBL_DATA_SOURCE_REFERENCE' => 'Source reference',
   'LBL_DATA_SOURCE_ID' => 'Source ID',
   'LBL_ICON' => 'Icon',
+  'LBL_ASSET_CRITICALITY'=>'Asset Cricality',
+  'LBL_ENABLE_FA'=>'Sync with Fixed Asset',
 );

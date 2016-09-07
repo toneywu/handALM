@@ -8,6 +8,20 @@ class HAT_Asset_LocationsViewEdit extends ViewEdit
 
     function display(){
 
+        //本函数完成以下事项
+        //1、初始化Framework-Site信息
+        //2、加载基于code_asset_location_type_id的动态界面模板（FF）
+        //3、正常Display
+        //4、基于FF判断是否展开界面
+
+        //1、初始化Framework-Site信息
+        require_once('modules/HAA_Frameworks/orgSelector_class.php');
+        $current_site_id = empty($this->bean->ham_maint_sites_id)?"":$this->bean->ham_maint_sites_id;
+        $current_module = $this->module;
+        $current_action = $this->action;
+        $this->ss->assign('MAINT_SITE',set_site_selector($current_site_id,$current_module,$current_action));
+
+        //2、加载基于code_asset_location_type_id的动态界面模板（FF）
         if(isset($this->bean->code_asset_location_type_id) && ($this->bean->code_asset_location_type_id)!=""){
             //判断是否已经设置有位置分类，如果有分类，则进一步的加载分类对应的FlexForm
             $location_type_id = $this->bean->code_asset_location_type_id;

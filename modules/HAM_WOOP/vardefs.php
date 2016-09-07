@@ -25,24 +25,24 @@ $dictionary['HAM_WOOP'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
-
-			
 		),
-		'wo_number' => array (
-			'required' => false,
+		'wo_number' =>
+		array (
+			'inline_edit' => '',
+			'required' => true,
 			'source' => 'non-db',
 			'name' => 'wo_number',
 			'vname' => 'LBL_WO_NUMBER',
 			'type' => 'relate',
-			'massupdate' => 0,
+			'massupdate' => '0',
+			'default' => NULL,
 			'no_default' => false,
 			'comments' => '',
 			'help' => '',
-			'importable' => 'true',
+			'importable' => false,
 			'duplicate_merge' => 'disabled',
 			'duplicate_merge_dom_value' => '0',
 			'audited' => false,
-			'inline_edit' => true,
 			'reportable' => true,
 			'unified_search' => false,
 			'merge_filter' => 'disabled',
@@ -54,10 +54,8 @@ $dictionary['HAM_WOOP'] = array (
 			'rname' => 'wo_number',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
-
-			
-		),
-
+			'id' => 'ham_wo_id',
+			),
 		'woop_number' => array (
 			'required' => false,
 			'name' => 'woop_number',
@@ -77,8 +75,6 @@ $dictionary['HAM_WOOP'] = array (
 			'merge_filter' => 'disabled',
 			'len' => '255',
 			'size' => '20',
-
-			
 		),
 		'date_target_start' => array (
 			'required' => true,
@@ -101,8 +97,6 @@ $dictionary['HAM_WOOP'] = array (
 			'enable_range_search' => false,
 			'dbType' => 'datetime',
 			//'display_default' => 'now&12:00am',
-
-	
 		),
 		'date_target_finish' => array (
 			'required' => true,
@@ -125,8 +119,6 @@ $dictionary['HAM_WOOP'] = array (
 			'enable_range_search' => false,
 			'dbType' => 'datetime',
 			// 'display_default' => 'now&12:00am',
-
-	
 		),
 		'date_actual_start' => array (
 			'required' => false,
@@ -149,8 +141,6 @@ $dictionary['HAM_WOOP'] = array (
 			'enable_range_search' => false,
 			'dbType' => 'datetime',
 			// 'display_default' => 'now&12:00am',
-
-	
 		),
 		'date_actual_finish' => array (
 			'required' => false,
@@ -368,7 +358,6 @@ $dictionary['HAM_WOOP'] = array (
 			'len' => 36,
 			'size' => '20',
 
-			
 		),
 		'owner' => array (
 			'required' => false,
@@ -397,7 +386,6 @@ $dictionary['HAM_WOOP'] = array (
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
 
-			
 		),
 
 		'work_center_res_id' => array (
@@ -420,7 +408,6 @@ $dictionary['HAM_WOOP'] = array (
 			'len' => 36,
 			'size' => '20',
 
-			
 		),
 
 		'work_center_res' => array (
@@ -450,7 +437,6 @@ $dictionary['HAM_WOOP'] = array (
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
 
-			
 		),
 
 		'work_center_people_id' => array (
@@ -472,8 +458,6 @@ $dictionary['HAM_WOOP'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
-
-			
 		),
 
 		'work_center_people' => array (
@@ -577,8 +561,6 @@ $dictionary['HAM_WOOP'] = array (
 			'size' => '20',
 			'enable_range_search' => false,
 			'precision' => '8',
-
-			
 		),
 
 		'act_module' => array (
@@ -600,11 +582,10 @@ $dictionary['HAM_WOOP'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 100,
 			'size' => '20',
-			'options' => 'moduleList',
+			'options' => 'ham_woop_moduleList',
 			'studio' => 'visible',
 			'dependency' => false,
 
-			
 		),
 
 		#序号     

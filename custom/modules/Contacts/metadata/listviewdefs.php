@@ -33,19 +33,31 @@ array (
       4 => 'account_id',
     ),
   ),
-  'TYPE_C' => 
+  'PEOPLE_TYPE_C' => 
   array (
-    'type' => 'enum',
+    'type' => 'relate',
     'default' => true,
     'studio' => 'visible',
-    'label' => 'LBL_TYPE',
-    'width' => '5%',
+    'label' => 'LBL_PEOPLE_TYPE',
+    'id' => 'HAA_CODES_ID_C',
+    'link' => true,
+    'width' => '10%',
   ),
   'TITLE' => 
   array (
     'width' => '15%',
     'label' => 'LBL_LIST_TITLE',
     'default' => true,
+  ),
+  'STATUS_C' => 
+  array (
+    'type' => 'relate',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_STATUS',
+    'id' => 'HAA_CODES_ID1_C',
+    'link' => true,
+    'width' => '10%',
   ),
   'ACCOUNT_NAME' => 
   array (

@@ -13,14 +13,27 @@ array (
         'default' => true,
         'width' => '10%',
       ),
-      'type_c' => 
+      'people_type_c' => 
       array (
-        'type' => 'enum',
+        'type' => 'relate',
         'default' => true,
         'studio' => 'visible',
-        'label' => 'LBL_TYPE',
+        'label' => 'LBL_PEOPLE_TYPE',
+        'id' => 'HAA_CODES_ID_C',
+        'link' => true,
         'width' => '10%',
-        'name' => 'type_c',
+        'name' => 'people_type_c',
+      ),
+      'status_c' => 
+      array (
+        'type' => 'relate',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_STATUS',
+        'id' => 'HAA_CODES_ID1_C',
+        'link' => true,
+        'width' => '10%',
+        'name' => 'status_c',
       ),
       'favorites_only' => 
       array (

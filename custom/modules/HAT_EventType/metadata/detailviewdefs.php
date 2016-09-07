@@ -127,18 +127,43 @@ array (
         array (
           0 => 
           array (
-            'name' => 'change_organization',
+            'name' => 'change_owning_org',
             'studio' => 'visible',
-            'label' => 'LBL_CHANGE_ORGANIZATION',
+            'label' => 'LBL_CHANGE_OWNING_ORG',
           ),
           1 => 
+          array (
+            'name' => 'change_owning_person',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_OWNING_PERSON',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
           array (
             'name' => 'change_oranization_le',
             'studio' => 'visible',
             'label' => 'LBL_CHANGE_ORANIZATION_LE',
           ),
+          1 => '',
         ),
-        1 => 
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_using_org',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_USING_ORG',
+          ),
+          1 => 
+          array (
+            'name' => 'change_using_person',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_USING_PERSON',
+          ),
+        ),
+        3 => 
         array (
           0 => 
           array (
@@ -146,20 +171,21 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_CHANGE_LOCATION',
           ),
-          1 => 
-          array (
-            'name' => 'change_location_desc',
-            'studio' => 'visible',
-            'label' => 'LBL_CHANGE_LOCATION_DESC',
-          ),
+          1 => '',
         ),
-        2 => 
+        4 => 
         array (
           0 => 
           array (
-            'name' => 'change_contact',
+            'name' => 'change_parent',
             'studio' => 'visible',
-            'label' => 'LBL_CHANGE_CONTACT',
+            'label' => 'LBL_CHANGE_PARENT',
+          ),
+          1 => 
+          array (
+            'name' => 'change_rack_position',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_RACK_POSITION',
           ),
         ),
       ),

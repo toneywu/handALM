@@ -39,3 +39,7 @@
 
 
 $app_list_strings['moduleList']['HAM_WOOP'] = 'WO Operations';
+
+$app_list_strings['ham_woop_moduleList']['']='';
+$app_list_strings['ham_woop_moduleList']['HAT_Asset_Trans_Batch']='Equip./Asset Transaction';
+$app_list_strings['ham_woop_moduleList']['HIT_IP_Allocations']='IP Assignment';

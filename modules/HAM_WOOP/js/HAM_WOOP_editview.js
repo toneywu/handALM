@@ -374,7 +374,7 @@ function date_finish_change(){
 		if($("#date_actual_finish").val()!=null&&$("#date_actual_finish").val()!=""&&$date_actual_start_date!=null){
 			$date_actual_finish_date = (stringToTime($("#date_actual_finish").val())/1000/3600);
 			var $differentHour = $date_actual_finish_date-$date_actual_start_date;
-			if($differentHour>0){
+			if($differentHour>=0){
 				 $("#duration_actual").val((parseFloat($differentHour)).toFixed(5));
 			}else{
 				alert("计划完成日期必须大于等于计划开始日期！");
@@ -383,54 +383,53 @@ function date_finish_change(){
 			var duration_actual_str =  $("#duration_actual").val();	
 		}
 }
-		
+
 
 	$("#date_schedualed_start").change(function(){
 		date_start_change();
 	});
-	
+
 	$("#date_target_start").change(function(){
 		date_start_change();
 	});
-	
+
 	$("#date_actual_start").change(function(){
 		date_start_change();
 	});
-	
-	
+
 	$("#date_schedualed_finish").change(function(){
 		date_finish_change();
 	});
-	
+
 	$("#date_target_finish").change(function(){
 		date_finish_change();
 	});
-	
+
 	$("#date_actual_finish").change(function(){
 		date_finish_change();
 	});
-	
+
 	$("#duration_schedualed").change(function(){
 		duration_change();
 	});
-	
+
 	$("#duration_target").change(function(){
 		duration_change();
 	});
-	
+
 	$("#duration_actual").change(function(){
 		duration_change();
 	});
-	
+
 	$("#woop_status").change(function(){
 		require_field();
 	});
 
-	
+
 	initTransHeaderStatus()
 
 	function initTransHeaderStatus() {
-	    
+
 	    var current_header_status = $("#woop_status").val();
 	    if (current_header_status=="DRAFT") {//可以DRAFT和SUBMIT
 	        $("#woop_status option[value='APPROVED']").remove();
@@ -589,6 +588,12 @@ function date_finish_change(){
 	    }
 	    
 	}
+
+function setEditViewReadonly () { //如果当前头状态为Submitted、Approved、Canceled、Closed需要将字段变为只读
+    $("#EditView_tabs input").attr("readonly",true);
+    $("#EditView_tabs button").attr("readonly",true);
+    $("#EditView_tabs input").attr("style","background-Color:#efefef");
+}
 
 
 });

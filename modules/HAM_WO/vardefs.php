@@ -96,8 +96,6 @@ $dictionary['HAM_WO'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
-
-			
 		),
 		'priority' => array (
 			'required' => true,
@@ -125,8 +123,6 @@ $dictionary['HAM_WO'] = array (
 			'rname' => 'name',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
-
-			
 		),
 		'wo_number' => array (
 			'required' => false,
@@ -147,8 +143,6 @@ $dictionary['HAM_WO'] = array (
 			'merge_filter' => 'disabled',
 			'len' => '255',
 			'size' => '20',
-
-			
 		),
 
 		'contact_id' => array (
@@ -491,8 +485,6 @@ $dictionary['HAM_WO'] = array (
 			'options' => 'ham_wo_status_list',
 			'studio' => 'visible',
 			'dependency' => false,
-
-			
 		),
 		'hat_event_type_id' => array (
 			'required' => false,
@@ -517,7 +509,7 @@ $dictionary['HAM_WO'] = array (
 			
 		),
 		'event_type' => array (
-			'required' => false,
+			'required' => true,
 			'source' => 'non-db',
 			'name' => 'event_type',
 			'vname' => 'LBL_EVENT_TYPE',
@@ -542,8 +534,6 @@ $dictionary['HAM_WO'] = array (
 			'rname' => 'name',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
-
-			
 		),
 		'hat_asset_locations_id' => array (
 			'required' => false,
@@ -564,8 +554,6 @@ $dictionary['HAM_WO'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
-
-			
 		),
 		'location' => array (
 			'required' => true,

@@ -1,45 +1,6 @@
 <?php
-/*********************************************************************************
- * SugarCRM Community Edition is a customer relationship management program developed by
- * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
-
- * SuiteCRM is an extension to SugarCRM Community Edition developed by Salesagility Ltd.
- * Copyright (C) 2011 - 2014 Salesagility Ltd.
- *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU Affero General Public License version 3 as published by the
- * Free Software Foundation with the addition of the following permission added
- * to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
- * IN WHICH THE COPYRIGHT IS OWNED BY SUGARCRM, SUGARCRM DISCLAIMS THE WARRANTY
- * OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
- * details.
- *
- * You should have received a copy of the GNU Affero General Public License along with
- * this program; if not, see http://www.gnu.org/licenses or write to the Free
- * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
- * 02110-1301 USA.
- *
- * You can contact SugarCRM, Inc. headquarters at 10050 North Wolfe Road,
- * SW2-130, Cupertino, CA 95014, USA. or at email address contact@sugarcrm.com.
- *
- * The interactive user interfaces in modified source and object code versions
- * of this program must display Appropriate Legal Notices, as required under
- * Section 5 of the GNU Affero General Public License version 3.
- *
- * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
- * these Appropriate Legal Notices must retain the display of the "Powered by
- * SugarCRM" logo and "Supercharged by SuiteCRM" logo. If the display of the logos is not
- * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
- * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
- ********************************************************************************/
-
+// created: 2016-09-03 14:58:08
 $mod_strings = array (
-  'LBL_ASSIGNED_TO_ID' => 'Assigned User Id',
-  'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
   'LBL_ID' => 'ID',
   'LBL_DATE_ENTERED' => 'Date Created',
   'LBL_DATE_MODIFIED' => 'Date Modified',
@@ -56,14 +17,18 @@ $mod_strings = array (
   'LBL_LIST_NAME' => 'Name',
   'LBL_EDIT_BUTTON' => 'Edit',
   'LBL_REMOVE' => 'Remove',
-  'LBL_LIST_FORM_TITLE' => 'Asset Transaction Batch List',
+  'LBL_ASSIGNED_TO_ID' => 'Assigned User Id',
+  'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
+  'LBL_SECURITYGROUPS' => 'Security Groups',
+  'LBL_SECURITYGROUPS_SUBPANEL_TITLE' => 'Security Groups',
+  'LBL_LIST_FORM_TITLE' => 'Asset Trans. Batch List',
   'LBL_MODULE_NAME' => 'Asset Transaction Batch',
   'LBL_MODULE_TITLE' => 'Asset Transaction Batch',
-  'LBL_HOMEPAGE_TITLE' => 'My Asset Transaction Batch',
-  'LNK_NEW_RECORD' => 'Create Asset Transaction Batch',
-  'LNK_LIST' => 'View Asset Transaction Batch',
-  'LNK_IMPORT_HAT_ASSET_TRANS_BATCH' => 'Import Asset Transaction Batch',
-  'LBL_SEARCH_FORM_TITLE' => 'Search Asset Transaction Batch',
+  'LBL_HOMEPAGE_TITLE' => 'My Asset Trans. Batch',
+  'LNK_NEW_RECORD' => 'Create Asset Trans. Batch',
+  'LNK_LIST' => 'View Asset Trans. Batch',
+  'LNK_IMPORT_HAT_ASSET_TRANS_BATCH' => 'Import Asset Trans. Batch',
+  'LBL_SEARCH_FORM_TITLE' => 'Search Asset Trans. Batch',
   'LBL_HISTORY_SUBPANEL_TITLE' => 'View History',
   'LBL_ACTIVITIES_SUBPANEL_TITLE' => 'Activities',
   'LBL_HAT_ASSET_TRANS_BATCH_SUBPANEL_TITLE' => 'Asset Transaction Batch',
@@ -71,5 +36,35 @@ $mod_strings = array (
   'LBL_ASSET_TRANS_STATUS' => 'Transaction Status',
   'LBL_PLANNED_EXECUTION_DATE' => 'Planned Execution Date',
   'LBL_ENVENT_TYPE_CONFIRM' => 'Please confirm that you choose a right Event Type. Reset Event Type will reset the entire form. The Event Type cannot be modified after saving.<br/><br/> Click - Yes - to confirm your selection. <br/> Click - No - to give up your selection.',
-    'LBL_DOMAIN'=>'Asset Opt. Domin',
+  'LBL_FRAMEWORKS' => 'Business Framework',
+  'LBL_FRAMEWORKS_ID' => 'Business Framework(ID)',
+  'LBL_CURRENT_OWNING_ORG_ID' => 'Current Organization (ID)',
+  'LBL_CURRENT_OWNING_ORG' => 'Current Owning Org',
+  'LBL_TARGET_OWNING_ORG_ID' => 'Target Owning Org (ID)',
+  'LBL_TARGET_OWNING_ORG' => 'Target Owning Org',
+  'LBL_TARGET_USING_ORG_ID' => 'Target Using Org (ID)',
+  'LBL_TARGET_USING_ORG' => 'Target Using Org',
+  'LBL_HAT_ASSET_TRANS_BATCH_HAT_ASSET_TRANS_FROM_HAT_ASSET_TRANS_TITLE' => 'Asset Transactions',
+  'LBL_EDITVIEW_PANEL1' => 'Line Items',
+  'LBL_EDITVIEW_PANEL2' => 'Additional Information',
+  'LBL_EVENT_TYPE' => 'Event Type',
+  'LBL_TRACKING_NUMBER' => 'Tracking Number',
+  'LBL_EVENT_TYPE_HAT_EVENTTYPE_ID' => 'Event Type (related  ID)',
+  'LBL_TARGET_ASSET_STATUS' => 'Target Asset Status',
+  'LBL_CHANGE_LOCATION' => 'Change Location',
+  'LBL_EDITVIEW_PANEL3' => 'Event Type Rules (readonly fields for instruction)',
+  'LBL_CHANGE_ORGANIZATION' => 'Change Organization',
+  'LBL_CHANGE_ORANIZATION_LE' => 'Change Org. & Cross Legal Entity',
+  'LBL_PROCESSING_ASSET_STATUS' => 'Processing Asset Status',
+  'LBL_CHANGE_LOCATION_DESC' => 'Change Location Description',
+  'LBL_CHANGE_CONTACT' => 'Change Contact',
+  'LBL_REQUIRE_APPROVAL_WORKFLOW' => 'Require Approval',
+  'LBL_REQUIRE_CONFIRMATION' => 'Require 2-Step Confirmation',
+  'LBL_CHANGE_TARGET_STATUS' => 'Change Target Status',
+  'LBL_CHANGE_PROCESSING_STATUS' => 'Change Processing Asset Status',
+  'LBL_SUBMITTED' => 'Submitted (Refresh to check the latest status)',
+  'LBL_SOURCE_WOOP'=>'Source WO Operation',
+  'LBL_SOURCE_WO'=>'Source WO',
+  'LBL_OWNER'=>'Owner',
+  'LBL_PLANNED_COMPLETE_DATE'=>'Planned Complete Date',
 );
