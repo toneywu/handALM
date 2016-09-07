@@ -36,7 +36,6 @@
  * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
-$app_list_strings['ham_wo_access_right_list']['PUCBLIC']='公共';
-$app_list_strings['ham_wo_access_right_list']['WORKCENTER']='工作中心';
-$app_list_strings['ham_wo_access_right_list']['RESOURCE']='资源/工种';
-$app_list_strings['ham_wo_access_right_list']['OWNER']='当前负责人';
+
+
+$app_list_strings['moduleList']['HIT_VLAN_LIST'] = 'VLAN_LIST';
