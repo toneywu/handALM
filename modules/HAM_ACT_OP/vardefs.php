@@ -292,7 +292,7 @@ $dictionary['HAM_ACT_OP'] = array(
             'merge_filter' => 'disabled',
             'len' => 100,
             'size' => '20',
-            'options' => 'moduleList',
+            'options' => 'ham_woop_moduleList',
             'studio' => 'visible',
             'dependency' => false,
             ), 
@@ -304,7 +304,7 @@ $dictionary['HAM_ACT_OP'] = array(
         'name' => 'autoopen_next_task',
         'vname' => 'LBL_AUTOOPEN_NEXT_TASK',
         'type' => 'bool',
-        'default'=>'',
+        'default'=>'true',
         'reportable' => true,
         'studio' => 'visible'
         ),
