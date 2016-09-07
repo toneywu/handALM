@@ -111,7 +111,7 @@ $(document).ready(function(){
 	var wo_status = $("#wo_status").val();
 	if(wo_status=="APPROVED"||wo_status=="WSCH"||wo_status=="WMATL"||wo_status=="WPCOND"||wo_status=="INPRG"){
 		mark_field_disabled("ham_act_id_rule",false);
-		mark_field_disabled("site_select",false);
+		mark_field_disabled("site",false);
 		mark_field_disabled("event_type",false);
 		mark_field_disabled("location",false);
 		mark_field_disabled("asset",false);
@@ -160,8 +160,8 @@ $(document).ready(function(){
 
     if($("#source_type").val()=='SR') {
         $("#reported_date").attr("type","text");
-        $("#site_select,#LBL_EDITVIEW_PANEL4 input,#LBL_EDITVIEW_PANEL4 select").attr("readonly",true);
-        $("#site_select,#LBL_EDITVIEW_PANEL4 input,#LBL_EDITVIEW_PANEL4 select").css("background-Color","#efefef");
+        $("#site,#LBL_EDITVIEW_PANEL4 input,#LBL_EDITVIEW_PANEL4 select").attr("readonly",true);
+        $("#site,#LBL_EDITVIEW_PANEL4 input,#LBL_EDITVIEW_PANEL4 select").css("background-Color","#efefef");
         $("#LBL_EDITVIEW_PANEL4 button,#LBL_EDITVIEW_PANEL4 .dateTime").hide();
     }
 

@@ -104,8 +104,7 @@ $mod_strings = array (
   'LBL_WORK_CENTER_RES'=>'资源/工种',
   'LBL_WORK_CENTER_PEOPLE'=>'负责人',
   'LBL_WORK_ORDER_ACCESS'=>'工单修改权限',
-  'LBL_NEXT_WOOP_ASSIGNMENT'=>'工序完工时可指派后续人员?',
-  'LBL_COMPLETE_BY_LAST_WOOP'=>'工单随最后一道工序完成?',
+  'LBL_NEXT_WOOP_ASSIGNMENT'=>'工序完工时可指派后续人员',
+  'LBL_COMPLETE_BY_LAST_WOOP'=>'工单随最后一道工序完成',
   'LBL_BTN_ASSIGN_BUTTON_LABEL'=>'工序认领',
-  'LBL_EDITVIEW_PANEL5'=>'负责人信息'
 );

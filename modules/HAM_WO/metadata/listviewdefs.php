@@ -11,7 +11,7 @@ array (
   ),
   'NAME' => 
   array (
-    'width' => '26%',
+    'width' => '32%',
     'label' => 'LBL_NAME',
     'default' => true,
     'link' => true,
@@ -44,7 +44,7 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-/*  'PRIORITY' => 
+  'PRIORITY' => 
   array (
     'type' => 'relate',
     'studio' => 'visible',
@@ -53,14 +53,14 @@ array (
     'link' => true,
     'width' => '10%',
     'default' => true,
-  ),*/
-/*  'DATE_SCHEDUALED_START' => 
+  ),
+  'DATE_SCHEDUALED_START' => 
   array (
     'type' => 'datetimecombo',
     'label' => 'LBL_SCHEDUALED_START_DATE',
     'width' => '10%',
     'default' => true,
-  ),*/
+  ),
   'DATE_SCHEDUALED_FINISH' => 
   array (
     'type' => 'datetimecombo',
