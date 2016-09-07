@@ -6,6 +6,13 @@ array (
   array (
     'templateMeta' => 
     array (
+	'includes' => 
+      array (
+        0 =>
+        array (
+          'file' => 'modules/AOS_Contracts/js/AOS_Contracts_detailview.js',
+        ),
+      ),
       'form' => 
       array (
         'buttons' => 
