@@ -46,22 +46,21 @@ $(document).ready(function(){
 function initTransHeaderStatus() {
     
     var current_header_status = $("#sr_status").val();
-    if (current_header_status=="DRAFT") {//可以DRAFT和SUBMIT
+    if (current_header_status=="DRAFT") {//可以DRAFT\SUBMIT\CLOSED
         $("#sr_status option[value='APPROVED']").remove();
-        $("#sr_status option[value='WORKING']").remove();
+        $("#sr_status option[value='INPRG']").remove();
         $("#sr_status option[value='REJECTED']").remove();
         $("#sr_status option[value='CANCELED']").remove();
-        $("#sr_status option[value='CLOSED']").remove();
     } else if (current_header_status=="SUBMITTED") { //可以CANCEL和SUBMIT
         $("#sr_status option[value='APPROVED']").remove();
         $("#sr_status option[value='REJECTED']").remove();
-        $("#sr_status option[value='WORKING']").remove();
+        $("#sr_status option[value='INPRG']").remove();
         $("#sr_status option[value='CLOSED']").remove();
         setEditViewReadonly ();
     } else if ((current_header_status=="APPROVED")||(current_header_status=="WORKING")) { //可以CANCEL,APPROVED
         $("#sr_status option[value='SUBMITTED']").remove();
         $("#sr_status option[value='REJECTED']").remove();
-        $("#sr_status option[value='WORKING']").remove();        
+        $("#sr_status option[value='INPRG']").remove();        
         $("#sr_status option[value='DRAFT']").remove();
         $("#sr_status option[value='CLOSED']").remove();
         setEditViewReadonly ();
@@ -69,7 +68,7 @@ function initTransHeaderStatus() {
         $("#sr_status option[value='SUBMITTED']").remove();
         $("#sr_status option[value='REJECTED']").remove();
         $("#sr_status option[value='DRAFT']").remove();
-        $("#sr_status option[value='WORKING']").remove();
+        $("#sr_status option[value='INPRG']").remove();
         $("#sr_status option[value='APPROVED']").remove();
         $("#sr_status option[value='CLOSED']").remove();
         $("#SAVE_HEADER,#save_and_continue,#SAVE_FOOTER").hide();
@@ -78,7 +77,7 @@ function initTransHeaderStatus() {
         $("#sr_status option[value='SUBMITTED']").remove();
         $("#sr_status option[value='REJECTED']").remove();
         $("#sr_status option[value='DRAFT']").remove();
-        $("#sr_status option[value='WORKING']").remove();        
+        $("#sr_status option[value='INPRG']").remove();        
         $("#sr_status option[value='APPROVED']").remove();
         $("#sr_status option[value='CANCELED']").remove();
         $("#SAVE_HEADER,#save_and_continue,#SAVE_FOOTER").hide();
