@@ -53,7 +53,7 @@ $mod_strings = array (
   'LBL_NAME' => 'Name',
   'LBL_CREATED_USER' => 'Created by User',
   'LBL_MODIFIED_USER' => 'Modified by User',
-  'LBL_LIST_NAME' => 'Name',
+  'LBL_LIST_NAME' => 'Event FullName',
   'LBL_EDIT_BUTTON' => 'Edit',
   'LBL_REMOVE' => 'Remove',
   'LBL_LIST_FORM_TITLE' => 'Event Type List',
@@ -92,4 +92,6 @@ $mod_strings = array (
   'LBL_CHANGE_USING_PERSON'=>'Change Using Person',
   'LBL_CHANGE_PARENT'=>'Change Parent Asset',
   'LBL_CHANGE_RACK_POSITION'=>'Change IT Rack Position',
+  'LBL_PARENT_EVENTTYPE'=>'Parent EventType',
+  'LBL_HAA_FF'=>'FlexForm',
 );

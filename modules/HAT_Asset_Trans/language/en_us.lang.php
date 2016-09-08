@@ -93,4 +93,5 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL5' => 'Notes',
   'LBL_DETAILVIEW_PANEL4' => 'Notes',
   'LBL_TARGET_RESPONSIBLE_CENTER_ACCOUNT_ID' => 'Target Responsible Center (related Account ID)',
+  'LBL_TARGET_PARENT_ASSET'=>'Target Parent Assets'
 );

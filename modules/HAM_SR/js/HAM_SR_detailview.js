@@ -27,16 +27,7 @@ function updateStatus(object_id) {
         window.location.href = "index.php?module=HAM_WO&action=EditView&sr_id="+object_id+"&return_module=HAM_SR&return_action=DetailView&return_id="+object_id;
       },100);
     }
-    /**
-     * 关闭SR 2016-09-08 yuan.chen 
-     * @param object_id
-     */
-    function close_sr(object_id) {
-        SUGAR.ajaxUI.showLoadingPanel();
-        setTimeout(function() {
-           window.location.href = "index.php?module=HAM_SR&action=EditView&button_change_status=CLOSED&record="+object_id+"&record"+object_id+"&return_module=HAM_SR&return_action=DetailView&return_id="+object_id;       
-         },100);
-      }
+
 
 function openWOPopup(){ //弹出工作单选择界面
   var popupRequestData = {
@@ -78,9 +69,9 @@ $(document).ready(function(){
 
 
   if($("#sr_status").val()=="DRAFT"){
-       var btn=$("<input type='button' class='btn_detailview' id='btn_submit' value='"+SUGAR.language.get('app_strings', 'LBL_SUBMIT_BUTTON_LABEL')+"'>"); 
-       $("#edit_button").after(btn);
-  } else if($("#sr_status").val()=="APPROVED"){
+   var btn=$("<input type='button' class='btn_detailview' id='btn_submit' value='"+SUGAR.language.get('app_strings', 'LBL_SUBMIT_BUTTON_LABEL')+"'>"); 
+   $("#edit_button").after(btn);
+      } else if($("#sr_status").val()=="APPROVED"){
       //添加建立工作单与分配工作单按钮
         var btn="<input type='button' class='btn_detailview' id='btn_create_wo' value='"+SUGAR.language.get('HAM_SR', 'LBL_SR_TO_NEW_WO')+"'>"
           + "<input type='button' class='btn_detailview' id='btn_assign_wo' value='"+SUGAR.language.get('HAM_SR', 'LBL_SR_TO_OLD_WO')+"'>";
@@ -92,20 +83,7 @@ $(document).ready(function(){
           + "<input type='hidden' id='sr_wo_status' name='sr_wo_status'>"
           );
         $("#formDetailView").append(fld);
-            
   }
-
-  if($("#sr_status").val()=="APPROVED"||$("#sr_status").val()=="INPRG"){
-	  //add by yuan.chen 2016-09-08
-      var close_btn=$("<input type='button' class='btn_detailview' id='btn_close_sr' value='"+SUGAR.language.get('app_strings', 'LBL_SUBMIT_BUTTON_CLOSE_SR_LABEL')+"'>");
-      $("#edit_button").after(close_btn);  
-      $("#btn_close_sr").click(function(){ //如果点了Create WO按钮，跳到工作单生成界面
-          //ajaxStatus.showStatus(SUGAR.language.get('app_strings', 'LBL_PROCESSING_REQUEST'));
-    	  close_sr($("input[name='record']").val());
-        });
-  }
-  
-	  
 
 /*    if ($("#ham_wo_id").text()=='') {
         $("#ham_wo_id").text(SUGAR.language.get('HAM_SR', 'LBL_SR_NOT_ASSIGED_TO_WO'))
