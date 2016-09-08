@@ -9,10 +9,10 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
     function Display() {
 
         global $db;
+        global $current_user;
 
-        $modules = array(
-            'HAT_Asset_Trans',
-            'HAT_Asset_Trans_Batch',
+        //0.处理头与行的语言包
+        $modules = array('HAT_Asset_Trans', 'HAT_Asset_Trans_Batch',
         );
 
         foreach ($modules as $module) {
@@ -29,8 +29,17 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
         $current_framework_id = empty($this->bean->hat_framework_id)?"":$this->bean->hat_framework_id;
         $current_module = $this->module;
         $current_action = $this->action;
-        $this->ss->assign('FRAMEWORK',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_framework_id'));
+        $this->ss->assign('FRAMEWORK',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id'));
 
+/*        //2.加载EventType对应的规则
+        if isset($this->bean->hat_eventtype_id) {
+            $beanEventType = BeanFactory::getBean('HAT_EventType', $this->bean->hat_eventtype_id);
+                //注意这个$beanFramework对象在DISPLAY之后还要被调用，以用于按照Framework中的规则去限定页面上的字段
+                if(isset($beanEventType)) {
+                    $this->bean->hat_eventtype_id
+                }
+        }
+*/
         //如果有工序来源，则初始化工序信息
         if (empty($this->bean->id) && !empty($_REQUEST['woop_id'])) {
             //如果当前对象还没有设置工序信息，并且参数中的工序有值，则根据参数中的WOOP对象填写当前处理单上的相关字段
@@ -79,7 +88,7 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
                     $this->bean->source_wo_id = $bean_woop['wo_id'];
                     $this->bean->source_wo = $bean_woop['wo_name'];
                     $this->bean->owner_id = $bean_woop['contact_id'];
-                    $this->bean->owner = $bean_woop['contact_name'];
+                    $this->bean->owner_contacts = $bean_woop['contact_name'];
                     $this->bean->tracking_number = $bean_woop['wo_number'].' / '.$bean_woop['woop_number'];
                     $this->bean->name = $bean_woop['wo_number'].':'.$bean_woop['woop_name'];
                     $this->bean->current_owning_org_id = $bean_woop['org_id'];
@@ -106,7 +115,17 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
                }
 
 
+        } elseif (empty($this->bean->id)){
+            //如果不是从工序上来，但是处理新建的状态
+            //
+            $this->bean->owner_contacts = $current_user->linked_contact_c;
+            $this->bean->owner_id = $current_user->contact_id_c;
+            $this->bean->current_owning_org_id = $current_user->account_id_c;
+            $this->bean->current_owning_org = $current_user->contact_organization_c;
         }
+
+
+
         parent::Display();
     }
 }

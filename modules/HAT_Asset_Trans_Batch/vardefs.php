@@ -39,9 +39,9 @@
 
 $dictionary['HAT_Asset_Trans_Batch'] = array(
 	'table'=>'hat_asset_trans_batch',
-	'audited'=>true,
-	'inline_edit'=>true,
-	'duplicate_merge'=>true,
+	'audited'=>false,
+	'inline_edit'=>false,
+	'duplicate_merge'=>false,
 	'fields'=>array (
 		'name' => 
 		array (
@@ -160,6 +160,18 @@ $dictionary['HAT_Asset_Trans_Batch'] = array(
 			'dbType' => 'datetime',
 			'display_default' => 'now',
 			),
+		'lov_asset_status_list' =>
+		array (
+			'source' => 'non-db', //从EventType映射
+			'name' => 'lov_asset_status_list',
+			'vname' => 'LBL_TARGET_ASSET_STATUS',
+			'type' => 'enum',
+			'default'=>'',
+			'reportable' => true,
+			'studio' => 'visible',
+			'options' => 'asset_status_list',
+			),
+
 /*		'lov_cux_event_type_option_list' =>
 		array (
 								'source' => 'non-db', //从EventType映射
@@ -668,11 +680,11 @@ $dictionary['HAT_Asset_Trans_Batch'] = array(
 			  	'len' => 36,
 			  	'size' => '20',
 			  	),
-			  'owner' => 
+			  'owner_contacts' => 
 			  array (
 			  	'required' => true,
 			  	'source' => 'non-db',
-			  	'name' => 'owner',
+			  	'name' => 'owner_contacts',
 			  	'vname' => 'LBL_OWNER',
 			  	'type' => 'relate',
 			  	'massupdate' => 0,
@@ -689,6 +701,7 @@ $dictionary['HAT_Asset_Trans_Batch'] = array(
 			  	'merge_filter' => 'disabled',
 			  	'len' => '255',
 			  	'size' => '20',
+			  	'id'=> 'owner_id',
 			  	'id_name' => 'owner_id',
 			  	'ext2' => 'Contacts',
 			  	'module' => 'Contacts',
