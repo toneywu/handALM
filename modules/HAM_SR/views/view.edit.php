@@ -188,6 +188,16 @@ class HAM_SRViewEdit extends ViewEdit
         }
 
 
+		//从明细界面点击关闭SR后跳转到编辑界面后 改变SR的状态
+		if(isset($_GET['button_change_status'])){
+			$change_status=$_GET['button_change_status'];
+			if($change_status=="CLOSED"){
+			$this->bean->sr_status='CLOSED';
+		}
+		}
+		
+		
+
         parent::Display();
     }
 }
