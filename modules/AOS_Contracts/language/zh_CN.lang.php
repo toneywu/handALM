@@ -109,6 +109,5 @@ $mod_strings = array (
     'LBL_SHIPPING_TAX_USDOLLAR' => '物流税点 (默认货币)',
     'LBL_SHIPPING_TAX_AMT_USDOLLAR' => '物流税费 (默认货币)',
     'LBL_GRAND_TOTAL_USDOLLAR' => '总计 (默认货币)',
-    'LBL_BTN_CREATE_WO_ORDER_BUTTON_LABEL'=>'创建工单',
 );
 ?>
