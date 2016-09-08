@@ -120,5 +120,4 @@ $mod_strings = array (
  'LBL_CLOSED_DATE'=>'Closed Date',
  'LBL_CLOSED_BY'=>'Closed By',
  'LBL_EDITVIEW_PANEL4'=>'Worklog',
- 'LBL_SUBMIT_BUTTON_CLOSE_SR_LABEL'=>'Close SR',
 );

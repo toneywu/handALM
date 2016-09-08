@@ -51,7 +51,7 @@ $mod_strings = array (
   'LBL_CREATED_ID' => '创建人编号',
   'LBL_DESCRIPTION' => '描述',
   'LBL_DELETED' => '已删除',
-  'LBL_NAME' => '姓名',
+  'LBL_NAME' => '标题概述',
   'LBL_CREATED_USER' => '用户创建',
   'LBL_MODIFIED_USER' => '用户修改',
   'LBL_LIST_NAME' => '名称',
@@ -82,4 +82,6 @@ $mod_strings = array (
   'LBL_TARGET_USING_ORG_ID' => '目标使用组织 (ID)',
   'LBL_TARGET_USING_ORG' => '目标使用组织',
   'LBL_PLANNED_COMPLETE_DATE'=>'计划完成日期',
+    'LBL_TRACKING_NUMBER' => '跟踪编号#',
+      'LBL_EVENT_TYPE' => '事务类型',
 );
