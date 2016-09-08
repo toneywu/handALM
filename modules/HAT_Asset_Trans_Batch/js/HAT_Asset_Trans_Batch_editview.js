@@ -2,11 +2,8 @@ var prodln = 0;
 
 function setEventTypePopupReturn(popupReplyData){
 	set_return(popupReplyData);
-	setEventTypeFields();
-}
-
-function setEventTypeFields() {
-	$.ajax({//
+	//console.log( 'index.php?to_pdf=true&module=HAT_EventType&action=getTransSetting&id=' + $("#hat_eventtype_id").val());
+	$.ajax({//读取子地点
 		url: 'index.php?to_pdf=true&module=HAT_EventType&action=getTransSetting&id=' + $("#hat_eventtype_id").val(),//e74a5e34-906f-0590-d914-57cbe0e5ae89
 		async: false,
 		success: function (data) {
@@ -22,6 +19,44 @@ function setEventTypeFields() {
 		}
 	})
 }
+
+
+
+/*function reset_EventType_Fields() {
+	if ($('#require_confirmation').val()=='LOCKED') { //如果不需要二次确认，则没有二次确认的中间状态
+		mark_field_disabled('change_processing_status');
+		$("#change_processing_status").attr("checked",false);
+		mark_field_disabled('processing_asset_status');
+	} else {
+		mark_field_enabled('change_processing_status');
+		mark_field_enabled('processing_asset_status');
+	}
+
+	if ($('#change_owning_org').val()=='LOCKED') {//如果不可更新组织，则不存在跨LE变更组织
+		mark_field_disabled('change_oranization_le');
+	} else {
+		mark_field_enabled('change_oranization_le');
+	}
+
+	if ($('#change_using_org').val()=='LOCKED') {//如果不可更新组织，则不存在跨LE变更组织
+		mark_field_disabled('change_oranization_le');
+	} else {
+		mark_field_enabled('change_oranization_le');
+	}
+
+	if($("#change_target_status").val()==1)	{
+		mark_field_enabled('target_asset_status');//show();
+	} else {
+		mark_field_disabled('target_asset_status');//show();
+	}
+
+	if($("#change_processing_status").val()==1) {
+		mark_field_enabled('processing_asset_status');//show()
+	} else {
+		mark_field_disabled('processing_asset_status');//show()
+	}
+
+}*/
 
 
 function setHeaderOrganizationPopupReturn(popupReplyData) {
@@ -140,16 +175,7 @@ function getLovValueByText(focused_textfiled_id,list_Lov_id) { //根据LOV的Tex
 }
 
 $(document).ready(function(){
-
-	//$("#lov_asset_status_list").parent("td").hide();
-	$("#detailpanel_2").hide();
-
 	resetEventType(true);
-
-	if ($("#hat_eventtype_id").val() != "") {
-		setEventTypeFields();
-	}
-
 	initTransHeaderStatus();
 
 });

@@ -827,7 +827,7 @@ $dictionary['HAT_Asset_Trans'] = array(
 			'enable_range_search' => false,
 			'dbType' => 'datetime',
 			),
-		'trans_status' => 
+		'asset_trans_status' => 
 		array (
 			'required' => false,
 			'name' => 'trans_status',
