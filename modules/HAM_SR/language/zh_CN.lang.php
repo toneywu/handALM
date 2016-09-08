@@ -122,5 +122,6 @@ $mod_strings = array (
  'LBL_CLOSED_BY'=>'关闭人',
   'LBL_EDITVIEW_PANEL4'=>'工作及处理情况',
  'LBL_EVENT_TYPE'=>'SR申请类型',
+ 'LBL_SUBMIT_BUTTON_CLOSE_SR_LABEL'=>'关闭SR',
 
 );
