@@ -28,6 +28,17 @@ function updateStatus(object_id) {
       },100);
     }
 
+    /**
+    +
+         * 关闭SR 2016-09-08 yuan.chen 
+        * @param object_id
+        */
+       function close_sr(object_id) {
+           SUGAR.ajaxUI.showLoadingPanel();
+           setTimeout(function() {
+              window.location.href = "index.php?module=HAM_SR&action=EditView&button_change_status=CLOSED&record="+object_id+"&record"+object_id+"&return_module=HAM_SR&return_action=DetailView&return_id="+object_id;       
+             },100);
+          }
 
 function openWOPopup(){ //弹出工作单选择界面
   var popupRequestData = {
@@ -84,6 +95,19 @@ $(document).ready(function(){
           );
         $("#formDetailView").append(fld);
   }
+  
+  if($("#sr_status").val()=="APPROVED"||$("#sr_status").val()=="INPRG"){
+	  //add by yuan.chen 2016-09-08
+      var close_btn=$("<input type='button' class='btn_detailview' id='btn_close_sr' value='"+SUGAR.language.get('app_strings', 'LBL_SUBMIT_BUTTON_CLOSE_SR_LABEL')+"'>");
+      $("#edit_button").after(close_btn);  
+      $("#btn_close_sr").click(function(){ //如果点了Create WO按钮，跳到工作单生成界面
+          //ajaxStatus.showStatus(SUGAR.language.get('app_strings', 'LBL_PROCESSING_REQUEST'));
+    	  close_sr($("input[name='record']").val());
+        });
+  }
+  
+  
+  
 
 /*    if ($("#ham_wo_id").text()=='') {
         $("#ham_wo_id").text(SUGAR.language.get('HAM_SR', 'LBL_SR_NOT_ASSIGED_TO_WO'))
@@ -104,4 +128,4 @@ $(document).ready(function(){
       openWOPopup();
     });
 
-  });
+});
