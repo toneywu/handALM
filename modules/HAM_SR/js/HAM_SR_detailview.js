@@ -98,8 +98,8 @@ $(document).ready(function(){
   
   if($("#sr_status").val()=="APPROVED"||$("#sr_status").val()=="INPRG"){
 	  //add by yuan.chen 2016-09-08
-      var close_btn=$("<input type='button' class='btn_detailview' id='btn_close_sr' value='"+SUGAR.language.get('app_strings', 'LBL_SUBMIT_BUTTON_CLOSE_SR_LABEL')+"'>");
-      $("#edit_button").after(close_btn);  
+      var close_btn=$("<input type='button' class='btn_detailview' id='btn_close_sr' value='"+SUGAR.language.get('HAM_SR', 'LBL_SUBMIT_BUTTON_CLOSE_SR_LABEL')+"'>");
+      $("#delete_button").after(close_btn);  
       $("#btn_close_sr").click(function(){ //如果点了Create WO按钮，跳到工作单生成界面
           //ajaxStatus.showStatus(SUGAR.language.get('app_strings', 'LBL_PROCESSING_REQUEST'));
     	  close_sr($("input[name='record']").val());
