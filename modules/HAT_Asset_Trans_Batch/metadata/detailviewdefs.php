@@ -105,7 +105,11 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_TARGET_ORGANIZATION',
           ),
-          1 => 'owner_contacts'
+          1 => 
+          array (
+            'name' => 'modified_by_name',
+            'label' => 'LBL_MODIFIED_NAME',
+          ),
         ),
         5 => 
         array (

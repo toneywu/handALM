@@ -15,7 +15,7 @@ array (
           2 => '<input type="hidden" name="source_wo_org"  id="source_wo_org" value="{$SOURCE_WO_ORG}">',
           11 => '<input type="hidden" name="require_approval_workflow" id="require_approval_workflow">',
           12 => '<input type="hidden" name="require_confirmation"  id="require_confirmation">',
-          13 => '<input type="hidden" name="change_target_status"  id="change_target_status">',
+          13 => '<input type="hidden" name="target_asset_status"  id="target_asset_status">',
           14 => '<input type="hidden" name="change_parent"  id="change_parent">',
           15 => '<input type="hidden" name="change_location"  id="change_location">',
           16 => '<input type="hidden" name="processing_asset_status"  id="processing_asset_status">',
@@ -26,7 +26,6 @@ array (
           21 => '<input type="hidden" name="change_using_person"  id="change_using_person">',
           22 => '<input type="hidden" name="change_oranization_le"  id="change_oranization_le">',
           23 => '<input type="hidden" name="event_short_desc"  id="event_short_desc">',
-          24 => '<input type="hidden" name="target_asset_status"  id="target_asset_status">',
         ),
       ),
       'includes' =>
@@ -97,7 +96,6 @@ array (
               array (
                 'name' => 'event_type',
                 'id' => 'hat_eventtype_id',
-                'event_short_desc'=>'name'
               ),
               'call_back_function' => 'setEventTypePopupReturn',
             ),
@@ -144,19 +142,14 @@ array (
         ),
         4 =>
         array (
-          0 => 'lov_asset_status_list',
-          1 => ''
-        ),
-        5 =>
-        array (
-          0 => 'owner_contacts',
+          0 => 'owner',
           1 =>
           array (
             'name' => 'planned_execution_date',
             'label' => 'LBL_PLANNED_EXECUTION_DATE',
           ),
         ),
-        6 =>
+        5 =>
         array (
           2 => 'description',
           1 =>
