@@ -58,15 +58,44 @@ array (
       array (
         0 => 
         array (
-          0 => 'name',
-          1 => 
+          0 => 
           array (
             'name' => 'basic_type',
             'studio' => 'visible',
             'label' => 'LBL_BASIC_TYPE',
           ),
+          1 => '',
         ),
         1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'event_short_desc',
+            'label' => 'LBL_EVENT_SHORT_DESC',
+          ),
+          1 => 
+          array (
+            'name' => 'parent_eventtype',
+            'studio' => 'visible',
+            'label' => 'LBL_PARENT_EVENTTYPE',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 'name',
+          1 => '',
+        ),
+        3 => 
+        array (
+          0 => 'description',
+          1 => 
+          array (
+            'name' => 'haa_ff',
+            'studio' => 'visible',
+            'label' => 'LBL_HAA_FF',
+          ),
+        ),
+        4 => 
         array (
           0 => 
           array (
@@ -80,15 +109,6 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_REQUIRE_CONFIRMATION',
           ),
-        ),
-        2 => 
-        array (
-          0 => 
-          array (
-            'name' => 'event_short_desc',
-            'label' => 'LBL_EVENT_SHORT_DESC',
-          ),
-          1 => 'description',
         ),
       ),
       'lbl_editview_panel1' => 

@@ -50,7 +50,7 @@ $mod_strings = array (
   'LBL_CREATED_ID' => '创建人编号',
   'LBL_DESCRIPTION' => '描述',
   'LBL_DELETED' => '已删除',
-  'LBL_NAME' => '名称',
+  'LBL_NAME' => '事件完整名称',
   'LBL_CREATED_USER' => '用户创建',
   'LBL_MODIFIED_USER' => '用户修改',
   'LBL_LIST_NAME' => '名称',
@@ -90,4 +90,8 @@ $mod_strings = array (
   'LBL_CHANGE_USING_PERSON'=>'可修改使用人',
   'LBL_CHANGE_PARENT'=>'可修改父资产关系',
   'LBL_CHANGE_RACK_POSITION'=>'可修改IT机柜内位置',
+
+    'LBL_PARENT_EVENTTYPE'=>'父事件类型',
+  'LBL_HAA_FF'=>'动态界面模板FF',
+
 );
