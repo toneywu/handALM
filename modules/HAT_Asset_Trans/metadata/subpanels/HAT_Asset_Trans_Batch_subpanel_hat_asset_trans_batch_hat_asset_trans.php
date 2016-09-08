@@ -41,13 +41,13 @@ $subpanel_layout['list_fields'] = array (
     'type' => 'relate',
     'studio' => 'visible',
     'vname' => 'LBL_TARGET_LOCATION',
-    'id' => 'HAT_ASSET_LOCATIONS_ID_C',
+    'id' => 'HAT_ASSET_LOCATIONS_ID',
     'link' => true,
     'width' => '10%',
     'default' => true,
     'widget_class' => 'SubPanelDetailViewLink',
     'target_module' => 'HAT_Asset_Locations',
-    'target_record_key' => 'hat_asset_locations_id_c',
+    'target_record_key' => 'hat_asset_locations_id',
   ),
   'target_location_desc' => 
   array (
