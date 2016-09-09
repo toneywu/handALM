@@ -12,10 +12,10 @@ var associated_javascript_data;
 		var treeObj = $.fn.zTree.getZTreeObj("PopupView");
 		var nodes = treeObj.getSelectedNodes();
 		var id = nodes[0].id;
-		//associated_javascript_data='{"'+nodes[0].id+'":{"ID":"'+nodes[0].id+'","NAME":"'+nodes[0].id+'","DOCUMENT_NAME":""}}';
+
 		data='{"'+nodes[0].id+'":{"ID":"'+nodes[0].id+'","NAME":"'+nodes[0].name+'","DATE_ENTERED":"","DATE_MODIFIED":"","MODIFIED_USER_ID":"","MODIFIED_BY_NAME":"","CREATED_BY":"","CREATED_BY_NAME":"","DESCRIPTION":"","DELETED":"","CREATED_BY_LINK":"","MODIFIED_USER_LINK":"","ASSIGNED_USER_ID":"","ASSIGNED_USER_NAME":"","ASSIGNED_USER_LINK":"","SECURITYGROUPS":"","BASIC_TYPE":"Service Request","PARENT_EVENTTYPE_ID":"","PARENT_EVENTTYPE":"","HAA_FF_ID":"","HAA_FF":"","TARGET_ASSET_STATUS":"","CHANGE_PARENT":"","CHANGE_LOCATION":"","PROCESSING_ASSET_STATUS":"","CHANGE_RACK_POSITION":"","CHANGE_OWNING_ORG":"","CHANGE_OWNING_PERSON":"","CHANGE_USING_ORG":"","CHANGE_USING_PERSON":"","CHANGE_ORANIZATION_LE":"","CHANGE_LOCATION_DESC":"","REQUIRE_APPROVAL_WORKFLOW":"","REQUIRE_CONFIRMATION":"","CHANGE_TARGET_STATUS":"","CHANGE_PROCESSING_STATUS":"","CONCAT_NAME":"","EVENT_SHORT_DESC":""}}';
 		associated_javascript_data = jQuery.parseJSON(data)
-		console.log(associated_javascript_data);
+		//console.log(associated_javascript_data);
 		send_back('HAT_EventType',id);
 	}
 
