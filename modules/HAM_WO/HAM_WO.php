@@ -40,9 +40,7 @@ class HAM_WO extends HAM_WO_sugar {
 				$bean_numbering->save();
 			}
 		}
-		
-		
-		
+
 		// 在资产事务处理保存时判断，如果事务处理的行状态达标，则更新资产状态
 		$focus_wo_status = $this->wo_status;
 		if ($focus_wo_status == 'SUBMITTED') {

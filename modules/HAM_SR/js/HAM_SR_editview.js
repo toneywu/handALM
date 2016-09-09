@@ -86,21 +86,23 @@ function mark_field_enabled(field_name,not_required_bool) {
 
 /**
  * 设置必输 add by yuan.chen2016-09-08
- * 状态为结束（无论是手工改选还是通过按钮跳转），在关闭日期、关闭人字段都是必须提供的。在其它状态下，这两个字段是非必须输入的
+ * 状态为结束（无论是手工改选还是通过按钮跳转），在关闭日期、关闭人字段都是必须提供的。在其它状态下，这两个字段是信用
  */
 function close_people_info(){
 	var sr_status = $("#sr_status").val();
-	if(sr_status!="CLOSED"){
-		mark_field_enabled("closed_date",true);
-		mark_field_enabled("closed_by",true);
+	if(sr_status!="COMPLETE"){
+        //非完成状态时，时间和人员信息不可填写
+		mark_field_disabled("closed_date",false);
+		mark_field_disabled("closed_by",false);
 	}else{
+        //完成状态时，时间和人员信息必须提供
 		mark_field_enabled("closed_date",false);
 		mark_field_enabled("closed_by",false);
 	}
 }
 
 $(document).ready(function(){
-	
+
 	//将SR编号标识的不可修改
     if($("#sr_number").val()=="") {
         $("#sr_number").after(SUGAR.language.get('HAM_SR', 'LBL_AUTONUM'));
@@ -109,6 +111,8 @@ $(document).ready(function(){
         $("#sr_number").after($("#sr_number").val());
         $("#sr_number").hide();
     }
+
+    close_people_info();
 
     /**
      * add by yuan.chen 2016-09-08
@@ -179,18 +183,27 @@ function initTransHeaderStatus() {
         $("#sr_status option[value='INPRG']").remove();
         $("#sr_status option[value='REJECTED']").remove();
         $("#sr_status option[value='CANCELED']").remove();
+        $("#sr_status option[value='CLOSED']").remove();
     } else if (current_header_status=="SUBMITTED") { //可以CANCEL和SUBMIT
         $("#sr_status option[value='APPROVED']").remove();
         $("#sr_status option[value='REJECTED']").remove();
         $("#sr_status option[value='INPRG']").remove();
         $("#sr_status option[value='CLOSED']").remove();
+        $("#sr_status option[value='COMPLETE']").remove();
         setEditViewReadonly ();
-    } else if ((current_header_status=="APPROVED")||(current_header_status=="WORKING")) { //可以CANCEL,APPROVED
+    } else if ((current_header_status=="APPROVED")||(current_header_status=="WORKING")) { //可以CANCEL,APPROVED,COMPLETE
         $("#sr_status option[value='SUBMITTED']").remove();
         $("#sr_status option[value='REJECTED']").remove();
-        $("#sr_status option[value='INPRG']").remove();        
+        $("#sr_status option[value='INPRG']").remove();
         $("#sr_status option[value='DRAFT']").remove();
         $("#sr_status option[value='CLOSED']").remove();
+        setEditViewReadonly ();
+    }else if ((current_header_status=="INPRG")) { //可以CANCEL，不可以Approved
+        $("#sr_status option[value='SUBMITTED']").remove();
+        $("#sr_status option[value='REJECTED']").remove();
+        $("#sr_status option[value='DRAFT']").remove();
+        $("#sr_status option[value='APPROVED']").remove();
+        $("#SAVE_HEADER,#save_and_continue,#SAVE_FOOTER").hide();
         setEditViewReadonly ();
     } else if ((current_header_status=="CANCELED")) { //什么也不能做
         $("#sr_status option[value='SUBMITTED']").remove();
@@ -199,15 +212,26 @@ function initTransHeaderStatus() {
         $("#sr_status option[value='INPRG']").remove();
         $("#sr_status option[value='APPROVED']").remove();
         $("#sr_status option[value='CLOSED']").remove();
+        $("#sr_status option[value='COMPLETE']").remove();
         $("#SAVE_HEADER,#save_and_continue,#SAVE_FOOTER").hide();
+        setEditViewReadonly ();
+    }else if ((current_header_status=="COMPLETE")) { //什么也不能做，同Canceled
+        $("#sr_status option[value='SUBMITTED']").remove();
+        $("#sr_status option[value='REJECTED']").remove();
+        $("#sr_status option[value='DRAFT']").remove();
+        $("#sr_status option[value='INPRG']").remove();
+        $("#sr_status option[value='APPROVED']").remove();
+        $("#sr_status option[value='CANCELED']").remove();
+        $("#sr_status option[value='CLOSED']").remove();
         setEditViewReadonly ();
     }else if ((current_header_status=="CLOSED")) { //什么也不能做，同Canceled
         $("#sr_status option[value='SUBMITTED']").remove();
         $("#sr_status option[value='REJECTED']").remove();
         $("#sr_status option[value='DRAFT']").remove();
-        $("#sr_status option[value='INPRG']").remove();        
+        $("#sr_status option[value='INPRG']").remove();
         $("#sr_status option[value='APPROVED']").remove();
         $("#sr_status option[value='CANCELED']").remove();
+        $("#sr_status option[value='COMPLETE']").remove();
         $("#SAVE_HEADER,#save_and_continue,#SAVE_FOOTER").hide();
         setEditViewReadonly ();
     }

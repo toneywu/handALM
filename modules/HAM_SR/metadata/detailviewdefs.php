@@ -6,14 +6,20 @@ array (
   array (
     'templateMeta' => 
     array (
-      'form' => 
+      'form' =>
       array (
         'buttons' => 
         array (
           0 => 'EDIT',
           1 => 'DUPLICATE',
           2 => 'DELETE',
-         // 3 => 'FIND_DUPLICATES',
+        ),
+        'hidden' =>
+        array (
+          0 => '<input type="hidden" name="sr_wo_id" id="sr_wo_id">',
+          1 => '<input type="hidden" name="sr_wo_num"  id="sr_wo_num">',
+          2 => '<input type="hidden" name="sr_wo_name"  id="sr_wo_name">',
+          3 => '<input type="hidden" name="sr_wo_status" id="sr_wo_status">',
         ),
       ),
       'includes' => 
@@ -64,6 +70,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_EDITVIEW_PANEL4' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
       ),
       'syncDetailEditViews' => true,
     ),
@@ -80,9 +91,9 @@ array (
           ),
           1 => 
           array (
-            'name' => 'sr_status',
+            'name' => 'site',
             'studio' => 'visible',
-            'label' => 'LBL_SR_STATUS',
+            'label' => 'LBL_SITE',
           ),
         ),
         1 => 
@@ -90,12 +101,15 @@ array (
           0 => 'name',
           1 => 
           array (
-            'name' => 'site',
+            'name' => 'event_type',
             'studio' => 'visible',
-            'label' => 'LBL_SITE',
+            'label' => 'LBL_EVENT_TYPE',
           ),
         ),
-        2 => 
+      ),
+      'lbl_editview_panel1' => 
+      array (
+        0 => 
         array (
           0 => 
           array (
@@ -105,38 +119,21 @@ array (
           ),
           1 => 
           array (
+            'name' => 'sr_status',
+            'studio' => 'visible',
+            'label' => 'LBL_SR_STATUS',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 'description',
+          1 => 
+          array (
             'name' => 'reported_date',
             'label' => 'LBL_REPORTED_DATE',
           ),
         ),
-        3 => 
-        array (
-          0 => 'description',
-        ),
-        4 => 
-        array (
-          0 => array(
-            'name'=>'ham_wo_name',
-/*            'default' => true,
-            'related_fields' => 
-            array ( 
-               0 => 'ham_wo_number', // your field name in all small letters
-              ),*/
-            //'customCode' => '{$HAM_WO_NAME}', // your field name in ALL CAPITAL LETTERS
-          ),
-
-          1 => 'ham_wo_status',
-          ),
-     
-/*        5 => 
-        array (
-          0 => 'ham_wo_number',
-          1 => '',
-          ),*/
-         ),
-      'lbl_editview_panel1' => 
-      array (
-        0 => 
+        2 => 
         array (
           0 => 
           array (
@@ -149,7 +146,7 @@ array (
             'name' => 'asset',
           ),
         ),
-        1 => 
+        3 => 
         array (
           0 => 
           array (
@@ -216,15 +213,15 @@ array (
         array (
           0 => 
           array (
-            'name' => 'reporter',
-            'studio' => 'visible',
-            'label' => 'LBL_REPORTER',
-          ),
-          1 => 
-          array (
             'name' => 'reporter_org',
             'studio' => 'visible',
             'label' => 'LBL_REPORTER_ORG',
+          ),
+          1 => 
+          array (
+            'name' => 'reporter',
+            'studio' => 'visible',
+            'label' => 'LBL_REPORTER',
           ),
         ),
         1 => 
@@ -249,22 +246,59 @@ array (
           ),
           1 => 
           array (
-            'name' => 'created_by_name',
-            'label' => 'LBL_CREATED',
+            'name' => 'contact_by',
+            'studio' => 'visible',
+            'label' => 'LBL_CONTACT_BY',
           ),
         ),
         3 => 
         array (
           0 => 
           array (
-            'name' => 'contact_by',
+            'name' => 'contact_notes',
+            'label' => 'LBL_CONTACT_NOTES',
+          ),
+          1 => '',
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'owned_org',
             'studio' => 'visible',
-            'label' => 'LBL_CONTACT_BY',
+            'label' => 'LBL_OWNED_ORG',
           ),
           1 => 
           array (
-            'name' => 'contact_notes',
-            'label' => 'LBL_CONTACT_NOTES',
+            'name' => 'owned_by',
+            'studio' => 'visible',
+            'label' => 'LBL_OWNED_BY',
+          ),
+        ),
+      ),
+      'lbl_editview_panel4' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'worklog',
+            'label' => 'LBL_WORKLOG',
+          ),
+          1 => '',
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'closed_date',
+            'label' => 'LBL_CLOSED_DATE',
+          ),
+          1 => 
+          array (
+            'name' => 'closed_by',
+            'studio' => 'visible',
+            'label' => 'LBL_CLOSED_BY',
           ),
         ),
       ),

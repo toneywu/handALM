@@ -168,11 +168,17 @@ class HAM_SRViewEdit extends ViewEdit
         }
 
         //自动填写当前的记录创建人
-        if ($this->bean->created_by!="") {
-            $this->bean->created_by_name = $current_user->name;
-            $this->bean->created_by = $current_user->id;
+        if (empty($this->bean->owned_by_id)) {
+            $this->bean->owned_by = $current_user->linked_contact_c;
+            $this->bean->owned_by_id = $current_user->contact_id_c;
+            $this->bean->owned_org_id = $current_user->account_id_c;
+            $this->bean->owned_org = $current_user->contact_organization_c;
         }
-                        /*$_GET['id']."'";*/
+        if (isset($this->bean->sr_status) && $this->bean->sr_status!='CLOSED') {
+            $this->bean->closed_by = $current_user->linked_contact_c;
+            $this->bean->closed_by_id = $current_user->contact_id_c;
+            $this->bean->closed_date = date('Y-m-d H:i');
+        }
 
 
         if(empty($this->bean->id)){ //如果当前为新记录，则初始化字段
@@ -190,8 +196,8 @@ class HAM_SRViewEdit extends ViewEdit
 		//从明细界面点击关闭SR后跳转到编辑界面后 改变SR的状态
 		if(isset($_GET['button_change_status'])){
 			$change_status=$_GET['button_change_status'];
-			if($change_status=="CLOSED"){
-			$this->bean->sr_status='CLOSED';
+			if($change_status=="COMPLETE"){
+			$this->bean->sr_status='COMPLETE';
 		  }
 		}
 

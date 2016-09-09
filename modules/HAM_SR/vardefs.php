@@ -329,7 +329,7 @@ $dictionary['HAM_SR'] = array(
     'closed_by_id' => 
     array (
       'required' => false,
-      'name' => 'contact_id',
+      'name' => 'closed_by_id',
       'vname' => 'LBL_REPORTER_CONTACT_ID',
       'type' => 'id',
       'massupdate' => 0,
@@ -398,7 +398,7 @@ $dictionary['HAM_SR'] = array(
       ),
     'reporter' => 
     array (
-      'required' => true,
+      'required' => false,
       'source' => 'non-db',
       'name' => 'reporter',
       'vname' => 'LBL_REPORTER',
@@ -580,7 +580,7 @@ $dictionary['HAM_SR'] = array(
       ),
     'reporter_org' => 
     array (
-      'required' => true,
+      'required' => false,
       'source' => 'non-db',
       'name' => 'reporter_org',
       'vname' => 'LBL_REPORTER_ORG',
@@ -698,7 +698,7 @@ $dictionary['HAM_SR'] = array(
       ),
     'location' => 
     array (
-      'required' => true,
+      'required' => false,
       'source' => 'non-db',
       'name' => 'location',
       'vname' => 'LBL_LOCATION',
@@ -830,7 +830,7 @@ $dictionary['HAM_SR'] = array(
       ),
     'map_lat' => 
     array (
-      'required' => true,
+      'required' => false,
       'name' => 'map_lat',
       'vname' => 'LBL_MAP_LAT',
       'type' => 'float',
@@ -853,7 +853,7 @@ $dictionary['HAM_SR'] = array(
       ),
     'map_lng' => 
     array (
-      'required' => true,
+      'required' => false,
       'name' => 'map_lng',
       'vname' => 'LBL_MAP_LNG',
       'type' => 'float',
@@ -876,7 +876,7 @@ $dictionary['HAM_SR'] = array(
       ),
     'map_zoom' => 
     array (
-      'required' => true,
+      'required' => false,
       'name' => 'map_zoom',
       'vname' => 'LBL_MAPS_ZOOM',
       'type' => 'int',

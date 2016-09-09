@@ -78,6 +78,10 @@ array (
             'name' => 'parent_eventtype',
             'studio' => 'visible',
             'label' => 'LBL_PARENT_EVENTTYPE',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&basic_type_advanced="+encodeURIComponent($("#basic_type option:selected").val())+"',
+            ),
           ),
         ),
         2 => 

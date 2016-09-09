@@ -37,8 +37,6 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
-
-$app_list_strings['moduleList']['HAM_Work_Requests'] = 'Work Requests';
 $app_list_strings['moduleList']['HAM_SR'] = 'Service Request';
 $app_list_strings['ham_work_requests_type_dom']['Administration'] = 'Administration';
 $app_list_strings['ham_work_requests_type_dom']['Product'] = 'Product';
@@ -63,10 +61,15 @@ $app_list_strings['ahm_contact_by_list']['WORKPHONE'] = 'work phone';
 $app_list_strings['ahm_contact_by_list']['MOBILE'] = 'Mobile Phone';
 $app_list_strings['ahm_contact_by_list']['ONSITE'] = 'On-Site Directly';
 $app_list_strings['ahm_contact_by_list']['EMAIL'] = 'Email';
-$app_list_strings['ham_sr_status_list']['DRAFT'] = 'Draft';
-$app_list_strings['ham_sr_status_list']['SUBMITTED'] = 'Submitted';
-$app_list_strings['ham_sr_status_list']['APPROVED'] = 'Approved';
-$app_list_strings['ham_sr_status_list']['REJECTED'] = 'Rejected';
-$app_list_strings['ham_sr_status_list']['CANCELED'] = 'Canceled';
-$app_list_strings['ham_sr_status_list']['WORKING'] = 'Processing by WO';
-$app_list_strings['ham_sr_status_list']['CLOSED'] = 'Completed';
+
+
+$app_list_strings['ham_sr_status_list']=array (
+  'DRAFT' => 'Draft',
+  'SUBMITTED' => 'Submitted',
+  'APPROVED' => 'Approved',
+  'REJECTED' => 'Rejected',
+  'CANCELED' => 'Canceled',
+  'INPRG' => 'Processing',
+  'COMPLETE'=>'Complete',
+  'CLOSED' => 'Completed',
+);
