@@ -19,10 +19,20 @@ class HAM_SR extends HAM_SR_sugar {
 		return $SR_fields;
 	}
 
-	
+
+	function save($check_notify = false) {
+		if ($this->sr_status == 'SUBMITTED') {
+			$this->sr_status = 'APPROVED';
+		}
+		if ($this->sr_status == 'COMPLETE') {
+			$this->sr_status = 'CLOSED'; //如果提交时状态为完成，保存后状态为结束。结束状态下没有任何内容可再修改。
+		}
+		parent :: save($check_notify); //保存WO主体
+	}
+
 	function __construct(){
 		parent::__construct();
 	}
-	
+
 }
 ?>

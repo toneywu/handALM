@@ -63,10 +63,14 @@ $app_list_strings['ahm_contact_by_list']['WORKPHONE'] = 'work phone';
 $app_list_strings['ahm_contact_by_list']['MOBILE'] = 'Mobile Phone';
 $app_list_strings['ahm_contact_by_list']['ONSITE'] = 'On-Site Directly';
 $app_list_strings['ahm_contact_by_list']['EMAIL'] = 'Email';
-$app_list_strings['ham_sr_status_list']['DRAFT'] = 'Draft';
-$app_list_strings['ham_sr_status_list']['SUBMITTED'] = 'Submitted';
-$app_list_strings['ham_sr_status_list']['APPROVED'] = 'Approved';
-$app_list_strings['ham_sr_status_list']['REJECTED'] = 'Rejected';
-$app_list_strings['ham_sr_status_list']['CANCELED'] = 'Canceled';
-$app_list_strings['ham_sr_status_list']['WORKING'] = 'Working';
-$app_list_strings['ham_sr_status_list']['CLOSED'] = 'Closed';
+
+$app_list_strings['ham_sr_status_list']=array (
+  'DRAFT' => '拟定中',
+  'SUBMITTED' => '提交',
+  'APPROVED' => '已批准',
+  'REJECTED' => '已拒绝',
+  'CANCELED' => '已取消',
+  'INPRG' => '处理中',
+  'COMPLETE'=>'完成',
+  'CLOSED' => '结束',
+);
