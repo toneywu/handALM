@@ -78,6 +78,7 @@ array (
             'name' => 'site',
             'studio' => 'visible',
             'label' => 'LBL_SITE',
+            'customCode'=>'{$MAINT_SITE}'
           ),
         ),
         1 => 
@@ -196,7 +197,7 @@ array (
           1 => '',
         ),
       ),
-      'lbl_editview_panel2' => 
+      'lbl_editview_panel_gis' => 
       array (
         0 => 
         array (
@@ -249,7 +250,7 @@ array (
           ),
         ),
       ),
-      'lbl_editview_panel3' => 
+      'lbl_editview_panel_schedule' => 
       array (
         0 => 
         array (
