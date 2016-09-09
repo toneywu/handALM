@@ -6,7 +6,7 @@ array (
   array (
     'templateMeta' => 
     array (
-/*      'form' =>
+      'form' =>
       array (
         'buttons' => 
         array (
@@ -14,7 +14,14 @@ array (
           1 => 'DUPLICATE',
           2 => 'DELETE',
         ),
-      ),*/
+        'hidden' =>
+        array (
+          0 => '<input type="hidden" name="sr_wo_id" id="sr_wo_id">',
+          1 => '<input type="hidden" name="sr_wo_num"  id="sr_wo_num">',
+          2 => '<input type="hidden" name="sr_wo_name"  id="sr_wo_name">',
+          3 => '<input type="hidden" name="sr_wo_status" id="sr_wo_status">',
+        ),
+      ),
       'includes' => 
       array (
         0 => 

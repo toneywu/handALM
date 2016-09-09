@@ -215,6 +215,16 @@ function initTransHeaderStatus() {
         $("#sr_status option[value='COMPLETE']").remove();
         $("#SAVE_HEADER,#save_and_continue,#SAVE_FOOTER").hide();
         setEditViewReadonly ();
+    }else if ((current_header_status=="COMPLETE")) { //什么也不能做，同Canceled
+        $("#sr_status option[value='SUBMITTED']").remove();
+        $("#sr_status option[value='REJECTED']").remove();
+        $("#sr_status option[value='DRAFT']").remove();
+        $("#sr_status option[value='INPRG']").remove();
+        $("#sr_status option[value='APPROVED']").remove();
+        $("#sr_status option[value='CANCELED']").remove();
+        $("#sr_status option[value='CLOSED']").remove();
+        $("#SAVE_HEADER,#save_and_continue,#SAVE_FOOTER").hide();
+        setEditViewReadonly ();
     }else if ((current_header_status=="CLOSED")) { //什么也不能做，同Canceled
         $("#sr_status option[value='SUBMITTED']").remove();
         $("#sr_status option[value='REJECTED']").remove();

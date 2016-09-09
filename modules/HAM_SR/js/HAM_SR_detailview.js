@@ -86,13 +86,6 @@ $(document).ready(function(){
         var btn="<input type='button' class='btn_detailview' id='btn_create_wo' value='"+SUGAR.language.get('HAM_SR', 'LBL_SR_TO_NEW_WO')+"'>"
           + "<input type='button' class='btn_detailview' id='btn_assign_wo' value='"+SUGAR.language.get('HAM_SR', 'LBL_SR_TO_OLD_WO')+"'>";
         $("#edit_button").after(btn);
-        console.log(btn);
-        var fld=$("<input type='hidden' id='sr_wo_id' name='sr_wo_id>" //添加3个用户记录工作单信息的字段（在分配工作单时使用）
-          + "<input type='hidden' id='sr_wo_num' name='sr_wo_num'>"
-          + "<input type='hidden' id='sr_wo_name' name='sr_wo_name'>"
-          + "<input type='hidden' id='sr_wo_status' name='sr_wo_status'>"
-          );
-        $("#formDetailView").append(fld);
   }
   
   if($("#sr_status").val()=="APPROVED"||$("#sr_status").val()=="INPRG"){
