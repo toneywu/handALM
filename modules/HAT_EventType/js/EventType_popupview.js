@@ -1,6 +1,9 @@
-//http://localhost/handALM/index.php?module=HAT_EventType&action=Popup&query=true&basic_type_advanced=SR&mode=single&create=true&metadata=undefined&field_to_name[]=name
-
+//**********************************************************/
+//*本文件被POPUP View引用，用于生成一个树型的选择框，代替传统的List
+//By toney.wu
+//*********************************************************/
 $('head').append('<link href="custom/resources/zTree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" type="text/css" />');
+
 
 var module="HAT_EventType";
 var is_show_fullname =0;
@@ -48,10 +51,11 @@ $(document).ready(function() {
 	var zTreeObj;
 	var setting = {
 			view: {
-				showIcon: false,
+				showIcon: true,
 				selectedMulti: false,
-				nameIsHTML: true,
-				showTitle: false
+				nameIsHTML: false,
+				showTitle: false,
+				//fontCss: {'font-size':'22px'},
 			},
 			async: {
 				enable: true,
@@ -76,16 +80,18 @@ $(document).ready(function() {
 
 	//console.log('index.php?to_pdf=true&module=HAT_EventType&action=getEventTreeNodes&type='+$("#PopupView").attr('eventtype'));
 
+	console.log(zNodes);
 	$("#PopupView").addClass("ztree");
 
+
 	//第一个节点
-	var zNodes = [{name:$("#PopupView").attr('eventtype')+":"+$("#PopupView").attr('eventtype_name'), open:true, isParent:true,pId: 0,type:$("#PopupView").attr('eventtype')}];
+	//var zNodes = [{name:$("#PopupView").attr('eventtype')+":"+$("#PopupView").attr('eventtype_name'), open:true, isParent:true,pId: 0,type:$("#PopupView").attr('eventtype')}];
 	//初始化树
 	//SUGAR.util.doWhen("typeof $.fn.zTree.init == 'function'", function(){
 	$.getScript("custom/resources/zTree/js/jquery.ztree.core.min.js", function() {
 		zTreeObj = $.fn.zTree.init($("#PopupView"), setting, zNodes);
 		//加载第一层的所有节点
-		zTreeObj.reAsyncChildNodes(zTreeObj.getNodeByTId("treeview_selector_1"), "refresh", false);
+		//zTreeObj.reAsyncChildNodes(zTreeObj.getNodeByTId("treeview_selector_1"), "refresh", false);
 	});
 
 
