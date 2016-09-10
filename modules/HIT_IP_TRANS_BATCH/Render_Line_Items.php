@@ -14,6 +14,7 @@ function display_lines($focus, $field, $value, $view){
 			$sql = "SELECT   hat.id
 					        ,a.name hat_asset_name
 					        ,s.name hit_ip_subnets
+					        ,s.id   hit_ip_subnets_id
 					        ,hi.name parent_ip
 					        ,hat.associated_ip
 					        ,hat.mask

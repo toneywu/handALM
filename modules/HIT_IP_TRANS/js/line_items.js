@@ -204,6 +204,8 @@ function insertLineData(asset_trans_line ){ //将数据写入到对应的行字�
     $("#line_port".concat(String(ln))).val(asset_trans_line.port);
     $("#line_speed_limit".concat(String(ln))).val(asset_trans_line.speed_limit);
     $("#line_hat_asset_name".concat(String(ln))).val(asset_trans_line.hat_asset_name);
+    $("#line_hit_ip_subnets_id".concat(String(ln))).val(asset_trans_line.hit_ip_subnets_id);
+    $("#line_id".concat(String(ln))).val(asset_trans_line.id);
     renderTransLine(ln);
   }
 }
@@ -272,7 +274,7 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<td><span name='displayed_line_port[" + prodln + "]' id='displayed_line_port" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_speed_limit[" + prodln + "]' id='displayed_line_speed_limit" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_hat_asset_name[" + prodln + "]' id='displayed_line_hat_asset_name" + prodln + "'></span></td>"+
-      
+      //"<td><span name='displayed_line_hit_ip_subnets_id[" + prodln + "]' id='displayed_line_hit_ip_subnets_id" + prodln + "''></span></td>"+
       "<td><input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'></td>";
   var z2 = tablebody.insertRow(-1);
   z2.id = 'asset_trans_line2_displayed' + prodln;
@@ -386,6 +388,8 @@ function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_line_port"+ln).html($("#line_port"+ln).val());
   $("#displayed_line_speed_limit"+ln).html($("#line_speed_limit"+ln).val());
   $("#displayed_line_hat_asset_name"+ln).html($("#line_hat_asset_name"+ln).val());
+  $("#displayed_line_hit_ip_subnets_id"+ln).html($("#line_hit_ip_subnets_id"+ln).val());
+  $("#displayed_line_id"+ln).html($("#line_id"+ln).val());
 }
 
 function resetAsset(ln){ //在用户重新选择资产之后，会连带的更新资产相关的字段信息。
