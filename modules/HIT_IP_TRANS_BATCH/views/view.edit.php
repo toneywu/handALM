@@ -12,7 +12,7 @@ class HIT_IP_TRANS_BATCHViewEdit extends ViewEdit
         global $current_user;
 
         //0.处理头与行的语言包
-        $modules = array('HAT_Asset_Trans', 'HAT_Asset_Trans_Batch',
+        $modules = array('HIT_IP_TRANS_BATCH', 'HIT_IP_TRANS',
         );
 
         foreach ($modules as $module) {
