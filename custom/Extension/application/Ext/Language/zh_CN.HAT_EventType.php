@@ -38,4 +38,32 @@
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['HAM_ACT_OP'] = 'Std.Activity Tasks';
+$app_list_strings['moduleList']['HAT_EventType']='事件类型';
+$app_list_strings['moduleListSingular']['HAT_EventType']='事件类型';
+
+$GLOBALS['app_list_strings']['asset_trans_status']=array (
+  'DRAFT' => '未提交',
+  'SUBMITTED' => '提交',
+  'APPROVED' => '已批准',
+  'REJECTED' => '已拒绝',
+  'CANCELED' => '取消',
+  'CLOSED' => '结束',
+  'TRANSACTED' => '已完成事务处理',
+);
+
+$GLOBALS['app_list_strings']['cux_event_type_option_list']=array (
+  'LOCKED' => '禁止使用或修改此字段',
+  'REQUIRED' => '必须修改',
+  'OPTIONAL' => '任意，可按业务场景需要修改',
+);
+
+$app_list_strings['hat_event_type_list']=array (
+  'AT_MOVE' => '设备/资产事务处理',
+  'NETWORK' => '网络资源事务处理',
+  'SR' => '服务申请 SR',
+  'WO' => '工作单 WO',
+  'INV_IN' => 'INV: Stock-In',
+  'INV_OUT' => 'INV: Stock-Out',
+  'INV_TRANSFER' => 'INV: Stock Transfer',
+  'INV_WO' => 'INV: Issue to WO',
+);

@@ -37,7 +37,8 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
-$app_list_strings['moduleList']['HAM_SR'] = 'Service Request';
+$app_list_strings['moduleList']['HAM_SR']='Service Requests';
+$app_list_strings['moduleListSingular']['HAM_SR']='Service Request';
 $app_list_strings['ham_work_requests_type_dom']['Administration'] = 'Administration';
 $app_list_strings['ham_work_requests_type_dom']['Product'] = 'Product';
 $app_list_strings['ham_work_requests_type_dom']['User'] = 'User';

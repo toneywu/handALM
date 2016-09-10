@@ -7,7 +7,7 @@ function display_lines($focus, $field, $value, $view){
     $html = '';
     if($view == 'EditView'){
         $html .= '<script src="modules/HIT_IP_TRANS/js/line_items.js"></script>';
-        $html .= "<table border='0' cellspacing='4' width='37.5%' id='lineItems' class='list view table'></table>";
+        $html .= "<table border='0' id='lineItems' class='list view table'></table>";
         $html .= '<script>insertTransLineHeader(\'lineItems\');</script>';
 
          if($focus->id != '') { //如果不是新增（即如果是编辑已有记录）
