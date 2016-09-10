@@ -1,5 +1,5 @@
 <?php
-// created: 2016-09-07 12:09:21
+// created: 2016-09-10 22:06:02
 $GLOBALS['tabStructure'] = array (
   'LBL_TABGROUP_SALES' => 
   array (
@@ -42,8 +42,8 @@ $GLOBALS['tabStructure'] = array (
     'modules' => 
     array (
       0 => 'HIT_IP',
-      1 => 'HIT_IP_Allocations',
-      2 => 'HIT_VLAN',
+      1 => 'HIT_VLAN',
+      2 => 'HIT_IP_TRANS_BATCH',
       3 => 'HIT_VLAN_LIST',
       4 => 'HIT_VNI_LIST',
     ),
@@ -54,9 +54,11 @@ $GLOBALS['tabStructure'] = array (
     'modules' => 
     array (
       0 => 'HAM_ACT',
-      1 => 'Project',
-      2 => 'HAM_SR',
-      3 => 'HAM_WO',
+      1 => 'HAM_ACT_OP',
+      2 => 'Project',
+      3 => 'HAM_SR',
+      4 => 'HAM_WO',
+      5 => 'HAM_WOOP',
     ),
   ),
   'LBL_GROUPTAB4_1462886949' => 

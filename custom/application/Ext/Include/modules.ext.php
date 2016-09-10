@@ -143,13 +143,6 @@ $moduleList[] = 'HAM_WO_Lines';
 
  
  //WARNING: The contents of this file are auto-generated
-$beanList['HAM_WOOP'] = 'HAM_WOOP';
-$beanFiles['HAM_WOOP'] = 'modules/HAM_WOOP/HAM_WOOP.php';
-$moduleList[] = 'HAM_WOOP';
-
-
- 
- //WARNING: The contents of this file are auto-generated
 $beanList['HAT_Assets'] = 'HAT_Assets';
 $beanFiles['HAT_Assets'] = 'modules/HAT_Assets/HAT_Assets.php';
 $moduleList[] = 'HAT_Assets';
@@ -365,6 +358,20 @@ $moduleList[] = 'HIT_VLAN';
 $beanList['HIT_IP_Subnets'] = 'HIT_IP_Subnets';
 $beanFiles['HIT_IP_Subnets'] = 'modules/HIT_IP_Subnets/HIT_IP_Subnets.php';
 $moduleList[] = 'HIT_IP_Subnets';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+$beanList['HIT_IP_TRANS'] = 'HIT_IP_TRANS';
+$beanFiles['HIT_IP_TRANS'] = 'modules/HIT_IP_TRANS/HIT_IP_TRANS.php';
+$moduleList[] = 'HIT_IP_TRANS';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+$beanList['HIT_IP_TRANS_BATCH'] = 'HIT_IP_TRANS_BATCH';
+$beanFiles['HIT_IP_TRANS_BATCH'] = 'modules/HIT_IP_TRANS_BATCH/HIT_IP_TRANS_BATCH.php';
+$moduleList[] = 'HIT_IP_TRANS_BATCH';
 
 
  

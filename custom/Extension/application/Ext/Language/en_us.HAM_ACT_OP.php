@@ -38,4 +38,4 @@
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['HAM_ACT_OP'] = 'Std.Activity Operations';
+$app_list_strings['moduleList']['HAM_ACT_OP'] = 'Std.Activity Tasks';

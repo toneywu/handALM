@@ -38,8 +38,7 @@
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['HAM_Work_Requests'] = 'Work Requests';
-$app_list_strings['moduleList']['HAM_SR'] = 'Service Request';
+$app_list_strings['moduleList']['HAM_SR'] = '服务申请单 SR';
 $app_list_strings['ham_work_requests_type_dom']['Administration'] = '管理员';
 $app_list_strings['ham_work_requests_type_dom']['Product'] = '产品';
 $app_list_strings['ham_work_requests_type_dom']['User'] = '用户';
