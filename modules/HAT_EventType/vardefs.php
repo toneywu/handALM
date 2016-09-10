@@ -64,7 +64,7 @@ $dictionary['HAT_EventType'] = array(
         'merge_filter' => 'disabled',
         'len' => 100,
         'size' => '20',
-        'options' => 'cux_event_type_list',
+        'options' => 'hat_event_type_list',
         'studio' => 'visible',
         'dependency' => false,
         ),

@@ -38,10 +38,8 @@
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['HAT_EventType'] = 'Event Type';
-$app_list_strings['cux_map_type_list']['TENCENT'] = 'Tencent Map';
-$app_list_strings['cux_map_type_list']['GPS'] = 'Std.GPS';
-$app_list_strings['asset_status_list'][''] = '';
+$app_list_strings['moduleList']['HAT_EventType']='Event Types';
+$app_list_strings['moduleListSingular']['HAT_EventType']='Event Type';
 
 $app_list_strings['asset_status_list']['Ordered'] = 'Ordered';
 $app_list_strings['asset_status_list']['InService'] = 'In-Service';
@@ -54,7 +52,7 @@ $app_list_strings['cux_event_type_option_list']['LOCKED'] = 'Locked/Not Availabl
 $app_list_strings['cux_event_type_option_list']['REQUIRED'] = 'Required';
 $app_list_strings['cux_event_type_option_list']['OPTIONAL'] = 'Optional';
 
-$app_list_strings['hat_event_type_list']=array (
+$GLOBALS['app_list_strings']['cux_event_type_list']=array (
   'AT_MOVE' => 'Equip./Asset Trans.',
   'NETWORK' => 'Network Resource Trans.',
   'SR' => 'Service Request',

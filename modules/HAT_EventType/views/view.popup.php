@@ -26,7 +26,7 @@ class HAT_EventTypeViewPopup extends ViewPopup
 
     	echo '<form id="popup_query_form" name="popup_query_form">';
         echo '<h3>'.$mod_strings['LBL_SEARCH_FORM_TITLE'].'</h3>';
-    	echo ('<div style="font-size:larger" id="PopupView" eventtype="'.$_REQUEST['basic_type_advanced'].'" eventtype_name="'.$app_list_strings['cux_event_type_list'][$_REQUEST['basic_type_advanced']].'"></div>');
+    	echo ('<div style="font-size:larger" id="PopupView" eventtype="'.$_REQUEST['basic_type_advanced'].'" eventtype_name="'.$app_list_strings['hat_event_type_list'][$_REQUEST['basic_type_advanced']].'"></div>');
     	//这个是放置树型控件的容器
     	//另外这个容器有两个参数：用于存放ROOT结点的名称与类型(已经没有功能做用了，之前为是动态加载，目前已经是批量加载，所以没有什么用了)
 
@@ -59,7 +59,7 @@ class HAT_EventTypeViewPopup extends ViewPopup
 
             $bean_event =  $db-> query($sel);
 
-            $txt_jason='{name:"'.$app_list_strings['cux_event_type_list'][$_REQUEST['basic_type_advanced']].'", open:true, isParent:true,pId:0,id:"ROOT"},';
+            $txt_jason='{name:"'.$app_list_strings['hat_event_type_list'][$_REQUEST['basic_type_advanced']].'", open:true, isParent:true,pId:0,id:"ROOT"},';
             while ( $eventtype = $db->fetchByAssoc($bean_event) ) {
                     $txt_jason .='{id:"'.$eventtype['id'].'",';
                     $txt_jason .='pId:"'.(($eventtype['parent_eventtype_id']=="")?"ROOT":$eventtype['parent_eventtype_id']).'",';

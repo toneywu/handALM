@@ -38,27 +38,30 @@
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['HAT_EventType'] = 'Event Type';
-$app_list_strings['cux_map_type_list']['TENCENT'] = 'Tencent Map';
-$app_list_strings['cux_map_type_list']['GPS'] = 'Std.GPS';
-$app_list_strings['asset_status_list'][''] = '';
+$app_list_strings['moduleList']['HAT_EventType']='事件类型';
+$app_list_strings['moduleListSingular']['HAT_EventType']='事件类型';
 
-$app_list_strings['asset_status_list']['Ordered'] = 'Ordered';
-$app_list_strings['asset_status_list']['InService'] = 'In-Service';
-$app_list_strings['asset_status_list']['Idle'] = 'Idle';
-$app_list_strings['asset_status_list']['LentOut'] = 'Lent-Out';
-$app_list_strings['asset_status_list']['OutOfService'] = 'Out-of-Service';
-$app_list_strings['asset_status_list']['Received'] = 'Received';
+$GLOBALS['app_list_strings']['asset_trans_status']=array (
+  'DRAFT' => '未提交',
+  'SUBMITTED' => '提交',
+  'APPROVED' => '已批准',
+  'REJECTED' => '已拒绝',
+  'CANCELED' => '取消',
+  'CLOSED' => '结束',
+  'TRANSACTED' => '已完成事务处理',
+);
 
-$app_list_strings['cux_event_type_option_list']['LOCKED'] = 'Locked/Not Available';
-$app_list_strings['cux_event_type_option_list']['REQUIRED'] = 'Required';
-$app_list_strings['cux_event_type_option_list']['OPTIONAL'] = 'Optional';
+$GLOBALS['app_list_strings']['cux_event_type_option_list']=array (
+  'LOCKED' => '禁止使用或修改此字段',
+  'REQUIRED' => '必须修改',
+  'OPTIONAL' => '任意，可按业务场景需要修改',
+);
 
 $app_list_strings['hat_event_type_list']=array (
-  'AT_MOVE' => 'Equip./Asset Trans.',
-  'NETWORK' => 'Network Resource Trans.',
-  'SR' => 'Service Request',
-  'WO' => 'Work Order',
+  'AT_MOVE' => '设备/资产事务处理',
+  'NETWORK' => '网络资源事务处理',
+  'SR' => '服务申请 SR',
+  'WO' => '工作单 WO',
   'INV_IN' => 'INV: Stock-In',
   'INV_OUT' => 'INV: Stock-Out',
   'INV_TRANSFER' => 'INV: Stock Transfer',
