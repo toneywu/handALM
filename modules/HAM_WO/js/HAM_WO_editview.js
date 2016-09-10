@@ -106,7 +106,8 @@ $(document).ready(function(){
      * 工作单来源信息面板下的所有字段    
      * 
 	 */
-	checkAccess($("input[name='record']").val());
+    //BUG：CheckAccess存在问题，新创建工作单时，会自动推出。请检查新增记录的逻辑 #by toney_wu
+	//checkAccess($("input[name='record']").val());
 	//权限满足后 字段不可编辑：
 	var wo_status = $("#wo_status").val();
 	if(wo_status=="APPROVED"||wo_status=="WSCH"||wo_status=="WMATL"||wo_status=="WPCOND"||wo_status=="INPRG"){

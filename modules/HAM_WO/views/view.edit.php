@@ -11,18 +11,18 @@ class HAM_WOViewEdit extends ViewEdit {
 		global $current_user;
 		global $db;
 
-		/*echo "ViewEdit";
-		foreach ($this->bean as $key => $value) {
-		    echo '</br>'.$key;
-		}*/
-		/*
-		echo "<br/>";
-		echo 'location = '.$this->bean->location;
-		
-		foreach ($this->bean->name as $key => $value) {
-		    echo '</br>'.$key.'value = '.$value;
-		}*/
+		//1、初始化Framework-Site信息
+		//2、如果当前数据来源于SR（有参数sr_id）则从对应的SR上复制信息
+		//3、判断是否来自合同的，如果来源于合同则显示合同字段信息
 
+        //1、初始化Framework-Site信息
+        require_once('modules/HAA_Frameworks/orgSelector_class.php');
+        $current_site_id = empty($this->bean->ham_maint_sites_id)?"":$this->bean->ham_maint_sites_id;
+        $current_module = $this->module;
+        $current_action = $this->action;
+        $this->ss->assign('MAINT_SITE',set_site_selector($current_site_id,$current_module,$current_action));
+
+		//2、如果当前数据来源于SR（有参数sr_id）则从对应的SR上复制信息
 		if (isset ($_GET['sr_id']) && $_GET['sr_id'] != "") {
 			//如果有SR关联(由SR创建 WO时)
 			$sr_id = $_GET['sr_id'];
@@ -187,7 +187,7 @@ class HAM_WOViewEdit extends ViewEdit {
 			echo "</script>";
 		}
 		/**
-		 * 是否来自合同的
+		 * 3、判断是否来自合同的，如果来源于合同则显示合同字段信息
 		 * modify by yuan.chen 2016-09-07
 		 */
 		if (isset ($_GET['contract_id']) && $_GET['contract_id'] != "") {
@@ -201,7 +201,6 @@ class HAM_WOViewEdit extends ViewEdit {
 				$this->bean->source_type='Contracts';
 				//$this->bean->saveContracts(false);			
 			}
-			
 		}
 		parent :: Display();
 	} //end function
