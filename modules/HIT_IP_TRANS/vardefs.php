@@ -142,6 +142,7 @@ $dictionary['HIT_IP_TRANS'] = array (
 			'type' => 'varchar',
 			'massupdate' => 0,
 			'no_default' => false,
+			'source' => 'non-db',
 			'comments' => '',
 			'help' => '',
 			'importable' => 'true',
