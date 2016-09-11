@@ -22,8 +22,14 @@ function display_lines($focus, $field, $value, $view){
 					        ,hat.port
 					        ,hat.speed_limit
 					        ,hat.gateway
+							,hat.monitoring
+							,hat.hat_assets_cabinet_id
+							,b.name hat_assets_cabinet
+							,hat.channel_content
+							,hat.channel_num	
 					FROM   hit_ip_trans hat
 					LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
+					LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
 					LEFT JOIN hit_ip_subnets s ON (hat.hit_ip_subnets_id=s.id)
 					LEFT JOIN hit_ip hi ON (s.parent_hit_ip_id=hi.id)
 					WHERE hat.hit_ip_trans_batch_id ='".$focus->id."'";

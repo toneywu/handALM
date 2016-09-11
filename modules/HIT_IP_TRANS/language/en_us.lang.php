@@ -78,6 +78,8 @@ $mod_strings = array (
   'LBL_PORT'=>'Port',
   'LBL_SPEED_LIMIT'=>'Speed Limit',
   'LBL_HAT_ASSET_NAME'=>'Asset',
-  
-  
+  'LBL_CABINET'=>'Cabinet',
+  'LBL_MONITORING'=>'Monitoring',
+  'LBL_CHANNEL_NUM'=>'Channel Num',
+  'LBL_CHANNEL_CONTENT'=>'Channel Content',
 );
