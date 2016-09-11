@@ -71,6 +71,17 @@ $viewdefs[$module_name]['DetailView'] = array(
   array (
     'description',
   ),
+   'lbl_editview_panel1' =>
+      array (
+        0 =>
+        array (
+          0 =>
+          array (
+            'name' => 'line_items',
+            'label' => 'LBL_LINE_ITEMS',
+          ),
+        ),
+      ),
 )
 );
 ?>
