@@ -49,16 +49,15 @@ if (!empty ($current_id)) {
 			$people_name = $last_resource_people['resource_people_name'];
 			$people_id = $last_resource_people['resource_people_id'];
 		}
+		
 		if ($people_name != null || $people_id == null) {
 			$current_bean->work_center_people = $people_name;
 			$current_bean->work_center_people_id = $people_id;
 			$res_people_bean = BeanFactory :: getBean('HAM_Work_Center_People', $people_id);
 			if(!empty($res_people_bean->contact_id)){
 				$contact_bean = BeanFactory :: getBean('Contacts', $res_people_bean->contact_id);
-				$current_bean->assign_user_id = $contact_bean->user_id_c;
+				$current_bean->assigned_user_id = $contact_bean->user_id_c;
 			}
-			
-			
 			$current_bean->save();
 		}
 	}

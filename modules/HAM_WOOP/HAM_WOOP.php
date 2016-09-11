@@ -128,6 +128,9 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 		global $app_list_strings, $timedate;
 		$woop_fields = $this->get_list_view_array();
 		$ham_wo_id = $_GET['record'];
+		if($ham_wo_id==null){
+			$ham_wo_id=$this->ham_wo_id;
+		}
 		$woop_status =isset($this->woop_status)?$this->woop_status:"";
 
 		if (($woop_status=="APPROVED"||$woop_status=="WSCH"||$woop_status=="WMATL"||$woop_status=="WPCOND"||$woop_status=="INPRG"||$woop_status=="REWORK") && (empty($this->action) || $this->action != 'Popup')) {
