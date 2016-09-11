@@ -5,7 +5,7 @@ var prodln = 0;
 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
 
 function show_ip_desc(ip_val,desc_obj) {
-  ip_splited = ip_val.split("/")
+  ip_splited = ip_val.split("/");
   if ( IpSubnetCalculator.isIp(ip_splited[0])&&ip_splited[1]<=32&&ip_splited[1]>=0) {
     var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1])
     //console.log(ip_caled);
@@ -18,9 +18,14 @@ function show_ip_desc(ip_val,desc_obj) {
     desc_obj.html("");
    }
 };
+
+function show_ip_subnet_ojb(ln) {
+  	$("#line_name"+ln).val($("#line_ip_subnet"+ln).val());
+  	show_ip_desc($("#line_ip_subnet"+ln).val(),$("#line_ip_subnet"+ln+"_ip_desc"));
+  	show_ip_desc($("#line_name"+ln).val(),$("#line_name"+ln+"_ip_desc"));
+}
+
 function show_ip_desc_ojb(obj) {
-  console.log(obj.value);
-  console.log(obj.id+"_ip_desc");
   show_ip_desc(obj.value,$("#"+obj.id+"_ip_desc"));
 }
 
@@ -104,127 +109,57 @@ function insertTransLineHeader(tableid){
   var a=x.insertCell(1);
   a.innerHTML='#';
   var b=x.insertCell(2);
+  b.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_IP_SUBNET');
+  var b=x.insertCell(3);
   b.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_NAME');
-  var b1=x.insertCell(3);
+  var b1=x.insertCell(4);
   b1.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_NETMASK');
-  var c=x.insertCell(4);
+  var c=x.insertCell(5);
   c.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_LOWEST');
-  var d=x.insertCell(5);
+  var d=x.insertCell(6);
   d.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_HIGHEST');
-  var e=x.insertCell(6);
+  var e=x.insertCell(7);
   e.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_QTY');
-  var f=x.insertCell(7);
+  var f=x.insertCell(8);
   f.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_VLAN');
-  var g=x.insertCell(8);
+  var g=x.insertCell(9);
   g.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_TUNNEL');
-  var h=x.insertCell(9);
+  var h=x.insertCell(10);
   h.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_DESCRIPTION');
-  var i=x.insertCell(10);
+  var i=x.insertCell(11);
   i.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_ORGANIZATION');
-  var j=x.insertCell(11);
+  var j=x.insertCell(12);
   j.innerHTML='&nbsp;';
 }
 
 
-function insertLineData(hit_ip_subnets){ //将数据写入到对应的行字段中
+function insertLineData(hit_ip_subnets, current_view){ //将数据写入到对应的行字段中
   //console.log(hit_ip_subnets);
   var ln = 0;
   if(hit_ip_subnets.id != '0' && hit_ip_subnets.id !== ''){
-    ln = insertTransLineElements("lineItems");
+    ln = insertTransLineElements("lineItems", current_view);
     $("#line_id".concat(String(ln))).val(hit_ip_subnets.id);
+    $("#line_ip_subnet".concat(String(ln))).val(hit_ip_subnets.ip_subnet);
     $("#line_name".concat(String(ln))).val(hit_ip_subnets.name);
     $("#line_vlan".concat(String(ln))).val(hit_ip_subnets.vlan);
     $("#line_vlan_id".concat(String(ln))).val(hit_ip_subnets.vlan_id);
     $("#line_description".concat(String(ln))).val(hit_ip_subnets.description);
     $("#line_tunnel".concat(String(ln))).val(hit_ip_subnets.tunnel);
-    renderTransLine(ln);
+
+
+      renderTransLine(ln);
+
     resetItem(ln);
   }
 }
 
 function insertTransLineElements(tableid,current_view) { //创建界面要素
 //包括以下内容：1）显示头，2）定义SQS对象，3）定义界面显示的可见字段，4）界面行编辑器界面
+
   if (document.getElementById(tableid + '_head') !== null) {
     document.getElementById(tableid + '_head').style.display = "";
   }
 
-/*
-sqs_objects["line_inventory_item[" + prodln + "]"] = {
-  "form": "EditView",
-  "method": "query",
-  "modules": ["AOS_Products"],
-  "group": "or",
-  "field_list": ["name", "id", "primary_uom_c", "haa_uom_id_c", "secondary_uom_c","haa_uom_id1_c","secondary_unit_defaulting_c","tracking_uom_c"],
-  "populate_list": ["line_inventory_item[" + prodln + "]", "line_item_id[" + prodln + "]", "line_primary_uom[" + prodln + "]", "line_primary_uom_id[" + prodln + "]", "line_secondary_uom[" + prodln + "]", "line_secondary_unit_defaulting[" + prodln + "]", "line_tracking_uom[" + prodln + "]"],
-  "required_list": ["line_item_id[" + prodln + "]"],
-  "conditions": [{
-    "name": "name",
-    "op": "like_custom",
-    "end": "%",'begin': '%',
-    "value": ""
-  }],
-  "order": "name",
-  "limit": "30",
-  "post_onblur_function": "resetItem(" + prodln + ");",
-  "no_match_text": "No Match"
-};*/
- /*  sqs_objects["line_target_organization[" + prodln + "]"] = {
-    "form": "EditView",
-    "method": "query",
-    "modules": ["Accounts"],
-    "group": "or",
-    "field_list": ["name", "id"],
-    "populate_list": ["line_target_organization[" + prodln + "]", "line_account_id_c[" + prodln + "]"],
-    "required_list": ["line_account_id_c[" + prodln + "]"],
-    "conditions": [{
-      "name": "name",
-      "op": "like_custom",
-      "end": "%",'begin': '%',
-      "value": ""
-    }],
-    "order": "name",
-    "limit": "30",
-    // "post_onblur_function": "resetItem(" + prodln + ");",
-    "no_match_text": "No Match"
-  };
-  sqs_objects["line_target_person[" + prodln + "]"] = {
-    "form": "EditView",
-    "method": "query",
-    "modules": ["Contacts"],
-    "group": "or",
-    "field_list": ["name", "id"],
-    "populate_list": ["line_target_person[" + prodln + "]", "line_contact_id_c[" + prodln + "]"],
-    "required_list": ["line_contact_id_c[" + prodln + "]"],
-    "conditions": [{
-      "name": "name",
-      "op": "like_custom",
-      "end": "%",'begin': '%',
-      "value": ""
-    }],
-    "order": "name",
-    "limit": "30",
-    // "post_onblur_function": "resetItem(" + prodln + ");",
-    "no_match_text": "No Match"
-  };
-  sqs_objects["line_target_location[" + prodln + "]"] = {
-    "form": "EditView",
-    "method": "query",
-    "modules": ["HAT_Asset_Locations"],
-    "group": "or",
-    "field_list": ["name", "id","location_title"],
-    "populate_list": ["line_target_location[" + prodln + "]", "line_hat_asset_locations_id_c[" + prodln + "]", "line_target_location_desc[" + prodln + "]"],
-    "required_list": ["line_hat_asset_locations_id_c[" + prodln + "]"],
-    "conditions": [{
-      "name": "name",
-      "op": "like_custom",
-      "end": "%",'begin': '%',
-      "value": ""
-    }],
-    "order": "name",
-    "limit": "30",
-    // "post_onblur_function": "resetItem(" + prodln + ");",
-    "no_match_text": "No Match"
-  };*/
 
   tablebody = document.createElement("tbody");
   tablebody.id = "line_body" + prodln;
@@ -237,18 +172,21 @@ sqs_objects["line_inventory_item[" + prodln + "]"] = {
   z1.innerHTML  =
   "<td><input id='selectLineClicked"+ prodln +"' type='checkbox' onclick='selectLineClicked(this)'></td>"+
   "<td><span name='displayed_line_num[" + prodln + "]' id='displayed_line_num" + prodln + "'>1</span></td>" +
+  "<td><span name='displayed_line_ip_subnet[" + prodln + "]' id='displayed_line_ip_subnet" + prodln + "'></span></td>"+
   "<td><span name='displayed_line_name[" + prodln + "]' id='displayed_line_name" + prodln + "'></span></td>"+
-  "<td><span name='displayed_line_netmask[" + prodln + "]' id='displayed_line_netmask" + prodln + "'></span></td>"+
-  "<td><span name='displayed_line_lowest[" + prodln + "]' id='displayed_line_lowest" + prodln + "'></span></td>"+
-  "<td><span name='displayed_line_highest[" + prodln + "]' id='displayed_line_highest" + prodln + "'></span></td>"+
-  "<td><span name='displayed_line_qty[" + prodln + "]' id='displayed_line_qty" + prodln + "'></span></td>"+
+  "<td><span name='displayed_line_ip_netmask[" + prodln + "]' id='displayed_line_ip_netmask" + prodln + "'></span></td>"+
+  "<td><span name='displayed_line_ip_lowest[" + prodln + "]' id='displayed_line_ip_lowest" + prodln + "'></span></td>"+
+  "<td><span name='displayed_line_ip_highest[" + prodln + "]' id='displayed_line_ip_highest" + prodln + "'></span></td>"+
+  "<td><span name='displayed_line_ip_qty[" + prodln + "]' id='displayed_line_ip_qty" + prodln + "'></span></td>"+
   "<td><span name='displayed_line_vlan[" + prodln + "]' id='displayed_line_vlan" + prodln + "'></span></td>"+
   "<td><span name='displayed_line_tunnel[" + prodln + "]' id='displayed_line_tunnel" + prodln + "'></span></td>" +
   "<td><span name='displayed_line_description[" + prodln + "]' id='displayed_line_description" + prodln + "'></span></td>" +
   "<td><span name='displayed_line_organization[" + prodln + "]' id='displayed_line_organization" + prodln + "'></span></td>" +
-  "<td>"+
-  "<input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'>";
- // (current_view=="DetailView"?"<input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'>":" ")+
+  "<td>"
+
+  if(current_view=="EditView") {
+      z1.innerHTML+="<input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'>";
+  }
   "</td>";
 
   var x = tablebody.insertRow(-1); //以下生成的是Line Editor
@@ -257,8 +195,14 @@ sqs_objects["line_inventory_item[" + prodln + "]"] = {
 
   x.innerHTML  = "<td colSpan='11'><div class='lineEditor'>"+
   "<span class='input_group'>"+
+  "<label>"+SUGAR.language.get('HIT_IP_Subnets', 'LBL_IP_SUBNET')+"<span class='required'>*</span></label>"+
+  "<input class='sqsEnabled' autocomplete='off' type='text' style='width:113px;' name='line_ip_subnet[" + prodln + "]' id='line_ip_subnet" + prodln + "' value='' title='' onblur='show_ip_subnet_ojb("+prodln+")'>"+
+  "<span class='input_mask'>"+SUGAR.language.get('HIT_IP', 'LBL_NAME_DESC')+"</span>"+
+  "<span class='input_desc' name='line_ip_subnet[" + prodln + "]_ip_desc' id='line_ip_subnet" + prodln + "_ip_desc' ></span>"+
+  "</span>"+
+  "<span class='input_group'>"+
   "<label>"+SUGAR.language.get('HIT_IP_Subnets', 'LBL_NAME')+"<span class='required'>*</span></label>"+
-  "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_name[" + prodln + "]' id='line_name" + prodln + "' value='' title='' onblur='show_ip_desc_ojb(this)'>"+
+  "<input class='sqsEnabled' autocomplete='off' type='text' style='width:113px;' name='line_name[" + prodln + "]' id='line_name" + prodln + "' value='' title='' onblur='show_ip_desc_ojb(this)'>"+
   "<span class='input_mask'>"+SUGAR.language.get('HIT_IP', 'LBL_NAME_DESC')+"</span>"+
   "<span class='input_desc' name='line_name[" + prodln + "]_ip_desc' id='line_name" + prodln + "_ip_desc' ></span>"+
   "</span><hr/>"+
@@ -304,14 +248,15 @@ function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
   //
   ip_splited = $("#line_name"+ln).val().split("/")
   if ( IpSubnetCalculator.isIp(ip_splited[0])&&ip_splited[1]<=32&&ip_splited[1]>=0) {
-    var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1])
-    //显示IP细节信息，由IpSubnetCalculator.js完成算法
-   $("#displayed_line_netmask"+ln).html(ip_caled.prefixMaskStr);
-   $("#displayed_line_lowest"+ln).html(ip_caled.ipLowStr);
-   $("#displayed_line_highest"+ln).html(ip_caled.ipHighStr);
-   $("#displayed_line_qty"+ln).html(Math.pow(2,ip_caled.invertedSize));
+	   var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1])
+	    //显示IP细节信息，由IpSubnetCalculator.js完成算法
+	   $("#displayed_line_ip_netmask"+ln).html(ip_caled.prefixMaskStr);
+	   $("#displayed_line_ip_lowest"+ln).html(ip_caled.ipLowStr);
+	   $("#displayed_line_ip_highest"+ln).html(ip_caled.ipHighStr);
+	   $("#displayed_line_ip_qty"+ln).html(Math.pow(2,ip_caled.invertedSize));
   }
 
+  $("#displayed_line_ip_subnet"+ln).html("<strong>"+$("#line_ip_subnet"+ln).val()+"</strong>");
   $("#displayed_line_name"+ln).html("<strong>"+$("#line_name"+ln).val()+"</strong>");
   $("#displayed_line_vlan"+ln).html($("#line_vlan"+ln).val());
   $("#displayed_line_tunnel"+ln).html($("#line_tunnel"+ln).val());
@@ -343,7 +288,7 @@ function insertTransLineFootor(tableid)
   foot_html ="";
   foot_html += "<div style='text-align:left'>"
   foot_html += "<input id='btnAddNewLine' type='button' class='button' onclick='addNewLine(\"" +tableid+ "\")' value='+ "+SUGAR.language.get('HIT_IP_Subnets', 'LBL_BTN_ADD_NEW_IP')+"' />";
-  foot_html += "<span class='input_group'>" +
+/*  foot_html += "<span class='input_group'>" +
   " <label id='mass_org_label" + prodln + "_label'>"+SUGAR.language.get('HIT_IP_Subnets', 'LBL_IP_MASS_ASIGN')+":</label>"+
   "<input class='sqsEnabled' style='width:153px;' autocomplete='off' type='text' name='mass_org[" + prodln + "]' id='mass_org" + prodln + "' value='' title='' >"+
   "<input type='hidden' name='line_vlan_id[" + prodln + "]' id='line_vlan_id" + prodln + "' value='' />"+
@@ -351,7 +296,7 @@ function insertTransLineFootor(tableid)
   "</span>";
   foot_html += "<input id='btnMassAsign' type='button' class='button' onclick='addNewLine(\"" +tableid+ "\")' value='"+SUGAR.language.get('HIT_IP_Subnets', 'LBL_BTN_ASIGN_ORG')+"' />"
   foot_html += "<input id='btnMassAsign' type='button' class='button' onclick='addNewLine(\"" +tableid+ "\")' value='"+SUGAR.language.get('HIT_IP_Subnets', 'LBL_BTN_UNASIGN_ORG')+"' />"
-  foot_html += "</div>";
+ */ foot_html += "</div>";
   footer_cell.innerHTML=foot_html;
 }
 
@@ -359,7 +304,7 @@ function addNewLine(tableid) {
   //console.log(check_form('EditView'));
   //
   if (check_form('EditView')) {//只有必须填写的字段都填写了才可以新增
-    insertTransLineElements(tableid);//加入新行
+    insertTransLineElements(tableid,'EditView');//加入新行
     LineEditorShow(prodln - 1);       //打开行编辑器
     //console.log("check_form OK");
   } else {

@@ -71,6 +71,14 @@ array (
           1 => 'description',
         ),
       ),
+      'lbl_detailview_panel1' => 
+      array (
+        0 => 
+        array (
+          0 => 'line_items'
+        ),
+      ),
+      
     ),
   ),
 );
