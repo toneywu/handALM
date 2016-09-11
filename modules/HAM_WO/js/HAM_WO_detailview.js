@@ -9,6 +9,7 @@ function changeStatus(id){
 		$.ajax({
 			url: 'index.php?to_pdf=true&module=HAM_WO&action=getListFields&id=' + id,
 			success: function (data) {
+				//alert("changeStatus")
 				//$("wo_status").remove();
 				$("td[field='wo_status']").text(null);
 				$("td[field='wo_status']").replaceWith(data);
@@ -27,6 +28,7 @@ function assignWoop(id,record){
 		url: 'index.php?to_pdf=true&module=HAM_WOOP&action=assign_woop_people&id=' + id,
 		success: function (data) {
 			//alert(data);
+			//alert("assignWoop")
 			if(data!="Y"){
 				window.location.href = "index.php?module=HAM_WO&action=DetailView&record="+record;
 			}
@@ -46,6 +48,7 @@ function save(id,status_code){
 		$.ajax({
 			url: 'index.php?to_pdf=true&module=HAM_WO&action=saveBean&id=' + id+"&status_code="+status_code,
 			success: function (data) {
+				//alert("save")
 				window.location.href = "index.php?module=HAM_WO&action=DetailView&record="+id;
 			},
 			error: function () { //失败
@@ -59,6 +62,7 @@ function save(id,status_code){
  * @param name
  */
 function cancel(id,status_code){
+	//alert("cancel");
 	window.location.href = "index.php?module=HAM_WO&action=DetailView&record="+id;
 };
 
