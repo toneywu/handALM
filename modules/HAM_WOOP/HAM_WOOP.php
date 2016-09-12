@@ -128,6 +128,9 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 		global $app_list_strings, $timedate;
 		$woop_fields = $this->get_list_view_array();
 		$ham_wo_id = $_GET['record'];
+		if($ham_wo_id==null){
+			$ham_wo_id=$this->ham_wo_id;
+		}
 		$woop_status =isset($this->woop_status)?$this->woop_status:"";
 
 		if (($woop_status=="APPROVED"||$woop_status=="WSCH"||$woop_status=="WMATL"||$woop_status=="WPCOND"||$woop_status=="INPRG"||$woop_status=="REWORK") && (empty($this->action) || $this->action != 'Popup')) {
@@ -138,7 +141,7 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 
 			if (!empty($this->act_module) && !empty($this->work_center_people)){
 					//有动作模块，并且已经有人员分配
-				$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick="window.location.href = &quot;index.php?module='.$this->act_module.'&action=EditView&woop_id='.$this->id.'&quot;;">'.$app_list_strings['ham_woop_moduleList'][$this->act_module].'</a>';
+				$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=takeWoopActionModule("'.$this->act_module.'","'.$this->id.'")>'.$app_list_strings['ham_woop_moduleList'][$this->act_module].'</a>';
 			}
 		}
 

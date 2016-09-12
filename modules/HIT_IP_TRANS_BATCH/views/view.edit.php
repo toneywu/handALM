@@ -1,20 +1,14 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 require_once('include/MVC/View/views/view.detail.php');
-
 class HIT_IP_TRANS_BATCHViewEdit extends ViewEdit
 {
-
     function Display() {
-
         global $db;
         global $current_user;
-
         //0.处理头与行的语言包
         $modules = array('HIT_IP_TRANS_BATCH', 'HIT_IP_TRANS',
         );
-
         foreach ($modules as $module) {
             if (!is_file($GLOBALS['sugar_config']['cache_dir'] . 'jsLanguage/' . $module . '/' . $GLOBALS['current_language'] . '.js')) {
                 require_once 'include/language/jsLanguage.php';
@@ -22,15 +16,12 @@ class HIT_IP_TRANS_BATCHViewEdit extends ViewEdit
             }
             echo '<script type="text/javascript" src="' . $GLOBALS['sugar_config']['cache_dir'] . 'jsLanguage/' . $module . '/' . $GLOBALS['current_language'] . '.js?s=' . $GLOBALS['js_version_key'] . '&c=' . $GLOBALS['sugar_config']['js_custom_version'] . '&j=' . $GLOBALS['sugar_config']['js_lang_version'] . '"></script>';
         };
-
-
         //1、初始化Framework
         require_once('modules/HAA_Frameworks/orgSelector_class.php');
         $current_framework_id = empty($this->bean->hat_framework_id)?"":$this->bean->hat_framework_id;
         $current_module = $this->module;
         $current_action = $this->action;
         $this->ss->assign('FRAMEWORK',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id'));
-
 /*        //2.加载EventType对应的规则
         if isset($this->bean->hat_eventtype_id) {
             $beanEventType = BeanFactory::getBean('HAT_EventType', $this->bean->hat_eventtype_id);
@@ -78,10 +69,8 @@ class HIT_IP_TRANS_BATCHViewEdit extends ViewEdit
 										  AND ham_wo.`deleted` = 0
 										  AND ham_woop.`deleted` = 0
                                       and ham_woop.id = '".$_REQUEST['woop_id']."'";
-
                 //echo($sel_current_asset);
                 $result_woop =  $db->query($sql_current_string);
-
                 while ( $bean_woop = $db->fetchByAssoc($result_woop) ) {
                     $this->bean->source_woop_id = $bean_woop['woop_id'];
                     $this->bean->source_woop = $bean_woop['woop_name'];
@@ -93,7 +82,6 @@ class HIT_IP_TRANS_BATCHViewEdit extends ViewEdit
                     $this->bean->name = $bean_woop['wo_number'].':'.$bean_woop['woop_name'];
                     $this->bean->current_owning_org_id = $bean_woop['org_id'];
                     $this->bean->current_owning_org = $bean_woop['org_name'];
-
                     if(empty($this->bean->date_schedualed_finish)){
                         if(empty($this->bean->date_target_finish)){
                             if(empty($this->bean->date_finish_not_later)){
@@ -101,20 +89,16 @@ class HIT_IP_TRANS_BATCHViewEdit extends ViewEdit
                             } else {
                                 $this->bean->planned_complete_date = $bean_woop['date_finish_not_later'];
                             }
-
                         } else {
                             $this->bean->planned_complete_date = $bean_woop['date_target_finish'];
                         }
                     } else {
                         $this->bean->planned_complete_date = $bean_woop['date_schedualed_finish'];
                     }
-
                     $this->ss->assign('SOURCE_WOOP_ID',$bean_woop['woop_id']);
                     $this->ss->assign('SOURCE_WO_ID',$bean_woop['wo_id']);
                     $this->ss->assign('SOURCE_WO_ORG',$bean_woop['wo_id']);
                }
-
-
         } elseif (empty($this->bean->id)){
             //如果不是从工序上来，但是处理新建的状态
             //
@@ -123,9 +107,6 @@ class HIT_IP_TRANS_BATCHViewEdit extends ViewEdit
             $this->bean->current_owning_org_id = $current_user->account_id_c;
             $this->bean->current_owning_org = $current_user->contact_organization_c;
         }
-
-
-
         parent::Display();
     }
 }

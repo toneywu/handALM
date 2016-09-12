@@ -38,6 +38,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_DETAILVIEW_PANEL1' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
       ),
       'syncDetailEditViews' => true,
     ),
@@ -94,29 +99,40 @@ array (
           ),
           1 => 
           array (
-            'name' => 'source_wo',
+            'name' => 'owner_contacts',
             'studio' => 'visible',
-            'label' => 'LBL_SOURCE_WO',
+            'label' => 'LBL_OWNER',
           ),
         ),
         4 => 
         array (
           0 => 
           array (
-            'name' => 'source_woop',
+            'name' => 'source_wo',
             'studio' => 'visible',
-            'label' => 'LBL_SOURCE_WOOP',
+            'label' => 'LBL_SOURCE_WO',
           ),
           1 => 
           array (
-            'name' => 'owner_contacts',
+            'name' => 'source_woop',
             'studio' => 'visible',
-            'label' => 'LBL_OWNER',
+            'label' => 'LBL_SOURCE_WOOP',
           ),
         ),
         5 => 
         array (
           0 => 'description',
+        ),
+      ),
+      'lbl_detailview_panel1' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'line_items',
+            'label' => 'LBL_LINE_ITEMS',
+          ),
         ),
       ),
     ),

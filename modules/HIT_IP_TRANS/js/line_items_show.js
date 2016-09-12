@@ -1,185 +1,12 @@
-$.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
+
 var prodln = 0;
 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
 
-/**
- * 设置必输
- */
-function mark_field_enabled(field_name,not_required_bool) {
-  //field_name = 字段名，不需要jquery select标志，直接写名字
-  //not_required_bool如果为空或没有明确定义为true的话，字段为必须输入。如果=true则为非必须
-  //alert(not_required_bool);
-  $("#"+field_name).css({"color":"#000000","background-Color":"#ffffff"});
-  $("#"+field_name).attr("readonly",false);
-  $("#"+field_name+"_label").css({"color":"#000000","text-decoration":"none"})
-
-  if(typeof not_required_bool == "undefined" || not_required_bool==false || not_required_bool=="") {
-      addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());//将当前字段标记为必须验证
-      //打上必须星标
-      if  ($("#"+field_name+"_label .required").text()!='*') {//如果没有星标，则打上星标
-        $("#"+field_name+"_label").html($("#"+field_name+"_label").text()+"<span class='required'>*</span>");//打上星标
-      } else {//如果已经有星标了，则显示出来
-        $("#"+field_name+"_label .required").show();
-      }
-  } else { //如果不是必须的，则不显示星标
-    //直接Remove有时会出错，所有先设置为Validate再Remove
-    addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());
-    removeFromValidate('EditView',field_name);
-     //去除必须验证
-    $("#"+field_name+"_label .required").hide();
-  }
-  if  (typeof $("#btn_"+field_name)!= 'undefined') {//移除选择按钮
-    $("#btn_"+field_name).css({"visibility":"visible"});
-  }
-  if  (typeof $("#btn_clr_"+field_name)!= 'undefined') {//移除清空按钮
-    $("#btn_clr_"+field_name).css({"visibility":"visible"});
-  }
-}
-
-function openHitIpPopup(ln){//本文件为行上选择资产的按钮
-  lineno=ln;
-  var popupRequestData = {
-    "call_back_function" : "setAssetReturn",
-    "form_name" : "EditView",
-    "field_to_name_array" : {
-      "id" : "line_hit_ip_subnets_id" + ln,
-      "name" : "line_hit_ip_subnets" + ln,
-      "parent_hit_ip" : "line_parent_ip" + ln,
-    }
-  };
-  open_popup('HIT_IP_Subnets', 600, 850, '', true, true, popupRequestData);
-}
-
-function openCabinetPopup(ln){//本文件为行上选择资产的按钮
-	  lineno=ln;
-	  var popupRequestData = {
-	    "call_back_function" : "setCabinetReturn",
-	    "form_name" : "EditView",
-	    "field_to_name_array" : {
-	      "id" : "line_hat_assets_cabinet_id" + ln,
-	      "name" : "line_hat_assets_cabinet" + ln,
-	    }
-};
-	  open_popup('HAT_Assets', 600, 850, '', true, true, popupRequestData);
-}
-
-function openAssetPopup(ln){//本文件为行上选择资产的按钮
-	  lineno=ln;
-	  var popupRequestData = {
-	    "call_back_function" : "setAssetReturn",
-	    "form_name" : "EditView",
-	    "field_to_name_array" : {
-	      "id" : "line_hat_assets_id" + ln,
-	      "name" : "line_hat_asset_name" + ln,
-	    }
-	  };
-	  open_popup('HAT_Assets', 600, 850, '', true, true, popupRequestData);
-	}
-
-
-function setAssetReturn(popupReplyData){
-  set_return(popupReplyData);
-  //console.log(popupReplyData);
-  resetAsset(lineno);
-}
-
-function setCabinetReturn(popupReplyData){
-	  set_return(popupReplyData);
-	  //console.log(popupReplyData);
-	  //resetAsset(lineno);
-}
-
-function openParentAssetPopup(ln){//本文件为行上选择资产的按钮
-  lineno=ln;
-  var popupRequestData = {
-    "call_back_function" : "set_return",
-    "form_name" : "EditView",
-    "field_to_name_array" : {
-      "name" : "target_parent_asset" + ln,
-      "id" : "line_parent_asset_id" + ln,
-    },    
-  };
-  open_popup('HAT_Assets', 600, 850, '', true, true, popupRequestData);
-}
-
-
-function openOwningOrgPopup(ln){
-  lineno=ln;
-  var popupRequestData = {
-    "call_back_function" : "set_return",
-    "form_name" : "EditView",
-    "field_to_name_array" : {
-      "name" : "line_target_owning_org" + ln,
-      "id" : "line_owning_org_id" + ln,
-    },
-  };
-
-  open_popup('Accounts', 1000, 850,'' , true, true, popupRequestData);
-}
-
-
-function openUsingOrgPopup(ln){
-  lineno=ln;
-  var popupRequestData = {
-    "call_back_function" : "set_return",
-    "form_name" : "EditView",
-    "field_to_name_array" : {
-      "name" : "line_target_using_org" + ln,
-      "id" : "line_using_org_id" + ln,
-    },
-  };
-
-  open_popup('Accounts', 1000, 850,'' , true, true, popupRequestData);
-}
-
-
-
-function openOwningPersonPopup(ln){
-  lineno=ln;
-  var popupRequestData = {
-    "call_back_function" : "set_return",
-    "form_name" : "EditView",
-    "field_to_name_array" : {
-      "name" : "line_target_owning_person" + ln,
-      "id" : "line_owning_person_id" + ln,
-    }
-  };
-  var popupFilter = '&account_locked=ture&account_name_advanced='+$("#line_target_owning_org"+ln).val();
-  open_popup('Contacts', 1000, 850,popupFilter, true, true, popupRequestData);
-}
-
-function openUsingPersonPopup(ln){
-  lineno=ln;
-  var popupRequestData = {
-    "call_back_function" : "set_return",
-    "form_name" : "EditView",
-    "field_to_name_array" : {
-      "name" : "line_target_using_person" + ln,
-      "id" : "line_using_person_id" + ln,
-    }
-  };
-  var popupFilter = '&account_locked=ture&account_name_advanced='+$("#line_target_using_org"+ln).val();
-  open_popup('Contacts', 1000, 850,popupFilter, true, true, popupRequestData);
-}
-
-
-
-function openLocationPopup(ln){
-  lineno=ln;
-  var popupRequestData = {
-    "call_back_function" : "set_return",
-    "form_name" : "EditView",
-    "field_to_name_array" : {
-      "name" : "line_target_location" + ln,
-      "location_title" : "line_target_location_desc" + ln,
-      "id" : "line_hat_asset_locations_id" + ln
-    }
-  };
-  open_popup('HAT_Asset_Locations', 1000, 850, '', true, true, popupRequestData);
-}
-
 function insertTransLineHeader(tableid){
   $("#line_items_label").hide();//隐藏SugarCRM字段
+ //alert($("#LBL_DETAILVIEW_PANEL1 tr:eq(:first)").first());
+ //alert($("#LBL_DETAILVIEW_PANEL1 tr td:first").text());
+ $("#LBL_DETAILVIEW_PANEL1 tr td:first").remove();
   //alert(SUGAR.language.get('HAT_Asset_Trans', 'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE'));
 
   tablehead = document.createElement("thead");
@@ -219,8 +46,6 @@ function insertTransLineHeader(tableid){
   f.innerHTML="带宽类型";
   var g=x.insertCell(7);
   g.innerHTML="端口";
-
-
   var i=x.insertCell(8);
   i.innerHTML="限速";
 
@@ -343,35 +168,25 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<td><span name='displayed_line_hat_assets_cabinet[" + prodln + "]' id='displayed_line_hat_assets_cabinet" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_monitoring[" + prodln + "]' id='displayed_line_monitoring" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_channel_num[" + prodln + "]' id='displayed_line_channel_num" + prodln + "'></span></td>"+
-      "<td><span name='displayed_line_channel_content[" + prodln + "]' id='displayed_line_channel_content" + prodln + "'></span></td>"+
+      "<td><span name='displayed_line_channel_content[" + prodln + "]' id='displayed_line_channel_content" + prodln + "'></span></td>"
       //"<td><span name='displayed_line_hit_ip_subnets_id[" + prodln + "]' id='displayed_line_hit_ip_subnets_id" + prodln + "''></span></td>"+
-      "<td><input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'></td>";
-  var z2 = tablebody.insertRow(-1);
-  z2.id = 'asset_trans_line2_displayed' + prodln;
-//  z2.innerHTML  =
-//      "<td></td>" +
-//      "<td></td>" +
-//      "<td></td>" +
-//      "<td><span name='displayed_line_current_asset_status[" + prodln + "]' id='displayed_line_current_asset_status" + prodln + "'>2</span></td>"+
-//      "<td><span name='displayed_line_current_responsible_center[" + prodln + "]' id='displayed_line_current_responsible_center" + prodln + "'></span></td>"+
-//      "<td><span name='displayed_line_current_responsible_person[" + prodln + "]' id='displayed_line_current_responsible_person" + prodln + "'></span></td>"+
-//      "<td><span name='displayed_line_current_location[" + prodln + "]' id='displayed_line_current_location" + prodln + "'></span></td>"+
-//      "<td><span name='displayed_line_current_location_desc[" + prodln + "]' id='displayed_line_current_location_desc" + prodln + "'></span></td>"+
-//      "<td></td>";
+      //"<td><input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'></td>";
+
   
   var x = tablebody.insertRow(-1); //以下生成的是Line Editor
   x.id = 'asset_trans_editor' + prodln;
   x.style = "display:none";
-  x.innerHTML  = "<td colSpan='12'><div class='lineEditor'>"+
+  x.innerHTML  = "<td colSpan='9'><div class='lineEditor'>"+
 	  //C段
-	  "<span class='input_group'><label>"+"C段"+"</label></span>"+
+	  "<label>"+"C段"+"</label>"+
 	  "<input style='width:78px;' type='hidden' readonly='readonly' name='line_parent_ip[" + prodln + "]' id='line_parent_ip" + prodln + "'  value='' title=''>"+
 	  "<span id='line_parent_ip_displayed" + prodln + "' ></span>"+
 	  "</span>"+
+	  
   	  //网段
       "<span class='input_group'>"+
       "<label>"+"网段"+"<span class='required'>*</span></label>"+
-      //网段Lov描述
+      //Lov描述
       "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_hit_ip_subnets[" + prodln + "]' id='line_hit_ip_subnets" + prodln + "' value='' title='' onblur='resetAsset("+prodln+")'>"+
       //Lov的Id
       "<input type='hidden' name='line_hit_ip_subnets_id[" + prodln + "]' id='line_hit_ip_subnets_id" + prodln + "' value=''>"+
@@ -414,16 +229,16 @@ function insertTransLineElements(tableid) { //创建界面要素
       "</span>"+
       
       //资产lov
-      "<span class='input_group'><label>"+"设备"+"</label>"+
+      "<label>"+"设备"+"<span class='required'>*</span></label>"+
       "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_hat_asset_name[" + prodln + "]' id='line_hat_asset_name" + prodln + "' value='' title='' onblur='resetAsset("+prodln+")'>"+
       "<input type='hidden' name='line_hat_assets_id[" + prodln + "]' id='line_hat_assets_id" + prodln + "' value=''>"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openAssetPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
       //机柜lov
-      "<span class='input_group'><label>"+"机柜"+"</label>"+
+      "<label>"+"机柜"+"<span class='required'>*</span></label>"+
       "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_hat_assets_cabinet[" + prodln + "]' id='line_hat_assets_cabinet" + prodln + "' value='' title='' onblur='resetAsset("+prodln+")'>"+
       "<input type='hidden' name='line_hat_assets_cabinet_id[" + prodln + "]' id='line_hat_assets_cabinet_id" + prodln + "' value=''>"+
-      "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn2' onclick='openCabinetPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+      "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openCabinetPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
       //监控链接
       "<span class='input_group'>"+
@@ -432,7 +247,7 @@ function insertTransLineElements(tableid) { //创建界面要素
       "</span>"+
       //频道号
       "<span class='input_group'>"+
-      "<label>"+"频道号"+"</label>"+
+      "<label>"+"监控链接"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_channel_num[" + prodln + "]' id='line_channel_num" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
       //频道内容
@@ -446,10 +261,9 @@ function insertTransLineElements(tableid) { //创建界面要素
 
         //"<button type='button' id='line_delete_line" + prodln + "' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_DELETE_INLINE') + "' tabindex='116' onclick='markLineDeleted(" + prodln + ",\"line_\")'><img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button>"+
 
-      "<input type='button' id='line_delete_line" + prodln + "' class='button btn_del' value='" + SUGAR.language.get('app_strings', 'LBL_DELETE_INLINE') + "' tabindex='116' onclick='btnMarkLineDeleted(" + prodln + ",\"line_\")'>"+
+     // "<input type='button' id='line_delete_line" + prodln + "' class='button btn_del' value='" + SUGAR.language.get('app_strings', 'LBL_DELETE_INLINE') + "' tabindex='116' onclick='btnMarkLineDeleted(" + prodln + ",\"line_\")'>"+
         // "<input style='float:right;' type='button' id='btn_LineEditorClose" + prodln + "' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE') + "'onclick='LineEditorClose(" + prodln + ")>"+
-      "<button type='button' id='btn_LineEditorClose" + prodln + "' class='button btn_save' value='" + SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE') + "' tabindex='116' onclick='LineEditorClose(" + prodln + ",\"line_\")'>"+SUGAR.language.get('app_strings', 'LBL_SAVE_BUTTON_LABEL')+" & "+SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE')+" <img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button>"+
-
+      //"<button type='button' id='btn_LineEditorClose" + prodln + "' class='button btn_save' value='" + SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE') + "' tabindex='116' onclick='LineEditorClose(" + prodln + ",\"line_\")'>"+SUGAR.language.get('app_strings', 'LBL_SAVE_BUTTON_LABEL')+" & "+SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE')+" <img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button>"+
       "<input type='hidden' name='associated_ip[" + prodln + "]' id='line_associated_ip" + prodln + "' maxlength='50' value='' title=''>"+
       "<input type='hidden' name='mask[" + prodln + "]' id='line_mask" + prodln + "' maxlength='50' value='' title='' >"+
       "<input type='hidden' name='gateway[" + prodln + "]' id='line_gateway" + prodln + "'  maxlength='50' value='' title='' >"+
@@ -457,7 +271,8 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<input type='hidden' name='port[" + prodln + "]' id='line_port" + prodln + "'  maxlength='50' value='' title='' >"+
       "<input type='hidden' name='speed_limit[" + prodln + "]' id='line_current_location_desc" + prodln + "'  maxlength='50' value='' title='' >"+
       "</div></td>";
-  addToValidate('EditView', 'line_hit_ip_subnets'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Asset_Trans_Batch', 'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE'));
+
+  addToValidate('EditView', 'line_asset'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Asset_Trans_Batch', 'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE'));
   addToValidate('EditView', 'line_name'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Asset_Trans_Batch', 'LBL_NAME'));
   addToValidate('EditView', 'line_target_organization'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Asset_Trans_Batch', 'LBL_TARGET_RESPONSIBLE_CENTER'));
   addToValidate('EditView', 'line_target_location'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Asset_Trans_Batch', 'LBL_TARGET_LOCATION'));
@@ -485,7 +300,6 @@ function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_line_hat_assets_cabinet"+ln).html($("#line_hat_assets_cabinet"+ln).val());
   $("#displayed_line_channel_content"+ln).html($("#line_channel_content"+ln).val());
   $("#displayed_line_channel_num"+ln).html($("#line_channel_num"+ln).val());
-  mark_field_enabled("displayed_line_hit_ip_subnets", false);
 }
 
 function resetAsset(ln){ //在用户重新选择资产之后，会连带的更新资产相关的字段信息。
@@ -578,15 +392,12 @@ function insertTransLineFootor(tableid)
 
   footer_cell.scope="row";
   footer_cell.colSpan="9";
-  footer_cell.innerHTML="<input id='btnAddNewLine' type='button' class='button btn_del' onclick='addNewLine(\"" +tableid+ "\")' value='+ "+SUGAR.language.get('HIT_IP_TRANS', 'LBL_BTN_ADD_TRANS_LINE')+"' />";
+  //footer_cell.innerHTML="<input id='btnAddNewLine' type='button' class='button btn_del' onclick='addNewLine(\"" +tableid+ "\")' value='+ "+SUGAR.language.get('HIT_IP_TRANS', 'LBL_BTN_ADD_TRANS_LINE')+"' />";
   //TODO:添加一个Checkbox用于显示和隐藏当前组织、人员、地点……
 }
-/**
- * 添加事务处理行
- * @param tableid
- */
+
 function addNewLine(tableid) {
-	//alert(check_form('EditView'));
+  //alert("clicked")
   if (check_form('EditView')) {//只有必须填写的字段都填写了才可以新增
     insertTransLineElements(tableid);//加入新行
     LineEditorShow(prodln - 1);       //打开行编辑器
@@ -607,7 +418,6 @@ function btnMarkLineDeleted(ln, key) {//删除当前行
       }
     }
   })
-  $("#Trans_line_head").show();
 }
 function markLineDeleted(ln, key) {//删除当前行
 
@@ -627,7 +437,6 @@ function markLineDeleted(ln, key) {//删除当前行
 }
 
 function LineEditorShow(ln){ //显示行编辑器（先自动关闭所有的行编辑器，再打开当前行）
-	//mark_field_enabled("line_hit_ip_subnets0", false);
   if (prodln>1) {
     for (var i=0;i<prodln;i++) {
       LineEditorClose(i);
@@ -636,19 +445,16 @@ function LineEditorShow(ln){ //显示行编辑器（先自动关闭所有的行�
   $("#asset_trans_line1_displayed"+ln).hide();
   $("#asset_trans_line2_displayed"+ln).hide();
   $("#asset_trans_editor"+ln).show();
-  $("#Trans_line_head").hide();
+
 }
 
 function LineEditorClose(ln) {//关闭行编辑器（显示为正常行）
   if (check_form('EditView')) {
-	mark_field_enabled("line_hit_ip_subnets"+ln, false);
     $("#asset_trans_editor"+ln).hide();
     $("#asset_trans_line1_displayed"+ln).show();
     $("#asset_trans_line2_displayed"+ln).show();
     renderTransLine(ln);
     resetLineNum_Bold();
-    
-    $("#Trans_line_head").show()
   }
 }
 

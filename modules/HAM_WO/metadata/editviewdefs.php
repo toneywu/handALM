@@ -139,7 +139,7 @@ array (
             'label' => 'LBL_LOCATION',
             'displayParams' => 
             array (
-              'initial_filter' => '&maint_site_advanced="+encodeURIComponent(document.getElementById("site").value)+"',
+              'initial_filter' => '&ham_maint_sites_id_advanced="+encodeURIComponent(document.getElementById("ham_maint_sites_id").value)+"',
               'field_to_name_array' => 
               array (
                 'name' => 'location',

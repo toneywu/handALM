@@ -408,7 +408,7 @@ $app_list_strings['moduleList']['HAM_WOOP'] = '工单任务';
 
 $app_list_strings['ham_woop_moduleList']['']='';
 $app_list_strings['ham_woop_moduleList']['HAT_Asset_Trans_Batch']='设备/资产事务';
-$app_list_strings['ham_woop_moduleList']['HIT_IP_TRANS_BATCH']='网络资源事务';
+$app_list_strings['ham_woop_moduleList']['HIT_IP_Trans_Batch']='IP事务.';
 
 
 /*********************************************************************************

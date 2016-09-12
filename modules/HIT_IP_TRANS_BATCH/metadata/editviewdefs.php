@@ -1,4 +1,5 @@
 <?php
+
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
@@ -38,41 +39,59 @@
  ********************************************************************************/
 
 $module_name = 'HIT_IP_TRANS_BATCH';
-$viewdefs[$module_name]['EditView'] = array(
-    'templateMeta' => array('maxColumns' => '2', 
-                            'widths' => array(
-                                            array('label' => '10', 'field' => '30'), 
-                                            array('label' => '10', 'field' => '30')
-                                            ),                                                                                                                                    
-                                            ),
-                                            
-                                            
- 'panels' =>array (
-  'default' => 
-  array (
-    
-    array (
-      'name',
-      'assigned_user_name',
-    ),
-    
-    array (
-      'description',
-    ),
-  ),
-  'lbl_editview_panel1' =>
-      array (
-        0 =>
-        array (
-          0 =>
-          array (
-            'name' => 'line_items',
-            'label' => 'LBL_LINE_ITEMS',
-          ),
-        ),
-      ),
-                                                    
-),
-                        
+$viewdefs[$module_name]['EditView'] = array (
+	'templateMeta' => array (
+		'includes' => array (
+			0 => array (
+				'file' => 'modules/HIT_IP_TRANS_BATCH/js/hit_ip_trans_batch_editview.js',
+				
+			),
+			
+		),
+		'maxColumns' => '2',
+		'widths' => array (
+			array (
+				'label' => '10',
+				'field' => '30'
+			),
+			array (
+				'label' => '10',
+				'field' => '30'
+			)
+		),
+		
+	),
+
+	'panels' => array (
+		'default' => array (
+
+			array (
+				'name',
+				'assigned_user_name',
+				
+			),
+
+			array (
+				'description',
+				
+			),
+			
+		),
+		'lbl_editview_panel1' => array (
+			0 => array (
+				0 => array (
+					'name' => 'line_items',
+					'label' => 'LBL_LINE_ITEMS',
+					
+				),
+				
+			),
+			
+		),
+
+		
+	),
+
+	
 );
 ?>

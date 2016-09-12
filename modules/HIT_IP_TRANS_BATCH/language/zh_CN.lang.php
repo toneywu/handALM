@@ -84,4 +84,8 @@ $mod_strings = array (
   'LBL_EVENT_TYPE' => '事务类型',
   'LBL_NAME' => '事务标题',
   'LBL_HIT_IP_TRANS_BATCH_HIT_IP_TRANS_TITLE'=>'事务处理行',
+  'LBL_EMAIL'=>'邮箱',
+  'LBL_CONTACT_NAME'=>'客户姓名',
+  'LBL_SEND_TO_CUSTOMER'=>'是否给客户发送',
+  'LBL_SERVICE_DATE'=>'服务开通时间',
 );
