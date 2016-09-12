@@ -12,6 +12,12 @@ class HAT_EventTypeViewPopup extends ViewPopup
  		global $mod_strings, $app_strings, $app_list_strings;
         global $db;
 
+        if ($_REQUEST['basic_type_advanced']=='HAT_Asset_Trans_Batch'){
+            $_REQUEST['basic_type_advanced']='AT_MOVE';
+        } else if ($_REQUEST['basic_type_advanced']=='HIT_IP_TRANS_BATCH') {
+            $_REQUEST['basic_type_advanced']='NETWORK';
+        }
+
 /*        if(($this->bean instanceOf SugarBean) && !$this->bean->ACLAccess('list')){
             ACLController::displayNoAccess();
             sugar_cleanup(true);
@@ -31,7 +37,7 @@ class HAT_EventTypeViewPopup extends ViewPopup
     	//另外这个容器有两个参数：用于存放ROOT结点的名称与类型(已经没有功能做用了，之前为是动态加载，目前已经是批量加载，所以没有什么用了)
 
     	echo '<input type="text" name="eventtype_selected"  tabindex="0" id="eventtype_selected" size="" value="" title="" autocomplete="off">';
-    	echo '<input type="button" name="btn_eventtype" id=name="btn_eventtype" value="'.$app_strings['LBL_ID_FF_SELECT'].'" class="yui-ac-input" onclick="btn_eventtype_clicked()">';
+    	echo '<input type="button" name="btn_submit" id="btn_submit" value="'.$app_strings['LBL_ID_FF_SELECT'].'" class="yui-ac-input" onclick="btn_eventtype_clicked()">';
     	//以上是选择框
 
 		echo '<input type="hidden" name="module" value="HAT_EventType">';
@@ -45,33 +51,41 @@ class HAT_EventTypeViewPopup extends ViewPopup
         /* 以下为加载数据 by toney.wu
         /*****************************************************************/
 
-        if($_REQUEST['basic_type_advanced']!="") {
-                $sel ="SELECT
-                          hat_eventtype.id,
-                          hat_eventtype.name,
-                          hat_eventtype.parent_eventtype_id
-                        FROM
-                          hat_eventtype
-                        WHERE
-                         hat_eventtype.`deleted`=0 AND
-                         hat_eventtype.`basic_type`= '".$_REQUEST['basic_type_advanced']."'";
-                $sel .= " ORDER BY name";
+        $beanEventTypes = BeanFactory::getBean('HAT_EventType')->get_full_list('name',"hat_eventtype.basic_type = '".$_REQUEST['basic_type_advanced']."'");
+ 
+         $txt_jason='{name:"'.$app_list_strings['hat_event_type_list'][$_REQUEST['basic_type_advanced']].'", open:true, isParent:true,pId:0,id:"ROOT"},';
+            $beanEventTypes = BeanFactory::getBean('HAT_EventType')->get_full_list('name',"hat_eventtype.basic_type = '".$_REQUEST['basic_type_advanced']."'");
 
-            $bean_event =  $db-> query($sel);
+                    $txt_jason='{name:"'.$app_list_strings['hat_event_type_list'][$_REQUEST['basic_type_advanced']].'", open:true, isParent:true,pId:0,id:"ROOT"},';
 
-            $txt_jason='{name:"'.$app_list_strings['hat_event_type_list'][$_REQUEST['basic_type_advanced']].'", open:true, isParent:true,pId:0,id:"ROOT"},';
-            while ( $eventtype = $db->fetchByAssoc($bean_event) ) {
-                    $txt_jason .='{id:"'.$eventtype['id'].'",';
-                    $txt_jason .='pId:"'.(($eventtype['parent_eventtype_id']=="")?"ROOT":$eventtype['parent_eventtype_id']).'",';
-                    $txt_jason .='name:"'.$eventtype['name'].'"},';
-            }
+                    if (isset($beanEventTypes)) {
+                        foreach ($beanEventTypes as $beanEventType) {
+                            $txt_jason.="{";
+                            foreach ($beanEventType->field_name_map as $key => $value) {
+                                //echo $key."=".(gettype($value)).":"."<br/>";
+                                if ($key == 'parent_eventtype_id'){
+                                    //Parent_eventtype_id需要特别处理
+                                    $txt_jason .='pId:"'.(($beanEventType->parent_eventtype_id=="")?"ROOT":$beanEventType->parent_eventtype_id).'",';
+                                }else {
+                                    if (isset($beanEventType->$key)) {
+                                        $txt_jason .=$key.':"'.$beanEventType->$key.'",';
+                                    }
+                                }
+                            }
+                            $txt_jason  = substr($txt_jason,0,strlen($txt_jason)-1);//去除最后一个,
+                            $txt_jason.="},";
+                        }
+                    }
 
-            $txt_jason=substr($txt_jason,0,strlen($txt_jason)-1);
-            //$txt_jason='{"node":['.$txt_jason.']}';
-            $txt_jason='['.$txt_jason.']';
-            //echo($txt_jason);
-            echo('<script>var zNodes = '.$txt_jason.'</script>');
-        }
+
+                    $txt_jason  = substr($txt_jason,0,strlen($txt_jason)-1);//去除最后一个,
+                    $txt_jason .= "}";
+
+                    $txt_jason=substr($txt_jason,0,strlen($txt_jason)-1);
+                    //$txt_jason='{"node":['.$txt_jason.']}';
+                    $txt_jason='['.$txt_jason.']';
+                    //echo($txt_jason);
+                    echo('<script>var zNodes = '.$txt_jason.'</script>');
 
        //parent::Display();
     }

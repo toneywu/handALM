@@ -103,11 +103,22 @@ array (
           ),
           1 => 
           array (
+            'name' => 'event_type',
+            'studio' => 'visible',
+            'label' => 'LBL_EVENT_TYPE',
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
             'name' => 'autoopen_next_task',
             'studio' => 'visible',
             'label' => 'LBL_AUTOOPEN_NEXT_TASK',
           ),
+          1=>"",
         ),
+      ),
       ),
     ),
   ),

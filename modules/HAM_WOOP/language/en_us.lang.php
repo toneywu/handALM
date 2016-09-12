@@ -70,5 +70,6 @@ $mod_strings = array (
   'LBL_LOCATION'=>'LOCATION',
   'LBL_WO_STATUS'=>'WO_STATUS',
   'LBL_EDITVIEW_PANEL3'=>'Next Operation',
-  'LBL_TAKE_OWNERSHIP'=>'Take it'
+  'LBL_TAKE_OWNERSHIP'=>'Take it',
+  'LBL_EVENT_TYPE'=>'Event Type',
 );

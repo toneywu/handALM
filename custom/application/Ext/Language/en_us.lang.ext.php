@@ -682,7 +682,7 @@ $app_list_strings['moduleList']['HAM_WOOP'] = 'WO Tasks';
 
 $app_list_strings['ham_woop_moduleList']['']='';
 $app_list_strings['ham_woop_moduleList']['HAT_Asset_Trans_Batch']='Equip./Asset Trans.';
-$app_list_strings['ham_woop_moduleList']['HIT_IP_Trans_Batch']='IP Trans.';
+$app_list_strings['ham_woop_moduleList']['HIT_IP_TRANS_BATCH']='Network Resource Trans.';
 
 
 /*********************************************************************************

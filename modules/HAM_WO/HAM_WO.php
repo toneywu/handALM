@@ -189,6 +189,7 @@ class HAM_WO extends HAM_WO_sugar {
 
 					$ham_woop->autoOpen_next_task = $ham_act_op->autoopen_next_task;
 					$ham_woop->act_module = $ham_act_op->act_module;
+					$ham_woop->hat_eventtype_id = $ham_act_op->hat_eventtype_id;
 					$ham_woop->save();
 					$index++;
 				}
