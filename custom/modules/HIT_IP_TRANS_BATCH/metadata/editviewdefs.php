@@ -6,22 +6,20 @@ array (
   array (
     'templateMeta' => 
     array (
-      'form' =>
+      'form' => 
       array (
-        'hidden' =>
+        'hidden' => 
         array (
           0 => '<input type="hidden" name="source_woop_id" id="source_woop_id" value="{$SOURCE_WOOP_ID}">',
-          1 => '<input type="hidden" name="source_wo_id"  id="source_wo_id" value="{$SOURCE_WO_ID}">',
-          2 => '<input type="hidden" name="source_wo_org"  id="source_wo_org" value="{$SOURCE_WO_ORG}">',
         ),
       ),
-      'includes' =>
+      'includes' => 
       array (
-        0 =>
+        0 => 
         array (
           'file' => 'modules/HAA_FF/ff_include.js',
         ),
-        1 =>
+        1 => 
         array (
           'file' => 'modules/HIT_IP_TRANS_BATCH/js/HIT_IP_TRANS_BATCH_editview.js',
         ),
@@ -67,21 +65,21 @@ array (
             'name' => 'framework',
             'studio' => 'visible',
             'label' => 'LBL_FRAMEWORKS',
-            'customCode'=>'{$FRAMEWORK}'
+            'customCode' => '{$FRAMEWORK}',
           ),
           1 => 
           array (
             'name' => 'event_type',
             'studio' => 'visible',
             'label' => 'LBL_EVENT_TYPE',
-            'displayParams' =>
+            'displayParams' => 
             array (
               'initial_filter' => '&basic_type_advanced=NETWORK',
-              'field_to_name_array' =>
+              'field_to_name_array' => 
               array (
                 'name' => 'event_type',
                 'id' => 'hat_eventtype_id',
-                'event_short_desc'=>'name'
+                'event_short_desc' => 'name',
               ),
               'call_back_function' => 'setEventTypePopupReturn',
             ),
@@ -109,6 +107,15 @@ array (
             'name' => 'target_owning_org',
             'studio' => 'visible',
             'label' => 'LBL_TARGET_OWNING_ORG',
+			'displayParams' => 
+            array (
+              'field_to_name_array' => 
+              array (
+                'name' => 'target_owning_org',
+                'id' => 'target_owning_org_id',
+              ),
+			  'call_back_function' => 'setTargetOwningOrgPopupReturn',
+            ),
           ),
           1 => 'name',
         ),
@@ -121,27 +128,83 @@ array (
           ),
           1 => 
           array (
-            'name' => 'source_wo',
+            'name' => 'owner_contacts',
             'studio' => 'visible',
-            'label' => 'LBL_SOURCE_WO',
+            'label' => 'LBL_OWNER',
           ),
         ),
         4 => 
         array (
           0 => 
           array (
-            'name' => 'source_woop',
+            'name' => 'source_wo',
             'studio' => 'visible',
-            'label' => 'LBL_SOURCE_WOOP',
+            'label' => 'LBL_SOURCE_WO',
+            'displayParams' => 
+            array (
+              'field_to_name_array' => 
+              array (
+                'name' => 'source_wo',
+                'id' => 'source_wo_id',
+              ),
+              'call_back_function' => 'setWoPopupReturn',
+            ),
           ),
           1 => 
           array (
-            'name' => 'owner_contacts',
+            'name' => 'source_woop',
             'studio' => 'visible',
-            'label' => 'LBL_OWNER',
+            'label' => 'LBL_SOURCE_WOOP',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&ham_wo_id_advanced="+encodeURIComponent(document.getElementById("source_wo_id").value)+"',
+              'field_to_name_array' => 
+              array (
+                'name' => 'source_woop',
+                'id' => 'source_woop_id',
+              ),
+            ),
           ),
         ),
         5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'contact_name',
+            'studio' => 'visible',
+            'label' => 'LBL_CONTACT_NAME',
+			'displayParams' => 
+            array (
+              'initial_filter' => '&account_id_advanced="+encodeURIComponent(document.getElementById("target_owning_org_id").value)+"',
+              'field_to_name_array' => 
+              array (
+                'name' => 'contact_name',
+                'id' => 'account_id',
+				'email_and_name1'=>'email',
+              ),
+            ),
+          ),
+          1 => 
+          array (
+            'name' => 'email',
+            'studio' => 'visible',
+            'label' => 'LBL_EMAIL',
+          ),
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'service_date',
+            'label' => 'LBL_SERVICE_DATE',
+          ),
+          1 => 
+          array (
+            'name' => 'send_to_customer',
+            'label' => 'LBL_SEND_TO_CUSTOMER',
+          ),
+        ),
+        7 => 
         array (
           0 => 'description',
         ),
@@ -155,7 +218,6 @@ array (
             'name' => 'line_items',
             'label' => 'LBL_LINE_ITEMS',
           ),
-          1 => '',
         ),
       ),
     ),

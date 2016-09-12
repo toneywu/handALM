@@ -121,6 +121,34 @@ array (
         ),
         5 => 
         array (
+          0 => 
+          array (
+            'name' => 'contact_name',
+            'studio' => 'visible',
+            'label' => 'LBL_CONTACT_NAME',
+          ),
+          1 => 
+          array (
+            'name' => 'email',
+            'studio' => 'visible',
+            'label' => 'LBL_EMAIL',
+          ),
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'send_to_customer',
+            'label' => 'LBL_SEND_TO_CUSTOMER',
+          ),
+          1 => 
+          array (
+            'name' => 'service_date',
+            'label' => 'LBL_SERVICE_DATE',
+          ),
+        ),
+        7 => 
+        array (
           0 => 'description',
         ),
       ),
