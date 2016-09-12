@@ -76,5 +76,3 @@ public/
 test*.*
 downloaded/
 *.zip
-modules/HIT_IP_TRANS_BATCH/views/view.edit.php
-modules/HAM_WO/js/HAM_WO_detailview.js
