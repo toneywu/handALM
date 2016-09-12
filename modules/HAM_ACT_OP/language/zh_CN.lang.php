@@ -57,4 +57,5 @@ $mod_strings = array (
   'LBL_AUTOOPEN_NEXT_TASK' => '完工后打开下道工序',
   'LBL_HAM_WORK_CENTER_RES_NAME_HAM_WORK_CENTER_RES_ID' => '资源 (related  ID)',
   'LBL_HAM_WORK_CENTER_RES_NAME' => '资源',
+  'LBL_EVENT_TYPE'=>'事件类型',
 );

@@ -36,4 +36,5 @@ $mod_strings = array (
   'LNK_IMPORT_HAM_ACT_OP' => '导入 ACT_OP',
   'LBL_HAM_ACT_OP_SUBPANEL_TITLE' => 'ACT_OP',
   'LBL_ACT_OP_SUBPANEL_TITLE' => 'Activity Operations',
+  'LBL_EVENT_TYPE'=>'Event Type',
 );

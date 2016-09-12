@@ -12,8 +12,11 @@ function display_lines($focus, $field, $value, $view){
 
          if($focus->id != '') { //如果不是新增（即如果是编辑已有记录,或是显示已有记录）
          	$sql = "SELECT
+					  hit_ip_subnets.id,
 					  hit_ip_subnets.`name`,
-					  hit_ip_subnets.ip_subnet
+					  hit_ip_subnets.ip_subnet,
+					  hit_ip_subnets.description,
+					  hit_ip_subnets.tunnel
 					FROM
 					  hit_ip,
 					  hit_ip_subnets

@@ -127,8 +127,10 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 		//or refer to the asset module as the first customzation module with this feature
 		global $app_list_strings, $timedate;
 		$woop_fields = $this->get_list_view_array();
-		$ham_wo_id = $_GET['record'];
-		if($ham_wo_id==null){
+
+		if (isset($_GET['record'])) {
+			$ham_wo_id = $_GET['record'];
+		}else{
 			$ham_wo_id=$this->ham_wo_id;
 		}
 		$woop_status =isset($this->woop_status)?$this->woop_status:"";
@@ -141,8 +143,10 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 
 			if (!empty($this->act_module) && !empty($this->work_center_people)){
 					//有动作模块，并且已经有人员分配
-				$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=takeWoopActionModule("'.$this->act_module.'","'.$this->id.'")>'.$app_list_strings['ham_woop_moduleList'][$this->act_module].'</a>';
+				$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=window.location.href="index.php?module='.$this->act_module.'&action=EditView&woop_id='.$this->id.'">'.$app_list_strings['ham_woop_moduleList'][$this->act_module].'</a>';
 			}
+
+			//$woop_fields['ACT_MODULE'] =empty($this->act_module);
 		}
 
 
