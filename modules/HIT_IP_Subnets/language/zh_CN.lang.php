@@ -52,7 +52,8 @@ $mod_strings = array (
   'LBL_CREATED_ID' => '创建人编号',
   'LBL_DESCRIPTION' => '用途/描述',
   'LBL_DELETED' => '已删除',
-  'LBL_NAME' => '子网IP地址段',
+  'LBL_NAME' => '准确IP地址',
+  'LBL_IP_SUBNET'=>'IP子网段地址',
   'LBL_CREATED_USER' => '用户创建',
   'LBL_MODIFIED_USER' => '用户修改',
   'LBL_LIST_NAME' => '名称',
@@ -72,5 +73,10 @@ $mod_strings = array (
   'LBL_NEW_FORM_TITLE' => '新建 IT IP子网',
     'LBL_PARENT_HIT_IP'=>'所属IP段',
   'LBL_VLAN'=>'VLAN',
-  'LBL_TUNNEL'=>'通道'
+  'LBL_TUNNEL'=>'通道',
+  'LBL_LOWEST'=>'最低IP',
+  'LBL_HIGHEST'=>'最高IP',
+  'LBL_NETMASK'=>'子网掩码',
+  'LBL_QTY'=>'IP数量',
+
 );
