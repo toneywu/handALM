@@ -82,7 +82,7 @@ class HIT_IP_TRANS_BATCHViewEdit extends ViewEdit
                     $this->bean->name = $bean_woop['wo_number'].':'.$bean_woop['woop_name'];
                     $this->bean->current_owning_org_id = $bean_woop['org_id'];
                     $this->bean->current_owning_org = $bean_woop['org_name'];
-                    if(empty($this->bean->date_schedualed_finish)){
+/*                    if(empty($this->bean->date_schedualed_finish)){
                         if(empty($this->bean->date_target_finish)){
                             if(empty($this->bean->date_finish_not_later)){
                                 $this->bean->planned_complete_date = $this->bean->planned_execution_date;
@@ -94,7 +94,7 @@ class HIT_IP_TRANS_BATCHViewEdit extends ViewEdit
                         }
                     } else {
                         $this->bean->planned_complete_date = $bean_woop['date_schedualed_finish'];
-                    }
+                    }*/
                     $this->ss->assign('SOURCE_WOOP_ID',$bean_woop['woop_id']);
                     $this->ss->assign('SOURCE_WO_ID',$bean_woop['wo_id']);
                     $this->ss->assign('SOURCE_WO_ORG',$bean_woop['wo_id']);
