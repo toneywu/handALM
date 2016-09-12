@@ -1,51 +1,3 @@
-function setEventTypePopupReturn(popupReplyData){
-	set_return(popupReplyData);
-	setEventTypeFields();
-}
-
-function setTargetOwningOrgPopupReturn(popupReplyData){
-	set_return(popupReplyData);
-	if($("#target_owning_org").val()=="") {
-		$("#contact_name").val("");
-		$("#account_id").val("");
-		$("#email").val("");
-	}else{
-		mark_field_enabled("contact_name",true);
-	}
-}
-
-
-function setEventTypeFields() {
-	$.ajax({//
-		url: 'index.php?to_pdf=true&module=HAT_EventType&action=getTransSetting&id=' + $("#hat_eventtype_id").val(),//e74a5e34-906f-0590-d914-57cbe0e5ae89
-		async: false,
-		success: function (data) {
-			var obj = jQuery.parseJSON(data);
-			//console.log(obj);
-			for(var i in obj) {
-				$("#"+i).val(obj[i]);//向隐藏的字段中复制值，从而所有的EventType值都会提供到隐藏的字段中
-			}
-			resetEventType();
-		},
-		error: function () { //失败
-			alert('Error loading document');
-		}
-	})
-}
-
-function resetEventType(){
-};
-
-function setWoPopupReturn(popupReplyData){
-	set_return(popupReplyData);
-	if($("#source_wo").val()=="") {
-		$("#source_woop").val("");
-		$("#source_woop_id").val("");
-		mark_field_disabled("source_woop",false);
-	}else{
-		mark_field_enabled("source_woop",true);
-	}
-}
 /**
  * 设置必输
  */
@@ -58,6 +10,7 @@ function mark_field_enabled(field_name,not_required_bool) {
   $("#"+field_name+"_label").css({"color":"#000000","text-decoration":"none"})
 
   if(typeof not_required_bool == "undefined" || not_required_bool==false || not_required_bool=="") {
+	  //alert(field_name);
       addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());//将当前字段标记为必须验证
       //打上必须星标
       if  ($("#"+field_name+"_label .required").text()!='*') {//如果没有星标，则打上星标
@@ -79,6 +32,7 @@ function mark_field_enabled(field_name,not_required_bool) {
     $("#btn_clr_"+field_name).css({"visibility":"visible"});
   }
 }
+
 //设置字段不可更新
 function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 	  mark_obj = $("#"+field_name);
@@ -105,66 +59,35 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 	  $("#"+field_name+"_label .required").hide();
 }
 
-$(document).ready(function(){
-
-		  
-	mark_field_disabled("email",false);
+function loopField(fieldName,type){
 	
-	mark_field_disabled("contact_name",false);
-	
-	if($("#source_wo").val()=="") {
-		mark_field_disabled("source_woop",false);
-	}
-	
-	$("#source_wo").change(function(){
-		if($("#source_wo").val()=="") {
-			$("#source_woop").val("");
-			$("#source_woop_id").val("");
-			mark_field_disabled("source_woop",false);
+	if(type=="OPTIONAL"){
+		for (var i=0;i<prodln;i++) {
+			mark_field_enabled(fieldName+i,true);
+		 }
+	}else if(type=="LOCKED"){
+		for (var i=0;i<prodln;i++) {
+		    mark_field_disabled(fieldName+i,false);
 		}
-	});	
-	
-	$("#btn_clr_source_wo").click(function(){
-		if($("#source_wo").val()=="") {
-			$("#source_woop").val("");
-			$("#source_woop_id").val("");
-			mark_field_disabled("source_woop",false);
+	}else if(type=="REQUIRED"){
+		for (var i=0;i<prodln;i++) {
+			//mark_field_disabled(fieldName+i,false);
+		    mark_field_enabled(fieldName+i,false);
 		}
-	});	
-	
-	$("#contact_name").change(function(){
-		if($("#contact_name").val()=="") {
-			$("#email").val("");
-			mark_field_disabled("email",false);
-		}
-	});	
-	
-	$("#btn_clr_contact_name").click(function(){
-		if($("#contact_name").val()=="") {
-			$("#email").val("");
-			mark_field_disabled("email",false);
-		}
-	});	
-	
-	
-	$("#target_owning_org").change(function(){
-		if($("#target_owning_org").val()=="") {
-			$("#contact_name").val("");
-			$("#email").val("");
-			mark_field_disabled("contact_name",false);
-			mark_field_disabled("email",false);
-		}
-	});	
-	
-	$("#btn_clr_target_owning_org").click(function(){
-		if($("#target_owning_org").val()=="") {
-			$("#contact_name").val("");
-			$("#email").val("");
-			mark_field_disabled("contact_name",false);
-			mark_field_disabled("email",false);
-		}
-	});	
-	
-	
+	}	
 }
-)
+
+function changeRequired(lineRecord){
+	
+	loopField("line_hit_ip_subnets",lineRecord.lineRecord);
+	//loopField("line_hit_ip_subnets",lineRecord.change_associated_ip);
+	loopField("line_gateway",lineRecord.change_gateway);
+	loopField("line_bandwidth_type",lineRecord.change_bandwidth_type);
+	loopField("line_port",lineRecord.change_port);
+	loopField("line_speed_limit",lineRecord.change_speed_limit);
+	loopField("line_hat_asset_name",lineRecord.change_asset);
+	loopField("line_hat_assets_cabinet",lineRecord.change_cabinet);
+	loopField("line_monitoring",lineRecord.change_monitoring);
+	loopField("line_channel_num",lineRecord.change_channel_num);
+	loopField("line_channel_content",lineRecord.change_channel_content);
+}

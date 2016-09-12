@@ -1,4 +1,5 @@
 $.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
+$.getScript("/modules/HIT_IP_TRANS_BATCH/js/html_dom_required_setting.js");
 var prodln = 0;
 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
 
@@ -378,9 +379,9 @@ function insertTransLineElements(tableid) { //创建界面要素
       //Lov窗口
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openHitIpPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
-      "<span class='input_group'>"+
       //可用IP
-      "<label>"+"可用IP"+"</label>"+
+      "<span class='input_group'>"+
+      "<label id='line_associated_ip"+prodln+"_label'>"+"可用IP"+"</label>"+
       "<input style='width:78px;' type='hidden' readonly='readonly' name='line_associated_ip[" + prodln + "]' id='line_associated_ip" + prodln + "'  value='' title=''>"+
       "<span id='line_associated_ip_displayed" + prodln + "' ></span>"+
       "</span>"+
@@ -393,23 +394,23 @@ function insertTransLineElements(tableid) { //创建界面要素
       
       //网关
       "<span class='input_group'>"+
-      "<label>"+"网关"+"</label>"+
+      "<label id='line_gateway"+prodln+"_label'>"+"网关"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_gateway[" + prodln + "]' id='line_gateway" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
       
       //带宽类型
       "<span class='input_group'>"+
-      "<label>"+"带宽类型"+"</label>"+
+      "<label id='line_bandwidth_type"+prodln+"_label'>"+"带宽类型"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_bandwidth_type[" + prodln + "]' id='line_bandwidth_type" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
       //端口
       "<span class='input_group'>"+
-      "<label>"+"端口"+"</label>"+
+      "<label id='line_port_limit"+prodln+"_label'>"+"端口"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_port[" + prodln + "]' id='line_port" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
       //限速
       "<span class='input_group'>"+
-      "<label>"+"限速"+"</label>"+
+      "<label id='line_speed_limit"+prodln+"_label'>"+"限速"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_speed_limit[" + prodln + "]' id='line_speed_limit" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
       
@@ -420,24 +421,24 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openAssetPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
       //机柜lov
-      "<span class='input_group'><label>"+"机柜"+"</label>"+
+      "<span class='input_group'><label id='line_hat_assets_cabinet"+prodln+"_label'>"+"机柜"+"</label>"+
       "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_hat_assets_cabinet[" + prodln + "]' id='line_hat_assets_cabinet" + prodln + "' value='' title='' onblur='resetAsset("+prodln+")'>"+
       "<input type='hidden' name='line_hat_assets_cabinet_id[" + prodln + "]' id='line_hat_assets_cabinet_id" + prodln + "' value=''>"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn2' onclick='openCabinetPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
       //监控链接
       "<span class='input_group'>"+
-      "<label>"+"监控链接"+"</label>"+
+      "<label id='line_monitoring"+prodln+"_label'>"+"监控链接"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_monitoring[" + prodln + "]' id='line_monitoring" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
       //频道号
       "<span class='input_group'>"+
-      "<label>"+"频道号"+"</label>"+
+      "<label id='line_channel_num"+prodln+"_label'>"+"频道号"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_channel_num[" + prodln + "]' id='line_channel_num" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
       //频道内容
       "<span class='input_group'>"+
-      "<label>"+"频道内容"+"</label>"+
+      "<label id='line_channel_content"+prodln+"_label'>"+"频道内容"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_channel_content[" + prodln + "]' id='line_channel_content" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
       
@@ -637,6 +638,7 @@ function LineEditorShow(ln){ //显示行编辑器（先自动关闭所有的行�
   $("#asset_trans_line2_displayed"+ln).hide();
   $("#asset_trans_editor"+ln).show();
   $("#Trans_line_head").hide();
+  changeRequired(lineData);
 }
 
 function LineEditorClose(ln) {//关闭行编辑器（显示为正常行）
@@ -649,6 +651,8 @@ function LineEditorClose(ln) {//关闭行编辑器（显示为正常行）
     resetLineNum_Bold();
     
     $("#Trans_line_head").show()
+    
+    //changeRequired(lineData);
   }
 }
 

@@ -44,9 +44,10 @@ $viewdefs[$module_name]['EditView'] = array (
 		'includes' => array (
 			0 => array (
 				'file' => 'modules/HIT_IP_TRANS_BATCH/js/hit_ip_trans_batch_editview.js',
-				
 			),
-			
+			1 => array (
+				'file' => 'modules/HIT_IP_TRANS_BATCH/js/html_dom_required_setting.js',
+			),
 		),
 		'maxColumns' => '2',
 		'widths' => array (
