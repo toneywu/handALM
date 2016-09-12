@@ -31,6 +31,8 @@ function mark_field_enabled(field_name,not_required_bool) {
   if  (typeof $("#btn_clr_"+field_name)!= 'undefined') {//移除清空按钮
     $("#btn_clr_"+field_name).css({"visibility":"visible"});
   }
+  
+  //$("#btn_line_hat_asset_name0").css({"visibility":"hidden"});
 }
 
 //设置字段不可更新
@@ -46,6 +48,7 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 	    	mark_obj.closest('td').css({"display":"table-column"});
 	    	mark_obj_lable.css({"display":"table-column"});
 		}
+	  	$("#btn_"+field_name).css({"visibility":"visible"});
 	  }else{
 	  	mark_obj.closest('td').css({"display":""});
 	    mark_obj_lable.css({"display":""});
@@ -57,8 +60,11 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 	    removeFromValidate('EditView',field_name); // 去除必须验证
 	  }
 	  $("#"+field_name+"_label .required").hide();
+	  $("#btn_"+field_name).css({"visibility":"hidden"});
 }
-
+/**
+ * loopField
+ */
 function loopField(fieldName,type){
 	
 	if(type=="OPTIONAL"){
@@ -76,7 +82,9 @@ function loopField(fieldName,type){
 		}
 	}	
 }
-
+/**
+ * 
+ */
 function changeRequired(lineRecord){
 	
 	loopField("line_hit_ip_subnets",lineRecord.lineRecord);

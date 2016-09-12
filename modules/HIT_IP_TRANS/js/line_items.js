@@ -1,5 +1,4 @@
 $.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
-$.getScript("/modules/HIT_IP_TRANS_BATCH/js/html_dom_required_setting.js");
 var prodln = 0;
 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
 
@@ -22,6 +21,7 @@ function mark_field_enabled(field_name,not_required_bool) {
       } else {//如果已经有星标了，则显示出来
         $("#"+field_name+"_label .required").show();
       }
+      //$("#"+field_name+"_btn").remove();
   } else { //如果不是必须的，则不显示星标
     //直接Remove有时会出错，所有先设置为Validate再Remove
     addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());
@@ -377,7 +377,7 @@ function insertTransLineElements(tableid) { //创建界面要素
       //Lov的Id
       "<input type='hidden' name='line_hit_ip_subnets_id[" + prodln + "]' id='line_hit_ip_subnets_id" + prodln + "' value=''>"+
       //Lov窗口
-      "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openHitIpPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+      "<button id='btn_line_hit_ip_subnets" + prodln + "' title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openHitIpPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
       //可用IP
       "<span class='input_group'>"+
@@ -418,13 +418,13 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<span class='input_group'><label>"+"设备"+"</label>"+
       "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_hat_asset_name[" + prodln + "]' id='line_hat_asset_name" + prodln + "' value='' title='' onblur='resetAsset("+prodln+")'>"+
       "<input type='hidden' name='line_hat_assets_id[" + prodln + "]' id='line_hat_assets_id" + prodln + "' value=''>"+
-      "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openAssetPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+      "<button id='btn_line_hat_asset_name" + prodln + "' title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openAssetPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
       //机柜lov
       "<span class='input_group'><label id='line_hat_assets_cabinet"+prodln+"_label'>"+"机柜"+"</label>"+
       "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_hat_assets_cabinet[" + prodln + "]' id='line_hat_assets_cabinet" + prodln + "' value='' title='' onblur='resetAsset("+prodln+")'>"+
       "<input type='hidden' name='line_hat_assets_cabinet_id[" + prodln + "]' id='line_hat_assets_cabinet_id" + prodln + "' value=''>"+
-      "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn2' onclick='openCabinetPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+      "<button id='btn_line_hat_assets_cabinet" + prodln + "' title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn2' onclick='openCabinetPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
       //监控链接
       "<span class='input_group'>"+
@@ -652,7 +652,7 @@ function LineEditorClose(ln) {//关闭行编辑器（显示为正常行）
     
     $("#Trans_line_head").show()
     
-    //changeRequired(lineData);
+    changeRequired(lineData);
   }
 }
 

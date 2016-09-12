@@ -71,7 +71,7 @@ function display_lines($focus, $field, $value, $view) {
 				//echo var_dump($row);;
 				$event_line_data = json_encode($event_row);
 				//echo $event_line_data;
-				echo "<script> var lineData=" . $event_line_data . "</script>";
+				$html .="<script> var lineData=" . $event_line_data . ";</script>";
 				$html .= "<script>changeRequired(" . $event_line_data . ");</script>";
 
 			}
