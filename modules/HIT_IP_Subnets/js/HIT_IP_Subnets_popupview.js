@@ -102,7 +102,7 @@ $(document).ready(function() {
 
 	//console.log(zNodes);
 	$("#PopupView").addClass("ztree");
-		$("#btn_submit").attr('disabled',true);
+	$("#btn_submit").attr('disabled',true);
 
 
 

@@ -40,10 +40,14 @@ var associated_javascript_data;
 			}
 			return childNodes;
 	}
+
 	function onClick(event, treeId, treeNode, clickFlag) {
-		if(treeNode.pId!=0) { //非根结点点击后的作用
+		if(treeNode.pId!=0 && treeNode.isParent==false) { //非根结点点击后的作用
 			zTreeObj= $.fn.zTree.getZTreeObj(treeId);
 			$("#eventtype_selected").val(treeNode.name);
+			$("#btn_submit").attr('disabled',false);
+		}else {
+			$("#btn_submit").attr('disabled',true);
 		}
 	}
 	function onAsyncSuccess(e, treeId, treeNode) {
@@ -90,6 +94,7 @@ $(document).ready(function() {
 
 	//console.log(zNodes);
 	$("#PopupView").addClass("ztree");
+	$("#btn_submit").attr('disabled',true);
 
 
 	//第一个节点

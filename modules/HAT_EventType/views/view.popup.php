@@ -31,7 +31,7 @@ class HAT_EventTypeViewPopup extends ViewPopup
     	//另外这个容器有两个参数：用于存放ROOT结点的名称与类型(已经没有功能做用了，之前为是动态加载，目前已经是批量加载，所以没有什么用了)
 
     	echo '<input type="text" name="eventtype_selected"  tabindex="0" id="eventtype_selected" size="" value="" title="" autocomplete="off">';
-    	echo '<input type="button" name="btn_eventtype" id=name="btn_eventtype" value="'.$app_strings['LBL_ID_FF_SELECT'].'" class="yui-ac-input" onclick="btn_eventtype_clicked()">';
+    	echo '<input type="button" name="btn_submit" id="btn_submit" value="'.$app_strings['LBL_ID_FF_SELECT'].'" class="yui-ac-input" onclick="btn_eventtype_clicked()">';
     	//以上是选择框
 
 		echo '<input type="hidden" name="module" value="HAT_EventType">';
