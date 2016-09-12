@@ -93,5 +93,16 @@ $mod_strings = array (
 
     'LBL_PARENT_EVENTTYPE'=>'父事件类型',
   'LBL_HAA_FF'=>'动态界面模板FF',
+  'LBL_CHANGE_IP_SUBNETS'=>'可修改网段',
+  'LBL_CHANGE_ASSOCIATED_IP'=>'可修改可用IP',
+  'LBL_CHANGE_GATEWAY'=>'可修改网关',
+  'LBL_CHANGE_BANDWIDTH_TYPE'=>'可修改宽带类型',
+  'LBL_CHANGE_PORT'=>'可修改端口',
+  'LBL_CHANGE_SPEED_LIMIT'=>'可修改限速',
+  'LBL_CHANGE_ASSET'=>'可修改设备',
+  'LBL_CHANGE_CABINET'=>'可修改机柜',
+  'LBL_CHANGE_MONITORING'=>'可修改监控链接',
+  'LBL_CHANGE_CHANNEL_NUM'=>'可修改频道号',
+  'LBL_CHANGE_CHANNEL_CONTENT'=>'可修改频道内容',
 
 );
