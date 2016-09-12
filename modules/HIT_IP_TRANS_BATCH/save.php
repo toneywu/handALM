@@ -67,7 +67,8 @@ function save_lines($post_data, $parent, $key = ''){
         echo "<br/>hit_ip_subnets_id=".$post_data[$key.'hit_ip_subnets_id'][$i];
         echo "<br/>line_parent_ip=".$post_data[$key.'line_parent_ip'][$i];
         echo "<br/>hat_asset_locations_id=".$post_data[$key.'hat_asset_locations_id'][$i];
-
+        echo 'id='.$post_data[$key.'id'][$i]."<br>";
+        
         if ($post_data[$key.'hit_ip_subnets_id'][$i]!='') {
             //只保存Asset、Account、Location不为空的记录，否则直接到下一循环
             if($post_data[$key.'deleted'][$i] == 1){//删除行
@@ -76,8 +77,10 @@ function save_lines($post_data, $parent, $key = ''){
                 $trans_line -> retrieve($post_data[$key.'id'][$i]);
                 $trans_line -> mark_deleted($post_data[$key.'id'][$i]);
             } else {//新增或修改行
+            
                 if($post_data[$key.'id'][$i] == ''){//新增行
                     echo "<br/>----------->line added";
+                     
                     $trans_line = new HIT_IP_TRANS();
                     $trans_line = BeanFactory::getBean('HIT_IP_TRANS');
                 } else {//修改行
