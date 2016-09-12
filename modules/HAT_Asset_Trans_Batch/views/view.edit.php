@@ -53,6 +53,8 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
                                           ham_woop.`date_schedualed_finish` ,
                                           ham_woop.`date_target_finish`,
                                           ham_woop.`date_finish_not_later`,
+                                          ham_woop.hat_eventtype_id,
+                                          hat_eventtype.name event_type,
 										  contacts.id contact_id,
 										  contacts.`last_name` contact_name,
 										  accounts.`id` org_id,
@@ -74,6 +76,8 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
 										      AND accounts_contacts.`account_id`  = accounts.`id`
 										      AND accounts_contacts.`contact_id` =contacts.`id`
 										    )
+                                        LEFT JOIN (hat_eventtype) 
+                                        ON hat_eventtype.`id` = ham_woop.hat_eventtype_id 
 										WHERE ham_wo.`id` = ham_woop.`ham_wo_id`
 										  AND ham_wo.`deleted` = 0
 										  AND ham_woop.`deleted` = 0
@@ -85,6 +89,8 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
                 while ( $bean_woop = $db->fetchByAssoc($result_woop) ) {
                     $this->bean->source_woop_id = $bean_woop['woop_id'];
                     $this->bean->source_woop = $bean_woop['woop_name'];
+                    $this->bean->hat_eventtype_id = $bean_woop['hat_eventtype_id'];
+                    $this->bean->event_type = $bean_woop['event_type'];
                     $this->bean->source_wo_id = $bean_woop['wo_id'];
                     $this->bean->source_wo = $bean_woop['wo_name'];
                     $this->bean->owner_id = $bean_woop['contact_id'];

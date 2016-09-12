@@ -103,7 +103,7 @@ array (
             'label' => 'LBL_EVENT_TYPE',
             'displayParams' => 
             array (
-              'initial_filter' => '&basic_type_advanced ="+encodeURIComponent($("#act_module option:selected").text())+"',
+              'initial_filter' => '&basic_type_advanced="+encodeURIComponent($("#act_module option:selected").val())+"',
             ),
           ),
         ),

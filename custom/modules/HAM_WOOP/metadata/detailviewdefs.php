@@ -198,13 +198,23 @@ array (
       array (
         0 => 
         array (
-          0 => 'description',
-          1 => 
+          0 => 
           array (
             'name' => 'act_module',
             'studio' => 'visible',
             'label' => 'LBL_ACT_MODULE',
           ),
+          1 => 
+          array (
+            'name' => 'event_type',
+            'studio' => 'visible',
+            'label' => 'LBL_EVENT_TYPE',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 'description',
+          1 => '',
         ),
       ),
       'lbl_editview_panel3' => 

@@ -12,6 +12,12 @@ class HAT_EventTypeViewPopup extends ViewPopup
  		global $mod_strings, $app_strings, $app_list_strings;
         global $db;
 
+        if ($_REQUEST['basic_type_advanced']=='HAT_Asset_Trans_Batch'){
+            $_REQUEST['basic_type_advanced']='AT_MOVE';
+        } else if ($_REQUEST['basic_type_advanced']=='HIT_IP_TRANS_BATCH') {
+            $_REQUEST['basic_type_advanced']='NETWORK';
+        }
+
 /*        if(($this->bean instanceOf SugarBean) && !$this->bean->ACLAccess('list')){
             ACLController::displayNoAccess();
             sugar_cleanup(true);
