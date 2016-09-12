@@ -140,7 +140,10 @@ function insertLineData(hit_ip_subnets, current_view){ //将数据写入到对�
     ln = insertTransLineElements("lineItems", current_view);
     $("#line_id".concat(String(ln))).val(hit_ip_subnets.id);
     $("#line_ip_subnet".concat(String(ln))).val(hit_ip_subnets.ip_subnet);
-    $("#line_name".concat(String(ln))).val(hit_ip_subnets.name);
+/*    $("#line_ip_netmask".concat(String(ln))).val(hit_ip_subnets.ip_netmask);
+    $("#line_ip_highest".concat(String(ln))).val(hit_ip_subnets.ip_highest);
+    $("#line_ip_lowest".concat(String(ln))).val(hit_ip_subnets.ip_lowest);
+*/    $("#line_name".concat(String(ln))).val(hit_ip_subnets.name);
     $("#line_vlan".concat(String(ln))).val(hit_ip_subnets.vlan);
     $("#line_vlan_id".concat(String(ln))).val(hit_ip_subnets.vlan_id);
     $("#line_description".concat(String(ln))).val(hit_ip_subnets.description);
@@ -229,6 +232,10 @@ function insertTransLineElements(tableid,current_view) { //创建界面要素
 
   "<input type='hidden' name='line_deleted[" + prodln + "]' id='line_deleted" + prodln + "' value='0'>"+
   "<input type='hidden' name='line_id[" + prodln + "]' id='line_id" + prodln + "' value=''>"+
+  "<input type='hidden' name='line_ip_netmask[" + prodln + "]' id='line_ip_netmask" + prodln + "' value=''>"+
+  "<input type='hidden' name='line_ip_highest[" + prodln + "]' id='line_ip_highest" + prodln + "' value=''>"+
+  "<input type='hidden' name='line_ip_lowest[" + prodln + "]' id='line_ip_lowest" + prodln + "' value=''>"+
+  "<input type='hidden' name='line_ip_qty[" + prodln + "]' id='line_ip_qty" + prodln + "' value=''>"+
 
   "<input type='button' id='line_delete_line" + prodln + "' class='button btn_del' value='" + SUGAR.language.get('app_strings', 'LBL_DELETE_INLINE') + "' tabindex='116' onclick='btnMarkLineDeleted(" + prodln + ",\"line_\")'>"+
   "<button type='button' id='btn_LineEditorClose" + prodln + "' class='button btn_save' value='" + SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE') + "' tabindex='116' onclick='LineEditorClose(" + prodln + ",\"line_\")'>"+SUGAR.language.get('app_strings', 'LBL_SAVE_BUTTON_LABEL')+" & "+SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE')+" <img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button>"+
@@ -254,6 +261,12 @@ function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
 	   $("#displayed_line_ip_lowest"+ln).html(ip_caled.ipLowStr);
 	   $("#displayed_line_ip_highest"+ln).html(ip_caled.ipHighStr);
 	   $("#displayed_line_ip_qty"+ln).html(Math.pow(2,ip_caled.invertedSize));
+     //对应的隐藏字段
+     $("#line_ip_netmask"+ln).val(ip_caled.prefixMaskStr);
+     $("#line_ip_lowest"+ln).val(ip_caled.ipLowStr);
+     $("#line_ip_highest"+ln).val(ip_caled.ipHighStr);
+     $("#line_ip_qty"+ln).val(Math.pow(2,ip_caled.invertedSize));
+
   }
 
   $("#displayed_line_ip_subnet"+ln).html("<strong>"+$("#line_ip_subnet"+ln).val()+"</strong>");
