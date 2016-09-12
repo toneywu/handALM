@@ -1,6 +1,9 @@
-//http://localhost/handALM/index.php?module=HAT_EventType&action=Popup&query=true&basic_type_advanced=SR&mode=single&create=true&metadata=undefined&field_to_name[]=name
-
+//**********************************************************/
+//*本文件被POPUP View引用，用于生成一个树型的选择框，代替传统的List
+//By toney.wu
+//*********************************************************/
 $('head').append('<link href="custom/resources/zTree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" type="text/css" />');
+
 
 var module="HAT_EventType";
 var is_show_fullname =0;
@@ -13,8 +16,18 @@ var associated_javascript_data;
 		var nodes = treeObj.getSelectedNodes();
 		var id = nodes[0].id;
 
-		data='{"'+nodes[0].id+'":{"ID":"'+nodes[0].id+'","NAME":"'+nodes[0].name+'","DATE_ENTERED":"","DATE_MODIFIED":"","MODIFIED_USER_ID":"","MODIFIED_BY_NAME":"","CREATED_BY":"","CREATED_BY_NAME":"","DESCRIPTION":"","DELETED":"","CREATED_BY_LINK":"","MODIFIED_USER_LINK":"","ASSIGNED_USER_ID":"","ASSIGNED_USER_NAME":"","ASSIGNED_USER_LINK":"","SECURITYGROUPS":"","BASIC_TYPE":"Service Request","PARENT_EVENTTYPE_ID":"","PARENT_EVENTTYPE":"","HAA_FF_ID":"","HAA_FF":"","TARGET_ASSET_STATUS":"","CHANGE_PARENT":"","CHANGE_LOCATION":"","PROCESSING_ASSET_STATUS":"","CHANGE_RACK_POSITION":"","CHANGE_OWNING_ORG":"","CHANGE_OWNING_PERSON":"","CHANGE_USING_ORG":"","CHANGE_USING_PERSON":"","CHANGE_ORANIZATION_LE":"","CHANGE_LOCATION_DESC":"","REQUIRE_APPROVAL_WORKFLOW":"","REQUIRE_CONFIRMATION":"","CHANGE_TARGET_STATUS":"","CHANGE_PROCESSING_STATUS":"","CONCAT_NAME":"","EVENT_SHORT_DESC":""}}';
+		data="";
+		for(var propertyName in nodes[0]) {
+		   if (typeof(nodes[0][propertyName]) == 'string') {
+		   		data += '"'+propertyName.toUpperCase()+'":"'+nodes[0][propertyName]+'",';
+		   }
+		}
+		data = data.slice(0, -1);//cut last char
+		data='{"'+nodes[0].id+'":{'+data+'}}';
+
 		associated_javascript_data = jQuery.parseJSON(data)
+
+		//alert(data);
 		//console.log(associated_javascript_data);
 		send_back('HAT_EventType',id);
 	}
@@ -48,10 +61,11 @@ $(document).ready(function() {
 	var zTreeObj;
 	var setting = {
 			view: {
-				showIcon: false,
+				showIcon: true,
 				selectedMulti: false,
-				nameIsHTML: true,
-				showTitle: false
+				nameIsHTML: false,
+				showTitle: false,
+				//fontCss: {'font-size':'22px'},
 			},
 			async: {
 				enable: true,
@@ -76,16 +90,18 @@ $(document).ready(function() {
 
 	//console.log('index.php?to_pdf=true&module=HAT_EventType&action=getEventTreeNodes&type='+$("#PopupView").attr('eventtype'));
 
+	//console.log(zNodes);
 	$("#PopupView").addClass("ztree");
 
+
 	//第一个节点
-	var zNodes = [{name:$("#PopupView").attr('eventtype')+":"+$("#PopupView").attr('eventtype_name'), open:true, isParent:true,pId: 0,type:$("#PopupView").attr('eventtype')}];
+	//var zNodes = [{name:$("#PopupView").attr('eventtype')+":"+$("#PopupView").attr('eventtype_name'), open:true, isParent:true,pId: 0,type:$("#PopupView").attr('eventtype')}];
 	//初始化树
 	//SUGAR.util.doWhen("typeof $.fn.zTree.init == 'function'", function(){
 	$.getScript("custom/resources/zTree/js/jquery.ztree.core.min.js", function() {
 		zTreeObj = $.fn.zTree.init($("#PopupView"), setting, zNodes);
 		//加载第一层的所有节点
-		zTreeObj.reAsyncChildNodes(zTreeObj.getNodeByTId("treeview_selector_1"), "refresh", false);
+		//zTreeObj.reAsyncChildNodes(zTreeObj.getNodeByTId("treeview_selector_1"), "refresh", false);
 	});
 
 

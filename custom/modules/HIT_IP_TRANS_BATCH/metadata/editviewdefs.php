@@ -6,6 +6,26 @@ array (
   array (
     'templateMeta' => 
     array (
+      'form' =>
+      array (
+        'hidden' =>
+        array (
+          0 => '<input type="hidden" name="source_woop_id" id="source_woop_id" value="{$SOURCE_WOOP_ID}">',
+          1 => '<input type="hidden" name="source_wo_id"  id="source_wo_id" value="{$SOURCE_WO_ID}">',
+          2 => '<input type="hidden" name="source_wo_org"  id="source_wo_org" value="{$SOURCE_WO_ORG}">',
+        ),
+      ),
+      'includes' =>
+      array (
+        0 =>
+        array (
+          'file' => 'modules/HAA_FF/ff_include.js',
+        ),
+        1 =>
+        array (
+          'file' => 'modules/HIT_IP_TRANS_BATCH/js/HIT_IP_TRANS_BATCH_editview.js',
+        ),
+      ),
       'maxColumns' => '2',
       'widths' => 
       array (
@@ -47,12 +67,24 @@ array (
             'name' => 'framework',
             'studio' => 'visible',
             'label' => 'LBL_FRAMEWORKS',
+            'customCode'=>'{$FRAMEWORK}'
           ),
           1 => 
           array (
             'name' => 'event_type',
             'studio' => 'visible',
             'label' => 'LBL_EVENT_TYPE',
+            'displayParams' =>
+            array (
+              'initial_filter' => '&basic_type_advanced=NETWORK',
+              'field_to_name_array' =>
+              array (
+                'name' => 'event_type',
+                'id' => 'hat_eventtype_id',
+                'event_short_desc'=>'name'
+              ),
+              'call_back_function' => 'setEventTypePopupReturn',
+            ),
           ),
         ),
         1 => 

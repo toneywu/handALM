@@ -38,4 +38,27 @@
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['HAM_ACT_OP'] = 'Std.Activity Tasks';
+$app_list_strings['moduleList']['HAT_EventType']='Event Types';
+$app_list_strings['moduleListSingular']['HAT_EventType']='Event Type';
+
+$app_list_strings['asset_status_list']['Ordered'] = 'Ordered';
+$app_list_strings['asset_status_list']['InService'] = 'In-Service';
+$app_list_strings['asset_status_list']['Idle'] = 'Idle';
+$app_list_strings['asset_status_list']['LentOut'] = 'Lent-Out';
+$app_list_strings['asset_status_list']['OutOfService'] = 'Out-of-Service';
+$app_list_strings['asset_status_list']['Received'] = 'Received';
+
+$app_list_strings['cux_event_type_option_list']['LOCKED'] = 'Locked/Not Available';
+$app_list_strings['cux_event_type_option_list']['REQUIRED'] = 'Required';
+$app_list_strings['cux_event_type_option_list']['OPTIONAL'] = 'Optional';
+
+$GLOBALS['app_list_strings']['cux_event_type_list']=array (
+  'AT_MOVE' => 'Equip./Asset Trans.',
+  'NETWORK' => 'Network Resource Trans.',
+  'SR' => 'Service Request',
+  'WO' => 'Work Order',
+  'INV_IN' => 'INV: Stock-In',
+  'INV_OUT' => 'INV: Stock-Out',
+  'INV_TRANSFER' => 'INV: Stock Transfer',
+  'INV_WO' => 'INV: Issue to WO',
+);

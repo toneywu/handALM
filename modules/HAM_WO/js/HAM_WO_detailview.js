@@ -1,25 +1,39 @@
+if(typeof(YAHOO.SUGAR) == 'undefined') {
+	$.getScript("include/javascript/sugarwidgets/SugarYUIWidgets.js");
+}
+
 /**
  * 点击按钮 调用Ajax请求 获取list里面根据工单状态应该显示的value
  * @param name
  */
 function changeStatus(id){
-	
-	var flag= window.confirm("是否需要修改状态?");
-	if(flag){
+
+	/*var flag= window.confirm("是否需要修改状态?");
+	if(flag){*/
+	//修改状态变更的样式 by:toney.wu 20160903
+	//ref:https://developer.sugarcrm.com/2011/03/18/howto-create-nice-looking-popup-message-boxes-in-sugar/
+
 		$.ajax({
 			url: 'index.php?to_pdf=true&module=HAM_WO&action=getListFields&id=' + id,
 			success: function (data) {
-				//alert("changeStatus")
-				//$("wo_status").remove();
-				$("td[field='wo_status']").text(null);
-				$("td[field='wo_status']").replaceWith(data);
-
+				var title_txt=SUGAR.language.get('HAM_WO', 'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL')
+				var html=""
+				html+=title_txt;
+				html+=data;
+				//html+="<input type='button' class='btn_detailview' id='btn_save' value='"+SUGAR.language.get('app_strings', 'LBL_SAVE_BUTTON_LABEL')+"'>";
+				YAHOO.SUGAR.MessageBox.show({msg: html,title: title_txt, type: 'confirm',
+																		fn: function(confirm) {
+																			if (confirm == 'yes') {
+																				save($("input[name='record']").val(),$("#wo_status").val());
+																			}
+																		}
+											});
 			},
 			error: function () { //失败
 				alert('Error loading document');
 			}
 		});
-	}
+	/*}*/
 };
 
 function assignWoop(id,record){
@@ -28,7 +42,6 @@ function assignWoop(id,record){
 		url: 'index.php?to_pdf=true&module=HAM_WOOP&action=assign_woop_people&id=' + id,
 		success: function (data) {
 			//alert(data);
-			//alert("assignWoop")
 			if(data!="Y"){
 				window.location.href = "index.php?module=HAM_WO&action=DetailView&record="+record;
 			}
@@ -48,7 +61,6 @@ function save(id,status_code){
 		$.ajax({
 			url: 'index.php?to_pdf=true&module=HAM_WO&action=saveBean&id=' + id+"&status_code="+status_code,
 			success: function (data) {
-				//alert("save")
 				window.location.href = "index.php?module=HAM_WO&action=DetailView&record="+id;
 			},
 			error: function () { //失败
@@ -62,7 +74,6 @@ function save(id,status_code){
  * @param name
  */
 function cancel(id,status_code){
-	//alert("cancel");
 	window.location.href = "index.php?module=HAM_WO&action=DetailView&record="+id;
 };
 

@@ -38,4 +38,4 @@
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['HIT_IP_TRANS_BATCH'] = 'IP_TRANS_BATCH';
+$app_list_strings['moduleList']['HIT_IP_TRANS_BATCH'] = 'Network Resource Trans.';
