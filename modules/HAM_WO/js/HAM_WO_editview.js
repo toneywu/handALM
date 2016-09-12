@@ -50,10 +50,10 @@ function setWorkCenterResPopupReturn(popupReplyData){
  * @param name
  */
 function checkAccess(id){
-	if(id!=""){
 		$.ajax({
 			url: 'index.php?to_pdf=true&module=HAM_WO&action=checkAccess&id=' + id,
 			success: function (data) {
+				//alert(data);
 				if(data!="Y"){
 					window.location.href = "index.php?module=HAM_WO&action=DetailView&record="+id;
 				}
@@ -62,7 +62,6 @@ function checkAccess(id){
 				alert('Error loading document');
 			}
 		});
-	}
 };
 
 //设置字段不可更新

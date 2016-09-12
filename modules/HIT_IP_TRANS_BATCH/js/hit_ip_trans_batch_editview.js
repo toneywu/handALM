@@ -9,33 +9,6 @@ function setWoPopupReturn(popupReplyData){
 	}
 }
 
-
-function setEventTypePopupReturn(popupReplyData){
-	set_return(popupReplyData);
-	setEventTypeFields();
-}
-
-function setEventTypeFields() {
-	$.ajax({//
-		url: 'index.php?to_pdf=true&module=HAT_EventType&action=getTransSetting&id=' + $("#hat_eventtype_id").val(),//e74a5e34-906f-0590-d914-57cbe0e5ae89
-		async: false,
-		success: function (data) {
-			var obj = jQuery.parseJSON(data);
-			//console.log(obj);
-			for(var i in obj) {
-				$("#"+i).val(obj[i]);//向隐藏的字段中复制值，从而所有的EventType值都会提供到隐藏的字段中
-			}
-			resetEventType();
-		},
-		error: function () { //失败
-			alert('Error loading document');
-		}
-	})
-}
-
-function resetEventType(){
-};
-
 /**
  * 设置必输
  */
@@ -103,9 +76,11 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 	}
 
 $(document).ready(function(){
-	mark_field_disabled("email",false);
+	
 	if($("#source_wo").val()=="") {
 		mark_field_disabled("source_woop",false);
+		//$("#source_woop").val("");
+		//$("#source_woop_id").val("");
 	}
 	
 	$("#source_wo").change(function(){
@@ -123,21 +98,5 @@ $(document).ready(function(){
 			mark_field_disabled("source_woop",false);
 		}
 	});	
-	
-	$("#contact_name").change(function(){
-		if($("#contact_name").val()=="") {
-			$("#email").val("");
-			mark_field_disabled("source_woop",false);
-		}
-	});	
-	
-	$("#btn_clr_contact_name").click(function(){
-		if($("#contact_name").val()=="") {
-			$("#email").val("");
-			mark_field_disabled("email",false);
-		}
-	});	
-	
-	
 }
 )

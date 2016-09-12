@@ -85,9 +85,5 @@ $mod_strings = array (
   'LBL_TARGET_ASSET_STATUS' => 'Target Asset Status',
   'LBL_NAME' => 'Trans Title',
   'LBL_HIT_IP_TRANS_BATCH_HIT_IP_TRANS_TITLE'=>'Line Items',
-  'LBL_EMAIL'=>'Email',
-  'LBL_CONTACT_NAME'=>'Customer',
-  'LBL_SEND_TO_CUSTOMER'=>'Send To Customer',
-  'LBL_SERVICE_DATE'=>'Service Date',
   
 );

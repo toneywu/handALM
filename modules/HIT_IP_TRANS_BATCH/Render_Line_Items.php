@@ -46,7 +46,6 @@ function display_lines($focus, $field, $value, $view){
       }
 	  
 	  $html .= '<script>insertTransLineFootor(\'lineItems\');</script>';
-	  $html .= '<script>resetLineNum_Bold();</script>';
     }
     else if($view == 'DetailView'){
     	$html .= '<script src="modules/HIT_IP_TRANS/js/line_items_show.js"></script>';
@@ -88,7 +87,6 @@ function display_lines($focus, $field, $value, $view){
 		}
       }
 	  $html .= '<script>insertTransLineFootor(\'lineItems\');</script>';
-	  $html .= '<script>resetLineNum_Bold();</script>';
     	
 	}
     return $html;
