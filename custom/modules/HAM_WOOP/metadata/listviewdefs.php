@@ -9,13 +9,6 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-  'WO_NUMBER' => 
-  array (
-    'type' => 'varchar',
-    'label' => 'LBL_WO_NUMBER',
-    'width' => '5%',
-    'default' => true,
-  ),
   'NAME' => 
   array (
     'width' => '32%',
@@ -74,6 +67,21 @@ array (
     'link' => true,
     'width' => '10%',
     'default' => true,
+  ),
+  'WO_NUMBER' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_WO_NUMBER',
+    'width' => '5%',
+    'default' => true,
+  ),
+  'ACT_MODULE' => 
+  array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'label' => 'LBL_ACT_MODULE',
+    'width' => '10%',
+    'default' => false,
   ),
 );
 ?>
