@@ -107,4 +107,6 @@ $mod_strings = array (
   'LBL_NEXT_WOOP_ASSIGNMENT'=>'任务完工时可指派后续人员',
   'LBL_COMPLETE_BY_LAST_WOOP'=>'工单随最后一道任务完成',
   'LBL_BTN_ASSIGN_BUTTON_LABEL'=>'认领',
+  'LBL_EDITVIEW_PANEL5'=>'工作对象行',
+
 );

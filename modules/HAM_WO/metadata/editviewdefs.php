@@ -14,6 +14,10 @@ array (
         ),
         1 => 
         array (
+          'file' => 'modules/HAA_FF/HAA_FF.php',
+        ),
+        2 => 
+        array (
           'file' => 'modules/HAM_WO/js/HAM_WO_editview.js',
         ),
       ),

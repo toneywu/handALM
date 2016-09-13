@@ -76,7 +76,7 @@ $layout_defs['HAM_WO'] = array (
             ),
         ),
 		
-		'wo_line' => array (
+/*		'wo_line' => array (
             'order' => 12,
             'module' => 'HAM_WO_Lines',
             'sort_order' => 'asc',
@@ -87,7 +87,7 @@ $layout_defs['HAM_WO'] = array (
             'top_buttons'  => array (
                 0 => array('widget_class' => 'SubPanelTopCreateButton'),
             ),
-        ),
+        ),*/
 
 /*        'hmm_mo_request_lines' => array (
             'order' => 10,

@@ -696,7 +696,7 @@ $dictionary['HAM_WO'] = array (
 			
 		),
 		'map_lat' => array (
-			'required' => true,
+			'required' => false,
 			'name' => 'map_lat',
 			'vname' => 'LBL_MAP_LAT',
 			'type' => 'float',
@@ -712,7 +712,7 @@ $dictionary['HAM_WO'] = array (
 			'unified_search' => false,
 			'merge_filter' => 'disabled',
 			//'default' => '0.00000000',
-	'len' => '11',
+			'len' => '11',
 			'size' => '20',
 			'enable_range_search' => false,
 			'precision' => '8',
@@ -720,7 +720,7 @@ $dictionary['HAM_WO'] = array (
 			
 		),
 		'map_lng' => array (
-			'required' => true,
+			'required' => false,
 			'name' => 'map_lng',
 			'vname' => 'LBL_MAP_LNG',
 			'type' => 'float',
@@ -744,7 +744,7 @@ $dictionary['HAM_WO'] = array (
 			
 		),
 		'map_zoom' => array (
-			'required' => true,
+			'required' => false,
 			'name' => 'map_zoom',
 			'vname' => 'LBL_MAP_ZOOM',
 			'type' => 'int',

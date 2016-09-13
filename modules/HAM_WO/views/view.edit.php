@@ -16,6 +16,7 @@ class HAM_WOViewEdit extends ViewEdit {
 		//3、判断是否来自合同的，如果来源于合同则显示合同字段信息
 		//4、初始化工作单编号等字段
 
+
         //1、初始化Framework-Site信息
         require_once('modules/HAA_Frameworks/orgSelector_class.php');
         $current_site_id = empty($this->bean->ham_maint_sites_id)?"":$this->bean->ham_maint_sites_id;

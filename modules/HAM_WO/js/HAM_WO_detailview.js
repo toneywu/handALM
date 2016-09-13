@@ -11,8 +11,9 @@ function showWOLines() {
 		$.ajax({
 			url: 'index.php?to_pdf=true&module=HAM_WO&action=getWOLiness&id=' + $("input[name=record]").val(),
 			success: function (data) {
+				//console.log(data);
 				$("#wo_lines").html(data);
-			};
+			},
 			error: function () { //失败
 				alert('Error loading document');
 			}
@@ -128,6 +129,7 @@ $(document).ready(function(){
 
 	$("#merge_duplicate_button").after(change_btn);
 
+	$("#wo_lines").parent("td").prev("td").hide();
 	showWOLines();
 
 	$("#btn_change_status").click(function(){ //如果点了修改状态按钮，调用Ajax修改状态

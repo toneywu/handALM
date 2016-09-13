@@ -65,6 +65,7 @@ function mark_field_enabled(field_name,not_required_bool) {
       } else {//如果已经有星标了，则显示出来
         $("#"+field_name+"_label .required").show();
       }
+      $("#"+field_name+"_btn").remove();
   } else { //如果不是必须的，则不显示星标
     //直接Remove有时会出错，所有先设置为Validate再Remove
     addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());
@@ -109,9 +110,9 @@ $(document).ready(function(){
 
 		  
 	mark_field_disabled("email",false);
-	
-	mark_field_disabled("contact_name",false);
-	
+	if($("target_owning_org").val()==""){
+	    mark_field_disabled("contact_name",false);
+	}
 	if($("#source_wo").val()=="") {
 		mark_field_disabled("source_woop",false);
 	}
