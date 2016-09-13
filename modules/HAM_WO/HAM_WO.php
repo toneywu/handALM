@@ -73,6 +73,11 @@ class HAM_WO extends HAM_WO_sugar {
 		//这里的第一道工序、以及后序工序不包括已经删除、取消或结束的工序
 
 		if ($this->wo_status == "SUBMITTED" || $this->wo_status == "APPROVED") {
+			//工作单审批后会判断计划时间如果没有填写，如果没有进行手工排程，按目标时间进行默认
+			if ($this->date_schedualed_start == "") { $this->date_schedualed_start = $this->date_target_start; }
+			if ($this->date_schedualed_finish == "") { $this->date_schedualed_finish = $this->date_target_finish; }
+			if ($this->plan_fixed == "") { $this->plan_fixed = true; }
+
 			//遍历工序  
 
 			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('WOOP_NUMBER', "ham_woop.woop_status not in ('CLOSED','CANCELED') and ham_wo_id='" . $this->id . "'");

@@ -8,7 +8,7 @@ class HAM_SRViewEdit extends ViewEdit
 
     function Display() {
 
-        global $current_user;
+        global $current_user,$mod_strings;
         global $db;
 /*        echo "string";
         foreach ($current_user as $key => $value) {
@@ -200,6 +200,15 @@ class HAM_SRViewEdit extends ViewEdit
 			$this->bean->sr_status='COMPLETE';
 		  }
 		}
+
+        $sr_num_html="";
+        if(empty($this->bean->sr_number)){
+            //如果当前工作单号为空，则返回自动编号标签
+            $sr_num_html=$mod_strings['LBL_AUTONUM'].'<input type="hidden" value="" id="sr_number" name="sr_number">';
+        } else {
+            $sr_num_html=$this->bean->sr_number.'<input type="hidden" value="'.$this->bean->sr_number.'" id="sr_number" name="sr_number">';
+        }
+        $this->ss->assign('SR_NUMBER',$sr_num_html);
 
         parent::Display();
     }

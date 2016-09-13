@@ -134,31 +134,10 @@ $(document).ready(function(){
 		mark_field_disabled("event_type",false);
 	}
 	
-	var currentDate = new Date();
-	var yearStr = currentDate.getFullYear();
-	var monthStr = currentDate.getMonth()+1;
-	var dayStr = currentDate.getDate();
-	var hourStr = currentDate.getHours();
-	var minutesStr = currentDate.getMinutes();
-	var timeStr = yearStr+"-"+monthStr+"-"+dayStr+" "+hourStr+":"+minutesStr;
-	$("#date_target_start").val(timeStr);
-	$("#date_target_finish").val(timeStr);
-	
+
 //这时obj就是触发事件的对象，可以使用它的各个属性
 //还可以将obj转换成jquery对象，方便选用其他元素
 
-	/*alert(SUGAR.language.get('HAM_WO', 'LBL_AUTONUM'));
-	for(i in SUGAR){
-		alert(i);
-	}*/
-	
-	if($("#wo_number").val()=="") {
-        $("#wo_number").after(SUGAR.language.get('HAM_WO', 'LBL_AUTONUM'));
-        $("#wo_number").hide();
-	} else {
-        $("#wo_number").after($("#wo_number").val());
-        $("#wo_number").hide();
-    }
 
     if($("#source_type").val()=='SR') {
         $("#reported_date").attr("type","text");

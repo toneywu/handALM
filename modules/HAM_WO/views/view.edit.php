@@ -8,12 +8,13 @@ class HAM_WOViewEdit extends ViewEdit {
 
 	function Display() {
 
-		global $current_user;
+		global $current_user, $mod_strings;
 		global $db;
 
 		//1、初始化Framework-Site信息
 		//2、如果当前数据来源于SR（有参数sr_id）则从对应的SR上复制信息
 		//3、判断是否来自合同的，如果来源于合同则显示合同字段信息
+		//4、初始化工作单编号等字段
 
         //1、初始化Framework-Site信息
         require_once('modules/HAA_Frameworks/orgSelector_class.php');
@@ -202,6 +203,28 @@ class HAM_WOViewEdit extends ViewEdit {
 				//$this->bean->saveContracts(false);			
 			}
 		}
+
+
+		/**
+		 * 4、初始化工作单编号等字段
+		 * modify by toney.wu 2016-09-07
+		 */
+
+    	$wo_num_html="";
+		if(empty($this->bean->wo_number)){
+			//如果当前工作单号为空，则返回自动编号标签
+			$wo_num_html=$mod_strings['LBL_AUTONUM'].'<input type="hidden" value="" id="wo_number" name="wo_number">';
+		} else {
+			$wo_num_html=$this->bean->wo_number.'<input type="hidden" value="'.$this->bean->wo_number.'" id="wo_number" name="wo_number">';
+		}
+		$this->ss->assign('WO_NUMBER',$wo_num_html);
+
+		//初始化目标开始与结束日期
+		if(empty($this->bean->id)){
+			$this->bean->date_target_start = date('Y-m-d H:i:s');
+			$this->bean->date_target_finish = date('Y-m-d H:i:s');
+		}
+
 		parent :: Display();
 	} //end function
 

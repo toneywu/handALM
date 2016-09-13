@@ -72,6 +72,7 @@ array (
           array (
             'name' => 'sr_number',
             'label' => 'LBL_SR_NUMBER',
+            'customCode'=>'{$SR_NUMBER}'
           ),
           1 => 
           array (

@@ -569,7 +569,7 @@ $dictionary['HAM_WO'] = array (
 			
 		),
 		'location' => array (
-			'required' => true,
+			'required' => false,
 			'source' => 'non-db',
 			'name' => 'location',
 			'vname' => 'LBL_LOCATION',
@@ -1277,6 +1277,25 @@ $dictionary['HAM_WO'] = array (
 			'unified_search' => false,
 			'merge_filter' => 'disabled',
 			
+		),
+
+	'wo_lines' => array (
+			'required' => false,
+			'name' => 'wo_lines',
+			'source'=>'non-db',
+			'vname' => 'LBL_WO_LINES',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => false,
+			'reportable' => false,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
 		),
 		'sr_link' => array (
 			'name' => 'sr_link',

@@ -257,7 +257,7 @@ function date_start_change(){
 		// 1）如果计划完成时间有填写，自动更新计划时长。
 		$date_schedualed_finish_date = (stringToTime($("#date_schedualed_finish").val())/1000/3600);
 		var $differentHour = $date_schedualed_finish_date-$date_schedualed_start_date;
-		if($differentHour>0){
+		if($differentHour>=0){
 			 $("#duration_schedualed").val((parseFloat($differentHour)).toFixed(5));
 		}else{
 			alert("计划完成日期必须大于等于计划开始日期！");
@@ -279,7 +279,7 @@ function date_start_change(){
 		// 1）如果计划完成时间有填写，自动更新计划时长。
 		$date_target_finish_date = (stringToTime($("#date_target_finish").val())/1000/3600);
 		var $differentHour = $date_target_finish_date-$date_target_start_date;
-		if($differentHour>0){
+		if($differentHour>=0){
 			 $("#duration_target").val((parseFloat($differentHour)).toFixed(5));
 		}else{
 			alert("目标完成日期必须大于等于计划开始日期！");
@@ -301,7 +301,7 @@ function date_start_change(){
 		// 1）如果计划完成时间有填写，自动更新计划时长。
 		$date_actual_finish_date = (stringToTime($("#date_actual_finish").val())/1000/3600);
 		var $differentHour = $date_actual_finish_date-$date_actual_start_date;
-		if($differentHour>0){
+		if($differentHour>=0){
 			 $("#duration_actual").val((parseFloat($differentHour)).toFixed(5));
 		}else{
 			alert("实际完成日期必须大于等于计划开始日期！");
@@ -333,7 +333,7 @@ function date_finish_change(){
 			$date_schedualed_finish_date = (stringToTime($("#date_schedualed_finish").val())/1000/3600);
 			
 			var $differentHour = $date_schedualed_finish_date-$date_schedualed_start_date;
-			if($differentHour>0){
+			if($differentHour>=0){
 				 $("#duration_schedualed").val((parseFloat($differentHour)).toFixed(5));
 			}else{
 				alert("计划完成日期必须大于等于计划开始日期！");
@@ -354,7 +354,7 @@ function date_finish_change(){
 		if($("#date_target_finish").val()!=null&&$("#date_target_finish").val()!=""&&$date_target_start_date!=null){
 			$date_target_finish_date = (stringToTime($("#date_target_finish").val())/1000/3600);
 			var $differentHour = $date_target_finish_date-$date_target_start_date;
-			if($differentHour>0){
+			if($differentHour>=0){
 				 $("#duration_target").val((parseFloat($differentHour)).toFixed(5));
 			}else{
 				alert("计划完成日期必须大于等于计划开始日期！");

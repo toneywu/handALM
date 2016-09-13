@@ -3,6 +3,23 @@ if(typeof(YAHOO.SUGAR) == 'undefined') {
 }
 
 /**
+ * 通过Ajax显示工作单行
+ * @param name
+ */
+function showWOLines() {
+	console.log('index.php?to_pdf=true&module=HAM_WO&action=getWOLiness&id=' + $("input[name=record]").val());
+		$.ajax({
+			url: 'index.php?to_pdf=true&module=HAM_WO&action=getWOLiness&id=' + $("input[name=record]").val(),
+			success: function (data) {
+				$("#wo_lines").html(data);
+			};
+			error: function () { //失败
+				alert('Error loading document');
+			}
+		});
+};
+
+/**
  * 点击按钮 调用Ajax请求 获取list里面根据工单状态应该显示的value
  * @param name
  */
@@ -108,15 +125,16 @@ $(document).ready(function(){
 	var change_btn=$("<input type='button' class='btn_detailview' id='btn_change_status' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL')+"'>");
 	var save_btn=$("<input type='button' class='btn_detailview' id='btn_save' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_SAVE_BUTTON_LABEL')+"'>");
 	var cancel_btn=$("<input type='button' class='btn_detailview' id='btn_cancel' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_CANCEL_BUTTON_LABEL')+"'>");
-	
+
 	$("#merge_duplicate_button").after(change_btn);
-	
-	
+
+	showWOLines();
+
 	$("#btn_change_status").click(function(){ //如果点了修改状态按钮，调用Ajax修改状态
-		
+
 		$("#btn_change_status").after(save_btn);
 		$("#btn_save").after(cancel_btn);
-		
+
 		//registe function save()
 		$("#btn_save").click(function(){ //如果保存按钮 保存记录
 			save($("input[name='record']").val(),$("#wo_status").val());
@@ -131,7 +149,7 @@ $(document).ready(function(){
 		changeStatus($("input[name='record']").val());
 	   }
 	);
-	
+
 	/**
 	 * checkAccess
 	 */
