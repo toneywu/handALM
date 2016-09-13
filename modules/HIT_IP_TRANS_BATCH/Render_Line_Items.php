@@ -6,10 +6,12 @@ function display_lines($focus, $field, $value, $view) {
 	$html = '';
 	if ($view == 'EditView') {
 		$html .= '<script src="modules/HIT_IP_TRANS/js/line_items.js"></script>';
+		$html .= '<script src="modules/HAA_FF/ff_include.js"></script>';
+		$html .= '<script src="custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js"></script>';
 		$html .= '<script src="modules/HIT_IP_TRANS_BATCH/js/html_dom_required_setting.js"></script>';
 		$html .= "<table border='0' id='lineItems' class='list view table'></table>";
 		$html .= '<script>insertTransLineHeader(\'lineItems\');</script>';
-
+		$html .= "<script> var lineData='';</script>";
 		if ($focus->id != '') { //如果不是新增（即如果是编辑已有记录）
 			$sql = "SELECT   hat.id
 								        ,a.name hat_asset_name
@@ -26,7 +28,7 @@ function display_lines($focus, $field, $value, $view) {
 										,hat.hat_assets_cabinet_id
 										,b.name hat_assets_cabinet
 										,hat.channel_content
-										,hat.channel_num	
+										,hat.channel_num,s.ip_netmask	
 								FROM   hit_ip_trans hat
 								LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
 								LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
@@ -39,6 +41,7 @@ function display_lines($focus, $field, $value, $view) {
 			while ($row = $focus->db->fetchByAssoc($result)) {
 				//echo var_dump($row);;
 				$line_data = json_encode($row);
+				$html .= "<script>lineData=".$line_data.";</script>";
 				$html .= "<script>insertLineData(" . $line_data . ");</script>";
 				//REF:custom/modules/HAT_Asset_Trans/js/line_items.js
 				//通过insertLineData向已经完成初始化的页面要素中，写入值
@@ -98,7 +101,7 @@ function display_lines($focus, $field, $value, $view) {
 											,hat.hat_assets_cabinet_id
 											,b.name hat_assets_cabinet
 											,hat.channel_content
-											,hat.channel_num	
+											,hat.channel_num,s.ip_netmask,s.ip_lowest+'~'+ s.ip_highest associated_ip	
 									FROM   hit_ip_trans hat
 									LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
 									LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)

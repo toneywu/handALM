@@ -304,7 +304,12 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_CHANGE_CHANNEL_CONTENT',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'change_mrtg_link',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_CHANGE_MRTG_LINK',
+          ),
         ),
       ),
     ),

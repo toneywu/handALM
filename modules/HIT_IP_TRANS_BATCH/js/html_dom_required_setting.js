@@ -62,6 +62,59 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 	  $("#"+field_name+"_label .required").hide();
 	  $("#btn_"+field_name).css({"visibility":"hidden"});
 }
+
+
+function hide_field_disabled(field_name, hide_bool, keep_position=false) {
+
+	  var view = action_sugar_grp1;
+	  mark_obj = $("#"+field_name);
+	  mark_obj_lable = $("#"+field_name+"_label");
+
+	  if(view === 'EditView') {
+	    if(hide_bool==true) {
+	      	if (keep_position==false) {
+	        	mark_obj.closest('td').css({"display":"none"});
+	        	mark_obj_lable.css({"display":"none"});
+	      	}else{
+	          	mark_obj.closest('td').css({"display":"table-column"});
+	          	mark_obj_lable.css({"display":"table-column"});
+	      	}
+	    }else{
+	        mark_obj.closest('td').css({"display":""});
+	        mark_obj_lable.css({"display":""});
+	        mark_obj.css({"color":"#efefef","background-Color":"#efefef;"});
+	        mark_obj.attr("readonly",true);
+	        mark_obj_lable.css({"color":"#aaaaaa","text-decoration":"line-through"});
+	    }
+	    if (typeof validate != "undefined" && typeof validate['EditView'] != "undefined") {
+	      removeFromValidate('EditView',field_name); //去除必须验证
+	    }
+	    $("#"+field_name+"_label .required").hide();
+
+	    if  (typeof $("#btn_"+field_name)!= 'undefined') {
+	      $("#btn_"+field_name).css({"visibility":"hidden"});
+	    }
+	    if  (typeof $("#btn_clr_"+field_name)!= 'undefined') {
+	      $("#btn_clr_"+field_name).css({"visibility":"hidden"});
+	    }
+	    //消除已经填写的数据
+	    $("#"+field_name).val("");
+	    if  (typeof $("#"+field_name+"_id")!= 'undefined') {
+	      $("#"+field_name+"_id").val("");
+	    }
+	  } else {
+	    //DetailedView只需要考虑隐藏字段的情况
+	      if(hide_bool==true) {
+	          if (keep_position==false) {
+	            mark_obj.closest('td').css({"display":"none"});
+	            mark_obj.closest('td').prev().css({"display":"none"});
+	          }else{
+	              mark_obj.closest('td').prev().html("");
+	              mark_obj.closest('td').html("");
+	          }
+	      }
+	  }
+	}
 /**
  * loopField
  */
@@ -79,6 +132,12 @@ function loopField(fieldName,type){
 		for (var i=0;i<prodln;i++) {
 			//mark_field_disabled(fieldName+i,false);
 		    mark_field_enabled(fieldName+i,false);
+		}
+	}else if(type=="INVISIABLE"){
+		//alert(fieldName);
+		for (var i=0;i<prodln;i++) {
+			hide_field_disabled(fieldName+i,true,false)
+		    //$("#"+fieldName+i).css({"visibility":"hidden"});
 		}
 	}	
 }

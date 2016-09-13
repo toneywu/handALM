@@ -20,6 +20,18 @@ class HIT_IP_TRANS_BATCHViewDetail extends ViewDetail {
 
 			}
 		}
+if(!empty($this->bean->account_id)) {$contact_id= $this->bean->account_id;
+        if(!empty($contact_id)){
+        	$contact_bean = BeanFactory :: getBean('Contacts')->retrieve_by_string_fields(array (
+		'id' => $contact_id
+		)			);    
+		
+		$sea = new SugarEmailAddress; 
+		$primary = $sea->getPrimaryAddress($contact_bean);  	
+        $this->bean->email=$primary;
+        }
+}
+        
 		parent :: Display(); 
 
 	}

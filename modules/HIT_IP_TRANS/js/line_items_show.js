@@ -84,7 +84,7 @@ function insertLineData(asset_trans_line ){ //将数据写入到对应的行字�
     $("#line_parent_ip".concat(String(ln))).val(asset_trans_line.parent_ip);
     $("#line_hit_ip_subnets".concat(String(ln))).val(asset_trans_line.hit_ip_subnets);
     $("#line_associated_ip".concat(String(ln))).val(asset_trans_line.associated_ip);
-    //$("#line_mask".concat(String(ln))).val(asset_trans_line.mask);
+    $("#line_mask".concat(String(ln))).val(asset_trans_line.ip_netmask);
     $("#line_gateway".concat(String(ln))).val(asset_trans_line.gateway);
     $("#line_bandwidth_type".concat(String(ln))).val(asset_trans_line.bandwidth_type);
     $("#line_port".concat(String(ln))).val(asset_trans_line.port);
