@@ -136,8 +136,13 @@ function loopField(fieldName,type){
 	}else if(type=="INVISIABLE"){
 		//alert(fieldName);
 		for (var i=0;i<prodln;i++) {
-			hide_field_disabled(fieldName+i,true,false)
-		    //$("#"+fieldName+i).css({"visibility":"hidden"});
+			//hide_field_disabled(fieldName+i,true,false)
+		    $("#"+fieldName+i).css({"visibility":"hidden"});
+		    $("#"+fieldName+i+"_label").css({"visibility":"hidden"});
+		    $("#btn_"+fieldName+i).css({"visibility":"hidden"});
+		    $("#"+fieldName+i).parents('.input_group').remove(); 
+		    $("#"+fieldName+"_title").remove(); 
+		    $("#displayed_"+fieldName+i).remove(); 
 		}
 	}	
 }
@@ -145,7 +150,6 @@ function loopField(fieldName,type){
  * 
  */
 function changeRequired(lineRecord){
-	
 	loopField("line_hit_ip_subnets",lineRecord.lineRecord);
 	//loopField("line_hit_ip_subnets",lineRecord.change_associated_ip);
 	loopField("line_gateway",lineRecord.change_gateway);
@@ -157,4 +161,5 @@ function changeRequired(lineRecord){
 	loopField("line_monitoring",lineRecord.change_monitoring);
 	loopField("line_channel_num",lineRecord.change_channel_num);
 	loopField("line_channel_content",lineRecord.change_channel_content);
+	loopField("line_mrtg_link",lineRecord.change_mrtg_link);
 }

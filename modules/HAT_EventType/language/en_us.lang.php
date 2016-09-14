@@ -105,5 +105,5 @@ $mod_strings = array (
   'LBL_CHANGE_MONITORING'=>'Change Monitioring',
   'LBL_CHANGE_CHANNEL_NUM'=>'Change Channel Num',
   'LBL_CHANGE_CHANNEL_CONTENT'=>'Change Channel Content',
-  'LBL_CHANGE_CHANGE_MRTG_LINK'=>'MRGT Link',
+  'LBL_CHANGE_CHANGE_MRTG_LINK'=>'Change MRGT Link',
 );

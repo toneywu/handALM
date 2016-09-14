@@ -82,4 +82,5 @@ $mod_strings = array (
   'LBL_MONITORING'=>'Monitoring',
   'LBL_CHANNEL_NUM'=>'Channel Num',
   'LBL_CHANNEL_CONTENT'=>'Channel Content',
+  'LBL_MRTG_LINK'=>'MRTG Link',
 );

@@ -866,11 +866,10 @@ $dictionary['HAT_EventType'] = array (
 			'dependency' => false,
 			
 		),
-		
 		'change_mrtg_link' => array (
 			'required' => false,
-			'name' => 'change_change_mrtg_link',
-			'vname' => 'LBL_CHANGE_CHANGE_MRTG_LINK',
+			'name' => 'change_mrtg_link',
+			'vname' => 'LBL_CHANGE_MRTG_LINK',
 			'type' => 'enum',
 			'massupdate' => 0,
 			'default' => 'LOCKED',
@@ -892,6 +891,7 @@ $dictionary['HAT_EventType'] = array (
 			'dependency' => false,
 			
 		),
+		
 	
 	),
 	'relationships' => array (),

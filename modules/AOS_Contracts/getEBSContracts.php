@@ -179,7 +179,8 @@ if (curl_errno($soap_do)) {
 					//INVENTORY_ITEM_name
 					$item_list = BeanFactory :: getBean('AOS_Products')->get_full_list('', "aos_products.part_number = '$item_number_val'");
 					if (count($item_list) != 0) {
-						$newBean->product_id = $item_list[0]->id;
+						$newLineBean->product_id = $item_list[0]->id;
+						echo "product_id = ".$item_list[0]->id."<br>";
 					}
 					$newLineBean->product_discount = $parent_description_val;
 					$newLineBean->vat_amt = $open_type_val;
@@ -189,7 +190,7 @@ if (curl_errno($soap_do)) {
 					$newLineBean->parent_type = 'AOS_Contracts';
 					$newLineBean->product_source_id_c=$contract_line_id_val;
 					//
-					$newLineBean->save();
+					//$newLineBean->save();
 				}
 			}
 		}
