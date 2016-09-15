@@ -84,4 +84,5 @@ $mod_strings = array (
   'LBL_PLANNED_COMPLETE_DATE'=>'计划完成日期',
     'LBL_TRACKING_NUMBER' => '跟踪编号#',
       'LBL_EVENT_TYPE' => '事务类型',
+  'LBL_WO_LINES'=>'工单对象行',
 );

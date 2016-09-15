@@ -67,4 +67,5 @@ $mod_strings = array (
   'LBL_SOURCE_WO'=>'Source WO',
   'LBL_OWNER'=>'Owner',
   'LBL_PLANNED_COMPLETE_DATE'=>'Planned Complete Date',
+  'LBL_WO_LINES'=>'WO Obj.Lines',
 );

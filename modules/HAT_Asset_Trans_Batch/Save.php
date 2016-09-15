@@ -46,7 +46,8 @@ foreach($_POST as $key => $value){
 */
 save_lines($_POST,$sugarbean, 'line_');
 
-$sugarbean->save();//再调用一次，为了触发AfterSave,确认是否需要将头彻底关闭
+//$sugarbean->save();//再调用一次，为了触发AfterSave,确认是否需要将头彻底关闭
+
 
 handleRedirect($return_id, 'HAT_Asset_Trans_Batch');
 
@@ -63,10 +64,10 @@ function save_lines($post_data, $parent, $key = ''){
     for ($i = 0; $i < $line_count; ++$i) {
         //echo "<br/>line ".$i." processed;";
         echo "<br/>hat_assets_hat_asset_transhat_assets_ida=".$post_data[$key.'hat_assets_hat_asset_transhat_assets_ida'][$i];
-        echo "<br/>target_owning_org_id=".$post_data[$key.'owning_org_id'][$i];
-        echo "<br/>hat_asset_locations_id=".$post_data[$key.'hat_asset_locations_id'][$i];
 
-        if ($post_data[$key.'hat_assets_hat_asset_transhat_assets_ida'][$i]!='' && $post_data[$key.'owning_org_id'][$i]!='' &&$post_data[$key.'hat_asset_locations_id'][$i]!='') {
+        //print_r($post_data);
+
+        if ($post_data[$key.'id'][$i]!='' && $post_data[$key.'target_owning_org_id'][$i]!='' &&$post_data[$key.'target_location_id'][$i]!='') {
             //只保存Asset、Account、Location不为空的记录，否则直接到下一循环
             if($post_data[$key.'deleted'][$i] == 1){//删除行
                 echo "<br/>----------->line deleted";
@@ -86,7 +87,7 @@ function save_lines($post_data, $parent, $key = ''){
 
                 foreach($trans_line->field_defs as $field_def) { //循环对所有要素
                     $trans_line->$field_def['name'] = $post_data[$key.$field_def['name']][$i];
-                    //echo "<br/>".$field_def[name].'='. $post_data[$key.$field_def['name']][$i];
+                    echo "<br/>***".$field_def['name'].'='. $post_data[$key.$field_def['name']][$i];
                 }
                 $trans_line->hat_asset_trans_batch_hat_asset_transhat_asset_trans_batch_ida = $parent->id;//父ID
                 $trans_line->trans_status = $parent->asset_trans_status;//父状态 LogicHook BeforeSave可能会改写

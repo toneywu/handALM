@@ -56,10 +56,10 @@ class HIT_IP_SubnetsViewPopup extends ViewPopup
                 $txt_jason.='"pID":0';
                 $txt_jason.="},";
 
-                $beanIPSubnets = BeanFactory::getBean('HIT_IP_Subnets')->get_full_list('name',"hit_ip_subnets.parent_hit_ip_id='".$thisIP->id."'");
-
-
-
+                $beanIPSubnets = BeanFactory::getBean('HIT_IP_Subnets')->get_full_list('hit_ip_subnets, name',
+                                                                            "hit_ip_subnets.parent_hit_ip_id='".$thisIP->id."'
+                                                                             AND hit_ip_subnets.name = hit_ip_subnets.ip_subnet");
+                //加载精确IP与子IP相同的数据，也就是只有第2层IP段网的内容
 				if (isset($beanIPSubnets)) {
 					foreach ($beanIPSubnets as $beanIPSubnet) {
 						$txt_jason.="{";
@@ -81,6 +81,33 @@ class HIT_IP_SubnetsViewPopup extends ViewPopup
 						$txt_jason.="},";
 					}
 				}
+
+
+                $beanIPSubnets = BeanFactory::getBean('HIT_IP_Subnets')->get_full_list('hit_ip_subnets, name',
+                                                                            "hit_ip_subnets.parent_hit_ip_id='".$thisIP->id."'
+                                                                             AND hit_ip_subnets.name = hit_ip_subnets.ip_subnet");
+                //加载精确IP与子IP不相同的数据，也就是第3层IP段网的内容
+                if (isset($beanIPSubnets)) {
+                    foreach ($beanIPSubnets as $beanIPSubnet) {
+                        $txt_jason.="{";
+                        foreach ($beanIPSubnet->field_name_map as $key => $value) {
+                            if ($key == 'parent_hit_ip_id'){
+                                //Parent_eventtype_id需要特别处理
+                                $txt_jason .='pId:"'.$thisIP->id.'",';
+                            }else if ($key == 'name'){
+                                //Parent_eventtype_id需要特别处理
+                                $txt_jason .='return_name:"'.$beanIPSubnet->hit_ip_subnets.'",';
+                                $txt_jason .='name:"<strong>'.$beanIPSubnet->hit_ip_subnets.'</strong> : <span class=\"input_desc\">'.$beanIPSubnet->ip_lowest.'~'.$beanIPSubnet->ip_highest.' / '.$beanIPSubnet->ip_netmask.'</span>",';
+                            }else {
+                                if (isset($beanIPSubnet->$key)) {
+                                    $txt_jason .=$key.':"'.$beanIPSubnet->$key.'",';
+                                }
+                            }
+                        }
+                        $txt_jason  = substr($txt_jason,0,strlen($txt_jason)-1);//去除最后一个,
+                        $txt_jason.="},";
+                    }
+                }
 
             }
             $txt_jason  = substr($txt_jason,0,strlen($txt_jason)-1);//去除最后一个,

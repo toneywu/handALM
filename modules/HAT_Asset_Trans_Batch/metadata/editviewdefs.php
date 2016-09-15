@@ -2,13 +2,13 @@
 $module_name = 'HAT_Asset_Trans_Batch';
 $viewdefs [$module_name] = 
 array (
-  'EditView' =>
+  'EditView' => 
   array (
-    'templateMeta' =>
+    'templateMeta' => 
     array (
-      'form' =>
+      'form' => 
       array (
-        'hidden' =>
+        'hidden' => 
         array (
           0 => '<input type="hidden" name="source_woop_id" id="source_woop_id" value="{$SOURCE_WOOP_ID}">',
           1 => '<input type="hidden" name="source_wo_id"  id="source_wo_id" value="{$SOURCE_WO_ID}">',
@@ -29,148 +29,159 @@ array (
           24 => '<input type="hidden" name="target_asset_status"  id="target_asset_status">',
         ),
       ),
-      'includes' =>
+      'includes' => 
       array (
-        0 =>
+        0 => 
         array (
           'file' => 'modules/HAA_FF/ff_include.js',
         ),
-        1 =>
+        1 => 
         array (
           'file' => 'modules/HAT_Asset_Trans_Batch/js/HAT_Asset_Trans_Batch_editview.js',
         ),
       ),
       'maxColumns' => '2',
-      'widths' =>
+      'widths' => 
       array (
-        0 =>
+        0 => 
         array (
           'label' => '10',
           'field' => '30',
         ),
-        1 =>
+        1 => 
         array (
           'label' => '10',
           'field' => '30',
         ),
       ),
-      'useTabs' =>true,
-      'tabDefs' =>
+      'useTabs' => false,
+      'tabDefs' => 
       array (
-        'DEFAULT' =>
+        'DEFAULT' => 
         array (
-          'newTab' =>false,
+          'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_EDITVIEW_PANEL1' =>
+        'LBL_EDITVIEW_PANEL2' => 
         array (
-          'newTab' =>false,
+          'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_EDITVIEW_PANEL2' =>
+        'LBL_EDITVIEW_PANEL1' => 
         array (
-          'newTab' =>false,
+          'newTab' => false,
           'panelDefault' => 'expanded',
         ),
       ),
     ),
-    'panels' =>
+    'panels' => 
     array (
-      'default' =>
+      'default' => 
       array (
-        0 =>
+        0 => 
         array (
-          0 =>
+          0 => 
           array (
             'name' => 'framework',
             'customCode' => '{$FRAMEWORK}',
           ),
-          1 =>
+          1 => 
           array (
             'name' => 'event_type',
             'studio' => 'visible',
             'label' => 'LBL_EVENT_TYPE',
-            'displayParams' =>
+            'displayParams' => 
             array (
               'initial_filter' => '&basic_type_advanced=AT_MOVE',
-              'field_to_name_array' =>
+              'field_to_name_array' => 
               array (
                 'name' => 'event_type',
                 'id' => 'hat_eventtype_id',
-                'event_short_desc'=>'name'
+                'event_short_desc' => 'name',
               ),
               'call_back_function' => 'setEventTypePopupReturn',
             ),
           ),
         ),
-        1 =>
+        1 => 
         array (
-          0 =>
+          0 => 
           array (
             'name' => 'asset_trans_status',
             'studio' => 'visible',
             'label' => 'LBL_ASSET_TRANS_STATUS',
           ),
-          1 =>
+          1 => '',
+        ),
+        2 => 
+        array (
+          0 => 
           array (
             'name' => 'current_owning_org',
             'studio' => 'visible',
             'label' => 'LBL_CURRENT_OWNING_ORG',
           ),
+          1 => 'owner_contacts',
         ),
-        2 =>
+        3 => 
         array (
-          0 =>
+          0 => 
           array (
             'name' => 'target_owning_org',
             'studio' => 'visible',
             'label' => 'LBL_TARGET_OWNING_ORG',
           ),
-          1 =>
+          1 => 
           array (
             'name' => 'target_using_org',
             'studio' => 'visible',
             'label' => 'LBL_TARGET_USING_ORG',
           ),
         ),
-        3 =>
+        4 => 
         array (
           0 => 'name',
-          1 =>
+          1 => 
           array (
             'name' => 'tracking_number',
             'label' => 'LBL_TRACKING_NUMBER',
           ),
         ),
-        4 =>
+        5 => 
         array (
-          0 => 'lov_asset_status_list',
-          1 => ''
-        ),
-        5 =>
-        array (
-          0 => 'owner_contacts',
-          1 =>
+          0 => 
           array (
             'name' => 'planned_execution_date',
             'label' => 'LBL_PLANNED_EXECUTION_DATE',
           ),
-        ),
-        6 =>
-        array (
-          2 => 'description',
-          1 =>
+          1 => 
           array (
             'name' => 'planned_complete_date',
             'label' => 'LBL_PLANNED_COMPLETE_DATE',
           ),
         ),
-      ),
-      'lbl_editview_panel1' =>
-      array (
-        0 =>
+        6 =>
         array (
-          0 =>
+          0 => 'description',
+          1 => '',
+        ),
+        7 => 
+        array (
+          0 => 'wo_lines',
+        ),
+      ),
+      'lbl_editview_panel2' => 
+      array (
+        0 => 
+        array (
+          0 => 'lov_asset_status_list',
+        ),
+      ),
+      'lbl_editview_panel1' => 
+      array (
+        0 => 
+        array (
+          0 => 
           array (
             'name' => 'line_items',
             'label' => 'LBL_LINE_ITEMS',

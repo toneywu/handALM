@@ -88,4 +88,8 @@ $mod_strings = array (
   'LBL_TARGET_USING_PERSON'=>'目标使用人',
   'LBL_TARGET_USING_ORG'=>'目标使用组织',
   'LBL_TARGET_PARENT_ASSET'=>'目标父资产',
- );
+  'LBL_CHANGE_FROM'=>' 由 ',
+  'LBL_CHANGE_NULL'=>'空',
+  'LBL_CHANGE_FROM_TO'=>' 变更为 ',
+  'LBL_CHANGE_TO'=>' 变更为 ',
+);

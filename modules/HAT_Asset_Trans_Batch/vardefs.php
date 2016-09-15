@@ -171,7 +171,16 @@ $dictionary['HAT_Asset_Trans_Batch'] = array(
 			'studio' => 'visible',
 			'options' => 'asset_status_list',
 			),
-
+		'wo_lines' =>
+		array (
+			'source' => 'non-db', //从EventType映射
+			'name' => 'wo_lines',
+			'vname' => 'LBL_WO_LINES',
+			'type' => 'varchar',
+			'default'=>'',
+			'reportable' => true,
+			'studio' => 'visible',
+			),
 /*		'lov_cux_event_type_option_list' =>
 		array (
 								'source' => 'non-db', //从EventType映射

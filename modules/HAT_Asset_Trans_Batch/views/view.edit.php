@@ -12,7 +12,7 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
         global $current_user;
 
         //0.处理头与行的语言包
-        $modules = array('HAT_Asset_Trans', 'HAT_Asset_Trans_Batch',
+        $modules = array('HAT_Asset_Trans', 'HAT_Asset_Trans_Batch', 'HAT_Assets'
         );
 
         foreach ($modules as $module) {

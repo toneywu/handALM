@@ -17,25 +17,32 @@ array (
     'label' => 'LBL_ASSET_TRANS_STATUS',
     'width' => '5%',
   ),
-  'CURRENT_ORGANIZATION_C' => 
+  'CURRENT_OWNING_ORG' => 
   array (
     'type' => 'relate',
-    'default' => true,
     'studio' => 'visible',
-    'label' => 'LBL_CURRENT_ORGANIZATION',
-    'id' => 'ACCOUNT_ID_C',
+    'label' => 'LBL_CURRENT_OWNING_ORG',
+    'id' => 'CURRENT_OWNING_ORG_ID',
     'link' => true,
     'width' => '10%',
+    'default' => true,
   ),
-  'TARGET_ORGANIZATION_C' => 
+  'OWNER_CONTACTS' => 
   array (
     'type' => 'relate',
-    'default' => true,
     'studio' => 'visible',
-    'label' => 'LBL_TARGET_ORGANIZATION',
-    'id' => 'ACCOUNT_ID1_C',
+    'label' => 'LBL_OWNER',
+    'id' => 'OWNER_ID',
     'link' => true,
     'width' => '10%',
+    'default' => true,
+  ),
+  'PLANNED_EXECUTION_DATE' => 
+  array (
+    'type' => 'date',
+    'label' => 'LBL_PLANNED_EXECUTION_DATE',
+    'width' => '10%',
+    'default' => true,
   ),
 );
 ?>

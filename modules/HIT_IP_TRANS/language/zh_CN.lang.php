@@ -83,4 +83,5 @@ $mod_strings = array (
   'LBL_MONITORING'=>'监控链接',
   'LBL_CHANNEL_NUM'=>'频道号',
   'LBL_CHANNEL_CONTENT'=>'频道内容',
+  'LBL_MRTG_LINK'=>'MRTG链接',
 );

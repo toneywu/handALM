@@ -124,7 +124,7 @@ $(document).ready(function(){
 //处理工作对象行
     $("#wo_lines").parent("td").prev("td").hide();
     $("#wo_lines").hide();
-    $("#wo_lines").after("<div id='wo_lines_display'>")
+    $("#wo_lines").after("<div id='wo_lines_display'></div>")
     showWOLines();
 
     if($("#source_type").val()=='SR') {

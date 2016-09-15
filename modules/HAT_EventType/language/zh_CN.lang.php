@@ -104,5 +104,6 @@ $mod_strings = array (
   'LBL_CHANGE_MONITORING'=>'可修改监控链接',
   'LBL_CHANGE_CHANNEL_NUM'=>'可修改频道号',
   'LBL_CHANGE_CHANNEL_CONTENT'=>'可修改频道内容',
+  'LBL_CHANGE_CHANGE_MRTG_LINK'=>'可修改MRGT链接',
 
 );

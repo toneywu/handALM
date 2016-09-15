@@ -430,6 +430,27 @@ $dictionary['HIT_IP_TRANS'] = array (
 			'len' => '255',
 			'size' => '20',	
 		),
+		
+		'mrtg_link' => array (
+			'required' => false,
+			'name' => 'mrtg_link',
+			'vname' => 'LBL_MRTG_LINK',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',	
+		),
 
 		'line_parent_ip' => array (
 			'source' => 'non-db',
