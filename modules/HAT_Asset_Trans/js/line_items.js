@@ -461,8 +461,6 @@ function resetEditorFields(ln) {
 	$("#line_target_asset_status_displayed"+ln).html("<span class='color_tag color_asset_status_"+target_status_value+"'>"+target_status_text+"</span>");
 
 
-
-
  //以下处理EventType中定义的当前事件的业务规则
    if ($("#change_parent").val()=="LOCKED") {
 		$("span.ig_parent_asset").hide()
@@ -493,7 +491,7 @@ function resetEditorFields(ln) {
 		$("span.ig_using_person_desc").hide();
    }else{
    		  //在头的Views中会加载Framework中的属性。决定资产的使用人及负责人字段是值列表还是文字
-		if (using_person_field_rule=="TEXT") { //判断使用人字段是列表还是文本框
+		if (typeof using_person_field_rule== "undefined" || using_person_field_rule=="TEXT") { //判断使用人字段是列表还是文本框
 			$("span.ig_using_person_list").hide();
 			$("span.ig_using_person_desc").show();
 		} else {
@@ -508,7 +506,7 @@ function resetEditorFields(ln) {
 		$("span.ig_owning_person_desc").hide();
    }else{
    		  //在头的Views中会加载Framework中的属性。决定资产的使用人及负责人字段是值列表还是文字
-   		if (owning_person_field_rule=="TEXT") {//判断负责人字段是列表还是文本框
+   		if (typeof owning_person_field_rule== "undefined" || owning_person_field_rule=="TEXT") {//判断负责人字段是列表还是文本框
 			$("span.ig_owning_person_list").hide();
 			$("span.ig_owning_person_desc").show();
 		} else {
@@ -646,11 +644,11 @@ function LineEditorClose(ln) {//关闭行编辑器（显示为正常行）
     $("#asset_trans_editor"+ln).hide();
     $("#asset_trans_line1_displayed"+ln).show();
     renderTransLine(ln);
-    resetLineNum_Bold();
+    resetLineNum();
   }
 }
 
-function resetLineNum_Bold() {//数行号
+function resetLineNum() {//数行号
   var j=0;
   for (var i=0;i<prodln;i++) {
     if ($("#line_deleted"+i).val()!=1) {//跳过已经删除的行（实际数据还没有删除，只是从界面隐藏）

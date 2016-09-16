@@ -14,7 +14,7 @@ class HAM_SR extends HAM_SR_sugar {
 		$SR_fields = $this->get_list_view_array();
 
 		if (!empty($this->sr_status))
-			$SR_fields['SR_STATUS'] = "<span class='color_tag color_doc_status_{$this->sr_status}'>".$app_list_strings['ham_sr_status_list'][$this->sr_status]."</span>";
+			$SR_fields['SR_STATUS_VAL'] = $this->sr_status;
 
 		return $SR_fields;
 	}

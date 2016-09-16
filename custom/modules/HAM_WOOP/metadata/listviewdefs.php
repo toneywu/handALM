@@ -30,6 +30,7 @@ array (
     'label' => 'LBL_WOOP_STATUS',
     'width' => '12%',
     'default' => true,
+    'customCode'=>'<span class="color_tag color_doc_status_{$WOOP_STATUS_VAL}">{$WOOP_STATUS}</span>',
   ),
   'DATE_SCHEDUALED_START' => 
   array (

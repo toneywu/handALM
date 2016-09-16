@@ -61,6 +61,7 @@ $dashletData['HAM_WOOPDashlet']['columns'] = array (
     'width' => '10%',
     'default' => true,
     'name' => 'woop_status',
+     'customCode'=>'<span class="color_tag color_doc_status_{$WOOP_STATUS_VAL}">{$WOOP_STATUS}</span>',
   ),
   'name' => 
   array (

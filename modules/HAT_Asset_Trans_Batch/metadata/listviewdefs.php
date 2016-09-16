@@ -16,6 +16,7 @@ array (
     'default' => true,
     'label' => 'LBL_ASSET_TRANS_STATUS',
     'width' => '5%',
+    'customCode'=>'<span class="color_tag color_doc_status_{$ASSET_TRANS_STATUS_VAL}">{$ASSET_TRANS_STATUS}</span>',
   ),
   'CURRENT_OWNING_ORG' => 
   array (

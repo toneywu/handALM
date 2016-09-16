@@ -288,7 +288,7 @@ class HAM_WO extends HAM_WO_sugar {
 		$WO_fields = $this->get_list_view_array();
 		//为工作单的状态着色
 		if (!empty ($this->wo_status))
-			$WO_fields['WO_STATUS'] = "<span class='color_tag color_doc_status_{$this->wo_status}'>" . $app_list_strings['ham_wo_status_list'][$this->wo_status] . "</span>";
+			$WO_fields['WO_STATUS_VAL'] = $this->wo_status;
 
 		return $WO_fields;
 	}

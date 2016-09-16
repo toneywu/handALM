@@ -1,8 +1,26 @@
 var prodln = 0;
 
 function setEventTypePopupReturn(popupReplyData){
-	set_return(popupReplyData);
-	setEventTypeFields();
+	if (prodln>0) {
+		//如果已经有行信息，则弹出确认框在确认后才发生变化。
+		//如果没有行，则直接变化
+		var title_txt="";
+		var html=SUGAR.language.get('HAT_ASSET_TRANS_BATCH', 'LBL_ENVENT_TYPE_CONFIRM');
+		YAHOO.SUGAR.MessageBox.show({msg: html,title: title_txt, 
+				type: 'confirm',
+				fn: function(confirm) {
+					if (confirm == 'yes') {
+						cleanAllTransLines()
+						set_return(popupReplyData);
+						setEventTypeFields();
+					}
+				}
+			});
+	} else {
+		//如果还没有行，则直接执行
+		set_return(popupReplyData);
+		setEventTypeFields();
+	}
 }
 
 function setEventTypeFields() {
@@ -47,12 +65,13 @@ function resetEventType (isFirstTime) {
 //在选择了Event Type之后的相关处理，本函数被setEventTypePopupReturn调用，为实质性处理。
 // 本函数在页面初始化时也会被首次调用，调用时isFirstTime=true。
 	//alert("resetEventType Called");
-/*	if (isFirstTime!=true) {
-		$("#target_organization_c").val("");//只要重新选择，一律清单空组织字段
-		$("#target_organization_c_id").val("");
+	if (isFirstTime!=true) {
+		$("#target_owning_org").val("");//只要重新选择，一律清单空组织字段
+		$("#target_owning_org_id").val("");
+		$("#target_using_org").val("");//只要重新选择，一律清单空组织字段
+		$("#target_using_org_id").val("");
 		cleanAllTransLines();
 	}
-*/
 
 	var change_org_value = $("#change_owning_org").val();//根据是否需要修改组织的EventType来标记Target Organization状态
 	if(change_org_value=='LOCKED'||change_org_value==''){//如果不需要更新组织，则失效目标组织字段
@@ -153,7 +172,6 @@ function getLovValueByText(focused_textfiled_id,list_Lov_id) { //根据LOV的Tex
 }
 
 $(document).ready(function(){
-
 
 	resetEventType(true);
 

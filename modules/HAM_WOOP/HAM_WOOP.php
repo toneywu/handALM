@@ -153,7 +153,8 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 		$WO_fields = $this->get_list_view_array();
 		//为工作单的状态着色
 		if (!empty ($woop_status))
-			$woop_fields['WOOP_STATUS'] = "<span class='color_tag color_doc_status_".$woop_status."'>" . $app_list_strings['ham_wo_status_list'][$woop_status]. "</span>";
+			$woop_fields['WOOP_STATUS_VAL'] = $this->woop_status;
+
 
 		return $woop_fields;
 	}
