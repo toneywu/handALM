@@ -159,9 +159,10 @@ function initTransHeaderStatus() {
 }
 
 function setEditViewReadonly () { //如果当前头状态为Submitted、Approved、Canceled、Closed需要将字段变为只读
-	$("#tabcontent0 input").attr("readonly",true);
-	$("#tabcontent0 button").attr("readonly",true);
-	$("#tabcontent0 input").attr("style","background-Color:#efefef");
+	$("#Default_HAT_Asset_Trans_Batch_Subpanel input").attr("readonly",true);
+	$("#Default_HAT_Asset_Trans_Batch_Subpanel input").attr("style","background-Color:#efefef");
+	$("#Default_HAT_Asset_Trans_Batch_Subpanel button,#Default_HAT_Asset_Trans_Batch_Subpanel .input-group-addon").css("cursor","not-allowed");
+	$("#Default_HAT_Asset_Trans_Batch_Subpanel button,#Default_HAT_Asset_Trans_Batch_Subpanel .input-group-addon").prop('onclick',null).off('click');
 }
 
 function getLovValueByText(focused_textfiled_id,list_Lov_id) { //根据LOV的Text，转为Value
