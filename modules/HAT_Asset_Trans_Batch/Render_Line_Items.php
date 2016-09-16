@@ -52,9 +52,9 @@ function display_lines($focus, $field, $value, $view){
 					  owning_person_c.`last_name` current_owning_person,
 					  owning_person_c.id current_owning_person_id,
 					  p_asset_c.id current_parent_asset_id,
-					  p_asset_c.name current_parent_asset, 
+					  p_asset_c.name current_parent_asset,
 					  p_asset_t.id target_parent_asset_id,
-					  p_asset_t.name target_parent_asset
+					  p_asset_t.name target_parent_asset 
 					FROM
 					  hat_asset_trans hat 
 					  LEFT JOIN hat_asset_locations location_c 
@@ -64,7 +64,7 @@ function display_lines($focus, $field, $value, $view){
 					    ) 
 					  LEFT JOIN hat_asset_locations location_t 
 					    ON (
-					      location_t.id = hat.hat_asset_locations_id 
+					      location_t.id = hat.target_location_id 
 					      AND location_t.`deleted` = 0
 					    ) 
 					  LEFT JOIN accounts using_org_c 
@@ -79,12 +79,12 @@ function display_lines($focus, $field, $value, $view){
 					    ) 
 					  LEFT JOIN accounts using_org_t 
 					    ON (
-					      using_org_t.id = hat.`using_org_id` 
+					      using_org_t.id = hat.`target_using_org_id` 
 					      AND using_org_t.`deleted` = 0
 					    ) 
 					  LEFT JOIN accounts owning_org_t 
 					    ON (
-					      owning_org_t.id = hat.`owning_org_id` 
+					      owning_org_t.id = hat.`target_owning_org_id` 
 					      AND owning_org_t.`deleted` = 0
 					    ) 
 					  LEFT JOIN contacts using_person_t 
@@ -106,26 +106,22 @@ function display_lines($focus, $field, $value, $view){
 					    ON (
 					      owning_person_c.id = hat.`current_owning_person_id` 
 					      AND owning_person_c.`deleted` = 0
-					    )
-					  LEFT JOIN hat_assets p_asset_c
+					    ) 
+					  LEFT JOIN hat_assets p_asset_c 
 					    ON (
 					      p_asset_c.id = hat.`current_parent_asset_id` 
 					      AND p_asset_c.`deleted` = 0
-					    )
-					  LEFT JOIN hat_assets p_asset_t
+					    ) 
+					  LEFT JOIN hat_assets p_asset_t 
 					    ON (
 					      p_asset_t.id = hat.target_parent_asset_id 
 					      AND p_asset_t.`deleted` = 0
 					    ),
-					  hat_asset_trans_batch_hat_asset_trans_c hat_b,
-					  hat_assets ha,
-					  hat_assets_hat_asset_trans_c hat_ha 
+					  hat_assets ha
 					WHERE hat.deleted = 0 
-					  AND hat_ha.hat_assets_hat_asset_transhat_asset_trans_idb = hat.id 
-					  AND hat_ha.hat_assets_hat_asset_transhat_assets_ida = ha.id 
-					  AND hat.id = hat_b.hat_asset_trans_batch_hat_asset_transhat_asset_trans_idb 
-							AND hat_b.hat_asset_trans_batch_hat_asset_transhat_asset_trans_batch_ida ='".$focus->id."'";
-							
+					  AND ha.`id`=hat.`asset_id`
+					  AND hat.batch_id = '".$focus->id."'";
+
             $result = $focus->db->query($sql);
 
         $html .= "<script>$(document).ready(function(){

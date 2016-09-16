@@ -565,8 +565,6 @@ $dictionary['HAM_WO'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
-
-			
 		),
 		'location' => array (
 			'required' => false,
@@ -616,8 +614,6 @@ $dictionary['HAM_WO'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
-
-			
 		),
 		'asset' => array (
 			'required' => false,

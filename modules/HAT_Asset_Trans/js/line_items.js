@@ -11,7 +11,7 @@ function openAssetPopup(ln){//本文件为行上选择资产的按钮
     "call_back_function" : "setAssetReturn",
     "form_name" : "EditView",
     "field_to_name_array" : {
-      "id" : "line_hat_assets_hat_asset_transhat_assets_ida" + ln,
+      "id" : "line_asset_id" + ln,
       "name" : "line_asset" + ln,
       "asset_desc" : "line_name" + ln,
       "asset_status" : "line_current_asset_status" + ln,//注意，这一条目写的是Current
@@ -190,8 +190,8 @@ function insertTransLineElements(tableid, current_view) { //创建界面要素
     "modules": ["HAT_Assets"],
     "group": "or",
     "field_list": ["name", "id", "asset_desc", "asset_status", "hat_assets_accountsaccounts_ida"],
-    "populate_list": ["line_asset[" + prodln + "]", "line_hat_assets_hat_asset_transhat_assets_ida[" + prodln + "]", "line_name[" + prodln + "]", "line_target_asset_status[" + prodln + "]", "line_target_organization[" + prodln + "]"],
-    "required_list": ["line_hat_assets_hat_asset_transhat_assets_ida[" + prodln + "]"],
+    "populate_list": ["line_asset[" + prodln + "]", "line_asset_id[" + prodln + "]", "line_name[" + prodln + "]", "line_target_asset_status[" + prodln + "]", "line_target_organization[" + prodln + "]"],
+    "required_list": ["line_asset_id[" + prodln + "]"],
     "conditions": [{
       "name": "name",
       "op": "like_custom",
@@ -288,7 +288,7 @@ function insertTransLineElements(tableid, current_view) { //创建界面要素
       "<span class='input_group'>"+
       "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE')+"<span class='required'>*</span></label>"+
       "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_asset[" + prodln + "]' id='line_asset" + prodln + "' value='' title='' onblur='resetAsset("+prodln+")'>"+
-      "<input type='hidden' name='line_hat_assets_hat_asset_transhat_assets_ida[" + prodln + "]' id='line_hat_assets_hat_asset_transhat_assets_ida" + prodln + "' value=''>"+
+      "<input type='hidden' name='line_asset_id[" + prodln + "]' id='line_asset_id" + prodln + "' value=''>"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openAssetPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
       "<span class='input_group'>"+
@@ -452,7 +452,7 @@ function resetEditorFields(ln) {
 function resetAsset(ln){ //在用户重新选择资产之后，会连带的更新资产相关的字段信息。
 
   if ($("#line_asset"+ln).val()=== '') { //如果资产字段为空，则将所有关联的字段全部清空
-    $("#line_hat_assets_hat_asset_transhat_assets_ida"+ln).val("");
+    $("#line_asset_id"+ln).val("");
     $("#line_current_owning_org"+ln).val("");
     $("#line_current_using_org"+ln).val("");
     $("#line_current_owning_org_id"+ln).val("");

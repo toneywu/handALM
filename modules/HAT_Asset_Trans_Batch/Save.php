@@ -18,15 +18,15 @@ else {
     $check_notify = FALSE;
 }
 
-
 require_once('include/formbase.php');
-$sugarbean = populateFromPost('', $sugarbean);//调用populateFromPost写入POST的数据
 
-$GLOBALS['log']->infor("Header Saved");
+$GLOBALS['log']->infor("OK.Header is Saving...");
+
+$sugarbean = populateFromPost('', $sugarbean);//调用populateFromPost写入POST的数据
 $sugarbean->save($check_notify);
 $return_id = $sugarbean->id;
 
-$GLOBALS['log']->debug("Saved HAT_Asset_Trans_Batch record with id of ".$return_id);
+$GLOBALS['log']->infor("OK.Saved HAT_Asset_Trans_Batch record with id of ".$return_id);
 //****************** END: Save the header normally******************//
 
 
@@ -38,36 +38,28 @@ else{
 }
 
 $transLine = array();
-/*
-foreach($_POST as $key => $value){
-    print_R($key."->".$value);
-    echo "<br/>";
-}
-*/
+
 save_lines($_POST,$sugarbean, 'line_');
 
 //$sugarbean->save();//再调用一次，为了触发AfterSave,确认是否需要将头彻底关闭
-
-
 handleRedirect($return_id, 'HAT_Asset_Trans_Batch');
-
+die;
 
 
 //****************** END: Jump Back *************************************************************//
 
 function save_lines($post_data, $parent, $key = ''){
-    $line_count = isset($post_data[$key.'hat_assets_hat_asset_transhat_assets_ida']) ? count($post_data[$key.'hat_assets_hat_asset_transhat_assets_ida']) : 0; //判断记录的行数
+    $line_count = isset($post_data[$key.'asset_id']) ? count($post_data[$key.'asset_id']) : 0; //判断记录的行数
 
     echo '<br/>.line_count = '.$line_count;
     echo '<br/>.$parent.id = '.$parent->id;
 
     for ($i = 0; $i < $line_count; ++$i) {
-        //echo "<br/>line ".$i." processed;";
-        echo "<br/>hat_assets_hat_asset_transhat_assets_ida=".$post_data[$key.'hat_assets_hat_asset_transhat_assets_ida'][$i];
-
+        echo "<br/>line ".$i." processed;";
+        echo "<br/>asset_id=".$post_data[$key.'asset_id'][$i];
         //print_r($post_data);
 
-        if ($post_data[$key.'id'][$i]!='' && $post_data[$key.'target_owning_org_id'][$i]!='' &&$post_data[$key.'target_location_id'][$i]!='') {
+        if ($post_data[$key.'asset_id'][$i]!='' && $post_data[$key.'target_owning_org_id'][$i]!='' &&$post_data[$key.'target_location_id'][$i]!='') {
             //只保存Asset、Account、Location不为空的记录，否则直接到下一循环
             if($post_data[$key.'deleted'][$i] == 1){//删除行
                 echo "<br/>----------->line deleted";
@@ -84,23 +76,18 @@ function save_lines($post_data, $parent, $key = ''){
                     $trans_line = new HAT_Asset_Trans();
                     $trans_line -> retrieve($post_data[$key.'id'][$i]);
                 }
-
+                //如果是新增或修改模式，继续以下代码
                 foreach($trans_line->field_defs as $field_def) { //循环对所有要素
                     $trans_line->$field_def['name'] = $post_data[$key.$field_def['name']][$i];
                     echo "<br/>***".$field_def['name'].'='. $post_data[$key.$field_def['name']][$i];
                 }
-                $trans_line->hat_asset_trans_batch_hat_asset_transhat_asset_trans_batch_ida = $parent->id;//父ID
+                $trans_line->batch_id = $parent->id;//父ID
                 $trans_line->trans_status = $parent->asset_trans_status;//父状态 LogicHook BeforeSave可能会改写
-
+                $trans_line->assigned_user_id = $parent->assigned_user_id;
             }
-
-            //$trans_line->assigned_user_id = $parent->assigned_user_id;
-
-            //echo("$parent->id=".$parent->id;);
-            //echo("$parent->assigned_user_id".$parent->assigned_user_id;);
-
+            //echo("\ntransLine Saved");
             $trans_line->save();
-            $GLOBALS['log']->infor("transLine Saved");
+            $GLOBALS['log']->infor("OK.transLines are Saved");
         } else {
             //empty line jumped
         }

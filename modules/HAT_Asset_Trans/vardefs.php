@@ -43,6 +43,27 @@ $dictionary['HAT_Asset_Trans'] = array(
 	'inline_edit'=>true,
 	'duplicate_merge'=>true,
 	'fields'=>array (
+		'batch_id' => 
+		array (
+			'required' => false,
+			'name' => 'batch_id',
+			'vname' => 'LBL_BATCH_ID',
+			'type' => 'id',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => 0,
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => false,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => 36,
+			'size' => '20',
+			),
 		'action_desc' => 
 		array (
 			'required' => false,
@@ -948,10 +969,10 @@ $dictionary['HAT_Asset_Trans'] = array(
 			'studio' => 'visible',
 			'dependency' => false,
 			),
-		'owning_org_id' => 
+		'target_owning_org_id' => 
 		array (
 			'required' => false,
-			'name' => 'owning_org_id',
+			'name' => 'target_owning_org_id',
 			'vname' => 'LBL_TARGET_RESPONSIBLE_CENTER_ACCOUNT_ID',
 			'type' => 'id',
 			'massupdate' => 0,
@@ -997,10 +1018,10 @@ $dictionary['HAT_Asset_Trans'] = array(
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
 			),
-		'using_org_id' => 
+		'target_using_org_id' => 
 		array (
 			'required' => false,
-			'name' => 'using_org_id',
+			'name' => 'target_using_org_id',
 			'vname' => 'LBL_USING_ORG_ID',
 			'type' => 'id',
 			'massupdate' => 0,
