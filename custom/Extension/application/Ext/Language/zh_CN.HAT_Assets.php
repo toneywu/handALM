@@ -56,7 +56,7 @@ $app_list_strings['hat_asset_status_list']=array (
   'Discard' => '已处置/迁出',
 );
 
-$GLOBALS['app_list_strings']['hat_asset_source_type_list']=array (
+$app_list_strings['hat_asset_source_type_list']=array (
   'PURCHASE' => '购置',
   'DONATE' => '捐赠获得',
   'BUILD' => '建造/开发',
@@ -67,7 +67,7 @@ $GLOBALS['app_list_strings']['hat_asset_source_type_list']=array (
   'BORROW' => '临时借入',
 );
 
-$GLOBALS['app_list_strings']['asset_criticality_list']=array (
+$app_list_strings['asset_criticality_list']=array (
   '' => '',
   'A' => 'A',
   'B' => 'B',

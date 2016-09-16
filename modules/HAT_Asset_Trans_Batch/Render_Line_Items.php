@@ -4,11 +4,13 @@ function display_lines($focus, $field, $value, $view){
 
     global $sugar_config, $locale, $app_list_strings, $mod_strings;
 
+    //加载资产状态对应的LOV值列表
     echo '<script>var hat_asset_status_list = [';
     foreach (translate('hat_asset_status_list') as $key => $value) {
     	echo "{name:'".$key."',value:'".$value."'},";
     }
     echo ']</script>';
+
 
     //以下开始处理行显示相关的内容
     $html = '';
@@ -124,8 +126,7 @@ function display_lines($focus, $field, $value, $view){
 
             $result = $focus->db->query($sql);
 
-        $html .= "<script>$(document).ready(function(){
-";
+        $html .= "<script>$(document).ready(function(){";
 		while ($row = $focus->db->fetchByAssoc($result)) {
 			$line_data = json_encode($row);
 			$html .= "insertLineData(" . $line_data .",'".$view."');";

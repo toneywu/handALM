@@ -41,7 +41,7 @@
 $app_list_strings['moduleList']['HAT_EventType']='Event Types';
 $app_list_strings['moduleListSingular']['HAT_EventType']='Event Type';
 
-$GLOBALS['app_list_strings']['asset_trans_status']=array (
+$app_list_strings['asset_trans_status']=array (
   'DRAFT' => 'Draft',
   'SUBMITTED' => 'Submit',
   'APPROVED' => 'Approved',

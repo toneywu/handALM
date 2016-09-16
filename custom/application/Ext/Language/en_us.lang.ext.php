@@ -1145,7 +1145,7 @@ $app_list_strings['hat_asset_status_list']=array (
   'Discard' => 'Decom. & Removed',
 );
 
-$GLOBALS['app_list_strings']['hat_asset_source_type_list']=array (  
+$app_list_strings['hat_asset_source_type_list']=array (  
     'PURCHASE' => 'Purchase Contract/Order',
     'DONATE' => 'Donated',
     'BUILD' => 'Built',
@@ -1157,7 +1157,7 @@ $GLOBALS['app_list_strings']['hat_asset_source_type_list']=array (
 );
 
 
-$GLOBALS['app_list_strings']['asset_criticality_list']=array (
+$app_list_strings['asset_criticality_list']=array (
   '' => '',
   'A' => 'A',
   'B' => 'B',
@@ -1313,7 +1313,7 @@ $app_list_strings['hat_counting_objects_type_list']['INV'] = 'Inventory Items';
 $app_list_strings['moduleList']['HAT_EventType']='Event Types';
 $app_list_strings['moduleListSingular']['HAT_EventType']='Event Type';
 
-$GLOBALS['app_list_strings']['asset_trans_status']=array (
+$app_list_strings['asset_trans_status']=array (
   'DRAFT' => 'Draft',
   'SUBMITTED' => 'Submit',
   'APPROVED' => 'Approved',

@@ -485,6 +485,10 @@ array (
             'name' => 'parent_asset',
             'studio' => 'visible',
             'label' => 'LBL_PARENT_ASSET',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&framework_advanced="+encodeURIComponent($("#haa_framework").val())+"',
+            ),
           ),
         ),
         1 => 
@@ -535,6 +539,11 @@ array (
             'name' => 'owning_org',
             'studio' => 'visible',
             'label' => 'LBL_OWING_ORG',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&frame_c_advanced="+encodeURIComponent($("#haa_framework").val())+"',
+              'call_back_function' => 'setUsingOrgPopupReturn',
+            ),
           ),
           1 => 
           array (
@@ -549,6 +558,10 @@ array (
             'name' => 'owning_person',
             'studio' => 'visible',
             'label' => 'LBL_OWNING_PERSON',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&account_name_advanced="+encodeURIComponent($("#owning_org").val())+"',
+            ),
           ),
         ),
         6 => 
@@ -558,6 +571,11 @@ array (
             'name' => 'using_org',
             'studio' => 'visible',
             'label' => 'LBL_USING_ORG',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&frame_c_advanced="+encodeURIComponent($("#haa_framework").val())+"',
+              'call_back_function' => 'setUsingOrgPopupReturn',
+            ),
           ),
           1 => 
           array (
@@ -572,6 +590,10 @@ array (
             'name' => 'using_person',
             'studio' => 'visible',
             'label' => 'LBL_USING_PERSON',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&account_name_advanced="+encodeURIComponent($("#using_org").val())+"',
+            ),
           ),
         ),
       ),

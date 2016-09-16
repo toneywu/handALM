@@ -41,7 +41,7 @@
 $app_list_strings['moduleList']['HAT_EventType']='事件类型';
 $app_list_strings['moduleListSingular']['HAT_EventType']='事件类型';
 
-$GLOBALS['app_list_strings']['asset_trans_status']=array (
+$app_list_strings['asset_trans_status']=array (
   'DRAFT' => '未提交',
   'SUBMITTED' => '提交',
   'APPROVED' => '已批准',
