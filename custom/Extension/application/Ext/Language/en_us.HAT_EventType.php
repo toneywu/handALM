@@ -41,12 +41,15 @@
 $app_list_strings['moduleList']['HAT_EventType']='Event Types';
 $app_list_strings['moduleListSingular']['HAT_EventType']='Event Type';
 
-$app_list_strings['asset_status_list']['Ordered'] = 'Ordered';
-$app_list_strings['asset_status_list']['InService'] = 'In-Service';
-$app_list_strings['asset_status_list']['Idle'] = 'Idle';
-$app_list_strings['asset_status_list']['LentOut'] = 'Lent-Out';
-$app_list_strings['asset_status_list']['OutOfService'] = 'Out-of-Service';
-$app_list_strings['asset_status_list']['Received'] = 'Received';
+$GLOBALS['app_list_strings']['asset_trans_status']=array (
+  'DRAFT' => 'Draft',
+  'SUBMITTED' => 'Submit',
+  'APPROVED' => 'Approved',
+  'REJECTED' => 'Rejected',
+  'CANCELED' => 'Canceled',
+  'CLOSED' => 'Closed',
+  'TRANSACTED' => 'Transacted',
+);
 
 $app_list_strings['cux_event_type_option_list']['LOCKED'] = 'Locked/Not Available';
 $app_list_strings['cux_event_type_option_list']['REQUIRED'] = 'Required';

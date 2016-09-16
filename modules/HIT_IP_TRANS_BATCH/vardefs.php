@@ -117,15 +117,15 @@ $dictionary['HIT_IP_TRANS_BATCH'] = array (
 			'default' => 'DRAFT',
 			
 		),
-		'lov_asset_status_list' => array (
+		'hat_asset_status' => array (
 			'source' => 'non-db', //从EventType映射
-	'name' => 'lov_asset_status_list',
+	'name' => 'hat_asset_status',
 			'vname' => 'LBL_TARGET_ASSET_STATUS',
 			'type' => 'enum',
 			'default' => '',
 			'reportable' => true,
 			'studio' => 'visible',
-			'options' => 'asset_status_list',
+			'options' => 'hat_asset_status_list',
 			
 		),
 

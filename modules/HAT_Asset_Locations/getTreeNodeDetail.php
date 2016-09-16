@@ -129,7 +129,7 @@ $bean_assets = $db->query($sel_asset); //无如是Location还是asset来源，�
        $txt_jason .='"asset_group":"'.$asset['asset_group'].'",';
        $txt_jason .='"category_id":"'.$asset['category_id'].'",';
        $txt_jason .='"category":"'.$asset['category'].'",';
-       $txt_jason .='"asset_status":"<span class=\"color_tag color_asset_status_'.$asset['asset_status'].'\">'.$app_list_strings['asset_status_list'][$asset['asset_status']].'</span>",';
+       $txt_jason .='"asset_status":"<span class=\"color_tag color_asset_status_'.$asset['asset_status'].'\">'.$app_list_strings['hat_asset_status_list'][$asset['asset_status']].'</span>",';
        $txt_jason .='"asset_name":"'.$asset['asset_name'].'",';
        $txt_jason .='"asset_number":"'.$asset['asset_number'].'",';
        $txt_jason .='"serial_number":"'.$asset['serial_number'].'",';

@@ -34,8 +34,17 @@ function openAssetPopup(ln){//本文件为行上选择资产的按钮
 }
 
 function setAssetReturn(popupReplyData){
+  //popupReplyData中lineno会做为行号一并返回
   set_return(popupReplyData);
-  console.log(popupReplyData);
+
+  //-Start:将Status的值返回到当前资产状态字段中（默认返回的是文本）
+  var current_status_text = $("#line_current_asset_status"+lineno).val();//current从Popup中返回的是Text，要以Value形式保存，否则会有多语言问题
+  var current_status_value = hat_asset_status_list.filter(function( obj ) {
+                                return obj.value === current_status_text//current_status_text;
+                              });
+  $("#line_current_asset_status"+lineno).val(current_status_value[0].name);
+  //-END:将Status的值返回到当前资产状态字段中
+
   resetAsset(lineno);
 }
 
@@ -48,7 +57,7 @@ function openParentAssetPopup(ln){//本文件为行上选择资产的按钮
     "field_to_name_array" : {
       "name" : "line_target_parent_asset" + ln,
       "id" : "line_target_parent_asset_id" + ln,
-    },    
+    },
   };
   open_popup('HAT_Assets', 600, 850, '', true, true, popupRequestData);
 }
@@ -129,8 +138,11 @@ function openLocationPopup(ln){
   open_popup('HAT_Asset_Locations', 1000, 850, '', true, true, popupRequestData);
 }
 
+/******************************
+/* 加载表头
+/*******************************/
 function insertTransLineHeader(tableid){
-  $("#line_items_label").hide();//隐藏SugarCRM字段
+  $("#line_items_label").hide();//隐藏标签
   var head_html="<tr>";
   head_html +="<th width='3%'>#</th>";
   head_html +="<th width='13%'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE')+"</th>";
@@ -143,6 +155,9 @@ function insertTransLineHeader(tableid){
 }
 
 
+/******************************
+/* 加载表行数据，将具体的数据写入到insertTransLineElements创建出的界面要素中
+/*******************************/
 function insertLineData(asset_trans_line, current_view){ //将数据写入到对应的行字段中
   //console.log(asset_trans_line);
   var ln = 0;
@@ -150,7 +165,7 @@ function insertLineData(asset_trans_line, current_view){ //将数据写入到对
     ln = insertTransLineElements("lineItems", current_view);
 
     for(var propertyName in asset_trans_line) {
-      //遍历所有的属性
+      //这里直接遍历所有的属性（因此需要建立与Bean属性同名的各个字段）
       //console.log(propertyName+"="+asset_trans_line[propertyName]);
       //console.log("#line_"+propertyName.concat(String(ln)) +"=="+ asset_trans_line[propertyName] );
       $("#line_"+propertyName.concat(String(ln))).val(asset_trans_line[propertyName]);
@@ -160,6 +175,9 @@ function insertLineData(asset_trans_line, current_view){ //将数据写入到对
   }
 }
 
+/******************************
+/* 创建出界面的字段要素（不包括填写值，填写值通过insertLineData完成
+/*******************************/
 function insertTransLineElements(tableid, current_view) { //创建界面要素
 //包括以下内容：1）显示头，2）定义SQS对象，3）定义界面显示的可见字段，4）界面行编辑器界面
   if (document.getElementById(tableid + '_head') !== null) {
@@ -354,8 +372,7 @@ function insertTransLineElements(tableid, current_view) { //创建界面要素
   addToValidate('EditView', 'line_name'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Asset_Trans_Batch', 'LBL_NAME'));
   addToValidate('EditView', 'line_target_organization'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Asset_Trans_Batch', 'LBL_TARGET_RESPONSIBLE_CENTER'));
   addToValidate('EditView', 'line_target_location'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Asset_Trans_Batch', 'LBL_TARGET_LOCATION'));
-
-  renderTransLine(prodln);
+ //renderTransLine(prodln);
 
   prodln++;
 
@@ -364,6 +381,7 @@ function insertTransLineElements(tableid, current_view) { //创建界面要素
 
 function generateLineDesc(ln){
 	//用于生成说明文字
+  //例如XXX字段由XX变更为XXX
 	var LineDesc="";
   LineDesc += LineDescElement("line_","target_asset_status","current_asset_status","LBL_ASSET_STATUS",ln,"target_asset_status","current_asset_status");
   LineDesc += LineDescElement("line_","target_parent_asset_id","current_parent_asset_id","LBL_PARENT_ASSET",ln,"target_parent_asset","current_parent_asset");
@@ -379,9 +397,7 @@ function generateLineDesc(ln){
 
 function LineDescElement(prefix_name,target_obj_name, current_obj_name, obj_label, ln, target_objval_name, current_objval_name) {
   var result="";
-
-  //console.log(prefix_name+current_obj_name+ln+"="+$("#"+prefix_name+current_obj_name+ln).val()+" vs "+prefix_name+target_obj_name+ln+"="+$("#"+prefix_name+target_obj_name+ln).val());
-
+  //对字段进行比较，以生成字段变更对应的文字描述。
   if (typeof $("#"+prefix_name+current_obj_name+ln).val()=="undefined") {
     $("#"+prefix_name+current_obj_name+ln).val("");
   }
@@ -406,21 +422,34 @@ function LineDescElement(prefix_name,target_obj_name, current_obj_name, obj_labe
       result += "<strong>"+$("#"+prefix_name+target_objval_name+ln).val()+"</strong>. ";
     }
   }
-  //console.log("HERE:"+ln+result)
   return result;
 }
 
 function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
   generateLineDesc(ln);//去生成Description
+  resetEditorFields(ln);//初始化编辑状态下的一些字段
   $("#displayed_line_asset"+ln).html($("#line_asset"+ln).val());
   $("#displayed_line_name"+ln).html($("#line_name"+ln).val());
   $("#displayed_line_description"+ln).html($("#line_description"+ln).val());
 
 }
 
+function resetEditorFields(ln) {
+  //生成编辑行中的字段样式，如锁定一些字段，以及加颜色的字段
+
+  if($("#change_target_status").val()==1) { //如果头EventType需要变更
+    $("#line_target_asset_status"+ln).val($("#target_asset_status").val());//从头上复制当前的资产状态
+  } else {
+    $("#line_target_asset_status"+ln).val($("#line_current_asset_status"+ln).val());//目标状态=当前资产状态（保持不变）,以Value保存
+  }
+  var target_status_value = $("#line_target_asset_status"+ln).val();
+  var target_status_text = hat_asset_status_list.filter(function(obj) {
+                                return obj.name === target_status_value;
+                              })[0].value;
+  $("#line_target_asset_status_displayed"+ln).html("<span class='color_tag color_asset_status_"+target_status_value+"'>"+target_status_text+"</span>");
+}
+
 function resetAsset(ln){ //在用户重新选择资产之后，会连带的更新资产相关的字段信息。
-  //alert(document.getElementById("line_current_responsible_center"+ln).value);
-  //alert($("#line_current_responsible_center"+ln).val());
 
   if ($("#line_asset"+ln).val()=== '') { //如果资产字段为空，则将所有关联的字段全部清空
     $("#line_hat_assets_hat_asset_transhat_assets_ida"+ln).val("");
@@ -457,24 +486,7 @@ function resetAsset(ln){ //在用户重新选择资产之后，会连带的更�
     $("#line_target_parent_asset"+ln).val($("#line_current_parent_asset"+ln).val());
     $("#line_target_parent_asset_id"+ln).val($("#line_current_parent_asset_id"+ln).val());
 
-
-  var tmp = document.createElement("DIV");
-  tmp.innerHTML = $("#line_current_asset_status"+ln).val();
-  var current_status_text = tmp.textContent || tmp.innerText || "";//current从Popup中返回的是Text，要以Value形式保存，否则会有多语言问题
-
-  var current_status_value = $("#lov_asset_status_list option").filter(function() {return $(this).html() == current_status_text;}).val()
-  $("#line_current_asset_status"+ln).val(current_status_value);
-
-
-  if($("#change_target_status").val()==1) { //如果头EventType需要变更
-    $("#line_target_asset_status"+ln).val( $("#target_asset_status").val());//从头上复制当前的资产状态
-  } else {
-    $("#line_target_asset_status"+ln).val(current_status_value);//目标状态=当前资产状态（保持不变）,以Value保存
-  }
-  var target_status_value = $("#line_target_asset_status"+ln).val();
-  var target_status_text = $("#lov_asset_status_list option[value='"+target_status_value+"']").text();
-
-  $("#line_target_asset_status_displayed"+ln).html("<span class='color_tag color_asset_status_"+target_status_value+"'>"+target_status_text+"</span>");
+  resetEditorFields(ln);
 /*
   if($("#change_organization").val()=='LOCKED') {//如果不可以更新目标组织
     $("#line_target_organization"+ln).attr("readonly",true);

@@ -41,31 +41,40 @@
 $app_list_strings['moduleList']['HAT_Assets'] = '资产';
 $app_list_strings['moduleList']['HAT_Asset_Locations'] = '资产位置';
 $app_list_strings['moduleList']['HAT_Asset_Trans'] = '资产事务处理行';
-$app_list_strings['moduleList']['HAT_Asset_Trans_Batch'] = '资产事务处理';
-$app_list_strings['asset_status_list']['Ordered'] = '购置未交付';
-$app_list_strings['asset_status_list']['InService'] = '正常使用中';
-$app_list_strings['asset_status_list']['Idle'] = '闲置';
-$app_list_strings['asset_status_list']['LentOut'] = '借出';
-$app_list_strings['asset_status_list']['OutOfService'] = '停止使用';
-$app_list_strings['asset_status_list']['Received'] = '交付未启用';
-$app_list_strings['asset_criticality_list']['A'] = 'A';
-$app_list_strings['asset_criticality_list']['B'] = 'B';
-$app_list_strings['asset_criticality_list']['C'] = 'C';
-$app_list_strings['asset_criticality_list']['D'] = 'D';
-$app_list_strings['asset_criticality_list']['E'] = 'E';
-$app_list_strings['asset_source_type_list']['PURCHASE'] = '采购合同/订单';
-$app_list_strings['asset_source_type_list']['DONATE'] = '捐赠获得';
-$app_list_strings['asset_source_type_list']['BUILD'] = '建设';
-$app_list_strings['asset_source_type_list']['COUNTING'] = '盘盈';
-$app_list_strings['asset_source_type_list']['INTERNAL'] = '内部调配';
-$app_list_strings['asset_source_type_list']['OTHER'] = '其它';
-$app_list_strings['asset_trans_status']['DRAFT'] = 'Draft';
-$app_list_strings['asset_trans_status']['SUBMITTED'] = 'Await Approval';
-$app_list_strings['asset_trans_status']['APPROVED'] = 'Approved';
-$app_list_strings['asset_trans_status']['REJECTED'] = 'Rejected';
-$app_list_strings['asset_trans_status']['CANCELED'] = 'Canceled';
-$app_list_strings['asset_trans_status']['CLOSED'] = 'Closed';
-$app_list_strings['asset_trans_status']['TRANSACTED'] = 'Transacted';
+$app_list_strings['moduleList']['HAT_Asset_Trans_Batch'] = '资产事务处理单';
+
+
+$app_list_strings['hat_asset_status_list']=array (
+  ''=>'',
+  'Ordered' => '购置未交付',
+  'Received' => '已收货未启用',
+  'InService' => '在用中',
+  'Idle' => '空闲/可用',
+  'Stocked' => '空闲/库存',
+  'TempOut' => '外部',
+  'OutOfService' => '已退役',
+  'Discard' => '已处置/迁出',
+);
+
+$GLOBALS['app_list_strings']['hat_asset_source_type_list']=array (
+  'PURCHASE' => '购置',
+  'DONATE' => '捐赠获得',
+  'BUILD' => '建造/开发',
+  'COUNTING' => '盘盈',
+  'INTERNAL' => '内部调配',
+  'OTHER' => '其它',
+  'LEASE' => '经营租赁',
+  'BORROW' => '临时借入',
+);
+
+$GLOBALS['app_list_strings']['asset_criticality_list']=array (
+  '' => '',
+  'A' => 'A',
+  'B' => 'B',
+  'C' => 'C',
+  'OTHER' => 'Other',
+);
+
 
 $app_list_strings['hat_map_marker_type_list']=array (
     'POINT' => '坐标点',

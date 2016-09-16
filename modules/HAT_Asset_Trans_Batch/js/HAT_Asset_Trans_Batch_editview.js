@@ -154,8 +154,6 @@ function getLovValueByText(focused_textfiled_id,list_Lov_id) { //根据LOV的Tex
 
 $(document).ready(function(){
 
-	//$("#lov_asset_status_list").parent("td").hide();
-	$("#detailpanel_2").hide();
 
 	resetEventType(true);
 

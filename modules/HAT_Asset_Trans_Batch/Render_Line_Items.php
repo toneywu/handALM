@@ -4,6 +4,13 @@ function display_lines($focus, $field, $value, $view){
 
     global $sugar_config, $locale, $app_list_strings, $mod_strings;
 
+    echo '<script>var hat_asset_status_list = [';
+    foreach (translate('hat_asset_status_list') as $key => $value) {
+    	echo "{name:'".$key."',value:'".$value."'},";
+    }
+    echo ']</script>';
+
+    //以下开始处理行显示相关的内容
     $html = '';
     if($view == 'EditView' || $view == 'DetailView'){
         $html .= '<script src="modules/HAT_Asset_Trans/js/line_items.js"></script>';
@@ -118,15 +125,18 @@ function display_lines($focus, $field, $value, $view){
 					  AND hat_ha.hat_assets_hat_asset_transhat_assets_ida = ha.id 
 					  AND hat.id = hat_b.hat_asset_trans_batch_hat_asset_transhat_asset_trans_idb 
 							AND hat_b.hat_asset_trans_batch_hat_asset_transhat_asset_trans_batch_ida ='".$focus->id."'";
-
+							
             $result = $focus->db->query($sql);
 
+        $html .= "<script>$(document).ready(function(){
+";
 		while ($row = $focus->db->fetchByAssoc($result)) {
 			$line_data = json_encode($row);
-			$html .= "<script>insertLineData(" . $line_data .",'".$view."');</script>";
+			$html .= "insertLineData(" . $line_data .",'".$view."');";
 			//REF:custom/modules/HAT_Asset_Trans/js/line_items.js
             //通过insertLineData向已经完成初始化的页面要素中，写入值
 		}
+        $html .= "})</script>";
       }
 
       if($view == 'EditView') {

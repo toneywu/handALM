@@ -52,7 +52,7 @@ class HIT_Rack_Allocations extends HIT_Rack_Allocations_sugar {
 		$asset_fields = $this->get_list_view_array();
 
 		if (!empty($this->asset_status))
-			$asset_fields['ASSET_STATUS'] = "<span class='color_tag color_asset_status_{$this->asset_status}'>".$app_list_strings['asset_status_list'][$this->asset_status]."</span>";
+			$asset_fields['ASSET_STATUS'] = "<span class='color_tag color_asset_status_{$this->asset_status}'>".$app_list_strings['hat_asset_status_list'][$this->asset_status]."</span>";
 
 
 		global $db;

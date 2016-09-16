@@ -62,11 +62,6 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_EDITVIEW_PANEL2' => 
-        array (
-          'newTab' => false,
-          'panelDefault' => 'expanded',
-        ),
         'LBL_EDITVIEW_PANEL1' => 
         array (
           'newTab' => false,
@@ -170,13 +165,7 @@ array (
           0 => 'wo_lines',
         ),
       ),
-      'lbl_editview_panel2' => 
-      array (
-        0 => 
-        array (
-          0 => 'lov_asset_status_list',
-        ),
-      ),
+
       'lbl_editview_panel1' => 
       array (
         0 => 

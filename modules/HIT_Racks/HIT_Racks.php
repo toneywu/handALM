@@ -75,7 +75,7 @@ class HIT_Racks extends HIT_Racks_sugar {
         //读取资产相关的字段
         if(!empty($this->hat_assets_id)) {
             $bean_asset = BeanFactory::getBean('HAT_Assets',$this->hat_assets_id);
-            $HIT_Racks_fields['STATUS'] = "<span class='color_tag color_asset_status_".$bean_asset->asset_status."'>".$app_list_strings['asset_status_list'][$bean_asset->asset_status]."</span>";
+            $HIT_Racks_fields['STATUS'] = "<span class='color_tag color_asset_status_".$bean_asset->asset_status."'>".$app_list_strings['hat_asset_status_list'][$bean_asset->asset_status]."</span>";
 /*            $HIT_Racks_fields['HAT_ASSETS_ACCOUNTS_ID'] = $bean_asset->hat_assets_accountsaccounts_ida;
             $HIT_Racks_fields['HAT_ASSETS_ACCOUNTS_NAME']= $bean_asset->hat_assets_accounts_name;
 */          $HIT_Racks_fields['HAT_ASSET_LOCATIONS_ID'] = $bean_asset->hat_asset_locations_hat_assetshat_asset_locations_ida;

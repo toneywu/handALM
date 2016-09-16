@@ -23,6 +23,7 @@ array (
     'studio' => 'visible',
     'label' => 'LBL_ASSET_STATUS',
     'width' => '15%',
+    'customCode'=>'<span class="color_tag color_asset_status_{$ASSET_STATUS_VAL}">{$ASSET_STATUS}</span>'
   ),
   'ASSET_CATEGORY' => 
   array (

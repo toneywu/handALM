@@ -172,7 +172,7 @@ $bean_assets = $db->query($sel_asset); //无如是Location还是asset来源，�
        $txt_jason .=get_jason_field('asset_desc','HAT_Assets',$asset['asset_desc']);
        $txt_jason .=get_jason_field('asset_category','HAT_Assets',$asset['asset_category']);
        $txt_jason .=get_jason_field('asset_group','HAT_Assets',$asset['asset_group']);
-       $txt_jason .=get_jason_field('asset_status','HAT_Assets','<span class=\"color_tag color_asset_status_'.$asset['asset_status'].'\">'.$app_list_strings['asset_status_list'][$asset['asset_status']].'</span>');
+       $txt_jason .=get_jason_field('asset_status','HAT_Assets','<span class=\"color_tag color_asset_status_'.$asset['asset_status'].'\">'.$app_list_strings['hat_asset_status_list'][$asset['asset_status']].'</span>');
        $txt_jason .=get_jason_field('asset_number','HAT_Assets',$asset['asset_number']);
        $txt_jason .=get_jason_field('serial_number','HAT_Assets',$asset['serial_number']);
        $txt_jason .=get_jason_field('vin','HAT_Assets',$asset['vin']);
@@ -206,7 +206,7 @@ $bean_assets = $db->query($sel_asset); //无如是Location还是asset来源，�
        $txt_jason .='"asset_group":"'.$asset['asset_group'].'",';
        $txt_jason .='"category_id":"'.$asset['category_id'].'",';
        $txt_jason .='"category":"'.$asset['category'].'",';
-       $txt_jason .='"asset_status":"<span class=\"color_tag color_asset_status_'.$asset['asset_status'].'\">'.$app_list_strings['asset_status_list'][$asset['asset_status']].'</span>",';
+       $txt_jason .='"asset_status":"<span class=\"color_tag color_asset_status_'.$asset['asset_status'].'\">'.$app_list_strings['hat_asset_status_list'][$asset['asset_status']].'</span>",';
        $txt_jason .='"asset_name":"'.$asset['asset_name'].'",';
        $txt_jason .='"asset_number":"'.$asset['asset_number'].'",';
        $txt_jason .='"serial_number":"'.$asset['serial_number'].'",';

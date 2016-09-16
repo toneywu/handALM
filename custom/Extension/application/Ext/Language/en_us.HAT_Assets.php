@@ -38,29 +38,56 @@
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['HAT_EventType'] = 'Event Type';
-$app_list_strings['cux_map_type_list']['TENCENT'] = 'Tencent Map';
-$app_list_strings['cux_map_type_list']['GPS'] = 'Std.GPS';
-$app_list_strings['asset_status_list'][''] = '';
+$app_list_strings['moduleList']['HAT_Assets'] = 'Assets';
+$app_list_strings['moduleList']['HAT_Asset_Locations'] = 'Asset Locations';
+$app_list_strings['moduleList']['HAT_Asset_Trans'] = 'Asset Transactions';
+$app_list_strings['moduleList']['HAT_Asset_Trans_Batch'] = 'Asset Transaction Batch';
 
-$app_list_strings['asset_status_list']['Ordered'] = 'Ordered';
-$app_list_strings['asset_status_list']['InService'] = 'In-Service';
-$app_list_strings['asset_status_list']['Idle'] = 'Idle';
-$app_list_strings['asset_status_list']['LentOut'] = 'Lent-Out';
-$app_list_strings['asset_status_list']['OutOfService'] = 'Out-of-Service';
-$app_list_strings['asset_status_list']['Received'] = 'Received';
+$app_list_strings['hat_asset_status_list']=array (
+  ''=>'',
+  'Ordered' => 'Ordered',
+  'Received' => 'Not Ready',
+  'InService' => 'Operating',
+  'Idle' => 'Idle/Ready',
+  'Stocked' => 'Stocked',
+  'TempOut' => 'Outside',
+  'OutOfService' => 'Decom.',
+  'Discard' => 'Decom. & Removed',
+);
 
-$app_list_strings['cux_event_type_option_list']['LOCKED'] = 'Locked/Not Available';
-$app_list_strings['cux_event_type_option_list']['REQUIRED'] = 'Required';
-$app_list_strings['cux_event_type_option_list']['OPTIONAL'] = 'Optional';
+$GLOBALS['app_list_strings']['hat_asset_source_type_list']=array (  
+    'PURCHASE' => 'Purchase Contract/Order',
+    'DONATE' => 'Donated',
+    'BUILD' => 'Built',
+    'COUNTING' => 'Counting Profit',
+    'INTERNAL' => 'Internal Transfer',
+    'OTHER' => 'Other',
+    'LEASE' => 'Leased',
+    'BORROW' => 'Borrowed',
+);
 
-$app_list_strings['hat_event_type_list']=array (
-  'AT_MOVE' => 'Equip./Asset Trans.',
-  'NETWORK' => 'Network Resource Trans.',
-  'SR' => 'Service Request',
-  'WO' => 'Work Order',
-  'INV_IN' => 'INV: Stock-In',
-  'INV_OUT' => 'INV: Stock-Out',
-  'INV_TRANSFER' => 'INV: Stock Transfer',
-  'INV_WO' => 'INV: Issue to WO',
+
+$GLOBALS['app_list_strings']['asset_criticality_list']=array (
+  '' => '',
+  'A' => 'A',
+  'B' => 'B',
+  'C' => 'C',
+  'OTHER' => 'Other',
+);
+
+
+$app_list_strings['hat_map_marker_type_list']=array (
+    'POINT' => 'point',
+    'CIRCLE' => 'circle area',
+    'POLYGON' => 'polygon area',
+    'POLYLINE' => 'polyline area',
+    'RECTANGLE' => 'rectangle area',
+);
+
+$app_list_strings['hat_navigator_tree_type_list']=array (
+    'TREE_LOCATON' => 'Functional Location',
+    'OWNING_ORG' => 'Owining Orgnaization',
+    'USING_ORG' => 'Using Orgnaization',
+    'PRODUCT' => 'Category and Asset Group',
+    'CATEGORY' => 'Asset Category',
 );

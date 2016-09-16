@@ -156,7 +156,7 @@ $dictionary['HIT_Racks'] = array(
 			'merge_filter' => 'disabled',
 			'len' => 100,
 			'size' => '20',
-			'options' => 'asset_status_list',
+			'options' => 'hat_asset_status_list',
 			'studio' => 'visible',
 			'dependency' => false,
 			),
