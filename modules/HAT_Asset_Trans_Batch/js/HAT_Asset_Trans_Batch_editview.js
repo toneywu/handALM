@@ -159,10 +159,21 @@ function initTransHeaderStatus() {
 }
 
 function setEditViewReadonly () { //如果当前头状态为Submitted、Approved、Canceled、Closed需要将字段变为只读
-	$("#Default_HAT_Asset_Trans_Batch_Subpanel input").attr("readonly",true);
+/*	$("#Default_HAT_Asset_Trans_Batch_Subpanel input").attr("readonly",true);
 	$("#Default_HAT_Asset_Trans_Batch_Subpanel input").attr("style","background-Color:#efefef");
-	$("#Default_HAT_Asset_Trans_Batch_Subpanel button,#Default_HAT_Asset_Trans_Batch_Subpanel .input-group-addon").css("cursor","not-allowed");
-	$("#Default_HAT_Asset_Trans_Batch_Subpanel button,#Default_HAT_Asset_Trans_Batch_Subpanel .input-group-addon").prop('onclick',null).off('click');
+
+*/	//将文本显示在Input之后
+	$("#Default_HAT_Asset_Trans_Batch_Subpanel input[type=text]").each(function(){
+	    $(this).after($(this).val());
+	  });
+	//将文本变为Hidden
+	$("#Default_HAT_Asset_Trans_Batch_Subpanel input[type=text]").each(function() {
+	   $("<input type='hidden' />").attr({ id: this.id, name: this.name, value: this.value }).insertBefore(this);
+	}).remove();
+	//将按钮去除
+	$("#Default_HAT_Asset_Trans_Batch_Subpanel button,#Default_HAT_Asset_Trans_Batch_Subpanel .input-group-addon").hide();
+
+	//TODO：行上的禁用没有处理
 }
 
 function getLovValueByText(focused_textfiled_id,list_Lov_id) { //根据LOV的Text，转为Value

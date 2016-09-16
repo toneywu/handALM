@@ -1,6 +1,8 @@
 <?php
 //TODO 目前还不能通过事务处理关联父资产，也不能由父资产联动的更新子资产
 //global $current_user;
+$sugarbean = new HAT_Asset_Trans_Batch();
+$sugarbean->retrieve($_POST['record']);
 
 if (!empty($_POST['assigned_user_id']) && ($focus->assigned_user_id != $_POST['assigned_user_id']) && ($_POST['assigned_user_id'] != $current_user->id)) {
     $check_notify = TRUE; //如果指定了负责人，并且与当前录入人不同，就通知对应的人员进行处理。
@@ -11,19 +13,24 @@ else {
 
 require_once('include/formbase.php');
 
-$return_id = save_header($check_notify);//保存头
+$return_id = save_header($sugarbean, $check_notify);//保存头
 save_lines($_POST, $sugarbean, 'line_');//保存行
 
-//$sugarbean->save();//再调用一次，为了触发AfterSave,确认是否需要将头彻底关闭
-//handleRedirect($return_id, 'HAT_Asset_Trans_Batch');
+//目前在审批后立即就结束，但未来可以支持2步确认。
+//因此代码在此预留
+if ($sugarbean->asset_trans_status=="APPROVED") {
+    $sugarbean->asset_trans_status == "CLOSED";
+    $sugarbean->save();//再调用一次，为了触发AfterSave,确认是否需要将头彻底关闭
+}
+
+handleRedirect($return_id, 'HAT_Asset_Trans_Batch');
 die;
 
 //****************** END: Jump Back *************************************************************//
 
 //****************** START: Save the header normally 写入头信息******************//
-function save_header($check_notify) {
-    $sugarbean = new HAT_Asset_Trans_Batch();
-    $sugarbean->retrieve($_POST['record']);
+function save_header($sugarbean, $check_notify) {
+
 
     if(!$sugarbean->ACLAccess('Save')){//确认访问权限
         ACLController::displayNoAccess(true);
@@ -132,6 +139,8 @@ function save_asset_lines($focus){
             $beanAsset->location_desc = $focus->target_location_desc;
             $beanAsset->asset_status = $focus->target_asset_status;
             $beanAsset->save();
+
+            $focus->trans_status == "CLOSED";
         }
 }
 ?>

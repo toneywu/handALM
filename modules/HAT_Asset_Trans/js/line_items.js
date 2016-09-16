@@ -279,7 +279,7 @@ function insertTransLineElements(tableid, current_view) { //创建界面要素
       "<td><span name='displayed_line_name[" + prodln + "]' id='displayed_line_name" + prodln + "'></span></td>"+
     "<td><span name='displayed_line_description[" + prodln + "]' id='displayed_line_description" + prodln + "'></span></td>";
 
-  if(current_view=="EditView") {
+  if(current_view=="EditView" && $("#asset_trans_status")=="DRAFT") {
       z1.innerHTML+="<input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'>";
   }
 
@@ -574,18 +574,18 @@ function resetAsset(ln){ //在用户重新选择资产之后，会连带的更�
 }
 
 
-function insertTransLineFootor(tableid)
-{
-  tablefooter = document.createElement("tfoot");
-  document.getElementById(tableid).appendChild(tablefooter);
+function insertTransLineFootor(tableid) {
+    if($("#asset_trans_status").val()=="DRAFT") {
+      tablefooter = document.createElement("tfoot");
+      document.getElementById(tableid).appendChild(tablefooter);
 
-  var footer_row=tablefooter.insertRow(-1);
-  var footer_cell = footer_row.insertCell(0);
+      var footer_row=tablefooter.insertRow(-1);
+      var footer_cell = footer_row.insertCell(0);
 
-  footer_cell.scope="row";
-  footer_cell.colSpan="9";
-  footer_cell.innerHTML="<input id='btnAddNewLine' type='button' class='button btn_del' onclick='addNewLine(\"" +tableid+ "\")' value='+ "+SUGAR.language.get('HAT_Asset_Trans', 'LBL_BTN_ADD_TRANS_LINE')+"' />";
-  //TODO:添加一个Checkbox用于显示和隐藏当前组织、人员、地点……
+      footer_cell.scope="row";
+      footer_cell.colSpan="5";
+      footer_cell.innerHTML="<input id='btnAddNewLine' type='button' class='button btn_del' onclick='addNewLine(\"" +tableid+ "\")' value='+ "+SUGAR.language.get('HAT_Asset_Trans', 'LBL_BTN_ADD_TRANS_LINE')+"' />";
+      }
 }
 
 function addNewLine(tableid) {
