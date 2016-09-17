@@ -98,4 +98,5 @@ $mod_strings = array (
   'LBL_CHANGE_NULL'=>'NULL',
   'LBL_CHANGE_FROM_TO'=>' to ',
   'LBL_CHANGE_TO'=>' is changed to ',
+  'LBL_TARGET_RACK'=>'Target Rack Position',
 );
