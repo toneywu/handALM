@@ -42,12 +42,25 @@ var associated_javascript_data;
 	}
 
 	function onClick(event, treeId, treeNode, clickFlag) {
-		if(treeNode.pId!=0 && treeNode.isParent==false) { //非根结点点击后的作用
-			zTreeObj= $.fn.zTree.getZTreeObj(treeId);
-			$("#eventtype_selected").val(treeNode.name);
-			$("#btn_submit").attr('disabled',false);
-		}else {
-			$("#btn_submit").attr('disabled',true);
+		if (allnodes==false) {
+			//allnode是在view中传入的参数
+			//在默认情况下，只有子结点可以点击
+			if(treeNode.pId!=0 && treeNode.isParent==false) { //非根结点,以及非父亲结点点击后的作用
+				zTreeObj= $.fn.zTree.getZTreeObj(treeId);
+				$("#eventtype_selected").val(treeNode.name);
+				$("#btn_submit").attr('disabled',false);
+			}else {
+				$("#btn_submit").attr('disabled',true);
+			}
+		}else{
+			//如果将allnodes定义为true,则所有结点都可以点击。（如在设置EventType父结点时，需要选择到所有的结点）
+			if(treeNode.pId!=0 ) { //非根结点点击后的作用
+				zTreeObj= $.fn.zTree.getZTreeObj(treeId);
+				$("#eventtype_selected").val(treeNode.name);
+				$("#btn_submit").attr('disabled',false);
+			}else {
+				$("#btn_submit").attr('disabled',true);
+			}
 		}
 	}
 	function onAsyncSuccess(e, treeId, treeNode) {
