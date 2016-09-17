@@ -115,7 +115,7 @@ $bean_locations = $db->query($sel_location); //无如是Location还是asset来�
                         AND hat_assets.id = '".$_GET['id']."'";
 
 
-//echo($sel_sub_asset);
+echo($sel_asset);
 
 $bean_assets = $db->query($sel_asset); //无如是Location还是asset来源，都可以显示子资产
 //if(is_array($bean_assets)) {

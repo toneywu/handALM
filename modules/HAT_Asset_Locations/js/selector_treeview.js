@@ -37,11 +37,11 @@ data: {
 	function filter(treeId, parentNode, childNodes) {
 	if (!childNodes) return null;
 	for (var i=0, l=childNodes.length; i<l; i++) {
-		childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
+		//childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
 		childNodes[i].isParent = true;
 				//childNodes[i].t="";
-			}
-			return childNodes;
+		}
+		return childNodes;
 	}
 
 
@@ -88,7 +88,7 @@ data: {
 		var type = node.type;
 		if ( typeof(node.data)== 'undefined') {
 			//undefined说明当前的结点没有明细信息，所以需要通过Ajax加载数据
-			targetDIV.html('<img align="absmiddle" src="themes/'+SUGAR.themes.theme_name+'/images/img_loading.gif"></span> '+SUGAR.language.get('app_strings', 'LBL_LOADING'));
+			targetDIV.html('<img align="absmiddle" src="custom/resources/zTree/css/metroStyle/img/loading.gif"></span> '+SUGAR.language.get('app_strings', 'LBL_LOADING'));
 			//console.log(node.data.Loaded);
 			//
 				//console.log('index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeNodeDetail&id=' + id+"&type="+ type);
@@ -103,6 +103,7 @@ data: {
 						node.data=datatopush;
 						treeObj.updateNode(node);
 						console.log(node);
+						console.log('index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeNodeDetail&id=' + id+"&type="+ type);
 						//node.setNodesProperty("NodeLoaded", "true" , true);
 						showNodeDetailHTML(node,targetDIV);
 					},
@@ -153,25 +154,27 @@ function initTree(treeView) {
 	//如果需要测试，可以直接用以下URL：http://localhost/suite/index.php?module=HAT_Asset_Locations&action=getTreeNodes&type=using_org_business_type
 	//其中type是必须提供的，可能提供id参数。id参数与type有关，比如type为location，则对应的ID为HAT_Asset_Locations的ID
 	//具体的ajax部分，见getTreeNodes.php，树与Ajax的关系，定义在Setting中
+
+	var framework_title="<strong>"+$("#haa_framework").val()+"</strong> ";
 	if (treeView=='TREE_LOCATON') {
-		var zNodes = [{name:$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0,type:"location"}];
+		var zNodes = [{name:framework_title+$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0,type:"location"}];
 	} else if (treeView=='OWNING_ORG') {
 		var zNodes = [
-			{name:$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0,type:"owning_org_business_type"},
+			{name:framework_title+$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0,type:"owning_org_business_type"},
 			//资产一定会分配所属组织，所有没有未分配的情况
 		];
 	} else if (treeView=='USING_ORG') {
 		var zNodes = [
-			{name:$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0,type:"using_org_business_type"},
+			{name:framework_title+$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0,type:"using_org_business_type"},
 			{name:"Unassigned", open:true, isParent:true,pId: 0,type:"using_org",id:"UNASSIGNED"}
 		];
 	} else if (treeView=='PRODUCT') {
 		var zNodes = [
-			{name:$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0,type:"product_category"},
+			{name:framework_title+$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0,type:"product_category"},
 		];
 	} else if (treeView=='CATEGORY') {
 		var zNodes = [
-			{name:$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0,type:"asset_category"},
+			{name:framework_title+$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0,type:"asset_category"},
 		];
 	}
 	//初始化树

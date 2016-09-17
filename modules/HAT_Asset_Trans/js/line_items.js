@@ -126,8 +126,6 @@ function openUsingPersonPopup(ln){
   open_popup('Contacts', 1000, 850,popupFilter, true, true, popupRequestData);
 }
 
-
-
 function openLocationPopup(ln){
   lineno=ln;
   var popupRequestData = {
@@ -140,6 +138,19 @@ function openLocationPopup(ln){
     }
   };
   open_popup('HAT_Asset_Locations', 1000, 850, '', true, true, popupRequestData);
+}
+
+
+function openRackPopup(ln){
+  lineno=ln;
+  var popupRequestData = {
+    "call_back_function" : "set_return",
+    "form_name" : "EditView",
+    "field_to_name_array" : {
+      "name" : "target_rack_position_desc" + ln,
+    }
+  };
+  open_popup('HIT_Racks', 1200, 850, '', true, true, popupRequestData);
 }
 
 /******************************
@@ -351,6 +362,12 @@ function insertTransLineElements(tableid, current_view) { //创建界面要素
       "<span class='input_group ig_location'>"+
       "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_LOCATION_DESC')+"</label>"+
       "<input style='width:153px;' type='text' name='line_target_location_desc[" + prodln + "]' id='line_target_location_desc" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
+      "<span class='input_group ig_rack_position_desc'>"+
+      "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_LOCATION')+" <span class='required'>*</span></label>"+
+      "<input style='width:153px;' type='text' name='target_rack_position_desc[" + prodln + "]' id='target_rack_position_desc" + prodln + "' maxlength='50' value='' title=''>"+
+      //"<input type='hidden' name='line_target_location_id[" + prodln + "]' id='line_target_location_id" + prodln + "' value='' />"+
+      "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openRackPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
       "<input type='hidden' name='line_deleted[" + prodln + "]' id='line_deleted" + prodln + "' value='0'>"+
       "<input type='hidden' name='line_id[" + prodln + "]' id='line_id" + prodln + "' value=''>"+
