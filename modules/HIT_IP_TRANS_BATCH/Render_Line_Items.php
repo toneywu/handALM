@@ -55,6 +55,7 @@ function display_lines($focus, $field, $value, $view) {
 		if ($view == 'DetailView') {
 			
 			$html .= '<script src="modules/HIT_IP_TRANS/js/line_items_show.js"></script>';
+			$html .= '<script src="custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js"></script>';
 			$html .= "<table border='0' cellspacing='16' width='37.5%' id='lineItems' class='list view table'></table>";
 			$html .= '<script>insertTransLineHeader(\'lineItems\');</script>';
 
