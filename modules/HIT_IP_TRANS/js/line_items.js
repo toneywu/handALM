@@ -5,6 +5,7 @@ if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
 if(typeof(YAHOO.SUGAR) == 'undefined') {
 	$.getScript("include/javascript/sugarwidgets/SugarYUIWidgets.js");
 }
+$.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
 /**
  * 设置必输
  */
