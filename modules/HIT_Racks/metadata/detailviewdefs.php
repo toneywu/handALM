@@ -10,7 +10,7 @@ array (
       array (
         0 => 
         array (
-          'file' => 'modules/HIT_Racks/js/detialview_hit_racks.js',
+          'file' => 'modules/HIT_Racks/js/detailview_hit_racks.js',
         ),
       ),
       'form' => 

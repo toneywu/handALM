@@ -1,5 +1,14 @@
 $(document).ready(function(){
 
+    $("#line_items_span").parent("td").prev("td").hide();
+    if (typeof $("#source_wo_id").attr("data-id-value") !="undefined") {
+      //如果来源于工作单则显示工作单对象行信息，否则直接隐藏行
+      $("#wo_lines").append("<div id='wo_lines_display'></div>");
+      showWOLines($("#source_wo_id").attr("data-id-value"));
+    } else {
+        $("#wo_lines").parent("tr").hide();
+    }
+
   if($("#asset_trans_status").val()=="DRAFT"){
      var btn=$("<input type='button' class='btn_detailview' id='btn_submit' value='"+SUGAR.language.get('app_strings', 'LBL_SUBMIT_BUTTON_LABEL')+"'>");
      //$("#asset_trans_status").parent().append(btn);
@@ -11,6 +20,20 @@ $(document).ready(function(){
     });
 
 });
+
+function showWOLines(wo_id) {
+    console.log('index.php?to_pdf=true&module=HAM_WO&action=getWOLiness&id=' + wo_id);
+        $.ajax({
+            url: 'index.php?to_pdf=true&module=HAM_WO&action=getWOLiness&id=' + wo_id,
+            success: function (data) {
+                //console.log(data);
+                $("#wo_lines_display").html(data);
+            },
+            error: function () { //失败
+                alert('Error loading document');
+            }
+        });
+};
 
 function updateStatus(object_id) {
     if (object_id) {

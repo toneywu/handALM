@@ -41,7 +41,7 @@
 $app_list_strings['moduleList']['HAT_EventType']='事件类型';
 $app_list_strings['moduleListSingular']['HAT_EventType']='事件类型';
 
-$GLOBALS['app_list_strings']['asset_trans_status']=array (
+$app_list_strings['asset_trans_status']=array (
   'DRAFT' => '未提交',
   'SUBMITTED' => '提交',
   'APPROVED' => '已批准',
@@ -62,8 +62,8 @@ $app_list_strings['hat_event_type_list']=array (
   'NETWORK' => '网络资源事务处理',
   'SR' => '服务申请 SR',
   'WO' => '工作单 WO',
-  'INV_IN' => 'INV: Stock-In',
-  'INV_OUT' => 'INV: Stock-Out',
-  'INV_TRANSFER' => 'INV: Stock Transfer',
-  'INV_WO' => 'INV: Issue to WO',
+  'INV_IN' => '库存: 入库',
+  'INV_OUT' => '库存: 出库',
+  'INV_TRANSFER' => '库存: 库存转移',
+  'INV_WO' => '库存: 向工单发料',
 );

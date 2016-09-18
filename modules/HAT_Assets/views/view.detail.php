@@ -48,7 +48,7 @@ class HAT_AssetsViewDetail extends ViewDetail
         }
 /*
 		if (isset($this->bean->asset_status))
-			$this->bean->asset_status = "<span class='color_tag color_asset_status_".$this->bean->asset_status."'>".$app_list_strings['asset_status_list'][$this->bean->asset_status]."</span>";
+			$this->bean->asset_status = "<span class='color_tag color_asset_status_".$this->bean->asset_status."'>".$app_list_strings['hat_asset_status_list'][$this->bean->asset_status]."</span>";
 */
         parent::Display();
 

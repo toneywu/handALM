@@ -14,6 +14,10 @@ array (
         ),
         1 => 
         array (
+          'file' => 'modules/HAA_FF/HAA_FF.php',
+        ),
+        2 => 
+        array (
           'file' => 'modules/HAM_WO/js/HAM_WO_editview.js',
         ),
       ),
@@ -31,12 +35,12 @@ array (
           'field' => '30',
         ),
       ),
-      'useTabs' => false,
+      'useTabs' => true,
       'tabDefs' => 
       array (
         'DEFAULT' => 
         array (
-          'newTab' => false,
+          'newTab' => true,
           'panelDefault' => 'expanded',
         ),
         'LBL_EDITVIEW_PANEL1' => 
@@ -44,12 +48,12 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_EDITVIEW_PANEL2' => 
+        'LBL_EDITVIEW_PANEL_GIS' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_EDITVIEW_PANEL3' => 
+        'LBL_EDITVIEW_PANEL_SCHEDULE' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
@@ -57,6 +61,11 @@ array (
         'LBL_EDITVIEW_PANEL4' => 
         array (
           'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_EDITVIEW_PANEL5' => 
+        array (
+          'newTab' => true,
           'panelDefault' => 'expanded',
         ),
       ),
@@ -72,13 +81,14 @@ array (
           array (
             'name' => 'wo_number',
             'label' => 'LBL_WO_NUMBER',
+            'customCode'=>'{$WO_NUMBER}',
           ),
           1 => 
           array (
             'name' => 'site',
             'studio' => 'visible',
             'label' => 'LBL_SITE',
-            'customCode'=>'{$MAINT_SITE}'
+            'customCode' => '{$MAINT_SITE}',
           ),
         ),
         1 => 
@@ -126,6 +136,12 @@ array (
         3 => 
         array (
           0 => 'description',
+          1 => 
+          array (
+            'name' => 'work_order_access',
+            'studio' => 'visible',
+            'label' => 'LBL_WORK_ORDER_ACCESS',
+          ),
         ),
       ),
       'lbl_editview_panel1' => 
@@ -377,6 +393,13 @@ array (
             'customCode' => '<input type="text" id="source_type" name="source_type" value="{$fields.source_type.value}"><input type="hidden" id="source_id" name="source_id" value="{$fields.source_id.value}">',
           ),
           1 => 'source_reference',
+        ),
+      ),
+      'lbl_editview_panel5' => 
+      array (
+        0 => 
+        array (
+          0 => 'wo_lines',
         ),
       ),
     ),

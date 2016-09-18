@@ -42,7 +42,20 @@
  */
 require_once('modules/HAT_Asset_Trans_Batch/HAT_Asset_Trans_Batch_sugar.php');
 class HAT_Asset_Trans_Batch extends HAT_Asset_Trans_Batch_sugar {
-	
+
+    function get_list_view_data(){
+    //资产状态的颜色
+    global $app_list_strings;
+        $asset_fields = $this->get_list_view_array();
+
+        if (!empty($this->asset_trans_status)) {
+            $asset_fields['ASSET_TRANS_STATUS_VAL'] = $this->asset_trans_status;
+        }
+
+        return $asset_fields;
+    }
+
+
 	function __construct(){
 		parent::__construct();
 	}

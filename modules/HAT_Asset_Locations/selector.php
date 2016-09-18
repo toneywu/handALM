@@ -105,62 +105,39 @@
 </style>
 
 <?php global $mod_strings, $app_strings, $app_list_strings;?>
+<?php   require_once('modules/HAA_Frameworks/orgSelector_class.php');
+        $current_framework_id = "";
+        $current_module = $this->module;
+        $current_action = $this->action;
+        echo '<div "div_framework" style="display:none">'.set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id').'</div>'
+?>
+
 
 <div id="selector_top">
 	<div id="select_mode">
 		 <div id="selectorType_Tree" class="tabFocused">
-	         <span class="tab_label"><i class="icon-sitemap"></i> <?php echo $mod_strings['LBL_NAV_MODE_TREE'];?> </span>
+	         <span class="tab_label"><i class="icon-sitemap"></i> <?php echo translate('LBL_NAV_MODE_TREE','HAT_Asset_Locations');?> </span>
 		     <select id="selector_view_tree" class="form-horizontal">
 		     <?php foreach ($app_list_strings['hat_navigator_tree_type_list'] as $key => $value) {
 		     	echo '<option value="'.$key.'">'.$value.'</option>';
 		     }?>
 			</select>
 			<input type="hidden" id="current_view">
-			<button id="btn_switch_tree_view"><?php echo $mod_strings['LBL_BTN_SWITCH_VIEW'];?></button>
+			<button id="btn_switch_tree_view"><?php echo  translate('LBL_BTN_SWITCH_VIEW','HAT_Asset_Locations');?></button>
 	    </div>
 		<div id="selectorType_Map" class="tabUnfocused">
-	         <span class="tab_label"><i class="icon-map-o"></i> <?php echo $mod_strings['LBL_NAV_MODE_MAP'];?> </span>
+	         <span class="tab_label"><i class="icon-map-o"></i> <?php echo  translate('LBL_NAV_MODE_MAP','HAT_Asset_Locations')?> </span>
 		<select id="selector_map_type" class="form-horizontal">
 		     <?php foreach ($app_list_strings['cux_map_type_list'] as $key => $value) {
 		     	echo '<option value="'.$key.'">'.$value.'</option>';
 		     }?>
 		</select>
-		<button id="btn_switch_map_view"><?php echo $mod_strings['LBL_BTN_SWITCH_VIEW'];?></button>
+		<button id="btn_switch_map_view"><?php echo translate('LBL_BTN_SWITCH_VIEW','HAT_Asset_Locations');?></button>
 	    </div>
 	</div>
 
 <div id="selector_top_view" class="row">
 
-<!-- 	    <div id="selctor_top_view_details" class="col-md-3">
-			<span class="col-md-12 field_span">
-				<span class="top_label">Data Scope:</span>
-				<select class="form-horizontal" style="200px">
-					<option value="LOCATOIN">Location Only</option>
-					<option value="ASSET" selected="selected">Equip./Asset and Location</option>
-				</select>
- 			</span>
-		<span class="col-md-12 field_span"><span class="top_label">View:</span>
-
-
-
-		</span>
-
-
-    	</div>
-
-
-
-	<div id="top_filter" class="col-md-9">
-		<span class="col-md-6 field_span"><span id="site_advanced_label" class="top_filter_label">Site</span><input ></span>
-		<span class="col-md-6 field_span"><span id="site_advanced_label" class="top_filter_label">Owining Org</span><select><option>Location Type</option></select><input></span>
-		<span class="col-md-6 field_span"><span id="site_advanced_label" class="top_filter_label">Using Org</span><select><option>Location Type</option></select><input></span>
-		<span class="col-md-6 field_span"><span id="site_advanced_label" class="top_filter_label">Location</span><select><option>Location Type</option></select><input></span>
-		<span class="col-md-6 field_span"><span id="site_advanced_label" class="top_filter_label">Asset</span><select><option>Asset Nameplate</option></select><input></span>
-
-		<button id="selectorType_Filter">
-	        <span class="glyphicon glyphicon-filter"></span>Apply Filter
-	    </button>
-	</div> -->
 </div>
 
 

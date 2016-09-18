@@ -103,14 +103,6 @@ function close_people_info(){
 
 $(document).ready(function(){
 
-	//将SR编号标识的不可修改
-    if($("#sr_number").val()=="") {
-        $("#sr_number").after(SUGAR.language.get('HAM_SR', 'LBL_AUTONUM'));
-        $("#sr_number").hide();
-    } else {
-        $("#sr_number").after($("#sr_number").val());
-        $("#sr_number").hide();
-    }
 
     close_people_info();
 

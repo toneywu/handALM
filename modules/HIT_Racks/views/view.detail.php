@@ -30,7 +30,7 @@ class HIT_RACKSViewDetail extends ViewDetail
             $this->bean->asset_source_type = $asset->asset_source_type;
             $this->bean->asset_source_ref= $asset->asset_source_ref;
             $this->bean->asset_status = $asset->asset_status;
-            //$this->bean->asset_status = "<span class='color_tag color_asset_status_".$asset->asset_status."'>".$app_list_strings['asset_status_list'][$asset->asset_status]."</span>";
+            //$this->bean->asset_status = "<span class='color_tag color_asset_status_".$asset->asset_status."'>".$app_list_strings['hat_asset_status_list'][$asset->asset_status]."</span>";
             $this->bean->using_org_id = $asset->using_org_id;
             $this->bean->owning_org_id = $asset->owning_org_id;
             $this->bean->using_person_id = $asset->using_person_id ;

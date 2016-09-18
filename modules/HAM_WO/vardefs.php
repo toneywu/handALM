@@ -565,11 +565,9 @@ $dictionary['HAM_WO'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
-
-			
 		),
 		'location' => array (
-			'required' => true,
+			'required' => false,
 			'source' => 'non-db',
 			'name' => 'location',
 			'vname' => 'LBL_LOCATION',
@@ -616,8 +614,6 @@ $dictionary['HAM_WO'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
-
-			
 		),
 		'asset' => array (
 			'required' => false,
@@ -696,7 +692,7 @@ $dictionary['HAM_WO'] = array (
 			
 		),
 		'map_lat' => array (
-			'required' => true,
+			'required' => false,
 			'name' => 'map_lat',
 			'vname' => 'LBL_MAP_LAT',
 			'type' => 'float',
@@ -712,7 +708,7 @@ $dictionary['HAM_WO'] = array (
 			'unified_search' => false,
 			'merge_filter' => 'disabled',
 			//'default' => '0.00000000',
-	'len' => '11',
+			'len' => '11',
 			'size' => '20',
 			'enable_range_search' => false,
 			'precision' => '8',
@@ -720,7 +716,7 @@ $dictionary['HAM_WO'] = array (
 			
 		),
 		'map_lng' => array (
-			'required' => true,
+			'required' => false,
 			'name' => 'map_lng',
 			'vname' => 'LBL_MAP_LNG',
 			'type' => 'float',
@@ -744,7 +740,7 @@ $dictionary['HAM_WO'] = array (
 			
 		),
 		'map_zoom' => array (
-			'required' => true,
+			'required' => false,
 			'name' => 'map_zoom',
 			'vname' => 'LBL_MAP_ZOOM',
 			'type' => 'int',
@@ -1277,6 +1273,25 @@ $dictionary['HAM_WO'] = array (
 			'unified_search' => false,
 			'merge_filter' => 'disabled',
 			
+		),
+
+	'wo_lines' => array (
+			'required' => false,
+			'name' => 'wo_lines',
+			'source'=>'non-db',
+			'vname' => 'LBL_WO_LINES',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => false,
+			'reportable' => false,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
 		),
 		'sr_link' => array (
 			'name' => 'sr_link',

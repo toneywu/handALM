@@ -160,18 +160,27 @@ $dictionary['HAT_Asset_Trans_Batch'] = array(
 			'dbType' => 'datetime',
 			'display_default' => 'now',
 			),
-		'lov_asset_status_list' =>
+		'hat_asset_status' =>
 		array (
 			'source' => 'non-db', //从EventType映射
-			'name' => 'lov_asset_status_list',
+			'name' => 'hat_asset_status',
 			'vname' => 'LBL_TARGET_ASSET_STATUS',
 			'type' => 'enum',
 			'default'=>'',
 			'reportable' => true,
 			'studio' => 'visible',
-			'options' => 'asset_status_list',
+			'options' => 'hat_asset_status_list',
 			),
-
+		'wo_lines' =>
+		array (
+			'source' => 'non-db', //从EventType映射
+			'name' => 'wo_lines',
+			'vname' => 'LBL_WO_LINES',
+			'type' => 'varchar',
+			'default'=>'',
+			'reportable' => true,
+			'studio' => 'visible',
+			),
 /*		'lov_cux_event_type_option_list' =>
 		array (
 								'source' => 'non-db', //从EventType映射
@@ -183,16 +192,16 @@ $dictionary['HAT_Asset_Trans_Batch'] = array(
 								'studio' => 'visible',
 								'options' => 'cux_event_type_option_list',
 								),
-		'lov_asset_status_list' =>
+		'hat_asset_status' =>
 		array (
 								'source' => 'non-db', //从EventType映射
-								'name' => 'lov_asset_status_list',
+								'name' => 'hat_asset_status',
 								'vname' => 'LBL_ASSET_STATUS_LIST',
 								'type' => 'enum',
 								'default'=>'',
 								'reportable' => true,
 								'studio' => 'visible',
-								'options' => 'asset_status_list',
+								'options' => 'hat_asset_status_list',
 								),
 		'target_asset_status' => 
 		array ( 
@@ -203,7 +212,7 @@ $dictionary['HAT_Asset_Trans_Batch'] = array(
 			  'default'=>'',
 			  'reportable' => true,
 			  'studio' => 'visible',
-			  //'options' => 'asset_status_list',
+			  //'options' => 'hat_asset_status_list',
 			  ),
 		'change_location' => 
 		array ( 
@@ -225,7 +234,7 @@ $dictionary['HAT_Asset_Trans_Batch'] = array(
 			  'default'=>'',
 			  'reportable' => true,
 			  'studio' => 'visible',
-			 // 'options' => 'asset_status_list',
+			 // 'options' => 'hat_asset_status_list',
 			  ),
 		'change_organization' => 
 		array ( 

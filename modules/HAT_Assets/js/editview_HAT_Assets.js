@@ -19,7 +19,16 @@ function setProductPopupReturn(popupReplyData){//选择完产品后的动作
 	//图标显示
 
 }
-
+function setOwningOrgPopupReturn(popupReplyData){//选择完所属组织的动作
+	set_return(popupReplyData);
+	$("#owning_person").val("");//因为组织变化了，对应的人员也一定会变化，因此将人员字段清空后，手工重新选择。
+	$("#owning_person_id").val("");
+}
+function setUsingOrgPopupReturn(popupReplyData){//选择完使用组织的动作
+	set_return(popupReplyData);
+	$("#using_person").val("");//因为组织变化了，对应的人员也一定会变化，因此将人员字段清空后，手工重新选择。
+	$("#using_person_id").val("");
+}
 
 function generateAssetDesc() {//自动生成资产全名=名称+厂商+型号
 	var combined_asset_desc;

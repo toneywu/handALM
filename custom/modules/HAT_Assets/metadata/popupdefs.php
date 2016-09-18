@@ -12,6 +12,7 @@ $popupMeta = array (
   'hat_assets_accounts_name' => 'hat_assets.hat_assets_accounts_name',
   'hat_assets_contacts_name' => 'hat_assets.hat_assets_contacts_name',
   'tracking_number' => 'hat_assets.tracking_number',
+  'framework' => 'hat_assets.framework',
 ),
     'searchInputs' => array (
   1 => 'name',
@@ -22,8 +23,19 @@ $popupMeta = array (
   8 => 'hat_assets_accounts_name',
   9 => 'hat_assets_contacts_name',
   10 => 'tracking_number',
+  11 => 'framework',
 ),
     'searchdefs' => array (
+  'framework' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'label' => 'LBL_FRAMEWORK',
+    'id' => 'HAA_FRAMEWORKS_ID',
+    'link' => true,
+    'width' => '10%',
+    'name' => 'framework',
+  ),
   'name' => 
   array (
     'type' => 'name',

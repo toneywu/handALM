@@ -103,7 +103,7 @@ function showNodeDetail(node,targetDIV) {
 		varHTML += showNodeField(node.data.asset_status,'LBL_ASSET_STATUS','HAT_Assets');
 		varHTML += showNodeField(node.data.maintainable,'LBL_MAINTAINABLE','HAT_Assets');
 		varHTML += showNodeField(node.data.site_name,'LBL_MAINT_SITE','HAT_Asset_Locations',node.data.site_id,'HAM_Maint_Sites');
-		varHTML += showNodeField(node.data.location_name,'LBL_HAT_ASSET_LOCATIONS_HAT_ASSETS_FROM_HAT_ASSET_LOCATIONS_TITLE','HAT_Assets',node.data.location_id,'HAT_Asset_Locations');
+		varHTML += showNodeField(node.data.location_name,'LBL_LOCATION','HAT_Assets',node.data.location_id,'HAT_Asset_Locations');
 		varHTML += showNodeField(node.data.location_desc,'LBL_LOCATION_DESC','HAT_Assets');
 		varHTML += showNodeField(node.data.account_name,'LBL_HAT_ASSETS_ACCOUNTS_FROM_ACCOUNTS_TITLE','HAT_Assets');
 		varHTML += showNodeField(node.data.contact_name,'LBL_HAT_ASSETS_CONTACTS_FROM_CONTACTS_TITLE','HAT_Assets');

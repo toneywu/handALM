@@ -12,7 +12,7 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
         global $current_user;
 
         //0.处理头与行的语言包
-        $modules = array('HAT_Asset_Trans', 'HAT_Asset_Trans_Batch',
+        $modules = array('HAT_Asset_Trans', 'HAT_Asset_Trans_Batch', 'HAT_Assets'
         );
 
         foreach ($modules as $module) {
@@ -31,15 +31,7 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
         $current_action = $this->action;
         $this->ss->assign('FRAMEWORK',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id'));
 
-/*        //2.加载EventType对应的规则
-        if isset($this->bean->hat_eventtype_id) {
-            $beanEventType = BeanFactory::getBean('HAT_EventType', $this->bean->hat_eventtype_id);
-                //注意这个$beanFramework对象在DISPLAY之后还要被调用，以用于按照Framework中的规则去限定页面上的字段
-                if(isset($beanEventType)) {
-                    $this->bean->hat_eventtype_id
-                }
-        }
-*/
+
         //如果有工序来源，则初始化工序信息
         if (empty($this->bean->id) && !empty($_REQUEST['woop_id'])) {
             //如果当前对象还没有设置工序信息，并且参数中的工序有值，则根据参数中的WOOP对象填写当前处理单上的相关字段
@@ -123,7 +115,7 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
 
         } elseif (empty($this->bean->id)){
             //如果不是从工序上来，但是处理新建的状态
-            //
+            //默认当前人员信息到负责部门与人员
             $this->bean->owner_contacts = $current_user->linked_contact_c;
             $this->bean->owner_id = $current_user->contact_id_c;
             $this->bean->current_owning_org_id = $current_user->account_id_c;
@@ -131,6 +123,15 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
         }
 
 
+        $beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
+        //处理Framework中的相关规则性字段
+        //以下JS变更主要在modules\HAT_Asset_Trans\js\line_items.js中变调用
+        echo "<script>";
+        if(isset($beanFramework)) {
+            echo "var owning_person_field_rule='".$beanFramework->owning_person_field_rule."';";
+            echo "var using_person_field_rule='".$beanFramework->using_person_field_rule."';";
+        }
+        echo "</script>";
 
         parent::Display();
     }

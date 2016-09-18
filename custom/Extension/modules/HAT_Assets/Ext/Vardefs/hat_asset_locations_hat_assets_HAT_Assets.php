@@ -7,14 +7,14 @@ $dictionary["HAT_Assets"]["fields"]["hat_asset_locations_hat_assets"] = array (
   'source' => 'non-db',
   'module' => 'HAT_Asset_Locations',
   'bean_name' => 'HAT_Asset_Locations',
-  'vname' => 'LBL_HAT_ASSET_LOCATIONS_HAT_ASSETS_FROM_HAT_ASSET_LOCATIONS_TITLE',
+  'vname' => 'LBL_LOCATION',
   'id_name' => 'hat_asset_locations_hat_assetshat_asset_locations_ida',
 );
 $dictionary["HAT_Assets"]["fields"]["hat_asset_locations_hat_assets_name"] = array (
   'name' => 'hat_asset_locations_hat_assets_name',
   'type' => 'relate',
   'source' => 'non-db',
-  'vname' => 'LBL_HAT_ASSET_LOCATIONS_HAT_ASSETS_FROM_HAT_ASSET_LOCATIONS_TITLE',
+  'vname' => 'LBL_LOCATION',
   'save' => true,
   'id_name' => 'hat_asset_locations_hat_assetshat_asset_locations_ida',
   'link' => 'hat_asset_locations_hat_assets',

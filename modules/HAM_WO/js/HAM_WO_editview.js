@@ -65,41 +65,22 @@ function checkAccess(id){
 	}
 };
 
-//设置字段不可更新
-function mark_field_disabled(field_name, hide_bool, keep_position=false) {
-	  mark_obj = $("#"+field_name);
-	  mark_obj_lable = $("#"+field_name+"_label");
-
-	  if(hide_bool==true) {
-	  	if (keep_position==false) {
-	    	mark_obj.closest('td').css({"display":"none"});
-	    	mark_obj_lable.css({"display":"none"});
-		}else{
-	    	mark_obj.closest('td').css({"display":"table-column"});
-	    	mark_obj_lable.css({"display":"table-column"});
-		}
-	  }else{
-	  	mark_obj.closest('td').css({"display":""});
-	    mark_obj_lable.css({"display":""});
-		mark_obj.css({"color":"inherit","background-Color":"#efefef;"});
-	  	mark_obj.attr("readonly",true);
-	  	mark_obj_lable.css({"color":"#aaaaaa"});
-	  }
-	  if (typeof validate != "undefined" && typeof validate['EditView'] != "undefined") {
-	    removeFromValidate('EditView',field_name); // 去除必须验证
-	  }
-	  $("#"+field_name+"_label .required").hide();
-
-	  if  (typeof $("#btn_"+field_name)!= 'undefined') {
-	    $("#btn_"+field_name).css({"visibility":"hidden"});
-	  }
-	  if  (typeof $("#btn_clr_"+field_name)!= 'undefined') {
-	    $("#btn_clr_"+field_name).css({"visibility":"hidden"});
-	  }
-	}
+function showWOLines() {
+    console.log('index.php?to_pdf=true&module=HAM_WO&action=getWOLiness&id=' + $("input[name=record]").val());
+        $.ajax({
+            url: 'index.php?to_pdf=true&module=HAM_WO&action=getWOLiness&id=' + $("input[name=record]").val(),
+            success: function (data) {
+                //console.log(data);
+                $("#wo_lines_display").html(data);
+            },
+            error: function () { //失败
+                alert('Error loading document');
+            }
+        });
+};
 
 $(document).ready(function(){
-		
+
 	/**
 	 * checkAccess 
 	 * 工作单状态为其它状态时（包括已批准、等待XX、正在执行中及未来可能扩展的状态），以下字段不可编辑：
@@ -111,54 +92,40 @@ $(document).ready(function(){
 	//checkAccess($("input[name='record']").val());
 	//权限满足后 字段不可编辑：
 	var wo_status = $("#wo_status").val();
-	if(wo_status=="APPROVED"||wo_status=="WSCH"||wo_status=="WMATL"||wo_status=="WPCOND"||wo_status=="INPRG"){
-		mark_field_disabled("ham_act_id_rule",false);
-		mark_field_disabled("site",false);
-		mark_field_disabled("event_type",false);
-		mark_field_disabled("location",false);
-		mark_field_disabled("asset",false);
-		mark_field_disabled("contract",false);
-		mark_field_disabled("date_target_start",false);
-		mark_field_disabled("date_target_finish",false);
-		mark_field_disabled("reporter",false);
-		mark_field_disabled("reporter_org",false);
-		mark_field_disabled("reported_date",false);
-		mark_field_disabled("priority",false);
-		mark_field_disabled("source_type",false);
-		mark_field_disabled("source_reference",false);
+
+    SUGAR.util.doWhen("typeof mark_field_disabled != 'undefined'"), function() {
+    	if(wo_status=="APPROVED"||wo_status=="WSCH"||wo_status=="WMATL"||wo_status=="WPCOND"||wo_status=="INPRG"){
+    		mark_field_disabled("ham_act_id_rule",false);
+    		mark_field_disabled("site",false);
+    		mark_field_disabled("event_type",false);
+    		mark_field_disabled("location",false);
+    		mark_field_disabled("asset",false);
+    		mark_field_disabled("contract",false);
+    		mark_field_disabled("date_target_start",false);
+    		mark_field_disabled("date_target_finish",false);
+    		mark_field_disabled("reporter",false);
+    		mark_field_disabled("reporter_org",false);
+    		mark_field_disabled("reported_date",false);
+    		mark_field_disabled("priority",false);
+    		mark_field_disabled("source_type",false);
+    		mark_field_disabled("source_reference",false);
+    	}
+    	if(wo_status!="DRAFT"){
+    		mark_field_disabled("ham_act_id_rule",false);
+    		mark_field_disabled("location",false);
+    		mark_field_disabled("asset",false);
+    		mark_field_disabled("event_type",false);
+    	}
 	}
-	if(wo_status!="DRAFT"){
-		mark_field_disabled("ham_act_id_rule",false);
-		mark_field_disabled("location",false);
-		mark_field_disabled("asset",false);
-		mark_field_disabled("event_type",false);
-	}
-	
-	var currentDate = new Date();
-	var yearStr = currentDate.getFullYear();
-	var monthStr = currentDate.getMonth()+1;
-	var dayStr = currentDate.getDate();
-	var hourStr = currentDate.getHours();
-	var minutesStr = currentDate.getMinutes();
-	var timeStr = yearStr+"-"+monthStr+"-"+dayStr+" "+hourStr+":"+minutesStr;
-	$("#date_target_start").val(timeStr);
-	$("#date_target_finish").val(timeStr);
-	
+
 //这时obj就是触发事件的对象，可以使用它的各个属性
 //还可以将obj转换成jquery对象，方便选用其他元素
-
-	/*alert(SUGAR.language.get('HAM_WO', 'LBL_AUTONUM'));
-	for(i in SUGAR){
-		alert(i);
-	}*/
-	
-	if($("#wo_number").val()=="") {
-        $("#wo_number").after(SUGAR.language.get('HAM_WO', 'LBL_AUTONUM'));
-        $("#wo_number").hide();
-	} else {
-        $("#wo_number").after($("#wo_number").val());
-        $("#wo_number").hide();
-    }
+    
+//处理工作对象行
+    $("#wo_lines").parent("td").prev("td").hide();
+    $("#wo_lines").hide();
+    $("#wo_lines").after("<div id='wo_lines_display'></div>")
+    showWOLines();
 
     if($("#source_type").val()=='SR') {
         $("#reported_date").attr("type","text");

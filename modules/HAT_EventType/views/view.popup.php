@@ -12,10 +12,19 @@ class HAT_EventTypeViewPopup extends ViewPopup
  		global $mod_strings, $app_strings, $app_list_strings;
         global $db;
 
+        //由于资产事务处理界面与EventType定义界面类型名称有些不统一，因此在此进行一个转化
         if ($_REQUEST['basic_type_advanced']=='HAT_Asset_Trans_Batch'){
             $_REQUEST['basic_type_advanced']='AT_MOVE';
         } else if ($_REQUEST['basic_type_advanced']=='HIT_IP_TRANS_BATCH') {
             $_REQUEST['basic_type_advanced']='NETWORK';
+        }
+
+        //在定义EventType时需要选择父结点，因此需要点选到所有的节点。因此在此基于PHP端的参数，传入到JS中
+        //在定义其它单据选择EventType时，只需要占先到末结点。
+        if (isset($_REQUEST['allnodes']) &&($_REQUEST['allnodes']=='1'||$_REQUEST['allnodes']=='true')){
+            echo "<script>var allnodes=true;</script>";
+        }else {
+            echo "<script>var allnodes=false;</script>";
         }
 
 /*        if(($this->bean instanceOf SugarBean) && !$this->bean->ACLAccess('list')){

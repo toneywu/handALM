@@ -51,8 +51,9 @@ class HAT_Assets extends HAT_Assets_sugar {
 	global $app_list_strings;
 		$asset_fields = $this->get_list_view_array();
 
-		if (!empty($this->asset_status))
-			$asset_fields['ASSET_STATUS'] = "<span class='color_tag color_asset_status_{$this->asset_status}'>".$app_list_strings['asset_status_list'][$this->asset_status]."</span>";
+		if (!empty($this->asset_status)) {
+			$asset_fields['ASSET_STATUS_VAL'] = $this->asset_status;
+		}
 
 		return $asset_fields;
 	}

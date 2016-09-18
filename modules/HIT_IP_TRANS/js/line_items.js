@@ -571,7 +571,7 @@ function resetAsset(ln){ //在用户重新选择资产之后，会连带的更�
   tmp.innerHTML = $("#line_current_asset_status"+ln).val();
   var current_status_text = tmp.textContent || tmp.innerText || "";//current从Popup中返回的是Text，要以Value形式保存，否则会有多语言问题
 
-  var current_status_value = $("#lov_asset_status_list option").filter(function() {return $(this).html() == current_status_text;}).val()
+  var current_status_value = $("#hat_asset_status option").filter(function() {return $(this).html() == current_status_text;}).val()
   $("#line_current_asset_status"+ln).val(current_status_value);
 
 
@@ -581,7 +581,7 @@ function resetAsset(ln){ //在用户重新选择资产之后，会连带的更�
     $("#line_target_asset_status"+ln).val(current_status_value);//目标为当前资产状态,以Value保存
   }
   var target_status_value = $("#line_target_asset_status"+ln).val();
-  var target_status_text = $("#lov_asset_status_list option[value='"+target_status_value+"']").text();
+  var target_status_text = $("#hat_asset_status option[value='"+target_status_value+"']").text();
 
   $("#line_target_asset_status_displayed"+ln).html("<span class='color_tag color_asset_status_"+target_status_value+"'>"+target_status_text+"</span>");
 

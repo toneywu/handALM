@@ -348,11 +348,10 @@ $dictionary['HAM_ACT_OP'] = array(
 #完工后打开下道工序
 'autoopen_next_task' =>
       array (
-        'source' => 'non-db', 
         'name' => 'autoopen_next_task',
         'vname' => 'LBL_AUTOOPEN_NEXT_TASK',
         'type' => 'bool',
-        'default'=>'true',
+        'default'=>true,
         'reportable' => true,
         'studio' => 'visible'
         ),

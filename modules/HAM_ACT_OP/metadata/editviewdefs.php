@@ -42,7 +42,7 @@ array (
             'name' => 'ham_act_id_rule',
             'studio' => 'visible',
             'label' => 'HAM_ACT_ID_RULE',
-            'customCode' => '<input type="hidden" name="ham_act_id_rule" id="ham_act_id_rule" value="{$fields.ham_act_id_rule.value}">{$fields.ham_act_id_rule.value}',
+            'customCode' => '<input type="hidden" name="ham_act_id" id="ham_act_id" value="{$fields.ham_act_id.value}"><input type="hidden" name="ham_act_id_rule" id="ham_act_id_rule" value="{$fields.ham_act_id_rule.value}">{$fields.ham_act_id_rule.value}',
           ),
           1 => 
           array (

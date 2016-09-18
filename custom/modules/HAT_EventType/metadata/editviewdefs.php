@@ -85,7 +85,7 @@ array (
             'label' => 'LBL_PARENT_EVENTTYPE',
             'displayParams' => 
             array (
-              'initial_filter' => '&basic_type_advanced="+encodeURIComponent($("#basic_type option:selected").val())+"',
+              'initial_filter' => '&allnodes=1&basic_type_advanced="+encodeURIComponent($("#basic_type option:selected").val())+"',
             ),
           ),
         ),
