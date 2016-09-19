@@ -108,5 +108,5 @@ $mod_strings = array (
   'LBL_COMPLETE_BY_LAST_WOOP'=>'工单随最后一道任务完成',
   'LBL_BTN_ASSIGN_BUTTON_LABEL'=>'认领',
   'LBL_EDITVIEW_PANEL5'=>'工作对象行',
-
+  'LBL_BTN_COMPLETE_BUTTON_LABEL'=>'工单完成',
 );

@@ -66,18 +66,18 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 		}
 
 		$next_woop = "SELECT woop_number
-				FROM ham_woop
-				WHERE ham_woop.deleted =0 AND ham_wo_id = '" . $this->ham_wo_id . "' and woop_number>" . $this->woop_number . "
-				ORDER BY ham_woop.woop_number ASC
-				LIMIT 0 , 1";
+										FROM ham_woop
+										WHERE ham_woop.deleted =0 AND ham_wo_id = '" . $this->ham_wo_id . "' and woop_number>" . $this->woop_number . "
+										ORDER BY ham_woop.woop_number ASC
+										LIMIT 0 , 1";
 		$next_woop_bean = BeanFactory :: getBean("HAM_WOOP")->get_full_list("woop_number ASC", "ham_woop.ham_wo_id ='" . $this->ham_wo_id . "' and woop_number>" . $this->woop_number, "", "0");
 
 		$show_status = $this->woop_status;
 		$sel = "SELECT woop_number
-				FROM ham_woop
-				WHERE ham_woop.deleted =0 AND ham_wo_id = '" . $this->ham_wo_id . "'
-				ORDER BY ham_woop.woop_number DESC
-				LIMIT 0 , 1";
+										FROM ham_woop
+										WHERE ham_woop.deleted =0 AND ham_wo_id = '" . $this->ham_wo_id . "'
+										ORDER BY ham_woop.woop_number DESC
+										LIMIT 0 , 1";
 
 		$bean_woop_list = $db->query($sel);
 		$last_woop_number = 0;
@@ -109,7 +109,7 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 				//echo "work_center_res_id=".$this->work_center_res_id."<br>";
 				//echo "work_center_people_id=".$this->work_center_people_id."<br>";
 				$wo_bean = BeanFactory :: getBean("HAM_WO", $this->ham_wo_id);
-				if($wo_bean->next_woop_assignment==1){
+				if ($wo_bean->next_woop_assignment == 1) {
 					$next_woop_bean[0]->work_center_res_id = $this->work_center_res_id;
 					$next_woop_bean[0]->work_center_people_id = $this->work_center_people_id;
 				}
@@ -117,9 +117,24 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 
 			} else {
 				//最后一道工序 在工序完成后，立刻跳转到工作单完工界面中。 
+				//add by yuan.chen 2016-09-19
+				$wo_bean = BeanFactory :: getBean("HAM_WO", $this->ham_wo_id);
+				if ($wo_bean->complete_by_last_woop == true) {
+					$woop_bean = BeanFactory :: getBean("HAM_WOOP", $this->id);
+					$woop_bean->wo_status = 'COMPLETED';
+					$woop_bean->save();
+					parent :: save($check_notify);
+					$queryParams = array (
+						'module' => 'HAM_WO',
+						'action' => 'EditView',
+						'record' => $this->ham_wo_id,
+						'fromWoop' => 'Y',
+						'last_woop_id'=>$this->id,
+					);
+					SugarApplication :: redirect('index.php?' . http_build_query($queryParams));
+				}
 			}
 		}
-		//die();
 
 		parent :: save($check_notify);
 	}
@@ -143,29 +158,28 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 				//$WO_fields['WOOP_ACTION'] = $assign_btn;
 			}
 
-			if (!empty($this->act_module) && !empty($this->work_center_people)){
-					//有动作模块，并且已经有人员分配
-				$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=window.location.href="index.php?module='.$this->act_module.'&action=EditView&woop_id='.$this->id.'">'.$app_list_strings['ham_woop_moduleList'][$this->act_module].'</a>';
-			
-			if($this->act_module=='HIT_IP_TRANS_BATCH'){
-				$hit_ip_trans_batch_bean = BeanFactory :: getBean('HIT_IP_TRANS_BATCH')->get_full_list("date_entered desc","hit_ip_trans_batch.source_woop_id='".$this->id."'");
-				if(count($hit_ip_trans_batch_bean)!=0){
-					$it_trans_batch_id = $hit_ip_trans_batch_bean[0]->id;
-					$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=window.location.href="index.php?module='.$this->act_module.'&record='.$it_trans_batch_id.'&action=EditView&woop_id='.$this->id.'">'.$app_list_strings['ham_woop_moduleList'][$this->act_module].'</a>';
-				}
-			}else if($this->act_module=='HAT_Asset_Trans_Batch'){
+			if (!empty ($this->act_module) && !empty ($this->work_center_people)) {
+				//有动作模块，并且已经有人员分配
+				$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=window.location.href="index.php?module=' . $this->act_module . '&action=EditView&woop_id=' . $this->id . '">' . $app_list_strings['ham_woop_moduleList'][$this->act_module] . '</a>';
 
-				$asset_trans_beans = BeanFactory :: getBean('HAT_Asset_Trans_Batch')->get_full_list("date_entered desc","hat_asset_trans_batch.source_woop_id='".$this->id."'");
-				if(count($asset_trans_beans)!=0){
-					$asset_trans_id = $asset_trans_beans[0]->id;
-					$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=window.location.href="index.php?module='.$this->act_module.'&record='.$asset_trans_id.'&action=EditView&woop_id='.$this->id.'">'.$app_list_strings['ham_woop_moduleList'][$this->act_module].'</a>';
-				}
+				if ($this->act_module == 'HIT_IP_TRANS_BATCH') {
+					$hit_ip_trans_batch_bean = BeanFactory :: getBean('HIT_IP_TRANS_BATCH')->get_full_list("date_entered desc", "hit_ip_trans_batch.source_woop_id='" . $this->id . "'");
+					if (count($hit_ip_trans_batch_bean) != 0) {
+						$it_trans_batch_id = $hit_ip_trans_batch_bean[0]->id;
+						$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=window.location.href="index.php?module=' . $this->act_module . '&record=' . $it_trans_batch_id . '&action=EditView&woop_id=' . $this->id . '">' . $app_list_strings['ham_woop_moduleList'][$this->act_module] . '</a>';
+					}
+				} else
+					if ($this->act_module == 'HAT_Asset_Trans_Batch') {
+
+						$asset_trans_beans = BeanFactory :: getBean('HAT_Asset_Trans_Batch')->get_full_list("date_entered desc", "hat_asset_trans_batch.source_woop_id='" . $this->id . "'");
+						if (count($asset_trans_beans) != 0) {
+							$asset_trans_id = $asset_trans_beans[0]->id;
+							$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=window.location.href="index.php?module=' . $this->act_module . '&record=' . $asset_trans_id . '&action=EditView&woop_id=' . $this->id . '">' . $app_list_strings['ham_woop_moduleList'][$this->act_module] . '</a>';
+						}
+					}
+
 			}
-			
-			
-			
-			
-			}
+
 //			if($this->act_module=='HIT_IP_TRANS_BATCH'){
 //				$hit_ip_trans_batch_bean = BeanFactory :: getBean('HIT_IP_TRANS_BATCH')->get_full_list("date_entered desc","hit_ip_trans_batch.source_woop_id='".$this->id."'");
 //				if(count($hit_ip_trans_batch_bean)!=0){

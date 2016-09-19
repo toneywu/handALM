@@ -469,7 +469,6 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<input type='hidden' name='line_id[" + prodln + "]' id='line_id" + prodln + "' value=''>"+
 
         //"<button type='button' id='line_delete_line" + prodln + "' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_DELETE_INLINE') + "' tabindex='116' onclick='markLineDeleted(" + prodln + ",\"line_\")'><img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button>"+
-
       "<input type='button' id='line_delete_line" + prodln + "' class='button btn_del' value='" + SUGAR.language.get('app_strings', 'LBL_DELETE_INLINE') + "' tabindex='116' onclick='btnMarkLineDeleted(" + prodln + ",\"line_\")'>"+
         // "<input style='float:right;' type='button' id='btn_LineEditorClose" + prodln + "' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE') + "'onclick='LineEditorClose(" + prodln + ")>"+
       "<button type='button' id='btn_LineEditorClose" + prodln + "' class='button btn_save' value='" + SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE') + "' tabindex='116' onclick='LineEditorClose(" + prodln + ",\"line_\")'>"+SUGAR.language.get('app_strings', 'LBL_SAVE_BUTTON_LABEL')+" & "+SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE')+" <img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button>"+
@@ -647,12 +646,7 @@ function addNewLine(tableid) {
     insertTransLineElements(tableid);//加入新行
     LineEditorShow(prodln - 1);       //打开行编辑器
   }
-  
-  
-  
-  
-  
-}
+ }
 
 function btnMarkLineDeleted(ln, key) {//删除当前行
   YAHOO.SUGAR.MessageBox.show({
@@ -678,18 +672,15 @@ function markLineDeleted(ln, key) {//删除当前行
   document.getElementById(key + 'delete_line' + ln).onclick = '';
 
   if (typeof validate != "undefined" && typeof validate['EditView'] != "undefined") {
-    removeFromValidate('EditView','line_asset'+ ln);
-    removeFromValidate('EditView','line_name'+ ln);
+    removeFromValidate('EditView','line_hit_ip_subnets'+ ln);
+    removeFromValidate('EditView','line_speed_limit'+ ln);
     removeFromValidate('EditView','line_target_organization'+ ln);
     removeFromValidate('EditView','line_target_location'+ ln);
   }
-  resetLineNum();
-
+  //resetLineNum();
 }
 
 function LineEditorShow(ln){ //显示行编辑器（先自动关闭所有的行编辑器，再打开当前行）
-	//changeRequired(lineData);
-	//mark_field_enabled("line_hit_ip_subnets0", false);
   if (prodln>1) {
     for (var i=0;i<prodln;i++) {
       LineEditorClose(i);
@@ -699,7 +690,6 @@ function LineEditorShow(ln){ //显示行编辑器（先自动关闭所有的行�
   $("#asset_trans_line2_displayed"+ln).hide();
   $("#asset_trans_editor"+ln).show();
   $("#Trans_line_head").hide();
-  //changeRequired(lineData);
 }
 
 function LineEditorClose(ln) {//关闭行编辑器（显示为正常行）

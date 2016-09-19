@@ -68,7 +68,13 @@ function assignWoop(id,record){
 			alert('Error loading document');
 		}
 	});
-	
+}
+
+
+
+function complete_work_order(record){
+	//alert(record);
+	window.location.href = "index.php?module=HAM_WO&action=EditView&record="+record+"&fromWoop=Y";
 }
 
 /**
@@ -156,5 +162,18 @@ $(document).ready(function(){
 	 * checkAccess
 	 */
 	checkAccess($("input[name='record']").val());
+	
+	
+	var complete_btn=$("<input type='button' class='btn_detailview' id='btn_complete' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_COMPLETE_BUTTON_LABEL')+"'>");
+	if($("#wo_status").val()=="APPROVED"){
+		$("#btn_change_status").after(complete_btn);
+		//registe function cancel()
+		$("#btn_complete").click(function(){ //如果取消按钮 返回
+			complete_work_order($("input[name='record']").val());
+		   }
+		);
+	}
+	
+	
 }
 );
