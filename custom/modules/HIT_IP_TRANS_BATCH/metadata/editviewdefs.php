@@ -10,7 +10,7 @@ array (
       array (
         'hidden' => 
         array (
-          0 => '<input type="hidden" name="source_woop_id" id="source_woop_id" value="{$SOURCE_WOOP_ID}">',
+          //0 => '<input type="hidden" name="source_woop_id" id="source_woop_id" value="{$SOURCE_WOOP_ID}">',
         ),
       ),
       'includes' => 

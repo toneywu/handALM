@@ -15,10 +15,13 @@ class HAM_WO extends HAM_WO_sugar {
 	}
 
 	function save($check_notify = false) {
-
+//		echo $_POST['isDuplicate'];
+//		foreach ( $_POST as $key => $value ) {
+//       			echo "****key = ".$key.",value=".$value."<br>";
+//			}
 		//在保存之前通过getNumbering生成WO编号
 		// 用于产生自动编号
-		if ($this->wo_number == '') {
+		if ($this->wo_number == ''||!empty($_POST['duplicateId'])) {
 			$bean_site = BeanFactory :: getBean('HAM_Maint_Sites', $this->ham_maint_sites_id);
 			$bean_numbering = BeanFactory :: getBean('HAA_Numbering_Rule', $bean_site->wo_haa_numbering_rule_id);
 
@@ -73,9 +76,16 @@ class HAM_WO extends HAM_WO_sugar {
 		//这里的第一道工序、以及后序工序不包括已经删除、取消或结束的工序
 
 		if ($this->wo_status == "SUBMITTED" || $this->wo_status == "APPROVED") {
-			//遍历工序  
+			//工作单审批后会判断计划时间如果没有填写，如果没有进行手工排程，按目标时间进行默认
+			if ($this->date_schedualed_start == "") { $this->date_schedualed_start = $this->date_target_start; }
+			if ($this->date_schedualed_finish == "") { $this->date_schedualed_finish = $this->date_target_finish; }
+			if ($this->plan_fixed == "") { $this->plan_fixed = true; }
 
+			//遍历工序  
+			
 			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('WOOP_NUMBER', "ham_woop.woop_status not in ('CLOSED','CANCELED') and ham_wo_id='" . $this->id . "'");
+			
+			
 			if (!empty ($ham_woops)) {
 
 				foreach ($ham_woops as $key => $value) {
@@ -156,7 +166,7 @@ class HAM_WO extends HAM_WO_sugar {
 					$ham_woop->woop_status = $ham_act_op->activity_status;
 					$ham_woop->ham_work_center_id = $ham_act_op->sr_work_center_rule_id;
 					$ham_woop->work_center_res_id = $ham_act_op->work_center_res_id;
-					$ham_woop->ham_wo_id = $this->id;
+					
 					$ham_woop->woop_number = $ham_act_op->activity_op_number;
 					//$ham_woop->description=$this->name;
 					if ($index == 1) {
@@ -166,27 +176,20 @@ class HAM_WO extends HAM_WO_sugar {
 						$ham_woop->date_schedualed_finish = $this->date_schedualed_finish;
 						$pre_date_target_finish = $this->date_target_finish;
 						$pre_date_schedualed_finish = $this->date_schedualed_finish;
-						//echo "woop_number=".$ham_woop->woop_number."<br>";
-						//echo "ham_woop->date_target_finish".$ham_woop->date_target_finish."<br>";
-						//echo "ham_woop->date_schedualed_finish".$ham_woop->date_schedualed_finish."<br>";
+						if(empty($ham_woop->ham_wo_id)&&($this->wo_status == "SUBMITTED" || $this->wo_status == "APPROVED")){
+							$ham_woop->woop_status = "APPROVED";
+						}
 					} else {
 						$ham_woop->date_target_start = $pre_date_target_finish;
 						$ham_woop->date_schedualed_start = $pre_date_schedualed_finish;
 						//计划开始时间+Duration后，计划出计划完成时间
 						$ham_woop->date_target_finish = $this->get_finish_date($pre_date_target_finish, $ham_act_op->standard_hour);
 						$ham_woop->date_schedualed_finish = $this->get_finish_date($pre_date_schedualed_finish, $ham_act_op->standard_hour);
-						//echo "woop_number=".$ham_woop->woop_number."<br>";
-						//echo "ham_woop->date_target_finish".$ham_woop->date_target_finish."<br>";
-						//echo "ham_woop->date_schedualed_finish".$ham_woop->date_schedualed_finish."<br>";
 
 						$pre_date_target_finish = $ham_woop->date_target_finish;
 						$pre_date_schedualed_finish = $ham_woop->date_schedualed_finish;
 					}
-
-					//echo "pre_date_target_finish=".$pre_date_target_finish."<br>";
-					//echo "pre_date_schedualed_finish=".$pre_date_schedualed_finish."<br>";
-					//echo "duration=".$ham_act_op->standard_hour."<br>";	
-
+					$ham_woop->ham_wo_id = $this->id;
 					$ham_woop->autoOpen_next_task = $ham_act_op->autoopen_next_task;
 					$ham_woop->act_module = $ham_act_op->act_module;
 					$ham_woop->hat_eventtype_id = $ham_act_op->hat_eventtype_id;
@@ -283,7 +286,7 @@ class HAM_WO extends HAM_WO_sugar {
 		$WO_fields = $this->get_list_view_array();
 		//为工作单的状态着色
 		if (!empty ($this->wo_status))
-			$WO_fields['WO_STATUS'] = "<span class='color_tag color_doc_status_{$this->wo_status}'>" . $app_list_strings['ham_wo_status_list'][$this->wo_status] . "</span>";
+			$WO_fields['WO_STATUS_VAL'] = $this->wo_status;
 
 		return $WO_fields;
 	}

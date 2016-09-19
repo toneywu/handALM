@@ -253,20 +253,21 @@ function insertTransLineHeader(tableid){
 }
 
 
-function insertLineData(asset_trans_line ){ //将数据写入到对应的行字段中
+function insertLineData(asset_trans_line){ //将数据写入到对应的行字段中
   console.log(asset_trans_line);
   var ln = 0;
   if(asset_trans_line.id != '0' && asset_trans_line.id !== ''){
     ln = insertTransLineElements("lineItems");
     //alert(asset_trans_line.hit_ip_subnets);
-     ip_splited = asset_trans_line.hit_ip_subnets.split("/")
+     ip_splited = asset_trans_line.hit_ip_subnets.split("/");
+     SUGAR.util.doWhen("typeof IpSubnetCalculator != 'undefined'", function(){
 	  if ( IpSubnetCalculator.isIp(ip_splited[0])&&ip_splited[1]<=32&&ip_splited[1]>=0) {
 		   var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1]);
 		   var associated_ip= ip_caled.ipLowStr+"~"+ip_caled.ipHighStr;
 		   //显示IP细节信息，由IpSubnetCalculator.js完成算法
 		   $("#line_associated_ip"+ln).html(associated_ip);
 	  }
-    
+     });
     $("#line_parent_ip".concat(String(ln))).val(asset_trans_line.parent_ip);
     $("#line_hit_ip_subnets".concat(String(ln))).val(asset_trans_line.hit_ip_subnets);
     //$("#line_associated_ip".concat(String(ln))).val(asset_trans_line.associated_ip);
@@ -492,7 +493,10 @@ function insertTransLineElements(tableid) { //创建界面要素
 }
 
 function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
-	 ip_splited = $("#line_hit_ip_subnets"+ln).val().split("/")
+	
+	//SUGAR.util.doWhen("typeof $ != 'undefined'", function(){
+	 ip_splited = $("#line_hit_ip_subnets"+ln).val().split("/");
+	 //SUGAR.util.doWhen("typeof IpSubnetCalculator != 'undefined'", function(){
 	  if ( IpSubnetCalculator.isIp(ip_splited[0])&&ip_splited[1]<=32&&ip_splited[1]>=0) {
 		   var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1]);
 		   var associated_ip= ip_caled.ipLowStr+"~"+ip_caled.ipHighStr;
@@ -501,8 +505,8 @@ function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
 		   $("#line_associated_ip"+ln).val(associated_ip);
 		   //alert(associated_ip);
 	  }
-	
-	
+	 //});
+	//});
 	//alert($("#line_hit_ip_subnets"+ln).val());
   $("#displayed_line_parent_ip"+ln).html($("#line_parent_ip"+ln).val());
   $("#displayed_line_hit_ip_subnets"+ln).html($("#line_hit_ip_subnets"+ln).val());
@@ -624,9 +628,30 @@ function insertTransLineFootor(tableid)
 function addNewLine(tableid) {
 	//alert(check_form('EditView'));
   if (check_form('EditView')) {//只有必须填写的字段都填写了才可以新增
+	  
+  event_id = $("#hat_eventtype_id").val();
+  $.ajax({//
+		url: 'index.php?to_pdf=true&module=HIT_IP_TRANS_BATCH&action=getEventJsonData&hat_eventtype_id=' + event_id,
+		async: false,
+		success: function (data) {
+			console.log(data);
+			//alert(data);
+			lineData = jQuery.parseJSON(data);
+			changeRequired(lineData);
+		},
+		error: function () { //失败
+			alert('Error loading document');
+		}
+	})
+	  
     insertTransLineElements(tableid);//加入新行
     LineEditorShow(prodln - 1);       //打开行编辑器
   }
+  
+  
+  
+  
+  
 }
 
 function btnMarkLineDeleted(ln, key) {//删除当前行
@@ -663,6 +688,7 @@ function markLineDeleted(ln, key) {//删除当前行
 }
 
 function LineEditorShow(ln){ //显示行编辑器（先自动关闭所有的行编辑器，再打开当前行）
+	//changeRequired(lineData);
 	//mark_field_enabled("line_hit_ip_subnets0", false);
   if (prodln>1) {
     for (var i=0;i<prodln;i++) {

@@ -291,14 +291,16 @@ function insertTransLineElements(tableid) { //创建界面要素
 }
 
 function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
-	ip_splited = $("#line_hit_ip_subnets"+ln).val().split("/")
-	  if (IpSubnetCalculator.isIp(ip_splited[0])&&ip_splited[1]<=32&&ip_splited[1]>=0) {
-		   var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1]);
-		   var associated_ip= ip_caled.ipLowStr+"~"+ip_caled.ipHighStr;
-		   //显示IP细节信息，由IpSubnetCalculator.js完成算法
-		   $("#displayed_line_associated_ip"+ln).html(associated_ip);
-		   $("#line_associated_ip"+ln).val(associated_ip);
-	  }
+	ip_splited = $("#line_hit_ip_subnets"+ln).val().split("/");
+	SUGAR.util.doWhen("typeof IpSubnetCalculator != 'undefined'", function(){
+		  if (IpSubnetCalculator.isIp(ip_splited[0])&&ip_splited[1]<=32&&ip_splited[1]>=0) {
+			   var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1]);
+			   var associated_ip= ip_caled.ipLowStr+"~"+ip_caled.ipHighStr;
+			   //显示IP细节信息，由IpSubnetCalculator.js完成算法
+			   $("#displayed_line_associated_ip"+ln).html(associated_ip);
+			   $("#line_associated_ip"+ln).val(associated_ip);
+		  }
+		});
 	//alert($("#line_hit_ip_subnets"+ln).val());
   $("#displayed_line_parent_ip"+ln).html($("#line_parent_ip"+ln).val());
   $("#displayed_line_hit_ip_subnets"+ln).html($("#line_hit_ip_subnets"+ln).val());

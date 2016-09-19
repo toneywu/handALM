@@ -1,11 +1,15 @@
-﻿function require_field(){
+﻿
+function require_field(){
 	var woop_status = $("#woop_status").val();
 	if(woop_status!="COMPLETED"){
 		mark_field_enabled("date_actual_start",true);
 		mark_field_enabled("date_actual_finish",true);
+		
 	}else{
 		mark_field_enabled("date_actual_start",false);
 		mark_field_enabled("date_actual_finish",false);
+		$("#span_date_actual_start span.input-group-addon").show();
+		$("#span_date_actual_finish span.input-group-addon").show();
 	}
 }
 
@@ -45,9 +49,9 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 	  }
 	}
 
-/**
- * 设置必输
- */
+///**
+// * 设置必输
+// 
 function mark_field_enabled(field_name,not_required_bool) {
   //field_name = 字段名，不需要jquery select标志，直接写名字
   //not_required_bool如果为空或没有明确定义为true的话，字段为必须输入。如果=true则为非必须
@@ -78,7 +82,6 @@ function mark_field_enabled(field_name,not_required_bool) {
     $("#btn_clr_"+field_name).css({"visibility":"visible"});
   }
 }
-
 
 $(document).ready(function(){
 	
@@ -460,6 +463,7 @@ function date_finish_change(){
 	        $("#woop_status option[value='CANCELED']").remove();
 	        $("#woop_status option[value='REWORK']").remove();
 	        setEditViewReadonly ();
+	        
 	    } else if ((current_header_status=="APPROVED")||(current_header_status=="RELEASED")) { //可以CANCEL,COMPLETED
 	        /*$("#wo_status option[value='SUBMITTED']").remove();
 	        $("#wo_status option[value='REJECTED']").remove();
@@ -593,6 +597,43 @@ function setEditViewReadonly () { //如果当前头状态为Submitted、Approved
     $("#EditView_tabs input").attr("readonly",true);
     $("#EditView_tabs button").attr("readonly",true);
     $("#EditView_tabs input").attr("style","background-Color:#efefef");
+    mark_field_disabled("work_center",false);
+	mark_field_disabled("work_center_people",false);
+	mark_field_disabled("work_center_res",false);
+	mark_field_disabled("date_schedualed_start",false);
+	mark_field_disabled("event_type",false);
+	
+	
+	var woop_status = $("#woop_status").val();
+	if(woop_status=="COMPLETED"){
+		mark_field_enabled("date_actual_start",true);
+		mark_field_enabled("date_actual_finish",true);
+		$(".input-group-addon").hide();
+		$("#date_schedualed_start").unbind("focus");
+		$("#date_target_start").unbind("focus");
+		$("#date_start_not_earlier").unbind("focus");
+		$("#date_actual_start").unbind("focus");
+		
+		$("#date_schedualed_finish").unbind("focus");
+		$("#date_target_finish").unbind("focus");
+		$("#date_finish_not_later").unbind("focus");
+		$("#date_actual_finish").unbind("focus");
+		
+		$("#span_date_actual_start span.input-group-addon").show();
+		$("#span_date_actual_finish span.input-group-addon").show();
+	}else{
+		$("#date_schedualed_start").unbind("focus");
+		$("#date_target_start").unbind("focus");
+		$("#date_start_not_earlier").unbind("focus");
+		$("#date_actual_start").unbind("focus");
+		
+		$("#date_schedualed_finish").unbind("focus");
+		$("#date_target_finish").unbind("focus");
+		$("#date_finish_not_later").unbind("focus");
+		$("#date_actual_finish").unbind("focus");
+		$(".input-group-addon").hide();
+	}
+    
 }
 
 
