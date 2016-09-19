@@ -34,7 +34,7 @@ function display_lines($focus, $field, $value, $view) {
 											LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
 											LEFT JOIN hit_ip_subnets s ON (hat.hit_ip_subnets_id=s.id)
 											LEFT JOIN hit_ip hi ON (s.parent_hit_ip_id=hi.id)
-											WHERE hat.hit_ip_trans_batch_id ='" . $focus->id . "'";
+											WHERE hat.deleted=0 and hat.hit_ip_trans_batch_id ='" . $focus->id . "'";
 
 			$result = $focus->db->query($sql);
 
@@ -81,7 +81,7 @@ function display_lines($focus, $field, $value, $view) {
 													LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
 													LEFT JOIN hit_ip_subnets s ON (hat.hit_ip_subnets_id=s.id)
 													LEFT JOIN hit_ip hi ON (s.parent_hit_ip_id=hi.id)
-													WHERE hat.hit_ip_trans_batch_id ='" . $focus->id . "'";
+													WHERE hat.deleted=0 and  hat.hit_ip_trans_batch_id ='" . $focus->id . "'";
 
 				$result = $focus->db->query($sql);
 

@@ -202,6 +202,24 @@ class HAM_WOViewEdit extends ViewEdit {
 				//$this->bean->saveContracts(false);			
 			}
 		}
+		if(isset ($_REQUEST['isDuplicate'])&&$_REQUEST['isDuplicate']=="true"){
+			$this->bean->wo_status='DRAFT';	
+		}
+
+		if(isset($_REQUEST['fromWoop'])&&$_REQUEST['fromWoop']=='Y'){
+			$this->bean->wo_status='COMPLETED';	
+			$last_woop_bean = BeanFactory::getBean("HAM_WOOP",$_REQUEST['last_woop_id']);
+			if(!empty($last_woop_bean->date_actual_finish)){
+				$this->bean->date_actual_finish=$last_woop_bean->date_actual_finish;
+			}else{
+				$this->bean->date_actual_finish=date('y-m-d h:i',time());
+			}	
+			if(empty($this->bean->date_actual_start)){
+				$this->bean->date_actual_start=$this->bean->date_entered;
+			}
+		}
+		
+		
 		parent :: Display();
 	} //end function
 

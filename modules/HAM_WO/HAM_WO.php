@@ -35,7 +35,6 @@ class HAM_WO extends HAM_WO_sugar {
 				for ($i = 0; $i < $bean_numbering->min_num_strlength; $i++) {
 					$padding_str = $padding_str +"0";
 				}
-
 				$padding_str = substr($padding_str, 0, strlen($padding_str) - strlen($current_numberstr)) + $current_numberstr;
 				$nextval_str = $bean_numbering->perfix . $padding_str;
 				$bean_numbering->current_number = $current_number;
@@ -74,8 +73,7 @@ class HAM_WO extends HAM_WO_sugar {
 
 		//工作单审批通过时（APPROVED）会将工单下第一道工序状态变为已批准（APPROVED）。其余工序状态变为等待前序（WPREV）。
 		//这里的第一道工序、以及后序工序不包括已经删除、取消或结束的工序
-
-		if ($this->wo_status == "SUBMITTED" || $this->wo_status == "APPROVED") {
+		if (($this->wo_status == "SUBMITTED" || $this->wo_status == "APPROVED")&&$db_bean[0]->wo_status!="APPROVED") {
 			//工作单审批后会判断计划时间如果没有填写，如果没有进行手工排程，按目标时间进行默认
 			if ($this->date_schedualed_start == "") { $this->date_schedualed_start = $this->date_target_start; }
 			if ($this->date_schedualed_finish == "") { $this->date_schedualed_finish = $this->date_target_finish; }
@@ -101,7 +99,7 @@ class HAM_WO extends HAM_WO_sugar {
 
 			}
 		}
-		elseif ($this->wo_status == "CANCELED") {
+		elseif ($this->wo_status == "CANCELED"&&$db_bean[0]->wo_status!="CANCELED") {
 			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('WOOP_NUMBER', "ham_woop.woop_status not in ('COMPLETED','CLOSED') and ham_wo_id='" . $this->id . "'");
 			if (!empty ($ham_woops)) {
 
@@ -112,7 +110,7 @@ class HAM_WO extends HAM_WO_sugar {
 
 			}
 		}
-		elseif ($this->wo_status == "COMPLETED" || $this->wo_status == "CLOSED") {
+		elseif (($this->wo_status == "COMPLETED" || $this->wo_status == "CLOSED")&&($db_bean[0]->wo_status!="COMPLETED"&&$db_bean[0]->wo_status!="CLOSED")) {
 			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('WOOP_NUMBER', "ham_wo_id='" . $this->id . "'");
 			if (!empty ($ham_woops)) {
 
@@ -137,7 +135,7 @@ class HAM_WO extends HAM_WO_sugar {
 				$ham_wo_line_bean->save();
 			}
 		}
-		
+
 		parent :: save($check_notify); //保存WO主体
 		//add by yuan.chen@2016-07-22
 		$bean_id = $this->activity;
@@ -190,7 +188,7 @@ class HAM_WO extends HAM_WO_sugar {
 						$pre_date_schedualed_finish = $ham_woop->date_schedualed_finish;
 					}
 					$ham_woop->ham_wo_id = $this->id;
-					$ham_woop->autoOpen_next_task = $ham_act_op->autoopen_next_task;
+					$ham_woop->autoopen_next_task = $ham_act_op->autoopen_next_task;
 					$ham_woop->act_module = $ham_act_op->act_module;
 					$ham_woop->hat_eventtype_id = $ham_act_op->hat_eventtype_id;
 					$ham_woop->save();

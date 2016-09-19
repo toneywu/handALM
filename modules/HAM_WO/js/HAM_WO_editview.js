@@ -45,6 +45,20 @@ function setWorkCenterResPopupReturn(popupReplyData){
 	set_return(popupReplyData);
 }
 
+
+function require_field(){
+	var wo_status = $("#wo_status").val();
+	if(wo_status){
+		mark_field_enabled("date_actual_start",true);
+		mark_field_enabled("date_actual_finish",true);
+	}else{
+		mark_field_enabled("date_actual_start",false);
+		mark_field_enabled("date_actual_finish",false);
+		$("#span_date_actual_start span.input-group-addon").show();
+		$("#span_date_actual_finish span.input-group-addon").show();
+	}
+}
+
 /**
  * 点击按钮 调用Ajax请求 获取权限
  * @param name
@@ -64,6 +78,39 @@ function checkAccess(id){
 		});
 	}
 };
+///**
+//* 设置必输
+//
+function mark_field_enabled(field_name,not_required_bool) {
+//field_name = 字段名，不需要jquery select标志，直接写名字
+//not_required_bool如果为空或没有明确定义为true的话，字段为必须输入。如果=true则为非必须
+//alert(not_required_bool);
+	$("#"+field_name).css({"color":"#000000","background-Color":"#ffffff"});
+	$("#"+field_name).attr("readonly",false);
+	$("#"+field_name+"_label").css({"color":"#000000","text-decoration":"none"})
+
+	if(typeof not_required_bool == "undefined" || not_required_bool==false || not_required_bool=="") {
+	   addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());//将当前字段标记为必须验证
+	   //打上必须星标
+	   if  ($("#"+field_name+"_label .required").text()!='*') {//如果没有星标，则打上星标
+	     $("#"+field_name+"_label").html($("#"+field_name+"_label").text()+"<span class='required'>*</span>");//打上星标
+	   } else {//如果已经有星标了，则显示出来
+	     $("#"+field_name+"_label .required").show();
+	   }
+	} else { //如果不是必须的，则不显示星标
+	 //直接Remove有时会出错，所有先设置为Validate再Remove
+	 addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());
+	 removeFromValidate('EditView',field_name);
+	  //去除必须验证
+	 $("#"+field_name+"_label .required").hide();
+	}
+	if  (typeof $("#btn_"+field_name)!= 'undefined') {//移除选择按钮
+	 $("#btn_"+field_name).css({"visibility":"visible"});
+	}
+	if  (typeof $("#btn_clr_"+field_name)!= 'undefined') {//移除清空按钮
+	 $("#btn_clr_"+field_name).css({"visibility":"visible"});
+	}
+}
 
 //设置字段不可更新
 function mark_field_disabled(field_name, hide_bool, keep_position=false) {
@@ -151,6 +198,11 @@ $(document).ready(function(){
 	for(i in SUGAR){
 		alert(i);
 	}*/
+	
+	
+	
+	
+	
 	
 	if($("#wo_number").val()=="") {
         $("#wo_number").after(SUGAR.language.get('HAM_WO', 'LBL_AUTONUM'));
@@ -283,7 +335,7 @@ function initTransHeaderStatus() {
         $("#wo_status option[value='APPROVED']").remove();
         $("#wo_status option[value='CANCELED']").remove();
         $("#wo_status option[value='TRANSACTED']").remove();
-        $("#wo_status option[value='COMPLETED']").remove();
+        //$("#wo_status option[value='COMPLETED']").remove();
         $("#SAVE_HEADER,#save_and_continue,#SAVE_FOOTER").hide();
       
         $("#wo_status option[value='WSCH']").remove();
@@ -339,10 +391,46 @@ function initTransHeaderStatus() {
     
 }
 
+    
+$("#wo_status").change(function(){
+		require_field();
+});
+    
+    
 function setEditViewReadonly () { //如果当前头状态为Submitted、Approved、Canceled、Closed需要将字段变为只读
     $("#tabcontent0 input").attr("readonly",true);
     $("#tabcontent0 button").attr("readonly",true);
     $("#tabcontent0 input").attr("style","background-Color:#efefef");
+    var wo_status = $("#wo_status").val();
+    if(wo_status=="COMPLETED"){
+		mark_field_enabled("date_actual_start",false);
+		mark_field_enabled("date_actual_finish",false);
+		$(".input-group-addon").hide();
+		$("#date_schedualed_start").unbind("focus");
+		$("#date_target_start").unbind("focus");
+		$("#date_start_not_earlier").unbind("focus");
+		$("#date_actual_start").unbind("focus");
+		
+		$("#date_schedualed_finish").unbind("focus");
+		$("#date_target_finish").unbind("focus");
+		$("#date_finish_not_later").unbind("focus");
+		$("#date_actual_finish").unbind("focus");
+		
+		$("#span_date_actual_start span.input-group-addon").show();
+		$("#span_date_actual_finish span.input-group-addon").show();
+	}else{
+		$("#date_schedualed_start").unbind("focus");
+		$("#date_target_start").unbind("focus");
+		$("#date_start_not_earlier").unbind("focus");
+		$("#date_actual_start").unbind("focus");
+		
+		$("#date_schedualed_finish").unbind("focus");
+		$("#date_target_finish").unbind("focus");
+		$("#date_finish_not_later").unbind("focus");
+		$("#date_actual_finish").unbind("focus");
+		$(".input-group-addon").hide();
+	}
+    
 }
 
 });

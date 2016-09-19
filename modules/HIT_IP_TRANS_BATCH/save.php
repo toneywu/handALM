@@ -5,7 +5,6 @@
 //****************** START: Save the header normally 写入头信息******************//
 $sugarbean = new HIT_IP_TRANS_BATCH();
 $sugarbean->retrieve($_POST['record']);
-echo "ddd";
 
 if(!$sugarbean->ACLAccess('Save')){//确认访问权限
     ACLController::displayNoAccess(true);
@@ -75,6 +74,7 @@ function save_lines($post_data, $parent, $key = ''){
                 echo "<br/>----------->line deleted";
                 $trans_line = new HIT_IP_TRANS();
                 $trans_line -> retrieve($post_data[$key.'id'][$i]);
+                echo 'delete_id = '.$post_data[$key.'id'][$i]."<br>";
                 $trans_line -> mark_deleted($post_data[$key.'id'][$i]);
             } else {//新增或修改行
             
@@ -99,7 +99,6 @@ function save_lines($post_data, $parent, $key = ''){
                 $trans_line->trans_status = $parent->asset_trans_status;//父状态 LogicHook BeforeSave可能会改写
 				
             }
-			//die();
             //$trans_line->assigned_user_id = $parent->assigned_user_id;
 
             //echo("$parent->id=".$parent->id;);
