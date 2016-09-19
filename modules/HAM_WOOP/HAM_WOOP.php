@@ -173,7 +173,6 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 //					$woop_fields['ACT_MODULE'] .="&record=".$it_trans_batch_id;
 //				}
 //			}
-			
 
 			//$woop_fields['ACT_MODULE'] =empty($this->act_module);
 		}
@@ -181,12 +180,8 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 		$WO_fields = $this->get_list_view_array();
 		//为工作单的状态着色
 		if (!empty ($woop_status))
-<<<<<<< HEAD
 			$woop_fields['WOOP_STATUS_VAL'] = $this->woop_status;
 
-=======
-			$woop_fields['WOOP_STATUS'] = "<span class='color_tag color_doc_status_" . $woop_status . "'>" . $app_list_strings['ham_wo_status_list'][$woop_status] . "</span>";
->>>>>>> ce64b0843cc38da6fb099e7fddea85a4308d052f
 
 		return $woop_fields;
 	}

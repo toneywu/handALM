@@ -80,17 +80,12 @@ class HAM_WO extends HAM_WO_sugar {
 			if ($this->date_schedualed_start == "") { $this->date_schedualed_start = $this->date_target_start; }
 			if ($this->date_schedualed_finish == "") { $this->date_schedualed_finish = $this->date_target_finish; }
 			if ($this->plan_fixed == "") { $this->plan_fixed = true; }
-<<<<<<< HEAD
 
-			//遍历工序  
-=======
->>>>>>> ce64b0843cc38da6fb099e7fddea85a4308d052f
 
-			//遍历工序  
-			
+			//遍历工序
+
 			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('WOOP_NUMBER', "ham_woop.woop_status not in ('CLOSED','CANCELED') and ham_wo_id='" . $this->id . "'");
-			
-			
+
 			if (!empty ($ham_woops)) {
 
 				foreach ($ham_woops as $key => $value) {
