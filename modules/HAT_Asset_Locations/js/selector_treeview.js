@@ -38,6 +38,13 @@ data: {
 	if (!childNodes) return null;
 	for (var i=0, l=childNodes.length; i<l; i++) {
 		//childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
+		childNodes[i].detailed_name = childNodes[i].name;
+
+		if (typeof childNodes[i].status != 'undefined') {
+			childNodes[i].name = childNodes[i].name +" "+childNodes[i].status;
+		} else {
+			childNodes[i].name = childNodes[i].name;
+		}
 		childNodes[i].isParent = true;
 				//childNodes[i].t="";
 		}
@@ -90,10 +97,8 @@ data: {
 			//undefined说明当前的结点没有明细信息，所以需要通过Ajax加载数据
 			targetDIV.html('<img align="absmiddle" src="custom/resources/zTree/css/metroStyle/img/loading.gif"></span> '+SUGAR.language.get('app_strings', 'LBL_LOADING'));
 			//console.log(node.data.Loaded);
-			//
-				//console.log('index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeNodeDetail&id=' + id+"&type="+ type);
 				$.ajax({//读取子地点
-					url: 'index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeNodeDetailHTML&id=' + id+"&type="+ type,
+					url: 'index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeNodeDetailHTML&current_mode='+current_mode+'&id=' + id+"&type="+ type,
 					success: function (data) {
 						var obj = jQuery.parseJSON(data);
 						var datatopush = new Object();
@@ -103,7 +108,7 @@ data: {
 						node.data=datatopush;
 						treeObj.updateNode(node);
 						console.log(node);
-						console.log('index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeNodeDetail&id=' + id+"&type="+ type);
+						console.log('index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeNodeDetailHTML&id=' + id+"&type="+ type);
 						//node.setNodesProperty("NodeLoaded", "true" , true);
 						showNodeDetailHTML(node,targetDIV);
 					},
@@ -122,13 +127,20 @@ data: {
 function showNodeDetailHTML(node,targetDIV) {
 	//加载每个节点的详细内容
 	var varHTML = "";
-	varHTML ="<h3>"+(node.name)+"</h3>";
+	varHTML ="<h3>"+(node.detailed_name)+"</h3>";
 	if (node.type=='location'||node.type=='asset') {
 		//显示主要动作按钮
-		varHTML+="<div class='detail_action_panel'>";
-		for (index = 0; index < node.data.btn.length; ++index) {
-		    varHTML+="<a href='index.php?"+node.data.btn[index]['link']+"' class='button'>"+node.data.btn[index]['lab']+"</a>";
+
+		if (current_mode=="view") {
+			varHTML+="<div class='detail_action_panel'>";
+			for (index = 0; index < node.data.btn.length; ++index) {
+			    varHTML+="<a href='index.php?"+node.data.btn[index]['link']+"' class='button'>"+node.data.btn[index]['lab']+"</a>";
+			}
+		} else {
+			varHTML+=showNodeDetailBtn(node);
 		}
+
+
 		varHTML+="</div>";
 		//显示主要字段
 		for (var index = 0; index < node.data.fields.length; ++index) {
@@ -139,6 +151,36 @@ function showNodeDetailHTML(node,targetDIV) {
 	targetDIV.html(varHTML);
 }
 
+function showNodeDetailBtn(node) {
+	if (current_mode=="asset" && node.type=="asset") {
+		 return "<a href='#' class='button' onclick='btn_select_clicked()'>"+"Select this"+"</a>";
+	} else {
+		return "";
+	}
+}
+
+function btn_select_clicked() {
+	//在选择模式下返回值
+	var treeObj = $.fn.zTree.getZTreeObj("treeview_selector");
+	var nodes = treeObj.getSelectedNodes();
+	var id = nodes[0].id;
+
+	data="";
+	for(var fields in nodes[0]['data']['fields']) {
+/*	   if (typeof(nodes[0]['data'][propertyName]) == 'string') {
+	   		data += '"'+propertyName.toUpperCase()+'":"'+nodes[0][propertyName]+'",';
+	   }*/
+	   data += '"'+ nodes[0]['data']['fields'][fields]['name']+'":"'+nodes[0]['data']['fields'][fields]['value']+'",';
+
+	}
+	data = data.slice(0, -1);//cut last char
+	data='{"'+nodes[0].id+'":{'+data+'}}';
+
+	associated_javascript_data = jQuery.parseJSON(data)
+	console.log(associated_javascript_data);
+	console.log(nodes[0]['data']);
+	//send_back('HAT_Asset_Locations',id);
+}
 
 
 function initTree(treeView) {

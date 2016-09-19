@@ -32,7 +32,7 @@ function openAssetPopup(ln){//本文件为行上选择资产的按钮
       "location_desc" : "line_current_location_desc" + ln,
     }
   };
-  var popupFilter = '&framework_advanced='+$("#haa_framework").val();
+  var popupFilter = '&current_mode=asset&framework_advanced='+$("#haa_framework").val();
   open_popup('HAT_Assets', 600, 850, popupFilter, true, true, popupRequestData);
 }
 

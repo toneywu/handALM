@@ -16,6 +16,12 @@ global $mod_strings, $app_strings, $app_list_strings,$dictionary;
 require_once('cache/modules/HAT_Assets/HAT_Assetsvardefs.php');
 require_once('cache/modules/HAT_Asset_Locations/HAT_Asset_Locationsvardefs.php');
 
+if (isset($_REQUEST['current_mode'])){
+  $current_mode= $_REQUEST['current_mode'];
+}else{
+  $current_mode="view";
+}
+
 
 $txt_jason ='';
 
@@ -38,7 +44,7 @@ function get_jason_field ($label_field_name, $mod_name,  $val_field,  $val_type=
       $val_field = '<a href=\"index.php?module='.$relate_mod_name.'&action=DetailView&record='.$val_field_id.'\">'.$val_field.'</a>';
     }
     if (isset($val_field)&&$val_field!='') {
-      $return_text ='{"lab":"'.get_label_name($label_field_name, $mod_name).'","val":"'.$val_field.'"},';
+      $return_text ='{"name":"'.$label_field_name.'","value":"'.$val_field.'","lab":"'.get_label_name($label_field_name, $mod_name).'","val":"'.$val_field.'"},';
     } else {
       $return_text ='';
     }
@@ -82,12 +88,14 @@ $bean_locations = $db->query($sel_location); //无如是Location还是asset来�
        $txt_jason=substr($txt_jason,0,strlen($txt_jason)-1);//最后一个没有,
        $txt_jason .='],';
 
-       $txt_jason .='"btn":[{"link":"module=HAT_Asset_Locations&action=DetailView&record='.$location['id'].'","lab":"'.translate('LBL_ACT_VIEW_LOCATION','HAT_Asset_Locations').'"}';
-       $txt_jason .=',{"link":"module=HAM_SRs&action=EditView&location_id='.$location['id'].'","lab":"'.translate('LBL_ACT_CREATE_SR','HAT_Asset_Locations').'"}';
-       $txt_jason .=',{"link":"module=HAM_WO&action=EditView&location_id='.$location['id'].'","lab":"'.translate('LBL_ACT_CREATE_WO','HAT_Asset_Locations').'"}';
-       $txt_jason .=']';
+       if ($current_mode=="view") {
+         $txt_jason .='"btn":[{"link":"module=HAT_Asset_Locations&action=DetailView&record='.$location['id'].'","lab":"'.translate('LBL_ACT_VIEW_LOCATION','HAT_Asset_Locations').'"}';
+         $txt_jason .=',{"link":"module=HAM_SRs&action=EditView&location_id='.$location['id'].'","lab":"'.translate('LBL_ACT_CREATE_SR','HAT_Asset_Locations').'"}';
+         $txt_jason .=',{"link":"module=HAM_WO&action=EditView&location_id='.$location['id'].'","lab":"'.translate('LBL_ACT_CREATE_WO','HAT_Asset_Locations').'"}';
+         $txt_jason .='],';
+       }
 
-
+       $txt_jason .='"type":"location"';
     }
 
 } elseif ($_GET['type']=="asset") { //如果是Asset来源，只要读取下面的子资产,以Asset的ID检索
@@ -116,7 +124,6 @@ $bean_locations = $db->query($sel_location); //无如是Location还是asset来�
                     ham_maint_sites.id site_id,
                     ham_maint_sites.name site_name,
                     hat_assets.location_desc,
-                    haa_frameworks.name domain_name,
                     accounts_u.id using_org_id,
                     accounts_u.name using_org_name,
                     contacts_o.id using_person_id,
@@ -186,56 +193,21 @@ $bean_assets = $db->query($sel_asset); //无如是Location还是asset来源，�
        $txt_jason .=get_jason_field('hat_asset_locations_hat_assets_name','HAT_Assets',$asset['location_name'],'relate',$asset['location_id'],'HAT_Asset_Locations');
        $txt_jason .=get_jason_field('location_desc','HAT_Assets',$asset['location_desc']);
        $txt_jason .=get_jason_field('maint_site','HAT_Asset_Locations',$asset['site_name']);
-       $txt_jason .=get_jason_field('domain','HAT_Assets',$asset['domain_name']);
        $txt_jason .=get_jason_field('owning_org','HAT_Assets',$asset['owning_org_name'],'relate',$asset['owning_org_id'],'Accounts');
        $txt_jason .=get_jason_field('owning_person','HAT_Assets',$asset['owning_person_id'],'relate',$asset['owning_person_id'],'Contacts');
        $txt_jason .=get_jason_field('using_org','HAT_Assets',$asset['using_org_name'],'relate',$asset['using_org_id'],'Accounts');
        $txt_jason .=get_jason_field('using_person','HAT_Assets',$asset['using_person_id'],'relate',$asset['using_person_id'],'Contacts');
        $txt_jason=substr($txt_jason,0,strlen($txt_jason)-1);//最后一个没有
        $txt_jason .='],';
-       $txt_jason .='"btn":[{"link":"module=HAT_Asset_Locations&action=DetailView&record='.$asset['location_id'].'","lab":"'.translate('LBL_ACT_VIEW_LOCATION','HAT_Asset_Locations').'"}';
-       $txt_jason .=',{"link":"module=HAT_Assets&action=DetailView&record='.$asset['id'].'","lab":"'.translate('LBL_ACT_VIEW_ASSET','HAT_Asset_Locations').'"}';
-       $txt_jason .=',{"link":"module=HAM_SRs&action=EditView&hat_assets_id='.$asset['id'].'","lab":"'.translate('LBL_ACT_CREATE_SR','HAT_Asset_Locations').'"}';
-       $txt_jason .=',{"link":"module=HAM_WO&action=EditView&hat_assets_id='.$asset['id'].'","lab":"'.translate('LBL_ACT_CREATE_WO','HAT_Asset_Locations').'"}';
-       $txt_jason .='],';
-/*
-       //$txt_jason .='"id":"'.$asset['id'].'",';
-       $txt_jason .='"name":"'.$asset['name'].'",';
-       $txt_jason .='"asset_desc":"'.$asset['asset_desc'].'",';
-       $txt_jason .='"asset_group_id":"'.$asset['asset_group_id'].'",';
-       $txt_jason .='"asset_group":"'.$asset['asset_group'].'",';
-       $txt_jason .='"category_id":"'.$asset['category_id'].'",';
-       $txt_jason .='"category":"'.$asset['category'].'",';
-       $txt_jason .='"asset_status":"<span class=\"color_tag color_asset_status_'.$asset['asset_status'].'\">'.$app_list_strings['hat_asset_status_list'][$asset['asset_status']].'</span>",';
-       $txt_jason .='"asset_name":"'.$asset['asset_name'].'",';
-       $txt_jason .='"asset_number":"'.$asset['asset_number'].'",';
-       $txt_jason .='"serial_number":"'.$asset['serial_number'].'",';
-       $txt_jason .='"vin":"'.$asset['vin'].'",';
-       $txt_jason .='"engine_num":"'.$asset['engine_num'].'",';
-       $txt_jason .='"tracking_number":"'.$asset['tracking_number'].'",';
-       $txt_jason .='"brand":"'.$asset['brand'].'",';
-       $txt_jason .='"model":"'.$asset['model'].'",';
-       $txt_jason .='"maintainable":"'.(($asset['maintainable']==0)?'NO':'YES').'",';
-       $txt_jason .='"enable_it_rack":"'.$asset['enable_it_rack'].'",';
 
-      if ($asset['enable_it_rack']==1) {
-        //如果已经有机柜管理，则继续读取机柜信息
-        $bean_rack = BeanFactory::getBean('HIT_Racks')->retrieve_by_string_fields(array('hat_assets_id'=>$asset['id']));
-        $txt_jason .='"hit_racks":"'. $bean_rack->name.'",';
-        $txt_jason .='"hit_racks_id":"'. $bean_rack->id.'",';
-      }
+       if ($current_mode=="view") {
+         $txt_jason .='"btn":[{"link":"module=HAT_Asset_Locations&action=DetailView&record='.$asset['location_id'].'","lab":"'.translate('LBL_ACT_VIEW_LOCATION','HAT_Asset_Locations').'"}';
+         $txt_jason .=',{"link":"module=HAT_Assets&action=DetailView&record='.$asset['id'].'","lab":"'.translate('LBL_ACT_VIEW_ASSET','HAT_Asset_Locations').'"}';
+         $txt_jason .=',{"link":"module=HAM_SRs&action=EditView&hat_assets_id='.$asset['id'].'","lab":"'.translate('LBL_ACT_CREATE_SR','HAT_Asset_Locations').'"}';
+         $txt_jason .=',{"link":"module=HAM_WO&action=EditView&hat_assets_id='.$asset['id'].'","lab":"'.translate('LBL_ACT_CREATE_WO','HAT_Asset_Locations').'"}';
+         $txt_jason .='],';
+       }
 
-       $txt_jason .='"location_desc":"'.$asset['location_desc'].'",';
-       $txt_jason .='"location_id":"'.$asset['location_id'].'",';
-       $txt_jason .='"location_name":"'.$asset['location_name'].'",';
-       $txt_jason .='"site_id":"'.$asset['site_id'].'",';
-       $txt_jason .='"site_name":"'.$asset['site_name'].'",';
-       $txt_jason .='"domain_name":"'.$asset['domain_name'].'",';
-       $txt_jason .='"location_desc":"'.$asset['location_desc'].'",';
-       $txt_jason .='"account_id":"'.$asset['account_id'].'",';
-       $txt_jason .='"account_name":"'.$asset['account_name'].'",';
-       $txt_jason .='"contact_id":"'.$asset['contact_id'].'",';
-       $txt_jason .='"contact_name":"'.$asset['contact_name'].'",';*/
        $txt_jason .='"type":"asset"';
     }
 //}
