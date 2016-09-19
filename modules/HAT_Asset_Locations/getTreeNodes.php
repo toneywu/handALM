@@ -30,7 +30,7 @@ if (!defined('sugarEntry') || !sugarEntry)
 global $db;
 $txt_jason ='';
 
-
+$current_framework=(isset($_SESSION["current_framework"]))?$_SESSION["current_framework"]:"";
 
 
 if($_REQUEST['type']=="location") { //如果是Locationg来源，需要读取子位置和子资产（Asset来源只需要子资产）
@@ -43,7 +43,7 @@ if($_REQUEST['type']=="location") { //如果是Locationg来源，需要读取子
                             hat_asset_locations,
                             ham_maint_sites 
                           WHERE hat_asset_locations.`ham_maint_sites_id`= '' OR 
-                          (hat_asset_locations.`ham_maint_sites_id` = ham_maint_sites.id AND ham_maint_sites.`haa_frameworks_id`='".$_SESSION["current_framework"]."')
+                          (hat_asset_locations.`ham_maint_sites_id` = ham_maint_sites.id AND ham_maint_sites.`haa_frameworks_id`='".$current_framework."')
                           AND hat_asset_locations.deleted = 0";
 
         if (isset($_REQUEST['id'])) {//如果指明了当前的ID
@@ -76,6 +76,7 @@ if($_REQUEST['type']=="location") { //如果是Locationg来源，需要读取子
                             AND hat_asset_locations_hat_assets_c.deleted = 0
                             AND hat_assets.deleted = 0
                             AND hat_assets.parent_asset_id = ''
+                            AND hat_assets.haa_frameworks_id='".$current_framework."'
                             AND hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_asset_locations_ida ='".$_REQUEST['id']."'";
     }
 
@@ -175,7 +176,9 @@ if($_REQUEST['type']=="location") { //如果是Locationg来源，需要读取子
     		//显示组织下挂接的资产
 	        $sel_sub_asset ="SELECT  hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status
 	        					FROM hat_assets 
-	        					WHERE hat_assets.`deleted`=0 AND hat_assets.".$_REQUEST['type']."_id=''
+	        					WHERE hat_assets.`deleted`=0 
+                      AND hat_assets.haa_frameworks_id='".$current_framework."'
+                      AND hat_assets.".$_REQUEST['type']."_id=''
 	                    ORDER BY hat_assets.name";
 
 
@@ -223,7 +226,9 @@ if($_REQUEST['type']=="location") { //如果是Locationg来源，需要读取子
   $sql_string ="SELECT 
   					hat_assets.id, hat_assets.name, hat_assets.asset_desc,  hat_assets.asset_icon
   					FROM hat_assets
-  					WHERE hat_assets.`deleted`=0 AND hat_assets.`aos_products_id` = '".$_REQUEST['id']."'
+  					WHERE hat_assets.`deleted`=0 
+              AND hat_assets.haa_frameworks_id='".$current_framework."'
+              AND hat_assets.`aos_products_id` = '".$_REQUEST['id']."'
 					 ORDER BY name";
     $sel_sub_asset =$sql_string;
 
@@ -234,6 +239,7 @@ if($_REQUEST['type']=="location") { //如果是Locationg来源，需要读取子
                         hat_assets 
                     WHERE 
                         hat_assets.deleted=0 
+                        AND hat_assets.haa_frameworks_id='".$current_framework."'
                         AND hat_assets.parent_asset_id = '".$_REQUEST['id']."'";
 
 }
@@ -258,7 +264,8 @@ if (isset($sel_sub_asset)) {
     //if(is_array($bean_assets)) {
         while ( $asset = $db->fetchByAssoc($bean_assets) ) {
            $txt_jason .='{id:"'.$asset['id'].'",';
-           $txt_jason .='name:"<i class=\'zmdi '.$asset['asset_icon'].' icon-hc-lg \'></i> <span class=\'treeview_asset\'>'.$asset['name'].'</span>: '.$asset['asset_desc'].' <span class=\'color_tag color_asset_status_'.$asset['asset_status'].'\'>'.$app_list_strings['hat_asset_status_list'][$asset['asset_status']].'</span>",';
+           $txt_jason .='name:"<i class=\'zmdi '.$asset['asset_icon'].' icon-hc-lg \'></i> <span class=\'treeview_asset\'>'.$asset['name'].'</span>: '.$asset['asset_desc'].'",';
+           $txt_jason .='status:"<span class=\'color_tag color_asset_status_'.$asset['asset_status'].'\'>'.$app_list_strings['hat_asset_status_list'][$asset['asset_status']].'</span>",';
            $txt_jason .='type:"asset"},';
         }
     //}

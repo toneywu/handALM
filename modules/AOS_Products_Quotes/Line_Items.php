@@ -43,7 +43,7 @@ function display_lines($focus, $field, $value, $view){
         $html .= 'var total_tax = '.$total_tax.';';
         $html .= '</script>';
 
-        $html .= "<table border='0' cellspacing='4' width='37.5%' id='lineItems'></table>";
+        $html .= "<table border='0' cellspacing='4' id='lineItems'></table>";
 
         if($enable_groups){
             $html .= "<div style='padding-top: 10px; padding-bottom:10px;'>";
@@ -51,7 +51,7 @@ function display_lines($focus, $field, $value, $view){
             $html .= "</div>";
         }
         $html .= '<input type="hidden" name="vathidden" id="vathidden" value="'.get_select_options_with_id($app_list_strings['vat_list'], '').'">
-				  <input type="hidden" name="discounthidden" id="discounthidden" value="'.get_select_options_with_id($app_list_strings['discount_list'], '').'">';
+                  <input type="hidden" name="discounthidden" id="discounthidden" value="'.get_select_options_with_id($app_list_strings['discount_list'], '').'">';
         if($focus->id != '') {
             require_once('modules/AOS_Products_Quotes/AOS_Products_Quotes.php');
             require_once('modules/AOS_Line_Item_Groups/AOS_Line_Item_Groups.php');
@@ -171,7 +171,7 @@ function display_lines($focus, $field, $value, $view){
                 $product .= "<tr>";
                 $product_note = wordwrap($line_item->description,40,"<br />\n");
                 $product .= "<td class='tabDetailViewDF' style='text-align: left; padding:2px;'>".++$productCount."</td>";
-                $product .= "<td class='tabDetailViewDF' style='padding:2px;'>".stripDecimalPointsAndTrailingZeroes(format_number($line_item->product_qty),$sep[1])."</td>";
+                $product .= "<td class='tabDetailViewDF' style='padding:2px;'>".$line_item->product_qty."</td>";
 
                 $product .= "<td class='tabDetailViewDF' style='padding:2px;'><a href='index.php?module=AOS_Products&action=DetailView&record=".$line_item->product_id."' class='tabDetailViewDFLink'>".$line_item->name."</a><br />".$product_note."</td>";
                 $product .= "<td class='tabDetailViewDF' style='text-align: right; padding:2px;'>".currency_format_number($line_item->product_list_price,$params)."</td>";
