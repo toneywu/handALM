@@ -49,7 +49,7 @@ save_lines($_POST,$sugarbean, 'line_');
 
 $sugarbean->save();//再调用一次，为了触发AfterSave,确认是否需要将头彻底关闭
 
-handleRedirect($return_id, 'HAT_Asset_Trans_Batch');
+handleRedirect($return_id, 'HIT_IP_TRANS_BATCH');
 
 
 

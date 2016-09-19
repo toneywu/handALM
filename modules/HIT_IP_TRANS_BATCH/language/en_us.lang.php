@@ -89,5 +89,7 @@ $mod_strings = array (
   'LBL_CONTACT_NAME'=>'Customer',
   'LBL_SEND_TO_CUSTOMER'=>'Send To Customer',
   'LBL_SERVICE_DATE'=>'Service Date',
+  'LBL_EDITVIEW_PANEL1'=>'Transaction Lines',
+  'LBL_DETAILVIEW_PANEL1'=>'Transaction Lines',
   
 );
