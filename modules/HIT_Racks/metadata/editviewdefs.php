@@ -12,7 +12,7 @@ array (
         array (
           'file' => 'modules/HIT_Racks/js/editview_hit_racks.js',
         ),
-      )`
+      ),
       'maxColumns' => '2',
       'widths' => 
       array (
