@@ -23,9 +23,9 @@ if ($sugarbean->asset_trans_status=="APPROVED") {
     $sugarbean->save();//再调用一次，为了触发AfterSave,确认是否需要将头彻底关闭
 }
 
+
 handleRedirect($return_id, 'HAT_Asset_Trans_Batch');
 die;
-
 //****************** END: Jump Back *************************************************************//
 
 //****************** START: Save the header normally 写入头信息******************//
@@ -109,7 +109,14 @@ function save_lines($post_data, $parent, $key = ''){
                 //可以进一步的对资产信息进行修改
                 if ($parent->asset_trans_status=='APPROVED') {
                     save_asset_lines($trans_line);
+
+                    if (isset($trans_line->target_rack_position_data) && $trans_line->target_rack_position_data!="") {
+                        save_rack_allocations($trans_line, $parent);
+                    }
+
                 }
+
+
             }
             //echo("\ntransLine Saved");
             $trans_line->save();
@@ -127,7 +134,7 @@ function save_asset_lines($focus){
 //    $beanAsset = new HAT_Asset_Trans();
 
         //如果不出意外，应当由HAT_TransactionBatch/checkApprovalWorkflow.php先将头STATUS调整为APPROVED
-        $beanAsset = BeanFactory::getBean('HAT_Assets', $focus->hat_assets_hat_asset_transhat_assets_ida);
+        $beanAsset = BeanFactory::getBean('HAT_Assets', $focus->asset_id);
         if ($beanAsset) { // test if $bean was loaded successfully
             $beanAsset->owning_org_id = $focus->owning_org_id;
             $beanAsset->owning_person_id = $focus->target_owning_person_id;
@@ -138,9 +145,48 @@ function save_asset_lines($focus){
             $beanAsset->hat_asset_locations_hat_assetshat_asset_locations_ida = $focus->target_location_id;
             $beanAsset->location_desc = $focus->target_location_desc;
             $beanAsset->asset_status = $focus->target_asset_status;
+            $beanAsset->parent_asset_id = $focus->target_parent_asset_id;
+
             $beanAsset->save();
+
+
 
             $focus->trans_status == "CLOSED";
         }
 }
+
+function save_rack_allocations($focus, $parent){
+
+    $RackAllocation = BeanFactory::getBean('HIT_Rack_Allocations') ->retrieve_by_string_fields(array('hit_rack_allocations.hat_assets_id'=> $focus->asset_id));
+        //基于当前设备（Asset_ID)进行查找，一个资产只能被分配到一个位置。
+        //如果已经有位置了，则将当前位置进行更新，否则添加一个新的U位分配
+        //
+        echo (isset($RackAllocation)).":".$focus->asset_id."###</br>";
+        if (isset($RackAllocation)) {
+            //如果有记录，则对当前数据进行更新（不需要做什么）
+        }else{
+            //如果没有记录，则需要创建新记录
+            $RackAllocation = new HIT_Rack_Allocations();
+            $RackAllocation = BeanFactory::getBean('HIT_Rack_Allocations');
+            //创建一个新分配信息
+        }
+
+        $RackAllocationData = $focus->target_rack_position_data;
+        list($rack_id, $rack_pos_top, $height, $rack_pos_depth) = split('[|]', $RackAllocationData);
+
+        $RackAllocation->hit_racks_id = $rack_id;
+        $RackAllocation->name = $focus->name;
+        $RackAllocation->hat_assets_id = $focus->asset_id;
+        $RackAllocation->rack_pos_top = $rack_pos_top;
+        $RackAllocation->height = $height;
+        $RackAllocation->rack_pos_depth = $rack_pos_depth;
+        $RackAllocation->sync_parent_enabled = true;
+        $RackAllocation->placeholder = false;
+        $RackAllocation->description = $parent->name;
+        $RackAllocation->save();
+        //target_parent_asset_id
+        //
+        //echo "[".$focus->target_rack_position_data."]".$rack_id."|". $rack_pos_top."|". $height."|". $rack_pos_depth."*******************";
+}
+
 ?>

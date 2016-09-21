@@ -147,7 +147,10 @@ function openRackPopup(ln){
     "call_back_function" : "set_return",
     "form_name" : "EditView",
     "field_to_name_array" : {
-      "name" : "target_rack_position_desc" + ln,
+      "name" : "line_target_rack_position_desc" + ln,
+      "rackvalue" : "line_target_rack_position_data" + ln,
+      "rackid" : "line_target_parent_asset_id" + ln,
+      "rackname" : "line_target_parent_asset" + ln,
     }
   };
   var popupFilter = '&current_mode=rack&framework_advanced='+$("#haa_framework").val();
@@ -291,7 +294,7 @@ function insertTransLineElements(tableid, current_view) { //创建界面要素
       "<td><span name='displayed_line_name[" + prodln + "]' id='displayed_line_name" + prodln + "'></span></td>"+
     "<td><span name='displayed_line_description[" + prodln + "]' id='displayed_line_description" + prodln + "'></span></td>";
 
-  if(current_view=="EditView" && $("#asset_trans_status")=="DRAFT") {
+  if(current_view == "EditView" && $("#asset_trans_status").val()=="DRAFT") {
       z1.innerHTML+="<input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'>";
   }
 
@@ -366,8 +369,8 @@ function insertTransLineElements(tableid, current_view) { //创建界面要素
       "</span>"+
       "<span class='input_group ig_rack_position_desc'>"+
       "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_RACK')+" <span class='required'>*</span></label>"+
-      "<input style='width:153px;' type='text' name='target_rack_position_desc[" + prodln + "]' id='target_rack_position_desc" + prodln + "' maxlength='50' value='' title=''>"+
-      //"<input type='hidden' name='line_target_location_id[" + prodln + "]' id='line_target_location_id" + prodln + "' value='' />"+
+      "<input style='width:153px;' type='text' name='line_target_rack_position_desc[" + prodln + "]' id='line_target_rack_position_desc" + prodln + "' maxlength='50' value='' title=''>"+
+      "<input type='hidden' name='line_target_rack_position_data[" + prodln + "]' id='line_target_rack_position_data" + prodln + "' value='' />"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openRackPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
       "<input type='hidden' name='line_deleted[" + prodln + "]' id='line_deleted" + prodln + "' value='0'>"+
@@ -421,6 +424,7 @@ function generateLineDesc(ln){
   LineDesc += LineDescElement("line_","target_using_person_id","current_using_person_id","LBL_USING_PERSON",ln,"target_using_person","current_using_person");
   LineDesc += LineDescElement("line_","target_location_id","current_location_id","LBL_LOCATION",ln,"target_location","current_location");
   LineDesc += LineDescElement("line_","target_location_desc","current_location_desc","LBL_LOCATION_DESC",ln,"target_location_desc","current_location_desc");
+  LineDesc += LineDescElement("line_","target_rack_position_desc","","LBL_RACK",ln,"target_rack_position_desc","");
 
 	$("#line_description"+ln).val(LineDesc);
 };
@@ -435,23 +439,35 @@ function LineDescElement(prefix_name,target_obj_name, current_obj_name, obj_labe
     $("#"+prefix_name+target_obj_name+ln).val("");
   }
 
-  if($("#"+prefix_name+current_obj_name+ln).val()!=$("#"+prefix_name+target_obj_name+ln).val()) {
-    result  = SUGAR.language.get('HAT_Assets', obj_label);
-    result += SUGAR.language.get('HAT_Asset_Trans', 'LBL_CHANGE_FROM');//" is changed from "
+  //console.log(typeof current_obj_name != 'undefined' && current_obj_name!="");
+  if (typeof current_obj_name != 'undefined' && current_obj_name!="") {
+    if($("#"+prefix_name+current_obj_name+ln).val()!=$("#"+prefix_name+target_obj_name+ln).val()) {
+      result  = SUGAR.language.get('HAT_Assets', obj_label);
+      result += SUGAR.language.get('HAT_Asset_Trans', 'LBL_CHANGE_FROM');//" is changed from "
 
-    if ($("#"+prefix_name+current_obj_name+ln).val()=="") {
-      result += SUGAR.language.get('HAT_Asset_Trans', 'LBL_CHANGE_NULL');
-    } else {
-      result += $("#"+prefix_name+current_objval_name+ln).val();
-    }
-    result += SUGAR.language.get('HAT_Asset_Trans', 'LBL_CHANGE_FROM_TO');//" to "
+      if ($("#"+prefix_name+current_obj_name+ln).val()=="") {
+        result += SUGAR.language.get('HAT_Asset_Trans', 'LBL_CHANGE_NULL');
+      } else {
+        result += $("#"+prefix_name+current_objval_name+ln).val();
+      }
+      result += SUGAR.language.get('HAT_Asset_Trans', 'LBL_CHANGE_FROM_TO');//" to "
 
-    if ($("#"+prefix_name+target_obj_name+ln).val()=="") {
-      result += "<strong>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_CHANGE_NULL')+"</strong>. ";
-    }else {
-      result += "<strong>"+$("#"+prefix_name+target_objval_name+ln).val()+"</strong>. ";
+      if ($("#"+prefix_name+target_obj_name+ln).val()=="") {
+        result += "<strong>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_CHANGE_NULL')+"</strong>. ";
+      }else {
+        result += "<strong>"+$("#"+prefix_name+target_objval_name+ln).val()+"</strong>. ";
+      }
     }
+  } else if ( $("#"+prefix_name+target_objval_name+ln).val()!="") {
+      result  = SUGAR.language.get('HAT_Assets', obj_label);
+      result += SUGAR.language.get('HAT_Asset_Trans', 'LBL_CHANGE_TO');//" is changed to "
+      if ($("#"+prefix_name+target_obj_name+ln).val()=="") {
+        result += "<strong>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_CHANGE_NULL')+"</strong>. ";
+      }else {
+        result += "<strong>"+$("#"+prefix_name+target_objval_name+ln).val()+"</strong>. ";
+      }
   }
+//console.log("#"+prefix_name+target_objval_name+ln+"="+$("#"+prefix_name+target_objval_name+ln).val());
   return result;
 }
 
@@ -609,7 +625,7 @@ function insertTransLineFootor(tableid) {
 function addNewLine(tableid) {
   //alert("clicked")
   if (check_form('EditView')) {//只有必须填写的字段都填写了才可以新增
-    insertTransLineElements(tableid);//加入新行
+    insertTransLineElements(tableid,'EditView');//加入新行
     LineEditorShow(prodln - 1);       //打开行编辑器
   }
 }

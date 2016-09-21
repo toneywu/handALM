@@ -124,7 +124,13 @@
 		echo '<script>var current_mode = "view";</script>';
 	}
 ?>
-
+<?php
+	echo '<selcet id="hit_rack_pos_depth_list" style="display:none">';
+	foreach ($app_list_strings['hit_rack_pos_depth_list'] as $key => $value) {
+		echo '<option value="'.$key.'">'.$value.'</option>';
+	}
+	echo '</selcet>';
+?>
 <?
 	if (isset($_REQUEST['current_mode'])){
 		if ($_REQUEST['current_mode']=="asset") {
@@ -178,7 +184,7 @@
 <?php //加载语言包
         $modules = array(
             'HAT_Asset_Locations',
-            'HAT_Assets',
+            'HAT_Assets','HIT_Rack_Allocations','HIT_Racks',
         );
         foreach ($modules as $module) {
             if (!is_file($GLOBALS['sugar_config']['cache_dir'] . 'jsLanguage/' . $module . '/' . $GLOBALS['current_language'] . '.js')) {
@@ -191,6 +197,7 @@
 
 <script>
 	$.getScript("modules/HAT_Asset_Locations/js/selector_resizer.js"); //加载横竖两个可拖拉条
+	$.getScript("modules/HAT_Asset_Locations/js/selector_treeview_racks.js");//加载结构树中机柜图部分的处理
 	$.getScript("modules/HAT_Asset_Locations/js/selector_treeview.js");//加载结构树的处理
 	$.getScript("modules/HAT_Asset_Locations/js/selector_mapview.js");//加载地图视图的处理
 

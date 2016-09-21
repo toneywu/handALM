@@ -93,4 +93,5 @@ $mod_strings = array (
   'LBL_CHANGE_NULL'=>'空',
   'LBL_CHANGE_FROM_TO'=>' 变更为 ',
   'LBL_CHANGE_TO'=>' 变更为 ',
+  'LBL_TARGET_RACK'=>'目标机柜U位',
 );

@@ -656,7 +656,7 @@ function btnMarkLineDeleted(ln, key) {//删除当前行
 function markLineDeleted(ln, key) {//删除当前行
 
   // collapse line; update deleted value
-  document.getElementById(key + 'body' + ln).style.display = 'none';
+ // document.getElementById(key + 'body' + ln).style.display = 'none';
   document.getElementById(key + 'deleted' + ln).value = '1';
   document.getElementById(key + 'delete_line' + ln).onclick = '';
 
@@ -674,6 +674,8 @@ function markLineDeleted(ln, key) {//删除当前行
   if($("#line_hit_ip_subnets"+ln).val()==""){
 	  $("#line_hit_ip_subnets"+ln).val("deleted");
   }
+  if ($("#line_hit_ip_subnets" + ln).val()=="")
+      $("#line_hit_ip_subnets" + ln).val("deleted");
   //resetLineNum();
 }
 

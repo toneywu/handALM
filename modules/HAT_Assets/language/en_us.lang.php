@@ -131,5 +131,6 @@ $mod_strings = array (
   'LBL_MAP_MARKER_TYPE' => 'Marker Type',
   'LBL_MAP_TYPE'=>'Map Type',
   'LBL_FIXED_ASSET'=>'Fixed Assets#',
-  'LBL_ENABLE_FA'=>'Sync with Fixed Asset'
+  'LBL_ENABLE_FA'=>'Sync with Fixed Asset',
+  'LBL_RACK'=>'Server-Rack Position',
 );

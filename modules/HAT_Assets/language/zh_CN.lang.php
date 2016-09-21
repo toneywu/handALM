@@ -134,4 +134,5 @@ $mod_strings = array (
   'LBL_MAP_TYPE'=>'地图类型',
   'LBL_FIXED_ASSET'=>'财务固定资产',
   'LBL_ENABLE_FA'=>'与财务固定资产同步',
+  'LBL_RACK'=>'所在机柜U位',
 );
