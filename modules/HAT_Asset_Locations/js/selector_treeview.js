@@ -152,6 +152,8 @@ function showNodeDetailHTML(node,targetDIV) {
 }
 
 function showNodeDetailBtn(node) {
+	//如果是在选择模块下（参数current_mode!="view")。Ajax不会返回HTML形式的Buttons
+	//因此在JS中生成按钮。
 	if (current_mode=="asset" && node.type=="asset") {
 		 return "<a href='#' class='button' onclick='btn_select_clicked()'>"+"Select this"+"</a>";
 	} else {
@@ -166,20 +168,17 @@ function btn_select_clicked() {
 	var id = nodes[0].id;
 
 	data="";
-	for(var fields in nodes[0]['data']['fields']) {
-/*	   if (typeof(nodes[0]['data'][propertyName]) == 'string') {
-	   		data += '"'+propertyName.toUpperCase()+'":"'+nodes[0][propertyName]+'",';
-	   }*/
-	   data += '"'+ nodes[0]['data']['fields'][fields]['name']+'":"'+nodes[0]['data']['fields'][fields]['value']+'",';
+	for(var fields in nodes[0]['data']['rdata']) {
+	   data += '"'+ fields.toUpperCase()+'":"'+nodes[0]['data']['rdata'][fields]+'",';
 
 	}
 	data = data.slice(0, -1);//cut last char
-	data='{"'+nodes[0].id+'":{'+data+'}}';
+	data='{"'+nodes[0]['data']['rdata']['id']+'":{'+data+'}}';
+	//console.log(jQuery.parseJSON(data));
 
 	associated_javascript_data = jQuery.parseJSON(data)
-	console.log(associated_javascript_data);
-	console.log(nodes[0]['data']);
-	//send_back('HAT_Asset_Locations',id);
+	//console.log(data);
+	send_back('HAT_Asset_Locations',id);
 }
 
 

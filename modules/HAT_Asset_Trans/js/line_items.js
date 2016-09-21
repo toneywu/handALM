@@ -33,7 +33,7 @@ function openAssetPopup(ln){//本文件为行上选择资产的按钮
     }
   };
   var popupFilter = '&current_mode=asset&framework_advanced='+$("#haa_framework").val();
-  open_popup('HAT_Assets', 600, 850, popupFilter, true, true, popupRequestData);
+  open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
 }
 
 function setAssetReturn(popupReplyData){
@@ -41,11 +41,11 @@ function setAssetReturn(popupReplyData){
   set_return(popupReplyData);
 
   //-Start:将Status的值返回到当前资产状态字段中（默认返回的是文本）
-  var current_status_text = $("#line_current_asset_status"+lineno).val();//current从Popup中返回的是Text，要以Value形式保存，否则会有多语言问题
+/*  var current_status_text = $("#line_current_asset_status"+lineno).val();//current从Popup中返回的是Text，要以Value形式保存，否则会有多语言问题
   var current_status_value = hat_asset_status_list.filter(function( obj ) {
                                 return obj.value === current_status_text//current_status_text;
                               });
-  $("#line_current_asset_status"+lineno).val(current_status_value[0].name);
+  $("#line_current_asset_status"+lineno).val(current_status_value[0].name);*/
   //-END:将Status的值返回到当前资产状态字段中
 
   resetAsset(lineno);
@@ -62,8 +62,8 @@ function openParentAssetPopup(ln){//本文件为行上选择资产的按钮
       "id" : "line_target_parent_asset_id" + ln,
     },
   };
-  var popupFilter = '&framework_advanced='+$("#haa_framework").val();
-  open_popup('HAT_Assets', 600, 850, popupFilter, true, true, popupRequestData);
+  var popupFilter = '&current_mode=asset&framework_advanced='+$("#haa_framework").val();
+  open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
 }
 
 
@@ -150,7 +150,8 @@ function openRackPopup(ln){
       "name" : "target_rack_position_desc" + ln,
     }
   };
-  open_popup('HIT_Racks', 1200, 850, '', true, true, popupRequestData);
+  var popupFilter = '&current_mode=rack&framework_advanced='+$("#haa_framework").val();
+  open_popup('HIT_Racks', 1200, 850, popupFilter, true, true, popupRequestData);
 }
 
 /******************************
@@ -536,7 +537,7 @@ function resetEditorFields(ln) {
 
 function resetAsset(ln){ //在用户重新选择资产之后，会连带的更新资产相关的字段信息。
 
-  if ($("#line_asset"+ln).val()=== '') { //如果资产字段为空，则将所有关联的字段全部清空
+  if ($("#line_asset_id"+ln).val()=== '') { //如果资产字段为空，则将所有关联的字段全部清空
     $("#line_asset_id"+ln).val("");
     $("#line_current_owning_org"+ln).val("");
     $("#line_current_using_org"+ln).val("");

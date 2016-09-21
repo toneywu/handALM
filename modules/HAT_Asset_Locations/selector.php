@@ -123,8 +123,18 @@
 	} else {
 		echo '<script>var current_mode = "view";</script>';
 	}
-
 ?>
+
+<?
+	if (isset($_REQUEST['current_mode'])){
+		if ($_REQUEST['current_mode']=="asset") {
+			echo "<h3>".translate('LBL_NAV_ASSET','HAT_Asset_Locations')."</h3>";
+		}else if ($_REQUEST['current_mode']=="rack") {
+			echo "<h3>".translate('LBL_NAV_RACK','HAT_Asset_Locations')."</h3>";
+		}
+	}
+?>
+
 
 <div id="selector_top">
 	<div id="select_mode">

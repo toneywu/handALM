@@ -402,6 +402,9 @@ input[type=text], select{
 .color_asset_status_Received {
 	background-color: #91E9ED;/*亮蓝*/
 }
+.color_asset_status_PreAssigned {
+	background-color: #c7ffa1;/*亮绿*/
+}
 .color_asset_status_InService {
 	background-color: #BEEECC;/*淡绿*/
 }
@@ -412,7 +415,7 @@ input[type=text], select{
 	background-color: #CECEBE;/*灰偏土黄*/
 }
 .color_asset_status_TempOut {
-	background-color: #dbc7ff;/*中绿*/
+	background-color: #dbc7ff;/*紫色*/
 }
 .color_asset_status_OutOfService {
 	background-color: #dbdbdb;/*灰*/
