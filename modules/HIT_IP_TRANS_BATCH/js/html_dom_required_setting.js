@@ -162,4 +162,5 @@ function changeRequired(lineRecord){
 	loopField("line_channel_num",lineRecord.change_channel_num);
 	loopField("line_channel_content",lineRecord.change_channel_content);
 	loopField("line_mrtg_link",lineRecord.change_mrtg_link);
+	loopField("line_access_assets_name",lineRecord.change_access_assets_name);
 }

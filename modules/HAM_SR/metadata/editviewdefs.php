@@ -92,6 +92,13 @@ array (
             'displayParams' => 
             array (
               'initial_filter' => '&basic_type_advanced=SR',
+              'field_to_name_array' =>
+              array (
+                'name' => 'event_type',
+                'id' => 'hat_event_type_id',
+                'haa_ff_id' => 'haa_ff_id',
+              ),
+              'call_back_function' => 'setEventTypePopupReturn',
             ),
           ),
         ),

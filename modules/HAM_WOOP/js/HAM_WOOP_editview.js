@@ -156,7 +156,6 @@ Date.prototype.format = function(fmt){ // author: meizz
 
 // 时长
 function duration_change(){	
-
 	 if($('#duration_schedualed').val()!=null&&$('#duration_schedualed').val()!=""){
 		 $("#duration_schedualed").val(parseFloat($("#duration_schedualed").val()).toFixed(5));
 		 if(isNaN($('#duration_schedualed').val())){
@@ -194,13 +193,11 @@ function duration_change(){
 	
 	// 如果目标完成时间没有填写，目标时长有值 则自动更新目标完成时间
 	if($duration_schedualed_str!=null&&$duration_schedualed_str!=""&&$date_schedualed_start_str!=null&&$date_schedualed_start_str!=""){
-		// alert("1");
 		var $total_num =stringToTime($date_schedualed_start_str)+$duration_schedualed_nums;
 		var time2=new Date(parseInt($total_num)).format('yyyy-M-d hh:m');
 		$("#date_schedualed_finish").val(time2);
 	}else if($duration_schedualed_str!=null&&$duration_schedualed_str!=""&&$date_schedualed_finish_str!=null&&$date_schedualed_finish_str!=""){
 	// 如果目标完成时间有，没有填写目标开始，自动更新目标开始时间
-		// alert("2");
 		var $total_num =stringToTime($date_schedualed_finish_str)-$duration_schedualed_nums;
 		var time2=new Date(parseInt($total_num)).format('yyyy-M-d hh:m');
 		$("#date_schedualed_start").val(time2);	
@@ -214,13 +211,11 @@ function duration_change(){
 	var $duration_target_nums = parseInt($duration_target_str)*1000*3600;
 	// 如果目标完成时间没有填写，目标时长有值 则自动更新目标完成时间
 	if($duration_target_str!=null&&$duration_target_str!=""&&$date_target_start_str!=null&&$date_target_start_str!=""){
-		// alert("3");
 		var $total_num =stringToTime($date_target_start_str)+$duration_target_nums;
 		var time2=new Date(parseInt($total_num)).format('yyyy-M-d hh:m');
 		$("#date_target_finish").val(time2);
 	}else if($duration_target_str!=null&&$duration_target_str!=""&&$date_target_finish_str!=null&&$date_target_finish_str!=""){
 	// 如果目标完成时间有，没有填写目标开始，自动更新目标开始时间
-		// alert("4");
 		var $total_num =stringToTime($date_target_finish_str)-$duration_target_nums;
 		var time2=new Date(parseInt($total_num)).format('yyyy-M-d hh:m');
 		$("#date_target_start").val(time2);	
@@ -234,14 +229,12 @@ function duration_change(){
 	var $date_actual_finish_str = $("#date_actual_finish").val();
 	// 如果目标完成时间没有填写，目标时长有值 则自动更新目标完成时间
 	if($duration_actual_str!=null&&$duration_actual_str!=""&&$date_actual_start_str!=null&&$date_actual_start_str!=""){
-		// alert("5"+$duration_actual_str);
-		
+
 		var $total_num =stringToTime($date_actual_start_str)+$duration_actual_nums;
 		var time2=new Date(parseInt($total_num)).format('yyyy-M-d hh:m');
 		$("#date_actual_finish").val(time2);
 	}else if($duration_actual_str!=null&&$duration_actual_str!=""&&$date_actual_finish_str!=null&&$date_actual_finish_str!=""){
 	// 如果目标完成时间有，没有填写目标开始，自动更新目标开始时间
-		// alert("6");
 		var $total_num =stringToTime($date_actual_finish_str)-$duration_actual_nums;
 		var time2=new Date(parseInt($total_num)).format('yyyy-M-d hh:m');
 		$("#date_actual_start").val(time2);	

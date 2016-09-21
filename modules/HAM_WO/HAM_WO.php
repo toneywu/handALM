@@ -122,7 +122,7 @@ class HAM_WO extends HAM_WO_sugar {
 		}
 		
 		if (isset ($this->source_type) && $this->source_type != "") {
-			$this->source_type="";
+			//$this->source_type="";
 			//1 通过合同找合同条目 
 			//2将合同条目插入到工单对象行里面去
 			$contract_product_beans = BeanFactory :: getBean('AOS_Products_Quotes')->get_full_list('', "aos_products_quotes.parent_id = '{$this->contract_id}'");

@@ -83,4 +83,5 @@ $mod_strings = array (
   'LBL_CHANNEL_NUM'=>'Channel Num',
   'LBL_CHANNEL_CONTENT'=>'Channel Content',
   'LBL_MRTG_LINK'=>'MRTG Link',
+  'LBL_BTN_COPY_TRANS_LINE'=>'Duplicate Transaction Line',
 );

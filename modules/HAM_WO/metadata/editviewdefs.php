@@ -380,7 +380,7 @@ array (
                 'name' => 'priority',
                 'id' => 'ham_priority_id',
               ),
-              'call_back_function' => 'setHamPriorityReturn',
+              //'call_back_function' => 'setHamPriorityReturn',
             ),
           ),
         ),

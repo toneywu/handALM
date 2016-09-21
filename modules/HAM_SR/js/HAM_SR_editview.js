@@ -1,7 +1,22 @@
+$.getScript("modules/HAA_FF/ff_include.js");
+//load triger_setFF()
 function setAssetPopupReturn(popupReplyData){
 	set_return(popupReplyData);
 	$("#asset_desc_text").text($("#asset_desc").val());
 }
+
+function setEventTypePopupReturn(popupReplyData){
+	set_return(popupReplyData);
+    call_ff();
+}
+
+function call_ff() {
+    triger_setFF($("#haa_ff_id").val(),"HAM_SR");
+    $(".expandLink").click();
+}
+
+
+
 function setLocationPopupReturn(popupReplyData){
 	set_return(popupReplyData);
 	$("#location_desc_text").text($("#location_desc").val());
@@ -103,7 +118,12 @@ function close_people_info(){
 
 $(document).ready(function(){
 
-
+	//触发FF
+    SUGAR.util.doWhen("typeof setFF == 'function'", function(){
+        call_ff();
+    })
+    
+    
     close_people_info();
 
     /**

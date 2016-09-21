@@ -461,8 +461,61 @@ $dictionary['HIT_IP_TRANS'] = array (
 			'reportable' => true,
 			'studio' => 'visible'
 		),
-
 		
+		
+		'access_assets_name' => array (
+			'required' => false,
+			'source' => 'non-db',
+			'name' => 'access_asset_name',
+			'vname' => 'LBL_ACCESS_ASSET_NAME',
+			'type' => 'relate',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+			'id_name' => 'hat_assets_id',
+			'ext2' => 'HAT_Assets',
+			'module' => 'HAT_Assets',
+			'rname' => 'name',
+			'quicksearch' => 'enabled',
+			'studio' => 'visible',
+		),
+		
+		
+		'access_assets_id' => 
+  array (
+    'required' => false,
+    'name' => 'access_assets_id',
+    'vname' => 'LBL_ACCESS_ASSETS_ID',
+    'type' => 'id',
+    'massupdate' => 0,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'true',
+    'duplicate_merge' => 'disabled',
+    'duplicate_merge_dom_value' => 0,
+    'audited' => false,
+    'inline_edit' => true,
+    'reportable' => false,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'len' => 36,
+    'size' => '20',
+
+  ),
+
+	
 	),
 	'relationships' => array (),
 	'optimistic_locking' => true,
