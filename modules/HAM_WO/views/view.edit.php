@@ -224,23 +224,31 @@ class HAM_WOViewEdit extends ViewEdit {
 			$this->bean->date_target_start = date('Y-m-d H:i:s');
 			$this->bean->date_target_finish = date('Y-m-d H:i:s');
 		}
-
+		//如果是工单复制的情况如何
 		if(isset ($_REQUEST['isDuplicate'])&&$_REQUEST['isDuplicate']=="true"){
 			$this->bean->wo_status='DRAFT';	
+			$wo_num_html=$mod_strings['LBL_AUTONUM'].'<input type="hidden" value="" id="wo_number" name="wo_number">';
+			$this->ss->assign('WO_NUMBER',$wo_num_html);
 		}
-
+		//工单来源于 工序完成 和点击工单完成的按钮
 		if(isset($_REQUEST['fromWoop'])&&$_REQUEST['fromWoop']=='Y'){
 			$this->bean->wo_status='COMPLETED';	
 			$last_woop_bean = BeanFactory::getBean("HAM_WOOP",$_REQUEST['last_woop_id']);
+			$timeDate = new TimeDate();
+			global $current_user;
 			if(!empty($last_woop_bean->date_actual_finish)){
-				$this->bean->date_actual_finish=$last_woop_bean->date_actual_finish;
+				$localDate = $timeDate->to_display_date_time($last_woop_bean->date_actual_finish, true, true, $current_user);
+				$this->bean->date_actual_finish=$localDate;
 			}else{
-				$this->bean->date_actual_finish=date('y-m-d h:i',time());
+				$localDate = $timeDate->to_display_date_time(time(), true, true, $current_user);
+				$this->bean->date_actual_finish=$localDate;
 			}	
 			if(empty($this->bean->date_actual_start)){
-				$this->bean->date_actual_start=$this->bean->date_entered;
+				$localDate = $timeDate->to_display_date_time($this->bean->date_entered, true, true, $current_user);
+				$this->bean->date_actual_start=$localDate;
 			}
 		}
+
 
 		parent :: Display();
 	} //end function

@@ -1,3 +1,12 @@
+$.getScript("modules/HAA_FF/ff_include.js");
+//load triger_setFF()
+ 
+function call_ff() {
+    triger_setFF($("#haa_ff_id").val(),"HAM_SR","DetailView");
+    $(".expandLink").click();
+ 
+}
+
 function updateStatus(object_id) {
   if (object_id) {
         //ajaxStatus.flashStatus(SUGAR.language.get('app_strings', 'LBL_LOADING'),800);为什么Ajax不能正常的被调用@！？
@@ -77,7 +86,13 @@ function setWOReturn(popupReplyData) { //调用Ajax写入当前工作请求的�
 
 $(document).ready(function(){
 
-
+	//触发FF
+	  SUGAR.util.doWhen("typeof setFF == 'function'", function(){
+	    call_ff();
+	    //alert("hh");
+	  });
+	  
+	  
   if($("#sr_status").val()=="DRAFT"){
    var btn=$("<input type='button' class='btn_detailview' id='btn_submit' value='"+SUGAR.language.get('app_strings', 'LBL_SUBMIT_BUTTON_LABEL')+"'>"); 
    $("#edit_button").after(btn);

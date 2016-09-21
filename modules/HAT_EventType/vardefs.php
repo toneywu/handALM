@@ -892,6 +892,32 @@ $dictionary['HAT_EventType'] = array (
 			
 		),
 		
+		
+		'change_access_assets_name' => array (
+			'required' => false,
+			'name' => 'change_access_assets_name',
+			'vname' => 'LBL_CHANGE_ACCESS_ASSETS_NAME',
+			'type' => 'enum',
+			'massupdate' => 0,
+			'default' => 'LOCKED',
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => 100,
+			'size' => '20',
+			'options' => 'cux_event_type_option_list',
+			'studio' => 'visible',
+			'dependency' => false,
+		),
+		
 	
 	),
 	'relationships' => array (),
