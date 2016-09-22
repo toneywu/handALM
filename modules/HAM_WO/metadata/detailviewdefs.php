@@ -69,7 +69,12 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_EDITVIEW_PANEL5' => 
+        'LBL_EDITVIEW_PANEL_WOLINES' => 
+        array (
+          'newTab' => true,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_EDITVIEW_PANEL_SOURCE' => 
         array (
           'newTab' => true,
           'panelDefault' => 'expanded',
@@ -127,7 +132,12 @@ array (
       ),
       'lbl_editview_panel1' => 
       array (
-        0 => 
+        0=>
+        array (
+            0=>'account',
+            1=>'contact'
+          ),
+        1 =>
         array (
           0 => 
           array (
@@ -142,7 +152,7 @@ array (
             'label' => 'LBL_ASSET',
           ),
         ),
-        1 => 
+        2 => 
         array (
           0 => 
           array (
@@ -151,7 +161,7 @@ array (
           ),
           1 => 'map_enabled',
         ),
-        2 => 
+        3 => 
         array (
           0 => 
           array (
@@ -285,11 +295,18 @@ array (
           1 => 'source_reference',
         ),
       ),
-      'lbl_editview_panel5' => 
+      'lbl_editview_panel_wolines' => 
       array (
         0 => 
         array (
-          0 => 'wo_lines',
+          0 => '',
+        ),
+      ),
+      'lbl_editview_panel_source' => 
+      array (
+        0 => 
+        array (
+          0 => '',
         ),
       ),
     ),

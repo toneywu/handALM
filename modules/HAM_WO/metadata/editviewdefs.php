@@ -146,7 +146,12 @@ array (
       ),
       'lbl_editview_panel1' => 
       array (
-        0 => 
+        0=>
+        array (
+            0=>'account',
+            1=>'contact'
+          ),
+        1 => 
         array (
           0 => 
           array (
@@ -188,7 +193,7 @@ array (
             ),
           ),
         ),
-        1 => 
+        2 => 
         array (
           0 => 
           array (
@@ -395,13 +400,13 @@ array (
           1 => 'source_reference',
         ),
       ),
-      'lbl_editview_panel5' => 
+    /*  'lbl_editview_panel5' => 
       array (
         0 => 
         array (
           0 => 'wo_lines',
         ),
-      ),
+      ),*/
     ),
   ),
 );
