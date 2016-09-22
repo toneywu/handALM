@@ -109,9 +109,9 @@
         $current_framework_id = "";
         $current_module = $this->module;
         $current_action = $this->action;
-        echo '<div "div_framework" style="display:none">'.set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id').'</div>'
+        echo '<div "div_framework" style="display:none">'.set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id').'</div>';
 ?>
-<?
+<?php
 	if (isset($_REQUEST['current_mode'])){
 		echo '<script>var current_mode = "'.$_REQUEST['current_mode'].'"</script>';
     	echo ('<script type="text/javascript" src="include/javascript/popup_helper.js"></script>');
@@ -131,7 +131,7 @@
 	}
 	echo '</selcet>';
 ?>
-<?
+<?php
 	if (isset($_REQUEST['current_mode'])){
 		if ($_REQUEST['current_mode']=="asset") {
 			echo "<h3>".translate('LBL_NAV_ASSET','HAT_Asset_Locations')."</h3>";

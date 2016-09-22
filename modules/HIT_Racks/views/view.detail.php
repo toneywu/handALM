@@ -43,7 +43,7 @@ class HIT_RACKSViewDetail extends ViewDetail
             $this->bean->received_date = $asset->received_date;
             $this->bean->dismiss_date = $asset->dismiss_date;
         //画出机柜图
-            require_once('modules\HIT_Racks\ServerChart.php');
+            require_once('modules/HIT_Racks/ServerChart.php');
             $this->bean-> position_display_area = getServerChart($this->bean,"RackFrame")."<div id='js_jason' style='display:none'>{".getServerChart($this->bean,"Servers")."}</div>";
         }
         $this->bean-> occupation = getOccupationCnt($this->bean);

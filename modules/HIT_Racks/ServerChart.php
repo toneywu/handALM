@@ -35,30 +35,26 @@ function getServerChart($RackBean, $mode) {
                             hat_assets.asset_status,
                             contacts.id contact_id,
                             contacts.last_name contact_name,
-                            accounts.id account_id,   
+                            accounts.id account_id,
                             accounts.name account_name,
                             hit_rack_allocations.rack_pos_depth,
                             hit_rack_allocations.rack_pos_top,
                             hit_rack_allocations.height 
                           FROM
-                            hit_rack_allocations
+                            hit_rack_allocations 
                             LEFT JOIN hat_assets 
                               ON (
                                 hit_rack_allocations.hat_assets_id = hat_assets.id 
                                 AND hat_assets.deleted = 0
-                              )
-                            LEFT JOIN (hat_assets_accounts_c, accounts) 
+                              ) 
+                            LEFT JOIN accounts 
                               ON (
-                                hat_assets_accounts_c.hat_assets_accountshat_assets_idb = hat_assets.id 
-                                AND hat_assets_accounts_c.hat_assets_accountsaccounts_ida = accounts.id 
-                                AND hat_assets_accounts_c.deleted = 0 
+                                hat_assets.`using_org_id` = accounts.id 
                                 AND accounts.deleted = 0
                               ) 
-                            LEFT JOIN (hat_assets_contacts_c, contacts) 
+                            LEFT JOIN contacts 
                               ON (
-                                hat_assets_contacts_c.hat_assets_contactshat_assets_idb = hat_assets.id 
-                                AND hat_assets_contacts_c.hat_assets_contactscontacts_ida = contacts.id 
-                                AND hat_assets_contacts_c.deleted = 0 
+                                hat_assets.`using_person_id`= contacts.`id`
                                 AND contacts.deleted = 0
                               ) 
                           WHERE hit_rack_allocations.deleted = 0 

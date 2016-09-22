@@ -5,7 +5,6 @@
  * 返回的JASON示例： 
  * {"node":[{"id":"92a3dde3-47a1-7467-8e26-56b74a8bed37","html":" V-SH01 : Shanghai Hongqiao Area","type":"location"},{"id":"1f790755-182c-d9bd-9e9e-56b74a64455c","html":" V-SH02 : Shanghai Pudong Area","type":"location"}]}
  */
-error_reporting(E_ALL);
 
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
@@ -174,10 +173,8 @@ $bean_locations = $db->query($sel_location); //无如是Location还是asset来�
                         AND hat_assets.id = '".$_GET['id']."'";
 
 
-//echo($sel_asset);
-$bean_assets = $db->query($sel_asset); //无如是Location还是asset来源，都可以显示子资产
-//if(is_array($bean_assets)) {
-    while ( $asset = $db->fetchByAssoc($bean_assets) ) {
+    $bean_assets = $db->query($sel_asset); //无如是Location还是asset来源，都可以显示子资产
+    while ($asset = $db->fetchByAssoc($bean_assets)) {
 
       $txt_rack_jason = "";
       $txt_rack_allocation_jason="";
@@ -191,7 +188,7 @@ $bean_assets = $db->query($sel_asset); //无如是Location还是asset来源，�
         $txt_rack_jason .=get_jason_field('standard_power','HIT_Racks',$beanRack->standard_power);
         $txt_rack_jason .=get_jason_field('stock_number','HIT_Racks',$beanRack->stock_number);
 
-        require_once('modules\HIT_Racks\ServerChart.php');
+        require_once('modules/HIT_Racks/ServerChart.php');
         $txt_rack_jason .= get_jason_field('occupation','HIT_Racks', getOccupationCnt($beanRack));
         $txt_rack_jason .= get_jason_field('position_display_area','HIT_Racks', getServerChart($beanRack,"RackFrame"));
 
@@ -235,7 +232,7 @@ $bean_assets = $db->query($sel_asset); //无如是Location还是asset来源，�
          $txt_jason .=',{"link":"module=HAM_SRs&action=EditView&hat_assets_id='.$asset['id'].'","lab":"'.translate('LBL_ACT_CREATE_SR','HAT_Asset_Locations').'"}';
          $txt_jason .=',{"link":"module=HAM_WO&action=EditView&hat_assets_id='.$asset['id'].'","lab":"'.translate('LBL_ACT_CREATE_WO','HAT_Asset_Locations').'"}';
          $txt_jason .='],';
-       } else{
+       } else {
           $txt_jason .= '"rdata":{';
           foreach ($asset as $key => $value) {
             $txt_jason .= '"'.$key.'":"'.$value.'",';
@@ -249,13 +246,11 @@ $bean_assets = $db->query($sel_asset); //无如是Location还是asset来源，�
           $txt_jason  .=','.$txt_rack_allocation_jason;
        }
     }
-//}
 }
 
 //$txt_jason=substr($txt_jason,0,strlen($txt_jason)-1);//去除最后的,
 $txt_jason='{'.$txt_jason.'}';
 echo($txt_jason);
 
-
-
 exit();
+?>

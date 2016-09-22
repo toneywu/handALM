@@ -51,7 +51,7 @@ class HIT_Racks extends HIT_Racks_sugar {
 
 		$HIT_Racks_fields = $this->get_list_view_array();
 
-         require_once('modules\HIT_Racks\ServerChart.php');
+         require_once('modules/HIT_Racks/ServerChart.php');
          $HIT_Racks_fields['OCCUPATION'] = getOccupationCnt($this);
 
 
