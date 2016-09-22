@@ -51,7 +51,7 @@ $app_list_strings['asset_trans_status']=array (
   'TRANSACTED' => '已完成事务处理',
 );
 
-$GLOBALS['app_list_strings']['cux_event_type_option_list']=array (
+$app_list_strings['cux_event_type_option_list']=array (
   'LOCKED' => '禁止使用或修改此字段',
   'REQUIRED' => '必须修改',
   'OPTIONAL' => '任意，可按业务场景需要修改',

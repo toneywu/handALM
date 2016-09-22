@@ -1328,7 +1328,7 @@ $app_list_strings['cux_event_type_option_list']['LOCKED'] = 'Locked/Not Availabl
 $app_list_strings['cux_event_type_option_list']['REQUIRED'] = 'Required';
 $app_list_strings['cux_event_type_option_list']['OPTIONAL'] = 'Optional';
 
-$GLOBALS['app_list_strings']['cux_event_type_list']=array (
+$app_list_string['hat_event_type_list']=array (
   'AT_MOVE' => 'Equip./Asset Trans.',
   'NETWORK' => 'Network Resource Trans.',
   'SR' => 'Service Request',
