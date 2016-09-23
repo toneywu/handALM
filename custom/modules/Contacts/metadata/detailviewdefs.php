@@ -90,6 +90,17 @@ array (
           ),
         ),
       ),
+	  'includes' => 
+      array (
+        0 =>
+        array (
+          'file' => 'modules/HAA_FF/ff_include.js',
+          ),
+        1 =>
+        array (
+          'file' => 'custom/modules/Contacts/js/ContactsDetailView.js',
+          ),
+        ),
       'maxColumns' => '2',
       'widths' => 
       array (
