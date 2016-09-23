@@ -161,7 +161,7 @@ array (
           ),
           1 => 'map_enabled',
         ),
-        3 => 
+/*        3 => 
         array (
           0 => 
           array (
@@ -170,7 +170,7 @@ array (
             'label' => 'LBL_CONTRACT',
           ),
           1 => '',
-        ),
+        ),*/
       ),
       'lbl_editview_panel_gis' => 
       array (
@@ -268,16 +268,17 @@ array (
         array (
           0 => 
           array (
-            'name' => 'reporter',
-            'studio' => 'visible',
-            'label' => 'LBL_REPORTER',
-          ),
-          1 => 
-          array (
             'name' => 'reporter_org',
             'studio' => 'visible',
             'label' => 'LBL_REPORTER_ORG',
           ),
+          1 => 
+          array (
+            'name' => 'reporter',
+            'studio' => 'visible',
+            'label' => 'LBL_REPORTER',
+          ),
+
         ),
         1 => 
         array (
