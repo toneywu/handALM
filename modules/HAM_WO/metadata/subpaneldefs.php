@@ -43,8 +43,7 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 $layout_defs['HAM_WO'] = array (
     // list of what Subpanels to show in the DetailView
     'subpanel_setup' => array (
-        
-		
+
 		'sr' => array (
             'order' => 30,
             'module' => 'HAM_SR',
@@ -55,14 +54,13 @@ $layout_defs['HAM_WO'] = array (
             'title_key' => 'LBL_SR_SUBPANEL_TITLE',
             'top_buttons'  => array (
                 //array('widget_class' => 'SubPanelTopCreateButton'),
-                0 => array (
+/*                0 => array (
                     'widget_class' => 'SubPanelTopSelectButton',
                     'mode'         => 'MultiSelect',
-                    ),
+                    ),*/
                 ),
             ),
-			
-			
+
         'woop' => array (
             'order' => 11,
             'module' => 'HAM_WOOP',
@@ -71,11 +69,12 @@ $layout_defs['HAM_WO'] = array (
             'subpanel_name' => 'HAM_WO_subpanel_woop',
             'get_subpanel_data' => 'woop_link',
             'title_key' => 'LBL_WOOP_SUBPANEL_TITLE',
+            'get_subpanel_data' => 'function:getWOOPQuery',
             'top_buttons'  => array (
                 0 => array('widget_class' => 'SubPanelTopCreateButton'),
             ),
         ),
-		
+
 		'wo_line' => array (
             'order' => 12,
             'module' => 'HAM_WO_Lines',
@@ -89,27 +88,6 @@ $layout_defs['HAM_WO'] = array (
             ),
         ),
 
-/*        'hmm_mo_request_lines' => array (
-            'order' => 10,
-            'module' => 'HMM_MO_Request_Lines',
-            'sort_order' => 'asc',
-            'sort_by' => 'item_name',
-            'subpanel_name' => 'default',
-            'get_subpanel_data' => 'function:get_material_lines',
-            'generate_select' => true,
-            'title_key' => 'LBL_HMM_MO_Request_Lines_TITLE',
-            'top_buttons'  => array (),
-            'function_parameters' => array(
-                'import_function_file' => 'modules/HMM_MO_Request_Lines/WOSubpanel.php',
-                //'base_unit_id' => $this->_focus->base_unit_id,
-                //'uom_class_id' => $this->_focus->id,
-                'return_as_array' => 'true'
-            ),
-        ),*/
-
-        
-
         ),
-        
     );
     ?>

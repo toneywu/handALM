@@ -284,8 +284,15 @@ $dictionary['HAM_WOOP'] = array (
 			'options' => 'ham_wo_status_list',
 			'studio' => 'visible',
 			'dependency' => false,
-
-			
+		),
+		'woop_status_tagged' => array (
+			'required' => true,
+			'name' => 'woop_status_tagged',
+			'vname' => 'LBL_WOOP_STATUS',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'source' => 'non-de',
 		),
 		'ham_work_center_id' => array (
 			'required' => true,

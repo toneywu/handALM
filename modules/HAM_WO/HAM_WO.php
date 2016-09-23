@@ -49,8 +49,8 @@ class HAM_WO extends HAM_WO_sugar {
 			$this->wo_status = 'APPROVED';
 			//TODO:以后再加入真正的工作流判断，临时只要提交都会通过
 		} else
-			if ($focus_wo_status == 'APPROVED') {
-			}
+		if ($focus_wo_status == 'APPROVED') {
+		}
 		$check_bean = BeanFactory :: getBean("HAM_WO");
 		$db_bean = $check_bean->get_full_list('', "ham_wo.id ='" . $this->id . "'");
 		//数据库里面的 活动 只要工单状态为拟定，并且活动字段发生了变化，都将工序删除，重新从活动从COPY 
@@ -309,6 +309,43 @@ class HAM_WO extends HAM_WO_sugar {
 		}
 		parent :: save($check_notify); //保存WO主体
 
+	}
+
+	public function getWOOPQuery() {
+			//{$this->id}
+		$query = "SELECT 
+					ham_woop.id,
+					ham_woop.ham_work_center_id,
+					ham_woop.work_center_res_id,
+					ham_woop.work_center_people_id,
+					ham_woop.woop_number,
+					ham_woop.name,
+					ham_woop.date_schedualed_start,
+					ham_woop.date_schedualed_finish,
+					jt0.name work_center,
+					jt1.name work_center_res,
+					jt2.name work_center_people,
+					ham_woop.act_module,
+					ham_woop.woop_status,
+					ham_woop.assigned_user_id,
+					'woop' panel_name 
+					FROM
+					ham_woop 
+					LEFT JOIN ham_work_centers jt0 
+					ON ham_woop.ham_work_center_id = jt0.id 
+					AND jt0.deleted = 0 
+					LEFT JOIN ham_work_center_res jt1 
+					ON ham_woop.work_center_res_id = jt1.id 
+					AND jt1.deleted = 0 
+					LEFT JOIN ham_work_center_people jt2 
+					ON ham_woop.work_center_people_id = jt2.id 
+					AND jt2.deleted = 0 
+					INNER JOIN ham_wo woop_link_rel 
+					ON ham_woop.ham_wo_id = woop_link_rel.id 
+					AND woop_link_rel.deleted = 0 
+					WHERE ham_woop.deleted=0
+					AND ham_woop.ham_wo_id='".$this->id."'";
+		return $query;
 	}
 
 }

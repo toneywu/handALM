@@ -179,26 +179,18 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 					}
 
 			}
-
-//			if($this->act_module=='HIT_IP_TRANS_BATCH'){
-//				$hit_ip_trans_batch_bean = BeanFactory :: getBean('HIT_IP_TRANS_BATCH')->get_full_list("date_entered desc","hit_ip_trans_batch.source_woop_id='".$this->id."'");
-//				if(count($hit_ip_trans_batch_bean)!=0){
-//					$it_trans_batch_id = $hit_ip_trans_batch_bean[0]->id;
-//					$woop_fields['ACT_MODULE'] .="&record=".$it_trans_batch_id;
-//				}
-//			}
-
-			//$woop_fields['ACT_MODULE'] =empty($this->act_module);
 		}
 
 		$WO_fields = $this->get_list_view_array();
 		//为工作单的状态着色
-		if (!empty ($woop_status))
+		if (!empty ($woop_status)) {
 			$woop_fields['WOOP_STATUS_VAL'] = $this->woop_status;
-
+			$woop_fields['WOOP_STATUS_TAGGED'] ='<span class="color_tag color_doc_status_'.$this->woop_status.'">'.$app_list_strings['ham_wo_status_list'][$woop_status].'</span>' ;
+		}
 
 		return $woop_fields;
 	}
+
 
 	function __construct() {
 		parent :: __construct();
