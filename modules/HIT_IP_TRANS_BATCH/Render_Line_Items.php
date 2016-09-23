@@ -42,6 +42,7 @@ function display_lines($focus, $field, $value, $view) {
 			while ($row = $focus->db->fetchByAssoc($result)) {
 				//echo var_dump($row);;
 				$line_data = json_encode($row);
+				$html .= "<script>var lineDataTemp=" . $line_data . ";</script>";
 				$html .= "<script>lineData=" . $line_data . ";</script>";
 				$html .= "<script>insertLineData(" . $line_data . ");</script>";
 				//REF:custom/modules/HAT_Asset_Trans/js/line_items.js
