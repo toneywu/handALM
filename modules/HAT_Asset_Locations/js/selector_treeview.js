@@ -146,9 +146,14 @@ function showNodeDetailHTML(node,targetDIV) {
 		for (var index = 0; index < node.data.fields.length; ++index) {
 		    varHTML+="<p><span class='lab'>"+node.data.fields[index]['lab']+"</span><span class='detail_data'>"+node.data.fields[index]['val']+"</span></p>";
 		}
-
 	}
 	targetDIV.html(varHTML);
+	//读取机柜信息
+	showITRacks(node);
+
+	if (current_mode=="rack") {//如果当前模式是选择U位，则出现U位选择的按钮
+		$("#rack_frame").after(showITRacksForm(node));
+	}
 }
 
 function showNodeDetailBtn(node) {
@@ -160,6 +165,7 @@ function showNodeDetailBtn(node) {
 		return "";
 	}
 }
+
 
 function btn_select_clicked() {
 	//在选择模式下返回值

@@ -135,8 +135,15 @@ $(document).ready(function(){
 
 	$("#merge_duplicate_button").after(change_btn);
 
-	$("#wo_lines").parent("td").prev("td").hide();
-	showWOLines();
+/*	$("#wo_lines").parent("td").prev("td").hide();
+	showWOLines();*/
+
+	//将Subpanel的内容前移到上方TAB中
+	$("#LBL_EDITVIEW_PANEL_WOLINES").after("<div class='tab_subpanel'>"+$("#whole_subpanel_wo_line").html()+"</div>");
+	$("#whole_subpanel_wo_line").html("");
+	$("#LBL_EDITVIEW_PANEL_SOURCE").after("<div class='tab_subpanel'>"+$("#whole_subpanel_sr").html()+"</div>");
+	$("#whole_subpanel_sr").html("");
+
 
 	$("#btn_change_status").click(function(){ //如果点了修改状态按钮，调用Ajax修改状态
 

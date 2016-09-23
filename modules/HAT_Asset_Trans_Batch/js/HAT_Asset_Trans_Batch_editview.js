@@ -185,7 +185,9 @@ function getLovValueByText(focused_textfiled_id,list_Lov_id) { //根据LOV的Tex
 
 $(document).ready(function(){
 
-	resetEventType(true);
+	SUGAR.util.doWhen("typeof mark_field_disabled != 'undefined'", function(){
+		resetEventType(true);
+	})
 
 	if ($("#hat_eventtype_id").val() != "") {
 		setEventTypeFields();

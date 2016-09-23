@@ -97,6 +97,9 @@ $mod_strings = array (
   'LBL_WORK_ORDER_ACCESS'=>'Work Order Access',
   'LBL_NEXT_WOOP_ASSIGNMENT'=>'Next WO Task Assignment',
   'LBL_BTN_ASSIGN_BUTTON_LABEL'=>'Operating Assign',
-  'LBL_EDITVIEW_PANEL5'=>'WO Obj.Lines',
+  'LBL_EDITVIEW_PANEL_WOLINES'=>'WO Obj.Lines',
   'LBL_BTN_COMPLETE_BUTTON_LABEL'=>'Complete Work Order',
+  'LBL_EDITVIEW_PANEL_SOURCE'=>'Sources/Events',
+  'LBL_CONTACT'=>'Contact',
+  'LBL_ACCOUNT'=>'Customer/Demand Org.'
 );

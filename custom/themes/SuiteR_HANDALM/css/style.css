@@ -303,6 +303,10 @@ input[type=text], select{
 /**********************************/
 /*以下是完全自定义的一些对象	  */
 /**********************************/
+.detail .tab_subpanel tr td[scope=row], .detail .tab_subpanel .action_buttons{
+	text-align: left;
+}
+
 #lineItems {
 	border-style: none;
 }

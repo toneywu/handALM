@@ -5,7 +5,6 @@
  * 返回的JASON示例： 
  * {"node":[{"id":"92a3dde3-47a1-7467-8e26-56b74a8bed37","html":" V-SH01 : Shanghai Hongqiao Area","type":"location"},{"id":"1f790755-182c-d9bd-9e9e-56b74a64455c","html":" V-SH02 : Shanghai Pudong Area","type":"location"}]}
  */
-error_reporting(E_ALL);
 
 if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
@@ -41,7 +40,7 @@ function get_jason_field ($label_field_name, $mod_name,  $val_field,  $val_type=
 
     if ($val_type=="bool") {
       $val_field = ($val_field==0)?'<input type=\"checkbox\">':'<input type=\"checkbox\" checked=\"checked\">';
-    }elseif ($val_type=="relate" && isset($val_field_id)) {
+    } elseif ($val_type=="relate" && isset($val_field_id)) {
       $val_field = '<a href=\"index.php?module='.$relate_mod_name.'&action=DetailView&record='.$val_field_id.'\">'.$val_field.'</a>';
     }
     if (isset($val_field)&&$val_field!='') {
@@ -174,13 +173,30 @@ $bean_locations = $db->query($sel_location); //无如是Location还是asset来�
                         AND hat_assets.id = '".$_GET['id']."'";
 
 
-//echo($sel_asset);
+    $bean_assets = $db->query($sel_asset); //无如是Location还是asset来源，都可以显示子资产
+    while ($asset = $db->fetchByAssoc($bean_assets)) {
 
-$bean_assets = $db->query($sel_asset); //无如是Location还是asset来源，都可以显示子资产
-//if(is_array($bean_assets)) {
-    while ( $asset = $db->fetchByAssoc($bean_assets) ) {
+      $txt_rack_jason = "";
+      $txt_rack_allocation_jason="";
+      //如果当前资产是IT机柜，则加载机柜相关的内容，合并到展示区域中
+      if ($asset['enable_it_rack']==true) {
+        $beanRack = BeanFactory::getBean('HIT_Racks') ->retrieve_by_string_fields(array('hit_racks.hat_assets_id'=>$asset['id']));
+        $txt_rack_jason .=get_jason_field('height','HIT_Racks',$beanRack->height);
+        $txt_rack_jason .=get_jason_field('dimension_external','HIT_Racks',$beanRack->dimension_external);
+        $txt_rack_jason .=get_jason_field('dimension_internal','HIT_Racks',$beanRack->dimension_internal);
+        $txt_rack_jason .=get_jason_field('rated_current','HIT_Racks',$beanRack->rated_current);
+        $txt_rack_jason .=get_jason_field('standard_power','HIT_Racks',$beanRack->standard_power);
+        $txt_rack_jason .=get_jason_field('stock_number','HIT_Racks',$beanRack->stock_number);
 
+        require_once('modules/HIT_Racks/ServerChart.php');
+        $txt_rack_jason .= get_jason_field('occupation','HIT_Racks', getOccupationCnt($beanRack));
+        $txt_rack_jason .= get_jason_field('position_display_area','HIT_Racks', getServerChart($beanRack,"RackFrame"));
 
+        $txt_rack_allocation_jason = getServerChart($beanRack,"Servers").',"rackid":"'.$beanRack->id.'"';
+      }
+
+      //以下是正常的资产信息，所以有资产都按以下进行加载
+      //机柜会在最后进行合并
        $txt_jason .='"fields":[';
        $txt_jason .=get_jason_field('name','HAT_Assets',$asset['name']);
        $txt_jason .=get_jason_field('asset_desc','HAT_Assets',$asset['asset_desc']);
@@ -204,6 +220,9 @@ $bean_assets = $db->query($sel_asset); //无如是Location还是asset来源，�
        $txt_jason .=get_jason_field('owning_person','HAT_Assets',$asset['owning_person_id'],'relate',$asset['owning_person_id'],'Contacts');
        $txt_jason .=get_jason_field('using_org','HAT_Assets',$asset['using_org'],'relate',$asset['using_org_id'],'Accounts');
        $txt_jason .=get_jason_field('using_person','HAT_Assets',$asset['using_person_id'],'relate',$asset['using_person_id'],'Contacts');
+       //资产的常规信息显示完成后，钭机柜的信息合并进来，注意最后还要合并一次机柜的分配信息
+       $txt_jason .=$txt_rack_jason;
+
        $txt_jason=substr($txt_jason,0,strlen($txt_jason)-1);//最后一个没有
        $txt_jason .='],';
 
@@ -213,7 +232,7 @@ $bean_assets = $db->query($sel_asset); //无如是Location还是asset来源，�
          $txt_jason .=',{"link":"module=HAM_SRs&action=EditView&hat_assets_id='.$asset['id'].'","lab":"'.translate('LBL_ACT_CREATE_SR','HAT_Asset_Locations').'"}';
          $txt_jason .=',{"link":"module=HAM_WO&action=EditView&hat_assets_id='.$asset['id'].'","lab":"'.translate('LBL_ACT_CREATE_WO','HAT_Asset_Locations').'"}';
          $txt_jason .='],';
-       } else{
+       } else {
           $txt_jason .= '"rdata":{';
           foreach ($asset as $key => $value) {
             $txt_jason .= '"'.$key.'":"'.$value.'",';
@@ -223,14 +242,15 @@ $bean_assets = $db->query($sel_asset); //无如是Location还是asset来源，�
        }
 
        $txt_jason .='"type":"asset"';
+       if (isset($txt_rack_allocation_jason)&&$txt_rack_allocation_jason!="") { //如果有机柜信息，继续加载机柜的分配信息
+          $txt_jason  .=','.$txt_rack_allocation_jason;
+       }
     }
-//}
 }
 
 //$txt_jason=substr($txt_jason,0,strlen($txt_jason)-1);//去除最后的,
 $txt_jason='{'.$txt_jason.'}';
 echo($txt_jason);
 
-
-
 exit();
+?>

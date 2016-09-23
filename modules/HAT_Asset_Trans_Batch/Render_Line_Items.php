@@ -33,6 +33,8 @@ function display_lines($focus, $field, $value, $view){
 					  location_c.id current_location_id,
 					  hat.target_location_desc,
 					  hat.current_location_desc,
+					  hat.target_rack_position_desc,
+					  hat.target_rack_position_data,
 					  hat.target_using_person_desc,
 					  hat.target_owning_person_desc,
 					  hat.current_using_person_desc,

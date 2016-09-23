@@ -63,6 +63,7 @@ class HAM_WOViewEdit extends ViewEdit {
 
 			$this->bean->date_target_start = date('Y-m-d H:i');
 			$this->bean->date_target_finish = date('Y-m-d H:i');
+
 			#$this->bean->date_target_finish =$this->bean->date_target_start;
 		} else {
 			//如果没有SR关联
@@ -199,9 +200,9 @@ class HAM_WOViewEdit extends ViewEdit {
 				$contract_bean = BeanFactory :: getBean('AOS_Contracts')->retrieve_by_string_fields(array (
 									'id' => $contract_id
 								));
-				$this->bean->contract=$contract_bean->name;		
+				$this->bean->contract=$contract_bean->name;
 				$this->bean->source_type='Contracts';
-				//$this->bean->saveContracts(false);			
+				//$this->bean->saveContracts(false);
 			}
 		}
 

@@ -14,7 +14,7 @@
 $(document).ready(function(){
 
 
-	var varServer = jQuery.parseJSON($("#js_jason").text());
+	var varServer = jQuery.parseJSON($('#js_jason').text());
 	var numberingRule = varServer.numbering_rule;
 
 	$("#LBL_DETAILVIEW_PANEL1 td:first").hide();

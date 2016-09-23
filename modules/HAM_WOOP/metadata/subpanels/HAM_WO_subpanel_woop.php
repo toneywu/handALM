@@ -22,6 +22,7 @@ $subpanel_layout['list_fields'] = array (
     'vname' => 'LBL_WOOP_STATUS',
     'width' => '14%',
     'default' => true,
+    'customCode'=>'<span class="color_tag color_doc_status_{$WOOP_STATUS_VAL}">{$WOOP_STATUS}</span>',
   ),
   'date_schedualed_start' => 
   array (
