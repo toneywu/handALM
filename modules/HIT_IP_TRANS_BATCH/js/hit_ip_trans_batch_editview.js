@@ -1,6 +1,14 @@
+
+function call_ff() {
+    triger_setFF($("#haa_ff_id").val(),"HIT_IP_TRANS_BATCH");
+    $(".expandLink").click();
+}
+
+
 function setEventTypePopupReturn(popupReplyData){
 	set_return(popupReplyData);
 	setEventTypeFields();
+	call_ff();
 }
 
 function setTargetOwningOrgPopupReturn(popupReplyData){
@@ -107,6 +115,16 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 }
 
 $(document).ready(function(){
+	
+	//这里可以有其它代码;
+	   if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
+			$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');
+		}
+
+    //触发FF
+    SUGAR.util.doWhen("typeof setFF == 'function'", function(){
+        call_ff();
+     });
 
 		  
 	mark_field_disabled("email",false);
