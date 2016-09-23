@@ -299,7 +299,7 @@ function initTransHeaderStatus() {
         $("#wo_status option[value='CANCELED']").remove();
         $("#wo_status option[value='TRANSACTED']").remove();
         //$("#wo_status option[value='COMPLETED']").remove();
-        $("#SAVE_HEADER,#save_and_continue,#SAVE_FOOTER").hide();
+        //$("#SAVE_HEADER,#save_and_continue,#SAVE_FOOTER").hide();
       
         $("#wo_status option[value='WSCH']").remove();
         $("#wo_status option[value='WMATL']").remove();

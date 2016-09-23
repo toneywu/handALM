@@ -24,8 +24,9 @@ function triger_setFF(id_value, module_name,action) {
 
 function setFF(FFObj,action) {
 	//设置FlexFORM，动态的调整界面字段
-	//console.log(FFObj);
-  console.log(FFObj);
+
+	var view = action_sugar_grp1;
+    console.log(FFObj);
 	if (FFObj.fieldtype=="HIDE") {
 		mark_field_disabled(FFObj.field,true,false) //隐藏字段
 	} else if (FFObj.fieldtype=="PLACEHOLDER"){
@@ -34,6 +35,14 @@ function setFF(FFObj,action) {
 
 	if (FFObj.label!=null&&FFObj.label!="") {//修改标签
 		$("#"+FFObj.field).prev().html(FFObj.label+":"); 
+		
+		if(view=="DetailView"){
+		   $("#"+FFObj.field).parent().prev().html(FFObj.label+":");
+		}else{
+			$("#"+FFObj.field+"_label").html(FFObj.label+":");
+		}
+		
+		
 	}
 	
 	if (FFObj.default_val!=null) {//设置默认值
@@ -57,7 +66,8 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
         	mark_obj_lable.css({"display":"none"});
       	}else{
           	mark_obj.closest('td').css({"display":"table-column"});
-          	mark_obj_lable.css({"display":"table-column"});
+          	//mark_obj_lable.css({"display":"table-column"});
+          	mark_obj_lable.css({"visibility":"hidden"});
       	}
     }else{
         mark_obj.closest('td').css({"display":""});

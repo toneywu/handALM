@@ -1,4 +1,4 @@
-$.getScript("modules/HAA_FF/ff_include.js");
+$.getScript("modules/HAM_SR/js/ff_include.js");
 //load triger_setFF()
 function setAssetPopupReturn(popupReplyData){
 	set_return(popupReplyData);
@@ -11,7 +11,7 @@ function setEventTypePopupReturn(popupReplyData){
 }
 
 function call_ff() {
-    triger_setFF($("#haa_ff_id").val(),"HAM_SR");
+	triger_setFF($("#haa_ff_id").val(),"HAM_SR",'EditView');
     $(".expandLink").click();
 }
 
@@ -33,7 +33,7 @@ function setLocationPopupReturn(popupReplyData){
  * 设置不可输入 add by yuan.chen2016-09-08
  */
 //设置字段不可更新
-function mark_field_disabled(field_name, hide_bool, keep_position=false) {
+/*function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 	  mark_obj = $("#"+field_name);
 	  mark_obj_lable = $("#"+field_name+"_label");
 
@@ -63,12 +63,12 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 	  if  (typeof $("#btn_clr_"+field_name)!= 'undefined') {
 	    $("#btn_clr_"+field_name).css({"visibility":"hidden"});
 	  }
-	}
+	}*/
 /**
  * 设置必输 add by yuan.chen2016-09-08
  */
 //设置字段不可更新
-function mark_field_enabled(field_name,not_required_bool) {
+/*function mark_field_enabled(field_name,not_required_bool) {
 	  //field_name = 字段名，不需要jquery select标志，直接写名字
 	  //not_required_bool如果为空或没有明确定义为true的话，字段为必须输入。如果=true则为非必须
 	  //alert(not_required_bool);
@@ -97,7 +97,7 @@ function mark_field_enabled(field_name,not_required_bool) {
 	  if  (typeof $("#btn_clr_"+field_name)!= 'undefined') {//移除清空按钮
 	    $("#btn_clr_"+field_name).css({"visibility":"visible"});
 	  }
-}
+}*/
 
 /**
  * 设置必输 add by yuan.chen2016-09-08
@@ -117,7 +117,11 @@ function close_people_info(){
 }
 
 $(document).ready(function(){
-
+	
+	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
+		$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');
+	}
+	
 	//触发FF
     SUGAR.util.doWhen("typeof setFF == 'function'", function(){
         call_ff();
@@ -168,6 +172,9 @@ $(document).ready(function(){
 	});
     //end modified
     
+    $("#event_type").change(function(){
+		change_interface();
+	});
 
 
 	//在地点、资产下方添加一个说明的span

@@ -118,7 +118,7 @@ function setAccessAssetNameReturn(popupReplyData){
 
 function setHitIpReturn(popupReplyData){
 	//alert(popupReplyData);
-	console.log(popupReplyData);
+	  console.log("popupReplyData="+popupReplyData);
 	  set_return(popupReplyData);
 }
 
@@ -259,11 +259,13 @@ function insertTransLineHeader(tableid){
 
 function insertLineData(asset_trans_line){ //将数据写入到对应的行字段中
   console.log(asset_trans_line);
+  //console.log($.isArray(asset_trans_line));
+
   var ln = 0;
   if(asset_trans_line.id != '0' && asset_trans_line.id !== ''){
     ln = insertTransLineElements("lineItems");
     //alert(asset_trans_line.hit_ip_subnets);
-     ip_splited = asset_trans_line.hit_ip_subnets.split("/");
+     var ip_splited = asset_trans_line.hit_ip_subnets.split("/");
      SUGAR.util.doWhen("typeof IpSubnetCalculator != 'undefined'", function(){
 	  if ( IpSubnetCalculator.isIp(ip_splited[0])&&ip_splited[1]<=32&&ip_splited[1]>=0) {
 		   var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1]);
@@ -703,11 +705,38 @@ function resetLineNum_Bold() {//数行号
   //if (j==0) {}
 }
 
+function LineEditorClose(ln) {//关闭行编辑器（显示为正常行）
+	  if (check_form('EditView')) {
+	    $("#asset_trans_editor"+ln).hide();
+	    $("#asset_trans_line1_displayed"+ln).show();
+	    $("#asset_trans_line2_displayed"+ln).show();
+	    renderTransLine(ln);
+	    resetLineNum_Bold();
+	  }
+	}
+
 function dulicateTranLine(ln) {//关闭行编辑器（显示为正常行）
-  //if (check_form('EditView')) {
-	 var cloneDom =  $("#line_body"+ln);
-	 $("#lineItems").append(cloneDom);
-	 alert("ddd");
-  //}
-  ln++;
+	if (check_form('EditView')) {
+		  var keyValue="";
+			//获取上一行 排除已经删除的得到prodin的真实数值
+		  	  var lastProdln=1;
+			  for(var i=0;i<=prodln-1;i++){
+				  if($("#line_deleted"+i).val()!=1){
+					  lastProdln=i;
+				  }
+			  }
+			//加入新行  
+		    insertTransLineElements("lineItems");
+		 
+			for(var key in lineDataTemp){
+			  var domvalue= $("#line_"+key+lastProdln).val();	
+			  $("#line_"+key+(prodln-1)).val(domvalue); 
+			  $("#displayed_line_"+key+(prodln-1)).html(domvalue); 
+			}
+			//清除id
+			$("#line_id"+(prodln-1)).val(null);
+			
+			//设置行号
+			resetLineNum_Bold();
+	}
 }
