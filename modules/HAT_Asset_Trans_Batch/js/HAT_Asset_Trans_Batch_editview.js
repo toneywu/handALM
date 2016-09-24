@@ -1,3 +1,8 @@
+function call_ff() {
+    triger_setFF($("#haa_ff_id").val(),"HAT_Asset_Trans_Batch");
+    $(".expandLink").click();
+}
+
 var prodln = 0;
 
 function setEventTypePopupReturn(popupReplyData){
@@ -21,6 +26,8 @@ function setEventTypePopupReturn(popupReplyData){
 		set_return(popupReplyData);
 		setEventTypeFields();
 	}
+	
+	 call_ff();
 }
 
 function setEventTypeFields() {
@@ -184,6 +191,17 @@ function getLovValueByText(focused_textfiled_id,list_Lov_id) { //根据LOV的Tex
 }
 
 $(document).ready(function(){
+	
+	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
+		$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');
+	}
+
+		//触发FF
+		SUGAR.util.doWhen("typeof setFF == 'function'", function(){
+		call_ff();
+		});
+
+	
 
 	SUGAR.util.doWhen("typeof mark_field_disabled != 'undefined'", function(){
 		resetEventType(true);

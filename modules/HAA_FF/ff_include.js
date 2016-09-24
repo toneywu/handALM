@@ -78,14 +78,14 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {functi
 
 	  if(view === 'EditView') {
 	    if(hide_bool==true) {
-	      	if (keep_position==false) {
+	    	if (keep_position==false) {
 	        	mark_obj.closest('td').css({"display":"none"});
 	        	//mark_obj_lable.css({"display":"none"});
+				mark_obj_lable.css({"visibility":"hidden"});
 	      	}else{
 	          	mark_obj.closest('td').css({"display":"table-column"});
 	          	//mark_obj_lable.css({"display":"table-column"});
 				mark_obj_lable.css({"visibility":"hidden"});
-				
 	      	}
 	    }else{
 	        mark_obj.closest('td').css({"display":""});
