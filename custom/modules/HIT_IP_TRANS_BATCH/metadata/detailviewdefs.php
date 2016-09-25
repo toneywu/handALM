@@ -30,6 +30,17 @@ array (
           'field' => '30',
         ),
       ),
+	  'includes' => 
+      array (
+        0 => 
+        array (
+          'file' => 'modules/HAA_FF/ff_include.js',
+        ),
+        1 => 
+        array (
+          'file' => 'modules/HIT_IP_TRANS_BATCH/js/HIT_IP_TRANS_BATCH_detailview.js',
+        ),
+      ),
       'useTabs' => false,
       'tabDefs' => 
       array (

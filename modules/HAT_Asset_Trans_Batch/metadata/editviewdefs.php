@@ -93,6 +93,7 @@ array (
                 'name' => 'event_type',
                 'id' => 'hat_eventtype_id',
                 'event_short_desc' => 'name',
+                'haa_ff_id' => 'haa_ff_id',
               ),
               'call_back_function' => 'setEventTypePopupReturn',
             ),

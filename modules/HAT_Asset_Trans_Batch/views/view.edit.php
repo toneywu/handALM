@@ -22,7 +22,7 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
             }
             echo '<script type="text/javascript" src="' . $GLOBALS['sugar_config']['cache_dir'] . 'jsLanguage/' . $module . '/' . $GLOBALS['current_language'] . '.js?s=' . $GLOBALS['js_version_key'] . '&c=' . $GLOBALS['sugar_config']['js_custom_version'] . '&j=' . $GLOBALS['sugar_config']['js_lang_version'] . '"></script>';
         };
-
+	
 
         //1、初始化Framework
         require_once('modules/HAA_Frameworks/orgSelector_class.php');
@@ -31,7 +31,23 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
         $current_action = $this->action;
         $this->ss->assign('FRAMEWORK',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id'));
 
-
+		
+		//2、加载基于code_asset_location_type_id的动态界面模板（FF）
+        if(isset($this->bean->hat_eventtype_id) && ($this->bean->hat_eventtype_id)!=""){
+            //判断是否已经设置有位置分类，如果有分类，则进一步的加载分类对应的FlexForm
+            $event_type_id = $this->bean->hat_eventtype_id;
+            $bean_code = BeanFactory::getBean('HAT_EventType',$event_type_id);
+            if (isset($bean_code->haa_ff_id)) {
+                $ff_id = $bean_code->haa_ff_id;
+            }
+            if (isset($ff_id) && $ff_id!="") {
+                //如果分类有对应的FlexForm，些建立一个对象去存储FF_ID
+                //需要注意的是在Metadata中是不包括这个ID的，如果这里没有加载则在后续的JS文件中加载
+                echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="'.$ff_id.'">';
+            }
+        }
+        
+        
         //如果有工序来源，则初始化工序信息
         if (empty($this->bean->id) && !empty($_REQUEST['woop_id'])) {
             //如果当前对象还没有设置工序信息，并且参数中的工序有值，则根据参数中的WOOP对象填写当前处理单上的相关字段
@@ -134,5 +150,12 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
         echo "</script>";
 
         parent::Display();
+        //如果已经选择位置分类，无论是否位置分类对应的FlexForm有值，值将界面展开。
+        //（如果没有位置分类，则界面保持折叠状态。）
+        if(isset($this->bean->hat_eventtype_id) && ($this->bean->hat_eventtype_id)!=""){
+                    echo '<script>$(".collapsed").switchClass("collapsed","expanded");</script>';
+         } else {
+                echo '<script>$(".expanded").switchClass("expanded","collapsed");</script>';
+         }
     }
 }
