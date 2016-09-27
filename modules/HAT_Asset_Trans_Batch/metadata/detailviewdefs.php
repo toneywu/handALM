@@ -10,6 +10,10 @@ array (
       array (
         0 => 
         array (
+          'file' => 'modules/HAA_FF/ff_include.js',
+        ),
+        1 => 
+        array (
           'file' => 'modules/HAT_Asset_Trans_Batch/js/HAT_Asset_Trans_Batch_detailview.js',
         ),
       ),

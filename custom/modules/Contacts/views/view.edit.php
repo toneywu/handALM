@@ -75,9 +75,13 @@ class ContactsViewEdit extends ViewEdit
             //如果分类有对应的FlexForm，些建立一个对象去存储FF_ID
             //需要注意的是在Metadata中是不包括这个ID的，如果这里没有加载则在后续的JS文件中加载
 		}
-        $ff_id_field = '<input id=haa_ff_id name=haa_ff_id type=hidden '.(isset($ff_id)?'value='.$ff_id:'').'>';
-        echo '<script>if($("#haa_ff_id").length==0) { $("#EditView").append("'.$ff_id_field.'");}</script>';
-
+        //$ff_id_field = '<input id=haa_ff_id name=haa_ff_id type=hidden '.(isset($ff_id)?'value='.$ff_id:'').'>';
+        //echo '<script>if($("#haa_ff_id").length==0) { $("#EditView").append("'.$ff_id_field.'");}</script>';
+		echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="'.$ff_id.'">';
+        //$ff_id_field = '<input id=haa_ff_id name=haa_ff_id type=hidden '.(isset($ff_id)?'value='.$ff_id:'').'>';
+        //echo '<script>if($("#haa_ff_id").length==0) { $("#EditView").append("'.$ff_id_field.'");}</script>';
+		
+		
 		parent::Display();
 
 		//如果已经选择business_type，无论是否business_type对应的FlexForm有值，值将界面展开。

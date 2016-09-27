@@ -2,6 +2,14 @@ if(typeof(YAHOO.SUGAR) == 'undefined') {
 	$.getScript("include/javascript/sugarwidgets/SugarYUIWidgets.js");
 }
 
+$.getScript("modules/HAA_FF/ff_include.js");//load triger_setFF()
+
+function call_ff() {
+    triger_setFF($("#haa_ff_id").val(),"HAM_WO","DetailView");
+    $(".expandLink").click();
+ 
+}
+
 /**
  * 通过Ajax显示工作单行
  * @param name
@@ -127,6 +135,11 @@ function checkAccess(id){
  * document 页面加载 入口函数
  */
 $(document).ready(function(){
+	
+	  //触发FF
+   SUGAR.util.doWhen("typeof setFF == 'function'", function(){
+    	call_ff();
+   });
 
 	//明细页面添加一个按钮
 	var change_btn=$("<input type='button' class='btn_detailview' id='btn_change_status' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL')+"'>");

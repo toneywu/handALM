@@ -1,3 +1,13 @@
+function setEventTypeReturn(popupReplyData){//选择地点类型后
+    set_return(popupReplyData);
+    call_ff();
+}
+
+function call_ff() {
+    triger_setFF($("#haa_ff_id").val(),"HAM_WO");
+    $(".expandLink").click();
+}
+
 function setAssetPopupReturn(popupReplyData){
 	set_return(popupReplyData);
 	$("#asset_desc_text").text($("#asset_desc").val());
@@ -127,6 +137,16 @@ function showWOLines() {
 };
 
 $(document).ready(function(){
+	
+	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
+		$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');
+	}
+
+	//触发FF
+	SUGAR.util.doWhen("typeof setFF == 'function'", function(){
+		call_ff();
+	});
+
 
 	/**
 	 * checkAccess 

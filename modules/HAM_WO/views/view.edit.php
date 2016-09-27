@@ -232,26 +232,56 @@ class HAM_WOViewEdit extends ViewEdit {
 			$this->ss->assign('WO_NUMBER',$wo_num_html);
 		}
 		//工单来源于 工序完成 和点击工单完成的按钮
+		//工单来源于 工序完成 和点击工单完成的按钮
 		if(isset($_REQUEST['fromWoop'])&&$_REQUEST['fromWoop']=='Y'){
 			$this->bean->wo_status='COMPLETED';	
 			$last_woop_bean = BeanFactory::getBean("HAM_WOOP",$_REQUEST['last_woop_id']);
+			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('woop_number desc', "ham_woop.ham_wo_id ='" . $this->bean->id . "'");
+			$last_woop_bean=$ham_woops[0];
+			echo $last_woop_bean->woop_number;
 			$timeDate = new TimeDate();
 			global $current_user;
-			if(!empty($last_woop_bean->date_actual_finish)){
+			global $timedate;
+			if($last_woop_bean->date_actual_finish!=null){
 				$localDate = $timeDate->to_display_date_time($last_woop_bean->date_actual_finish, true, true, $current_user);
+				
 				$this->bean->date_actual_finish=$localDate;
 			}else{
-				$localDate = $timeDate->to_display_date_time(time(), true, true, $current_user);
-				$this->bean->date_actual_finish=$localDate;
+				//$localDate = $timeDate->to_display_date_time(,true, true, $current_user);
+				//$this->bean->date_actual_finish=$localDate;
+				$this->bean->date_actual_finish=$timedate->now();
 			}	
-			if(empty($this->bean->date_actual_start)){
-				$localDate = $timeDate->to_display_date_time($this->bean->date_entered, true, true, $current_user);
-				$this->bean->date_actual_start=$localDate;
+			if($this->bean->date_actual_start==null){
+				//$localDate = $timeDate->to_display_date_time($this->bean->date_entered, true, true, $current_user);
+				//$this->bean->date_actual_start=$localDate;
+				//$this->bean->date_actual_start=$timedate->now();
+				$this->bean->date_actual_start=$this->bean->date_entered;
 			}
 		}
 
-
+		//2、加载基于code_asset_location_type_id的动态界面模板（FF）
+        if(isset($this->bean->hat_event_type_id) && ($this->bean->hat_event_type_id)!=""){
+            //判断是否已经设置有位置分类，如果有分类，则进一步的加载分类对应的FlexForm
+            $event_type_id = $this->bean->hat_event_type_id;
+            $bean_code = BeanFactory::getBean('HAT_EventType',$event_type_id);
+            if (isset($bean_code->haa_ff_id)) {
+                $ff_id = $bean_code->haa_ff_id;
+            }
+            if (isset($ff_id) && $ff_id!="") {
+                //如果分类有对应的FlexForm，些建立一个对象去存储FF_ID
+                //需要注意的是在Metadata中是不包括这个ID的，如果这里没有加载则在后续的JS文件中加载
+                echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="'.$ff_id.'">';
+            }
+        }
+        	
 		parent :: Display();
+		//如果已经选择位置分类，无论是否位置分类对应的FlexForm有值，值将界面展开。
+        //（如果没有位置分类，则界面保持折叠状态。）
+        if(isset($this->bean->hat_event_type_id) && ($this->bean->hat_event_type_id)!=""){
+                    echo '<script>$(".collapsed").switchClass("collapsed","expanded");</script>';
+         } else {
+                echo '<script>$(".expanded").switchClass("expanded","collapsed");</script>';
+         }
 	} //end function
 
 } //end class
