@@ -84,4 +84,7 @@ $mod_strings = array (
   'LBL_CHANNEL_CONTENT'=>'Channel Content',
   'LBL_MRTG_LINK'=>'MRTG Link',
   'LBL_BTN_COPY_TRANS_LINE'=>'Duplicate Transaction Line',
+  'LBL_PARENT_IP'=>'Parent IP',
+  'LBL_ASSOCIATED_IP'=>'Associated IP',
+  'LBL_ACCESS_ASSETS_NAME'=>'Access Assets Name',
 );

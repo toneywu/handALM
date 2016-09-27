@@ -77,7 +77,7 @@ $mod_strings = array (
   'LBL_BANDWIDTH_TYPE'=>'宽带类型',
   'LBL_PORT'=>'端口呀',
   'LBL_SPEED_LIMIT'=>'限速',
-  'LBL_HAT_ASSET_NAME'=>'资产设备',
+  'LBL_HAT_ASSET_NAME'=>'网关设备',
   'LBL_NAME'=>'Name',
   'LBL_CABINET'=>'机柜',
   'LBL_MONITORING'=>'监控链接',
@@ -85,4 +85,7 @@ $mod_strings = array (
   'LBL_CHANNEL_CONTENT'=>'频道内容',
   'LBL_MRTG_LINK'=>'MRTG链接',
   'LBL_BTN_COPY_TRANS_LINE'=>'复制行',
+  'LBL_PARENT_IP'=>'C段',
+  'LBL_ASSOCIATED_IP'=>'可用IP',
+  'LBL_ACCESS_ASSETS_NAME'=>'接入设备',
 );

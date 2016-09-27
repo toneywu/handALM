@@ -150,6 +150,7 @@ function loopField(fieldName,type){
  * 
  */
 function changeRequired(lineRecord){
+	console.log(lineRecord);
 	loopField("line_hit_ip_subnets",lineRecord.lineRecord);
 	//loopField("line_hit_ip_subnets",lineRecord.change_associated_ip);
 	loopField("line_gateway",lineRecord.change_gateway);
