@@ -52,6 +52,7 @@ handleRedirect($return_id, 'HIT_IP_TRANS_BATCH');
 function save_lines($post_data, $parent, $key = '') {
 	$line_count = isset ($post_data[$key . 'hit_ip_subnets_id']) ? count($post_data[$key . 'hit_ip_subnets_id']) : 0; //判断记录的行数
 	$insertFlag = "N";
+	$prev_trans_batch_id = "";
 	echo '<br/>.line_count = ' . $line_count;
 	echo '<br/>.$parent.id = ' . $parent->id;
 
@@ -84,16 +85,19 @@ function save_lines($post_data, $parent, $key = '') {
 					$trans_line = new HIT_IP_TRANS();
 					$trans_line->retrieve($post_data[$key . 'id'][$i]);
 					$insertFlag = 'N';
+					$prev_trans_batch_id=$trans_line->hit_ip_trans_batch_id;
+					echo "prev_trans_batch_id=".$prev_trans_batch_id;
 				}
 				foreach ($trans_line->field_defs as $field_def) { //循环对所有要素
 					//echo "value = ".$post_data[$key.'hit_ip_ida'][$i]."<br>";
 					//echo "field_name= " . $field_def['name'] . "--------------------value = " . $post_data[$key . $field_def['name']][$i] . "<br>";
 					$trans_line-> $field_def['name'] = $post_data[$key . $field_def['name']][$i];
-					//echo "<br/>".$field_def[name].'='. $post_data[$key.$field_def['name']][$i];
+					echo "<br/>".$field_def[name].'='. $post_data[$key.$field_def['name']][$i];
 				}
 				if ($insertFlag == "Y") {
 					$trans_line->hit_ip_trans_batch_id = $parent->id; //父ID
 				}
+				
 				$trans_line->trans_status = $parent->asset_trans_status; //父状态 LogicHook BeforeSave可能会改写
 
 			}
@@ -107,7 +111,7 @@ function save_lines($post_data, $parent, $key = '') {
 
 			if ($parent->asset_trans_status == "APPROVED") {
 				$GLOBALS['log']->infor("allocation Lines Begin to process");
-				save_allocation_lines($trans_line, $parent);
+				save_allocation_lines($trans_line, $parent,$prev_trans_batch_id);
 				$GLOBALS['log']->infor("End to process Allocation Lines");
 			}
 		} else {
@@ -117,23 +121,20 @@ function save_lines($post_data, $parent, $key = '') {
 	}
 }
 
-function save_allocation_lines($trans_line, $parent) {
+function save_allocation_lines($trans_line_bean, $parent,$prev_trans_batch_id) {
 	/**
 	 * 循环所有网络事务处理行
 	 */
+	 $trans_line = new HIT_IP_TRANS();
+	 $trans_line->retrieve($trans_line_bean->id);
 	//1 尝试获取 
 	$allocation_line_bean = BeanFactory :: getBean('HIT_IP_Allocations')->retrieve_by_string_fields(array (
 		'source_trans_id' => $trans_line->id
 	));
 	//2 获取不到就new一个对象
-	if ($allocation_line_bean->id == null) {
+	if ($allocation_line_bean->source_trans_id == null) {
 		$allocation_line_bean = BeanFactory :: newBean("HIT_IP_Allocations");
 	}
-	//	foreach ($allocation_line_bean->field_defs as $field_def) {
-	//		//echo　'field name = '.$field_def['name']."</br>";
-	//		echo "field = ".$field_def['name'].",value =".$trans_line-> $field_def['name']. "</br>";
-	//		$allocation_line_bean-> $field_def['name'] = $trans_line-> $field_def['name'];
-	//	}
 	$allocation_line_bean->name = $trans_line->name;
 	$allocation_line_bean->hit_ip_subnets_id = $trans_line->hit_ip_subnets_id;
 	$allocation_line_bean->hit_ip_subnets = $trans_line->hit_ip_subnets;
@@ -155,7 +156,11 @@ function save_allocation_lines($trans_line, $parent) {
 	$allocation_line_bean->access_asset_name = $trans_line->access_asset_name;
 	$allocation_line_bean->access_assets_id = $trans_line->access_assets_id;
 	if ($allocation_line_bean->source_trans_id == null) {
-		$allocation_line_bean->hit_ip_trans_batch_id = $trans_line->hit_ip_trans_batch_id;
+//		if($prev_trans_batch_id!=null){
+//			$allocation_line_bean->$trans_line = $prev_trans_batch_id;
+//		}
+		$allocation_line_bean->$trans_line = $trans_line->hit_ip_trans_batch_id;
+		//$allocation_line_bean->hit_ip_trans_batch_id = $trans_line->hit_ip_trans_batch_id;
 		$allocation_line_bean->source_trans_id = $trans_line->id;
 		$allocation_line_bean->source_wo_id = $parent->source_wo_id;
 		$allocation_line_bean->source_woop_id = $parent->source_woop_id;

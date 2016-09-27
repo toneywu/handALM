@@ -232,21 +232,30 @@ class HAM_WOViewEdit extends ViewEdit {
 			$this->ss->assign('WO_NUMBER',$wo_num_html);
 		}
 		//工单来源于 工序完成 和点击工单完成的按钮
+		//工单来源于 工序完成 和点击工单完成的按钮
 		if(isset($_REQUEST['fromWoop'])&&$_REQUEST['fromWoop']=='Y'){
 			$this->bean->wo_status='COMPLETED';	
 			$last_woop_bean = BeanFactory::getBean("HAM_WOOP",$_REQUEST['last_woop_id']);
+			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('woop_number desc', "ham_woop.ham_wo_id ='" . $this->bean->id . "'");
+			$last_woop_bean=$ham_woops[0];
+			echo $last_woop_bean->woop_number;
 			$timeDate = new TimeDate();
 			global $current_user;
-			if(!empty($last_woop_bean->date_actual_finish)){
+			global $timedate;
+			if($last_woop_bean->date_actual_finish!=null){
 				$localDate = $timeDate->to_display_date_time($last_woop_bean->date_actual_finish, true, true, $current_user);
+				
 				$this->bean->date_actual_finish=$localDate;
 			}else{
-				$localDate = $timeDate->to_display_date_time(time(), true, true, $current_user);
-				$this->bean->date_actual_finish=$localDate;
+				//$localDate = $timeDate->to_display_date_time(,true, true, $current_user);
+				//$this->bean->date_actual_finish=$localDate;
+				$this->bean->date_actual_finish=$timedate->now();
 			}	
-			if(empty($this->bean->date_actual_start)){
-				$localDate = $timeDate->to_display_date_time($this->bean->date_entered, true, true, $current_user);
-				$this->bean->date_actual_start=$localDate;
+			if($this->bean->date_actual_start==null){
+				//$localDate = $timeDate->to_display_date_time($this->bean->date_entered, true, true, $current_user);
+				//$this->bean->date_actual_start=$localDate;
+				//$this->bean->date_actual_start=$timedate->now();
+				$this->bean->date_actual_start=$this->bean->date_entered;
 			}
 		}
 
