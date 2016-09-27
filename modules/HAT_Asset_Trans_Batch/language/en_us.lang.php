@@ -68,4 +68,5 @@ $mod_strings = array (
   'LBL_OWNER'=>'Owner',
   'LBL_PLANNED_COMPLETE_DATE'=>'Planned Complete Date',
   'LBL_WO_LINES'=>'WO Obj.Lines',
+  'LBL_GENERATE_DOC'=>'Generate Doc.',
 );

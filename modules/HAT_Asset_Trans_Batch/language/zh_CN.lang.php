@@ -85,4 +85,6 @@ $mod_strings = array (
     'LBL_TRACKING_NUMBER' => '跟踪编号#',
       'LBL_EVENT_TYPE' => '事务类型',
   'LBL_WO_LINES'=>'工单对象行',
+  'LBL_GENERATE_DOC'=>'生成文档',
+
 );

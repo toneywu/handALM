@@ -50,3 +50,8 @@ function updateStatus(object_id) {
         });
     }
 }
+
+function GenerateDoc() {
+    var record_id=$( "input[name*='record']" ).val();
+    window.location = "index.php?module=HAT_Asset_Trans_Batch&action=GenerateDoc&uid="+record_id;
+}

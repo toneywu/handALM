@@ -18,8 +18,12 @@ array (
         'buttons' => 
         array (
           0 => 'EDIT',
-          1 => 'DUPLICATE',
-          2 => 'DELETE',
+/*          1 => 'DUPLICATE',*/
+          /*2 => 'DELETE',*/
+          1 =>
+          array (
+            'customCode' => '<input type="button" class="button" onClick="GenerateDoc();" value="{$MOD.LBL_GENERATE_DOC}">',
+          ),
         ),
       ),
       'maxColumns' => '2',
