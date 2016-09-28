@@ -105,5 +105,6 @@ $mod_strings = array (
   'LBL_CHANGE_CHANNEL_NUM'=>'可修改频道号',
   'LBL_CHANGE_CHANNEL_CONTENT'=>'可修改频道内容',
   'LBL_CHANGE_CHANGE_MRTG_LINK'=>'可修改MRGT链接',
-
+  'LBL_CHANGE_ACCESS_ASSETS_NAME'=>'可修改接入设备',
+'LBL_EDITVIEW_PANEL3' => '网络事务处理行',
 );

@@ -80,6 +80,7 @@ $mod_strings = array (
   'LBL_REQUIRE_CONFIRMATION' => 'Require Confirmation',
   'LBL_EDITVIEW_PANEL1' => 'Status Change',
   'LBL_EDITVIEW_PANEL2' => 'Management and Location Tracking',
+  'LBL_EDITVIEW_PANEL3' => 'IT　Transaction Line',
   'LBL_KEEP_TARGET_STATUS' => 'Keep Target Status Unchaged',
   'LBL_CHANGE_TARGET_STATUS' => 'Change Target Status',
   'LBL_CHANGE_PROCESSING_STATUS' => 'Change Processing Status',
@@ -106,4 +107,5 @@ $mod_strings = array (
   'LBL_CHANGE_CHANNEL_NUM'=>'Change Channel Num',
   'LBL_CHANGE_CHANNEL_CONTENT'=>'Change Channel Content',
   'LBL_CHANGE_CHANGE_MRTG_LINK'=>'Change MRGT Link',
+  'LBL_CHANGE_ACCESS_ASSETS_NAME'=>'Change Access Asset Name',
 );

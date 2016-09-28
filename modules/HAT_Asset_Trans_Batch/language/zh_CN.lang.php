@@ -85,4 +85,11 @@ $mod_strings = array (
     'LBL_TRACKING_NUMBER' => '跟踪编号#',
       'LBL_EVENT_TYPE' => '事务类型',
   'LBL_WO_LINES'=>'工单对象行',
+  'LBL_ACCOUNT'=>'客户/需求组织',
+  'LBL_ATTRIBUTE1'=>'属性记录 1',
+  'LBL_ATTRIBUTE2'=>'属性记录 2',
+  'LBL_ATTRIBUTE3'=>'属性记录 3',
+  'LBL_ATTRIBUTE4'=>'属性记录 4',
+  'LBL_ATTRIBUTE5'=>'属性记录 5',
+  'LBL_ATTRIBUTE6'=>'属性记录 6',
 );

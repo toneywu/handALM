@@ -1,17 +1,11 @@
 <?php
-$module_name = 'HIT_IP_TRANS_BATCH';
+$module_name = 'HAT_Asset_Trans_Batch';
 $viewdefs [$module_name] = 
 array (
-  'EditView' => 
+  'DetailView' => 
   array (
     'templateMeta' => 
     array (
-      'form' => 
-      array (
-        'hidden' => 
-        array (
-        ),
-      ),
       'includes' => 
       array (
         0 => 
@@ -20,7 +14,16 @@ array (
         ),
         1 => 
         array (
-          'file' => 'modules/HIT_IP_TRANS_BATCH/js/HIT_IP_TRANS_BATCH_editview.js',
+          'file' => 'modules/HAT_Asset_Trans_Batch/js/HAT_Asset_Trans_Batch_detailview.js',
+        ),
+      ),
+      'form' => 
+      array (
+        'buttons' => 
+        array (
+          0 => 'EDIT',
+          1 => 'DUPLICATE',
+          2 => 'DELETE',
         ),
       ),
       'maxColumns' => '2',
@@ -45,7 +48,7 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_EDITVIEW_PANEL2' => 
+        'LBL_DETAILVIEW_PANEL2' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
@@ -56,7 +59,6 @@ array (
           'panelDefault' => 'expanded',
         ),
       ),
-      'syncDetailEditViews' => true,
     ),
     'panels' => 
     array (
@@ -69,25 +71,12 @@ array (
             'name' => 'framework',
             'studio' => 'visible',
             'label' => 'LBL_FRAMEWORKS',
-            'customCode' => '{$FRAMEWORK}',
           ),
           1 => 
           array (
             'name' => 'event_type',
             'studio' => 'visible',
             'label' => 'LBL_EVENT_TYPE',
-            'displayParams' => 
-            array (
-              'initial_filter' => '&basic_type_advanced=NETWORK',
-              'field_to_name_array' => 
-              array (
-                'name' => 'event_type',
-                'id' => 'hat_eventtype_id',
-                'event_short_desc' => 'name',
-                'haa_ff_id' => 'haa_ff_id',
-              ),
-              'call_back_function' => 'setEventTypePopupReturn',
-            ),
           ),
         ),
         1 => 
@@ -98,123 +87,80 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_ASSET_TRANS_STATUS',
           ),
-          1 => 
+          1 => '',
+        ),
+        2 => 
+        array (
+          0 => 
           array (
             'name' => 'current_owning_org',
             'studio' => 'visible',
             'label' => 'LBL_CURRENT_OWNING_ORG',
           ),
+          1 => 'owner_contacts',
         ),
-        2 => 
+        3 => 
         array (
           0 => 
           array (
             'name' => 'target_owning_org',
             'studio' => 'visible',
             'label' => 'LBL_TARGET_OWNING_ORG',
-            'displayParams' => 
-            array (
-              'field_to_name_array' => 
-              array (
-                'name' => 'target_owning_org',
-                'id' => 'target_owning_org_id',
-              ),
-              'call_back_function' => 'setTargetOwningOrgPopupReturn',
-            ),
-          ),
-          1 => 'name',
-        ),
-        3 => 
-        array (
-          0 => 
-          array (
-            'name' => 'tracking_number',
-            'label' => 'LBL_TRACKING_NUMBER',
           ),
           1 => 
           array (
-            'name' => 'owner_contacts',
+            'name' => 'target_using_org',
             'studio' => 'visible',
-            'label' => 'LBL_OWNER',
+            'label' => 'LBL_TARGET_USING_ORG',
           ),
         ),
         4 => 
         array (
-          0 => 
-          array (
-            'name' => 'source_wo',
-            'studio' => 'visible',
-            'label' => 'LBL_SOURCE_WO',
-            'displayParams' => 
-            array (
-              'field_to_name_array' => 
-              array (
-                'name' => 'source_wo',
-                'id' => 'source_wo_id',
-              ),
-              'call_back_function' => 'setWoPopupReturn',
-            ),
-          ),
+          0 => 'name',
           1 => 
           array (
-            'name' => 'source_woop',
-            'studio' => 'visible',
-            'label' => 'LBL_SOURCE_WOOP',
-            'displayParams' => 
-            array (
-              'initial_filter' => '&ham_wo_id_advanced="+encodeURIComponent(document.getElementById("source_wo_id").value)+"',
-              'field_to_name_array' => 
-              array (
-                'name' => 'source_woop',
-                'id' => 'source_woop_id',
-              ),
-            ),
+            'name' => 'tracking_number',
+            'label' => 'LBL_TRACKING_NUMBER',
           ),
         ),
         5 => 
         array (
           0 => 
           array (
-            'name' => 'contact_name',
-            'studio' => 'visible',
-            'label' => 'LBL_CONTACT_NAME',
-            'displayParams' => 
-            array (
-              'initial_filter' => '&account_id_advanced="+encodeURIComponent(document.getElementById("target_owning_org_id").value)+"',
-              'field_to_name_array' => 
-              array (
-                'name' => 'contact_name',
-                'id' => 'account_id',
-                'email_and_name1' => 'email',
-              ),
-            ),
+            'name' => 'planned_execution_date',
+            'label' => 'LBL_PLANNED_EXECUTION_DATE',
           ),
           1 => 
           array (
-            'name' => 'email',
-            'studio' => 'visible',
-            'label' => 'LBL_EMAIL',
+            'name' => 'planned_complete_date',
+            'label' => 'LBL_PLANNED_COMPLETE_DATE',
           ),
         ),
         6 => 
         array (
           0 => 
           array (
-            'name' => 'service_date',
-            'label' => 'LBL_SERVICE_DATE',
+            'name' => 'source_wo',
+            'studio' => 'visible',
+            'label' => 'LBL_SOURCE_WO',
           ),
           1 => 
           array (
-            'name' => 'send_to_customer',
-            'label' => 'LBL_SEND_TO_CUSTOMER',
+            'name' => 'source_woop',
+            'studio' => 'visible',
+            'label' => 'LBL_SOURCE_WOOP',
           ),
         ),
         7 => 
         array (
           0 => 'description',
         ),
+        8 => 
+        array (
+          0 => 'wo_lines',
+        ),
       ),
-      'lbl_editview_panel2' => 
+      'lbl_detailview_panel2' => 
       array (
         0 => 
         array (

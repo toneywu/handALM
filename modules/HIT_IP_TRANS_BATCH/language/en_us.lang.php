@@ -91,5 +91,11 @@ $mod_strings = array (
   'LBL_SERVICE_DATE'=>'Service Date',
   'LBL_EDITVIEW_PANEL1'=>'Transaction Lines',
   'LBL_DETAILVIEW_PANEL1'=>'Transaction Lines',
+  'LBL_ATTRIBUTE1'=>'Extra Attribute1',
+  'LBL_ATTRIBUTE2'=>'Extra Attribute2',
+  'LBL_ATTRIBUTE3'=>'Extra Attribute3',
+  'LBL_ATTRIBUTE4'=>'Extra Attribute4',
+  'LBL_ATTRIBUTE5'=>'Extra Attribute5',
+  'LBL_ATTRIBUTE6'=>'Extra Attribute6',
   
 );
