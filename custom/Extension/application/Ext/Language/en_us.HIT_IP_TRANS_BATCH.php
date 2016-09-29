@@ -39,3 +39,6 @@
 
 
 $app_list_strings['moduleList']['HIT_IP_TRANS_BATCH'] = 'Network Resource Trans.';
+
+
+

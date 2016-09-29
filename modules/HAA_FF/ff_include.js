@@ -1,15 +1,15 @@
 /*这个文件主要被其它模块调用*/
 
-function triger_setFF(id_value, module_name,action) {
+function triger_setFF(id_value, module_name) {
+
   //console.log("index.php?to_pdf=true&module=HAA_FF&action=setFF&ff_module="+module_name+"&ff_id="+id_value);
   if (id_value!="") {
    $.ajax({
         url: "index.php?to_pdf=true&module=HAA_FF&action=setFF&ff_module="+module_name+"&ff_id="+id_value,
         success: function (result) {
              var ff_fields = jQuery.parseJSON(result);
-			 console.log(ff_fields);
              $.each(ff_fields.FF, function () {
-                setFF(this,action)
+                setFF(this)
             })
              //alert("index.php?to_pdf=true&module=HAA_FF&action=setFF&ff_module="+module_name+"&ff_id="+id_value);
         },
@@ -22,11 +22,10 @@ function triger_setFF(id_value, module_name,action) {
 }
 
 
-function setFF(FFObj,action) {
-	//设置FlexFORM，动态的调整界面字段
+function setFF(FFObj) {
+	//设置FlexFORM，也就是根据不同的Product结果，动态的调整界面字段
 	//console.log(FFObj);
-    console.log(FFObj);
-    var view = action_sugar_grp1;
+  console.log(FFObj);
 	if (FFObj.fieldtype=="HIDE") {
 		mark_field_disabled(FFObj.field,true,false) //隐藏字段
 	} else if (FFObj.fieldtype=="PLACEHOLDER"){
@@ -34,34 +33,8 @@ function setFF(FFObj,action) {
 	}
 
 	if (FFObj.label!=null&&FFObj.label!="") {//修改标签
-		$("#"+FFObj.field).prev().html(FFObj.label+":"); 
-		
-		//console.log(view);
-		if(view=="DetailView"){
-		   $("#"+FFObj.field).parent().prev().html(FFObj.label+":");
-		   
-		   if($("#"+FFObj.field+"_id").parent().parent().attr("field")==FFObj.field){
-				$("#"+FFObj.field+"_id").parent().parent().prev().html(FFObj.label+":");
-		   
-		   }
-		   //var dom1 =  $("td[field="+FFObj.field+"]");
-		   //console.log(dom1.attr("width"));
-		   //$("td[field="+FFObj.field+"]").html(FFObj.label+":");
-		   $("td[field="+FFObj.field+"]").prev().html(FFObj.label+":");
-		   
-		   console.log($("td[field="+FFObj.field+"]").prev().text());
-		   
-		   if($("#"+FFObj.field).parent().parent().attr("type")=="relate"){
-		      $("#"+FFObj.field).prev().html(FFObj.label+":");
-		   }
-		   
-		   
-		}else{
-			$("#"+FFObj.field+"_label").html(FFObj.label+":");
-		}
-		
+		$("#"+FFObj.field+'_label').html(FFObj.label+":"); 
 	}
-	
 	if (FFObj.default_val!=null) {//设置默认值
 		  $("#"+FFObj.field+":checkbox").prop('checked',FFObj.default_val=='1'?true:false);
 		  $("#"+FFObj.field).val(FFObj.default_val);
@@ -69,7 +42,8 @@ function setFF(FFObj,action) {
 }
 
 
-function mark_field_disabled(field_name, hide_bool, keep_position=false) {function mark_field_disabled(field_name, hide_bool, keep_position=false) {
+
+function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 
 	  var view = action_sugar_grp1;
 
@@ -93,7 +67,6 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {functi
 	        mark_obj.css({"color":"#efefef","background-Color":"#efefef;"});
 	        mark_obj.attr("readonly",true);
 	        mark_obj_lable.css({"color":"#aaaaaa","text-decoration":"line-through"});
-			
 	    }
 	    if (typeof validate != "undefined" && typeof validate['EditView'] != "undefined") {
 	      removeFromValidate('EditView',field_name); //去除必须验证
@@ -126,10 +99,10 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {functi
 	              mark_obj.closest('td').prev().html("");
 	              mark_obj.closest('td').html("");
 	          }
-			  
 	      }
 	  }
 	}
+
 
 function mark_field_enabled(field_name,not_required_bool) {
   //field_name = 字段名，不需要jquery select标志，直接写名字
