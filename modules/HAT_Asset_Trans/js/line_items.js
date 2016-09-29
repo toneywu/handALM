@@ -663,6 +663,7 @@ function markLineDeleted(ln, key) {//删除当前行
 }
 
 function LineEditorShow(ln){ //显示行编辑器（先自动关闭所有的行编辑器，再打开当前行）
+  change_asset_required(event_line_data);
   if (prodln>1) {
     for (var i=0;i<prodln;i++) {
       LineEditorClose(i);

@@ -384,6 +384,11 @@ function setEditViewReadonly () { //如果当前头状态为Submitted、Approved
     $("#tabcontent0 input").attr("readonly",true);
     $("#tabcontent0 button").attr("readonly",true);
     $("#tabcontent0 input").attr("style","background-Color:#efefef");
+    
+    $("#tabcontent0 button").css("display","none");
+	$("#tabcontent0 select").css("background-Color","#efefef");
+	$("#tabcontent0 .dateTime").hide();
+    
     var wo_status = $("#wo_status").val();
     if(wo_status=="COMPLETED"){
 		mark_field_enabled("date_actual_start",false);

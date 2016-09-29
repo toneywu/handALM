@@ -179,6 +179,27 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 					}
 
 			}
+		}else{
+			//add by yuan.chen 2016-09-28
+			if (!empty ($this->act_module) && !empty ($this->work_center_people)) {
+				//有动作模块，并且已经有人员分配
+				if ($this->act_module == 'HIT_IP_TRANS_BATCH') {
+					$hit_ip_trans_batch_bean = BeanFactory :: getBean('HIT_IP_TRANS_BATCH')->get_full_list("date_entered desc", "hit_ip_trans_batch.source_woop_id='" . $this->id . "'");
+					if (count($hit_ip_trans_batch_bean) != 0) {
+						$it_trans_batch_id = $hit_ip_trans_batch_bean[0]->id;
+						$woop_fields['ACT_MODULE'] = '<a href="index.php?module=' . $this->act_module . '&record=' . $it_trans_batch_id . '&action=EditView&woop_id=' . $this->id . '">' . $app_list_strings['ham_woop_moduleList'][$this->act_module] . '</a>';
+					}
+				} else
+					if ($this->act_module == 'HAT_Asset_Trans_Batch') {
+
+						$asset_trans_beans = BeanFactory :: getBean('HAT_Asset_Trans_Batch')->get_full_list("date_entered desc", "hat_asset_trans_batch.source_woop_id='" . $this->id . "'");
+						if (count($asset_trans_beans) != 0) {
+							$asset_trans_id = $asset_trans_beans[0]->id;
+							$woop_fields['ACT_MODULE'] = '<a href=index.php?module=' . $this->act_module . '&record=' . $asset_trans_id . '&action=EditView&woop_id=' . $this->id . '">' . $app_list_strings['ham_woop_moduleList'][$this->act_module] . '</a>';
+						}
+					}
+
+			}
 		}
 
 		$WO_fields = $this->get_list_view_array();
@@ -187,7 +208,6 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 			$woop_fields['WOOP_STATUS_VAL'] = $this->woop_status;
 			$woop_fields['WOOP_STATUS_TAGGED'] ='<span class="color_tag color_doc_status_'.$this->woop_status.'">'.$app_list_strings['ham_wo_status_list'][$woop_status].'</span>' ;
 		}
-
 		return $woop_fields;
 	}
 
