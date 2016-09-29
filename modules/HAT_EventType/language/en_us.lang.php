@@ -108,4 +108,5 @@ $mod_strings = array (
   'LBL_CHANGE_CHANNEL_CONTENT'=>'Change Channel Content',
   'LBL_CHANGE_CHANGE_MRTG_LINK'=>'Change MRGT Link',
   'LBL_CHANGE_ACCESS_ASSETS_NAME'=>'Change Access Asset Name',
+  'LBL_AOS_PDF_TEMPLATE'=>'PDF Template',
 );

@@ -11,6 +11,12 @@
         die('Error retrieving record. This record may be deleted or you may not be authorized to view it.');
     }*/
     //error_reporting(0);
+
+    echo '<script src="custom/resources/tinymce/js/tinymce/tinymce.min.js"></script>';
+    //echo '<script src="custom/resources/tinymce/js/tinymce/langs/zh_CN.js"></script>';
+    echo '<script src="modules/HAT_Asset_Trans_Batch/js/GenerateDoc.js"></script>';
+
+
     require_once('modules/AOS_PDF_Templates/PDF_Lib/mpdf.php');
     require_once('modules/AOS_PDF_Templates/templateParser.php');
     require_once('modules/AOS_PDF_Templates/sendEmail.php');
@@ -89,11 +95,25 @@
 
     $printable = str_replace("\n","<br />",$converted);
 
+/*echo "<pre>";
+print_r ($module);
+*/
+echo '<div class="moduleTitle">
+<h2> <a href="index.php?module=HAT_Asset_Trans_Batch&amp;action=DetailView&amp;record='.$module->id.'">'.$module->name.'</a><span class="pointer">»</span>'.translate('LBL_GENERATE_DOC','HAT_Asset_Trans_Batch').'</h2><div class="clear"></div></div>';
+
+
+    echo '<input type="button" value="Save as PDF">';
     echo $header;
-    echo $printable;
+    echo '<textarea>'.$printable.'</textarea>';
     echo $footer;
 
+?>
 
+
+
+
+
+<?php
 //本函数添加资产事务处理行
 function populate_asset_trans_lines($text, $lineItems, $element = 'tr'){
     $firstValue = '';

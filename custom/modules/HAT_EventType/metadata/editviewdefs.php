@@ -92,7 +92,13 @@ array (
         2 => 
         array (
           0 => 'name',
-          1 => '',
+          1 => array (
+            'name'=>'aos_pdf_template',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&type_advanced=HAT_Asset_Trans_Batch',
+            ),
+            ),
         ),
         3 => 
         array (

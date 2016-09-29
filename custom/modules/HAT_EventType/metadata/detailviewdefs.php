@@ -87,7 +87,7 @@ array (
         2 => 
         array (
           0 => 'name',
-          1 => '',
+          1 => 'aos_pdf_template',
         ),
         3 => 
         array (
