@@ -112,4 +112,10 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL_SOURCE'=>'来源/事件',
   'LBL_CONTACT'=>'需求方联系人',
   'LBL_ACCOUNT'=>'客户/需求组织',
+  'LBL_ATTRIBUTE1'=>'属性记录 1',
+  'LBL_ATTRIBUTE2'=>'属性记录 2',
+  'LBL_ATTRIBUTE3'=>'属性记录 3',
+  'LBL_ATTRIBUTE4'=>'属性记录 4',
+  'LBL_ATTRIBUTE5'=>'属性记录 5',
+  'LBL_ATTRIBUTE6'=>'属性记录 6',
 );

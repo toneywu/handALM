@@ -1,14 +1,6 @@
-
-function call_ff() {
-    triger_setFF($("#haa_ff_id").val(),"HIT_IP_TRANS_BATCH");
-    $(".expandLink").click();
-}
-
-
 function setEventTypePopupReturn(popupReplyData){
 	set_return(popupReplyData);
 	setEventTypeFields();
-	call_ff();
 }
 
 function setTargetOwningOrgPopupReturn(popupReplyData){
@@ -25,17 +17,17 @@ function setTargetOwningOrgPopupReturn(popupReplyData){
 
 function setEventTypeFields() {
 	$.ajax({//
-		url: 'index.php?to_pdf=true&module=HAT_EventType&action=getTransSetting&id=' + $("#hat_eventtype_id").val(),// e74a5e34-906f-0590-d914-57cbe0e5ae89
+		url: 'index.php?to_pdf=true&module=HAT_EventType&action=getTransSetting&id=' + $("#hat_eventtype_id").val(),//e74a5e34-906f-0590-d914-57cbe0e5ae89
 		async: false,
 		success: function (data) {
 			var obj = jQuery.parseJSON(data);
-			// console.log(obj);
+			//console.log(obj);
 			for(var i in obj) {
-				$("#"+i).val(obj[i]);// 向隐藏的字段中复制值，从而所有的EventType值都会提供到隐藏的字段中
+				$("#"+i).val(obj[i]);//向隐藏的字段中复制值，从而所有的EventType值都会提供到隐藏的字段中
 			}
 			resetEventType();
 		},
-		error: function () { // 失败
+		error: function () { //失败
 			alert('Error loading document');
 		}
 	})
@@ -58,37 +50,37 @@ function setWoPopupReturn(popupReplyData){
  * 设置必输
  */
 function mark_field_enabled(field_name,not_required_bool) {
-  // field_name = 字段名，不需要jquery select标志，直接写名字
-  // not_required_bool如果为空或没有明确定义为true的话，字段为必须输入。如果=true则为非必须
-  // alert(not_required_bool);
+  //field_name = 字段名，不需要jquery select标志，直接写名字
+  //not_required_bool如果为空或没有明确定义为true的话，字段为必须输入。如果=true则为非必须
+  //alert(not_required_bool);
   $("#"+field_name).css({"color":"#000000","background-Color":"#ffffff"});
   $("#"+field_name).attr("readonly",false);
   $("#"+field_name+"_label").css({"color":"#000000","text-decoration":"none"})
 
   if(typeof not_required_bool == "undefined" || not_required_bool==false || not_required_bool=="") {
-      addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());// 将当前字段标记为必须验证
-      // 打上必须星标
-      if  ($("#"+field_name+"_label .required").text()!='*') {// 如果没有星标，则打上星标
-        $("#"+field_name+"_label").html($("#"+field_name+"_label").text()+"<span class='required'>*</span>");// 打上星标
-      } else {// 如果已经有星标了，则显示出来
+      addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());//将当前字段标记为必须验证
+      //打上必须星标
+      if  ($("#"+field_name+"_label .required").text()!='*') {//如果没有星标，则打上星标
+        $("#"+field_name+"_label").html($("#"+field_name+"_label").text()+"<span class='required'>*</span>");//打上星标
+      } else {//如果已经有星标了，则显示出来
         $("#"+field_name+"_label .required").show();
       }
       $("#"+field_name+"_btn").remove();
-  } else { // 如果不是必须的，则不显示星标
-    // 直接Remove有时会出错，所有先设置为Validate再Remove
+  } else { //如果不是必须的，则不显示星标
+    //直接Remove有时会出错，所有先设置为Validate再Remove
     addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());
     removeFromValidate('EditView',field_name);
-     // 去除必须验证
+     //去除必须验证
     $("#"+field_name+"_label .required").hide();
   }
-  if  (typeof $("#btn_"+field_name)!= 'undefined') {// 移除选择按钮
+  if  (typeof $("#btn_"+field_name)!= 'undefined') {//移除选择按钮
     $("#btn_"+field_name).css({"visibility":"visible"});
   }
-  if  (typeof $("#btn_clr_"+field_name)!= 'undefined') {// 移除清空按钮
+  if  (typeof $("#btn_clr_"+field_name)!= 'undefined') {//移除清空按钮
     $("#btn_clr_"+field_name).css({"visibility":"visible"});
   }
 }
-// 设置字段不可更新
+//设置字段不可更新
 function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 	  mark_obj = $("#"+field_name);
 	  mark_obj_lable = $("#"+field_name+"_label");
@@ -115,20 +107,7 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 }
 
 $(document).ready(function(){
-	
-	
-	// 这里可以有其它代码;
-	   if($('#haa_ff_id').length==0) {// 如果对象不存在就添加一个
-			$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');
-		}
 
-    // 触发FF
-    SUGAR.util.doWhen("typeof setFF == 'function'", function(){
-        call_ff();
-     });
-	
-     addToValidate('EditView', 'service_date', 'varchar', 'true',SUGAR.language.get('HIT_IP_TRANS_BATCH',
-					'LBL_SERVICE_DATE'));// 将当前字段标记为必须验证
 		  
 	mark_field_disabled("email",false);
 	if($("target_owning_org").val()==""){
@@ -187,15 +166,6 @@ $(document).ready(function(){
 		}
 	});	
 	
-	
-	  if($("#asset_trans_status").val()=="APPROVED"){
-	  mark_field_disabled("asset_trans_status",false);
-	  $("#asset_trans_status option").each(function (){  
-           if($(this).val() != "APPROVED"){
-    			$(this).remove();
-   		}
-       });
-	   }
 	
 }
 )

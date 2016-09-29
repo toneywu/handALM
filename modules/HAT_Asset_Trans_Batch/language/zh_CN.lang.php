@@ -82,9 +82,15 @@ $mod_strings = array (
   'LBL_TARGET_USING_ORG_ID' => '目标使用组织 (ID)',
   'LBL_TARGET_USING_ORG' => '目标使用组织',
   'LBL_PLANNED_COMPLETE_DATE'=>'计划完成日期',
-    'LBL_TRACKING_NUMBER' => '跟踪编号#',
-      'LBL_EVENT_TYPE' => '事务类型',
+  'LBL_TRACKING_NUMBER' => '跟踪编号#',
+  'LBL_EVENT_TYPE' => '事务类型',
   'LBL_WO_LINES'=>'工单对象行',
   'LBL_GENERATE_DOC'=>'生成文档',
-
+  'LBL_ACCOUNT'=>'客户/需求组织',
+  'LBL_ATTRIBUTE1'=>'属性记录 1',
+  'LBL_ATTRIBUTE2'=>'属性记录 2',
+  'LBL_ATTRIBUTE3'=>'属性记录 3',
+  'LBL_ATTRIBUTE4'=>'属性记录 4',
+  'LBL_ATTRIBUTE5'=>'属性记录 5',
+  'LBL_ATTRIBUTE6'=>'属性记录 6',
 );

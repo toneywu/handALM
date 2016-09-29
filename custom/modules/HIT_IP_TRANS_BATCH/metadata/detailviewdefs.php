@@ -30,7 +30,7 @@ array (
           'field' => '30',
         ),
       ),
-	  'includes' => 
+      'includes' => 
       array (
         0 => 
         array (
@@ -49,7 +49,12 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_DETAILVIEW_PANEL1' => 
+        'LBL_EDITVIEW_PANEL2' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_EDITVIEW_PANEL1' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
@@ -149,13 +154,13 @@ array (
         array (
           0 => 
           array (
-            'name' => 'send_to_customer',
-            'label' => 'LBL_SEND_TO_CUSTOMER',
+            'name' => 'service_date',
+            'label' => 'LBL_SERVICE_DATE',
           ),
           1 => 
           array (
-            'name' => 'service_date',
-            'label' => 'LBL_SERVICE_DATE',
+            'name' => 'send_to_customer',
+            'label' => 'LBL_SEND_TO_CUSTOMER',
           ),
         ),
         7 => 
@@ -163,7 +168,49 @@ array (
           0 => 'description',
         ),
       ),
-      'lbl_detailview_panel1' => 
+      'lbl_editview_panel2' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute1',
+            'label' => 'LBL_ATTRIBUTE1',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute2',
+            'label' => 'LBL_ATTRIBUTE2',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute3',
+            'label' => 'LBL_ATTRIBUTE3',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute4',
+            'label' => 'LBL_ATTRIBUTE4',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute5',
+            'label' => 'LBL_ATTRIBUTE5',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute6',
+            'label' => 'LBL_ATTRIBUTE6',
+          ),
+        ),
+      ),
+      'lbl_editview_panel1' => 
       array (
         0 => 
         array (

@@ -133,7 +133,7 @@ class AOS_PDF_TemplatesViewEdit extends ViewEdit {
                 $insert_fields_js2 .="'$line_module_name':$options,\n";
 
             }
-            //CUX1、资产事务处理单
+            //CUX2、网络事务处理单
             if ($module->object_name == 'HIT_IP_TRANS_BATCH'){
 /*                echo "<prev>";
                 print_r ($module);*/
@@ -148,7 +148,7 @@ class AOS_PDF_TemplatesViewEdit extends ViewEdit {
                 }
                 $options = json_encode($options_array);
 
-                $line_module_name = $beanList['HAT_Asset_Trans'];
+                $line_module_name = $beanList['HIT_IP_TRANS'];
                 $fmod_options_array[$line_module_name] = translate('LBL_LINE_ITEMS','AOS_Quotes').' : '.translate('LBL_MODULE_NAME','HIT_IP_TRANS');
                 $insert_fields_js2 .="'$line_module_name':$options,\n";
 

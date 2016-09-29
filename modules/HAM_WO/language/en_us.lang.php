@@ -101,5 +101,12 @@ $mod_strings = array (
   'LBL_BTN_COMPLETE_BUTTON_LABEL'=>'Complete Work Order',
   'LBL_EDITVIEW_PANEL_SOURCE'=>'Sources/Events',
   'LBL_CONTACT'=>'Contact',
-  'LBL_ACCOUNT'=>'Customer/Demand Org.'
+  'LBL_ACCOUNT'=>'Customer/Demand Org.',
+  'LBL_ATTRIBUTE1'=>'Extra Attribute1',
+  'LBL_ATTRIBUTE2'=>'Extra Attribute2',
+  'LBL_ATTRIBUTE3'=>'Extra Attribute3',
+  'LBL_ATTRIBUTE4'=>'Extra Attribute4',
+  'LBL_ATTRIBUTE5'=>'Extra Attribute5',
+  'LBL_ATTRIBUTE6'=>'Extra Attribute6',
+  'LBL_COMPLETE_BY_LAST_WOOP'=>'Work Order Complete With Last Work Operation',
 );
