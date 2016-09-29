@@ -95,6 +95,7 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
                 $result_woop =  $db->query($sql_current_string);
 
                 while ( $bean_woop = $db->fetchByAssoc($result_woop) ) {
+                	
                     $this->bean->source_woop_id = $bean_woop['woop_id'];
                     $this->bean->source_woop = $bean_woop['woop_name'];
                     $this->bean->hat_eventtype_id = $bean_woop['hat_eventtype_id'];
@@ -126,6 +127,17 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
                     $this->ss->assign('SOURCE_WOOP_ID',$bean_woop['woop_id']);
                     $this->ss->assign('SOURCE_WO_ID',$bean_woop['wo_id']);
                     $this->ss->assign('SOURCE_WO_ORG',$bean_woop['wo_id']);
+                    //找到工单上面的组织
+					$wo_bean = BeanFactory :: getBean('HAM_WO')->retrieve_by_string_fields(array ('ID' => $bean_woop['wo_id']));
+					if(!empty($wo_bean)){
+						$this->bean->target_using_org_id=$wo_bean->account_id;
+						$account_bean = BeanFactory :: getBean('Accounts')->retrieve_by_string_fields(array ('ID' => $wo_bean->account_id));
+						if(!empty($account_bean)){
+							$this->bean->target_using_org=$account_bean->name;
+						}
+					}
+                    
+                    
                }
 
 
@@ -146,6 +158,9 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
         if(isset($beanFramework)) {
             echo "var owning_person_field_rule='".$beanFramework->owning_person_field_rule."';";
             echo "var using_person_field_rule='".$beanFramework->using_person_field_rule."';";
+            //add by yuan.chen
+            echo "var source_woop_id='".$this->bean->source_woop_id."';";
+            echo "var source_wo_id='".$this->bean->source_wo_id."';";
         }
         echo "</script>";
 

@@ -22,7 +22,12 @@ class HAT_Asset_Trans_BatchViewDetail extends ViewDetail
             }
             echo '<script type="text/javascript" src="' . $GLOBALS['sugar_config']['cache_dir'] . 'jsLanguage/' . $module . '/' . $GLOBALS['current_language'] . '.js?s=' . $GLOBALS['js_version_key'] . '&c=' . $GLOBALS['sugar_config']['js_custom_version'] . '&j=' . $GLOBALS['sugar_config']['js_lang_version'] . '"></script>';
         };
-
+		echo '<script src="modules/HIT_IP_TRANS_BATCH/js/html_dom_required_setting.js"></script>';
+		
+		if($_GET["woop_id"]!=null){
+			echo '<script>var hideButtonFlag="Y";</script>';
+		}
+		
         parent::Display();
         
         

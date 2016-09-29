@@ -15,6 +15,9 @@ $(document).ready(function(){
     //alert("hh");
   });
 
+    if (typeof hideButtonFlag !="undefined") {
+	   $(".action_buttons").hide();
+    }
 
     $("#line_items_span").parent("td").prev("td").hide();
     if (typeof $("#source_wo_id").attr("data-id-value") !="undefined") {
