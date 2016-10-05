@@ -48,6 +48,9 @@ class HIT_RacksViewEdit extends ViewEdit
             $this->bean->start_date = $asset->start_date;
             $this->bean->received_date = $asset->received_date;
             $this->bean->dismiss_date = $asset->dismiss_date;
+            //add by yuan.chen 2016-10-05
+            $products_bean = BeanFactory :: getBean('AOS_Products')->retrieve_by_string_fields(array ('id' => $this->bean->aos_products_id));
+		    $this->bean->asset_group     = $products_bean->name;
         }
         parent::Display();
 
