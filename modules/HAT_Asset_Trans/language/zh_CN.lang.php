@@ -94,4 +94,5 @@ $mod_strings = array (
   'LBL_CHANGE_FROM_TO'=>' 变更为 ',
   'LBL_CHANGE_TO'=>' 变更为 ',
   'LBL_TARGET_RACK'=>'目标机柜U位',
+  'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE' => '设备/资产',
 );

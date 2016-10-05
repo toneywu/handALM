@@ -163,7 +163,26 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
             echo "var source_wo_id='".$this->bean->source_wo_id."';";
         }
         echo "</script>";
-
+        
+		echo '<script src="modules/HIT_IP_TRANS_BATCH/js/html_dom_required_setting.js"></script>';
+		
+		//add by yuan.chen 
+			$event_sql = "SELECT 
+					  h.change_owning_org,
+					  h.change_using_org,
+					  h.change_location,
+					  h.change_owning_person,
+					  h.change_rack_position
+				FROM
+					  hat_eventtype h 
+				WHERE h.deleted=0 
+				AND   h.id ='" . $this->bean->hat_eventtype_id . "'";
+			$event_result = $db->query($event_sql);
+			while ($event_row = $db->fetchByAssoc($event_result)) {
+				$event_line_data = json_encode($event_row);
+				echo "<script> var event_line_data=".$event_line_data."</script>";
+			}
+	
         parent::Display();
         //如果已经选择位置分类，无论是否位置分类对应的FlexForm有值，值将界面展开。
         //（如果没有位置分类，则界面保持折叠状态。）

@@ -166,7 +166,7 @@ function changeRequired(lineRecord){
 	loopField("line_access_assets_name",lineRecord.change_access_assets_name);
 }
 
-function change_asset_Required(lineRecord){
+function change_asset_required(lineRecord){
 	console.log(lineRecord);
 	loopField("line_target_owning_org",lineRecord.change_owning_org);
 	loopField("line_target_owning_org",lineRecord.change_using_org);

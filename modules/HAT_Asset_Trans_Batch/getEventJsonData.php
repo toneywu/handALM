@@ -15,7 +15,7 @@ $event_sql = "SELECT
 				  h.change_using_org,
 				  h.change_location,
 				  h.change_owning_person,
-				  h.change_rack_position,
+				  h.change_rack_position
 			FROM
 			      hat_eventtype h 
 			WHERE h.deleted=0 

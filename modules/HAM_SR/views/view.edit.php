@@ -216,7 +216,7 @@ class HAM_SRViewEdit extends ViewEdit
 		}
 
         $sr_num_html="";
-        if(empty($this->bean->sr_number)){
+        if(empty($this->bean->sr_number)||$_REQUEST['isDuplicate']==true){
             //如果当前工作单号为空，则返回自动编号标签
             $sr_num_html=$mod_strings['LBL_AUTONUM'].'<input type="hidden" value="" id="sr_number" name="sr_number">';
         } else {
