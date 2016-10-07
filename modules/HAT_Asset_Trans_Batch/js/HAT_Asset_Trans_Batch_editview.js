@@ -73,10 +73,10 @@ function resetEventType (isFirstTime) {
 // 本函数在页面初始化时也会被首次调用，调用时isFirstTime=true。
 	//alert("resetEventType Called");
 	if (isFirstTime!=true) {
-		$("#target_owning_org").val("");//只要重新选择，一律清单空组织字段
-		$("#target_owning_org_id").val("");
-		$("#target_using_org").val("");//只要重新选择，一律清单空组织字段
-		$("#target_using_org_id").val("");
+		//$("#target_owning_org").val("");//只要重新选择，一律清单空组织字段
+		//$("#target_owning_org_id").val("");
+		//$("#target_using_org").val("");//只要重新选择，一律清单空组织字段
+		//$("#target_using_org_id").val("");
 		cleanAllTransLines();
 	}
 
@@ -200,7 +200,10 @@ $(document).ready(function(){
 		SUGAR.util.doWhen("typeof setFF == 'function'", function(){
 		call_ff();
 		});
-
+		
+		
+	$("#source_woop_id").val(source_woop_id);
+	$("#source_wo_id").val(source_wo_id);
 	
 
 	SUGAR.util.doWhen("typeof mark_field_disabled != 'undefined'", function(){

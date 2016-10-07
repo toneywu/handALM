@@ -136,8 +136,28 @@ function display_lines($focus, $field, $value, $view){
             //通过insertLineData向已经完成初始化的页面要素中，写入值
 		}
         $html .= "})</script>";
+        
+        //add by yuan.chen 2016-09-28
+        $event_sql = "SELECT 
+							  h.change_owning_org,
+							  h.change_using_org,
+							  h.change_location,
+							  h.change_owning_person,
+							  h.change_rack_position
+						FROM
+						      hat_eventtype h 
+						WHERE h.deleted=0 
+						AND   h.id ='" . $focus->hat_eventtype_id . "'";
+			$event_result = $focus->db->query($event_sql);
+			while ($event_row = $focus->db->fetchByAssoc($event_result)) {
+				$event_line_data = json_encode($event_row);
+				$html .= "<script>var event_line_data=".$event_line_data.";</script>";
+				$html .= "<script>change_asset_required(" . $event_line_data . ");</script>";
+			}
+		//end yuan.chen 2016-09-28
+		
       }
-
+		$html .= '<script>insertTransLineFootor(\'lineItems\');</script>';
       if($view == 'EditView') {
 	  	$html .= '<script>insertTransLineFootor(\'lineItems\');</script>';
 	  }

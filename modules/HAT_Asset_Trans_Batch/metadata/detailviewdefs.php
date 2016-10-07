@@ -16,6 +16,9 @@ array (
         array (
           'file' => 'modules/HAT_Asset_Trans_Batch/js/HAT_Asset_Trans_Batch_detailview.js',
         ),
+        2 => array (
+				'file' => 'modules/HIT_IP_TRANS_BATCH/js/html_dom_required_setting.js',
+		),
       ),
       'form' => 
       array (

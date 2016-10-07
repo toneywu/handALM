@@ -124,6 +124,16 @@ class HIT_IP_TRANS_BATCHViewEdit extends ViewEdit {
 				$this->ss->assign('SOURCE_WOOP_ID', $bean_woop['woop_id']);
 				$this->ss->assign('SOURCE_WO_ID', $bean_woop['wo_id']);
 				$this->ss->assign('SOURCE_WO_ORG', $bean_woop['wo_id']);
+				//找到工单上面的组织
+				$wo_bean = BeanFactory :: getBean('HAM_WO')->retrieve_by_string_fields(array ('ID' => $bean_woop['wo_id']));
+				if(!empty($wo_bean)){
+					$this->bean->target_owning_org_id=$wo_bean->account_id;
+					//$this->bean->current_owning_org=$wo_bean->name;
+					$account_bean = BeanFactory :: getBean('Accounts')->retrieve_by_string_fields(array ('ID' => $wo_bean->account_id));
+					if(!empty($account_bean)){
+						$this->bean->target_owning_org=$account_bean->name;
+					}
+				}
 			}
 
 			$event_sql = "SELECT 

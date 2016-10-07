@@ -31,7 +31,12 @@ class HIT_IP_TRANS_BATCHViewDetail extends ViewDetail {
 				$this->bean->email = $primary;
 			}
 		}
-
+		
+		if($_GET["woop_id"]!=null){
+			echo '<script>var hideButtonFlag="Y";</script>';
+		}
+		
+		
 		parent :: Display();
 		//ff 在DetailView显示之前中进行初始化数据的加载 
 		if (isset ($this->bean->hat_eventtype_id) && ($this->bean->hat_eventtype_id) != "") {
@@ -43,7 +48,7 @@ class HIT_IP_TRANS_BATCHViewDetail extends ViewDetail {
 				echo '<script src="modules/HAA_FF/ff_include.js"></script>';
 				echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="' . $ff_id . '">';
 				echo '<script> function call_ff() {
-								    triger_setFF($("#haa_ff_id").val(),"HAM_SR","DetailView");
+								    triger_setFF($("#haa_ff_id").val(),"HIT_IP_TRANS_BATCH","DetailView");
 								    $(".expandLink").click();
 								 
 								}</script>';

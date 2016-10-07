@@ -26,6 +26,12 @@ class HAT_Asset_Trans_BatchViewDetail extends ViewDetail
 /*        echo "<pre>";
         echo ($this->hat_eventtype_id);*/
 
+		echo '<script src="modules/HIT_IP_TRANS_BATCH/js/html_dom_required_setting.js"></script>';
+
+		if($_GET["woop_id"]!=null){
+			echo '<script>var hideButtonFlag="Y";</script>';
+		}
+
         parent::Display();
 
 
