@@ -4,14 +4,15 @@ function call_ff() {
 }
 
 var prodln = 0;
+var global_eventOptions;
 
 function setEventTypePopupReturn(popupReplyData){
 	if (prodln>0) {
 		//如果已经有行信息，则弹出确认框在确认后才发生变化。
 		//如果没有行，则直接变化
-		var title_txt="";
-		var html=SUGAR.language.get('HAT_ASSET_TRANS_BATCH', 'LBL_ENVENT_TYPE_CONFIRM');
-		YAHOO.SUGAR.MessageBox.show({msg: html,title: title_txt, 
+		var title_txt="!!!";
+		var html=SUGAR.language.get('HAT_Asset_Trans_Batch', 'LBL_ENVENT_TYPE_CONFIRM');
+		YAHOO.SUGAR.MessageBox.show({msg: html, title: title_txt,
 				type: 'confirm',
 				fn: function(confirm) {
 					if (confirm == 'yes') {
@@ -26,8 +27,8 @@ function setEventTypePopupReturn(popupReplyData){
 		set_return(popupReplyData);
 		setEventTypeFields();
 	}
-	
-	 call_ff();
+
+	 call_ff();//调用FlexForm
 }
 
 function setEventTypeFields() {
@@ -35,11 +36,11 @@ function setEventTypeFields() {
 		url: 'index.php?to_pdf=true&module=HAT_EventType&action=getTransSetting&id=' + $("#hat_eventtype_id").val(),//e74a5e34-906f-0590-d914-57cbe0e5ae89
 		async: false,
 		success: function (data) {
-			var obj = jQuery.parseJSON(data);
+			global_eventOptions = jQuery.parseJSON(data);
 			//console.log(obj);
-			for(var i in obj) {
+/*			for(var i in obj) {
 				$("#"+i).val(obj[i]);//向隐藏的字段中复制值，从而所有的EventType值都会提供到隐藏的字段中
-			}
+			}*/
 			resetEventType();
 		},
 		error: function () { //失败
@@ -68,48 +69,69 @@ function setHeaderOrganizationPopupReturn(popupReplyData) {
 	//console.log(popupReplyData);
 }
 
-function resetEventType (isFirstTime) {
+function resetEventType() {
 //在选择了Event Type之后的相关处理，本函数被setEventTypePopupReturn调用，为实质性处理。
 // 本函数在页面初始化时也会被首次调用，调用时isFirstTime=true。
-	//alert("resetEventType Called");
-	if (isFirstTime!=true) {
-		//$("#target_owning_org").val("");//只要重新选择，一律清单空组织字段
-		//$("#target_owning_org_id").val("");
-		//$("#target_using_org").val("");//只要重新选择，一律清单空组织字段
-		//$("#target_using_org_id").val("");
+	//deleted by toney.wu 20161007 不确定是否可以删除，但似乎没有需要执行的必要性了。
+	/*	if (isFirstTime!=true) {
 		cleanAllTransLines();
+	}*/
+	//本函数将change_asset_Required中的内容已经公完全实现了，没有change_asset_Required存在的必要性了
+	//console.log(global_eventOptions);
+
+	//处理头字段
+	if (global_eventOptions.change_owning_org == "REQUIRED"){
+		mark_field_enabled('target_owning_org',false);
+	} else if (global_eventOptions.change_owning_org == "OPTIONAL"){
+		mark_field_enabled('target_owning_org',true);
+	} else {
+		mark_field_disabled('target_owning_org',false);
 	}
 
-	var change_org_value = $("#change_owning_org").val();//根据是否需要修改组织的EventType来标记Target Organization状态
-	if(change_org_value=='LOCKED'||change_org_value==''){//如果不需要更新组织，则失效目标组织字段
-		mark_field_disabled("target_owning_org");
-	}else if(change_org_value=='OPTIONAL') {
-		mark_field_enabled("target_owning_org", true);//启用目标组织字段，非必须
-	}else{
-		mark_field_enabled("target_owning_org");//启用目标组织字段，必须
+	if (global_eventOptions.change_using_org == "REQUIRED"){
+		mark_field_enabled('target_using_org',false);
+	} else if (global_eventOptions.change_owning_org == "OPTIONAL"){
+		mark_field_enabled('target_using_org',true);
+	} else {
+		mark_field_disabled('target_using_org',false);
 	}
 
-	var change_org_value = $("#change_using_org").val();//根据是否需要修改组织的EventType来标记Target Organization状态
-	if(change_org_value=='LOCKED'||change_org_value==''){//如果不需要更新组织，则失效目标组织字段
-		mark_field_disabled("target_using_org");
-	}else if(change_org_value=='OPTIONAL') {
-		mark_field_enabled("target_using_org", true);//启用目标组织字段
-	}else{
-		mark_field_enabled("target_using_org");//启用目标组织字段
-	}
+	//处理行字段
+	loopField("line_target_owning_org",global_eventOptions.change_owning_org);
+	loopField("line_target_owning_org",global_eventOptions.change_using_org);
+
+	loopField("line_target_rack_position_desc",global_eventOptions.change_rack_position);
+
+   if (global_eventOptions.change_owning_person=="INVISIABLE") {
+		loopField("line_target_owning_person","INVISIABLE");
+		loopField("line_target_owning_person_desc","INVISIABLE");
+   }else{
+   		  //在头的Views中会加载Framework中的属性。决定资产的使用人及负责人字段是值列表还是文字
+		if (typeof using_person_field_rule== "undefined" || using_person_field_rule=="TEXT") { //判断使用人字段是列表还是文本框
+			loopField("line_target_owning_person",global_eventOptions.change_owning_person);
+			loopField("line_target_owning_person_desc","INVISIABLE");
+		} else {
+			loopField("line_target_owning_person_desc",global_eventOptions.change_owning_person);
+			loopField("line_target_owning_person","INVISIABLE");
+		}
+   };
+
+   if ($("#change_using_person").val()=="INVISIABLE") {
+		$("span.ig_owning_person_list").hide();
+		$("span.ig_owning_person_desc").hide();
+   }else{
+   		  //在头的Views中会加载Framework中的属性。决定资产的使用人及负责人字段是值列表还是文字
+   		if (typeof owning_person_field_rule== "undefined" || owning_person_field_rule=="TEXT") {//判断负责人字段是列表还是文本框
+			$("span.ig_owning_person_list").hide();
+			$("span.ig_owning_person_desc").show();
+		} else {
+			$("span.ig_owning_person_list").show();
+			$("span.ig_owning_person_desc").hide();
+		}
+   };
 
 }
-/*
-function checkLinesReady() { //判断是否可以添加行
-	//alert("checkLinesReady");
-	if ($("#account_id_c").val()!=''&&$("#hat_eventtype_id").val()!=''&&($("#change_organization").val() == 'LOCKED'||$("#account_id1_c").val()!=''))
-	{ //如果当前组织不为空&&事件类型不为空&&//如果不需要填写目标组织或已经填写了目标组织
-		$("#detailpanel_2").show();
-	}else {
-		$("#detailpanel_2").hide();
-		cleanAllTransLines();
-	}
-}*/
+
 
 function cleanAllTransLines() {
 
@@ -191,28 +213,26 @@ function getLovValueByText(focused_textfiled_id,list_Lov_id) { //根据LOV的Tex
 }
 
 $(document).ready(function(){
-	
+
 	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
 		$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');
 	}
-
-		//触发FF
-		SUGAR.util.doWhen("typeof setFF == 'function'", function(){
+	//触发FF
+	SUGAR.util.doWhen("typeof setFF == 'function'", function(){
 		call_ff();
-		});
-		
-		
+	});
+
+
 	$("#source_woop_id").val(source_woop_id);
 	$("#source_wo_id").val(source_wo_id);
-	
+
 
 	SUGAR.util.doWhen("typeof mark_field_disabled != 'undefined'", function(){
-		resetEventType(true);
+		if ($("#hat_eventtype_id").val() != "") {
+			setEventTypeFields();
+		}
 	})
 
-	if ($("#hat_eventtype_id").val() != "") {
-		setEventTypeFields();
-	}
 
 	initTransHeaderStatus();
 

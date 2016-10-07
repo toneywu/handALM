@@ -136,29 +136,33 @@ function display_lines($focus, $field, $value, $view){
             //通过insertLineData向已经完成初始化的页面要素中，写入值
 		}
         $html .= "})</script>";
-        
+      	//deleted by toney.wu 20161007
+      	//以下代码没有调用的意义，在EditView对应的JS文件中$(document).ready(function()中调用了setEventTypeFields，之个函数会通过Ajax读取EventType对应的选项值，并写入到HiddenFields当中.
+      	//之后又通过调用change_asset_required完成了本函数以下功能中的内容。
+      	//因此不再需要执行以下的内容
         //add by yuan.chen 2016-09-28
-        $event_sql = "SELECT 
+/*        if($focus->id != '') {
+        	$event_sql = "SELECT
 							  h.change_owning_org,
 							  h.change_using_org,
 							  h.change_location,
 							  h.change_owning_person,
 							  h.change_rack_position
 						FROM
-						      hat_eventtype h 
-						WHERE h.deleted=0 
+						      hat_eventtype h
+						WHERE h.deleted=0
 						AND   h.id ='" . $focus->hat_eventtype_id . "'";
 			$event_result = $focus->db->query($event_sql);
 			while ($event_row = $focus->db->fetchByAssoc($event_result)) {
 				$event_line_data = json_encode($event_row);
 				$html .= "<script>var event_line_data=".$event_line_data.";</script>";
-				$html .= "<script>change_asset_required(" . $event_line_data . ");</script>";
+				//$html .= "<script>change_asset_required(" . $event_line_data . ");</script>";
 			}
+		}*/
 		//end yuan.chen 2016-09-28
-		
       }
-		$html .= '<script>insertTransLineFootor(\'lineItems\');</script>';
-      if($view == 'EditView') {
+
+      if($view == 'EditView') {//显示添加行的按钮
 	  	$html .= '<script>insertTransLineFootor(\'lineItems\');</script>';
 	  }
     }

@@ -31,11 +31,15 @@ array (
       ),
       'includes' => 
       array (
-        0 => 
+        0 =>
         array (
           'file' => 'modules/HAA_FF/ff_include.js',
         ),
-        1 => 
+        1 =>
+        array (
+        'file' => 'modules/HIT_IP_TRANS_BATCH/js/html_dom_required_setting.js',
+        ),
+        2 =>
         array (
           'file' => 'modules/HAT_Asset_Trans_Batch/js/HAT_Asset_Trans_Batch_editview.js',
         ),
@@ -161,19 +165,8 @@ array (
             'label' => 'LBL_PLANNED_COMPLETE_DATE',
           ),
         ),
+
         6 => 
-        array (
-          0 => 'description',
-          1 => '',
-        ),
-        7 => 
-        array (
-          0 => 'wo_lines',
-        ),
-      ),
-      'lbl_editview_panel2' => 
-      array (
-        0 => 
         array (
           0 => 
           array (
@@ -186,7 +179,7 @@ array (
             'label' => 'LBL_ATTRIBUTE2',
           ),
         ),
-        1 => 
+        7 => 
         array (
           0 => 
           array (
@@ -199,7 +192,7 @@ array (
             'label' => 'LBL_ATTRIBUTE4',
           ),
         ),
-        2 => 
+        8 => 
         array (
           0 => 
           array (
@@ -212,6 +205,16 @@ array (
             'label' => 'LBL_ATTRIBUTE6',
           ),
         ),
+        9 => 
+        array (
+          0 => 'description',
+          1 => '',
+        ),
+        10 => 
+        array (
+          0 => 'wo_lines',
+        ),
+
       ),
       'lbl_editview_panel1' => 
       array (

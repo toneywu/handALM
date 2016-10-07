@@ -29,69 +29,70 @@ array (
           24 => '<input type="hidden" name="target_asset_status"  id="target_asset_status">',
         ),
       ),
-      'includes' => 
+      'includes' =>
       array (
-        0 => 
+        0 =>
         array (
           'file' => 'modules/HAA_FF/ff_include.js',
         ),
-        1 => 
+        1 =>
+        array (
+        'file' => 'modules/HIT_IP_TRANS_BATCH/js/html_dom_required_setting.js',
+        ),
+        2 =>
         array (
           'file' => 'modules/HAT_Asset_Trans_Batch/js/HAT_Asset_Trans_Batch_editview.js',
         ),
-        2 => array (
-				'file' => 'modules/HIT_IP_TRANS_BATCH/js/html_dom_required_setting.js',
-		),
       ),
       'maxColumns' => '2',
-      'widths' => 
+      'widths' =>
       array (
-        0 => 
+        0 =>
         array (
           'label' => '10',
           'field' => '30',
         ),
-        1 => 
+        1 =>
         array (
           'label' => '10',
           'field' => '30',
         ),
       ),
       'useTabs' => false,
-      'tabDefs' => 
+      'tabDefs' =>
       array (
-        'DEFAULT' => 
+        'DEFAULT' =>
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_EDITVIEW_PANEL1' => 
+        'LBL_EDITVIEW_PANEL1' =>
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
       ),
     ),
-    'panels' => 
+    'panels' =>
     array (
-      'default' => 
+      'default' =>
       array (
-        0 => 
+        0 =>
         array (
-          0 => 
+          0 =>
           array (
             'name' => 'framework',
             'customCode' => '{$FRAMEWORK}',
           ),
-          1 => 
+          1 =>
           array (
             'name' => 'event_type',
             'studio' => 'visible',
             'label' => 'LBL_EVENT_TYPE',
-            'displayParams' => 
+            'displayParams' =>
             array (
               'initial_filter' => '&basic_type_advanced=AT_MOVE',
-              'field_to_name_array' => 
+              'field_to_name_array' =>
               array (
                 'name' => 'event_type',
                 'id' => 'hat_eventtype_id',

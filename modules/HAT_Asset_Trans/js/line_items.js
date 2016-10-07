@@ -39,15 +39,6 @@ function openAssetPopup(ln){//本文件为行上选择资产的按钮
 function setAssetReturn(popupReplyData){
   //popupReplyData中lineno会做为行号一并返回
   set_return(popupReplyData);
-
-  //-Start:将Status的值返回到当前资产状态字段中（默认返回的是文本）
-/*  var current_status_text = $("#line_current_asset_status"+lineno).val();//current从Popup中返回的是Text，要以Value形式保存，否则会有多语言问题
-  var current_status_value = hat_asset_status_list.filter(function( obj ) {
-                                return obj.value === current_status_text//current_status_text;
-                              });
-  $("#line_current_asset_status"+lineno).val(current_status_value[0].name);*/
-  //-END:将Status的值返回到当前资产状态字段中
-
   resetAsset(lineno);
 }
 
@@ -305,70 +296,70 @@ function insertTransLineElements(tableid, current_view) { //创建界面要素
 
   x.innerHTML  = "<td colSpan='9'><div class='lineEditor'>"+
       "<span class='input_group'>"+
-      "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE')+"<span class='required'>*</span></label>"+
+      "<label id='line_asset" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE')+"<span class='required'>*</span></label>"+
       "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_asset[" + prodln + "]' id='line_asset" + prodln + "' value='' title='' onblur='resetAsset("+prodln+")'>"+
       "<input type='hidden' name='line_asset_id[" + prodln + "]' id='line_asset_id" + prodln + "' value=''>"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openAssetPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
       "<span class='input_group'>"+
-      "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_NAME')+" <span class='required'>*</span></label>"+
+      "<label id='line_name" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_NAME')+" <span class='required'>*</span></label>"+
       "<input style='width:225px;'  autocomplete='off' type='text' name='line_name[" + prodln + "]' id='line_name" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
       "<span class='input_group'>"+
-      "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_ASSET_STATUS')+"</label>"+
+      "<label id='line_target_asset_status" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_ASSET_STATUS')+"</label>"+
       "<input style='width:78px;' type='hidden' readonly='readonly' name='line_target_asset_status[" + prodln + "]' id='line_target_asset_status" + prodln + "'  value='' title=''>"+
       "<span id='line_target_asset_status_displayed" + prodln + "' ></span>"+
       "</span>"+
       "<span class='input_group ig_parent_asset'>"+
-      "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_PARENT_ASSET')+"</label>"+
+      "<label id='line_target_parent_asset" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_PARENT_ASSET')+"</label>"+
       "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_target_parent_asset[" + prodln + "]' id='line_target_parent_asset" + prodln + "' value='' title='' onblur='resetAsset("+prodln+")'>"+
       "<input type='hidden' name='line_target_parent_asset_id[" + prodln + "]' id='line_target_parent_asset_id" + prodln + "' value=''>"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openParentAssetPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
       "<span class='input_group ig_owning_org'>"+
-      "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_RESPONSIBLE_CENTER')+" <span class='required'>*</span></label>"+
+      "<label id='line_target_owning_org" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_RESPONSIBLE_CENTER')+" <span class='required'>*</span></label>"+
       "<input class='sqsEnabled' style='width:153px;' autocomplete='off' type='text' name='line_target_owning_org[" + prodln + "]' id='line_target_owning_org" + prodln + "' value='' title='' >"+
       "<input type='hidden' name='line_target_owning_org_id[" + prodln + "]' id='line_target_owning_org_id" + prodln + "' value='' />"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openOwningOrgPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
       "<span class='input_group ig_owning_person_list ig_owning_person'>"+
-      "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_OWNING_PERSON')+"</label>"+
+      "<label id='line_target_owning_person" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_OWNING_PERSON')+"</label>"+
       "<input class='sqsEnabled' style='width:103px;' type='text' name='line_target_owning_person[" + prodln + "]' id='line_target_owning_person" + prodln + "' maxlength='50' value='' title=''>"+
       "<input type='hidden' name='line_target_owning_person_id[" + prodln + "]' id='line_target_owning_person_id" + prodln + "' value='' />"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openOwningPersonPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
       "<span class='input_group ig_owning_person_desc ig_owning_person'>"+
-      "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_OWNING_PERSON')+"</label>"+
+      "<label id='line_target_owning_person_desc" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_OWNING_PERSON')+"</label>"+
       "<input style='width:103px;' name='line_target_owning_person_desc[" + prodln + "]' id='line_target_owning_person_desc" + prodln + "' value='' />"+
       "</span>"+
       "<span class='input_group ig_using_org'>"+
-      "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_USING_ORG')+" <span class='required'>*</span></label>"+
+      "<label id='line_target_using_org" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_USING_ORG')+" <span class='required'>*</span></label>"+
       "<input class='sqsEnabled' style='width:153px;' autocomplete='off' type='text' name='line_target_using_org[" + prodln + "]' id='line_target_using_org" + prodln + "' value='' title='' >"+
       "<input type='hidden' name='line_target_using_org_id[" + prodln + "]' id='line_target_using_org_id" + prodln + "' value='' />"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openUsingOrgPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
       "<span class='input_group ig_using_person_list ig_using_person'>"+
-      "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_USING_PERSON')+"</label>"+
+      "<label id='line_target_using_person" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_USING_PERSON')+"</label>"+
       "<input class='sqsEnabled' style='width:103px;' type='text' name='line_target_using_person[" + prodln + "]' id='line_target_using_person" + prodln + "' maxlength='50' value='' title=''>"+
       "<input type='hidden' name='line_target_using_person_id[" + prodln + "]' id='line_target_using_person_id" + prodln + "' value='' />"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openUsingPersonPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
       "<span class='input_group ig_using_person_desc ig_using_person'>"+
-      "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_USING_PERSON')+"</label>"+
+      "<label id='line_target_using_person_desc" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_USING_PERSON')+"</label>"+
       "<input style='width:103px;' type='text' name='line_target_using_person_desc[" + prodln + "]' id='line_target_using_person_desc" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
       "<span class='input_group ig_location'>"+
-      "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_LOCATION')+" <span class='required'>*</span></label>"+
+      "<label id='line_target_location" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_LOCATION')+" <span class='required'>*</span></label>"+
       "<input class='sqsEnabled' style='width:153px;' type='text' name='line_target_location[" + prodln + "]' id='line_target_location" + prodln + "' maxlength='50' value='' title=''>"+
       "<input type='hidden' name='line_target_location_id[" + prodln + "]' id='line_target_location_id" + prodln + "' value='' />"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openLocationPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
       "<span class='input_group ig_location'>"+
-      "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_LOCATION_DESC')+"</label>"+
+      "<label id='line_target_location_desc" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_LOCATION_DESC')+"</label>"+
       "<input style='width:153px;' type='text' name='line_target_location_desc[" + prodln + "]' id='line_target_location_desc" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
       "<span class='input_group ig_rack_position_desc'>"+
-      "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_RACK')+" <span class='required'>*</span></label>"+
+      "<label id='line_target_rack_position_desc" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_RACK')+" <span class='required'>*</span></label>"+
       "<input style='width:153px;' type='text' name='line_target_rack_position_desc[" + prodln + "]' id='line_target_rack_position_desc" + prodln + "' maxlength='50' value='' title=''>"+
       "<input type='hidden' name='line_target_rack_position_data[" + prodln + "]' id='line_target_rack_position_data" + prodln + "' value='' />"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openRackPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
@@ -494,61 +485,6 @@ function resetEditorFields(ln) {
 	                          })[0].value;
 	$("#line_target_asset_status_displayed"+ln).html("<span class='color_tag color_asset_status_"+target_status_value+"'>"+target_status_text+"</span>");
 
-
- //以下处理EventType中定义的当前事件的业务规则
-   if ($("#change_parent").val()=="LOCKED") {
-		$("span.ig_parent_asset").hide()
-   }else{
-	   	$("span.ig_parent_asset").show()
-   };
-
-   if ($("#change_location").val()=="LOCKED") {
-		$("span.ig_location").hide()
-   }else{
-   		$("span.ig_location").show()
-   };
-
-   if ($("#change_owning_org").val()=="LOCKED") {
-		$("span.ig_owning_org").hide()
-   }else{
-		$("span.ig_owning_org").show()
-   };
-
-   if ($("#change_using_org").val()=="LOCKED") {
-		$("span.ig_using_org").hide()
-   }else{
-   		$("span.ig_using_org").show()
-   };
-
-   if ($("#change_owning_person").val()=="LOCKED") {
-		$("span.ig_using_person_list").hide();
-		$("span.ig_using_person_desc").hide();
-   }else{
-   		  //在头的Views中会加载Framework中的属性。决定资产的使用人及负责人字段是值列表还是文字
-		if (typeof using_person_field_rule== "undefined" || using_person_field_rule=="TEXT") { //判断使用人字段是列表还是文本框
-			$("span.ig_using_person_list").hide();
-			$("span.ig_using_person_desc").show();
-		} else {
-			$("span.ig_using_person_list").show();
-			$("span.ig_using_person_desc").hide();
-		}
-   };
-
-
-   if ($("#change_using_person").val()=="LOCKED") {
-		$("span.ig_owning_person_list").hide();
-		$("span.ig_owning_person_desc").hide();
-   }else{
-   		  //在头的Views中会加载Framework中的属性。决定资产的使用人及负责人字段是值列表还是文字
-   		if (typeof owning_person_field_rule== "undefined" || owning_person_field_rule=="TEXT") {//判断负责人字段是列表还是文本框
-			$("span.ig_owning_person_list").hide();
-			$("span.ig_owning_person_desc").show();
-		} else {
-			$("span.ig_owning_person_list").show();
-			$("span.ig_owning_person_desc").hide();
-		}
-   };
-
 }
 
 function resetAsset(ln){ //在用户重新选择资产之后，会连带的更新资产相关的字段信息。
@@ -663,7 +599,8 @@ function markLineDeleted(ln, key) {//删除当前行
 }
 
 function LineEditorShow(ln){ //显示行编辑器（先自动关闭所有的行编辑器，再打开当前行）
-  change_asset_required(event_line_data);
+  //deleted by toney.wu 20161007
+  resetEventType();
   if (prodln>1) {
     for (var i=0;i<prodln;i++) {
       LineEditorClose(i);

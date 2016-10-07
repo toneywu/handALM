@@ -136,8 +136,7 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
 							$this->bean->target_using_org=$account_bean->name;
 						}
 					}
-                    
-                    
+
                }
 
 
@@ -165,7 +164,8 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
         echo "</script>";
 
         parent::Display();
-        //如果已经选择位置分类，无论是否位置分类对应的FlexForm有值，值将界面展开。
+
+        //如果已经选择EventType，值将界面展开。
         //（如果没有位置分类，则界面保持折叠状态。）
         if(isset($this->bean->hat_eventtype_id) && ($this->bean->hat_eventtype_id)!=""){
                     echo '<script>$(".collapsed").switchClass("collapsed","expanded");</script>';
