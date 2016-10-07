@@ -8,7 +8,6 @@ function call_ff() {
 
 
 $(document).ready(function(){
-	
 	 //触发FF 
 	SUGAR.util.doWhen("typeof setFF == 'function'", function(){
     call_ff();
@@ -68,6 +67,10 @@ function updateStatus(object_id) {
 }
 
 function GenerateDoc() {
-    var record_id=$( "input[name*='record']" ).val();
-    window.location = "index.php?module=HAT_Asset_Trans_Batch&action=GenerateDoc&uid="+record_id;
+	if (typeof template_id == 'undefined') {
+		alert ("error: no template");
+	} else {
+	    var record_id=$( "input[name*='record']" ).val();
+	    window.location = "index.php?module=HAT_Asset_Trans_Batch&action=GenerateDoc&uid="+record_id+"&templateID="+template_id;
+    }
 }

@@ -153,6 +153,25 @@ class AOS_PDF_TemplatesViewEdit extends ViewEdit {
                 $insert_fields_js2 .="'$line_module_name':$options,\n";
 
             }
+
+            //CUX3、资产事务处理及网络事务处理单都共享的工作单行
+            if ($module->object_name == 'HIT_IP_TRANS_BATCH' || $module->object_name == 'HAT_Asset_Trans_Batch'){
+                $options_array = array(''=>'');
+                $group_quote = new HAM_WO_Lines();
+                foreach($group_quote->field_defs as $line_name => $line_arr){
+                    if(!((isset($line_arr['dbType']) && strtolower($line_arr['dbType']) == 'id') || $line_arr['type'] == 'id' || $line_arr['type'] == 'link')){
+                        if((!isset($line_arr['reportable']) || $line_arr['reportable']) ){//&& $line_arr['vname']  != 'LBL_NAME'
+                            $options_array['$'.$group_quote->table_name.'_'.$line_name] = translate($line_arr['vname'],$group_quote->module_dir);
+                        }
+                    }
+                }
+                $options = json_encode($options_array);
+
+                $line_module_name = $beanList['HAM_WO_Lines'];
+                $fmod_options_array[$line_module_name] = translate('LBL_LINE_ITEMS','AOS_Quotes').' : '.translate('LBL_MODULE_NAME','HAM_WO_Lines');
+                $insert_fields_js2 .="'$line_module_name':$options,\n";
+
+            }
             //************************************************************
             //将客户化的代码嵌入 END
             //************************************************************
