@@ -625,9 +625,9 @@ $app_list_strings['ham_wo_status_list']=array (
   'DRAFT' => 'Draft',
   'SUBMITTED' => 'Submitted',
   'APPROVED' => 'Approved',
-  'WSCH'=>'Waiting on Scheduling',
-  'WMATL'=>'Waiting on Material',
-  'WPCOND'=>'Waiting on Condition',
+  'WSCH'=>'WaitScheduling',
+  'WMATL'=>'WaitMaterial',
+  'WPCOND'=>'WaitCondition',
   'REJECTED' => 'Rejected',
 /*  'RELEASED' => 'Released',*/
   'INPRG'=>'In Progress',
@@ -635,7 +635,7 @@ $app_list_strings['ham_wo_status_list']=array (
   'COMPLETED' => 'Completed',
   'CLOSED' => 'Closed',
   'REWORK'=>'Rework',
-  'WPREV'=>'Waiting on Previous'
+  'WPREV'=>'WaitPrevious'
 );
 
 
@@ -1796,6 +1796,9 @@ $app_list_strings['moduleList']['HIT_IP_TRANS'] = 'IP_TRANS';
 
 
 $app_list_strings['moduleList']['HIT_IP_TRANS_BATCH'] = 'Network Resource Trans.';
+
+
+
 
 
 /*********************************************************************************

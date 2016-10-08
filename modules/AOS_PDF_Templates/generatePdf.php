@@ -108,6 +108,8 @@
 	$text = str_replace("\$shipping_amount","\$".$module_type_low."_shipping_amount",$text);
 	$text = str_replace("\$total_amount","\$".$module_type_low."_total_amount",$text);
 
+
+
     $text = populate_group_lines($text, $lineItemsGroups, $lineItems);
 
 	$converted = templateParser::parse_template($text, $object_arr);
@@ -115,7 +117,6 @@
 	$footer = templateParser::parse_template($footer, $object_arr);
 	
 	$printable = str_replace("\n","<br />",$converted);
-
 
 
 	if($task == 'pdf' || $task == 'emailpdf')
