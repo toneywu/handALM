@@ -1,4 +1,4 @@
-$.getScript("modules/HAM_SR/js/ff_include.js");
+$.getScript("modules/HAA_FF/ff_include.js");
 //load triger_setFF()
 function setAssetPopupReturn(popupReplyData){
 	set_return(popupReplyData);

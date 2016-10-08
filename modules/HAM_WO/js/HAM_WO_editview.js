@@ -34,6 +34,21 @@ function setWoPriorityReturn(popupReplyData){
 
 function setHamActivityReturn(popupReplyData){
 	set_return(popupReplyData);
+	//$("#haa_ff_id").val(popupReplyData.name_to_value_array.hat_event_type_id);
+	//console.log(popupReplyData.name_to_value_array.hat_event_type_id);
+	//通过事务处理单获取haa_ff_id
+	//
+	$.ajax({
+			url: 'index.php?to_pdf=true&module=HAM_WO&action=get_ff_id&hat_event_type_id=' + popupReplyData.name_to_value_array.hat_event_type_id,
+			success: function (data) {
+				$("#haa_ff_id").val(data);
+				call_ff();
+			},
+			error: function () { //失败
+				alert('Error loading document');
+			}
+		});
+	
 	if($("#name").val()==""||$("#name").val()==""){
 		$("#name").val($("#ham_act_id_rule").val());
 	}
@@ -41,6 +56,7 @@ function setHamActivityReturn(popupReplyData){
 		$("#priority").val($("#wo_priority").val());
 		$("#ham_priority_id").val($("#wo_priority_id").val());
 	}
+	
 }
 
 function setWorkCenterPopupReturn(popupReplyData){
@@ -146,7 +162,12 @@ $(document).ready(function(){
 	SUGAR.util.doWhen("typeof setFF == 'function'", function(){
 		call_ff();
 	});
-
+	
+	$("#event_type").change(function(){
+		SUGAR.util.doWhen("typeof setFF == 'function'", function(){
+			call_ff();
+		});
+	});
 
 	/**
 	 * checkAccess 
@@ -378,6 +399,8 @@ function initTransHeaderStatus() {
 $("#wo_status").change(function(){
 		require_field();
 });
+
+
     
     
 function setEditViewReadonly () { //如果当前头状态为Submitted、Approved、Canceled、Closed需要将字段变为只读

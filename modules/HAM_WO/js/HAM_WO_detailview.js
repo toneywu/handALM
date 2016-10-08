@@ -91,6 +91,7 @@ function complete_work_order(record){
  */
 function save(id,status_code){
 		$.ajax({
+		
 			url: 'index.php?to_pdf=true&module=HAM_WO&action=saveBean&id=' + id+"&status_code="+status_code,
 			success: function (data) {
 				window.location.href = "index.php?module=HAM_WO&action=DetailView&record="+id;

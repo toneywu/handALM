@@ -8,6 +8,7 @@ function insertTransLineHeader(tableid){
  //alert($("#LBL_DETAILVIEW_PANEL1 tr:eq(:first)").first());
  //alert($("#LBL_DETAILVIEW_PANEL1 tr td:first").text());
  $("#LBL_DETAILVIEW_PANEL1 tr td:first").remove();
+ $("#LBL_EDITVIEW_PANEL1 tr td:first").remove();
   //alert(SUGAR.language.get('HAT_Asset_Trans', 'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE'));
 
   tablehead = document.createElement("thead");
