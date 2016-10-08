@@ -1,12 +1,14 @@
+//deleted by toney.wu 前两个函数保持在ff_include.js中，不要单独进行维护，如果ff_include.js不完整，请针对此文件进行更新
+
 /**
  * 设置必输
  */
-function mark_field_enabled(field_name,not_required_bool) {
+/*function mark_field_enabled(field_name,not_required_bool) {
   // field_name = 字段名，不需要jquery select标志，直接写名字
   // not_required_bool如果为空或没有明确定义为true的话，字段为必须输入。如果=true则为非必须
   // alert(not_required_bool);
   // 
-  console.log(field_name+"="+not_required_bool);
+  //console.log(field_name+"="+not_required_bool);
 
   $("#"+field_name).css({"color":"#000000","background-Color":"#ffffff"});
   $("#"+field_name).attr("readonly",false);
@@ -116,7 +118,7 @@ function hide_field_disabled(field_name, hide_bool, keep_position=false) {
 	          }
 	      }
 	  }
-	}
+	}*/
 /**
  * loopField
  */
@@ -135,15 +137,15 @@ function loopField(fieldName,type){
 		    mark_field_enabled(fieldName+i,false);
 		}
 	}else if(type=="INVISIABLE"){
-		// alert(fieldName);
 		for (var i=0;i<prodln;i++) {
 			// hide_field_disabled(fieldName+i,true,false)
 		    $("#"+fieldName+i).css({"visibility":"hidden"});
 		    $("#"+fieldName+i+"_label").css({"visibility":"hidden"});
 		    $("#btn_"+fieldName+i).css({"visibility":"hidden"});
-		    $("#"+fieldName+i).parents('.input_group').remove(); 
-		    $("#"+fieldName+"_title").remove(); 
-		    $("#displayed_"+fieldName+i).remove(); 
+		    $("#"+fieldName+i).parents('.input_group').hide();//remove(); 
+		    $("#"+fieldName+"_title").hide();//remove(); 
+		    $("#displayed_"+fieldName+i).hide();//remove(); 
+		    mark_field_disabled(fieldName+i,false);
 		}
 	}
 }
