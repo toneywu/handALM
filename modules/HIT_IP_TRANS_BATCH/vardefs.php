@@ -40,9 +40,9 @@
 
 $dictionary['HIT_IP_TRANS_BATCH'] = array (
 	'table' => 'hit_ip_trans_batch',
-	'audited' => true,
-	'inline_edit' => true,
-	'duplicate_merge' => true,
+	'audited' => false,
+	'inline_edit' => false,
+	'duplicate_merge' => false,
 	'fields' => array (
 		'name' => array (
 			'name' => 'name',

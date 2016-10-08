@@ -122,6 +122,7 @@ if(!isset($_REQUEST['uid']) || empty($_REQUEST['uid']) || !isset($_REQUEST['temp
 
     $text = populate_template_lines($text, $lineItems,'tr','HAT_Asset_Trans');//完成行字段的覆盖
     $text = populate_template_lines($text, $lineItems,'tr','HAM_WO_Lines');//完成行字段的覆盖
+    $text = populate_template_lines($text, $lineItems,'tr','HIT_IP_TRANS');//完成行字段的覆盖
 
 	$converted = templateParser::parse_template($text, $object_arr);//这里完成了字段的替换
     $header = templateParser::parse_template($header, $object_arr);

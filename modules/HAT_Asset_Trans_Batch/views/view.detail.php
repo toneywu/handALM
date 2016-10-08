@@ -49,7 +49,6 @@ class HAT_Asset_Trans_BatchViewDetail extends ViewDetail
 				}</script>';
 				echo '<script>call_ff()</script>';
 			}
-            echo $bean_code->name;
             echo '<script>var template_id="'.$bean_code->aos_pdf_templates_id.'"</script>';
         }
 

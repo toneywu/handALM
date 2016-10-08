@@ -31,12 +31,11 @@ class HIT_IP_TRANS_BATCHViewDetail extends ViewDetail {
 				$this->bean->email = $primary;
 			}
 		}
-		
-		if($_GET["woop_id"]!=null){
+
+		if(isset($_REQUEST["woop_id"])){
 			echo '<script>var hideButtonFlag="Y";</script>';
 		}
-		
-		
+
 		parent :: Display();
 		//ff 在DetailView显示之前中进行初始化数据的加载 
 		if (isset ($this->bean->hat_eventtype_id) && ($this->bean->hat_eventtype_id) != "") {
@@ -50,10 +49,10 @@ class HIT_IP_TRANS_BATCHViewDetail extends ViewDetail {
 				echo '<script> function call_ff() {
 								    triger_setFF($("#haa_ff_id").val(),"HIT_IP_TRANS_BATCH","DetailView");
 								    $(".expandLink").click();
-								 
 								}</script>';
 				echo '<script>call_ff()</script>';
 			}
+            echo '<script>var template_id="'.$bean_code->aos_pdf_templates_id.'"</script>';
 		}
 
 	}
