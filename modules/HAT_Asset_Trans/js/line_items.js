@@ -7,6 +7,7 @@ if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
 
 function openAssetPopup(ln){//本文件为行上选择资产的按钮
   lineno=ln;
+  //console.log(global_eventOptions);
   var popupRequestData = {
     "call_back_function" : "setAssetReturn",
     "form_name" : "EditView",
@@ -32,7 +33,7 @@ function openAssetPopup(ln){//本文件为行上选择资产的按钮
       "location_desc" : "line_current_location_desc" + ln,
     }
   };
-  var popupFilter = '&current_mode=asset&framework_advanced='+$("#haa_framework").val();
+  var popupFilter = '&current_mode='+global_eventOptions.asset_scope.toLowerCase()+'&defualt_list='+global_eventOptions.default_asset_list.toLowerCase()+'&haa_frameworks_id_advanced='+$("#haa_frameworks_id").val();
   open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
 }
 

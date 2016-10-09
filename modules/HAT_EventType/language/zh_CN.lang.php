@@ -83,15 +83,13 @@ $mod_strings = array (
   'LBL_EVENT_SHORT_DESC' => '事件短名称',
   'LNK_IMPORT_HAT_EVENTTYPE' => '导入 资产事件类型',
   'LBL_HAT_EVENTTYPE_SUBPANEL_TITLE' => '资产事件类型',
-  
   'LBL_CHANGE_OWNING_ORG'=>'可修改所属组织',
   'LBL_CHANGE_OWNING_PERSON'=>'可修改所属负责人',
   'LBL_CHANGE_USING_ORG'=>'可修改使用组织',
   'LBL_CHANGE_USING_PERSON'=>'可修改使用人',
   'LBL_CHANGE_PARENT'=>'可修改父资产关系',
   'LBL_CHANGE_RACK_POSITION'=>'可修改IT机柜内位置',
-
-    'LBL_PARENT_EVENTTYPE'=>'父事件类型',
+  'LBL_PARENT_EVENTTYPE'=>'父事件类型',
   'LBL_HAA_FF'=>'动态界面模板FF',
   'LBL_CHANGE_IP_SUBNETS'=>'可修改网段',
   'LBL_CHANGE_ASSOCIATED_IP'=>'可修改可用IP',
@@ -106,7 +104,8 @@ $mod_strings = array (
   'LBL_CHANGE_CHANNEL_CONTENT'=>'可修改频道内容',
   'LBL_CHANGE_CHANGE_MRTG_LINK'=>'可修改MRGT链接',
   'LBL_CHANGE_ACCESS_ASSETS_NAME'=>'可修改接入设备',
-'LBL_EDITVIEW_PANEL3' => '网络事务处理行',
+  'LBL_EDITVIEW_PANEL3' => '网络事务处理行',
   'LBL_AOS_PDF_TEMPLATE'=>'PDF单据模板格式',
-
+  'LBL_ASSET_SCOPE'=>'资产范围',
+  'LBL_DEFAILT_ASSET_LIST'=>'默认的资产列表',
 );

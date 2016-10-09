@@ -67,3 +67,15 @@ $app_list_strings['hat_event_type_list']=array (
   'INV_TRANSFER' => '库存: 库存转移',
   'INV_WO' => '库存: 向工单发料',
 );
+
+$app_list_strings['hat_asset_scope_list']=array (
+  'ASSET' => '所有设备/资产',
+  'IT' => 'IT设备',
+  'RACK' => 'IT机柜',
+);
+
+$app_list_strings['hat_default_asset_list']=array (
+  'NONE' => '无默认限制列表',
+  'USING_ORG' => '当前使用组织',
+  'WO_ASSET_TRANS' => '当前工单/已有的资产事务',
+);

@@ -39,12 +39,12 @@ array (
 					'field' => '30',
 					),
 				),
-			'useTabs' => true,
+			'useTabs' => false,
 			'tabDefs' => 
 			array (
 				'DEFAULT' => 
 				array (
-					'newTab' => true,
+					'newTab' => false,
 					'panelDefault' => 'expanded',
 					),
 				'LBL_EDITVIEW_PANEL1' => 

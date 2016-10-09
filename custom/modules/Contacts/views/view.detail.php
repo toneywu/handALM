@@ -85,7 +85,7 @@ class ContactsViewDetail extends ViewDetail
                     //Subpanels to hide
                     $hideSubpanels=array( //如果是内部用户，隐藏以下Tab页
                         'activities',
-						'history',
+						//'history',
                         'opportunities',
 						'leads',
 						'campaigns',
@@ -102,7 +102,7 @@ class ContactsViewDetail extends ViewDetail
 				}else{
                     $hideSubpanels=array( //如果是外部用户，隐藏以下Tab页
                         'activities',
-						'history',
+						//'history',
                         'opportunities',
 						'leads',
 						'campaigns',
