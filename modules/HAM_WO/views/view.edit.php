@@ -202,6 +202,12 @@ class HAM_WOViewEdit extends ViewEdit {
 								));
 				$this->bean->contract=$contract_bean->name;
 				$this->bean->source_type='Contracts';
+				$this->bean->account_id=$contract_bean->contract_account_id;
+				$account_bean = BeanFactory :: getBean('Accounts')->retrieve_by_string_fields(array (
+									'id' => $contract_bean->contract_account_id
+								));
+								
+				$this->bean->account=$account_bean->name;
 				//$this->bean->saveContracts(false);
 			}
 		}
