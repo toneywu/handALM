@@ -11,4 +11,6 @@ $mod_strings = array (
   'LBL_REVISION_HPR_AM_ROLES_ID' => 'Revision (related  ID)',
   'LBL_REVISION' => 'Revision',
   'LBL_CONTRACT_NUMBER' => 'Contract Number',
+  'LBL_BTN_CREATE_WO_ORDER_BUTTON_LABEL'=>'Create Work Order',
+
 );
