@@ -71,14 +71,6 @@ if(!isset($_REQUEST['uid']) || empty($_REQUEST['uid']) || !isset($_REQUEST['temp
     $object_arr = array();
     $object_arr[$module_type] = $module->id;
 
-    $lineItems = array();
-    $sql = "SELECT id FROM hat_asset_trans WHERE hat_asset_trans.`batch_id`='".$_REQUEST['uid']."' AND hat_asset_trans.`deleted`=0 ORDER BY hat_asset_trans.`id`";
-    $res = $module->db->query($sql);
-    while($row = $module->db->fetchByAssoc($res)){
-            $lineItems[$row['id']]= $row['id'];
-    }
-
-
     //backward compatibility
     $object_arr['Accounts'] = $module->billing_account_id;
     $object_arr['Contacts'] = $module->billing_contact_id;
@@ -120,9 +112,38 @@ if(!isset($_REQUEST['uid']) || empty($_REQUEST['uid']) || !isset($_REQUEST['temp
         function ($matches) { return date($matches[1]); },
         $text );
 
-    $text = populate_template_lines($text, $lineItems,'tr','HAT_Asset_Trans');//完成行字段的覆盖
-    $text = populate_template_lines($text, $lineItems,'tr','HAM_WO_Lines');//完成行字段的覆盖
-    $text = populate_template_lines($text, $lineItems,'tr','HIT_IP_TRANS');//完成行字段的覆盖
+    if ($module_type=="HAT_Asset_Trans_Batch") {
+        //加载资产事务处理行
+        $lineItems = array();
+        $sql = "SELECT id FROM hat_asset_trans WHERE hat_asset_trans.`batch_id`='".$_REQUEST['uid']."' AND hat_asset_trans.`deleted`=0 ORDER BY hat_asset_trans.`id`";
+        $res = $module->db->query($sql);
+        while($row = $module->db->fetchByAssoc($res)){
+                $lineItems[$row['id']]= $row['id'];
+        }
+        $text = populate_template_lines($text, $lineItems,'tr','HAT_Asset_Trans');//完成行字段的覆盖
+    }
+
+    if ($module_type=="HIT_IP_TRANS_BATCH") {
+        //加载网络事务处理行
+        $lineItems = array();
+        $sql = "SELECT id FROM hit_ip_trans WHERE hit_ip_trans.`hit_ip_trans_batch_id`='".$_REQUEST['uid']."' AND hit_ip_trans.`deleted`=0 ORDER BY hit_ip_trans.`id`";
+        $res = $module->db->query($sql);
+        while($row = $module->db->fetchByAssoc($res)){
+                $lineItems[$row['id']]= $row['id'];
+        }
+        $text = populate_template_lines($text, $lineItems,'tr','HIT_IP_TRANS');//完成行字段的覆盖
+    }
+
+    if ($module_type=="HIT_IP_TRANS_BATCH" ||$module_type=="HAT_Asset_Trans_Batch") {
+        //加载工作单行
+        $lineItems = array();
+        $sql = "SELECT id FROM ham_wo_lines WHERE ham_wo_lines.`deleted`=0 AND ham_wo_lines.`ham_wo_id`='"+$module->source_wo_id+"' ORDER BY hit_ip_trans.`id`";
+        $res = $module->db->query($sql);
+        while($row = $module->db->fetchByAssoc($res)){
+                $lineItems[$row['id']]= $row['id'];
+        }
+        $text = populate_template_lines($text, $lineItems,'tr','HAM_WO_Lines');//完成行字段的覆盖
+    }
 
 	$converted = templateParser::parse_template($text, $object_arr);//这里完成了字段的替换
     $header = templateParser::parse_template($header, $object_arr);
