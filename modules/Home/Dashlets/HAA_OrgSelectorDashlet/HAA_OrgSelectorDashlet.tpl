@@ -1,5 +1,6 @@
 
 <div style="padding:5px" >
+	<span id="Framework_Logo_{$id}"></span>
 	<span id="HAA_FrameworkSeletor_{$id}">{$frameworkLbl}
 	<select id="framework_selector_{$id}">
 		{$framework_field}
