@@ -78,7 +78,8 @@ class HIT_RacksViewEdit extends ViewEdit
                 $current_supplier_desc=isset($this->bean->supplier_desc)?$this->bean->supplier_desc:"";
                 echo ('<script>$("#supplier_org").parent().html(\'<input type="hidden" name="supplier_org" id="supplier_org" value="'.$current_supplier_org.'"/><input type="hidden" name="supplier_org_id" id="supplier_org_id" value="'.$current_supplier_org_id.'"/><input type="text" name="supplier_desc" id="supplier_desc" value="'.$current_supplier_desc.'"/>\');</script>');
             }
-
+/*            echo "<pre>";
+            print_r($this->bean);*/
             if($beanFramework->source_reference_field_rule=='TEXT'){
                 $current_source_reference = isset($this->bean->asset_source)?($this->bean->asset_source):"";
                 $current_source_reference_id=isset($this->bean->asset_source_id)?$this->bean->asset_source_id:"";
