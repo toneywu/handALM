@@ -11,9 +11,13 @@ array (
         'buttons' => 
         array (
           0 => 'EDIT',
-          1 => 'DUPLICATE',
+/*          1 => 'DUPLICATE',
           2 => 'DELETE',
-          3 => 'FIND_DUPLICATES',
+          3 => 'FIND_DUPLICATES',*/
+          1 =>
+          array (
+            'customCode' => '<input type="button" class="button" onClick="GenerateDoc();" value="{$MOD.LBL_GENERATE_DOC}">',
+          ),
         ),
       ),
       'maxColumns' => '2',
@@ -163,14 +167,9 @@ array (
             'label' => 'LBL_SEND_TO_CUSTOMER',
           ),
         ),
+
+
         7 => 
-        array (
-          0 => 'description',
-        ),
-      ),
-      'lbl_editview_panel2' => 
-      array (
-        0 => 
         array (
           0 => 
           array (
@@ -183,7 +182,7 @@ array (
             'label' => 'LBL_ATTRIBUTE2',
           ),
         ),
-        1 => 
+        8 => 
         array (
           0 => 
           array (
@@ -196,7 +195,7 @@ array (
             'label' => 'LBL_ATTRIBUTE4',
           ),
         ),
-        2 => 
+        9 => 
         array (
           0 => 
           array (
@@ -208,6 +207,10 @@ array (
             'name' => 'attribute6',
             'label' => 'LBL_ATTRIBUTE6',
           ),
+        ),
+        10 => 
+        array (
+          0 => 'description',
         ),
       ),
       'lbl_editview_panel1' => 

@@ -1,16 +1,20 @@
+//deleted by toney.wu 前两个函数保持在ff_include.js中，不要单独进行维护，如果ff_include.js不完整，请针对此文件进行更新
+
 /**
  * 设置必输
  */
-function mark_field_enabled(field_name,not_required_bool) {
+/*function mark_field_enabled(field_name,not_required_bool) {
   // field_name = 字段名，不需要jquery select标志，直接写名字
   // not_required_bool如果为空或没有明确定义为true的话，字段为必须输入。如果=true则为非必须
   // alert(not_required_bool);
+  // 
+  //console.log(field_name+"="+not_required_bool);
+
   $("#"+field_name).css({"color":"#000000","background-Color":"#ffffff"});
   $("#"+field_name).attr("readonly",false);
   $("#"+field_name+"_label").css({"color":"#000000","text-decoration":"none"})
 
   if(typeof not_required_bool == "undefined" || not_required_bool==false || not_required_bool=="") {
-	  // alert(field_name);
       addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());// 将当前字段标记为必须验证
       // 打上必须星标
       if  ($("#"+field_name+"_label .required").text()!='*') {// 如果没有星标，则打上星标
@@ -114,12 +118,11 @@ function hide_field_disabled(field_name, hide_bool, keep_position=false) {
 	          }
 	      }
 	  }
-	}
+	}*/
 /**
  * loopField
  */
 function loopField(fieldName,type){
-	
 	if(type=="OPTIONAL"){
 		for (var i=0;i<prodln;i++) {
 			mark_field_enabled(fieldName+i,true);
@@ -134,17 +137,17 @@ function loopField(fieldName,type){
 		    mark_field_enabled(fieldName+i,false);
 		}
 	}else if(type=="INVISIABLE"){
-		// alert(fieldName);
 		for (var i=0;i<prodln;i++) {
 			// hide_field_disabled(fieldName+i,true,false)
 		    $("#"+fieldName+i).css({"visibility":"hidden"});
 		    $("#"+fieldName+i+"_label").css({"visibility":"hidden"});
 		    $("#btn_"+fieldName+i).css({"visibility":"hidden"});
-		    $("#"+fieldName+i).parents('.input_group').remove(); 
-		    $("#"+fieldName+"_title").remove(); 
-		    $("#displayed_"+fieldName+i).remove(); 
+		    $("#"+fieldName+i).parents('.input_group').hide();//remove(); 
+		    $("#"+fieldName+"_title").hide();//remove(); 
+		    $("#displayed_"+fieldName+i).hide();//remove(); 
+		    mark_field_disabled(fieldName+i,false);
 		}
-	}	
+	}
 }
 /**
  * 
@@ -166,10 +169,15 @@ function changeRequired(lineRecord){
 	loopField("line_access_assets_name",lineRecord.change_access_assets_name);
 }
 
-function change_asset_required(lineRecord){
-	console.log(lineRecord);
+//delted by toney.wu 20161007
+//所有的功能已经实现HAT_Asset_Trans_Batch_editview.js的函数resetEventType()
+/*function change_asset_Required(lineRecord){
+
+	console.log("lineRecord");
+
 	loopField("line_target_owning_org",lineRecord.change_owning_org);
 	loopField("line_target_owning_org",lineRecord.change_using_org);
 	loopField("line_target_owning_person",lineRecord.change_owning_person);
 	loopField("line_target_rack_position_desc",lineRecord.change_rack_position);
 }
+*/

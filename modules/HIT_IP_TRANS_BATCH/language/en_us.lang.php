@@ -86,6 +86,7 @@ $mod_strings = array (
   'LBL_NAME' => 'Trans Title',
   'LBL_HIT_IP_TRANS_BATCH_HIT_IP_TRANS_TITLE'=>'Line Items',
   'LBL_EMAIL'=>'Email',
+  'LBL_GENERATE_DOC'=>'Generate Doc.',
   'LBL_CONTACT_NAME'=>'Customer',
   'LBL_SEND_TO_CUSTOMER'=>'Send To Customer',
   'LBL_SERVICE_DATE'=>'Service Date',

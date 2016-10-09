@@ -22,17 +22,19 @@ class HAT_Asset_Trans_BatchViewDetail extends ViewDetail
             }
             echo '<script type="text/javascript" src="' . $GLOBALS['sugar_config']['cache_dir'] . 'jsLanguage/' . $module . '/' . $GLOBALS['current_language'] . '.js?s=' . $GLOBALS['js_version_key'] . '&c=' . $GLOBALS['sugar_config']['js_custom_version'] . '&j=' . $GLOBALS['sugar_config']['js_lang_version'] . '"></script>';
         };
-		echo '<script src="modules/HIT_IP_TRANS_BATCH/js/html_dom_required_setting.js"></script>';
-		
-		if($_GET["woop_id"]!=null){
+
+		//echo '<script src="modules/HIT_IP_TRANS_BATCH/js/html_dom_required_setting.js"></script>';
+
+		if(isset($_REQUEST["woop_id"])){
 			echo '<script>var hideButtonFlag="Y";</script>';
 		}
-		
+
         parent::Display();
-        
-        
-        //ff 在DetailView显示之前中进行初始化数据的加载 
+
+
+        //ff 在DetailView显示之前中进行初始化数据的加载
 		if (isset ($this->bean->hat_eventtype_id) && ($this->bean->hat_eventtype_id) != "") {
+
 			$event_type_id = $this->bean->hat_eventtype_id;
 			$bean_code = BeanFactory :: getBean('HAT_EventType', $event_type_id);
 			$ff_id = $bean_code->haa_ff_id;
@@ -43,13 +45,12 @@ class HAT_Asset_Trans_BatchViewDetail extends ViewDetail
 				echo '<script> function call_ff() {
 				    triger_setFF($("#haa_ff_id").val(),"HAM_SR","DetailView");
 				    $(".expandLink").click();
-				 
+
 				}</script>';
 				echo '<script>call_ff()</script>';
 			}
-}
-        
-        
-        
+            echo '<script>var template_id="'.$bean_code->aos_pdf_templates_id.'"</script>';
+        }
+
     }
 }

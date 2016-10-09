@@ -8,18 +8,17 @@ function call_ff() {
 
 
 $(document).ready(function(){
-	
 	 //触发FF 
-	SUGAR.util.doWhen("typeof setFF == 'function'", function(){
-    call_ff();
-    //alert("hh");
-  });
+    SUGAR.util.doWhen("typeof setFF == 'function'", function(){
+        call_ff();
+    });
 
     if (typeof hideButtonFlag !="undefined") {
 	   $(".action_buttons").hide();
     }
 
     $("#line_items_span").parent("td").prev("td").hide();
+
     if (typeof $("#source_wo_id").attr("data-id-value") !="undefined") {
       //如果来源于工作单则显示工作单对象行信息，否则直接隐藏行
       $("#wo_lines").append("<div id='wo_lines_display'></div>");
@@ -45,7 +44,6 @@ function showWOLines(wo_id) {
         $.ajax({
             url: 'index.php?to_pdf=true&module=HAM_WO&action=getWOLiness&id=' + wo_id,
             success: function (data) {
-                //console.log(data);
                 $("#wo_lines_display").html(data);
             },
             error: function () { //失败
@@ -71,6 +69,11 @@ function updateStatus(object_id) {
 }
 
 function GenerateDoc() {
-    var record_id=$( "input[name*='record']" ).val();
-    window.location = "index.php?module=HAT_Asset_Trans_Batch&action=GenerateDoc&uid="+record_id;
+    if (typeof template_id == 'undefined' || template_id.length == 0) {
+        alert (SUGAR.language.get('app_strings', 'LBL_NO_TEMPLATE'));
+        //warning for no PDF template
+	} else {
+	    var record_id=$( "input[name*='record']" ).val();
+	    window.location = "index.php?module=HAT_Asset_Trans_Batch&action=GenerateDoc&uid="+record_id+"&templateID="+template_id;
+    }
 }
