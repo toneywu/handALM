@@ -95,7 +95,7 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
                 $result_woop =  $db->query($sql_current_string);
 
                 while ( $bean_woop = $db->fetchByAssoc($result_woop) ) {
-                	
+
                     $this->bean->source_woop_id = $bean_woop['woop_id'];
                     $this->bean->source_woop = $bean_woop['woop_name'];
                     $this->bean->hat_eventtype_id = $bean_woop['hat_eventtype_id'];
@@ -162,9 +162,9 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
             echo "var source_wo_id='".$this->bean->source_wo_id."';";
         }
         echo "</script>";
-        
-		echo '<script src="modules/HIT_IP_TRANS_BATCH/js/html_dom_required_setting.js"></script>';
-		
+
+/*		echo '<script src="modules/HIT_IP_TRANS_BATCH/js/html_dom_required_setting.js"></script>';
+
 		//add by yuan.chen 
 			$event_sql = "SELECT 
 					  h.change_owning_org,
@@ -180,7 +180,7 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
 			while ($event_row = $db->fetchByAssoc($event_result)) {
 				$event_line_data = json_encode($event_row);
 				echo "<script> var event_line_data=".$event_line_data."</script>";
-			}
+			}*/
 	
         parent::Display();
 

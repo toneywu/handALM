@@ -158,9 +158,9 @@ echo '<div class="moduleTitle">
 <h2> <a href="index.php?module=HAT_Asset_Trans_Batch&amp;action=DetailView&amp;record='.$module->id.'">'.$module->name.'</a><span class="pointer">»</span>'.translate('LBL_GENERATE_DOC','HAT_Asset_Trans_Batch').'</h2><div class="clear"></div></div>';
 
     echo '<form id="GenerateDocForm" name="GenerateDoc" method="post" >';
-    echo '<input name="BtnSave" id="BtnSaveAsPDF" type="button" value="Save and Continue" onclick="SaveAsPDF(\'save\',\''.$_REQUEST['uid'].'\',\''.$template_id.'\')">';
-    echo '<input name="BtnRegenerate" id="BtnRegenerate" type="button" value="Regenerate Doc" onclick="SaveAsPDF(\'new\',\''.$_REQUEST['uid'].'\',\''.$template_id.'\')">';
-    echo '<input name="BtnSaveAsPDF" id="BtnSaveAsPDF" type="button" value="Achive as PDF" onclick="SaveAsPDF(\'pdf\',\''.$_REQUEST['uid'].'\',\''.$template_id.'\')">';
+    echo '<input name="BtnSave" id="BtnSave" type="button" value="Save and Continue" onclick="SaveAsPDF(\'save\',\''.$module_type.'\',\''.$_REQUEST['uid'].'\',\''.$template_id.'\')">';
+    echo '<input name="BtnRegenerate" id="BtnRegenerate" type="button" value="Regenerate Doc" onclick="SaveAsPDF(\'new\',\''.$module_type.'\',\''.$_REQUEST['uid'].'\',\''.$template_id.'\')">';
+    echo '<input name="BtnSaveAsPDF" id="BtnSaveAsPDF" type="button" value="Achive as PDF" onclick="SaveAsPDF(\'pdf\',\''.$module_type.'\',\''.$_REQUEST['uid'].'\',\''.$template_id.'\')">';
     echo $header;
     echo '<textarea name="DocText" id="DocText">'.$printable.'</textarea>';
     echo $footer;
