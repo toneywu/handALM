@@ -33,11 +33,10 @@ class HAM_SRViewDetail extends ViewDetail {
 				echo '<script> function call_ff() {
 				    triger_setFF($("#haa_ff_id").val(),"HAM_SR","DetailView");
 				    $(".expandLink").click();
-				 
+
 				}</script>';
 				echo '<script>call_ff()</script>';
 			}
 		}
-		
 	}
 }

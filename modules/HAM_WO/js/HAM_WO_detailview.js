@@ -136,11 +136,6 @@ function checkAccess(id){
  * document 页面加载 入口函数
  */
 $(document).ready(function(){
-	
-	  //触发FF
-   SUGAR.util.doWhen("typeof setFF == 'function'", function(){
-    	call_ff();
-   });
 
 	//明细页面添加一个按钮
 	var change_btn=$("<input type='button' class='btn_detailview' id='btn_change_status' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL')+"'>");
