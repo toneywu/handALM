@@ -54,7 +54,7 @@ class AOS_ProductsViewEdit extends ViewEdit
 
         $beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
         //从业务框架中复制默认的物料单位
-        if(isset($beanFramework)&&empty($this->bean->haa_uom_id_c)) {
+        if(isset($beanFramework)&&empty($this->bean->haa_uom_id_c)&&!empty($beanFramework->default_product_uom_id)) {
            $this->bean->primary_uom_c = $beanFramework->default_product_uom;
            $this->bean->haa_uom_id_c = $beanFramework->default_product_uom_id;
         }
