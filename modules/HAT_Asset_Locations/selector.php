@@ -231,9 +231,18 @@ $(document).ready(function(){
 			//如果当前模块是Treeview
 			$("#current_view").val($("#selector_view_tree").val());//加载树的类型
 
-			SUGAR.util.doWhen("typeof initTree == 'function'", function() {//在selector_treeview.js完成加载之后，再继续加载
+			SUGAR.util.doWhen("typeof initTree == 'function'", function() {
+				//在selector_treeview.js完成加载之后，再继续加载
 				//这里是需要执行的内容
-				initTree($("#current_view").val());
+				<?php
+				if (isset($_REQUEST['defualt_list']) && $_REQUEST['defualt_list']!="NONE") {
+					//默认搜索模式
+					echo 'initTree("LIST","'.$_REQUEST["defualt_list"].'");';
+				 }else {
+					//如果没有搜索参数，就默认树型结构初始化
+					echo 'initTree($("#current_view").val());';
+				}
+				?>
 			});
 		} else {
 			//如果当前模式不是Treeview，就是MapView

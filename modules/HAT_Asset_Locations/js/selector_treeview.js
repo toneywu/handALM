@@ -188,7 +188,7 @@ function btn_select_clicked() {
 }
 
 
-function initTree(treeView) {
+function initTree(treeView, default_list) {
 
 	$("#treeview_selector").addClass("ztree");
 	$("#treeview_selector,#node_details").html("");
@@ -203,7 +203,10 @@ function initTree(treeView) {
 	//具体的ajax部分，见getTreeNodes.php，树与Ajax的关系，定义在Setting中
 
 	var framework_title="<strong>"+$("#haa_framework").val()+"</strong> ";
-	if (treeView=='TREE_LOCATON') {
+
+	if (treeView=='LIST') {
+		var zNodes = [{name:framework_title+$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0,type:default_list}];
+	} else if (treeView=='TREE_LOCATON') {
 		var zNodes = [{name:framework_title+$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0,type:"location"}];
 	} else if (treeView=='OWNING_ORG') {
 		var zNodes = [
