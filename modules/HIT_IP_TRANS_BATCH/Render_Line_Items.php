@@ -28,13 +28,15 @@ function display_lines($focus, $field, $value, $view) {
 							,hat.hat_assets_cabinet_id
 							,b.name hat_assets_cabinet
 							,hat.channel_content
-							,hat.channel_num,s.ip_netmask,s.ip_lowest+'~'+ s.ip_highest associated_ip,hat.mrtg_link,hat.access_assets_id,c.name access_assets_name 	,'OTHER_WOOP' source_ref,hat.date_entered
+							,hat.channel_num,s.ip_netmask,s.ip_lowest+'~'+ s.ip_highest associated_ip,hat.mrtg_link,hat.access_assets_id,c.name access_assets_name 	,'OTHER_WOOP' source_ref,hat.date_entered,hat.main_asset_id,d.name main_asset,hat.backup_asset_id,e.name backup_asset
 					FROM   hit_ip_allocations hat
 					LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
 					LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
 					LEFT JOIN hit_ip_subnets s ON (hat.hit_ip_subnets_id=s.id)
 					LEFT JOIN hit_ip hi ON (s.parent_hit_ip_id=hi.id)
 					LEFT JOIN hat_assets c ON (hat.access_assets_id=c.id)
+					LEFT JOIN hat_assets d ON (hat.main_asset_id=d.id)
+					LEFT JOIN hat_assets e ON (hat.backup_asset_id=e.id)
 					WHERE hat.deleted=0 and hat.hit_ip_trans_batch_id !='" . $focus->id . "' and hat.source_wo_id='" .
 		$focus->source_wo_id . "' and hat.source_woop_id!='" .
 		$focus->source_woop_id . "')";
@@ -55,13 +57,15 @@ function display_lines($focus, $field, $value, $view) {
 								,hat.hat_assets_cabinet_id
 								,b.name hat_assets_cabinet
 								,hat.channel_content
-								,hat.channel_num,s.ip_netmask,s.ip_lowest + '~' + s.ip_highest associated_ip,hat.mrtg_link	,hat.access_assets_id,c.name access_assets_name ,'CURRENT_WOOP' source_ref,hat.date_entered
+								,hat.channel_num,s.ip_netmask,s.ip_lowest + '~' + s.ip_highest associated_ip,hat.mrtg_link	,hat.access_assets_id,c.name access_assets_name ,'CURRENT_WOOP' source_ref,hat.date_entered,hat.main_asset_id,d.name main_asset,hat.backup_asset_id,e.name backup_asset
 						FROM   hit_ip_trans hat
 						LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
 						LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
 						LEFT JOIN hit_ip_subnets s ON (hat.hit_ip_subnets_id=s.id)
 						LEFT JOIN hit_ip hi ON (s.parent_hit_ip_id=hi.id)
 						LEFT JOIN hat_assets c ON (hat.access_assets_id=c.id)
+						LEFT JOIN hat_assets d ON (hat.main_asset_id=d.id)
+					    LEFT JOIN hat_assets e ON (hat.backup_asset_id=e.id)
 						WHERE hat.deleted=0 and hat.hit_ip_trans_batch_id ='" . $focus->id . "')";
 			$sql = $sql1 . " union all " . $sql2 . " order by date_entered asc";
 			$result = $focus->db->query($sql);
@@ -155,13 +159,15 @@ function display_lines($focus, $field, $value, $view) {
 																,hat.hat_assets_cabinet_id
 																,b.name hat_assets_cabinet
 																,hat.channel_content
-																,hat.channel_num,s.ip_netmask,s.ip_lowest+'~'+ s.ip_highest associated_ip,hat.mrtg_link,hat.access_assets_id,c.name access_assets_name ,hat.date_entered	
+																,hat.channel_num,s.ip_netmask,s.ip_lowest+'~'+ s.ip_highest associated_ip,hat.mrtg_link,hat.access_assets_id,c.name access_assets_name ,hat.date_entered,hat.main_asset_id,d.name main_asset,hat.backup_asset_id,e.name backup_asset	
 														FROM   hit_ip_trans hat
 														LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
 														LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
 														LEFT JOIN hit_ip_subnets s ON (hat.hit_ip_subnets_id=s.id)
 														LEFT JOIN hit_ip hi ON (s.parent_hit_ip_id=hi.id)
 														LEFT JOIN hat_assets c ON (hat.access_assets_id=c.id)
+														LEFT JOIN hat_assets d ON (hat.main_asset_id=d.id)
+					                                    LEFT JOIN hat_assets e ON (hat.backup_asset_id=e.id)
 														WHERE hat.deleted=0 and  hat.hit_ip_trans_batch_id ='" . $focus->id . "')";
 				//				$result = $focus->db->query($sql);
 				//
@@ -193,13 +199,15 @@ function display_lines($focus, $field, $value, $view) {
 																,hat.hat_assets_cabinet_id
 																,b.name hat_assets_cabinet
 																,hat.channel_content
-																,hat.channel_num,s.ip_netmask,s.ip_lowest+'~'+ s.ip_highest associated_ip,hat.mrtg_link,hat.access_assets_id,c.name access_assets_name 	,hat.date_entered
+																,hat.channel_num,s.ip_netmask,s.ip_lowest+'~'+ s.ip_highest associated_ip,hat.mrtg_link,hat.access_assets_id,c.name access_assets_name 	,hat.date_entered,hat.main_asset_id,d.name main_asset,hat.backup_asset_id,e.name backup_asset
 														FROM   hit_ip_allocations hat
 														LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
 														LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
 														LEFT JOIN hit_ip_subnets s ON (hat.hit_ip_subnets_id=s.id)
 														LEFT JOIN hit_ip hi ON (s.parent_hit_ip_id=hi.id)
 														LEFT JOIN hat_assets c ON (hat.access_assets_id=c.id)
+														LEFT JOIN hat_assets d ON (hat.main_asset_id=d.id)
+					    								LEFT JOIN hat_assets e ON (hat.backup_asset_id=e.id)
 														WHERE hat.deleted=0 and hat.hit_ip_trans_batch_id !='" . $focus->id . "'" . " and     
 														 hat.source_wo_id='" .
 				$focus->source_wo_id . "' and hat.source_woop_id!= '" .

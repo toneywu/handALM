@@ -88,4 +88,6 @@ $mod_strings = array (
   'LBL_PARENT_IP'=>'C段',
   'LBL_ASSOCIATED_IP'=>'可用IP',
   'LBL_ACCESS_ASSETS_NAME'=>'接入设备',
+  'LBL_MAIN_ASSET'=>'主',
+  'LBL_BACKUP_ASSET'=>'从',
 );

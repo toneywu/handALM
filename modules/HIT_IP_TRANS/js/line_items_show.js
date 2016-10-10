@@ -64,6 +64,10 @@ function insertTransLineHeader(tableid){
   m.innerHTML="<span id='line_channel_num_title'>频道号</span>";
   var n=x.insertCell(15);
   n.innerHTML="<span id='line_channel_content_title'>频道内容</span>";
+  var n=x.insertCell(16);
+  n.innerHTML="<span id='line_main_asset_title'>主</span>";
+  var n=x.insertCell(17);
+  n.innerHTML="<span id='line_backup_asset_title'>备</span>";
   
 }
 
@@ -99,6 +103,8 @@ function insertLineData(asset_trans_line ){ //将数据写入到对应的行字�
     $("#line_monitoring".concat(String(ln))).val(asset_trans_line.monitoring);
     $("#line_mrtg_link".concat(String(ln))).val(asset_trans_line.mrtg_link);
     $("#line_access_assets_name".concat(String(ln))).val(asset_trans_line.access_assets_name);
+    $("#line_main_asset".concat(String(ln))).val(asset_trans_line.main_asset);
+    $("#line_backup_asset".concat(String(ln))).val(asset_trans_line.backup_asset);
     renderTransLine(ln);
   }
 }
@@ -172,7 +178,9 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<td><span name='displayed_line_monitoring[" + prodln + "]' id='displayed_line_monitoring" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_mrtg_link[" + prodln + "]' id='displayed_line_mrtg_link" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_channel_num[" + prodln + "]' id='displayed_line_channel_num" + prodln + "'></span></td>"+
-      "<td><span name='displayed_line_channel_content[" + prodln + "]' id='displayed_line_channel_content" + prodln + "'></span></td>" ;
+      "<td><span name='displayed_line_channel_content[" + prodln + "]' id='displayed_line_channel_content" + prodln + "'></span></td>"+
+      "<td><span name='displayed_line_main_asset[" + prodln + "]' id='displayed_line_main_asset" + prodln + "'></span></td>"+
+      "<td><span name='displayed_line_backup_asset[" + prodln + "]' id='displayed_line_backup_asset" + prodln + "'></span></td>";
       
       //"<td><span name='displayed_line_hit_ip_subnets_id[" + prodln + "]' id='displayed_line_hit_ip_subnets_id" + prodln + "''></span></td>"+
       //"<td><input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'></td>";
@@ -271,6 +279,18 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<input type='hidden' name='line_access_assets_id[" + prodln + "]' id='line_access_assets_id" + prodln + "' value=''>"+
       "<button id='btn_line_access_assets_name" + prodln + "' title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openAccessAssetNamePopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
+      //主
+      "<label>"+"主"+"<span class='required'>*</span></label>"+
+      "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_main_asset[" + prodln + "]' id='line_main_asset" + prodln + "' value='' title='' onblur='resetAsset("+prodln+")'>"+
+      "<input type='hidden' name='line_main_asset_id[" + prodln + "]' id='line_main_asset_id" + prodln + "' value=''>"+
+      "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openAssetPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+      "</span>"+
+      //备
+      "<label>"+"备"+"<span class='required'>*</span></label>"+
+      "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_backup_asset[" + prodln + "]' id='line_backup_asset" + prodln + "' value='' title='' onblur='resetAsset("+prodln+")'>"+
+      "<input type='hidden' name='line_backup_asset_id[" + prodln + "]' id='line_backup_asset_id" + prodln + "' value=''>"+
+      "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openAssetPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+      "</span>"+
       "<input type='hidden' name='line_deleted[" + prodln + "]' id='line_deleted" + prodln + "' value='0'>"+
       "<input type='hidden' name='line_id[" + prodln + "]' id='line_id" + prodln + "' value=''>"+
 
@@ -327,6 +347,8 @@ function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_line_channel_content"+ln).html($("#line_channel_content"+ln).val());
   $("#displayed_line_mrtg_link"+ln).html($("#line_mrtg_link"+ln).val());
   $("#displayed_line_access_assets_name"+ln).html($("#line_access_assets_name"+ln).val());
+  $("#displayed_line_main_asset"+ln).html($("#line_main_asset"+ln).val());
+  $("#displayed_line_backup_asset"+ln).html($("#line_backup_asset"+ln).val());
 }
 
 function resetAsset(ln){ //在用户重新选择资产之后，会连带的更新资产相关的字段信息。

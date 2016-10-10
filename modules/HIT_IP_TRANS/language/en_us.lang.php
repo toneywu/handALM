@@ -87,4 +87,6 @@ $mod_strings = array (
   'LBL_PARENT_IP'=>'Parent IP',
   'LBL_ASSOCIATED_IP'=>'Associated IP',
   'LBL_ACCESS_ASSETS_NAME'=>'Access Assets Name',
+  'LBL_MAIN_ASSET'=>'Main',
+  'LBL_BACKUP_ASSET'=>'Backup',
 );
