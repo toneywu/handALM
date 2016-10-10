@@ -159,7 +159,7 @@ function save_allocation_lines($trans_line_bean, $parent,$prev_trans_batch_id) {
 //		if($prev_trans_batch_id!=null){
 //			$allocation_line_bean->$trans_line = $prev_trans_batch_id;
 //		}
-		$allocation_line_bean->$trans_line = $trans_line->hit_ip_trans_batch_id;
+		$allocation_line_bean->hit_ip_trans_batch_id = $trans_line->hit_ip_trans_batch_id;
 		//$allocation_line_bean->hit_ip_trans_batch_id = $trans_line->hit_ip_trans_batch_id;
 		$allocation_line_bean->source_trans_id = $trans_line->id;
 		$allocation_line_bean->source_wo_id = $parent->source_wo_id;

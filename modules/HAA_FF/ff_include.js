@@ -185,7 +185,8 @@ function mark_field_enabled(field_name,not_required_bool) {
   // alert(not_required_bool);
   $("#"+field_name).css({"color":"#000000","background-Color":"#ffffff"});
   $("#"+field_name).attr("readonly",false);
-  $("#"+field_name+"_label").css({"color":"#000000","text-decoration":"none"})
+  $("#"+field_name+"_label").css({"color":"#000000"})
+  
 
   if(typeof not_required_bool == "undefined" || not_required_bool==false || not_required_bool=="") {
       addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());// 将当前字段标记为必须验证

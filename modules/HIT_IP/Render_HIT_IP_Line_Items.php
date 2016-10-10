@@ -7,6 +7,10 @@ function display_lines($focus, $field, $value, $view){
 	$html = '';
 	if($view == 'EditView' || $view == 'DetailView'){
 		$html .= '<script src="modules/HIT_IP_Subnets/js/subnet_line_items.js"></script>';
+		/**
+		 * 解决编辑取消后 detailView不能正确加载外部js库
+		 */
+		$html .= '<script src="custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js"></script>';
 		$html .= "<table border='0' cellspacing='4' id='lineItems' class='list view table'></table>";
 		$html .= '<script>insertTransLineHeader(\'lineItems\');</script>';
 
