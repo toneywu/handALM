@@ -13,10 +13,10 @@ function showITRacks(node){
 		  	pos_y = varServer.server[i].rack_pos_top;
 		  	pos_x = varServer.server[i].rack_pos_depth;
 		  	pos_height = varServer.server[i].height;
-		  	console.log("#position_"+pos_x.substring(0,1)+"_"+pos_y);
+		  	//console.log("#position_"+pos_x.substring(0,1)+"_"+pos_y);
 		  	//显示当前服务器
 		  	pos_obj = $("#position_"+pos_x.substring(0,1)+"_"+pos_y)
-			console.log(varServer.server[i]);
+			//console.log(varServer.server[i]);
 			if(varServer.server[i].asset_id!="") {
 
 				//$("#position_F_36").hide();
@@ -31,7 +31,6 @@ function showITRacks(node){
 					"border":"#000 2px solid", 
 				});
 
-				console.log("AAA");
 			}else{
 				pos_obj.append(SUGAR.language.get('app_strings', 'LBL_PLACEHOLDER'));
 				pos_obj.css({

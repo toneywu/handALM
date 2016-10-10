@@ -119,6 +119,7 @@ $bean_locations = $db->query($sel_location); //无如是Location还是asset来�
                     hat_assets.model,
                     hat_assets.maintainable,
                     hat_assets.enable_it_rack,
+                    hat_assets.enable_it_ports,
                     hat_assets.using_person_desc,
                     hat_assets.owning_person_desc,
                     hat_asset_locations.id hat_asset_locations_hat_assetshat_asset_locations_ida,
@@ -213,6 +214,7 @@ $bean_locations = $db->query($sel_location); //无如是Location还是asset来�
        $txt_jason .=get_jason_field('model','HAT_Assets',$asset['model']);
        $txt_jason .=get_jason_field('maintainable','HAT_Assets',$asset['maintainable'],'bool');
        $txt_jason .=get_jason_field('enable_it_rack','HAT_Assets',$asset['enable_it_rack'],'bool');
+       $txt_jason .=get_jason_field('enable_it_ports','HAT_Assets',$asset['enable_it_ports'],'bool');
        $txt_jason .=get_jason_field('hat_asset_locations_hat_assets_name','HAT_Assets',$asset['hat_asset_locations_hat_assets_name'],'relate',$asset['hat_asset_locations_hat_assetshat_asset_locations_ida'],'HAT_Asset_Locations');
        $txt_jason .=get_jason_field('location_desc','HAT_Assets',$asset['location_desc']);
        $txt_jason .=get_jason_field('maint_site','HAT_Asset_Locations',$asset['site_name']);
@@ -240,7 +242,7 @@ $bean_locations = $db->query($sel_location); //无如是Location还是asset来�
           $txt_jason=substr($txt_jason,0,strlen($txt_jason)-1);//去除最后的,
           $txt_jason.="},";
        }
-
+       $txt_jason .='"enable_it_ports":"'.$asset['enable_it_ports'].'",';
        $txt_jason .='"type":"asset"';
        if (isset($txt_rack_allocation_jason)&&$txt_rack_allocation_jason!="") { //如果有机柜信息，继续加载机柜的分配信息
           $txt_jason  .=','.$txt_rack_allocation_jason;
