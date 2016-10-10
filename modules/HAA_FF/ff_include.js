@@ -158,14 +158,17 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 		  	};
 		});
 
+
 		if (hide_tr_bool==true) {//如果确定当前行已经完全为空了，则将当前行直接隐去。
 			var hide_table_bool=true;
-			$.each(mark_obj_tr.closest("table").children("td"), function() {
+			$.each(mark_obj_tr.siblings().children("td"), function() {
 			  	if ($(this).text()!="" && !($(this).css("visibility")=="hidden" || $(this).css("display")=="none")) {
 			  		//如果当前字段有内容，并且有内容的字段没有隐藏，则认为当前行不为空
 			  		hide_table_bool=false;
+			  		return false;//break for jquery each;
 			  	};
 			});
+
 
 			if (hide_table_bool==true) {
 				mark_obj_tr.closest("div").hide();
