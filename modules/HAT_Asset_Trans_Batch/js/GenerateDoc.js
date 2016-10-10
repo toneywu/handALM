@@ -24,7 +24,7 @@ SUGAR.util.doWhen("typeof tinymce != 'undefined'", function(){
 });
 
 
-function SaveAsPDF(task, uid, templateID){
-  document.getElementById('GenerateDocForm').action = "index.php?module=HAT_Asset_Trans_Batch&action=GenerateDoc&uid="+uid+"&templateID="+templateID+"&task="+task;
+function SaveAsPDF(task, module, uid, templateID){
+  document.getElementById('GenerateDocForm').action = "index.php?module="+module+"&action=GenerateDoc&uid="+uid+"&templateID="+templateID+"&task="+task;
   document.getElementById('GenerateDocForm').submit();
 }

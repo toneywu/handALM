@@ -1395,11 +1395,13 @@ $app_list_strings['asset_trans_status']=array (
   'TRANSACTED' => 'Transacted',
 );
 
-$app_list_strings['cux_event_type_option_list']['LOCKED'] = 'Locked/Not Available';
-$app_list_strings['cux_event_type_option_list']['REQUIRED'] = 'Required';
-$app_list_strings['cux_event_type_option_list']['OPTIONAL'] = 'Optional';
+$app_list_strings['cux_event_type_option_list']=array (
+  'LOCKED' => 'Locked/Not Available',
+  'REQUIRED' => 'Required',
+  'OPTIONAL' => 'Optional',
+);
 
-$app_list_string['hat_event_type_list']=array (
+$app_list_strings['hat_event_type_list']=array (
   'AT_MOVE' => 'Equip./Asset Trans.',
   'NETWORK' => 'Network Resource Trans.',
   'SR' => 'Service Request',
@@ -1408,6 +1410,18 @@ $app_list_string['hat_event_type_list']=array (
   'INV_OUT' => 'INV: Stock-Out',
   'INV_TRANSFER' => 'INV: Stock Transfer',
   'INV_WO' => 'INV: Issue to WO',
+);
+
+$app_list_strings['hat_asset_scope_list']=array (
+  'ASSET' => 'All',
+  'IT' => 'IT Equipment',
+  'RACK' => 'IT Server Rack',
+);
+
+$app_list_strings['hat_default_asset_list']=array (
+  'NONE' => 'None',
+  'USING_ORG' => 'Current Using Org',
+  'WO_ASSET_TRANS' => 'WO/Asset Trans',
 );
 
 /*********************************************************************************

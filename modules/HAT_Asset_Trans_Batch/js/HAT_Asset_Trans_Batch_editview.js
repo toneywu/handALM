@@ -37,7 +37,7 @@ function setEventTypeFields() {
 		async: false,
 		success: function (data) {
 			global_eventOptions = jQuery.parseJSON(data);
-			//console.log(obj);
+			console.log(global_eventOptions);
 /*			for(var i in obj) {
 				$("#"+i).val(obj[i]);//向隐藏的字段中复制值，从而所有的EventType值都会提供到隐藏的字段中
 			}*/

@@ -101,6 +101,11 @@ array (
         ),
         4 => 
         array (
+          0 => 'asset_scope',
+          1 => 'default_asset_list'
+        ),
+        5 => 
+        array (
           0 => 
           array (
             'name' => 'require_approval_workflow',
