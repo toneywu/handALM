@@ -1,4 +1,10 @@
-/* 这个文件主要被其它模块调用 */
+/*************************************************************
+* 这个文件是HandALM一个重要的通用性模块，它会被其它多个模块调用
+* 这个文件中定义了FlexForm的基本方法
+* 同时这个文件中还提供了以下重要的函数
+* mark_field_disabled
+* mark_field_enabled
+*************************************************************/
 
 function triger_setFF(id_value, module_name) {
   //console.log("index.php?to_pdf=true&module=HAA_FF&action=setFF&ff_module="+module_name+"&ff_id="+id_value);
@@ -22,9 +28,13 @@ function triger_setFF(id_value, module_name) {
 
 
 function setFF(FFObj) {
-	//设置FlexFORM，也就是根据不同的Product结果，动态的调整界面字段
+	//设置FlexFORM，基于triger_setFF函数读取到的Ajax结果，动态的调整界面字段
+	//其中FFObj是FF_Fields中定义的需要变化的各个字段及属性
 	//console.log(FFObj);
+
 	var view = action_sugar_grp1;
+	//有些界面在EditView和DetailView中处理有所不同，因此先读取出当前界面是哪些，保存在View中
+	//另外如果当前界面不是EditView或DetailView可能会有错误
 
 	if (FFObj.fieldtype=="HIDE") { //将字段进行隐藏
 		mark_field_disabled(FFObj.field,true,false);
@@ -45,7 +55,8 @@ function setFF(FFObj) {
 
 	if (view=="EditView") {
 		//设定是否为必须值
-		//TODO这里的处理逻辑没有写完，因为判断的逻辑比较复杂。先要判断当前字段是否为必须，然后需要继续当前是否有变化来进行处理
+		//TODO:
+		//这里的处理逻辑没有写完，因为判断的逻辑比较复杂。先要判断当前字段是否为必须，然后需要继续当前是否有变化来进行处理
 		//并且处理包括在样式上打上*的标记或去除，以及在字段验证上进行处理
 /*		if (FFObj.att_required == 0) {
 			//非必须
@@ -161,6 +172,7 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 
 		if (hide_tr_bool==true) {//如果确定当前行已经完全为空了，则将当前行直接隐去。
 			var hide_table_bool=true;
+			//如果当前行可以直接隐去，则进一步判断是否当前行所在的整个区块都可以直接隐去
 			$.each(mark_obj_tr.siblings().children("td"), function() {
 			  	if ($(this).text()!="" && !($(this).css("visibility")=="hidden" || $(this).css("display")=="none")) {
 			  		//如果当前字段有内容，并且有内容的字段没有隐藏，则认为当前行不为空
@@ -171,9 +183,9 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 
 
 			if (hide_table_bool==true) {
-				mark_obj_tr.closest("div").hide();
+				mark_obj_tr.closest("div").hide();//将当前行所在区块隐去
 			}else{
-				mark_obj_tr.hide();
+				mark_obj_tr.hide();//将当前行隐去
 			}
 		}
 }
@@ -186,7 +198,6 @@ function mark_field_enabled(field_name,not_required_bool) {
   $("#"+field_name).css({"color":"#000000","background-Color":"#ffffff"});
   $("#"+field_name).attr("readonly",false);
   $("#"+field_name+"_label").css({"color":"#000000"})
-  
 
   if(typeof not_required_bool == "undefined" || not_required_bool==false || not_required_bool=="") {
       addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());// 将当前字段标记为必须验证
