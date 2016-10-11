@@ -4,7 +4,7 @@
 *用于处理查询的业务场景
 *当REQUST(defualt_list)不为空，或不为NONE时进行默认查询的处理
 * ************************************************************/
-$current_mode_sql="";
+$current_mode_sql="1=1";
 if (isset($_REQUEST['current_mode'])) {
     if($_REQUEST['current_mode']=="rack") {
         $current_mode_sql = "hat_assets.enable_it_rack = 1 ";
@@ -16,7 +16,8 @@ if (isset($_REQUEST['current_mode'])) {
 if ($_REQUEST['type']=="wo_asset_trans" && isset($_REQUEST['wo_id'])) {
     //wo_asset_trans 显示当前工作单的所有资产事务处理行中出现的内容
 
-        $sel_sub_asset ="SELECT 
+    //因为存在多个资产事务处理行处理了同一个资产的情况（比如不同资产事务单），因此在结果中需要DISTINCT
+        $sel_sub_asset ="SELECT DISTINCT
                         hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status
                         FROM
                           hat_assets,
@@ -29,9 +30,11 @@ if ($_REQUEST['type']=="wo_asset_trans" && isset($_REQUEST['wo_id'])) {
                           AND hat_assets.id = hat_asset_trans.`asset_id`
                           AND hat_asset_trans_batch.`source_wo_id`='".$_REQUEST['wo_id']."'
                           AND hat_assets.haa_frameworks_id='".$current_framework."'
+                          AND hat_asset_trans_batch.`asset_trans_status` != 'DRAFT'
+                          AND hat_asset_trans_batch.`asset_trans_status` != 'CANCELED'
                           AND ".$current_mode_sql. " ORDER by hat_assets.name ASC";
-                         //AND hat_asset_trans_batch.`asset_trans_status` != 'DRAFT' AND hat_asset_trans_batch.`asset_trans_status` != 'CANCELED'
-                         //理论上需要启用上述条件
+                         //
+        //echo $sel_sub_asset;
 }
 ?>
 

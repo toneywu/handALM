@@ -1,3 +1,11 @@
+function call_ff() {
+    triger_setFF($("#haa_ff_id").val(),"HIT_IP_TRANS_BATCH");
+    $(".expandLink").click();
+}
+
+var prodln = 0;
+var global_eventOptions;
+
 function setEventTypePopupReturn(popupReplyData){
 	set_return(popupReplyData);
 	setEventTypeFields();
@@ -20,6 +28,9 @@ function setEventTypeFields() {
 		url: 'index.php?to_pdf=true&module=HAT_EventType&action=getTransSetting&id=' + $("#hat_eventtype_id").val(),//e74a5e34-906f-0590-d914-57cbe0e5ae89
 		async: false,
 		success: function (data) {
+			global_eventOptions = jQuery.parseJSON(data);
+			console.log(global_eventOptions);
+
 			var obj = jQuery.parseJSON(data);
 			//console.log(obj);
 			for(var i in obj) {
@@ -49,7 +60,7 @@ function setWoPopupReturn(popupReplyData){
 /**
  * 设置必输
  */
-function mark_field_enabled(field_name,not_required_bool) {
+/*function mark_field_enabled(field_name,not_required_bool) {
   //field_name = 字段名，不需要jquery select标志，直接写名字
   //not_required_bool如果为空或没有明确定义为true的话，字段为必须输入。如果=true则为非必须
   //alert(not_required_bool);
@@ -105,10 +116,24 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 	  }
 	  $("#"+field_name+"_label .required").hide();
 }
-
+*/
 $(document).ready(function(){
 
-		  
+	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
+		$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');
+	}
+	//触发FF
+	SUGAR.util.doWhen("typeof setFF == 'function'", function(){
+		call_ff();
+	});
+
+	SUGAR.util.doWhen("typeof mark_field_disabled != 'undefined'", function(){
+		if ($("#hat_eventtype_id").val() != "") {
+			setEventTypeFields();//初始化EventType，完成后会将EventType的值写入global_eventOptions
+		}
+	})
+
+
 	mark_field_disabled("email",false);
 	if($("target_owning_org").val()==""){
 	    mark_field_disabled("contact_name",false);

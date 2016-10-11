@@ -243,7 +243,7 @@ $(document).ready(function(){
 			SUGAR.util.doWhen("typeof initTree == 'function'", function() {<?php
 				//在selector_treeview.js完成加载之后，再继续加载
 				//这里是需要执行的内容
-				if (isset($_REQUEST['defualt_list']) && $_REQUEST['defualt_list']!="NONE") {
+				if (isset($_REQUEST['defualt_list']) && $_REQUEST['defualt_list']!="none") {
 					//默认搜索模式
 					if ($_REQUEST['defualt_list']=="wo_asset_trans" && isset($_REQUEST['wo_id'])) {
 						echo 'initTree("LIST","'.$_REQUEST["defualt_list"].'","'.$_REQUEST["wo_id"].'");';

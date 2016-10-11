@@ -209,7 +209,7 @@ function initTree(treeView, default_list, p3) {
 	//具体的ajax部分，见getTreeNodes.php，树与Ajax的关系，定义在Setting中
 
 	var framework_title="<strong>"+$("#haa_framework").val()+"</strong> ";
-	console.log("zNodes");
+	console.log(treeView);
 
 	if (treeView=='LIST') {
 		var zNodes = [{name:framework_title+$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0, type:default_list, wo_id:p3, current_mode: current_mode}];

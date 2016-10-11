@@ -151,10 +151,10 @@ $bean_locations = $db->query($sel_location); //无如是Location还是asset来�
                     contacts contacts_u ON (hat_assets.`using_person_id` = contacts_u.id
                         AND contacts_u.deleted = 0)
                         LEFT JOIN
-                    accounts accounts_o ON (hat_assets.`using_org_id` = accounts_o.id
+                    accounts accounts_o ON (hat_assets.`owning_org_id` = accounts_o.id
                         AND accounts_o.deleted = 0)
                         LEFT JOIN
-                    contacts contacts_o ON (hat_assets.`using_person_id` = contacts_o.id
+                    contacts contacts_o ON (hat_assets.`owning_person_id` = contacts_o.id
                         AND contacts_o.deleted = 0)
                         LEFT JOIN
                     (hat_asset_locations_hat_assets_c, hat_asset_locations, ham_maint_sites) ON (hat_assets.id = hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_assets_idb
