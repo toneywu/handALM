@@ -167,6 +167,8 @@ function changeRequired(lineRecord){
 	loopField("line_channel_content",lineRecord.change_channel_content);
 	loopField("line_mrtg_link",lineRecord.change_mrtg_link);
 	loopField("line_access_assets_name",lineRecord.change_access_assets_name);
+	loopField("line_main_asset",lineRecord.change_main_asset);
+	loopField("line_backup_asset",lineRecord.change_backup_asset);
 }
 
 //delted by toney.wu 20161007
