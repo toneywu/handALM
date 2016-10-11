@@ -32,6 +32,8 @@ function setEventTypePopupReturn(popupReplyData){
 }
 
 function setEventTypeFields() {
+		console.log('index.php?to_pdf=true&module=HAT_EventType&action=getTransSetting&id=' + $("#hat_eventtype_id").val())//e74a5e34-906f-0590-d914-57cbe0e5ae89
+
 	$.ajax({//
 		url: 'index.php?to_pdf=true&module=HAT_EventType&action=getTransSetting&id=' + $("#hat_eventtype_id").val(),//e74a5e34-906f-0590-d914-57cbe0e5ae89
 		async: false,
@@ -229,7 +231,7 @@ $(document).ready(function(){
 
 	SUGAR.util.doWhen("typeof mark_field_disabled != 'undefined'", function(){
 		if ($("#hat_eventtype_id").val() != "") {
-			setEventTypeFields();
+			setEventTypeFields();//初始化EventType，完成后会将EventType的值写入global_eventOptions
 		}
 	})
 

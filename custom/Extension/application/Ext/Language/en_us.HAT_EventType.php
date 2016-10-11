@@ -78,4 +78,5 @@ $app_list_strings['hat_default_asset_list']=array (
   'NONE' => 'None',
   'USING_ORG' => 'Current Using Org',
   'WO_ASSET_TRANS' => 'WO/Asset Trans',
+  'WO_IP_TRANS' => 'WO/Net Rescource Trans',
 );

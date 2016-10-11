@@ -2,6 +2,11 @@
 
 <link rel="stylesheet" src="custom/resources/zTree/css/zTreeStyle/zTreeStyle.css" type="text/css">
 <script src="custom/resources/zTree/js/jquery.ztree.core.min.js"></script>
+<script src="modules/HAT_Asset_Locations/js/selector_resizer.js"></script>
+<script src="modules/HAT_Asset_Locations/js/selector_treeview_racks.js"></script>
+<script src="modules/HAT_Asset_Locations/js/selector_treeview.js"></script>
+<script src="modules/HAT_Asset_Locations/js/selector_mapview.js"></script>
+
 <style type="text/css">
 	#workbench_left {
 		width:450px;
@@ -135,8 +140,12 @@
 	if (isset($_REQUEST['current_mode'])){
 		if ($_REQUEST['current_mode']=="asset") {
 			echo "<h3>".translate('LBL_NAV_ASSET','HAT_Asset_Locations')."</h3>";
+		}else if ($_REQUEST['current_mode']=="it") {
+			echo "<h3>".translate('LBL_NAV_IT','HAT_Asset_Locations')."</h3>";
 		}else if ($_REQUEST['current_mode']=="rack") {
 			echo "<h3>".translate('LBL_NAV_RACK','HAT_Asset_Locations')."</h3>";
+		}else if ($_REQUEST['current_mode']=="rackposition") {
+			echo "<h3>".translate('LBL_NAV_RACKPOSITION','HAT_Asset_Locations')."</h3>";
 		}
 	}
 ?>
@@ -196,11 +205,11 @@
 ?>
 
 <script>
-	$.getScript("modules/HAT_Asset_Locations/js/selector_resizer.js"); //加载横竖两个可拖拉条
+/*	$.getScript("modules/HAT_Asset_Locations/js/selector_resizer.js"); //加载横竖两个可拖拉条
 	$.getScript("modules/HAT_Asset_Locations/js/selector_treeview_racks.js");//加载结构树中机柜图部分的处理
 	$.getScript("modules/HAT_Asset_Locations/js/selector_treeview.js");//加载结构树的处理
 	$.getScript("modules/HAT_Asset_Locations/js/selector_mapview.js");//加载地图视图的处理
-
+*/
 
 $(document).ready(function(){
 
@@ -231,9 +240,20 @@ $(document).ready(function(){
 			//如果当前模块是Treeview
 			$("#current_view").val($("#selector_view_tree").val());//加载树的类型
 
-			SUGAR.util.doWhen("typeof initTree == 'function'", function() {//在selector_treeview.js完成加载之后，再继续加载
+			SUGAR.util.doWhen("typeof initTree == 'function'", function() {<?php
+				//在selector_treeview.js完成加载之后，再继续加载
 				//这里是需要执行的内容
-				initTree($("#current_view").val());
+				if (isset($_REQUEST['defualt_list']) && $_REQUEST['defualt_list']!="none") {
+					//默认搜索模式
+					if ($_REQUEST['defualt_list']=="wo_asset_trans" && isset($_REQUEST['wo_id'])) {
+						echo 'initTree("LIST","'.$_REQUEST["defualt_list"].'","'.$_REQUEST["wo_id"].'");';
+					}else{
+						echo 'initTree("LIST","'.$_REQUEST["defualt_list"].'");';
+					}
+				 }else {
+					//如果没有搜索参数，就默认树型结构初始化
+					echo 'initTree($("#current_view").val());';
+				}?>
 			});
 		} else {
 			//如果当前模式不是Treeview，就是MapView

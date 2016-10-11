@@ -12,7 +12,7 @@ var setting = {
 		async: {
 			enable: true,
 			url: 'index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeNodes',
-			autoParam:["id", "type"],
+			autoParam:["id", "type","wo_id","current_mode"],
 			dataFilter: filter
 		},
 		callback: {
@@ -67,7 +67,7 @@ data: {
 	function onClick(event, treeId, treeNode, clickFlag) {
 		if(treeNode.pId!=0) { //非根结点点击后的作用
 			zTreeObj= $.fn.zTree.getZTreeObj(treeId);
-			console.log(treeNode);
+			//console.log(treeNode);
 			loadDataForNodeDetail(zTreeObj, treeNode, $("#node_details"));
 		}
 	}
@@ -96,7 +96,6 @@ data: {
 		if ( typeof(node.data)== 'undefined') {
 			//undefined说明当前的结点没有明细信息，所以需要通过Ajax加载数据
 			targetDIV.html('<img align="absmiddle" src="custom/resources/zTree/css/metroStyle/img/loading.gif"></span> '+SUGAR.language.get('app_strings', 'LBL_LOADING'));
-			//console.log(node.data.Loaded);
 				$.ajax({//读取子地点
 					url: 'index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeNodeDetailHTML&current_mode='+current_mode+'&id=' + id+"&type="+ type,
 					success: function (data) {
@@ -108,7 +107,7 @@ data: {
 						node.data=datatopush;
 						treeObj.updateNode(node);
 						console.log(node);
-						console.log('index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeNodeDetailHTML&id=' + id+"&type="+ type);
+						//console.log('index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeNodeDetailHTML&id=' + id+"&type="+ type);
 						//node.setNodesProperty("NodeLoaded", "true" , true);
 						showNodeDetailHTML(node,targetDIV);
 					},
@@ -151,7 +150,7 @@ function showNodeDetailHTML(node,targetDIV) {
 	//读取机柜信息
 	showITRacks(node);
 
-	if (current_mode=="rack") {//如果当前模式是选择U位，则出现U位选择的按钮
+	if (current_mode=="rackposition") {//如果当前模式是选择U位，则出现U位选择的按钮
 		$("#rack_frame").after(showITRacksForm(node));
 	}
 }
@@ -159,8 +158,15 @@ function showNodeDetailHTML(node,targetDIV) {
 function showNodeDetailBtn(node) {
 	//如果是在选择模块下（参数current_mode!="view")。Ajax不会返回HTML形式的Buttons
 	//因此在JS中生成按钮。
-	if (current_mode=="asset" && node.type=="asset") {
-		 return "<a href='#' class='button' onclick='btn_select_clicked()'>"+"Select this"+"</a>";
+	console.log("current_mode="+current_mode);
+	console.log("node.type"+node.type);
+	console.log("node.data.rackid"+node.data.rackid);
+	if ((current_mode=="asset" && node.type=="asset") ||//选择所有资产
+		(current_mode=="it" && node.type=="asset" && node.data.enable_it_ports=="1") ||//选择IT可联网设备
+		(current_mode=="rack" && node.type=="asset" && typeof(node.data.rackid)!="undefined") //选择机柜
+		)
+		 {
+		 return "<a href='#' class='button' onclick='btn_select_clicked()'>"+SUGAR.language.get('app_strings', 'LBL_BTN_SELECT')+"</a>";
 	} else {
 		return "";
 	}
@@ -188,8 +194,8 @@ function btn_select_clicked() {
 }
 
 
-function initTree(treeView) {
-
+function initTree(treeView, default_list, p3) {
+	//p3 should be WO_ID
 	$("#treeview_selector").addClass("ztree");
 	$("#treeview_selector,#node_details").html("");
 	$("#workbench_left").css('width','60%')
@@ -203,7 +209,12 @@ function initTree(treeView) {
 	//具体的ajax部分，见getTreeNodes.php，树与Ajax的关系，定义在Setting中
 
 	var framework_title="<strong>"+$("#haa_framework").val()+"</strong> ";
-	if (treeView=='TREE_LOCATON') {
+	console.log(treeView);
+
+	if (treeView=='LIST') {
+		var zNodes = [{name:framework_title+$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0, type:default_list, wo_id:p3, current_mode: current_mode}];
+		console.log(zNodes);
+	} else if (treeView=='TREE_LOCATON') {
 		var zNodes = [{name:framework_title+$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0,type:"location"}];
 	} else if (treeView=='OWNING_ORG') {
 		var zNodes = [

@@ -9,7 +9,7 @@ if (typeof(YAHOO.SUGAR) == 'undefined') {
 }
 $.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
 /**
- * 设置必输
+ * 设置必输 TODO：确认本函数能否删除，在include.js中有公共的函数
  */
 function mark_field_enabled(field_name, not_required_bool) {
 	// field_name = 字段名，不需要jquery select标志，直接写名字
@@ -58,7 +58,7 @@ function mark_field_enabled(field_name, not_required_bool) {
 	}
 }
 
-function openHitIpPopup(ln) {// 本文件为行上选择资产的按钮
+function openHitIpPopup(ln) {// 本文件为行上选择IP按钮
 	lineno = ln;
 	var popupRequestData = {
 		"call_back_function" : "setHitIpReturn",
@@ -75,7 +75,7 @@ function openHitIpPopup(ln) {// 本文件为行上选择资产的按钮
 	open_popup('HIT_IP_Subnets', 600, 850, '', true, true, popupRequestData);
 }
 
-function openCabinetPopup(ln) {// 本文件为行上选择资产的按钮
+function openCabinetPopup(ln) {// 本文件为行上选择机柜的按钮
 	lineno = ln;
 	var popupRequestData = {
 		"call_back_function" : "setCabinetReturn",
@@ -85,7 +85,14 @@ function openCabinetPopup(ln) {// 本文件为行上选择资产的按钮
 			"name" : "line_hat_assets_cabinet" + ln
 		}
 	};
-	open_popup('HIT_Racks', 600, 850, '', true, true, popupRequestData);
+	//目前列表限制规则为，如果来源为工作单，则限制在本工作单范围内填写的设备，否则不限制
+	//TODO:需要加上从EventType上的列表规则，现在设置的列表规则无效，都是在此写死的
+  var popupFilter;
+  var source_wo_id=$("#source_wo_id").val();
+  var popupFilter = '&current_mode=rack&defualt_list='+global_eventOptions.default_asset_list.toLowerCase()+'&wo_id='+source_wo_id+'&haa_frameworks_id_advanced='+$("#haa_frameworks_id").val();
+  open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
+	//open_popup('HIT_Racks', 600, 850, '', true, true, popupRequestData);
+
 }
 
 function setCabinetReturn(popupReplyData) {
@@ -104,7 +111,12 @@ function openAssetPopup(ln) {// 本文件为行上选择资产的按钮
 			"name" : "line_hat_asset_name" + ln
 		}
 	};
-	open_popup('HAT_Assets', 600, 850, '', true, true, popupRequestData);
+	//目前列表限制规则为，如果来源为工作单，则限制在本工作单范围内填写的设备，否则不限制
+	//TODO:需要加上从EventType上的列表规则，现在设置的列表规则无效，都是在此写死的
+  var popupFilter;
+  var source_wo_id=$("#source_wo_id").val();
+  var popupFilter = '&current_mode=it&defualt_list='+global_eventOptions.default_asset_list.toLowerCase()+'&wo_id='+source_wo_id+'&haa_frameworks_id_advanced='+$("#haa_frameworks_id").val();
+  open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
 }
 
 
@@ -159,7 +171,10 @@ function openAccessAssetNamePopup(ln) {// 本文件为行上选择资产的按�
 			"name" : "line_access_assets_name" + ln
 		}
 	};
-	open_popup('HAT_Assets', 600, 850, '', true, true, popupRequestData);
+  var popupFilter;
+  var source_wo_id=$("#source_wo_id").val();
+  var popupFilter = '&current_mode=it&defualt_list='+global_eventOptions.default_asset_list.toLowerCase()+'&wo_id='+source_wo_id+'&haa_frameworks_id_advanced='+$("#haa_frameworks_id").val();
+  open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
 }
 
 function setAccessAssetNameReturn(popupReplyData) {

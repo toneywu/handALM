@@ -87,5 +87,8 @@ $mod_strings = array (
   'LBL_BTN_SWITCH_VIEW'=>'Switch View',
   'LBL_NAV_LOCATION'=>'Explore and select a Location',
   'LBL_NAV_ASSET'=>'Explore and select an Equipment/Asset',
+  'LBL_NAV_IT'=>'Explore and select a IT Equipment',
   'LBL_NAV_RACK'=>'Explore and select a Server/Network Rack',
+  'LBL_NAV_RACKPOSITION'=>'Explore and select a Server/Network Rack Position',
+  'LBL_BTN_SELECT'=>'Select',
 );

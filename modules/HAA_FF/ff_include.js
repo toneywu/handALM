@@ -1,4 +1,10 @@
-/* 这个文件主要被其它模块调用 */
+/*************************************************************
+* 这个文件是HandALM一个重要的通用性模块，它会被其它多个模块调用
+* 这个文件中定义了FlexForm的基本方法
+* 同时这个文件中还提供了以下重要的函数
+* mark_field_disabled
+* mark_field_enabled
+*************************************************************/
 
 function triger_setFF(id_value, module_name) {
   //console.log("index.php?to_pdf=true&module=HAA_FF&action=setFF&ff_module="+module_name+"&ff_id="+id_value);
@@ -12,7 +18,7 @@ function triger_setFF(id_value, module_name) {
                 setFF(this)
             })
         },
-        error: function () { // 失败
+        error: function () { //失败
             alert('Error loading document');
         },
         async:false
@@ -22,20 +28,51 @@ function triger_setFF(id_value, module_name) {
 
 
 function setFF(FFObj) {
-	//设置FlexFORM，也就是根据不同的Product结果，动态的调整界面字段
+	//设置FlexFORM，基于triger_setFF函数读取到的Ajax结果，动态的调整界面字段
+	//其中FFObj是FF_Fields中定义的需要变化的各个字段及属性
 	//console.log(FFObj);
-	if (FFObj.fieldtype=="HIDE") {
+
+	var view = action_sugar_grp1;
+	//有些界面在EditView和DetailView中处理有所不同，因此先读取出当前界面是哪些，保存在View中
+	//另外如果当前界面不是EditView或DetailView可能会有错误
+
+	if (FFObj.fieldtype=="HIDE") { //将字段进行隐藏
 		mark_field_disabled(FFObj.field,true,false);
 	} else if (FFObj.fieldtype=="PLACEHOLDER"){
 		mark_field_disabled(FFObj.field,true,true);
+	} else {
+	//如果是非隐藏字段
+		//修改标签名称
+		if (FFObj.label!=null&&FFObj.label!="") {
+			if (view=="EditView") {
+				$("#"+FFObj.field+'_label').html(FFObj.label+":"); 
+			} else if(view =="DetailView") {
+				$("td[field='"+FFObj.field+"']").prev("td").html(FFObj.label+":");
+
+			}
+		}
 	}
 
-	if (FFObj.label!=null&&FFObj.label!="") {
-		$("#"+FFObj.field+'_label').html(FFObj.label+":"); 
-	}
-	if (FFObj.default_val!=null) {
-		  $("#"+FFObj.field+":checkbox").prop('checked',FFObj.default_val=='1'?true:false);
-		  $("#"+FFObj.field).val(FFObj.default_val);
+	if (view=="EditView") {
+		//设定是否为必须值
+		//TODO:
+		//这里的处理逻辑没有写完，因为判断的逻辑比较复杂。先要判断当前字段是否为必须，然后需要继续当前是否有变化来进行处理
+		//并且处理包括在样式上打上*的标记或去除，以及在字段验证上进行处理
+/*		if (FFObj.att_required == 0) {
+			//非必须
+		} else {
+			//必须
+			$("#"+FFObj.field+'_label').append('<span class="required">*</span>');
+			//这个逻辑没有写完，没有这么简单
+		}
+*/
+		//TODO还需要添加字段为值列表、Checkbox等一系列形态
+
+		//设定默认值
+		if (FFObj.default_val!=null) {
+			  $("#"+FFObj.field+":checkbox").prop('checked',FFObj.default_val=='1'?true:false);
+			  $("#"+FFObj.field).val(FFObj.default_val);
+		}
 	}
 }
 
@@ -45,7 +82,6 @@ function hideAllAttributes() {
 	var i=1;
 	while ($("#attribute"+i).length != 0 || $("#attribute"+i+"_c").length != 0) {
 		//检查界面模块是否有Attribute存在，如果有就继续下一个，循环直到不再有新的Attribute存在
-		//console.log("#attribute"+i+"_c ："+$("#attribute"+i+"_c").length);
 		//以下判断是将attributeX失效，还是将attributeX_c失效
 		if ($("#attribute"+i).length != 0) {
 			mark_field_disabled("attribute"+i,true,false);
@@ -57,14 +93,13 @@ function hideAllAttributes() {
 }
 
 function mark_field_disabled(field_name, hide_bool, keep_position=false) {
-
 	  var view = action_sugar_grp1;
 
-	  mark_obj = $("#"+field_name);
-	  mark_obj_lable = $("#"+field_name+"_label");
-	  mark_obj_tr = $("#"+field_name).closest("tr");
+	  if(view == 'EditView') {
+		mark_obj = $("#"+field_name);
+		mark_obj_lable = $("#"+field_name+"_label");
+		mark_obj_tr = $("#"+field_name).closest("tr");
 
-	  if(view === 'EditView') {
 	    if(hide_bool==true) {
 	    	if (keep_position==false) {
 	        	mark_obj.closest('td').css({"display":"none"});
@@ -100,43 +135,60 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 	    if  (typeof $("#"+field_name+"_id")!= 'undefined') {
 	      $("#"+field_name+"_id").val("");
 	    }
-	  } else {
+	  } else if (view === 'DetailView') {
 	    //DetailedView只需要考虑隐藏字段的情况
+		  mark_obj_td = $("td[field='"+field_name+"']");
+		  mark_obj_lable_td = mark_obj_td.prev("td");
+		  mark_obj_tr = mark_obj_td.closest("tr");
+
 	      if(hide_bool==true) {
 		     //需要进行隐藏
 	          if (keep_position==false) {
 	          	//缩进隐藏
-	            mark_obj.closest('td').css({"display":"none"});
-				//mark_obj.closest('td').css({"visibility":"hidden"});
-	            mark_obj.closest('td').prev().css({"display":"none"});
-				//mark_obj.closest('td').prev().css({"visibility":"hidden"});
-/*				$("td[field="+field_name+"]").prev().css({"visibility":"hidden"});
-				$("td[field="+field_name+"]").css({"visibility":"hidden"});
-*/				mark_obj_tr.append("<td></td><td></td>");
+	            mark_obj_td.hide(); //当前字段所在的TD隐藏
+	            mark_obj_lable_td.hide();//当前字段之前的TD隐藏（标签TD)
+				mark_obj_tr.append("<td></td><td></td>");
 				//之前HIDE了两个单元格，在此补上，以防显示错位
 	          }else{
 	          	//不缩进隐藏,直接接两个TD中的内容清空，不进行处理
 
 	          }
-			mark_obj.closest('td').prev().html("");
-			mark_obj.closest('td').html("");
+			mark_obj_lable_td.html("");
+			mark_obj_td.html("");
 	     }
 	  }
-	  	//以下内容针对EditView和DetailView都有效
+	  	//以下内容针对EditView和DetailView都有效，基于mark_obj_tr
   	    //判断是否当前行完全是空白了，如果已经完全是空白，则将当前行直接清空
-		var hide_bool=true;
+  	    //如果当前行可以清空，则进一步判断，当前区域是否是空白，如果当前区域也是空白，直接将当前区域清空
+		var hide_tr_bool=true;
 		$.each(mark_obj_tr.children("td"), function() {
-			//console.log($(this).css("visibility"));
-		  	if ($(this).text()!="" && ($(this).css("visibility")!="hidden"||$(this).css("display")!="none")) { 
+		  	if ($(this).text()!="" && !($(this).css("visibility")=="hidden" || $(this).css("display")=="none")) {
 		  		//如果当前字段有内容，并且有内容的字段没有隐藏，则认为当前行不为空
-		  		hide_bool=false;
+		  		hide_tr_bool=false;
+		  		return false;//break for jquery each;
 		  	};
 		});
-		//console.log(hide_bool);
-		if (hide_bool==true) {
-			mark_obj_tr.hide();
+
+
+		if (hide_tr_bool==true) {//如果确定当前行已经完全为空了，则将当前行直接隐去。
+			var hide_table_bool=true;
+			//如果当前行可以直接隐去，则进一步判断是否当前行所在的整个区块都可以直接隐去
+			$.each(mark_obj_tr.siblings().children("td"), function() {
+			  	if ($(this).text()!="" && !($(this).css("visibility")=="hidden" || $(this).css("display")=="none")) {
+			  		//如果当前字段有内容，并且有内容的字段没有隐藏，则认为当前行不为空
+			  		hide_table_bool=false;
+			  		return false;//break for jquery each;
+			  	};
+			});
+
+
+			if (hide_table_bool==true) {
+				mark_obj_tr.closest("div").hide();//将当前行所在区块隐去
+			}else{
+				mark_obj_tr.hide();//将当前行隐去
+			}
 		}
-	}
+}
 
 
 function mark_field_enabled(field_name,not_required_bool) {
@@ -146,7 +198,6 @@ function mark_field_enabled(field_name,not_required_bool) {
   $("#"+field_name).css({"color":"#000000","background-Color":"#ffffff"});
   $("#"+field_name).attr("readonly",false);
   $("#"+field_name+"_label").css({"color":"#000000"})
-  
 
   if(typeof not_required_bool == "undefined" || not_required_bool==false || not_required_bool=="") {
       addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());// 将当前字段标记为必须验证

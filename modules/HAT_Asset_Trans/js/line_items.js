@@ -33,8 +33,10 @@ function openAssetPopup(ln){//本文件为行上选择资产的按钮
       "location_desc" : "line_current_location_desc" + ln,
     }
   };
-  var popupFilter = '&current_mode='+global_eventOptions.asset_scope.toLowerCase()+'&defualt_list='+global_eventOptions.default_asset_list.toLowerCase()+'&haa_frameworks_id_advanced='+$("#haa_frameworks_id").val();
+
+  var popupFilter = '&current_mode='+global_eventOptions.asset_scope.toLowerCase()+'&defualt_list='+global_eventOptions.default_asset_list.toLowerCase()+'&wo_id='+source_wo_id+'&haa_frameworks_id_advanced='+$("#haa_frameworks_id").val();
   open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
+
 }
 
 function setAssetReturn(popupReplyData){

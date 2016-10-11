@@ -32,6 +32,7 @@ $txt_jason ='';
 
 $current_framework=(isset($_SESSION["current_framework"]))?$_SESSION["current_framework"]:"";
 
+require_once('modules/HAT_Asset_Locations/getTreeNodeList.php');//所有的默认搜索都从这个文件进行处理
 
 if($_REQUEST['type']=="location") { //如果是Locationg来源，需要读取子位置和子资产（Asset来源只需要子资产）
         $sel_sub_location ="SELECT 
