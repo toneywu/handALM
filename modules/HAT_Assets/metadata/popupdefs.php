@@ -57,7 +57,7 @@ $popupMeta = array (
   array (
     'type' => 'relate',
     'link' => true,
-    'label' => 'LBL_HAT_ASSET_LOCATIONS_HAT_ASSETS_FROM_HAT_ASSET_LOCATIONS_TITLE',
+    'label' => 'LBL_LOCATION',
     'id' => 'HAT_ASSET_LOCATIONS_HAT_ASSETSHAT_ASSET_LOCATIONS_IDA',
     'width' => '10%',
     'name' => 'hat_asset_locations_hat_assets_name',
@@ -110,7 +110,7 @@ $popupMeta = array (
   array (
     'type' => 'relate',
     'link' => true,
-    'label' => 'LBL_HAT_ASSET_LOCATIONS_HAT_ASSETS_FROM_HAT_ASSET_LOCATIONS_TITLE',
+    'label' => 'LBL_LOCATION',
     'id' => 'HAT_ASSET_LOCATIONS_HAT_ASSETSHAT_ASSET_LOCATIONS_IDA',
     'width' => '10%',
     'default' => true,

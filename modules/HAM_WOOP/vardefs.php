@@ -284,8 +284,15 @@ $dictionary['HAM_WOOP'] = array (
 			'options' => 'ham_wo_status_list',
 			'studio' => 'visible',
 			'dependency' => false,
-
-			
+		),
+		'woop_status_tagged' => array (
+			'required' => true,
+			'name' => 'woop_status_tagged',
+			'vname' => 'LBL_WOOP_STATUS',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'source' => 'non-de',
 		),
 		'ham_work_center_id' => array (
 			'required' => true,
@@ -587,7 +594,55 @@ $dictionary['HAM_WOOP'] = array (
 			'dependency' => false,
 
 		),
-
+        'hat_eventtype_id' => 
+        array (
+          'required' => false,
+          'name' => 'hat_eventtype_id',
+          'vname' => 'LBL_HAT_EVENTTYPE_ID',
+          'type' => 'id',
+          'massupdate' => 0,
+          'no_default' => false,
+          'comments' => '',
+          'help' => '',
+          'importable' => 'true',
+          'duplicate_merge' => 'disabled',
+          'duplicate_merge_dom_value' => 0,
+          'audited' => false,
+          'inline_edit' => true,
+          'reportable' => false,
+          'unified_search' => false,
+          'merge_filter' => 'disabled',
+          'len' => 36,
+          'size' => '20',
+          ),
+        'event_type' => 
+        array (
+          'required' => false,
+          'source' => 'non-db',
+          'name' => 'event_type',
+          'vname' => 'LBL_EVENT_TYPE',
+          'type' => 'relate',
+          'massupdate' => 0,
+          'no_default' => false,
+          'comments' => '',
+          'help' => '',
+          'importable' => 'true',
+          'duplicate_merge' => 'disabled',
+          'duplicate_merge_dom_value' => '0',
+          'audited' => false,
+          'inline_edit' => true,
+          'reportable' => true,
+          'unified_search' => false,
+          'merge_filter' => 'disabled',
+          'len' => '255',
+          'size' => '20',
+          'id_name' => 'hat_eventtype_id',
+          'ext2' => 'HAT_EventType',
+          'module' => 'HAT_EventType',
+          'rname' => 'name',
+          'quicksearch' => 'enabled',
+          'studio' => 'visible',
+          ),
 		#序号     
 	'next_woop' => array (
 			'source' => 'non-db', //显示当前地点的说明

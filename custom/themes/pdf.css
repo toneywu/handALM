@@ -1,0 +1,66 @@
+.table-bordered td{
+	border:1px solid black;
+	padding: 0.5em;
+}
+
+.table-standard {
+	border:1px solid #5b5b5b;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+.table-standard td, .table-standard th {
+	padding:0.5em;
+	border:1px solid #5b5b5b;
+}
+
+
+.table-hor-minimalist {
+	border-bottom:1px solid #ddd;
+	border-spacing: 0;
+}
+.table-hor-minimalist th {
+	color:#039;
+	padding:1em;
+	border-bottom:2px solid #6678b1;
+}
+.table-hor-minimalist td {
+	padding:0.5em;
+	border-top:1px solid #ddd;
+}
+
+.table-box{
+	border-top:3px solid #5b5b5b;
+	border-bottom:3px solid #5b5b5b;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+.table-box th {
+	color:#039;
+	padding:1em;
+	border:1px solid #ddd;
+	border-bottom:2px solid #ddd;
+	font-weight:bold;
+}
+.table-box td {
+	padding:0.5em;
+	border-top:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+	border-left:1px solid #acacac;
+	border-right:1px solid #acacac;
+}
+
+.table-newspaper{
+	border:1px solid #5b5b5b;
+	border-spacing: 0;
+}
+.table-newspaper th {
+	color:#039;
+	padding:1em;
+	border:1px solid #ddd;
+	border-bottom:2px solid #ddd;
+	font-weight:bold;
+}
+.table-newspaper td {
+	padding:1em;
+	border-top:1px solid #ddd;
+}

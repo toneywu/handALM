@@ -2,13 +2,13 @@
 $module_name = 'HAT_Asset_Trans_Batch';
 $viewdefs [$module_name] = 
 array (
-  'EditView' =>
+  'EditView' => 
   array (
-    'templateMeta' =>
+    'templateMeta' => 
     array (
-      'form' =>
+      'form' => 
       array (
-        'hidden' =>
+        'hidden' => 
         array (
           0 => '<input type="hidden" name="source_woop_id" id="source_woop_id" value="{$SOURCE_WOOP_ID}">',
           1 => '<input type="hidden" name="source_wo_id"  id="source_wo_id" value="{$SOURCE_WO_ID}">',
@@ -37,6 +37,10 @@ array (
         ),
         1 =>
         array (
+        'file' => 'modules/HIT_IP_TRANS_BATCH/js/html_dom_required_setting.js',
+        ),
+        2 =>
+        array (
           'file' => 'modules/HAT_Asset_Trans_Batch/js/HAT_Asset_Trans_Batch_editview.js',
         ),
       ),
@@ -54,22 +58,17 @@ array (
           'field' => '30',
         ),
       ),
-      'useTabs' =>true,
+      'useTabs' => false,
       'tabDefs' =>
       array (
         'DEFAULT' =>
         array (
-          'newTab' =>false,
+          'newTab' => false,
           'panelDefault' => 'expanded',
         ),
         'LBL_EDITVIEW_PANEL1' =>
         array (
-          'newTab' =>false,
-          'panelDefault' => 'expanded',
-        ),
-        'LBL_EDITVIEW_PANEL2' =>
-        array (
-          'newTab' =>false,
+          'newTab' => false,
           'panelDefault' => 'expanded',
         ),
       ),
@@ -97,80 +96,86 @@ array (
               array (
                 'name' => 'event_type',
                 'id' => 'hat_eventtype_id',
-                'event_short_desc'=>'name'
+                'event_short_desc' => 'name',
+                'haa_ff_id' => 'haa_ff_id',
               ),
               'call_back_function' => 'setEventTypePopupReturn',
             ),
           ),
         ),
-        1 =>
+        1 => 
         array (
-          0 =>
+          0 => 
           array (
             'name' => 'asset_trans_status',
             'studio' => 'visible',
             'label' => 'LBL_ASSET_TRANS_STATUS',
           ),
-          1 =>
+          1 => '',
+        ),
+        2 => 
+        array (
+          0 => 
           array (
             'name' => 'current_owning_org',
             'studio' => 'visible',
             'label' => 'LBL_CURRENT_OWNING_ORG',
           ),
+          1 => 'owner_contacts',
         ),
-        2 =>
+        3 => 
         array (
-          0 =>
+          0 => 
           array (
             'name' => 'target_owning_org',
             'studio' => 'visible',
             'label' => 'LBL_TARGET_OWNING_ORG',
           ),
-          1 =>
+          1 => 
           array (
             'name' => 'target_using_org',
             'studio' => 'visible',
             'label' => 'LBL_TARGET_USING_ORG',
           ),
         ),
-        3 =>
+        4 => 
         array (
           0 => 'name',
-          1 =>
+          1 => 
           array (
             'name' => 'tracking_number',
             'label' => 'LBL_TRACKING_NUMBER',
           ),
         ),
-        4 =>
+        5 => 
         array (
-          0 => 'lov_asset_status_list',
-          1 => ''
-        ),
-        5 =>
-        array (
-          0 => 'owner_contacts',
-          1 =>
+          0 => 
           array (
             'name' => 'planned_execution_date',
             'label' => 'LBL_PLANNED_EXECUTION_DATE',
           ),
-        ),
-        6 =>
-        array (
-          2 => 'description',
-          1 =>
+          1 => 
           array (
             'name' => 'planned_complete_date',
             'label' => 'LBL_PLANNED_COMPLETE_DATE',
           ),
         ),
-      ),
-      'lbl_editview_panel1' =>
-      array (
-        0 =>
+        6 =>
         array (
-          0 =>
+          0 => 'description',
+          1 => '',
+        ),
+        7 => 
+        array (
+          0 => 'wo_lines',
+        ),
+      ),
+
+      'lbl_editview_panel1' => 
+      array (
+        0 => 
+        array (
+          0 => 
           array (
             'name' => 'line_items',
             'label' => 'LBL_LINE_ITEMS',

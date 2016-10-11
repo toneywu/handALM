@@ -20,6 +20,10 @@ array (
       array (
         0 => 
         array (
+          'file' => 'custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js',
+        ),
+        1 => 
+        array (
           'file' => 'modules/HIT_IP/js/HIT_IP_detailview.js',
         ),
       ),      

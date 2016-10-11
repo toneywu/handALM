@@ -2,6 +2,11 @@
 
 <link rel="stylesheet" src="custom/resources/zTree/css/zTreeStyle/zTreeStyle.css" type="text/css">
 <script src="custom/resources/zTree/js/jquery.ztree.core.min.js"></script>
+<script src="modules/HAT_Asset_Locations/js/selector_resizer.js"></script>
+<script src="modules/HAT_Asset_Locations/js/selector_treeview_racks.js"></script>
+<script src="modules/HAT_Asset_Locations/js/selector_treeview.js"></script>
+<script src="modules/HAT_Asset_Locations/js/selector_mapview.js"></script>
+
 <style type="text/css">
 	#workbench_left {
 		width:450px;
@@ -105,62 +110,72 @@
 </style>
 
 <?php global $mod_strings, $app_strings, $app_list_strings;?>
+<?php   require_once('modules/HAA_Frameworks/orgSelector_class.php');
+        $current_framework_id = "";
+        $current_module = $this->module;
+        $current_action = $this->action;
+        echo '<div "div_framework" style="display:none">'.set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id').'</div>';
+?>
+<?php
+	if (isset($_REQUEST['current_mode'])){
+		echo '<script>var current_mode = "'.$_REQUEST['current_mode'].'"</script>';
+    	echo ('<script type="text/javascript" src="include/javascript/popup_helper.js"></script>');
+    	echo '<form id="popup_query_form" name="popup_query_form">';
+		echo '<input type="hidden" name="module" value="HAT_Asset_Locations">';
+ 		echo '<input type="hidden" name="action" value="Popup">';
+    	echo '<input type="hidden" name="request_data" >'; //所有的参数都存在在这里，参数会被自动填充
+    	echo '</form>';
+	} else {
+		echo '<script>var current_mode = "view";</script>';
+	}
+?>
+<?php
+	echo '<selcet id="hit_rack_pos_depth_list" style="display:none">';
+	foreach ($app_list_strings['hit_rack_pos_depth_list'] as $key => $value) {
+		echo '<option value="'.$key.'">'.$value.'</option>';
+	}
+	echo '</selcet>';
+?>
+<?php
+	if (isset($_REQUEST['current_mode'])){
+		if ($_REQUEST['current_mode']=="asset") {
+			echo "<h3>".translate('LBL_NAV_ASSET','HAT_Asset_Locations')."</h3>";
+		}else if ($_REQUEST['current_mode']=="it") {
+			echo "<h3>".translate('LBL_NAV_IT','HAT_Asset_Locations')."</h3>";
+		}else if ($_REQUEST['current_mode']=="rack") {
+			echo "<h3>".translate('LBL_NAV_RACK','HAT_Asset_Locations')."</h3>";
+		}else if ($_REQUEST['current_mode']=="rackposition") {
+			echo "<h3>".translate('LBL_NAV_RACKPOSITION','HAT_Asset_Locations')."</h3>";
+		}
+	}
+?>
+
 
 <div id="selector_top">
 	<div id="select_mode">
 		 <div id="selectorType_Tree" class="tabFocused">
-	         <span class="tab_label"><i class="icon-sitemap"></i> <?php echo $mod_strings['LBL_NAV_MODE_TREE'];?> </span>
+	         <span class="tab_label"><i class="icon-sitemap"></i> <?php echo translate('LBL_NAV_MODE_TREE','HAT_Asset_Locations');?> </span>
 		     <select id="selector_view_tree" class="form-horizontal">
 		     <?php foreach ($app_list_strings['hat_navigator_tree_type_list'] as $key => $value) {
 		     	echo '<option value="'.$key.'">'.$value.'</option>';
 		     }?>
 			</select>
 			<input type="hidden" id="current_view">
-			<button id="btn_switch_tree_view"><?php echo $mod_strings['LBL_BTN_SWITCH_VIEW'];?></button>
+			<button id="btn_switch_tree_view"><?php echo  translate('LBL_BTN_SWITCH_VIEW','HAT_Asset_Locations');?></button>
 	    </div>
 		<div id="selectorType_Map" class="tabUnfocused">
-	         <span class="tab_label"><i class="icon-map-o"></i> <?php echo $mod_strings['LBL_NAV_MODE_MAP'];?> </span>
+	         <span class="tab_label"><i class="icon-map-o"></i> <?php echo  translate('LBL_NAV_MODE_MAP','HAT_Asset_Locations')?> </span>
 		<select id="selector_map_type" class="form-horizontal">
 		     <?php foreach ($app_list_strings['cux_map_type_list'] as $key => $value) {
 		     	echo '<option value="'.$key.'">'.$value.'</option>';
 		     }?>
 		</select>
-		<button id="btn_switch_map_view"><?php echo $mod_strings['LBL_BTN_SWITCH_VIEW'];?></button>
+		<button id="btn_switch_map_view"><?php echo translate('LBL_BTN_SWITCH_VIEW','HAT_Asset_Locations');?></button>
 	    </div>
 	</div>
 
 <div id="selector_top_view" class="row">
 
-<!-- 	    <div id="selctor_top_view_details" class="col-md-3">
-			<span class="col-md-12 field_span">
-				<span class="top_label">Data Scope:</span>
-				<select class="form-horizontal" style="200px">
-					<option value="LOCATOIN">Location Only</option>
-					<option value="ASSET" selected="selected">Equip./Asset and Location</option>
-				</select>
- 			</span>
-		<span class="col-md-12 field_span"><span class="top_label">View:</span>
-
-
-
-		</span>
-
-
-    	</div>
-
-
-
-	<div id="top_filter" class="col-md-9">
-		<span class="col-md-6 field_span"><span id="site_advanced_label" class="top_filter_label">Site</span><input ></span>
-		<span class="col-md-6 field_span"><span id="site_advanced_label" class="top_filter_label">Owining Org</span><select><option>Location Type</option></select><input></span>
-		<span class="col-md-6 field_span"><span id="site_advanced_label" class="top_filter_label">Using Org</span><select><option>Location Type</option></select><input></span>
-		<span class="col-md-6 field_span"><span id="site_advanced_label" class="top_filter_label">Location</span><select><option>Location Type</option></select><input></span>
-		<span class="col-md-6 field_span"><span id="site_advanced_label" class="top_filter_label">Asset</span><select><option>Asset Nameplate</option></select><input></span>
-
-		<button id="selectorType_Filter">
-	        <span class="glyphicon glyphicon-filter"></span>Apply Filter
-	    </button>
-	</div> -->
 </div>
 
 
@@ -178,7 +193,7 @@
 <?php //加载语言包
         $modules = array(
             'HAT_Asset_Locations',
-            'HAT_Assets',
+            'HAT_Assets','HIT_Rack_Allocations','HIT_Racks',
         );
         foreach ($modules as $module) {
             if (!is_file($GLOBALS['sugar_config']['cache_dir'] . 'jsLanguage/' . $module . '/' . $GLOBALS['current_language'] . '.js')) {
@@ -190,10 +205,11 @@
 ?>
 
 <script>
-	$.getScript("modules/HAT_Asset_Locations/js/selector_resizer.js"); //加载横竖两个可拖拉条
+/*	$.getScript("modules/HAT_Asset_Locations/js/selector_resizer.js"); //加载横竖两个可拖拉条
+	$.getScript("modules/HAT_Asset_Locations/js/selector_treeview_racks.js");//加载结构树中机柜图部分的处理
 	$.getScript("modules/HAT_Asset_Locations/js/selector_treeview.js");//加载结构树的处理
 	$.getScript("modules/HAT_Asset_Locations/js/selector_mapview.js");//加载地图视图的处理
-
+*/
 
 $(document).ready(function(){
 
@@ -224,9 +240,20 @@ $(document).ready(function(){
 			//如果当前模块是Treeview
 			$("#current_view").val($("#selector_view_tree").val());//加载树的类型
 
-			SUGAR.util.doWhen("typeof initTree == 'function'", function() {//在selector_treeview.js完成加载之后，再继续加载
+			SUGAR.util.doWhen("typeof initTree == 'function'", function() {<?php
+				//在selector_treeview.js完成加载之后，再继续加载
 				//这里是需要执行的内容
-				initTree($("#current_view").val());
+				if (isset($_REQUEST['defualt_list']) && $_REQUEST['defualt_list']!="none") {
+					//默认搜索模式
+					if ($_REQUEST['defualt_list']=="wo_asset_trans" && isset($_REQUEST['wo_id'])) {
+						echo 'initTree("LIST","'.$_REQUEST["defualt_list"].'","'.$_REQUEST["wo_id"].'");';
+					}else{
+						echo 'initTree("LIST","'.$_REQUEST["defualt_list"].'");';
+					}
+				 }else {
+					//如果没有搜索参数，就默认树型结构初始化
+					echo 'initTree($("#current_view").val());';
+				}?>
 			});
 		} else {
 			//如果当前模式不是Treeview，就是MapView

@@ -2,11 +2,48 @@
 $module_name = 'HAM_WOOP';
 $listViewDefs [$module_name] = 
 array (
+  'WOOP_NUMBER' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_WOOP_NUMBER',
+    'width' => '10%',
+    'default' => true,
+  ),
   'WO_NUMBER' => 
   array (
     'type' => 'varchar',
     'label' => 'LBL_WO_NUMBER',
     'width' => '5%',
+    'default' => true,
+  ),
+  'NAME' => 
+  array (
+    'width' => '32%',
+    'label' => 'LBL_NAME',
+    'default' => true,
+    'link' => true,
+  ),
+  'WOOP_STATUS' => 
+  array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'label' => 'LBL_WOOP_STATUS',
+    'width' => '12%',
+    'default' => true,
+    'customCode'=>'{$WOOP_STATUS_TAGGED}',
+  ),
+  'DATE_SCHEDUALED_START' => 
+  array (
+    'type' => 'datetimecombo',
+    'label' => 'LBL_SCHEDUALED_START_DATE',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'DATE_SCHEDUALED_FINISH' => 
+  array (
+    'type' => 'datetimecombo',
+    'label' => 'LBL_SCHEDUALED_FINISH_DATE',
+    'width' => '10%',
     'default' => true,
   ),
   'WORK_CENTER' => 
@@ -29,49 +66,41 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-  'WOOP_NUMBER' => 
+  'WORK_CENTER_PEOPLE' => 
   array (
-    'type' => 'varchar',
-    'label' => 'LBL_WOOP_NUMBER',
+    'type' => 'relate',
+    'studio' => 'visible',
+    'label' => 'LBL_HAM_WORK_CENTER_PEOPLE',
+    'id' => 'WORK_CENTER_PEOPLE_ID',
+    'link' => true,
     'width' => '10%',
     'default' => true,
   ),
-  'NAME' => 
-  array (
-    'width' => '32%',
-    'label' => 'LBL_NAME',
-    'default' => true,
-    'link' => true,
-  ),
-  'WOOP_STATUS' => 
+  'ACT_MODULE' => 
   array (
     'type' => 'enum',
     'studio' => 'visible',
-    'label' => 'LBL_WOOP_STATUS',
-    'width' => '12%',
-    'default' => true,
-  ),
-  'DATE_SCHEDUALED_START' => 
-  array (
-    'type' => 'datetimecombo',
-    'label' => 'LBL_SCHEDUALED_START_DATE',
+    'label' => 'LBL_ACT_MODULE',
     'width' => '10%',
     'default' => true,
   ),
-  'DATE_SCHEDUALED_FINISH' => 
+  'OWNER' => 
   array (
-    'type' => 'datetimecombo',
-    'label' => 'LBL_SCHEDUALED_FINISH_DATE',
+    'type' => 'relate',
+    'studio' => 'visible',
+    'label' => 'LBL_OWNER',
+    'id' => 'CONTACT_ID',
+    'link' => true,
     'width' => '10%',
-    'default' => true,
+    'default' => false,
   ),
-/*  'DESCRIPTION' => 
+  'DESCRIPTION' => 
   array (
     'type' => 'text',
     'label' => 'LBL_DESCRIPTION',
     'sortable' => false,
     'width' => '10%',
-    'default' => true,
-  ),*/
+    'default' => false,
+  ),
 );
 ?>

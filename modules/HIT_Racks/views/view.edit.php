@@ -48,6 +48,9 @@ class HIT_RacksViewEdit extends ViewEdit
             $this->bean->start_date = $asset->start_date;
             $this->bean->received_date = $asset->received_date;
             $this->bean->dismiss_date = $asset->dismiss_date;
+            //add by yuan.chen 2016-10-05
+            $products_bean = BeanFactory :: getBean('AOS_Products')->retrieve_by_string_fields(array ('id' => $this->bean->aos_products_id));
+		    $this->bean->asset_group     = $products_bean->name;
         }
         parent::Display();
 
@@ -75,7 +78,8 @@ class HIT_RacksViewEdit extends ViewEdit
                 $current_supplier_desc=isset($this->bean->supplier_desc)?$this->bean->supplier_desc:"";
                 echo ('<script>$("#supplier_org").parent().html(\'<input type="hidden" name="supplier_org" id="supplier_org" value="'.$current_supplier_org.'"/><input type="hidden" name="supplier_org_id" id="supplier_org_id" value="'.$current_supplier_org_id.'"/><input type="text" name="supplier_desc" id="supplier_desc" value="'.$current_supplier_desc.'"/>\');</script>');
             }
-
+/*            echo "<pre>";
+            print_r($this->bean);*/
             if($beanFramework->source_reference_field_rule=='TEXT'){
                 $current_source_reference = isset($this->bean->asset_source)?($this->bean->asset_source):"";
                 $current_source_reference_id=isset($this->bean->asset_source_id)?$this->bean->asset_source_id:"";

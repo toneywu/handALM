@@ -8,21 +8,23 @@ class HAM_WOViewEdit extends ViewEdit {
 
 	function Display() {
 
-		global $current_user;
+		global $current_user, $mod_strings;
 		global $db;
 
-		/*echo "ViewEdit";
-		foreach ($this->bean as $key => $value) {
-		    echo '</br>'.$key;
-		}*/
-		/*
-		echo "<br/>";
-		echo 'location = '.$this->bean->location;
-		
-		foreach ($this->bean->name as $key => $value) {
-		    echo '</br>'.$key.'value = '.$value;
-		}*/
+		//1、初始化Framework-Site信息
+		//2、如果当前数据来源于SR（有参数sr_id）则从对应的SR上复制信息
+		//3、判断是否来自合同的，如果来源于合同则显示合同字段信息
+		//4、初始化工作单编号等字段
 
+
+        //1、初始化Framework-Site信息
+        require_once('modules/HAA_Frameworks/orgSelector_class.php');
+        $current_site_id = empty($this->bean->ham_maint_sites_id)?"":$this->bean->ham_maint_sites_id;
+        $current_module = $this->module;
+        $current_action = $this->action;
+        $this->ss->assign('MAINT_SITE',set_site_selector($current_site_id,$current_module,$current_action));
+
+		//2、如果当前数据来源于SR（有参数sr_id）则从对应的SR上复制信息
 		if (isset ($_GET['sr_id']) && $_GET['sr_id'] != "") {
 			//如果有SR关联(由SR创建 WO时)
 			$sr_id = $_GET['sr_id'];
@@ -61,6 +63,7 @@ class HAM_WOViewEdit extends ViewEdit {
 
 			$this->bean->date_target_start = date('Y-m-d H:i');
 			$this->bean->date_target_finish = date('Y-m-d H:i');
+
 			#$this->bean->date_target_finish =$this->bean->date_target_start;
 		} else {
 			//如果没有SR关联
@@ -187,7 +190,7 @@ class HAM_WOViewEdit extends ViewEdit {
 			echo "</script>";
 		}
 		/**
-		 * 是否来自合同的
+		 * 3、判断是否来自合同的，如果来源于合同则显示合同字段信息
 		 * modify by yuan.chen 2016-09-07
 		 */
 		if (isset ($_GET['contract_id']) && $_GET['contract_id'] != "") {
@@ -197,13 +200,94 @@ class HAM_WOViewEdit extends ViewEdit {
 				$contract_bean = BeanFactory :: getBean('AOS_Contracts')->retrieve_by_string_fields(array (
 									'id' => $contract_id
 								));
-				$this->bean->contract=$contract_bean->name;		
+				$this->bean->contract=$contract_bean->name;
 				$this->bean->source_type='Contracts';
-				//$this->bean->saveContracts(false);			
+				$this->bean->account_id=$contract_bean->contract_account_id;
+				$account_bean = BeanFactory :: getBean('Accounts')->retrieve_by_string_fields(array (
+									'id' => $contract_bean->contract_account_id
+								));
+								
+				$this->bean->account=$account_bean->name;
+				//$this->bean->saveContracts(false);
 			}
-			
 		}
+
+		/**
+		 * 4、初始化工作单编号等字段
+		 * modify by toney.wu 2016-09-07
+		 */
+
+    	$wo_num_html="";
+		if(empty($this->bean->wo_number)){
+			//如果当前工作单号为空，则返回自动编号标签
+			$wo_num_html=$mod_strings['LBL_AUTONUM'].'<input type="hidden" value="" id="wo_number" name="wo_number">';
+		} else {
+			$wo_num_html=$this->bean->wo_number.'<input type="hidden" value="'.$this->bean->wo_number.'" id="wo_number" name="wo_number">';
+		}
+		$this->ss->assign('WO_NUMBER',$wo_num_html);
+
+		//初始化目标开始与结束日期
+		if(empty($this->bean->id)){
+			$this->bean->date_target_start = date('Y-m-d H:i:s');
+			$this->bean->date_target_finish = date('Y-m-d H:i:s');
+		}
+		//如果是工单复制的情况如何
+		if(isset ($_REQUEST['isDuplicate'])&&$_REQUEST['isDuplicate']=="true"){
+			$this->bean->wo_status='DRAFT';	
+			$wo_num_html=$mod_strings['LBL_AUTONUM'].'<input type="hidden" value="" id="wo_number" name="wo_number">';
+			$this->ss->assign('WO_NUMBER',$wo_num_html);
+		}
+		//工单来源于 工序完成 和点击工单完成的按钮
+		//工单来源于 工序完成 和点击工单完成的按钮
+		if(isset($_REQUEST['fromWoop'])&&$_REQUEST['fromWoop']=='Y'){
+			$this->bean->wo_status='COMPLETED';	
+			$last_woop_bean = BeanFactory::getBean("HAM_WOOP",$_REQUEST['last_woop_id']);
+			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('woop_number desc', "ham_woop.ham_wo_id ='" . $this->bean->id . "'");
+			$last_woop_bean=$ham_woops[0];
+			echo $last_woop_bean->woop_number;
+			$timeDate = new TimeDate();
+			global $current_user;
+			global $timedate;
+			if($last_woop_bean->date_actual_finish!=null){
+				$localDate = $timeDate->to_display_date_time($last_woop_bean->date_actual_finish, true, true, $current_user);
+				
+				$this->bean->date_actual_finish=$localDate;
+			}else{
+				//$localDate = $timeDate->to_display_date_time(,true, true, $current_user);
+				//$this->bean->date_actual_finish=$localDate;
+				$this->bean->date_actual_finish=$timedate->now();
+			}	
+			if($this->bean->date_actual_start==null){
+				//$localDate = $timeDate->to_display_date_time($this->bean->date_entered, true, true, $current_user);
+				//$this->bean->date_actual_start=$localDate;
+				//$this->bean->date_actual_start=$timedate->now();
+				$this->bean->date_actual_start=$this->bean->date_entered;
+			}
+		}
+
+		//2、加载基于code_asset_location_type_id的动态界面模板（FF）
+        if(isset($this->bean->hat_event_type_id) && ($this->bean->hat_event_type_id)!=""){
+            //判断是否已经设置有位置分类，如果有分类，则进一步的加载分类对应的FlexForm
+            $event_type_id = $this->bean->hat_event_type_id;
+            $bean_code = BeanFactory::getBean('HAT_EventType',$event_type_id);
+            if (isset($bean_code->haa_ff_id)) {
+                $ff_id = $bean_code->haa_ff_id;
+            }
+            if (isset($ff_id) && $ff_id!="") {
+                //如果分类有对应的FlexForm，些建立一个对象去存储FF_ID
+                //需要注意的是在Metadata中是不包括这个ID的，如果这里没有加载则在后续的JS文件中加载
+                echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="'.$ff_id.'">';
+            }
+        }
+        	
 		parent :: Display();
+		//如果已经选择位置分类，无论是否位置分类对应的FlexForm有值，值将界面展开。
+        //（如果没有位置分类，则界面保持折叠状态。）
+        if(isset($this->bean->hat_event_type_id) && ($this->bean->hat_event_type_id)!=""){
+                    echo '<script>$(".collapsed").switchClass("collapsed","expanded");</script>';
+         } else {
+                echo '<script>$(".expanded").switchClass("expanded","collapsed");</script>';
+         }
 	} //end function
 
 } //end class

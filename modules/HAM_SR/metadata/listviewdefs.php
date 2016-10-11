@@ -23,6 +23,7 @@ array (
     'label' => 'LBL_SR_STATUS',
     'width' => '10%',
     'default' => true,
+    'customCode'=>'<span class="color_tag color_doc_status_{$SR_STATUS_VAL}">{$SR_STATUS}</span>',
   ),
   'PRIORITY' => 
   array (

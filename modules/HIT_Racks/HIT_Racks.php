@@ -51,31 +51,14 @@ class HIT_Racks extends HIT_Racks_sugar {
 
 		$HIT_Racks_fields = $this->get_list_view_array();
 
- 		//计算机柜占用率
-         global $db;
-         if (!empty($this->id) && !empty($this->height)) {
-            $sel_rack_allocation = "SELECT
-                                hit_rack_allocations.height
-                            FROM
-                                hit_rack_allocations
-                            WHERE
-                                hit_rack_allocations.deleted =0
-                                AND hit_rack_allocations.hit_racks_id ='".$this->id."'";
-            $bean_rack_allocation =  $db-> query($sel_rack_allocation);
-            $occupation_cnt=0;
-            while ( $d_bean_rack_allocation= $db->fetchByAssoc($bean_rack_allocation) ) {
-                   $occupation_cnt += $d_bean_rack_allocation['height'];
-            }
-
-         $HIT_Racks_fields['OCCUPATION'] = round($occupation_cnt/($this->height)*100)."% <div id='occupation_bar' style='border:#ccc 1px solid; height:1em; width:5em;display:inline-flex'><div id='occupation_bar_filled' style='background-color:#999; height:0.8em; width:".round($occupation_cnt/($this->height)*10/2,1)."em; display:block'></div> </div>"   ;
-		}
-
+         require_once('modules/HIT_Racks/ServerChart.php');
+         $HIT_Racks_fields['OCCUPATION'] = getOccupationCnt($this);
 
 
         //读取资产相关的字段
         if(!empty($this->hat_assets_id)) {
             $bean_asset = BeanFactory::getBean('HAT_Assets',$this->hat_assets_id);
-            $HIT_Racks_fields['STATUS'] = "<span class='color_tag color_asset_status_".$bean_asset->asset_status."'>".$app_list_strings['asset_status_list'][$bean_asset->asset_status]."</span>";
+            $HIT_Racks_fields['STATUS'] = "<span class='color_tag color_asset_status_".$bean_asset->asset_status."'>".$app_list_strings['hat_asset_status_list'][$bean_asset->asset_status]."</span>";
 /*            $HIT_Racks_fields['HAT_ASSETS_ACCOUNTS_ID'] = $bean_asset->hat_assets_accountsaccounts_ida;
             $HIT_Racks_fields['HAT_ASSETS_ACCOUNTS_NAME']= $bean_asset->hat_assets_accounts_name;
 */          $HIT_Racks_fields['HAT_ASSET_LOCATIONS_ID'] = $bean_asset->hat_asset_locations_hat_assetshat_asset_locations_ida;
@@ -147,6 +130,6 @@ class HIT_Racks extends HIT_Racks_sugar {
 	function __construct(){
 		parent::__construct();
 	}
-	
+
 }
 ?>

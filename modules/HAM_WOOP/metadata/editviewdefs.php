@@ -27,7 +27,7 @@ array (
           'field' => '30',
         ),
       ),
-      'useTabs' => true,
+      'useTabs' => false,
       'tabDefs' => 
       array (
         'DEFAULT' => 
@@ -90,12 +90,7 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_WORK_CENTER',
           ),
-          1 => 
-          array (
-            'name' => 'owner',
-            'studio' => 'visible',
-            'label' => 'LBL_OWNER',
-          ),
+          1 => '',
         ),
         3 => 
         array (
@@ -194,13 +189,27 @@ array (
       array (
         0 => 
         array (
-          0 => 'description',
-          1 => 
+          0 => 
           array (
             'name' => 'act_module',
             'studio' => 'visible',
             'label' => 'LBL_ACT_MODULE',
           ),
+          1 => 
+          array (
+            'name' => 'event_type',
+            'studio' => 'visible',
+            'label' => 'LBL_EVENT_TYPE',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&basic_type_advanced="+encodeURIComponent($("#act_module option:selected").val())+"',
+            ),
+          ),
+        ),
+        1 => 
+        array (
+          0 => 'description',
+          1 => '',
         ),
       ),
       'lbl_editview_panel3' => 

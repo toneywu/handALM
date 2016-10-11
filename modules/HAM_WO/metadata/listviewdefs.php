@@ -23,6 +23,7 @@ array (
     'label' => 'LBL_WO_STATUS',
     'width' => '10%',
     'default' => true,
+   'customCode'=>'<span class="color_tag color_doc_status_{$WO_STATUS_VAL}">{$WO_STATUS}</span>',
   ),
   'LOCATION' => 
   array (

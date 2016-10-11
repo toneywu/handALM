@@ -38,7 +38,7 @@ function set_framework_selector($bean_framework_id,$current_module,$current_acti
             //如果已经有framework在记录中，则直接加载
         }
         //当前字段由Relate类型变为只读，不可修改
-        $html ='<input type="hidden" name="'.$vardef_framework_id_name.'" id="'.$vardef_framework_id_name.'" value="'.$bean_framework_id .'">'. $bean_framework_name;
+        $html ='<input type="hidden" name="'.$vardef_framework_id_name.'" id="'.$vardef_framework_id_name.'" value="'.$bean_framework_id .'"><input type="hidden" name="haa_framework" id="haa_framework" value="'.$bean_framework_name .'">'. $bean_framework_name;
         return $html;
 }
 

@@ -52,7 +52,7 @@ $mod_strings = array (
   'LBL_CREATED_ID' => 'Created By Id',
   'LBL_DESCRIPTION' => 'Usage / Description',
   'LBL_DELETED' => 'Deleted',
-  'LBL_NAME' => 'Subnet IP Address',
+  'LBL_NAME' => 'Accurate IP Address',
   'LBL_CREATED_USER' => 'Created by User',
   'LBL_MODIFIED_USER' => 'Modified by User',
   'LBL_LIST_NAME' => 'Subnet IP Address',
@@ -83,4 +83,5 @@ $mod_strings = array (
   'LBL_BTN_UNASIGN_ORG'=>'Unassign Org.',
   'LBL_BTN_ASIGN_ORG'=>'Assign Org.',
   'LBL_UNASSIGNED'=>'Unassigned',
+  'LBL_IP_SUBNET' => 'Subnet IP Address',
 );

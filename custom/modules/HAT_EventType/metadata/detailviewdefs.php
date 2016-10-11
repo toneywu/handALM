@@ -48,6 +48,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_EDITVIEW_PANEL3' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
       ),
       'syncDetailEditViews' => true,
     ),
@@ -82,7 +87,7 @@ array (
         2 => 
         array (
           0 => 'name',
-          1 => '',
+          1 => 'aos_pdf_template',
         ),
         3 => 
         array (
@@ -95,6 +100,11 @@ array (
           ),
         ),
         4 => 
+        array (
+          0 => 'asset_scope',
+          1 => 'default_asset_list'
+        ),
+        5 => 
         array (
           0 => 
           array (
@@ -206,6 +216,99 @@ array (
             'name' => 'change_rack_position',
             'studio' => 'visible',
             'label' => 'LBL_CHANGE_RACK_POSITION',
+          ),
+        ),
+      ),
+      'lbl_editview_panel3' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_ip_subnets',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_IP_SUBNETS',
+          ),
+          1 => 
+          array (
+            'name' => 'change_associated_ip',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_ASSOCIATED_IP',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_gateway',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_GATEWAY',
+          ),
+          1 => 
+          array (
+            'name' => 'change_bandwidth_type',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_BANDWIDTH_TYPE',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_port',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_PORT',
+          ),
+          1 => 
+          array (
+            'name' => 'change_speed_limit',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_SPEED_LIMIT',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_asset',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_ASSET',
+          ),
+          1 => 
+          array (
+            'name' => 'change_cabinet',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_CABINET',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_monitoring',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_MONITORING',
+          ),
+          1 => 
+          array (
+            'name' => 'change_channel_num',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_CHANNEL_NUM',
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_channel_content',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_CHANNEL_CONTENT',
+          ),
+          1 => 
+          array (
+            'name' => 'change_mrtg_link',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_CHANGE_MRTG_LINK',
           ),
         ),
       ),

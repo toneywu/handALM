@@ -67,4 +67,13 @@ $mod_strings = array (
   'LBL_SOURCE_WO'=>'Source WO',
   'LBL_OWNER'=>'Owner',
   'LBL_PLANNED_COMPLETE_DATE'=>'Planned Complete Date',
+  'LBL_WO_LINES'=>'WO Obj.Lines',
+  'LBL_GENERATE_DOC'=>'Generate Doc.',
+  'LBL_ACCOUNT'=>'Customer/Demand Org.',
+  'LBL_ATTRIBUTE1'=>'Extra Attribute1',
+  'LBL_ATTRIBUTE2'=>'Extra Attribute2',
+  'LBL_ATTRIBUTE3'=>'Extra Attribute3',
+  'LBL_ATTRIBUTE4'=>'Extra Attribute4',
+  'LBL_ATTRIBUTE5'=>'Extra Attribute5',
+  'LBL_ATTRIBUTE6'=>'Extra Attribute6',
 );

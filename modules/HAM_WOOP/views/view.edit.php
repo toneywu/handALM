@@ -69,7 +69,6 @@ class HAM_WOOPViewEdit extends ViewEdit {
 				$this->bean->next_work_center_res = $next_bean->work_center_res;
 				$this->bean->next_work_center_people = $next_bean->work_center_people;
 			}
-			
 			if (isset ($wo_id)) {
 				$ham_wo_bean = BeanFactory::getBean("HAM_WO",$wo_id);
 				echo '<script>var ham_wo_id="' . $ham_wo_bean->id . '";</script>';

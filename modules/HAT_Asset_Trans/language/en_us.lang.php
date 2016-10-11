@@ -1,42 +1,5 @@
 <?php
-/*********************************************************************************
- * SugarCRM Community Edition is a customer relationship management program developed by
- * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
-
- * SuiteCRM is an extension to SugarCRM Community Edition developed by Salesagility Ltd.
- * Copyright (C) 2011 - 2014 Salesagility Ltd.
- *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU Affero General Public License version 3 as published by the
- * Free Software Foundation with the addition of the following permission added
- * to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
- * IN WHICH THE COPYRIGHT IS OWNED BY SUGARCRM, SUGARCRM DISCLAIMS THE WARRANTY
- * OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
- * details.
- *
- * You should have received a copy of the GNU Affero General Public License along with
- * this program; if not, see http://www.gnu.org/licenses or write to the Free
- * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
- * 02110-1301 USA.
- *
- * You can contact SugarCRM, Inc. headquarters at 10050 North Wolfe Road,
- * SW2-130, Cupertino, CA 95014, USA. or at email address contact@sugarcrm.com.
- *
- * The interactive user interfaces in modified source and object code versions
- * of this program must display Appropriate Legal Notices, as required under
- * Section 5 of the GNU Affero General Public License version 3.
- *
- * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
- * these Appropriate Legal Notices must retain the display of the "Powered by
- * SugarCRM" logo and "Supercharged by SuiteCRM" logo. If the display of the logos is not
- * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
- * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
- ********************************************************************************/
-
+// created: 2016-10-10 23:39:04
 $mod_strings = array (
   'LBL_ASSIGNED_TO_ID' => 'Assigned User Id',
   'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
@@ -81,7 +44,7 @@ $mod_strings = array (
   'LBL_TARGET_LOCATION_DESC' => 'Target Location Desc',
   'LBL_TARGET_RESPONSIBLE_PERSON' => 'Target Responsible Person',
   'LBL_TARGET_RESPONSIBLE_PERSON_CONTACT_ID' => 'Target Responsible Person (related Contact ID)',
-  'LBL_TARGET_RESPONSIBLE_CENTER' => 'Target Responsible Center',
+  'LBL_TARGET_RESPONSIBLE_CENTER' => 'Target Owning Org',
   'LBL_EDITVIEW_PANEL1' => 'New Panel 1',
   'LBL_EDITVIEW_PANEL2' => 'New Panel 2',
   'LBL_EDITVIEW_PANEL3' => 'Target',
@@ -93,5 +56,17 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL5' => 'Notes',
   'LBL_DETAILVIEW_PANEL4' => 'Notes',
   'LBL_TARGET_RESPONSIBLE_CENTER_ACCOUNT_ID' => 'Target Responsible Center (related Account ID)',
-  'LBL_TARGET_PARENT_ASSET'=>'Target Parent Assets'
+  'LBL_TARGET_PARENT_ASSET' => 'Target Parent Assets',
+  'LBL_CHANGE_FROM' => ' is changed from ',
+  'LBL_CHANGE_NULL' => 'NULL',
+  'LBL_CHANGE_FROM_TO' => ' to ',
+  'LBL_CHANGE_TO' => ' is changed to ',
+  'LBL_TARGET_RACK' => 'Target Rack Position',
+  'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE' => 'Assets',
+  'LBL_HAT_ASSET_TRANS_BATCH_HAT_ASSET_TRANS_FROM_HAT_ASSET_TRANS_BATCH_TITLE' => 'Asset Transaction Batch',
+  'LBL_BTN_ADD_TRANS_LINE' => 'Add Asset Transaction Line',
+  'LBL_TARGET_OWNING_PERSON'=>'Target Owning Person',
+  'LBL_TARGET_USING_PERSON' => 'Target Using Person',
+  'LBL_TARGET_USING_ORG' => 'Target Using Org',
+
 );

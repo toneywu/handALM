@@ -303,6 +303,10 @@ input[type=text], select{
 /**********************************/
 /*以下是完全自定义的一些对象	  */
 /**********************************/
+.detail .tab_subpanel tr td[scope=row], .detail .tab_subpanel .action_buttons{
+	text-align: left;
+}
+
 #lineItems {
 	border-style: none;
 }
@@ -396,34 +400,46 @@ input[type=text], select{
 	padding:3px 10px 3px 10px;
 	border-radius:15px;
 }
-.color_asset_status_InService {
-	background-color: #BEEECC;/*淡绿*/
-}
 .color_asset_status_Ordered {
 	background-color: #A2D4D7;/*蓝绿*/
+}
+.color_asset_status_Received {
+	background-color: #91E9ED;/*亮蓝*/
+}
+.color_asset_status_PreAssigned {
+	background-color: #c7ffa1;/*亮绿*/
+}
+.color_asset_status_InService {
+	background-color: #BEEECC;/*淡绿*/
 }
 .color_asset_status_Idle {
 	background-color: #E1DFA6;/*淡黄*/
 }
-.color_asset_status_LentOut {
-	background-color: #7BBE98;/*中绿*/
-}
-.color_asset_status_OutOfService {
+.color_asset_status_Stocked {
 	background-color: #CECEBE;/*灰偏土黄*/
 }
-.color_asset_status_Received {
-	background-color: #91E9ED;/*亮蓝*/
+.color_asset_status_TempOut {
+	background-color: #dbc7ff;/*紫色*/
+}
+.color_asset_status_OutOfService {
+	background-color: #dbdbdb;/*灰*/
+}
+.color_asset_status_Discard {
+	background-color: #b4b4b4;/*深灰*/
 }
 
 /*动态着色标签-单据状态，包括SR、WO*/
 .color_doc_status_DRAFT { 
 	background-color: #CECEBE;/*灰偏土黄*/
 }
+.color_doc_status_SUBMITTED {
+	background-color: #e0e5ae;/*淡黄绿*/
+}
 .color_doc_status_APPROVED {
 	background-color: #91E9ED;/*亮蓝*/
 }
 .color_doc_status_INPRG {
-	background-color: #BEEECC;/*淡绿*/
+	background-color: #c7ffa1;/*亮绿*/
 }
 .color_doc_status_REJECTED {
 	background-color: #E1DFA6;/*淡黄*/
@@ -432,7 +448,7 @@ input[type=text], select{
 	background-color: #d7d7d7;/*灰*/
 }
 .color_doc_status_CLOSED {
-	background-color: #009688;/*深绿*/
+	background-color: #adcab0;/*灰绿*/
 }
 .color_doc_status_WSCH {
 	background-color: #b4a775;/*淡黄*/
@@ -447,7 +463,7 @@ input[type=text], select{
 	background-color: #add1d5;/*蓝*/
 }
 .color_doc_status_COMPLETED {
-	background-color: #7BBE98;/*淡黄*/
+	background-color: #a3dfaa;/*中绿*/
 }
 .color_doc_status_REWORK {
 	background-color: #aeadd5;/*灰*/

@@ -85,7 +85,7 @@ $dictionary['HIT_VNI_LIST'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 100,
 			'size' => '20',
-			'options' => 'bandwidth_type',
+			'options' => 'cux_vni_bandwidth_list',
 			'studio' => 'visible',
 			'dependency' => false,
 		),

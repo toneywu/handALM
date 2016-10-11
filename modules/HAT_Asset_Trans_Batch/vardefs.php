@@ -160,162 +160,27 @@ $dictionary['HAT_Asset_Trans_Batch'] = array(
 			'dbType' => 'datetime',
 			'display_default' => 'now',
 			),
-		'lov_asset_status_list' =>
+		'hat_asset_status' =>
 		array (
 			'source' => 'non-db', //从EventType映射
-			'name' => 'lov_asset_status_list',
+			'name' => 'hat_asset_status',
 			'vname' => 'LBL_TARGET_ASSET_STATUS',
 			'type' => 'enum',
 			'default'=>'',
 			'reportable' => true,
 			'studio' => 'visible',
-			'options' => 'asset_status_list',
+			'options' => 'hat_asset_status_list',
 			),
-
-/*		'lov_cux_event_type_option_list' =>
+		'wo_lines' =>
 		array (
-								'source' => 'non-db', //从EventType映射
-								'name' => 'lov_cux_event_type_option_list',
-								'vname' => 'LBL_EVENT_TYPE_OPTION_LIST',
-								'type' => 'enum',
-								'default'=>'',
-								'reportable' => true,
-								'studio' => 'visible',
-								'options' => 'cux_event_type_option_list',
-								),
-		'lov_asset_status_list' =>
-		array (
-								'source' => 'non-db', //从EventType映射
-								'name' => 'lov_asset_status_list',
-								'vname' => 'LBL_ASSET_STATUS_LIST',
-								'type' => 'enum',
-								'default'=>'',
-								'reportable' => true,
-								'studio' => 'visible',
-								'options' => 'asset_status_list',
-								),
-		'target_asset_status' => 
-		array ( 
-			  'source' => 'non-db', //从EventType映射
-			  'name' => 'target_asset_status',
-			  'vname' => 'LBL_TARGET_ASSET_STATUS',
-			  'type' => 'varchar',// 'enum',
-			  'default'=>'',
-			  'reportable' => true,
-			  'studio' => 'visible',
-			  //'options' => 'asset_status_list',
-			  ),
-		'change_location' => 
-		array ( 
-			  'source' => 'non-db', //从EventType映射
-			  'name' => 'change_location',
-			  'vname' => 'LBL_CHANGE_LOCATION',
-			  'type' =>'varchar',// 'enum',
-			  'default' => 'OPTIONAL',
-			  'reportable' => true,
-			  'studio' => 'visible',
-			  //'options' => 'cux_event_type_option_list',
-			  ),
-		'processing_asset_status' => 
-		array ( 
-			  'source' => 'non-db', //从EventType映射
-			  'name' => 'processing_asset_status',
-			  'vname' => 'LBL_PROCESSING_ASSET_STATUS',
-			  'type' => 'varchar',//'enum',
-			  'default'=>'',
-			  'reportable' => true,
-			  'studio' => 'visible',
-			 // 'options' => 'asset_status_list',
-			  ),
-		'change_organization' => 
-		array ( 
-			  'source' => 'non-db', //从EventType映射
-			  'name' => 'change_organization',
-			  'vname' => 'LBL_CHANGE_ORGANIZATION',
-			  'type' => 'varchar',//'enum',
-			  'default' => 'OPTIONAL',
-			  'reportable' => true,
-			  'studio' => 'visible',
-			  //'options' => 'cux_event_type_option_list',
-			  ),
-		'change_contact' => 
-		array ( 
-			  'source' => 'non-db', //从EventType映射
-			  'name' => 'change_contact',
-			  'vname' => 'LBL_CHANGE_CONTACT',
-			  'type' =>'varchar',// 'enum',
-			  'default' => 'OPTIONAL',
-			  'reportable' => true,
-			  'studio' => 'visible',
-			 // 'options' => 'cux_event_type_option_list',
-			  ),
-		'change_oranization_le' => 
-		array ( 
-			  'source' => 'non-db', //从EventType映射
-			  'name' => 'change_oranization_le',
-			  'vname' => 'LBL_CHANGE_ORANIZATION_LE',
-			  'type' => 'varchar',//'enum',
-			  'default' => 'OPTIONAL',
-			  'reportable' => true,
-			  'studio' => 'visible',
-			  //'options' => 'cux_event_type_option_list',
-			  ),
-		'change_location_desc' => 
-		array ( 
-			  'source' => 'non-db', //从EventType映射
-			  'name' => 'change_location_desc',
-			  'vname' => 'LBL_CHANGE_LOCATION_DESC',
-			  'type' => 'varchar',////'enum',
-			  'default' => 'OPTIONAL',
-			  'reportable' => true,
-			  'studio' => 'visible',
-			  //'options' => 'cux_event_type_option_list',
-			  ),
-		'require_approval_workflow' => 
-		array ( 
-			  'source' => 'non-db', //从EventType映射
-			  'name' => 'require_approval_workflow',
-			  'vname' => 'LBL_REQUIRE_APPROVAL_WORKFLOW',
-			  'type' =>'varchar',// 'enum',
-			  'default' => 'LOCKED',
-			  'reportable' => true,
-			  'studio' => 'visible',
-			 // 'options' => 'cux_event_type_option_list',
-			  ),		
-		'require_confirmation' => 
-		array ( 
-			  'source' => 'non-db', //从EventType映射
-			  'name' => 'require_confirmation',
-			  'vname' => 'LBL_REQUIRE_CONFIRMATION',
-			  'type' =>'varchar',// 'enum',
-			  'default' => 'LOCKED',
-			  'reportable' => true,
-			  'studio' => 'visible',
-			 // 'options' => 'cux_event_type_option_list',
-			  ),	
-		'change_target_status' => 
-		array ( 
-			  'source' => 'non-db', //从EventType映射
-			  'name' => 'change_target_status',
-			  'vname' => 'LBL_CHANGE_TARGET_STATUS',
-			  'type' => 'varchar',// 'enum',
-			  'default' => '0',
-			  'reportable' => true,
-			  'studio' => 'visible',
-			  //'options' => 'dom_int_bool',
-			  ),	
-		'change_processing_status' => 
-		array ( 
-			  'source' => 'non-db', //从EventType映射
-			  'name' => 'change_processing_status',
-			  'vname' => 'LBL_CHANGE_PROCESSING_STATUS',
-			  'type' =>'varchar',// 'enum',
-			  'default' => '0',
-			  'reportable' => true,
-			  'studio' => 'visible',
-			  //'options' => 'dom_int_bool',
-			  ),		
-*/
+			'source' => 'non-db', //从EventType映射
+			'name' => 'wo_lines',
+			'vname' => 'LBL_WO_LINES',
+			'type' => 'varchar',
+			'default'=>'',
+			'reportable' => true,
+			'studio' => 'visible',
+			),
 			  'haa_frameworks_id' => 
 			  array (
 			  	'required' => false,
@@ -729,6 +594,134 @@ $dictionary['HAT_Asset_Trans_Batch'] = array(
 			  		'include' => 'modules/HAT_Asset_Trans_Batch/Render_Line_Items.php'
 			  		),
 			  	),
+			  	
+			  	'attribute1' =>
+    array (
+      'required' => false,
+      'name' => 'attribute1',
+      'vname' => 'LBL_ATTRIBUTE1',
+      'type' => 'varchar',
+      'massupdate' => 0,
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'duplicate_merge_dom_value' => '0',
+      'audited' => false,
+      'inline_edit' => true,
+      'reportable' => true,
+      'unified_search' => false,
+      'merge_filter' => 'disabled',
+      'len' => '255',
+      'size' => '20',
+      ),
+    'attribute2' =>
+    array (
+      'required' => false,
+      'name' => 'attribute2',
+      'vname' => 'LBL_ATTRIBUTE2',
+      'type' => 'varchar',
+      'massupdate' => 0,
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'duplicate_merge_dom_value' => '0',
+      'audited' => false,
+      'inline_edit' => true,
+      'reportable' => true,
+      'unified_search' => false,
+      'merge_filter' => 'disabled',
+      'len' => '255',
+      'size' => '20',
+      ),
+    'attribute3' =>
+    array (
+      'required' => false,
+      'name' => 'attribute3',
+      'vname' => 'LBL_ATTRIBUTE3',
+      'type' => 'varchar',
+      'massupdate' => 0,
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'duplicate_merge_dom_value' => '0',
+      'audited' => false,
+      'inline_edit' => true,
+      'reportable' => true,
+      'unified_search' => false,
+      'merge_filter' => 'disabled',
+      'len' => '255',
+      'size' => '20',
+      ),
+    'attribute4' =>
+    array (
+      'required' => false,
+      'name' => 'attribute4',
+      'vname' => 'LBL_ATTRIBUTE4',
+      'type' => 'varchar',
+      'massupdate' => 0,
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'duplicate_merge_dom_value' => '0',
+      'audited' => false,
+      'inline_edit' => true,
+      'reportable' => true,
+      'unified_search' => false,
+      'merge_filter' => 'disabled',
+      'len' => '255',
+      'size' => '20',
+      ),
+    'attribute5' =>
+    array (
+      'required' => false,
+      'name' => 'attribute5',
+      'vname' => 'LBL_ATTRIBUTE5',
+      'type' => 'varchar',
+      'massupdate' => 0,
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'duplicate_merge_dom_value' => '0',
+      'audited' => false,
+      'inline_edit' => true,
+      'reportable' => true,
+      'unified_search' => false,
+      'merge_filter' => 'disabled',
+      'len' => '255',
+      'size' => '20',
+      ),
+    'attribute6' =>
+    array (
+      'required' => false,
+      'name' => 'attribute6',
+      'vname' => 'LBL_ATTRIBUTE6',
+      'type' => 'varchar',
+      'massupdate' => 0,
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'duplicate_merge_dom_value' => '0',
+      'audited' => false,
+      'inline_edit' => true,
+      'reportable' => true,
+      'unified_search' => false,
+      'merge_filter' => 'disabled',
+      'len' => '255',
+      'size' => '20',
+      ),
+      
 			  'hat_asset_trans_batch_hat_asset_trans' =>
 			  array (
 			  	'name' => 'hat_asset_trans_batch_hat_asset_trans',

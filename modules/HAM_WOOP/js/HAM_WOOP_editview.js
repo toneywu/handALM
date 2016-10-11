@@ -1,11 +1,15 @@
-﻿function require_field(){
+﻿
+function require_field(){
 	var woop_status = $("#woop_status").val();
 	if(woop_status!="COMPLETED"){
 		mark_field_enabled("date_actual_start",true);
 		mark_field_enabled("date_actual_finish",true);
+		
 	}else{
 		mark_field_enabled("date_actual_start",false);
 		mark_field_enabled("date_actual_finish",false);
+		$("#span_date_actual_start span.input-group-addon").show();
+		$("#span_date_actual_finish span.input-group-addon").show();
 	}
 }
 
@@ -45,9 +49,9 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 	  }
 	}
 
-/**
- * 设置必输
- */
+///**
+// * 设置必输
+// 
 function mark_field_enabled(field_name,not_required_bool) {
   //field_name = 字段名，不需要jquery select标志，直接写名字
   //not_required_bool如果为空或没有明确定义为true的话，字段为必须输入。如果=true则为非必须
@@ -78,7 +82,6 @@ function mark_field_enabled(field_name,not_required_bool) {
     $("#btn_clr_"+field_name).css({"visibility":"visible"});
   }
 }
-
 
 $(document).ready(function(){
 	
@@ -153,7 +156,6 @@ Date.prototype.format = function(fmt){ // author: meizz
 
 // 时长
 function duration_change(){	
-
 	 if($('#duration_schedualed').val()!=null&&$('#duration_schedualed').val()!=""){
 		 $("#duration_schedualed").val(parseFloat($("#duration_schedualed").val()).toFixed(5));
 		 if(isNaN($('#duration_schedualed').val())){
@@ -191,13 +193,11 @@ function duration_change(){
 	
 	// 如果目标完成时间没有填写，目标时长有值 则自动更新目标完成时间
 	if($duration_schedualed_str!=null&&$duration_schedualed_str!=""&&$date_schedualed_start_str!=null&&$date_schedualed_start_str!=""){
-		// alert("1");
 		var $total_num =stringToTime($date_schedualed_start_str)+$duration_schedualed_nums;
 		var time2=new Date(parseInt($total_num)).format('yyyy-M-d hh:m');
 		$("#date_schedualed_finish").val(time2);
 	}else if($duration_schedualed_str!=null&&$duration_schedualed_str!=""&&$date_schedualed_finish_str!=null&&$date_schedualed_finish_str!=""){
 	// 如果目标完成时间有，没有填写目标开始，自动更新目标开始时间
-		// alert("2");
 		var $total_num =stringToTime($date_schedualed_finish_str)-$duration_schedualed_nums;
 		var time2=new Date(parseInt($total_num)).format('yyyy-M-d hh:m');
 		$("#date_schedualed_start").val(time2);	
@@ -211,13 +211,11 @@ function duration_change(){
 	var $duration_target_nums = parseInt($duration_target_str)*1000*3600;
 	// 如果目标完成时间没有填写，目标时长有值 则自动更新目标完成时间
 	if($duration_target_str!=null&&$duration_target_str!=""&&$date_target_start_str!=null&&$date_target_start_str!=""){
-		// alert("3");
 		var $total_num =stringToTime($date_target_start_str)+$duration_target_nums;
 		var time2=new Date(parseInt($total_num)).format('yyyy-M-d hh:m');
 		$("#date_target_finish").val(time2);
 	}else if($duration_target_str!=null&&$duration_target_str!=""&&$date_target_finish_str!=null&&$date_target_finish_str!=""){
 	// 如果目标完成时间有，没有填写目标开始，自动更新目标开始时间
-		// alert("4");
 		var $total_num =stringToTime($date_target_finish_str)-$duration_target_nums;
 		var time2=new Date(parseInt($total_num)).format('yyyy-M-d hh:m');
 		$("#date_target_start").val(time2);	
@@ -231,14 +229,12 @@ function duration_change(){
 	var $date_actual_finish_str = $("#date_actual_finish").val();
 	// 如果目标完成时间没有填写，目标时长有值 则自动更新目标完成时间
 	if($duration_actual_str!=null&&$duration_actual_str!=""&&$date_actual_start_str!=null&&$date_actual_start_str!=""){
-		// alert("5"+$duration_actual_str);
-		
+
 		var $total_num =stringToTime($date_actual_start_str)+$duration_actual_nums;
 		var time2=new Date(parseInt($total_num)).format('yyyy-M-d hh:m');
 		$("#date_actual_finish").val(time2);
 	}else if($duration_actual_str!=null&&$duration_actual_str!=""&&$date_actual_finish_str!=null&&$date_actual_finish_str!=""){
 	// 如果目标完成时间有，没有填写目标开始，自动更新目标开始时间
-		// alert("6");
 		var $total_num =stringToTime($date_actual_finish_str)-$duration_actual_nums;
 		var time2=new Date(parseInt($total_num)).format('yyyy-M-d hh:m');
 		$("#date_actual_start").val(time2);	
@@ -257,7 +253,7 @@ function date_start_change(){
 		// 1）如果计划完成时间有填写，自动更新计划时长。
 		$date_schedualed_finish_date = (stringToTime($("#date_schedualed_finish").val())/1000/3600);
 		var $differentHour = $date_schedualed_finish_date-$date_schedualed_start_date;
-		if($differentHour>0){
+		if($differentHour>=0){
 			 $("#duration_schedualed").val((parseFloat($differentHour)).toFixed(5));
 		}else{
 			alert("计划完成日期必须大于等于计划开始日期！");
@@ -279,7 +275,7 @@ function date_start_change(){
 		// 1）如果计划完成时间有填写，自动更新计划时长。
 		$date_target_finish_date = (stringToTime($("#date_target_finish").val())/1000/3600);
 		var $differentHour = $date_target_finish_date-$date_target_start_date;
-		if($differentHour>0){
+		if($differentHour>=0){
 			 $("#duration_target").val((parseFloat($differentHour)).toFixed(5));
 		}else{
 			alert("目标完成日期必须大于等于计划开始日期！");
@@ -301,7 +297,7 @@ function date_start_change(){
 		// 1）如果计划完成时间有填写，自动更新计划时长。
 		$date_actual_finish_date = (stringToTime($("#date_actual_finish").val())/1000/3600);
 		var $differentHour = $date_actual_finish_date-$date_actual_start_date;
-		if($differentHour>0){
+		if($differentHour>=0){
 			 $("#duration_actual").val((parseFloat($differentHour)).toFixed(5));
 		}else{
 			alert("实际完成日期必须大于等于计划开始日期！");
@@ -333,7 +329,7 @@ function date_finish_change(){
 			$date_schedualed_finish_date = (stringToTime($("#date_schedualed_finish").val())/1000/3600);
 			
 			var $differentHour = $date_schedualed_finish_date-$date_schedualed_start_date;
-			if($differentHour>0){
+			if($differentHour>=0){
 				 $("#duration_schedualed").val((parseFloat($differentHour)).toFixed(5));
 			}else{
 				alert("计划完成日期必须大于等于计划开始日期！");
@@ -354,7 +350,7 @@ function date_finish_change(){
 		if($("#date_target_finish").val()!=null&&$("#date_target_finish").val()!=""&&$date_target_start_date!=null){
 			$date_target_finish_date = (stringToTime($("#date_target_finish").val())/1000/3600);
 			var $differentHour = $date_target_finish_date-$date_target_start_date;
-			if($differentHour>0){
+			if($differentHour>=0){
 				 $("#duration_target").val((parseFloat($differentHour)).toFixed(5));
 			}else{
 				alert("计划完成日期必须大于等于计划开始日期！");
@@ -460,6 +456,7 @@ function date_finish_change(){
 	        $("#woop_status option[value='CANCELED']").remove();
 	        $("#woop_status option[value='REWORK']").remove();
 	        setEditViewReadonly ();
+	        
 	    } else if ((current_header_status=="APPROVED")||(current_header_status=="RELEASED")) { //可以CANCEL,COMPLETED
 	        /*$("#wo_status option[value='SUBMITTED']").remove();
 	        $("#wo_status option[value='REJECTED']").remove();
@@ -593,6 +590,43 @@ function setEditViewReadonly () { //如果当前头状态为Submitted、Approved
     $("#EditView_tabs input").attr("readonly",true);
     $("#EditView_tabs button").attr("readonly",true);
     $("#EditView_tabs input").attr("style","background-Color:#efefef");
+    mark_field_disabled("work_center",false);
+	mark_field_disabled("work_center_people",false);
+	mark_field_disabled("work_center_res",false);
+	mark_field_disabled("date_schedualed_start",false);
+	mark_field_disabled("event_type",false);
+	
+	
+	var woop_status = $("#woop_status").val();
+	if(woop_status=="COMPLETED"){
+		mark_field_enabled("date_actual_start",true);
+		mark_field_enabled("date_actual_finish",true);
+		$(".input-group-addon").hide();
+		$("#date_schedualed_start").unbind("focus");
+		$("#date_target_start").unbind("focus");
+		$("#date_start_not_earlier").unbind("focus");
+		$("#date_actual_start").unbind("focus");
+		
+		$("#date_schedualed_finish").unbind("focus");
+		$("#date_target_finish").unbind("focus");
+		$("#date_finish_not_later").unbind("focus");
+		$("#date_actual_finish").unbind("focus");
+		
+		$("#span_date_actual_start span.input-group-addon").show();
+		$("#span_date_actual_finish span.input-group-addon").show();
+	}else{
+		$("#date_schedualed_start").unbind("focus");
+		$("#date_target_start").unbind("focus");
+		$("#date_start_not_earlier").unbind("focus");
+		$("#date_actual_start").unbind("focus");
+		
+		$("#date_schedualed_finish").unbind("focus");
+		$("#date_target_finish").unbind("focus");
+		$("#date_finish_not_later").unbind("focus");
+		$("#date_actual_finish").unbind("focus");
+		$(".input-group-addon").hide();
+	}
+    
 }
 
 

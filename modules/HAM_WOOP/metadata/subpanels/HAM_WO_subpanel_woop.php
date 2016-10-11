@@ -15,26 +15,27 @@ $subpanel_layout['list_fields'] = array (
     'width' => '15%',
     'default' => true,
   ),
-  'woop_status' => 
+  'woop_status_tagged' => 
   array (
-    'type' => 'enum',
+    'type' => 'varchar',
     'studio' => 'visible',
     'vname' => 'LBL_WOOP_STATUS',
-    'width' => '14%',
+    'width' => '7%',
     'default' => true,
+    //'fill_in_additional_fields'=>true
   ),
   'date_schedualed_start' => 
   array (
     'type' => 'datetimecombo',
     'vname' => 'LBL_SCHEDUALED_START_DATE',
-    'width' => '7%',
+    'width' => '8%',
     'default' => true,
   ),
   'date_schedualed_finish' => 
   array (
     'type' => 'datetimecombo',
     'vname' => 'LBL_SCHEDUALED_FINISH_DATE',
-    'width' => '7%',
+    'width' => '8%',
     'default' => true,
   ),
   'work_center' => 

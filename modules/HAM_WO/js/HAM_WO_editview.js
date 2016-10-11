@@ -1,3 +1,13 @@
+function setEventTypeReturn(popupReplyData){//选择地点类型后
+    set_return(popupReplyData);
+    call_ff();
+}
+
+function call_ff() {
+    triger_setFF($("#haa_ff_id").val(),"HAM_WO");
+    $(".expandLink").click();
+}
+
 function setAssetPopupReturn(popupReplyData){
 	set_return(popupReplyData);
 	$("#asset_desc_text").text($("#asset_desc").val());
@@ -24,6 +34,21 @@ function setWoPriorityReturn(popupReplyData){
 
 function setHamActivityReturn(popupReplyData){
 	set_return(popupReplyData);
+	//$("#haa_ff_id").val(popupReplyData.name_to_value_array.hat_event_type_id);
+	//console.log(popupReplyData.name_to_value_array.hat_event_type_id);
+	//通过事务处理单获取haa_ff_id
+	//
+	$.ajax({
+			url: 'index.php?to_pdf=true&module=HAM_WO&action=get_ff_id&hat_event_type_id=' + popupReplyData.name_to_value_array.hat_event_type_id,
+			success: function (data) {
+				$("#haa_ff_id").val(data);
+				call_ff();
+			},
+			error: function () { //失败
+				alert('Error loading document');
+			}
+		});
+	
 	if($("#name").val()==""||$("#name").val()==""){
 		$("#name").val($("#ham_act_id_rule").val());
 	}
@@ -31,6 +56,7 @@ function setHamActivityReturn(popupReplyData){
 		$("#priority").val($("#wo_priority").val());
 		$("#ham_priority_id").val($("#wo_priority_id").val());
 	}
+	
 }
 
 function setWorkCenterPopupReturn(popupReplyData){
@@ -45,15 +71,29 @@ function setWorkCenterResPopupReturn(popupReplyData){
 	set_return(popupReplyData);
 }
 
+
+function require_field(){
+	var wo_status = $("#wo_status").val();
+	if(wo_status){
+		mark_field_enabled("date_actual_start",true);
+		mark_field_enabled("date_actual_finish",true);
+	}else{
+		mark_field_enabled("date_actual_start",false);
+		mark_field_enabled("date_actual_finish",false);
+		$("#span_date_actual_start span.input-group-addon").show();
+		$("#span_date_actual_finish span.input-group-addon").show();
+	}
+}
+
 /**
  * 点击按钮 调用Ajax请求 获取权限
  * @param name
  */
 function checkAccess(id){
+	if(id!=""){
 		$.ajax({
 			url: 'index.php?to_pdf=true&module=HAM_WO&action=checkAccess&id=' + id,
 			success: function (data) {
-				//alert(data);
 				if(data!="Y"){
 					window.location.href = "index.php?module=HAM_WO&action=DetailView&record="+id;
 				}
@@ -62,43 +102,73 @@ function checkAccess(id){
 				alert('Error loading document');
 			}
 		});
+	}
+};
+///**
+//* 设置必输
+//
+function mark_field_enabled(field_name,not_required_bool) {
+//field_name = 字段名，不需要jquery select标志，直接写名字
+//not_required_bool如果为空或没有明确定义为true的话，字段为必须输入。如果=true则为非必须
+//alert(not_required_bool);
+	$("#"+field_name).css({"color":"#000000","background-Color":"#ffffff"});
+	$("#"+field_name).attr("readonly",false);
+	$("#"+field_name+"_label").css({"color":"#000000","text-decoration":"none"})
+
+	if(typeof not_required_bool == "undefined" || not_required_bool==false || not_required_bool=="") {
+	   addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());//将当前字段标记为必须验证
+	   //打上必须星标
+	   if  ($("#"+field_name+"_label .required").text()!='*') {//如果没有星标，则打上星标
+	     $("#"+field_name+"_label").html($("#"+field_name+"_label").text()+"<span class='required'>*</span>");//打上星标
+	   } else {//如果已经有星标了，则显示出来
+	     $("#"+field_name+"_label .required").show();
+	   }
+	} else { //如果不是必须的，则不显示星标
+	 //直接Remove有时会出错，所有先设置为Validate再Remove
+	 addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());
+	 removeFromValidate('EditView',field_name);
+	  //去除必须验证
+	 $("#"+field_name+"_label .required").hide();
+	}
+	if  (typeof $("#btn_"+field_name)!= 'undefined') {//移除选择按钮
+	 $("#btn_"+field_name).css({"visibility":"visible"});
+	}
+	if  (typeof $("#btn_clr_"+field_name)!= 'undefined') {//移除清空按钮
+	 $("#btn_clr_"+field_name).css({"visibility":"visible"});
+	}
+}
+
+function showWOLines() {
+    console.log('index.php?to_pdf=true&module=HAM_WO&action=getWOLiness&id=' + $("input[name=record]").val());
+        $.ajax({
+            url: 'index.php?to_pdf=true&module=HAM_WO&action=getWOLiness&id=' + $("input[name=record]").val(),
+            success: function (data) {
+                //console.log(data);
+                $("#wo_lines_display").html(data);
+            },
+            error: function () { //失败
+                alert('Error loading document');
+            }
+        });
 };
 
-//设置字段不可更新
-function mark_field_disabled(field_name, hide_bool, keep_position=false) {
-	  mark_obj = $("#"+field_name);
-	  mark_obj_lable = $("#"+field_name+"_label");
-
-	  if(hide_bool==true) {
-	  	if (keep_position==false) {
-	    	mark_obj.closest('td').css({"display":"none"});
-	    	mark_obj_lable.css({"display":"none"});
-		}else{
-	    	mark_obj.closest('td').css({"display":"table-column"});
-	    	mark_obj_lable.css({"display":"table-column"});
-		}
-	  }else{
-	  	mark_obj.closest('td').css({"display":""});
-	    mark_obj_lable.css({"display":""});
-		mark_obj.css({"color":"inherit","background-Color":"#efefef;"});
-	  	mark_obj.attr("readonly",true);
-	  	mark_obj_lable.css({"color":"#aaaaaa"});
-	  }
-	  if (typeof validate != "undefined" && typeof validate['EditView'] != "undefined") {
-	    removeFromValidate('EditView',field_name); // 去除必须验证
-	  }
-	  $("#"+field_name+"_label .required").hide();
-
-	  if  (typeof $("#btn_"+field_name)!= 'undefined') {
-	    $("#btn_"+field_name).css({"visibility":"hidden"});
-	  }
-	  if  (typeof $("#btn_clr_"+field_name)!= 'undefined') {
-	    $("#btn_clr_"+field_name).css({"visibility":"hidden"});
-	  }
+$(document).ready(function(){
+	
+	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
+		$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');
 	}
 
-$(document).ready(function(){
-		
+	//触发FF
+	SUGAR.util.doWhen("typeof setFF == 'function'", function(){
+		call_ff();
+	});
+	
+	$("#event_type").change(function(){
+		SUGAR.util.doWhen("typeof setFF == 'function'", function(){
+			call_ff();
+		});
+	});
+
 	/**
 	 * checkAccess 
 	 * 工作单状态为其它状态时（包括已批准、等待XX、正在执行中及未来可能扩展的状态），以下字段不可编辑：
@@ -106,57 +176,45 @@ $(document).ready(function(){
      * 工作单来源信息面板下的所有字段    
      * 
 	 */
-	checkAccess($("input[name='record']").val());
+    //BUG：CheckAccess存在问题，新创建工作单时，会自动推出。请检查新增记录的逻辑 #by toney_wu
+	//checkAccess($("input[name='record']").val());
 	//权限满足后 字段不可编辑：
 	var wo_status = $("#wo_status").val();
-	if(wo_status=="APPROVED"||wo_status=="WSCH"||wo_status=="WMATL"||wo_status=="WPCOND"||wo_status=="INPRG"){
-		mark_field_disabled("ham_act_id_rule",false);
-		mark_field_disabled("site",false);
-		mark_field_disabled("event_type",false);
-		mark_field_disabled("location",false);
-		mark_field_disabled("asset",false);
-		mark_field_disabled("contract",false);
-		mark_field_disabled("date_target_start",false);
-		mark_field_disabled("date_target_finish",false);
-		mark_field_disabled("reporter",false);
-		mark_field_disabled("reporter_org",false);
-		mark_field_disabled("reported_date",false);
-		mark_field_disabled("priority",false);
-		mark_field_disabled("source_type",false);
-		mark_field_disabled("source_reference",false);
+
+    SUGAR.util.doWhen("typeof mark_field_disabled != 'undefined'"), function() {
+    	if(wo_status=="APPROVED"||wo_status=="WSCH"||wo_status=="WMATL"||wo_status=="WPCOND"||wo_status=="INPRG"){
+    		mark_field_disabled("ham_act_id_rule",false);
+    		mark_field_disabled("site",false);
+    		mark_field_disabled("event_type",false);
+    		mark_field_disabled("location",false);
+    		mark_field_disabled("asset",false);
+    		mark_field_disabled("contract",false);
+    		mark_field_disabled("date_target_start",false);
+    		mark_field_disabled("date_target_finish",false);
+    		mark_field_disabled("reporter",false);
+    		mark_field_disabled("reporter_org",false);
+    		mark_field_disabled("reported_date",false);
+    		mark_field_disabled("priority",false);
+    		mark_field_disabled("source_type",false);
+    		mark_field_disabled("source_reference",false);
+    	}
+    	if(wo_status!="DRAFT"){
+    		mark_field_disabled("ham_act_id_rule",false);
+    		mark_field_disabled("location",false);
+    		mark_field_disabled("asset",false);
+    		mark_field_disabled("event_type",false);
+    	}
 	}
-	if(wo_status!="DRAFT"){
-		mark_field_disabled("ham_act_id_rule",false);
-		mark_field_disabled("location",false);
-		mark_field_disabled("asset",false);
-		mark_field_disabled("event_type",false);
-	}
-	
-	var currentDate = new Date();
-	var yearStr = currentDate.getFullYear();
-	var monthStr = currentDate.getMonth()+1;
-	var dayStr = currentDate.getDate();
-	var hourStr = currentDate.getHours();
-	var minutesStr = currentDate.getMinutes();
-	var timeStr = yearStr+"-"+monthStr+"-"+dayStr+" "+hourStr+":"+minutesStr;
-	$("#date_target_start").val(timeStr);
-	$("#date_target_finish").val(timeStr);
-	
+
 //这时obj就是触发事件的对象，可以使用它的各个属性
 //还可以将obj转换成jquery对象，方便选用其他元素
 
-	/*alert(SUGAR.language.get('HAM_WO', 'LBL_AUTONUM'));
-	for(i in SUGAR){
-		alert(i);
-	}*/
-	
-	if($("#wo_number").val()=="") {
-        $("#wo_number").after(SUGAR.language.get('HAM_WO', 'LBL_AUTONUM'));
-        $("#wo_number").hide();
-	} else {
-        $("#wo_number").after($("#wo_number").val());
-        $("#wo_number").hide();
-    }
+//处理工作对象行
+    $("#wo_lines").parent("td").prev("td").hide();
+    $("#wo_lines").hide();
+    $("#wo_lines").after("<div id='wo_lines_display'></div>")
+    showWOLines();
+
 
     if($("#source_type").val()=='SR') {
         $("#reported_date").attr("type","text");
@@ -281,8 +339,8 @@ function initTransHeaderStatus() {
         $("#wo_status option[value='APPROVED']").remove();
         $("#wo_status option[value='CANCELED']").remove();
         $("#wo_status option[value='TRANSACTED']").remove();
-        $("#wo_status option[value='COMPLETED']").remove();
-        $("#SAVE_HEADER,#save_and_continue,#SAVE_FOOTER").hide();
+        //$("#wo_status option[value='COMPLETED']").remove();
+        //$("#SAVE_HEADER,#save_and_continue,#SAVE_FOOTER").hide();
       
         $("#wo_status option[value='WSCH']").remove();
         $("#wo_status option[value='WMATL']").remove();
@@ -337,10 +395,53 @@ function initTransHeaderStatus() {
     
 }
 
+    
+$("#wo_status").change(function(){
+		require_field();
+});
+
+
+    
+    
 function setEditViewReadonly () { //如果当前头状态为Submitted、Approved、Canceled、Closed需要将字段变为只读
     $("#tabcontent0 input").attr("readonly",true);
     $("#tabcontent0 button").attr("readonly",true);
     $("#tabcontent0 input").attr("style","background-Color:#efefef");
+    
+    $("#tabcontent0 button").css("display","none");
+	$("#tabcontent0 select").css("background-Color","#efefef");
+	$("#tabcontent0 .dateTime").hide();
+    
+    var wo_status = $("#wo_status").val();
+    if(wo_status=="COMPLETED"){
+		mark_field_enabled("date_actual_start",false);
+		mark_field_enabled("date_actual_finish",false);
+		$(".input-group-addon").hide();
+		$("#date_schedualed_start").unbind("focus");
+		$("#date_target_start").unbind("focus");
+		$("#date_start_not_earlier").unbind("focus");
+		$("#date_actual_start").unbind("focus");
+		
+		$("#date_schedualed_finish").unbind("focus");
+		$("#date_target_finish").unbind("focus");
+		$("#date_finish_not_later").unbind("focus");
+		$("#date_actual_finish").unbind("focus");
+		
+		$("#span_date_actual_start span.input-group-addon").show();
+		$("#span_date_actual_finish span.input-group-addon").show();
+	}else{
+		$("#date_schedualed_start").unbind("focus");
+		$("#date_target_start").unbind("focus");
+		$("#date_start_not_earlier").unbind("focus");
+		$("#date_actual_start").unbind("focus");
+		
+		$("#date_schedualed_finish").unbind("focus");
+		$("#date_target_finish").unbind("focus");
+		$("#date_finish_not_later").unbind("focus");
+		$("#date_actual_finish").unbind("focus");
+		$(".input-group-addon").hide();
+	}
+    
 }
 
 });

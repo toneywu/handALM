@@ -15,10 +15,13 @@ class HAM_WO extends HAM_WO_sugar {
 	}
 
 	function save($check_notify = false) {
-
+//		echo $_POST['isDuplicate'];
+//		foreach ( $_POST as $key => $value ) {
+//       			echo "****key = ".$key.",value=".$value."<br>";
+//			}
 		//在保存之前通过getNumbering生成WO编号
 		// 用于产生自动编号
-		if ($this->wo_number == '') {
+		if ($this->wo_number == ''||!empty($_POST['duplicateId'])) {
 			$bean_site = BeanFactory :: getBean('HAM_Maint_Sites', $this->ham_maint_sites_id);
 			$bean_numbering = BeanFactory :: getBean('HAA_Numbering_Rule', $bean_site->wo_haa_numbering_rule_id);
 
@@ -32,7 +35,6 @@ class HAM_WO extends HAM_WO_sugar {
 				for ($i = 0; $i < $bean_numbering->min_num_strlength; $i++) {
 					$padding_str = $padding_str +"0";
 				}
-
 				$padding_str = substr($padding_str, 0, strlen($padding_str) - strlen($current_numberstr)) + $current_numberstr;
 				$nextval_str = $bean_numbering->perfix . $padding_str;
 				$bean_numbering->current_number = $current_number;
@@ -40,17 +42,15 @@ class HAM_WO extends HAM_WO_sugar {
 				$bean_numbering->save();
 			}
 		}
-		
-		
-		
+
 		// 在资产事务处理保存时判断，如果事务处理的行状态达标，则更新资产状态
 		$focus_wo_status = $this->wo_status;
 		if ($focus_wo_status == 'SUBMITTED') {
 			$this->wo_status = 'APPROVED';
 			//TODO:以后再加入真正的工作流判断，临时只要提交都会通过
 		} else
-			if ($focus_wo_status == 'APPROVED') {
-			}
+		if ($focus_wo_status == 'APPROVED') {
+		}
 		$check_bean = BeanFactory :: getBean("HAM_WO");
 		$db_bean = $check_bean->get_full_list('', "ham_wo.id ='" . $this->id . "'");
 		//数据库里面的 活动 只要工单状态为拟定，并且活动字段发生了变化，都将工序删除，重新从活动从COPY 
@@ -73,11 +73,17 @@ class HAM_WO extends HAM_WO_sugar {
 
 		//工作单审批通过时（APPROVED）会将工单下第一道工序状态变为已批准（APPROVED）。其余工序状态变为等待前序（WPREV）。
 		//这里的第一道工序、以及后序工序不包括已经删除、取消或结束的工序
+		if (($this->wo_status == "SUBMITTED" || $this->wo_status == "APPROVED")&&$db_bean[0]->wo_status!="APPROVED") {
+			//工作单审批后会判断计划时间如果没有填写，如果没有进行手工排程，按目标时间进行默认
+			if ($this->date_schedualed_start == "") { $this->date_schedualed_start = $this->date_target_start; }
+			if ($this->date_schedualed_finish == "") { $this->date_schedualed_finish = $this->date_target_finish; }
+			if ($this->plan_fixed == "") { $this->plan_fixed = true; }
 
-		if ($this->wo_status == "SUBMITTED" || $this->wo_status == "APPROVED") {
-			//遍历工序  
+
+			//遍历工序
 
 			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('WOOP_NUMBER', "ham_woop.woop_status not in ('CLOSED','CANCELED') and ham_wo_id='" . $this->id . "'");
+
 			if (!empty ($ham_woops)) {
 
 				foreach ($ham_woops as $key => $value) {
@@ -93,7 +99,7 @@ class HAM_WO extends HAM_WO_sugar {
 
 			}
 		}
-		elseif ($this->wo_status == "CANCELED") {
+		elseif ($this->wo_status == "CANCELED"&&$db_bean[0]->wo_status!="CANCELED") {
 			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('WOOP_NUMBER', "ham_woop.woop_status not in ('COMPLETED','CLOSED') and ham_wo_id='" . $this->id . "'");
 			if (!empty ($ham_woops)) {
 
@@ -104,7 +110,7 @@ class HAM_WO extends HAM_WO_sugar {
 
 			}
 		}
-		elseif ($this->wo_status == "COMPLETED" || $this->wo_status == "CLOSED") {
+		elseif (($this->wo_status == "COMPLETED" || $this->wo_status == "CLOSED")&&($db_bean[0]->wo_status!="COMPLETED"&&$db_bean[0]->wo_status!="CLOSED")) {
 			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('WOOP_NUMBER', "ham_wo_id='" . $this->id . "'");
 			if (!empty ($ham_woops)) {
 
@@ -116,7 +122,7 @@ class HAM_WO extends HAM_WO_sugar {
 		}
 		
 		if (isset ($this->source_type) && $this->source_type != "") {
-			$this->source_type="";
+			//$this->source_type="";
 			//1 通过合同找合同条目 
 			//2将合同条目插入到工单对象行里面去
 			$contract_product_beans = BeanFactory :: getBean('AOS_Products_Quotes')->get_full_list('', "aos_products_quotes.parent_id = '{$this->contract_id}'");
@@ -129,7 +135,7 @@ class HAM_WO extends HAM_WO_sugar {
 				$ham_wo_line_bean->save();
 			}
 		}
-		
+
 		parent :: save($check_notify); //保存WO主体
 		//add by yuan.chen@2016-07-22
 		$bean_id = $this->activity;
@@ -158,7 +164,7 @@ class HAM_WO extends HAM_WO_sugar {
 					$ham_woop->woop_status = $ham_act_op->activity_status;
 					$ham_woop->ham_work_center_id = $ham_act_op->sr_work_center_rule_id;
 					$ham_woop->work_center_res_id = $ham_act_op->work_center_res_id;
-					$ham_woop->ham_wo_id = $this->id;
+					
 					$ham_woop->woop_number = $ham_act_op->activity_op_number;
 					//$ham_woop->description=$this->name;
 					if ($index == 1) {
@@ -168,29 +174,23 @@ class HAM_WO extends HAM_WO_sugar {
 						$ham_woop->date_schedualed_finish = $this->date_schedualed_finish;
 						$pre_date_target_finish = $this->date_target_finish;
 						$pre_date_schedualed_finish = $this->date_schedualed_finish;
-						//echo "woop_number=".$ham_woop->woop_number."<br>";
-						//echo "ham_woop->date_target_finish".$ham_woop->date_target_finish."<br>";
-						//echo "ham_woop->date_schedualed_finish".$ham_woop->date_schedualed_finish."<br>";
+						if(empty($ham_woop->ham_wo_id)&&($this->wo_status == "SUBMITTED" || $this->wo_status == "APPROVED")){
+							$ham_woop->woop_status = "APPROVED";
+						}
 					} else {
 						$ham_woop->date_target_start = $pre_date_target_finish;
 						$ham_woop->date_schedualed_start = $pre_date_schedualed_finish;
 						//计划开始时间+Duration后，计划出计划完成时间
 						$ham_woop->date_target_finish = $this->get_finish_date($pre_date_target_finish, $ham_act_op->standard_hour);
 						$ham_woop->date_schedualed_finish = $this->get_finish_date($pre_date_schedualed_finish, $ham_act_op->standard_hour);
-						//echo "woop_number=".$ham_woop->woop_number."<br>";
-						//echo "ham_woop->date_target_finish".$ham_woop->date_target_finish."<br>";
-						//echo "ham_woop->date_schedualed_finish".$ham_woop->date_schedualed_finish."<br>";
 
 						$pre_date_target_finish = $ham_woop->date_target_finish;
 						$pre_date_schedualed_finish = $ham_woop->date_schedualed_finish;
 					}
-
-					//echo "pre_date_target_finish=".$pre_date_target_finish."<br>";
-					//echo "pre_date_schedualed_finish=".$pre_date_schedualed_finish."<br>";
-					//echo "duration=".$ham_act_op->standard_hour."<br>";	
-
-					$ham_woop->autoOpen_next_task = $ham_act_op->autoopen_next_task;
+					$ham_woop->ham_wo_id = $this->id;
+					$ham_woop->autoopen_next_task = $ham_act_op->autoopen_next_task;
 					$ham_woop->act_module = $ham_act_op->act_module;
+					$ham_woop->hat_eventtype_id = $ham_act_op->hat_eventtype_id;
 					$ham_woop->save();
 					$index++;
 				}
@@ -284,7 +284,7 @@ class HAM_WO extends HAM_WO_sugar {
 		$WO_fields = $this->get_list_view_array();
 		//为工作单的状态着色
 		if (!empty ($this->wo_status))
-			$WO_fields['WO_STATUS'] = "<span class='color_tag color_doc_status_{$this->wo_status}'>" . $app_list_strings['ham_wo_status_list'][$this->wo_status] . "</span>";
+			$WO_fields['WO_STATUS_VAL'] = $this->wo_status;
 
 		return $WO_fields;
 	}
@@ -309,6 +309,43 @@ class HAM_WO extends HAM_WO_sugar {
 		}
 		parent :: save($check_notify); //保存WO主体
 
+	}
+
+	public function getWOOPQuery() {
+			//{$this->id}
+		$query = "SELECT 
+					ham_woop.id,
+					ham_woop.ham_work_center_id,
+					ham_woop.work_center_res_id,
+					ham_woop.work_center_people_id,
+					ham_woop.woop_number,
+					ham_woop.name,
+					ham_woop.date_schedualed_start,
+					ham_woop.date_schedualed_finish,
+					jt0.name work_center,
+					jt1.name work_center_res,
+					jt2.name work_center_people,
+					ham_woop.act_module,
+					ham_woop.woop_status,
+					ham_woop.assigned_user_id,
+					'woop' panel_name 
+					FROM
+					ham_woop 
+					LEFT JOIN ham_work_centers jt0 
+					ON ham_woop.ham_work_center_id = jt0.id 
+					AND jt0.deleted = 0 
+					LEFT JOIN ham_work_center_res jt1 
+					ON ham_woop.work_center_res_id = jt1.id 
+					AND jt1.deleted = 0 
+					LEFT JOIN ham_work_center_people jt2 
+					ON ham_woop.work_center_people_id = jt2.id 
+					AND jt2.deleted = 0 
+					INNER JOIN ham_wo woop_link_rel 
+					ON ham_woop.ham_wo_id = woop_link_rel.id 
+					AND woop_link_rel.deleted = 0 
+					WHERE ham_woop.deleted=0
+					AND ham_woop.ham_wo_id='".$this->id."'";
+		return $query;
 	}
 
 }

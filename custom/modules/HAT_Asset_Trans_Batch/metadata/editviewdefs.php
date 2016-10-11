@@ -31,11 +31,15 @@ array (
       ),
       'includes' => 
       array (
-        0 => 
+        0 =>
         array (
           'file' => 'modules/HAA_FF/ff_include.js',
         ),
-        1 => 
+        1 =>
+        array (
+        'file' => 'modules/HIT_IP_TRANS_BATCH/js/html_dom_required_setting.js',
+        ),
+        2 =>
         array (
           'file' => 'modules/HAT_Asset_Trans_Batch/js/HAT_Asset_Trans_Batch_editview.js',
         ),
@@ -98,6 +102,7 @@ array (
                 'name' => 'event_type',
                 'id' => 'hat_eventtype_id',
                 'event_short_desc' => 'name',
+                'haa_ff_id' => 'haa_ff_id',
               ),
               'call_back_function' => 'setEventTypePopupReturn',
             ),
@@ -160,19 +165,56 @@ array (
             'label' => 'LBL_PLANNED_COMPLETE_DATE',
           ),
         ),
+
         6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute1',
+            'label' => 'LBL_ATTRIBUTE1',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute2',
+            'label' => 'LBL_ATTRIBUTE2',
+          ),
+        ),
+        7 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute3',
+            'label' => 'LBL_ATTRIBUTE3',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute4',
+            'label' => 'LBL_ATTRIBUTE4',
+          ),
+        ),
+        8 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute5',
+            'label' => 'LBL_ATTRIBUTE5',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute6',
+            'label' => 'LBL_ATTRIBUTE6',
+          ),
+        ),
+        9 => 
         array (
           0 => 'description',
           1 => '',
         ),
-      ),
-      'lbl_editview_panel2' => 
-      array (
-        0 => 
+        10 => 
         array (
-          0 => 'lov_asset_status_list',
-          1 => '',
+          0 => 'wo_lines',
         ),
+
       ),
       'lbl_editview_panel1' => 
       array (

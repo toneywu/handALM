@@ -52,6 +52,10 @@ array (
             'name' => 'event_type',
             'studio' => 'visible',
             'label' => 'LBL_EVENT_TYPE',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&basic_type_advanced=WO',
+            ),
           ),
           1 => 
           array (

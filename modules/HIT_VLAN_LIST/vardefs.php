@@ -165,7 +165,7 @@ $dictionary['HIT_VLAN_LIST'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 100,
 			'size' => '20',
-			'options' => 'link_list',
+			'options' => 'cux_vlan_link_list',
 			'studio' => 'visible',
 			'dependency' => false,	
 		),
