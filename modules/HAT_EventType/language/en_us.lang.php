@@ -111,4 +111,6 @@ $mod_strings = array (
   'LBL_AOS_PDF_TEMPLATE'=>'PDF Template',
   'LBL_ASSET_SCOPE'=>'Asset Scope',
   'LBL_DEFAILT_ASSET_LIST'=>'Default Asset List',
+  'LBL_CHANGE_MAIN_ASSET'=>'Change Main Asset',
+  'LBL_CHANGE_BACKUP_ASSET'=>'Change Backup Asset',
 );

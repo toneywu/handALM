@@ -16,6 +16,10 @@ array (
         array (
           'file' => 'modules/HAT_Assets/js/detailview_treeview.js',
         ),*/
+        1 => 
+        array (
+          'file' => 'modules/HAA_FF/ff_include.js',
+        ),
         2 => 
         array (
           'file' => 'modules/HAT_Assets/js/detailview_HAT_Assets.js',

@@ -51,6 +51,25 @@ class HAT_AssetsViewDetail extends ViewDetail
 			$this->bean->asset_status = "<span class='color_tag color_asset_status_".$this->bean->asset_status."'>".$app_list_strings['hat_asset_status_list'][$this->bean->asset_status]."</span>";
 */
         parent::Display();
+        
+        //ff 在DetailView显示之前中进行初始化数据的加载 
+		if (isset ($this->bean->aos_products_id) && ($this->bean->aos_products_id) != "") {
+			$aos_products_id = $this->bean->aos_products_id;
+			$bean_product = BeanFactory::getBean('AOS_Products',$aos_products_id);
+
+			$ff_id = $bean_product->haa_ff_id_c;
+
+			if (isset ($ff_id) && $ff_id != "") {
+				echo '<script src="modules/HAA_FF/ff_include.js"></script>';
+				echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="' . $ff_id . '">';
+				echo '<script> function call_ff() {
+								    triger_setFF($("#haa_ff_id").val(),"HAT_Assets","DetailView");
+								    $(".expandLink").click();
+								 
+								}</script>';
+				echo '<script>call_ff()</script>';
+			}
+		}
 
 	}
 

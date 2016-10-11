@@ -108,4 +108,6 @@ $mod_strings = array (
   'LBL_AOS_PDF_TEMPLATE'=>'PDF单据模板格式',
   'LBL_ASSET_SCOPE'=>'资产范围',
   'LBL_DEFAILT_ASSET_LIST'=>'默认的资产列表',
+  'LBL_CHANGE_MAIN_ASSET'=>'可修改主设备',
+  'LBL_CHANGE_BACKUP_ASSET'=>'可修改备设备',
 );

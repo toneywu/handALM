@@ -1,3 +1,4 @@
+$.getScript("modules/HAA_FF/ff_include.js");
 function trimStr(str){return str.replace(/(^\s*)|(\s*$)/g,"");}
 
 function setProductPopupReturn(popupReplyData){//选择完产品后的动作
@@ -13,7 +14,7 @@ function setProductPopupReturn(popupReplyData){//选择完产品后的动作
 	resetAssetName();//自动生成资产铭牌号
 
 	//开始建立flexFields
-	triger_setFF($("#haa_ff_id_c").val(),"HAT_Assets")
+	triger_setFF($("#haa_ff_id").val(),"HAT_Assets")
 	$(".expandLink").click();
 	$('#target_iconpicker').iconpicker('setIcon', $("#asset_icon"));
 	//图标显示
@@ -83,6 +84,17 @@ $(document).ready(function(){
 	SUGAR.util.doWhen("typeof icon_edit_init == 'function'", function(){
 		icon_edit_init($("#asset_icon"));
 	});
+	
+	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
+		$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');
+	};
+
+    //触发FF
+    SUGAR.util.doWhen("typeof setFF == 'function'", function(){
+        triger_setFF($("#haa_ff_id").val(),"HAT_Assets")
+		$(".expandLink").click();
+     });
+
 
 	$("#asset_desc").css("background-color","#efefef");
 	$("#linear_length").css("background-color","#efefef");
