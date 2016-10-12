@@ -169,6 +169,8 @@ function changeRequired(lineRecord){
 	loopField("line_access_assets_name",lineRecord.change_access_assets_name);
 	loopField("line_main_asset",lineRecord.change_main_asset);
 	loopField("line_backup_asset",lineRecord.change_backup_asset);
+	loopField("line_parent_ip",lineRecord.change_ip_subnets);
+	loopField("line_associated_ip",lineRecord.change_associated_ip);
 }
 
 //delted by toney.wu 20161007
