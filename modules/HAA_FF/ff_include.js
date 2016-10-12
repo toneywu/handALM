@@ -117,7 +117,7 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 	        mark_obj_lable.css({"display":""});
 	        mark_obj.css({"color":"#efefef","background-Color":"#efefef;"});
 	        mark_obj.attr("readonly",true);
-	        mark_obj_lable.css({"color":"#aaaaaa","text-decoration":"line-through"});
+	        mark_obj_lable.css({"color":"#aaaaaa"});
 	    }
 	    if (typeof validate != "undefined" && typeof validate['EditView'] != "undefined") {
 	      removeFromValidate('EditView',field_name); //去除必须验证

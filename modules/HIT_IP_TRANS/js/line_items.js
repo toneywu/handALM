@@ -813,7 +813,7 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			+"<span class='input_group'><label id='line_main_asset"
 			+ prodln
 			+ "_label'>"
-			+ SUGAR.language.get('app_strings', 'LBL_MAIN_ASSET')
+			+ SUGAR.language.get('HIT_IP_TRANS', 'LBL_MAIN_ASSET')
 			+ "</label>"
 			+ "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_main_asset["
 			+ prodln
@@ -846,7 +846,7 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			"<span class='input_group'><label id='line_backup_asset"
 			+ prodln
 			+ "_label'>"
-			+ SUGAR.language.get('app_strings', 'LBL_BACKUP_ASSET')
+			+ SUGAR.language.get('HIT_IP_TRANS', 'LBL_BACKUP_ASSET')
 			+ "</label>"
 			+ "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_backup_asset["
 			+ prodln

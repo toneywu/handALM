@@ -186,6 +186,8 @@ function insertTransLineElements(tableid) { //创建界面要素
       //"<td><input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'></td>";
 
   
+      
+      
   var x = tablebody.insertRow(-1); //以下生成的是Line Editor
   x.id = 'asset_trans_editor' + prodln;
   x.style = "display:none";
