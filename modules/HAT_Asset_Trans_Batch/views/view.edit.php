@@ -46,14 +46,17 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
                 echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="'.$ff_id.'">';
             }
         }
-        
-        
+
         //如果有工序来源，则初始化工序信息
         if (empty($this->bean->id) && !empty($_REQUEST['woop_id'])) {
             //如果当前对象还没有设置工序信息，并且参数中的工序有值，则根据参数中的WOOP对象填写当前处理单上的相关字段
                $sql_current_string ="SELECT
 										  ham_wo.`id` wo_id,
 										  ham_wo.`name` wo_name,
+										  ham_wo.`account_id` source_wo_account_id,
+										  accounts2.`name` source_wo_account,
+										  ham_wo.`contact_id` source_wo_contact,
+										  contacts2.`last_name` source_wo_contact_id,
 										  ham_woop.`id` woop_id,
 										  ham_woop.`name` woop_name,
 										  ham_wo.`wo_number` wo_number,
@@ -68,7 +71,11 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
 										  accounts.`id` org_id,
 										  accounts.`name` org_name
 										FROM
-										  ham_wo,
+										  ham_wo
+										  LEFT JOIN (
+											accounts accounts2) ON (accounts2.id = ham_wo.`account_id`)
+										  LEFT JOIN (
+											contacts contacts2) ON (contacts2.id = ham_wo.`contact_id`),
 										  ham_woop
 										  LEFT JOIN (
 										      ham_work_center_people,
@@ -91,7 +98,7 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
 										  AND ham_woop.`deleted` = 0
                                       and ham_woop.id = '".$_REQUEST['woop_id']."'";
 
-                //echo($sel_current_asset);
+                //echo($sql_current_string);
                 $result_woop =  $db->query($sql_current_string);
 
                 while ( $bean_woop = $db->fetchByAssoc($result_woop) ) {
@@ -108,6 +115,12 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
                     $this->bean->name = $bean_woop['wo_number'].':'.$bean_woop['woop_name'];
                     $this->bean->current_owning_org_id = $bean_woop['org_id'];
                     $this->bean->current_owning_org = $bean_woop['org_name'];
+                    //工单上的客户与联系人
+                    //在选择EventType后，如果当前EventType需要变化组织就会默认工作单的内容
+                    $this->bean->source_wo_account = $bean_woop['source_wo_account'];
+                    $this->bean->source_wo_account_id = $bean_woop['source_wo_account_id'];
+                    $this->bean->source_wo_contact = $bean_woop['source_wo_contact'];
+                    $this->bean->source_wo_contact_id = $bean_woop['source_wo_contact_id'];
 
                     if(empty($this->bean->date_schedualed_finish)){
                         if(empty($this->bean->date_target_finish)){
