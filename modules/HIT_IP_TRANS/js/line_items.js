@@ -1195,7 +1195,7 @@ function LineEditorClose(ln) {// 关闭行编辑器（显示为正常行）
 }
 
 function dulicateTranLine(ln) {// 关闭行编辑器（显示为正常行）
-	if (check_form('EditView')) {
+	//if (check_form('EditView')) {
 		var keyValue = "";
 		// 获取上一行 排除已经删除的得到prodin的真实数值
 		var lastProdln = 1;
@@ -1206,16 +1206,56 @@ function dulicateTranLine(ln) {// 关闭行编辑器（显示为正常行）
 		}
 		// 加入新行
 		insertTransLineElements("lineItems");
-
-		for (var key in lineDataTemp) {
-			var domvalue = $("#line_" + key + lastProdln).val();
-			$("#line_" + key + (prodln - 1)).val(domvalue);
-			$("#displayed_line_" + key + (prodln - 1)).html(domvalue);
-		}
+		if(typeof lineDataTemp  =="undefined"){
+			var lineDataTemp={
+				id:"",
+				hat_asset_name:"",
+				hat_assets_id:"",
+				hit_ip_subnets:"",
+				hit_ip_subnets_id:"",
+				parent_ip:"",
+				associated_ip:"",
+				mask:"",
+				bandwidth_type:"",
+				port:"",
+				speed_limit:"",
+				gateway:"",
+				monitoring:"",
+				hat_assets_cabinet_id:"",
+				hat_assets_cabinet:"",
+				channel_content:"",
+				channel_num:"",
+				ip_netmask:"",
+				associated_ip:"",
+				mrtg_link:"",
+				access_assets_id:"",
+				access_assets_name:"",
+				source_ref:"",
+				date_entered:"",
+				main_asset_id:"",
+				main_asset:"",
+				backup_asset_id:"",
+				backup_asset:"",
+				
+				
+			};
+			
+		}	
+		//if(typeof lineDataTemp  =="undefined"){
+		//	console.log($("displayed_line_parent_ip0").text());
+		//	$("#displayed_line_parent_ip"+1).val($("#displayed_line_parent_ip"+lastProdln).val());
+		//}else{
+			for (var key in lineDataTemp) {
+				var domvalue = $("#line_" + key + lastProdln).val();
+				$("#line_" + key + (prodln - 1)).val(domvalue);
+				$("#displayed_line_" + key + (prodln - 1)).html(domvalue);
+			}
+		//}
 		// 清除id
 		$("#line_id" + (prodln - 1)).val(null);
 
 		// 设置行号
 		resetLineNum_Bold();
-	}
+		changeRequired(lineData);
+	//}
 }

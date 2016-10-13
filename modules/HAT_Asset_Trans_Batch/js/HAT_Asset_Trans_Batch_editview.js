@@ -92,7 +92,7 @@ function resetEventType() {
 
 	if (global_eventOptions.change_using_org == "REQUIRED"){
 		mark_field_enabled('target_using_org',false);
-	} else if (global_eventOptions.change_owning_org == "OPTIONAL"){
+	} else if (global_eventOptions.change_using_org == "OPTIONAL"){
 		mark_field_enabled('target_using_org',true);
 	} else {
 		mark_field_disabled('target_using_org',false);

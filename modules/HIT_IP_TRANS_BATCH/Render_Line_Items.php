@@ -228,7 +228,7 @@ function display_lines($focus, $field, $value, $view) {
 
 		}
 
-	if ($focus->id != '') {
+	if ($focus->hat_eventtype_id != '') {
 
 		$event_sql = "SELECT 
 												  h.change_ip_subnets,
@@ -248,9 +248,7 @@ function display_lines($focus, $field, $value, $view) {
 											AND   h.id ='" . $focus->hat_eventtype_id . "'";
 		$event_result = $focus->db->query($event_sql);
 		while ($event_row = $focus->db->fetchByAssoc($event_result)) {
-			//echo var_dump($row);;
 			$event_line_data = json_encode($event_row);
-			//echo $event_line_data;
 			$html .= "<script> var lineData=" . $event_line_data . ";</script>";
 			$html .= "<script>changeRequired(" . $event_line_data . ");</script>";
 

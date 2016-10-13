@@ -611,6 +611,11 @@ function LineEditorShow(ln){ //显示行编辑器（先自动关闭所有的行�
   }
   $("#asset_trans_line1_displayed"+ln).hide();
   $("#asset_trans_editor"+ln).show();
+  if($("#target_using_org_id").val()!=null){
+	  console.log($("#target_using_org_id").val());
+	  $("#line_target_using_org_id"+ln).val($("#target_using_org_id").val());
+	  $("#line_target_using_org"+ln).val($("#target_using_org").val());
+  }
 
 }
 
