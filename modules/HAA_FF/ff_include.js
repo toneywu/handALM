@@ -8,12 +8,12 @@
 
 function triger_setFF(id_value, module_name) {
   //console.log("index.php?to_pdf=true&module=HAA_FF&action=setFF&ff_module="+module_name+"&ff_id="+id_value);
-  hideAllAttributes()//将所有的Attribute先变空，如果Attribute在FF中有设置，在后续的SetFF过程中会自动显示出来，否则这些扩展字段默认都不显示
   if (id_value!="") {
    $.ajax({
         url: "index.php?to_pdf=true&module=HAA_FF&action=setFF&ff_module="+module_name+"&ff_id="+id_value,
         success: function (result) {
              var ff_fields = jQuery.parseJSON(result);
+			 hideAllAttributes(ff_fields)//将所有的Attribute先变空，如果Attribute在FF中有设置，在后续的SetFF过程中会自动显示出来，否则这些扩展字段默认都不显示
              $.each(ff_fields.FF, function () { //针对读取到的FF模板，针对每个设置的条目进行处理
                 setFF(this)
             })
@@ -43,7 +43,7 @@ function setFF(FFObj) {
 	} else {
 	//如果是非隐藏字段
 		//修改标签名称
-		if (FFObj.label!=null&&FFObj.label!="") {
+		if (FFObj.label!=null && FFObj.label!="") {
 			if (view=="EditView") {
 				$("#"+FFObj.field+'_label').html(FFObj.label+":"); 
 			} else if(view =="DetailView") {
@@ -76,17 +76,27 @@ function setFF(FFObj) {
 	}
 }
 
-function hideAllAttributes() {
+function hideAllAttributes(ff_fields) {
 	//在FF设置之前进行调用，用于将所有的Attribute对象进行隐藏，也就是所有的Attribute默认都是不显示的，除非在FF中进行了设置
 	//之后通过SetFF确定是否需要将已经隐藏的Attribute进行显示出来。
 	var i=1;
 	while ($("#attribute"+i).length != 0 || $("#attribute"+i+"_c").length != 0) {
 		//检查界面模块是否有Attribute存在，如果有就继续下一个，循环直到不再有新的Attribute存在
-		//以下判断是将attributeX失效，还是将attributeX_c失效
-		if ($("#attribute"+i).length != 0) {
-			mark_field_disabled("attribute"+i,true,false);
-		} else {
-			mark_field_disabled("attribute"+i+"_c",true,false);
+
+		var ff_defined=false;
+        $.each(ff_fields.FF, function () { //针对读取到的FF模板，针对每个设置的条目进行处理
+            if (this.field == "attribute"+i || this.field == "attribute"+i+"_c") {
+            	//如果在当前FF中有针对当前Attribute字段的定义，则不对当前字段进行处理，直接以FF的定义进行处理
+            	ff_defined=true;
+            }
+        })
+        if (ff_defined==false) {
+			//以下判断是将attributeX失效，还是将attributeX_c失效
+			if ($("#attribute"+i).length != 0) {
+				mark_field_disabled("attribute"+i,true,false);
+			} else {
+				mark_field_disabled("attribute"+i+"_c",true,false);
+			}
 		}
 		i++;//查找下一个attribute
 	}
@@ -94,9 +104,8 @@ function hideAllAttributes() {
 
 function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 	  var view = action_sugar_grp1;
-
 	  if(view == 'EditView') {
-		mark_obj = $("#"+field_name);
+		mark_obj = ($("#"+field_name).length>0)?$("#"+field_name):$("[name='"+field_name+"'");
 		mark_obj_lable = $("#"+field_name+"_label");
 		mark_obj_tr = $("#"+field_name).closest("tr");
 
@@ -104,6 +113,8 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 	    	if (keep_position==false) {
 	        	mark_obj.closest('td').css({"display":"none"});
 	        	mark_obj_lable.css({"display":"none"});
+	        	mark_obj_tr.append("<td></td><td></td>");
+
 				//mark_obj_lable.css({"visibility":"hidden"});
 				//toney.wu 20161007修改为通过display控制，否则界面上会大面积留下 
 	      	}else{
@@ -145,10 +156,12 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 		     //需要进行隐藏
 	          if (keep_position==false) {
 	          	//缩进隐藏
-	            mark_obj_td.hide(); //当前字段所在的TD隐藏
-	            mark_obj_lable_td.hide();//当前字段之前的TD隐藏（标签TD)
-				mark_obj_tr.append("<td></td><td></td>");
+	          	if (mark_obj_td.css("display")!="none") {
+		            mark_obj_td.hide(); //当前字段所在的TD隐藏
+		            mark_obj_lable_td.hide();//当前字段之前的TD隐藏（标签TD)
+					mark_obj_tr.append("<td></td><td></td>");
 				//之前HIDE了两个单元格，在此补上，以防显示错位
+				}
 	          }else{
 	          	//不缩进隐藏,直接接两个TD中的内容清空，不进行处理
 

@@ -510,10 +510,23 @@ function resetAsset(ln){ //在用户重新选择资产之后，会连带的更�
     $("#line_current_parent_asset"+ln).val("");
     $("#line_current_parent_asset_id"+ln).val("");
   }
+
+  if ($("#target_owning_org_id").val()!="" && (global_eventOptions.change_owning_org == "REQUIRED" ||global_eventOptions.change_owning_org == "OPTIONAL")){
+    $("#line_target_owning_org"+ln).val($("#target_owning_org").val());
+    $("#line_target_owning_org_id"+ln).val($("#target_owning_org_id").val());
+  } else {
     $("#line_target_owning_org"+ln).val($("#line_current_owning_org"+ln).val());
-    $("#line_target_using_org"+ln).val($("#line_current_using_org"+ln).val());
     $("#line_target_owning_org_id"+ln).val($("#line_current_owning_org_id"+ln).val());
+  }
+
+  if ($("#target_using_org_id").val()!="" && (global_eventOptions.change_using_org == "REQUIRED" ||global_eventOptions.change_using_org == "OPTIONAL")){
+    $("#line_target_using_org"+ln).val($("#target_using_org").val());
+    $("#line_target_using_org_id"+ln).val($("#target_using_org_id").val());
+  } else {
+    $("#line_target_using_org"+ln).val($("#line_current_using_org"+ln).val());
     $("#line_target_using_org_id"+ln).val($("#line_current_using_org_id"+ln).val());
+  }
+
     $("#line_target_owning_person"+ln).val($("#line_current_owning_person"+ln).val());
     $("#line_target_using_person"+ln).val($("#line_current_using_person"+ln).val());
     $("#line_target_owning_person_id"+ln).val($("#line_current_owning_person_id"+ln).val());
