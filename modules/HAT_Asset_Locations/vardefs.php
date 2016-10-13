@@ -56,7 +56,7 @@ $dictionary['HAT_Asset_Locations'] = array(
 			array (
 				'boost' => 3,
 				),
-			'required' => true,
+			'required' => false,
 			'importable' => 'required',
 			'duplicate_merge' => 'enabled',
 			'merge_filter' => 'disabled',
@@ -72,7 +72,7 @@ $dictionary['HAT_Asset_Locations'] = array(
 			),
 		'location_title' =>
 		array (
-			'required' => true,
+			'required' => false,
 			'name' => 'location_title',
 			'vname' => 'LBL_LOCATION_TITLE',
 			'type' => 'varchar',
