@@ -98,7 +98,6 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
 										  AND ham_woop.`deleted` = 0
                                       and ham_woop.id = '".$_REQUEST['woop_id']."'";
 
-                //echo($sql_current_string);
                 $result_woop =  $db->query($sql_current_string);
 
                 while ( $bean_woop = $db->fetchByAssoc($result_woop) ) {

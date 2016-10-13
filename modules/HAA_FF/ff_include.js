@@ -30,7 +30,7 @@ function triger_setFF(id_value, module_name) {
 function setFF(FFObj) {
 	//设置FlexFORM，基于triger_setFF函数读取到的Ajax结果，动态的调整界面字段
 	//其中FFObj是FF_Fields中定义的需要变化的各个字段及属性
-	console.log(FFObj);
+	//console.log(FFObj);
 
 	var view = action_sugar_grp1;
 	//有些界面在EditView和DetailView中处理有所不同，因此先读取出当前界面是哪些，保存在View中
@@ -90,8 +90,6 @@ function hideAllAttributes(ff_fields) {
             	ff_defined=true;
             }
         })
-        console.log(ff_defined);
-
         if (ff_defined==false) {
 			//以下判断是将attributeX失效，还是将attributeX_c失效
 			if ($("#attribute"+i).length != 0) {
@@ -158,10 +156,12 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 		     //需要进行隐藏
 	          if (keep_position==false) {
 	          	//缩进隐藏
-	            mark_obj_td.hide(); //当前字段所在的TD隐藏
-	            mark_obj_lable_td.hide();//当前字段之前的TD隐藏（标签TD)
-				mark_obj_tr.append("<td></td><td></td>");
+	          	if (mark_obj_td.css("display")!="none") {
+		            mark_obj_td.hide(); //当前字段所在的TD隐藏
+		            mark_obj_lable_td.hide();//当前字段之前的TD隐藏（标签TD)
+					mark_obj_tr.append("<td></td><td></td>");
 				//之前HIDE了两个单元格，在此补上，以防显示错位
+				}
 	          }else{
 	          	//不缩进隐藏,直接接两个TD中的内容清空，不进行处理
 

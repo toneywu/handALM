@@ -95,7 +95,7 @@ function resetEventType() {
 	}
 
 	//依据事件类型，确认是否需要变化使用组织
-	console.log(global_eventOptions.change_using_org);
+	//console.log(global_eventOptions.change_using_org);
 	if (global_eventOptions.change_using_org == "REQUIRED"){
 		mark_field_enabled('target_using_org',false);
 	} else if (global_eventOptions.change_using_org == "OPTIONAL"){
@@ -104,7 +104,7 @@ function resetEventType() {
 		mark_field_disabled('target_using_org',false);
 	}
 	//如果需要变化（包括必须变化和可以变化2种场景，就从工作单上进行默认）
-	console.log("source_wo_account:"+$("#source_wo_account").val());
+	//console.log("source_wo_account:"+$("#source_wo_account").val());
 	if ($("#source_wo_account").val()!="" && (global_eventOptions.change_using_org == "REQUIRED"||global_eventOptions.change_using_org == "OPTIONAL")){
 		$("#target_using_org").val($("#source_wo_account").val())
 		$("#target_using_org_id").val($("#source_wo_account_id").val())
@@ -231,7 +231,6 @@ $(document).ready(function(){
 	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
 		$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');
 	}
-	//触发FF
 	SUGAR.util.doWhen("typeof setFF == 'function'", function(){
 		call_ff();
 	});
