@@ -122,6 +122,7 @@ array (
             ),
           ),
         ),
+/*deleted by toney.wu 不确定以下代码有什么用处，先删除20161013
         1 => 
         array (
           0 => 
@@ -132,7 +133,7 @@ array (
           array (
             'name' => 'hfa_fixed_assets_hat_assets_1_name',
           ),
-        ),
+        ),*/
       ),
       'lbl_editview_panel4' => 
       array (
