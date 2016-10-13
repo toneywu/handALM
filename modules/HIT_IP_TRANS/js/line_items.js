@@ -372,7 +372,9 @@ function insertLineData(asset_trans_line) { // 将数据写入到对应的行字
 		$("#line_access_assets_id".concat(String(ln)))
 				.val(asset_trans_line.access_assets_id);
 		$("#line_main_asset".concat(String(ln))).val(asset_trans_line.main_asset);
+		$("#line_main_asset_id".concat(String(ln))).val(asset_trans_line.main_asset_id);
     	$("#line_backup_asset".concat(String(ln))).val(asset_trans_line.backup_asset);
+		$("#line_backup_asset_id".concat(String(ln))).val(asset_trans_line.backup_asset_id);
 		renderTransLine(ln);
 	}
 }
