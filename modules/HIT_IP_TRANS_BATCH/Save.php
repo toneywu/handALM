@@ -155,10 +155,19 @@ function save_allocation_lines($trans_line_bean, $parent,$prev_trans_batch_id) {
 	$allocation_line_bean->line_parent_ip = $trans_line->line_parent_ip;
 	$allocation_line_bean->access_asset_name = $trans_line->access_asset_name;
 	$allocation_line_bean->access_assets_id = $trans_line->access_assets_id;
-	$allocation_line_bean->main_asset = $trans_line->main_asset;
-	$allocation_line_bean->main_asset_id = $trans_line->main_asset_id;
-	$allocation_line_bean->backup_asset = $trans_line->backup_asset;
-	$allocation_line_bean->backup_asset_id = $trans_line->backup_asset_id;
+//	$allocation_line_bean->main_asset = $trans_line->main_asset;
+//	$allocation_line_bean->main_asset_id = $trans_line->main_asset_id;
+//	$allocation_line_bean->backup_asset = $trans_line->backup_asset;
+//	$allocation_line_bean->backup_asset_id = $trans_line->backup_asset_id;
+	$allocation_line_bean->status=$trans_line->status;
+	$allocation_line_bean->port_backup=$trans_line->port_backup;
+	$allocation_line_bean->monitoring_backup=$trans_line->monitoring_backup;
+	$allocation_line_bean->channel_content_backup=$trans_line->channel_content_backup;
+	$allocation_line_bean->channel_num_backup=$trans_line->channel_num_backup;
+	$allocation_line_bean->date_start=$trans_line->date_start;
+	$allocation_line_bean->date_end=$trans_line->date_end;
+	$allocation_line_bean->access_assets_backup_id=$trans_line->access_assets_backup_id;
+	
 	if ($allocation_line_bean->source_trans_id == null) {
 
 

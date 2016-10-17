@@ -89,4 +89,12 @@ $mod_strings = array (
   'LBL_ACCESS_ASSETS_NAME'=>'Access Assets Name',
   'LBL_MAIN_ASSET'=>'Main',
   'LBL_BACKUP_ASSET'=>'Backup',
+  'LBL_DATE_END'=>'Ending Date',
+  'LBL_DATE_START'=>'Start Date',
+  'LBL_ACCESS_ASSETS_BACKUP_NAME'=>'Access Asset(Backup)',
+  'LBL_CHANNEL_NUM_BACKUP'=>'Channel Number(Backup)',
+  'LBL_CHANNEL_CONTENT_BACKUP'=>'Channel Content(Backup)',
+  'LBL_MONITORING_BACKUP'=>'Monitoring(Backup)',
+  'LBL_PORT_BACKUP'=>'Port(Backup)',
+  'LBL_STATUS'=>'Status',
 );

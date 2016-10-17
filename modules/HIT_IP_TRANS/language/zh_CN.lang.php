@@ -90,4 +90,12 @@ $mod_strings = array (
   'LBL_ACCESS_ASSETS_NAME'=>'接入设备',
   'LBL_MAIN_ASSET'=>'主',
   'LBL_BACKUP_ASSET'=>'从',
+  'LBL_DATE_END'=>'占用终止时间',
+  'LBL_DATE_START'=>'占用起始时间',
+  'LBL_ACCESS_ASSETS_BACKUP_NAME'=>'接入设备(备)',
+  'LBL_CHANNEL_NUM_BACKUP'=>'频道号(备)',
+  'LBL_CHANNEL_CONTENT_BACKUP'=>'频道内容(备)',
+  'LBL_MONITORING_BACKUP'=>'监控链接(备)',
+  'LBL_PORT_BACKUP'=>'端口(备)',
+  'LBL_STATUS'=>'状态',
 );
