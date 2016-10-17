@@ -1495,6 +1495,7 @@ function resetLineNum_Bold() {// 数行号
 }
 
 function LineEditorClose(ln) {// 关闭行编辑器（显示为正常行）
+	$("#Trans_line_head").show();
 	if (check_form('EditView')) {
 		$("#asset_trans_editor" + ln).hide();
 		$("#asset_trans_line1_displayed" + ln).show();
@@ -1503,6 +1504,7 @@ function LineEditorClose(ln) {// 关闭行编辑器（显示为正常行）
 		resetLineNum_Bold();
 	}{
 		console.log("return false");
+		
 		return;
 	}
 	$("#Trans_line_head").show();

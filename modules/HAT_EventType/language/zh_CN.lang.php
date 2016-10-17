@@ -110,4 +110,12 @@ $mod_strings = array (
   'LBL_DEFAILT_ASSET_LIST'=>'默认的资产列表',
   'LBL_CHANGE_MAIN_ASSET'=>'可修改主设备',
   'LBL_CHANGE_BACKUP_ASSET'=>'可修改备设备',
+   'LBL_CHANGE_STATUS'=>'可修改状态',
+  'LBL_CHANGE_PORT_BACKUP'=>'可修改端口(备)',
+  'LBL_CHANGE_MONITORING_BACKUP'=>'可修改监控链接(备)',
+  'LBL_CHANGE_CHANNEL_CONTENT_BACKUP'=>'可修改频道内容(备)',
+  'LBL_CHANGE_CHANNEL_NUM_BACKUP'=>'可修改频道号(备)',
+  'LBL_CHANGE_ACCESS_ASSETS_BACKUP_NAME'=>'可修改接入资产(备)',
+  'LBL_CHANGE_DATE_START'=>'可修改占用起始时间',
+  'LBL_CHANGE_DATE_END'=>'可修改占用终止时间',
 );

@@ -113,4 +113,13 @@ $mod_strings = array (
   'LBL_DEFAILT_ASSET_LIST'=>'Default Asset List',
   'LBL_CHANGE_MAIN_ASSET'=>'Change Main Asset',
   'LBL_CHANGE_BACKUP_ASSET'=>'Change Backup Asset',
+  'LBL_CHANGE_STATUS'=>'Change Status',
+  'LBL_CHANGE_PORT_BACKUP'=>'Change Port(Backup)',
+  'LBL_CHANGE_MONITORING_BACKUP'=>'Change Monitoring(Backup)',
+  'LBL_CHANGE_CHANNEL_CONTENT_BACKUP'=>'Change Channel Content(Backup)',
+  'LBL_CHANGE_CHANNEL_NUM_BACKUP'=>'Change Channel Num(Backup)',
+  'LBL_CHANGE_ACCESS_ASSETS_BACKUP_NAME'=>'Change Asset Access (Backup)',
+  'LBL_CHANGE_DATE_START'=>'Change Date Start',
+  'LBL_CHANGE_DATE_END'=>'Change Date End',
+  
 );

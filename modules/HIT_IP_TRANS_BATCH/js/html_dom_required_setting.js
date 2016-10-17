@@ -182,6 +182,13 @@ function changeRequired(lineRecord){
 	loopField("line_access_assets_name",lineRecord.change_access_assets_name);
 	loopField("line_parent_ip",lineRecord.change_parent);
 	loopField("line_associated_ip",lineRecord.change_associated_ip);
+	loopField("line_date_end",lineRecord.change_date_end);
+	loopField("line_date_start",lineRecord.change_date_start);
+	loopField("line_port_backup",lineRecord.change_port_backup);
+	loopField("line_monitoring_backup",lineRecord.change_monitoring_backup);
+	loopField("line_channel_content_backup",lineRecord.change_channel_content_backup);
+	loopField("line_channel_num_backup",lineRecord.change_channel_num_backup);
+	loopField("line_status",lineRecord.change_status);
 }
 
 //delted by toney.wu 20161007
