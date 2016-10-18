@@ -1,0 +1,104 @@
+<?php
+
+class HAT_AssetsViewList extends ViewList {
+    function listViewProcess(){
+		
+		global $current_user;
+		
+        $this->processSearchForm();
+        $this->lv->searchColumns = $this->searchForm->searchColumns;
+
+        if(!$this->headers)
+            return;
+        if(empty($_REQUEST['search_form_only']) || $_REQUEST['search_form_only'] == false){
+            $this->lv->ss->assign("SEARCH",true);
+			
+			/********************CUX WHERE START*****************
+			*************************************************/
+			
+			/*
+			$user_access_profile = $current_user->asset_access_profile_c;
+			//$GLOBALS['log']->error('User debug: hat_assets\viwqs\view.list.php - $current_user->asset_access_profile_c='.$current_user->asset_access_profile_c);
+			if ($user_access_profile!=99) {
+				//全局用户，无限制查询条件
+			} else {
+				//初始化，准备添加查询限制条件
+				if(!empty($this->where)){
+					$this->where .= " AND ";
+				}
+				//获取到当前用户的联系人(联系人：用户=多：1，因此可能有多个联系人，此时只保留一个)
+				$current_user->load_relationship('users_contacts_1');
+				$focusd_contacts = $current_user->users_contacts_1->getBeans();
+				foreach($focusd_contacts as $focusd_contact){	
+					$focusd_contact_id = $focusd_contact->id;
+				}
+
+				//获取到当前用户的部门
+				$focusd_contact->load_relationship('accounts_contacts');
+				$focusd_orgs = $focusd_contact->accounts_contacts->getBeans();
+				/*foreach($focusd_orgs as $focusd_org){	
+					$focusd_org_id = $focusd_org->id;
+				}*/
+
+			/*
+				$this->where .= "(hat_assets_contactscontacts_ida='".$focusd_contact_id."') ";
+				
+				
+				$this->where .= "and (hat_assets_contactscontacts_ida='".$focusd_contact_id."') ";
+
+			*/
+				
+			}
+
+			//1：$current_user = BeanFactory::getBean('Users',$users.id);
+			//2：$focusd_user = new User();
+			//   $focusd_user->retrieve($current_user->id);
+
+			
+			//$GLOBALS['log']->error('User debug: hat_assets\viwqs\view.list.php - $focusd_contact_id='.$focusd_contact_id);
+			//$GLOBALS['log']->error('User debug: hat_assets\viwqs\view.list.php - $users.id='.$current_user->id);
+			//GLOBALS['log']->error('User debug: hat_assets\viwqs\view.list.php - $this->where='.$this->where);
+			//$focusd_contacts = $focusd_user->get_linked_beans('contacts','Contact');
+			
+			
+			/*此处为三层权限管理的限制
+			SELECT 
+				users.user_name,
+				users.last_name,
+				hpr_am_roles.name role_name,
+				aos_product_categories.name
+			FROM
+				contacts,
+				users,
+				users_contacts_1_c,
+				hpr_am_roles,
+				hpr_am_roles_contacts_c,
+				hpr_am_catelog,
+				aos_product_categories
+			WHERE
+				users_contacts_1_c.users_contacts_1contacts_idb = contacts.id
+					AND users_contacts_1_c.users_contacts_1users_ida = users.id
+					AND hpr_am_roles_contacts_c.hpr_am_roles_contactshpr_am_roles_ida = hpr_am_roles.id
+					AND hpr_am_roles_contacts_c.hpr_am_roles_contactscontacts_idb = contacts.id
+					AND hpr_am_catelog.aos_product_categories_id_c = aos_product_categories.id
+					AND hpr_am_catelog.hpr_am_roles_id_c = hpr_am_roles.id
+					AND hpr_am_roles.deleted = 0
+					AND hpr_am_roles_contacts_c.deleted = 0
+					AND users_contacts_1_c.deleted = 0
+					AND users.deleted = 0
+					AND contacts.deleted = 0
+					AND hpr_am_catelog.deleted = 0
+					AND aos_product_categories.deleted = 0
+
+		*/
+			/********************CUX WHERE END *****************
+			*************************************************/
+			
+            $this->lv->setup($this->seed, 'include/ListView/ListViewGeneric.tpl', $this->where, $this->params);
+            $savedSearchName = empty($_REQUEST['saved_search_select_name']) ? '' : (' - ' . $_REQUEST['saved_search_select_name']);
+            echo $this->lv->display();
+        }
+    }
+}  
+
+?>

@@ -6,6 +6,13 @@ array (
   array (
     'templateMeta' => 
     array (
+      'includes' => 
+      array (
+        0 =>
+        array (
+          'file' => 'custom/modules/AOS_Contracts/js/AOS_Contracts_editview.js',
+        ),
+      ),
       'maxColumns' => '2',
       'widths' => 
       array (
@@ -133,20 +140,28 @@ array (
             'name' => 'type_c',
             'studio' => 'visible',
             'label' => 'LBL_TYPE',
-       'displayParams' => 
+            'displayParams' => 
             array (
-              'initial_filter' => '&code_type_advanced=contract_type'
-        )
+              //按列表类型过滤可选值,其中contract_type需灵活替换
+              'initial_filter' => '&code_type_advanced=contract_type',
+              'field_to_name_array' =>
+              array (
+                'name' => 'type_c',
+                'id' => 'haa_codes_id1_c',
+                'haa_ff_id' => 'haa_ff_id',
+              ),
+              'call_back_function' => 'setContractTypePopupReturn',
+            ),
           ),
           1 => 
           array (
             'name' => 'business_type_c',
             'studio' => 'visible',
             'label' => 'LBL_BUSINESS_TYPE',
-       'displayParams' => 
-            array (
-              'initial_filter' => '&code_type_advanced=contract_business_type'
-        )
+            'displayParams' => 
+                array (
+                  'initial_filter' => '&code_type_advanced=contract_business_type'
+            ),
           ),
         ),
         8 => 
