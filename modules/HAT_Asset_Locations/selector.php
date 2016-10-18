@@ -172,17 +172,6 @@
 		</select>
 		<button id="btn_switch_map_view"><?php echo translate('LBL_BTN_SWITCH_VIEW','HAT_Asset_Locations');?></button>
 	    </div>
-	    
-	    <div>
-			<span class="input_group">  
-				<label id="assetStatus_label">资产状态</label>
-				<select id="asset_status" class="form-horizontal">
-			     <?php foreach ($app_list_strings['hat_asset_status_list'] as $key => $value) {
-			     	echo '<option value="'.$key.'">'.$value.'</option>';
-			     }?>
-		</select>
-			</span>  
-	    </div>
 	</div>
 
 <div id="selector_top_view" class="row">
@@ -221,8 +210,6 @@
 	$.getScript("modules/HAT_Asset_Locations/js/selector_treeview.js");//加载结构树的处理
 	$.getScript("modules/HAT_Asset_Locations/js/selector_mapview.js");//加载地图视图的处理
 */
-
-
 
 $(document).ready(function(){
 

@@ -121,8 +121,5 @@ $mod_strings = array (
   'LBL_CHANGE_ACCESS_ASSETS_BACKUP_NAME'=>'Change Asset Access (Backup)',
   'LBL_CHANGE_DATE_START'=>'Change Date Start',
   'LBL_CHANGE_DATE_END'=>'Change Date End',
-  'LBL_CHANGE_ASSET_STATUS'=>'Change Asset Status',
-  'LBL_CHANGE_ASSET_DATE_START'=>'Change Asset Start Date',
-  'LBL_CHANGE_ASSET_DATE_END'=>'Change Asset End Date',
   
 );

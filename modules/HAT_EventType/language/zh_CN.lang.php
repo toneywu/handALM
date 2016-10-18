@@ -118,7 +118,4 @@ $mod_strings = array (
   'LBL_CHANGE_ACCESS_ASSETS_BACKUP_NAME'=>'可修改接入资产(备)',
   'LBL_CHANGE_DATE_START'=>'可修改占用起始时间',
   'LBL_CHANGE_DATE_END'=>'可修改占用终止时间',
-  'LBL_CHANGE_ASSET_STATUS'=>'可修改资产事物处理的状态',
-  'LBL_CHANGE_ASSET_DATE_START'=>'可修改资产占用起始时间',
-  'LBL_CHANGE_ASSET_DATE_END'=>'可修改资产占用终止时间',
 );

@@ -64,7 +64,4 @@ $mod_strings = array (
   'LBL_BTN_ADD_TRANS_LINE' => '添加资产事务处理行',
   'LBL_TARGET_RESPONSIBLE_PERSON' => 'Target Responsible 人员',
   'LBL_EDITVIEW_PANEL6' => '新建面板 6',
-  'LBL_STATUS'=>'状态',
-  'LBL_DATE_START'=>'占用起始时间',
-  'LBL_DATE_END'=>'占用终止时间',
 );
