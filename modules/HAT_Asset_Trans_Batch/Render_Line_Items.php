@@ -58,7 +58,10 @@ function display_lines($focus, $field, $value, $view){
 					  p_asset_c.id current_parent_asset_id,
 					  p_asset_c.name current_parent_asset,
 					  p_asset_t.id target_parent_asset_id,
-					  p_asset_t.name target_parent_asset 
+					  p_asset_t.name target_parent_asset,
+					  hat.date_start, 		
+					  hat.date_end,		
+					  hat.status
 					FROM
 					  hat_asset_trans hat 
 					  LEFT JOIN hat_asset_locations location_c 
