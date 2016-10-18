@@ -68,5 +68,8 @@ $mod_strings = array (
   'LBL_TARGET_OWNING_PERSON'=>'Target Owning Person',
   'LBL_TARGET_USING_PERSON' => 'Target Using Person',
   'LBL_TARGET_USING_ORG' => 'Target Using Org',
+  'LBL_STATUS'=>'Status',
+  'LBL_DATE_START'=>'Start Date',
+  'LBL_DATE_END'=>'Ending Date',
 
 );

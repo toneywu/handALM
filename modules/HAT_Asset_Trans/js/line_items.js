@@ -367,6 +367,21 @@ function insertTransLineElements(tableid, current_view) { //创建界面要素
       "<input type='hidden' name='line_target_rack_position_data[" + prodln + "]' id='line_target_rack_position_data" + prodln + "' value='' />"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openRackPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
+      
+      //add by yuan.chen
+      "<span class='input_group ig_location'>"+
+      "<label id='line_date_start" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_DATE_START')+"</label>"+
+      "<input style='width:153px;' type='text' name='line_date_start[" + prodln + "]' id='line_date_start" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
+      "<span class='input_group ig_location'>"+
+      "<label id='line_date_end" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_DATE_END')+"</label>"+
+      "<input style='width:153px;' type='text' name='line_date_end[" + prodln + "]' id='line_date_end" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
+      "<span class='input_group ig_location'>"+
+      "<label id='line_status" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_STATUS')+"</label>"+
+      "<input style='width:153px;' type='text' name='line_status[" + prodln + "]' id='line_status" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
+      //end 
       "<input type='hidden' name='line_deleted[" + prodln + "]' id='line_deleted" + prodln + "' value='0'>"+
       "<input type='hidden' name='line_id[" + prodln + "]' id='line_id" + prodln + "' value=''>"+
 
