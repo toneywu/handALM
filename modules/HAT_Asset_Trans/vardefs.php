@@ -1136,7 +1136,6 @@ $dictionary['HAT_Asset_Trans'] = array(
 			//'display_default' => 'now&12:00am',
 		),
 		
-		
 		'status' =>
         array (
             'required' => false,

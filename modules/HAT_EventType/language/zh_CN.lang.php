@@ -121,4 +121,5 @@ $mod_strings = array (
   'LBL_CHANGE_ASSET_STATUS'=>'可修改资产事物处理的状态',
   'LBL_CHANGE_ASSET_DATE_START'=>'可修改资产占用起始时间',
   'LBL_CHANGE_ASSET_DATE_END'=>'可修改资产占用终止时间',
+  
 );

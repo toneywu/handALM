@@ -1239,6 +1239,7 @@ $dictionary['HAT_EventType'] = array (
 			'dependency' => false,
 		),
 		
+		
 		'change_asset_status' => array (
 			'required' => false,
 			'name' => 'change_asset_status',

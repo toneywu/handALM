@@ -489,6 +489,7 @@ function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
 
 }
 
+
 function resetEditorFields(ln) {
   //生成编辑行中的字段样式，如锁定一些字段，以及加颜色的字段
   //以下处理当前资产的状态字段

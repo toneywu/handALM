@@ -2,7 +2,6 @@ function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"HAT_Asset_Trans_Batch");
     $(".expandLink").click();
 }
-
 var prodln = 0;
 var global_eventOptions;
 

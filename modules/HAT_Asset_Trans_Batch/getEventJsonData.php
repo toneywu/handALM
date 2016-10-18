@@ -8,6 +8,7 @@ if (empty ($_REQUEST['hat_eventtype_id'])) {
 	die('Not A Valid ID');
 }
 
+
 global $db;
 
 $event_sql = "SELECT 

@@ -11,7 +11,6 @@ function display_lines($focus, $field, $value, $view){
     }
     echo ']</script>';
 
-
     //以下开始处理行显示相关的内容
     $html = '';
     if($view == 'EditView' || $view == 'DetailView'){
