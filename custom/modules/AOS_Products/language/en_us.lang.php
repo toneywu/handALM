@@ -27,4 +27,5 @@ $mod_strings = array (
   'LBL_ICON' => 'Icon',
   'LBL_ASSET_CRITICALITY'=>'Asset Cricality',
   'LBL_ENABLE_FA'=>'Sync with Fixed Asset',
+  'LBL_DOMAIN'=>'Frameworks',
 );

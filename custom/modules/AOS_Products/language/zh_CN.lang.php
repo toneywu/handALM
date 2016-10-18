@@ -29,4 +29,5 @@ $mod_strings = array (
   'LBL_ICON' => '资产图标',
   'LBL_ENABLE_FA' => '与财务固定资产同步',
   'LBL_ASSET_CRITICALITY' => '资产重要性',
+  'LBL_DOMAIN'=>'业务框架',
 );

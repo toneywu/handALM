@@ -44,31 +44,43 @@ function insertTransLineHeader(tableid){
   d.innerHTML="<span id='line_mask_title'>掩码</span>";
   var e=x.insertCell(5);
   e.innerHTML="<span id='line_gateway_title'>网关</span>";
+  
   var j=x.insertCell(6);
   j.innerHTML="<span id='line_hat_asset_name_title'>网关设备</span>";
   var p=x.insertCell(7);
-  p.innerHTML="<span id='line_access_assets_name_title'>接入设备</span>";
-  var g=x.insertCell(8);
-  g.innerHTML="<span id='line_port_title'>端口</span>";
-  var f=x.insertCell(9);
+  p.innerHTML="<span id='line_access_assets_name_title'>接入设备(主)</span>";
+  var p2=x.insertCell(8);
+  p2.innerHTML="<span id='line_access_assets_name_title'>接入设备(备)</span>";
+  var g=x.insertCell(9);
+  g.innerHTML="<span id='line_port_title'>端口(主)</span>";
+  var g2=x.insertCell(10);
+  g2.innerHTML="<span id='line_port_title'>端口(备)</span>";
+  var f=x.insertCell(11);
   f.innerHTML="<span id='line_bandwidth_type_title'>带宽类型</span>"; 
-  var i=x.insertCell(10);
+  var i=x.insertCell(12);
   i.innerHTML="<span id='line_speed_limit_title'>限速</span>";
-  var k=x.insertCell(11);
+  var k=x.insertCell(13);
   k.innerHTML="<span id='line_hat_assets_cabinet_title'>机柜</span>";
-  var l=x.insertCell(12);
-  l.innerHTML="<span id='line_monitoring_title'>监控链接</span>";
-  var o=x.insertCell(13);
+  var l=x.insertCell(14);
+  l.innerHTML="<span id='line_monitoring_title'>监控链接(主)</span>";
+  var l2=x.insertCell(15);
+  l2.innerHTML="<span id='line_monitoring_title'>监控链接(备)</span>";
+  var o=x.insertCell(16);
   o.innerHTML="<span id='line_mrtg_link_title'>MRTG 链接</span>";
-  var m=x.insertCell(14);
-  m.innerHTML="<span id='line_channel_num_title'>频道号</span>";
-  var n=x.insertCell(15);
-  n.innerHTML="<span id='line_channel_content_title'>频道内容</span>";
-  var n=x.insertCell(16);
-  n.innerHTML="<span id='line_main_asset_title'>主</span>";
-  var n=x.insertCell(17);
-  n.innerHTML="<span id='line_backup_asset_title'>备</span>";
-  
+  var m=x.insertCell(17);
+  m.innerHTML="<span id='line_channel_num_title'>频道号(主)</span>";
+  var m2=x.insertCell(18);
+  m2.innerHTML="<span id='line_channel_num_title'>频道号(备)</span>";
+  var n=x.insertCell(19);
+  n.innerHTML="<span id='line_channel_content_title'>频道内容(主)</span>";
+  var n2=x.insertCell(20);
+  n2.innerHTML="<span id='line_channel_content_title'>频道内容(备)</span>"
+  var n3=x.insertCell(21);
+  n3.innerHTML="<span id='line_date_start_title'>占用起始时间</span>"
+  var n4=x.insertCell(22);
+  n4.innerHTML="<span id='line_date_end_title'>占用终止时间</span>"
+  var e2=x.insertCell(23);
+  e2.innerHTML="<span id='line_gateway_title'>状态</span>";;
 }
 
 
@@ -103,8 +115,14 @@ function insertLineData(asset_trans_line ){ //将数据写入到对应的行字�
     $("#line_monitoring".concat(String(ln))).val(asset_trans_line.monitoring);
     $("#line_mrtg_link".concat(String(ln))).val(asset_trans_line.mrtg_link);
     $("#line_access_assets_name".concat(String(ln))).val(asset_trans_line.access_assets_name);
-    $("#line_main_asset".concat(String(ln))).val(asset_trans_line.main_asset);
-    $("#line_backup_asset".concat(String(ln))).val(asset_trans_line.backup_asset);
+    $("#line_access_assets_backup_name".concat(String(ln))).val(asset_trans_line.access_assets_backup_name);
+    $("#line_status".concat(String(ln))).val(asset_trans_line.status);
+    $("#line_port_backup".concat(String(ln))).val(asset_trans_line.port_backup);
+    $("#line_monitoring_backup".concat(String(ln))).val(asset_trans_line.monitoring_backup);
+    $("#line_channel_content_backup".concat(String(ln))).val(asset_trans_line.channel_content_backup);
+    $("#line_channel_num_backup".concat(String(ln))).val(asset_trans_line.channel_num_backup);
+    $("#line_date_start".concat(String(ln))).val(asset_trans_line.date_start);
+    $("#line_date_end".concat(String(ln))).val(asset_trans_line.date_end);
     renderTransLine(ln);
   }
 }
@@ -171,16 +189,22 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<td><span name='displayed_line_gateway[" + prodln + "]' id='displayed_line_gateway" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_hat_asset_name[" + prodln + "]' id='displayed_line_hat_asset_name" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_access_assets_name[" + prodln + "]' id='displayed_line_access_assets_name" + prodln + "'></span></td>"+
+      "<td><span name='displayed_line_access_assets_backup_name[" + prodln + "]' id='displayed_line_access_assets_backup_name" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_port[" + prodln + "]' id='displayed_line_port" + prodln + "'></span></td>"+
+      "<td><span name='displayed_line_port_backup[" + prodln + "]' id='displayed_line_port_backup" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_bandwidth_type[" + prodln + "]' id='displayed_line_bandwidth_type" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_speed_limit[" + prodln + "]' id='displayed_line_speed_limit" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_hat_assets_cabinet[" + prodln + "]' id='displayed_line_hat_assets_cabinet" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_monitoring[" + prodln + "]' id='displayed_line_monitoring" + prodln + "'></span></td>"+
+      "<td><span name='displayed_line_monitoring_backup[" + prodln + "]' id='displayed_line_monitoring_backup" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_mrtg_link[" + prodln + "]' id='displayed_line_mrtg_link" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_channel_num[" + prodln + "]' id='displayed_line_channel_num" + prodln + "'></span></td>"+
+      "<td><span name='displayed_line_channel_num_backup[" + prodln + "]' id='displayed_line_channel_num_backup" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_channel_content[" + prodln + "]' id='displayed_line_channel_content" + prodln + "'></span></td>"+
-      "<td><span name='displayed_line_main_asset[" + prodln + "]' id='displayed_line_main_asset" + prodln + "'></span></td>"+
-      "<td><span name='displayed_line_backup_asset[" + prodln + "]' id='displayed_line_backup_asset" + prodln + "'></span></td>";
+      "<td><span name='displayed_line_channel_content_backup[" + prodln + "]' id='displayed_line_channel_content_backup" + prodln + "'></span></td>"+
+      "<td><span name='displayed_line_date_start[" + prodln + "]' id='displayed_line_date_start" + prodln + "'></span></td>"+
+      "<td><span name='displayed_line_date_end[" + prodln + "]' id='displayed_line_date_end" + prodln + "'></span></td>" +
+      "<td><span name='displayed_line_status[" + prodln + "]' id='displayed_line_status" + prodln + "'></span></td>";
       
       //"<td><span name='displayed_line_hit_ip_subnets_id[" + prodln + "]' id='displayed_line_hit_ip_subnets_id" + prodln + "''></span></td>"+
       //"<td><input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'></td>";
@@ -191,7 +215,7 @@ function insertTransLineElements(tableid) { //创建界面要素
   var x = tablebody.insertRow(-1); //以下生成的是Line Editor
   x.id = 'asset_trans_editor' + prodln;
   x.style = "display:none";
-  x.innerHTML  = "<td colSpan='14'><div class='lineEditor'>"+
+  x.innerHTML  = "<td colSpan='19'><div class='lineEditor'>"+
 	  //C段
 	  "<label>"+"C段"+"</label>"+
 	  "<input style='width:78px;' type='hidden' readonly='readonly' name='line_parent_ip[" + prodln + "]' id='line_parent_ip" + prodln + "'  value='' title=''>"+
@@ -255,34 +279,70 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<input type='hidden' name='line_hat_assets_cabinet_id[" + prodln + "]' id='line_hat_assets_cabinet_id" + prodln + "' value=''>"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openCabinetPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
-      //监控链接
+      //监控链接(主)
       "<span class='input_group'>"+
-      "<label>"+"监控链接"+"</label>"+
+      "<label>"+"监控链接(主)"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_monitoring[" + prodln + "]' id='line_monitoring" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
-      //频道号
+	  //监控链接(备)
       "<span class='input_group'>"+
-      "<label>"+"监控链接"+"</label>"+
+      "<label>"+"监控链接(备)"+"</label>"+
+      "<input style=' width:153px;' type='text' name='line_monitoring_backup[" + prodln + "]' id='line_monitoring_backup" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
+      //频道号(主)
+      "<span class='input_group'>"+
+      "<label>"+"频道号(主)"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_channel_num[" + prodln + "]' id='line_channel_num" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
-      //频道内容
+	  //频道号(备)
       "<span class='input_group'>"+
-      "<label>"+"频道内容"+"</label>"+
+      "<label>"+"频道号(备)"+"</label>"+
+      "<input style=' width:153px;' type='text' name='line_channel_num_backup[" + prodln + "]' id='line_channel_num_backup" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
+      //频道内容(主)
+      "<span class='input_group'>"+
+      "<label>"+"频道内容(主)"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_channel_content[" + prodln + "]' id='line_channel_content" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
+	  //频道内容(备)
+      "<span class='input_group'>"+
+      "<label>"+"频道内容(备)"+"</label>"+
+      "<input style=' width:153px;' type='text' name='line_channel_content_backup[" + prodln + "]' id='line_channel_content_backup" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
        //MRTG Link
       "<span class='input_group'>"+
       "<label>"+"MRTG Link"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_mrtg_link[" + prodln + "]' id='line_mrtg_link" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
-      //接入设备
+      //接入设备(主)
       "<span class='input_group'><label>"+"接入设备"+"</label>"+
       "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_access_assets_name[" + prodln + "]' id='line_access_assets_name" + prodln + "' value='' title='' onblur='resetAsset("+prodln+")'>"+
       "<input type='hidden' name='line_access_assets_id[" + prodln + "]' id='line_access_assets_id" + prodln + "' value=''>"+
       "<button id='btn_line_access_assets_name" + prodln + "' title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openAccessAssetNamePopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
+	  //接入设备(备)
+      "<span class='input_group'><label>"+"接入设备(备)"+"</label>"+
+      "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_access_assets_backup_name[" + prodln + "]' id='line_access_assets_backup_name" + prodln + "' value='' title='' onblur='resetAsset("+prodln+")'>"+
+      "<input type='hidden' name='line_access_assets_backup_id[" + prodln + "]' id='line_access_assets_backup_id" + prodln + "' value=''>"+
+      "<button id='btn_line_access_assets_backup_name" + prodln + "' title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openAccessAssetNamePopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+      "</span>"+
+      //状态
+      "<span class='input_group'>"+
+      "<label>"+"状态"+"</label>"+
+      "<input style=' width:153px;' type='text' name='line_status[" + prodln + "]' id='line_status" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
+      //占用起始时间
+      "<span class='input_group'>"+
+      "<label>"+"占用起始时间"+"</label>"+
+      "<input style=' width:153px;' type='text' name='line_date_start[" + prodln + "]' id='line_date_start" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
+      //占用终止时间
+      "<span class='input_group'>"+
+      "<label>"+"占用终止时间"+"</label>"+
+      "<input style=' width:153px;' type='text' name='line_date_end[" + prodln + "]' id='line_date_end" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
       //主
-      "<label>"+"主"+"<span class='required'>*</span></label>"+
+      /*"<label>"+"主"+"<span class='required'>*</span></label>"+
       "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_main_asset[" + prodln + "]' id='line_main_asset" + prodln + "' value='' title='' onblur='resetAsset("+prodln+")'>"+
       "<input type='hidden' name='line_main_asset_id[" + prodln + "]' id='line_main_asset_id" + prodln + "' value=''>"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openAssetPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
@@ -293,6 +353,7 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<input type='hidden' name='line_backup_asset_id[" + prodln + "]' id='line_backup_asset_id" + prodln + "' value=''>"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openAssetPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
+      */
       "<input type='hidden' name='line_deleted[" + prodln + "]' id='line_deleted" + prodln + "' value='0'>"+
       "<input type='hidden' name='line_id[" + prodln + "]' id='line_id" + prodln + "' value=''>"+
 
@@ -349,8 +410,14 @@ function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_line_channel_content"+ln).html($("#line_channel_content"+ln).val());
   $("#displayed_line_mrtg_link"+ln).html($("#line_mrtg_link"+ln).val());
   $("#displayed_line_access_assets_name"+ln).html($("#line_access_assets_name"+ln).val());
-  $("#displayed_line_main_asset"+ln).html($("#line_main_asset"+ln).val());
-  $("#displayed_line_backup_asset"+ln).html($("#line_backup_asset"+ln).val());
+  $("#displayed_line_status"+ln).html($("#line_status"+ln).val());
+  $("#displayed_line_port_backup"+ln).html($("#line_port_backup"+ln).val());
+  $("#displayed_line_monitoring_backup"+ln).html($("#line_monitoring_backup"+ln).val());
+  $("#displayed_line_channel_content_backup"+ln).html($("#line_channel_content_backup"+ln).val());
+  $("#displayed_line_channel_num_backup"+ln).html($("#line_channel_num_backup"+ln).val());
+  $("#displayed_line_access_assets_backup_name"+ln).html($("#line_access_assets_backup_name"+ln).val());
+  $("#displayed_line_date_start"+ln).html($("#line_date_start"+ln).val());
+  $("#displayed_line_date_end"+ln).html($("#line_date_end"+ln).val());
 }
 
 function resetAsset(ln){ //在用户重新选择资产之后，会连带的更新资产相关的字段信息。

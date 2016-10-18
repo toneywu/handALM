@@ -234,6 +234,29 @@ $dictionary['HIT_IP_TRANS'] = array (
 
 			
 		),
+		
+		'port_backup' => array (
+			'required' => false,
+			'name' => 'port',
+			'vname' => 'LBL_PORT_BACKUP',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+
+			
+		),
 
 		'speed_limit' => array (
 			'required' => false,
@@ -386,6 +409,29 @@ $dictionary['HIT_IP_TRANS'] = array (
 
 			
 		),
+		//备份 监控链接
+		'monitoring_backup' => array (
+			'required' => false,
+			'name' => 'monitoring_backup',
+			'vname' => 'LBL_MONITORING_BACKUP',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+
+			
+		),
 
 		'channel_num' => array (
 			'required' => false,
@@ -409,11 +455,55 @@ $dictionary['HIT_IP_TRANS'] = array (
 
 			
 		),
+		
+		'channel_num_backup' => array (
+			'required' => false,
+			'name' => 'channel_num_backup',
+			'vname' => 'LBL_CHANNEL_NUM_BACKUP',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+
+			
+		),
 
 		'channel_content' => array (
 			'required' => false,
 			'name' => 'channel_content',
 			'vname' => 'LBL_CHANNEL_CONTENT',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',	
+		),
+		
+		'channel_content_backup' => array (
+			'required' => false,
+			'name' => 'channel_content_backup',
+			'vname' => 'LBL_CHANNEL_CONTENT_BACKUP',
 			'type' => 'varchar',
 			'massupdate' => 0,
 			'no_default' => false,
@@ -516,7 +606,60 @@ $dictionary['HIT_IP_TRANS'] = array (
   ),
   
   
-  'main_asset_id' => array (
+  'access_assets_backup_name' => array (
+			'required' => false,
+			'source' => 'non-db',
+			'name' => 'access_assets_backup_name',
+			'vname' => 'LBL_ACCESS_ASSETS_BACKUP_NAME',
+			'type' => 'relate',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+			'id_name' => 'access_assets_backup_id',
+			'ext2' => 'HAT_Assets',
+			'module' => 'HAT_Assets',
+			'rname' => 'name',
+			'quicksearch' => 'enabled',
+			'studio' => 'visible',
+		),
+		
+		
+		'access_assets_backup_id' => 
+  array (
+    'required' => false,
+    'name' => 'access_assets_backup_id',
+    'vname' => 'LBL_ACCESS_ASSETS_BACKUP_ID',
+    'type' => 'id',
+    'massupdate' => 0,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'true',
+    'duplicate_merge' => 'disabled',
+    'duplicate_merge_dom_value' => 0,
+    'audited' => false,
+    'inline_edit' => true,
+    'reportable' => false,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'len' => 36,
+    'size' => '20',
+
+  ),
+  
+  
+ /* 'main_asset_id' => array (
 			'required' => false,
 			'name' => 'main_asset_id',
 			'vname' => 'LBL_MAIN_ASSET_ID',
@@ -615,8 +758,79 @@ $dictionary['HIT_IP_TRANS'] = array (
 			'studio' => 'visible',
 		),
   
+  */
   
+  'date_start' => array (
+			'required' => false,
+			'name' => 'date_start',
+			'vname' => 'LBL_DATE_START',
+			'type' => 'date',
+			'massupdate' => 0,
+			'no_default' => true,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'size' => '20',
+			'enable_range_search' => false,
+			'dbType' => 'datetime',
+			//'display_default' => 'now&12:00am',
+		),
 
+'date_end' => array (
+			'required' => false,
+			'name' => 'date_end',
+			'vname' => 'LBL_DATE_END',
+			'type' => 'date',
+			'massupdate' => 0,
+			'no_default' => true,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'size' => '20',
+			'enable_range_search' => false,
+			'dbType' => 'datetime',
+			//'display_default' => 'now&12:00am',
+		),
+		
+		
+		'status' =>
+        array (
+            'required' => false,
+            'name' => 'status',
+            'vname' => 'LBL_STATUS',
+            'type' => 'enum',
+            'massupdate' => 0,
+            'no_default' => false,
+            'comments' => '',
+            'help' => '',
+            'importable' => 'true',
+            'duplicate_merge' => 'disabled',
+            'duplicate_merge_dom_value' => '0',
+            'audited' => false,
+            'inline_edit' => true,
+            'reportable' => true,
+            'unified_search' => false,
+            'merge_filter' => 'disabled',
+            'len' => 100,
+            'size' => '20',
+            'options' => 'haa_code_type_list',
+            'studio' => 'visible',
+            'dependency' => false,
+            ),
 	
 	),
 	'relationships' => array (),

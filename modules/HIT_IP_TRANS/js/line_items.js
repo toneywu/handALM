@@ -8,6 +8,63 @@ if (typeof(YAHOO.SUGAR) == 'undefined') {
 	$.getScript("include/javascript/sugarwidgets/SugarYUIWidgets.js");
 }
 $.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
+
+//补齐两位数  
+function padleft0(obj) {  
+	return obj.toString().replace(/^[0-9]{1}$/, "0" + obj);  
+} 
+		
+function getnowtime() {
+		var nowtime = new Date();
+		var year = nowtime.getFullYear();
+		var month = padleft0(nowtime.getMonth() + 1);
+		var day = padleft0(nowtime.getDate());
+		var hour = padleft0(nowtime.getHours());
+		var minute = padleft0(nowtime.getMinutes());
+		var second = padleft0(nowtime.getSeconds());
+		var millisecond = nowtime.getMilliseconds(); millisecond = millisecond.toString().length == 1 ? "00" + millisecond : millisecond.toString().length == 2 ? "0" + millisecond : millisecond;
+		return year + "-" + month + "-" + day + " " + hour + ":" + minute ;//+ ":" + second + "." + millisecond;
+}
+		
+function openDateStart(ln){
+	var Datetimepicker=$('#span_line_date_start'+ln);
+	//console.log(Datetimepicker);
+	Datetimepicker.val(getnowtime());
+	var start_date = getnowtime();
+	var dateformat="Y-m-d H:M";
+	var newDate = new Date();
+	var t       = newDate.toJSON(); 
+	dateformat = dateformat.replace(/Y/,"yyyy");
+	dateformat = dateformat.replace(/m/,"mm");
+	dateformat = dateformat.replace(/d/,"dd");
+	dateformat = dateformat.replace(/H/,"hh");
+	dateformat = dateformat.replace(/M/,"ii");
+	//Datetimepicker.datetimepicker('setStartDate',start_date);
+	Datetimepicker.datetimepicker({
+		language: 'en_us',
+		format: dateformat,
+		showMeridian: true,
+		startView: 1,
+		todayHighlight: 1,
+		todayBtn: true,
+		autoclose: true,
+		startDate:new Date(t),
+	});
+	
+	/*var Datetimepicker2 =$('#line_date_start_date');
+	Datetimepicker2.datetimepicker({
+		language: 'en_us',
+		format: dateformat,
+		showMeridian: true,
+		startView: 1,
+		todayHighlight: 1,
+		todayBtn: true,
+		autoclose: true,
+		startDate:new Date(t),
+	});*/
+}
+
+
 /**
  * 设置必输 TODO：确认本函数能否删除，在include.js中有公共的函数
  */
@@ -66,7 +123,7 @@ function openHitIpPopup(ln) {// 本文件为行上选择IP按钮
 		"field_to_name_array" : {
 			"id" : "line_hit_ip_subnets_id" + ln,
 			"name" : "line_hit_ip_subnets" + ln,
-			"parent_hit_ip" : "line_parent_ip" + ln,
+			"parent_hit_ip" : "line_parent_ip"+ln,
 			"ip_netmask" : "line_mask" + ln,
 			"ip_lowest" : "line_low_associated_ip" + ln,
 			"ip_highest" : "line_high_associated_ip" + ln
@@ -161,6 +218,10 @@ function setAssetReturn(popupReplyData) {
 	resetAsset(lineno);
 }
 
+/**
+ * 接入设备(主)
+ * @param {} ln
+ */
 function openAccessAssetNamePopup(ln) {// 本文件为行上选择资产的按钮
 	lineno = ln;
 	var popupRequestData = {
@@ -181,10 +242,34 @@ function setAccessAssetNameReturn(popupReplyData) {
 	set_return(popupReplyData);
 }
 
-function setHitIpReturn(popupReplyData) {
-	// alert(popupReplyData);
-	console.log(popupReplyData);
+/**
+ * 接入设备(备)
+ * @param {} ln
+ */
+function openAccessAssetBackupPopup(ln) {
+	lineno = ln;
+	var popupRequestData = {
+		"call_back_function" : "setAccessAssetBackupNameReturn",
+		"form_name" : "EditView",
+		"field_to_name_array" : {
+			"id" : "line_access_assets_backup_id" + ln,
+			"name" : "line_access_assets_backup_name" + ln
+		}
+	};
+  open_popup('HAT_Assets', 1200, 850, '', true, true, popupRequestData);
+}
+
+
+
+function setAccessAssetBackupNameReturn(popupReplyData) {
 	set_return(popupReplyData);
+}
+
+
+
+function setHitIpReturn(popupReplyData) {
+	set_return(popupReplyData);
+	$("#line_parent_ip0").text("ddd");
 }
 
 function openOwningOrgPopup(ln) {
@@ -291,33 +376,42 @@ function insertTransLineHeader(tableid) {
 	j.innerHTML = "<span id='line_hat_asset_name_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_HAT_ASSET_NAME')+"</span>";
 	var p = x.insertCell(7);
 	p.innerHTML = "<span id='line_access_assets_name_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_ACCESS_ASSETS_NAME')+"</span>";
-	var g = x.insertCell(8);
+	var p2 = x.insertCell(8);
+	p2.innerHTML = "<span id='line_access_assets_backup_name_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_ACCESS_ASSETS_BACKUP_NAME')+"</span>";
+	var g = x.insertCell(9);
 	g.innerHTML = "<span id='line_port_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_PORT')+"</span>";
-	var f = x.insertCell(9);
+	var g2 = x.insertCell(10);
+	g2.innerHTML = "<span id='line_port_backup_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_PORT_BACKUP')+"</span>";
+	var f = x.insertCell(11);
 	f.innerHTML = "<span id='line_bandwidth_type_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_BANDWIDTH_TYPE')+"</span>";
-	var i = x.insertCell(10);
+	var i = x.insertCell(12);
 	i.innerHTML = "<span id='line_speed_limit_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_SPEED_LIMIT')+"</span>";
-	var k = x.insertCell(11);
+	var k = x.insertCell(13);
 	k.innerHTML = "<span id='line_hat_assets_cabinet_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_CABINET')+"</span>";
-	var l = x.insertCell(12);
+	var l = x.insertCell(14);
 	l.innerHTML = "<span id='line_monitoring_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_MONITORING')+"</span>";
-	var o = x.insertCell(13);
+	var l2 = x.insertCell(15);
+	l2.innerHTML = "<span id='line_monitoring_backup_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_MONITORING_BACKUP')+"</span>";
+	var o = x.insertCell(16);
 	o.innerHTML = "<span id='line_mrtg_link_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_MRTG_LINK')+"</span>";
-	var m = x.insertCell(14);
+	var m = x.insertCell(17);
 	m.innerHTML = "<span id='line_channel_num_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_CHANNEL_NUM')+"</span>";
-	var n = x.insertCell(15);
-	n.innerHTML = "<span id='line_channel_content_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_CHANNEL_CONTENT')+"</span>";
-	var n = x.insertCell(16);
-	n.innerHTML = "<span id='line_main_asset_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_MAIN_ASSET')+"</span>";
-	var n = x.insertCell(17);
-	n.innerHTML = "<span id='line_backup_asset_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_BACKUP_ASSET')+"</span>";
+	var m2 = x.insertCell(18);
+	m2.innerHTML = "<span id='line_channel_num_backup_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_CHANNEL_NUM_BACKUP')+"</span>";
+	var n = x.insertCell(19);
+	n.innerHTML = "<span id='line_channel_content_backup_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_CHANNEL_CONTENT')+"</span>";
+	var n = x.insertCell(20);
+	n.innerHTML = "<span id='line_channel_content_backup_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_CHANNEL_CONTENT_BACKUP')+"</span>";
+	var n3 = x.insertCell(21);
+	n3.innerHTML = "<span id='line_date_start_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_DATE_START')+"</span>";
+	var n4 = x.insertCell(22);
+	n4.innerHTML = "<span id='line_date_end_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_DATE_END')+"</span>";
+	var n2 = x.insertCell(23);
+	n2.innerHTML = "<span id='line_status_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_STATUS')+"</span>";
 
 }
 
 function insertLineData(asset_trans_line) { // 将数据写入到对应的行字段中
-	console.log(asset_trans_line);
-	// console.log($.isArray(asset_trans_line));
-
 	var ln = 0;
 	if (asset_trans_line.id != '0' && asset_trans_line.id !== '') {
 		ln = insertTransLineElements("lineItems");
@@ -371,14 +465,47 @@ function insertLineData(asset_trans_line) { // 将数据写入到对应的行字
 				.val(asset_trans_line.hat_assets_id);
 		$("#line_access_assets_id".concat(String(ln)))
 				.val(asset_trans_line.access_assets_id);
-		$("#line_main_asset".concat(String(ln))).val(asset_trans_line.main_asset);
-		$("#line_main_asset_id".concat(String(ln))).val(asset_trans_line.main_asset_id);
-    	$("#line_backup_asset".concat(String(ln))).val(asset_trans_line.backup_asset);
-		$("#line_backup_asset_id".concat(String(ln))).val(asset_trans_line.backup_asset_id);
+		$("#line_access_assets_backup_name".concat(String(ln))).val(asset_trans_line.access_assets_backup_name);
+		$("#line_access_assets_backup_id".concat(String(ln))).val(asset_trans_line.access_assets_backup_id);
+	    $("#line_status".concat(String(ln))).val(asset_trans_line.status);
+	    $("#line_port_backup".concat(String(ln))).val(asset_trans_line.port_backup);
+	    $("#line_monitoring_backup".concat(String(ln))).val(asset_trans_line.monitoring_backup);
+	    $("#line_channel_content_backup".concat(String(ln))).val(asset_trans_line.channel_content_backup);
+	    $("#line_channel_num_backup".concat(String(ln))).val(asset_trans_line.channel_num_backup);
+	    $("#line_date_start".concat(String(ln))).val(asset_trans_line.date_start);
+	    $("#line_date_end".concat(String(ln))).val(asset_trans_line.date_end);
 		renderTransLine(ln);
 	}
 }
-
+$(document).ready(function(){
+	var newDate = new Date();
+	var t       = newDate.toJSON(); 
+	var dateformat="Y-m-d H:M";
+	dateformat = dateformat.replace(/Y/,"yyyy");
+	dateformat = dateformat.replace(/m/,"mm");
+	dateformat = dateformat.replace(/d/,"dd");
+	dateformat = dateformat.replace(/H/,"hh");
+	dateformat = dateformat.replace(/M/,"ii");
+	
+	
+	$('.form_datetime').datetimepicker({
+    //精确到分的时间
+    format: dateformat,
+    weekStart: 1,
+    todayBtn:  1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 2,
+    forceParse: 0,
+    //showMeridian: 1,
+    minuteStep : 1,
+	startDate:new Date(t),
+});
+	
+	
+	
+	
+});
 function insertTransLineElements(tableid) { // 创建界面要素
 // 包括以下内容：1）显示头，2）定义SQS对象，3）定义界面显示的可见字段，4）界面行编辑器界面
 	if (document.getElementById(tableid + '_head') !== null) {
@@ -457,17 +584,28 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			+ "'></span></td>"
 			+ "<td><span name='displayed_line_access_assets_name[" + prodln
 			+ "]' id='displayed_line_access_assets_name" + prodln
-			+ "'></span></td>" + "<td><span name='displayed_line_port["
+			+ "'></span></td>" 
+			+ "<td><span name='displayed_line_access_assets_backup_name[" + prodln
+			+ "]' id='displayed_line_access_assets_backup_name" + prodln
+			+ "'></span></td>"
+			+ "<td><span name='displayed_line_port["
 			+ prodln + "]' id='displayed_line_port" + prodln + "'></span></td>"
+			+ "<td><span name='displayed_line_port_backup["
+			+ prodln + "]' id='displayed_line_port_backup" + prodln + "'></span></td>"
 			+ "<td><span name='displayed_line_bandwidth_type[" + prodln
 			+ "]' id='displayed_line_bandwidth_type" + prodln
-			+ "'></span></td>" + "<td><span name='displayed_line_speed_limit["
+			+ "'></span></td>" 
+			+ "<td><span name='displayed_line_speed_limit["
 			+ prodln + "]' id='displayed_line_speed_limit" + prodln
 			+ "'></span></td>"
 			+ "<td><span name='displayed_line_hat_assets_cabinet[" + prodln
 			+ "]' id='displayed_line_hat_assets_cabinet" + prodln
-			+ "'></span></td>" + "<td><span name='displayed_line_monitoring["
+			+ "'></span></td>" 
+			+ "<td><span name='displayed_line_monitoring["
 			+ prodln + "]' id='displayed_line_monitoring" + prodln
+			+ "'></span></td>"
+			+ "<td><span name='displayed_line_monitoring_backup["
+			+ prodln + "]' id='displayed_line_monitoring_backup" + prodln
 			+ "'></span></td>"
 			+ "<td><span name='displayed_line_mrtg_link["
 			+ prodln
@@ -479,19 +617,34 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			+ "]' id='displayed_line_channel_num"
 			+ prodln
 			+ "'></span></td>"
+			+ "<td><span name='displayed_line_channel_num_backup["
+			+ prodln
+			+ "]' id='displayed_line_channel_num_backup"
+			+ prodln
+			+ "'></span></td>"
 			+ "<td><span name='displayed_line_channel_content["
 			+ prodln
 			+ "]' id='displayed_line_channel_content"
 			+ prodln
 			+ "'></span></td>"
-			+ "<td><span name='displayed_line_main_asset["
+			+ "<td><span name='displayed_line_channel_content_backup["
 			+ prodln
-			+ "]' id='displayed_line_main_asset"
+			+ "]' id='displayed_line_channel_content_backup"
 			+ prodln
 			+ "'></span></td>"
-			+ "<td><span name='displayed_line_backup_asset["
+			+ "<td><span name='displayed_line_date_start["
 			+ prodln
-			+ "]' id='displayed_line_backup_asset"
+			+ "]' id='displayed_line_date_start"
+			+ prodln
+			+ "'></span></td>"
+			+ "<td><span name='displayed_line_date_end["
+			+ prodln
+			+ "]' id='displayed_line_date_end"
+			+ prodln
+			+ "'></span></td>"
+			+ "<td><span name='displayed_line_status["
+			+ prodln
+			+ "]' id='displayed_line_status"
 			+ prodln
 			+ "'></span></td>"
 			+
@@ -654,7 +807,7 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			"<span class='input_group'><label id='line_access_assets_name"
 			+ prodln
 			+ "_label'>"
-			+ "接入设备"
+			+ "接入设备(主)"
 			+ "</label>"
 			+ "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_access_assets_name["
 			+ prodln
@@ -683,16 +836,64 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			+ "'></button>"
 			+ "</span>"
 			+
-			// 端口
+			// 接入设备(备)
+			"<span class='input_group'><label id='line_access_assets_backup_name"
+			+ prodln
+			+ "_label'>"
+			+ "接入设备(备)"
+			+ "</label>"
+			+ "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_access_assets_backup_name["
+			+ prodln
+			+ "]' id='line_access_assets_backup_name"
+			+ prodln
+			+ "' value='' title='' onblur='resetAsset("
+			+ prodln
+			+ ")'>"
+			+ "<input type='hidden' name='line_access_assets_backup_id["
+			+ prodln
+			+ "]' id='line_access_assets_backup_id"
+			+ prodln
+			+ "' value=''>"
+			+ "<button id='btn_line_access_assets_backup_name"
+			+ prodln
+			+ "' title='"
+			+ SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE')
+			+ "' accessKey='"
+			+ SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY')
+			+ "' type='button' tabindex='116' class='button' value='"
+			+ SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL')
+			+ "' name='btn1' onclick='openAccessAssetBackupPopup("
+			+ prodln
+			+ ");'><img src='themes/default/images/id-ff-select.png' alt='"
+			+ SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL')
+			+ "'></button>"
+			+ "</span>"
+			+
+			
+			// 端口(主)
 			"<span class='input_group'>"
 			+ "<label id='line_port"
 			+ prodln
 			+ "_label'>"
-			+ "端口"
+			+ "端口(主)"
 			+ "</label>"
 			+ "<input style=' width:153px;' type='text' name='line_port["
 			+ prodln
 			+ "]' id='line_port"
+			+ prodln
+			+ "' maxlength='50' value='' title=''>"
+			+ "</span>"
+			+
+			// 端口(备)
+			"<span class='input_group'>"
+			+ "<label id='line_port_backup"
+			+ prodln
+			+ "_label'>"
+			+ "端口(备)"
+			+ "</label>"
+			+ "<input style=' width:153px;' type='text' name='line_port_backup["
+			+ prodln
+			+ "]' id='line_port_backup"
 			+ prodln
 			+ "' maxlength='50' value='' title=''>"
 			+ "</span>"
@@ -758,16 +959,30 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			+ "'></button>"
 			+ "</span>"
 			+
-			// 监控链接
+			// 监控链接(主)
 			"<span class='input_group'>"
 			+ "<label id='line_monitoring"
 			+ prodln
 			+ "_label'>"
-			+ "监控链接"
+			+ "监控链接(主)"
 			+ "</label>"
 			+ "<input style=' width:153px;' type='text' name='line_monitoring["
 			+ prodln
 			+ "]' id='line_monitoring"
+			+ prodln
+			+ "' maxlength='50' value='' title=''>"
+			+ "</span>"
+			+
+			// 监控链接(备)
+			"<span class='input_group'>"
+			+ "<label id='line_monitoring_backup"
+			+ prodln
+			+ "_label'>"
+			+ "监控链接(备)"
+			+ "</label>"
+			+ "<input style=' width:153px;' type='text' name='line_monitoring_backup["
+			+ prodln
+			+ "]' id='line_monitoring_backup"
 			+ prodln
 			+ "' maxlength='50' value='' title=''>"
 			+ "</span>"
@@ -786,12 +1001,12 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			+ "' maxlength='50' value='' title=''>"
 			+ "</span>"
 			+
-			// 频道号
+			// 频道号(主)
 			"<span class='input_group'>"
 			+ "<label id='line_channel_num"
 			+ prodln
 			+ "_label'>"
-			+ "频道号"
+			+ "频道号(主)"
 			+ "</label>"
 			+ "<input style=' width:153px;' type='text' name='line_channel_num["
 			+ prodln
@@ -800,19 +1015,44 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			+ "' maxlength='50' value='' title=''>"
 			+ "</span>"
 			+
-			// 频道内容
+			// 频道号(备)
+			"<span class='input_group'>"
+			+ "<label id='line_channel_num_backup"
+			+ prodln
+			+ "_label'>"
+			+ "频道号(备)"
+			+ "</label>"
+			+ "<input style=' width:153px;' type='text' name='line_channel_num_backup["
+			+ prodln
+			+ "]' id='line_channel_num_backup"
+			+ prodln
+			+ "' maxlength='50' value='' title=''>"
+			+ "</span>"
+			+
+			// 频道内容(主)
 			"<span class='input_group'>"
 			+ "<label id='line_channel_content"
 			+ prodln
 			+ "_label'>"
-			+ "频道内容"
+			+ "频道内容(主)"
 			+ "</label>"
 			+ "<input style=' width:153px;' type='text' name='line_channel_content["
 			+ prodln + "]' id='line_channel_content" + prodln
 			+ "' maxlength='50' value='' title=''>" + "</span>"
 			
+			// 频道内容(备)
+			+"<span class='input_group'>"
+			+ "<label id='line_channel_content_backup"
+			+ prodln
+			+ "_label'>"
+			+ "频道内容(备)"
+			+ "</label>"
+			+ "<input style=' width:153px;' type='text' name='line_channel_content_backup["
+			+ prodln + "]' id='line_channel_content_backup" + prodln
+			+ "' maxlength='50' value='' title=''>" + "</span>"
+			
 			// 主
-			+"<span class='input_group'><label id='line_main_asset"
+			/*+"<span class='input_group'><label id='line_main_asset"
 			+ prodln
 			+ "_label'>"
 			+ SUGAR.language.get('HIT_IP_TRANS', 'LBL_MAIN_ASSET')
@@ -875,8 +1115,51 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			+ ");'><img src='themes/default/images/id-ff-select.png' alt='"
 			+ SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL')
 			+ "'></button>"
-			+ "</span>"
+			+ "</span>"*/
 			
+			// startdate
+			+"<span class='input-group date form_datetime id='span_line_date_start'"+prodln+" >"
+			+ "<label id='line_date_start"
+			+ prodln
+			+ "_label'>"
+			+ "占用起始时间"
+			+ "</label>"
+			+ "<input style=' width:153px;' type='text' name='line_date_start["
+			+ prodln + "]' id='line_date_start" + prodln
+			+ "' maxlength='50' value='' title=''>" +"<span class='input-group-addon' id='line_date_start_date'><span class='glyphicon glyphicon-calendar'></span></span>"+ "</span>"
+			
+			
+			// enddate
+			+"<span class='input-group date form_datetime id='span_line_date_end'"+prodln+" >"
+			+ "<label id='line_date_end"
+			+ prodln
+			+ "_label'>"
+			+ "占用终止时间"
+			+ "</label>"
+			+ "<input style=' width:153px;' type='text' name='line_date_end["
+			+ prodln + "]' id='line_date_end" + prodln
+			+ "' maxlength='50' value='' title=''>" +"<span class='input-group-addon' id='line_date_end_date'><span class='glyphicon glyphicon-calendar'></span></span>"+ "</span>"
+			// endDate
+			/*+"<span class='form-group' id='span_line_date_end'"+prodln+">"
+            +    "<label for='dtp_input1' class='col-md-2 control-label'>占用终止时间</label>"
+            +    "<span class='input-group date form_datetime col-md-5'>"
+            +        "<input class='form-control' size='16' type='text' value='' readonly>"
+            +        "<span class='input-group-addon'><span class='glyphicon glyphicon-remove'></span></span>+"
+            +        "<span class='input-group-addon'><span class='glyphicon glyphicon-th'></span></span>"
+            +    "</span>"
+            +    "<input type='hidden' id='dtp_input1' value='' /><br/>"
+            +"</span>"*/
+			
+			// 状态
+			+"<span class='input_group'>"
+			+ "<label id='line_status"
+			+ prodln
+			+ "_label'>"
+			+ "状态"
+			+ "</label>"
+			+ "<input style=' width:153px;' type='text' name='line_status["
+			+ prodln + "]' id='line_status" + prodln
+			+ "' maxlength='50' value='' title=''>" + "</span>"
 			
 			+ "<input type='hidden' name='line_deleted[" + prodln
 			+ "]' id='line_deleted" + prodln + "' value='0'>"
@@ -917,7 +1200,6 @@ function insertTransLineElements(tableid) { // 创建界面要素
 }
 
 function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
-
 	ip_splited = $("#line_hit_ip_subnets" + ln).val().split("/");
 	if (IpSubnetCalculator.isIp(ip_splited[0]) && ip_splited[1] <= 32
 			&& ip_splited[1] >= 0) {
@@ -927,8 +1209,26 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 		// 显示IP细节信息，由IpSubnetCalculator.js完成算法
 		$("#displayed_line_associated_ip" + ln).html(associated_ip);
 		$("#line_associated_ip" + ln).val(associated_ip);
+		//console.log(associated_ip);
 	}
+	
+	
+	
+	
+	//if($("#displayed_line_parent_ip" + ln).val()==""&&$("#line_parent_ip" + ln).val()!=""){
+	//	$("#displayed_line_parent_ip" + ln).html($("#line_parent_ip" + ln).val());
+	//}
+	
 	$("#displayed_line_parent_ip" + ln).html($("#line_parent_ip" + ln).val());
+	//console.log("line_parent_ip = "+$("#line_parent_ip" + ln).val()+",index = "+ln);
+	//console.log("********begin**********");
+	//console.log($("#line_parent_ip" + 0).val()+",displayed = "+$("#displayed_line_parent_ip"+0).html());
+	//console.log($("#line_parent_ip" + 1).val()+",displayed = "+$("#displayed_line_parent_ip" + 1).html());
+	//console.log($("#line_parent_ip" + 2).val()+",displayed = "+$("#displayed_line_parent_ip" + 2).html());
+	//console.log("*********end*********");
+	
+	
+	
 	$("#displayed_line_hit_ip_subnets" + ln)
 			.html($("#line_hit_ip_subnets" + ln).val());
 	$("#displayed_line_mask" + ln).html($("#line_mask" + ln).val());
@@ -962,9 +1262,16 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 	$("#displayed_line_id" + ln).html($("#line_id" + ln).val());
 	$("#displayed_line_hat_assets_id" + ln).html($("#line_hat_assets_id" + ln)
 			.val());
-	$("#displayed_line_main_asset"+ln).html($("#line_main_asset"+ln).val());
-    $("#displayed_line_backup_asset"+ln).html($("#line_backup_asset"+ln).val());
-	// mark_field_enabled("displayed_line_hit_ip_subnets", false);
+      $("#displayed_line_status"+ln).html($("#line_status"+ln).val());
+	  $("#displayed_line_port_backup"+ln).html($("#line_port_backup"+ln).val());
+	  $("#displayed_line_monitoring_backup"+ln).html($("#line_monitoring_backup"+ln).val());
+	  $("#displayed_line_channel_content_backup"+ln).html($("#line_channel_content_backup"+ln).val());
+	  $("#displayed_line_channel_num_backup"+ln).html($("#line_channel_num_backup"+ln).val());
+	  $("#displayed_line_access_assets_backup_name"+ln).html($("#line_access_assets_backup_name"+ln).val());
+	  $("#displayed_line_access_assets_backup_id"+ln).html($("#line_access_assets_backup_id"+ln).val());
+	  $("#displayed_line_date_start"+ln).html($("#line_date_start"+ln).val());
+	  $("#displayed_line_date_end"+ln).html($("#line_date_end"+ln).val());
+    
 
 }
 
@@ -1064,7 +1371,7 @@ function insertTransLineFootor(tableid) {
 	var footer_cell = footer_row.insertCell(0);
 
 	footer_cell.scope = "row";
-	footer_cell.colSpan = "9";
+	footer_cell.colSpan = "21";
 	footer_cell.innerHTML = "<input id='btnAddNewLine' type='button' class='button btn_del' onclick='addNewLine(\""
 			+ tableid
 			+ "\")' value='+ "
@@ -1083,6 +1390,9 @@ function insertTransLineFootor(tableid) {
  * @param tableid
  */
 function addNewLine(tableid) {
+	
+	console.log("addNewLine prodln = "+prodln);
+	
 	// alert(check_form('EditView'));
 	var line_data = "";
 	if (check_form('EditView')) {// 只有必须填写的字段都填写了才可以新增
@@ -1165,6 +1475,7 @@ function LineEditorShow(ln) { // 显示行编辑器（先自动关闭所有的�
 			LineEditorClose(i);
 		}
 	}
+	//LineEditorClose(ln);
 	$("#asset_trans_line1_displayed" + ln).hide();
 	$("#asset_trans_line2_displayed" + ln).hide();
 	$("#asset_trans_editor" + ln).show();
@@ -1184,18 +1495,23 @@ function resetLineNum_Bold() {// 数行号
 }
 
 function LineEditorClose(ln) {// 关闭行编辑器（显示为正常行）
+	$("#Trans_line_head").show();
 	if (check_form('EditView')) {
 		$("#asset_trans_editor" + ln).hide();
 		$("#asset_trans_line1_displayed" + ln).show();
 		$("#asset_trans_line2_displayed" + ln).show();
 		renderTransLine(ln);
 		resetLineNum_Bold();
+	}{
+		console.log("return false");
+		
+		return;
 	}
 	$("#Trans_line_head").show();
 }
 
 function dulicateTranLine(ln) {// 关闭行编辑器（显示为正常行）
-	if (check_form('EditView')) {
+	//if (check_form('EditView')) {
 		var keyValue = "";
 		// 获取上一行 排除已经删除的得到prodin的真实数值
 		var lastProdln = 1;
@@ -1206,16 +1522,57 @@ function dulicateTranLine(ln) {// 关闭行编辑器（显示为正常行）
 		}
 		// 加入新行
 		insertTransLineElements("lineItems");
+		if(typeof lineDataTemp  =="undefined"){
+			var lineDataTemp={
+				id:"",
+				hat_asset_name:"",
+				hat_assets_id:"",
+				hit_ip_subnets:"",
+				hit_ip_subnets_id:"",
+				parent_ip:"",
+				associated_ip:"",
+				mask:"",
+				bandwidth_type:"",
+				port:"",
+				speed_limit:"",
+				gateway:"",
+				monitoring:"",
+				hat_assets_cabinet_id:"",
+				hat_assets_cabinet:"",
+				channel_content:"",
+				channel_num:"",
+				ip_netmask:"",
+				associated_ip:"",
+				mrtg_link:"",
+				access_assets_id:"",
+				access_assets_name:"",
+				source_ref:"",
+				date_entered:"",
+				main_asset_id:"",
+				main_asset:"",
+				backup_asset_id:"",
+				backup_asset:"",	
+			};
+			
+		}	
 
-		for (var key in lineDataTemp) {
-			var domvalue = $("#line_" + key + lastProdln).val();
-			$("#line_" + key + (prodln - 1)).val(domvalue);
-			$("#displayed_line_" + key + (prodln - 1)).html(domvalue);
-		}
+			for (var key in lineDataTemp) {
+				var domvalue = $("#line_" + key + lastProdln).val();
+				$("#line_" + key + (prodln - 1)).val(domvalue);
+				//计算字段
+				$("#displayed_line_" + key + (prodln - 1)).html(domvalue);
+			}
+		
+			//if($("#line_parent_ip" + lastProdln).val()==""){
+			//	$("#displayed_line_parent_ip" + (prodln - 1)).html($("#displayed_line_parent_ip" +lastProdln).html());
+			//}
+		console.log("index = "+(prodln - 1)+"-----"+$("#line_parent_ip" + lastProdln).val());
+		
 		// 清除id
 		$("#line_id" + (prodln - 1)).val(null);
-
+		//changeRequired(lineData);
 		// 设置行号
 		resetLineNum_Bold();
-	}
+		
+	//}
 }

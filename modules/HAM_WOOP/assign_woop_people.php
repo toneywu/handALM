@@ -12,6 +12,7 @@ if (!defined('sugarEntry') || !sugarEntry)
 	die('Not A Valid Entry Point');
 global $current_user;
 global $db;
+$timeDate = new TimeDate();
 
 $current_id = $_GET['id'];
 //echo $current_id;
@@ -58,6 +59,7 @@ if (!empty ($current_id)) {
 				$contact_bean = BeanFactory :: getBean('Contacts', $res_people_bean->contact_id);
 				$current_bean->assigned_user_id = $contact_bean->user_id_c;
 			}
+				$current_bean->date_actual_start=$timedate->now();
 			$current_bean->save();
 		}
 	}

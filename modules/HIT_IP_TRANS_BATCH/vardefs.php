@@ -1,5 +1,6 @@
 <?php
 
+
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
@@ -54,6 +55,7 @@ $dictionary['HIT_IP_TRANS_BATCH'] = array (
 			'unified_search' => true,
 			'full_text_search' => array (
 				'boost' => 3,
+
 				
 			),
 			'required' => true,
@@ -69,6 +71,7 @@ $dictionary['HIT_IP_TRANS_BATCH'] = array (
 			'inline_edit' => true,
 			'reportable' => true,
 			'size' => '20',
+
 			
 		),
 		'tracking_number' => array (
@@ -90,6 +93,7 @@ $dictionary['HIT_IP_TRANS_BATCH'] = array (
 			'inline_edit' => true,
 			'reportable' => true,
 			'size' => '20',
+
 			
 		),
 		'asset_trans_status' => array (
@@ -115,6 +119,7 @@ $dictionary['HIT_IP_TRANS_BATCH'] = array (
 			'studio' => 'visible',
 			'dependency' => false,
 			'default' => 'DRAFT',
+
 			
 		),
 		'hat_asset_status' => array (
@@ -126,6 +131,7 @@ $dictionary['HIT_IP_TRANS_BATCH'] = array (
 			'reportable' => true,
 			'studio' => 'visible',
 			'options' => 'hat_asset_status_list',
+
 			
 		),
 
@@ -148,6 +154,7 @@ $dictionary['HIT_IP_TRANS_BATCH'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
+
 			
 		),
 		'framework' => array (
@@ -176,6 +183,7 @@ $dictionary['HIT_IP_TRANS_BATCH'] = array (
 			'rname' => 'name',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
+
 			
 		),
 		'hat_eventtype_id' => array (
@@ -197,6 +205,7 @@ $dictionary['HIT_IP_TRANS_BATCH'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
+
 			
 		),
 		'event_type' => array (
@@ -225,6 +234,7 @@ $dictionary['HIT_IP_TRANS_BATCH'] = array (
 			'rname' => 'name',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
+
 			
 		),
 		'current_owning_org_id' => array (
@@ -246,6 +256,7 @@ $dictionary['HIT_IP_TRANS_BATCH'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
+
 			
 		),
 		'current_owning_org' => array (
@@ -274,6 +285,7 @@ $dictionary['HIT_IP_TRANS_BATCH'] = array (
 			'rname' => 'name',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
+
 			
 		),
 		'target_owning_org_id' => array (
@@ -295,6 +307,7 @@ $dictionary['HIT_IP_TRANS_BATCH'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
+
 			
 		),
 		'target_owning_org' => array (
@@ -323,6 +336,7 @@ $dictionary['HIT_IP_TRANS_BATCH'] = array (
 			'rname' => 'name',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
+
 			
 		),
 		'source_wo_id' => array (
@@ -344,6 +358,7 @@ $dictionary['HIT_IP_TRANS_BATCH'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
+
 			
 		),
 		'source_wo' => array (
@@ -372,6 +387,7 @@ $dictionary['HIT_IP_TRANS_BATCH'] = array (
 			'rname' => 'name',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
+
 			
 		),
 		'source_woop_id' => array (
@@ -393,6 +409,7 @@ $dictionary['HIT_IP_TRANS_BATCH'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
+
 			
 		),
 		'source_woop' => array (
@@ -421,6 +438,7 @@ $dictionary['HIT_IP_TRANS_BATCH'] = array (
 			'rname' => 'name',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
+
 			
 		),
 		'owner_id' => array (
@@ -442,6 +460,7 @@ $dictionary['HIT_IP_TRANS_BATCH'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
+
 			
 		),
 		'owner_contacts' => array (
@@ -471,6 +490,7 @@ $dictionary['HIT_IP_TRANS_BATCH'] = array (
 			'rname' => 'name',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
+
 			
 		),
 		'line_items' => array (
@@ -490,21 +510,24 @@ $dictionary['HIT_IP_TRANS_BATCH'] = array (
 				'returns' => 'html',
 				'include' => 'modules/HIT_IP_TRANS_BATCH/Render_Line_Items.php'
 			),
+
+			
 		),
-		
-		'hit_ip_trans_batch_hit_ip_trans' =>
-			  array (
-			  	'name' => 'hit_ip_trans_batch_hit_ip_trans',
-			  	'type' => 'link',
-			  	'relationship' => 'hit_ip_trans_batch_hit_ip_trans',
-			  	'source' => 'non-db',
-			  	'module' => 'HIT_IP_TRANS',
-			  	'bean_name' => 'HIT_IP_TRANS',
-			  	'side' => 'right',
-			  	'vname' => 'LBL_HIT_IP_TRANS_BATCH_HIT_IP_TRANS_FROM_HIT_IP_TRANS_TITLE',
-			  	),
-			  	
-			  	'service_date' => array (
+
+		'hit_ip_trans_batch_hit_ip_trans' => array (
+			'name' => 'hit_ip_trans_batch_hit_ip_trans',
+			'type' => 'link',
+			'relationship' => 'hit_ip_trans_batch_hit_ip_trans',
+			'source' => 'non-db',
+			'module' => 'HIT_IP_TRANS',
+			'bean_name' => 'HIT_IP_TRANS',
+			'side' => 'right',
+			'vname' => 'LBL_HIT_IP_TRANS_BATCH_HIT_IP_TRANS_FROM_HIT_IP_TRANS_TITLE',
+
+			
+		),
+
+		'service_date' => array (
 			'required' => true,
 			'name' => 'service_date',
 			'vname' => 'LBL_SERVICE_DATE',
@@ -524,232 +547,246 @@ $dictionary['HIT_IP_TRANS_BATCH'] = array (
 			'size' => '20',
 			'enable_range_search' => false,
 			'dbType' => 'datetime',
-		),
-		
-		'send_to_customer' => 
-      array (
-            'required' => false,
-            'name' => 'send_to_customer',
-            'vname' => 'LBL_SEND_TO_CUSTOMER',
-            'type' => 'bool',
-            'massupdate' => 0,
-            'comments' => '',
-            'help' => '',
-            'importable' => 'true',
-            'duplicate_merge' => 'disabled',
-            'duplicate_merge_dom_value' => '0',
-            'audited' => false,
-            'inline_edit' => false,
-            'reportable' => true,
-            'unified_search' => false,
-            'merge_filter' => 'disabled',
-            ),
-            
-            
- 'account_id' => 
-  array (
-    'required' => false,
-    'name' => 'account_id',
-    'vname' => 'LBL_ACCOUNT_ID',
-    'type' => 'id',
-    'massupdate' => 0,
-    'no_default' => false,
-    'comments' => '',
-    'help' => '',
-    'importable' => 'true',
-    'duplicate_merge' => 'disabled',
-    'duplicate_merge_dom_value' => 0,
-    'audited' => false,
-    'inline_edit' => true,
-    'reportable' => false,
-    'unified_search' => false,
-    'merge_filter' => 'disabled',
-    'len' => 36,
-    'size' => '20',
-  ),
 
-'contact_name' => 
-  array (
-    'required' => false,
-    'source' => 'non-db',
-    'name' => 'contact_name',
-    'vname' => 'LBL_CONTACT_NAME',
-    'type' => 'relate',
-    'massupdate' => 0,
-    'no_default' => false,
-    'comments' => '',
-    'help' => '',
-    'importable' => 'true',
-    'duplicate_merge' => 'disabled',
-    'duplicate_merge_dom_value' => '0',
-    'audited' => false,
-    'inline_edit' => true,
-    'reportable' => true,
-    'unified_search' => false,
-    'merge_filter' => 'disabled',
-    'len' => '255',
-    'size' => '20',
-    'id_name' => 'account_id',//返回的值 显示name存储id
-    'ext2' => 'Contacts',
-    'module' => 'Contacts',
-    'rname' => 'name',//在界面上面显示其他模块的 HAT_Assets的Name字段 也就是前台显示
-    'quicksearch' => 'enabled',
-    'studio' => 'visible',
-  ),
-  
- 'email' =>
-      array (
-        'source' => 'non-db', //显示当前地点的说明
-        'name' => 'email',
-        'vname' => 'LBL_EMAIL',
-        'type' => 'varchar',
-        'default'=>'',
-        'reportable' => true,
-        'studio' => 'visible'
-        ),
-        
-        'attribute1' =>
-    array (
-      'required' => false,
-      'name' => 'attribute1',
-      'vname' => 'LBL_ATTRIBUTE1',
-      'type' => 'varchar',
-      'massupdate' => 0,
-      'no_default' => false,
-      'comments' => '',
-      'help' => '',
-      'importable' => 'true',
-      'duplicate_merge' => 'disabled',
-      'duplicate_merge_dom_value' => '0',
-      'audited' => false,
-      'inline_edit' => true,
-      'reportable' => true,
-      'unified_search' => false,
-      'merge_filter' => 'disabled',
-      'len' => '255',
-      'size' => '20',
-      ),
-    'attribute2' =>
-    array (
-      'required' => false,
-      'name' => 'attribute2',
-      'vname' => 'LBL_ATTRIBUTE2',
-      'type' => 'varchar',
-      'massupdate' => 0,
-      'no_default' => false,
-      'comments' => '',
-      'help' => '',
-      'importable' => 'true',
-      'duplicate_merge' => 'disabled',
-      'duplicate_merge_dom_value' => '0',
-      'audited' => false,
-      'inline_edit' => true,
-      'reportable' => true,
-      'unified_search' => false,
-      'merge_filter' => 'disabled',
-      'len' => '255',
-      'size' => '20',
-      ),
-    'attribute3' =>
-    array (
-      'required' => false,
-      'name' => 'attribute3',
-      'vname' => 'LBL_ATTRIBUTE3',
-      'type' => 'varchar',
-      'massupdate' => 0,
-      'no_default' => false,
-      'comments' => '',
-      'help' => '',
-      'importable' => 'true',
-      'duplicate_merge' => 'disabled',
-      'duplicate_merge_dom_value' => '0',
-      'audited' => false,
-      'inline_edit' => true,
-      'reportable' => true,
-      'unified_search' => false,
-      'merge_filter' => 'disabled',
-      'len' => '255',
-      'size' => '20',
-      ),
-    'attribute4' =>
-    array (
-      'required' => false,
-      'name' => 'attribute4',
-      'vname' => 'LBL_ATTRIBUTE4',
-      'type' => 'varchar',
-      'massupdate' => 0,
-      'no_default' => false,
-      'comments' => '',
-      'help' => '',
-      'importable' => 'true',
-      'duplicate_merge' => 'disabled',
-      'duplicate_merge_dom_value' => '0',
-      'audited' => false,
-      'inline_edit' => true,
-      'reportable' => true,
-      'unified_search' => false,
-      'merge_filter' => 'disabled',
-      'len' => '255',
-      'size' => '20',
-      ),
-    'attribute5' =>
-    array (
-      'required' => false,
-      'name' => 'attribute5',
-      'vname' => 'LBL_ATTRIBUTE5',
-      'type' => 'varchar',
-      'massupdate' => 0,
-      'no_default' => false,
-      'comments' => '',
-      'help' => '',
-      'importable' => 'true',
-      'duplicate_merge' => 'disabled',
-      'duplicate_merge_dom_value' => '0',
-      'audited' => false,
-      'inline_edit' => true,
-      'reportable' => true,
-      'unified_search' => false,
-      'merge_filter' => 'disabled',
-      'len' => '255',
-      'size' => '20',
-      ),
-    'attribute6' =>
-    array (
-      'required' => false,
-      'name' => 'attribute6',
-      'vname' => 'LBL_ATTRIBUTE6',
-      'type' => 'varchar',
-      'massupdate' => 0,
-      'no_default' => false,
-      'comments' => '',
-      'help' => '',
-      'importable' => 'true',
-      'duplicate_merge' => 'disabled',
-      'duplicate_merge_dom_value' => '0',
-      'audited' => false,
-      'inline_edit' => true,
-      'reportable' => true,
-      'unified_search' => false,
-      'merge_filter' => 'disabled',
-      'len' => '255',
-      'size' => '20',
-      ),	
+			
+		),
+
+		'send_to_customer' => array (
+			'required' => false,
+			'name' => 'send_to_customer',
+			'vname' => 'LBL_SEND_TO_CUSTOMER',
+			'type' => 'bool',
+			'massupdate' => 0,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => false,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+
+			
+		),
+
+		'account_id' => array (
+			'required' => false,
+			'name' => 'account_id',
+			'vname' => 'LBL_ACCOUNT_ID',
+			'type' => 'id',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => 0,
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => false,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => 36,
+			'size' => '20',
+
+			
+		),
+
+		'contact_name' => array (
+			'required' => false,
+			'source' => 'non-db',
+			'name' => 'contact_name',
+			'vname' => 'LBL_CONTACT_NAME',
+			'type' => 'relate',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+			'id_name' => 'account_id', //返回的值 显示name存储id
+	'ext2' => 'Contacts',
+			'module' => 'Contacts',
+			'rname' => 'name', //在界面上面显示其他模块的 HAT_Assets的Name字段 也就是前台显示
+	'quicksearch' => 'enabled',
+			'studio' => 'visible',
+
+			
+		),
+
+		'email' => array (
+			'source' => 'non-db',
+			'name' => 'email',
+			'vname' => 'LBL_EMAIL',
+			'type' => 'varchar',
+			'default' => '',
+			'reportable' => true,
+			'studio' => 'visible'
+		),
+
+		'attribute1' => array (
+			'required' => false,
+			'name' => 'attribute1',
+			'vname' => 'LBL_ATTRIBUTE1',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+
+			
+		),
+		'attribute2' => array (
+			'required' => false,
+			'name' => 'attribute2',
+			'vname' => 'LBL_ATTRIBUTE2',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+
+			
+		),
+		'attribute3' => array (
+			'required' => false,
+			'name' => 'attribute3',
+			'vname' => 'LBL_ATTRIBUTE3',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+
+			
+		),
+		'attribute4' => array (
+			'required' => false,
+			'name' => 'attribute4',
+			'vname' => 'LBL_ATTRIBUTE4',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+
+			
+		),
+		'attribute5' => array (
+			'required' => false,
+			'name' => 'attribute5',
+			'vname' => 'LBL_ATTRIBUTE5',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+
+			
+		),
+		'attribute6' => array (
+			'required' => false,
+			'name' => 'attribute6',
+			'vname' => 'LBL_ATTRIBUTE6',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+
+			
+		),
+
 		
 	),
 	'relationships' => array (
-		'hit_ip_trans_batch_hit_ip_trans' =>
-				array (
-				  'lhs_module' => 'HIT_IP_TRANS_BATCH',
-				  'lhs_table' => 'hit_ip_trans_batch',
-				  'lhs_key'   => 'id',
-				  'rhs_module' => 'HIT_IP_TRANS',
-				  'rhs_table' => 'hit_ip_trans',
-				  'rhs_key'   => 'hit_ip_trans_batch_id',
-				  'relationship_type' => 'one-to-many',
-				  ),
+		'hit_ip_trans_batch_hit_ip_trans' => array (
+			'lhs_module' => 'HIT_IP_TRANS_BATCH',
+			'lhs_table' => 'hit_ip_trans_batch',
+			'lhs_key' => 'id',
+			'rhs_module' => 'HIT_IP_TRANS',
+			'rhs_table' => 'hit_ip_trans',
+			'rhs_key' => 'hit_ip_trans_batch_id',
+			'relationship_type' => 'one-to-many',
+
+			
+		),
+
+		
 	),
 	'optimistic_locking' => true,
 	'unified_search' => true,
+
 	
 );
 if (!class_exists('VardefManager')) {

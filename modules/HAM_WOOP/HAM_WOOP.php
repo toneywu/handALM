@@ -113,6 +113,8 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 					$next_woop_bean[0]->work_center_res_id = $this->work_center_res_id;
 					$next_woop_bean[0]->work_center_people_id = $this->work_center_people_id;
 				}
+				$timedate = new TimeDate();
+				$this->date_actual_finish=$timedate->now();
 				$next_woop_bean[0]->save();
 
 			} else {
@@ -122,6 +124,8 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 				if ($wo_bean->complete_by_last_woop == true) {
 					$woop_bean = BeanFactory :: getBean("HAM_WOOP", $this->id);
 					$woop_bean->wo_status = 'COMPLETED';
+					$timeDate = new TimeDate();
+					$woop_bean->date_actual_finish=$timedate->now();
 					$woop_bean->save();
 					parent :: save($check_notify);
 					$queryParams = array (
