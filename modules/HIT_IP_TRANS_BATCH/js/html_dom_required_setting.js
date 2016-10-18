@@ -6,6 +6,7 @@ function mark_field_disabled_mine(field_name, hide_bool, keep_position=false) {
 		mark_obj = ($("#"+field_name).length>0)?$("#"+field_name):$("[name='"+field_name+"'");
 		mark_obj_lable = $("#"+field_name+"_label");
 		mark_obj_tr = $("#"+field_name).closest("tr");
+		mark_obj_date = $("#"+field_name+"_date");
 
 	    if(hide_bool==true) {
 	    	if (keep_position==false) {
@@ -27,6 +28,8 @@ function mark_field_disabled_mine(field_name, hide_bool, keep_position=false) {
 	        mark_obj.css({"color":"#efefef","background-Color":"#efefef;"});
 	        mark_obj.attr("readonly",true);
 	        mark_obj_lable.css({"color":"#aaaaaa"});
+	        mark_obj_date.remove();
+	      	
 	    }
 	    if (typeof validate != "undefined" && typeof validate['EditView'] != "undefined") {
 	      removeFromValidate('EditView',field_name); //去除必须验证
@@ -157,7 +160,8 @@ function loopField(fieldName,type){
 		    $("#"+fieldName+i).parents('.input_group').hide();//remove(); 
 		    $("#"+fieldName+"_title").hide();//remove(); 
 		    $("#displayed_"+fieldName+i).hide();//remove(); 
-		    mark_field_disabled(fieldName+i,false);
+		    $("#span_"+fieldName+i).hide();//remove(); 
+		    mark_field_disabled_mine(fieldName+i,false);
 		}
 	}
 }

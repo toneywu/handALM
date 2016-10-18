@@ -1118,7 +1118,7 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			+ "</span>"*/
 			
 			// startdate
-			+"<span class='input-group date form_datetime id='span_line_date_start'"+prodln+" >"
+			+"<span class='input-group date form_datetime' id='span_line_date_start"+prodln+"' >"
 			+ "<label id='line_date_start"
 			+ prodln
 			+ "_label'>"
@@ -1126,11 +1126,11 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			+ "</label>"
 			+ "<input style=' width:153px;' type='text' name='line_date_start["
 			+ prodln + "]' id='line_date_start" + prodln
-			+ "' maxlength='50' value='' title=''>" +"<span class='input-group-addon' id='line_date_start_date'><span class='glyphicon glyphicon-calendar'></span></span>"+ "</span>"
+			+ "' maxlength='50' value='' title=''>" +"<span class='input-group-addon' id='line_date_start"+prodln+"_date"+"'><span class='glyphicon glyphicon-calendar'></span></span>"+ "</span>"
 			
 			
 			// enddate
-			+"<span class='input-group date form_datetime id='span_line_date_end'"+prodln+" >"
+			+"<span class='input-group date form_datetime' id='span_line_date_end"+prodln+"' >"
 			+ "<label id='line_date_end"
 			+ prodln
 			+ "_label'>"
@@ -1138,7 +1138,7 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			+ "</label>"
 			+ "<input style=' width:153px;' type='text' name='line_date_end["
 			+ prodln + "]' id='line_date_end" + prodln
-			+ "' maxlength='50' value='' title=''>" +"<span class='input-group-addon' id='line_date_end_date'><span class='glyphicon glyphicon-calendar'></span></span>"+ "</span>"
+			+ "' maxlength='50' value='' title=''>" +"<span class='input-group-addon' id='line_date_end"+prodln+"_date"+"'><span class='glyphicon glyphicon-calendar'></span></span>"+ "</span>"
 			// endDate
 			/*+"<span class='form-group' id='span_line_date_end'"+prodln+">"
             +    "<label for='dtp_input1' class='col-md-2 control-label'>占用终止时间</label>"
@@ -1391,9 +1391,6 @@ function insertTransLineFootor(tableid) {
  */
 function addNewLine(tableid) {
 	
-	console.log("addNewLine prodln = "+prodln);
-	
-	// alert(check_form('EditView'));
 	var line_data = "";
 	if (check_form('EditView')) {// 只有必须填写的字段都填写了才可以新增
 
@@ -1490,21 +1487,16 @@ function resetLineNum_Bold() {// 数行号
 			$("#displayed_line_num" + i).text(j);
 		}
 	}
-	// TODO：如果最终有效的行数，则将头标记为空
-	// if (j==0) {}
 }
 
 function LineEditorClose(ln) {// 关闭行编辑器（显示为正常行）
-	$("#Trans_line_head").show();
 	if (check_form('EditView')) {
 		$("#asset_trans_editor" + ln).hide();
 		$("#asset_trans_line1_displayed" + ln).show();
 		$("#asset_trans_line2_displayed" + ln).show();
 		renderTransLine(ln);
 		resetLineNum_Bold();
-	}{
-		console.log("return false");
-		
+	}else{
 		return;
 	}
 	$("#Trans_line_head").show();

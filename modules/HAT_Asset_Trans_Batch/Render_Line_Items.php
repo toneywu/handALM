@@ -132,6 +132,7 @@ function display_lines($focus, $field, $value, $view){
 		while ($row = $focus->db->fetchByAssoc($result)) {
 			$line_data = json_encode($row);
 			$html .= "insertLineData(" . $line_data .",'".$view."');";
+			$html .= 'resetLineNum();';
 			//REF:custom/modules/HAT_Asset_Trans/js/line_items.js
             //通过insertLineData向已经完成初始化的页面要素中，写入值
 		}
