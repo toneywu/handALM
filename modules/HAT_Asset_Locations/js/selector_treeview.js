@@ -166,7 +166,7 @@ function showNodeDetailBtn(node) {
 		(current_mode=="rack" && node.type=="asset" && typeof(node.data.rackid)!="undefined") //选择机柜
 		)
 		 {
-		 return "<a href='#' class='button' onclick='btn_select_clicked()'>"+SUGAR.language.get('app_strings', 'LBL_BTN_SELECT')+"</a>";
+		 return "<a href='#' class='button' onclick='btn_select_clicked()'>"+SUGAR.language.get('HAT_Asset_Locations', 'LBL_BTN_SELECT')+"</a>";
 	} else {
 		return "";
 	}

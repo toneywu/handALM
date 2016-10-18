@@ -29,7 +29,6 @@ if ($_REQUEST['type']=="wo_asset_trans" && isset($_REQUEST['wo_id'])) {
                           AND hat_asset_trans.`batch_id` = hat_asset_trans_batch.`id`
                           AND hat_assets.id = hat_asset_trans.`asset_id`
                           AND hat_asset_trans_batch.`source_wo_id`='".$_REQUEST['wo_id']."'
-                          AND hat_assets.haa_frameworks_id='".$current_framework."'
                           AND hat_asset_trans_batch.`asset_trans_status` != 'DRAFT'
                           AND hat_asset_trans_batch.`asset_trans_status` != 'CANCELED'
                           AND ".$current_mode_sql. " ORDER by hat_assets.name ASC";
