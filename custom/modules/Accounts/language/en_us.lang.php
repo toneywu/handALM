@@ -77,4 +77,7 @@ $mod_strings = array (
   'LBL_SERVICE_PERSON_DESC' => 'Service Person Desc',
   'LBL_CUSTOMER_CLASSS_HAA_CODES_ID' => 'Customer Class (related ID)',
   'LBL_CUSTOMER_CLASSS' => 'Customer Class',
+  'LBL_HIT_RACKS_SUBPANEL_TITLE'=>'Racks',
+  'LBL_HIT_IP_ALLOCATIONS_TITLE'=>'Allocations',
+  'LBL_HAM_WO_TITLE'=>'Work Orders',
 );
