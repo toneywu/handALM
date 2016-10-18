@@ -1,0 +1,18 @@
+<?php
+if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+
+require_once('include/MVC/View/views/view.detail.php');
+
+class HAT_AssetsViewDetail extends ViewDetail
+{
+       function preDisplay() {
+		   //echo '<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>';
+		   //echo '<script charset="utf-8" src="custom/modules/HAT_Assets/js/detailview_map_point.js"></script>';
+		   echo('<script>');
+		   require_once("custom/modules/HAT_Assets/js/detailview_map_point.js");
+		   echo ('</script>');
+		   
+		   parent::preDisplay();
+	   }
+}
+?>
