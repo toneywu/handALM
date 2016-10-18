@@ -8,6 +8,7 @@ if (empty ($_REQUEST['hat_eventtype_id'])) {
 	die('Not A Valid ID');
 }
 
+
 global $db;
 
 $event_sql = "SELECT 
@@ -15,7 +16,7 @@ $event_sql = "SELECT
 				  h.change_using_org,
 				  h.change_location,
 				  h.change_owning_person,
-				  h.change_rack_position
+				  h.change_rack_position,h.change_asset_status,h.change_asset_date_end,h.change_asset_date_start
 			FROM
 			      hat_eventtype h 
 			WHERE h.deleted=0 

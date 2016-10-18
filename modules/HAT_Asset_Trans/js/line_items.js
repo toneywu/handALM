@@ -367,6 +367,21 @@ function insertTransLineElements(tableid, current_view) { //创建界面要素
       "<input type='hidden' name='line_target_rack_position_data[" + prodln + "]' id='line_target_rack_position_data" + prodln + "' value='' />"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openRackPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
+      
+      //add by yuan.chen
+      "<span class='input_group ig_location'>"+
+      "<label id='line_date_start" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_DATE_START')+"</label>"+
+      "<input style='width:153px;' type='text' name='line_date_start[" + prodln + "]' id='line_date_start" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
+      "<span class='input_group ig_location'>"+
+      "<label id='line_date_end" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_DATE_END')+"</label>"+
+      "<input style='width:153px;' type='text' name='line_date_end[" + prodln + "]' id='line_date_end" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
+      "<span class='input_group ig_location'>"+
+      "<label id='line_status" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_STATUS')+"</label>"+
+      "<input style='width:153px;' type='text' name='line_status[" + prodln + "]' id='line_status" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
+      //end 
       "<input type='hidden' name='line_deleted[" + prodln + "]' id='line_deleted" + prodln + "' value='0'>"+
       "<input type='hidden' name='line_id[" + prodln + "]' id='line_id" + prodln + "' value=''>"+
 
@@ -468,11 +483,12 @@ function LineDescElement(prefix_name,target_obj_name, current_obj_name, obj_labe
 function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
   generateLineDesc(ln);//去生成Description
   resetEditorFields(ln);//初始化编辑状态下的一些字段
-  $("#displayed_line_asset"+ln).html($("#line_asset"+ln).val());
+  $("#displayed_line_asset"+ln).html("<a href='index.php?module=HAT_Assets&action=DetailView&record="+$("#line_asset_id"+ln).val()+"'>"+$("#line_asset"+ln).val()+"</a>");
   $("#displayed_line_name"+ln).html($("#line_name"+ln).val());
   $("#displayed_line_description"+ln).html($("#line_description"+ln).val());
 
 }
+
 
 function resetEditorFields(ln) {
   //生成编辑行中的字段样式，如锁定一些字段，以及加颜色的字段

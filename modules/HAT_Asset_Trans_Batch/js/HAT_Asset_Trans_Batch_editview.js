@@ -2,7 +2,6 @@ function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"HAT_Asset_Trans_Batch");
     $(".expandLink").click();
 }
-
 var prodln = 0;
 var global_eventOptions;
 
@@ -115,6 +114,12 @@ function resetEventType() {
 	loopField("line_target_owning_org",global_eventOptions.change_using_org);
 
 	loopField("line_target_rack_position_desc",global_eventOptions.change_rack_position);
+	
+	//add by  yuan.chen
+	loopField("line_date_start",global_eventOptions.change_asset_date_end);
+	loopField("line_date_end",global_eventOptions.change_asset_date_start);
+	loopField("line_status",global_eventOptions.change_asset_status);
+	//end 
 
    if (global_eventOptions.change_owning_person=="INVISIABLE") {
 		loopField("line_target_owning_person","INVISIABLE");

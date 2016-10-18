@@ -11,7 +11,6 @@ function display_lines($focus, $field, $value, $view){
     }
     echo ']</script>';
 
-
     //以下开始处理行显示相关的内容
     $html = '';
     if($view == 'EditView' || $view == 'DetailView'){
@@ -58,7 +57,10 @@ function display_lines($focus, $field, $value, $view){
 					  p_asset_c.id current_parent_asset_id,
 					  p_asset_c.name current_parent_asset,
 					  p_asset_t.id target_parent_asset_id,
-					  p_asset_t.name target_parent_asset 
+					  p_asset_t.name target_parent_asset,
+					  hat.date_start, 		
+					  hat.date_end,		
+					  hat.status
 					FROM
 					  hat_asset_trans hat 
 					  LEFT JOIN hat_asset_locations location_c 
@@ -132,6 +134,7 @@ function display_lines($focus, $field, $value, $view){
 		while ($row = $focus->db->fetchByAssoc($result)) {
 			$line_data = json_encode($row);
 			$html .= "insertLineData(" . $line_data .",'".$view."');";
+			$html .= 'resetLineNum();';
 			//REF:custom/modules/HAT_Asset_Trans/js/line_items.js
             //通过insertLineData向已经完成初始化的页面要素中，写入值
 		}
