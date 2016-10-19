@@ -1,17 +1,59 @@
 <?php
-// created: 2016-10-19 10:03:58
+// created: 2016-10-19 15:17:21
 $subpanel_layout['list_fields'] = array (
   'name' => 
   array (
     'vname' => 'LBL_NAME',
     'widget_class' => 'SubPanelDetailViewLink',
-    'width' => '45%',
+    'width' => '15%',
     'default' => true,
   ),
-  'date_modified' => 
+  'hit_ip_subnets' => 
   array (
-    'vname' => 'LBL_DATE_MODIFIED',
-    'width' => '45%',
+    'type' => 'relate',
+    'studio' => 'visible',
+    'vname' => 'LBL_HIT_IP',
+    'id' => 'HIT_IP_SUBNETS_ID',
+    'link' => true,
+    'width' => '20%',
+    'default' => true,
+    'widget_class' => 'SubPanelDetailViewLink',
+    'target_module' => 'HIT_IP_Subnets',
+    'target_record_key' => 'hit_ip_subnets_id',
+  ),
+  'associated_ip' => 
+  array (
+    'type' => 'varchar',
+    'vname' => 'LBL_ASSOCIATED_IP',
+    'width' => '35%',
+    'default' => true,
+  ),
+  'speed_limit' => 
+  array (
+    'type' => 'varchar',
+    'vname' => 'LBL_SPEED_LIMIT',
+    'width' => '5%',
+    'default' => true,
+  ),
+  'bandwidth_type' => 
+  array (
+    'type' => 'varchar',
+    'vname' => 'LBL_BANDWIDTH_TYPE',
+    'width' => '5%',
+    'default' => true,
+  ),
+  'date_start' => 
+  array (
+    'type' => 'date',
+    'vname' => 'LBL_DATE_START',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'date_end' => 
+  array (
+    'type' => 'date',
+    'vname' => 'LBL_DATE_END',
+    'width' => '10%',
     'default' => true,
   ),
   'edit_button' => 
@@ -30,5 +72,4 @@ $subpanel_layout['list_fields'] = array (
     'width' => '5%',
     'default' => true,
   ),
-  
 );

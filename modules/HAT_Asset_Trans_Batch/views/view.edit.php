@@ -31,7 +31,6 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
         $current_action = $this->action;
         $this->ss->assign('FRAMEWORK',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id'));
 
-		
 		//2、加载基于code_asset_location_type_id的动态界面模板（FF）
         if(isset($this->bean->hat_eventtype_id) && ($this->bean->hat_eventtype_id)!=""){
             //判断是否已经设置有位置分类，如果有分类，则进一步的加载分类对应的FlexForm

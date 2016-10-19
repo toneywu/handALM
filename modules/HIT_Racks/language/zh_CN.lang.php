@@ -107,4 +107,5 @@ $mod_strings = array (
   'LBL_USING_PERSON'=>'使用人',
     'LBL_SOURCE_REF'=>'来源参考说明',
   'LBL_OWING_ORG_USING'=>'使用单位所有',
+  'LBL_USING_TARGET'=>'用途',
 );
