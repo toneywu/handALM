@@ -94,6 +94,22 @@ $layout_defs['Accounts'] = array(
             ),
         ),
 			
+		'hat_assets' => array(
+            'order' => 30,
+            'module' => 'HAT_Assets',
+            'sort_order' => 'asc',
+            'sort_by' => 'name',
+            'subpanel_name' => 'default',
+            'get_subpanel_data' => 'function:get_assets',//这里没有指向传统的link，而是指向了一个function
+            'generate_select' => true,
+            'title_key' => 'LBL_HAT_ASSETS_TITLE',
+            'top_buttons'  => array (),
+            'function_parameters' => array(
+                'import_function_file' => 'modules/HAT_Assets/AssetsSubpanel.php',//指向特定的文件
+                'using_org_id' => $this->_focus->id,
+                'return_as_array' => 'true'
+            ),
+        ),	
 	
 
         'activities' => array(

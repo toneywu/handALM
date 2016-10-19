@@ -80,4 +80,5 @@ $mod_strings = array (
   'LBL_HIT_RACKS_SUBPANEL_TITLE'=>'Racks',
   'LBL_HIT_IP_ALLOCATIONS_TITLE'=>'Allocations',
   'LBL_HAM_WO_TITLE'=>'Work Orders',
+  'LBL_HAT_ASSETS_TITLE'=>'Assets',
 );
