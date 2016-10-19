@@ -194,8 +194,8 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 						$woop_fields['ACT_MODULE'] = '<a href="index.php?module=' . $this->act_module . '&record=' . $it_trans_batch_id . '&action=EditView&woop_id=' . $this->id . '">' . $app_list_strings['ham_woop_moduleList'][$this->act_module] . '</a>';
 					}
 				} else
-					if ($this->act_module == 'HAT_Asset_Trans_Batch') {
-
+					if (strtoupper($this->act_module) == 'HAT_ASSET_TRANS_BATCH') {
+						//echo $this->id."</br>";
 						$asset_trans_beans = BeanFactory :: getBean('HAT_Asset_Trans_Batch')->get_full_list("date_entered desc", "hat_asset_trans_batch.source_woop_id='" . $this->id . "'");
 						if (count($asset_trans_beans) != 0) {
 							$asset_trans_id = $asset_trans_beans[0]->id;
@@ -208,6 +208,7 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 				
 			}
 		}
+		
 		
 		
 
