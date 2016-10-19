@@ -86,4 +86,5 @@ $mod_strings = array (
   'LBL_HIT_RACKS_SUBPANEL_TITLE'=>'机柜',
   'LBL_HIT_IP_ALLOCATIONS_TITLE'=>'IP分配信息',
   'LBL_HAM_WO_TITLE'=>'工单信息',
+  'LBL_HAT_ASSETS_TITLE'=>'资产/设备',
   );

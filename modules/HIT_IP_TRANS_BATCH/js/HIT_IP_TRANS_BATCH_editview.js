@@ -131,7 +131,15 @@ $(document).ready(function(){
 		if ($("#hat_eventtype_id").val() != "") {
 			setEventTypeFields();//初始化EventType，完成后会将EventType的值写入global_eventOptions
 		}
-	})
+	});
+
+	//add by yuan.chen
+	if(typeof source_wo_id!="undefined"){
+		$("#CANCEL_HEADER").click(function(){
+			window.location.href='index.php?module=HAM_WO&action=EditView&record='+source_wo_id;
+		});	
+	};
+	
 
 
 	mark_field_disabled("email",false);

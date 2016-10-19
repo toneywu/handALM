@@ -134,6 +134,9 @@ class HIT_IP_TRANS_BATCHViewEdit extends ViewEdit {
 						$this->bean->target_owning_org=$account_bean->name;
 					}
 				}
+				
+				echo '<script>var source_wo_id ='.$bean_woop['wo_id'].'</script>';
+				
 			}
 
 			$event_sql = "SELECT 
