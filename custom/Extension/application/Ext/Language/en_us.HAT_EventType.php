@@ -55,6 +55,15 @@ $app_list_strings['cux_event_type_option_list']=array (
   'LOCKED' => 'Locked/Not Available',
   'REQUIRED' => 'Required',
   'OPTIONAL' => 'Optional',
+  'INVISIABLE' => 'Invisible',
+);
+
+$app_list_strings['cux_event_type_option2_list']=array (
+  'LOCKED' => 'Locked/Not Available',
+  'REQUIRED' => 'Required',
+  'OPTIONAL' => 'Optional',
+  'INVISIABLE' => 'Invisible',
+  'EMPTY' => 'Empty',
 );
 
 $app_list_strings['hat_event_type_list']=array (

@@ -3,7 +3,7 @@ function call_ff() {
     $(".expandLink").click();
 }
 var prodln = 0;
-var global_eventOptions;
+//var global_eventOptions;
 
 function setEventTypePopupReturn(popupReplyData){
 	if (prodln>0) {
@@ -36,8 +36,8 @@ function setEventTypeFields() {
 		url: 'index.php?to_pdf=true&module=HAT_EventType&action=getTransSetting&id=' + $("#hat_eventtype_id").val(),//e74a5e34-906f-0590-d914-57cbe0e5ae89
 		async: false,
 		success: function (data) {
-			global_eventOptions = jQuery.parseJSON(data);
-			console.log(global_eventOptions);
+			$("#eventOptions").val(data);
+			//console.log(jQuery.parseJSON($("#eventOptions").val()));
 /*			for(var i in obj) {
 				$("#"+i).val(obj[i]);//向隐藏的字段中复制值，从而所有的EventType值都会提供到隐藏的字段中
 			}*/
@@ -81,6 +81,9 @@ function resetEventType() {
 
 	//处理头字段
 	//依据事件类型，确认是否需要变化所属组织
+	//
+	var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());
+
 	if (global_eventOptions.change_owning_org == "REQUIRED"){
 		mark_field_enabled('target_owning_org',false);
 	} else if (global_eventOptions.change_owning_org == "OPTIONAL"){
@@ -95,13 +98,14 @@ function resetEventType() {
 
 	//依据事件类型，确认是否需要变化使用组织
 	//console.log(global_eventOptions.change_using_org);
-	if (global_eventOptions.change_using_org == "REQUIRED"){
+	if (global_eventOptions.change_using_org == "REQUIRED"){ //必须提供使用组织及日期范围
 		mark_field_enabled('target_using_org',false);
 	} else if (global_eventOptions.change_using_org == "OPTIONAL"){
 		mark_field_enabled('target_using_org',true);
 	} else {
-		mark_field_disabled('target_using_org',false);
+		mark_field_disabled('target_using_org',false); //使用组织字段不可见
 	}
+
 	//如果需要变化（包括必须变化和可以变化2种场景，就从工作单上进行默认）
 	//console.log("source_wo_account:"+$("#source_wo_account").val());
 	if ($("#source_wo_account").val()!="" && (global_eventOptions.change_using_org == "REQUIRED"||global_eventOptions.change_using_org == "OPTIONAL")){
@@ -111,15 +115,19 @@ function resetEventType() {
 
 	//处理行字段
 	loopField("line_target_owning_org",global_eventOptions.change_owning_org);
-	loopField("line_target_owning_org",global_eventOptions.change_using_org);
+
+	loopField("line_target_using_org",global_eventOptions.change_using_org);
+	loopField("line_target_using_org_id",global_eventOptions.change_using_org);
 
 	loopField("line_target_rack_position_desc",global_eventOptions.change_rack_position);
-	
+
 	//add by  yuan.chen
-	loopField("line_date_start",global_eventOptions.change_asset_date_end);
+	//开始与结束时间根据使用组织及人员进行显示，不单独进行处理 deleted toney.wu 改到Using_org中
+/*	loopField("line_date_start",global_eventOptions.change_asset_date_end);
 	loopField("line_date_end",global_eventOptions.change_asset_date_start);
-	loopField("line_status",global_eventOptions.change_asset_status);
-	//end 
+*/	//状态不单独进行处理，已经有了 deleted toney.wu
+/*	loopField("line_status",global_eventOptions.change_asset_status);
+*/	//end 
 
    if (global_eventOptions.change_owning_person=="INVISIABLE") {
 		loopField("line_target_owning_person","INVISIABLE");
@@ -247,7 +255,7 @@ $(document).ready(function(){
 
 	SUGAR.util.doWhen("typeof mark_field_disabled != 'undefined'", function(){
 		if ($("#hat_eventtype_id").val() != "") {
-			setEventTypeFields();//初始化EventType，完成后会将EventType的值写入global_eventOptions
+			setEventTypeFields();//初始化EventType，完成后会将EventType的值写入eventOptions这一隐藏字段
 		}
 	})
 

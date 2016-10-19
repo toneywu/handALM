@@ -1399,6 +1399,15 @@ $app_list_strings['cux_event_type_option_list']=array (
   'LOCKED' => 'Locked/Not Available',
   'REQUIRED' => 'Required',
   'OPTIONAL' => 'Optional',
+  'INVISIABLE' => 'Invisible',
+);
+
+$app_list_strings['cux_event_type_option2_list']=array (
+  'LOCKED' => 'Locked/Not Available',
+  'REQUIRED' => 'Required',
+  'OPTIONAL' => 'Optional',
+  'INVISIABLE' => 'Invisible',
+  'EMPTY' => 'Empty',
 );
 
 $app_list_strings['hat_event_type_list']=array (
@@ -1424,6 +1433,7 @@ $app_list_strings['hat_default_asset_list']=array (
   'WO_ASSET_TRANS' => 'WO/Asset Trans',
   'WO_IP_TRANS' => 'WO/Net Rescource Trans',
 );
+
 
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
