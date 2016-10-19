@@ -13,7 +13,6 @@ $(document).ready(function() {
 function setTasksTypePopupReturn(popupReplyData){
     set_return(popupReplyData);
     $("#parent_name_label").hide();
-    console.log(popupReplyData);
     call_ff();
 }
  
