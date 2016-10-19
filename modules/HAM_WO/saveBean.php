@@ -17,5 +17,5 @@ $status_code = $_GET['status_code'];
 $ham_wo_bean = BeanFactory :: getBean('HAM_WO', $current_id);
 $ham_wo_bean->wo_status = $status_code;
 $ham_wo_bean->save();
-//echo $status_code;
+
 ?>

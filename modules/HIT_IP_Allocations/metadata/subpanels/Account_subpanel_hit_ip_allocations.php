@@ -30,4 +30,5 @@ $subpanel_layout['list_fields'] = array (
     'width' => '5%',
     'default' => true,
   ),
+  
 );

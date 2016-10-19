@@ -1,5 +1,6 @@
 <?php
 // created: 2016-10-19 10:16:59
+
 $subpanel_layout['list_fields'] = array (
   'ham_act_id_rule' => 
   array (

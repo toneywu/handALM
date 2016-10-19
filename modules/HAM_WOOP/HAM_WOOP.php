@@ -139,7 +139,6 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 				}
 			}
 		}
-
 		parent :: save($check_notify);
 	}
 

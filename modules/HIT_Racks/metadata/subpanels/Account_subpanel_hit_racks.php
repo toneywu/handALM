@@ -16,6 +16,7 @@ $subpanel_layout['list_fields'] = array (
     'width' => '15%',
     'default' => true,
   ),
+  
   'height' => 
   array (
     'type' => 'int',

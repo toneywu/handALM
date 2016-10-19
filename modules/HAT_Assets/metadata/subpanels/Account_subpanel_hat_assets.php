@@ -44,6 +44,7 @@ $subpanel_layout['list_fields'] = array (
     'vname' => 'LBL_ASSET_STATUS',
     'width' => '10%',
   ),
+  
   'hat_asset_locations_hat_assets_name' => 
   array (
     'type' => 'relate',
