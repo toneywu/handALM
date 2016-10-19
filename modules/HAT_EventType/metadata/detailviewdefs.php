@@ -311,6 +311,30 @@ array (
             'label' => 'LBL_CHANGE_CHANGE_MRTG_LINK',
           ),
         ),
+        6=>
+        array(
+          0=>'change_main_asset',
+          1=>'change_backup_asset'
+        ),
+        7=>
+        array(
+          0=>'change_port_backup',
+          1=>'change_monitoring_backup'
+        ),
+        8=>
+        array(
+          0=>'change_channel_content_backup',
+          1=>'change_channel_num_backup'
+        ),
+        9=>
+        array(
+          0=>'change_date_end',
+          1=>'change_date_start'
+        ),
+        10=>
+        array(
+          0=>'change_status',
+        )
       ),
     ),
   ),
