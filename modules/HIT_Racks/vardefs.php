@@ -954,7 +954,7 @@ $dictionary['HIT_Racks'] = array(
 			),
 		'asset_source' =>
 		    array (
-		      'required' => true,
+		      'required' => false,
 		      'source' => 'non-db',
 		      'name' => 'asset_source',
 		      'vname' => 'LBL_ASSET_SOURCE',
@@ -980,6 +980,31 @@ $dictionary['HIT_Racks'] = array(
 		      'quicksearch' => 'enabled',
 		      'studio' => 'visible',
 		      ),
+		      
+'using_target' => 
+  array (
+    'required' => false,
+    'name' => 'using_target',
+    'vname' => 'LBL_USING_TARGET',
+    'type' => 'varchar',
+    'massupdate' => 0,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'true',
+    'duplicate_merge' => 'disabled',
+    'duplicate_merge_dom_value' => '0',
+    'audited' => false,
+    'inline_edit' => true,
+    'reportable' => true,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'len' => '255',
+    'size' => '20',
+  ),
+		      
+		      
+		      
 		'asset_source_id' =>
 		array (
 			'required' => false,

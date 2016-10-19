@@ -41,7 +41,12 @@ function setEventTypeFields() {
 /*			for(var i in obj) {
 				$("#"+i).val(obj[i]);//向隐藏的字段中复制值，从而所有的EventType值都会提供到隐藏的字段中
 			}*/
+			if($("#haa_ff_id").val()==""){
+				$("#haa_ff_id").val(jQuery.parseJSON(data).haa_ff_id);
+				call_ff();
+			}
 			resetEventType();
+			
 		},
 		error: function () { //失败
 			alert('Error loading document');

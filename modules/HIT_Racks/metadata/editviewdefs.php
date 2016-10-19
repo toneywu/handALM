@@ -49,7 +49,7 @@ array (
             'name' => 'framework',
             'studio' => 'visible',
             'label' => 'LBL_FRAMEWORK',
-            'customCode'=>'{$FRAMEWORK}'
+            'customCode' => '{$FRAMEWORK}',
           ),
           1 => 
           array (
@@ -78,15 +78,6 @@ array (
           0 => 
           array (
             'name' => 'asset_number',
-/*            'displayParams' => 
-            array (
-              'field_to_name_array' => 
-              array (
-                'name' => 'asset',
-                'id' => 'hat_assets_id',
-                'asset_desc' => 'name',
-              ),
-           ),*/ 
           ),
           1 => 'name',
         ),
@@ -151,7 +142,11 @@ array (
             'name' => 'stock_number',
             'label' => 'LBL_STOCK_NUMBER',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'using_target',
+            'label' => 'LBL_USING_TARGET',
+          ),
         ),
         9 => 
         array (
@@ -168,7 +163,6 @@ array (
             'label' => 'LBL_ASSET_SOURCE',
             'displayParams' => 
             array (
-              //'initial_filter' => '&type_advanced=Good',
               'field_to_name_array' => 
               array (
                 'name' => 'asset_source',
@@ -178,9 +172,9 @@ array (
                 'currency_id' => 'currency_id',
                 'supplier_org' => 'supplier_org',
                 'supplier_org_id' => 'supplier_org_id',
-                'supplier_desc'=>'supplier_desc',
+                'supplier_desc' => 'supplier_desc',
               ),
-             ),
+            ),
           ),
         ),
         10 => 
@@ -191,20 +185,20 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_SUPPLIER_ORG',
           ),
-          1 => 'asset_source_ref'
+          1 => 'asset_source_ref',
         ),
-        11 =>
+        11 => 
         array (
-          0 =>
+          0 => 
           array (
             'name' => 'received_date',
           ),
-          1 => 'start_date'
+          1 => 'start_date',
         ),
-        12 =>
+        12 => 
         array (
           0 => 'dismiss_date',
-          1 => ''
+          1 => '',
         ),
         13 => 
         array (
@@ -213,7 +207,7 @@ array (
             'name' => 'owning_org',
             'studio' => 'visible',
             'label' => 'LBL_OWING_ORG',
-            'displayParams' =>
+            'displayParams' => 
             array (
               'initial_filter' => '&frame_c_advanced="+encodeURIComponent($("#haa_framework").val())+"',
               'call_back_function' => 'setUsingOrgPopupReturn',
@@ -224,31 +218,31 @@ array (
             'name' => 'owning_person',
             'studio' => 'visible',
             'label' => 'LBL_OWNING_PERSON',
-            'displayParams' =>
+            'displayParams' => 
             array (
               'initial_filter' => '&account_name_advanced="+encodeURIComponent($("#owning_org").val())+"',
             ),
           ),
         ),
-        14 =>
+        14 => 
         array (
-          0 =>
+          0 => 
           array (
             'name' => 'using_org',
             'studio' => 'visible',
             'label' => 'LBL_USING_ORG',
-            'displayParams' =>
+            'displayParams' => 
             array (
               'initial_filter' => '&frame_c_advanced="+encodeURIComponent($("#haa_framework").val())+"',
               'call_back_function' => 'setUsingOrgPopupReturn',
             ),
           ),
-          1 =>
+          1 => 
           array (
             'name' => 'using_person',
             'studio' => 'visible',
             'label' => 'LBL_USING_PERSON',
-            'displayParams' =>
+            'displayParams' => 
             array (
               'initial_filter' => '&account_name_advanced="+encodeURIComponent($("#using_org").val())+"',
             ),

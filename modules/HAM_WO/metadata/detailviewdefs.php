@@ -41,12 +41,12 @@ array (
           'field' => '30',
         ),
       ),
-      'useTabs' => true,
+      'useTabs' => false,
       'tabDefs' => 
       array (
         'DEFAULT' => 
         array (
-          'newTab' => true,
+          'newTab' => false,
           'panelDefault' => 'expanded',
         ),
         'LBL_EDITVIEW_PANEL1' => 
@@ -67,16 +67,6 @@ array (
         'LBL_EDITVIEW_PANEL4' => 
         array (
           'newTab' => false,
-          'panelDefault' => 'expanded',
-        ),
-        'LBL_EDITVIEW_PANEL_WOLINES' => 
-        array (
-          'newTab' => true,
-          'panelDefault' => 'expanded',
-        ),
-        'LBL_EDITVIEW_PANEL_SOURCE' => 
-        array (
-          'newTab' => true,
           'panelDefault' => 'expanded',
         ),
       ),
@@ -129,15 +119,34 @@ array (
             'label' => 'LBL_WORK_ORDER_ACCESS',
           ),
         ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'complete_by_last_woop',
+            'label' => 'LBL_COMPLETE_BY_LAST_WOOP',
+          ),
+          1 => '',
+        ),
       ),
       'lbl_editview_panel1' => 
       array (
-        0=>
+        0 => 
         array (
-            0=>'account',
-            1=>'contact'
+          0 => 'account',
+          1 => 'contact',
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'contract',
+            'studio' => 'visible',
+            'label' => 'LBL_CONTRACT',
           ),
-        1 =>
+          1 => '',
+        ),
+        2 => 
         array (
           0 => 
           array (
@@ -152,7 +161,7 @@ array (
             'label' => 'LBL_ASSET',
           ),
         ),
-        2 => 
+        3 => 
         array (
           0 => 
           array (
@@ -161,16 +170,6 @@ array (
           ),
           1 => 'map_enabled',
         ),
-/*        3 => 
-        array (
-          0 => 
-          array (
-            'name' => 'contract',
-            'studio' => 'visible',
-            'label' => 'LBL_CONTRACT',
-          ),
-          1 => '',
-        ),*/
       ),
       'lbl_editview_panel_gis' => 
       array (
@@ -278,7 +277,6 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_REPORTER',
           ),
-
         ),
         1 => 
         array (
@@ -294,20 +292,6 @@ array (
         array (
           0 => 'source_type',
           1 => 'source_reference',
-        ),
-      ),
-      'lbl_editview_panel_wolines' => 
-      array (
-        0 => 
-        array (
-          0 => '',
-        ),
-      ),
-      'lbl_editview_panel_source' => 
-      array (
-        0 => 
-        array (
-          0 => '',
         ),
       ),
     ),

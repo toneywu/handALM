@@ -57,17 +57,17 @@ array (
     array (
       'default' => 
       array (
-        0 =>
+        0 => 
         array (
           0 => 'framework',
           1 => 'asset_group',
         ),
-        1 =>
+        1 => 
         array (
           0 => 'asset_location',
           1 => 'asset_status',
         ),
-        2 =>
+        2 => 
         array (
           0 => 'asset',
           1 => 'name',
@@ -118,6 +118,15 @@ array (
         array (
           0 => 'owning_org',
           1 => 'using_org',
+        ),
+        11 => 
+        array (
+          0 => 
+          array (
+            'name' => 'using_target',
+            'label' => 'LBL_USING_TARGET',
+          ),
+          1 => '',
         ),
       ),
       'lbl_detailview_panel1' => 

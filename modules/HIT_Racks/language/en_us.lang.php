@@ -106,4 +106,5 @@ $mod_strings = array (
   'LBL_USING_PERSON'=>'Using Person',
   'LBL_SOURCE_REF'=>'Source Reference',
   'LBL_OWING_ORG_USING'=>'User ownned',
+  'LBL_USING_TARGET'=>'Using',
 );
