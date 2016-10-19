@@ -7,7 +7,6 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
 {
 
     function Display() {
-
         global $db;
         global $current_user;
 
@@ -30,21 +29,7 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
         $current_module = $this->module;
         $current_action = $this->action;
         $this->ss->assign('FRAMEWORK',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id'));
-
-		//2、加载基于code_asset_location_type_id的动态界面模板（FF）
-        if(isset($this->bean->hat_eventtype_id) && ($this->bean->hat_eventtype_id)!=""){
-            //判断是否已经设置有位置分类，如果有分类，则进一步的加载分类对应的FlexForm
-            $event_type_id = $this->bean->hat_eventtype_id;
-            $bean_code = BeanFactory::getBean('HAT_EventType',$event_type_id);
-            if (isset($bean_code->haa_ff_id)) {
-                $ff_id = $bean_code->haa_ff_id;
-            }
-            if (isset($ff_id) && $ff_id!="") {
-                //如果分类有对应的FlexForm，些建立一个对象去存储FF_ID
-                //需要注意的是在Metadata中是不包括这个ID的，如果这里没有加载则在后续的JS文件中加载
-                echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="'.$ff_id.'">';
-            }
-        }
+		
 
         //如果有工序来源，则初始化工序信息
         if (empty($this->bean->id) && !empty($_REQUEST['woop_id'])) {
@@ -68,7 +53,7 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
 										  contacts.id contact_id,
 										  contacts.`last_name` contact_name,
 										  accounts.`id` org_id,
-										  accounts.`name` org_name
+										  accounts.`name` org_name,hat_eventtype.haa_ff_id
 										FROM
 										  ham_wo
 										  LEFT JOIN (
@@ -119,7 +104,7 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
                     $this->bean->source_wo_account_id = $bean_woop['source_wo_account_id'];
                     $this->bean->source_wo_contact = $bean_woop['source_wo_contact'];
                     $this->bean->source_wo_contact_id = $bean_woop['source_wo_contact_id'];
-
+					$this->bean->haa_ff_id=$bean_woop['haa_ff_id'];
                     if(empty($this->bean->date_schedualed_finish)){
                         if(empty($this->bean->date_target_finish)){
                             if(empty($this->bean->date_finish_not_later)){
@@ -159,8 +144,23 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
             $this->bean->current_owning_org_id = $current_user->account_id_c;
             $this->bean->current_owning_org = $current_user->contact_organization_c;
         }
-
-
+		//2、加载基于code_asset_location_type_id的动态界面模板（FF）		
+        if(isset($this->bean->hat_eventtype_id) && ($this->bean->hat_eventtype_id)!=""){
+            //判断是否已经设置有位置分类，如果有分类，则进一步的加载分类对应的FlexForm
+            $event_type_id = $this->bean->hat_eventtype_id;
+            $bean_code = BeanFactory::getBean('HAT_EventType',$event_type_id);
+            if (isset($bean_code->haa_ff_id)) {
+                $ff_id = $bean_code->haa_ff_id;
+            }
+			
+            if (isset($ff_id) && $ff_id!="") {
+                //如果分类有对应的FlexForm，些建立一个对象去存储FF_ID
+                //需要注意的是在Metadata中是不包括这个ID的，如果这里没有加载则在后续的JS文件中加载
+                echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="'.$ff_id.'">';
+            }
+        }
+		
+		
         $beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
         //处理Framework中的相关规则性字段
         //以下JS变更主要在modules\HAT_Asset_Trans\js\line_items.js中变调用

@@ -98,5 +98,6 @@ $mod_strings = array (
   'LBL_ATTRIBUTE4'=>'Extra Attribute4',
   'LBL_ATTRIBUTE5'=>'Extra Attribute5',
   'LBL_ATTRIBUTE6'=>'Extra Attribute6',
+  'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL'=>'Change Status',
   
 );

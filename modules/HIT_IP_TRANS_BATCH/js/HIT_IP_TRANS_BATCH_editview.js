@@ -57,6 +57,11 @@ function setWoPopupReturn(popupReplyData){
 		mark_field_enabled("source_woop",true);
 	}
 }
+
+
+
+
+
 /**
  * 设置必输
  */
@@ -134,9 +139,9 @@ $(document).ready(function(){
 	});
 
 	//add by yuan.chen
-	if(typeof source_wo_id!="undefined"){
-		$("#CANCEL_HEADER").click(function(){
-			window.location.href='index.php?module=HAM_WO&action=EditView&record='+source_wo_id;
+	if(typeof source_wo_id_tt!="undefined"){
+		$("#CANCEL_HEADER").bind("click",function(){
+			SUGAR.ajaxUI.loadContent('index.php?action=DetailView&module=HAM_WO&record='+source_wo_id_tt)
 		});	
 	};
 	
