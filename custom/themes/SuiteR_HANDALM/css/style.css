@@ -11,7 +11,10 @@
 }
 
 .recent_h3 {
-		padding: 10px 0px;/*FIX：左侧标题*/
+	padding: 10px 0px;/*FIX：左侧标题*/
+}
+.recently_viewed_link_container_sidebar li.recentlinks a { /*左侧字体截断*/
+	overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 170px;
 }
 
 #mobile_menu a {

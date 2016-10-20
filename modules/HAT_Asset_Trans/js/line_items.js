@@ -149,7 +149,7 @@ function openRackPopup(ln){
       "rackname" : "line_target_parent_asset" + ln,
     }
   };
-  var popupFilter = '&current_mode=rackposition&framework_advanced='+$("#haa_framework").val();
+  var popupFilter = '&current_mode=rackposition&defualt_list=wo_asset_trans'+'&wo_id='+source_wo_id+'&framework_advanced='+$("#haa_framework").val();
   open_popup('HIT_Racks', 1200, 850, popupFilter, true, true, popupRequestData);
 }
 

@@ -6,7 +6,7 @@
 * ************************************************************/
 $current_mode_sql="1=1";
 if (isset($_REQUEST['current_mode'])) {
-    if($_REQUEST['current_mode']=="rack") {
+    if($_REQUEST['current_mode']=="rack"||$_REQUEST['current_mode']=="rackposition") {
         $current_mode_sql = "hat_assets.enable_it_rack = 1 ";
     } elseif ($_REQUEST['current_mode']=="it") {
         $current_mode_sql = "hat_assets.enable_it_ports = 1 ";

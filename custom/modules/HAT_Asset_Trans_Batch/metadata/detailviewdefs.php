@@ -23,12 +23,26 @@ array (
         array (
           0 => 'EDIT',
 /*          1 => 'DUPLICATE',
-2 => 'DELETE',*/
-1 =>
-array (
-  'customCode' => '<input type="button" class="button" onClick="GenerateDoc();" value="{$MOD.LBL_GENERATE_DOC}">',
-  ),
-),
+            2 => 'DELETE',*/
+          1 =>
+            array (
+              'customCode' => '<input type="button" class="button" onClick="GenerateDoc();" value="{$MOD.LBL_GENERATE_DOC}">',
+              ),
+            ),
+
+        'hidden' => 
+        array (
+          0 => '<input type="hidden" name="source_woop_id" id="source_woop_id" value="{$SOURCE_WOOP_ID}">',
+          1 => '<input type="hidden" name="source_wo_id"  id="source_wo_id" value="{$SOURCE_WO_ID}">',
+          2 => '<input type="hidden" name="source_wo_org"  id="source_wo_org" value="{$SOURCE_WO_ORG}">',
+          3 => '<input type="hidden" name="source_wo_account"  id="source_wo_account" value="{$SOURCE_WO_ACCOUNT}">',
+          4 => '<input type="hidden" name="source_wo_account_id"  id="source_wo_account_id" value="{$SOURCE_WO_ACCOUNT_ID}">',
+          5 => '<input type="hidden" name="source_wo_contact"  id="source_wo_contact" value="{$SOURCE_WO_CONTACT}">',
+          6 => '<input type="hidden" name="source_wo_contact_id"  id="source_wo_contact_id" value="{$SOURCE_WO_CONTACT}">',
+
+          11 => '<input type="hidden" name="eventOptions" id="eventOptions">',
+
+        ),
         ),
       'maxColumns' => '2',
       'widths' => 
