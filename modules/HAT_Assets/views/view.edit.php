@@ -50,6 +50,11 @@ class HAT_AssetsViewEdit extends ViewEdit
 
 
 		}
+		
+		if(isset($_REQUEST['woop_id']) && !empty($_REQUEST['woop_id'])  ){
+			$woop_bean = BeanFactory :: getBean('HAM_WOOP')->retrieve_by_string_fields(array ('ID' => $_REQUEST['woop_id']));
+			echo '<script>var source_wo_id_tt="'.$woop_bean->ham_wo_id.'"</script>';
+		}
 
 		parent::Display();
 

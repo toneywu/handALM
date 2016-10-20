@@ -174,6 +174,12 @@ class HIT_IP_TRANS_BATCHViewEdit extends ViewEdit {
 			$this->bean->current_owning_org_id = $current_user->account_id_c;
 			$this->bean->current_owning_org = $current_user->contact_organization_c;
 		}
+		
+		if(isset($_REQUEST['woop_id']) && !empty($_REQUEST['woop_id'])  ){
+			$woop_bean = BeanFactory :: getBean('HAM_WOOP')->retrieve_by_string_fields(array ('ID' => $_REQUEST['woop_id']));
+			echo '<script>var source_wo_id_tt="'.$woop_bean->ham_wo_id.'"</script>';
+		}
+		
 
 		//echo "account_id ".$this->bean->account_id."<br>";
 		if (!empty ($this->bean->account_id)) {

@@ -36,7 +36,9 @@ $(document).ready(function(){
     $("#btn_submit").click(function(){
         $("#btn_submit").hide('normal', updateStatus($("input[name='record']").val()));
     });
-
+	
+    
+    var change_btn=$("<input type='button' class='btn_detailview' id='btn_change_status' value='"+SUGAR.language.get('HIT_IP_TRANS_BATCH', 'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL')+"'>");
 });
 
 function showWOLines(wo_id) {

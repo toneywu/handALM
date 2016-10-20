@@ -109,11 +109,11 @@ function save_lines($post_data, $parent, $key = '') {
 			$trans_line->save();
 			$GLOBALS['log']->infor("transLine Saved");
 
-			if ($parent->asset_trans_status == "APPROVED") {
+			//if ($parent->asset_trans_status == "APPROVED") {
 				$GLOBALS['log']->infor("allocation Lines Begin to process");
 				save_allocation_lines($trans_line, $parent,$prev_trans_batch_id);
 				$GLOBALS['log']->infor("End to process Allocation Lines");
-			}
+			//}
 		} else {
 			//empty line jumped
 		}

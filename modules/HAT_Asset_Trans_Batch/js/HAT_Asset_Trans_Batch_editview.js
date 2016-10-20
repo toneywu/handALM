@@ -41,12 +41,10 @@ function setEventTypeFields() {
 /*			for(var i in obj) {
 				$("#"+i).val(obj[i]);//向隐藏的字段中复制值，从而所有的EventType值都会提供到隐藏的字段中
 			}*/
+			resetEventType();
 			if($("#haa_ff_id").val()==""){
 				$("#haa_ff_id").val(jQuery.parseJSON(data).haa_ff_id);
-				call_ff();
 			}
-			resetEventType();
-			
 		},
 		error: function () { //失败
 			alert('Error loading document');
@@ -253,7 +251,14 @@ $(document).ready(function(){
 		call_ff();
 	});
 
-
+	//add by yuan.chen
+	if(typeof source_wo_id_tt!="undefined"){
+		$("#CANCEL_HEADER").bind("click",function(){
+			SUGAR.ajaxUI.loadContent('index.php?action=DetailView&module=HAM_WO&record='+source_wo_id_tt)
+		});	
+	};
+	
+	
 	$("#source_woop_id").val(source_woop_id);
 	$("#source_wo_id").val(source_wo_id);
 
