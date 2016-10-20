@@ -1,5 +1,5 @@
 <?php
-// created: 2016-10-07 17:11:41
+// created: 2016-10-21 00:13:50
 $GLOBALS['tabStructure'] = array (
   'LBL_TABGROUP_SALES' => 
   array (
@@ -116,13 +116,14 @@ $GLOBALS['tabStructure'] = array (
       4 => 'HAT_Systems',
       5 => 'HAT_EventType',
       6 => 'HAA_Codes',
-      7 => 'HPR_AM_Roles',
-      8 => 'AOS_Product_Categories',
-      9 => 'HAM_Priority',
-      10 => 'HAA_UOM_Classes',
-      11 => 'HAT_Linear_Reference_Methods',
-      12 => 'AOS_PDF_Templates',
-      13 => 'HAA_FF',
+      7 => 'AOS_Product_Categories',
+      8 => 'HPR_AM_Roles',
+      9 => 'HPR_AM_Catelog',
+      10 => 'HAM_Priority',
+      11 => 'HAA_UOM_Classes',
+      12 => 'HAT_Linear_Reference_Methods',
+      13 => 'AOS_PDF_Templates',
+      14 => 'HAA_FF',
     ),
   ),
 );
