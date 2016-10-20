@@ -19,4 +19,5 @@ $mod_strings = array (
   'LBL_HAT_ASSETS_CONTACTS' => 'Response Person',
   'LBL_EDITVIEW_PANEL1' => 'Result',
   'LBL_TASK_TYPE'=>'Task Type',
+  'LBL_FRAME'=>'Frameworks',
 );

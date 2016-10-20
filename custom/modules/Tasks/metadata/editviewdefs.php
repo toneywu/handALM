@@ -46,20 +46,15 @@ array (
           'file' => 'custom/modules/Tasks/js/TasksEditView.js',
         ),
       ),
-      'useTabs' => false,
+      'useTabs' => true,
       'tabDefs' => 
       array (
+        'DEFAULT' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
         'LBL_TASK_INFORMATION' => 
-        array (
-          'newTab' => false,
-          'panelDefault' => 'expanded',
-        ),
-        'LBL_EDITVIEW_PANEL1' => 
-        array (
-          'newTab' => false,
-          'panelDefault' => 'expanded',
-        ),
-        'LBL_PANEL_ASSIGNMENT' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
@@ -68,11 +63,18 @@ array (
     ),
     'panels' => 
     array (
-      'lbl_task_information' => 
+      'default' => 
       array (
         0 => 
         array (
           0 => 
+          array (
+            'name' => 'haa_framework_c',
+            'studio' => 'visible',
+            'label' => 'LBL_HAA_FRAMEWORK',
+            'customCode' => '{$FRAMEWORK_C}',
+          ),
+          1 => 
           array (
             'name' => 'task_type_c',
             'studio' => 'visible',
@@ -89,7 +91,13 @@ array (
               'call_back_function' => 'setTasksTypePopupReturn',
             ),
           ),
-          1 => 
+        ),
+      ),
+      'lbl_task_information' => 
+      array (
+        0 => 
+        array (
+          0 => 
           array (
             'name' => 'name',
             'displayParams' => 
@@ -97,6 +105,7 @@ array (
               'required' => true,
             ),
           ),
+          1 => 'assigned_user_name',
         ),
         1 => 
         array (
@@ -157,16 +166,6 @@ array (
         array (
           0 => 
           array (
-            'name' => 'description',
-          ),
-        ),
-      ),
-      'lbl_editview_panel1' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
             'name' => 'attribute1_c',
             'label' => 'LBL_ATTRIBUTE1',
           ),
@@ -176,7 +175,7 @@ array (
             'label' => 'LBL_ATTRIBUTE2',
           ),
         ),
-        1 => 
+        5 => 
         array (
           0 => 
           array (
@@ -189,7 +188,7 @@ array (
             'label' => 'LBL_ATTRIBUTE4',
           ),
         ),
-        2 => 
+        6 => 
         array (
           0 => 
           array (
@@ -198,25 +197,29 @@ array (
           ),
           1 => 
           array (
+            'name' => 'attribute6_c',
+            'label' => 'LBL_ATTRIBUTE6',
+          ),
+        ),
+        7 => 
+        array (
+          0 => 
+          array (
             'name' => 'attribute7_c',
             'label' => 'LBL_ATTRIBUTE7',
           ),
-        ),
-        3 => 
-        array (
-          0 => 
+          1 => 
           array (
             'name' => 'attribute8_c',
             'label' => 'LBL_ATTRIBUTE8',
           ),
-          1 => '',
         ),
-      ),
-      'LBL_PANEL_ASSIGNMENT' => 
-      array (
-        0 => 
+        8 => 
         array (
-          0 => 'assigned_user_name',
+          0 => 
+          array (
+            'name' => 'description',
+          ),
         ),
       ),
     ),

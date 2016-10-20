@@ -6,7 +6,7 @@ $(document).ready(function() {
     //触发FF
     SUGAR.util.doWhen("typeof setFF == 'function'", function(){
         call_ff();
-    })
+    });
 });
 
 //选择合同类型的回调函数
@@ -17,6 +17,10 @@ function setTasksTypePopupReturn(popupReplyData){
 }
  
 function call_ff() {
+    if ($("#haa_ff_id").val()!=""){
+        $("#parent_name_label").hide();
+    }
     triger_setFF($("#haa_ff_id").val(),"Tasks");
     $(".expandLink").click();
+    
 }
