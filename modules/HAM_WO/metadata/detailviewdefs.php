@@ -41,12 +41,12 @@ array (
           'field' => '30',
         ),
       ),
-      'useTabs' => false,
+      'useTabs' => true,
       'tabDefs' => 
       array (
         'DEFAULT' => 
         array (
-          'newTab' => false,
+          'newTab' => true,
           'panelDefault' => 'expanded',
         ),
         'LBL_EDITVIEW_PANEL1' => 
@@ -69,6 +69,16 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_EDITVIEW_PANEL_WOLINES' => 
+         array (
+           'newTab' => true,
+           'panelDefault' => 'expanded',
+         ),
+         'LBL_EDITVIEW_PANEL_SOURCE' => 
+         array (
+           'newTab' => true,
+           'panelDefault' => 'expanded',
+         ),
       ),
       'syncDetailEditViews' => true,
     ),
@@ -294,6 +304,20 @@ array (
           1 => 'source_reference',
         ),
       ),
+      'lbl_editview_panel_wolines' => 
+       array (
+         0 => 
+         array (
+           0 => '',
+         ),
+       ),
+       'lbl_editview_panel_source' => 
+       array (
+         0 => 
+         array (
+           0 => '',
+         ),
+       ),
     ),
   ),
 );

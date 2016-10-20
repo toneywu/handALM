@@ -68,7 +68,7 @@ array (
           'panelDefault' => 'expanded',
         ),
       ),
-      'syncDetailEditViews' => true,
+      'syncDetailEditViews' => false,
     ),
     'panels' => 
     array (
