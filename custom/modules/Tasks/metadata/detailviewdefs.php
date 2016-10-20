@@ -70,31 +70,52 @@ array (
           'field' => '30',
         ),
       ),
-      'includes'=>array(
-          0=>array(
-            'file'=>'modules/HAA_FF/ff_include.js',
-            ),
-          1=>array(
-            'file'=>'custom/modules/Tasks/js/TasksDetailView.js',
-            ),
+      'includes' => 
+      array (
+        0 => 
+        array (
+          'file' => 'modules/HAA_FF/ff_include.js',
         ),
+        1 => 
+        array (
+          'file' => 'custom/modules/Tasks/js/TasksDetailView.js',
+        ),
+      ),
       'useTabs' => true,
       'tabDefs' => 
       array (
-        'LBL_TASK_INFORMATION' => 
+        'DEFAULT' => 
         array (
-          'newTab' => true,
+          'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_PANEL_ASSIGNMENT' => 
+        'LBL_TASK_INFORMATION' => 
         array (
-          'newTab' => true,
+          'newTab' => false,
           'panelDefault' => 'expanded',
         ),
       ),
     ),
     'panels' => 
     array (
+      'default' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'haa_framework_c',
+            'studio' => 'visible',
+            'label' => 'LBL_HAA_FRAMEWORK',
+          ),
+          1 => 
+          array (
+            'name' => 'task_type_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TASK_TYPE',
+          ),
+        ),
+      ),
       'lbl_task_information' => 
       array (
         0 => 
@@ -104,40 +125,7 @@ array (
             'name' => 'name',
             'label' => 'LBL_SUBJECT',
           ),
-          1 => 'status',
-        ),
-        1 => 
-        array (
-          0 => 'date_start',
           1 => 
-          array (
-            'name' => 'parent_name',
-            'customLabel' => '{sugar_translate label=\'LBL_MODULE_NAME\' module=$fields.parent_type.value}',
-          ),
-        ),
-        2 => 
-        array (
-          0 => 'date_due',
-          1 => 
-          array (
-            'name' => 'contact_name',
-            'label' => 'LBL_CONTACT',
-          ),
-        ),
-        3 => 
-        array (
-          0 => 'priority',
-        ),
-        4 => 
-        array (
-          0 => 'description',
-        ),
-      ),
-      'LBL_PANEL_ASSIGNMENT' => 
-      array (
-        0 => 
-        array (
-          0 => 
           array (
             'name' => 'assigned_user_name',
             'label' => 'LBL_ASSIGNED_TO',
@@ -145,18 +133,82 @@ array (
         ),
         1 => 
         array (
+          0 => 'status',
+          1 => 'date_start',
+        ),
+        2 => 
+        array (
           0 => 
           array (
-            'name' => 'date_entered',
-            'customCode' => '{$fields.date_entered.value} {$APP.LBL_BY} {$fields.created_by_name.value}',
-            'label' => 'LBL_DATE_ENTERED',
+            'name' => 'parent_name',
+            'customLabel' => '{sugar_translate label=\'LBL_MODULE_NAME\' module=$fields.parent_type.value}',
+          ),
+          1 => 'date_due',
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'contact_name',
+            'label' => 'LBL_CONTACT',
+          ),
+          1 => 'priority',
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute1_c',
+            'label' => 'LBL_ATTRIBUTE1',
           ),
           1 => 
           array (
-            'name' => 'date_modified',
-            'customCode' => '{$fields.date_modified.value} {$APP.LBL_BY} {$fields.modified_by_name.value}',
-            'label' => 'LBL_DATE_MODIFIED',
+            'name' => 'attribute2_c',
+            'label' => 'LBL_ATTRIBUTE2',
           ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute3_c',
+            'label' => 'LBL_ATTRIBUTE3',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute4_c',
+            'label' => 'LBL_ATTRIBUTE4',
+          ),
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute5_c',
+            'label' => 'LBL_ATTRIBUTE5',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute6_c',
+            'label' => 'LBL_ATTRIBUTE6',
+          ),
+        ),
+        7 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute7_c',
+            'label' => 'LBL_ATTRIBUTE7',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute8_c',
+            'label' => 'LBL_ATTRIBUTE8',
+          ),
+        ),
+        8 => 
+        array (
+          0 => 'description',
         ),
       ),
     ),

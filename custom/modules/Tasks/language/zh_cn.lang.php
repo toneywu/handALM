@@ -1,5 +1,5 @@
 <?php
-// created: 2016-10-19 12:58:56
+// created: 2016-10-20 11:40:02
 $mod_strings = array (
   'LBL_ACCOUNT' => '组织',
   'LBL_CONTACT_NAME' => '人员 Name ',
@@ -16,4 +16,6 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL1' => '结果',
   'LBL_TASK_TYPE_HAA_CODES_ID' => '任务类型 (related 列表代码 ID)',
   'LBL_TASK_TYPE' => '任务类型',
+  'LBL_HAA_FRAMEWORK_HAA_FRAMEWORKS_ID' => '业务框架 (related Business Framework ID)',
+  'LBL_HAA_FRAMEWORK' => '业务框架',
 );
