@@ -5,19 +5,13 @@ class TasksViewDetail extends ViewDetail
 {
 	public function __construct()
     {
-        if(isset($this->bean->id) && ($this->bean->id)!=""){
-            $id_c = $this->bean->id;
-            $haa_codes=BeanFactory::getBean('Tasks',$id_c);
-            $haa_codes->haa_frameworks_id_c=$_SESSION["current_framework"];
-            $haa_codes->save();
-        }
         parent::ViewDetail();
         $this->useForSubpanel = true;
         $this->useModuleQuickCreateTemplate = true;
     }
     
 	function display()
-	{
+	{  
         if(isset($this->bean->id) && ($this->bean->id)!=""){
             $id_c = $this->bean->id;
             $haa_codes=BeanFactory::getBean('Tasks',$id_c);

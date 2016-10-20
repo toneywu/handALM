@@ -21,7 +21,7 @@ class TasksViewEdit extends ViewEdit
             $bean_framework_id = $_SESSION["current_framework"];
             $bean_framework_name = $beanFramework->name;
         }
-        $this->ss->assign('FRAMEWORK_C',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_framework_id_c')); 
+        $this->ss->assign('FRAMEWORK_C',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id_c')); 
 		//*********************处理FF界面 START********************
 		if(isset($this->bean->haa_codes_id_c) && ($this->bean->haa_codes_id_c)!=""){
             //判断是否已经设置合同的列表代码，如果有合同的列表代码，则进一步的加载对应的FlexForm

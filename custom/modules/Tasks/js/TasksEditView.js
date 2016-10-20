@@ -17,10 +17,10 @@ function setTasksTypePopupReturn(popupReplyData){
 }
  
 function call_ff() {
-    triger_setFF($("#haa_ff_id").val(),"Tasks");
-    var type=$(".moduleTitle>h2").html();
-    if (type!="新增") {
+    if ($("#haa_ff_id").val()!=""){
         $("#parent_name_label").hide();
     }
+    triger_setFF($("#haa_ff_id").val(),"Tasks");
     $(".expandLink").click();
+    
 }
