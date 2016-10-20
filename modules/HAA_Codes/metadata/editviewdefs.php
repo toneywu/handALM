@@ -37,7 +37,11 @@ array (
       array (
         0 => 
         array (
-          0 => 'name',
+          0 => 
+          array (
+            'name' => 'framework',
+            'customCode' => '{$FRAMEWORK}',
+          ),
           1 => 
           array (
             'name' => 'code_type',
@@ -47,7 +51,8 @@ array (
         ),
         1 => 
         array (
-          0 => 'description',
+          0 => 'name',
+          1=>'description'
         ),
       ),
     ),
