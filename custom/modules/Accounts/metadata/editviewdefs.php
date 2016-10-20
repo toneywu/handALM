@@ -103,7 +103,7 @@ array (
             'label' => 'LBL_BUSINESS_TYPE',
             'displayParams' => 
             array (
-              'initial_filter' => '&code_type_advanced=account_business_type',
+              'initial_filter' => '&code_type_advanced=accounts_business_type',
               'field_to_name_array' => 
               array (
                 'name' => 'business_type_c',
@@ -232,7 +232,7 @@ array (
             'label' => 'LBL_CUSTOMER_CLASSS',
             'displayParams' => 
             array (
-              'initial_filter' => '&code_type_advanced=account_customer_class',
+              'initial_filter' => '&code_type_advanced=accounts_customer_class',
             ),
           ),
         ),

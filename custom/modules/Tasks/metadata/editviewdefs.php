@@ -81,7 +81,7 @@ array (
             'label' => 'LBL_TASK_TYPE',
             'displayParams' => 
             array (
-              'initial_filter' => '&code_type_advanced=task_type',
+              'initial_filter' => '&code_type_advanced=tasks_type',
               'field_to_name_array' => 
               array (
                 'name' => 'task_type_c',

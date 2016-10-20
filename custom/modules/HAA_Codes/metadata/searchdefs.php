@@ -12,14 +12,14 @@ array (
         'default' => true,
         'width' => '10%',
       ),
-      'code_type' => 
+      'code_module' => 
       array (
         'type' => 'enum',
         'studio' => 'visible',
-        'label' => 'LBL_CODE_TYPE',
+        'label' => 'LBL_CODE_MODULE',
         'width' => '10%',
         'default' => true,
-        'name' => 'code_type',
+        'name' => 'code_module',
       ),
       'code_tag' => 
       array (
@@ -37,6 +37,15 @@ array (
         'name' => 'name',
         'default' => true,
         'width' => '10%',
+      ),
+      'code_module' => 
+      array (
+        'type' => 'enum',
+        'studio' => 'visible',
+        'label' => 'LBL_CODE_MODULE',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'code_module',
       ),
       'code_type' => 
       array (

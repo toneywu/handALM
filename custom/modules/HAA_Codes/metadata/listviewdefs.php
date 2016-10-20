@@ -17,6 +17,14 @@ array (
     'width' => '10%',
     'default' => true,
   ),
+  'CODE_MODULE' => 
+  array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'label' => 'LBL_CODE_MODULE',
+    'width' => '10%',
+    'default' => true,
+  ),
   'CODE_TAG' => 
   array (
     'type' => 'varchar',

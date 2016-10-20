@@ -45,9 +45,14 @@ array (
     array (
       'default' => 
       array (
-        0 => 
+        0=>
+        array(
+          0=>'framework',
+          1=>''
+        ),
+        1 => 
         array (
-          0 => 'name',
+          0 => 'code_module',
           1 => 
           array (
             'name' => 'code_type',
@@ -55,12 +60,12 @@ array (
             'label' => 'LBL_CODE_TYPE',
           ),
         ),
-        1 => 
-        array (
-          0 => 'description',
-          1 => '',
-        ),
         2 => 
+        array (
+          0 => 'name',
+          1 => 'description',
+        ),
+        3 => 
         array (
           0 => 
           array (

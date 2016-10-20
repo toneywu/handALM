@@ -42,6 +42,11 @@ array (
             'name' => 'framework',
             'customCode' => '{$FRAMEWORK}',
           ),
+          1=>''
+        ),
+        1 => 
+        array (
+          0 => 'code_module',
           1 => 
           array (
             'name' => 'code_type',
@@ -49,12 +54,12 @@ array (
             'label' => 'LBL_CODE_TYPE',
           ),
         ),
-        1 => 
+        2 => 
         array (
           0 => 'name',
           1 => 'description',
         ),
-        2 => 
+        3 => 
         array (
           0 => 
           array (
