@@ -835,6 +835,59 @@ $dictionary['HIT_IP_Allocations'] = array (
 			
 		),
 		
+		
+		'target_owning_org_id' => array (
+			'required' => false,
+			'name' => 'target_owning_org_id',
+			'vname' => 'LBL_TARGET_OWNING_ORG_ID',
+			'type' => 'id',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => 0,
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => false,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => 36,
+			'size' => '20',
+
+			
+		),
+		'target_owning_org' => array (
+			'required' => true,
+			'source' => 'non-db',
+			'name' => 'target_owning_org',
+			'vname' => 'LBL_TARGET_OWNING_ORG',
+			'type' => 'relate',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+			'id_name' => 'target_owning_org_id',
+			'ext2' => 'Accounts',
+			'module' => 'Accounts',
+			'rname' => 'name',
+			'quicksearch' => 'enabled',
+			'studio' => 'visible',
+
+			
+		),
+		
 		'status' =>
         array (
             'required' => false,

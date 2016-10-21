@@ -50,11 +50,11 @@ function insertTransLineHeader(tableid){
   var p=x.insertCell(7);
   p.innerHTML="<span id='line_access_assets_name_title'>接入设备(主)</span>";
   var p2=x.insertCell(8);
-  p2.innerHTML="<span id='line_access_assets_name_title'>接入设备(备)</span>";
+  p2.innerHTML="<span id='line_access_assets_backup_name_title'>接入设备(备)</span>";
   var g=x.insertCell(9);
   g.innerHTML="<span id='line_port_title'>端口(主)</span>";
   var g2=x.insertCell(10);
-  g2.innerHTML="<span id='line_port_title'>端口(备)</span>";
+  g2.innerHTML="<span id='line_port_backup_title'>端口(备)</span>";
   var f=x.insertCell(11);
   f.innerHTML="<span id='line_bandwidth_type_title'>带宽类型</span>"; 
   var i=x.insertCell(12);
@@ -64,23 +64,23 @@ function insertTransLineHeader(tableid){
   var l=x.insertCell(14);
   l.innerHTML="<span id='line_monitoring_title'>监控链接(主)</span>";
   var l2=x.insertCell(15);
-  l2.innerHTML="<span id='line_monitoring_title'>监控链接(备)</span>";
+  l2.innerHTML="<span id='line_monitoring_backup_title'>监控链接(备)</span>";
   var o=x.insertCell(16);
   o.innerHTML="<span id='line_mrtg_link_title'>MRTG 链接</span>";
   var m=x.insertCell(17);
   m.innerHTML="<span id='line_channel_num_title'>频道号(主)</span>";
   var m2=x.insertCell(18);
-  m2.innerHTML="<span id='line_channel_num_title'>频道号(备)</span>";
+  m2.innerHTML="<span id='line_channel_num_backup_title'>频道号(备)</span>";
   var n=x.insertCell(19);
   n.innerHTML="<span id='line_channel_content_title'>频道内容(主)</span>";
   var n2=x.insertCell(20);
-  n2.innerHTML="<span id='line_channel_content_title'>频道内容(备)</span>"
+  n2.innerHTML="<span id='line_channel_content_backup_title'>频道内容(备)</span>"
   var n3=x.insertCell(21);
   n3.innerHTML="<span id='line_date_start_title'>占用起始时间</span>"
   var n4=x.insertCell(22);
   n4.innerHTML="<span id='line_date_end_title'>占用终止时间</span>"
   var e2=x.insertCell(23);
-  e2.innerHTML="<span id='line_gateway_title'>状态</span>";;
+  e2.innerHTML="<span id='line_status_title'>状态</span>";;
 }
 
 

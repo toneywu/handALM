@@ -49,7 +49,7 @@ $layout_defs['AOS_Contracts'] = array(
                 ),
             ),
         ),
-		'aos_quotes_aos_contracts' =>
+	/*	'aos_quotes_aos_contracts' =>
 		array (
 	  		'order' => 100,
 			'module' => 'AOS_Quotes',
@@ -71,7 +71,7 @@ $layout_defs['AOS_Contracts'] = array(
 		  				'mode' => 'MultiSelect',
 				),
 			),
-		),
+		),*/
 	),
 );
 ?>
