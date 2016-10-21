@@ -260,6 +260,58 @@ function openAccessAssetBackupPopup(ln) {
 }
 
 
+function btnAddLine(ln){
+	lineno = ln;
+	var popupRequestData = {
+		"call_back_function" : "setAddLineBtnReturn",
+		"form_name" : "EditView",
+		"field_to_name_array" : {
+			"id" : "line_access_assets_id" + ln,
+			"name" : "line_access_assets_name" + ln
+		}
+	};
+  var targe_owning_org_id = $("#target_owning_org_id").val();
+  //var popupFilter = '&target_owning_org_id='+targe_owning_org_id;
+  var popupFilter = '&id='+'ef94fc1b-7795-cca1-c8a8-58084bbb8301';
+  open_popup('HIT_IP_Allocations', 1200, 850,popupFilter, true, true, popupRequestData, "MultiSelect", true);
+}
+
+function setAddLineBtnReturn(popupReplyData) {
+	set_return(popupReplyData);
+	console.log(JSON.stringify(popupReplyData.selection_list));
+	
+	var idJson = popupReplyData.selection_list;
+	for(var p in idJson){
+		$.ajax({
+			url:'index.php?to_pdf=true&module=HIT_IP_TRANS&action=syncHtmlPage&record='+idJson[p],
+			//data:JSON.stringify(popupReplyData.selection_list),
+			//type:"POST",
+			success: function (msg) {
+				console.log(msg);
+				
+				insertLineData($.parseJSON(msg));
+			},
+			error: function () { //失败
+				alert('Error loading document');
+			}
+		});
+	} 
+	
+	/*$.ajax({
+			url:'index.php?to_pdf=true&module=HIT_IP_TRANS&action=syncHtmlPage&idArray='+idJson,
+			//data:JSON.stringify(popupReplyData.selection_list),
+			//type:"POST",
+			
+			success: function (msg) {
+				console.log(msg);
+			},
+			error: function () { //失败
+				alert('Error loading document');
+			}
+		});*/
+	
+	
+}
 
 function setAccessAssetBackupNameReturn(popupReplyData) {
 	set_return(popupReplyData);
@@ -269,7 +321,6 @@ function setAccessAssetBackupNameReturn(popupReplyData) {
 
 function setHitIpReturn(popupReplyData) {
 	set_return(popupReplyData);
-	$("#line_parent_ip0").text("ddd");
 }
 
 function openOwningOrgPopup(ln) {
@@ -399,7 +450,7 @@ function insertTransLineHeader(tableid) {
 	var m2 = x.insertCell(18);
 	m2.innerHTML = "<span id='line_channel_num_backup_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_CHANNEL_NUM_BACKUP')+"</span>";
 	var n = x.insertCell(19);
-	n.innerHTML = "<span id='line_channel_content_backup_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_CHANNEL_CONTENT')+"</span>";
+	n.innerHTML = "<span id='line_channel_content_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_CHANNEL_CONTENT')+"</span>";
 	var n = x.insertCell(20);
 	n.innerHTML = "<span id='line_channel_content_backup_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_CHANNEL_CONTENT_BACKUP')+"</span>";
 	var n3 = x.insertCell(21);
@@ -1180,7 +1231,18 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			+ " & " + SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE')
 			+ " <img src='themes/default/images/id-ff-clear.png' alt='"
 			+ SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE')
-			+ "'></button>" + "</div></td>";
+			+ "'></button>"
+			
+			+ "<input type='button' id='line_add_trans_line" + prodln
+			+ "' class='button btn_del' value='"
+			+ "添加行"
+			+ "' tabindex='116' onclick='btnAddLine(" + prodln
+			+ ",\"line_\")'>"			
+
+
+
+
+			+"</div></td>";
 	addToValidate('EditView', 'line_hit_ip_subnets' + prodln, 'varchar',
 			'true', SUGAR.language.get('HAT_Asset_Trans_Batch',
 					'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE'));
@@ -1392,9 +1454,9 @@ function insertTransLineFootor(tableid) {
 function addNewLine(tableid) {
 	
 	var line_data = "";
-	if (check_form('EditView')) {// 只有必须填写的字段都填写了才可以新增
+	//if (check_form('EditView')) {// 只有必须填写的字段都填写了才可以新增
 
-		event_id = $("#hat_eventtype_id").val();
+		var event_id = $("#hat_eventtype_id").val();
 		$.ajax({//
 			url : 'index.php?to_pdf=true&module=HIT_IP_TRANS_BATCH&action=getEventJsonData&hat_eventtype_id='
 					+ event_id,
@@ -1408,12 +1470,12 @@ function addNewLine(tableid) {
 			error : function() { // 失败
 				alert('Error loading document');
 			}
-		})
+		});
 
 		insertTransLineElements(tableid);// 加入新行
 		LineEditorShow(prodln - 1); // 打开行编辑器
-		changeRequired(line_data);
-	}
+		//single_changeRequired(line_data,(prodln - 1));
+	//}
 }
 
 function btnMarkLineDeleted(ln, key) {// 删除当前行
@@ -1472,11 +1534,26 @@ function LineEditorShow(ln) { // 显示行编辑器（先自动关闭所有的�
 			LineEditorClose(i);
 		}
 	}
+	   var event_id = $("#hat_eventtype_id").val();
+	   $.ajax({//
+			url : 'index.php?to_pdf=true&module=HIT_IP_TRANS_BATCH&action=getEventJsonData&hat_eventtype_id='
+					+ event_id,
+			async : false,
+			success : function(data) {
+				var line_data = jQuery.parseJSON(data);
+				single_changeRequired(line_data,ln);
+			},
+			error : function() { // 失败
+				alert('Error loading document');
+			}
+		});
+	
 	//LineEditorClose(ln);
 	$("#asset_trans_line1_displayed" + ln).hide();
 	$("#asset_trans_line2_displayed" + ln).hide();
 	$("#asset_trans_editor" + ln).show();
 	$("#Trans_line_head").hide();
+	
 }
 
 function resetLineNum_Bold() {// 数行号
@@ -1501,6 +1578,63 @@ function LineEditorClose(ln) {// 关闭行编辑器（显示为正常行）
 	}
 	$("#Trans_line_head").show();
 }
+
+function single_Field(fieldName,type,i){
+	if(type=="OPTIONAL"){
+		//for (var i=0;i<prodln;i++) {
+			mark_field_enabled_mine(fieldName+i,true);
+		 //}
+	}else if(type=="LOCKED"){
+		//for (var i=0;i<prodln;i++) {
+		    mark_field_disabled_mine(fieldName+i,false);
+		//}
+	}else if(type=="REQUIRED"){
+		//for (var i=0;i<prodln;i++) {
+			// mark_field_disabled(fieldName+i,false);
+		    mark_field_enabled_mine(fieldName+i,false);
+		//}
+	}else if(type=="INVISIABLE"){
+		//for (var i=0;i<prodln;i++) {
+			// hide_field_disabled(fieldName+i,true,false)
+		    $("#"+fieldName+i).css({"visibility":"hidden"});
+		    $("#"+fieldName+i+"_label").css({"visibility":"hidden"});
+		    $("#btn_"+fieldName+i).css({"visibility":"hidden"});
+		    $("#"+fieldName+i).parents('.input_group').hide();//remove(); 
+		    $("#"+fieldName+"_title").hide();//remove(); 
+		    $("#displayed_"+fieldName+i).hide();//remove(); 
+		    $("#span_"+fieldName+i).hide();//remove(); 
+		    mark_field_disabled_mine(fieldName+i,false);
+		//}
+	}
+}
+
+
+function single_changeRequired(lineRecord,i){
+	single_Field("line_hit_ip_subnets",lineRecord.lineRecord,i);
+	single_Field("line_gateway",lineRecord.change_gateway,i);
+	single_Field("line_bandwidth_type",lineRecord.change_bandwidth_type,i);
+	single_Field("line_port",lineRecord.change_port,i);
+	single_Field("line_speed_limit",lineRecord.change_speed_limit,i);
+	single_Field("line_hat_asset_name",lineRecord.change_asset,i);
+	single_Field("line_hat_assets_cabinet",lineRecord.change_cabinet,i);
+	single_Field("line_monitoring",lineRecord.change_monitoring,i);
+	single_Field("line_channel_num",lineRecord.change_channel_num,i);
+	single_Field("line_channel_content",lineRecord.change_channel_content,i);
+	single_Field("line_mrtg_link",lineRecord.change_mrtg_link,i);
+	single_Field("line_access_assets_name",lineRecord.change_access_assets_name,i);
+	single_Field("line_parent_ip",lineRecord.change_parent,i);
+	single_Field("line_associated_ip",lineRecord.change_associated_ip,i);
+	single_Field("line_date_end",lineRecord.change_date_end,i);
+	single_Field("line_date_start",lineRecord.change_date_start,i);
+	single_Field("line_port_backup",lineRecord.change_port_backup,i);
+	single_Field("line_monitoring_backup",lineRecord.change_monitoring_backup,i);
+	single_Field("line_channel_content_backup",lineRecord.change_channel_content_backup,i);
+	single_Field("line_channel_num_backup",lineRecord.change_channel_num_backup,i);
+	single_Field("line_status",lineRecord.change_status,i);
+	console.log(lineRecord.change_monitoring_backup+"---"+i);
+}
+
+
 
 function dulicateTranLine(ln) {// 关闭行编辑器（显示为正常行）
 	//if (check_form('EditView')) {
@@ -1540,10 +1674,15 @@ function dulicateTranLine(ln) {// 关闭行编辑器（显示为正常行）
 				access_assets_name:"",
 				source_ref:"",
 				date_entered:"",
-				main_asset_id:"",
-				main_asset:"",
-				backup_asset_id:"",
-				backup_asset:"",	
+				access_assets_backup_id:"",
+				access_assets_backup_name:"",
+				status:"",
+				port_backup:"",
+				monitoring_backup:"",
+				channel_content_backup:"",
+				channel_num_backup:"",
+				date_start:"",
+				date_end:"",
 			};
 			
 		}	
@@ -1562,7 +1701,8 @@ function dulicateTranLine(ln) {// 关闭行编辑器（显示为正常行）
 		
 		// 清除id
 		$("#line_id" + (prodln - 1)).val(null);
-		//changeRequired(lineData);
+		$("#line_source_ref" + (prodln - 1)).val(null);
+		single_changeRequired(lineData,(prodln - 1));
 		// 设置行号
 		resetLineNum_Bold();
 		
