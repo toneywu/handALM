@@ -8,16 +8,6 @@ array (
     'default' => true,
     'link' => true,
   ),
-   'TYPE_C' => 
-  array (
-    'type' => 'relate',
-    'default' => true,
-    'studio' => 'visible',
-    'label' => 'LBL_TYPE',
-    'id' => 'HAA_CODES_ID_C',
-    'link' => true,
-    'width' => '10%',
-  ),
   'CONTRACT_NUMBER_C' => 
   array (
     'type' => 'varchar',
