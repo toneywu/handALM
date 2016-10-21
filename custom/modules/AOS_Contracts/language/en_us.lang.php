@@ -12,5 +12,17 @@ $mod_strings = array (
   'LBL_REVISION' => 'Revision',
   'LBL_CONTRACT_NUMBER' => 'Contract Number',
   'LBL_BTN_CREATE_WO_ORDER_BUTTON_LABEL'=>'Create Work Order',
-
-);
+  'LBL_CONTRACT_SUBTYPE_C_HAA_CODES_ID' => 'Contract Subtype (related Codes ID)',
+  'LBL_CONTRACT_SUBTYPE_C' => 'Contract Subtype',
+  'LBL_PRE_CONTRACT_NUMBER_C_AOS_CONTRACTS_ID' => 'Prevision Contract (related Contracts ID)',
+  'LBL_PRE_CONTRACT_NUMBER_C' => 'Prevision Contract',
+  'LBL_ATTRIBUTE1_C' => 'Attribute1',
+  'LBL_ATTRIBUTE2_C' => 'Attribute2',
+  'LBL_ATTRIBUTE3_C' => 'Attribute3',
+  'LBL_ATTRIBUTE4_C' => 'Attribute4',
+  'LBL_ATTRIBUTE5_C' => 'Attribute5',
+  'LBL_ATTRIBUTE6_C' => 'Attribute6',
+  'LBL_FRAMEWORK_C_HAA_FRAMEWORKS_ID' => 'Business Framework (related Business Framework ID)',
+  'LBL_FRAMEWORK_C' => 'Business Framework',
+  'LBL_EDITVIEW_PANEL1' => 'Basic Information',
+  );
