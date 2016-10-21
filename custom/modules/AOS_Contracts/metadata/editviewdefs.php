@@ -8,7 +8,7 @@ array (
     array (
       'includes' => 
       array (
-        0 =>
+        0 => 
         array (
           'file' => 'custom/modules/AOS_Contracts/js/AOS_Contracts_editview.js',
         ),
@@ -36,6 +36,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_EDITVIEW_PANEL1' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
         'LBL_LINE_ITEMS' => 
         array (
           'newTab' => false,
@@ -45,7 +50,37 @@ array (
     ),
     'panels' => 
     array (
-      'default' => 
+      'DEFAULT' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'framework_c',
+            'studio' => 'visible',
+            'label' => 'LBL_FRAMEWORK_C',
+            'customCode' => '{$FRAMEWORK_C}',
+          ),
+          1 => 
+          array (
+            'name' => 'type_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TYPE',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&code_type_advanced=contract_type',
+              'field_to_name_array' => 
+              array (
+                'name' => 'type_c',
+                'id' => 'haa_codes_id_c',
+                'haa_ff_id' => 'haa_ff_id',
+              ),
+              'call_back_function' => 'setContractTypePopupReturn',
+            ),
+          ),
+        ),
+      ),
+      'LBL_EDITVIEW_PANEL1' => 
       array (
         0 => 
         array (
@@ -64,7 +99,16 @@ array (
             'name' => 'contract_number_c',
             'label' => 'LBL_CONTRACT_NUMBER',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'contract_subtype_c',
+            'studio' => 'visible',
+            'label' => 'LBL_CONTRACT_SUBTYPE_C',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&code_type_advanced=contract_type&parent_type_value_advanced="+this.form.{$fields.type_c.name}.value+"',
+            ),
+          ),
         ),
         2 => 
         array (
@@ -137,30 +181,22 @@ array (
         array (
           0 => 
           array (
-            'name' => 'type_c',
-            'studio' => 'visible',
-            'label' => 'LBL_TYPE',
-            'displayParams' => 
-            array (
-              //按列表类型过滤可选值,其中contract_type需灵活替换
-              'initial_filter' => '&code_type_advanced=contract_type',
-              'field_to_name_array' =>
-              array (
-                'name' => 'type_c',
-                'id' => 'haa_codes_id1_c',
-                'haa_ff_id' => 'haa_ff_id',
-              ),
-              'call_back_function' => 'setContractTypePopupReturn',
-            ),
-          ),
-          1 => 
-          array (
             'name' => 'business_type_c',
             'studio' => 'visible',
             'label' => 'LBL_BUSINESS_TYPE',
             'displayParams' => 
-                array (
-                  'initial_filter' => '&code_type_advanced=contract_business_type'
+            array (
+              'initial_filter' => '&code_type_advanced=contract_business_type',
+            ),
+          ),
+          1 => 
+          array (
+            'name' => 'media_type_c',
+            'studio' => 'visible',
+            'label' => 'LBL_MEDIA_TYPE',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&code_type_advanced=contract_media_type',
             ),
           ),
         ),
@@ -168,28 +204,79 @@ array (
         array (
           0 => 
           array (
-            'name' => 'media_type_c',
-            'studio' => 'visible',
-            'label' => 'LBL_MEDIA_TYPE',
-       'displayParams' => 
-            array (
-              'initial_filter' => '&code_type_advanced=contract_media_type'
-        )            
-          ),
-          1 => 
-          array (
             'name' => 'revision_c',
             'studio' => 'visible',
             'label' => 'LBL_REVISION',
-       'displayParams' => 
+            'displayParams' => 
             array (
-              'initial_filter' => '&code_type_advanced=contract_revision'
-        )            
+              'initial_filter' => '&code_type_advanced=contract_revision',
+            ),
+          ),
+          1 => 
+          array (
+            'name' => 'pre_contract_number_c',
+            'studio' => 'visible',
+            'label' => 'LBL_PRE_CONTRACT_NUMBER_C',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&type_c_advanced="+this.form.{$fields.type_c.name}.value+"',
+            ),
           ),
         ),
         9 => 
         array (
+          0 => 
+          array (
+            'name' => 'contract_revision_c',
+            'studio' => 'visible',
+            'label' => 'LBL_CONTRACT_REVISION',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute1_c',
+            'studio' => 'visible',
+            'label' => 'LBL_ATTRIBUTE1_C',
+          ),
+        ),
+        10 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute2_c',
+            'studio' => 'visible',
+            'label' => 'LBL_ATTRIBUTE2_C',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute3_c',
+            'studio' => 'visible',
+            'label' => 'LBL_ATTRIBUTE3_C',
+          ),
+        ),
+        11 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute4_c',
+            'studio' => 'visible',
+            'label' => 'LBL_ATTRIBUTE4_C',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute5_c',
+            'studio' => 'visible',
+            'label' => 'LBL_ATTRIBUTE5_C',
+          ),
+        ),
+        12 => 
+        array (
           0 => 'description',
+          1 => 
+          array (
+            'name' => 'attribute6_c',
+            'studio' => 'visible',
+            'label' => 'LBL_ATTRIBUTE6_C',
+          ),
         ),
       ),
       'lbl_line_items' => 
@@ -210,10 +297,6 @@ array (
             'name' => 'line_items',
             'label' => 'LBL_LINE_ITEMS',
           ),
-        ),
-        2 => 
-        array (
-          0 => '',
         ),
         3 => 
         array (
