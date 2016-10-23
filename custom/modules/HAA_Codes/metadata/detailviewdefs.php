@@ -79,6 +79,19 @@ array (
             'label' => 'LBL_CODE_TAG',
           ),
         ),
+          4 => 
+        array (
+          0 => array (
+            'name' => 'parent_type_value',
+            'studio' => 'visible',
+            'label' => 'LBL_PARENT_TYPE_VALUE',
+            'displayParams' =>
+            array (
+              'initial_filter' => '&code_type_advanced="+this.form.{$fields.code_type.name}.value+"',
+            )
+          ),
+          1 => '',
+        ),
       ),
     ),
   ),
