@@ -18,3 +18,9 @@ function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"AOS_Contracts");
     $(".expandLink").click();
 }
+
+function setPreContractPopupReturn(popupReplyData) {
+	popupReplyData["name_to_value_array"]["contract_revision_c"]=String(parseInt(popupReplyData["name_to_value_array"]["contract_revision_c"])+1);
+	set_return(popupReplyData);
+	
+}

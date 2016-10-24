@@ -55,7 +55,7 @@ class AccountsViewEdit extends ViewEdit
         $current_framework_id = empty($this->bean->hat_framework_id)?"":$this->bean->hat_framework_id;
         $current_module = $this->module;
         $current_action = $this->action;
-        $this->ss->assign('FRAMEWORK_C',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_framework_id_c'));
+        $this->ss->assign('FRAMEWORK_C',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id_c'));
 
 
 
