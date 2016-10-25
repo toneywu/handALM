@@ -6,10 +6,12 @@ $popupMeta = array (
 	'whereClauses' => array (
 		'name' => 'haa_codes.name',
 		'code_type' => 'haa_codes.code_type',
+		'parent_type_value' => 'haa_codes.parent_type_value',
 		),
 	'searchInputs' => array (
 		1 => 'name',
 		4 => 'code_type',
+		5=>'parent_type_value',
 		),
 	'searchdefs' => array (
 		'name' => 
@@ -57,5 +59,14 @@ $popupMeta = array (
 			'default' => true,
 			'name' => 'code_type',
 			),  
+		'PARENT_TYPE_VALUE' => 
+		array (
+			'type' => 'relate',
+			'studio' => 'visible',
+			'label' => 'LBL_PARENT_TYPE_VALUE',
+			'width' => '20%',
+			'default' => true,
+			'name' => 'parent_type_value',
+			), 
 		),
 	);

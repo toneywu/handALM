@@ -42,6 +42,16 @@ array (
     'link' => true,
     'width' => '10%',
   ),
+  'PARENT_TYPE_VALUE' => 
+  array (
+    'type' => 'relate',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_PARENT_TYPE_VALUE',
+    'id' => 'PARENT_TYPE_VALUE_ID',
+    'link' => true,
+    'width' => '10%',
+  ),
   'DESCRIPTION' => 
   array (
     'type' => 'text',

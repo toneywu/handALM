@@ -72,5 +72,6 @@ $mod_strings = array (
   'LBL_NEW_FORM_TITLE' => '新建 代码',
   'LBL_CODE_TYPE' => '代码类型',
   'LBL_CODE_MODULE'=>'代码所属模块',
-
-);
+  'LBL_PARENT_TYPE_VALUE_ID'=>'父类名称Id',
+  'LBL_PARENT_TYPE_VALUE'=>'父类名称',
+  );
