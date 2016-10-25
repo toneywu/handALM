@@ -164,6 +164,7 @@ function loopField(fieldName,type){
 		    $("#displayed_"+fieldName+i).hide();//remove(); 
 		    $("#span_"+fieldName+i).hide();//remove(); 
 		    mark_field_disabled_mine(fieldName+i,false);
+		}
 	}else if(type=="EMPTY"){
 		for (var i=0;i<prodln;i++) {
 		    mark_field_disabled_mine(fieldName+i,false);
