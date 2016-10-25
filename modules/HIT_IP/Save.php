@@ -72,9 +72,10 @@ handleRedirect($return_id, 'HIP_IP');
 	                foreach($ip_subnet_line->field_defs as $field_def) { //循环对所有要素
 	                    $ip_subnet_line->$field_def['name'] = $post_data[$key.$field_def['name']][$i];
 	                    echo "<br/>".$field_def[name].'='. $post_data[$key.$field_def['name']][$i];
+						 $ip_subnet_line->hit_vlan_id = $post_data[$key.'vlan_id'][$i];
 	                }
 	                $ip_subnet_line->parent_hit_ip_id = $parent->id;//父ID
-
+					//die();
 	            }
 
 

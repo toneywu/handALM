@@ -72,7 +72,9 @@ function resetAssetName() { //自动生成资产铭牌号
 		}
 	} else {
 		$("#name").css("background-color","#fff");
-		$("#name").attr("readonly","false");
+		//$("#name").attr("readonly","false");
+		//fix 2016-10-24 by yuan.chen
+		$("#name").removeAttr("readonly");
 	}
 }
 

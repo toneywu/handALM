@@ -125,6 +125,8 @@ function resetEventType() {
 	loopField("line_target_rack_position_desc",global_eventOptions.change_rack_position);
 
 	//add by  yuan.chen
+	loopField("line_target_parent_asset",global_eventOptions.change_parent);
+
 	//开始与结束时间根据使用组织及人员进行显示，不单独进行处理 deleted toney.wu 改到Using_org中
 /*	loopField("line_date_start",global_eventOptions.change_asset_date_end);
 	loopField("line_date_end",global_eventOptions.change_asset_date_start);

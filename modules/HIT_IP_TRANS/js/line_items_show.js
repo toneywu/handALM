@@ -261,6 +261,11 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<label>"+"端口"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_port[" + prodln + "]' id='line_port" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
+	  //端口(备)
+      "<span class='input_group'>"+
+      "<label>"+"端口(备)"+"</label>"+
+      "<input style=' width:153px;' type='text' name='line_port_backup[" + prodln + "]' id='line_port_backup" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
       //限速
       "<span class='input_group'>"+
       "<label>"+"限速"+"</label>"+

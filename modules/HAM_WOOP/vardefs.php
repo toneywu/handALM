@@ -846,6 +846,60 @@ $dictionary['HAM_WOOP'] = array (
 	'quicksearch' => 'enabled',
 			'studio' => 'visible',	
 		),
+		
+		
+		#合同号
+	'contract_id' => array (
+			'required' => false,
+			'name' => 'contract_id',
+			'vname' => 'LBL_CONTRACT_ID',
+			'type' => 'id',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => 0,
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => false,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => 36,
+			'size' => '20',
+
+			
+		),
+		'contract' => array (
+			'required' => false,
+			'source' => 'non-db',
+			'name' => 'contract',
+			'vname' => 'LBL_CONTRACT',
+			'type' => 'relate',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+			'id_name' => 'contract_id',
+			'ext2' => 'AOS_Contracts',
+			'module' => 'AOS_Contracts',
+			'rname' => 'name',
+			'quicksearch' => 'enabled',
+			'studio' => 'visible',
+
+			
+		),
 
 		
 	),

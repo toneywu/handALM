@@ -116,6 +116,16 @@ array (
             'label' => 'LBL_HAM_WORK_CENTER_PEOPLE',
           ),
         ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'contract',
+            'studio' => 'visible',
+            'label' => 'LBL_CONTRACT',
+          ),
+          1 => '',
+        ),
       ),
       'lbl_editview_panel1' => 
       array (

@@ -1,5 +1,6 @@
 <?php
 
+
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
@@ -65,43 +66,49 @@ class HAT_Assets extends HAT_Assets_sugar {
 
 	function save($check_notify = false) {
 
-		
-		echo "number= ".$this->bean->asset_number;
 		if ($this->bean->asset_number == null) {
 			//1 根据产品 获取产品的资产编号定义
 			//asset_group
 			$products_bean = BeanFactory :: getBean('AOS_Products')->retrieve_by_string_fields(array (
-				'id' => $this->beam->aos_products_id
+				'id' => $this->aos_products_id
 			));
 			$prefix = $products_bean->asset_num_perfix_c;
 			$min_num_strlength = $products_bean->asset_num_padding_c;
-			
 			//定义一个 编号类型在 编号规则里面
-				$bean_numbering = BeanFactory :: getBean('HAA_Numbering_Rule')->retrieve_by_string_fields(array (
-					'document_type' => 'ASSET',
-					'perfix'=>$prefix,
-					'min_num_strlength'=>$min_num_strlength
-				));
-			if (empty ($bean_numbering)) {
-				//如果没有的话 就新增一个编号规则
-				$bean_numbering = BeanFactory :: newBean('HAA_Numbering_Rule');
-				$bean_numbering->document_type = 'ASSET';
-				$bean_numbering->name = 'Asset';
-				$bean_numbering->perfix=$prefix;
-				$bean_numbering->min_num_strlength=$min_num_strlength;
-				$bean_numbering->current_number=$min_num_strlength;
-				$bean_numbering->nextval=$prefix.($bean_numbering->current_number+$min_num_strlength);
-				
-				$bean_numbering->save();
-				$this->asset_number=$prefix.$min_num_strlength;
-			}else{
-				//如果有定义编号规则的话
-				$this->asset_number=$bean_numbering->nextval;
-				$bean_numbering->current_number=$this->bean->asset_number;
-				$bean_numbering->nextval=$prefix.($bean_numbering->current_number+$min_num_strlength);
-				$bean_numbering->save();
+			$bean_numbering = BeanFactory :: getBean('HAA_Numbering_Rule')->retrieve_by_string_fields(array (
+				'document_type' => 'ASSET',
+				'perfix' => $prefix,
+				'min_num_strlength' => $min_num_strlength
+			));
+			if ($min_num_strlength != 0) {
+				if (empty ($bean_numbering)) {
+					//如果没有的话 就新增一个编号规则
+					$bean_numbering = BeanFactory :: newBean('HAA_Numbering_Rule');
+					$bean_numbering->document_type = 'ASSET';
+					$bean_numbering->name = 'Asset';
+					$bean_numbering->perfix = $prefix;
+					$bean_numbering->min_num_strlength = $min_num_strlength;
+				    $newCurrentNum = str_pad(1,$min_num_strlength,"0",STR_PAD_LEFT);
+					//$bean_numbering->current_number = $newCurrentNum;
+					$bean_numbering->nextval = $prefix . str_pad(2,$min_num_strlength,"0",STR_PAD_LEFT);
+					$bean_numbering->save();
+					$this->asset_number = $prefix . $newCurrentNum;
+				} else {
+					//如果有定义编号规则的话
+					$this->asset_number = $bean_numbering->nextval;
+					//先判断当前编号的长度 如果没有超过直接+1 并且补0 如果超过了直接+1 不用补0
+					$maxNum = str_pad(9,$min_num_strlength,"9",STR_PAD_LEFT);
+					$newNextNum = preg_replace('/^0*/', '', str_replace($prefix,"",$this->asset_number))+1;
+					//字符串前面补0
+					if($newNextNum<=$maxNum){
+						$newCurrentNumStr = str_pad($newNextNum,$min_num_strlength,"0",STR_PAD_LEFT);
+					}else{
+						$newCurrentNumStr=$newNextNum;
+					}
+					$bean_numbering->nextval = $prefix . $newCurrentNumStr;
+					$bean_numbering->save();
+				}
 			}
-
 		}
 
 		parent :: save($check_notify); //保存Assets主体

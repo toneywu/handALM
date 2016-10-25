@@ -237,7 +237,7 @@ $dictionary['HIT_IP_TRANS'] = array (
 		
 		'port_backup' => array (
 			'required' => false,
-			'name' => 'port',
+			'name' => 'port_backup',
 			'vname' => 'LBL_PORT_BACKUP',
 			'type' => 'varchar',
 			'massupdate' => 0,

@@ -15,12 +15,12 @@ function display_lines($focus, $field, $value, $view){
 		$html .= '<script>insertTransLineHeader(\'lineItems\');</script>';
 
          if($focus->id != '') { //如果不是新增（即如果是编辑已有记录,或是显示已有记录）
-         	$sql = "SELECT
+         	/*$sql = "SELECT
 					  hit_ip_subnets.id,
 					  hit_ip_subnets.`name`,
 					  hit_ip_subnets.ip_subnet,
 					  hit_ip_subnets.description,
-					  hit_ip_subnets.tunnel
+					  hit_ip_subnets.tunnel,hit_ip_subnets.hit_vlan_id,hit_ip_subnets.vlan
 					FROM
 					  hit_ip,
 					  hit_ip_subnets
@@ -29,6 +29,27 @@ function display_lines($focus, $field, $value, $view){
 					  AND hit_ip.`deleted` = 0
 					  AND hit_ip_subnets.`deleted` = 0
 					ORDER BY INET_ATON(hit_ip_subnets.`name`) ";//INET_ATON是为了让IP有正确的排序
+*/
+			$sql = "SELECT 
+						  his.id,
+						  his.`name`,
+						  his.ip_subnet,
+						  his.description,
+						  his.tunnel,
+						  his.hit_vlan_id vlan_id,hv.name vlan,his.org_id,a.name org
+						FROM
+						  `hit_ip_subnets` his 
+						  LEFT JOIN hit_vlan hv 
+							ON (his.hit_vlan_id = hv.id) 
+						  LEFT JOIN accounts a 
+							ON (his.org_id = a.id) 	
+						  INNER JOIN hit_ip hi 
+							ON (hi.id = his.parent_hit_ip_id)
+					  where hi.id = '".$focus->id."'
+					  AND hi.`deleted` = 0
+					  AND his.`deleted` = 0
+					ORDER BY INET_ATON(his.`name`) ";//INET_ATON是为了让IP有正确的排序
+
 
          	$result = $focus->db->query($sql);
 
