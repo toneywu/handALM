@@ -99,6 +99,7 @@ $mod_strings = array (
   'LBL_DATE_END'=>'Ending Date',
   'LBL_DATE_START'=>'Start Date',
   'LBL_ACCESS_ASSETS_BACKUP_NAME'=>'Access Asset(Backup)',
+  'LBL_ACCESS_ASSETS_NAME'=>'Access Asset',
   'LBL_CHANNEL_NUM_BACKUP'=>'Channel Number(Backup)',
   'LBL_CHANNEL_CONTENT_BACKUP'=>'Channel Content(Backup)',
   'LBL_MONITORING_BACKUP'=>'Monitoring(Backup)',

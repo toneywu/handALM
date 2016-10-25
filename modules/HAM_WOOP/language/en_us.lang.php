@@ -72,4 +72,5 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL3'=>'Next Operation',
   'LBL_TAKE_OWNERSHIP'=>'Take it',
   'LBL_EVENT_TYPE'=>'Event Type',
+  'LBL_CONTRACT'=>'Contract',
 );

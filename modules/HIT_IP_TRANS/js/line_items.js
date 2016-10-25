@@ -260,25 +260,21 @@ function openAccessAssetBackupPopup(ln) {
 }
 
 
-function btnAddLine(ln){
-	lineno = ln;
+function btnAddAllocLine(){
 	var popupRequestData = {
 		"call_back_function" : "setAddLineBtnReturn",
 		"form_name" : "EditView",
 		"field_to_name_array" : {
-			"id" : "line_access_assets_id" + ln,
-			"name" : "line_access_assets_name" + ln
 		}
 	};
-  var targe_owning_org_id = $("#target_owning_org_id").val();
-  //var popupFilter = '&target_owning_org_id='+targe_owning_org_id;
-  var popupFilter = '&id='+'ef94fc1b-7795-cca1-c8a8-58084bbb8301';
+  var target_owning_org_id = $("#target_owning_org_id").val();
+  var popupFilter = '&target_owning_org_id_advanced='+target_owning_org_id;
   open_popup('HIT_IP_Allocations', 1200, 850,popupFilter, true, true, popupRequestData, "MultiSelect", true);
 }
 
 function setAddLineBtnReturn(popupReplyData) {
 	set_return(popupReplyData);
-	console.log(JSON.stringify(popupReplyData.selection_list));
+	//console.log(JSON.stringify(popupReplyData.selection_list));
 	
 	var idJson = popupReplyData.selection_list;
 	for(var p in idJson){
@@ -287,15 +283,17 @@ function setAddLineBtnReturn(popupReplyData) {
 			//data:JSON.stringify(popupReplyData.selection_list),
 			//type:"POST",
 			success: function (msg) {
-				console.log(msg);
-				
+				//console.log(msg);
 				insertLineData($.parseJSON(msg));
 			},
 			error: function () { //失败
 				alert('Error loading document');
 			}
 		});
-	} 
+	};
+	
+	// 设置行号
+	resetLineNum_Bold();
 	
 	/*$.ajax({
 			url:'index.php?to_pdf=true&module=HIT_IP_TRANS&action=syncHtmlPage&idArray='+idJson,
@@ -309,8 +307,6 @@ function setAddLineBtnReturn(popupReplyData) {
 				alert('Error loading document');
 			}
 		});*/
-	
-	
 }
 
 function setAccessAssetBackupNameReturn(popupReplyData) {
@@ -526,6 +522,7 @@ function insertLineData(asset_trans_line) { // 将数据写入到对应的行字
 	    $("#line_date_start".concat(String(ln))).val(asset_trans_line.date_start);
 	    $("#line_date_end".concat(String(ln))).val(asset_trans_line.date_end);
 		renderTransLine(ln);
+		single_changeRequired(lineData,ln);	
 	}
 }
 $(document).ready(function(){
@@ -1233,12 +1230,12 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			+ SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE')
 			+ "'></button>"
 			
-			+ "<input type='button' id='line_add_trans_line" + prodln
+			/*+ "<input type='button' id='line_add_trans_line" + prodln
 			+ "' class='button btn_del' value='"
 			+ "添加行"
 			+ "' tabindex='116' onclick='btnAddLine(" + prodln
 			+ ",\"line_\")'>"			
-
+*/
 
 
 
@@ -1443,6 +1440,9 @@ function insertTransLineFootor(tableid) {
 			+ tableid
 			+ "\")' value='+ "
 			+ SUGAR.language.get('HIT_IP_TRANS', 'LBL_BTN_COPY_TRANS_LINE')
+			+ "' />"
+			+ "<input id='btnAddLine' type='button' class='button btn_del' onclick='btnAddAllocLine()' value='+ "
+			+ SUGAR.language.get('HIT_IP_TRANS', 'LBL_BTN_ADD_ALLOC_TRANS_LINE')
 			+ "' />";
 	// TODO:添加一个Checkbox用于显示和隐藏当前组织、人员、地点……
 }
@@ -1462,8 +1462,6 @@ function addNewLine(tableid) {
 					+ event_id,
 			async : false,
 			success : function(data) {
-				console.log(data);
-				// alert(data);
 				line_data = jQuery.parseJSON(data);
 
 			},
@@ -1610,7 +1608,7 @@ function single_Field(fieldName,type,i){
 
 
 function single_changeRequired(lineRecord,i){
-	single_Field("line_hit_ip_subnets",lineRecord.lineRecord,i);
+	single_Field("line_hit_ip_subnets",lineRecord.hit_ip_subnets,i);
 	single_Field("line_gateway",lineRecord.change_gateway,i);
 	single_Field("line_bandwidth_type",lineRecord.change_bandwidth_type,i);
 	single_Field("line_port",lineRecord.change_port,i);
@@ -1631,7 +1629,6 @@ function single_changeRequired(lineRecord,i){
 	single_Field("line_channel_content_backup",lineRecord.change_channel_content_backup,i);
 	single_Field("line_channel_num_backup",lineRecord.change_channel_num_backup,i);
 	single_Field("line_status",lineRecord.change_status,i);
-	console.log(lineRecord.change_monitoring_backup+"---"+i);
 }
 
 
@@ -1697,7 +1694,7 @@ function dulicateTranLine(ln) {// 关闭行编辑器（显示为正常行）
 			//if($("#line_parent_ip" + lastProdln).val()==""){
 			//	$("#displayed_line_parent_ip" + (prodln - 1)).html($("#displayed_line_parent_ip" +lastProdln).html());
 			//}
-		console.log("index = "+(prodln - 1)+"-----"+$("#line_parent_ip" + lastProdln).val());
+		//console.log("index = "+(prodln - 1)+"-----"+$("#line_parent_ip" + lastProdln).val());
 		
 		// 清除id
 		$("#line_id" + (prodln - 1)).val(null);

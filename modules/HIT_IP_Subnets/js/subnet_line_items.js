@@ -134,7 +134,7 @@ function insertTransLineHeader(tableid){
 
 
 function insertLineData(hit_ip_subnets, current_view){ //将数据写入到对应的行字段中
-  //console.log(hit_ip_subnets);
+  console.log(hit_ip_subnets);
   var ln = 0;
   if(hit_ip_subnets.id != '0' && hit_ip_subnets.id !== ''){
     ln = insertTransLineElements("lineItems", current_view);
@@ -146,6 +146,8 @@ function insertLineData(hit_ip_subnets, current_view){ //将数据写入到对�
 */    $("#line_name".concat(String(ln))).val(hit_ip_subnets.name);
     $("#line_vlan".concat(String(ln))).val(hit_ip_subnets.vlan);
     $("#line_vlan_id".concat(String(ln))).val(hit_ip_subnets.vlan_id);
+	$("#line_org".concat(String(ln))).val(hit_ip_subnets.org);
+    $("#line_org_id".concat(String(ln))).val(hit_ip_subnets.org_id);
     $("#line_description".concat(String(ln))).val(hit_ip_subnets.description);
     $("#line_tunnel".concat(String(ln))).val(hit_ip_subnets.tunnel);
 

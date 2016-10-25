@@ -63,4 +63,5 @@ $mod_strings = array (
   'LBL_SYN_WO_STATUS'=>'同步至工单状态',
   'LBL_TAKE_OWNERSHIP'=>'认领任务',
   'LBL_EVENT_TYPE'=>'事件类型',
+  'LBL_CONTRACT'=>'合同',
 );

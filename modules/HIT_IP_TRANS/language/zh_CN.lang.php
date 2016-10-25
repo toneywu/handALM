@@ -98,4 +98,5 @@ $mod_strings = array (
   'LBL_MONITORING_BACKUP'=>'监控链接(备)',
   'LBL_PORT_BACKUP'=>'端口(备)',
   'LBL_STATUS'=>'状态',
+  'LBL_BTN_ADD_ALLOC_TRANS_LINE'=>'新增行',
 );

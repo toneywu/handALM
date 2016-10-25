@@ -167,10 +167,9 @@ function save_allocation_lines($trans_line_bean, $parent,$prev_trans_batch_id) {
 	$allocation_line_bean->date_start=$trans_line->date_start;
 	$allocation_line_bean->date_end=$trans_line->date_end;
 	$allocation_line_bean->access_assets_backup_id=$trans_line->access_assets_backup_id;
-	
+	$allocation_line_bean->target_owning_org_id=$parent->target_owning_org_id;
+	$allocation_line_bean->target_owning_org=$parent->target_owning_org;
 	if ($allocation_line_bean->source_trans_id == null) {
-
-
 		$allocation_line_bean->hit_ip_trans_batch_id = $trans_line->hit_ip_trans_batch_id;
 		//$allocation_line_bean->hit_ip_trans_batch_id = $trans_line->hit_ip_trans_batch_id;
 		$allocation_line_bean->source_trans_id = $trans_line->id;
