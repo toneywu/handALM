@@ -9,7 +9,7 @@
 
 <style type="text/css">
 	#workbench_left {
-		width:450px;
+		width:250px;
 		height:600px;
 		float:left;
 		background-color:#efefef;
@@ -32,12 +32,20 @@
 		font-size: small;
 	}
 
+	#node_details .detailed_fileds {
+		float: left;
+		width: 300px;
+		padding:1px 1em 1px 0px;
+	}
 	#node_details span.lab {
-		width:35%;
-		padding:2px;
+		width:135px;
 		margin: 0 1em 0 0;
-		text-align: right;
-		display: inline-block;
+		display: table-cell;
+	}
+	#node_details span.detail_data {
+		/*width:170px;*/
+		font-weight:bold;
+		display: table-cell;
 	}
 
 	#node_details_footer {
@@ -173,16 +181,16 @@
 		<button id="btn_switch_map_view"><?php echo translate('LBL_BTN_SWITCH_VIEW','HAT_Asset_Locations');?></button>
 	    </div>
 	    
-	    <div>
+<!-- 	    <div>
 			<span class="input_group">  
 				<label id="assetStatus_label">资产状态</label>
 				<select id="asset_status" class="form-horizontal">
 			     <?php foreach ($app_list_strings['hat_asset_status_list'] as $key => $value) {
 			     	echo '<option value="'.$key.'">'.$value.'</option>';
 			     }?>
-		</select>
+				</select>
 			</span>  
-	    </div>
+	    </div> -->
 	</div>
 
 <div id="selector_top_view" class="row">

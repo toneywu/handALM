@@ -14,7 +14,7 @@
 	padding: 10px 0px;/*FIX：左侧标题*/
 }
 .recently_viewed_link_container_sidebar li.recentlinks a { /*左侧字体截断*/
-	overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 170px;
+	overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 150px;
 }
 
 #mobile_menu a {
@@ -306,6 +306,21 @@ input[type=text], select{
 /**********************************/
 /*以下是完全自定义的一些对象	  */
 /**********************************/
+
+/*机柜管理中显示机柜中的设备*/
+.Rack_Elements {
+	cursor:pointer;
+}
+.Rack_Elements:hover{
+	border-width:3px;
+}
+.rack_frame tr td.rack_highlighted {
+	background-color: blue;
+}
+.rack_frame tr td.rack_error {
+	background-color: red;
+}
+
 .detail .tab_subpanel tr td[scope=row], .detail .tab_subpanel .action_buttons{
 	text-align: left;
 }

@@ -143,7 +143,7 @@ function showNodeDetailHTML(node,targetDIV) {
 		varHTML+="</div>";
 		//显示主要字段
 		for (var index = 0; index < node.data.fields.length; ++index) {
-		    varHTML+="<p><span class='lab'>"+node.data.fields[index]['lab']+"</span><span class='detail_data'>"+node.data.fields[index]['val']+"</span></p>";
+		    varHTML+="<div class='detailed_fileds'><span class='lab'>"+node.data.fields[index]['lab']+"</span><span class='detail_data'>"+node.data.fields[index]['val']+"</span></div>";
 		}
 	}
 	targetDIV.html(varHTML);
@@ -198,8 +198,8 @@ function initTree(treeView, default_list, p3) {
 	//p3 should be WO_ID
 	$("#treeview_selector").addClass("ztree");
 	$("#treeview_selector,#node_details").html("");
-	$("#workbench_left").css('width','60%')
-	$("#node_details").css('width','40%')
+	$("#workbench_left").css('width','40%')
+	$("#node_details").css('width','60%')
 
 
 	//加载Root节点
