@@ -40,6 +40,10 @@ $mod_strings = array (
   'LBL_ATTRIBUTE3' => 'attribute3',
   'LBL_ATTRIBUTE4' => 'attribute4',
   'LBL_ATTRIBUTE5' => 'attribute5',
+  'LBL_ATTRIBUTE6' => 'attribute6',
+  'LBL_ATTRIBUTE7' => 'attribute7',
+  'LBL_ATTRIBUTE8' => 'attribute8',
+  'LBL_ATTRIBUTE9' => 'attribute9',
   'LBL_PEOPLE_TYPE_HAA_CODES_ID' => 'People Type (related  ID)',
   'LBL_PEOPLE_TYPE' => 'People Type',
   'LBL_EDITVIEW_PANEL1' => 'User Account',
@@ -54,5 +58,5 @@ $mod_strings = array (
   'LBL_DATA_SOURCE_CODE' => 'Data Source',
   'LBL_DATA_SOURCE_REFERENCE' => 'Data Source ID',
   'LBL_DATA_SOURCE_ID' => 'Data Source Reference',
-  'LBL_DETAILVIEW_PANEL2' => 'New Panel 2',
+  'LBL_PRIMARY_CONTACT' => 'Primary Contact',
 );

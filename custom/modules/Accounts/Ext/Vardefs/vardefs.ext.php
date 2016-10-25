@@ -78,6 +78,30 @@ $dictionary['Account']['fields']['attribute5_c']['labelValue']='Attribute 5';
 
  
 
+ // created: 2016-10-25 21:44:52
+$dictionary['Account']['fields']['attribute6_c']['inline_edit']='';
+$dictionary['Account']['fields']['attribute6_c']['labelValue']='attribute6';
+
+ 
+
+ // created: 2016-10-25 21:46:01
+$dictionary['Account']['fields']['attribute7_c']['inline_edit']='';
+$dictionary['Account']['fields']['attribute7_c']['labelValue']='attribute7';
+
+ 
+
+ // created: 2016-10-25 21:45:38
+$dictionary['Account']['fields']['attribute8_c']['inline_edit']='';
+$dictionary['Account']['fields']['attribute8_c']['labelValue']='attribute8';
+
+ 
+
+ // created: 2016-10-25 21:46:25
+$dictionary['Account']['fields']['attribute9_c']['inline_edit']='';
+$dictionary['Account']['fields']['attribute9_c']['labelValue']='attribute9';
+
+ 
+
  // created: 2016-07-25 07:55:20
 $dictionary['Account']['fields']['business_type_c']['inline_edit']='';
 $dictionary['Account']['fields']['business_type_c']['labelValue']='Business Type';

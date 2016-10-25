@@ -57,6 +57,30 @@ $dictionary['Contact']['fields']['attribute5_c']['labelValue']='attribute5';
 
  
 
+ // created: 2016-10-25 21:49:58
+$dictionary['Contact']['fields']['attribute6_c']['inline_edit']='';
+$dictionary['Contact']['fields']['attribute6_c']['labelValue']='attribute6';
+
+ 
+
+ // created: 2016-10-25 21:51:08
+$dictionary['Contact']['fields']['attribute7_c']['inline_edit']='';
+$dictionary['Contact']['fields']['attribute7_c']['labelValue']='attribute7';
+
+ 
+
+ // created: 2016-10-25 21:50:32
+$dictionary['Contact']['fields']['attribute8_c']['inline_edit']='';
+$dictionary['Contact']['fields']['attribute8_c']['labelValue']='attribute8';
+
+ 
+
+ // created: 2016-10-25 21:50:46
+$dictionary['Contact']['fields']['attribute9_c']['inline_edit']='';
+$dictionary['Contact']['fields']['attribute9_c']['labelValue']='attribute9';
+
+ 
+
  // created: 2016-02-09 18:33:50
 $dictionary['Contact']['fields']['chinese_name_c']['inline_edit']='1';
 $dictionary['Contact']['fields']['chinese_name_c']['labelValue']='Chinese Name';
@@ -174,6 +198,12 @@ $dictionary['Contact']['fields']['linked_user_c']['labelValue']='Linked User';
  // created: 2016-09-03 19:30:42
 $dictionary['Contact']['fields']['people_type_c']['inline_edit']='';
 $dictionary['Contact']['fields']['people_type_c']['labelValue']='People Type';
+
+ 
+
+ // created: 2016-10-25 23:11:23
+$dictionary['Contact']['fields']['primary_contact_c']['inline_edit']='';
+$dictionary['Contact']['fields']['primary_contact_c']['labelValue']='primary contact';
 
  
 

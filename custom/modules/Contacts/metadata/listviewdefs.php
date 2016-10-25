@@ -3,7 +3,7 @@ $listViewDefs ['Contacts'] =
 array (
   'NAME' => 
   array (
-    'width' => '25%',
+    'width' => '20%',
     'label' => 'LBL_LIST_NAME',
     'link' => true,
     'contextMenu' => 
@@ -87,6 +87,13 @@ array (
     array (
       0 => 'account_id',
     ),
+  ),
+  'PRIMARY_CONTACT_C' => 
+  array (
+    'type' => 'bool',
+    'default' => true,
+    'label' => 'LBL_PRIMARY_CONTACT',
+    'width' => '3%',
   ),
   'EMAIL1' => 
   array (

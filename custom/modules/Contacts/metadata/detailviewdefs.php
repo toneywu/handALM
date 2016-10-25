@@ -90,17 +90,13 @@ array (
           ),
         ),
       ),
-	  'includes' => 
+      'includes' => 
       array (
-        0 =>
+        0 => 
         array (
-          'file' => 'modules/HAA_FF/ff_include.js',
-          ),
-        1 =>
-        array (
-          'file' => 'custom/modules/Contacts/js/ContactsDetailView.js',
-          ),
+          'file' => 'modules/Leads/Lead.js',
         ),
+      ),
       'maxColumns' => '2',
       'widths' => 
       array (
@@ -115,14 +111,7 @@ array (
           'field' => '30',
         ),
       ),
-      'includes' => 
-      array (
-        0 => 
-        array (
-          'file' => 'modules/Leads/Lead.js',
-        ),
-      ),
-      'useTabs' => true,
+      'useTabs' => false,
       'tabDefs' => 
       array (
         'DEFAULT' => 
@@ -135,7 +124,7 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_EDITVIEW_PANEL1' => 
+        'LBL_EDITVIEW_PANEL2' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
@@ -257,9 +246,8 @@ array (
           ),
           1 => 
           array (
-            'name' => 'title',
-            'comment' => 'The title of the contact',
-            'label' => 'LBL_TITLE',
+            'name' => 'primary_contact_c',
+            'label' => 'LBL_PRIMARY_CONTACT',
           ),
         ),
         7 => 
@@ -270,6 +258,7 @@ array (
             'studio' => 'false',
             'label' => 'LBL_EMAIL_ADDRESS',
           ),
+          1 => '',
         ),
         8 => 
         array (
@@ -359,12 +348,38 @@ array (
           ),
           1 => 
           array (
+            'name' => 'attribute6_c',
+            'label' => 'LBL_ATTRIBUTE6',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute7_c',
+            'label' => 'LBL_ATTRIBUTE7',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute8_c',
+            'label' => 'LBL_ATTRIBUTE8',
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
             'name' => 'birthdate',
             'comment' => 'The birthdate of the contact',
             'label' => 'LBL_BIRTHDATE',
           ),
+          1 => 
+          array (
+            'name' => 'attribute9_c',
+            'label' => 'LBL_ATTRIBUTE9',
+          ),
         ),
-        4 => 
+        6 => 
         array (
           0 => 
           array (
@@ -378,7 +393,6 @@ array (
             'label' => 'LBL_CAMPAIGN',
           ),
         ),
-
       ),
       'LBL_PANEL_ASSIGNMENT' => 
       array (

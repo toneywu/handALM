@@ -65,6 +65,7 @@ class ContactsViewEdit extends ViewEdit
 
 
 		//*********************处理FF界面 START********************
+		$ff_id="";
 		if(isset($this->bean->haa_codes_id_c) && ($this->bean->haa_codes_id_c)!=""){
             //判断是否已经设置有组织的业务类型，如果有组织的业务类型，则进一步的加载产品对应的FlexForm
 
@@ -75,18 +76,13 @@ class ContactsViewEdit extends ViewEdit
             //如果分类有对应的FlexForm，些建立一个对象去存储FF_ID
             //需要注意的是在Metadata中是不包括这个ID的，如果这里没有加载则在后续的JS文件中加载
 		}
-        //$ff_id_field = '<input id=haa_ff_id name=haa_ff_id type=hidden '.(isset($ff_id)?'value='.$ff_id:'').'>';
-        //echo '<script>if($("#haa_ff_id").length==0) { $("#EditView").append("'.$ff_id_field.'");}</script>';
 		echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="'.$ff_id.'">';
-        //$ff_id_field = '<input id=haa_ff_id name=haa_ff_id type=hidden '.(isset($ff_id)?'value='.$ff_id:'').'>';
-        //echo '<script>if($("#haa_ff_id").length==0) { $("#EditView").append("'.$ff_id_field.'");}</script>';
-		
-		
+
 		parent::Display();
 
 		//如果已经选择business_type，无论是否business_type对应的FlexForm有值，值将界面展开。
 	    //（如果没有产品，则界面保持折叠状态。）
-		if(isset($this->bean->haa_codes_id1_c) && ($this->bean->haa_codes_id1_c)!=""){
+		if(isset($this->bean->haa_codes_id_c) && ($this->bean->haa_codes_id_c)!=""){
                 	echo '<script>$(".collapsed").switchClass("collapsed","expanded");</script>';
          } else {
             	echo '<script>$(".expanded").switchClass("expanded","collapsed");</script>';

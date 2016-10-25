@@ -1,13 +1,13 @@
 <?php
-// created: 2016-09-03 17:55:34
+// created: 2016-10-25 23:11:23
 $mod_strings = array (
-  'LBL_ACCOUNT_NAME' => '组织 Name:',
+  'LBL_ACCOUNT_NAME' => '所属组织:',
   'LBL_ACCOUNT_ID' => '组织 ID:',
   'LBL_ACCOUNT' => '组织',
   'LBL_HAT_ASSETS_CONTACTS_FROM_HAT_ASSETS_TITLE' => '设备/设备/资产',
   'LBL_HPR_AM_ROLES_CONTACTS_FROM_HPR_AM_ROLES_TITLE' => '资产管理角色',
   'LNK_NEW_CONTACT' => '新增联系人',
-  'LNK_CONTACT_LIST' => '联系人',
+  'LNK_CONTACT_LIST' => '联系人列表',
   'LNK_IMPORT_VCARD' => '从vCard新增',
   'LNK_IMPORT_CONTACTS' => '导入联系人',
   'MSG_SHOW_DUPLICATES' => '新增这个联系人可能造成重复，您可以点击新增联系人来通过已存在的记录新增新的联系人或是点击取消。',
@@ -38,4 +38,10 @@ $mod_strings = array (
   'LBL_DATA_SOURCE_CODE' => '数据来源',
   'LBL_DATA_SOURCE_ID' => '数据来源ID',
   'LBL_DATA_SOURCE_REFERENCE' => '数据来源参考',
+  'LBL_ATTRIBUTE6' => '附加属性 6',
+  'LBL_ATTRIBUTE7' => '附加属性 7',
+  'LBL_ATTRIBUTE8' => '附加属性 8',
+  'LBL_ATTRIBUTE9' => '附加属性 9',
+  'LBL_PRIMARY_CONTACT' => '首要联系人',
+    'LBL_EDITVIEW_PANEL1' => '系统用户账户信息',
 );

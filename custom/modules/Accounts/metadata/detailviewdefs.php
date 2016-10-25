@@ -401,17 +401,43 @@ array (
         array (
           0 => 
           array (
+            'name' => 'attribute5_c',
+            'label' => 'LBL_ATTRIBUTE5',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute6_c',
+            'label' => 'LBL_ATTRIBUTE6',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute7_c',
+            'label' => 'LBL_ATTRIBUTE7',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute8_c',
+            'label' => 'LBL_ATTRIBUTE8',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
             'name' => 'description',
             'comment' => 'Full text of the note',
             'label' => 'LBL_DESCRIPTION',
           ),
           1 => 
           array (
-            'name' => 'attribute5_c',
-            'label' => 'LBL_ATTRIBUTE5',
+            'name' => 'attribute9_c',
+            'label' => 'LBL_ATTRIBUTE9',
           ),
         ),
-        3 => 
+        5 => 
         array (
           0 => 
           array (

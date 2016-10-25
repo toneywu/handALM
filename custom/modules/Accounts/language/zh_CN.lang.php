@@ -1,5 +1,5 @@
 <?php
-// created: 2016-08-21 18:36:36
+// created: 2016-10-25 21:46:25
 $mod_strings = array (
   'LNK_NEW_ACCOUNT' => '新增组织',
   'LNK_ACCOUNT_LIST' => '组织',
@@ -60,6 +60,10 @@ $mod_strings = array (
   'LBL_ATTRIBUTE3' => '附加属性 3',
   'LBL_ATTRIBUTE4' => '附加属性 4',
   'LBL_ATTRIBUTE5' => '附加属性 5',
+  'LBL_ATTRIBUTE6' => '附加属性 6',
+  'LBL_ATTRIBUTE7' => '附加属性 7',
+  'LBL_ATTRIBUTE8' => '附加属性 8',
+  'LBL_ATTRIBUTE9' => '附加属性 9',
   'LBL_HAA_QUAL_SUBPANEL' => '资质/许可证',
   'LBL_RESPONSIBLE_PERSON' => '负责人姓名',
   'LBL_EDITVIEW_PANEL2' => '负责人信息',
@@ -75,16 +79,15 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL5' => '基础信息',
   'LBL_CUSTOMER_CLASSS_HAA_CODES_ID' => '客户级别 (related ID)',
   'LBL_CUSTOMER_CLASSS' => '客户级别',
-  'LBL_FRAME_HAA_FRAMEWORKS_ID' => '业务框架(related ID)',
+  'LBL_FRAME_HAA_FRAMEWORKS_ID' => '业务框架 (ID)',
   'LBL_FRAME' => '业务框架',
   'LBL_SALES_PERSON_DESC' => '销售人员说明',
   'LBL_SALES_NOTE' => '销售方备注',
   'LBL_SERVICE_PERSON_DESC' => '售后服务人员说明',
   'LBL_SERVICE_NOTE' => '售后服务备注',
-  'LBL_FRAME_HAA_FRAMEWORKS_ID' => '业务框架 (ID)',
-  'LBL_FRAME' => '业务框架',
-  'LBL_HIT_RACKS_SUBPANEL_TITLE'=>'机柜',
-  'LBL_HIT_IP_ALLOCATIONS_TITLE'=>'IP分配信息',
-  'LBL_HAM_WO_TITLE'=>'工单信息',
-  'LBL_HAT_ASSETS_TITLE'=>'资产/设备',
-  );
+  'LBL_HIT_RACKS_SUBPANEL_TITLE' => '机柜',
+  'LBL_HIT_IP_ALLOCATIONS_TITLE' => 'IP分配信息',
+  'LBL_HAM_WO_TITLE' => '工单信息',
+  'LBL_HAT_ASSETS_TITLE' => '资产/设备',
+
+);
