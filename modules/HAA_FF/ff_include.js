@@ -30,7 +30,7 @@ function triger_setFF(id_value, module_name) {
 function setFF(FFObj) {
 	//设置FlexFORM，基于triger_setFF函数读取到的Ajax结果，动态的调整界面字段
 	//其中FFObj是FF_Fields中定义的需要变化的各个字段及属性
-	//console.log(FFObj);
+	//console.log(FFObj);//<-------------------如果你需要调试，可以将这一行的内容输出
 
 	var view = action_sugar_grp1;
 	//有些界面在EditView和DetailView中处理有所不同，因此先读取出当前界面是哪些，保存在View中
@@ -70,8 +70,10 @@ function setFF(FFObj) {
 
 		//设定默认值
 		if (FFObj.default_val!=null) {
-			  $("#"+FFObj.field+":checkbox").prop('checked',FFObj.default_val=='1'?true:false);
-			  $("#"+FFObj.field).val(FFObj.default_val);
+			var thisObj = $("#"+FFObj.field);
+			$("#"+FFObj.field+":checkbox").attr('checked',(FFObj.default_val=='1'?'true':'false')); //针对Checkbox
+			thisObj.val(FFObj.default_val);//针对其它input以及select对象
+			$("#"+FFObj.field).trigger('change');//触发设置了默认值之后的chanage事件
 		}
 	}
 }
