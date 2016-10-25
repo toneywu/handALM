@@ -200,6 +200,7 @@ function changeRequired(lineRecord){
 	loopField("line_channel_content_backup",lineRecord.change_channel_content_backup);
 	loopField("line_channel_num_backup",lineRecord.change_channel_num_backup);
 	loopField("line_status",lineRecord.change_status);
+	loopField("line_access_assets_backup_name",lineRecord.change_access_assets_backup_name);
 }
 
 //delted by toney.wu 20161007

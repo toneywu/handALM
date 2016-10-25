@@ -38,4 +38,8 @@ $mod_strings = array (
   'LBL_DATA_SOURCE_CODE' => '数据来源',
   'LBL_DATA_SOURCE_ID' => '数据来源ID',
   'LBL_DATA_SOURCE_REFERENCE' => '数据来源参考',
+  'LBL_DOCUMENT_TYPE_C'=>'证件类型',
+  'LBL_DOCUMENT_NUM_C'=>'证件编号',
+  'LBL_IS_PRIMARY_CONTACT_C'=>'是否首要联系人',
+  'LBL_NATURE_C'=>'性质',
 );

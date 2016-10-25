@@ -55,4 +55,8 @@ $mod_strings = array (
   'LBL_DATA_SOURCE_REFERENCE' => 'Data Source ID',
   'LBL_DATA_SOURCE_ID' => 'Data Source Reference',
   'LBL_DETAILVIEW_PANEL2' => 'New Panel 2',
+  'LBL_DOCUMENT_TYPE_C'=>'Document Type',
+  'LBL_DOCUMENT_NUM_C'=>'Document Num.',
+  'LBL_IS_PRIMARY_CONTACT_C'=>'Primary Contact',
+  'LBL_NATURE_C'=>'Nature',
 );

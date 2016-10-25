@@ -302,7 +302,7 @@ function display_lines($focus, $field, $value, $view) {
 			  ,h.change_monitoring_backup
 			  ,h.change_channel_content_backup
 			  ,h.change_channel_num_backup
-			  ,h.change_status
+			  ,h.change_status,h.change_access_assets_backup_name
 			FROM
 			  hat_eventtype h 
 			WHERE h.deleted = 0 
