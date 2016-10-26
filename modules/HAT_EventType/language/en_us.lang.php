@@ -124,4 +124,5 @@ $mod_strings = array (
   'LBL_CHANGE_ASSET_STATUS'=>'Change Asset Status',
   'LBL_CHANGE_ASSET_DATE_START'=>'Change Asset Start Date',
   'LBL_CHANGE_ASSET_DATE_END'=>'Change Asset End Date',
+  'LBL_CHANGE_ENABLE_ACTION'=>'Change Enable Action',
 );

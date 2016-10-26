@@ -155,6 +155,39 @@ function openRackPopup(ln){
   open_popup('HIT_Racks', 1200, 850, popupFilter, true, true, popupRequestData);
 }
 
+function addNewAssetLine(){
+	var popupRequestData = {
+			"call_back_function" : "setAddNewLineBtnReturn",
+			"form_name" : "EditView",
+			"field_to_name_array" : {
+	}};
+  var target_owning_org_id = $("#target_owning_org_id").val();
+  var popupFilter = '&target_owning_org_id_advanced='+target_owning_org_id;
+  open_popup('HAT_Assets', 1200, 850,popupFilter, true, true, popupRequestData, "MultiSelect", true);
+
+}
+
+function setAddNewLineBtnReturn(popupReplyData) {
+	set_return(popupReplyData);
+	var idJson = popupReplyData.selection_list;
+	for(var p in idJson){
+		$.ajax({
+			url:'index.php?to_pdf=true&module=HAT_Asset_Trans&action=syncHtmlPage&record='+idJson[p],
+			success: function (msg) {
+				//console.log(msg);
+				insertLineData($.parseJSON(msg));
+			},
+			error: function () { //失败
+				alert('Error loading document');
+			}
+		});
+	};
+	
+	// 设置行号
+	resetLineNum_Bold();
+}
+
+
 /******************************
 /* 加载表头
 /*******************************/
@@ -603,7 +636,8 @@ function insertTransLineFootor(tableid) {
 
       footer_cell.scope="row";
       footer_cell.colSpan="5";
-      footer_cell.innerHTML="<input id='btnAddNewLine' type='button' class='button btn_del' onclick='addNewLine(\"" +tableid+ "\")' value='+ "+SUGAR.language.get('HAT_Asset_Trans', 'LBL_BTN_ADD_TRANS_LINE')+"' />";
+      footer_cell.innerHTML="<input id='btnAddNewLine' type='button' class='button btn_del' onclick='addNewLine(\"" +tableid+ "\")' value='+ "+SUGAR.language.get('HAT_Asset_Trans', 'LBL_BTN_ADD_TRANS_LINE')+"' />"+
+      "<input id='btnNewLine' type='button' class='button btn_del' onclick='addNewAssetLine()' value='+ "+SUGAR.language.get('HAT_Asset_Trans', 'LBL_BTN_ADD_NEW_LINE')+"' />";
       }
 }
 

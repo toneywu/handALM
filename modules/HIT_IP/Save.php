@@ -73,6 +73,7 @@ handleRedirect($return_id, 'HIP_IP');
 	                    $ip_subnet_line->$field_def['name'] = $post_data[$key.$field_def['name']][$i];
 	                    echo "<br/>".$field_def[name].'='. $post_data[$key.$field_def['name']][$i];
 						 $ip_subnet_line->hit_vlan_id = $post_data[$key.'vlan_id'][$i];
+						 $ip_subnet_line->ip_type = $post_data[$key.'ip_type_val'][$i];
 	                }
 	                $ip_subnet_line->parent_hit_ip_id = $parent->id;//父ID
 					//die();

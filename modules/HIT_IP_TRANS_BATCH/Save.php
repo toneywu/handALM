@@ -93,6 +93,7 @@ function save_lines($post_data, $parent, $key = '') {
 					//echo "field_name= " . $field_def['name'] . "--------------------value = " . $post_data[$key . $field_def['name']][$i] . "<br>";
 					$trans_line-> $field_def['name'] = $post_data[$key . $field_def['name']][$i];
 					echo "<br/>".$field_def[name].'='. $post_data[$key.$field_def['name']][$i];
+					$trans_line-> enable_action = $post_data[$key . 'enable_action_val'][$i];
 				}
 				if ($insertFlag == "Y") {
 					$trans_line->hit_ip_trans_batch_id = $parent->id; //父ID
@@ -169,6 +170,7 @@ function save_allocation_lines($trans_line_bean, $parent,$prev_trans_batch_id) {
 	$allocation_line_bean->access_assets_backup_id=$trans_line->access_assets_backup_id;
 	$allocation_line_bean->target_owning_org_id=$parent->target_owning_org_id;
 	$allocation_line_bean->target_owning_org=$parent->target_owning_org;
+	$allocation_line_bean->enable_action=$trans_line->enable_action;
 	if ($allocation_line_bean->source_trans_id == null) {
 		$allocation_line_bean->hit_ip_trans_batch_id = $trans_line->hit_ip_trans_batch_id;
 		//$allocation_line_bean->hit_ip_trans_batch_id = $trans_line->hit_ip_trans_batch_id;
