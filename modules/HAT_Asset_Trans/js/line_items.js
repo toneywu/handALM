@@ -497,20 +497,22 @@ function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
 function resetEditorFields(ln) {
   //生成编辑行中的字段样式，如锁定一些字段，以及加颜色的字段
   //以下处理当前资产的状态字段
-	if($("#change_target_status").val()==1) { //如果头EventType需要变更
-	$("#line_target_asset_status"+ln).val($("#target_asset_status").val());//从头上复制当前的资产状态
-	} else {
-	$("#line_target_asset_status"+ln).val($("#line_current_asset_status"+ln).val());//目标状态=当前资产状态（保持不变）,以Value保存
-	}
-	var target_status_value = $("#line_target_asset_status"+ln).val();
-	var target_status_text = hat_asset_status_list.filter(function(obj) {
-	                            return obj.name === target_status_value;
-	                          })[0].value;
-	$("#line_target_asset_status_displayed"+ln).html("<span class='color_tag color_asset_status_"+target_status_value+"'>"+target_status_text+"</span>");
+   var eventOptions = $("#eventOptions").val()!=""?jQuery.parseJSON($("#eventOptions").val()):"";
+
+  if (eventOptions!="") {
+
+    if (eventOptions.change_target_status=='1') { //如果头EventType需要变更
+       $("#line_target_asset_status"+ln).val(eventOptions.target_asset_status);//从头上复制当前的资产状态
+    } else {
+       $("#line_target_asset_status"+ln).val($("#line_current_asset_status"+ln).val());//目标状态=当前资产状态（保持不变）,以Value保存
+    }
+    var target_status_value = $("#line_target_asset_status"+ln).val();
+    var target_status_text = hat_asset_status_list.filter(function(obj) {
+                                return obj.name === target_status_value;
+                              })[0].value;
+    $("#line_target_asset_status_displayed"+ln).html("<span class='color_tag color_asset_status_"+target_status_value+"'>"+target_status_text+"</span>");
 
 
-  if ($("#eventOptions").val()!="") {
-    var eventOptions = jQuery.parseJSON($("#eventOptions").val());
     //判断是否要清空资产的使用组织及机柜上的信息
     if(eventOptions.change_using_org == "EMPTY") {//判断是否需要清空使用组织
       $("#line_target_using_org"+ln).val("");
@@ -567,6 +569,11 @@ function resetAsset(ln){ //在用户重新选择资产之后，会连带的更�
     $("#line_target_using_org_id"+ln).val($("#line_current_using_org_id"+ln).val());
   }
 
+  if (eventOptions.change_target_status=='1') {
+    $("#line_target_asset_status"+ln).val(eventOptions.target_asset_status);
+  }else{
+    $("#line_target_asset_status"+ln).val($("#line_current_asset_status"+ln).val());
+  }
     $("#line_target_owning_person"+ln).val($("#line_current_owning_person"+ln).val());
     $("#line_target_using_person"+ln).val($("#line_current_using_person"+ln).val());
     $("#line_target_owning_person_id"+ln).val($("#line_current_owning_person_id"+ln).val());
@@ -576,9 +583,9 @@ function resetAsset(ln){ //在用户重新选择资产之后，会连带的更�
     $("#line_target_location"+ln).val($("#line_current_location"+ln).val());
     $("#line_target_location_id"+ln).val($("#line_current_location_id"+ln).val());
     $("#line_target_location_desc"+ln).val($("#line_current_location_desc"+ln).val());
-    $("#line_target_asset_status"+ln).val($("#line_current_asset_status"+ln).val());
     $("#line_target_parent_asset"+ln).val($("#line_current_parent_asset"+ln).val());
     $("#line_target_parent_asset_id"+ln).val($("#line_current_parent_asset_id"+ln).val());
+    $("#line_target_asset_status"+ln).val($("#line_current_asset_status"+ln).val());
 
   resetEditorFields(ln);
 
