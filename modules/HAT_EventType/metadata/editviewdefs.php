@@ -365,6 +365,12 @@ array (
         11 => 
         array (
           0 => 'change_status',
+          1 => 
+          array (
+            'name' => 'change_enable_action',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_ENABLE_ACTION',
+          ),
         ),
       ),
     ),

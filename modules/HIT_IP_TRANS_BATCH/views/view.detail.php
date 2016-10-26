@@ -7,6 +7,21 @@ require_once ('include/MVC/View/views/view.detail.php');
 class HIT_IP_TRANS_BATCHViewDetail extends ViewDetail {
 
 	function Display() {
+		//0.处理头与行的语言包
+		$modules = array (
+			'HIT_IP_TRANS_BATCH',
+			'HIT_IP_TRANS',
+
+			
+		);
+		foreach ($modules as $module) {
+			if (!is_file($GLOBALS['sugar_config']['cache_dir'] . 'jsLanguage/' . $module . '/' . $GLOBALS['current_language'] . '.js')) {
+				require_once 'include/language/jsLanguage.php';
+				jsLanguage :: createModuleStringsCache($module, $GLOBALS['current_language']);
+			}
+			echo '<script type="text/javascript" src="' . $GLOBALS['sugar_config']['cache_dir'] . 'jsLanguage/' . $module . '/' . $GLOBALS['current_language'] . '.js?s=' . $GLOBALS['js_version_key'] . '&c=' . $GLOBALS['sugar_config']['js_custom_version'] . '&j=' . $GLOBALS['sugar_config']['js_lang_version'] . '"></script>';
+		};
+		
 		//下一道工序的获取
 		if (isset ($_REQUEST['record']) && $_REQUEST['record'] != "") {
 			$bean_batch = BeanFactory :: getBean('HIT_IP_TRANS_BATCH', $_REQUEST['record']);

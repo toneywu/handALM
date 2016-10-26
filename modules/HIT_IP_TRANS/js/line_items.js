@@ -63,6 +63,36 @@ function openDateStart(ln){
 		startDate:new Date(t),
 	});*/
 }
+/**
+ * 点击失效的checkbox
+ * @param {} selectIn
+ */
+function selectedLine(selectIn){
+	
+	if($("#line_enable_action"+selectIn).is(':checked')){
+		$("#line_enable_action"+selectIn).prop("checked",'true');
+		$("#line_status"+selectIn).val("UNEFFECTIVE");
+		$("#line_status_dis"+selectIn).val(SUGAR.language.get('HIT_IP_TRANS', 'LBL_EFFICACY'));
+		var mydate = new Date();
+  		var currentDate=mydate.toLocaleString();
+		$("#line_date_end"+selectIn).val(getnowtime());
+		$("#line_enable_action"+selectIn).val('0');
+		$("#line_enable_action_val"+selectIn).val('0');
+        $("#displayed_line_enable_action"+selectIn).attr("checked",true);
+        $("#displayed_line_enable_action"+selectIn).prop("checked",true);
+        document.getElementById("displayed_line_enable_action"+selectIn).checked = true;
+	}else{
+		$("#line_enable_action"+selectIn).removeAttr("checked");
+		$("#line_date_end"+selectIn).val(null);
+		$("#line_status"+selectIn).val("EFFECTIVE");
+		$("#line_status_dis"+selectIn).val(SUGAR.language.get('HIT_IP_TRANS', 'LBL_EFFECTIVE'));
+
+        $("#displayed_line_enable_action"+selectIn).removeAttr("checked");
+        $("#line_enable_action"+selectIn).val('1');
+        $("#line_enable_action_val"+selectIn).val('1');
+	}
+	
+}
 
 
 /**
@@ -155,8 +185,6 @@ function openCabinetPopup(ln) {// 本文件为行上选择机柜的按钮
 
 function setCabinetReturn(popupReplyData) {
 	set_return(popupReplyData);
-	// console.log(popupReplyData);
-	// resetAsset(lineno);
 }
 
 function openAssetPopup(ln) {// 本文件为行上选择资产的按钮
@@ -180,8 +208,6 @@ function openAssetPopup(ln) {// 本文件为行上选择资产的按钮
 
 function setMainAssetReturn(popupReplyData) {
 	set_return(popupReplyData);
-	// console.log(popupReplyData);
-	// resetAsset(lineno);
 }
 function openMainAssetPopup(ln) {// 本文件为行上选择资产的按钮
 	lineno = ln;
@@ -454,7 +480,9 @@ function insertTransLineHeader(tableid) {
 	n3.innerHTML = "<span id='line_date_start_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_DATE_START')+"</span>";
 	var n4 = x.insertCell(22);
 	n4.innerHTML = "<span id='line_date_end_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_DATE_END')+"</span>";
-	var n2 = x.insertCell(23);
+	var n3 = x.insertCell(23);
+	n3.innerHTML = "<span id='line_enable_action_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_ENABLE_ACTION')+"</span>";
+	var n2 = x.insertCell(24);
 	n2.innerHTML = "<span id='line_status_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_STATUS')+"</span>";
 
 }
@@ -522,6 +550,23 @@ function insertLineData(asset_trans_line) { // 将数据写入到对应的行字
 	    $("#line_channel_num_backup".concat(String(ln))).val(asset_trans_line.channel_num_backup);
 	    $("#line_date_start".concat(String(ln))).val(asset_trans_line.date_start);
 	    $("#line_date_end".concat(String(ln))).val(asset_trans_line.date_end);
+	    $("#line_enable_action".concat(String(ln))).val(asset_trans_line.enable_action);
+	    
+	    if($("#line_status"+ln).val()==""||$("#line_status"+ln).val()=="EFFECTIVE"){
+	  	  $("#line_status_dis"+ln).val(SUGAR.language.get('HIT_IP_TRANS',"LBL_EFFECTIVE"));
+	    }else{
+	  	  $("#line_status_dis"+ln).val(SUGAR.language.get('HIT_IP_TRANS',"LBL_EFFICACY"));
+	    } 
+	    
+	    if($("#line_enable_action"+ln).val()==""||$("#line_enable_action"+ln).val()=="0"){
+  	 	 $("#line_enable_action"+ln).attr("checked",true);
+     	 $("#line_enable_action"+ln).prop("checked",true);
+      	 document.getElementById("displayed_line_enable_action"+ln).checked = true;
+ 		 }else{
+  			 $("#line_enable_action"+ln).removeAttr("checked");
+ 		 } 
+	    
+	    
 		renderTransLine(ln);
 		single_changeRequired(lineData,ln);	
 	}
@@ -615,95 +660,34 @@ function insertTransLineElements(tableid) { // 创建界面要素
 	var z1 = tablebody.insertRow(-1);
 	z1.id = 'asset_trans_line1_displayed' + prodln;
 	z1.className = 'oddListRowS1';
-	z1.innerHTML = "<td><span name='displayed_line_num[" + prodln
-			+ "]' id='displayed_line_num" + prodln + "'>1</span></td>"
-			+ "<td><span name='displayed_line_parent_ip[" + prodln
-			+ "]' id='displayed_line_parent_ip" + prodln + "'></span></td>"
-			+ "<td><span name='displayed_line_hit_ip_subnets[" + prodln
-			+ "]' id='displayed_line_hit_ip_subnets" + prodln
-			+ "'></span></td>"
-			+ "<td><span name='displayed_line_associated_ip[" + prodln
-			+ "]' id='displayed_line_associated_ip" + prodln + "'></span></td>"
-			+ "<td><span name='displayed_line_mask[" + prodln
-			+ "]' id='displayed_line_mask" + prodln + "'></span></td>"
-			+ "<td><span name='displayed_line_gateway[" + prodln
-			+ "]' id='displayed_line_gateway" + prodln + "'></span></td>"
-			+ "<td><span name='displayed_line_hat_asset_name[" + prodln
-			+ "]' id='displayed_line_hat_asset_name" + prodln
-			+ "'></span></td>"
-			+ "<td><span name='displayed_line_access_assets_name[" + prodln
-			+ "]' id='displayed_line_access_assets_name" + prodln
-			+ "'></span></td>" 
-			+ "<td><span name='displayed_line_access_assets_backup_name[" + prodln
-			+ "]' id='displayed_line_access_assets_backup_name" + prodln
-			+ "'></span></td>"
-			+ "<td><span name='displayed_line_port["
-			+ prodln + "]' id='displayed_line_port" + prodln + "'></span></td>"
-			+ "<td><span name='displayed_line_port_backup["
-			+ prodln + "]' id='displayed_line_port_backup" + prodln + "'></span></td>"
-			+ "<td><span name='displayed_line_bandwidth_type[" + prodln
-			+ "]' id='displayed_line_bandwidth_type" + prodln
-			+ "'></span></td>" 
-			+ "<td><span name='displayed_line_speed_limit["
-			+ prodln + "]' id='displayed_line_speed_limit" + prodln
-			+ "'></span></td>"
-			+ "<td><span name='displayed_line_hat_assets_cabinet[" + prodln
-			+ "]' id='displayed_line_hat_assets_cabinet" + prodln
-			+ "'></span></td>" 
-			+ "<td><span name='displayed_line_monitoring["
-			+ prodln + "]' id='displayed_line_monitoring" + prodln
-			+ "'></span></td>"
-			+ "<td><span name='displayed_line_monitoring_backup["
-			+ prodln + "]' id='displayed_line_monitoring_backup" + prodln
-			+ "'></span></td>"
-			+ "<td><span name='displayed_line_mrtg_link["
-			+ prodln
-			+ "]' id='displayed_line_mrtg_link"
-			+ prodln
-			+ "'></span></td>"
-			+ "<td><span name='displayed_line_channel_num["
-			+ prodln
-			+ "]' id='displayed_line_channel_num"
-			+ prodln
-			+ "'></span></td>"
-			+ "<td><span name='displayed_line_channel_num_backup["
-			+ prodln
-			+ "]' id='displayed_line_channel_num_backup"
-			+ prodln
-			+ "'></span></td>"
-			+ "<td><span name='displayed_line_channel_content["
-			+ prodln
-			+ "]' id='displayed_line_channel_content"
-			+ prodln
-			+ "'></span></td>"
-			+ "<td><span name='displayed_line_channel_content_backup["
-			+ prodln
-			+ "]' id='displayed_line_channel_content_backup"
-			+ prodln
-			+ "'></span></td>"
-			+ "<td><span name='displayed_line_date_start["
-			+ prodln
-			+ "]' id='displayed_line_date_start"
-			+ prodln
-			+ "'></span></td>"
-			+ "<td><span name='displayed_line_date_end["
-			+ prodln
-			+ "]' id='displayed_line_date_end"
-			+ prodln
-			+ "'></span></td>"
-			+ "<td><span name='displayed_line_status["
-			+ prodln
-			+ "]' id='displayed_line_status"
-			+ prodln
-			+ "'></span></td>"
-			+
-			// "<td><span name='displayed_line_hit_ip_subnets_id[" + prodln +
-			// "]' id='displayed_line_hit_ip_subnets_id" + prodln +
-			// "''></span></td>"+
-			"<td><input type='button' value='"
-			+ SUGAR.language.get('app_strings', 'LBL_EDITINLINE')
-			+ "' class='button'  id='btn_edit_line" + prodln
-			+ "' onclick='LineEditorShow(" + prodln + ")'></td>";
+	z1.innerHTML = 
+	"<td><span name='displayed_line_num[" + prodln+ "]' id='displayed_line_num" + prodln + "'>1</span></td>"+ 
+	"<td><span name='displayed_line_parent_ip[" + prodln+ "]' id='displayed_line_parent_ip" + prodln + "'></span></td>"+
+	"<td><span name='displayed_line_hit_ip_subnets[" + prodln+ "]' id='displayed_line_hit_ip_subnets" + prodln+ "'></span></td>"+
+	"<td><span name='displayed_line_associated_ip[" + prodln+ "]' id='displayed_line_associated_ip" + prodln + "'></span></td>"
+			+ "<td><span name='displayed_line_mask[" + prodln+ "]' id='displayed_line_mask" + prodln + "'></span></td>"
+			+ "<td><span name='displayed_line_gateway[" + prodln+ "]' id='displayed_line_gateway" + prodln + "'></span></td>"
+			+ "<td><span name='displayed_line_hat_asset_name[" + prodln+ "]' id='displayed_line_hat_asset_name" + prodln+ "'></span></td>"
+			+ "<td><span name='displayed_line_access_assets_name[" + prodln+ "]' id='displayed_line_access_assets_name" + prodln+ "'></span></td>" 
+			+ "<td><span name='displayed_line_access_assets_backup_name[" + prodln+ "]' id='displayed_line_access_assets_backup_name" + prodln+ "'></span></td>"
+			+ "<td><span name='displayed_line_port["+ prodln + "]' id='displayed_line_port" + prodln + "'></span></td>"
+			+ "<td><span name='displayed_line_port_backup["+ prodln + "]' id='displayed_line_port_backup" + prodln + "'></span></td>"
+			+ "<td><span name='displayed_line_bandwidth_type[" + prodln+ "]' id='displayed_line_bandwidth_type" + prodln+ "'></span></td>" 
+			+ "<td><span name='displayed_line_speed_limit["+ prodln + "]' id='displayed_line_speed_limit" + prodln+ "'></span></td>"
+			+ "<td><span name='displayed_line_hat_assets_cabinet[" + prodln+ "]' id='displayed_line_hat_assets_cabinet" + prodln+ "'></span></td>" 
+			+ "<td><span name='displayed_line_monitoring["+ prodln + "]' id='displayed_line_monitoring" + prodln+ "'></span></td>"
+			+ "<td><span name='displayed_line_monitoring_backup["+ prodln + "]' id='displayed_line_monitoring_backup" + prodln+ "'></span></td>"
+			+ "<td><span name='displayed_line_mrtg_link["+ prodln+ "]' id='displayed_line_mrtg_link"+ prodln+ "'></span></td>"
+			+ "<td><span name='displayed_line_channel_num["+ prodln+ "]' id='displayed_line_channel_num"+ prodln+ "'></span></td>"
+			+ "<td><span name='displayed_line_channel_num_backup["+ prodln+ "]' id='displayed_line_channel_num_backup"+ prodln+ "'></span></td>"
+			+ "<td><span name='displayed_line_channel_content["+ prodln+ "]' id='displayed_line_channel_content"+ prodln+ "'></span></td>"
+			+ "<td><span name='displayed_line_channel_content_backup["+ prodln+ "]' id='displayed_line_channel_content_backup"+ prodln+ "'></span></td>"
+			+ "<td><span name='displayed_line_date_start["+ prodln+ "]' id='displayed_line_date_start"+ prodln+ "'></span></td>"
+			+ "<td><span name='displayed_line_date_end["+ prodln+ "]' id='displayed_line_date_end"+ prodln+ "'></span></td>"
+			//+ "<td><span name='displayed_line_enable_action["+ prodln+ "]' id='displayed_line_enable_action"+ prodln+ "'></span></td>"
+			+"<td><input type='checkbox' disabled='true'  name='displayed_line_enable_action[" + prodln + "]' id='displayed_line_enable_action" + prodln + "'></input></td>"
+			+ "<td><span name='displayed_line_status["+ prodln+ "]' id='displayed_line_status"+ prodln+ "'></span></td>"
+			+"<td><input type='button' value='"+ SUGAR.language.get('app_strings', 'LBL_EDITINLINE')+ "' class='button'  id='btn_edit_line" + prodln+ "' onclick='LineEditorShow(" + prodln + ")'></td>";
 	var z2 = tablebody.insertRow(-1);
 	z2.id = 'asset_trans_line2_displayed' + prodln;
 
@@ -793,14 +777,9 @@ function insertTransLineElements(tableid) { // 创建界面要素
 
 			// 掩码
 			"<span class='input_group'>"
-			+ "<label>"
-			+ "掩码"
-			+ "</label>"
-			+ "<input style=' width:153px;' type='text' name='line_mask["
-			+ prodln
-			+ "]' id='line_mask"
-			+ prodln
-			+ "' readonly='readonly' maxlength='50' value='' title=''>"
+			+ "<label>"+ "掩码"+ "</label>"
+			+ "<input style=' width:153px;' type='text' name='line_mask["+ prodln+ "]' id='line_mask"
+			+ prodln+ "' readonly='readonly' maxlength='50' value='' title=''>"
 			+ "</span>"
 			+
 
@@ -1168,26 +1147,16 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			
 			// startdate
 			+"<span class='input-group date form_datetime' id='span_line_date_start"+prodln+"' >"
-			+ "<label id='line_date_start"
-			+ prodln
-			+ "_label'>"
-			+ "占用起始时间"
-			+ "</label>"
-			+ "<input style=' width:153px;' type='text' name='line_date_start["
-			+ prodln + "]' id='line_date_start" + prodln
-			+ "' maxlength='50' value='' title=''>" +"<span class='input-group-addon' id='line_date_start"+prodln+"_date"+"'><span class='glyphicon glyphicon-calendar'></span></span>"+ "</span>"
+			+ "<label id='line_date_start"+ prodln+ "_label'>"+ "占用起始时间"+ "</label>"
+			+ "<input style=' width:153px;' type='text' name='line_date_start["+ prodln + "]' id='line_date_start" + prodln	+ "' maxlength='50' value='' title=''>" +"<span class='input-group-addon' id='line_date_start"+prodln+"_date"+"'><span class='glyphicon glyphicon-calendar'></span></span>"
+			+ "</span>"
 			
 			
 			// enddate
 			+"<span class='input-group date form_datetime' id='span_line_date_end"+prodln+"' >"
-			+ "<label id='line_date_end"
-			+ prodln
-			+ "_label'>"
-			+ "占用终止时间"
-			+ "</label>"
-			+ "<input style=' width:153px;' type='text' name='line_date_end["
-			+ prodln + "]' id='line_date_end" + prodln
-			+ "' maxlength='50' value='' title=''>" +"<span class='input-group-addon' id='line_date_end"+prodln+"_date"+"'><span class='glyphicon glyphicon-calendar'></span></span>"+ "</span>"
+			+ "<label id='line_date_end"+ prodln+ "_label'>"+ "占用终止时间"+ "</label>"
+			+ "<input style=' width:153px;' type='text' name='line_date_end["+ prodln + "]' id='line_date_end" + prodln+ "' maxlength='50' value='' title=''>" +"<span class='input-group-addon' id='line_date_end"+prodln+"_date"+"'><span class='glyphicon glyphicon-calendar'></span></span>"
+			+ "</span>"
 			// endDate
 			/*+"<span class='form-group' id='span_line_date_end'"+prodln+">"
             +    "<label for='dtp_input1' class='col-md-2 control-label'>占用终止时间</label>"
@@ -1198,60 +1167,34 @@ function insertTransLineElements(tableid) { // 创建界面要素
             +    "</span>"
             +    "<input type='hidden' id='dtp_input1' value='' /><br/>"
             +"</span>"*/
-			
+		    +"<span class='input_group'>"+
+		    "<label>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_ENABLE_ACTION')+" </label>"+
+		    "<input name='line_enable_action[" + prodln + "]'  type='checkbox' id='line_enable_action" + prodln + "'  value='' title='"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_ENABLE_ACTION')+"' onclick=selectedLine("+prodln+")></input>"
+		    +"</span>"
 			// 状态
 			+"<span class='input_group'>"
-			+ "<label id='line_status"
-			+ prodln
-			+ "_label'>"
-			+ "状态"
-			+ "</label>"
-			+ "<input style=' width:153px;' type='text' name='line_status["
-			+ prodln + "]' id='line_status" + prodln
-			+ "' maxlength='50' value='' title=''>" + "</span>"
+			+ "<label id='line_status"+ prodln+ "_label'>"+ "状态"+ "</label>"
+			+ "<input style=' width:153px;' type='text' readonly='readonly' name='line_status_dis["+ prodln + "]' id='line_status_dis" + prodln+ "' maxlength='50' value='' title=''>" 
+			+ "</span>"
 			
-			+ "<input type='hidden' name='line_deleted[" + prodln
-			+ "]' id='line_deleted" + prodln + "' value='0'>"
-			+ "<input type='hidden' name='line_id[" + prodln + "]' id='line_id"
-			+ prodln + "' value=''>"
-			+ "<input type='hidden' name='line_source_ref[" + prodln
-			+ "]' id='line_source_ref" + prodln + "' value=''>"
-			+ "<input type='button' id='line_delete_line" + prodln
-			+ "' class='button btn_del' value='"
-			+ SUGAR.language.get('app_strings', 'LBL_DELETE_INLINE')
-			+ "' tabindex='116' onclick='btnMarkLineDeleted(" + prodln
-			+ ",\"line_\")'>" + "<button type='button' id='btn_LineEditorClose"
-			+ prodln + "' class='button btn_save' value='"
-			+ SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE')
-			+ "' tabindex='116' onclick='LineEditorClose(" + prodln
-			+ ",\"line_\")'>"
-			+ SUGAR.language.get('app_strings', 'LBL_SAVE_BUTTON_LABEL')
-			+ " & " + SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE')
-			+ " <img src='themes/default/images/id-ff-clear.png' alt='"
-			+ SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE')
-			+ "'></button>"
-			
-			/*+ "<input type='button' id='line_add_trans_line" + prodln
-			+ "' class='button btn_del' value='"
-			+ "添加行"
-			+ "' tabindex='116' onclick='btnAddLine(" + prodln
-			+ ",\"line_\")'>"			
-*/
-
-
-
+			+ "<input type='hidden' name='line_deleted[" + prodln+ "]' id='line_deleted" + prodln + "' value='0'>"
+			+ "<input type='hidden' name='line_status[" + prodln+ "]' id='line_status" + prodln + "' value='0'>"
+			+ "<input type='hidden' name='line_enable_action_val[" + prodln+ "]' id='line_enable_action_val" + prodln + "' value='0'>"
+			+ "<input type='hidden' name='line_id[" + prodln + "]' id='line_id"+ prodln + "' value=''>"
+			+ "<input type='hidden' name='line_source_ref[" + prodln+ "]' id='line_source_ref" + prodln + "' value=''>"
+			+ "<input type='button' id='line_delete_line" + prodln+ "' class='button btn_del' value='"+ SUGAR.language.get('app_strings', 'LBL_DELETE_INLINE')+ "' tabindex='116' onclick='btnMarkLineDeleted(" + prodln+ ",\"line_\")'>" + "<button type='button' id='btn_LineEditorClose"+ prodln + "' class='button btn_save' value='"+ SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE')+ "' tabindex='116' onclick='LineEditorClose(" + prodln+ ",\"line_\")'>"+ SUGAR.language.get('app_strings', 'LBL_SAVE_BUTTON_LABEL')+ " & " + SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE')+ " <img src='themes/default/images/id-ff-clear.png' alt='"+ SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE')+ "'></button>"
 			+"</div></td>";
-	addToValidate('EditView', 'line_hit_ip_subnets' + prodln, 'varchar',
-			'true', SUGAR.language.get('HAT_Asset_Trans_Batch',
-					'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE'));
-	addToValidate('EditView', 'line_name' + prodln, 'varchar', 'true',
-			SUGAR.language.get('HAT_Asset_Trans_Batch', 'LBL_NAME'));
-	addToValidate('EditView', 'line_target_organization' + prodln, 'varchar',
-			'true', SUGAR.language.get('HAT_Asset_Trans_Batch',
-					'LBL_TARGET_RESPONSIBLE_CENTER'));
-	addToValidate('EditView', 'line_target_location' + prodln, 'varchar',
-			'true', SUGAR.language.get('HAT_Asset_Trans_Batch',
-					'LBL_TARGET_LOCATION'));
+			addToValidate('EditView', 'line_hit_ip_subnets' + prodln, 'varchar',
+					'true', SUGAR.language.get('HAT_Asset_Trans_Batch',
+							'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE'));
+			addToValidate('EditView', 'line_name' + prodln, 'varchar', 'true',
+					SUGAR.language.get('HAT_Asset_Trans_Batch', 'LBL_NAME'));
+			addToValidate('EditView', 'line_target_organization' + prodln, 'varchar',
+					'true', SUGAR.language.get('HAT_Asset_Trans_Batch',
+							'LBL_TARGET_RESPONSIBLE_CENTER'));
+			addToValidate('EditView', 'line_target_location' + prodln, 'varchar',
+					'true', SUGAR.language.get('HAT_Asset_Trans_Batch',
+							'LBL_TARGET_LOCATION'));
 
 	renderTransLine(prodln);
 
@@ -1271,24 +1214,8 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 		$("#line_associated_ip" + ln).val(associated_ip);
 		//console.log(associated_ip);
 	}
-	
-	
-	
-	
-	//if($("#displayed_line_parent_ip" + ln).val()==""&&$("#line_parent_ip" + ln).val()!=""){
-	//	$("#displayed_line_parent_ip" + ln).html($("#line_parent_ip" + ln).val());
-	//}
-	
+
 	$("#displayed_line_parent_ip" + ln).html($("#line_parent_ip" + ln).val());
-	//console.log("line_parent_ip = "+$("#line_parent_ip" + ln).val()+",index = "+ln);
-	//console.log("********begin**********");
-	//console.log($("#line_parent_ip" + 0).val()+",displayed = "+$("#displayed_line_parent_ip"+0).html());
-	//console.log($("#line_parent_ip" + 1).val()+",displayed = "+$("#displayed_line_parent_ip" + 1).html());
-	//console.log($("#line_parent_ip" + 2).val()+",displayed = "+$("#displayed_line_parent_ip" + 2).html());
-	//console.log("*********end*********");
-	
-	
-	
 	$("#displayed_line_hit_ip_subnets" + ln)
 			.html($("#line_hit_ip_subnets" + ln).val());
 	$("#displayed_line_mask" + ln).html($("#line_mask" + ln).val());
@@ -1322,15 +1249,30 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 	$("#displayed_line_id" + ln).html($("#line_id" + ln).val());
 	$("#displayed_line_hat_assets_id" + ln).html($("#line_hat_assets_id" + ln)
 			.val());
-      $("#displayed_line_status"+ln).html($("#line_status"+ln).val());
-	  $("#displayed_line_port_backup"+ln).html($("#line_port_backup"+ln).val());
-	  $("#displayed_line_monitoring_backup"+ln).html($("#line_monitoring_backup"+ln).val());
-	  $("#displayed_line_channel_content_backup"+ln).html($("#line_channel_content_backup"+ln).val());
-	  $("#displayed_line_channel_num_backup"+ln).html($("#line_channel_num_backup"+ln).val());
-	  $("#displayed_line_access_assets_backup_name"+ln).html($("#line_access_assets_backup_name"+ln).val());
-	  $("#displayed_line_access_assets_backup_id"+ln).html($("#line_access_assets_backup_id"+ln).val());
-	  $("#displayed_line_date_start"+ln).html($("#line_date_start"+ln).val());
-	  $("#displayed_line_date_end"+ln).html($("#line_date_end"+ln).val());
+  $("#displayed_line_status"+ln).html($("#line_status"+ln).val());
+  if($("#line_status"+ln).val()==""||$("#line_status"+ln).val()=="EFFECTIVE"){
+  	  $("#displayed_line_status"+ln).html(SUGAR.language.get('HIT_IP_TRANS',"LBL_EFFECTIVE"));
+  }else{
+  	 $("#displayed_line_status"+ln).html(SUGAR.language.get('HIT_IP_TRANS',"LBL_EFFICACY"));
+  }  
+  $("#displayed_line_port_backup"+ln).html($("#line_port_backup"+ln).val());
+  $("#displayed_line_monitoring_backup"+ln).html($("#line_monitoring_backup"+ln).val());
+  $("#displayed_line_channel_content_backup"+ln).html($("#line_channel_content_backup"+ln).val());
+  $("#displayed_line_channel_num_backup"+ln).html($("#line_channel_num_backup"+ln).val());
+  $("#displayed_line_access_assets_backup_name"+ln).html($("#line_access_assets_backup_name"+ln).val());
+  $("#displayed_line_access_assets_backup_id"+ln).html($("#line_access_assets_backup_id"+ln).val());
+  $("#displayed_line_date_start"+ln).html($("#line_date_start"+ln).val());
+  $("#displayed_line_date_end"+ln).html( $("#line_date_end"+ln).val());
+  
+  console.log("val = "+$("#line_enable_action"+ln).val());
+  if($("#line_enable_action"+ln).val()==""||$("#line_enable_action"+ln).val()=="0"){
+  	  
+  	  $("#displayed_line_enable_action"+ln).attr("checked",true);
+      $("#displayed_line_enable_action"+ln).prop("checked",true);
+      document.getElementById("displayed_line_enable_action"+ln).checked = true;
+  }else{
+  	  $("#displayed_line_enable_action"+ln).removeAttr("checked");
+  }  
     
 
 }
@@ -1631,6 +1573,7 @@ function single_changeRequired(lineRecord,i){
 	single_Field("line_channel_num_backup",lineRecord.change_channel_num_backup,i);
 	single_Field("line_status",lineRecord.change_status,i);
 	single_Field("line_access_assets_backup_name",lineRecord.change_access_assets_backup_name,i);
+	single_Field("line_change_enable_action",lineRecord.change_enable_action,i);
 }
 
 
@@ -1682,6 +1625,7 @@ function dulicateTranLine(ln) {// 关闭行编辑器（显示为正常行）
 				channel_num_backup:"",
 				date_start:"",
 				date_end:"",
+				enable_action:''
 			};
 			
 		}	

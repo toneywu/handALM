@@ -99,4 +99,7 @@ $mod_strings = array (
   'LBL_PORT_BACKUP'=>'端口(备)',
   'LBL_STATUS'=>'状态',
   'LBL_BTN_ADD_ALLOC_TRANS_LINE'=>'新增行',
+  'LBL_ENABLE_ACTION'=>'失效',
+  'LBL_EFFICACY'=>'失效',
+  'LBL_EFFECTIVE'=>'有效',
 );
