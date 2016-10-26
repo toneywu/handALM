@@ -125,6 +125,7 @@ function openHitIpPopup(ln) {// 本文件为行上选择IP按钮
 			"name" : "line_hit_ip_subnets" + ln,
 			"parent_hit_ip" : "line_parent_ip"+ln,
 			"ip_netmask" : "line_mask" + ln,
+			"gateway" : "line_gateway" + ln,
 			"ip_lowest" : "line_low_associated_ip" + ln,
 			"ip_highest" : "line_high_associated_ip" + ln
 		}
@@ -1629,6 +1630,7 @@ function single_changeRequired(lineRecord,i){
 	single_Field("line_channel_content_backup",lineRecord.change_channel_content_backup,i);
 	single_Field("line_channel_num_backup",lineRecord.change_channel_num_backup,i);
 	single_Field("line_status",lineRecord.change_status,i);
+	single_Field("line_access_assets_backup_name",lineRecord.change_access_assets_backup_name,i);
 }
 
 

@@ -319,6 +319,56 @@ $dictionary['HIT_IP_Subnets'] = array(
         'len' => '255',
         'size' => '20',
         ),
+        
+        //add by yuan.chen
+        'gateway' => array (
+			'required' => false,
+			'name' => 'gateway',
+			'vname' => 'LBL_GATEWAY',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+		),
+		
+		'ip_type' =>
+        array (
+            'required' => false,
+            'name' => 'ip_type',
+            'vname' => 'LBL_IP_TYPE',
+            'type' => 'enum',
+            'massupdate' => 0,
+            'no_default' => false,
+            'comments' => '',
+            'help' => '',
+            'importable' => 'true',
+            'duplicate_merge' => 'disabled',
+            'duplicate_merge_dom_value' => '0',
+            'audited' => false,
+            'inline_edit' => true,
+            'reportable' => true,
+            'unified_search' => false,
+            'merge_filter' => 'disabled',
+            'len' => 100,
+            'size' => '20',
+            'options' => 'hit_ip_type_list',
+            'studio' => 'visible',
+            'dependency' => false,
+            ),
+		
+		
+        
      ),
 'relationships'=>array (
     ),

@@ -1948,7 +1948,7 @@ $dictionary['HAT_Assets'] = array(
       ),
     'owning_org' =>
     array (
-      'required' => true,
+      'required' => false,
       'source' => 'non-db',
       'name' => 'owning_org',
       'vname' => 'LBL_OWING_ORG',
@@ -1997,7 +1997,7 @@ $dictionary['HAT_Assets'] = array(
       ),
     'asset_source' =>
     array (
-      'required' => true,
+      'required' => false,
       'source' => 'non-db',
       'name' => 'asset_source',
       'vname' => 'LBL_ASSET_SOURCE',

@@ -78,5 +78,7 @@ $mod_strings = array (
   'LBL_HIGHEST'=>'最高IP',
   'LBL_NETMASK'=>'子网掩码',
   'LBL_QTY'=>'IP数量',
+  'LBL_IP_TYPE'=>'IP类型',
+  'LBL_GATEWAY'=>'网关',
 
 );

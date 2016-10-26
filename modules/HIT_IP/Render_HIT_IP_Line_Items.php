@@ -36,7 +36,7 @@ function display_lines($focus, $field, $value, $view){
 						  his.ip_subnet,
 						  his.description,
 						  his.tunnel,
-						  his.hit_vlan_id vlan_id,hv.name vlan,his.org_id,a.name org
+						  his.hit_vlan_id vlan_id,hv.name vlan,his.org_id,a.name org,his.gateway,his.ip_type
 						FROM
 						  `hit_ip_subnets` his 
 						  LEFT JOIN hit_vlan hv 
