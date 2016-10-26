@@ -831,6 +831,27 @@ $dictionary['HIT_IP_TRANS'] = array (
             'studio' => 'visible',
             'dependency' => false,
             ),
+            
+            'enable_action' => 
+      array (
+            'required' => false,
+            'name' => 'enable_action',
+            'vname' => 'LBL_ENABLE_ACTION',
+            'type' => 'bool',
+            'massupdate' => 0,
+            'comments' => '',
+            'help' => '',
+            'importable' => 'true',
+            'duplicate_merge' => 'disabled',
+            'duplicate_merge_dom_value' => '0',
+            'audited' => false,
+            'inline_edit' => false,
+            'reportable' => true,
+            'unified_search' => false,
+            'merge_filter' => 'disabled',
+            ),
+
+            
 	
 	),
 	'relationships' => array (),

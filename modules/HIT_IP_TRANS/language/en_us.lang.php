@@ -98,4 +98,7 @@ $mod_strings = array (
   'LBL_PORT_BACKUP'=>'Port(Backup)',
   'LBL_STATUS'=>'Status',
   'LBL_BTN_ADD_ALLOC_TRANS_LINE'=>'新增行',
+  'LBL_ENABLE_ACTION'=>'Enable?',
+  'LBL_EFFICACY'=>'Efficacy',
+  'LBL_EFFECTIVE'=>'Effective',
 );

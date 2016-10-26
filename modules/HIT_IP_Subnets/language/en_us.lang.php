@@ -84,6 +84,6 @@ $mod_strings = array (
   'LBL_BTN_ASIGN_ORG'=>'Assign Org.',
   'LBL_UNASSIGNED'=>'Unassigned',
   'LBL_IP_SUBNET' => 'Subnet IP Address',
-  'LBL_IP_TYPE'=>'IP Type',
+  'LBL_IP_TYPE'=>'Scattered Distribution',
   'LBL_GATEWAY'=>'Gateway',
 );

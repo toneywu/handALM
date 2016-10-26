@@ -105,4 +105,5 @@ $mod_strings = array (
   'LBL_MONITORING_BACKUP'=>'Monitoring(Backup)',
   'LBL_PORT_BACKUP'=>'Port(Backup)',
   'LBL_STATUS'=>'Status',
+  'LBL_ENABLE_ACTION'=>'Enable?',
 );

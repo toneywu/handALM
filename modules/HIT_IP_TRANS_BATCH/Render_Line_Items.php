@@ -43,7 +43,7 @@ function display_lines($focus, $field, $value, $view) {
 									,hat.channel_content_backup
 									,hat.channel_num_backup
 									,hat.date_start
-									,hat.date_end,hat.status
+									,hat.date_end,hat.status,hat.enable_action
 							FROM   hit_ip_allocations hat
 							LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
 							LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
@@ -57,44 +57,44 @@ function display_lines($focus, $field, $value, $view) {
 
 		if ($focus->id != '') { //如果不是新增（即如果是编辑已有记录）
 			$sql1 = "(SELECT   hat.id
-									        ,a.name hat_asset_name,a.id hat_assets_id
-									        ,s.name hit_ip_subnets
-									        ,s.id   hit_ip_subnets_id
-									        ,hi.name parent_ip
-									        ,hat.associated_ip
-									        ,hat.mask
-									        ,hat.bandwidth_type
-									        ,hat.port
-									        ,hat.speed_limit
-									        ,hat.gateway
-											,hat.monitoring
-											,hat.hat_assets_cabinet_id
-											,b.name hat_assets_cabinet
-											,hat.channel_content
-											,hat.channel_num
-											,s.ip_netmask
-											,s.ip_lowest + '~' + s.ip_highest associated_ip
-											,hat.mrtg_link
-											,hat.access_assets_id
-											,c.name access_assets_name
-											,'CURRENT_WOOP' source_ref
-											,hat.date_entered
-											,hat.access_assets_backup_id
-											,d.name access_assets_backup_name
-											,hat.status,hat.port_backup
-											,hat.monitoring_backup
-											,hat.channel_content_backup
-											,hat.channel_num_backup
-											,hat.date_start
-											,hat.date_end,hat.status
-									FROM   hit_ip_trans hat
-									LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
-									LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
-									LEFT JOIN hit_ip_subnets s ON (hat.hit_ip_subnets_id=s.id)
-									LEFT JOIN hit_ip hi ON (s.parent_hit_ip_id=hi.id)
-									LEFT JOIN hat_assets c ON (hat.access_assets_id=c.id)
-									LEFT JOIN hat_assets d ON (hat.access_assets_backup_id=d.id)
-									WHERE hat.deleted=0 and hat.hit_ip_trans_batch_id ='" . $focus->id . "')";
+					        ,a.name hat_asset_name,a.id hat_assets_id
+					        ,s.name hit_ip_subnets
+					        ,s.id   hit_ip_subnets_id
+					        ,hi.name parent_ip
+					        ,hat.associated_ip
+					        ,hat.mask
+					        ,hat.bandwidth_type
+					        ,hat.port
+					        ,hat.speed_limit
+					        ,hat.gateway
+							,hat.monitoring
+							,hat.hat_assets_cabinet_id
+							,b.name hat_assets_cabinet
+							,hat.channel_content
+							,hat.channel_num
+							,s.ip_netmask
+							,s.ip_lowest + '~' + s.ip_highest associated_ip
+							,hat.mrtg_link
+							,hat.access_assets_id
+							,c.name access_assets_name
+							,'CURRENT_WOOP' source_ref
+							,hat.date_entered
+							,hat.access_assets_backup_id
+							,d.name access_assets_backup_name
+							,hat.status,hat.port_backup
+							,hat.monitoring_backup
+							,hat.channel_content_backup
+							,hat.channel_num_backup
+							,hat.date_start
+							,hat.date_end,hat.status,hat.enable_action
+					FROM   hit_ip_trans hat
+					LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
+					LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
+					LEFT JOIN hit_ip_subnets s ON (hat.hit_ip_subnets_id=s.id)
+					LEFT JOIN hit_ip hi ON (s.parent_hit_ip_id=hi.id)
+					LEFT JOIN hat_assets c ON (hat.access_assets_id=c.id)
+					LEFT JOIN hat_assets d ON (hat.access_assets_backup_id=d.id)
+					WHERE hat.deleted=0 and hat.hit_ip_trans_batch_id ='" . $focus->id . "')";
 			$sql = $sql1 . " union all " . $sql2 . " order by date_entered asc";
 			$result = $focus->db->query($sql);
 
@@ -126,43 +126,6 @@ function display_lines($focus, $field, $value, $view) {
 		$html .= '<script>insertTransLineFootor(\'lineItems\');</script>';
 		$html .= '<script>resetLineNum_Bold();</script>';
 
-		/**add by yuan.chen 2016-09-26
-		 * 来源于网络事务处理分配行
-		 */
-		//		$sql = "SELECT   hat.source_trans_id id
-		//								        ,a.name hat_asset_name
-		//								        ,s.name hit_ip_subnets
-		//								        ,s.id   hit_ip_subnets_id
-		//								        ,hi.name parent_ip
-		//								        ,hat.associated_ip
-		//								        ,null mask
-		//								        ,hat.bandwidth_type
-		//								        ,hat.port
-		//								        ,hat.speed_limit
-		//								        ,hat.gateway
-		//										,hat.monitoring
-		//										,hat.hat_assets_cabinet_id
-		//										,b.name hat_assets_cabinet
-		//										,hat.channel_content
-		//										,hat.channel_num,s.ip_netmask,s.ip_lowest+'~'+ s.ip_highest associated_ip,hat.mrtg_link,hat.access_assets_id,c.name access_assets_name 	,'OTHER_WOOP' source_ref
-		//								FROM   hit_ip_allocations hat
-		//								LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
-		//								LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
-		//								LEFT JOIN hit_ip_subnets s ON (hat.hit_ip_subnets_id=s.id)
-		//								LEFT JOIN hit_ip hi ON (s.parent_hit_ip_id=hi.id)
-		//								LEFT JOIN hat_assets c ON (hat.access_assets_id=c.id)
-		//								WHERE hat.deleted=0 and hat.hit_ip_trans_batch_id !='" . $focus->id . "' and hat.source_wo_id='" .
-		//		$focus->source_wo_id."' and hat.source_woop_id!='" .
-		//		$focus->source_woop_id."'";
-		//		$result = $focus->db->query($sql);
-		//
-		//		while ($row = $focus->db->fetchByAssoc($result)) {
-		//			$line_data = json_encode($row);
-		//			$html .= "<script>insertLineData(" . $line_data . ");</script>";
-		//		}
-		//		$html .= '<script>insertTransLineFootor(\'lineItems\');</script>';
-		//		$html .= '<script>resetLineNum_Bold();</script>';
-
 	} else
 		if ($view == 'DetailView') {
 
@@ -173,97 +136,85 @@ function display_lines($focus, $field, $value, $view) {
 
 			if ($focus->id != '') { //如果不是新增（即如果是编辑已有记录）
 				$sql1 = "(SELECT   hat.id
-																		        ,a.name hat_asset_name
-																		        ,s.name hit_ip_subnets
-																		        ,s.id   hit_ip_subnets_id
-																		        ,hi.name parent_ip
-																		        ,hat.associated_ip
-																		        ,hat.mask
-																		        ,hat.bandwidth_type
-																		        ,hat.port
-																		        ,hat.speed_limit
-																		        ,hat.gateway
-																				,hat.monitoring
-																				,hat.hat_assets_cabinet_id
-																				,b.name hat_assets_cabinet
-																				,hat.channel_content
-																				,hat.channel_num
-																				,s.ip_netmask
-																				,s.ip_lowest+'~'+ s.ip_highest associated_ip
-																				,hat.mrtg_link
-																				,hat.access_assets_id
-																				,c.name access_assets_name
-																				,hat.date_entered
-																				,hat.access_assets_backup_id
-																				,d.name access_assets_backup_name
-																				,hat.status,hat.port_backup
-																				,hat.monitoring_backup
-																				,hat.channel_content_backup
-																				,hat.channel_num_backup
-																				,ifnull(hat.date_start,null) date_start
-																				,hat.date_end,hat.status
-																		FROM   hit_ip_trans hat
-																		LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
-																		LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
-																		LEFT JOIN hit_ip_subnets s ON (hat.hit_ip_subnets_id=s.id)
-																		LEFT JOIN hit_ip hi ON (s.parent_hit_ip_id=hi.id)
-																		LEFT JOIN hat_assets c ON (hat.access_assets_id=c.id)
-																		LEFT JOIN hat_assets d ON (hat.access_assets_backup_id=d.id)
-																		WHERE hat.deleted=0 and  hat.hit_ip_trans_batch_id ='" . $focus->id . "')";
-				//				$result = $focus->db->query($sql);
-				//
-				//				while ($row = $focus->db->fetchByAssoc($result)) {
-				//					//echo var_dump($row);;
-				//
-				//					$line_data = json_encode($row);
-				//					//echo $line_data;
-				//					$html .= "<script>insertLineData(" . $line_data . ");</script>";
-				//					//REF:custom/modules/HAT_Asset_Trans/js/line_items.js
-				//					//通过insertLineData向已经完成初始化的页面要素中，写入值
-				//				}
-
+						        ,a.name hat_asset_name
+						        ,s.name hit_ip_subnets
+						        ,s.id   hit_ip_subnets_id
+						        ,hi.name parent_ip
+						        ,hat.associated_ip
+						        ,hat.mask
+						        ,hat.bandwidth_type
+						        ,hat.port
+						        ,hat.speed_limit
+						        ,hat.gateway
+								,hat.monitoring
+								,hat.hat_assets_cabinet_id
+								,b.name hat_assets_cabinet
+								,hat.channel_content
+								,hat.channel_num
+								,s.ip_netmask
+								,s.ip_lowest+'~'+ s.ip_highest associated_ip
+								,hat.mrtg_link
+								,hat.access_assets_id
+								,c.name access_assets_name
+								,hat.date_entered
+								,hat.access_assets_backup_id
+								,d.name access_assets_backup_name
+								,hat.status,hat.port_backup
+								,hat.monitoring_backup
+								,hat.channel_content_backup
+								,hat.channel_num_backup
+								,ifnull(hat.date_start,null) date_start
+								,hat.date_end,hat.status,hat.enable_action
+						FROM   hit_ip_trans hat
+						LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
+						LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
+						LEFT JOIN hit_ip_subnets s ON (hat.hit_ip_subnets_id=s.id)
+						LEFT JOIN hit_ip hi ON (s.parent_hit_ip_id=hi.id)
+						LEFT JOIN hat_assets c ON (hat.access_assets_id=c.id)
+						LEFT JOIN hat_assets d ON (hat.access_assets_backup_id=d.id)
+						WHERE hat.deleted=0 and  hat.hit_ip_trans_batch_id ='" . $focus->id . "')";
 				/**add by yuan.chen 2016-09-12
 					* 来源于网络事务处理分配行
 					*/
-				$sql2 = "(SELECT   hat.id
-																		        ,a.name hat_asset_name
-																		        ,s.name hit_ip_subnets
-																		        ,s.id   hit_ip_subnets_id
-																		        ,hi.name parent_ip
-																		        ,hat.associated_ip
-																		        ,null mask
-																		        ,hat.bandwidth_type
-																		        ,hat.port
-																		        ,hat.speed_limit
-																		        ,hat.gateway
-																				,hat.monitoring
-																				,hat.hat_assets_cabinet_id
-																				,b.name hat_assets_cabinet
-																				,hat.channel_content
-																				,hat.channel_num
-																				,s.ip_netmask
-																				,s.ip_lowest+'~'+ s.ip_highest associated_ip
-																				,hat.mrtg_link,hat.access_assets_id
-																				,c.name access_assets_name
-																				,hat.date_entered
-																				,hat.access_assets_backup_id
-																				,d.name access_assets_backup_name
-																				,hat.status,hat.port_backup
-																				,hat.monitoring_backup
-																				,hat.channel_content_backup
-																				,hat.channel_num_backup
-																				,ifnull(hat.date_start,null) date_start
-																				,hat.date_end,hat.status
-																		FROM   hit_ip_allocations hat
-																		LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
-																		LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
-																		LEFT JOIN hit_ip_subnets s ON (hat.hit_ip_subnets_id=s.id)
-																		LEFT JOIN hit_ip hi ON (s.parent_hit_ip_id=hi.id)
-																		LEFT JOIN hat_assets c ON (hat.access_assets_id=c.id)
-																		LEFT JOIN hat_assets d ON (hat.access_assets_backup_id=d.id)
-									    								
-																		WHERE hat.deleted=0 and hat.hit_ip_trans_batch_id !='" . $focus->id . "'" . " and     
-																		 hat.source_wo_id='" .
+				$sql2 = "(SELECT hat.id
+						        ,a.name hat_asset_name
+						        ,s.name hit_ip_subnets
+						        ,s.id   hit_ip_subnets_id
+						        ,hi.name parent_ip
+						        ,hat.associated_ip
+						        ,null mask
+						        ,hat.bandwidth_type
+						        ,hat.port
+						        ,hat.speed_limit
+						        ,hat.gateway
+								,hat.monitoring
+								,hat.hat_assets_cabinet_id
+								,b.name hat_assets_cabinet
+								,hat.channel_content
+								,hat.channel_num
+								,s.ip_netmask
+								,s.ip_lowest+'~'+ s.ip_highest associated_ip
+								,hat.mrtg_link,hat.access_assets_id
+								,c.name access_assets_name
+								,hat.date_entered
+								,hat.access_assets_backup_id
+								,d.name access_assets_backup_name
+								,hat.status,hat.port_backup
+								,hat.monitoring_backup
+								,hat.channel_content_backup
+								,hat.channel_num_backup
+								,ifnull(hat.date_start,null) date_start,hat.enable_action
+								,hat.date_end,hat.status
+						FROM   hit_ip_allocations hat
+						LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
+						LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
+						LEFT JOIN hit_ip_subnets s ON (hat.hit_ip_subnets_id=s.id)
+						LEFT JOIN hit_ip hi ON (s.parent_hit_ip_id=hi.id)
+						LEFT JOIN hat_assets c ON (hat.access_assets_id=c.id)
+						LEFT JOIN hat_assets d ON (hat.access_assets_backup_id=d.id)
+						
+						WHERE hat.deleted=0 and hat.hit_ip_trans_batch_id !='" . $focus->id . "'" . " and     
+						 hat.source_wo_id='" .
 				$focus->source_wo_id . "' and hat.source_woop_id!= '" .
 				$focus->source_woop_id . "') ";
 				$sql = $sql1 . " union all " . $sql2 . " order by date_entered asc";
@@ -302,7 +253,7 @@ function display_lines($focus, $field, $value, $view) {
 			  ,h.change_monitoring_backup
 			  ,h.change_channel_content_backup
 			  ,h.change_channel_num_backup
-			  ,h.change_status,h.change_access_assets_backup_name
+			  ,h.change_status,h.change_access_assets_backup_name,h.change_enable_action
 			FROM
 			  hat_eventtype h 
 			WHERE h.deleted = 0 
