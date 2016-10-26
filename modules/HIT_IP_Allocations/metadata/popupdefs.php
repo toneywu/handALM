@@ -26,7 +26,7 @@ $popupMeta = array (
     'studio' => 'visible',
     'label' => 'LBL_HIT_IP',
     'id' => 'HIT_IP_SUBNETS_ID',
-    'link' => false,
+    'link' => true,
     'width' => '10%',
     'name' => 'hit_ip_subnets',
   ),
@@ -66,6 +66,14 @@ $popupMeta = array (
     'link' => true,
     'width' => '10%',
     'name' => 'access_assets_name',
+  ),
+   'target_owning_org_id' => 
+  array (
+    'type' => 'varchar',
+    'studio' => 'visible',
+    'label' => '',
+    'width' => '10%',
+    'name' => 'target_owning_org_id',
   ),
 ),
 );
