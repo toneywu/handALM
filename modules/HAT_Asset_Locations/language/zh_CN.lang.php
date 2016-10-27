@@ -96,5 +96,7 @@ $mod_strings = array (
   'LBL_NAV_IT'=>'浏览并选择IT设备',
   'LBL_NAV_RACK'=>'浏览并选择服务器/网络机柜',
   'LBL_NAV_RACKPOSITION'=>'浏览并选择服务器/网络机柜位置',
+  'LBL_PLACEHOLDER'=>'占位',
+  'LBL_ADD_PLACEHOLDER'=>'分配机柜空间',
   'LBL_BTN_SELECT'=>'选中此项',
 );
