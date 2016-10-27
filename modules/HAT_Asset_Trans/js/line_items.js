@@ -178,6 +178,8 @@ function setAddNewLineBtnReturn(popupReplyData) {
 			success: function (msg) {
 				console.log(msg);
 				insertLineData($.parseJSON(msg),'EditView');
+				console.log("当前行号="+prodln);
+				resetAsset((prodln-1));
 			},
 			error: function () { //失败
 				alert('Error loading document');
