@@ -1,4 +1,4 @@
-$.getScript("modules/HAA_FF/ff_include.js");
+﻿$.getScript("modules/HAA_FF/ff_include.js");
 
 $(document).ready(function() {
     //这里可以有其它代码;

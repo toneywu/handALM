@@ -1,9 +1,9 @@
-﻿<?php
+<?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 require_once('include/MVC/View/views/view.popup.php');
 
-class AOS_ContractsViewPopup extends ViewPopup
+class AOS_InvoicesViewPopup extends ViewPopup
 {
 
     function Display() {
