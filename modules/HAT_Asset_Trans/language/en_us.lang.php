@@ -71,7 +71,5 @@ $mod_strings = array (
   'LBL_STATUS'=>'Status',
   'LBL_DATE_START'=>'Start Date',
   'LBL_DATE_END'=>'Ending Date',
-  'LBL_BTN_ADD_NEW_LINE'=>'Add New Line',
-  
-
+  'LBL_BTN_ADD_NEW_LINE'=>'Select From Allocated Assets',
 );

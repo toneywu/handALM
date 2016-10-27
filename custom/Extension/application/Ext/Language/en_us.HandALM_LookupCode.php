@@ -48,7 +48,9 @@ $app_list_strings['haa_code_module_list']=array (
   'asset_location' => 'Asset Locations',
   'asset_qualification'=>'Asset Qualifications',
   'qualification'=>'Qualifications',
+  'wo'=>'Activities/Work Orders',
   'flexform'=>'FlexForm Extended Fields',
+
 );
 
 $app_list_strings['haa_code_type_list']=array (
@@ -69,4 +71,5 @@ $app_list_strings['haa_code_type_list']=array (
   'qualification_type'=>'qualification_type',
   'flexform_extended_list'=>'flexform_extended_list',
   'tasks_type'=>'tasks_type',
+  'wo_activity_type'=>'wo_activity_type'
 );

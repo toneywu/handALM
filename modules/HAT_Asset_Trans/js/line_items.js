@@ -392,6 +392,16 @@ function insertTransLineElements(tableid, current_view) { //创建界面要素
       "<label id='line_target_using_person_desc" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_USING_PERSON')+"</label>"+
       "<input style='width:103px;' type='text' name='line_target_using_person_desc[" + prodln + "]' id='line_target_using_person_desc" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
+      //失效时间
+      "<span class='input_group ig_location'>"+
+      "<label id='line_date_start" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_DATE_START')+"</label>"+
+      "<input style='width:153px;' type='text' name='line_date_start[" + prodln + "]' id='line_date_start" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
+      "<span class='input_group ig_location'>"+
+      "<label id='line_date_end" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_DATE_END')+"</label>"+
+      "<input style='width:153px;' type='text' name='line_date_end[" + prodln + "]' id='line_date_end" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
+
       "<span class='input_group ig_location'>"+
       "<label id='line_target_location" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_LOCATION')+" <span class='required'>*</span></label>"+
       "<input class='sqsEnabled' style='width:153px;' type='text' name='line_target_location[" + prodln + "]' id='line_target_location" + prodln + "' maxlength='50' value='' title=''>"+
@@ -409,15 +419,7 @@ function insertTransLineElements(tableid, current_view) { //创建界面要素
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openRackPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
       
-      //add by yuan.chen
-      "<span class='input_group ig_location'>"+
-      "<label id='line_date_start" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_DATE_START')+"</label>"+
-      "<input style='width:153px;' type='text' name='line_date_start[" + prodln + "]' id='line_date_start" + prodln + "' maxlength='50' value='' title=''>"+
-      "</span>"+
-      "<span class='input_group ig_location'>"+
-      "<label id='line_date_end" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_DATE_END')+"</label>"+
-      "<input style='width:153px;' type='text' name='line_date_end[" + prodln + "]' id='line_date_end" + prodln + "' maxlength='50' value='' title=''>"+
-      "</span>"+
+
 /*      "<span class='input_group ig_location'>"+
       "<label id='line_status" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_STATUS')+"</label>"+
       "<input style='width:153px;' type='text' name='line_status[" + prodln + "]' id='line_status" + prodln + "' maxlength='50' value='' title=''>"+

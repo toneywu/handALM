@@ -14,9 +14,9 @@ class HAT_Asset_Trans_BatchViewList extends ViewList
       parent::processSearchForm();
       $haa_frameworks_id=$_SESSION["current_framework"];
       if ($this->where) {
-        $this->where.=" and haa_frameworks_id='".$haa_frameworks_id."'";
+        $this->where.=" and hat_asset_trans_batch.haa_frameworks_id='".$haa_frameworks_id."'";
       }else{
-        $this->where="haa_frameworks_id='".$haa_frameworks_id."'";
+        $this->where="hat_asset_trans_batch.haa_frameworks_id='".$haa_frameworks_id."'";
       }
     }
 }
