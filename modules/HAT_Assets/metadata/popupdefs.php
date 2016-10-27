@@ -12,6 +12,8 @@ $popupMeta = array (
   'hat_assets_accounts_name' => 'hat_assets.hat_assets_accounts_name',
   'hat_assets_contacts_name' => 'hat_assets.hat_assets_contacts_name',
   'tracking_number' => 'hat_assets.tracking_number',
+  'enable_it_rack' => 'hat_assets.enable_it_rack',
+  'owning_org_id' => 'hat_assets.owning_org_id',
 ),
     'searchInputs' => array (
   1 => 'name',
@@ -22,6 +24,8 @@ $popupMeta = array (
   8 => 'hat_assets_accounts_name',
   9 => 'hat_assets_contacts_name',
   10 => 'tracking_number',
+  11 => 'enable_it_rack',
+  12 => 'owning_org_id',
 ),
     'searchdefs' => array (
   'name' => 
@@ -135,6 +139,22 @@ $popupMeta = array (
     'width' => '10%',
     'default' => true,
     'name' => 'hat_assets_contacts_name',
+  ),
+     'enable_it_rack' => 
+  array (
+    'type' => 'varchar',
+    'studio' => 'visible',
+    'label' => '',
+    'width' => '10%',
+    'name' => 'enable_it_rack',
+  ),
+     'owning_org_id' => 
+  array (
+    'type' => 'varchar',
+    'studio' => 'visible',
+    'label' => '',
+    'width' => '10%',
+    'name' => 'owning_org_id',
   ),
 ),
 );

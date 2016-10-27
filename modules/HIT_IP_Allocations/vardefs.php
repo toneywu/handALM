@@ -696,6 +696,7 @@ $dictionary['HIT_IP_Allocations'] = array (
 			'size' => '20',
 			'enable_range_search' => false,
 			'dbType' => 'datetime',
+			'isnull'=>false,
 			//'display_default' => 'now&12:00am',
 		),
 
@@ -719,6 +720,7 @@ $dictionary['HIT_IP_Allocations'] = array (
 			'size' => '20',
 			'enable_range_search' => false,
 			'dbType' => 'datetime',
+			'isnull'=>false,
 			//'display_default' => 'now&12:00am',
 		),
 		

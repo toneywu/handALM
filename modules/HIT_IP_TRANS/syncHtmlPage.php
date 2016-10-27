@@ -12,9 +12,9 @@ if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
 global $db;
 $obj = json_decode($_GET['idArray']);
-$current_id = $_GET['id'];
+$current_id = $_GET['record'];
 
-$sql = "SELECT   hat.source_trans_id id
+$sql = "SELECT   null id
 							        ,a.name hat_asset_name,a.id hat_assets_id
 							        ,s.name hit_ip_subnets
 							        ,s.id   hit_ip_subnets_id
@@ -44,7 +44,7 @@ $sql = "SELECT   hat.source_trans_id id
 									,hat.channel_content_backup
 									,hat.channel_num_backup
 									,hat.date_start
-									,hat.date_end,hat.status
+									,hat.date_end,hat.status,hat.enable_action
 							FROM   hit_ip_allocations hat
 							LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
 							LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)

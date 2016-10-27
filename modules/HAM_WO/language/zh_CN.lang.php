@@ -118,4 +118,5 @@ $mod_strings = array (
   'LBL_ATTRIBUTE4'=>'属性记录 4',
   'LBL_ATTRIBUTE5'=>'属性记录 5',
   'LBL_ATTRIBUTE6'=>'属性记录 6',
+  'LBL_BTN_WOOP_REJECT_BUTTON_LABEL'=>'工序驳回',
 );

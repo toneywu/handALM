@@ -132,6 +132,71 @@ function checkAccess(id){
 		});
 };
 
+
+/*function process_woop(woop_id,wo_id){
+	//alert(record);
+	console.log(woop_id+"-----"+wo_id);
+	$.ajax({
+		url: 'index.php?to_pdf=true&module=HAM_WOOP&action=rejectWoop&woop_id=' + id+'&wo_id='+wo_id,
+		success: function (data) {
+			alert("Success");
+			console.log(data);
+		
+		},
+		error: function () { //失败
+			alert('Error loading document');
+		}
+	});
+};
+*/
+function process_woop(woop_id,wo_id){
+		$.ajax({
+		
+			url: 'index.php?to_pdf=true&module=HAM_WOOP&action=process_woop&record=' + woop_id+"&ham_wo_id="+wo_id,
+			success: function (data) {
+				console.log(data);
+				window.location.href = "index.php?module=HAM_WO&action=DetailView&record="+wo_id;
+			},
+			error: function () { //失败
+				alert('Error loading document');
+			}
+		});
+};
+
+/**
+ * 点击按钮 工序驳回
+ * @param name
+ */
+function reject_woop(id){
+
+		$.ajax({
+			url: 'index.php?to_pdf=true&module=HAM_WOOP&action=rejectWoop&id=' + id,
+			success: function (data) {
+				var title_txt=SUGAR.language.get('HAM_WO', 'LBL_BTN_WOOP_REJECT_BUTTON_LABEL')
+				var html=""
+				html+=title_txt;
+				html+=data;
+				//html+="<input type='button' class='btn_detailview' id='btn_save' value='"+SUGAR.language.get('app_strings', 'LBL_SAVE_BUTTON_LABEL')+"'>";
+				YAHOO.SUGAR.MessageBox.show({msg: html,title: title_txt, type: 'confirm',
+																		fn: function(confirm) {
+																			if (confirm == 'yes') {
+																				//save($("input[name='record']").val(),$("#wo_status").val());
+																				//console.log($("#woop_num").val());
+																				//获取选择要驳回到哪一笔的工序
+																				process_woop($("#woop_num").val(),id);
+																			}
+																		}
+											});
+			},
+			error: function () { //失败
+				alert('Error loading document');
+			}
+		});
+	/*}*/
+};
+
+
+
 /**
  * document 页面加载 入口函数
  */
@@ -189,7 +254,12 @@ $(document).ready(function(){
 		   }
 		);
 	}
-	
-	
+	//add by yuan.chen
+	var reject_woop_btn=$("<input type='button' class='btn_detailview' id='btn_woop_reject' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_WOOP_REJECT_BUTTON_LABEL')+"'>");
+	$("#formgetWOOPQuery").append(reject_woop_btn);
+	$("#btn_woop_reject").click(function(){
+		reject_woop($("input[name='record']").val());
+		
+	});
 }
 );
