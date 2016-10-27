@@ -170,12 +170,14 @@ function addNewAssetLine(){
 function setAddNewLineBtnReturn(popupReplyData) {
 	set_return(popupReplyData);
 	var idJson = popupReplyData.selection_list;
+	console.log(popupReplyData);
 	for(var p in idJson){
+		console.log(idJson[p]);
 		$.ajax({
 			url:'index.php?to_pdf=true&module=HAT_Asset_Trans&action=syncHtmlPage&record='+idJson[p],
 			success: function (msg) {
-				//console.log(msg);
-				insertLineData($.parseJSON(msg));
+				console.log(msg);
+				insertLineData($.parseJSON(msg),'EditView');
 			},
 			error: function () { //失败
 				alert('Error loading document');
@@ -184,7 +186,7 @@ function setAddNewLineBtnReturn(popupReplyData) {
 	};
 	
 	// 设置行号
-	resetLineNum_Bold();
+	resetLineNum();
 }
 
 
@@ -209,7 +211,7 @@ function insertTransLineHeader(tableid){
 /* 加载表行数据，将具体的数据写入到insertTransLineElements创建出的界面要素中
 /*******************************/
 function insertLineData(asset_trans_line, current_view){ //将数据写入到对应的行字段中
-  //console.log(asset_trans_line);
+  console.log(asset_trans_line);
   var ln = 0;
   if(asset_trans_line.id != '0' && asset_trans_line.id !== ''){
     ln = insertTransLineElements("lineItems", current_view);
@@ -636,8 +638,8 @@ function insertTransLineFootor(tableid) {
 
       footer_cell.scope="row";
       footer_cell.colSpan="5";
-      footer_cell.innerHTML="<input id='btnAddNewLine' type='button' class='button btn_del' onclick='addNewLine(\"" +tableid+ "\")' value='+ "+SUGAR.language.get('HAT_Asset_Trans', 'LBL_BTN_ADD_TRANS_LINE')+"' />"+
-      "<input id='btnNewLine' type='button' class='button btn_del' onclick='addNewAssetLine()' value='+ "+SUGAR.language.get('HAT_Asset_Trans', 'LBL_BTN_ADD_NEW_LINE')+"' />";
+      footer_cell.innerHTML="<input id='btnAddNewLine' type='button' class='button btn_del' onclick='addNewLine(\"" +tableid+ "\")' value='+ "+SUGAR.language.get('HAT_Asset_Trans', 'LBL_BTN_ADD_TRANS_LINE')+"' />"
+	  +"<input id='btnNewLine' type='button' class='button btn_del' onclick='addNewAssetLine()' value='+ "+SUGAR.language.get('HAT_Asset_Trans', 'LBL_BTN_ADD_NEW_LINE')+"' />";
       }
 }
 
