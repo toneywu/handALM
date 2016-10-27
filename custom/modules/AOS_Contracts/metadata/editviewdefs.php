@@ -222,7 +222,7 @@ array (
               'initial_filter' => '&type_c_advanced="+this.form.{$fields.type_c.name}.value+"',
               'field_to_name_array' => 
               array (
-                'id'=>'aos_contracts_id_c',
+                'id' => 'aos_contracts_id_c',
                 'name' => 'pre_contract_number_c',
                 'contract_number_c' => 'contract_number_c',
                 'contract_revision_c' => 'contract_revision_c',
@@ -238,7 +238,7 @@ array (
             'name' => 'contract_revision_c',
             'studio' => 'visible',
             'label' => 'LBL_CONTRACT_REVISION',
-            'customCode'=>'<input name="contract_revision_c" readonly="readonly" id="contract_revision_c" value="1"  type="text">',
+            'customCode' => '<input name="contract_revision_c" readonly="readonly" id="contract_revision_c" value="1"  type="text">',
           ),
           1 => 
           array (

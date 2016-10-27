@@ -1,5 +1,6 @@
 <?php
-$module_name = 'AOS_Contracts';
+$module_name = 'AOS_Invoices';
+$_object_name = 'aos_invoices';
 $viewdefs [$module_name] = 
 array (
   'DetailView' => 
@@ -10,7 +11,7 @@ array (
       array (
         0 => 
         array (
-          'file' => 'modules/AOS_Contracts/js/AOS_Contracts_detailview.js',
+          'file' => 'custom/modules/AOS_Invoices/js/AOS_Invoices_editview.js',
         ),
       ),
       'form' => 
@@ -29,6 +30,10 @@ array (
           array (
             'customCode' => '<input type="button" class="button" onClick="showPopup(\'emailpdf\');" value="{$MOD.LBL_EMAIL_PDF}">',
           ),
+          6 => 
+          array (
+            'customCode' => '<input type="button" class="button" onClick="showPopup(\'email\');" value="{$MOD.LBL_EMAIL_INVOICE}">',
+          ),
         ),
       ),
       'maxColumns' => '2',
@@ -46,10 +51,14 @@ array (
         ),
       ),
       'useTabs' => true,
-      'syncDetailEditViews' => true,
       'tabDefs' => 
       array (
-        'DEFAULT' => 
+        'LBL_PANEL_OVERVIEW' => 
+        array (
+          'newTab' => true,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_INVOICE_TO' => 
         array (
           'newTab' => true,
           'panelDefault' => 'expanded',
@@ -68,185 +77,153 @@ array (
     ),
     'panels' => 
     array (
-      'default' => 
+      'LBL_PANEL_OVERVIEW' => 
       array (
         0 => 
         array (
-          0 => 'name',
+          0 => 
+          array (
+            'name' => 'name',
+            'label' => 'LBL_NAME',
+          ),
           1 => 
           array (
-            'name' => 'status',
-            'studio' => 'visible',
-            'label' => 'LBL_STATUS',
+            'name' => 'number',
+            'label' => 'LBL_INVOICE_NUMBER',
           ),
         ),
         1 => 
         array (
           0 => 
           array (
-            'name' => 'contract_number_c',
-            'label' => 'LBL_CONTRACT_NUMBER',
+            'name' => 'quote_number',
+            'label' => 'LBL_QUOTE_NUMBER',
+          ),
+          1 => 
+          array (
+            'name' => 'quote_date',
+            'label' => 'LBL_QUOTE_DATE',
           ),
         ),
         2 => 
         array (
           0 => 
           array (
-            'name' => 'total_contract_value',
-            'label' => 'LBL_TOTAL_CONTRACT_VALUE',
+            'name' => 'due_date',
+            'label' => 'LBL_DUE_DATE',
           ),
           1 => 
           array (
-            'name' => 'assigned_user_name',
-            'label' => 'LBL_ASSIGNED_TO_NAME',
+            'name' => 'invoice_date',
+            'label' => 'LBL_INVOICE_DATE',
           ),
         ),
         3 => 
         array (
           0 => 
           array (
-            'name' => 'start_date',
-            'label' => 'LBL_START_DATE',
+            'name' => 'assigned_user_name',
+            'label' => 'LBL_ASSIGNED_TO_NAME',
           ),
           1 => 
           array (
-            'name' => 'contract_account',
-            'label' => 'LBL_CONTRACT_ACCOUNT',
+            'name' => 'status',
+            'label' => 'LBL_STATUS',
           ),
         ),
         4 => 
         array (
           0 => 
           array (
-            'name' => 'end_date',
-            'label' => 'LBL_END_DATE',
+            'name' => 'clear_date_c',
+            'label' => 'LBL_CLEAR_DATE',
           ),
           1 => 
           array (
-            'name' => 'contact',
-            'studio' => 'visible',
-            'label' => 'LBL_CONTACT',
+            'name' => 'closed_date_c',
+            'label' => 'LBL_CLOSED_DATE',
           ),
         ),
         5 => 
         array (
           0 => 
           array (
-            'name' => 'renewal_reminder_date',
-            'label' => 'LBL_RENEWAL_REMINDER_DATE',
+            'name' => 'late_days_c',
+            'label' => 'LBL_LATE_DAYS',
           ),
           1 => 
           array (
-            'name' => 'opportunity',
-            'label' => 'LBL_OPPORTUNITY',
+            'name' => 'event_type_c',
+            'label' => 'LBL_EVENT_TYPE',
           ),
         ),
         6 => 
         array (
           0 => 
           array (
-            'name' => 'company_signed_date',
-            'label' => 'LBL_COMPANY_SIGNED_DATE',
+            'name' => 'source_code_c',
+            'label' => 'LBL_SOURCE_CODE',
           ),
           1 => 
           array (
-            'name' => 'customer_signed_date',
-            'label' => 'LBL_CUSTOMER_SIGNED_DATE',
+            'name' => 'source_reference_c',
+            'label' => 'LBL_SOURCE_REFERENCE',
           ),
         ),
         7 => 
         array (
           0 => 
           array (
-            'name' => 'type_c',
-            'studio' => 'visible',
-            'label' => 'LBL_TYPE',
-          ),
-          1 => 
-          array (
-            'name' => 'business_type_c',
-            'studio' => 'visible',
-            'label' => 'LBL_BUSINESS_TYPE',
+            'name' => 'description',
+            'label' => 'LBL_DESCRIPTION',
           ),
         ),
-        8 => 
+      ),
+      'LBL_INVOICE_TO' => 
+      array (
+        0 => 
         array (
           0 => 
           array (
-            'name' => 'media_type_c',
-            'studio' => 'visible',
-            'label' => 'LBL_MEDIA_TYPE',
-          ),
-          1 => 
-          array (
-            'name' => 'revision_c',
-            'studio' => 'visible',
-            'label' => 'LBL_REVISION',
+            'name' => 'billing_account',
+            'label' => 'LBL_BILLING_ACCOUNT',
           ),
         ),
-        9 => 
+        1 => 
         array (
           0 => 
           array (
-            'name' => 'pre_contract_number_c',
-            'studio' => 'visible',
-            'label' => 'LBL_PRE_CONTRACT_NUMBER_C',
+            'name' => 'billing_contact',
+            'label' => 'LBL_BILLING_CONTACT',
           ),
           1 => 
           array (
-            'name' => 'contract_revision_c',
-            'studio' => 'visible',
-            'label' => 'LBL_CONTRACT_REVISION',
+            'name' => 'billing_contact_number',
+            'label' => 'LBL_BILLING_CONTACT_NUMBER',
           ),
         ),
-        10 => 
+        2 => 
         array (
           0 => 
           array (
-            'name' => 'attribute1_c',
-            'studio' => 'visible',
-            'label' => 'LBL_ATTRIBUTE1_C',
+            'name' => 'billing_address_street',
+            'label' => 'LBL_BILLING_ADDRESS',
+            'type' => 'address',
+            'displayParams' => 
+            array (
+              'key' => 'billing',
+            ),
           ),
           1 => 
           array (
-            'name' => 'attribute2_c',
-            'studio' => 'visible',
-            'label' => 'LBL_ATTRIBUTE2_C',
+            'name' => 'shipping_address_street',
+            'label' => 'LBL_SHIPPING_ADDRESS',
+            'type' => 'address',
+            'displayParams' => 
+            array (
+              'key' => 'shipping',
+            ),
           ),
-        ),
-        11 => 
-        array (
-          0 => 
-          array (
-            'name' => 'attribute3_c',
-            'studio' => 'visible',
-            'label' => 'LBL_ATTRIBUTE3_C',
-          ),
-          1 => 
-          array (
-            'name' => 'attribute4_c',
-            'studio' => 'visible',
-            'label' => 'LBL_ATTRIBUTE4_C',
-          ),
-        ),
-        12 => 
-        array (
-          0 => 
-          array (
-            'name' => 'attribute5_c',
-            'studio' => 'visible',
-            'label' => 'LBL_ATTRIBUTE5_C',
-          ),
-          1 => 
-          array (
-            'name' => 'attribute6_c',
-            'studio' => 'visible',
-            'label' => 'LBL_ATTRIBUTE6_C',
-          ),
-        ),
-        13 => 
-        array (
-          0 => 'description',
         ),
       ),
       'lbl_line_items' => 
