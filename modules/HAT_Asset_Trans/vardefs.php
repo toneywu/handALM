@@ -1087,10 +1087,28 @@ $dictionary['HAT_Asset_Trans'] = array(
 			'rname' => 'name',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
-			),  
-			
-			
-			'date_start' => array (
+			),
+'inactive_using' =>
+		array (
+			'required' => false,
+			'name' => 'inactive_using',
+			'vname' => 'LBL_INACTIVE_USING',
+			'type' => 'bool',
+			'massupdate' => 0,
+			'default' => '0',
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			),
+'date_start' => array (
 			'required' => false,
 			'name' => 'date_start',
 			'vname' => 'LBL_DATE_START',
@@ -1135,8 +1153,7 @@ $dictionary['HAT_Asset_Trans'] = array(
 			'dbType' => 'datetime',
 			//'display_default' => 'now&12:00am',
 		),
-		
-		'status' =>
+'status' =>
         array (
             'required' => false,
             'name' => 'status',

@@ -72,4 +72,5 @@ $mod_strings = array (
   'LBL_DATE_START'=>'Start Date',
   'LBL_DATE_END'=>'Ending Date',
   'LBL_BTN_ADD_NEW_LINE'=>'Select From Allocated Assets',
+  'LBL_INACTIVE_USING'=>'Inactive Using Allocation',
 );

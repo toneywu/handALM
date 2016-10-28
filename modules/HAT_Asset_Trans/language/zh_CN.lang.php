@@ -65,7 +65,8 @@ $mod_strings = array (
   'LBL_TARGET_RESPONSIBLE_PERSON' => 'Target Responsible 人员',
   'LBL_EDITVIEW_PANEL6' => '新建面板 6',
   'LBL_STATUS'=>'状态',
-  'LBL_DATE_START'=>'占用起始时间',
-  'LBL_DATE_END'=>'占用终止时间',
+  'LBL_INACTIVE_USING'=>'终止使用分配',
+  'LBL_DATE_START'=>'使用分配起始时间',
+  'LBL_DATE_END'=>'使用分配终止时间',
   'LBL_BTN_ADD_NEW_LINE'=>'从当已分配资产中挑选',
 );

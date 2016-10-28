@@ -139,9 +139,16 @@ function save_asset_lines($focus){
             $beanAsset->owning_org_id = $focus->owning_org_id;
             $beanAsset->owning_person_id = $focus->target_owning_person_id;
             $beanAsset->owning_person_desc = $focus->target_owning_person_desc;
-            $beanAsset->using_org_id = $focus->target_using_org;
-            $beanAsset->using_person_id = $focus->target_using_person_id;
-            $beanAsset->using_person_desc = $focus->target_using_person_desc;
+
+            if(empty($focus->inactive_using) || $focus->inactive_using!= 1) {//正常保存使用信息
+                $beanAsset->using_org_id = $focus->target_using_org;
+                $beanAsset->using_person_id = $focus->target_using_person_id;
+                $beanAsset->using_person_desc = $focus->target_using_person_desc;
+            }else{//清空使用信息
+                $beanAsset->using_org_id = "";
+                $beanAsset->using_person_id = "";
+                $beanAsset->using_person_desc = "";
+            }
             $beanAsset->hat_asset_locations_hat_assetshat_asset_locations_ida = $focus->target_location_id;
             $beanAsset->location_desc = $focus->target_location_desc;
             $beanAsset->asset_status = $focus->target_asset_status;

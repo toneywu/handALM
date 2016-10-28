@@ -222,7 +222,14 @@ function insertLineData(asset_trans_line, current_view){ //将数据写入到对
       //这里直接遍历所有的属性（因此需要建立与Bean属性同名的各个字段）
       //console.log(propertyName+"="+asset_trans_line[propertyName]);
       //console.log("#line_"+propertyName.concat(String(ln)) +"=="+ asset_trans_line[propertyName] );
-      $("#line_"+propertyName.concat(String(ln))).val(asset_trans_line[propertyName]);
+      if ($("#line_"+propertyName.concat(String(ln))).is(':checkbox')) {
+        if (asset_trans_line[propertyName]=true) {
+          document.getElementById("line_"+propertyName.concat(String(ln))).checked = true;
+        }
+      }else {
+        //如果当前字段不是checkbox，就以val的形式赋值
+        $("#line_"+propertyName.concat(String(ln))).val(asset_trans_line[propertyName]);
+      }
     }
 
     renderTransLine(ln);
@@ -393,6 +400,10 @@ function insertTransLineElements(tableid, current_view) { //创建界面要素
       "<input style='width:103px;' type='text' name='line_target_using_person_desc[" + prodln + "]' id='line_target_using_person_desc" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
       //失效时间
+      "<span class='input_group'>"+
+      "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_INACTIVE_USING')+" </label>"+
+      "<input name='line_inactive_using[" + prodln + "]'  type='checkbox' id='line_inactive_using" + prodln + "'  value='' title='"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_INACTIVE_USING')+"' onclick=inactiveUsingLine("+prodln+")></input>"+
+      "</span>"+
       "<span class='input_group ig_location'>"+
       "<label id='line_date_start" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_DATE_START')+"</label>"+
       "<input style='width:153px;' type='text' name='line_date_start[" + prodln + "]' id='line_date_start" + prodln + "' maxlength='50' value='' title=''>"+
@@ -471,9 +482,17 @@ function generateLineDesc(ln){
   LineDesc += LineDescElement("line_","target_asset_status","current_asset_status","LBL_ASSET_STATUS",ln,"target_asset_status","current_asset_status");
   LineDesc += LineDescElement("line_","target_parent_asset_id","current_parent_asset_id","LBL_PARENT_ASSET",ln,"target_parent_asset","current_parent_asset");
 	LineDesc += LineDescElement("line_","target_owning_org_id","current_owning_org_id","LBL_OWING_ORG",ln,"target_owning_org","current_owning_org");
-  LineDesc += LineDescElement("line_","target_using_org_id","current_using_org_id","LBL_USING_ORG",ln,"target_using_org","current_using_org");
   LineDesc += LineDescElement("line_","target_owning_person_id","current_owning_person_id","LBL_OWNING_PERSON",ln,"target_owning_person","current_owning_person");
-  LineDesc += LineDescElement("line_","target_using_person_id","current_using_person_id","LBL_USING_PERSON",ln,"target_using_person","current_using_person");
+
+  if($("#line_inactive_using"+ln).is(':checked')){ //如果失效的Checkbox=Y，则显示已经清空组织
+    LineDesc += LineDescElement("line_","","current_using_org_id","LBL_USING_ORG",ln,"","current_using_org");
+    LineDesc += LineDescElement("line_","","current_using_person_id","LBL_USING_PERSON",ln,"","current_using_person");
+  }else{
+    //否则的话，继续对组织数据进行对比
+    LineDesc += LineDescElement("line_","target_using_org_id","current_using_org_id","LBL_USING_ORG",ln,"target_using_org","current_using_org");
+    LineDesc += LineDescElement("line_","target_using_person_id","current_using_person_id","LBL_USING_PERSON",ln,"target_using_person","current_using_person");
+  }
+
   LineDesc += LineDescElement("line_","target_location_id","current_location_id","LBL_LOCATION",ln,"target_location","current_location");
   LineDesc += LineDescElement("line_","target_location_desc","current_location_desc","LBL_LOCATION_DESC",ln,"target_location_desc","current_location_desc");
   LineDesc += LineDescElement("line_","target_rack_position_desc","","LBL_RACK",ln,"target_rack_position_desc","");
@@ -484,39 +503,63 @@ function generateLineDesc(ln){
 function LineDescElement(prefix_name,target_obj_name, current_obj_name, obj_label, ln, target_objval_name, current_objval_name) {
   var result="";
   //对字段进行比较，以生成字段变更对应的文字描述。
+  var current_obj_val, target_obj_val, current_objval_val, target_objval_val
   if (typeof $("#"+prefix_name+current_obj_name+ln).val()=="undefined") {
-    $("#"+prefix_name+current_obj_name+ln).val("");
-  }
-  if (typeof $("#"+prefix_name+target_obj_name+ln).val()=="undefined") {
-    $("#"+prefix_name+target_obj_name+ln).val("");
+    current_obj_val = "";
+  } else {
+    current_obj_val = $("#"+prefix_name+current_obj_name+ln).val();
   }
 
-  //console.log(typeof current_obj_name != 'undefined' && current_obj_name!="");
+  if (typeof $("#"+prefix_name+target_obj_name+ln).val()=="undefined") {
+    target_obj_val="";
+  }else{
+    target_obj_val = $("#"+prefix_name+target_obj_name+ln).val();
+  }
+
+  current_objval_val = $("#"+prefix_name+target_objval_name+ln).val()
+  target_objval_val = $("#"+prefix_name+target_objval_name+ln).val();
+
+  if(current_objval_name=="current_asset_status"){
+  	current_objval_val = hat_asset_status_list.filter(function(obj) {
+                                return obj.name === current_objval_val;
+                              })[0].value;
+	}
+  if(target_objval_name=="target_asset_status"){
+  	target_objval_val = hat_asset_status_list.filter(function(obj) {
+                                return obj.name === target_objval_val;
+                              })[0].value;
+	}
+
+ // console.log( current_obj_val+", "+target_obj_val+", "+target_objval_name+", "+current_objval_name);
   if (typeof current_obj_name != 'undefined' && current_obj_name!="") {
-    if($("#"+prefix_name+current_obj_name+ln).val()!=$("#"+prefix_name+target_obj_name+ln).val()) {
+    //如果当前值不为空
+    //将显示为XXX字段由XXX变更为XXX
+    if(current_obj_val!=target_obj_val) {
       result  = SUGAR.language.get('HAT_Assets', obj_label);
       result += SUGAR.language.get('HAT_Asset_Trans', 'LBL_CHANGE_FROM');//" is changed from "
 
-      if ($("#"+prefix_name+current_obj_name+ln).val()=="") {
-        result += SUGAR.language.get('HAT_Asset_Trans', 'LBL_CHANGE_NULL');
+      if (current_obj_val=="") {
+        result += SUGAR.language.get('HAT_Asset_Trans', 'LBL_CHANGE_NULL');//如果当前对比值为空，则显示FROM NULL
       } else {
-        result += $("#"+prefix_name+current_objval_name+ln).val();
+        result += current_objval_val;//如果当前对比值不为空，则显示FROM XXX值名称
       }
       result += SUGAR.language.get('HAT_Asset_Trans', 'LBL_CHANGE_FROM_TO');//" to "
 
-      if ($("#"+prefix_name+target_obj_name+ln).val()=="") {
+      if (target_obj_val=="") {
         result += "<strong>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_CHANGE_NULL')+"</strong>. ";
       }else {
-        result += "<strong>"+$("#"+prefix_name+target_objval_name+ln).val()+"</strong>. ";
+        result += "<strong>"+target_objval_val+"</strong>. ";
       }
     }
   } else if ( $("#"+prefix_name+target_objval_name+ln).val()!="") {
+  	//如果当前对象为空，并且目标不为空
+  	//将显示为XXX字段变更为XXX
       result  = SUGAR.language.get('HAT_Assets', obj_label);
       result += SUGAR.language.get('HAT_Asset_Trans', 'LBL_CHANGE_TO');//" is changed to "
-      if ($("#"+prefix_name+target_obj_name+ln).val()=="") {
+      if (target_obj_val=="") {
         result += "<strong>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_CHANGE_NULL')+"</strong>. ";
       }else {
-        result += "<strong>"+$("#"+prefix_name+target_objval_name+ln).val()+"</strong>. ";
+        result += "<strong>"+target_objval_val+"</strong>. ";
       }
   }
 //console.log("#"+prefix_name+target_objval_name+ln+"="+$("#"+prefix_name+target_objval_name+ln).val());
@@ -688,7 +731,6 @@ function markLineDeleted(ln, key) {//删除当前行
 }
 
 function LineEditorShow(ln){ //显示行编辑器（先自动关闭所有的行编辑器，再打开当前行）
-  //deleted by toney.wu 20161007
   resetEventType();
   
   if (prodln>1) {
@@ -699,7 +741,7 @@ function LineEditorShow(ln){ //显示行编辑器（先自动关闭所有的行�
   $("#asset_trans_line1_displayed"+ln).hide();
   $("#asset_trans_editor"+ln).show();
   if($("#target_using_org_id").val()!=null){
-	  console.log($("#target_using_org_id").val());
+	  //console.log($("#target_using_org_id").val());
 	  $("#line_target_using_org_id"+ln).val($("#target_using_org_id").val());
 	  $("#line_target_using_org"+ln).val($("#target_using_org").val());
   }
@@ -725,4 +767,44 @@ function resetLineNum() {//数行号
   }
   //TODO：如果最终有效的行数，则将头标记为空
   //if (j==0) {}
+}
+
+function padleft0(obj) {//TODO 和hit_ip_trans中的一样，移动到公共函数库
+  return obj.toString().replace(/^[0-9]{1}$/, "0" + obj);  
+}
+function getnowtime() {//TODO 和hit_ip_trans中的一样，移动到公共函数库
+    var nowtime = new Date();
+    var year = nowtime.getFullYear();
+    var month = padleft0(nowtime.getMonth() + 1);
+    var day = padleft0(nowtime.getDate());
+    var hour = padleft0(nowtime.getHours());
+    var minute = padleft0(nowtime.getMinutes());
+    var second = padleft0(nowtime.getSeconds());
+    var millisecond = nowtime.getMilliseconds(); millisecond = millisecond.toString().length == 1 ? "00" + millisecond : millisecond.toString().length == 2 ? "0" + millisecond : millisecond;
+    return year + "-" + month + "-" + day + " " + hour + ":" + minute ;//+ ":" + second + "." + millisecond;
+}
+
+function inactiveUsingLine(ln){
+  if($("#line_inactive_using"+ln).is(':checked')){
+    //$("#line_inactive_using"+ln).prop("checked",'true');
+    document.getElementById("line_inactive_using"+ln).checked = true;
+    var mydate = new Date();
+    var currentDate=mydate.toLocaleString();
+    $("#line_date_end"+ln).val(getnowtime());
+/*    $("#line_inactive_using"+ln).val('0');
+    $("#line_inactive_using_val"+ln).val('0');
+        $("#displayed_line_inactive_using"+ln).attr("checked",true);
+        $("#displayed_line_inactive_using"+ln).prop("checked",true);
+*/  //
+  }else{
+    $("#line_inactive_using"+ln).removeAttr("checked");
+    $("#line_date_end"+ln).val("");
+/*    $("#line_status"+ln).val("EFFECTIVE");
+    $("#line_status_dis"+ln).val(SUGAR.language.get('HIT_IP_TRANS', 'LBL_EFFECTIVE'));
+
+        $("#displayed_line_inactive_using"+ln).removeAttr("checked");
+        $("#line_inactive_using"+ln).val('1');
+        $("#line_inactive_using_val"+ln).val('1');*/
+  }
+  
 }
