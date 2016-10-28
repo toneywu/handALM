@@ -13,6 +13,8 @@ $popupMeta = array (
   'hat_assets_contacts_name' => 'hat_assets.hat_assets_contacts_name',
   'tracking_number' => 'hat_assets.tracking_number',
   'framework' => 'hat_assets.framework',
+  'owning_org_id' => 'hat_assets.owning_org_id',
+  'enable_it_rack'=>'hat_assets.enable_it_rack',
 ),
     'searchInputs' => array (
   1 => 'name',
@@ -24,6 +26,8 @@ $popupMeta = array (
   9 => 'hat_assets_contacts_name',
   10 => 'tracking_number',
   11 => 'framework',
+  12=>'owning_org_id',
+  13=>'enable_it_rack',
 ),
     'searchdefs' => array (
   'framework' => 
@@ -99,6 +103,22 @@ $popupMeta = array (
     'width' => '10%',
     'name' => 'tracking_number',
   ),
+  'owning_org_id' => 
+  array (
+    'type' => 'varchar',
+    'label' => '',
+    'width' => '10%',
+    'default' => true,
+    'name' => 'owning_org_id',
+  ),
+  'enable_it_rack' => 
+  array (
+    'type' => 'varchar',
+    'label' => '',
+    'width' => '10%',
+    'default' => true,
+    'name' => 'enable_it_rack',
+  ),
 ),
     'listviewdefs' => array (
   'NAME' => 
@@ -148,5 +168,6 @@ $popupMeta = array (
     'default' => true,
     'name' => 'hat_assets_contacts_name',
   ),
+  
 ),
 );

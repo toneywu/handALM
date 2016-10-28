@@ -428,15 +428,14 @@ function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
   }else {
     $("#displayed_line_enable_action"+ln).removeAttr("checked");
   }
-
+ console.log("line_status = "+$("#line_status"+ln).val());
   
   if($("#line_status"+ln).val()==""||$("#line_status"+ln).val()=="EFFECTIVE"){
   	  $("#displayed_line_status"+ln).html(SUGAR.language.get('HIT_IP_TRANS','LBL_EFFECTIVE'));
   }else{
   	 $("#displayed_line_status"+ln).html(SUGAR.language.get('HIT_IP_TRANS','LBL_EFFICACY'));
-  	 console.log($("#line_status"+ln).val());
+  	
   } 
-  
   
 }
 
@@ -570,6 +569,19 @@ function markLineDeleted(ln, key) {//删除当前行
     removeFromValidate('EditView','line_name'+ ln);
     removeFromValidate('EditView','line_target_organization'+ ln);
     removeFromValidate('EditView','line_target_location'+ ln);
+    removeFromValidate('EditView','line_bandwidth_type'+ ln);
+    removeFromValidate('EditView','line_port'+ ln);
+    removeFromValidate('EditView','line_port_backup'+ ln);
+    removeFromValidate('EditView','line_access_assets_name'+ ln);
+    removeFromValidate('EditView','line_access_assets_backup_name'+ ln);
+    removeFromValidate('EditView','line_speed_limit'+ ln);
+    removeFromValidate('EditView','line_hat_assets_cabinet'+ ln);
+    removeFromValidate('EditView','line_monitoring'+ ln);
+    removeFromValidate('EditView','line_monitoring_backup'+ ln);
+    removeFromValidate('EditView','line_channel_num_backup'+ ln);
+    removeFromValidate('EditView','line_channel_content_backup'+ ln);
+    removeFromValidate('EditView','line_date_start'+ ln);
+    removeFromValidate('EditView','line_date_end'+ ln);
   }
   resetLineNum();
 

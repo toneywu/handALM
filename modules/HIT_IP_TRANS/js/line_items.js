@@ -302,7 +302,7 @@ function btnAddAllocLine(){
 function setAddLineBtnReturn(popupReplyData) {
 	set_return(popupReplyData);
 	//console.log(JSON.stringify(popupReplyData.selection_list));
-	
+	console.log(popupReplyData);
 	var idJson = popupReplyData.selection_list;
 	for(var p in idJson){
 		$.ajax({
@@ -310,7 +310,7 @@ function setAddLineBtnReturn(popupReplyData) {
 			//data:JSON.stringify(popupReplyData.selection_list),
 			//type:"POST",
 			success: function (msg) {
-				//console.log(msg);
+				console.log($.parseJSON(msg));
 				insertLineData($.parseJSON(msg));
 			},
 			error: function () { //失败
@@ -551,14 +551,16 @@ function insertLineData(asset_trans_line) { // 将数据写入到对应的行字
 	    $("#line_date_start".concat(String(ln))).val(asset_trans_line.date_start);
 	    $("#line_date_end".concat(String(ln))).val(asset_trans_line.date_end);
 	    $("#line_enable_action".concat(String(ln))).val(asset_trans_line.enable_action);
+		$("#line_enable_action_val".concat(String(ln))).val(asset_trans_line.enable_action);
 	    
-	    if($("#line_status"+ln).val()==""||$("#line_status"+ln).val()=="EFFECTIVE"){
+	    if($("#line_status"+ln).val()=="EFFECTIVE"){
 	  	  $("#line_status_dis"+ln).val(SUGAR.language.get('HIT_IP_TRANS',"LBL_EFFECTIVE"));
-	    }else{
+	    }else if($("#line_status"+ln).val()=="UNEFFECTIVE"){
 	  	  $("#line_status_dis"+ln).val(SUGAR.language.get('HIT_IP_TRANS',"LBL_EFFICACY"));
 	    } 
 	    
-	    if($("#line_enable_action"+ln).val()==""||$("#line_enable_action"+ln).val()=="0"){
+		console.log("line_enable_action = "+$("#line_enable_action"+ln).val());
+	    if($("#line_enable_action"+ln).val()=="0"){
   	 	 $("#line_enable_action"+ln).attr("checked",true);
      	 $("#line_enable_action"+ln).prop("checked",true);
       	 document.getElementById("displayed_line_enable_action"+ln).checked = true;
@@ -1178,8 +1180,8 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			+ "</span>"
 			
 			+ "<input type='hidden' name='line_deleted[" + prodln+ "]' id='line_deleted" + prodln + "' value='0'>"
-			+ "<input type='hidden' name='line_status[" + prodln+ "]' id='line_status" + prodln + "' value='0'>"
-			+ "<input type='hidden' name='line_enable_action_val[" + prodln+ "]' id='line_enable_action_val" + prodln + "' value='0'>"
+			+ "<input type='hidden' name='line_status[" + prodln+ "]' id='line_status" + prodln + "'>"
+			+ "<input type='hidden' name='line_enable_action_val[" + prodln+ "]' id='line_enable_action_val" + prodln + "' value='1'>"
 			+ "<input type='hidden' name='line_id[" + prodln + "]' id='line_id"+ prodln + "' value=''>"
 			+ "<input type='hidden' name='line_source_ref[" + prodln+ "]' id='line_source_ref" + prodln + "' value=''>"
 			+ "<input type='button' id='line_delete_line" + prodln+ "' class='button btn_del' value='"+ SUGAR.language.get('app_strings', 'LBL_DELETE_INLINE')+ "' tabindex='116' onclick='btnMarkLineDeleted(" + prodln+ ",\"line_\")'>" + "<button type='button' id='btn_LineEditorClose"+ prodln + "' class='button btn_save' value='"+ SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE')+ "' tabindex='116' onclick='LineEditorClose(" + prodln+ ",\"line_\")'>"+ SUGAR.language.get('app_strings', 'LBL_SAVE_BUTTON_LABEL')+ " & " + SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE')+ " <img src='themes/default/images/id-ff-clear.png' alt='"+ SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE')+ "'></button>"
@@ -1250,9 +1252,9 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 	$("#displayed_line_hat_assets_id" + ln).html($("#line_hat_assets_id" + ln)
 			.val());
   $("#displayed_line_status"+ln).html($("#line_status"+ln).val());
-  if($("#line_status"+ln).val()==""||$("#line_status"+ln).val()=="EFFECTIVE"){
+  if($("#line_status"+ln).val()=="EFFECTIVE"||$("#line_status"+ln).val()==""){
   	  $("#displayed_line_status"+ln).html(SUGAR.language.get('HIT_IP_TRANS',"LBL_EFFECTIVE"));
-  }else{
+  }else if($("#line_status"+ln).val()=="UNEFFECTIVE"){
   	 $("#displayed_line_status"+ln).html(SUGAR.language.get('HIT_IP_TRANS',"LBL_EFFICACY"));
   }  
   $("#displayed_line_port_backup"+ln).html($("#line_port_backup"+ln).val());
@@ -1265,7 +1267,7 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
   $("#displayed_line_date_end"+ln).html( $("#line_date_end"+ln).val());
   
   console.log("val = "+$("#line_enable_action"+ln).val());
-  if($("#line_enable_action"+ln).val()==""||$("#line_enable_action"+ln).val()=="0"){
+  if($("#line_enable_action"+ln).val()=="0"){
   	  
   	  $("#displayed_line_enable_action"+ln).attr("checked",true);
       $("#displayed_line_enable_action"+ln).prop("checked",true);
@@ -1459,6 +1461,24 @@ function markLineDeleted(ln, key) {// 删除当前行
 		removeFromValidate('EditView', 'line_access_assets_name' + ln);
 		removeFromValidate('EditView', 'line_hat_asset_name' + ln);
 		removeFromValidate('EditView', 'line_hit_ip_subnets_id' + ln);
+		
+		removeFromValidate('EditView','line_asset'+ ln);
+	    removeFromValidate('EditView','line_name'+ ln);
+	    removeFromValidate('EditView','line_target_organization'+ ln);
+	    removeFromValidate('EditView','line_target_location'+ ln);
+	    removeFromValidate('EditView','line_bandwidth_type'+ ln);
+	    removeFromValidate('EditView','line_port'+ ln);
+	    removeFromValidate('EditView','line_port_backup'+ ln);
+	    removeFromValidate('EditView','line_access_assets_name'+ ln);
+	    removeFromValidate('EditView','line_access_assets_backup_name'+ ln);
+	    removeFromValidate('EditView','line_speed_limit'+ ln);
+	    removeFromValidate('EditView','line_hat_assets_cabinet'+ ln);
+	    removeFromValidate('EditView','line_monitoring'+ ln);
+	    removeFromValidate('EditView','line_monitoring_backup'+ ln);
+	    removeFromValidate('EditView','line_channel_num_backup'+ ln);
+	    removeFromValidate('EditView','line_channel_content_backup'+ ln);
+	    removeFromValidate('EditView','line_date_start'+ ln);
+	    removeFromValidate('EditView','line_date_end'+ ln);
 	}
 
 	if ($("#line_hit_ip_subnets" + ln).val() == "") {

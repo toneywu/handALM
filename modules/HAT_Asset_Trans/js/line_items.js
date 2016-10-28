@@ -162,7 +162,7 @@ function addNewAssetLine(){
 			"field_to_name_array" : {
 	}};
   var target_owning_org_id = $("#target_owning_org_id").val();
-  var popupFilter = '&target_owning_org_id_advanced='+target_owning_org_id;
+  var popupFilter = '&owning_org_id_advanced='+target_owning_org_id+'&enable_it_rack_advanced=1';
   open_popup('HAT_Assets', 1200, 850,popupFilter, true, true, popupRequestData, "MultiSelect", true);
 
 }
