@@ -42,9 +42,10 @@
 		margin: 0 1em 0 0;
 		display: table-cell;
 	}
-	#node_details span.detail_data {
+	#node_details span.detail_data,#node_details span.detail_data a {
 		/*width:170px;*/
 		font-weight:bold;
+		font-size: 1em;
 		display: table-cell;
 	}
 

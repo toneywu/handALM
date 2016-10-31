@@ -179,7 +179,7 @@ $bean_locations = $db->query($sel_location); //无如是Location还是asset来�
 
       $txt_rack_jason = "";
       $txt_rack_allocation_jason="";
-      //如果当前资产是IT机柜，则加载机柜相关的内容，合并到展示区域中
+      //如果当前资产是IT机柜，则加载机柜相关的文字内容（定义在机柜模块中），合并到展示区域中
       if ($asset['enable_it_rack']==true) {
         $beanRack = BeanFactory::getBean('HIT_Racks') ->retrieve_by_string_fields(array('hit_racks.hat_assets_id'=>$asset['id']));
         $txt_rack_jason .=get_jason_field('height','HIT_Racks',$beanRack->height);
@@ -188,12 +188,15 @@ $bean_locations = $db->query($sel_location); //无如是Location还是asset来�
         $txt_rack_jason .=get_jason_field('rated_current','HIT_Racks',$beanRack->rated_current);
         $txt_rack_jason .=get_jason_field('standard_power','HIT_Racks',$beanRack->standard_power);
         $txt_rack_jason .=get_jason_field('stock_number','HIT_Racks',$beanRack->stock_number);
+        $txt_rack_jason .=get_jason_field('enable_partial_allocation','HIT_Racks',$beanRack->enable_partial_allocation,'bool');
 
         require_once('modules/HIT_Racks/ServerChart.php');
         $txt_rack_jason .= get_jason_field('occupation','HIT_Racks', getOccupationCnt($beanRack));
-        $txt_rack_jason .= get_jason_field('position_display_area','HIT_Racks', getServerChart($beanRack,"RackFrame"));
-
+        //$txt_rack_jason .= get_jason_field('position_display_area','HIT_Racks', getServerChart($beanRack,"RackFrame"));
+        //以上是机柜图，20161030将机柜图从文字区域转到下方，单独处理
+        //从下内容都来源于modules/HIT_Racks/ServerChart.php
         $txt_rack_allocation_jason = getServerChart($beanRack,"Servers").',"rackid":"'.$beanRack->id.'"';
+        $txt_rack_allocation_chart = '"'.getServerChart($beanRack,"RackFrame").'"';
       }
 
       //以下是正常的资产信息，所以有资产都按以下进行加载
@@ -244,8 +247,10 @@ $bean_locations = $db->query($sel_location); //无如是Location还是asset来�
        }
        $txt_jason .='"enable_it_ports":"'.$asset['enable_it_ports'].'",';
        $txt_jason .='"type":"asset"';
+
        if (isset($txt_rack_allocation_jason)&&$txt_rack_allocation_jason!="") { //如果有机柜信息，继续加载机柜的分配信息
           $txt_jason  .=','.$txt_rack_allocation_jason;
+          $txt_jason  .=',"chart":'.$txt_rack_allocation_chart;
        }
     }
 }

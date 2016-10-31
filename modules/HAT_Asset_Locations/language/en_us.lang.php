@@ -92,5 +92,6 @@ $mod_strings = array (
   'LBL_NAV_RACKPOSITION'=>'Explore and select a Server/Network Rack Position',
   'LBL_BTN_SELECT'=>'Select',
   'LBL_PLACEHOLDER'=>'Placeholder',
-  'LBL_ADD_PLACEHOLDER'=>'Allocation Server-Rack Space'
+  'LBL_ADD_PLACEHOLDER'=>'Allocation Server-Rack Space',
+
 );
