@@ -1,5 +1,5 @@
 <?php
-// created: 2016-08-24 11:24:49
+// created: 2016-10-31 16:18:39
 $subpanel_layout['list_fields'] = array (
   'woop_number' => 
   array (
@@ -22,20 +22,19 @@ $subpanel_layout['list_fields'] = array (
     'vname' => 'LBL_WOOP_STATUS',
     'width' => '7%',
     'default' => true,
-    //'fill_in_additional_fields'=>true
   ),
-  'date_schedualed_start' => 
+  'date_actual_start' => 
   array (
     'type' => 'datetimecombo',
-    'vname' => 'LBL_SCHEDUALED_START_DATE',
-    'width' => '8%',
+    'vname' => 'LBL_ACTUAL_START_DATE',
+    'width' => '10%',
     'default' => true,
   ),
-  'date_schedualed_finish' => 
+  'date_actual_finish' => 
   array (
     'type' => 'datetimecombo',
-    'vname' => 'LBL_SCHEDUALED_FINISH_DATE',
-    'width' => '8%',
+    'vname' => 'LBL_ACTUAL_FINISH_DATE',
+    'width' => '10%',
     'default' => true,
   ),
   'work_center' => 
@@ -77,26 +76,15 @@ $subpanel_layout['list_fields'] = array (
     'target_module' => 'HAM_Work_Center_People',
     'target_record_key' => 'work_center_people_id',
   ),
-
   'act_module' => 
   array (
     'type' => 'enum',
     'studio' => 'visible',
     'vname' => 'LBL_ACT_MODULE',
     'width' => '15%',
-    'default' => false,
+    'default' => true,
     'sortable' => false,
   ),
-/*
-  'woop_action' => 
-  array (
-    'type' => 'varchar',
-    'studio' => 'visible',
-    'vname' => 'LBL_WOOP_ACTION',
-    'width' => '20%',
-    'default' => true,
-	'sortable' => false,
-  ),*/
   'edit_button' => 
   array (
     'vname' => 'LBL_EDIT_BUTTON',
