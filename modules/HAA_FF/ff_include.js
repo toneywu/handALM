@@ -38,10 +38,6 @@ function setFF(FFObj) {
 
 	if (FFObj.fieldtype=="HIDE") { //将字段进行隐藏
 		mark_field_disabled(FFObj.field,true,false);
-	} else if(FFObj.fieldtype=="LIST"){
-		mark_field_setlist(FFObj);
-	} else if(FFObj.fieldtype=="CHECKBOX"){ 
-		mark_field_setcheckbox(FFObj);
 	} else if (FFObj.fieldtype=="PLACEHOLDER"){
 		mark_field_disabled(FFObj.field,true,true);
 	} else {
@@ -105,55 +101,6 @@ function hideAllAttributes(ff_fields) {
 			}
 		}
 		i++;//查找下一个attribute
-	}
-}
-
-function mark_field_setlist(fields) {
-	var view=action_sugar_grp1;
-	var field_name=fields.field;
-	if (view=='EditView') {
-		var html="<select id='"+field_name+"' name='"+field_name+"'></select>";
-		$("#"+field_name+'_label').html(fields.label+":");
-		$("#"+field_name).parent().html(html);
-		$.ajax({
-			url:"index.php?to_pdf=true&module=HAA_FF&action=get_HAA_FF&code_tag="+fields.listfilter,
-			type:"POST",
-			success:function(data){
-				var fields = jQuery.parseJSON(data);
-				var option="";
-				for (var i = 0; i < fields.length; i++) {
-					option+="<option value='"+fields[i]+"'>"+fields[i]+"</option>";
-				}
-				$("#"+field_name).append(option);
-			}
-		});
-	}else if(view=='DetailView'){
-		$("#"+field_name).parent().prev().html(fields.label+":");
-	}
-}
-
-function mark_field_setcheckbox(fields){
-	var view=action_sugar_grp1;
-	var html="";
-	var field_name=fields.field;
-	if (view=='EditView') {
-		$("#"+field_name+'_label').html(fields.label+":");
-		var checkval=$("#"+field_name).val();
-		html='<input id="'+field_name+'" name="'+field_name+'" type="checkbox" value="1"/>';//默认为false
-		if (checkval==1) {
-			html='<input id="'+field_name+'" name="'+field_name+'" type="checkbox" value="1" checked/>';
-		}
-		$("#"+field_name).val("0").hide();
-		$("#"+field_name).parent().append(html);
-	} else if(view=='DetailView'){
-		var checkval=$("#"+field_name).html();
-		html='<input id="'+field_name+'" name="'+field_name+'" type="checkbox" disabled value="1"/>';
-		if (checkval==1) {
-			html='<input id="'+field_name+'" name="'+field_name+'" type="checkbox" disabled value="1" checked/>';
-		}
-		$("#"+field_name).hide();
-		$("#"+field_name).parent().html(html);
-		$("#"+field_name).parent().prev().html(fields.label+":");
 	}
 }
 
