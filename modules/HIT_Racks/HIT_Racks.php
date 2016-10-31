@@ -114,6 +114,8 @@ class HIT_Racks extends HIT_Racks_sugar {
             //以下数据更新只进行一次，如果保存后确定了资产组关系后，就不再更新。
             //也就是说用户可以在资产上更新这些字段，而需要永远与资产组保持一致
             $asset_group = BeanFactory::getBean('AOS_Products',$asset->aos_products_id); //将分类等值直接从Product上进行复制
+            $asset->asset_name = $asset_group->name;
+            $asset->asset_icon = $asset_group->icon_c;
             $asset->aos_product_categories_id = $asset_group->aos_product_category_id;//产品分类
             $asset->enable_fa = $asset_group->enable_fa_c;//FA标志
             $asset->asset_criticality = $asset_group->asset_criticality_c;//重要性
