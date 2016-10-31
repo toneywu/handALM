@@ -34,7 +34,7 @@
 
  function insertLineItems(product,group){
 
-var curent_module=GetUrlParamString("module");
+    var curent_module=GetUrlParamString("module");
     var type = 'product_';
     var ln = 0;
     var current_group = 'lineItems';
@@ -90,7 +90,7 @@ var curent_module=GetUrlParamString("module");
  */
 
  function insertProductLine(tableid, groupid) {
-var curent_module=GetUrlParamString("module");
+    var curent_module=GetUrlParamString("module");
     if(!enable_groups){
         tableid = "product_group0";
     }
@@ -213,10 +213,10 @@ var curent_module=GetUrlParamString("module");
 
     }
     else{
-       var h = x.insertCell(9);
-       h.innerHTML = "<input type='hidden' name='product_currency[" + prodln + "]' id='product_currency" + prodln + "' value=''><input type='hidden' name='product_deleted[" + prodln + "]' id='product_deleted" + prodln + "' value='0'><input type='hidden' name='product_id[" + prodln + "]' id='product_id" + prodln + "' value=''><button type='button' id='product_delete_line" + prodln + "' class='button' value='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "' tabindex='116' onclick='markLineDeleted(" + prodln + ",\"product_\")'><img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button><br>";
+     var h = x.insertCell(9);
+     h.innerHTML = "<input type='hidden' name='product_currency[" + prodln + "]' id='product_currency" + prodln + "' value=''><input type='hidden' name='product_deleted[" + prodln + "]' id='product_deleted" + prodln + "' value='0'><input type='hidden' name='product_id[" + prodln + "]' id='product_id" + prodln + "' value=''><button type='button' id='product_delete_line" + prodln + "' class='button' value='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "' tabindex='116' onclick='markLineDeleted(" + prodln + ",\"product_\")'><img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button><br>";
 
-   }
+ }
 //End modefy 20161022增加结算周期和日期
 
 
@@ -304,7 +304,7 @@ function formatListPrice(ln){
  */
 
  function insertServiceLine(tableid, groupid) {
-var curent_module=GetUrlParamString("module");
+    var curent_module=GetUrlParamString("module");
     if(!enable_groups){
         tableid = "service_group0";
     }
@@ -372,10 +372,10 @@ var curent_module=GetUrlParamString("module");
         f.innerHTML = "<input type='hidden' name='service_deleted[" + servln + "]' id='service_deleted" + servln + "' value='0'><input type='hidden' name='service_id[" + servln + "]' id='service_id" + servln + "' value=''><button type='button' class='button' id='service_delete_line" + servln + "' value='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "' tabindex='116' onclick='markLineDeleted(" + servln + ",\"service_\")'><img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button><br>";
 
     }else{
-       var f = x.insertCell(6);
-       f.innerHTML = "<input type='hidden' name='service_deleted[" + servln + "]' id='service_deleted" + servln + "' value='0'><input type='hidden' name='service_id[" + servln + "]' id='service_id" + servln + "' value=''><button type='button' class='button' id='service_delete_line" + servln + "' value='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "' tabindex='116' onclick='markLineDeleted(" + servln + ",\"service_\")'><img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button><br>";
+     var f = x.insertCell(6);
+     f.innerHTML = "<input type='hidden' name='service_deleted[" + servln + "]' id='service_deleted" + servln + "' value='0'><input type='hidden' name='service_id[" + servln + "]' id='service_id" + servln + "' value=''><button type='button' class='button' id='service_delete_line" + servln + "' value='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "' tabindex='116' onclick='markLineDeleted(" + servln + ",\"service_\")'><img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button><br>";
 
-   }
+ }
     //End modefy 20161022增加结算周期和日期
 
 
@@ -444,10 +444,10 @@ var curent_module=GetUrlParamString("module");
         h.style.color="rgb(68,68,68)";
         h.innerHTML='&nbsp;';
     }else{
-     var h=x.insertCell(8);
-     h.style.color="rgb(68,68,68)";
-     h.innerHTML='&nbsp;';
- }
+       var h=x.insertCell(8);
+       h.style.color="rgb(68,68,68)";
+       h.innerHTML='&nbsp;';
+   }
 //End Modefy BY osmond 20161022 合同模块增加结算周期
 
 }
@@ -506,10 +506,10 @@ var curent_module=GetUrlParamString("module");
     }
     else
     {
-     var g=x.insertCell(6);
-     g.style.color="rgb(68,68,68)";
-     g.innerHTML='&nbsp;'; 
- }
+       var g=x.insertCell(6);
+       g.style.color="rgb(68,68,68)";
+       g.innerHTML='&nbsp;'; 
+   }
     //End Modefy by osmond 20161022 合同模块增加结算周期
     
 }
@@ -520,7 +520,7 @@ var curent_module=GetUrlParamString("module");
 
  function insertGroup()
  {
-var curent_module=GetUrlParamString("module");
+    var curent_module=GetUrlParamString("module");
     if(!enable_groups && groupn > 0){
         return;
     }
@@ -547,28 +547,28 @@ var curent_module=GetUrlParamString("module");
     tableheader = document.createElement("thead");
     table.appendChild(tableheader);
     var header_row=tableheader.insertRow(-1);
- if (curent_module=="AOS_Invoices"){
-    sqs_objects["group_name["+groupn+"]"] = {
-        "form": "EditView",
-        "method": "query",
-        "modules": ["HAA_Codes"],
-        "group": "or",
-        "field_list": [ "name"],
-        "populate_list": ["group_name["+groupn+"]"],
-        "required_list": ["group_name["+groupn+"]"],
-        "conditions": [{
-         "name": "name",
-         "op": "like_custom",
-         "end": "%",'begin': '%',
-         "value": ""
-     }],
-     "order": "name",
-     "limit": "30",
-     "no_match_text": "No Match"
- };
-}
+    if (curent_module=="AOS_Invoices"){
+        sqs_objects["group_name["+groupn+"]"] = {
+            "form": "EditView",
+            "method": "query",
+            "modules": ["HAA_Codes"],
+            "group": "or",
+            "field_list": [ "name"],
+            "populate_list": ["group_name["+groupn+"]"],
+            "required_list": ["group_name["+groupn+"]"],
+            "conditions": [{
+               "name": "name",
+               "op": "like_custom",
+               "end": "%",'begin': '%',
+               "value": ""
+           }],
+           "order": "name",
+           "limit": "30",
+           "no_match_text": "No Match"
+       };
+   }
 
- if(enable_groups){
+   if(enable_groups){
     var header_cell = header_row.insertCell(0);
     header_cell.scope="row";
     header_cell.colSpan="8";
@@ -577,12 +577,12 @@ var curent_module=GetUrlParamString("module");
         "<input type='hidden' name='group_id["+groupn+"]' id='"+ table.id +"id' value=''><input type='hidden' name='group_group_number["+groupn+"]' id='"+ table.id +"group_number' value='"+groupn+"'>";
     }
     else{
-       header_cell.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_GROUP_NAME')+":&nbsp;&nbsp;<input name='group_name[]' id='"+ table.id +"name' size='30' maxlength='255'  title='' tabindex='120' type='text'><input type='hidden' name='group_id[]' id='"+ table.id +"id' value=''><input type='hidden' name='group_group_number[]' id='"+ table.id +"group_number' value='"+groupn+"'>";
+     header_cell.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_GROUP_NAME')+":&nbsp;&nbsp;<input name='group_name[]' id='"+ table.id +"name' size='30' maxlength='255'  title='' tabindex='120' type='text'><input type='hidden' name='group_id[]' id='"+ table.id +"id' value=''><input type='hidden' name='group_group_number[]' id='"+ table.id +"group_number' value='"+groupn+"'>";
 
-   }
-   var header_cell_del = header_row.insertCell(1);
-   header_cell_del.scope="row";
-   header_cell_del.innerHTML="<span title='" + SUGAR.language.get(module_sugar_grp1, 'LBL_DELETE_GROUP') + "' style='float: right;'><a style='cursor: pointer;' id='deleteGroup' tabindex='116' onclick='markGroupDeleted("+groupn+")'><img src='themes/default/images/id-ff-clear.png' alt='X'></a></span><input type='hidden' name='group_deleted[]' id='"+ table.id +"deleted' value='0'>";
+ }
+ var header_cell_del = header_row.insertCell(1);
+ header_cell_del.scope="row";
+ header_cell_del.innerHTML="<span title='" + SUGAR.language.get(module_sugar_grp1, 'LBL_DELETE_GROUP') + "' style='float: right;'><a style='cursor: pointer;' id='deleteGroup' tabindex='116' onclick='markGroupDeleted("+groupn+")'><img src='themes/default/images/id-ff-clear.png' alt='X'></a></span><input type='hidden' name='group_deleted[]' id='"+ table.id +"deleted' value='0'>";
 }
 
 
@@ -1075,13 +1075,13 @@ function CalendarShow(field) {//显示日历
   dateformat = dateformat.replace(/d/,"dd");
   dateformat = dateformat.split(" ",1);
   Datetimepicker.datetimepicker({
-   language: 'zh_CN',
-   format: dateformat[0],
-   showMeridian: true,
-   minView: 2,
-   todayBtn: true,
-   autoclose: true,
-});
+     language: 'zh_CN',
+     format: dateformat[0],
+     showMeridian: true,
+     minView: 2,
+     todayBtn: true,
+     autoclose: true,
+ });
 }
 
 function setProductSettlementPeriodChange(field,prodln) {
@@ -1091,15 +1091,15 @@ function setProductSettlementPeriodChange(field,prodln) {
   var field_value=field.value;
   var html='';
   if (field_value=="Once"){
-   html= '<input class="date_input pull-left" readOnly="readOnly" autocomplete="off" name="product_initial_account_day_c[' + prodln + ']" id="product_initial_account_day_c' + prodln + '" value="'+accountDayValue+'" title="" tabindex="0" type="text">';
-}
-else{
-   html='<input class="date_input pull-left"  autocomplete="off" name="product_initial_account_day_c[' + prodln + ']" id="product_initial_account_day_c' + prodln + '" value="'+accountDayValue+'" title="" tabindex="0" type="text" onclick="CalendarShow(this);">'+
-   '<span class="input-group-addon">'+
-   '<span class="glyphicon glyphicon-calendar"></span></span>';
+     html= '<input class="date_input pull-left" readOnly="readOnly" autocomplete="off" name="product_initial_account_day_c[' + prodln + ']" id="product_initial_account_day_c' + prodln + '" value="'+accountDayValue+'" title="" tabindex="0" type="text">';
+ }
+ else{
+     html='<input class="date_input pull-left"  autocomplete="off" name="product_initial_account_day_c[' + prodln + ']" id="product_initial_account_day_c' + prodln + '" value="'+accountDayValue+'" title="" tabindex="0" type="text" onclick="CalendarShow(this);">'+
+     '<span class="input-group-addon">'+
+     '<span class="glyphicon glyphicon-calendar"></span></span>';
 
-}
-accountDay.innerHTML=html;
+ }
+ accountDay.innerHTML=html;
 }
 
 function setServiceSettlementPeriodChange(field,servln) {
@@ -1109,16 +1109,17 @@ function setServiceSettlementPeriodChange(field,servln) {
   var field_value=field.value;
   var html='';
   if (field_value=="Once"){
-   html= '<input class="date_input pull-left" readOnly="readOnly" autocomplete="off" name="service_initial_account_day_c[' + servln + ']" id="service_initial_account_day_c' + servln + '" value="'+accountDayValue+'" title="" tabindex="0" type="text">';
-}
-else{
-   html='<input class="date_input pull-left"  autocomplete="off" name="service_initial_account_day_c[' + servln + ']" id="service_initial_account_day_c' + servln + '" value="'+accountDayValue+'" title="" tabindex="0" type="text" onclick="CalendarShow(this);">'+
-   '<span class="input-group-addon">'+
-   '<span class="glyphicon glyphicon-calendar"></span></span>';
+     html= '<input class="date_input pull-left" readOnly="readOnly" autocomplete="off" name="service_initial_account_day_c[' + servln + ']" id="service_initial_account_day_c' + servln + '" value="'+accountDayValue+'" title="" tabindex="0" type="text">';
+ }
+ else{
+     html='<input class="date_input pull-left"  autocomplete="off" name="service_initial_account_day_c[' + servln + ']" id="service_initial_account_day_c' + servln + '" value="'+accountDayValue+'" title="" tabindex="0" type="text" onclick="CalendarShow(this);">'+
+     '<span class="input-group-addon">'+
+     '<span class="glyphicon glyphicon-calendar"></span></span>';
 
+ }
+ accountDay.innerHTML=html;
 }
-accountDay.innerHTML=html;
-}
+
 function replace_display_lines(linesHtml) {
   var lineItems=document.getElementById("line_items_span");
   lineItems.innerHTML=linesHtml;
@@ -1128,5 +1129,13 @@ function GetUrlParamString(paramName)
 {
     var reg = new RegExp("(^|&)"+ paramName +"=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
-    if(r!=null)return  unescape(r[2]); return null;
+    if(r!=null){return  unescape(r[2]);}
+    else{
+        var url=decodeURIComponent(document.location.href);
+        url=url.split("#")[1];
+        url=url.split("?")[1];
+        r = url.match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+    } 
+    return null;
 }
