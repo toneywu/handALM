@@ -11,9 +11,9 @@ class AOS_ContractsViewList extends ViewList
     parent::processSearchForm();
     $haa_frameworks_id=$_SESSION["current_framework"];
     if ($this->where) { 
-      $this->where.=" AND haa_frameworks_id_c ='".$haa_frameworks_id."'";
+      $this->where.=" AND aos_contracts_cstm.haa_frameworks_id_c ='".$haa_frameworks_id."'";
     }else{
-     $this->where.=" where haa_frameworks_id_c ='".$haa_frameworks_id."'";
+     $this->where.=" where aos_contracts_cstm.haa_frameworks_id_c ='".$haa_frameworks_id."'";
    }
  } 
 }
