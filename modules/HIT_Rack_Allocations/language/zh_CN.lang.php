@@ -81,6 +81,9 @@ $mod_strings = array (
   'LBL_ASSET_DESC'=>'资产说明',
   'LBL_ASSET_STATUS'=>'资产状态',
   'LBL_ASSET_ACCOUNT'=>'使用单位',
-    'LBL_SYNC_PARENT_ENABLED'=>'将当前机柜设定为父资产?',
-      'LBL_PLACEHOLDER'=>'占位（标记为不可用空间）'
+  'LBL_SYNC_PARENT_ENABLED'=>'将当前机柜设定为父资产?',
+  'LBL_PLACEHOLDER'=>'占位',
+  'LBL_INACTIVE_USING'=>'将当前分配失效',
+  'LBL_DATE_START'=>'使用分配起始时间',
+  'LBL_DATE_END'=>'使用分配终止时间',
 );

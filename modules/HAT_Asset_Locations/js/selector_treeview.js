@@ -93,6 +93,7 @@ data: {
 	function loadDataForNodeDetail(treeObj, node, targetDIV) {//通过Ajax加载当前节点明细
 		var id = node.id;
 		var type = node.type;
+		console.log('index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeNodeDetailHTML&id=' + id+"&type="+ type);
 		if ( typeof(node.data)== 'undefined') {
 			//undefined说明当前的结点没有明细信息，所以需要通过Ajax加载数据
 			targetDIV.html('<img align="absmiddle" src="custom/resources/zTree/css/metroStyle/img/loading.gif"></span> '+SUGAR.language.get('app_strings', 'LBL_LOADING'));
@@ -107,7 +108,6 @@ data: {
 						node.data=datatopush;
 						treeObj.updateNode(node);
 						console.log(node);
-						//console.log('index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeNodeDetailHTML&id=' + id+"&type="+ type);
 						//node.setNodesProperty("NodeLoaded", "true" , true);
 						showNodeDetailHTML(node,targetDIV);
 					},
@@ -142,9 +142,16 @@ function showNodeDetailHTML(node,targetDIV) {
 
 		varHTML+="</div>";
 		//显示主要字段
+		varHTML+="<div class='detailed_data_table'>"
 		for (var index = 0; index < node.data.fields.length; ++index) {
 		    varHTML+="<div class='detailed_fileds'><span class='lab'>"+node.data.fields[index]['lab']+"</span><span class='detail_data'>"+node.data.fields[index]['val']+"</span></div>";
 		}
+		varHTML+="</div>"
+		if (typeof (node.data.chart)!="undefined") {
+			varHTML+=node.data.chart;
+		}
+
+
 	}
 	targetDIV.html(varHTML);
 	//读取机柜信息
@@ -198,8 +205,8 @@ function initTree(treeView, default_list, p3) {
 	//p3 should be WO_ID
 	$("#treeview_selector").addClass("ztree");
 	$("#treeview_selector,#node_details").html("");
-	$("#workbench_left").css('width','40%')
-	$("#node_details").css('width','60%')
+	$("#workbench_left").css('width','43%')
+	$("#node_details").css('width','57%')
 
 
 	//加载Root节点

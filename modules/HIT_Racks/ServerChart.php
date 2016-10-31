@@ -39,7 +39,9 @@ function getServerChart($RackBean, $mode) {
                             accounts.name account_name,
                             hit_rack_allocations.rack_pos_depth,
                             hit_rack_allocations.rack_pos_top,
-                            hit_rack_allocations.height 
+                            hit_rack_allocations.height,
+                            hit_rack_allocations.id,
+                            hit_rack_allocations.description
                           FROM
                             hit_rack_allocations 
                             LEFT JOIN hat_assets 
@@ -74,7 +76,10 @@ function getServerChart($RackBean, $mode) {
          $allocation_html.="\"height\":\"".$d_bean_rack_allocation['height']."\",";
          $allocation_html.="\"rack_pos_top\":\"".$d_bean_rack_allocation['rack_pos_top']."\",";
          $allocation_html.="\"rack_pos_depth\":\"".$d_bean_rack_allocation['rack_pos_depth']."\",";
-         $allocation_html.="\"hat_assets_accounts_name\":\"".$d_bean_rack_allocation['account_name']."\"";
+         $allocation_html.="\"hat_assets_accounts_name\":\"".$d_bean_rack_allocation['account_name']."\",";
+         $allocation_html.="\"hat_assets_accounts_id\":\"".$d_bean_rack_allocation['account_id']."\",";
+         $allocation_html.="\"id\":\"".$d_bean_rack_allocation['id']."\",";
+         $allocation_html.="\"desc\":\"".$d_bean_rack_allocation['description']."\"";
          $allocation_html.="},";
          $occupation_cnt += $d_bean_rack_allocation['height'];
   }

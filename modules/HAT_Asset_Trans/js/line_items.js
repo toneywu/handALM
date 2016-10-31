@@ -223,7 +223,7 @@ function insertLineData(asset_trans_line, current_view){ //将数据写入到对
       //console.log(propertyName+"="+asset_trans_line[propertyName]);
       //console.log("#line_"+propertyName.concat(String(ln)) +"=="+ asset_trans_line[propertyName] );
       if ($("#line_"+propertyName.concat(String(ln))).is(':checkbox')) {
-        if (asset_trans_line[propertyName]=true) {
+        if (asset_trans_line[propertyName]==true) {
           document.getElementById("line_"+propertyName.concat(String(ln))).checked = true;
         }
       }else {
@@ -413,17 +413,17 @@ function insertTransLineElements(tableid, current_view) { //创建界面要素
       "<input style='width:153px;' type='text' name='line_date_end[" + prodln + "]' id='line_date_end" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
 
-      "<span class='input_group ig_location'>"+
+      "<span class='input_group'>"+
       "<label id='line_target_location" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_LOCATION')+" <span class='required'>*</span></label>"+
       "<input class='sqsEnabled' style='width:153px;' type='text' name='line_target_location[" + prodln + "]' id='line_target_location" + prodln + "' maxlength='50' value='' title=''>"+
       "<input type='hidden' name='line_target_location_id[" + prodln + "]' id='line_target_location_id" + prodln + "' value='' />"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openLocationPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
-      "<span class='input_group ig_location'>"+
+      "<span class='input_group'>"+
       "<label id='line_target_location_desc" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_LOCATION_DESC')+"</label>"+
       "<input style='width:153px;' type='text' name='line_target_location_desc[" + prodln + "]' id='line_target_location_desc" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
-      "<span class='input_group ig_rack_position_desc'>"+
+      "<span class='input_group'>"+
       "<label id='line_target_rack_position_desc" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_RACK')+" <span class='required'>*</span></label>"+
       "<input style='width:153px;' type='text' name='line_target_rack_position_desc[" + prodln + "]' id='line_target_rack_position_desc" + prodln + "' maxlength='50' value='' title=''>"+
       "<input type='hidden' name='line_target_rack_position_data[" + prodln + "]' id='line_target_rack_position_data" + prodln + "' value='' />"+
@@ -516,9 +516,10 @@ function LineDescElement(prefix_name,target_obj_name, current_obj_name, obj_labe
     target_obj_val = $("#"+prefix_name+target_obj_name+ln).val();
   }
 
-  current_objval_val = $("#"+prefix_name+target_objval_name+ln).val()
+  current_objval_val = $("#"+prefix_name+current_objval_name+ln).val()
   target_objval_val = $("#"+prefix_name+target_objval_name+ln).val();
 
+//console.log( current_obj_val+", "+target_obj_val+", "+target_objval_name+", "+current_objval_name);
   if(current_objval_name=="current_asset_status"){
   	current_objval_val = hat_asset_status_list.filter(function(obj) {
                                 return obj.name === current_objval_val;
@@ -530,7 +531,7 @@ function LineDescElement(prefix_name,target_obj_name, current_obj_name, obj_labe
                               })[0].value;
 	}
 
- // console.log( current_obj_val+", "+target_obj_val+", "+target_objval_name+", "+current_objval_name);
+//  console.log( current_obj_val+", "+target_obj_val+", "+target_objval_name+", "+current_objval_name);
   if (typeof current_obj_name != 'undefined' && current_obj_name!="") {
     //如果当前值不为空
     //将显示为XXX字段由XXX变更为XXX

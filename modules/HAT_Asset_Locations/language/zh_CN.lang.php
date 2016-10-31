@@ -99,4 +99,5 @@ $mod_strings = array (
   'LBL_PLACEHOLDER'=>'占位',
   'LBL_ADD_PLACEHOLDER'=>'分配机柜空间',
   'LBL_BTN_SELECT'=>'选中此项',
+
 );
