@@ -223,6 +223,10 @@ class HAM_SRViewEdit extends ViewEdit
             $sr_num_html=$this->bean->sr_number.'<input type="hidden" value="'.$this->bean->sr_number.'" id="sr_number" name="sr_number">';
         }
         $this->ss->assign('SR_NUMBER',$sr_num_html);
+        
+        if($_REQUEST['idDuplicate']==true){
+        	$this->sr_status='DRAFT';
+        }
 
         parent::Display();
         

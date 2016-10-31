@@ -147,7 +147,11 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 		//or refer to the asset module as the first customzation module with this feature
 		global $app_list_strings, $timedate;
 		$woop_fields = $this->get_list_view_array();
-
+		//add by yuan.chen
+		$current_bean = BeanFactory::getBean("HAM_WOOP",$this->id);
+		$woop_fields['DATE_ACTUAL_START']=$current_bean->date_actual_start;
+		$woop_fields['DATE_ACTUAL_FINISH']=$current_bean->date_actual_finish;
+		
 		if (isset ($_GET['record'])) {
 			$ham_wo_id = $_GET['record'];
 		} else {
