@@ -49,6 +49,7 @@ $app_list_strings['haa_code_module_list']=array (
   'asset_qualification'=>'Asset Qualifications',
   'qualification'=>'Qualifications',
   'wo'=>'Activities/Work Orders',
+  'revenue' => 'Revenue/Expenditure Trans',
   'flexform'=>'FlexForm Extended Fields',
 
 );
@@ -60,9 +61,9 @@ $app_list_strings['haa_code_type_list']=array (
   'accounts_nature' => 'accounts_nature',
   'accounts_org_type' => 'accounts_org_type',
   'accounts_customer_class' => 'accounts_customer_class',
-  'contract_business_type' => 'contract_business_type',  
   'contact_business_type'=>'contact_business_type',
   'contact_id_type'=>'contact_id_type',
+  'contract_business_type' => 'contract_business_type',
   'contract_media_type' => 'contract_media_type',
   'contract_revision' => 'contract_revision',
   'contract_type' => 'contract_type',
@@ -71,5 +72,7 @@ $app_list_strings['haa_code_type_list']=array (
   'qualification_type'=>'qualification_type',
   'flexform_extended_list'=>'flexform_extended_list',
   'tasks_type'=>'tasks_type',
-  'wo_activity_type'=>'wo_activity_type'
+  'wo_activity_type'=>'wo_activity_type',
+  'revenue_expense_group' => 'revenue_expense_group',
+  'revenue_expense_type' => 'revenue_expense_type',
 );
