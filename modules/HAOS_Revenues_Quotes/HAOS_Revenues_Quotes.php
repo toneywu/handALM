@@ -52,11 +52,34 @@ class HAOS_Revenues_Quotes extends HAOS_Revenues_Quotes_sugar {
 	function save($check_notify = FALSE){
 		global $sugar_config;
 
+		
+		//生成收支项编号
+		//费用组对应的列表代码的TAG维护编码规则名称
+		if ($this->wo_number == '') {
+			$bean_codes = BeanFactory :: getBean('HAA_Codes', $this->haa_codes_id_c);//以参数传值时只能传ID值，否则发创建Bean，因此用以下方法创建。
+			$bean_numbering = BeanFactory :: getBean('HAA_Numbering_Rule')->retrieve_by_string_fields(array('name'=>$bean_codes->code_tag));
+			if (!empty($bean_numbering)) {
+					//取得当前的编号
+				$this->revenue_quote_number = $bean_numbering->nextval;
+					//预生成下一个编号，并保存在$bean_numbering中
+				$current_number = ($bean_numbering->current_number) + 1;
+				$current_numberstr = "" . $current_number;
+				$padding_str = "";
+				for ($i = 0; $i < ($bean_numbering->min_num_strlength); $i++) {
+					$padding_str = $padding_str +"0";
+				}
+				$padding_str = substr($padding_str, 0, strlen($padding_str) - strlen($current_numberstr)) + $current_numberstr;
+				$nextval_str = ($bean_numbering->perfix) . $padding_str;
+				$bean_numbering->current_number = $current_number;
+				$bean_numbering->nextval = $nextval_str;
+				$bean_numbering->save();
+			}
+		}
+		
 		if (empty($this->id)  || $this->new_with_id){
 			if(isset($_POST['group_id'])) unset($_POST['group_id']);
 			if(isset($_POST['product_id'])) unset($_POST['product_id']);
 		}
-
 		require_once('modules/AOS_Products_Quotes/AOS_Utils.php');
 
 		perform_aos_save($this);
@@ -74,11 +97,10 @@ class HAOS_Revenues_Quotes extends HAOS_Revenues_Quotes_sugar {
 		$product_quote_group->parent_id = $this->id;
 		$product_quote_group->parent_type = $this->object_name;
 		$product_quote_group->save();*/
-
 		require_once('modules/AOS_Products_Quotes/AOS_Products_Quotes.php');
-        $productQuote = new AOS_Products_Quotes();
-        $productQuote->save_lines($_POST, $this, $groups, 'product_');
-}
+		$productQuote = new AOS_Products_Quotes();
+		$productQuote->save_lines($_POST, $this, $groups, 'product_');
+	}
 
 
 	function mark_deleted($id)

@@ -238,7 +238,7 @@ array (
             'name' => 'contract_revision_c',
             'studio' => 'visible',
             'label' => 'LBL_CONTRACT_REVISION',
-            'customCode' => '<input name="contract_revision_c" readonly="readonly" id="contract_revision_c" value="1"  type="text">',
+            'customCode' => '<input name="contract_revision_c" readonly="readonly" id="contract_revision_c" value="{$contract_revision}"  type="text">',
           ),
           1 => 
           array (

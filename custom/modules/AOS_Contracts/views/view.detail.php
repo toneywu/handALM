@@ -23,11 +23,13 @@ class AOS_ContractsViewDetail extends ViewDetail {
 			if (isset ($ff_id) && $ff_id != "") {
 				echo '<script src="modules/HAA_FF/ff_include.js"></script>';
 				echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="' . $ff_id . '">';
-				echo '<script> function call_ff() {
-					triger_setFF($("#haa_ff_id").val(),"AOS_Contracts","DetailView");
-					$(".expandLink").click();
-				}</script>';
-				echo '<script>call_ff()</script>';
+				echo '<script> 
+					function call_ff() {
+						triger_setFF($("#haa_ff_id").val(),"AOS_Contracts");
+						$(".expandLink").click();
+					}
+				</script>';
+				echo '<script>call_ff();</script>';
 			}
 		}
 		$this->displayLineItems();
@@ -58,7 +60,6 @@ class AOS_ContractsViewDetail extends ViewDetail {
 		$groupEnd = '';
 		$product = '';
 		$service = '';
-
 		while ($row = $focus->db->fetchByAssoc($result)) {
 
 			$line_item = new AOS_Products_Quotes();
@@ -191,12 +192,10 @@ class AOS_ContractsViewDetail extends ViewDetail {
 
 			}
 		}
-
 		$html .= $groupStart.$product.$service.$groupEnd;
 		$html .= "</table>";
 		echo '<script src="custom/modules/AOS_Products_Quotes/line_items.js"></script>';
 		echo "<script>replace_display_lines(" .json_encode($html). ");</script>";
-
 	}
 	function get_discount_string($type, $amount, $params, $locale, $sep){
 
