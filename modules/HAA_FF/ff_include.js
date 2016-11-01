@@ -230,11 +230,11 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
   	    //如果当前行可以清空，则进一步判断，当前区域是否是空白，如果当前区域也是空白，直接将当前区域清空
 		var hide_tr_bool=true;
 		$.each(mark_obj_tr.children("td"), function() {
-		  	if ($(this).text()!="" && !($(this).css("visibility")=="hidden" || $(this).css("display")=="none")) {
+		  	if ($(this).text().trim()!="" && !($(this).css("visibility")=="hidden" || $(this).css("display")=="none")) {
 		  		//如果当前字段有内容，并且有内容的字段没有隐藏，则认为当前行不为空
 		  		hide_tr_bool=false;
 		  		return false;//break for jquery each;
-		  	};
+		  	}
 		});
 
 
