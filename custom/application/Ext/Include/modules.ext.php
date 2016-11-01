@@ -385,6 +385,13 @@ $moduleList[] = 'HIT_IP_TRANS_BATCH';
 
  
  //WARNING: The contents of this file are auto-generated
+$beanList['HIT_Link_PO'] = 'HIT_Link_PO';
+$beanFiles['HIT_Link_PO'] = 'modules/HIT_Link_PO/HIT_Link_PO.php';
+$moduleList[] = 'HIT_Link_PO';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
 $beanList['HIT_ODF_REL'] = 'HIT_ODF_REL';
 $beanFiles['HIT_ODF_REL'] = 'modules/HIT_ODF_REL/HIT_ODF_REL.php';
 $moduleList[] = 'HIT_ODF_REL';

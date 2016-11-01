@@ -6,6 +6,13 @@ array (
   array (
     'templateMeta' => 
     array (
+      'includes' => 
+      array (
+        0 => 
+        array (
+          'file' => 'modules/HIT_ODF_REL/js/hit_odf_rel_editview.js',
+        ),
+      ),
       'maxColumns' => '2',
       'widths' => 
       array (
@@ -51,6 +58,7 @@ array (
           array (
             'name' => 'jump_number',
             'label' => 'LBL_JUMP_NUMBER',
+            'customCode' => '{$JUMP_NUMBER}',
           ),
         ),
         1 => 
@@ -73,7 +81,7 @@ array (
         array (
           0 => 
           array (
-            'name' => 'a_hat_asset_location',
+            'name' => 'a_hat_asset_locations',
             'studio' => 'visible',
             'label' => 'LBL_A_HAT_ASSET_LOCATIONS',
           ),
@@ -82,6 +90,14 @@ array (
             'name' => 'a_hit_racks',
             'studio' => 'visible',
             'label' => 'LBL_A_HIT_RACKS',
+			'displayParams' =>  array (
+              'initial_filter' => '&current_mode=1',//这一行代码是关键，从site对象取值。用initial_filter进行过滤。
+              'field_to_name_array' => //这里是从Location选择之后，将Location中可以获取到的一些值复制到对应的字段（与本例主题无关）
+              array (
+                'name' => 'a_hit_racks',
+                'id' => 'a_hit_racks_id',
+              ),
+            ),
           ),
         ),
         1 => 
@@ -135,6 +151,14 @@ array (
             'name' => 'b_hit_racks',
             'studio' => 'visible',
             'label' => 'LBL_B_HIT_RACKS',
+			'displayParams' =>  array (
+              'initial_filter' => '&current_mode=1',//这一行代码是关键，从site对象取值。用initial_filter进行过滤。
+              'field_to_name_array' => //这里是从Location选择之后，将Location中可以获取到的一些值复制到对应的字段（与本例主题无关）
+              array (
+                'name' => 'b_hit_racks',
+                'id' => 'b_hit_racks_id',
+              ),
+            ),
           ),
         ),
         1 => 
