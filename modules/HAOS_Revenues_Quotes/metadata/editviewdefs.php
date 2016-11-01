@@ -141,7 +141,7 @@ array (
           array (
             'name' => 'revenue_quote_number',
             'label' => 'LBL_REVENUE_QUOTE_NUMBER',
-            'customCode' => '<input id="revenue_quote_number" name="revenue_quote_number" size="30" maxlength="255" value="{$REVENUE_QUOTE_NUMBER}" disabled title="" type="text">',
+            'customCode' => '{$fields.revenue_quote_number.value}',
             ),
           1 => 'name',
           ),

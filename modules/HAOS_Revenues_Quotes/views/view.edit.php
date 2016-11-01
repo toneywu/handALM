@@ -16,28 +16,7 @@ class HAOS_Revenues_QuotesViewEdit extends ViewEdit {
 		$current_action = $this->action;
 		$this->ss->assign('FRAMEWORK_C',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id_c'));//分配显示业务框架
 
-       //TODO 收支项的编码规则取值地方待补充
-		$bean_site = BeanFactory :: getBean('HAM_Maint_Sites', $this->ham_maint_sites_id);
-		$bean_numbering = BeanFactory :: getBean('HAA_Numbering_Rule', $bean_site->wo_haa_numbering_rule_id);
-
-		if (!empty ($bean_numbering)) {
-				//取得当前的编号
-			$this->revenue_quote_number = $bean_numbering->nextval;
-				//预生成下一个编号，并保存在$bean_numbering中
-			$current_number = $bean_numbering->current_number + 1;
-			$current_numberstr = "" . $current_number;
-			$padding_str = "";
-			for ($i = 0; $i < $bean_numbering->min_num_strlength; $i++) {
-				$padding_str = $padding_str +"0";
-			}
-			$padding_str = substr($padding_str, 0, strlen($padding_str) - strlen($current_numberstr)) + $current_numberstr;
-			$nextval_str = $bean_numbering->perfix . $padding_str;
-			$bean_numbering->current_number = $current_number;
-			$bean_numbering->nextval = $nextval_str;
-			$bean_numbering->save();
-		}
-		$this->ss->assign('REVENUE_QUOTE_NUMBER',$this->revenue_quote_number);
-		//分配自动编号
+     
 		$this->populateBillContactInfo();
 		$this->populateParentInfo();
 		$this->populateInvoicesInfo();
