@@ -242,7 +242,8 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 			var hide_table_bool=true;
 			//如果当前行可以直接隐去，则进一步判断是否当前行所在的整个区块都可以直接隐去
 			$.each(mark_obj_tr.siblings().children("td"), function() {
-			  	if ($(this).text()!="" && !($(this).css("visibility")=="hidden" || $(this).css("display")=="none")) {
+			  	//if ($(this).text()!="" && !($(this).css("visibility")=="hidden" || $(this).css("display")=="none")) {
+			  		if ($(this).text()!="" && ($(this).css("visibility")!="hidden" || $(this).css("display")!="none")) {
 			  		//如果当前字段有内容，并且有内容的字段没有隐藏，则认为当前行不为空
 			  		hide_table_bool=false;
 			  		return false;//break for jquery each;
