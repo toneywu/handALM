@@ -1,59 +1,126 @@
+if(typeof(YAHOO.SUGAR) == 'undefined') {
+  $.getScript("include/javascript/sugarwidgets/SugarYUIWidgets.js");
+}
+
 var prodln = 0;
+
 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
 
 function openAssetPopup(ln){//本文件为行上选择资产的按钮
+  var eventOptions = jQuery.parseJSON($("#eventOptions").val());
   lineno=ln;
+  //console.log(eventOptions);
   var popupRequestData = {
     "call_back_function" : "setAssetReturn",
     "form_name" : "EditView",
     "field_to_name_array" : {
-      "id" : "line_hat_assets_hat_asset_transhat_assets_ida" + ln,
+      "id" : "line_asset_id" + ln,
       "name" : "line_asset" + ln,
       "asset_desc" : "line_name" + ln,
       "asset_status" : "line_current_asset_status" + ln,//注意，这一条目写的是Current
-      "hat_assets_accounts_name" : "line_target_organization" + ln,
-      "hat_assets_accountsaccounts_ida" : "line_account_id_c" + ln,
-      "hat_assets_contacts_name" : "line_target_person" + ln,
-      "hat_assets_contactscontacts_ida" : "line_contact_id_c" + ln,
-      "hat_asset_locations_hat_assets_name" : "line_target_location" + ln,
-      "hat_asset_locations_hat_assetshat_asset_locations_ida" : "line_hat_asset_locations_id_c" + ln,
-      "location_desc" : "line_target_location_desc" + ln,
+      "parent_asset" : "line_current_parent_asset" + ln,
+      "parent_asset_id" : "line_current_parent_asset_id" + ln,
+      "owning_org" : "line_current_owning_org" + ln,
+      "owning_org_id" : "line_current_owning_org_id" + ln,
+      "owning_person" : "line_current_owning_person" + ln,
+      "owning_person_id" : "line_current_owning_person_id" + ln,
+      "owning_person_desc" : "line_current_owning_person_desc" + ln,
+      "using_org" : "line_current_using_org" + ln,
+      "using_org_id" : "line_current_using_org_id" + ln,
+      "using_person" : "line_current_using_person" + ln,
+      "using_person_id" : "line_current_using_person_id" + ln,
+      "using_person_desc" : "line_current_using_person_desc" + ln,
+      "hat_asset_locations_hat_assets_name" : "line_current_location" + ln,
+      "hat_asset_locations_hat_assetshat_asset_locations_ida" : "line_current_location_id" + ln,
+      "location_desc" : "line_current_location_desc" + ln,
     }
   };
-  open_popup('HAT_Assets', 600, 850, '', true, true, popupRequestData);
+
+  var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());	
+  var popupFilter = '&current_mode='+global_eventOptions.asset_scope.toLowerCase()+'&defualt_list='+global_eventOptions.default_asset_list.toLowerCase()+'&wo_id='+source_wo_id+'&haa_frameworks_id_advanced='+$("#haa_frameworks_id").val();
+
+  open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
+
 }
 
 function setAssetReturn(popupReplyData){
+  //popupReplyData中lineno会做为行号一并返回
   set_return(popupReplyData);
   resetAsset(lineno);
 }
 
 
-
-function openAccountPopup(ln){
+function openParentAssetPopup(ln){//本文件为行上选择资产的按钮
   lineno=ln;
   var popupRequestData = {
     "call_back_function" : "set_return",
     "form_name" : "EditView",
     "field_to_name_array" : {
-      "name" : "line_target_organization" + ln,
-      "id" : "line_account_id_c" + ln,
+      "name" : "line_target_parent_asset" + ln,
+      "id" : "line_target_parent_asset_id" + ln,
     },
   };
-
-  open_popup('Accounts', 1000, 850,'' , true, true, popupRequestData);
+  var popupFilter = '&current_mode=asset&framework_advanced='+$("#haa_framework").val();
+  open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
 }
-function openContactPopup(ln){
+
+
+function openOwningOrgPopup(ln){
   lineno=ln;
   var popupRequestData = {
     "call_back_function" : "set_return",
     "form_name" : "EditView",
     "field_to_name_array" : {
-      "name" : "line_target_person" + ln,
-      "id" : "line_contact_id_c" + ln,
+      "name" : "line_target_owning_org" + ln,
+      "id" : "line_target_owning_org_id" + ln,
+    },
+  };
+  var popupFilter = '&frame_c_advanced='+$("#haa_framework").val();
+  open_popup('Accounts', 1000, 850,popupFilter, true, true, popupRequestData);
+}
+
+
+function openUsingOrgPopup(ln){
+  lineno=ln;
+  var popupRequestData = {
+    "call_back_function" : "set_return",
+    "form_name" : "EditView",
+    "field_to_name_array" : {
+      "name" : "line_target_using_org" + ln,
+      "id" : "line_target_using_org_id" + ln,
+    },
+  };
+  var popupFilter = '&frame_c_advanced='+$("#haa_framework").val();
+  open_popup('Accounts', 1000, 850,popupFilter , true, true, popupRequestData);
+}
+
+
+
+function openOwningPersonPopup(ln){
+  lineno=ln;
+  var popupRequestData = {
+    "call_back_function" : "set_return",
+    "form_name" : "EditView",
+    "field_to_name_array" : {
+      "name" : "line_target_owning_person" + ln,
+      "id" : "line_target_owning_person_id" + ln,
     }
   };
-  var popupFilter = '&account_locked=ture&account_name_advanced='+$("#line_target_organization"+ln).val();
+  var popupFilter = '&account_locked=ture&account_name_advanced='+$("#line_target_owning_org"+ln).val();
+  open_popup('Contacts', 1000, 850,popupFilter, true, true, popupRequestData);
+}
+
+function openUsingPersonPopup(ln){
+  lineno=ln;
+  var popupRequestData = {
+    "call_back_function" : "set_return",
+    "form_name" : "EditView",
+    "field_to_name_array" : {
+      "name" : "line_target_using_person" + ln,
+      "id" : "line_target_using_person_id" + ln,
+    }
+  };
+  var popupFilter = '&account_locked=ture&account_name_advanced='+$("#line_target_using_org"+ln).val();
   open_popup('Contacts', 1000, 850,popupFilter, true, true, popupRequestData);
 }
 
@@ -65,86 +132,127 @@ function openLocationPopup(ln){
     "field_to_name_array" : {
       "name" : "line_target_location" + ln,
       "location_title" : "line_target_location_desc" + ln,
-      "id" : "line_hat_asset_locations_id_c" + ln
+      "id" : "line_target_location_id" + ln
     }
   };
   open_popup('HAT_Asset_Locations', 1000, 850, '', true, true, popupRequestData);
 }
 
-function insertTransLineHeader(tableid){
-  $("#line_items_label").hide();//隐藏SugarCRM字段
-  //alert(SUGAR.language.get('HAT_Asset_Trans', 'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE'));
 
-  tablehead = document.createElement("thead");
-  tablehead.id = tableid +"_head";
-  tablehead.style.display="none";
-  document.getElementById(tableid).appendChild(tablehead);
+function openRackPopup(ln){
+  lineno=ln;
+  var popupRequestData = {
+    "call_back_function" : "set_return",
+    "form_name" : "EditView",
+    "field_to_name_array" : {
+      "name" : "line_target_rack_position_desc" + ln,
+      "rackvalue" : "line_target_rack_position_data" + ln,
+      "rackid" : "line_target_parent_asset_id" + ln,
+      "rackname" : "line_target_parent_asset" + ln,
+    }
+  };
+  var popupFilter = '&current_mode=rackposition&defualt_list=wo_asset_trans'+'&wo_id='+source_wo_id+'&framework_advanced='+$("#haa_framework").val();
+  open_popup('HIT_Racks', 1200, 850, popupFilter, true, true, popupRequestData);
+}
 
-  var x=tablehead.insertRow(-1);
-  x.id='Trans_line_head';
-  var a=x.insertCell(0);
-  a.innerHTML='#';//SUGAR.language.get('HAT_Asset_Trans', 'LBL_TRANS_STATUS');
-  var b=x.insertCell(1);
-  b.innerHTML=SUGAR.language.get('HAT_Asset_Trans', 'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE');
-  var b1=x.insertCell(2);
-  b1.innerHTML=SUGAR.language.get('HAT_Asset_Trans', 'LBL_NAME');
-  var c=x.insertCell(3);
-  c.innerHTML=SUGAR.language.get('HAT_Asset_Trans_Batch', 'LBL_TARGET_ASSET_STATUS');
-  var d=x.insertCell(4);
-  d.innerHTML=SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_RESPONSIBLE_CENTER');
-  var e=x.insertCell(5);
-  e.innerHTML=SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_RESPONSIBLE_PERSON');
-  var f=x.insertCell(6);
-  f.innerHTML=SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_LOCATION');
-  var g=x.insertCell(7);
-  g.innerHTML=SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_LOCATION_DESC');
-  var h=x.insertCell(8);
-  h.innerHTML='&nbsp;';
+function addNewAssetLine(){
+	var popupRequestData = {
+			"call_back_function" : "setAddNewLineBtnReturn",
+			"form_name" : "EditView",
+			"field_to_name_array" : {
+	}};
+  var target_owning_org_id = $("#target_owning_org_id").val();
+  var popupFilter = '&owning_org_id_advanced='+target_owning_org_id+'&enable_it_rack_advanced=1';
+  open_popup('HAT_Assets', 1200, 850,popupFilter, true, true, popupRequestData, "MultiSelect", true);
+
+}
+
+function setAddNewLineBtnReturn(popupReplyData) {
+	set_return(popupReplyData);
+	var idJson = popupReplyData.selection_list;
+	console.log(popupReplyData);
+	for(var p in idJson){
+		console.log(idJson[p]);
+		$.ajax({
+			url:'index.php?to_pdf=true&module=HAT_Asset_Trans&action=syncHtmlPage&record='+idJson[p],
+			success: function (msg) {
+				console.log(msg);
+				insertLineData($.parseJSON(msg),'EditView');
+				console.log("当前行号="+prodln);
+				resetAsset((prodln-1));
+			},
+			error: function () { //失败
+				alert('Error loading document');
+			}
+		});
+	};
+	
+	// 设置行号
+	resetLineNum();
 }
 
 
-function insertLineData(asset_trans_line ){ //将数据写入到对应的行字段中
-  //console.log(asset_trans_line);
+/******************************
+/* 加载表头
+/*******************************/
+function insertTransLineHeader(tableid){
+  $("#line_items_label").hide();//隐藏标签
+  var head_html="<tr>";
+  head_html +="<th width='3%'>#</th>";
+  head_html +="<th width='13%'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE')+"</th>";
+  head_html +="<th width='22%'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_NAME')+"</th>";
+  head_html +="<th width='55%'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_DESCRIPTION')+"</th>";
+  head_html +="<th width='8%'> </th>";
+  head_html +="<tr>";
+
+  $("#lineItems").append(head_html)
+}
+
+
+/******************************
+/* 加载表行数据，将具体的数据写入到insertTransLineElements创建出的界面要素中
+/*******************************/
+function insertLineData(asset_trans_line, current_view){ //将数据写入到对应的行字段中
+  console.log(asset_trans_line);
   var ln = 0;
   if(asset_trans_line.id != '0' && asset_trans_line.id !== ''){
-    ln = insertTransLineElements("lineItems");
-    $("#line_id".concat(String(ln))).val(asset_trans_line.id);
-    $("#line_asset".concat(String(ln))).val(asset_trans_line.asset_name);
-    $("#line_hat_assets_hat_asset_transhat_assets_ida".concat(String(ln))).val(asset_trans_line.asset_id);
-    $("#line_name".concat(String(ln))).val(asset_trans_line.line_name);
-    $("#line_target_asset_status".concat(String(ln))).val(asset_trans_line.target_asset_status);
-    $("#line_current_asset_status".concat(String(ln))).val(asset_trans_line.current_asset_status);
-    $("#line_target_organization".concat(String(ln))).val(asset_trans_line.target_account_name);
-    $("#line_account_id_c".concat(String(ln))).val(asset_trans_line.target_account_id);
-    $("#line_current_responsible_center".concat(String(ln))).val(asset_trans_line.current_responsible_center);
-    $("#line_target_person".concat(String(ln))).val(asset_trans_line.target_contact_name);
-    $("#line_contact_id_c".concat(String(ln))).val(asset_trans_line.target_contact_id);
-    $("#line_current_responsible_person".concat(String(ln))).val(asset_trans_line.current_responsible_person);
-    $("#line_target_location".concat(String(ln))).val(asset_trans_line.target_location_name);
-    $("#line_hat_asset_locations_id_c".concat(String(ln))).val(asset_trans_line.target_location_id);
-    $("#line_target_location_desc".concat(String(ln))).val(asset_trans_line.target_location_desc);
-    $("#line_current_location".concat(String(ln))).val(asset_trans_line.current_location);
-    $("#line_current_location_desc".concat(String(ln))).val(asset_trans_line.current_location_desc);
+    ln = insertTransLineElements("lineItems", current_view);
 
-    //$("#line_name".concat(String(ln))).val(asset_line.target_location_desc);
+    for(var propertyName in asset_trans_line) {
+      //这里直接遍历所有的属性（因此需要建立与Bean属性同名的各个字段）
+      //console.log(propertyName+"="+asset_trans_line[propertyName]);
+      //console.log("#line_"+propertyName.concat(String(ln)) +"=="+ asset_trans_line[propertyName] );
+      if ($("#line_"+propertyName.concat(String(ln))).is(':checkbox')) {
+        if (asset_trans_line[propertyName]==true) {
+          document.getElementById("line_"+propertyName.concat(String(ln))).checked = true;
+        }
+      }else {
+        //如果当前字段不是checkbox，就以val的形式赋值
+        $("#line_"+propertyName.concat(String(ln))).val(asset_trans_line[propertyName]);
+      }
+    }
+
     renderTransLine(ln);
   }
 }
 
-function insertTransLineElements(tableid) { //创建界面要素
+/******************************
+/* 创建出界面的字段要素（不包括填写值，填写值通过insertLineData完成
+/*******************************/
+function insertTransLineElements(tableid, current_view) { //创建界面要素
 //包括以下内容：1）显示头，2）定义SQS对象，3）定义界面显示的可见字段，4）界面行编辑器界面
   if (document.getElementById(tableid + '_head') !== null) {
     document.getElementById(tableid + '_head').style.display = "";
   }
 
-  sqs_objects["line_asset[" + prodln + "]"] = {
+/*  sqs_objects["line_asset[" + prodln + "]"] = {
     "form": "EditView",
     "method": "query",
     "modules": ["HAT_Assets"],
     "group": "or",
     "field_list": ["name", "id", "asset_desc", "asset_status", "hat_assets_accountsaccounts_ida"],
-    "populate_list": ["line_asset[" + prodln + "]", "line_hat_assets_hat_asset_transhat_assets_ida[" + prodln + "]", "line_name[" + prodln + "]", "line_target_asset_status[" + prodln + "]", "line_target_organization[" + prodln + "]"],
-    "required_list": ["line_hat_assets_hat_asset_transhat_assets_ida[" + prodln + "]"],
+    "populate_list": ["line_asset[" + prodln + "]", "line_asset_id[" + prodln + "]", "line_name[" + prodln + "]", "line_target_asset_status[" + prodln + "]", "line_target_organization[" + prodln + "]"],
+    "required_list": ["line_asset_id[" + prodln + "]"],
     "conditions": [{
       "name": "name",
       "op": "like_custom",
@@ -200,8 +308,8 @@ function insertTransLineElements(tableid) { //创建界面要素
     "modules": ["HAT_Asset_Locations"],
     "group": "or",
     "field_list": ["name", "id","location_title"],
-    "populate_list": ["line_target_location[" + prodln + "]", "line_hat_asset_locations_id_c[" + prodln + "]", "line_target_location_desc[" + prodln + "]"],
-    "required_list": ["line_hat_asset_locations_id_c[" + prodln + "]"],
+    "populate_list": ["line_target_location[" + prodln + "]", "line_hat_asset_locations_id[" + prodln + "]", "line_target_location_desc[" + prodln + "]"],
+    "required_list": ["line_hat_asset_locations_id[" + prodln + "]"],
     "conditions": [{
       "name": "name",
       "op": "like_custom",
@@ -213,7 +321,7 @@ function insertTransLineElements(tableid) { //创建界面要素
     // "post_onblur_function": "resetAsset(" + prodln + ");",
     "no_match_text": "No Match"
   };
-
+*/
   tablebody = document.createElement("tbody");
   tablebody.id = "line_body" + prodln;
   document.getElementById(tableid).appendChild(tablebody);
@@ -226,24 +334,12 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<td><span name='displayed_line_num[" + prodln + "]' id='displayed_line_num" + prodln + "'>1</span></td>" +
       "<td><span name='displayed_line_asset[" + prodln + "]' id='displayed_line_asset" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_name[" + prodln + "]' id='displayed_line_name" + prodln + "'></span></td>"+
-      "<td><span name='displayed_line_target_asset_status[" + prodln + "]' id='displayed_line_target_asset_status" + prodln + "'></span></td>"+
-      "<td><span name='displayed_line_target_organization[" + prodln + "]' id='displayed_line_target_organization" + prodln + "'></span></td>"+
-      "<td><span name='displayed_line_target_person[" + prodln + "]' id='displayed_line_target_person" + prodln + "'></span></td>"+
-      "<td><span name='displayed_line_target_location[" + prodln + "]' id='displayed_line_target_location" + prodln + "'></span></td>"+
-      "<td><span name='displayed_line_target_location_desc[" + prodln + "]' id='displayed_line_target_location_desc" + prodln + "'></span></td>"+
-      "<td><input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'></td>";
-  var z2 = tablebody.insertRow(-1);
-  z2.id = 'asset_trans_line2_displayed' + prodln;
-  z2.innerHTML  =
-      "<td></td>" +
-      "<td></td>" +
-      "<td></td>" +
-      "<td><span name='displayed_line_current_asset_status[" + prodln + "]' id='displayed_line_current_asset_status" + prodln + "'>2</span></td>"+
-      "<td><span name='displayed_line_current_responsible_center[" + prodln + "]' id='displayed_line_current_responsible_center" + prodln + "'></span></td>"+
-      "<td><span name='displayed_line_current_responsible_person[" + prodln + "]' id='displayed_line_current_responsible_person" + prodln + "'></span></td>"+
-      "<td><span name='displayed_line_current_location[" + prodln + "]' id='displayed_line_current_location" + prodln + "'></span></td>"+
-      "<td><span name='displayed_line_current_location_desc[" + prodln + "]' id='displayed_line_current_location_desc" + prodln + "'></span></td>"+
-      "<td></td>";
+    "<td><span name='displayed_line_description[" + prodln + "]' id='displayed_line_description" + prodln + "'></span></td>";
+
+  if(current_view == "EditView" && $("#asset_trans_status").val()=="DRAFT") {
+      z1.innerHTML+="<input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'>";
+  }
+
 
   var x = tablebody.insertRow(-1); //以下生成的是Line Editor
   x.id = 'asset_trans_editor' + prodln;
@@ -251,42 +347,95 @@ function insertTransLineElements(tableid) { //创建界面要素
 
   x.innerHTML  = "<td colSpan='9'><div class='lineEditor'>"+
       "<span class='input_group'>"+
-      "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE')+"<span class='required'>*</span></label>"+
+      "<label id='line_asset" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE')+"<span class='required'>*</span></label>"+
       "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_asset[" + prodln + "]' id='line_asset" + prodln + "' value='' title='' onblur='resetAsset("+prodln+")'>"+
-      "<input type='hidden' name='line_hat_assets_hat_asset_transhat_assets_ida[" + prodln + "]' id='line_hat_assets_hat_asset_transhat_assets_ida" + prodln + "' value=''>"+
+      "<input type='hidden' name='line_asset_id[" + prodln + "]' id='line_asset_id" + prodln + "' value=''>"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openAssetPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
       "<span class='input_group'>"+
-      "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_NAME')+" <span class='required'>*</span></label>"+
+      "<label id='line_name" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_NAME')+" <span class='required'>*</span></label>"+
       "<input style='width:225px;'  autocomplete='off' type='text' name='line_name[" + prodln + "]' id='line_name" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
       "<span class='input_group'>"+
-      "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_ASSET_STATUS')+"</label>"+
+      "<label id='line_target_asset_status" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_ASSET_STATUS')+"</label>"+
       "<input style='width:78px;' type='hidden' readonly='readonly' name='line_target_asset_status[" + prodln + "]' id='line_target_asset_status" + prodln + "'  value='' title=''>"+
       "<span id='line_target_asset_status_displayed" + prodln + "' ></span>"+
       "</span>"+
-      "<span class='input_group'>"+
-      "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_RESPONSIBLE_CENTER')+" <span class='required'>*</span></label>"+
-      "<input class='sqsEnabled' style='width:153px;' autocomplete='off' type='text' name='line_target_organization[" + prodln + "]' id='line_target_organization" + prodln + "' value='' title='' >"+
-      "<input type='hidden' name='line_account_id_c[" + prodln + "]' id='line_account_id_c" + prodln + "' value='' />"+
-      "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openAccountPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+      "<span class='input_group ig_parent_asset'>"+
+      "<label id='line_target_parent_asset" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_PARENT_ASSET')+"</label>"+
+      "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_target_parent_asset[" + prodln + "]' id='line_target_parent_asset" + prodln + "' value='' title='' onblur='resetAsset("+prodln+")'>"+
+      "<input type='hidden' name='line_target_parent_asset_id[" + prodln + "]' id='line_target_parent_asset_id" + prodln + "' value=''>"+
+      "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openParentAssetPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
-      "<span class='input_group'>"+
-      "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_RESPONSIBLE_PERSON')+"</label>"+
-      "<input class='sqsEnabled' style=' width:103px;' type='text' name='line_target_person[" + prodln + "]' id='line_target_person" + prodln + "' maxlength='50' value='' title=''>"+
-      "<input type='hidden' name='line_contact_id_c[" + prodln + "]' id='line_contact_id_c" + prodln + "' value='' />"+
-      "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openContactPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+      "<span class='input_group ig_owning_org'>"+
+      "<label id='line_target_owning_org" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_RESPONSIBLE_CENTER')+" <span class='required'>*</span></label>"+
+      "<input class='sqsEnabled' style='width:153px;' autocomplete='off' type='text' name='line_target_owning_org[" + prodln + "]' id='line_target_owning_org" + prodln + "' value='' title='' >"+
+      "<input type='hidden' name='line_target_owning_org_id[" + prodln + "]' id='line_target_owning_org_id" + prodln + "' value='' />"+
+      "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openOwningOrgPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
+      "<span class='input_group ig_owning_person_list ig_owning_person'>"+
+      "<label id='line_target_owning_person" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_OWNING_PERSON')+"</label>"+
+      "<input class='sqsEnabled' style='width:103px;' type='text' name='line_target_owning_person[" + prodln + "]' id='line_target_owning_person" + prodln + "' maxlength='50' value='' title=''>"+
+      "<input type='hidden' name='line_target_owning_person_id[" + prodln + "]' id='line_target_owning_person_id" + prodln + "' value='' />"+
+      "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openOwningPersonPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+      "</span>"+
+      "<span class='input_group ig_owning_person_desc ig_owning_person'>"+
+      "<label id='line_target_owning_person_desc" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_OWNING_PERSON')+"</label>"+
+      "<input style='width:103px;' name='line_target_owning_person_desc[" + prodln + "]' id='line_target_owning_person_desc" + prodln + "' value='' />"+
+      "</span>"+
+      "<span class='input_group ig_using_org'>"+
+      "<label id='line_target_using_org" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_USING_ORG')+" <span class='required'>*</span></label>"+
+      "<input class='sqsEnabled' style='width:153px;' autocomplete='off' type='text' name='line_target_using_org[" + prodln + "]' id='line_target_using_org" + prodln + "' value='' title='' >"+
+      "<input type='hidden' name='line_target_using_org_id[" + prodln + "]' id='line_target_using_org_id" + prodln + "' value='' />"+
+      "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openUsingOrgPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+      "</span>"+
+      "<span class='input_group ig_using_person_list ig_using_person'>"+
+      "<label id='line_target_using_person" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_USING_PERSON')+"</label>"+
+      "<input class='sqsEnabled' style='width:103px;' type='text' name='line_target_using_person[" + prodln + "]' id='line_target_using_person" + prodln + "' maxlength='50' value='' title=''>"+
+      "<input type='hidden' name='line_target_using_person_id[" + prodln + "]' id='line_target_using_person_id" + prodln + "' value='' />"+
+      "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openUsingPersonPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+      "</span>"+
+      "<span class='input_group ig_using_person_desc ig_using_person'>"+
+      "<label id='line_target_using_person_desc" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_USING_PERSON')+"</label>"+
+      "<input style='width:103px;' type='text' name='line_target_using_person_desc[" + prodln + "]' id='line_target_using_person_desc" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
+      //失效时间
       "<span class='input_group'>"+
-      "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_LOCATION')+" <span class='required'>*</span></label>"+
-      "<input class='sqsEnabled' style=' width:103px;' type='text' name='line_target_location[" + prodln + "]' id='line_target_location" + prodln + "' maxlength='50' value='' title=''>"+
-      "<input type='hidden' name='line_hat_asset_locations_id_c[" + prodln + "]' id='line_hat_asset_locations_id_c" + prodln + "' value='' />"+
+      "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_INACTIVE_USING')+" </label>"+
+      "<input name='line_inactive_using[" + prodln + "]'  type='checkbox' id='line_inactive_using" + prodln + "'  value='' title='"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_INACTIVE_USING')+"' onclick=inactiveUsingLine("+prodln+")></input>"+
+      "</span>"+
+      "<span class='input_group ig_location'>"+
+      "<label id='line_date_start" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_DATE_START')+"</label>"+
+      "<input style='width:153px;' type='text' name='line_date_start[" + prodln + "]' id='line_date_start" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
+      "<span class='input_group ig_location'>"+
+      "<label id='line_date_end" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_DATE_END')+"</label>"+
+      "<input style='width:153px;' type='text' name='line_date_end[" + prodln + "]' id='line_date_end" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
+
+      "<span class='input_group'>"+
+      "<label id='line_target_location" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_LOCATION')+" <span class='required'>*</span></label>"+
+      "<input class='sqsEnabled' style='width:153px;' type='text' name='line_target_location[" + prodln + "]' id='line_target_location" + prodln + "' maxlength='50' value='' title=''>"+
+      "<input type='hidden' name='line_target_location_id[" + prodln + "]' id='line_target_location_id" + prodln + "' value='' />"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openLocationPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
       "<span class='input_group'>"+
-      "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_LOCATION_DESC')+"</label>"+
-      "<input style=' width:153px;' type='text' name='line_target_location_desc[" + prodln + "]' id='line_target_location_desc" + prodln + "' maxlength='50' value='' title=''>"+
+      "<label id='line_target_location_desc" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_LOCATION_DESC')+"</label>"+
+      "<input style='width:153px;' type='text' name='line_target_location_desc[" + prodln + "]' id='line_target_location_desc" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
+      "<span class='input_group'>"+
+      "<label id='line_target_rack_position_desc" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_RACK')+" <span class='required'>*</span></label>"+
+      "<input style='width:153px;' type='text' name='line_target_rack_position_desc[" + prodln + "]' id='line_target_rack_position_desc" + prodln + "' maxlength='50' value='' title=''>"+
+      "<input type='hidden' name='line_target_rack_position_data[" + prodln + "]' id='line_target_rack_position_data" + prodln + "' value='' />"+
+      "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openRackPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+      "</span>"+
+      
+
+/*      "<span class='input_group ig_location'>"+
+      "<label id='line_status" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_STATUS')+"</label>"+
+      "<input style='width:153px;' type='text' name='line_status[" + prodln + "]' id='line_status" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+*/
+      //end 
       "<input type='hidden' name='line_deleted[" + prodln + "]' id='line_deleted" + prodln + "' value='0'>"+
       "<input type='hidden' name='line_id[" + prodln + "]' id='line_id" + prodln + "' value=''>"+
 
@@ -296,126 +445,256 @@ function insertTransLineElements(tableid) { //创建界面要素
         // "<input style='float:right;' type='button' id='btn_LineEditorClose" + prodln + "' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE') + "'onclick='LineEditorClose(" + prodln + ")>"+
       "<button type='button' id='btn_LineEditorClose" + prodln + "' class='button btn_save' value='" + SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE') + "' tabindex='116' onclick='LineEditorClose(" + prodln + ",\"line_\")'>"+SUGAR.language.get('app_strings', 'LBL_SAVE_BUTTON_LABEL')+" & "+SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE')+" <img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button>"+
 
-      "<input type='hidden' name='line_current_asset_status[" + prodln + "]' id='line_current_asset_status" + prodln + "' maxlength='50' value='' title=''>"+
-      "<input type='hidden' name='line_current_responsible_center[" + prodln + "]' id='line_current_responsible_center" + prodln + "' maxlength='50' value='' title='' >"+
-      "<input type='hidden' name='line_current_responsible_person[" + prodln + "]' id='line_current_responsible_person" + prodln + "'  maxlength='50' value='' title='' >"+
+      "<input type='hidden' name='line_current_parent_asset[" + prodln + "]' id='line_current_parent_asset" + prodln + "'  value='' title='' >"+
+      "<input type='hidden' name='line_current_parent_asset_id[" + prodln + "]' id='line_current_parent_asset_id" + prodln + "'  value='' title='' >"+
+      "<input type='hidden' name='line_current_using_org_id[" + prodln + "]' id='line_current_using_org_id" + prodln + "'  value='' title='' >"+
+      "<input type='hidden' name='line_current_using_org[" + prodln + "]' id='line_current_using_org" + prodln + "'  value='' title='' >"+
+      "<input type='hidden' name='line_current_owning_org_id[" + prodln + "]' id='line_current_owning_org_id" + prodln + "'  value='' title=''>"+
+      "<input type='hidden' name='line_current_owning_org[" + prodln + "]' id='line_current_owning_org" + prodln + "' value='' title=''>"+
+      "<input type='hidden' name='line_current_location_id[" + prodln + "]' id='line_current_location_id" + prodln + "'  value='' title='' >"+
       "<input type='hidden' name='line_current_location[" + prodln + "]' id='line_current_location" + prodln + "'  value='' title='' >"+
-      "<input type='hidden' name='line_current_location_desc[" + prodln + "]' id='line_current_location_desc" + prodln + "'  maxlength='50' value='' title='' >"+
+      "<input type='hidden' name='line_current_location_desc[" + prodln + "]' id='line_current_location_desc" + prodln + "'  value='' title='' >"+
+      "<input type='hidden' name='line_current_using_person[" + prodln + "]' id='line_current_using_person" + prodln + "'  value='' title='' >"+
+      "<input type='hidden' name='line_current_using_person_id[" + prodln + "]' id='line_current_using_person_id" + prodln + "'  value='' title='' >"+
+      "<input type='hidden' name='line_current_using_person_desc[" + prodln + "]' id='line_current_using_person_desc" + prodln + "'  value='' title='' >"+
+      "<input type='hidden' name='line_current_asset_status[" + prodln + "]' id='line_current_asset_status" + prodln + "'  value='' title=''>"+
+      "<input type='hidden' name='line_current_owning_person_id[" + prodln + "]' id='line_current_owning_person_id" + prodln + "'  value='' title='' >"+
+      "<input type='hidden' name='line_current_owning_person[" + prodln + "]' id='line_current_owning_person" + prodln + "'  value='' title='' >"+
+      "<input type='hidden' name='line_current_owning_person_desc[" + prodln + "]' id='line_current_owning_person_desc" + prodln + "'  value='' title='' >"+
+      "<input type='hidden' name='line_description[" + prodln + "]' id='line_description" + prodln + "'  value='' title='' >"+
       "</div></td>";
 
   addToValidate('EditView', 'line_asset'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Asset_Trans_Batch', 'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE'));
   addToValidate('EditView', 'line_name'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Asset_Trans_Batch', 'LBL_NAME'));
   addToValidate('EditView', 'line_target_organization'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Asset_Trans_Batch', 'LBL_TARGET_RESPONSIBLE_CENTER'));
   addToValidate('EditView', 'line_target_location'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Asset_Trans_Batch', 'LBL_TARGET_LOCATION'));
-
-  renderTransLine(prodln);
+ //renderTransLine(prodln);
 
   prodln++;
 
   return prodln - 1;
 }
 
+function generateLineDesc(ln){
+	//用于生成说明文字
+  //例如XXX字段由XX变更为XXX
+	var LineDesc="";
+  LineDesc += LineDescElement("line_","target_asset_status","current_asset_status","LBL_ASSET_STATUS",ln,"target_asset_status","current_asset_status");
+  LineDesc += LineDescElement("line_","target_parent_asset_id","current_parent_asset_id","LBL_PARENT_ASSET",ln,"target_parent_asset","current_parent_asset");
+	LineDesc += LineDescElement("line_","target_owning_org_id","current_owning_org_id","LBL_OWING_ORG",ln,"target_owning_org","current_owning_org");
+  LineDesc += LineDescElement("line_","target_owning_person_id","current_owning_person_id","LBL_OWNING_PERSON",ln,"target_owning_person","current_owning_person");
+
+  if($("#line_inactive_using"+ln).is(':checked')){ //如果失效的Checkbox=Y，则显示已经清空组织
+    LineDesc += LineDescElement("line_","","current_using_org_id","LBL_USING_ORG",ln,"","current_using_org");
+    LineDesc += LineDescElement("line_","","current_using_person_id","LBL_USING_PERSON",ln,"","current_using_person");
+  }else{
+    //否则的话，继续对组织数据进行对比
+    LineDesc += LineDescElement("line_","target_using_org_id","current_using_org_id","LBL_USING_ORG",ln,"target_using_org","current_using_org");
+    LineDesc += LineDescElement("line_","target_using_person_id","current_using_person_id","LBL_USING_PERSON",ln,"target_using_person","current_using_person");
+  }
+
+  LineDesc += LineDescElement("line_","target_location_id","current_location_id","LBL_LOCATION",ln,"target_location","current_location");
+  LineDesc += LineDescElement("line_","target_location_desc","current_location_desc","LBL_LOCATION_DESC",ln,"target_location_desc","current_location_desc");
+  LineDesc += LineDescElement("line_","target_rack_position_desc","","LBL_RACK",ln,"target_rack_position_desc","");
+
+	$("#line_description"+ln).val(LineDesc);
+};
+
+function LineDescElement(prefix_name,target_obj_name, current_obj_name, obj_label, ln, target_objval_name, current_objval_name) {
+  var result="";
+  //对字段进行比较，以生成字段变更对应的文字描述。
+  var current_obj_val, target_obj_val, current_objval_val, target_objval_val
+  if (typeof $("#"+prefix_name+current_obj_name+ln).val()=="undefined") {
+    current_obj_val = "";
+  } else {
+    current_obj_val = $("#"+prefix_name+current_obj_name+ln).val();
+  }
+
+  if (typeof $("#"+prefix_name+target_obj_name+ln).val()=="undefined") {
+    target_obj_val="";
+  }else{
+    target_obj_val = $("#"+prefix_name+target_obj_name+ln).val();
+  }
+
+  current_objval_val = $("#"+prefix_name+current_objval_name+ln).val()
+  target_objval_val = $("#"+prefix_name+target_objval_name+ln).val();
+
+//console.log( current_obj_val+", "+target_obj_val+", "+target_objval_name+", "+current_objval_name);
+  if(current_objval_name=="current_asset_status"){
+  	current_objval_val = hat_asset_status_list.filter(function(obj) {
+                                return obj.name === current_objval_val;
+                              })[0].value;
+	}
+  if(target_objval_name=="target_asset_status"){
+  	target_objval_val = hat_asset_status_list.filter(function(obj) {
+                                return obj.name === target_objval_val;
+                              })[0].value;
+	}
+
+//  console.log( current_obj_val+", "+target_obj_val+", "+target_objval_name+", "+current_objval_name);
+  if (typeof current_obj_name != 'undefined' && current_obj_name!="") {
+    //如果当前值不为空
+    //将显示为XXX字段由XXX变更为XXX
+    if(current_obj_val!=target_obj_val) {
+      result  = SUGAR.language.get('HAT_Assets', obj_label);
+      result += SUGAR.language.get('HAT_Asset_Trans', 'LBL_CHANGE_FROM');//" is changed from "
+
+      if (current_obj_val=="") {
+        result += SUGAR.language.get('HAT_Asset_Trans', 'LBL_CHANGE_NULL');//如果当前对比值为空，则显示FROM NULL
+      } else {
+        result += current_objval_val;//如果当前对比值不为空，则显示FROM XXX值名称
+      }
+      result += SUGAR.language.get('HAT_Asset_Trans', 'LBL_CHANGE_FROM_TO');//" to "
+
+      if (target_obj_val=="") {
+        result += "<strong>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_CHANGE_NULL')+"</strong>. ";
+      }else {
+        result += "<strong>"+target_objval_val+"</strong>. ";
+      }
+    }
+  } else if ( $("#"+prefix_name+target_objval_name+ln).val()!="") {
+  	//如果当前对象为空，并且目标不为空
+  	//将显示为XXX字段变更为XXX
+      result  = SUGAR.language.get('HAT_Assets', obj_label);
+      result += SUGAR.language.get('HAT_Asset_Trans', 'LBL_CHANGE_TO');//" is changed to "
+      if (target_obj_val=="") {
+        result += "<strong>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_CHANGE_NULL')+"</strong>. ";
+      }else {
+        result += "<strong>"+target_objval_val+"</strong>. ";
+      }
+  }
+//console.log("#"+prefix_name+target_objval_name+ln+"="+$("#"+prefix_name+target_objval_name+ln).val());
+  return result;
+}
+
 function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
-  //alert(("#displayed_line_num"+ln)+"="+ $("#displayed_line_num"+ln).html());
-  $("#displayed_line_asset"+ln).html($("#line_asset"+ln).val());
+  generateLineDesc(ln);//去生成Description
+  resetEditorFields(ln);//初始化编辑状态下的一些字段
+  $("#displayed_line_asset"+ln).html("<a href='index.php?module=HAT_Assets&action=DetailView&record="+$("#line_asset_id"+ln).val()+"'>"+$("#line_asset"+ln).val()+"</a>");
   $("#displayed_line_name"+ln).html($("#line_name"+ln).val());
-  $("#displayed_line_target_asset_status"+ln).html($("#line_target_asset_status_displayed"+ln+" span").text());
-  $("#displayed_line_target_organization"+ln).html($("#line_target_organization"+ln).val());
-  $("#displayed_line_target_person"+ln).html($("#line_target_person"+ln).val());
-  $("#displayed_line_target_location"+ln).html($("#line_target_location"+ln).val());
-  $("#displayed_line_target_location_desc"+ln).html($("#line_target_location_desc"+ln).val());
-  $("#displayed_line_current_asset_status"+ln).html($("#lov_asset_status_list option[value='"+$("#line_current_asset_status"+ln).val()+"']").text());
-  $("#displayed_line_current_responsible_center"+ln).html($("#line_current_responsible_center"+ln).val());
-  $("#displayed_line_current_responsible_person"+ln).html($("#line_current_responsible_person"+ln).val());
-  $("#displayed_line_current_location"+ln).html($("#line_current_location"+ln).val());
-  $("#displayed_line_current_location_desc"+ln).html($("#line_current_location_desc"+ln).val());
+  $("#displayed_line_description"+ln).html($("#line_description"+ln).val());
+
+}
+
+
+function resetEditorFields(ln) {
+  //生成编辑行中的字段样式，如锁定一些字段，以及加颜色的字段
+  //以下处理当前资产的状态字段
+   var eventOptions = $("#eventOptions").val()!=""?jQuery.parseJSON($("#eventOptions").val()):"";
+
+  if (eventOptions!="") {
+
+    if (eventOptions.change_target_status=='1') { //如果头EventType需要变更
+       $("#line_target_asset_status"+ln).val(eventOptions.target_asset_status);//从头上复制当前的资产状态
+    } else {
+       $("#line_target_asset_status"+ln).val($("#line_current_asset_status"+ln).val());//目标状态=当前资产状态（保持不变）,以Value保存
+    }
+    var target_status_value = $("#line_target_asset_status"+ln).val();
+    var target_status_text = hat_asset_status_list.filter(function(obj) {
+                                return obj.name === target_status_value;
+                              })[0].value;
+    $("#line_target_asset_status_displayed"+ln).html("<span class='color_tag color_asset_status_"+target_status_value+"'>"+target_status_text+"</span>");
+
+
+    //判断是否要清空资产的使用组织及机柜上的信息
+    if(eventOptions.change_using_org == "EMPTY") {//判断是否需要清空使用组织
+      $("#line_target_using_org"+ln).val("");
+      $("#line_target_using_org_id"+ln).val("");
+    }
+    if(eventOptions.change_using_org == "EMPTY" || eventOptions.change_using_person) {//判断是否需要清空使用人。另外组织为空人一定为空
+      $("#line_target_using_person"+ln).val("");
+      $("#line_target_using_person_id"+ln).val("");
+      $("#line_target_using_person_desc"+ln).val("");
+    }
+    if(eventOptions.change_rack_position == "EMPTY") {//判断是否需要清空机枻
+      $("#line_target_rack_position_desc"+ln).val("");
+      $("#line_target_rack_position_data"+ln).val("");
+    }
+  }
 }
 
 function resetAsset(ln){ //在用户重新选择资产之后，会连带的更新资产相关的字段信息。
-  //alert(document.getElementById("line_current_responsible_center"+ln).value);
-  //alert($("#line_current_responsible_center"+ln).val());
-  if ($("#line_asset"+ln).val()=== '') { //如果资产字段为空，则将所有关联的字段全部清空
-    $("#line_hat_assets_hat_asset_transhat_assets_ida"+ln).val("");
-    $("#line_target_organization"+ln).val("");
-    $("#line_target_person"+ln).val("");
-    $("#line_target_location"+ln).val("");
-    $("#line_target_location_desc"+ln).val("");
-    $("#line_target_asset_status"+ln).val("");
-    $("#line_current_asset_status"+ln).val("");
-    $("#line_current_responsible_center"+ln).val("");
-    $("#line_current_responsible_person"+ln).val("");
+
+  if ($("#line_asset_id"+ln).val()=== '') { //如果资产字段为空，则将所有关联的字段全部清空
+    $("#line_asset_id"+ln).val("");
+    $("#line_current_owning_org"+ln).val("");
+    $("#line_current_using_org"+ln).val("");
+    $("#line_current_owning_org_id"+ln).val("");
+    $("#line_current_using_org_id"+ln).val("");
+    $("#line_current_owning_person"+ln).val("");
+    $("#line_current_using_person"+ln).val("");
+    $("#line_current_owning_person_id"+ln).val("");
+    $("#line_current_using_person_id"+ln).val("");
+    $("#line_current_owning_person_desc"+ln).val("");
+    $("#line_current_using_person_desc"+ln).val("");
     $("#line_current_location"+ln).val("");
     $("#line_current_location_desc"+ln).val("");
+    $("#line_current_asset_status"+ln).val("");
+    $("#line_current_parent_asset"+ln).val("");
+    $("#line_current_parent_asset_id"+ln).val("");
   }
-  //以下为Current的几个字段获得值，这几个字段为空时，直接从Target字段复制
-  //这几行的位置在Target清空之后，这样如果Target为空，则当前Current也会清空
-  if ($("#line_current_responsible_center"+ln).val()=== '') {
-    $("#line_current_responsible_center"+ln).val($("#line_target_organization"+ln).val());
-  }
-  if ($("#line_current_responsible_person"+ln).val()=== '') {
-    $("#line_current_responsible_person"+ln).val($("#line_target_person"+ln).val());
+
+    var eventOptions = $("#eventOptions").val()!=""?jQuery.parseJSON($("#eventOptions").val()):"";
+
+  if ($("#target_owning_org_id").val()!="" && (eventOptions.change_owning_org == "REQUIRED" ||eventOptions.change_owning_org == "OPTIONAL")){
+    $("#line_target_owning_org"+ln).val($("#target_owning_org").val());
+    $("#line_target_owning_org_id"+ln).val($("#target_owning_org_id").val());
   } else {
-    $("#line_contact_id_c"+ln).val('');
-  }
-  if ($("#line_current_location"+ln).val()=== '') {
-    $("#line_current_location"+ln).val($("#line_target_location"+ln).val());
-  }
-  if ($("#line_current_location_desc"+ln).val()=== '') {
-    $("#line_current_location_desc"+ln).val($("#line_target_location_desc"+ln).val());
+    $("#line_target_owning_org"+ln).val($("#line_current_owning_org"+ln).val());
+    $("#line_target_owning_org_id"+ln).val($("#line_current_owning_org_id"+ln).val());
   }
 
-  //TODO 这里直接读取了头字段，最好改为参数
-  //以下是根据Event Type的规则，对字段进行设置
-  var current_status_text=$("#line_current_asset_status"+ln).val();//current从Popup中返回的是Text，要以Value形式保存，否则会有多语言问题
-  var current_status_value = $("#lov_asset_status_list option").filter(function() {return $(this).html() == current_status_text;}).val()
-  $("#line_current_asset_status"+ln).val(current_status_value);
-
-  if($("#change_target_status").val()==1) { //如果头EventType需要变更
-    $("#line_target_asset_status"+ln).val( $("#target_asset_status").val());//目标为当前资产状态
+  if ($("#target_using_org_id").val()!="" && (eventOptions.change_using_org == "REQUIRED" ||eventOptions.change_using_org == "OPTIONAL")){
+    $("#line_target_using_org"+ln).val($("#target_using_org").val());
+    $("#line_target_using_org_id"+ln).val($("#target_using_org_id").val());
   } else {
-    $("#line_target_asset_status"+ln).val(current_status_value);//目标为当前资产状态,以Value保存
+    $("#line_target_using_org"+ln).val($("#line_current_using_org"+ln).val());
+    $("#line_target_using_org_id"+ln).val($("#line_current_using_org_id"+ln).val());
   }
-  var target_status_value = $("#line_target_asset_status"+ln).val();
-  var target_status_text = $("#lov_asset_status_list option[value='"+target_status_value+"']").text();
 
-  $("#line_target_asset_status_displayed"+ln).html("<span class='color_tag color_asset_status_"+target_status_value+"'>"+target_status_text+"</span>");
+  if (eventOptions.change_target_status=='1') {
+    $("#line_target_asset_status"+ln).val(eventOptions.target_asset_status);
+  }else{
+    $("#line_target_asset_status"+ln).val($("#line_current_asset_status"+ln).val());
+  }
+    $("#line_target_owning_person"+ln).val($("#line_current_owning_person"+ln).val());
+    $("#line_target_using_person"+ln).val($("#line_current_using_person"+ln).val());
+    $("#line_target_owning_person_id"+ln).val($("#line_current_owning_person_id"+ln).val());
+    $("#line_target_using_person_id"+ln).val($("#line_current_using_person_id"+ln).val());
+    $("#line_target_owning_person_desc"+ln).val($("#line_current_owning_person_desc"+ln).val());
+    $("#line_target_using_person_desc"+ln).val($("#line_current_using_person_desc"+ln).val());
+    $("#line_target_location"+ln).val($("#line_current_location"+ln).val());
+    $("#line_target_location_id"+ln).val($("#line_current_location_id"+ln).val());
+    $("#line_target_location_desc"+ln).val($("#line_current_location_desc"+ln).val());
+    $("#line_target_parent_asset"+ln).val($("#line_current_parent_asset"+ln).val());
+    $("#line_target_parent_asset_id"+ln).val($("#line_current_parent_asset_id"+ln).val());
+    $("#line_target_asset_status"+ln).val($("#line_current_asset_status"+ln).val());
 
-  if($("#change_organization").val()=='LOCKED') {//如果不可以更新目标组织
-    $("#line_target_organization"+ln).attr("readonly",true);
-    $("#line_target_organization"+ln+"~ button").css('display','none');
-  }
-  if($("#change_contact").val()=='LOCKED') {//如果不可以更新联系人
-    $("#line_target_person"+ln).attr("readonly",true);
-    $("#line_target_person"+ln+"~ button").css('display','none');
-  }
-  if($("#change_location").val()=='LOCKED') {//如果不可以更新地点
-    $("#line_target_location"+ln).attr("readonly",true);
-    $("#line_target_location"+ln+"~ button").css('display','none');
-  }
-  if($("#change_location_desc").val()=='LOCKED') {//如果不可以更地点说明
-    $("#line_target_location_desc"+ln).attr("readonly",true);
-  }
+  resetEditorFields(ln);
+
+
 }
 
 
-function insertTransLineFootor(tableid)
-{
-  tablefooter = document.createElement("tfoot");
-  document.getElementById(tableid).appendChild(tablefooter);
+function insertTransLineFootor(tableid) {
+    if($("#asset_trans_status").val()=="DRAFT") {
+      tablefooter = document.createElement("tfoot");
+      document.getElementById(tableid).appendChild(tablefooter);
 
-  var footer_row=tablefooter.insertRow(-1);
-  var footer_cell = footer_row.insertCell(0);
+      var footer_row=tablefooter.insertRow(-1);
+      var footer_cell = footer_row.insertCell(0);
 
-  footer_cell.scope="row";
-  footer_cell.colSpan="9";
-  footer_cell.innerHTML="<input id='btnAddNewLine' type='button' class='button btn_del' onclick='addNewLine(\"" +tableid+ "\")' value='+ "+SUGAR.language.get('HAT_Asset_Trans', 'LBL_BTN_ADD_TRANS_LINE')+"' />";
-  //TODO:添加一个Checkbox用于显示和隐藏当前组织、人员、地点……
+      footer_cell.scope="row";
+      footer_cell.colSpan="5";
+      footer_cell.innerHTML="<input id='btnAddNewLine' type='button' class='button btn_del' onclick='addNewLine(\"" +tableid+ "\")' value='+ "+SUGAR.language.get('HAT_Asset_Trans', 'LBL_BTN_ADD_TRANS_LINE')+"' />"
+	  +"<input id='btnNewLine' type='button' class='button btn_del' onclick='addNewAssetLine()' value='+ "+SUGAR.language.get('HAT_Asset_Trans', 'LBL_BTN_ADD_NEW_LINE')+"' />";
+      }
 }
 
 function addNewLine(tableid) {
   //alert("clicked")
   if (check_form('EditView')) {//只有必须填写的字段都填写了才可以新增
-    insertTransLineElements(tableid);//加入新行
+    insertTransLineElements(tableid,'EditView');//加入新行
     LineEditorShow(prodln - 1);       //打开行编辑器
   }
 }
@@ -453,14 +732,20 @@ function markLineDeleted(ln, key) {//删除当前行
 }
 
 function LineEditorShow(ln){ //显示行编辑器（先自动关闭所有的行编辑器，再打开当前行）
+  resetEventType();
+  
   if (prodln>1) {
     for (var i=0;i<prodln;i++) {
       LineEditorClose(i);
     }
   }
   $("#asset_trans_line1_displayed"+ln).hide();
-  $("#asset_trans_line2_displayed"+ln).hide();
   $("#asset_trans_editor"+ln).show();
+  if($("#target_using_org_id").val()!=null){
+	  //console.log($("#target_using_org_id").val());
+	  $("#line_target_using_org_id"+ln).val($("#target_using_org_id").val());
+	  $("#line_target_using_org"+ln).val($("#target_using_org").val());
+  }
 
 }
 
@@ -468,13 +753,12 @@ function LineEditorClose(ln) {//关闭行编辑器（显示为正常行）
   if (check_form('EditView')) {
     $("#asset_trans_editor"+ln).hide();
     $("#asset_trans_line1_displayed"+ln).show();
-    $("#asset_trans_line2_displayed"+ln).show();
     renderTransLine(ln);
-    resetLineNum_Bold();
+    resetLineNum();
   }
 }
 
-function resetLineNum_Bold() {//数行号
+function resetLineNum() {//数行号
   var j=0;
   for (var i=0;i<prodln;i++) {
     if ($("#line_deleted"+i).val()!=1) {//跳过已经删除的行（实际数据还没有删除，只是从界面隐藏）
@@ -484,4 +768,44 @@ function resetLineNum_Bold() {//数行号
   }
   //TODO：如果最终有效的行数，则将头标记为空
   //if (j==0) {}
+}
+
+function padleft0(obj) {//TODO 和hit_ip_trans中的一样，移动到公共函数库
+  return obj.toString().replace(/^[0-9]{1}$/, "0" + obj);  
+}
+function getnowtime() {//TODO 和hit_ip_trans中的一样，移动到公共函数库
+    var nowtime = new Date();
+    var year = nowtime.getFullYear();
+    var month = padleft0(nowtime.getMonth() + 1);
+    var day = padleft0(nowtime.getDate());
+    var hour = padleft0(nowtime.getHours());
+    var minute = padleft0(nowtime.getMinutes());
+    var second = padleft0(nowtime.getSeconds());
+    var millisecond = nowtime.getMilliseconds(); millisecond = millisecond.toString().length == 1 ? "00" + millisecond : millisecond.toString().length == 2 ? "0" + millisecond : millisecond;
+    return year + "-" + month + "-" + day + " " + hour + ":" + minute ;//+ ":" + second + "." + millisecond;
+}
+
+function inactiveUsingLine(ln){
+  if($("#line_inactive_using"+ln).is(':checked')){
+    //$("#line_inactive_using"+ln).prop("checked",'true');
+    document.getElementById("line_inactive_using"+ln).checked = true;
+    var mydate = new Date();
+    var currentDate=mydate.toLocaleString();
+    $("#line_date_end"+ln).val(getnowtime());
+/*    $("#line_inactive_using"+ln).val('0');
+    $("#line_inactive_using_val"+ln).val('0');
+        $("#displayed_line_inactive_using"+ln).attr("checked",true);
+        $("#displayed_line_inactive_using"+ln).prop("checked",true);
+*/  //
+  }else{
+    $("#line_inactive_using"+ln).removeAttr("checked");
+    $("#line_date_end"+ln).val("");
+/*    $("#line_status"+ln).val("EFFECTIVE");
+    $("#line_status_dis"+ln).val(SUGAR.language.get('HIT_IP_TRANS', 'LBL_EFFECTIVE'));
+
+        $("#displayed_line_inactive_using"+ln).removeAttr("checked");
+        $("#line_inactive_using"+ln).val('1');
+        $("#line_inactive_using_val"+ln).val('1');*/
+  }
+  
 }

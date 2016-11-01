@@ -24,9 +24,9 @@ function loadDataForNode(node, onCompleteCallback) {
 	var type = node.data.nodeType;
 
 	//console.log("try to load");
-	console.log(id);
+/*	console.log(id);
 	console.log(type);
-
+*/
 	$.ajax({//读取子地点
 		url: 'index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeNodes&id=' + id+"&type="+ type,
 		//dataType: "json",

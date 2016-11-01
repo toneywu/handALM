@@ -155,7 +155,7 @@ $dictionary['HAM_Work_Center_Res'] = array(
         'relationship' => 'ham_work_center_res_people',
         'vname' => 'LBL_WORK_CENTER_RES_PEOPLE_SUBPANEL_TITLE',
         'link_type' => 'many',
-        'module' => 'HAM_WORK_CENTER_PEOPLE',
+        'module' => 'HAM_Work_Center_People',
         'bean_name' => 'HAM_WORK_CENTER_PEOPLE',
         'source' => 'non-db',
 		),	

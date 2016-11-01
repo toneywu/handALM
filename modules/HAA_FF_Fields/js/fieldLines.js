@@ -66,24 +66,6 @@ function showModuleFields(){
 
     if(ff_module != ''){
 
-/*        var callback = {
-            success: function(result) {
-                flow_rel_modules = result.responseText;
-            }
-        }*/
-/*        var callback2 = {
-            success: function(result) {
-                ff_fields = result.responseText;
-                document.getElementById('btn_FieldLine').disabled = '';
-                console.log("ff_fields loaded");
-                console.log(ff_fields);
-            }
-        }
-
-        //YAHOO.util.Connect.asyncRequest ("GET", "index.php?module=AOW_WorkFlow&action=getModuleRelationships&aow_module="+ff_module,callback);
-        YAHOO.util.Connect.asyncRequest ("GET", "index.php?module=AOW_WorkFlow&action=getModuleFields&aow_value=&view=EditView&aow_module="+ff_module,callback2);
-*/
-
     $.ajax({//Load module fields
         url: "index.php?to_pdf=true&module=AOW_WorkFlow&action=getModuleFields&aow_value=&view=EditView&aow_module="+ff_module,
         //dataType: "json",
@@ -105,104 +87,7 @@ function showModuleFields(){
 
 }
 
-/*function showConditionCurrentModuleFields(ln, value){
 
-    if (typeof value === 'undefined') { value = ''; }
-
-    ff_module = document.getElementById('ff_module').value;
-    var rel_field = document.getElementById('aow_conditions_module_path' + ln).value;
-
-    if(ff_module != '' && rel_field != ''){
-
-        var callback = {
-            success: function(result) {
-                var fields = JSON.parse(result.responseText);
-
-                document.getElementById('aow_conditions_field'+ln).innerHTML = '';
-
-                var selector = document.getElementById('aow_conditions_field'+ln);
-                for (var i in fields) {
-                    selector.options[selector.options.length] = new Option(fields[i], i);
-                }
-
-                if(fields[value] != null ){
-                    document.getElementById('aow_conditions_field'+ln).value = value;
-                }
-
-                if(value == '') showModuleField(ln);
-
-            }
-        }
-
-        YAHOO.util.Connect.asyncRequest ("GET", "index.php?module=AOW_WorkFlow&action=getModuleFields&aow_module="+ff_module+"&view=JSON&rel_field="+rel_field+"&aow_value="+value,callback);
-
-    }
-
-}*/
-
-function showModuleField(ln, operator_value, type_value, field_value){/*
-    if (typeof operator_value === 'undefined') { operator_value = ''; }
-    if (typeof type_value === 'undefined') { type_value = ''; }
-    if (typeof field_value === 'undefined') { field_value = ''; }
-
-    var rel_field = document.getElementById('aow_conditions_module_path'+ln).value;
-    var aow_field = document.getElementById('aow_conditions_field'+ln).value;
-    if(aow_field != ''){
-
-        var callback = {
-            success: function(result) {
-                document.getElementById('aow_conditions_operatorInput'+ln).innerHTML = result.responseText;
-                SUGAR.util.evalScript(result.responseText);
-                document.getElementById('aow_conditions_operatorInput'+ln).onchange = function(){changeOperator(ln);};
-
-            },
-            failure: function(result) {
-                document.getElementById('aow_conditions_operatorInput'+ln).innerHTML = '';
-            }
-        }
-        var callback2 = {
-            success: function(result) {
-                document.getElementById('aow_conditions_fieldTypeInput'+ln).innerHTML = result.responseText;
-                SUGAR.util.evalScript(result.responseText);
-                document.getElementById('aow_conditions_fieldTypeInput'+ln).onchange = function(){showModuleFieldType(ln);};
-            },
-            failure: function(result) {
-                document.getElementById('aow_conditions_fieldTypeInput'+ln).innerHTML = '';
-            }
-        }
-        var callback3 = {
-            success: function(result) {
-                document.getElementById('aow_conditions_fieldInput'+ln).innerHTML = result.responseText;
-                SUGAR.util.evalScript(result.responseText);
-                enableQS(true);
-            },
-            failure: function(result) {
-                document.getElementById('aow_conditions_fieldInput'+ln).innerHTML = '';
-            }
-        }
-
-        var aow_operator_name = "aow_conditions_operator["+ln+"]";
-        var aow_field_type_name = "aow_conditions_value_type["+ln+"]";
-        var aow_field_name = "aow_conditions_value["+ln+"]";
-
-        YAHOO.util.Connect.asyncRequest ("GET", "index.php?module=AOW_WorkFlow&action=getModuleOperatorField&view="+action_sugar_grp1+"&aow_module="+ff_module+"&aow_fieldname="+aow_field+"&aow_newfieldname="+aow_operator_name+"&aow_value="+operator_value+"&rel_field="+rel_field,callback);
-        YAHOO.util.Connect.asyncRequest ("GET", "index.php?module=AOW_WorkFlow&action=getFieldTypeOptions&view="+action_sugar_grp1+"&aow_module="+ff_module+"&aow_fieldname="+aow_field+"&aow_newfieldname="+aow_field_type_name+"&aow_value="+type_value+"&rel_field="+rel_field,callback2);
-        YAHOO.util.Connect.asyncRequest ("GET", "index.php?module=AOW_WorkFlow&action=getModuleFieldType&view="+action_sugar_grp1+"&aow_module="+ff_module+"&aow_fieldname="+aow_field+"&aow_newfieldname="+aow_field_name+"&aow_value="+field_value+"&aow_type="+type_value+"&rel_field="+rel_field,callback3);
-
-    } else {
-        document.getElementById('aow_conditions_operatorInput'+ln).innerHTML = ''
-        document.getElementById('aow_conditions_fieldTypeInput'+ln).innerHTML = '';
-        document.getElementById('aow_conditions_fieldInput'+ln).innerHTML = '';
-    }
-
-    if(operator_value == 'is_null'){
-        hideElem('aow_conditions_fieldTypeInput' + ln);
-        hideElem('aow_conditions_fieldInput' + ln);
-    } else {
-        showElem('aow_conditions_fieldTypeInput' + ln);
-        showElem('aow_conditions_fieldInput' + ln);
-    }*/
-}
 
 function showModuleFieldType(ln, value){
     if (typeof value === 'undefined') { value = ''; }
@@ -224,6 +109,20 @@ function showModuleFieldType(ln, value){
     var aow_field_name = "aow_conditions_value["+ln+"]";
 
     YAHOO.util.Connect.asyncRequest ("GET", "index.php?module=AOW_WorkFlow&action=getModuleFieldType&view="+action_sugar_grp1+"&aow_module="+ff_module+"&aow_fieldname="+aow_field+"&aow_newfieldname="+aow_field_name+"&aow_value="+value+"&aow_type="+type_value+"&rel_field="+rel_field,callback);
+}
+
+function checkModuleField(ln) {
+    current_val= $("#ff_field_field"+ln).val();
+    for (var i=0;i<condln_count;i++){
+        //判断当前值是否已经被选择过，确保唯一性
+        if ( i!=ln && current_val == $("#ff_field_field"+i).val()) {
+            console.log(current_val+"("+i+")");
+            $("#ff_field_field"+ln).val("")
+            alert(SUGAR.language.get('app_strings', 'LBL_DUPLICATED_ERR'));
+            break;
+        }
+    }
+
 }
 
 
@@ -313,7 +212,7 @@ function insertFieldLine(){
     //b.style.width = '18%';
     var viewStyle = 'display:none';
     if(action_sugar_grp1 == 'EditView'){viewStyle = '';}
-    b.innerHTML = "<select style='width:158px;"+viewStyle+"' name='ff_field_field["+ condln +"]' id='ff_field_field" + condln + "' value='' title='' tabindex='115' onchange='showModuleField(" + condln + ");'>" + ff_fields + "</select>";
+    b.innerHTML = "<select style='width:158px;"+viewStyle+"' name='ff_field_field["+ condln +"]' id='ff_field_field" + condln + "' value='' title='' tabindex='115' onchange='checkModuleField(" + condln + ");'>" + ff_fields + "</select>";
     if(action_sugar_grp1 == 'EditView'){viewStyle = 'display:none';}else{viewStyle = '';}
 
     b.innerHTML += "<span style='width:158px;"+viewStyle+"' id='ff_field_field_label" + condln + "' ></span>";

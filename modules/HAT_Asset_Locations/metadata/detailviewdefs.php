@@ -16,6 +16,10 @@ array (
         array (
           'file' => 'modules/HAT_Asset_Locations/js/detailview_treeview.js',
         ),*/
+        0 => 
+        array (
+          'file' => 'modules/HAT_Asset_Locations/js/detailview_map_point.js',
+        ),
         2 => 
         array (
           'file' => 'modules/HAT_Asset_Locations/js/HAT_Asset_Locations_detailview.js',

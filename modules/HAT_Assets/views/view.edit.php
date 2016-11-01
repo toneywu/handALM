@@ -17,18 +17,12 @@ class HAT_AssetsViewEdit extends ViewEdit
         //6、基于FF判断是否展开界面
 
         //1、初始化Framework
-        if (empty($this->bean->hat_framework_id)) {
-            //从Session加载Business Framework字段的值
-            $beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
+        require_once('modules/HAA_Frameworks/orgSelector_class.php');
+        $current_framework_id = empty($this->bean->haa_frameworks_id)?"":$this->bean->haa_frameworks_id;
+        $current_module = $this->module;
+        $current_action = $this->action;
+        $this->ss->assign('FRAMEWORK',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id'));
 
-            if(isset($beanFramework)) {
-                $this->bean->hat_framework_id = $_SESSION["current_framework"];
-                $this->bean->framework = $beanFramework->name;
-            }
-        }
-        //当前字段由Relate类型变为只读，不可修改
-        $html ='<input type="hidden" name="hat_framework_id" value="'.$this->bean->hat_framework_id .'"><input type="hidden" name="framework" value="'.$this->bean->framework .'">'. $this->bean->framework;
-        $this->ss->assign('FRAMEWORK',$html);
 
         //2、初始化GIS信息
         ////关联地图图层
@@ -56,9 +50,15 @@ class HAT_AssetsViewEdit extends ViewEdit
 
 
 		}
+		
+		if(isset($_REQUEST['woop_id']) && !empty($_REQUEST['woop_id'])  ){
+			$woop_bean = BeanFactory :: getBean('HAM_WOOP')->retrieve_by_string_fields(array ('ID' => $_REQUEST['woop_id']));
+			echo '<script>var source_wo_id_tt="'.$woop_bean->ham_wo_id.'"</script>';
+		}
 
 		parent::Display();
 
+        $beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
         //处理Framework中的相关字段
         if(isset($beanFramework)) {
             if($beanFramework->owning_person_field_rule=='TEXT'){
@@ -81,6 +81,13 @@ class HAT_AssetsViewEdit extends ViewEdit
                 $current_supplier_org_id=isset($this->bean->supplier_org_id)?$this->bean->supplier_org_id:"";
                 $current_supplier_desc=isset($this->bean->supplier_desc)?$this->bean->supplier_desc:"";
                 echo ('<script>$("#supplier_org").parent().html(\'<input type="hidden" name="supplier_org" id="supplier_org" value="'.$current_supplier_org.'"/><input type="hidden" name="supplier_org_id" id="supplier_org_id" value="'.$current_supplier_org_id.'"/><input type="text" name="supplier_desc" id="supplier_desc" value="'.$current_supplier_desc.'"/>\');</script>');
+            }
+
+            if($beanFramework->source_reference_field_rule=='TEXT'){
+                $current_source_reference = isset($this->bean->asset_source)?($this->bean->asset_source):"";
+                $current_source_reference_id=isset($this->bean->asset_source_id)?$this->bean->asset_source_id:"";
+                $current_source_reference_desc=isset($this->bean->asset_source_ref)?$this->bean->asset_source_ref:"";
+                echo ('<script>$("#asset_source").parent().html(\'<input type="hidden" name="asset_source" id="asset_source" value="'.$current_source_reference.'"/><input type="hidden" name="asset_source_id" id="asset_source_id" value="'.$current_source_reference_id.'"/><input type="text" name="asset_source_ref" id="asset_source_ref" value="'.$current_source_reference_desc.'"/>\');</script>');
             }
         }
 

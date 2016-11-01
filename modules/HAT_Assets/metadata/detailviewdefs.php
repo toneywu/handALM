@@ -8,13 +8,17 @@ array (
     array (
       'includes' => 
       array (
-        0 =>
+/*        0 =>
         array (
           'file' => 'modules/HAT_Assets/js/detailview_map_point.js',
         ),
         1 => 
         array (
           'file' => 'modules/HAT_Assets/js/detailview_treeview.js',
+        ),*/
+        1 => 
+        array (
+          'file' => 'modules/HAA_FF/ff_include.js',
         ),
         2 => 
         array (
@@ -417,7 +421,7 @@ array (
           ),
         ),
       ),
-      'lbl_detailview_panel6' => 
+/*      'lbl_detailview_panel6' => 
       array (
         0 => 
         array (
@@ -428,8 +432,8 @@ array (
             'label' => 'LBL_PARENT_ASSET',
           ),
         ),
-      ),
-      'lbl_detailview_panel4' => 
+      ),*/
+   /*   'lbl_detailview_panel4' => 
       array (
         0 => 
         array (
@@ -494,7 +498,7 @@ array (
                       'customCode' => '<div id="cuxMap" style="background-color: #efefef; height: 20px; width: 80%;">map will be loaded here</div><input type="hidden" name="map_layer_url" id="map_layer_url" value="{$fields.map_layer_url.value}">',
                   ),
           ),
-      ),
+      ),*/
       'lbl_detailview_panel1' => 
       array (
         0 => 

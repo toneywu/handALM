@@ -12,21 +12,21 @@ function initMap() {
 						mapTypeId: qq.maps.MapTypeId.ROADMAP
 					  };
 					  var map = new qq.maps.Map(document.getElementById("cuxMap"), myOptions);
-					  
+
 					var current_lat=$("#map_lat").text();
 					var current_lng=$("#map_lng").text();
 					//alert(document.getElementById("location_map_lat").value);
 					var current_latlng = new qq.maps.LatLng(current_lat,current_lng);
-						
-					if ((current_lat!="") && (current_lng!="") && (current_lng!="0.00000000")) {	
+
+					if ((current_lat!="") && (current_lng!="") && (current_lng!="0.00000000")) {
 							map.setCenter(current_latlng);
 							map.panTo(current_latlng);
-							
+
 							var marker=new qq.maps.Marker({
 								position:(current_latlng),
 								animation:qq.maps.MarkerAnimation.DROP,
 								map:map
-							});			
+							});
 					} else { //if lat and lng is empty, load current city as the default position on map
 						citylocation = new qq.maps.CityService({
 								complete : function(result){
@@ -36,7 +36,7 @@ function initMap() {
 						citylocation.searchLocalCity();
 					}
 }
-					   
+
 function loadMapScript() {
 					  var script = document.createElement("script");
 					  script.type = "text/javascript";
@@ -45,14 +45,13 @@ function loadMapScript() {
 	                  $("#cuxMap").css("width","100%");
 					  document.body.appendChild(script);
 					}
-		
-	
+
 $(document).ready(function(){
 		if($("#map_enabled").is(':checked')) {
-			$("#detailpanel_4").show();
-			loadMapScript(); 
+			$("#LBL_EDITVIEW_PANEL_GIS").parent("div").show();
+			loadMapScript();
 			//alert(document.getElementById("map_lat").innerHTML);
 		} else {
-			$("#detailpanel_4").hide();
-		}	
+			$("#LBL_EDITVIEW_PANEL_GIS").parent("div").hide();
+		}
 	});

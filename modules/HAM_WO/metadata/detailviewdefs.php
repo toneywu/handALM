@@ -41,12 +41,12 @@ array (
           'field' => '30',
         ),
       ),
-      'useTabs' => false,
+      'useTabs' => true,
       'tabDefs' => 
       array (
         'DEFAULT' => 
         array (
-          'newTab' => false,
+          'newTab' => true,
           'panelDefault' => 'expanded',
         ),
         'LBL_EDITVIEW_PANEL1' => 
@@ -54,17 +54,12 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_EDITVIEW_PANEL5' => 
+        'LBL_EDITVIEW_PANEL_GIS' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_EDITVIEW_PANEL2' => 
-        array (
-          'newTab' => false,
-          'panelDefault' => 'expanded',
-        ),
-        'LBL_EDITVIEW_PANEL3' => 
+        'LBL_EDITVIEW_PANEL_SCHEDULE' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
@@ -74,6 +69,16 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_EDITVIEW_PANEL_WOLINES' => 
+         array (
+           'newTab' => true,
+           'panelDefault' => 'expanded',
+         ),
+         'LBL_EDITVIEW_PANEL_SOURCE' => 
+         array (
+           'newTab' => true,
+           'panelDefault' => 'expanded',
+         ),
       ),
       'syncDetailEditViews' => true,
     ),
@@ -101,7 +106,6 @@ array (
           array (
             'name' => 'ham_act_id_rule',
             'studio' => 'visible',
-            'label' => 'HAM_ACT_ID_RULE',
           ),
           1 => 'name',
         ),
@@ -118,11 +122,41 @@ array (
         3 => 
         array (
           0 => 'description',
+          1 => 
+          array (
+            'name' => 'work_order_access',
+            'studio' => 'visible',
+            'label' => 'LBL_WORK_ORDER_ACCESS',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'complete_by_last_woop',
+            'label' => 'LBL_COMPLETE_BY_LAST_WOOP',
+          ),
+          1 => '',
         ),
       ),
       'lbl_editview_panel1' => 
       array (
         0 => 
+        array (
+          0 => 'account',
+          1 => 'contact',
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'contract',
+            'studio' => 'visible',
+            'label' => 'LBL_CONTRACT',
+          ),
+          1 => '',
+        ),
+        2 => 
         array (
           0 => 
           array (
@@ -137,7 +171,7 @@ array (
             'label' => 'LBL_ASSET',
           ),
         ),
-        1 => 
+        3 => 
         array (
           0 => 
           array (
@@ -146,64 +180,8 @@ array (
           ),
           1 => 'map_enabled',
         ),
-        2 => 
-        array (
-          0 => 
-          array (
-            'name' => 'contract',
-            'studio' => 'visible',
-            'label' => 'LBL_CONTRACT',
-          ),
-          1 => '',
-        ),
       ),
-      'lbl_editview_panel5' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            'name' => 'work_center',
-            'studio' => 'visible',
-            'label' => 'LBL_WORK_CENTER',
-          ),
-          1 => 
-          array (
-            'name' => 'work_center_res',
-            'studio' => 'visible',
-            'label' => 'LBL_WORK_CENTER_RES',
-          ),
-        ),
-        1 => 
-        array (
-          0 => 
-          array (
-            'name' => 'work_center_people',
-            'studio' => 'visible',
-            'label' => 'LBL_WORK_CENTER_PEOPLE',
-          ),
-          1 => 
-          array (
-            'name' => 'work_order_access',
-            'studio' => 'visible',
-            'label' => 'LBL_WORK_ORDER_ACCESS',
-          ),
-        ),
-        2 => 
-        array (
-          0 => 
-          array (
-            'name' => 'next_woop_assignment',
-            'label' => 'LBL_NEXT_WOOP_ASSIGNMENT',
-          ),
-          1 => 
-          array (
-            'name' => 'complete_by_last_woop',
-            'label' => 'LBL_COMPLETE_BY_LAST_WOOP',
-          ),
-        ),
-      ),
-      'lbl_editview_panel2' => 
+      'lbl_editview_panel_gis' => 
       array (
         0 => 
         array (
@@ -224,7 +202,7 @@ array (
           0 => 'map_display_area',
         ),
       ),
-      'lbl_editview_panel3' => 
+      'lbl_editview_panel_schedule' => 
       array (
         0 => 
         array (
@@ -299,15 +277,15 @@ array (
         array (
           0 => 
           array (
-            'name' => 'reporter',
-            'studio' => 'visible',
-            'label' => 'LBL_REPORTER',
-          ),
-          1 => 
-          array (
             'name' => 'reporter_org',
             'studio' => 'visible',
             'label' => 'LBL_REPORTER_ORG',
+          ),
+          1 => 
+          array (
+            'name' => 'reporter',
+            'studio' => 'visible',
+            'label' => 'LBL_REPORTER',
           ),
         ),
         1 => 
@@ -326,6 +304,20 @@ array (
           1 => 'source_reference',
         ),
       ),
+      'lbl_editview_panel_wolines' => 
+       array (
+         0 => 
+         array (
+           0 => '',
+         ),
+       ),
+       'lbl_editview_panel_source' => 
+       array (
+         0 => 
+         array (
+           0 => '',
+         ),
+       ),
     ),
   ),
 );

@@ -72,6 +72,7 @@ array (
             'name' => 'framework_c',
             'studio' => 'visible',
             'label' => 'LBL_FRAMEWORK',
+            'customCode' => '{$FRAMEWORK_C}',
             'displayParams' => 
             array (
               'field_to_name_array' => 
@@ -240,10 +241,25 @@ array (
         array (
           0 => 
           array (
+            'name' => 'asset_criticality_c',
+            'studio' => 'visible',
+            'label' => 'LBL_ASSET_CRITICALITY',
+          ),
+          1 => 
+          array (
+            'name' => 'enable_fa_c',
+            'label' => 'LBL_ENABLE_FA',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
             'name' => 'flexform_c',
             'studio' => 'visible',
             'label' => 'LBL_FLEXFORM',
           ),
+          1 => '',
         ),
       ),
     ),

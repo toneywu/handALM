@@ -108,20 +108,21 @@
 	$text = str_replace("\$shipping_amount","\$".$module_type_low."_shipping_amount",$text);
 	$text = str_replace("\$total_amount","\$".$module_type_low."_total_amount",$text);
 
+
+
     $text = populate_group_lines($text, $lineItemsGroups, $lineItems);
 
 	$converted = templateParser::parse_template($text, $object_arr);
 	$header = templateParser::parse_template($header, $object_arr);
 	$footer = templateParser::parse_template($footer, $object_arr);
-	
-	$printable = str_replace("\n","<br />",$converted);
 
+	$printable = str_replace("\n","<br />",$converted);
 
 
 	if($task == 'pdf' || $task == 'emailpdf')
 		{
 			$file_name = $mod_strings['LBL_PDF_NAME']."_".str_replace(" ","_",$module->name).".pdf";
-			
+
 			ob_clean();
 			try{
 				$pdf=new mPDF('en','A4','','DejaVuSansCondensed',$template->margin_left,$template->margin_right,$template->margin_top,$template->margin_bottom,$template->margin_header,$template->margin_footer);
@@ -145,7 +146,7 @@
 		{
 			sendEmail::send_email($module,$module_type, $printable,'', false);
 		}
-	
+
 
 function populate_group_lines($text, $lineItemsGroups, $lineItems, $element = 'table'){
 

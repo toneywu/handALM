@@ -42,10 +42,10 @@
  */
 require_once('modules/HIT_IP/HIT_IP_sugar.php');
 class HIT_IP extends HIT_IP_sugar {
-	
+
+
 	function __construct(){
 		parent::__construct();
 	}
-	
 }
 ?>

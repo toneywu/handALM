@@ -6,21 +6,54 @@ array (
   array (
     'templateMeta' => 
     array (
-        'includes' =>
-            array (
-                0 =>
-                    array (
-                        'file' => 'custom/modules/HAT_Asset_Trans_Batch/js/HAT_Asset_Trans_Batch_detailview.js',
-                    ),
-            ),
-    'form' =>
+      'includes' => 
+      array (
+        0 => 
+        array (
+          'file' => 'modules/HAA_FF/ff_include.js',
+        ),
+        1 => 
+        array (
+          'file' => 'modules/HAT_Asset_Trans_Batch/js/HAT_Asset_Trans_Batch_detailview.js',
+        ),
+        2 => array (
+				'file' => 'modules/HIT_IP_TRANS_BATCH/js/html_dom_required_setting.js',
+		),
+      ),
+      'form' => 
       array (
         'buttons' => 
         array (
           0 => 'EDIT',
-          1 => 'DUPLICATE',
-          2 => 'DELETE',
-         // 3 => 'FIND_DUPLICATES',
+/*          1 => 'DUPLICATE',*/
+          /*2 => 'DELETE',*/
+          1 =>
+          array (
+            'customCode' => '<input type="button" class="button" onClick="GenerateDoc();" value="{$MOD.LBL_GENERATE_DOC}">',
+          ),
+        ),
+        'hidden' => 
+        array (
+          0 => '<input type="hidden" name="source_woop_id" id="source_woop_id" value="{$SOURCE_WOOP_ID}">',
+          1 => '<input type="hidden" name="source_wo_id"  id="source_wo_id" value="{$SOURCE_WO_ID}">',
+          2 => '<input type="hidden" name="source_wo_account"  id="source_wo_account" value="{$SOURCE_WO_ACCOUNT}">',
+          3 => '<input type="hidden" name="source_wo_account_id"  id="source_wo_account_id" value="{$SOURCE_WO_ACCOUNT_ID}">',
+          4 => '<input type="hidden" name="source_wo_contact"  id="source_wo_contact" value="{$SOURCE_WO_CONTACT}">',
+          5 => '<input type="hidden" name="source_wo_contact_id"  id="source_wo_contact_id" value="{$SOURCE_WO_CONTACT}">',
+          11 => '<input type="hidden" name="require_approval_workflow" id="require_approval_workflow">',
+          12 => '<input type="hidden" name="require_confirmation"  id="require_confirmation">',
+          13 => '<input type="hidden" name="change_target_status"  id="change_target_status">',
+          14 => '<input type="hidden" name="change_parent"  id="change_parent">',
+          15 => '<input type="hidden" name="change_location"  id="change_location">',
+          16 => '<input type="hidden" name="processing_asset_status"  id="processing_asset_status">',
+          17 => '<input type="hidden" name="change_rack_position"  id="change_rack_position">',
+          18 => '<input type="hidden" name="change_owning_org"  id="change_owning_org">',
+          19 => '<input type="hidden" name="change_owning_person"  id="change_owning_person">',
+          20 => '<input type="hidden" name="change_using_org"  id="change_using_org">',
+          21 => '<input type="hidden" name="change_using_person"  id="change_using_person">',
+          22 => '<input type="hidden" name="change_oranization_le"  id="change_oranization_le">',
+          23 => '<input type="hidden" name="event_short_desc"  id="event_short_desc">',
+          24 => '<input type="hidden" name="target_asset_status"  id="target_asset_status">',
         ),
       ),
       'maxColumns' => '2',
@@ -45,6 +78,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_EDITVIEW_PANEL1' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
       ),
     ),
     'panels' => 
@@ -55,11 +93,16 @@ array (
         array (
           0 => 
           array (
-            'name' => 'event_type_c',
+            'name' => 'framework',
+            'studio' => 'visible',
+            'label' => 'LBL_FRAMEWORKS',
+          ),
+          1 => 
+          array (
+            'name' => 'event_type',
             'studio' => 'visible',
             'label' => 'LBL_EVENT_TYPE',
           ),
-          1 => 'name',
         ),
         1 => 
         array (
@@ -69,58 +112,86 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_ASSET_TRANS_STATUS',
           ),
+          1 => '',
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'current_owning_org',
+            'studio' => 'visible',
+            'label' => 'LBL_CURRENT_OWNING_ORG',
+          ),
+          1 => 'owner_contacts',
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'target_owning_org',
+            'studio' => 'visible',
+            'label' => 'LBL_TARGET_OWNING_ORG',
+          ),
+          1 => 
+          array (
+            'name' => 'target_using_org',
+            'studio' => 'visible',
+            'label' => 'LBL_TARGET_USING_ORG',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 'name',
           1 => 
           array (
             'name' => 'tracking_number',
             'label' => 'LBL_TRACKING_NUMBER',
           ),
         ),
-        2 => 
-        array (
-          0 => 
-          array (
-            'name' => 'current_organization_c',
-            'studio' => 'visible',
-            'label' => 'LBL_CURRENT_ORGANIZATION',
-          ),
-          1 => '',
-        ),
-        3 => 
-        array (
-          0 => 
-          array (
-            'name' => 'target_asset_status',
-            'label' => 'LBL_TARGET_ASSET_STATUS',
-          ),
-          1 => 
-          array (
-            'name' => 'change_location',
-            'studio' => 'visible',
-            'label' => 'LBL_CHANGE_LOCATION',
-          ),
-        ),
-        4 => 
-        array (
-          0 => 
-          array (
-            'name' => 'target_organization_c',
-            'studio' => 'visible',
-            'label' => 'LBL_TARGET_ORGANIZATION',
-          ),
-          1 => 
-          array (
-            'name' => 'modified_by_name',
-            'label' => 'LBL_MODIFIED_NAME',
-          ),
-        ),
         5 => 
         array (
-          0 => 'date_entered',
-          1 => 'date_modified',
+          0 => 
+          array (
+            'name' => 'planned_execution_date',
+            'label' => 'LBL_PLANNED_EXECUTION_DATE',
+          ),
+          1 => 
+          array (
+            'name' => 'planned_complete_date',
+            'label' => 'LBL_PLANNED_COMPLETE_DATE',
+          ),
         ),
         6 => 
         array (
+          0 => 
+          array (
+            'name' => 'source_wo',
+            'studio' => 'visible',
+            'label' => 'LBL_SOURCE_WO',
+          ),
+          1 => 
+          array (
+            'name' => 'source_woop',
+            'studio' => 'visible',
+            'label' => 'LBL_SOURCE_WOOP',
+          ),
+        ),
+        7 => 
+        array (
           0 => 'description',
+        ),
+        8=>
+        array (0=>'wo_lines'),
+      ),
+          'lbl_editview_panel1' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'line_items',
+            'label' => 'LBL_LINE_ITEMS',
+          ),
         ),
       ),
     ),

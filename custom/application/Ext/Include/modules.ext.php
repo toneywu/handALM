@@ -3,6 +3,15 @@
 
  
  //WARNING: The contents of this file are auto-generated
+$beanList['HAA_Docs'] = 'HAA_Docs';
+$beanFiles['HAA_Docs'] = 'modules/HAA_Docs/HAA_Docs.php';
+$modules_exempt_from_availability_check['HAA_Docs'] = 'HAA_Docs';
+$report_include_modules['HAA_Docs'] = 'HAA_Docs';
+$modInvisList[] = 'HAA_Docs';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
 $beanList['HAA_FF_Labels'] = 'HAA_FF_Labels';
 $beanFiles['HAA_FF_Labels'] = 'modules/HAA_FF_Labels/HAA_FF_Labels.php';
 $modules_exempt_from_availability_check['HAA_FF_Labels'] = 'HAA_FF_Labels';
@@ -139,13 +148,6 @@ $moduleList[] = 'HAM_Work_Center_Res';
 $beanList['HAM_WO_Lines'] = 'HAM_WO_Lines';
 $beanFiles['HAM_WO_Lines'] = 'modules/HAM_WO_Lines/HAM_WO_Lines.php';
 $moduleList[] = 'HAM_WO_Lines';
-
-
- 
- //WARNING: The contents of this file are auto-generated
-$beanList['HAM_WOOP'] = 'HAM_WOOP';
-$beanFiles['HAM_WOOP'] = 'modules/HAM_WOOP/HAM_WOOP.php';
-$moduleList[] = 'HAM_WOOP';
 
 
  
@@ -369,6 +371,20 @@ $moduleList[] = 'HIT_IP_Subnets';
 
  
  //WARNING: The contents of this file are auto-generated
+$beanList['HIT_IP_TRANS'] = 'HIT_IP_TRANS';
+$beanFiles['HIT_IP_TRANS'] = 'modules/HIT_IP_TRANS/HIT_IP_TRANS.php';
+$moduleList[] = 'HIT_IP_TRANS';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+$beanList['HIT_IP_TRANS_BATCH'] = 'HIT_IP_TRANS_BATCH';
+$beanFiles['HIT_IP_TRANS_BATCH'] = 'modules/HIT_IP_TRANS_BATCH/HIT_IP_TRANS_BATCH.php';
+$moduleList[] = 'HIT_IP_TRANS_BATCH';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
 $beanList['HIT_Ports'] = 'HIT_Ports';
 $beanFiles['HIT_Ports'] = 'modules/HIT_Ports/HIT_Ports.php';
 $moduleList[] = 'HIT_Ports';
@@ -386,6 +402,20 @@ $moduleList[] = 'HIT_Racks';
 $beanList['HIT_Rack_Allocations'] = 'HIT_Rack_Allocations';
 $beanFiles['HIT_Rack_Allocations'] = 'modules/HIT_Rack_Allocations/HIT_Rack_Allocations.php';
 $moduleList[] = 'HIT_Rack_Allocations';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+$beanList['HIT_VLAN_LIST'] = 'HIT_VLAN_LIST';
+$beanFiles['HIT_VLAN_LIST'] = 'modules/HIT_VLAN_LIST/HIT_VLAN_LIST.php';
+$moduleList[] = 'HIT_VLAN_LIST';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+$beanList['HIT_VNI_LIST'] = 'HIT_VNI_LIST';
+$beanFiles['HIT_VNI_LIST'] = 'modules/HIT_VNI_LIST/HIT_VNI_LIST.php';
+$moduleList[] = 'HIT_VNI_LIST';
 
 
  

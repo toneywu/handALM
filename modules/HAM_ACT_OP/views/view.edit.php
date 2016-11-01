@@ -24,27 +24,26 @@ class HAM_ACT_OPViewEdit extends ViewEdit
 			$this->bean->ham_act_id =$ham_act_id;
         }
 		
-			global $db;
+        if (empty($this->bean->activity_op_number)) {
+            //如果当前工序还没有序号，则按最后一个序号+10自动处理。
 			$sel ="SELECT activity_op_number
 						FROM ham_act_op
 						WHERE ham_act_op.deleted =0 AND ham_act_op.ham_act_id = '".$ham_act_id."'
 							ORDER BY ham_act_op.activity_op_number DESC
 							LIMIT 0 , 1";
 
-			
             $bean_woop_list =  $db->query($sel);
             $last_woop_number = 0;
             while ( $last_woop = $db->fetchByAssoc($bean_woop_list) ) {
                     $last_woop_number = $last_woop['activity_op_number'];
-					
-					
             }
            //echo 'last_woop_number='.$last_woop_number;
             if ($last_woop_number>0) {
-                $this->bean->activity_op_number = floor(($last_woop_number+10)/10)*10;
+                $this->bean->activity_op_number = floor(($last_woop_number)/10)*10+10;
             } else {
                 $this->bean->activity_op_number = "10";
             }
+        }
 
         parent::Display();
     }

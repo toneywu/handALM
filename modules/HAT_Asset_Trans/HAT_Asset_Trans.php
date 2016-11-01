@@ -42,10 +42,9 @@
  */
 require_once('modules/HAT_Asset_Trans/HAT_Asset_Trans_sugar.php');
 class HAT_Asset_Trans extends HAT_Asset_Trans_sugar {
-	
+
 	function __construct(){
 		parent::__construct();
 	}
-	
 }
 ?>

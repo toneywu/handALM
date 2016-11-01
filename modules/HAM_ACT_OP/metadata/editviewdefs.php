@@ -42,7 +42,7 @@ array (
             'name' => 'ham_act_id_rule',
             'studio' => 'visible',
             'label' => 'HAM_ACT_ID_RULE',
-            'customCode' => '<input type="hidden" name="ham_act_id_rule" id="ham_act_id_rule" value="{$fields.ham_act_id_rule.value}">{$fields.ham_act_id_rule.value}',
+            'customCode' => '<input type="hidden" name="ham_act_id" id="ham_act_id" value="{$fields.ham_act_id.value}"><input type="hidden" name="ham_act_id_rule" id="ham_act_id_rule" value="{$fields.ham_act_id_rule.value}">{$fields.ham_act_id_rule.value}',
           ),
           1 => 
           array (
@@ -98,10 +98,24 @@ array (
           ),
           1 => 
           array (
+            'name' => 'event_type',
+            'studio' => 'visible',
+            'label' => 'LBL_EVENT_TYPE',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&basic_type_advanced="+encodeURIComponent($("#act_module option:selected").val())+"',
+            ),
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
             'name' => 'autoopen_next_task',
             'studio' => 'visible',
             'label' => 'LBL_AUTOOPEN_NEXT_TASK',
           ),
+          1=>"",
         ),
       ),
     ),

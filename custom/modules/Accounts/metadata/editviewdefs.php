@@ -103,7 +103,7 @@ array (
             'label' => 'LBL_BUSINESS_TYPE',
             'displayParams' => 
             array (
-              'initial_filter' => '&code_type_advanced=account_business_type',
+              'initial_filter' => '&code_type_advanced=accounts_business_type',
               'field_to_name_array' => 
               array (
                 'name' => 'business_type_c',
@@ -232,7 +232,7 @@ array (
             'label' => 'LBL_CUSTOMER_CLASSS',
             'displayParams' => 
             array (
-              'initial_filter' => '&code_type_advanced=account_customer_class',
+              'initial_filter' => '&code_type_advanced=accounts_customer_class',
             ),
           ),
         ),
@@ -258,14 +258,12 @@ array (
             'name' => 'sales_responsible_person_c',
             'studio' => 'visible',
             'label' => 'LBL_SALES_RESPONSIBLE_PERSON',
-            /*'customCode' => '{$SALES_RESPONSIBLE_PERSON_C}',*/
           ),
           1 => 
           array (
             'name' => 'service_responsible_person_c',
             'studio' => 'visible',
             'label' => 'LBL_SERVICE_RESPONSIBLE_PERSON',
-            /*'customCode' => '{$SERVICE_RESPONSIBLE_PERSON_C}',*/
           ),
         ),
         3 => 
@@ -431,13 +429,39 @@ array (
         array (
           0 => 
           array (
+            'name' => 'attribute5_c',
+            'label' => 'LBL_ATTRIBUTE5',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute6_c',
+            'label' => 'LBL_ATTRIBUTE6',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute7_c',
+            'label' => 'LBL_ATTRIBUTE7',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute8_c',
+            'label' => 'LBL_ATTRIBUTE8',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
             'name' => 'description',
             'label' => 'LBL_DESCRIPTION',
           ),
           1 => 
           array (
-            'name' => 'attribute5_c',
-            'label' => 'LBL_ATTRIBUTE5',
+            'name' => 'attribute9_c',
+            'label' => 'LBL_ATTRIBUTE9',
           ),
         ),
       ),

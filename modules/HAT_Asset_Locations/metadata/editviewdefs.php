@@ -12,15 +12,11 @@ array (
         array (
           'file' => 'modules/HAT_Assets/js/editview_icon_picker.js',
         ),
-/*        1 => 
-        array (
-          'file' => 'modules/HAT_Asset_Locations/js/editview_treeview.js',
-        ),*/
-        2 => 
+        1 => 
         array (
           'file' => 'modules/HAT_Asset_Locations/js/editview_map_point.js',
         ),
-        3 => 
+        2 => 
         array (
           'file' => 'modules/HAT_Asset_Locations/js/HAT_Asset_Locations_editview.js',
         ),
@@ -86,6 +82,7 @@ array (
             'name' => 'maint_site',
             'studio' => 'visible',
             'label' => 'LBL_MAINT_SITE',
+            'customCode'=>'{$MAINT_SITE}'
           ),
           1 => 
           array (

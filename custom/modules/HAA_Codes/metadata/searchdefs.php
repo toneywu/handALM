@@ -11,16 +11,16 @@ array (
         'name' => 'name',
         'default' => true,
         'width' => '10%',
-      ),
-      'code_type' => 
+        ),
+      'code_module' => 
       array (
         'type' => 'enum',
         'studio' => 'visible',
-        'label' => 'LBL_CODE_TYPE',
+        'label' => 'LBL_CODE_MODULE',
         'width' => '10%',
         'default' => true,
-        'name' => 'code_type',
-      ),
+        'name' => 'code_module',
+        ),
       'code_tag' => 
       array (
         'type' => 'varchar',
@@ -28,8 +28,23 @@ array (
         'width' => '10%',
         'default' => true,
         'name' => 'code_tag',
+        ),
+      'parent_type_value' => 
+      array (
+       'type' => 'relate',
+       'name' => 'parent_type_value',
+       'width' => '10%',
+       'default' => true,
+       'label' => 'LBL_PARENT_TYPE_VALUE',
+       'id' => 'parent_type_value_ID',
+       'link' => true,
+       'studio' => 'visible',
+       'displayParams' => 
+       array (
+        'initial_filter' => '&code_type_advanced="+$("#code_type_basic").val()+"',
+        ),
+       ),
       ),
-    ),
     'advanced_search' => 
     array (
       'name' => 
@@ -37,7 +52,16 @@ array (
         'name' => 'name',
         'default' => true,
         'width' => '10%',
-      ),
+        ),
+      'code_module' => 
+      array (
+        'type' => 'enum',
+        'studio' => 'visible',
+        'label' => 'LBL_CODE_MODULE',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'code_module',
+        ),
       'code_type' => 
       array (
         'type' => 'enum',
@@ -46,7 +70,7 @@ array (
         'width' => '10%',
         'default' => true,
         'name' => 'code_type',
-      ),
+        ),
       'code_tag' => 
       array (
         'type' => 'varchar',
@@ -54,7 +78,22 @@ array (
         'width' => '10%',
         'default' => true,
         'name' => 'code_tag',
-      ),
+        ),
+      'parent_type_value' => 
+      array (
+       'type' => 'relate',
+       'name' => 'parent_type_value',
+       'width' => '10%',
+       'default' => true,
+       'label' => 'LBL_PARENT_TYPE_VALUE',
+       'id' => 'parent_type_value_ID',
+       'link' => true,
+       'studio' => 'visible',
+       'displayParams' => 
+       array (
+        'initial_filter' => '&code_type_advanced="+$("#code_type_basic").val()+"',
+        ),
+       ),
       'haa_ff' => 
       array (
         'type' => 'relate',
@@ -65,9 +104,9 @@ array (
         'link' => true,
         'width' => '10%',
         'name' => 'haa_ff',
+        ),
       ),
     ),
-  ),
   'templateMeta' => 
   array (
     'maxColumns' => '3',
@@ -76,7 +115,7 @@ array (
     array (
       'label' => '10',
       'field' => '30',
+      ),
     ),
-  ),
-);
-?>
+  );
+  ?>

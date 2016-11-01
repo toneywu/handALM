@@ -1,4 +1,4 @@
-<?php
+	<?php
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
@@ -44,7 +44,7 @@ $dictionary['HMM_Trans_Batch'] = array(
 		'duplicate_merge'=>false,
 		'fields'=>array (
 
-				'ham_maint_sites_id' => 
+		'ham_maint_sites_id' =>
 		array (
 			'required' => false,
 			'name' => 'ham_maint_sites_id',
@@ -65,7 +65,7 @@ $dictionary['HMM_Trans_Batch'] = array(
 			'len' => 36,
 			'size' => '20',
 			),
-		'site' => 
+		'site' =>
 		array (
 			'required' => true,
 			'source' => 'non-db',
@@ -93,7 +93,7 @@ $dictionary['HMM_Trans_Batch'] = array(
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
 			),
-		'hat_event_type_id' => 
+		'hat_event_type_id' =>
 		array (
 			'required' => false,
 			'name' => 'hat_event_type_id',
@@ -142,7 +142,7 @@ $dictionary['HMM_Trans_Batch'] = array(
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
 			),
-		'trans_status' => 
+		'trans_status' =>
 		array (
 			'required' => true,
 			'name' => 'trans_status',
@@ -166,7 +166,7 @@ $dictionary['HMM_Trans_Batch'] = array(
 			'studio' => 'visible',
 			'dependency' => false,
 			'default' => 'DRAFT',
-			),		
+			),
 		'trans_basic_type_lov' =>
 		array (
 			'source' => 'non-db',
@@ -303,7 +303,7 @@ $dictionary['HMM_Trans_Batch'] = array(
 			'rname' => 'name',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
-			),		
+			),
 		'ham_woop_id' =>
 		array (
 			'required' => false,
@@ -376,25 +376,6 @@ $dictionary['HMM_Trans_Batch'] = array(
 			'dbType' => 'datetime',
 			'display_default' => 'now',
 			),
-		'trans_basic_type_lov' =>
-		array (
-			'source' => 'non-db',
-			'name' => 'trans_basic_type_lov',
-			'vname' => 'LBL_TRANS_BASIC_TYPE',
-			'type' => 'enum',
-			'reportable' => true,
-			'studio' => 'visible',
-			'options' => 'cux_event_type_list',
-			),
-		'trans_basic_type' =>
-		array (
-			'source' => 'non-db',
-			'name' => 'trans_basic_type',
-			'vname' => 'LBL_TRANS_BASIC_TYPE',
-			'type' => 'varchar',
-			'reportable' => true,
-			'studio' => 'visible',
-			),		
 		'secondary_unit_defaulting_lov' =>
 		array (
 			'source' => 'non-db',
@@ -404,7 +385,7 @@ $dictionary['HMM_Trans_Batch'] = array(
 			  'reportable' => true,
 			  'studio' => 'visible',
 			  'options' => 'cux_products_secondary_unit_defaulting_list',
-			  ),	
+			  ),
 		'tracking_uom_lov' =>
 		array (
 			'source' => 'non-db',
@@ -415,7 +396,7 @@ $dictionary['HMM_Trans_Batch'] = array(
 			  'studio' => 'visible',
 			  'options' => 'cux_products_uom_usage_list',
 			  ),
-		'locator_control_lov' => 
+		'locator_control_lov' =>
 		array (
 			'source' => 'non-db',
 			'name' => 'locator_control_lov',
@@ -424,7 +405,7 @@ $dictionary['HMM_Trans_Batch'] = array(
 			  'reportable' => true,
 			  'studio' => 'visible',
 			  'options' => 'hat_inventory_node_list',
-			  ),			  	
+			  ),
 ),
 	'relationships'=>array (
 ),

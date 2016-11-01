@@ -74,7 +74,7 @@ $mod_strings = array (
   'LBL_PARENT_ASSET' => 'Parent Asset',
   'LBL_SUPPLIER_ORG' => 'Supplier',
   'LBL_ASSET_GROUP' => 'Product/Asset Group',
-  'LBL_HAT_ASSET_LOCATIONS_HAT_ASSETS_FROM_HAT_ASSET_LOCATIONS_TITLE' => 'Asset Locations',
+  'LBL_LOCATION' => 'Asset Locations',
   'LBL_HAT_ASSETS_CONTACTS_FROM_CONTACTS_TITLE' => 'Contacts',
   'LBL_TRANSATION_SUBPANEL' => 'Asset Transactions',
   'LBL_SR_SUBPANEL' => 'Service Requests',
@@ -131,5 +131,6 @@ $mod_strings = array (
   'LBL_MAP_MARKER_TYPE' => 'Marker Type',
   'LBL_MAP_TYPE'=>'Map Type',
   'LBL_FIXED_ASSET'=>'Fixed Assets#',
-  'LBL_ENABLE_FA'=>'Sync with Fixed Asset'
+  'LBL_ENABLE_FA'=>'Sync with Fixed Asset',
+  'LBL_RACK'=>'Server-Rack Position',
 );

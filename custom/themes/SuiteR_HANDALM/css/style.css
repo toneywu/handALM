@@ -11,7 +11,10 @@
 }
 
 .recent_h3 {
-		padding: 10px 0px;/*FIX：左侧标题*/
+	padding: 10px 0px;/*FIX：左侧标题*/
+}
+.recently_viewed_link_container_sidebar li.recentlinks a { /*左侧字体截断*/
+	overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 150px;
 }
 
 #mobile_menu a {
@@ -303,6 +306,51 @@ input[type=text], select{
 /**********************************/
 /*以下是完全自定义的一些对象	  */
 /**********************************/
+
+.detailed_data_table {
+	display:  table;
+	margin:0 0 2em 0;
+}
+
+/*机柜管理中显示机柜中的设备*/
+.Rack_Elements {
+	cursor:pointer;
+}
+.Rack_Elements:hover{
+	border-width:3px;
+}
+.rack_frame tr td.rack_highlighted {
+	background-color: blue;
+}
+.rack_frame tr td.rack_error {
+	background-color: red;
+}
+
+.rack_frame tr th, .rack_frame tr td {
+	padding:0px 8px;
+	border:#eee 1px solid;
+	line-height:1.2em;
+	font-size:0.8em;
+}
+.rack_frame tr td {
+	background-color: #ccc;
+}
+.rack_frame tr td.rack_label {
+	background-color: #fff;
+}
+.rack_server {
+	background-color:#777;
+	color:#fff;
+	line-height:0.9em;
+	overflow:hidden;
+	padding:0px 5px;
+	vertical-align:middle;
+	/*position:absolute;*/
+}
+.detail .tab_subpanel tr td[scope=row], .detail .tab_subpanel .action_buttons{
+	text-align: left;
+}
+
 #lineItems {
 	border-style: none;
 }
@@ -332,106 +380,82 @@ input[type=text], select{
 	border-bottom:0;
 	font-size:inherit;
 }
-
-/*
-#tree_view_area {
-	border-color:#F6F6F6;
-	border-style: solid;
-}
-#tree_view_area tr td {
-	padding:3px 3px 3px 0;
-}
-#divTreeNode_header {
-	border-bottom: #ccc 1px solid;
-    padding: 0 0 10px 0;
-    font-size: larger;
-}
-#divTreeNode_detail {
-    padding: 15px;
-}
-#divTreeNode_detail p{
-    font-size:1em;
-    padding:2px 0px;
-}
-#divTreeNode_detail p .lab{
-    width:25%;
-    display: inline-block;
-}
-#divTreeNode_detail p .detail_data{
-	font-weight: bold;
-}
-#divTreeNode_footer {
-	border-top: #ccc 1px solid;
-    padding: 10px 0 0 0;
-}
-#divTreeNode_footer a {
-    padding: 0 15px;
-    border-left： #ccc 1px solid;
-}*/
-
-.rack_frame tr th, .rack_frame tr td {
-	padding:0px 8px;
-	border:#eee 1px solid;
-	line-height:1.2em;
-	font-size:0.8em;
-}
-.rack_frame tr td {
-	background-color: #ccc;
-}
-.rack_frame tr td.rack_label {
-	background-color: #fff;
-}
-.rack_server {
-	background-color:#777;
-	color:#fff;
-	line-height:0.9em;
-	overflow:hidden;
-	padding:0px 5px;
+.input_group input[type=checkbox], input[type=radio]{
 	vertical-align:middle;
-	/*position:absolute;*/
 }
 
 /*动态着色标签*/
 .color_tag {
 	padding:3px 10px 3px 10px;
-}
-.color_asset_status_InService {
-	background-color: #BEEECC;/*淡绿*/
+	border-radius:15px;
 }
 .color_asset_status_Ordered {
 	background-color: #A2D4D7;/*蓝绿*/
 }
+.color_asset_status_Received {
+	background-color: #91E9ED;/*亮蓝*/
+}
+.color_asset_status_PreAssigned {
+	background-color: #c7ffa1;/*亮绿*/
+}
+.color_asset_status_InService {
+	background-color: #BEEECC;/*淡绿*/
+}
 .color_asset_status_Idle {
 	background-color: #E1DFA6;/*淡黄*/
 }
-.color_asset_status_LentOut {
-	background-color: #7BBE98;/*中绿*/
-}
-.color_asset_status_OutOfService {
+.color_asset_status_Stocked {
 	background-color: #CECEBE;/*灰偏土黄*/
 }
-.color_asset_status_Received {
-	background-color: #91E9ED;/*亮蓝*/
+.color_asset_status_TempOut {
+	background-color: #dbc7ff;/*紫色*/
+}
+.color_asset_status_OutOfService {
+	background-color: #dbdbdb;/*灰*/
+}
+.color_asset_status_Discard {
+	background-color: #b4b4b4;/*深灰*/
 }
 
 /*动态着色标签-单据状态，包括SR、WO*/
 .color_doc_status_DRAFT { 
 	background-color: #CECEBE;/*灰偏土黄*/
 }
+.color_doc_status_SUBMITTED {
+	background-color: #e0e5ae;/*淡黄绿*/
+}
 .color_doc_status_APPROVED {
 	background-color: #91E9ED;/*亮蓝*/
 }
-.color_doc_status_WORKING {
-	background-color: #BEEECC;/*淡绿*/
+.color_doc_status_INPRG {
+	background-color: #c7ffa1;/*亮绿*/
 }
 .color_doc_status_REJECTED {
 	background-color: #E1DFA6;/*淡黄*/
 }
 .color_doc_status_CANCELED {
-	background-color: #B0B0B0;/*灰*/
+	background-color: #d7d7d7;/*灰*/
 }
 .color_doc_status_CLOSED {
-	background-color: #7BBE98;/*中绿*/
+	background-color: #adcab0;/*灰绿*/
+}
+.color_doc_status_WSCH {
+	background-color: #b4a775;/*淡黄*/
+}
+.color_doc_status_WMATL {
+	background-color: #b4a775;/*淡黄*/
+}
+.color_doc_status_WPCOND {
+	background-color: #b4a775;/*淡黄*/
+}
+.color_doc_status_WPREV {
+	background-color: #add1d5;/*蓝*/
+}
+.color_doc_status_COMPLETED {
+	background-color: #a3dfaa;/*中绿*/
+}
+.color_doc_status_REWORK {
+	background-color: #aeadd5;/*灰*/
 }
 
 

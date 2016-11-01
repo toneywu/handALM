@@ -1,6 +1,5 @@
 <?php
-// created: 2016-08-01 23:21:47
+// created: 2016-09-28 09:40:09
 $mod_strings = array (
-  'LBL_WO_LINE_SUBPANEL_TITLE' => 'WO Object Lines',
-  'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL'=>'WO Status Modify',
+  'LBL_EDITVIEW_PANEL5' => 'Additional Property',
 );

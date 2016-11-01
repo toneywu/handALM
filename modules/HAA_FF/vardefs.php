@@ -47,7 +47,7 @@ $dictionary['HAA_FF'] = array(
 		array (
 			'required' => false,
 			'name' => 'haa_frameworks_id',
-			'vname' => 'LBL_DOMAIN_ID',
+			'vname' => 'LBL_FRAMEWORK_ID',
 			'type' => 'id',
 			'massupdate' => 0,
 			'no_default' => false,
@@ -64,12 +64,12 @@ $dictionary['HAA_FF'] = array(
 			'len' => 36,
 			'size' => '20',
 			),
-		'domain' => 
+		'framework' => 
 		array (
 			'required' => true,
 			'source' => 'non-db',
-			'name' => 'domain',
-			'vname' => 'LBL_DOMAIN',
+			'name' => 'framework',
+			'vname' => 'LBL_FRAMEWORK',
 			'type' => 'relate',
 			'massupdate' => 0,
 			'no_default' => false,

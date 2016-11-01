@@ -6,7 +6,7 @@ array (
   array (
     'templateMeta' => 
     array (
-    'includes' => 
+      'includes' => 
       array (
         0 => 
         array (
@@ -23,7 +23,6 @@ array (
           3 => 'FIND_DUPLICATES',
         ),
       ),
-      
       'maxColumns' => '2',
       'widths' => 
       array (
@@ -52,6 +51,11 @@ array (
           'panelDefault' => 'expanded',
         ),
         'LBL_EDITVIEW_PANEL2' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_EDITVIEW_PANEL3' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
@@ -95,12 +99,7 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_WORK_CENTER',
           ),
-          1 => 
-          array (
-            'name' => 'owner',
-            'studio' => 'visible',
-            'label' => 'LBL_OWNER',
-          ),
+          1 => '',
         ),
         3 => 
         array (
@@ -116,6 +115,16 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_HAM_WORK_CENTER_PEOPLE',
           ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'contract',
+            'studio' => 'visible',
+            'label' => 'LBL_CONTRACT',
+          ),
+          1 => '',
         ),
       ),
       'lbl_editview_panel1' => 
@@ -199,13 +208,79 @@ array (
       array (
         0 => 
         array (
-          0 => 'description',
-          1 => 
+          0 => 
           array (
             'name' => 'act_module',
             'studio' => 'visible',
             'label' => 'LBL_ACT_MODULE',
           ),
+          1 => 
+          array (
+            'name' => 'event_type',
+            'studio' => 'visible',
+            'label' => 'LBL_EVENT_TYPE',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 'description',
+          1 => '',
+        ),
+      ),
+      'lbl_editview_panel3' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'next_woop',
+            'studio' => 'visible',
+            'label' => 'LBL_NEXT_WOOP',
+          ),
+          1 => 
+          array (
+            'name' => 'next_woop_name',
+            'studio' => 'visible',
+            'label' => 'LBL_NEXT_WOOP_NAME',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'next_work_center',
+            'studio' => 'visible',
+            'label' => 'LBL_NEXT_WORK_CENTER',
+          ),
+          1 => 
+          array (
+            'name' => 'next_work_center_res',
+            'studio' => 'visible',
+            'label' => 'LBL_NEXT_WORK_CENTER_RES',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'next_work_center_people',
+            'studio' => 'visible',
+            'label' => 'LBL_NEXT_WORK_CENTER_PEOPLE',
+          ),
+          1 => 
+          array (
+            'name' => 'autoopen_next_task',
+            'label' => 'LBL_AUTOOPEN_NEXT_TASK',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'syn_wo_status',
+            'label' => 'LBL_SYN_WO_STATUS',
+          ),
+          1 => '',
         ),
       ),
     ),

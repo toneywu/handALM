@@ -13,13 +13,13 @@ array (
   array (
     'type' => 'int',
     'label' => 'LBL_HEIGHT',
-    'width' => '8%',
+    'width' => '3%',
     'default' => true,
   ),
-  'DEPTH' => 
+  'STATUS' => 
   array (
-    'type' => 'int',
-    'label' => 'LBL_DEPTH',
+    'type' => 'vchar',
+    'label' => 'LBL_ASSET_STATUS',
     'width' => '8%',
     'default' => true,
   ),
@@ -43,29 +43,29 @@ array (
   ),
   'HAT_ASSET_LOCATIONS' => 
   array (
-    'type' => 'relate',
+    'type' => 'varchar',
     'label' => 'LBL_HAT_ASSET_LOCATIONS',
     'id' => 'HAT_ASSET_LOCATIONS_ID',
+    'link' => false,
+    'width' => '15%',
+    'default' => true,
+  ),
+
+  'HAT_ASSET_USING_ORG' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_USING_ORG',
+    'id' => 'HAT_ASSET_USING_ORG_ID',
     'link' => true,
     'width' => '15%',
     'default' => true,
   ),
-  'HAT_ASSETS_ACCOUNTS_NAME' => 
+  'HAT_ASSET_OWNING_ORG_USING' => 
   array (
-    'type' => 'relate',
-    'label' => 'LBL_HAT_ASSETS_ACCOUNTS_FROM_ACCOUNTS_TITLE',
-    'id' => 'HAT_ASSETS_ACCOUNTS_ID',
-    'link' => true,
-    'width' => '15%',
+    'width' => '5%',
+    'label' => 'LBL_OWING_ORG_USING',
+    'type' => 'varchar',
     'default' => true,
-  ),
-  'ASSIGNED_USER_NAME' => 
-  array (
-    'width' => '9%',
-    'label' => 'LBL_ASSIGNED_TO_NAME',
-    'module' => 'Employees',
-    'id' => 'ASSIGNED_USER_ID',
-    'default' => false,
   ),
 );
 ?>

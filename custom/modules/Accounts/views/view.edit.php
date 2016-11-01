@@ -50,19 +50,13 @@ class AccountsViewEdit extends ViewEdit
 		//4、读取Frame中销售及服务人员字段
 		//5、处理FF展开
 
-		//*********************处理业务框架，以及业务框架下销售及服务人员是List或是Text START********************
-        if (empty($this->bean->haa_frameworks_id_c)) {
-            //从Session加载Business Framework字段的值
-            $beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
+        //1、初始化Framework
+        require_once('modules/HAA_Frameworks/orgSelector_class.php');
+        $current_framework_id = empty($this->bean->hat_framework_id)?"":$this->bean->hat_framework_id;
+        $current_module = $this->module;
+        $current_action = $this->action;
+        $this->ss->assign('FRAMEWORK_C',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id_c'));
 
-            if(isset($beanFramework)) {
-                $this->bean->haa_frameworks_id_c = $_SESSION["current_framework"];
-                $this->bean->framework_c = $beanFramework->name;
-            }
-        }
-        //当前字段由Relate类型变为只读，不可修改
-        $html ='<input type="hidden" name="hat_framework_id" value="'.$this->bean->haa_frameworks_id_c .'"><input type="hidden" name="framework" value="'.$this->bean->framework_c .'">'. $this->bean->framework_c;
-        $this->ss->assign('FRAMEWORK_C',$html);
 
 
 		//*********************处理业务框架，以及业务框架下销售及服务人员是List或是Text END********************
@@ -86,6 +80,7 @@ class AccountsViewEdit extends ViewEdit
 		parent::Display();
 
 
+        $beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
         if(isset($beanFramework)) {
             if($beanFramework->sales_person_field_rule=='TEXT'){
 	        	$current_sales_responsible_person_c = isset($this->bean->sales_responsible_person_c)?($this->bean->sales_responsible_person_c):"";

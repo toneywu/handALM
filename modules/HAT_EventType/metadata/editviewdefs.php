@@ -20,17 +20,17 @@ array (
           'field' => '30',
         ),
       ),
-	   'includes' => 
+      'includes' => 
       array (
-        0 =>
-        array (
-          'file' => 'modules/HAT_EventType/js/reset_EvenType_Fields.js',
-        ),
-        1 =>
+        0 => 
         array (
           'file' => 'modules/HAT_EventType/js/EditView.js',
         ),
-		),
+        1 => 
+        array (
+          'file' => 'modules/HAT_EventType/js/reset_EvenType_Fields.js',
+        ),
+      ),
       'useTabs' => false,
       'tabDefs' => 
       array (
@@ -49,6 +49,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_EDITVIEW_PANEL3' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
       ),
       'syncDetailEditViews' => true,
     ),
@@ -58,7 +63,11 @@ array (
       array (
         0 => 
         array (
-          0 => 'name',
+          0 => 
+          array (
+            'name' => 'framework',
+            'customCode' => '{$FRAMEWORK}',
+          ),
           1 => 
           array (
             'name' => 'basic_type',
@@ -67,6 +76,50 @@ array (
           ),
         ),
         1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'event_short_desc',
+            'label' => 'LBL_EVENT_SHORT_DESC',
+          ),
+          1 => 
+          array (
+            'name' => 'parent_eventtype',
+            'studio' => 'visible',
+            'label' => 'LBL_PARENT_EVENTTYPE',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&allnodes=1&basic_type_advanced="+encodeURIComponent($("#basic_type option:selected").val())+"',
+            ),
+          ),
+        ),
+        2 => 
+        array (
+          0 => 'name',
+          1 => array (
+            'name'=>'aos_pdf_template',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&type_advanced=HAT_Asset_Trans_Batch',
+            ),
+          ),
+        ),
+        3 => 
+        array (
+          0 => 'description',
+          1 => 
+          array (
+            'name' => 'haa_ff',
+            'studio' => 'visible',
+            'label' => 'LBL_HAA_FF',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 'asset_scope',
+          1 => 'default_asset_list',
+        ),
+        5 => 
         array (
           0 => 
           array (
@@ -81,19 +134,24 @@ array (
             'label' => 'LBL_REQUIRE_CONFIRMATION',
           ),
         ),
-        2 => 
-        array (
-          0 => 
-          array (
-            'name' => 'event_short_desc',
-            'label' => 'LBL_EVENT_SHORT_DESC',
-          ),
-          1 => 'description',
-        ),
       ),
       'lbl_editview_panel1' => 
       array (
         0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_target_status',
+            'label' => 'LBL_CHANGE_TARGET_STATUS',
+          ),
+          1 => 
+          array (
+            'name' => 'target_asset_status',
+            'studio' => 'visible',
+            'label' => 'LBL_TARGET_ASSET_STATUS',
+          ),
+        ),
+        1 => 
         array (
           0 => 
           array (
@@ -102,23 +160,9 @@ array (
           ),
           1 => 
           array (
-            'name' => 'change_target_status',
-            'label' => 'LBL_CHANGE_TARGET_STATUS',
-          ),
-        ),
-        1 => 
-        array (
-          0 => 
-          array (
             'name' => 'processing_asset_status',
             'studio' => 'visible',
             'label' => 'LBL_PROCESSING_ASSET_STATUS',
-          ),
-          1 => 
-          array (
-            'name' => 'target_asset_status',
-            'studio' => 'visible',
-            'label' => 'LBL_TARGET_ASSET_STATUS',
           ),
         ),
       ),
@@ -128,18 +172,43 @@ array (
         array (
           0 => 
           array (
-            'name' => 'change_organization',
+            'name' => 'change_owning_org',
             'studio' => 'visible',
-            'label' => 'LBL_CHANGE_ORGANIZATION',
+            'label' => 'LBL_CHANGE_OWNING_ORG',
           ),
           1 => 
+          array (
+            'name' => 'change_owning_person',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_OWNING_PERSON',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
           array (
             'name' => 'change_oranization_le',
             'studio' => 'visible',
             'label' => 'LBL_CHANGE_ORANIZATION_LE',
           ),
+          1 => '',
         ),
-        1 => 
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_using_org',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_USING_ORG',
+          ),
+          1 => 
+          array (
+            'name' => 'change_using_person',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_USING_PERSON',
+          ),
+        ),
+        3 => 
         array (
           0 => 
           array (
@@ -147,20 +216,191 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_CHANGE_LOCATION',
           ),
+          1 => '',
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_parent',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_PARENT',
+          ),
           1 => 
           array (
-            'name' => 'change_location_desc',
+            'name' => 'change_rack_position',
             'studio' => 'visible',
-            'label' => 'LBL_CHANGE_LOCATION_DESC',
+            'label' => 'LBL_CHANGE_RACK_POSITION',
+          ),
+        ),
+      ),
+      'lbl_editview_panel3' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_ip_subnets',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_IP_SUBNETS',
+          ),
+          1 => 
+          array (
+            'name' => 'change_associated_ip',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_ASSOCIATED_IP',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_gateway',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_GATEWAY',
+          ),
+          1 => 
+          array (
+            'name' => 'change_bandwidth_type',
+            'studio' => 'visible',
+          ),
+        ),
+      ),
+      'lbl_editview_panel3' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_ip_subnets',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_IP_SUBNETS',
+          ),
+          1 => 
+          array (
+            'name' => 'change_associated_ip',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_ASSOCIATED_IP',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_gateway',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_GATEWAY',
+          ),
+          1 => 
+          array (
+            'name' => 'change_bandwidth_type',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_BANDWIDTH_TYPE',
           ),
         ),
         2 => 
         array (
           0 => 
           array (
-            'name' => 'change_contact',
+            'name' => 'change_port',
             'studio' => 'visible',
-            'label' => 'LBL_CHANGE_CONTACT',
+            'label' => 'LBL_CHANGE_PORT',
+          ),
+          1 => 
+          array (
+            'name' => 'change_speed_limit',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_SPEED_LIMIT',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_asset',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_ASSET',
+          ),
+          1 => 
+          array (
+            'name' => 'change_cabinet',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_CABINET',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_monitoring',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_MONITORING',
+          ),
+          1 => 
+          array (
+            'name' => 'change_channel_num',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_CHANNEL_NUM',
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_channel_content',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_CHANNEL_CONTENT',
+          ),
+          1 => 
+          array (
+            'name' => 'change_mrtg_link',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_CHANGE_MRTG_LINK',
+          ),
+        ),
+        6 => 
+        array (
+          0 => 'change_main_asset',
+          1 => 'change_backup_asset',
+        ),
+        7 => 
+        array (
+          0 => 'change_port_backup',
+          1 => 'change_monitoring_backup',
+        ),
+        8 => 
+        array (
+          0 => 'change_channel_content_backup',
+          1 => 'change_channel_num_backup',
+        ),
+        9 => 
+        array (
+          0 => 'change_date_end',
+          1 => 'change_date_start',
+        ),
+        10 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_access_assets_name',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_ACCESS_ASSETS_NAME',
+          ),
+          1 => 
+          array (
+            'name' => 'change_access_assets_backup_name',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_ACCESS_ASSETS_BACKUP_NAME',
+            ),
+        ),
+        11 => 
+        array (
+          0 => 'change_status',
+          1 => 
+          array (
+            'name' => 'change_enable_action',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_ENABLE_ACTION',
           ),
         ),
       ),

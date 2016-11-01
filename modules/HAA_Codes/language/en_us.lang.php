@@ -74,4 +74,7 @@ $mod_strings = array (
   'LBL_HAA_FF'=>'Flexible Form',
   'LBL_HAA_FF_ID'=>'Flexible Form ID',
   'LBL_CODE_TAG'=>'Tag',
-);
+  'LBL_CODE_MODULE'=>'Code Module',
+  'LBL_PARENT_TYPE_VALUE_ID'=>'Parent Type Value Id',
+  'LBL_PARENT_TYPE_VALUE'=>'Parent Type Value',
+  );

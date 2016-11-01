@@ -14,6 +14,14 @@ array (
         ),
         1 => 
         array (
+          'file' => 'modules/HAA_FF/HAA_FF.php',
+        ),
+        2 => 
+        array (
+          'file' => 'modules/HAA_FF/ff_include.js',
+        ),
+        3 => 
+        array (
           'file' => 'modules/HAM_WO/js/HAM_WO_editview.js',
         ),
       ),
@@ -44,17 +52,12 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_EDITVIEW_PANEL5' => 
+        'LBL_EDITVIEW_PANEL_GIS' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_EDITVIEW_PANEL2' => 
-        array (
-          'newTab' => false,
-          'panelDefault' => 'expanded',
-        ),
-        'LBL_EDITVIEW_PANEL3' => 
+        'LBL_EDITVIEW_PANEL_SCHEDULE' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
@@ -65,7 +68,7 @@ array (
           'panelDefault' => 'expanded',
         ),
       ),
-      'syncDetailEditViews' => true,
+      'syncDetailEditViews' => false,
     ),
     'panels' => 
     array (
@@ -77,12 +80,14 @@ array (
           array (
             'name' => 'wo_number',
             'label' => 'LBL_WO_NUMBER',
+            'customCode' => '{$WO_NUMBER}',
           ),
           1 => 
           array (
             'name' => 'site',
             'studio' => 'visible',
             'label' => 'LBL_SITE',
+            'customCode' => '{$MAINT_SITE}',
           ),
         ),
         1 => 
@@ -124,17 +129,65 @@ array (
             'displayParams' => 
             array (
               'initial_filter' => '&basic_type_advanced=WO',
+              'field_to_name_array' => 
+              array (
+                'name' => 'event_type',
+                'id' => 'hat_event_type_id',
+                'haa_ff_id' => 'haa_ff_id',
+              ),
+              'call_back_function' => 'setEventTypeReturn',
             ),
           ),
         ),
         3 => 
         array (
           0 => 'description',
+          1 => 
+          array (
+            'name' => 'work_order_access',
+            'studio' => 'visible',
+            'label' => 'LBL_WORK_ORDER_ACCESS',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'complete_by_last_woop',
+            'label' => 'LBL_COMPLETE_BY_LAST_WOOP',
+          ),
+          1 => '',
         ),
       ),
       'lbl_editview_panel1' => 
       array (
         0 => 
+        array (
+          0 => 'account',
+          1 => 
+          array (
+            'name' => 'contact',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&account_name_advanced="+encodeURIComponent($("#account").val())+"',
+            ),
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'contract',
+            'studio' => 'visible',
+            'label' => 'LBL_CONTRACT',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&contract_account_advanced="+encodeURIComponent($("#account").val())+"',
+            ),
+          ),
+          1 => '',
+        ),
+        2 => 
         array (
           0 => 
           array (
@@ -143,7 +196,7 @@ array (
             'label' => 'LBL_LOCATION',
             'displayParams' => 
             array (
-              'initial_filter' => '&maint_site_advanced="+encodeURIComponent(document.getElementById("site").value)+"',
+              'initial_filter' => '&ham_maint_sites_id_advanced="+encodeURIComponent(document.getElementById("ham_maint_sites_id").value)+"',
               'field_to_name_array' => 
               array (
                 'name' => 'location',
@@ -176,7 +229,7 @@ array (
             ),
           ),
         ),
-        1 => 
+        3 => 
         array (
           0 => 
           array (
@@ -190,93 +243,8 @@ array (
             'label' => 'LBL_MAP_ENABLED',
           ),
         ),
-        2 => 
-        array (
-          0 => 
-          array (
-            'name' => 'contract',
-            'studio' => 'visible',
-            'label' => 'LBL_CONTRACT',
-          ),
-          1 => '',
-        ),
       ),
-      'lbl_editview_panel5' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            'name' => 'work_center',
-            'studio' => 'visible',
-            'label' => 'LBL_WORK_CENTER',
-			'displayParams' => 
-            array (
-              'field_to_name_array' => 
-              array (
-                'name' => 'work_center',
-                'id' => 'work_center_id',
-              ),
-			  'call_back_function' => 'setWorkCenterPopupReturn',
-            ),
-          ),
-          1 => 
-          array (
-            'name' => 'work_center_res',
-            'studio' => 'visible',
-            'label' => 'LBL_WORK_CENTER_RES',
-			'displayParams' => 
-            array (
-              'initial_filter' => '&work_center_id_advanced="+encodeURIComponent(document.getElementById("work_center_id").value)+"',
-              'field_to_name_array' => 
-              array (
-                'name' => 'work_center_res',
-                'id' => 'work_center_res_id',
-              ),
-			  'call_back_function' => 'setWorkCenterResPopupReturn',
-            ),
-          ),
-        ),
-        1 => 
-        array (
-          0 => 
-          array (
-            'name' => 'work_center_people',
-            'studio' => 'visible',
-            'label' => 'LBL_WORK_CENTER_PEOPLE',
-			'displayParams' => 
-            array (
-			  'initial_filter' => '&work_center_res_id_advanced="+encodeURIComponent(document.getElementById("work_center_res_id").value)+"',
-              'field_to_name_array' => 
-              array (
-                'name' => 'work_center_people',
-                'id' => 'work_center_people_id',
-              ),
-			  //'call_back_function' => 'setWorkCenterPeoplePopupReturn',
-            ),
-          ),
-          1 => 
-          array (
-            'name' => 'work_order_access',
-            'studio' => 'visible',
-            'label' => 'LBL_WORK_ORDER_ACCESS',
-          ),
-        ),
-        2 => 
-        array (
-          0 => 
-          array (
-            'name' => 'next_woop_assignment',
-            'label' => 'LBL_NEXT_WOOP_ASSIGNMENT',
-          ),
-          1 => 
-          array (
-            'name' => 'complete_by_last_woop',
-            'label' => 'LBL_COMPLETE_BY_LAST_WOOP',
-          ),
-        ),
-      ),
-      'lbl_editview_panel2' => 
+      'lbl_editview_panel_gis' => 
       array (
         0 => 
         array (
@@ -329,7 +297,7 @@ array (
           ),
         ),
       ),
-      'lbl_editview_panel3' => 
+      'lbl_editview_panel_schedule' => 
       array (
         0 => 
         array (
@@ -413,15 +381,19 @@ array (
         array (
           0 => 
           array (
-            'name' => 'reporter',
-            'studio' => 'visible',
-            'label' => 'LBL_REPORTER',
-          ),
-          1 => 
-          array (
             'name' => 'reporter_org',
             'studio' => 'visible',
             'label' => 'LBL_REPORTER_ORG',
+          ),
+          1 => 
+          array (
+            'name' => 'reporter',
+            'studio' => 'visible',
+            'label' => 'LBL_REPORTER',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&account_name_advanced="+encodeURIComponent($("#reporter_org").val())+"',
+            ),
           ),
         ),
         1 => 
@@ -443,7 +415,6 @@ array (
                 'name' => 'priority',
                 'id' => 'ham_priority_id',
               ),
-              'call_back_function' => 'setHamPriorityReturn',
             ),
           ),
         ),

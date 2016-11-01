@@ -37,7 +37,16 @@ array (
       array (
         0 => 
         array (
-          0 => 'name',
+          0 => 
+          array (
+            'name' => 'framework',
+            'customCode' => '{$FRAMEWORK}',
+          ),
+          1=>''
+        ),
+        1 => 
+        array (
+          0 => 'code_module',
           1 => 
           array (
             'name' => 'code_type',
@@ -45,12 +54,12 @@ array (
             'label' => 'LBL_CODE_TYPE',
           ),
         ),
-        1 => 
-        array (
-          0 => 'description',
-          1 => '',
-        ),
         2 => 
+        array (
+          0 => 'name',
+          1 => 'description',
+        ),
+        3 => 
         array (
           0 => 
           array (
@@ -63,6 +72,19 @@ array (
             'name' => 'code_tag',
             'label' => 'LBL_CODE_TAG',
           ),
+        ),
+        4 => 
+        array (
+          0 => array (
+            'name' => 'parent_type_value',
+            'studio' => 'visible',
+            'label' => 'LBL_PARENT_TYPE_VALUE',
+            'displayParams' =>
+            array (
+              'initial_filter' => '&code_type_advanced="+this.form.{$fields.code_type.name}.value+"',
+            )
+          ),
+          1 => '',
         ),
       ),
     ),

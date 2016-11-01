@@ -115,13 +115,14 @@ array (
                 'id' => 'aos_products_id',
                 'aos_product_category_name' => 'asset_category',
                 'aos_product_category_id' => 'aos_product_categories_id',
-                'asset_name_rule_c' => 'asset_name_rule_c',
-                'haa_ff_id_c' => 'haa_ff_id_c',
+                'asset_name_rule_c' => 'asset_name_rule',
+                'haa_ff_id_c' => 'haa_ff_id',
               ),
               'call_back_function' => 'setProductPopupReturn',
             ),
           ),
         ),
+/*deleted by toney.wu 不确定以下代码有什么用处，先删除20161013
         1 => 
         array (
           0 => 
@@ -132,7 +133,7 @@ array (
           array (
             'name' => 'hfa_fixed_assets_hat_assets_1_name',
           ),
-        ),
+        ),*/
       ),
       'lbl_editview_panel4' => 
       array (
@@ -390,8 +391,23 @@ array (
           ),
           1 => 
           array (
-            'name' => 'asset_source_ref',
+            'name' => 'asset_source',
             'label' => 'LBL_SOURCE_REF',
+            'displayParams' => 
+            array (
+              //'initial_filter' => '&type_advanced=Good',
+              'field_to_name_array' => 
+              array (
+                'name' => 'asset_source',
+                'id' => 'asset_source_id',
+                'received_date' => 'received_date',
+                'line_price' => 'original_cost',
+                'currency_id' => 'currency_id',
+                'supplier_org' => 'supplier_org',
+                'supplier_org_id' => 'supplier_org_id',
+                'supplier_desc'=>'supplier_desc',
+              ),
+             ),
           ),
         ),
         1 => 
@@ -470,6 +486,10 @@ array (
             'name' => 'parent_asset',
             'studio' => 'visible',
             'label' => 'LBL_PARENT_ASSET',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&framework_advanced="+encodeURIComponent($("#haa_framework").val())+"',
+            ),
           ),
         ),
         1 => 
@@ -520,6 +540,11 @@ array (
             'name' => 'owning_org',
             'studio' => 'visible',
             'label' => 'LBL_OWING_ORG',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&frame_c_advanced="+encodeURIComponent($("#haa_framework").val())+"',
+              'call_back_function' => 'setUsingOrgPopupReturn',
+            ),
           ),
           1 => 
           array (
@@ -534,6 +559,10 @@ array (
             'name' => 'owning_person',
             'studio' => 'visible',
             'label' => 'LBL_OWNING_PERSON',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&account_name_advanced="+encodeURIComponent($("#owning_org").val())+"',
+            ),
           ),
         ),
         6 => 
@@ -543,6 +572,11 @@ array (
             'name' => 'using_org',
             'studio' => 'visible',
             'label' => 'LBL_USING_ORG',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&frame_c_advanced="+encodeURIComponent($("#haa_framework").val())+"',
+              'call_back_function' => 'setUsingOrgPopupReturn',
+            ),
           ),
           1 => 
           array (
@@ -557,6 +591,10 @@ array (
             'name' => 'using_person',
             'studio' => 'visible',
             'label' => 'LBL_USING_PERSON',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&account_name_advanced="+encodeURIComponent($("#using_org").val())+"',
+            ),
           ),
         ),
       ),

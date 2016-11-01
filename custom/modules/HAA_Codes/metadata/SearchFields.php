@@ -1,5 +1,5 @@
 <?php
-// created: 2016-08-01 19:02:07
+// created: 2016-10-20 23:19:44
 $searchFields['HAA_Codes'] = array (
   'name' => 
   array (
