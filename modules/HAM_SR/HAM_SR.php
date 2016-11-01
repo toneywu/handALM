@@ -14,15 +14,58 @@ class HAM_SR extends HAM_SR_sugar {
 		$SR_fields = $this->get_list_view_array();
 
 		if (!empty($this->sr_status))
-			$SR_fields['SR_STATUS'] = "<span class='color_tag color_doc_status_{$this->sr_status}'>".$app_list_strings['ham_sr_status_list'][$this->sr_status]."</span>";
+			$SR_fields['SR_STATUS_VAL'] = $this->sr_status;
 
 		return $SR_fields;
 	}
 
-	
+
+	function save($check_notify = false) {
+		if ($this->sr_status == 'SUBMITTED') {
+			$this->sr_status = 'APPROVED';
+		}
+		if ($this->sr_status == 'COMPLETE') {
+			$this->sr_status = 'CLOSED'; //如果提交时状态为完成，保存后状态为结束。结束状态下没有任何内容可再修改。
+		}
+
+		if ($this->sr_status != 'COMPLETE' || $this->sr_status != 'CLOSED') {
+			$this->closed_date = "";
+			$this->closed_by = "";
+			$this->closed_by_id="";
+		}
+
+
+		if ($this->sr_number=='') {
+			    $bean_site = BeanFactory::getBean('HAM_Maint_Sites',$this->ham_maint_sites_id);
+				$bean_numbering = BeanFactory::getBean('HAA_Numbering_Rule',$bean_site->sr_haa_numbering_rule_id);
+
+				if (isset($bean_numbering)) {
+
+				    $this->sr_number = $bean_numbering->nextval;
+
+				    $current_number    =    $bean_numbering->current_number +1;
+			        $current_numberstr = "".$current_number;
+			        $padding_str ="";
+			        for($i=0; $i<$bean_numbering->min_num_strlength; $i++) {
+			        	$padding_str =  $padding_str+ "0";
+			        }
+
+			        $padding_str = substr($padding_str,0, strlen($padding_str) - strlen($current_numberstr)) + $current_numberstr;
+			        $nextval_str = $bean_numbering->perfix.$padding_str;
+
+
+			        $bean_numbering->current_number = $current_number;
+					$bean_numbering->nextval = $nextval_str;
+					$bean_numbering->save();
+				}
+		}
+
+		parent :: save($check_notify); //保存WO主体
+	}
+
 	function __construct(){
 		parent::__construct();
 	}
-	
+
 }
 ?>

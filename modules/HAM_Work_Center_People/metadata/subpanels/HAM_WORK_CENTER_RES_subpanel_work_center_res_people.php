@@ -29,7 +29,7 @@ $subpanel_layout['list_fields'] = array (
     'width' => '10%',
     'default' => true,
   ),
-  'perople' => 
+  'people' => 
   array (
     'type' => 'relate',
     'studio' => 'visible',

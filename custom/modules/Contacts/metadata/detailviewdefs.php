@@ -90,6 +90,13 @@ array (
           ),
         ),
       ),
+      'includes' => 
+      array (
+        0 => 
+        array (
+          'file' => 'modules/Leads/Lead.js',
+        ),
+      ),
       'maxColumns' => '2',
       'widths' => 
       array (
@@ -104,35 +111,56 @@ array (
           'field' => '30',
         ),
       ),
-      'includes' => 
-      array (
-        0 => 
-        array (
-          'file' => 'modules/Leads/Lead.js',
-        ),
-      ),
-      'useTabs' => true,
+      'useTabs' => false,
       'tabDefs' => 
       array (
+        'DEFAULT' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
         'LBL_CONTACT_INFORMATION' => 
         array (
-          'newTab' => true,
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_EDITVIEW_PANEL2' => 
+        array (
+          'newTab' => false,
           'panelDefault' => 'expanded',
         ),
         'LBL_PANEL_ADVANCED' => 
         array (
-          'newTab' => true,
+          'newTab' => false,
           'panelDefault' => 'expanded',
         ),
         'LBL_PANEL_ASSIGNMENT' => 
         array (
-          'newTab' => true,
+          'newTab' => false,
           'panelDefault' => 'expanded',
         ),
       ),
     ),
     'panels' => 
     array (
+      'default' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'framework_c',
+            'studio' => 'visible',
+            'label' => 'LBL_FRAMEWORK',
+          ),
+          1 => 
+          array (
+            'name' => 'people_type_c',
+            'studio' => 'visible',
+            'label' => 'LBL_PEOPLE_TYPE',
+          ),
+        ),
+      ),
       'lbl_contact_information' => 
       array (
         0 => 
@@ -143,6 +171,12 @@ array (
             'comment' => 'Last name of the contact',
             'label' => 'LBL_LAST_NAME',
           ),
+          1 => 
+          array (
+            'name' => 'status_c',
+            'studio' => 'visible',
+            'label' => 'LBL_STATUS',
+          ),
         ),
         1 => 
         array (
@@ -152,23 +186,9 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_SALUTATION_C',
           ),
+          1 => '',
         ),
         2 => 
-        array (
-          0 => 
-          array (
-            'name' => 'type_c',
-            'studio' => 'visible',
-            'label' => 'LBL_TYPE',
-          ),
-          1 => 
-          array (
-            'name' => 'linked_user_c',
-            'studio' => 'visible',
-            'label' => 'LBL_LINKED_USER',
-          ),
-        ),
-        3 => 
         array (
           0 => 
           array (
@@ -181,13 +201,12 @@ array (
             'label' => 'LBL_MOBILE_PHONE',
           ),
         ),
-        4 => 
+        3 => 
         array (
           0 => 
           array (
-            'name' => 'title',
-            'comment' => 'The title of the contact',
-            'label' => 'LBL_TITLE',
+            'name' => 'phone_fax',
+            'label' => 'LBL_FAX_PHONE',
           ),
           1 => 
           array (
@@ -195,7 +214,30 @@ array (
             'label' => 'LBL_DEPARTMENT',
           ),
         ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'employee_number_c',
+            'label' => 'LBL_EMPLOYEE_NUMBER',
+          ),
+          1 => '',
+        ),
         5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'id_type_c',
+            'studio' => 'visible',
+            'label' => 'LBL_ID_TYPE',
+          ),
+          1 => 
+          array (
+            'name' => 'id_number_c',
+            'label' => 'LBL_ID_NUMBER',
+          ),
+        ),
+        6 => 
         array (
           0 => 
           array (
@@ -204,11 +246,11 @@ array (
           ),
           1 => 
           array (
-            'name' => 'phone_fax',
-            'label' => 'LBL_FAX_PHONE',
+            'name' => 'primary_contact_c',
+            'label' => 'LBL_PRIMARY_CONTACT',
           ),
         ),
-        6 => 
+        7 => 
         array (
           0 => 
           array (
@@ -216,8 +258,9 @@ array (
             'studio' => 'false',
             'label' => 'LBL_EMAIL_ADDRESS',
           ),
+          1 => '',
         ),
-        7 => 
+        8 => 
         array (
           0 => 
           array (
@@ -240,14 +283,18 @@ array (
             ),
           ),
         ),
-        8 => 
+      ),
+      'lbl_editview_panel2' => 
+      array (
+        0 => 
         array (
           0 => 
           array (
-            'name' => 'description',
-            'comment' => 'Full text of the note',
-            'label' => 'LBL_DESCRIPTION',
+            'name' => 'linked_user_c',
+            'studio' => 'visible',
+            'label' => 'LBL_LINKED_USER',
           ),
+          1 => '',
         ),
       ),
       'LBL_PANEL_ADVANCED' => 
@@ -256,17 +303,89 @@ array (
         array (
           0 => 
           array (
-            'name' => 'lead_source',
-            'comment' => 'How did the contact come about',
-            'label' => 'LBL_LEAD_SOURCE',
+            'name' => 'description',
+            'comment' => 'Full text of the note',
+            'label' => 'LBL_DESCRIPTION',
+          ),
+          1 => 
+          array (
+            'name' => 'report_to_name',
+            'label' => 'LBL_REPORTS_TO',
           ),
         ),
         1 => 
         array (
           0 => 
           array (
-            'name' => 'report_to_name',
-            'label' => 'LBL_REPORTS_TO',
+            'name' => 'attribute1_c',
+            'label' => 'LBL_ATTRIBUTE1',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute2_c',
+            'label' => 'LBL_ATTRIBUTE2',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute3_c',
+            'label' => 'LBL_ATTRIBUTE3',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute4_c',
+            'label' => 'LBL_ATTRIBUTE4',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute5_c',
+            'label' => 'LBL_ATTRIBUTE5',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute6_c',
+            'label' => 'LBL_ATTRIBUTE6',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute7_c',
+            'label' => 'LBL_ATTRIBUTE7',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute8_c',
+            'label' => 'LBL_ATTRIBUTE8',
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'birthdate',
+            'comment' => 'The birthdate of the contact',
+            'label' => 'LBL_BIRTHDATE',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute9_c',
+            'label' => 'LBL_ATTRIBUTE9',
+          ),
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'lead_source',
+            'comment' => 'How did the contact come about',
+            'label' => 'LBL_LEAD_SOURCE',
           ),
           1 => 
           array (
@@ -290,6 +409,19 @@ array (
             'name' => 'date_modified',
             'customCode' => '{$fields.date_modified.value} {$APP.LBL_BY} {$fields.modified_by_name.value}',
             'label' => 'LBL_DATE_MODIFIED',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'data_source_code_c',
+            'label' => 'LBL_DATA_SOURCE_CODE',
+          ),
+          1 => 
+          array (
+            'name' => 'data_source_id_c',
+            'label' => 'LBL_DATA_SOURCE_ID',
           ),
         ),
       ),

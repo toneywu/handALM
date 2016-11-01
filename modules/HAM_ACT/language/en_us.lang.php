@@ -35,4 +35,9 @@ $mod_strings = array (
   'LBL_NEW_FORM_TITLE' => 'New ACT',
   'LBL_WORK_CENTER_NUMBER' => 'WorkCenter Num',
   'LBL_ACT_OP_SUBPANEL_TITLE' => 'Activity Operations',
+  'LBL_SR_HAA_FRAMEWORKS_RULE'=>'Business Framwork',
+  'LBL_EVENT_TYPE'=>'Work Order Type',
+  'LBL_ACT_STATUS'=>'Default Status',
+  'LBL_PRIORITY'=>'Work Priority',
+  'SR_HAA_CODES_RULE'=>'Activity Type',
 );

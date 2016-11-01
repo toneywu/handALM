@@ -2,11 +2,18 @@
 $module_name = 'HAM_WOOP';
 $listViewDefs [$module_name] = 
 array (
+  'WOOP_NUMBER' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_WOOP_NUMBER',
+    'width' => '10%',
+    'default' => true,
+  ),
   'WO_NUMBER' => 
   array (
     'type' => 'varchar',
     'label' => 'LBL_WO_NUMBER',
-    'width' => '10%',
+    'width' => '5%',
     'default' => true,
   ),
   'NAME' => 
@@ -16,13 +23,14 @@ array (
     'default' => true,
     'link' => true,
   ),
-  'WO_STATUS' => 
+  'WOOP_STATUS' => 
   array (
     'type' => 'enum',
     'studio' => 'visible',
-    'label' => 'LBL_WO_STATUS',
-    'width' => '10%',
+    'label' => 'LBL_WOOP_STATUS',
+    'width' => '12%',
     'default' => true,
+    'customCode'=>'{$WOOP_STATUS_TAGGED}',
   ),
   'DATE_SCHEDUALED_START' => 
   array (
@@ -38,12 +46,60 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-  'ASSIGNED_USER_NAME' => 
+  'WORK_CENTER' => 
   array (
-    'width' => '9%',
-    'label' => 'LBL_ASSIGNED_TO_NAME',
-    'module' => 'Employees',
-    'id' => 'ASSIGNED_USER_ID',
+    'type' => 'relate',
+    'studio' => 'visible',
+    'label' => 'LBL_WORK_CENTER',
+    'id' => 'HAM_WORK_CENTER_ID',
+    'link' => true,
+    'width' => '10%',
+    'default' => true,
+  ),
+  'WORK_CENTER_RES' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'label' => 'LBL_WORK_CENTER_RES',
+    'id' => 'WORK_CENTER_RES_ID',
+    'link' => true,
+    'width' => '10%',
+    'default' => true,
+  ),
+  'WORK_CENTER_PEOPLE' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'label' => 'LBL_HAM_WORK_CENTER_PEOPLE',
+    'id' => 'WORK_CENTER_PEOPLE_ID',
+    'link' => true,
+    'width' => '10%',
+    'default' => true,
+  ),
+  'ACT_MODULE' => 
+  array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'label' => 'LBL_ACT_MODULE',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'OWNER' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'label' => 'LBL_OWNER',
+    'id' => 'CONTACT_ID',
+    'link' => true,
+    'width' => '10%',
+    'default' => false,
+  ),
+  'DESCRIPTION' => 
+  array (
+    'type' => 'text',
+    'label' => 'LBL_DESCRIPTION',
+    'sortable' => false,
+    'width' => '10%',
     'default' => false,
   ),
 );

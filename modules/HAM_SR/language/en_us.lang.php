@@ -114,4 +114,11 @@ $mod_strings = array (
   'LBL_SR_SUBPANEL_TITLE'=>'Related Service Requests',
   'LBL_WO_NUM'=>'WO#',
  'LBL_EVENT_TYPE'=>'SR Type',
+ 'LBL_OWNED_BY'=>'Owned By',
+ 'LBL_OWNED_BY'=>'Owned by Org',
+ 'LBL_WORKLOG'=>'Worklog',
+ 'LBL_CLOSED_DATE'=>'Closed Date',
+ 'LBL_CLOSED_BY'=>'Closed By',
+ 'LBL_EDITVIEW_PANEL4'=>'Worklog',
+ 'LBL_SUBMIT_BUTTON_CLOSE_SR_LABEL'=>'Complete SR',
 );

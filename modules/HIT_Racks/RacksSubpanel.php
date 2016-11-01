@@ -25,3 +25,15 @@ function get_current_asset($params) {
 
     return $return_array;
 }*/
+
+function get_hit_racks($params) {
+    $args = func_get_args();
+	$using_org_id = $args[0]['using_org_id'];
+
+    $return_array['select'] = " SELECT h.*";
+    $return_array['from'] = " FROM hit_racks";
+    $return_array['where'] = " WHERE hit_racks.hat_assets_id = hat_assets.id and hat_assets.using_org_id='" . $using_org_id . "'";//会自动加入deleted字段
+    $return_array['join'] = ",hat_assets";
+    $return_array['join_tables'] = "hit_racks.hat_assets_id = hat_assets.id";
+    return $return_array;
+}

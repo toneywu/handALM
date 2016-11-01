@@ -90,5 +90,14 @@ $mod_strings = array (
   'LBL_MAP_MARKER_TYPE' => '定位方式',
   'LBL_NAV_MODE_TREE'=>'层次结构树',
   'LBL_NAV_MODE_MAP'=>'MAP/GIS图层定位',
-  'LBL_BTN_SWITCH_VIEW'=>'切换视图'
+  'LBL_BTN_SWITCH_VIEW'=>'切换视图',
+  'LBL_NAV_LOCATION'=>'浏览并选择位置',
+  'LBL_NAV_ASSET'=>'浏览并选择设备/资产',
+  'LBL_NAV_IT'=>'浏览并选择IT设备',
+  'LBL_NAV_RACK'=>'浏览并选择服务器/网络机柜',
+  'LBL_NAV_RACKPOSITION'=>'浏览并选择服务器/网络机柜位置',
+  'LBL_PLACEHOLDER'=>'占位',
+  'LBL_ADD_PLACEHOLDER'=>'分配机柜空间',
+  'LBL_BTN_SELECT'=>'选中此项',
+
 );

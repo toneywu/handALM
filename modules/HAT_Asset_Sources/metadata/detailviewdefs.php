@@ -109,6 +109,20 @@ array (
         array (
           0 => 
           array (
+            'name' => 'received_date',
+            'label' => 'LBL_RECEIVED_DATE',
+          ),
+          1 => 
+          array (
+            'name' => 'currency_id',
+            'studio' => 'visible',
+            'label' => 'LBL_CURRENCY',
+          ),
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
             'name' => 'source_type',
             'label' => 'LBL_SOURCE_TYPE',
           ),
@@ -118,7 +132,7 @@ array (
             'label' => 'LBL_SOURCE_REFERENCE',
           ),
         ),
-        6 => 
+        7 => 
         array (
           0 => 
           array (

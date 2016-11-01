@@ -38,4 +38,4 @@
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['HAM_ACT_OP'] = '活动工序';
+$app_list_strings['moduleList']['HAM_ACT_OP'] = '标准活动任务';

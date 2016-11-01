@@ -286,11 +286,11 @@
       'len' => 36,
       'size' => '20',
     ),
-    'perople' => 
+    'people' => 
     array (
       'required' => false,
       'source' => 'non-db',
-      'name' => 'perople',
+      'name' => 'people',
       'vname' => 'LBL_PEROPLE',
       'type' => 'relate',
       'massupdate' => 0,

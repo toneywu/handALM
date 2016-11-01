@@ -391,7 +391,7 @@
 </nav>
 <!--End Responsive Top Navigation Menu -->
 {if $THEME_CONFIG.display_sidebar}
-    <!--Start Page Container and Responsive Sidebar -->
+    <!--Start Page Container and Responsive Sidebar --><!--这里仿SuiteP模板，加入了side-bar-class -->
     <div id='sidebar_container' class="container-fluid">
         <a href="javascript:void(0)" id="buttontoggle"><span class="glyphicon glyphicon-th-list"></span></a>
         <div class="row">
@@ -406,7 +406,11 @@
                                         {if $item.URL == "-"}
                                             <li><a></a><span>&nbsp;</span></li>
                                         {else}
-                                            <li class="actionmenulinks" role="presentation"><a href="{$item.URL}"><span>{$item.LABEL}</span></a></li>
+                                            <li class="actionmenulinks" role="presentation">
+                                                <a href="{$item.URL}" class="side-bar-{$item.MODULE_NAME}">
+                                                    <span class="actionmenulink">{$item.LABEL}</span>
+                                                </a>
+                                            </li>
                                         {/if}
                                     {/foreach}
                                     <br>

@@ -35,4 +35,5 @@ $mod_strings = array (
   'LBL_SITE' => 'Maint Site/Area',
   'LBL_WORK_CENTER_ACT_SUBPANEL_TITLE' => 'Activities',
   'LBL_WORK_CENTER_RES_SUBPANEL_TITLE' => 'Resource Of Work Centers',
+  'LBL_FRAMEWORK'=>'Business Framework',
 );

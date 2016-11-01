@@ -53,7 +53,7 @@ array (
         array (
           0 => 
           array (
-            'name' => 'perople',
+            'name' => 'people',
             'studio' => 'visible',
             'label' => 'LBL_PEROPLE',
             'displayParams' => 
@@ -62,7 +62,7 @@ array (
               array (
                 'account_name' => 'organization_name',
                 'id' => 'contact_id',
-                'name' => 'perople',
+                'name' => 'people',
 				'linked_user_c'=>'user_name',
               ),
             ),

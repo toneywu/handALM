@@ -6,6 +6,13 @@ array (
   array (
     'templateMeta' => 
     array (
+      'includes' => 
+      array (
+        0 => 
+        array (
+          'file' => 'modules/AOS_Contracts/js/AOS_Contracts_detailview.js',
+        ),
+      ),
       'form' => 
       array (
         'buttons' => 
@@ -80,7 +87,6 @@ array (
             'name' => 'contract_number_c',
             'label' => 'LBL_CONTRACT_NUMBER',
           ),
-          1 => '',
         ),
         2 => 
         array (
@@ -180,6 +186,66 @@ array (
         ),
         9 => 
         array (
+          0 => 
+          array (
+            'name' => 'pre_contract_number_c',
+            'studio' => 'visible',
+            'label' => 'LBL_PRE_CONTRACT_NUMBER_C',
+          ),
+          1 => 
+          array (
+            'name' => 'contract_revision_c',
+            'studio' => 'visible',
+            'label' => 'LBL_CONTRACT_REVISION',
+          ),
+        ),
+        10 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute1_c',
+            'studio' => 'visible',
+            'label' => 'LBL_ATTRIBUTE1_C',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute2_c',
+            'studio' => 'visible',
+            'label' => 'LBL_ATTRIBUTE2_C',
+          ),
+        ),
+        11 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute3_c',
+            'studio' => 'visible',
+            'label' => 'LBL_ATTRIBUTE3_C',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute4_c',
+            'studio' => 'visible',
+            'label' => 'LBL_ATTRIBUTE4_C',
+          ),
+        ),
+        12 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute5_c',
+            'studio' => 'visible',
+            'label' => 'LBL_ATTRIBUTE5_C',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute6_c',
+            'studio' => 'visible',
+            'label' => 'LBL_ATTRIBUTE6_C',
+          ),
+        ),
+        13 => 
+        array (
           0 => 'description',
         ),
       ),
@@ -201,11 +267,6 @@ array (
             'name' => 'line_items',
             'label' => 'LBL_LINE_ITEMS',
           ),
-        ),
-        2 => 
-        array (
-          0 => '',
-          1 => '',
         ),
         3 => 
         array (

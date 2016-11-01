@@ -39,9 +39,8 @@ array (
         array (
           0 => 
           array (
-            'name' => 'sr_hat_domains_rule',
-            'studio' => 'visible',
-            'label' => 'LBL_SR_HAA_FRAMEWORKS_RULE',
+            'name' => 'framework',
+            'customCode' => '{$FRAMEWORK}',
           ),
           1 => 'name',
         ),
@@ -52,6 +51,10 @@ array (
             'name' => 'event_type',
             'studio' => 'visible',
             'label' => 'LBL_EVENT_TYPE',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&basic_type_advanced=WO',
+            ),
           ),
           1 => 
           array (

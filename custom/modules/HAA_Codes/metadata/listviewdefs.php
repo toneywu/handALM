@@ -17,6 +17,14 @@ array (
     'width' => '10%',
     'default' => true,
   ),
+  'CODE_MODULE' => 
+  array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'label' => 'LBL_CODE_MODULE',
+    'width' => '10%',
+    'default' => true,
+  ),
   'CODE_TAG' => 
   array (
     'type' => 'varchar',
@@ -31,6 +39,16 @@ array (
     'studio' => 'visible',
     'label' => 'LBL_HAA_FF',
     'id' => 'HAA_FF_ID',
+    'link' => true,
+    'width' => '10%',
+  ),
+  'PARENT_TYPE_VALUE' => 
+  array (
+    'type' => 'relate',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_PARENT_TYPE_VALUE',
+    'id' => 'PARENT_TYPE_VALUE_ID',
     'link' => true,
     'width' => '10%',
   ),

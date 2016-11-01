@@ -15,7 +15,7 @@ class HAA_FFController extends SugarController {
 
         $html='';
         if(isset($_REQUEST['ff_id']) && $_REQUEST['ff_id'] != ''){
-                $sql = "SELECT 
+                $sql = "SELECT
                               haa_ff_fields.`id`,
                               haa_ff_fields.`field`,
                               haa_ff_fields.`fieldtype`,
@@ -79,50 +79,48 @@ class HAA_FFController extends SugarController {
     }
 
     Private function save_lines($post_data, $parent, $key = ''){
-            $line_count = isset($post_data[$key.'field']) ? count($post_data[$key.'field']) : 0; //判断记录的行数
 
-            for ($i = 0; $i < $line_count; ++$i) {
+        $line_count = isset($post_data[$key.'field']) ? count($post_data[$key.'field']) : 0; //判断记录的行数
 
-                if ($post_data[$key.'field'][$i]!='') {
-                    //只保存字段名不为空时继续，否则直接到下一循环
-                    //TODO：这里信赖之前的JS处理结果，在服务器层没有做进一步的校验.理论上需要再去检验是否双单位填写正确，以及是否货位相关字段正确
-                    //
-                    if($post_data[$key.'deleted'][$i] == 1 && $post_data[$key.'id'][$i] != ''){//删除行
-                        $field_lines = new HAA_FF_Fields();
-                        $field_lines -> retrieve($post_data[$key.'id'][$i]);
-                        $field_lines -> mark_deleted($post_data[$key.'id'][$i]);
-                        //将Label表中的也同步清除
-                        $field_label_lines = BeanFactory::getBean('HAA_FF_Labels');
-                        $field_label_lines -> retrieve_by_string_fields(array('haa_ff_field_id'=> $post_data[$key.'id'][$i]));
-                        $field_label_lines -> mark_deleted();
-                        $field_label_lines -> save();
-                    } else {
-                    //新增或修改行
-                        if($post_data[$key.'id'][$i] == ''){//新增行
-                            $field_lines = new HAA_FF_Fields();
-                            $field_lines = BeanFactory::getBean('HAA_FF_Fields');
-                        } else {//修改行
-                            echo ("line should be modified<br/>");
-                            $field_lines = BeanFactory::getBean('HAA_FF_Fields') -> retrieve($post_data[$key.'id'][$i]);
-                        }
+        for ($i = 0; $i < $line_count; ++$i) {
 
-                        //echo "(".$post_data[$key.'field'][$i].") ->att_hide=".((is_null($post_data[$key.'att_hide'][$i])||$post_data[$key.'att_hide'][$i]==0)?0:1)."[".$post_data[$key.'att_hide'][$i]."]<br/>";
+            if ($post_data[$key.'deleted'][$i] == 1 && $post_data[$key.'id'][$i] != '') {
+                //需要删除记录
+                $field_lines = new HAA_FF_Fields();
+                $field_lines -> retrieve($post_data[$key.'id'][$i]);
+                $field_lines -> mark_deleted($post_data[$key.'id'][$i]);
+                //将Label表中的也同步清除
+                $field_label_lines = BeanFactory::getBean('HAA_FF_Labels');
+                $field_label_lines -> retrieve_by_string_fields(array('haa_ff_field_id'=> $post_data[$key.'id'][$i]));
+                $field_label_lines -> mark_deleted();
+                $field_label_lines -> save();
+            } else if ($post_data[$key.'field'][$i]!='') {
+                //只保存字段名不为空时继续，否则直接到下一循环
+                //新增或修改行
+                if($post_data[$key.'id'][$i] == ''){//新增行
+                    $field_lines = new HAA_FF_Fields();
+                    $field_lines = BeanFactory::getBean('HAA_FF_Fields');
+                } else {//修改行
+                    echo ("line should be modified<br/>");
+                    $field_lines = BeanFactory::getBean('HAA_FF_Fields') -> retrieve($post_data[$key.'id'][$i]);
+                }
 
-                        $field_lines ->field = $post_data[$key.'field'][$i];
-                        $field_lines ->fieldtype = $post_data[$key.'fieldtype'][$i];
-                        $field_lines ->listfilter = $post_data[$key.'listfilter'][$i];
-                        $field_lines ->att_required = is_null($post_data[$key.'att_required'][$i])?0:1;
-                        $field_lines ->mask = $post_data[$key.'mask'][$i];
-                        //$field_lines ->att_hide = is_null($post_data[$key.'att_hide'][$i])?0:1;//Checkbox传递过来时空为没有选，0为选中。
-                        //$field_lines ->att_keep_position = is_null($post_data[$key.'att_keep_position'][$i])?0:1;
-                        $field_lines ->default_val = $post_data[$key.'default_val'][$i];
-                        $field_lines->haa_ff_id = $parent->id;//父ID
-                    }
+                //echo "(".$post_data[$key.'field'][$i].") ->att_hide=".((is_null($post_data[$key.'att_hide'][$i])||$post_data[$key.'att_hide'][$i]==0)?0:1)."[".$post_data[$key.'att_hide'][$i]."]<br/>";
 
-                    $field_lines->save();
+                $field_lines ->field = $post_data[$key.'field'][$i];
+                $field_lines ->fieldtype = $post_data[$key.'fieldtype'][$i];
+                $field_lines ->listfilter = $post_data[$key.'listfilter'][$i];
+                $field_lines ->att_required = is_null($post_data[$key.'att_required'][$i])?0:1;
+                $field_lines ->mask = $post_data[$key.'mask'][$i];
+                //$field_lines ->att_hide = is_null($post_data[$key.'att_hide'][$i])?0:1;//Checkbox传递过来时空为没有选，0为选中。
+                //$field_lines ->att_keep_position = is_null($post_data[$key.'att_keep_position'][$i])?0:1;
+                $field_lines ->default_val = $post_data[$key.'default_val'][$i];
+                $field_lines->haa_ff_id = $parent->id;//父ID
 
-                      //写入多语言表
-                      //
+                $field_lines->save();
+
+                  //写入多语言表
+                  //
                 $current_line_id = $field_lines->id;
                 echo $current_line_id." ".$post_data[$key.'label2'][$i]."<br/>";
 
@@ -162,8 +160,6 @@ class HAA_FFController extends SugarController {
                     $field_label_lines->lang = 'zh_CN';
                     $field_label_lines->save();
                 }
-
-                    //$GLOBALS['log']->debug("Field Line Saved");
 
             } else {
                     //empty line jumped

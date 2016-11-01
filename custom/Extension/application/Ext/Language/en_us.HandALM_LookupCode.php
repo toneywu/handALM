@@ -39,7 +39,40 @@
 
 
 $app_list_strings['moduleList']['HAA_Codes'] = 'Codes';
-$app_list_strings['haa_code_type_list']['accounts_level'] = 'Organization: Level';
-$app_list_strings['haa_code_type_list']['account_org_type'] = 'Organization: Organization Type';
-$app_list_strings['haa_code_type_list']['account_nature'] = 'Organization: Nature';
-$app_list_strings['haa_code_type_list']['account_business_type'] = 'Organization: Business Type';
+
+$app_list_strings['haa_code_module_list']=array (
+  'accounts' => 'Organizations',
+  'tasks' => 'Tasks',
+  'contact' => 'People',
+  'contract' => 'Contracts',
+  'asset_location' => 'Asset Locations',
+  'asset_qualification'=>'Asset Qualifications',
+  'qualification'=>'Qualifications',
+  'wo'=>'Activities/Work Orders',
+  'revenue' => 'Revenue/Expenditure Trans',
+  'flexform'=>'FlexForm Extended Fields',
+
+);
+
+$app_list_strings['haa_code_type_list']=array (
+  '' => '',
+  'accounts_level' => 'accounts_level',
+  'accounts_business_type' => 'accounts_business_type',
+  'accounts_nature' => 'accounts_nature',
+  'accounts_org_type' => 'accounts_org_type',
+  'accounts_customer_class' => 'accounts_customer_class',
+  'contact_business_type'=>'contact_business_type',
+  'contact_id_type'=>'contact_id_type',
+  'contract_business_type' => 'contract_business_type',
+  'contract_media_type' => 'contract_media_type',
+  'contract_revision' => 'contract_revision',
+  'contract_type' => 'contract_type',
+  'asset_location_type' => 'asset_location_type',
+  'asset_qualification_type'=>'asset_qualification_type',
+  'qualification_type'=>'qualification_type',
+  'flexform_extended_list'=>'flexform_extended_list',
+  'tasks_type'=>'tasks_type',
+  'wo_activity_type'=>'wo_activity_type',
+  'revenue_expense_group' => 'revenue_expense_group',
+  'revenue_expense_type' => 'revenue_expense_type',
+);

@@ -45,10 +45,10 @@ $dictionary['HAM_Work_Centers'] = array(
 		'fields'=>array (
 
 #维护区域		
-'ham_maint_sites_id_c' => 
+'ham_maint_sites_id' => 
   array (
     'required' => false,
-    'name' => 'ham_maint_sites_id_c',
+    'name' => 'ham_maint_sites_id',
     'vname' => 'LBL_SITE_HAM_MAINT_SITES_ID',
     'type' => 'id',
     'massupdate' => 0,
@@ -88,7 +88,7 @@ $dictionary['HAM_Work_Centers'] = array(
     'merge_filter' => 'disabled',
     'len' => '255',
     'size' => '20',
-    'id_name' => 'ham_maint_sites_id_c',
+    'id_name' => 'ham_maint_sites_id',
     'ext2' => 'HAM_Maint_Sites',
     'module' => 'HAM_Maint_Sites',
     'rname' => 'name',
@@ -96,7 +96,7 @@ $dictionary['HAM_Work_Centers'] = array(
     'studio' => 'visible',
   ),
   
-  
+  /*
 'sr_hat_domains_rule_id' => 
     array (
       'required' => false,
@@ -147,10 +147,32 @@ $dictionary['HAM_Work_Centers'] = array(
       'quicksearch' => 'enabled',
       'studio' => 'visible',
       ),
-	  
-	  
+	  */
+    'framework' =>
+    array (
+      'required' => true,
+      'source' => 'non-db',
+      'name' => 'framework',
+      'vname' => 'LBL_FRAMEWORK',
+      'type' => 'varchar',
+      'massupdate' => 0,
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'duplicate_merge_dom_value' => '0',
+      'audited' => false,
+      'inline_edit' => true,
+      'reportable' => true,
+      'unified_search' => false,
+      'merge_filter' => 'disabled',
+      'len' => '255',
+      'size' => '20',
+      'quicksearch' => 'enabled',
+      'studio' => 'visible',
+      ),
 
-	  
 'sr_ham_maint_sites_rule_id' => 
     array (
       'required' => false,

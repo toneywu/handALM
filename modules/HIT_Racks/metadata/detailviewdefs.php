@@ -10,7 +10,7 @@ array (
       array (
         0 => 
         array (
-          'file' => 'modules/HIT_Racks/js/detialview_hit_racks.js',
+          'file' => 'modules/HIT_Racks/js/detailview_hit_racks.js',
         ),
       ),
       'form' => 
@@ -59,13 +59,20 @@ array (
       array (
         0 => 
         array (
-          0 => 
-          array (
-            'name' => 'asset',
-          ),
-          1 => 'asset_desc',
+          0 => 'framework',
+          1 => 'asset_group',
         ),
         1 => 
+        array (
+          0 => 'asset_location',
+          1 => 'asset_status',
+        ),
+        2 => 
+        array (
+          0 => 'asset',
+          1 => 'name',
+        ),
+        3 => 
         array (
           0 => 
           array (
@@ -74,38 +81,52 @@ array (
           ),
           1 => 
           array (
-            'name' => 'depth',
-            'label' => 'LBL_DEPTH',
+            'name' => 'enable_partial_allocation',
           ),
-        ),
-        2 => 
-        array (
-          0 => 
-          array (
-            'name' => 'numbering_rule',
-            'studio' => 'visible',
-            'label' => 'LBL_NUMBERING_RULE',
-          ),
-          1 => 'hat_assets_accounts_name',
-        ),
-        3 => 
-        array (
-          0 => 
-          array (
-            'name' => 'asset_status',
-            'link' => false,
-          ),
-          1 => 'hat_asset_locations',
         ),
         4 => 
         array (
           0 => 'description',
-          1 => 
+          1 => '',
+        ),
+        5 => 
+        array (
+          0 => 'dimension_external',
+          1 => 'dimension_internal',
+        ),
+        6 => 
+        array (
+          0 => 'rated_current',
+          1 => 'standard_power',
+        ),
+        7 => 
+        array (
+          0 => 'stock_number',
+          1 => 'start_date',
+        ),
+        8 => 
+        array (
+          0 => 'asset_source_type',
+          1 => 'asset_source',
+        ),
+        9 => 
+        array (
+          0 => 'supplier_org',
+          1 => 'asset_source_ref',
+        ),
+        10 => 
+        array (
+          0 => 'owning_org',
+          1 => 'using_org',
+        ),
+        11 => 
+        array (
+          0 => 
           array (
-            'name' => 'occupation',
-            'studio' => 'visible',
-            'label' => 'LBL_OCCUPATION',
+            'name' => 'using_target',
+            'label' => 'LBL_USING_TARGET',
           ),
+          1 => '',
         ),
       ),
       'lbl_detailview_panel1' => 

@@ -41,4 +41,5 @@ $mod_strings = array (
   'LBL_WORK_CENTER_ACT_SUBPANEL_TITLE' => 'LBL_WORK_CENTER_ACT_SUBPANEL_TITLE',
   'LBL_EDITVIEW_PANEL1' => '新建面板 1',
   'LBL_WORK_CENTER_NUMBER' => '工作中心编号',
+  'LBL_FRAMEWORK'=>'业务框架',
 );

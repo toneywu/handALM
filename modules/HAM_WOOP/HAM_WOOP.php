@@ -47,49 +47,37 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 
 	function save($check_notify = false) {
 
-		//		foreach ($this as $key => $value) {
-		//			if(is_string($value)){
-		//				echo "key = " . $key . ",value = " . $value . "<br>";
-		//			}elseif(is_object($value)){
-		//				echo var_dump($value)."<br>";
-		//				
-		//			}
-		//			
-		//		}
-
 		global $db;
 		$id = $this->id;
 		$sql = "select woop_status from ham_woop where ham_woop.id='" . $id . "'";
 		$results = $db->query($sql);
 		$current_db_status = "";
-	
+
 		while ($result = $db->fetchByAssoc($results)) {
 			$current_db_status = $result['woop_status'];
 		}
-		
+
 		//没什么特殊的，就是工序在APPROVED之后可以手工变为WSCH、WMATL、WPCOND。 如果是这3个状态，同时同步工单状态=Y，就去修改工作单状态
-		if($current_db_status=="APPROVED"&&($this->woop_status=="WSCH"||$this->woop_status=="WMATL"||$this->woop_status=="WPCOND")&&$this->syn_wo_status=="Y"){
-			
-			$wo_bean = BeanFactory::getBean("HAM_WO",$this->ham_wo_id);
-			$wo_bean->wo_stauts=$this->woop_status;
-			$wo_bean->saveWO(false,'O',$this->woop_status);
+		if ($current_db_status == "APPROVED" && ($this->woop_status == "WSCH" || $this->woop_status == "WMATL" || $this->woop_status == "WPCOND") && $this->syn_wo_status == "Y") {
+
+			$wo_bean = BeanFactory :: getBean("HAM_WO", $this->ham_wo_id);
+			$wo_bean->wo_stauts = $this->woop_status;
+			$wo_bean->saveWO(false, 'O', $this->woop_status);
 		}
-		
-		//die();
 
 		$next_woop = "SELECT woop_number
-													    FROM ham_woop
-														WHERE ham_woop.deleted =0 AND ham_wo_id = '" . $this->ham_wo_id . "' and woop_number>" . $this->woop_number . "
-														ORDER BY ham_woop.woop_number ASC
-														LIMIT 0 , 1";
-		$next_woop_bean = BeanFactory :: getBean("HAM_WOOP")->get_full_list("woop_number ASC", "HAM_WOOP.ham_wo_id ='" . $this->ham_wo_id . "' and woop_number>" . $this->woop_number, "", "0");
+										FROM ham_woop
+										WHERE ham_woop.deleted =0 AND ham_wo_id = '" . $this->ham_wo_id . "' and woop_number>" . $this->woop_number . "
+										ORDER BY ham_woop.woop_number ASC
+										LIMIT 0 , 1";
+		$next_woop_bean = BeanFactory :: getBean("HAM_WOOP")->get_full_list("woop_number ASC", "ham_woop.ham_wo_id ='" . $this->ham_wo_id . "' and woop_number>" . $this->woop_number, "", "0");
 
 		$show_status = $this->woop_status;
 		$sel = "SELECT woop_number
-													    FROM ham_woop
-														WHERE ham_woop.deleted =0 AND ham_wo_id = '" . $this->ham_wo_id . "'
-														ORDER BY ham_woop.woop_number DESC
-														LIMIT 0 , 1";
+										FROM ham_woop
+										WHERE ham_woop.deleted =0 AND ham_wo_id = '" . $this->ham_wo_id . "'
+										ORDER BY ham_woop.woop_number DESC
+										LIMIT 0 , 1";
 
 		$bean_woop_list = $db->query($sel);
 		$last_woop_number = 0;
@@ -108,21 +96,49 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 		//			echo "current_db_status=".$current_db_status."<br>";
 		//		}
 		//完工的动作
+		//echo "current_db_status=".$current_db_status."<br>";
+		//echo "show_status=".$show_status."<br>";
 		if ($current_db_status <> $show_status && ($show_status == "COMPLETED" || $show_status == "CLOSED")) {
 			//非最后一道工序
 			if ($last_woop_number <> $this->woop_number) {
 				if ($this->autoopen_next_task == "Y" && $next_woop_bean[0]->woop_status = "WPREV") {
-					$next_woop_bean[0]->status = "APPROVED";
+					$next_woop_bean[0]->woop_status = "APPROVED";
 				}
-				$next_woop_bean[0]->work_center_res_id = $this->work_center_res_id;
-				$next_woop_bean[0]->work_center_people_id = $this->work_center_people_id;
-				$next_woop_bean->save();
+				//echo "autoopen_next_task=".$this->autoopen_next_task."<br>";
+				//echo "next woop_status=".$next_woop_bean[0]->woop_status."<br>";
+				//echo "work_center_res_id=".$this->work_center_res_id."<br>";
+				//echo "work_center_people_id=".$this->work_center_people_id."<br>";
+				$wo_bean = BeanFactory :: getBean("HAM_WO", $this->ham_wo_id);
+				if ($wo_bean->next_woop_assignment == 1) {
+					$next_woop_bean[0]->work_center_res_id = $this->work_center_res_id;
+					$next_woop_bean[0]->work_center_people_id = $this->work_center_people_id;
+				}
+				$timedate = new TimeDate();
+				$this->date_actual_finish=$timedate->now();
+				$next_woop_bean[0]->save();
+
 			} else {
 				//最后一道工序 在工序完成后，立刻跳转到工作单完工界面中。 
+				//add by yuan.chen 2016-09-19
+				$wo_bean = BeanFactory :: getBean("HAM_WO", $this->ham_wo_id);
+				if ($wo_bean->complete_by_last_woop == true) {
+					$woop_bean = BeanFactory :: getBean("HAM_WOOP", $this->id);
+					$woop_bean->wo_status = 'COMPLETED';
+					$timeDate = new TimeDate();
+					$woop_bean->date_actual_finish=$timedate->now();
+					$woop_bean->save();
+					parent :: save($check_notify);
+					$queryParams = array (
+						'module' => 'HAM_WO',
+						'action' => 'EditView',
+						'record' => $this->ham_wo_id,
+						'fromWoop' => 'Y',
+						'last_woop_id'=>$this->id,
+					);
+					SugarApplication :: redirect('index.php?' . http_build_query($queryParams));
+				}
 			}
 		}
-		//die();
-
 		parent :: save($check_notify);
 	}
 
@@ -131,14 +147,83 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 		//or refer to the asset module as the first customzation module with this feature
 		global $app_list_strings, $timedate;
 		$woop_fields = $this->get_list_view_array();
-		$ham_wo_id = $_GET['record'];
-		if (empty ($this->work_center_people)){
-			//$WO_fields['WOOP_ACTION'] = '<a href="index.php?to_pdf=true&module=HAM_WOOP&action=assign_woop_people&id="'.$this->id.'>工单认领</a>';
-			$woop_fields['WOOP_ACTION'] = '<a href="#" onclick=assignWoop("'.$this->id.'","'.$ham_wo_id.'")>工单认领</a>';
-			//$WO_fields['WOOP_ACTION'] = $assign_btn;
+		//add by yuan.chen
+		$current_bean = BeanFactory::getBean("HAM_WOOP",$this->id);
+		$woop_fields['DATE_ACTUAL_START']=$current_bean->date_actual_start;
+		$woop_fields['DATE_ACTUAL_FINISH']=$current_bean->date_actual_finish;
+		
+		if (isset ($_GET['record'])) {
+			$ham_wo_id = $_GET['record'];
+		} else {
+			$ham_wo_id = $this->ham_wo_id;
+		}
+		$woop_status = isset ($this->woop_status) ? $this->woop_status : "";
+
+		if (($woop_status == "APPROVED" || $woop_status == "WSCH" || $woop_status == "WMATL" || $woop_status == "WPCOND" || $woop_status == "INPRG" || $woop_status == "REWORK") && (empty ($this->action) || $this->action != 'Popup')) {
+			if (empty ($this->work_center_people)) {
+				$woop_fields['WORK_CENTER_PEOPLE'] = '<a href="#" class="button" onclick=assignWoop("' . $this->id . '","' . $ham_wo_id . '")>' . translate('LBL_TAKE_OWNERSHIP', 'HAM_WOOP') . '</a>';
+				//$WO_fields['WOOP_ACTION'] = $assign_btn;
+			}
+
+			if (!empty ($this->act_module) && !empty ($this->work_center_people)) {
+				//有动作模块，并且已经有人员分配
+				$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=window.location.href="index.php?module=' . $this->act_module . '&action=EditView&woop_id=' . $this->id . '">' . $app_list_strings['ham_woop_moduleList'][$this->act_module] . '</a>';
+
+				if (strtoupper($this->act_module) == 'HIT_IP_TRANS_BATCH') {
+					$hit_ip_trans_batch_bean = BeanFactory :: getBean('HIT_IP_TRANS_BATCH')->get_full_list("date_entered desc", "hit_ip_trans_batch.source_woop_id='" . $this->id . "'");
+					if (count($hit_ip_trans_batch_bean) != 0) {
+						$it_trans_batch_id = $hit_ip_trans_batch_bean[0]->id;
+						$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=window.location.href="index.php?module=' . $this->act_module . '&record=' . $it_trans_batch_id . '&action=EditView&woop_id=' . $this->id . '">' . $app_list_strings['ham_woop_moduleList'][$this->act_module] . '</a>';
+					}
+				} else
+					if ($this->act_module == 'HAT_Asset_Trans_Batch') {
+
+						$asset_trans_beans = BeanFactory :: getBean('HAT_Asset_Trans_Batch')->get_full_list("date_entered desc", "hat_asset_trans_batch.source_woop_id='" . $this->id . "'");
+						if (count($asset_trans_beans) != 0) {
+							$asset_trans_id = $asset_trans_beans[0]->id;
+							$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=window.location.href="index.php?module=' . $this->act_module . '&record=' . $asset_trans_id . '&action=EditView&woop_id=' . $this->id . '">' . $app_list_strings['ham_woop_moduleList'][$this->act_module] . '</a>';
+						}
+					}
+
+			}
+		}else{
+			//add by yuan.chen 2016-09-28
+			if (!empty ($this->act_module) && !empty ($this->work_center_people)) {
+				//有动作模块，并且已经有人员分配
+				if (strtoupper($this->act_module) == 'HIT_IP_TRANS_BATCH') {
+					$hit_ip_trans_batch_bean = BeanFactory :: getBean('HIT_IP_TRANS_BATCH')->get_full_list("date_entered desc", "hit_ip_trans_batch.source_woop_id='" . $this->id . "'");
+					if (count($hit_ip_trans_batch_bean) != 0) {
+						$it_trans_batch_id = $hit_ip_trans_batch_bean[0]->id;
+						$woop_fields['ACT_MODULE'] = '<a href="index.php?module=' . $this->act_module . '&record=' . $it_trans_batch_id . '&action=EditView&woop_id=' . $this->id . '">' . $app_list_strings['ham_woop_moduleList'][$this->act_module] . '</a>';
+					}
+				} else
+					if (strtoupper($this->act_module) == 'HAT_ASSET_TRANS_BATCH') {
+						//echo $this->id."</br>";
+						$asset_trans_beans = BeanFactory :: getBean('HAT_Asset_Trans_Batch')->get_full_list("date_entered desc", "hat_asset_trans_batch.source_woop_id='" . $this->id . "'");
+						if (count($asset_trans_beans) != 0) {
+							$asset_trans_id = $asset_trans_beans[0]->id;
+							$woop_fields['ACT_MODULE'] = '<a href=index.php?module=' . $this->act_module . '&record=' . $asset_trans_id . '&action=EditView&woop_id=' . $this->id . '">' . $app_list_strings['ham_woop_moduleList'][$this->act_module] . '</a>';
+						}
+					}
+			}
+			if($this->act_module=="HIT_IP_Trans_Batch"){
+				$woop_fields['ACT_MODULE'] =$app_list_strings['ham_woop_moduleList']["HIT_IP_TRANS_BATCH"];
+				
+			}
+		}
+		
+		
+		
+
+		$WO_fields = $this->get_list_view_array();
+		//为工作单的状态着色
+		if (!empty ($woop_status)) {
+			$woop_fields['WOOP_STATUS_VAL'] = $this->woop_status;
+			$woop_fields['WOOP_STATUS_TAGGED'] ='<span class="color_tag color_doc_status_'.$this->woop_status.'">'.$app_list_strings['ham_wo_status_list'][$woop_status].'</span>' ;
 		}
 		return $woop_fields;
 	}
+
 
 	function __construct() {
 		parent :: __construct();

@@ -8,12 +8,35 @@ class HAM_SRViewEdit extends ViewEdit
 
     function Display() {
 
-        global $current_user;
+        global $current_user,$mod_strings;
         global $db;
 /*        echo "string";
         foreach ($current_user as $key => $value) {
             echo '</br>'.$key ." = ".$value;
         }*/
+
+        //1、初始化Framework-Site信息
+        require_once('modules/HAA_Frameworks/orgSelector_class.php');
+        $current_site_id = empty($this->bean->ham_maint_sites_id)?"":$this->bean->ham_maint_sites_id;
+        $current_module = $this->module;
+        $current_action = $this->action;
+        $this->ss->assign('MAINT_SITE',set_site_selector($current_site_id,$current_module,$current_action));
+		
+		//2、加载基于hat_event_type_id的动态界面模板（FF）
+        if(isset($this->bean->hat_event_type_id) && ($this->bean->hat_event_type_id)!=""){
+            //判断是否已经设置有位置分类，如果有分类，则进一步的加载分类对应的FlexForm
+            $event_type_id = $this->bean->hat_event_type_id;
+            $bean_code = BeanFactory::getBean('HAT_EventType',$event_type_id);
+            if (isset($bean_code->haa_ff_id)) {
+                $ff_id = $bean_code->haa_ff_id;
+            }
+            if (isset($ff_id) && $ff_id!="") {
+                //如果分类有对应的FlexForm，些建立一个对象去存储FF_ID
+                //需要注意的是在Metadata中是不包括这个ID的，如果这里没有加载则在后续的JS文件中加载
+                echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="'.$ff_id.'">';
+            }
+        }
+
 
        if ((isset($this->bean->hat_asset_locationss_id)==false || $this->bean->hat_asset_locationss_id=="") && (isset($_REQUEST['location_id']) && $_REQUEST['location_id']!="")&& (isset($_REQUEST['hat_assets_id'])==false || $_REQUEST['hat_assets_id']!="")) { 
             //如果没有地点记录，并且传入了地点参数，并且没有资产参数时，从地点进行读取
@@ -144,6 +167,10 @@ class HAM_SRViewEdit extends ViewEdit
             $resule_contacts =  $db->query($sel_current_contact);
 
             while ( $resule_contact = $db->fetchByAssoc($resule_contacts) ) {
+                //将当前用户默认到跟踪人信息
+                $this->bean->owned_by = $resule_contact['contact_name'];
+                $this->bean->owned_by_id = $resule_contact['contact_id'];
+                //将当前用户默认到报告人信息
                 $this->bean->reporter = $resule_contact['contact_name'];
                 $this->bean->contact_id_c = $resule_contact['contact_id'];
                 $this->bean->work_phone = $resule_contact['phone_work'];
@@ -155,11 +182,17 @@ class HAM_SRViewEdit extends ViewEdit
         }
 
         //自动填写当前的记录创建人
-        if ($this->bean->created_by!="") {
-            $this->bean->created_by_name = $current_user->name;
-            $this->bean->created_by = $current_user->id;
+        if (empty($this->bean->owned_by_id)) {
+            $this->bean->owned_by = $current_user->linked_contact_c;
+            $this->bean->owned_by_id = $current_user->contact_id_c;
+            $this->bean->owned_org_id = $current_user->account_id_c;
+            $this->bean->owned_org = $current_user->contact_organization_c;
         }
-                        /*$_GET['id']."'";*/
+        if (isset($this->bean->sr_status) && $this->bean->sr_status!='CLOSED') {
+            $this->bean->closed_by = $current_user->linked_contact_c;
+            $this->bean->closed_by_id = $current_user->contact_id_c;
+            $this->bean->closed_date = date('Y-m-d H:i');
+        }
 
 
         if(empty($this->bean->id)){ //如果当前为新记录，则初始化字段
@@ -174,7 +207,36 @@ class HAM_SRViewEdit extends ViewEdit
             echo '<script>var js_var_location_title="'. $this->bean->location_title.'";</script>';
         }
 
+		//从明细界面点击关闭SR后跳转到编辑界面后 改变SR的状态
+		if(isset($_GET['button_change_status'])){
+			$change_status=$_GET['button_change_status'];
+			if($change_status=="COMPLETE"){
+			$this->bean->sr_status='COMPLETE';
+		  }
+		}
+
+        $sr_num_html="";
+        if(empty($this->bean->sr_number)||$_REQUEST['isDuplicate']==true){
+            //如果当前工作单号为空，则返回自动编号标签
+            $sr_num_html=$mod_strings['LBL_AUTONUM'].'<input type="hidden" value="" id="sr_number" name="sr_number">';
+        } else {
+            $sr_num_html=$this->bean->sr_number.'<input type="hidden" value="'.$this->bean->sr_number.'" id="sr_number" name="sr_number">';
+        }
+        $this->ss->assign('SR_NUMBER',$sr_num_html);
+        
+        if($_REQUEST['idDuplicate']==true){
+        	$this->sr_status='DRAFT';
+        }
 
         parent::Display();
+        
+        //如果已经选择位置分类，无论是否位置分类对应的FlexForm有值，值将界面展开。
+        //（如果没有位置分类，则界面保持折叠状态。）
+        if(isset($this->bean->hat_event_type_id) && ($this->bean->hat_event_type_id)!=""){
+                    echo '<script>$(".collapsed").switchClass("collapsed","expanded");</script>';
+         } else {
+                echo '<script>$(".expanded").switchClass("expanded","collapsed");</script>';
+         }
+         
     }
 }

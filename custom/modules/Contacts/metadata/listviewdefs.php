@@ -3,7 +3,7 @@ $listViewDefs ['Contacts'] =
 array (
   'NAME' => 
   array (
-    'width' => '25%',
+    'width' => '20%',
     'label' => 'LBL_LIST_NAME',
     'link' => true,
     'contextMenu' => 
@@ -33,19 +33,31 @@ array (
       4 => 'account_id',
     ),
   ),
-  'TYPE_C' => 
+  'PEOPLE_TYPE_C' => 
   array (
-    'type' => 'enum',
+    'type' => 'relate',
     'default' => true,
     'studio' => 'visible',
-    'label' => 'LBL_TYPE',
-    'width' => '5%',
+    'label' => 'LBL_PEOPLE_TYPE',
+    'id' => 'HAA_CODES_ID_C',
+    'link' => true,
+    'width' => '10%',
   ),
   'TITLE' => 
   array (
     'width' => '15%',
     'label' => 'LBL_LIST_TITLE',
     'default' => true,
+  ),
+  'STATUS_C' => 
+  array (
+    'type' => 'relate',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_STATUS',
+    'id' => 'HAA_CODES_ID1_C',
+    'link' => true,
+    'width' => '10%',
   ),
   'ACCOUNT_NAME' => 
   array (
@@ -75,6 +87,13 @@ array (
     array (
       0 => 'account_id',
     ),
+  ),
+  'PRIMARY_CONTACT_C' => 
+  array (
+    'type' => 'bool',
+    'default' => true,
+    'label' => 'LBL_PRIMARY_CONTACT',
+    'width' => '3%',
   ),
   'EMAIL1' => 
   array (

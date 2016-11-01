@@ -241,6 +241,20 @@ array (
         array (
           0 => 
           array (
+            'name' => 'asset_criticality_c',
+            'studio' => 'visible',
+            'label' => 'LBL_ASSET_CRITICALITY',
+          ),
+          1 => 
+          array (
+            'name' => 'enable_fa_c',
+            'label' => 'LBL_ENABLE_FA',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
             'name' => 'flexform_c',
             'studio' => 'visible',
             'label' => 'LBL_FLEXFORM',

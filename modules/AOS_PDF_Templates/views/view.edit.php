@@ -107,6 +107,7 @@ class AOS_PDF_TemplatesViewEdit extends ViewEdit {
                 }
             }
 
+
             //LINE ITEMS CODE!
             if(isset($module->lineItems) && $module->lineItems){
 

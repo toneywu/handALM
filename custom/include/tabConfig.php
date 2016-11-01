@@ -1,5 +1,5 @@
 <?php
-// created: 2016-08-23 13:59:34
+// created: 2016-10-21 00:13:50
 $GLOBALS['tabStructure'] = array (
   'LBL_TABGROUP_SALES' => 
   array (
@@ -17,6 +17,7 @@ $GLOBALS['tabStructure'] = array (
       8 => 'HAT_Warranty_Types',
       9 => 'HAT_Meters',
       10 => 'HAT_Meter_Types',
+      11 => 'HAT_Asset_Sources',
     ),
   ),
   'LBL_GROUPTAB1_1454774981' => 
@@ -41,8 +42,10 @@ $GLOBALS['tabStructure'] = array (
     'modules' => 
     array (
       0 => 'HIT_IP',
-      1 => 'HIT_IP_Allocations',
-      2 => 'HIT_VLAN',
+      1 => 'HIT_VLAN',
+      2 => 'HIT_IP_TRANS_BATCH',
+      3 => 'HIT_VLAN_LIST',
+      4 => 'HIT_VNI_LIST',
     ),
   ),
   'LBL_TABGROUP_SUPPORT' => 
@@ -51,9 +54,11 @@ $GLOBALS['tabStructure'] = array (
     'modules' => 
     array (
       0 => 'HAM_ACT',
-      1 => 'Project',
-      2 => 'HAM_SR',
-      3 => 'HAM_WO',
+      1 => 'HAM_ACT_OP',
+      2 => 'Project',
+      3 => 'HAM_SR',
+      4 => 'HAM_WO',
+      5 => 'HAM_WOOP',
     ),
   ),
   'LBL_GROUPTAB4_1462886949' => 
@@ -111,12 +116,14 @@ $GLOBALS['tabStructure'] = array (
       4 => 'HAT_Systems',
       5 => 'HAT_EventType',
       6 => 'HAA_Codes',
-      7 => 'HPR_AM_Roles',
-      8 => 'AOS_Product_Categories',
-      9 => 'HAM_Priority',
-      10 => 'HAA_UOM_Classes',
-      11 => 'HAT_Linear_Reference_Methods',
-      12 => 'HAA_FF',
+      7 => 'AOS_Product_Categories',
+      8 => 'HPR_AM_Roles',
+      9 => 'HPR_AM_Catelog',
+      10 => 'HAM_Priority',
+      11 => 'HAA_UOM_Classes',
+      12 => 'HAT_Linear_Reference_Methods',
+      13 => 'AOS_PDF_Templates',
+      14 => 'HAA_FF',
     ),
   ),
 );

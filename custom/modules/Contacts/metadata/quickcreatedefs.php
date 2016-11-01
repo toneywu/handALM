@@ -32,6 +32,15 @@ array (
           'field' => '30',
         ),
       ),
+      'useTabs' => false,
+      'tabDefs' => 
+      array (
+        'DEFAULT' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+      ),
     ),
     'panels' => 
     array (
@@ -98,6 +107,34 @@ array (
           ),
         ),
         5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'document_type_c',
+            'studio' => 'visible',
+            'label' => 'LBL_DOCUMENT_TYPE_C',
+          ),
+          1 => 
+          array (
+            'name' => 'document_num_c',
+            'label' => 'LBL_DOCUMENT_NUM_C',
+          ),
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'is_primary_contact_c',
+            'label' => 'LBL_IS_PRIMARY_CONTACT_C',
+          ),
+          1 => 
+          array (
+            'name' => 'nature_c',
+            'studio' => 'visible',
+            'label' => 'LBL_NATURE_C',
+          ),
+        ),
+        7 => 
         array (
           0 => 
           array (

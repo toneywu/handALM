@@ -25,24 +25,24 @@ $dictionary['HAM_WOOP'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
-
-			
 		),
-		'wo_number' => array (
-			'required' => false,
+		'wo_number' =>
+		array (
+			'inline_edit' => '',
+			'required' => true,
 			'source' => 'non-db',
 			'name' => 'wo_number',
 			'vname' => 'LBL_WO_NUMBER',
 			'type' => 'relate',
-			'massupdate' => 0,
+			'massupdate' => '0',
+			'default' => NULL,
 			'no_default' => false,
 			'comments' => '',
 			'help' => '',
-			'importable' => 'true',
+			'importable' => false,
 			'duplicate_merge' => 'disabled',
 			'duplicate_merge_dom_value' => '0',
 			'audited' => false,
-			'inline_edit' => true,
 			'reportable' => true,
 			'unified_search' => false,
 			'merge_filter' => 'disabled',
@@ -54,10 +54,8 @@ $dictionary['HAM_WOOP'] = array (
 			'rname' => 'wo_number',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
-
-			
-		),
-
+			'id' => 'ham_wo_id',
+			),
 		'woop_number' => array (
 			'required' => false,
 			'name' => 'woop_number',
@@ -77,8 +75,6 @@ $dictionary['HAM_WOOP'] = array (
 			'merge_filter' => 'disabled',
 			'len' => '255',
 			'size' => '20',
-
-			
 		),
 		'date_target_start' => array (
 			'required' => true,
@@ -101,8 +97,6 @@ $dictionary['HAM_WOOP'] = array (
 			'enable_range_search' => false,
 			'dbType' => 'datetime',
 			//'display_default' => 'now&12:00am',
-
-	
 		),
 		'date_target_finish' => array (
 			'required' => true,
@@ -125,8 +119,6 @@ $dictionary['HAM_WOOP'] = array (
 			'enable_range_search' => false,
 			'dbType' => 'datetime',
 			// 'display_default' => 'now&12:00am',
-
-	
 		),
 		'date_actual_start' => array (
 			'required' => false,
@@ -149,8 +141,6 @@ $dictionary['HAM_WOOP'] = array (
 			'enable_range_search' => false,
 			'dbType' => 'datetime',
 			// 'display_default' => 'now&12:00am',
-
-	
 		),
 		'date_actual_finish' => array (
 			'required' => false,
@@ -294,8 +284,15 @@ $dictionary['HAM_WOOP'] = array (
 			'options' => 'ham_wo_status_list',
 			'studio' => 'visible',
 			'dependency' => false,
-
-			
+		),
+		'woop_status_tagged' => array (
+			'required' => true,
+			'name' => 'woop_status_tagged',
+			'vname' => 'LBL_WOOP_STATUS',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'source' => 'non-de',
 		),
 		'ham_work_center_id' => array (
 			'required' => true,
@@ -368,7 +365,6 @@ $dictionary['HAM_WOOP'] = array (
 			'len' => 36,
 			'size' => '20',
 
-			
 		),
 		'owner' => array (
 			'required' => false,
@@ -397,7 +393,6 @@ $dictionary['HAM_WOOP'] = array (
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
 
-			
 		),
 
 		'work_center_res_id' => array (
@@ -420,7 +415,6 @@ $dictionary['HAM_WOOP'] = array (
 			'len' => 36,
 			'size' => '20',
 
-			
 		),
 
 		'work_center_res' => array (
@@ -450,7 +444,6 @@ $dictionary['HAM_WOOP'] = array (
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
 
-			
 		),
 
 		'work_center_people_id' => array (
@@ -472,8 +465,6 @@ $dictionary['HAM_WOOP'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
-
-			
 		),
 
 		'work_center_people' => array (
@@ -577,8 +568,6 @@ $dictionary['HAM_WOOP'] = array (
 			'size' => '20',
 			'enable_range_search' => false,
 			'precision' => '8',
-
-			
 		),
 
 		'act_module' => array (
@@ -600,13 +589,60 @@ $dictionary['HAM_WOOP'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 100,
 			'size' => '20',
-			'options' => 'moduleList',
+			'options' => 'ham_woop_moduleList',
 			'studio' => 'visible',
 			'dependency' => false,
 
-			
 		),
-
+        'hat_eventtype_id' => 
+        array (
+          'required' => false,
+          'name' => 'hat_eventtype_id',
+          'vname' => 'LBL_HAT_EVENTTYPE_ID',
+          'type' => 'id',
+          'massupdate' => 0,
+          'no_default' => false,
+          'comments' => '',
+          'help' => '',
+          'importable' => 'true',
+          'duplicate_merge' => 'disabled',
+          'duplicate_merge_dom_value' => 0,
+          'audited' => false,
+          'inline_edit' => true,
+          'reportable' => false,
+          'unified_search' => false,
+          'merge_filter' => 'disabled',
+          'len' => 36,
+          'size' => '20',
+          ),
+        'event_type' => 
+        array (
+          'required' => false,
+          'source' => 'non-db',
+          'name' => 'event_type',
+          'vname' => 'LBL_EVENT_TYPE',
+          'type' => 'relate',
+          'massupdate' => 0,
+          'no_default' => false,
+          'comments' => '',
+          'help' => '',
+          'importable' => 'true',
+          'duplicate_merge' => 'disabled',
+          'duplicate_merge_dom_value' => '0',
+          'audited' => false,
+          'inline_edit' => true,
+          'reportable' => true,
+          'unified_search' => false,
+          'merge_filter' => 'disabled',
+          'len' => '255',
+          'size' => '20',
+          'id_name' => 'hat_eventtype_id',
+          'ext2' => 'HAT_EventType',
+          'module' => 'HAT_EventType',
+          'rname' => 'name',
+          'quicksearch' => 'enabled',
+          'studio' => 'visible',
+          ),
 		#序号     
 	'next_woop' => array (
 			'source' => 'non-db', //显示当前地点的说明
@@ -809,6 +845,60 @@ $dictionary['HAM_WOOP'] = array (
 			'size' => '20',
 	'quicksearch' => 'enabled',
 			'studio' => 'visible',	
+		),
+		
+		
+		#合同号
+	'contract_id' => array (
+			'required' => false,
+			'name' => 'contract_id',
+			'vname' => 'LBL_CONTRACT_ID',
+			'type' => 'id',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => 0,
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => false,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => 36,
+			'size' => '20',
+
+			
+		),
+		'contract' => array (
+			'required' => false,
+			'source' => 'non-db',
+			'name' => 'contract',
+			'vname' => 'LBL_CONTRACT',
+			'type' => 'relate',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+			'id_name' => 'contract_id',
+			'ext2' => 'AOS_Contracts',
+			'module' => 'AOS_Contracts',
+			'rname' => 'name',
+			'quicksearch' => 'enabled',
+			'studio' => 'visible',
+
+			
 		),
 
 		
