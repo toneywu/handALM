@@ -1301,7 +1301,7 @@ $app_list_strings['hit_racks_numbering_list']['TOP'] = '1=Top';
 
 $app_list_strings['moduleList']['HIT_Rack_Allocations'] = 'Rack Allocations';
 $app_list_strings['hit_rack_pos_depth_list']['FM'] = 'FM- 前中-';
-$app_list_strings['hit_rack_pos_depth_list']['BM'] = '-Mb -中后';
+$app_list_strings['hit_rack_pos_depth_list']['MB'] = '-Mb -中后';
 $app_list_strings['hit_rack_pos_depth_list']['F'] = 'F-- 前--';
 $app_list_strings['hit_rack_pos_depth_list']['M'] = '-M- -中-';
 $app_list_strings['hit_rack_pos_depth_list']['B'] = '--B --后';

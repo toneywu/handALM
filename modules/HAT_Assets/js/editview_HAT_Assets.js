@@ -136,7 +136,9 @@ $(document).ready(function(){
 		}
 	});
 
-	$('#enable_fa').change(function(){ //针对是否对固定资产进行同步，决定了是否必须要提供固定资产编号字段
+	//这里的代码于20161101进行屏蔽by tone.wu，
+	//原因是业务上会有需要FA关联，当前当前不存在FA编号的情况，这段代码暂时保留，是否会加入设置点后激活待定
+/*	$('#enable_fa').change(function(){ //针对是否对固定资产进行同步，决定了是否必须要提供固定资产编号字段
 		if( $(this).is(':checked')) {
 			//如果启用固定资产同步则必须有固定资产信息
 			mark_field_enabled('fixed_asset',false);
@@ -146,7 +148,7 @@ $(document).ready(function(){
 			mark_field_enabled('fixed_asset',true);
 		}
 	});
-
+*/
 	$("#linear_start_measure,#linear_end_measure").change(function(){ //自动计算线性长度
 		//if ($.isNumeric($("#linear_start_measure").val())&&$.isNumeric($("#linear_end_measure").val())) {
 			$("#linear_length").val($("#linear_end_measure").val()-$("#linear_start_measure").val())

@@ -317,17 +317,7 @@ $dictionary['HIT_Rack_Allocations'] = array(
         'bean_name' => 'HAT_Assets',
         'source' => 'non-db',
         ),
-/*      'hat_assets_accounts' => 
-      array (
-          'name' => 'hat_assets_accounts',
-          'type' => 'link',
-          'relationship' => 'hat_assets_accounts',
-          'source' => 'non-db',
-          'module' => 'Accounts',
-          'bean_name' => 'Account',
-          'vname' => 'LBL_HAT_ASSETS_ACCOUNTS_FROM_ACCOUNTS_TITLE',
-          'id_name' => 'hat_assets_accountsaccounts_ida',
-          ),*/
+
       ),
 'relationships'=>array (
  'hit_rack_allocations_hat_assets' => 
@@ -338,7 +328,7 @@ $dictionary['HIT_Rack_Allocations'] = array(
   'rhs_module' => 'HAT_Assets',
   'rhs_table' => 'hat_assets',
   'rhs_key'   => 'id',
-  'relationship_type' => 'one-to-one',
+  'relationship_type' => 'many-to-one',
   ),
  ),
 'optimistic_locking'=>true,

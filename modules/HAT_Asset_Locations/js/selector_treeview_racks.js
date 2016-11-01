@@ -1,13 +1,11 @@
 /*********************
 /* 基于U位明细进行绘图
 /***************************/
-//$.getScript("custom/resources/bootstrap3-dialog-master/src/js/bootstrap-dialog.js"); //MessageBox
-$.getScript("cache/include/javascript/sugar_grp_yui_widgets.js"); //MessageBox
+//$.getScript("custom/resources/JSON/json2.js"); //JASON2
+//$.getScript("cache/include/javascript/sugar_grp_yui_widgets.js"); //old MessageBox
 $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); //MessageBox
 $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
 
-//https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css
-//https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js
 
 var globalServerData;
 
@@ -16,22 +14,9 @@ function showITRacks(node){ //渲染机柜，在首次加载时被调用
 		//console.log(node.data.server);
 		globalServerData = node.data;
 
-
 		for (i in globalServerData.server) {
-		  	/*pos_y = globalServerData.server[i].rack_pos_top;
-		  	pos_height = globalServerData.server[i].height;
-		  	pos_x = globalServerData.server[i].rack_pos_depth;
-
-		  	asset_id = globalServerData.server[i].asset_id;
-		  	asset_status = globalServerData.server[i].asset_status;
-		  	asset_name = globalServerData.server[i].asset_name;
-		  	asset_desc = globalServerData.server[i].asset_desc;
-			asset_using_org = globalServerData.server[i].hat_assets_accounts_name*/
-
-		  	//console.log("#position_"+pos_x.substring(0,1)+"_"+pos_y);
 		  	drawBlocker(i)//绘制设备占位或空占位
 			selectServerArea();//加载可触发的事件
-			//showITRacksForm(node);
 		}
 	}
 }
@@ -116,7 +101,6 @@ function drawBlocker(i) {//绘制设备占位或空占位
 *包括对设备位置进行修改时，也会先调用本函数，再通过drawBlocker进行重新绘制
 ********************/
 function cleanBlocker(pos_x, pos_height, pos_y) {
-	console.log("CleanBlocker");
 	var numberingRule = globalServerData.numbering_rule;//获取是大编号在TOP还是小编号在TOP，影响Height的计算
   	var pos_obj = $("#position_"+pos_x.substring(0,1)+"_"+pos_y)//定位上左上角的td对象
   	var var_paired_y = 0;
@@ -195,6 +179,7 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
 	//console.log(varDeepth);
 
 	return_html += '<form id="EditView"><div class="lineEditor">';
+	return_html +=  "<input type='hidden' name='rack_pos_id' id='rack_pos_id' value=''>";
 	return_html += "<span class='input_group'>"+
 			"<label>"+ SUGAR.language.get('HIT_Rack_Allocations', 'LBL_PLACEHOLDER')+"</label>"+
 			"<input name='rack_pos_placeholder'  type='checkbox' id='rack_pos_placeholder'  value='' title='"+SUGAR.language.get('HIT_Rack_Allocations', 'LBL_PLACEHOLDER')+"' onclick=inactiveUsingLine()></input>"+
@@ -279,9 +264,8 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
 	}
 
 
-	if (isPopup==false) {
-		return_html += '<button type="button" id="btn_LineEditorClose0" class="button btn_save" value="Close"  onclick="btn_RackSelect_clicked()">'+ SUGAR.language.get('app_strings', 'LBL_SAVE_BUTTON_LABEL') +'</button>';
-	}
+	//if (isPopup==false) {
+	//}
 	return_html += '</div>';
 	return return_html;
 }
@@ -316,11 +300,11 @@ function btn_RackSelect_clicked() {
 
 	data = data.slice(0, -1);//cut last char
 	data='{"'+nodes[0]['data']['rdata']['id']+'":{'+data+'}}';
-	//console.log(data);
+	console.log(data);
 
 	associated_javascript_data = jQuery.parseJSON(data)
 	//console.log(data);
-	send_back('HAT_Asset_Locations',id);
+	//send_back('HAT_Asset_Locations',id);
 }
 
 
@@ -493,14 +477,21 @@ function savePlaceHolder(i) {
 	pos_height= (typeof($('#rack_pos_height').val())!="undefined")?$('#rack_pos_height').val():"";
 	pos_y= (typeof($('#rack_pos_top').val())!="undefined")?$('#rack_pos_top').val():"";
 	asset_id = (typeof($('#rack_pos_asset_id').val())!="undefined")?$('#rack_pos_asset_id').val():"";
-	asset_name = (typeof($('#rack_pos_asset_name').val())!="undefined")?$('#rack_pos_asset_name').val():"";
+	if (asset_id=="") {//ID为空时当前字段为占位符号，否则正常显示设备名
+		asset_name = SUGAR.language.get('HAT_Asset_Locations', 'LBL_PLACEHOLDER');
+	}else{
+		asset_name = (typeof($('#rack_pos_asset_name').val())!="undefined")?$('#rack_pos_asset_name').val():"";
+	}
 	asset_desc = (typeof($('#rack_pos_asset_desc').val())!="undefined")?$('#rack_pos_asset_desc').val():"";
 	asset_status = (typeof($('#rack_pos_asset_status').val())!="undefined")?$('#rack_pos_asset_status').val():"";
 	asset_using_org = (typeof($('#rack_pos_hat_assets_accounts_name').val())!="undefined")?$('#rack_pos_hat_assets_accounts_name').val():"";
 	asset_using_org_id = (typeof($('#rack_pos_hat_assets_accounts_id').val())!="undefined")?$('#rack_pos_hat_assets_accounts_id').val():"";
+	id = (typeof($('#rack_pos_id').val())!="undefined")?$('#rack_pos_id').val():"";
 	desc = (typeof($('#rack_pos_desc').val())!="undefined")?$('#rack_pos_desc').val():"";
+	inactive_using = (typeof($('#rack_pos_inactive_using').val())!="undefined")?$('#rack_pos_inactive_using').val():"";
 
 	Blocker = {
+		id: id,
 		rack_pos_depth : pos_x,
 	    rack_pos_top : pos_y,
 	    height : pos_height,
@@ -510,30 +501,33 @@ function savePlaceHolder(i) {
 	    asset_desc : asset_desc,
 	    hat_assets_accounts_name : asset_using_org,
 	    hat_assets_accounts_id : asset_using_org_id,
-	    desc:desc
+	    desc: desc,
+	    inactive_using: inactive_using,
+	    allc_status: "DRAFT",
 	};
 
-	if (i==undefined) {
+	if (i==undefined) { //插入或更新到当前对象数列中
   		globalServerData.server.push(Blocker);
   		i=globalServerData.server.length-1;
 	}else{
 		globalServerData.server[i]=Blocker;
 	}
-
-	console.log('index.php?to_pdf=true&module=HIT_Rack_Allocations&action=SaveDynamicAllocation&asset_id=' + asset_id+"&using_org_id="+asset_using_org_id+"&desc="+desc)
-	console.log(JSON.stringify(globalServerData.server[i]));
-
-	$.ajax({
-		url: 'index.php?to_pdf=true&module=HIT_Rack_Allocations&action=SaveDynamicAllocation&asset_id=' + asset_id+"&using_org_id="+asset_using_org_id+"&desc="+desc,
+	//console.log('index.php?to_pdf=true&module=HIT_Rack_Allocations&action=SaveDynamicAllocation&rack_id=' + globalServerData.rackid,)
+/*	$.ajax({
+		url: 'index.php?to_pdf=true&module=HIT_Rack_Allocations&action=SaveDynamicAllocation&hit_rack_id=' + globalServerData.rackid,
 		//data: {alldata:}
 		type: 'POST',
-		data: JSON.stringify(globalServerData.server[i]),
+		data: {jsonData: JSON.stringify(Blocker)},
 		success: function (data) {
-			drawBlocker(i);
-			console.log(data)
+			if (data!="") {
+				globalServerData.server[i].id = data;
+			}
+
+			//console.log(data)
 		},
 		error: function () { //失败
 			alert('Error loading document');
 		}
 	});
+*/	drawBlocker(i);//绘制图形在界面中
 }

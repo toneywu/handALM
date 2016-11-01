@@ -93,5 +93,6 @@ $mod_strings = array (
   'LBL_BTN_SELECT'=>'Select',
   'LBL_PLACEHOLDER'=>'Placeholder',
   'LBL_ADD_PLACEHOLDER'=>'Allocation Server-Rack Space',
+  'LBL_INACTIVED'=>'removed',
 
 );
