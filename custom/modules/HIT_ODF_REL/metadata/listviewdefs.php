@@ -77,20 +77,22 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-  'ASSIGNED_USER_NAME' => 
-  array (
-    'width' => '9%',
-    'label' => 'LBL_ASSIGNED_TO_NAME',
-    'module' => 'Employees',
-    'id' => 'ASSIGNED_USER_ID',
-    'default' => false,
-  ),
   'NAME' => 
   array (
     'width' => '32%',
     'label' => 'LBL_NAME',
     'default' => false,
     'link' => true,
+  ),
+  'A_HAT_ASSET_LOCATIONS' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'label' => 'LBL_A_HAT_ASSET_LOCATIONS',
+    'id' => 'A_HAT_ASSET_LOCATIONS_ID',
+    'link' => true,
+    'width' => '10%',
+    'default' => false,
   ),
 );
 ?>

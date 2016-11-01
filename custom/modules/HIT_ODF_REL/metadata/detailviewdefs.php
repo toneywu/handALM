@@ -83,7 +83,7 @@ array (
         array (
           0 => 
           array (
-            'name' => 'a_hat_asset_location',
+            'name' => 'a_hat_asset_locations',
             'studio' => 'visible',
             'label' => 'LBL_A_HAT_ASSET_LOCATIONS',
           ),

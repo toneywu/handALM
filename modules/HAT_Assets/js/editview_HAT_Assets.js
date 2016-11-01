@@ -47,7 +47,8 @@ function generateAssetDesc() {//自动生成资产全名=名称+厂商+型号
 }
 
 function resetAssetName() { //自动生成资产铭牌号
-	if($("#asset_name_rule").val()!="MANUAL") {
+	//fix by yuan.chen 2016-11-01
+	if($("#asset_name_rule").val()!="MANUAL"&&$("#asset_name_rule").val()!=null) {
 		$("#name").css("background-color","#efefef");
 		$("#name").attr("readonly","true");
 
