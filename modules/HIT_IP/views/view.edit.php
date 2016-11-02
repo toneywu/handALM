@@ -23,13 +23,13 @@ class HIT_IPViewEdit extends ViewEdit
         };
 
 
-        //1、初始化Framework
-/*        require_once('modules/HAA_Frameworks/orgSelector_class.php');
-        $current_framework_id = empty($this->bean->hat_framework_id)?"":$this->bean->hat_framework_id;
+
+        //1、初始化Framework-Site信息
+        require_once('modules/HAA_Frameworks/orgSelector_class.php');
+        $current_site_id = empty($this->bean->ham_maint_sites_id)?"":$this->bean->ham_maint_sites_id;
         $current_module = $this->module;
         $current_action = $this->action;
-        $this->ss->assign('FRAMEWORK',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id'));*/
-
+        $this->ss->assign('MAINT_SITE',set_site_selector($current_site_id,$current_module,$current_action));
 
         parent::Display();
     }

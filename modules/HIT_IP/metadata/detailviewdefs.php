@@ -71,9 +71,7 @@ array (
           ),
           1 => 
           array (
-            'name' => 'vlan',
-            'studio' => 'visible',
-            'label' => 'LBL_VLAN',
+            'name' => 'location',
           ),
         ),
         1 => 

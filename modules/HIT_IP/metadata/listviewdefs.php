@@ -9,7 +9,7 @@ array (
     'label' => 'LBL_NAME',
     'width' => '10%',
     'default' => true,
-  ),
+  ),/*
   'VLAN' => 
   array (
     'type' => 'relate',
@@ -19,15 +19,8 @@ array (
     'link' => true,
     'width' => '10%',
     'default' => true,
-  ),
-  'DESCRIPTION' => 
-  array (
-    'type' => 'text',
-    'label' => 'LBL_DESCRIPTION',
-    'sortable' => false,
-    'width' => '10%',
-    'default' => true,
-  ),
+  ),*/
+
   'SITE' => 
   array (
     'type' => 'relate',
@@ -38,12 +31,13 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-  'DATE_MODIFIED' => 
+    'DESCRIPTION' => 
   array (
-    'type' => 'datetime',
-    'label' => 'LBL_DATE_MODIFIED',
-    'width' => '10%',
-    'default' => false,
+    'type' => 'text',
+    'label' => 'LBL_DESCRIPTION',
+    'sortable' => false,
+    'width' => '60%',
+    'default' => true,
   ),
 );
 ?>

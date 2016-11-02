@@ -80,5 +80,9 @@ $mod_strings = array (
   'LBL_QTY'=>'IP数量',
   'LBL_IP_TYPE'=>'允许零散分配',
   'LBL_GATEWAY'=>'网关',
+  'LBL_ORGANIZATION'=>'使用组织',
+  'LBL_LOCATION'=>'位置',
+    'LBL_BTN_ADD_NEW_IP'=>'添加子网IP',
+      'LBL_STATUS'=>'状态',
 
 );

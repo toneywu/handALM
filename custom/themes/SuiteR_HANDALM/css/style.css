@@ -154,6 +154,7 @@ input[type=text], select{
 .lineEditor .input_group {
 	width: 38em;
 	display: inline-block;
+	vertical-align: top
 }
 .lineEditor label {
 	width: 12em; vertical-align: middle;

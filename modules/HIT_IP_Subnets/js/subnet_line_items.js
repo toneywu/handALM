@@ -4,6 +4,17 @@ $.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
 var prodln = 0;
 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
 
+
+function check_subnet_ip(ip_val) { //检查子网IP是否合规
+  //1、判断子网IP是否在网段之内
+  //2、判断子网IP是否在当前网段中已经存在
+  ip_splited = ip_val.split("/");
+  if ( IpSubnetCalculator.isIp(ip_splited[0])&&ip_splited[1]<=32&&ip_splited[1]>=0) {
+    var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1])
+  }
+}
+
+
 function show_ip_desc(ip_val,desc_obj) {
   ip_splited = ip_val.split("/");
   if ( IpSubnetCalculator.isIp(ip_splited[0])&&ip_splited[1]<=32&&ip_splited[1]>=0) {
@@ -23,7 +34,7 @@ function show_ip_desc(ip_val,desc_obj) {
  * 点击按钮 调用Ajax请求 获取list里面根据工单状态应该显示的value
  * @param name
  */
-/*function getPopListValue(id,selectIn){
+/*function getPopListValue(id,ln){
 		$.ajax({
 			url: 'index.php?to_pdf=true&module=HIT_IP_Subnets&action=getListFields&id=' + id+"&prodln="+selectIn,
 			success: function (data) {
@@ -40,34 +51,40 @@ function show_ip_desc(ip_val,desc_obj) {
 };
 */
 
-function selectedLine(selectIn){
-	
-	if($("#line_ip_type"+selectIn).is(':checked')){
-		console.log("checked");
-		$("#line_ip_type"+selectIn).attr("checked",'true');
-		$("#line_ip_type"+selectIn).val("0");
-		$("#line_ip_type_val"+selectIn).val("0");
-		//$("#line_ip_type"+selectIn).prop( "checked", true );
-		//$("#displayed_line_ip_type"+ln).attr("checked","true");
+function checkEnableSeperateAsign(ln){
+	if($("#line_ip_type"+ln).is(':checked')){
+		//console.log("checked");
+		$("#line_ip_type"+ln).attr("checked",'true');
+		$("#line_ip_type"+ln).val("0");
+		$("#line_ip_type_val"+ln).val("0");
+    $("#input_group_acc_ip"+ln).show();
+    $("#displayed_line_name"+ln).css("color","#000");
 	}else{
-		console.log("unchecked");
-		$("#line_ip_type"+selectIn).removeAttr("checked");
-		$("#line_ip_type"+selectIn).val("1");
-		$("#line_ip_type_val"+selectIn).val("1");
-		//$("#line_ip_type"+selectIn).prop( "checked", false );
-		//$("#displayed_line_ip_type"+ln).removeAttr("checked");
+		//console.log("unchecked");
+		$("#line_ip_type"+ln).removeAttr("checked");
+		$("#line_ip_type"+ln).val("1");
+		$("#line_ip_type_val"+ln).val("1");
+    $("#line_name"+ln).val($("#line_ip_subnet"+ln).val())//如果不可以散U分配，则精确IP与子网IP相同
+    $("#input_group_acc_ip"+ln).hide();
+    $("#displayed_line_name"+ln).css("color","#ccc");
 	}
-	
 }
 
 function show_ip_subnet_ojb(ln) {
   	$("#line_name"+ln).val($("#line_ip_subnet"+ln).val());
   	show_ip_desc($("#line_ip_subnet"+ln).val(),$("#line_ip_subnet"+ln+"_ip_desc"));
   	show_ip_desc($("#line_name"+ln).val(),$("#line_name"+ln+"_ip_desc"));
+
+//    console.log($("#line_hat_asset_locations_id"+ln).val()+":"+($("#line_hat_asset_locations_id"+ln).val()==""));
+    if($("#line_hat_asset_locations_id"+ln).val()==""){//将位置从头复制到行上
+      $("#line_hat_asset_locations_id"+ln).val($("#hat_asset_locations_id").val());
+      $("#line_location"+ln).val($("#location").val())
+    }
+
 }
 
 function show_ip_desc_ojb(obj) {
-  show_ip_desc(obj.value,$("#"+obj.id+"_ip_desc"));
+  show_ip_desc($("#line_name"+ln).val(),$("#line_name"+ln+"_ip_desc"));
 }
 
 function openVLANPopup(ln){ //在行上选择了From Location
@@ -81,6 +98,19 @@ function openVLANPopup(ln){ //在行上选择了From Location
     }
   };
   open_popup('HIT_VLAN', 1000, 850, '', true, true, popupRequestData);
+}
+
+function openLocationPopup(ln){ //在行上选择了From Location
+  lineno=ln;
+  var popupRequestData = {
+    "call_back_function" : "set_return",
+    "form_name" : "EditView",
+    "field_to_name_array" : {
+      "name" : "line_location" + ln,
+      "id" : "hat_asset_locations_id" + ln,
+    }
+  };
+  open_popup('HAT_Asset_Locations', 1000, 850, '', true, true, popupRequestData);
 }
 
 function openOrgPopup(ln){ //在行上选择了From Location
@@ -151,30 +181,40 @@ function insertTransLineHeader(tableid){
   a.innerHTML='#';
   var b=x.insertCell(2);
   b.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_IP_SUBNET');
-  var b=x.insertCell(3);
-  b.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_NAME');
-  var b1=x.insertCell(4);
-  b1.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_NETMASK');
-  var c=x.insertCell(5);
-  c.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_LOWEST');
-  var d=x.insertCell(6);
-  d.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_HIGHEST');
-  var e=x.insertCell(7);
-  e.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_QTY');
-  var f=x.insertCell(8);
+  var c=x.insertCell(3);
+  c.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_IP_TYPE');
+  var d=x.insertCell(4);
+  d.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_NAME');
+  var e=x.insertCell(5);
+  e.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_NETMASK');
+  var f=x.insertCell(6);
+  f.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_LOWEST');
+  var g=x.insertCell(7);
+  g.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_HIGHEST');
+  var h=x.insertCell(8);
+  h.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_QTY');
+/*  var f=x.insertCell(8);
   f.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_VLAN');
   var g=x.insertCell(9);
-  g.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_TUNNEL');
-  var h=x.insertCell(10);
-  h.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_DESCRIPTION');
+  g.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_TUNNEL');*/
+  var j=x.insertCell(9);
+  j.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_GATEWAY');
+
+  var i=x.insertCell(10);
+  i.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_DESCRIPTION');
+
   var i=x.insertCell(11);
-  i.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_IP_TYPE');
-  var i1=x.insertCell(12);
-  i1.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_GATEWAY');
-  var i2=x.insertCell(13);
-  i2.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_ORGANIZATION');
-  var j=x.insertCell(14);
-  j.innerHTML='&nbsp;';
+  i.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_LOCATION');
+
+  var k=x.insertCell(12);
+  k.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_ORGANIZATION');
+
+  var l=x.insertCell(13);
+  l.innerHTML=SUGAR.language.get('HIT_IP_Subnets', 'LBL_STATUS');
+
+  var l=x.insertCell(14);
+  l.innerHTML=" ";
+
 }
 
 
@@ -188,10 +228,10 @@ function insertLineData(hit_ip_subnets, current_view){ //将数据写入到对�
 /*    $("#line_ip_netmask".concat(String(ln))).val(hit_ip_subnets.ip_netmask);
     $("#line_ip_highest".concat(String(ln))).val(hit_ip_subnets.ip_highest);
     $("#line_ip_lowest".concat(String(ln))).val(hit_ip_subnets.ip_lowest);
-*/    $("#line_name".concat(String(ln))).val(hit_ip_subnets.name);
+*/  $("#line_name".concat(String(ln))).val(hit_ip_subnets.name);
     $("#line_vlan".concat(String(ln))).val(hit_ip_subnets.vlan);
     $("#line_vlan_id".concat(String(ln))).val(hit_ip_subnets.vlan_id);
-	$("#line_org".concat(String(ln))).val(hit_ip_subnets.org);
+	  $("#line_org".concat(String(ln))).val(hit_ip_subnets.org);
     $("#line_org_id".concat(String(ln))).val(hit_ip_subnets.org_id);
     $("#line_description".concat(String(ln))).val(hit_ip_subnets.description);
     $("#line_tunnel".concat(String(ln))).val(hit_ip_subnets.tunnel);
@@ -226,18 +266,20 @@ function insertTransLineElements(tableid,current_view) { //创建界面要素
   "<td><input id='selectLineClicked"+ prodln +"' type='checkbox' onclick='selectLineClicked(this)'></td>"+
   "<td><span name='displayed_line_num[" + prodln + "]' id='displayed_line_num" + prodln + "'>1</span></td>" +
   "<td><span name='displayed_line_ip_subnet[" + prodln + "]' id='displayed_line_ip_subnet" + prodln + "'></span></td>"+
+  "<td><input type='checkbox' disabled='true'  name='displayed_line_ip_type[" + prodln + "]' id='displayed_line_ip_type" + prodln + "'></input></td>" +
   "<td><span name='displayed_line_name[" + prodln + "]' id='displayed_line_name" + prodln + "'></span></td>"+
   "<td><span name='displayed_line_ip_netmask[" + prodln + "]' id='displayed_line_ip_netmask" + prodln + "'></span></td>"+
   "<td><span name='displayed_line_ip_lowest[" + prodln + "]' id='displayed_line_ip_lowest" + prodln + "'></span></td>"+
   "<td><span name='displayed_line_ip_highest[" + prodln + "]' id='displayed_line_ip_highest" + prodln + "'></span></td>"+
   "<td><span name='displayed_line_ip_qty[" + prodln + "]' id='displayed_line_ip_qty" + prodln + "'></span></td>"+
-  "<td><span name='displayed_line_vlan[" + prodln + "]' id='displayed_line_vlan" + prodln + "'></span></td>"+
-  "<td><span name='displayed_line_tunnel[" + prodln + "]' id='displayed_line_tunnel" + prodln + "'></span></td>" +
-  "<td><span name='displayed_line_description[" + prodln + "]' id='displayed_line_description" + prodln + "'></span></td>" +
-  //"<td><span name='displayed_line_ip_type[" + prodln + "]' id='displayed_line_ip_type" + prodln + "'></span></td>" +
-  "<td><input type='checkbox' disabled='true'  name='displayed_line_ip_type[" + prodln + "]' id='displayed_line_ip_type" + prodln + "'></input></td>" +
+//remvoed 20161102 按马丁提出的需求，将2个字段先隐藏
+/*  "<td><span name='displayed_line_vlan[" + prodln + "]' id='displayed_line_vlan" + prodln + "'></span></td>"+
+  "<td><span name='displayed_line_tunnel[" + prodln + "]' id='displayed_line_tunnel" + prodln + "'></span></td>" +*/
   "<td><span name='displayed_line_gateway[" + prodln + "]' id='displayed_line_gateway" + prodln + "'></span></td>" +
+  "<td><span name='displayed_line_description[" + prodln + "]' id='displayed_line_description" + prodln + "'></span></td>" +
+  "<td><span name='displayed_line_location[" + prodln + "]' id='displayed_line_location" + prodln + "'></span></td>" +
   "<td><span name='displayed_line_organization[" + prodln + "]' id='displayed_line_organization" + prodln + "'></span></td>" +
+  "<td><span name='displayed_line_status[" + prodln + "]' id='displayed_line_status" + prodln + "'></span></td>" +
   "<td>"
 
   if(current_view=="EditView") {
@@ -249,16 +291,23 @@ function insertTransLineElements(tableid,current_view) { //创建界面要素
   x.id = 'trans_editor' + prodln;
   x.style = "display:none";
 
-  x.innerHTML  = "<td colSpan='11'><div class='lineEditor'>"+
+  x.innerHTML  = "<td colSpan='13'><div class='lineEditor'>"+
   "<span class='input_group'>"+
   "<label>"+SUGAR.language.get('HIT_IP_Subnets', 'LBL_IP_SUBNET')+"<span class='required'>*</span></label>"+
   "<input class='sqsEnabled' autocomplete='off' type='text' style='width:113px;' name='line_ip_subnet[" + prodln + "]' id='line_ip_subnet" + prodln + "' value='' title='' onblur='show_ip_subnet_ojb("+prodln+")'>"+
   "<span class='input_mask'>"+SUGAR.language.get('HIT_IP', 'LBL_NAME_DESC')+"</span>"+
   "<span class='input_desc' name='line_ip_subnet[" + prodln + "]_ip_desc' id='line_ip_subnet" + prodln + "_ip_desc' ></span>"+
   "</span>"+
-  "<span class='input_group'>"+
+
+  "<span class='input_group '>"+
+  "<label>"+SUGAR.language.get('HIT_IP_Subnets', 'LBL_IP_TYPE')+" </label>"+
+  //"<select style='width:153px;' name='line_ip_back_type[" + prodln + "]' id='line_ip_back_type" + prodln + "' maxlength='50' value='' title='"+SUGAR.language.get('HIT_IP_Subnets', 'LBL_IP_TYPE')+"'></select>"+
+  "<input name='line_ip_type[" + prodln + "]'  type='checkbox' id='line_ip_type" + prodln + "'  value='' title='"+SUGAR.language.get('HIT_IP_Subnets', 'LBL_IP_TYPE')+"' onclick=checkEnableSeperateAsign("+prodln+")></input>"+
+  "</span>"+
+
+  "<span class='input_group' id='input_group_acc_ip"+prodln+"'>"+
   "<label>"+SUGAR.language.get('HIT_IP_Subnets', 'LBL_NAME')+"<span class='required'>*</span></label>"+
-  "<input class='sqsEnabled' autocomplete='off' type='text' style='width:113px;' name='line_name[" + prodln + "]' id='line_name" + prodln + "' value='' title='' onblur='show_ip_desc_ojb(this)'>"+
+  "<input class='sqsEnabled' autocomplete='off' type='text' style='width:113px;' name='line_name[" + prodln + "]' id='line_name" + prodln + "' value='' title='' onblur='show_ip_desc_ojb("+prodln+")'>"+
   "<span class='input_mask'>"+SUGAR.language.get('HIT_IP', 'LBL_NAME_DESC')+"</span>"+
   "<span class='input_desc' name='line_name[" + prodln + "]_ip_desc' id='line_name" + prodln + "_ip_desc' ></span>"+
   "</span><hr/>"+
@@ -266,7 +315,7 @@ function insertTransLineElements(tableid,current_view) { //创建界面要素
   "<label>"+SUGAR.language.get('HIT_IP_Subnets', 'LBL_DESCRIPTION')+"</label>"+
   "<input  autocomplete='off' type='text' style='width:153px;' name='line_description[" + prodln + "]' id='line_description" + prodln + "' value='' title='' onblur='resetItem("+prodln+")'>"+
   "</span>"+
-  "<span class='input_group'>"+
+/*  "<span class='input_group'>"+
   "<label id='line_vlan" + prodln + "_label'>"+SUGAR.language.get('HIT_IP_Subnets', 'LBL_VLAN')+"</label>"+
   "<input class='sqsEnabled' style='width:153px;' autocomplete='off' type='text' name='line_vlan[" + prodln + "]' id='line_vlan" + prodln + "' value='' title='' >"+
   "<input type='hidden' name='line_vlan_id[" + prodln + "]' id='line_vlan_id" + prodln + "' value='' />"+
@@ -276,18 +325,21 @@ function insertTransLineElements(tableid,current_view) { //创建界面要素
   "<label>"+SUGAR.language.get('HIT_IP_Subnets', 'LBL_TUNNEL')+" </label>"+
   "<input style='width:153px;'  autocomplete='off' type='text' name='line_tunnel[" + prodln + "]' id='line_tunnel" + prodln + "' maxlength='50' value='' title=''>"+
   "</span>"+
-  "<span class='input_group'>"+
+*/  
+"<span class='input_group'>"+
+  "<label id='line_vlan" + prodln + "_label'>"+SUGAR.language.get('HIT_IP_Subnets', 'LBL_LOCATION')+"</label>"+
+  "<input class='sqsEnabled' style='width:153px;' autocomplete='off' type='text' name='line_location[" + prodln + "]' id='line_location" + prodln + "' value='' title='' >"+
+  "<input type='hidden' name='line_hat_asset_locations_id[" + prodln + "]' id='line_hat_asset_locations_id" + prodln + "' value='' />"+
+  "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openLocationPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+  "</span>"+
+
+"<span class='input_group'>"+
   "<label id='line_vlan" + prodln + "_label'>"+SUGAR.language.get('HIT_IP_Subnets', 'LBL_ORGANIZATION')+"</label>"+
   "<input class='sqsEnabled' style='width:153px;' autocomplete='off' type='text' name='line_org[" + prodln + "]' id='line_org" + prodln + "' value='' title='' >"+
   "<input type='hidden' name='line_org_id[" + prodln + "]' id='line_org_id" + prodln + "' value='' />"+
   "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openOrgPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
   "</span>"+
   //add by yuan.chen
-  "</span>"+
-  "<span class='input_group'>"+
-  "<label>"+SUGAR.language.get('HIT_IP_Subnets', 'LBL_IP_TYPE')+" </label>"+
-  //"<select style='width:153px;' name='line_ip_back_type[" + prodln + "]' id='line_ip_back_type" + prodln + "' maxlength='50' value='' title='"+SUGAR.language.get('HIT_IP_Subnets', 'LBL_IP_TYPE')+"'></select>"+
-  "<input name='line_ip_type[" + prodln + "]'  type='checkbox' id='line_ip_type" + prodln + "'  value='' title='"+SUGAR.language.get('HIT_IP_Subnets', 'LBL_IP_TYPE')+"' onclick=selectedLine("+prodln+")></input>"+
   "</span>"+
   "</span>"+
   "<span class='input_group'>"+
@@ -319,7 +371,9 @@ function insertTransLineElements(tableid,current_view) { //创建界面要素
 function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
   //alert(("#displayed_line_num"+ln)+"="+ $("#displayed_line_num"+ln).html());
   //
-	console.log("renderTransLine"+ln);
+	//console.log("renderTransLine"+ln);
+
+  checkEnableSeperateAsign(ln);
   ip_splited = $("#line_name"+ln).val().split("/")
   if ( IpSubnetCalculator.isIp(ip_splited[0])&&ip_splited[1]<=32&&ip_splited[1]>=0) {
 	   var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1])
@@ -343,6 +397,7 @@ function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_line_description"+ln).html($("#line_description"+ln).val());
   $("#displayed_line_gateway"+ln).html($("#line_gateway"+ln).val());
   $("#displayed_line_ip_type"+ln).html($("#line_ip_type"+ln).val());
+  $("#displayed_line_location"+ln).html($("#line_location"+ln).val());
 
   if ($("#line_org"+ln).val()=="") {
     $("#displayed_line_organization"+ln).html(SUGAR.language.get('HIT_IP_Subnets', 'LBL_UNASSIGNED'));
@@ -443,6 +498,9 @@ function LineEditorShow(ln){ //显示行编辑器（先自动关闭所有的行�
       LineEditorClose(i);
     }
   }
+
+  show_ip_subnet_ojb(ln)//显示IP附加信息
+
   $("#subnets_line_displayed"+ln).hide();
   $("#trans_editor"+ln).show();
   //渲染下拉列表框的值
@@ -477,7 +535,7 @@ function resetLineNum_Bold() {//数行号
 //以下为公共的函数
 //*********************************************************************
 //
-function mark_field_disabled(field_name, hide_bool) {
+/*function mark_field_disabled(field_name, hide_bool) {
   mark_obj = $("#"+field_name);
   mark_obj_lable = $("#"+field_name+"_label");
 
@@ -506,8 +564,8 @@ function mark_field_disabled(field_name, hide_bool) {
     $("#"+field_name+"_id").val("");
   }
 }
-
-function mark_field_enabled(field_name,not_required_bool) {
+*/
+/*function mark_field_enabled(field_name,not_required_bool) {
   //field_name = 字段名，不需要jquery select标志，直接写名字
   //not_required_bool如果为空或没有明确定义为true的话，字段为必须输入。如果=ture则为非必须
   //alert(required_bool);
@@ -534,4 +592,4 @@ function mark_field_enabled(field_name,not_required_bool) {
   if  (typeof $("#btn_clr_"+field_name)!= 'undefined') {//移除清空按钮
     $("#btn_clr_"+field_name).css({"visibility":"visible"});
   }
-}
+}*/

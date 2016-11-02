@@ -75,4 +75,6 @@ $mod_strings = array (
   'LBL_IP_INTERNET_BM' => 'IP Internet BM',
   'LBL_IP_C_BM' => 'IP C BM',
   'LBL_IP_USAGE' => 'IP Usage',
+  'LBL_LOCATION'=>'位置',
+
 );

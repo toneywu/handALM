@@ -28,4 +28,7 @@ $mod_strings = array (
   'LBL_ATTRIBUTE1_C' => '附加属性1',
   'LBL_SETTLEMENT_PERIOD_C' => '结算周期',
   'LBL_INITIAL_ACCOUNT_DAY' => '首次结算日',
+  'LBL_EFFECTIVE_START_C' =>'生效日期',
+  'LBL_EFFECTIVE_END_C' =>'终止日期',
+  'LBL_UOM_NAME_C'=>'单位',
 );
