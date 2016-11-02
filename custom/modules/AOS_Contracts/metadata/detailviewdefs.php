@@ -268,6 +268,11 @@ array (
             'label' => 'LBL_LINE_ITEMS',
           ),
         ),
+        2 => 
+        array (
+          0 => '',
+          1 => '',
+        ),
         3 => 
         array (
           0 => 

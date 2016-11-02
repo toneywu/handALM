@@ -17,7 +17,7 @@ class AOS_contractsViewEdit extends ViewEdit
     $current_module = $this->module;
     $current_action = $this->action;
     $this->ss->assign('FRAMEWORK_C',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id_c'));
-    if ($_POST['record']) {//更改记录时，读取版本号
+    if (isset($_POST['record'])) {//更改记录时，读取版本号
       $contract_revision=BeanFactory::getBean('AOS_Contracts',$_POST['record']);
       $this->ss->assign('contract_revision',$contract_revision->contract_revision_c);
     }else{//新建时，赋值1
