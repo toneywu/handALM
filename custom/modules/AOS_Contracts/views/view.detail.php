@@ -159,7 +159,6 @@ class AOS_ContractsViewDetail extends ViewDetail {
 				
 				$product .= "<td class='tabDetailViewDF' style='text-align: right; padding:2px;'><a href='javascript:;' onclick='showmore(this)'><i class='glyphicon glyphicon-plus'></i></a></td>";
 				$product .= "</tr>";
-				
 				$product .="<tr id='show_more'>";
 				$product .="<td width='10%' colspan='2' style='text-align: right;padding:2px;' >".$mod_strings['LBL_UOM_NAME_C'].":</td>";
 				$product .= "<td colspan='9' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$line_item->uom_name_c."</td>";
@@ -186,10 +185,8 @@ class AOS_ContractsViewDetail extends ViewDetail {
 					$service .= "<td width='12%' class='dataLabel' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_SERVICE_DISCOUNT']."</td>";
 					$service .= "<td width='12%' class='dataLabel' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_SERVICE_PRICE']."</td>";
 					$service .= "<td width='12%' class='dataLabel' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_VAT']."</td>";
-					$service .= "<td width='12%' class='dataLabel' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_VAT_AMT']."</td>";
-					$service .= "<td width='12%' class='dataLabel' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_SETTLEMENT_PERIOD_C']."</td>";
-					$service .= "<td width='12%' class='dataLabel' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_INITIAL_ACCOUNT_DAY']."</td>";
-					$service .= "<td width='12%' class='dataLabel' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_TOTAL_PRICE']."</td>";
+					$service .= "<td width='12%' colspan='2' class='dataLabel' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_VAT_AMT']."</td>";
+					$service .= "<td width='12%' colspan='2' class='dataLabel' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_TOTAL_PRICE']."</td>";
 					$service .= "<td width='12%' class='dataLabel' style='text-align: right;padding:2px;' scope='row'>更多</td>";
 					$service .= "</tr>";
 				}
@@ -204,12 +201,21 @@ class AOS_ContractsViewDetail extends ViewDetail {
 
 				$service .= "<td class='tabDetailViewDF' style='text-align: right; padding:2px;'>".currency_format_number($line_item->product_unit_price,$params)."</td>";
 				$service .= "<td class='tabDetailViewDF' style='text-align: right; padding:2px;'>".rtrim(rtrim(format_number($line_item->vat), '0'), $sep[1])."%</td>";
-				$service .= "<td class='tabDetailViewDF' style='text-align: right; padding:2px;'>".currency_format_number($line_item->vat_amt,$params )."</td>";
-				$service .= "<td class='tabDetailViewDF' style='text-align: right; padding:2px;'>".$app_list_strings['settlement_period_list'][$line_item->settlement_period_c]."</td>";
-				$service .= "<td class='tabDetailViewDF' style='text-align: right; padding:2px;'>".$line_item->initial_account_day_c."</td>";
-				$service .= "<td class='tabDetailViewDF' style='text-align: right; padding:2px;'>".currency_format_number($line_item->product_total_price,$params )."</td>";
-
+				$service .= "<td class='tabDetailViewDF' colspan='2' style='text-align: right; padding:2px;'>".currency_format_number($line_item->vat_amt,$params )."</td>";
+				$service .= "<td class='tabDetailViewDF' colspan='2' style='text-align: right; padding:2px;'>".currency_format_number($line_item->product_total_price,$params )."</td>";
+				$service .= "<td class='tabDetailViewDF' style='text-align: right; padding:2px;'><a href='javascript:;' onclick='showmore(this)'><i class='glyphicon glyphicon-plus'></i></a></td>";
 				$service .= "</tr>";
+				$service .="<tr id='show_more'>";
+				$service .= "<td width='20%' colspan='2' style='text-align: right;padding:2px;'>".$mod_strings['LBL_INITIAL_ACCOUNT_DAY'].":</td>";
+				$service .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$line_item->initial_account_day_c."</td>";
+				$service .= "<td width='20%' colspan='2' style='text-align: right;padding:2px;'>".$mod_strings['LBL_SETTLEMENT_PERIOD_C'].":</td>";
+				$service .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$app_list_strings['settlement_period_list'][$line_item->settlement_period_c]."</td>";
+				$service .="</tr><tr>";
+				$service .= "<td width='12%' colspan='2' style='text-align: right;padding:2px;' >".$mod_strings['LBL_EFFECTIVE_START_C'].":</td>";
+				$service .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$line_item->effective_start_c."</td>";
+				$service .= "<td width='12%' colspan='2' style='text-align: right;padding:2px;' >".$mod_strings['LBL_EFFECTIVE_END_C'].":</td>";
+				$service .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$line_item->effective_end_c."</td>";
+				$service .="</tr>";
 
 			}
 		}
