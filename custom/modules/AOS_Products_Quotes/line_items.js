@@ -1139,3 +1139,22 @@ function GetUrlParamString(paramName)
     } 
     return null;
 }
+
+function showMore(btn,num){//btn和num确定点击哪个+
+    if($(".showmore"+num+"").css("display")=="none"){
+        $(".showmore"+num+"").show();
+        $(btn).children().removeClass("glyphicon glyphicon-plus");
+        $(btn).children().addClass("glyphicon glyphicon-minus");
+    }else{
+        $(".showmore"+num+"").hide();
+        $(btn).children().removeClass("glyphicon glyphicon-minus");
+        $(btn).children().addClass("glyphicon glyphicon-plus");
+    }
+}
+
+$(function(){
+    $("#currency_id_span").parent().attr("colspan",5);
+    $("#line_items_span").parent().attr("colspan",9);
+    $("#tax_amount").parent().next().remove();
+    $("#tax_amount").parent().next().remove();
+});

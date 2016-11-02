@@ -49,7 +49,6 @@ class AOS_ContractsViewDetail extends ViewDetail {
 		$result = $focus->db->query($sql);
 
 		$sep = get_number_seperators();
-
 		$html .= "<table border='0' width='100%' id='group_item' cellpadding='0' cellspacing='0'>";
 
 		$i = 0;
@@ -60,6 +59,7 @@ class AOS_ContractsViewDetail extends ViewDetail {
 		$groupEnd = '';
 		$product = '';
 		$service = '';
+		$row_num=0;
 		while ($row = $focus->db->fetchByAssoc($result)) {
 
 			$line_item = new AOS_Products_Quotes();
@@ -67,7 +67,7 @@ class AOS_ContractsViewDetail extends ViewDetail {
 
 			if($enable_groups && ($group_id != $row['group_id'] || $i == 0)){
 				$html .= $groupStart.$product.$service.$groupEnd;
-				if($i != 0)$html .= "<tr><td colspan='11' nowrap='nowrap'><br></td></tr>";
+				if($i != 0)$html .= "<tr><td colspan='12' nowrap='nowrap'><br></td></tr>";
 				$groupStart = '';
 				$groupEnd = '';
 				$product = '';
@@ -83,29 +83,29 @@ class AOS_ContractsViewDetail extends ViewDetail {
 				$groupStart .= "<tr>";
 				$groupStart .= "<td class='tabDetailViewDL' style='text-align: left;padding:2px;' scope='row'>&nbsp;</td>";
 				$groupStart .= "<td class='tabDetailViewDL' style='text-align: left;padding:2px;' scope='row'>".$mod_strings['LBL_GROUP_NAME'].":</td>";
-				$groupStart .= "<td class='tabDetailViewDL' colspan='9' style='text-align: left;padding:2px;'>".$group_item->name."</td>";
+				$groupStart .= "<td class='tabDetailViewDL' colspan='10' style='text-align: left;padding:2px;'>".$group_item->name."</td>";
 				$groupStart .= "</tr>";
 
-				$groupEnd = "<tr><td colspan='11' nowrap='nowrap'><br></td></tr>";
+				$groupEnd = "<tr><td colspan='12' nowrap='nowrap'><br></td></tr>";
 				$groupEnd .= "<tr>";
-				$groupEnd .= "<td class='tabDetailViewDL' colspan='10' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_TOTAL_AMT'].":&nbsp;&nbsp;</td>";
+				$groupEnd .= "<td class='tabDetailViewDL' colspan='11' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_TOTAL_AMT'].":&nbsp;&nbsp;</td>";
 				$groupEnd .= "<td class='tabDetailViewDL' style='text-align: right;padding:2px;'>".currency_format_number($group_item->total_amt, $params)."</td>";
 				$groupEnd .= "</tr>";
 				$groupEnd .= "<tr>";
 
-				$groupEnd .= "<td class='tabDetailViewDL' colspan='10' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_DISCOUNT_AMOUNT'].":&nbsp;&nbsp;</td>";
+				$groupEnd .= "<td class='tabDetailViewDL' colspan='11' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_DISCOUNT_AMOUNT'].":&nbsp;&nbsp;</td>";
 				$groupEnd .= "<td class='tabDetailViewDL' style='text-align: right;padding:2px;'>".currency_format_number($group_item->discount_amount, $params)."</td>";
 				$groupEnd .= "</tr>";
 				$groupEnd .= "<tr>";
-				$groupEnd .= "<td class='tabDetailViewDL' colspan='10' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_SUBTOTAL_AMOUNT'].":&nbsp;&nbsp;</td>";
+				$groupEnd .= "<td class='tabDetailViewDL' colspan='11' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_SUBTOTAL_AMOUNT'].":&nbsp;&nbsp;</td>";
 				$groupEnd .= "<td class='tabDetailViewDL' style='text-align: right;padding:2px;'>".currency_format_number($group_item->subtotal_amount, $params)."</td>";
 				$groupEnd .= "</tr>";
 				$groupEnd .= "<tr>";
-				$groupEnd .= "<td class='tabDetailViewDL' colspan='10' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_TAX_AMOUNT'].":&nbsp;&nbsp;</td>";
+				$groupEnd .= "<td class='tabDetailViewDL' colspan='11' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_TAX_AMOUNT'].":&nbsp;&nbsp;</td>";
 				$groupEnd .= "<td class='tabDetailViewDL' style='text-align: right;padding:2px;'>".currency_format_number($group_item->tax_amount, $params)."</td>";
 				$groupEnd .= "</tr>";
 				$groupEnd .= "<tr>";
-				$groupEnd .= "<td class='tabDetailViewDL' colspan='10' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_GRAND_TOTAL'].":&nbsp;&nbsp;</td>";
+				$groupEnd .= "<td class='tabDetailViewDL' colspan='11' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_GRAND_TOTAL'].":&nbsp;&nbsp;</td>";
 				$groupEnd .= "<td class='tabDetailViewDL' style='text-align: right;padding:2px;'>".currency_format_number($group_item->total_amount, $params)."</td>";
 				$groupEnd .= "</tr>";
 			}
@@ -157,17 +157,17 @@ class AOS_ContractsViewDetail extends ViewDetail {
 				$product .= "<td class='tabDetailViewDF' style='text-align: right; padding:2px;'>".currency_format_number($line_item->product_total_price,$params )."</td>";
 				
 				
-				$product .= "<td class='tabDetailViewDF' style='text-align: right; padding:2px;'><a href='javascript:;' onclick='showmore(this)'><i class='glyphicon glyphicon-plus'></i></a></td>";
+				$product .= "<td class='tabDetailViewDF' style='text-align: right; padding:2px;'><a href='javascript:;' onclick='showMore(this,".$row_num.")'><i class='glyphicon glyphicon-plus'></i></a></td>";
 				$product .= "</tr>";
-				$product .="<tr id='show_more'>";
+				$product .="<tr class='showmore".$row_num."' style='display:none'>";
 				$product .="<td width='10%' colspan='2' style='text-align: right;padding:2px;' >".$mod_strings['LBL_UOM_NAME_C'].":</td>";
-				$product .= "<td colspan='9' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$line_item->uom_name_c."</td>";
-				$product .="</tr><tr>";
+				$product .= "<td colspan='10' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$line_item->uom_name_c."</td>";
+				$product .="</tr><tr class='showmore".$row_num."' style='display:none'>";
 				$product .= "<td width='20%' colspan='2' style='text-align: right;padding:2px;'>".$mod_strings['LBL_INITIAL_ACCOUNT_DAY'].":</td>";
 				$product .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$line_item->initial_account_day_c."</td>";
 				$product .= "<td width='20%' colspan='2' style='text-align: right;padding:2px;'>".$mod_strings['LBL_SETTLEMENT_PERIOD_C'].":</td>";
 				$product .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$app_list_strings['settlement_period_list'][$line_item->settlement_period_c]."</td>";
-				$product .="</tr><tr>";
+				$product .="</tr><tr class='showmore".$row_num."' style='display:none'>";
 				$product .= "<td width='12%' colspan='2' style='text-align: right;padding:2px;' >".$mod_strings['LBL_EFFECTIVE_START_C'].":</td>";
 				$product .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$line_item->effective_start_c."</td>";
 				$product .= "<td width='12%' colspan='2' style='text-align: right;padding:2px;' >".$mod_strings['LBL_EFFECTIVE_END_C'].":</td>";
@@ -203,14 +203,14 @@ class AOS_ContractsViewDetail extends ViewDetail {
 				$service .= "<td class='tabDetailViewDF' style='text-align: right; padding:2px;'>".rtrim(rtrim(format_number($line_item->vat), '0'), $sep[1])."%</td>";
 				$service .= "<td class='tabDetailViewDF' colspan='2' style='text-align: right; padding:2px;'>".currency_format_number($line_item->vat_amt,$params )."</td>";
 				$service .= "<td class='tabDetailViewDF' colspan='2' style='text-align: right; padding:2px;'>".currency_format_number($line_item->product_total_price,$params )."</td>";
-				$service .= "<td class='tabDetailViewDF' style='text-align: right; padding:2px;'><a href='javascript:;' onclick='showmore(this)'><i class='glyphicon glyphicon-plus'></i></a></td>";
+				$service .= "<td class='tabDetailViewDF' style='text-align: right; padding:2px;'><a href='javascript:;' onclick='showMore(this,".$row_num.")'><i class='glyphicon glyphicon-plus'></i></a></td>";
 				$service .= "</tr>";
-				$service .="<tr id='show_more'>";
+				$service .="<tr class='showmore".$row_num."' style='display:none'>";
 				$service .= "<td width='20%' colspan='2' style='text-align: right;padding:2px;'>".$mod_strings['LBL_INITIAL_ACCOUNT_DAY'].":</td>";
 				$service .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$line_item->initial_account_day_c."</td>";
 				$service .= "<td width='20%' colspan='2' style='text-align: right;padding:2px;'>".$mod_strings['LBL_SETTLEMENT_PERIOD_C'].":</td>";
 				$service .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$app_list_strings['settlement_period_list'][$line_item->settlement_period_c]."</td>";
-				$service .="</tr><tr>";
+				$service .="</tr><tr class='showmore".$row_num."' style='display:none'>";
 				$service .= "<td width='12%' colspan='2' style='text-align: right;padding:2px;' >".$mod_strings['LBL_EFFECTIVE_START_C'].":</td>";
 				$service .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$line_item->effective_start_c."</td>";
 				$service .= "<td width='12%' colspan='2' style='text-align: right;padding:2px;' >".$mod_strings['LBL_EFFECTIVE_END_C'].":</td>";
@@ -218,10 +218,10 @@ class AOS_ContractsViewDetail extends ViewDetail {
 				$service .="</tr>";
 
 			}
+			$row_num++;
 		}
 		$html .= $groupStart.$product.$service.$groupEnd;
 		$html .= "</table>";
-		$html.='<script>$("#line_items_span").parent().attr("colspan",8);</script>';
 		echo '<script src="custom/modules/AOS_Products_Quotes/line_items.js"></script>';
 		echo "<script>replace_display_lines(" .json_encode($html). ");</script>";
 	}
