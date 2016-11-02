@@ -51,6 +51,12 @@ $app_list_strings['hat_meter_value_change_list']['ASC'] = 'Ascending';
 $app_list_strings['hat_meter_value_change_list']['DES'] = 'Descending';
 $app_list_strings['hat_meter_value_change_list']['FLU'] = 'Fluctuating';
 
+$app_list_strings['hat_meter_taget_reference_list']['Current'] = 'Current';
+$app_list_strings['hat_meter_taget_reference_list']['Rate/Day'] = 'Rate/Day';
+$app_list_strings['hat_meter_taget_reference_list']['Rate/Week'] = 'Rate/Week';
+$app_list_strings['hat_meter_taget_reference_list']['Rate/Month'] = 'Rate/Month';
+$app_list_strings['hat_meter_taget_reference_list']['Rate/30Days'] = 'Rate/30Days';
+
 $app_list_strings['hat_meter_type_list'][''] = '';
 $app_list_strings['hat_meter_type_list']['A'] = 'Absolute';
 $app_list_strings['hat_meter_type_list']['C'] = 'Change';

@@ -51,6 +51,12 @@ $app_list_strings['hat_meter_value_change_list']['ASC'] = '上升/递增';
 $app_list_strings['hat_meter_value_change_list']['DES'] = '下降/递减';
 $app_list_strings['hat_meter_value_change_list']['FLU'] = '波动/增减不定';
 
+$app_list_strings['hat_meter_taget_reference_list']['Current'] = '当前值';
+$app_list_strings['hat_meter_taget_reference_list']['Rate/Day'] = '每日';
+$app_list_strings['hat_meter_taget_reference_list']['Rate/Week'] = '每周';
+$app_list_strings['hat_meter_taget_reference_list']['Rate/Month'] = '每自然月';
+$app_list_strings['hat_meter_taget_reference_list']['Rate/30Days'] = '每自然月';
+
 $app_list_strings['hat_meter_type_list'][''] = '';
 $app_list_strings['hat_meter_type_list']['A'] = '直接读数';
 $app_list_strings['hat_meter_type_list']['C'] = '记录每次相对变化';
