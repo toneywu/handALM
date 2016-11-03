@@ -73,12 +73,17 @@ class AccountsViewEdit extends ViewEdit
 			$ff_id = $bean_business_type->haa_ff_id;
             //如果分类有对应的FlexForm，些建立一个对象去存储FF_ID
             //需要注意的是在Metadata中是不包括这个ID的，如果这里没有加载则在后续的JS文件中加载
+			/*if (isset($ff_id) && $ff_id!="") {
+                //如果分类有对应的FlexForm，些建立一个对象去存储FF_ID
+                //需要注意的是在Metadata中是不包括这个ID的，如果这里没有加载则在后续的JS文件中加载
+                echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="'.$ff_id.'">';
+            }*/
 		}
-        $ff_id_field = '<input id=haa_ff_id name=haa_ff_id type=hidden '.(isset($ff_id)?'value='.$ff_id:'').'>';
-        echo '<script>if($("#haa_ff_id").length==0) { $("#EditView").append("'.$ff_id_field.'");}</script>';
+        
 
 		parent::Display();
-
+		$ff_id_field = '<input id=haa_ff_id name=haa_ff_id type=hidden '.(isset($ff_id)?'value='.$ff_id:'').'>';
+        echo '<script>if($("#haa_ff_id").length==0) { $("#EditView").append("'.$ff_id_field.'");}</script>';
 
         $beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
         if(isset($beanFramework)) {

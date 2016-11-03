@@ -10,8 +10,11 @@ $wo_id = $_GET['ham_wo_id'];
 $reject_woop_bean = BeanFactory :: getBean('HAM_WOOP', $woop_id);
 //要驳回到哪个工序 它的工序编号
 $reject_woop_number = $reject_woop_bean->woop_number;
-$reject_woop_bean->date_actual_finish = null;
+$reject_woop_bean->date_actual_finish = '';
+$reject_woop_bean->date_actual_start = '';
 $reject_woop_bean->woop_status = 'APPROVED';
+$reject_woop_bean->work_center_people_id = '';
+$reject_woop_bean->work_center_people = '';
 $reject_woop_bean->save();
 
 //驳回的工序对于的事物处理单
