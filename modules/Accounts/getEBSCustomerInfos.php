@@ -89,15 +89,15 @@ if (curl_errno($soap_do)) {
 		echo 'customer_name= ' . $customer_name_val . "<br>";
 		echo 'product_code = ' . $product_code_val . "<br>";
 
-		$check_customer = BeanFactory :: getBean('Accounts')->get_full_list('', "accounts.full_name_c = '{$customer_name_val}'");
+		$check_customer = BeanFactory :: getBean('Accounts')->get_full_list('', "accounts_cstm.full_name_c = '".$customer_name_val."'");
 
 		//是否创建客户
 		if (count($check_customer) == 0) {
 			$customer_bean = BeanFactory :: newBean("Accounts");
 			//业务类型默认为一般客户，给相应字段设置ID值
 			$check_customer_biz_types = BeanFactory :: getBean('HAA_Codes')->retrieve_by_string_fields(array (
-				'code_type' => 'account_business_type',
-				'name' => '客户：一般客户'
+				'code_type' => 'accounts_business_type',
+				'name' => '客户'
 			));
 
 			if ($check_customer_biz_types) {
@@ -105,7 +105,13 @@ if (curl_errno($soap_do)) {
 			}
 
 			// ERP别名设置给组织简称
-			$customer_bean->name = $known_as_val;
+			if(!empty($known_as_val)){
+				$customer_bean->name = $known_as_val;
+			}else{
+				
+				$customer_bean->name = $customer_name_val;
+			}
+			
 			// ERP客户名称设置给组织全称
 			$customer_bean->full_name_c = $customer_name_val;
 			// ERP客户ID设置给组织#
@@ -139,7 +145,7 @@ if (curl_errno($soap_do)) {
 				$customer_bean->haa_codes_id_c = $check_customer_level->id;
 			}
 
-			$customer_bean->is_le_c = "1";
+			$customer_bean->is_le_c = "0";
 			$customer_bean->is_customer_c = "1";
 			$customer_bean->billing_address_street = $address_val;
 			$customer_bean->billing_address_city = $city_val;

@@ -2,13 +2,18 @@
 $module_name = 'HIT_Link_PO';
 $listViewDefs [$module_name] = 
 array (
+  'NAME' => 
+  array (
+    'width' => '32%',
+    'label' => 'LBL_NAME',
+    'default' => true,
+    'link' => true,
+  ),
   'PRODUCT_NUMBER' => 
   array (
     'type' => 'relate',
     'studio' => 'visible',
     'label' => 'LBL_PRODUCT_NUMBER',
-    'id' => 'PRODUCT_ID',
-    'link' => true,
     'width' => '10%',
     'default' => true,
   ),
@@ -53,13 +58,6 @@ array (
     'studio' => 'visible',
     'label' => 'LBL_VENDOR',
     'width' => '10%',
-  ),
-  'NAME' => 
-  array (
-    'width' => '32%',
-    'label' => 'LBL_NAME',
-    'default' => false,
-    'link' => true,
   ),
   'ASSIGNED_USER_NAME' => 
   array (
