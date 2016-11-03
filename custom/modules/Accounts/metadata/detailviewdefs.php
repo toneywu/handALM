@@ -99,16 +99,17 @@ array (
         ),
         1 => 
         array (
+
           0 => 
+          array (
+            'name' => 'full_name_c',
+            'label' => 'LBL_FULL_NAME',
+          ),
+          1 => 
           array (
             'name' => 'name',
             'comment' => 'Name of the Company',
             'label' => 'LBL_NAME',
-          ),
-          1 => 
-          array (
-            'name' => 'full_name_c',
-            'label' => 'LBL_FULL_NAME',
           ),
         ),
         2 => 

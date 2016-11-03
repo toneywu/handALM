@@ -121,17 +121,17 @@ array (
         array (
           0 => 
           array (
+            'name' => 'full_name_c',
+            'label' => 'LBL_FULL_NAME',
+          ),
+          1 => 
+          array (
             'name' => 'name',
             'label' => 'LBL_NAME',
             'displayParams' => 
             array (
               'required' => true,
             ),
-          ),
-          1 => 
-          array (
-            'name' => 'full_name_c',
-            'label' => 'LBL_FULL_NAME',
           ),
         ),
         1 => 

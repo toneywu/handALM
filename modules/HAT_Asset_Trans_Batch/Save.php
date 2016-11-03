@@ -28,7 +28,9 @@ handleRedirect($return_id, 'HAT_Asset_Trans_Batch');
 die;
 //****************** END: Jump Back *************************************************************//
 
-//****************** START: Save the header normally 写入头信息******************//
+//**************
+//**** START: Save the header normally 写入头信息****
+//**************//
 function save_header($sugarbean, $check_notify) {
 
 
@@ -96,7 +98,7 @@ function save_lines($post_data, $parent, $key = ''){
                     $trans_line = new HAT_Asset_Trans();
                     $trans_line -> retrieve($post_data[$key.'id'][$i]);
                 }
-                //如果是新增或修改模式，继续以下代码
+                //如果是新增或修改模式，继续以下代码完成对象字段的赋值
                 foreach($trans_line->field_defs as $field_def) { //循环对所有要素
                     $trans_line->$field_def['name'] = $post_data[$key.$field_def['name']][$i];
                     echo "<br/>***".$field_def['name'].'='. $post_data[$key.$field_def['name']][$i];
@@ -105,15 +107,18 @@ function save_lines($post_data, $parent, $key = ''){
                 $trans_line->trans_status = $parent->asset_trans_status;//父状态 LogicHook BeforeSave可能会改写
                 $trans_line->assigned_user_id = $parent->assigned_user_id;
 
-                //在新增或修改模式下，
+
+                //在新增或修改模式下，对机柜的分配进行处理
+                if (isset($trans_line->target_rack_position_data) && $trans_line->target_rack_position_data!="") {
+                    echo "rack";
+                    save_rack_allocations($trans_line, $parent);
+                }
+
+
+                //在新增或修改模式下，如果状态通过后
                 //可以进一步的对资产信息进行修改
                 if ($parent->asset_trans_status=='APPROVED') {
                     save_asset_lines($trans_line);
-
-                    if (isset($trans_line->target_rack_position_data) && $trans_line->target_rack_position_data!="") {
-                        save_rack_allocations($trans_line, $parent);
-                    }
-
                 }
 
 
@@ -164,7 +169,12 @@ function save_asset_lines($focus){
 
 function save_rack_allocations($focus, $parent){
 
-    $RackAllocation = BeanFactory::getBean('HIT_Rack_Allocations') ->retrieve_by_string_fields(array('hit_rack_allocations.hat_assets_id'=> $focus->asset_id));
+    //这里需要进行区分，如果当前的设备是IT设备是一种处理方式，如果当前资产是机柜则是另一种处理方式
+    $beanAsset = BeanFactory::getBean('HAT_Assets', $focus->asset_id);
+
+    if ($beanAsset && $beanAsset->enable_it_ports == 1 && $beanAsset->enable_it_rack == 0) { // test if $bean was loaded successfully
+        //如果当前为IT设备，则为当前IT设备进行分配。
+        $RackAllocation = BeanFactory::getBean('HIT_Rack_Allocations') ->retrieve_by_string_fields(array('hit_rack_allocations.hat_assets_id'=> $focus->asset_id));
         //基于当前设备（Asset_ID)进行查找，一个资产只能被分配到一个位置。
         //如果已经有位置了，则将当前位置进行更新，否则添加一个新的U位分配
         //
@@ -191,9 +201,52 @@ function save_rack_allocations($focus, $parent){
         $RackAllocation->placeholder = false;
         $RackAllocation->description = $parent->name;
         $RackAllocation->save();
-        //target_parent_asset_id
-        //
-        //echo "[".$focus->target_rack_position_data."]".$rack_id."|". $rack_pos_top."|". $height."|". $rack_pos_depth."*******************";
+    }
+    else if ($beanAsset && $beanAsset->enable_it_rack == 1) {
+    //如果当前为机柜，则为当前机柜的所有分配进行更新。
+
+        $RackAllocationData = ($focus->target_rack_position_data);
+        $RackAllocationData = str_replace("&quot;",'"',$RackAllocationData);
+        $jsonData = json_decode($RackAllocationData);
+        //例如：{"1":{"id":"","rack_pos_depth":"FM","rack_pos_top":"38","height":"2","asset_id":"","asset_status":"","asset_name":"占位","asset_desc":"","hat_assets_accounts_name":"","hat_assets_accounts_id":"","desc":"","inactive_using":"1"}}
+        print_r($jsonData);
+
+        foreach($jsonData as $key) {
+
+            if ($key->id!="" && $key->inactive_using==1) {
+                //删除记录
+                $RackAllocation = BeanFactory::getBean('HIT_Rack_Allocations', $key->id);
+                $RackAllocation->mark_deleted();
+                $RackAllocation->save();
+            } else {
+
+                if (empty($key->id) || $key->id=="" || !isset($RackAllocation))  {
+                    //如果没有记录，则需要创建新记录
+                    $RackAllocation = new HIT_Rack_Allocations();
+                    $RackAllocation = BeanFactory::getBean('HIT_Rack_Allocations');
+                    //创建一个新分配信息
+                }elseif ($key->id!="") {
+                    $RackAllocation = BeanFactory::getBean('HIT_Rack_Allocations', $key->id);
+                }
+
+                $Rack = BeanFactory::getBean('HIT_Racks') ->retrieve_by_string_fields(array('hit_racks.`hat_assets_id'=> $focus->asset_id));
+
+                $RackAllocation->hit_racks_id = $Rack->id;
+                $RackAllocation->name = $key->asset_name;
+                $RackAllocation->hat_assets_id = $key->asset_id;
+                $RackAllocation->rack_pos_top = $key->rack_pos_top;
+                $RackAllocation->height = $key->height;
+                $RackAllocation->rack_pos_depth = $key->rack_pos_depth;
+                $RackAllocation->sync_parent_enabled = true;
+                $RackAllocation->placeholder = false;
+                $RackAllocation->description = $parent->name;
+                $RackAllocation->save();
+
+                echo "\nrack saved";
+            }//END IF非删除
+        }//END FOR 循环下一行机柜信息
+    }
+
 }
 
 ?>

@@ -193,10 +193,16 @@ function btn_select_clicked() {
 
 	}
 	data = data.slice(0, -1);//cut last char
-	data='{"'+nodes[0]['data']['rdata']['id']+'":{'+data+returnRackData()+'}}';
-	console.log(jQuery.parseJSON(data));
+
+	if (nodes[0]['data']['rdata']['enable_it_rack']=="1") {
+		data='{"'+nodes[0]['data']['rdata']['id']+'":{'+data+returnRackData()+'}}';
+	} else {
+		data='{"'+nodes[0]['data']['rdata']['id']+'":{'+data+'}}';
+	}
+
+	//console.log(jQuery.parseJSON(data));
 	associated_javascript_data = jQuery.parseJSON(data)
-	//send_back('HAT_Asset_Locations',id);
+	send_back('HAT_Asset_Locations',id);
 }
 
 function returnRackData() {//返回机柜相关的信息
@@ -205,11 +211,13 @@ function returnRackData() {//返回机柜相关的信息
 	var varRackDESC="";
 	var cnt = 0;
 
+
+
 	for (i in globalServerData.server) {
 		if (globalServerData.server[i].allc_status=="DRAFT") {//有变更，需要添加记录
 			cnt++;
 			varRackJASON += '"'+cnt+'":{';
-			if (globalServerData.server[i].allc_status!=true) {
+			if (globalServerData.server[i].inactive_using!=1) {
 				varRackJASON += '"id":"'+globalServerData.server[i].id+'",'
 				 		+ '"rack_pos_depth":"'+globalServerData.server[i].rack_pos_depth+'",'
 						+ '"rack_pos_top":"'+globalServerData.server[i].rack_pos_top+'",'
@@ -222,7 +230,7 @@ function returnRackData() {//返回机柜相关的信息
 						+ '"hat_assets_accounts_id":"'+globalServerData.server[i].hat_assets_accounts_id+'",'
 						+ '"desc":"'+globalServerData.server[i].desc+'",'
 						+ '"inactive_using":"1"';//最后一个没有","结束
-				varRackDESC += "["+globalServerData.server[i].rack_pos_top+"/"+globalServerData.server[i].height+"]"+globalServerData.server[i].asset_name+", "
+				varRackDESC += "["+globalServerData.server[i].rack_pos_top+"/"+globalServerData.server[i].height+"]"+globalServerData.server[i].asset_name+"|"+globalServerData.server[i].hat_assets_accounts_name+", "
 			}else {
 				varRackJASON += '"id":"'+globalServerData.server[i].id+'",'
 						+ '"inactive_using":"0"';//最后一个没有","结束
@@ -235,15 +243,19 @@ function returnRackData() {//返回机柜相关的信息
 	if (varRackDESC!="") {
 		varRackDESC = varRackDESC.slice(0, -2);//cut last char
 		varRackDESC = ',"RACK_DESC":"'+varRackDESC+'"';
+	}else{
+		varRackDESC = ',"RACK_DESC":""';
 	}
 
 	if (varRackJASON!="") {
 		varRackJASON = varRackJASON.slice(0, -1);//cut last char
-		varRackJASON = '"RACK":"{'+varRackJASON.replace(/"/g, '&quot;')+'}"';
+		varRackJASON = ',"RACK":"{'+varRackJASON.replace(/"/g, "&quot;")+'}"';
+	}else{
+		varRackJASON = ',"RACK":""';
 	}
 
-	console.log(varRackJASON);
-	return varRackDESC+","+varRackJASON;
+	//console.log(varRackJASON);
+	return varRackDESC+varRackJASON;
 }
 
 function initTree(treeView, default_list, p3) {

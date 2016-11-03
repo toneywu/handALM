@@ -126,12 +126,20 @@
         echo '<div "div_framework" style="display:none">'.set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id').'</div>';
 ?>
 <?php
-	if (isset($_REQUEST['current_mode'])){
+	if (isset($_REQUEST['current_mode'])){//如果有值就多半是在选择模式
 		echo '<script>var current_mode = "'.$_REQUEST['current_mode'].'"</script>';
     	echo ('<script type="text/javascript" src="include/javascript/popup_helper.js"></script>');
     	echo '<form id="popup_query_form" name="popup_query_form">';
 		echo '<input type="hidden" name="module" value="HAT_Asset_Locations">';
  		echo '<input type="hidden" name="action" value="Popup">';
+
+ 		if (isset($_REQUEST['target_using_org'])) {
+ 			echo '<input type="hidden" id="target_using_org" name="target_using_org" value="'.$_REQUEST['target_using_org'].'">';
+ 			echo '<input type="hidden" id="target_using_org_id" name="target_using_org_id" value="'.$_REQUEST['target_using_org_id'].'">';
+ 		}else{
+ 			echo '<input type="hidden" id="target_using_org" name="target_using_org" value="">';
+ 			echo '<input type="hidden" id="target_using_org_id" name="target_using_org_id" value="">';
+ 		}
     	echo '<input type="hidden" name="request_data" >'; //所有的参数都存在在这里，参数会被自动填充
     	echo '</form>';
 	} else {

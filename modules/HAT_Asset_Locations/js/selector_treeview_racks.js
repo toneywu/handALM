@@ -144,8 +144,11 @@ function openAssetPopup(ln){//本文件为行上选择资产的按钮
 function setAssetReturn(popupReplyData){
   //popupReplyData中lineno会做为行号一并返回
   set_return(popupReplyData);
-
-  console.log(popupReplyData);
+  if ($("#target_using_org_id").val()!="") {
+  	$("#rack_poshat_assets_accounts_name").val($("#target_using_org").val());
+  	$("#rack_poshat_assets_accounts_id").val($("#target_using_org_id").val())
+  }
+  //console.log(popupReplyData);
 }
 
 function openUsingOrgPopup(ln){
@@ -182,7 +185,7 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
 	return_html +=  "<input type='hidden' name='rack_pos_id' id='rack_pos_id' value=''>";
 	return_html += "<span class='input_group'>"+
 			"<label>"+ SUGAR.language.get('HIT_Rack_Allocations', 'LBL_PLACEHOLDER')+"</label>"+
-			"<input name='rack_pos_placeholder'  type='checkbox' id='rack_pos_placeholder'  value='' title='"+SUGAR.language.get('HIT_Rack_Allocations', 'LBL_PLACEHOLDER')+"' onclick=inactiveUsingLine()></input>"+
+			"<input name='rack_pos_placeholder'  type='checkbox' id='rack_pos_placeholder'  value='' title='"+SUGAR.language.get('HIT_Rack_Allocations', 'LBL_PLACEHOLDER')+"'></input>"+
       		"</span>";
 
 	return_html +=
@@ -234,7 +237,7 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
 	return_html +=
       "<span class='input_group'>"+
       "<label>"+SUGAR.language.get('HIT_Rack_Allocations', 'LBL_INACTIVE_USING')+" </label>"+
-      "<input name='rack_pos_inactive_using'  type='checkbox' id='rack_pos_inactive_using'  value='' title='"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_INACTIVE_USING')+"' onclick=inactiveUsingLine()></input>"+
+      "<input name='rack_pos_inactive_using'  type='checkbox' id='rack_pos_inactive_using'  value='' title='"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_INACTIVE_USING')+"'></input>"+
       "</span></div></form>"
 
 	if (i!=undefined) {//如果i不为空说明是修改，不是新增，此时需要将已经有的值读入字段中
@@ -259,9 +262,18 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
 	        return_html +='$("#rack_pos_'+propertyName+'").val("'+globalServerData.server[i][propertyName]+'");'
 	      }
 	    }
+
 		return_html += "</script>";
 
 	}
+
+    //处理特殊的默认值
+    if($("#target_using_org_id").val()!="") {
+    	return_html +="<script>"
+        return_html +='$("#rack_poshat_assets_accounts_name").val($("#target_using_org").val());'
+        return_html +='$("#rack_poshat_assets_accounts_id").val($("#target_using_org_id").val());'
+    	return_html +="</script>"
+    }
 
 
 	//if (isPopup==false) {
@@ -488,7 +500,13 @@ function savePlaceHolder(i) {
 	asset_using_org_id = (typeof($('#rack_pos_hat_assets_accounts_id').val())!="undefined")?$('#rack_pos_hat_assets_accounts_id').val():"";
 	id = (typeof($('#rack_pos_id').val())!="undefined")?$('#rack_pos_id').val():"";
 	desc = (typeof($('#rack_pos_desc').val())!="undefined")?$('#rack_pos_desc').val():"";
-	inactive_using = (typeof($('#rack_pos_inactive_using').val())!="undefined")?$('#rack_pos_inactive_using').val():"";
+
+	if ($('#rack_pos_inactive_using').is(':checked')) {
+		inactive_using =1;
+	}else {
+		inactive_using =0;
+	};
+
 
 	Blocker = {
 		id: id,
@@ -529,5 +547,9 @@ function savePlaceHolder(i) {
 			alert('Error loading document');
 		}
 	});
-*/	drawBlocker(i);//绘制图形在界面中
+*/
+	console.log(Blocker.inactive_using+":"+Blocker.inactive_using!=1)
+	if(Blocker.inactive_using!=1) {
+		drawBlocker(i);//绘制图形在界面中
+	}//如果失效就不再画了
 }
