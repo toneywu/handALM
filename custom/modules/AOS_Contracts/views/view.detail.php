@@ -88,25 +88,30 @@ class AOS_ContractsViewDetail extends ViewDetail {
 
 				$groupEnd = "<tr><td colspan='12' nowrap='nowrap'><br></td></tr>";
 				$groupEnd .= "<tr>";
-				$groupEnd .= "<td class='tabDetailViewDL' colspan='11' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_TOTAL_AMT'].":&nbsp;&nbsp;</td>";
+				$groupEnd .= "<td class='tabDetailViewDL' colspan='10' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_TOTAL_AMT'].":&nbsp;&nbsp;</td>";
 				$groupEnd .= "<td class='tabDetailViewDL' style='text-align: right;padding:2px;'>".currency_format_number($group_item->total_amt, $params)."</td>";
+				$groupEnd .="<td></td>";
 				$groupEnd .= "</tr>";
 				$groupEnd .= "<tr>";
 
-				$groupEnd .= "<td class='tabDetailViewDL' colspan='11' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_DISCOUNT_AMOUNT'].":&nbsp;&nbsp;</td>";
+				$groupEnd .= "<td class='tabDetailViewDL' colspan='10' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_DISCOUNT_AMOUNT'].":&nbsp;&nbsp;</td>";
 				$groupEnd .= "<td class='tabDetailViewDL' style='text-align: right;padding:2px;'>".currency_format_number($group_item->discount_amount, $params)."</td>";
+				$groupEnd .="<td></td>";
 				$groupEnd .= "</tr>";
 				$groupEnd .= "<tr>";
-				$groupEnd .= "<td class='tabDetailViewDL' colspan='11' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_SUBTOTAL_AMOUNT'].":&nbsp;&nbsp;</td>";
+				$groupEnd .= "<td class='tabDetailViewDL' colspan='10' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_SUBTOTAL_AMOUNT'].":&nbsp;&nbsp;</td>";
 				$groupEnd .= "<td class='tabDetailViewDL' style='text-align: right;padding:2px;'>".currency_format_number($group_item->subtotal_amount, $params)."</td>";
+				$groupEnd .="<td></td>";
 				$groupEnd .= "</tr>";
 				$groupEnd .= "<tr>";
-				$groupEnd .= "<td class='tabDetailViewDL' colspan='11' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_TAX_AMOUNT'].":&nbsp;&nbsp;</td>";
+				$groupEnd .= "<td class='tabDetailViewDL' colspan='10' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_TAX_AMOUNT'].":&nbsp;&nbsp;</td>";
 				$groupEnd .= "<td class='tabDetailViewDL' style='text-align: right;padding:2px;'>".currency_format_number($group_item->tax_amount, $params)."</td>";
+				$groupEnd .="<td></td>";
 				$groupEnd .= "</tr>";
 				$groupEnd .= "<tr>";
-				$groupEnd .= "<td class='tabDetailViewDL' colspan='11' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_GRAND_TOTAL'].":&nbsp;&nbsp;</td>";
+				$groupEnd .= "<td class='tabDetailViewDL' colspan='10' style='text-align: right;padding:2px;' scope='row'>".$mod_strings['LBL_GRAND_TOTAL'].":&nbsp;&nbsp;</td>";
 				$groupEnd .= "<td class='tabDetailViewDL' style='text-align: right;padding:2px;'>".currency_format_number($group_item->total_amount, $params)."</td>";
+				$groupEnd .="<td></td>";
 				$groupEnd .= "</tr>";
 			}
 			if($line_item->product_id != '0' && $line_item->product_id != null){
