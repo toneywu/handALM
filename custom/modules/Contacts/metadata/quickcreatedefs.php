@@ -18,6 +18,13 @@ array (
           6 => '{if !empty($smarty.request.contact_name)}<input type="hidden" name="report_to_name" value="{$smarty.request.contact_name}">{/if}',
         ),
       ),
+	  'includes' => 
+      array (
+        1 =>
+        array (
+          'file' => 'custom/modules/Contacts/js/ContactsEditView.js',
+          ),
+        ),
       'maxColumns' => '2',
       'widths' => 
       array (
@@ -50,18 +57,6 @@ array (
         array (
           0 => 
           array (
-            'name' => 'first_name',
-            'customCode' => '{html_options name="salutation" id="salutation" options=$fields.salutation.options selected=$fields.salutation.value}&nbsp;<input name="first_name" id="first_name" size="25" maxlength="25" type="text" value="{$fields.first_name.value}">',
-          ),
-          1 => 
-          array (
-            'name' => 'account_name',
-          ),
-        ),
-        1 => 
-        array (
-          0 => 
-          array (
             'name' => 'last_name',
             'displayParams' => 
             array (
@@ -70,75 +65,68 @@ array (
           ),
           1 => 
           array (
-            'name' => 'phone_work',
+            'name' => 'first_name',
+            'customCode' => '{html_options name="salutation" id="salutation" options=$fields.salutation.options selected=$fields.salutation.value}&nbsp;<input name="first_name" id="first_name" size="25" maxlength="25" type="text" value="{$fields.first_name.value}">',
           ),
         ),
-        2 => 
+        1 => 
         array (
           0 => 
           array (
-            'name' => 'title',
+            'name' => 'phone_work',
           ),
           1 => 
           array (
             'name' => 'phone_mobile',
           ),
         ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'email1',
+          ),
+        ),
         3 => 
         array (
           0 => 
           array (
-            'name' => 'phone_fax',
+            'name' => 'people_type_c',
+            'studio' => 'visible',
+            'label' => 'LBL_PEOPLE_TYPE',
+			'displayParams' => 
+            array (
+              'initial_filter' => '&code_type_advanced=contact_business_type',
+              'field_to_name_array' => 
+              array (
+                'name' => 'people_type_c',
+                'id' => 'haa_codes_id_c',
+                'haa_ff_id' => 'haa_ff_id',
+                ),
+              'call_back_function' => 'setBusinessTypePopupReturn',
+              ),
           ),
           1 => 
           array (
-            'name' => 'do_not_call',
+            'name' => 'primary_contact_c',
+            'label' => 'LBL_PRIMARY_CONTACT',
           ),
         ),
         4 => 
         array (
           0 => 
           array (
-            'name' => 'email1',
-          ),
-          1 => 
-          array (
-            'name' => 'lead_source',
+            'name' => 'id_type_c',
+            'studio' => 'visible',
+            'label' => 'LBL_ID_TYPE',
           ),
         ),
         5 => 
         array (
           0 => 
           array (
-            'name' => 'document_type_c',
-            'studio' => 'visible',
-            'label' => 'LBL_DOCUMENT_TYPE_C',
-          ),
-          1 => 
-          array (
-            'name' => 'document_num_c',
-            'label' => 'LBL_DOCUMENT_NUM_C',
-          ),
-        ),
-        6 => 
-        array (
-          0 => 
-          array (
-            'name' => 'is_primary_contact_c',
-            'label' => 'LBL_IS_PRIMARY_CONTACT_C',
-          ),
-          1 => 
-          array (
-            'name' => 'nature_c',
-            'studio' => 'visible',
-            'label' => 'LBL_NATURE_C',
-          ),
-        ),
-        7 => 
-        array (
-          0 => 
-          array (
-            'name' => 'assigned_user_name',
+            'name' => 'id_number_c',
+            'label' => 'LBL_ID_NUMBER',
           ),
         ),
       ),

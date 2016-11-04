@@ -1,17 +1,19 @@
-/*var  varServer = {"server":[
-		{	asset_name:"IT-SRV-SRV-001",
-			asset_desc:"流媒体服务器.联想.RD440",
-			asset_status:"InService",
-			height:3,
-			rack_pos_top:30,
-			rack_pos_depth:"FM",
-			hat_assets_accounts_name:"玄武中学",
-		},
-	]
-};*/
+/*
+ * var varServer = {"server":[ { asset_name:"IT-SRV-SRV-001",
+ * asset_desc:"流媒体服务器.联想.RD440", asset_status:"InService", height:3,
+ * rack_pos_top:30, rack_pos_depth:"FM", hat_assets_accounts_name:"玄武中学", }, ] };
+ */
+$.getScript("modules/HAA_FF/ff_include.js");// load triger_setFF()
+
+function call_ff() {
+    triger_setFF($("#haa_ff_id").val(),"HAM_SR","DetailView");
+    $(".expandLink").click();
+ 
+}
 
 
 $(document).ready(function(){
+    call_ff();
 
 
 	var varServer = jQuery.parseJSON($('#js_jason').text());
@@ -23,8 +25,8 @@ $(document).ready(function(){
 	  	pos_y = varServer.server[i].rack_pos_top;
 	  	pos_x = varServer.server[i].rack_pos_depth;
 	  	pos_height = varServer.server[i].height;
-	  	//console.log(pos_x.length);
-	  	//显示当前服务器
+	  	// console.log(pos_x.length);
+	  	// 显示当前服务器
 	  	pos_obj = $("#position_"+pos_x.substring(0,1)+"_"+pos_y)
 		console.log(varServer.server[i]);
 		if(varServer.server[i].asset_id!="") {
@@ -45,12 +47,12 @@ $(document).ready(function(){
 				"border":"2px #A8A8A8 dashed", 
 			});
 		}
-		//if(pos_x=="FM")
+		// if(pos_x=="FM")
 		pos_obj.attr("colspan",pos_x.length);
-		//纵向合并列
+		// 纵向合并列
 		pos_obj.attr("rowspan",pos_height);
 
-		for(var y=0; y<Number(pos_height); y++) { //将周边单元格进行合并
+		for(var y=0; y<Number(pos_height); y++) { // 将周边单元格进行合并
 			var var_target_row = 0;
 			if(numberingRule=="TOP") {
 				var_target_row =(Number(pos_y)+y);
@@ -59,12 +61,12 @@ $(document).ready(function(){
 			}
 
 			for(var x=0; x<pos_x.length; x++) {
-				//console.log("#position_"+pos_x.substring(x,x+1)+"_"+var_target_row);
+				// console.log("#position_"+pos_x.substring(x,x+1)+"_"+var_target_row);
 				$("#position_"+pos_x.substring(x,x+1)+"_"+var_target_row).hide();
 			}
 		}
-		//console.log(pos_obj);
-		pos_obj.show();//上述循环时将自己也隐藏了，现在重新显示出来
+		// console.log(pos_obj);
+		pos_obj.show();// 上述循环时将自己也隐藏了，现在重新显示出来
 
 	}
 

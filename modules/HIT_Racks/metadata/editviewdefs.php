@@ -56,6 +56,18 @@ array (
             'name' => 'asset_group',
             'studio' => 'visible',
             'label' => 'LBL_ASSET_GROUP',
+            'displayParams' =>
+            array (
+              //'initial_filter' => '&code_type_advanced=asset_location_type',
+              'field_to_name_array' =>
+              array (
+                'name' => 'asset_group',
+                'id' => 'aos_products_id',
+                'haa_ff_id_c' => 'haa_ff_id',
+              ),
+              'call_back_function' => 'setAssetGroupPopupReturn',
+            ),
+            
           ),
         ),
         1 => 
