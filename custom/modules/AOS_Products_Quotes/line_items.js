@@ -149,19 +149,30 @@
     var x = tablebody.insertRow(-1);
     x.id = 'product_line' + prodln;
 
-    var a = x.insertCell(0);
-    a.innerHTML = "<input type='text' style='width:73px;' name='product_product_qty[" + prodln + "]' id='product_product_qty" + prodln + "' size='5' value='' title='' tabindex='116' onblur='Quantity_format2Number(" + prodln + ");calculateLine(" + prodln + ",\"product_\");'>";
+    var b = x.insertCell(0);
 
-    var b = x.insertCell(1);
-    b.innerHTML = "<input style='width:178px;' class='sqsEnabled' autocomplete='off' type='text' name='product_name[" + prodln + "]' id='product_name" + prodln + "' maxlength='50' value='' title='' tabindex='116' value=''><input type='hidden' name='product_product_id[" + prodln + "]' id='product_product_id" + prodln + "' size='20' maxlength='50' value=''>";
+    b.innerHTML = "<input style='width:178px;' class='sqsEnabled'  autocomplete='off' type='text' name='product_name[" + prodln + "]' id='product_name" + prodln + "' maxlength='50' value='' title='' tabindex='116' value=''><input type='hidden' name='product_product_id[" + prodln + "]' id='product_product_id" + prodln + "' size='20' maxlength='50' value=''>";
 
-    var b1 = x.insertCell(2);
+    var b1 = x.insertCell(1);
     b1.innerHTML = "<input style='width:178px;' class='sqsEnabled' autocomplete='off' type='text' name='product_part_number[" + prodln + "]' id='product_part_number" + prodln + "' maxlength='50' value='' title='' tabindex='116' value=''>";
 
-    var b2 = x.insertCell(3);
+    var b2 = x.insertCell(2);
     b2.innerHTML = "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openProductPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>";
 
-    var c = x.insertCell(4);
+    var a = x.insertCell(3);
+    a.innerHTML = "<input type='text' style='width:53px;' name='product_product_qty[" + prodln + "]' id='product_product_qty" + prodln + "' size='5' value='' title='' tabindex='116' onblur='Quantity_format2Number(" + prodln + ");calculateLine(" + prodln + ",\"product_\");'>";
+    
+    var a1 =x.insertCell(4);
+    if(curent_module=="AOS_Contracts"){
+        a1.innerHTML ="<input type='text' class='sqsEnabled' style='width:53px;' name='product_uom_name_c[" + prodln + "]' id='product_uom_name_c" + prodln + "' size='5' value='' title='' tabindex='116'>";
+        a1.innerHTML +="<input type='hidden' class='sqsEnabled' name='product_haa_uom_id_c["+prodln+"]' id='product_haa_uom_id_c"+prodln+"'/>"
+    }
+    
+    var a2 =x.insertCell(5);
+    if (curent_module=="AOS_Contracts") {
+        a2.innerHTML ="<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openProductUomPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>";
+    }
+    var c = x.insertCell(6);
     c.innerHTML = "<input style='text-align: right; width:115px;' type='text' name='product_product_list_price[" + prodln + "]' id='product_product_list_price" + prodln + "' size='11' maxlength='50' value='' title='' tabindex='116' onblur='calculateLine(" + prodln + ",\"product_\");'><input type='hidden' name='product_product_cost_price[" + prodln + "]' id='product_product_cost_price" + prodln + "' value=''  />";
 
     if (typeof currencyFields !== 'undefined'){
@@ -171,26 +182,26 @@
 
     }
 
-    var d = x.insertCell(5);
+    var d = x.insertCell(7);
     d.innerHTML = "<input type='text' style='text-align: right; width:90px;' name='product_product_discount[" + prodln + "]' id='product_product_discount" + prodln + "' size='12' maxlength='50' value='' title='' tabindex='116' onblur='calculateLine(" + prodln + ",\"product_\");' onblur='calculateLine(" + prodln + ",\"product_\");'><input type='hidden' name='product_product_discount_amount[" + prodln + "]' id='product_product_discount_amount" + prodln + "' value=''  />";
     d.innerHTML += "<select tabindex='116' name='product_discount[" + prodln + "]' id='product_discount" + prodln + "' onchange='calculateLine(" + prodln + ",\"product_\");'>" + discount_hidden + "</select>";
 
-    var e = x.insertCell(6);
-    e.innerHTML = "<input type='text' style='text-align: right; width:115px;' name='product_product_unit_price[" + prodln + "]' id='product_product_unit_price" + prodln + "' size='11' maxlength='50' value='' title='' tabindex='116' readonly='readonly' onblur='calculateLine(" + prodln + ",\"product_\");' onblur='calculateLine(" + prodln + ",\"product_\");'>";
+    var e = x.insertCell(8);
+    e.innerHTML = "<input type='text' style='text-align: right; width:90px;' name='product_product_unit_price[" + prodln + "]' id='product_product_unit_price" + prodln + "' size='11' maxlength='50' value='' title='' tabindex='116' readonly='readonly' onblur='calculateLine(" + prodln + ",\"product_\");' onblur='calculateLine(" + prodln + ",\"product_\");'>";
 
     if (typeof currencyFields !== 'undefined'){
         currencyFields.push("product_product_unit_price" + prodln);
     }
 
-    var f = x.insertCell(7);
-    f.innerHTML = "<input type='text' style='text-align: right; width:90px;' name='product_vat_amt[" + prodln + "]' id='product_vat_amt" + prodln + "' size='11' maxlength='250' value='' title='' tabindex='116' readonly='readonly'>";
+    var f = x.insertCell(9);
+    f.innerHTML = "<input type='text' style='text-align: right; width:50px;' name='product_vat_amt[" + prodln + "]' id='product_vat_amt" + prodln + "' size='11' maxlength='250' value='' title='' tabindex='116' readonly='readonly'>";
     f.innerHTML += "<select tabindex='116' name='product_vat[" + prodln + "]' id='product_vat" + prodln + "' onchange='calculateLine(" + prodln + ",\"product_\");'>" + vat_hidden + "</select>";
 
     if (typeof currencyFields !== 'undefined'){
         currencyFields.push("product_vat_amt" + prodln);
     }
 
-    var g = x.insertCell(8);
+    var g = x.insertCell(10);
     g.innerHTML = "<input type='text' style='text-align: right; width:115px;' name='product_product_total_price[" + prodln + "]' id='product_product_total_price" + prodln + "' size='11' maxlength='50' value='' title='' tabindex='116' readonly='readonly'><input type='hidden' name='product_group_number[" + prodln + "]' id='product_group_number" + prodln + "' value='"+groupid+"'>";
 
     if (typeof currencyFields !== 'undefined'){
@@ -198,49 +209,74 @@
     }
 
     //modefy BY osmond.liu 20161022合同模块增加结算周期和日期
-    if (curent_module=='AOS_Contracts') {
-        var settlement_period_option=document.getElementById("settlementperiodhidden").value;
+    
+    var h = x.insertCell(11);
 
-        var g1 = x.insertCell(9);
-        g1.innerHTML = "<select tabindex='0' name='product_settlement_period_c[" + prodln + "]' onchange='setProductSettlementPeriodChange(this,"+prodln+");'"+ " id='product_settlement_period_c" + prodln + "'>" + settlement_period_option +"</select>";
-
-        var g2 = x.insertCell(10);
-        g2.innerHTML ='<span class="input-group date" style="width:190px;" id="span_product_initial_account_day_c'+prodln+'">'+
-        '<input class="date_input pull-left"  autocomplete="off" readonly="readonly" name="product_initial_account_day_c[' + prodln + ']" id="product_initial_account_day_c' + prodln + '" value="" title="" tabindex="0" type="text">'+
-        '</span>';
-        var h = x.insertCell(11);
-        h.innerHTML = "<input type='hidden' name='product_currency[" + prodln + "]' id='product_currency" + prodln + "' value=''><input type='hidden' name='product_deleted[" + prodln + "]' id='product_deleted" + prodln + "' value='0'><input type='hidden' name='product_id[" + prodln + "]' id='product_id" + prodln + "' value=''><button type='button' id='product_delete_line" + prodln + "' class='button' value='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "' tabindex='116' onclick='markLineDeleted(" + prodln + ",\"product_\")'><img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button><br>";
-
-    }
-    else{
-     var h = x.insertCell(9);
-     h.innerHTML = "<input type='hidden' name='product_currency[" + prodln + "]' id='product_currency" + prodln + "' value=''><input type='hidden' name='product_deleted[" + prodln + "]' id='product_deleted" + prodln + "' value='0'><input type='hidden' name='product_id[" + prodln + "]' id='product_id" + prodln + "' value=''><button type='button' id='product_delete_line" + prodln + "' class='button' value='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "' tabindex='116' onclick='markLineDeleted(" + prodln + ",\"product_\")'><img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button><br>";
-
- }
 //End modefy 20161022增加结算周期和日期
-
-
-
 
 enableQS(true);
     //QSFieldsArray["EditView_product_name"+prodln].forceSelection = true;
-
     var y = tablebody.insertRow(-1);
     y.id = 'product_note_line' + prodln;
+    //y.style.cssText="display:none";
 
-    var h1 = y.insertCell(0);
-    h1.colSpan = "3";
-    h1.style.color = "rgb(68,68,68)";
-    h1.innerHTML = "<span style='vertical-align: top;'>" + SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_DESCRIPTION') + " :&nbsp;&nbsp;</span>";
-    h1.innerHTML += "<textarea tabindex='116' name='product_item_description[" + prodln + "]' id='product_item_description" + prodln + "' rows='2' cols='23'></textarea>&nbsp;&nbsp;";
+    if (curent_module=="AOS_Contracts") {
+        h.innerHTML="<a style='float:left' title='隐藏' onclick='edit_show_more_product(this,"+prodln+")' href='javascript:;'><i class='glyphicon glyphicon-minus'></i></a>";
+        var settlement_period_option=document.getElementById("settlementperiodhidden").value;
 
-    var i = y.insertCell(1);
-    i.colSpan = "3";
-    i.style.color = "rgb(68,68,68)";
-    i.innerHTML = "<span style='vertical-align: top;'>"  + SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NOTE') + " :&nbsp;</span>";
-    i.innerHTML += "<textarea tabindex='116' name='product_description[" + prodln + "]' id='product_description" + prodln + "' rows='2' cols='23'></textarea>&nbsp;&nbsp;";
+        var r2=y.insertCell(0);
+        r2.colSpan="11";
+        //结算周期
+        r2.innerHTML="<div class='pull-left' style='width:150px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_SETTLEMENT_PERIOD_C')+":</div>"+
+        "<select tabindex='0' name='product_settlement_period_c[" + prodln + "]' onchange='setProductSettlementPeriodChange(this,"+prodln+");'"+ " id='product_settlement_period_c" + prodln + "'>" + settlement_period_option +"</select></div>";
+        //首次结算日
+        r2.innerHTML +="<div class='pull-left' style='width:185px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_INITIAL_ACCOUNT_DAY')+":</div>"+
+        '<span id="span_product_initial_account_day_c'+prodln+'" class="input-group date'+prodln+'">'+
+        '<input id="product_initial_account_day_c' + prodln + '" class="date_input pull-left" readOnly="readOnly" style="width:75px" autocomplete="off" name="product_initial_account_day_c[' + prodln + ']" value="" title="" tabindex="0" type="text"></span></div>';
+        //生效日期
+        r2.innerHTML +="<div class='pull-left' style='width:175px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_START_C')+":</div>"+
+        '<span id="span_product_effective_start_c'+prodln+'" class="input-group date'+prodln+'">'+
+        '<input id="product_effective_start_c' + prodln + '" class="date_input pull-left" style="width:75px" autocomplete="off" name="product_effective_start_c[' + prodln + ']" value="" title="" tabindex="0" type="text" onclick="CalendarShow(this);"><span class="input-group-addon">'+
+        '<span class="glyphicon glyphicon-calendar"></span></span></span></div>';
+        //终止日期
+        r2.innerHTML +="<div class='pull-left' style='width:165px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_END_C')+":</div>"+
+        '<span id="span_product_effective_end_c'+prodln+'" class="input-group date'+prodln+'">'+
+        '<input id="product_effective_end_c' + prodln + '" class="date_input pull-left" style="width:75px" autocomplete="off" name="product_effective_end_c[' + prodln + ']" value="" title="" tabindex="0" type="text" onclick="CalendarShow(this);"><span class="input-group-addon">'+
+        '<span class="glyphicon glyphicon-calendar"></span></span></span></div>';
+        //说明
+        r2.innerHTML +="<div class='pull-left'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_DESCRIPTION')+":</div>"+
+        "<textarea tabindex='116' name='product_item_description[" + prodln + "]' id='product_item_description" + prodln + "' rows='2' cols='23'></textarea></div>";
+        //备注
+        r2.innerHTML +="<div class='pull-left'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NOTE')+":</div>"+
+        "<textarea tabindex='116' name='product_description[" + prodln + "]' id='product_description" + prodln + "' rows='2' cols='23'></textarea></div>";
 
+        /*var y1 = tablebody.insertRow(-1);
+        //y1.style.cssText="display:none";
+        var h1 = y1.insertCell(0);
+        h1.colSpan = "3";
+        h1.style.color = "rgb(68,68,68)";
+        h1.innerHTML = "<span style='vertical-align: top;'>" + SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_DESCRIPTION') + " :&nbsp;&nbsp;</span>";
+        h1.innerHTML += "<textarea tabindex='116' name='product_item_description[" + prodln + "]' id='product_item_description" + prodln + "' rows='2' cols='23'></textarea>&nbsp;&nbsp;";
 
+        var i = y1.insertCell(1);
+        i.colSpan = "3";
+        i.style.color = "rgb(68,68,68)";
+        i.innerHTML = "<span style='vertical-align: top;'>"  + SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NOTE') + " :&nbsp;</span>";
+        i.innerHTML += "<textarea tabindex='116' name='product_description[" + prodln + "]' id='product_description" + prodln + "' rows='2' cols='23'></textarea>&nbsp;&nbsp;";*/
+    }else{
+        var h1 = y.insertCell(0);
+        //h1.colSpan = "3";
+        h1.style.color = "rgb(68,68,68)";
+        h1.innerHTML = "<span style='vertical-align: top;'>" + SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_DESCRIPTION') + " :&nbsp;&nbsp;</span>";
+        h1.innerHTML += "<textarea tabindex='116' name='product_item_description[" + prodln + "]' id='product_item_description" + prodln + "' rows='2' cols='23'></textarea>&nbsp;&nbsp;";
+
+        var i = y.insertCell(1);
+        //i.colSpan = "2";
+        i.style.color = "rgb(68,68,68)";
+        i.innerHTML = "<span style='vertical-align: top;'>"  + SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NOTE') + " :&nbsp;</span>";
+        i.innerHTML += "<textarea tabindex='116' name='product_description[" + prodln + "]' id='product_description" + prodln + "' rows='2' cols='23'></textarea>&nbsp;&nbsp;";
+    }
+    h.innerHTML += "<input type='hidden' name='product_currency[" + prodln + "]' id='product_currency" + prodln + "' value=''><input type='hidden' name='product_deleted[" + prodln + "]' id='product_deleted" + prodln + "' value='0'><input type='hidden' name='product_id[" + prodln + "]' id='product_id" + prodln + "' value=''><button type='button' id='product_delete_line" + prodln + "' class='button' value='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "' tabindex='116' onclick='markLineDeleted(" + prodln + ",\"product_\")'><img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button>";
     addToValidate('EditView','product_product_id'+prodln,'id',true,"Please choose a product");
     prodln++;
 
@@ -264,7 +300,8 @@ enableQS(true);
             "part_number" : "product_part_number" + ln,
             "cost" : "product_product_cost_price" + ln,
             "price" : "product_product_list_price" + ln,
-            "currency_id" : "product_currency" + ln
+            "currency_id" : "product_currency" + ln,
+            "primary_uom_c":"product_uom_name_c"+ln,
         }
     };
 
@@ -272,10 +309,26 @@ enableQS(true);
 
 }
 
-
 function setProductReturn(popupReplyData){
     set_return(popupReplyData);
     formatListPrice(lineno);
+}
+
+function openProductUomPopup(ln){
+    var popupRequestData = {
+        "call_back_function" : "setProductUomReturn",
+        "form_name" : "EditView",
+        "field_to_name_array" : {
+            "name":"product_uom_name_c"+ln,
+            "id":"product_haa_uom_id_c"+ln,
+        }
+    };
+
+    open_popup('HAA_UOM', 800, 850, '', true, true, popupRequestData);
+}
+
+function setProductUomReturn(popupReplyData){
+    set_return(popupReplyData);
 }
 
 function formatListPrice(ln){
@@ -356,28 +409,61 @@ function formatListPrice(ln){
     if (typeof currencyFields !== 'undefined'){
         currencyFields.push("service_product_total_price" + servln);
     }
-
+    var f = x.insertCell(6);
+    
     //modefy BY osmond.liu 20161022合同模块增加结算周期和日期
     if (curent_module=='AOS_Contracts') {
+        f.innerHTML = "<a style='float:left' title='隐藏' onclick='edit_show_more_service(this,"+servln+")' href='javascript:;'><i class='glyphicon glyphicon-minus'></i></a>";
         var settlement_period_option=document.getElementById("settlementperiodhidden").value;
 
-        var g1 = x.insertCell(6);
-        g1.innerHTML = "<select tabindex='0' name='service_settlement_period_c[" + servln + "]' onchange='setServiceSettlementPeriodChange(this,"+servln+");'"+ " id='service_settlement_period_c" + servln + "'>" + settlement_period_option +"</select>";
+        //var f = x.insertCell(6);
+        //f.innerHTML = "<input type='hidden' name='service_deleted[" + servln + "]' id='service_deleted" + servln + "' value='0'><input type='hidden' name='service_id[" + servln + "]' id='service_id" + servln + "' value=''><button type='button' class='button' id='service_delete_line" + servln + "' value='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "' tabindex='116' onclick='markLineDeleted(" + servln + ",\"service_\")'><img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button><br>";
 
-        var g2 = x.insertCell(7);
-        g2.innerHTML ='<span class="input-group date" style="width:190px;" id="span_service_initial_account_day_c'+servln+'">'+
-        '<input class="date_input pull-left"  autocomplete="off" readonly="readonly" name="service_initial_account_day_c[' + servln + ']" id="service_initial_account_day_c' + servln + '" value="" title="" tabindex="0" type="text">'+
-        '</span>';
-        var f = x.insertCell(8);
-        f.innerHTML = "<input type='hidden' name='service_deleted[" + servln + "]' id='service_deleted" + servln + "' value='0'><input type='hidden' name='service_id[" + servln + "]' id='service_id" + servln + "' value=''><button type='button' class='button' id='service_delete_line" + servln + "' value='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "' tabindex='116' onclick='markLineDeleted(" + servln + ",\"service_\")'><img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button><br>";
+        //增加行
+        var y = tablebody.insertRow(-1);
+        var r = y.insertCell(0);
+        //r.id = 'service_line' + servln;
+        r.colSpan="11";
 
+        //结算周期
+        r.innerHTML="<div class='pull-left' style='width:150px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_SETTLEMENT_PERIOD_C')+":</div>"+
+        "<select tabindex='0' name='service_settlement_period_c[" + servln + "]' onchange='setServiceSettlementPeriodChange(this,"+servln+");'"+ " id='service_settlement_period_c" + servln + "'>" + settlement_period_option +"</select></div>";
+        //首次结算日
+        r.innerHTML +="<div class='pull-left' style='width:185px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_INITIAL_ACCOUNT_DAY')+":</div>"+
+        '<span id="span_service_initial_account_day_c'+servln+'" class="input-group date'+servln+'">'+
+        '<input id="service_initial_account_day_c' + servln + '" class="date_input pull-left" readOnly="readOnly" style="width:75px" autocomplete="off" name="service_initial_account_day[' + servln + ']" value="" title="" tabindex="0" type="text"></span></div>';
+        //生效日期
+        r.innerHTML +="<div class='pull-left' style='width:175px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_START_C')+":</div>"+
+        '<span id="span_service_effective_start_c' + servln + '" class="input-group date'+servln+'">'+
+        '<input id="service_effective_start_c' + servln + '" class="date_input pull-left" style="width:75px" autocomplete="off" name="service_effective_start_c[' + servln + ']" onclick="CalendarShow(this);" value="" title="" tabindex="0" type="text"><span class="input-group-addon">'+
+        '<span class="glyphicon glyphicon-calendar"></span></span></span></div>';
+        //终止日期
+        r.innerHTML +="<div class='pull-left' style='width:165px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_END_C')+":</div>"+
+        '<span id="span_service_effective_end_c'+ servln +'" class="input-group date'+servln+'">'+
+        '<input id="service_effective_end_c' + servln + '" class="date_input pull-left" style="width:75px" autocomplete="off" name="service_effective_end_c[' + servln + ']" onclick="CalendarShow(this);" value="" title="" tabindex="0" type="text"><span class="input-group-addon">'+
+        '<span class="glyphicon glyphicon-calendar"></span></span></span></div>';
+        //说明
+        r.innerHTML +="<div class='pull-left'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_DESCRIPTION')+":</div>"+
+        "<textarea tabindex='116' name='service_item_description[" + servln + "]' id='product_item_description" + servln + "' rows='2' cols='23'></textarea></div>";
+        //备注
+        r.innerHTML +="<div class='pull-left'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NOTE')+":</div>"+
+        "<textarea tabindex='116' name='service_description[" + servln + "]' id='product_description" + servln + "' rows='2' cols='23'></textarea></div>";
     }else{
-     var f = x.insertCell(6);
-     f.innerHTML = "<input type='hidden' name='service_deleted[" + servln + "]' id='service_deleted" + servln + "' value='0'><input type='hidden' name='service_id[" + servln + "]' id='service_id" + servln + "' value=''><button type='button' class='button' id='service_delete_line" + servln + "' value='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "' tabindex='116' onclick='markLineDeleted(" + servln + ",\"service_\")'><img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button><br>";
+        var row=tablebody.insertRow(-1);
+        var h1 = row.insertCell(0);
+        //h1.colSpan = "3";
+        h1.style.color = "rgb(68,68,68)";
+        h1.innerHTML = "<span style='vertical-align: top;'>" + SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_DESCRIPTION') + " :&nbsp;&nbsp;</span>";
+        h1.innerHTML += "<textarea tabindex='116' name='servicet_item_description[" + prodln + "]' id='service_item_description" + prodln + "' rows='2' cols='23'></textarea>&nbsp;&nbsp;";
 
- }
+        var i = row.insertCell(1);
+        //i.colSpan = "2";
+        i.style.color = "rgb(68,68,68)";
+        i.innerHTML = "<span style='vertical-align: top;'>"  + SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NOTE') + " :&nbsp;</span>";
+        i.innerHTML += "<textarea tabindex='116' name='service_description[" + prodln + "]' id='service_description" + prodln + "' rows='2' cols='23'></textarea>&nbsp;&nbsp;";
+    }
     //End modefy 20161022增加结算周期和日期
-
+    f.innerHTML += "<input type='hidden' name='service_deleted[" + servln + "]' id='service_deleted" + servln + "' value='0'><input type='hidden' name='service_id[" + servln + "]' id='service_id" + servln + "' value=''><button type='button' class='button' id='service_delete_line" + servln + "' value='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "' tabindex='116' onclick='markLineDeleted(" + servln + ",\"service_\")'><img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button><br>";
 
     servln++;
 
@@ -399,40 +485,49 @@ function formatListPrice(ln){
     var x=tablehead.insertRow(-1);
     x.id='product_head';
 
-    var a=x.insertCell(0);
-    a.style.color="rgb(68,68,68)";
-    a.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_QUANITY');
-
-    var b=x.insertCell(1);
+    var b=x.insertCell(0);
     b.style.color="rgb(68,68,68)";
     b.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NAME');
 
-    var b1=x.insertCell(2);
+    var b1=x.insertCell(1);
     b1.colSpan = "2";
     b1.style.color="rgb(68,68,68)";
     b1.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_PART_NUMBER');
 
-    var c=x.insertCell(3);
+    var a=x.insertCell(2);
+    a.style.color="rgb(68,68,68)";
+    a.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_QUANITY');
+
+    var a1=x.insertCell(3);
+    a1.style.color="rgb(68,68,68)";
+    if (curent_module=="AOS_Contracts") {
+        a1.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_UOM_NAME_C');
+    }
+    var a2=x.insertCell(4);
+    a2.style.color="rgb(68,68,68)";
+    a2.innerHTML="";
+
+    var c=x.insertCell(5);
     c.style.color="rgb(68,68,68)";
     c.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_LIST_PRICE');
 
-    var d=x.insertCell(4);
+    var d=x.insertCell(6);
     d.style.color="rgb(68,68,68)";
     d.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_DISCOUNT_AMT');
 
-    var e=x.insertCell(5);
+    var e=x.insertCell(7);
     e.style.color="rgb(68,68,68)";
     e.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_UNIT_PRICE');
 
-    var f=x.insertCell(6);
+    var f=x.insertCell(8);
     f.style.color="rgb(68,68,68)";
     f.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_VAT_AMT');
 
-    var g=x.insertCell(7);
+    var g=x.insertCell(9);
     g.style.color="rgb(68,68,68)";
     g.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_TOTAL_PRICE');
     //Modefy BY osmond 20161022 合同模块增加结算周期
-    if (curent_module=='AOS_Contracts') {
+    /*if (curent_module=='AOS_Contracts') {
         var g1=x.insertCell(8);
         g1.style.color="rgb(68,68,68)";
         g1.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_SETTLEMENT_PERIOD_C');
@@ -443,11 +538,11 @@ function formatListPrice(ln){
         var h=x.insertCell(10);
         h.style.color="rgb(68,68,68)";
         h.innerHTML='&nbsp;';
-    }else{
-       var h=x.insertCell(8);
+    }else{*/
+       var h=x.insertCell(10);
        h.style.color="rgb(68,68,68)";
        h.innerHTML='&nbsp;';
-   }
+   //}
 //End Modefy BY osmond 20161022 合同模块增加结算周期
 
 }
@@ -492,7 +587,7 @@ function formatListPrice(ln){
     f.style.color="rgb(68,68,68)";
     f.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_TOTAL_PRICE');
     //Modefy BY osmond 20161022 合同模块增加结算周期
-    if (curent_module=='AOS_Contracts') {
+    /*if (curent_module=='AOS_Contracts') {
         var g1=x.insertCell(6);
         g1.style.color="rgb(68,68,68)";
         g1.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_SETTLEMENT_PERIOD_C');
@@ -505,11 +600,11 @@ function formatListPrice(ln){
         g.innerHTML='&nbsp;';
     }
     else
-    {
-       var g=x.insertCell(6);
-       g.style.color="rgb(68,68,68)";
-       g.innerHTML='&nbsp;'; 
-   }
+        {*/
+           var g=x.insertCell(6);
+           g.style.color="rgb(68,68,68)";
+           g.innerHTML='&nbsp;'; 
+   //}
     //End Modefy by osmond 20161022 合同模块增加结算周期
     
 }
@@ -1067,8 +1162,9 @@ function check_form(formname) {
     return validate_form(formname, '');
 }
 function CalendarShow(field) {//显示日历
-  var field_name='#span_'+field.getAttribute("id");
-  var Datetimepicker=$(field_name);
+  /*var field_name='#span_'+field.getAttribute("id");
+  console.log(field_name);*/
+  var Datetimepicker=$(field);
   var dateformat="Y-m-d H:M";
   dateformat = dateformat.replace(/Y/,"yyyy");
   dateformat = dateformat.replace(/m/,"mm");
@@ -1088,13 +1184,13 @@ function setProductSettlementPeriodChange(field,prodln) {
   var field_name=field.getAttribute("id");
   var accountDay=document.getElementById("span_product_initial_account_day_c"+prodln);
   var accountDayValue=document.getElementById("product_initial_account_day_c"+prodln).value;
-  var field_value=field.value;
+  var field_value=field.value; 
   var html='';
   if (field_value=="Once"){
-     html= '<input class="date_input pull-left" readOnly="readOnly" autocomplete="off" name="product_initial_account_day_c[' + prodln + ']" id="product_initial_account_day_c' + prodln + '" value="'+accountDayValue+'" title="" tabindex="0" type="text">';
+     html= '<input class="date_input pull-left" readOnly="readOnly" autocomplete="off" name="product_initial_account_day_c[' + prodln + ']" style="width:75px" id="product_initial_account_day_c' + prodln + '" value="" title="" tabindex="0" type="text">';
  }
  else{
-     html='<input class="date_input pull-left"  autocomplete="off" name="product_initial_account_day_c[' + prodln + ']" id="product_initial_account_day_c' + prodln + '" value="'+accountDayValue+'" title="" tabindex="0" type="text" onclick="CalendarShow(this);">'+
+     html='<input class="date_input pull-left"  autocomplete="off" name="product_initial_account_day_c[' + prodln + ']" style="width:75px" id="product_initial_account_day_c' + prodln + '" value="'+accountDayValue+'" title="" tabindex="0" type="text" onclick="CalendarShow(this);">'+
      '<span class="input-group-addon">'+
      '<span class="glyphicon glyphicon-calendar"></span></span>';
 
@@ -1106,16 +1202,17 @@ function setServiceSettlementPeriodChange(field,servln) {
   var field_name=field.getAttribute("id");
   var accountDay=document.getElementById("span_service_initial_account_day_c"+servln);
   var accountDayValue=document.getElementById("service_initial_account_day_c"+servln).value;
+  $("#service_initial_account_day_c"+servln).val("");
   var field_value=field.value;
+
   var html='';
   if (field_value=="Once"){
-     html= '<input class="date_input pull-left" readOnly="readOnly" autocomplete="off" name="service_initial_account_day_c[' + servln + ']" id="service_initial_account_day_c' + servln + '" value="'+accountDayValue+'" title="" tabindex="0" type="text">';
+     html= '<input class="date_input pull-left" readOnly="readOnly" style="width:75px" autocomplete="off" name="service_initial_account_day_c[' + servln + ']" id="service_initial_account_day_c' + servln + '" value="" title="" tabindex="0" type="text">';
  }
  else{
-     html='<input class="date_input pull-left"  autocomplete="off" name="service_initial_account_day_c[' + servln + ']" id="service_initial_account_day_c' + servln + '" value="'+accountDayValue+'" title="" tabindex="0" type="text" onclick="CalendarShow(this);">'+
+     html='<input class="date_input pull-left" autocomplete="off" style="width:75px" name="service_initial_account_day_c[' + servln + ']" id="service_initial_account_day_c' + servln + '" value="'+accountDayValue+'" title="" tabindex="0" type="text" onclick="CalendarShow(this);">'+
      '<span class="input-group-addon">'+
      '<span class="glyphicon glyphicon-calendar"></span></span>';
-
  }
  accountDay.innerHTML=html;
 }
@@ -1127,17 +1224,58 @@ function replace_display_lines(linesHtml) {
 
 function GetUrlParamString(paramName)
 {
+    if ($("#viewtype").val()) {
+        return $("#viewtype").val();
+    }
     var reg = new RegExp("(^|&)"+ paramName +"=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
     if(r!=null){return  unescape(r[2]);}
     else{
         var url=decodeURIComponent(document.location.href);
         url=url.split("#")[1];
-        url=url.split("?")[1];
-        r = url.match(reg);
-        if(r!=null)return  unescape(r[2]); return null;
+        if (url) {
+            url=url.split("?")[1];
+            r = url.match(reg);
+            if(r!=null)return  unescape(r[2]); return null;
+        }
     } 
     return null;
+}
+
+function edit_show_more_product(btn,num){//编辑模式下的显示隐藏product
+    if($("#product_note_line"+num).css("display")=="none"){
+        $("#product_note_line"+num).show();
+        $("#product_note_line"+num).next().show();
+        changeAttr(btn,"show");
+    }else{
+        $("#product_note_line"+num).hide();
+        $("#product_note_line"+num).next().hide();
+        changeAttr(btn,"hide");
+    }
+}
+
+function changeAttr(btn,type){
+    if (type=="show") {
+        $(btn).children().removeClass("glyphicon glyphicon-plus");
+        $(btn).children().addClass("glyphicon glyphicon-minus");
+        $(btn).attr("title","隐藏");
+    }else{
+        $(btn).children().removeClass("glyphicon glyphicon-minus");
+        $(btn).children().addClass("glyphicon glyphicon-plus");
+        $(btn).attr("title","更多");
+    }
+}
+
+function edit_show_more_service(btn,num){//编辑模式下的显示隐藏service
+    if($("#service_line"+num).next().css("display")=="none"){
+        //$("#service_line"+num).show();
+        $("#service_line"+num).next().show();
+        changeAttr(btn,"show");
+    }else{
+        //$("#service_line"+num).hide();
+        $("#service_line"+num).next().hide();
+        changeAttr(btn,"hide");
+    }
 }
 
 function showMore(btn,num){//btn和num确定点击哪个+
@@ -1153,8 +1291,10 @@ function showMore(btn,num){//btn和num确定点击哪个+
 }
 
 $(function(){
-    $("#currency_id_span").parent().attr("colspan",5);
-    $("#line_items_span").parent().attr("colspan",9);
-    $("#tax_amount").parent().next().remove();
-    $("#tax_amount").parent().next().remove();
+    if($("#edit_button").length>0){//判断是否在Detail中
+        $("#LBL_LINE_ITEMS>tbody>tr>td").removeAttr("colspan");//清除colsan,因为只有两列
+        $("#LBL_LINE_ITEMS>tbody>tr:lt(3)>td:eq(1)").attr("width","87.5%");//第一列已经是12.5%，只需设置第二列
+        $("#LBL_LINE_ITEMS>tbody>tr>td").removeAttr("width");//行宽，无用设置，移除
+        $("#LBL_LINE_ITEMS>tbody>tr:eq(7)>td:gt(1)").remove();
+    }
 });
