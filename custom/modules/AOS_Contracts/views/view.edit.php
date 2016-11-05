@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 class AOS_contractsViewEdit extends ViewEdit
@@ -48,6 +48,7 @@ class AOS_contractsViewEdit extends ViewEdit
  }
  public function preDisplay() {
   global $app_list_strings;
+  echo "<input type='hidden' id='viewtype' value='AOS_Contracts'/>";
   echo '<input type="hidden" name="settlement_period_c" id="settlementperiodhidden" value="'.get_select_options_with_id($app_list_strings['settlement_period_list'], '').'">';
   parent::preDisplay();
 }
