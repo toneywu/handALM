@@ -44,6 +44,7 @@ $dictionary['HAT_EventType'] = array (
 	'inline_edit' => true,
 	'duplicate_merge' => true,
 	'fields' => array (
+
     'haa_frameworks_id' =>
     array (
       'required' => false,
@@ -1363,6 +1364,28 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
+		),
+		
+		'need_limit_transaction_lines' => array (
+			'required' => false,
+			'name' => 'need_limit_transaction_lines',
+			'vname' => 'LBL_NEED_LIMIT_TRANSACTION_LINES',
+			'type' => 'bool',
+			'massupdate' => 0,
+			'default' => '1',
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			//'options' => 'dom_int_bool',
+	
 		),
 		
 		

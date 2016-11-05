@@ -294,8 +294,25 @@ function btnAddAllocLine(){
 		"field_to_name_array" : {
 		}
 	};
+	
   var target_owning_org_id = $("#target_owning_org_id").val();
   var popupFilter = '&target_owning_org_id_advanced='+target_owning_org_id;
+  var event_id = $("#hat_eventtype_id").val();
+	$.ajax({//
+		url : 'index.php?to_pdf=true&module=HIT_IP_TRANS_BATCH&action=getEventJsonData&hat_eventtype_id='
+				+ event_id,
+		async : false,
+		success : function(data) {
+			var line_data = jQuery.parseJSON(data);
+			console.log(line_data.need_limit_transaction_lines+"----");
+			if(line_data.need_limit_transaction_lines==''||line_data.need_limit_transaction_lines=='0'){
+				popupFilter='';
+			}
+		},
+		error : function() { // 失败
+			alert('Error loading document');
+		}
+	});
   open_popup('HIT_IP_Allocations', 1200, 850,popupFilter, true, true, popupRequestData, "MultiSelect", true);
 }
 

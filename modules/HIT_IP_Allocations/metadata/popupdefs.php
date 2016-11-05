@@ -11,6 +11,7 @@ $popupMeta = array (
   'access_assets_name' => 'hit_ip_allocations.access_assets_name',
   'target_owning_org_id' => 'hit_ip_allocations.target_owning_org_id',
 ),
+//'whereStatement'=>'access_assets_id="df9949d1-378c-9048-24e2-5819fdfe80ec"',
     'searchInputs' => array (
   4 => 'hit_ip_subnets',
   5 => 'bandwidth_type',

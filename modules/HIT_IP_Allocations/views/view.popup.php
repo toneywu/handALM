@@ -17,17 +17,17 @@ class HIT_IP_AllocationsViewPopup extends ViewPopup
 		//echo "<input type='hidden' id='target_owning_org_id_advanced' value='".$_REQUEST["target_owning_org_id_advanced"]."'>";
 		parent::Display();
 		//echo var_dump($popupMeta);
+		//echo $_REQUEST['target_owning_org_id_advanced'];
     }
     
-   
-    
-    public function listViewProcess(){
+	function process() {
 
-        echo "helloworld";
-        //$this->params['custom_select'] = " CUSTOM SELEC";
-        //$this->params['custom_from'] = "CUSTOM FROM";
-        $this->where .= " where target_owning_org_id_advanced="."54b17458-3c99-15cd-ce95-57ad8b859112";
-        parent::listViewProcess();
-        
+ 		global $mod_strings, $app_strings, $app_list_strings;
+        global $db;
+        global $popupMeta;
+		
+		parent::process();
+		//echo var_dump(file_exists('modules/' . $this->module . '/Popup_picker.php'));
+		//echo 'dd'.$_REQUEST['_get_where_clause'];
     }
 }
