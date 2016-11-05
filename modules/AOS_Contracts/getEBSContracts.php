@@ -139,6 +139,11 @@ if (curl_errno($soap_do)) {
 			$newBean->start_date = $h_start_date_active_val;
 			$newBean->end_date = $h_end_date_active_val;
 			$newBean->data_source_id_c=$h_contract_header_id_val;
+			$newBean->attribuet1_c=$org_name_val;
+			$newBean->attribuet2_c=$sale_unit_val;
+			$newBean->attribuet3_c=$contract_type_val;
+			$newBean->attribuet4_c=$sales_document_name_val;
+			$newBean->attribuet5_c=$frame_contract_num_val;
 			$newBean->save();
 
 			echo "header_id = " . $newBean->id . "<br>";
@@ -190,7 +195,7 @@ if (curl_errno($soap_do)) {
 					$newLineBean->parent_type = 'AOS_Contracts';
 					$newLineBean->product_source_id_c=$contract_line_id_val;
 					//
-					//$newLineBean->save();
+					$newLineBean->save();
 				}
 			}
 		}

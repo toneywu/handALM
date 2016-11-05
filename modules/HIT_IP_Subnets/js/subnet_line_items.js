@@ -1,20 +1,82 @@
 $.getScript("cache/include/javascript/sugar_grp_yui_widgets.js"); //MessageBox
-$.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js"); 
+$.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
+$.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); //MessageBox
+$('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
+
 
 var prodln = 0;
 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
 
 
-function check_subnet_ip(ip_val) { //检查子网IP是否合规
+function check_subnet_ip(ln) { //检查子网IP是否合规
   //1、判断子网IP是否在网段之内
-  //2、判断子网IP是否在当前网段中已经存在
-  ip_splited = ip_val.split("/");
-  if ( IpSubnetCalculator.isIp(ip_splited[0])&&ip_splited[1]<=32&&ip_splited[1]>=0) {
-    var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1])
+  //2、判断精确IP是否在当前子网网段内
+  //2、判断精确IP是否在当前网段中已经存在
+  var err_msg="";
+
+  if ($("#line_ip_subnet"+ln).val()=="") {
+    return;
   }
-}
+
+  var ip_splited = $("#line_name"+ln).val().split("/");//当前行的精确IP地址
+  var ip_subnet_splited = $("#line_ip_subnet"+ln).val().split("/");//当前行的IP Subnet地址
+  var ip_parenet_splited = $("#name").val().split("/");//头上的IP地址
+
+  if ( IpSubnetCalculator.isIp(ip_splited[0])&&ip_splited[1]<=32&&ip_splited[1]>=0) {
+    //如果当前IP格式正常就继续判断是否有冲突
+    var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1])
+    var ip_parenet_caled = IpSubnetCalculator.calculateSubnetMask(ip_parenet_splited[0],ip_parenet_splited[1])
+    //1、判断子网IP是否在网段之内
+    if (ip_caled.ipHigh>ip_subnet_splited.ipHigh || ip_caled.ipLow<ip_subnet_splited.ipLow) {
+      //与父IP确认，是否走出当前父IP的范围
+      err_msg =  SUGAR.language.get('HIT_IP_Subnets', 'LBL_ERR_IP_SCOPE');
+    }
+
+    //2、判断精确IP是否在当前子网网段内
+    if (ip_caled.ipHigh>ip_parenet_caled.ipHigh || ip_caled.ipLow<ip_parenet_caled.ipLow) {
+      //与父IP确认，是否走出当前父IP的范围
+      err_msg =  SUGAR.language.get('HIT_IP_Subnets', 'LBL_ERR_IP_SCOPE');
+    }
+      //2、判断精确IP是否在当前网段中已经存在
+    for (var i = 0; i < prodln - 1; i++) {
+      if (i!=ln && $("#line_deleted"+i).val()!=1){ //针对之前所有行的记录进行比较
+        ip_loop_splited = $("#line_ip_subnet"+i).val().split("/");//当前行的IP地址
+        if ( IpSubnetCalculator.isIp(ip_loop_splited[0])&&ip_loop_splited[1]<=32&&ip_loop_splited[1]>=0) {
+          var ip_loop_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1])
+          if ((ip_caled.ipLow <= ip_loop_caled.ipHigh && ip_caled.ipLow >= ip_loop_caled.ipLow) ||
+            (ip_caled.ipHigh <= ip_loop_caled.ipHigh && ip_caled.ipHigh >= ip_loop_caled.ipLow)) {
+            //判断当前IP和LOOP的IP是否有重合
+            err_msg =  SUGAR.language.get('HIT_IP_Subnets', 'LBL_ERR_IP_CONFILCT')+"[<strong>"+$("#line_ip_subnet"+i).val()+"</strong> :"+ip_loop_caled.ipLowStr+"~"+ip_loop_caled.ipHighStr+"]";
+          }
+        }
+      }
+    }//end for
+  } else {
+    err_msg =  SUGAR.language.get('HIT_IP_Subnets', 'LBL_ERR_IP_FORMAT');
+  }
+
+  clear_all_errors();
+  $("#btn_LineEditorClose"+ln).show()
+  $("#btn_LineEditorClose"+ln).prop('disabled', false);
+
+  if (err_msg!="") {
+    add_error_style('EditView','line_ip_subnet['+ln+']',SUGAR.language.get('app_strings', 'LBL_EMAIL_ERROR_GENERAL_TITLE')+": "+err_msg);
+    $("#btn_LineEditorClose"+ln).prop('disabled', true);
+    $("#btn_LineEditorClose"+ln).hide();
 
 
+    BootstrapDialog.alert({
+              type: BootstrapDialog.TYPE_DANGER,
+              title: SUGAR.language.get('app_strings', 'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+              message: err_msg,
+          });
+  }
+}//end function check_subnet_ip
+
+/**
+ * 将当前IP的关联信息，绘制在界面上
+ * @ipval,desc_obj
+ */
 function show_ip_desc(ip_val,desc_obj) {
   ip_splited = ip_val.split("/");
   if ( IpSubnetCalculator.isIp(ip_splited[0])&&ip_splited[1]<=32&&ip_splited[1]>=0) {
@@ -30,10 +92,7 @@ function show_ip_desc(ip_val,desc_obj) {
    }
 };
 
-/**
- * 点击按钮 调用Ajax请求 获取list里面根据工单状态应该显示的value
- * @param name
- */
+
 /*function getPopListValue(id,ln){
 		$.ajax({
 			url: 'index.php?to_pdf=true&module=HIT_IP_Subnets&action=getListFields&id=' + id+"&prodln="+selectIn,
@@ -81,10 +140,12 @@ function show_ip_subnet_ojb(ln) {
       $("#line_location"+ln).val($("#location").val())
     }
 
+    check_subnet_ip(ln);
 }
 
-function show_ip_desc_ojb(obj) {
+function show_ip_desc_ojb(ln) {
   show_ip_desc($("#line_name"+ln).val(),$("#line_name"+ln+"_ip_desc"));
+  check_subnet_ip(ln);
 }
 
 function openVLANPopup(ln){ //在行上选择了From Location
@@ -413,7 +474,6 @@ function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
     document.getElementById("displayed_line_ip_type"+ln).checked = true;
   } 
   else {
-  	console.log("line_ip_type2222 ="+$("#line_ip_type"+ln).val());
     $("#displayed_line_ip_type"+ln).removeAttr("checked");
   }
 }

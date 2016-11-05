@@ -36,6 +36,7 @@ if (!empty ($current_id)) {
 								LEFT   JOIN ham_work_centers w
 								ON     r.work_center_id = w.id
 								WHERE  u.id ='" . $current_user->contact_id_c . "'";
+	//echo $current_bean->work_center_people_id;
 	if ($current_bean->work_center_people_id == null) {
 		if ($current_bean->ham_work_center_id!=null){
 		$sql = $sql . " and (w.id='" . $current_bean->ham_work_center_id ."')";
@@ -43,6 +44,7 @@ if (!empty ($current_id)) {
 		if($current_bean->work_center_res_id!=null){
 		$sql = $sql . " and (r.id='" . $current_bean->work_center_res_id . "')";
 		}
+		
 		$bean_resource_people_list = $db->query($sql);
 		$people_name = "";
 		$people_id = "";
@@ -58,8 +60,9 @@ if (!empty ($current_id)) {
 			if(!empty($res_people_bean->contact_id)){
 				$contact_bean = BeanFactory :: getBean('Contacts', $res_people_bean->contact_id);
 				$current_bean->assigned_user_id = $contact_bean->user_id_c;
-			}
 				$current_bean->date_actual_start=$timedate->now();
+			}
+				
 			$current_bean->save();
 		}
 	}

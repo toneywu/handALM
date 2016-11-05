@@ -11,6 +11,12 @@ function call_ff() {
 	$(".expandLink").click();
 }
 
+function setParentLocationPopupReturn(popupReplyData){//选择地点类型后
+	set_return(popupReplyData);
+	if($("name").val()==""){
+	   $("name").val($("#parent_location").val());
+	}
+}
 
 $(document).ready(function() {
 	//alert("haa_ff_id="+$("#haa_ff_id").val());
@@ -28,6 +34,7 @@ $(document).ready(function() {
 	SUGAR.util.doWhen("typeof setFF == 'function'", function(){
 		call_ff();
 	});
-
+	
+	
 
 });

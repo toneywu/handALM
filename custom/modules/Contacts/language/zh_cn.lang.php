@@ -44,4 +44,6 @@ $mod_strings = array (
   'LBL_ATTRIBUTE9' => '附加属性 9',
   'LBL_PRIMARY_CONTACT' => '首要联系人',
     'LBL_EDITVIEW_PANEL1' => '系统用户账户信息',
+  'LBL_PEOPLE_TYPE_HAA_CODES_ID' => '人员类型(ID)',
+  'LBL_PEOPLE_TYPE' => '人员类型',    
 );
