@@ -116,6 +116,7 @@ function close_people_info(){
 	}
 }
 
+
 $(document).ready(function(){
 	
 	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个

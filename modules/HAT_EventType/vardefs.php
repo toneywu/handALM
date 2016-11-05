@@ -44,6 +44,7 @@ $dictionary['HAT_EventType'] = array (
 	'inline_edit' => true,
 	'duplicate_merge' => true,
 	'fields' => array (
+	
 		'basic_type' => array (
 			'required' => true,
 			'name' => 'basic_type',

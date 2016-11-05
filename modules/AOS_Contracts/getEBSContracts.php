@@ -157,6 +157,7 @@ if (curl_errno($soap_do)) {
 			echo "frame_contract_num_val=" . $frame_contract_num_val . "<br>";
 			echo "start_date=" . $h_start_date_active_val . "<br>";
 
+
 			foreach ($record['LINES'] as $line_key => $line_value) {
 				$contract_line_id_val = $line_value['CONTRACT_LINE_ID'];
 				$line_num_val = $line_value['LINE_NUM'];

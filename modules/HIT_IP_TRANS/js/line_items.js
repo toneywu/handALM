@@ -294,6 +294,7 @@ function btnAddAllocLine(){
 		"field_to_name_array" : {
 		}
 	};
+	
   var target_owning_org_id = $("#target_owning_org_id").val();
   var popupFilter = '&target_owning_org_id_advanced='+target_owning_org_id;
   var event_id = $("#hat_eventtype_id").val();
