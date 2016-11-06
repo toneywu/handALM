@@ -214,9 +214,9 @@ $(document).ready(function(){
 
 	//将Subpanel的内容前移到上方TAB中
 	$("#LBL_EDITVIEW_PANEL_WOLINES").after("<div class='tab_subpanel'>"+$("#whole_subpanel_wo_line").html()+"</div>");
-	$("#whole_subpanel_wo_line").html("");
+	$("#whole_subpanel_wo_line").replaceWith("");
 	$("#LBL_EDITVIEW_PANEL_SOURCE").after("<div class='tab_subpanel'>"+$("#whole_subpanel_sr").html()+"</div>");
-	$("#whole_subpanel_sr").html("");
+	$("#whole_subpanel_sr").replaceWith("");
 
 
 	$("#btn_change_status").click(function(){ //如果点了修改状态按钮，调用Ajax修改状态
@@ -243,8 +243,8 @@ $(document).ready(function(){
 	 * checkAccess
 	 */
 	checkAccess($("input[name='record']").val());
-	
-	
+
+
 	var complete_btn=$("<input type='button' class='btn_detailview' id='btn_complete' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_COMPLETE_BUTTON_LABEL')+"'>");
 	if($("#wo_status").val()=="APPROVED"){
 		$("#btn_change_status").after(complete_btn);
@@ -259,7 +259,6 @@ $(document).ready(function(){
 	$("#formgetWOOPQuery").append(reject_woop_btn);
 	$("#btn_woop_reject").click(function(){
 		reject_woop($("input[name='record']").val());
-		
 	});
 }
 );

@@ -85,4 +85,11 @@ $mod_strings = array (
   'LBL_HIT_IP_ALLOCATIONS_TITLE'=>'Allocations',
   'LBL_HAM_WO_TITLE'=>'Work Orders',
   'LBL_HAT_ASSETS_TITLE'=>'Assets',
+  'LBL_DETAILVIEW_PANEL_ASSET' => 'Equip./Assets',
+  'LBL_DETAILVIEW_PANEL_IT' => 'IT Resources',
+  'LBL_DETAILVIEW_PANEL_MEMBER' => 'Members & Contacts',
+  'LBL_DETAILVIEW_PANEL_QUAL' => 'Qualifications',
+  'LBL_DETAILVIEW_PANEL_DOC' => 'Documents',
+  'LBL_DETAILVIEW_PANEL_BUSINESS'=>'Business',
+  'LBL_DETAILVIEW_PANEL_WORK'=>'Service & Work',
 );

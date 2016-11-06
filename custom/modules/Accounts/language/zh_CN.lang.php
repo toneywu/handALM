@@ -1,5 +1,5 @@
 <?php
-// created: 2016-10-25 21:46:25
+// created: 2016-11-06 20:01:33
 $mod_strings = array (
   'LNK_NEW_ACCOUNT' => '新增组织',
   'LNK_ACCOUNT_LIST' => '组织',
@@ -75,7 +75,7 @@ $mod_strings = array (
   'LBL_DATA_SOURCE_ID' => '数据来源ID',
   'LBL_ORGANIZATION_LEVEL_HAA_CODES_ID' => '组织级别(related  ID)',
   'LBL_PHONE_OFFICE' => '电话:',
-  'LBL_DETAILVIEW_PANEL5' => '新建面板 5',
+  'LBL_DETAILVIEW_PANEL5' => 'IT资源',
   'LBL_EDITVIEW_PANEL5' => '基础信息',
   'LBL_CUSTOMER_CLASSS_HAA_CODES_ID' => '客户级别 (related ID)',
   'LBL_CUSTOMER_CLASSS' => '客户级别',
@@ -89,5 +89,11 @@ $mod_strings = array (
   'LBL_HIT_IP_ALLOCATIONS_TITLE' => 'IP分配信息',
   'LBL_HAM_WO_TITLE' => '工单信息',
   'LBL_HAT_ASSETS_TITLE' => '资产/设备',
-
+  'LBL_DETAILVIEW_PANEL_ASSET' => '资产',
+  'LBL_DETAILVIEW_PANEL_IT' => 'IT资源',  
+  'LBL_DETAILVIEW_PANEL_MEMBER' => '下级组织及联系人',
+  'LBL_DETAILVIEW_PANEL_QUAL' => '资质/许可证',
+  'LBL_DETAILVIEW_PANEL_DOC' => '文档',
+  'LBL_DETAILVIEW_PANEL_BUSINESS'=>'业务往来',
+  'LBL_DETAILVIEW_PANEL_WORK'=>'服务及工作记录',
 );

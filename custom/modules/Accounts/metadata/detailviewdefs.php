@@ -48,12 +48,12 @@ array (
           'file' => 'custom/modules/Accounts/js/AccountsDetailView.js',
         ),
       ),
-      'useTabs' => false,
+      'useTabs' => true,
       'tabDefs' => 
       array (
         'DEFAULT' => 
         array (
-          'newTab' => false,
+          'newTab' => true,
           'panelDefault' => 'expanded',
         ),
         'LBL_EDITVIEW_PANEL2' => 
@@ -81,8 +81,43 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_DETAILVIEW_PANEL_IT' => 
+        array (
+          'newTab' => true,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_DETAILVIEW_PANEL_ASSET' => 
+        array (
+          'newTab' => true,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_DETAILVIEW_PANEL_MEMBER' => 
+        array (
+          'newTab' => true,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_DETAILVIEW_PANEL_QUAL' => 
+        array (
+          'newTab' => true,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_DETAILVIEW_PANEL_DOC' => 
+        array (
+          'newTab' => true,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_DETAILVIEW_PANEL_BUSINESS' => 
+        array (
+          'newTab' => true,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_DETAILVIEW_PANEL_WORK' => 
+        array (
+          'newTab' => true,
+          'panelDefault' => 'expanded',
+        ),
       ),
-      'syncDetailEditViews' => true,
+      'syncDetailEditViews' => false,
     ),
     'panels' => 
     array (
@@ -99,7 +134,6 @@ array (
         ),
         1 => 
         array (
-
           0 => 
           array (
             'name' => 'full_name_c',
@@ -450,6 +484,67 @@ array (
             'name' => 'data_source_reference_c',
             'label' => 'LBL_DATA_SOURCE_REFERENCE',
           ),
+        ),
+      ),
+      'lbl_detailview_panel_it' => 
+      array (
+        0 => 
+        array (
+          0 => '',
+          1 => '',
+        ),
+      ),
+      'lbl_detailview_panel_asset' => 
+      array (
+        0 => 
+        array (
+          0 => '',
+          1 => '',
+        ),
+      ),
+      'lbl_detailview_panel_member' => 
+      array (
+        0 => 
+        array (
+          0 => '',
+          1 => '',
+        ),
+        1 => 
+        array (
+          0 => '',
+          1 => '',
+        ),
+      ),
+      'lbl_detailview_panel_qual' => 
+      array (
+        0 => 
+        array (
+          0 => '',
+          1 => '',
+        ),
+      ),
+      'lbl_detailview_panel_doc' => 
+      array (
+        0 => 
+        array (
+          0 => '',
+          1 => '',
+        ),
+      ),
+      'lbl_detailview_panel_business' => 
+      array (
+        0 => 
+        array (
+          0 => '',
+          1 => '',
+        ),
+      ),
+      'lbl_detailview_panel_work' => 
+      array (
+        0 => 
+        array (
+          0 => '',
+          1 => '',
         ),
       ),
     ),
