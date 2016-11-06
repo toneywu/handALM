@@ -37,17 +37,22 @@ array (
           'file' => 'modules/HAA_FF/ff_include.js',
         ),
       ),
-      'useTabs' => false,
+      'useTabs' => true,
       'tabDefs' => 
       array (
         'DEFAULT' => 
         array (
-          'newTab' => false,
+          'newTab' => true,
           'panelDefault' => 'expanded',
         ),
         'LBL_EDITVIEW_PANEL2' => 
         array (
           'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_EDITVIEW_PANEL3' => 
+        array (
+          'newTab' => true,
           'panelDefault' => 'expanded',
         ),
       ),
@@ -95,6 +100,18 @@ array (
           array (
             'name' => 'field_lines',
             'label' => 'LBL_FIELD_LINES',
+          ),
+        ),
+      ),
+      'lbl_editview_panel3' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'triget_js',
+            'comment' => 'save the js code.',
+            'label' => 'LBL_TRIGER_JS',
           ),
         ),
       ),

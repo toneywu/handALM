@@ -31,17 +31,22 @@ array (
           'file' => 'modules/HAT_Assets/js/editview_icon_picker.js',
         ),
       ),
-      'useTabs' => false,
+      'useTabs' => true,
       'tabDefs' => 
       array (
         'DEFAULT' => 
         array (
-          'newTab' => false,
+          'newTab' => true,
           'panelDefault' => 'expanded',
         ),
         'LBL_EDITVIEW_PANEL2' => 
         array (
           'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_EDITVIEW_PANEL3' => 
+        array (
+          'newTab' => true,
           'panelDefault' => 'expanded',
         ),
       ),
@@ -58,7 +63,7 @@ array (
             'name' => 'framework',
             'studio' => 'visible',
             'label' => 'LBL_FRAMEWORK',
-            'customCode'=>'{$FRAMEWORK}'
+            'customCode' => '{$FRAMEWORK}',
           ),
           1 => 'name',
         ),
@@ -88,6 +93,18 @@ array (
         0 => 
         array (
           0 => 'field_lines',
+        ),
+      ),
+      'lbl_editview_panel3' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'triget_js',
+            'comment' => 'save the js code.',
+            'label' => 'LBL_TRIGER_JS',
+          ),
         ),
       ),
     ),

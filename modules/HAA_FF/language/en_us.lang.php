@@ -76,4 +76,5 @@ $mod_strings = array (
   'LBL_ADD_FIELD'=>'Add Field Line',
   'LBL_EDITVIEW_PANEL2'=> 'Detailed Lines',
   'LBL_TRIGER_JS'=>'Triger JavaScript (WANNING: Trigering JS code here with cause performace issues! So donot use it if possible.)',
+  'LBL_EDITVIEW_PANEL3' => 'Advanced',
 );
