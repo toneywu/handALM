@@ -15,42 +15,44 @@ class HAA_FFController extends SugarController {
 
         $html='';
         if(isset($_REQUEST['ff_id']) && $_REQUEST['ff_id'] != ''){
-                $sql = "SELECT
-                              haa_ff_fields.`id`,
-                              haa_ff_fields.`field`,
-                              haa_ff_fields.`fieldtype`,
-                              haa_ff_fields.`listfilter`,
-                              haa_ff_fields.`mask`,
-                              haa_ff_fields.`att_required`,
-                              haa_ff_fields.`default_val`,
-                              haa_ff_labels.`name` label
-                            FROM
-                              haa_ff,
-                              haa_ff_fields
-                              LEFT JOIN haa_ff_labels
-                                ON haa_ff_fields.`id` = haa_ff_labels.`haa_ff_field_id`
-                                AND haa_ff_labels.`deleted` = 0
-                                AND haa_ff_labels.`lang` = '".(isset($current_language)?$current_language:'en_us')."'
-                            WHERE haa_ff.`id` = haa_ff_fields.`haa_ff_id`
-                              AND haa_ff_fields.`deleted` = 0
-                              AND haa_ff.`deleted` = 0
-                              AND haa_ff.`id` = '".$_REQUEST['ff_id']."'";
-                             // echo $sql;
-                $result = $db->query($sql);
-                while ($row = $db->fetchByAssoc($result)) {
-                      $line_data = json_encode($row);
-                      if ($html =="") {
-                        $html=$line_data;
-                      }else{
-                        $html .= ','.$line_data;
-                      }
-                }
-            }
-            echo '{"FF": ['.$html.']}';
+        	$this_FF = BeanFactory::getBean('HAA_FF',$_REQUEST['ff_id']);
+            //END=-读取行上的设置
+            $sql = "SELECT
+                          haa_ff_fields.`id`,
+                          haa_ff_fields.`field`,
+                          haa_ff_fields.`fieldtype`,
+                          haa_ff_fields.`listfilter`,
+                          haa_ff_fields.`mask`,
+                          haa_ff_fields.`att_required`,
+                          haa_ff_fields.`default_val`,
+                          haa_ff_labels.`name` label
+                        FROM
+                          haa_ff_fields
+                          LEFT JOIN haa_ff_labels
+                            ON haa_ff_fields.`id` = haa_ff_labels.`haa_ff_field_id`
+                            AND haa_ff_labels.`deleted` = 0
+                            AND haa_ff_labels.`lang` = '".(isset($current_language)?$current_language:'en_us')."'
+                        WHERE haa_ff_fields.`haa_ff_id`  = '".$_REQUEST['ff_id']."'";
+                         // echo $sql;
+            $result = $db->query($sql);
+            while ($row = $db->fetchByAssoc($result)) {
+                  $line_data = json_encode($row);
+                  if ($html =="") {
+                    $html=$line_data;
+                  }else{
+                    $html .= ','.$line_data;
+                  }
+            }//END=-读取行上的设置
+
+        }//END if
+        if (!empty($this_FF->triget_js)) {
+        	echo '{"FF": ['.$html.'],"JS":"'.htmlspecialchars($this_FF->triget_js).'"}';
+        } else {
+        	echo '{"FF": ['.$html.']}';
+        }
     }
 
-    public function action_save()
-    {
+    public function action_save()  {
         $sugarbean = new HAA_FF();
         $sugarbean->retrieve($_POST['record']);
 
@@ -131,7 +133,7 @@ class HAA_FFController extends SugarController {
                 if (empty($field_label_lines->haa_ff_field_id) and $field_label_lines->haa_ff_field_id=="") {
                     //如果没有分配ID，则可能是个新记录
                     $field_label_lines = BeanFactory::getBean('HAA_FF_Labels');
-                    $field_label_lines->haa_ff_field_id = $current_line_id;
+                    $field_label_lines->haa_ff_field_id = $current_line_id; 
                 }
 
                 if ($field_label_lines->name !=''||$post_data[$key.'label'][$i]!='') {
@@ -152,7 +154,8 @@ class HAA_FFController extends SugarController {
                     $field_label_lines = BeanFactory::getBean('HAA_FF_Labels');
                     $field_label_lines->haa_ff_field_id = $current_line_id;
                     echo "new <br/>";
-                }else{echo "old [".$field_label_lines->haa_ff_field_id."][".$post_data[$key.'label_b'][$i]."]<br/>";}
+                }else{echo "old [".$field_label_lines->haa_ff_field_id."][".$post_data[$key.'label_b'][$i]."]<br/>";
+            	}
 
                 if ($field_label_lines->name !=''||$post_data[$key.'label_b'][$i]!='') {
                             //如果原先记录就存在，或者记录不存在但新数据存在，则进行数据记录

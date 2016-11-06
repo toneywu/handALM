@@ -74,5 +74,7 @@ $mod_strings = array (
   'LBL_CONDITION_LINES' => '条件',
   'LBL_FIELD_LINES'=>'被调整的字段',
   'LBL_ADD_FIELD'=>'添加字段项',
-  'LBL_EDITVIEW_PANEL2'=>'模板字段项明细'
+  'LBL_EDITVIEW_PANEL2'=>'模板字段项明细',
+  'LBL_TRIGER_JS'=>'触发JavaScript代码（注意：在这里触发代码的执行效率很低，会有性能问题，尽可能不要使用）',
+
 );

@@ -138,6 +138,15 @@ $dictionary['HAA_FF'] = array(
 			'studio' => 'visible',
 			'dependency' => false,
 			),
+	    'triget_js' => 
+	    array (
+	      'name' => 'triget_js',
+	      'vname' => 'LBL_TRIGER_JS',
+	      'type' => 'text',
+	      'comment' => 'save the js code.',
+	      'rows' => 6,
+	      'cols' => 80,
+	    ),
 		'condition_lines' =>
 		array(
 			'required' => false,
@@ -146,6 +155,7 @@ $dictionary['HAA_FF'] = array(
 			'type' => 'function',
 			'source' => 'non-db',
 			'massupdate' => 0,
+			'comment' => '这个东西好像没有什么用，暂时还没有删除，似乎可以直接删除',
 			'importable' => 'false',
 			'duplicate_merge' => 'disabled',
 			'duplicate_merge_dom_value' => 0,
