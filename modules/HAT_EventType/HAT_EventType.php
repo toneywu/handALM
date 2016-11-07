@@ -42,10 +42,10 @@
  */
 require_once('modules/HAT_EventType/HAT_EventType_sugar.php');
 class HAT_EventType extends HAT_EventType_sugar {
-
+	
 	function __construct(){
 		parent::__construct();
 	}
-
+	
 }
 ?>

@@ -151,11 +151,6 @@ array (
             'name' => 'late_days_c',
             'label' => 'LBL_LATE_DAYS',
           ),
-          1 => 
-          array (
-            'name' => 'event_type_c',
-            'label' => 'LBL_EVENT_TYPE',
-          ),
         ),
         6 => 
         array (
