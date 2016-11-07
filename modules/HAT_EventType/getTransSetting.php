@@ -30,7 +30,7 @@ $txt_jason ='';
 $txt_jason=substr($txt_jason,0,strlen($txt_jason)-1);
 $txt_jason='{'.$txt_jason.'}';
 echo($txt_jason);
-//测试
+
 exit();
 
 ?>

@@ -102,7 +102,7 @@ array (
             array (
               'initial_filter' => '&type_advanced=HAT_Asset_Trans_Batch',
             ),
-          ),
+            ),
         ),
         3 => 
         array (
@@ -117,7 +117,7 @@ array (
         4 => 
         array (
           0 => 'asset_scope',
-          1 => 'default_asset_list',
+          1 => 'default_asset_list'
         ),
         5 => 
         array (
@@ -263,38 +263,6 @@ array (
           array (
             'name' => 'change_bandwidth_type',
             'studio' => 'visible',
-          ),
-        ),
-      ),
-      'lbl_editview_panel3' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            'name' => 'change_ip_subnets',
-            'studio' => 'visible',
-            'label' => 'LBL_CHANGE_IP_SUBNETS',
-          ),
-          1 => 
-          array (
-            'name' => 'change_associated_ip',
-            'studio' => 'visible',
-            'label' => 'LBL_CHANGE_ASSOCIATED_IP',
-          ),
-        ),
-        1 => 
-        array (
-          0 => 
-          array (
-            'name' => 'change_gateway',
-            'studio' => 'visible',
-            'label' => 'LBL_CHANGE_GATEWAY',
-          ),
-          1 => 
-          array (
-            'name' => 'change_bandwidth_type',
-            'studio' => 'visible',
             'label' => 'LBL_CHANGE_BANDWIDTH_TYPE',
           ),
         ),
@@ -358,51 +326,30 @@ array (
             'label' => 'LBL_CHANGE_CHANGE_MRTG_LINK',
           ),
         ),
-        6 => 
-        array (
-          0 => 'change_main_asset',
-          1 => 'change_backup_asset',
+        6=>
+        array(
+          0=>'change_main_asset',
+          1=>'change_backup_asset'
         ),
-        7 => 
-        array (
-          0 => 'change_port_backup',
-          1 => 'change_monitoring_backup',
+        7=>
+        array(
+          0=>'change_port_backup',
+          1=>'change_monitoring_backup'
         ),
-        8 => 
-        array (
-          0 => 'change_channel_content_backup',
-          1 => 'change_channel_num_backup',
+        8=>
+        array(
+          0=>'change_channel_content_backup',
+          1=>'change_channel_num_backup'
         ),
-        9 => 
-        array (
-          0 => 'change_date_end',
-          1 => 'change_date_start',
+        9=>
+        array(
+          0=>'change_date_end',
+          1=>'change_date_start'
         ),
-        10 => 
-        array (
-          0 => 
-          array (
-            'name' => 'change_access_assets_name',
-            'studio' => 'visible',
-            'label' => 'LBL_CHANGE_ACCESS_ASSETS_NAME',
-          ),
-          1 => 
-          array (
-            'name' => 'change_access_assets_backup_name',
-            'studio' => 'visible',
-            'label' => 'LBL_CHANGE_ACCESS_ASSETS_BACKUP_NAME',
-            ),
-        ),
-        11 => 
-        array (
-          0 => 'change_status',
-          1 => 
-          array (
-            'name' => 'change_enable_action',
-            'studio' => 'visible',
-            'label' => 'LBL_CHANGE_ENABLE_ACTION',
-          ),
-        ),
+        10=>
+        array(
+          0=>'change_status',
+        )
       ),
     ),
   ),

@@ -16,16 +16,6 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-  'EVENT_TYPE' => 
-  array (
-    'type' => 'relate',
-    'studio' => 'visible',
-    'label' => 'LBL_EVENT_TYPE',
-    'id' => 'HAT_EVENTTYPE_ID',
-    'link' => true,
-    'width' => '10%',
-    'default' => true,
-  ),
   'DATE_ENTERED' => 
   array (
     'type' => 'datetime',
