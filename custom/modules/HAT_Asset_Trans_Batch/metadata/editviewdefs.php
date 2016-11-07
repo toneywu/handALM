@@ -17,36 +17,20 @@ array (
           4 => '<input type="hidden" name="source_wo_account_id"  id="source_wo_account_id" value="{$SOURCE_WO_ACCOUNT_ID}">',
           5 => '<input type="hidden" name="source_wo_contact"  id="source_wo_contact" value="{$SOURCE_WO_CONTACT}">',
           6 => '<input type="hidden" name="source_wo_contact_id"  id="source_wo_contact_id" value="{$SOURCE_WO_CONTACT}">',
-
           11 => '<input type="hidden" name="eventOptions" id="eventOptions">',
-
-/*          11 => '<input type="hidden" name="require_approval_workflow" id="require_approval_workflow">',
-          12 => '<input type="hidden" name="require_confirmation"  id="require_confirmation">',
-          13 => '<input type="hidden" name="change_target_status"  id="change_target_status">',
-          14 => '<input type="hidden" name="change_parent"  id="change_parent">',
-          15 => '<input type="hidden" name="change_location"  id="change_location">',
-          16 => '<input type="hidden" name="processing_asset_status"  id="processing_asset_status">',
-          17 => '<input type="hidden" name="change_rack_position"  id="change_rack_position">',
-          18 => '<input type="hidden" name="change_owning_org"  id="change_owning_org">',
-          19 => '<input type="hidden" name="change_owning_person"  id="change_owning_person">',
-          20 => '<input type="hidden" name="change_using_org"  id="change_using_org">',
-          21 => '<input type="hidden" name="change_using_person"  id="change_using_person">',
-          22 => '<input type="hidden" name="change_oranization_le"  id="change_oranization_le">',
-          23 => '<input type="hidden" name="event_short_desc"  id="event_short_desc">',
-          24 => '<input type="hidden" name="target_asset_status"  id="target_asset_status">',*/
         ),
       ),
       'includes' => 
       array (
-        0 =>
+        0 => 
         array (
           'file' => 'modules/HAA_FF/ff_include.js',
         ),
-        1 =>
+        1 => 
         array (
-        'file' => 'modules/HIT_IP_TRANS_BATCH/js/html_dom_required_setting.js',
+          'file' => 'modules/HIT_IP_TRANS_BATCH/js/html_dom_required_setting.js',
         ),
-        2 =>
+        2 => 
         array (
           'file' => 'modules/HAT_Asset_Trans_Batch/js/HAT_Asset_Trans_Batch_editview.js',
         ),
@@ -96,24 +80,6 @@ array (
             'name' => 'framework',
             'customCode' => '{$FRAMEWORK}',
           ),
-          1 => 
-          array (
-            'name' => 'event_type',
-            'studio' => 'visible',
-            'label' => 'LBL_EVENT_TYPE',
-            'displayParams' => 
-            array (
-              'initial_filter' => '&basic_type_advanced=AT_MOVE',
-              'field_to_name_array' => 
-              array (
-                'name' => 'event_type',
-                'id' => 'hat_eventtype_id',
-                'event_short_desc' => 'name',
-                'haa_ff_id' => 'haa_ff_id',
-              ),
-              'call_back_function' => 'setEventTypePopupReturn',
-            ),
-          ),
         ),
         1 => 
         array (
@@ -123,7 +89,6 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_ASSET_TRANS_STATUS',
           ),
-          1 => '',
         ),
         2 => 
         array (
@@ -172,7 +137,6 @@ array (
             'label' => 'LBL_PLANNED_COMPLETE_DATE',
           ),
         ),
-
         6 => 
         array (
           0 => 
@@ -215,13 +179,11 @@ array (
         9 => 
         array (
           0 => 'description',
-          1 => '',
         ),
         10 => 
         array (
           0 => 'wo_lines',
         ),
-
       ),
       'lbl_editview_panel1' => 
       array (

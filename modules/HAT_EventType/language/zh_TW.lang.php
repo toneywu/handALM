@@ -40,6 +40,8 @@
 $mod_strings = array (
   'LBL_ASSIGNED_TO_ID' => '負責人編號',
   'LBL_ASSIGNED_TO_NAME' => '指派給',
+  'LBL_SECURITYGROUPS' => '安全群組',
+  'LBL_SECURITYGROUPS_SUBPANEL_TITLE' => '安全群組',
   'LBL_ID' => '編號',
   'LBL_DATE_ENTERED' => '創建日期',
   'LBL_DATE_MODIFIED' => '修改日期',

@@ -19,16 +19,6 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-  'EVENT_TYPE' => 
-  array (
-    'type' => 'relate',
-    'studio' => 'visible',
-    'label' => 'LBL_EVENT_TYPE',
-    'id' => 'HAT_EVENT_TYPE_ID',
-    'link' => true,
-    'width' => '10%',
-    'default' => true,
-  ),
   'HAM_WOOP' => 
   array (
     'type' => 'relate',

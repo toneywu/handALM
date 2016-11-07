@@ -17,37 +17,10 @@ array (
     'label' => 'LBL_BASIC_TYPE',
     'width' => '10%',
   ),
-  'PARENT_EVENTTYPE' => 
-  array (
-    'type' => 'relate',
-    'default' => true,
-    'studio' => 'visible',
-    'label' => 'LBL_PARENT_EVENTTYPE',
-    'id' => 'PARENT_EVENTTYPE_ID',
-    'link' => true,
-    'width' => '10%',
-  ),
-  'HAA_FF' => 
-  array (
-    'type' => 'relate',
-    'default' => true,
-    'studio' => 'visible',
-    'label' => 'LBL_HAA_FF',
-    'id' => 'HAA_FF_ID',
-    'link' => true,
-    'width' => '10%',
-  ),
-  'EVENT_SHORT_DESC' => 
-  array (
-    'type' => 'varchar',
-    'label' => 'LBL_EVENT_SHORT_DESC',
-    'width' => '10%',
-    'default' => true,
-  ),
   'CHANGE_TARGET_STATUS' => 
   array (
     'type' => 'bool',
-    'default' => false,
+    'default' => true,
     'label' => 'LBL_CHANGE_TARGET_STATUS',
     'width' => '10%',
   ),
@@ -57,21 +30,13 @@ array (
     'studio' => 'visible',
     'label' => 'LBL_TARGET_ASSET_STATUS',
     'width' => '10%',
-    'default' => false,
+    'default' => true,
   ),
   'CHANGE_PROCESSING_STATUS' => 
   array (
     'type' => 'bool',
-    'default' => false,
+    'default' => true,
     'label' => 'LBL_CHANGE_PROCESSING_STATUS',
-    'width' => '10%',
-  ),
-  'CHANGE_ORANIZATION_LE' => 
-  array (
-    'type' => 'enum',
-    'default' => false,
-    'studio' => 'visible',
-    'label' => 'LBL_CHANGE_ORANIZATION_LE',
     'width' => '10%',
   ),
   'PROCESSING_ASSET_STATUS' => 
@@ -80,36 +45,36 @@ array (
     'studio' => 'visible',
     'label' => 'LBL_PROCESSING_ASSET_STATUS',
     'width' => '10%',
-    'default' => false,
+    'default' => true,
+  ),
+  'CHANGE_ORGANIZATION' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_CHANGE_ORGANIZATION',
+    'width' => '10%',
+  ),
+  'CHANGE_ORANIZATION_LE' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_CHANGE_ORANIZATION_LE',
+    'width' => '10%',
   ),
   'CHANGE_CONTACT' => 
   array (
     'type' => 'enum',
-    'default' => false,
+    'default' => true,
     'studio' => 'visible',
     'label' => 'LBL_CHANGE_CONTACT',
-    'width' => '10%',
-  ),
-  'REQUIRE_APPROVAL_WORKFLOW' => 
-  array (
-    'type' => 'enum',
-    'default' => false,
-    'studio' => 'visible',
-    'label' => 'LBL_REQUIRE_APPROVAL_WORKFLOW',
-    'width' => '10%',
-  ),
-  'REQUIRE_CONFIRMATION' => 
-  array (
-    'type' => 'enum',
-    'default' => false,
-    'studio' => 'visible',
-    'label' => 'LBL_REQUIRE_CONFIRMATION',
     'width' => '10%',
   ),
   'CHANGE_LOCATION' => 
   array (
     'type' => 'enum',
-    'default' => false,
+    'default' => true,
     'studio' => 'visible',
     'label' => 'LBL_CHANGE_LOCATION',
     'width' => '10%',
@@ -117,17 +82,25 @@ array (
   'CHANGE_LOCATION_DESC' => 
   array (
     'type' => 'enum',
-    'default' => false,
+    'default' => true,
     'studio' => 'visible',
     'label' => 'LBL_CHANGE_LOCATION_DESC',
     'width' => '10%',
   ),
-  'CHANGE_ORGANIZATION' => 
+  'REQUIRE_APPROVAL_WORKFLOW' => 
   array (
     'type' => 'enum',
-    'default' => false,
+    'default' => true,
     'studio' => 'visible',
-    'label' => 'LBL_CHANGE_ORGANIZATION',
+    'label' => 'LBL_REQUIRE_APPROVAL_WORKFLOW',
+    'width' => '10%',
+  ),
+  'REQUIRE_CONFIRMATION' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'studio' => 'visible',
+    'label' => 'LBL_REQUIRE_CONFIRMATION',
     'width' => '10%',
   ),
   'DESCRIPTION' => 

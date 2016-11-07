@@ -38,6 +38,11 @@ include('custom/metadata/hat_counting_lines_hat_counting_batchsMetaData.php');
 
  
  //WARNING: The contents of this file are auto-generated
+include('custom/metadata/hat_eventmaneger_haos_revenues_quotesMetaData.php');
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
 include('custom/metadata/hpr_am_roles_contactsMetaData.php');
 
 
