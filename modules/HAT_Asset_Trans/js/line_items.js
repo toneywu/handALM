@@ -167,21 +167,22 @@ function openRackPopup(ln){
       "rackname" : "line_target_parent_asset" + ln,
     }
   };
-  var popupFilter = '&current_mode=rackposition&defualt_list=wo_asset_trans'
+  var popupFilter = '&current_mode=rackposition&defualt_list=rack'
                   +'&asset_id='+$("#line_asset_id"+ln).val()
                   +'&wo_id='+source_wo_id
-                  +'&framework_advanced='+$("#haa_framework").val();
-  open_popup('HIT_Racks', 1200, 850, popupFilter, true, true, popupRequestData);
+                  +'&framework_advanced='+$("#haa_framework").val()
+                  +'&defualt_list=rack';
+  open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
 }
 
 function addNewAssetLine(){
-	var popupRequestData = {
-			"call_back_function" : "setAddNewLineBtnReturn",
-			"form_name" : "EditView",
-			"field_to_name_array" : {
-	}};
-  var target_owning_org_id = $("#target_owning_org_id").val();
-  var popupFilter = '&owning_org_id_advanced='+target_owning_org_id+'&enable_it_rack_advanced=1';
+  var popupRequestData = {
+      "call_back_function" : "setAddNewLineBtnReturn",
+      "form_name" : "EditView",
+      "field_to_name_array" : {
+  }};
+  var target_owning_org_id = $("#target_using_org_id").val();
+  var popupFilter = '&using_org_id_advanced='+target_owning_org_id+'&enable_it_rack_advanced=1';
   open_popup('HAT_Assets', 1200, 850,popupFilter, true, true, popupRequestData, "MultiSelect", true);
 
 }

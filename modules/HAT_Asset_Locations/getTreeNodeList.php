@@ -13,6 +13,21 @@ if (isset($_REQUEST['current_mode'])) {
     }
 }
 
+if ($_REQUEST['type']=="rack" && isset($_REQUEST['wo_id'])) {
+    //wo_asset_trans 显示当前工作单的所有资产事务处理行中出现的内容
+
+    //因为存在多个资产事务处理行处理了同一个资产的情况（比如不同资产事务单），因此在结果中需要DISTINCT
+        $sel_sub_asset ="SELECT 
+                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status
+                        FROM
+                          hat_assets
+                        WHERE hat_assets.`deleted`=0
+                          AND hat_assets.id ='".$_REQUEST['wo_id']."'";
+
+                        //echo $sel_sub_asset;
+}
+
+
 if ($_REQUEST['type']=="wo_asset_trans" && isset($_REQUEST['wo_id'])) {
     //wo_asset_trans 显示当前工作单的所有资产事务处理行中出现的内容
 

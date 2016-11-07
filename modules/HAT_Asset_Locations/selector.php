@@ -277,7 +277,9 @@ $(document).ready(function(){
 					//默认搜索模式
 					if ($_REQUEST['defualt_list']=="wo_asset_trans" && isset($_REQUEST['wo_id'])) {
 						echo 'initTree("LIST","'.$_REQUEST["defualt_list"].'","'.$_REQUEST["wo_id"].'");';
-					}else{
+					} else if ($_REQUEST['defualt_list']=="rack" && isset($_REQUEST['asset_id'])) {
+						echo 'initTree("LIST","'.$_REQUEST["defualt_list"].'","'.$_REQUEST["asset_id"].'");';
+					} else{
 						echo 'initTree("LIST","'.$_REQUEST["defualt_list"].'");';
 					}
 				 }else {
