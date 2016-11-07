@@ -82,4 +82,5 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL2' => 'Inventory Option',
   'LBL_HAA_FRAMEWORK'=>'Business Framewrok',
   'LBL_HAA_FRAMEWORKS_ID'=>'Business Framewrok(ID)',
+  'LBL_DEFT_UNASSIGNED_LOCATION'=>'Default Location for unassigned assets',
 );

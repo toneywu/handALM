@@ -6,8 +6,8 @@ if (!defined('sugarEntry') || !sugarEntry)
     die('Not A Valid Entry Point');
   
 $current_id = $_GET['id']; 	
-$ham_wo_bean = BeanFactory::getBean('HAT_Asset_Trans_Batch',$current_id);
-$current_status = $ham_wo_bean->wo_status;
+$beanTransBatch = BeanFactory::getBean('HAT_Asset_Trans_Batch',$current_id);
+$current_status = $beanTransBatch->asset_trans_status;
 echo '<select name='.'"asset_trans_status"'.' id="asset_trans_status"'.'>';
 foreach($app_list_strings['asset_trans_status'] as $key=>$value){
 	if($key!="DRAFT"||$key!=$current_status){

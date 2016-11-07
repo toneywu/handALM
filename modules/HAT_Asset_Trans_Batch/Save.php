@@ -1,6 +1,8 @@
 <?php
-//TODO 目前还不能通过事务处理关联父资产，也不能由父资产联动的更新子资产
+
 //global $current_user;
+
+
 $sugarbean = new HAT_Asset_Trans_Batch();
 $sugarbean->retrieve($_POST['record']);
 
@@ -12,6 +14,7 @@ else {
 }
 
 require_once('include/formbase.php');
+
 
 $return_id = save_header($sugarbean, $check_notify);//保存头
 save_lines($_POST, $sugarbean, 'line_');//保存行
@@ -78,6 +81,8 @@ function save_lines($post_data, $parent, $key = ''){
     for ($i = 0; $i < $line_count; ++$i) {
         echo "<br/>line ".$i." processed;";
         echo "<br/>asset_id=".$post_data[$key.'asset_id'][$i];
+        echo "<br/>target_owning_org_id=".$post_data[$key.'target_owning_org_id'][$i];
+        echo "<br/>target_location_id=".$post_data[$key.'target_location_id'][$i];
         //print_r($post_data);
 
         if ($post_data[$key.'asset_id'][$i]!='' && $post_data[$key.'target_owning_org_id'][$i]!='' &&$post_data[$key.'target_location_id'][$i]!='') {
@@ -118,7 +123,19 @@ function save_lines($post_data, $parent, $key = ''){
                 //在新增或修改模式下，如果状态通过后
                 //可以进一步的对资产信息进行修改
                 if ($parent->asset_trans_status=='APPROVED') {
+                    //审批通过后直接更新资产信息
                     save_asset_lines($trans_line);
+                    $beanRack = BeanFactory::getBean('HIT_Racks')->
+                                            retrieve_by_string_fields(array('hat_assets_id'=>$post_data[$key.'asset_id'][$i])
+                                                );
+                    echo ("\nChecking Rack inofrmation: beanRack->enable_partial_allocation = ".$beanRack->enable_partial_allocation);
+                    if(isset($beanRack) && $beanRack->enable_partial_allocation == false) {
+                    //如果当前设备是IT机柜并且机柜非整U分配，则将机柜上的位置、使用组织与人员信息、或失效信息提供到机柜分配行上
+                        echo "\nRack is not partial allocation, assets information should be set as parent Rack-Asset.";
+                        save_rack_elements_from_rack($trans_line, $beanRack);
+                    }
+
+
                 }
 
 
@@ -133,6 +150,64 @@ function save_lines($post_data, $parent, $key = ''){
     }
 }
 
+function save_rack_elements_from_rack($focus, $beanRack) {
+    //如果当前设备是IT机柜并且机柜整U分配
+    //则将机柜上的位置、使用组织与人员信息、或失效信息提供到机柜分配行上
+     $RackAllocations = BeanFactory::getBean('HIT_Rack_Allocations')->get_full_list(
+             '', "hit_rack_allocations.hit_racks_id = '".$beanRack->id."'"
+             );
+
+    foreach ($RackAllocations as $record ) {
+        //更新机柜上的分配信息
+        $beanRackAllocations = BeanFactory::getBean('HIT_Rack_Allocations',$record->id);
+        if(empty($focus->inactive_using) || $focus->inactive_using!= 1) {//正常保存使用信息
+            //$beanRackAllocations->using_org_id = $focus->target_using_org;
+        }else{//清空使用信息
+
+        }
+        $beanRackAllocations->save();
+
+        //更新机柜上的分配的资产的具体属性
+        if (!empty($record->hat_assets_id)) {
+            $beanAsset = BeanFactory::getBean('HAT_Assets',$record->hat_assets_id);
+            if(empty($focus->inactive_using) || $focus->inactive_using!= 1) {//正常保存使用信息
+                $beanAsset->using_org_id = $focus->target_using_org_id;
+                $beanAsset->using_person_id = $focus->target_using_person_id;
+                $beanAsset->using_person_desc = $focus->target_using_person_desc;
+                $beanAsset->parent_asset_id = $beanRack->hat_assets_id;
+                $beanAsset->hat_asset_locations_hat_assetshat_asset_locations_ida = $focus->target_location_id;
+                echo "<br/>Asset[".($beanAsset->name)."] located on Rack has been set according to the Rack information";
+            }else{//清空使用信息
+                $beanAsset->using_org_id = "";
+                $beanAsset->using_person_id = "";
+                $beanAsset->using_person_desc = "";
+                $beanAsset->parent_asset_id ="";
+                $beanAsset->hat_asset_locations_hat_assetshat_asset_locations_ida = "";
+
+/*                $sql = "SELECT ham_maint_sites.id,
+                  ham_maint_sites.deft_unassigned_location_id 
+                FROM
+                  ham_maint_sites,
+                  hat_asset_locations 
+                WHERE ham_maint_sites.id = hat_asset_locations.`ham_maint_sites_id` 
+                  AND ham_maint_sites.`deleted`=0
+                  AND hat_asset_locations.`deleted`=0
+                  AND hat_asset_locations.id ='".$focus->target_location_id."'";
+
+                echo $sql;*/
+                $beanLocation = BeanFactory::getBean('HAT_Asset_Locations',$focus->target_location_id);
+                $beanSite = BeanFactory::getBean('HAM_Maint_Sites',$beanLocation->ham_maint_sites_id);
+                $beanAsset->hat_asset_locations_hat_assetshat_asset_locations_ida = $beanSite->deft_unassigned_location_id;
+
+                echo "location=".$beanAsset->hat_asset_locations_hat_assetshat_asset_locations_ida;
+                echo "<br/>Asset[".($beanAsset->name)."] located on Rack has been set removed.";
+            }
+
+            $beanAsset->asset_status = $focus->target_asset_status;
+            $beanAsset->save();
+        }
+    }
+}
 
 function save_asset_lines($focus){
     //本函数在处理Trans_line时，如果当前行是新增或是修改则变化资产信息
@@ -146,7 +221,7 @@ function save_asset_lines($focus){
             $beanAsset->owning_person_desc = $focus->target_owning_person_desc;
 
             if(empty($focus->inactive_using) || $focus->inactive_using!= 1) {//正常保存使用信息
-                $beanAsset->using_org_id = $focus->target_using_org;
+                $beanAsset->using_org_id = $focus->target_using_org_id;
                 $beanAsset->using_person_id = $focus->target_using_person_id;
                 $beanAsset->using_person_desc = $focus->target_using_person_desc;
             }else{//清空使用信息
@@ -160,15 +235,16 @@ function save_asset_lines($focus){
             $beanAsset->parent_asset_id = $focus->target_parent_asset_id;
 
             $beanAsset->save();
-
-
+            //以上为常规保存了所有的设备
 
             $focus->trans_status == "CLOSED";
         }
 }
 
+//**************
+//**** START: 保存机柜的分配信息****
+//**************//
 function save_rack_allocations($focus, $parent){
-
     //这里需要进行区分，如果当前的设备是IT设备是一种处理方式，如果当前资产是机柜则是另一种处理方式
     $beanAsset = BeanFactory::getBean('HAT_Assets', $focus->asset_id);
 

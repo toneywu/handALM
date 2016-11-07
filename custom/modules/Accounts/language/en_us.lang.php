@@ -92,4 +92,5 @@ $mod_strings = array (
   'LBL_DETAILVIEW_PANEL_DOC' => 'Documents',
   'LBL_DETAILVIEW_PANEL_BUSINESS'=>'Business',
   'LBL_DETAILVIEW_PANEL_WORK'=>'Service & Work',
+  'LBL_CREDIT_HOLD'=>'Credit Hold',
 );

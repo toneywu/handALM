@@ -89,11 +89,12 @@ $mod_strings = array (
   'LBL_HIT_IP_ALLOCATIONS_TITLE' => 'IP分配信息',
   'LBL_HAM_WO_TITLE' => '工单信息',
   'LBL_HAT_ASSETS_TITLE' => '资产/设备',
-  'LBL_DETAILVIEW_PANEL_ASSET' => '资产',
+  'LBL_DETAILVIEW_PANEL_ASSET' => '设备/资产',
   'LBL_DETAILVIEW_PANEL_IT' => 'IT资源',  
   'LBL_DETAILVIEW_PANEL_MEMBER' => '下级组织及联系人',
   'LBL_DETAILVIEW_PANEL_QUAL' => '资质/许可证',
   'LBL_DETAILVIEW_PANEL_DOC' => '文档',
   'LBL_DETAILVIEW_PANEL_BUSINESS'=>'业务往来',
   'LBL_DETAILVIEW_PANEL_WORK'=>'服务及工作记录',
+  'LBL_CREDIT_HOLD'=>'应收款超限额（欠费）暂挂'
 );

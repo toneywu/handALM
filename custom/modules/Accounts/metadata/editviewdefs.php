@@ -201,13 +201,18 @@ array (
       array (
         0 => 
         array (
+          0 => '',
+          1 => '',
+        ),
+        1 => 
+        array (
           0 => 
           array (
             'name' => 'responsible_person_c',
             'label' => 'LBL_RESPONSIBLE_PERSON',
           ),
         ),
-        1 => 
+        2 => 
         array (
           0 => 
           array (
@@ -234,6 +239,11 @@ array (
             array (
               'initial_filter' => '&code_type_advanced=accounts_customer_class',
             ),
+          ),
+          1 => 
+          array (
+            'name' => 'credit_hold_c',
+            'label' => 'LBL_CREDIT_HOLD',
           ),
         ),
         1 => 

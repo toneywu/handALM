@@ -75,4 +75,5 @@ $mod_strings = array (
   'LBL_LOCATOR_CODING_MASK_DESC'=>'库存货位编码说明',
   'LBL_HAA_FRAMEWORK'=>'业务框架',
   'LBL_HAA_FRAMEWORKS_ID'=>'业务框架(ID)',
+  'LBL_DEFT_UNASSIGNED_LOCATION'=>'未分配资产的默认位置',
 );

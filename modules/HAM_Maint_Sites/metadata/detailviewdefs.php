@@ -90,6 +90,11 @@ array (
             'label' => 'LBL_WO_HAA_NUMBERING_RULE',
           ),
         ),
+        1=>
+        array (
+            0=>'deft_unassigned_location',
+            1=>''
+          ),
       ),
       'lbl_editview_panel2' => 
       array (

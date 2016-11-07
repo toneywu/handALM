@@ -74,12 +74,12 @@ class AccountsViewDetail extends ViewDetail
 			if (isset ($ff_id) && $ff_id != "") {
 				echo '<script src="modules/HAA_FF/ff_include.js"></script>';
 				echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="' . $ff_id . '">';
-				echo '<script> function call_ff() {
+/*				echo '<script> function call_ff() {
 				    triger_setFF($("#haa_ff_id").val(),"Accounts","DetailView");
 				    $(".expandLink").click();
 				 
 				}</script>';
-				echo '<script>call_ff()</script>';
+				echo '<script>call_ff()</script>';*/
 			}
 		}
 }

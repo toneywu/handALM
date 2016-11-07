@@ -85,12 +85,14 @@ $(document).ready(function() {
 		$("#wo_lines").parent("tr").hide();
 	}
 
+
 	if ($("#asset_trans_status").val() == "DRAFT") {
 		var btn = $("<input type='button' class='btn_detailview' id='btn_submit' value='"
 				+ SUGAR.language.get('app_strings', 'LBL_SUBMIT_BUTTON_LABEL')
 				+ "'>");
+
 		// $("#asset_trans_status").parent().append(btn);
-		$("#detail_header_action_menu").after(btn);
+		//$("#edit_button").after(btn);
 	}
 
 	$("#btn_submit").click(function() {

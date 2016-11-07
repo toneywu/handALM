@@ -150,6 +150,12 @@ function openLocationPopup(ln){
 
 
 function openRackPopup(ln){
+
+  if ($("#line_asset_id"+ln).val()=="") {
+    alert("No Asset")
+    return;
+  }
+
   lineno=ln;
   var popupRequestData = {
     "call_back_function" : "set_return",
@@ -161,7 +167,10 @@ function openRackPopup(ln){
       "rackname" : "line_target_parent_asset" + ln,
     }
   };
-  var popupFilter = '&current_mode=rackposition&defualt_list=wo_asset_trans'+'&wo_id='+source_wo_id+'&framework_advanced='+$("#haa_framework").val();
+  var popupFilter = '&current_mode=rackposition&defualt_list=wo_asset_trans'
+                  +'&asset_id='+$("#line_asset_id"+ln).val()
+                  +'&wo_id='+source_wo_id
+                  +'&framework_advanced='+$("#haa_framework").val();
   open_popup('HIT_Racks', 1200, 850, popupFilter, true, true, popupRequestData);
 }
 
@@ -234,7 +243,9 @@ function insertLineData(asset_trans_line, current_view){ //将数据写入到对
       //console.log("#line_"+propertyName.concat(String(ln)) +"=="+ asset_trans_line[propertyName] );
       if ($("#line_"+propertyName.concat(String(ln))).is(':checkbox')) {
         if (asset_trans_line[propertyName]==true) {
+          console.log(propertyName+"="+asset_trans_line[propertyName]);
           document.getElementById("line_"+propertyName.concat(String(ln))).checked = true;
+          document.getElementById("line_"+propertyName.concat(String(ln))).value = 1;
         }
       }else {
         //如果当前字段不是checkbox，就以val的形式赋值
@@ -495,6 +506,8 @@ function generateLineDesc(ln){
   LineDesc += LineDescElement("line_","target_owning_person_id","current_owning_person_id","LBL_OWNING_PERSON",ln,"target_owning_person","current_owning_person");
 
   if($("#line_inactive_using"+ln).is(':checked')){ //如果失效的Checkbox=Y，则显示已经清空组织
+    console.log('inactive checked');
+    LineDesc += SUGAR.language.get('HAT_Asset_Trans', 'LBL_INACTIVE_USING')+" ";
     LineDesc += LineDescElement("line_","","current_using_org_id","LBL_USING_ORG",ln,"","current_using_org");
     LineDesc += LineDescElement("line_","","current_using_person_id","LBL_USING_PERSON",ln,"","current_using_person");
   }else{
@@ -541,7 +554,7 @@ function LineDescElement(prefix_name,target_obj_name, current_obj_name, obj_labe
                               })[0].value;
 	}
 
-//  console.log( current_obj_val+", "+target_obj_val+", "+target_objval_name+", "+current_objval_name);
+  console.log( current_obj_val+", "+target_obj_val+", "+target_objval_name+", "+current_objval_name);
   if (typeof current_obj_name != 'undefined' && current_obj_name!="") {
     //如果当前值不为空
     //将显示为XXX字段由XXX变更为XXX
@@ -800,6 +813,7 @@ function inactiveUsingLine(ln){
     var mydate = new Date();
     var currentDate=mydate.toLocaleString();
     $("#line_date_end"+ln).val(getnowtime());
+    $("#line_inactive_using"+ln).val('1');
 /*    $("#line_inactive_using"+ln).val('0');
     $("#line_inactive_using_val"+ln).val('0');
         $("#displayed_line_inactive_using"+ln).attr("checked",true);
@@ -808,6 +822,7 @@ function inactiveUsingLine(ln){
   }else{
     $("#line_inactive_using"+ln).removeAttr("checked");
     $("#line_date_end"+ln).val("");
+    $("#line_inactive_using"+ln).val('0');
 /*    $("#line_status"+ln).val("EFFECTIVE");
     $("#line_status_dis"+ln).val(SUGAR.language.get('HIT_IP_TRANS', 'LBL_EFFECTIVE'));
 
