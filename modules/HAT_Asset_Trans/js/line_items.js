@@ -176,16 +176,17 @@ function openRackPopup(ln){
 }
 
 function addNewAssetLine(){
-  var popupRequestData = {
-      "call_back_function" : "setAddNewLineBtnReturn",
-      "form_name" : "EditView",
-      "field_to_name_array" : {
-  }};
+	var popupRequestData = {
+			"call_back_function" : "setAddNewLineBtnReturn",
+			"form_name" : "EditView",
+			"field_to_name_array" : {
+	}};
   var target_owning_org_id = $("#target_using_org_id").val();
   var popupFilter = '&using_org_id_advanced='+target_owning_org_id+'&enable_it_rack_advanced=1';
   open_popup('HAT_Assets', 1200, 850,popupFilter, true, true, popupRequestData, "MultiSelect", true);
 
 }
+
 
 function setAddNewLineBtnReturn(popupReplyData) {
 	set_return(popupReplyData);
