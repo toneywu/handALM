@@ -13,8 +13,9 @@ $popupMeta = array (
   'hat_assets_contacts_name' => 'hat_assets.hat_assets_contacts_name',
   'tracking_number' => 'hat_assets.tracking_number',
   'enable_it_rack' => 'hat_assets.enable_it_rack',
-  'owning_org_id' => 'hat_assets.owning_org_id',
+  'using_org_id' => 'hat_assets.using_org_id',
 ),
+'whereStatement'=>'(("'.$_REQUEST["target_using_org_id_advanced"]. '"!="" and EXISTS (SELECT 1   FROM    hit_racks r,hit_rack_allocations ra WHERE hat_assets.id = r.hat_assets_id AND r.id = ra.hit_racks_id AND ra.deleted = 0 AND hat_assets.using_org_id = "'.$_REQUEST["target_using_org_id_advanced"].'")) or ""="'.$_REQUEST["target_using_org_id_advanced"].'")',
     'searchInputs' => array (
   1 => 'name',
   4 => 'asset_desc',
@@ -25,7 +26,7 @@ $popupMeta = array (
   9 => 'hat_assets_contacts_name',
   10 => 'tracking_number',
   11 => 'enable_it_rack',
-  12 => 'owning_org_id',
+  12 => 'using_org_id',
 ),
     'searchdefs' => array (
   'name' => 
@@ -148,13 +149,13 @@ $popupMeta = array (
     'width' => '10%',
     'name' => 'enable_it_rack',
   ),
-     'owning_org_id' => 
+     'using_org_id' => 
   array (
     'type' => 'varchar',
     'studio' => 'visible',
     'label' => '',
     'width' => '10%',
-    'name' => 'owning_org_id',
+    'name' => 'using_org_id',
   ),
 ),
 );
