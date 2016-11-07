@@ -13,8 +13,8 @@ function call_ff() {
 
 function setParentLocationPopupReturn(popupReplyData){//选择地点类型后
 	set_return(popupReplyData);
-	if($("name").val()==""){
-	   $("name").val($("#parent_location").val());
+	if($("#name").val()==""){
+	   $("#name").val($("#parent_location").val());
 	}
 }
 

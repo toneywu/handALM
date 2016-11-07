@@ -2,12 +2,12 @@
 $module_name = 'HIT_ODF_REL';
 $listViewDefs [$module_name] = 
 array (
-  'JUMP_NUMBER' => 
+  'NAME' => 
   array (
-    'type' => 'varchar',
-    'label' => 'LBL_JUMP_NUMBER',
-    'width' => '10%',
+    'width' => '32%',
+    'label' => 'LBL_NAME',
     'default' => true,
+    'link' => true,
   ),
   'ODF_USER' => 
   array (
@@ -77,12 +77,12 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-  'NAME' => 
+  'JUMP_NUMBER' => 
   array (
-    'width' => '32%',
-    'label' => 'LBL_NAME',
+    'type' => 'varchar',
+    'label' => 'LBL_JUMP_NUMBER',
+    'width' => '10%',
     'default' => false,
-    'link' => true,
   ),
   'A_HAT_ASSET_LOCATIONS' => 
   array (

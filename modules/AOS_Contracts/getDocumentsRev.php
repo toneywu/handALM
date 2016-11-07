@@ -4,5 +4,5 @@
 	
 	echo $contractBean->id;
 	$contractReversionBean = BeanFactory::getBean("AOS_Contracts_Documents","4acc4957-b461-e70d-62d0-5819993b37ec");
-	echo $contractReversionBean->id;
+	echo "ddd".var_dump($contractReversionBean->id);
 ?>
