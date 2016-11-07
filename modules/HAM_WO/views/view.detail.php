@@ -19,7 +19,7 @@ class HAM_WOViewDetail extends ViewDetail {
 				echo '<script src="modules/HAA_FF/ff_include.js"></script>';
 				echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="' . $ff_id . '">';
 				echo '<script> function call_ff() {
-								    triger_setFF($("#haa_ff_id").val(),"HAM_SR","DetailView");
+								    triger_setFF($("#haa_ff_id").val(),"HAM_WO","DetailView");
 								    $(".expandLink").click();
 								}</script>';
 				echo '<script>call_ff()</script>';
