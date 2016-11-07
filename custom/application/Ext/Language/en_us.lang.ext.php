@@ -1290,14 +1290,14 @@ $app_list_strings['moduleList']['HPR_AM_Roles'] = 'AM Roles';
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['HAOS_Revenues_Quotes'] = '收支计费项';
-$app_list_strings['haos_source_code_list']['AOS_Contracts'] = '合同';
-$app_list_strings['haos_source_code_list']['Manual'] = '手工';
-$app_list_strings['haos_source_code_list']['Excel'] = 'Excel导入';
-$app_list_strings['haos_source_code_list']['Others'] = '其他事件';
-$app_list_strings['haos_source_code_list']['Ref_System'] = '外围系统';
-$app_list_strings['haos_revenue_clear_status_list']['Unclear'] = '未结算';
-$app_list_strings['haos_revenue_clear_status_list']['Cleared'] = '已结算';
+$app_list_strings['moduleList']['HAOS_Revenues_Quotes'] = 'Revenue/Expense';
+$app_list_strings['haos_source_code_list']['AOS_Contracts'] = 'Contract';
+$app_list_strings['haos_source_code_list']['Manual'] = 'Manual';
+$app_list_strings['haos_source_code_list']['Excel'] = 'Excel Sheet';
+$app_list_strings['haos_source_code_list']['Others'] = 'Other';
+$app_list_strings['haos_source_code_list']['Ref_System'] = 'External System';
+$app_list_strings['haos_revenue_clear_status_list']['Unclear'] = 'Open';
+$app_list_strings['haos_revenue_clear_status_list']['Cleared'] = 'Closed';
 
 
 /*********************************************************************************
