@@ -257,12 +257,51 @@ array (
         ),
         4 => 
         array (
-          0 => 'description',
-          1 => 
+          0 => 
           array (
             'name' => 'attribute9',
             'label' => 'LBL_ATTRIBUTE9',
           ),
+          1 => 
+          array (
+            'name' => 'attribute10',
+            'label' => 'LBL_ATTRIBUTE10',
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute11',
+            'label' => 'LBL_ATTRIBUTE11',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute12',
+            'label' => 'LBL_ATTRIBUTE12',
+          ),
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute13',
+            'label' => 'LBL_ATTRIBUTE13',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute14',
+            'label' => 'LBL_ATTRIBUTE14',
+          ),
+        ),
+        7 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute15',
+            'label' => 'LBL_ATTRIBUTE15',
+          ),
+          1 => 'description',
         ),
       ),
     ),

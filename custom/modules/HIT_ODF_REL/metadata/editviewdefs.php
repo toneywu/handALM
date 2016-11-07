@@ -90,9 +90,10 @@ array (
             'name' => 'a_hit_racks',
             'studio' => 'visible',
             'label' => 'LBL_A_HIT_RACKS',
-			'displayParams' =>  array (
-              'initial_filter' => '&current_mode=1',//这一行代码是关键，从site对象取值。用initial_filter进行过滤。
-              'field_to_name_array' => //这里是从Location选择之后，将Location中可以获取到的一些值复制到对应的字段（与本例主题无关）
+            'displayParams' => 
+            array (
+              'initial_filter' => '&current_mode=1',
+              'field_to_name_array' => 
               array (
                 'name' => 'a_hit_racks',
                 'id' => 'a_hit_racks_id',
@@ -104,8 +105,21 @@ array (
         array (
           0 => 
           array (
-            'name' => 'a_odf_mark',
-            'label' => 'LBL_A_ODF_MARK',
+            'name' => 'a_odf_mark_name',
+            'studio' => 'visible',
+            'label' => 'LBL_A_ODF_MARK_NAME',
+			'displayParams' => 
+            array (
+              //'initial_filter' => '&current_mode=1',
+              'field_to_name_array' => 
+              array (
+                'attribute5' => 'a_odf_mark_name',
+				'attribute9' => 'b_odf_mark_name',
+				'id' => 'a_odf_mark',
+              ),
+			   'call_back_function' => 'setAODFMarkNameReturn',
+            ),
+			
           ),
           1 => 
           array (
@@ -151,9 +165,10 @@ array (
             'name' => 'b_hit_racks',
             'studio' => 'visible',
             'label' => 'LBL_B_HIT_RACKS',
-			'displayParams' =>  array (
-              'initial_filter' => '&current_mode=1',//这一行代码是关键，从site对象取值。用initial_filter进行过滤。
-              'field_to_name_array' => //这里是从Location选择之后，将Location中可以获取到的一些值复制到对应的字段（与本例主题无关）
+            'displayParams' => 
+            array (
+              'initial_filter' => '&current_mode=1',
+              'field_to_name_array' => 
               array (
                 'name' => 'b_hit_racks',
                 'id' => 'b_hit_racks_id',
@@ -165,8 +180,20 @@ array (
         array (
           0 => 
           array (
-            'name' => 'b_odf_mark',
-            'label' => 'LBL_B_ODF_MARK',
+            'name' => 'b_odf_mark_name',
+            'studio' => 'visible',
+            'label' => 'LBL_B_ODF_MARK_NAME',
+			'displayParams' => 
+            array (
+              //'initial_filter' => '&current_mode=1',
+              'field_to_name_array' => 
+              array (
+                'attribute9' => 'b_odf_mark_name',
+				 'attribute5' => 'a_odf_mark_name',
+				'id' => 'b_odf_mark',
+              ),
+			  'call_back_function' => 'setBODFMarkNameReturn',
+            ),
           ),
           1 => 
           array (

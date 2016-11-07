@@ -125,7 +125,7 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 					$woop_bean = BeanFactory :: getBean("HAM_WOOP", $this->id);
 					$woop_bean->wo_status = 'COMPLETED';
 					$timeDate = new TimeDate();
-					$woop_bean->date_actual_finish=$timedate->now();
+					$woop_bean->date_actual_finish=$timeDate->now();
 					$woop_bean->save();
 					parent :: save($check_notify);
 					$queryParams = array (

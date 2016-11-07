@@ -107,11 +107,9 @@ array (
       array (
         0 => 
         array (
-          0 => 'parent_location',
-          1 => 
-          array (
-            'name' => 'location_icon',
-            'label' => 'LBL_ICON',
+          0 =>array (
+            'name' => 'parent_location',
+            'label' => 'LBL_PARENT_LOCATION',
             'displayParams' => 
             array (
               'field_to_name_array' => 
@@ -121,6 +119,11 @@ array (
               ),
               'call_back_function' => 'setParentLocationPopupReturn',
             ),
+          ),
+          1 => 
+          array (
+            'name' => 'location_icon',
+            'label' => 'LBL_ICON',
           ),
         ),
         1 => 

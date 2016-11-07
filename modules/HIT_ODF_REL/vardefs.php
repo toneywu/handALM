@@ -219,28 +219,60 @@ $dictionary['HIT_ODF_REL'] = array (
 			
 		),
 		//A端ODF架标识
-	'a_odf_mark' => array (
-			'required' => false,
-			'name' => 'a_odf_mark',
-			'vname' => 'LBL_A_ODF_MARK',
-			'type' => 'varchar',
-			'massupdate' => 0,
-			'no_default' => false,
-			'comments' => '',
-			'help' => '',
-			'importable' => 'true',
-			'duplicate_merge' => 'disabled',
-			'duplicate_merge_dom_value' => '0',
-			'audited' => false,
-			'inline_edit' => true,
-			'reportable' => true,
-			'unified_search' => false,
-			'merge_filter' => 'disabled',
-			'len' => '255',
-			'size' => '20',
+		'a_odf_mark' => 
+  array (
+    'required' => false,
+    'name' => 'a_odf_mark',
+    'vname' => 'LBL_A_ODF_MARK',
+    'type' => 'id',
+    'massupdate' => 0,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'true',
+    'duplicate_merge' => 'disabled',
+    'duplicate_merge_dom_value' => 0,
+    'audited' => false,
+    'inline_edit' => true,
+    'reportable' => false,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'len' => 36,
+    'size' => '20',
 
-			
-		),
+  ),
+	
+		'a_odf_mark_name' => 
+  array (
+    'required' => false,
+    'source' => 'non-db',
+    'name' => 'a_odf_mark_name',
+    'vname' => 'LBL_A_ODF_MARK_NAME',
+    'type' => 'relate',
+    'massupdate' => 0,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'true',
+    'duplicate_merge' => 'disabled',
+    'duplicate_merge_dom_value' => '0',
+    'audited' => false,
+    'inline_edit' => true,
+    'reportable' => true,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'len' => '255',
+    'size' => '20',
+    'id_name' => 'a_odf_mark',//返回的值 显示name存储id
+    'ext2' => 'HAT_Assets',
+    'module' => 'HAT_Assets',
+    'rname' => 'attribute5',//在界面上面显示其他模块的 HAT_Assets的Name字段 也就是前台显示
+    'quicksearch' => 'enabled',
+    'studio' => 'visible',
+
+  ),
+		
+		
 		//A端芯数
 	'a_odf_cores' => array (
 			'required' => false,
@@ -468,28 +500,58 @@ $dictionary['HIT_ODF_REL'] = array (
 			
 		),
 		//B端ODF架标识
-	'b_odf_mark' => array (
-			'required' => false,
-			'name' => 'b_odf_mark',
-			'vname' => 'LBL_B_ODF_MARK',
-			'type' => 'varchar',
-			'massupdate' => 0,
-			'no_default' => false,
-			'comments' => '',
-			'help' => '',
-			'importable' => 'true',
-			'duplicate_merge' => 'disabled',
-			'duplicate_merge_dom_value' => '0',
-			'audited' => false,
-			'inline_edit' => true,
-			'reportable' => true,
-			'unified_search' => false,
-			'merge_filter' => 'disabled',
-			'len' => '255',
-			'size' => '20',
+		'b_odf_mark' => 
+  array (
+    'required' => false,
+    'name' => 'b_odf_mark',
+    'vname' => 'LBL_B_ODF_MARK',
+    'type' => 'id',
+    'massupdate' => 0,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'true',
+    'duplicate_merge' => 'disabled',
+    'duplicate_merge_dom_value' => 0,
+    'audited' => false,
+    'inline_edit' => true,
+    'reportable' => false,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'len' => 36,
+    'size' => '20',
 
-			
-		),
+  ),
+	
+		'b_odf_mark_name' => 
+  array (
+    'required' => false,
+    'source' => 'non-db',
+    'name' => 'b_odf_mark_name',
+    'vname' => 'LBL_B_ODF_MARK_NAME',
+    'type' => 'relate',
+    'massupdate' => 0,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'true',
+    'duplicate_merge' => 'disabled',
+    'duplicate_merge_dom_value' => '0',
+    'audited' => false,
+    'inline_edit' => true,
+    'reportable' => true,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'len' => '255',
+    'size' => '20',
+    'id_name' => 'b_odf_mark',//返回的值 显示name存储id
+    'ext2' => 'HAT_Assets',
+    'module' => 'HAT_Assets',
+    'rname' => 'attribute9',//在界面上面显示其他模块的 HAT_Assets的Name字段 也就是前台显示
+    'quicksearch' => 'enabled',
+    'studio' => 'visible',
+
+  ),
 		//B端芯数
 	'b_odf_cores' => array (
 			'required' => false,

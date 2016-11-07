@@ -302,7 +302,7 @@ array (
           ),
         ),
       ),
-      'lbl_editview_panel5' => 
+      'lbl_editview_panel_desc' => 
       array (
         0 => 
         array (
