@@ -43,7 +43,7 @@ function display_lines($focus, $field, $value, $view) {
 									,hat.channel_content_backup
 									,hat.channel_num_backup
 									,hat.date_start
-									,hat.date_end,hat.status,hat.enable_action
+									,hat.date_end,hat.status,hat.enable_action,hat.broadband_type
 							FROM   hit_ip_allocations hat
 							LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
 							LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
@@ -86,7 +86,7 @@ function display_lines($focus, $field, $value, $view) {
 							,hat.channel_content_backup
 							,hat.channel_num_backup
 							,hat.date_start
-							,hat.date_end,hat.status,hat.enable_action
+							,hat.date_end,hat.status,hat.enable_action,hat.broadband_type
 					FROM   hit_ip_trans hat
 					LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
 					LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
@@ -164,7 +164,7 @@ function display_lines($focus, $field, $value, $view) {
 								,hat.channel_content_backup
 								,hat.channel_num_backup
 								,ifnull(hat.date_start,null) date_start
-								,hat.date_end,hat.status,hat.enable_action
+								,hat.date_end,hat.status,hat.enable_action,hat.broadband_type
 						FROM   hit_ip_trans hat
 						LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
 						LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
@@ -204,7 +204,7 @@ function display_lines($focus, $field, $value, $view) {
 								,hat.channel_content_backup
 								,hat.channel_num_backup
 								,ifnull(hat.date_start,null) date_start,hat.enable_action
-								,hat.date_end,hat.status
+								,hat.date_end,hat.status,hat.broadband_type
 						FROM   hit_ip_allocations hat
 						LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
 						LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
@@ -253,7 +253,7 @@ function display_lines($focus, $field, $value, $view) {
 			  ,h.change_monitoring_backup
 			  ,h.change_channel_content_backup
 			  ,h.change_channel_num_backup
-			  ,h.change_status,h.change_access_assets_backup_name,h.change_enable_action
+			  ,h.change_status,h.change_access_assets_backup_name,h.change_enable_action,h.change_broadband_type
 			FROM
 			  hat_eventtype h 
 			WHERE h.deleted = 0 

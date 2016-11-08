@@ -13,10 +13,15 @@ function triger_setFF(id_value, module_name) {
         url: "index.php?to_pdf=true&module=HAA_FF&action=setFF&ff_module="+module_name+"&ff_id="+id_value,
         success: function (result) {
              var ff_fields = jQuery.parseJSON(result);
+
 			 hideAllAttributes(ff_fields)//将所有的Attribute先变空，如果Attribute在FF中有设置，在后续的SetFF过程中会自动显示出来，否则这些扩展字段默认都不显示
              $.each(ff_fields.FF, function () { //针对读取到的FF模板，针对每个设置的条目进行处理
                 setFF(this)
             })
+
+            if (typeof(ff_fields.JS)!="undefined") {
+             	eval($('<textarea>').html(htmlUnescape(ff_fields.JS)).text());
+            }
         },
         error: function () { //失败
             alert('Error loading document');
@@ -26,11 +31,19 @@ function triger_setFF(id_value, module_name) {
   }
 }
 
+function htmlUnescape(str){
+    return str
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&');
+}
 
 function setFF(FFObj) {
 	//设置FlexFORM，基于triger_setFF函数读取到的Ajax结果，动态的调整界面字段
 	//其中FFObj是FF_Fields中定义的需要变化的各个字段及属性
-	//console.log(FFObj);
+	//console.log(FFObj);//<-------------------如果你需要调试，可以将这一行的内容输出
 
 	var view = action_sugar_grp1;
 	//有些界面在EditView和DetailView中处理有所不同，因此先读取出当前界面是哪些，保存在View中
@@ -38,8 +51,26 @@ function setFF(FFObj) {
 
 	if (FFObj.fieldtype=="HIDE") { //将字段进行隐藏
 		mark_field_disabled(FFObj.field,true,false);
+	} else if(FFObj.fieldtype=="LIST"){
+		mark_field_setlist(FFObj);
+	} else if(FFObj.fieldtype=="CHECKBOX"){ 
+		mark_field_setcheckbox(FFObj);
 	} else if (FFObj.fieldtype=="PLACEHOLDER"){
 		mark_field_disabled(FFObj.field,true,true);
+	} else if (FFObj.fieldtype=="READONLY"){
+		//write annother function to control
+		//add by yuan.chen
+		
+		mark_field_readonly(FFObj.field,false);
+		//修改标签名称
+		if (FFObj.label!=null && FFObj.label!="") {
+			if (view=="EditView") {
+				$("#"+FFObj.field+'_label').html(FFObj.label+":"); 
+			} else if(view =="DetailView") {
+				$("td[field='"+FFObj.field+"']").prev("td").html(FFObj.label+":");
+			}
+		}
+		//end 
 	} else {
 	//如果是非隐藏字段
 		//修改标签名称
@@ -70,8 +101,10 @@ function setFF(FFObj) {
 
 		//设定默认值
 		if (FFObj.default_val!=null) {
-			  $("#"+FFObj.field+":checkbox").prop('checked',FFObj.default_val=='1'?true:false);
-			  $("#"+FFObj.field).val(FFObj.default_val);
+			var thisObj = $("#"+FFObj.field);
+			$("#"+FFObj.field+":checkbox").attr('checked',(FFObj.default_val=='1'?'true':'false')); //针对Checkbox
+			thisObj.val(FFObj.default_val);//针对其它input以及select对象
+			$("#"+FFObj.field).trigger('change');//触发设置了默认值之后的chanage事件
 		}
 	}
 }
@@ -99,6 +132,55 @@ function hideAllAttributes(ff_fields) {
 			}
 		}
 		i++;//查找下一个attribute
+	}
+}
+
+function mark_field_setlist(fields) {
+	var view=action_sugar_grp1;
+	var field_name=fields.field;
+	if (view=='EditView') {
+		var html="<select id='"+field_name+"' name='"+field_name+"'></select>";
+		$("#"+field_name+'_label').html(fields.label+":");
+		$("#"+field_name).parent().html(html);
+		$.ajax({
+			url:"index.php?to_pdf=true&module=HAA_FF&action=get_HAA_FF&code_tag="+fields.listfilter,
+			type:"POST",
+			success:function(data){
+				var fields = jQuery.parseJSON(data);
+				var option="";
+				for (var i = 0; i < fields.length; i++) {
+					option+="<option value='"+fields[i]+"'>"+fields[i]+"</option>";
+				}
+				$("#"+field_name).append(option);
+			}
+		});
+	}else if(view=='DetailView'){
+		$("#"+field_name).parent().prev().html(fields.label+":");
+	}
+}
+
+function mark_field_setcheckbox(fields){
+	var view=action_sugar_grp1;
+	var html="";
+	var field_name=fields.field;
+	if (view=='EditView') {
+		$("#"+field_name+'_label').html(fields.label+":");
+		var checkval=$("#"+field_name).val();
+		html='<input id="'+field_name+'" name="'+field_name+'" type="checkbox" value="1"/>';//默认为false
+		if (checkval==1) {
+			html='<input id="'+field_name+'" name="'+field_name+'" type="checkbox" value="1" checked/>';
+		}
+		$("#"+field_name).val("0").hide();
+		$("#"+field_name).parent().append(html);
+	} else if(view=='DetailView'){
+		var checkval=$("#"+field_name).html();
+		html='<input id="'+field_name+'" name="'+field_name+'" type="checkbox" disabled value="1"/>';
+		if (checkval==1) {
+			html='<input id="'+field_name+'" name="'+field_name+'" type="checkbox" disabled value="1" checked/>';
+		}
+		$("#"+field_name).hide();
+		$("#"+field_name).parent().html(html);
+		$("#"+field_name).parent().prev().html(fields.label+":");
 	}
 }
 
@@ -175,11 +257,11 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
   	    //如果当前行可以清空，则进一步判断，当前区域是否是空白，如果当前区域也是空白，直接将当前区域清空
 		var hide_tr_bool=true;
 		$.each(mark_obj_tr.children("td"), function() {
-		  	if ($(this).text()!="" && !($(this).css("visibility")=="hidden" || $(this).css("display")=="none")) {
+		  	if ($(this).text().trim()!="" && !($(this).css("visibility")=="hidden" || $(this).css("display")=="none")) {
 		  		//如果当前字段有内容，并且有内容的字段没有隐藏，则认为当前行不为空
 		  		hide_tr_bool=false;
 		  		return false;//break for jquery each;
-		  	};
+		  	}
 		});
 
 
@@ -187,7 +269,8 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 			var hide_table_bool=true;
 			//如果当前行可以直接隐去，则进一步判断是否当前行所在的整个区块都可以直接隐去
 			$.each(mark_obj_tr.siblings().children("td"), function() {
-			  	if ($(this).text()!="" && !($(this).css("visibility")=="hidden" || $(this).css("display")=="none")) {
+			  	//if ($(this).text()!="" && !($(this).css("visibility")=="hidden" || $(this).css("display")=="none")) {
+			  		if ($(this).text()!="" && ($(this).css("visibility")!="hidden" || $(this).css("display")!="none")) {
 			  		//如果当前字段有内容，并且有内容的字段没有隐藏，则认为当前行不为空
 			  		hide_table_bool=false;
 			  		return false;//break for jquery each;
@@ -201,6 +284,49 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 				mark_obj_tr.hide();//将当前行隐去
 			}
 		}
+}
+
+function mark_field_readonly(field_name) {
+	  var view = action_sugar_grp1;
+	  if(view == 'EditView') {
+		mark_obj = ($("#"+field_name).length>0)?$("#"+field_name):$("[name='"+field_name+"'");
+		mark_obj_lable = $("#"+field_name+"_label");
+		mark_obj_tr = $("#"+field_name).closest("tr");
+
+	   
+		mark_obj.closest('td').css({"display":""});
+		mark_obj_lable.css({"display":""});
+		mark_obj.attr("disabled","disabled");
+		
+		mark_obj.css({"background-Color":"#efefef;"});
+		mark_obj.attr("readonly",true);
+		mark_obj_lable.css({"color":"#aaaaaa"});
+	    
+	    if (typeof validate != "undefined" && typeof validate['EditView'] != "undefined") {
+	      removeFromValidate('EditView',field_name); //去除必须验证
+	    }
+	    $("#"+field_name+"_label .required").hide();
+
+	    if  (typeof $("#btn_"+field_name)!= 'undefined') {
+	      $("#btn_"+field_name).css({"visibility":"hidden"});
+	    }
+	    if  (typeof $("#btn_clr_"+field_name)!= 'undefined') {
+	      $("#btn_clr_"+field_name).css({"visibility":"hidden"});
+	    }
+	    //消除已经填写的数据
+	    //$("#"+field_name).val("");
+	    if  (typeof $("#"+field_name+"_id")!= 'undefined') {
+	      $("#"+field_name+"_id").val("");
+	    }
+		
+		if($("#"+field_name).attr("class")=="date_input"){
+		console.log(field_name);
+		var next_dates_array =$("#"+field_name).nextAll();
+		next_dates_array.css({"visibility":"hidden"});
+		}
+		
+		
+	  }
 }
 
 

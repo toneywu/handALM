@@ -932,6 +932,28 @@ $dictionary['HIT_IP_Allocations'] = array (
             'unified_search' => false,
             'merge_filter' => 'disabled',
             ),
+            
+            //宽带类型
+		'broadband_type' => array (
+			'required' => false,
+			'name' => 'broadband_type',
+			'vname' => 'LBL_BROADBAND_TYPE',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+		),
 		
 	),
 	'relationships' => array (),

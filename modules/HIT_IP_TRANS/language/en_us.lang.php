@@ -101,4 +101,5 @@ $mod_strings = array (
   'LBL_ENABLE_ACTION'=>'Enable?',
   'LBL_EFFICACY'=>'Efficacy',
   'LBL_EFFECTIVE'=>'Effective',
+  'LBL_BROADBAND_TYPE'=>'Broadband Type',
 );

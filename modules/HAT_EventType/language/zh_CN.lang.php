@@ -124,4 +124,5 @@ $mod_strings = array (
   'LBL_CHANGE_ENABLE_ACTION'=>'可修改失效',
   
   'LBL_NEED_LIMIT_TRANSACTION_LINES'=>'仅显示指定组织历史记录',
+  'LBL_CHANGE_BROADBAND_TYPE'=>'可修改带宽变量',
 );

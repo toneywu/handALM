@@ -31,11 +31,14 @@ class HIT_IP_AllocationsViewPopup extends ViewPopup
 		//}
 		//$popupMeta["whereStatement"].=' 2=1';
 		parent::process();
+		//echo $popupMeta["whereStatement"];
+		//echo "where".$popupMeta->_get_where_clause();
+		//echo "REQUEST".var_dump($_SESSION);
 		
 		
 		//echo  $_REQUEST["access_assets_name_advanced"];
 		
 		//echo var_dump(file_exists('modules/' . $this->module . '/Popup_picker.php'));
-		echo print_r($popupMeta["whereStatement"]);
+		//echo print_r($popupMeta["whereStatement"]);
     }
 }
