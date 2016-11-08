@@ -1373,6 +1373,15 @@ $dictionary['HAT_EventType'] = array (
 			'type' => 'bool',
 			'massupdate' => 0,
 			'default' => '1',
+			),
+		//宽带类型
+		'change_broadband_type' => array (
+			'required' => false,
+			'name' => 'change_broadband_type',
+			'vname' => 'LBL_CHANGE_BROADBAND_TYPE',
+			'type' => 'enum',
+			'massupdate' => 0,
+			'default' => 'LOCKED',
 			'no_default' => false,
 			'comments' => '',
 			'help' => '',
@@ -1384,10 +1393,12 @@ $dictionary['HAT_EventType'] = array (
 			'reportable' => true,
 			'unified_search' => false,
 			'merge_filter' => 'disabled',
-			//'options' => 'dom_int_bool',
-	
+			'len' => 100,
+			'size' => '20',
+			'options' => 'cux_event_type_option_list',
+			'studio' => 'visible',
+			'dependency' => false,
 		),
-		
 		
 		'default_asset_list' => array (
 			'required' => false,

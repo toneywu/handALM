@@ -2,83 +2,40 @@
 $module_name = 'HAA_QUAL';
 $listViewDefs [$module_name] = 
 array (
-  'NAME' => 
-  array (
-    'width' => '20%',
-    'label' => 'LBL_NAME',
-    'default' => true,
-    'link' => true,
-  ),
-  'CODE_QUALIFICATION_TYPE' => 
-  array (
-    'type' => 'relate',
-    'default' => true,
-    'studio' => 'visible',
-    'label' => 'LBL_QUALIFICATION_TYPE',
-    'id' => 'CODE_QUALIFICATION_TYPE_ID',
-    'link' => true,
-    'width' => '15%',
-  ),
-  'PARENT_NAME' => 
-  array (
-    'type' => 'parent',
-    'studio' => 'visible',
-    'label' => 'LBL_FLEX_RELATE',
-    'link' => true,
-    'sortable' => false,
-    'ACLTag' => 'PARENT',
-    'dynamic_module' => 'PARENT_TYPE',
-    'id' => 'PARENT_ID',
-    'related_fields' => 
-    array (
-      0 => 'parent_id',
-      1 => 'parent_type',
-    ),
-    'width' => '20%',
-    'default' => true,
-  ),
-  'EFFECTIVE_START_DATE' => 
-  array (
-    'type' => 'date',
-    'label' => 'LBL_EFFECTIVE_START_DATE',
-    'width' => '10%',
-    'default' => true,
-  ),
-  'NO_EFFECTIVE_END_FLAG' => 
-  array (
-    'type' => 'bool',
-    'default' => true,
-    'label' => 'LBL_NO_EFFECTIVE_END_FLAG',
-    'width' => '5%',
-  ),
-  'EFFECTIVE_END_DATE' => 
-  array (
-    'type' => 'date',
-    'label' => 'LBL_EFFECTIVE_END_DATE',
-    'width' => '10%',
-    'default' => true,
-  ),
-  'QUAL_STATUS' => 
-  array (
-    'type' => 'enum',
-    'default' => true,
-    'studio' => 'visible',
-    'label' => 'LBL_QUAL_STATUS',
-    'width' => '10%',
-  ),
-  'CONTENT' => 
+  'CERTIFIED_BY' => 
   array (
     'type' => 'varchar',
-    'label' => 'LBL_CONTENT',
-    'width' => '10%',
+    'label' => 'LBL_CERTIFIED_BY',
+    'width' => '20%',
+    'default' => true,
+  ),
+  'ATTRIBUTE12' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_ATTRIBUTE12',
+    'width' => '15%',
     'default' => true,
   ),
   'ATTRIBUTE7' => 
   array (
     'type' => 'varchar',
     'label' => 'LBL_ATTRIBUTE7',
+    'width' => '15%',
+    'default' => true,
+  ),
+  'ATTRIBUTE8' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_ATTRIBUTE8',
+    'width' => '40%',
+    'default' => true,
+  ),
+  'DATE_ENTERED' => 
+  array (
+    'type' => 'datetime',
+    'label' => 'LBL_DATE_ENTERED',
     'width' => '10%',
-    'default' => false,
+    'default' => true,
   ),
   'ORG' => 
   array (
@@ -177,13 +134,6 @@ array (
     'width' => '10%',
     'default' => false,
   ),
-  'ATTRIBUTE8' => 
-  array (
-    'type' => 'varchar',
-    'label' => 'LBL_ATTRIBUTE8',
-    'width' => '10%',
-    'default' => false,
-  ),
   'ATTRIBUTE9' => 
   array (
     'type' => 'varchar',
@@ -199,11 +149,110 @@ array (
     'width' => '10%',
     'default' => false,
   ),
-  'CERTIFIED_BY' => 
+  'EFFECTIVE_START_DATE' => 
+  array (
+    'type' => 'date',
+    'label' => 'LBL_EFFECTIVE_START_DATE',
+    'width' => '10%',
+    'default' => false,
+  ),
+  'NO_EFFECTIVE_END_FLAG' => 
+  array (
+    'type' => 'bool',
+    'default' => false,
+    'label' => 'LBL_NO_EFFECTIVE_END_FLAG',
+    'width' => '5%',
+  ),
+  'EFFECTIVE_END_DATE' => 
+  array (
+    'type' => 'date',
+    'label' => 'LBL_EFFECTIVE_END_DATE',
+    'width' => '10%',
+    'default' => false,
+  ),
+  'QUAL_STATUS' => 
+  array (
+    'type' => 'enum',
+    'default' => false,
+    'studio' => 'visible',
+    'label' => 'LBL_QUAL_STATUS',
+    'width' => '10%',
+  ),
+  'CONTENT' => 
   array (
     'type' => 'varchar',
-    'label' => 'LBL_CERTIFIED_BY',
+    'label' => 'LBL_CONTENT',
     'width' => '10%',
+    'default' => false,
+  ),
+  'ATTRIBUTE15' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_ATTRIBUTE15',
+    'width' => '10%',
+    'default' => false,
+  ),
+  'ATTRIBUTE14' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_ATTRIBUTE14',
+    'width' => '10%',
+    'default' => false,
+  ),
+  'ATTRIBUTE13' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_ATTRIBUTE13',
+    'width' => '10%',
+    'default' => false,
+  ),
+  'NAME' => 
+  array (
+    'width' => '20%',
+    'label' => 'LBL_NAME',
+    'default' => false,
+    'link' => true,
+  ),
+  'ATTRIBUTE11' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_ATTRIBUTE11',
+    'width' => '10%',
+    'default' => false,
+  ),
+  'ATTRIBUTE10' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_ATTRIBUTE10',
+    'width' => '10%',
+    'default' => false,
+  ),
+  'CODE_QUALIFICATION_TYPE' => 
+  array (
+    'type' => 'relate',
+    'default' => false,
+    'studio' => 'visible',
+    'label' => 'LBL_QUALIFICATION_TYPE',
+    'id' => 'CODE_QUALIFICATION_TYPE_ID',
+    'link' => true,
+    'width' => '15%',
+  ),
+  'PARENT_NAME' => 
+  array (
+    'type' => 'parent',
+    'studio' => 'visible',
+    'label' => 'LBL_FLEX_RELATE',
+    'link' => true,
+    'sortable' => false,
+    'ACLTag' => 'PARENT',
+    'dynamic_module' => 'PARENT_TYPE',
+    'id' => 'PARENT_ID',
+    'related_fields' => 
+    array (
+      0 => 'parent_id',
+      1 => 'parent_type',
+    ),
+    'width' => '20%',
     'default' => false,
   ),
 );

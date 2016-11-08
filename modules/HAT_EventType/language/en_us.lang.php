@@ -127,4 +127,5 @@ $mod_strings = array (
   'LBL_CHANGE_ENABLE_ACTION'=>'Change Enable Action',
   
   'LBL_NEED_LIMIT_TRANSACTION_LINES'=>'Only Display History Of Organizations',
+  'LBL_CHANGE_BROADBAND_TYPE'=>'Change Brandband Type',
 );

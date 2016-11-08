@@ -103,5 +103,6 @@ $mod_strings = array (
   'LBL_PORT_BACKUP'=>'端口(备)',
   'LBL_STATUS'=>'状态',
   'LBL_ENABLE_ACTION'=>'失效?',
+  'LBL_BROADBAND_TYPE'=>'带宽变量',
   
 );

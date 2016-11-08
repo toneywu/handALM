@@ -11,6 +11,8 @@ class HIT_IP_SubnetsViewPopup extends ViewPopup
 
  		global $mod_strings, $app_strings, $app_list_strings;
         global $db;
+		if(!isset($_REQUEST['current_mode'])||$_REQUEST['current_mode']!='TREE'){
+	
 
 /*        if(($this->bean instanceOf SugarBean) && !$this->bean->ACLAccess('list')){
             ACLController::displayNoAccess();
@@ -126,5 +128,11 @@ class HIT_IP_SubnetsViewPopup extends ViewPopup
         echo('<script>var zNodes = '.$txt_jason.'</script>');
 
   // parent::Display();
-    }
+    }else{
+		insert_popup_header(null, false);
+		echo '<script src="modules/HIT_IP_Allocations/js/popup_view.js"></script>';
+		//echo "<input type='hidden' id='target_owning_org_id_advanced' value='".$_REQUEST["target_owning_org_id_advanced"]."'>";
+		parent::Display();
+	
+	}
 }

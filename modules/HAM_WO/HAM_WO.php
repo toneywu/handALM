@@ -82,7 +82,7 @@ class HAM_WO extends HAM_WO_sugar {
 
 			//遍历工序
 
-			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('WOOP_NUMBER', "ham_woop.woop_status not in ('CLOSED','CANCELED') and ham_wo_id='" . $this->id . "'");
+			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('woop_number', "ham_woop.woop_status not in ('CLOSED','CANCELED') and ham_wo_id='" . $this->id . "'");
 
 			if (!empty ($ham_woops)) {
 

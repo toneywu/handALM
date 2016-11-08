@@ -176,6 +176,7 @@ function getListofValue(){
                      +"<option value='PLACEHOLDER'>Hide(Placeholder)</option>"
                      +"<option value='INPUT'>Input</option>"
                      +"<option value='LIST'>List</option>"
+                     +"<option value='READONLY'>Read Only</option>"
                      +"<option value='CHECKBOX'>Checkbox</option>";
 }
 

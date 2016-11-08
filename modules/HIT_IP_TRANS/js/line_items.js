@@ -1,5 +1,6 @@
 // $.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
 var prodln = 0;
+var currentLine=0;
 if (typeof sqs_objects == 'undefined') {
 	var sqs_objects = new Array;
 }
@@ -144,9 +145,9 @@ function mark_field_enabled(field_name, not_required_bool) {
 				});
 	}
 }
-
 function openHitIpPopup(ln) {// 本文件为行上选择IP按钮
 	lineno = ln;
+	currentLine=ln;
 	var popupRequestData = {
 		"call_back_function" : "setHitIpReturn",
 		"form_name" : "EditView",
@@ -160,7 +161,15 @@ function openHitIpPopup(ln) {// 本文件为行上选择IP按钮
 			"ip_highest" : "line_high_associated_ip" + ln
 		}
 	};
-	open_popup('HIT_IP_Subnets', 600, 850, '', true, true, popupRequestData);
+	console.log("当前行号="+currentLine);
+	if($("#line_hit_ip_subnets"+ln).val()==""){
+	    var popupFilter = '&current_mode=rack';
+	   open_popup('HIT_IP_Subnets', 600, 850, popupFilter, true, true, popupRequestData, "MultiSelect", true);
+	
+	}else{
+	    var popupFilter = '&current_mode=rack';
+	    open_popup('HIT_IP_Subnets', 600, 850, popupFilter, true, true, popupRequestData);
+	}
 }
 
 function openCabinetPopup(ln) {// 本文件为行上选择机柜的按钮
@@ -303,7 +312,7 @@ function btnAddAllocLine(){
 function setAddLineBtnReturn(popupReplyData) {
 	set_return(popupReplyData);
 	//console.log(JSON.stringify(popupReplyData.selection_list));
-	console.log(popupReplyData);
+	//console.log(popupReplyData);
 	var idJson = popupReplyData.selection_list;
 	for(var p in idJson){
 		$.ajax({
@@ -311,7 +320,7 @@ function setAddLineBtnReturn(popupReplyData) {
 			//data:JSON.stringify(popupReplyData.selection_list),
 			//type:"POST",
 			success: function (msg) {
-				console.log($.parseJSON(msg));
+				//console.log($.parseJSON(msg));
 				insertLineData($.parseJSON(msg));
 			},
 			error: function () { //失败
@@ -344,7 +353,43 @@ function setAccessAssetBackupNameReturn(popupReplyData) {
 
 
 function setHitIpReturn(popupReplyData) {
+	console.log("回调");
+	if($("#line_hit_ip_subnets"+currentLine).val()==""){
+	    console.log("generate_ip_line");
+	    generate_ip_line(popupReplyData);
+		markLineDeleted(currentLine, "line_");
+	   $("#Trans_line_head").show();
+	   LineEditorClose(currentLine);
+	   console.log(popupReplyData)	
+	}
 	set_return(popupReplyData);
+	
+}
+
+
+
+
+function generate_ip_line(popupReplyData) {
+	var idJson = popupReplyData.selection_list;
+	for(var p in idJson){
+		$.ajax({
+			url:'index.php?to_pdf=true&module=HIT_IP_TRANS&action=gernate_ip_record&record='+idJson[p],
+			//data:JSON.stringify(popupReplyData.selection_list),
+			//type:"POST",
+			success: function (msg) {
+				//console.log($.parseJSON(msg));
+				insertLineData($.parseJSON(msg));
+				resetLineNum_Bold();
+			},
+			error: function () { //失败
+				alert('Error loading document');
+			}
+		});
+	};
+	
+	// 设置行号
+	resetLineNum_Bold();
+
 }
 
 function openOwningOrgPopup(ln) {
@@ -1594,6 +1639,7 @@ function single_changeRequired(lineRecord,i){
 	single_Field("line_channel_content_backup",lineRecord.change_channel_content_backup,i);
 	single_Field("line_channel_num_backup",lineRecord.change_channel_num_backup,i);
 	single_Field("line_status",lineRecord.change_status,i);
+	single_Field("line_status_dis",lineRecord.change_status,i);
 	single_Field("line_access_assets_backup_name",lineRecord.change_access_assets_backup_name,i);
 	single_Field("line_change_enable_action",lineRecord.change_enable_action,i);
 	single_Field("line_broadband_type",lineRecord.change_broadband_type,i);

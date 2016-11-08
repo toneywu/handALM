@@ -57,6 +57,20 @@ function setFF(FFObj) {
 		mark_field_setcheckbox(FFObj);
 	} else if (FFObj.fieldtype=="PLACEHOLDER"){
 		mark_field_disabled(FFObj.field,true,true);
+	} else if (FFObj.fieldtype=="READONLY"){
+		//write annother function to control
+		//add by yuan.chen
+		
+		mark_field_readonly(FFObj.field,false);
+		//修改标签名称
+		if (FFObj.label!=null && FFObj.label!="") {
+			if (view=="EditView") {
+				$("#"+FFObj.field+'_label').html(FFObj.label+":"); 
+			} else if(view =="DetailView") {
+				$("td[field='"+FFObj.field+"']").prev("td").html(FFObj.label+":");
+			}
+		}
+		//end 
 	} else {
 	//如果是非隐藏字段
 		//修改标签名称
@@ -270,6 +284,49 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 				mark_obj_tr.hide();//将当前行隐去
 			}
 		}
+}
+
+function mark_field_readonly(field_name) {
+	  var view = action_sugar_grp1;
+	  if(view == 'EditView') {
+		mark_obj = ($("#"+field_name).length>0)?$("#"+field_name):$("[name='"+field_name+"'");
+		mark_obj_lable = $("#"+field_name+"_label");
+		mark_obj_tr = $("#"+field_name).closest("tr");
+
+	   
+		mark_obj.closest('td').css({"display":""});
+		mark_obj_lable.css({"display":""});
+		mark_obj.attr("disabled","disabled");
+		
+		mark_obj.css({"background-Color":"#efefef;"});
+		mark_obj.attr("readonly",true);
+		mark_obj_lable.css({"color":"#aaaaaa"});
+	    
+	    if (typeof validate != "undefined" && typeof validate['EditView'] != "undefined") {
+	      removeFromValidate('EditView',field_name); //去除必须验证
+	    }
+	    $("#"+field_name+"_label .required").hide();
+
+	    if  (typeof $("#btn_"+field_name)!= 'undefined') {
+	      $("#btn_"+field_name).css({"visibility":"hidden"});
+	    }
+	    if  (typeof $("#btn_clr_"+field_name)!= 'undefined') {
+	      $("#btn_clr_"+field_name).css({"visibility":"hidden"});
+	    }
+	    //消除已经填写的数据
+	    //$("#"+field_name).val("");
+	    if  (typeof $("#"+field_name+"_id")!= 'undefined') {
+	      $("#"+field_name+"_id").val("");
+	    }
+		
+		if($("#"+field_name).attr("class")=="date_input"){
+		console.log(field_name);
+		var next_dates_array =$("#"+field_name).nextAll();
+		next_dates_array.css({"visibility":"hidden"});
+		}
+		
+		
+	  }
 }
 
 

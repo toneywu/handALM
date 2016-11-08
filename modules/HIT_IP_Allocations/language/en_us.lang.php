@@ -106,4 +106,5 @@ $mod_strings = array (
   'LBL_PORT_BACKUP'=>'Port(Backup)',
   'LBL_STATUS'=>'Status',
   'LBL_ENABLE_ACTION'=>'Enable?',
+  'LBL_BROADBAND_TYPE'=>'Broadband Type',
 );

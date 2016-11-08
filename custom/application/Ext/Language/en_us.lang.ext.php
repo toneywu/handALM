@@ -1299,7 +1299,6 @@ $app_list_strings['haos_source_code_list']['Ref_System'] = 'External System';
 $app_list_strings['haos_revenue_clear_status_list']['Unclear'] = 'Open';
 $app_list_strings['haos_revenue_clear_status_list']['Cleared'] = 'Closed';
 
-
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
