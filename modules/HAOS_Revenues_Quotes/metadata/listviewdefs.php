@@ -66,6 +66,16 @@ array (
   'width' => '10%',
   'default' => true,
   ),
+ 'CONTRACT_NUMBER' => 
+ array (
+  'type' => 'relate',
+  'studio' => 'visible',
+  'label' => 'LBL_CONTRACT_NUMBER',
+  'id' => 'contact_id_c',
+  'link' => true,
+  'width' => '10%',
+  'default' => true,
+  ),
  'ASSIGNED_USER_NAME' => 
  array (
   'width' => '9%',

@@ -14,8 +14,8 @@ class HAOS_Revenues_QuotesViewDetail extends ViewDetail  {
 		$this->populateInvoicesInfo();
 		parent::display();
 		//ff 在DetailView显示之前中进行初始化数据的加载 
-		if(isset($this->bean->parent_eventtype_id) && ($this->bean->parent_eventtype_id)!=""){
-			$hat_eventtype_id = $this->bean->parent_eventtype_id;
+		if(isset($this->bean->hat_eventtype_id_c) && ($this->bean->hat_eventtype_id_c)!=""){
+			$hat_eventtype_id = $this->bean->hat_eventtype_id_c;
 			$bean_event_type = BeanFactory::getBean('HAT_EventType',$hat_eventtype_id);
 			$ff_id = $bean_event_type->haa_ff_id;
 
@@ -38,6 +38,8 @@ class HAOS_Revenues_QuotesViewDetail extends ViewDetail  {
 		$bean_contact= BeanFactory::getBean('Contacts', $this->bean->contact_id_c);
 		if ($bean_contact) { 
 			$this->bean->contract_name = isset($bean_contact->chinese_name_c)?$bean_contact->chinese_name_c:'';
+			$this->bean->contract_number = isset($bean_contact->employee_number_c)?$bean_contact->employee_number_c:'';
+
 		}
 	}
 	function populateInvoicesInfo(){

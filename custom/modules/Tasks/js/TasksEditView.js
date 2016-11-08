@@ -12,15 +12,16 @@ $(document).ready(function() {
 //选择合同类型的回调函数
 function setTasksTypePopupReturn(popupReplyData){
     set_return(popupReplyData);
-    $("#parent_name_label").hide();
     call_ff();
+    if($("#parent_name_label").next().css('display')=="none"){//字段设置了隐藏，才隐藏label
+        $("#parent_name_label").hide();
+    }
 }
  
 function call_ff() {
-    if ($("#haa_ff_id").val()!=""){
-        $("#parent_name_label").hide();
-    }
     triger_setFF($("#haa_ff_id").val(),"Tasks");
     $(".expandLink").click();
-    
+    if($("#parent_name_label").next().css('display')=="none"){
+        $("#parent_name_label").hide();
+    }
 }

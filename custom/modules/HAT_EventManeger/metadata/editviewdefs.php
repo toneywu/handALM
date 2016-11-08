@@ -63,12 +63,6 @@ array (
           1 => 
           array (
             'name' => 'event_type',
-            'studio' => 'visible',
-            'label' => 'LBL_EVENT_TYPE',
-            ),
-          1 => 
-          array (
-            'name' => 'event_type',
             'label' => 'LBL_EVENT_TYPE',
             'displayParams' => 
             array (
@@ -82,6 +76,17 @@ array (
               'call_back_function' => 'setEventTypeReturn',
               ),
             ),
+          ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'event_number',
+            'studio' => 'visible',
+            'label' => 'LBL_EVENT_NUMBER',
+            'customCode' => '{$fields.event_number.value}',
+            ),
+          1 => '',
           ),
         ),
       'lbl_editview_panel3' => 
@@ -265,7 +270,7 @@ array (
       'name' => 'clear_status',
       'studio' => 'visible',
       'label' => 'LBL_CLEAR_STATUS',
-       'customCode' => '<input type="text" readonly="readonly" name="clear_status" id="clear_status" value="{$fields.clear_status.value}">',
+      'customCode' => '<input type="text" readonly="readonly" name="clear_status" id="clear_status" value="{$fields.clear_status.value}">',
       ),
     ),
   1 => 

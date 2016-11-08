@@ -70,6 +70,16 @@ array (
         array (
           0 => 
           array (
+            'name' => 'event_number',
+            'studio' => 'visible',
+            'label' => 'LBL_EVENT_NUMBER',
+            ),
+          1 => '',
+          ),
+        1 => 
+        array (
+          0 => 
+          array (
             'name' => 'frameworks',
             'studio' => 'visible',
             'label' => 'LBL_FRAMEWORKS',
@@ -81,7 +91,7 @@ array (
             'label' => 'LBL_EVENT_TYPE',
             ),
           ),
-        1 => 
+        2 => 
         array (
           0 => 
           array (
@@ -95,7 +105,7 @@ array (
             'label' => 'LBL_EVENT_SUBTYPE',
             ),
           ),
-        2 => 
+        3 => 
         array (
           0 => 
           array (
@@ -104,7 +114,7 @@ array (
             ),
           1 => 'name',
           ),
-        3 => 
+        4 => 
         array (
           0 => 
           array (
@@ -119,7 +129,7 @@ array (
             'label' => 'LBL_ASSET_NUMBER',
             ),
           ),
-        4 => 
+        5 => 
         array (
           0 => 
           array (
@@ -134,7 +144,7 @@ array (
             'label' => 'LBL_PERSON_NUMBER',
             ),
           ),
-        5 => 
+        6 => 
         array (
           0 => 
           array (
@@ -147,7 +157,7 @@ array (
             'label' => 'LBL_EVENT_LOCATION',
             ),
           ),
-        6 => 
+        7 => 
         array (
           0 => 
           array (
@@ -161,7 +171,7 @@ array (
             'label' => 'LBL_TREATMENT_STATUS',
             ),
           ),
-        7 => 
+        8 => 
         array (
           0 => 
           array (
@@ -171,7 +181,7 @@ array (
             ),
           1 => 'description',
           ),
-        8 => 
+        9 => 
         array (
           0 => 
           array (
@@ -184,7 +194,7 @@ array (
             'label' => 'LBL_ATTRIBUTE2',
             ),
           ),
-        9 => 
+        10 => 
         array (
           0 => 
           array (
@@ -197,7 +207,7 @@ array (
             'label' => 'LBL_ATTRIBUTE4',
             ),
           ),
-        10 => 
+        11 => 
         array (
           0 => 
           array (
@@ -210,7 +220,7 @@ array (
             'label' => 'LBL_ATTRIBUTE6',
             ),
           ),
-        11 => 
+        12 => 
         array (
           0 => 
           array (
@@ -230,7 +240,7 @@ array (
         array (
           0 => 
           array (
-            'name' => 'revenues_quote_number',
+            'name' => 'revenue_quote_number',
             'studio' => 'visible',
             'label' => 'LBL_REVENUE_QUOTE_NUMBER',
             ),

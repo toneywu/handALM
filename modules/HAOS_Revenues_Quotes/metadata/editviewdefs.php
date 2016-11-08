@@ -86,7 +86,7 @@ array (
               'field_to_name_array' => 
               array (
                 'name' => 'event_type',
-                'id' => 'parent_eventtype_id',
+                'id' => 'hat_eventtype_id_c',
                 'haa_ff_id' => 'haa_ff_id',
                 ),
               'call_back_function' => 'setEventTypeReturn',
@@ -300,6 +300,10 @@ array (
             'name' => 'account_name',
             'studio' => 'visible',
             'label' => 'LBL_ACCOUNT_NAME',
+<<<<<<< HEAD
+=======
+            'displayParams'=>array('required'=>false),
+>>>>>>> 8b6be0cfc8e81f021f761923dcec1dc838c0f7e5
             ),
           1 => 
           array (

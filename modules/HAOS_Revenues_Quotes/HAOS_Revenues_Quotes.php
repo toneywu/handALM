@@ -55,7 +55,7 @@ class HAOS_Revenues_Quotes extends HAOS_Revenues_Quotes_sugar {
 		
 		//生成收支项编号
 		//费用组对应的列表代码的TAG维护编码规则名称
-		if ($this->wo_number == '') {
+		if ($this->revenue_quote_number == '') {
 			$bean_codes = BeanFactory :: getBean('HAA_Codes', $this->haa_codes_id_c);//以参数传值时只能传ID值，否则发创建Bean，因此用以下方法创建。
 			$bean_numbering = BeanFactory :: getBean('HAA_Numbering_Rule')->retrieve_by_string_fields(array('name'=>$bean_codes->code_tag));
 			if (!empty($bean_numbering)) {

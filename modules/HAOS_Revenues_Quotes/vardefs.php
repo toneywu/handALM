@@ -506,9 +506,30 @@ $dictionary['HAOS_Revenues_Quotes'] = array(
         'quicksearch' => 'enabled',
         'studio' => 'visible',
         ),
-      'event_type'=>
+     'hat_eventtype_id_c' => 
       array (
         'required' => false,
+        'name' => 'hat_eventtype_id_c',
+        'vname' => 'LBL_EVENT_TYPE_HAT_EVENTTYPE_ID',
+        'type' => 'id',
+        'massupdate' => 0,
+        'no_default' => false,
+        'comments' => '',
+        'help' => '',
+        'importable' => 'true',
+        'duplicate_merge' => 'disabled',
+        'duplicate_merge_dom_value' => 0,
+        'audited' => false,
+        'inline_edit' => true,
+        'reportable' => false,
+        'unified_search' => false,
+        'merge_filter' => 'disabled',
+        'len' => 36,
+        'size' => '20',
+        ),
+      'event_type' => 
+      array (
+        'required' => true,
         'source' => 'non-db',
         'name' => 'event_type',
         'vname' => 'LBL_EVENT_TYPE',
@@ -527,14 +548,13 @@ $dictionary['HAOS_Revenues_Quotes'] = array(
         'merge_filter' => 'disabled',
         'len' => '255',
         'size' => '20',
-        'id_name' => 'parent_eventtype_id',
+        'id_name' => 'hat_eventtype_id_c',
         'ext2' => 'HAT_EventType',
         'module' => 'HAT_EventType',
         'rname' => 'name',
         'quicksearch' => 'enabled',
         'studio' => 'visible',
         ),
-
       'attribute1' => 
       array (
         'required' => false,
@@ -839,7 +859,7 @@ $dictionary['HAOS_Revenues_Quotes'] = array(
         'id_name' => 'contact_id_c',
         'ext2' => 'Contacts',
         'module' => 'Contacts',
-        'rname' => 'name',
+        'rname' => 'employee_number_c',
         'quicksearch' => 'enabled',
         'studio' => 'visible',
         ),
@@ -979,7 +999,7 @@ $dictionary['HAOS_Revenues_Quotes'] = array(
         'merge_filter' => 'disabled',
         'len' => '255',
         'size' => '20',
-        ),
+      ),
       'source_class'=>
       array(
         'required' => false,
@@ -1019,14 +1039,14 @@ $dictionary['HAOS_Revenues_Quotes'] = array(
         array(
             'name' => 'display_lines',
             'returns' => 'html',
-            'include' => 'modules/HAOS_Revenues_Quotes/line_items.php'
+            'include' => 'modules/HAOS_revenues_quotes/line_items.php'
             ),
         ),
       ),
-    'relationships'=>array (
+'relationships'=>array (
     ),
-    'optimistic_locking'=>true,
-    'unified_search'=>true,
+'optimistic_locking'=>true,
+'unified_search'=>true,
 );
 if (!class_exists('VardefManager')){
     require_once('include/SugarObjects/VardefManager.php');

@@ -681,6 +681,27 @@ $dictionary['HAT_EventManeger'] = array(
         'len' => '255',
         'size' => '20',
         ),
+      'event_number' => 
+      array (
+        'required' => true,
+        'name' => 'event_number',
+        'vname' => 'LBL_EVENT_NUMBER',
+        'type' => 'varchar',
+        'massupdate' => 0,
+        'no_default' => false,
+        'comments' => '',
+        'help' => '',
+        'importable' => 'true',
+        'duplicate_merge' => 'disabled',
+        'duplicate_merge_dom_value' => '0',
+        'audited' => false,
+        'inline_edit' => true,
+        'reportable' => true,
+        'unified_search' => false,
+        'merge_filter' => 'disabled',
+        'len' => '255',
+        'size' => '20',
+        ),
       'haos_revenues_quotes_id' => 
       array (
         'required' => false,
