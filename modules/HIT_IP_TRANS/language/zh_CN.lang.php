@@ -102,4 +102,5 @@ $mod_strings = array (
   'LBL_ENABLE_ACTION'=>'失效',
   'LBL_EFFICACY'=>'失效',
   'LBL_EFFECTIVE'=>'有效',
+  'LBL_BROADBAND_TYPE'=>'带宽变量',
 );

@@ -81,8 +81,11 @@ function insertTransLineHeader(tableid){
   n4.innerHTML="<span id='line_date_end_title'>占用终止时间</span>";
   var e3=x.insertCell(23);
   e3.innerHTML="<span id='line_enable_action_title'>失效</span>";
+  
   var e2=x.insertCell(24);
   e2.innerHTML="<span id='line_status_title'>状态</span>";
+  var e3=x.insertCell(25);
+  e3.innerHTML="<span id='line_broadband_type_title'>带宽变量</span>";
 }
 
 
@@ -126,6 +129,7 @@ function insertLineData(asset_trans_line ){ //将数据写入到对应的行字�
     $("#line_date_start".concat(String(ln))).val(asset_trans_line.date_start);
     $("#line_date_end".concat(String(ln))).val(asset_trans_line.date_end);
     $("#line_enable_action".concat(String(ln))).val(asset_trans_line.enable_action);
+    $("#line_broadband_type".concat(String(ln))).val(asset_trans_line.broadband_type);
     renderTransLine(ln);
   }
 }
@@ -208,7 +212,8 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<td><span name='displayed_line_date_start[" + prodln + "]' id='displayed_line_date_start" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_date_end[" + prodln + "]' id='displayed_line_date_end" + prodln + "'></span></td>" +
       "<td><input type='checkbox' disabled='true'  name='displayed_line_enable_action[" + prodln + "]' id='displayed_line_enable_action" + prodln + "'></input></td>" +
-      "<td><span name='displayed_line_status[" + prodln + "]' id='displayed_line_status" + prodln + "'></span></td>";
+      "<td><span name='displayed_line_status[" + prodln + "]' id='displayed_line_status" + prodln + "'></span></td>"+
+      "<td><span name='displayed_line_broadband_type[" + prodln + "]' id='displayed_line_broadband_type" + prodln + "'></span></td>";
       
       //"<td><span name='displayed_line_hit_ip_subnets_id[" + prodln + "]' id='displayed_line_hit_ip_subnets_id" + prodln + "''></span></td>"+
       //"<td><input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'></td>";
@@ -345,6 +350,11 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<label>"+"状态"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_status[" + prodln + "]' id='line_status" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
+      //宽带类型
+      "<span class='input_group'>"+
+      "<label>"+"宽带类型"+"</label>"+
+      "<input style=' width:153px;' type='text' name='line_broadband_type[" + prodln + "]' id='line_broadband_type" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
       //占用起始时间
       "<span class='input_group'>"+
       "<label>"+"占用起始时间"+"</label>"+
@@ -420,6 +430,7 @@ function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_line_access_assets_backup_name"+ln).html($("#line_access_assets_backup_name"+ln).val());
   $("#displayed_line_date_start"+ln).html($("#line_date_start"+ln).val());
   $("#displayed_line_date_end"+ln).html($("#line_date_end"+ln).val());
+  $("#displayed_line_broadband_type"+ln).html($("#line_broadband_type"+ln).val());
   
   if ($("#line_enable_action"+ln).val()=="0") {
     $("#displayed_line_enable_action"+ln).attr("checked",true);
@@ -428,8 +439,7 @@ function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
   }else {
     $("#displayed_line_enable_action"+ln).removeAttr("checked");
   }
- console.log("line_status = "+$("#line_status"+ln).val());
-  
+
   if($("#line_status"+ln).val()==""||$("#line_status"+ln).val()=="EFFECTIVE"){
   	  $("#displayed_line_status"+ln).html(SUGAR.language.get('HIT_IP_TRANS','LBL_EFFECTIVE'));
   }else{
@@ -582,6 +592,7 @@ function markLineDeleted(ln, key) {//删除当前行
     removeFromValidate('EditView','line_channel_content_backup'+ ln);
     removeFromValidate('EditView','line_date_start'+ ln);
     removeFromValidate('EditView','line_date_end'+ ln);
+    removeFromValidate('EditView','line_broadband_type'+ ln);
   }
   resetLineNum();
 

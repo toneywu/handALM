@@ -30,7 +30,7 @@ $event_sql = "SELECT
 			  ,h.change_monitoring_backup
 			  ,h.change_channel_content_backup
 			  ,h.change_channel_num_backup
-			  ,h.change_status,h.change_access_assets_backup_name,h.change_enable_action
+			  ,h.change_status,h.change_access_assets_backup_name,h.change_enable_action,h.change_broadband_type
 			FROM
 			  hat_eventtype h 
 			WHERE h.deleted = 0 

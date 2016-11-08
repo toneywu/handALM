@@ -171,6 +171,7 @@ function save_allocation_lines($trans_line_bean, $parent,$prev_trans_batch_id) {
 	$allocation_line_bean->target_owning_org_id=$parent->target_owning_org_id;
 	$allocation_line_bean->target_owning_org=$parent->target_owning_org;
 	$allocation_line_bean->enable_action=$trans_line->enable_action;
+	$allocation_line_bean->broadband_type=$trans_line->broadband_type;
 	if ($allocation_line_bean->source_trans_id == null) {
 		$allocation_line_bean->hit_ip_trans_batch_id = $trans_line->hit_ip_trans_batch_id;
 		//$allocation_line_bean->hit_ip_trans_batch_id = $trans_line->hit_ip_trans_batch_id;

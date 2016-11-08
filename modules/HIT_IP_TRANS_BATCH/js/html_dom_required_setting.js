@@ -172,45 +172,6 @@ function loopField(fieldName,type){
 		}
 	}
 }
-
-
-function single_changeRequired(lineRecord,i){
-	single_Field("line_hit_ip_subnets",lineRecord.lineRecord,i);
-	single_Field("line_gateway",lineRecord.change_gateway,i);
-	single_Field("line_bandwidth_type",lineRecord.change_bandwidth_type,i);
-	single_Field("line_port",lineRecord.change_port,i);
-	single_Field("line_speed_limit",lineRecord.change_speed_limit,i);
-	single_Field("line_hat_asset_name",lineRecord.change_asset,i);
-	single_Field("line_hat_assets_cabinet",lineRecord.change_cabinet,i);
-	single_Field("line_monitoring",lineRecord.change_monitoring,i);
-	single_Field("line_channel_num",lineRecord.change_channel_num,i);
-	single_Field("line_channel_content",lineRecord.change_channel_content,i);
-	single_Field("line_mrtg_link",lineRecord.change_mrtg_link,i);
-	single_Field("line_access_assets_name",lineRecord.change_access_assets_name,i);
-	single_Field("line_parent_ip",lineRecord.change_parent,i);
-	single_Field("line_associated_ip",lineRecord.change_associated_ip,i);
-	single_Field("line_date_end",lineRecord.change_date_end,i);
-	single_Field("line_date_start",lineRecord.change_date_start,i);
-	single_Field("line_port_backup",lineRecord.change_port_backup,i);
-	single_Field("line_monitoring_backup",lineRecord.change_monitoring_backup,i);
-	single_Field("line_channel_content_backup",lineRecord.change_channel_content_backup,i);
-	single_Field("line_channel_num_backup",lineRecord.change_channel_num_backup,i);
-	single_Field("line_status",lineRecord.change_status,i);
-}
-
-
-
-function dulicateTranLine(ln) {// 关闭行编辑器（显示为正常行）
-	//if (check_form('EditView')) {
-		var keyValue = "";
-		// 获取上一行 排除已经删除的得到prodin的真实数值
-		var lastProdln = 1;
-		for (var i = 0; i <= prodln - 1; i++) {
-			if ($("#line_deleted" + i).val() != 1) {
-				lastProdln = i;
-			}
-		}
-}
 /**
  * 
  */

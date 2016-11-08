@@ -1,9 +1,0 @@
-save.php 保存时自动执行（只要是此文件名）
-
-Logic_hook -->getEventType.php 本文件主要是读取EventType对应的关联字段信息
-
-Render_Line_Items.php 由vardefs定义
-
-//头部的Javascript动作。custom\modules\HAT_Asset_Trans_Batch\js\HAT_Asset_Trans_Batch_editview.js
-//行部的动作定义在custom\modules\HAT_Asset_Trans\js
-//同时需要引用EventType相关的动作，定义在D:\xampp\htdocs\suite\modules\HAT_EventType\js\reset_EvenType_Fields.js

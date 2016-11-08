@@ -71,6 +71,24 @@ array (
             'label' => 'LBL_FRAMEWORKS',
             'customCode' => '{$FRAMEWORK}',
           ),
+          1 => 
+          array (
+            'name' => 'event_type',
+            'studio' => 'visible',
+            'label' => 'LBL_EVENT_TYPE',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&basic_type_advanced=NETWORK',
+              'field_to_name_array' => 
+              array (
+                'name' => 'event_type',
+                'id' => 'hat_eventtype_id',
+                'event_short_desc' => 'name',
+                'haa_ff_id' => 'haa_ff_id',
+              ),
+              'call_back_function' => 'setEventTypePopupReturn',
+            ),
+          ),
         ),
         1 => 
         array (

@@ -11,7 +11,10 @@ array (
         'buttons' => 
         array (
           0 => 'EDIT',
-          1 => 
+/*          1 => 'DUPLICATE',
+          2 => 'DELETE',
+          3 => 'FIND_DUPLICATES',*/
+          1 =>
           array (
             'customCode' => '<input type="button" class="button" onClick="GenerateDoc();" value="{$MOD.LBL_GENERATE_DOC}">',
           ),
@@ -74,6 +77,12 @@ array (
             'name' => 'framework',
             'studio' => 'visible',
             'label' => 'LBL_FRAMEWORKS',
+          ),
+          1 => 
+          array (
+            'name' => 'event_type',
+            'studio' => 'visible',
+            'label' => 'LBL_EVENT_TYPE',
           ),
         ),
         1 => 
@@ -158,6 +167,8 @@ array (
             'label' => 'LBL_SEND_TO_CUSTOMER',
           ),
         ),
+
+
         7 => 
         array (
           0 => 
