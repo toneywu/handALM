@@ -53,11 +53,7 @@ class HAOS_Revenues_QuotesViewEdit extends ViewEdit {
 	function populateInvoicesInfo(){
 		$bean= BeanFactory::getBean('AOS_Invoices', $this->bean->aos_invoices_id_c);
 		if ($bean) { 
-			if(isset($bean->status)&&$bean->status!="") {
-				$this->bean->cleared_status =$app_list_strings['invoice_status_dom'][$bean->status];
-			}else{
-				$this->bean->cleared_status="";
-			}
+			$this->bean->cleared_status =$app_list_strings['invoice_status_dom'][isset($bean->status)?$bean->status:''];
 		}
 	}
 
