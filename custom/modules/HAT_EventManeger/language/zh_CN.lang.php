@@ -1,6 +1,7 @@
 <?php
-// created: 2016-11-07 18:07:39
+// created: 2016-11-07 21:02:34
 $mod_strings = array (
-  'LBL_EDITVIEW_PANEL1' => '新建面板 1',
-  'LBL_EDITVIEW_PANEL3' => '新建面板 3',
+  'LBL_EDITVIEW_PANEL1' => '收支计费项',
+  'LBL_EDITVIEW_PANEL3' => '主要信息',
+  'LBL_DETAILVIEW_PANEL1' => '收支计费项',
 );

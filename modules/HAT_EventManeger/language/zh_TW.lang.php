@@ -87,4 +87,5 @@ $mod_strings = array (
   'LBL_FINE' => '罚款',
   'LBL_TREATMENT_PROCESS' => '处理经过',
   'LBL_TREATMENT_STATUS' => '处理状态',
+  'LBL_ATTRIBUTE1' => 'Attribute1',
 );
