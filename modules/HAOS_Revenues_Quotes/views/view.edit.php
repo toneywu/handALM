@@ -22,17 +22,20 @@ class HAOS_Revenues_QuotesViewEdit extends ViewEdit {
 		$this->populateInvoicesInfo();
 
 		//*********************处理FF界面 START********************
-		if(isset($this->bean->parent_eventtype_id) && ($this->bean->parent_eventtype_id)!=""){
-			$hat_eventtype_id = $this->bean->parent_eventtype_id;
+		if(isset($this->bean->hat_eventtype_id_c) && ($this->bean->hat_eventtype_id_c)!=""){
+			$hat_eventtype_id = $this->bean->hat_eventtype_id_c;
 			$bean_event_type = BeanFactory::getBean('HAT_EventType',$hat_eventtype_id);
 			$ff_id = $bean_event_type->haa_ff_id;
 		}
-
+		$html .= "<script>
+                if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
+                </script>";
+        echo $html;
 		parent::display();
 		$ff_id_field = '<input id=haa_ff_id name=haa_ff_id type=hidden '.(isset($ff_id)?'value='.$ff_id:'').'>';
 		echo '<script>if($("#haa_ff_id").length==0) {  $("#EditView").append("'.$ff_id_field.'");}</script>';
 		//如果已经选择事件类型，无论是否事件类型对应的FlexForm有值，值将界面展开。
-		if(isset($this->bean->parent_eventtype_id) && ($this->bean->parent_eventtype_id)!=""){
+		if(isset($this->bean->hat_eventtype_id_c) && ($this->bean->hat_eventtype_id_c)!=""){
 			echo '<script>$(".collapsed").switchClass("collapsed","expanded");</script>';
 		} /*else {
 			echo '<script>$(".expanded").switchClass("expanded","collapsed");</script>';
@@ -47,6 +50,7 @@ class HAOS_Revenues_QuotesViewEdit extends ViewEdit {
 		$bean_contact= BeanFactory::getBean('Contacts', $this->bean->contact_id_c);
 		if ($bean_contact) { 
 			$this->bean->contract_name = isset($bean_contact->chinese_name_c)?$bean_contact->chinese_name_c:'';
+			$this->bean->contract_number = isset($bean_contact->employee_number_c)?$bean_contact->employee_number_c:'';
 		}
 	}
 

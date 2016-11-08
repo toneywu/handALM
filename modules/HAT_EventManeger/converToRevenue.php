@@ -30,7 +30,6 @@ if(!(ACLController::checkAccess('HAOS_Revenues_Quotes', 'edit', true))){
 require_once('modules/HAT_EventManeger/HAT_EventManeger.php');
 require_once('modules/HAOS_Revenues_Quotes/HAOS_Revenues_Quotes.php');
 require_once('modules/AOS_Products_Quotes/AOS_Products_Quotes.php');
-
 global $timedate;
 
 //Setting values in EventManager
@@ -44,56 +43,47 @@ $rawRow = $event->fetched_row;
 $rawRow['id'] = '';
 $rawRow['haa_frameworks_id_c'] = $rawRow['haa_frameworks_id_c'];
 $rawRow['revenue_quote_number'] = '';
-	$rawRow['date_entered'] = '';
-	$rawRow['date_modified'] = '';
+$rawRow['clear_status'] = 'Unclear';
+$rawRow['event_date'] = date_format(date_create($event->event_date),"Y-m-d") ;
+$rawRow['source_code'] = 'Others';
+$rawRow['source_id'] = $event->id;
+$rawRow['source_reference'] =  $event->event_number;
+$rawRow['contract_number'] = $event->person_number;
+$rawRow['contact_id_c'] = $event->contact_id_c;
+$rawRow['contract_name'] = $event->person_name;
+$rawRow['date_entered'] = '';
+$rawRow['date_modified'] = '';
+
+$bean_codes = BeanFactory :: getBean('HAA_Codes')->retrieve_by_string_fields(array (
+	'name' => $event->event_type
+	));
+if ($bean_codes) { 
+	$rawRow['haa_codes_id_c']= isset($bean_codes->id)?$bean_codes->id:'';
+}
+$rawRow['expense_group'] = $event->event_type;
+
+
+
 $quote->populateFromRow($rawRow);
 $quote->process_save_dates =false;
 $quote->save();
+$event->haos_revenues_quotes_id=$quote->id;
+$event->save();
 
 
-/*	//Setting Group Line Items
-$sql = "SELECT * FROM aos_line_item_groups WHERE parent_type = 'AOS_Quotes' AND parent_id = '".$quote->id."' AND deleted = 0";
-$result = $this->bean->db->query($sql);
-while ($row = $this->bean->db->fetchByAssoc($result)) {
-	$row['id'] = '';
-	$row['parent_id'] = $invoice->id;
-	$row['parent_type'] = 'AOS_Invoices';
-	if($row['total_amt'] != null) $row['total_amt'] = format_number($row['total_amt']);
-	if($row['discount_amount'] != null) $row['discount_amount'] = format_number($row['discount_amount']);
-	if($row['subtotal_amount'] != null) $row['subtotal_amount'] = format_number($row['subtotal_amount']);
-	if($row['tax_amount'] != null) $row['tax_amount'] = format_number($row['tax_amount']);
-	if($row['subtotal_tax_amount'] != null) $row['subtotal_tax_amount'] = format_number($row['subtotal_tax_amount']);
-	if($row['total_amount'] != null) $row['total_amount'] = format_number($row['total_amount']);
-	$group_invoice = new AOS_Line_Item_Groups();
-	$group_invoice->populateFromRow($row);
-	$group_invoice->save();
-}
 
-	//Setting Line Items
-$sql = "SELECT * FROM aos_products_quotes WHERE parent_type = 'AOS_Quotes' AND parent_id = '".$quote->id."' AND deleted = 0";
-$result = $this->bean->db->query($sql);
-while ($row = $this->bean->db->fetchByAssoc($result)) {
-	$row['id'] = '';
-	$row['parent_id'] = $invoice->id;
-	$row['parent_type'] = 'AOS_Invoices';
-	if($row['product_cost_price'] != null)
-	{
-		$row['product_cost_price'] = format_number($row['product_cost_price']);
-	}
-	$row['product_list_price'] = format_number($row['product_list_price']);
-	if($row['product_discount'] != null)
-	{
-		$row['product_discount'] = format_number($row['product_discount']);
-		$row['product_discount_amount'] = format_number($row['product_discount_amount']);
-	}
-	$row['product_unit_price'] = format_number($row['product_unit_price']);
-	$row['vat_amt'] = format_number($row['vat_amt']);
-	$row['product_total_price'] = format_number($row['product_total_price']);
-	$row['product_qty'] = format_number($row['product_qty']);
-	$prod_invoice = new AOS_Products_Quotes();
-	$prod_invoice->populateFromRow($row);
-	$prod_invoice->save();
-}*/
+//Setting Line Items
+$prod_invoice = new AOS_Products_Quotes();
+$prod_invoice->parent_id=$quote->id;
+$prod_invoice->parent_type='HAOS_Revenues_Quotes';
+$prod_invoice->line_item_type_c='Service';
+$prod_invoice->vat="0.0";
+$prod_invoice->product_total_price=$event->fine;
+$prod_invoice->product_list_price=$event->fine;
+$prod_invoice->product_unit_price=$event->fine;
+$prod_invoice->name=$event->name;
+$prod_invoice->save();
+
 ob_clean();
-header('Location: index.php?module=HAOS_Revenues_Quotes&action=EditView&record='.$invoice->id);
+header('Location: index.php?module=HAOS_Revenues_Quotes&action=EditView&record='.$quote->id);
 ?>

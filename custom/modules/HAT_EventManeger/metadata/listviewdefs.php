@@ -2,6 +2,13 @@
 $module_name = 'HAT_EventManeger';
 $listViewDefs [$module_name] = 
 array (
+  'EVENT_NUMBER' => 
+  array (
+    'label' => 'LBL_EVENT_NUMBER',
+    'link' => true,
+    'width' => '10%',
+    'default' => true,
+  ),
   'EVENT_TYPE' => 
   array (
     'type' => 'relate',

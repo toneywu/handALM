@@ -39,9 +39,10 @@
         ln = insertProductLine();
         type = 'product_';
     //} 
+
     for(var p in product){
         if(document.getElementById(type + p + ln) !== null){
-            if(product[p] !== '' && isNumeric(product[p]) && p != 'vat'  && p != 'product_id' && p != 'name' && p != "part_number"){
+            if(product[p] !== '' && isNumeric(product[p]) && p != 'vat'  && p != 'product_id' && p != 'name' && p != "part_number" &&p!='id'){
                 document.getElementById(type + p + ln).value = format2Number(product[p]);
             } else {
                 document.getElementById(type + p + ln).value = product[p];
@@ -76,7 +77,7 @@
 
     var b =x.insertCell(1);
     b.width="37.5%";
-    b.innerHTML ="<select id='product_line_item_type_c" + prodln + "' onchange='setLineTypeCtrl(this,"+prodln+");' name='product_line_item_type_c[" + prodln + "]'>"+line_item_type_hidden+"</select>";
+    b.innerHTML ="<select id='product_line_item_type_c" + prodln + "' onchange='setLineTypeCtrl(this,"+prodln+");document.getElementById(\"product_name0\").value=\"\";' name='product_line_item_type_c[" + prodln + "]'>"+line_item_type_hidden+"</select>";
 
     var g = x.insertCell(2);
     g.width="12.5%";
@@ -230,7 +231,6 @@ function setLineTypeCtrl(field,ln){
    else
    {
     $('#product_product_id'+ln).val("0");
-    $('#product_name'+ln).val("");
     $('#product_product_qty'+ln).val("");
     $("#product_part_number"+ln).val("");
     $('#product_part_number'+ln).hide();
@@ -511,22 +511,31 @@ function check_form(formname) {
     if (typeof(siw) != 'undefined' && siw && typeof(siw.selectingSomething) != 'undefined' && siw.selectingSomething)
         return false;
     else{
+        var bool=false;
         if ($("#name_label0").has(".required")&&$("#product_name0").val()=="") {
             var html='<div class="required validation-message">缺少必填字段:产品</div>';
             $("#product_name0").parent().append(html);
+            bool=true;
         }
-        if ($("#list_price_label0").has(".required")&&$("#list_price_label0").val()=="") {
+        if ($("#list_price_label0").has(".required")&&$("#product_product_list_price0").val()=="") {
             var html='<div class="required validation-message">缺少必填字段:单价</div>';
             $("#product_product_list_price0").parent().append(html);
+            bool=true;
         }
-        if($("#unit_price_label0").has(".required")&&$("#unit_price_label0").val()==""){
+        if($("#unit_price_label0").has(".required")&&$("#product_product_unit_price0").val()==""){
             var html='<div class="required validation-message">缺少必填字段:实际单价</div>';
             $("#product_product_unit_price0").parent().append(html);
+            bool=true;
         }
-        if($("#total_price_label0").has(".required")&&$("#total_price_label0").val()==""){
+        if($("#total_price_label0").has(".required")&&$("#product_product_total_price0").val()==""){
             var html='<div class="required validation-message">缺少必填字段:单价</div>';
             $("#product_product_total_price0").parent().append(html);
+            bool=true;
         }
-        return validate_form(formname, '');
+        if (bool==true) {
+            return false;
+        }else{
+            return validate_form(formname, '');
+        }
     }
 }

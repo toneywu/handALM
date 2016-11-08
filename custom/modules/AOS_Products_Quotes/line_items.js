@@ -39,7 +39,6 @@
     var ln = 0;
     var current_group = 'lineItems';
     var gid = product.group_id;
-
     if(typeof group_ids[gid] === 'undefined'){
         current_group = insertGroup();
         group_ids[gid] = current_group;
@@ -59,7 +58,7 @@
         ln = insertServiceLine('service_group'+current_group,current_group);
         type = 'service_';
     }
-
+    console.log(product);
     for(var p in product){
         if(document.getElementById(type + p + ln) !== null){
             if(product[p] !== '' && isNumeric(product[p]) && p != 'vat'  && p != 'product_id' && p != 'name' && p != "part_number"){
@@ -230,17 +229,17 @@ if (curent_module=="AOS_Contracts") {
         "<select tabindex='0' name='product_settlement_period_c[" + prodln + "]' onchange='setProductSettlementPeriodChange(this,"+prodln+");'"+ " id='product_settlement_period_c" + prodln + "'>" + settlement_period_option +"</select></div>";
         //首次结算日
         r2.innerHTML +="<div class='pull-left' style='width:185px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_INITIAL_ACCOUNT_DAY')+":</div>"+
-            '<span id="span_product_initial_account_day_c'+prodln+'" class="input-group date'+prodln+'" >'+
-            '<input id="product_initial_account_day_c' + prodln + '" class="date-input pull-left" readOnly="readOnly" style="width:75px" autocomplete="off" name="product_initial_account_day_c[' + prodln + ']" value="" title="" tabindex="0" type="text"></span></div>';
+            '<span id="span_product_initial_account_day_c'+prodln+'" class="input-group date" >'+
+            '<input id="product_initial_account_day_c' + prodln + '" class="date_input pull-left" readOnly="readOnly" style="width:75px" autocomplete="off" name="product_initial_account_day_c[' + prodln + ']" value="" title="" tabindex="0" type="text"></span></div>';
         //生效日期
         r2.innerHTML +="<div class='pull-left' style='width:175px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_START_C')+":</div>"+
-            '<span id="span_product_effective_start_c'+prodln+'" class="input-group date'+prodln+' show_calendar">'+
-            '<input id="product_effective_start_c' + prodln + '" class="date-input pull-left" style="width:75px" autocomplete="off" name="product_effective_start_c[' + prodln + ']" value="" title="" tabindex="0" type="text" onclick="CalendarShow(this)"><span class="input-group-addon">'+
+            '<span id="span_product_effective_start_c'+prodln+'" class="input-group date show_calendar">'+
+            '<input id="product_effective_start_c' + prodln + '" class="date_input pull-left" style="width:75px" autocomplete="off" name="product_effective_start_c[' + prodln + ']" value="" title="" tabindex="0" type="text" onclick="CalendarShow(this)"><span class="input-group-addon">'+
             '<span class="glyphicon glyphicon-calendar"></span></span></span></div>';
         //终止日期
         r2.innerHTML +="<div class='pull-left' style='width:165px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_END_C')+":</div>"+
-            '<span id="span_product_effective_end_c'+prodln+'" class="input-group date'+prodln+' show_calendar">'+
-            '<input id="product_effective_end_c' + prodln + '" class="date-input pull-left" style="width:75px" autocomplete="off" name="product_effective_end_c[' + prodln + ']" value="" title="" tabindex="0" type="text" onclick="CalendarShow(this)"><span class="input-group-addon">'+
+            '<span id="span_product_effective_end_c'+prodln+'" class="input-group date show_calendar">'+
+            '<input id="product_effective_end_c' + prodln + '" class="date_input pull-left" style="width:75px" autocomplete="off" name="product_effective_end_c[' + prodln + ']" value="" title="" tabindex="0" type="text" onclick="CalendarShow(this)"><span class="input-group-addon">'+
             '<span class="glyphicon glyphicon-calendar"></span></span></span></div>';
         //说明
         r2.innerHTML +="<div class='pull-left'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_DESCRIPTION')+":</div>"+
@@ -428,16 +427,16 @@ function formatListPrice(ln){
         "<select tabindex='0' name='service_settlement_period_c[" + servln + "]' onchange='setServiceSettlementPeriodChange(this,"+servln+");'"+ " id='service_settlement_period_c" + servln + "'>" + settlement_period_option +"</select></div>";
         //首次结算日
         r.innerHTML +="<div class='pull-left' style='width:185px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_INITIAL_ACCOUNT_DAY')+":</div>"+
-            '<span id="span_service_initial_account_day_c'+servln+'" class="input-group date'+servln+'">'+
+            '<span id="span_service_initial_account_day_c'+servln+'" class="input-group date">'+
             '<input id="service_initial_account_day_c' + servln + '" class="date_input pull-left" readOnly="readOnly" style="width:75px" autocomplete="off" name="service_initial_account_day[' + servln + ']" value="" title="" tabindex="0" type="text"></span></div>';
         //生效日期
         r.innerHTML +="<div class='pull-left' style='width:175px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_START_C')+":</div>"+
-            '<span id="span_service_effective_start_c' + servln + '" class="input-group date'+servln+' show_calendar">'+
+            '<span id="span_service_effective_start_c' + servln + '" class="input-group date show_calendar">'+
             '<input id="service_effective_start_c' + servln + '" class="date_input pull-left" style="width:75px" autocomplete="off" name="service_effective_start_c[' + servln + ']" value="" title="" tabindex="0" type="text" onclick="CalendarShow(this)"><span class="input-group-addon">'+
             '<span class="glyphicon glyphicon-calendar"></span></span></span></div>';
         //终止日期
         r.innerHTML +="<div class='pull-left' style='width:165px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_END_C')+":</div>"+
-            '<span id="span_service_effective_end_c'+ servln +'" class="input-group date'+servln+' show_calendar">'+
+            '<span id="span_service_effective_end_c'+ servln +'" class="input-group date show_calendar">'+
             '<input id="service_effective_end_c' + servln + '" class="date_input pull-left" style="width:75px" autocomplete="off" name="service_effective_end_c[' + servln + ']" value="" title="" tabindex="0" type="text" onclick="CalendarShow(this)"><span class="input-group-addon">'+
             '<span class="glyphicon glyphicon-calendar"></span></span></span></div>';
         //说明

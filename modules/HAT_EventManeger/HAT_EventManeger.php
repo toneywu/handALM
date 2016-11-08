@@ -46,6 +46,25 @@ class HAT_EventManeger extends HAT_EventManeger_sugar {
 	function __construct(){
 		parent::__construct();
 	}
+
+	function save($check_notify = FALSE){
+		global $sugar_config;
+
+		if ($this->event_number==''){
+			
+			if($sugar_config['dbconfig']['db_type'] == 'mssql'){
+				$this->event_number = $this->db->getOne("SELECT MAX(CAST(event_number as INT))+1 FROM HAT_EventManeger");
+			} else {
+				$this->event_number = $this->db->getOne("SELECT MAX(CAST(event_number as UNSIGNED))+1 FROM HAT_EventManeger");
+			}
+
+			if($this->event_number < 1||$this->event_number==''){
+				$this->event_number = 1;
+			}
+		}
+		parent::save($check_notify);
+
+	}
 	
 }
 ?>
