@@ -1,338 +1,76 @@
 <?php
+/*********************************************************************************
+ * SugarCRM Community Edition is a customer relationship management program developed by
+ * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
+
+ * SuiteCRM is an extension to SugarCRM Community Edition developed by Salesagility Ltd.
+ * Copyright (C) 2011 - 2014 Salesagility Ltd.
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Affero General Public License version 3 as published by the
+ * Free Software Foundation with the addition of the following permission added
+ * to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
+ * IN WHICH THE COPYRIGHT IS OWNED BY SUGARCRM, SUGARCRM DISCLAIMS THE WARRANTY
+ * OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License along with
+ * this program; if not, see http://www.gnu.org/licenses or write to the Free
+ * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301 USA.
+ *
+ * You can contact SugarCRM, Inc. headquarters at 10050 North Wolfe Road,
+ * SW2-130, Cupertino, CA 95014, USA. or at email address contact@sugarcrm.com.
+ *
+ * The interactive user interfaces in modified source and object code versions
+ * of this program must display Appropriate Legal Notices, as required under
+ * Section 5 of the GNU Affero General Public License version 3.
+ *
+ * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
+ * these Appropriate Legal Notices must retain the display of the "Powered by
+ * SugarCRM" logo and "Supercharged by SuiteCRM" logo. If the display of the logos is not
+ * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
+ * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
+ ********************************************************************************/
+
 $module_name = 'HAOS_Revenues_Quotes';
-$viewdefs [$module_name] = 
-array (
-  'DetailView' => 
+$viewdefs[$module_name]['DetailView'] = array(
+'templateMeta' => array('form' => array('buttons'=>array('EDIT', 'DUPLICATE', 'DELETE', 'FIND_DUPLICATES',
+                                                         )),
+                        'maxColumns' => '2',
+                        'widths' => array(
+                                        array('label' => '10', 'field' => '30'),
+                                        array('label' => '10', 'field' => '30')
+                                        ),
+                        ),
+
+'panels' =>array (
+
   array (
-    'templateMeta' => 
+    'name',
+    'assigned_user_name',
+  ),
+
+  array (
+	array (
+      'name' => 'date_entered',
+      'customCode' => '{$fields.date_entered.value} {$APP.LBL_BY} {$fields.created_by_name.value}',
+      'label' => 'LBL_DATE_ENTERED',
+    ),
     array (
-      'form' => 
-      array (
-        'buttons' => 
-        array (
-          0 => 'EDIT',
-          1 => 'DUPLICATE',
-          2 => 'DELETE',
-          3 => 'FIND_DUPLICATES',
-          ),
-        ),
-      'maxColumns' => '2',
-      'widths' => 
-      array (
-        0 => 
-        array (
-          'label' => '10',
-          'field' => '30',
-          ),
-        1 => 
-        array (
-          'label' => '10',
-          'field' => '30',
-          ),
-        ),
-      'useTabs' => false,
-      'tabDefs' => 
-      array (
-        'DEFAULT' => 
-        array (
-          'newTab' => false,
-          'panelDefault' => 'expanded',
-          ),
-        'LBL_EDITVIEW_PANEL4' => 
-        array (
-          'newTab' => false,
-          'panelDefault' => 'expanded',
-          ),
-        'LBL_LINE_ITEMS_PANEL1' => 
-        array (
-          'newTab' => false,
-          'panelDefault' => 'expanded',
-          ),
-        'LBL_EDITVIEW_PANEL1' => 
-        array (
-          'newTab' => false,
-          'panelDefault' => 'expanded',
-          ),
-        'LBL_EDITVIEW_PANEL2' => 
-        array (
-          'newTab' => false,
-          'panelDefault' => 'expanded',
-          ),
-        'LBL_EDITVIEW_PANEL3' => 
-        array (
-          'newTab' => false,
-          'panelDefault' => 'expanded',
-          ),
-        ),
-      ),
-    'panels' => 
-    array (
-      'default' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            'name' => 'frameworks',
-            'studio' => 'visible',
-            'label' => 'LBL_FRAMEWORKS',
-            ),
-          1 => 
-          array (
-            'name' => 'event_type',
-            'studio' => 'visible',
-            'label' => 'LBL_EVENT_TYPE',
-            ),
-          ),
-        1 => 
-        array (
-          0 => 
-          array (
-            'name' => 'source_code',
-            'studio' => 'visible',
-            'label' => 'LBL_SOURCE_CODE',
-            ),
-          1 => 
-          array (
-            'name' => 'source_reference',
-            'label' => 'LBL_SOURCE_REFERENCE',
-            ),
-          ),
-        ),
-      'lbl_editview_panel4' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            'name' => 'expense_group',
-            'studio' => 'visible',
-            'label' => 'LBL_EXPENSE_GROUP',
-            ),
-          1 => 
-          array (
-            'name' => 'expense_type',
-            'studio' => 'visible',
-            'label' => 'LBL_EXPENSE_TYPE',
-            ),
-          ),
-        1 => 
-        array (
-          0 => 
-          array (
-            'name' => 'revenue_quote_number',
-            'label' => 'LBL_REVENUE_QUOTE_NUMBER',
-            ),
-          1 => 
-          array (
-            'name' => 'revenue_quote_name',
-            'label' => 'LBL_REVENUE_QUOTE_NAME',
-            ),
-          ),
-        2 => 
-        array (
-          0 => 
-          array (
-            'name' => 'event_date',
-            'label' => 'LBL_EVENT_DATE',
-            ),
-          1 => 
-          array (
-            'name' => 'due_date',
-            'label' => 'LBL_DUE_DATE',
-            ),
-          ),
-        3 => 
-        array (
-          0 => 
-          array (
-            'name' => 'clear_status',
-            'studio' => 'visible',
-            'label' => 'LBL_CLEAR_STATUS',
-            ),
-          1 => 
-          array (
-            'name' => 'cleared_status',
-            'label' => 'LBL_CLEARED_STATUS',
-            ),
-          ),
-        4 => 
-        array (
-          0 => 
-          array (
-            'name' => 'deposit_flag',
-            'label' => 'LBL_DEPOSIT_FLAG',
-            ),
-          1 => 
-          array (
-            'name' => 'prepay_flag',
-            'label' => 'LBL_PREPAY_FLAG',
-            ),
-          ),
-        5 => 
-        array (
-          0 => 
-          array (
-            'name' => 'bill_id',
-            'label' => 'LBL_BILL_ID',
-            ),
-          1 => 
-          array (
-            'name' => 'invoice_number',
-            'studio' => 'visible',
-            'label' => 'LBL_INVOICE_NUMBER',
-            ),
-          ),
-        6 => 
-        array (
-          0 => 
-          array (
-            'name' => 'invoice_line_number',
-            'studio' => 'visible',
-            'label' => 'LBL_INVOICE_LINE_NUMBER',
-            ),
-          1 => '',
-          ),
-        ),
-      'lbl_line_items_panel1' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            'name' => 'line_items',
-            'label' => 'LBL_LINE_ITEMS',
-            ),
-          ),
-        ),
-      'lbl_editview_panel1' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            'name' => 'attribute1',
-            'label' => 'LBL_ATTRIBUTE1',
-            ),
-          1 => 
-          array (
-            'name' => 'attribute2',
-            'label' => 'LBL_ATTRIBUTE2',
-            ),
-          ),
-        1 => 
-        array (
-          0 => 
-          array (
-            'name' => 'attribute3',
-            'label' => 'LBL_ATTRIBUTE3',
-            ),
-          1 => 
-          array (
-            'name' => 'attribute4',
-            'label' => 'LBL_ATTRIBUTE4',
-            ),
-          ),
-        2 => 
-        array (
-          0 => 
-          array (
-            'name' => 'attribute5',
-            'label' => 'LBL_ATTRIBUTE5',
-            ),
-          1 => 
-          array (
-            'name' => 'attribute6',
-            'label' => 'LBL_ATTRIBUTE6',
-            ),
-          ),
-        3 => 
-        array (
-          0 => 
-          array (
-            'name' => 'attribute7',
-            'label' => 'LBL_ATTRIBUTE7',
-            ),
-          1 => 
-          array (
-            'name' => 'attribute8',
-            'label' => 'LBL_ATTRIBUTE8',
-            ),
-          ),
-        4 => 
-        array (
-          0 => 
-          array (
-            'name' => 'attribute9',
-            'label' => 'LBL_ATTRIBUTE9',
-            ),
-          1 => 
-          array (
-            'name' => 'attribute10',
-            'label' => 'LBL_ATTRIBUTE10',
-            ),
-          ),
-        ),
-      'lbl_editview_panel2' => 
-      array (
-        0 => 
-        array (
-         0 =>   array (
-          'name' => 'account_name',
-          'studio' => 'visible',
-          'label' => 'LBL_ACCOUNT_NAME',
-          ),
-         1 => 
-         array (
-          'name' => 'contract_number',
-          'studio' => 'visible',
-          'label' => 'LBL_CONTRACT_NUMBER',
-          ),
-         ),
-        1 => 
-        array (
-          0 => 
-          array (
-            'name' => 'contract_name',
-            'label' => 'LBL_CONTRACT_NAME',
-            ),
-          1 => '',
-          ),
-        ),
-      'lbl_editview_panel3' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            'name' => 'source_number',
-            'studio' => 'visible',
-            'label' => 'LBL_SOURCE_NUMBER',
-            ),
-          1 => 
-          array (
-            'name' => 'source_name',
-            'studio' => 'visible',
-            'label' => 'LBL_SOURCE_NAME',
-            ),
-          ),
-        1 => 
-        array (
-          0 => 
-          array (
-            'name' => 'source_type',
-            'studio' => 'visible',
-            'label' => 'LBL_SOURCE_TYPE',
-            ),
-          1 => 
-          array (
-            'name' => 'source_class',
-            'studio' => 'visible',
-            'label' => 'LBL_SOURCE_CLASS',
-            ),
-          ),
-        ),
-      ),
-),
+      'name' => 'date_modified',
+      'customCode' => '{$fields.date_modified.value} {$APP.LBL_BY} {$fields.modified_by_name.value}',
+      'label' => 'LBL_DATE_MODIFIED',
+    ),
+  ),
+
+  array (
+    'description',
+  ),
+)
 );
 ?>

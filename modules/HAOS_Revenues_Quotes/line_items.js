@@ -128,7 +128,7 @@
     var y = tablebody.insertRow(-1);
 
     var c = y.insertCell(0);
-    c.innerHTML = "<span id='name_label"+prodln+"'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NAME')+"<span class='required'>&nbsp*</span></span>";
+    c.innerHTML ="<span id='name_label"+prodln+"'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NAME')+"<span class='required'>&nbsp*</span></span>";
 
     var c1 = y.insertCell(1);
     c1.innerHTML = "<input style='width:178px;'  type='text' name='product_name[" + prodln + "]' id='product_name" + prodln + "' maxlength='50' value='' title='' tabindex='116' value=''><input type='hidden' name='product_product_id[" + prodln + "]' id='product_product_id" + prodln + "' size='20' maxlength='50' value=''>";
@@ -150,7 +150,7 @@
     var z = tablebody.insertRow(-1);
 
     var i = z.insertCell(0);
-    i.innerHTML = "<span id='list_price_label"+prodln+"'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_LIST_PRICE')+"<span class='required'>&nbsp*</span></span>";
+    i.innerHTML = "<span id='list_price_label"+prodln+"'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_LIST_PRICE')+"<span class='required'>&nbsp*</span>";
 
     var j = z.insertCell(1);
     j.innerHTML = "<input style='text-align: right; width:115px;' type='text' name='product_product_list_price[" + prodln + "]' id='product_product_list_price" + prodln + "' size='11' maxlength='50' value='' title='' tabindex='116' onblur='calculateLine(" + prodln + ",\"product_\");'><input type='hidden' name='product_product_cost_price[" + prodln + "]' id='product_product_cost_price" + prodln + "' value=''  />";
@@ -173,7 +173,7 @@
 
     var z1 = tablebody.insertRow(-1);
     var m = z1.insertCell(0);
-    m.innerHTML ="<span id='unit_price_label"+prodln+"'>"+ SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_UNIT_PRICE')+"<span class='required'>&nbsp*</span></span>";
+    m.innerHTML = "<span id='unit_price_label"+prodln+"'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_UNIT_PRICE')+"<span class='required'>&nbsp*</span></span>";
 
     var n = z1.insertCell(1);
     n.innerHTML = "<input type='text' style='text-align: right; width:115px;' name='product_product_unit_price[" + prodln + "]' id='product_product_unit_price" + prodln + "' size='11' maxlength='50' value='' title='' tabindex='116' readonly='readonly' onblur='calculateLine(" + prodln + ",\"product_\");' onblur='calculateLine(" + prodln + ",\"product_\");'>";
@@ -192,7 +192,7 @@
     o1.innerHTML += "<select tabindex='116' name='product_vat[" + prodln + "]' id='product_vat" + prodln + "' onchange='calculateLine(" + prodln + ",\"product_\");'>" + vat_hidden + "</select>";
     var z2 = tablebody.insertRow(-1);
     var p = z2.insertCell(0);
-    p.innerHTML = SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_TOTAL_PRICE')+"<span class='required'>&nbsp*</span>";
+    p.innerHTML = "<span id='total_price_label"+prodln+"'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_TOTAL_PRICE')+"<span class='required'>&nbsp*</span></span>";
 
     var p1 = z2.insertCell(1);
     p1.innerHTML = "<input type='text' style='text-align: right; width:115px;' name='product_product_total_price[" + prodln + "]' id='product_product_total_price" + prodln + "' size='11' maxlength='50' value='' title='' tabindex='116' readonly='readonly'><input type='hidden' name='product_group_number[" + prodln + "]' id='product_group_number" + prodln + "' value='0'>"+
@@ -510,5 +510,23 @@ function formatNumber(n, num_grp_sep, dec_sep, round, precision) {
 function check_form(formname) {
     if (typeof(siw) != 'undefined' && siw && typeof(siw.selectingSomething) != 'undefined' && siw.selectingSomething)
         return false;
-    return validate_form(formname, '');
+    else{
+        if ($("#name_label0").has(".required")&&$("#product_name0").val()=="") {
+            var html='<div class="required validation-message">缺少必填字段:产品</div>';
+            $("#product_name0").parent().append(html);
+        }
+        if ($("#list_price_label0").has(".required")&&$("#list_price_label0").val()=="") {
+            var html='<div class="required validation-message">缺少必填字段:单价</div>';
+            $("#product_product_list_price0").parent().append(html);
+        }
+        if($("#unit_price_label0").has(".required")&&$("#unit_price_label0").val()==""){
+            var html='<div class="required validation-message">缺少必填字段:实际单价</div>';
+            $("#product_product_unit_price0").parent().append(html);
+        }
+        if($("#total_price_label0").has(".required")&&$("#total_price_label0").val()==""){
+            var html='<div class="required validation-message">缺少必填字段:单价</div>';
+            $("#product_product_total_price0").parent().append(html);
+        }
+        return validate_form(formname, '');
+    }
 }

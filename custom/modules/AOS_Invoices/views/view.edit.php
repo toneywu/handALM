@@ -7,9 +7,9 @@ class AOS_InvoicesViewEdit extends ViewEdit {
 	function AOS_InvoicesViewEdit(){
 		parent::ViewEdit();
 	}
-	
-	function display(){
 
+	function display(){
+		global $db;
 		require_once('modules/HAA_Frameworks/orgSelector_class.php');
 		$current_framework_id = empty($this->bean->hat_framework_id)?"":$this->bean->hat_framework_id;
 		$current_module = $this->module;
@@ -27,8 +27,55 @@ class AOS_InvoicesViewEdit extends ViewEdit {
 			$bean_event_type = BeanFactory::getBean('HAT_EventType',$hat_eventtype_id_c);
 			$ff_id = $bean_event_type->haa_ff_id;
 		}
-
 		parent::display();
+		$html="";
+		if (isset($_GET["data"])) {
+            $cord_array=preg_split('/,/', $_GET["data"]);
+            foreach ($cord_array as $k => $v) {
+                $cord_array[$k]="'".$cord_array[$k]."'";
+            }
+            $str=implode(',', $cord_array);
+            $sql = "SELECT hr.haa_codes_id_c FROM aos_products_quotes pg left join haos_revenues_quotes hr on pg.parent_id=hr.id WHERE pg.id in(".$str.") AND pg.deleted = 0 and hr.deleted=0 group by hr.haa_codes_id_c ORDER BY pg.number ASC";
+            $result = $db->query($sql);
+            var_dump($sql);
+            $html .= "<script>
+                if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
+                </script>";
+            while ( $grow = $db->fetchByAssoc($result)) {//分组->组下的条目
+            	$group_item = 'null';
+                if ($grow['haa_codes_id_c'] != null) {
+                    $group_item = new HAA_codes();
+                    $group_item ->retrieve($grow['haa_codes_id_c']);
+                    $group_item=$group_item->toArray();
+                    $group_item['group_id']=$grow['haa_codes_id_c'];
+                    $group_item = json_encode($group_item);
+                }
+            	$sql="select pg.id from aos_products_quotes pg,haos_revenues_quotes hr WHERE pg.parent_id=hr.id and pg.deleted=0 and hr.deleted=0 and hr.haa_codes_id_c='".$grow['haa_codes_id_c']."' and pg.id in(".$str.")";
+            	$res = $db->query($sql);
+            	while ( $lrow = $db->fetchByAssoc($res)) {
+            		$line_item = new AOS_Products_Quotes();
+                	$line_item->retrieve($lrow['id']);
+                	$line_item=$line_item->toArray();
+                	$line_item['group_id']=$grow['haa_codes_id_c'];
+                	$line_item = json_encode($line_item);
+                	$html .= "<script>
+                        insertLineItems(" . $line_item . "," . $group_item . ");
+                    </script>";
+            	}
+            }
+            $cord=$_GET['cord'];
+            $cord_array=preg_split('/,/', $cord);
+            $accounts=BeanFactory::getBean('Accounts',$cord_array[1]);
+            $contacts=BeanFactory::getBean('Contacts',$cord_array[0]);
+            echo "<script>
+				document.getElementById('billing_account').value='".$accounts->name."';
+				document.getElementById('billing_account_id').value='".$cord_array[1]."';
+				document.getElementById('billing_contact').value='".$contacts->name."';
+				document.getElementById('billing_contact_id').value='".$cord_array[0]."';
+				document.getElementById('billing_contact_number').value='".$contacts->employee_number_c."';
+            </script>";
+            echo $html;
+        }
 		$ff_id_field = '<input id=haa_ff_id name=haa_ff_id type=hidden '.(isset($ff_id)?'value='.$ff_id:'').'>';
 		echo '<script>if($("#haa_ff_id").length==0) {  $("#EditView").append("'.$ff_id_field.'");}</script>';
 		//如果已经选择事件类型，无论是否事件类型对应的FlexForm有值，值将界面展开。

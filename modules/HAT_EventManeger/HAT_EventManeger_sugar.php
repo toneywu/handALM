@@ -85,6 +85,7 @@ class HAT_EventManeger_sugar extends Basic {
 	var $fine;
 	var $treatment_process;
 	var $treatment_status;
+	var $attribute1;
 	
 	function __construct(){
 		parent::__construct();

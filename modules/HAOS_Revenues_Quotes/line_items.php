@@ -2,8 +2,7 @@
 
 function display_lines($focus, $field, $value, $view){
 
-    global $sugar_config, $locale, $app_list_strings, $mod_strings;
-
+    global $sugar_config, $locale, $app_list_strings, $mod_strings,$db;
 
     $enable_groups = (int)$sugar_config['aos']['lineItems']['enableGroups'];
     $total_tax = (int)$sugar_config['aos']['lineItems']['totalTax'];
@@ -41,7 +40,6 @@ function display_lines($focus, $field, $value, $view){
         $line_item->retrieve($row['id']);      
     }
 }
-
 $line_item = json_encode($line_item->toArray());
 $html .= "<script>
 insertLineItems(" . $line_item . ");

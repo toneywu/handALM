@@ -48,10 +48,6 @@ array (
         2 => 
         array (
           0 => 'description',
-          1 => 
-          array (
-            'name' => 'hat_eventmaneger_haos_revenues_quotes_name',
-          ),
         ),
       ),
     ),
