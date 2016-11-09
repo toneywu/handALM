@@ -37,7 +37,7 @@ $sql = "				SELECT
 						  NULL mrtg_link,
 						  NULL access_assets_id,
 						  NULL access_assets_name,
-						  'OTHER_WOOP' source_ref,
+						  '' source_ref,
 						  NULL date_entered,
 						  NULL access_assets_backup_id,
 						  NULL access_assets_backup_name,

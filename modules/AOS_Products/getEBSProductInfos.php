@@ -69,7 +69,6 @@ if (curl_errno($soap_do)) {
 
 	$result_clob = $xml->getElementsByTagName("X_RESULT_CLOB")->item(0)->nodeValue;
 	$json_array = json_decode($result_clob, true);
-
 	$uomBean = BeanFactory :: getBean('HAA_UOM')->get_full_list('', "HAA_UOM.uom_code = 'EA'");
 	$uom_id = null;
 
@@ -79,9 +78,8 @@ if (curl_errno($soap_do)) {
 	$frame_bean = BeanFactory :: getBean('HAA_Frameworks')->retrieve_by_string_fields(array (
 		'code' => 'ChinaCache'
 	));
-
 	if ($result_clob != null) {
-		foreach ($json_array as $key => $record) {
+		foreach ($json_array as $key => $record) {	
 			foreach ($record as $record_key => $record_value) {
 
 				$product_code_val = $record['PRODUCT_CODE'];
@@ -90,12 +88,9 @@ if (curl_errno($soap_do)) {
 				$item_category_val = $record['ITEM_CATEGORY'];
 				$product_status_name_val = $record['PRODUCT_STATUS_NAME'];
 				$item_number_val = $record['ITEM_NUMBER'];
-
-				echo 'product_name = ' . $product_name_val . "<br>";
-				echo 'product_code = ' . $product_code_val . "<br>";
-				echo 'item_number = ' . $item_number_val . "<br>";
-
-				$check_product = BeanFactory :: getBean('AOS_Products')->get_full_list('', "aos_products.name = '{$product_code_val}'");
+				$parent_product = $record['PARENT_PRODUCT'];
+				echo 'Product_Name= ' . $product_name_val . "<br>".',product_code = ' . $product_code_val.',item_number = ' . $item_number_val;
+				$check_product = BeanFactory :: getBean('AOS_Products')->get_full_list('', "aos_products.part_number = '{$product_code_val}'");
 				//是否创建产品类别
 				if (count($check_product) == 0) {
 					$product_bean = BeanFactory :: newBean("AOS_Products");
@@ -108,9 +103,8 @@ if (curl_errno($soap_do)) {
 					$product_bean->data_source_code_c = 'EBS';
 					$product_bean->data_source_reference_c = 'PRO_PRODUCT_BASE_INFO';
 					$product_bean->data_source_id_c = $product_id_val;
-
+					$product_bean->description = $parent_product;
 					//*********
-
 					$check_product_category = BeanFactory :: getBean('AOS_Product_Categories')->get_full_list('', "aos_product_categories.name = '{$item_category_val}'");
 					//是否创建产品类别
 					if (count($check_product_category) == 0) {

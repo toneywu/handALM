@@ -86,7 +86,7 @@ if (curl_errno($soap_do)) {
 		$frame_contract_num_val = $record['FRAME_CONTRACT_NUM'];
 		echo "h_contract_header_id_val =" . $h_contract_header_id_val . "<br>";
 		//判断是否数据库是否已经存在这个合同 如果存在则不插入
-		$check_exists = BeanFactory :: getBean('AOS_Contracts')->get_full_list('', "aos_contracts.data_source_id_c = '$h_contract_header_id_val'");
+		$check_exists = BeanFactory :: getBean('AOS_Contracts')->get_full_list('', "aos_contracts_cstm.data_source_id_c = '$h_contract_header_id_val'");
 		if (count($check_exists) == 0) {
 			//系统中不存在才开始创建
 			$newBean = BeanFactory :: getBean('AOS_Contracts');

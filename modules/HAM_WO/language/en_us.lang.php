@@ -110,4 +110,5 @@ $mod_strings = array (
   'LBL_ATTRIBUTE6'=>'Extra Attribute6',
   'LBL_COMPLETE_BY_LAST_WOOP'=>'Work Order Complete With Last Work Operation',
   'LBL_BTN_WOOP_REJECT_BUTTON_LABEL'=>'Reject WO Operation',
+  'LBL_EDITVIEW_PANEL_DESC'=>'Additional information',
 );

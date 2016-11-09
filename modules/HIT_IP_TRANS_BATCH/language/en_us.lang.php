@@ -99,5 +99,5 @@ $mod_strings = array (
   'LBL_ATTRIBUTE5'=>'Extra Attribute5',
   'LBL_ATTRIBUTE6'=>'Extra Attribute6',
   'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL'=>'Change Status',
-  
+  'LBL_EDITVIEW_PANEL2'=>'Additional information',
 );
