@@ -134,6 +134,11 @@ array (
             'label' => 'LBL_REQUIRE_CONFIRMATION',
           ),
         ),
+        6=>
+        array(
+          0=>'check_customer_hold',
+          1=>''
+        )
       ),
       'lbl_editview_panel1' => 
       array (

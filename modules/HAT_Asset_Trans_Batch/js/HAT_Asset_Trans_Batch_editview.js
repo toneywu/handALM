@@ -28,19 +28,16 @@ function setEventTypePopupReturn(popupReplyData){
 	}
 
 	 call_ff();//调用FlexForm
+	 $("#asset_trans_status").change();
 }
 
 function setEventTypeFields() {
-	console.log('index.php?to_pdf=true&module=HAT_EventType&action=getTransSetting&id=' + $("#hat_eventtype_id").val())//e74a5e34-906f-0590-d914-57cbe0e5ae89
+	//console.log('index.php?to_pdf=true&module=HAT_EventType&action=getTransSetting&id=' + $("#hat_eventtype_id").val())//e74a5e34-906f-0590-d914-57cbe0e5ae89
 	$.ajax({//
 		url: 'index.php?to_pdf=true&module=HAT_EventType&action=getTransSetting&id=' + $("#hat_eventtype_id").val(),//e74a5e34-906f-0590-d914-57cbe0e5ae89
 		async: false,
 		success: function (data) {
 			$("#eventOptions").val(data);
-			//console.log(jQuery.parseJSON($("#eventOptions").val()));
-/*			for(var i in obj) {
-				$("#"+i).val(obj[i]);//向隐藏的字段中复制值，从而所有的EventType值都会提供到隐藏的字段中
-			}*/
 			resetEventType();
 			if($("#haa_ff_id").val()==""){
 				$("#haa_ff_id").val(jQuery.parseJSON(data).haa_ff_id);
@@ -284,3 +281,35 @@ $(document).ready(function(){
     }
 
 });
+
+//提交时做客户的信息检查，如果当前客户有值，并且头状态为提交，则进行信息检查
+$("#asset_trans_status").change(function(){
+	//注意：这里只对头上的做了验证，没有去验证行
+
+	if($("#eventOptions").val()=="") {
+		return
+	}
+
+	var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());
+	//if (global_eventOptions.change_owning_org == "REQUIRED"){
+
+	console.log("checking");
+	if ($("#target_using_org_id").val()!="" && $(this).children('option:selected').val()=="SUBMITTED") {
+
+		console.log('index.php?to_pdf=true&module=HAA_FF&action=validateField&mode=accounthold&id=' + $("#target_using_org_id").val())
+		$.ajax({//
+			url: 'index.php?to_pdf=true&module=HAA_FF&action=validateField&mode=accounthold&id=' + $("#target_using_org_id").val(),
+			async: false,
+			success: function (data) {
+				clear_all_errors();
+				if (data=='0') {
+					add_error_style('EditView','asset_trans_status',SUGAR.language.get('app_strings', 'LBL_CUSTOMER_HOLD_ERR'));
+				}
+			},//end sucess
+			error: function () { //失败
+				alert('Error loading AJAX for status check');
+			}//end error
+		});//end ajax
+
+	}//end if
+})//end onChange function

@@ -181,10 +181,27 @@ function addNewAssetLine(){
 			"form_name" : "EditView",
 			"field_to_name_array" : {
 	}};
-  var target_owning_org_id = $("#target_using_org_id").val();
-  var popupFilter = '&using_org_id_advanced='+target_owning_org_id+'&enable_it_rack_advanced=1';
-  open_popup('HAT_Assets', 1200, 850,popupFilter, true, true, popupRequestData, "MultiSelect", true);
 
+  var eventOptions = $("#eventOptions").val()!=""?jQuery.parseJSON($("#eventOptions").val()):"";
+  //console.log(eventOptions);
+  var popupFilter=""
+  if (eventOptions!="") {
+    if (eventOptions.default_asset_list=="USING_ORG") {
+        popupFilter += '&using_org_id_advanced='+ $("#target_using_org_id").val();
+    } else if  (eventOptions.default_asset_list=="WO_ASSET_TRANS") {
+        popupFilter += '&asset_wo_id='+ $("#source_wo_id").val();
+    } else if  (eventOptions.default_asset_list=="WO_IP_TRANS") {
+        popupFilter += '&ip_wo_id='+ $("#source_wo_id").val();
+    }
+
+    if (eventOptions.asset_scope=="RACK") {
+        popupFilter += '&enable_it_rack_advanced=1';
+    } else if (eventOptions.asset_scope=="IT") {
+        popupFilter += '&enable_it_ports=1';
+    }
+
+      open_popup('HAT_Assets', 1200, 850,popupFilter, true, true, popupRequestData, "MultiSelect", true);
+  }
 }
 
 
@@ -556,7 +573,7 @@ function LineDescElement(prefix_name,target_obj_name, current_obj_name, obj_labe
                               })[0].value;
 	}
 
-  console.log( current_obj_val+", "+target_obj_val+", "+target_objval_name+", "+current_objval_name);
+  //console.log( current_obj_val+", "+target_obj_val+", "+target_objval_name+", "+current_objval_name);
   if (typeof current_obj_name != 'undefined' && current_obj_name!="") {
     //如果当前值不为空
     //将显示为XXX字段由XXX变更为XXX

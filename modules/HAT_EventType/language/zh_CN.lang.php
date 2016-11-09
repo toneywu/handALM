@@ -122,7 +122,9 @@ $mod_strings = array (
   'LBL_CHANGE_ASSET_DATE_START'=>'可修改资产占用起始时间',
   'LBL_CHANGE_ASSET_DATE_END'=>'可修改资产占用终止时间',
   'LBL_CHANGE_ENABLE_ACTION'=>'可修改失效',
-  
   'LBL_NEED_LIMIT_TRANSACTION_LINES'=>'仅显示指定组织历史记录',
   'LBL_CHANGE_BROADBAND_TYPE'=>'可修改带宽变量',
+  'LBL_CHECK_CUSTOMER_HOLD'=>'检查客暂挂',
+  'LBL_EDITVIEW_PANEL1'=>'状态变化',
+  'LBL_EDITVIEW_PANEL2'=>'管理与位置跟踪'
 );

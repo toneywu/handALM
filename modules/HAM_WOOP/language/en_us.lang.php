@@ -73,4 +73,8 @@ $mod_strings = array (
   'LBL_TAKE_OWNERSHIP'=>'Take it',
   'LBL_EVENT_TYPE'=>'Event Type',
   'LBL_CONTRACT'=>'Contract',
+  'LBL_WO_NUMBER'=>'WO#',
+  'LBL_EDITVIEW_PANEL1'=>'Schedule Information',
+  'LBL_EDITVIEW_PANEL2'=>'Related Operation',
+  'LBL_EDITVIEW_PANEL3'=>'Next Task',  
 );
