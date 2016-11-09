@@ -1039,7 +1039,7 @@ $dictionary['HAOS_Revenues_Quotes'] = array(
         array(
             'name' => 'display_lines',
             'returns' => 'html',
-            'include' => 'modules/HAOS_revenues_quotes/line_items.php'
+            'include' => 'modules/HAOS_Revenues_Quotes/line_items.php'
             ),
         ),
       ),

@@ -72,7 +72,7 @@ else if($view == 'DetailView'){
     $line_item->retrieve($row['id']);
     $html .="<tr>";
     $html .="<td scope='col' width='12.5%'>".$mod_strings['LBL_LINE_ITEM_TYPE'].":</td>
-    <td width='37.5%'>".$line_item->line_item_type."</td>
+    <td width='37.5%'>".$app_list_strings['haos_line_item_type_list'][$line_item->line_item_type_c]."</td>
     <td scope='col' width='12.5%'>".$mod_strings['LBL_PART_NUMBER'].":</td>
     <td width='37.5%'>".$line_item->part_number."</td>";
     $html .="</tr>";

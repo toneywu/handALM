@@ -300,10 +300,9 @@ array (
             'name' => 'account_name',
             'studio' => 'visible',
             'label' => 'LBL_ACCOUNT_NAME',
-<<<<<<< HEAD
-=======
+// HEAD 8b6be0cfc8e81f021f761923dcec1dc838c0f7e5
             'displayParams'=>array('required'=>false),
->>>>>>> 8b6be0cfc8e81f021f761923dcec1dc838c0f7e5
+
             ),
           1 => 
           array (
