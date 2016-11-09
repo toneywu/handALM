@@ -300,7 +300,13 @@ array (
             'name' => 'account_name',
             'studio' => 'visible',
             'label' => 'LBL_ACCOUNT_NAME',
-           'displayParams'=>array('required'=>false),
+            'displayParams'=>array(
+              'field_to_name_array' => 
+              array (
+                'id' => 'account_id_c',
+                'name' => 'account_name',
+                ),
+              'required'=>false),
             ),
           1 => 
           array (

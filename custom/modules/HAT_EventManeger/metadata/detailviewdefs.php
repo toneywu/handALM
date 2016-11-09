@@ -74,7 +74,6 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_EVENT_NUMBER',
             ),
-          1 => '',
           ),
         1 => 
         array (
@@ -238,19 +237,19 @@ array (
       array (
         0 => 
         array (
-          0 => 
-          array (
-            'name' => 'revenue_quote_number',
-            'studio' => 'visible',
-            'label' => 'LBL_REVENUE_QUOTE_NUMBER',
-            ),
-          1 => 
-          array (
-            'name' => 'clear_status',
-            'studio' => 'visible',
-            'label' => 'LBL_CLEAR_STATUS',
-            ),
+         0 => 
+         array (
+          'name' => 'revenue_quote_number',
+          'studio' => 'visible',
+          'label' => 'LBL_REVENUE_QUOTE_NUMBER',
           ),
+         1 => 
+         array (
+          'name' => 'clear_status',
+          'studio' => 'visible',
+          'label' => 'LBL_CLEAR_STATUS',
+          ),
+         ),
         1 => 
         array (
           0 => 

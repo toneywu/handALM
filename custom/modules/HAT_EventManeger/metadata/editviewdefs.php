@@ -86,7 +86,6 @@ array (
             'label' => 'LBL_EVENT_NUMBER',
             'customCode' => '{$fields.event_number.value}',
             ),
-          1 => '',
           ),
         ),
       'lbl_editview_panel3' => 
@@ -258,21 +257,21 @@ array (
 array (
   0 => 
   array (
-    0 => 
-    array (
-      'name' => 'revenue_quote_number',
-      'studio' => 'visible',
-      'label' => 'LBL_REVENUE_QUOTE_NUMBER',
-      'customCode' => '<input type="text" readonly="readonly" name="revenue_quote_number" id="revenue_quote_number" value="{$fields.revenue_quote_number.value}">',
-      ),
-    1 => 
-    array (
-      'name' => 'clear_status',
-      'studio' => 'visible',
-      'label' => 'LBL_CLEAR_STATUS',
-      'customCode' => '<input type="text" readonly="readonly" name="clear_status" id="clear_status" value="{$fields.clear_status.value}">',
-      ),
+   0 => 
+   array (
+    'name' => 'revenue_quote_number',
+    'studio' => 'visible',
+    'label' => 'LBL_REVENUE_QUOTE_NUMBER',
+    'customCode' => '<input type="text" readonly="readonly" name="revenue_quote_number" id="revenue_quote_number" value="{$fields.revenue_quote_number.value}">',
     ),
+   1 => 
+   array (
+    'name' => 'clear_status',
+    'studio' => 'visible',
+    'label' => 'LBL_CLEAR_STATUS',
+    'customCode' => '<input type="text" readonly="readonly" name="clear_status" id="clear_status" value="{$fields.clear_status.value}">',
+    ),
+   ),
   1 => 
   array (
     0 => 

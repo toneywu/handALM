@@ -47,6 +47,7 @@ $rawRow['clear_status'] = 'Unclear';
 $rawRow['event_date'] = date_format(date_create($event->event_date),"Y-m-d") ;
 $rawRow['source_code'] = 'Others';
 $rawRow['source_id'] = $event->id;
+
 $rawRow['source_reference'] =  $event->event_number;
 $rawRow['contract_number'] = $event->person_number;
 $rawRow['contact_id_c'] = $event->contact_id_c;
@@ -60,6 +61,21 @@ $bean_codes = BeanFactory :: getBean('HAA_Codes')->retrieve_by_string_fields(arr
 if ($bean_codes) { 
 	$rawRow['haa_codes_id_c']= isset($bean_codes->id)?$bean_codes->id:'';
 }
+
+$bean_types = BeanFactory :: getBean('HAT_EventType')->retrieve_by_string_fields(array (
+	'name' => $event->event_type,
+	'basic_type' => 'REVENUE'
+	));
+if ($bean_types) { 
+	$rawRow['hat_eventtype_id_c']= isset($bean_types->id)?$bean_types->id:'';
+	$rawRow['event_type'] = $event->event_type;
+}
+else{
+	$rawRow['event_type'] = '';
+	$rawRow['hat_eventtype_id_c']= '';
+}
+
+
 $rawRow['expense_group'] = $event->event_type;
 
 
