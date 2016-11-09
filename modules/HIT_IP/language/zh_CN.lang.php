@@ -76,5 +76,5 @@ $mod_strings = array (
   'LBL_IP_C_BM' => 'IP C BM',
   'LBL_IP_USAGE' => 'IP Usage',
   'LBL_LOCATION'=>'位置',
-
+  'LBL_EDITVIEW_PANEL_DESC'=>'附加信息',
 );

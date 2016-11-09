@@ -3,7 +3,6 @@ $username = "sysadmin";
 $password = "welcome8";
 $startdate = "2015-05-06";
 $enddate = "2016-07-26";
-echo "mdf password = " . md5($password);
 $postAllString = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
 					    <soap:Header xmlns:ns1="http://xmlns.oracle.com/apps/cux/soaprovider/plsql/cux_ws_eam_basic_info_pkg/">
 					        <ns1:SOAHeader>
@@ -17,7 +16,7 @@ $postAllString = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/env
 					    <soap:Body xmlns:ns2="http://xmlns.oracle.com/apps/cux/soaprovider/plsql/cux_ws_eam_basic_info_pkg/get_basic_info/">
 					        <ns2:InputParameters>
 					            <ns2:P_START_DATE>2016-05-01</ns2:P_START_DATE>
-					            <ns2:P_END_DATE>2016-09-01</ns2:P_END_DATE>
+					            <ns2:P_END_DATE>2016-12-31</ns2:P_END_DATE>
 					            <ns2:P_TYPE_CODE>CUSTOMER</ns2:P_TYPE_CODE>
 					        </ns2:InputParameters>
 					    </soap:Body>
@@ -89,8 +88,8 @@ if (curl_errno($soap_do)) {
 		echo 'customer_name= ' . $customer_name_val . "<br>";
 		echo 'product_code = ' . $product_code_val . "<br>";
 
-		$check_customer = BeanFactory :: getBean('Accounts')->get_full_list('', "accounts_cstm.full_name_c = '".$customer_name_val."'");
-
+		$check_customer = BeanFactory :: getBean('Accounts')->get_full_list('', "accounts_cstm.organization_number_c = '".$customer_id_val."'");
+		echo "custom_id_val = ".$customer_id_val."<br>";
 		//是否创建客户
 		if (count($check_customer) == 0) {
 			$customer_bean = BeanFactory :: newBean("Accounts");
@@ -163,6 +162,19 @@ if (curl_errno($soap_do)) {
 			$customer_bean->haa_frameworks_id_c = $frame_bean->id;
 			$customer_bean->save();
 
+		}else{
+		   
+			echo 'New Account ='.$customer_name_val.",customer_id = ".$check_customer[0]->id."<br>";
+			$find_curstomer_id=$check_customer[0]->id;
+			$customer_bean = BeanFactory :: getBean("Accounts",$find_curstomer_id);
+			// ERP别名设置给组织简称
+			if(!empty($known_as_val)){
+				$customer_bean->name = $known_as_val;
+			}else{
+				
+				$customer_bean->name = $customer_name_val;
+			}
+			$customer_bean->save();
 		}
 	}
 }

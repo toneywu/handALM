@@ -122,8 +122,12 @@ array (
         6=>
         array(
           0=>'check_customer_hold',
-          1=>''
-        )
+          1=> 
+          array (
+            'name' => 'need_limit_transaction_lines',
+            'label' => 'LBL_NEED_LIMIT_TRANSACTION_LINES',
+          ),
+        ),
       ),
       'lbl_editview_panel1' => 
       array (
@@ -181,7 +185,12 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_CHANGE_ORANIZATION_LE',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'change_location_desc',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_LOCATION_DESC',
+          ),
         ),
         2 => 
         array (
@@ -361,6 +370,16 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_CHANGE_ENABLE_ACTION',
           ),
+        ),
+        12 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_broadband_type',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_BROADBAND_TYPE',
+          ),
+          1 => '',
         ),
       ),
     ),
