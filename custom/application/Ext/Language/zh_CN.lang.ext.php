@@ -793,28 +793,9 @@ $app_list_strings['ham_work_orders_resolution_dom']['Invalid'] = '无效';
  ********************************************************************************/
 
 
-
 $app_list_strings['moduleList']['HPR_AM_Users'] = '资产管理用户';
 $app_list_strings['moduleList']['HPR_AM_Catelog'] = '资产目录';
 $app_list_strings['moduleList']['HPR_AM_Roles'] = '资产管理角色';
-$app_list_strings['moduleList']['HAT_EventManeger'] = '事件管理';
-$app_list_strings['moduleList']['HAT_EventType'] = 'Event Type';
-$app_list_strings['cux_map_type_list']['TENCENT'] = 'Tencent Map';
-$app_list_strings['cux_map_type_list']['GPS'] = 'Std.GPS';
-$app_list_strings['cux_event_type_list']['AT_MOVE'] = 'MOVE';
-$app_list_strings['asset_status_list'][''] = '';
-$app_list_strings['asset_status_list']['Ordered'] = 'Ordered';
-$app_list_strings['asset_status_list']['InService'] = 'In-Service';
-$app_list_strings['asset_status_list']['Idle'] = 'Idle';
-$app_list_strings['asset_status_list']['LentOut'] = 'Lent-Out';
-$app_list_strings['asset_status_list']['OutOfService'] = 'Out-of-Service';
-$app_list_strings['asset_status_list']['Received'] = 'Received';
-$app_list_strings['cux_event_type_option_list']['LOCKED'] = 'Locked/Not Available';
-$app_list_strings['cux_event_type_option_list']['REQUIRED'] = 'Required';
-$app_list_strings['cux_event_type_option_list']['OPTIONAL'] = 'Optional';
-$app_list_strings['hat_treatment_status_list']['InProcess'] = '处理中';
-$app_list_strings['hat_treatment_status_list']['New'] = '未处理';
-$app_list_strings['hat_treatment_status_list']['Completed'] = '已处理';
 
 
 /*********************************************************************************

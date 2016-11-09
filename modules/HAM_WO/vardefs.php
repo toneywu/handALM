@@ -602,8 +602,6 @@ $dictionary['HAM_WO'] = array (
 			'enable_range_search' => false,
 			'dbType' => 'datetime',
 			// 'display_default' => 'now&12:00am',
-
-	
 		),
 		'wo_status' => array (
 			'required' => true,

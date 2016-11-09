@@ -6,12 +6,12 @@ array (
   array (
     'type' => 'varchar',
     'label' => 'LBL_WO_NUMBER',
-    'width' => '10%',
+    'width' => '8%',
     'default' => true,
   ),
   'NAME' => 
   array (
-    'width' => '32%',
+    'width' => '20%',
     'label' => 'LBL_NAME',
     'default' => true,
     'link' => true,
@@ -21,21 +21,21 @@ array (
     'type' => 'enum',
     'studio' => 'visible',
     'label' => 'LBL_WO_STATUS',
-    'width' => '10%',
+    'width' => '7%',
     'default' => true,
    'customCode'=>'<span class="color_tag color_doc_status_{$WO_STATUS_VAL}">{$WO_STATUS}</span>',
   ),
-  'LOCATION' => 
+  'WO_WORK_OBJECT' => 
   array (
-    'type' => 'relate',
+    'type' => 'varchar',
     'studio' => 'visible',
-    'label' => 'LBL_LOCATION',
-    'id' => 'HAT_ASSET_LOCATIONS_ID',
-    'link' => true,
+    'label' => 'LBL_WO_WORK_OBJECT',
+    'link' => false,
     'width' => '10%',
     'default' => true,
+    'customCode'=>'{$WO_WORK_OBJECT}',
   ),
-  'ASSET' => 
+/*  'ASSET' => 
   array (
     'type' => 'relate',
     'studio' => 'visible',
@@ -44,14 +44,14 @@ array (
     'link' => true,
     'width' => '10%',
     'default' => true,
-  ),
+  ),*/
   'PRIORITY' => 
   array (
     'type' => 'relate',
     'studio' => 'visible',
     'label' => 'LBL_PRIORITY',
     'id' => 'HAM_PRIORITY_ID',
-    'link' => true,
+    'link' => false,
     'width' => '10%',
     'default' => true,
   ),
@@ -69,6 +69,16 @@ array (
     'width' => '10%',
     'default' => true,
   ),
+  'WO_OWNER' => 
+  array (
+    'type' => 'varchar',
+    'studio' => 'visible',
+    'label' => 'WO_OWNER',
+    'link' => false,
+    'width' => '10%',
+    'default' => true,
+    'customCode'=>'{$WO_OWNER}',
+  ),
   'SITE' => 
   array (
     'type' => 'relate',
@@ -78,6 +88,7 @@ array (
     'link' => true,
     'width' => '10%',
     'default' => true,
+    'link' => false,
   ),
   'ASSIGNED_USER_NAME' => 
   array (

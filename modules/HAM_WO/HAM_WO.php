@@ -285,12 +285,64 @@ class HAM_WO extends HAM_WO_sugar {
 	function get_list_view_data() {
 		//refer to the task module as an example
 		//or refer to the asset module as the first customzation module with this feature
-		global $app_list_strings, $timedate;
+		global $app_list_strings, $timedate, $db;
 
 		$WO_fields = $this->get_list_view_array();
 		//为工作单的状态着色
 		if (!empty ($this->wo_status))
 			$WO_fields['WO_STATUS_VAL'] = $this->wo_status;
+
+		
+
+		$sel = "SELECT 
+				  accounts.`name` account_name,
+				  accounts.id account_id,
+				   hat_asset_locations.name location_name,
+				   hat_asset_locations.id location_id,
+				   hat_assets.name asset_name,
+				   hat_assets.id asset_id,
+				   ham_work_centers.name work_center_name,
+				   ham_work_centers.id work_center_id,
+				   ham_work_center_people.`name` work_center_people_name,
+				   ham_work_center_people.id work_center_people_id
+				FROM
+				  ham_wo 
+				  LEFT JOIN accounts 
+				    ON ham_wo.`account_id` = accounts.`id` 
+				  LEFT JOIN hat_asset_locations 
+				    ON hat_asset_locations.id = ham_wo.`hat_asset_locations_id` 
+				  LEFT JOIN hat_assets 
+				    ON hat_assets.id = ham_wo.`hat_assets_id` 
+				  LEFT JOIN ham_work_centers
+				    ON ham_work_centers.id = ham_wo.`work_center_id`
+				  LEFT JOIN ham_work_center_people
+				  ON ham_work_center_people.id = ham_wo.`work_center_people_id`
+				WHERE ham_wo.id ='".$this->id."'";
+
+		$beanSEL = $db->query($sel); //无如是Location还是asset来源，都可以显示子资产
+
+		$WO_WORK_OBJECT = "";
+		$WO_OWNER = "";
+	    while ( $result = $db->fetchByAssoc($beanSEL) ) {
+	    	if (!empty ($result['account_name']))
+				$WO_WORK_OBJECT .= '<a href="index.php?module=Accounts&action=DetailView&record='.$result['account_id'].'">'
+									.$result['account_name'].'</a> ';
+
+			if (!empty ($result['location_name']))
+				$WO_WORK_OBJECT .= "@".'<a href="index.php?module=HAT_Asset_Locations&action=DetailView&record='.$result['location_id'].'">'.$result['location_name']." ";
+
+			if (!empty ($result['asset_name']))
+				$WO_WORK_OBJECT .= "[".'<a href="index.php?module=HAT_Assets&action=DetailView&record='.$result['asset_id'].'">'.$result['asset_name']."]";
+		
+			if (!empty ($result['work_center_people_name']))
+				$WO_OWNER .= $result['work_center_people_name'];
+			if (!empty ($result['work_center_name']))
+				$WO_OWNER .= "@".$result['work_center_name'];
+		}
+		$WO_fields['WO_WORK_OBJECT'] = $WO_WORK_OBJECT;
+		$WO_fields['WO_OWNER'] = $WO_OWNER;
+
+
 
 		return $WO_fields;
 	}

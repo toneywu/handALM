@@ -119,5 +119,9 @@ $mod_strings = array (
   'LBL_ATTRIBUTE5'=>'属性记录 5',
   'LBL_ATTRIBUTE6'=>'属性记录 6',
   'LBL_BTN_WOOP_REJECT_BUTTON_LABEL'=>'工序回退',
-  'LBL_EDITVIEW_PANEL_DESC'=>'附加属性'
+  'LBL_EDITVIEW_PANEL_DESC'=>'附加属性',
+  'LBL_WO_WORK_OBJECT'=>'工作对象',
+  'LBL_EDITVIEW_PANEL_CONTRL'=>'工作职责及权限控制',
+    'WO_OWNER'=>'负责人',
+
 );

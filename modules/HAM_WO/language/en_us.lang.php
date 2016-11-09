@@ -112,4 +112,7 @@ $mod_strings = array (
   'LBL_BTN_WOOP_REJECT_BUTTON_LABEL'=>'Task Rework',
   'LBL_BTN_WOOP_REJECT_BUTTON_LABEL'=>'Reject WO Operation',
   'LBL_EDITVIEW_PANEL_DESC'=>'Additional information',
+  'LBL_WO_WORK_OBJECT'=>'Work with',
+  'LBL_EDITVIEW_PANEL_CONTRL'=>'Responsibility and Control',
+
 );
