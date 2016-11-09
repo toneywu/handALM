@@ -581,7 +581,7 @@ $dictionary['HAT_EventType'] = array (
 		),
 		'check_customer_hold' => array (
 			'required' => false,
-			'name' => 'check_custom_hold',
+			'name' => 'check_customer_hold',
 			'vname' => 'LBL_CHECK_CUSTOMER_HOLD',
 			'type' => 'bool',
 			'massupdate' => 0,
@@ -593,12 +593,11 @@ $dictionary['HAT_EventType'] = array (
 			'duplicate_merge' => 'disabled',
 			'duplicate_merge_dom_value' => '0',
 			'audited' => false,
-			'inline_edit' => true,
+			'inline_edit' => false,
 			'reportable' => true,
 			'unified_search' => false,
 			'merge_filter' => 'disabled',
 			//'options' => 'dom_int_bool',
-	
 		),		
 		'change_target_status' => array (
 			'required' => false,

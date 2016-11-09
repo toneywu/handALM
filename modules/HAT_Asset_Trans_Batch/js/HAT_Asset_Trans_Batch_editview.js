@@ -28,7 +28,7 @@ function setEventTypePopupReturn(popupReplyData){
 	}
 
 	 call_ff();//调用FlexForm
-	 $("#asset_trans_status").change();
+
 }
 
 function setEventTypeFields() {
@@ -82,6 +82,8 @@ function resetEventType() {
 	//处理头字段
 	//依据事件类型，确认是否需要变化所属组织
 	//
+	 $("#asset_trans_status").change();
+
 	var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());
 
 	if (global_eventOptions.change_owning_org == "REQUIRED"){
@@ -280,36 +282,37 @@ $(document).ready(function(){
 		$("#wo_lines").parent("td").prev("td").hide();
     }
 
-});
 
-//提交时做客户的信息检查，如果当前客户有值，并且头状态为提交，则进行信息检查
-$("#asset_trans_status").change(function(){
-	//注意：这里只对头上的做了验证，没有去验证行
+	//提交时做客户的信息检查，如果当前客户有值，并且头状态为提交，则进行信息检查
+	$("#asset_trans_status").change(function(){
+		//注意：这里只对头上的做了验证，没有去验证行
+			if($("#eventOptions").val()=="") {
+				return
+			}
+		
+		var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());
 
-	if($("#eventOptions").val()=="") {
-		return
-	}
 
-	var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());
-	//if (global_eventOptions.change_owning_org == "REQUIRED"){
+		if (global_eventOptions.check_customer_hold == "1"){
+			console.log("checking");
+			if ($("#source_wo_id").val()!="" && $(this).children('option:selected').val()=="SUBMITTED") {
 
-	console.log("checking");
-	if ($("#target_using_org_id").val()!="" && $(this).children('option:selected').val()=="SUBMITTED") {
-
-		console.log('index.php?to_pdf=true&module=HAA_FF&action=validateField&mode=accounthold&id=' + $("#target_using_org_id").val())
-		$.ajax({//
-			url: 'index.php?to_pdf=true&module=HAA_FF&action=validateField&mode=accounthold&id=' + $("#target_using_org_id").val(),
-			async: false,
-			success: function (data) {
-				clear_all_errors();
-				if (data=='0') {
-					add_error_style('EditView','asset_trans_status',SUGAR.language.get('app_strings', 'LBL_CUSTOMER_HOLD_ERR'));
-				}
-			},//end sucess
-			error: function () { //失败
-				alert('Error loading AJAX for status check');
-			}//end error
-		});//end ajax
-
-	}//end if
-})//end onChange function
+				console.log('index.php?to_pdf=true&module=HAA_FF&action=validateField&mode=woaccounthold&id=' + $("#source_wo_id").val())
+				$.ajax({//
+					url: 'index.php?to_pdf=true&module=HAA_FF&action=validateField&mode=woaccounthold&id=' + $("#source_wo_id").val(),
+					async: false,
+					success: function (data) {
+						console.log("checked result="+data);
+						clear_all_errors();
+						if (data=='0') {
+							add_error_style('EditView','asset_trans_status',SUGAR.language.get('app_strings', 'LBL_CUSTOMER_HOLD_ERR'));
+						}
+					},//end sucess
+					error: function () { //失败
+						alert('Error loading AJAX for status check');
+					}//end error
+				});//end ajax
+			}//end if
+		}
+	})//end onChange function
+})
