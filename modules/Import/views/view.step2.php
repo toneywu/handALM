@@ -59,7 +59,6 @@ class ImportViewStep2 extends ImportView
  	public function display()
     {
         global $mod_strings, $app_list_strings, $app_strings, $current_user, $import_bean_map, $import_mod_strings;
-
         $this->instruction = 'LBL_SELECT_UPLOAD_INSTRUCTION';
         $this->ss->assign('INSTRUCTION', $this->getInstruction());
 
@@ -94,7 +93,7 @@ class ImportViewStep2 extends ImportView
 
         $import_map_seed = new ImportMap();
         $custom_imports_arr = $import_map_seed->retrieve_all_by_string_fields( array('assigned_user_id' => $current_user->id, 'is_published' => 'no','module' => $_REQUEST['import_module']));
-
+		
         if( count($custom_imports_arr) )
         {
             $custom = array();
@@ -103,6 +102,7 @@ class ImportViewStep2 extends ImportView
                 $custom[] = array( "IMPORT_NAME" => $import->name,"IMPORT_ID"   => $import->id);
             }
             $this->ss->assign('custom_imports',$custom);
+			
         }
 
         // get globally defined import maps
@@ -135,6 +135,7 @@ class ImportViewStep2 extends ImportView
         $content = $this->ss->fetch('modules/Import/tpls/step2.tpl');
         $this->ss->assign("CONTENT",$content);
         $this->ss->display('modules/Import/tpls/wizardWrapper.tpl');
+		
     }
 
     /**

@@ -1,13 +1,13 @@
 <?php
 // created: 2016-10-19 15:17:21
 $subpanel_layout['list_fields'] = array (
-  'name' => 
+  /*'name' => 
   array (
     'vname' => 'LBL_NAME',
     'widget_class' => 'SubPanelDetailViewLink',
     'width' => '15%',
     'default' => true,
-  ),
+  ),*/
   'hit_ip_subnets' => 
   array (
     'type' => 'relate',
@@ -56,7 +56,7 @@ $subpanel_layout['list_fields'] = array (
     'width' => '10%',
     'default' => true,
   ),
-  'edit_button' => 
+  /*'edit_button' => 
   array (
     'vname' => 'LBL_EDIT_BUTTON',
     'widget_class' => 'SubPanelEditButton',
@@ -71,5 +71,5 @@ $subpanel_layout['list_fields'] = array (
     'module' => 'HIT_IP_Allocations',
     'width' => '5%',
     'default' => true,
-  ),
+  ),*/
 );
