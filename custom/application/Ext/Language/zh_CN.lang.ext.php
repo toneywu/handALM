@@ -811,13 +811,6 @@ $app_list_strings['hat_treatment_status_list']['Completed'] = '已处理';
 
 
 $app_list_strings['moduleList']['HAOS_Revenues_Quotes'] = '收支计费项';
-$app_list_strings['haos_source_code_list']['AOS_Contracts'] = '合同';
-$app_list_strings['haos_source_code_list']['Manual'] = '手工';
-$app_list_strings['haos_source_code_list']['Excel'] = 'Excel导入';
-$app_list_strings['haos_source_code_list']['Others'] = '其他事件';
-$app_list_strings['haos_source_code_list']['Ref_System'] = '外围系统';
-$app_list_strings['haos_revenue_clear_status_list']['Unclear'] = '未结算';
-$app_list_strings['haos_revenue_clear_status_list']['Cleared'] = '已结算';
 
 
 /*********************************************************************************

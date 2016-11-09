@@ -89,46 +89,23 @@ function setFF(FFObj) {
 		//TODO:
 		//这里的处理逻辑没有写完，因为判断的逻辑比较复杂。先要判断当前字段是否为必须，然后需要继续当前是否有变化来进行处理
 		//并且处理包括在样式上打上*的标记或去除，以及在字段验证上进行处理
-		if (FFObj.att_required == 0) {
+/*		if (FFObj.att_required == 0) {
 			//非必须
-			$("#"+FFObj.field+'_label').children().remove(".required");
 		} else {
 			//必须
 			$("#"+FFObj.field+'_label').append('<span class="required">*</span>');
+			//这个逻辑没有写完，没有这么简单
 		}
-
+*/
 		//TODO还需要添加字段为值列表、Checkbox等一系列形态
 
 		//设定默认值
-		if (FFObj.default_val!=null&&FFObj.default_val!="") {
+		if (FFObj.default_val!=null) {
 			var thisObj = $("#"+FFObj.field);
 			$("#"+FFObj.field+":checkbox").attr('checked',(FFObj.default_val=='1'?'true':'false')); //针对Checkbox
 			thisObj.val(FFObj.default_val);//针对其它input以及select对象
 			$("#"+FFObj.field).trigger('change');//触发设置了默认值之后的chanage事件
 		}
-	}
-}
-//重写check_form方法
-function check_form(formname){
-	if(typeof(siw)!='undefined'&&siw&&typeof(siw.selectingSomething)!='undefined'&&siw.selectingSomething)
-		return false;
-	else{
-		var flag=false;
-		$(".required").each(function(){
-			//获取label的ID
-			var label_id=$(this).parent().attr("id");
-			//按照_label截取为数组,取第一个,即为字段ID
-			var field_id=label_id.split("_label")[0];
-			var field_label=$(this).parent().text().replace("*","");
-			field_label=field_label.replace(":","");
-			if($("#"+field_id).val()==""){//文本域input、textarea
-				//获取字段对应文本框的ID
-				add_error_style('EditView', field_id, SUGAR.language.get('app_strings', 'ERR_MISSING_REQUIRED_FIELDS')+":"+field_label);
-				flag=true;
-			}
-		});
-		if(!flag)
-			return validate_form(formname,'');
 	}
 }
 
