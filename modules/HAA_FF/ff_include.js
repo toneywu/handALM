@@ -116,14 +116,21 @@ function check_form(formname){
 		var flag=false;
 		$(".required").each(function(){
 			//获取label的ID
-			var label_id=$(this).parent().attr("id");
+			var label_id="";
+			if($(this).parent().attr("id")){
+				label_id=$(this).parent().attr("id");
+			}
 			//按照_label截取为数组,取第一个,即为字段ID
-			var field_id=label_id.split("_label")[0];
+			var array=label_id.split("_label");
+			var field_id=array[0];
+			if (array[1]!="") {
+				field_id+=array[1];
+			}
 			var field_label=$(this).parent().text().replace("*","");
 			field_label=field_label.replace(":","");
 			if($("#"+field_id).val()==""){//文本域input、textarea
 				//获取字段对应文本框的ID
-				add_error_style('EditView', field_id, SUGAR.language.get('app_strings', 'ERR_MISSING_REQUIRED_FIELDS')+":"+field_label);
+				add_error_style('EditView', field_id, SUGAR.language.get('app_strings', 'ERR_MISSING_REQUIRED_FIELDS')+field_label);
 				flag=true;
 			}
 		});

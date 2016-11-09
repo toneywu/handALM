@@ -73,6 +73,7 @@
 
     var a = x.insertCell(0);
     a.width ="12.5%";
+    a.id="product_line_item_type_c_label"+prodln;
     a.innerHTML = SUGAR.language.get(module_sugar_grp1, 'LBL_LINE_ITEM_TYPE')+"<span class='required'>&nbsp*</span>";
 
     var b =x.insertCell(1);
@@ -81,7 +82,8 @@
 
     var g = x.insertCell(2);
     g.width="12.5%";
-    g.innerHTML = "<span id='qty_label"+prodln+"'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_QTY')+"</span>";
+    g.id="product_product_qty_label"+prodln;
+    g.innerHTML = SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_QTY');
 
     var h = x.insertCell(3);
     h.width ="37.5%";
@@ -129,7 +131,8 @@
     var y = tablebody.insertRow(-1);
 
     var c = y.insertCell(0);
-    c.innerHTML = "<span id='name_label"+prodln+"'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NAME')+"<span class='required'>&nbsp*</span></span>";
+    c.id="product_name_label"+prodln;
+    c.innerHTML = SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NAME')+"<span class='required'>&nbsp*</span>";
 
     var c1 = y.insertCell(1);
     c1.innerHTML = "<input style='width:178px;'  type='text' name='product_name[" + prodln + "]' id='product_name" + prodln + "' maxlength='50' value='' title='' tabindex='116' value=''><input type='hidden' name='product_product_id[" + prodln + "]' id='product_product_id" + prodln + "' size='20' maxlength='50' value=''>";
@@ -137,7 +140,8 @@
 
     var d = y.insertCell(2);
     d.width="12.5%";
-    d.innerHTML =   "<span id='part_number_label"+prodln+"'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PART_NUMBER')+"</span>";
+    d.id="product_part_number_label"+prodln;
+    d.innerHTML = SUGAR.language.get(module_sugar_grp1, 'LBL_PART_NUMBER');
 
     
 
@@ -149,9 +153,9 @@
 
 
     var z = tablebody.insertRow(-1);
-
     var i = z.insertCell(0);
-    i.innerHTML = "<span id='list_price_label"+prodln+"'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_LIST_PRICE')+"<span class='required'>&nbsp*</span></span>";
+    i.id="product_product_list_price_label"+prodln;
+    i.innerHTML = SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_LIST_PRICE')+"<span class='required'>&nbsp*</span>";
 
     var j = z.insertCell(1);
     j.innerHTML = "<input style='text-align: right; width:115px;' type='text' name='product_product_list_price[" + prodln + "]' id='product_product_list_price" + prodln + "' size='11' maxlength='50' value='' title='' tabindex='116' onblur='calculateLine(" + prodln + ",\"product_\");'><input type='hidden' name='product_product_cost_price[" + prodln + "]' id='product_product_cost_price" + prodln + "' value=''  />";
@@ -165,6 +169,7 @@
 
     var k = z.insertCell(2);
     k.width="12.5%";
+    k.id="product_discount_label"+prodln;
     k.innerHTML = SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_DISCOUNT');
 
     var l = z.insertCell(3);
@@ -174,7 +179,8 @@
 
     var z1 = tablebody.insertRow(-1);
     var m = z1.insertCell(0);
-    m.innerHTML ="<span id='unit_price_label"+prodln+"'>"+ SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_UNIT_PRICE')+"<span class='required'>&nbsp*</span></span>";
+    m.id="product_product_unit_price_label"+prodln;
+    m.innerHTML = SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_UNIT_PRICE')+"<span class='required'>&nbsp*</span>";
 
     var n = z1.insertCell(1);
     n.innerHTML = "<input type='text' style='text-align: right; width:115px;' name='product_product_unit_price[" + prodln + "]' id='product_product_unit_price" + prodln + "' size='11' maxlength='50' value='' title='' tabindex='116' readonly='readonly' onblur='calculateLine(" + prodln + ",\"product_\");' onblur='calculateLine(" + prodln + ",\"product_\");'>";
@@ -185,6 +191,7 @@
 
     var o = z1.insertCell(2);
     o.width="12.5%";
+    o.id="product_vat_label"+prodln;
     o.innerHTML = SUGAR.language.get(module_sugar_grp1, 'LBL_VAT_AMT');
 
     var o1 = z1.insertCell(3);
@@ -193,6 +200,7 @@
     o1.innerHTML += "<select tabindex='116' name='product_vat[" + prodln + "]' id='product_vat" + prodln + "' onchange='calculateLine(" + prodln + ",\"product_\");'>" + vat_hidden + "</select>";
     var z2 = tablebody.insertRow(-1);
     var p = z2.insertCell(0);
+    p.id="product_product_total_price_label"+prodln;
     p.innerHTML = SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_TOTAL_PRICE')+"<span class='required'>&nbsp*</span>";
 
     var p1 = z2.insertCell(1);
@@ -215,37 +223,30 @@
 
 function setLineTypeCtrl(field,ln){
     if (field.value=='Product'){
-       $('#product_product_id'+ln).val("");
-       $('#product_part_number'+ln).show();
-       $('#product_product_qty'+ln).show();
-       $('#qty_label'+ln).show();
-       $('#part_number_select_btn'+ln).show();
-       $('#part_number_label'+ln).show();
-       addToValidate('EditView','product_product_id'+ln,'id',true,"Please choose a product");
-
-       $('#name_label'+ln).html("<span id='name_label"+ln+"'>"+SUGAR.language.get('HAOS_Revenues_Quotes', 'LBL_PRODUCT_NAME')+"<span class='required'>&nbsp*</span></span>");
-       $('#unit_price_label'+ln).html("<span id='unit_price_label"+ln+"'>"+SUGAR.language.get('HAOS_Revenues_Quotes', 'LBL_PRODUCT_UNIT_PRICE')+"<span class='required'>&nbsp*</span></span>");
-       $('#list_price_label'+ln).html("<span id='list_price_label"+ln+"'>"+SUGAR.language.get('HAOS_Revenues_Quotes', 'LBL_PRODUCT_LIST_PRICE')+"<span class='required'>&nbsp*</span></span>");
-       
-   }
-   else
-   {
-    $('#product_product_id'+ln).val("0");
-    $('#product_product_qty'+ln).val("");
-    $("#product_part_number"+ln).val("");
-    $('#product_part_number'+ln).hide();
-    $('#part_number_select_btn'+ln).hide();
-    $('#part_number_label'+ln).hide();
-    $('#product_product_qty'+ln).hide();
-    $('#qty_label'+ln).hide();
-    removeFromValidate('EditView','product_product_id'+ln);
-
-    $('#name_label'+ln).html("<span id='name_label"+ln+"'>"+SUGAR.language.get('HAOS_Revenues_Quotes', 'LBL_SERVICE_NAME')+"<span class='required'>&nbsp*</span></span>");   
-    $('#unit_price_label'+ln).html("<span id='unit_price_label"+ln+"'>"+SUGAR.language.get('HAOS_Revenues_Quotes', 'LBL_SERVICE_LIST_PRICE')+"<span class='required'>&nbsp*</span></span>");
-    $('#list_price_label'+ln).html("<span id='list_price_label"+ln+"'>"+SUGAR.language.get('HAOS_Revenues_Quotes', 'LBL_SERVICE_PRICE')+"<span class='required'>&nbsp*</span></span>");
-    
-}
-
+        $('#product_product_id'+ln).val("");
+        $('#product_product_qty_label'+ln).html("数量");
+        $('#product_product_qty'+ln).show();
+        $('#product_part_number_label'+ln).html("物料编码");
+        $('#part_number_select_btn'+ln).show();
+        $('#product_part_number'+ln).show();
+        //addToValidate('EditView','product_product_id'+ln,'id',true,"Please choose a product");
+        $('#product_name_label'+ln).html(SUGAR.language.get('HAOS_Revenues_Quotes', 'LBL_PRODUCT_NAME')+"<span class='required'>&nbsp*</span>");
+        $('#product_product_list_price_label'+ln).html(SUGAR.language.get('HAOS_Revenues_Quotes', 'LBL_PRODUCT_LIST_PRICE')+"<span class='required'>&nbsp*</span>");
+        $('#product_product_unit_price_label'+ln).html(SUGAR.language.get('HAOS_Revenues_Quotes', 'LBL_PRODUCT_UNIT_PRICE')+"<span class='required'>&nbsp*</span>"); 
+   }else{
+        $('#product_product_id'+ln).val("0");
+        $('#product_product_qty'+ln).val("");
+        $("#product_part_number_label"+ln).html("");
+        $('#product_part_number'+ln).hide();
+        $('#part_number_select_btn'+ln).hide();
+        $('#part_number_label'+ln).hide();
+        $('#product_product_qty'+ln).hide();
+        $('#product_product_qty_label'+ln).html("");
+        //removeFromValidate('EditView','product_product_id'+ln);
+        $('#product_name_label'+ln).html(SUGAR.language.get('HAOS_Revenues_Quotes', 'LBL_SERVICE_NAME')+"<span class='required'>&nbsp*</span>");   
+        $('#product_product_list_price_label'+ln).html(SUGAR.language.get('HAOS_Revenues_Quotes', 'LBL_SERVICE_LIST_PRICE')+"<span class='required'>&nbsp*</span>");
+        $('#product_product_unit_price_label'+ln).html(SUGAR.language.get('HAOS_Revenues_Quotes', 'LBL_SERVICE_PRICE')+"<span class='required'>&nbsp*</span>");
+    }
 }
 /**
  * Open product popup
@@ -507,7 +508,7 @@ function formatNumber(n, num_grp_sep, dec_sep, round, precision) {
     return n[0] + (n.length > 1 && n[1] !== "" ? dec_sep + n[1] : "");
 }
 
-function check_form(formname) {
+/*function check_form(formname) {
     if (typeof(siw) != 'undefined' && siw && typeof(siw.selectingSomething) != 'undefined' && siw.selectingSomething) {
         return false;
     } else {
@@ -538,4 +539,4 @@ function check_form(formname) {
             return validate_form(formname, '');
         }
     }
-}
+}*/
