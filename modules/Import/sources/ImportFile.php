@@ -136,6 +136,8 @@ class ImportFile extends ImportDataSource
 
         // Autodetect does setFpAfterBOM()
         $this->_encoding = $this->autoDetectCharacterSet();
+		echo "encoding = ".$this->_encoding;
+		$this->_encoding = 'GBK';
     }
 
     /**
@@ -366,6 +368,7 @@ class ImportFile extends ImportDataSource
         if (empty($charset_for_import))
         {
             $charset_for_import = $locale->getExportCharset(); 
+		
         }
         
         // Reset the fp to after the bom if applicable.

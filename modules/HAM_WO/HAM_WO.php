@@ -135,6 +135,12 @@ class HAM_WO extends HAM_WO_sugar {
 				$ham_wo_line_bean->save();
 			}
 		}
+		//当前工单的合同和工单对象行中的合同不匹配的都要删除
+		$woop_beans = BeanFactory :: getBean('HAM_WO_Lines')->get_full_list('', "ham_wo_lines.ham_wo_id = '{$this->id}' and ham_wo_lines.contract_id<>'".$this->contract_id."'");
+		foreach ($woop_beans as $woop_bean) {
+			$woop_bean->deleted = 1;
+			$woop_bean->save();
+		}
 
 		parent :: save($check_notify); //保存WO主体
 		//add by yuan.chen@2016-07-22

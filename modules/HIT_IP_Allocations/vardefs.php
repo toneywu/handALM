@@ -676,11 +676,11 @@ $dictionary['HIT_IP_Allocations'] = array (
 			'studio' => 'visible',
 		),
 		
-		 'date_start' => array (
-			'required' => true,
+		'date_start' => array (
+			'required' => false,
 			'name' => 'date_start',
 			'vname' => 'LBL_DATE_START',
-			'type' => 'date',
+			'type' => 'datetimecombo',
 			'massupdate' => 0,
 			'no_default' => false,
 			'comments' => '',
@@ -696,15 +696,15 @@ $dictionary['HIT_IP_Allocations'] = array (
 			'size' => '20',
 			'enable_range_search' => false,
 			'dbType' => 'datetime',
-			'isnull'=>false,
-			//'display_default' => 'now&12:00am',
+			// 'display_default' => 'now&12:00am',
 		),
-
+		
+		
 'date_end' => array (
-			'required' => true,
+			'required' => false,
 			'name' => 'date_end',
 			'vname' => 'LBL_DATE_END',
-			'type' => 'date',
+			'type' => 'datetimecombo',
 			'massupdate' => 0,
 			'no_default' => false,
 			'comments' => '',
@@ -720,8 +720,7 @@ $dictionary['HIT_IP_Allocations'] = array (
 			'size' => '20',
 			'enable_range_search' => false,
 			'dbType' => 'datetime',
-			'isnull'=>false,
-			//'display_default' => 'now&12:00am',
+			// 'display_default' => 'now&12:00am',
 		),
 		
 		'access_assets_backup_id' => 
