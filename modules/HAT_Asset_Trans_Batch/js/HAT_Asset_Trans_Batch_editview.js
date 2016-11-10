@@ -82,9 +82,12 @@ function resetEventType() {
 	//处理头字段
 	//依据事件类型，确认是否需要变化所属组织
 	//
-	 $("#asset_trans_status").change();
 
 	var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());
+
+	if (global_eventOptions.check_customer_hold == "1"){
+	 	$("#asset_trans_status").change(); //对客户的信息状态进行验证
+	}
 
 	if (global_eventOptions.change_owning_org == "REQUIRED"){
 		mark_field_enabled('target_owning_org',false);
