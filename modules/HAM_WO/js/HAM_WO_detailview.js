@@ -1,7 +1,7 @@
-/*if(typeof(YAHOO.SUGAR) == 'undefined') {
+if(typeof(YAHOO.SUGAR) == 'undefined') {
 	$.getScript("include/javascript/sugarwidgets/SugarYUIWidgets.js");
 }
-*/
+
 $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); //MessageBox
 $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
 
@@ -11,7 +11,6 @@ $.getScript("modules/HAA_FF/ff_include.js");//load triger_setFF()
 function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"HAM_WO","DetailView");
     $(".expandLink").click();
- 
 }
 
 /**
@@ -40,21 +39,23 @@ function changeStatus(id){
 
 	//bootstrap-dialog详细说明在：\custom\resources\bootstrap3-dialog-master\examples\index.html
 	//注意在本文件头引用了，bootstrap-dialog.min.js和bootstrap-dialog.min.css
+	//
+	//console.log('index.php?to_pdf=true&module=HAM_WO&action=getListFields&id=' + id)
 		$.ajax({
 			url: 'index.php?to_pdf=true&module=HAM_WO&action=getListFields&id=' + id, //通过getListFields.php获取当前工单可选的状态
 			success: function (data) {
 				//如果成功的通过Ajax读取了状态列表，则显示出状态列表，并通过Dialog确认是否修改状态
 				var title_txt=SUGAR.language.get('HAM_WO', 'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL')
-				var html=""
-				html+=title_txt;
-				html+=data;
+				var html="";
+				html+='<label for="target_wo_status">'+title_txt+'</label>'+data;
 				BootstrapDialog.confirm({
 		              //type: BootstrapDialog.TYPE_DANGER,
 		              title: title_txt,
 		              message: html,
-		              function(result){
+		              callback: function(result){
 				            if(result) {
-				                save($("input[name='record']").val(),$("#wo_status").val()); //alert('Yup.');
+				            	//alert('Yup.');
+				                saveStatus($("input[name='record']").val(),$("#target_wo_status").val()); //
 				            }else {
 				                //alert('Nope.');
 				            }
@@ -95,10 +96,10 @@ function complete_work_order(record){
  * 点击按钮 调用Ajax请求 保存
  * @param name
  */
-function save(id,status_code){
+function saveStatus(id,status_code){
+	//console.log('index.php?to_pdf=true&module=HAM_WO&action=saveStatusBean&id=' + id+"&status_code="+status_code);
 		$.ajax({
-		
-			url: 'index.php?to_pdf=true&module=HAM_WO&action=saveBean&id=' + id+"&status_code="+status_code,
+			url: 'index.php?to_pdf=true&module=HAM_WO&action=saveStatus&id=' + id+"&status_code="+status_code,
 			success: function (data) {
 				window.location.href = "index.php?module=HAM_WO&action=DetailView&record="+id;
 			},
@@ -112,11 +113,11 @@ function save(id,status_code){
  * 点击按钮 调用Ajax请求 保存
  * @param name
  */
-function cancel(id,status_code){
+/*function cancel(id,status_code){
 	window.location.href = "index.php?module=HAM_WO&action=DetailView&record="+id;
 };
 
-
+*/
 
 /**
  * 点击按钮 调用Ajax请求 获取权限
