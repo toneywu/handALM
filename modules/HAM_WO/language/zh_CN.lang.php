@@ -98,8 +98,6 @@ $mod_strings = array (
   'LBL_WO_LINE_SUBPANEL_TITLE'=>'工作对象行',
   'LBL_REPORTER' => '报告人',
 	'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL'=>'状态修改',
-	'LBL_BTN_SAVE_BUTTON_LABEL'=>'保存',
-	'LBL_BTN_CANCEL_BUTTON_LABEL'=>'取消',
 	'LBL_WORK_CENTER'=>'工作中心',
   'LBL_WORK_CENTER_RES'=>'资源/工种',
   'LBL_WORK_CENTER_PEOPLE'=>'负责人',
@@ -122,6 +120,6 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL_DESC'=>'附加属性',
   'LBL_WO_WORK_OBJECT'=>'工作对象',
   'LBL_EDITVIEW_PANEL_CONTRL'=>'工作职责及权限控制',
-    'WO_OWNER'=>'负责人',
+    'LBL_WO_OWNER'=>'负责人',
 
 );

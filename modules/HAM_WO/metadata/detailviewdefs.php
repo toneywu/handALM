@@ -64,6 +64,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_EDITVIEW_PANEL_CONTRL' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
         'LBL_EDITVIEW_PANEL_SCHEDULE' => 
         array (
           'newTab' => false,
@@ -75,15 +80,15 @@ array (
           'panelDefault' => 'expanded',
         ),
         'LBL_EDITVIEW_PANEL_WOLINES' => 
-         array (
-           'newTab' => true,
-           'panelDefault' => 'expanded',
-         ),
-         'LBL_EDITVIEW_PANEL_SOURCE' => 
-         array (
-           'newTab' => true,
-           'panelDefault' => 'expanded',
-         ),
+        array (
+          'newTab' => true,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_EDITVIEW_PANEL_SOURCE' => 
+        array (
+          'newTab' => true,
+          'panelDefault' => 'expanded',
+        ),
       ),
       'syncDetailEditViews' => true,
     ),
@@ -127,20 +132,6 @@ array (
         3 => 
         array (
           0 => 'description',
-          1 => 
-          array (
-            'name' => 'work_order_access',
-            'studio' => 'visible',
-            'label' => 'LBL_WORK_ORDER_ACCESS',
-          ),
-        ),
-        4 => 
-        array (
-          0 => 
-          array (
-            'name' => 'complete_by_last_woop',
-            'label' => 'LBL_COMPLETE_BY_LAST_WOOP',
-          ),
           1 => '',
         ),
       ),
@@ -249,7 +240,52 @@ array (
           ),
         ),
       ),
-
+      'lbl_editview_panel_contrl' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'work_center',
+            'studio' => 'visible',
+            'label' => 'LBL_WORK_CENTER',
+          ),
+          1 => 
+          array (
+            'name' => 'work_center_res',
+            'studio' => 'visible',
+            'label' => 'LBL_WORK_CENTER_RES',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'work_center_people',
+            'studio' => 'visible',
+            'label' => 'LBL_WORK_CENTER_PEOPLE',
+          ),
+          1 => 
+          array (
+            'name' => 'work_order_access',
+            'studio' => 'visible',
+            'label' => 'LBL_WORK_ORDER_ACCESS',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'complete_by_last_woop',
+            'label' => 'LBL_COMPLETE_BY_LAST_WOOP',
+          ),
+          1 => 
+          array (
+            'name' => 'next_woop_assignment',
+            'label' => 'LBL_NEXT_WOOP_ASSIGNMENT',
+          ),
+        ),
+      ),
       'lbl_editview_panel_schedule' => 
       array (
         0 => 
@@ -353,19 +389,19 @@ array (
         ),
       ),
       'lbl_editview_panel_wolines' => 
-       array (
-         0 => 
-         array (
-           0 => '',
-         ),
-       ),
-       'lbl_editview_panel_source' => 
-       array (
-         0 => 
-         array (
-           0 => '',
-         ),
-       ),
+      array (
+        0 => 
+        array (
+          0 => '',
+        ),
+      ),
+      'lbl_editview_panel_source' => 
+      array (
+        0 => 
+        array (
+          0 => '',
+        ),
+      ),
     ),
   ),
 );

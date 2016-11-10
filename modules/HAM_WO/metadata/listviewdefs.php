@@ -73,7 +73,7 @@ array (
   array (
     'type' => 'varchar',
     'studio' => 'visible',
-    'label' => 'WO_OWNER',
+    'label' => 'LBL_WO_OWNER',
     'link' => false,
     'width' => '10%',
     'default' => true,

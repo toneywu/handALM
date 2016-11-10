@@ -88,9 +88,7 @@ $mod_strings = array (
   'LBL_PLAN_FIXED'=>'Schedule Fixed',
   'LBL_WO_LINE_SUBPANEL_TITLE'=>'WO Object Lines',
   'HAM_ACT_ID_RULE'=>'Std.Activity',
-  'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL'=>'WO Status Modify',
-  'LBL_BTN_SAVE_BUTTON_LABEL'=>'Save Button',
-  'LBL_BTN_CANCEL_BUTTON_LABEL'=>'Cancel Button',
+  'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL'=>'Change WO Status',
   'LBL_WORK_CENTER'=>'Work Center',
   'LBL_WORK_CENTER_RES'=>'Work Center Resource',
   'LBL_WORK_CENTER_PEOPLE'=>'Work Center People',
@@ -114,5 +112,5 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL_DESC'=>'Additional information',
   'LBL_WO_WORK_OBJECT'=>'Work with',
   'LBL_EDITVIEW_PANEL_CONTRL'=>'Responsibility and Control',
-
+  'LBL_WO_OWNER'=>'Owner',
 );

@@ -62,6 +62,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_EDITVIEW_PANEL_CONTRL' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
         'LBL_EDITVIEW_PANEL_SCHEDULE' => 
         array (
           'newTab' => false,
@@ -147,20 +152,6 @@ array (
         3 => 
         array (
           0 => 'description',
-          1 => 
-          array (
-            'name' => 'work_order_access',
-            'studio' => 'visible',
-            'label' => 'LBL_WORK_ORDER_ACCESS',
-          ),
-        ),
-        4 => 
-        array (
-          0 => 
-          array (
-            'name' => 'complete_by_last_woop',
-            'label' => 'LBL_COMPLETE_BY_LAST_WOOP',
-          ),
           1 => '',
         ),
       ),
@@ -341,6 +332,52 @@ array (
           array (
             'name' => 'attribute6',
             'label' => 'LBL_ATTRIBUTE6',
+          ),
+        ),
+      ),
+      'lbl_editview_panel_contrl' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'work_center',
+            'studio' => 'visible',
+            'label' => 'LBL_WORK_CENTER',
+          ),
+          1 => 
+          array (
+            'name' => 'work_center_res',
+            'studio' => 'visible',
+            'label' => 'LBL_WORK_CENTER_RES',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'work_center_people',
+            'studio' => 'visible',
+            'label' => 'LBL_WORK_CENTER_PEOPLE',
+          ),
+          1 => 
+          array (
+            'name' => 'work_order_access',
+            'studio' => 'visible',
+            'label' => 'LBL_WORK_ORDER_ACCESS',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'complete_by_last_woop',
+            'label' => 'LBL_COMPLETE_BY_LAST_WOOP',
+          ),
+          1 => 
+          array (
+            'name' => 'next_woop_assignment',
+            'label' => 'LBL_NEXT_WOOP_ASSIGNMENT',
           ),
         ),
       ),
