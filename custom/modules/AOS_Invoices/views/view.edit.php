@@ -37,7 +37,6 @@ class AOS_InvoicesViewEdit extends ViewEdit {
             $str=implode(',', $cord_array);
             $sql = "SELECT hr.haa_codes_id_c FROM aos_products_quotes pg left join haos_revenues_quotes hr on pg.parent_id=hr.id WHERE pg.id in(".$str.") AND pg.deleted = 0 and hr.deleted=0 group by hr.haa_codes_id_c ORDER BY pg.number ASC";
             $result = $db->query($sql);
-            var_dump($sql);
             $html .= "<script>
                 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
                 </script>";

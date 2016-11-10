@@ -16,7 +16,7 @@ class HAOS_Revenues_QuotesViewEdit extends ViewEdit {
 		$current_action = $this->action;
 		$this->ss->assign('FRAMEWORK_C',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id_c'));//分配显示业务框架
 
-     
+		
 		$this->populateBillContactInfo();
 		$this->populateParentInfo();
 		$this->populateInvoicesInfo();
@@ -28,21 +28,21 @@ class HAOS_Revenues_QuotesViewEdit extends ViewEdit {
 			$ff_id = $bean_event_type->haa_ff_id;
 		}
 		$html .= "<script>
-                if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
-                </script>";
-        echo $html;
-		parent::display();
-		$ff_id_field = '<input id=haa_ff_id name=haa_ff_id type=hidden '.(isset($ff_id)?'value='.$ff_id:'').'>';
-		echo '<script>if($("#haa_ff_id").length==0) {  $("#EditView").append("'.$ff_id_field.'");}</script>';
+		if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
+	</script>";
+	echo $html;
+	parent::display();
+	$ff_id_field = '<input id=haa_ff_id name=haa_ff_id type=hidden '.(isset($ff_id)?'value='.$ff_id:'').'>';
+	echo '<script>if($("#haa_ff_id").length==0) {  $("#EditView").append("'.$ff_id_field.'");}</script>';
 		//如果已经选择事件类型，无论是否事件类型对应的FlexForm有值，值将界面展开。
-		if(isset($this->bean->hat_eventtype_id_c) && ($this->bean->hat_eventtype_id_c)!=""){
-			echo '<script>$(".collapsed").switchClass("collapsed","expanded");</script>';
+	if(isset($this->bean->hat_eventtype_id_c) && ($this->bean->hat_eventtype_id_c)!=""){
+		echo '<script>$(".collapsed").switchClass("collapsed","expanded");</script>';
 		} /*else {
 			echo '<script>$(".expanded").switchClass("expanded","collapsed");</script>';
 		}*/
 
 		//*********************处理FF界面 END********************
-
+		echo '<script>removeFromValidate("EditView","account_name");</script>';
 	}
 	
 
