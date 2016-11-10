@@ -121,6 +121,7 @@ if (curl_errno($soap_do)) {
 						$product_bean->aos_product_category_id = $check_product_category[0]->id;
 					}
 					$product_bean->save();
+					return true;
 				}
 
 			}

@@ -60,7 +60,7 @@ function setFF(FFObj) {
 	} else if (FFObj.fieldtype=="READONLY"){
 		//write annother function to control
 		//add by yuan.chen
-		
+
 		mark_field_readonly(FFObj.field,false);
 		//修改标签名称
 		if (FFObj.label!=null && FFObj.label!="") {
@@ -89,12 +89,16 @@ function setFF(FFObj) {
 		//TODO:
 		//这里的处理逻辑没有写完，因为判断的逻辑比较复杂。先要判断当前字段是否为必须，然后需要继续当前是否有变化来进行处理
 		//并且处理包括在样式上打上*的标记或去除，以及在字段验证上进行处理
-		if (FFObj.att_required == 0) {
+		if ((FFObj.att_required == 0||FFObj.att_required == '0')
+			&&(FFObj.fieldtype!="HIDE"&&FFObj.fieldtype!="PLACEHOLDER"&&FFObj.fieldtype!="CHECKBOX")) {
 			//非必须
 			$("#"+FFObj.field+'_label').children().remove(".required");
 		} else {
 			//必须
-			$("#"+FFObj.field+'_label').append('<span class="required">*</span>');
+			if ($("#"+FFObj.field+'_label').is(":visible")) {
+				$("#"+FFObj.field+"_label").append('<span class="required">*</span>');
+				//只需要加入这个Class系统就会自动进行验证，不需要额外的内容
+			}
 		}
 
 		//TODO还需要添加字段为值列表、Checkbox等一系列形态
@@ -139,9 +143,12 @@ function check_form(formname){
 	}
 }
 
+/******************************
+//在FF设置之前进行调用，用于将所有的Attribute对象进行隐藏，也就是所有的Attribute默认都是不显示的，除非在FF中进行了设置
+//之后通过SetFF确定是否需要将已经隐藏的Attribute进行显示出来。
+/*****************************/
 function hideAllAttributes(ff_fields) {
-	//在FF设置之前进行调用，用于将所有的Attribute对象进行隐藏，也就是所有的Attribute默认都是不显示的，除非在FF中进行了设置
-	//之后通过SetFF确定是否需要将已经隐藏的Attribute进行显示出来。
+
 	var i=1;
 	while ($("#attribute"+i).length != 0 || $("#attribute"+i+"_c").length != 0) {
 		//检查界面模块是否有Attribute存在，如果有就继续下一个，循环直到不再有新的Attribute存在
@@ -214,14 +221,24 @@ function mark_field_setcheckbox(fields){
 	}
 }
 
-function mark_field_disabled(field_name, hide_bool, keep_position=false) {
-	  var view = action_sugar_grp1;
-	  if(view == 'EditView') {
+function mark_field_disabled(field_name, hide_bool, keep_position=false, donot_clean=true) {
+	var view = action_sugar_grp1;
+	if(view == 'EditView') {
 		mark_obj = ($("#"+field_name).length>0)?$("#"+field_name):$("[name='"+field_name+"'");
 		mark_obj_lable = $("#"+field_name+"_label");
 		mark_obj_tr = $("#"+field_name).closest("tr");
 
-	    if(hide_bool==true) {
+		if (donot_clean==false) {
+		    //消除已经填写的数据
+		    if ($("#"+field_name).prev().prop('nodeName')=="INPUT") {
+		    	$("#"+field_name).removeAttr('value')
+		    }
+		    if ($("#"+field_name+"_id").prev().prop('nodeName')=="INPUT") {
+		    	$("#"+field_name+"_id").removeAttr('value')
+		    }
+		}
+
+	  if(hide_bool==true) {
 	    	if (keep_position==false) {
 	        	mark_obj.closest('td').css({"display":"none"});
 	        	mark_obj_lable.css({"display":"none"});
@@ -253,12 +270,9 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 	    if  (typeof $("#btn_clr_"+field_name)!= 'undefined') {
 	      $("#btn_clr_"+field_name).css({"visibility":"hidden"});
 	    }
-	    //消除已经填写的数据
-	    $("#"+field_name).val("");
-	    if  (typeof $("#"+field_name+"_id")!= 'undefined') {
-	      $("#"+field_name+"_id").val("");
-	    }
-	  } else if (view === 'DetailView') {
+
+	  } //End EditView
+	  else if (view == 'DetailView') {
 	    //DetailedView只需要考虑隐藏字段的情况
 		  mark_obj_td = $("td[field='"+field_name+"']");
 		  mark_obj_lable_td = mark_obj_td.prev("td");
@@ -281,7 +295,8 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 			mark_obj_lable_td.html("");
 			mark_obj_td.html("");
 	     }
-	  }
+	  } //end DetailView
+
 	  	//以下内容针对EditView和DetailView都有效，基于mark_obj_tr
   	    //判断是否当前行完全是空白了，如果已经完全是空白，则将当前行直接清空
   	    //如果当前行可以清空，则进一步判断，当前区域是否是空白，如果当前区域也是空白，直接将当前区域清空
@@ -314,7 +329,7 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false) {
 				mark_obj_tr.hide();//将当前行隐去
 			}
 		}
-}
+}//end function mark_field_disabled
 
 function mark_field_readonly(field_name) {
 	  var view = action_sugar_grp1;
@@ -390,4 +405,34 @@ function mark_field_enabled(field_name,not_required_bool) {
   if  (typeof $("#btn_clr_"+field_name)!= 'undefined') {// 移除清空按钮
     $("#btn_clr_"+field_name).css({"visibility":"visible"});
   }
+}
+
+
+function FFCheckField(field_id,ajaxStr,errMsg) {
+	// for example,
+	// ajaxStr="d&mode=locationName&val='+checkname+'&id=' + locaton_id"
+	// errMsg="SUGAR.language.get('app_strings', 'LBL_DUPLICATED_ERR')"
+
+	var checkname =$("#"+field_id+"").val();
+
+		console.log('index.php?to_pdf=true&module=HAA_FF&action=validateField&'+ajaxStr);
+		if(checkname=="") {
+			return
+		}
+
+		$.ajax({//
+			url: 'index.php?to_pdf=true&module=HAA_FF&action=validateField&'+ajaxStr,
+			//async: false,
+			success: function (data) {
+				console.log("checked result="+data+":"+(data=='0'||data==0));
+				clear_all_errors();
+				if (data=='0'||data==0) {
+					console.log('error');
+					add_error_style('EditView',field_id,errMsg);
+				}
+			},//end sucess
+			error: function () { //失败
+				alert('Error loading AJAX for status check');
+			}//end error
+		})//end ajax
 }
