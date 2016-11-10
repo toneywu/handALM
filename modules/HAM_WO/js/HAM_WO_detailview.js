@@ -213,18 +213,12 @@ $(document).ready(function(){
 	$("#whole_subpanel_wo_line").replaceWith("");
 	$("#LBL_EDITVIEW_PANEL_SOURCE").after("<div class='tab_subpanel'>"+$("#whole_subpanel_sr").html()+"</div>");
 	$("#whole_subpanel_sr").replaceWith("");
-
-	//明细页面添加一个按钮
-	var change_btn=$("<input type='button' class='btn_detailview' id='btn_change_status' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL')+"'>");
-	var save_btn=$("<input type='button' class='btn_detailview' id='btn_save' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_SAVE_BUTTON_LABEL')+"'>");
-	var cancel_btn=$("<input type='button' class='btn_detailview' id='btn_cancel' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_CANCEL_BUTTON_LABEL')+"'>");
-
-	$("#merge_duplicate_button").after(change_btn);
-
 /*	$("#wo_lines").parent("td").prev("td").hide();
 	showWOLines();*/
 
-
+	//明细页面添加一个按钮
+	var change_btn=$("<input type='button' class='btn_detailview' id='btn_change_status' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL')+"'>");
+	$("#merge_duplicate_button").after(change_btn);
 	$("#btn_change_status").click(function(){ //如果点了修改状态按钮，调用Ajax修改状态
 		changeStatus($("input[name='record']").val());
 	});
