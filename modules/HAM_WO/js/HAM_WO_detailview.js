@@ -1,6 +1,10 @@
-if(typeof(YAHOO.SUGAR) == 'undefined') {
+/*if(typeof(YAHOO.SUGAR) == 'undefined') {
 	$.getScript("include/javascript/sugarwidgets/SugarYUIWidgets.js");
 }
+*/
+$.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); //MessageBox
+$('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
+
 
 $.getScript("modules/HAA_FF/ff_include.js");//load triger_setFF()
 
@@ -34,26 +38,28 @@ function showWOLines() {
  */
 function changeStatus(id){
 
-	/*var flag= window.confirm("是否需要修改状态?");
-	if(flag){*/
-	//修改状态变更的样式 by:toney.wu 20160903
-	//ref:https://developer.sugarcrm.com/2011/03/18/howto-create-nice-looking-popup-message-boxes-in-sugar/
-
+	//bootstrap-dialog详细说明在：\custom\resources\bootstrap3-dialog-master\examples\index.html
+	//注意在本文件头引用了，bootstrap-dialog.min.js和bootstrap-dialog.min.css
 		$.ajax({
-			url: 'index.php?to_pdf=true&module=HAM_WO&action=getListFields&id=' + id,
+			url: 'index.php?to_pdf=true&module=HAM_WO&action=getListFields&id=' + id, //通过getListFields.php获取当前工单可选的状态
 			success: function (data) {
+				//如果成功的通过Ajax读取了状态列表，则显示出状态列表，并通过Dialog确认是否修改状态
 				var title_txt=SUGAR.language.get('HAM_WO', 'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL')
 				var html=""
 				html+=title_txt;
 				html+=data;
-				//html+="<input type='button' class='btn_detailview' id='btn_save' value='"+SUGAR.language.get('app_strings', 'LBL_SAVE_BUTTON_LABEL')+"'>";
-				YAHOO.SUGAR.MessageBox.show({msg: html,title: title_txt, type: 'confirm',
-																		fn: function(confirm) {
-																			if (confirm == 'yes') {
-																				save($("input[name='record']").val(),$("#wo_status").val());
-																			}
-																		}
-											});
+				BootstrapDialog.confirm({
+		              //type: BootstrapDialog.TYPE_DANGER,
+		              title: title_txt,
+		              message: html,
+		              function(result){
+				            if(result) {
+				                save($("input[name='record']").val(),$("#wo_status").val()); //alert('Yup.');
+				            }else {
+				                //alert('Nope.');
+				            }
+			        	}
+		          });
 			},
 			error: function () { //失败
 				alert('Error loading document');
@@ -202,6 +208,12 @@ function reject_woop(id){
  */
 $(document).ready(function(){
 
+	//将Subpanel的内容前移到上方TAB中
+	$("#LBL_EDITVIEW_PANEL_WOLINES").after("<div class='tab_subpanel'>"+$("#whole_subpanel_wo_line").html()+"</div>");
+	$("#whole_subpanel_wo_line").replaceWith("");
+	$("#LBL_EDITVIEW_PANEL_SOURCE").after("<div class='tab_subpanel'>"+$("#whole_subpanel_sr").html()+"</div>");
+	$("#whole_subpanel_sr").replaceWith("");
+
 	//明细页面添加一个按钮
 	var change_btn=$("<input type='button' class='btn_detailview' id='btn_change_status' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL')+"'>");
 	var save_btn=$("<input type='button' class='btn_detailview' id='btn_save' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_SAVE_BUTTON_LABEL')+"'>");
@@ -212,32 +224,10 @@ $(document).ready(function(){
 /*	$("#wo_lines").parent("td").prev("td").hide();
 	showWOLines();*/
 
-	//将Subpanel的内容前移到上方TAB中
-	$("#LBL_EDITVIEW_PANEL_WOLINES").after("<div class='tab_subpanel'>"+$("#whole_subpanel_wo_line").html()+"</div>");
-	$("#whole_subpanel_wo_line").replaceWith("");
-	$("#LBL_EDITVIEW_PANEL_SOURCE").after("<div class='tab_subpanel'>"+$("#whole_subpanel_sr").html()+"</div>");
-	$("#whole_subpanel_sr").replaceWith("");
-
 
 	$("#btn_change_status").click(function(){ //如果点了修改状态按钮，调用Ajax修改状态
-
-		$("#btn_change_status").after(save_btn);
-		$("#btn_save").after(cancel_btn);
-
-		//registe function save()
-		$("#btn_save").click(function(){ //如果保存按钮 保存记录
-			save($("input[name='record']").val(),$("#wo_status").val());
-		   }
-		);
-		//registe function cancel()
-		$("#btn_cancel").click(function(){ //如果取消按钮 返回
-			cancel($("input[name='record']").val(),$("#wo_status").val());
-		   }
-		);
-		////registe function changeStatus()
 		changeStatus($("input[name='record']").val());
-	   }
-	);
+	});
 
 	/**
 	 * checkAccess
