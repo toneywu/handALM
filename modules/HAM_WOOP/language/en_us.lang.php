@@ -77,4 +77,5 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL1'=>'Schedule Information',
   'LBL_EDITVIEW_PANEL2'=>'Related Operation',
   'LBL_EDITVIEW_PANEL3'=>'Next Task',  
+  'LBL_TAKE_ACTION'=>'Action',
 );

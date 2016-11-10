@@ -151,29 +151,43 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 		$current_bean = BeanFactory::getBean("HAM_WOOP",$this->id);
 		$woop_fields['DATE_ACTUAL_START']=$current_bean->date_actual_start;
 		$woop_fields['DATE_ACTUAL_FINISH']=$current_bean->date_actual_finish;
-		
+
 		if (isset ($_GET['record'])) {
 			$ham_wo_id = $_GET['record'];
 		} else {
 			$ham_wo_id = $this->ham_wo_id;
 		}
+
 		$woop_status = isset ($this->woop_status) ? $this->woop_status : "";
 
+
+/*		if (!empty ($this->act_module)) {
+			if (strtoupper($this->act_module) == 'HIT_IP_TRANS_BATCH') {
+				$woop_fields['ACT_MODULE'] = '<span class="glyphicon glyphicon-globe"> </span>';
+			}
+			if ($this->act_module == 'HAT_Asset_Trans_Batch') {
+				$woop_fields['ACT_MODULE'] = '<span class="glyphicon glyphicon-retweet"> </span>';
+			}
+		}*/
+
 		if (($woop_status == "APPROVED" || $woop_status == "WSCH" || $woop_status == "WMATL" || $woop_status == "WPCOND" || $woop_status == "INPRG" || $woop_status == "REWORK") && (empty ($this->action) || $this->action != 'Popup')) {
+
 			if (empty ($this->work_center_people)) {
+				//如果当前工序没有工作中心，则可以分配工作中心人员
 				$woop_fields['WORK_CENTER_PEOPLE'] = '<a href="#" class="button" onclick=assignWoop("' . $this->id . '","' . $ham_wo_id . '")>' . translate('LBL_TAKE_OWNERSHIP', 'HAM_WOOP') . '</a>';
 				//$WO_fields['WOOP_ACTION'] = $assign_btn;
 			}
 
 			if (!empty ($this->act_module) && !empty ($this->work_center_people)) {
 				//有动作模块，并且已经有人员分配
-				$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=window.location.href="index.php?module=' . $this->act_module . '&action=EditView&woop_id=' . $this->id . '">' . $app_list_strings['ham_woop_moduleList'][$this->act_module] . '</a>';
+				/*$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=window.location.href="index.php?module=' . $this->act_module . '&action=EditView&woop_id=' . $this->id . '">' . translate('LBL_TAKE_ACTION', 'HAM_WOOP')  . '</a>';*/
 
 				if (strtoupper($this->act_module) == 'HIT_IP_TRANS_BATCH') {
 					$hit_ip_trans_batch_bean = BeanFactory :: getBean('HIT_IP_TRANS_BATCH')->get_full_list("date_entered desc", "hit_ip_trans_batch.source_woop_id='" . $this->id . "'");
 					if (count($hit_ip_trans_batch_bean) != 0) {
 						$it_trans_batch_id = $hit_ip_trans_batch_bean[0]->id;
-						$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=window.location.href="index.php?module=' . $this->act_module . '&record=' . $it_trans_batch_id . '&action=EditView&woop_id=' . $this->id . '">' . $app_list_strings['ham_woop_moduleList'][$this->act_module] . '</a>';
+						//$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=window.location.href="index.php?module=' . $this->act_module . '&record=' . $it_trans_batch_id . '&action=EditView&woop_id=' . $this->id . '">' . $app_list_strings['ham_woop_moduleList'][$this->act_module] . '</a>';
+						$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=window.location.href="index.php?module=' . $this->act_module . '&record=' . $it_trans_batch_id . '&action=EditView&woop_id=' . $this->id . '"><span class="glyphicon glyphicon-globe"> </span> ' . translate('LBL_TAKE_ACTION', 'HAM_WOOP')  . '</a>';
 					}
 				} else
 					if ($this->act_module == 'HAT_Asset_Trans_Batch') {
@@ -181,7 +195,7 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 						$asset_trans_beans = BeanFactory :: getBean('HAT_Asset_Trans_Batch')->get_full_list("date_entered desc", "hat_asset_trans_batch.source_woop_id='" . $this->id . "'");
 						if (count($asset_trans_beans) != 0) {
 							$asset_trans_id = $asset_trans_beans[0]->id;
-							$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=window.location.href="index.php?module=' . $this->act_module . '&record=' . $asset_trans_id . '&action=EditView&woop_id=' . $this->id . '">' . $app_list_strings['ham_woop_moduleList'][$this->act_module] . '</a>';
+							$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=window.location.href="index.php?module=' . $this->act_module . '&record=' . $asset_trans_id . '&action=EditView&woop_id=' . $this->id . '"><span class="glyphicon glyphicon-retweet"> </span> ' . translate('LBL_TAKE_ACTION', 'HAM_WOOP')  . '</a>';
 						}
 					}
 
@@ -194,7 +208,7 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 					$hit_ip_trans_batch_bean = BeanFactory :: getBean('HIT_IP_TRANS_BATCH')->get_full_list("date_entered desc", "hit_ip_trans_batch.source_woop_id='" . $this->id . "'");
 					if (count($hit_ip_trans_batch_bean) != 0) {
 						$it_trans_batch_id = $hit_ip_trans_batch_bean[0]->id;
-						$woop_fields['ACT_MODULE'] = '<a href="index.php?module=' . $this->act_module . '&record=' . $it_trans_batch_id . '&action=EditView&woop_id=' . $this->id . '">' . $app_list_strings['ham_woop_moduleList'][$this->act_module] . '</a>';
+						$woop_fields['ACT_MODULE'] = '<a href="index.php?module=' . $this->act_module . '&record=' . $it_trans_batch_id . '&action=EditView&woop_id=' . $this->id . '">' .  translate('LBL_TAKE_ACTION', 'HAM_WOOP')  . '</a>';
 					}
 				} else
 					if (strtoupper($this->act_module) == 'HAT_ASSET_TRANS_BATCH') {
@@ -202,20 +216,18 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 						$asset_trans_beans = BeanFactory :: getBean('HAT_Asset_Trans_Batch')->get_full_list("date_entered desc", "hat_asset_trans_batch.source_woop_id='" . $this->id . "'");
 						if (count($asset_trans_beans) != 0) {
 							$asset_trans_id = $asset_trans_beans[0]->id;
-							$woop_fields['ACT_MODULE'] = '<a href=index.php?module=' . $this->act_module . '&record=' . $asset_trans_id . '&action=EditView&woop_id=' . $this->id . '">' . $app_list_strings['ham_woop_moduleList'][$this->act_module] . '</a>';
+							$woop_fields['ACT_MODULE'] = '<a href=index.php?module=' . $this->act_module . '&record=' . $asset_trans_id . '&action=EditView&woop_id=' . $this->id . '">' . translate('LBL_TAKE_ACTION', 'HAM_WOOP') . '</a>';
 						}
 					}
 			}
 			if($this->act_module=="HIT_IP_Trans_Batch"){
 				$woop_fields['ACT_MODULE'] =$app_list_strings['ham_woop_moduleList']["HIT_IP_TRANS_BATCH"];
-				
 			}
 		}
-		
-		
-		
+
 
 		$WO_fields = $this->get_list_view_array();
+		
 		//为工作单的状态着色
 		if (!empty ($woop_status)) {
 			$woop_fields['WOOP_STATUS_VAL'] = $this->woop_status;
