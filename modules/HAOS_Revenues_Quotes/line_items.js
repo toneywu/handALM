@@ -229,7 +229,7 @@ function setLineTypeCtrl(field,ln){
         $('#product_part_number_label'+ln).html("物料编码");
         $('#part_number_select_btn'+ln).show();
         $('#product_part_number'+ln).show();
-        //addToValidate('EditView','product_product_id'+ln,'id',true,"Please choose a product");
+        addToValidate('EditView','product_product_id'+ln,'id',true,"Please choose a product");
         $('#product_name_label'+ln).html(SUGAR.language.get('HAOS_Revenues_Quotes', 'LBL_PRODUCT_NAME')+"<span class='required'>&nbsp*</span>");
         $('#product_product_list_price_label'+ln).html(SUGAR.language.get('HAOS_Revenues_Quotes', 'LBL_PRODUCT_LIST_PRICE')+"<span class='required'>&nbsp*</span>");
         $('#product_product_unit_price_label'+ln).html(SUGAR.language.get('HAOS_Revenues_Quotes', 'LBL_PRODUCT_UNIT_PRICE')+"<span class='required'>&nbsp*</span>"); 
@@ -242,7 +242,7 @@ function setLineTypeCtrl(field,ln){
         $('#part_number_label'+ln).hide();
         $('#product_product_qty'+ln).hide();
         $('#product_product_qty_label'+ln).html("");
-        //removeFromValidate('EditView','product_product_id'+ln);
+        removeFromValidate('EditView','product_product_id'+ln);
         $('#product_name_label'+ln).html(SUGAR.language.get('HAOS_Revenues_Quotes', 'LBL_SERVICE_NAME')+"<span class='required'>&nbsp*</span>");   
         $('#product_product_list_price_label'+ln).html(SUGAR.language.get('HAOS_Revenues_Quotes', 'LBL_SERVICE_LIST_PRICE')+"<span class='required'>&nbsp*</span>");
         $('#product_product_unit_price_label'+ln).html(SUGAR.language.get('HAOS_Revenues_Quotes', 'LBL_SERVICE_PRICE')+"<span class='required'>&nbsp*</span>");
