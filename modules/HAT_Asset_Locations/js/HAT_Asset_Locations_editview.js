@@ -1,4 +1,7 @@
 $.getScript("modules/HAA_FF/ff_include.js");
+
+
+
 //load triger_setFF()
 
 function setLocationTypePopupReturn(popupReplyData){//选择地点类型后
@@ -18,6 +21,9 @@ function setParentLocationPopupReturn(popupReplyData){//选择地点类型后
 	}
 }
 
+
+
+
 $(document).ready(function() {
 	//alert("haa_ff_id="+$("#haa_ff_id").val());
 	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
@@ -34,28 +40,15 @@ $(document).ready(function() {
 	SUGAR.util.doWhen("typeof setFF == 'function'", function(){
 		call_ff();
 	});
-	
-	var cancel_btn=$("<input type='button' class='btn_detailview' id='btn_cancel' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_CANCEL_BUTTON_LABEL')+"'>");
 
-	$("#SAVE_HEADER").after(change_btn);
-	
-	
-	
-	
-	$("#btn_cancel"),click(function(){
-		//位置类型 数据中心 名称唯一
-		console.log('index.php?to_pdf=true&module=HAM_WO&action=getWOLiness&id=' + $("input[name=record]").val());
-        $.ajax({
-            url: 'index.php?to_pdf=true&module=HAT_Asset_Locations&action=check_name_unique&date_center_name=' + $("#name").val(),
-            success: function (data) {
-                console.log(data);
-            },
-            error: function () { //失败
-                alert('Error loading document');
-            }
-        });
-		
-    });
-	
+	$("#name").change(function(){
+		//验证当前地点代码是否唯一
+		var ajaxStr='mode=locationName&val='+$("#name").val()+'&id=' + $("input[name*='record']" ).val()+'&site_id='+$("#ham_maint_sites_id").val();
+		var errMSG = SUGAR.language.get('app_strings', 'LBL_DUPLICATED_ERR');
+		FFCheckField('name',ajaxStr,errMSG);
+	})//end onChange function
+
+
+
 
 });

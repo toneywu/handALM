@@ -43,7 +43,7 @@ $dictionary['HAT_Asset_Locations'] = array(
 	'inline_edit'=>true,
 	'duplicate_merge'=>true,
 	'fields'=>array (
-		'name' =>
+/*		'name' =>
 		array (
 			'name' => 'name',
 			'vname' => 'LBL_NAME',
@@ -69,7 +69,7 @@ $dictionary['HAT_Asset_Locations'] = array(
 			'inline_edit' => false,
 			'reportable' => true,
 			'size' => '20',
-			),
+			),*/
 		'location_title' =>
 		array (
 			'required' => false,
