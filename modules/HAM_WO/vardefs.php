@@ -1208,7 +1208,7 @@ $dictionary['HAM_WO'] = array (
 			
 		),
 		'work_center' => array (
-			'required' => false,
+			'required' => true,
 			'source' => 'non-db',
 			'name' => 'work_center',
 			'vname' => 'LBL_WORK_CENTER',
@@ -1261,7 +1261,7 @@ $dictionary['HAM_WO'] = array (
 			
 		),
 		'work_center_res' => array (
-			'required' => false,
+			'required' => true,
 			'source' => 'non-db',
 			'name' => 'work_center_res',
 			'vname' => 'LBL_WORK_CENTER_RES',
@@ -1314,7 +1314,7 @@ $dictionary['HAM_WO'] = array (
 			
 		),
 		'work_center_people' => array (
-			'required' => false,
+			'required' => true,
 			'source' => 'non-db',
 			'name' => 'work_center_people',
 			'vname' => 'LBL_WORK_CENTER_PEOPLE',
