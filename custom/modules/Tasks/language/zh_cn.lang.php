@@ -18,4 +18,5 @@ $mod_strings = array (
   'LBL_TASK_TYPE' => '任务类型',
   'LBL_HAA_FRAMEWORK_HAA_FRAMEWORKS_ID' => '业务框架 (related Business Framework ID)',
   'LBL_HAA_FRAMEWORK' => '业务框架',
+  
 );
