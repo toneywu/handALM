@@ -89,6 +89,7 @@ if (curl_errno($soap_do)) {
 				$product_status_name_val = $record['PRODUCT_STATUS_NAME'];
 				$item_number_val = $record['ITEM_NUMBER'];
 				$parent_product = $record['PARENT_PRODUCT'];
+				$primary_uom_code = $record['PRIMARY_UOM_CODE'];
 				echo 'Product_Name= ' . $product_name_val . "<br>".',product_code = ' . $product_code_val.',item_number = ' . $item_number_val;
 				$check_product = BeanFactory :: getBean('AOS_Products')->get_full_list('', "aos_products.part_number = '{$product_code_val}'");
 				//是否创建产品类别
@@ -119,6 +120,14 @@ if (curl_errno($soap_do)) {
 						$product_bean->aos_product_category_id = $product_category->id;
 					} else {
 						$product_bean->aos_product_category_id = $check_product_category[0]->id;
+					}
+					//通过单位找到单位的id
+					$uom_bean = BeanFactory :: getBean('HAA_UOM')->retrieve_by_string_fields(array (
+										    'name' => $primary_uom_code
+					));	
+					$product_bean->haa_uom_id_c=$uom_bean->id;
+					if (empty($uom_bean)){
+						echo "单位为空 请先维护.";
 					}
 					$product_bean->save();
 				}

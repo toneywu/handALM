@@ -11,6 +11,22 @@ function setEventTypePopupReturn(popupReplyData){
 	setEventTypeFields();
 }
 
+
+function showWOLines(wo_id) {
+    console.log('index.php?to_pdf=true&module=HAM_WO&action=getWOLiness&id=' + wo_id);
+        $.ajax({
+            url: 'index.php?to_pdf=true&module=HAM_WO&action=getWOLiness&id=' + wo_id,
+            success: function (data) {
+                //console.log(data);
+                $("#wo_lines_display").html(data);
+            },
+            error: function () { //失败
+                alert('Error loading document');
+            }
+        });
+};
+
+
 function setTargetOwningOrgPopupReturn(popupReplyData){
 	set_return(popupReplyData);
 	if($("#target_owning_org").val()=="") {
@@ -205,5 +221,14 @@ $(document).ready(function(){
 	});	
 	
 	$("#email").css("color","");
+	
+	$("#wo_lines").hide();
+    $("#wo_lines").after("<div id='wo_lines_display'></div>")
+    if ($("#source_wo_id").val()!="") {
+    	//如果来源于工作单则显示工作单对象行信息，否则直接隐藏行
+    	showWOLines($("#source_wo_id").val());
+    } else {
+		$("#wo_lines").parent("td").prev("td").hide();
+    }
 }
 )

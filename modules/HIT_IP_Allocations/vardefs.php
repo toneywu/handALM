@@ -954,6 +954,8 @@ $dictionary['HIT_IP_Allocations'] = array (
 			'size' => '20',
 		),
 		
+		
+		
 	),
 	'relationships' => array (),
 	'optimistic_locking' => true,

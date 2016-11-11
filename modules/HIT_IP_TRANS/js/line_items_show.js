@@ -432,7 +432,7 @@ function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_line_date_end"+ln).html($("#line_date_end"+ln).val());
   $("#displayed_line_broadband_type"+ln).html($("#line_broadband_type"+ln).val());
   
-  if ($("#line_enable_action"+ln).val()=="0") {
+  if ($("#line_enable_action"+ln).val()=="1") {
     $("#displayed_line_enable_action"+ln).attr("checked",true);
     $("#displayed_line_enable_action"+ln).prop("checked",true);
     document.getElementById("displayed_line_enable_action"+ln).checked = true;

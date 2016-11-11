@@ -157,7 +157,8 @@ function save_asset_lines($focus){
 
 function save_rack_allocations($focus, $parent){
 
-    $RackAllocation = BeanFactory::getBean('HIT_Rack_Allocations') ->retrieve_by_string_fields(array('hit_rack_allocations.hat_assets_id'=> $focus->asset_id));
+    $RackAllocation = BeanFactory::getBean('HIT_Rack_Allocations') ->retrieve_by_string_fields(array('hit_rack_allocations.hat_assets_id'=> $focu
+    s->asset_id));
         //基于当前设备（Asset_ID)进行查找，一个资产只能被分配到一个位置。
         //如果已经有位置了，则将当前位置进行更新，否则添加一个新的U位分配
         //

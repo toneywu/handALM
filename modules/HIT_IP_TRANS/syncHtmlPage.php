@@ -35,7 +35,7 @@ $sql = "SELECT   null id
 									,hat.mrtg_link
 									,hat.access_assets_id
 									,c.name access_assets_name 	
-									,'OTHER_WOOP' source_ref,
+									,null source_ref,
 									hat.date_entered,
 									hat.access_assets_backup_id,
 									d.name access_assets_backup_name

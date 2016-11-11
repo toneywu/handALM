@@ -59,6 +59,16 @@ array (
             'name' => 'product',
             'studio' => 'visible',
             'label' => 'LBL_PRODUCT',
+            'displayParams' => 
+            array (
+              'field_to_name_array' => 
+              array (
+                'name' => 'product',
+                'id' => 'product_id',
+                'haa_uom_id_c'=>'uom_id',
+                'primary_uom_c'=>'uom_code'
+              ),
+            ),
           ),
         ),
         2 => 
