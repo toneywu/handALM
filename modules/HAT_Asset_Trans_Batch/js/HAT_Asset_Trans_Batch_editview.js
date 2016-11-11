@@ -94,7 +94,7 @@ function resetEventType() {
 	} else if (global_eventOptions.change_owning_org == "OPTIONAL"){
 		mark_field_enabled('target_owning_org',true);
 	} else {
-		mark_field_disabled('target_owning_org',false);
+		mark_field_disabled('target_owning_org',false,false,false); //所属组织字段不可见,并清空当前值
 	}
 	if (global_eventOptions.change_owning_org == "REQUIRED"||global_eventOptions.change_owning_org == "OPTIONAL"){
 		$("#target_owning_org").val($("#source_wo_account").val())
@@ -108,7 +108,7 @@ function resetEventType() {
 	} else if (global_eventOptions.change_using_org == "OPTIONAL"){
 		mark_field_enabled('target_using_org',true);
 	} else {
-		mark_field_disabled('target_using_org',false); //使用组织字段不可见
+		mark_field_disabled('target_using_org',false,false,false); //使用组织字段不可见,并清空当前值
 	}
 
 	//如果需要变化（包括必须变化和可以变化2种场景，就从工作单上进行默认）

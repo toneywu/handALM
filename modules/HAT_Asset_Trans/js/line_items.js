@@ -761,12 +761,15 @@ function markLineDeleted(ln, key) {//删除当前行
   document.getElementById(key + 'deleted' + ln).value = '1';
   document.getElementById(key + 'delete_line' + ln).onclick = '';
 
-  if (typeof validate != "undefined" && typeof validate['EditView'] != "undefined") {
+
+  $("#line_*"+ ln).children().remove(".required");
+
+/*  if (typeof validate != "undefined" && typeof validate['EditView'] != "undefined") {
     removeFromValidate('EditView','line_asset'+ ln);
     removeFromValidate('EditView','line_name'+ ln);
     removeFromValidate('EditView','line_target_organization'+ ln);
     removeFromValidate('EditView','line_target_location'+ ln);
-  }
+  }*/
   resetLineNum();
 
 }

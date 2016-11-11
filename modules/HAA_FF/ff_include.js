@@ -89,8 +89,9 @@ function setFF(FFObj) {
 		//TODO:
 		//这里的处理逻辑没有写完，因为判断的逻辑比较复杂。先要判断当前字段是否为必须，然后需要继续当前是否有变化来进行处理
 		//并且处理包括在样式上打上*的标记或去除，以及在字段验证上进行处理
-		if ((FFObj.att_required == 0||FFObj.att_required == '0')
-			&&(FFObj.fieldtype!="HIDE"&&FFObj.fieldtype!="PLACEHOLDER"&&FFObj.fieldtype!="CHECKBOX")) {
+		//
+
+		if (FFObj.att_required == 0||FFObj.att_required == '0' || FFObj.fieldtype!="HIDE" || FFObj.fieldtype!="PLACEHOLDER" || FFObj.fieldtype!="CHECKBOX"){
 			//非必须
 			$("#"+FFObj.field+'_label').children().remove(".required");
 		} else {
@@ -113,7 +114,7 @@ function setFF(FFObj) {
 	}
 }
 //重写check_form方法
-function check_form(formname){
+/*function check_form(formname){
 	if(typeof(siw)!='undefined'&&siw&&typeof(siw.selectingSomething)!='undefined'&&siw.selectingSomething)
 		return false;
 	else{
@@ -141,7 +142,7 @@ function check_form(formname){
 		if(!flag)
 			return validate_form(formname,'');
 	}
-}
+}*/
 
 /******************************
 //在FF设置之前进行调用，用于将所有的Attribute对象进行隐藏，也就是所有的Attribute默认都是不显示的，除非在FF中进行了设置
@@ -262,7 +263,7 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false, donot_c
 	    if (typeof validate != "undefined" && typeof validate['EditView'] != "undefined") {
 	      removeFromValidate('EditView',field_name); //去除必须验证
 	    }
-	    $("#"+field_name+"_label .required").hide();
+	    $("#"+field_name+"_label").children().remove(".required");
 
 	    if  (typeof $("#btn_"+field_name)!= 'undefined') {
 	      $("#btn_"+field_name).css({"visibility":"hidden"});
@@ -375,30 +376,37 @@ function mark_field_readonly(field_name) {
 }
 
 
-function mark_field_enabled(field_name,not_required_bool) {
+function mark_field_enabled(field_name, not_required_bool) {
   // field_name = 字段名，不需要jquery select标志，直接写名字
   // not_required_bool如果为空或没有明确定义为true的话，字段为必须输入。如果=true则为非必须
+  // not_required_bool = ture = 非必须，可选
+  // not_required_bool = false = 必须
   // alert(not_required_bool);
   $("#"+field_name).css({"color":"#000000","background-Color":"#ffffff"});
   $("#"+field_name).attr("readonly",false);
   $("#"+field_name+"_label").css({"color":"#000000"})
 
+
+
   if(typeof not_required_bool == "undefined" || not_required_bool==false || not_required_bool=="") {
-      addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());// 将当前字段标记为必须验证
+      //addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());// 将当前字段标记为必须验证
       // 打上必须星标
-      if  ($("#"+field_name+"_label .required").text()!='*') {// 如果没有星标，则打上星标
-        $("#"+field_name+"_label").html($("#"+field_name+"_label").text()+"<span class='required'>*</span>");// 打上星标
-      } else {// 如果已经有星标了，则显示出来
-        $("#"+field_name+"_label .required").show();
-      }
+      $("#"+field_name+'_label').children().remove(".required");
+		if ($("#"+field_name+'_label').is(":visible")) {
+			addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());
+			$("#"+field_name+"_label").append('<span class="required">*</span>');
+			//只需要加入这个Class系统就会自动进行验证，不需要额外的内容
+		}
 
   } else { // 如果不是必须的，则不显示星标
     // 直接Remove有时会出错，所有先设置为Validate再Remove
     addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());
     removeFromValidate('EditView',field_name);
      // 去除必须验证
-    $("#"+field_name+"_label .required").hide();
+    /*$("#"+field_name+"_label .required").hide();*/
+     $("#"+field_name+'_label').children().remove(".required");
   }
+
   if  (typeof $("#btn_"+field_name)!= 'undefined') {// 移除选择按钮
     $("#btn_"+field_name).css({"visibility":"visible"});
   }
@@ -428,7 +436,12 @@ function FFCheckField(field_id,ajaxStr,errMsg) {
 				clear_all_errors();
 				if (data=='0'||data==0) {
 					console.log('error');
+					$("#SAVE_HEADER").prop('disabled', true);
+					$("#SAVE_HEADER").addClass('disabled');
 					add_error_style('EditView',field_id,errMsg);
+				} else {
+					$("#SAVE_HEADER").prop('disabled', false);
+					$("#SAVE_HEADER").removeClass('disabled');
 				}
 			},//end sucess
 			error: function () { //失败

@@ -12,77 +12,83 @@ array (
         array (
           0 => '<input type="hidden" name="source_woop_id" id="source_woop_id" value="{$SOURCE_WOOP_ID}">',
           1 => '<input type="hidden" name="source_wo_id"  id="source_wo_id" value="{$SOURCE_WO_ID}">',
-          2 => '<input type="hidden" name="source_wo_account"  id="source_wo_account" value="{$SOURCE_WO_ACCOUNT}">',
-          3 => '<input type="hidden" name="source_wo_account_id"  id="source_wo_account_id" value="{$SOURCE_WO_ACCOUNT_ID}">',
-          4 => '<input type="hidden" name="source_wo_contact"  id="source_wo_contact" value="{$SOURCE_WO_CONTACT}">',
-          5 => '<input type="hidden" name="source_wo_contact_id"  id="source_wo_contact_id" value="{$SOURCE_WO_CONTACT}">',
-          11 => '<input type="hidden" name="require_approval_workflow" id="require_approval_workflow">',
-          12 => '<input type="hidden" name="eventOptions" id="eventOptions">',        ),
+          2 => '<input type="hidden" name="source_wo_org"  id="source_wo_org" value="{$SOURCE_WO_ORG}">',
+          3 => '<input type="hidden" name="source_wo_account"  id="source_wo_account" value="{$SOURCE_WO_ACCOUNT}">',
+          4 => '<input type="hidden" name="source_wo_account_id"  id="source_wo_account_id" value="{$SOURCE_WO_ACCOUNT_ID}">',
+          5 => '<input type="hidden" name="source_wo_contact"  id="source_wo_contact" value="{$SOURCE_WO_CONTACT}">',
+          6 => '<input type="hidden" name="source_wo_contact_id"  id="source_wo_contact_id" value="{$SOURCE_WO_CONTACT}">',
+          11 => '<input type="hidden" name="eventOptions" id="eventOptions">',
+        ),
       ),
-      'includes' =>
+      'includes' => 
       array (
-        0 =>
+        0 => 
         array (
           'file' => 'modules/HAA_FF/ff_include.js',
         ),
-        1 =>
+        1 => 
         array (
-        'file' => 'modules/HIT_IP_TRANS_BATCH/js/html_dom_required_setting.js',
+          'file' => 'modules/HIT_IP_TRANS_BATCH/js/html_dom_required_setting.js',
         ),
-        2 =>
+        2 => 
         array (
           'file' => 'modules/HAT_Asset_Trans_Batch/js/HAT_Asset_Trans_Batch_editview.js',
         ),
       ),
       'maxColumns' => '2',
-      'widths' =>
+      'widths' => 
       array (
-        0 =>
+        0 => 
         array (
           'label' => '10',
           'field' => '30',
         ),
-        1 =>
+        1 => 
         array (
           'label' => '10',
           'field' => '30',
         ),
       ),
       'useTabs' => false,
-      'tabDefs' =>
+      'tabDefs' => 
       array (
-        'DEFAULT' =>
+        'DEFAULT' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_EDITVIEW_PANEL1' =>
+        'LBL_EDITVIEW_PANEL2' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_EDITVIEW_PANEL1' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
       ),
     ),
-    'panels' =>
+    'panels' => 
     array (
-      'default' =>
+      'default' => 
       array (
-        0 =>
+        0 => 
         array (
-          0 =>
+          0 => 
           array (
             'name' => 'framework',
             'customCode' => '{$FRAMEWORK}',
           ),
-          1 =>
+          1 => 
           array (
             'name' => 'event_type',
             'studio' => 'visible',
             'label' => 'LBL_EVENT_TYPE',
-            'displayParams' =>
+            'displayParams' => 
             array (
               'initial_filter' => '&basic_type_advanced=AT_MOVE',
-              'field_to_name_array' =>
+              'field_to_name_array' => 
               array (
                 'name' => 'event_type',
                 'id' => 'hat_eventtype_id',
@@ -93,7 +99,10 @@ array (
             ),
           ),
         ),
-        1 => 
+      ),
+      'lbl_editview_panel2' => 
+      array (
+        0 => 
         array (
           0 => 
           array (
@@ -103,7 +112,7 @@ array (
           ),
           1 => '',
         ),
-        2 => 
+        1 => 
         array (
           0 => 
           array (
@@ -113,7 +122,7 @@ array (
           ),
           1 => 'owner_contacts',
         ),
-        3 => 
+        2 => 
         array (
           0 => 
           array (
@@ -128,7 +137,7 @@ array (
             'label' => 'LBL_TARGET_USING_ORG',
           ),
         ),
-        4 => 
+        3 => 
         array (
           0 => 'name',
           1 => 
@@ -137,7 +146,7 @@ array (
             'label' => 'LBL_TRACKING_NUMBER',
           ),
         ),
-        5 => 
+        4 => 
         array (
           0 => 
           array (
@@ -150,17 +159,55 @@ array (
             'label' => 'LBL_PLANNED_COMPLETE_DATE',
           ),
         ),
-        6 =>
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute1',
+            'label' => 'LBL_ATTRIBUTE1',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute2',
+            'label' => 'LBL_ATTRIBUTE2',
+          ),
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute3',
+            'label' => 'LBL_ATTRIBUTE3',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute4',
+            'label' => 'LBL_ATTRIBUTE4',
+          ),
+        ),
+        7 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute5',
+            'label' => 'LBL_ATTRIBUTE5',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute6',
+            'label' => 'LBL_ATTRIBUTE6',
+          ),
+        ),
+        8 => 
         array (
           0 => 'description',
           1 => '',
         ),
-        7 => 
+        9 => 
         array (
           0 => 'wo_lines',
         ),
       ),
-
       'lbl_editview_panel1' => 
       array (
         0 => 

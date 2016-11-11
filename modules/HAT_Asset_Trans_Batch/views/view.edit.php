@@ -143,6 +143,8 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
             $this->bean->owner_id = $current_user->contact_id_c;
             $this->bean->current_owning_org_id = $current_user->account_id_c;
             $this->bean->current_owning_org = $current_user->contact_organization_c;
+            $this->bean->source_woop_id= "";
+            $this->bean->source_wo_id="";
         }
 		//2、加载基于code_asset_location_type_id的动态界面模板（FF）		
         if(isset($this->bean->hat_eventtype_id) && ($this->bean->hat_eventtype_id)!=""){

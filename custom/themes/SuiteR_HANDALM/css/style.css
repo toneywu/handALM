@@ -87,13 +87,19 @@ li.topnav:hover{
 	background-color:#286090;
 }
 
-#SAVE_HEADER,#SAVE_FOOTER,#search_form_submit,#save_and_continue,#Login{/*突出提交按钮*/
+/*突出提交按钮*/
+#SAVE_HEADER,#SAVE_FOOTER,#search_form_submit,#save_and_continue,#Login{
 	background-color:#00A2FF;
 }
 #SAVE_HEADER:hover,#SAVE_FOOTER:hover,#search_form_submit:hover,#save_and_continue:hover,#Login:hover{
 	/*突出提交按钮(绿色）另btn_save为客户化标签*/
 	background-color:#00b359;
 }
+#SAVE_HEADER.disabled,#SAVE_FOOTER.disabled,#search_form_submit.disabled,#save_and_continue.disabled,#Login.disabled{
+	/*突出提交按钮(绿色）另btn_save为客户化标签*/
+	background-color:#ccc;
+}
+
 
 
 .paginationChangeButtons button[disabled],.paginationChangeButtons  input[type="submit"][disabled],.paginationChangeButtons  input[type="reset"][disabled],.paginationChangeButtons  input[type="button"][disabled] {

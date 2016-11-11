@@ -96,4 +96,5 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL1' => '事务处理行',
   'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL'=>'更改状态',
   'LBL_PDF_TEMPLATES'=>'PDF模板',
+  'LBL_EDITVIEW_PANEL2'=>'题头',
 );
