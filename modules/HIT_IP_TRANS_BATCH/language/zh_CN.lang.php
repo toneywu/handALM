@@ -100,4 +100,5 @@ $mod_strings = array (
   'LBL_ATTRIBUTE6'=>'属性记录 6',
   'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL'=>'更改状态',
   'LBL_EDITVIEW_PANEL2'=>'附加信息',
+  'LBL_WO_LINES'=>'工单对象行',
 );

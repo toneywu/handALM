@@ -9,6 +9,20 @@ function call_ff() {
 }
 
 
+function showWOLines(wo_id) {
+    console.log('index.php?to_pdf=true&module=HAM_WO&action=getWOLiness&id=' + wo_id);
+        $.ajax({
+            url: 'index.php?to_pdf=true&module=HAM_WO&action=getWOLiness&id=' + wo_id,
+            success: function (data) {
+                //console.log(data);
+                $("#wo_lines_display").html(data);
+            },
+            error: function () { //失败
+                alert('Error loading document');
+            }
+        });
+};
+
 /**
  * 点击按钮 调用Ajax请求 保存
  * @param name
@@ -64,6 +78,14 @@ $(document).ready(function() {
 
   $("#line_items_span").parent("td").prev("td").hide();
   //去除行前的标签
+  
+   if (typeof $("#source_wo_id").attr("data-id-value") != "undefined") {
+		// 如果来源于工作单则显示工作单对象行信息，否则直接隐藏行
+		$("#wo_lines").append("<div id='wo_lines_display'></div>");
+		showWOLines($("#source_wo_id").attr("data-id-value"));
+	} else {
+		$("#wo_lines").parent("tr").hide();
+	}
   
     var change_btn=$("<input type='button' class='btn_detailview' id='btn_change_status' value='"+SUGAR.language.get('HIT_IP_TRANS_BATCH', 'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL')+"'>");
 	

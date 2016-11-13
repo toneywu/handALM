@@ -248,6 +248,7 @@ function save_rack_allocations($focus, $parent){
     //这里需要进行区分，如果当前的设备是IT设备是一种处理方式，如果当前资产是机柜则是另一种处理方式
     $beanAsset = BeanFactory::getBean('HAT_Assets', $focus->asset_id);
 
+
     if ($beanAsset && $beanAsset->enable_it_ports == 1 && $beanAsset->enable_it_rack == 0) { // test if $bean was loaded successfully
         //如果当前为IT设备，则为当前IT设备进行分配。
         $RackAllocation = BeanFactory::getBean('HIT_Rack_Allocations') ->retrieve_by_string_fields(array('hit_rack_allocations.hat_assets_id'=> $focus->asset_id));

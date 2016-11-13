@@ -77,10 +77,10 @@ array (
             array (
               'field_to_name_array' => 
               array (
-                'name' => 'framework_c',
-                'id' => 'haa_frameworks_id_c',
-                'default_product_uom' => 'primary_uom_c',
-                'default_product_uom_id' => 'haa_uom_id_c',
+                'name' => 'product',
+                'id' => 'product_id',
+                'haa_uom_id_c'=>'uom_id',
+                'primary_uom_c'=>'uom_code'
               ),
             ),
           ),

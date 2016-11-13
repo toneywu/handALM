@@ -77,8 +77,8 @@ function selectedLine(selectIn){
 		var mydate = new Date();
   		var currentDate=mydate.toLocaleString();
 		$("#line_date_end"+selectIn).val(getnowtime());
-		$("#line_enable_action"+selectIn).val('0');
-		$("#line_enable_action_val"+selectIn).val('0');
+		$("#line_enable_action"+selectIn).val('1');
+		$("#line_enable_action_val"+selectIn).val('1');
         $("#displayed_line_enable_action"+selectIn).attr("checked",true);
         $("#displayed_line_enable_action"+selectIn).prop("checked",true);
         document.getElementById("displayed_line_enable_action"+selectIn).checked = true;
@@ -89,8 +89,8 @@ function selectedLine(selectIn){
 		$("#line_status_dis"+selectIn).val(SUGAR.language.get('HIT_IP_TRANS', 'LBL_EFFECTIVE'));
 
         $("#displayed_line_enable_action"+selectIn).removeAttr("checked");
-        $("#line_enable_action"+selectIn).val('1');
-        $("#line_enable_action_val"+selectIn).val('1');
+        $("#line_enable_action"+selectIn).val('0');
+        $("#line_enable_action_val"+selectIn).val('0');
 	}
 	
 }
@@ -608,7 +608,7 @@ function insertLineData(asset_trans_line) { // 将数据写入到对应的行字
 	  	  $("#line_status_dis"+ln).val(SUGAR.language.get('HIT_IP_TRANS',"LBL_EFFICACY"));
 	    } 
 	    
-	    if($("#line_enable_action"+ln).val()=="0"){
+	    if($("#line_enable_action"+ln).val()=="1"){
   	 	 $("#line_enable_action"+ln).attr("checked",true);
      	 $("#line_enable_action"+ln).prop("checked",true);
       	 document.getElementById("displayed_line_enable_action"+ln).checked = true;

@@ -872,6 +872,29 @@ $dictionary['HIT_IP_TRANS'] = array (
 			'len' => '255',
 			'size' => '20',
 		),
+		
+		'history_id' => array (
+			'required' => false,
+			'name' => 'history_id',
+			'vname' => 'LBL_HISTORY_ID',
+			'type' => 'id',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => 0,
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => false,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => 36,
+			'size' => '20',
+
+			
+		),
 
             
 	
