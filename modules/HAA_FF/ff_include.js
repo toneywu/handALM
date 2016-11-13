@@ -4,7 +4,11 @@
 * 同时这个文件中还提供了以下重要的函数
 * mark_field_disabled
 * mark_field_enabled
+* FFCheckField
 *************************************************************/
+$.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); //MessageBox
+$('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
+
 
 function triger_setFF(id_value, module_name) {
   //console.log("index.php?to_pdf=true&module=HAA_FF&action=setFF&ff_module="+module_name+"&ff_id="+id_value);
@@ -416,36 +420,122 @@ function mark_field_enabled(field_name, not_required_bool) {
 }
 
 
-function FFCheckField(field_id,ajaxStr,errMsg) {
+/***************************************
+*FFCheckField用于，通过Ajax完成字段的合规性验证
+*常用于:重名检测，关联性检测及更复杂的用途
+***************************************
+*Parameters:
+* field_idStr string 当前被验证字段的ID名
+* ajaxStr string 需要向HAA_FF/validateField.php传递的所有参数
+* errMsg string 如果验证失败，显示的错误信息
+* async_bool
+***************************************
+* Return
+* Ture: 没有任何问题
+* False : 有验证错误
+* 其它备注：本函数一般与OverwriteSaveBtn()配合使用
+***************************************/
 	// for example,
 	// ajaxStr="d&mode=locationName&val='+checkname+'&id=' + locaton_id"
 	// errMsg="SUGAR.language.get('app_strings', 'LBL_DUPLICATED_ERR')"
 
-	var checkname =$("#"+field_id+"").val();
+function FFCheckField( field_idStr, ajaxStr, errMsg, async_bool=false) {
+	//console.log('index.php?to_pdf=true&module=HAA_FF&action=validateField&'+ajaxStr);
+	var result=false;
+	var checkname =$("#"+field_idStr).val();
 
-		console.log('index.php?to_pdf=true&module=HAA_FF&action=validateField&'+ajaxStr);
 		if(checkname=="") {
 			return
 		}
+		$("#"+field_idStr).after("<span id='"+field_idStr+"_validating'> Validating...</span>");
 
 		$.ajax({//
 			url: 'index.php?to_pdf=true&module=HAA_FF&action=validateField&'+ajaxStr,
-			//async: false,
+			async: async_bool,
 			success: function (data) {
 				console.log("checked result="+data+":"+(data=='0'||data==0));
 				clear_all_errors();
+				$("#"+field_idStr+"_validating").remove();
+				save_btn=$("#SAVE_HEADER, #SAVE_FOOTER")
 				if (data=='0'||data==0) {
-					console.log('error');
-					$("#SAVE_HEADER").prop('disabled', true);
-					$("#SAVE_HEADER").addClass('disabled');
-					add_error_style('EditView',field_id,errMsg);
+					//console.log('error');
+/*					save_btn.prop('disabled', true);
+					save_btn.addClass('disabled');*/
+					add_error_style('EditView',field_idStr,errMsg);
+					result=false;
 				} else {
-					$("#SAVE_HEADER").prop('disabled', false);
-					$("#SAVE_HEADER").removeClass('disabled');
+/*					save_btn.prop('disabled', false);
+					save_btn.removeClass('disabled');*/
+					result=true;
 				}
 			},//end sucess
 			error: function () { //失败
 				alert('Error loading AJAX for status check');
+				$("#"+field_idStr+"_validating").remove();
 			}//end error
 		})//end ajax
+
+		return result;
+}
+
+/***************************************
+*OverwriteSaveBtn() 代替标准的SAVE及SAVE&Continue按钮，允许在提交前进行额外的逻辑校验
+***************************************
+**Parameters:
+* preValidateFunction function 之前需要校验的逻辑，指向一个Function，
+* 							   这里是检验逻辑，可能是一短简单的JS校验，也可能是一段耗时更长的Ajax检查
+*                              这个逻辑完成了额外的验证逻辑与提示信息，并且返回true/false表示通过/不通过
+*                              在这个逻辑中可以不包括check_form因为在本函数中提交前会最终确认一次check_form()
+*结果：
+*	 无返回值，这个函数会依据参数的结果，决定是否进行保存。如果参数结果为false则什么也不做。
+*备注：
+*本函数一般只用于EditView的场景，在EditView对应的JS中配合FFCheckField（）完成
+***************************************/
+function OverwriteSaveBtn(preValidateFunction) {
+	SaveBtn = $('#SAVE_HEADER, #SAVE_FOOTER');
+	SaveBtn.removeAttr('onclick');
+	SaveBtn.attr("type","button"); //防止有Submit类的Button会自动提交，因此将类型变为Button
+
+	SaveBtn.click(function(){
+		//因为数据校验可能需要时间，在此可以先进行用户提示
+		//因为Ajax检查时间可能很长，因此在检查前先显示出Dialog提示用户
+		var validateResult = preValidateFunction();
+		if ($(".validation-message").length==0 && validateResult) {//如果验证没有问题
+			//执行Save按钮正常执行的内容
+			validateResult = check_form('EditView');//通过标准的check_form再做一次校验
+			if (validateResult) {
+				BootstrapDialog.show({
+            		message: "<img src='"+SUGAR.themes.loading_image+"'/> "+SUGAR.language.get('app_strings', 'LBL_SAVING')+" & "+SUGAR.language.get('app_strings', 'LBL_LOADING_PAGE'),
+        		});
+ 				//以下是Save按钮标准的保存内容
+ 				var _form = document.getElementById('EditView'); _form.action.value='Save'; if(validateResult)SUGAR.ajaxUI.submitForm(_form);return false;
+ 			}
+		} else {
+			console.log("Something wrong");
+			dialog.close();
+		}
+
+	// /save_and_continue 在修改时会存在，新增时不存在
+	});
+
+	if ($("#save_and_continue").length>0) {
+		SaveCtiBtn = $('#save_and_continue');
+		SaveCtiBtn.removeAttr('onclick');
+		SaveCtiBtn.attr("type","button"); //防止有Submit类的Button会自动提交，因此将类型变为Button
+
+		SaveCtiBtn.click(function(){
+			//因为数据校验可能需要时间，在此可以先进行用户提示
+			var validateResult = preValidateFunction();
+			if ($(".validation-message").length==0 && validateResult) {//如果验证没有问题
+				//执行Save按钮正常执行的内容
+				validateResult = check_form('EditView');//通过标准的check_form再做一次校验
+				if (validateResult) {
+	 				//以下是Save按钮标准的保存内容
+					this.form.action.value='Save';if(check_form('EditView')){sendAndRedirect('EditView', 'Saving HAT_Asset_Locations...', '?action=ajaxui#ajaxUILoc=index.php%3Faction%3DEditView%26module%3DHAT_Asset_Locations%26record%3Db65eb9e1-0bf7-baf7-d775-58071f913196%26offset%3D2');}	 			}
+			} else {
+					console.log("Something wrong")
+			}
+		});
+	};
+
 }

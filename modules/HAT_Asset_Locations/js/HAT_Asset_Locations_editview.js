@@ -41,14 +41,27 @@ $(document).ready(function() {
 		call_ff();
 	});
 
-	$("#name").change(function(){
+
+	function preValidateFunction(async_bool = false) {
 		//验证当前地点代码是否唯一
+		////如果是onChang校验，可以FFCheckField的async_bool=true这个输入过程与校验过程同步
+		///但如果是SAVE按钮的触发，一定要async=false(保持默认)
 		var ajaxStr='mode=locationName&val='+$("#name").val()+'&id=' + $("input[name*='record']" ).val()+'&site_id='+$("#ham_maint_sites_id").val();
 		var errMSG = SUGAR.language.get('app_strings', 'LBL_DUPLICATED_ERR');
-		FFCheckField('name',ajaxStr,errMSG);
+		var result= FFCheckField('name',ajaxStr,errMSG,async_bool);
+		console.log("checking..."+result);
+		return result;
+	}
+
+	$("#name").change(function(){
+		//验证当前地点代码是否唯一
+		preValidateFunction(true)//如果是onChang校验，可以FFCheckField的async_bool=true这个输入过程与校验过程同步
 	})//end onChange function
 
 
+	SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
+		OverwriteSaveBtn(preValidateFunction);//注意引用时不加（）
+	});
 
 
 });
