@@ -530,6 +530,9 @@ function OverwriteSaveBtn(preValidateFunction) {
 				//执行Save按钮正常执行的内容
 				validateResult = check_form('EditView');//通过标准的check_form再做一次校验
 				if (validateResult) {
+					BootstrapDialog.show({
+	            		message: "<img src='"+SUGAR.themes.loading_image+"'/> "+SUGAR.language.get('app_strings', 'LBL_SAVING')+" & "+SUGAR.language.get('app_strings', 'LBL_LOADING_PAGE'),
+	        		});
 	 				//以下是Save按钮标准的保存内容
 					this.form.action.value='Save';if(check_form('EditView')){sendAndRedirect('EditView', 'Saving HAT_Asset_Locations...', '?action=ajaxui#ajaxUILoc=index.php%3Faction%3DEditView%26module%3DHAT_Asset_Locations%26record%3Db65eb9e1-0bf7-baf7-d775-58071f913196%26offset%3D2');}	 			}
 			} else {
