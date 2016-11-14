@@ -9,6 +9,7 @@ class HAM_WOViewDetail extends ViewDetail {
 	function Display() {
 
 		parent :: Display(); 
+
 		//ff 在DetailView显示之前中进行初始化数据的加载 
 		if (isset ($this->bean->hat_event_type_id) && ($this->bean->hat_event_type_id) != "") {
 			$event_type_id = $this->bean->hat_event_type_id;
@@ -25,7 +26,6 @@ class HAM_WOViewDetail extends ViewDetail {
 				echo '<script>call_ff()</script>';
 			}
 		}
-
 	}
 
 	

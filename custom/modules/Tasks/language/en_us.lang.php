@@ -22,4 +22,5 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL1' => 'Result',
   'LBL_TASK_TYPE'=>'Task Type',
   'LBL_FRAME'=>'Frameworks',
+  'LBL_HAA_FRAMEWORK'=>'业务框架',
 );

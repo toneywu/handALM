@@ -58,7 +58,7 @@
         ln = insertServiceLine('service_group'+current_group,current_group);
         type = 'service_';
     }
-    console.log(product);
+
     for(var p in product){
         if(document.getElementById(type + p + ln) !== null){
             if(product[p] !== '' && isNumeric(product[p]) && p != 'vat'  && p != 'product_id' && p != 'name' && p != "part_number"){

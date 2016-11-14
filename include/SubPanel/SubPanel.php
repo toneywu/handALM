@@ -166,7 +166,8 @@ class SubPanel
 		}else{
 			$ListView = new ListView();
 		}
-		$ListView->initNewXTemplate($xTemplatePath,$this->subpanel_defs->mod_strings);
+	
+	    $ListView->initNewXTemplate($xTemplatePath,$this->subpanel_defs->mod_strings);
 		$ListView->xTemplateAssign("RETURN_URL", "&return_module=".$this->parent_module."&return_action=DetailView&return_id=".$this->parent_bean->id);
 		$ListView->xTemplateAssign("RELATED_MODULE", $this->parent_module);  // TODO: what about unions?
 		$ListView->xTemplateAssign("RECORD_ID", $this->parent_bean->id);

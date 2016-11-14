@@ -46,7 +46,6 @@ global $theme;
 global $beanList;
 global $beanFiles;
 
-
 if(empty($_REQUEST['module']))
 {
 	die("'module' was not defined");
