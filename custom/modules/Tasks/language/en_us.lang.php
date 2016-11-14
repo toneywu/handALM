@@ -1,7 +1,7 @@
 <?php
 // created: 2016-10-19 12:52:12
 $mod_strings = array (
-  'LBL_ACCOUNT' => 'Organization / Customer / Supplier',
+  'LBL_ACCOUNT' => 'Organization',
   'LBL_BUGS' => 'Bugs',
   'LBL_CASE' => 'Case',
   'LBL_CONTACT_NAME' => 'Person Name ',

@@ -15,5 +15,5 @@ $mod_strings = array (
   'LBL_ACCOUNT_NAME' => 'Account Name:',
   'LBL_ACCOUNT_ID' => 'Account ID',
   'LBL_ACCOUNT' => 'Account',
-  'LBL_LIST_ACCOUNT_NAME' => 'Organization / Customer / Supplier Name',
+  'LBL_LIST_ACCOUNT_NAME' => 'Organization Name',
 );
