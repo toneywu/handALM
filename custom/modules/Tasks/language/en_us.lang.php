@@ -21,5 +21,6 @@ $mod_strings = array (
   'LBL_HAT_ASSETS_CONTACTS' => 'Response Person',
   'LBL_EDITVIEW_PANEL1' => 'Result',
   'LBL_TASK_TYPE'=>'Task Type',
-  'LBL_FRAME'=>'Frameworks',
+  'LBL_HAA_FRAMEWORK_HAA_FRAMEWORKS_ID' => 'Business Framework(ID)',
+  'LBL_HAA_FRAMEWORK'=>'Business Framework',
 );
