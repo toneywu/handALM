@@ -125,8 +125,8 @@ $mod_strings = array (
   'LBL_CHANGE_ASSET_DATE_START'=>'Change Asset Start Date',
   'LBL_CHANGE_ASSET_DATE_END'=>'Change Asset End Date',
   'LBL_CHANGE_ENABLE_ACTION'=>'Change Enable Action',
-  'LBL_NEED_LIMIT_TRANSACTION_LINES'=>'Only Display History Of Organizations',
+  'LBL_NEED_LIMIT_TRANSACTION_LINES'=>'Limit IP to current Org.',
   'LBL_CHANGE_BROADBAND_TYPE'=>'Change Brandband Type',
-  'LBL_CHECK_CUSTOMER_HOLD'=>'Check Customer Hold',
-  
+  'LBL_CHECK_CUSTOMER_HOLD_T_USING'=>'Check Target Using Org. Hold',
+  'LBL_CHECK_CUSTOMER_HOLD_C_OWNING'=>'Check Current Owning Org. Hold',
 );

@@ -104,7 +104,16 @@ array (
           0 => 'asset_scope',
           1 => 'default_asset_list',
         ),
-        5 => 
+        5=>
+        array(
+          0=> 
+          array (
+            'name' => 'need_limit_transaction_lines',
+            'label' => 'LBL_NEED_LIMIT_TRANSACTION_LINES',
+          ),
+          1=>""
+        ),
+        6 => 
         array (
           0 => 
           array (
@@ -119,14 +128,10 @@ array (
             'label' => 'LBL_REQUIRE_CONFIRMATION',
           ),
         ),
-        6=>
+        7=>
         array(
-          0=>'check_customer_hold',
-          1=> 
-          array (
-            'name' => 'need_limit_transaction_lines',
-            'label' => 'LBL_NEED_LIMIT_TRANSACTION_LINES',
-          ),
+          0=>'check_customer_hold_t_using',
+          1=>'check_customer_hold_c_owning',
         ),
       ),
       'lbl_editview_panel1' => 
