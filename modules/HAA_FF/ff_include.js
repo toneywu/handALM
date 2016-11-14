@@ -11,7 +11,7 @@ $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialo
 
 
 function triger_setFF(id_value, module_name) {
-  //console.log("index.php?to_pdf=true&module=HAA_FF&action=setFF&ff_module="+module_name+"&ff_id="+id_value);
+  console.log("index.php?to_pdf=true&module=HAA_FF&action=setFF&ff_module="+module_name+"&ff_id="+id_value);
   if (id_value!="") {
    $.ajax({
         url: "index.php?to_pdf=true&module=HAA_FF&action=setFF&ff_module="+module_name+"&ff_id="+id_value,
@@ -47,7 +47,7 @@ function htmlUnescape(str){
 function setFF(FFObj) {
 	//设置FlexFORM，基于triger_setFF函数读取到的Ajax结果，动态的调整界面字段
 	//其中FFObj是FF_Fields中定义的需要变化的各个字段及属性
-	//console.log(FFObj);//<-------------------如果你需要调试，可以将这一行的内容输出
+	console.log(FFObj);//<-------------------如果你需要调试，可以将这一行的内容输出
 
 	var view = action_sugar_grp1;
 	//有些界面在EditView和DetailView中处理有所不同，因此先读取出当前界面是哪些，保存在View中
@@ -64,20 +64,15 @@ function setFF(FFObj) {
 	} else if (FFObj.fieldtype=="READONLY"){
 		//write annother function to control
 		//add by yuan.chen
-
 		mark_field_readonly(FFObj.field,false);
-		//修改标签名称
-		if (FFObj.label!=null && FFObj.label!="") {
-			if (view=="EditView") {
-				$("#"+FFObj.field+'_label').html(FFObj.label+":"); 
-			} else if(view =="DetailView") {
-				$("td[field='"+FFObj.field+"']").prev("td").html(FFObj.label+":");
-			}
-		}
-		//end 
-	} else {
+
+	}
+
+
+	//修改标签名称
+	 if (FFObj.fieldtype!="HIDE" && FFObj.fieldtype!="PLACEHOLDER") {
 	//如果是非隐藏字段
-		//修改标签名称
+		console.log(FFObj.field + " lab:"+FFObj.label+" "+(FFObj.label!=null))
 		if (FFObj.label!=null && FFObj.label!="") {
 			if (view=="EditView") {
 				$("#"+FFObj.field+'_label').html(FFObj.label+":"); 
@@ -90,11 +85,6 @@ function setFF(FFObj) {
 
 	if (view=="EditView") {
 		//设定是否为必须值
-		//TODO:
-		//这里的处理逻辑没有写完，因为判断的逻辑比较复杂。先要判断当前字段是否为必须，然后需要继续当前是否有变化来进行处理
-		//并且处理包括在样式上打上*的标记或去除，以及在字段验证上进行处理
-		//
-
 		if (FFObj.att_required == 0||FFObj.att_required == '0' || FFObj.fieldtype!="HIDE" || FFObj.fieldtype!="PLACEHOLDER" || FFObj.fieldtype!="CHECKBOX"){
 			//非必须
 			$("#"+FFObj.field+'_label').children().remove(".required");
@@ -105,8 +95,6 @@ function setFF(FFObj) {
 				//只需要加入这个Class系统就会自动进行验证，不需要额外的内容
 			}
 		}
-
-		//TODO还需要添加字段为值列表、Checkbox等一系列形态
 
 		//设定默认值
 		if (FFObj.default_val!=null&&FFObj.default_val!="") {
@@ -182,7 +170,7 @@ function mark_field_setlist(fields) {
 	var field_name=fields.field;
 	if (view=='EditView') {
 		var html="<select id='"+field_name+"' name='"+field_name+"'></select>";
-		$("#"+field_name+'_label').html(fields.label+":");
+		//$("#"+field_name+'_label').html(fields.label+":");
 		$("#"+field_name).parent().html(html);
 		$.ajax({
 			url:"index.php?to_pdf=true&module=HAA_FF&action=get_HAA_FF&code_tag="+fields.listfilter,

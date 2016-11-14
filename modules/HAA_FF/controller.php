@@ -32,7 +32,7 @@ class HAA_FFController extends SugarController {
                             ON haa_ff_fields.`id` = haa_ff_labels.`haa_ff_field_id`
                             AND haa_ff_labels.`deleted` = 0
                             AND haa_ff_labels.`lang` = '".(isset($current_language)?$current_language:'en_us')."'
-                        WHERE haa_ff_fields.`haa_ff_id`  = '".$_REQUEST['ff_id']."'";
+                        WHERE haa_ff_fields.`haa_ff_id`  = '".$_REQUEST['ff_id']."' AND haa_ff_fields.deleted = 0";
                          // echo $sql;
             $result = $db->query($sql);
             while ($row = $db->fetchByAssoc($result)) {
