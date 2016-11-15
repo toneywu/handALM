@@ -17,6 +17,11 @@
 			'submenu' => ''
 			 );
 
+	    $global_control_links['ViewLog'] = array(
+			'linkinfo' => array($app_strings['LBL_DISPLAY_LOG'] => 'javascript:void(window.open(\'index.php?module=Configurator&action=LogView\'))'),
+			'submenu' => ''
+			 );
+
 	}
 
 

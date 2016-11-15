@@ -286,13 +286,12 @@ $(document).ready(function(){
     }
 
 
-	//提交时做客户的信息检查，如果当前客户有值，并且头状态为提交，则进行信息检查
+/*	//提交时做客户的信息检查，如果当前客户有值，并且头状态为提交，则进行信息检查
 	$("#asset_trans_status").change(function(){
 		//注意：这里只对头上的做了验证，没有去验证行
 			if($("#eventOptions").val()=="") {
 				return
-			}
-		
+
 		var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());
 
 
@@ -318,4 +317,28 @@ $(document).ready(function(){
 			}//end if
 		}
 	})//end onChange function
+*/
+
+	function preValidateFunction(async_bool = false) {
+		//验证当前如果状态是Submit则用户是否有暂挂冲突
+		////如果是onChang校验，可以FFCheckField的async_bool=true这个输入过程与校验过程同步
+		///但如果是SAVE按钮的触发，一定要async=false(保持默认)
+		var ajaxStr='mode=CustomHold&val='+$("#name").val()+'&id=' + $("input[name*='record']" ).val();
+		var errMSG = SUGAR.language.get('app_strings', 'LBL_CUSTOMER_HOLD_ERR');
+
+		var result= FFCheckField('name',ajaxStr,errMSG,async_bool);
+		return result;
+	}
+
+	$("#asset_trans_status").change(function(){
+		//验证当前地点代码是否唯一
+		preValidateFunction(true)//如果是onChang校验，可以FFCheckField的async_bool=true这个输入过程与校验过程同步
+	})//end onChange function
+
+
+	SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
+		OverwriteSaveBtn(preValidateFunction);//注意引用时不加（）
+	});
+
+
 })

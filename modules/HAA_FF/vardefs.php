@@ -188,7 +188,7 @@ $dictionary['HAA_FF'] = array(
 				'include' => 'modules/HAA_FF_Fields/FieldLines.php'
 				),
 			),
-		'ff_conditions' =>
+/*		'ff_conditions' =>
 		array(
 			'name' => 'ff_conditions',
 			'type' => 'link',
@@ -196,7 +196,7 @@ $dictionary['HAA_FF'] = array(
 			'module' => 'HAA_FF_Conditions',
 			'bean_name' => 'HAA_FF_Conditions',
 			'source' => 'non-db',
-			),
+			),*/
 		'ff_fields' =>
 		array(
 			'name' => 'ff_fields',
@@ -208,7 +208,7 @@ $dictionary['HAA_FF'] = array(
 			),
 		),
 	'relationships'=>array (
-		'ff_ff_conditions' =>
+/*		'ff_ff_conditions' =>
 		array(
 			'lhs_module' => 'HAA_FF',
 			'lhs_table' => 'haa_ff',
@@ -217,7 +217,7 @@ $dictionary['HAA_FF'] = array(
 			'rhs_table' => 'haa_ff_conditions',
 			'rhs_key' => 'haa_ff_id',
 			'relationship_type' => 'one-to-many',
-			),
+			),*/
 		'ff_ff_fields' =>
 		array(
 			'lhs_module' => 'HAA_FF',

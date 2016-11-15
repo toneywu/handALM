@@ -1,5 +1,5 @@
 <?php
-
+// created: 2016-11-14 20:45:26
 $GLOBALS['tabStructure'] = array (
   'LBL_TABGROUP_SALES' => 
   array (
@@ -125,6 +125,7 @@ $GLOBALS['tabStructure'] = array (
       12 => 'HAT_Linear_Reference_Methods',
       13 => 'AOS_PDF_Templates',
       14 => 'HAA_FF',
+      15 => 'HAA_FSQL',
     ),
   ),
 );

@@ -87,6 +87,11 @@ array (
           0 => 'description',
           1 => '',
         ),
+        3=>
+        array(
+          0=>'sql_string',
+          1=>''
+          )
       ),
       'lbl_editview_panel2' => 
       array (
