@@ -646,11 +646,32 @@ function insertTransLineFootor(tableid) {
       }
 }
 
+function getWOTargetDate(ln){
+	$wo_id = $("#source_wo_id").val();
+	$.ajax({
+			url:'index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=getWOInfos&ham_wo_id='+$wo_id,
+			success: function (data) {
+				console.log(data);
+				var obj = $.parseJSON(data);
+				//console.log("which Line number = "+ln);
+				//console.log(obj);
+				//console.log(obj.date_target_finish);
+				$("#line_date_start"+ln).val(obj.date_actual_start);
+				$("#line_date_end"+ln).val(obj.date_target_finish);
+			},
+			error: function () { //失败
+				alert('Error loading document');
+			}
+		});
+}
+
 function addNewLine(tableid) {
   //alert("clicked")
   if (check_form('EditView')) {//只有必须填写的字段都填写了才可以新增
     insertTransLineElements(tableid,'EditView');//加入新行
     LineEditorShow(prodln - 1);       //打开行编辑器
+    getWOTargetDate(prodln - 1);
+    //获取工单上面的2个日期
   }
 }
 
