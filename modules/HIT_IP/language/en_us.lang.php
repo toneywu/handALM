@@ -79,5 +79,6 @@ $mod_strings = array (
   'LBL_IP_FIRST'=>'First IP:',
   'LBL_IP_LAST'=>'Last IP:',
   'LBL_IP_COUNT'=>'Qty:',
-  'LBL_DETAILVIEW_PANEL1'=>'Subnet Managment'
+  'LBL_DETAILVIEW_PANEL1'=>'Subnet Managment',
+  'LBL_ERROR_IP_TYPE'=>'Please Enter The Correct IP Type ',
 );

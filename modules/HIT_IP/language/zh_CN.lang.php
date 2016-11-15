@@ -76,4 +76,5 @@ $mod_strings = array (
   'LBL_IP_C_BM' => 'IP C BM',
   'LBL_IP_USAGE' => 'IP Usage',
   'LBL_EDITVIEW_PANEL_DESC'=>'附加信息',
+  'LBL_ERROR_IP_TYPE'=>'请输入正确的IP类型',
 );

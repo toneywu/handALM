@@ -80,5 +80,6 @@ $mod_strings = array (
   'LBL_QTY'=>'IP数量',
   'LBL_IP_TYPE'=>'允许零散分配',
   'LBL_GATEWAY'=>'网关',
+  'LBL_ERR_SUBNET_IP_SCOPE'=>'准确IP必须在子网段范围之内:',
 
 );

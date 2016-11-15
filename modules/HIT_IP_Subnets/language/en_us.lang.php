@@ -86,4 +86,5 @@ $mod_strings = array (
   'LBL_IP_SUBNET' => 'Subnet IP Address',
   'LBL_IP_TYPE'=>'Scattered Distribution',
   'LBL_GATEWAY'=>'Gateway',
+  'LBL_ERR_SUBNET_IP_SCOPE'=>'Really IP Address Must be In Scope:',
 );
