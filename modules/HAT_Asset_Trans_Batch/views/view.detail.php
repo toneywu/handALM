@@ -28,20 +28,7 @@ class HAT_Asset_Trans_BatchViewDetail extends ViewDetail
         if(isset($_REQUEST["woop_id"])){
          echo '<script>var hideButtonFlag="Y";</script>';
      }
-        //Modefy by zeng 20161110
-     $bean_type = BeanFactory :: getBean('HAT_EventType', $this->bean->hat_eventtype_id);
-     $aos_pdf_templates_id = $bean_type->aos_pdf_templates_id;
-     $sql = "select id,name from aos_pdf_templates where type='HAT_Asset_Trans_Batch'";
-     $list=$db->query($sql);
-     while ($row = $db->fetchByAssoc($list)){
-        if ($aos_pdf_templates_id!=''&&$row['id']==$aos_pdf_templates_id){
-            $option.="<option value=".$row['id']." selected>".$row['name']."</option>";
-        }else{
-            $option.="<option value=".$row['id'].">".$row['name']."</option>";
-        }
-    }
-    echo "<input type='hidden' id='pdftemplatehidden' name='pdftemplatehidden' value='".$option."'/>";
-        //END Modefy zeng 20161110
+
     parent::Display();
 
 
@@ -62,7 +49,24 @@ class HAT_Asset_Trans_BatchViewDetail extends ViewDetail
         }</script>';
         echo '<script>call_ff()</script>';
     }
-    echo '<script>var template_id="'.$bean_code->aos_pdf_templates_id.'"</script>';
+    //Modefy by zeng 20161110
+     $aos_pdf_templates_id = $bean_code->aos_pdf_templates_id;
+     $sql = "select id,name from aos_pdf_templates where type='HAT_Asset_Trans_Batch'";
+     $list=$db->query($sql);
+     $option='';
+     while ($row = $db->fetchByAssoc($list)){
+        if ($aos_pdf_templates_id!=''&&$row['id']==$aos_pdf_templates_id){
+            $option.="<option value=".$row['id']." selected>".$row['name']."</option>";
+        }else{
+            $option.="<option value=".$row['id'].">".$row['name']."</option>";
+        }
+        if ($aos_pdf_templates_id==''){
+            $aos_pdf_templates_id=$row['id'];
+        }
+    }
+    echo "<input type='hidden' id='pdftemplatehidden' name='pdftemplatehidden' value='".$option."'/>";
+        //END Modefy zeng 20161110
+    echo '<script>var template_id="'.$aos_pdf_templates_id.'"</script>';
 }
 
 }
