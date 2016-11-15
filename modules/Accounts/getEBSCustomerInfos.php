@@ -158,7 +158,7 @@ if (curl_errno($soap_do)) {
 			$customer_bean->attribute3_c = $salers_email_val;
 			$customer_bean->attribute1_c = $owning_su_desc_val;
 			//客户业务赋值给附加属性1
-			$customer_bean->attribute1_c = $customer_business;
+			$customer_bean->attribute1_c = $customer_business_val;
 			$customer_bean->haa_frameworks_id_c = $frame_bean->id;
 			$customer_bean->save();
 

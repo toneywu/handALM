@@ -90,4 +90,5 @@ $mod_strings = array (
   'LBL_ERR_IP_FORMAT'=>'IP Format is not correct, please enter an IP refer to the following format: 10.0.0.0/24',
   'LBL_ERR_IP_SCOPE'=>'Current IP Address is not in the parent scope.',
   'LBL_ERR_IP_CONFILCT'=>'Current IP address is conflict with other lines',
+  'LBL_ERR_SUBNET_IP_SCOPE'=>'IP Subnet is not in the parent scope.',
 );

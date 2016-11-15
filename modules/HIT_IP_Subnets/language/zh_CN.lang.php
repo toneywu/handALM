@@ -87,5 +87,6 @@ $mod_strings = array (
   'LBL_ERR_IP_FORMAT'=>'IP地址格式不正确，请按下列格式进行录入: 10.0.0.0/24',
   'LBL_ERR_IP_SCOPE'=>'当前IP录入的值不在父项的范围内。',
   'LBL_ERR_IP_CONFILCT'=>'当前IP录入的值与其它IP地址冲突。请修改当前值值。如果是另一行有错误，请或先删除当前行，去修改有冲突的值。',
+  'LBL_ERR_SUBNET_IP_SCOPE'=>'准确IP必须在子网段范围之内:',
 
 );
