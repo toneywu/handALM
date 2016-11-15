@@ -487,7 +487,11 @@ function OverwriteSaveBtn(preValidateFunction) {
 	SaveBtn.click(function(){
 		//因为数据校验可能需要时间，在此可以先进行用户提示
 		//因为Ajax检查时间可能很长，因此在检查前先显示出Dialog提示用户
+
+		setTimeout(SaveBtn.addClass("disabled").attr("disabled",true), 1000);
+  		//SaveBtn.addClass("disabled").attr("disabled",true);
 		var validateResult = preValidateFunction();
+
 		if ($(".validation-message").length==0 && validateResult) {//如果验证没有问题
 			//执行Save按钮正常执行的内容
 			validateResult = check_form('EditView');//通过标准的check_form再做一次校验
@@ -500,7 +504,11 @@ function OverwriteSaveBtn(preValidateFunction) {
  			}
 		} else {
 			console.log("Something wrong");
-			dialog.close();
+  			SaveBtn.removeClass("disabled").attr("disabled",false);
+			BootstrapDialog.show({
+        		message: SUGAR.language.get('app_strings', 'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+        		type:BootstrapDialog.TYPE_WARNING,
+    		});			//dialog.close();
 		}
 
 	// /save_and_continue 在修改时会存在，新增时不存在
