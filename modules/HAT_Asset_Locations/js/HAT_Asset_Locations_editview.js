@@ -1,4 +1,4 @@
-$.getScript("modules/HAA_FF/ff_include.js");
+	$.getScript("modules/HAA_FF/ff_include.js");
 
 
 
@@ -48,7 +48,7 @@ $(document).ready(function() {
 		///但如果是SAVE按钮的触发，一定要async=false(保持默认)
 		var ajaxStr='mode=locationName&val='+$("#name").val()+'&id=' + $("input[name*='record']" ).val()+'&site_id='+$("#ham_maint_sites_id").val();
 		var errMSG = SUGAR.language.get('app_strings', 'LBL_DUPLICATED_ERR');
-		var result= FFCheckField('name',ajaxStr,errMSG,async_bool);
+		var result= FFCheckField('name',ajaxStr,errMSG,async_bool);//ff_include.js
 		console.log("checking..."+result);
 		return result;
 	}
@@ -59,8 +59,9 @@ $(document).ready(function() {
 	})//end onChange function
 
 
+	//改写Save事件，在Save之前加入数据校验
 	SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
-		OverwriteSaveBtn(preValidateFunction);//注意引用时不加（）
+		OverwriteSaveBtn(preValidateFunction);//ff_include.js 注意preValidateFunction是一个Function，在此引用时不加（）
 	});
 
 
