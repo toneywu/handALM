@@ -65,6 +65,9 @@ function resetEventType(){
 
 function setWoPopupReturn(popupReplyData){
 	set_return(popupReplyData);
+	//console.log(popupReplyData);
+	$("location_id").val(popupReplyData.name_to_value_array.location_id);
+	//console.log(popupReplyData.name_to_value_array.location_id);
 	if($("#source_wo").val()=="") {
 		$("#source_woop").val("");
 		$("#source_woop_id").val("");

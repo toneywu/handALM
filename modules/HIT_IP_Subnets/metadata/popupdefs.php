@@ -9,13 +9,17 @@ $popupMeta = array (
   'ip_subnet' => 'hit_ip_subnets.ip_subnet',
   'location' => 'hit_ip_subnets.location',
   'description' => 'hit_ip_subnets.description',
+  'hat_asset_locations_id' => 'hit_ip_subnets.hat_asset_locations_id',
 ),
+//'whereStatement'=>' (1=1 or ("'.$_REQUEST['location_advanced'].'" !=null and (hit_ip_subnets.purpose is null or  hit_ip_subnets.purpose not in ('INTERNET','BROADCASE','GATEWAY','MANAGERMENT','OTHERS')  ))) ',
+'whereStatement'=>'(1=1 or ("'.$_REQUEST["location_advanced"].'" !=null and (hit_ip_subnets.purpose is null or hit_ip_subnets.purpose not in ("INTERNET","BROADCASE","GATEWAY","MANAGERMENT","OTHERS") )  ) )',
     'searchInputs' => array (
   1 => 'name',
   2 => 'parent_hit_ip',
   3 => 'ip_subnet',
   4 => 'location',
   5 => 'description',
+  6=> 'hat_asset_locations_id',
 ),
     'searchdefs' => array (
   'parent_hit_ip' => 
@@ -58,6 +62,13 @@ $popupMeta = array (
     'width' => '10%',
     'name' => 'description',
   ),
+  /*'hat_asset_locations_id' => 
+  array (
+    'type' => 'varchar2',
+	'label' => '',
+    'width' => '10%',
+    'name' => 'hat_asset_locations_id',
+  ),*/
 ),
     'listviewdefs' => array (
   'PARENT_HIT_IP' => 

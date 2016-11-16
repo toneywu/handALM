@@ -73,4 +73,5 @@ $mod_strings = array (
   'LBL_VALN_NUM' => 'VALN#',
   'LBL_VLAN_USAGE' => 'VLAN Usage',
   'LBL_VLAN_IP_SUBPANEL' => 'IP Allocated',
+  'LBL_PORT'=>'Port',
 );

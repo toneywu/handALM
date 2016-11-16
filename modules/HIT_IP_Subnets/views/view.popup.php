@@ -125,10 +125,17 @@ class HIT_IP_SubnetsViewPopup extends ViewPopup {
 			// parent::Display();
 		} else {
 			insert_popup_header(null, false);
-			echo '<script src="modules/HIT_IP_Allocations/js/popup_view.js"></script>';
+			echo '<script src="modules/HIT_IP_Subnets/js/popup_view.js"></script>';
+			//echo "hat_asset_locations_id_advanced = ".$_REQUEST["hat_asset_locations_id_advanced"];
+			
+			
 			//echo "<input type='hidden' id='target_owning_org_id_advanced' value='".$_REQUEST["target_owning_org_id_advanced"]."'>";
+			$location_bean = BeanFactory::getBean("HAT_Asset_Locations",$_REQUEST["hat_asset_locations_id_advanced"]);
+			//echo $location_bean->name;
+			echo "<script> var location_name = '".$location_bean->name."';</script>";
+			
 			parent :: Display();
-			//echo "REQUEST".var_dump($_SESSION);
+			//echo "REQUEST".var_dump($_SESSION["HIT_IP_Subnets2_QUERY"]);
 
 		}
 	}

@@ -73,4 +73,5 @@ $mod_strings = array (
   'LBL_VALN_NUM' => 'VALN#',
   'LBL_VLAN_USAGE' => '用途',
   'LBL_VLAN_IP_SUBPANEL' => '相关的IP地址',
+  'LBL_PORT'=>'端口',
 );

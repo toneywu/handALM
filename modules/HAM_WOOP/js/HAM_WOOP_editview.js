@@ -1,4 +1,4 @@
-﻿
+﻿$.getScript("modules/HAA_FF/ff_include.js");
 function require_field(){
 	var woop_status = $("#woop_status").val();
 	/*if(woop_status!="COMPLETED"){
@@ -185,7 +185,26 @@ function mark_field_enabled(field_name,not_required_bool) {
   }
 }
 
+function preValidateFunction(ham_woop_id) {
+	$.ajax({
+			url:'index.php?to_pdf=true&module=HAM_WOOP&action=getTransStatus&record='+ham_woop_id+"&ham_wo_id"+$("#ham_wo_id").val()+"&act_module="+$("#act_module").val(),
+			success: function (msg) {
+				console.log(msg);
+			},
+			error: function () { //失败
+				alert('Error loading document');
+			}
+		});
+}
+	
+	
 $(document).ready(function(){
+	
+
+	//改写Save事件，在Save之前加入数据校验
+	SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
+		OverwriteSaveBtn(preValidateFunction);//ff_include.js 注意preValidateFunction是一个Function，在此引用时不加（）
+	});
 	
 	
 function stringToTime(string){
