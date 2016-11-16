@@ -488,7 +488,7 @@ function OverwriteSaveBtn(preValidateFunction) {
 		//因为数据校验可能需要时间，在此可以先进行用户提示
 		//因为Ajax检查时间可能很长，因此在检查前先显示出Dialog提示用户
 
-		setTimeout(SaveBtn.addClass("disabled").attr("disabled",true), 1000);
+		//setTimeout(SaveBtn.addClass("disabled").attr("disabled",true), 1000);
   		//SaveBtn.addClass("disabled").attr("disabled",true);
 		var validateResult = preValidateFunction();
 
