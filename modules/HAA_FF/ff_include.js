@@ -432,38 +432,39 @@ function FFCheckField( field_idStr, ajaxStr, errMsg, async_bool=false) {
 	var result=false;
 	var checkname =$("#"+field_idStr).val();
 
-		if(checkname=="") {
-			return
-		}
-		$("#"+field_idStr).after("<span id='"+field_idStr+"_validating'> Validating...</span>");
+	if(checkname=="") {
+		return
+	}
 
-		$.ajax({//
-			url: 'index.php?to_pdf=true&module=HAA_FF&action=validateField&'+ajaxStr,
-			async: async_bool,
-			success: function (data) {
-				console.log("checked result="+data+":"+(data=='0'||data==0));
-				clear_all_errors();
-				$("#"+field_idStr+"_validating").remove();
-				save_btn=$("#SAVE_HEADER, #SAVE_FOOTER")
-				if (data=='0'||data==0) {
-					//console.log('error');
+	$("#"+field_idStr).after("<span id='"+field_idStr+"_validating'> <img src='"+SUGAR.themes.loading_image+"'/> SUGAR.language.get('app_strings', 'LBL_VALIDATING')</span>");
+
+	$.ajax({//
+		url: 'index.php?to_pdf=true&module=HAA_FF&action=validateField&'+ajaxStr,
+		async: async_bool,
+		success: function (data) {
+			console.log("checked result="+data+":"+(data=='0'||data==0));
+			clear_all_errors();
+			$("#"+field_idStr+"_validating").remove();
+			//save_btn=$("#SAVE_HEADER, #SAVE_FOOTER")
+			if (data=='0'||data==0) {
+				//console.log('error');
 /*					save_btn.prop('disabled', true);
-					save_btn.addClass('disabled');*/
-					add_error_style('EditView',field_idStr,errMsg);
-					result=false;
-				} else {
+				save_btn.addClass('disabled');*/
+				add_error_style('EditView',field_idStr,errMsg);
+				result=false;
+			} else {
 /*					save_btn.prop('disabled', false);
-					save_btn.removeClass('disabled');*/
-					result=true;
-				}
-			},//end sucess
-			error: function () { //失败
-				alert('Error loading AJAX for status check');
-				$("#"+field_idStr+"_validating").remove();
-			}//end error
-		})//end ajax
+				save_btn.removeClass('disabled');*/
+				result=true;
+			}
+		},//end sucess
+		error: function () { //失败
+			alert('Error loading AJAX for status check');
+			$("#"+field_idStr+"_validating").remove();
+		}//end error
+	})//end ajax
 
-		return result;
+	return result;
 }
 
 /***************************************
@@ -503,13 +504,13 @@ function OverwriteSaveBtn(preValidateFunction) {
  				var _form = document.getElementById('EditView'); _form.action.value='Save'; if(validateResult)SUGAR.ajaxUI.submitForm(_form);return false;
  			}
 		} else {
-			console.log("Something wrong");
-  			SaveBtn.removeClass("disabled").attr("disabled",false);
-			BootstrapDialog.show({
+			//console.log("Something wrong");
+  			//SaveBtn.removeClass("disabled").attr("disabled",false);
+/*			BootstrapDialog.show({
         		message: SUGAR.language.get('app_strings', 'LBL_EMAIL_ERROR_GENERAL_TITLE'),
         		type:BootstrapDialog.TYPE_WARNING,
     		});			//dialog.close();
-		}
+*/		}
 
 	// /save_and_continue 在修改时会存在，新增时不存在
 	});

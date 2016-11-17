@@ -50,7 +50,7 @@ $mod_strings = array (
   'LBL_MODIFIED_NAME' => 'Modified By Name',
   'LBL_CREATED' => 'Created By',
   'LBL_CREATED_ID' => 'Created By Id',
-  'LBL_DESCRIPTION' => 'Usage / Description',
+  'LBL_DESCRIPTION' => 'Description',
   'LBL_DELETED' => 'Deleted',
   'LBL_NAME' => 'Accurate IP Address',
   'LBL_CREATED_USER' => 'Created by User',
@@ -91,4 +91,7 @@ $mod_strings = array (
   'LBL_ERR_IP_SCOPE'=>'Current IP Address is not in the parent scope.',
   'LBL_ERR_IP_CONFILCT'=>'Current IP address is conflict with other lines',
   'LBL_ERR_SUBNET_IP_SCOPE'=>'IP Subnet is not in the parent scope.',
+  'LBL_PURPOSE'=>'Purpose',
+  'LBL_ERR_LOSE_SUBNET_MASK'=>'Subnet Segment Value Indeed',
+  'LBL_ERR_NOT_EQUAL_PARENT_IP'=>'Subnet should be the same C Segment IP.',
 );

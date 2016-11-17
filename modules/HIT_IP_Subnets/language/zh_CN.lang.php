@@ -50,7 +50,7 @@ $mod_strings = array (
   'LBL_MODIFIED_NAME' => '修改人姓名',
   'LBL_CREATED' => '创建人',
   'LBL_CREATED_ID' => '创建人编号',
-  'LBL_DESCRIPTION' => '用途/描述',
+  'LBL_DESCRIPTION' => '描述',
   'LBL_DELETED' => '已删除',
   'LBL_NAME' => '准确IP地址',
   'LBL_IP_SUBNET'=>'IP子网段地址',
@@ -71,7 +71,7 @@ $mod_strings = array (
   'LBL_ACTIVITIES_SUBPANEL_TITLE' => '销售活动',
   'LBL_HIT_IP_SUBNETS_SUBPANEL_TITLE' => 'IT IP子网',
   'LBL_NEW_FORM_TITLE' => '新建 IT IP子网',
-    'LBL_PARENT_HIT_IP'=>'所属IP段',
+  'LBL_PARENT_HIT_IP'=>'所属IP段',
   'LBL_VLAN'=>'VLAN',
   'LBL_TUNNEL'=>'通道',
   'LBL_LOWEST'=>'最低IP',
@@ -88,5 +88,8 @@ $mod_strings = array (
   'LBL_ERR_IP_SCOPE'=>'当前IP录入的值不在父项的范围内。',
   'LBL_ERR_IP_CONFILCT'=>'当前IP录入的值与其它IP地址冲突。请修改当前值值。如果是另一行有错误，请或先删除当前行，去修改有冲突的值。',
   'LBL_ERR_SUBNET_IP_SCOPE'=>'准确IP必须在子网段范围之内:',
+  'LBL_PURPOSE'=>'用途',
+  'LBL_ERR_LOSE_SUBNET_MASK'=>'子网段缺少段值',
+  'LBL_ERR_NOT_EQUAL_PARENT_IP'=>'子网段IP前三段应该和C段相同.',
 
 );

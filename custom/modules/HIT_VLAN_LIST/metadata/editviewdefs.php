@@ -62,8 +62,12 @@ array (
         ),
         2 => 
         array (
-          0 => 'description',
-          1 => '',
+          0 => 
+          array (
+            'name' => 'port',
+            'label' => 'LBL_PORT',
+          ),
+          1 => 'description',
         ),
         3 => 
         array (

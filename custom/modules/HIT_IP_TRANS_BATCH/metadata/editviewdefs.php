@@ -151,6 +151,7 @@ array (
               array (
                 'name' => 'source_wo',
                 'id' => 'source_wo_id',
+				'hat_asset_locations_id'=>'location_id',
               ),
               'call_back_function' => 'setWoPopupReturn',
             ),

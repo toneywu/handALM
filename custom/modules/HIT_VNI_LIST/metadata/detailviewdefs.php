@@ -69,6 +69,11 @@ array (
             'label' => 'LBL_CUSTOMER_NAME',
           ),
         ),
+        2 => 
+        array (
+          0 => 'description',
+          1 => '',
+        ),
       ),
     ),
   ),

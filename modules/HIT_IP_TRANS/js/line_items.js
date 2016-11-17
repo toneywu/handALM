@@ -1708,12 +1708,14 @@ function dulicateTranLine(ln) {// 关闭行编辑器（显示为正常行）
 				$("#line_" + key + (prodln - 1)).val(domvalue);
 				//计算字段
 				$("#displayed_line_" + key + (prodln - 1)).html(domvalue);
+				if($("displayed_line_enable_action"+proln).val()==0){
+					$("#displayed_line_enable_action"+proln).attr("checked",true);
+        			$("#displayed_line_enable_action"+proln).prop("checked",true);
+        			document.getElementById("displayed_line_enable_action"+proln).checked = true;
+				}else{
+					$("#displayed_line_enable_action"+proln).removeAttr("checked");
+				}
 			}
-		
-			//if($("#line_parent_ip" + lastProdln).val()==""){
-			//	$("#displayed_line_parent_ip" + (prodln - 1)).html($("#displayed_line_parent_ip" +lastProdln).html());
-			//}
-		//console.log("index = "+(prodln - 1)+"-----"+$("#line_parent_ip" + lastProdln).val());
 		
 		// 清除id
 		$("#line_id" + (prodln - 1)).val(null);

@@ -41,13 +41,18 @@ function display_lines($focus, $field, $value, $view){
 						  hv.name vlan,
 						  his.org_id,
 						  a.name org,
-						  his.gateway,his.ip_type
+						  his.gateway,
+						  his.ip_type,
+						  his.purpose,
+						  h.name location
 						FROM
 						  `hit_ip_subnets` his 
 						  LEFT JOIN hit_vlan hv 
 							ON (his.hit_vlan_id = hv.id) 
 						  LEFT JOIN accounts a 
 							ON (his.org_id = a.id) 	
+						  LEFT JOIN hat_asset_locations h
+						  	ON (h.id=his.hat_asset_locations_id)	
 						  INNER JOIN hit_ip hi 
 							ON (hi.id = his.parent_hit_ip_id)
 					  where hi.id = '".$focus->id."'

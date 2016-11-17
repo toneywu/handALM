@@ -194,7 +194,10 @@ class HIT_IP_TRANS_BATCHViewEdit extends ViewEdit {
 				$this->bean->email = $primary;
 			}
 		}
-
+		
+		$source_wo_bean = BeanFactory :: getBean('HAM_WO')->retrieve_by_string_fields(array ('id' => $this->bean->source_wo_id));
+		echo '<input id="location_id" name="haa_ff_id" type="hidden" value="'.$source_wo_bean->hat_asset_locations_id.'">';
+		
 		parent :: Display();
 		//如果已经选择位置分类，无论是否位置分类对应的FlexForm有值，值将界面展开。
         //（如果没有位置分类，则界面保持折叠状态。）
