@@ -283,7 +283,8 @@ function openLocationPopup(ln) { // 在行上选择了From Location
 			"id" : "line_hat_asset_locations_id" + ln
 		}
 	};
-	open_popup('HAT_Asset_Locations', 1000, 850, '', true, true,
+	var popupFilter = '&site_type=D';
+	open_popup('HAT_Asset_Locations', 1000, 850, popupFilter, true, true,
 			popupRequestData);
 }
 

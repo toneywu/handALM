@@ -1,67 +1,362 @@
 <?php
-/*********************************************************************************
- * SugarCRM Community Edition is a customer relationship management program developed by
- * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
-
- * SuiteCRM is an extension to SugarCRM Community Edition developed by Salesagility Ltd.
- * Copyright (C) 2011 - 2014 Salesagility Ltd.
- *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU Affero General Public License version 3 as published by the
- * Free Software Foundation with the addition of the following permission added
- * to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
- * IN WHICH THE COPYRIGHT IS OWNED BY SUGARCRM, SUGARCRM DISCLAIMS THE WARRANTY
- * OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
- * details.
- *
- * You should have received a copy of the GNU Affero General Public License along with
- * this program; if not, see http://www.gnu.org/licenses or write to the Free
- * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
- * 02110-1301 USA.
- *
- * You can contact SugarCRM, Inc. headquarters at 10050 North Wolfe Road,
- * SW2-130, Cupertino, CA 95014, USA. or at email address contact@sugarcrm.com.
- *
- * The interactive user interfaces in modified source and object code versions
- * of this program must display Appropriate Legal Notices, as required under
- * Section 5 of the GNU Affero General Public License version 3.
- *
- * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
- * these Appropriate Legal Notices must retain the display of the "Powered by
- * SugarCRM" logo and "Supercharged by SuiteCRM" logo. If the display of the logos is not
- * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
- * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
- ********************************************************************************/
-
-$module_name = 'HIT_VLAN_LIST';
-$viewdefs[$module_name]['EditView'] = array(
-    'templateMeta' => array('maxColumns' => '2', 
-                            'widths' => array(
-                                            array('label' => '10', 'field' => '30'), 
-                                            array('label' => '10', 'field' => '30')
-                                            ),                                                                                                                                    
-                                            ),
-                                            
-                                            
- 'panels' =>array (
-  'default' => 
+$module_name = 'HAM_SR';
+$viewdefs [$module_name] = 
+array (
+  'EditView' => 
   array (
-    
+    'templateMeta' => 
     array (
-      'name',
-      'assigned_user_name',
+      'includes' => 
+      array (
+        0 => 
+        array (
+          'file' => 'modules/HAM_SR/js/editview_map_point.js',
+        ),
+        1 => 
+        array (
+          'file' => 'modules/HAM_SR/js/HAM_SR_editview.js',
+        ),
+      ),
+      'maxColumns' => '2',
+      'widths' => 
+      array (
+        0 => 
+        array (
+          'label' => '10',
+          'field' => '30',
+        ),
+        1 => 
+        array (
+          'label' => '10',
+          'field' => '30',
+        ),
+      ),
+      'useTabs' => false,
+      'tabDefs' => 
+      array (
+        'DEFAULT' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_EDITVIEW_PANEL1' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_EDITVIEW_PANEL2' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_EDITVIEW_PANEL3' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_EDITVIEW_PANEL4' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+      ),
+      'syncDetailEditViews' => true,
     ),
-    
+    'panels' => 
     array (
-      'description',
+      'default' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'sr_number',
+            'label' => 'LBL_SR_NUMBER',
+            'customCode'=>'{$SR_NUMBER}'
+          ),
+          1 => 
+          array (
+            'name' => 'site',
+            'studio' => 'visible',
+            'label' => 'LBL_SITE',
+            'customCode' => '{$MAINT_SITE}',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 'name',
+          1 => 
+          array (
+            'name' => 'event_type',
+            'label' => 'LBL_EVENT_TYPE',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&basic_type_advanced=SR',
+              'field_to_name_array' =>
+              array (
+                'name' => 'event_type',
+                'id' => 'hat_event_type_id',
+                'haa_ff_id' => 'haa_ff_id',
+              ),
+              'call_back_function' => 'setEventTypePopupReturn',
+            ),
+          ),
+        ),
+      ),
+      'lbl_editview_panel1' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'priority',
+            'studio' => 'visible',
+            'label' => 'LBL_PRIORITY',
+          ),
+          1 => 
+          array (
+            'name' => 'sr_status',
+            'studio' => 'visible',
+            'label' => 'LBL_SR_STATUS',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 'description',
+          1 => 
+          array (
+            'name' => 'reported_date',
+            'label' => 'LBL_REPORTED_DATE',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'location',
+            'studio' => 'visible',
+            'label' => 'LBL_LOCATION',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&maint_site_advanced="+encodeURIComponent($("#site_select option:selected").html())+"&site_type=D',
+              'field_to_name_array' => 
+              array (
+                'name' => 'location',
+                'id' => 'hat_asset_locations_id',
+                'location_title' => 'location_desc',
+                'map_zoom' => 'map_zoom',
+                'map_lat' => 'map_lat',
+                'map_lng' => 'map_lng',
+                'map_address' => 'map_search_text',
+                'map_type' => 'map_type',
+                'map_enabled' => 'location_map_enabled',
+              ),
+              'call_back_function' => 'setLocationPopupReturn',
+            ),
+          ),
+          1 => 
+          array (
+            'name' => 'asset',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&hat_asset_locations_hat_assets_name_advanced="+encodeURIComponent(document.getElementById("location").value)+"',
+              'field_to_name_array' => 
+              array (
+                'name' => 'asset',
+                'id' => 'hat_assets_id',
+                'asset_desc' => 'asset_desc',
+                'location_desc' => 'location_extra_desc',
+              ),
+              'call_back_function' => 'setAssetPopupReturn',
+            ),
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'location_extra_desc',
+            'label' => 'LBL_LOCATION_EXTRA_DESC',
+          ),
+          1 => 
+          array (
+            'name' => 'map_enabled',
+            'studio' => 'visible',
+            'label' => 'LBL_MAPS_ENABLED',
+          ),
+        ),
+      ),
+      'lbl_editview_panel2' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'map_search_area',
+            'studio' => 'visible',
+            'label' => 'LBL_MAP_SEARCH_AREA',
+            'customCode' => '<input type="text" id="map_search_text" name="map_search_text"/><input type="button" id="btn_map_search" name="btn_map_search" value="Search on Map" size="30";/> <input type="checkbox" id="chk_rewrite_address" checked="true">Rewrite Address',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'map_type',
+            'studio' => 'visible',
+            'label' => 'LBL_MAP_TYPE',
+          ),
+          1 => 
+          array (
+            'name' => 'map_zoom',
+            'studio' => 'visible',
+            'label' => 'LBL_MAP_ZOOM',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'map_lat',
+            'label' => 'LBL_MAP_LAT',
+            'precision' => '8',
+          ),
+          1 => 
+          array (
+            'name' => 'map_lng',
+            'label' => 'LBL_MAP_LNG',
+            'precision' => '8',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'map_display_area',
+            'studio' => 'visible',
+            'label' => 'LBL_MAP_DISPLAY_AREA',
+            'customCode' => '<div id="cuxMap" style="background-color: #efefef; ">map will be loaded here</div>',
+          ),
+        ),
+      ),
+      'lbl_editview_panel3' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'reporter_org',
+            'studio' => 'visible',
+            'label' => 'LBL_REPORTER_ORG',
+			'displayParams' => 
+            array (
+              'initial_filter' => '&asset_using_org=Y',
+            ),
+          ),
+          1 => 
+          array (
+            'name' => 'reporter',
+            'studio' => 'visible',
+            'label' => 'LBL_REPORTER',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&account_name_advanced="+encodeURIComponent(document.getElementById("reporter_org").value)+"',
+              'field_to_name_array' => 
+              array (
+                'name' => 'reporter',
+                'id' => 'contact_id',
+                'account_name' => 'reporter_org',
+                'account_id' => 'account_id',
+                'phone_work' => 'work_phone',
+                'phone_mobile' => 'mobile',
+                'email1' => 'email',
+              ),
+            ),
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'work_phone',
+            'label' => 'LBL_WORK_PHONE',
+          ),
+          1 => 
+          array (
+            'name' => 'mobile',
+            'label' => 'LBL_MOBILE',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'email',
+            'label' => 'LBL_EMAIL',
+          ),
+          1 => 
+          array (
+            'name' => 'contact_by',
+            'studio' => 'visible',
+            'label' => 'LBL_CONTACT_BY',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'contact_notes',
+            'label' => 'LBL_CONTACT_NOTES',
+          ),
+          1 => '',
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'owned_org',
+            'studio' => 'visible',
+            'label' => 'LBL_OWNED_ORG',
+			'displayParams' => 
+            array (
+              'initial_filter' => '&asset_using_org=Y',
+            ),
+          ),
+          1 => 
+          array (
+            'name' => 'owned_by',
+            'studio' => 'visible',
+            'label' => 'LBL_OWNED_BY',
+          ),
+        ),
+      ),
+      'lbl_editview_panel4' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'worklog',
+            'label' => 'LBL_WORKLOG',
+          ),
+          1 => '',
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'closed_date',
+            'label' => 'LBL_CLOSED_DATE',
+          ),
+          1 => 
+          array (
+            'name' => 'closed_by',
+            'studio' => 'visible',
+            'label' => 'LBL_CLOSED_BY',
+          ),
+        ),
+      ),
     ),
   ),
-                                                    
-),
-                        
 );
 ?>

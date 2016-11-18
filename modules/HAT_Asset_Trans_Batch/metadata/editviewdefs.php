@@ -123,6 +123,10 @@ array (
             'name' => 'current_owning_org',
             'studio' => 'visible',
             'label' => 'LBL_CURRENT_OWNING_ORG',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&asset_using_org=Y',
+            ),
           ),
           1 => 'owner_contacts',
         ),
@@ -139,6 +143,10 @@ array (
             'name' => 'target_using_org',
             'studio' => 'visible',
             'label' => 'LBL_TARGET_USING_ORG',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&asset_using_org=Y',
+            ),
           ),
         ),
         4 => 

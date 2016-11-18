@@ -77,6 +77,10 @@ array (
             'name' => 'asset_location',
             'studio' => 'visible',
             'label' => 'LBL_ASSET_LOCATION',
+            'displayParams' =>
+            array (
+              'initial_filter' => '&site_type=J',
+            ),
           ),
           1 => 
           array (
@@ -221,7 +225,7 @@ array (
             'label' => 'LBL_OWING_ORG',
             'displayParams' => 
             array (
-              'initial_filter' => '&frame_c_advanced="+encodeURIComponent($("#haa_framework").val())+"',
+              'initial_filter' => '&frame_c_advanced="+encodeURIComponent($("#haa_framework").val())+"&asset_using_org=Y',
               'call_back_function' => 'setUsingOrgPopupReturn',
             ),
           ),
@@ -245,7 +249,7 @@ array (
             'label' => 'LBL_USING_ORG',
             'displayParams' => 
             array (
-              'initial_filter' => '&frame_c_advanced="+encodeURIComponent($("#haa_framework").val())+"',
+              'initial_filter' => '&frame_c_advanced="+encodeURIComponent($("#haa_framework").val())+"&asset_using_org=Y',
               'call_back_function' => 'setUsingOrgPopupReturn',
             ),
           ),

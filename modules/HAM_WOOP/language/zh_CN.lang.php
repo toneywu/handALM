@@ -65,4 +65,5 @@ $mod_strings = array (
   'LBL_TAKE_OWNERSHIP'=>'认领任务',
   'LBL_EVENT_TYPE'=>'事件类型',
   'LBL_CONTRACT'=>'合同',
+  'LBL_ERROR_STATUS_ERR'=>'事务处理单状态不正确，请检查',
 );

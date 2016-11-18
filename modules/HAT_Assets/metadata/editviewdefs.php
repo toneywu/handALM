@@ -115,8 +115,8 @@ array (
                 'id' => 'aos_products_id',
                 'aos_product_category_name' => 'asset_category',
                 'aos_product_category_id' => 'aos_product_categories_id',
-                'asset_name_rule_c' => 'asset_name_rule_c',
-                'haa_ff_id_c' => 'haa_ff_id_c',
+                'asset_name_rule_c' => 'asset_name_rule',
+                'haa_ff_id_c' => 'haa_ff_id',
               ),
               'call_back_function' => 'setProductPopupReturn',
             ),
@@ -542,9 +542,10 @@ array (
             'label' => 'LBL_OWING_ORG',
             'displayParams' => 
             array (
-              'initial_filter' => '&frame_c_advanced="+encodeURIComponent($("#haa_framework").val())+"',
+              'initial_filter' => '&frame_c_advanced="+encodeURIComponent($("#haa_framework").val())+"&Asset_using_org=Y',
               'call_back_function' => 'setUsingOrgPopupReturn',
             ),
+			
           ),
           1 => 
           array (
@@ -574,7 +575,7 @@ array (
             'label' => 'LBL_USING_ORG',
             'displayParams' => 
             array (
-              'initial_filter' => '&frame_c_advanced="+encodeURIComponent($("#haa_framework").val())+"',
+              'initial_filter' => '&frame_c_advanced="+encodeURIComponent($("#haa_framework").val())+"&Asset_using_org=Y',
               'call_back_function' => 'setUsingOrgPopupReturn',
             ),
           ),

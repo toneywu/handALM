@@ -73,4 +73,5 @@ $mod_strings = array (
   'LBL_TAKE_OWNERSHIP'=>'Take it',
   'LBL_EVENT_TYPE'=>'Event Type',
   'LBL_CONTRACT'=>'Contract',
+  'LBL_ERROR_STATUS_ERR'=>'Error Transaction Status,Please Check it',
 );
