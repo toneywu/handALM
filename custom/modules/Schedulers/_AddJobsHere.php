@@ -76,23 +76,6 @@ function custom_job()
 {
     echo "测试成功";
 	$GLOBALS['log']->error("测试成功");
-
-	return true;
-}
-
-/**
- * Job 0 refreshes all job schedulers at midnight
- * DEPRECATED
- */
-function sync_jt_accounts()
-{
-		
-	
-	
-}
-	
-	
-
 	return true;
 }
 ?>

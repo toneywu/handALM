@@ -1,36 +1,35 @@
 <?php
-$username = "XR_API";
-$password = "asdf1234";
+$username = "ERP_API";
+$password = "qazwsx12345";
 $startdate = "2015-05-06";
-$enddate = "2016-12-26";
-$postAllString = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-    <soap:Header xmlns:ns1="http://xmlns.oracle.com/apps/cux/soaprovider/plsql/cux_ws_eam_get_infos_pkg/">
-        <ns1:SOAHeader>
-            <ns1:Responsibility>CUX_SUPER_RESPKEY</ns1:Responsibility>
-            <ns1:RespApplication>CUX</ns1:RespApplication>
-            <ns1:SecurityGroup>STANDARD</ns1:SecurityGroup>
-            <ns1:NLSLanguage>SIMPLIFIED CHINESE</ns1:NLSLanguage>
-            <ns1:Org_Id>81</ns1:Org_Id>
-        </ns1:SOAHeader>
-     <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" soap:mustUnderstand="1"><wsse:UsernameToken xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"><wsse:Username>XR_API</wsse:Username><wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">asdf1234</wsse:Password></wsse:UsernameToken></wsse:Security>
-    </soap:Header>
-    <soap:Body xmlns:ns2="http://xmlns.oracle.com/apps/cux/soaprovider/plsql/cux_ws_eam_get_infos_pkg/get_info/">
-        <ns2:InputParameters>
-            <ns2:P_START_DATE></ns2:P_START_DATE>
-            <ns2:P_END_DATE></ns2:P_END_DATE>
-            <ns2:P_TYPE_CODE>CUSTOMER</ns2:P_TYPE_CODE>
-        </ns2:InputParameters>
-    </soap:Body>
-</soap:Envelope>';
-$url = "http://111.200.33.204:1574/80000/webservices/SOAProvider/plsql/cux_ws_eam_get_infos_pkg/";
-
+$enddate = "2016-07-26";
+$postAllString = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+					    <soap:Header xmlns:ns1="http://xmlns.oracle.com/apps/cux/soaprovider/plsql/cux_ws_eam_basic_info_pkg/">
+					        <ns1:SOAHeader>
+					            <ns1:Responsibility>APPLICATION_DEVELOPER</ns1:Responsibility>
+					            <ns1:RespApplication>FND</ns1:RespApplication>
+					            <ns1:SecurityGroup>STANDARD</ns1:SecurityGroup>
+					            <ns1:NLSLanguage>AMERICAN</ns1:NLSLanguage>
+					            <ns1:Org_Id>81</ns1:Org_Id>
+					        </ns1:SOAHeader>
+					    <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" soap:mustUnderstand="1"><wsse:UsernameToken xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"><wsse:Username>ERP_API</wsse:Username><wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">qazwsx12345</wsse:Password></wsse:UsernameToken></wsse:Security></soap:Header>
+					    <soap:Body xmlns:ns2="http://xmlns.oracle.com/apps/cux/soaprovider/plsql/cux_ws_eam_basic_info_pkg/get_basic_info/">
+					        <ns2:InputParameters>
+					            <ns2:P_START_DATE>2016-05-01</ns2:P_START_DATE>
+					            <ns2:P_END_DATE>2016-12-31</ns2:P_END_DATE>
+					            <ns2:P_TYPE_CODE>CUSTOMER</ns2:P_TYPE_CODE>
+					        </ns2:InputParameters>
+					    </soap:Body>
+					</soap:Envelope>';
+//$url = "http://szdctest.chinacache.com:8020/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";
+$url = "http://111.200.33.204:1574/8031/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";
 $soap_do = curl_init();
 
 curl_setopt($soap_do, CURLOPT_URL, $url);
 
 curl_setopt($soap_do, CURLOPT_CONNECTTIMEOUT, 10);
 
-curl_setopt($soap_do, CURLOPT_TIMEOUT, 600);
+curl_setopt($soap_do, CURLOPT_TIMEOUT, 60);
 
 curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true);
 
@@ -46,33 +45,40 @@ curl_setopt($soap_do, CURLOPT_HTTPHEADER, array (
 	'Content-Type: text/xml; charset=utf-8',
 	'Content-Length: ' . strlen($postAllString)
 ));
-
+global $db;
 $result = curl_exec($soap_do);
-echo ($result);
+//echo "result".$result;
 if (curl_errno($soap_do)) {
 	echo 'Curl error: ' . curl_error($soap_do);
 } else {
-	
 	$p = xml_parser_create();
 	xml_parse_into_struct($p, $result, $vals, $indexs);
 	xml_parser_free($p);
-	
+
 	$xml = new DOMDocument();
 	$xml->loadXML($result);
 	$result_clob_Dom = $xml->getElementsByTagName("X_RESULT_CLOB");
 	$x_return_status = $xml->getElementsByTagName("X_RETURN_STATUS");
 	$x_msg_data = $xml->getElementsByTagName("X_MSG_DATA");
-
-	echo "x_return_status = " . $x_return_status->item(0)->nodeValue . "<br>";
-	echo "x_msg_data = " . $x_msg_data->item(0)->nodeValue . "<br>";
-	$xml_array = simplexml_load_string($result);
+	
+	
+	//$xml_array = simplexml_load_string($result);
 	$json_array = json_decode($result_clob_Dom->item(0)->nodeValue, true);
 	$frame_bean = BeanFactory :: getBean('HAA_Frameworks')->retrieve_by_string_fields(array (
 		'code' => 'ChinaCache'
 	));
-	foreach ($json_array as $key => $record) {
-	echo $record;
-		$customer_id_val = $record['CUSTOMER_ID'];
+	print_r($json_array);
+	echo "x_return_status = " . $x_return_status->item(0)->nodeValue . "<br>";
+	echo "x_msg_data = " . $x_msg_data->item(0)->nodeValue . "<br>";
+	echo (count($json_array))."<br>";
+    $num=count($json_array);
+    $query_bean = BeanFactory :: newBean('Accounts');
+	for($i=1222;$i<$num;++$i){ 
+	    
+		$record=$json_array[$i];
+    echo "customer_name=".$record["CUSTOMER_NAME"].$i."<br>";
+	     //foreach ($json_array as $key => $record) {
+	    $customer_id_val = $record['CUSTOMER_ID'];
 		$customer_name_val = $record['CUSTOMER_NAME'];
 		$known_as_val = $record['KNOWN_AS'];
 		$customer_class_val = $record['CUSTOMER_CLASS'];
@@ -89,13 +95,20 @@ if (curl_errno($soap_do)) {
 		$customer_business_val = $record['CUSTOMER_BUSINESS'];
 		$organization_class_val = $record['ORGANIZATION_CLASS'];
 
-		echo 'customer_name= ' . $customer_name_val . "<br>";
-		echo 'product_code = ' . $product_code_val . "<br>";
-
-		$check_customer = BeanFactory :: getBean('Accounts')->get_full_list('', "accounts_cstm.organization_number_c = '".$customer_id_val."'");
-		echo "custom_id_val = ".$customer_id_val."<br>";
+		//echo 'customer_name= ' . $customer_name_val .',product_code = ' . $product_code_val.",key = ".$i. "<br>";
+		$sql = 'SELECT count(1) cnt FROM accounts INNER JOIN accounts_cstm WHERE accounts.id = accounts_cstm.id_c and accounts.deleted=0 AND accounts_cstm.organization_number_c ="'.$customer_id_val.'"';
+		$result = $db->query($sql);
+	    $rows =0;
+	    while ( $resule_asset = $db->fetchByAssoc($result) ) {
+		   $rows=$resule_asset['cnt'];
+		}
+		echo "rows=".$rows.",sql =".$sql."<br>";
+		//$check_customer = BeanFactory :: getBean('Accounts')->get_full_list('', "accounts.organization_number_c = '".$customer_id_val."'");
+		//$check_customer = BeanFactory :: getBean('Accounts')->get_full_list('', " accounts.organization_number_c=1");
+		//echo "custom_id_val = ".$customer_id_val."<br>";
 		//是否创建客户
-		if (count($check_customer) == 0) {
+		
+		if ($rows == 0) {
 			$customer_bean = BeanFactory :: newBean("Accounts");
 			//业务类型默认为一般客户，给相应字段设置ID值
 			$check_customer_biz_types = BeanFactory :: getBean('HAA_Codes')->retrieve_by_string_fields(array (
@@ -162,9 +175,9 @@ if (curl_errno($soap_do)) {
 			$customer_bean->attribute3_c = $salers_email_val;
 			$customer_bean->attribute1_c = $owning_su_desc_val;
 			//客户业务赋值给附加属性1
-			$customer_bean->attribute1_c = $customer_business;
+			//$customer_bean->attribute1_c = $customer_business_val;
 			$customer_bean->haa_frameworks_id_c = $frame_bean->id;
-			$customer_bean->save();
+			//$customer_bean->save();
 
 		}else{
 		   
@@ -174,11 +187,12 @@ if (curl_errno($soap_do)) {
 			// ERP别名设置给组织简称
 			if(!empty($known_as_val)){
 				$customer_bean->name = $known_as_val;
+				$customer_bean->full_name_c = $customer_name_val;
 			}else{
 				
 				$customer_bean->name = $customer_name_val;
 			}
-			$customer_bean->save();
+			//$customer_bean->save();
 		}
 	}
 }

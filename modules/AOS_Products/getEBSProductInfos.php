@@ -1,29 +1,30 @@
 <?php
-$username = "sysadmin";
-$password = "welcome8";
+$username = "XR_API";
+$password = "asdf1234";
 $startdate = "2015-05-06";
 $enddate = "2016-07-26";
 //echo "mdf password = " . md5($password) . "<br>";
-$postAllString = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
-					    <soap:Header xmlns:ns1="http://xmlns.oracle.com/apps/cux/soaprovider/plsql/cux_ws_eam_basic_info_pkg/">
-					        <ns1:SOAHeader>
-					            <ns1:Responsibility>CUX_SUPER_RESPKEY</ns1:Responsibility>
-					            <ns1:RespApplication>CUX</ns1:RespApplication>
-					            <ns1:SecurityGroup>STANDARD</ns1:SecurityGroup>
-					            <ns1:NLSLanguage>AMERICAN</ns1:NLSLanguage>
-					            <ns1:Org_Id>81</ns1:Org_Id>
-					        </ns1:SOAHeader>
-					    <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" soap:mustUnderstand="1"><wsse:UsernameToken xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"><wsse:Username>sysadmin</wsse:Username><wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">welcome8</wsse:Password></wsse:UsernameToken></wsse:Security></soap:Header>
-					    <soap:Body xmlns:ns2="http://xmlns.oracle.com/apps/cux/soaprovider/plsql/cux_ws_eam_basic_info_pkg/get_basic_info/">
-					        <ns2:InputParameters>
-					            <ns2:P_START_DATE>2016-01-01</ns2:P_START_DATE>
-					            <ns2:P_END_DATE>2016-09-01</ns2:P_END_DATE>
-					            <ns2:P_TYPE_CODE>PRODUCT</ns2:P_TYPE_CODE>
-					        </ns2:InputParameters>
-					    </soap:Body>
-					</soap:Envelope>';
+$postAllString = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Header xmlns:ns1="http://xmlns.oracle.com/apps/cux/soaprovider/plsql/cux_ws_eam_get_infos_pkg/">
+        <ns1:SOAHeader>
+            <ns1:Responsibility>CUX_SUPER_RESPKEY</ns1:Responsibility>
+            <ns1:RespApplication>CUX</ns1:RespApplication>
+            <ns1:SecurityGroup>STANDARD</ns1:SecurityGroup>
+            <ns1:NLSLanguage>SIMPLIFIED CHINESE</ns1:NLSLanguage>
+            <ns1:Org_Id>81</ns1:Org_Id>
+        </ns1:SOAHeader>
+     <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" soap:mustUnderstand="1"><wsse:UsernameToken xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"><wsse:Username>XR_API</wsse:Username><wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">asdf1234</wsse:Password></wsse:UsernameToken></wsse:Security>
+    </soap:Header>
+    <soap:Body xmlns:ns2="http://xmlns.oracle.com/apps/cux/soaprovider/plsql/cux_ws_eam_get_infos_pkg/get_info/">
+        <ns2:InputParameters>
+            <ns2:P_START_DATE>2015-01-01</ns2:P_START_DATE>
+            <ns2:P_END_DATE>2016-12-31</ns2:P_END_DATE>
+            <ns2:P_TYPE_CODE>PRODUCT</ns2:P_TYPE_CODE>
+        </ns2:InputParameters>
+    </soap:Body>
+</soap:Envelope>';
 //$url = "http://szdctest.chinacache.com:8020/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";
-$url = "http://111.200.33.204:1574/8020/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";
+$url = "http://111.200.33.204:1574/80000/webservices/SOAProvider/plsql/cux_ws_eam_get_infos_pkg/";
 $soap_do = curl_init();
 
 curl_setopt($soap_do, CURLOPT_URL, $url);
@@ -90,8 +91,9 @@ if (curl_errno($soap_do)) {
 				$item_number_val = $record['ITEM_NUMBER'];
 				$parent_product = $record['PARENT_PRODUCT'];
 				$primary_uom_code = $record['PRIMARY_UOM_CODE'];
-				echo 'Product_Name= ' . $product_name_val . "<br>".',product_code = ' . $product_code_val.',item_number = ' . $item_number_val;
-				$check_product = BeanFactory :: getBean('AOS_Products')->get_full_list('', "aos_products.part_number = '{$product_code_val}'");
+				echo 'Product_Name= ' . $product_name_val . "<br>".',product_code = ' . $product_code_val.',item_number = ' . $item_number_val.",UOM=".$primary_uom_code;
+				$check_product = BeanFactory :: getBean('AOS_Products')->get_full_list('', "aos_products.part_number = '".$product_code_val."'");
+				//$check_product = BeanFactory :: getBean('AOS_Products')->get_full_list('', "aos_products.part_number = '".$product_code_val."'");
 				//是否创建产品类别
 				if (count($check_product) == 0) {
 					$product_bean = BeanFactory :: newBean("AOS_Products");
