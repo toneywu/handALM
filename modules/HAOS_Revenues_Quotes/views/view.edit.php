@@ -42,7 +42,13 @@ class HAOS_Revenues_QuotesViewEdit extends ViewEdit {
 		}*/
 
 		//*********************处理FF界面 END********************
-		echo '<script>removeFromValidate("EditView","account_name");</script>';
+		echo '<script>removeFromValidate("EditView","account_name");
+		addToValidate("EditView", "product_line_item_type_c0","varchar", true,SUGAR.language.get(module_sugar_grp1, "LBL_LINE_ITEM_TYPE"));
+    addToValidate("EditView", "product_name0","varchar", true,SUGAR.language.get(module_sugar_grp1, "LBL_NAME"));
+    addToValidate("EditView", "product_product_list_price0","float", true,SUGAR.language.get(module_sugar_grp1, "LBL_PRODUCT_LIST_PRICE"));
+    addToValidate("EditView", "product_product_unit_price0","float", true,SUGAR.language.get(module_sugar_grp1, "LBL_PRODUCT_UNIT_PRICE"));
+    addToValidate("EditView", "product_product_total_price0","float", true,SUGAR.language.get(module_sugar_grp1, "LBL_PRODUCT_TOTAL_PRICE"));
+		</script>';
 	}
 	
 

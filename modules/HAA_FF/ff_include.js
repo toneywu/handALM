@@ -85,7 +85,7 @@ function setFF(FFObj) {
 
 	if (view=="EditView") {
 		//设定是否为必须值
-		if (FFObj.att_required == 0||FFObj.att_required == '0' || FFObj.fieldtype!="HIDE" || FFObj.fieldtype!="PLACEHOLDER" || FFObj.fieldtype!="CHECKBOX"){
+		/*if (FFObj.att_required == 0||FFObj.att_required == '0' || FFObj.fieldtype!="HIDE" || FFObj.fieldtype!="PLACEHOLDER" || FFObj.fieldtype!="CHECKBOX"){
 			//非必须
 			$("#"+FFObj.field+'_label').children().remove(".required");
 		} else {
@@ -94,7 +94,19 @@ function setFF(FFObj) {
 				$("#"+FFObj.field+"_label").append('<span class="required">*</span>');
 				//只需要加入这个Class系统就会自动进行验证，不需要额外的内容
 			}
+		}*/
+		//modify by chen zeng 20161117
+		if (FFObj.att_required == 0) {
+			//非必须
+			$("#"+FFObj.field+'_label').children().remove(".required");
+			removeFromValidate('EditView',FFObj.field);
+		} else {
+			//必须
+			$("#"+FFObj.field+'_label').append('<span class="required">*</span>');
+			addToValidate('EditView', FFObj.field,'varchar', 'true', FFObj.label);
 		}
+		//check_form方法影响范围过大，不应使用
+		//END modify by chen zeng 20161117
 
 		//设定默认值
 		if (FFObj.default_val!=null&&FFObj.default_val!="") {
@@ -105,36 +117,6 @@ function setFF(FFObj) {
 		}
 	}
 }
-//重写check_form方法
-/*function check_form(formname){
-	if(typeof(siw)!='undefined'&&siw&&typeof(siw.selectingSomething)!='undefined'&&siw.selectingSomething)
-		return false;
-	else{
-		var flag=false;
-		$(".required").each(function(){
-			//获取label的ID
-			var label_id="";
-			if($(this).parent().attr("id")){
-				label_id=$(this).parent().attr("id");
-			}
-			//按照_label截取为数组,取第一个,即为字段ID
-			var array=label_id.split("_label");
-			var field_id=array[0];
-			if (array[1]!="") {
-				field_id+=array[1];
-			}
-			var field_label=$(this).parent().text().replace("*","");
-			field_label=field_label.replace(":","");
-			if($("#"+field_id).val()==""){//文本域input、textarea
-				//获取字段对应文本框的ID
-				add_error_style('EditView', field_id, SUGAR.language.get('app_strings', 'ERR_MISSING_REQUIRED_FIELDS')+field_label);
-				flag=true;
-			}
-		});
-		if(!flag)
-			return validate_form(formname,'');
-	}
-}*/
 
 /******************************
 //在FF设置之前进行调用，用于将所有的Attribute对象进行隐藏，也就是所有的Attribute默认都是不显示的，除非在FF中进行了设置
