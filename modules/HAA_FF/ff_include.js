@@ -96,7 +96,10 @@ function setFF(FFObj) {
 			}
 		}*/
 		//modify by chen zeng 20161117
-		if (FFObj.att_required == 0) {
+		//if (FFObj.att_required == 0) {
+		//modified by toney.wu 20161118
+		//如果昌隐藏字段，都自动为非必须
+		if (FFObj.att_required == 0||FFObj.att_required == '0' || FFObj.fieldtype=="HIDE" || FFObj.fieldtype=="PLACEHOLDER" || FFObj.fieldtype=="CHECKBOX"){
 			//非必须
 			$("#"+FFObj.field+'_label').children().remove(".required");
 			removeFromValidate('EditView',FFObj.field);
