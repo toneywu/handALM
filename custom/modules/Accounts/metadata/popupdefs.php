@@ -11,6 +11,7 @@ $popupMeta = array (
   'frame_c' => 'accounts.frame_c',
   'business_type_c' => 'accounts.business_type_c',
 ),
+'whereStatement'=>'(("'.$_REQUEST["asset_using_org"].'"="Y" and accounts_cstm.org_type_c in ("INTERNAL","EXTERNAL")) or "'.$_REQUEST["asset_using_org"].'" ="" )',
     'searchInputs' => array (
   0 => 'name',
   9 => 'parent_name',

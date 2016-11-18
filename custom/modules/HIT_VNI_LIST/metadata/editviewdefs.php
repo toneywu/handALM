@@ -57,6 +57,10 @@ array (
             'name' => 'customer_name',
             'studio' => 'visible',
             'label' => 'LBL_CUSTOMER_NAME',
+			'displayParams' => 
+            array (
+              'initial_filter' => '&asset_using_org=Y',
+            ),
           ),
         ),
         2 => 

@@ -248,6 +248,10 @@ array (
             'name' => 'reporter_org',
             'studio' => 'visible',
             'label' => 'LBL_REPORTER_ORG',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&asset_using_org=Y',
+            ),
           ),
           1 => 
           array (
@@ -313,6 +317,10 @@ array (
             'name' => 'owned_org',
             'studio' => 'visible',
             'label' => 'LBL_OWNED_ORG',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&asset_using_org=D',
+            ),
           ),
           1 => 
           array (

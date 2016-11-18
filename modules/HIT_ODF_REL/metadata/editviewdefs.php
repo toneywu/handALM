@@ -84,6 +84,10 @@ array (
             'name' => 'a_hat_asset_locations',
             'studio' => 'visible',
             'label' => 'LBL_A_HAT_ASSET_LOCATIONS',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&site_type=F',
+            ),
           ),
           1 => 
           array (
@@ -92,7 +96,7 @@ array (
             'label' => 'LBL_A_HIT_RACKS',
             'displayParams' => 
             array (
-              'initial_filter' => '&current_mode=1',
+              'initial_filter' => '&current_mode=1&site_type=J',
               'field_to_name_array' => 
               array (
                 'name' => 'a_hit_racks',
@@ -108,18 +112,16 @@ array (
             'name' => 'a_odf_mark_name',
             'studio' => 'visible',
             'label' => 'LBL_A_ODF_MARK_NAME',
-			'displayParams' => 
+            'displayParams' => 
             array (
-              //'initial_filter' => '&current_mode=1',
               'field_to_name_array' => 
               array (
                 'attribute5' => 'a_odf_mark_name',
-				'attribute9' => 'b_odf_mark_name',
-				'id' => 'a_odf_mark',
+                'attribute9' => 'b_odf_mark_name',
+                'id' => 'a_odf_mark',
               ),
-			   'call_back_function' => 'setAODFMarkNameReturn',
+              'call_back_function' => 'setAODFMarkNameReturn',
             ),
-			
           ),
           1 => 
           array (
@@ -159,6 +161,10 @@ array (
             'name' => 'b_hat_asset_locations',
             'studio' => 'visible',
             'label' => 'LBL_B_HAT_ASSET_LOCATIONS',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&site_type=F',
+            ),
           ),
           1 => 
           array (
@@ -167,7 +173,7 @@ array (
             'label' => 'LBL_B_HIT_RACKS',
             'displayParams' => 
             array (
-              'initial_filter' => '&current_mode=1',
+              'initial_filter' => '&current_mode=1&site_type=J',
               'field_to_name_array' => 
               array (
                 'name' => 'b_hit_racks',
@@ -183,16 +189,15 @@ array (
             'name' => 'b_odf_mark_name',
             'studio' => 'visible',
             'label' => 'LBL_B_ODF_MARK_NAME',
-			'displayParams' => 
+            'displayParams' => 
             array (
-              //'initial_filter' => '&current_mode=1',
               'field_to_name_array' => 
               array (
                 'attribute9' => 'b_odf_mark_name',
-				 'attribute5' => 'a_odf_mark_name',
-				'id' => 'b_odf_mark',
+                'attribute5' => 'a_odf_mark_name',
+                'id' => 'b_odf_mark',
               ),
-			  'call_back_function' => 'setBODFMarkNameReturn',
+              'call_back_function' => 'setBODFMarkNameReturn',
             ),
           ),
           1 => 

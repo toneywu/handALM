@@ -3,20 +3,16 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 require_once('include/MVC/View/views/view.popup.php');
 
-class AccountsViewPopup extends ViewPopup
+class HAT_Asset_LocationsViewPopup extends ViewPopup
 {
 
     function Display() {
 
-          if (empty($_REQUEST['haa_frameworks_id_c_advanced'])) {          //如果界面没有供出对应的值，此仅列出当前Session选定组织的Framework
-               $haa_frameworks_id=$_SESSION["current_framework"];
-               $_REQUEST['haa_frameworks_id_c_advanced']=$haa_frameworks_id;
-          }
-
-	   echo '<script src="custom/modules/Accounts/js/popup_view.js"></script>';
-	   if(!empty($_REQUEST["asset_using_org"])){
-		 echo '<script> var asset_using_org="'.$_REQUEST["asset_using_org"].'";</script>';
-		}
+	   echo '<script src="modules/HAT_Asset_Locations/js/popup_view.js"></script>';
+	   if(!empty($_REQUEST["site_type"])){
+		   echo '<script> var site_type="'.$_REQUEST["site_type"].'";</script>';
+	   }
+	   //
        parent::Display();
 
     }
@@ -43,7 +39,7 @@ class AccountsViewPopup extends ViewPopup
 		
 		//echo var_dump(file_exists('modules/' . $this->module . '/Popup_picker.php'));
 		//echo print_r($_SESSION);
-		echo print_r($_SESSION['Accounts2_QUERY']);
+		echo print_r($_SESSION['HAT_Asset_Locations2_QUERY']);
 		//echo print_r($_REQUEST);
     }
 

@@ -159,8 +159,9 @@ echo '<div class="moduleTitle">
 
     echo '<form id="GenerateDocForm" name="GenerateDoc" method="post" >';
     echo '<input name="BtnSave" id="BtnSave" type="button" value="Save and Continue" onclick="SaveAsPDF(\'save\',\''.$module_type.'\',\''.$_REQUEST['uid'].'\',\''.$template_id.'\')">';
-    echo '<input name="BtnRegenerate" id="BtnRegenerate" type="button" value="Regenerate Doc" onclick="SaveAsPDF(\'new\',\''.$module_type.'\',\''.$_REQUEST['uid'].'\',\''.$template_id.'\')">';
+    //echo '<input name="BtnRegenerate" id="BtnRegenerate" type="button" value="Regenerate Doc" onclick="SaveAsPDF(\'new\',\''.$module_type.'\',\''.$_REQUEST['uid'].'\',\''.$template_id.'\')">';
     echo '<input name="BtnSaveAsPDF" id="BtnSaveAsPDF" type="button" value="Achive as PDF" onclick="SaveAsPDF(\'pdf\',\''.$module_type.'\',\''.$_REQUEST['uid'].'\',\''.$template_id.'\')">';
+	echo '<input name="BtnCancel" id="BtnCancel" type="button" value="Cancel" onclick="cancel(\'new\',\''.$module_type.'\',\''.$_REQUEST['uid'].'\',\''.$template_id.'\')">';
     echo $header;
     echo '<textarea name="DocText" id="DocText">'.$printable.'</textarea>';
     echo $footer;

@@ -159,7 +159,14 @@ array (
       array (
         0 => 
         array (
-          0 => 'account',
+          0 => 
+          array (
+            'name' => 'account',
+            'displayParams' => 
+            array (
+              'initial_filter' =>'&asset_using_org=Y',
+            ),
+          ),
           1 => 
           array (
             'name' => 'contact',
@@ -192,7 +199,7 @@ array (
             'label' => 'LBL_LOCATION',
             'displayParams' => 
             array (
-              'initial_filter' => '&ham_maint_sites_id_advanced="+encodeURIComponent(document.getElementById("ham_maint_sites_id").value)+"',
+              'initial_filter' => '&ham_maint_sites_id_advanced="+encodeURIComponent(document.getElementById("ham_maint_sites_id").value)+"&site_type=D',
               'field_to_name_array' => 
               array (
                 'name' => 'location',

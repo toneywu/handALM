@@ -542,9 +542,10 @@ array (
             'label' => 'LBL_OWING_ORG',
             'displayParams' => 
             array (
-              'initial_filter' => '&frame_c_advanced="+encodeURIComponent($("#haa_framework").val())+"',
+              'initial_filter' => '&frame_c_advanced="+encodeURIComponent($("#haa_framework").val())+"&Asset_using_org=Y',
               'call_back_function' => 'setUsingOrgPopupReturn',
             ),
+			
           ),
           1 => 
           array (
@@ -574,7 +575,7 @@ array (
             'label' => 'LBL_USING_ORG',
             'displayParams' => 
             array (
-              'initial_filter' => '&frame_c_advanced="+encodeURIComponent($("#haa_framework").val())+"',
+              'initial_filter' => '&frame_c_advanced="+encodeURIComponent($("#haa_framework").val())+"&Asset_using_org=Y',
               'call_back_function' => 'setUsingOrgPopupReturn',
             ),
           ),

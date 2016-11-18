@@ -85,7 +85,7 @@ function openOwningOrgPopup(ln){
       "id" : "line_target_owning_org_id" + ln,
     },
   };
-  var popupFilter = '&frame_c_advanced='+$("#haa_framework").val();
+  var popupFilter = '&frame_c_advanced='+$("#haa_framework").val()+"&asset_using_org=Y";
   open_popup('Accounts', 1000, 850,popupFilter, true, true, popupRequestData);
 }
 
@@ -100,7 +100,7 @@ function openUsingOrgPopup(ln){
       "id" : "line_target_using_org_id" + ln,
     },
   };
-  var popupFilter = '&frame_c_advanced='+$("#haa_framework").val();
+  var popupFilter = '&frame_c_advanced='+$("#haa_framework").val()+"&asset_using_org=Y";
   open_popup('Accounts', 1000, 850,popupFilter , true, true, popupRequestData);
 }
 

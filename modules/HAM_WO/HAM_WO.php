@@ -132,6 +132,7 @@ class HAM_WO extends HAM_WO_sugar {
 				$ham_wo_line_bean->product_id = $contract_product_bean->product_id;
 				$ham_wo_line_bean->quantity = $contract_product_bean->product_qty;
 				$ham_wo_line_bean->contract_id = $this->contract_id;
+				$ham_wo_line_bean->description = $contract_product_bean->description;
 				$ham_wo_line_bean->save();
 			}
 		}

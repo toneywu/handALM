@@ -103,6 +103,10 @@ array (
             'name' => 'current_owning_org',
             'studio' => 'visible',
             'label' => 'LBL_CURRENT_OWNING_ORG',
+			'displayParams' => 
+            array (
+              'initial_filter' => '&asset_using_org=Y',
+            ),
           ),
         ),
         2 => 
@@ -114,6 +118,7 @@ array (
             'label' => 'LBL_TARGET_OWNING_ORG',
             'displayParams' => 
             array (
+			'initial_filter' => '&asset_using_org=Y',
               'field_to_name_array' => 
               array (
                 'name' => 'target_owning_org',
@@ -213,10 +218,6 @@ array (
         7 => 
         array (
           0 => 'description',
-        ),
-		8=> 
-        array (
-          0 => 'wo_lines',
         ),
       ),
       'lbl_editview_panel2' => 
