@@ -7,6 +7,8 @@ require_once ('include/MVC/View/views/view.detail.php');
 class HIT_IP_TRANS_BATCHViewDetail extends ViewDetail {
 
 	function Display() {
+		 global $db;
+        global $current_user;
 		//0.处理头与行的语言包
 		$modules = array (
 			'HIT_IP_TRANS_BATCH',
@@ -67,7 +69,25 @@ class HIT_IP_TRANS_BATCHViewDetail extends ViewDetail {
 								}</script>';
 				echo '<script>call_ff()</script>';
 			}
-            echo '<script>var template_id="'.$bean_code->aos_pdf_templates_id.'"</script>';
+
+			//Modefy by osmond.liu 20161118
+     $aos_pdf_templates_id = $bean_code->aos_pdf_templates_id;
+     $sql = "select id,name from aos_pdf_templates where type='HIT_IP_TRANS_BATCH'";
+     $list=$db->query($sql);
+     $option='';
+     while ($row = $db->fetchByAssoc($list)){
+        if ($aos_pdf_templates_id!=''&&$row['id']==$aos_pdf_templates_id){
+            $option.="<option value=".$row['id']." selected>".$row['name']."</option>";
+        }else{
+            $option.="<option value=".$row['id'].">".$row['name']."</option>";
+        }
+        if ($aos_pdf_templates_id==''){
+            $aos_pdf_templates_id=$row['id'];
+        }
+    }
+    echo "<input type='hidden' id='pdftemplatehidden' name='pdftemplatehidden' value='".$option."'/>";
+        //END Modefy osmond.liu 20161110
+    echo '<script>var template_id="'.$aos_pdf_templates_id.'"</script>';
 		}
 
 	}

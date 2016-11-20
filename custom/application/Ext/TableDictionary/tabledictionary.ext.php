@@ -41,4 +41,14 @@ include('custom/metadata/hat_counting_lines_hat_counting_batchsMetaData.php');
 include('custom/metadata/hpr_am_roles_contactsMetaData.php');
 
 
+ 
+ //WARNING: The contents of this file are auto-generated
+include('custom/metadata/hpr_groups_hpr_group_membersMetaData.php');
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+include('custom/metadata/hpr_groups_hpr_group_priviligesMetaData.php');
+
+
 ?>

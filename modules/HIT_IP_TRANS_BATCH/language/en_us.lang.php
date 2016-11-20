@@ -101,4 +101,5 @@ $mod_strings = array (
   'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL'=>'Change Status',
   'LBL_EDITVIEW_PANEL2'=>'Additional information',
   'LBL_WO_LINES'=>'WO Obj.Lines',
+    'LBL_PDF_TEMPLATES'=>'PDF模板',
 );
