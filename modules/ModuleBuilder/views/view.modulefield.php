@@ -149,12 +149,14 @@ class ViewModulefield extends SugarView
             $objectName = BeanFactory::getObjectName($moduleName);
             $module = BeanFactory::getBean($moduleName);
 
-			VardefManager::loadVardef($moduleName, $objectName,true);
-			global $dictionary;
-			// add the next three lines
-			if(!isset($module->mbvardefs) || is_null($module->mbvardefs)) {
-				 $module->mbvardefs = new stdClass();
-			}
+            VardefManager::loadVardef($moduleName, $objectName,true);
+            global $dictionary;
+
+            // Fix for issue #1177 - when trying to add or edit fields in a module an error message is shown:
+            // "Warning: Creating default object from empty value"
+            if(!isset($module->mbvardefs) || is_null($module->mbvardefs)) {
+                $module->mbvardefs = new stdClass();
+            }
             $module->mbvardefs->vardefs =  $dictionary[$objectName];
 			
             $module->name = $moduleName;

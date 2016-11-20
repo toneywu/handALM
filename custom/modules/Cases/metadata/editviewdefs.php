@@ -1,141 +1,136 @@
 <?php
-$viewdefs ['Cases'] = 
-array (
-  'EditView' => 
+// created: 2016-11-20 16:29:49
+$viewdefs['Cases']['EditView'] = array (
+  'templateMeta' => 
   array (
-    'templateMeta' => 
+    'maxColumns' => '2',
+    'widths' => 
     array (
-      'maxColumns' => '2',
-      'widths' => 
+      0 => 
       array (
-        0 => 
-        array (
-          'label' => '10',
-          'field' => '30',
-        ),
-        1 => 
-        array (
-          'label' => '10',
-          'field' => '30',
-        ),
+        'label' => '10',
+        'field' => '30',
       ),
-      'includes' => 
+      1 => 
       array (
-        0 => 
-        array (
-          'file' => 'include/javascript/bindWithDelay.js',
-        ),
-        1 => 
-        array (
-          'file' => 'modules/AOK_KnowledgeBase/AOK_KnowledgeBase_SuggestionBox.js',
-        ),
-        2 => 
-        array (
-          'file' => 'include/javascript/qtip/jquery.qtip.min.js',
-        ),
-      ),
-      'useTabs' => false,
-      'tabDefs' => 
-      array (
-        'LBL_CASE_INFORMATION' => 
-        array (
-          'newTab' => false,
-          'panelDefault' => 'expanded',
-        ),
-      ),
-      'form' => 
-      array (
-        'enctype' => 'multipart/form-data',
+        'label' => '10',
+        'field' => '30',
       ),
     ),
-    'panels' => 
+    'includes' => 
     array (
-      'lbl_case_information' => 
+      0 => 
+      array (
+        'file' => 'include/javascript/bindWithDelay.js',
+      ),
+      1 => 
+      array (
+        'file' => 'modules/AOK_KnowledgeBase/AOK_KnowledgeBase_SuggestionBox.js',
+      ),
+      2 => 
+      array (
+        'file' => 'include/javascript/qtip/jquery.qtip.min.js',
+      ),
+    ),
+    'useTabs' => false,
+    'tabDefs' => 
+    array (
+      'LBL_CASE_INFORMATION' => 
+      array (
+        'newTab' => false,
+        'panelDefault' => 'expanded',
+      ),
+    ),
+    'form' => 
+    array (
+      'enctype' => 'multipart/form-data',
+    ),
+  ),
+  'panels' => 
+  array (
+    'lbl_case_information' => 
+    array (
+      0 => 
       array (
         0 => 
         array (
-          0 => 
+          'name' => 'case_number',
+          'type' => 'readonly',
+        ),
+        1 => 'priority',
+      ),
+      1 => 
+      array (
+        0 => 
+        array (
+          'name' => 'state',
+          'comment' => 'The state of the case (i.e. open/closed)',
+          'label' => 'LBL_STATE',
+        ),
+        1 => 'status',
+      ),
+      2 => 
+      array (
+        0 => 'type',
+        1 => 'account_name',
+      ),
+      3 => 
+      array (
+        0 => 
+        array (
+          'name' => 'name',
+          'displayParams' => 
           array (
-            'name' => 'case_number',
-            'type' => 'readonly',
           ),
-          1 => 'priority',
         ),
         1 => 
         array (
-          0 => 
-          array (
-            'name' => 'state',
-            'comment' => 'The state of the case (i.e. open/closed)',
-            'label' => 'LBL_STATE',
-          ),
-          1 => 'status',
+          'name' => 'suggestion_box',
+          'label' => 'LBL_SUGGESTION_BOX',
         ),
-        2 => 
+      ),
+      4 => 
+      array (
+        0 => 
         array (
-          0 => 'type',
-          1 => 'account_name',
+          'name' => 'description',
         ),
-        3 => 
+      ),
+      5 => 
+      array (
+        0 => 
         array (
-          0 => 
-          array (
-            'name' => 'name',
-            'displayParams' => 
-            array (
-            ),
-          ),
-          1 => 
-          array (
-            'name' => 'suggestion_box',
-            'label' => 'LBL_SUGGESTION_BOX',
-          ),
+          'name' => 'resolution',
+          'nl2br' => true,
         ),
-        4 => 
+      ),
+      6 => 
+      array (
+        0 => 
         array (
-          0 => 
-          array (
-            'name' => 'description',
-            'nl2br' => true,
-          ),
+          'name' => 'update_text',
+          'studio' => 'visible',
+          'label' => 'LBL_UPDATE_TEXT',
         ),
-        5 => 
+        1 => 
         array (
-          0 => 
-          array (
-            'name' => 'resolution',
-            'nl2br' => true,
-          ),
+          'name' => 'internal',
+          'studio' => 'visible',
+          'label' => 'LBL_INTERNAL',
         ),
-        6 => 
+      ),
+      7 => 
+      array (
+        0 => 
         array (
-          0 => 
-          array (
-            'name' => 'update_text',
-            'studio' => 'visible',
-            'label' => 'LBL_UPDATE_TEXT',
-          ),
-          1 => 
-          array (
-            'name' => 'internal',
-            'studio' => 'visible',
-            'label' => 'LBL_INTERNAL',
-          ),
+          'name' => 'case_update_form',
+          'studio' => 'visible',
         ),
-        7 => 
-        array (
-          0 => 
-          array (
-            'name' => 'case_update_form',
-            'studio' => 'visible',
-          ),
-        ),
-        8 => 
-        array (
-          0 => 'assigned_user_name',
-        ),
+      ),
+      8 => 
+      array (
+        0 => 'assigned_user_name',
       ),
     ),
   ),
 );
-?>

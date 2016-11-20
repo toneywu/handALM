@@ -304,6 +304,7 @@ function getEditFieldHTML($module, $fieldname, $aow_field, $view = 'EditView', $
 function saveField($field, $id, $module, $value)
 {
 
+    global $current_user;
     $bean = BeanFactory::getBean($module, $id);
 
     if (is_object($bean) && $bean->id != "") {
@@ -317,11 +318,29 @@ function saveField($field, $id, $module, $value)
                 $bean->parent_type = $_REQUEST['parent_type'];
                 $bean->fill_in_additional_parent_fields(); // get up to date parent info as need it to display name
             }
+        }else if ($bean->field_defs[$field]['type'] == "currency"){
+			if (stripos($field, 'usdollar')) {
+				$newfield = str_replace("_usdollar", "", $field);
+				$bean->$newfield = $value;
+			}
+			else{
+				$bean->$field = $value;
+			}
+            
         }else{
             $bean->$field = $value;
         }
 
-        $bean->save();
+        $check_notify = FALSE;
+
+        if (isset( $bean->fetched_row['assigned_user_id']) && $field == "assigned_user_name") {
+            $old_assigned_user_id = $bean->fetched_row['assigned_user_id'];
+            if (!empty($value) && ($old_assigned_user_id != $value) && ($value != $current_user->id)) {
+                $check_notify = TRUE;
+            }
+        }
+
+        $bean->save($check_notify);
         return getDisplayValue($bean, $field);
     } else {
         return false;
@@ -427,7 +446,7 @@ function formatDisplayValue($bean, $value, $vardef, $method = "save")
     }
 
     //if field is of type radio.
-    if ($vardef['type'] == "radioenum" || $vardef['type'] == "enum") {
+     if ($vardef['type'] == "radioenum" || $vardef['type'] == "enum" || $vardef['type'] == "dynamicenum") {
         $value = $app_list_strings[$vardef['options']][$value];
     }
 
@@ -449,7 +468,12 @@ function formatDisplayValue($bean, $value, $vardef, $method = "save")
         $idName = $vardef['id_name'];
         $record = $bean->$idName;
 
-        $value = "<a class=\"listViewTdLinkS1\" href=\"index.php?action=DetailView&module=".$vardef['module']."&record=$record\">";
+        if($vardef['name'] != "assigned_user_name") {
+            $value = "<a class=\"listViewTdLinkS1\" href=\"index.php?action=DetailView&module=".$vardef['module']."&record=$record\">";
+        } else {
+            $value = "";
+        }
+
 
         //To fix github bug 880 (the rname was null and was causing a 500 error in the getFieldValueFromModule call to $fieldname
         $fieldName = 'name';//$vardef['name'];
@@ -458,17 +482,32 @@ function formatDisplayValue($bean, $value, $vardef, $method = "save")
 
         if($vardef['ext2']){
 
-            $value .= getFieldValueFromModule($fieldName,$vardef['ext2'],$record) . "</a>";
+            $value .= getFieldValueFromModule($fieldName,$vardef['ext2'],$record);
 
-        }else if(!empty($vardef['rname'])){
-            $value .= getFieldValueFromModule($fieldName,$vardef['module'],$record) . "</a>";
+        } else if(!empty($vardef['rname']) || $vardef['name'] == "related_doc_name") {
+            $value .= getFieldValueFromModule($fieldName,$vardef['module'],$record);
 
         } else {
-            $value .= $name . "</a>";
+            $value .= $name;
+        }
+
+        if($vardef['name'] != "assigned_user_name") {
+            $value .= "</a>";
         }
     }
-
-
+	if($vardef['type'] == "url")
+	{
+		$value = '<a href='.$value.' target="_blank">'.$value.'</a>';
+	}
+	
+	if($vardef['type'] == "currency"){
+		if($_REQUEST['view'] != "DetailView"){			
+			$value = currency_format_number($value);		
+		}
+		else
+			$value = format_number($value);		
+	}
+	
     return $value;
 }
 

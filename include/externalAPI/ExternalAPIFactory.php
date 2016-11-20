@@ -66,6 +66,11 @@ class ExternalAPIFactory
                             && $connector->isRequiredConfigFieldsSet()) {
                                 $filteredList[$name] = $data;
                         }
+                     } elseif (isset($data['authMethod']) && $data['authMethod'] == 'oauth2') {
+                        $connector = SourceFactory::getSource($data['connector'], false);
+                        if (!empty($connector) && $connector->isRequiredConfigFieldsSet()) {
+                            $filteredList[$name] = $data;
+                        }
                      }else{
                         $filteredList[$name] = $data;
                      }
@@ -106,21 +111,19 @@ class ExternalAPIFactory
         $baseDirList = array('include/externalAPI/','custom/include/externalAPI/');
         foreach ( $baseDirList as $baseDir ) {
             $dirList = glob($baseDir.'*',GLOB_ONLYDIR);
-            if(is_array($dirList)){ 
-                foreach($dirList as $dir) {
-                    if ( $dir == $baseDir.'.' || $dir == $baseDir.'..' || $dir == $baseDir.'Base' ) {
-                        continue;
-                    }
+            foreach($dirList as $dir) {
+                if ( $dir == $baseDir.'.' || $dir == $baseDir.'..' || $dir == $baseDir.'Base' ) {
+                    continue;
+                }
 
-                    $apiName = str_replace($baseDir,'',$dir);
-                    if ( file_exists($dir.'/ExtAPI'.$apiName.'.php') ) {
-                        $apiFullList[$apiName]['className'] = 'ExtAPI'.$apiName;
-                        $apiFullList[$apiName]['file'] = $dir.'/'.$apiFullList[$apiName]['className'].'.php';
-                    }
-                    if ( file_exists($dir.'/ExtAPI'.$apiName.'_cstm.php') ) {
-                        $apiFullList[$apiName]['className'] = 'ExtAPI'.$apiName.'_cstm';
-                        $apiFullList[$apiName]['file_cstm'] = $dir.'/'.$apiFullList[$apiName]['className'].'.php';
-                    }
+                $apiName = str_replace($baseDir,'',$dir);
+                if ( file_exists($dir.'/ExtAPI'.$apiName.'.php') ) {
+                    $apiFullList[$apiName]['className'] = 'ExtAPI'.$apiName;
+                    $apiFullList[$apiName]['file'] = $dir.'/'.$apiFullList[$apiName]['className'].'.php';
+                }
+                if ( file_exists($dir.'/ExtAPI'.$apiName.'_cstm.php') ) {
+                    $apiFullList[$apiName]['className'] = 'ExtAPI'.$apiName.'_cstm';
+                    $apiFullList[$apiName]['file_cstm'] = $dir.'/'.$apiFullList[$apiName]['className'].'.php';
                 }
             }
         }
@@ -272,6 +275,7 @@ class ExternalAPIFactory
      * @param string $moduleName
      * @param bool $ignoreAuth Ignore if we have authentication details or not
      * @param bool $addEmptyEntry Add empty entry?
+     * @return array
      */
      public static function getModuleDropDown($moduleName, $ignoreAuth = false, $addEmptyEntry = false) {
         global $app_list_strings;
