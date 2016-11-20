@@ -69,6 +69,6 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL1'=>'计划与排程信息',
   'LBL_EDITVIEW_PANEL2'=>'相关操作',
   'LBL_EDITVIEW_PANEL3'=>'后序任务',
-  'LBL_TAKE_ACTION'=>'操作'
+  'LBL_TAKE_ACTION'=>'操作',
   'LBL_ERROR_STATUS_ERR'=>'事务处理单状态不正确，请检查',
 );
