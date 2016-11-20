@@ -68,7 +68,7 @@ class HPR_Group_Priviliges_sugar extends Basic {
 	var $assigned_user_name;
 	var $assigned_user_link;
 	var $SecurityGroups;
-	var $module;
+	var $privilige_module;
 	var $sql_statement_for_listview;
 	var $enabled_flag;
 	var $hpr_group_members_id_c;

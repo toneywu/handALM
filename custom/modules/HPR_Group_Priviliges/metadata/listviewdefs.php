@@ -2,7 +2,7 @@
 $module_name = 'HPR_Group_Priviliges';
 $listViewDefs [$module_name] = 
 array (
-  'MODULE' => 
+  'PRIVILIGE_MODULE' => 
   array (
     'type' => 'enum',
     'studio' => 'visible',

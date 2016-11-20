@@ -1,13 +1,29 @@
 <?php
-$module_name = 'HPR_Group_Members';
-$listViewDefs [$module_name] = 
-array (
+$popupMeta = array (
+    'moduleMain' => 'HPR_Group_Members',
+    'varName' => 'HPR_Group_Members',
+    'orderBy' => 'hpr_group_members.name',
+    'whereClauses' => array (
+  'name' => 'hpr_group_members.name',
+),
+    'searchInputs' => array (
+  1 => 'name',
+),
+    'searchdefs' => array (
+  'name' => 
+  array (
+    'name' => 'name',
+    'width' => '10%',
+  ),
+),
+    'listviewdefs' => array (
   'NAME' => 
   array (
     'width' => '32%',
     'label' => 'LBL_NAME',
     'default' => true,
     'link' => true,
+    'name' => 'name',
   ),
   'ORGANIZATION' => 
   array (
@@ -18,6 +34,7 @@ array (
     'link' => true,
     'width' => '10%',
     'default' => true,
+    'name' => 'organization',
   ),
   'USER_NAME' => 
   array (
@@ -28,6 +45,7 @@ array (
     'link' => true,
     'width' => '10%',
     'default' => true,
+    'name' => 'user_name',
   ),
   'ENABLED_FLAG' => 
   array (
@@ -35,6 +53,7 @@ array (
     'default' => true,
     'label' => 'LBL_ENABLED_FLAG',
     'width' => '10%',
+    'name' => 'enabled_flag',
   ),
   'DESCRIPTION' => 
   array (
@@ -44,14 +63,7 @@ array (
     'sortable' => false,
     'width' => '10%',
     'default' => true,
+    'name' => 'description',
   ),
-  'ASSIGNED_USER_NAME' => 
-  array (
-    'width' => '9%',
-    'label' => 'LBL_ASSIGNED_TO_NAME',
-    'module' => 'Employees',
-    'id' => 'ASSIGNED_USER_ID',
-    'default' => false,
-  ),
+),
 );
-?>
