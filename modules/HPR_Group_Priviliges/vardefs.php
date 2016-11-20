@@ -43,10 +43,10 @@ $dictionary['HPR_Group_Priviliges'] = array(
     'inline_edit'=>true,
 		'duplicate_merge'=>true,
 		'fields'=>array (
-  'module' => 
+  'privilige_module' => 
   array (
     'required' => true,
-    'name' => 'module',
+    'name' => 'privilige_module',
     'vname' => 'LBL_MODULE',
     'type' => 'enum',
     'massupdate' => 0,
@@ -221,4 +221,4 @@ $dictionary['HPR_Group_Priviliges'] = array(
 if (!class_exists('VardefManager')){
         require_once('include/SugarObjects/VardefManager.php');
 }
-VardefManager::createVardef('HPR_Group_Priviliges','HPR_Group_Priviliges', array('basic','assignable','security_groups'));
+VardefManager::createVardef('HPR_Group_Priviliges','HPR_Group_Priviliges', array('basic','assignable','security_groups'));

@@ -8,7 +8,7 @@ $subpanel_layout['list_fields'] = array (
     'width' => '45%',
     'default' => true,
   ),
-  'module' => 
+  'privilige_module' => 
   array (
     'type' => 'enum',
     'studio' => 'visible',
