@@ -512,6 +512,10 @@ array (
           0 => 
           array (
             'name' => 'hat_asset_locations_hat_assets_name',
+			'displayParams' => 
+            array (
+              'initial_filter' => '&site_type=D',
+            ),
           ),
           1 => 
           array (
@@ -542,7 +546,7 @@ array (
             'label' => 'LBL_OWING_ORG',
             'displayParams' => 
             array (
-              'initial_filter' => '&frame_c_advanced="+encodeURIComponent($("#haa_framework").val())+"&Asset_using_org=Y',
+              'initial_filter' => '&frame_c_advanced="+encodeURIComponent($("#haa_framework").val())+"&asset_using_org=Y',
               'call_back_function' => 'setUsingOrgPopupReturn',
             ),
 			
@@ -575,7 +579,7 @@ array (
             'label' => 'LBL_USING_ORG',
             'displayParams' => 
             array (
-              'initial_filter' => '&frame_c_advanced="+encodeURIComponent($("#haa_framework").val())+"&Asset_using_org=Y',
+              'initial_filter' => '&frame_c_advanced="+encodeURIComponent($("#haa_framework").val())+"&asset_using_org=Y',
               'call_back_function' => 'setUsingOrgPopupReturn',
             ),
           ),

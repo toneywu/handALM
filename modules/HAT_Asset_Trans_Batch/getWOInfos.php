@@ -11,7 +11,7 @@ if (empty ($_REQUEST['ham_wo_id'])) {
 global $db;
 
 $wo_sql = "SELECT 
-				  h.date_actual_start,
+				  h.date_target_start,
 				  h.date_target_finish
 			FROM
 			      ham_wo h 

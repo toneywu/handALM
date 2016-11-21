@@ -656,7 +656,7 @@ function getWOTargetDate(ln){
 				//console.log("which Line number = "+ln);
 				//console.log(obj);
 				//console.log(obj.date_target_finish);
-				$("#line_date_start"+ln).val(obj.date_actual_start);
+				$("#line_date_start"+ln).val(obj.date_target_start);
 				$("#line_date_end"+ln).val(obj.date_target_finish);
 			},
 			error: function () { //失败

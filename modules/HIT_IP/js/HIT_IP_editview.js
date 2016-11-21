@@ -4,19 +4,10 @@
 //    console.log( IpSubnetCalculator.toDecimal( '127.0.0.1' ) ); // "2130706433"
  //  console.log( IpSubnetCalculator.calculate( '5.4.3.21', '6.7.8.9' ) );
  $.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
-$("#name").bind("change",function(){
-	if($("#name").val()!=""){
-		check_name();
-	}
+ $.getScript("modules/HAA_FF/ff_include.js");
+ $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); // MessageBox
+$('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
 
-});
-
-
-$("#SAVE_HEADER").blur(function(){
-		check_name();
-});
-	
-	
 function show_ip_desc(ip_val,desc_obj) {
 	ip_splited = ip_val.split("/")
 	if ( IpSubnetCalculator.isIp(ip_splited[0])&&ip_splited[1]<=32&&ip_splited[1]>=0) {
@@ -34,31 +25,51 @@ function show_ip_desc(ip_val,desc_obj) {
 
 function check_name(){
 
+	var result_flag = true;
+	var error_msg = "";
 	var str =  $("#name").val();
 	var suffix = str.substr(-3,3);
 		if(suffix!="\/24"){
 			$("#SAVE_HEADER").prop('disabled', true);
 			$("#SAVE_HEADER").addClass('disabled');
 			clear_all_errors();
-			add_error_style('EditView',"name","IP Type Is not right");
+			add_error_style('EditView',"name_desc","IP Type Is not right");
+			error_msg="IP Type Is not right";
+			result_flag=false;
 		}else{
 			clear_all_errors();
 			$("#SAVE_HEADER").prop('disabled', false);
 			$("#SAVE_HEADER").removeClass('disabled');
 		}
 	$ip_splited = $("#name").val().split("/");
-	console.log(IpSubnetCalculator.isIp($ip_splited[0]));
-	console.log($ip_splited[0]);
 	if(!IpSubnetCalculator.isIp($ip_splited[0])){
 		$("#SAVE_HEADER").prop('disabled', true);
 			$("#SAVE_HEADER").addClass('disabled');
 			clear_all_errors();
-			add_error_style('EditView',"name",SUGAR.language.get("HIT_IP","LBL_ERROR_IP_TYPE"));
+			add_error_style('EditView',"name_desc",SUGAR.language.get("HIT_IP","LBL_ERROR_IP_TYPE"));
+			error_msg=SUGAR.language.get("HIT_IP","LBL_ERROR_IP_TYPE");
+			result_flag=false;
 	}else{
 		     clear_all_errors();
 			$("#SAVE_HEADER").prop('disabled', false);
 			$("#SAVE_HEADER").removeClass('disabled');
-	}	
+	}
+		console.log(error_msg);
+		if (error_msg != "") {
+		add_error_style('EditView',"name_desc",error_msg);
+		BootstrapDialog.alert({
+					type : BootstrapDialog.TYPE_DANGER,
+					title : SUGAR.language.get('app_strings',
+							'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+					message : error_msg
+				});
+		}else{
+			$("#SAVE_HEADER").prop('disabled', false);
+		    $("#SAVE_HEADER").removeClass('disabled');
+		
+		}
+		
+		return result_flag;
 }
 
 
@@ -68,9 +79,15 @@ $(document).ready(function(){
 
 	$("#SAVE_FOOTER").hide();
 	$("#CANCEL_FOOTER").hide();
+	
 	if($("#name").val()!=""){
 		check_name();
 	}
+	
+	//改写Save事件，在Save之前加入数据校验
+	SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
+		OverwriteSaveBtn(check_name);//ff_include.js 注意preValidateFunction是一个Function，在此引用时不加（）
+	});
 	
 
 	$("#name_desc").html(SUGAR.language.get('HIT_IP', 'LBL_NAME_DESC'));
@@ -82,18 +99,18 @@ $(document).ready(function(){
 		check_name();
 	});
 	
-	$("#SAVE_HEADER").click(function(){
+	/*$("#SAVE_HEADER").click(function(){
 		check_name();
-	});
+	});*/
 	
-	$("#name").blur(function(){
+	/*$("#name").blur(function(){
 		check_name();
-	});
+	});*/
 
    $("#name").keyup(function(){    
 		$(this).val($(this).val().replace(/[^0-9./]/g,''));   
-		
-		check_name();
+		//console.log("keyup ");
+	    //check_name();
 	}).bind("paste",function(){     
 		$(this).val($(this).val().replace(/[^0-9./]/g,''));     
 	}).css("ime-mode", "disabled");
