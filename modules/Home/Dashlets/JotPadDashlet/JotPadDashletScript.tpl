@@ -54,9 +54,8 @@ if(typeof JotPad == 'undefined') { // since the dashlet can be included multiple
 	        blur: function(ta, id) {
 	        	ajaxStatus.showStatus('{/literal}{$saving}{literal}'); // show that AJAX call is happening
 	        	// what data to post to the dashlet
-    	    	//var va=YAHOO.lang.JSON.stringify(encodeURIComponent(ta.value));
-				ta.value=ta.value.replace(/&/gi, "%26");
- 				var va=YAHOO.lang.JSON.stringify(ta.value);
+    	    	var va=YAHOO.lang.JSON.stringify(encodeURIComponent(ta.value));
+				va = va.replace(/%0A/g, "%5Cn");
     	    	postData = 'to_pdf=1&module=Home&action=CallMethodDashlet&method=saveText&id=' + id + '&savedText=' + va;
 				var cObj = YAHOO.util.Connect.asyncRequest('POST','index.php', 
 								  {success: JotPad.saved, failure: JotPad.saved}, postData);

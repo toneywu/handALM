@@ -22,9 +22,8 @@ $postAllString = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/env
         </ns2:InputParameters>
     </soap:Body>
 </soap:Envelope>';
-//$url = "http://szdctest.chinacache.com:8020/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";
 $url = "http://111.200.33.204:1574/80000/webservices/SOAProvider/plsql/cux_ws_eam_get_infos_pkg/";
-//$url = "http://36.110.51.5:1574/8031/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";
+
 $soap_do = curl_init();
 
 curl_setopt($soap_do, CURLOPT_URL, $url);

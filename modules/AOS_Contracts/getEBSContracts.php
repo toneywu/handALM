@@ -146,7 +146,8 @@ if (curl_errno($soap_do)) {
 			$newBean->attribute1_c=$org_name_val;
 			$newBean->attribute2_c=$sale_unit_val;
 			$newBean->attribute3_c=$contract_type_val;
-			$newBean->attribute4_c=$sales_document_name_val;
+			//$newBean->attribute4_c=$sales_document_name_val;
+			$newBean->attribute4_c=$flow_status_name_val;
 			$newBean->attribute5_c=$frame_contract_num_val;
 			$newBean->attribute6_c=$salesrep_name_val;
 			$newBean->haa_frameworks_id_c = $frame_bean->id;

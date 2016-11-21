@@ -98,8 +98,9 @@ array (
         array (
           0 => 
           array (
-            'name' => 'a_odf_mark',
-            'label' => 'LBL_A_ODF_MARK',
+            'name' => 'a_odf_mark_name',
+            'studio' => 'visible',
+            'label' => 'LBL_A_ODF_MARK_NAME',
           ),
           1 => 
           array (
@@ -151,8 +152,9 @@ array (
         array (
           0 => 
           array (
-            'name' => 'b_odf_mark',
-            'label' => 'LBL_B_ODF_MARK',
+            'name' => 'b_odf_mark_name',
+            'studio' => 'visible',
+            'label' => 'LBL_B_ODF_MARK_NAME',
           ),
           1 => 
           array (

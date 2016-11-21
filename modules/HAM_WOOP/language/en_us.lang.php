@@ -78,4 +78,5 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL2'=>'Related Operation',
   'LBL_EDITVIEW_PANEL3'=>'Next Task',  
   'LBL_TAKE_ACTION'=>'Action',
+  'LBL_ERROR_STATUS_ERR'=>'Error Transaction Status,Please Check it',
 );

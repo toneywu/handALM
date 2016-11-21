@@ -185,26 +185,38 @@ function mark_field_enabled(field_name,not_required_bool) {
   }
 }
 
-function preValidateFunction(ham_woop_id) {
+
+function preValidateFunction(async_bool = false) {
+	console.log('index.php?to_pdf=true&module=HAM_WOOP&action=getTransStatus&ham_wo_id='+$("#ham_wo_id").val()+'&act_module='+$("#act_module").val()+"&woop_number="+$("#woop_number").val());
+	var return_flag=true;
 	$.ajax({
-			url:'index.php?to_pdf=true&module=HAM_WOOP&action=getTransStatus&record='+ham_woop_id+"&ham_wo_id"+$("#ham_wo_id").val()+"&act_module="+$("#act_module").val(),
-			success: function (msg) {
-				console.log(msg);
+			url:'index.php?to_pdf=true&module=HAM_WOOP&action=getTransStatus&ham_wo_id='+$("#ham_wo_id").val()+'&act_module='+$("#act_module").val()+"&woop_number="+$("#woop_number").val(),
+			success: function (data) {
+				if(data=="N"){
+				    var error_msg = SUGAR.language.get('HAM_WOOP', 'LBL_ERROR_STATUS_ERR');
+					add_error_style('EditView',"woop_status",error_msg);
+					return_flag=false;
+				}else{
+					console.log("data = "+data);
+					return_flag=true;
+				}
 			},
 			error: function () { //失败
 				alert('Error loading document');
+				return_flag=false;
 			}
 		});
-}
-	
+		
+		//return return_flag;
+}	
+
 	
 $(document).ready(function(){
 	
-
-	//改写Save事件，在Save之前加入数据校验
-	SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
-		OverwriteSaveBtn(preValidateFunction);//ff_include.js 注意preValidateFunction是一个Function，在此引用时不加（）
-	});
+//改写Save事件，在Save之前加入数据校验
+SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
+	OverwriteSaveBtn(preValidateFunction);//ff_include.js 注意preValidateFunction是一个Function，在此引用时不加（）
+});
 	
 	
 function stringToTime(string){

@@ -42,6 +42,10 @@ array (
             'name' => 'maint_site',
             'studio' => 'visible',
             'label' => 'LBL_MAINT_SITE',
+			'displayParams' => 
+            array (
+              'initial_filter' => '&site_type=D',
+            ),
           ),
           1 => 
           array (

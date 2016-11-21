@@ -11,12 +11,14 @@
 
 	global $current_user; 
   
-    if (is_admin($current_user) ) {          //echo 'This module is  //show quick repair link for admin.
+    if (is_admin($current_user) ) {          //echo 'This module is  
+    	//show quick repair link for admin.
 	    $global_control_links['QuickRepair'] = array(
 			'linkinfo' => array($app_strings['LBL_QUICKREPAIR'] => 'javascript:void(window.open(\'index.php?module=Administration&action=repair\'))'),
 			'submenu' => ''
 			 );
 
+	    //show view log for Admin
 	    $global_control_links['ViewLog'] = array(
 			'linkinfo' => array($app_strings['LBL_DISPLAY_LOG'] => 'javascript:void(window.open(\'index.php?module=Configurator&action=LogView\'))'),
 			'submenu' => ''

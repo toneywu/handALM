@@ -58,6 +58,10 @@ array (
           1 => 
           array (
             'name' => 'location',
+	       		'displayParams' => 
+            array (
+              'initial_filter' => '&site_type=D',
+            ),
           ),
         ),
         1 => 

@@ -77,6 +77,7 @@ class ImportViewStep3 extends ImportView
         $field_map = $mapping_file->set_get_import_wizard_fields();
         $default_values = array();
 		$ignored_fields = array();
+
         if ( !empty( $_REQUEST['source_id']))
         {
             $GLOBALS['log']->fatal("Loading import map properties.");
@@ -84,7 +85,6 @@ class ImportViewStep3 extends ImportView
             $mapping_file->retrieve( $_REQUEST['source_id'],false);
             $_REQUEST['source'] = $mapping_file->source;
             $has_header = $mapping_file->has_header;
-			
             if (isset($mapping_file->delimiter))
                 $_REQUEST['custom_delimiter'] = $mapping_file->delimiter;
             if (isset($mapping_file->enclosure))
@@ -98,6 +98,7 @@ class ImportViewStep3 extends ImportView
         else
         {
             $classname = $this->getMappingClassName(ucfirst($_REQUEST['source']));
+
             //Set the $_REQUEST['source'] to be 'other' for ImportMapOther special case
             if($classname == 'ImportMapOther')
             {
@@ -124,20 +125,14 @@ class ImportViewStep3 extends ImportView
 
         // Now parse the file and look for errors
         $importFile = new ImportFile( $uploadFileName, $delimiter, html_entity_decode($_REQUEST['custom_enclosure'],ENT_QUOTES), FALSE);
-		echo $uploadFileName."<br>";
-		echo $delimiter."<br>";
-		print_r($_REQUEST['custom_enclosure']."<br>");
-		
-		
-		print_r($importFile);
+
         if ( !$importFile->fileExists() ) {
             $this->_showImportError($mod_strings['LBL_CANNOT_OPEN'],$_REQUEST['import_module'],'Step2');
             return;
         }
 
         $charset = $importFile->autoDetectCharacterSet();
-		$charset='UTF-8';
-		//echo $charset;
+
         // retrieve first 3 rows
         $rows = array();
 
@@ -149,7 +144,7 @@ class ImportViewStep3 extends ImportView
             $maxFieldCount = $importFile->getFieldCount() > $maxFieldCount ?  $importFile->getFieldCount() : $maxFieldCount;
         }
         $ret_field_count = $maxFieldCount;
-		print_r($rows);
+
         // Bug 14689 - Parse the first data row to make sure it has non-empty data in it
         $isempty = true;
         if ( $rows[(int)$has_header] != false ) {
@@ -165,9 +160,9 @@ class ImportViewStep3 extends ImportView
             $this->_showImportError($mod_strings['LBL_NO_LINES'],$_REQUEST['import_module'],'Step2');
             return;
         }
-        
+
         // save first row to send to step 4
-        $this->ss->assign("FIRSTROW", base64_encode(serialize($rows[0])));
+        $this->ss->assign("FIRSTROW", htmlentities(json_encode($rows[0])));
 
         // Now build template
         $this->ss->assign("TMP_FILE", $uploadFileName );
@@ -230,7 +225,6 @@ class ImportViewStep3 extends ImportView
 
             foreach ( $fields as $fieldname => $properties ) {
                 // get field name
-				
                 if (!empty($moduleStrings['LBL_EXPORT_'.strtoupper($fieldname)]) )
                 {
                      $displayname = str_replace(":","", $moduleStrings['LBL_EXPORT_'.strtoupper($fieldname)] );
@@ -302,9 +296,7 @@ class ImportViewStep3 extends ImportView
             // to be displayed in UTF-8 format
             if (!empty($charset) && $charset != 'UTF-8') {
                 if (isset($rows[1][$field_count])) {
-					//print_r($rows[1][$field_count]."<br>");
                     $rows[1][$field_count] = $locale->translateCharset($rows[1][$field_count], $charset);
-					
                 }
             }
 
@@ -330,7 +322,6 @@ class ImportViewStep3 extends ImportView
                 $defaultField = '';
                 foreach ( $fields as $fieldname => $properties ) {
                     // get field name
-					
                     if (!empty ($properties['vname']))
                         $displayname = str_replace(":","",translate($properties['vname'] ,$this->bean->module_dir));
                     else

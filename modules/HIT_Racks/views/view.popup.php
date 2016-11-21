@@ -28,9 +28,7 @@ class HIT_RacksViewPopup extends ViewPopup {
 			}
 			insert_popup_header(null, false);
 			$popup = new PopupSmarty($this->bean, $this->module);
-			echo "ddd".var_dump($popup->_popupMeta);
 			parent :: Display();
-			
 		} else {
 
 			//require_once('include/Popups/PopupSmarty.php');

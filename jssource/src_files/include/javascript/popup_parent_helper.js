@@ -60,7 +60,7 @@ function open_popup(module_name, width, height, initial_filter, close_popup, hid
 	window.document.popup_request_data = popup_request_data;
 	window.document.close_popup = close_popup;
 	//globally changing width and height of standard pop up window from 600 x 400 to 800 x 800 
-	width = (width == 600) ? 1024 : width;
+	width = (width == 600) ? 800 : width;
 	height = (height == 400) ? 800 : height;
 	
 	// launch the popup
@@ -218,6 +218,14 @@ function set_return_and_save_targetlist(popup_reply_data)
             SUGAR.util.callOnChangeListers(window.document.forms[form_index].elements[get_element_index(form_index,the_key)]);
 		}
 	}
+
+	if(popup_reply_data.passthru_data.do_contacts)
+	{
+		var form = window.document.forms[form_index];
+		var do_contacts = $('<input type="hidden" name="do_contacts" value="1"/>');
+		$(form).append(do_contacts);
+	}
+
 	window.document.forms[form_index].elements[get_element_index(form_index,"return_module")].value = window.document.forms[form_index].elements[get_element_index(form_index,"module")].value;
 	window.document.forms[form_index].elements[get_element_index(form_index,"return_action")].value = 'ListView';
 	window.document.forms[form_index].elements[get_element_index(form_index,"uids")].value = uids;

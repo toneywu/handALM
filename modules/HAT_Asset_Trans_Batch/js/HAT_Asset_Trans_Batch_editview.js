@@ -327,24 +327,24 @@ $(document).ready(function(){
 				return
 		}
 
-		var result = false;
+		var result = true;
 		var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());
-		if (global_eventOptions.check_customer_hold_c_owning == "1"){
-		//针对当前使用组织进行信息检查，如在报废或移出资产前确认，当前资产的拥有方是否有欠费行为
-			var ajaxStr='mode=accounthold&val='+$("#name").val()+'&id=' + $("#current_owning_org_id").val();
-			var errMSG = SUGAR.language.get('app_strings', 'LBL_CUSTOMER_HOLD_ERR');
-			var result1= FFCheckField('current_owning_org',ajaxStr,errMSG,async_bool);
-		}
-		//针对当前的目前使用组织进行检查，如在分配资产前确认当前用户是否有不良信用。
-		if (global_eventOptions.check_customer_hold_t_using == "1"){
-			var ajaxStr='mode=accounthold&val='+$("#name").val()+'&id=' + $("#target_using_org_id").val();
-			var errMSG = SUGAR.language.get('app_strings', 'LBL_CUSTOMER_HOLD_ERR');
-			var result2= FFCheckField('target_using_org',ajaxStr,errMSG,async_bool);
-		}
-		if (result1==false || result2==false) {
-			result = false;
-		} else {
-			result = true;
+
+		if ($("#asset_trans_status").val()=="SUBMITTED") {//如果是提交状态，进行客户信息检查
+			if (global_eventOptions.check_customer_hold_c_owning == "1"){
+			//针对当前使用组织进行信息检查，如在报废或移出资产前确认，当前资产的拥有方是否有欠费行为
+				var ajaxStr='mode=accounthold&val='+$("#name").val()+'&id=' + $("#current_owning_org_id").val();
+				var errMSG = SUGAR.language.get('app_strings', 'LBL_CUSTOMER_HOLD_ERR');
+				result= FFCheckField('current_owning_org',ajaxStr,errMSG,async_bool);
+			}
+			//针对当前的目前使用组织进行检查，如在分配资产前确认当前用户是否有不良信用。
+			//因为FFCheckField会将已经的错误清除，所以如果当前已经报错（Result=false)就不再继续进行额外的校验了。
+			if (result==true && global_eventOptions.check_customer_hold_t_using == "1"){
+				var ajaxStr='mode=accounthold&val='+$("#name").val()+'&id=' + $("#target_using_org_id").val();
+				var errMSG = SUGAR.language.get('app_strings', 'LBL_CUSTOMER_HOLD_ERR');
+				result= FFCheckField('target_using_org',ajaxStr,errMSG,async_bool);
+			}
+
 		}
 		return result
 	}
