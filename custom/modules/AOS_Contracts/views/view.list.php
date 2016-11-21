@@ -20,7 +20,14 @@ function processSearchForm(){
 	$current_module = $this->module;
 	$current_user_id =$current_user->id;
 	$aclSQLList=getListViewSQLStatement($current_module,$current_user_id,$haa_frameworks_id);
-	$this->where.=empty($this->where)?(empty($aclSQLList)?"":$aclSQLList):(empty($aclSQLList)?"":" AND ".$aclSQLList);
+	$this->where.=empty($this->where)?(empty($aclSQLList)?"":$aclSQLList):(empty($aclSQLList)?"":'  AND '.$aclSQLList);
 	//End HPR权限控制逻辑
 } 
+
+/*function display()
+{
+	global $db;
+	parent::display();
+	var_dump($db->lastsql);
+}*/
 }
