@@ -2,7 +2,7 @@
 // created: 2016-11-06 20:01:33
 $mod_strings = array (
   'LNK_NEW_ACCOUNT' => '新增组织',
-  'LNK_ACCOUNT_LIST' => '组织',
+  'LNK_ACCOUNT_LIST' => '查看组织',
   'LNK_IMPORT_ACCOUNTS' => '导入组织',
   'MSG_SHOW_DUPLICATES' => '新增这个联系人也许会重复，您可以继续点击建立组织来透过之前的记录建立或是点击取消。',
   'LBL_SAVE_ACCOUNT' => '保存组织',

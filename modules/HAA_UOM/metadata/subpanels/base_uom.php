@@ -61,12 +61,12 @@ $subpanel_layout = array(
 		'uom_symbol'=>array(
 	 		'vname' => 'LBL_UOM_SYMBOL',
 	 		'width' => '10%',
-		),	
+		),
 		'conversions'=>array(
 	 		'vname' => 'LBL_CONVERSION',
 	 		'width' => '10%',
 	 		//'customCode' => 'N/A',
-		),					
+		),
 		'edit_button'=>array(
             'vname' => 'LBL_EDIT_BUTTON',
 			'widget_class' => 'SubPanelEditButton',

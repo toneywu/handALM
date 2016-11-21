@@ -14,14 +14,5 @@ $layout_defs["Accounts"]["subpanel_setup"]['haa_qual_accounts'] = array (
     array (
       'widget_class' => 'SubPanelTopCreateButton',
     ),
-/*    0 => 
-    array (
-      'widget_class' => 'SubPanelTopButtonQuickCreate',
-    ),
-    1 => 
-    array (
-      'widget_class' => 'SubPanelTopSelectButton',
-      'mode' => 'MultiSelect',
-    ),*/
   ),
 );

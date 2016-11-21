@@ -40,13 +40,13 @@ class AccountsViewDetail extends ViewDetail
                         'opportunities',
 						'leads',
 						'campaigns',
-                        'documents',
+                        //'documents',
                         'cases',
 						'bugs',
 						//'contacts',
 						'account_aos_quotes',
 						'account_aos_invoices',
-						'account_aos_contracts',
+						//'account_aos_contracts',
 						'products_services_purchased',
 						'project');
 				}

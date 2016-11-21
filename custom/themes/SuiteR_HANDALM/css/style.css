@@ -124,10 +124,6 @@ input[type=text], select{
 	margin:-4px 2px 2px 2px;
 }*/
 
-#EditView_tabs .multiple .button, #EditView_tabs .multiple input[type=button],.search_form .view .multiple .button,#popup_query_form .multiple input[type=button],#popup_query_form .multiple button{
-	background-color:#eee;
-	padding: 4px 8px;
-}
 #popup_query_form .sqsEnabled {width:70%}
 
 .search_form .view, #popup_query_form {/*搜索区域的颜色*/
@@ -263,9 +259,63 @@ input[type=text], select{
 	cursor: auto;
 }
 
+.email-address-add-button {
+	padding:0px 3px;
+}
+.col-xs-12,.email-address-options-container .col-xs-12, .col-xs-12 .email-address-add-line-container, .col-xs-12 .email-address-lines-container, .col-xs-12  .email-address-lines-container .col-xs-12{
+	padding:0px;
+}
+.email-address-options-container .email-address-option{
+	padding:0px;
+	width:33%;
+}
+.email-address-options-container .email-address-option label{
+	font-weight:normal;
+}
+
+/******************************************************/
+/*  以下是基于Suite Ｐ主题的增强和修正					  */
+/******************************************************/
+/* Action Bar */
+#actionMenuSidebar {
+	padding:10px;
+}
+
+.nav li.actionmenulinks a {
+    padding-left: 30px;
+    margin-left: -10px;
+    background-repeat: no-repeat;
+    background-position-y: 6px;
+    background-position-x: 10px;
+}
+
+.nav .actionmenulinks a.side-bar-Create {
+    background-image: url("../../../../custom/themes/SuiteR_HANDALM/images/sidebar/Add.png");
+}
+.nav .actionmenulinks a.side-bar-List {
+    background-image: url("../../../../custom/themes/SuiteR_HANDALM/images/sidebar/List.png");
+}
+.nav .actionmenulinks a.side-bar-View {
+    background-image: url("../../../../custom/themes/SuiteR_HANDALM/images/sidebar/List.png");
+}
+.nav .actionmenulinks a.side-bar-Import {
+    background-image: url("../../../../custom/themes/SuiteR_HANDALM/images/sidebar/Import.png");
+}
+
+.nav .actionmenulinks a.side-bar-Create_Contact_Vcard {
+    background-image: url("../../../../custom/themes/SuiteR_HANDALM/images/sidebar/Create_Contact_Vcard.png");
+}
+
+
+
 /******************************************************/
 /*  以下是自定义的Bootstrap一些对象与SuiteCRM冲突	  */
 /******************************************************/
+.nav .actionmenulinks a.side-bar-TreeView {
+    background-image: url("../../../../custom/themes/SuiteR_HANDALM/images/sidebar/TreeView.png");
+}
+
+
 .iconpicker {
     min-width: 50px;
     padding: 0;

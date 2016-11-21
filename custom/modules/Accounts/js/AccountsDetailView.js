@@ -51,6 +51,8 @@ function DocumentReady() {
     $("#LBL_DETAILVIEW_PANEL_ASSET").after("<div class='tab_subpanel'>"+$("#whole_subpanel_hat_assets").html()+"</div>");
     $("#whole_subpanel_hat_assets").replaceWith("");
 
+    $("#LBL_DETAILVIEW_PANEL_BUSINESS").after("<div class='tab_subpanel'>"+$("#whole_subpanel_account_aos_contracts").html()+"</div>");
+    $("#whole_subpanel_account_aos_contracts").replaceWith("");
 }
 
 

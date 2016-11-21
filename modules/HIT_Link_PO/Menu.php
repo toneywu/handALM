@@ -41,6 +41,6 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 global $mod_strings, $app_strings, $sugar_config;
  
-if(ACLController::checkAccess('HIT_Link_PO', 'edit', true))$module_menu[]=Array("index.php?module=HIT_Link_PO&action=EditView&return_module=HIT_Link_PO&return_action=DetailView", $mod_strings['LNK_NEW_RECORD'],"CreateHIT_Link_PO", 'HIT_Link_PO');
-if(ACLController::checkAccess('HIT_Link_PO', 'list', true))$module_menu[]=Array("index.php?module=HIT_Link_PO&action=index&return_module=HIT_Link_PO&return_action=DetailView", $mod_strings['LNK_LIST'],"HIT_Link_PO", 'HIT_Link_PO');
+if(ACLController::checkAccess('HIT_Link_PO', 'edit', true))$module_menu[]=Array("index.php?module=HIT_Link_PO&action=EditView&return_module=HIT_Link_PO&return_action=DetailView", $mod_strings['LNK_NEW_RECORD'],"Create", 'HIT_Link_PO');
+if(ACLController::checkAccess('HIT_Link_PO', 'list', true))$module_menu[]=Array("index.php?module=HIT_Link_PO&action=index&return_module=HIT_Link_PO&return_action=DetailView", $mod_strings['LNK_LIST'],"List", 'HIT_Link_PO');
 if(ACLController::checkAccess('HIT_Link_PO', 'import', true))$module_menu[]=Array("index.php?module=Import&action=Step1&import_module=HIT_Link_PO&return_module=HIT_Link_PO&return_action=index", $app_strings['LBL_IMPORT'],"Import", 'HIT_Link_PO');
