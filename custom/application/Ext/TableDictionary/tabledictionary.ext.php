@@ -8,6 +8,21 @@ include('custom/metadata/aos_products_haa_uom_conversions_1MetaData.php');
 
  
  //WARNING: The contents of this file are auto-generated
+include('custom/metadata/haos_insurances_documentsMetaData.php');
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+include('custom/metadata/haos_insurances_haos_insurance_claimsMetaData.php');
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+include('custom/metadata/haos_insurance_claims_haos_insurance_claims_linesMetaData.php');
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
 include('custom/metadata/hat_assets_accountsMetaData.php');
 
 

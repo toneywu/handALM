@@ -46,6 +46,61 @@ class HPR_Groups extends HPR_Groups_sugar {
 	function __construct(){
 		parent::__construct();
 	}
-	
+
+	function save($check_notify = FALSE){
+		$this->id=parent::save($check_notify);
+		$post_data=$_POST;
+
+		/*var_dump($post_data);
+		exit();*/
+		$line_count = isset($post_data['line_deleted']) ? count($post_data['line_deleted']) : 0;
+		$line_count1 = isset($post_data['linepri_deleted']) ? count($post_data['linepri_deleted']) : 0;
+        for ($i = 0; $i < $line_count; ++$i) {
+        	$key="line_";
+        	$lines = new HPR_Group_Members();
+            if ($post_data[$key . 'deleted'][$i] == 1) {
+                $lines->mark_deleted($post_data[$key . 'id'][$i]);
+            } else {
+                foreach ($lines->field_defs as $field_def) {
+                    $field_name = $field_def['name'];
+                    if (isset($post_data[$key . $field_name][$i])) {
+                        $lines->$field_name = $post_data[$key . $field_name][$i];
+                    }
+                }
+	            $lines->save($check_notify);
+	            if (!$post_data['line_id'][$i]) {//新建才加关联关系
+	            	$table='hpr_groups_hpr_group_members_c';
+	            	$relate_values = array('deleted' =>0 ,
+	            	'hpr_groups_hpr_group_membershpr_groups_ida'=>$this->id,
+	            	'hpr_groups_hpr_group_membershpr_group_members_idb'=>$lines->id );
+	            }
+	            parent::set_relationship($table,$relate_values);
+	        }
+	    }
+	    for ($i = 0; $i < $line_count1; ++$i) {
+        	$key="linepri_";
+        	$lines = new HPR_Group_Priviliges();
+            if ($post_data[$key . 'deleted'][$i] == 1) {
+                $lines->mark_deleted($post_data[$key . 'id'][$i]);
+            } else {
+                foreach ($lines->field_defs as $field_def) {
+                    $field_name = $field_def['name'];
+                    if (isset($post_data[$key . $field_name][$i])) {
+                        $lines->$field_name = $post_data[$key . $field_name][$i];
+                    }
+                }
+	            $lines->save($check_notify);
+	             if(!$post_data['linepri_id'][$i]){
+	            	$table='hpr_groups_hpr_group_priviliges_c';
+	            	$relate_values = array('deleted' =>0 ,
+	            	'hpr_groups_hpr_group_priviligeshpr_groups_ida'=>$this->id,
+	            	'hpr_groups_hpr_group_priviligeshpr_group_priviliges_idb'=>$lines->id );
+	            }
+
+	            parent::set_relationship($table,$relate_values);
+	        }
+	    }
+	}
+
 }
 ?>

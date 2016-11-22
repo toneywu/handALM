@@ -73,4 +73,17 @@ $mod_strings = array (
   'LBL_FRAMEWORKS_HAA_FRAMEWORKS_ID' => '业务框架 (related Business Framework ID)',
   'LBL_FRAMEWORKS' => '业务框架',
   'LBL_ENABLED_FLAG' => '是否启用',
+
+  'LBL_MEM_ORGANIZATION' => '组织',
+  'LBL_MEM_USER_NAME' => '用户',
+  'LBL_MEM_NAME' => '名称',
+  'LBL_MEM_ENABLED_FLAG' => '是否启用',
+  'LBL_MEM_DESCRIPTION' => '备注',
+
+  'LBL_PRI_MODULE' => '模块',
+  'LBL_PRI_GROUP_MEMBER' => '对象',
+  'LBL_PRI_NAME' => '名称',
+  'LBL_PRI_SQL_STATEMENT_FOR_LISTVIEW' => 'SQL_STATEMENT_FOR_LISTVIEW',
+  'LBL_PRI_ENABLED_FLAG' => '是否启用',
+  'LBL_PRI_DESCRIPTION' => '备注',
 );

@@ -11,7 +11,7 @@ array (
         0 => 
         array (
           'file' => 'modules/HPR_Group_Priviliges/js/HPR_Group_Priviliges.js',
-        ),
+          ),
       ),
       'maxColumns' => '2',
       'widths' => 
@@ -43,31 +43,31 @@ array (
       array (
         0 => 
         array (
-          0 => 'name',
-          1 => 
+          0 => 
           array (
             'name' => 'privilige_module',
             'studio' => 'visible',
             'label' => 'LBL_MODULE',
-            'displayParams' => 
+            'displayParams' =>
             array (
               'call_back_function' => 'setDefaultName',
+            ),
+          ),
+          1 => 
+          array (
+            'name' => 'group_member',
+            'studio' => 'visible',
+            'label' => 'LBL_GROUP_MEMBER',
+            'displayParams' =>
+            array (
+              'call_back_function' => 'setDefaultName',
+              'initial_filter' => '&hpr_groups_hpr_group_members_name_advanced=+$(#name).text()+',
             ),
           ),
         ),
         1 => 
         array (
-          0 => 
-          array (
-            'name' => 'group_member',
-            'studio' => 'visible',
-            'label' => 'LBL_GROUP_MEMBER',
-            'displayParams' => 
-            array (
-              'call_back_function' => 'setDefaultName',
-              'initial_filter' => '&hpr_groups_hpr_group_members_name_advanced="+$("#name").text()+"',
-            ),
-          ),
+          0 => 'name',
           1 => 
           array (
             'name' => 'sql_statement_for_listview',

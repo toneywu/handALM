@@ -1,13 +1,6 @@
 <?php
-// created: 2016-11-18 15:50:16
+// created: 2016-11-18 13:21:00
 $subpanel_layout['list_fields'] = array (
-  'name' => 
-  array (
-    'vname' => 'LBL_NAME',
-    'widget_class' => 'SubPanelDetailViewLink',
-    'width' => '45%',
-    'default' => true,
-  ),
   'organization' => 
   array (
     'type' => 'relate',
@@ -33,6 +26,13 @@ $subpanel_layout['list_fields'] = array (
     'widget_class' => 'SubPanelDetailViewLink',
     'target_module' => 'Users',
     'target_record_key' => 'user_id_c',
+  ),
+  'name' => 
+  array (
+    'vname' => 'LBL_NAME',
+    'widget_class' => 'SubPanelDetailViewLink',
+    'width' => '45%',
+    'default' => true,
   ),
   'enabled_flag' => 
   array (

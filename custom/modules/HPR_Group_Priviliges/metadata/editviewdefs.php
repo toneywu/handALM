@@ -5,12 +5,12 @@ array (
   'EditView' => 
   array (
     'includes' => 
-    array (
-      0 => 
       array (
-        'file' => 'modules/HPR_Group_Priviliges/js/HPR_Group_Priviliges.js',
+        0 => 
+        array (
+          'file' => 'modules/HPR_Group_Priviliges/js/HPR_Group_Priviliges.js',
+          ),
       ),
-    ),
     'templateMeta' => 
     array (
       'maxColumns' => '2',
@@ -43,13 +43,22 @@ array (
       array (
         0 => 
         array (
-          0 => 'name',
-          1 => 
+          0 => 
           array (
             'name' => 'privilige_module',
             'studio' => 'visible',
             'label' => 'LBL_MODULE',
-            'displayParams' => 
+            'displayParams' =>
+            array (
+              'call_back_function' => 'setDefaultName',
+            ),
+          ),
+          1 => 
+          array (
+            'name' => 'group_member',
+            'studio' => 'visible',
+            'label' => 'LBL_GROUP_MEMBER',
+            'displayParams' =>
             array (
               'call_back_function' => 'setDefaultName',
             ),
@@ -57,17 +66,7 @@ array (
         ),
         1 => 
         array (
-          0 => 
-          array (
-            'name' => 'group_member',
-            'studio' => 'visible',
-            'label' => 'LBL_GROUP_MEMBER',
-            'displayParams' => 
-            array (
-              'initial_filter' => '&hpr_groups_hpr_group_members_name_advanced="+$("#name").text()+"',
-              'call_back_function' => 'setDefaultName',
-            ),
-          ),
+          0 => 'name',
           1 => 
           array (
             'name' => 'sql_statement_for_listview',

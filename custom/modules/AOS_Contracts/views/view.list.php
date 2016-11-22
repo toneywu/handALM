@@ -23,7 +23,6 @@ function processSearchForm(){
 	$this->where.=empty($this->where)?(empty($aclSQLList)?"":$aclSQLList):(empty($aclSQLList)?"":'  AND '.$aclSQLList);
 	//End HPR权限控制逻辑
 } 
-
 /*function display()
 {
 	global $db;

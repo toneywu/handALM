@@ -2,13 +2,6 @@
 $module_name = 'HPR_Group_Members';
 $listViewDefs [$module_name] = 
 array (
-  'NAME' => 
-  array (
-    'width' => '32%',
-    'label' => 'LBL_NAME',
-    'default' => true,
-    'link' => true,
-  ),
   'ORGANIZATION' => 
   array (
     'type' => 'relate',
@@ -28,6 +21,13 @@ array (
     'link' => true,
     'width' => '10%',
     'default' => true,
+  ),
+  'NAME' => 
+  array (
+    'width' => '32%',
+    'label' => 'LBL_NAME',
+    'default' => true,
+    'link' => true,
   ),
   'ENABLED_FLAG' => 
   array (

@@ -141,6 +141,46 @@ $dictionary['HPR_Groups'] = array(
     'reportable' => true,
     'size' => '20',
   ),
+  'line_items1' =>
+            array(
+                'required' => false,
+                'name' => 'line_items1',
+                'vname' => 'LBL_LINE_ITEMS1',
+                'type' => 'function',
+                'source' => 'non-db',
+                'massupdate' => 0,
+                'importable' => 'false',
+                'duplicate_merge' => 'disabled',
+                'duplicate_merge_dom_value' => 0,
+                'audited' => false,
+                'reportable' => false,
+                'function' =>
+                    array(
+                        'name' => 'display_lines',
+                        'returns' => 'html',
+                        'include' => 'modules/HPR_Group_Members/Line_Items.php',
+                    ),
+            ),
+    'line_items2' =>
+            array(
+                'required' => false,
+                'name' => 'line_items2',
+                'vname' => 'LBL_LINE_ITEMS2',
+                'type' => 'function',
+                'source' => 'non-db',
+                'massupdate' => 0,
+                'importable' => 'false',
+                'duplicate_merge' => 'disabled',
+                'duplicate_merge_dom_value' => 0,
+                'audited' => false,
+                'reportable' => false,
+                'function' =>
+                    array(
+                        'name' => 'display_lines1',
+                        'returns' => 'html',
+                        'include' => 'modules/HPR_Group_Priviliges/Line_Items.php',
+                    ),
+            ),
   'description' => 
   array (
     'name' => 'description',
@@ -174,4 +214,4 @@ $dictionary['HPR_Groups'] = array(
 if (!class_exists('VardefManager')){
         require_once('include/SugarObjects/VardefManager.php');
 }
-VardefManager::createVardef('HPR_Groups','HPR_Groups', array('basic','assignable','security_groups'));
+VardefManager::createVardef('HPR_Groups','HPR_Groups', array('basic','assignable','security_groups'));
