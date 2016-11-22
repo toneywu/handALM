@@ -73,6 +73,13 @@ $moduleList[] = 'HAA_QUAL';
 
  
  //WARNING: The contents of this file are auto-generated
+$beanList['HAA_Shortcuts'] = 'HAA_Shortcuts';
+$beanFiles['HAA_Shortcuts'] = 'modules/HAA_Shortcuts/HAA_Shortcuts.php';
+$moduleList[] = 'HAA_Shortcuts';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
 $beanList['HAA_UOM'] = 'HAA_UOM';
 $beanFiles['HAA_UOM'] = 'modules/HAA_UOM/HAA_UOM.php';
 $moduleList[] = 'HAA_UOM';

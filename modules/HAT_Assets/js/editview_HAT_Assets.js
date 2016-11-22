@@ -1,5 +1,4 @@
 $.getScript("modules/HAA_FF/ff_include.js");
-function trimStr(str){return str.replace(/(^\s*)|(\s*$)/g,"");}
 
 function setProductPopupReturn(popupReplyData){//选择完产品后的动作
 	set_return(popupReplyData);
@@ -33,9 +32,9 @@ function setUsingOrgPopupReturn(popupReplyData){//选择完使用组织的动作
 
 function generateAssetDesc() {//自动生成资产全名=名称+厂商+型号
 	var combined_asset_desc;
-	var trimed_name 	= trimStr($("#asset_name").val());
-	var trimed_brand	= trimStr($("#brand").val());
-	var trimed_model	= trimStr($("#model").val());
+	var trimed_name 	= $.trim($("#asset_name").val());
+	var trimed_brand	= $.trim($("#brand").val());
+	var trimed_model	= $.trim($("#model").val());
 	combined_asset_desc = trimed_name;
 	if (trimed_brand!="") {
 		combined_asset_desc +="."+trimed_brand;

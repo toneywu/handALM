@@ -74,6 +74,7 @@ class HAA_OrgSelectorDashlet extends Dashlet {
         }
 
         $str = $ss->fetch('modules/Home/Dashlets/HAA_OrgSelectorDashlet/HAA_OrgSelectorDashlet.tpl');
+
         return parent::display($this->dashletStrings['LBL_DBLCLICK_HELP']) . $str . '<br />'; // return parent::display for title and such
 
     }

@@ -11,3 +11,7 @@
 	</span>
 </div>
 <div>{$current_message}</div>
+
+<div class="shortcuts_panel">
+	<div id="shortcuts_panel_{$id}" class="row"></div>
+</div>
