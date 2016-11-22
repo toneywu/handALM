@@ -58,6 +58,7 @@ array (
             'label' => 'LBL_PEROPLE',
             'displayParams' => 
             array (
+			  'initial_filter' => '&contract_type=INNER',
               'field_to_name_array' => 
               array (
                 'account_name' => 'organization_name',

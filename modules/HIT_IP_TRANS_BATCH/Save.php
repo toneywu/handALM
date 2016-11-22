@@ -56,7 +56,7 @@ function save_lines($post_data, $parent, $key = '') {
 	echo '<br/>.line_count = ' . $line_count;
 	echo '<br/>.$parent.id = ' . $parent->id;
 
-	echo var_dump($post_data);
+	//echo var_dump($post_data);
 	for ($i = 0; $i < $line_count; ++ $i) {
 		//echo "<br/>line ".$i." processed;";
 		echo "<br/>hit_ip_subnets_id=" . $post_data[$key . 'hit_ip_subnets_id'][$i];
@@ -92,7 +92,7 @@ function save_lines($post_data, $parent, $key = '') {
 					//echo "value = ".$post_data[$key.'hit_ip_ida'][$i]."<br>";
 					//echo "field_name= " . $field_def['name'] . "--------------------value = " . $post_data[$key . $field_def['name']][$i] . "<br>";
 					$trans_line-> $field_def['name'] = $post_data[$key . $field_def['name']][$i];
-					echo "<br/>" . $field_def[name] . '=' . $post_data[$key . $field_def['name']][$i];
+					//echo "<br/>" . $field_def[name] . '=' . $post_data[$key . $field_def['name']][$i];
 					$trans_line->enable_action = $post_data[$key . 'enable_action_val'][$i];
 				}
 				if ($insertFlag == "Y") {
@@ -126,9 +126,9 @@ function save_allocation_lines($trans_line_bean, $parent, $prev_trans_batch_id) 
 	/**
 	 * 循环所有网络事务处理行
 	 */
+	global $db;
 	$trans_line = new HIT_IP_TRANS();
 	$trans_line->retrieve($trans_line_bean->id);
-
 	if (!empty ($trans_line->history_id)) {
 		//1 尝试获取 
 		$allocation_line_bean = BeanFactory :: getBean('HIT_IP_Allocations')->retrieve_by_string_fields(array (
@@ -172,24 +172,41 @@ function save_allocation_lines($trans_line_bean, $parent, $prev_trans_batch_id) 
 		$allocation_line_bean->broadband_type = $trans_line->broadband_type;
 		if ($allocation_line_bean->source_trans_id == null) {
 			$allocation_line_bean->hit_ip_trans_batch_id = $trans_line->hit_ip_trans_batch_id;
-			//$allocation_line_bean->hit_ip_trans_batch_id = $trans_line->hit_ip_trans_batch_id;
 			$allocation_line_bean->source_trans_id = $trans_line->id;
 			$allocation_line_bean->source_wo_id = $parent->source_wo_id;
 			$allocation_line_bean->source_woop_id = $parent->source_woop_id;
 		}
 		//事物处理单行行上面存历史表id
 		$trans_line->history_id = $allocation_line_bean->id;
-		//如果当前行是删除 那么allocation里面也要删除
-		/*if ($trans_line->deleted == 1) {
-			$allocation_line_bean->deleted = 1;
-		
-		}*/
 		$allocation_line_bean->save();
 
 	}
+	
+	echo "然后通过 ip和端口去找历史表 看是否存在 如果不存在需要新建  "."<br>";
+	echo "subnets_id = ".$trans_line_bean->hit_ip_subnets_id."<br>";
+	
+	$sql ='SELECT count(1) cnt
+			FROM hit_ip_allocations h
+			WHERE IFNULL(h.port,"$$$$$")=IFNULL("'.$trans_line_bean->PORT.'","$$$$$")
+			AND   IFNULL(h.hit_ip_subnets_id,"$$$$$")=IFNULL("'.$trans_line_bean->hit_ip_subnets_id.'","$$$$$")
+			AND   h.deleted=0';
+	echo $sql;
+	$result = $db->query($sql);
+	$nums=0;
+	while($row = $GLOBALS['db']->fetchByAssoc($result) )
+	{
+		//Use $row['id'] to grab the id fields value
+		$nums = $row['cnt'];
+	}
+
+	echo "result".$nums."<br>";
+	
 	//然后通过 ip和端口去找历史表 看是否存在 如果不存在需要新建  
-	$allocation_line_beans = BeanFactory :: getBean("HIT_IP_Allocations")->get_full_list('', "((hit_ip_allocations.hit_ip_subnets_id ='" . $trans_line[0]->hit_ip_subnets_id."') or (hit_ip_allocations.hit_ip_subnets_id is null and '".$trans_line[0]->hit_ip_subnets_id."' is null ))");
-	if (count($allocation_line_beans) > 0) {
+	//$allocation_line_beans = BeanFactory :: getBean("HIT_IP_Allocations")->get_full_list('', "((hit_ip_allocations.hit_ip_subnets_id ='" . $trans_line_bean->hit_ip_subnets_id."' and ifnull(hit_ip_allocations.port,'-1111')=ifnull('".$trans_line_bean->port."') ) or (hit_ip_allocations.hit_ip_subnets_id is null and '".$trans_line_bean->hit_ip_subnets_id."' is null ))");
+	//echo "beans count = ".count($allocation_line_beans)."<br>";
+	//echo print_r(allocation_line_beans);
+	//die();
+	if ($nums > 0) {
 		//不做任何处理
 	} else {
 		//新增行
