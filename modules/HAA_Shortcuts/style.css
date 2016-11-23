@@ -1,0 +1,16 @@
+
+.shortcuts_panel {
+	margin:10px 20px;
+}
+
+.shortcut_set{
+	background-color: #efefef;
+	/*margin: 10px;*/
+	border: #fff solid 2px;
+	text-align: center;
+	padding: 10px 0px;
+}
+
+.shortcut_icon {
+	display: list-item; margin:10px;
+}

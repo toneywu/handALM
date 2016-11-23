@@ -20,6 +20,9 @@ array (
         array (
           'file' => 'modules/HAT_Asset_Locations/js/detailview_map_point.js',
         ),
+        1=>
+        array(
+           'file' => 'modules/HAT_Assets/js/editview_icon_picker.js',),
         2 => 
         array (
           'file' => 'modules/HAT_Asset_Locations/js/HAT_Asset_Locations_detailview.js',
@@ -114,6 +117,8 @@ array (
           array (
             'name' => 'location_icon',
             'label' => 'LBL_ICON',
+            'customCode'=>'<i class="zmdi {$fields.location_icon.value} icon-hc-lg "></i> ({$fields.location_icon.value})'
+
           ),
         ),
         1 => 
