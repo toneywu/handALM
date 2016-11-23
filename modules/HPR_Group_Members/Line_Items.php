@@ -22,14 +22,13 @@ function display_lines($focus, $field, $value, $view){
 	hgm.user_id_c,
 	u.last_name
 FROM
-	hpr_group_members hgm,
-	hpr_groups_hpr_group_members_c hgc,
-	accounts a,
-	users u
+	hpr_group_members hgm
+LEFT JOIN users u ON u.id = hgm.user_id_c,
+ hpr_groups_hpr_group_members_c hgc,
+ accounts a
 WHERE
 	hgm.id = hgc.hpr_groups_hpr_group_membershpr_group_members_idb
 AND hgm.account_id_c = a.id
-AND hgm.user_id_c = u.id
 AND hgm.deleted = 0
 AND hgc.hpr_groups_hpr_group_membershpr_groups_ida ='".$focus->id."'";
 							
