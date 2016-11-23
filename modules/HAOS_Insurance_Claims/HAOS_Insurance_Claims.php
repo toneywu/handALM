@@ -47,5 +47,40 @@ class HAOS_Insurance_Claims extends HAOS_Insurance_Claims_sugar {
 		parent::__construct();
 	}
 	
+	function save($check_notify = FALSE){
+		global $current_user;
+		require_once('modules/AOS_Products_Quotes/AOS_Utils.php');
+        perform_aos_save($this);
+		$this->id=parent::save($check_notify);
+		$post_data=$_POST;
+		$key="line_";
+		$line_count = isset($post_data[$key . 'deleted']) ? count($post_data[$key . 'deleted']) : 0;
+        $j = 0;
+        for ($i = 0; $i < $line_count; ++$i) {
+        	$lines = new HAOS_Insurance_Claims_Lines();
+            if ($post_data[$key . 'deleted'][$i] == 1) {
+                $lines->mark_deleted($post_data[$key . 'id'][$i]);
+            } else {
+                foreach ($lines->field_defs as $field_def) {
+                    $field_name = $field_def['name'];
+                    if (isset($post_data[$key . $field_name][$i])) {
+                        $lines->$field_name = $post_data[$key . $field_name][$i];
+                    }
+                }
+                $lines->currency_id=$this->currency_id;
+                $lines->assigned_user_id=$current_user->id;
+                $lines->name=$post_data[$key . "relate_insurance_number"][$i];
+                perform_aos_save($lines);
+	            $lines->save($check_notify);
+	            if (!$post_data['line_id'][$i]) {//新建才加关联关系
+	            	$table='haos_insurance_claims_haos_insurance_claims_lines_c';
+	            	$relate_values = array('deleted' =>0 ,
+	            	'haos_insurefcc_claims_ida'=>$this->id,
+	            	'haos_insurf06es_lines_idb'=>$lines->id );
+	            }
+	            parent::set_relationship($table,$relate_values);
+	        }
+	    }
+	}
 }
 ?>

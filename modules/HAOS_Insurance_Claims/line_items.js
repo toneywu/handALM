@@ -63,19 +63,18 @@ function insertLineData(line_data){//将数据写入到对应的行字段中
 		ln=insertLineElements("lineItems");
 		$("#line_relate_insurance_number".concat(String(ln))).val(line_data.relate_insurance_number);
 		$("#line_id".concat(String(ln))).val(line_data.id);
+		$("#line_insurance_type".concat(String(ln))).val(line_data.insurance_type);
 		$("#line_haos_insurances_id_c".concat(String(ln))).val(line_data.haos_insurances_id_c);
 		$("#line_claim_amount".concat(String(ln))).val(format2Number(line_data.claim_amount,2));
-		$("#line_other_side_amount".concat(String(ln))).val(line_data.other_side_amount);
+		$("#line_other_side_amount".concat(String(ln))).val(format2Number(line_data.other_side_amount,2));
 		$("#line_gap_amount".concat(String(ln))).val(format2Number(line_data.gap_amount,2));
 		$("#line_actual_amount".concat(String(ln))).val(format2Number(line_data.actual_amount,2));
 		$("#line_other_side_act_amt".concat(String(ln))).val(format2Number(line_data.other_side_act_amt,2));
-		var flag=line_data.document_ready_flag==1?"是":"否";
-        $("#line_document_ready_flag".concat(String(ln))).val(flag);
+		$("#line_document_ready_flag".concat(String(ln))).attr('checked',line_data.document_ready_flag==1?true:false);
+        $("#line_document_ready_flag".concat(String(ln))).val(line_data.document_ready_flag);
         $("#line_document_deliver_date".concat(String(ln))).val(line_data.document_deliver_date);
         $("#line_premium_payment_date".concat(String(ln))).val(line_data.premium_payment_date);
         $("#line_gap_payment_date".concat(String(ln))).val(line_data.gap_payment_date);
-        /*$("#line_accident_experience".concat(String(ln))).val(line_data.accident_experience);
-        $("#line_additional_comments".concat(String(ln))).val(line_data.additional_comments);*/
 		renderLine(ln);
 		$("#line_editor"+ln).hide();
 	}
@@ -115,7 +114,7 @@ function insertLineElements(tableid){
 	"<table border='0' class='lineEditor' width='100%'>"+
 	"<tr>"+
 		"<td id='relate_insurance_number_label'>"+SUGAR.language.get('HAOS_Insurance_Claims_Lines','LBL_RELATE_INSURANCE_NUMBER')+":<span class='required'>*</span></td>"+
-		"<td><input name='line_relate_insurance_number["+prodln+"]'id='line_relate_insurance_number"+prodln+"' type='text' maxlength='255' size='24' value=''/>"+
+		"<td><input name='line_relate_insurance_number["+prodln+"]'id='line_relate_insurance_number"+prodln+"' type='text' tabindex='0' class='sqsEnabled yui-ac-input' autocomplete='off' maxlength='255' size='24' value=''/>"+
 		"<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openInsurancePopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
 		"</td>"+
 		"<td id='insurance_type_label'>"+SUGAR.language.get('HAOS_Insurance_Claims_Lines','LBL_INSURANCE_TYPE')+"</td>"+
@@ -174,7 +173,22 @@ function insertLineElements(tableid){
 	"</table></td>";
 	addToValidate('EditView','line_relate_insurance_number'+prodln,'varchar','true',SUGAR.language.get('HAOS_Insurance_Claims_Lines','LBL_RELATE_INSURANCE_NUMBER'));
 	addToValidate('EditView','line_claim_amount'+prodln,'varchar','true',SUGAR.language.get('HAOS_Insurance_Claims_Lines','LBL_CLAIM_AMOUNT'));
-	
+	addToValidateBinaryDependency('EditView', 'line_relate_insurance_number'+prodln, 'varchar', false,'没有匹配字段: 保险单号', 'line_haos_insurances_id_c'+prodln );
+	var old_val="";
+	$("#line_relate_insurance_number"+prodln).click(function(){
+		old_val=$(this).val();
+	});
+	$("#line_relate_insurance_number"+prodln).blur(function(){
+		var leave_val=$(this).val();
+		if (leave_val!=old_val) {
+			$(this).val("");
+			var line_num=$(this).attr("id").replace(/[^0-9]/ig,"");
+			$("#line_haos_insurances_id_c"+line_num).val("");
+		}
+	});
+	$("#line_document_ready_flag"+prodln).click(function(){
+		$(this).val($(this).is(':checked')?1:0);
+	});
 	renderLine(prodln);
 
 	prodln++;
@@ -368,10 +382,10 @@ function insertLineFootor(tableid)
 }
 
 function addNewLine(tableid){
-	//if(check_form('EditView')){//只有必须填写的字段都填写了才可以新增
+	if(check_form('EditView')){//只有必须填写的字段都填写了才可以新增
 		insertLineElements(tableid);//加入新行
 		LineEditorShow(prodln-1);//打开行编辑器
-	//}
+	}
 }
 
 function CalendarShow(){//显示日历
@@ -409,6 +423,10 @@ function markLineDeleted(ln,key){//删除当前行
 }
 
 function LineEditorShow(ln){//显示行编辑器（先自动关闭所有的行编辑器，再打开当前行）
+	if(!checkValidate('EditView','line_relate_insurance_number'+ln))
+	addToValidate('EditView','line_relate_insurance_number'+ln,'varchar','true',SUGAR.language.get('HAOS_Insurance_Claims_Lines','LBL_RELATE_INSURANCE_NUMBER'));
+	if(!checkValidate('EditView','line_claim_amount'+ln))
+	addToValidate('EditView','line_claim_amount'+ln,'varchar','true',SUGAR.language.get('HAOS_Insurance_Claims_Lines','LBL_CLAIM_AMOUNT'));
 	if(prodln>1){
 		for(vari=0;i<prodln;i++){
 			LineEditorClose(i);

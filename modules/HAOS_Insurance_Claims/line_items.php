@@ -11,6 +11,7 @@ function display_lines($focus,$field,$value,$view){
 			$sql="SELECT
 			hicl.id,
 			hi.name relate_insurance_number,
+			hc.name insurance_type,
 			hicl.haos_insurances_id_c, 
 			hicl.claim_amount,
 			hicl.other_side_amount,
@@ -26,10 +27,12 @@ function display_lines($focus,$field,$value,$view){
 			FROM
 			haos_insurance_claims_haos_insurance_claims_lines_c hhc,
 			haos_insurance_claims_lines hicl,
-			haos_insurances hi
+			haos_insurances hi,
+			haa_codes hc
 			WHERE hicl.deleted=0
 			AND hicl.haos_insurances_id_c=hi.id
 			AND hhc.haos_insurf06es_lines_idb = hicl.id
+			AND hi.haa_codes_id_c=hc.id
 			AND hhc.haos_insurefcc_claims_ida='".$focus->id."'";
 			$result=$focus->db->query($sql);
 			while($row=$focus->db->fetchByAssoc($result)){

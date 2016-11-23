@@ -91,18 +91,21 @@ z1.innerHTML  =
     "<td><input name='line_organization["+prodln1+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='line_organization"+prodln1+"' size='' value='' title='' autocomplete='off' accesskey='7' type='text'>"+
     "<input name='line_account_id_c["+prodln1+"]' id='line_account_id_c"+prodln1+"' type='hidden' value=''>"+
     "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openOrgPopup(" + prodln1 + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+    "<button type='button' name='btn_clr_orgname' id='btn_clr_orgname' tabindex='0' title='清除选择' class='button lastChild' onclick='SUGAR.clearRelateField(this.form, \"line_organization"+prodln1+"\", \"line_account_id_c"+prodln1+"\");' value='清除选择'><img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button>"+
     "</td>"+
     "<td>"+SUGAR.language.get('HPR_Groups', 'LBL_MEM_USER_NAME')+"</td>"+
     "<td><input name='line_user_name["+prodln1+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='line_user_name"+prodln1+"' size='' value='' title='' autocomplete='off' type='text'>"+
     "<input name='line_user_id_c["+prodln1+"]' id='line_user_id_c"+prodln1+"' type='hidden' value=''>"+
     "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openUserNamePopup(" + prodln1 + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+    "<button type='button' name='btn_clr_username' id='btn_clr_username' tabindex='0' title='清除选择' class='button lastChild' onclick='SUGAR.clearRelateField(this.form, \"line_user_name"+prodln1+"\", \"line_user_id_c"+prodln1+"\");' value='清除选择'><img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button>"+
     "</td>"+
   "</tr>"+
   "<tr>"+
     "<td>"+SUGAR.language.get('HPR_Groups', 'LBL_MEM_NAME')+"<span class='required'>*</span></td>"+
     "<td><input name='line_name["+prodln1+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='line_name"+prodln1+"' size='' value='' title='' autocomplete='off' accesskey='7' type='text'></td>"+
     "<td>"+SUGAR.language.get('HPR_Groups', 'LBL_MEM_ENABLED_FLAG')+"<span class='required'>*</span></td>"+
-    "<td><input name='line_enabled_flag["+prodln1+"]' id='line_enabled_flag"+prodln1+"' title='' value='' type='checkbox' checked></td>"+
+    "<input type='hidden' name='line_enabled_flag["+prodln1+"]' value='0'> "+
+    "<td><input name='line_enabled_flag["+prodln1+"]' id='line_enabled_flag"+prodln1+"' title='' value='1' type='checkbox' checked></td>"+
   "</tr>"+
   "<tr>"+
     "<td>"+SUGAR.language.get('HPR_Groups', 'LBL_MEM_DESCRIPTION')+"</td>"+
@@ -114,10 +117,13 @@ z1.innerHTML  =
   "</table></td>";
     // console.log(x.innerHTML);
     addToValidate('EditView', 'line_account_id_c'+ prodln1,'id', 'true',SUGAR.language.get('HPR_Groups', 'LBL_MEM_ORGANIZATION'));
-    addToValidate('EditView', 'line_user_id_c'+ prodln1,'id', 'true',SUGAR.language.get('HPR_Groups', 'LBL_MEM_USER_NAME'));
+    //addToValidate('EditView', 'line_user_name'+ prodln1,'varchar', 'true',SUGAR.language.get('HPR_Groups', 'LBL_MEM_ORGANIZATION'));
     addToValidate('EditView', 'line_name'+ prodln1,'varchar', 'true',SUGAR.language.get('HPR_Groups', 'LBL_MEM_NAME'));
     addToValidate('EditView', 'line_enabled_flag'+ prodln1,'bool', 'true',SUGAR.language.get('HPR_Groups', 'LBL_MEM_ENABLED_FLAG'));
     //addToValidate('EditView', 'line_amount'+ prodln1,'float', 'true',SUGAR.language.get('hie_exp_apply_lines', 'LBL_AMOUNT'));
+
+    clr_value('#line_organization','#line_account_id_c',prodln1);
+    clr_value('#line_user_name','#line_user_id_c',prodln1);
 
     renderLine(prodln1);
     prodln1++;
@@ -129,7 +135,7 @@ function renderLine(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_line_user_name"+ln).html($("#line_user_name"+ln).val());
   $("#displayed_line_name"+ln).html($("#line_name"+ln).val());
   var flag=$("#line_enabled_flag"+ln).is(':checked')?"是":"否";
-  $("#line_enabled_flag"+ln).val($("#line_enabled_flag"+ln).is(':checked')?"1":"0");
+  $("#line_enabled_flag"+ln).html(flag);
   $("#displayed_line_enabled_flag"+ln).html(flag);
   $("#displayed_line_description"+ln).html($("#line_description"+ln).val());
 }
@@ -191,7 +197,7 @@ function markLineDeleted(ln, key) {//删除当前行
 
   if (typeof validate != "undefined" && typeof validate['EditView'] != "undefined") {
     removeFromValidate('EditView','line_account_id_c'+ ln);
-    removeFromValidate('EditView','line_user_id_c'+ ln);
+    //removeFromValidate('EditView','line_user_id_c'+ ln);
     removeFromValidate('EditView','line_name'+ ln);
     removeFromValidate('EditView','line_enabled_flag'+ ln);
    // removeFromValidate('EditView','line_amount'+ ln);
@@ -201,6 +207,7 @@ function markLineDeleted(ln, key) {//删除当前行
 }
 
 function LineEditorShow(ln){ //显示行编辑器（先自动关闭所有的行编辑器，再打开当前行）
+  validate(ln);
   if (prodln1>1) {
     for (var i=0;i<prodln1;i++) {
       LineEditorClose(i);
@@ -293,6 +300,27 @@ function setUserNameReturn(popupReplyData){
   setDefaultMemberName(lineno);
 }
 
+/*function clrOrgName(ln){
+
+  var clr='';
+  $("#line_organization"+ln).val(clr);
+  $("#line_account_id_c"+ln).val(clr);
+}*/
+
+/*function clrUserName(ln){
+
+  var clr='';
+  $("#line_user_name"+ln).val(clr);
+  $("#line_user_id_c"+ln).val(clr);
+}*/
+
+function validate(ln){
+  addToValidate('EditView', 'line_account_id_c'+ prodln1,'id', 'true',SUGAR.language.get('HPR_Groups', 'LBL_MEM_ORGANIZATION'));
+  //addToValidate('EditView', 'line_user_name'+ prodln1,'varchar', 'true',SUGAR.language.get('HPR_Groups', 'LBL_MEM_ORGANIZATION'));
+  addToValidate('EditView', 'line_name'+ prodln1,'varchar', 'true',SUGAR.language.get('HPR_Groups', 'LBL_MEM_NAME'));
+  addToValidate('EditView', 'line_enabled_flag'+ prodln1,'bool', 'true',SUGAR.language.get('HPR_Groups', 'LBL_MEM_ENABLED_FLAG'));
+}
+
 function setDefaultMemberName(ln){
   var members_name=$("#line_organization"+ln).val();
   if ($("#line_user_name"+ln).val()) {
@@ -301,3 +329,18 @@ function setDefaultMemberName(ln){
   $("#line_name"+ln).val(members_name);
 }
 
+function clr_value(attr_name,attr_id,ln){
+var old_val="";
+  $(attr_name+ln).click(function(){
+    old_val=$(this).val();
+  });
+  $(attr_name+ln).blur(function(){
+    var leave_val=$(this).val();
+    if (leave_val!=old_val) {
+      $(this).val("");
+      var line_num=$(this).attr("id").replace(/[^0-9]/ig,"");
+      $(attr_id+line_num).val("");
+    }
+  });
+
+}

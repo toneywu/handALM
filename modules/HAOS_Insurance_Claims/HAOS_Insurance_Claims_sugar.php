@@ -68,6 +68,36 @@ class HAOS_Insurance_Claims_sugar extends Basic {
 	var $assigned_user_name;
 	var $assigned_user_link;
 	var $SecurityGroups;
+	var $haa_frameworks_id_c;
+	var $frameworks;
+	var $haa_codes_id_c;
+	var $claim_type;
+	var $claim_number;
+	var $parent_name;
+	var $parent_type;
+	var $parent_id;
+	var $claim_treated_status;
+	var $hat_eventmaneger_id_c;
+	var $relate_event_number;
+	var $ham_wo_id_c;
+	var $relate_wo_number;
+	var $currency_id;
+	var $claim_total_amount;
+	var $claim_total_amount_usdollar;
+	var $gap_amount;
+	var $gap_amount_usdollar;
+	var $act_claim_total_amt;
+	var $act_claim_total_amt_usdollar;
+	var $attribute1;
+	var $attribute2;
+	var $attribute3;
+	var $attribute4;
+	var $attribute5;
+	var $attribute6;
+	var $attribute7;
+	var $attribute8;
+	var $attribute9;
+	var $attribute10;
 	
 	function __construct(){
 		parent::__construct();
