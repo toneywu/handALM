@@ -233,7 +233,10 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false, donot_c
 	    }else{
 	        mark_obj.closest('td').css({"display":""});
 	        mark_obj_lable.css({"display":""});
-	        mark_obj.css({"color":"#efefef","background-Color":"#efefef;"});
+	        //Modefy By osmond.liu 20161123 更改字体颜色
+	        //mark_obj.css({"color":"#efefef","background-Color":"#efefef;"});
+	        mark_obj.css({"color":"#aaaaaa","background-Color":"#efefef;"});
+	        //End Modefy By osmond.liu 20161123 更改字体颜色
 	        mark_obj.attr("readonly",true);
 	        mark_obj_lable.css({"color":"#aaaaaa"});
 	    }
