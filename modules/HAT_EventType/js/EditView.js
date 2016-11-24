@@ -28,7 +28,7 @@ function reset_EventType_Fields() {
 	}
 
 }
-
+/*
 function mark_field_disabled(field_name) {
 	$("#"+field_name).attr("style","color:#efefef;background-Color:#efefef;");
 	$("#"+field_name).attr("disabled",true);
@@ -42,7 +42,7 @@ function mark_field_enabled(field_name) {
 	$("#"+field_name+"_label").attr("style","color:#000000;text-decoration:none;");
 	$("#"+field_name+"_label .required").show();
 
-}
+}*/
 
 
 $(document).ready(function() {

@@ -24,9 +24,13 @@ array (
       array (
         0 => 
         array (
-          'file' => 'modules/HAT_EventType/js/EditView.js',
+          'file' => 'modules/HAA_FF/ff_include.js',
         ),
         1 => 
+        array (
+          'file' => 'modules/HAT_EventType/js/EditView.js',
+        ),
+        2 => 
         array (
           'file' => 'modules/HAT_EventType/js/reset_EvenType_Fields.js',
         ),

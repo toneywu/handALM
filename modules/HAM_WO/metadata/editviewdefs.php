@@ -12,10 +12,10 @@ array (
         array (
           'file' => 'modules/HAM_WO/js/editview_map_point.js',
         ),
-        1 => 
+/*        1 => 
         array (
           'file' => 'modules/HAA_FF/HAA_FF.php',
-        ),
+        ),*/
         2 => 
         array (
           'file' => 'modules/HAA_FF/ff_include.js',

@@ -20,18 +20,24 @@ var setting = {
 			onClick: onClick,
 			onAsyncSuccess:onAsyncSuccess,
 			//onAsyncError: onAsyncError,
-/*				beforeAsync: beforeAsync,
-onAsyncSuccess: onAsyncSuccess*/
-},
-data: {
-	simpleData: {
-		enable: true,
-		idKey: "id",
-		pIdKey: "pId",
-		rootPId: 0
-	}
-}
-};
+			/*beforeAsync: beforeAsync,
+			onAsyncSuccess: onAsyncSuccess*/
+		},
+		data: {
+			simpleData: {
+				enable: true,
+				idKey: "id",
+				pIdKey: "pId",
+				rootPId: 0
+			}
+		},
+		//判断是否为多选
+		check: {
+				enable: true
+			},
+		//check.chkboxType = { "Y" : "ps", "N" : "ps" };
+	};
+
 
 
 	function filter(treeId, parentNode, childNodes) {//对加载后的结果进行处理,这一段是树结点数据展示的关键字段
@@ -45,8 +51,8 @@ data: {
 				childNodes[i].name = "";
 			}
 
-			if (typeof childNodes[i].icon != 'undefined') {//图标
-				childNodes[i].name += " "+'<i class="zmdi '+childNodes[i].icon+' icon-hc-lg "></i> ';
+			if (typeof childNodes[i].img != 'undefined') {//图标
+				childNodes[i].name += " "+'<i class="zmdi '+childNodes[i].img+' icon-hc-lg "></i> ';
 			}
 			childNodes[i].name += '<span class="treeview_'+childNodes[i].type+'">';
 			if (childNodes[i].type=="asset" ) {//依据Business Framework定义的显示规则，确定是否显示CODE、名称
@@ -363,9 +369,14 @@ function initTree(treeView, default_list, p3) {
 		var zNodes = [
 			{name:framework_title+$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0,type:"asset_category"},
 		];
-	}
+	};
+
 	//初始化树
 	zTreeObj = $.fn.zTree.init($("#treeview_selector"), setting, zNodes);
+
+/*	zTreeObj.setting.check.enable = true
+	
+*/zTreeObj.setting.check.chkboxType = {"Y":"ps","N":"ps"};
 	//加载第一层的所有节点
 	zTreeObj.reAsyncChildNodes(zTreeObj.getNodeByTId("treeview_selector_1"), "refresh", false);
 

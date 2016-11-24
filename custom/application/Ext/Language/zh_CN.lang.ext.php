@@ -166,7 +166,7 @@ $app_list_strings['haa_frameworks_field_rule']['LIST'] = '基于预定义的列�
 
 $app_list_strings['haa_frameworks_display_rule']['BOTH'] = '同时显示名称与代码';
 $app_list_strings['haa_frameworks_display_rule']['CODE'] = '代码/铭牌优先';
-$app_list_strings['haa_frameworks_display_rule']['NAME'] = '名称描述优先';
+$app_list_strings['haa_frameworks_display_rule']['DESC'] = '名称描述优先';
 
 
 /*********************************************************************************

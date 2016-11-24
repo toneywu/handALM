@@ -5,7 +5,7 @@
  * 返回的JASON示例：
  * {"node":[{"id":"92a3dde3-47a1-7467-8e26-56b74a8bed37","html":" V-SH01 : Shanghai Hongqiao Area","type":"location"},{"id":"1f790755-182c-d9bd-9e9e-56b74a64455c","html":" V-SH02 : Shanghai Pudong Area","type":"location"}]}
 
-可以用以下方法测试：http://localhost/suite/index.php?module=HAT_Asset_Locations&action=getTreeNodes&return_module=HAT_Asset_Locations&return_action=index&type=using_org_business_type
+可以用以下方法测试：index.php?module=HAT_Asset_Locations&action=getTreeNodes&return_module=HAT_Asset_Locations&return_action=index&type=using_org_business_type
 
 Functional Location
 	location--> asset
@@ -36,15 +36,15 @@ require_once('modules/HAT_Asset_Locations/getTreeNodeList.php');//所有的默�
 
 if($_REQUEST['type']=="location") { //如果是Locationg来源，需要读取子位置和子资产（Asset来源只需要子资产）
         $sel_sub_location ="SELECT 
-                            hat_asset_locations.id,
-                            hat_asset_locations.name,
-                            hat_asset_locations.location_title,
-                            hat_asset_locations.location_icon
+                            `hat_asset_locations`.id,
+                            `hat_asset_locations`.name,
+                            `hat_asset_locations`.location_title,
+                            `hat_asset_locations`.location_icon
                           FROM
                             hat_asset_locations,
                             ham_maint_sites 
                           WHERE hat_asset_locations.`ham_maint_sites_id`= '' OR 
-                          (hat_asset_locations.`ham_maint_sites_id` = ham_maint_sites.id AND ham_maint_sites.`haa_frameworks_id`='".$current_framework."')
+                          (hat_asset_locations.`ham_maint_sites_id` = `ham_maint_sites`.id AND ham_maint_sites.`haa_frameworks_id`='".$current_framework."')
                           AND hat_asset_locations.deleted = 0";
 
         if (isset($_REQUEST['id'])) {//如果指明了当前的ID
@@ -57,10 +57,9 @@ if($_REQUEST['type']=="location") { //如果是Locationg来源，需要读取子
 
     $bean_locations =  $db-> query($sel_sub_location);
 
-
     while ( $location = $db->fetchByAssoc($bean_locations) ) {
            $txt_jason .='{id:"'.$location['id'].'",';
-           $txt_jason .='icon:"'.$location['location_icon'].'",';
+           $txt_jason .='img:"'.$location['location_icon'].'",';
            $txt_jason .='code:"'.$location['name'].'",';
            $txt_jason .='desc:"'.$location['location_title'].'",';
           // $txt_jason .='status_tag:"color_asset_status_'.$asset['asset_status'].'",';
@@ -270,7 +269,7 @@ if (isset($sel_sub_asset)) {
         while ( $asset = $db->fetchByAssoc($bean_assets) ) {
            $txt_jason .='{id:"'.$asset['id'].'",';
            //$txt_jason .='name:"<i class=\'zmdi '.$asset['asset_icon'].' icon-hc-lg \'></i> <span class=\'treeview_asset\'>'.$asset['name'].'</span>: '.$asset['asset_desc'].'",';
-           $txt_jason .='icon:"'.$asset['asset_icon'].'",';
+           $txt_jason .='img:"'.$asset['asset_icon'].'",';
            $txt_jason .='code:"'.$asset['name'].'",';
            $txt_jason .='desc:"'.$asset['asset_desc'].'",';
            $txt_jason .='status_tag:"color_asset_status_'.$asset['asset_status'].'",';

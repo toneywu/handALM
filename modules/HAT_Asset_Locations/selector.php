@@ -156,8 +156,14 @@
 	} else {
 		echo '<script>var current_mode = "view";</script>';
 	}
-?>
-<?php
+
+	if (isset($_REQUEST['mode'])&&$_REQUEST['mode']=='MultiSelec'){//如果有值就多选模式
+		echo '<script>var IsMultiSelec = true;</script>';
+	} else {
+		echo '<script>var IsMultiSelec = false;</script>';
+	}
+
+	//TODO：下面这个是有些多余的，需要考虑如何删除
 	echo '<selcet id="hit_rack_pos_depth_list" style="display:none">';
 	foreach ($app_list_strings['hit_rack_pos_depth_list'] as $key => $value) {
 		echo '<option value="'.$key.'">'.$value.'</option>';
