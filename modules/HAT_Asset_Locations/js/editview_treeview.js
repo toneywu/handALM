@@ -32,7 +32,7 @@ function loadDataForNode(node, onCompleteCallback) {
 		//dataType: "json",
 		success: function (data) {
 			//ajaxStatus.hideStatus();
-			//console.log(data);
+			console.log(data);
 			var obj = jQuery.parseJSON(data);
 			if(obj.node.length>0) { //如果读取到1个以上的节点，则直接增加节点
 				$.each(obj.node, function () {

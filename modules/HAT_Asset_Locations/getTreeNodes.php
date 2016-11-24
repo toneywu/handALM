@@ -55,14 +55,16 @@ if($_REQUEST['type']=="location") { //如果是Locationg来源，需要读取子
 
         $sel_sub_location .= " ORDER BY name";
 
-       // echo $sel_sub_location."</br>";
-
     $bean_locations =  $db-> query($sel_sub_location);
 
 
     while ( $location = $db->fetchByAssoc($bean_locations) ) {
-            $txt_jason .='{id:"'.$location['id'].'",';
-            $txt_jason .='name:"<i class=\'zmdi '.$location['location_icon'].' icon-hc-lg \'></i> <span class=\'treeview_location\'> '.$location['name'].'</span>: '.$location['location_title'].'",';
+           $txt_jason .='{id:"'.$location['id'].'",';
+           $txt_jason .='icon:"'.$location['location_icon'].'",';
+           $txt_jason .='code:"'.$location['name'].'",';
+           $txt_jason .='desc:"'.$location['location_title'].'",';
+          // $txt_jason .='status_tag:"color_asset_status_'.$asset['asset_status'].'",';
+          // $txt_jason .='status:"'.$app_list_strings['hat_asset_status_list'][$asset['asset_status']].'",';
             $txt_jason .='type:"location"},';
     }
 
@@ -197,6 +199,7 @@ if($_REQUEST['type']=="location") { //如果是Locationg来源，需要读取子
     $get_sql_results =  $db-> query($sql_string);//加载所有的组织
     while ( $sql_result = $db->fetchByAssoc($get_sql_results) ) {
             $txt_jason .='{id:"'.$sql_result['id'].'",';
+
             $txt_jason .='name:"<span class=\'treeview_location\'> '.$sql_result['name'].'</span>",';
             $txt_jason .='type:"'.$_REQUEST['type'].'"},';
     }
@@ -253,7 +256,8 @@ if (isset($sel_asset_grouped_by_contact)) {
     //if(is_array($bean_assets)) {
         while ( $result = $db->fetchByAssoc($get_sql_results) ) {
            $txt_jason .='{id:"'.$result['id'].'",';
-           $txt_jason .='name:"<i class=\'zmdi icon-hc-lg \'></i> <span class=\'treeview_contact\'>'.$result['last_name'].'</span>",';
+           $txt_jason .='icon:"",';
+           $txt_jason .='code:"'.$result['last_name'].'",';
            $txt_jason .='type:"grouped_contact"},';
         }
     //}
@@ -265,8 +269,12 @@ if (isset($sel_sub_asset)) {
     //if(is_array($bean_assets)) {
         while ( $asset = $db->fetchByAssoc($bean_assets) ) {
            $txt_jason .='{id:"'.$asset['id'].'",';
-           $txt_jason .='name:"<i class=\'zmdi '.$asset['asset_icon'].' icon-hc-lg \'></i> <span class=\'treeview_asset\'>'.$asset['name'].'</span>: '.$asset['asset_desc'].'",';
-           $txt_jason .='status:"<span class=\'color_tag color_asset_status_'.$asset['asset_status'].'\'>'.$app_list_strings['hat_asset_status_list'][$asset['asset_status']].'</span>",';
+           //$txt_jason .='name:"<i class=\'zmdi '.$asset['asset_icon'].' icon-hc-lg \'></i> <span class=\'treeview_asset\'>'.$asset['name'].'</span>: '.$asset['asset_desc'].'",';
+           $txt_jason .='icon:"'.$asset['asset_icon'].'",';
+           $txt_jason .='code:"'.$asset['name'].'",';
+           $txt_jason .='desc:"'.$asset['asset_desc'].'",';
+           $txt_jason .='status_tag:"color_asset_status_'.$asset['asset_status'].'",';
+           $txt_jason .='status:"'.$app_list_strings['hat_asset_status_list'][$asset['asset_status']].'",';
            $txt_jason .='type:"asset"},';
         }
     //}

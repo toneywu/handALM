@@ -94,5 +94,5 @@ $mod_strings = array (
   'LBL_PLACEHOLDER'=>'Placeholder',
   'LBL_ADD_PLACEHOLDER'=>'Allocation Server-Rack Space',
   'LBL_INACTIVED'=>'removed',
-
+  'LBL_NAV_MODE_GIRD'=>'Grid Position',
 );

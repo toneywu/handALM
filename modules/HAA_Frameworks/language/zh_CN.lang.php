@@ -97,5 +97,7 @@ $mod_strings = array (
   'LBL_SOURCE_REFERENCE_FIELD_RULE'=>'来源参考字段输入类型',
   'LBL_ITRACK_ASSET_GROUP'=>'IT服务器机柜默认资产组',
   'LBL_EDITVIEW_PANEL3'=>'客户信息跟踪规则',
+'LBL_LOCATION_DISPLAY_RULE'=>'位置显示方式',
+'LBL_ASSET_DISPLAY_RULE'=>'设备/资产显示方式',
 
 );

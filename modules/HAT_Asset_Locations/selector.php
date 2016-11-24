@@ -124,6 +124,17 @@
         $current_module = $this->module;
         $current_action = $this->action;
         echo '<div "div_framework" style="display:none">'.set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id').'</div>';
+
+        $beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
+        //处理Framework中的相关规则性字段
+        //加载Framework对应的一些显示规则
+        echo "<script>";
+        if(isset($beanFramework)) {
+            echo "var location_display_rule='".$beanFramework->fetched_row['location_display_rule']."';";
+            echo "var asset_display_rule='".$beanFramework->fetched_row['asset_display_rule']."';";
+            //add by yuan.chen
+        }
+        echo "</script>";
 ?>
 <?php
 	if (isset($_REQUEST['current_mode'])){//如果有值就多半是在选择模式
@@ -169,6 +180,7 @@
 
 
 <div id="selector_top">
+<!--顶部的TAB标签-->
 	<div id="select_mode">
 		 <div id="selectorType_Tree" class="tabFocused">
 	         <span class="tab_label"><i class="icon-sitemap"></i> <?php echo translate('LBL_NAV_MODE_TREE','HAT_Asset_Locations');?> </span>
@@ -180,17 +192,25 @@
 			<input type="hidden" id="current_view">
 			<button id="btn_switch_tree_view"><?php echo  translate('LBL_BTN_SWITCH_VIEW','HAT_Asset_Locations');?></button>
 	    </div>
+<!-- 		<div id="selectorType_Grid" class="tabUnfocused">
+	        <span class="tab_label"><i class="icon-map-o"></i> <?php echo  translate('LBL_NAV_MODE_GIRD','HAT_Asset_Locations')?> </span>
+			<button id="btn_switch_grid_view"><?php echo translate('LBL_BTN_SWITCH_VIEW','HAT_Asset_Locations');?></button>
+	    </div> 
 		<div id="selectorType_Map" class="tabUnfocused">
 	         <span class="tab_label"><i class="icon-map-o"></i> <?php echo  translate('LBL_NAV_MODE_MAP','HAT_Asset_Locations')?> </span>
-		<select id="selector_map_type" class="form-horizontal">
-		     <?php foreach ($app_list_strings['cux_map_type_list'] as $key => $value) {
-		     	echo '<option value="'.$key.'">'.$value.'</option>';
-		     }?>
-		</select>
-		<button id="btn_switch_map_view"><?php echo translate('LBL_BTN_SWITCH_VIEW','HAT_Asset_Locations');?></button>
-	    </div>
-	    
-<!-- 	    <div>
+			<select id="selector_map_type" class="form-horizontal">
+			     <?php foreach ($app_list_strings['cux_map_type_list'] as $key => $value) {
+			     	echo '<option value="'.$key.'">'.$value.'</option>';
+			     }?>
+			</select>
+			<button id="btn_switch_map_view"><?php echo translate('LBL_BTN_SWITCH_VIEW','HAT_Asset_Locations');?></button>
+	    </div>-->
+
+
+	</div>
+
+<div id="selector_top_view" class="row">
+ 	    <div>
 			<span class="input_group">  
 				<label id="assetStatus_label">资产状态</label>
 				<select id="asset_status" class="form-horizontal">
@@ -198,12 +218,16 @@
 			     	echo '<option value="'.$key.'">'.$value.'</option>';
 			     }?>
 				</select>
-			</span>  
-	    </div> -->
-	</div>
+			</span>
+	    </div>
+ 	    <div>
+			<span class="input_group">
+				<label id="assetStatus_label">资产名称</label>
+				<input>
+			</span>
+	    </div>
 
-<div id="selector_top_view" class="row">
-
+	    <button id="">Search</button>
 </div>
 
 
@@ -246,22 +270,42 @@ $(document).ready(function(){
 	$("#selectorType_Tree").click(function(){
 		$("#selectorType_Tree").addClass("tabFocused");
 		$("#selectorType_Tree").removeClass("tabUnfocused");
+		$("#selectorType_Grid").addClass("tabUnfocused");
+		$("#selectorType_Grid").removeClass("tabFocused");
 		$("#selectorType_Map").addClass("tabUnfocused");
 		$("#selectorType_Map").removeClass("tabFocused");
 		$("#selector_map_type").hide();
 		$("#selector_view_tree").show();
 		$("#btn_switch_map_view").hide();
+		$("#btn_switch_grid_view").hide();
 		$("#btn_switch_tree_view").show();
 	});
 
 	$("#selectorType_Map").click(function(){
 		$("#selectorType_Tree").addClass("tabUnfocused");
 		$("#selectorType_Tree").removeClass("tabFocused");
+		$("#selectorType_Grid").addClass("tabUnfocused");
+		$("#selectorType_Grid").removeClass("tabFocused");
 		$("#selectorType_Map").addClass("tabFocused");
 		$("#selectorType_Map").removeClass("tabUnfocused");
 		$("#selector_map_type").show();
 		$("#selector_view_tree").hide();
 		$("#btn_switch_map_view").show();
+		$("#btn_switch_grid_view").hide();
+		$("#btn_switch_tree_view").hide();
+	});
+
+	$("#selectorType_Grid").click(function(){
+		$("#selectorType_Tree").addClass("tabUnfocused");
+		$("#selectorType_Tree").removeClass("tabFocused");
+		$("#selectorType_Grid").addClass("tabFocused");
+		$("#selectorType_Grid").removeClass("tabUnfocused");
+		$("#selectorType_Map").addClass("tabUnfocused");
+		$("#selectorType_Map").removeClass("tabFocused");
+		$("#selector_map_type").hide();
+		$("#selector_view_tree").hide();
+		$("#btn_switch_map_view").hide();
+		$("#btn_switch_grid_view").show();
 		$("#btn_switch_tree_view").hide();
 	});
 
@@ -286,8 +330,11 @@ $(document).ready(function(){
 					//如果没有搜索参数，就默认树型结构初始化
 					echo 'initTree($("#current_view").val());';
 				}?>
-			});
-		} else {
+			});//end util
+		} else if($("#selectorType_Grid").hasClass('tabFocused')) {
+			//Gird定位
+		}
+		else {
 			//如果当前模式不是Treeview，就是MapView
 		}
 

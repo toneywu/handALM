@@ -34,20 +34,85 @@ data: {
 };
 
 
-	function filter(treeId, parentNode, childNodes) {
+	function filter(treeId, parentNode, childNodes) {//对加载后的结果进行处理,这一段是树结点数据展示的关键字段
 	if (!childNodes) return null;
-	for (var i=0, l=childNodes.length; i<l; i++) {
-		//childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
-		childNodes[i].detailed_name = childNodes[i].name;
+		console.log(childNodes);
+		for (var i=0, l=childNodes.length; i<l; i++) {
+			//childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
+			//name是会在Tree中展示的名称
 
-		if (typeof childNodes[i].status != 'undefined') {
-			childNodes[i].name = childNodes[i].name +" "+childNodes[i].status;
-		} else {
-			childNodes[i].name = childNodes[i].name;
-		}
-		childNodes[i].isParent = true;
-				//childNodes[i].t="";
-		}
+			if (typeof childNodes[i].name == 'undefined') {
+				childNodes[i].name = "";
+			}
+
+			if (typeof childNodes[i].icon != 'undefined') {//图标
+				childNodes[i].name += " "+'<i class="zmdi '+childNodes[i].icon+' icon-hc-lg "></i> ';
+			}
+			childNodes[i].name += '<span class="treeview_'+childNodes[i].type+'">';
+			if (childNodes[i].type=="asset" ) {//依据Business Framework定义的显示规则，确定是否显示CODE、名称
+				if (asset_display_rule == "CODE") {
+					if (typeof childNodes[i].code != 'undefined') {//只显示CODE
+						childNodes[i].name += childNodes[i].code;
+					}
+					childNodes[i].name +="</span>";//close treeview span
+				} else if (asset_display_rule == "DESC") {
+					if (typeof childNodes[i].desc != 'undefined') {//只显示名称
+						childNodes[i].name += childNodes[i].desc;
+					}
+					childNodes[i].name +="</span>";//close treeview span
+				} else {//BOTH and Others
+					if (typeof childNodes[i].code != 'undefined') {//显示Code+名称
+						childNodes[i].name += childNodes[i].code;
+					}
+					childNodes[i].name +="</span>";//close treeview span
+					if (typeof childNodes[i].desc != 'undefined') {
+						childNodes[i].name += " "+childNodes[i].desc;
+					}
+				} // end if for CODE
+
+			}else if (childNodes[i].type=="location" ) {//依据Business Framework定义的显示规则，确定是否显示CODE、名称
+				if (location_display_rule == "CODE") {
+					if (typeof childNodes[i].code != 'undefined') {//只显示CODE
+						childNodes[i].name += childNodes[i].code;
+					}
+					childNodes[i].name +="</span>";//close treeview span
+				} else if (asset_display_rule == "DESC") {
+					if (typeof childNodes[i].desc != 'undefined') {//只显示名称
+						childNodes[i].name += childNodes[i].desc;
+					}
+					childNodes[i].name +="</span>";//close treeview span
+				} else {
+					if (typeof childNodes[i].code != 'undefined') {//显示Code+名称
+						childNodes[i].name += childNodes[i].code;
+					}
+					childNodes[i].name +="</span>";//close treeview span
+					if (typeof childNodes[i].desc != 'undefined') {
+						childNodes[i].name += " "+childNodes[i].desc;
+					}
+				}
+			} else {//Asset and Location以外的情况
+					if (typeof childNodes[i].code != 'undefined') {//显示Code+名称
+						childNodes[i].name += " "+childNodes[i].code+"</span>";//close treeview span
+					}
+					if (typeof childNodes[i].desc != 'undefined') {
+						childNodes[i].name += " "+childNodes[i].desc;
+					}
+			}//End code and name
+
+			//detailed_name是在DetailView中需要显示的名称。
+			childNodes[i].detailed_name = childNodes[i].name;
+
+
+			if (typeof childNodes[i].status != 'undefined') {
+				if (typeof childNodes[i].status_tag != 'undefined') {
+					childNodes[i].name += " <span class='"+childNodes[i].status_tag+"'>"+childNodes[i].status+"</span>";
+				} else {
+					childNodes[i].name += " "+childNodes[i].status;
+				}
+			}
+			childNodes[i].isParent = true;
+					//childNodes[i].t="";
+		}//end for
 		return childNodes;
 	}
 
