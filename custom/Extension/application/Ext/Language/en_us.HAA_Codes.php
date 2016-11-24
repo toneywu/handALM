@@ -51,7 +51,7 @@ $app_list_strings['haa_code_module_list']=array (
   'wo'=>'Activities/Work Orders',
   'revenue' => 'Revenue/Expenditure Trans',
   'flexform'=>'FlexForm Extended Fields',
-
+  'insurance' => 'Insurance',
 );
 
 $app_list_strings['haa_code_type_list']=array (
@@ -75,4 +75,5 @@ $app_list_strings['haa_code_type_list']=array (
   'wo_activity_type'=>'wo_activity_type',
   'revenue_expense_group' => 'revenue_expense_group',
   'revenue_expense_type' => 'revenue_expense_type',
+  'insurance_type'=>'insurance_type',
 );
