@@ -164,6 +164,10 @@ $app_list_strings['haa_frameworks_field_rule'][''] = '';
 $app_list_strings['haa_frameworks_field_rule']['TEXT'] = '基于任意输入的文本';
 $app_list_strings['haa_frameworks_field_rule']['LIST'] = '基于预定义的列表';
 
+$app_list_strings['haa_frameworks_display_rule']['BOTH'] = '同时显示名称与代码';
+$app_list_strings['haa_frameworks_display_rule']['CODE'] = '代码/铭牌优先';
+$app_list_strings['haa_frameworks_display_rule']['NAME'] = '名称描述优先';
+
 
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by

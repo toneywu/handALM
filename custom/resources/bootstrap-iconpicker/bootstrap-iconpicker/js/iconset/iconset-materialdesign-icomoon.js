@@ -20,7 +20,7 @@
  * limitations under the License.
  * ======================================================================== */
 
- ;(function($){
+ ;(function($){ //ref:https://icomoon.io/app/#/select/font
 
   $.iconset_materialdesign = {
     iconClass: 'icon',
@@ -105,6 +105,8 @@
     '3d_rotation','amusement6','amusement7','waterpark','coaster','ferris',
 
     'goat','local_florist','pagelines',
+    //标志
+    'coin-yen','coin-dollar','coin-euro','coin-pound','image','user','clipboard','blocked','cross','checkmark','tab','ungroup',
 
 
     ]};

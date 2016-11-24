@@ -47,3 +47,7 @@ $app_list_strings['haa_frameworks_contact_rule']['PUB_OPT'] = '组织共享组�
 $app_list_strings['haa_frameworks_field_rule'][''] = '';
 $app_list_strings['haa_frameworks_field_rule']['TEXT'] = '基于任意输入的文本';
 $app_list_strings['haa_frameworks_field_rule']['LIST'] = '基于预定义的列表';
+
+$app_list_strings['haa_frameworks_display_rule']['BOTH'] = '同时显示名称与代码';
+$app_list_strings['haa_frameworks_display_rule']['CODE'] = '代码/铭牌优先';
+$app_list_strings['haa_frameworks_display_rule']['DESC'] = '名称描述优先';

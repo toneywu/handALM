@@ -128,6 +128,7 @@ input[type=text], select{
 
 .search_form .view, #popup_query_form {/*搜索区域的颜色*/
 	background-color:#EDF6FF;
+	display: inline-table;
 }
 .moduleTitle span.utils {
 	margin-top:0px;
@@ -187,16 +188,12 @@ input[type=text], select{
 	/*突出删除按钮(红色）另btn_del为客户化标签*/
 	background-color:#c43c35;
 }
-.sidebar {/*加宽Sidebar*/
-	padding:25px 14px 10px 15px;
-	min-width:230px !important;
-}
-#buttontoggle {
+/*#buttontoggle {
 	z-index:1001;
 	padding:8px 4px 8px 8px;
 	background:#F7F7F7;
 	/* left: 225px !important */;
-}
+}*/
 
 .dropdown-menu li a, .dropdown-menu li a:hover{ /*默认的顶部下拉菜单太小，加宽*/
 	padding:2px 0px 2px 5px;
@@ -302,9 +299,44 @@ input[type=text], select{
 .nav .actionmenulinks a.side-bar-Create_Contact_Vcard {
     background-image: url("../../../../custom/themes/SuiteR_HANDALM/images/sidebar/Create_Contact_Vcard.png");
 }
+#create_link {
+	display: none;
+}
+#buttontoggle.button-toggle-collapsed {
+    position: fixed;
+    top: 80px;
+    z-index: 1000;
+    height: 30px;
+    width: 30px;
+    background-color: #72c6f7;
+    background-image: none,  url("../../../../custom/themes/SuiteR_HANDALM/images/p_show_sidebar.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    left: 0px;
+    cursor: pointer;
+}
 
+#buttontoggle.button-toggle-expanded {
+    position: fixed;
+    top: 80px;
+    z-index: 1000;
+    height: 30px;
+    width: 18px;
+    background-color: #eaeaea;
+    background-image: none,  url("../../../../custom/themes/SuiteR_HANDALM/images/p_hide_sidebar.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    left: 215px;
+    cursor: pointer;
+}
 
-
+li.recentlinks_edit a {
+	display: none;
+}
 /******************************************************/
 /*  以下是自定义的Bootstrap一些对象与SuiteCRM冲突	  */
 /******************************************************/

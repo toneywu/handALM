@@ -299,14 +299,22 @@
                     <span class="glyphicon glyphicon-user"> </span>
                     <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <ul class="dropdown-menu user-dropdown" role="menu" aria-labelledby="dropdownMenu2">
+                    <li role="presentation">
+                        <a href='index.php?module=Users&action=EditView&record={$CURRENT_USER_ID}'>
+                            {$APP.LBL_PROFILE}
+                        </a>
+                    </li>
                     {foreach from=$GCLS item=GCL name=gcl key=gcl_key}
                         <li role="presentation">
-                            <a id="{$gcl_key}_link" href="{$GCL.URL}"{if !empty($GCL.ONCLICK)} onclick="{$GCL.ONCLICK}"{/if}>{$GCL.LABEL}</a>
+                            <a id="{$gcl_key}_link"
+                               href="{$GCL.URL}"{if !empty($GCL.ONCLICK)} onclick="{$GCL.ONCLICK}"{/if}>{$GCL.LABEL}</a>
                         </li>
                     {/foreach}
-                    <li role="presentation"><a role="menuitem" id="logout_link" href='{$LOGOUT_LINK}' class='utilsLink'>{$LOGOUT_LABEL}</a></li>
+                    <li role="presentation"><a role="menuitem" id="logout_link" href='{$LOGOUT_LINK}'
+                                               class='utilsLink'>{$LOGOUT_LABEL}</a></li>
                 </ul>
+
             </div>
 
             <div id="search" class="dropdown nav navbar-nav navbar-right">
@@ -393,7 +401,10 @@
 {if $THEME_CONFIG.display_sidebar}
     <!--Start Page Container and Responsive Sidebar --><!--这里仿SuiteP模板，加入了side-bar-class -->
     <div id='sidebar_container' class="container-fluid">
-        <a href="javascript:void(0)" id="buttontoggle"><span class="glyphicon glyphicon-th-list"></span></a>
+
+    <a id="buttontoggle" class="button-toggle-expanded"><span></span></a>
+
+        <!--<a href="javascript:void(0)" id="buttontoggle"><span class="glyphicon glyphicon-th-list"></span></a>-->
         <div class="row">
             <div {if $smarty.cookies.sidebartoggle == 'collapsed'}style="display:none"{/if} class="col-sm-3 col-md-2 sidebar">
                 <div id="actionMenuSidebar">

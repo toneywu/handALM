@@ -213,6 +213,11 @@ $app_list_strings['haa_frameworks_field_rule'][''] = '';
 $app_list_strings['haa_frameworks_field_rule']['TEXT'] = 'Free Text';
 $app_list_strings['haa_frameworks_field_rule']['LIST'] = 'Predefined List';
 
+$app_list_strings['haa_frameworks_display_rule']['BOTH'] = 'Both Code and Name';
+$app_list_strings['haa_frameworks_display_rule']['CODE'] = 'Code/Nameplate as 1st priority';
+$app_list_strings['haa_frameworks_display_rule']['NAME'] = 'Name as 1st priority';
+
+
 
 
 /*********************************************************************************
