@@ -1,4 +1,5 @@
 <?php
+if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
@@ -37,13 +38,10 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
+require_once "include/utils/additional_details.php";
+
+
+function additionalDetailsFP_events($fields = array(), SugarBean $bean, $params = array()) {
+    return additional_details($fields, $bean, $params);
 }
 
-global $app_strings, $current_language;
-
-$dashletMeta['SpotsDashlet'] = array('module'		=> 'Spots','title' => 'LBL_TITLE', // array index in language pack
-                                      'description' => 'LBL_DESCRIPTION', // array index in language pack 
-                                      'icon' => 'themes/default/images/icon_SpotsDashlet_32.gif',
-                                      'category' => 'Tools', );

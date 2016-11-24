@@ -37,13 +37,8 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
-if (!defined('sugarEntry') || !sugarEntry) {
-    die('Not A Valid Entry Point');
-}
+/**
+ * This file adds support for studio
+ */
 
-global $app_strings, $current_language;
-
-$dashletMeta['SpotsDashlet'] = array('module'		=> 'Spots','title' => 'LBL_TITLE', // array index in language pack
-                                      'description' => 'LBL_DESCRIPTION', // array index in language pack 
-                                      'icon' => 'themes/default/images/icon_SpotsDashlet_32.gif',
-                                      'category' => 'Tools', );
+?>

@@ -88,9 +88,9 @@ class MySugar{
     }
 
 	function addDashlet(){
-/*        if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] != 'POST') {
             return;
-        }*/
+        }
 
 		if(!is_file(sugar_cached('dashlets/dashlets.php'))) {
             require_once('include/Dashlets/DashletCacheBuilder.php');
