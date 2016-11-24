@@ -50,17 +50,10 @@ configureDlg.setHeader(result['header']);configureDlg.setBody(result['body']);va
 $('html, body').animate({scrollTop:newTop});$('#dlg').animate({top:(newTop)+'px'});}
 SUGAR.mySugar.configureDashletId=id;var cObj=YAHOO.util.Connect.asyncRequest('GET','index.php?to_pdf=1&module='+module+'&action=DynamicAction&DynamicAction=configureDashlet&id='+id,{success:fillInConfigureDiv,failure:fillInConfigureDiv},null);},retrieveDashlet:function(id,url,callback,dynamic,pageReload,pageTabElement){var _pageReload=typeof pageReload=='undefined'?false:pageReload;var _pageTabElement=typeof pageTabElement=='undefined'||pageTabElement.length==0?false:pageTabElement;if(!_pageTabElement&&SUGAR.mySugar.currentDashlet&&$('#'+SUGAR.mySugar.currentDashlet.id).closest('.tab-pane').length>0){_pageTabElement=$('#'+SUGAR.mySugar.currentDashlet.id).closest('.tab-pane');}
 ajaxStatus.showStatus(SUGAR.language.get('app_strings','LBL_LOADING'));if(!url){url='index.php?action=DynamicAction&DynamicAction=displayDashlet&session_commit=1&module='+module+'&to_pdf=1&id='+id;is_chart_dashlet=false;}
-else if(url=='predefined_chart'){
 
-	url='index.php?action=DynamicAction&DynamicAction=displayDashlet&session_commit=1&module='+module+'&to_pdf=1&id='+id;scriptUrl='index.php?action=DynamicAction&DynamicAction=getPredefinedChartScript&session_commit=1&module='+module+'&to_pdf=1&id='+id;is_chart_dashlet=true;}
-
-console.log(url);
+else if(url=='predefined_chart'){url='index.php?action=DynamicAction&DynamicAction=displayDashlet&session_commit=1&module='+module+'&to_pdf=1&id='+id;scriptUrl='index.php?action=DynamicAction&DynamicAction=getPredefinedChartScript&session_commit=1&module='+module+'&to_pdf=1&id='+id;is_chart_dashlet=true;}
 if(dynamic){url+='&dynamic=true';}
-SUGAR.mySugar.currentDashlet=document.getElementById('dashlet_entire_'+id);
-
-
-
-$.ajax({"method":"GET","url":url}).done(function(data,textStatus,jqXHR){var updateDashlet=null;if($(data).find('#dashlet_entire_'+id).length==0){updateDashlet=$(data).find('.bd-center').html();}else{updateDashlet=$(data).find('#dashlet_entire_'+id+' .bd-center').html();}
+SUGAR.mySugar.currentDashlet=document.getElementById('dashlet_entire_'+id);$.ajax({"method":"GET","url":url}).done(function(data,textStatus,jqXHR){var updateDashlet=null;if($(data).find('#dashlet_entire_'+id).length==0){updateDashlet=$(data).find('.bd-center').html();}else{updateDashlet=$(data).find('#dashlet_entire_'+id+' .bd-center').html();}
 $(SUGAR.mySugar.currentDashlet).find('.bd-center').html(updateDashlet);ajaxStatus.hideStatus();});return false;},setChooser:function(){var displayColumnsDef=new Array();var hideTabsDef=new Array();var left_td=document.getElementById('display_tabs_td');var right_td=document.getElementById('hide_tabs_td');var displayTabs=left_td.getElementsByTagName('select')[0];var hideTabs=right_td.getElementsByTagName('select')[0];for(i=0;i<displayTabs.options.length;i++){displayColumnsDef.push(displayTabs.options[i].value);}
 if(typeof hideTabs!='undefined'){for(i=0;i<hideTabs.options.length;i++){hideTabsDef.push(hideTabs.options[i].value);}}
 document.getElementById('displayColumnsDef').value=displayColumnsDef.join('|');document.getElementById('hideTabsDef').value=hideTabsDef.join('|');},deleteDashlet:function(id){if(confirm(SUGAR.language.get('app_strings','LBL_REMOVE_DASHLET_CONFIRM'))){ajaxStatus.showStatus(SUGAR.language.get('app_strings','LBL_REMOVING_DASHLET'));del=function(){var success=function(data){dashlet=document.getElementById('dashlet_'+id);dashlet.parentNode.removeChild(dashlet);ajaxStatus.showStatus(SUGAR.language.get('app_strings','LBL_REMOVED_DASHLET'));window.setTimeout('ajaxStatus.hideStatus()',2000);}
@@ -68,43 +61,15 @@ var cObj=YAHOO.util.Connect.asyncRequest('GET','index.php?to_pdf=1&module='+modu
 var anim=new YAHOO.util.Anim('dashlet_entire_'+id,{height:{to:1}},.5);anim.onComplete.subscribe(del);document.getElementById('dashlet_entire_'+id).style.overflow='hidden';anim.animate();return false;}
 return false;},addDashlet:function(id,type,type_module,pageNum,pageTabElement){var _pageNum=typeof pageNum=='undefined'?false:pageNum;var _pageTabElement=typeof pageTabElement=='undefined'?false:pageTabElement;ajaxStatus.hideStatus();columns=SUGAR.mySugar.getLayout();var num_dashlets=columns[0].length;if(typeof columns[1]==undefined){num_dashlets=num_dashlets+columns[1].length;}
 if((num_dashlets)>=SUGAR.mySugar.maxCount){alert(SUGAR.language.get('app_strings','LBL_MAX_DASHLETS_REACHED'));return;}
-ajaxStatus.showStatus(SUGAR.language.get('app_strings','LBL_ADDING_DASHLET'));
-
-
-
-$.ajax({"method":"POST",
-	"url":"index.php?module="+module+"&action=DynamicAction&DynamicAction=addDashlet&activeTab="+activeTab+"&id="+id+"&to_pdf=1",
-	"data":{'type':type,'type_module':type_module}}).done(function(dashlet_id)
-	{console.log("["+dashlet_id+"]");console.log(type);console.log(type_module);colZero=document.getElementById('col_'+activeTab+'_0');newDashlet=document.createElement('li');
-
-dashlet_id=$.trim(dashlet_id);
-console.log("index.php?module="+module+"&action=DynamicAction&DynamicAction=addDashlet&activeTab="+activeTab+"&id="+id+"&to_pdf=1");
-newDashlet.id='dashlet_'+dashlet_id;
-console.log('dashlet_entire_'+dashlet_id);
-console.log('<div style="position: absolute; top: -1000px; overflow: hidden;" id="dashlet_entire_'+dashlet_id+'"></div>');
-console.log("END");
-newDashlet.className='noBullet active';
-newDashlet.innerHTML='<div style="position: absolute; top: -1000px; overflow: hidden;" id="dashlet_entire_'+dashlet_id+'"></div>';colZero.insertBefore(newDashlet,colZero.firstChild);var url=null;if(type=='module'||type=='web'){url=null;type='module';}
-
-
-
-
+ajaxStatus.showStatus(SUGAR.language.get('app_strings','LBL_ADDING_DASHLET'));$.ajax({"method":"POST","url":"index.php?module="+module+"&action=DynamicAction&DynamicAction=addDashlet&activeTab="+activeTab+"&id="+id+"&to_pdf=1","data":{'type':type,'type_module':type_module}}).done(function(dashlet_id){colZero=document.getElementById('col_'+activeTab+'_0');newDashlet=document.createElement('li');newDashlet.id='dashlet_'+dashlet_id;newDashlet.className='noBullet active';newDashlet.innerHTML='<div style="position: absolute; top: -1000px; overflow: hidden;" id="dashlet_entire_'+dashlet_id+'"></div>';colZero.insertBefore(newDashlet,colZero.firstChild);var url=null;if(type=='module'||type=='web'){url=null;type='module';}
+>>>>>>> 17eb59e17aad644baabb15b83efe413c18b4f919
 else if(type=='predefined_chart'){url='predefined_chart';type='predefined_chart';}
 else if(type=='chart'){url='chart';type='chart';}
 var _pageReload=typeof pageReload=='undefined'?false:pageReload;var _pageTabElement=typeof pageTabElement=='undefined'||pageTabElement.length==0?false:pageTabElement;if(!_pageTabElement&&SUGAR.mySugar.currentDashlet&&$('#'+SUGAR.mySugar.currentDashlet.id).closest('.tab-pane').length>0){_pageTabElement=$('#'+SUGAR.mySugar.currentDashlet.id).closest('.tab-pane');}
 ajaxStatus.showStatus(SUGAR.language.get('app_strings','LBL_LOADING'));if(url==null){url='index.php?action=DynamicAction&DynamicAction=displayDashlet&session_commit=1&module='+module+'&to_pdf=1&id='+dashlet_id;is_chart_dashlet=false;}
 else if(url=='predefined_chart'){url='index.php?action=DynamicAction&DynamicAction=displayDashlet&session_commit=1&module='+module+'&to_pdf=1&id='+dashlet_id;scriptUrl='index.php?action=DynamicAction&DynamicAction=getPredefinedChartScript&session_commit=1&module='+module+'&to_pdf=1&id='+dashlet_id;is_chart_dashlet=true;}
 if(typeof dynamic!=="undefined"){url+='&dynamic=true';}
-
-
-
-SUGAR.mySugar.currentDashlet=document.getElementById('dashlet_entire_'+dashlet_id);$.when($.ajax({"method":"GET","url":url})).then(function(data,textStatus,jqXHR){ajaxStatus.hideStatus();dashletEntire=document.getElementById('dashlet_entire_'+dashlet_id);
-console.log($('#dashlet_entire_'+dashlet_id));
-console.log(dashletEntire);
-console.log(document.getElementById('dashlet_entire_'+dashlet_id));
-console.log('dashlet_entire_'+dashlet_id);
-
-dd=new ygDDList('dashlet_'+dashlet_id);dd.setHandleElId('dashlet_header_'+dashlet_id);dd.dashletID=dashlet_id;dd.onMouseDown=SUGAR.mySugar.onDrag;dd.onDragDrop=SUGAR.mySugar.onDrop;ajaxStatus.showStatus(SUGAR.language.get('app_strings','LBL_ADDED_DASHLET'));dashletRegion=YAHOO.util.Dom.getRegion(dashletEntire);dashletEntire.style.position='relative';dashletEntire.style.height='1px';dashletEntire.style.top='0px';dashletEntire.className='dashletPanel';var anim=new YAHOO.util.Anim('dashlet_entire_'+dashlet_id,{height:{to:dashletRegion.bottom-dashletRegion.top}},.5);anim.onComplete.subscribe(function(){document.getElementById('dashlet_entire_'+dashlet_id).style.height='100%';});anim.animate();newLayout=SUGAR.mySugar.getLayout(true);SUGAR.mySugar.saveLayout(newLayout);retrievePage(activePage);});});return false;},retrieveCurrentPage:function(pageNum){if(typeof pageNum=='undefined'&&$('ul.nav.nav-tabs.nav-dashboard li.active a').length>0){var pageNum=parseInt($('ul.nav.nav-tabs.nav-dashboard li.active a').first().attr('id').substring(3));}
+SUGAR.mySugar.currentDashlet=document.getElementById('dashlet_entire_'+dashlet_id);$.when($.ajax({"method":"GET","url":url})).then(function(data,textStatus,jqXHR){ajaxStatus.hideStatus();dashletEntire=document.getElementById('dashlet_entire_'+dashlet_id);dd=new ygDDList('dashlet_'+dashlet_id);dd.setHandleElId('dashlet_header_'+dashlet_id);dd.dashletID=dashlet_id;dd.onMouseDown=SUGAR.mySugar.onDrag;dd.onDragDrop=SUGAR.mySugar.onDrop;ajaxStatus.showStatus(SUGAR.language.get('app_strings','LBL_ADDED_DASHLET'));dashletRegion=YAHOO.util.Dom.getRegion(dashletEntire);dashletEntire.style.position='relative';dashletEntire.style.height='1px';dashletEntire.style.top='0px';dashletEntire.className='dashletPanel';var anim=new YAHOO.util.Anim('dashlet_entire_'+dashlet_id,{height:{to:dashletRegion.bottom-dashletRegion.top}},.5);anim.onComplete.subscribe(function(){document.getElementById('dashlet_entire_'+dashlet_id).style.height='100%';});anim.animate();newLayout=SUGAR.mySugar.getLayout(true);SUGAR.mySugar.saveLayout(newLayout);retrievePage(activePage);});});return false;},retrieveCurrentPage:function(pageNum){if(typeof pageNum=='undefined'&&$('ul.nav.nav-tabs.nav-dashboard li.active a').length>0){var pageNum=parseInt($('ul.nav.nav-tabs.nav-dashboard li.active a').first().attr('id').substring(3));}
 else{pageNum=0;}
 retrievePage(pageNum);},showDashletsDialog:function(){columns=SUGAR.mySugar.getLayout();if(this.closeDashletsDialogTimer!=null){window.clearTimeout(this.closeDashletsDialogTimer);}
 var num_dashlets=0;var i=0;for(i=0;i<3;i++){if(typeof columns[i]!="undefined"){num_dashlets=num_dashlets+columns[i].length;}}

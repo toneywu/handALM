@@ -45,7 +45,7 @@ array (
         array (
           0 => 
           array (
-            'name' => 'module',
+            'name' => 'privilige_module',
             'studio' => 'visible',
             'label' => 'LBL_MODULE',
             'displayParams' =>
@@ -61,6 +61,7 @@ array (
             'displayParams' =>
             array (
               'call_back_function' => 'setDefaultName',
+              'initial_filter' => '&hpr_groups_hpr_group_members_name_advanced=+$(#name).text()+',
             ),
           ),
         ),

@@ -50,7 +50,7 @@ array (
             'label' => 'LBL_ORGANIZATION',
             'displayParams' =>
             array (
-              'initial_filter' => '&frame_c_advanced="+$("#haa_frameworks_id_c").text()+"',
+              //'initial_filter' => '&frame_c_advanced="+$("#haa_frameworks_id_c").text()+"',
               'call_back_function' => 'setDefaultName',
             ),
           ),
@@ -61,7 +61,7 @@ array (
             'label' => 'LBL_USER_NAME',
             'displayParams' =>
             array (
-              'initial_filter' => '&contact_organization_c_advanced="+this.form.{$fields.organization.name}.value+"',
+              //'initial_filter' => '&contact_organization_c_advanced="+this.form.{$fields.organization.name}.value+"',
               'call_back_function' => 'setDefaultName',
             ),
           ),

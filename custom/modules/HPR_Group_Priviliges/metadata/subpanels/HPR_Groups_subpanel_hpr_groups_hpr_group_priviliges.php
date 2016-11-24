@@ -1,14 +1,7 @@
 <?php
-// created: 2016-11-18 15:51:31
+// created: 2016-11-18 13:21:43
 $subpanel_layout['list_fields'] = array (
-  'name' => 
-  array (
-    'vname' => 'LBL_NAME',
-    'widget_class' => 'SubPanelDetailViewLink',
-    'width' => '45%',
-    'default' => true,
-  ),
-  'module' => 
+  'privilige_module' => 
   array (
     'type' => 'enum',
     'studio' => 'visible',
@@ -29,12 +22,12 @@ $subpanel_layout['list_fields'] = array (
     'target_module' => 'HPR_Group_Members',
     'target_record_key' => 'hpr_group_members_id_c',
   ),
-  'enabled_flag' => 
+  'name' => 
   array (
-    'type' => 'bool',
+    'vname' => 'LBL_NAME',
+    'widget_class' => 'SubPanelDetailViewLink',
+    'width' => '45%',
     'default' => true,
-    'vname' => 'LBL_ENABLED_FLAG',
-    'width' => '10%',
   ),
   'sql_statement_for_listview' => 
   array (
@@ -45,17 +38,12 @@ $subpanel_layout['list_fields'] = array (
     'width' => '10%',
     'default' => true,
   ),
-  'hpr_groups_hpr_group_priviliges_name' => 
+  'enabled_flag' => 
   array (
-    'type' => 'relate',
-    'link' => true,
-    'vname' => 'LBL_HPR_GROUPS_HPR_GROUP_PRIVILIGES_FROM_HPR_GROUPS_TITLE',
-    'id' => 'HPR_GROUPS_HPR_GROUP_PRIVILIGESHPR_GROUPS_IDA',
-    'width' => '10%',
+    'type' => 'bool',
     'default' => true,
-    'widget_class' => 'SubPanelDetailViewLink',
-    'target_module' => 'HPR_Groups',
-    'target_record_key' => 'hpr_groups_hpr_group_priviligeshpr_groups_ida',
+    'vname' => 'LBL_ENABLED_FLAG',
+    'width' => '10%',
   ),
   'description' => 
   array (

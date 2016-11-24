@@ -70,4 +70,5 @@ $mod_strings = array (
   'LBL_ACTIVITIES_SUBPANEL_TITLE' => '銷售活動',
   'LBL_HAA_SHORTCUTS_SUBPANEL_TITLE' => 'Shortcuts',
   'LBL_NEW_FORM_TITLE' => '新建 Shortcuts',
+  
 );

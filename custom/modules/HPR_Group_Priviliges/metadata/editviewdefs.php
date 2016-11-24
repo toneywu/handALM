@@ -45,7 +45,7 @@ array (
         array (
           0 => 
           array (
-            'name' => 'module',
+            'name' => 'privilige_module',
             'studio' => 'visible',
             'label' => 'LBL_MODULE',
             'displayParams' =>

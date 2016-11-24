@@ -39,7 +39,6 @@
 
 
 $app_list_strings['moduleList']['HAA_Shortcuts'] = 'Home Shortcuts';
-
 $app_list_strings['haa_shortcut_action_list']=array (
   'List' => 'List View',
   'Edit' => 'Create New',
