@@ -589,7 +589,7 @@ class SugarView
                 $extraTabs = array();
 
                 // Split it in to the tabs that go across the top, and the ones that are on the extra menu.
-                if ( count($topTabs) > $max_tabs ) {
+/*                if ( count($topTabs) > $max_tabs ) {
                     $extraTabs = array_splice($topTabs,$max_tabs);
                 }
                 // Make sure the current module is accessable through one of the top tabs
@@ -608,7 +608,7 @@ class SugarView
                     if ( !empty($moduleTab) ) {
                         $topTabs[$moduleTab] = $app_list_strings['moduleList'][$moduleTab];
                     }
-                }
+                }*/
 
 
                 /*
