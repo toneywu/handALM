@@ -102,22 +102,28 @@ li.topnav:hover{
 
 
 
-.paginationChangeButtons button[disabled],.paginationChangeButtons  input[type="submit"][disabled],.paginationChangeButtons  input[type="reset"][disabled],.paginationChangeButtons  input[type="button"][disabled] {
+.paginationActionButtons .button[disabled], .paginationChangeButtons button[disabled],.paginationChangeButtons  input[type="submit"][disabled],.paginationChangeButtons  input[type="reset"][disabled],.paginationChangeButtons  input[type="button"][disabled] {
 	background-color:#fdfdff;/*换页按钮：无效的*/
 }
-.paginationChangeButtons button[disabled]:hover,.paginationChangeButtons  input[type="submit"][disabled]:hover,.paginationChangeButtons  input[type="reset"][disabled],.paginationChangeButtons  input[type="button"][disabled]:hover {
+.paginationActionButtons .button[disabled]:hover .paginationChangeButtons button[disabled]:hover,.paginationChangeButtons  input[type="submit"][disabled]:hover,.paginationChangeButtons  input[type="reset"][disabled],.paginationChangeButtons  input[type="button"][disabled]:hover {
 	background-color:#fdfdff;/*换页按钮：无效的*/
 }
-.paginationChangeButtons .button, .paginationChangeButtonsinput [type=submit], .paginationChangeButtons input[type=button] {
+
+.paginationActionButtons .button,.paginationChangeButtons .button, .paginationChangeButtons input[type=submit], .paginationChangeButtons input[type=button] {
+	background-color:#eeeeee;/*换页按钮：有效的*/
+}
+.paginationActionButtons .button:hover,.paginationChangeButtons .button:hover, .paginationChangeButtons input[type=submit]:hover, .paginationChangeButtons input[type=button]:hover {
 	background-color:#8BBFDE;/*换页按钮：有效的*/
 }
-.paginationChangeButtons .button:hover, .paginationChangeButtons input[type=submit]:hover, .paginationChangeButtons input[type=button]:hover {
-	background-color:#286090;/*换页按钮：有效的*/
-}
+
 
 
 input[type=text], select{
 	padding:4px;
+}
+
+.id-ff .button { /*popup button*/
+	background-color: #eeeeee;
 }
 
 /*.button, input[type=submit], input[type=button] {
@@ -127,14 +133,18 @@ input[type=text], select{
 #popup_query_form .sqsEnabled {width:70%}
 
 .search_form .view, #popup_query_form {/*搜索区域的颜色*/
-	background-color:#EDF6FF;
+	background-color:#f9f8f2;
+}
+.search_form .view, #popup_query_form {/*搜索区域的颜色*/
 	display: inline-table;
 }
 .moduleTitle span.utils {
 	margin-top:0px;
 }
-
-.oddListRowS1,.evenListRowS1{line-height:14px;}
+/*列表行*/
+.oddListRowS1,.evenListRowS1{
+	line-height:14px;
+}
 
 .list tr.pagination td table td {
 	background-color:#f3f9ff;

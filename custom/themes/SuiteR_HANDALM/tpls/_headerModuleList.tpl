@@ -156,10 +156,10 @@
                             <span class="notCurrentTabRight">&nbsp;</span>
                             <ul role="menu" {if $smarty.foreach.groupList.last} class="dropdown-menu All"{else} class="dropdown-menu" {/if}>
                                 {foreach from=$modules.modules item=module key=modulekey}
-                                    <li>
-                                        {capture name=moduleTabId assign=moduleTabId}moduleTab_{$smarty.foreach.moduleList.index}_{$module}{/capture}
-                                        {sugar_link id=$moduleTabId module=$modulekey data=$module extraparams=$extraparams}
-                                    </li>
+                                        <li>
+                                            {capture name=moduleTabId assign=moduleTabId}moduleTab_{$smarty.foreach.moduleList.index}_{$module}{/capture}
+                                            {sugar_link id=$moduleTabId module=$modulekey data=$module extraparams=$extraparams}
+                                        </li>
                                 {/foreach}
                                 {foreach from=$modules.extra item=submodulename key=submodule}
                                     <li><a href="{sugar_link module=$submodule link_only=1 extraparams=$extraparams}">{$submodulename}</a></li>
