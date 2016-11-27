@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Advanced OpenSales, Advanced, robust set of sales modules.
  * @package Advanced OpenSales for SugarCRM
  * @copyright SalesAgility Ltd http://www.salesagility.com
