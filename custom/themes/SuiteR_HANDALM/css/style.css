@@ -135,7 +135,7 @@ input[type=text], select{
 .search_form .view, #popup_query_form {/*搜索区域的颜色*/
 	background-color:#f9f8f2;
 }
-.search_form .view, #popup_query_form {/*搜索区域的颜色*/
+.search_form .view {/*搜索区域的颜色*/
 	display: inline-table;
 }
 .moduleTitle span.utils {

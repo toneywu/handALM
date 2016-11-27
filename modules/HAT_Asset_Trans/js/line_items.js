@@ -184,7 +184,7 @@ function addNewAssetLine(){
 
    var eventOptions = $("#eventOptions").val()!=""?jQuery.parseJSON($("#eventOptions").val()):"";
   //console.log(eventOptions);
-  var popupFilter=""
+  var popupFilter="&current_mode=asset"
   if (eventOptions!="") {
     if (eventOptions.default_asset_list=="USING_ORG") {
       popupFilter += '&using_org_id_advanced='+ $("#target_using_org_id").val();
@@ -208,7 +208,7 @@ function addNewAssetLine(){
 function setAddNewLineBtnReturn(popupReplyData) {
 	set_return(popupReplyData);
 	var idJson = popupReplyData.selection_list;
-	console.log(popupReplyData);
+/*	console.log(popupReplyData);
 	for(var p in idJson){
 		console.log(idJson[p]);
 		$.ajax({
@@ -223,8 +223,20 @@ function setAddNewLineBtnReturn(popupReplyData) {
 				alert('Error loading document');
 			}
 		});
-	};
-	
+	};*/
+    $.ajax({
+      url:'index.php?to_pdf=true&module=HAT_Asset_Trans&action=LoadSelectedAssets',
+      data:{idArray:idJson},
+      type:"POST",
+      success: function (msg) {
+        console.log(msg);
+        insertLineData($.parseJSON(msg),'EditView');
+        resetAsset((prodln-1));
+      },
+      error: function () { //失败
+        alert('Error loading document');
+      }
+    });
 	// 设置行号
 	resetLineNum();
 }
@@ -791,12 +803,13 @@ function markLineDeleted(ln, key) {//删除当前行
 
   $("#line_*"+ ln).children().remove(".required");
 
-/*  if (typeof validate != "undefined" && typeof validate['EditView'] != "undefined") {
+  if (typeof validate != "undefined" && typeof validate['EditView'] != "undefined") {
     removeFromValidate('EditView','line_asset'+ ln);
     removeFromValidate('EditView','line_name'+ ln);
     removeFromValidate('EditView','line_target_organization'+ ln);
     removeFromValidate('EditView','line_target_location'+ ln);
-  }*/
+    removeFromValidate('EditView','line_target_location_desc'+ ln);
+  }
   resetLineNum();
 
 }

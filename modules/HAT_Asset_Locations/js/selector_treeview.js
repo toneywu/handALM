@@ -3,6 +3,13 @@ $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap-iconpi
 
 var zTreeObj;
 var setting = {
+		//判断是否为多选
+		check: {
+				enable: true, //表示是否显示节点前的checkbox选择框,
+				chkboxType: { "Y" : "s", "N" : "ps" },//不关联父，关联子
+				chkStyle: "checkbox",
+				nocheckInherit: true,
+			},
 		view: {
 			showIcon: false,
 			selectedMulti: false,
@@ -19,9 +26,8 @@ var setting = {
 			//beforeClick: beforeClick,
 			onClick: onClick,
 			onAsyncSuccess:onAsyncSuccess,
+			onCheck: onCheck,
 			//onAsyncError: onAsyncError,
-			/*beforeAsync: beforeAsync,
-			onAsyncSuccess: onAsyncSuccess*/
 		},
 		data: {
 			simpleData: {
@@ -31,11 +37,6 @@ var setting = {
 				rootPId: 0
 			}
 		},
-		//判断是否为多选
-		check: {
-				enable: true
-			},
-		//check.chkboxType = { "Y" : "ps", "N" : "ps" };
 	};
 
 
@@ -150,13 +151,72 @@ var setting = {
 				treeNode.isParent = false;
 				zTreeObj.updateNode(treeNode);
 			}
+
+			//zTreeObj.setChkDisabled(treeNode, true);//先标记当前结点Checkbox状态为不可点，如果有子节点，当前节点有可能被标记为可点
+			for (var i=0, l=treeNode.children.length; i<l; i++) {//标记Checkbox状态
+				//markNodeCheckable(e, treeId, treeNode.children[i]);
+				//如果当前某个子结点满足要求
+				if (checkNodeSelectable(e, zTreeObj, treeNode.children[i])) {
+					zTreeObj.setChkDisabled(treeNode.children[i], false);//如果满足条件，当前字段为可勾选
+					setAllParentsCheckable(e, zTreeObj, treeNode.children[i])
+				}else{
+					zTreeObj.setChkDisabled(treeNode.children[i], true);//如果不满足条件，当前字段为不可勾选
+				};
+			}
 		}
+
+	function setAllParentsCheckable(e, zTreeObj, treeNode) {//通过向上循环将同一个路径上的节点都标为可点击
+		parentNode= treeNode.getParentNode();
+		while (parentNode.chkDisabled == true || parentNode.isFirstNode == false) { //如果父节点已经可以勾选，则不再循环
+		  zTreeObj.setChkDisabled(parentNode, false);
+		  parentNode= parentNode.getParentNode();
+		}
+	}
+
+	function checkNodeSelectable(e, zTreeObj, treeNode) { //依据当前节点属性以及当前的模式判断是否可以选中。
+		if (treeNode.type == "asset" && current_mode=="asset") {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	function onAsyncError(e, treeId, treeNode) {
 			zTreeObj= $.fn.zTree.getZTreeObj(treeId);
 			treeNode.isParent = true;
 			zTreeObj.updateNode(treeNode);
 	}
+
+	function onCheck(e, treeId, treeNode) {//如果是多选模式，看触发OnCheck事件
+		//OnCheck事件依据树上选择的内容，显示在MultiSelectDiv区域中
+			var zTree = $.fn.zTree.getZTreeObj(treeId),
+				checkedNodes = zTree.getCheckedNodes(true),
+				checkCount = 0,
+				MultiSelectHTML = "",
+				data = "";
+			for (var i=0, l=checkedNodes.length; i<l; i++) {//标记Checkbox状态
+				if (checkNodeSelectable(e, zTreeObj, checkedNodes[i])) {
+					checkCount++;
+					MultiSelectHTML+= '<li>'
+									+ '<input type="checkbox" class="checkbox" name="mass[]" checked="checked" value="'+checkedNodes[i].id+'" style="display:none">'
+									+ checkedNodes[i].name
+									+ '</li>';
+					data = '"'+checkedNodes[i].id+'":{"ID":"'+checkedNodes[i].id+'"},';
+				}
+			}
+			$("#MultiSelectCount").html(checkCount);
+			$("#MultiSelectList").html("<ul>"+MultiSelectHTML+"</ul>");
+
+			if (data!="") {
+				data = data.slice(0, -1);//cut last char
+				data = '{'+data+"}";
+				console.log(data);
+				associated_javascript_data = jQuery.parseJSON(data);
+			}
+	}
+
+
+
 	function ajaxGetNodes(treeNode, type) {
 			zTree.reAsyncChildNodes(treeNode, type, false);
 	};
@@ -178,7 +238,7 @@ var setting = {
 						}
 						node.data=datatopush;
 						treeObj.updateNode(node);
-						console.log(node);
+						//console.log(node);
 						//node.setNodesProperty("NodeLoaded", "true" , true);
 						showNodeDetailHTML(node,targetDIV);
 					},
@@ -374,10 +434,6 @@ function initTree(treeView, default_list, p3) {
 	//初始化树
 	zTreeObj = $.fn.zTree.init($("#treeview_selector"), setting, zNodes);
 
-/*	zTreeObj.setting.check.enable = true
-	
-*/zTreeObj.setting.check.chkboxType = {"Y":"ps","N":"ps"};
 	//加载第一层的所有节点
 	zTreeObj.reAsyncChildNodes(zTreeObj.getNodeByTId("treeview_selector_1"), "refresh", false);
-
 }

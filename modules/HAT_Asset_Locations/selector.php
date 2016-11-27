@@ -1,7 +1,22 @@
-<?php if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');?>
+<?php if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+
+//requests
+//
+//	current_mode =	view 标准的查看模式（默认）
+//					----------------------------------------以下为进行PopupSelect模式
+//					asset可以选择资产
+//					rackposition 如果当前模式是选择U位，则出现U位选择的按钮
+//					it 选择IT可联网设备
+//					rack 选择机柜
+//
+//	mode = MultiSelect 表示进入了多选模式，否则为单选
+
+?>
 
 <link rel="stylesheet" src="custom/resources/zTree/css/zTreeStyle/zTreeStyle.css" type="text/css">
 <script src="custom/resources/zTree/js/jquery.ztree.core.min.js"></script>
+<script src="custom/resources/zTree/js/jquery.ztree.excheck.js"></script>
+
 <script src="modules/HAT_Asset_Locations/js/selector_resizer.js"></script>
 <script src="modules/HAT_Asset_Locations/js/selector_treeview_racks.js"></script>
 <script src="modules/HAT_Asset_Locations/js/selector_treeview.js"></script>
@@ -116,29 +131,65 @@
 .detail_action_panel {
 	margin: 25px 0;
 }
+#MultiSelectDiv {
+	float: right;
+	padding:5px;
+}
+#MultiSelectCount {
+    font-weight: bold;
+    font-size: large;
+    background-color: #c5efff;
+    padding: 5px 12px;
+    border-radius: 15px;
+}
+#MultiSelectDiv ul {
+	padding: 20px;
+    list-style-type: none;
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
 </style>
 
-<?php global $mod_strings, $app_strings, $app_list_strings;?>
-<?php   require_once('modules/HAA_Frameworks/orgSelector_class.php');
-        $current_framework_id = "";
-        $current_module = $this->module;
-        $current_action = $this->action;
-        echo '<div "div_framework" style="display:none">'.set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id').'</div>';
-
-        $beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
-        //处理Framework中的相关规则性字段
-        //加载Framework对应的一些显示规则
-        echo "<script>";
-        if(isset($beanFramework)) {
-            echo "var location_display_rule='".$beanFramework->fetched_row['location_display_rule']."';";
-            echo "var asset_display_rule='".$beanFramework->fetched_row['asset_display_rule']."';";
-            //add by yuan.chen
-        }
-        echo "</script>";
-?>
 <?php
-	if (isset($_REQUEST['current_mode'])){//如果有值就多半是在选择模式
+
+	global $mod_strings, $app_strings, $app_list_strings;
+   	require_once('modules/HAA_Frameworks/orgSelector_class.php');
+    $current_framework_id = "";
+    $current_module = $this->module;
+    $current_action = $this->action;
+    echo '<div "div_framework" style="display:none">'.set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id').'</div>';
+
+    $beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
+    //处理Framework中的相关规则性字段
+    //加载Framework对应的一些显示规则
+    echo "<script>";
+    if(isset($beanFramework)) {
+        echo "var location_display_rule='".$beanFramework->fetched_row['location_display_rule']."';";
+        echo "var asset_display_rule='".$beanFramework->fetched_row['asset_display_rule']."';";
+        //add by yuan.chen
+    }
+    echo "</script>";
+
+    //显示标题
+	if (isset($_REQUEST['current_mode'])){
+		if ($_REQUEST['current_mode']=="asset") {
+			echo "<h3>".translate('LBL_NAV_ASSET','HAT_Asset_Locations')."</h3>";
+		}else if ($_REQUEST['current_mode']=="it") {
+			echo "<h3>".translate('LBL_NAV_IT','HAT_Asset_Locations')."</h3>";
+		}else if ($_REQUEST['current_mode']=="rack") {
+			echo "<h3>".translate('LBL_NAV_RACK','HAT_Asset_Locations')."</h3>";
+		}else if ($_REQUEST['current_mode']=="rackposition") {
+			echo "<h3>".translate('LBL_NAV_RACKPOSITION','HAT_Asset_Locations')."</h3>";
+		}
+
+	}
+
+
+
+	if (isset($_REQUEST['current_mode'])){//如果有值就是在选择模式,因此将current_mode传递到JS中
 		echo '<script>var current_mode = "'.$_REQUEST['current_mode'].'"</script>';
+		//引用标准的popup_helper用于返回值
     	echo ('<script type="text/javascript" src="include/javascript/popup_helper.js"></script>');
     	echo '<form id="popup_query_form" name="popup_query_form">';
 		echo '<input type="hidden" name="module" value="HAT_Asset_Locations">';
@@ -151,17 +202,28 @@
  			echo '<input type="hidden" id="target_using_org" name="target_using_org" value="">';
  			echo '<input type="hidden" id="target_using_org_id" name="target_using_org_id" value="">';
  		}
+
+		if (isset($_REQUEST['mode'])&&$_REQUEST['mode']=='MultiSelect'){//如果有值就多选模式
+ 			echo '<input type="hidden" name="mode" value="MultiSelect">';
+		}
+
     	echo '<input type="hidden" name="request_data" >'; //所有的参数都存在在这里，参数会被自动填充
+    	//注意这里有form暂时没有关闭，在下面继续加入字段后再关闭
+    			//多选区
+		echo '<div id="MultiSelectDiv" class="dropdown">
+				<span id="MultiSelectCount">0</span><span> Object(s) has been selected.</span>
+				<input class="button" type="button" id="MassUpdate_select_button" value="选择" onclick="send_back_selected(\'HAT_Assets\',document.popup_query_form,\'mass[]\',\'继续之前请选择。\');">
+				<div id="MultiSelectList" class="dropdown-menu"></div>
+			</div>';
+		echo '<input type="hidden" name="select_entire_list" value="0">';
+		echo '<input type="hidden" name="current_query_by_page" value="">';
     	echo '</form>';
+
 	} else {
 		echo '<script>var current_mode = "view";</script>';
 	}
 
-	if (isset($_REQUEST['mode'])&&$_REQUEST['mode']=='MultiSelec'){//如果有值就多选模式
-		echo '<script>var IsMultiSelec = true;</script>';
-	} else {
-		echo '<script>var IsMultiSelec = false;</script>';
-	}
+
 
 	//TODO：下面这个是有些多余的，需要考虑如何删除
 	echo '<selcet id="hit_rack_pos_depth_list" style="display:none">';
@@ -169,20 +231,12 @@
 		echo '<option value="'.$key.'">'.$value.'</option>';
 	}
 	echo '</selcet>';
+
+
+
+
 ?>
-<?php
-	if (isset($_REQUEST['current_mode'])){
-		if ($_REQUEST['current_mode']=="asset") {
-			echo "<h3>".translate('LBL_NAV_ASSET','HAT_Asset_Locations')."</h3>";
-		}else if ($_REQUEST['current_mode']=="it") {
-			echo "<h3>".translate('LBL_NAV_IT','HAT_Asset_Locations')."</h3>";
-		}else if ($_REQUEST['current_mode']=="rack") {
-			echo "<h3>".translate('LBL_NAV_RACK','HAT_Asset_Locations')."</h3>";
-		}else if ($_REQUEST['current_mode']=="rackposition") {
-			echo "<h3>".translate('LBL_NAV_RACKPOSITION','HAT_Asset_Locations')."</h3>";
-		}
-	}
-?>
+
 
 
 <div id="selector_top">
@@ -216,7 +270,7 @@
 	</div>
 
 <div id="selector_top_view" class="row">
- 	    <div>
+<!--  	    <div>
 			<span class="input_group">  
 				<label id="assetStatus_label">资产状态</label>
 				<select id="asset_status" class="form-horizontal">
@@ -233,7 +287,7 @@
 			</span>
 	    </div>
 
-	    <button id="">Search</button>
+	    <button id="">Search</button> -->
 </div>
 
 
@@ -348,7 +402,18 @@ $(document).ready(function(){
 
 	$("#selectorType_Tree").click();//默认是Functional Tree的View
 	$("#btn_switch_tree_view").click();//默认是Functional Tree的模式
+
+	$("#MultiSelectDiv").mouseover(function(){
+		$("#MultiSelectList").show();
+
+		$("#MultiSelectDiv").mouseout(function(){
+			$("#MultiSelectList").hide();
+		});
+	});
+
 });
+
+
 
 
 </script>
