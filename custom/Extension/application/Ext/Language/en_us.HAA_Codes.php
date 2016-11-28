@@ -76,4 +76,5 @@ $app_list_strings['haa_code_type_list']=array (
   'revenue_expense_group' => 'revenue_expense_group',
   'revenue_expense_type' => 'revenue_expense_type',
   'insurance_type'=>'insurance_type',
+  'insurance_claim_type'=>'insurance_claim_type',
 );
