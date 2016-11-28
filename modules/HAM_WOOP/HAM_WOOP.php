@@ -161,7 +161,7 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 			$ham_wo_id = $this->ham_wo_id;
 		};
 
-		echo $woop_fields['WOOP_EDI'];
+		//echo $woop_fields['WOOP_EDI']; //不知道这一行有什么用，报错，先去除
 		$woop_status = isset ($this->woop_status) ? $this->woop_status : "";
 
 

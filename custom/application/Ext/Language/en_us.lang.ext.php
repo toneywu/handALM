@@ -79,6 +79,7 @@ $app_list_strings['haa_code_type_list']=array (
   'revenue_expense_group' => 'revenue_expense_group',
   'revenue_expense_type' => 'revenue_expense_type',
   'insurance_type'=>'insurance_type',
+  'insurance_claim_type'=>'insurance_claim_type',
 );
 
 /*********************************************************************************
@@ -1672,6 +1673,9 @@ $app_list_strings['hat_event_type_list']=array (
   'INV_OUT' => 'INV: Stock-Out',
   'INV_TRANSFER' => 'INV: Stock Transfer',
   'INV_WO' => 'INV: Issue to WO',
+  'EVENT_MANAGER' => 'Incident',
+  'INVOICE' => 'Invoice',
+  'REVENUE' => 'Revenue/Expense Trans.',
 );
 
 $app_list_strings['hat_asset_scope_list']=array (
