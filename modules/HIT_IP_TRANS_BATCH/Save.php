@@ -252,6 +252,7 @@ function save_allocation_lines($trans_line_bean, $parent, $prev_trans_batch_id) 
 		}
 		//事物处理单行行上面存历史表id
 		$trans_line->history_id = $allocation_line_bean->id;
+		$trans_line->save();
 		$allocation_line_bean->save();
 	}
 
