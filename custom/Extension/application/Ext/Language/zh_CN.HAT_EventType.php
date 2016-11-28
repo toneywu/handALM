@@ -75,7 +75,11 @@ $app_list_strings['hat_event_type_list']=array (
   'INV_OUT' => '库存: 出库',
   'INV_TRANSFER' => '库存: 库存转移',
   'INV_WO' => '库存: 向工单发料',
+  'EVENT_MANAGER' => '事件管理',
+  'INVOICE' => '发票',
+  'REVENUE' => '收支计费项',
 );
+
 
 $app_list_strings['hat_asset_scope_list']=array (
   'ASSET' => '所有设备/资产',

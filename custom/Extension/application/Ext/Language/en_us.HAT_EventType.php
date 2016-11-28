@@ -75,6 +75,9 @@ $app_list_strings['hat_event_type_list']=array (
   'INV_OUT' => 'INV: Stock-Out',
   'INV_TRANSFER' => 'INV: Stock Transfer',
   'INV_WO' => 'INV: Issue to WO',
+  'EVENT_MANAGER' => 'Incident',
+  'INVOICE' => 'Invoice',
+  'REVENUE' => 'Revenue/Expense Trans.',
 );
 
 $app_list_strings['hat_asset_scope_list']=array (

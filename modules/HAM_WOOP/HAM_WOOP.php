@@ -186,7 +186,7 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 
 			if (!empty ($this->act_module) && !empty ($this->work_center_people)) {
 				//有动作模块，并且已经有人员分配
-				/*$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=window.location.href="index.php?module=' . $this->act_module . '&action=EditView&woop_id=' . $this->id . '">' . translate('LBL_TAKE_ACTION', 'HAM_WOOP')  . '</a>';*/
+				$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=window.location.href="index.php?module=' . $this->act_module . '&action=EditView&woop_id=' . $this->id . '">' . translate('LBL_TAKE_ACTION', 'HAM_WOOP')  . '</a>';
 				//echo "woop_number = ".$this->woop_number.",act_module=".$this->act_module.",work_center_people=".$this->work_center_people;
 				if (strtoupper($this->act_module) == 'HIT_IP_TRANS_BATCH') {
 					$hit_ip_trans_batch_bean = BeanFactory :: getBean('HIT_IP_TRANS_BATCH')->get_full_list("date_entered desc", "hit_ip_trans_batch.source_woop_id='" . $this->id . "'");
