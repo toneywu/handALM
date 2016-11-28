@@ -48,7 +48,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 require_once('modules/Import/CsvAutoDetect.php');
 require_once('modules/Import/sources/ImportDataSource.php');
-require_once('include/utils/sugar_file_utils.php');
+
 class ImportFile extends ImportDataSource
 {
     /**
@@ -136,10 +136,8 @@ class ImportFile extends ImportDataSource
 
         // Autodetect does setFpAfterBOM()
         $this->_encoding = $this->autoDetectCharacterSet();
-        echo "encoding = ".$this->_encoding;
-        //osmond.liu 161125注释掉
-		//$this->_encoding = 'GBK';
-        //end 161125
+		echo "encoding = ".$this->_encoding;
+		$this->_encoding = 'GBK';
     }
 
     /**
@@ -169,11 +167,11 @@ class ImportFile extends ImportDataSource
             //Make sure the file exists before unlinking
             if(file_exists($this->_sourcename)) {
                unlink($this->_sourcename);
-           }
-       }
+            }
+        }
 
-       ini_restore('auto_detect_line_endings');
-   }
+        ini_restore('auto_detect_line_endings');
+    }
 
     /**
 	 * This is needed to prevent unserialize vulnerability
@@ -370,146 +368,138 @@ class ImportFile extends ImportDataSource
         if (empty($charset_for_import))
         {
             $charset_for_import = $locale->getExportCharset(); 
-
+		
         }
-
+        
         // Reset the fp to after the bom if applicable.
         $this->setFpAfterBOM();
-        //Add By Osmond 161124
-        //增加文件编码转换
-       if ($charset_for_import !='UTF-8'){
-           $contents_before = sugar_file_get_contents($this->_sourcename);
-           $contents_after =iconv("GBK", 'UTF-8', $contents_before);
-           $num=sugar_file_put_contents($this->_sourcename, $contents_after); 
-       }
-       $charset_for_import='UTF-8';
-        //End 文件编码转换 161124 
-       return $charset_for_import;
+        
+        return $charset_for_import;
 
-   }
-
-   public function getDateFormat()
-   {
-    if ($this->_detector) {
-        $this->_date_format = $this->_detector->getDateFormat();
     }
 
-    return $this->_date_format;
-}
-
-public function getTimeFormat()
-{
-    if ($this->_detector) {
-        $this->_time_format = $this->_detector->getTimeFormat();
-    }
-
-    return $this->_time_format;
-}
-
-public function setHeaderRow($hasHeader)
-{
-    $this->_hasHeader = $hasHeader;
-}
-
-public function hasHeaderRow($autoDetect = TRUE)
-{
-    if($autoDetect)
+    public function getDateFormat()
     {
-        if (!isset($_REQUEST['import_module']))
-            return FALSE;
+        if ($this->_detector) {
+            $this->_date_format = $this->_detector->getDateFormat();
+        }
 
-        $module = $_REQUEST['import_module'];
-
-        $ret = FALSE;
-        $heading = FALSE;
-
-        if ($this->_detector)
-            $ret = $this->_detector->hasHeader($heading, $module, $this->_encoding);
-
-        if ($ret)
-            $this->_hasHeader = $heading;
+        return $this->_date_format;
     }
-    return $this->_hasHeader;
-}
 
-public function setImportFileMap($map)
-{
-    $this->_importFile = $map;
-    $importMapProperties = array('_delimiter' => 'delimiter','_enclosure' => 'enclosure', '_hasHeader' => 'has_header');
+    public function getTimeFormat()
+    {
+        if ($this->_detector) {
+            $this->_time_format = $this->_detector->getTimeFormat();
+        }
+
+        return $this->_time_format;
+    }
+
+    public function setHeaderRow($hasHeader)
+    {
+        $this->_hasHeader = $hasHeader;
+    }
+
+    public function hasHeaderRow($autoDetect = TRUE)
+    {
+        if($autoDetect)
+        {
+            if (!isset($_REQUEST['import_module']))
+                return FALSE;
+
+            $module = $_REQUEST['import_module'];
+
+            $ret = FALSE;
+            $heading = FALSE;
+
+            if ($this->_detector)
+                $ret = $this->_detector->hasHeader($heading, $module, $this->_encoding);
+
+            if ($ret)
+                $this->_hasHeader = $heading;
+        }
+        return $this->_hasHeader;
+    }
+
+    public function setImportFileMap($map)
+    {
+        $this->_importFile = $map;
+        $importMapProperties = array('_delimiter' => 'delimiter','_enclosure' => 'enclosure', '_hasHeader' => 'has_header');
         //Inject properties from the import map
-    foreach($importMapProperties as $k => $v)
-    {
-        $this->$k = $map->$v;
+        foreach($importMapProperties as $k => $v)
+        {
+            $this->$k = $map->$v;
+        }
     }
-}
 
     //Begin Implementation for SPL's Iterator interface
-public function key()
-{
-    return $this->_rowsCount;
-}
-
-public function current()
-{
-    return $this->_currentRow;
-}
-
-public function next()
-{
-    $this->getNextRow();
-}
-
-public function valid()
-{
-    return $this->_currentRow !== FALSE;
-}
-
-public function rewind()
-{
-    $this->setFpAfterBOM();
-        //Load our first row
-    $this->getNextRow();
-}
-
-public function getTotalRecordCount()
-{
-    $totalCount = $this->getNumberOfLinesInfile();
-    if($this->hasHeaderRow(FALSE) && $totalCount > 0)
+    public function key()
     {
-        $totalCount--;
-    }
-    return $totalCount;
-}
-
-public function loadDataSet($totalItems = 0)
-{
-    $currentLine = 0;
-    $this->_dataSet = array();
-    $this->rewind();
-        //If there's a header don't include it.
-    if( $this->hasHeaderRow(FALSE) )
-        $this->next();
-
-    while( $this->valid() &&  $totalItems > count($this->_dataSet) )
-    {
-        if($currentLine >= $this->_offset)
-        {
-            $this->_dataSet[] = $this->_currentRow;
-        }
-        $this->next();
-        $currentLine++;
+        return $this->_rowsCount;
     }
 
-    return $this;
-}
-
-public function getHeaderColumns()
-{
-    $this->rewind();
-    if($this->hasHeaderRow(FALSE))
+    public function current()
+    {
         return $this->_currentRow;
-    else
-        return FALSE;
-}
+    }
+
+    public function next()
+    {
+        $this->getNextRow();
+    }
+
+    public function valid()
+    {
+        return $this->_currentRow !== FALSE;
+    }
+
+    public function rewind()
+    {
+        $this->setFpAfterBOM();
+        //Load our first row
+        $this->getNextRow();
+    }
+
+    public function getTotalRecordCount()
+    {
+        $totalCount = $this->getNumberOfLinesInfile();
+        if($this->hasHeaderRow(FALSE) && $totalCount > 0)
+        {
+            $totalCount--;
+        }
+        return $totalCount;
+    }
+
+    public function loadDataSet($totalItems = 0)
+    {
+        $currentLine = 0;
+        $this->_dataSet = array();
+        $this->rewind();
+        //If there's a header don't include it.
+        if( $this->hasHeaderRow(FALSE) )
+            $this->next();
+
+        while( $this->valid() &&  $totalItems > count($this->_dataSet) )
+        {
+            if($currentLine >= $this->_offset)
+            {
+                $this->_dataSet[] = $this->_currentRow;
+            }
+            $this->next();
+            $currentLine++;
+        }
+
+        return $this;
+    }
+
+    public function getHeaderColumns()
+    {
+        $this->rewind();
+        if($this->hasHeaderRow(FALSE))
+            return $this->_currentRow;
+        else
+            return FALSE;
+    }
 
 }

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
@@ -83,7 +83,7 @@ $mod_strings = array (
   'LBL_PRI_MODULE' => '模块',
   'LBL_PRI_GROUP_MEMBER' => '对象',
   'LBL_PRI_NAME' => '名称',
-  'LBL_PRI_SQL_STATEMENT_FOR_LISTVIEW' => 'Sql_Statement_For_Listview',
+  'LBL_PRI_SQL_STATEMENT_FOR_LISTVIEW' => 'SQL Statement For ListView',
   'LBL_PRI_ENABLED_FLAG' => '是否启用',
   'LBL_PRI_DESCRIPTION' => '备注',
 );

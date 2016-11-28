@@ -13,13 +13,16 @@ class HAOS_Revenues_QuotesViewList extends ViewList
         }else{//没有其他查询条件时
             $this->where=" EXISTS ( SELECT 1 FROM haos_revenues_quotes tc WHERE haos_revenues_quotes.id=tc.id AND tc.haa_frameworks_id_c='".$haa_frameworks_id."')";
         }
+       
     }
 
 	function display(){
 		parent::display();
 		echo "<script>
-			var btn='<input type=\"button\" value=\"创建发票\" onclick=\"createInvoices()\">';
-			$('.paginationActionButtons').append(btn);
+			if($(\"#createInvoiceBtn\").length==0){
+			var createInvBtn=$('<input id=\"createInvoiceBtn\" type=\"button\" value=\"创建发票\" onclick=\"createInvoices()\">');
+			createInvBtn.insertBefore('#selectedRecordsTop');
+			}
 		</script>";
 		echo "<script>
 			function createInvoices(){
