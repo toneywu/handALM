@@ -74,5 +74,5 @@ $mod_strings = array (
   'LBL_ORGANIZATION' => '组织',
   'LBL_USER_NAME_USER_ID' => '用户 (related 用户 ID)',
   'LBL_USER_NAME' => '用户',
-  'LBL_ENABLED_FLAG' => '是否启用',
+  'LBL_ENABLED_FLAG' => '是否启用', 
 );
