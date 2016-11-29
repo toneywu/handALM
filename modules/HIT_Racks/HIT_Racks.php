@@ -48,29 +48,50 @@ class HIT_Racks extends HIT_Racks_sugar {
 	//refer to the task module as an example
 	//or refer to the asset module as the first customzation module with this feature
 		global $action, $currentModule, $focus, $current_module_strings, $app_list_strings, $timedate;
+        global $db;
 
 		$HIT_Racks_fields = $this->get_list_view_array();
-
-         require_once('modules/HIT_Racks/ServerChart.php');
-         $HIT_Racks_fields['OCCUPATION'] = getOccupationCnt($this);
-
-
-        //读取资产相关的字段
-        if(!empty($this->hat_assets_id)) {
-            $bean_asset = BeanFactory::getBean('HAT_Assets',$this->hat_assets_id);
-            $HIT_Racks_fields['STATUS'] = "<span class='color_tag color_asset_status_".$bean_asset->asset_status."'>".$app_list_strings['hat_asset_status_list'][$bean_asset->asset_status]."</span>";
-/*            $HIT_Racks_fields['HAT_ASSETS_ACCOUNTS_ID'] = $bean_asset->hat_assets_accountsaccounts_ida;
-            $HIT_Racks_fields['HAT_ASSETS_ACCOUNTS_NAME']= $bean_asset->hat_assets_accounts_name;
-*/          $HIT_Racks_fields['HAT_ASSET_LOCATIONS_ID'] = $bean_asset->hat_asset_locations_hat_assetshat_asset_locations_ida;
-            $HIT_Racks_fields['HAT_ASSET_LOCATIONS'] = $bean_asset->hat_asset_locations_hat_assets_name;
-            $HIT_Racks_fields['HAT_ASSET_USING_ORG'] = $bean_asset->using_org;
-            $HIT_Racks_fields['HAT_ASSET_USING_ORG_ID'] = $bean_asset->using_org_id;
+        require_once('modules/HIT_Racks/ServerChart.php');
+        $HIT_Racks_fields['OCCUPATION'] = getOccupationCnt($this);
 
 
-            if(isset($bean_asset->using_org_id) && ($bean_asset->owning_org_id==$bean_asset->using_org_id))
+        $sql_string ="SELECT
+                          hat_assets.`using_org_id` using_org_id,
+                          accounts.name using_org_name,
+                          hat_asset_locations.`name` location_name,
+                          hat_asset_locations.`id` location_id,
+                          hat_assets.asset_status,
+                          hat_assets.owning_org_id
+                        FROM
+                          hit_racks, hat_assets
+                          LEFT JOIN (
+                              hat_asset_locations_hat_assets_c,
+                              hat_asset_locations
+                            )
+                            ON (
+                              hat_asset_locations_hat_assets_c.`hat_asset_locations_hat_assetshat_assets_idb` = hat_assets.id
+                              AND hat_asset_locations_hat_assets_c.`hat_asset_locations_hat_assetshat_asset_locations_ida` = hat_asset_locations.`id`
+                              AND hat_asset_locations.`deleted` = 0
+                            )
+                          LEFT JOIN accounts
+                            ON accounts.id = hat_assets.`using_org_id`
+                          WHERE hit_racks.`hat_assets_id` = hat_assets.id
+                            AND hit_racks.id='".$this->id."'";
+
+
+        $get_sql_results =  $db-> query($sql_string);//加载所有
+        while ( $sql_result = $db->fetchByAssoc($get_sql_results) ) {
+                $HIT_Racks_fields['HAT_ASSET_LOCATIONS_ID'] = $sql_result['location_id'];
+                $HIT_Racks_fields['HAT_ASSET_LOCATIONS'] = $sql_result['location_name'];
+                $HIT_Racks_fields['HAT_ASSET_USING_ORG'] = $sql_result['using_org_name'];
+                $HIT_Racks_fields['HAT_ASSET_USING_ORG_ID'] = $sql_result['using_org_id'];
+                $HIT_Racks_fields['STATUS'] = "<span class='color_tag color_asset_status_".$sql_result['asset_status']."'>".$app_list_strings['hat_asset_status_list'][$sql_result['asset_status']]."</span>";
+
+            if($sql_result['using_org_id'] && ($sql_result['using_org_id'] ==$sql_result['owning_org_id'] ))
                 $HIT_Racks_fields['HAT_ASSET_OWNING_ORG_USING'] =  translate('LBL_SEARCH_DROPDOWN_YES','app_list_strings');
 
         }
+
 		return $HIT_Racks_fields;
 	}
 

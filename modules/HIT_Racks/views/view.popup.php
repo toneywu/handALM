@@ -17,17 +17,17 @@ class HIT_RacksViewPopup extends ViewPopup {
 			//if (isset($_REQUEST['target_owning_org_id_advanced'])&&$_REQUEST['target_owning_org_id_advanced']!="") {
 			//echo '<script>var owning_org_id="'.$_REQUEST['target_owning_org_id_advanced'].'"</script>';
 			//}
-			require_once('include/Popups/PopupSmarty.php');
+			//require_once('include/Popups/PopupSmarty.php');
 			//require_once 'modules/ModuleBuilder/parsers/ParserFactory.php' ;
 			//$parser = ParserFactory::getParser ( $this->editLayout, $this->editModule, $this->editPackage) ;
 
 			//$smarty = $this->constructSmarty ( $parser ) ;
-			if (($this->bean instanceOf SugarBean) && !$this->bean->ACLAccess('list')) {
+/*			if (($this->bean instanceOf SugarBean) && !$this->bean->ACLAccess('list')) {
 				ACLController :: displayNoAccess();
 				sugar_cleanup(true);
 			}
 			insert_popup_header(null, false);
-			$popup = new PopupSmarty($this->bean, $this->module);
+			$popup = new PopupSmarty($this->bean, $this->module);*/
 			parent :: Display();
 		} else {
 

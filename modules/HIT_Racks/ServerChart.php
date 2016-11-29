@@ -118,7 +118,7 @@ function getOccupationCnt($RackBean) {
                $occupation_cnt += $d_bean_rack_allocation['height'];
         }
 
-        return "<span style='white-space:nowrap;'>".round($occupation_cnt/($RackBean->height)*100)."% <span id='occupation_bar' style='border:#ccc 1px solid; height:1em; width:5em;display:inline-flex'><span id='occupation_bar_filled' style='background-color:#999; height:0.8em; width:".round($occupation_cnt/($RackBean->height)*10/2,1)."em; display:block'></span></span></span>";
+        return "<span style='white-space:nowrap;'> <span id='occupation_bar' style='border:#ccc 1px solid; height:1em; width:5em;display:inline-flex'><span id='occupation_bar_filled' style='background-color:#999; height:0.8em; width:".round($occupation_cnt/($RackBean->height)*10/2,1)."em; display:block'></span></span> ".round($occupation_cnt/($RackBean->height)*100)."%</span>";
       }
 }
 ?>

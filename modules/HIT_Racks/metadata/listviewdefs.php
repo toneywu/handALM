@@ -31,16 +31,7 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-  'ASSET' => 
-  array (
-    'type' => 'relate',
-    'studio' => 'visible',
-    'label' => 'LBL_ASSET',
-    'id' => 'HAT_ASSETS_ID',
-    'link' => true,
-    'width' => '12%',
-    'default' => true,
-  ),
+
   'HAT_ASSET_LOCATIONS' => 
   array (
     'type' => 'varchar',
