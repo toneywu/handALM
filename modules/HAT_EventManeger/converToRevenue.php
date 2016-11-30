@@ -28,8 +28,7 @@ if(!(ACLController::checkAccess('HAOS_Revenues_Quotes', 'edit', true))){
 }
 
 require_once('modules/HAT_EventManeger/HAT_EventManeger.php');
-require_once('modules/HAOS_Revenues_Quotes/HAOS_Revenues_Quotes.php');
-require_once('modules/AOS_Products_Quotes/AOS_Products_Quotes.php');
+require_once('modules/HAOS_Revenues_Quotes/createRevenue.php');
 global $timedate;
 
 //Setting values in EventManager
@@ -38,7 +37,6 @@ $event->retrieve($_REQUEST['record']);
 $event->save();
 
 	//Setting Invoice Values
-$quote = new HAOS_Revenues_Quotes();
 $rawRow = $event->fetched_row;
 $rawRow['id'] = '';
 $rawRow['haa_frameworks_id_c'] = $rawRow['haa_frameworks_id_c'];
@@ -52,54 +50,21 @@ $rawRow['source_reference'] =  $event->event_number;
 $rawRow['contract_number'] = $event->person_number;
 $rawRow['contact_id_c'] = $event->contact_id_c;
 $rawRow['contract_name'] = $event->person_name;
-$rawRow['date_entered'] = '';
-$rawRow['date_modified'] = '';
-
-$bean_codes = BeanFactory :: getBean('HAA_Codes')->retrieve_by_string_fields(array (
-	'name' => $event->event_type
-	));
-if ($bean_codes) { 
-	$rawRow['haa_codes_id_c']= isset($bean_codes->id)?$bean_codes->id:'';
-}
-
-$bean_types = BeanFactory :: getBean('HAT_EventType')->retrieve_by_string_fields(array (
-	'name' => $event->event_type,
-	'basic_type' => 'REVENUE'
-	));
-if ($bean_types) { 
-	$rawRow['hat_eventtype_id_c']= isset($bean_types->id)?$bean_types->id:'';
-	$rawRow['event_type'] = $event->event_type;
-}
-else{
-	$rawRow['event_type'] = '';
-	$rawRow['hat_eventtype_id_c']= '';
-}
-
 
 $rawRow['expense_group'] = $event->event_type;
-
-
-
-$quote->populateFromRow($rawRow);
-$quote->process_save_dates =false;
-$quote->save();
-$event->haos_revenues_quotes_id=$quote->id;
-$event->save();
-
-
+$rawRow['event_type'] =$event->event_type;
 
 //Setting Line Items
-$prod_invoice = new AOS_Products_Quotes();
-$prod_invoice->parent_id=$quote->id;
-$prod_invoice->parent_type='HAOS_Revenues_Quotes';
-$prod_invoice->line_item_type_c='Service';
-$prod_invoice->vat="0.0";
-$prod_invoice->product_total_price=$event->fine;
-$prod_invoice->product_list_price=$event->fine;
-$prod_invoice->product_unit_price=$event->fine;
-$prod_invoice->name=$event->name;
-$prod_invoice->save();
+$quoteRow['line_item_type_c']='Service';
+$quoteRow['vat']="0.0";
+$quoteRow['product_total_price']=$event->fine;
+$quoteRow['product_list_price']=$event->fine;
+$quoteRow['product_unit_price']=$event->fine;
+$quoteRow['name']=$event->name;
+
+$event->haos_revenues_quotes_id=createRevenue($rawRow,$quoteRow);
+$event->save();
 
 ob_clean();
-header('Location: index.php?module=HAOS_Revenues_Quotes&action=EditView&record='.$quote->id);
+header('Location: index.php?module=HAOS_Revenues_Quotes&action=EditView&record='.$event->haos_revenues_quotes_id);
 ?>

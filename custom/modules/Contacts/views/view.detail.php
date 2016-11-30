@@ -131,6 +131,14 @@ class ContactsViewDetail extends ViewDetail
 		
 		  function Display() {
 		parent :: Display();      //ff 在DetailView显示之前中进行初始化数据的加载 
+		$user_id = $this->bean->id;
+		$user_name = $this->bean->last_name;
+		echo "<input id='user_id' value='".$user_id."' type='hidden' >";
+		echo "<input id='user_name' value='".$user_name."' type='hidden'>";
+		echo "<script>$(function(){ var html='<input class=\"button\" value=\"创建任务\" id=\"Task_button\" name=\"创建任务\" title=\"创建任务\" onclick=\"userTotask();\" type=\"button\">'
+    $('#History__button').after(html);});</script>";
+    	echo '<script>function userTotask(){
+	location.href="?module=Tasks&action=EditView&return_module=Tasks&return_action=DetailView&contact_id='.$user_id.'&contact_name='.$user_name.'";}</script>';
 		if (isset ($this->bean->haa_codes_id_c) && ($this->bean->haa_codes_id_c) != "") {
 			//判断是否已经设置有组织的业务类型，如果有组织的业务类型，则进一步的加载产品对应的FlexForm
 			$haa_codes_id_c = $this->bean->haa_codes_id_c;

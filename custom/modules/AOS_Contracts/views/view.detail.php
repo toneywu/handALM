@@ -177,6 +177,11 @@ class AOS_ContractsViewDetail extends ViewDetail {
 				$product .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$line_item->effective_start_c."</td>";
 				$product .= "<td width='12%' colspan='2' style='text-align: right;padding:2px;' >".$mod_strings['LBL_EFFECTIVE_END_C'].":</td>";
 				$product .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$line_item->effective_end_c."</td>";
+				$product .="</tr><tr class='showmore".$row_num."' style='display:none'>";
+				$product .="<td width='12%' colspan='2' style='text-align: right;padding:2px;' >".$mod_strings['LBL_NEXT_ACCOUNT_DAY'].":</td>";
+				$product .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$line_item->next_account_day_c."</td>";
+				$product .= "<td width='12%' colspan='2' style='text-align: right;padding:2px;' >".$mod_strings['LBL_FINAL_ACCOUNT_DAY'].":</td>";
+				$product .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$line_item->final_account_day_c."</td>";
 				$product .="</tr>";
 
 
@@ -220,6 +225,11 @@ class AOS_ContractsViewDetail extends ViewDetail {
 				$service .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$line_item->effective_start_c."</td>";
 				$service .= "<td width='12%' colspan='2' style='text-align: right;padding:2px;' >".$mod_strings['LBL_EFFECTIVE_END_C'].":</td>";
 				$service .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$line_item->effective_end_c."</td>";
+				$service .="</tr><tr class='showmore".$row_num."' style='display:none'>";
+				$service .="<td width='12%' colspan='2' style='text-align: right;padding:2px;' >".$mod_strings['LBL_NEXT_ACCOUNT_DAY'].":</td>";
+				$service .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$line_item->next_account_day_c."</td>";
+				$service .= "<td width='12%' colspan='2' style='text-align: right;padding:2px;' >".$mod_strings['LBL_FINAL_ACCOUNT_DAY'].":</td>";
+				$service .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$line_item->final_account_day_c."</td>";
 				$service .="</tr>";
 
 			}

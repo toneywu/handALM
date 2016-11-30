@@ -13,29 +13,32 @@ function insertLineHeader(tableid){
 	var a=x.insertCell(0);
 	a.width="12%";
 	a.innerHTML=SUGAR.language.get('HAOS_Insurance_Claims_Lines','LBL_RELATE_INSURANCE_NUMBER');
-	var b=x.insertCell(1);
+	var f=x.insertCell(1);
+	f.width="8%";
+	f.innerHTML=SUGAR.language.get('HAOS_Insurance_Claims_Lines','LBL_INSURANCE_TYPE');
+	var b=x.insertCell(2);
 	b.width="10%";
 	b.align='center';
 	b.innerHTML=SUGAR.language.get('HAOS_Insurance_Claims_Lines','LBL_CLAIM_AMOUNT');
-	var b1=x.insertCell(2);
+	var b1=x.insertCell(3);
 	b1.width="10%";
 	b1.align='center';
 	b1.innerHTML=SUGAR.language.get('HAOS_Insurance_Claims_Lines','LBL_OTHER_SIDE_AMOUNT');
-	var c=x.insertCell(3);
+	var c=x.insertCell(4);
 	c.width="10%";
 	c.align='center';
 	c.innerHTML=SUGAR.language.get('HAOS_Insurance_Claims_Lines','LBL_GAP_AMOUNT');
-	var d=x.insertCell(4);
+	var d=x.insertCell(5);
 	d.width="10%";
 	d.align='center';
 	d.innerHTML=SUGAR.language.get('HAOS_Insurance_Claims_Lines','LBL_ACTUAL_AMOUNT');
-	var e=x.insertCell(5);
+	var e=x.insertCell(6);
 	e.width="9%";
 	e.align='center';
 	e.innerHTML=SUGAR.language.get('HAOS_Insurance_Claims_Lines','LBL_OTHER_SIDE_ACT_AMT');
-	var f=x.insertCell(6);
+	/*var f=x.insertCell(6);
 	f.width="8%";
-	f.innerHTML=SUGAR.language.get('HAOS_Insurance_Claims_Lines','LBL_DOCUMENT_READY_FLAG');
+	f.innerHTML=SUGAR.language.get('HAOS_Insurance_Claims_Lines','LBL_DOCUMENT_READY_FLAG');*/
 	var g=x.insertCell(7);
 	g.width="10%";
 	g.innerHTML=SUGAR.language.get('HAOS_Insurance_Claims_Lines','LBL_DOCUMENT_DELIVER_DATE');
@@ -70,8 +73,8 @@ function insertLineData(line_data){//将数据写入到对应的行字段中
 		$("#line_gap_amount".concat(String(ln))).val(format2Number(line_data.gap_amount,2));
 		$("#line_actual_amount".concat(String(ln))).val(format2Number(line_data.actual_amount,2));
 		$("#line_other_side_act_amt".concat(String(ln))).val(format2Number(line_data.other_side_act_amt,2));
-		$("#line_document_ready_flag".concat(String(ln))).attr('checked',line_data.document_ready_flag==1?true:false);
-        $("#line_document_ready_flag".concat(String(ln))).val(line_data.document_ready_flag);
+		/*$("#line_document_ready_flag".concat(String(ln))).attr('checked',line_data.document_ready_flag==1?true:false);
+        $("#line_document_ready_flag".concat(String(ln))).val(line_data.document_ready_flag);*/
         $("#line_document_deliver_date".concat(String(ln))).val(line_data.document_deliver_date);
         $("#line_premium_payment_date".concat(String(ln))).val(line_data.premium_payment_date);
         $("#line_gap_payment_date".concat(String(ln))).val(line_data.gap_payment_date);
@@ -93,12 +96,12 @@ function insertLineElements(tableid){
 	z1.className='oddListRowS1';
 	z1.innerHTML=
 	"<td id='displayed_relate_insurance_number"+prodln+"'></td>"+
+	"<td id='displayed_insurance_type"+prodln+"'></td>"+
 	"<td id='displayed_claim_amount"+prodln+"' align='right'></td>"+
 	"<td id='displayed_other_side_amount"+prodln+"' align='right'></td>"+
 	"<td id='displayed_gap_amount"+prodln+"' align='right'></td>"+
 	"<td id='displayed_actual_amount"+prodln+"' align='right'></td>"+
 	"<td id='displayed_other_side_act_amt"+prodln+"' align='right'></td>"+
-	"<td id='displayed_document_ready_flag"+prodln+"' align='center'></td>"+
 	"<td id='displayed_document_deliver_date"+prodln+"' align='center'></td>"+
 	"<td id='displayed_premium_payment_date"+prodln+"' align='center'></td>"+
 	"<td id='displayed_gap_payment_date"+prodln+"' align='center'></td>"+
@@ -203,8 +206,9 @@ function renderLine(ln){//将编辑器中的内容显示于正常行中
 	$("#displayed_gap_amount"+ln).html($("#line_gap_amount"+ln).val());
 	$("#displayed_actual_amount"+ln).html($("#line_actual_amount"+ln).val());
 	$("#displayed_other_side_act_amt"+ln).html($("#line_other_side_act_amt"+ln).val());
-	var flag=$("#line_document_ready_flag"+ln).is(":checked")?"是":"否";
-	$("#displayed_document_ready_flag"+ln).html(flag);
+	/*var flag=$("#line_document_ready_flag"+ln).is(":checked")?"是":"否";
+	$("#displayed_document_ready_flag"+ln).html(flag);*/
+	$("#displayed_insurance_type"+ln).html($("#line_insurance_type"+ln).val());
 	$("#displayed_document_deliver_date"+ln).html($("#line_document_deliver_date"+ln).val());
 	$("#displayed_premium_payment_date"+ln).html($("#line_premium_payment_date"+ln).val());
 	$("#displayed_gap_payment_date"+ln).html($("#line_gap_payment_date"+ln).val());
@@ -263,16 +267,16 @@ function calculate() {
 	var claim_amount=0;
 	var gap_amount=0;
 	var act_claim_total_amt=0;
-	$("#lineItems tbody").each(function(){
+	$("#lineItems>tbody").each(function(){
 		$(this).children().eq(0).children().each(function(i){
 			if($(this).parent().css("display")!="none"){
-				if (i==1) {
+				if (i==2) {
 					claim_amount=eval(claim_amount+unformatNumber($(this).text().trim(),',','.'));
 				}
-				if (i==3) {
+				if (i==4) {
 					gap_amount=eval(gap_amount+unformatNumber($(this).text().trim(),',','.'));
 				}
-				if (i==4) {
+				if (i==5) {
 					act_claim_total_amt=eval(act_claim_total_amt+unformatNumber($(this).text().trim(),',','.'));
 				}
 			}

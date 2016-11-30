@@ -38,7 +38,7 @@ class HAOS_Revenues_QuotesViewList extends ViewList
 				});
 				if(bool==true){
 					$.ajax({
-						url:'?module=HAOS_Revenues_Quotes&action=checkinfo&to_pdf=1',
+						url:'?module=HAOS_Revenues_Quotes&action=checkInfo&to_pdf=1',
 						data:'&data='+data_array,
 						type:'POST',
 						success:function(data){

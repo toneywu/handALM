@@ -30,6 +30,7 @@ WHERE
 	hgp.id = hgc.hpr_groups_hpr_group_priviligeshpr_group_priviliges_idb
 AND hgp.hpr_group_members_id_c = hgm.id
 AND hgm.deleted = 0
+and hgp.deleted=0
 and hgc.hpr_groups_hpr_group_priviligeshpr_groups_ida ='".$focus->id."'";
 							
 				

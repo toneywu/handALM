@@ -74,8 +74,9 @@ array_push($job_strings, 'sync_xr_po_infos');
  */
 function custom_job()
 {
-    echo "测试成功";
+	echo "测试成功";
 	$GLOBALS['log']->error("测试成功");
 	return true;
 }
+
 ?>

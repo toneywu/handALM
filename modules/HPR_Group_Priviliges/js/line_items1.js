@@ -1,4 +1,4 @@
-var prodln = 0;
+  var prodln = 0;
 var columnNum = 7;
 var lineno;
 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
@@ -92,7 +92,7 @@ z1.innerHTML  =
   "<tr>"+
     "<input name='linepri_id["+prodln+"]' id='linepri_id"+prodln+"' value='' type='hidden'>"+
     "<td>"+SUGAR.language.get('HPR_Groups', 'LBL_PRI_MODULE')+"<span class='required'>*</span></td>"+
-    "<td><select tabindex='116' name='linepri_privilige_module[" + prodln + "]' id='displayed_line_item_type_code" + prodln + "'onchange='setDefaultName("+prodln+")'>" + line_item_module_option +"</select></td>"+
+    "<td><select tabindex='116' name='linepri_privilige_module[" + prodln + "]' id='linepri_privilige_module" + prodln + "'onchange='setDefaultName("+prodln+")'>" + line_item_module_option +"</select></td>"+
     //"<td><input name='linepri_privilige_module["+prodln+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='linepri_privilige_module"+prodln+"' size='' value='' title='' autocomplete='off' accesskey='7' type='text'></td>"+
     "<td>"+SUGAR.language.get('HPR_Groups', 'LBL_PRI_GROUP_MEMBER')+"<span class='required'>*</span></td>"+
     "<td><input name='linepri_member_name["+prodln+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='linepri_member_name"+prodln+"' size='' value='' title='' autocomplete='off' type='text' 'onchange='setDefaultName("+prodln+")'>"+
@@ -141,7 +141,7 @@ z1.innerHTML  =
   }
 
 function renderLine_pri(ln) { //将编辑器中的内容显示于正常行中
-  $("#displayed_linepri_privilige_module"+ln).html($("#displayed_line_item_type_code"+ln).find("option:selected").html());
+  $("#displayed_linepri_privilige_module"+ln).html($("#linepri_privilige_module"+ln).find("option:selected").html());
   $("#displayed_linepri_member_name"+ln).html($("#linepri_member_name"+ln).val());
   $("#displayed_linepri_name"+ln).html($("#linepri_name"+ln).val());
   $("#displayed_linepri_sql_statement_for_listview"+ln).html($("#linepri_sql_statement_for_listview"+ln).val());
