@@ -184,8 +184,18 @@ function addNewAssetLine(){
 
    var eventOptions = $("#eventOptions").val()!=""?jQuery.parseJSON($("#eventOptions").val()):"";
   //console.log(eventOptions);
-  var popupFilter="&current_mode=asset"
-  if (eventOptions!="") {
+  var popupFilter = '&current_mode='+eventOptions.asset_scope.toLowerCase()
+  +'&defualt_list='+eventOptions.default_asset_list.toLowerCase()
+  +'&wo_id='+source_wo_id+'&haa_frameworks_id_advanced='
+  +$("#haa_frameworks_id").val();
+
+  if ($("#target_using_org_id").val()!="") {
+    popupFilter +="&target_using_org="+$("#target_using_org").val()
+    +"&target_using_org_id="+$("#target_using_org_id").val();
+  }
+
+//20161130 toney.wu relpace popup list with tree selection.
+/* if (eventOptions!="") {
     if (eventOptions.default_asset_list=="USING_ORG") {
       popupFilter += '&using_org_id_advanced='+ $("#target_using_org_id").val();
     } else if  (eventOptions.default_asset_list=="WO_ASSET_TRANS") {
@@ -199,38 +209,28 @@ function addNewAssetLine(){
     } else if (eventOptions.asset_scope=="IT") {
       popupFilter += '&enable_it_ports=1';
     }
+*/
+
 
     open_popup('HAT_Assets', 1200, 850,popupFilter, true, true, popupRequestData, "MultiSelect", true);
-  }
 }
 
 
-function setAddNewLineBtnReturn(popupReplyData) {
+function setAddNewLineBtnReturn(popupReplyData) { //批量添加资产的POPUP返回处理
 	set_return(popupReplyData);
 	var idJson = popupReplyData.selection_list;
-/*	console.log(popupReplyData);
-	for(var p in idJson){
-		console.log(idJson[p]);
-		$.ajax({
-			url:'index.php?to_pdf=true&module=HAT_Asset_Trans&action=syncHtmlPage&record='+idJson[p],
-			success: function (msg) {
-				console.log(msg);
-				insertLineData($.parseJSON(msg),'EditView');
-				console.log("当前行号="+prodln);
-				resetAsset((prodln-1));
-			},
-			error: function () { //失败
-				alert('Error loading document');
-			}
-		});
-	};*/
     $.ajax({
       url:'index.php?to_pdf=true&module=HAT_Asset_Trans&action=LoadSelectedAssets',
       data:{idArray:idJson},
       type:"POST",
       success: function (msg) {
-        console.log(msg);
-        insertLineData($.parseJSON(msg),'EditView');
+
+        linesReturned=$.parseJSON(msg);
+        $(linesReturned.lines).each(function(){
+          insertLineData($(this)[0],'EditView');
+          //console.log($(this));
+        });
+
         resetAsset((prodln-1));
       },
       error: function () { //失败
@@ -265,7 +265,7 @@ function insertTransLineHeader(tableid){
 function insertLineData(asset_trans_line, current_view){ //将数据写入到对应的行字段中
   console.log(asset_trans_line);
   var ln = 0;
-  if(asset_trans_line.id != '0' && asset_trans_line.id !== ''){
+  //if(asset_trans_line.id != '0' && asset_trans_line.id !== ''){
     ln = insertTransLineElements("lineItems", current_view);
 
     for(var propertyName in asset_trans_line) {
@@ -285,7 +285,7 @@ function insertLineData(asset_trans_line, current_view){ //将数据写入到对
     }
 
     renderTransLine(ln);
-  }
+  //}
 }
 
 /******************************
@@ -581,14 +581,19 @@ function LineDescElement(prefix_name,target_obj_name, current_obj_name, obj_labe
 
 //console.log( current_obj_val+", "+target_obj_val+", "+target_objval_name+", "+current_objval_name);
 if(current_objval_name=="current_asset_status"){
+//  current_objval_val="";
  current_objval_val = hat_asset_status_list.filter(function(obj) {
   return obj.name === current_objval_val;
 })[0].value;
+
 }
+
 if(target_objval_name=="target_asset_status"){
+  //current_objval_val="";
  target_objval_val = hat_asset_status_list.filter(function(obj) {
   return obj.name === target_objval_val;
 })[0].value;
+
 }
 
   //console.log( current_obj_val+", "+target_obj_val+", "+target_objval_name+", "+current_objval_name);
@@ -751,6 +756,7 @@ function insertTransLineFootor(tableid) {
 
 function getWOTargetDate(ln){
 	$wo_id = $("#source_wo_id").val();
+  console.log('index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=getWOInfos&ham_wo_id='+$wo_id);
 	$.ajax({
    url:'index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=getWOInfos&ham_wo_id='+$wo_id,
    success: function (data) {

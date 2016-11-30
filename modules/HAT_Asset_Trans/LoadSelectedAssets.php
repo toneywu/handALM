@@ -2,7 +2,8 @@
 
 
 
-header("Content-type: text/html; charset=UTF-8");
+//header("Content-type: text/html; charset=UTF-8");
+header('Content-Type: application/json');
 error_reporting(E_ALL);
 
 if (!defined('sugarEntry') || !sugarEntry)
@@ -11,26 +12,35 @@ global $db;
 
 $idStr= '"'.join('","',$_REQUEST['idArray']).'"';
 
+
 $sql = "SELECT 
 			   h.id asset_id
-			  ,h.name asset,a.name
-			  ,h.asset_desc
+			  ,h.name asset
+			  ,h.name name
 			  ,h.asset_status       current_asset_status
+			  ,h.asset_status       target_asset_status
+			  ,l.name 				current_location
+			  ,l.id 				current_location_id
+			  ,h.location_desc 		current_location_desc
+			  ,l.name 				target_location
+			  ,l.id 				target_location_id
+			  ,h.location_desc 		target_location_desc
 			  ,own_org.id          	current_owning_org_id
 			  ,own_org.name  		current_owning_org 
+			  ,own_org.id          	target_owning_org_id
+			  ,own_org.name  		target_owning_org 
 			  ,using_org.id   		current_using_org_id
 			  ,using_org.name 		current_using_org
-			  ,parent_asset.name 		current_parent_asset
+			  ,parent_asset.name 	current_parent_asset
 			  ,parent_asset.id 		current_parent_asset_id
+			  ,parent_asset.name 	target_parent_asset
+			  ,parent_asset.id 		target_parent_asset_id
 			  ,owning_person_t.last_name 	current_owning_person
 			  ,owning_person_t.id 		current_owning_person_id
 			  ,h.owning_person_desc 	current_owning_person_desc
 			  ,using_person_t.id  		current_using_person_id
 			  ,using_person_t.last_name  	current_using_person
 			  ,h.using_person_desc  	current_using_person_desc
-			  ,l.name 			current_location
-			  ,l.id 			current_location_id
-			  ,h.location_desc 		current_location_desc
 			FROM
 			  hat_assets h 
 			  LEFT JOIN aos_products a ON (a.id=h.aos_products_id AND   a.deleted=0)
@@ -45,12 +55,30 @@ $sql = "SELECT
 
 //echo $sql;
 
+		$result = $db->query($sql);
+		$i=1;
+		//$line_data = '{';
+		$line_data="";
+		while ($row = $db->fetchByAssoc($result)) {
+			//$row['id']=create_guid();
+			//$line_data .= '"'.$i.'":['.json_encode($row)."],";
+			$line_data .= json_encode($row).",";
+			$i++;
+		}
+		$line_data = substr($line_data,0,strlen($line_data)-1);//去除最后一个,
+		$line_data = '{"lines":['.$line_data."]}";
+
+		//$line_data .= '}';
+
+
+	print json_encode($line_data);
+/*
 
 	$result = $db->query($sql);
 	$rows = array();
 	while ($row = $db->fetchByAssoc($result)) {
 		$rows[] = $row;//str_replace("null",'""',$row);
 	}
-	print json_encode($rows);
+	print json_encode($rows);*/
 
 ?>
