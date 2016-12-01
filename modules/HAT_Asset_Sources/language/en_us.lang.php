@@ -79,7 +79,7 @@ $mod_strings = array (
   'LBL_LINE_QTY'=>'Qty',
   'LBL_LINE_PRICE'=>'Price',
   'LBL_SOURCE_TYPE'=>'Source Type',
-  'LBL_SOURCE_REFERENCE'=>'Source Reference',
+  'LBL_SOURCE_REFERENCE'=>'Comments',
   'LBL_SOURCE_ID'=>'Source ID',
   'LBL_RECEIVED_DATE'=>'Received Date',
 );
