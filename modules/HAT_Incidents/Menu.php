@@ -1,4 +1,5 @@
 <?php
+if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point'); 
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
@@ -37,5 +38,19 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
+/*********************************************************************************
 
-$app_list_strings['moduleList']['HAT_Incidents'] = 'Incidents';
+ * Description:  TODO To be written.
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
+ * All Rights Reserved.
+ * Contributor(s): ______________________________________..
+ ********************************************************************************/
+
+global $mod_strings, $app_strings, $sugar_config;
+
+		
+if(ACLController::checkAccess('HAT_Incidents', 'edit', true))$module_menu[]=Array("index.php?module=HAT_Incidents&action=EditView&return_module=HAT_Incidents&return_action=index", $mod_strings['LNK_NEW_RECORD'],"Create", 'HAT_Incidents');
+
+if(ACLController::checkAccess('HAT_Incidents', 'list', true))$module_menu[]=Array("index.php?module=HAT_Incidents&action=index&return_module=HAT_Incidents&return_action=DetailView", $mod_strings['LBL_LIST_FORM_TITLE'],"List", 'HAT_Incidents');
+
+?>

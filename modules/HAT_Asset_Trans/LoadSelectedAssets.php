@@ -14,9 +14,9 @@ $idStr= '"'.join('","',$_REQUEST['idArray']).'"';
 
 
 $sql = "SELECT 
-			   h.id asset_id
-			  ,h.name asset
-			  ,h.name name
+			   h.id 				asset_id
+			  ,h.name 				asset
+			  ,h.asset_desc	 		name
 			  ,h.asset_status       current_asset_status
 			  ,h.asset_status       target_asset_status
 			  ,l.name 				current_location

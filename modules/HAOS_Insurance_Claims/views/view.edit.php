@@ -33,8 +33,8 @@ class HAOS_Insurance_ClaimsViewEdit extends ViewEdit
 			echo'<script type="text/javascript"src="'.$GLOBALS['sugar_config']['cache_dir'].'jsLanguage/'.$module.'/'.$GLOBALS['current_language'].'.js?s='.$GLOBALS['js_version_key'].'&c='.$GLOBALS['sugar_config']['js_custom_version'].'&j='.$GLOBALS['sugar_config']['js_lang_version'].'"></script>';
 		}
 		echo "<script type='text/javascript' src='custom/resources/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js'></script>";
-		$event_id=$this->bean->hat_eventmaneger_id_c;
-		$event=BeanFactory::getBean('HAT_EventManeger', $event_id);
+		$event_id=$this->bean->hat_incidents_id_c;
+		$event=BeanFactory::getBean('HAT_Incidents', $event_id);
 		$this->bean->relate_event_number=$event->event_number;
 		$this->bean->time=$event->event_date;
 		$this->bean->location=$event->event_location;

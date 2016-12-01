@@ -1,4 +1,5 @@
 <?php
+if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
@@ -37,5 +38,29 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
+/*********************************************************************************
 
-$app_list_strings['moduleList']['HAT_Incidents'] = 'Incidents';
+ * Description:  Defines the English language pack for the base application.
+ * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
+ * All Rights Reserved.
+ * Contributor(s): ______________________________________..
+ ********************************************************************************/
+
+require_once('include/Dashlets/DashletGeneric.php');
+require_once('modules/HAT_Incidents/HAT_Incidents.php');
+
+class HAT_IncidentsDashlet extends DashletGeneric { 
+    function __construct($id, $def = null) {
+		global $current_user, $app_strings;
+		require('modules/HAT_Incidents/metadata/dashletviewdefs.php');
+
+        parent::__construct($id, $def);
+
+        if(empty($def['title'])) $this->title = translate('LBL_HOMEPAGE_TITLE', 'HAT_Incidents');
+
+        $this->searchFields = $dashletData['HAT_IncidentsDashlet']['searchFields'];
+        $this->columns = $dashletData['HAT_IncidentsDashlet']['columns'];
+
+        $this->seedBean = new HAT_Incidents();        
+    }
+}

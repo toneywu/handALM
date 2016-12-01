@@ -37,5 +37,34 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
+/**
+ * THIS CLASS IS FOR DEVELOPERS TO MAKE CUSTOMIZATIONS IN
+ */
+require_once('modules/HAT_Incidents/HAT_Incidents_sugar.php');
+class HAT_Incidents extends HAT_Incidents_sugar {
+	
+	function __construct(){
+		parent::__construct();
+	}
 
-$app_list_strings['moduleList']['HAT_Incidents'] = 'Incidents';
+	function save($check_notify = FALSE){
+		global $sugar_config;
+
+		if ($this->event_number==''){
+			
+			if($sugar_config['dbconfig']['db_type'] == 'mssql'){
+				$this->event_number = $this->db->getOne("SELECT MAX(CAST(event_number as INT))+1 FROM HAT_Incidents");
+			} else {
+				$this->event_number = $this->db->getOne("SELECT MAX(CAST(event_number as UNSIGNED))+1 FROM HAT_Incidents");
+			}
+
+			if($this->event_number < 1||$this->event_number==''){
+				$this->event_number = 1;
+			}
+		}
+		parent::save($check_notify);
+
+	}
+	
+}
+?>

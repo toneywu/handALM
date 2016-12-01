@@ -17,8 +17,8 @@ class HAOS_Insurance_ClaimsViewDetail extends ViewDetail
             $bean_framework_name = $beanFramework->name;
         }
         $this->ss->assign('FRAMEWORK_C',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id_c'));
-        $event_id=$this->bean->hat_eventmaneger_id_c;
-        $event=BeanFactory::getBean('HAT_EventManeger', $event_id);
+        $event_id=$this->bean->hat_incidents_id_c;
+        $event=BeanFactory::getBean('HAT_Incidents', $event_id);
         $this->bean->relate_event_number=$event->event_number;
         $this->bean->time=$event->event_date;
         $this->bean->location=$event->event_location;

@@ -695,7 +695,7 @@ $app_list_strings['moduleList']['HAM_ACT_OP'] = 'Std.Activity Tasks';
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['HAT_EventManeger'] = 'Incidents';
+$app_list_strings['moduleList']['HAT_Incidents'] = 'Incidents';
 
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by

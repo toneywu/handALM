@@ -388,7 +388,7 @@ $app_list_strings['moduleList']['HAM_ACT_OP'] = '标准活动任务';
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['HAT_EventManeger'] = '事件管理';
+$app_list_strings['moduleList']['HAT_Incidents'] = '事件管理';
 
 
 /*********************************************************************************

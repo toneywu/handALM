@@ -127,7 +127,7 @@ array (
               'field_to_name_array' =>
               array (
                 'event_number' => 'relate_event_number',
-                'id' => 'hat_eventmaneger_id_c',
+                'id' => 'hat_incidents_id_c',
                 'event_date' => 'time',
                 'event_location' => 'location',
                 'name'=>'comment',

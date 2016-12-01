@@ -39,7 +39,7 @@ array (
     'type' => 'relate',
     'studio' => 'visible',
     'label' => 'LBL_RELATE_EVENT_NUMBER',
-    'id' => 'HAT_EVENTMANEGER_ID_C',
+    'id' => 'HAT_INCIDENTS_ID_C',
     'link' => true,
     'width' => '10%',
     'default' => true,

@@ -77,7 +77,7 @@ class HAOS_Insurance_Claims_sugar extends Basic {
 	var $parent_type;
 	var $parent_id;
 	var $claim_treated_status;
-	var $hat_eventmaneger_id_c;
+	var $hat_incidents_id_c;
 	var $relate_event_number;
 	var $ham_wo_id_c;
 	var $relate_wo_number;

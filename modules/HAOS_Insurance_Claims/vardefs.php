@@ -308,11 +308,11 @@ $dictionary['HAOS_Insurance_Claims'] = array(
     'studio' => 'visible',
     'dependency' => false,
   ),
-  'hat_eventmaneger_id_c' => 
+  'hat_incidents_id_c' => 
   array (
     'required' => false,
-    'name' => 'hat_eventmaneger_id_c',
-    'vname' => 'LBL_RELATE_EVENT_NUMBER_HAT_EVENTMANEGER_ID',
+    'name' => 'hat_incidents_id_c',
+    'vname' => 'LBL_RELATE_EVENT_NUMBER_HAT_INCIDENTS_ID',
     'type' => 'id',
     'massupdate' => 0,
     'no_default' => false,
@@ -350,9 +350,9 @@ $dictionary['HAOS_Insurance_Claims'] = array(
     'merge_filter' => 'disabled',
     'len' => '255',
     'size' => '20',
-    'id_name' => 'hat_eventmaneger_id_c',
-    'ext2' => 'HAT_EventManeger',
-    'module' => 'HAT_EventManeger',
+    'id_name' => 'hat_incidents_id_c',
+    'ext2' => 'HAT_Incidents',
+    'module' => 'HAT_Incidents',
     'rname' => 'name',
     'quicksearch' => 'enabled',
     'studio' => 'visible',
