@@ -226,28 +226,38 @@ if (curent_module=="AOS_Contracts") {
         r2.colSpan="11";
         //结算周期
         r2.innerHTML="<div class='pull-left' style='width:150px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_SETTLEMENT_PERIOD_C')+":</div>"+
-        "<select tabindex='0' name='product_settlement_period_c[" + prodln + "]' onchange='setProductSettlementPeriodChange(this,"+prodln+");'"+ " id='product_settlement_period_c" + prodln + "'>" + settlement_period_option +"</select></div>";
+        "<select tabindex='0' name='product_settlement_period_c[" + prodln + "]' onchange='setProductSettlementPeriodChange(this,"+prodln+");'"+ " id='product_settlement_period_c" + prodln + "'>" + settlement_period_option +"</select>"+
+        "<div style='width:290px; margin-top:5px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_NEXT_ACCOUNT_DAY')+":</div>"+
+        "<span id='span_product_next_account_day_c"+prodln+"' class='input-group date'>"+
+        "<input type='text' class='date_input pull-left' id='product_next_account_day_c"+prodln+"' name='product_next_account_day_c["+prodln+"]'/>"+
+        "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></span></div></div>";
         //首次结算日
         r2.innerHTML +="<div class='pull-left' style='width:185px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_INITIAL_ACCOUNT_DAY')+":</div>"+
             '<span id="span_product_initial_account_day_c'+prodln+'" class="input-group date" >'+
-            '<input id="product_initial_account_day_c' + prodln + '" class="date_input pull-left" readOnly="readOnly" style="width:75px" autocomplete="off" name="product_initial_account_day_c[' + prodln + ']" value="" title="" tabindex="0" type="text"></span></div>';
+            '<input id="product_initial_account_day_c' + prodln + '" class="date_input pull-left" style="width:75px" autocomplete="off" name="product_initial_account_day_c[' + prodln + ']" value="" title="" tabindex="0" type="text" onchange="setNextDayVal(\'product_\','+prodln+',this)">'+
+            '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span></span></div>';
         //生效日期
-        r2.innerHTML +="<div class='pull-left' style='width:175px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_START_C')+":</div>"+
-            '<span id="span_product_effective_start_c'+prodln+'" class="input-group date show_calendar">'+
-            '<input id="product_effective_start_c' + prodln + '" class="date_input pull-left" style="width:75px" autocomplete="off" name="product_effective_start_c[' + prodln + ']" value="" title="" tabindex="0" type="text" onclick="CalendarShow(this)"><span class="input-group-addon">'+
-            '<span class="glyphicon glyphicon-calendar"></span></span></span></div>';
-        //终止日期
-        r2.innerHTML +="<div class='pull-left' style='width:165px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_END_C')+":</div>"+
+        r2.innerHTML +="<div class='pull-left' style='width:340px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_START_C')+":</div>"+
+            '<span id="span_product_effective_start_c'+prodln+'" class="input-group date show_calendar pull-left">'+
+            '<input id="product_effective_start_c' + prodln + '" class="date_input pull-left" style="width:75px" autocomplete="off" name="product_effective_start_c[' + prodln + ']" value="" title="" tabindex="0" type="text"><span class="input-group-addon">'+
+            '<span class="glyphicon glyphicon-calendar"></span></span></span>'+
+            "<div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_END_C')+":</div>"+
             '<span id="span_product_effective_end_c'+prodln+'" class="input-group date show_calendar">'+
-            '<input id="product_effective_end_c' + prodln + '" class="date_input pull-left" style="width:75px" autocomplete="off" name="product_effective_end_c[' + prodln + ']" value="" title="" tabindex="0" type="text" onclick="CalendarShow(this)"><span class="input-group-addon">'+
-            '<span class="glyphicon glyphicon-calendar"></span></span></span></div>';
+            '<input id="product_effective_end_c' + prodln + '" class="date_input pull-left" style="width:75px" autocomplete="off" name="product_effective_end_c[' + prodln + ']" value="" title="" tabindex="0" type="text"><span class="input-group-addon">'+
+            '<span class="glyphicon glyphicon-calendar"></span></span></span>'+
+            "<div style='width:290px; margin-top:5px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_FINAL_ACCOUNT_DAY')+":</div>"+
+            "<span id='span_product_final_account_day_c"+prodln+"' class='input-group date'>"+
+            "<input type='text' class='date_input pull-left' id='product_final_account_day_c"+prodln+"' name='product_final_account_day_c["+prodln+"]' disabled/>"+
+            "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></span></div></div>";
+        //终止日期
+        
         //说明
         r2.innerHTML +="<div class='pull-left'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_DESCRIPTION')+":</div>"+
                 "<textarea tabindex='116' name='product_item_description[" + prodln + "]' id='product_item_description" + prodln + "' rows='2' cols='23'></textarea></div>";
         //备注
         r2.innerHTML +="<div class='pull-left'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NOTE')+":</div>"+
                 "<textarea tabindex='116' name='product_description[" + prodln + "]' id='product_description" + prodln + "' rows='2' cols='23'></textarea></div>";
-
+        setProductSettlementPeriodChange(document.getElementById('product_settlement_period_c'+prodln),prodln);
         /*var y1 = tablebody.insertRow(-1);
         //y1.style.cssText="display:none";
         var h1 = y1.insertCell(0);
@@ -277,6 +287,7 @@ if (curent_module=="AOS_Contracts") {
     h.innerHTML += "<input type='hidden' name='product_currency[" + prodln + "]' id='product_currency" + prodln + "' value=''><input type='hidden' name='product_deleted[" + prodln + "]' id='product_deleted" + prodln + "' value='0'><input type='hidden' name='product_id[" + prodln + "]' id='product_id" + prodln + "' value=''><button type='button' id='product_delete_line" + prodln + "' class='button' value='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "' tabindex='116' onclick='markLineDeleted(" + prodln + ",\"product_\")'><img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button>";
     addToValidate('EditView','product_product_id'+prodln,'id',true,"Please choose a product");
     prodln++;
+    CalendarShow();
     return prodln - 1;
 }
 
@@ -424,27 +435,37 @@ function formatListPrice(ln){
 
         //结算周期
         r.innerHTML="<div class='pull-left' style='width:150px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_SETTLEMENT_PERIOD_C')+":</div>"+
-        "<select tabindex='0' name='service_settlement_period_c[" + servln + "]' onchange='setServiceSettlementPeriodChange(this,"+servln+");'"+ " id='service_settlement_period_c" + servln + "'>" + settlement_period_option +"</select></div>";
+        "<select tabindex='0' name='service_settlement_period_c[" + servln + "]' onchange='setServiceSettlementPeriodChange(this,"+servln+");'"+ " id='service_settlement_period_c" + servln + "'>" + settlement_period_option +"</select>"+
+        "<div style='width:290px; margin-top:5px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_NEXT_ACCOUNT_DAY')+":</div>"+
+        "<span id='span_service_next_account_day_c"+servln+"' class='input-group date'>"+
+        "<input type='text' class='date_input pull-left' id='service_next_account_day_c"+servln+"' name='service_next_account_day_c["+servln+"]'/>"+
+        "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></span></div></div>";
         //首次结算日
         r.innerHTML +="<div class='pull-left' style='width:185px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_INITIAL_ACCOUNT_DAY')+":</div>"+
             '<span id="span_service_initial_account_day_c'+servln+'" class="input-group date">'+
-            '<input id="service_initial_account_day_c' + servln + '" class="date_input pull-left" readOnly="readOnly" style="width:75px" autocomplete="off" name="service_initial_account_day[' + servln + ']" value="" title="" tabindex="0" type="text"></span></div>';
+            '<input id="service_initial_account_day_c' + servln + '" class="date_input pull-left" readOnly="readOnly" style="width:75px" autocomplete="off" name="service_initial_account_day_c[' + servln + ']" value="" title="" tabindex="0" type="text" onchange="setNextDayVal(\'service_\','+servln+',this)"/>'+
+            '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span></span></div>';
         //生效日期
-        r.innerHTML +="<div class='pull-left' style='width:175px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_START_C')+":</div>"+
-            '<span id="span_service_effective_start_c' + servln + '" class="input-group date show_calendar">'+
-            '<input id="service_effective_start_c' + servln + '" class="date_input pull-left" style="width:75px" autocomplete="off" name="service_effective_start_c[' + servln + ']" value="" title="" tabindex="0" type="text" onclick="CalendarShow(this)"><span class="input-group-addon">'+
-            '<span class="glyphicon glyphicon-calendar"></span></span></span></div>';
-        //终止日期
-        r.innerHTML +="<div class='pull-left' style='width:165px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_END_C')+":</div>"+
+        r.innerHTML +="<div class='pull-left' style='width:340px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_START_C')+":</div>"+
+            '<span id="span_service_effective_start_c' + servln + '" class="input-group date show_calendar pull-left">'+
+            '<input id="service_effective_start_c' + servln + '" class="date_input pull-left" style="width:75px" autocomplete="off" name="service_effective_start_c[' + servln + ']" value="" title="" tabindex="0" type="text"><span class="input-group-addon">'+
+            '<span class="glyphicon glyphicon-calendar"></span></span></span>'+
+            "<div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_END_C')+":</div>"+
             '<span id="span_service_effective_end_c'+ servln +'" class="input-group date show_calendar">'+
-            '<input id="service_effective_end_c' + servln + '" class="date_input pull-left" style="width:75px" autocomplete="off" name="service_effective_end_c[' + servln + ']" value="" title="" tabindex="0" type="text" onclick="CalendarShow(this)"><span class="input-group-addon">'+
-            '<span class="glyphicon glyphicon-calendar"></span></span></span></div>';
+            '<input id="service_effective_end_c' + servln + '" class="date_input pull-left" style="width:75px" autocomplete="off" name="service_effective_end_c[' + servln + ']" value="" title="" tabindex="0" type="text"><span class="input-group-addon">'+
+            '<span class="glyphicon glyphicon-calendar"></span></span></span>'+
+            "<div style='width:290px; margin-top:5px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_FINAL_ACCOUNT_DAY')+":</div>"+
+            "<span id='span_service_final_account_day_c"+servln+"' class='input-group date'>"+
+            "<input type='text' class='date_input pull-left' id='service_final_account_day_c"+servln+"' name='service_final_account_day_c["+servln+"]' disabled/>"+
+            "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></span></div></div>";
+        //终止日期
         //说明
         r.innerHTML +="<div class='pull-left'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_DESCRIPTION')+":</div>"+
                 "<textarea tabindex='116' name='service_item_description[" + servln + "]' id='product_item_description" + servln + "' rows='2' cols='23'></textarea></div>";
         //备注
         r.innerHTML +="<div class='pull-left'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NOTE')+":</div>"+
                 "<textarea tabindex='116' name='service_description[" + servln + "]' id='product_description" + servln + "' rows='2' cols='23'></textarea></div>";
+        setServiceSettlementPeriodChange(document.getElementById('service_settlement_period_c'+servln),servln);
     }else{
         var row=tablebody.insertRow(-1);
         var h1 = row.insertCell(0);
@@ -452,7 +473,6 @@ function formatListPrice(ln){
         h1.style.color = "rgb(68,68,68)";
         h1.innerHTML = "<span style='vertical-align: top;'>" + SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_DESCRIPTION') + " :&nbsp;&nbsp;</span>";
         h1.innerHTML += "<textarea tabindex='116' name='servicet_item_description[" + prodln + "]' id='service_item_description" + prodln + "' rows='2' cols='23'></textarea>&nbsp;&nbsp;";
-
         var i = row.insertCell(1);
         //i.colSpan = "2";
         i.style.color = "rgb(68,68,68)";
@@ -461,7 +481,8 @@ function formatListPrice(ln){
     }
     //End modefy 20161022增加结算周期和日期
     f.innerHTML += "<input type='hidden' name='service_deleted[" + servln + "]' id='service_deleted" + servln + "' value='0'><input type='hidden' name='service_id[" + servln + "]' id='service_id" + servln + "' value=''><button type='button' class='button' id='service_delete_line" + servln + "' value='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "' tabindex='116' onclick='markLineDeleted(" + servln + ",\"service_\")'><img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button><br>";
-
+    //setServiceSettlementPeriodChange($("#service_settlement_period_c"+servln).find("option:selected").val(),servln);
+    CalendarShow();
     servln++;
 
     return servln - 1;
@@ -1161,6 +1182,7 @@ function check_form(formname) {
 function CalendarShow() {//显示日历
   /*var field_name='#span_'+field.getAttribute("id");
   console.log(field_name);*/
+
   var Datetimepicker=$(".show_calendar");
   var dateformat="Y-m-d H:M";
   dateformat = dateformat.replace(/Y/,"yyyy");
@@ -1177,41 +1199,110 @@ function CalendarShow() {//显示日历
  });
 }
 
-function setProductSettlementPeriodChange(field,prodln) {
-  var field_name=field.getAttribute("id");
-  var accountDay=document.getElementById("span_product_initial_account_day_c"+prodln);
-  var accountDayValue=document.getElementById("product_initial_account_day_c"+prodln).value;
+function setProductSettlementPeriodChange(field,prodlns) {
+  /*var field_name=field.getAttribute("id");
+  var accountDay=document.getElementById("span_product_initial_account_day_c"+prodlns);
+  var accountDayValue=document.getElementById("product_initial_account_day_c"+prodlns).value;
+  
+  var html='';*/
   var field_value=field.value; 
-  var html='';
+  var html='<input id="product_next_account_day'+prodlns+'" name="product_next_account_day_c['+prodlns+']" type="hidden">';
+  if ($("#product_final_account_day_c"+prodlns).val()) {
+    $("#product_settlement_period_c"+prodlns).attr('disabled',true);
+    $("#product_next_account_day_c"+prodlns).attr('disabled',true);
+    $("#product_next_account_day_c"+prodlns).next().hide();
+  }
   if (field_value=="Once"){
-     html= '<input class="date_input pull-left" readOnly="readOnly" autocomplete="off" name="product_initial_account_day_c[' + prodln + ']" style="width:75px" id="product_initial_account_day_c' + prodln + '" value="" title="" tabindex="0" type="text">';
+     //html= '<input class="date_input pull-left" disabled="disabled" autocomplete="off" name="product_initial_account_day_c[' + prodlns + ']" style="width:75px" id="product_initial_account_day_c' + prodlns + '" value="" title="" tabindex="0" type="text">';
+    $("#product_initial_account_day_c"+prodlns).val("");
+    //$("#product_next_account_day_c"+prodlns).val("");
+    $("#product_initial_account_day_c"+prodlns).next().hide();
+    $("#product_initial_account_day_c"+prodlns).attr('disabled',true);
+    $("#product_initial_account_day_c"+prodlns).parent().removeClass("show_calendar");
+    $("#span_product_next_account_day_c"+prodlns).addClass('show_calendar');
+    if ($("#product_next_account_day"+prodlns)) {
+        $("#product_next_account_day"+prodlns).remove();
+    }
+    $("#product_next_account_day_c"+prodlns).attr('disabled',false);
+    $("#product_next_account_day_c"+prodlns).next().show();
+ }else{
+     $("#product_initial_account_day_c"+prodlns).next().show();
+     $("#product_initial_account_day_c"+prodlns).attr('disabled',false);
+     $("#product_initial_account_day_c"+prodlns).parent().addClass("show_calendar");
+     $("#span_product_next_account_day_c"+prodlns).removeClass('show_calendar');
+     //$("#product_next_account_day_c"+prodlns).val($("#product_initial_account_day_c"+prodlns).val());
+     $("#product_next_account_day_c"+prodlns).attr('disabled',true);
+     if ($("#product_next_account_day_c"+prodlns).val()) {
+        $("#product_next_account_day_c"+prodlns).next().show();
+        $("#product_next_account_day_c"+prodlns).attr('disabled',false);
+     }else{
+        $("#product_next_account_day_c"+prodlns).next().hide();
+        $("#product_next_account_day_c"+prodlns).after(html);
+        $("#product_next_account_day"+prodlns).val($("#product_initial_account_day_c"+prodlns).val());
+     }
  }
- else{
-     html='<input class="date_input pull-left show_calendar"  autocomplete="off" name="product_initial_account_day_c[' + prodln + ']" style="width:75px" id="product_initial_account_day_c' + prodln + '" value="'+accountDayValue+'" title="" tabindex="0" type="text" onclick="CalendarShow(this)">'+
-     '<span class="input-group-addon">'+
-     '<span class="glyphicon glyphicon-calendar"></span></span>';
-
- }
- accountDay.innerHTML=html;
+ //accountDay.innerHTML=html;
+ CalendarShow();
 }
 
 function setServiceSettlementPeriodChange(field,servln) {
-  var field_name=field.getAttribute("id");
+/*  var field_name=field.getAttribute("id");
   var accountDay=document.getElementById("span_service_initial_account_day_c"+servln);
-  var accountDayValue=document.getElementById("service_initial_account_day_c"+servln).value;
-  $("#service_initial_account_day_c"+servln).val("");
+  var accountDayValue=document.getElementById("service_initial_account_day_c"+servln).value;*/
   var field_value=field.value;
-
-  var html='';
+  var html='<input id="service_next_account_day'+servln+'" name="service_next_account_day_c['+servln+']" type="hidden">';
+ if ($("#service_final_account_day_c"+servln).val()) {
+    $("#service_settlement_period_c"+servln).attr('disabled',true);
+    $("#service_next_account_day_c"+servln).attr('disabled',true);
+    $("#service_next_account_day_c"+servln).next().hide();
+  }
   if (field_value=="Once"){
-     html= '<input class="date_input pull-left" readOnly="readOnly" style="width:75px" autocomplete="off" name="service_initial_account_day_c[' + servln + ']" id="service_initial_account_day_c' + servln + '" value="" title="" tabindex="0" type="text">';
- }
- else{
-     html='<input class="date_input pull-left show_calendar" autocomplete="off" style="width:75px" name="service_initial_account_day_c[' + servln + ']" id="service_initial_account_day_c' + servln + '" value="'+accountDayValue+'" title="" tabindex="0" type="text" onclick="CalendarShow(this)">'+
+
+    //html= '<input class="date_input pull-left" disabled="disabled" style="width:75px" autocomplete="off" name="service_initial_account_day_c[' + servln + ']" id="service_initial_account_day_c' + servln + '" value="" title="" tabindex="0" type="text">';
+    $("#service_initial_account_day_c"+servln).val("");
+   // $("#service_next_account_day_c"+servln).val("");
+    $("#service_initial_account_day_c"+servln).next().hide();
+    $("#service_initial_account_day_c"+servln).attr('disabled',true);
+    $("#service_initial_account_day_c"+servln).parent().removeClass("show_calendar");
+    $("#span_service_next_account_day_c"+servln).addClass('show_calendar');
+    if ($("#service_next_account_day"+servln)) {
+        $("#service_next_account_day"+servln).remove();
+    }
+    $("#service_next_account_day_c"+servln).attr('disabled',false);
+    $("#service_next_account_day_c"+servln).next().show();
+    
+    //$("#span_service_next_account_day_c"+servln).next().show();
+ }else{
+    /* html='<input class="date_input pull-left" autocomplete="off" style="width:75px" name="service_initial_account_day_c[' + servln + ']" id="service_initial_account_day_c' + servln + '" value="'+accountDayValue+'" title="" tabindex="0" type="text">'+
      '<span class="input-group-addon">'+
-     '<span class="glyphicon glyphicon-calendar"></span></span>';
+     '<span class="glyphicon glyphicon-calendar"></span></span>';*/
+     $("#service_initial_account_day_c"+servln).next().show();
+     $("#service_initial_account_day_c"+servln).attr('disabled',false);
+     $("#service_initial_account_day_c"+servln).parent().addClass("show_calendar");
+     $("#span_service_next_account_day_c"+servln).removeClass('show_calendar');
+     //$("#service_next_account_day_c"+servln).val($("#service_initial_account_day_c"+servln).val());
+    // $("#service_next_account_day"+servln).val($("#service_initial_account_day_c"+servln).val());
+     $("#service_next_account_day_c"+servln).attr('disabled',true);
+     if ($("#service_next_account_day_c"+servln).val()) {
+        $("#service_next_account_day_c"+servln).next().show();
+        $("#service_next_account_day_c"+servln).attr('disabled',false);
+     }else{
+        $("#service_next_account_day_c"+servln).next().hide();
+        $("#service_next_account_day_c"+servln).after(html);
+        $("#service_next_account_day"+servln).val($("#product_initial_account_day_c"+servln).val());
+     }
  }
- accountDay.innerHTML=html;
+ //accountDay.innerHTML=html;
+ CalendarShow();
+}
+
+function setNextDayVal(key,num,ipt) {
+    var id="#"+key+"next_account_day_c"+num;
+    var id_hidden="#"+key+"next_account_day"+num;
+    if (!$(id).val()) {
+        $(id).val($(ipt).val());
+        $(id_hidden).val($(ipt).val());
+    }
 }
 
 function replace_display_lines(linesHtml) {

@@ -1,7 +1,4 @@
-<?php 
- //WARNING: The contents of this file are auto-generated
-
-
+<?php
 $job_strings[] = 'CreateRevenuesFromContract';
 function CreateRevenuesFromContract()
 {
@@ -27,5 +24,4 @@ function CreateRevenuesFromContract()
 
 	return true;
 }
-
 ?>

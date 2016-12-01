@@ -1,9 +1,5 @@
-<?php 
- //WARNING: The contents of this file are auto-generated
-
-
+<?php
 
 $mod_strings['LBL_CREATEREVENUESFROMCONTRACT']='Create Revenues From Contracts';
-
 
 ?>

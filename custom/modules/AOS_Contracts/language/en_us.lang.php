@@ -27,4 +27,8 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL1' => 'Basic Information',
     'LBL_SETTLEMENT_PERIOD_C' => 'Settlement Period',
   'LBL_INITIAL_ACCOUNT_DAY' => 'Initial Account Day',
+  'LBL_CREATE_REVENUE'=>'Create Revenues',
+   'LBL_HAOS_REVENUES_QUOTES'=>'收支计费项',
+  'LBL_NEXT_ACCOUNT_DAY'=>'下一次结算日期',
+  'LBL_FINAL_ACCOUNT_DAY'=>'最后一次结算日期',
   );

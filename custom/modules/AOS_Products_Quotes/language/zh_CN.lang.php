@@ -1,5 +1,5 @@
 <?php
-// created: 2016-10-21 17:09:51
+// created: 2016-11-29 17:38:03
 $mod_strings = array (
   'LBL_SETTLEMENT_PERIOD_C' => '结算周期',
   'LBL_INITIAL_ACCOUNT_DAY' => '首次结算日',
@@ -47,7 +47,6 @@ $mod_strings = array (
   'LBL_AOS_PRODUCTS_QUOTES_SUBPANEL_TITLE' => '产品报价',
   'LBL_FLEX_RELATE' => '关联到',
   'LBL_PRODUCT' => '产品',
-
   'LBL_SERVICE_MODULE_NAME' => '服务',
   'LBL_LIST_NUM' => '编号',
   'LBL_PARENT_ID' => '上级ID',
@@ -60,4 +59,6 @@ $mod_strings = array (
   'LBL_PRODUCT_DISCOUNT_AMOUNT_USDOLLAR' => '优惠总计(默认货币)',
   'LBL_VAT_AMT_USDOLLAR' => '税费总计(默认货币)',
   'LBL_PRODUCTS_SERVICES' => 'Product / Service',
-  );
+  'LBL_NEXT_ACCOUNT_DAY' => '下次结算日期',
+  'LBL_FINAL_ACCOUNT_DAY' => '最后结算日期',
+);

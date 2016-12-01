@@ -31,4 +31,8 @@ $mod_strings = array (
   'LBL_EFFECTIVE_START_C' =>'生效日期',
   'LBL_EFFECTIVE_END_C' =>'终止日期',
   'LBL_UOM_NAME_C'=>'单位',
+  'LBL_CREATE_REVENUE'=>'创建收支项',
+  'LBL_HAOS_REVENUES_QUOTES'=>'收支计费项',
+  'LBL_NEXT_ACCOUNT_DAY'=>'下一次结算日期',
+  'LBL_FINAL_ACCOUNT_DAY'=>'最后一次结算日期',
 );

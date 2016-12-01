@@ -205,18 +205,19 @@
 
 		if (isset($_REQUEST['mode'])&&$_REQUEST['mode']=='MultiSelect'){//如果有值就多选模式
  			echo '<input type="hidden" name="mode" value="MultiSelect">';
+    			//多选区
+			echo '<div id="MultiSelectDiv" class="dropdown">
+					<span id="MultiSelectCount">0</span><span> Object(s) has been selected.</span>
+					<input class="button" type="button" id="MassUpdate_select_button" value="选择" onclick="send_back_selected(\'HAT_Assets\',document.popup_query_form,\'mass[]\',\'继续之前请选择。\');">
+					<div id="MultiSelectList" class="dropdown-menu"></div>
+				</div>';
+			echo '<input type="hidden" name="select_entire_list" value="0">';
+			echo '<input type="hidden" name="current_query_by_page" value="">';
 		}
 
     	echo '<input type="hidden" name="request_data" >'; //所有的参数都存在在这里，参数会被自动填充
     	//注意这里有form暂时没有关闭，在下面继续加入字段后再关闭
-    			//多选区
-		echo '<div id="MultiSelectDiv" class="dropdown">
-				<span id="MultiSelectCount">0</span><span> Object(s) has been selected.</span>
-				<input class="button" type="button" id="MassUpdate_select_button" value="选择" onclick="send_back_selected(\'HAT_Assets\',document.popup_query_form,\'mass[]\',\'继续之前请选择。\');">
-				<div id="MultiSelectList" class="dropdown-menu"></div>
-			</div>';
-		echo '<input type="hidden" name="select_entire_list" value="0">';
-		echo '<input type="hidden" name="current_query_by_page" value="">';
+
     	echo '</form>';
 
 	} else {
