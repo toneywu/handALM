@@ -11,7 +11,7 @@ $current_status = $ham_wo_bean->wo_status;
 echo '<select name="target_wo_status" id="target_wo_status"'.'>';
 foreach($app_list_strings['ham_wo_status_list'] as $key=>$value){
 	
-if($current_status=="DRAFT"){
+if($current_status=="DRAFT"||$current_status=="RETURNED"){
 	if($key=="SUBMITTED"||$key=="CLOSED"){
 		echo '<option value="'.$key.'">'.$value.'</option>';
 	}

@@ -79,7 +79,7 @@ $mod_strings = array (
   'LBL_LINE_QTY'=>'数量',
   'LBL_LINE_PRICE'=>'单价',
   'LBL_SOURCE_TYPE'=>'来源类型',
-  'LBL_SOURCE_REFERENCE'=>'来源参考',
+  'LBL_SOURCE_REFERENCE'=>'备注',
   'LBL_SOURCE_ID'=>'来源ID',
   'LBL_RECEIVED_DATE'=>'接收日期',
 );

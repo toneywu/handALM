@@ -109,6 +109,15 @@ array (
             'label' => 'LBL_CURRENCY',
           ),
         ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'source_reference',
+            'label' => 'LBL_SOURCE_REFERENCE',
+          ),
+          1 => '',
+        ),
       ),
     ),
   ),

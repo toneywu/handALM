@@ -91,8 +91,14 @@ function sync_jt_accounts() {
 	$frame_bean = BeanFactory :: getBean('HAA_Frameworks')->retrieve_by_string_fields(array (
 		'code' => 'ChinaCache'
 	));
+	
 	$GLOBALS['log']->infor("frameWorkId=" . $frame_bean->id);
 	$GLOBALS['log']->infor(count($json_array));
+	
+	$custom_type = BeanFactory :: getBean('HAA_Codes')->retrieve_by_string_fields(array (
+				'code_type' => 'accounts_business_type',
+				'name' => '外部客户'));
+
 	$num = count($json_array);
 	for ($i = 0; $i < $num; ++ $i) {
 
@@ -119,19 +125,11 @@ function sync_jt_accounts() {
 		while ($resule_asset = $db->fetchByAssoc($result)) {
 			$rows = $resule_asset['cnt'];
 		}
-		//$GLOBALS['log']->infor("rows=" . $rows . ",sql =" . $sql . ",key = " . $i . "<br>");
-		//是否创建客户
 		if ($rows == 0) {
-			echo 'customer_name= ' . $customer_name_val . ',product_code = ' . $product_code_val . ",key = " . $i . "<br>";
 			//业务类型默认为一般客户，给相应字段设置ID值
-			$check_customer_biz_types = BeanFactory :: getBean('HAA_Codes')->retrieve_by_string_fields(array (
-				'code_type' => 'accounts_business_type',
-				'name' => '外部客户'
-			));
-			if ($check_customer_biz_types) {
-				$customer_bean->haa_codes_id1_c = $check_customer_biz_types->id;
+			if ($custom_type) {
+				$customer_bean->haa_codes_id1_c = $custom_type->id;
 			}
-			echo 'haa_codes_id = ' . $customer_bean->haa_codes_id1_c;
 			// ERP别名设置给组织简称
 			if (!empty ($known_as_val)) {
 				$customer_bean->name = $known_as_val;
@@ -182,6 +180,7 @@ function sync_jt_accounts() {
 			$customer_bean->attribute1_c = $owning_su_desc_val;
 			$customer_bean->sales_note_c = $customer_business_val;
 			$customer_bean->haa_frameworks_id_c = $frame_bean->id;
+			
 			$account_id = create_guid();
 			$insert_sql = 'insert into accounts(id,name,billing_address_street,billing_address_city,billing_address_state,billing_address_country,shipping_address_street,shipping_address_city,shipping_address_state,shipping_address_country)
 						value("' . $account_id . '","' . $customer_bean->name . '","' . $address_val . '","' . $city_val . '","' . $province_val . '","' . $country_val . '","' . $address_val . '","' . $city_val . '","' . $province_val . '","' . $country_val . '") ';
@@ -192,48 +191,57 @@ function sync_jt_accounts() {
 									         responsible_person_note_c,haa_codes_id_c,is_le_c,is_customer_c,attribute2_c,attribute3_c,attribute1_c,haa_frameworks_id_c,sales_note_c,service_note_c,contact_id_c)
 										     value("' . $account_id . '","' . $customer_bean->haa_codes_id1_c . '","' . $customer_bean->full_name_c . '","' . $customer_bean->organization_number_c . '","' . $customer_bean->org_type_c . '","' . $customer_bean->account_id_c . '","' . $customer_bean->responsible_person_note_c . '","' . $customer_bean->haa_codes_id_c . '","' . $customer_bean->is_le_c . '","' . $customer_bean->is_customer_c . '","' . $customer_bean->attribute2_c . '","' . $customer_bean->attribute3_c . '","' . $customer_bean->attribute1_c . '","' . $frame_bean->id . '","' . $customer_bean->sales_note_c . '","' . $customer_bean->service_note_c . '","'.$customer_bean->contact_id_c.'") ';
 			$insert_cstm_result = $db->query($insert_cstm_sql);
+			
 			$GLOBALS['log']->infor("insert_cstm_sql = " . $insert_cstm_sql);
 		} else {
 			$sql = 'SELECT accounts.id  FROM accounts INNER JOIN accounts_cstm WHERE accounts.id = accounts_cstm.id_c and accounts.deleted=0 AND accounts_cstm.organization_number_c ="' . $customer_id_val . '"';
 			$result = $db->query($sql);
-			$GLOBALS['log']->infor("select_sql = ".$sql);
 			while ($resule_asset = $db->fetchByAssoc($result)) {
 				$contacts_cstm_id = $resule_asset["id"];
 			}
 			
-			if(!empty($known_as_val)){
+			if(!empty($known_as_val)||$known_as_val!=""){
 				$customer_bean->name = $known_as_val;
 				$customer_bean->full_name_c = $customer_name_val;
 			}else{
 				$customer_bean->name = $customer_name_val;
-			}
+				$customer_bean->full_name_c = $customer_name_val;
+			}			
 			$check_contacts_sql = 'SELECT contacts.id  FROM contacts INNER JOIN contacts_cstm WHERE contacts.id = contacts_cstm.id_c and contacts.deleted=0 AND contacts_cstm.chinese_name_c ="' . $salers_id_val . '"';
 			$check_contacts_result = $db->query($check_contacts_sql);
 			while ($resule_asset = $db->fetchByAssoc($check_contacts_result)) {
 				$customer_bean->contact_id_c = $resule_asset["id"];
 			}
-			$update_sql = 'update accounts_cstm a set a.full_name_c="'.$customer_bean->full_name_c.'",a.contact_id_c="'.$customer_bean->contact_id_c.'" where a.id_c="'.$contacts_cstm_id.'"';
-			$GLOBALS['log']->infor("update_sql=".$update_sql);
-			$result = $db->query($update_sql);
+			
+			$update_cstm_sql = 'update accounts_cstm a set a.full_name_c="'.$customer_bean->full_name_c.'",a.contact_id_c="'.$customer_bean->contact_id_c.'" where a.id_c="'.$contacts_cstm_id.'"';
+			$result = $db->query($update_cstm_sql);
+			$GLOBALS['log']->infor("update_cstm_sql=".$update_cstm_sql);
+			
 			$update_sql = 'update accounts a set a.name="'.$customer_bean->name.'" where a.id="'.$contacts_cstm_id.'"';
-			$GLOBALS['log']->infor("update_sql=".$update_sql);
 			$result = $db->query($update_sql);
-			
-			
+			$GLOBALS['log']->infor("update_sql=".$update_sql);
 		}
 	}
 	$GLOBALS['log']->infor("end   sync jt customer data");
 	return true;
 }
+
 function sync_jt_contracts() {
 	global $db;
 	$soap_util_bean = new SoapUtil();
-	$json_array = $soap_util_bean->call_soap_ws("CONTRACT", "JT");
+	$json_array = $soap_util_bean->call_soap_ws("CONTRACT", "JT",'2014-01-01','2014-02-01');
 	$GLOBALS['log']->infor("begin to sync jt contracts data");
 	//$GLOBALS['log']->infor($json_array);
+	
 	$frame_bean = BeanFactory :: getBean('HAA_Frameworks')->retrieve_by_string_fields(array (
 		'code' => 'ChinaCache'
 	));
+	
+	$contract_fix_type = BeanFactory :: getBean('HAA_Codes')->retrieve_by_string_fields(array (
+		'code_type' => 'contract_type',
+		'name'=>'集团',
+	));
+	$GLOBALS['log']->infor(count($json_array));
 	//处理数据
 	foreach ($json_array as $key => $record) {
 		$h_contract_header_id_val = $record['CONTRACT_HEADER_ID'];
@@ -254,18 +262,16 @@ function sync_jt_contracts() {
 		$flow_status_name_val = $record['FLOW_STATUS_NAME'];
 		$frame_contract_num_val = $record['FRAME_CONTRACT_NUM'];
 		//判断是否数据库是否已经存在这个合同 如果存在则不插入
-		//$check_exists = BeanFactory :: getBean('AOS_Contracts')->get_full_list('', "aos_contracts_cstm.data_source_id_c = '$h_contract_header_id_val'");
-		
+
 		$sql = 'SELECT count(1) cnt FROM aos_contracts INNER JOIN aos_contracts_cstm WHERE aos_contracts.id = aos_contracts_cstm.id_c and aos_contracts.deleted=0 AND aos_contracts_cstm.data_source_id_c ="' . $h_contract_header_id_val . '"';
 		$result = $db->query($sql);
 		$rows = 0;
+		$GLOBALS['log']->infor("check_sql  = " . $sql);
 		while ($resule_asset = $db->fetchByAssoc($result)) {
 			$rows = $resule_asset['cnt'];
 		}
 		
 		if ($rows == 0) {
-			//系统中不存在才开始创建
-			//$newBean = BeanFactory :: getBean('AOS_Contracts');
 			$newBean->data_source_id_c = $h_contract_header_id_val;
 			//通过商业机会找商业机会的relatedId
 			$opportunities_sql = 'SELECT opportunities.id  FROM opportunities  WHERE opportunities.deleted=0 and opportunities.name ="' . $org_name_val . '"';
@@ -274,12 +280,6 @@ function sync_jt_contracts() {
 				$record_val = $opportunities_record['id'];
 				$newBean->opportunity_id = $record_val;
 			}
-			$GLOBALS['log']->infor("opportunities_sql=".$opportunities_sql);
-			/*$opportunities_list = BeanFactory :: getBean('Opportunities')->get_full_list('', "opportunities.name = '$org_name_val'");
-			if (count($opportunities_list) != 0) {
-				$newBean->opportunity_id = $opportunities_list[0]->id;
-			}*/
-
 			//通过客户名称找客户的relatedId
 			$contract_account_sql = 'SELECT accounts.id  FROM accounts  WHERE accounts.deleted=0 and accounts.name ="' . $sold_to_org_name_val . '"';
 			$contract_account_result = $db->query($contract_account_sql);
@@ -287,23 +287,13 @@ function sync_jt_contracts() {
 				$record_val = $contract_account_record['id'];
 				$newBean->contract_account_id = $record_val;
 			}
-			$GLOBALS['log']->infor("contract_account_sql=".$contract_account_sql);
-			/*$opportunities_list = BeanFactory :: getBean('Accounts')->get_full_list('', "accounts.name = '$sold_to_org_name_val'");
-			if (count($opportunities_list) != 0) {
-				$newBean->contract_account_id = $opportunities_list[0]->id;
-			}*/
-
 			//business_type
-			$business_sql = 'SELECT users.id  FROM users  WHERE users.last_name ="' . $salesrep_name_val . '"';
+			$business_sql = 'SELECT haa_codes.id  FROM haa_codes  WHERE haa_codes.name ="' . $sale_unit_val . '"';
 			$business_result = $db->query($business_sql);
 			while ($business_record = $db->fetchByAssoc($business_result)) {
 				$record_val = $business_record['id'];
 				$newBean->haa_codes_id1_c = $record_val;
 			}
-			/*$business_list = BeanFactory :: getBean('HAA_Codes')->get_full_list('', "haa_codes.name = '$sale_unit_val'");
-			if (count($business_list) != 0) {
-				$newBean->haa_codes_id1_c = $business_list[0]->id;
-			}*/
 
 			//salesrep_name
 			$users_sql = 'SELECT users.id  FROM users  WHERE users.last_name ="' . $salesrep_name_val . '"';
@@ -312,11 +302,6 @@ function sync_jt_contracts() {
 				$record_val = $users_record['id'];
 				$newBean->assigned_user_id = $record_val;
 			}
-		
-			/*$salesrep_list = BeanFactory :: getBean('Users')->get_full_list('', "users.last_name = '$salesrep_name_val'");
-			if (count($salesrep_list) != 0) {
-				$newBean->assigned_user_id = $salesrep_list[0]->id;
-			}*/
 
 			//Media Type
 			$media_type_sql = 'SELECT haa_codes.id  FROM haa_codes  WHERE haa_codes.name ="' . $contract_type_val . '"';
@@ -325,10 +310,6 @@ function sync_jt_contracts() {
 				$record_val = $media_type_record['id'];
 				$newBean->haa_codes_id2_c = $record_val;
 			}
-			/*$media_type_list = BeanFactory :: getBean('HAA_Codes')->get_full_list('', "haa_codes.name = '$contract_type_val'");
-			if (count($media_type_list) != 0) {
-				$newBean->haa_codes_id2_c = $media_type_list[0]->id;
-			}*/
 
 			//TYPE
 			$type_sql = 'SELECT haa_codes.id  FROM haa_codes  WHERE haa_codes.name ="' . $order_type_name_val . '"';
@@ -337,11 +318,7 @@ function sync_jt_contracts() {
 				$record_val = $type_record['id'];
 				$newBean->haa_codes_id_c = $record_val;
 			}
-			/*$type_list = BeanFactory :: getBean('HAA_Codes')->get_full_list('', "haa_codes.name = '$order_type_name_val'");
-			if (count($type_list) != 0) {
-				$newBean->haa_codes_id_c = $type_list[0]->id;
-			}*/
-
+			
 			//revision
 			$revision_sql = 'SELECT hpr_am_roles.id  FROM hpr_am_roles  WHERE hpr_am_roles.name ="' . $frame_contract_num_val . '"';
 			$revision_result = $db->query($revision_sql);
@@ -349,18 +326,19 @@ function sync_jt_contracts() {
 				$record_val = $revision_record['id'];
 				$newBean->contract_revision_c = $record_val;
 			}
-			/*$revision_list = BeanFactory :: getBean('HPR_AM_Roles')->get_full_list('', "hpr_am_roles.name = '$frame_contract_num_val'");
-			if (count($revision_list) != 0) {
-				$newBean->revision_c = $revision_list[0]->id;
-			}*/
+			
 			$newBean->name = $sales_document_name_val;
 			$status_code = array_search($flow_status_name_val, $app_list_strings['contract_type_list'], true);
 			$newBean->status = $status_code;
 			$newBean->contract_number_c = $order_number_val;
 			$newBean->start_date = $h_start_date_active_val;
 			$newBean->end_date = $h_end_date_active_val;
+			
+			if($h_end_date_active_val==""||empty($h_end_date_active_val)){
+				$newBean->end_date=null;
+			}
 			$newBean->data_source_id_c = $h_contract_header_id_val;
-			$newBean->attribute1_c = $org_name_val;
+			$newBean->attribute1_c = $order_type_name_val;
 			$newBean->attribute2_c = $sale_unit_val;
 			$newBean->attribute3_c = $contract_type_val;
 			//$newBean->attribute4_c=$sales_document_name_val;
@@ -384,11 +362,21 @@ function sync_jt_contracts() {
 				 '","' . $sales_document_name_val . 
 				 '","' . $status . 
 				 '","' . $newBean->opportunity_id . 
-				 '","' . $newBean->contract_account_id . 
-				 '","' . $newBean->start_date . 
-				 '","' . $newBean->end_date . 
-				 '","' . $newBean->assigned_user_id . 
-				 '") ';
+				 '","' . $newBean->contract_account_id.'"';
+			
+			if(!empty($newBean->start_date)){
+				$insert_sql =$insert_sql.',"'.$newBean->start_date.'"';
+			}else{
+				$insert_sql =$insert_sql.',NULL,';
+			}
+			
+			if(!empty($newBean->end_date)){
+				$insert_sql =$insert_sql.',"'.$newBean->end_date.'"';
+			}else{
+				$insert_sql =$insert_sql.',NULL';
+			}
+			
+			$insert_sql =$insert_sql.',"'.$newBean->assigned_user_id.'")';	 
 			$insert_result = $db->query($insert_sql);
 			
 			$insert_cstm_sql = 'insert into aos_contracts_cstm(
@@ -410,21 +398,28 @@ function sync_jt_contracts() {
 				 "' . $contact_id . 
 				 '","' . $newBean->haa_codes_id1_c . 
 				 '","' . $newBean->haa_codes_id2_c . 
-				 '","' . $newBean->haa_codes_id_c . 
-				 '","' . $newBean->revision_c . 
-				 '","' . order_number_val . 
+				 '","' . $contract_fix_type->id.'"';
+			if($newBean->revision_c==""||empty($newBean->revision_c)){
+				$insert_cstm_sql=$insert_cstm_sql.',NULL';
+			}else{
+				$insert_cstm_sql=$insert_cstm_sql.',"' . $newBean->revision_c.'"';
+			}
+			
+			$insert_cstm_sql=$insert_cstm_sql.',"' . $order_number_val . 
 				 '","' . $newBean->data_source_id_c . 
-				 '","' . $newBean->attribute1_c . 
+				 '","' . $order_type_name_val . 
 				 '","' . $newBean->attribute2_c . 
 				 '","' . $newBean->attribute3_c . 
 				 '","' . $newBean->attribute4_c . 
 				 '","' . $newBean->attribute5_c . 
 				 '","' . $newBean->attribute6_c . 
-				 '","'.$frame_bean->id.'") ';
+				 '","'.$frame_bean->id.'") ';	 
 			$insert_cstm_result = $db->query($insert_cstm_sql);
+			
 			$GLOBALS['log']->infor("insert_cstm_sql = " . $insert_cstm_sql);
 			
 			$GLOBALS['log']->infor("header_id = " . $newBean->id . ",header_name=" . $sales_document_name_val . ",org_name_val=" . $org_name_val . ",sold_to_org_name_val" . $sold_to_org_name_val . ",sale_unit_val=" . $sale_unit_val . ",salesrep_name_val=" . $salesrep_name_val . ",contract_type_val=" . $contract_type_val . ",order_type_name_val" . $order_type_name_val . ",frame_contract_num_val=" . $frame_contract_num_val . ",start_date=" . $h_start_date_active_val);
+			
 			foreach ($record['LINES'] as $line_key => $line_value) {
 				$contract_line_id_val = $line_value['CONTRACT_LINE_ID'];
 				$line_num_val = $line_value['LINE_NUM'];
@@ -440,9 +435,8 @@ function sync_jt_contracts() {
 				$end_date_active_val = $line_value['END_DATE_ACTIVE'];
 				$formula_type_code_val = $line_value['FORMULA_TYPE_CODE'];
 				$GLOBALS['log']->infor("line_id= " . $contract_line_id_val . ",LINE_NUMBER=" . $line_num_val . ",item_number_val=" . $item_number_val . ",inventory_item_name_val=" . $inventory_item_name_val."producty_quantity= ".$quantity_val);
-				//$check_line_exists = BeanFactory :: getBean('AOS_Products_Quotes')->get_full_list('', "aos_products_quotes.product_source_id_c = '$contract_line_id_val'");
 				
-				$sql = 'SELECT count(1) cnt FROM aos_products_quotes INNER JOIN aos_products_quotes_cstm WHERE aos_products_quotes.id = aos_products_quotes_cstm.id_c and aos_products_quotes.deleted=0 AND aos_products_quotes_cstm.product_source_id_c ="' . $contract_line_id_val . '"';
+				$sql = 'SELECT count(1) cnt FROM aos_products_quotes INNER JOIN aos_products_quotes_cstm WHERE aos_products_quotes.id = aos_products_quotes_cstm.id_c and aos_products_quotes.deleted=0 AND aos_products_quotes_cstm.product_source_id_c ="' . $contract_line_id_val . '" and aos_products_quotes.parent_id="'.$contact_id.'"';
 				$result = $db->query($sql);
 				$rows = 0;
 				while ($resule_asset = $db->fetchByAssoc($result)) {
@@ -454,10 +448,6 @@ function sync_jt_contracts() {
 					$newLineBean->data_source_id_c = $contract_line_id_val;
 					$newLineBean->name = $inventory_item_name_val;
 					//INVENTORY_ITEM_name
-					/*$item_list = BeanFactory :: getBean('AOS_Products')->get_full_list('', "aos_products.part_number = '$item_number_val'");
-					if (count($item_list) != 0) {
-						$newLineBean->product_id = $item_list[0]->id;
-					}*/
 					$item_list_sql = 'SELECT aos_products.id  FROM aos_products  WHERE aos_products.deleted=0 and aos_products.part_number ="' . $item_number_val . '"';
 					$item_list_result = $db->query($item_list_sql);
 					while ($item_list_record = $db->fetchByAssoc($item_list_result)) {
@@ -476,7 +466,6 @@ function sync_jt_contracts() {
 					$newLineBean->effective_end_c = $end_date_active_val;
 					$newLineBean->parent_type = 'AOS_Contracts';
 					$newLineBean->product_source_id_c = $contract_line_id_val;
-					//$newLineBean->save();
 					$aos_products_quotes_id = create_guid();
 					$insert_sql = 'insert into aos_products_quotes(
 									 id
@@ -486,6 +475,7 @@ function sync_jt_contracts() {
 									,vat_amt
 									,product_qty
 									,item_description
+									,parent_id
 									,parent_type)
 									 value(
 									 "' . $aos_products_quotes_id . 
@@ -495,7 +485,8 @@ function sync_jt_contracts() {
 									 '","' . $newLineBean->vat_amt . 
 									 '","' . $newLineBean->product_qty . 
 									  '","' . $formula_type_code_val . 
-									 '","' . $newLineBean->parent_type .
+									  '","' . $contact_id . 
+									  '","' . $newLineBean->parent_type .
 									 '") ';
 						$insert_result = $db->query($insert_sql);
 						$GLOBALS['log']->infor("effective_end_c=".$newLineBean->effective_end_c);
@@ -515,6 +506,19 @@ function sync_jt_contracts() {
 				}
 			}
 			
+		}else{
+			//更新合同状态
+			$status_code = array_search($flow_status_name_val, $app_list_strings['contract_type_list'], true);
+			$sql = 'SELECT aos_contracts.id cnt FROM aos_contracts INNER JOIN aos_contracts_cstm WHERE aos_contracts.id = aos_contracts_cstm.id_c and aos_contracts.deleted=0 AND aos_contracts_cstm.data_source_id_c ="' . $h_contract_header_id_val . '"';
+			$result = $db->query($sql);
+			while ($resule_asset = $db->fetchByAssoc($result)) {
+				$contract_id = $resule_asset['id'];
+			}
+			$contract_bean = BeanFactory::getBean('AOS_Contracts',$contract_id);
+			if($contract_bean->status!=$status_code){
+				$contract_bean->status=$status_code;
+				$contract_bean->save();
+			}
 		}
 	}
 	$GLOBALS['log']->infor("end   sync jt contracts data");
@@ -522,10 +526,11 @@ function sync_jt_contracts() {
 }
 
 function sync_jt_po_infos() {
+	global $db;
 	$soap_util_bean = new SoapUtil();
-	$json_array = $soap_util_bean->call_soap_ws("PO", "JT");
+	$json_array = $soap_util_bean->call_soap_ws("PO", "JT",'2010-01-01','2016-12-31');
 	$GLOBALS['log']->infor("begin to sync jt PO Infos data");
-	$GLOBALS['log']->infor($json_array);
+	//$GLOBALS['log']->infor($json_array);
 	//业务框架
 	$frame_bean = BeanFactory :: getBean('HAA_Frameworks')->retrieve_by_string_fields(array (
 		'code' => 'ChinaCache'
@@ -549,6 +554,7 @@ function sync_jt_po_infos() {
 				$line_num_val = $line_value['LINE_NUM'];
 				$po_header_id_val = $line_value['PO_HEADER_ID'];
 				$inventory_item_id_val = $line_value['ITEM_ID'];
+				$item_num_val = $line_value['ITEM_NUM'];
 				$item_description_val = $line_value['ITEM_DESCRIPTION'];
 				$unit_val = $line_value['UNIT'];
 				$quantity_val = $line_value['QUANTITY'];
@@ -569,12 +575,13 @@ function sync_jt_po_infos() {
 					$newLineBean->description = $comments_val;
 					$newLineBean->source_type = $instance_name_val;
 					$newLineBean->line_num = $line_num_val;
-					$newLineBean->item_num = $inventory_item_id_val;
+					$newLineBean->item_num = $item_num_val;
 					$newLineBean->line_qty = $quantity_val;
 					$newLineBean->line_price = $unit_price_val;
 					$newLineBean->source_reference = $prod_name_val;
 					$newLineBean->haa_frameworks_id = $frame_id;
 					$newLineBean->source_id = $po_line_id_val;
+					$newLineBean->haa_frameworks_id = $frame_bean->id;
 					$newLineBean->save();
 				}
 			}
@@ -587,18 +594,18 @@ function sync_jt_po_infos() {
 function sync_xr_accounts() {
 	global $db;
 	$soap_util_bean = new SoapUtil();
-	$json_array = $soap_util_bean->call_soap_ws("PO", "XR");
+	$json_array = $soap_util_bean->call_soap_ws("CUSTOMER", "XR");
 	$GLOBALS['log']->infor("begin to sync xr customer data");
-	$GLOBALS['log']->infor($json_array);
-	//处理数据
+	//$GLOBALS['log']->infor($json_array);
+	$custom_type = BeanFactory :: getBean('HAA_Codes')->retrieve_by_string_fields(array (
+				'code_type' => 'accounts_business_type',
+				'name' => '外部客户'));
+	
 	$frame_bean = BeanFactory :: getBean('HAA_Frameworks')->retrieve_by_string_fields(array (
-		'code' => 'ChinaCache'
-	));
-	$GLOBALS['log']->infor("frameWorkId=" . $frame_bean->id);
-	$GLOBALS['log']->infor(count($json_array));
+		'code' => 'ChinaCache'));
+		
 	$num = count($json_array);
 	for ($i = 0; $i < $num; ++ $i) {
-
 		$record = $json_array[$i];
 		$customer_id_val = $record['CUSTOMER_ID'];
 		$customer_name_val = $record['CUSTOMER_NAME'];
@@ -622,19 +629,12 @@ function sync_xr_accounts() {
 		while ($resule_asset = $db->fetchByAssoc($result)) {
 			$rows = $resule_asset['cnt'];
 		}
-		$GLOBALS['log']->infor("rows=" . $rows . ",sql =" . $sql . ",key = " . $i . "<br>");
 		//是否创建客户
 		if ($rows == 0) {
-			echo 'customer_name= ' . $customer_name_val . ',product_code = ' . $product_code_val . ",key = " . $i . "<br>";
 			//业务类型默认为一般客户，给相应字段设置ID值
-			$check_customer_biz_types = BeanFactory :: getBean('HAA_Codes')->retrieve_by_string_fields(array (
-				'code_type' => 'accounts_business_type',
-				'name' => '外部客户'
-			));
-			if ($check_customer_biz_types) {
-				$customer_bean->haa_codes_id1_c = $check_customer_biz_types->id;
+			if ($custom_type) {
+				$customer_bean->haa_codes_id1_c = $custom_type->id;
 			}
-			echo 'haa_codes_id = ' . $customer_bean->haa_codes_id1_c;
 			// ERP别名设置给组织简称
 			if (!empty ($known_as_val)) {
 				$customer_bean->name = $known_as_val;
@@ -685,6 +685,7 @@ function sync_xr_accounts() {
 			$customer_bean->attribute1_c = $owning_su_desc_val;
 			$customer_bean->sales_note_c = $customer_business_val;
 			$customer_bean->haa_frameworks_id_c = $frame_bean->id;
+			
 			$account_id = create_guid();
 			$insert_sql = 'insert into accounts(id,name,billing_address_street,billing_address_city,billing_address_state,billing_address_country,shipping_address_street,shipping_address_city,shipping_address_state,shipping_address_country)
 						value("' . $account_id . '","' . $customer_bean->name . '","' . $address_val . '","' . $city_val . '","' . $province_val . '","' . $country_val . '","' . $address_val . '","' . $city_val . '","' . $province_val . '","' . $country_val . '") ';
@@ -695,34 +696,35 @@ function sync_xr_accounts() {
 									         responsible_person_note_c,haa_codes_id_c,is_le_c,is_customer_c,attribute2_c,attribute3_c,attribute1_c,haa_frameworks_id_c,sales_note_c,service_note_c,contact_id_c)
 										     value("' . $account_id . '","' . $customer_bean->haa_codes_id1_c . '","' . $customer_bean->full_name_c . '","' . $customer_bean->organization_number_c . '","' . $customer_bean->org_type_c . '","' . $customer_bean->account_id_c . '","' . $customer_bean->responsible_person_note_c . '","' . $customer_bean->haa_codes_id_c . '","' . $customer_bean->is_le_c . '","' . $customer_bean->is_customer_c . '","' . $customer_bean->attribute2_c . '","' . $customer_bean->attribute3_c . '","' . $customer_bean->attribute1_c . '","' . $frame_bean->id . '","' . $customer_bean->sales_note_c . '","' . $customer_bean->service_note_c . '","'.$customer_bean->contact_id_c.'") ';
 			$insert_cstm_result = $db->query($insert_cstm_sql);
+			
 			$GLOBALS['log']->infor("insert_cstm_sql = " . $insert_cstm_sql);
 		} else {
 			$sql = 'SELECT accounts.id  FROM accounts INNER JOIN accounts_cstm WHERE accounts.id = accounts_cstm.id_c and accounts.deleted=0 AND accounts_cstm.organization_number_c ="' . $customer_id_val . '"';
 			$result = $db->query($sql);
-			$GLOBALS['log']->infor("select_sql = ".$sql);
 			while ($resule_asset = $db->fetchByAssoc($result)) {
 				$contacts_cstm_id = $resule_asset["id"];
 			}
 			
-			if(!empty($known_as_val)){
+			if(!empty($known_as_val)||$known_as_val!=""){
 				$customer_bean->name = $known_as_val;
 				$customer_bean->full_name_c = $customer_name_val;
 			}else{
 				$customer_bean->name = $customer_name_val;
+				$customer_bean->full_name_c = $customer_name_val;
 			}
+			
 			$check_contacts_sql = 'SELECT contacts.id  FROM contacts INNER JOIN contacts_cstm WHERE contacts.id = contacts_cstm.id_c and contacts.deleted=0 AND contacts_cstm.chinese_name_c ="' . $salers_id_val . '"';
 			$check_contacts_result = $db->query($check_contacts_sql);
 			while ($resule_asset = $db->fetchByAssoc($check_contacts_result)) {
 				$customer_bean->contact_id_c = $resule_asset["id"];
 			}
-			$update_sql = 'update accounts_cstm a set a.name="'.$customer_bean->name.'", a.full_name_c="'.$customer_bean->full_name_c.'",a.contact_id_c="'.$customer_bean->contact_id_c.'" where a.id_c="'.$contacts_cstm_id.'"';
+			$update_cstm_sql = 'update accounts_cstm a set a.full_name_c="'.$customer_bean->full_name_c.'",a.contact_id_c="'.$customer_bean->contact_id_c.'" where a.id_c="'.$contacts_cstm_id.'"';
+			$GLOBALS['log']->infor("update_cstm_sql=".$update_cstm_sql);
+			$result = $db->query($update_cstm_sql);
+			
+			$update_sql = 'update accounts a set a.name="'.$customer_bean->name.'" where a.id="'.$contacts_cstm_id.'"';
 			$GLOBALS['log']->infor("update_sql=".$update_sql);
 			$result = $db->query($update_sql);
-			$update_sql = 'update accounts a set a.name="'.$customer_bean->name.'", a.full_name_c="'.$customer_bean->full_name_c.'",a.contact_id_c="'.$customer_bean->contact_id_c.'" where a.id_c="'.$contacts_cstm_id.'"';
-			$GLOBALS['log']->infor("update_sql=".$update_sql);
-			$result = $db->query($update_sql);
-			
-			
 		}
 	}
 	$GLOBALS['log']->infor("end   sync xr customer data");
@@ -730,23 +732,29 @@ function sync_xr_accounts() {
 }
 
 function sync_xr_products() {
+	global $db;
 	$soap_util_bean = new SoapUtil();
 	$json_array = $soap_util_bean->call_soap_ws("PRODUCT", "XR");
+	
 	$GLOBALS['log']->infor("begin to sync xr products data");
-	//$GLOBALS['log']->infor($json_array);
 	//处理数据
 	foreach ($json_array as $key => $record) {	
+			
 			foreach ($record as $record_key => $record_value) {
-				$product_code_val = $record['PRODUCT_CODE'];
-				$product_id_val = $record['PRODUCT_ID'];
-				$product_name_val = $record['PRODUCT_NAME'];
-				$item_category_val = $record['ITEM_CATEGORY'];
+				
+				$product_code_val   = $record['PRODUCT_CODE'];
+				$product_id_val     = $record['PRODUCT_ID'];
+				$product_name_val   = $record['PRODUCT_NAME'];
+				$item_category_val  = $record['ITEM_CATEGORY'];
 				$product_status_name_val = $record['PRODUCT_STATUS_NAME'];
-				$item_number_val = $record['ITEM_NUMBER'];
-				$parent_product = $record['PARENT_PRODUCT'];
-				$primary_uom_code = $record['PRIMARY_UOM_CODE'];
-				$check_product = BeanFactory :: getBean('AOS_Products')->get_full_list('', "aos_products.part_number = '".$product_code_val."'");
+				$item_number_val         = $record['ITEM_NUMBER'];
+				$parent_product          = $record['PARENT_PRODUCT'];
+				$primary_uom_code        = $record['PRIMARY_UOM_CODE'];
+				
+				$check_product           = BeanFactory :: getBean('AOS_Products')->get_full_list('', "aos_products.part_number = '".$product_code_val."'");
+				
 				$GLOBALS['log']->infor('Product_Name= ' . $product_name_val .'product_code = ' . $product_code_val.',item_number = ' . $item_number_val.",UOM=".$primary_uom_code);
+				
 				//是否创建产品类别
 				if (count($check_product) == 0) {
 					$product_bean = BeanFactory :: newBean("AOS_Products");
@@ -762,6 +770,7 @@ function sync_xr_products() {
 					$product_bean->description = $parent_product;
 					//*********
 					$check_product_category = BeanFactory :: getBean('AOS_Product_Categories')->get_full_list('', "aos_product_categories.name = '{$item_category_val}'");
+					
 					//是否创建产品类别
 					if (count($check_product_category) == 0) {
 						$product_category = BeanFactory :: newBean("AOS_Product_Categories");
@@ -776,6 +785,7 @@ function sync_xr_products() {
 					} else {
 						$product_bean->aos_product_category_id = $check_product_category[0]->id;
 					}
+					
 					//通过单位找到单位的id
 					$uom_bean = BeanFactory :: getBean('HAA_UOM')->retrieve_by_string_fields(array (
 										    'name' => $primary_uom_code
@@ -819,6 +829,10 @@ function sync_xr_products() {
 									 '") ';
 					$insert_cstm_result = $db->query($insert_cstm_sql);
 					$GLOBALS['log']->infor("product_cstm_ql  = ".insert_cstm_sql);
+				}else{
+					$product_bean = $check_product[0];
+					$product_bean->name=$product_name_val;
+					$product_bean->save();
 				}
 			}
 		}
@@ -827,16 +841,23 @@ function sync_xr_products() {
 }
 
 function sync_xr_contracts() {
+	global $db;
 	$soap_util_bean = new SoapUtil();
 	$json_array = $soap_util_bean->call_soap_ws("CONTRACT", "XR");
 	$GLOBALS['log']->infor("begin to sync xr contracts data");
-	$GLOBALS['log']->infor($json_array);
-	//处理数据
+	//$GLOBALS['log']->infor($json_array);
 	$frame_bean = BeanFactory :: getBean('HAA_Frameworks')->retrieve_by_string_fields(array (
 		'code' => 'ChinaCache'
 	));
+	$contract_fix_type = BeanFactory :: getBean('HAA_Codes')->retrieve_by_string_fields(array (
+		'code_type' => 'contract_type',
+		'name'=>'欣润',
+	));
+	
 	//处理数据
+	$GLOBALS['log']->infor(count($json_array));
 	foreach ($json_array as $key => $record) {
+		$GLOBALS['log']->infor("record");
 		$h_contract_header_id_val = $record['CONTRACT_HEADER_ID'];
 		$org_id_val = $record['ORG_ID'];
 		$org_name_val = $record['ORG_NAME'];
@@ -855,54 +876,38 @@ function sync_xr_contracts() {
 		$flow_status_name_val = $record['FLOW_STATUS_NAME'];
 		$frame_contract_num_val = $record['FRAME_CONTRACT_NUM'];
 		//判断是否数据库是否已经存在这个合同 如果存在则不插入
-		//$check_exists = BeanFactory :: getBean('AOS_Contracts')->get_full_list('', "aos_contracts_cstm.data_source_id_c = '$h_contract_header_id_val'");
-		
 		$sql = 'SELECT count(1) cnt FROM aos_contracts INNER JOIN aos_contracts_cstm WHERE aos_contracts.id = aos_contracts_cstm.id_c and aos_contracts.deleted=0 AND aos_contracts_cstm.data_source_id_c ="' . $h_contract_header_id_val . '"';
 		$result = $db->query($sql);
 		$rows = 0;
+		$GLOBALS['log']->infor("sql = ".$sql);
 		while ($resule_asset = $db->fetchByAssoc($result)) {
 			$rows = $resule_asset['cnt'];
 		}
 		
 		if ($rows == 0) {
-			//系统中不存在才开始创建
-			//$newBean = BeanFactory :: getBean('AOS_Contracts');
 			$newBean->data_source_id_c = $h_contract_header_id_val;
 			//通过商业机会找商业机会的relatedId
 			$opportunities_sql = 'SELECT opportunities.id  FROM opportunities  WHERE opportunities.deleted=0 and opportunities.name ="' . $org_name_val . '"';
-			$opportunities_result = $db->query(opportunities_sql);
+			$opportunities_result = $db->query($opportunities_sql);
 			while ($opportunities_record = $db->fetchByAssoc($opportunities_result)) {
 				$record_val = $opportunities_record['id'];
 				$newBean->opportunity_id = $record_val;
 			}
-			/*$opportunities_list = BeanFactory :: getBean('Opportunities')->get_full_list('', "opportunities.name = '$org_name_val'");
-			if (count($opportunities_list) != 0) {
-				$newBean->opportunity_id = $opportunities_list[0]->id;
-			}*/
 
 			//通过客户名称找客户的relatedId
 			$contract_account_sql = 'SELECT accounts.id  FROM accounts  WHERE accounts.deleted=0 and accounts.name ="' . $sold_to_org_name_val . '"';
-			$contract_account_result = $db->query(contract_account_sql);
+			$contract_account_result = $db->query($contract_account_sql);
 			while ($contract_account_record = $db->fetchByAssoc($contract_account_result)) {
 				$record_val = $contract_account_record['id'];
 				$newBean->contract_account_id = $record_val;
 			}
-			/*$opportunities_list = BeanFactory :: getBean('Accounts')->get_full_list('', "accounts.name = '$sold_to_org_name_val'");
-			if (count($opportunities_list) != 0) {
-				$newBean->contract_account_id = $opportunities_list[0]->id;
-			}*/
-
 			//business_type
-			$business_sql = 'SELECT users.id  FROM users  WHERE users.last_name ="' . $salesrep_name_val . '"';
+			$business_sql = 'SELECT haa_codes.id  FROM haa_codes  WHERE haa_codes.name ="' . $sale_unit_val . '"';
 			$business_result = $db->query($business_sql);
 			while ($business_record = $db->fetchByAssoc($business_result)) {
 				$record_val = $business_record['id'];
 				$newBean->haa_codes_id1_c = $record_val;
 			}
-			/*$business_list = BeanFactory :: getBean('HAA_Codes')->get_full_list('', "haa_codes.name = '$sale_unit_val'");
-			if (count($business_list) != 0) {
-				$newBean->haa_codes_id1_c = $business_list[0]->id;
-			}*/
 
 			//salesrep_name
 			$users_sql = 'SELECT users.id  FROM users  WHERE users.last_name ="' . $salesrep_name_val . '"';
@@ -911,12 +916,6 @@ function sync_xr_contracts() {
 				$record_val = $users_record['id'];
 				$newBean->assigned_user_id = $record_val;
 			}
-		
-			/*$salesrep_list = BeanFactory :: getBean('Users')->get_full_list('', "users.last_name = '$salesrep_name_val'");
-			if (count($salesrep_list) != 0) {
-				$newBean->assigned_user_id = $salesrep_list[0]->id;
-			}*/
-
 			//Media Type
 			$media_type_sql = 'SELECT haa_codes.id  FROM haa_codes  WHERE haa_codes.name ="' . $contract_type_val . '"';
 			$media_type_result = $db->query($media_type_sql);
@@ -924,11 +923,6 @@ function sync_xr_contracts() {
 				$record_val = $media_type_record['id'];
 				$newBean->haa_codes_id2_c = $record_val;
 			}
-			/*$media_type_list = BeanFactory :: getBean('HAA_Codes')->get_full_list('', "haa_codes.name = '$contract_type_val'");
-			if (count($media_type_list) != 0) {
-				$newBean->haa_codes_id2_c = $media_type_list[0]->id;
-			}*/
-
 			//TYPE
 			$type_sql = 'SELECT haa_codes.id  FROM haa_codes  WHERE haa_codes.name ="' . $order_type_name_val . '"';
 			$type_result = $db->query($type_sql);
@@ -936,10 +930,6 @@ function sync_xr_contracts() {
 				$record_val = $type_record['id'];
 				$newBean->haa_codes_id_c = $record_val;
 			}
-			/*$type_list = BeanFactory :: getBean('HAA_Codes')->get_full_list('', "haa_codes.name = '$order_type_name_val'");
-			if (count($type_list) != 0) {
-				$newBean->haa_codes_id_c = $type_list[0]->id;
-			}*/
 
 			//revision
 			$revision_sql = 'SELECT hpr_am_roles.id  FROM hpr_am_roles  WHERE hpr_am_roles.name ="' . $frame_contract_num_val . '"';
@@ -948,10 +938,6 @@ function sync_xr_contracts() {
 				$record_val = $revision_record['id'];
 				$newBean->contract_revision_c = $record_val;
 			}
-			/*$revision_list = BeanFactory :: getBean('HPR_AM_Roles')->get_full_list('', "hpr_am_roles.name = '$frame_contract_num_val'");
-			if (count($revision_list) != 0) {
-				$newBean->revision_c = $revision_list[0]->id;
-			}*/
 			$newBean->name = $sales_document_name_val;
 			$status_code = array_search($flow_status_name_val, $app_list_strings['contract_type_list'], true);
 			$newBean->status = $status_code;
@@ -959,16 +945,14 @@ function sync_xr_contracts() {
 			$newBean->start_date = $h_start_date_active_val;
 			$newBean->end_date = $h_end_date_active_val;
 			$newBean->data_source_id_c = $h_contract_header_id_val;
-			$newBean->attribute1_c = $org_name_val;
+			$newBean->attribute1_c = $order_type_name_val;
 			$newBean->attribute2_c = $sale_unit_val;
 			$newBean->attribute3_c = $contract_type_val;
-			//$newBean->attribute4_c=$sales_document_name_val;
 			$newBean->attribute4_c = $flow_status_name_val;
 			$newBean->attribute5_c = $frame_contract_num_val;
 			$newBean->attribute6_c = $salesrep_name_val;
 			$newBean->haa_frameworks_id_c = $frame_bean->id;
 			$contact_id = create_guid();
-		    //$newBean->save();
 			$insert_sql = 'insert into aos_contracts(
 			     id
 				,name
@@ -989,7 +973,9 @@ function sync_xr_contracts() {
 				 '","' . $newBean->assigned_user_id . 
 				 '") ';
 			$insert_result = $db->query($insert_sql);
-			
+			if(empty($newBean->revision_c)){
+				$newBean->revision_c=0;
+			}
 			$insert_cstm_sql = 'insert into aos_contracts_cstm(
 			     id_c
 				,haa_codes_id1_c
@@ -1009,9 +995,9 @@ function sync_xr_contracts() {
 				 "' . $contact_id . 
 				 '","' . $newBean->haa_codes_id1_c . 
 				 '","' . $newBean->haa_codes_id2_c . 
-				 '","' . $newBean->haa_codes_id_c . 
+				 '","' . $contract_fix_type->id . 
 				 '","' . $newBean->revision_c . 
-				 '","' . order_number_val . 
+				 '","' . $order_number_val . 
 				 '","' . $newBean->data_source_id_c . 
 				 '","' . $newBean->attribute1_c . 
 				 '","' . $newBean->attribute2_c . 
@@ -1044,6 +1030,7 @@ function sync_xr_contracts() {
 				$sql = 'SELECT count(1) cnt FROM aos_products_quotes INNER JOIN aos_products_quotes_cstm WHERE aos_products_quotes.id = aos_products_quotes_cstm.id_c and aos_products_quotes.deleted=0 AND aos_products_quotes_cstm.product_source_id_c ="' . $contract_line_id_val . '"';
 				$result = $db->query($sql);
 				$rows = 0;
+				$GLOBALS['log']->infor("line_sql=".$sql );
 				while ($resule_asset = $db->fetchByAssoc($result)) {
 					$rows = $resule_asset['cnt'];
 				}
@@ -1082,22 +1069,22 @@ function sync_xr_contracts() {
 									,name
 									,product_id
 									,description
-									,vat_amt
 									,product_qty
 									,item_description
+									,parent_id
 									,parent_type)
 									 value(
 									 "' . $aos_products_quotes_id . 
 									 '","' . $inventory_item_name_val . 
 									 '","' . $newLineBean->product_id . 
 									 '","' . $newLineBean->product_discount . 
-									 '","' . $newLineBean->vat_amt . 
 									 '","' . $newLineBean->product_qty . 
 									  '","' . $formula_type_code_val . 
+									  '","' . $contact_id . 
 									 '","' . $newLineBean->parent_type .
 									 '") ';
 						$insert_result = $db->query($insert_sql);
-						$GLOBALS['log']->infor("effective_end_c=".$newLineBean->effective_end_c);
+						$GLOBALS['log']->infor("insert_aos_products_quotes_sql=".$insert_sql);
 						$insert_cstm_sql = 'insert into aos_products_quotes_cstm(
 							 id_c
 							,effective_start_c
@@ -1114,17 +1101,32 @@ function sync_xr_contracts() {
 				}
 			}
 			
+		}else{
+			//更新合同状态
+			$status_code = array_search($flow_status_name_val, $app_list_strings['contract_type_list'], true);
+			$sql = 'SELECT aos_contracts.id cnt FROM aos_contracts INNER JOIN aos_contracts_cstm WHERE aos_contracts.id = aos_contracts_cstm.id_c and aos_contracts.deleted=0 AND aos_contracts_cstm.data_source_id_c ="' . $h_contract_header_id_val . '"';
+			$result = $db->query($sql);
+			while ($resule_asset = $db->fetchByAssoc($result)) {
+				$contract_id = $resule_asset['id'];
+			}
+			$contract_bean = BeanFactory::getBean('AOS_Contracts',$contract_id);
+			if($contract_bean->status!=$status_code){
+				$contract_bean->status=$status_code;
+				$contract_bean->save();
+			}
 		}
+	
 	}
 	$GLOBALS['log']->infor("end   sync xr contracts data");
 	return true;
 }
 
 function sync_xr_po_infos() {
+	global $db;
 	$soap_util_bean = new SoapUtil();
 	$json_array = $soap_util_bean->call_soap_ws("PO", "XR");
 	$GLOBALS['log']->infor("begin to sync xr PO Infos data");
-	$GLOBALS['log']->infor($json_array);
+	//$GLOBALS['log']->infor($json_array);
 	//业务框架
 	$frame_bean = BeanFactory :: getBean('HAA_Frameworks')->retrieve_by_string_fields(array (
 		'code' => 'ChinaCache'
@@ -1140,9 +1142,9 @@ function sync_xr_po_infos() {
 			$comments_val = $record['COMMENTS'];
 			$org_name_val = $record['ORG_NAME'];
 			$instance_name_val = $record['INSTANCE_NAME'];
+			$item_num_val = $line_value['ITEM_NUM'];
 
 			foreach ($record['LINES'] as $line_key => $line_value) {
-
 				//判断是否数据库是否已经存在这个订单行 如果存在则不插入
 				$po_line_id_val = $line_value['PO_LINE_ID'];
 				$line_num_val = $line_value['LINE_NUM'];
@@ -1168,18 +1170,19 @@ function sync_xr_po_infos() {
 					$newLineBean->description = $comments_val;
 					$newLineBean->source_type = $instance_name_val;
 					$newLineBean->line_num = $line_num_val;
-					$newLineBean->item_num = $inventory_item_id_val;
+					$newLineBean->item_num = $item_num_val;
 					$newLineBean->line_qty = $quantity_val;
 					$newLineBean->line_price = $unit_price_val;
 					$newLineBean->source_reference = $prod_name_val;
 					$newLineBean->haa_frameworks_id = $frame_id;
 					$newLineBean->source_id = $po_line_id_val;
+					$newLineBean->haa_frameworks_id = $frame_bean->id;
 					$newLineBean->save();
 				}
 			}
 		}
 }
-		$GLOBALS['log']->infor("end   sync xr PO Infos data");
+		$GLOBALS['log']->infor("end sync xr PO Infos data");
 		return true;
 	}
 
