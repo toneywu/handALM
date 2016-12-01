@@ -1,5 +1,6 @@
 <?php
-
+//！！！！！
+//影响子面板 废弃不用，逻辑移到edit和Detial中
 function display_lines($focus, $field, $value, $view){
 
     global $sugar_config, $locale, $app_list_strings, $mod_strings;
@@ -49,7 +50,7 @@ insertLineItems(" . $line_item . ");
 
 }
 else if($view == 'DetailView'){
-   $params = array('currency_id' => $focus->currency_id);
+   params = array('currency_id' => $focus->currency_id);
 
    $sql = "SELECT pg.id, pg.group_id FROM aos_products_quotes pg LEFT JOIN aos_line_item_groups lig ON pg.group_id = lig.id WHERE pg.parent_type = '".$focus->object_name."' AND pg.parent_id = '".$focus->id."' AND pg.deleted = 0 ORDER BY lig.number ASC, pg.number ASC";
 

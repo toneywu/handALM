@@ -1,5 +1,5 @@
 <?php
-// created: 2016-10-25 11:21:43
+// created: 2016-12-02 01:45:14
 $searchFields['AOS_Invoices'] = array (
   'name' => 
   array (
@@ -163,5 +163,15 @@ $searchFields['AOS_Invoices'] = array (
     'query_type' => 'default',
     'enable_range_search' => true,
     'is_date_field' => true,
+  ),
+  'start_range_late_days_c' => 
+  array (
+    'query_type' => 'default',
+    'enable_range_search' => true,
+  ),
+  'end_range_late_days_c' => 
+  array (
+    'query_type' => 'default',
+    'enable_range_search' => true,
   ),
 );

@@ -507,7 +507,10 @@ function formatNumber(n, num_grp_sep, dec_sep, round, precision) {
     }
     return n[0] + (n.length > 1 && n[1] !== "" ? dec_sep + n[1] : "");
 }
-
+function replace_display_lines(linesHtml,elementId) {
+  var lineItems=document.getElementById(elementId);
+  lineItems.innerHTML=linesHtml;
+}
 /*function check_form(formname) {
     if (typeof(siw) != 'undefined' && siw && typeof(siw.selectingSomething) != 'undefined' && siw.selectingSomething) {
         return false;

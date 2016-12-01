@@ -13,10 +13,8 @@ function CreateRevenuesFromContract()
 	aos_contracts act
 	WHERE 1=1
 	and act.deleted=0
-	and	act.STATUS NOT IN (
-	'Termination',
-	'Expired',
-	'Proposed'
+	and	act.STATUS  IN (
+	'Signed'
 	)";
 
 	$result = $db->query($sql);
