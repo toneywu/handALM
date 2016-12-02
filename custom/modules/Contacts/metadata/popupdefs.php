@@ -9,7 +9,8 @@ $popupMeta = array (
   'people_type_c' => 'contacts.people_type_c',
   'status_c' => 'contacts.status_c',
 ),
-'whereStatement'=>'(("'.$_REQUEST["contract_type"].'"="INNER" and exists (select 1 from accounts_cstm accounts_cstm where accounts_cstm.id_c = accounts.id and accounts_cstm.is_asset_org_c = 1 and accounts_cstm.`org_type_c` in ("INTERNAL"))) or "'.$_REQUEST["contract_type"].'" ="" )',
+'whereStatement'=>'(("'.$_REQUEST["contract_type"].'"="INNER" and exists (select 1 from accounts_cstm accounts_cstm where accounts_cstm.id_c = accounts.id and accounts_cstm.is_asset_org_c = 1 and accounts_cstm.`org_type_c` in ("INTERNAL"))) or "'.$_REQUEST["contract_type"].'" ="" )',/* AND contacts.id IN
+  (SELECT cc.id_c FROM contacts_cstm cc WHERE cc.`haa_frameworks_id_c` = "'.$_SESSION["current_framework"].'")',*/
     'searchInputs' => array (
   1 => 'last_name',
   2 => 'account_name',
