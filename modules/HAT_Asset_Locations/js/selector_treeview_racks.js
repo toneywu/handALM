@@ -329,7 +329,8 @@ function selectServerArea() {
 	var selected_start_cell, selected_end_cell
 	$("#rack_frame tr td.rack_td")
 		.mousedown(function () {
-			//console.log("DOWN")
+		console.log("DOWN");
+		alert("Clicked");
 		  if (isMouseDown == false) {
 		  	  $("#rack_frame td").removeClass("rack_highlighted");
 		  	  $("#rack_frame td").removeClass("rack_error");

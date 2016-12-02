@@ -514,7 +514,7 @@ array (
             'name' => 'hat_asset_locations_hat_assets_name',
 			'displayParams' => 
             array (
-              'initial_filter' => '&site_type=D',
+              //'initial_filter' => '&site_type=D', 资产定义时应当可以选择任意位置toney.wu
             ),
           ),
           1 => 

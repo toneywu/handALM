@@ -12,7 +12,7 @@ $popupMeta = array (
 		'code_asset_location_type' => 'hat_asset_locations.code_asset_location_type',
 		
 	),
-	'whereStatement'=>'(("'.$_REQUEST["site_type"].'"="D" and jt0.name in ("数据中心")) or ("'.$_REQUEST["site_type"].'"="J" and jt0.name in ("机柜列")) or ("'.$_REQUEST["site_type"].'"="F" and jt0.name in ("房间")) or "'.$_REQUEST["site_type"].'" ="" )',
+	'whereStatement'=>'(("'.$_REQUEST["site_type"].'"="D" and jt0.name in ("数据中心")) or ("'.$_REQUEST["site_type"].'"="J" and jt0.name in ("机柜列")) or ("'.$_REQUEST["site_type"].'"="F" and jt0.name in ("房间")) or "'.$_REQUEST["site_type"].'" ="" ) AND hat_asset_locations.`ham_maint_sites_id` IN (SELECT ham_maint_sites.id FROM haa_frameworks, ham_maint_sites WHERE haa_frameworks.id = ham_maint_sites.`haa_frameworks_id` AND haa_frameworks.id = "'.$_SESSION["current_framework"].'")',
 	'searchInputs' => array (
 		1 => 'name',
 		4 => 'location_title',
