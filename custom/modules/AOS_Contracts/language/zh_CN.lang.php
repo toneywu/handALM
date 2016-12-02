@@ -33,6 +33,6 @@ $mod_strings = array (
   'LBL_UOM_NAME_C'=>'单位',
   'LBL_CREATE_REVENUE'=>'创建收支项',
   'LBL_HAOS_REVENUES_QUOTES'=>'收支计费项',
-  'LBL_NEXT_ACCOUNT_DAY'=>'下一次结算日期',
-  'LBL_FINAL_ACCOUNT_DAY'=>'最后一次结算日期',
+  'LBL_NEXT_ACCOUNT_DAY'=>'下次结算日期',
+  'LBL_FINAL_ACCOUNT_DAY'=>'最后结算日期',
 );

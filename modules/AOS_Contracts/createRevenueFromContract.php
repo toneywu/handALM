@@ -32,6 +32,10 @@ function createRevenueFromContract($contractId){
 	require_once('modules/HAOS_Revenues_Quotes/createRevenue.php');
 	$contract = new AOS_Contracts();
 	$contract->retrieve($contractId);
+	if ($contract->status!='Signed'){
+		die('已签约的合同才能创建收支计费项!');
+	}
+
 	$productQuoteBean=BeanFactory::getBean('AOS_Products_Quotes');
 	$quotesBeanList=$productQuoteBean->get_full_list(
 //Order by

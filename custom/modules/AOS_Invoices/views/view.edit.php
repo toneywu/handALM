@@ -35,13 +35,17 @@ class AOS_InvoicesViewEdit extends ViewEdit {
                 $cord_array[$k]="'".$cord_array[$k]."'";
             }
             $str=implode(',', $cord_array);
-            $sql = "SELECT hr.haa_codes_id_c FROM aos_products_quotes pg left join haos_revenues_quotes hr on pg.parent_id=hr.id WHERE pg.id in(".$str.") AND pg.deleted = 0 and hr.deleted=0 group by hr.haa_codes_id_c ORDER BY pg.number ASC";
+            $sql = "SELECT pg.id,hr.haa_codes_id_c,pg.parent_id FROM aos_products_quotes pg left join haos_revenues_quotes hr on pg.parent_id=hr.id WHERE pg.id in(".$str.") AND pg.deleted = 0 and hr.deleted=0 group by hr.haa_codes_id_c ORDER BY pg.number ASC";
             $result = $db->query($sql);
             $html .= "<script>
                 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
                 </script>";
             while ( $grow = $db->fetchByAssoc($result)) {//分组->组下的条目
             	$group_item = 'null';
+            	$quote = new AOS_Products_Quotes();
+	            $quote->retrieve($grow['id']);
+	            $quote->haos_revenues_quotes_id_c=$grow['parent_id'];
+	            $quote->save();
                 if ($grow['haa_codes_id_c'] != null) {
                     $group_item = new HAA_codes();
                     $group_item ->retrieve($grow['haa_codes_id_c']);
@@ -62,6 +66,7 @@ class AOS_InvoicesViewEdit extends ViewEdit {
                     </script>";
             	}
             }
+      
             $cord=$_GET['cord'];
             $cord_array=preg_split('/,/', $cord);
             $accounts=BeanFactory::getBean('Accounts',$cord_array[1]);
@@ -72,6 +77,7 @@ class AOS_InvoicesViewEdit extends ViewEdit {
 				document.getElementById('billing_contact').value='".$contacts->name."';
 				document.getElementById('billing_contact_id').value='".$cord_array[0]."';
 				document.getElementById('billing_contact_number').value='".$contacts->employee_number_c."';
+				document.getElementById('source_code_c').value='HAOS_Revenues_Quotes';
             </script>";
             echo $html;
         }

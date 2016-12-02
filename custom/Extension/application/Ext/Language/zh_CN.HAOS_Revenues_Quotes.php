@@ -38,44 +38,37 @@
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['HAA_Codes'] = 'Codes';
+$app_list_strings['moduleList']['HAOS_Revenues_Quotes'] = '收支计费项';
 
-$app_list_strings['haa_code_module_list']=array (
-  'accounts' => 'Organizations',
-  'tasks' => 'Tasks',
-  'contact' => 'People',
-  'contract' => 'Contracts',
-  'asset_location' => 'Asset Locations',
-  'asset_qualification'=>'Asset Qualifications',
-  'qualification'=>'Qualifications',
-  'wo'=>'Activities/Work Orders',
-  'revenue' => 'Revenue/Expenditure Trans',
-  'flexform'=>'FlexForm Extended Fields',
-  'insurance' => 'Insurance',
-  );
+$GLOBALS['app_list_strings']['contract_status_list']=array (
+  'Not Started' => '未开始',
+  'In Progress' => '处理中',
+  'Signed' => '签约',
+  'Expired' => '到期',
+  'Proposed' => '拟定',
+  'Renew' => '续签',
+  'Termination' => '解除',
+);
 
-$app_list_strings['haa_code_type_list']=array (
-  '' => '',
-  'accounts_level' => 'accounts_level',
-  'accounts_business_type' => 'accounts_business_type',
-  'accounts_nature' => 'accounts_nature',
-  'accounts_org_type' => 'accounts_org_type',
-  'accounts_customer_class' => 'accounts_customer_class',
-  'contact_business_type'=>'contact_business_type',
-  'contact_id_type'=>'contact_id_type',
-  'contract_business_type' => 'contract_business_type',
-  'contract_media_type' => 'contract_media_type',
-  'contract_revision' => 'contract_revision',
-  'contract_type' => 'contract_type',
-  'asset_location_type' => 'asset_location_type',
-  'asset_qualification_type'=>'asset_qualification_type',
-  'qualification_type'=>'qualification_type',
-  'flexform_extended_list'=>'flexform_extended_list',
-  'tasks_type'=>'tasks_type',
-  'wo_activity_type'=>'wo_activity_type',
-  'revenue_expense_group' => 'revenue_expense_group',
-  'revenue_expense_type' => 'revenue_expense_type',
-  'insurance_claim_type' => 'insurance_claim_type',
-  'insurance_type' => 'insurance_type',
-  'insurance_subtype' => 'insurance_subtype',
-  );
+
+$GLOBALS['app_list_strings']['settlement_period_list']=array (
+  'Once' => '一次结清',
+  'Monthly' => '按月',
+);
+
+
+
+
+$GLOBALS['app_list_strings']['haos_line_item_type_list']=array (
+  'Product' => '产品',
+  'Service' => '服务',
+);
+
+$GLOBALS['app_list_strings']['haos_source_code_list']=array (
+  'AOS_Contracts' => '合同',
+  'HAOS_Revenues_Quotes' => '收支计费项',
+  'Manual' => '手工',
+  'Excel' => 'Excel导入',
+  'Others' => '其他事件',
+  'Ref_System' => '外围系统',
+);

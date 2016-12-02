@@ -127,6 +127,22 @@ class AOS_InvoicesController extends SugarController {
             //Todo:未付或部分付款，则手动关闭，手动关闭后，未付的部分形成一个新的收支项
 			}
 		}
+
+		$productQuoteBean=BeanFactory::getBean('AOS_Products_Quotes');
+		$quotesBeanList=$productQuoteBean->get_full_list(
+			'name',
+			"aos_products_quotes.parent_id='".$this->bean->id."'"
+			);
+
+		foreach($quotesBeanList as $quoteBean){
+			$quote = new HAOS_Revenues_Quotes();
+			$quote->retrieve($quoteBean->haos_revenues_quotes_id_c);
+			$quote->aos_invoices_id_c=$this->bean->id;
+			$quote->aos_products_quotes_id_c=$quoteBean->id;
+			$quote->clear_status="Cleared";
+			$quote->save();
+		}
+
 		parent::post_save();
 	}
 

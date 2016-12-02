@@ -221,6 +221,7 @@ array (
             'name' => 'line_items',
             'studio' => 'visible',
             'label' => 'LBL_LINE_ITEMS',
+            'customCode'=>'<span id="line_items_span">',
             ),
           ),
         ),

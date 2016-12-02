@@ -1,9 +1,9 @@
 <?php
-	error_reporting(E_ALL);
-	if (!defined('sugarEntry') || !sugarEntry)
-		die('Not A Valid Entry Point');
-	global $db;
-	$cord_array=$_POST["data"];
+error_reporting(E_ALL);
+if (!defined('sugarEntry') || !sugarEntry)
+	die('Not A Valid Entry Point');
+global $db;
+$cord_array=$_POST["data"];
 	if (preg_match("/[']|[\"]/", $cord_array)) {//简单防止sql注入
 		$sql='';
 	}else{
@@ -30,6 +30,7 @@
 				$re_cords[]=$record["id"];
 			}
 			echo json_encode(array('type'=>1,'value'=>$re_cords,'cord'=>$account));
+
 		}
 	}
-?>
+	?>
