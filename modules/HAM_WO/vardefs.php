@@ -26,7 +26,7 @@ $dictionary['HAM_WO'] = array (
 			'size' => '20',
 
 			
-		),
+			),
 		'site' => array (
 			'required' => true,
 			'source' => 'non-db',
@@ -55,7 +55,56 @@ $dictionary['HAM_WO'] = array (
 			'studio' => 'visible',
 
 			
-		),
+			),
+		'haos_revenues_quotes_id' => 
+		array (
+			'required' => false,
+			'name' => 'haos_revenues_quotes_id',
+			'vname' => 'LBL_HAOS_REVENUES_QUOTES_ID',
+			'type' => 'id',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => 0,
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => false,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => 36,
+			'size' => '20',
+			),
+		'revenue_quote_number' => 
+		array (
+			'required' => false,
+			'source' => 'non-db',
+			'name' => 'revenue_quote_number',
+			'vname' => 'LBL_REVENUE_QUOTE_NUMBER',
+			'type' => 'relate',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+			'id_name' => 'haos_revenues_quotes_id',
+			'ext2' => 'HAOS_Revenues_Quotes',
+			'module' => 'HAOS_Revenues_Quotes', 
+			'rname' => 'revenue_quote_number',
+			'quicksearch' => 'enabled',
+			'studio' => 'visible',
+			),
 		'location_extra_desc' => array (
 			'required' => false,
 			'name' => 'location_extra_desc',
@@ -77,7 +126,7 @@ $dictionary['HAM_WO'] = array (
 			'size' => '20',
 
 			
-		),
+			),
 //		'ham_priority_id' => array (
 //			'required' => false,
 //			'name' => 'ham_priority_id',
@@ -130,49 +179,49 @@ $dictionary['HAM_WO'] = array (
 //			
 //		),
 
-'ham_priority_id' => 
-  array (
-    'required' => false,
-    'name' => 'ham_priority_id',
-    'vname' => 'LBL_PRIORITY_HAM_PRIORITY_ID',
-    'type' => 'id',
-    'massupdate' => 0,
-    'no_default' => false,
-    'comments' => '',
-    'help' => '',
-    'importable' => 'true',
-    'duplicate_merge' => 'disabled',
-    'duplicate_merge_dom_value' => 0,
-    'audited' => false,
-    'inline_edit' => true,
-    'reportable' => false,
-    'unified_search' => false,
-    'merge_filter' => 'disabled',
-    'len' => 36,
-    'size' => '20',
-  ),
+		'ham_priority_id' => 
+		array (
+			'required' => false,
+			'name' => 'ham_priority_id',
+			'vname' => 'LBL_PRIORITY_HAM_PRIORITY_ID',
+			'type' => 'id',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => 0,
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => false,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => 36,
+			'size' => '20',
+			),
 
-'priority' => 
-  array (
-    'required' => false,
-    'source' => 'non-db',
-    'name' => 'priority',
-    'vname' => 'LBL_PRIORITY',
-    'type' => 'relate',
-    'massupdate' => 0,
-    'no_default' => false,
-    'comments' => '',
-    'help' => '',
-    'importable' => 'true',
-    'duplicate_merge' => 'disabled',
-    'duplicate_merge_dom_value' => '0',
-    'audited' => false,
-    'inline_edit' => true,
-    'reportable' => true,
-    'unified_search' => false,
-    'merge_filter' => 'disabled',
-    'len' => '255',
-    'size' => '20',
+		'priority' => 
+		array (
+			'required' => false,
+			'source' => 'non-db',
+			'name' => 'priority',
+			'vname' => 'LBL_PRIORITY',
+			'type' => 'relate',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
     'id_name' => 'ham_priority_id',//返回的值 显示name存储id
     'ext2' => 'HAM_Priority',
     'module' => 'HAM_Priority',
@@ -180,7 +229,7 @@ $dictionary['HAM_WO'] = array (
     'quicksearch' => 'enabled',
     'studio' => 'visible',
 
-  ),
+    ),
 		'wo_number' => array (
 			'required' => false,
 			'name' => 'wo_number',
@@ -200,7 +249,7 @@ $dictionary['HAM_WO'] = array (
 			'merge_filter' => 'disabled',
 			'len' => '255',
 			'size' => '20',
-		),
+			),
 		'contact_id' => array (
 			'required' => false,
 			'name' => 'contact_id',
@@ -220,7 +269,7 @@ $dictionary['HAM_WO'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
-		),
+			),
 		'contact' => array (
 			'required' => false,
 			'source' => 'non-db',
@@ -247,7 +296,7 @@ $dictionary['HAM_WO'] = array (
 			'rname' => 'name',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
-		),
+			),
 		'account_id' => array (
 			'required' => false,
 			'name' => 'account_id',
@@ -267,7 +316,7 @@ $dictionary['HAM_WO'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
-		),
+			),
 		'account' => array (
 			'required' => false,
 			'source' => 'non-db',
@@ -294,7 +343,7 @@ $dictionary['HAM_WO'] = array (
 			'rname' => 'name',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
-		),
+			),
 		'reporter_contact_id' => array (
 			'required' => false,
 			'name' => 'reporter_contact_id',
@@ -314,7 +363,7 @@ $dictionary['HAM_WO'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
-		),
+			),
 		'reporter' => array (
 			'required' => false,
 			'source' => 'non-db',
@@ -341,7 +390,7 @@ $dictionary['HAM_WO'] = array (
 			'rname' => 'name',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
-		),
+			),
 		'reporter_account_id' => array (
 			'required' => false,
 			'name' => 'reporter_account_id',
@@ -361,7 +410,7 @@ $dictionary['HAM_WO'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
-		),
+			),
 		'reporter_org' => array (
 			'required' => false,
 			'source' => 'non-db',
@@ -388,7 +437,7 @@ $dictionary['HAM_WO'] = array (
 			'rname' => 'name',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
-		),
+			),
 		'reported_date' => array (
 			'required' => false,
 			'name' => 'reported_date',
@@ -412,7 +461,7 @@ $dictionary['HAM_WO'] = array (
 			'display_default' => '',
 
 			
-		),
+			),
 		'date_target_start' => array (
 			'required' => true,
 			'name' => 'date_target_start',
@@ -435,8 +484,8 @@ $dictionary['HAM_WO'] = array (
 			'dbType' => 'datetime',
 			//'display_default' => 'now&12:00am',
 
-	
-		),
+			
+			),
 		'date_target_finish' => array (
 			'required' => true,
 			'name' => 'date_target_finish',
@@ -459,8 +508,8 @@ $dictionary['HAM_WO'] = array (
 			'dbType' => 'datetime',
 			// 'display_default' => 'now&12:00am',
 
-	
-		),
+			
+			),
 		'date_actual_start' => array (
 			'required' => false,
 			'name' => 'date_actual_start',
@@ -483,8 +532,8 @@ $dictionary['HAM_WO'] = array (
 			'dbType' => 'datetime',
 			// 'display_default' => 'now&12:00am',
 
-	
-		),
+			
+			),
 		'date_actual_finish' => array (
 			'required' => false,
 			'name' => 'date_actual_finish',
@@ -507,8 +556,8 @@ $dictionary['HAM_WO'] = array (
 			'dbType' => 'datetime',
 			// 'display_default' => 'now&12:00am',
 
-	
-		),
+			
+			),
 		'date_schedualed_start' => array (
 			'required' => false,
 			'name' => 'date_schedualed_start',
@@ -531,8 +580,8 @@ $dictionary['HAM_WO'] = array (
 			'dbType' => 'datetime',
 			// 'display_default' => 'now&12:00am',
 
-	
-		),
+			
+			),
 		'date_schedualed_finish' => array (
 			'required' => false,
 			'name' => 'date_schedualed_finish',
@@ -555,8 +604,8 @@ $dictionary['HAM_WO'] = array (
 			'dbType' => 'datetime',
 			// 'display_default' => 'now&12:00am',
 
-	
-		),
+			
+			),
 		'date_start_not_earlier' => array (
 			'required' => false,
 			'name' => 'date_start_not_earlier',
@@ -579,8 +628,8 @@ $dictionary['HAM_WO'] = array (
 			'dbType' => 'datetime',
 			// 'display_default' => 'now&12:00am',
 
-	
-		),
+			
+			),
 		'date_finish_not_later' => array (
 			'required' => false,
 			'name' => 'date_finish_not_later',
@@ -602,7 +651,7 @@ $dictionary['HAM_WO'] = array (
 			'enable_range_search' => false,
 			'dbType' => 'datetime',
 			// 'display_default' => 'now&12:00am',
-		),
+			),
 		'wo_status' => array (
 			'required' => true,
 			'name' => 'wo_status',
@@ -627,7 +676,7 @@ $dictionary['HAM_WO'] = array (
 			'dependency' => false,
 
 			
-		),
+			),
 		'hat_event_type_id' => array (
 			'required' => false,
 			'name' => 'hat_event_type_id',
@@ -649,7 +698,7 @@ $dictionary['HAM_WO'] = array (
 			'size' => '20',
 
 			
-		),
+			),
 		'event_type' => array (
 			'required' => false,
 			'source' => 'non-db',
@@ -678,7 +727,7 @@ $dictionary['HAM_WO'] = array (
 			'studio' => 'visible',
 
 			
-		),
+			),
 		'hat_asset_locations_id' => array (
 			'required' => false,
 			'name' => 'hat_asset_locations_id',
@@ -698,7 +747,7 @@ $dictionary['HAM_WO'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
-		),
+			),
 		'location' => array (
 			'required' => false,
 			'source' => 'non-db',
@@ -727,7 +776,7 @@ $dictionary['HAM_WO'] = array (
 			'studio' => 'visible',
 
 			
-		),
+			),
 		'hat_assets_id' => array (
 			'required' => false,
 			'name' => 'hat_assets_id',
@@ -747,7 +796,7 @@ $dictionary['HAM_WO'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
-		),
+			),
 		'asset' => array (
 			'required' => false,
 			'source' => 'non-db',
@@ -776,34 +825,34 @@ $dictionary['HAM_WO'] = array (
 			'studio' => 'visible',
 
 			
-		),
+			),
 		'asset_desc' => array (
 			'source' => 'non-db', //显示当前资产的说明
-	'name' => 'asset_desc',
+			'name' => 'asset_desc',
 			'vname' => 'LBL_ASSET_DESC',
 			'type' => 'varchar',
 			'default' => '',
 			'reportable' => true,
 			'studio' => 'visible'
-		),
+			),
 		'location_desc' => array (
 			'source' => 'non-db', //显示当前地点的说明
-	'name' => 'location_desc',
+			'name' => 'location_desc',
 			'vname' => 'LBL_LOCATION_DESC',
 			'type' => 'varchar',
 			'default' => '',
 			'reportable' => true,
 			'studio' => 'visible'
-		),
+			),
 		'location_map_enabled' => array (
 			'source' => 'non-db', //显示当前地点的说明
-	'name' => 'location_map_enabled',
+			'name' => 'location_map_enabled',
 			'vname' => 'LBL_LOCATION_MAP_ENABLED',
 			'type' => 'bool',
 			'default' => '',
 			'reportable' => true,
 			'studio' => 'visible'
-		),
+			),
 		'map_type' => array (
 			'required' => false,
 			'name' => 'map_type',
@@ -823,7 +872,7 @@ $dictionary['HAM_WO'] = array (
 			'options' => 'cux_map_type_list',
 
 			
-		),
+			),
 		'map_lat' => array (
 			'required' => false,
 			'name' => 'map_lat',
@@ -847,7 +896,7 @@ $dictionary['HAM_WO'] = array (
 			'precision' => '8',
 
 			
-		),
+			),
 		'map_lng' => array (
 			'required' => false,
 			'name' => 'map_lng',
@@ -865,13 +914,13 @@ $dictionary['HAM_WO'] = array (
 			'unified_search' => false,
 			'merge_filter' => 'disabled',
 			//'default' => '0.00000000',
-	'len' => '11',
+			'len' => '11',
 			'size' => '20',
 			'enable_range_search' => false,
 			'precision' => '8',
 
 			
-		),
+			),
 		'map_zoom' => array (
 			'required' => false,
 			'name' => 'map_zoom',
@@ -890,7 +939,7 @@ $dictionary['HAM_WO'] = array (
 			'merge_filter' => 'disabled',
 
 			
-		),
+			),
 		'map_enabled' => array (
 			'required' => false,
 			'name' => 'map_enabled',
@@ -909,7 +958,7 @@ $dictionary['HAM_WO'] = array (
 			'merge_filter' => 'disabled',
 
 			
-		),
+			),
 		'map_address' => array (
 			'required' => false,
 			'name' => 'map_address',
@@ -928,7 +977,7 @@ $dictionary['HAM_WO'] = array (
 			'merge_filter' => 'disabled',
 
 			
-		),
+			),
 		'map_search_area' => array (
 			'name' => 'map_search_area',
 			'vname' => 'LBL_MAP_SEARCH_AREA',
@@ -937,15 +986,15 @@ $dictionary['HAM_WO'] = array (
 			'massupdate' => 0,
 
 			
-		),
+			),
 		'map_display_area' => array (
 			'source' => 'non-db', //Location
-	'name' => 'map_display_area',
+			'name' => 'map_display_area',
 			'vname' => 'LBL_MAP_DISPLAY_AREA',
 			'type' => 'varchar',
 			'reportable' => true,
 			'studio' => 'visible'
-		),
+			),
 		'source_type' => array (
 			'required' => false,
 			'name' => 'source_type',
@@ -964,7 +1013,7 @@ $dictionary['HAM_WO'] = array (
 			'merge_filter' => 'disabled',
 
 			
-		),
+			),
 		'source_id' => array (
 			'required' => false,
 			'name' => 'source_id',
@@ -983,7 +1032,7 @@ $dictionary['HAM_WO'] = array (
 			'merge_filter' => 'disabled',
 
 			
-		),
+			),
 		'source_reference' => array (
 			'required' => false,
 			'name' => 'source_reference',
@@ -1002,9 +1051,9 @@ $dictionary['HAM_WO'] = array (
 			'merge_filter' => 'disabled',
 
 			
-		),
+			),
 		#add by yuan.chen		
-	'plan_fixed' => array (
+		'plan_fixed' => array (
 			'required' => false,
 			'name' => 'plan_fixed',
 			'vname' => 'LBL_PLAN_FIXED',
@@ -1022,10 +1071,10 @@ $dictionary['HAM_WO'] = array (
 			'merge_filter' => 'disabled',
 
 			
-		),
+			),
 
 		#活动头
-	'activity' => array (
+		'activity' => array (
 			'required' => false,
 			'name' => 'activity',
 			'vname' => 'ACTIVITY',
@@ -1046,7 +1095,7 @@ $dictionary['HAM_WO'] = array (
 			'size' => '20',
 
 			
-		),
+			),
 
 		'ham_act_id_rule' => array (
 			'required' => false,
@@ -1076,10 +1125,10 @@ $dictionary['HAM_WO'] = array (
 			'studio' => 'visible',
 
 			
-		),
+			),
 
 		#计划优先级
-	'wo_priority_id' => array (
+		'wo_priority_id' => array (
 			'required' => false,
 			'name' => 'wo_priority_id',
 			'vname' => 'LBL_WO_PRIORITY_ID',
@@ -1100,7 +1149,7 @@ $dictionary['HAM_WO'] = array (
 			'size' => '20',
 
 			
-		),
+			),
 		'wo_priority' => array (
 			'required' => true,
 			'source' => 'non-db',
@@ -1129,10 +1178,10 @@ $dictionary['HAM_WO'] = array (
 			'studio' => 'visible',
 
 			
-		),
+			),
 
 		#合同号
-	'contract_id' => array (
+		'contract_id' => array (
 			'required' => false,
 			'name' => 'contract_id',
 			'vname' => 'LBL_CONTRACT_ID',
@@ -1153,7 +1202,7 @@ $dictionary['HAM_WO'] = array (
 			'size' => '20',
 
 			
-		),
+			),
 		'contract' => array (
 			'required' => false,
 			'source' => 'non-db',
@@ -1182,10 +1231,10 @@ $dictionary['HAM_WO'] = array (
 			'studio' => 'visible',
 
 			
-		),
+			),
 
 		#工作中心
-	'work_center_id' => array (
+		'work_center_id' => array (
 			'required' => false,
 			'name' => 'work_center_id',
 			'vname' => 'LBL_WORK_CENTER_ID',
@@ -1206,7 +1255,7 @@ $dictionary['HAM_WO'] = array (
 			'size' => '20',
 
 			
-		),
+			),
 		'work_center' => array (
 			'required' => true,
 			'source' => 'non-db',
@@ -1235,10 +1284,10 @@ $dictionary['HAM_WO'] = array (
 			'studio' => 'visible',
 
 			
-		),
+			),
 
 		#资源/工种
-	'work_center_res_id' => array (
+		'work_center_res_id' => array (
 			'required' => false,
 			'name' => 'work_center_res_id',
 			'vname' => 'LBL_WORK_CENTER_RES_ID',
@@ -1259,7 +1308,7 @@ $dictionary['HAM_WO'] = array (
 			'size' => '20',
 
 			
-		),
+			),
 		'work_center_res' => array (
 			'required' => true,
 			'source' => 'non-db',
@@ -1288,10 +1337,10 @@ $dictionary['HAM_WO'] = array (
 			'studio' => 'visible',
 
 			
-		),
+			),
 
 		#负责人
-	'work_center_people_id' => array (
+		'work_center_people_id' => array (
 			'required' => false,
 			'name' => 'work_center_people_id',
 			'vname' => 'LBL_WORK_CENTER_PEOPLE_ID',
@@ -1312,7 +1361,7 @@ $dictionary['HAM_WO'] = array (
 			'size' => '20',
 
 			
-		),
+			),
 		'work_center_people' => array (
 			'required' => true,
 			'source' => 'non-db',
@@ -1341,9 +1390,9 @@ $dictionary['HAM_WO'] = array (
 			'studio' => 'visible',
 
 			
-		),
+			),
 		#工单修改权限
-	'work_order_access' => array (
+		'work_order_access' => array (
 			'required' => true,
 			'name' => 'work_order_access',
 			'vname' => 'LBL_WORK_ORDER_ACCESS',
@@ -1366,10 +1415,10 @@ $dictionary['HAM_WO'] = array (
 			'studio' => 'visible',
 			'dependency' => false,
 			
-		),
+			),
 
 		#工序完工时可指派后续人员
-	'next_woop_assignment' => array (
+		'next_woop_assignment' => array (
 			'required' => false,
 			'name' => 'next_woop_assignment',
 			'vname' => 'LBL_NEXT_WOOP_ASSIGNMENT',
@@ -1386,10 +1435,10 @@ $dictionary['HAM_WO'] = array (
 			'unified_search' => false,
 			'merge_filter' => 'disabled',
 			
-		),
+			),
 
 		#工单随最后一道工序完成
-	'complete_by_last_woop' => array (
+		'complete_by_last_woop' => array (
 			'required' => false,
 			'name' => 'complete_by_last_woop',
 			'vname' => 'LBL_COMPLETE_BY_LAST_WOOP',
@@ -1406,137 +1455,137 @@ $dictionary['HAM_WO'] = array (
 			'unified_search' => false,
 			'merge_filter' => 'disabled',
 			
-		),
+			),
 		
 		
 		'attribute1' =>
-    array (
-      'required' => false,
-      'name' => 'attribute1',
-      'vname' => 'LBL_ATTRIBUTE1',
-      'type' => 'varchar',
-      'massupdate' => 0,
-      'no_default' => false,
-      'comments' => '',
-      'help' => '',
-      'importable' => 'true',
-      'duplicate_merge' => 'disabled',
-      'duplicate_merge_dom_value' => '0',
-      'audited' => false,
-      'inline_edit' => true,
-      'reportable' => true,
-      'unified_search' => false,
-      'merge_filter' => 'disabled',
-      'len' => '255',
-      'size' => '20',
-      ),
-    'attribute2' =>
-    array (
-      'required' => false,
-      'name' => 'attribute2',
-      'vname' => 'LBL_ATTRIBUTE2',
-      'type' => 'varchar',
-      'massupdate' => 0,
-      'no_default' => false,
-      'comments' => '',
-      'help' => '',
-      'importable' => 'true',
-      'duplicate_merge' => 'disabled',
-      'duplicate_merge_dom_value' => '0',
-      'audited' => false,
-      'inline_edit' => true,
-      'reportable' => true,
-      'unified_search' => false,
-      'merge_filter' => 'disabled',
-      'len' => '255',
-      'size' => '20',
-      ),
-    'attribute3' =>
-    array (
-      'required' => false,
-      'name' => 'attribute3',
-      'vname' => 'LBL_ATTRIBUTE3',
-      'type' => 'varchar',
-      'massupdate' => 0,
-      'no_default' => false,
-      'comments' => '',
-      'help' => '',
-      'importable' => 'true',
-      'duplicate_merge' => 'disabled',
-      'duplicate_merge_dom_value' => '0',
-      'audited' => false,
-      'inline_edit' => true,
-      'reportable' => true,
-      'unified_search' => false,
-      'merge_filter' => 'disabled',
-      'len' => '255',
-      'size' => '20',
-      ),
-    'attribute4' =>
-    array (
-      'required' => false,
-      'name' => 'attribute4',
-      'vname' => 'LBL_ATTRIBUTE4',
-      'type' => 'varchar',
-      'massupdate' => 0,
-      'no_default' => false,
-      'comments' => '',
-      'help' => '',
-      'importable' => 'true',
-      'duplicate_merge' => 'disabled',
-      'duplicate_merge_dom_value' => '0',
-      'audited' => false,
-      'inline_edit' => true,
-      'reportable' => true,
-      'unified_search' => false,
-      'merge_filter' => 'disabled',
-      'len' => '255',
-      'size' => '20',
-      ),
-    'attribute5' =>
-    array (
-      'required' => false,
-      'name' => 'attribute5',
-      'vname' => 'LBL_ATTRIBUTE5',
-      'type' => 'varchar',
-      'massupdate' => 0,
-      'no_default' => false,
-      'comments' => '',
-      'help' => '',
-      'importable' => 'true',
-      'duplicate_merge' => 'disabled',
-      'duplicate_merge_dom_value' => '0',
-      'audited' => false,
-      'inline_edit' => true,
-      'reportable' => true,
-      'unified_search' => false,
-      'merge_filter' => 'disabled',
-      'len' => '255',
-      'size' => '20',
-      ),
-    'attribute6' =>
-    array (
-      'required' => false,
-      'name' => 'attribute6',
-      'vname' => 'LBL_ATTRIBUTE6',
-      'type' => 'varchar',
-      'massupdate' => 0,
-      'no_default' => false,
-      'comments' => '',
-      'help' => '',
-      'importable' => 'true',
-      'duplicate_merge' => 'disabled',
-      'duplicate_merge_dom_value' => '0',
-      'audited' => false,
-      'inline_edit' => true,
-      'reportable' => true,
-      'unified_search' => false,
-      'merge_filter' => 'disabled',
-      'len' => '255',
-      'size' => '20',
-      ),
+		array (
+			'required' => false,
+			'name' => 'attribute1',
+			'vname' => 'LBL_ATTRIBUTE1',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+			),
+		'attribute2' =>
+		array (
+			'required' => false,
+			'name' => 'attribute2',
+			'vname' => 'LBL_ATTRIBUTE2',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+			),
+		'attribute3' =>
+		array (
+			'required' => false,
+			'name' => 'attribute3',
+			'vname' => 'LBL_ATTRIBUTE3',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+			),
+		'attribute4' =>
+		array (
+			'required' => false,
+			'name' => 'attribute4',
+			'vname' => 'LBL_ATTRIBUTE4',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+			),
+		'attribute5' =>
+		array (
+			'required' => false,
+			'name' => 'attribute5',
+			'vname' => 'LBL_ATTRIBUTE5',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+			),
+		'attribute6' =>
+		array (
+			'required' => false,
+			'name' => 'attribute6',
+			'vname' => 'LBL_ATTRIBUTE6',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+			),
 
-	'wo_lines' => array (
+		'wo_lines' => array (
 			'required' => false,
 			'name' => 'wo_lines',
 			'source'=>'non-db',
@@ -1553,7 +1602,7 @@ $dictionary['HAM_WO'] = array (
 			'reportable' => false,
 			'unified_search' => false,
 			'merge_filter' => 'disabled',
-		),
+			),
 		'sr_link' => array (
 			'name' => 'sr_link',
 			'type' => 'link',
@@ -1565,7 +1614,7 @@ $dictionary['HAM_WO'] = array (
 			'source' => 'non-db',
 
 			
-		),
+			),
 
 		'woop_link' => array (
 			'name' => 'woop_link',
@@ -1578,7 +1627,7 @@ $dictionary['HAM_WO'] = array (
 			'source' => 'non-db',
 
 			
-		),
+			),
 		'wo_line_link' => array (
 			'name' => 'wo_line_link',
 			'type' => 'link',
@@ -1590,54 +1639,54 @@ $dictionary['HAM_WO'] = array (
 			'source' => 'non-db',
 
 			
-		),
+			),
 
 		
-	),
-	'relationships' => array (
-
-		'ham_wo_sr' => array (
-			'lhs_module' => 'HAM_WO',
-			'lhs_table' => 'ham_wo',
-			'lhs_key' => 'id',
-			'rhs_module' => 'HAM_SR',
-			'rhs_table' => 'ham_sr',
-			'rhs_key' => 'ham_wo_id',
-			'relationship_type' => 'one-to-many',
-
-			
 		),
+'relationships' => array (
 
-		'ham_wo_woop' => array (
-			'lhs_module' => 'HAM_WO',
-			'lhs_table' => 'ham_wo',
-			'lhs_key' => 'id',
-			'rhs_module' => 'HAM_WOOP',
-			'rhs_table' => 'ham_woop',
-			'rhs_key' => 'ham_wo_id',
-			'relationship_type' => 'one-to-many',
-
-			
-		),
-
-		'ham_wo_line' => array (
-			'lhs_module' => 'HAM_WO',
-			'lhs_table' => 'ham_wo',
-			'lhs_key' => 'id',
-			'rhs_module' => 'HAM_WO_Lines',
-			'rhs_table' => 'ham_wo_lines',
-			'rhs_key' => 'ham_wo_id',
-			'relationship_type' => 'one-to-many',
-
-			
-		),
+	'ham_wo_sr' => array (
+		'lhs_module' => 'HAM_WO',
+		'lhs_table' => 'ham_wo',
+		'lhs_key' => 'id',
+		'rhs_module' => 'HAM_SR',
+		'rhs_table' => 'ham_sr',
+		'rhs_key' => 'ham_wo_id',
+		'relationship_type' => 'one-to-many',
 
 		
-	),
-	'optimistic_locking' => true,
-	'unified_search' => true,
+		),
+
+	'ham_wo_woop' => array (
+		'lhs_module' => 'HAM_WO',
+		'lhs_table' => 'ham_wo',
+		'lhs_key' => 'id',
+		'rhs_module' => 'HAM_WOOP',
+		'rhs_table' => 'ham_woop',
+		'rhs_key' => 'ham_wo_id',
+		'relationship_type' => 'one-to-many',
+
+		
+		),
+
+	'ham_wo_line' => array (
+		'lhs_module' => 'HAM_WO',
+		'lhs_table' => 'ham_wo',
+		'lhs_key' => 'id',
+		'rhs_module' => 'HAM_WO_Lines',
+		'rhs_table' => 'ham_wo_lines',
+		'rhs_key' => 'ham_wo_id',
+		'relationship_type' => 'one-to-many',
+
+		
+		),
 
 	
+	),
+'optimistic_locking' => true,
+'unified_search' => true,
+
+
 );
 if (!class_exists('VardefManager')) {
 	require_once ('include/SugarObjects/VardefManager.php');
@@ -1646,4 +1695,4 @@ VardefManager :: createVardef('HAM_WO', 'HAM_WO', array (
 	'basic',
 	'assignable',
 	'security_groups'
-));
+	));

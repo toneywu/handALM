@@ -113,4 +113,7 @@ $mod_strings = array (
   'LBL_WO_WORK_OBJECT'=>'Work with',
   'LBL_EDITVIEW_PANEL_CONTRL'=>'Responsibility and Control',
   'LBL_WO_OWNER'=>'Owner',
+  'LBL_CREATE_REVENUE'=>'Create Revenue',
+  'LBL_REVENUE_QUOTE_NUMBER'=>'Revenue Quote Number',
+  'LBL_HAOS_REVENUES_QUOTES_ID'=>'Revenue Quote Id'
 );
