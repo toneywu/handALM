@@ -7,7 +7,6 @@ class AOS_ContractsViewList extends ViewList
  *  重写方法，添加where条件
  */
 function processSearchForm(){
-	global $current_user;
 	parent::processSearchForm();
 	$haa_frameworks_id=$_SESSION["current_framework"];
 	if ($this->where) { 
@@ -16,6 +15,7 @@ function processSearchForm(){
 		 $this->where.=" EXISTS ( SELECT 1 FROM aos_contracts_cstm tc WHERE aos_contracts.id=tc.id_c AND tc.haa_frameworks_id_c='".$haa_frameworks_id."')";
 	}
 	//增加HPR权限控制逻辑
+	global $current_user;
 	require_once('modules/HPR_Group_Priviliges/checkListACL.php');
 	$current_module = $this->module;
 	$current_user_id =$current_user->id;

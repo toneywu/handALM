@@ -2,13 +2,14 @@
 //根据用户匹配权限策略
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
-function getListViewSQLStatement($current_module,$user_id,$framework_id) {
+function getListViewSQLStatement($current_module,$user_id,$framework_id,$paraArray=array()) {
     global $db,$currentModule;
     if ($current_module==''){
         $current_module=$currentModule;
     }
     $listViewSQLStatement = "";
     $beanUser = BeanFactory::getBean('Users',$user_id);
+
     if(isset($beanUser)) {
         $account_id_c = isset($beanUser->account_id_c)?$beanUser->account_id_c:'';
     }
@@ -38,16 +39,21 @@ function getListViewSQLStatement($current_module,$user_id,$framework_id) {
         and hg.haa_frameworks_id_c='" . $framework_id . "'".
         "and hgm.account_id_c='".$account_id_c."'".
         "and hgp.privilige_module='".$current_module."'".
-        "and hgm.user_id_c=IFNULL('".$user_id."',hgm.user_id_c)";
+        "and (hgm.user_id_c='' or hgm.user_id_c='".$user_id."')";
 
         $privilige_result = $db->query($privilige_sql);
 
         while ($privilige_row = $db->fetchByAssoc($privilige_result)) {
+
+
             $listViewSQLStatement = empty($listViewSQLStatement)?$privilige_row['sql_statement_for_listview']:($listViewSQLStatement." AND ".$privilige_row['sql_statement_for_listview']);
         }
     }
 
     $listViewSQLStatement=str_replace("&#039;", "'", $listViewSQLStatement);
+    for ($i=0;$i<count($paraArray);$i++){
+        $listViewSQLStatement=str_replace(":".($i+1), $paraArray[$i], $listViewSQLStatement);
+    }
     return $listViewSQLStatement;
 }
 ?>
