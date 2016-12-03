@@ -758,7 +758,7 @@ $app_list_strings['moduleList']['HAM_ACT_OP'] = 'Std.Activity Tasks';
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['HAT_EventManeger'] = 'Incidents';
+$app_list_strings['moduleList']['HAT_Incidents'] = 'Incidents';
 
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
@@ -1432,6 +1432,48 @@ $app_list_strings['moduleList']['HPR_AM_Roles'] = 'AM Roles';
 $app_list_strings['moduleList']['HAOS_Revenues_Quotes'] = '收支计费项';
 
 
+$app_list_strings['contract_status_list']=array (
+  'Not Started' => '未开始',
+  'In Progress' => '处理中',
+  'Signed' => '签约',
+  'Expired' => '到期',
+  'Proposed' => '拟定',
+  'Renew' => '续签',
+  'Termination' => '解除',
+);
+
+
+$app_list_strings['settlement_period_list']=array (
+  'Once' => '一次结清',
+  'Monthly' => '按月',
+);
+
+
+
+
+$app_list_strings['haos_line_item_type_list']=array (
+  'Product' => '产品',
+  'Service' => '服务',
+);
+
+$app_list_strings['haos_source_code_list']=array (
+  'AOS_Contracts' => '合同',
+  'Manual' => '手工',
+  'Excel' => 'Excel导入',
+  'Others' => '其他事件',
+  'Ref_System' => '外围系统',
+);
+
+$app_list_strings['invoice_status_dom']=array (
+  'Paid' => 'Paid',
+  'Unpaid' => 'Unpaid',
+  'Cancelled' => 'Cancelled',
+  'PartedPaid' => 'Partially Paid',
+
+);
+
+
+
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
@@ -1517,7 +1559,7 @@ $app_list_strings['moduleList']['HAOS_Insurance_Claims_Lines'] = '理赔明细';
 
 
 $app_list_strings['moduleList']['HAOS_Revenues_Quotes'] = '收支计费项';
-$app_list_strings['contract_status_list']=array (
+$GLOBALS['app_list_strings']['contract_status_list']=array (
   'Not Started' => '未开始',
   'In Progress' => '处理中',
   'Signed' => '签约',
@@ -1528,7 +1570,7 @@ $app_list_strings['contract_status_list']=array (
 );
 
 
-$app_list_strings['settlement_period_list']=array (
+$GLOBALS['app_list_strings']['settlement_period_list']=array (
   'Once' => '一次结清',
   'Monthly' => '按月',
 );
@@ -1536,14 +1578,13 @@ $app_list_strings['settlement_period_list']=array (
 
 
 
-$app_list_strings['haos_line_item_type_list']=array (
+$GLOBALS['app_list_strings']['haos_line_item_type_list']=array (
   'Product' => '产品',
   'Service' => '服务',
 );
 
-$app_list_strings['haos_source_code_list']=array (
+$GLOBALS['app_list_strings']['haos_source_code_list']=array (
   'AOS_Contracts' => '合同',
-  'HAM_WO' => '工单WO',
   'HAOS_Revenues_Quotes' => '收支计费项',
   'Manual' => '手工',
   'Excel' => 'Excel导入',
@@ -1810,6 +1851,9 @@ $app_list_strings['hat_event_type_list']=array (
   'INV_OUT' => 'INV: Stock-Out',
   'INV_TRANSFER' => 'INV: Stock Transfer',
   'INV_WO' => 'INV: Issue to WO',
+  'EVENT_MANAGER' => 'Incident',
+  'INVOICE' => 'Invoice',
+  'REVENUE' => 'Revenue/Expense Trans.',
 );
 
 $app_list_strings['hat_asset_scope_list']=array (
