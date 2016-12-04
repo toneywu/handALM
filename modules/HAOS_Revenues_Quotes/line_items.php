@@ -39,7 +39,7 @@ function display_lines($focus, $field, $value, $view){
 
 
     while ($row = $focus->db->fetchByAssoc($result)) {
-        $line_item->retrieve($row['id']);      
+        $line_item->retrieve($row['id']);
     }
 }
 

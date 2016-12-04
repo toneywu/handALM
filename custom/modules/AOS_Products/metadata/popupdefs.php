@@ -4,11 +4,15 @@ $popupMeta = array (
     'varName' => 'AOS_Products',
     'orderBy' => 'aos_products.name',
     'whereClauses' => array (
-  'name' => 'aos_products.name',
-  'part_number' => 'aos_products.part_number',
-  'type' => 'aos_products.type',
-  'is_asset_group_c' => 'aos_products_cstm.is_asset_group_c',
-),
+      'name' => 'aos_products.name',
+      'part_number' => 'aos_products.part_number',
+      'type' => 'aos_products.type',
+      'is_asset_group_c' => 'aos_products_cstm.is_asset_group_c',
+  ),
+
+'whereStatement'=>'(aos_products_cstm.`haa_frameworks_id_c` = "'.$_SESSION["current_framework"].'")',
+
+
     'searchInputs' => array (
   1 => 'name',
   4 => 'part_number',

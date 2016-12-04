@@ -1,3 +1,6 @@
+.navbar-inverse {
+	background-color: #245a86 !important;
+}
 
 /*Start of Cuxtomization*/
 /*打印时不显示HREF中的内容*/
@@ -202,7 +205,6 @@ input[type=text], select{
 	z-index:1001;
 	padding:8px 4px 8px 8px;
 	background:#F7F7F7;
-	/* left: 225px !important */;
 }*/
 
 .dropdown-menu li a, .dropdown-menu li a:hover{ /*默认的顶部下拉菜单太小，加宽*/
@@ -212,9 +214,12 @@ input[type=text], select{
 	min-width:220px;
 }
 .currentTab {/*頂部菜单，突出当前的模块*/
-	background-color:#609DC1;
+	/*background-color:#609DC1;
 	padding:12px 10px 12px 10px;
-	margin:0px 5px 0 3px;
+	margin:0px 5px 0 3px;*/
+	background: linear-gradient(rgb(138, 196, 255) 1%,rgb(0, 139, 206) 80%, rgb(54, 127, 202));
+    padding: 11px 11px 17px 11px;
+    border-radius: 10px 10px 0 0;
 }
 .datetimecombo_time, .datetimecombo_time { /*默认的时间显示选择框上下不对齐*/
 	margin:-5px 0 0 0;
@@ -285,17 +290,24 @@ input[type=text], select{
 /******************************************************/
 /* Action Bar */
 #actionMenuSidebar {
-	padding:10px;
+	padding:0;
+	margin-bottom: 1em;
 }
-
+#actionMenuSidebar h2 {
+	display: none;
+}
 .nav li.actionmenulinks a {
     padding-left: 30px;
     margin-left: -10px;
     background-repeat: no-repeat;
     background-position-y: 6px;
     background-position-x: 10px;
+    background-color: #e6ecef;
+    margin-top: 0.5em;
 }
-
+.nav li.actionmenulinks a:hover {
+    background-color: #cff4ce;
+}
 .nav .actionmenulinks a.side-bar-Create, .nav .actionmenulinks a.side-bar-Add {
     background-image: url("../../../../custom/themes/SuiteR_HANDALM/images/sidebar/Add.png");
 }
@@ -309,6 +321,11 @@ input[type=text], select{
 .nav .actionmenulinks a.side-bar-Create_Contact_Vcard {
     background-image: url("../../../../custom/themes/SuiteR_HANDALM/images/sidebar/Create_Contact_Vcard.png");
 }
+
+.favorite_icon_fill .icon {
+fill:#ff9800;
+}
+
 #create_link {
 	display: none;
 }
@@ -317,7 +334,7 @@ input[type=text], select{
     top: 80px;
     z-index: 1000;
     height: 30px;
-    width: 30px;
+    width: 25px;
     background-color: #72c6f7;
     background-image: none,  url("../../../../custom/themes/SuiteR_HANDALM/images/p_show_sidebar.png");
     background-repeat: no-repeat;

@@ -108,7 +108,7 @@ array (
             'label' => 'LBL_ASSET_GROUP',
             'displayParams' => 
             array (
-              'initial_filter' => '&type_advanced=Good',
+              'initial_filter' => '&type_advanced=Good&is_asset_group_c_advanced=1',
               'field_to_name_array' => 
               array (
                 'name' => 'asset_group',

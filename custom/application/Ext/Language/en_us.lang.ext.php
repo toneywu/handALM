@@ -145,6 +145,7 @@ $app_list_strings['haa_code_type_list']=array (
   'insurance_subtype' => 'insurance_subtype',
   );
 
+
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
