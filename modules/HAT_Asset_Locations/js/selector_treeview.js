@@ -224,7 +224,7 @@ var setting = {
 	function loadDataForNodeDetail(treeObj, node, targetDIV) {//通过Ajax加载当前节点明细
 		var id = node.id;
 		var type = node.type;
-		console.log('index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeNodeDetailHTML&id=' + id+"&type="+ type);
+		//console.log('index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeNodeDetailHTML&id=' + id+"&type="+ type);
 		if ( typeof(node.data)== 'undefined') {
 			//undefined说明当前的结点没有明细信息，所以需要通过Ajax加载数据
 			targetDIV.html('<img align="absmiddle" src="custom/resources/zTree/css/metroStyle/img/loading.gif"></span> '+SUGAR.language.get('app_strings', 'LBL_LOADING'));
@@ -238,7 +238,7 @@ var setting = {
 						}
 						node.data=datatopush;
 						treeObj.updateNode(node);
-						//console.log(node);
+						console.log(node);
 						//node.setNodesProperty("NodeLoaded", "true" , true);
 						showNodeDetailHTML(node,targetDIV);
 					},
@@ -282,7 +282,6 @@ function showNodeDetailHTML(node,targetDIV) {
 		if (typeof (node.data.chart)!="undefined") {
 			varHTML+=node.data.chart;
 		}
-
 
 	}
 	targetDIV.html(varHTML);

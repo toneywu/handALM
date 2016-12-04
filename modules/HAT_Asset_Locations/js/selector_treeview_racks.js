@@ -16,9 +16,10 @@ function showITRacks(node){ //渲染机柜，在首次加载时被调用
 
 		for (i in globalServerData.server) {
 		  	drawBlocker(i)//绘制设备占位或空占位
-			selectServerArea();//加载可触发的事件
 		}
+
 	}
+	selectServerArea();//加载可触发的事件
 }
 
 /******************
@@ -330,7 +331,6 @@ function selectServerArea() {
 	$("#rack_frame tr td.rack_td")
 		.mousedown(function () {
 		console.log("DOWN");
-		alert("Clicked");
 		  if (isMouseDown == false) {
 		  	  $("#rack_frame td").removeClass("rack_highlighted");
 		  	  $("#rack_frame td").removeClass("rack_error");
