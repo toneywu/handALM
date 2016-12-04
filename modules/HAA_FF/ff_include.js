@@ -11,7 +11,7 @@ $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialo
 
 
 function triger_setFF(id_value, module_name) {
-  console.log("index.php?to_pdf=true&module=HAA_FF&action=setFF&ff_module="+module_name+"&ff_id="+id_value);
+  //console.log("index.php?to_pdf=true&module=HAA_FF&action=setFF&ff_module="+module_name+"&ff_id="+id_value);
   if (id_value!="") {
    $.ajax({
         url: "index.php?to_pdf=true&module=HAA_FF&action=setFF&ff_module="+module_name+"&ff_id="+id_value,
@@ -47,7 +47,7 @@ function htmlUnescape(str){
 function setFF(FFObj) {
 	//设置FlexFORM，基于triger_setFF函数读取到的Ajax结果，动态的调整界面字段
 	//其中FFObj是FF_Fields中定义的需要变化的各个字段及属性
-	console.log(FFObj);//<-------------------如果你需要调试，可以将这一行的内容输出
+	//console.log(FFObj);//<-------------------如果你需要调试，可以将这一行的内容输出
 
 	var view = action_sugar_grp1;
 	//有些界面在EditView和DetailView中处理有所不同，因此先读取出当前界面是哪些，保存在View中
@@ -72,7 +72,7 @@ function setFF(FFObj) {
 	//修改标签名称
 	 if (FFObj.fieldtype!="HIDE" && FFObj.fieldtype!="PLACEHOLDER") {
 	//如果是非隐藏字段
-		console.log(FFObj.field + " lab:"+FFObj.label+" "+(FFObj.label!=null))
+		//console.log(FFObj.field + " lab:"+FFObj.label+" "+(FFObj.label!=null))
 		if (FFObj.label!=null && FFObj.label!="") {
 			if (view=="EditView") {
 				$("#"+FFObj.field+'_label').html(FFObj.label+":"); 
@@ -346,7 +346,7 @@ function mark_field_readonly(field_name) {
 	    }
 		
 		if($("#"+field_name).attr("class")=="date_input"){
-		console.log(field_name);
+		//console.log(field_name);
 		var next_dates_array =$("#"+field_name).nextAll();
 		next_dates_array.css({"visibility":"hidden"});
 		}

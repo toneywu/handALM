@@ -755,7 +755,8 @@ function insertTransLineFootor(tableid) {
 }
 
 function getWOTargetDate(ln){
-	$wo_id = $("#source_wo_id").val();
+  $wo_id = $("#source_wo_id").val();
+  console.log("wo_id="+$wo_id);
   console.log('index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=getWOInfos&ham_wo_id='+$wo_id);
 	$.ajax({
    url:'index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=getWOInfos&ham_wo_id='+$wo_id,

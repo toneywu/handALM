@@ -145,11 +145,11 @@ function resetEventType() {
    }else{
    		  //在头的Views中会加载Framework中的属性。决定资产的使用人及负责人字段是值列表还是文字
 		if (typeof using_person_field_rule== "undefined" || using_person_field_rule=="TEXT") { //判断使用人字段是列表还是文本框
-			loopField("line_target_owning_person",global_eventOptions.change_owning_person);
-			loopField("line_target_owning_person_desc","INVISIABLE");
-		} else {
 			loopField("line_target_owning_person","INVISIABLE");
 			loopField("line_target_owning_person_desc",global_eventOptions.change_owning_person);
+		} else {
+			loopField("line_target_owning_person",global_eventOptions.change_owning_person);
+			loopField("line_target_owning_person_desc","INVISIABLE");
 		}
    };
 
@@ -159,11 +159,11 @@ function resetEventType() {
    }else{
    		  //在头的Views中会加载Framework中的属性。决定资产的使用人及负责人字段是值列表还是文字
    		if (typeof owning_person_field_rule== "undefined" || owning_person_field_rule=="TEXT") {//判断负责人字段是列表还是文本框
-			loopField("line_target_using_person",global_eventOptions.change_using_person);
-			loopField("line_target_using_person_desc","INVISIABLE");
-		} else {
 			loopField("line_target_using_person","INVISIABLE");
 			loopField("line_target_using_person_desc",global_eventOptions.change_using_person);
+		} else {
+			loopField("line_target_using_person",global_eventOptions.change_using_person);
+			loopField("line_target_using_person_desc","INVISIABLE");
 		}
    };
 
