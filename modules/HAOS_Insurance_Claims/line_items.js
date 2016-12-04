@@ -497,3 +497,8 @@ function setDefault() {
 	}
 	var setime=setTimeout("setDefault()",500);
 }
+
+function replace_display_lines(linesHtml,elementId) {
+  var lineItems=document.getElementById(elementId);
+  lineItems.innerHTML=linesHtml;
+}
