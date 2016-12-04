@@ -1,5 +1,5 @@
 <?php
-// created: 2016-11-17 22:00:50
+// created: 2016-12-03 19:14:47
 $subpanel_layout['list_fields'] = array (
   'relate_insurance_number' => 
   array (
@@ -24,8 +24,9 @@ $subpanel_layout['list_fields'] = array (
   ),
   'other_side_amount' => 
   array (
-    'type' => 'varchar',
+    'type' => 'currency',
     'vname' => 'LBL_OTHER_SIDE_AMOUNT',
+    'currency_format' => true,
     'width' => '10%',
     'default' => true,
   ),
@@ -53,12 +54,12 @@ $subpanel_layout['list_fields'] = array (
     'width' => '10%',
     'default' => true,
   ),
-  'document_ready_flag' => 
+  'document_deliver_date' => 
   array (
-    'type' => 'bool',
-    'default' => true,
-    'vname' => 'LBL_DOCUMENT_READY_FLAG',
+    'type' => 'date',
+    'vname' => 'LBL_DOCUMENT_DELIVER_DATE',
     'width' => '10%',
+    'default' => true,
   ),
   'premium_payment_date' => 
   array (
@@ -67,17 +68,19 @@ $subpanel_layout['list_fields'] = array (
     'width' => '10%',
     'default' => true,
   ),
-  'document_deliver_date' => 
-  array (
-    'type' => 'date',
-    'vname' => 'LBL_DOCUMENT_DELIVER_DATE',
-    'width' => '10%',
-    'default' => true,
-  ),
   'gap_payment_date' => 
   array (
     'type' => 'date',
     'vname' => 'LBL_GAP_PAYMENT_DATE',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'accident_experience' => 
+  array (
+    'type' => 'text',
+    'studio' => 'visible',
+    'vname' => 'LBL_ACCIDENT_EXPERIENCE',
+    'sortable' => false,
     'width' => '10%',
     'default' => true,
   ),

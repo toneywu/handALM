@@ -97,8 +97,8 @@ $mod_strings = array (
   'LBL_WOOP_SUBPANEL_TITLE' => '工单任务',
   'LBL_WO_LINE_SUBPANEL_TITLE'=>'工作对象行',
   'LBL_REPORTER' => '报告人',
-	'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL'=>'状态修改',
-	'LBL_WORK_CENTER'=>'工作中心',
+  'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL'=>'状态修改',
+  'LBL_WORK_CENTER'=>'工作中心',
   'LBL_WORK_CENTER_RES'=>'资源/工种',
   'LBL_WORK_CENTER_PEOPLE'=>'负责人',
   'LBL_WORK_ORDER_ACCESS'=>'工单修改权限',
@@ -120,6 +120,8 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL_DESC'=>'附加属性',
   'LBL_WO_WORK_OBJECT'=>'工作对象',
   'LBL_EDITVIEW_PANEL_CONTRL'=>'工作职责及权限控制',
-    'LBL_WO_OWNER'=>'负责人',
-
-);
+  'LBL_WO_OWNER'=>'负责人',
+  'LBL_HAOS_REVENUES_QUOTES_ID'=>'Revenue Quote Id',
+  'LBL_CREATE_REVENUE'=>'创建收支项',
+  'LBL_REVENUE_QUOTE_NUMBER'=>'收支计费项编号'
+  );

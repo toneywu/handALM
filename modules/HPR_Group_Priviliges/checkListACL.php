@@ -9,7 +9,6 @@ function getListViewSQLStatement($current_module,$user_id,$framework_id,$paraArr
     }
     $listViewSQLStatement = "";
     $beanUser = BeanFactory::getBean('Users',$user_id);
-
     if(isset($beanUser)) {
         $account_id_c = isset($beanUser->account_id_c)?$beanUser->account_id_c:'';
     }
@@ -44,8 +43,6 @@ function getListViewSQLStatement($current_module,$user_id,$framework_id,$paraArr
         $privilige_result = $db->query($privilige_sql);
 
         while ($privilige_row = $db->fetchByAssoc($privilige_result)) {
-
-
             $listViewSQLStatement = empty($listViewSQLStatement)?$privilige_row['sql_statement_for_listview']:($listViewSQLStatement." AND ".$privilige_row['sql_statement_for_listview']);
         }
     }

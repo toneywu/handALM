@@ -1,5 +1,5 @@
 <?php
-// created: 2016-05-02 22:00:08
+// created: 2016-12-03 18:25:07
 $mod_strings = array (
   'LBL_EDITVIEW_PANEL4' => '标识与属性',
   'LBL_DETAILVIEW_PANEL5' => '结构与关联',
@@ -10,4 +10,5 @@ $mod_strings = array (
   'LBL_PARENT_ASSET' => '父资产',
   'LBL_SUPPLIER_ORG' => '供应商',
   'LBL_HAT_ASSETS_CONTACTS_FROM_CONTACTS_TITLE' => '使用人',
+  'LBL_HAOS_INSURANCE_CLAIMS_SUBPANEL_TITLE' => '保险理赔',
 );

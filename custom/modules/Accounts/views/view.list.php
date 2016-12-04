@@ -28,7 +28,7 @@ class AccountsViewList extends ViewList
     		$this->where="haa_frameworks_id_c='".$haa_frameworks_id."'";
     	}
 
-        //增加HPR权限控制逻辑
+          //增加HPR权限控制逻辑
         require_once('modules/HPR_Group_Priviliges/checkListACL.php');
         global $current_user;
         $current_module = $this->module;
