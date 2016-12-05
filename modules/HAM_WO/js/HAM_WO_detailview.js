@@ -202,7 +202,24 @@ function process_woop(woop_id,wo_id){
  	/*}*/
  };
 
-
+	/**
+ * 调用Ajax请求 获取是否有创建收支项权限
+ * @param name
+ */
+ function checkEditRevenueACL(id){
+ 	var return_val ="";
+ 	return_val=$.ajax({
+ 		url: 'index.php?to_pdf=true&module=HAM_WO&action=checkEditRevenueACL&id=' + id,
+ 		success: function (data) {
+ 			if(data=="N"){
+ 				$("#create_to_revenue_button").hide();
+ 			}
+ 		},
+ 		error: function () {
+ 			alert('Error loading document');
+ 		}
+ 	});
+ };
 
 /**
  * document 页面加载 入口函数
@@ -228,11 +245,14 @@ showWOLines();*/
 	 * checkAccess
 	 */
 	 checkAccess($("input[name='record']").val());
+	 //增加创建收支项权限 osmond.liu 20161205
+	 //checkEditRevenueACL
+	 checkEditRevenueACL($("input[name='record']").val());
+//end 
 
-
-	 var complete_btn=$("<input type='button' class='btn_detailview' id='btn_complete' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_COMPLETE_BUTTON_LABEL')+"'>");
-	 if($("#wo_status").val()=="APPROVED"){
-	 	$("#btn_change_status").after(complete_btn);
+var complete_btn=$("<input type='button' class='btn_detailview' id='btn_complete' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_COMPLETE_BUTTON_LABEL')+"'>");
+if($("#wo_status").val()=="APPROVED"){
+	$("#btn_change_status").after(complete_btn);
 		//registe function cancel()
 		$("#btn_complete").click(function(){ //如果取消按钮 返回
 			complete_work_order($("input[name='record']").val());
@@ -250,13 +270,13 @@ showWOLines();*/
 	//等待前序的工序不能编辑
 	var woopEdit='';
 	var woopStatus='';
-    $("#list_subpanel_woop table tr:gt(3)").each(function(i){
-    	woopEdit="#woop_edit_"+(i+1);
-    	woopStatus=$(this).children().eq(2).text().trim();
-    	if (woopStatus=='等待前序'){
-    		$(woopEdit).removeAttr("href"); 
-    	}
-    });
+	$("#list_subpanel_woop table tr:gt(3)").each(function(i){
+		woopEdit="#woop_edit_"+(i+1);
+		woopStatus=$(this).children().eq(2).text().trim();
+		if (woopStatus=='等待前序'){
+			$(woopEdit).removeAttr("href"); 
+		}
+	});
 	//
 }
 );

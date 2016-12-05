@@ -48,6 +48,7 @@ $mod_strings = array (
   'LBL_HAT_ASSET_LOCATIONS_HAT_ASSET_LOCATIONS_FROM_HAT_ASSET_LOCATIONS_L_TITLE' => 'Asset Locations',
   'LBL_MAP_ZOOM' => 'Default Zoom Level',
   'LBL_PARENT_LOCATION' => 'Parent Location',
+  'LBL_PARENT_LOCATION_ID' => 'Parent Location Id',
   'LBL_MAINT_SITE' => 'Maint. Site/Area',
   'LBL_TREEVIEW' => 'Treeview',
   'LBL_HAT_ASSET_LOCATIONS_HAT_ASSET_LOCATIONS_FROM_HAT_ASSET_LOCATIONS_R_TITLE' => 'Sub-Asset Locations',

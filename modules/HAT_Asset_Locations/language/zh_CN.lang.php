@@ -47,6 +47,7 @@ $mod_strings = array (
   'LBL_MAP_TYPE' => '地图/GIS类型',
   'LBL_MAP_DISPLAY_AREA' => '地图显示区',
   'LBL_PARENT_LOCATION' => '父位置节点',
+  'LBL_PARENT_LOCATION_ID' => '父位置节点Id',
   'LBL_MAP_ZOOM' => '地图默认放大倍数',
   'LBL_TREEVIEW' => '层次结构',
   'LBL_MAINT_SITE' => '维护地点/区域',
@@ -80,7 +81,7 @@ $mod_strings = array (
   'LBL_METERS_SUBPANEL'=>'测量点/仪表',
   'LBL_EDITVIEW_PANEL3' => '地址与联系方式',
   'LBL_EDITVIEW_PANEL4' => '基础信息',
-    'LBL_EDITVIEW_PANEL_TREEVIEW' => '层次结构',
+  'LBL_EDITVIEW_PANEL_TREEVIEW' => '层次结构',
   'LBL_ATTRIBUTE1' => '附加属性 1',
   'LBL_ATTRIBUTE2' => '附加属性 2',
   'LBL_ATTRIBUTE3' => '附加属性 3',
@@ -102,4 +103,4 @@ $mod_strings = array (
   'LBL_INACTIVED'=>'已失效',
   'LBL_NAV_MODE_GIRD'=>'网格定位',
 
-);
+  );
