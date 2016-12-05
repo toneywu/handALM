@@ -431,6 +431,11 @@ function initTree(treeView, default_list, p3) {
 	};
 
 	//初始化树
+	if ($("#mode").val()=="MultiSelect") {
+		setting.check.enable=true;
+	} else {
+		setting.check.enable=false;
+	}
 	zTreeObj = $.fn.zTree.init($("#treeview_selector"), setting, zNodes);
 
 	//加载第一层的所有节点

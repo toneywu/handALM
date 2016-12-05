@@ -52,6 +52,7 @@ $app_list_strings['ham_wo_status_list']=array (
   'WPCOND'=>'等待作业条件',
   'REJECTED' => '已拒绝',
 /*  'RELEASED' => 'Released',*/
+  'RETURNED'=>'需重新计划',
   'INPRG'=>'正在执行中',
   'CANCELED' => '已取消',
   'COMPLETED' => '工作完成',

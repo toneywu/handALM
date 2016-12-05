@@ -570,5 +570,8 @@ li.recentlinks_edit a {
 .color_doc_status_REWORK {
 	background-color: #aeadd5;/*灰*/
 }
+.color_doc_status_RETURNED {
+	background-color: #ffc107;/*亮黄*/
+}
 
 

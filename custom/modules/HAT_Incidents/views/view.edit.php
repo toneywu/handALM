@@ -52,14 +52,17 @@ class HAT_IncidentsViewEdit extends ViewEdit {
 			$this->bean->asset_number = isset($bean_asset->asset_number)?$bean_asset->asset_number:'';
 			$this->bean->asset_name = isset($bean_asset->asset_desc)?$bean_asset->asset_desc:'';
 		}
-		$bean_revenue= BeanFactory::getBean('HAOS_Revenues_Quotes', $this->bean->haos_revenues_quotes_id);
-		if ($bean_revenue) { 
-			$this->bean->revenue_quote_number = isset($bean_revenue->revenue_quote_number)?$bean_revenue->revenue_quote_number:'';
-			$this->bean->clear_status = $app_list_strings['haos_revenue_clear_status_list'][isset($bean_revenue->clear_status)?$bean_revenue->clear_status:''];
-			$this->bean->invoice_number = isset($bean_revenue->invoice_number)?$bean_revenue->invoice_number:'';
-			$bean_invoice= BeanFactory::getBean('AOS_Invoices', $bean_revenue->aos_invoices_id_c);
-			if ($bean) { 
-				$this->bean->cleared_status =$app_list_strings['invoice_status_dom'][isset($bean_invoice->status)?$bean_invoice->status:''];
+
+		if(isset($this->bean->haos_revenues_quotes_id)) {
+			$bean_revenue= BeanFactory::getBean('HAOS_Revenues_Quotes', $this->bean->haos_revenues_quotes_id);
+			if ($bean_revenue) { 
+				$this->bean->revenue_quote_number = isset($bean_revenue->revenue_quote_number)?$bean_revenue->revenue_quote_number:'';
+				$this->bean->clear_status = $app_list_strings['haos_revenue_clear_status_list'][isset($bean_revenue->clear_status)?$bean_revenue->clear_status:''];
+				$this->bean->invoice_number = isset($bean_revenue->invoice_number)?$bean_revenue->invoice_number:'';
+				$bean_invoice= BeanFactory::getBean('AOS_Invoices', $bean_revenue->aos_invoices_id_c);
+				if ($bean) { 
+					$this->bean->cleared_status =$app_list_strings['invoice_status_dom'][isset($bean_invoice->status)?$bean_invoice->status:''];
+				}
 			}
 		}
 

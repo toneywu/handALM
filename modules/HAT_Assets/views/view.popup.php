@@ -28,7 +28,7 @@ class HAT_AssetsViewPopup extends ViewPopup
 			//if (isset($_REQUEST['target_owning_org_id_advanced'])&&$_REQUEST['target_owning_org_id_advanced']!="") {
 				//echo '<script>var owning_org_id="'.$_REQUEST['target_owning_org_id_advanced'].'"</script>';
 			//}
-	       parent::Display();
+            parent::Display();
 	    }
     }
 }

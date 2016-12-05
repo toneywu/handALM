@@ -59,5 +59,6 @@ $app_list_strings['ham_wo_status_list']=array (
   'COMPLETED' => 'Completed',
   'CLOSED' => 'Closed',
   'REWORK'=>'Rework',
+  'RETURNED'=>'Replan',
   'WPREV'=>'WaitPrevious'
 );

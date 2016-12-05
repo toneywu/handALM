@@ -15,7 +15,7 @@ $popupMeta = array (
       'enable_it_rack' => 'hat_assets.enable_it_rack',
       'using_org_id' => 'hat_assets.using_org_id',
     ),
-'whereStatement'=>'(("'.$_REQUEST["target_using_org_id_advanced"]. '"!="" and EXISTS (SELECT 1   FROM    hit_racks r,hit_rack_allocations ra WHERE hat_assets.id = r.hat_assets_id AND r.id = ra.hit_racks_id AND ra.deleted = 0 AND hat_assets.using_org_id = "'.$_REQUEST["target_using_org_id_advanced"].'")) or ""="'.$_REQUEST["target_using_org_id_advanced"].'")',
+'whereStatement'=>'(("'.isset($_REQUEST["target_using_org_id_advanced"])?$_REQUEST["target_using_org_id_advanced"]:"". '"!="" and EXISTS (SELECT 1   FROM    hit_racks r,hit_rack_allocations ra WHERE hat_assets.id = r.hat_assets_id AND r.id = ra.hit_racks_id AND ra.deleted = 0 AND hat_assets.using_org_id = "'.isset($_REQUEST["target_using_org_id_advanced"])?$_REQUEST["target_using_org_id_advanced"]:"".'")) or ""="'.isset($_REQUEST["target_using_org_id_advanced"])?$_REQUEST["target_using_org_id_advanced"]:"".'") AND haa_frameworks.id = "'.$_SESSION["current_framework"].'"',
 
     'searchInputs' => array (
   1 => 'name',

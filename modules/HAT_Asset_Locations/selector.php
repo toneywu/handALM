@@ -204,7 +204,7 @@
  		}
 
 		if (isset($_REQUEST['mode'])&&$_REQUEST['mode']=='MultiSelect'){//如果有值就多选模式
- 			echo '<input type="hidden" name="mode" value="MultiSelect">';
+ 			echo '<input type="hidden" id="mode" name="mode" value="MultiSelect">';
     			//多选区
 			echo '<div id="MultiSelectDiv" class="dropdown">
 					<span id="MultiSelectCount">0</span><span> Object(s) has been selected.</span>
