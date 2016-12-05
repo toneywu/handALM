@@ -23,36 +23,70 @@ function show_ip_desc(ip_val,desc_obj) {
 	 }
 };
 
+
+/**
+ * 点击按钮 调用Ajax请求 获取权限
+ * @param name
+ */
+function checkAccess(){
+	    var segmentName = $("#name").val();
+		var record = $("input[name=record]").val();
+		var error_msg="";
+		console.log('index.php?to_pdf=true&module=HIT_IP&action=checkCSegmentExists&segmentName=' + segmentName+"&record="+record);
+		$.ajax({
+			url: 'index.php?to_pdf=true&module=HIT_IP&action=checkCSegmentExists&segmentName=' + segmentName+"&record="+record,
+			success: function (data) {
+				if(data=="Y"){
+					error_msg=SUGAR.language.get("HIT_IP","LBL_ALREADY_EXISTS_IN_SYSTEM");
+					add_error_style('EditView',"name_desc",error_msg);
+					BootstrapDialog.alert({
+					type : BootstrapDialog.TYPE_DANGER,
+					title : SUGAR.language.get('app_strings',
+							'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+					message : error_msg
+				});
+				}
+			},
+			error: function () { //失败
+			}
+		});
+};
+
+
 function check_name(){
 
 	var result_flag = true;
 	var error_msg = "";
 	var str =  $("#name").val();
 	var suffix = str.substr(-3,3);
+	checkAccess();
+	if(error_msg==""){
 		if(suffix!="\/24"){
 			$("#SAVE_HEADER").prop('disabled', true);
 			$("#SAVE_HEADER").addClass('disabled');
 			clear_all_errors();
-			add_error_style('EditView',"name_desc","IP Type Is not right");
-			error_msg="IP Type Is not right";
+			error_msg=SUGAR.language.get("HIT_IP","LBL_ERROR_IP_TYPE");
+			add_error_style('EditView',"name_desc",error_msg);
 			result_flag=false;
 		}else{
 			clear_all_errors();
 			$("#SAVE_HEADER").prop('disabled', false);
 			$("#SAVE_HEADER").removeClass('disabled');
 		}
-	$ip_splited = $("#name").val().split("/");
-	if(!IpSubnetCalculator.isIp($ip_splited[0])){
-		$("#SAVE_HEADER").prop('disabled', true);
-			$("#SAVE_HEADER").addClass('disabled');
-			clear_all_errors();
-			add_error_style('EditView',"name_desc",SUGAR.language.get("HIT_IP","LBL_ERROR_IP_TYPE"));
-			error_msg=SUGAR.language.get("HIT_IP","LBL_ERROR_IP_TYPE");
-			result_flag=false;
-	}else{
-		     clear_all_errors();
-			$("#SAVE_HEADER").prop('disabled', false);
-			$("#SAVE_HEADER").removeClass('disabled');
+	
+		$ip_splited = $("#name").val().split("/");
+		if(!IpSubnetCalculator.isIp($ip_splited[0])){
+			$("#SAVE_HEADER").prop('disabled', true);
+				$("#SAVE_HEADER").addClass('disabled');
+				clear_all_errors();
+				add_error_style('EditView',"name_desc",SUGAR.language.get("HIT_IP","LBL_ERROR_IP_TYPE"));
+				error_msg=SUGAR.language.get("HIT_IP","LBL_ERROR_IP_TYPE");
+				result_flag=false;
+		}else{
+				 clear_all_errors();
+				$("#SAVE_HEADER").prop('disabled', false);
+				$("#SAVE_HEADER").removeClass('disabled');
+		}
 	}
 		console.log(error_msg);
 		if (error_msg != "") {

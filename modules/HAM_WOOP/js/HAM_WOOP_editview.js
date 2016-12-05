@@ -201,13 +201,9 @@ function preValidateFunction(async_bool = false) {
 					return_flag=true;
 				}
 			},
-			error: function () { //失败
-				alert('Error loading document');
-				return_flag=false;
-			}
 		});
 		
-		//return return_flag;
+		return return_flag;
 }	
 
 	

@@ -21,20 +21,45 @@ function check_subnet_ip(ln) { // 检查子网IP是否合规
 	}
 
 	var ip_subnet_splited = $("#line_ip_subnet" + ln).val().split("/");// 当前行的IP
-	var line_name = $("#line_name" + ln).val() + "\/" + ip_subnet_splited[1];
-	var ip_splited = line_name.split("/");// 当前行的精确IP地址
+	/*if(typeof $("#line_name" + ln).val()=="undefined"){
+		$("#line_name" + ln).val($("#line_ip_subnet" + ln).val());
+		var ip_splited = $("#line_name" + ln).val().split("/");
+	}else{
+		var ip_transfer_splited = $("#line_name" + ln).val() + "\/" + ip_subnet_splited[1];
+	    var ip_splited = ip_transfer_splited.split("/");
+	}*/
+	
+	var spilit_str = $("#line_name" + ln).val();
+	if(spilit_str==""){
+		spilit_str=$("#line_ip_subnet" + ln).val();
+	}else{
+		spilit_str=spilit_str+ "\/" + ip_subnet_splited[1];
+	}
+	ip_splited=spilit_str.split("/");
+	console.log(ip_splited);
+	
+	var line_name = $("#line_name" + ln).val().split("/");// 当前行的IP
 	var ip_parenet_splited = $("#name").val().split("/");// 头上的IP地址
 
 	//C段下的子网段掩码只能是大于等于24,且小于等于32。和准确ip一致
-	console.log(ip_subnet_splited[1]);
 	if ($("#line_ip_subnet" + ln).val() != null
-			&& IpSubnetCalculator.isIp(ip_splited[0])
-			&& ip_subnet_splited[1] < 24 && ip_subnet_splited[1] > 32) {
+			&& IpSubnetCalculator.isIp(ip_subnet_splited[0])
+			&& ip_subnet_splited[1] >= 24 && ip_subnet_splited[1] <= 32) {
+	}else{
+		console.log(ip_subnet_splited[1]+"~"+ip_splited[0]);
 		err_msg = SUGAR.language.get('HIT_IP_Subnets',
 				'LBL_ERR_SUBNET_IP_SCOPE2');
 	}
 
-	if (err_msg == ""&&$("#line_ip_type"+ln).val()=="") {
+	if(IpSubnetCalculator.isIp(ip_parenet_splited[0])&&IpSubnetCalculator.isIp(ip_subnet_splited[0])){
+		var c_segment_array = ip_parenet_splited[0].split(".");
+		var subnet_array =  ip_subnet_splited[0].split(".");
+		if(c_segment_array[0]!=subnet_array[0]||c_segment_array[1]!=subnet_array[1]||c_segment_array[2]!=subnet_array[2]){
+			err_msg = SUGAR.language.get('HIT_IP_Subnets',
+										'LBL_ERR_NOT_EQUAL_PARENT_IP');
+		}
+	}
+	if (err_msg == "") {
 		if (IpSubnetCalculator.isIp(ip_splited[0]) && ip_splited[1] <= 32&& ip_splited[1] >=24
 			) {
 			// 如果当前IP格式正常就继续判断是否有冲突
@@ -46,14 +71,11 @@ function check_subnet_ip(ln) { // 检查子网IP是否合规
 			var ip_subnet_caled = IpSubnetCalculator.calculateSubnetMask(
 					ip_subnet_splited[0], ip_subnet_splited[1]);
 			// 1、判断子网IP是否在网段之内
-			// console.log('line_name = '+line_name);
-			// console.log('ipHigh
-			// ='+ip_caled.ipHigh+"~"+ip_subnet_caled.ipHigh);
-			// console.log('ipLow = '+ip_caled.ipLow+"~"+ip_subnet_caled.ipLow);
+			 console.log('ipHigh ='+ip_caled.ipHigh+"~"+ip_subnet_caled.ipHigh);
+			 console.log('ipLow = '+ip_caled.ipLow+"~"+ip_subnet_caled.ipLow);
 			if (ip_caled.ipHigh > ip_subnet_caled.ipHigh
 					|| ip_caled.ipLow < ip_subnet_caled.ipLow) {
 				// 与父IP确认，是否走出当前父IP的范围 当前IP录入的值不在父项的范围内
-				console.log("name and subnet compare");
 				err_msg = SUGAR.language.get('HIT_IP_Subnets',
 						'LBL_ERR_IP_SCOPE');
 			}
@@ -75,7 +97,8 @@ function check_subnet_ip(ln) { // 检查子网IP是否合规
 
 			// 2、判断精确IP是否在当前网段中已经存在
 			for (var i = 0; i < prodln - 1; i++) {
-				if (i != ln && $("#line_deleted" + i).val() != 1) { // 针对之前所有行的记录进行比较
+				console.log("2、判断精确IP是否在当前网段中已经存在 line_ip_typei="+$("#line_ip_type" + i).val()+",ln="+$("#line_ip_type" + ln).val());	
+				/*if (i != ln && $("#line_deleted" + i).val() != 1&& $("#line_ip_type" + i).val() != 1&& $("#line_ip_type" + ln).val() != 1) { // 针对之前所有行的记录进行比较
 					ip_loop_splited = $("#line_ip_subnet" + i).val().split("/");// 当前行的IP地址
 					if (IpSubnetCalculator.isIp(ip_loop_splited[0])
 							&& ip_loop_splited[1] <= 32
@@ -95,17 +118,79 @@ function check_subnet_ip(ln) { // 检查子网IP是否合规
 									+ "~" + ip_loop_caled.ipHighStr + "]";
 						}
 					}
+				}*/
+			
+			
+			//散U的时候 精确ip不能重复
+			for (var j = 0; j <= prodln - 1; j++) {	
+				//排除已经删除的行
+				//散U的时候 勾选为散U  为0
+				if(i!=j&&$("#line_deleted" + i).val() != "1"&&$("#line_deleted" + j).val() != "1"&&$("#line_ip_type" + i).val()=="0"&&$("#line_ip_type" + j).val()=="0"){
+					console.log("i = "+i+",j="+j);
+					//并且必须是ip
+					var ip_loop_splited_a = $("#line_name" + i).val().split("/");
+					var ip_loop_splited_b = $("#line_name" + j).val().split("/");
+					//console.log("i="+$.trim(ip_loop_splited_a[0]));
+					//console.log("j="+$.trim(ip_loop_splited_b[0]));
+					if(IpSubnetCalculator.isIp($.trim(ip_loop_splited_a[0]))&&IpSubnetCalculator.isIp($.trim(ip_loop_splited_b[0]))){
+						var ip_array_a = $.trim(ip_loop_splited_a[0]).split(".");
+						var ip_array_b = $.trim(ip_loop_splited_b[0]).split(".");
+						if(ip_array_a[0]==ip_array_b[0]&&ip_array_a[1]==ip_array_b[1]&&ip_array_a[2]==ip_array_b[2]&&ip_array_a[3]==ip_array_b[3]){
+							err_msg = SUGAR.language.get('HIT_IP_Subnets','LBL_ERR_IP_CONFILCT2');
+							occur_error(err_msg,ln);
+							return;
+						}
+					}
 				}
-			}// end for
+				
+			}
+			//整柜的时候子网段不能重复
+			for (var k = 0; k <= prodln-1; k++) {	
+				//排除已经删除的行
+				console.log(" k ="+k+",line_deleted="+$("#line_deleted" + k).val()+",line_ip_type I="+$("#line_ip_type" + i).val()+",line_ip_type K="+$("#line_ip_type" + k).val());
+				
+				if(i!=k&&$.trim($("#line_deleted" + k).val()) == "0"&&$.trim($("#line_ip_type" + i).val())=="1"&&$.trim($("#line_ip_type" + k).val())=="1"){
+					console.log("i = "+i+",k="+k);
+					//并且必须是ip
+					var ip_loop_splited_a = $("#line_ip_subnet" + i).val().split("/");
+					var ip_loop_splited_b = $("#line_ip_subnet" + k).val().split("/");
+					//console.log("i="+$.trim(ip_loop_splited_a[0]));
+					//console.log("k="+$.trim(ip_loop_splited_b[0]));
+					if(IpSubnetCalculator.isIp($.trim(ip_loop_splited_a[0]))&&IpSubnetCalculator.isIp($.trim(ip_loop_splited_b[0]))){
+						var ip_array_a = $.trim(ip_loop_splited_a[0]).split(".");
+						var ip_array_b = $.trim(ip_loop_splited_b[0]).split(".");
+						if(ip_array_a[0]==ip_array_b[0]&&ip_array_a[1]==ip_array_b[1]&&ip_array_a[2]==ip_array_b[2]&&ip_array_a[3]==ip_array_b[3]){
+							err_msg = SUGAR.language.get('HIT_IP_Subnets','LBL_ERR_IP_CONFILCT');
+							occur_error(err_msg,ln);
+							return;
+						}
+					}
+				}
+				
+			}
+			
+			}
+			
+			
+			// end for
 		} else {
+			//if (IpSubnetCalculator.isIp(ip_splited[0]) && ip_splited[1] <= 32&& ip_splited[1] >=24
+			//) {
+				console.log("ip_splited[0] = "+ip_splited[0]+",ip_splited[1]="+ip_splited[1]+",ip_splited="+ip_splited);
 			err_msg = SUGAR.language.get('HIT_IP_Subnets',
-					'LBL_ERR_NAME_IP_SCOPE');
+					'LBL_ERR_SUBNET_IP_SCOPE2');
 		}
 	}
 	clear_all_errors();
 	$("#btn_LineEditorClose" + ln).show()
 	$("#btn_LineEditorClose" + ln).prop('disabled', false);
+	console.log("err_msg = "+err_msg);
+	occur_error(err_msg);
+}// end function check_subnet_ip
 
+
+function occur_error(err_msg,ln){
+	
 	if (err_msg != "") {
 		add_error_style('EditView', 'line_ip_subnet[' + ln + ']',
 				SUGAR.language.get('app_strings',
@@ -126,8 +211,8 @@ function check_subnet_ip(ln) { // 检查子网IP是否合规
 		$("#SAVE_HEADER").prop('disabled', false);
 		$("#SAVE_HEADER").removeClass('disabled');
 	}
-}// end function check_subnet_ip
-
+	
+}
 /**
  * 将当前IP的关联信息，绘制在界面上
  * 
@@ -194,6 +279,9 @@ function checkEnableSeperateAsign(ln) {
 		$("#line_ip_type_val" + ln).val("0");
 		$("#input_group_acc_ip" + ln).show();
 		$("#displayed_line_name" + ln).css("color", "#000");
+		addToValidate('EditView', 'line_name' + ln, 'varchar', 'true',
+			SUGAR.language.get('HIT_IP_Subnets', 'LBL_NAME'));
+			//check_subnet_ip(ln);
 	} else {
 		// console.log("unchecked");
 		$("#line_ip_type" + ln).removeAttr("checked");
@@ -204,6 +292,7 @@ function checkEnableSeperateAsign(ln) {
 		// }
 		$("#input_group_acc_ip" + ln).hide();
 		$("#displayed_line_name" + ln).css("color", "#ccc");
+		removeFromValidate('EditView', 'line_name' + ln);
 	}
 
 	// modified by yuan.chen 2016-11-12
@@ -806,7 +895,6 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 	//console.log(SUGAR.language.get("app_list_strings","hit_ip_purpose_list").INTERNET);
 	$meaning = SUGAR.language.get("app_list_strings","hit_ip_purpose_list");
 	var key = $("#line_purpose" + ln).val();
-	console.log($meaning[key]);
 	$("#displayed_line_purpose" + ln).html($meaning[key]);	
 			
 	$("#displayed_line_gateway" + ln).html($("#line_gateway" + ln).val());
@@ -881,6 +969,8 @@ function addNewLine(tableid) {
 }
 
 function btnMarkLineDeleted(ln, key) {// 删除当前行
+	$("#SAVE_HEADER").prop('disabled', false);
+	$("#SAVE_HEADER").removeClass('disabled');
 	YAHOO.SUGAR.MessageBox.show({
 				msg : SUGAR.language.get('app_strings',
 						'NTC_DELETE_CONFIRMATION'),

@@ -99,7 +99,7 @@ function selectedLine(selectIn){
 /**
  * 设置必输 TODO：确认本函数能否删除，在include.js中有公共的函数
  */
-function mark_field_enabled(field_name, not_required_bool) {
+/*function mark_field_enabled(field_name, not_required_bool) {
 	// field_name = 字段名，不需要jquery select标志，直接写名字
 	// not_required_bool如果为空或没有明确定义为true的话，字段为必须输入。如果=true则为非必须
 	// alert(not_required_bool);
@@ -144,7 +144,7 @@ function mark_field_enabled(field_name, not_required_bool) {
 					"visibility" : "visible"
 				});
 	}
-}
+}*/
 function openHitIpPopup(ln) {// 本文件为行上选择IP按钮
 	lineno = ln;
 	currentLine=ln;
@@ -1313,7 +1313,7 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
   $("#displayed_line_date_start"+ln).html($("#line_date_start"+ln).val());
   $("#displayed_line_date_end"+ln).html( $("#line_date_end"+ln).val());
   $("#displayed_line_broadband_type"+ln).html( $("#line_broadband_type"+ln).val());
-  if($("#line_enable_action"+ln).val()=="0"){
+  if($("#line_enable_action"+ln).val()=="1"){
   	  
   	  $("#displayed_line_enable_action"+ln).attr("checked",true);
       $("#displayed_line_enable_action"+ln).prop("checked",true);
@@ -1497,7 +1497,10 @@ function markLineDeleted(ln, key) {// 删除当前行
 	document.getElementById(key + 'deleted' + ln).value = '1';
 	document.getElementById(key + 'delete_line' + ln).onclick = '';
 
-	if (typeof validate != "undefined"
+	$("#line_*"+ ln).children().remove(".required");
+
+	//用新的删除验证方式代替老的，toney.wu20161111
+/*	if (typeof validate != "undefined"
 			&& typeof validate['EditView'] != "undefined") {
 		removeFromValidate('EditView', 'line_hit_ip_subnets' + ln);
 		removeFromValidate('EditView', 'line_speed_limit' + ln);
@@ -1526,7 +1529,7 @@ function markLineDeleted(ln, key) {// 删除当前行
 	    removeFromValidate('EditView','line_date_start'+ ln);
 	    removeFromValidate('EditView','line_date_end'+ ln);
 	    removeFromValidate('EditView','line_broadband_type'+ ln);
-	}
+	}*/
 
 	if ($("#line_hit_ip_subnets" + ln).val() == "") {
 		$("#line_hit_ip_subnets" + ln).val("deleted");
