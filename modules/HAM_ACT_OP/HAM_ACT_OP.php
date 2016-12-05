@@ -42,7 +42,18 @@
  */
 require_once('modules/HAM_ACT_OP/HAM_ACT_OP_sugar.php');
 class HAM_ACT_OP extends HAM_ACT_OP_sugar {
-	
+
+
+	function get_list_view_data() {
+		//refer to the task module as an example
+		//or refer to the asset module as the first customzation module with this feature
+		global $app_list_strings, $timedate;
+		$actop_fields = $this->get_list_view_array();
+		$actop_fields['STANDARD_HOUR'] = $this->standard_hour."AA";
+
+		return $actop_fields;
+	}
+
 	function __construct(){
 		parent::__construct();
 	}

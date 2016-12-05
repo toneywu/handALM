@@ -37,6 +37,8 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
                $sql_current_string ="SELECT
 										  ham_wo.`id` wo_id,
 										  ham_wo.`name` wo_name,
+                                          ham_wo.`ham_maint_sites_id` site_id,
+                                          ham_maint_sites.name site_name,
 										  ham_wo.`account_id` source_wo_account_id,
 										  accounts2.`name` source_wo_account,
 										  ham_wo.`contact_id` source_wo_contact,
@@ -53,9 +55,12 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
 										  contacts.id contact_id,
 										  contacts.`last_name` contact_name,
 										  accounts.`id` org_id,
-										  accounts.`name` org_name,hat_eventtype.haa_ff_id
+										  accounts.`name` org_name,
+                                          hat_eventtype.haa_ff_id
 										FROM
 										  ham_wo
+                                          LEFT JOIN (
+                                            ham_maint_sites) on (ham_maint_sites.id = ham_wo.ham_maint_sites_id)
 										  LEFT JOIN (
 											accounts accounts2) ON (accounts2.id = ham_wo.`account_id`)
 										  LEFT JOIN (
@@ -98,6 +103,9 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
                     $this->bean->name = $bean_woop['wo_number'].':'.$bean_woop['woop_name'];
                     $this->bean->current_owning_org_id = $bean_woop['org_id'];
                     $this->bean->current_owning_org = $bean_woop['org_name'];
+                    $this->bean->ham_maint_sites_id = $bean_woop['site_id'];
+                    $this->bean->site = $bean_woop['site_name'];
+
                     //工单上的客户与联系人
                     //在选择EventType后，如果当前EventType需要变化组织就会默认工作单的内容
                     $this->bean->source_wo_account = $bean_woop['source_wo_account'];
@@ -146,7 +154,7 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
             $this->bean->source_woop_id= "";
             $this->bean->source_wo_id="";
         }
-		//2、加载基于code_asset_location_type_id的动态界面模板（FF）		
+		//2、加载基于code_asset_location_type_id的动态界面模板（FF）
         if(isset($this->bean->hat_eventtype_id) && ($this->bean->hat_eventtype_id)!=""){
             //判断是否已经设置有位置分类，如果有分类，则进一步的加载分类对应的FlexForm
             $event_type_id = $this->bean->hat_eventtype_id;
@@ -154,15 +162,15 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
             if (isset($bean_code->haa_ff_id)) {
                 $ff_id = $bean_code->haa_ff_id;
             }
-			
+
             if (isset($ff_id) && $ff_id!="") {
                 //如果分类有对应的FlexForm，些建立一个对象去存储FF_ID
                 //需要注意的是在Metadata中是不包括这个ID的，如果这里没有加载则在后续的JS文件中加载
                 echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="'.$ff_id.'">';
             }
         }
-		
-		
+
+
         $beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
         //处理Framework中的相关规则性字段
         //以下JS变更主要在modules\HAT_Asset_Trans\js\line_items.js中变调用

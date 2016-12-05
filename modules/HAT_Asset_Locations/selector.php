@@ -194,6 +194,7 @@
     	echo '<form id="popup_query_form" name="popup_query_form">';
 		echo '<input type="hidden" name="module" value="HAT_Asset_Locations">';
  		echo '<input type="hidden" name="action" value="Popup">';
+ 		echo '<input type="hidden" name="site_id" id="site_id" value="'.$_REQUEST['site_id'].'">';
 
  		if (isset($_REQUEST['target_using_org'])) {
  			echo '<input type="hidden" id="target_using_org" name="target_using_org" value="'.$_REQUEST['target_using_org'].'">';

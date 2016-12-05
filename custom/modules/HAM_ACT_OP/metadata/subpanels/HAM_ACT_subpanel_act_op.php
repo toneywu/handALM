@@ -1,18 +1,18 @@
 <?php
-// created: 2016-09-07 13:35:07
+// created: 2016-12-05 12:19:17
 $subpanel_layout['list_fields'] = array (
   'activity_op_number' => 
   array (
     'type' => 'varchar',
     'vname' => 'LBL_ACTIVITY_OP_NUMBER',
-    'width' => '10%',
+    'width' => '5%',
     'default' => true,
   ),
   'name' => 
   array (
     'vname' => 'LBL_NAME',
     'widget_class' => 'SubPanelDetailViewLink',
-    'width' => '35%',
+    'width' => '15%',
     'default' => true,
   ),
   'standard_hour' => 
@@ -68,6 +68,19 @@ $subpanel_layout['list_fields'] = array (
     'vname' => 'LBL_ACT_MODULE',
     'width' => '10%',
     'default' => true,
+  ),
+  'event_type' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'vname' => 'LBL_EVENT_TYPE',
+    'id' => 'HAT_EVENTTYPE_ID',
+    'link' => true,
+    'width' => '10%',
+    'default' => true,
+    'widget_class' => 'SubPanelDetailViewLink',
+    'target_module' => 'HAT_EventType',
+    'target_record_key' => 'hat_eventtype_id',
   ),
   'edit_button' => 
   array (

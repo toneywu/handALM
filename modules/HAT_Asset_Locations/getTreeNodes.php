@@ -42,10 +42,15 @@ if($_REQUEST['type']=="location") { //如果是Locationg来源，需要读取子
                             `hat_asset_locations`.location_icon
                           FROM
                             hat_asset_locations,
-                            ham_maint_sites 
-                          WHERE hat_asset_locations.`ham_maint_sites_id`= '' OR 
-                          (hat_asset_locations.`ham_maint_sites_id` = `ham_maint_sites`.id AND ham_maint_sites.`haa_frameworks_id`='".$current_framework."')
-                          AND hat_asset_locations.deleted = 0";
+                            ham_maint_sites
+                          WHERE hat_asset_locations.deleted = 0";
+        if (isset($_REQUEST['site_id'])&&$_REQUEST['site_id']!="undefined") {
+          //只列出当前Site下的地点
+          $sel_sub_location .= " AND hat_asset_locations.`ham_maint_sites_id` = `ham_maint_sites`.id AND hat_asset_locations.`ham_maint_sites_id` = '".$_REQUEST['site_id']."'";
+        } else {
+         //取出当前业务框架下的所有地点+所有没有Site的地点
+          $sel_sub_location .= " AND (hat_asset_locations.`ham_maint_sites_id`= '' OR (hat_asset_locations.`ham_maint_sites_id` = `ham_maint_sites`.id AND ham_maint_sites.`haa_frameworks_id`='".$current_framework."'))";
+        }
 
         if (isset($_REQUEST['id'])) {//如果指明了当前的ID
             $sel_sub_location .= " AND parent_location_id = '".$_REQUEST['id']."'";
@@ -54,6 +59,8 @@ if($_REQUEST['type']=="location") { //如果是Locationg来源，需要读取子
         }
 
         $sel_sub_location .= " ORDER BY name";
+
+    //echo($sel_sub_location);
 
     $bean_locations =  $db-> query($sel_sub_location);
 

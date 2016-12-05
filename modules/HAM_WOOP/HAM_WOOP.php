@@ -202,12 +202,15 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 					if (strtoupper($this->act_module) == 'HAT_ASSET_TRANS_BATCH') {
 						$asset_trans_beans = BeanFactory :: getBean('HAT_Asset_Trans_Batch')->get_full_list("date_entered desc", "hat_asset_trans_batch.source_woop_id='" . $this->id . "'");
 						//echo $this->id;
+						//echo count($asset_trans_beans);
 						if (count($asset_trans_beans) == 0) {
-							//echo count($asset_trans_beans);
-							$asset_trans_id = $asset_trans_beans[0]->id;
-							$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=window.location.href="index.php?module=' . $this->act_module . '&record=' . $asset_trans_id . '&action=EditView&woop_id=' . $this->id . '"><span class="glyphicon glyphicon-retweet"> </span> ' . translate('LBL_TAKE_ACTION', 'HAM_WOOP')  . '</a>';
+							//如果当前工序没有任何事务处理单关联;
+/*							$asset_trans_id = $asset_trans_beans[0]->id;
+							$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=window.location.href="index.php?module=' . $this->act_module . '&record=' . $asset_trans_id . '&action=EditView&woop_id=' . $this->id . '"><span class="glyphicon glyphicon-retweet"> </span> ' . translate('LBL_TAKE_ACTION', 'HAM_WOOP')  . '</a>';*/
+							$woop_fields['ACT_MODULE'] = '<a href="#" class="button" onclick=window.location.href="index.php?module=' . $this->act_module . '&action=EditView&woop_id=' . $this->id . '"><span class="glyphicon glyphicon-retweet"> </span> ' . translate('LBL_TAKE_ACTION', 'HAM_WOOP')  . '</a>';
 						}else{
-							$asset_trans_beans = BeanFactory :: getBean('HAT_Asset_Trans_Batch')->get_full_list("date_entered desc", "hat_asset_trans_batch.source_woop_id='" . $this->id . "'");
+							//如果当前工序有超过1个事务处理单关联
+							//$asset_trans_beans = BeanFactory :: getBean('HAT_Asset_Trans_Batch')->get_full_list("date_entered desc", "hat_asset_trans_batch.source_woop_id='" . $this->id . "'");
 							if (count($asset_trans_beans) != 0) {
 								$asset_trans_id = $asset_trans_beans[0]->id;
 								$woop_fields['ACT_MODULE'] = '<a href=index.php?module=' . $this->act_module . '&record=' . $asset_trans_id . '&action=EditView&woop_id=' . $this->id . '">' . translate('LBL_TAKE_ACTION', 'HAM_WOOP') . '</a>';

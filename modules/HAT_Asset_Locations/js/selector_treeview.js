@@ -18,7 +18,7 @@ var setting = {
 		},
 		async: {
 			enable: true,
-			url: 'index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeNodes',
+			url: 'index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeNodes&site_id='+$("#site_id").val(),
 			autoParam:["id", "type","wo_id","current_mode"],
 			dataFilter: filter
 		},
@@ -436,6 +436,8 @@ function initTree(treeView, default_list, p3) {
 	} else {
 		setting.check.enable=false;
 	}
+
+	setting.async.url = 'index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeNodes&site_id='+$("#site_id").val();
 	zTreeObj = $.fn.zTree.init($("#treeview_selector"), setting, zNodes);
 
 	//加载第一层的所有节点

@@ -8,7 +8,7 @@ class HAA_FrameworksController extends SugarController
 			$_SESSION["current_framework"]=$_REQUEST['framework_id'];
 			//将当前的framework_id写入Session
 
-			$Bean_list = BeanFactory::getBean('HAM_Maint_Sites')->get_full_list('name',"ham_maint_sites.haa_frameworks_id='".$_REQUEST['framework_id']."'");
+			$Bean_list = BeanFactory::getBean('HAM_Maint_Sites')->get_full_list("name","ham_maint_sites.haa_frameworks_id='".$_REQUEST['framework_id']."'");
 			$site_field = "";
 
 	        if (isset($Bean_list)) { //如果当前列表中有值才进行加载

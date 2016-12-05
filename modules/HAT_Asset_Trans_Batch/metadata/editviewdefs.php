@@ -110,7 +110,7 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_ASSET_TRANS_STATUS',
           ),
-          1 => '',
+          1 => 'site',
         ),
         1 => 
         array (
