@@ -1643,6 +1643,39 @@ $dictionary['HAM_WO'] = array (
 
 		
 		),
+
+'indices'=>array (
+    array (
+      'name' => 'ham_wopk',
+      'type' => 'primary',
+      'fields' => 
+      array (
+        0 => 'id',
+      ),
+    ),
+    array (
+      'name' => 'idx_wo_site_id_del',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'id',
+        1 => 'deleted',
+        2 => 'ham_maint_sites_id'
+      ),
+    ),
+    array (
+      'name' => 'idx_wo_site_name_del',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'name',
+        1 => 'deleted',
+        2 =>'ham_maint_sites_id',
+      ),
+    ),
+),
+
+
 'relationships' => array (
 
 	'ham_wo_sr' => array (

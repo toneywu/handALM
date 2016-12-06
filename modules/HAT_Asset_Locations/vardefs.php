@@ -882,6 +882,47 @@ $dictionary['HAT_Asset_Locations'] = array(
         ),
 
 	),
+
+'indices'=>array (
+    array (
+      'name' => 'hat_asset_locationspk',
+      'type' => 'primary',
+      'fields' => 
+      array (
+        0 => 'id',
+      ),
+    ),
+    array (
+      'name' => 'idx_location_id_del',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'id',
+        1 => 'deleted',
+      ),
+    ),
+    array (
+      'name' => 'idx_location_name_del',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'name',
+        1 => 'deleted',
+      ),
+    ),
+    array (
+      'name' => 'idx_location_site_parent_del',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'ham_maint_sites_id',
+        1 =>'parent_location_id',
+        2 => 'deleted',
+      ),
+    ),
+),
+
+
 'optimistic_locking'=>true,
 'unified_search'=>true,
 );

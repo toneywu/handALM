@@ -2180,6 +2180,49 @@ $dictionary['HAT_Assets'] = array(
       'source' => 'non-db',
       ),
     ),
+
+'indices'=>array (
+    array (
+      'name' => 'hat_assetspk',
+      'type' => 'primary',
+      'fields' => 
+      array (
+        0 => 'id',
+      ),
+    ),
+    array (
+      'name' => 'idx_asset_framework_id_del',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'id',
+        1 => 'deleted',
+        2 =>'haa_frameworks_id'
+      ),
+    ),
+    array (
+      'name' => 'idx_asset_framework_name_del',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'name',
+        1 => 'deleted',
+        2 =>'haa_frameworks_id',
+      ),
+    ),
+    array (
+      'name' => 'idx_asset_framework_parent_del',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'haa_frameworks_id',
+        1 =>'parent_asset_id',
+        2 => 'deleted',
+      ),
+    ),
+),
+
+
 'relationships'=>array (
   'ham_sr_hat_assets' =>
   array (

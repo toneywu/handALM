@@ -903,6 +903,46 @@ $dictionary['HAM_WOOP'] = array (
 
 		
 	),
+
+'indices'=>array (
+    array (
+      'name' => 'ham_wooppk',
+      'type' => 'primary',
+      'fields' => 
+      array (
+        0 => 'id',
+      ),
+    ),
+    array (
+      'name' => 'idx_woop_site_id_del',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'id',
+        1 => 'deleted',
+      ),
+    ),
+    array (
+      'name' => 'idx_woop_site_name_del',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'name',
+        1 => 'deleted',
+      ),
+    ),
+    array (
+      'name' => 'idx_woop_wo_del',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'ham_wo_id',
+        1 => 'deleted',
+      ),
+    ),
+),
+
+
 	'relationships' => array (),
 	'optimistic_locking' => true,
 	'unified_search' => true,

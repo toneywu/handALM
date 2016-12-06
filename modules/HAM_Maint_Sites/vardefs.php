@@ -524,6 +524,46 @@ $dictionary['HAM_Maint_Sites'] = array(
       ),
 
     ),
+
+'indices'=>array (
+    array (
+      'name' => 'ham_maint_sitespk',
+      'type' => 'primary',
+      'fields' => 
+      array (
+        0 => 'id',
+      ),
+    ),
+    array (
+      'name' => 'idx_site_id_del',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'id',
+        1 => 'deleted',
+      ),
+    ),
+    array (
+      'name' => 'idx_site_name_del',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'name',
+        1 => 'deleted',
+      ),
+    ),
+    array (
+      'name' => 'idx_site_framework_del',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'haa_frameworks_id',
+        1 => 'deleted',
+      ),
+    ),
+),
+
+
 'relationships'=>array (
 
  ),
