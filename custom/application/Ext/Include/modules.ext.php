@@ -274,6 +274,13 @@ $moduleList[] = 'HAT_Counting_Tasks';
 
  
  //WARNING: The contents of this file are auto-generated
+$beanList['HAT_Gird_Rules'] = 'HAT_Gird_Rules';
+$beanFiles['HAT_Gird_Rules'] = 'modules/HAT_Gird_Rules/HAT_Gird_Rules.php';
+$moduleList[] = 'HAT_Gird_Rules';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
 $beanList['HAT_Linear_Elements'] = 'HAT_Linear_Elements';
 $beanFiles['HAT_Linear_Elements'] = 'modules/HAT_Linear_Elements/HAT_Linear_Elements.php';
 $moduleList[] = 'HAT_Linear_Elements';
