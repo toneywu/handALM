@@ -270,7 +270,10 @@ function openAccessAssetNamePopup(ln) {// 本文件为行上选择资产的按�
 	};
   var popupFilter;
   var source_wo_id=$("#source_wo_id").val();
-  var popupFilter = '&current_mode=it&defualt_list='+global_eventOptions.default_asset_list.toLowerCase()+'&wo_id='+source_wo_id+'&haa_frameworks_id_advanced='+$("#haa_frameworks_id").val();
+  var popupFilter = '&current_mode=it&defualt_list='+global_eventOptions.default_asset_list.toLowerCase()
+  					+'&wo_id='+source_wo_id
+  					+'&haa_frameworks_id_advanced='+$("#haa_frameworks_id").val()
+  					+'&site_id='+$("#ham_maint_sites_id").val();
   open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
 }
 

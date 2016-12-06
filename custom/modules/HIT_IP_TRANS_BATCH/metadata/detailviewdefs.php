@@ -11,10 +11,7 @@ array (
         'buttons' => 
         array (
           0 => 'EDIT',
-/*          1 => 'DUPLICATE',
-          2 => 'DELETE',
-          3 => 'FIND_DUPLICATES',*/
-          1 =>
+          1 => 
           array (
             'customCode' => '<input type="button" class="button" onClick="GenerateDoc();" value="{$MOD.LBL_GENERATE_DOC}">',
           ),
@@ -85,7 +82,10 @@ array (
             'label' => 'LBL_EVENT_TYPE',
           ),
         ),
-        1 => 
+      ),
+      'lbl_editview_panel2' => 
+      array (
+        0 => 
         array (
           0 => 
           array (
@@ -95,9 +95,24 @@ array (
           ),
           1 => 
           array (
+            'name' => 'site',
+            'studio' => 'visible',
+            'label' => 'LBL_SITE',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
             'name' => 'current_owning_org',
             'studio' => 'visible',
             'label' => 'LBL_CURRENT_OWNING_ORG',
+          ),
+          1 => 
+          array (
+            'name' => 'owner_contacts',
+            'studio' => 'visible',
+            'label' => 'LBL_OWNER',
           ),
         ),
         2 => 
@@ -108,38 +123,9 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_TARGET_OWNING_ORG',
           ),
-          1 => 'name',
+          1 => '',
         ),
         3 => 
-        array (
-          0 => 
-          array (
-            'name' => 'tracking_number',
-            'label' => 'LBL_TRACKING_NUMBER',
-          ),
-          1 => 
-          array (
-            'name' => 'owner_contacts',
-            'studio' => 'visible',
-            'label' => 'LBL_OWNER',
-          ),
-        ),
-        4 => 
-        array (
-          0 => 
-          array (
-            'name' => 'source_wo',
-            'studio' => 'visible',
-            'label' => 'LBL_SOURCE_WO',
-          ),
-          1 => 
-          array (
-            'name' => 'source_woop',
-            'studio' => 'visible',
-            'label' => 'LBL_SOURCE_WOOP',
-          ),
-        ),
-        5 => 
         array (
           0 => 
           array (
@@ -154,7 +140,16 @@ array (
             'label' => 'LBL_EMAIL',
           ),
         ),
-        6 => 
+        4 => 
+        array (
+          0 => 'name',
+          1 => 
+          array (
+            'name' => 'tracking_number',
+            'label' => 'LBL_TRACKING_NUMBER',
+          ),
+        ),
+        5 => 
         array (
           0 => 
           array (
@@ -167,9 +162,7 @@ array (
             'label' => 'LBL_SEND_TO_CUSTOMER',
           ),
         ),
-
-
-        7 => 
+        6 => 
         array (
           0 => 
           array (
@@ -182,7 +175,7 @@ array (
             'label' => 'LBL_ATTRIBUTE2',
           ),
         ),
-        8 => 
+        7 => 
         array (
           0 => 
           array (
@@ -195,7 +188,7 @@ array (
             'label' => 'LBL_ATTRIBUTE4',
           ),
         ),
-        9 => 
+        8 => 
         array (
           0 => 
           array (
@@ -208,9 +201,10 @@ array (
             'label' => 'LBL_ATTRIBUTE6',
           ),
         ),
-        10 => 
+        9 => 
         array (
           0 => 'description',
+          1 => '',
         ),
       ),
       'lbl_editview_panel1' => 

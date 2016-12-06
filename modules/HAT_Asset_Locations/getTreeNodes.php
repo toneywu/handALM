@@ -60,7 +60,7 @@ if($_REQUEST['type']=="location") { //如果是Locationg来源，需要读取子
 
         $sel_sub_location .= " ORDER BY name";
 
-    //echo($sel_sub_location);
+    echo($sel_sub_location);
 
     $bean_locations =  $db-> query($sel_sub_location);
 

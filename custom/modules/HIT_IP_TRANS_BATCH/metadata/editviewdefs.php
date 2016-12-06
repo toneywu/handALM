@@ -90,7 +90,10 @@ array (
             ),
           ),
         ),
-        1 => 
+      ),
+      'lbl_editview_panel2' => 
+      array (
+        0 => 
         array (
           0 => 
           array (
@@ -100,13 +103,28 @@ array (
           ),
           1 => 
           array (
+            'name' => 'site',
+            'studio' => 'visible',
+            'label' => 'LBL_SITE',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
             'name' => 'current_owning_org',
             'studio' => 'visible',
             'label' => 'LBL_CURRENT_OWNING_ORG',
-			'displayParams' => 
+            'displayParams' => 
             array (
               'initial_filter' => '&asset_using_org=Y',
             ),
+          ),
+          1 => 
+          array (
+            'name' => 'owner_contacts',
+            'studio' => 'visible',
+            'label' => 'LBL_OWNER',
           ),
         ),
         2 => 
@@ -118,7 +136,7 @@ array (
             'label' => 'LBL_TARGET_OWNING_ORG',
             'displayParams' => 
             array (
-			'initial_filter' => '&asset_using_org=Y',
+              'initial_filter' => '&asset_using_org=Y',
               'field_to_name_array' => 
               array (
                 'name' => 'target_owning_org',
@@ -127,57 +145,9 @@ array (
               'call_back_function' => 'setTargetOwningOrgPopupReturn',
             ),
           ),
-          1 => 'name',
+          1 => '',
         ),
         3 => 
-        array (
-          0 => 
-          array (
-            'name' => 'tracking_number',
-            'label' => 'LBL_TRACKING_NUMBER',
-          ),
-          1 => 
-          array (
-            'name' => 'owner_contacts',
-            'studio' => 'visible',
-            'label' => 'LBL_OWNER',
-          ),
-        ),
-        4 => 
-        array (
-          0 => 
-          array (
-            'name' => 'source_wo',
-            'studio' => 'visible',
-            'label' => 'LBL_SOURCE_WO',
-            'displayParams' => 
-            array (
-              'field_to_name_array' => 
-              array (
-                'name' => 'source_wo',
-                'id' => 'source_wo_id',
-				'hat_asset_locations_id'=>'location_id',
-              ),
-              'call_back_function' => 'setWoPopupReturn',
-            ),
-          ),
-          1 => 
-          array (
-            'name' => 'source_woop',
-            'studio' => 'visible',
-            'label' => 'LBL_SOURCE_WOOP',
-            'displayParams' => 
-            array (
-              'initial_filter' => '&ham_wo_id_advanced="+encodeURIComponent(document.getElementById("source_wo_id").value)+"',
-              'field_to_name_array' => 
-              array (
-                'name' => 'source_woop',
-                'id' => 'source_woop_id',
-              ),
-            ),
-          ),
-        ),
-        5 => 
         array (
           0 => 
           array (
@@ -202,7 +172,16 @@ array (
             'label' => 'LBL_EMAIL',
           ),
         ),
-        6 => 
+        4 => 
+        array (
+          0 => 'name',
+          1 => 
+          array (
+            'name' => 'tracking_number',
+            'label' => 'LBL_TRACKING_NUMBER',
+          ),
+        ),
+        5 => 
         array (
           0 => 
           array (
@@ -215,14 +194,7 @@ array (
             'label' => 'LBL_SEND_TO_CUSTOMER',
           ),
         ),
-        7 => 
-        array (
-          0 => 'description',
-        ),
-      ),
-      'lbl_editview_panel2' => 
-      array (
-        0 => 
+        6 => 
         array (
           0 => 
           array (
@@ -235,7 +207,7 @@ array (
             'label' => 'LBL_ATTRIBUTE2',
           ),
         ),
-        1 => 
+        7 => 
         array (
           0 => 
           array (
@@ -248,7 +220,7 @@ array (
             'label' => 'LBL_ATTRIBUTE4',
           ),
         ),
-        2 => 
+        8 => 
         array (
           0 => 
           array (
@@ -260,6 +232,11 @@ array (
             'name' => 'attribute6',
             'label' => 'LBL_ATTRIBUTE6',
           ),
+        ),
+        9 => 
+        array (
+          0 => 'description',
+          1 => '',
         ),
       ),
       'lbl_editview_panel1' => 
