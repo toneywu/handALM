@@ -121,20 +121,25 @@ class HIT_IP_SubnetsViewPopup extends ViewPopup {
 			$txt_jason = '[' . $txt_jason . ']';
 			// echo($txt_jason);
 			echo ('<script>var zNodes = ' . $txt_jason . '</script>');
-			echo "REQUEST".var_dump($_SESSION);	
+			//echo "REQUEST".var_dump($_SESSION);	
 			// parent::Display();
 		} else {
 			insert_popup_header(null, false);
+			echo ('<script type="text/javascript" src="include/javascript/popup_helper.js"></script>');
 			echo '<script src="modules/HIT_IP_Subnets/js/popup_view.js"></script>';
 			//echo "hat_asset_locations_id_advanced = ".$_REQUEST["hat_asset_locations_id_advanced"];
 			
 			
 			//echo "<input type='hidden' id='target_owning_org_id_advanced' value='".$_REQUEST["target_owning_org_id_advanced"]."'>";
-			$location_bean = BeanFactory::getBean("HAT_Asset_Locations",$_REQUEST["hat_asset_locations_id_advanced"]);
+			$location_bean = BeanFactory::getBean("HAM_Maint_Sites",$_REQUEST["location_id"]);
 			//echo $location_bean->name;
-			echo "<script> var location_name = '".$location_bean->name."';</script>";
-			
+			echo "<script> var location_id = '".$location_bean->id."';</script>";
 			parent :: Display();
+			
+			
+			 if(!empty($_REQUEST["location_id"])){
+				echo '<script> var location_id="'.$_REQUEST["location_id"].'";</script>';
+			 }
 			//echo "REQUEST".var_dump($_SESSION["HIT_IP_Subnets2_QUERY"]);
 
 		}

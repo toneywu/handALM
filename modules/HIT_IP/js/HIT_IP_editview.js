@@ -3,14 +3,14 @@
 //
 //    console.log( IpSubnetCalculator.toDecimal( '127.0.0.1' ) ); // "2130706433"
  //  console.log( IpSubnetCalculator.calculate( '5.4.3.21', '6.7.8.9' ) );
- $.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
- $.getScript("modules/HAA_FF/ff_include.js");
- $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); // MessageBox
+$.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
+$.getScript("modules/HAA_FF/ff_include.js");
+$.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); // MessageBox
 $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
 
 function show_ip_desc(ip_val,desc_obj) {
 	ip_splited = ip_val.split("/")
-	if ( IpSubnetCalculator.isIp(ip_splited[0])&&ip_splited[1]<=32&&ip_splited[1]>=0) {
+	if (IpSubnetCalculator.isIp(ip_splited[0])&&ip_splited[1]<=32&&ip_splited[1]>=0) {
 	  var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1])
 	  //console.log(ip_caled);
 	  desc_obj.html("-----<br/>"
@@ -108,8 +108,12 @@ function check_name(){
 
 
 $(document).ready(function(){
-	
-	$.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
+	if(typeof IpSubnetCalculator=="undefined"){
+		$.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
+	}
+	if(typeof BootstrapDialog=="undefined"){
+			$.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); // MessageBox
+	}
 
 	$("#SAVE_FOOTER").hide();
 	$("#CANCEL_FOOTER").hide();

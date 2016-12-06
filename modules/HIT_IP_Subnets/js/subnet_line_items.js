@@ -1,9 +1,7 @@
 $.getScript("cache/include/javascript/sugar_grp_yui_widgets.js"); // MessageBox
 $.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
-$
-		.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); // MessageBox
-$('head')
-		.append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
+$.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); // MessageBox
+$('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
 
 var prodln = 0;
 if (typeof sqs_objects == 'undefined') {
@@ -365,7 +363,7 @@ function openVLANPopup(ln) { // 在行上选择了From Location
 function openLocationPopup(ln) { // 在行上选择了From Location
 	lineno = ln;
 	var popupRequestData = {
-		"call_back_function" : "set_location_return",
+		"call_back_function" : "set_main_sites_return",
 		"form_name" : "EditView",
 		"field_to_name_array" : {
 			"name" : "line_location" + ln,
@@ -373,12 +371,11 @@ function openLocationPopup(ln) { // 在行上选择了From Location
 		}
 	};
 	var popupFilter = '&site_type=D';
-	open_popup('HAT_Asset_Locations', 1000, 850, popupFilter, true, true,
+	open_popup('HAM_Maint_Sites', 1000, 850, popupFilter, true, true,
 			popupRequestData);
 }
 
-function set_location_return(popupReplyData){
-console.log(popupReplyData);
+function set_main_sites_return(popupReplyData){
 	set_return(popupReplyData);
 }
 

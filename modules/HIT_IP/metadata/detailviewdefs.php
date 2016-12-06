@@ -26,7 +26,7 @@ array (
         array (
           'file' => 'modules/HIT_IP/js/HIT_IP_detailview.js',
         ),
-      ),      
+      ),
       'maxColumns' => '2',
       'widths' => 
       array (
@@ -69,12 +69,6 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_SITE',
           ),
-          1 => 
-          array (
-            'name' => 'vlan',
-            'studio' => 'visible',
-            'label' => 'LBL_VLAN',
-          ),
         ),
         1 => 
         array (
@@ -86,7 +80,7 @@ array (
       array (
         0 => 
         array (
-          0 => 'line_items'
+          0 => 'line_items',
         ),
       ),
     ),

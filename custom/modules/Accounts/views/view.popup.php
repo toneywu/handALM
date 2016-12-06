@@ -42,7 +42,7 @@ class AccountsViewPopup extends ViewPopup
 		
 		//echo var_dump(file_exists('modules/' . $this->module . '/Popup_picker.php'));
 		//echo print_r($_SESSION);
-		echo print_r($_SESSION['Accounts2_QUERY']);
+		//echo print_r($_SESSION['Accounts2_QUERY']);
 		//echo print_r($_REQUEST);
     }
 

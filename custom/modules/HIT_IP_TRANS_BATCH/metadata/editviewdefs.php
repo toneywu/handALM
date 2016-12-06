@@ -103,10 +103,6 @@ array (
             'name' => 'current_owning_org',
             'studio' => 'visible',
             'label' => 'LBL_CURRENT_OWNING_ORG',
-			'displayParams' => 
-            array (
-              'initial_filter' => '&asset_using_org=Y',
-            ),
           ),
         ),
         2 => 
@@ -118,7 +114,6 @@ array (
             'label' => 'LBL_TARGET_OWNING_ORG',
             'displayParams' => 
             array (
-			'initial_filter' => '&asset_using_org=Y',
               'field_to_name_array' => 
               array (
                 'name' => 'target_owning_org',
@@ -156,7 +151,6 @@ array (
               array (
                 'name' => 'source_wo',
                 'id' => 'source_wo_id',
-				'hat_asset_locations_id'=>'location_id',
               ),
               'call_back_function' => 'setWoPopupReturn',
             ),
@@ -219,6 +213,21 @@ array (
         array (
           0 => 'description',
         ),
+		8 => 
+        array (
+          0 => 'wo_lines',
+        ),
+		 'lbl_editview_panel1' =>
+      array (
+        0 =>
+        array (
+          0 =>
+          array (
+            'name' => 'line_items',
+            'label' => 'LBL_LINE_ITEMS',
+          ),
+        ),
+      ),
       ),
       'lbl_editview_panel2' => 
       array (

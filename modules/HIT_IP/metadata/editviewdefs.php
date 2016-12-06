@@ -39,6 +39,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_DETAILVIEW_PANEL1' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
       ),
       'syncDetailEditViews' => false,
     ),
@@ -55,14 +60,7 @@ array (
             'label' => 'LBL_SITE',
             'customCode' => '{$MAINT_SITE}',
           ),
-          1 => 
-          array (
-            'name' => 'location',
-			'displayParams' => 
-            array (
-              'initial_filter' => '&site_type=D',
-            ),
-          ),
+          1 => '',
         ),
         1 => 
         array (
@@ -78,10 +76,9 @@ array (
       array (
         0 => 
         array (
-          0 => 'line_items'
+          0 => 'line_items',
         ),
       ),
-      
     ),
   ),
 );

@@ -212,6 +212,9 @@ array (
         array (
           0 => 'description',
         ),
+		11=>
+        array (0=>'wo_lines'),
+
       ),
       'lbl_editview_panel1' => 
       array (

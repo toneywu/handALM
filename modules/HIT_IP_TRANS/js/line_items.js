@@ -69,82 +69,34 @@ function openDateStart(ln){
  * @param {} selectIn
  */
 function selectedLine(selectIn){
-	
+	//0 代表失效
 	if($("#line_enable_action"+selectIn).is(':checked')){
+		console.log("checked");
 		$("#line_enable_action"+selectIn).prop("checked",'true');
 		$("#line_status"+selectIn).val("UNEFFECTIVE");
 		$("#line_status_dis"+selectIn).val(SUGAR.language.get('HIT_IP_TRANS', 'LBL_EFFICACY'));
 		var mydate = new Date();
   		var currentDate=mydate.toLocaleString();
 		$("#line_date_end"+selectIn).val(getnowtime());
-		$("#line_enable_action"+selectIn).val('1');
-		$("#line_enable_action_val"+selectIn).val('1');
+		$("#line_enable_action"+selectIn).val('0');
+		$("#line_enable_action_val"+selectIn).val('0');
         $("#displayed_line_enable_action"+selectIn).attr("checked",true);
         $("#displayed_line_enable_action"+selectIn).prop("checked",true);
         document.getElementById("displayed_line_enable_action"+selectIn).checked = true;
 	}else{
+		console.log("unchecked");
 		$("#line_enable_action"+selectIn).removeAttr("checked");
 		$("#line_date_end"+selectIn).val(null);
 		$("#line_status"+selectIn).val("EFFECTIVE");
 		$("#line_status_dis"+selectIn).val(SUGAR.language.get('HIT_IP_TRANS', 'LBL_EFFECTIVE'));
 
         $("#displayed_line_enable_action"+selectIn).removeAttr("checked");
-        $("#line_enable_action"+selectIn).val('0');
-        $("#line_enable_action_val"+selectIn).val('0');
+        $("#line_enable_action"+selectIn).val('1');
+        $("#line_enable_action_val"+selectIn).val('1');
 	}
 	
 }
 
-
-/**
- * 设置必输 TODO：确认本函数能否删除，在include.js中有公共的函数
- */
-/*function mark_field_enabled(field_name, not_required_bool) {
-	// field_name = 字段名，不需要jquery select标志，直接写名字
-	// not_required_bool如果为空或没有明确定义为true的话，字段为必须输入。如果=true则为非必须
-	// alert(not_required_bool);
-	$("#" + field_name).css({
-				"color" : "#000000",
-				"background-Color" : "#ffffff"
-			});
-	$("#" + field_name).attr("readonly", false);
-	$("#" + field_name + "_label").css({
-				"color" : "#000000",
-				"text-decoration" : "none"
-			})
-
-	if (typeof not_required_bool == "undefined" || not_required_bool == false
-			|| not_required_bool == "") {
-		addToValidate('EditView', field_name, 'varchar', 'true', $("#"
-						+ field_name + "_label").text());// 将当前字段标记为必须验证
-		// 打上必须星标
-		if ($("#" + field_name + "_label .required").text() != '*') {// 如果没有星标，则打上星标
-			$("#" + field_name + "_label").html($("#" + field_name + "_label")
-					.text()
-					+ "<span class='required'>*</span>");// 打上星标
-		} else {// 如果已经有星标了，则显示出来
-			$("#" + field_name + "_label .required").show();
-		}
-		// $("#"+field_name+"_btn").remove();
-	} else { // 如果不是必须的，则不显示星标
-		// 直接Remove有时会出错，所有先设置为Validate再Remove
-		addToValidate('EditView', field_name, 'varchar', 'true', $("#"
-						+ field_name + "_label").text());
-		removeFromValidate('EditView', field_name);
-		// 去除必须验证
-		$("#" + field_name + "_label .required").hide();
-	}
-	if (typeof $("#btn_" + field_name) != 'undefined') {// 移除选择按钮
-		$("#btn_" + field_name).css({
-					"visibility" : "visible"
-				});
-	}
-	if (typeof $("#btn_clr_" + field_name) != 'undefined') {// 移除清空按钮
-		$("#btn_clr_" + field_name).css({
-					"visibility" : "visible"
-				});
-	}
-}*/
 function openHitIpPopup(ln) {// 本文件为行上选择IP按钮
 	lineno = ln;
 	currentLine=ln;
@@ -196,23 +148,7 @@ function setCabinetReturn(popupReplyData) {
 	set_return(popupReplyData);
 }
 
-function openAssetPopup(ln) {// 本文件为行上选择资产的按钮
-	lineno = ln;
-	var popupRequestData = {
-		"call_back_function" : "setAssetReturn",
-		"form_name" : "EditView",
-		"field_to_name_array" : {
-			"id" : "line_hat_assets_id" + ln,
-			"name" : "line_hat_asset_name" + ln
-		}
-	};
-	//目前列表限制规则为，如果来源为工作单，则限制在本工作单范围内填写的设备，否则不限制
-	//TODO:需要加上从EventType上的列表规则，现在设置的列表规则无效，都是在此写死的
-  var popupFilter;
-  var source_wo_id=$("#source_wo_id").val();
-  var popupFilter = '&current_mode=it&defualt_list='+global_eventOptions.default_asset_list.toLowerCase()+'&wo_id='+source_wo_id+'&haa_frameworks_id_advanced='+$("#haa_frameworks_id").val();
-  open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
-}
+
 
 
 function setMainAssetReturn(popupReplyData) {
@@ -236,7 +172,7 @@ function setBackupAssetReturn(popupReplyData) {
 	// console.log(popupReplyData);
 	// resetAsset(lineno);
 }
-function openBackupAssetPopup(ln) {// 本文件为行上选择资产的按钮
+/*function openBackupAssetPopup(ln) {// 本文件为行上选择资产的按钮
 	lineno = ln;
 	var popupRequestData = {
 		"call_back_function" : "setBackupAssetReturn",
@@ -246,7 +182,31 @@ function openBackupAssetPopup(ln) {// 本文件为行上选择资产的按钮
 			"name" : "line_backup_asset" + ln
 		}
 	};
-	open_popup('HAT_Assets', 600, 850, '', true, true, popupRequestData);
+  var popupFilter = '&current_mode=it&defualt_list='+global_eventOptions.default_asset_list.toLowerCase()
+  				+'&wo_id='+source_wo_id
+  				+'&haa_frameworks_id_advanced='+$("#haa_frameworks_id").val()
+				+'&site_id='+$("#ham_maint_sites_id").val();
+  open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
+}*/
+function openAssetPopup(ln) {// 本文件为行上选择资产的按钮
+	lineno = ln;
+	var popupRequestData = {
+		"call_back_function" : "setAssetReturn",
+		"form_name" : "EditView",
+		"field_to_name_array" : {
+			"id" : "line_hat_assets_id" + ln,
+			"name" : "line_hat_asset_name" + ln
+		}
+	};
+	//目前列表限制规则为，如果来源为工作单，则限制在本工作单范围内填写的设备，否则不限制
+	//TODO:需要加上从EventType上的列表规则，现在设置的列表规则无效，都是在此写死的
+  var popupFilter;
+  var source_wo_id=$("#source_wo_id").val();
+  var popupFilter = '&current_mode=it&defualt_list='+global_eventOptions.default_asset_list.toLowerCase()
+  				+'&wo_id='+source_wo_id
+  				+'&haa_frameworks_id_advanced='+$("#haa_frameworks_id").val()
+				+'&site_id='+$("#ham_maint_sites_id").val();
+  open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
 }
 
 function setAssetReturn(popupReplyData) {
@@ -270,7 +230,10 @@ function openAccessAssetNamePopup(ln) {// 本文件为行上选择资产的按�
 	};
   var popupFilter;
   var source_wo_id=$("#source_wo_id").val();
-  var popupFilter = '&current_mode=it&defualt_list='+global_eventOptions.default_asset_list.toLowerCase()+'&wo_id='+source_wo_id+'&haa_frameworks_id_advanced='+$("#haa_frameworks_id").val();
+  var popupFilter = '&current_mode=it&defualt_list='+global_eventOptions.default_asset_list.toLowerCase()
+  					+'&wo_id='+source_wo_id
+  					+'&haa_frameworks_id_advanced='+$("#haa_frameworks_id").val()
+  					+'&site_id='+$("#ham_maint_sites_id").val();
   open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
 }
 
@@ -292,7 +255,11 @@ function openAccessAssetBackupPopup(ln) {
 			"name" : "line_access_assets_backup_name" + ln
 		}
 	};
-  open_popup('HAT_Assets', 1200, 850, '', true, true, popupRequestData);
+ var popupFilter = '&current_mode=it&defualt_list='+global_eventOptions.default_asset_list.toLowerCase()
+  				+'&wo_id='+source_wo_id
+  				+'&haa_frameworks_id_advanced='+$("#haa_frameworks_id").val()
+				+'&site_id='+$("#ham_maint_sites_id").val();
+  open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
 }
 
 
@@ -553,6 +520,7 @@ function insertLineData(asset_trans_line) { // 将数据写入到对应的行字
 						$("#line_associated_ip" + ln).html(associated_ip);
 					}
 				});
+				console.log(asset_trans_line);
 		$("#line_parent_ip".concat(String(ln))).val(asset_trans_line.parent_ip);
 		$("#line_hit_ip_subnets".concat(String(ln)))
 				.val(asset_trans_line.hit_ip_subnets);
@@ -597,6 +565,7 @@ function insertLineData(asset_trans_line) { // 将数据写入到对应的行字
 	    $("#line_channel_content_backup".concat(String(ln))).val(asset_trans_line.channel_content_backup);
 	    $("#line_channel_num_backup".concat(String(ln))).val(asset_trans_line.channel_num_backup);
 	    $("#line_date_start".concat(String(ln))).val(asset_trans_line.date_start);
+		
 	    $("#line_date_end".concat(String(ln))).val(asset_trans_line.date_end);
 	    $("#line_enable_action".concat(String(ln))).val(asset_trans_line.enable_action);
 		$("#line_enable_action_val".concat(String(ln))).val(asset_trans_line.enable_action);
@@ -608,7 +577,7 @@ function insertLineData(asset_trans_line) { // 将数据写入到对应的行字
 	  	  $("#line_status_dis"+ln).val(SUGAR.language.get('HIT_IP_TRANS',"LBL_EFFICACY"));
 	    } 
 	    
-	    if($("#line_enable_action"+ln).val()=="1"){
+	    if($("#line_enable_action"+ln).val()=="0"){
   	 	 $("#line_enable_action"+ln).attr("checked",true);
      	 $("#line_enable_action"+ln).prop("checked",true);
       	 document.getElementById("displayed_line_enable_action"+ln).checked = true;
@@ -1313,16 +1282,15 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
   $("#displayed_line_date_start"+ln).html($("#line_date_start"+ln).val());
   $("#displayed_line_date_end"+ln).html( $("#line_date_end"+ln).val());
   $("#displayed_line_broadband_type"+ln).html( $("#line_broadband_type"+ln).val());
-  if($("#line_enable_action"+ln).val()=="1"){
-  	  
+  //0 代表失效
+  if($("#line_enable_action"+ln).val()=="0"){
   	  $("#displayed_line_enable_action"+ln).attr("checked",true);
       $("#displayed_line_enable_action"+ln).prop("checked",true);
       document.getElementById("displayed_line_enable_action"+ln).checked = true;
   }else{
   	  $("#displayed_line_enable_action"+ln).removeAttr("checked");
-  }  
-    
-
+  } 
+  
 }
 
 function resetAsset(ln) { // 在用户重新选择资产之后，会连带的更新资产相关的字段信息。
@@ -1500,7 +1468,7 @@ function markLineDeleted(ln, key) {// 删除当前行
 	$("#line_*"+ ln).children().remove(".required");
 
 	//用新的删除验证方式代替老的，toney.wu20161111
-/*	if (typeof validate != "undefined"
+	if (typeof validate != "undefined"
 			&& typeof validate['EditView'] != "undefined") {
 		removeFromValidate('EditView', 'line_hit_ip_subnets' + ln);
 		removeFromValidate('EditView', 'line_speed_limit' + ln);
@@ -1529,7 +1497,7 @@ function markLineDeleted(ln, key) {// 删除当前行
 	    removeFromValidate('EditView','line_date_start'+ ln);
 	    removeFromValidate('EditView','line_date_end'+ ln);
 	    removeFromValidate('EditView','line_broadband_type'+ ln);
-	}*/
+	}
 
 	if ($("#line_hit_ip_subnets" + ln).val() == "") {
 		$("#line_hit_ip_subnets" + ln).val("deleted");
@@ -1583,6 +1551,7 @@ function LineEditorClose(ln) {// 关闭行编辑器（显示为正常行）
 		$("#asset_trans_line1_displayed" + ln).show();
 		$("#asset_trans_line2_displayed" + ln).show();
 		renderTransLine(ln);
+		console.log("line_type = "+$("#line_enable_action"+ln).val());
 		resetLineNum_Bold();
 	}else{
 		return;
