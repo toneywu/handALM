@@ -1,6 +1,7 @@
 <?php
 //TODO 目前还不能通过事务处理关联父资产，也不能由父资产联动的更新子资产
 //global $current_user;
+global $db;
 $sugarbean = new HAT_Asset_Trans_Batch();
 $sugarbean->retrieve($_POST['record']);
 
@@ -12,9 +13,30 @@ else {
 }
 
 require_once('include/formbase.php');
+     //add by yuan.chen  2016-12-07
+     //需要事先判断 当前头状态是否从非已批准变为已批准 如果是的话 做后续erp资产调拨操作
+    $current_header_id = $_POST['record'];
+	$need_allocation="N";
+	//如果是新增 但是状态直接是提交 那么也当成需要完成资产调拨 满足条件1
+	if(empty($current_header_id)&&($_POST['asset_trans_status']=="SUBMITTED")){
+		$need_allocation="Y";
+	}else{
+		//如果有值 则通过数据库来判断
+		$check_sql =  'select hat_asset_trans_batch.asset_trans_status from hat_asset_trans_batch where hat_asset_trans_batch.deleted=0 and hat_asset_trans_batch.id="'.$current_header_id.'"';
+		$check_result = $db->query($check_sql);
+		while ($check_record = $db->fetchByAssoc($check_result)) {
+			$db_status = $check_record['asset_trans_status'];
+			if($db_status!="APPROVED"&&$_POST['asset_trans_status']=="APPROVED"){
+				$need_allocation="Y";
+			}
+		}
+	}
+	
+	
+//end by yuan.chen
 
 $return_id = save_header($sugarbean, $check_notify);//保存头
-save_lines($_POST, $sugarbean, 'line_');//保存行
+save_lines($_POST, $sugarbean, 'line_',$need_allocation);//保存行
 
 //目前在审批后立即就结束，但未来可以支持2步确认。
 //因此代码在此预留
@@ -67,7 +89,7 @@ function check_hearder_status($sugarbean) {
 }
 
 
-function save_lines($post_data, $parent, $key = ''){
+function save_lines($post_data, $parent, $key = '',$need_allocation){
     $line_count = isset($post_data[$key.'asset_id']) ? count($post_data[$key.'asset_id']) : 0; //判断记录的行数
 
     echo '<br/>.line_count = '.$line_count;
@@ -105,6 +127,17 @@ function save_lines($post_data, $parent, $key = ''){
                 $trans_line->trans_status = $parent->asset_trans_status;//父状态 LogicHook BeforeSave可能会改写
                 $trans_line->assigned_user_id = $parent->assigned_user_id;
 
+				//资产调拨
+				erp_asset_allocation($trans_line->asset_id,
+									 $trans_line->target_owning_org_id,
+									 $trans_line->target_location_id,
+									 $trans_line->target_location_desc,
+									 $need_allocation,
+									 $trans_line->id,
+									 $trans_line->target_owning_org,
+									 $trans_line->target_location);
+				
+				
                 //在新增或修改模式下，
                 //可以进一步的对资产信息进行修改
                 if ($parent->asset_trans_status=='APPROVED') {
@@ -190,4 +223,44 @@ function save_rack_allocations($focus, $parent){
         //echo "[".$focus->target_rack_position_data."]".$rack_id."|". $rack_pos_top."|". $height."|". $rack_pos_depth."*******************";
 }
 
+
+function erp_asset_allocation($asset_id,
+							  $target_owning_org_id,
+							  $target_location_id,
+							  $target_location_desc,
+							  $need_allocation,
+							  $line_id,
+							  $target_owning_org,
+							  $target_location){
+	$asset_bean = BeanFactory::getBean("HAT_Assets",$asset_id);
+	if($need_allocation=="Y"){//代表资产事物处理单的状态确实发生变化 只需判断下一步的条件是否满足
+	
+		if($asset_bean->fixed_asset_id){//是否对应ERP那边的资产编号
+		  //判断是否发生变化  参数和DB里面的值进行判断
+		    $check_line_sql =  'select hat_asset_trans.target_owning_org_id
+			                          ,hat_asset_trans.target_location_id
+									  ,hat_asset_trans.target_location_desc
+                      			from hat_asset_trans 
+								where hat_asset_trans.deleted=0 and hat_asset_trans.id="'.$current_header_id.'"';
+			$check_result = $db->query($check_line_sql);
+			while ($check_record = $db->fetchByAssoc($check_result)) {
+				$db_target_owning_org_id=$check_record['target_owning_org_id'];
+				$db_target_location_id  =$check_record['target_location_id'];
+				$db_target_location_desc=$check_record['target_location_desc'];
+			
+			if($db_target_owning_org_id!=$target_owning_org_id||
+			   $db_target_location_id!=$target_location_id||
+			   ($db_target_location_desc!=$target_location_desc||$target_location_desc!=$asset_bean->attribute10)){
+				//做资产调拨
+				
+				
+			}	
+				
+			}
+		
+		
+		}
+	}	
+	
+}
 ?>

@@ -12,7 +12,7 @@ $popupMeta = array (
   'hat_asset_locations_id' => 'hit_ip_subnets.hat_asset_locations_id',
 ),
 //'whereStatement'=>' (1=1 or ("'.$_REQUEST['location_advanced'].'" !=null and (hit_ip_subnets.purpose is null or  hit_ip_subnets.purpose not in ('INTERNET','BROADCASE','GATEWAY','MANAGERMENT','OTHERS')  ))) ',
-'whereStatement'=>'((1=1 and "'.$_REQUEST['location_id'].'" ="") or ("'.$_REQUEST["location_id"].'" !="" and hit_ip_subnets.hat_asset_locations_id="'.$_REQUEST["location_id"].'" and (hit_ip_subnets.purpose is null or hit_ip_subnets.purpose not in ("NETWORK_ADDRESS","BROADCAST_ADDRESS","GATEWAY","Management_IP","NON_OUR_RESOURCES") ) and (exists (select 1 from hit_ip_allocations h where h.deleted=0 and h.hit_ip_subnets_id=hit_ip_subnets.id and h.status="UNEFFECTIVE") or not exists(select 1 from hit_ip_allocations h where h.deleted=0 and h.hit_ip_subnets_id=hit_ip_subnets.id  )) ) )',
+'whereStatement'=>'((1=1 and "'.$_REQUEST['location_id'].'" ="") or ("'.$_REQUEST["location_id"].'" !="" and hit_ip_subnets.hat_asset_locations_id="'.$_REQUEST["location_id"].'" and (hit_ip_subnets.purpose is null or hit_ip_subnets.purpose not in ("NETWORK_ADDRESS","BROADCAST_ADDRESS","GATEWAY","Management_IP","NON_OUR_RESOURCES") ) and (exists (select 1 from hit_ip_allocations h where h.deleted=0 and h.hit_ip_subnets_id=hit_ip_subnets.id and h.enable_action="0") or not exists(select 1 from hit_ip_allocations h where h.deleted=0 and h.hit_ip_subnets_id=hit_ip_subnets.id  )) ) )',
     'searchInputs' => array (
   1 => 'name',
   2 => 'parent_hit_ip',
