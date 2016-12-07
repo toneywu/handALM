@@ -569,6 +569,12 @@ function insertLineData(asset_trans_line) { // 将数据写入到对应的行字
 	    $("#line_date_end".concat(String(ln))).val(asset_trans_line.date_end);
 	    $("#line_enable_action".concat(String(ln))).val(asset_trans_line.enable_action);
 		$("#line_enable_action_val".concat(String(ln))).val(asset_trans_line.enable_action);
+		if(asset_trans_line.enable_action==null||asset_trans_line.enable_action==""){
+			$("#line_enable_action".concat(String(ln))).val(1);
+			$("#line_enable_action_val".concat(String(ln))).val(1);
+		}
+		
+		
 		$("#line_broadband_type".concat(String(ln))).val(asset_trans_line.broadband_type);
 	    
 	    if($("#line_status"+ln).val()=="EFFECTIVE"){
