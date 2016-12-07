@@ -11,7 +11,10 @@ array (
         'buttons' => 
         array (
           0 => 'EDIT',
-          1 => 
+/*          1 => 'DUPLICATE',
+          2 => 'DELETE',
+          3 => 'FIND_DUPLICATES',*/
+          1 =>
           array (
             'customCode' => '<input type="button" class="button" onClick="GenerateDoc();" value="{$MOD.LBL_GENERATE_DOC}">',
           ),
@@ -82,6 +85,7 @@ array (
             'label' => 'LBL_EVENT_TYPE',
           ),
         ),
+<<<<<<< HEAD
       ),
       'lbl_editview_panel2' => 
       array (
@@ -211,6 +215,144 @@ array (
         0 => 
         array (
           0 => 
+=======
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'asset_trans_status',
+            'studio' => 'visible',
+            'label' => 'LBL_ASSET_TRANS_STATUS',
+          ),
+          1 => 
+          array (
+            'name' => 'current_owning_org',
+            'studio' => 'visible',
+            'label' => 'LBL_CURRENT_OWNING_ORG',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'target_owning_org',
+            'studio' => 'visible',
+            'label' => 'LBL_TARGET_OWNING_ORG',
+          ),
+          1 => 'name',
+        ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'tracking_number',
+            'label' => 'LBL_TRACKING_NUMBER',
+          ),
+          1 => 
+          array (
+            'name' => 'owner_contacts',
+            'studio' => 'visible',
+            'label' => 'LBL_OWNER',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'source_wo',
+            'studio' => 'visible',
+            'label' => 'LBL_SOURCE_WO',
+          ),
+          1 => 
+          array (
+            'name' => 'source_woop',
+            'studio' => 'visible',
+            'label' => 'LBL_SOURCE_WOOP',
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'contact_name',
+            'studio' => 'visible',
+            'label' => 'LBL_CONTACT_NAME',
+          ),
+          1 => 
+          array (
+            'name' => 'email',
+            'studio' => 'visible',
+            'label' => 'LBL_EMAIL',
+          ),
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'service_date',
+            'label' => 'LBL_SERVICE_DATE',
+          ),
+          1 => 
+          array (
+            'name' => 'send_to_customer',
+            'label' => 'LBL_SEND_TO_CUSTOMER',
+          ),
+        ),
+
+
+        7 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute1',
+            'label' => 'LBL_ATTRIBUTE1',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute2',
+            'label' => 'LBL_ATTRIBUTE2',
+          ),
+        ),
+        8 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute3',
+            'label' => 'LBL_ATTRIBUTE3',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute4',
+            'label' => 'LBL_ATTRIBUTE4',
+          ),
+        ),
+        9 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute5',
+            'label' => 'LBL_ATTRIBUTE5',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute6',
+            'label' => 'LBL_ATTRIBUTE6',
+          ),
+        ),
+        10 => 
+        array (
+          0 => 'description',
+        ),
+		11=>
+        array (0=>'wo_lines'),
+
+      ),
+      'lbl_editview_panel1' => 
+      array (
+        0 => 
+        array (
+          0 => 
+>>>>>>> 6e7a30fec9a91c79450f1bfb8c16b92922ea3ec0
           array (
             'name' => 'line_items',
             'label' => 'LBL_LINE_ITEMS',

@@ -1,7 +1,15 @@
 $.getScript("modules/HAA_FF/ff_include.js");
 $(document).ready(function() {
-	//$("#access_assets_name_advanced").after("<input type='hidden' id='target_owning_org_id_advanced' value='54b17458-3c99-15cd-ce95-57ad8b859112'>");
+	console.log("location_id");
 	//$("#hat_asset_locations_id_advanced").css("display","none");
+	/*if (typeof location_id != 'undefined'&&location_id!="") {
+		$("#name_advanced").after("<input type='hidden' id='location_id_advanced' value='"+location_id+"'>");
+	}*/
+
+	if(typeof location_id!="undefined"){
+		$html='<input id="location_id" name="location_id" type="hidden" value="'+location_id+'"/>';
+		$("#name_advanced").after($html);
+   }	
 	
 	if (typeof location_name != 'undefined') {
 	 if(location_name!=""||$("#location_advanced").val()!=""){

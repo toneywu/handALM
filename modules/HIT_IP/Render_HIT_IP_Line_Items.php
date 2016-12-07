@@ -51,7 +51,7 @@ function display_lines($focus, $field, $value, $view){
 							ON (his.hit_vlan_id = hv.id) 
 						  LEFT JOIN accounts a 
 							ON (his.org_id = a.id) 	
-						  LEFT JOIN hat_asset_locations h
+						  LEFT JOIN ham_maint_sites h
 						  	ON (h.id=his.hat_asset_locations_id)	
 						  INNER JOIN hit_ip hi 
 							ON (hi.id = his.parent_hit_ip_id)

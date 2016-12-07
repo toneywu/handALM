@@ -232,6 +232,13 @@ showWOLines();*/
 
 	 var complete_btn=$("<input type='button' class='btn_detailview' id='btn_complete' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_COMPLETE_BUTTON_LABEL')+"'>");
 	 if($("#wo_status").val()=="APPROVED"){
+		 //add by yuan.chen 2016-12-06
+		 $("input[name^=HAM_WO_Lines_]").attr("disabled","disabled");
+		 $("input[name^=HAM_WOOP_新增_button]").attr("disabled","disabled");
+		 $("a[id^=wo_line_edit_]").removeAttr("href");
+		 $("a[id^=wo_line_remove_]").removeAttr("href");
+		 $("a[id^=wo_line_remove_]").parent().parent().remove();
+		 //end
 	 	$("#btn_change_status").after(complete_btn);
 		//registe function cancel()
 		$("#btn_complete").click(function(){ //如果取消按钮 返回

@@ -36,7 +36,7 @@ foreach($_POST as $key => $value){
 */
 save_lines($_POST,$sugarbean, 'line_');
 
-handleRedirect($return_id, 'HIP_IP');
+handleRedirect($return_id, 'HIT_IP');
 
 
 

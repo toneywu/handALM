@@ -76,7 +76,9 @@ $mod_strings = array (
   'LBL_IP_INTERNET_BM' => 'IP Internet BM',
   'LBL_IP_C_BM' => 'IP C BM',
   'LBL_IP_USAGE' => 'IP Usage',
-  'LBL_LOCATION'=>'位置',
+  'LBL_LOCATION'=>'维护区域',
   'LBL_EDITVIEW_PANEL_DESC'=>'附加信息',
   'LBL_ERROR_IP_TYPE'=>'请输入正确的IP类型',
+  'LBL_DETAILVIEW_PANEL1'=>'子网段管理',
+    'LBL_ALREADY_EXISTS_IN_SYSTEM'=>'C段已经存在系统当中',
 );
