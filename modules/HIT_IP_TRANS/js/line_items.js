@@ -196,23 +196,7 @@ function setCabinetReturn(popupReplyData) {
 	set_return(popupReplyData);
 }
 
-function openAssetPopup(ln) {// 本文件为行上选择资产的按钮
-	lineno = ln;
-	var popupRequestData = {
-		"call_back_function" : "setAssetReturn",
-		"form_name" : "EditView",
-		"field_to_name_array" : {
-			"id" : "line_hat_assets_id" + ln,
-			"name" : "line_hat_asset_name" + ln
-		}
-	};
-	//目前列表限制规则为，如果来源为工作单，则限制在本工作单范围内填写的设备，否则不限制
-	//TODO:需要加上从EventType上的列表规则，现在设置的列表规则无效，都是在此写死的
-  var popupFilter;
-  var source_wo_id=$("#source_wo_id").val();
-  var popupFilter = '&current_mode=it&defualt_list='+global_eventOptions.default_asset_list.toLowerCase()+'&wo_id='+source_wo_id+'&haa_frameworks_id_advanced='+$("#haa_frameworks_id").val();
-  open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
-}
+
 
 
 function setMainAssetReturn(popupReplyData) {
@@ -236,7 +220,7 @@ function setBackupAssetReturn(popupReplyData) {
 	// console.log(popupReplyData);
 	// resetAsset(lineno);
 }
-function openBackupAssetPopup(ln) {// 本文件为行上选择资产的按钮
+/*function openBackupAssetPopup(ln) {// 本文件为行上选择资产的按钮
 	lineno = ln;
 	var popupRequestData = {
 		"call_back_function" : "setBackupAssetReturn",
@@ -246,7 +230,31 @@ function openBackupAssetPopup(ln) {// 本文件为行上选择资产的按钮
 			"name" : "line_backup_asset" + ln
 		}
 	};
-	open_popup('HAT_Assets', 600, 850, '', true, true, popupRequestData);
+  var popupFilter = '&current_mode=it&defualt_list='+global_eventOptions.default_asset_list.toLowerCase()
+  				+'&wo_id='+source_wo_id
+  				+'&haa_frameworks_id_advanced='+$("#haa_frameworks_id").val()
+				+'&site_id='+$("#ham_maint_sites_id").val();
+  open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
+}*/
+function openAssetPopup(ln) {// 本文件为行上选择资产的按钮
+	lineno = ln;
+	var popupRequestData = {
+		"call_back_function" : "setAssetReturn",
+		"form_name" : "EditView",
+		"field_to_name_array" : {
+			"id" : "line_hat_assets_id" + ln,
+			"name" : "line_hat_asset_name" + ln
+		}
+	};
+	//目前列表限制规则为，如果来源为工作单，则限制在本工作单范围内填写的设备，否则不限制
+	//TODO:需要加上从EventType上的列表规则，现在设置的列表规则无效，都是在此写死的
+  var popupFilter;
+  var source_wo_id=$("#source_wo_id").val();
+  var popupFilter = '&current_mode=it&defualt_list='+global_eventOptions.default_asset_list.toLowerCase()
+  				+'&wo_id='+source_wo_id
+  				+'&haa_frameworks_id_advanced='+$("#haa_frameworks_id").val()
+				+'&site_id='+$("#ham_maint_sites_id").val();
+  open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
 }
 
 function setAssetReturn(popupReplyData) {
@@ -270,7 +278,10 @@ function openAccessAssetNamePopup(ln) {// 本文件为行上选择资产的按�
 	};
   var popupFilter;
   var source_wo_id=$("#source_wo_id").val();
-  var popupFilter = '&current_mode=it&defualt_list='+global_eventOptions.default_asset_list.toLowerCase()+'&wo_id='+source_wo_id+'&haa_frameworks_id_advanced='+$("#haa_frameworks_id").val();
+  var popupFilter = '&current_mode=it&defualt_list='+global_eventOptions.default_asset_list.toLowerCase()
+  					+'&wo_id='+source_wo_id
+  					+'&haa_frameworks_id_advanced='+$("#haa_frameworks_id").val()
+  					+'&site_id='+$("#ham_maint_sites_id").val();
   open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
 }
 
@@ -292,7 +303,11 @@ function openAccessAssetBackupPopup(ln) {
 			"name" : "line_access_assets_backup_name" + ln
 		}
 	};
-  open_popup('HAT_Assets', 1200, 850, '', true, true, popupRequestData);
+ var popupFilter = '&current_mode=it&defualt_list='+global_eventOptions.default_asset_list.toLowerCase()
+  				+'&wo_id='+source_wo_id
+  				+'&haa_frameworks_id_advanced='+$("#haa_frameworks_id").val()
+				+'&site_id='+$("#ham_maint_sites_id").val();
+  open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
 }
 
 

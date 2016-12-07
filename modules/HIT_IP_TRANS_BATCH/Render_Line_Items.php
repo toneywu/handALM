@@ -3,6 +3,7 @@ function display_lines($focus, $field, $value, $view) {
 
 	global $sugar_config, $locale, $app_list_strings, $mod_strings;
 
+
 	$html = '';
 	$html .= '<script src="modules/HIT_IP_TRANS_BATCH/js/html_dom_required_setting.js"></script>';
 	if ($view == 'EditView') {
@@ -51,10 +52,13 @@ function display_lines($focus, $field, $value, $view) {
 							LEFT JOIN hit_ip hi ON (s.parent_hit_ip_id=hi.id)
 							LEFT JOIN hat_assets c ON (hat.access_assets_id=c.id)
 							LEFT JOIN hat_assets d ON (hat.access_assets_backup_id=d.id)
-							WHERE hat.deleted=0 and hat.hit_ip_trans_batch_id !='" . $focus->id . "' and hat.source_wo_id='" .
+							WHERE hat.deleted=0 and hat.hit_ip_trans_batch_id !='" . $focus->id . "'";
+
+							//toney.wu20161206原始的代码如下：没有看明白，ID已经限制了，为什么来源ID还需要限制似乎是多余的
+/*							WHERE hat.deleted=0 and hat.hit_ip_trans_batch_id !='" . $focus->id . "' and hat.source_wo_id='" .
 		$focus->source_wo_id . "' and hat.source_woop_id!='" .
 		$focus->source_woop_id . "')";
-
+*/
 		if ($focus->id != '') { //如果不是新增（即如果是编辑已有记录）
 			$sql1 = "(SELECT   hat.id
 					        ,a.name hat_asset_name,a.id hat_assets_id
@@ -231,7 +235,7 @@ function display_lines($focus, $field, $value, $view) {
 
 		}
 
-	if ($focus->hat_eventtype_id != '') {
+	if (isset($focus->hat_eventtype_id) && $focus->hat_eventtype_id != '') {
 
 		$event_sql = "SELECT 
 			  h.change_ip_subnets,

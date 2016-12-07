@@ -44,7 +44,7 @@ if($_REQUEST['type']=="location") { //如果是Locationg来源，需要读取子
                             hat_asset_locations,
                             ham_maint_sites
                           WHERE hat_asset_locations.deleted = 0";
-        if (isset($_REQUEST['site_id'])&&$_REQUEST['site_id']!="undefined") {
+        if (isset($_REQUEST['site_id'])&&$_REQUEST['site_id']!="undefined"&&$_REQUEST['site_id']!="") {
           //只列出当前Site下的地点
           $sel_sub_location .= " AND hat_asset_locations.`ham_maint_sites_id` = `ham_maint_sites`.id AND hat_asset_locations.`ham_maint_sites_id` = '".$_REQUEST['site_id']."'";
         } else {

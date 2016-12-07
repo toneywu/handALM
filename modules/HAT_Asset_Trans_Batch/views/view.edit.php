@@ -154,7 +154,7 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
             $this->bean->source_woop_id= "";
             $this->bean->source_wo_id="";
         }
-		//2、加载基于code_asset_location_type_id的动态界面模板（FF）
+		//2、加载基于hat_eventtype_id的动态界面模板（FF）
         if(isset($this->bean->hat_eventtype_id) && ($this->bean->hat_eventtype_id)!=""){
             //判断是否已经设置有位置分类，如果有分类，则进一步的加载分类对应的FlexForm
             $event_type_id = $this->bean->hat_eventtype_id;

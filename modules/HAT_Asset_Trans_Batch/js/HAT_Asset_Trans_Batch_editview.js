@@ -97,8 +97,12 @@ function resetEventType() {
 		mark_field_disabled('target_owning_org',false,false,false); //所属组织字段不可见,并清空当前值
 	}
 	if (global_eventOptions.change_owning_org == "REQUIRED"||global_eventOptions.change_owning_org == "OPTIONAL"){
-		$("#target_owning_org").val($("#source_wo_account").val())
-		$("#target_owning_org_id").val($("#source_wo_account_id").val())
+		if ($("#target_owning_org_id").val()=="" && $("#source_wo_account_id").val()!="") {
+			//如果当前的目标所属组织没有值，就从工单来源中复制
+			//如果已经有值了，就保持不变
+			$("#target_owning_org").val($("#source_wo_account").val())
+			$("#target_owning_org_id").val($("#source_wo_account_id").val())
+		}
 	}
 
 	//依据事件类型，确认是否需要变化使用组织
