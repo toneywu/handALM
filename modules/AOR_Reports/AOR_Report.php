@@ -1471,11 +1471,11 @@ function build_report_access_query(SugarBean $module, $alias){
                         $value = "CONCAT('%', ".$value.")";
                         break;
                     }
-
-                    if($condition->value_type == 'Value' && !$condition->value && $condition->operator == 'Equal_To') {
+                    /*Modify by chen 20161207*/
+                    /*if($condition->value_type == 'Value' && !$condition->value && $condition->operator == 'Equal_To') {
                         $value = "{$value} OR {$field} IS NULL";
-                    }
-
+                    }*/
+                    /*End Modify 20161207*/
                     if(!$where_set) {
                         if ($condition->value_type == "Period") {
                             if (array_key_exists($condition->value, $app_list_strings['date_time_period_list'])) {
@@ -1504,7 +1504,19 @@ function build_report_access_query(SugarBean $module, $alias){
                                 break;
                             }
                         } else {
-                            if (!$where_set) $query['where'][] = ($tiltLogicOp ? '' : ($condition->logic_op ? $condition->logic_op . ' ': 'AND ')) . $field . ' ' . $aor_sql_operator_list[$condition->operator] . ' ' . $value;
+                            if (!$where_set) {
+                                /*Modify by chen 20161207*/
+                                /*
+                                    if (!$where_set) $query['where'][] = ($tiltLogicOp ? '' : ($condition->logic_op ? $condition->logic_op . ' ': 'AND ')) . $field . ' ' . $aor_sql_operator_list[$condition->operator] . ' ' . $value;
+                                */
+                                $query['where'][] = ($tiltLogicOp ? '' : ($condition->logic_op ? $condition->logic_op . ' ': 'AND '));
+                                if ($value!="''") {
+                                    $query['where'][] .= $field . ' ' . $aor_sql_operator_list[$condition->operator] . ' ' . $value;
+                                }else{
+                                    $query['where'][] .=" NULL IS NULL";
+                                }
+                                /*End Modify 20161207*/
+                            }
                         }
                     }
                     $tiltLogicOp = false;
@@ -1536,7 +1548,6 @@ function build_report_access_query(SugarBean $module, $alias){
         if($closure) {
             $query['where'][] = ')';
         }
-
         return $query;
     }
 
