@@ -89,7 +89,7 @@ $(document).ready(function() {
   
     var change_btn=$("<input type='button' class='btn_detailview' id='btn_change_status' value='"+SUGAR.language.get('HIT_IP_TRANS_BATCH', 'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL')+"'>");
 	
-	if($("#asset_trans_status").val()!="DRAFT"){
+	if($("#asset_trans_status").val()=="DRAFT"){
 		$("#edit_button").after(change_btn);	
 	}
 	
@@ -100,12 +100,36 @@ $(document).ready(function() {
 
 });
 
+
 function GenerateDoc() {
 	if (typeof template_id == 'undefined' || template_id.length == 0) {
-		alert (SUGAR.language.get('app_strings', 'LBL_NO_TEMPLATE'));
-		//warning for no PDF template
+		alert(SUGAR.language.get('app_strings', 'LBL_NO_TEMPLATE'));
+		// warning for no PDF template
 	} else {
-	    var record_id=$( "input[name*='record']" ).val();
-	    window.location = "index.php?module=HIT_IP_TRANS_BATCH&action=GenerateDoc&uid="+record_id+"&templateID="+template_id;
-    }
+		var record_id = $("input[name*='record']").val();
+		//Modefy by osmond.liu 20161118
+		var title_txt=SUGAR.language.get('HIT_IP_TRANS_BATCH','LBL_PDF_TEMPLATES');
+		
+		var list=$("#pdftemplatehidden").val();
+		var $html=$('<select id="pdf_template_list" class="pdf_template_list" name="pdf_template_list">'+
+			list+'</select>');
+		var html='<select id="pdf_template_list" class="pdf_template_list" name="pdf_template_list">'+
+		list+'</select>';
+
+		BootstrapDialog.confirm({
+			title: title_txt,
+			message:$html,
+			 callback: function(result){
+				if(result) {
+					template_id=$('#pdf_template_list').val();
+					window.location = "index.php?module=HIT_IP_TRANS_BATCH&action=GenerateDoc&uid="
+					+ record_id + "&templateID=" + template_id;
+				}else{
+                    //alert("Nope.");              
+                }
+            }
+        });
+		//END Modefy osmond.liu 20161118
+		/**/
+	}
 }
