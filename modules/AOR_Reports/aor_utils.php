@@ -148,6 +148,7 @@ function getConditionsAsParameters($report, $override = array())
             'additionalConditions' => $additionalConditions
         );
     }
+
     return $conditions;
 }
 

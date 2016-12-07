@@ -45,3 +45,8 @@ $app_list_strings['moduleList']['HAT_Counting_Tasks'] = 'Counting Tasks';
 $app_list_strings['hat_counting_objects_type_list']['ASSETS'] = 'Physical Assets';
 $app_list_strings['hat_counting_objects_type_list']['FA'] = 'Financial Assets (Fixed Assets)';
 $app_list_strings['hat_counting_objects_type_list']['INV'] = 'Inventory Items';
+$app_list_strings['hat_counting_split_accord']=array (
+  'Organization' => '组织',
+  'Location' => '位置',
+  'Item' => '产品',
+);

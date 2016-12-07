@@ -117,6 +117,7 @@ $app_list_strings['haa_code_module_list']=array (
   'revenue' => 'Revenue/Expenditure Trans',
   'flexform'=>'FlexForm Extended Fields',
   'insurance' => 'Insurance',
+  'asset_counting' => 'Asset Counting',
   );
 
 $app_list_strings['haa_code_type_list']=array (
@@ -143,6 +144,7 @@ $app_list_strings['haa_code_type_list']=array (
   'insurance_claim_type' => 'insurance_claim_type',
   'insurance_type' => 'insurance_type',
   'insurance_subtype' => 'insurance_subtype',
+  'asset_counting_obj_type' => 'asset_counting_obj_type',
   );
 
 
@@ -1777,6 +1779,11 @@ $app_list_strings['moduleList']['HAT_Counting_Tasks'] = 'Counting Tasks';
 $app_list_strings['hat_counting_objects_type_list']['ASSETS'] = 'Physical Assets';
 $app_list_strings['hat_counting_objects_type_list']['FA'] = 'Financial Assets (Fixed Assets)';
 $app_list_strings['hat_counting_objects_type_list']['INV'] = 'Inventory Items';
+$app_list_strings['hat_counting_split_accord']=array (
+  'Organization' => '组织',
+  'Location' => '位置',
+  'Item' => '产品',
+);
 
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by

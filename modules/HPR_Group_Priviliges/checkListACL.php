@@ -15,7 +15,7 @@ function getListViewSQLStatement($current_module,$user_id,$framework_id,$paraArr
 
     if ($current_module&&$account_id_c&&$framework_id){
 
-        $privilige_sql = "SELECT
+        $privilige_sql = "SELECT IFNULL(hgm.user_id_c,'') user_id_c,
         hgp.sql_statement_for_listview
         FROM
         hpr_groups hg,
@@ -38,12 +38,17 @@ function getListViewSQLStatement($current_module,$user_id,$framework_id,$paraArr
         and hg.haa_frameworks_id_c='" . $framework_id . "'".
         "and hgm.account_id_c='".$account_id_c."'".
         "and hgp.privilige_module='".$current_module."'".
-        "and (hgm.user_id_c='' or hgm.user_id_c='".$user_id."')";
+        "and (hgm.user_id_c='' or hgm.user_id_c='".$user_id."')
+        order by hgm.user_id_c,hgm.account_id_c";
 
         $privilige_result = $db->query($privilige_sql);
-
+        $pre_user_id='-1';
         while ($privilige_row = $db->fetchByAssoc($privilige_result)) {
+            if ($pre_user_id!='-1'&&$pre_user_id!=$privilige_row['user_id_c']){
+                break;
+            }
             $listViewSQLStatement = empty($listViewSQLStatement)?$privilige_row['sql_statement_for_listview']:($listViewSQLStatement." AND ".$privilige_row['sql_statement_for_listview']);
+            $pre_user_id=$privilige_row['user_id_c'];
         }
     }
 
@@ -51,6 +56,7 @@ function getListViewSQLStatement($current_module,$user_id,$framework_id,$paraArr
     for ($i=0;$i<count($paraArray);$i++){
         $listViewSQLStatement=str_replace(":".($i+1), $paraArray[$i], $listViewSQLStatement);
     }
+
     return $listViewSQLStatement;
 }
 ?>

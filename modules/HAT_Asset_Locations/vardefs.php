@@ -523,7 +523,7 @@ $dictionary['HAT_Asset_Locations'] = array(
 		array (
 			'required' => false,
 			'name' => 'parent_location_id',
-			'vname' => 'LBL_PARENT_LOCATION',
+			'vname' => 'LBL_PARENT_LOCATION_ID',
 			'type' => 'id',
 			'massupdate' => 0,
 			'no_default' => false,
