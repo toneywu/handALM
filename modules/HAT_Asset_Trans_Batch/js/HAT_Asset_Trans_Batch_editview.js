@@ -28,20 +28,16 @@ function setEventTypePopupReturn(popupReplyData){
 	}
 
 	 call_ff();//调用FlexForm
+
 }
 
 function setEventTypeFields() {
-	console.log('index.php?to_pdf=true&module=HAT_EventType&action=getTransSetting&id=' + $("#hat_eventtype_id").val())//e74a5e34-906f-0590-d914-57cbe0e5ae89
+	//console.log('index.php?to_pdf=true&module=HAT_EventType&action=getTransSetting&id=' + $("#hat_eventtype_id").val())//e74a5e34-906f-0590-d914-57cbe0e5ae89
 	$.ajax({//
 		url: 'index.php?to_pdf=true&module=HAT_EventType&action=getTransSetting&id=' + $("#hat_eventtype_id").val(),//e74a5e34-906f-0590-d914-57cbe0e5ae89
 		async: false,
 		success: function (data) {
-			//console.log(data);
 			$("#eventOptions").val(data);
-			//console.log(jQuery.parseJSON($("#eventOptions").val()));
-/*			for(var i in obj) {
-				$("#"+i).val(obj[i]);//向隐藏的字段中复制值，从而所有的EventType值都会提供到隐藏的字段中
-			}*/
 			resetEventType();
 			if($("#haa_ff_id").val()==""){
 				$("#haa_ff_id").val(jQuery.parseJSON(data).haa_ff_id);
@@ -86,17 +82,27 @@ function resetEventType() {
 	//处理头字段
 	//依据事件类型，确认是否需要变化所属组织
 	//
+
 	var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());
+
+	if (global_eventOptions.check_customer_hold == "1"){
+	 	$("#asset_trans_status").change(); //对客户的信息状态进行验证
+	}
+
 	if (global_eventOptions.change_owning_org == "REQUIRED"){
 		mark_field_enabled('target_owning_org',false);
 	} else if (global_eventOptions.change_owning_org == "OPTIONAL"){
 		mark_field_enabled('target_owning_org',true);
 	} else {
-		mark_field_disabled('target_owning_org',false);
+		mark_field_disabled('target_owning_org',false,false,false); //所属组织字段不可见,并清空当前值
 	}
 	if (global_eventOptions.change_owning_org == "REQUIRED"||global_eventOptions.change_owning_org == "OPTIONAL"){
-		$("#target_owning_org").val($("#source_wo_account").val())
-		$("#target_owning_org_id").val($("#source_wo_account_id").val())
+		if ($("#target_owning_org_id").val()=="" && $("#source_wo_account_id").val()!="") {
+			//如果当前的目标所属组织没有值，就从工单来源中复制
+			//如果已经有值了，就保持不变
+			$("#target_owning_org").val($("#source_wo_account").val())
+			$("#target_owning_org_id").val($("#source_wo_account_id").val())
+		}
 	}
 
 	//依据事件类型，确认是否需要变化使用组织
@@ -106,7 +112,7 @@ function resetEventType() {
 	} else if (global_eventOptions.change_using_org == "OPTIONAL"){
 		mark_field_enabled('target_using_org',true);
 	} else {
-		mark_field_disabled('target_using_org',false); //使用组织字段不可见
+		mark_field_disabled('target_using_org',false,false,false); //使用组织字段不可见,并清空当前值
 	}
 
 	//如果需要变化（包括必须变化和可以变化2种场景，就从工作单上进行默认）
@@ -123,9 +129,13 @@ function resetEventType() {
 	loopField("line_target_using_org_id",global_eventOptions.change_using_org);
 
 	loopField("line_target_rack_position_desc",global_eventOptions.change_rack_position);
-	
+
 	//add by  yuan.chen
 	loopField("line_target_parent_asset",global_eventOptions.change_parent);
+	//add by  osmond.liu 20161123 增加资产地点的限制
+	loopField("line_target_location",global_eventOptions.change_location);
+	loopField("line_target_location_desc",global_eventOptions.change_location);
+//end modefy osmond.liu 20161123
 	//开始与结束时间根据使用组织及人员进行显示，不单独进行处理 deleted toney.wu 改到Using_org中
 /*	loopField("line_date_start",global_eventOptions.change_asset_date_end);
 	loopField("line_date_end",global_eventOptions.change_asset_date_start);
@@ -139,11 +149,11 @@ function resetEventType() {
    }else{
    		  //在头的Views中会加载Framework中的属性。决定资产的使用人及负责人字段是值列表还是文字
 		if (typeof using_person_field_rule== "undefined" || using_person_field_rule=="TEXT") { //判断使用人字段是列表还是文本框
-			loopField("line_target_owning_person",global_eventOptions.change_owning_person);
-			loopField("line_target_owning_person_desc","INVISIABLE");
-		} else {
 			loopField("line_target_owning_person","INVISIABLE");
 			loopField("line_target_owning_person_desc",global_eventOptions.change_owning_person);
+		} else {
+			loopField("line_target_owning_person",global_eventOptions.change_owning_person);
+			loopField("line_target_owning_person_desc","INVISIABLE");
 		}
    };
 
@@ -153,11 +163,11 @@ function resetEventType() {
    }else{
    		  //在头的Views中会加载Framework中的属性。决定资产的使用人及负责人字段是值列表还是文字
    		if (typeof owning_person_field_rule== "undefined" || owning_person_field_rule=="TEXT") {//判断负责人字段是列表还是文本框
-			loopField("line_target_using_person",global_eventOptions.change_using_person);
-			loopField("line_target_using_person_desc","INVISIABLE");
-		} else {
 			loopField("line_target_using_person","INVISIABLE");
 			loopField("line_target_using_person_desc",global_eventOptions.change_using_person);
+		} else {
+			loopField("line_target_using_person",global_eventOptions.change_using_person);
+			loopField("line_target_using_person_desc","INVISIABLE");
 		}
    };
 
@@ -197,6 +207,24 @@ function initTransHeaderStatus() {
 		$("#asset_trans_status option[value='CLOSED']").remove();
 		$("#asset_trans_status option[value='TRANSACTED']").remove();
 		setEditViewReadonly ();
+		//add by yuan.chen 2016-12-08
+		$("#EditView_tabs input").attr("readonly",true);
+        $("#EditView_tabs input").attr("style","background-Color:#efefef");
+	    $("#EditView_tabs textarea").attr("readonly",true);
+	    $("#EditView_tabs select").attr("disabled","disabled");
+	    $("#EditView_tabs select").css("background-Color","#efefef");
+	    $("#EditView_tabs input").attr("disabled","disabled");
+	    $("#EditView_tabs .dateTime").hide();
+		$(".input-group-addon").hide();
+		$("#EditView_tabs button").addClass("button");
+		$("#EditView_tabs button").removeAttr("style");
+		$("#EditView_tabs button").remove();
+		$("input[name^=btn_edit_line]").remove();
+		
+		
+		
+		
+		
 	} else if ((current_header_status=="CANCELED")) { //可以CANCEL,APPROVED
 		$("#asset_trans_status option[value='SUBMITTED']").remove();
 		$("#asset_trans_status option[value='REJECTED']").remove();
@@ -282,4 +310,79 @@ $(document).ready(function(){
 		$("#wo_lines").parent("td").prev("td").hide();
     }
 
-});
+
+/*	//提交时做客户的信息检查，如果当前客户有值，并且头状态为提交，则进行信息检查
+	$("#asset_trans_status").change(function(){
+		//注意：这里只对头上的做了验证，没有去验证行
+			if($("#eventOptions").val()=="") {
+				return
+
+		var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());
+
+
+		if (global_eventOptions.check_customer_hold == "1"){
+			console.log("checking");
+			if ($("#source_wo_id").val()!="" && $(this).children('option:selected').val()=="SUBMITTED") {
+
+				console.log('index.php?to_pdf=true&module=HAA_FF&action=validateField&mode=woaccounthold&id=' + $("#source_wo_id").val())
+				$.ajax({//
+					url: 'index.php?to_pdf=true&module=HAA_FF&action=validateField&mode=woaccounthold&id=' + $("#source_wo_id").val(),
+					async: false,
+					success: function (data) {
+						console.log("checked result="+data);
+						clear_all_errors();
+						if (data=='0') {
+							add_error_style('EditView','asset_trans_status',SUGAR.language.get('app_strings', 'LBL_CUSTOMER_HOLD_ERR'));
+						}
+					},//end sucess
+					error: function () { //失败
+						alert('Error loading AJAX for status check');
+					}//end error
+				});//end ajax
+			}//end if
+		}
+	})//end onChange function
+*/
+
+	function preValidateFunction(async_bool = false) {
+		//验证当前如果状态是Submit则用户是否有暂挂冲突
+		////如果是onChang校验，可以FFCheckField的async_bool=true这个输入过程与校验过程同步
+		///但如果是SAVE按钮的触发，一定要async=false(保持默认)
+		if($("#eventOptions").val()=="") {
+				return
+		}
+
+		var result = true;
+		var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());
+
+		if ($("#asset_trans_status").val()=="SUBMITTED") {//如果是提交状态，进行客户信息检查
+			if (global_eventOptions.check_customer_hold_c_owning == "1"){
+			//针对当前使用组织进行信息检查，如在报废或移出资产前确认，当前资产的拥有方是否有欠费行为
+				var ajaxStr='mode=accounthold&val='+$("#name").val()+'&id=' + $("#current_owning_org_id").val();
+				var errMSG = SUGAR.language.get('app_strings', 'LBL_CUSTOMER_HOLD_ERR');
+				result= FFCheckField('current_owning_org',ajaxStr,errMSG,async_bool);
+			}
+			//针对当前的目前使用组织进行检查，如在分配资产前确认当前用户是否有不良信用。
+			//因为FFCheckField会将已经的错误清除，所以如果当前已经报错（Result=false)就不再继续进行额外的校验了。
+			if (result==true && global_eventOptions.check_customer_hold_t_using == "1"){
+				var ajaxStr='mode=accounthold&val='+$("#name").val()+'&id=' + $("#target_using_org_id").val();
+				var errMSG = SUGAR.language.get('app_strings', 'LBL_CUSTOMER_HOLD_ERR');
+				result= FFCheckField('target_using_org',ajaxStr,errMSG,async_bool);
+			}
+
+		}
+		return result
+	}
+
+	$("#asset_trans_status").change(function(){
+		//验证当前地点代码是否唯一
+		preValidateFunction(true)//如果是onChang校验，可以FFCheckField的async_bool=true这个输入过程与校验过程同步
+	})//end onChange function
+
+
+	SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
+		OverwriteSaveBtn(preValidateFunction);//注意引用时不加（）
+	});
+
+
+})

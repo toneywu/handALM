@@ -233,5 +233,22 @@ $(document).ready(function(){
     } else {
 		$("#wo_lines").parent("td").prev("td").hide();
     }
+	
+	//add by yuan.chen 2016-12-08
+	if($("#asset_trans_status").val()=="APPROVED"){
+	   //$("#EditView_tabs button").css("display","none");
+	   $("#EditView_tabs input").attr("readonly",true);
+       $("#EditView_tabs input").attr("style","background-Color:#efefef");
+	   $("#EditView_tabs textarea").attr("readonly",true);
+	   $("#EditView_tabs select").attr("disabled","disabled");
+	   $("#EditView_tabs select").css("background-Color","#efefef");
+	   $("#EditView_tabs input").attr("disabled","disabled");
+	   $("#EditView_tabs .dateTime").hide();
+		$(".input-group-addon").hide();
+		$("#EditView_tabs button").addClass("button");
+		$("#EditView_tabs button").removeAttr("style");
+		$("#EditView_tabs button").remove();
+		$("input[name^=btn_edit_line]").remove();
+	}
 }
 )
