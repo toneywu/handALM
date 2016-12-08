@@ -26,7 +26,6 @@ if ($sugarbean->asset_trans_status=="APPROVED") {
     $sugarbean->save();//再调用一次，为了触发AfterSave,确认是否需要将头彻底关闭
 }
 
-
 handleRedirect($return_id, 'HAT_Asset_Trans_Batch');
 die;
 //****************** END: Jump Back *************************************************************//
@@ -50,6 +49,7 @@ function save_header($sugarbean, $check_notify) {
     $return_id = $sugarbean->id;
 
     $GLOBALS['log']->debug("OK.Saved HAT_Asset_Trans_Batch record with id of ".$return_id);
+    echo("OK.Saved HAT_Asset_Trans_Batch record with id of ".$return_id);
 
 
     if (isset($_REQUEST['duplicateSave']) && $_REQUEST['duplicateSave'] === "true"){
@@ -83,7 +83,9 @@ function save_lines($post_data, $parent, $key = ''){
         echo "<br/>asset_id=".$post_data[$key.'asset_id'][$i];
         echo "<br/>target_owning_org_id=".$post_data[$key.'target_owning_org_id'][$i];
         echo "<br/>target_location_id=".$post_data[$key.'target_location_id'][$i];
-        //print_r($post_data);
+        
+/*        echo "<pre>";
+        print_r($post_data);*/
 
         if ($post_data[$key.'asset_id'][$i]!='' && $post_data[$key.'target_owning_org_id'][$i]!='' &&$post_data[$key.'target_location_id'][$i]!='') {
             //只保存Asset、Account、Location不为空的记录，否则直接到下一循环

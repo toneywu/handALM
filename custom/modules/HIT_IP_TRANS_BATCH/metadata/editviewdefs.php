@@ -7,12 +7,12 @@ array (
     'templateMeta' => 
     array (
       'form' => 
-      array (
-        'hidden' => 
+      array (//不需要Hiden字段了，因为已经明处显示了 toney.wu20161207
+/*        'hidden' => 
         array (
           0 => '<input type="hidden" name="source_woop_id" id="source_woop_id" value="{$SOURCE_WOOP_ID}">',
           1 => '<input type="hidden" name="source_wo_id"  id="source_wo_id" value="{$SOURCE_WO_ID}">',
-        ),
+        ),*/
       ),
       'includes' => 
       array (
@@ -236,6 +236,21 @@ array (
           ),
         ),
         9 => 
+        array (
+          0 => 
+          array (
+            'name' => 'source_wo',
+            'studio' => 'visible',
+            'label' => 'LBL_SOURCE_WO',
+          ),
+          1 => 
+          array (
+            'name' => 'source_woop',
+            'studio' => 'visible',
+            'label' => 'LBL_SOURCE_WOOP',
+          ),
+        ),
+        10 => 
         array (
           0 => 'description',
         ),

@@ -18,4 +18,5 @@ $mod_strings = array (
   'LBL_PRIMARY_EMAIL_C' => 'Primary Email',
   'LBL_LINKED_CONTACT_CONTACT_ID' => 'Linked Contact (related Contact ID)',
   'LBL_LINKED_CONTACT' => 'Linked Person',
+  'LBL_FRAMEWORK'=>'Restrict Business Framework',
 );

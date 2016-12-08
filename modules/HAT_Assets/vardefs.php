@@ -2215,11 +2215,12 @@ $dictionary['HAT_Assets'] = array(
       'type' => 'index',
       'fields' => 
       array (
-        0 => 'haa_frameworks_id',
-        1 =>'parent_asset_id',
+        0 =>'parent_asset_id',
+        1 =>'haa_frameworks_id',
         2 => 'deleted',
       ),
     ),
+
 ),
 
 

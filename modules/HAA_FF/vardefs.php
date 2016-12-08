@@ -235,6 +235,16 @@ $dictionary['HAA_FF'] = array(
             'type' => 'index',
             'fields' => array('status'),
         ),
+
+	    array (
+	      'name' => 'idx_ff_id_del',
+	      'type' => 'index',
+	      'fields' => 
+	      array (
+	        0 => 'id',
+	        1 => 'deleted',
+	      ),
+	    ),
     ),
 	'optimistic_locking'=>true,
 	'unified_search'=>false,

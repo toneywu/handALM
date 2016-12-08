@@ -657,7 +657,7 @@ function resetEditorFields(ln) {
       $("#line_target_owning_org_id"+ln).val($("#target_owning_org_id").val());
     } else {
       //如果不需要变化使用组织，或是头上没有值 ，则资产的所属组织不变，将当前的所属组织复制到目标上
-      if ($("#line_target_owning_org_id").val()=="") {
+      if ($("#line_target_owning_org_id"+ln).val()=="") {
         $("#line_target_owning_org"+ln).val($("#line_current_owning_org"+ln).val());
         $("#line_target_owning_org_id"+ln).val($("#line_current_owning_org_id"+ln).val());
       }

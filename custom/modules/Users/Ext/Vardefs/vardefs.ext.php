@@ -42,6 +42,17 @@ $dictionary['User']['fields']['first_name_c']['labelValue']='First_Name';
 
  
 
+ // created: 2016-12-07 20:00:30
+$dictionary['User']['fields']['framewrok_c']['inline_edit']='';
+$dictionary['User']['fields']['framewrok_c']['labelValue']='Framework';
+
+ 
+
+ // created: 2016-12-07 20:00:30
+$dictionary['User']['fields']['haa_frameworks_id1_c']['inline_edit']=1;
+
+ 
+
  // created: 2016-02-10 10:46:19
 $dictionary['User']['fields']['last_name']['required']=false;
 $dictionary['User']['fields']['last_name']['inline_edit']=true;

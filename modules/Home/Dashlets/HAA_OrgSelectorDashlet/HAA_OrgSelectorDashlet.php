@@ -46,6 +46,8 @@ class HAA_OrgSelectorDashlet extends Dashlet {
      */
     function display() {
 
+        global $current_user;
+
         $ss = new Sugar_Smarty();
         $ss->assign('savedText', SugarCleaner::cleanHtml($this->savedText));
         $ss->assign('saving', $this->dashletStrings['LBL_SAVING']);
@@ -55,7 +57,16 @@ class HAA_OrgSelectorDashlet extends Dashlet {
         $ss->assign('frameworkLbl', $this->dashletStrings['LBL_FRAMEWORK']);
         $ss->assign('siteLbl', $this->dashletStrings['LBL_SITE']);
 
-		$frameworkBean_list = BeanFactory::getBean('HAA_Frameworks')->get_full_list('name'); //Order by name
+		//$frameworkBean_list = BeanFactory::getBean('HAA_Frameworks')->get_full_list('name'); //Order by name
+
+        if(isset($current_user->haa_frameworks_id1_c) && $current_user->haa_frameworks_id1_c!="") {
+            //如果当前用户设置了限定业务框架，则单一结果
+            $frameworkBean_list = BeanFactory::getBean('HAA_Frameworks')->get_full_list('name','haa_frameworks.id="'.$current_user->haa_frameworks_id1_c.'"'); //Order by name
+        }else {
+            //如果当前用户没有设置业务框架，则加载所有的列表
+            $frameworkBean_list = BeanFactory::getBean('HAA_Frameworks')->get_full_list('name'); //Order by name
+        }
+
         $framework_field = "";
 
         if (isset($frameworkBean_list)) { //如果当前列表中有值才进行加载

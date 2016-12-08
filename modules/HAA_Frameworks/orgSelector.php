@@ -9,9 +9,18 @@ if(empty($_REQUEST['return_module']) || empty($_REQUEST['return_action'])) die('
 		//业务框架及地点选择器，如果在首页用户没有确定业务框架，则相关需要业务框架信息的页面，会先调用这个页面，要求用户选择业务框架后，再跳转回原页面中
 		global $mod_strings, $app_strings, $app_list_strings;
 
-		$frameworkBean_list = BeanFactory::getBean('HAA_Frameworks')->get_full_list('name'); //Order by name
+		if(isset($current_user->haa_frameworks_id1_c) && $current_user->haa_frameworks_id1_c!="") {
+			//如果当前用户设置了限定业务框架，则单一结果
+			$frameworkBean_list = BeanFactory::getBean('HAA_Frameworks')->get_full_list('name','haa_frameworks.id="'.$current_user->haa_frameworks_id1_c.'"'); //Order by name
+		}else {
+			//如果当前用户没有设置业务框架，则加载所有的列表
+			$frameworkBean_list = BeanFactory::getBean('HAA_Frameworks')->get_full_list('name'); //Order by name
+
+		}
+
 		$current_message="";
 		$framework_field="";
+
 
 		if (isset($frameworkBean_list)) { //如果当前列表中有值才进行加载
             $current_framework=isset($_SESSION["current_framework"])?$_SESSION["current_framework"]:''; //获取当前的业务框架，如果已经设置，应当为ID

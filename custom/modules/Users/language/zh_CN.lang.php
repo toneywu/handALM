@@ -1,5 +1,5 @@
 <?php
-// created: 2016-03-19 09:28:00
+// created: 2016-12-07 20:01:48
 $mod_strings = array (
   'LBL_CONTACT_ORGANIZATION_ACCOUNT_ID' => '人员所在组织 (ID)',
   'LBL_CONTACT_ORGANIZATION' => '人员所在组织',
@@ -18,4 +18,6 @@ $mod_strings = array (
   'LBL_PRIMARY_EMAIL_C' => '（首选的）电子邮件',
   'LBL_LINKED_CONTACT_CONTACT_ID' => '关联至人员 (ID)',
   'LBL_LINKED_CONTACT' => '关联至人员',
+  'LBL_FRAMEWORK_HAA_FRAMEWORKS_ID' => '限定业务框架 (ID)',
+  'LBL_FRAMEWORK' => '限定业务框架',
 );

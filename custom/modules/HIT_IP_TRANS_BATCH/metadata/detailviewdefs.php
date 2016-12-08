@@ -2,27 +2,19 @@
 $module_name = 'HIT_IP_TRANS_BATCH';
 $viewdefs [$module_name] = 
 array (
-  'EditView' => 
+  'DetailView' => 
   array (
     'templateMeta' => 
     array (
       'form' => 
       array (
-        'hidden' => 
+        'buttons' => 
         array (
-          0 => '<input type="hidden" name="source_woop_id" id="source_woop_id" value="{$SOURCE_WOOP_ID}">',
-          1 => '<input type="hidden" name="source_wo_id"  id="source_wo_id" value="{$SOURCE_WO_ID}">',
-        ),
-      ),
-      'includes' => 
-      array (
-        0 => 
-        array (
-          'file' => 'modules/HAA_FF/ff_include.js',
-        ),
-        1 => 
-        array (
-          'file' => 'modules/HIT_IP_TRANS_BATCH/js/HIT_IP_TRANS_BATCH_editview.js',
+          0 => 'EDIT',
+          1 => 
+          array (
+            'customCode' => '<input type="button" class="button" onClick="GenerateDoc();" value="{$MOD.LBL_GENERATE_DOC}">',
+          ),
         ),
       ),
       'maxColumns' => '2',
@@ -37,6 +29,17 @@ array (
         array (
           'label' => '10',
           'field' => '30',
+        ),
+      ),
+      'includes' => 
+      array (
+        0 => 
+        array (
+          'file' => 'modules/HAA_FF/ff_include.js',
+        ),
+        1 => 
+        array (
+          'file' => 'modules/HIT_IP_TRANS_BATCH/js/HIT_IP_TRANS_BATCH_detailview.js',
         ),
       ),
       'useTabs' => false,
@@ -71,25 +74,12 @@ array (
             'name' => 'framework',
             'studio' => 'visible',
             'label' => 'LBL_FRAMEWORKS',
-            'customCode' => '{$FRAMEWORK}',
           ),
           1 => 
           array (
             'name' => 'event_type',
             'studio' => 'visible',
             'label' => 'LBL_EVENT_TYPE',
-            'displayParams' => 
-            array (
-              'initial_filter' => '&basic_type_advanced=NETWORK',
-              'field_to_name_array' => 
-              array (
-                'name' => 'event_type',
-                'id' => 'hat_eventtype_id',
-                'event_short_desc' => 'name',
-                'haa_ff_id' => 'haa_ff_id',
-              ),
-              'call_back_function' => 'setEventTypePopupReturn',
-            ),
           ),
         ),
       ),
@@ -117,16 +107,6 @@ array (
             'name' => 'target_owning_org',
             'studio' => 'visible',
             'label' => 'LBL_TARGET_OWNING_ORG',
-            'displayParams' => 
-            array (
-              'initial_filter' => '&asset_using_org=Y',
-              'field_to_name_array' => 
-              array (
-                'name' => 'target_owning_org',
-                'id' => 'target_owning_org_id',
-              ),
-              'call_back_function' => 'setTargetOwningOrgPopupReturn',
-            ),
           ),
           1 => '',
         ),
@@ -137,10 +117,6 @@ array (
             'name' => 'current_owning_org',
             'studio' => 'visible',
             'label' => 'LBL_CURRENT_OWNING_ORG',
-            'displayParams' => 
-            array (
-              'initial_filter' => '&asset_using_org=Y',
-            ),
           ),
           1 => 
           array (
@@ -165,16 +141,6 @@ array (
             'name' => 'contact_name',
             'studio' => 'visible',
             'label' => 'LBL_CONTACT_NAME',
-            'displayParams' => 
-            array (
-              'initial_filter' => '&account_id_advanced="+encodeURIComponent(document.getElementById("target_owning_org_id").value)+"',
-              'field_to_name_array' => 
-              array (
-                'name' => 'contact_name',
-                'id' => 'account_id',
-                'email_and_name1' => 'email',
-              ),
-            ),
           ),
           1 => 
           array (
@@ -236,6 +202,21 @@ array (
           ),
         ),
         9 => 
+        array (
+          0 => 
+          array (
+            'name' => 'source_wo',
+            'studio' => 'visible',
+            'label' => 'LBL_SOURCE_WO',
+          ),
+          1 => 
+          array (
+            'name' => 'source_woop',
+            'studio' => 'visible',
+            'label' => 'LBL_SOURCE_WOOP',
+          ),
+        ),
+        10 => 
         array (
           0 => 'description',
         ),
