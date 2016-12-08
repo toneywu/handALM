@@ -207,6 +207,24 @@ function initTransHeaderStatus() {
 		$("#asset_trans_status option[value='CLOSED']").remove();
 		$("#asset_trans_status option[value='TRANSACTED']").remove();
 		setEditViewReadonly ();
+		//add by yuan.chen 2016-12-08
+		$("#EditView_tabs input").attr("readonly",true);
+        $("#EditView_tabs input").attr("style","background-Color:#efefef");
+	    $("#EditView_tabs textarea").attr("readonly",true);
+	    $("#EditView_tabs select").attr("disabled","disabled");
+	    $("#EditView_tabs select").css("background-Color","#efefef");
+	    $("#EditView_tabs input").attr("disabled","disabled");
+	    $("#EditView_tabs .dateTime").hide();
+		$(".input-group-addon").hide();
+		$("#EditView_tabs button").addClass("button");
+		$("#EditView_tabs button").removeAttr("style");
+		$("#EditView_tabs button").remove();
+		$("input[name^=btn_edit_line]").remove();
+		
+		
+		
+		
+		
 	} else if ((current_header_status=="CANCELED")) { //可以CANCEL,APPROVED
 		$("#asset_trans_status option[value='SUBMITTED']").remove();
 		$("#asset_trans_status option[value='REJECTED']").remove();

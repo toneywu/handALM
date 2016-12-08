@@ -89,7 +89,7 @@ $(document).ready(function() {
   
     var change_btn=$("<input type='button' class='btn_detailview' id='btn_change_status' value='"+SUGAR.language.get('HIT_IP_TRANS_BATCH', 'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL')+"'>");
 	
-	if($("#asset_trans_status").val()!="DRAFT"){
+	if($("#asset_trans_status").val()=="DRAFT"){
 		$("#edit_button").after(change_btn);	
 	}
 	

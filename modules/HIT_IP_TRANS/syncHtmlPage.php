@@ -43,8 +43,8 @@ $sql = "SELECT   null id
 									,hat.monitoring_backup
 									,hat.channel_content_backup
 									,hat.channel_num_backup
-									,ifnull(hat.date_start,'') date_start
-									,hat.date_end,hat.status,hat.enable_action,hat.broadband_type
+									,hat.date_start
+									,hat.date_end,hat.status,ifnull(hat.enable_action,1) enable_action,hat.broadband_type
 							FROM   hit_ip_allocations hat
 							LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
 							LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)

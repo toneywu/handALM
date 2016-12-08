@@ -105,7 +105,10 @@
 		+ SUGAR.language.get('HAT_Asset_Trans_Batch',
 			'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL') + "'>");
 	if ($("#asset_trans_status").val() != "DRAFT") {
-		$("#edit_button").after(change_btn);
+/*=======
+	if ($("#asset_trans_status").val() == "DRAFT") {
+>>>>>>> 8cd2ae4945acb8cfd49cfeeb9cc475d381a7c271
+*/		$("#edit_button").after(change_btn);
 	}
 
 	$("#btn_change_status").click(function() {
@@ -165,7 +168,7 @@ function GenerateDoc() {
 		var record_id = $("input[name*='record']").val();
 		//Modefy by zeng 20161110
 		var title_txt=SUGAR.language.get('HAT_Asset_Trans_Batch','LBL_PDF_TEMPLATES');
-		
+
 		var list=$("#pdftemplatehidden").val();
 		var $html=$('<select id="pdf_template_list" class="pdf_template_list" name="pdf_template_list">'+
 			list+'</select>');
@@ -181,7 +184,7 @@ function GenerateDoc() {
 					window.location = "index.php?module=HAT_Asset_Trans_Batch&action=GenerateDoc&uid="
 					+ record_id + "&templateID=" + template_id;
 				}else{
-                    //alert("Nope.");              
+                    //alert("Nope.");
                 }
             }
         });
