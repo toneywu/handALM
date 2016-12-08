@@ -538,6 +538,10 @@ function insertLineData(asset_trans_line) { // 将数据写入到对应的行字
 		$("#line_hit_ip_subnets_id".concat(String(ln)))
 				.val(asset_trans_line.hit_ip_subnets_id);
 		$("#line_id".concat(String(ln))).val(asset_trans_line.id);
+		if(asset_trans_line.id=="1"){
+			$("#line_id".concat(String(ln))).val("");
+		}
+		
 		$("#line_hat_assets_cabinet_id".concat(String(ln)))
 				.val(asset_trans_line.hat_assets_cabinet_id);
 		$("#line_hat_assets_cabinet".concat(String(ln)))
@@ -1503,6 +1507,7 @@ function markLineDeleted(ln, key) {// 删除当前行
 	    removeFromValidate('EditView','line_date_start'+ ln);
 	    removeFromValidate('EditView','line_date_end'+ ln);
 	    removeFromValidate('EditView','line_broadband_type'+ ln);
+		removeFromValidate('EditView','line_mrtg_link'+ ln);
 	}
 
 	if ($("#line_hit_ip_subnets" + ln).val() == "") {
