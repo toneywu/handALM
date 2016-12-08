@@ -292,6 +292,20 @@ function initTransHeaderStatus() {
     	$("#wo_status option[value='CLOSED']").remove();
     	$("#wo_status option[value='WPREV']").remove();
         setEditViewReadonly ();
+		$("#pagecontent button").css("display","none");
+	   $("#pagecontent input").attr("readonly",true);
+       $("#pagecontent input").attr("style","background-Color:#efefef");
+	   $("#pagecontent textarea").attr("readonly",true);
+	   $("#pagecontent select").attr("disabled","disabled");
+	   $("#pagecontent select").css("background-Color","#efefef");
+	   $("#pagecontent input").attr("disabled","disabled");
+	   $("#pagecontent .dateTime").hide();
+	   $("#CANCEL_HEADER").removeAttr("readonly");
+	   $("#CANCEL_HEADER").removeAttr("disabled");
+	   $("#CANCEL_HEADER").removeAttr("style");
+	   $("#CANCEL_FOOTER").removeAttr("readonly");
+	   $("#CANCEL_FOOTER").removeAttr("disabled");
+	   $("#CANCEL_FOOTER").removeAttr("style");
     } else if ((current_header_status=="CANCELED")) { //什么也不能做
         $("#wo_status option[value='SUBMITTED']").remove();
         $("#wo_status option[value='REJECTED']").remove();

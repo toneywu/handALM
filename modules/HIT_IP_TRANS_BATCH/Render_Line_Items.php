@@ -43,8 +43,8 @@ function display_lines($focus, $field, $value, $view) {
 									,hat.monitoring_backup
 									,hat.channel_content_backup
 									,hat.channel_num_backup
-									,hat.date_start
-									,hat.date_end,hat.status,hat.enable_action,hat.broadband_type
+									,ifnull(hat.date_start,'') date_start
+									,ifnull(hat.date_end,'') date_end,hat.status,hat.enable_action,hat.broadband_type
 							FROM   hit_ip_allocations hat
 							LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
 							LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
@@ -52,13 +52,10 @@ function display_lines($focus, $field, $value, $view) {
 							LEFT JOIN hit_ip hi ON (s.parent_hit_ip_id=hi.id)
 							LEFT JOIN hat_assets c ON (hat.access_assets_id=c.id)
 							LEFT JOIN hat_assets d ON (hat.access_assets_backup_id=d.id)
-							WHERE hat.deleted=0 and hat.hit_ip_trans_batch_id !='" . $focus->id . "'";
+							WHERE hat.deleted=0 and hat.hit_ip_trans_batch_id !='" . $focus->id . "' and hat.source_wo_id='" .
+								$focus->source_wo_id . "' and hat.source_woop_id!='" .
+								$focus->source_woop_id . "')";
 
-							//toney.wu20161206原始的代码如下：没有看明白，ID已经限制了，为什么来源ID还需要限制似乎是多余的
-/*							WHERE hat.deleted=0 and hat.hit_ip_trans_batch_id !='" . $focus->id . "' and hat.source_wo_id='" .
-		$focus->source_wo_id . "' and hat.source_woop_id!='" .
-		$focus->source_woop_id . "')";
-*/
 		if ($focus->id != '') { //如果不是新增（即如果是编辑已有记录）
 			$sql1 = "(SELECT   hat.id
 					        ,a.name hat_asset_name,a.id hat_assets_id
@@ -89,8 +86,8 @@ function display_lines($focus, $field, $value, $view) {
 							,hat.monitoring_backup
 							,hat.channel_content_backup
 							,hat.channel_num_backup
-							,hat.date_start
-							,hat.date_end,hat.status,hat.enable_action,hat.broadband_type
+							,ifnull(hat.date_start,'') date_start
+							,ifnull(hat.date_end,'') date_end ,hat.status,hat.enable_action,hat.broadband_type
 					FROM   hit_ip_trans hat
 					LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
 					LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
@@ -167,8 +164,8 @@ function display_lines($focus, $field, $value, $view) {
 								,hat.monitoring_backup
 								,hat.channel_content_backup
 								,hat.channel_num_backup
-								,ifnull(hat.date_start,null) date_start
-								,hat.date_end,hat.status,hat.enable_action,hat.broadband_type
+								,ifnull(hat.date_start,'') date_start
+								,ifnull(hat.date_end,'') date_end,hat.status,hat.enable_action,hat.broadband_type
 						FROM   hit_ip_trans hat
 						LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
 						LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
@@ -208,7 +205,7 @@ function display_lines($focus, $field, $value, $view) {
 								,hat.channel_content_backup
 								,hat.channel_num_backup
 								,ifnull(hat.date_start,null) date_start,hat.enable_action
-								,hat.date_end,hat.status,hat.broadband_type
+								,ifnull(hat.date_end,'') date_end,hat.status,hat.broadband_type
 						FROM   hit_ip_allocations hat
 						LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
 						LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
