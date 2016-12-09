@@ -107,4 +107,5 @@ $mod_strings = array (
   'LBL_ERROR_IP_TYPE'=>'Please Enter The Correct IP Type ',
   'LBL_DETAILVIEW_PANEL1'=>'Subnet Managment',
   'LBL_ALREADY_EXISTS_IN_SYSTEM'=>'C Segment Already Exists In System',
+  'LBL_STATUS'=>'Status',
 );

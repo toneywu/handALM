@@ -29,14 +29,16 @@ function get_label_name ($field_name,$mod_name) {
   return (translate($dictionary[$mod_name]['fields'][$field_name]['vname'],$mod_name));
 }
 
-function get_jason_field ($label_field_name, $mod_name,  $val_field,  $val_type='varchar', $val_field_id='', $relate_mod_name='') {
-/*  $label_field_name, 标签字段对应的字段名
+/****************************************************
+*  $label_field_name, 标签字段对应的字段名
     $mod_name,  模块名
     $val_field,  数据内容
     $val_type='varchar', 数据项类型
     $con_string='',  连接符号，如JASON字段之间通过','关联
     $val_field_id='' 如果是ID字段，提供链接
-*/
+****************************************************/
+function get_jason_field ($label_field_name, $mod_name,  $val_field,  $val_type='varchar', $val_field_id='', $relate_mod_name='') {
+
 
     if ($val_type=="bool") {
       $val_field = ($val_field==0)?'<input type=\"checkbox\">':'<input type=\"checkbox\" checked=\"checked\">';
@@ -51,6 +53,8 @@ function get_jason_field ($label_field_name, $mod_name,  $val_field,  $val_type=
     return $return_text;
 }
 
+
+/*以下是执行的主要过程*************************************/
 
 if($_GET['type']=="location") { //如果是Locationg来源，需要读取子位置和子资产（Asset来源只需要子资产）
    $sel_location ="SELECT 
@@ -71,10 +75,10 @@ if($_GET['type']=="location") { //如果是Locationg来源，需要读取子位�
                         and ham_maint_sites.deleted=0
                         AND hat_asset_locations.id = '".$_GET['id']."'";
 
-//echo($sel_sub_asset);
+  //echo($sel_sub_asset);
 
-$bean_locations = $db->query($sel_location); //无如是Location还是asset来源，都可以显示子资产
-//if(is_array($bean_assets)) {
+  $bean_locations = $db->query($sel_location); //无如是Location还是asset来源，都可以显示子资产
+  //if(is_array($bean_assets)) {
     while ( $location = $db->fetchByAssoc($bean_locations) ) {
        //$txt_jason .='"type":"location"';
        $txt_jason .='"fields":[';

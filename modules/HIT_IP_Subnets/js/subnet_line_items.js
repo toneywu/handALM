@@ -247,6 +247,7 @@ function show_ip_desc(ip_val, desc_obj) {
  */
 
 function getPopListValue(id,ln){
+console.log('index.php?to_pdf=true&module=HIT_IP_Subnets&action=getPurposeListField&id=' +  id+"&prodln="+ln)
   $.ajax({
      url:'index.php?to_pdf=true&module=HIT_IP_Subnets&action=getPurposeListField&id=' +  id+"&prodln="+ln,
      success: function (data) {
@@ -569,8 +570,7 @@ function insertTransLineElements(tableid, current_view) { // 创建界面要素
 	z1.innerHTML = "<td><input id='selectLineClicked"
 			+ prodln
 			+ "' type='checkbox' onclick='selectLineClicked(this)'></td>"
-			+ "<td><span name='displayed_line_purpose[" + prodln
-			+ "]' id='displayed_line_purpose" + prodln + "'></span></td>"
+
 			+ "<td><span name='displayed_line_num["
 			+ prodln
 			+ "]' id='displayed_line_num"
@@ -623,6 +623,8 @@ function insertTransLineElements(tableid, current_view) { // 创建界面要素
 			+ "]' id='displayed_line_gateway" + prodln + "'></span></td>"
 			+ "<td><span name='displayed_line_purpose[" + prodln
 			+ "]' id='displayed_line_purpose" + prodln + "'></span></td>"
+/*			+ "<td><span name='displayed_line_purpose[" + prodln
+			+ "]' id='displayed_line_purpose" + prodln + "'></span></td>"*/
 			+ "<td><span name='displayed_line_description[" + prodln
 			+ "]' id='displayed_line_description" + prodln + "'></span></td>"
 			+ "<td><span name='displayed_line_location[" + prodln
@@ -715,13 +717,8 @@ function insertTransLineElements(tableid, current_view) { // 创建界面要素
 			+ "<label id='line_purpose_label"+prodln+"'>"
 			+ SUGAR.language.get('HIT_IP_Subnets', 'LBL_PURPOSE')
 			+ "</label>"
-			+ "<input  autocomplete='off' type='text' style='width:153px;' name='line_purpose["
-			+ prodln
-			+ "]' id='line_purpose"
-			+ prodln
-			+ "' value='' title='' onblur='resetItem("
-			+ prodln
-			+ ")'>"
+			+ "<input  autocomplete='off' type='text' style='width:153px;' name='line_purpose["+ prodln+ "]' id='line_purpose"+ prodln
+			+ "' value='' title='' onblur='resetItem("+ prodln+ ")'>"
 			+ "</span>"
 			
 			+ "<span class='input_group'>"
@@ -1042,7 +1039,7 @@ function LineEditorShow(ln) { // 显示行编辑器（先自动关闭所有的�
 	$("#trans_editor" + ln).show();
 	// 渲染下拉列表框的值
 	// 通过ajax获取
-	// getPopListValue($("#line_id"+ln).val(),ln);
+	 getPopListValue($("#line_id"+ln).val(),ln);
 
 }
 
