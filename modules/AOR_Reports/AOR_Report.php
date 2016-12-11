@@ -875,7 +875,7 @@ private function encloseForCSV($field){
 }
 
 function build_report_csv(){
-    global $beanList;
+    /*global $beanList;
     ini_set('zlib.output_compression', 'Off');
 
     ob_start();
@@ -957,7 +957,7 @@ function build_report_csv(){
     }
     print $csv;
 
-    sugar_cleanup(true);
+    sugar_cleanup(true);*/
 }
 
 
