@@ -122,7 +122,7 @@ function GenerateDoc() {
 			 callback: function(result){
 				if(result) {
 					template_id=$('#pdf_template_list').val();
-					window.location = "index.php?module=HIT_IP_TRANS_BATCH&action=GenerateDoc&uid="
+					window.location = "index.php?module=HIT_IP_TRANS_BATCH&action=GenerateDoc&task=new&uid="
 					+ record_id + "&templateID=" + template_id;
 				}else{
                     //alert("Nope.");              

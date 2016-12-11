@@ -2,7 +2,7 @@
  //WARNING: The contents of this file are auto-generated
 
 
-// created: 2016-12-07 15:28:45
+// created: 2016-02-08 10:53:31
 $dictionary["HAT_Assets"]["fields"]["hat_assets_accounts"] = array (
   'name' => 'hat_assets_accounts',
   'type' => 'link',
@@ -36,7 +36,7 @@ $dictionary["HAT_Assets"]["fields"]["hat_assets_accountsaccounts_ida"] = array (
 );
 
 
-// created: 2016-12-07 15:28:46
+// created: 2016-02-08 10:53:31
 $dictionary["HAT_Assets"]["fields"]["hat_assets_contacts"] = array (
   'name' => 'hat_assets_contacts',
   'type' => 'link',
@@ -75,7 +75,7 @@ $dictionary["HAT_Assets"]["fields"]["hat_assets_contactscontacts_ida"] = array (
 );
 
 
-// created: 2016-12-07 15:28:46
+// created: 2016-02-08 10:53:31
 $dictionary["HAT_Assets"]["fields"]["hat_assets_hat_asset_trans"] = array (
   'name' => 'hat_assets_hat_asset_trans',
   'type' => 'link',
@@ -88,7 +88,7 @@ $dictionary["HAT_Assets"]["fields"]["hat_assets_hat_asset_trans"] = array (
 );
 
 
-// created: 2016-12-07 15:28:51
+// created: 2016-02-08 10:53:31
 $dictionary["HAT_Assets"]["fields"]["hat_asset_locations_hat_assets"] = array (
   'name' => 'hat_asset_locations_hat_assets',
   'type' => 'link',
@@ -96,14 +96,14 @@ $dictionary["HAT_Assets"]["fields"]["hat_asset_locations_hat_assets"] = array (
   'source' => 'non-db',
   'module' => 'HAT_Asset_Locations',
   'bean_name' => 'HAT_Asset_Locations',
-  'vname' => 'LBL_HAT_ASSET_LOCATIONS_HAT_ASSETS_FROM_HAT_ASSET_LOCATIONS_TITLE',
+  'vname' => 'LBL_LOCATION',
   'id_name' => 'hat_asset_locations_hat_assetshat_asset_locations_ida',
 );
 $dictionary["HAT_Assets"]["fields"]["hat_asset_locations_hat_assets_name"] = array (
   'name' => 'hat_asset_locations_hat_assets_name',
   'type' => 'relate',
   'source' => 'non-db',
-  'vname' => 'LBL_HAT_ASSET_LOCATIONS_HAT_ASSETS_FROM_HAT_ASSET_LOCATIONS_TITLE',
+  'vname' => 'LBL_LOCATION',
   'save' => true,
   'id_name' => 'hat_asset_locations_hat_assetshat_asset_locations_ida',
   'link' => 'hat_asset_locations_hat_assets',
