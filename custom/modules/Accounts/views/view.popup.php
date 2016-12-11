@@ -27,13 +27,13 @@ class AccountsViewPopup extends ViewPopup
  		global $mod_strings, $app_strings, $app_list_strings;
         global $db;
         global $popupMeta;
+
 		//$popupMeta["whereStatement"].='access_assets_id="'.$_REQUEST["access_assets_id_advanced"].'"';
 		//if(isset($_REQUEST["access_assets_name_advanced"])&&!empty($_REQUEST["access_assets_name_advanced"])){
 		//	$popupMeta["whereStatement"].='(access_assets_name="'.$_REQUEST["hat_asset_name_advanced"].'" or hat_asset_name="'.$_REQUEST["hat_asset_name_advanced"].'")';
 		//}
-		//$popupMeta["whereStatement"].=' 2=1';
-		//$_SESSION['Accounts2_QUERY'].=" AND 1=2";
-		parent::process();
+
+				parent::process();
 		//echo $popupMeta["whereStatement"];
 		//echo "where".$popupMeta->_get_where_clause();
 		//echo "REQUEST".var_dump($_SESSION);
