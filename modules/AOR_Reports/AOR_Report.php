@@ -62,6 +62,7 @@ class AOR_Report extends Basic {
     var $assigned_user_name;
     var $assigned_user_link;
     var $report_module;
+    var $paramsArray=array();
 
     function __construct(){
         parent::__construct();
@@ -873,9 +874,10 @@ function calculateTotal($type, $totals){
 private function encloseForCSV($field){
     return '"'.$field.'"';
 }
-
-function build_report_csv(){
-    /*global $beanList;
+//Modefy BY LQ 20161212
+//根据报表类型来输出
+/*function build_report_csv(){
+    global $beanList;
     ini_set('zlib.output_compression', 'Off');
 
     ob_start();
@@ -957,8 +959,108 @@ function build_report_csv(){
     }
     print $csv;
 
-    sugar_cleanup(true);*/
+    sugar_cleanup(true);
+}*/
+
+function standard_build_report_csv(){
+    global $beanList;
+    ini_set('zlib.output_compression', 'Off');
+
+    ob_start();
+    require_once('include/export_utils.php');
+
+    $delimiter = getDelimiter();
+    $csv = '';
+        //text/comma-separated-values
+
+    $sql = "SELECT id FROM aor_fields WHERE aor_report_id = '".$this->id."' AND deleted = 0 ORDER BY field_order ASC";
+    $result = $this->db->query($sql);
+
+    $fields = array();
+    $i = 0;
+    while ($row = $this->db->fetchByAssoc($result)) {
+
+        $field = new AOR_Field();
+        $field->retrieve($row['id']);
+
+        $path = unserialize(base64_decode($field->module_path));
+        $field_bean = new $beanList[$this->report_module]();
+        $field_module = $this->report_module;
+        $field_alias = $field_bean->table_name;
+
+        if($path[0] != $this->report_module){
+            foreach($path as $rel){
+                if(empty($rel)){
+                    continue;
+                }
+                $field_module = getRelatedModule($field_module,$rel);
+                $field_alias = $field_alias . ':'.$rel;
+            }
+        }
+        $label = str_replace(' ','_',$field->label).$i;
+        $fields[$label]['field'] = $field->field;
+        $fields[$label]['display'] = $field->display;
+        $fields[$label]['function'] = $field->field_function;
+        $fields[$label]['module'] = $field_module;
+        $fields[$label]['alias'] = $field_alias;
+        $fields[$label]['params'] = $field->format;
+
+        if($field->display){
+            $csv.= $this->encloseForCSV($field->label);
+            $csv .= $delimiter;
+        }
+        ++$i;
+    }
+
+    $sql = $this->build_report_query();
+    $result = $this->db->query($sql);
+
+    while ($row = $this->db->fetchByAssoc($result)) {
+        $csv .= "\r\n";
+        foreach($fields as $name => $att){
+            $currency_id = isset($row[$att['alias'].'_currency_id']) ? $row[$att['alias'].'_currency_id'] : '';
+            if($att['display']){
+                if($att['function'] != '' ||  $att['params'] != '')
+                    $csv .= $this->encloseForCSV($row[$name]);
+                else
+                    $csv .= $this->encloseForCSV(trim(strip_tags(getModuleField($att['module'], $att['field'], $att['field'], 'DetailView',$row[$name],'',$currency_id))));
+                $csv .= $delimiter;
+            }
+        }
+    }
+
+    $csv= $GLOBALS['locale']->translateCharset($csv, 'UTF-8', $GLOBALS['locale']->getExportCharset());
+
+    ob_clean();
+    header("Pragma: cache");
+    header("Content-type: text/comma-separated-values; charset=".$GLOBALS['locale']->getExportCharset());
+    header("Content-Disposition: attachment; filename=\"{$this->name}.csv\"");
+    header("Content-transfer-encoding: binary");
+    header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
+    header("Last-Modified: " . TimeDate::httpTime() );
+    header("Cache-Control: post-check=0, pre-check=0", false );
+    header("Content-Length: ".mb_strlen($csv, '8bit'));
+    if (!empty($sugar_config['export_excel_compatible'])) {
+        $csv = chr(255) . chr(254) . mb_convert_encoding($csv, 'UTF-16LE', 'UTF-8');
+    }
+    print $csv;
+
+    sugar_cleanup(true);
 }
+
+function build_report_csv(){
+   
+    $bean_report=BeanFactory::getBean('AOR_Reports',$this->id);
+    if ($bean_report->report_type_c=='Standard'){
+        $this->standard_build_report_csv();
+    }
+    else {
+        require_once('custom/modules/AOR_Reports/rpt_files/'.$bean_report->custom_file_c);
+        custom_report_main($this->paramsArray);
+    }
+
+}
+
 
 
 
@@ -1029,7 +1131,9 @@ function build_report_query($group_value ='', $extra = array()){
         }
         $query .= ' '.$query_sort_by;
     }
+
     return $query;
+
 
 }
 
@@ -1344,6 +1448,7 @@ function build_report_access_query(SugarBean $module, $alias){
 
                     if (!empty($this->user_parameters[$condition->id]) && $condition->parameter) {
                         $condParam = $this->user_parameters[$condition->id];
+
                         $condition->value = $condParam['value'];
                         $condition->operator = $condParam['operator'];
                         $condition->value_type = $condParam['type'];
@@ -1475,6 +1580,9 @@ function build_report_access_query(SugarBean $module, $alias){
                     /*if($condition->value_type == 'Value' && !$condition->value && $condition->operator == 'Equal_To') {
                         $value = "{$value} OR {$field} IS NULL";
                     }*/
+
+                    $this->paramsArray[]=$condition->value;
+
                     /*End Modify 20161207*/
                     if(!$where_set) {
                         if ($condition->value_type == "Period") {
@@ -1509,46 +1617,46 @@ function build_report_access_query(SugarBean $module, $alias){
                                 /*
                                     if (!$where_set) $query['where'][] = ($tiltLogicOp ? '' : ($condition->logic_op ? $condition->logic_op . ' ': 'AND ')) . $field . ' ' . $aor_sql_operator_list[$condition->operator] . ' ' . $value;
                                 */
-                                $query['where'][] = ($tiltLogicOp ? '' : ($condition->logic_op ? $condition->logic_op . ' ': 'AND '));
-                                if ($value!="''") {
-                                    $query['where'][] .= $field . ' ' . $aor_sql_operator_list[$condition->operator] . ' ' . $value;
-                                }else{
-                                    $query['where'][] .=" NULL IS NULL";
+                                    $query['where'][] = ($tiltLogicOp ? '' : ($condition->logic_op ? $condition->logic_op . ' ': 'AND '));
+                                    if ($value!="''") {
+                                        $query['where'][] .= $field . ' ' . $aor_sql_operator_list[$condition->operator] . ' ' . $value;
+                                    }else{
+                                        $query['where'][] .=" NULL IS NULL";
+                                    }
+                                    /*End Modify 20161207*/
                                 }
-                                /*End Modify 20161207*/
                             }
                         }
-                    }
-                    $tiltLogicOp = false;
-                }
-                else if($condition->parenthesis) {
-                    if($condition->parenthesis == 'START') {
-                        $query['where'][] = ($tiltLogicOp ? '' : ($condition->logic_op ? $condition->logic_op . ' ' : 'AND ')) .  '(';
-                        $tiltLogicOp = true;
-                    }
-                    else {
-                        $query['where'][] = ')';
                         $tiltLogicOp = false;
                     }
+                    else if($condition->parenthesis) {
+                        if($condition->parenthesis == 'START') {
+                            $query['where'][] = ($tiltLogicOp ? '' : ($condition->logic_op ? $condition->logic_op . ' ' : 'AND ')) .  '(';
+                            $tiltLogicOp = true;
+                        }
+                        else {
+                            $query['where'][] = ')';
+                            $tiltLogicOp = false;
+                        }
+                    }
+                    else {
+                        $GLOBALS['log']->debug('illegal condition');
+                    }
+
                 }
-                else {
-                    $GLOBALS['log']->debug('illegal condition');
+
+                if(isset($query['where']) && $query['where']) {
+                    array_unshift($query['where'], '(');
+                    $query['where'][] = ') AND ';
                 }
+                $query['where'][] = $module->table_name.".deleted = 0 ".$this->build_report_access_query($module, $module->table_name);
 
             }
 
-            if(isset($query['where']) && $query['where']) {
-                array_unshift($query['where'], '(');
-                $query['where'][] = ') AND ';
+            if($closure) {
+                $query['where'][] = ')';
             }
-            $query['where'][] = $module->table_name.".deleted = 0 ".$this->build_report_access_query($module, $module->table_name);
-
+            return $query;
         }
 
-        if($closure) {
-            $query['where'][] = ')';
-        }
-        return $query;
     }
-
-}
