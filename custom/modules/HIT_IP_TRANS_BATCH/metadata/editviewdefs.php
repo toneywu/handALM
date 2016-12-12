@@ -7,10 +7,12 @@ array (
     'templateMeta' => 
     array (
       'form' => 
-      array (
-        'hidden' => 
+      array (//不需要Hiden字段了，因为已经明处显示了 toney.wu20161207
+/*        'hidden' => 
         array (
-        ),
+          0 => '<input type="hidden" name="source_woop_id" id="source_woop_id" value="{$SOURCE_WOOP_ID}">',
+          1 => '<input type="hidden" name="source_wo_id"  id="source_wo_id" value="{$SOURCE_WO_ID}">',
+        ),*/
       ),
       'includes' => 
       array (
@@ -90,7 +92,10 @@ array (
             ),
           ),
         ),
-        1 => 
+      ),
+      'lbl_editview_panel2' => 
+      array (
+        0 => 
         array (
           0 => 
           array (
@@ -100,12 +105,12 @@ array (
           ),
           1 => 
           array (
-            'name' => 'current_owning_org',
+            'name' => 'site',
             'studio' => 'visible',
-            'label' => 'LBL_CURRENT_OWNING_ORG',
+            'label' => 'LBL_SITE',
           ),
         ),
-        2 => 
+        1 => 
         array (
           0 => 
           array (
@@ -114,6 +119,7 @@ array (
             'label' => 'LBL_TARGET_OWNING_ORG',
             'displayParams' => 
             array (
+              'initial_filter' => '&asset_using_org=Y',
               'field_to_name_array' => 
               array (
                 'name' => 'target_owning_org',
@@ -122,14 +128,19 @@ array (
               'call_back_function' => 'setTargetOwningOrgPopupReturn',
             ),
           ),
-          1 => 'name',
+          1 => '',
         ),
-        3 => 
+        2 => 
         array (
           0 => 
           array (
-            'name' => 'tracking_number',
-            'label' => 'LBL_TRACKING_NUMBER',
+            'name' => 'current_owning_org',
+            'studio' => 'visible',
+            'label' => 'LBL_CURRENT_OWNING_ORG',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&asset_using_org=Y',
+            ),
           ),
           1 => 
           array (
@@ -138,40 +149,16 @@ array (
             'label' => 'LBL_OWNER',
           ),
         ),
-        4 => 
+        3 => 
         array (
-          0 => 
-          array (
-            'name' => 'source_wo',
-            'studio' => 'visible',
-            'label' => 'LBL_SOURCE_WO',
-            'displayParams' => 
-            array (
-              'field_to_name_array' => 
-              array (
-                'name' => 'source_wo',
-                'id' => 'source_wo_id',
-              ),
-              'call_back_function' => 'setWoPopupReturn',
-            ),
-          ),
+          0 => 'name',
           1 => 
           array (
-            'name' => 'source_woop',
-            'studio' => 'visible',
-            'label' => 'LBL_SOURCE_WOOP',
-            'displayParams' => 
-            array (
-              'initial_filter' => '&ham_wo_id_advanced="+encodeURIComponent(document.getElementById("source_wo_id").value)+"',
-              'field_to_name_array' => 
-              array (
-                'name' => 'source_woop',
-                'id' => 'source_woop_id',
-              ),
-            ),
+            'name' => 'tracking_number',
+            'label' => 'LBL_TRACKING_NUMBER',
           ),
         ),
-        5 => 
+        4 => 
         array (
           0 => 
           array (
@@ -196,7 +183,7 @@ array (
             'label' => 'LBL_EMAIL',
           ),
         ),
-        6 => 
+        5 => 
         array (
           0 => 
           array (
@@ -209,29 +196,7 @@ array (
             'label' => 'LBL_SEND_TO_CUSTOMER',
           ),
         ),
-        7 => 
-        array (
-          0 => 'description',
-        ),
-		8 => 
-        array (
-          0 => 'wo_lines',
-        ),
-		 'lbl_editview_panel1' =>
-      array (
-        0 =>
-        array (
-          0 =>
-          array (
-            'name' => 'line_items',
-            'label' => 'LBL_LINE_ITEMS',
-          ),
-        ),
-      ),
-      ),
-      'lbl_editview_panel2' => 
-      array (
-        0 => 
+        6 => 
         array (
           0 => 
           array (
@@ -244,7 +209,7 @@ array (
             'label' => 'LBL_ATTRIBUTE2',
           ),
         ),
-        1 => 
+        7 => 
         array (
           0 => 
           array (
@@ -257,7 +222,7 @@ array (
             'label' => 'LBL_ATTRIBUTE4',
           ),
         ),
-        2 => 
+        8 => 
         array (
           0 => 
           array (
@@ -269,6 +234,29 @@ array (
             'name' => 'attribute6',
             'label' => 'LBL_ATTRIBUTE6',
           ),
+        ),
+        9 => 
+        array (
+          0 => 
+          array (
+            'name' => 'source_wo',
+            'studio' => 'visible',
+            'label' => 'LBL_SOURCE_WO',
+          ),
+          1 => 
+          array (
+            'name' => 'source_woop',
+            'studio' => 'visible',
+            'label' => 'LBL_SOURCE_WOOP',
+          ),
+        ),
+        10 => 
+        array (
+          0 => 'description',
+        ),
+		11 => 
+        array (
+          0 => 'wo_lines',
         ),
       ),
       'lbl_editview_panel1' => 

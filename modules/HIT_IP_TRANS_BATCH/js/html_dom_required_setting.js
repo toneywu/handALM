@@ -30,6 +30,9 @@ function mark_field_disabled_mine(field_name, hide_bool, keep_position=false) {
 	        mark_obj.attr("readonly",true);
 	        mark_obj_lable.css({"color":"#aaaaaa"});
 	        mark_obj_date.remove();
+			if(mark_obj.attr("type")=="checkbox"){
+				mark_obj.attr("disabled","disabled");
+			}
 	      	
 	    }
 	    if (typeof validate != "undefined" && typeof validate['EditView'] != "undefined") {
@@ -146,6 +149,7 @@ function loopField(fieldName,type){
 		 }
 	}else if(type=="LOCKED"){
 		for (var i=0;i<prodln;i++) {
+			//console.log("name = "+fieldName);
 		    mark_field_disabled_mine(fieldName+i,false);
 		}
 	}else if(type=="REQUIRED"){
@@ -201,6 +205,7 @@ function changeRequired(lineRecord){
 	loopField("line_channel_num_backup",lineRecord.change_channel_num_backup);
 	loopField("line_status",lineRecord.change_status);
 	loopField("line_access_assets_backup_name",lineRecord.change_access_assets_backup_name);
+	loopField("line_enable_action",lineRecord.change_enable_action);
 }
 
 //delted by toney.wu 20161007
