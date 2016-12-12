@@ -49,7 +49,7 @@ class HIT_Rack_Allocations_sugar extends Basic {
 	var $module_dir = 'HIT_Rack_Allocations';
 	var $object_name = 'HIT_Rack_Allocations';
 	var $table_name = 'hit_rack_allocations';
-	var $importable = false;
+	var $importable = true;
 	var $disable_row_level_security = true ; // to ensure that modules created and deployed under CE will continue to function under team security if the instance is upgraded to PRO
 
 	var $id;

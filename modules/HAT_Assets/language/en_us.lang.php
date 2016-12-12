@@ -133,6 +133,6 @@ $mod_strings = array (
   'LBL_FIXED_ASSET'=>'Fixed Assets#',
   'LBL_ENABLE_FA'=>'Sync with Fixed Asset',
   'LBL_RACK'=>'Server-Rack Position',
-    'LBL_LINEAR_ELEMENTS_SUBPANEL'=>'Linear Elements'
-
+  'LBL_LINEAR_ELEMENTS_SUBPANEL'=>'Linear Elements',
+  'LBL_COST_CENTER'=>'Cost Center',
 );

@@ -2072,6 +2072,61 @@ $dictionary['HAT_Assets'] = array(
       'quicksearch' => 'enabled',
       'studio' => 'visible',
       ),
+	  
+	  'cost_center_id' =>
+    array (
+      'required' => false,
+      'name' => 'cost_center_id',
+      'vname' => 'LBL_COST_CENTER_ID',
+      'type' => 'id',
+      'massupdate' => 0,
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'false',
+      'duplicate_merge' => 'disabled',
+      'duplicate_merge_dom_value' => 0,
+      'audited' => false,
+      'inline_edit' => true,
+      'reportable' => false,
+      'unified_search' => false,
+      'merge_filter' => 'disabled',
+      'len' => 36,
+      'size' => '20',
+      ),
+    'cost_center' =>
+    array (
+      'required' => true,
+      'source' => 'non-db',
+      'name' => 'cost_center',
+      'vname' => 'LBL_COST_CENTER',
+      'type' => 'relate',
+      'massupdate' => 0,
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'duplicate_merge_dom_value' => '0',
+      'audited' => false,
+      'inline_edit' => true,
+      'reportable' => true,
+      'unified_search' => false,
+      'merge_filter' => 'disabled',
+      'len' => '255',
+      'size' => '20',
+      'id_name' => 'cost_center_id',
+      'ext2' => 'HAA_Codes',
+      'module' => 'HAA_Codes',
+      'rname' => 'name',
+      'quicksearch' => 'enabled',
+      'studio' => 'visible',
+      ),
+	  
+	  
+	  
+	  
+	  
     'asset_icon' =>
     array (
       'required' => false,

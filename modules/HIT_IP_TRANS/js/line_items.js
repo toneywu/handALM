@@ -1689,12 +1689,12 @@ function dulicateTranLine(ln) {// 关闭行编辑器（显示为正常行）
 				$("#line_" + key + (prodln - 1)).val(domvalue);
 				//计算字段
 				$("#displayed_line_" + key + (prodln - 1)).html(domvalue);
-				if($("displayed_line_enable_action"+proln).val()==0){
-					$("#displayed_line_enable_action"+proln).attr("checked",true);
-        			$("#displayed_line_enable_action"+proln).prop("checked",true);
-        			document.getElementById("displayed_line_enable_action"+proln).checked = true;
+				if($("displayed_line_enable_action"+prodln).val()==0){
+					$("#displayed_line_enable_action"+prodln).attr("checked",true);
+        			$("#displayed_line_enable_action"+prodln).prop("checked",true);
+        			document.getElementById("displayed_line_enable_action"+prodln).checked = true;
 				}else{
-					$("#displayed_line_enable_action"+proln).removeAttr("checked");
+					$("#displayed_line_enable_action"+prodln).removeAttr("checked");
 				}
 			}
 		

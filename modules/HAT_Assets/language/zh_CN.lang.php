@@ -134,5 +134,6 @@ $mod_strings = array (
   'LBL_FIXED_ASSET'=>'财务固定资产',
   'LBL_ENABLE_FA'=>'与财务固定资产同步',
   'LBL_RACK'=>'所在机柜U位',
-  'LBL_LINEAR_ELEMENTS_SUBPANEL'=>'线性资产要素'
+  'LBL_LINEAR_ELEMENTS_SUBPANEL'=>'线性资产要素',
+  'LBL_COST_CENTER'=>'成本中心',
 );

@@ -64,8 +64,6 @@ $dictionary['HIT_IP_Allocations'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
-
-			
 		),
 		'hit_ip_subnets' => array (
 			'required' => true,

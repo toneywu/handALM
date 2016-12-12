@@ -90,18 +90,20 @@ function insertTransLineHeader(tableid){
 
 
 function insertLineData(asset_trans_line ){ //将数据写入到对应的行字段中
+  console.log("insertLineData");
   console.log(asset_trans_line);
   var ln = 0;
   if(asset_trans_line.id != '0' && asset_trans_line.id !== ''){
     ln = insertTransLineElements("lineItems");
     //alert(asset_trans_line.hit_ip_subnets);
     ip_splited = asset_trans_line.hit_ip_subnets.split("/")
-//    if ( IpSubnetCalculator.isIp(ip_splited[0])&&ip_splited[1]<=32&&ip_splited[1]>=0) {
-//		   var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1]);
-//		   var associated_ip= ip_caled.ipLowStr+"~"+ip_caled.ipHighStr;
-//		   //显示IP细节信息，由IpSubnetCalculator.js完成算法
-//		   $("#line_associated_ip"+ln).html(associated_ip);
-//	  }
+    if ( IpSubnetCalculator.isIp(ip_splited[0])) {
+		   var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1]);
+		   var associated_ip= ip_caled.ipLowStr+"~"+ip_caled.ipHighStr;
+		   //显示IP细节信息，由IpSubnetCalculator.js完成算法
+		   $("#line_associated_ip"+ln).html(associated_ip);
+		   $("#displayed_line_associated_ip"+ln).html(associated_ip);
+	  }
     $("#line_parent_ip".concat(String(ln))).val(asset_trans_line.parent_ip);
     $("#line_hit_ip_subnets".concat(String(ln))).val(asset_trans_line.hit_ip_subnets);
     //$("#line_associated_ip".concat(String(ln))).val(asset_trans_line.associated_ip);
@@ -400,11 +402,11 @@ function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
 			   var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1]);
 			   var associated_ip= ip_caled.ipLowStr+"~"+ip_caled.ipHighStr;
 			   //显示IP细节信息，由IpSubnetCalculator.js完成算法
-			   $("#displayed_line_associated_ip"+ln).html(associated_ip);
+			   //$("#displayed_line_associated_ip"+ln).html(associated_ip);
 			   $("#line_associated_ip"+ln).val(associated_ip);
 		  }
 		});
-	//alert($("#line_hit_ip_subnets"+ln).val());
+
   $("#displayed_line_parent_ip"+ln).html($("#line_parent_ip"+ln).val());
   $("#displayed_line_hit_ip_subnets"+ln).html($("#line_hit_ip_subnets"+ln).val());
   $("#displayed_line_mask"+ln).html($("#line_mask"+ln).val());
