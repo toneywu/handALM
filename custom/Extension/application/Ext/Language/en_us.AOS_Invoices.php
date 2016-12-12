@@ -51,12 +51,3 @@ $GLOBALS['app_list_strings']['haos_line_item_type_list']=array (
   'Product' => '产品',
   'Service' => '服务',
 );
-
-$GLOBALS['app_list_strings']['haos_source_code_list']=array (
-  'AOS_Contracts' => '合同',
-  'HAOS_Revenues_Quotes' => '收支计费项',
-  'Manual' => '手工',
-  'Excel' => 'Excel导入',
-  'Others' => '其他事件',
-  'Ref_System' => '外围系统',
-);

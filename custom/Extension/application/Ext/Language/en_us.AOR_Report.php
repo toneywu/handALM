@@ -38,39 +38,8 @@
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['HAOS_Revenues_Quotes'] = '收支计费项';
 
-
-$app_list_strings['contract_status_list']=array (
-  'Not Started' => '未开始',
-  'In Progress' => '处理中',
-  'Signed' => '签约',
-  'Expired' => '到期',
-  'Proposed' => '拟定',
-  'Renew' => '续签',
-  'Termination' => '解除',
-);
-
-
-$app_list_strings['settlement_period_list']=array (
-  'Once' => '一次结清',
-  'Monthly' => '按月',
-);
-
-
-
-
-$app_list_strings['haos_line_item_type_list']=array (
-  'Product' => '产品',
-  'Service' => '服务',
-);
-
-
-$app_list_strings['invoice_status_dom']=array (
-  'Paid' => '已付',
-  'Unpaid' => '未付',
-  'Cancelled' => '已取消',
-  'PartedPaid' => '部分付款',
-
-);
-
+$app_list_strings['haor_report_type']=array (
+  'Standard' => '标准',
+  'Custom' => '自定义',
+  );

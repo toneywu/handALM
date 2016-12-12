@@ -72,7 +72,7 @@ class HIT_IP_TRANS_BATCHViewDetail extends ViewDetail {
 
 			//Modefy by osmond.liu 20161118
      $aos_pdf_templates_id = $bean_code->aos_pdf_templates_id;
-     $sql = "select id,name from aos_pdf_templates where type='HIT_IP_TRANS_BATCH'";
+     $sql = "select id,name from aos_pdf_templates where type='HIT_IP_TRANS_BATCH' and deleted=0";
      $list=$db->query($sql);
      $option='';
      while ($row = $db->fetchByAssoc($list)){
