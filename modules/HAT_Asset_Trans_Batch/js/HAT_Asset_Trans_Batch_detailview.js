@@ -6,7 +6,9 @@
  * $(".expandLink").click();
  *  }
  */
- $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js");
+$.getScript("cache/include/javascript/sugar_grp_yui_widgets.js"); // MessageBox
+$.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
+$.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); // MessageBox
  $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
 /**
  * 点击按钮 调用Ajax请求 保存
@@ -67,6 +69,46 @@
  	/* } */
  };
 
+ 
+ function check_quantity(){
+		var error_msg="";
+		var formData=$("#EditView");
+		var formData_str = formData.serialize();
+		
+		var json_obj={};
+		$("input[id^='line_asset_id']").each(function(){
+			var id_name=$(this).attr("id");
+			var id_index = id_name.split("line_asset_id")[1];
+			if($("#line_deleted"+id_index).val()=="0"){
+				json_obj[id_name]=$(this).val();	
+			}
+		});
+
+		var json_data ={};
+
+		json_data['asset_trans_status']="SUBMITTED";
+		json_data['record']=$("input[name=record]").val();
+		json_data['source_wo_id']=$("#source_wo_id_val").val();
+		json_data['source_woop_id']=$("#source_woop_id_val").val();
+		json_data["line_asset_id"]=json_obj;
+		$.ajax({
+			type:"POST",
+			url: "index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=checkContractQuantity",
+			data: json_data,
+			success: function(msg){ 
+				error_msg=msg;
+				console.log("msg = "+msg);
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				 alert('Error loading document');
+				 console.log(textStatus+errorThrown);
+			},
+			});
+	return error_msg;
+	
+}
+
+
  $(document).ready(function() {
 	/*
 	 * //触发FF SUGAR.util.doWhen("typeof setFF == 'function'", function(){
@@ -109,7 +151,18 @@
 	}
 
 	$("#btn_change_status").click(function() {
-		changeStatus($("input[name='record']").val());
+		var msg = check_quantity();
+		if(msg!="S"){
+			BootstrapDialog.alert({
+					type : BootstrapDialog.TYPE_DANGER,
+					title : SUGAR.language.get('app_strings',
+							'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+					message : msg
+				});
+		}else{
+			changeStatus($("input[name='record']").val());
+		}
+		
 	});
 
 });

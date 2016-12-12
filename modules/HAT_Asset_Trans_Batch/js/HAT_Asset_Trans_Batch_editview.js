@@ -1,3 +1,7 @@
+$.getScript("cache/include/javascript/sugar_grp_yui_widgets.js"); // MessageBox
+$.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
+$.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); // MessageBox
+ $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
 function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"HAT_Asset_Trans_Batch");
     $(".expandLink").click();
@@ -271,8 +275,97 @@ function getLovValueByText(focused_textfiled_id,list_Lov_id) { //根据LOV的Tex
 	return LovValue;
 }
 
-$(document).ready(function(){
+function check_quantity(){
+		var error_msg="";
+		var formData=$("#EditView");
+		var formData_str = formData.serialize();
+		
+		var json_obj={};
+		$("input[id^='line_asset_id']").each(function(){
+			var id_name=$(this).attr("id");
+			var id_index = id_name.split("line_asset_id")[1];
+			if($("#line_deleted"+id_index).val()=="0"){
+				json_obj[id_name]=$(this).val();	
+			}
+		});
 
+		var json_data ={};
+		
+		json_data['asset_trans_status']=$("#asset_trans_status").val();
+		json_data['record']=$("input[name=record]").val();
+		json_data['source_wo_id']=$("#source_wo_id").val();
+		json_data['source_woop_id']=$("#source_woop_id").val();
+		json_data["line_asset_id"]=json_obj;
+		$.ajax({
+			type:"POST",
+			url: "index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=checkContractQuantity",
+			data: json_data,
+			cache:false,  
+            async:false,//重要的关健点在于同步和异步的参数，  
+			success: function(msg){ 
+				error_msg=msg;
+				console.log("check_quantity = "+error_msg);
+				if(error_msg!="S"){
+					
+					BootstrapDialog.alert({
+							type : BootstrapDialog.TYPE_DANGER,
+							title : SUGAR.language.get('app_strings',
+									'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+							message : error_msg
+						});
+			}
+		},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				 //alert('Error loading document');
+				 console.log(textStatus+errorThrown);
+			},
+			});
+	return error_msg;
+	
+}
+
+$(document).ready(function(){
+	
+	/*function getFormData(form){
+    var data = form.serialize();
+    data = decodeURI(data);
+    var arr = data.split('&');
+    var item,key,value,newData={};
+    for(var i=0;i<arr.length;i++){
+        item = arr[i].split('=');
+        key = item[0];
+        value = item[1];
+        if(key.indexOf('[]')!=-1){
+            key = key.replace('[]','');
+            if(!newData[key]){
+                newData[key] = [];
+            }
+            newData[key].push(value);
+        }else{
+            newData[key] = value;
+        }
+    }
+    return newData;
+}*/
+ 
+	
+	var test_btn=$("<input type='button' class='button' id='btn_complete' value='"+"检测数量"+"'>");
+	$("#SAVE_HEADER").after(test_btn);
+	$("#btn_complete").click(function(){
+		check_quantity();
+		/*$.ajax({
+            url: 'index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=checkContractQuantity',
+            success: function (data) {
+                console.log("btn_complete "+data);
+                
+            },
+            error: function () { //失败
+                alert('Error loading document');
+            }
+        });*/
+	});
+		
+	
 	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
 		$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');
 	}
@@ -344,14 +437,20 @@ $(document).ready(function(){
 	})//end onChange function
 */
 
+    
+	
 	function preValidateFunction(async_bool = false) {
 		//验证当前如果状态是Submit则用户是否有暂挂冲突
 		////如果是onChang校验，可以FFCheckField的async_bool=true这个输入过程与校验过程同步
-		///但如果是SAVE按钮的触发，一定要async=false(保持默认)
+		//但如果是SAVE按钮的触发，一定要async=false(保持默认)
 		if($("#eventOptions").val()=="") {
 				return
 		}
-
+		var error_msg = check_quantity();
+		console.log("preValidateFunction = "+error_msg);
+		if(error_msg!=="S"&&error_msg!=""){
+			return;
+		}
 		var result = true;
 		var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());
 

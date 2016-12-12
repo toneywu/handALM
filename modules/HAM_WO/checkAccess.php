@@ -15,6 +15,7 @@ global $current_user;
 global $db;
 
 $current_id = $_GET['id'];
+
 if (!empty($current_id)) {
 
 	$ham_wo_bean = BeanFactory :: getBean('HAM_WO', $current_id);
