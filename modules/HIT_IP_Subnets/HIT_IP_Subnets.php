@@ -42,10 +42,38 @@
  */
 require_once('modules/HIT_IP_Subnets/HIT_IP_Subnets_sugar.php');
 class HIT_IP_Subnets extends HIT_IP_Subnets_sugar {
-	
+
+
+	function get_list_view_data() {
+		//refer to the task module as an example
+		//or refer to the asset module as the first customzation module with this feature
+		global $app_list_strings, $timedate, $db;
+
+		$IP_Fields = $this->get_list_view_array();
+
+		$sel = "SELECT hia.id sum_ip_a_qty FROM hit_ip_allocations hia WHERE hia.hit_ip_subnets_id = '".$this->id."' AND hia.`deleted`=0	AND (hia.`date_from`='' OR hia.`date_from` IS NULL OR hia.date_from>=CURDATE()) AND (hia.`date_to`='' OR hia.`date_to` IS NULL OR hia.`date_to`<=CURDATE())";
+
+
+		$beanSEL = $db->query($sel);
+		$SUM_IP_ALLOCATED_QTY=0;
+
+		$IP_Fields['STATUS'] = '<span class="color_asset_status_Idle">'.translate('LBL_UNASSIGNED','HIT_IP').'</span>';
+		$IP_Fields['COLOR_TAG'] = 'Idle';
+
+	    while ( $result = $db->fetchByAssoc($beanSEL) ) {
+	    	if (!empty ($result['sum_ip_a_qty'])) {
+				$IP_Fields['STATUS'] = '<span class="color_asset_status_Idle">'.translate('LBL_ASSIGNED','HIT_IP').'</span>';
+				$IP_Fields['COLOR_TAG'] = 'InService';
+			}
+		}
+
+		return $IP_Fields;
+	}
+
+
 	function __construct(){
 		parent::__construct();
 	}
-	
+
 }
 ?>

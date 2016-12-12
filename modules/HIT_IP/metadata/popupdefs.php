@@ -30,6 +30,15 @@ $popupMeta = array (
     'default' => true,
     'name' => 'ip_internet',
   ),
+  'STATUS' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_STATUS',
+    'sortable' => false,
+    'width' => '30%',
+    'default' => true,
+    'customCode'=>'<span class="color_tag color_asset_status_{$COLOR_TAG}">{$STATUS}</span>',
+  ),
   'IP_USAGE' => 
   array (
     'type' => 'varchar',

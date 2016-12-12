@@ -19,14 +19,7 @@ function check_subnet_ip(ln) { // 检查子网IP是否合规
 	}
 
 	var ip_subnet_splited = $("#line_ip_subnet" + ln).val().split("/");// 当前行的IP
-	/*if(typeof $("#line_name" + ln).val()=="undefined"){
-		$("#line_name" + ln).val($("#line_ip_subnet" + ln).val());
-		var ip_splited = $("#line_name" + ln).val().split("/");
-	}else{
-		var ip_transfer_splited = $("#line_name" + ln).val() + "\/" + ip_subnet_splited[1];
-	    var ip_splited = ip_transfer_splited.split("/");
-	}*/
-	
+
 	var spilit_str = $("#line_name" + ln).val();
 	if(spilit_str==""){
 		spilit_str=$("#line_ip_subnet" + ln).val();
@@ -34,8 +27,8 @@ function check_subnet_ip(ln) { // 检查子网IP是否合规
 		spilit_str=spilit_str+ "\/" + ip_subnet_splited[1];
 	}
 	ip_splited=spilit_str.split("/");
-	console.log(ip_splited);
-	
+	//console.log(ip_splited);
+
 	var line_name = $("#line_name" + ln).val().split("/");// 当前行的IP
 	var ip_parenet_splited = $("#name").val().split("/");// 头上的IP地址
 
@@ -547,6 +540,8 @@ function insertLineData(hit_ip_subnets, current_view) { // 将数据写入到对
 		$("#line_ip_type_val".concat(String(ln))).val(hit_ip_subnets.ip_type);
 		$("#line_hat_asset_locations_id".concat(String(ln))).val(hit_ip_subnets.hat_asset_locations_id);
 
+		$("#line_status".concat(String(ln))).val(hit_ip_subnets.allo_qty);
+
 		renderTransLine(ln);
 
 		resetItem(ln);
@@ -629,10 +624,8 @@ function insertTransLineElements(tableid, current_view) { // 创建界面要素
 			+ "]' id='displayed_line_description" + prodln + "'></span></td>"
 			+ "<td><span name='displayed_line_location[" + prodln
 			+ "]' id='displayed_line_location" + prodln + "'></span></td>"
-			+ "<td><span name='displayed_line_organization[" + prodln
-			+ "]' id='displayed_line_organization" + prodln + "'></span></td>"
-			+ "<td><span name='displayed_line_status[" + prodln
-			+ "]' id='displayed_line_status" + prodln + "'></span></td>"
+			+ "<td><span name='displayed_line_organization[" + prodln + "]' id='displayed_line_organization" + prodln + "'></span></td>"
+			+ "<td><span name='displayed_line_status[" + prodln+ "]' id='displayed_line_status" + prodln + "'></span></td>"
 			+ "<td>"
 
 	if (current_view == "EditView") {
@@ -824,25 +817,18 @@ function insertTransLineElements(tableid, current_view) { // 创建界面要素
 			+ " </label>"
 			+ "<input style='width:153px;'  autocomplete='off' type='text' name='line_gateway["
 			+ prodln + "]' id='line_gateway" + prodln
-			+ "' maxlength='50' value='' title=''>" + "</span>" +
+			+ "' maxlength='50' value='' title=''>" + "</span>" 
 
-			"<input type='hidden' name='line_deleted[" + prodln
-			+ "]' id='line_deleted" + prodln + "' value='0'>"
-			+ "<input type='hidden' name='line_id[" + prodln + "]' id='line_id"
-			+ prodln + "' value=''>"
-			+ "<input type='hidden' name='line_ip_type_val[" + prodln
-			+ "]' id='line_ip_type_val" + prodln + "' value=''>"
-			+ "<input type='hidden' name='line_ip_netmask[" + prodln
-			+ "]' id='line_ip_netmask" + prodln + "' value=''>"
-			+ "<input type='hidden' name='line_ip_highest[" + prodln
-			+ "]' id='line_ip_highest" + prodln + "' value=''>"
-			+ "<input type='hidden' name='line_ip_lowest[" + prodln
-			+ "]' id='line_ip_lowest" + prodln + "' value=''>"
-			+ "<input type='hidden' name='line_ip_qty[" + prodln
-			+ "]' id='line_ip_qty" + prodln + "' value=''>" +
+			+ "<input type='hidden' name='line_deleted[" + prodln + "]' id='line_deleted" + prodln + "' value='0'>"
+			+ "<input type='hidden' name='line_id[" + prodln + "]' id='line_id" + prodln + "' value=''>"
+			+ "<input type='hidden' name='line_ip_type_val[" + prodln + "]' id='line_ip_type_val" + prodln + "' value=''>"
+			+ "<input type='hidden' name='line_ip_netmask[" + prodln + "]' id='line_ip_netmask" + prodln + "' value=''>"
+			+ "<input type='hidden' name='line_ip_highest[" + prodln + "]' id='line_ip_highest" + prodln + "' value=''>"
+			+ "<input type='hidden' name='line_ip_lowest[" + prodln + "]' id='line_ip_lowest" + prodln + "' value=''>"
+			+ "<input type='hidden' name='line_ip_qty[" + prodln + "]' id='line_ip_qty" + prodln + "' value=''>" 
+			+ "<input type='hidden' name='line_status[" + prodln + "]' id='line_status" + prodln + "' value=''>" 
 
-			"<input type='button' id='line_delete_line" + prodln
-			+ "' class='button btn_del' value='"
+			+ "<input type='button' id='line_delete_line" + prodln+ "' class='button btn_del' value='"
 			+ SUGAR.language.get('app_strings', 'LBL_DELETE_INLINE')
 			+ "' tabindex='116' onclick='btnMarkLineDeleted(" + prodln
 			+ ",\"line_\")'>" + "<button type='button' id='btn_LineEditorClose"
@@ -931,6 +917,12 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 		$("#displayed_line_organization" + ln).html($("#line_org" + ln).val());
 	}
 
+
+	if($("#line_status"+ln).val()>0) {
+		$("#displayed_line_status"+ln).html("<span class='color_tag color_asset_status_InService'>"+SUGAR.language.get('HIT_IP', 'LBL_ASSIGNED')+"</span>");
+	} else {
+		$("#displayed_line_status"+ln).html("<span class='color_tag color_asset_status_Idle'>"+SUGAR.language.get('HIT_IP', 'LBL_UNASSIGNED')+"</span>");
+	}
 }
 
 function resetItem(ln) { // 在用户重新选择IP之后，会连带的更新相关的字段信息。

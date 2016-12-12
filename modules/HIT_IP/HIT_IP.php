@@ -43,6 +43,51 @@
 require_once('modules/HIT_IP/HIT_IP_sugar.php');
 class HIT_IP extends HIT_IP_sugar {
 
+	function get_list_view_data() {
+		//refer to the task module as an example
+		//or refer to the asset module as the first customzation module with this feature
+		global $app_list_strings, $timedate, $db;
+
+		$IP_Fields = $this->get_list_view_array();
+
+		//计算当前IP子网的数量
+		$sel = "SELECT count(ip_qty) sum_ip_qty FROM hit_ip_subnets WHERE hit_ip_subnets.`deleted`=0 AND hit_ip_subnets.`parent_hit_ip_id` ='".$this->id."'";
+		$beanSEL = $db->query($sel);
+
+	    while ( $result = $db->fetchByAssoc($beanSEL) ) {
+	    	if (!empty ($result['sum_ip_qty']))
+				$SUM_IP_QTY .= $result['sum_ip_qty'];
+
+		}
+
+		if (empty($SUM_IP_QTY)) {
+			$IP_Fields['STATUS'] = '<span class="color_asset_status_Idle">'.translate('LBL_UNASSIGNED','HIT_IP').'</span>';
+			$IP_Fields['COLOR_TAG'] = 'Idle';
+
+		} else {
+			//计算当前子网已经分派的IP数量，
+			$sel = "SELECT COUNT(1) sum_ip_a_qty FROM hit_ip_subnets his WHERE his.deleted = 0 AND his.parent_hit_ip_id = '".$this->id."' AND EXISTS 
+		(SELECT 1 FROM hit_ip_allocations hia WHERE (hia.accurate_ip = his.id  OR hia.hit_ip_subnets_id = his.id) AND hia.`deleted`=0
+		AND (hia.`date_from`='' OR hia.`date_from` IS NULL OR hia.date_from>=CURDATE())
+		AND (hia.`date_to`='' OR hia.`date_to` IS NULL OR hia.`date_to`<=CURDATE()))";
+
+
+			$beanSEL = $db->query($sel);
+			$SUM_IP_ALLOCATED_QTY=0;
+
+		    while ( $result = $db->fetchByAssoc($beanSEL) ) {
+		    	if (!empty ($result['sum_ip_a_qty']))
+					$SUM_IP_ALLOCATED_QTY .= $result['sum_ip_a_qty'];
+
+			}
+
+			$IP_Fields['STATUS'] = (($SUM_IP_ALLOCATED_QTY/$SUM_IP_QTY) * 100)."% ".translate('LBL_ASSIGNED','HIT_IP');
+			$IP_Fields['COLOR_TAG'] = 'InService';
+		}
+		return $IP_Fields;
+	}
+
+
 
 	function __construct(){
 		parent::__construct();

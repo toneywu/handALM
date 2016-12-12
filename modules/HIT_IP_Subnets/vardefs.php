@@ -414,9 +414,7 @@ $dictionary['HIT_IP_Subnets'] = array(
             'studio' => 'visible',
             'dependency' => false,
             ),
-		
-		
-		'purpose' =>
+        'purpose' =>
         array (
             'required' => false,
             'name' => 'purpose',
@@ -437,6 +435,29 @@ $dictionary['HIT_IP_Subnets'] = array(
             'len' => 100,
             'size' => '20',
             'options' => 'hit_ip_purpose_list',
+            'studio' => 'visible',
+            'dependency' => false,
+            ),  
+		
+		'status' =>
+        array (
+            'required' => false,
+            'name' => 'status',
+            'vname' => 'LBL_STATUS',
+            'type' => 'varchar',
+            'massupdate' => 0,
+            'no_default' => false,
+            'comments' => '',
+            'help' => '',
+            'importable' => 'false',
+            'duplicate_merge' => 'disabled',
+            'duplicate_merge_dom_value' => '0',
+            'audited' => false,
+            'inline_edit' => false,
+            'reportable' => false,
+            'unified_search' => false,
+            'merge_filter' => 'disabled',
+            'source'=>'non-db',
             'studio' => 'visible',
             'dependency' => false,
             ),  

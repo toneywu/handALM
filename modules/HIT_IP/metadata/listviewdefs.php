@@ -31,13 +31,23 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-    'DESCRIPTION' => 
+    'STATUS' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_STATUS',
+    'sortable' => false,
+    'width' => '30%',
+    'default' => true,
+    'customCode'=>'<span class="color_tag color_asset_status_{$COLOR_TAG}">{$STATUS}</span>',
+  ),
+  'DESCRIPTION' => 
   array (
     'type' => 'text',
     'label' => 'LBL_DESCRIPTION',
     'sortable' => false,
-    'width' => '60%',
+    'width' => '50%',
     'default' => true,
   ),
+
 );
 ?>

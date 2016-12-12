@@ -55,7 +55,7 @@ if($_REQUEST['type']=="location") { //如果是Locationg来源，需要读取子
         if (isset($_REQUEST['id'])) {//如果指明了当前的ID
             $sel_sub_location .= " AND parent_location_id = '".$_REQUEST['id']."'";
         } else {
-            $sel_sub_location .= " AND parent_location_id = ''";
+            $sel_sub_location .= " AND (parent_location_id = '' || parent_location_id IS NULL)";
         }
 
         $sel_sub_location .= " ORDER BY name";

@@ -210,7 +210,27 @@ $dictionary['HIT_IP'] = array(
         'len' => '255',
         'size' => '20',
         ),
-
+      'status' => 
+      array (
+        'required' => false,
+        'name' => 'status',
+        'vname' => 'LBL_STATUS',
+        'type' => 'varchar',
+        'massupdate' => 0,
+        'no_default' => false,
+        'comments' => '',
+        'help' => '',
+        'source'=>'non-db',
+        'duplicate_merge' => 'disabled',
+        'duplicate_merge_dom_value' => '0',
+        'audited' => false,
+        'inline_edit' => '',
+        'reportable' => true,
+        'unified_search' => false,
+        'merge_filter' => 'disabled',
+        'len' => '255',
+        'size' => '20',
+        ),
       'line_items' =>
       array (
         'required' => false,

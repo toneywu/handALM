@@ -44,7 +44,8 @@ function display_lines($focus, $field, $value, $view){
 						  his.gateway,
 						  his.ip_type,
 						  his.purpose,
-						  h.name location
+						  h.name location,
+						  COUNT(hiaa.id) allo_qty
 						FROM
 						  `hit_ip_subnets` his 
 						  LEFT JOIN hit_vlan hv 
@@ -52,7 +53,11 @@ function display_lines($focus, $field, $value, $view){
 						  LEFT JOIN accounts a 
 							ON (his.org_id = a.id) 	
 						  LEFT JOIN ham_maint_sites h
-						  	ON (h.id=his.hat_asset_locations_id)	
+						  	ON (h.id=his.hat_asset_locations_id)
+						  LEFT JOIN hit_ip_allocations hiaa 
+							ON ( hiaa.id IN 
+								(SELECT hia.id FROM hit_ip_allocations hia WHERE (hia.accurate_ip = his.id OR hia.hit_ip_subnets_id = his.id) AND hia.`deleted`=0 AND (hia.`date_from`='' OR hia.`date_from` IS NULL OR hia.date_from>=CURDATE()) AND (hia.`date_to`='' OR hia.`date_to` IS NULL OR hia.`date_to`<=CURDATE()))
+								)
 						  INNER JOIN hit_ip hi 
 							ON (hi.id = his.parent_hit_ip_id)
 					  where hi.id = '".$focus->id."'

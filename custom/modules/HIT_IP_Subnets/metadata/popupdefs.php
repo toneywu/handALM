@@ -63,13 +63,6 @@ $popupMeta = array (
     'width' => '10%',
     'name' => 'description',
   ),
-  /*'hat_asset_locations_id' => 
-  array (
-    'type' => 'varchar2',
-	'label' => '',
-    'width' => '10%',
-    'name' => 'hat_asset_locations_id',
-  ),*/
 ),
     'listviewdefs' => array (
   'PARENT_HIT_IP' => 
@@ -112,12 +105,23 @@ $popupMeta = array (
 	'options' => 'hit_ip_type_list',
     'name' => 'ip_type',
   ),
+  'STATUS' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_STATUS',
+    'sortable' => false,
+    'width' => '10%',
+    'default' => true,
+    'name' => 'status',
+    'customCode'=>'<span class="color_tag color_asset_status_{$COLOR_TAG}">{$STATUS}</span>',
+  ),
+
   'DESCRIPTION' => 
   array (
     'type' => 'text',
     'label' => 'LBL_DESCRIPTION',
     'sortable' => false,
-    'width' => '32%',
+    'width' => '22%',
     'default' => true,
     'name' => 'description',
   ),
