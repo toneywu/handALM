@@ -23,7 +23,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * @author SalesAgility <info@salesagility.com>
  */
 
-function createRevenueFromWO($WOId){
+function createRevenueFromAT($ATId){
 
 	if(!(ACLController::checkAccess('HAOS_Revenues_Quotes', 'edit', true))){
 		ACLController::displayNoAccess();
@@ -31,35 +31,35 @@ function createRevenueFromWO($WOId){
 	}
 
 	require_once('modules/HAOS_Revenues_Quotes/createRevenue.php');
-	$wo = new HAM_WO();
-	$wo->retrieve($WOId);
-	if ($wo->wo_status!='APPROVED'){
-		die('已批准的工单才能创建收支计费项!');
+	$at = new HAT_Asset_Trans_Batch();
+	$at->retrieve($ATId);
+	if ($at->asset_trans_status!='APPROVED'){
+		die('已批准的资产事务处理单才能创建收支计费项!');
 	}
 
 	$rawRow['haa_frameworks_id_c'] = $rawRow['haa_frameworks_id_c'];
 	$rawRow['revenue_quote_number'] = '';
-	$rawRow['name'] = $wo->name.'收支';
+	$rawRow['name'] = $at->name.'收支';
 	$rawRow['clear_status'] = 'Unclear';
 	$rawRow['event_date'] = '' ;
-	$rawRow['source_code'] = 'HAM_WO';
-	$rawRow['source_id'] = $wo->id;
+	$rawRow['source_code'] = 'HAT_Asset_Trans_Batch';
+	$rawRow['source_id'] = $at->id;
 
-	$rawRow['source_reference'] =  $wo->wo_number;
-	$rawRow['contact_id_c'] = $wo->work_center_people_id;
+	$rawRow['source_reference'] =  $at->tracking_number;
+	$rawRow['contact_id_c'] = $at->owner_id;
 
-	$rawRow['expense_group'] = $wo->event_type;
+	$rawRow['expense_group'] = $at->event_type;
 
 	$quoteRow['line_item_type_c']='Service';
 	$quoteRow['vat']="0.0";
 	$quoteRow['product_total_price']='';
 	$quoteRow['product_list_price']='';
 	$quoteRow['product_unit_price']='';
-	$quoteRow['name']=$wo->name;
+	$quoteRow['name']=$at->name;
 
-	$wo->haos_revenues_quotes_id=createRevenue($rawRow,$quoteRow);
-	$wo->save();
-	return $wo->haos_revenues_quotes_id;
+	$at->haos_revenues_quotes_id=createRevenue($rawRow,$quoteRow);
+	$at->save();
+	return $at->haos_revenues_quotes_id;
 
 }
 

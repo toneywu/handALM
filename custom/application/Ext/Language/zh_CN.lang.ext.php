@@ -933,13 +933,6 @@ $app_list_strings['haos_line_item_type_list']=array (
   'Service' => '服务',
 );
 
-$app_list_strings['haos_source_code_list']=array (
-  'AOS_Contracts' => '合同',
-  'Manual' => '手工',
-  'Excel' => 'Excel导入',
-  'Others' => '其他事件',
-  'Ref_System' => '外围系统',
-);
 
 $app_list_strings['invoice_status_dom']=array (
   'Paid' => '已付',
@@ -1045,13 +1038,13 @@ $app_list_strings['contract_status_list']=array (
   'Proposed' => '拟定',
   'Renew' => '续签',
   'Termination' => '解除',
-);
+  );
 
 
 $app_list_strings['settlement_period_list']=array (
   'Once' => '一次结清',
   'Monthly' => '按月',
-);
+  );
 
 
 
@@ -1059,17 +1052,18 @@ $app_list_strings['settlement_period_list']=array (
 $app_list_strings['haos_line_item_type_list']=array (
   'Product' => '产品',
   'Service' => '服务',
-);
+  );
 
 $app_list_strings['haos_source_code_list']=array (
   'AOS_Contracts' => '合同',
   'HAM_WO' => '工单WO',
+  'HAT_Asset_Trans_Batch' => '资产事务处理',
   'HAOS_Revenues_Quotes' => '收支计费项',
   'Manual' => '手工',
   'Excel' => 'Excel导入',
   'Others' => '其他事件',
   'Ref_System' => '外围系统',
-);
+  );
 
 
 /*********************************************************************************

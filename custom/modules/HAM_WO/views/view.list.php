@@ -27,7 +27,7 @@ class HAM_WOViewList extends ViewList
     $paraArray[]=$current_user_id;
     $aclSQLList=getListViewSQLStatement($current_module,$current_user_id,$haa_frameworks_id,$paraArray);
     $this->where.=empty($this->where)?(empty($aclSQLList)?"":$aclSQLList):(empty($aclSQLList)?"":'  AND '.$aclSQLList);
-   // var_dump($this->where);
+   //var_dump($this->where);
     //End HPR权限控制逻辑
   }
 }

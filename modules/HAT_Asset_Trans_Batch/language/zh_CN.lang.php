@@ -97,4 +97,5 @@ $mod_strings = array (
   'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL'=>'更改状态',
   'LBL_PDF_TEMPLATES'=>'PDF模板',
   'LBL_EDITVIEW_PANEL2'=>'题头',
+  'LBL_CREATE_REVENUE'=>'创建收支项'
 );

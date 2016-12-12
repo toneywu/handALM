@@ -250,8 +250,8 @@ showWOLines();*/
 	 checkEditRevenueACL($("input[name='record']").val());
 //end 
 
-	 var complete_btn=$("<input type='button' class='btn_detailview' id='btn_complete' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_COMPLETE_BUTTON_LABEL')+"'>");
-	 if($("#wo_status").val()=="APPROVED"){
+var complete_btn=$("<input type='button' class='btn_detailview' id='btn_complete' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_COMPLETE_BUTTON_LABEL')+"'>");
+if($("#wo_status").val()=="APPROVED"){
 		 //add by yuan.chen 2016-12-06
 		 $("input[name^=HAM_WO_Lines_]").attr("disabled","disabled");
 		 $("input[name^=HAM_WOOP_新增_button]").attr("disabled","disabled");
@@ -259,14 +259,14 @@ showWOLines();*/
 		 $("a[id^=wo_line_remove_]").removeAttr("href");
 		 $("a[id^=wo_line_remove_]").parent().parent().remove();
 		 //end
-	 	$("#btn_change_status").after(complete_btn);
+		 $("#btn_change_status").after(complete_btn);
 
 		//registe function cancel()
 		$("#btn_complete").click(function(){ //如果取消按钮 返回
 			complete_work_order($("input[name='record']").val());
 		});
 
-	 }
+	}
 	//add by yuan.chen
 	var reject_woop_btn=$("<input type='button' class='btn_detailview' id='btn_woop_reject' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_WOOP_REJECT_BUTTON_LABEL')+"'>");
 	$("#formgetWOOPQuery").append(reject_woop_btn);
@@ -281,6 +281,7 @@ showWOLines();*/
 	$("#list_subpanel_woop table tr:gt(3)").each(function(i){
 		woopEdit="#woop_edit_"+(i+1);
 		woopStatus=$(this).children().eq(2).text().trim();
+		woopHref=$(woopEdit).attr("href");
 		if (woopStatus=='等待前序'){
 			$(woopEdit).removeAttr("href"); 
 		}

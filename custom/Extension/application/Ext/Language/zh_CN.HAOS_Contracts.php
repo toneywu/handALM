@@ -65,13 +65,6 @@ $app_list_strings['haos_line_item_type_list']=array (
   'Service' => '服务',
 );
 
-$app_list_strings['haos_source_code_list']=array (
-  'AOS_Contracts' => '合同',
-  'Manual' => '手工',
-  'Excel' => 'Excel导入',
-  'Others' => '其他事件',
-  'Ref_System' => '外围系统',
-);
 
 $app_list_strings['invoice_status_dom']=array (
   'Paid' => '已付',
