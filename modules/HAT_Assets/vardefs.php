@@ -188,7 +188,7 @@ $dictionary['HAT_Assets'] = array(
     array (
       'required' => true,
       'name' => 'asset_name',
-      'vname' => 'LBL_ASSET_DESC',
+      'vname' => 'LBL_ASSET_NAME',
       'type' => 'varchar',
       'massupdate' => 0,
       'no_default' => false,
@@ -1247,7 +1247,7 @@ $dictionary['HAT_Assets'] = array(
       'no_default' => false,
       'comments' => '',
       'help' => '',
-      'importable' => 'true',
+      'importable' => 'false',
       'duplicate_merge' => 'disabled',
       'duplicate_merge_dom_value' => '0',
       'audited' => false,
@@ -1352,7 +1352,7 @@ $dictionary['HAT_Assets'] = array(
     array (
         'source' => 'non-db', //从EventType映射
         'name' => 'asset_status_taged',
-        'vname' => 'LBL_ASSET_STATUS',
+        'vname' => 'LBL_ASSET_STATUS_TAGED',
         'type' => 'varchar',
         'default'=>'',
         'reportable' => true,
@@ -1740,7 +1740,7 @@ $dictionary['HAT_Assets'] = array(
     array (
       'required' => false,
       'name' => 'supplier_desc',
-      'vname' => 'LBL_USING_PERSON_DESC',
+      'vname' => 'LBL_SUPPLIER_DESC',
       'type' => 'varchar',
       'massupdate' => 0,
       'no_default' => false,
@@ -2000,7 +2000,7 @@ $dictionary['HAT_Assets'] = array(
       'required' => false,
       'source' => 'non-db',
       'name' => 'asset_source',
-      'vname' => 'LBL_ASSET_SOURCE',
+      'vname' => 'LBL_ASSET_SOURCES',
       'type' => 'relate',
       'massupdate' => 0,
       'no_default' => false,
@@ -2033,7 +2033,7 @@ $dictionary['HAT_Assets'] = array(
       'no_default' => false,
       'comments' => '',
       'help' => '',
-      'importable' => 'true',
+      'importable' => 'false',
       'duplicate_merge' => 'disabled',
       'duplicate_merge_dom_value' => 0,
       'audited' => false,
@@ -2072,6 +2072,61 @@ $dictionary['HAT_Assets'] = array(
       'quicksearch' => 'enabled',
       'studio' => 'visible',
       ),
+	  
+	  'cost_center_id' =>
+    array (
+      'required' => false,
+      'name' => 'cost_center_id',
+      'vname' => 'LBL_COST_CENTER_ID',
+      'type' => 'id',
+      'massupdate' => 0,
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'false',
+      'duplicate_merge' => 'disabled',
+      'duplicate_merge_dom_value' => 0,
+      'audited' => false,
+      'inline_edit' => true,
+      'reportable' => false,
+      'unified_search' => false,
+      'merge_filter' => 'disabled',
+      'len' => 36,
+      'size' => '20',
+      ),
+    'cost_center' =>
+    array (
+      'required' => true,
+      'source' => 'non-db',
+      'name' => 'cost_center',
+      'vname' => 'LBL_COST_CENTER',
+      'type' => 'relate',
+      'massupdate' => 0,
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'duplicate_merge_dom_value' => '0',
+      'audited' => false,
+      'inline_edit' => true,
+      'reportable' => true,
+      'unified_search' => false,
+      'merge_filter' => 'disabled',
+      'len' => '255',
+      'size' => '20',
+      'id_name' => 'cost_center_id',
+      'ext2' => 'HAA_Codes',
+      'module' => 'HAA_Codes',
+      'rname' => 'name',
+      'quicksearch' => 'enabled',
+      'studio' => 'visible',
+      ),
+	  
+	  
+	  
+	  
+	  
     'asset_icon' =>
     array (
       'required' => false,
@@ -2180,6 +2235,50 @@ $dictionary['HAT_Assets'] = array(
       'source' => 'non-db',
       ),
     ),
+
+'indices'=>array (
+    array (
+      'name' => 'hat_assetspk',
+      'type' => 'primary',
+      'fields' => 
+      array (
+        0 => 'id',
+      ),
+    ),
+    array (
+      'name' => 'idx_asset_framework_id_del',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'id',
+        1 => 'deleted',
+        2 =>'haa_frameworks_id'
+      ),
+    ),
+    array (
+      'name' => 'idx_asset_framework_name_del',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'name',
+        1 => 'deleted',
+        2 =>'haa_frameworks_id',
+      ),
+    ),
+    array (
+      'name' => 'idx_asset_framework_parent_del',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 =>'parent_asset_id',
+        1 =>'haa_frameworks_id',
+        2 => 'deleted',
+      ),
+    ),
+
+),
+
+
 'relationships'=>array (
   'ham_sr_hat_assets' =>
   array (
