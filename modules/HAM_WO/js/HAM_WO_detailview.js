@@ -249,6 +249,26 @@ showWOLines();*/
 	 //checkEditRevenueACL
 	 checkEditRevenueACL($("input[name='record']").val());
 //end 
+	$("#list_subpanel_wo_line table tr:gt(3)").each(function(i){
+		console.log("i="+i);
+		var first_td = $(this).find("td:first");
+		var last_td = $(this).find("td:last");
+		console.log(first_td.find("a").text());
+		var contract_val = first_td.find("a").text();
+		if(contract_val!=""){
+		$("#wo_line_edit_"+(i+1)).removeAttr("href");
+		 /* $("#wo_line_remove_"+(i+1)).removeAttr("href");
+		 $("#wo_line_edit_"+(i+1)).parent().remove();
+		 $("#wo_line_remove_"+(i+1)).parent().remove();*/
+		 //console.log($("#wo_line_remove_"+(i+1)).parent().parent().attr("class"));
+		 $("#wo_line_remove_"+(i+1)).parent().remove();
+		 
+		
+		last_td.closest("td").attr("disabled","disabled");
+		}
+		
+	});
+
 
 var complete_btn=$("<input type='button' class='btn_detailview' id='btn_complete' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_COMPLETE_BUTTON_LABEL')+"'>");
 if($("#wo_status").val()=="APPROVED"){

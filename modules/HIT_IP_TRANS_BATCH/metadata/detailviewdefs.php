@@ -11,10 +11,7 @@ array (
         'buttons' => 
         array (
           0 => 'EDIT',
-/*          1 => 'DUPLICATE',
-          2 => 'DELETE',
-          3 => 'FIND_DUPLICATES',*/
-          1 =>
+          1 => 
           array (
             'customCode' => '<input type="button" class="button" onClick="GenerateDoc();" value="{$MOD.LBL_GENERATE_DOC}">',
           ),
@@ -206,7 +203,26 @@ array (
         ),
         9 => 
         array (
+          0 => 
+          array (
+            'name' => 'source_wo',
+            'studio' => 'visible',
+            'label' => 'LBL_SOURCE_WO',
+          ),
+          1 => 
+          array (
+            'name' => 'source_woop',
+            'studio' => 'visible',
+            'label' => 'LBL_SOURCE_WOOP',
+          ),
+        ),
+        10 => 
+        array (
           0 => 'description',
+        ),
+		11 => 
+        array (
+          0 => 'wo_lines',
         ),
       ),
       'lbl_editview_panel1' => 

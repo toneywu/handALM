@@ -26,6 +26,10 @@ array (
         array (
           'file' => 'modules/HIT_IP/js/HIT_IP_detailview.js',
         ),
+		3 => 
+        array (
+          'file' => 'custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js',
+        ),
       ),
       'maxColumns' => '2',
       'widths' => 

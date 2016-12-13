@@ -291,6 +291,19 @@ class HAM_WOViewEdit extends ViewEdit {
 		echo '<input id="org_acl_sqllist" name="org_acl_sqllist" type="hidden" value="'.$aclSQLList.'">';
     //End HPR权限控制逻辑
         //
+
+		//2016-12-13 add by yuan.chen
+		$this->bean->work_order_access='OWNER';
+		$ham_wo_center_people_beans = BeanFactory :: getBean("HAM_Work_Center_People")->get_full_list('', "ham_work_center_people.contact_id ='" . $current_user->contact_id_c . "'");
+		//echo "count = ".count($ham_wo_center_people_beans);
+		//echo count($ham_wo_center_people_beans);
+		if(count($ham_wo_center_people_beans)==1){
+			$this->bean->work_center_people_id=$ham_wo_center_people_beans[0]->id;
+			$this->bean->work_center_people=$ham_wo_center_people_beans[0]->name;
+		}
+
+		//
+
 		parent :: Display();
 		//如果已经选择位置分类，无论是否位置分类对应的FlexForm有值，值将界面展开。
         //（如果没有位置分类，则界面保持折叠状态。）
