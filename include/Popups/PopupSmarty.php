@@ -434,6 +434,20 @@ class PopupSmarty extends ListViewSmarty{
 
 
 		if (!empty($_REQUEST['query']) || (!empty($GLOBALS['sugar_config']['save_query']) && $GLOBALS['sugar_config']['save_query'] != 'populate_only')) {
+				//Add By osmond.liu 20161213
+        	//增加权限控制--暂时只影响组织
+        		$current_module = $this->module;
+        	if ( $current_module=='Accounts' ){
+        	require_once('modules/HPR_Group_Priviliges/checkListACL.php');
+        	global $current_user;
+        	$current_user_id =$current_user->id;
+        	$haa_frameworks_id=$_SESSION["current_framework"];
+        	$paraArray=array();
+        	$paraArray[]=$current_user_id;
+        	$aclSQLList=getListViewSQLStatement($current_module,$current_user_id,$haa_frameworks_id,$paraArray);
+        	$searchWhere.=empty($searchWhere)?(empty($aclSQLList)?"":$aclSQLList):(empty($aclSQLList)?"":'  AND '.$aclSQLList);
+        	$searchWhere='( '.$searchWhere.' )';}
+        	//End Add By osmond.liu 20161213
 			$data = $this->lvd->getListViewData($this->seed, $searchWhere, 0, -1, $this->filter_fields, $params, 'id');
 		} else {
 			$this->should_process = false;

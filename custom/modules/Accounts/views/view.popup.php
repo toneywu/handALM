@@ -46,5 +46,9 @@ class AccountsViewPopup extends ViewPopup
 		//echo print_r($_SESSION['Accounts2_QUERY']);
 		//echo print_r($_REQUEST);
     }
-
+function setup($seed, $file = null, $where = null, $params = Array(), $offset = 0, $limit = -1, $filter_fields = Array(), $id_field = 'id') {
+		$args = func_get_args();
+		var_dump("expression");
+		return call_user_func_array(array($this, '_setup'), $args);
+	}
 }
