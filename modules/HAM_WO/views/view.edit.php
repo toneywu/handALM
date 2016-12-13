@@ -18,12 +18,13 @@ class HAM_WOViewEdit extends ViewEdit {
 
 
         //1、初始化Framework-Site信息
-        require_once('modules/HAA_Frameworks/orgSelector_class.php');
-        $current_site_id = empty($this->bean->ham_maint_sites_id)?"":$this->bean->ham_maint_sites_id;
-        $current_module = $this->module;
-        $current_action = $this->action;
-        $this->ss->assign('MAINT_SITE',set_site_selector($current_site_id,$current_module,$current_action));
-
+		require_once('modules/HAA_Frameworks/orgSelector_class.php');
+		$current_site_id = empty($this->bean->ham_maint_sites_id)?"":$this->bean->ham_maint_sites_id;
+		$current_module = $this->module;
+		$current_action = $this->action;
+		$this->ss->assign('MAINT_SITE',set_site_selector($current_site_id,$current_module,$current_action));
+		$bean_site = BeanFactory :: getBean('HAM_Maint_Sites', $current_site_id);
+		$haa_frameworks_id=$bean_site->haa_frameworks_id;
 		//2、如果当前数据来源于SR（有参数sr_id）则从对应的SR上复制信息
 		if (isset ($_GET['sr_id']) && $_GET['sr_id'] != "") {
 			//如果有SR关联(由SR创建 WO时)
@@ -74,19 +75,19 @@ class HAM_WOViewEdit extends ViewEdit {
 
 				echo "<H1>Location</h1>";
 				$sel_current_location = "SELECT 
-				                                            hat_asset_locations.id location_id,
-				                                            hat_asset_locations.name location_name,
-				                                            hat_asset_locations.location_title location_title,
-				                                            ham_maint_sites.id site_id,
-				                                            ham_maint_sites.name site_name
-				                                        FROM
-				                                            hat_asset_locations,
-				                                            ham_maint_sites
-				                                        WHERE
-				                                            ham_maint_sites.id = hat_asset_locations.ham_maint_sites_id
-				                                                AND ham_maint_sites.deleted = 0
-				                                                AND hat_asset_locations.deleted = 0
-				                                                and hat_asset_locations.id ='" . $_REQUEST['location_id'] . "'";
+				hat_asset_locations.id location_id,
+				hat_asset_locations.name location_name,
+				hat_asset_locations.location_title location_title,
+				ham_maint_sites.id site_id,
+				ham_maint_sites.name site_name
+				FROM
+				hat_asset_locations,
+				ham_maint_sites
+				WHERE
+				ham_maint_sites.id = hat_asset_locations.ham_maint_sites_id
+				AND ham_maint_sites.deleted = 0
+				AND hat_asset_locations.deleted = 0
+				and hat_asset_locations.id ='" . $_REQUEST['location_id'] . "'";
 
 				//echo($sel_current_asset);
 				$resule_locations = $db->query($sel_current_location);
@@ -99,44 +100,44 @@ class HAM_WOViewEdit extends ViewEdit {
 					$this->bean->ham_maint_sites_id = $resule_asset['site_id'];
 				}
 			} else
-				if (isset ($this->bean->hat_asset_locations_id) && $this->bean->hat_asset_locations_id != "") {
+			if (isset ($this->bean->hat_asset_locations_id) && $this->bean->hat_asset_locations_id != "") {
 					//否则查询数据库，读取地点说明
-					$sel_current_location = "SELECT 
-					                                        hat_asset_locations.location_title location_title
-					                                    FROM
-					                                        hat_asset_locations
-					                                    WHERE
-					                                        hat_asset_locations.id ='" . $this->bean->hat_asset_locations_id . "'";
+				$sel_current_location = "SELECT 
+				hat_asset_locations.location_title location_title
+				FROM
+				hat_asset_locations
+				WHERE
+				hat_asset_locations.id ='" . $this->bean->hat_asset_locations_id . "'";
 					//echo($sel_current_location);
-					$resule_locations = $db->query($sel_current_location);
-					while ($resule_asset = $db->fetchByAssoc($resule_locations)) {
-						$this->bean->location_title = $resule_asset['location_title'];
-					}
+				$resule_locations = $db->query($sel_current_location);
+				while ($resule_asset = $db->fetchByAssoc($resule_locations)) {
+					$this->bean->location_title = $resule_asset['location_title'];
 				}
+			}
 			if ((isset ($this->bean->hat_assets_id) == false || $this->bean->hat_assets_id == "") && (isset ($_REQUEST['hat_assets_id']) && $_REQUEST['hat_assets_id'] != "")) { //如果没有资产，并且有资产传传入，则加载资产
 
 				$sel_current_asset = "SELECT
-				                                            hat_assets.id asset_id,
-				                                            hat_assets.name asset_name,
-				                                            hat_assets.asset_desc,
-				                                            hat_asset_locations.id location_id,
-				                                            hat_asset_locations.name location_name,
-				                                            hat_asset_locations.location_title location_title,
-				                                            hat_assets.location_desc,
-				                                            ham_maint_sites.id site_id,
-				                                            ham_maint_sites.name site_name
-				                                        FROM
-				                                            hat_assets
-				                                                LEFT JOIN
-				                                            (hat_asset_locations, hat_asset_locations_hat_assets_c, ham_maint_sites) ON (hat_assets.id = hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_assets_idb
-				                                                AND hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_asset_locations_ida = hat_asset_locations.id
-				                                                AND ham_maint_sites.id = hat_asset_locations.ham_maint_sites_id
-				                                                AND hat_asset_locations_hat_assets_c.deleted = 0
-				                                                AND ham_maint_sites.deleted = 0
-				                                                AND hat_asset_locations.deleted = 0)
-				                                        WHERE
-				                                            hat_assets.deleted = 0
-				                        and hat_assets.id = '" . $_REQUEST['hat_assets_id'] . "'";
+				hat_assets.id asset_id,
+				hat_assets.name asset_name,
+				hat_assets.asset_desc,
+				hat_asset_locations.id location_id,
+				hat_asset_locations.name location_name,
+				hat_asset_locations.location_title location_title,
+				hat_assets.location_desc,
+				ham_maint_sites.id site_id,
+				ham_maint_sites.name site_name
+				FROM
+				hat_assets
+				LEFT JOIN
+				(hat_asset_locations, hat_asset_locations_hat_assets_c, ham_maint_sites) ON (hat_assets.id = hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_assets_idb
+				AND hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_asset_locations_ida = hat_asset_locations.id
+				AND ham_maint_sites.id = hat_asset_locations.ham_maint_sites_id
+				AND hat_asset_locations_hat_assets_c.deleted = 0
+				AND ham_maint_sites.deleted = 0
+				AND hat_asset_locations.deleted = 0)
+				WHERE
+				hat_assets.deleted = 0
+				and hat_assets.id = '" . $_REQUEST['hat_assets_id'] . "'";
 
 				//echo($sel_current_asset);
 				$resule_assets = $db->query($sel_current_asset);
@@ -154,23 +155,23 @@ class HAM_WOViewEdit extends ViewEdit {
 					// $this->bean->location_map_enabled = $resule_asset['location_map_enabled'];
 				}
 			} else
-				if (isset ($this->bean->hat_assets_id) && $this->bean->hat_assets_id != "") {
-					$sel_current_asset = "SELECT
-					                                        hat_assets.asset_desc
-					                                    FROM
-					                                        hat_assets
-					                                    WHERE
-					                                        hat_assets.deleted = 0
-					                    and hat_assets.id = '" . $this->bean->hat_assets_id . "'";
+			if (isset ($this->bean->hat_assets_id) && $this->bean->hat_assets_id != "") {
+				$sel_current_asset = "SELECT
+				hat_assets.asset_desc
+				FROM
+				hat_assets
+				WHERE
+				hat_assets.deleted = 0
+				and hat_assets.id = '" . $this->bean->hat_assets_id . "'";
 
 					//echo($sel_current_asset);
-					$resule_assets = $db->query($sel_current_asset);
+				$resule_assets = $db->query($sel_current_asset);
 
-					while ($resule_asset = $db->fetchByAssoc($resule_assets)) {
-						$this->bean->asset_desc = $resule_asset['asset_desc'];
+				while ($resule_asset = $db->fetchByAssoc($resule_assets)) {
+					$this->bean->asset_desc = $resule_asset['asset_desc'];
 						// $this->bean->location_map_enabled = $resule_asset['location_map_enabled'];
-					}
 				}
+			}
 
 			//完成显示资产明细
 
@@ -198,15 +199,15 @@ class HAM_WOViewEdit extends ViewEdit {
 			if(!empty($contract_id)){
 				$this->bean->contract_id=$contract_id;
 				$contract_bean = BeanFactory :: getBean('AOS_Contracts')->retrieve_by_string_fields(array (
-									'id' => $contract_id
-								));
+					'id' => $contract_id
+					));
 				$this->bean->contract=$contract_bean->name;
 				$this->bean->source_type='Contracts';
 				$this->bean->account_id=$contract_bean->contract_account_id;
 				$account_bean = BeanFactory :: getBean('Accounts')->retrieve_by_string_fields(array (
-									'id' => $contract_bean->contract_account_id
-								));
-								
+					'id' => $contract_bean->contract_account_id
+					));
+
 				$this->bean->account=$account_bean->name;
 				//$this->bean->saveContracts(false);
 			}
@@ -217,7 +218,7 @@ class HAM_WOViewEdit extends ViewEdit {
 		 * modify by toney.wu 2016-09-07
 		 */
 
-    	$wo_num_html="";
+		$wo_num_html="";
 		if(empty($this->bean->wo_number)){
 			//如果当前工作单号为空，则返回自动编号标签
 			$wo_num_html=$mod_strings['LBL_AUTONUM'].'<input type="hidden" value="" id="wo_number" name="wo_number">';
@@ -266,28 +267,50 @@ class HAM_WOViewEdit extends ViewEdit {
 		}
 
 		//2、加载基于code_asset_location_type_id的动态界面模板（FF）
-        if(isset($this->bean->hat_event_type_id) && ($this->bean->hat_event_type_id)!=""){
+		if(isset($this->bean->hat_event_type_id) && ($this->bean->hat_event_type_id)!=""){
             //判断是否已经设置有位置分类，如果有分类，则进一步的加载分类对应的FlexForm
-            $event_type_id = $this->bean->hat_event_type_id;
-            $bean_code = BeanFactory::getBean('HAT_EventType',$event_type_id);
-            if (isset($bean_code->haa_ff_id)) {
-                $ff_id = $bean_code->haa_ff_id;
-            }
-            if (isset($ff_id) && $ff_id!="") {
+			$event_type_id = $this->bean->hat_event_type_id;
+			$bean_code = BeanFactory::getBean('HAT_EventType',$event_type_id);
+			if (isset($bean_code->haa_ff_id)) {
+				$ff_id = $bean_code->haa_ff_id;
+			}
+			if (isset($ff_id) && $ff_id!="") {
                 //如果分类有对应的FlexForm，些建立一个对象去存储FF_ID
                 //需要注意的是在Metadata中是不包括这个ID的，如果这里没有加载则在后续的JS文件中加载
-                echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="'.$ff_id.'">';
-            }
-        }
-        	
+				echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="'.$ff_id.'">';
+			}
+		}
+
+        	//增加组织的安全性20161211
+         //增加HPR权限控制逻辑
+		require_once('modules/HPR_Group_Priviliges/checkListACL.php');
+		$current_user_id =$current_user->id;
+		$paraArray=array();
+		$paraArray[]=$current_user_id;
+		$aclSQLList=getListViewSQLStatement('Accounts',$current_user_id,$haa_frameworks_id,$paraArray);
+		echo '<input id="org_acl_sqllist" name="org_acl_sqllist" type="hidden" value="'.$aclSQLList.'">';
+    //End HPR权限控制逻辑
+        //
+		//2016-12-13 add by yuan.chen
+		$this->bean->work_order_access='OWNER';
+		$ham_wo_center_people_beans = BeanFactory :: getBean("HAM_Work_Center_People")->get_full_list('', "ham_work_center_people.contact_id ='" . $current_user->contact_id_c . "'");
+		//echo "count = ".count($ham_wo_center_people_beans);
+		//echo count($ham_wo_center_people_beans);
+		if(count($ham_wo_center_people_beans)==1){
+			$this->bean->work_center_people_id=$ham_wo_center_people_beans[0]->id;
+			$this->bean->work_center_people=$ham_wo_center_people_beans[0]->name;
+		}
+		
+		//
+		
 		parent :: Display();
 		//如果已经选择位置分类，无论是否位置分类对应的FlexForm有值，值将界面展开。
         //（如果没有位置分类，则界面保持折叠状态。）
-        if(isset($this->bean->hat_event_type_id) && ($this->bean->hat_event_type_id)!=""){
-                    echo '<script>$(".collapsed").switchClass("collapsed","expanded");</script>';
-         } else {
-                echo '<script>$(".expanded").switchClass("expanded","collapsed");</script>';
-         }
+		if(isset($this->bean->hat_event_type_id) && ($this->bean->hat_event_type_id)!=""){
+			echo '<script>$(".collapsed").switchClass("collapsed","expanded");</script>';
+		} else {
+			echo '<script>$(".expanded").switchClass("expanded","collapsed");</script>';
+		}
 	} //end function
 
 } //end class

@@ -49,7 +49,7 @@ function setHamActivityReturn(popupReplyData){
 			}
 		});
 	
-	if($("#name").val()==""||$("#name").val()==""){
+	if($("#name").val()==""||$("#name").val()==""||$("#ham_act_id_rule").val()!=$("#name").val()){
 		$("#name").val($("#ham_act_id_rule").val());
 	}
 	if($("#priority").val()==""||$("#priority").val()==""){
@@ -153,6 +153,7 @@ function showWOLines() {
 };
 
 $(document).ready(function(){
+	
 	
 	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
 		$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');

@@ -21,15 +21,14 @@ if (!empty($current_id)) {
 	$ham_wo_bean = BeanFactory :: getBean('HAM_WO', $current_id);
 	$wo_status = $ham_wo_bean->wo_status;
 	$sql = "SELECT COUNT(1) cnt_num
-						FROM   contacts_users u
+						FROM   users_cstm u
 						LEFT   JOIN ham_work_center_people c
-						ON     u.contact_id = c.contact_id
+						ON     (u.contact_id_c = c.contact_id and c.deleted=0)
 						LEFT   JOIN ham_work_center_res r
-						ON     c.work_center_res_id = r.id
+						ON     (c.work_center_res_id = r.id and r.deleted=0)
 						LEFT   JOIN ham_work_centers w
-						ON     r.work_center_id = w.id
-						WHERE  u.contact_id ='" . $current_user->contact_id_c . "'";
-	
+						ON     (r.work_center_id = w.id and w.deleted=0)
+						WHERE  u.contact_id_c ='" . $current_user->contact_id_c . "'";
 	$show_flag = "N";
 	$work_center_id = $ham_wo_bean->work_center_id;
 	$work_center_res_id = $ham_wo_bean->work_center_res_id;
@@ -41,7 +40,8 @@ if (!empty($current_id)) {
 		$show_flag = "Y";
 	}
 	elseif ($access_code == "OWNER") {
-		if ($current_user->contact_id_c == $ham_wo_bean->work_center_people_id) {
+		$ham_wo_center_people_bean = BeanFactory :: getBean('HAM_Work_Center_People', $ham_wo_bean->work_center_people_id);
+		if ($current_user->contact_id_c == $ham_wo_center_people_bean->contact_id) {
 			$show_flag = "Y";
 		}
 	}

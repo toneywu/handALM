@@ -66,8 +66,12 @@ class HAM_WOOPViewEdit extends ViewEdit {
 				$this->bean->next_woop = $next_bean->woop_number;
 				$this->bean->next_woop_name = $next_bean->name;
 				$this->bean->next_work_center = $next_bean->work_center;
+				$this->bean->next_work_center_id = $next_bean->work_center_id;
 				$this->bean->next_work_center_res = $next_bean->work_center_res;
+				$this->bean->next_work_center_res_id = $next_bean->work_center_res_id;
 				$this->bean->next_work_center_people = $next_bean->work_center_people;
+				$this->bean->next_work_center_people_id = $next_bean->work_center_people_id;
+				
 			}
 			if (isset ($wo_id)) {
 				$ham_wo_bean = BeanFactory::getBean("HAM_WO",$wo_id);
