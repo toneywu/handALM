@@ -137,7 +137,7 @@ if(!isset($_REQUEST['uid']) || empty($_REQUEST['uid']) || !isset($_REQUEST['temp
     if ($module_type=="HIT_IP_TRANS_BATCH" ||$module_type=="HAT_Asset_Trans_Batch") {
         //加载工作单行
         $lineItems = array();
-        $sql = "SELECT id FROM ham_wo_lines WHERE ham_wo_lines.`deleted`=0 AND ham_wo_lines.`ham_wo_id`='"+$module->source_wo_id+"' ORDER BY hit_ip_trans.`id`";
+        $sql = "SELECT id FROM ham_wo_lines WHERE ham_wo_lines.`deleted`=0 AND ham_wo_lines.`ham_wo_id`='".$module->source_wo_id."' ORDER BY ham_wo_lines.`id`";
         $res = $module->db->query($sql);
         while($row = $module->db->fetchByAssoc($res)){
                 $lineItems[$row['id']]= $row['id'];
