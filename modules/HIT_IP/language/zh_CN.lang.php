@@ -81,4 +81,8 @@ $mod_strings = array (
   'LBL_ERROR_IP_TYPE'=>'请输入正确的IP类型',
   'LBL_DETAILVIEW_PANEL1'=>'子网段管理',
     'LBL_ALREADY_EXISTS_IN_SYSTEM'=>'C段已经存在系统当中',
+    'LBL_ASSIGNED'=>'已分配',
+    'LBL_UNASSIGNED'=>'未分配',
+    'LBL_UNDEFINED'=>'无子网段',
+
 );

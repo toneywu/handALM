@@ -88,5 +88,6 @@ $mod_strings = array (
   'LBL_ALREADY_EXISTS_IN_SYSTEM'=>'C Segment Already Exists In System',
     'LBL_ASSIGNED'=>'Assigned',
     'LBL_UNASSIGNED'=>'Unassigned',
+    'LBL_UNDEFINED'=>'No Subnet',
 
 );

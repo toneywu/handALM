@@ -76,9 +76,11 @@ if($_REQUEST['type']=="location") { //如果是Locationg来源，需要读取子
 
     if (isset($_REQUEST['id'])) {
         $sel_sub_asset ="SELECT 
-                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status
+                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status, hit_racks.id rack_id
                     FROM
-                        hat_assets,
+                        hat_assets
+                        LEFT JOIN
+                        hit_racks ON (hit_racks.`deleted`=0 AND hit_racks.`hat_assets_id`=hat_assets.id),
                         hat_asset_locations_hat_assets_c
                     WHERE
                         hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_assets_idb = hat_assets.id
@@ -170,9 +172,11 @@ if($_REQUEST['type']=="location") { //如果是Locationg来源，需要读取子
             //echo $sel_asset_grouped_by_contact;
 
 	        $sel_sub_asset ="SELECT
-	                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status
+	                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status,hit_racks.id rack_id
 	                    FROM
-	                        hat_assets,
+	                        hat_assets
+                        LEFT JOIN
+                        hit_racks ON (hit_racks.`deleted`=0 AND hit_racks.`hat_assets_id`=hat_assets.id),
 	                        accounts
 	                    WHERE
 	                        accounts.id = hat_assets.".$_REQUEST['type']."_id
@@ -244,9 +248,10 @@ if($_REQUEST['type']=="location") { //如果是Locationg来源，需要读取子
 
 } elseif ($_REQUEST['type']=="asset") { //如果是Asset来源，只要读取下面的子资产,以Asset的ID检索
     $sel_sub_asset ="SELECT 
-                        hat_assets.id, hat_assets.name, hat_assets.asset_desc,  hat_assets.asset_icon, hat_assets.asset_status
+                        hat_assets.id, hat_assets.name, hat_assets.asset_desc,  hat_assets.asset_icon, hat_assets.asset_status, hit_racks.id rack_id
                     FROM 
-                        hat_assets 
+                        hat_assets LEFT JOIN
+                        hit_racks ON (hit_racks.`deleted`=0 AND hit_racks.`hat_assets_id`=hat_assets.id)
                     WHERE 
                         hat_assets.deleted=0 
                         AND hat_assets.haa_frameworks_id='".$current_framework."'
@@ -279,6 +284,7 @@ if (isset($sel_sub_asset)) {
            $txt_jason .='img:"'.$asset['asset_icon'].'",';
            $txt_jason .='code:"'.$asset['name'].'",';
            $txt_jason .='desc:"'.$asset['asset_desc'].'",';
+           $txt_jason .='rack_id:"'.$asset['rack_id'].'",';
            $txt_jason .='status_tag:"color_asset_status_'.$asset['asset_status'].'",';
            $txt_jason .='status:"'.$app_list_strings['hat_asset_status_list'][$asset['asset_status']].'",';
            $txt_jason .='type:"asset"},';

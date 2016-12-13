@@ -47,6 +47,7 @@ class HIT_IP extends HIT_IP_sugar {
 		//refer to the task module as an example
 		//or refer to the asset module as the first customzation module with this feature
 		global $app_list_strings, $timedate, $db;
+		global $mod_strings, $app_strings;
 
 		$IP_Fields = $this->get_list_view_array();
 
@@ -61,8 +62,8 @@ class HIT_IP extends HIT_IP_sugar {
 		}
 
 		if (empty($SUM_IP_QTY)) {
-			$IP_Fields['STATUS'] = '<span class="color_asset_status_Idle">'.translate('LBL_UNASSIGNED','HIT_IP').'</span>';
-			$IP_Fields['COLOR_TAG'] = 'Idle';
+			$IP_Fields['STATUS'] = translate('LBL_UNDEFINED','HIT_IP');
+			$IP_Fields['COLOR_TAG'] = 'OutOfService';
 
 		} else {
 			//计算当前子网已经分派的IP数量，
@@ -81,8 +82,14 @@ class HIT_IP extends HIT_IP_sugar {
 
 			}
 
-			$IP_Fields['STATUS'] = (($SUM_IP_ALLOCATED_QTY/$SUM_IP_QTY) * 100)."% ".translate('LBL_ASSIGNED','HIT_IP');
-			$IP_Fields['COLOR_TAG'] = 'InService';
+			if ($SUM_IP_ALLOCATED_QTY==0) {
+				$IP_Fields['STATUS'] = translate('LBL_UNASSIGNED','HIT_IP');
+				$IP_Fields['COLOR_TAG'] = 'Idle';
+
+			} else {
+				$IP_Fields['STATUS'] = (($SUM_IP_ALLOCATED_QTY/$SUM_IP_QTY) * 100)."% ".translate('LBL_ASSIGNED','HIT_IP');
+				$IP_Fields['COLOR_TAG'] = 'InService';
+			}
 		}
 		return $IP_Fields;
 	}

@@ -7,9 +7,10 @@ var prodln = 0;
 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
 
 function openAssetPopup(ln){//本文件为行上选择资产的按钮
-  var eventOptions = jQuery.parseJSON($("#eventOptions").val());
+  //var eventOptions = jQuery.parseJSON($("#eventOptions").val());
+  //alert("asset_popup");
   lineno=ln;
-  //console.log(eventOptions);
+  console.log("EVENTOPTION="+$("#eventOptions").val());
   var popupRequestData = {
     "call_back_function" : "setAssetReturn",
     "form_name" : "EditView",
@@ -39,6 +40,8 @@ function openAssetPopup(ln){//本文件为行上选择资产的按钮
   };
 
   var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());	
+
+
   var popupFilter = '&current_mode='+global_eventOptions.asset_scope.toLowerCase()
   +'&defualt_list='+global_eventOptions.default_asset_list.toLowerCase()
   +'&wo_id='+source_wo_id
@@ -50,7 +53,7 @@ function openAssetPopup(ln){//本文件为行上选择资产的按钮
     popupFilter +="&target_using_org="+$("#target_using_org").val()
     +"&target_using_org_id="+$("#target_using_org_id").val();
   }
-
+  console.log(popupFilter);
   open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
 
 }

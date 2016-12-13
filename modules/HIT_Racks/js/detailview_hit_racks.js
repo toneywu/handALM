@@ -13,8 +13,10 @@ function call_ff() {
 
 
 $(document).ready(function(){
-    call_ff();
-
+    //触发FF
+    SUGAR.util.doWhen("typeof setFF == 'function'", function(){
+        call_ff();
+    });
 
 	var varServer = jQuery.parseJSON($('#js_jason').text());
 	var numberingRule = varServer.numbering_rule;
