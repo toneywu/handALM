@@ -19,14 +19,7 @@ function check_subnet_ip(ln) { // 检查子网IP是否合规
 	}
 
 	var ip_subnet_splited = $("#line_ip_subnet" + ln).val().split("/");// 当前行的IP
-	/*if(typeof $("#line_name" + ln).val()=="undefined"){
-		$("#line_name" + ln).val($("#line_ip_subnet" + ln).val());
-		var ip_splited = $("#line_name" + ln).val().split("/");
-	}else{
-		var ip_transfer_splited = $("#line_name" + ln).val() + "\/" + ip_subnet_splited[1];
-	    var ip_splited = ip_transfer_splited.split("/");
-	}*/
-	
+
 	var spilit_str = $("#line_name" + ln).val();
 	if(spilit_str==""){
 		spilit_str=$("#line_ip_subnet" + ln).val();
@@ -34,8 +27,8 @@ function check_subnet_ip(ln) { // 检查子网IP是否合规
 		spilit_str=spilit_str+ "\/" + ip_subnet_splited[1];
 	}
 	ip_splited=spilit_str.split("/");
-	console.log(ip_splited);
-	
+	//console.log(ip_splited);
+
 	var line_name = $("#line_name" + ln).val().split("/");// 当前行的IP
 	var ip_parenet_splited = $("#name").val().split("/");// 头上的IP地址
 
@@ -224,13 +217,13 @@ function show_ip_desc(ip_val, desc_obj) {
 				ip_splited[1])
 		// console.log(ip_caled);
 		desc_obj.html("-----<br/>"
-				+ SUGAR.language.get('HIT_IP', 'LBL_IP_NETMASK') + " <strong>"
+				+ SUGAR.language.get('HIT_IP_Subnets', 'LBL_IP_NETMASK') + " <strong>"
 				+ ip_caled.prefixMaskStr + "</strong><br/>"
-				+ SUGAR.language.get('HIT_IP', 'LBL_IP_FIRST') + " <strong>"
+				+ SUGAR.language.get('HIT_IP_Subnets', 'LBL_IP_FIRST') + " <strong>"
 				+ ip_caled.ipLowStr + "</strong><br/>"
-				+ SUGAR.language.get('HIT_IP', 'LBL_IP_LAST') + " <strong>"
+				+ SUGAR.language.get('HIT_IP_Subnets', 'LBL_IP_LAST') + " <strong>"
 				+ ip_caled.ipHighStr + "</strong><br/>"
-				+ SUGAR.language.get('HIT_IP', 'LBL_IP_COUNT') + " <strong>"
+				+ SUGAR.language.get('HIT_IP_Subnets', 'LBL_IP_COUNT') + " <strong>"
 				+ Math.pow(2, ip_caled.invertedSize) + "</strong>");
 	} else {
 		desc_obj.html("");
@@ -246,28 +239,28 @@ function show_ip_desc(ip_val, desc_obj) {
  * alert('Error loading document'); } }); };
  */
 
- 
-function getPopListValue(id,ln){ 
-  $.ajax(
-  	{ 
+function getPopListValue(id,ln){
+console.log('index.php?to_pdf=true&module=HIT_IP_Subnets&action=getPurposeListField&id=' +  id+"&prodln="+ln)
+  $.ajax({
      url:'index.php?to_pdf=true&module=HIT_IP_Subnets&action=getPurposeListField&id=' +  id+"&prodln="+ln,
-     success: function (data) { 
+     success: function (data) {
           var html="";
           html=data;
-          //console.log(html); 
-        $("#line_purpose"+ln).remove(); 
-		if($("line_purpose"+ln).length==0){
+          //console.log(html);
+        $("#line_purpose"+ln).remove();
+		console.log("getPopListValue="+ln);
+		if($("#line_purpose"+ln).val()!=''){
 		  $("#line_purpose_label"+ln).after(html);
 		}
-    	
-    }, 
+    },
     error: function () { //失败
-					alert('Error loading document'); 
-					} 
-	}); 
+					alert('Error loading document');
+					}
+	});
   };
-  
-  
+
+
+
 function checkEnableSeperateAsign(ln) {
 	console.log("line_name = " + $("#line_name" + ln).val());
 	if ($("#line_ip_type" + ln).is(':checked')) {
@@ -317,10 +310,11 @@ function show_ip_subnet_ojb(ln) {
 	//if ($("#line_name" + ln).val() == "") {
 	//	$("#line_name" + ln).val($("#line_ip_subnet" + ln).val());
 	//}
+
 	show_ip_desc($("#line_ip_subnet" + ln).val(), $("#line_ip_subnet" + ln
 					+ "_ip_desc"));
 	show_ip_desc($("#line_name" + ln).val(), $("#line_name" + ln + "_ip_desc"));
-	console.log("show_ip_subnet_ojb"+$("#line_hat_asset_locations_id" + ln).val());
+
 	// console.log($("#line_hat_asset_locations_id"+ln).val()+":"+($("#line_hat_asset_locations_id"+ln).val()==""));
 	if ($("#line_hat_asset_locations_id" + ln).val() == ""&&$("#hat_asset_locations_id").val()!="") {// 将位置从头复制到行上
 		$("#line_hat_asset_locations_id" + ln).val($("#hat_asset_locations_id")
@@ -347,6 +341,33 @@ function show_ip_desc_ojb(ln) {
 	check_subnet_ip(ln);
 }
 
+function openLocationPopup(ln){ //在行上选择了From Location
+  lineno=ln;
+  var popupRequestData = {
+    "call_back_function" : "set_return",
+    "form_name" : "EditView",
+    "field_to_name_array" : {
+      "name" : "line_location" + ln,
+      "id" : "hat_asset_locations_id" + ln,
+    }
+  };
+  open_popup('HAT_Asset_Locations', 1000, 850, '', true, true, popupRequestData);
+}
+
+function openOrgPopup(ln){ //在行上选择了From Location
+  lineno=ln;
+  var popupRequestData = {
+    "call_back_function" : "set_return",
+    "form_name" : "EditView",
+    "field_to_name_array" : {
+      "name" : "line_org" + ln,
+      "id" : "line_org_id" + ln,
+    }
+  };
+  open_popup('Accounts', 1000, 850, '', true, true, popupRequestData);
+}
+
+
 function openVLANPopup(ln) { // 在行上选择了From Location
 	lineno = ln;
 	var popupRequestData = {
@@ -371,8 +392,7 @@ function openLocationPopup(ln) { // 在行上选择了From Location
 		}
 	};
 	var popupFilter = '&site_type=D';
-	open_popup('HAM_Maint_Sites', 1000, 850, popupFilter, true, true,
-			popupRequestData);
+	open_popup('HAM_Maint_Sites', 1000, 850, popupFilter, true, true, popupRequestData);
 }
 
 function set_main_sites_return(popupReplyData){
@@ -391,6 +411,13 @@ function openOrgPopup(ln) { // 在行上选择了From Location
 	};
 	open_popup('Accounts', 1000, 850, '', true, true, popupRequestData);
 }
+
+
+function set_location_return(popupReplyData){
+	set_return(popupReplyData);
+}
+
+
 function openMassOrgPopup(ln) { // 在行上选择了From Location
 	lineno = ln;
 	var popupRequestData = {
@@ -465,7 +492,7 @@ function insertTransLineHeader(tableid) {
 	 */
 	var j = x.insertCell(9);
 	j.innerHTML = SUGAR.language.get('HIT_IP_Subnets', 'LBL_GATEWAY');
-	
+
 	var i1 = x.insertCell(10);
 	i1.innerHTML = SUGAR.language.get('HIT_IP_Subnets', 'LBL_PURPOSE');
 	
@@ -505,14 +532,17 @@ function insertLineData(hit_ip_subnets, current_view) { // 将数据写入到对
 		$("#line_description".concat(String(ln)))
 				.val(hit_ip_subnets.description);
 		$("#line_purpose".concat(String(ln)))
-				.val(hit_ip_subnets.purpose);	
+				.val(hit_ip_subnets.purpose);
 		$("#line_location".concat(String(ln)))
-				.val(hit_ip_subnets.location);		
+				.val(hit_ip_subnets.location);
 		$("#line_tunnel".concat(String(ln))).val(hit_ip_subnets.tunnel);
 		$("#line_ip_type".concat(String(ln))).val(hit_ip_subnets.ip_type);
 		$("#line_gateway".concat(String(ln))).val(hit_ip_subnets.gateway);
 		$("#line_ip_type_val".concat(String(ln))).val(hit_ip_subnets.ip_type);
 		$("#line_hat_asset_locations_id".concat(String(ln))).val(hit_ip_subnets.hat_asset_locations_id);
+
+		$("#line_status".concat(String(ln))).val(hit_ip_subnets.allo_qty);
+
 		renderTransLine(ln);
 
 		resetItem(ln);
@@ -536,6 +566,7 @@ function insertTransLineElements(tableid, current_view) { // 创建界面要素
 	z1.innerHTML = "<td><input id='selectLineClicked"
 			+ prodln
 			+ "' type='checkbox' onclick='selectLineClicked(this)'></td>"
+
 			+ "<td><span name='displayed_line_num["
 			+ prodln
 			+ "]' id='displayed_line_num"
@@ -588,14 +619,14 @@ function insertTransLineElements(tableid, current_view) { // 创建界面要素
 			+ "]' id='displayed_line_gateway" + prodln + "'></span></td>"
 			+ "<td><span name='displayed_line_purpose[" + prodln
 			+ "]' id='displayed_line_purpose" + prodln + "'></span></td>"
+/*			+ "<td><span name='displayed_line_purpose[" + prodln
+			+ "]' id='displayed_line_purpose" + prodln + "'></span></td>"*/
 			+ "<td><span name='displayed_line_description[" + prodln
 			+ "]' id='displayed_line_description" + prodln + "'></span></td>"
 			+ "<td><span name='displayed_line_location[" + prodln
 			+ "]' id='displayed_line_location" + prodln + "'></span></td>"
-			+ "<td><span name='displayed_line_organization[" + prodln
-			+ "]' id='displayed_line_organization" + prodln + "'></span></td>"
-			+ "<td><span name='displayed_line_status[" + prodln
-			+ "]' id='displayed_line_status" + prodln + "'></span></td>"
+			+ "<td><span name='displayed_line_organization[" + prodln + "]' id='displayed_line_organization" + prodln + "'></span></td>"
+			+ "<td><span name='displayed_line_status[" + prodln+ "]' id='displayed_line_status" + prodln + "'></span></td>"
 			+ "<td>"
 
 	if (current_view == "EditView") {
@@ -680,13 +711,8 @@ function insertTransLineElements(tableid, current_view) { // 创建界面要素
 			+ "<label id='line_purpose_label"+prodln+"'>"
 			+ SUGAR.language.get('HIT_IP_Subnets', 'LBL_PURPOSE')
 			+ "</label>"
-			+ "<input  autocomplete='off' type='text' style='width:153px;' name='line_purpose["
-			+ prodln
-			+ "]' id='line_purpose"
-			+ prodln
-			+ "' value='' title='' onblur='resetItem("
-			+ prodln
-			+ ")'>"
+			+ "<input  autocomplete='off' type='text' style='width:153px;' name='line_purpose["+ prodln+ "]' id='line_purpose"+ prodln
+			+ "' value='' title='' onblur='resetItem("+ prodln+ ")'>"
 			+ "</span>"
 			
 			+ "<span class='input_group'>"
@@ -701,7 +727,6 @@ function insertTransLineElements(tableid, current_view) { // 创建界面要素
 			+ prodln
 			+ ")'>"
 			+ "</span>"
-			
 			+
 			/*
 			 * "<span class='input_group'>"+ "<label id='line_vlan" + prodln +
@@ -793,25 +818,18 @@ function insertTransLineElements(tableid, current_view) { // 创建界面要素
 			+ " </label>"
 			+ "<input style='width:153px;'  autocomplete='off' type='text' name='line_gateway["
 			+ prodln + "]' id='line_gateway" + prodln
-			+ "' maxlength='50' value='' title=''>" + "</span>" +
+			+ "' maxlength='50' value='' title=''>" + "</span>" 
 
-			"<input type='hidden' name='line_deleted[" + prodln
-			+ "]' id='line_deleted" + prodln + "' value='0'>"
-			+ "<input type='hidden' name='line_id[" + prodln + "]' id='line_id"
-			+ prodln + "' value=''>"
-			+ "<input type='hidden' name='line_ip_type_val[" + prodln
-			+ "]' id='line_ip_type_val" + prodln + "' value=''>"
-			+ "<input type='hidden' name='line_ip_netmask[" + prodln
-			+ "]' id='line_ip_netmask" + prodln + "' value=''>"
-			+ "<input type='hidden' name='line_ip_highest[" + prodln
-			+ "]' id='line_ip_highest" + prodln + "' value=''>"
-			+ "<input type='hidden' name='line_ip_lowest[" + prodln
-			+ "]' id='line_ip_lowest" + prodln + "' value=''>"
-			+ "<input type='hidden' name='line_ip_qty[" + prodln
-			+ "]' id='line_ip_qty" + prodln + "' value=''>" +
+			+ "<input type='hidden' name='line_deleted[" + prodln + "]' id='line_deleted" + prodln + "' value='0'>"
+			+ "<input type='hidden' name='line_id[" + prodln + "]' id='line_id" + prodln + "' value=''>"
+			+ "<input type='hidden' name='line_ip_type_val[" + prodln + "]' id='line_ip_type_val" + prodln + "' value=''>"
+			+ "<input type='hidden' name='line_ip_netmask[" + prodln + "]' id='line_ip_netmask" + prodln + "' value=''>"
+			+ "<input type='hidden' name='line_ip_highest[" + prodln + "]' id='line_ip_highest" + prodln + "' value=''>"
+			+ "<input type='hidden' name='line_ip_lowest[" + prodln + "]' id='line_ip_lowest" + prodln + "' value=''>"
+			+ "<input type='hidden' name='line_ip_qty[" + prodln + "]' id='line_ip_qty" + prodln + "' value=''>" 
+			+ "<input type='hidden' name='line_status[" + prodln + "]' id='line_status" + prodln + "' value=''>" 
 
-			"<input type='button' id='line_delete_line" + prodln
-			+ "' class='button btn_del' value='"
+			+ "<input type='button' id='line_delete_line" + prodln+ "' class='button btn_del' value='"
 			+ SUGAR.language.get('app_strings', 'LBL_DELETE_INLINE')
 			+ "' tabindex='116' onclick='btnMarkLineDeleted(" + prodln
 			+ ",\"line_\")'>" + "<button type='button' id='btn_LineEditorClose"
@@ -840,7 +858,6 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 	// $("#displayed_line_num"+ln).html());
 	//
 	// console.log("renderTransLine"+ln);
-	
 	console.log("line_ip_type= " + $("#line_ip_type" + ln).val());
 	if ($("#line_ip_type_val" + ln).val() == "0") {
 		$("#displayed_line_ip_type" + ln).attr("checked", true);
@@ -882,18 +899,14 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 			+ "</strong>");
 	$("#displayed_line_vlan" + ln).html($("#line_vlan" + ln).val());
 	$("#displayed_line_tunnel" + ln).html($("#line_tunnel" + ln).val());
-	$("#displayed_line_description" + ln).html($("#line_description" + ln)
-			.val());
-	$("#displayed_line_location" + ln).html($("#line_location" + ln)
-			.val());	
-			
-	$("#displayed_line_purpose" + ln).html($("#line_purpose" + ln)
-			.val());
+	$("#displayed_line_description" + ln).html($("#line_description" + ln).val());
+	$("#displayed_line_location" + ln).html($("#line_location" + ln).val());
+	$("#displayed_line_purpose" + ln).html($("#line_purpose" + ln).val());
 	//console.log(SUGAR.language.get("app_list_strings","hit_ip_purpose_list").INTERNET);
 	$meaning = SUGAR.language.get("app_list_strings","hit_ip_purpose_list");
 	var key = $("#line_purpose" + ln).val();
 	$("#displayed_line_purpose" + ln).html($meaning[key]);	
-			
+
 	$("#displayed_line_gateway" + ln).html($("#line_gateway" + ln).val());
 	$("#displayed_line_ip_type" + ln).html($("#line_ip_type" + ln).val());
 	$("#displayed_line_location" + ln).html($("#line_location" + ln).val());
@@ -904,7 +917,17 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 	} else {
 		$("#displayed_line_organization" + ln).html($("#line_org" + ln).val());
 	}
+	console.log("displayed_line_ip_type = "+$("#displayed_line_ip_type"+ln).text());
+	if($("#displayed_line_ip_type"+ln).text()=="1"){
+		$("#displayed_line_name"+ln).text("");
+	}
+	
 
+	if($("#line_status"+ln).val()>0) {
+		$("#displayed_line_status"+ln).html("<span class='color_tag color_asset_status_InService'>"+SUGAR.language.get('HIT_IP', 'LBL_ASSIGNED')+"</span>");
+	} else {
+		$("#displayed_line_status"+ln).html("<span class='color_tag color_asset_status_Idle'>"+SUGAR.language.get('HIT_IP', 'LBL_UNASSIGNED')+"</span>");
+	}
 }
 
 function resetItem(ln) { // 在用户重新选择IP之后，会连带的更新相关的字段信息。
@@ -1010,14 +1033,10 @@ function LineEditorShow(ln) { // 显示行编辑器（先自动关闭所有的�
 	show_ip_subnet_ojb(ln)// 显示IP附加信息
 
 	$("#subnets_line_displayed" + ln).hide();
-	getPopListValue($("#line_id"+ln).val(),ln);
-	
-	
-	
 	$("#trans_editor" + ln).show();
 	// 渲染下拉列表框的值
 	// 通过ajax获取
-	
+	 getPopListValue($("#line_id"+ln).val(),ln);
 
 }
 
@@ -1041,51 +1060,3 @@ function resetLineNum_Bold() {// 数行号
 	// TODO：如果最终有效的行数，则将头标记为空
 	// if (j==0) {}
 }
-
-// *********************************************************************
-// 以下为公共的函数
-// *********************************************************************
-//
-/*
- * function mark_field_disabled(field_name, hide_bool) { mark_obj =
- * $("#"+field_name); mark_obj_lable = $("#"+field_name+"_label");
- * 
- * if(hide_bool==true) { mark_obj.css({"display":"none"});
- * mark_obj_lable.css({"display":"none"}); }else{
- * mark_obj.css({"color":"#efefef","background-Color":"#efefef;"});
- * mark_obj.attr("readonly",true);
- * mark_obj_lable.css({"color":"#aaaaaa","text-decoration":"line-through"}); }
- * if (typeof validate != "undefined" && typeof validate['EditView'] !=
- * "undefined") { removeFromValidate('EditView',field_name); //去除必须验证 }
- * $("#"+field_name+"_label .required").hide();
- * 
- * if (typeof $("#btn_"+field_name)!= 'undefined') {
- * $("#btn_"+field_name).css({"visibility":"hidden"}); } if (typeof
- * $("#btn_clr_"+field_name)!= 'undefined') {
- * $("#btn_clr_"+field_name).css({"visibility":"hidden"}); } //消除已经填写的数据
- * $("#"+field_name).val(""); if (typeof $("#"+field_name+"_id")!= 'undefined') {
- * $("#"+field_name+"_id").val(""); } }
- */
-/*
- * function mark_field_enabled(field_name,not_required_bool) { //field_name =
- * 字段名，不需要jquery select标志，直接写名字
- * //not_required_bool如果为空或没有明确定义为true的话，字段为必须输入。如果=ture则为非必须
- * //alert(required_bool);
- * 
- * $("#"+field_name).css({"color":"#000000","background-Color":"#ffffff"});
- * $("#"+field_name).attr("readonly",false);
- * $("#"+field_name+"_label").css({"color":"#000000","text-decoration":"none"})
- * 
- * if(typeof not_required_bool == "undefined" || not_required_bool==false ||
- * not_required_bool=="") { addToValidate('EditView', field_name,'varchar',
- * 'true', $("#"+field_name+"_label").text());//将当前字段标记为必须验证 //打上必须星标 if
- * ($("#"+field_name+"_label .required").text()!='*') {//如果没有星标，则打上星标
- * $("#"+field_name+"_label").html($("#"+field_name+"_label").text()+"<span
- * class='required'>*</span>");//打上星标 } else {//如果已经有星标了，则显示出来
- * $("#"+field_name+"_label .required").show(); } } else { //如果不是必须的，则不显示星标
- * removeFromValidate('EditView',field_name); //去除必须验证 $("#"+field_name+"_label
- * .required").hide(); } if (typeof $("#btn_"+field_name)!= 'undefined')
- * {//移除选择按钮 $("#btn_"+field_name).css({"visibility":"visible"}); } if (typeof
- * $("#btn_clr_"+field_name)!= 'undefined') {//移除清空按钮
- * $("#btn_clr_"+field_name).css({"visibility":"visible"}); } }
- */

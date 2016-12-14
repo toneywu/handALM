@@ -29,6 +29,7 @@ array (
           'panelDefault' => 'expanded',
         ),
       ),
+      'syncDetailEditViews' => true,
     ),
     'panels' => 
     array (
@@ -36,7 +37,11 @@ array (
       array (
         0 => 
         array (
-          0 => 'name',
+          0 => 
+          array (
+            'name' => 'framework',
+            'customCode' => '{$FRAMEWORK}<input type="hidden" name="haa_frameworks_id" id="haa_frameworks_id">',
+          ),
           1 => 
           array (
             'name' => 'site',
@@ -45,6 +50,15 @@ array (
           ),
         ),
         1 => 
+        array (
+          0 => 'name',
+          1 => 
+          array (
+            'name' => 'work_center_number',
+            'label' => 'LBL_WORK_CENTER_NUMBER',
+          ),
+        ),
+        2 => 
         array (
           0 => 'description',
           1 => '',

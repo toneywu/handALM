@@ -75,6 +75,9 @@ handleRedirect($return_id, 'HIT_IP');
 						 $ip_subnet_line->hit_vlan_id = $post_data[$key.'vlan_id'][$i];
 						 $ip_subnet_line->ip_type = $post_data[$key.'ip_type_val'][$i];
 	                }
+					if($ip_subnet_line->ip_type=="1"){
+						$ip_subnet_line->name=$ip_subnet_line->ip_subnet;
+					}
 	                $ip_subnet_line->parent_hit_ip_id = $parent->id;//父ID
 					//die();
 	            }
