@@ -7,8 +7,6 @@ if(!$sugarbean->ACLAccess('Save')){//确认访问权限
     ACLController::displayNoAccess(true);
     sugar_cleanup(true);
 }
-
-
 require_once('include/formbase.php');
 $sugarbean = populateFromPost('', $sugarbean);//调用populateFromPost写入POST的数据
 
@@ -75,6 +73,7 @@ handleRedirect($return_id, 'HIT_IP');
 						 $ip_subnet_line->hit_vlan_id = $post_data[$key.'vlan_id'][$i];
 						 $ip_subnet_line->ip_type = $post_data[$key.'ip_type_val'][$i];
 	                }
+					//updated by yuan.chen
 					if($ip_subnet_line->ip_type=="1"){
 						$ip_subnet_line->name=$ip_subnet_line->ip_subnet;
 					}
