@@ -385,6 +385,8 @@ $(document).ready(function(){
 						echo 'initTree("LIST","'.$_REQUEST["defualt_list"].'","'.$_REQUEST["wo_id"].'");';
 					} else if ($_REQUEST['defualt_list']=="rack" && isset($_REQUEST['asset_id'])) {
 						echo 'initTree("LIST","'.$_REQUEST["defualt_list"].'","'.$_REQUEST["asset_id"].'");';
+					} if ($_REQUEST['defualt_list']=="current_using_org" && isset($_REQUEST['target_using_org_id'])) {
+						echo 'initTree("LIST","current_using_org","'.$_REQUEST["target_using_org_id"].'");';
 					} else{
 						echo 'initTree("LIST","'.$_REQUEST["defualt_list"].'");';
 					}

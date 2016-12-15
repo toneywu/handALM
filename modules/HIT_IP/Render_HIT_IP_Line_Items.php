@@ -15,22 +15,8 @@ function display_lines($focus, $field, $value, $view){
 		$html .= '<script>insertTransLineHeader(\'lineItems\');</script>';
 
          if($focus->id != '') { //如果不是新增（即如果是编辑已有记录,或是显示已有记录）
-         	/*$sql = "SELECT
-					  hit_ip_subnets.id,
-					  hit_ip_subnets.`name`,
-					  hit_ip_subnets.ip_subnet,
-					  hit_ip_subnets.description,
-					  hit_ip_subnets.tunnel,hit_ip_subnets.hit_vlan_id,hit_ip_subnets.vlan
-					FROM
-					  hit_ip,
-					  hit_ip_subnets
-					WHERE hit_ip.id = hit_ip_subnets.parent_hit_ip_id
-					  AND hit_ip.id = '".$focus->id."'
-					  AND hit_ip.`deleted` = 0
-					  AND hit_ip_subnets.`deleted` = 0
-					ORDER BY INET_ATON(hit_ip_subnets.`name`) ";//INET_ATON是为了让IP有正确的排序
-*/
-			$sql = "SELECT 
+
+/*			$sql = "SELECT 
 						  his.id,
 						  his.`name`,
 						  his.ip_subnet,
@@ -45,7 +31,7 @@ function display_lines($focus, $field, $value, $view){
 						  his.ip_type,
 						  his.purpose,
 						  h.name location,
-						  COUNT(hiaa.id) allo_qty
+						   COUNT(hiaa.id) allo_qty 
 						FROM
 						  `hit_ip_subnets` his 
 						  LEFT JOIN hit_vlan hv 
@@ -56,14 +42,62 @@ function display_lines($focus, $field, $value, $view){
 						  	ON (h.id=his.hat_asset_locations_id)
 						  LEFT JOIN hit_ip_allocations hiaa 
 							ON ( hiaa.id IN 
-								(SELECT hia.id FROM hit_ip_allocations hia WHERE (hia.accurate_ip = his.id OR hia.hit_ip_subnets_id = his.id) AND hia.`deleted`=0 AND (hia.`date_from`='' OR hia.`date_from` IS NULL OR hia.date_from>=CURDATE()) AND (hia.`date_to`='' OR hia.`date_to` IS NULL OR hia.`date_to`<=CURDATE()))
+								(SELECT hia.id FROM hit_ip_allocations hia WHERE (hia.accurate_ip = his.id OR hia.hit_ip_subnets_id = his.id) AND hia.`deleted`=0 AND (hia.`date_from`='' OR hia.`date_from` IS NULL OR hia.date_from>=CURDATE()) AND (hia.`date_to`='' OR hia.`date_to` IS NULL OR hia.`date_to`<=CURDATE()) LIMIT 0,1)
 								)
 						  INNER JOIN hit_ip hi 
 							ON (hi.id = his.parent_hit_ip_id)
 					  where hi.id = '".$focus->id."'
 					  AND hi.`deleted` = 0
 					  AND his.`deleted` = 0
-					ORDER BY INET_ATON(his.`name`) ";//INET_ATON是为了让IP有正确的排序
+					ORDER BY INET_ATON(his.`name`) ";//INET_ATON是为了让IP有正确的排序*/
+					//20161214 Replaced by toney.wu
+		$sql = "SELECT
+						  his.id,
+						  his.`name`,
+						  his.ip_subnet,
+						  his.description,
+						  his.tunnel,
+						  his.hat_asset_locations_id hat_asset_locations_id,
+						  his.hit_vlan_id vlan_id,
+						  hv.name vlan,
+						  a.id org_id,
+						  a.name org,
+						  hiaa.id hiaa_id,
+						  hiaa.`gateway`,
+						  his.ip_type,
+						  his.purpose,
+						  h.name location,
+						  ha_access.`id` access_asset_id,
+						  ha_access.`name` access_asset_name,
+						  ha_mont.id mont_asset_id,
+						  ha_mont.name mont_asset_name,
+						  hiaa.`port`,
+						  hiaa.`speed_limit`,
+						  hiaa.`source_wo_id` source_id
+						FROM
+						  `hit_ip_subnets` his
+						  LEFT JOIN hit_vlan hv
+							ON (his.hit_vlan_id = hv.id)
+						  LEFT JOIN ham_maint_sites h
+						  	ON (h.id=his.hat_asset_locations_id)
+						  LEFT JOIN hit_ip_allocations hiaa 
+							ON ( hiaa.id =
+								(SELECT hia.id FROM hit_ip_allocations hia WHERE (hia.accurate_ip = his.id OR hia.hit_ip_subnets_id = his.id) AND hia.`deleted`=0 AND (hia.`date_from`='' OR hia.`date_from` IS NULL OR hia.date_from>=CURDATE()) AND (hia.`date_to`='' OR hia.`date_to` IS NULL OR hia.`date_to`<=CURDATE()) LIMIT 0,1)
+								)
+						  LEFT JOIN accounts a 
+							ON (hiaa.`account_id` = a.id) 
+						  LEFT JOIN hat_assets ha_access
+							ON (hiaa.`access_assets_id`=ha_access.id)
+						  LEFT JOIN hat_assets ha_mont
+							ON (hiaa.`monitoring`=ha_access.id)
+							,
+							hit_ip hi
+					  WHERE hi.id = '".$focus->id."'
+					  AND hi.id = his.parent_hit_ip_id
+					  AND hi.`deleted` = 0
+					  AND his.`deleted` = 0
+					ORDER BY INET_ATON(his.`name`)";//INET_ATON是为了让IP有正确的排序*/
+
 
 
          	$result = $focus->db->query($sql);

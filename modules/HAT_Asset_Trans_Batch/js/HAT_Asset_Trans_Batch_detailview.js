@@ -146,12 +146,12 @@ $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.
 	var change_btn = $("<input type='button' class='btn_detailview' id='btn_change_status' value='"
 		+ SUGAR.language.get('HAT_Asset_Trans_Batch',
 			'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL') + "'>");
-	if ($("#asset_trans_status").val() != "DRAFT") {
-/*=======
-	if ($("#asset_trans_status").val() == "DRAFT") {
->>>>>>> 8cd2ae4945acb8cfd49cfeeb9cc475d381a7c271
-*/		$("#edit_button").after(change_btn);
+	//20161213toney.wu DRAFT也要吧改状态
+/*	if ($("#asset_trans_status").val() != "DRAFT") {
+		$("#edit_button").after(change_btn);
 	}
+*/
+	$("#edit_button").after(change_btn);
 
 	$("#btn_change_status").click(function() {
 		var msg = check_quantity();

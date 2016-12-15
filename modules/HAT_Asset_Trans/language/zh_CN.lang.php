@@ -68,5 +68,5 @@ $mod_strings = array (
   'LBL_INACTIVE_USING'=>'终止使用分配',
   'LBL_DATE_START'=>'使用分配起始时间',
   'LBL_DATE_END'=>'使用分配终止时间',
-  'LBL_BTN_ADD_NEW_LINE'=>'从当已分配资产中挑选',
+  'LBL_BTN_ADD_NEW_LINE'=>'批量添加行',
 );

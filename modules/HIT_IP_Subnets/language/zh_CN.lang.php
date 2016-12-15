@@ -102,5 +102,6 @@ $mod_strings = array (
   'LBL_DETAILVIEW_PANEL1'=>'子网段管理',
   'LBL_ALREADY_EXISTS_IN_SYSTEM'=>'C段已经存在系统当中',
   'LBL_STATUS'=>'状态',
-  'LBL_IP_SUBNET'=>'子网IP地址段'
+  'LBL_IP_SUBNET'=>'子网IP地址段',
+  'LBL_DETAILS'=>'明细',
 );

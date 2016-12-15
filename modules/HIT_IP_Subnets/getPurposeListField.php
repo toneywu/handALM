@@ -7,8 +7,12 @@ if (!defined('sugarEntry') || !sugarEntry)
   
 $current_id = $_GET['id'];
 $prodln = $_GET['prodln'];  	
+
 $hit_subnets_bean = BeanFactory::getBean('HIT_IP_Subnets',$current_id);
-$purpose = $hit_subnets_bean->purpose;
+if (isset($hit_subnets_bean->purpose)) {
+	$purpose = $hit_subnets_bean->purpose;
+}
+
 echo '<select name='.'"line_purpose['.$prodln.']"'.' id="line_purpose'.$prodln.'" style="width: 153px;">';
 echo '<option value=""></option>';		
 foreach($app_list_strings['hit_ip_purpose_list'] as $key=>$value){

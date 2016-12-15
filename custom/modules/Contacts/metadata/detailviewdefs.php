@@ -96,6 +96,10 @@ array (
         array (
           'file' => 'modules/Leads/Lead.js',
         ),
+        1 => 
+        array (
+          'file' => 'custom/modules/Contacts/js/ContactsDetailView.js',
+        ),
       ),
       'maxColumns' => '2',
       'widths' => 
@@ -111,12 +115,12 @@ array (
           'field' => '30',
         ),
       ),
-      'useTabs' => false,
+      'useTabs' => true,
       'tabDefs' => 
       array (
         'DEFAULT' => 
         array (
-          'newTab' => false,
+          'newTab' => true,
           'panelDefault' => 'expanded',
         ),
         'LBL_CONTACT_INFORMATION' => 
@@ -139,6 +143,33 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_DETAILVIEW_PANEL_ORG' => 
+        array (
+          'newTab' => true,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_DETAILVIEW_PANEL_HISTORY' => 
+        array (
+          'newTab' => true,
+          'panelDefault' => 'expanded',
+        ),
+
+        'LBL_DETAILVIEW_PANEL_DOC' => 
+        array (
+          'newTab' => true,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_DETAILVIEW_PANEL_BUSINESS' => 
+        array (
+          'newTab' => true,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_DETAILVIEW_PANEL_ASSETS' => 
+        array (
+          'newTab' => true,
+          'panelDefault' => 'expanded',
+        ),
+
       ),
     ),
     'panels' => 
@@ -425,6 +456,50 @@ array (
           ),
         ),
       ),
+      'lbl_detailview_panel_org' => 
+      array (
+        0 => 
+        array (
+          0 => '',
+          1 => '',
+        ),
+      ),
+
+      'lbl_detailview_panel_history' => 
+      array (
+        0 => 
+        array (
+          0 => '',
+          1 => '',
+        ),
+      ),
+      'lbl_detailview_panel_doc' => 
+      array (
+        0 => 
+        array (
+          0 => '',
+          1 => '',
+        ),
+      ),
+      'lbl_detailview_panel_business' => 
+      array (
+        0 => 
+        array (
+          0 => '',
+          1 => '',
+        ),
+      ),
+      'lbl_detailview_panel_assets' => 
+      array (
+        0 => 
+        array (
+          0 => '',
+          1 => '',
+        ),
+      ),
+
+
+//
     ),
   ),
 );

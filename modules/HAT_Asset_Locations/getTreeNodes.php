@@ -86,7 +86,7 @@ if($_REQUEST['type']=="location") { //如果是Locationg来源，需要读取子
                         hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_assets_idb = hat_assets.id
                             AND hat_asset_locations_hat_assets_c.deleted = 0
                             AND hat_assets.deleted = 0
-                            AND hat_assets.parent_asset_id = ''
+                            AND (hat_assets.parent_asset_id = '' OR hat_assets.parent_asset_id IS NULL)
                             AND hat_assets.haa_frameworks_id='".$current_framework."'
                             AND hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_asset_locations_ida ='".$_REQUEST['id']."' ORDER by hat_assets.name ASC";
     }

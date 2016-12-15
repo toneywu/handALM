@@ -139,7 +139,8 @@ class ContactsViewDetail extends ViewDetail
     $('#History__button').after(html);});</script>";
     	echo '<script>function userTotask(){
 	location.href="?module=Tasks&action=EditView&return_module=Tasks&return_action=DetailView&contact_id='.$user_id.'&contact_name='.$user_name.'";}</script>';
-		if (isset ($this->bean->haa_codes_id_c) && ($this->bean->haa_codes_id_c) != "") {
+
+/*		if (isset ($this->bean->haa_codes_id_c) && ($this->bean->haa_codes_id_c) != "") {
 			//判断是否已经设置有组织的业务类型，如果有组织的业务类型，则进一步的加载产品对应的FlexForm
 			$haa_codes_id_c = $this->bean->haa_codes_id_c;
 			$bean_business_type = BeanFactory::getBean('HAA_Codes',$haa_codes_id_c);
@@ -152,11 +153,10 @@ class ContactsViewDetail extends ViewDetail
 				echo '<script> function call_ff() {
 				    triger_setFF($("#haa_ff_id").val(),"Accounts","DetailView");
 				    $(".expandLink").click();
-				 
 				}</script>';
 				echo '<script>call_ff()</script>';
 			}
-		}
+		}*/
 }
 
 }

@@ -2096,7 +2096,7 @@ $dictionary['HAT_Assets'] = array(
       ),
     'cost_center' =>
     array (
-      'required' => true,
+      'required' => false,
       'source' => 'non-db',
       'name' => 'cost_center',
       'vname' => 'LBL_COST_CENTER',

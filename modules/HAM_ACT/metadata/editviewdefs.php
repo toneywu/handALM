@@ -78,7 +78,7 @@ array (
             'label' => 'SR_HAA_CODES_RULE',
 			'displayParams' =>
             array (
-              'initial_filter' => '&code_type_advanced=activity_type',
+              'initial_filter' => '&code_type_advanced=wo_activity_type',
             )
           ),
         ),

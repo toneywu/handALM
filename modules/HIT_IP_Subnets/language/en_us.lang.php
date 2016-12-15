@@ -108,4 +108,5 @@ $mod_strings = array (
   'LBL_DETAILVIEW_PANEL1'=>'Subnet Managment',
   'LBL_ALREADY_EXISTS_IN_SYSTEM'=>'C Segment Already Exists In System',
   'LBL_STATUS'=>'Status',
+  'LBL_DETAILS'=>'Details',
 );

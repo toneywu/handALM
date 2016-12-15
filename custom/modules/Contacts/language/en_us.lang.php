@@ -59,4 +59,9 @@ $mod_strings = array (
   'LBL_DATA_SOURCE_REFERENCE' => 'Data Source ID',
   'LBL_DATA_SOURCE_ID' => 'Data Source Reference',
   'LBL_PRIMARY_CONTACT' => 'Primary Contact',
+  'LBL_DETAIVIEW_PANEL_ORG'=>'Organization',
+  'LBL_DETAILVIEW_PANEL_HISTORY'=>'History',
+  'LBL_DETAILVIEW_PANEL_DOC'=>'Documents',
+  'LBL_DETAILVIEW_PANEL_BUSINESS'=>'Business Activities',
+  'LBL_DETAILVIEW_PANEL_ASSETS'=>'Equip.Asset & Transactions'
 );

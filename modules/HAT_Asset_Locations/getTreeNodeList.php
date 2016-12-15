@@ -13,7 +13,7 @@ if (isset($_REQUEST['current_mode'])) {
     }
 }
 
-if ($_REQUEST['type']=="rack" && isset($_REQUEST['wo_id'])) {
+if ($_REQUEST['type']=="rack" && isset($_REQUEST['query_id'])) {
     //wo_asset_trans 显示当前工作单的所有资产事务处理行中出现的内容
 
     //因为存在多个资产事务处理行处理了同一个资产的情况（比如不同资产事务单），因此在结果中需要DISTINCT
@@ -22,13 +22,13 @@ if ($_REQUEST['type']=="rack" && isset($_REQUEST['wo_id'])) {
                         FROM
                           hat_assets
                         WHERE hat_assets.`deleted`=0
-                          AND hat_assets.id ='".$_REQUEST['wo_id']."'";
+                          AND hat_assets.id ='".$_REQUEST['query_id']."'";
 
                         //echo $sel_sub_asset;
 }
 
 
-if ($_REQUEST['type']=="wo_asset_trans" && isset($_REQUEST['wo_id'])) {
+if ($_REQUEST['type']=="wo_asset_trans" && isset($_REQUEST['query_id'])) {
     //wo_asset_trans 显示当前工作单的所有资产事务处理行中出现的内容
 
     //因为存在多个资产事务处理行处理了同一个资产的情况（比如不同资产事务单），因此在结果中需要DISTINCT
@@ -43,14 +43,14 @@ if ($_REQUEST['type']=="wo_asset_trans" && isset($_REQUEST['wo_id'])) {
                           AND hat_assets.`deleted`=0
                           AND hat_asset_trans.`batch_id` = hat_asset_trans_batch.`id`
                           AND hat_assets.id = hat_asset_trans.`asset_id`
-                          AND hat_asset_trans_batch.`source_wo_id`='".$_REQUEST['wo_id']."'
+                          AND hat_asset_trans_batch.`source_wo_id`='".$_REQUEST['query_id']."'
                           AND hat_asset_trans_batch.`asset_trans_status` != 'DRAFT'
                           AND hat_asset_trans_batch.`asset_trans_status` != 'CANCELED'
                           AND ".$current_mode_sql. " ORDER by hat_assets.name ASC";
                          //
 }
 
-if ($_REQUEST['type']=="wo_ip_trans" && isset($_REQUEST['wo_id'])) {
+if ($_REQUEST['type']=="wo_ip_trans" && isset($_REQUEST['query_id'])) {
     //wo_ip_trans 显示当前工作单的所有网络资源事务处理行中出现的内容
 
     //因为存在多个资产事务处理行处理了同一个资产的情况（比如不同资产事务单），因此在结果中需要DISTINCT
@@ -70,7 +70,7 @@ if ($_REQUEST['type']=="wo_ip_trans" && isset($_REQUEST['wo_id'])) {
                             AND hit_ip_trans.`hit_ip_trans_batch_id` = hit_ip_trans_batch.`id` 
                             AND hit_ip_trans_batch.`asset_trans_status` != 'DRAFT' 
                             AND hit_ip_trans_batch.`asset_trans_status` != 'CANCELED'
-                            AND hit_ip_trans_batch.`source_wo_id`='".$_REQUEST['wo_id']."'
+                            AND hit_ip_trans_batch.`source_wo_id`='".$_REQUEST['query_id']."'
                           UNION ALL SELECT 
                             hit_ip_trans.access_assets_id 
                           FROM
@@ -81,11 +81,27 @@ if ($_REQUEST['type']=="wo_ip_trans" && isset($_REQUEST['wo_id'])) {
                             AND hit_ip_trans.`hit_ip_trans_batch_id` = hit_ip_trans_batch.`id` 
                             AND hit_ip_trans_batch.`asset_trans_status` != 'DRAFT' 
                             AND hit_ip_trans_batch.`asset_trans_status` != 'CANCELED' 
-                            AND hit_ip_trans_batch.`source_wo_id`='".$_REQUEST['wo_id']."'
+                            AND hit_ip_trans_batch.`source_wo_id`='".$_REQUEST['query_id']."'
                             )
                             AND ".$current_mode_sql. " ORDER by hat_assets.name ASC";
 }
 
+
+if ($_REQUEST['type']=="current_using_org" && isset($_REQUEST['query_id'])) {
+    //wo_ip_trans 显示当前工作单的所有网络资源事务处理行中出现的内容
+
+    //因为存在多个资产事务处理行处理了同一个资产的情况（比如不同资产事务单），因此在结果中需要DISTINCT
+        $sel_sub_asset ="SELECT
+                          hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status
+                        FROM
+                          hat_assets,
+                          accounts
+                        WHERE hat_assets.`deleted` = 0
+                          AND accounts.`deleted` = 0
+                          AND accounts.id = hat_assets.`using_org_id`
+                                                    AND accounts.id='".$_REQUEST['query_id']."'
+                            AND ".$current_mode_sql. " ORDER by hat_assets.name ASC";
+}
 //echo $sel_sub_asset;
 
 ?>

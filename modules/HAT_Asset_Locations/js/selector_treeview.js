@@ -19,7 +19,7 @@ var setting = {
 		async: {
 			enable: true,
 			url: 'index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeNodes&site_id='+$("#site_id").val(),
-			autoParam:["id", "type","wo_id","current_mode"],
+			autoParam:["id", "type","query_id","current_mode"],
 			dataFilter: filter
 		},
 		callback: {
@@ -175,8 +175,8 @@ var setting = {
 
 	function checkNodeSelectable(e, zTreeObj, treeNode) { //依据当前节点属性以及当前的模式判断是否可以选中。
 		//if (treeNode.type == "asset" && current_mode=="asset") {
-	console.log("treeNode will be listed here");
-	console.log(treeNode);
+	//console.log("treeNode will be listed here");
+	//console.log(treeNode);
 	if ((current_mode=="asset" && treeNode.type=="asset") ||//选择所有资产
 		(current_mode=="it" && treeNode.type=="asset" && node.data.enable_it_ports=="1") ||//选择IT可联网设备
 		(current_mode=="rack" && treeNode.type=="asset" && typeof(treeNode.rack_id)!="undefined") //选择机柜 
@@ -413,7 +413,7 @@ function initTree(treeView, default_list, p3) {
 	console.log(treeView);
 
 	if (treeView=='LIST') {
-		var zNodes = [{name:framework_title+$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0, type:default_list, wo_id:p3, current_mode: current_mode}];
+		var zNodes = [{name:framework_title+$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0, type:default_list, query_id:p3, current_mode: current_mode}];
 		console.log(zNodes);
 	} else if (treeView=='TREE_LOCATON') {
 		var zNodes = [{name:framework_title+$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0,type:"location"}];

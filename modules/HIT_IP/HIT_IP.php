@@ -87,7 +87,7 @@ class HIT_IP extends HIT_IP_sugar {
 				$IP_Fields['COLOR_TAG'] = 'Idle';
 
 			} else {
-				$IP_Fields['STATUS'] = (($SUM_IP_ALLOCATED_QTY/$SUM_IP_QTY) * 100)."% ".translate('LBL_ASSIGNED','HIT_IP');
+				$IP_Fields['STATUS'] = round(($SUM_IP_ALLOCATED_QTY/$SUM_IP_QTY) * 100)."% ".translate('LBL_ASSIGNED','HIT_IP');
 				$IP_Fields['COLOR_TAG'] = 'InService';
 			}
 		}
