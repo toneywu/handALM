@@ -66,7 +66,7 @@ class HAT_Assets extends HAT_Assets_sugar {
 
 	function save($check_notify = false) {
 
-		if ($this->bean->asset_number == null) {
+		if ($this->asset_number == null) {
 			//1 根据产品 获取产品的资产编号定义
 			//asset_group
 			$products_bean = BeanFactory :: getBean('AOS_Products')->retrieve_by_string_fields(array (
@@ -80,35 +80,47 @@ class HAT_Assets extends HAT_Assets_sugar {
 				'perfix' => $prefix,
 				'min_num_strlength' => $min_num_strlength
 			));
-			if ($min_num_strlength != 0) {
-				if (empty ($bean_numbering)) {
-					//如果没有的话 就新增一个编号规则
-					$bean_numbering = BeanFactory :: newBean('HAA_Numbering_Rule');
-					$bean_numbering->document_type = 'ASSET';
-					$bean_numbering->name = 'Asset';
-					$bean_numbering->perfix = $prefix;
-					$bean_numbering->min_num_strlength = $min_num_strlength;
-				    $newCurrentNum = str_pad(1,$min_num_strlength,"0",STR_PAD_LEFT);
-					//$bean_numbering->current_number = $newCurrentNum;
-					$bean_numbering->nextval = $prefix . str_pad(2,$min_num_strlength,"0",STR_PAD_LEFT);
-					$bean_numbering->save();
-					$this->asset_number = $prefix . $newCurrentNum;
-				} else {
-					//如果有定义编号规则的话
-					$this->asset_number = $bean_numbering->nextval;
-					//先判断当前编号的长度 如果没有超过直接+1 并且补0 如果超过了直接+1 不用补0
-					$maxNum = str_pad(9,$min_num_strlength,"9",STR_PAD_LEFT);
-					$newNextNum = preg_replace('/^0*/', '', str_replace($prefix,"",$this->asset_number))+1;
-					//字符串前面补0
-					if($newNextNum<=$maxNum){
-						$newCurrentNumStr = str_pad($newNextNum,$min_num_strlength,"0",STR_PAD_LEFT);
-					}else{
-						$newCurrentNumStr=$newNextNum;
+			
+			if(!empty(prefix)){
+				if ($min_num_strlength != 0) {
+					if (empty ($bean_numbering)) {
+						//如果没有的话 就新增一个编号规则
+						$bean_numbering = BeanFactory :: newBean('HAA_Numbering_Rule');
+						$bean_numbering->document_type = 'ASSET';
+						$bean_numbering->name = 'Asset';
+						$bean_numbering->perfix = $prefix;
+						$bean_numbering->min_num_strlength = $min_num_strlength;
+						$newCurrentNum = str_pad(1,$min_num_strlength,"0",STR_PAD_LEFT);
+						//$bean_numbering->current_number = $newCurrentNum;
+						$bean_numbering->nextval = $prefix . str_pad(2,$min_num_strlength,"0",STR_PAD_LEFT);
+						$bean_numbering->save();
+						$this->asset_number = $prefix . $newCurrentNum;
+					} else {
+						//如果有定义编号规则的话
+						$this->asset_number = $bean_numbering->nextval;
+						//先判断当前编号的长度 如果没有超过直接+1 并且补0 如果超过了直接+1 不用补0
+						$maxNum = str_pad(9,$min_num_strlength,"9",STR_PAD_LEFT);
+						$newNextNum = preg_replace('/^0*/', '', str_replace($prefix,"",$this->asset_number))+1;
+						//字符串前面补0
+						if($newNextNum<=$maxNum){
+							$newCurrentNumStr = str_pad($newNextNum,$min_num_strlength,"0",STR_PAD_LEFT);
+						}else{
+							$newCurrentNumStr=$newNextNum;
+						}
+						$bean_numbering->nextval = $prefix . $newCurrentNumStr;
+						$bean_numbering->save();
 					}
-					$bean_numbering->nextval = $prefix . $newCurrentNumStr;
-					$bean_numbering->save();
 				}
+				if(empty($this->bean->name)){
+					$this->name=$this->asset_group.$this->asset_number;
+					
+					
+				}
+				
+				
+				
 			}
+			
 		}
 
 		parent :: save($check_notify); //保存Assets主体
