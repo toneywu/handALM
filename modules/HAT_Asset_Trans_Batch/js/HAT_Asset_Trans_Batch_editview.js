@@ -49,13 +49,9 @@ function setEventTypeFields() {
 		async: false,
 		success: function (data) {
 			global_eventOptions = jQuery.parseJSON(data);
-			console.log(global_eventOptions);
-
+			//console.log(global_eventOptions);
+			$("#eventOptions").val(data);
 			var obj = jQuery.parseJSON(data);
-			//console.log(obj);
-			for(var i in obj) {
-				$("#"+i).val(obj[i]);//向隐藏的字段中复制值，从而所有的EventType值都会提供到隐藏的字段中
-			}
 			resetEventType();
 		},
 		error: function () { //失败
@@ -65,6 +61,93 @@ function setEventTypeFields() {
 }
 
 function resetEventType(){
+		var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());
+
+	if (global_eventOptions.check_customer_hold == "1"){
+	 	$("#asset_trans_status").change(); //对客户的信息状态进行验证
+	}
+
+	if (global_eventOptions.change_owning_org == "REQUIRED"){
+		mark_field_enabled('target_owning_org',false);
+	} else if (global_eventOptions.change_owning_org == "OPTIONAL"){
+		mark_field_enabled('target_owning_org',true);
+	} else {
+		mark_field_disabled('target_owning_org',false,false,false); //所属组织字段不可见,并清空当前值
+	}
+	if (global_eventOptions.change_owning_org == "REQUIRED"||global_eventOptions.change_owning_org == "OPTIONAL"){
+		if ($("#target_owning_org_id").val()=="" && $("#source_wo_account_id").val()!="") {
+			//如果当前的目标所属组织没有值，就从工单来源中复制
+			//如果已经有值了，就保持不变
+			$("#target_owning_org").val($("#source_wo_account").val())
+			$("#target_owning_org_id").val($("#source_wo_account_id").val())
+		}
+	}
+
+	//依据事件类型，确认是否需要变化使用组织
+	//console.log(global_eventOptions.change_using_org);
+	if (global_eventOptions.change_using_org == "REQUIRED"){ //必须提供使用组织及日期范围
+		mark_field_enabled('target_using_org',false);
+	} else if (global_eventOptions.change_using_org == "OPTIONAL"){
+		mark_field_enabled('target_using_org',true);
+	} else {
+		mark_field_disabled('target_using_org',false,false,false); //使用组织字段不可见,并清空当前值
+	}
+
+	//如果需要变化（包括必须变化和可以变化2种场景，就从工作单上进行默认）
+	//console.log("source_wo_account:"+$("#source_wo_account").val());
+	if ($("#source_wo_account").val()!="" && (global_eventOptions.change_using_org == "REQUIRED"||global_eventOptions.change_using_org == "OPTIONAL")){
+		$("#target_using_org").val($("#source_wo_account").val())
+		$("#target_using_org_id").val($("#source_wo_account_id").val())
+	}
+
+	//处理行字段
+	loopField("line_target_owning_org",global_eventOptions.change_owning_org);
+
+	loopField("line_target_using_org",global_eventOptions.change_using_org);
+	loopField("line_target_using_org_id",global_eventOptions.change_using_org);
+
+	loopField("line_target_rack_position_desc",global_eventOptions.change_rack_position);
+
+	//add by  yuan.chen
+	loopField("line_target_parent_asset",global_eventOptions.change_parent);
+	//add by  osmond.liu 20161123 增加资产地点的限制
+	loopField("line_target_location",global_eventOptions.change_location);
+	loopField("line_target_location_desc",global_eventOptions.change_location);
+//end modefy osmond.liu 20161123
+	//开始与结束时间根据使用组织及人员进行显示，不单独进行处理 deleted toney.wu 改到Using_org中
+/*	loopField("line_date_start",global_eventOptions.change_asset_date_end);
+	loopField("line_date_end",global_eventOptions.change_asset_date_start);
+*/	//状态不单独进行处理，已经有了 deleted toney.wu
+/*	loopField("line_status",global_eventOptions.change_asset_status);
+*/	//end 
+
+   if (global_eventOptions.change_owning_person=="INVISIABLE") {
+		loopField("line_target_owning_person","INVISIABLE");
+		loopField("line_target_owning_person_desc","INVISIABLE");
+   }else{
+   		  //在头的Views中会加载Framework中的属性。决定资产的使用人及负责人字段是值列表还是文字
+		if (typeof using_person_field_rule== "undefined" || using_person_field_rule=="TEXT") { //判断使用人字段是列表还是文本框
+			loopField("line_target_owning_person","INVISIABLE");
+			loopField("line_target_owning_person_desc",global_eventOptions.change_owning_person);
+		} else {
+			loopField("line_target_owning_person",global_eventOptions.change_owning_person);
+			loopField("line_target_owning_person_desc","INVISIABLE");
+		}
+   };
+
+   if (global_eventOptions.change_using_person=="INVISIABLE") {
+		loopField("line_target_using_person","INVISIABLE");
+		loopField("line_target_using_person_desc","INVISIABLE");
+   }else{
+   		  //在头的Views中会加载Framework中的属性。决定资产的使用人及负责人字段是值列表还是文字
+   		if (typeof owning_person_field_rule== "undefined" || owning_person_field_rule=="TEXT") {//判断负责人字段是列表还是文本框
+			loopField("line_target_using_person","INVISIABLE");
+			loopField("line_target_using_person_desc",global_eventOptions.change_using_person);
+		} else {
+			loopField("line_target_using_person",global_eventOptions.change_using_person);
+			loopField("line_target_using_person_desc","INVISIABLE");
+		}
+   };
 };
 
 function setWoPopupReturn(popupReplyData){
@@ -153,6 +236,57 @@ function check_repeat(ip_array)
    return /(\x0f[^\x0f]+)\x0f[\s\S]*\1/.test("\x0f"+ip_array.join("\x0f\x0f") +"\x0f");
 }
 
+
+function check_quantity(){
+		var error_msg="";
+		var formData=$("#EditView");
+		var formData_str = formData.serialize();
+		
+		var json_obj={};
+		$("input[id^='line_asset_id']").each(function(){
+			var id_name=$(this).attr("id");
+			var id_index = id_name.split("line_asset_id")[1];
+			if($("#line_deleted"+id_index).val()=="0"){
+				json_obj[id_name]=$(this).val();	
+			}
+		});
+
+		var json_data ={};
+		
+		json_data['asset_trans_status']=$("#asset_trans_status").val();
+		json_data['record']=$("input[name=record]").val();
+		json_data['source_wo_id']=$("#source_wo_id").val();
+		json_data['source_woop_id']=$("#source_woop_id").val();
+		json_data["line_asset_id"]=json_obj;
+		$.ajax({
+			type:"POST",
+			url: "index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=checkContractQuantity",
+			data: json_data,
+			cache:false,  
+            async:false,//重要的关健点在于同步和异步的参数，  
+			success: function(msg){ 
+				error_msg=msg;
+				console.log("check_quantity = "+error_msg);
+				if(error_msg!="S"){
+					
+					BootstrapDialog.alert({
+							type : BootstrapDialog.TYPE_DANGER,
+							title : SUGAR.language.get('app_strings',
+									'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+							message : error_msg
+						});
+			}
+		},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				 //alert('Error loading document');
+				 console.log(textStatus+errorThrown);
+			},
+			});
+	return error_msg;
+	
+}
+
+
 /**
 * 保存前验证
 */
@@ -160,6 +294,11 @@ function preValidateFunction(async_bool = false) {
 		var result = true;
 
 		console.log("preValidateFunction");
+		var error_msg = check_quantity();
+		console.log("preValidateFunction = "+error_msg);
+		if(error_msg!=="S"&&error_msg!=""){
+			return;
+		}
 		var ip_array= new Array();
 		$("input[id^='line_hit_ip_subnets_id']").each(function(){
 			id_name =  $(this).attr("id");

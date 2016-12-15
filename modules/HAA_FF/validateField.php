@@ -51,7 +51,7 @@ if ($_REQUEST['mode']=='locationName') { //当前当前site下是否有重名的
 			    ham_maint_sites all_site,
 			    ham_maint_sites cur_site 
 			  WHERE all_site.`haa_frameworks_id` = cur_site.`haa_frameworks_id` 
-			    ADN hat_asset_locations.deleted=0  AND cur_site.id = '".$_GET['site_id']."')";
+			    AND hat_asset_locations.deleted=0  AND cur_site.id = '".$_GET['site_id']."')";
 		$beanSEL = $db->query($sel);
 		$result_bool=1;
 	    while ( $result = $db->fetchByAssoc($beanSEL) ) {

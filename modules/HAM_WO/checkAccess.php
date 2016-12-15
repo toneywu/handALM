@@ -63,6 +63,9 @@ if (!empty($current_id)) {
 	if ($wo_status=="CANCELED"||$wo_status=="SUBMITTED"||$wo_status=="CLOSED"||$wo_status=="COMPLETED"){
 		$show_flag="N";
 	}
+	if($wo_status="DRAFT"||$wo_status="RETURNED"){
+		$show_flag="Y";
+	}
 	echo "$show_flag";
 }else{
 	echo "Y";

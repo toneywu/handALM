@@ -6,8 +6,8 @@ if (!defined('sugarEntry') || !sugarEntry)
 
 $woop_id = $_GET['record'];
 $wo_id = $_GET['ham_wo_id'];
-$include_reject_wo=$_GET['include_reject_wo'];
-if($include_reject_wo=='0'){
+$include_reject_wo=$_GET['include_reject_wo_val'];
+if($include_reject_wo=='1'){
 //找到要驳回和当前最大的工序之间的工序
 $reject_woop_bean = BeanFactory :: getBean('HAM_WOOP', $woop_id);
 //要驳回到哪个工序 它的工序编号
@@ -156,6 +156,4 @@ foreach ($between_woops as $between_woop) {
 	}
 }
 	
-	
-echo "Y";
 ?>

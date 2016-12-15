@@ -114,6 +114,7 @@ array (
             'label' => 'LBL_A_ODF_MARK_NAME',
             'displayParams' => 
             array (
+			  'initial_filter' => '&asset_type=ODF',
               'field_to_name_array' => 
               array (
                 'attribute5' => 'a_odf_mark_name',
@@ -191,6 +192,7 @@ array (
             'label' => 'LBL_B_ODF_MARK_NAME',
             'displayParams' => 
             array (
+			  'initial_filter' => '&asset_type=ODF',
               'field_to_name_array' => 
               array (
                 'attribute9' => 'b_odf_mark_name',
