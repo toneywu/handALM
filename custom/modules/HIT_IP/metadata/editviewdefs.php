@@ -71,6 +71,8 @@ array (
           0 => 
           array (
             'name' => 'name',
+			'studio' => 'visible',
+            'label' => 'LBL_IP_C',
             'customCode' => '<input type="text" name="name" id="name" value="{$fields.name.value}"><span class="input_mask" name="name_desc" id="name_desc"></span><span class="input_desc" name="name_ip_desc" id="name_ip_desc"></span>',
           ),
           1 => 'description',

@@ -10,7 +10,8 @@ $.getScript("cache/include/javascript/sugar_grp_yui_widgets.js"); // MessageBox
 $.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
 $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); // MessageBox
  $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
-/**
+var global_eventOptions;
+ /**
  * 点击按钮 调用Ajax请求 保存
  * 
  * @param name
@@ -69,7 +70,21 @@ $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.
  	/* } */
  };
 
- 
+function setEventTypeFields() {
+	$.ajax({//
+		url: 'index.php?to_pdf=true&module=HAT_EventType&action=getTransSetting&id=' + $("#hat_eventtype_id").val(),//e74a5e34-906f-0590-d914-57cbe0e5ae89
+		async: false,
+		success: function (data) {
+			global_eventOptions = jQuery.parseJSON(data);
+			//console.log(global_eventOptions);
+			$("#eventOptions").val(data);
+			var obj = jQuery.parseJSON(data);
+		},
+		error: function () { //失败
+			alert('Error loading document');
+		}
+	})
+}
  function check_quantity(){
 		var error_msg="";
 		var formData=$("#EditView");
@@ -114,6 +129,12 @@ $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.
 	 * //触发FF SUGAR.util.doWhen("typeof setFF == 'function'", function(){
 	 * call_ff(); });
 	 */
+	 
+	 if ($("#hat_eventtype_id").val() != "") {
+			setEventTypeFields();//初始化EventType，完成后会将EventType的值写入global_eventOptions
+	}
+	 
+	 
 	 if (typeof hideButtonFlag != "undefined") {
 	 	$(".action_buttons").hide();
 	 }
@@ -147,7 +168,7 @@ $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.
 		+ SUGAR.language.get('HAT_Asset_Trans_Batch',
 			'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL') + "'>");
 	//20161213toney.wu DRAFT也要吧改状态
-	if ($("#asset_trans_status").val() = "DRAFT") {
+	if ($("#asset_trans_status").val() == "DRAFT") {
 		$("#edit_button").after(change_btn);
 	}
 
@@ -162,7 +183,47 @@ $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.
 							'LBL_EMAIL_ERROR_GENERAL_TITLE'),
 					message : msg
 				});
-		}else{
+		}else{		
+			
+			var result = true;
+			//欠费
+			console.log(global_eventOptions);
+				if ($("#asset_trans_status").val()=="SUBMITTED"||$("#asset_trans_status").val()=="APPROVED"||$("#asset_trans_status").val()=="DRAFT") {//如果是提交状态，进行客户信息检查
+					if (global_eventOptions.check_customer_hold_c_owning == "1"){
+					//针对当前使用组织进行信息检查，如在报废或移出资产前确认，当前资产的拥有方是否有欠费行为
+						var ajaxStr='mode=accounthold&val='+$("#name").val()+'&id=' + $("#current_owning_org_id").val();
+						var errMSG = SUGAR.language.get('app_strings', 'LBL_CUSTOMER_HOLD_ERR');
+						result= FFCheckField('current_owning_org',ajaxStr,errMSG,false);
+						BootstrapDialog.alert({
+							type : BootstrapDialog.TYPE_DANGER,
+							title : SUGAR.language.get('app_strings',
+									'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+							message : errMSG
+						});
+						return;
+					}
+					console.log("result = "+result+",holding)_flag "+global_eventOptions.check_customer_hold_c_owning);
+					//针对当前的目前使用组织进行检查，如在分配资产前确认当前用户是否有不良信用。
+					//因为FFCheckField会将已经的错误清除，所以如果当前已经报错（Result=false)就不再继续进行额外的校验了。
+					if (result==true && global_eventOptions.check_customer_hold_c_owning == "1"){
+						console.log("2");
+						var ajaxStr='mode=accounthold&val='+$("#name").val()+'&id=' + $("#target_using_org_id").val();
+						var errMSG = SUGAR.language.get('app_strings', 'LBL_CUSTOMER_HOLD_ERR');
+						result= FFCheckField('target_using_org',ajaxStr,errMSG,false);
+						console.log("target_using_org_id"+$("#target_using_org_id").val());
+						BootstrapDialog.alert({
+							type : BootstrapDialog.TYPE_DANGER,
+							title : SUGAR.language.get('app_strings',
+									'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+							message : errMSG
+						});
+						return;
+					}
+
+				}
+				//End欠费			
+
+			
 			changeStatus($("input[name='record']").val());
 		}
 		

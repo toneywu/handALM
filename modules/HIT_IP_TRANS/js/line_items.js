@@ -97,6 +97,7 @@ function selectedLine(selectIn){
 	
 }
 
+
 function openHitIpPopup(ln) {// 本文件为行上选择IP按钮
 	lineno = ln;
 	currentLine=ln;
@@ -113,13 +114,12 @@ function openHitIpPopup(ln) {// 本文件为行上选择IP按钮
 			"ip_highest" : "line_high_associated_ip" + ln
 		}
 	};
-	console.log("当前行号="+currentLine);
 	if($("#line_hit_ip_subnets"+ln).val()==""){
-	    var popupFilter = '&current_mode=rack&location_id='+$("#location_id").val();
+	    var popupFilter = '&current_mode=rack&location_id='+$("#location_id").val()+"&location_advanced="+$("#site").val();
 	   open_popup('HIT_IP_Subnets', 600, 850, popupFilter, true, true, popupRequestData, "MultiSelect", true);
 	
 	}else{
-	    var popupFilter = '&current_mode=rrack&location_id='+$("#location_id").val();
+	    var popupFilter = '&current_mode=rrack&location_id='+$("#location_id").val()+"&location_advanced="+$("#site").val();
 	    open_popup('HIT_IP_Subnets', 600, 850, popupFilter, true, true, popupRequestData);
 	}
 }
@@ -1488,7 +1488,7 @@ function markLineDeleted(ln, key) {// 删除当前行
 		removeFromValidate('EditView', 'line_access_assets_name' + ln);
 		removeFromValidate('EditView', 'line_hat_asset_name' + ln);
 		removeFromValidate('EditView', 'line_hit_ip_subnets_id' + ln);
-		
+
 		removeFromValidate('EditView','line_asset'+ ln);
 	    removeFromValidate('EditView','line_name'+ ln);
 	    removeFromValidate('EditView','line_target_organization'+ ln);
