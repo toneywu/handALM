@@ -236,6 +236,57 @@ function check_repeat(ip_array)
    return /(\x0f[^\x0f]+)\x0f[\s\S]*\1/.test("\x0f"+ip_array.join("\x0f\x0f") +"\x0f");
 }
 
+
+function check_quantity(){
+		var error_msg="";
+		var formData=$("#EditView");
+		var formData_str = formData.serialize();
+		
+		var json_obj={};
+		$("input[id^='line_asset_id']").each(function(){
+			var id_name=$(this).attr("id");
+			var id_index = id_name.split("line_asset_id")[1];
+			if($("#line_deleted"+id_index).val()=="0"){
+				json_obj[id_name]=$(this).val();	
+			}
+		});
+
+		var json_data ={};
+		
+		json_data['asset_trans_status']=$("#asset_trans_status").val();
+		json_data['record']=$("input[name=record]").val();
+		json_data['source_wo_id']=$("#source_wo_id").val();
+		json_data['source_woop_id']=$("#source_woop_id").val();
+		json_data["line_asset_id"]=json_obj;
+		$.ajax({
+			type:"POST",
+			url: "index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=checkContractQuantity",
+			data: json_data,
+			cache:false,  
+            async:false,//重要的关健点在于同步和异步的参数，  
+			success: function(msg){ 
+				error_msg=msg;
+				console.log("check_quantity = "+error_msg);
+				if(error_msg!="S"){
+					
+					BootstrapDialog.alert({
+							type : BootstrapDialog.TYPE_DANGER,
+							title : SUGAR.language.get('app_strings',
+									'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+							message : error_msg
+						});
+			}
+		},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				 //alert('Error loading document');
+				 console.log(textStatus+errorThrown);
+			},
+			});
+	return error_msg;
+	
+}
+
+
 /**
 * 保存前验证
 */
@@ -243,6 +294,11 @@ function preValidateFunction(async_bool = false) {
 		var result = true;
 
 		console.log("preValidateFunction");
+		var error_msg = check_quantity();
+		console.log("preValidateFunction = "+error_msg);
+		if(error_msg!=="S"&&error_msg!=""){
+			return;
+		}
 		var ip_array= new Array();
 		$("input[id^='line_hit_ip_subnets_id']").each(function(){
 			id_name =  $(this).attr("id");

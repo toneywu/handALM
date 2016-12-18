@@ -1,10 +1,25 @@
 <?php
+if (isset($_REQUEST["target_owning_org_id_advanced"])) {
+  $target_using_org_id_advanced=$_REQUEST["target_owning_org_id_advanced"];
+} else {
+  $target_using_org_id_advanced="";
+}
+
+if (isset($_REQUEST["asset_type"])) {
+  $asset_type=$_REQUEST["asset_type"];
+} else {
+  $asset_type="";
+}
+if(isset($_REQUEST["asset_type_advanced"])&&$_REQUEST["asset_type_advanced"]!=""){
+	$asset_type=$_REQUEST["asset_type_advanced"];
+}
+
 $popupMeta = array (
     'moduleMain' => 'HAT_Assets',
     'varName' => 'HAT_Assets',
     'orderBy' => 'hat_assets.name',
     'whereClauses' => array (
-      'name' => 'hat_assets.name',
+/*      'name' => 'hat_assets.name',
       'asset_desc' => 'hat_assets.asset_desc',
       'serial_number' => 'hat_assets.serial_number',
       'vin' => 'hat_assets.vin',
@@ -15,7 +30,21 @@ $popupMeta = array (
       'enable_it_rack' => 'hat_assets.enable_it_rack',
       'using_org_id' => 'hat_assets.using_org_id',
     ),
-'whereStatement'=>'(("'.isset($_REQUEST["target_using_org_id_advanced"])?$_REQUEST["target_using_org_id_advanced"]:"". '"!="" and EXISTS (SELECT 1   FROM    hit_racks r,hit_rack_allocations ra WHERE hat_assets.id = r.hat_assets_id AND r.id = ra.hit_racks_id AND ra.deleted = 0 AND hat_assets.using_org_id = "'.isset($_REQUEST["target_using_org_id_advanced"])?$_REQUEST["target_using_org_id_advanced"]:"".'")) or ""="'.isset($_REQUEST["target_using_org_id_advanced"])?$_REQUEST["target_using_org_id_advanced"]:"".'") AND haa_frameworks.id = "'.$_SESSION["current_framework"].'"',
+'whereStatement'=>'(("'.isset($_REQUEST["target_using_org_id_advanced"])?$_REQUEST["target_using_org_id_advanced"]:"". '"!="" and EXISTS (SELECT 1   FROM    hit_racks r,hit_rack_allocations ra WHERE hat_assets.id = r.hat_assets_id AND r.id = ra.hit_racks_id AND ra.deleted = 0 AND hat_assets.using_org_id = "'.isset($_REQUEST["target_using_org_id_advanced"])?$_REQUEST["target_using_org_id_advanced"]:"".'")) or ""="'.isset($_REQUEST["target_using_org_id_advanced"])?$_REQUEST["target_using_org_id_advanced"]:"".'") AND haa_frameworks.id = "'.$_SESSION["current_framework"].'"',*/
+  'name' => 'hat_assets.name',
+  'asset_desc' => 'hat_assets.asset_desc',
+  'serial_number' => 'hat_assets.serial_number',
+  'vin' => 'hat_assets.vin',
+  'hat_asset_locations_hat_assets_name' => 'hat_assets.hat_asset_locations_hat_assets_name',
+  'hat_assets_accounts_name' => 'hat_assets.hat_assets_accounts_name',
+  'hat_assets_contacts_name' => 'hat_assets.hat_assets_contacts_name',
+  'tracking_number' => 'hat_assets.tracking_number',
+  'framework' => 'hat_assets.framework',
+  'using_org_id' => 'hat_assets.using_org_id',
+  'enable_it_rack'=>'hat_assets.enable_it_rack',
+),
+  'whereStatement'=>'hat_assets.haa_frameworks_id = "'.$_SESSION["current_framework"].'"'
+                    .' AND (("'.$target_using_org_id_advanced. '"!="" and EXISTS (SELECT 1 FROM hit_racks r,hit_rack_allocations ra WHERE hat_assets.id = r.hat_assets_id AND r.id = ra.hit_racks_id AND ra.deleted = 0 AND hat_assets.using_org_id = "'.$target_using_org_id_advanced.'"))  or ""="'.$target_using_org_id_advanced.'") and ("'.$asset_type.'" ="" or( "'.$asset_type.'"="ODF" and exists (select 1 from aos_products where aos_products.name="ODF" and aos_products.deleted=0 and aos_products.id=hat_assets.aos_products_id) )) ',
 
     'searchInputs' => array (
   1 => 'name',
@@ -26,10 +55,22 @@ $popupMeta = array (
   8 => 'hat_assets_accounts_name',
   9 => 'hat_assets_contacts_name',
   10 => 'tracking_number',
-  11 => 'enable_it_rack',
-  12 => 'using_org_id',
+  11 => 'framework',
+  12=>'using_org_id',
+  13=>'enable_it_rack',
+  14=>'asset_type',
 ),
     'searchdefs' => array (
+  'framework' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'label' => 'LBL_FRAMEWORK',
+    'id' => 'HAA_FRAMEWORKS_ID',
+    'link' => true,
+    'width' => '10%',
+    'name' => 'framework',
+  ),
   'name' => 
   array (
     'type' => 'name',
@@ -93,6 +134,30 @@ $popupMeta = array (
     'width' => '10%',
     'name' => 'tracking_number',
   ),
+  'owning_org_id' => 
+  array (
+    'type' => 'varchar',
+    'label' => '',
+    'width' => '10%',
+    'default' => true,
+    'name' => 'owning_org_id',
+  ),
+  'enable_it_rack' => 
+  array (
+    'type' => 'varchar',
+    'label' => '',
+    'width' => '10%',
+    'default' => true,
+    'name' => 'enable_it_rack',
+  ),
+  'asset_type' => 
+  array (
+    'type' => 'varchar',
+    'label' => '',
+    'width' => '10%',
+    'default' => true,
+    'name' => 'asset_type',
+  ),
 ),
     'listviewdefs' => array (
   'NAME' => 
@@ -142,21 +207,6 @@ $popupMeta = array (
     'default' => true,
     'name' => 'hat_assets_contacts_name',
   ),
-     'enable_it_rack' => 
-  array (
-    'type' => 'varchar',
-    'studio' => 'visible',
-    'label' => '',
-    'width' => '10%',
-    'name' => 'enable_it_rack',
-  ),
-     'using_org_id' => 
-  array (
-    'type' => 'varchar',
-    'studio' => 'visible',
-    'label' => '',
-    'width' => '10%',
-    'name' => 'using_org_id',
-  ),
+  
 ),
 );

@@ -153,8 +153,12 @@ function hideAllAttributes(ff_fields) {
 function mark_field_setlist(fields) {
 	var view=action_sugar_grp1;
 	var field_name=fields.field;
+	
+	var pre_val = $("#"+field_name).val();
+	console.log("pre_val = "+pre_val);
 	if (view=='EditView') {
-		var html="<select id='"+field_name+"' name='"+field_name+"'></select>";
+//		var html="<select id='"+field_name+"' name='"+field_name+"'></select>";
+		var html="<select id='"+field_name+"' class='"+field_name+"' name='"+field_name+"'></select>";
 		//$("#"+field_name+'_label').html(fields.label+":");
 		$("#"+field_name).parent().html(html);
 		$.ajax({
@@ -165,6 +169,12 @@ function mark_field_setlist(fields) {
 				var option="";
 				for (var i = 0; i < fields.length; i++) {
 					option+="<option value='"+fields[i]+"'>"+fields[i]+"</option>";
+					if(fields[i]==pre_val){
+						option+="<option selected ='selected' value='"+fields[i]+"'>"+fields[i]+"</option>";
+					}else{
+						option+="<option value='"+fields[i]+"'>"+fields[i]+"</option>";
+					}
+					
 				}
 				$("#"+field_name).append(option);
 			}

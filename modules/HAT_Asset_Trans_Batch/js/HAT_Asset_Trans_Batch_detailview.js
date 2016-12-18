@@ -147,10 +147,6 @@ $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.
 		+ SUGAR.language.get('HAT_Asset_Trans_Batch',
 			'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL') + "'>");
 	//20161213toney.wu DRAFT也要吧改状态
-/*	if ($("#asset_trans_status").val() != "DRAFT") {
-		$("#edit_button").after(change_btn);
-	}
-*/
 	$("#edit_button").after(change_btn);
 
 	$("#btn_change_status").click(function() {

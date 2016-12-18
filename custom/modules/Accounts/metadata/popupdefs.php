@@ -12,7 +12,10 @@ $popupMeta = array (
   'business_type_c' => 'accounts.business_type_c',
 ),
 
-'whereStatement'=>'(("'.$_REQUEST["asset_using_org"].'"="Y" and accounts_cstm.org_type_c in ("INTERNAL","EXTERNAL")) or "'.$_REQUEST["asset_using_org"].'" ="" )',
+/*conlict*/
+/*'whereStatement'=>'(("'.$_REQUEST["asset_using_org"].'"="Y" and accounts_cstm.org_type_c in ("INTERNAL","EXTERNAL")) or "'.$_REQUEST["asset_using_org"].'" ="" )',
+*/
+'whereStatement'=>'(("'.$_REQUEST["asset_using_org"].'"="Y" and accounts_cstm.is_asset_org_c=1) or ("'.$_REQUEST["asset_using_org"].'"="D" and accounts_cstm.org_type_c in ("INTERNAL")) or "'.$_REQUEST["asset_using_org"].'" ="" )',
 
     'searchInputs' => array (
   0 => 'name',

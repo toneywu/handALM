@@ -94,6 +94,7 @@
 			}	
 		}else{
 			//echo count($ham_woop_lines);
+			if(count($ham_woop_lines)!=0){
 				foreach($ham_woop_lines as $ham_woop_line){
 					
 						$product_bean = BeanFactory :: getBean('AOS_Products')->retrieve_by_string_fields(array (
@@ -110,6 +111,10 @@
 				}else{
 					echo "S";
 				}
+				
+			}else{
+				echo "S";
+			}
 		}
 	}else{
 		echo "S";

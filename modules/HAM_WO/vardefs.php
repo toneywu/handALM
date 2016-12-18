@@ -1098,7 +1098,7 @@ $dictionary['HAM_WO'] = array (
 			),
 
 		'ham_act_id_rule' => array (
-			'required' => false,
+			'required' => true,
 			'source' => 'non-db',
 			'name' => 'ham_act_id_rule',
 			'vname' => 'HAM_ACT_ID_RULE',
