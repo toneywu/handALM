@@ -49,9 +49,9 @@ array (
         array (
           0 => 
           array (
-            'name' => 'sr_haa_frameworks_rule',
+            'name' => 'framework',
             'studio' => 'visible',
-            'label' => 'LBL_SR_HAA_FRAMEWORKS_RULE',
+            'label' => 'LBL_FRAMEWORK',
           ),
           1 => 
           array (
