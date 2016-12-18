@@ -54,6 +54,5 @@ $mod_strings = array (
   'LBL_DETAILVIEW_PANEL_DOC'=>'文档',
   'LBL_DETAILVIEW_PANEL_BUSINESS'=>'业务往来',
   'LBL_DETAILVIEW_PANEL_ASSETS'=>'设备/资产及相关事务',
-  'LBL_ASSETS_USING_SUBPANEL'=>'正在使用中的',
-  'LBL_ASSETS_OWNING_SUBPANEL'=>'当前所拥有的',
+
 );

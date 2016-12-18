@@ -235,12 +235,11 @@ function sync_jt_contracts() {
 	
 	$frame_bean = BeanFactory :: getBean('HAA_Frameworks')->retrieve_by_string_fields(array (
 		'code' => 'ChinaCache'
-		
 	));
 	
 	$contract_fix_type = BeanFactory :: getBean('HAA_Codes')->retrieve_by_string_fields(array (
 		'code_type' => 'contract_type',
-		'code_tag'=>'JT'
+		'name'=>'集团',
 	));
 	$GLOBALS['log']->infor(count($json_array));
 	//处理数据
@@ -313,13 +312,13 @@ function sync_jt_contracts() {
 			}
 
 			//TYPE
-			/*$type_sql = 'SELECT haa_codes.id  FROM haa_codes  WHERE haa_codes.name ="' . $order_type_name_val . '"';
+			$type_sql = 'SELECT haa_codes.id  FROM haa_codes  WHERE haa_codes.name ="' . $order_type_name_val . '"';
 			$type_result = $db->query($type_sql);
 			while ($type_record = $db->fetchByAssoc($type_result)) {
 				$record_val = $type_record['id'];
 				$newBean->haa_codes_id_c = $record_val;
-			}*/
-			$newBean->haa_codes_id_c=$contract_fix_type;
+			}
+			
 			//revision
 			$revision_sql = 'SELECT hpr_am_roles.id  FROM hpr_am_roles  WHERE hpr_am_roles.name ="' . $frame_contract_num_val . '"';
 			$revision_result = $db->query($revision_sql);
@@ -399,7 +398,7 @@ function sync_jt_contracts() {
 				 "' . $contact_id . 
 				 '","' . $newBean->haa_codes_id1_c . 
 				 '","' . $newBean->haa_codes_id2_c . 
-				 '","' . $newBean->haa_codes_id_c.'"';
+				 '","' . $contract_fix_type->id.'"';
 			if($newBean->revision_c==""||empty($newBean->revision_c)){
 				$insert_cstm_sql=$insert_cstm_sql.',NULL';
 			}else{
@@ -736,9 +735,8 @@ function sync_xr_products() {
 	global $db;
 	$soap_util_bean = new SoapUtil();
 	$json_array = $soap_util_bean->call_soap_ws("PRODUCT", "XR");
-
+	
 	$GLOBALS['log']->infor("begin to sync xr products data");
-		//$GLOBALS['log']->infor($json_array);
 	//处理数据
 	foreach ($json_array as $key => $record) {	
 			
@@ -794,7 +792,7 @@ function sync_xr_products() {
 					));	
 					$product_bean->haa_uom_id_c=$uom_bean->id;
 					if (empty($uom_bean)){
-						$GLOBALS['log']->infor("单位为空 请先维护".$primary_uom_code);
+						$GLOBALS['log']->infor("单位为空 请先维护");
 					}
 					$product_id = create_guid();
 					$insert_sql = 'insert into aos_products(
@@ -853,11 +851,11 @@ function sync_xr_contracts() {
 	));
 	$contract_fix_type = BeanFactory :: getBean('HAA_Codes')->retrieve_by_string_fields(array (
 		'code_type' => 'contract_type',
-		'code_tag'=>'XR',
+		'name'=>'欣润',
 	));
-	$GLOBALS['log']->infor($frame_bean->id);
+	
 	//处理数据
-	//$GLOBALS['log']->infor(count($json_array));
+	$GLOBALS['log']->infor(count($json_array));
 	foreach ($json_array as $key => $record) {
 		$GLOBALS['log']->infor("record");
 		$h_contract_header_id_val = $record['CONTRACT_HEADER_ID'];
@@ -926,14 +924,13 @@ function sync_xr_contracts() {
 				$newBean->haa_codes_id2_c = $record_val;
 			}
 			//TYPE
-			//$type_sql = 'SELECT haa_codes.id  FROM haa_codes  WHERE haa_codes.name ="' . $order_type_name_val . '"';
-			/*$type_sql = 'SELECT haa_codes.id  FROM haa_codes  WHERE haa_codes.code_type ="contract_type" and haa_codes.name="欣润"';
+			$type_sql = 'SELECT haa_codes.id  FROM haa_codes  WHERE haa_codes.name ="' . $order_type_name_val . '"';
 			$type_result = $db->query($type_sql);
 			while ($type_record = $db->fetchByAssoc($type_result)) {
 				$record_val = $type_record['id'];
 				$newBean->haa_codes_id_c = $record_val;
-			}*/
-			$newBean->haa_codes_id_c = $contract_fix_type->id;
+			}
+
 			//revision
 			$revision_sql = 'SELECT hpr_am_roles.id  FROM hpr_am_roles  WHERE hpr_am_roles.name ="' . $frame_contract_num_val . '"';
 			$revision_result = $db->query($revision_sql);
@@ -998,7 +995,7 @@ function sync_xr_contracts() {
 				 "' . $contact_id . 
 				 '","' . $newBean->haa_codes_id1_c . 
 				 '","' . $newBean->haa_codes_id2_c . 
-				 '","' . $newBean->haa_codes_id_c . 
+				 '","' . $contract_fix_type->id . 
 				 '","' . $newBean->revision_c . 
 				 '","' . $order_number_val . 
 				 '","' . $newBean->data_source_id_c . 

@@ -156,7 +156,7 @@ $dictionary['HAM_Work_Center_Res'] = array(
         'vname' => 'LBL_WORK_CENTER_RES_PEOPLE_SUBPANEL_TITLE',
         'link_type' => 'many',
         'module' => 'HAM_Work_Center_People',
-        'bean_name' => 'HAM_Work_Center_People',
+        'bean_name' => 'HAM_WORK_CENTER_PEOPLE',
         'source' => 'non-db',
 		),	
   
@@ -168,7 +168,7 @@ $dictionary['HAM_Work_Center_Res'] = array(
       'lhs_module' => 'HAM_Work_Center_Res',
       'lhs_table' => 'ham_work_center_res',
       'lhs_key'   => 'id',
-      'rhs_module' => 'HAM_Work_Center_People',
+      'rhs_module' => 'HAM_WORK_CENTER_PEOPLE',
       'rhs_table' => 'ham_work_center_people',
       'rhs_key'   => 'work_center_res_id',
       'relationship_type' => 'one-to-many',

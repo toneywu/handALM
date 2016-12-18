@@ -5,7 +5,10 @@
 
 $mod_strings['LBL_CREATEREVENUESFROMCONTRACT']='Create Revenues From Contracts';
 
-$mod_strings['LBL_CUSTOM_JOB'] = 'Custom Job';
+
+
+
+    $mod_strings['LBL_CUSTOM_JOB'] = 'Custom Job';
 	$mod_strings['LBL_SYNC_JT_ACCOUNTS'] = '同步集团客户';
 	$mod_strings['LBL_SYNC_JT_PRODUCTS'] = '同步集团产品';
 	$mod_strings['LBL_SYNC_JT_CONTRACTS'] = '同步集团合同';

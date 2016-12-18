@@ -12,16 +12,16 @@ array (
         'default' => true,
         'width' => '10%',
       ),
-      'site' => 
+      'location' => 
       array (
         'type' => 'relate',
         'studio' => 'visible',
-        'label' => 'LBL_SITE',
-        'id' => 'HAM_MAINT_SITES_ID',
+        'label' => 'LBL_LOCATION',
+        'id' => 'HAT_ASSET_LOCATIONS_ID',
         'link' => true,
         'width' => '10%',
         'default' => true,
-        'name' => 'site',
+        'name' => 'location',
       ),
       'current_user_only' => 
       array (

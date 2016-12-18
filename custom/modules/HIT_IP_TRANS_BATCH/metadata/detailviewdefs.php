@@ -1,6 +1,5 @@
 <?php
 $module_name = 'HIT_IP_TRANS_BATCH';
-
 $viewdefs [$module_name] = 
 array (
   'DetailView' => 
