@@ -320,14 +320,11 @@ function setAccessAssetBackupNameReturn(popupReplyData) {
 
 
 function setHitIpReturn(popupReplyData) {
-	console.log("回调");
 	if($("#line_hit_ip_subnets"+currentLine).val()==""){
-	    console.log("generate_ip_line");
 	    generate_ip_line(popupReplyData);
 		markLineDeleted(currentLine, "line_");
 	   $("#Trans_line_head").show();
 	   LineEditorClose(currentLine);
-	   console.log(popupReplyData)	
 	}
 	set_return(popupReplyData);
 	
@@ -469,35 +466,42 @@ function insertTransLineHeader(tableid) {
 	g.innerHTML = "<span id='line_port_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_PORT')+"</span>";
 	var g2 = x.insertCell(10);
 	g2.innerHTML = "<span id='line_port_backup_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_PORT_BACKUP')+"</span>";
-	var f = x.insertCell(11);
+	//modified by yuan.chen
+	var g3 = x.insertCell(11);
+	g3.innerHTML = "<span id='line_child_port_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_CHILD_PORT')+"</span>";
+	var g4 = x.insertCell(12);
+	g4.innerHTML = "<span id='line_vlan_channel_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_VLAN_CHANNEL')+"</span>";
+	
+	
+	var f = x.insertCell(13);
 	f.innerHTML = "<span id='line_bandwidth_type_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_BANDWIDTH_TYPE')+"</span>";
-	var i = x.insertCell(12);
+	var i = x.insertCell(14);
 	i.innerHTML = "<span id='line_speed_limit_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_SPEED_LIMIT')+"</span>";
-	var k = x.insertCell(13);
+	var k = x.insertCell(15);
 	k.innerHTML = "<span id='line_hat_assets_cabinet_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_CABINET')+"</span>";
-	var l = x.insertCell(14);
+	var l = x.insertCell(16);
 	l.innerHTML = "<span id='line_monitoring_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_MONITORING')+"</span>";
-	var l2 = x.insertCell(15);
+	var l2 = x.insertCell(17);
 	l2.innerHTML = "<span id='line_monitoring_backup_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_MONITORING_BACKUP')+"</span>";
-	var o = x.insertCell(16);
+	var o = x.insertCell(18);
 	o.innerHTML = "<span id='line_mrtg_link_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_MRTG_LINK')+"</span>";
-	var m = x.insertCell(17);
+	var m = x.insertCell(19);
 	m.innerHTML = "<span id='line_channel_num_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_CHANNEL_NUM')+"</span>";
-	var m2 = x.insertCell(18);
+	var m2 = x.insertCell(20);
 	m2.innerHTML = "<span id='line_channel_num_backup_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_CHANNEL_NUM_BACKUP')+"</span>";
-	var n = x.insertCell(19);
+	var n = x.insertCell(21);
 	n.innerHTML = "<span id='line_channel_content_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_CHANNEL_CONTENT')+"</span>";
-	var n = x.insertCell(20);
+	var n = x.insertCell(22);
 	n.innerHTML = "<span id='line_channel_content_backup_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_CHANNEL_CONTENT_BACKUP')+"</span>";
-	var n3 = x.insertCell(21);
-	n3.innerHTML = "<span id='line_date_start_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_DATE_START')+"</span>";
-	var n4 = x.insertCell(22);
-	n4.innerHTML = "<span id='line_date_end_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_DATE_END')+"</span>";
 	var n3 = x.insertCell(23);
-	n3.innerHTML = "<span id='line_enable_action_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_ENABLE_ACTION')+"</span>";
-	var n2 = x.insertCell(24);
-	n2.innerHTML = "<span id='line_status_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_STATUS')+"</span>";
+	n3.innerHTML = "<span id='line_date_start_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_DATE_START')+"</span>";
+	var n4 = x.insertCell(24);
+	n4.innerHTML = "<span id='line_date_end_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_DATE_END')+"</span>";
 	var n3 = x.insertCell(25);
+	n3.innerHTML = "<span id='line_enable_action_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_ENABLE_ACTION')+"</span>";
+	var n2 = x.insertCell(26);
+	n2.innerHTML = "<span id='line_status_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_STATUS')+"</span>";
+	var n3 = x.insertCell(27);
 	n3.innerHTML = "<span id='line_broadband_type_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_BROADBAND_TYPE')+"</span>";
 
 }
@@ -573,6 +577,10 @@ function insertLineData(asset_trans_line) { // 将数据写入到对应的行字
 	    $("#line_date_end".concat(String(ln))).val(asset_trans_line.date_end);
 	    $("#line_enable_action".concat(String(ln))).val(asset_trans_line.enable_action);
 		$("#line_enable_action_val".concat(String(ln))).val(asset_trans_line.enable_action);
+		//modified by yuan.chen 2016-12-18
+		$("#line_child_port".concat(String(ln))).val(asset_trans_line.child_port);
+		$("#line_vlan_channel".concat(String(ln))).val(asset_trans_line.vlan_channel);
+
 		if(asset_trans_line.enable_action==null||asset_trans_line.enable_action==""){
 			$("#line_enable_action".concat(String(ln))).val(1);
 			$("#line_enable_action_val".concat(String(ln))).val(1);
@@ -701,6 +709,8 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			+ "<td><span name='displayed_line_access_assets_backup_name[" + prodln+ "]' id='displayed_line_access_assets_backup_name" + prodln+ "'></span></td>"
 			+ "<td><span name='displayed_line_port["+ prodln + "]' id='displayed_line_port" + prodln + "'></span></td>"
 			+ "<td><span name='displayed_line_port_backup["+ prodln + "]' id='displayed_line_port_backup" + prodln + "'></span></td>"
+			+ "<td><span name='displayed_line_child_port["+ prodln + "]' id='displayed_line_child_port" + prodln + "'></span></td>"
+			+ "<td><span name='displayed_line_vlan_channel["+ prodln + "]' id='displayed_line_vlan_channel" + prodln + "'></span></td>"
 			+ "<td><span name='displayed_line_bandwidth_type[" + prodln+ "]' id='displayed_line_bandwidth_type" + prodln+ "'></span></td>" 
 			+ "<td><span name='displayed_line_speed_limit["+ prodln + "]' id='displayed_line_speed_limit" + prodln+ "'></span></td>"
 			+ "<td><span name='displayed_line_hat_assets_cabinet[" + prodln+ "]' id='displayed_line_hat_assets_cabinet" + prodln+ "'></span></td>" 
@@ -952,6 +962,34 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			+ "<input style=' width:153px;' type='text' name='line_port_backup["
 			+ prodln
 			+ "]' id='line_port_backup"
+			+ prodln
+			+ "' maxlength='50' value='' title=''>"
+			+ "</span>"
+			+
+			//子端口
+			"<span class='input_group'>"
+			+ "<label id='line_child_port"
+			+ prodln
+			+ "_label'>"
+			+ "子端口"
+			+ "</label>"
+			+ "<input style=' width:153px;' type='text' name='line_child_port["
+			+ prodln
+			+ "]' id='line_child_port"
+			+ prodln
+			+ "' maxlength='50' value='' title=''>"
+			+ "</span>"
+			//vlan通道
+			+
+			"<span class='input_group'>"
+			+ "<label id='line_vlan_channel"
+			+ prodln
+			+ "_label'>"
+			+ "VLAN通道"
+			+ "</label>"
+			+ "<input style=' width:153px;' type='text' name='line_vlan_channel["
+			+ prodln
+			+ "]' id='line_vlan_channel"
 			+ prodln
 			+ "' maxlength='50' value='' title=''>"
 			+ "</span>"
@@ -1292,6 +1330,8 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
   $("#displayed_line_date_start"+ln).html($("#line_date_start"+ln).val());
   $("#displayed_line_date_end"+ln).html( $("#line_date_end"+ln).val());
   $("#displayed_line_broadband_type"+ln).html( $("#line_broadband_type"+ln).val());
+  $("#displayed_line_child_port"+ln).html( $("#line_child_port"+ln).val());
+  $("#displayed_line_vlan_channel"+ln).html( $("#line_vlan_channel"+ln).val());
   //0 代表失效
   if($("#line_enable_action"+ln).val()=="0"){
   	  $("#displayed_line_enable_action"+ln).attr("checked",true);
@@ -1508,6 +1548,8 @@ function markLineDeleted(ln, key) {// 删除当前行
 	    removeFromValidate('EditView','line_date_end'+ ln);
 	    removeFromValidate('EditView','line_broadband_type'+ ln);
 		removeFromValidate('EditView','line_mrtg_link'+ ln);
+		removeFromValidate('EditView','line_child_port'+ ln);
+		removeFromValidate('EditView','line_vlan_channel'+ ln);
 	}
 
 	if ($("#line_hit_ip_subnets" + ln).val() == "") {
@@ -1626,6 +1668,8 @@ function single_changeRequired(lineRecord,i){
 	single_Field("line_access_assets_backup_name",lineRecord.change_access_assets_backup_name,i);
 	single_Field("line_change_enable_action",lineRecord.change_enable_action,i);
 	single_Field("line_broadband_type",lineRecord.change_broadband_type,i);
+	single_Field("line_child_port",lineRecord.change_child_port,i);
+	single_Field("line_vlan_channel",lineRecord.change_vlan_channel,i);
 }
 
 
@@ -1678,7 +1722,9 @@ function dulicateTranLine(ln) {// 关闭行编辑器（显示为正常行）
 				date_start:"",
 				date_end:"",
 				enable_action:'',
-				broadband_type:''
+				broadband_type:'',
+				child_port:'',
+				vlan_channel:''
 			};
 			
 		}	

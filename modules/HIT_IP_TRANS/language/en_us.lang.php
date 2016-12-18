@@ -102,4 +102,6 @@ $mod_strings = array (
   'LBL_EFFICACY'=>'Efficacy',
   'LBL_EFFECTIVE'=>'Effective',
   'LBL_BROADBAND_TYPE'=>'Broadband Type',
+  'LBL_CHILD_PORT'=>'Child Port',
+  'LBL_VLAN_CHANNEL'=>'Vlan Channel',
 );

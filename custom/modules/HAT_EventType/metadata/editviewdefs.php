@@ -24,9 +24,13 @@ array (
       array (
         0 => 
         array (
-          'file' => 'modules/HAT_EventType/js/EditView.js',
+          'file' => 'modules/HAA_FF/ff_include.js',
         ),
         1 => 
+        array (
+          'file' => 'modules/HAT_EventType/js/EditView.js',
+        ),
+        2 => 
         array (
           'file' => 'modules/HAT_EventType/js/reset_EvenType_Fields.js',
         ),
@@ -65,11 +69,15 @@ array (
         array (
           0 => 
           array (
+            'name' => 'framework',
+            'customCode' => '{$FRAMEWORK}',
+          ),
+          1 => 
+          array (
             'name' => 'basic_type',
             'studio' => 'visible',
             'label' => 'LBL_BASIC_TYPE',
           ),
-          1 => '',
         ),
         1 => 
         array (
@@ -92,13 +100,14 @@ array (
         2 => 
         array (
           0 => 'name',
-          1 => array (
-            'name'=>'aos_pdf_template',
+          1 => 
+          array (
+            'name' => 'aos_pdf_template',
             'displayParams' => 
             array (
               'initial_filter' => '&type_advanced=HAT_Asset_Trans_Batch',
             ),
-            ),
+          ),
         ),
         3 => 
         array (
@@ -113,9 +122,18 @@ array (
         4 => 
         array (
           0 => 'asset_scope',
-          1 => 'default_asset_list'
+          1 => 'default_asset_list',
         ),
         5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'need_limit_transaction_lines',
+            'label' => 'LBL_NEED_LIMIT_TRANSACTION_LINES',
+          ),
+          1 => '',
+        ),
+        6 => 
         array (
           0 => 
           array (
@@ -129,6 +147,11 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_REQUIRE_CONFIRMATION',
           ),
+        ),
+        7 => 
+        array (
+          0 => 'check_customer_hold_t_using',
+          1 => 'check_customer_hold_c_owning',
         ),
       ),
       'lbl_editview_panel1' => 
@@ -187,7 +210,12 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_CHANGE_ORANIZATION_LE',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'change_location_desc',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_LOCATION_DESC',
+          ),
         ),
         2 => 
         array (
@@ -321,6 +349,76 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_CHANGE_CHANGE_MRTG_LINK',
           ),
+        ),
+        6 => 
+        array (
+          0 => 'change_main_asset',
+          1 => 'change_backup_asset',
+        ),
+        7 => 
+        array (
+          0 => 'change_port_backup',
+          1 => 'change_monitoring_backup',
+        ),
+        8 => 
+        array (
+          0 => 'change_channel_content_backup',
+          1 => 'change_channel_num_backup',
+        ),
+        9 => 
+        array (
+          0 => 'change_date_end',
+          1 => 'change_date_start',
+        ),
+        10 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_access_assets_name',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_ACCESS_ASSETS_NAME',
+          ),
+          1 => 
+          array (
+            'name' => 'change_access_assets_backup_name',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_ACCESS_ASSETS_BACKUP_NAME',
+          ),
+        ),
+        11 => 
+        array (
+          0 => 'change_status',
+          1 => 
+          array (
+            'name' => 'change_enable_action',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_ENABLE_ACTION',
+          ),
+        ),
+        12 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_broadband_type',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_BROADBAND_TYPE',
+          ),
+          1 => 
+          array (
+            'name' => 'change_child_port',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_CHILD_PORT',
+          ),
+        ),
+        13 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_vlan_channel',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_VLAN_CHANNEL',
+          ),
+          1 => '',
         ),
       ),
     ),
