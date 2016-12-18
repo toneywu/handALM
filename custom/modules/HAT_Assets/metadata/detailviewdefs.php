@@ -518,6 +518,20 @@ array (
         ),
         9 => 
         array (
+          0 => 
+          array (
+            'name' => 'attribute11',
+            'label' => 'LBL_ATTRIBUTE11',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute12',
+            'label' => 'LBL_ATTRIBUTE12',
+          ),
+        ),
+
+        10 => 
+        array (
           0 => 'description',
           1 => '',
         ),

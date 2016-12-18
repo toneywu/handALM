@@ -46,6 +46,7 @@ $app_list_strings['haa_code_module_list']=array (
   'contact' => 'People',
   'contract' => 'Contracts',
   'asset_location' => 'Asset Locations',
+  'asset_main'=>'Equip./Asset Main'
   'asset_qualification'=>'Asset Qualifications',
   'qualification'=>'Qualifications',
   'wo'=>'Activities/Work Orders',
@@ -57,6 +58,7 @@ $app_list_strings['haa_code_module_list']=array (
 
 $app_list_strings['haa_code_type_list']=array (
   '' => '',
+  'asset_main_cost_center'=>'asset_main_cost_center'
   'accounts_level' => 'accounts_level',
   'accounts_business_type' => 'accounts_business_type',
   'accounts_nature' => 'accounts_nature',

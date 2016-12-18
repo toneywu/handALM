@@ -94,6 +94,21 @@ function openOwningOrgPopup(ln){
   open_popup('Accounts', 1000, 850,popupFilter, true, true, popupRequestData);
 }
 
+function openCostCenterPopup(ln){
+  lineno=ln;
+  var popupRequestData = {
+    "call_back_function" : "set_return",
+    "form_name" : "EditView",
+    "field_to_name_array" : {
+      "name" : "line_target_cost_center" + ln,
+      "id" : "line_target_cost_center_id" + ln,
+    },
+  };
+  var popupFilter = '&frame_c_advanced='+$("#haa_framework").val();//+"&asset_using_org=Y";
+//http://localhost/handALM/index.php?module=HAA_Codes&action=Popup&mode=single&create=true&field_to_name[]=name
+  open_popup('HAT_Codes', 1000, 850,popupFilter, true, true, popupRequestData);
+}
+
 
 function openUsingOrgPopup(ln){
   lineno=ln;
@@ -457,6 +472,15 @@ if (document.getElementById(tableid + '_head') !== null) {
   "<label id='line_target_using_person_desc" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_USING_PERSON')+"</label>"+
   "<input style='width:103px;' type='text' name='line_target_using_person_desc[" + prodln + "]' id='line_target_using_person_desc" + prodln + "' maxlength='50' value='' title=''>"+
   "</span>"+
+
+  "<span class='input_group ig_cost_center'>"+
+  "<label id='line_cost_center" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_COST_CENTER')+" <span class='required'>*</span></label>"+
+  "<input class='sqsEnabled' style='width:153px;' autocomplete='off' type='text' name='line_target_cost_center[" + prodln + "]' id='line_target_cost_center" + prodln + "' value='' title='' >"+
+  "<input type='hidden' name='line_target_cost_center_id[" + prodln + "]' id='line_target_cost_center_id" + prodln + "' value='' />"+
+  "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openCostCenterPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+  "</span>"+
+
+
       //失效时间
       "<span class='input_group'>"+
       "<label>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_INACTIVE_USING')+" </label>"+
@@ -693,7 +717,7 @@ function resetEditorFields(ln) {
       $("#line_target_using_org"+ln).val("");
       $("#line_target_using_org_id"+ln).val("");
     }
-    if(eventOptions.change_using_org == "EMPTY" || eventOptions.change_using_person) {//判断是否需要清空使用人。另外组织为空人一定为空
+    if(eventOptions.change_using_org == "EMPTY" || eventOptions.change_using_person=="EMPTY") {//判断是否需要清空使用人。另外组织为空人一定为空
       $("#line_target_using_person"+ln).val("");
       $("#line_target_using_person_id"+ln).val("");
       $("#line_target_using_person_desc"+ln).val("");

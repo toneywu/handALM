@@ -371,22 +371,6 @@ array (
           1 => 'campaign_name',
         ),
       ),
-      'lbl_editview_panel2' => 
-      array (
-        0 => 
-        array (
-          0 => '',
-          1 => '',
-        ),
-      ),
-      'lbl_editview_panel3' => 
-      array (
-        0 => 
-        array (
-          0 => '',
-          1 => '',
-        ),
-      ),
     ),
   ),
 );

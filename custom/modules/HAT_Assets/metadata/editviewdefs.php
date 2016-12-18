@@ -323,6 +323,19 @@ array (
             'label' => 'LBL_ATTRIBUTE10',
           ),
         ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute11',
+            'label' => 'LBL_ATTRIBUTE11',
+          ),
+          1 => 
+          array (
+            'name' => 'attribute12',
+            'label' => 'LBL_ATTRIBUTE12',
+          ),
+        ),
       ),
       'lbl_editview_panel7' => 
       array (

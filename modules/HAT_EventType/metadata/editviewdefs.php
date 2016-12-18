@@ -256,6 +256,11 @@ array (
             'label' => 'LBL_CHANGE_RACK_POSITION',
           ),
         ),
+        5=>
+        array(
+          0=>"change_asset_attribute11",
+          1=>"change_asset_attribute12"
+        )
       ),
       'lbl_editview_panel3' => 
       array (

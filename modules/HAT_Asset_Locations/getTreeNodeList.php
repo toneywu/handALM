@@ -33,9 +33,10 @@ if ($_REQUEST['type']=="wo_asset_trans" && isset($_REQUEST['query_id'])) {
 
     //因为存在多个资产事务处理行处理了同一个资产的情况（比如不同资产事务单），因此在结果中需要DISTINCT
         $sel_sub_asset ="SELECT DISTINCT
-                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status
+                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status,hit_racks.id rack_id
                         FROM
-                          hat_assets,
+                          hat_assets
+                          LEFT JOIN hit_racks ON (hit_racks.`hat_assets_id`=hat_assets.id AND hit_racks.`deleted`=0),
                           hat_asset_trans,
                           hat_asset_trans_batch
                         WHERE hat_asset_trans.`deleted` = 0

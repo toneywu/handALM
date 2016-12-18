@@ -284,7 +284,11 @@ if (isset($sel_sub_asset)) {
            $txt_jason .='img:"'.$asset['asset_icon'].'",';
            $txt_jason .='code:"'.$asset['name'].'",';
            $txt_jason .='desc:"'.$asset['asset_desc'].'",';
-           $txt_jason .='rack_id:"'.$asset['rack_id'].'",';
+
+           if (isset($asset['rack_id'])) {
+            $txt_jason .='rack_id:"'.$asset['rack_id'].'",';
+           }
+
            $txt_jason .='status_tag:"color_asset_status_'.$asset['asset_status'].'",';
            $txt_jason .='status:"'.$app_list_strings['hat_asset_status_list'][$asset['asset_status']].'",';
            $txt_jason .='type:"asset"},';
