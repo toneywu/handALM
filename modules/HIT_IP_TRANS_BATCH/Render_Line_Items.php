@@ -14,6 +14,7 @@ function display_lines($focus, $field, $value, $view) {
 		$html .= '<script>insertTransLineHeader(\'lineItems\');</script>';
 		$html .= "<script> var lineData='';</script>";
 
+		
 		/*$sql2 = "(SELECT   hat.source_trans_id id
 							        ,a.name hat_asset_name,a.id hat_assets_id
 							        ,s.name hit_ip_subnets
