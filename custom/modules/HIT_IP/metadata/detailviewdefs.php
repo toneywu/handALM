@@ -76,7 +76,12 @@ array (
         ),
         1 => 
         array (
-          0 => 'name',
+          0 => 
+          array (
+            'name' => 'name',
+            'studio' => 'visible',
+            'label' => 'LBL_IP_C',
+          ),
           1 => 'description',
         ),
       ),

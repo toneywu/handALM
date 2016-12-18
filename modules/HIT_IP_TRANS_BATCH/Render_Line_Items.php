@@ -14,6 +14,7 @@ function display_lines($focus, $field, $value, $view) {
 		$html .= '<script>insertTransLineHeader(\'lineItems\');</script>';
 		$html .= "<script> var lineData='';</script>";
 
+		
 		/*$sql2 = "(SELECT   hat.source_trans_id id
 							        ,a.name hat_asset_name,a.id hat_assets_id
 							        ,s.name hit_ip_subnets
@@ -86,7 +87,7 @@ function display_lines($focus, $field, $value, $view) {
 									,hat.channel_content_backup
 									,hat.channel_num_backup
 									,ifnull(hat.date_start,'') date_start
-									,ifnull(hat.date_end,'') date_end,hat.status,hat.enable_action,hat.broadband_type
+									,ifnull(hat.date_end,'') date_end,hat.status,hat.enable_action,hat.broadband_type,hat.child_port,hat.vlan_channel
 							FROM   hit_ip_trans hat
 							LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
 							LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
@@ -135,7 +136,7 @@ function display_lines($focus, $field, $value, $view) {
 							,hat.channel_content_backup
 							,hat.channel_num_backup
 							,ifnull(hat.date_start,'') date_start
-							,ifnull(hat.date_end,'') date_end ,hat.status,hat.enable_action,hat.broadband_type
+							,ifnull(hat.date_end,'') date_end ,hat.status,hat.enable_action,hat.broadband_type,hat.child_port,hat.vlan_channel
 					FROM   hit_ip_trans hat
 					LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
 					LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
@@ -208,7 +209,7 @@ function display_lines($focus, $field, $value, $view) {
 								,hat.channel_content_backup
 								,hat.channel_num_backup
 								,ifnull(hat.date_start,'') date_start
-								,ifnull(hat.date_end,'') date_end,hat.status,hat.enable_action,hat.broadband_type
+								,ifnull(hat.date_end,'') date_end,hat.status,hat.enable_action,hat.broadband_type,hat.child_port,hat.vlan_channel
 						FROM   hit_ip_trans hat
 						LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
 						LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
@@ -297,7 +298,7 @@ function display_lines($focus, $field, $value, $view) {
 			  ,h.change_monitoring_backup
 			  ,h.change_channel_content_backup
 			  ,h.change_channel_num_backup
-			  ,h.change_status,h.change_access_assets_backup_name,h.change_enable_action,h.change_broadband_type
+			  ,h.change_status,h.change_access_assets_backup_name,h.change_enable_action,h.change_broadband_type,h.change_child_port,h.change_vlan_channel
 			FROM
 			  hat_eventtype h 
 			WHERE h.deleted = 0 

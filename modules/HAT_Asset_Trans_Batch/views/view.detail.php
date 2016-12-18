@@ -39,13 +39,23 @@ class HAT_Asset_Trans_BatchViewDetail extends ViewDetail
            $bean_code = BeanFactory :: getBean('HAT_EventType', $event_type_id);
            $ff_id = $bean_code->haa_ff_id;
 
+/*           if (isset ($ff_id) && $ff_id != "") {
+                echo '<script src="modules/HAA_FF/ff_include.js"></script>';
+                echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="' . $ff_id . '">';
+                echo '<script> function call_ff() {
+                    triger_setFF($("#haa_ff_id").val(),"HAM_SR","DetailView");
+                    $(".expandLink").click();*/
+
+			//add by yuan.chen
+			echo "<input type='hidden' id='hat_eventtype_id' name='hat_eventtype_id' value='".$this->bean->hat_eventtype_id."'/>";
            if (isset ($ff_id) && $ff_id != "") {
+			   echo "<input type='hidden' id='source_wo_id_val' name='source_wo_id_val' value='".$this->bean->source_wo_id."'/>";
+	           echo "<input type='hidden' id='source_woop_id_val' name='source_woop_id_val' value='".$this->bean->source_woop_id."'/>";
                 echo '<script src="modules/HAA_FF/ff_include.js"></script>';
                 echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="' . $ff_id . '">';
                 echo '<script> function call_ff() {
                     triger_setFF($("#haa_ff_id").val(),"HAM_SR","DetailView");
                     $(".expandLink").click();
-
                 }</script>';
                 echo '<script>call_ff()</script>';
             }

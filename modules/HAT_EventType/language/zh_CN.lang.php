@@ -127,5 +127,7 @@ $mod_strings = array (
   'LBL_CHECK_CUSTOMER_HOLD_T_USING'=>'检查目标使用组织暂挂状态',
   'LBL_CHECK_CUSTOMER_HOLD_C_OWNING'=>'检查当前所属组织暂挂状态',
   'LBL_EDITVIEW_PANEL1'=>'状态变化',
-  'LBL_EDITVIEW_PANEL2'=>'管理与位置跟踪'
+  'LBL_EDITVIEW_PANEL2'=>'管理与位置跟踪',
+  'LBL_CHANGE_CHILD_PORT'=>'可修改子端口',
+  'LBL_CHANGE_VLAN_CHANNEL'=>'可修改VLAN通道',
 );

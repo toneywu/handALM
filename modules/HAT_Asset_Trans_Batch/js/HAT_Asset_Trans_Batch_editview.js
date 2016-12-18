@@ -3,8 +3,9 @@ $.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
 $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); // MessageBox
 $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
 function call_ff() {
-    triger_setFF($("#haa_ff_id").val(),"HIT_IP_TRANS_BATCH");
+    triger_setFF($("#haa_ff_id").val(),"HAT_Asset_Trans_Batch");
     $(".expandLink").click();
+	console.log($("#haa_ff_id").val());
 }
 
 var prodln = 0;
@@ -12,7 +13,12 @@ var global_eventOptions;
 
 function setEventTypePopupReturn(popupReplyData){
 	set_return(popupReplyData);
+	console.log(popupReplyData);
+	
 	setEventTypeFields();
+	$("#haa_ff_id").val(popupReplyData.name_to_value_array.haa_ff_id);
+	triger_setFF($("#haa_ff_id").val(),"HAT_Asset_Trans_Batch");
+    $(".expandLink").click();
 }
 
 
@@ -299,7 +305,7 @@ function preValidateFunction(async_bool = false) {
 		if(error_msg!=="S"&&error_msg!=""){
 			return;
 		}
-		var ip_array= new Array();
+		/*var ip_array= new Array();
 		$("input[id^='line_hit_ip_subnets_id']").each(function(){
 			id_name =  $(this).attr("id");
 			id_index = id_name.split("line_hit_ip_subnets_id")[1];
@@ -322,6 +328,30 @@ function preValidateFunction(async_bool = false) {
 		}else{
 			result=true;
 		}
+		*/
+		
+		//欠费
+		var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());
+
+		if ($("#asset_trans_status").val()=="SUBMITTED"||$("#asset_trans_status").val()=="APPROVED") {//如果是提交状态，进行客户信息检查
+			if (global_eventOptions.check_customer_hold_c_owning == "1"){
+			//针对当前使用组织进行信息检查，如在报废或移出资产前确认，当前资产的拥有方是否有欠费行为
+				var ajaxStr='mode=accounthold&val='+$("#name").val()+'&id=' + $("#current_owning_org_id").val();
+				var errMSG = SUGAR.language.get('app_strings', 'LBL_CUSTOMER_HOLD_ERR');
+				result= FFCheckField('current_owning_org',ajaxStr,errMSG,async_bool);
+			}
+			//针对当前的目前使用组织进行检查，如在分配资产前确认当前用户是否有不良信用。
+			//因为FFCheckField会将已经的错误清除，所以如果当前已经报错（Result=false)就不再继续进行额外的校验了。
+			if (result==false && global_eventOptions.check_customer_hold_c_owning == "1"){
+				console.log("ddd");
+				var ajaxStr='mode=accounthold&val='+$("#name").val()+'&id=' + $("#target_using_org_id").val();
+				var errMSG = SUGAR.language.get('app_strings', 'LBL_CUSTOMER_HOLD_ERR');
+				result= FFCheckField('target_using_org',ajaxStr,errMSG,async_bool);
+			}
+
+		}
+		//End欠费
+		
 		return result
 }
 	
@@ -330,7 +360,11 @@ $(document).ready(function(){
 	SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
 		OverwriteSaveBtn(preValidateFunction);//注意引用时不加（）
 	});
-	
+	   $("#asset_trans_status option[value='SUBMITTED']").remove();
+        $("#asset_trans_status option[value='REJECTED']").remove();
+        $("#asset_trans_status option[value='CANCELED']").remove();
+        $("#asset_trans_status option[value='CLOSED']").remove();
+        $("#asset_trans_status option[value='TRANSACTED']").remove();
 	
 	
 	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个

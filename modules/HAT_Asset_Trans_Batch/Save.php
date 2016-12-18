@@ -17,7 +17,7 @@ else {
 require_once('include/formbase.php');
      //add by yuan.chen  2016-12-07
      //需要事先判断 当前头状态是否从非已批准变为已批准 如果是的话 做后续erp资产调拨操作
-    $current_header_id = $_POST['record'];
+    /*$current_header_id = $_POST['record'];
 	$need_allocation="N";
 	//如果是新增 但是状态直接是提交 那么也当成需要完成资产调拨 满足条件1
 	if(empty($current_header_id)&&($_POST['asset_trans_status']=="SUBMITTED")){
@@ -32,14 +32,17 @@ require_once('include/formbase.php');
 				$need_allocation="Y";
 			}
 		}
-	}
+	}*/
 
 
 //end by yuan.chen
 
+$save_header_status = $sugarbean->asset_trans_status;
 
 $return_id = save_header($sugarbean, $check_notify);//保存头
+
 save_lines($_POST, $sugarbean, 'line_',$need_allocation);//保存行
+
 
 //目前在审批后立即就结束，但未来可以支持2步确认。
 //因此代码在此预留
@@ -48,8 +51,11 @@ if ($sugarbean->asset_trans_status=="APPROVED") {
     $sugarbean->save();//再调用一次，为了触发AfterSave,确认是否需要将头彻底关闭
 }
 
+	$sugarbean->asset_trans_status == $_POST['asset_trans_status'];
+    $sugarbean->save();//再调用一次，为了触发AfterSave,确认是否需要将头彻底关闭
+
 handleRedirect($return_id, 'HAT_Asset_Trans_Batch');
-die;
+
 //****************** END: Jump Back *************************************************************//
 
 //**************
@@ -67,9 +73,9 @@ function save_header($sugarbean, $check_notify) {
 
     $sugarbean = populateFromPost('', $sugarbean);//调用populateFromPost写入POST的数据
     $sugarbean->asset_trans_status =  check_hearder_status($sugarbean);
+	
     $sugarbean->save($check_notify);
     $return_id = $sugarbean->id;
-
     $GLOBALS['log']->debug("OK.Saved HAT_Asset_Trans_Batch record with id of ".$return_id);
     echo("OK.Saved HAT_Asset_Trans_Batch record with id of ".$return_id);
 
@@ -80,7 +86,6 @@ function save_header($sugarbean, $check_notify) {
     else{
         $base_header_id = $sugarbean->id;
     }
-
     return $return_id;
 
 }
@@ -88,7 +93,9 @@ function save_header($sugarbean, $check_notify) {
 
 
 function check_hearder_status($sugarbean) {
-    if ($sugarbean->asset_trans_status == "SUBMITTED") {
+	echo "status = ".$sugarbean->asset_trans_status."<br>";
+	//modified  by yuan.chen 2016-12-17
+    if ($sugarbean->asset_trans_status == "SUBMITTED"||$sugarbean->asset_trans_status == "APPROVED") {
         return "APPROVED"; //目前是直接返回值，未来可以在此处加工作流信息
     }
 }
@@ -146,14 +153,14 @@ function save_lines($post_data, $parent, $key = '',$need_allocation){
 
 
 				//触发ERP资产调拨
-				erp_asset_allocation($trans_line->asset_id,
+				/*erp_asset_allocation($trans_line->asset_id,
 									 $trans_line->target_owning_org_id,
 									 $trans_line->target_location_id,
 									 $trans_line->target_location_desc,
 									 $need_allocation,
 									 $trans_line->id,
 									 $trans_line->target_owning_org,
-									 $trans_line->target_location);
+									 $trans_line->target_location);*/
 
                 //在新增或修改模式下，
                 //可以进一步的对资产信息进行修改
@@ -282,8 +289,6 @@ function save_asset_lines($focus){
 function save_rack_allocations($focus, $parent){
     //这里需要进行区分，如果当前的设备是IT设备是一种处理方式，如果当前资产是机柜则是另一种处理方式
     $beanAsset = BeanFactory::getBean('HAT_Assets', $focus->asset_id);
-
-
     if ($beanAsset && $beanAsset->enable_it_ports == 1 && $beanAsset->enable_it_rack == 0) { // test if $bean was loaded successfully
         //如果当前为IT设备，则为当前IT设备进行分配。
         $RackAllocation = BeanFactory::getBean('HIT_Rack_Allocations') ->retrieve_by_string_fields(array('hit_rack_allocations.hat_assets_id'=> $focus->asset_id));
@@ -340,7 +345,7 @@ function save_rack_allocations($focus, $parent){
                 }elseif ($key->id!="") {
                     $RackAllocation = BeanFactory::getBean('HIT_Rack_Allocations', $key->id);
                 }
-
+/*
                 $Rack = BeanFactory::getBean('HIT_Racks') ->retrieve_by_string_fields(array('hit_racks.`hat_assets_id'=> $focus->asset_id));
 
                 $RackAllocation->hit_racks_id = $Rack->id;
@@ -360,9 +365,27 @@ function save_rack_allocations($focus, $parent){
     }
 
 }
+*/
+                $Rack = BeanFactory::getBean('HIT_Racks') ->retrieve_by_string_fields(array('hit_racks.`hat_assets_id'=> $focus->asset_id));
+
+                $RackAllocation->hit_racks_id = $Rack->id;
+                $RackAllocation->name = $key->asset_name;
+                $RackAllocation->hat_assets_id = $key->asset_id;
+                $RackAllocation->rack_pos_top = $key->rack_pos_top;
+                $RackAllocation->height = $key->height;
+                $RackAllocation->rack_pos_depth = $key->rack_pos_depth;
+                $RackAllocation->sync_parent_enabled = true;
+                $RackAllocation->placeholder = false;
+                $RackAllocation->description = $parent->name;
+                $RackAllocation->save();
+
+                echo "\nrack saved";
+            }//END IF非删除
+        }//END FOR 循环下一行机柜信息
+    }
 
 
-function erp_asset_allocation($asset_id,
+/*function erp_asset_allocation($asset_id,
 							  $target_owning_org_id,
 							  $target_location_id,
 							  $target_location_desc,
@@ -395,5 +418,6 @@ function erp_asset_allocation($asset_id,
 		}
 	}
 
+*/
 }
 ?>

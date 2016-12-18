@@ -9,6 +9,7 @@ var global_eventOptions;
 function setEventTypePopupReturn(popupReplyData){
 	set_return(popupReplyData);
 	setEventTypeFields();
+	call_ff();
 }
 
 
@@ -40,6 +41,7 @@ function setTargetOwningOrgPopupReturn(popupReplyData){
 
 
 function setEventTypeFields() {
+	console.log("setEventTypeFields = "+$("#hat_eventtype_id").val());
 	$.ajax({//
 		url: 'index.php?to_pdf=true&module=HAT_EventType&action=getTransSetting&id=' + $("#hat_eventtype_id").val(),//e74a5e34-906f-0590-d914-57cbe0e5ae89
 		async: false,
@@ -146,6 +148,15 @@ $(document).ready(function(){
 	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
 		$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');
 	}
+	
+	    $("#asset_trans_status option[value='SUBMITTED']").remove();
+        $("#asset_trans_status option[value='REJECTED']").remove();
+        $("#asset_trans_status option[value='CANCELED']").remove();
+        $("#asset_trans_status option[value='CLOSED']").remove();
+        $("#asset_trans_status option[value='TRANSACTED']").remove();
+        
+	
+	
 	//触发FF
 	SUGAR.util.doWhen("typeof setFF == 'function'", function(){
 		call_ff();

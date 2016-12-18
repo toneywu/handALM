@@ -149,8 +149,8 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
             //默认当前人员信息到负责部门与人员
             $this->bean->owner_contacts = $current_user->linked_contact_c;
             $this->bean->owner_id = $current_user->contact_id_c;
-            $this->bean->current_owning_org_id = $current_user->account_id_c;
-            $this->bean->current_owning_org = $current_user->contact_organization_c;
+            //$this->bean->current_owning_org_id = $current_user->account_id_c;
+            //$this->bean->current_owning_org = $current_user->contact_organization_c;
             $this->bean->source_woop_id= "";
             $this->bean->source_wo_id="";
         }

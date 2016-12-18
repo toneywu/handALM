@@ -10,7 +10,7 @@ $ham_wo_bean = BeanFactory::getBean('HIT_IP_TRANS_BATCH',$current_id);
 $current_status = $ham_wo_bean->wo_status;
 echo '<select name='.'"asset_trans_status"'.' id="asset_trans_status"'.'>';
 foreach($app_list_strings['asset_trans_status'] as $key=>$value){
-	if($key!="DRAFT"||$key!=$current_status){
+	if($key=="SUBMITTED"||$key=="APPROVED"){
 		echo '<option value="'.$key.'">'.$value.'</option>';
 	}
 	

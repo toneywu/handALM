@@ -129,4 +129,6 @@ $mod_strings = array (
   'LBL_CHANGE_BROADBAND_TYPE'=>'Change Brandband Type',
   'LBL_CHECK_CUSTOMER_HOLD_T_USING'=>'Check Target Using Org. Hold',
   'LBL_CHECK_CUSTOMER_HOLD_C_OWNING'=>'Check Current Owning Org. Hold',
+  'LBL_CHANGE_CHILD_PORT'=>'Change Child Port',
+  'LBL_CHANGE_VLAN_CHANNEL'=>'Change VLAN Channel',
 );

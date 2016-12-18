@@ -7,6 +7,8 @@ class HAM_WOViewList extends ViewList
   function Display() {
     global $app_list_strings;
     $this->ss->assign('APP_LIST', $app_list_strings);
+
+	echo '<script src="modules/HAM_WO/js/HAM_WO_listview.js"></script>';
     parent::Display();
   }
 

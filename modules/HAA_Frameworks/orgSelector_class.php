@@ -98,6 +98,46 @@ function set_site_selector($bean_site_id,$current_module,$current_action,$vardef
             $beanSite = BeanFactory::getBean('HAM_Maint_Sites',$bean_site_id);
             $html .='<input type="hidden" name="'.$vardef_site_id_name.'" id="'.$vardef_site_id_name.'" value="'.$bean_site_id .'">';
             $html .=$beanSite->name;
+			if($current_module=="HAM_WO"&&$current_action=="EditView"){
+				$html="";
+				
+				//add by yuan.chen 2016-12-16
+				//从Session加载Business Framework字段的值
+                $beanSite = BeanFactory::getBean('HAM_Maint_Sites');
+                $beanSiteList = $beanSite ->get_full_list('name',"ham_maint_sites.haa_frameworks_id='".$_SESSION["current_framework"]."'");
+                if(! isset($beanSiteList)) {
+                    $beanSiteList = array();
+                    $html = "ERROR: Site list not found";
+                }
+				
+				
+                //$bean_site_id=empty($_SESSION['current_site'])?"":$_SESSION['current_site'];
+				
+                $html = "<select id='site_select' name='site_select'>";
+
+                for($i=0; $i<count($beanSiteList); $i++) {
+                    $the_site = $beanSiteList[$i];
+					
+                    if ($bean_site_id==$the_site->id) {
+                        $html .= "<option value='".$the_site->id."' selected='selected'>".$the_site->name."</option>";
+                    } else {
+                        $html .= "<option value='".$the_site->id."'>".$the_site->name."</option>";
+                    }
+                    if($the_site->id = $_SESSION['current_site']) {
+                        //TODO
+                    }
+
+                }
+                $html .="</select>";
+				$html .='<input type="hidden" name="'.$vardef_site_id_name.'" id="'.$vardef_site_id_name.'" value="'.$bean_site_id .'">';
+                $html .='<script>$("#site_select").change(function(){$("#'.$vardef_site_id_name.'").val($(this).val())})</script>';
+				//end
+				
+				
+				
+				
+				
+			}
         }
 
         return $html;

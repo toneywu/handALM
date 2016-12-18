@@ -21,20 +21,6 @@ function insertTransLineHeader(tableid){
   var a=x.insertCell(0);
   a.innerHTML='#';//SUGAR.language.get('HAT_Asset_Trans', 'LBL_TRANS_STATUS');
   var b=x.insertCell(1);
-//  b.innerHTML=SUGAR.language.get('HAT_Asset_Trans', 'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE');
-//  var b1=x.insertCell(2);
-//  b1.innerHTML=SUGAR.language.get('HAT_Asset_Trans', 'LBL_NAME');
-//  var c=x.insertCell(3);
-//  c.innerHTML=SUGAR.language.get('HAT_Asset_Trans_Batch', 'LBL_TARGET_ASSET_STATUS');
-//  var d=x.insertCell(4);
-//  d.innerHTML=SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_RESPONSIBLE_CENTER');
-//  var e=x.insertCell(5);
-//  e.innerHTML=SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_RESPONSIBLE_PERSON');
-//  var f=x.insertCell(6);
-//  f.innerHTML=SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_LOCATION');
-//  var g=x.insertCell(7);
-//  g.innerHTML=SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_LOCATION_DESC');
-//  var h=x.insertCell(8);
   b.innerHTML="<span id='line_parent_ip_title'>C段</span>";
   var b1=x.insertCell(2);
   b1.innerHTML="<span id='line_hit_ip_subnets_title'>网段</span>";
@@ -55,31 +41,37 @@ function insertTransLineHeader(tableid){
   g.innerHTML="<span id='line_port_title'>端口(主)</span>";
   var g2=x.insertCell(10);
   g2.innerHTML="<span id='line_port_backup_title'>端口(备)</span>";
-  var f=x.insertCell(11);
+  //add by yuan.chen
+  var g3=x.insertCell(11);
+  g3.innerHTML="<span id='line_child_port_title'>子端口</span>";
+  var g4=x.insertCell(12);
+  g4.innerHTML="<span id='line_vlan_channel_title'>VLAN通道</span>";
+  
+  var f=x.insertCell(13);
   f.innerHTML="<span id='line_bandwidth_type_title'>带宽类型</span>"; 
-  var i=x.insertCell(12);
+  var i=x.insertCell(14);
   i.innerHTML="<span id='line_speed_limit_title'>限速</span>";
-  var k=x.insertCell(13);
+  var k=x.insertCell(15);
   k.innerHTML="<span id='line_hat_assets_cabinet_title'>机柜</span>";
-  var l=x.insertCell(14);
+  var l=x.insertCell(16);
   l.innerHTML="<span id='line_monitoring_title'>监控链接(主)</span>";
-  var l2=x.insertCell(15);
+  var l2=x.insertCell(17);
   l2.innerHTML="<span id='line_monitoring_backup_title'>监控链接(备)</span>";
-  var o=x.insertCell(16);
+  var o=x.insertCell(18);
   o.innerHTML="<span id='line_mrtg_link_title'>MRTG 链接</span>";
-  var m=x.insertCell(17);
+  var m=x.insertCell(19);
   m.innerHTML="<span id='line_channel_num_title'>频道号(主)</span>";
-  var m2=x.insertCell(18);
+  var m2=x.insertCell(20);
   m2.innerHTML="<span id='line_channel_num_backup_title'>频道号(备)</span>";
-  var n=x.insertCell(19);
+  var n=x.insertCell(21);
   n.innerHTML="<span id='line_channel_content_title'>频道内容(主)</span>";
-  var n2=x.insertCell(20);
+  var n2=x.insertCell(22);
   n2.innerHTML="<span id='line_channel_content_backup_title'>频道内容(备)</span>"
-  var n3=x.insertCell(21);
+  var n3=x.insertCell(23);
   n3.innerHTML="<span id='line_date_start_title'>占用起始时间</span>"
-  var n4=x.insertCell(22);
+  var n4=x.insertCell(24);
   n4.innerHTML="<span id='line_date_end_title'>占用终止时间</span>";
-  var e3=x.insertCell(23);
+  var e3=x.insertCell(25);
   e3.innerHTML="<span id='line_enable_action_title'>失效</span>";
   
   var e2=x.insertCell(24);
@@ -132,6 +124,8 @@ function insertLineData(asset_trans_line ){ //将数据写入到对应的行字�
     $("#line_date_end".concat(String(ln))).val(asset_trans_line.date_end);
     $("#line_enable_action".concat(String(ln))).val(asset_trans_line.enable_action);
     $("#line_broadband_type".concat(String(ln))).val(asset_trans_line.broadband_type);
+	$("#line_child_port".concat(String(ln))).val(asset_trans_line.child_port);
+	$("#line_vlan_channel".concat(String(ln))).val(asset_trans_line.vlan_channel);
     renderTransLine(ln);
   }
 }
@@ -201,6 +195,8 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<td><span name='displayed_line_access_assets_backup_name[" + prodln + "]' id='displayed_line_access_assets_backup_name" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_port[" + prodln + "]' id='displayed_line_port" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_port_backup[" + prodln + "]' id='displayed_line_port_backup" + prodln + "'></span></td>"+
+	  "<td><span name='displayed_line_child_port[" + prodln + "]' id='displayed_line_child_port" + prodln + "'></span></td>"+
+	  "<td><span name='displayed_line_vlan_channel[" + prodln + "]' id='displayed_line_vlan_channel" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_bandwidth_type[" + prodln + "]' id='displayed_line_bandwidth_type" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_speed_limit[" + prodln + "]' id='displayed_line_speed_limit" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_hat_assets_cabinet[" + prodln + "]' id='displayed_line_hat_assets_cabinet" + prodln + "'></span></td>"+
@@ -276,6 +272,16 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<span class='input_group'>"+
       "<label>"+"端口(备)"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_port_backup[" + prodln + "]' id='line_port_backup" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
+	  //子端口
+      "<span class='input_group'>"+
+      "<label>"+"子端口"+"</label>"+
+      "<input style=' width:153px;' type='text' name='line_child_port[" + prodln + "]' id='line_child_port" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
+	  //vlan通道
+      "<span class='input_group'>"+
+      "<label>"+"VLAN通道"+"</label>"+
+      "<input style=' width:153px;' type='text' name='line_vlan_channel[" + prodln + "]' id='line_vlan_channel" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
       //限速
       "<span class='input_group'>"+
@@ -433,6 +439,8 @@ function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_line_date_start"+ln).html($("#line_date_start"+ln).val());
   $("#displayed_line_date_end"+ln).html($("#line_date_end"+ln).val());
   $("#displayed_line_broadband_type"+ln).html($("#line_broadband_type"+ln).val());
+  $("#displayed_line_child_port"+ln).html($("#line_child_port"+ln).val());
+  $("#displayed_line_vlan_channel"+ln).html($("#line_vlan_channel"+ln).val());
   
   if ($("#line_enable_action"+ln).val()=="0") {
     $("#displayed_line_enable_action"+ln).attr("checked",true);
@@ -595,6 +603,8 @@ function markLineDeleted(ln, key) {//删除当前行
     removeFromValidate('EditView','line_date_start'+ ln);
     removeFromValidate('EditView','line_date_end'+ ln);
     removeFromValidate('EditView','line_broadband_type'+ ln);
+	removeFromValidate('EditView','line_child_port'+ ln);
+	removeFromValidate('EditView','line_vlan_channel'+ ln);
   }
   resetLineNum();
 

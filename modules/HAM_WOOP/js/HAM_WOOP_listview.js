@@ -15,3 +15,19 @@
 	});
 	
 }
+
+
+$(document).ready(function(){
+		    
+	        $("#woop_status option[value='REJECTED']").remove();
+	        $("#woop_status option[value='WORKING']").remove();
+	        $("#woop_status option[value='TRANSACTED']").remove();
+	        $("#woop_status option[value='WSCH']").remove();
+	        $("#woop_status option[value='WMATL']").remove();
+	        $("#woop_status option[value='WPCOND']").remove();
+	        $("#woop_status option[value='INPRG']").remove();
+	        $("#woop_status option[value='RELEASED']").remove();
+	        $("#woop_status option[value='CANCELED']").remove();
+	        $("#woop_status option[value='REWORK']").remove();
+	        $("#woop_status option[value='RETURNED']").remove();
+})

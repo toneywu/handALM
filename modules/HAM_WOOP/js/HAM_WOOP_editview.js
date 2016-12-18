@@ -32,7 +32,7 @@ function require_field(){
 
 
 function preValidateFunction(async_bool = false) {
-		///但如果是SAVE按钮的触发，一定要async=false(保持默认)
+		//但如果是SAVE按钮的触发，一定要async=false(保持默认)
 	//console.log('index.php?to_pdf=true&module=HAM_WOOP&action=getTransStatus&ham_wo_id='+$("#ham_wo_id").val()+'&act_module='+$("#act_module").val()+"&woop_number="+$("#woop_number").val());
 	var return_flag=true;
 	$.ajax({
@@ -446,12 +446,13 @@ function date_finish_change(){
 	        setEditViewByStatus ();
 	        
 	    } else if ((current_header_status=="APPROVED")||(current_header_status=="RELEASED")) { //可以CANCEL,COMPLETED
-	        /*$("#wo_status option[value='SUBMITTED']").remove();
+	        $("#wo_status option[value='SUBMITTED']").remove();
 	        $("#wo_status option[value='REJECTED']").remove();
 	        $("#wo_status option[value='RELEASED']").remove();        
 	        $("#wo_status option[value='DRAFT']").remove();
 	        $("#wo_status option[value='CLOSED']").remove();
-	        $("#wo_status option[value='TRANSACTED']").remove();*/
+	        $("#wo_status option[value='TRANSACTED']").remove();
+			
 	    	$("#woop_status option[value='RELEASED']").remove();        
 	    	$("#woop_status option[value='REJECTED']").remove();
 	    	$("#woop_status option[value='DRAFT']").remove();
@@ -460,6 +461,14 @@ function date_finish_change(){
 	    	$("#woop_status option[value='REWORK']").remove();
 	        $("#woop_status option[value='WPREV']").remove();
 	        $("#woop_status option[value='RETURNED']").remove();
+<<<<<<< HEAD
+=======
+			$("#woop_status option[value='WSCH']").remove();
+	        $("#woop_status option[value='WMATL']").remove();
+	        $("#woop_status option[value='WPCOND']").remove();
+			$("#woop_status option[value='INPRG']").remove();
+			$("#woop_status option[value='CANCELED']").remove();
+>>>>>>> 74c201e4fee1e4808baf6ff42cd59cdb930dcda3
 
 	        setEditViewByStatus ();
 	    } else if ((current_header_status=="CANCELED")) { //什么也不能做
