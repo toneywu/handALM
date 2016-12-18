@@ -7,7 +7,10 @@ class HAA_FrameworksController extends SugarController
 		if (isset($_REQUEST['framework_id'])){
 			$_SESSION["current_framework"]=$_REQUEST['framework_id'];
 			//将当前的framework_id写入Session
-
+			$bean_framework=BeanFactory::getBean('HAA_Frameworks',$_REQUEST['framework_id']);
+			if ($bean_framework) {
+				$_SESSION["current_framework_code"]=$bean_framework->code;
+			}
 			$Bean_list = BeanFactory::getBean('HAM_Maint_Sites')->get_full_list("name","ham_maint_sites.haa_frameworks_id='".$_REQUEST['framework_id']."'");
 			$site_field = "";
 
@@ -18,7 +21,7 @@ class HAA_FrameworksController extends SugarController
 	            }
 	            echo($site_field);
 	        }
-    	}
+	    }
 
 	}
 
@@ -26,7 +29,7 @@ class HAA_FrameworksController extends SugarController
 		if (isset($_REQUEST['site_id'])){
 			$_SESSION["current_site"]=$_REQUEST['site_id'];
 			//将当前的site_id写入Session
-    	}
+		}
 
 	}
 

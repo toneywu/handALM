@@ -91,6 +91,20 @@ array (
           0 => 'name',
           1 => 
           array (
+            'name' => 'organization',
+            'label' => 'LBL_ORGANIZATION',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'parent_name',
+            'studio' => 'visible',
+            'label' => 'LBL_FLEX_RELATE',
+          ),
+          1 => 
+          array (
             'name' => 'insurance_subtype',
             'studio' => 'visible',
             'label' => 'LBL_INSURANCE_SUBTYPE',
@@ -100,7 +114,7 @@ array (
             ),
           ),
         ),
-        1 => 
+        2 => 
         array (
           0 => 
           array (
@@ -113,22 +127,14 @@ array (
             'label' => 'LBL_END_DATE',
           ),
         ),
-        2 => 
+        3 => 
         array (
           0 => 
-          array (
-            'name' => 'organization',
-            'label' => 'LBL_ORGANIZATION',
-          ),
-          1 => 
           array (
             'name' => 'insured_person',
             'label' => 'LBL_INSURED_PERSON',
           ),
-        ),
-        3 => 
-        array (
-          0 => 
+          1 => 
           array (
             'name' => 'first_beneficiary',
             'studio' => 'visible',
@@ -138,7 +144,11 @@ array (
               'initial_filter' => '&org_type_c_advanced=external',
             ),
           ),
-          1 => 'description',
+        ),
+        4 => 
+        array (
+          0 => 'description',
+          1 => '',
         ),
       ),
       'lbl_editview_panel3' => 

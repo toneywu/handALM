@@ -110,4 +110,5 @@ $mod_strings = array (
   'LBL_REPAIR_COST'=>'维修费用',
   'LBL_OTHER_REPAIR_COST'=>'对方维修费用',
   'LBL_NEW_LINE'=>'添加明细',
+  'LBL_CREATE_REVENUE'=>'创建收支项'
 );

@@ -100,4 +100,5 @@ $mod_strings = array (
   'LBL_ATTRIBUTE10' => '附加信息10',
   'LNK_IMPORT_HAOS_INSURANCE_CLAIMS' => '导入 保险理赔',
   'LBL_HAOS_INSURANCE_CLAIMS_SUBPANEL_TITLE' => '保险理赔',
+  'LBL_CREATE_REVENUE'=>'创建收支项'
 );

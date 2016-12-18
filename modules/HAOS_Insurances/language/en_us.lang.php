@@ -95,4 +95,5 @@ $mod_strings = array (
   'LBL_ATTRIBUTE10' => '预留字段10',
   'LNK_IMPORT_HAOS_INSURANCES' => '导入 保险管理',
   'LBL_HAOS_INSURANCES_SUBPANEL_TITLE' => '保险管理',
+  'LBL_FLEX_RELATE' =>'对象',
 );

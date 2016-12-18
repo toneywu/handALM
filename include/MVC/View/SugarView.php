@@ -1038,7 +1038,10 @@ EOHTML;
      */
     protected function _displaySubPanels()
     {
-        if (isset($this->bean) && !empty($this->bean->id) && (file_exists('modules/' . $this->module . '/metadata/subpaneldefs.php') || file_exists('custom/modules/' . $this->module . '/metadata/subpaneldefs.php') || file_exists('custom/modules/' . $this->module . '/Ext/Layoutdefs/layoutdefs.ext.php'))) {
+        //Modefy instance by zengchen 20161214 
+        $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+        if (isset($this->bean) && !empty($this->bean->id) && (file_exists('modules/' . $this->module . '/metadata/subpaneldefs.php') || file_exists('custom/modules/' . $this->module . '/metadata/subpaneldefs.php') || file_exists('custom/modules/' . $this->module . '/Ext/Layoutdefs/layoutdefs.ext.php')||file_exists($instance_loc.'modules/'. $this->module . '/metadata/subpaneldefs.php')||file_exists($instance_loc.'modules/' . $this->module . '/Ext/Layoutdefs/layoutdefs.ext.php'))) {
+            //Modefy instance by zengchen 20161214 End
             $GLOBALS['focus'] = $this->bean;
             require_once ('include/SubPanel/SubPanelTiles.php');
             $subpanel = new SubPanelTiles($this->bean, $this->module);
@@ -1231,9 +1234,16 @@ EOHTML;
         if (file_exists('custom/modules/' . $module . '/Ext/Menus/menu.ext.php')) {
             require('custom/modules/' . $module . '/Ext/Menus/menu.ext.php');
         }
+        $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+        //Add instance by zengchen 20161214 
+        if (file_exists($instance_loc.'modules/'. $module . '/Ext/Menus/menu.ext.php')) {
+            require($instance_loc.'modules/'. $module . '/Ext/Menus/menu.ext.php');
+        }
+        //Add instance by zengchen 20161214 End
         if (!file_exists('modules/' . $module . '/Menu.php')
                 && !file_exists('custom/modules/' . $module . '/Ext/Menus/menu.ext.php')
-                && !empty($GLOBALS['mod_strings']['LNK_NEW_RECORD'])) {
+                && !empty($GLOBALS['mod_strings']['LNK_NEW_RECORD'])
+                && !file_exists('custom/modules/' . $module . '/Ext/Menus/menu.ext.php')) {
             $module_menu[] = array("index.php?module=$module&action=EditView&return_module=$module&return_action=DetailView",
                 $GLOBALS['mod_strings']['LNK_NEW_RECORD'],"{$GLOBALS['app_strings']['LBL_CREATE_BUTTON_LABEL']}$module" ,$module );
             $module_menu[] = array("index.php?module=$module&action=index", $GLOBALS['mod_strings']['LNK_LIST'],
@@ -1249,7 +1259,11 @@ EOHTML;
         if (file_exists('custom/application/Ext/Menus/menu.ext.php')) {
             require('custom/application/Ext/Menus/menu.ext.php');
         }
-
+        //Add instance by zengchen 20161214
+        if (file_exists($instance_loc.'application/Ext/Menus/menu.ext.php')) {
+            require($instance_loc.'application/Ext/Menus/menu.ext.php');
+        }
+  //Add instance by zengchen 20161214 End
         $mod_strings = $curr_mod_strings;
         $builtModuleMenu = $module_menu;
         unset($module_menu);
@@ -1363,7 +1377,8 @@ EOHTML;
         $metadataFile = null;
         $foundViewDefs = false;
         $viewDef = strtolower($this->type) . 'viewdefs';
-        $coreMetaPath = 'modules/'.$this->module.'/metadata/' . $viewDef . '.php';
+           //Modefied by zengchen 20161214
+        /*$coreMetaPath = 'modules/'.$this->module.'/metadata/' . $viewDef . '.php';
         if(file_exists('custom/' .$coreMetaPath )){
             $metadataFile = 'custom/' . $coreMetaPath;
             $foundViewDefs = true;
@@ -1381,8 +1396,40 @@ EOHTML;
                     $foundViewDefs = true;
                 }
             }
+        }*/
+         $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+        $coreMetaPath = 'modules/'.$this->module.'/metadata/'.$viewDef.'.php';
+        if (file_exists($instance_loc.$coreMetaPath)) {
+            $metadataFile=$instance_loc.$coreMetaPath;
+            $foundViewDefs=true;
+        }else{
+            if (file_exists("custom/".$coreMetaPath)) {
+                $metadataFile="custom/".$coreMetaPath;
+                $foundViewDefs=true;
+            }else{
+                if(file_exists('custom/modules/'.$this->module.'/metadata/metafiles.php')){
+                    require_once('custom/modules/'.$this->module.'/metadata/metafiles.php');
+                    if(!empty($metafiles[$this->module][$viewDef])){
+                        $metadataFile = $metafiles[$this->module][$viewDef];
+                        $foundViewDefs = true;
+                    }
+                }else if(file_exists('modules/'.$this->module.'/metadata/metafiles.php')){
+                    require_once('modules/'.$this->module.'/metadata/metafiles.php');
+                    if(!empty($metafiles[$this->module][$viewDef])){
+                        $metadataFile = $metafiles[$this->module][$viewDef];
+                        $foundViewDefs = true;
+                    }
+                }
+            }
+            if (file_exists($instance_loc.'modules/'.$this->module.'/metadata/metafiles.php')) {
+                require_once($instance_loc.'modules/'.$this->module.'/metadata/metafiles.php');
+                if (!empty($metafiles[$this->module][$viewDef])) {
+                    $metadataFile = $metafiles[$this->module][$viewDef];
+                    $foundViewDefs = true;
+                }
+            }
         }
-
+        //End modefied by zengchen 20161214
         if(!$foundViewDefs && file_exists($coreMetaPath)){
                 $metadataFile = $coreMetaPath;
         }

@@ -16,6 +16,7 @@ class HAT_AssetsViewList extends ViewList
 function processSearchForm(){
   parent::processSearchForm();
   $haa_frameworks_id=$_SESSION["current_framework"];
+
   if ($this->where) {
     $this->where.=" and haa_frameworks_id='".$haa_frameworks_id."'";
   }else{

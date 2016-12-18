@@ -87,18 +87,24 @@ $app_list_strings['haor_report_type']=array (
 
 
 $app_list_strings['moduleList']['AOS_Invoices'] = 'Invoices';
+$app_list_strings['parent_type_display'] =array (
+	'Accounts' => 'Account',
+	'Contacts' => 'Contact',
+	'Tasks' => 'Task',
+	'Opportunities' => 'Opportunity',
 
+	'Bugs' => 'Bug',
+	'Cases' => 'Case',
+	'Leads' => 'Lead',
 
-$GLOBALS['app_list_strings']['settlement_period_list']=array (
-  'Once' => '一次结清',
-  'Monthly' => '按月',
-);
+	'Project' => 'Project',
+	'ProjectTask' => 'Project Task',
 
+	'Prospects' => 'Target',
+	'AOS_Contracts' => 'Contracts',
+	'HAT_Assets' => 'Assets',
 
-$GLOBALS['app_list_strings']['haos_line_item_type_list']=array (
-  'Product' => '产品',
-  'Service' => '服务',
-);
+	);
 
 
 /*********************************************************************************
@@ -1551,7 +1557,11 @@ $app_list_strings['moduleList']['HAOS_HAOS_Insurances'] = '保险管理';
 $app_list_strings['moduleList']['HAOS_Insurances'] = '保险管理';
 $app_list_strings['moduleList']['HAOS_Insurance_Claims'] = '保险理赔';
 $app_list_strings['moduleList']['HAOS_Insurance_Claims_Lines'] = '理赔明细';
-
+$app_list_strings['haos_claim_treated_status_list']=array (
+  'Untreated' => '未处理',
+  'Treating' => '处理中',
+  'Treated' => '已处理',
+  );
 
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
@@ -1622,6 +1632,8 @@ $app_list_strings['haos_source_code_list']=array (
   'HAM_WO' => '工单WO',
   'HAT_Asset_Trans_Batch' => '资产事务处理',
   'HAOS_Revenues_Quotes' => '收支计费项',
+  'HAT_Incidents' => '事件管理',
+  'HAOS_Insurance_Claims' => '保险理赔',
   'Manual' => '手工',
   'Excel' => 'Excel导入',
   'Others' => '其他事件',

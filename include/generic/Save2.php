@@ -136,11 +136,17 @@ else {
         }elseif(file_exists('modules/'.$module.'/metadata/metafiles.php')){
             require('modules/'.$module.'/metadata/metafiles.php');
         }
-
-        if (file_exists('custom/modules/'.$module.'/metadata/searchdefs.php'))
+       // Add By osmond.liu 20161218
+       $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+       if(file_exists($instance_loc.'modules/'.$module.'/metadata/metafiles.php'))
+       {
+           require($instance_loc.'modules/'.$module.'/metadata/metafiles.php');
+       }
+        elseif (file_exists('custom/modules/'.$module.'/metadata/searchdefs.php'))
         {
         	require_once('custom/modules/'.$module.'/metadata/searchdefs.php');
         }
+          //End Add By osmond.liu 20161218
         elseif (!empty($metafiles[$module]['searchdefs']))
         {
         	require_once($metafiles[$module]['searchdefs']);

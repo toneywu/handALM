@@ -87,6 +87,12 @@ $dictionary['Contact']['fields']['chinese_name_c']['labelValue']='Chinese Name';
 
  
 
+ // created: 2016-12-18 18:16:02
+$dictionary['Contact']['fields']['countries_c']['inline_edit']='1';
+$dictionary['Contact']['fields']['countries_c']['labelValue']='国籍/区域';
+
+ 
+
  // created: 2016-09-03 17:53:27
 $dictionary['Contact']['fields']['data_source_code_c']['inline_edit']='';
 $dictionary['Contact']['fields']['data_source_code_c']['labelValue']='data source code';
@@ -210,6 +216,12 @@ $dictionary['Contact']['fields']['primary_contact_c']['labelValue']='primary con
  // created: 2016-02-09 19:32:48
 $dictionary['Contact']['fields']['salutation_c']['inline_edit']='1';
 $dictionary['Contact']['fields']['salutation_c']['labelValue']='salutation';
+
+ 
+
+ // created: 2016-12-18 18:13:32
+$dictionary['Contact']['fields']['sex_c']['inline_edit']='1';
+$dictionary['Contact']['fields']['sex_c']['labelValue']='性别';
 
  
 

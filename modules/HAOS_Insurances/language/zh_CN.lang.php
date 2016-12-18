@@ -103,4 +103,5 @@ $mod_strings = array (
   'LBL_FILENAME' => '文件名称',
   'LBL_NEW_LINE' => '添加附件',
   'LBL_ACTIVE_DATE' =>'启用日期',
+  'LBL_FLEX_RELATE' =>'对象',
 );

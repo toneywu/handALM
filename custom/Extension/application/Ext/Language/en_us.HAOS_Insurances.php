@@ -42,3 +42,8 @@ $app_list_strings['moduleList']['HAOS_HAOS_Insurances'] = '保险管理';
 $app_list_strings['moduleList']['HAOS_Insurances'] = '保险管理';
 $app_list_strings['moduleList']['HAOS_Insurance_Claims'] = '保险理赔';
 $app_list_strings['moduleList']['HAOS_Insurance_Claims_Lines'] = '理赔明细';
+$app_list_strings['haos_claim_treated_status_list']=array (
+  'Untreated' => '未处理',
+  'Treating' => '处理中',
+  'Treated' => '已处理',
+  );

@@ -1,5 +1,5 @@
 <?php
-// created: 2016-12-15 12:29:53
+// created: 2016-12-18 18:16:02
 $mod_strings = array (
   'LBL_ACCOUNT_NAME' => '所属组织:',
   'LBL_ACCOUNT_ID' => '组织 ID:',
@@ -49,10 +49,11 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL2' => '用户账户',
   'LBL_EDITVIEW_PANEL3' => '新建面板 3',
   'LBL_DETAILVIEW_PANEL3' => '互动记录',
-  'LBL_DETAILVIEW_PANEL_ORG'=>'组织架构',
-  'LBL_DETAILVIEW_PANEL_HISTORY'=>'交互历史记录',
-  'LBL_DETAILVIEW_PANEL_DOC'=>'文档',
-  'LBL_DETAILVIEW_PANEL_BUSINESS'=>'业务往来',
-  'LBL_DETAILVIEW_PANEL_ASSETS'=>'设备/资产及相关事务',
-
+  'LBL_DETAILVIEW_PANEL_ORG' => '组织架构',
+  'LBL_DETAILVIEW_PANEL_HISTORY' => '交互历史记录',
+  'LBL_DETAILVIEW_PANEL_DOC' => '文档',
+  'LBL_DETAILVIEW_PANEL_BUSINESS' => '业务往来',
+  'LBL_DETAILVIEW_PANEL_ASSETS' => '设备/资产及相关事务',
+  'LBL_SEX' => '性别',
+  'LBL_COUNTRIES' => '国籍/区域',
 );

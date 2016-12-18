@@ -125,6 +125,25 @@ array (
           ),
           1 => 'description',
         ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'parent_name',
+            'studio' => 'visible',
+            'label' => 'LBL_FLEX_RELATE',
+          ),
+          1 => 
+          array (
+            'name' => 'first_beneficiary',
+            'studio' => 'visible',
+            'label' => 'LBL_FIRST_BENEFICIARY',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 'description',
+        ),
       ),
       'lbl_detailview_panel1' => 
       array (
