@@ -63,6 +63,7 @@
 	//echo "current_display_quantity = ".$current_display_quantity."-history_qty=".$history_qty;
 	if($need_allocation=="Y"){
 			
+			
 		$contract_qty =0;
 		
 		

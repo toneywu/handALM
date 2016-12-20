@@ -11,6 +11,7 @@ function call_ff() {
 var prodln = 0;
 var global_eventOptions;
 
+
 function setEventTypePopupReturn(popupReplyData){
 	set_return(popupReplyData);
 	console.log(popupReplyData);
