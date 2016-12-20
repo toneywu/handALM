@@ -1,11 +1,11 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
-
+ *
  * SuiteCRM is an extension to SugarCRM Community Edition developed by Salesagility Ltd.
- * Copyright (C) 2011 - 2014 Salesagility Ltd.
+ * Copyright (C) 2011 - 2016 Salesagility Ltd.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by the
@@ -38,39 +38,56 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
+//REF:http://urdhva-tech.blogspot.sg/2013/02/add-custom-subpanel-in-accounts-module.html
 
-$module_name='HAM_WO';
-$subpanel_layout = array(
-	'top_buttons' => array(
-		array('widget_class' => 'SubPanelTopCreateButton'),
-		array('widget_class' => 'SubPanelTopSelectButton', 'popup_module' => $module_name),
-	),
+$layout_defs['HAM_WO'] = array (
+    // list of what Subpanels to show in the DetailView
+    'subpanel_setup' => array (
 
-	'where' => '',
+		'sr' => array (
+            'order' => 30,
+            'module' => 'HAM_SR',
+            'sort_order' => 'asc',
+            'sort_by' => 'id',
+            'subpanel_name' => 'HAM_WO_subpanel_ham_sr',
+            'get_subpanel_data' => 'sr_link',
+            'title_key' => 'LBL_SR_SUBPANEL_TITLE',
+            'top_buttons'  => array (
+                //array('widget_class' => 'SubPanelTopCreateButton'),
+/*                0 => array (
+                    'widget_class' => 'SubPanelTopSelectButton',
+                    'mode'         => 'MultiSelect',
+                    ),*/
+                ),
+            ),
 
-	'list_fields' => array(
-		'name'=>array(
-	 		'vname' => 'LBL_NAME',
-			'widget_class' => 'SubPanelDetailViewLink',
-	 		'width' => '45%',
-		),
-		'date_modified'=>array(
-	 		'vname' => 'LBL_DATE_MODIFIED',
-	 		'width' => '45%',
-		),
-		'edit_button'=>array(
-            'vname' => 'LBL_EDIT_BUTTON',
-			'widget_class' => 'SubPanelEditButton',
-		 	'module' => $module_name,
-	 		'width' => '4%',
-		),
-		'remove_button'=>array(
-            'vname' => 'LBL_REMOVE',
-			'widget_class' => 'SubPanelRemoveButton',
-		 	'module' => $module_name,
-			'width' => '5%',
-		),
-	),
-);
+/*        'woop' => array (
+            'order' => 11,
+            'module' => 'HAM_WOOP',
+            'sort_order' => 'asc',
+            'sort_by' => 'woop_number',
+            'subpanel_name' => 'HAM_WO_subpanel_woop',
+            'get_subpanel_data' => 'woop_link',
+            'title_key' => 'LBL_WOOP_SUBPANEL_TITLE',
+            'get_subpanel_data' => 'function:getWOOPQuery',
+            'top_buttons'  => array (
+                0 => array('widget_class' => 'SubPanelTopCreateButton'),
+            ),
+        ),*/
 
-?>
+		'wo_line' => array (
+            'order' => 12,
+            'module' => 'HAM_WO_Lines',
+            'sort_order' => 'asc',
+            'sort_by' => 'name',
+            'subpanel_name' => 'default',
+            'get_subpanel_data' => 'wo_line_link',
+            'title_key' => 'LBL_WO_LINE_SUBPANEL_TITLE',
+            'top_buttons'  => array (
+                0 => array('widget_class' => 'SubPanelTopCreateButton'),
+            ),
+        ),
+
+        ),
+    );
+    ?>

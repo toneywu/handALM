@@ -269,13 +269,13 @@ showWOLines();*/
 	 //checkEditRevenueACL
 	 checkEditRevenueACL($("input[name='record']").val());
 //end 
-	$("#list_subpanel_wo_line table tr:gt(3)").each(function(i){
-		console.log("i="+i);
-		var first_td = $(this).find("td:first");
-		var last_td = $(this).find("td:last");
-		console.log(first_td.find("a").text());
-		var contract_val = first_td.find("a").text();
-		if(contract_val!=""){
+$("#list_subpanel_wo_line table tr:gt(3)").each(function(i){
+	console.log("i="+i);
+	var first_td = $(this).find("td:first");
+	var last_td = $(this).find("td:last");
+	console.log(first_td.find("a").text());
+	var contract_val = first_td.find("a").text();
+	if(contract_val!=""){
 		$("#wo_line_edit_"+(i+1)).removeAttr("href");
 		 /* $("#wo_line_remove_"+(i+1)).removeAttr("href");
 		 $("#wo_line_edit_"+(i+1)).parent().remove();
@@ -283,8 +283,8 @@ showWOLines();*/
 		 //console.log($("#wo_line_remove_"+(i+1)).parent().parent().attr("class"));
 		 $("#wo_line_remove_"+(i+1)).parent().remove();
 		 
-		
-		last_td.closest("td").attr("disabled","disabled");
+
+		 last_td.closest("td").attr("disabled","disabled");
 		}
 		
 	});
@@ -314,18 +314,46 @@ if($("#wo_status").val()=="APPROVED"){
 		reject_woop($("input[name='record']").val());
 	});
 
-	//add by osmond.liu 20161114
+	//add by osmond.liu 20161214
 	//等待前序的工序不能编辑
 	var woopEdit='';
 	var woopStatus='';
 	$("#list_subpanel_woop table tr:gt(3)").each(function(i){
 		woopEdit="#woop_edit_"+(i+1);
 		woopStatus=$(this).children().eq(2).text().trim();
-		woopHref=$(woopEdit).attr("href");
-		if (woopStatus=='等待前序'){
+		/*if (woopStatus=='等待前序'){
 			$(woopEdit).removeAttr("href"); 
+		}*/
+		//add by zengchen 20161213
+		var url=$(this).children().eq(1).find('a').attr('href');
+		var wo_id=decodeURIComponent(url).split('=')[5];
+		var action_module=$(this).children().eq(8).text().trim();
+		switch (action_module) {
+			case '网络资源事务':
+			action_module='HIT_IP_TRANS_BATCH';
+			break;
+			case '设备/资产事务':
+			action_module='HAT_Asset_Trans_Batch';
+			break;
 		}
-	});
-	//
+		switch(woopStatus){
+			case '等待前序':
+			$(woopEdit).removeAttr("href");
+			break;
+			case '已批准':
+				//var res=getDealStatu(wo_id);HAT_Assets_Trans_Batch->
+				var res=getDealStatu(wo_id,action_module);
+				if (res=='DRAFT'||res=='APPROVED') {
+					$(woopEdit).removeAttr("href");
+					if (res=='DRAFT'){
+						$(woopEdit).click(function(){
+							alert("请将功能模块的业务处理完，再编辑工序！");
+						});
+					}
+				}
+				break;
+			}
+		});
+	//add by osmond.liu 20161214
 }
 );

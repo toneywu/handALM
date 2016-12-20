@@ -11,4 +11,6 @@ $mod_strings = array (
 	'LBL_PARENT_CLASS' => '来源分类',
 	'LBL_PARENT_SUB_TYPE' => '来源子类',
 	'LBL_PARENT_TYPE' => '来源类型',
+	'LBL_INVOICE_CLOSE' =>'CLOSE',
+	'LBL_NAME' => '名称',
 	);

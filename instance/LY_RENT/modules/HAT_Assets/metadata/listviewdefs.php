@@ -43,7 +43,7 @@ array (
     'width' => '10%',
     'default' => true,
   ),*/
-  'HAT_ASSET_LOCATIONS_HAT_ASSETS_NAME' => 
+/*  'HAT_ASSET_LOCATIONS_HAT_ASSETS_NAME' => 
   array (
     'type' => 'relate',
     'link' => true,
@@ -61,7 +61,7 @@ array (
     'link' => true,
     'width' => '10%',
     'default' => true,
-  ),
+  ),*/
   'USING_PERSON' => 
   array (
     'type' => 'relate',

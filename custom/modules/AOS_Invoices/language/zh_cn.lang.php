@@ -1,7 +1,8 @@
 <?php
-// created: 2016-10-26 23:02:19
+// created: 2016-12-19 11:03:03
 $mod_strings = array (
   'LBL_BILLING_ACCOUNT' => '组织',
+  'LBL_NAME' => '名称',
   'LBL_BILLING_CONTACT' => '人员',
   'LBL_SOURCE_CODE' => '来源',
   'LBL_FRAMEWORK' => '业务框架',
@@ -12,11 +13,13 @@ $mod_strings = array (
   'LBL_BILLING_CONTACT_NUMBER' => '人员工号',
   'LBL_EVENT_TYPE_HAT_EVENTTYPE_ID' => '事件类型 (related 事件类型 ID)',
   'LBL_EVENT_TYPE' => '事件类型',
-  'LBL_BUS_SOURCE'=>'业务来源',
-  'LBL_PARENT_NAME'=>'来源名称',
+  'LBL_BUS_SOURCE' => '业务来源',
+  'LBL_PARENT_NAME' => '来源名称',
   'LBL_FLEX_RELATE' => '来源类型',
   'LBL_PARENT_NUMBER' => '来源编号',
   'LBL_PARENT_CLASS' => '来源分类',
   'LBL_PARENT_SUB_TYPE' => '来源子类',
   'LBL_PARENT_TYPE' => '来源类型',
-  );
+  'LBL_AMOUNT' => '金额',
+  'LBL_INVOICE_CLOSE'=>"关闭",
+);

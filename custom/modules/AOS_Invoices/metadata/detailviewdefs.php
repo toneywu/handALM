@@ -34,6 +34,10 @@ array (
           array (
             'customCode' => '<input type="button" class="button" onClick="showPopup(\'email\');" value="{$MOD.LBL_EMAIL_INVOICE}">',
           ),
+          7 => 
+          array (
+            'customCode' => '<input type="button" class="button" onClick="setCloseDate();" value="{$MOD.LBL_INVOICE_CLOSE}">',
+          ),
         ),
       ),
       'maxColumns' => '2',

@@ -277,15 +277,15 @@ function populate_template_lines($text, $lineItems, $element = 'tr', $module){
 
         //Converting Line Items
         $obb = array();
-
+        $linePart_t = $linePart;
         foreach ($lineItems as $id => $lineItemsArray){
             $obb[$module] = $lineItemsArray;
+            $linePart = $linePart_t;
             $linePart = templateParser::parse_template($linePart, $obb);
             $linePart = str_replace("&lt;strong&gt;", "", $linePart);
             $linePart = str_replace("&lt;/strong&gt;", "", $linePart);
             $text .= $linePart;
         }
-
         $text .= $parts[1];
     }
     return $text;

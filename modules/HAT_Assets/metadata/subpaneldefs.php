@@ -82,6 +82,25 @@ $layout_defs['HAT_Assets'] = array(
       'get_subpanel_data' => 'hat_assets_hat_asset_trans',
       'top_buttons' => array (),
       ),
+     'haos_insurances' => array(
+          'order' => 25,
+          'module' => 'HAOS_Insurances',
+          'sort_order' => 'asc',
+          'sort_by' => 'name',
+          'subpanel_name' => 'HAT_Assets_subpanel_haos_insurances',
+            'get_subpanel_data' => 'function:get_haos_insurances',//这里没有指向传统的link，而是指向了一个function
+            'generate_select' => true,
+            'title_key' => 'LBL_HAOS_INSURANCES_SUBPANEL_TITLE',
+            'top_buttons'  => array (0 => 
+              array (
+                'widget_class' => 'SubPanelTopCreateButton',
+                ),),
+            'function_parameters' => array(
+                'import_function_file' => 'modules/HAOS_Insurances/InsuranceSubpanel.php',//指向特定的文件
+                'parent_id' => $this->_focus->id,
+                'return_as_array' => 'true'
+                ),
+            ),
     'haos_insurance_claims' => array(
       'order' => 30,
       'module' => 'HAOS_Insurance_Claims',
