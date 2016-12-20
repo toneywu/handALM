@@ -81,7 +81,7 @@ class HAT_Assets extends HAT_Assets_sugar {
 				'min_num_strlength' => $min_num_strlength
 			));
 
-			if(!empty(prefix)){
+			if(!empty($prefix)){
 				if ($min_num_strlength != 0) {
 					if (empty ($bean_numbering)) {
 						//如果没有的话 就新增一个编号规则

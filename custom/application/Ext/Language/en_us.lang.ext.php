@@ -535,11 +535,18 @@ $app_list_strings['moduleList']['HAA_Maps'] = 'Map Layers';
 
 
 $app_list_strings['moduleList']['HAA_Numbering_Rule'] = 'Numbering Rule';
-$app_list_strings['haa_usage_list'][''] = '';
-$app_list_strings['haa_usage_list']['SR'] = 'SR - Service Request';
-$app_list_strings['haa_usage_list']['WO'] = 'WO - Work Order';
-$app_list_strings['haa_usage_list']['AT'] = 'AT - Asset Transaction';
 
+$app_list_strings['haa_numbering_rule_usage_list']=array (
+   '' => '',
+  'SR' => 'SR - Service Request',
+  'WO' => 'WO - Work Order',
+  'AT' => 'AT - Asset Transaction',
+  'MO' => 'MO-Move Order',
+  'INV_TRANS_BATCH' => 'INV Transaction batch',
+  'INV_TRANS_LINE' => 'INV Transaction Line',
+  'COUNT' => 'COUNT - Asset Counting',
+  'REVENUE' => 'REVENUE-Revenue Quote',
+  );
 
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
