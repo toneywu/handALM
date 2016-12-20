@@ -119,6 +119,13 @@ function resetEventType(){
 	//add by  osmond.liu 20161123 增加资产地点的限制
 	loopField("line_target_location",global_eventOptions.change_location);
 	loopField("line_target_location_desc",global_eventOptions.change_location);
+
+	loopField("line_target_asset_attribute10",global_eventOptions.change_asset_attribute10);
+	loopField("line_target_asset_attribute11",global_eventOptions.change_asset_attribute11);
+	loopField("line_target_asset_attribute12",global_eventOptions.change_asset_attribute12);
+	loopField("line_target_cost_center",global_eventOptions.change_cost_center);
+	loopField("line_target_cost_center_id",global_eventOptions.change_cost_center);
+
 //end modefy osmond.liu 20161123
 	//开始与结束时间根据使用组织及人员进行显示，不单独进行处理 deleted toney.wu 改到Using_org中
 /*	loopField("line_date_start",global_eventOptions.change_asset_date_end);
@@ -247,18 +254,18 @@ function check_quantity(){
 		var error_msg="";
 		var formData=$("#EditView");
 		var formData_str = formData.serialize();
-		
+
 		var json_obj={};
 		$("input[id^='line_asset_id']").each(function(){
 			var id_name=$(this).attr("id");
 			var id_index = id_name.split("line_asset_id")[1];
 			if($("#line_deleted"+id_index).val()=="0"){
-				json_obj[id_name]=$(this).val();	
+				json_obj[id_name]=$(this).val();
 			}
 		});
 
 		var json_data ={};
-		
+
 		json_data['asset_trans_status']=$("#asset_trans_status").val();
 		json_data['record']=$("input[name=record]").val();
 		json_data['source_wo_id']=$("#source_wo_id").val();
@@ -268,13 +275,13 @@ function check_quantity(){
 			type:"POST",
 			url: "index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=checkContractQuantity",
 			data: json_data,
-			cache:false,  
-            async:false,//重要的关健点在于同步和异步的参数，  
-			success: function(msg){ 
+			cache:false,
+            async:false,//重要的关健点在于同步和异步的参数，
+			success: function(msg){
 				error_msg=msg;
 				console.log("check_quantity = "+error_msg);
 				if(error_msg!="S"){
-					
+
 					BootstrapDialog.alert({
 							type : BootstrapDialog.TYPE_DANGER,
 							title : SUGAR.language.get('app_strings',
@@ -298,10 +305,14 @@ function check_quantity(){
 */
 function preValidateFunction(async_bool = false) {
 		var result = true;
+		var error_msg="S";
 
-		console.log("preValidateFunction");
-		var error_msg = check_quantity();
-		console.log("preValidateFunction = "+error_msg);
+		//toney.wu 仅针对有来源的工作单进行数据验证
+		if ($("#source_woop_id").val()!="") {
+			//console.log("preValidateFunction");
+			var error_msg = check_quantity(); //如果验证有误会返回错误信息
+			//console.log("preValidateFunction = "+error_msg);
+		}
 		if(error_msg!=="S"&&error_msg!=""){
 			return;
 		}

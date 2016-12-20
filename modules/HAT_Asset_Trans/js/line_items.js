@@ -36,6 +36,11 @@ function openAssetPopup(ln){//本文件为行上选择资产的按钮
       "location_desc" : "line_current_location_desc" + ln,
       "rack_desc":"line_target_rack_position_desc"+ln,
       "rack":"line_target_rack_position_data"+ln,
+      "cost_center_id":"line_current_cost_center_id"+ln,
+      "cost_center":"line_current_cost_center"+ln,
+      "attribute10":"line_current_asset_attribute10"+ln,
+      "attribute11":"line_current_asset_attribute11"+ln,
+      "attribute12":"line_current_asset_attribute12"+ln,
     }
   };
 
@@ -62,6 +67,7 @@ function setAssetReturn(popupReplyData){
   //popupReplyData中lineno会做为行号一并返回
   set_return(popupReplyData);
   resetAsset(lineno);
+  //console.log("line_target_rack_position_desc0="+$("#line_target_rack_position_desc0").val())
 }
 
 
@@ -104,9 +110,9 @@ function openCostCenterPopup(ln){
       "id" : "line_target_cost_center_id" + ln,
     },
   };
-  var popupFilter = '&frame_c_advanced='+$("#haa_framework").val();//+"&asset_using_org=Y";
+  var popupFilter = '&frame_c_advanced='+$("#haa_framework").val()+'&code_type_advanced=asset_main_cost_center';
 //http://localhost/handALM/index.php?module=HAA_Codes&action=Popup&mode=single&create=true&field_to_name[]=name
-  open_popup('HAT_Codes', 1000, 850,popupFilter, true, true, popupRequestData);
+  open_popup('HAA_Codes', 1000, 850,popupFilter, true, true, popupRequestData);
 }
 
 
@@ -456,6 +462,14 @@ if (document.getElementById(tableid + '_head') !== null) {
   "<label id='line_target_owning_person_desc" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_OWNING_PERSON')+"</label>"+
   "<input style='width:103px;' name='line_target_owning_person_desc[" + prodln + "]' id='line_target_owning_person_desc" + prodln + "' value='' />"+
   "</span>"+
+
+  "<span class='input_group ig_cost_center'>"+
+  "<label id='line_cost_center" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_COST_CENTER')+" <span class='required'>*</span></label>"+
+  "<input class='sqsEnabled' style='width:153px;' autocomplete='off' type='text' name='line_target_cost_center[" + prodln + "]' id='line_target_cost_center" + prodln + "' value='' title='' >"+
+  "<input type='hidden' name='line_target_cost_center_id[" + prodln + "]' id='line_target_cost_center_id" + prodln + "' value='' />"+
+  "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openCostCenterPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+  "</span>"+
+
   "<span class='input_group ig_using_org'>"+
   "<label id='line_target_using_org" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_USING_ORG')+" <span class='required'>*</span></label>"+
   "<input class='sqsEnabled' style='width:153px;' autocomplete='off' type='text' name='line_target_using_org[" + prodln + "]' id='line_target_using_org" + prodln + "' value='' title='' >"+
@@ -473,12 +487,6 @@ if (document.getElementById(tableid + '_head') !== null) {
   "<input style='width:103px;' type='text' name='line_target_using_person_desc[" + prodln + "]' id='line_target_using_person_desc" + prodln + "' maxlength='50' value='' title=''>"+
   "</span>"+
 
-  "<span class='input_group ig_cost_center'>"+
-  "<label id='line_cost_center" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_COST_CENTER')+" <span class='required'>*</span></label>"+
-  "<input class='sqsEnabled' style='width:153px;' autocomplete='off' type='text' name='line_target_cost_center[" + prodln + "]' id='line_target_cost_center" + prodln + "' value='' title='' >"+
-  "<input type='hidden' name='line_target_cost_center_id[" + prodln + "]' id='line_target_cost_center_id" + prodln + "' value='' />"+
-  "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openCostCenterPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
-  "</span>"+
 
 
       //失效时间
@@ -511,7 +519,22 @@ if (document.getElementById(tableid + '_head') !== null) {
       "<input type='hidden' name='line_target_rack_position_data[" + prodln + "]' id='line_target_rack_position_data" + prodln + "' value='' />"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openRackPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
-      
+
+      "<span class='input_group'>"+
+      "<label id='line_target_asset_attribute10" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_ASSET_ATTRIBUTE10')+"</label>"+
+      "<input style='width:153px;' type='text' name='line_target_asset_attribute10[" + prodln + "]' id='line_target_asset_attribute10" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
+
+      "<span class='input_group'>"+
+      "<label id='line_target_asset_attribute11" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_ASSET_ATTRIBUTE11')+"</label>"+
+      "<input style='width:153px;' type='text' name='line_target_asset_attribute11[" + prodln + "]' id='line_target_asset_attribute11" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
+
+      "<span class='input_group'>"+
+      "<label id='line_target_asset_attribute12" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TARGET_ASSET_ATTRIBUTE12')+"</label>"+
+      "<input style='width:153px;' type='text' name='line_target_asset_attribute12[" + prodln + "]' id='line_target_asset_attribute12" + prodln + "' maxlength='50' value='' title=''>"+
+      "</span>"+
+
 
 /*      "<span class='input_group ig_location'>"+
       "<label id='line_status" + prodln + "_label'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_STATUS')+"</label>"+
@@ -586,6 +609,11 @@ function generateLineDesc(ln){
   LineDesc += LineDescElement("line_","target_location_id","current_location_id","LBL_LOCATION",ln,"target_location","current_location");
   LineDesc += LineDescElement("line_","target_location_desc","current_location_desc","LBL_LOCATION_DESC",ln,"target_location_desc","current_location_desc");
   LineDesc += LineDescElement("line_","target_rack_position_desc","","LBL_RACK",ln,"target_rack_position_desc","");
+
+  LineDesc += LineDescElement("line_","target_cost_center_id","current_cost_center_id","LBL_COST_CENTER",ln,"target__cost_center","current_cost_center");
+  LineDesc += LineDescElement("line_","target_asset_attribute10","current_asset_attribute10","LBL_ATTRIBUTE10",ln,"target_asset_attribute10","current_asset_attribute10");
+  LineDesc += LineDescElement("line_","target_asset_attribute11","current_asset_attribute11","LBL_ATTRIBUTE11",ln,"target_asset_attribute11","current_asset_attribute11");
+  LineDesc += LineDescElement("line_","target_asset_attribute12","current_asset_attribute12","LBL_ATTRIBUTE12",ln,"target_asset_attribute12","current_asset_attribute12");
 
   $("#line_description"+ln).val(LineDesc);
 };
@@ -700,6 +728,23 @@ function resetEditorFields(ln) {
       $("#line_target_using_org_id"+ln).val($("#line_current_using_org_id"+ln).val());
     }
 
+    if (eventOptions.change_cost_center == "REQUIRED" ||eventOptions.change_cost_center == "OPTIONAL") {
+      //将当前的成本中心复制到目标上
+      $("#line_target_cost_center"+ln).val($("#line_current_cost_center"+ln).val());
+      $("#line_target_cost_center_id"+ln).val($("#line_current_cost_center_id"+ln).val());
+    }
+
+    if (eventOptions.change_asset_attribute10 == "REQUIRED" ||eventOptions.change_asset_attribute10 == "OPTIONAL") {
+      $("#line_target_asset_attribute10"+ln).val($("#line_current_asset_attribute10"+ln).val());
+    }
+    if (eventOptions.change_asset_attribute11 == "REQUIRED" ||eventOptions.change_asset_attribute11 == "OPTIONAL") {
+      $("#line_target_asset_attribute11"+ln).val($("#line_current_asset_attribute11"+ln).val());
+    }
+    if (eventOptions.change_asset_attribute12 == "REQUIRED" ||eventOptions.change_asset_attribute12 == "OPTIONAL") {
+      $("#line_target_asset_attribute12"+ln).val($("#line_current_asset_attribute12"+ln).val());
+    }
+
+
     if (eventOptions.change_target_status=='1') { //如果头EventType需要变更
        $("#line_target_asset_status"+ln).val(eventOptions.target_asset_status);//从头上复制当前的资产状态
      } else {
@@ -722,7 +767,7 @@ function resetEditorFields(ln) {
       $("#line_target_using_person_id"+ln).val("");
       $("#line_target_using_person_desc"+ln).val("");
     }
-    if(eventOptions.change_rack_position == "EMPTY") {//判断是否需要清空机枻
+    if(eventOptions.change_rack_position == "EMPTY" || $("#line_target_rack_position_desc"+ln).val()== "undefined") {//判断是否需要清空机枻
       $("#line_target_rack_position_desc"+ln).val("");
       $("#line_target_rack_position_data"+ln).val("");
     }

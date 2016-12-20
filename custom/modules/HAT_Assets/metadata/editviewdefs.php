@@ -498,6 +498,10 @@ array (
             'name' => 'cost_center',
             'studio' => 'visible',
             'label' => 'LBL_COST_CENTER',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&code_type_advanced=asset_main_cost_center',
+            ),
           ),
         ),
         1 => 

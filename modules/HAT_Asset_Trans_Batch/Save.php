@@ -258,9 +258,11 @@ function save_asset_lines($focus){
         //如果不出意外，应当由HAT_TransactionBatch/checkApprovalWorkflow.php先将头STATUS调整为APPROVED
         $beanAsset = BeanFactory::getBean('HAT_Assets', $focus->asset_id);
         if ($beanAsset) { // test if $bean was loaded successfully
-            $beanAsset->owning_org_id = $focus->owning_org_id;
+            $beanAsset->owning_org_id = $focus->target_owning_org_id;
             $beanAsset->owning_person_id = $focus->target_owning_person_id;
             $beanAsset->owning_person_desc = $focus->target_owning_person_desc;
+
+            $beanAsset->cost_center_id = $focus->target_cost_center_id;
 
             if(empty($focus->inactive_using) || $focus->inactive_using!= 1) {//正常保存使用信息
                 $beanAsset->using_org_id = $focus->target_using_org_id;
@@ -273,6 +275,9 @@ function save_asset_lines($focus){
             }
             $beanAsset->hat_asset_locations_hat_assetshat_asset_locations_ida = $focus->target_location_id;
             $beanAsset->location_desc = $focus->target_location_desc;
+            $beanAsset->attribute10 = $focus->target_asset_attribute10;
+            $beanAsset->attribute11 = $focus->target_asset_attribute11;
+            $beanAsset->attribute12 = $focus->target_asset_attribute12;
             $beanAsset->asset_status = $focus->target_asset_status;
             $beanAsset->parent_asset_id = $focus->target_parent_asset_id;
 

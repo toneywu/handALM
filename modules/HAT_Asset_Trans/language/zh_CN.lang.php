@@ -69,4 +69,13 @@ $mod_strings = array (
   'LBL_DATE_START'=>'使用分配起始时间',
   'LBL_DATE_END'=>'使用分配终止时间',
   'LBL_BTN_ADD_NEW_LINE'=>'批量添加行',
+  'LBL_TARGET_COST_CENTER'=>'目标成本中心',
+  'LBL_CURRNET_COST_CENTER'=>'当前成本中心',
+  'LBL_CURRENT_ASSET_ATTRIBUTE10'=>'目标产品',
+  'LBL_TARGET_ASSET_ATTRIBUTE10'=>'目标产品',
+  'LBL_CURRENT_ASSET_ATTRIBUTE11'=>'当前链路',
+  'LBL_TARGET_ASSET_ATTRIBUTE11'=>'目标链路',
+  'LBL_CURRENT_ASSET_ATTRIBUTE12'=>'当前波道',
+  'LBL_TARGET_ASSET_ATTRIBUTE12'=>'目标波道',
+
 );

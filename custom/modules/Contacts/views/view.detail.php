@@ -78,7 +78,7 @@ class ContactsViewDetail extends ViewDetail
                 $GLOBALS['focus'] = $this->bean;
                 require_once ('include/SubPanel/SubPanelTiles.php');
                 $subpanel = new SubPanelTiles($this->bean, $this->module);
-  
+
                 //Dependent logic
                 if ($this->bean->type_c == 'INTERNAL')
                 {

@@ -41,6 +41,11 @@ $sql = "SELECT
 			  ,using_person_t.id  		current_using_person_id
 			  ,using_person_t.last_name  	current_using_person
 			  ,h.using_person_desc  	current_using_person_desc
+			  ,h.attribute10 current_asset_attribute10,
+				h.attribute11 current_asset_attribute11,
+				h.attribute12 current_asset_attribute12,
+					  code_cc_c.name current_cost_center,
+					  code_cc_c.id current_cost_center_id
 			FROM
 			  hat_assets h 
 			  LEFT JOIN aos_products a ON (a.id=h.aos_products_id AND   a.deleted=0)
@@ -50,7 +55,8 @@ $sql = "SELECT
 			  LEFT JOIN accounts using_org ON (using_org.id=h.using_org_id)
 			  LEFT JOIN hat_assets parent_asset ON (parent_asset.id = h.parent_asset_id AND parent_asset.deleted = 0)
 			  LEFT JOIN contacts owning_person_t  ON (owning_person_t.id = h.owning_person_id AND owning_person_t.deleted = 0) 
-			  LEFT JOIN contacts using_person_t  ON (using_person_t.id = h.using_person_id AND using_person_t.deleted = 0)  
+			  LEFT JOIN contacts using_person_t  ON (using_person_t.id = h.using_person_id AND using_person_t.deleted = 0)
+			  LEFT JOIN haa_codes code_cc_c ON (code_cc_c.id = h.cost_center_id AND code_cc_c.deleted=0)
 			  WHERE   h.deleted=0 and h.id in (" . $idStr . ")";
 
 //echo $sql;

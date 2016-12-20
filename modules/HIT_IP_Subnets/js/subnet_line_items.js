@@ -304,21 +304,17 @@ function checkEnableSeperateAsign(ln) {
 }
 
 function show_ip_subnet_ojb(ln) {
-<<<<<<< HEAD
 
-	show_ip_desc($("#line_ip_subnet" + ln).val(), $("#line_ip_subnet" +ln + "_ip_desc"));
+	//show_ip_desc($("#line_ip_subnet" + ln).val(), $("#line_ip_subnet" +ln + "_ip_desc"));
 	//对于精确IP将不再显示明细情况
 	//show_ip_desc($("#line_name" + ln).val(), $("#line_name" + ln + "_ip_desc"));
 	//显示子网、精确IP对应的明细信息
-=======
 	//if ($("#line_name" + ln).val() == "") {
 	//	$("#line_name" + ln).val($("#line_ip_subnet" + ln).val());
 	//}
 
-	show_ip_desc($("#line_ip_subnet" + ln).val(), $("#line_ip_subnet" + ln
-					+ "_ip_desc"));
+	show_ip_desc($("#line_ip_subnet" + ln).val(), $("#line_ip_subnet" + ln + "_ip_desc"));
 	show_ip_desc($("#line_name" + ln).val(), $("#line_name" + ln + "_ip_desc"));
->>>>>>> 3bd5d31d1cdb6e80364e09e912c05e639b537c19
 
 	// console.log($("#line_hat_asset_locations_id"+ln).val()+":"+($("#line_hat_asset_locations_id"+ln).val()==""));
 	if ($("#line_hat_asset_locations_id" + ln).val() == ""&&$("#ham_maint_sites_id").val()!="") {// 将位置从头复制到行上

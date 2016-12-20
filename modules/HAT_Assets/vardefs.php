@@ -2164,11 +2164,7 @@ $dictionary['HAT_Assets'] = array(
       'quicksearch' => 'enabled',
       'studio' => 'visible',
       ),
-	  
-	  
-	  
-	  
-	  
+
     'asset_icon' =>
     array (
       'required' => false,

@@ -61,9 +61,29 @@ function display_lines($focus, $field, $value, $view){
 					  hat.inactive_using,
 					  hat.date_start,
 					  hat.date_end,
-					  hat.status
+					  hat.status,
+					  hat.current_asset_attribute10,
+					  hat.target_asset_attribute10,
+					  hat.current_asset_attribute11,
+					  hat.target_asset_attribute11,
+					  hat.current_asset_attribute12,
+					  hat.target_asset_attribute12,
+					  code_cc_c.name current_cost_center,
+					  code_cc_c.id current_cost_center_id,
+					  code_cc_t.name target_cost_center,
+					  code_cc_t.id target_cost_center_id
 					FROM
-					  hat_asset_trans hat 
+					  hat_asset_trans hat
+					  LEFT JOIN haa_codes code_cc_c
+					    ON (
+					    	hat.current_cost_center_id = code_cc_c.id
+					    	AND code_cc_c.deleted=0
+					    )
+					  LEFT JOIN haa_codes code_cc_t
+					    ON (
+					    	hat.target_cost_center_id = code_cc_t.id
+					    	AND code_cc_c.deleted=0
+					    )
 					  LEFT JOIN hat_asset_locations location_c 
 					    ON (
 					      location_c.id = hat.`current_location_id` 

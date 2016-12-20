@@ -131,4 +131,8 @@ $mod_strings = array (
   'LBL_CHECK_CUSTOMER_HOLD_C_OWNING'=>'Check Current Owning Org. Hold',
   'LBL_CHANGE_CHILD_PORT'=>'Change Child Port',
   'LBL_CHANGE_VLAN_CHANNEL'=>'Change VLAN Channel',
+  'LBL_CHANGE_ASSET_ATTRIBUTE10'=>'产品(cux)',
+  'LBL_CHANGE_ASSET_ATTRIBUTE11'=>'链路(cux)',
+  'LBL_CHANGE_ASSET_ATTRIBUTE12'=>'波道(cux)',
+  'LBL_CHANGE_COSt_CENTER'=>'Cost Center',
 );

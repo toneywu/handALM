@@ -237,6 +237,16 @@ array (
             'label' => 'LBL_CHANGE_RACK_POSITION',
           ),
         ),
+        5=>
+        array(
+          0=>"change_cost_center",
+          1=>"change_asset_attribute10"
+        ),
+        6=>
+        array(
+          0=>"change_asset_attribute11",
+          1=>"change_asset_attribute12"
+        )
       ),
       'lbl_editview_panel3' => 
       array (
@@ -383,6 +393,21 @@ array (
             'name' => 'change_broadband_type',
             'studio' => 'visible',
             'label' => 'LBL_CHANGE_BROADBAND_TYPE',
+          ),
+          1 => 
+          array (
+            'name' => 'change_child_port',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_CHILD_PORT',
+          ),
+        ),
+        13 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_vlan_channel',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_VLAN_CHANNEL',
           ),
           1 => '',
         ),
