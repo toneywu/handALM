@@ -12,8 +12,6 @@
 	global $app_list_strings, $timedate, $db;
 	$location_id = $_REQUEST['location_id'];
 
-	echo "GirdDraw";
-
 	function rotate($a) {
 		$b = array();
 		foreach ($a as $val) {
