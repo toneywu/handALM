@@ -19,37 +19,48 @@ $popupMeta = array (
     'varName' => 'HAT_Assets',
     'orderBy' => 'hat_assets.name',
     'whereClauses' => array (
+/*      'name' => 'hat_assets.name',
+      'asset_desc' => 'hat_assets.asset_desc',
+      'serial_number' => 'hat_assets.serial_number',
+      'vin' => 'hat_assets.vin',
+      'hat_asset_locations_hat_assets_name' => 'hat_assets.hat_asset_locations_hat_assets_name',
+      'hat_assets_accounts_name' => 'hat_assets.hat_assets_accounts_name',
+      'hat_assets_contacts_name' => 'hat_assets.hat_assets_contacts_name',
+      'tracking_number' => 'hat_assets.tracking_number',
+      'enable_it_rack' => 'hat_assets.enable_it_rack',
+      'using_org_id' => 'hat_assets.using_org_id',
+    ),
+'whereStatement'=>'(("'.isset($_REQUEST["target_using_org_id_advanced"])?$_REQUEST["target_using_org_id_advanced"]:"". '"!="" and EXISTS (SELECT 1   FROM    hit_racks r,hit_rack_allocations ra WHERE hat_assets.id = r.hat_assets_id AND r.id = ra.hit_racks_id AND ra.deleted = 0 AND hat_assets.using_org_id = "'.isset($_REQUEST["target_using_org_id_advanced"])?$_REQUEST["target_using_org_id_advanced"]:"".'")) or ""="'.isset($_REQUEST["target_using_org_id_advanced"])?$_REQUEST["target_using_org_id_advanced"]:"".'") AND haa_frameworks.id = "'.$_SESSION["current_framework"].'"',*/
   'name' => 'hat_assets.name',
   'asset_desc' => 'hat_assets.asset_desc',
   'serial_number' => 'hat_assets.serial_number',
-  'vin' => 'hat_assets.vin',
+  //'vin' => 'hat_assets.vin',
   'hat_asset_locations_hat_assets_name' => 'hat_assets.hat_asset_locations_hat_assets_name',
   'hat_assets_accounts_name' => 'hat_assets.hat_assets_accounts_name',
-  'hat_assets_contacts_name' => 'hat_assets.hat_assets_contacts_name',
-  'tracking_number' => 'hat_assets.tracking_number',
+  //'hat_assets_contacts_name' => 'hat_assets.hat_assets_contacts_name',
+  //'tracking_number' => 'hat_assets.tracking_number',
   'framework' => 'hat_assets.framework',
   'using_org_id' => 'hat_assets.using_org_id',
   'enable_it_rack'=>'hat_assets.enable_it_rack',
+  'owning_org' => 'hat_assets.owning_org',
 ),
   'whereStatement'=>'hat_assets.haa_frameworks_id = "'.$_SESSION["current_framework"].'"'
                     .' AND (("'.$target_using_org_id_advanced. '"!="" and EXISTS (SELECT 1 FROM hit_racks r,hit_rack_allocations ra WHERE hat_assets.id = r.hat_assets_id AND r.id = ra.hit_racks_id AND ra.deleted = 0 AND hat_assets.using_org_id = "'.$target_using_org_id_advanced.'"))  or ""="'.$target_using_org_id_advanced.'") and ("'.$asset_type.'" ="" or( "'.$asset_type.'"="ODF" and exists (select 1 from aos_products where aos_products.name="ODF" and aos_products.deleted=0 and aos_products.id=hat_assets.aos_products_id) )) ',
-  //下面的SQL是有问题的，不知道什么业务场景会用到toney.wu
-  //似乎是需要实现，如果当前使用部门不为空，则如果机柜分配的使用部门为当前部门时，也列出
-  //这个删除不是很确定，但之前的Where写的似乎也有BUG
 
     'searchInputs' => array (
   1 => 'name',
   4 => 'asset_desc',
   5 => 'serial_number',
-  6 => 'vin',
+  //6 => 'vin',
   7 => 'hat_asset_locations_hat_assets_name',
   8 => 'hat_assets_accounts_name',
-  9 => 'hat_assets_contacts_name',
-  10 => 'tracking_number',
+  //9 => 'hat_assets_contacts_name',
+  //10 => 'tracking_number',
   11 => 'framework',
   12=>'using_org_id',
   13=>'enable_it_rack',
   14=>'asset_type',
+  16 => 'owning_org',
 ),
     'searchdefs' => array (
   'framework' => 
@@ -84,13 +95,13 @@ $popupMeta = array (
     'width' => '10%',
     'name' => 'serial_number',
   ),
-  'vin' => 
+  /*'vin' => 
   array (
     'type' => 'varchar',
     'label' => 'LBL_VIN',
     'width' => '10%',
     'name' => 'vin',
-  ),
+  ),*/
   'hat_asset_locations_hat_assets_name' => 
   array (
     'type' => 'relate',
@@ -109,7 +120,7 @@ $popupMeta = array (
     'width' => '10%',
     'name' => 'hat_assets_accounts_name',
   ),
-  'hat_assets_contacts_name' => 
+  /*'hat_assets_contacts_name' => 
   array (
     'type' => 'relate',
     'link' => true,
@@ -124,7 +135,7 @@ $popupMeta = array (
     'label' => 'LBL_TRACKING_NUMBER',
     'width' => '10%',
     'name' => 'tracking_number',
-  ),
+  ),*/
   'owning_org_id' => 
   array (
     'type' => 'varchar',
@@ -148,6 +159,16 @@ $popupMeta = array (
     'width' => '10%',
     'default' => true,
     'name' => 'asset_type',
+  ),
+  'owning_org' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'label' => 'LBL_OWING_ORG',
+    'id' => 'OWNING_ORG_ID',
+    'link' => true,
+    'width' => '10%',
+    'name' => 'owning_org',
   ),
 ),
     'listviewdefs' => array (

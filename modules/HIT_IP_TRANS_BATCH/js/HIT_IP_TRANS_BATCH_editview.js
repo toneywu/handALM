@@ -1,3 +1,7 @@
+$.getScript("cache/include/javascript/sugar_grp_yui_widgets.js"); // MessageBox
+$.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
+$.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); // MessageBox
+$('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
 function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"HIT_IP_TRANS_BATCH");
     $(".expandLink").click();
@@ -79,71 +83,55 @@ function setWoPopupReturn(popupReplyData){
 	}
 }
 
+function preValidateFunction(async_bool = false) {
+	//但如果是SAVE按钮的触发，一定要async=false(保持默认)
+	var return_flag=true;
 
+	for(var i=0;i<prodln;i++){
+		console.log("prodln = "+prodln);
+		var pre_ip_id = $("#line_hit_ip_subnets_id"+i).val();
+		var pre_deleted = $("#line_deleted"+i).val();
+		var pre_port = $("#line_port"+i).val();
+		
+		console.log("第i行 "+(i+1)+",ip="+pre_ip_id+"~"+pre_port);
 
-
-
-/**
- * 设置必输
- */
-/*function mark_field_enabled(field_name,not_required_bool) {
-  //field_name = 字段名，不需要jquery select标志，直接写名字
-  //not_required_bool如果为空或没有明确定义为true的话，字段为必须输入。如果=true则为非必须
-  //alert(not_required_bool);
-  $("#"+field_name).css({"color":"#000000","background-Color":"#ffffff"});
-  $("#"+field_name).attr("readonly",false);
-  $("#"+field_name+"_label").css({"color":"#000000","text-decoration":"none"})
-
-  if(typeof not_required_bool == "undefined" || not_required_bool==false || not_required_bool=="") {
-      addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());//将当前字段标记为必须验证
-      //打上必须星标
-      if  ($("#"+field_name+"_label .required").text()!='*') {//如果没有星标，则打上星标
-        $("#"+field_name+"_label").html($("#"+field_name+"_label").text()+"<span class='required'>*</span>");//打上星标
-      } else {//如果已经有星标了，则显示出来
-        $("#"+field_name+"_label .required").show();
-      }
-      $("#"+field_name+"_btn").remove();
-  } else { //如果不是必须的，则不显示星标
-    //直接Remove有时会出错，所有先设置为Validate再Remove
-    addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());
-    removeFromValidate('EditView',field_name);
-     //去除必须验证
-    $("#"+field_name+"_label .required").hide();
-  }
-  if  (typeof $("#btn_"+field_name)!= 'undefined') {//移除选择按钮
-    $("#btn_"+field_name).css({"visibility":"visible"});
-  }
-  if  (typeof $("#btn_clr_"+field_name)!= 'undefined') {//移除清空按钮
-    $("#btn_clr_"+field_name).css({"visibility":"visible"});
-  }
-}
-//设置字段不可更新
-function mark_field_disabled(field_name, hide_bool, keep_position=false) {
-	  mark_obj = $("#"+field_name);
-	  mark_obj_lable = $("#"+field_name+"_label");
-
-	  if(hide_bool==true) {
-	  	if (keep_position==false) {
-	    	mark_obj.closest('td').css({"display":"none"});
-	    	mark_obj_lable.css({"display":"none"});
-		}else{
-	    	mark_obj.closest('td').css({"display":"table-column"});
-	    	mark_obj_lable.css({"display":"table-column"});
+			for(var j=i+1;j<prodln-1;j++){
+				var current_ip_id=$("#line_hit_ip_subnets_id"+j).val();
+				var current_deleted=$("#line_deleted"+j).val();
+				var current_port=$("#line_port"+j).val();
+				
+				console.log("第j行 "+(j+1)+",ip="+current_ip_id+"~"+current_port);
+				
+				if(pre_ip_id==current_ip_id&&current_deleted==pre_deleted&&pre_deleted=="0"&&pre_port==current_port){
+					console.log("equal");
+					return_flag=false;
+					BootstrapDialog.alert({
+						type : BootstrapDialog.TYPE_DANGER,
+						title : SUGAR.language.get('app_strings',
+								'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+						//message : "第"+$("#displayed_line_num"+i).text()+"行和第"+$("#displayed_line_num"+j).text()+"行存在重复的IP值"
+						message : "IP存在重复"
+					});
+					break;
+				}	
+			}
+			
+		if(return_flag==false){
+				break;
 		}
-	  }else{
-	  	mark_obj.closest('td').css({"display":""});
-	    mark_obj_lable.css({"display":""});
-		mark_obj.css({"color":"inherit","background-Color":"#efefef;"});
-	  	mark_obj.attr("readonly",true);
-	  	mark_obj_lable.css({"color":"#aaaaaa"});
-	  }
-	  if (typeof validate != "undefined" && typeof validate['EditView'] != "undefined") {
-	    removeFromValidate('EditView',field_name); // 去除必须验证
-	  }
-	  $("#"+field_name+"_label .required").hide();
+	}
+	//return_flag=false;
+	return return_flag;
 }
-*/
+
+
 $(document).ready(function(){
+	
+	//改写Save事件，在Save之前加入数据校验
+	SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
+		OverwriteSaveBtn(preValidateFunction);//ff_include.js 注意preValidateFunction是一个Function，在此引用时不加（）
+	});
+	
 
 	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
 		$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');

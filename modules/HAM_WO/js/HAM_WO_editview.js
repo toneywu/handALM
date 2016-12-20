@@ -261,6 +261,13 @@ function initTransHeaderStatus() {
         $("#wo_status option[value='INPRG']").remove();
         $("#wo_status option[value='WPREV']").remove();
         $("#wo_status option[value='REWORK']").remove(); 
+		console.log($("name[input=record]").val())
+		if(typeof $("name[input=record]").val()=="undefined"||$("name[input=record]").val()==''){
+			$("#site_select").append("<option selected ='selected' value=''></option>"); 
+			$("#site_select").val(""); 
+			addToValidate('EditView', "site_select",'varchar', 'true', $("#site_label").text());
+		}
+		
         //end 
     } else if (current_header_status=="SUBMITTED") { //可以CANCEL和SUBMIT
         $("#wo_status option[value='APPROVED']").remove();

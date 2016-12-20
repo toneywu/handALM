@@ -119,6 +119,13 @@ function resetEventType(){
 	//add by  osmond.liu 20161123 增加资产地点的限制
 	loopField("line_target_location",global_eventOptions.change_location);
 	loopField("line_target_location_desc",global_eventOptions.change_location);
+
+	loopField("line_target_asset_attribute10",global_eventOptions.change_asset_attribute10);
+	loopField("line_target_asset_attribute11",global_eventOptions.change_asset_attribute11);
+	loopField("line_target_asset_attribute12",global_eventOptions.change_asset_attribute12);
+	loopField("line_target_cost_center",global_eventOptions.change_cost_center);
+	loopField("line_target_cost_center_id",global_eventOptions.change_cost_center);
+
 //end modefy osmond.liu 20161123
 	//开始与结束时间根据使用组织及人员进行显示，不单独进行处理 deleted toney.wu 改到Using_org中
 /*	loopField("line_date_start",global_eventOptions.change_asset_date_end);
@@ -243,6 +250,47 @@ function check_repeat(ip_array)
 }
 
 
+
+function erp_allocations(){
+		var json_obj={};
+		var i=0;
+		$("input[id^='line_asset_id']").each(function(){
+			var id_name=$(this).attr("id");
+			var id_index = id_name.split("line_asset_id")[1];
+			if($("#line_deleted"+id_index).val()=="0"){
+				json_obj[id_name]=$(this).val();
+				i=i+1;
+				json_obj["line_target_cost_center"+id_index]=$("#line_target_cost_center"+id_index).val();
+				json_obj["line_target_cost_center_id"+id_index]=$("#line_target_cost_center_id"+id_index).val();
+				json_obj["line_target_location"+id_index]=$("#line_target_location"+id_index).val();
+				json_obj["line_target_location_id"+id_index]=$("#line_target_location_id"+id_index).val();
+				json_obj["line_target_asset_attribute10"+id_index]=$("#line_target_asset_attribute10"+id_index).val();
+				json_obj["line_target_location_desc"+id_index]=$("#line_target_location_desc"+id_index).val();
+			}
+			});
+			
+		var json_data ={};
+		json_data['asset_trans_status']=$("#asset_trans_status").val();
+		json_data['line_cnt']=i;
+		json_data['record']=$("input[name=record]").val();
+		json_data["line_asset_infos"]=json_obj;
+		
+		$.ajax({
+			type:"POST",
+			url: "index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=ebs_fa_allocations",
+			data: json_data,
+			cache:false,  
+            async:false,//重要的关健点在于同步和异步的参数，  
+			success: function(msg){ 
+					console.log(msg);
+					},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				 //alert('Error loading document');
+				 console.log(textStatus+errorThrown);
+			},
+		});
+			
+}
 function check_quantity(){
 		var error_msg="";
 		var formData=$("#EditView");
@@ -299,36 +347,20 @@ function check_quantity(){
 function preValidateFunction(async_bool = false) {
 		var result = true;
 
-		console.log("preValidateFunction");
+		console.log("begin..preValidateFunction");
+		
+		//erp_allocations
+		console.log("function preValidateFunction..begin call erp_allocations");
+		//erp_allocations();
+		//return ;
+		console.log("function preValidateFunction..end   call erp_allocations");
+		
 		var error_msg = check_quantity();
 		console.log("preValidateFunction = "+error_msg);
 		if(error_msg!=="S"&&error_msg!=""){
 			return;
 		}
-		/*var ip_array= new Array();
-		$("input[id^='line_hit_ip_subnets_id']").each(function(){
-			id_name =  $(this).attr("id");
-			id_index = id_name.split("line_hit_ip_subnets_id")[1];
-			console.log($("#line_deleted"+id_index).val());
-			if($("#line_deleted"+id_index).val()!='1'){
-				ip_array.push($(this).val());
-			}
-		});
 		
-		console.log(ip_array);
-		var repeat_flag = check_repeat(ip_array);
-		if(repeat_flag==true){
-			result=false;
-			BootstrapDialog.alert({
-							type : BootstrapDialog.TYPE_DANGER,
-							title : SUGAR.language.get('app_strings',
-									'LBL_EMAIL_ERROR_GENERAL_TITLE'),
-							message : "该网段重复维护,请重新选择"
-							});
-		}else{
-			result=true;
-		}
-		*/
 		
 		//欠费
 		var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());
@@ -351,7 +383,7 @@ function preValidateFunction(async_bool = false) {
 
 		}
 		//End欠费
-		
+		console.log("End..preValidateFunction");
 		return result
 }
 	
