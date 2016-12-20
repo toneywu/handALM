@@ -65,7 +65,7 @@
 			
 			
 		$contract_qty =0;
-		
+		//echo "test";
 		
 		$ham_woop_lines = BeanFactory :: getBean("HAM_WO_Lines")->get_full_list('', "ham_wo_lines.ham_wo_id ='" . $source_wo_id . "'");
 		
