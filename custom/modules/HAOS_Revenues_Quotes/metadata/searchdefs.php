@@ -16,7 +16,7 @@ array (
         'width' => '10%',
         'default' => true,
         'name' => 'account_name',
-      ),
+        ),
       'contract_number' => 
       array (
         'type' => 'relate',
@@ -27,7 +27,7 @@ array (
         'width' => '10%',
         'default' => true,
         'name' => 'contract_number',
-      ),
+        ),
       'expense_group' => 
       array (
         'type' => 'relate',
@@ -38,7 +38,7 @@ array (
         'width' => '10%',
         'default' => true,
         'name' => 'expense_group',
-      ),
+        ),
       'clear_status' => 
       array (
         'type' => 'enum',
@@ -47,7 +47,42 @@ array (
         'width' => '10%',
         'default' => true,
         'name' => 'clear_status',
-      ),
+        ),
+      'source_code' => 
+      array (
+        'type' => 'enum',
+        'studio' => 'visible',
+        'label' => 'LBL_SOURCE_CODE',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'source_code',
+        ),
+      'source_code' => 
+      array (
+        'type' => 'enum',
+        'studio' => 'visible',
+        'label' => 'LBL_SOURCE_CODE',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'source_code',
+        ),
+      'event_type' => 
+      array (
+        'type' => 'relate',
+        'studio' => 'visible',
+        'label' => 'LBL_EVENT_TYPE',
+        'id' => 'HAT_EVENTTYPE_ID_C',
+        'link' => true,
+        'width' => '10%',
+        'default' => true,
+        'name' => 'event_type',
+        ),
+      'event_date' => 
+      array (
+        'name' => 'event_date',
+        'default' => true,
+        'width' => '10%',
+        ),
       'current_user_only' => 
       array (
         'name' => 'current_user_only',
@@ -55,8 +90,8 @@ array (
         'type' => 'bool',
         'default' => true,
         'width' => '10%',
+        ),
       ),
-    ),
     'advanced_search' => 
     array (
       0 => 'name',
@@ -71,11 +106,11 @@ array (
           'params' => 
           array (
             0 => false,
+            ),
           ),
         ),
       ),
     ),
-  ),
   'templateMeta' => 
   array (
     'maxColumns' => '3',
@@ -84,7 +119,7 @@ array (
     array (
       'label' => '10',
       'field' => '30',
+      ),
     ),
-  ),
-);
-?>
+  );
+  ?>

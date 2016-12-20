@@ -37,8 +37,11 @@ class AccountsViewList extends ViewList
         $paraArray[]=$current_user_id;
         $aclSQLList=getListViewSQLStatement($current_module,$current_user_id,$haa_frameworks_id,$paraArray);
         $this->where.=empty($this->where)?(empty($aclSQLList)?"":$aclSQLList):(empty($aclSQLList)?"":'  AND '.$aclSQLList);
+<<<<<<< HEAD
 
         //echo($this->where);
+=======
+>>>>>>> 5abe13fb4f6a22e8e7a1d532fc1ab0348ed32d2b
     //End HPR权限控制逻辑
     }
 

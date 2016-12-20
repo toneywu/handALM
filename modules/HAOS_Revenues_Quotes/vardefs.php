@@ -366,7 +366,8 @@ $dictionary['HAOS_Revenues_Quotes'] = array(
         'unified_search' => false,
         'merge_filter' => 'disabled',
         'size' => '20',
-        'enable_range_search' => false,
+        'enable_range_search' => true,
+        'options' => 'date_range_search_dom',
         ),
       'due_date' => 
       array (
@@ -387,7 +388,8 @@ $dictionary['HAOS_Revenues_Quotes'] = array(
         'unified_search' => false,
         'merge_filter' => 'disabled',
         'size' => '20',
-        'enable_range_search' => false,
+        'enable_range_search' => true,
+        'options' => 'date_range_search_dom',
         ),
       'clear_status' => 
       array (

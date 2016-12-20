@@ -79,6 +79,8 @@ function insertLineData(line_data){//将数据写入到对应的行字段中
         $("#line_premium_payment_date".concat(String(ln))).val(line_data.premium_payment_date);
         $("#line_gap_payment_date".concat(String(ln))).val(line_data.gap_payment_date);
 		renderLine(ln);
+		$("#line_parent_id").val(line_data.parent_id);
+		$("#line_parent_type").val(line_data.parent_type);
 		$("#line_editor"+ln).hide();
 	}
 }
@@ -167,7 +169,9 @@ function insertLineElements(tableid){
 		"<td><textarea id='line_additional_comments"+prodln+"' name='line_additional_comments["+prodln+"]' rows='3' cols='50'></textarea></td>"+
 	"</tr>"+
 	"<tr>"+
-		"<td colSpan='2'><input type='hidden' id='line_id"+prodln+"' name='line_id["+prodln+"]' value=''/></td>"+
+		"<td colSpan='2'>"+
+			"<input type='hidden' id='line_id"+prodln+"' name='line_id["+prodln+"]' value=''/>"+
+		"</td>"+
 		"<td colSpan='2'><input type='hidden' id='line_deleted"+prodln+"' name='line_deleted["+prodln+"]' value='0'>"+
 						"<input type='button' id='line_delete_line"+prodln+"' class='button btn_del' value='"+SUGAR.language.get('app_strings','LBL_DELETE_INLINE')+"' tabindex='116' onclick='btnMarkLineDeleted("+prodln+",\"line_\")'>"+
 						"<button type='button' id='btn_LineEditorClose"+prodln+"' class='button btn_save' value='"+SUGAR.language.get('app_strings','LBL_CLOSEINLINE')+"' tabindex='116' onclick='LineEditorClose("+prodln+",\"line_\")'>"+SUGAR.language.get('app_strings','LBL_SAVE_BUTTON_LABEL')+"&"+SUGAR.language.get('app_strings','LBL_CLOSEINLINE')+"<img src='themes/default/images/id-ff-clear.png' alt='"+SUGAR.language.get(module_sugar_grp1,'LBL_REMOVE_PRODUCT_LINE')+"'></button>"+
@@ -229,28 +233,19 @@ function openInsurancePopup(ln){
 			"id":"line_haos_insurances_id_c"+ln,
 			"name" : "line_relate_insurance_number" + ln,
 			"insurance_type":"line_insurance_type"+ln,
+			//Add by zengchen 20161216
+			"parent_type":"line_parent_type",
+			"parent_id":"line_parent_id",
 		}
 	};
-	open_popup('HAOS_Insurances', 800, 850, '', true, true, popupRequestData);
+	var data="&parent_type_advanced="+$("#line_parent_type").val()+"&parent_id="+$("#line_parent_id").val();
+	//End add 20161216 ↓ data
+	open_popup('HAOS_Insurances', 800, 850, data, true, true, popupRequestData);
 }
 
 function setInsuranceReturn(popupReplyData){
 	set_return(popupReplyData);
 }
-
-/*function openPopup() {
-	var module=$("#parent_type").find("option:selected").val();
-	var popupRequestData = {
-		"call_back_function" : "setReturn",
-		"form_name" : "EditView",
-		"field_to_name_array" : {
-			"id":"parent_id",
-			"name" : "parent_name",
-		}
-	};
-	console.log(module);
-	open_popup(module, 800, 850, '', true, true, popupRequestData);
-}*/
 
 function line_caculate(ln) {//行内计算
 	var line_claim_amount=unformatNumber($("#line_claim_amount"+ln).val().trim(),',','.');

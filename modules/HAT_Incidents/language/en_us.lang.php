@@ -103,4 +103,6 @@ $mod_strings = array (
   'LBL_ATTRIBUTE6' => 'Attribute6',
   'LBL_ATTRIBUTE7' => 'Attribute7',
   'LBL_ATTRIBUTE8' => 'Attribute8',
+  'LBL_EDITVIEW_PANEL3' => '详细信息',
+  'LBL_EDITVIEW_PANEL1' => '收支管理',
   );

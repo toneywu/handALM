@@ -43,7 +43,7 @@ $rawRow['haa_frameworks_id_c'] = $rawRow['haa_frameworks_id_c'];
 $rawRow['revenue_quote_number'] = '';
 $rawRow['clear_status'] = 'Unclear';
 $rawRow['event_date'] = date_format(date_create($event->event_date),"Y-m-d") ;
-$rawRow['source_code'] = 'Others';
+$rawRow['source_code'] = 'HAT_Incidents';
 $rawRow['source_id'] = $event->id;
 
 $rawRow['source_reference'] =  $event->event_number;
@@ -53,6 +53,7 @@ $rawRow['contract_name'] = $event->person_name;
 
 $rawRow['expense_group'] = $event->event_type;
 $rawRow['event_type'] =$event->event_type;
+$rawRow['name']=$event->name.'收支';
 
 //Setting Line Items
 $quoteRow['line_item_type_c']='Service';

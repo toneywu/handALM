@@ -513,11 +513,15 @@ class SugarWebServiceUtilv4 extends SugarWebServiceUtilv3_1
 	{
 	    global $beanList, $beanFiles;
 	    $results = array();
+	    $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
 	    switch ($type)
 	    {
 	        case 'wireless':
-
-                if (file_exists('custom/modules/'.$module.'/metadata/wireless.subpaneldefs.php'))
+	        //Add instance by zengchen 20161214  instance
+	        	if (file_exists($instance_loc.'modules/'.$module.'/metadata/wireless.subpaneldefs.php')) 
+	        		require_once($instance_loc.'modules/'.$module.'/metadata/wireless.subpaneldefs.php');
+	        	//End Add instance by zengchen 20161214 instance
+	        	else if (file_exists('custom/modules/'.$module.'/metadata/wireless.subpaneldefs.php'))
 	                 require_once('custom/modules/'.$module.'/metadata/wireless.subpaneldefs.php');
 	            else if (file_exists('modules/'.$module.'/metadata/wireless.subpaneldefs.php'))
 	                 require_once('modules/'.$module.'/metadata/wireless.subpaneldefs.php');
@@ -527,6 +531,11 @@ class SugarWebServiceUtilv4 extends SugarWebServiceUtilv3_1
                 {
                     require_once('custom/modules/'.$module.'/Ext/WirelessLayoutdefs/wireless.subpaneldefs.ext.php');
                 }
+                //Add instance by zengchen 20161214  instance
+                if (file_exists($instance_loc.'modules/'.$module.'/Ext/WirelessLayoutdefs/wireless.subpaneldefs.ext.php')) {
+                	require_once($instance_loc.'modules/'.$module.'/Ext/WirelessLayoutdefs/wireless.subpaneldefs.ext.php');
+                }
+                //End Add instance by zengchen 20161214 instance
 	            break;
 
 	        case 'default':
@@ -535,6 +544,10 @@ class SugarWebServiceUtilv4 extends SugarWebServiceUtilv3_1
 	                require ('modules/'.$module.'/metadata/subpaneldefs.php');
 	            if ( file_exists('custom/modules/'.$module.'/Ext/Layoutdefs/layoutdefs.ext.php' ))
 	                require ('custom/modules/'.$module.'/Ext/Layoutdefs/layoutdefs.ext.php');
+	            //Add instance by zengchen 20161214  instance
+	            if (file_exists ($instance_loc.'modules/'.$module.'/metadata/subpaneldefs.php')) 
+	            	require ($instance_loc.'modules/'.$module.'/metadata/subpaneldefs.php');
+	            //End Add instance by zengchen 20161214 instance
 	    }
 
 	    //Filter results for permissions

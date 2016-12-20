@@ -39,15 +39,21 @@
 
 
 $app_list_strings['moduleList']['AOS_Invoices'] = 'Invoices';
+$app_list_strings['parent_type_display'] =array (
+	'Accounts' => 'Account',
+	'Contacts' => 'Contact',
+	'Tasks' => 'Task',
+	'Opportunities' => 'Opportunity',
 
+	'Bugs' => 'Bug',
+	'Cases' => 'Case',
+	'Leads' => 'Lead',
 
-$GLOBALS['app_list_strings']['settlement_period_list']=array (
-  'Once' => '一次结清',
-  'Monthly' => '按月',
-);
+	'Project' => 'Project',
+	'ProjectTask' => 'Project Task',
 
+	'Prospects' => 'Target',
+	'AOS_Contracts' => 'Contracts',
+	'HAT_Assets' => 'Assets',
 
-$GLOBALS['app_list_strings']['haos_line_item_type_list']=array (
-  'Product' => '产品',
-  'Service' => '服务',
-);
+	);

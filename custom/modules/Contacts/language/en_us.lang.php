@@ -66,5 +66,4 @@ $mod_strings = array (
   'LBL_DETAILVIEW_PANEL_ASSETS'=>'Equip.Asset & Transactions',
   'LBL_ASSETS_USING_SUBPANEL'=>'Using Assets',
   'LBL_ASSETS_OWNING_SUBPANEL'=>'Owning Assets',
-
 );

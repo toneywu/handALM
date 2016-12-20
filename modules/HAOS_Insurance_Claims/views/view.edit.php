@@ -44,6 +44,10 @@ class HAOS_Insurance_ClaimsViewEdit extends ViewEdit
 		$ff_id_field = '<input id=haa_ff_id name=haa_ff_id type=hidden '.(isset($ff_id)?'value='.$ff_id:'').'>';
 		echo '<script>if($("#haa_ff_id").length==0) {  $("#EditView").append("'.$ff_id_field.'");}</script>';
 	   			//*********************处理FF界面 END********************
+		//Add by zengchen 20161216
+		echo '<input id="line_parent_id" type="hidden" value="">';
+		echo '<input id="line_parent_type" type="hidden" value="">';
+		//End add 20161216
 		$this->displayLineItems();
 	}
 
@@ -61,6 +65,8 @@ class HAOS_Insurance_ClaimsViewEdit extends ViewEdit
 			hicl.id,
 			hi.name relate_insurance_number,
 			hc.name insurance_type,
+			hi.parent_type,
+			hi.parent_id,
 			hicl.haos_insurances_id_c, 
 			hicl.claim_amount,
 			hicl.other_side_amount,
@@ -82,7 +88,7 @@ class HAOS_Insurance_ClaimsViewEdit extends ViewEdit
 			AND hicl.haos_insurances_id_c=hi.id
 			AND hhc.haos_insurf06es_lines_idb = hicl.id
 			AND hi.haa_codes_id_c=hc.id
-			AND hhc.haos_insurefcc_claims_ida='".$focus->id."'";
+			AND hhc.haos_insurefcc_claims_ida='".$focus->id."'";//Add by zengchen 增加对象字段 parent_name parent_id 20161216
 			$result=$focus->db->query($sql);
 			while($row=$focus->db->fetchByAssoc($result)){
 				$line_data=json_encode($row);
