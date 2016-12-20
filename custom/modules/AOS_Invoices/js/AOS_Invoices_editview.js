@@ -6,7 +6,42 @@ $(document).ready(function() {
     //触发FF
     SUGAR.util.doWhen("typeof setFF == 'function'", function(){
     	call_ff();
-    })
+    });
+    //Add by zengchen 20161219
+    setAmount_c();
+    $("#status").change(function(){
+    	setAmount_c();
+    });
+
+    function setAmount_c(){
+    	var statu=$("#status option:selected").val();
+    	$("#amount_c").unbind("blur");
+    	$("#amount_c").attr("readonly",true);
+    	$("#amount_c").removeAttr("placeholder");
+    	switch(statu){
+    		case "Paid":
+    			$("#amount_c").val($("#total_amount").val());
+    		break;
+    		case "Unpaid":
+    			$("#amount_c").val("0.00");
+    		break;
+    		case "Cancelled":
+    			$("#amount_c").val("");
+    		break;
+    		case "PartedPaid":
+    			$("#amount_c").removeAttr("readonly");
+                $("#amount_c").attr("placeholder","金额大于0且小于金额总计");
+    			$("#amount_c").blur(function(){
+    				var amount_c=$("#amount_c").val().replace(/,/g,"");
+                    var total_amount=$("#total_amount").val().replace(/,/g,"");//去除除千分符
+    				if (parseFloat(amount_c)<=0||parseFloat(amount_c)>=parseFloat(total_amount)) {
+    					$("#amount_c").val("");
+    				}
+    			});
+    		break;
+    	}
+    }
+    //End add 20161219
 });
 //选择合同类型的回调函数
 function setEventTypeReturn(popupReplyData){
@@ -51,3 +86,60 @@ function resetParentInfo(){
 	$("#parent_sub_type").val("");
 	$("#parent_name").val("");
 }
+
+//Add by zengchen 20161219
+function setCloseDate(){
+    if ($("#closed_date_c").text()!="") {
+        return false;
+    }
+    console.log($("#closed_date_c"));
+    var message="是否将未结金额转入后期结算?";
+    var record=$("input[name='record']").val();
+    var url="?module=AOS_Invoices&action=setCloseDate&to_pdf=true";
+    YAHOO.SUGAR.MessageBox.show({
+        msg : "是否将未结金额转入后期结算?",
+        title : "关闭发票",
+        type : 'confirm',
+        buttons:[{
+            text:"是",
+            isDefault:true,
+            handler:function(){
+                YAHOO.SUGAR.MessageBox.config['fn']('yes');
+                YAHOO.SUGAR.MessageBox.hide();
+            },
+        },{
+            text:"否",
+            handler:function(){
+                YAHOO.SUGAR.MessageBox.config['fn']('no');
+                YAHOO.SUGAR.MessageBox.hide();
+            },
+        }],
+        fn : function(confirm) {
+            console.log(confirm);
+            if (confirm == 'yes') {
+                getAjaxData(record,url);
+                window.location.reload();//不管是与否，都刷新页面
+            }else{
+                getAjaxData(record,url);
+                window.location.reload();//不管是与否，都刷新页面
+            }
+        },
+    });
+}
+
+function getAjaxData(recordId,urlStr) {
+    $.ajax({
+        url:urlStr,
+        data:"&record="+recordId,
+        type:"POST",
+        success:function(res){
+            if (res==1) {
+                return true;
+            }else{
+                alert("未正常关闭该发票，请重试。");
+                return false;
+            }
+        }
+    });
+}
+//End add 20161219

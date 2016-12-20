@@ -91,7 +91,7 @@ class AOS_InvoicesViewEdit extends ViewEdit {
 		}*/
 
 		//*********************处理FF界面 END********************
-
+		echo "<script>$('#closed_date_c').val('".$this->bean->closed_date_c."')</script>";
 	}
 	
 	function populateInvoiceTemplates(){

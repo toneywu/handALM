@@ -36,13 +36,13 @@ $subpanel_layout['list_fields'] = array (
     'target_module' => 'HAM_Priority',
     'target_record_key' => 'ham_priority_id',
   ),*/
-  'date_modified' => 
+  /*'date_modified' => 
   array (
     'type' => 'datetime',
     'vname' => 'LBL_DATE_MODIFIED',
     'width' => '10%',
     'default' => true,
-  ),
+  ),*/
   'edit_button' => 
   array (
     'vname' => 'LBL_EDIT_BUTTON',

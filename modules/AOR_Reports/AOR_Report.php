@@ -1049,15 +1049,32 @@ function standard_build_report_csv(){
 }
 
 function build_report_csv(){
-   
+    $instance_code='';
     $bean_report=BeanFactory::getBean('AOR_Reports',$this->id);
-    if ($bean_report->report_type_c=='Standard'){
-        $this->standard_build_report_csv();
+    if($bean_report){
+       $bean_framework=BeanFactory::getBean('HAA_Frameworks',$this->haa_frameworks_id_c);
+       if($bean_framework){
+        $instance_code=$bean_framework->code;
     }
-    else {
-        require_once('custom/modules/AOR_Reports/rpt_files/'.$bean_report->custom_file_c);
-        custom_report_main($this->paramsArray);
+}
+if ($bean_report->report_type_c=='Standard'){
+    $this->standard_build_report_csv();
+}
+else {
+    if ($instance_code!=''){
+        $report_file='custom/modules/AOR_Reports/rpt_files/'. $instance_code .'/'.$bean_report->custom_file_c;
     }
+    else{
+        $report_file='custom/modules/AOR_Reports/rpt_files/'.$bean_report->custom_file_c;
+    }
+    if(file_exists($report_file)){
+        require_once($report_file); 
+    }
+    else{
+        die('未找到定义的报表程序文件，请联系运维人员，确定报表文件的部署路径是否准确。'); 
+    }
+    custom_report_main($this->paramsArray);
+}
 
 }
 

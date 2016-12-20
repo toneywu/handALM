@@ -52,12 +52,12 @@ class LanguageManager
 	static function createLanguageFile($module , $templates=array('default'), $refresh = false){
 		global $mod_strings, $current_language;
 		if(inDeveloperMode() || !empty($_SESSION['developerMode'])){
-			$refresh = true;
-		}
+        	$refresh = true;
+    	}
 		$temp_mod_strings = $mod_strings;
 		$lang = $current_language;
-		if(empty($lang))
-			$lang = $GLOBALS['sugar_config']['default_language'];
+        if(empty($lang))
+            $lang = $GLOBALS['sugar_config']['default_language'];
 		static $createdModules = array();
 		if(empty($createdModules[$module]) && ($refresh || !file_exists(sugar_cached('modules/').$module.'/language/'.$lang.'.lang.php'))){
 			$loaded_mod_strings = array();
@@ -141,9 +141,9 @@ class LanguageManager
 			if(file_exists($cache_dir) && $dir = @opendir($cache_dir)) {
 				while(($entry = readdir($dir)) !== false) {
 					if ($entry == "." || $entry == "..") continue;
-					foreach($languages as $clean_lang) {
-						LanguageManager::_clearCache($entry, $clean_lang);
-					}
+						foreach($languages as $clean_lang) {
+							LanguageManager::_clearCache($entry, $clean_lang);
+						}
 				}
 				closedir($dir);
 			}
@@ -176,29 +176,26 @@ class LanguageManager
 	 */
 	static function refreshLanguage($module, $lang, $loaded_mod_strings = array(), $additional_search_paths = null){
 		// Some of the vardefs do not correctly define dictionary as global.  Declare it first.
-		// Add By osmond.liu 20161219
-		$instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
 		$lang_paths = array(
-			'modules/'.$module.'/language/'.$lang.'.lang.php',
-			'modules/'.$module.'/language/'.$lang.'.lang.override.php',
-			'custom/modules/'.$module.'/language/'.$lang.'.lang.php',
-			'custom/modules/'.$module.'/Ext/Language/'.$lang.'.lang.ext.php',
-			$instance_loc.'modules/'.$module.'/language/'.$lang.'.lang.php',
-				 );//Add instance by osmond.liu 20161219 End
+					'modules/'.$module.'/language/'.$lang.'.lang.php',
+					'modules/'.$module.'/language/'.$lang.'.lang.override.php',
+					'custom/modules/'.$module.'/language/'.$lang.'.lang.php',
+					'custom/modules/'.$module.'/Ext/Language/'.$lang.'.lang.ext.php',
+				 );
 
 		#27023, if this module template language file was not attached , get the template from this module vardef cache file if exsits and load the template language files.
 		static $createdModules;
 		if(empty($createdModules[$module]) && isset($GLOBALS['beanList'][$module])){
-			$object = $GLOBALS['beanList'][$module];
+				$object = $GLOBALS['beanList'][$module];
 
-			if ($object == 'aCase')
-				$object = 'Case';
+				if ($object == 'aCase')
+		            $object = 'Case';
 
-			if(!empty($GLOBALS["dictionary"]["$object"]["templates"])){
-				$templates = $GLOBALS["dictionary"]["$object"]["templates"];
-				$loaded_mod_strings = LanguageManager::loadTemplateLanguage($module , $templates, $lang , $loaded_mod_strings);
-				$createdModules[$module] = true;
-			}
+		        if(!empty($GLOBALS["dictionary"]["$object"]["templates"])){
+		        	$templates = $GLOBALS["dictionary"]["$object"]["templates"];
+					$loaded_mod_strings = LanguageManager::loadTemplateLanguage($module , $templates, $lang , $loaded_mod_strings);
+					$createdModules[$module] = true;
+		        }
 		}
 		//end of fix #27023
 
@@ -244,6 +241,7 @@ class LanguageManager
 				return $return_result;
 			}
 		}
+
 		// Some of the vardefs do not correctly define dictionary as global.  Declare it first.
 		$cachedfile = sugar_cached('modules/').$module.'/language/'.$lang.'.lang.php';
 		if($refresh || !file_exists($cachedfile)){
@@ -276,9 +274,9 @@ class LanguageManager
      * @return string
      */
     public static function getLanguageCacheKey($module, $lang)
-    {
-    	return "LanguageManager.$module.$lang";
-    }
+	{
+         return "LanguageManager.$module.$lang";
+	}
 
     /**
      * Remove any cached js language strings.
@@ -288,18 +286,18 @@ class LanguageManager
      */
     public static function removeJSLanguageFiles()
     {
-    	$jsFiles = array();
-    	getFiles($jsFiles, sugar_cached('jsLanguage'));
-    	foreach($jsFiles as $file) {
-    		unlink($file);
-    	}
+        $jsFiles = array();
+        getFiles($jsFiles, sugar_cached('jsLanguage'));
+        foreach($jsFiles as $file) {
+            unlink($file);
+        }
 
-    	if( empty($GLOBALS['sugar_config']['js_lang_version']) )
-    		$GLOBALS['sugar_config']['js_lang_version'] = 1;
-    	else
-    		$GLOBALS['sugar_config']['js_lang_version'] += 1;
+        if( empty($GLOBALS['sugar_config']['js_lang_version']) )
+            $GLOBALS['sugar_config']['js_lang_version'] = 1;
+        else
+            $GLOBALS['sugar_config']['js_lang_version'] += 1;
 
-    	write_array_to_file( "sugar_config", $GLOBALS['sugar_config'], "config.php");
+        write_array_to_file( "sugar_config", $GLOBALS['sugar_config'], "config.php");
     }
 }
 

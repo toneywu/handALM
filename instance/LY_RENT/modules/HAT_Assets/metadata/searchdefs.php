@@ -20,14 +20,14 @@ array (
         'default' => true,
         'name' => 'asset_desc',
       ),
-      'asset_number' => 
+     /* 'asset_number' => 
       array (
         'type' => 'varchar',
         'label' => 'LBL_ASSET_NUMBER',
         'width' => '10%',
         'default' => true,
         'name' => 'asset_number',
-      ),
+      ),*/
       /*'serial_number' => 
       array (
         'type' => 'varchar',
@@ -44,7 +44,7 @@ array (
         'default' => true,
         'name' => 'vin',
       ),
-      'hat_asset_locations_hat_assets_name' => 
+      /*'hat_asset_locations_hat_assets_name' => 
       array (
         'type' => 'relate',
         'link' => true,
@@ -61,7 +61,7 @@ array (
         'width' => '10%',
         'default' => true,
         'name' => 'location_desc',
-      ),
+      ),*/
       /*'hat_assets_accounts_name' => 
       array (
         'type' => 'relate',
