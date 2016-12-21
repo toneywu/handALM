@@ -161,7 +161,6 @@
     echo '<div "div_framework" style="display:none">'.set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id').'</div>';
 
     $beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
-    //处理Framework中的相关规则性字段
     //加载Framework对应的一些显示规则
     echo "<script>";
     if(isset($beanFramework)) {
@@ -271,26 +270,35 @@
 
 	</div>
 
-<div id="selector_top_view" class="row">
-<!--  	    <div>
-			<span class="input_group">  
-				<label id="assetStatus_label">资产状态</label>
-				<select id="asset_status" class="form-horizontal">
-			     <?php foreach ($app_list_strings['hat_asset_status_list'] as $key => $value) {
-			     	echo '<option value="'.$key.'">'.$value.'</option>';
-			     }?>
-				</select>
-			</span>
-	    </div>
- 	    <div>
-			<span class="input_group">
-				<label id="assetStatus_label">资产名称</label>
-				<input>
-			</span>
-	    </div>
+<!--Search area-->
+<form id="search_form" name="search_form" method="post">
+	<div id="selector_top_view" class="row">
+				<span class="input_group">  
+					<label id="assetStatus_label">维护地点/区域</label>
 
-	    <button id="">Search</button> -->
-</div>
+<?php
+		require_once('modules/HAA_Frameworks/orgSelector_class.php');
+		$current_site_id = empty($this->bean->ham_maint_sites_id)?"":$this->bean->ham_maint_sites_id;
+		echo set_site_selector($current_site_id,$current_module,$current_action);
+?>
+				</span>
+
+				<span class="input_group">  
+					<label id="assetStatus_label">资产状态</label>
+					<select name="asset_status" id="asset_status" class="form-horizontal">
+				     <?php foreach ($app_list_strings['hat_asset_status_list'] as $key => $value) {
+				     	echo '<option value="'.$key.'">'.$value.'</option>';
+				     }?>
+					</select>
+				</span>
+				<span class="input_group">
+					<label id="assetName_label">资产名称</label>
+					<input name="asset_name" id="asset_name">
+				</span>
+
+		    <input type="button" id="btn_search" onclick="btn_search_clicked()" value="搜索">
+	</div>
+</form>
 
 
 <div id="workbench" style="margin:0;display:flex;border:1px solid #ccc">

@@ -54,7 +54,7 @@ if ($sugarbean->asset_trans_status=="APPROVED") {
 	$sugarbean->asset_trans_status == $_POST['asset_trans_status'];
     $sugarbean->save();//再调用一次，为了触发AfterSave,确认是否需要将头彻底关闭
 
-handleRedirect($return_id, 'HAT_Asset_Trans_Batch');
+//handleRedirect($return_id, 'HAT_Asset_Trans_Batch');
 
 //****************** END: Jump Back *************************************************************//
 
@@ -73,7 +73,7 @@ function save_header($sugarbean, $check_notify) {
 
     $sugarbean = populateFromPost('', $sugarbean);//调用populateFromPost写入POST的数据
     $sugarbean->asset_trans_status =  check_hearder_status($sugarbean);
-	
+
     $sugarbean->save($check_notify);
     $return_id = $sugarbean->id;
     $GLOBALS['log']->debug("OK.Saved HAT_Asset_Trans_Batch record with id of ".$return_id);
@@ -112,7 +112,7 @@ function save_lines($post_data, $parent, $key = '',$need_allocation){
         echo "<br/>asset_id=".$post_data[$key.'asset_id'][$i];
         echo "<br/>target_owning_org_id=".$post_data[$key.'target_owning_org_id'][$i];
         echo "<br/>target_location_id=".$post_data[$key.'target_location_id'][$i];
-        
+
 /*        echo "<pre>";
         print_r($post_data);*/
 
@@ -219,24 +219,14 @@ function save_rack_elements_from_rack($focus, $beanRack) {
                 $beanAsset->parent_asset_id = $beanRack->hat_assets_id;
                 $beanAsset->hat_asset_locations_hat_assetshat_asset_locations_ida = $focus->target_location_id;
                 echo "<br/>Asset[".($beanAsset->name)."] located on Rack has been set according to the Rack information";
-            }else{//清空使用信息
+            }else{//如果当前为失效，则清空使用信息
                 $beanAsset->using_org_id = "";
                 $beanAsset->using_person_id = "";
                 $beanAsset->using_person_desc = "";
                 $beanAsset->parent_asset_id ="";
                 $beanAsset->hat_asset_locations_hat_assetshat_asset_locations_ida = "";
 
-/*                $sql = "SELECT ham_maint_sites.id,
-                  ham_maint_sites.deft_unassigned_location_id 
-                FROM
-                  ham_maint_sites,
-                  hat_asset_locations 
-                WHERE ham_maint_sites.id = hat_asset_locations.`ham_maint_sites_id` 
-                  AND ham_maint_sites.`deleted`=0
-                  AND hat_asset_locations.`deleted`=0
-                  AND hat_asset_locations.id ='".$focus->target_location_id."'";
 
-                echo $sql;*/
                 $beanLocation = BeanFactory::getBean('HAT_Asset_Locations',$focus->target_location_id);
                 $beanSite = BeanFactory::getBean('HAM_Maint_Sites',$beanLocation->ham_maint_sites_id);
                 $beanAsset->hat_asset_locations_hat_assetshat_asset_locations_ida = $beanSite->deft_unassigned_location_id;
@@ -296,6 +286,7 @@ function save_rack_allocations($focus, $parent){
     $beanAsset = BeanFactory::getBean('HAT_Assets', $focus->asset_id);
     if ($beanAsset && $beanAsset->enable_it_ports == 1 && $beanAsset->enable_it_rack == 0) { // test if $bean was loaded successfully
         //如果当前为IT设备，则为当前IT设备进行分配。
+        //这种方式一般不再使用，留在这里是保持向后兼容性
         $RackAllocation = BeanFactory::getBean('HIT_Rack_Allocations') ->retrieve_by_string_fields(array('hit_rack_allocations.hat_assets_id'=> $focus->asset_id));
         //基于当前设备（Asset_ID)进行查找，一个资产只能被分配到一个位置。
         //如果已经有位置了，则将当前位置进行更新，否则添加一个新的U位分配
@@ -326,6 +317,7 @@ function save_rack_allocations($focus, $parent){
     }
     else if ($beanAsset && $beanAsset->enable_it_rack == 1) {
     //如果当前为机柜，则为当前机柜的所有分配进行更新。
+    //这是目前的主要操作方式
 
         $RackAllocationData = ($focus->target_rack_position_data);
         $RackAllocationData = str_replace("&quot;",'"',$RackAllocationData);

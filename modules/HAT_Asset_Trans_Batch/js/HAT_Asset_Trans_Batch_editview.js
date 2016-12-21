@@ -5,7 +5,7 @@ $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialo
 function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"HAT_Asset_Trans_Batch");
     $(".expandLink").click();
-	console.log($("#haa_ff_id").val());
+	//console.log($("#haa_ff_id").val());
 }
 
 var prodln = 0;
@@ -300,13 +300,55 @@ function check_quantity(){
 }
 
 
+
+function erp_allocations(){
+		var json_obj={};
+		var i=0;
+		$("input[id^='line_asset_id']").each(function(){
+			var id_name=$(this).attr("id");
+			var id_index = id_name.split("line_asset_id")[1];
+			if($("#line_deleted"+id_index).val()=="0"){
+				json_obj[id_name]=$(this).val();
+				i=i+1;
+				json_obj["line_target_cost_center"+id_index]=$("#line_target_cost_center"+id_index).val();
+				json_obj["line_target_cost_center_id"+id_index]=$("#line_target_cost_center_id"+id_index).val();
+				json_obj["line_target_location"+id_index]=$("#line_target_location"+id_index).val();
+				json_obj["line_target_location_id"+id_index]=$("#line_target_location_id"+id_index).val();
+				json_obj["line_target_asset_attribute10"+id_index]=$("#line_target_asset_attribute10"+id_index).val();
+				json_obj["line_target_location_desc"+id_index]=$("#line_target_location_desc"+id_index).val();
+			}
+			});
+			
+		var json_data ={};
+		json_data['asset_trans_status']=$("#asset_trans_status").val();
+		json_data['line_cnt']=i;
+		json_data['record']=$("input[name=record]").val();
+		json_data["line_asset_infos"]=json_obj;
+		
+		$.ajax({
+			type:"POST",
+			url: "index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=ebs_fa_allocations",
+			data: json_data,
+			cache:false,  
+            async:false,//重要的关健点在于同步和异步的参数，  
+			success: function(msg){ 
+					console.log(msg);
+					},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				 //alert('Error loading document');
+				 console.log(textStatus+errorThrown);
+			},
+		});
+			
+}
 /**
 * 保存前验证
 */
 function preValidateFunction(async_bool = false) {
 		var result = true;
 		var error_msg="S";
-
+		erp_allocations();
+		//return;
 		//toney.wu 仅针对有来源的工作单进行数据验证
 		if ($("#source_woop_id").val()!="") {
 			//console.log("preValidateFunction");
@@ -316,30 +358,7 @@ function preValidateFunction(async_bool = false) {
 		if(error_msg!=="S"&&error_msg!=""){
 			return;
 		}
-		/*var ip_array= new Array();
-		$("input[id^='line_hit_ip_subnets_id']").each(function(){
-			id_name =  $(this).attr("id");
-			id_index = id_name.split("line_hit_ip_subnets_id")[1];
-			console.log($("#line_deleted"+id_index).val());
-			if($("#line_deleted"+id_index).val()!='1'){
-				ip_array.push($(this).val());
-			}
-		});
 		
-		console.log(ip_array);
-		var repeat_flag = check_repeat(ip_array);
-		if(repeat_flag==true){
-			result=false;
-			BootstrapDialog.alert({
-							type : BootstrapDialog.TYPE_DANGER,
-							title : SUGAR.language.get('app_strings',
-									'LBL_EMAIL_ERROR_GENERAL_TITLE'),
-							message : "该网段重复维护,请重新选择"
-							});
-		}else{
-			result=true;
-		}
-		*/
 		
 		//欠费
 		var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());

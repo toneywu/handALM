@@ -70,10 +70,10 @@ $layout_defs['HIT_Racks'] = array(
             'title_key' => 'LBL_RACK_ALLOCATIONS_SUBPANEL_TITLE',
            'top_buttons' => 
            array (
-            0 => 
+/*            0 => 
             array (
               'widget_class' => 'SubPanelTopCreateButton',
-              ),
+              ),*/
             ),
 
             ),

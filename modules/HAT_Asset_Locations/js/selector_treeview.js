@@ -259,7 +259,18 @@ var setting = {
 	}
 
 
+function btn_search_clicked() {
+	alert("search clicked")
+	$.ajax({
+	  	url: 'index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeviewSearch',
+	  	type: 'POST',
+	  	data: { 'asset_status' : $('#asset_status').val(), 'asset_name' : $('#asset_name').val(), 'site_select': $('#site_select').val()},
+	  	success: function (rtn_data) {
+			console.log(rtn_data);
+		},
+	});
 
+}
 function showNodeDetailHTML(node,targetDIV) {
 	//加载每个节点的详细内容
 	var varHTML = "";
