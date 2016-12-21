@@ -80,7 +80,7 @@ class HAT_Assets extends HAT_Assets_sugar {
 				'perfix' => $prefix,
 				'min_num_strlength' => $min_num_strlength
 			));
-			
+
 			if(!empty(prefix)){
 				if ($min_num_strlength != 0) {
 					if (empty ($bean_numbering)) {
@@ -107,20 +107,14 @@ class HAT_Assets extends HAT_Assets_sugar {
 						}else{
 							$newCurrentNumStr=$newNextNum;
 						}
-						$bean_numbering->nextval = $prefix . $newCurrentNumStr;
-						$bean_numbering->save();
 					}
+					$bean_numbering->nextval = $prefix . $newCurrentNumStr;
+					$bean_numbering->save();
 				}
 				if(empty($this->bean->name)){
 					$this->name=$this->asset_group.$this->asset_number;
-					
-					
 				}
-				
-				
-				
 			}
-			
 		}
 
 		parent :: save($check_notify); //保存Assets主体

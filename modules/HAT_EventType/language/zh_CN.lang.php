@@ -130,4 +130,9 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL2'=>'管理与位置跟踪',
   'LBL_CHANGE_CHILD_PORT'=>'可修改子端口',
   'LBL_CHANGE_VLAN_CHANNEL'=>'可修改VLAN通道',
+  'LBL_CHANGE_ASSET_ATTRIBUTE10'=>'可修改产品(attr10)',
+  'LBL_CHANGE_ASSET_ATTRIBUTE11'=>'可修改链路(attr11)',
+  'LBL_CHANGE_ASSET_ATTRIBUTE12'=>'可修改波道(attr12)',
+  'LBL_CHANGE_COSt_CENTER'=>'可修改成本中心',
+  'LBL_ALLOCATION_FLAG'=>'是否进行资产调拨',
 );

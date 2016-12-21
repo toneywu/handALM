@@ -42,6 +42,8 @@ class PushAssetsUtil {
 			$assetBean->load_relationship('hat_asset_locations_hat_assets');
 			$locationsIds = $assetBean->hat_asset_locations_hat_assets->get();
 			$bean_location = BeanFactory :: getBean('HAT_Asset_Locations', $locationsIds[0]);
+			$mait_sites_bean = BeanFactory :: getBean('HAM_Maint_Sites', $bean_location->ham_maint_sites_id);
+			
 			$loopInput = '<HEADER>';
 			$guid = create_guid();
 			$loopInput = $loopInput . '<IF_ID>' . $guid . '</IF_ID>';
@@ -56,7 +58,7 @@ class PushAssetsUtil {
 			$loopInput = $loopInput . '<ASSET_BRAND>' . $assetBean->brand . '</ASSET_BRAND>';
 			$loopInput = $loopInput . '<ASSET_MODEL>' . $assetBean->model . '</ASSET_MODEL>';
 			$loopInput = $loopInput . '<ASSET_OWNING_ORG_NAME>' . $assetBean->cost_center . '</ASSET_OWNING_ORG_NAME>';
-			$loopInput = $loopInput . '<ASSET_LOCATION_NAME>' . $bean_location->name . '</ASSET_LOCATION_NAME>';
+			$loopInput = $loopInput . '<ASSET_LOCATION_NAME>' . $mait_sites_bean->name . '</ASSET_LOCATION_NAME>';
 			$loopInput = $loopInput . '<ASSET_SOURCE_TYPE>' . $assetBean->source_type . '</ASSET_SOURCE_TYPE>';
 			$loopInput = $loopInput . '<ASSET_SOURCE_ORDER></ASSET_SOURCE_ORDER>';
 			$loopInput = $loopInput . '<ASSET_SOURCE_LINE></ASSET_SOURCE_LINE>';

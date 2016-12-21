@@ -24,9 +24,13 @@ array (
       array (
         0 => 
         array (
-          'file' => 'modules/HAT_EventType/js/EditView.js',
+          'file' => 'modules/HAA_FF/ff_include.js',
         ),
         1 => 
+        array (
+          'file' => 'modules/HAT_EventType/js/EditView.js',
+        ),
+        2 => 
         array (
           'file' => 'modules/HAT_EventType/js/reset_EvenType_Fields.js',
         ),
@@ -96,9 +100,8 @@ array (
         2 => 
         array (
           0 => 'name',
-          1 => 
-          array (
-            'name' => 'aos_pdf_template',
+          1 => array (
+            'name'=>'aos_pdf_template',
             'displayParams' => 
             array (
               'initial_filter' => '&type_advanced=HAT_Asset_Trans_Batch',
@@ -120,7 +123,16 @@ array (
           0 => 'asset_scope',
           1 => 'default_asset_list',
         ),
-        5 => 
+        5=>
+        array(
+          0=> 
+          array (
+            'name' => 'need_limit_transaction_lines',
+            'label' => 'LBL_NEED_LIMIT_TRANSACTION_LINES',
+          ),
+          1=>""
+        ),
+        6 => 
         array (
           0 => 
           array (
@@ -135,14 +147,10 @@ array (
             'label' => 'LBL_REQUIRE_CONFIRMATION',
           ),
         ),
-        6 => 
-        array (
-          0 => 
-          array (
-            'name' => 'need_limit_transaction_lines',
-            'label' => 'LBL_NEED_LIMIT_TRANSACTION_LINES',
-          ),
-          1 => '',
+        7=>
+        array(
+          0=>'check_customer_hold_t_using',
+          1=>'check_customer_hold_c_owning',
         ),
       ),
       'lbl_editview_panel1' => 
@@ -246,6 +254,52 @@ array (
             'name' => 'change_rack_position',
             'studio' => 'visible',
             'label' => 'LBL_CHANGE_RACK_POSITION',
+          ),
+        ),
+        5=>
+        array(
+          0=>"change_cost_center",
+          1=>"change_asset_attribute10"
+        ),
+        6=>
+        array(
+          0=>"change_asset_attribute11",
+          1=>"change_asset_attribute12"
+        ),
+		7=>
+        array(
+          0=>"allocation_flag",
+        )
+      ),
+      'lbl_editview_panel3' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_ip_subnets',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_IP_SUBNETS',
+          ),
+          1 => 
+          array (
+            'name' => 'change_associated_ip',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_ASSOCIATED_IP',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_gateway',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_GATEWAY',
+          ),
+          1 => 
+          array (
+            'name' => 'change_bandwidth_type',
+            'studio' => 'visible',
           ),
         ),
       ),
@@ -374,7 +428,7 @@ array (
             'name' => 'change_access_assets_backup_name',
             'studio' => 'visible',
             'label' => 'LBL_CHANGE_ACCESS_ASSETS_BACKUP_NAME',
-          ),
+            ),
         ),
         11 => 
         array (
@@ -393,6 +447,21 @@ array (
             'name' => 'change_broadband_type',
             'studio' => 'visible',
             'label' => 'LBL_CHANGE_BROADBAND_TYPE',
+          ),
+          1 => 
+          array (
+            'name' => 'change_child_port',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_CHILD_PORT',
+          ),
+        ),
+        13 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_vlan_channel',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_VLAN_CHANNEL',
           ),
           1 => '',
         ),

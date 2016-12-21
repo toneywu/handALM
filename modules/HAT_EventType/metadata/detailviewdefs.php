@@ -104,7 +104,16 @@ array (
           0 => 'asset_scope',
           1 => 'default_asset_list',
         ),
-        5 => 
+        5=>
+        array(
+          0=> 
+          array (
+            'name' => 'need_limit_transaction_lines',
+            'label' => 'LBL_NEED_LIMIT_TRANSACTION_LINES',
+          ),
+          1=>""
+        ),
+        6 => 
         array (
           0 => 
           array (
@@ -119,14 +128,10 @@ array (
             'label' => 'LBL_REQUIRE_CONFIRMATION',
           ),
         ),
-        6 => 
-        array (
-          0 => 
-          array (
-            'name' => 'need_limit_transaction_lines',
-            'label' => 'LBL_NEED_LIMIT_TRANSACTION_LINES',
-          ),
-          1 => '',
+        7=>
+        array(
+          0=>'check_customer_hold_t_using',
+          1=>'check_customer_hold_c_owning',
         ),
       ),
       'lbl_editview_panel1' => 
@@ -232,6 +237,20 @@ array (
             'label' => 'LBL_CHANGE_RACK_POSITION',
           ),
         ),
+        5=>
+        array(
+          0=>"change_cost_center",
+          1=>"change_asset_attribute10"
+        ),
+        6=>
+        array(
+          0=>"change_asset_attribute11",
+          1=>"change_asset_attribute12"
+        ),
+		7=>
+        array(
+          0=>"allocation_flag",
+        )
       ),
       'lbl_editview_panel3' => 
       array (
@@ -325,6 +344,7 @@ array (
             'label' => 'LBL_CHANGE_CHANGE_MRTG_LINK',
           ),
         ),
+
         6 => 
         array (
           0 => 'change_main_asset',
@@ -377,6 +397,21 @@ array (
             'name' => 'change_broadband_type',
             'studio' => 'visible',
             'label' => 'LBL_CHANGE_BROADBAND_TYPE',
+          ),
+          1 => 
+          array (
+            'name' => 'change_child_port',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_CHILD_PORT',
+          ),
+        ),
+        13 => 
+        array (
+          0 => 
+          array (
+            'name' => 'change_vlan_channel',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_VLAN_CHANNEL',
           ),
           1 => '',
         ),
