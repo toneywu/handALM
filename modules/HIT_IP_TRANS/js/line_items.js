@@ -328,6 +328,24 @@ function setHitIpReturn(popupReplyData) {
 	}
 	set_return(popupReplyData);
 	
+	/*
+	ip_splited = $("#line_hit_ip_subnets" + ln).val().split("/");
+	if (IpSubnetCalculator.isIp(ip_splited[0]) && ip_splited[1] <= 32
+			&& ip_splited[1] >= 0) {
+		var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],
+				ip_splited[1]);
+		var associated_ip = ip_caled.ipLowStr + "~" + ip_caled.ipHighStr;
+		// 显示IP细节信息，由IpSubnetCalculator.js完成算法
+		$("#displayed_line_associated_ip" + ln).html(associated_ip);
+		$("#line_associated_ip" + ln).val(associated_ip);
+		//console.log(associated_ip);
+	}
+	
+	
+	
+	*/
+	
+	
 }
 
 
@@ -608,7 +626,10 @@ function insertLineData(asset_trans_line) { // 将数据写入到对应的行字
 		single_changeRequired(lineData,ln);	
 	}
 }
+
+
 $(document).ready(function(){
+	
 	var newDate = new Date();
 	var t       = newDate.toJSON(); 
 	var dateformat="Y-m-d H:M";
@@ -620,19 +641,18 @@ $(document).ready(function(){
 	
 	
 	$('.form_datetime').datetimepicker({
-    //精确到分的时间
-    format: dateformat,
-    weekStart: 1,
-    todayBtn:  1,
-    autoclose: 1,
-    todayHighlight: 1,
-    startView: 2,
-    forceParse: 0,
-    //showMeridian: 1,
-    minuteStep : 1,
-	startDate:new Date(t),
-});
-	
+		//精确到分的时间
+		format: dateformat,
+		weekStart: 1,
+		todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+		//showMeridian: 1,
+		minuteStep : 1,
+		startDate:new Date(t),
+	});
 	
 	
 	
@@ -1614,21 +1634,12 @@ function LineEditorClose(ln) {// 关闭行编辑器（显示为正常行）
 
 function single_Field(fieldName,type,i){
 	if(type=="OPTIONAL"){
-		//for (var i=0;i<prodln;i++) {
 			mark_field_enabled_mine(fieldName+i,true);
-		 //}
 	}else if(type=="LOCKED"){
-		//for (var i=0;i<prodln;i++) {
 		    mark_field_disabled_mine(fieldName+i,false);
-		//}
 	}else if(type=="REQUIRED"){
-		//for (var i=0;i<prodln;i++) {
-			// mark_field_disabled(fieldName+i,false);
 		    mark_field_enabled_mine(fieldName+i,false);
-		//}
 	}else if(type=="INVISIABLE"){
-		//for (var i=0;i<prodln;i++) {
-			// hide_field_disabled(fieldName+i,true,false)
 		    $("#"+fieldName+i).css({"visibility":"hidden"});
 		    $("#"+fieldName+i+"_label").css({"visibility":"hidden"});
 		    $("#btn_"+fieldName+i).css({"visibility":"hidden"});
@@ -1636,8 +1647,7 @@ function single_Field(fieldName,type,i){
 		    $("#"+fieldName+"_title").hide();//remove(); 
 		    $("#displayed_"+fieldName+i).hide();//remove(); 
 		    $("#span_"+fieldName+i).hide();//remove(); 
-		    mark_field_disabled_mine(fieldName+i,false);
-		//}
+		    mark_field_disabled_mine(fieldName+i,false);		
 	}
 }
 
@@ -1670,6 +1680,7 @@ function single_changeRequired(lineRecord,i){
 	single_Field("line_broadband_type",lineRecord.change_broadband_type,i);
 	single_Field("line_child_port",lineRecord.change_child_port,i);
 	single_Field("line_vlan_channel",lineRecord.change_vlan_channel,i);
+	single_Field("line_enable_action",lineRecord.change_enable_action,i);
 }
 
 

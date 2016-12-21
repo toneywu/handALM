@@ -11,6 +11,7 @@ function call_ff() {
 var prodln = 0;
 var global_eventOptions;
 
+
 function setEventTypePopupReturn(popupReplyData){
 	set_return(popupReplyData);
 	console.log(popupReplyData);
@@ -250,6 +251,47 @@ function check_repeat(ip_array)
 }
 
 
+
+function erp_allocations(){
+		var json_obj={};
+		var i=0;
+		$("input[id^='line_asset_id']").each(function(){
+			var id_name=$(this).attr("id");
+			var id_index = id_name.split("line_asset_id")[1];
+			if($("#line_deleted"+id_index).val()=="0"){
+				json_obj[id_name]=$(this).val();
+				i=i+1;
+				json_obj["line_target_cost_center"+id_index]=$("#line_target_cost_center"+id_index).val();
+				json_obj["line_target_cost_center_id"+id_index]=$("#line_target_cost_center_id"+id_index).val();
+				json_obj["line_target_location"+id_index]=$("#line_target_location"+id_index).val();
+				json_obj["line_target_location_id"+id_index]=$("#line_target_location_id"+id_index).val();
+				json_obj["line_target_asset_attribute10"+id_index]=$("#line_target_asset_attribute10"+id_index).val();
+				json_obj["line_target_location_desc"+id_index]=$("#line_target_location_desc"+id_index).val();
+			}
+			});
+			
+		var json_data ={};
+		json_data['asset_trans_status']=$("#asset_trans_status").val();
+		json_data['line_cnt']=i;
+		json_data['record']=$("input[name=record]").val();
+		json_data["line_asset_infos"]=json_obj;
+		
+		$.ajax({
+			type:"POST",
+			url: "index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=ebs_fa_allocations",
+			data: json_data,
+			cache:false,  
+            async:false,//重要的关健点在于同步和异步的参数，  
+			success: function(msg){ 
+					console.log(msg);
+					},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				 //alert('Error loading document');
+				 console.log(textStatus+errorThrown);
+			},
+		});
+			
+}
 function check_quantity(){
 		var error_msg="";
 		var formData=$("#EditView");
@@ -355,6 +397,7 @@ function preValidateFunction(async_bool = false) {
 			var error_msg = check_quantity(); //如果验证有误会返回错误信息
 			//console.log("preValidateFunction = "+error_msg);
 		}
+
 		if(error_msg!=="S"&&error_msg!=""){
 			return;
 		}
@@ -381,7 +424,7 @@ function preValidateFunction(async_bool = false) {
 
 		}
 		//End欠费
-		
+		console.log("End..preValidateFunction");
 		return result
 }
 	

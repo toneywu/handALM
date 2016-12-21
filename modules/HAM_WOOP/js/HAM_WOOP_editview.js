@@ -410,7 +410,7 @@ function date_finish_change(){
 
 	    var current_header_status = $("#woop_status").val();
 	    if (current_header_status=="DRAFT") {//可以DRAFT和SUBMIT
-	        $("#woop_status option[value='APPROVED']").remove();
+	        //$("#woop_status option[value='APPROVED']").remove();
 	        $("#woop_status option[value='RELEASED']").remove();
 	        $("#woop_status option[value='REJECTED']").remove();
 	        $("#woop_status option[value='CANCELED']").remove();
@@ -461,14 +461,12 @@ function date_finish_change(){
 	    	$("#woop_status option[value='REWORK']").remove();
 	        $("#woop_status option[value='WPREV']").remove();
 	        $("#woop_status option[value='RETURNED']").remove();
-<<<<<<< HEAD
-=======
+
 			$("#woop_status option[value='WSCH']").remove();
 	        $("#woop_status option[value='WMATL']").remove();
 	        $("#woop_status option[value='WPCOND']").remove();
 			$("#woop_status option[value='INPRG']").remove();
 			$("#woop_status option[value='CANCELED']").remove();
->>>>>>> 74c201e4fee1e4808baf6ff42cd59cdb930dcda3
 
 	        setEditViewByStatus ();
 	    } else if ((current_header_status=="CANCELED")) { //什么也不能做
@@ -598,6 +596,7 @@ function date_finish_change(){
 	    }
 	    
 	}
+	
 
 function setEditViewByStatus() { //如果当前头状态为Submitted、Approved、Canceled、Closed需要将字段变为只读
     //$("#EditView_tabs input").attr("readonly",true);
@@ -616,16 +615,30 @@ function setEditViewByStatus() { //如果当前头状态为Submitted、Approved�
 	if(woop_status!="DRAFT"){
 		//的非撰写状态下，以下字段不可以修改
 		mark_field_disabled("date_target_start",false);
+		$("#date_target_start").next().hide();
+		$("#date_target_start").unbind();
+		
 		mark_field_disabled("date_target_finish",false);
+		$("#date_target_finish").next().hide();
+		$("#date_target_finish").unbind();
 		mark_field_disabled("date_start_not_earlier",false);
+		$("#date_start_not_earlier").next().hide();
+		$("#date_start_not_earlier").unbind();
 		mark_field_disabled("date_target_finish",false);
+		$("#date_target_finish").next().hide();
+		$("#date_target_finish").unbind();
+		
 		mark_field_disabled("duration_target",false);
+		
 		mark_field_disabled("date_finish_not_later",false);
+		$("#date_finish_not_later").next().hide();
+		$("#date_finish_not_later").unbind();
+		
 		mark_field_disabled("work_center",false);
 
 		mark_field_disabled("event_type",false);
 		mark_field_disabled("act_module",false);
-
+		
 	}
 
 

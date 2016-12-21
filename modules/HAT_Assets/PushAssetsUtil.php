@@ -55,7 +55,7 @@ class PushAssetsUtil {
 			$loopInput = $loopInput . '<ASSET_NAME>' . $assetBean->asset_name . '</ASSET_NAME>';
 			$loopInput = $loopInput . '<ASSET_BRAND>' . $assetBean->brand . '</ASSET_BRAND>';
 			$loopInput = $loopInput . '<ASSET_MODEL>' . $assetBean->model . '</ASSET_MODEL>';
-			$loopInput = $loopInput . '<ASSET_OWNING_ORG_NAME>' . $assetBean->owning_org . '</ASSET_OWNING_ORG_NAME>';
+			$loopInput = $loopInput . '<ASSET_OWNING_ORG_NAME>' . $assetBean->cost_center . '</ASSET_OWNING_ORG_NAME>';
 			$loopInput = $loopInput . '<ASSET_LOCATION_NAME>' . $bean_location->name . '</ASSET_LOCATION_NAME>';
 			$loopInput = $loopInput . '<ASSET_SOURCE_TYPE>' . $assetBean->source_type . '</ASSET_SOURCE_TYPE>';
 			$loopInput = $loopInput . '<ASSET_SOURCE_ORDER></ASSET_SOURCE_ORDER>';

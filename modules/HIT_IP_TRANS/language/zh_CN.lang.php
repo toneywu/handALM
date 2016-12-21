@@ -103,6 +103,6 @@ $mod_strings = array (
   'LBL_EFFICACY'=>'失效',
   'LBL_EFFECTIVE'=>'有效',
   'LBL_BROADBAND_TYPE'=>'带宽变量',
-  'LBL_CHILD_PORT'=>'字端口',
+  'LBL_CHILD_PORT'=>'子端口',
   'LBL_VLAN_CHANNEL'=>'VLAN通道',
 );

@@ -33,14 +33,14 @@ class HAM_Work_Center_PeopleViewEdit extends ViewEdit
 			
         }
 		
-	if(isset($_REQUEST['contact_id']) && $_REQUEST['contact_id'] !="") {
+	//if(isset($_REQUEST['contact_id']) && $_REQUEST['contact_id'] !="") {
 		$bean_contact = BeanFactory::getBean('Contacts', $this->bean->contact_id);
         if ($bean_contact) 
 		{ // test if $bean_location was loaded successfully
                 $this->bean->organization_name = isset($bean_contact->account_name)?$bean_contact->account_name:'';
 				$this->bean->user_name=$bean_contact->linked_user_c;
         }
-    }
+   // }
 	
 	parent::Display();
 	}

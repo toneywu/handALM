@@ -1,5 +1,8 @@
 //必须要这个
-$.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
+if(typeof IPSubnetCalculator=="undefined"){
+$.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");	
+}
+
 var prodln = 0;
 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
 
@@ -80,7 +83,6 @@ function insertTransLineHeader(tableid){
   e3.innerHTML="<span id='line_broadband_type_title'>带宽变量</span>";
 }
 
-
 function insertLineData(asset_trans_line ){ //将数据写入到对应的行字段中
   console.log("insertLineData");
   console.log(asset_trans_line);
@@ -88,14 +90,32 @@ function insertLineData(asset_trans_line ){ //将数据写入到对应的行字�
   if(asset_trans_line.id != '0' && asset_trans_line.id !== ''){
     ln = insertTransLineElements("lineItems");
     //alert(asset_trans_line.hit_ip_subnets);
-    ip_splited = asset_trans_line.hit_ip_subnets.split("/")
-    if ( IpSubnetCalculator.isIp(ip_splited[0])) {
+    ip_splited = asset_trans_line.hit_ip_subnets.split("/");
+	
+	$.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js", function(data, status, jqxhr) {
+		if (IpSubnetCalculator.isIp(ip_splited[0])) {
 		   var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1]);
 		   var associated_ip= ip_caled.ipLowStr+"~"+ip_caled.ipHighStr;
 		   //显示IP细节信息，由IpSubnetCalculator.js完成算法
 		   $("#line_associated_ip"+ln).html(associated_ip);
 		   $("#displayed_line_associated_ip"+ln).html(associated_ip);
 	  }
+
+	});
+	
+	
+	/*if(typeof IpSubnetCalculator=="undefined"){
+		$.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
+		if (IpSubnetCalculator.isIp(ip_splited[0])) {
+		   var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1]);
+		   var associated_ip= ip_caled.ipLowStr+"~"+ip_caled.ipHighStr;
+		   //显示IP细节信息，由IpSubnetCalculator.js完成算法
+		   $("#line_associated_ip"+ln).html(associated_ip);
+		   $("#displayed_line_associated_ip"+ln).html(associated_ip);
+	  }
+	}*/
+	
+    
     $("#line_parent_ip".concat(String(ln))).val(asset_trans_line.parent_ip);
     $("#line_hit_ip_subnets".concat(String(ln))).val(asset_trans_line.hit_ip_subnets);
     //$("#line_associated_ip".concat(String(ln))).val(asset_trans_line.associated_ip);
