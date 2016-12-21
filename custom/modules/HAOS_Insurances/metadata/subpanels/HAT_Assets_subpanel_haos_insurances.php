@@ -59,7 +59,7 @@ $subpanel_layout['list_fields'] = array (
   array (
     'type' => 'varchar',
     'vname' => 'LBL_ORGANIZATION',
-    'width' => '15%',
+    'width' => '12%',
     'default' => true,
     ),
   'insured_person' => 
@@ -76,7 +76,7 @@ $subpanel_layout['list_fields'] = array (
     'vname' => 'LBL_FIRST_BENEFICIARY',
     'id' => 'ACCOUNT_ID_C',
     'link' => true,
-    'width' => '15%',
+    'width' => '12%',
     'default' => true,
     'widget_class' => 'SubPanelDetailViewLink',
     'target_module' => 'Accounts',
@@ -86,14 +86,14 @@ $subpanel_layout['list_fields'] = array (
   array (
     'type' => 'date',
     'vname' => 'LBL_START_DATE',
-    'width' => '15%',
+    'width' => '12%',
     'default' => true,
     ),
   'end_date' => 
   array (
     'type' => 'date',
     'vname' => 'LBL_END_DATE',
-    'width' => '15%',
+    'width' => '12%',
     'default' => true,
     ),
   'edit_button' => 

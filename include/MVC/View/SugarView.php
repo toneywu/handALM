@@ -1039,7 +1039,9 @@ EOHTML;
     protected function _displaySubPanels()
     {
         //Modefy instance by zengchen 20161214 
+        if(isset($_SESSION["current_framework_code"])){
         $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+    }
         if (isset($this->bean) && !empty($this->bean->id) && (file_exists('modules/' . $this->module . '/metadata/subpaneldefs.php') || file_exists('custom/modules/' . $this->module . '/metadata/subpaneldefs.php') || file_exists('custom/modules/' . $this->module . '/Ext/Layoutdefs/layoutdefs.ext.php')||file_exists($instance_loc.'modules/'. $this->module . '/metadata/subpaneldefs.php')||file_exists($instance_loc.'modules/' . $this->module . '/Ext/Layoutdefs/layoutdefs.ext.php'))) {
             //Modefy instance by zengchen 20161214 End
             $GLOBALS['focus'] = $this->bean;
@@ -1234,8 +1236,10 @@ EOHTML;
         if (file_exists('custom/modules/' . $module . '/Ext/Menus/menu.ext.php')) {
             require('custom/modules/' . $module . '/Ext/Menus/menu.ext.php');
         }
+        if(isset($_SESSION["current_framework_code"])){
         $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
-        //Add instance by zengchen 20161214 
+        }
+        //Add instance by 20161214 
         if (file_exists($instance_loc.'modules/'. $module . '/Ext/Menus/menu.ext.php')) {
             require($instance_loc.'modules/'. $module . '/Ext/Menus/menu.ext.php');
         }

@@ -86,4 +86,6 @@ $mod_strings = array (
   'LBL_PRI_SQL_STATEMENT_FOR_LISTVIEW' => 'SQL Statement For ListView',
   'LBL_PRI_ENABLED_FLAG' => '是否启用',
   'LBL_PRI_DESCRIPTION' => '备注',
+  'LBL_PRI_SQL_STATEMENT_FOR_POPUP' => 'Sql Statement For Popup',
+  'LBL_PRI_POPUP_GLOBAL_FLAG' => 'POPUP全局适用',
 );

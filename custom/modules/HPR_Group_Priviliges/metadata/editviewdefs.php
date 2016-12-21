@@ -35,6 +35,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_EDITVIEW_PANEL1'=>
+        array(
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
       ),
     ),
     'panels' => 
@@ -81,7 +86,33 @@ array (
             'name' => 'enabled_flag',
             'label' => 'LBL_ENABLED_FLAG',
           ),
+          1 => 
+          array(
+            'name' => 'popup_global_flag',
+            'label' => 'LBL_POPUP_GLOBAL_FLAG',
+          ),
+        ),
+        3 =>
+        array(
+          0 => 
+          array(
+            'name' => 'sql_statement_for_popup',
+            'label' => 'LBL_SQL_STATEMENT_FOR_POPUP',
+          ),
           1 => 'description',
+        ),
+      ),
+      'LBL_EDITVIEW_PANEL1'=>
+      array(
+        0 => 
+        array(
+          0 =>
+          array (
+            'name' => 'line_items',
+            'studio' => 'visible',
+            'label' => 'LBL_LINE_ITEMS',
+            'customCode'=>'<span id="line_items_span"></span>',
+          ),
         ),
       ),
     ),

@@ -49,11 +49,11 @@ array (
           'newTab' => true,
           'panelDefault' => 'expanded',
         ),
-        'LBL_DETAILVIEW_PANEL7' => 
+      /*  'LBL_DETAILVIEW_PANEL7' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
-        ),
+        ),*/
         'LBL_DETAILVIEW_PANEL3' => 
         array (
           'newTab' => false,
@@ -180,7 +180,7 @@ array (
           1 => 'fixed_asset',
         ),
       ),
-      'lbl_detailview_panel7' => 
+/*      'lbl_detailview_panel7' => 
       array (
         0 => 
         array (
@@ -218,7 +218,7 @@ array (
           ),
           1 => '',
         ),
-      ),
+      ),*/
       'lbl_detailview_panel3' => 
       array (
         0 => 

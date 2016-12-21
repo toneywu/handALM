@@ -76,6 +76,19 @@ array (
             'name' => 'enabled_flag',
             'label' => 'LBL_ENABLED_FLAG',
           ),
+          1 => 
+          array(
+            'name' => 'popup_global_flag',
+            'label' => 'LBL_POPUP_GLOBAL_FLAG',
+          ),
+        ),
+        3 =>
+        array(
+          0 => 
+          array(
+            'name' => 'sql_statement_for_popup',
+            'label' => 'LBL_SQL_STATEMENT_FOR_POPUP',
+          ),
           1 => 'description',
         ),
       ),

@@ -1296,16 +1296,13 @@ $app_list_strings['moduleList']['HAT_Asset_Sources'] = '资产来源';
 
 $app_list_strings['moduleList']['HAT_Counting_Batchs'] = 'Counting';
 $app_list_strings['moduleList']['HAT_Counting_Lines'] = 'Counting Lines';
-$app_list_strings['moduleList']['HAT_Counting_Results'] = 'Counting Results';
-$app_list_strings['moduleList']['HAT_Counting_Tasks'] = 'Counting Tasks';
+$app_list_strings['moduleList']['HAT_Counting_Results'] = '盘点结果';
+$app_list_strings['moduleList']['HAT_Counting_Rules'] = '盘点规则';
+$app_list_strings['moduleList']['HAT_Counting_Rule_Dtls'] = '盘点规则明细';
+$app_list_strings['moduleList']['HAT_Counting_Tasks'] = '盘点任务';
 $app_list_strings['hat_counting_objects_type_list']['ASSETS'] = 'Physical Assets';
 $app_list_strings['hat_counting_objects_type_list']['FA'] = 'Financial Assets (Fixed Assets)';
 $app_list_strings['hat_counting_objects_type_list']['INV'] = 'Inventory Items';
-$app_list_strings['hat_counting_split_accord']=array (
-  'Organization' => '组织',
-  'Location' => '位置',
-  'Item' => '产品',
-);
 
 
 /*********************************************************************************
@@ -1905,6 +1902,7 @@ $app_list_strings['moduleList']['HMM_Trans_History'] = 'INV Transaction History'
 
 $app_list_strings['moduleList']['HPR_Groups'] = '权限管理';
 $app_list_strings['moduleList']['HPR_Group_Members'] = '权限对象';
+$app_list_strings['moduleList']['HPR_Group_PopupModules'] = '策略适用模块';
 $app_list_strings['moduleList']['HPR_Group_Priviliges'] = '权限策略';
 
 ?>

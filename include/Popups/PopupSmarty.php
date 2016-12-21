@@ -444,7 +444,7 @@ class PopupSmarty extends ListViewSmarty{
         	$haa_frameworks_id=$_SESSION["current_framework"];
         	$paraArray=array();
         	$paraArray[]=$current_user_id;
-        	$aclSQLList=getListViewSQLStatement($current_module,$current_user_id,$haa_frameworks_id,$paraArray);
+        	$aclSQLList=getPopupSQLStatement($current_module,'',$current_user_id,$haa_frameworks_id,$paraArray);
         	$searchWhere.=empty($searchWhere)?(empty($aclSQLList)?"":$aclSQLList):(empty($aclSQLList)?"":'  AND '.$aclSQLList);
         	$searchWhere='( '.$searchWhere.' )';}
         	//End Add By osmond.liu 20161213

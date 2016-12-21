@@ -15,7 +15,7 @@ function custom_report_main($paraArray=array()){
 
     $report_bean = BeanFactory::getBean('AOR_Reports',$_REQUEST['record']);
     $name = $report_bean->name;
-
+    $frame_id = $report_bean->haa_frameworks_id_c;
     
     $sql = 'SELECT
     hw.id,
@@ -46,6 +46,9 @@ function custom_report_main($paraArray=array()){
 
     if ($parameterValueArray[0] != '' ) {
         $sql = $sql.' AND hw.account_id = "'.$parameterValueArray[0].'"';
+    }
+    if ($frame_id != '' ) {
+        $sql = $sql.' AND EXISTS (SELECT 1 FROM ham_maint_sites hms WHERE hms.id = hw.ham_maint_sites_id AND hms.haa_frameworks_id = "'.$frame_id.'")';
     }
     $result = $db->query($sql);
     while ($row = $db->fetchByAssoc($result)) {

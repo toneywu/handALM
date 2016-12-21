@@ -40,13 +40,10 @@
 
 $app_list_strings['moduleList']['HAT_Counting_Batchs'] = 'Counting';
 $app_list_strings['moduleList']['HAT_Counting_Lines'] = 'Counting Lines';
-$app_list_strings['moduleList']['HAT_Counting_Results'] = 'Counting Results';
-$app_list_strings['moduleList']['HAT_Counting_Tasks'] = 'Counting Tasks';
+$app_list_strings['moduleList']['HAT_Counting_Results'] = '盘点结果';
+$app_list_strings['moduleList']['HAT_Counting_Rules'] = '盘点规则';
+$app_list_strings['moduleList']['HAT_Counting_Rule_Dtls'] = '盘点规则明细';
+$app_list_strings['moduleList']['HAT_Counting_Tasks'] = '盘点任务';
 $app_list_strings['hat_counting_objects_type_list']['ASSETS'] = 'Physical Assets';
 $app_list_strings['hat_counting_objects_type_list']['FA'] = 'Financial Assets (Fixed Assets)';
 $app_list_strings['hat_counting_objects_type_list']['INV'] = 'Inventory Items';
-$app_list_strings['hat_counting_split_accord']=array (
-  'Organization' => '组织',
-  'Location' => '位置',
-  'Item' => '产品',
-);

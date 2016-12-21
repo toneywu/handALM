@@ -18,6 +18,8 @@ function display_lines1($focus, $field, $value, $view){
 	hgp.hpr_group_members_id_c,
 	hgp.id,
 	hgp.module,
+	hgp.popup_global_flag,
+	hgp.sql_statement_for_popup,
 	hgp.name privilige_name,
 	hgp.privilige_module,
 	hgp.sql_statement_for_listview,

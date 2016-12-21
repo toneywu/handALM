@@ -1,5 +1,5 @@
 <?php
-// created: 2016-11-18 15:23:21
+// created: 2016-12-20 20:44:34
 $dictionary["HPR_Groups"]["fields"]["hpr_groups_hpr_group_priviliges"] = array (
   'name' => 'hpr_groups_hpr_group_priviliges',
   'type' => 'link',

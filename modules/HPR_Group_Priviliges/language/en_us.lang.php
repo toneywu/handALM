@@ -75,4 +75,5 @@ $mod_strings = array (
   'LBL_ENABLED_FLAG' => '是否启用',
   'LBL_GROUP_MEMBER_HPR_GROUP_MEMBERS_ID' => '对象 (related  ID)',
   'LBL_GROUP_MEMBER' => '对象',
+  'LBL_SQL_STATEMENT_FOR_POPUP'=>'Sql Statement For Popup',
 );

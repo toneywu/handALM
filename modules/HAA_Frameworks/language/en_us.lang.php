@@ -98,4 +98,5 @@ $mod_strings = array (
 'LBL_ITRACK_ASSET_GROUP'=>'Asset Group for Server-Rack',
 'LBL_LOCATION_DISPLAY_RULE'=>'Location display as',
 'LBL_ASSET_DISPLAY_RULE'=>'Asset display as',
+'LBL_ASSET_COUNTING_RULE'=>'Asset Counting Batch Number Rule'
 );
