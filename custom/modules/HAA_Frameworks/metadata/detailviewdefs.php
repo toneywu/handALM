@@ -175,7 +175,7 @@ array (
         5 => 
         array (
           0 => 'itrack_asset_group',
-          1 => '',
+          1 => 'asset_counting_rule',
         ),
       ),
       'lbl_editview_panel3' => 

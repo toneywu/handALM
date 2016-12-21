@@ -22,11 +22,15 @@ function insertLineHeader_pri(tableid){
   var c=x.insertCell(3);
   c.width="40%";
   c.innerHTML=SUGAR.language.get('HPR_Groups', 'LBL_PRI_SQL_STATEMENT_FOR_LISTVIEW');
-  var b1=x.insertCell(4);
+  var z=x.insertCell(4);
+  z.innerHTML=SUGAR.language.get('HPR_Groups', 'LBL_PRI_POPUP_GLOBAL_FLAG');
+  var b1=x.insertCell(5);
   b1.innerHTML=SUGAR.language.get('HPR_Groups', 'LBL_PRI_ENABLED_FLAG');
-  var d=x.insertCell(5);
+  var z1=x.insertCell(6);
+  z1.innerHTML=SUGAR.language.get('HPR_Groups', 'LBL_PRI_SQL_STATEMENT_FOR_POPUP');
+  var d=x.insertCell(7);
   d.innerHTML=SUGAR.language.get('HPR_Groups', 'LBL_PRI_DESCRIPTION');
-  var f=x.insertCell(6);
+  var f=x.insertCell(8);
   f.innerHTML='&nbsp;';
 }
 
@@ -40,11 +44,12 @@ function insertLineData_pri(line_data ){ //将数据写入到对应的行字段�
     $("#linepri_member_name".concat(String(ln))).val(line_data.member_name);
     $("#linepri_name".concat(String(ln))).val(line_data.privilige_name);
     $("#linepri_sql_statement_for_listview".concat(String(ln))).val(line_data.sql_statement_for_listview);
+    $("#linepri_popup_global_flag".concat(String(ln))).attr('checked',line_data.popup_global_flag==1?true:false);
     $("#linepri_enabled_flag".concat(String(ln))).attr('checked',line_data.enabled_flag==1?true:false);
+    $("#linepri_sql_statement_for_popup".concat(String(ln))).text(line_data.sql_statement_for_popup);
     $("#linepri_enabled_flag".concat(String(ln))).val(line_data.enabled_flag);
     $("#linepri_description".concat(String(ln))).val(line_data.description);
     $("#linepri_hpr_group_members_id_c".concat(String(ln))).val(line_data.hpr_group_members_id_c);
-
     renderLine_pri(ln);
   }
 }
@@ -70,7 +75,9 @@ z1.innerHTML  =
 "<td><span name='displayed_linepri_member_name[" + prodln + "]' id='displayed_linepri_member_name" + prodln + "'></span></td>"+
 "<td><span name='displayed_linepri_name[" + prodln + "]' id='displayed_linepri_name" + prodln + "'></span></td>"+
 "<td><span name='displayed_linepri_sql_statement_for_listview[" + prodln + "]' id='displayed_linepri_sql_statement_for_listview" + prodln + "'></span></td>"+
+"<td><span name='displayed_linepri_popup_global_flag[" + prodln + "]' id='displayed_linepri_popup_global_flag" + prodln + "'></span></td>"+
 "<td><span name='displayed_linepri_enabled_flag[" + prodln + "]' id='displayed_linepri_enabled_flag" + prodln + "'></span></td>"+
+"<td><span name='displayed_linepri_sql_statement_for_popup[" + prodln + "]' id='displayed_linepri_sql_statement_for_popup" + prodln + "'></span></td>"+
 "<td><span name='displayed_linepri_description[" + prodln + "]' id='displayed_linepri_description" + prodln + "'></span></td>"+
 "<td><input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_linepri" + prodln +"' onclick='LineEditorShow_pri("+prodln+")'></td>";
 
@@ -113,9 +120,15 @@ z1.innerHTML  =
     "<td>"+SUGAR.language.get('HPR_Groups', 'LBL_PRI_ENABLED_FLAG')+"<span class='required'>*</span></td>"+
     "<input type='hidden' name='linepri_enabled_flag["+prodln+"]' value='0'> "+
     "<td><input name='linepri_enabled_flag["+prodln+"]'  id='linepri_enabled_flag"+prodln+"'  value='1' type='checkbox' checked></td>"+
+    "<td>"+SUGAR.language.get('HPR_Groups','LBL_PRI_POPUP_GLOBAL_FLAG')+"</td>"+
+    "<td><input type='checkbox' id='linepri_popup_global_flag"+prodln+"' name='linepri_popup_global_flag["+prodln+"]' value=''/></td>"+
+  "</tr>"+
+  "<tr>"+
+    "<td>"+SUGAR.language.get('HPR_Groups','LBL_PRI_SQL_STATEMENT_FOR_POPUP')+"</td>"+
+    "<td><textarea id='linepri_sql_statement_for_popup"+prodln+"' name='linepri_sql_statement_for_popup["+prodln+"]' rows='2' cols='50' title='' tabindex='0' style='overflow: hidden;'></textarea></td>"+
     "<td>"+SUGAR.language.get('HPR_Groups', 'LBL_PRI_DESCRIPTION')+"</td>"+
     "<td><textarea id='linepri_description"+prodln+"' name='linepri_description["+prodln+"]' rows='2' cols='50' title='' tabindex='0' style='overflow: hidden;'></textarea></td>"+
-    "</tr>"+
+  "</tr>"+
   "<tr>"+
     "<td><input type='hidden' id='linepri_deleted"+prodln+"' name='linepri_deleted["+prodln+"]'></td>"+
     "<td><input type='button' id='linepri_delete_line" + prodln + "' class='button btn_del' value='" + SUGAR.language.get('app_strings', 'LBL_DELETE_INLINE') + "' tabindex='116' onclick='btnMarkLineDeleted_pri(" + prodln + ",\"linepri_\")'>"+
@@ -147,7 +160,11 @@ function renderLine_pri(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_linepri_sql_statement_for_listview"+ln).html($("#linepri_sql_statement_for_listview"+ln).val());
   var flag=$("#linepri_enabled_flag"+ln).is(':checked')?"是":"否";
   $("#linepri_enabled_flag"+ln).val($("#linepri_enabled_flag"+ln).is(':checked')?"1":"0");
-  $("#displayed_linepri_enabled_flag"+ln).html(flag);
+  $("#displayed_linepri_enabled_flag"+ln).html(flag);//linepri_popup_global_flag
+  var popup_global_flag=$("#linepri_popup_global_flag"+ln).is(":checked")?"是":"否";
+  $("#displayed_linepri_popup_global_flag"+ln).html(popup_global_flag);
+  $("#linepri_popup_global_flag"+ln).val($("#linepri_popup_global_flag"+ln).is(':checked')?"1":"0");
+  $("#displayed_linepri_sql_statement_for_popup"+ln).html($("#linepri_sql_statement_for_popup"+ln).val());
   $("#displayed_linepri_description"+ln).html($("#linepri_description"+ln).val());
 }
 

@@ -45,11 +45,10 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * All Rights Reserved.
  * Contributor(s): ______________________________________..
  ********************************************************************************/
- 
+
 global $app_strings;
 
 $dashletMeta['HAT_Counting_TasksDashlet'] = array('module'		=> 'HAT_Counting_Tasks',
 										  'title'       => translate('LBL_HOMEPAGE_TITLE', 'HAT_Counting_Tasks'), 
                                           'description' => 'A customizable view into HAT_Counting_Tasks',
-                                          'icon'        => 'icon_HAT_Counting_Tasks_32.gif',
                                           'category'    => 'Module Views');

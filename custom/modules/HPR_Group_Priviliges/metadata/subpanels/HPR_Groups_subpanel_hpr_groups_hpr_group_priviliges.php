@@ -26,7 +26,7 @@ $subpanel_layout['list_fields'] = array (
   array (
     'vname' => 'LBL_NAME',
     'widget_class' => 'SubPanelDetailViewLink',
-    'width' => '45%',
+    'width' => '10%',
     'default' => true,
   ),
   'sql_statement_for_listview' => 
@@ -35,7 +35,7 @@ $subpanel_layout['list_fields'] = array (
     'studio' => 'visible',
     'vname' => 'LBL_SQL_STATEMENT_FOR_LISTVIEW',
     'sortable' => false,
-    'width' => '10%',
+    'width' => '20%',
     'default' => true,
   ),
   'enabled_flag' => 
@@ -45,13 +45,20 @@ $subpanel_layout['list_fields'] = array (
     'vname' => 'LBL_ENABLED_FLAG',
     'width' => '10%',
   ),
-  'description' => 
+  'popup_global_flag' => 
+  array(
+    'type' => 'bool',
+    'default' => true,
+    'vname' => 'LBL_POPUP_GLOBAL_FLAG',
+    'width' => '10%',
+  ),
+    'sql_statement_for_popup' => 
   array (
     'type' => 'text',
     'studio' => 'visible',
-    'vname' => 'LBL_DESCRIPTION',
+    'vname' => 'LBL_SQL_STATEMENT_FOR_POPUP',
     'sortable' => false,
-    'width' => '10%',
+    'width' => '20%',
     'default' => true,
   ),
   'edit_button' => 

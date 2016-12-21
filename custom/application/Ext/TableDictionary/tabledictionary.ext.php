@@ -48,7 +48,22 @@ include('custom/metadata/hat_asset_trans_batch_hat_asset_transMetaData.php');
 
  
  //WARNING: The contents of this file are auto-generated
+include('custom/metadata/hat_counting_lines_documentsMetaData.php');
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
 include('custom/metadata/hat_counting_lines_hat_counting_batchsMetaData.php');
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+include('custom/metadata/hat_counting_lines_hat_counting_resultsMetaData.php');
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+include('custom/metadata/hat_counting_rules_hat_counting_rule_dtlsMetaData.php');
 
 
  
@@ -64,6 +79,11 @@ include('custom/metadata/hpr_groups_hpr_group_membersMetaData.php');
  
  //WARNING: The contents of this file are auto-generated
 include('custom/metadata/hpr_groups_hpr_group_priviligesMetaData.php');
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+include('custom/metadata/hpr_group_priviliges_hpr_group_popupmodulesMetaData.php');
 
 
 ?>

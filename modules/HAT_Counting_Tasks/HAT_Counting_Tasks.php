@@ -46,6 +46,34 @@ class HAT_Counting_Tasks extends HAT_Counting_Tasks_sugar {
 	function __construct(){
 		parent::__construct();
 	}
+
+	function save($check_notify = FALSE){
+		global $sugar_config;
+		global $db;
+		if(!$_REQUEST["id"]){
+			$sql="SELECT
+			MAX(hct.task_number) task_number_max,hcb.batch_number
+			FROM
+			hat_counting_tasks hct,hat_counting_batchs hcb
+			WHERE
+			hct.hat_counting_batchs_id_c ='".$_REQUEST["hat_counting_batchs_id_c"]."'
+			and hcb.id = hct.hat_counting_batchs_id_c";
+			$result=$db->query($sql);
+			if($row=$db->fetchByAssoc($result)){
+				if($row["task_number_max"]){
+					$number=substr($row["task_number_max"], -2)+1;
+					if($number<10){
+						$number="0".$number;
+					}
+					$this->task_number=substr($row["task_number_max"],0,strlen($row["task_number_max"])-2).$number;
+
+				}else{
+					$this->task_number=$row["batch_number"].'01';
+				}
+			}
+		}
+		parent::save($check_notify);
+	}
 	
 }
 ?>

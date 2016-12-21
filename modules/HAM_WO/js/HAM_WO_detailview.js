@@ -156,20 +156,19 @@ function complete_work_order(record){
 	});
 };
 */
-function process_woop(woop_id,wo_id,include_reject_wo_val){
+function process_woop(woop_id,wo_id){
 	$.ajax({
 		
-		url: 'index.php?to_pdf=true&module=HAM_WOOP&action=process_woop&record=' + woop_id+"&ham_wo_id="+wo_id+"&include_reject_wo_val="+include_reject_wo_val,
+		url: 'index.php?to_pdf=true&module=HAM_WOOP&action=process_woop&record=' + woop_id+"&ham_wo_id="+wo_id,
 		success: function (data) {
 			console.log(data);
-			//window.location.href = "index.php?module=HAM_WO&action=DetailView&record="+wo_id;
+			window.location.href = "index.php?module=HAM_WO&action=DetailView&record="+wo_id;
 		},
 			error: function () { //失败
 				alert('Error loading document');
 			}
 		});
 };
-
 
 /**
  * 点击按钮 工序驳回
@@ -180,7 +179,6 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
  	$.ajax({
  		url: 'index.php?to_pdf=true&module=HAM_WOOP&action=rejectWoop&id=' + id,
  		success: function (data) {
-			console.log("rejectWoop="+data);
  			var title_txt=SUGAR.language.get('HAM_WO', 'LBL_BTN_WOOP_REJECT_BUTTON_LABEL')
  			var html=""
  			html+=title_txt;
@@ -188,32 +186,14 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 				//html+="<input type='button' class='btn_detailview' id='btn_save' value='"+SUGAR.language.get('app_strings', 'LBL_SAVE_BUTTON_LABEL')+"'>";
 				YAHOO.SUGAR.MessageBox.show({msg: html,title: title_txt, type: 'confirm',
 					fn: function(confirm) {
-						console.log("MessageBox");
-						 $("#include_reject_wo").click(function(){
-							 alert("ddd");
-						 });
-						 
 						if (confirm == 'yes') {
-							if ($("#include_reject_wo").is(':checked')) {
-								$("#include_reject_wo").attr("checked", 'true');
-								$("#include_reject_wo").val("0");
-								$("#woop_num").attr("disabled",true);
-								$('#woop_num').attr("disabled","disabled");
-							} else {
-								$("#include_reject_wo").removeAttr("checked");
-								$("#include_reject_wo").removeAttr("disabled");
-								$("#include_reject_wo").val("1");
-							}
-							var include_reject_wo_val = $("#include_reject_wo").val();
-							
-							console.log("include_reject_wo_val = "+include_reject_wo_val);
-								//save($("input[name='record']").val(),$("#wo_status").val());
-								//console.log($("#woop_num").val());
-								//获取选择要驳回到哪一笔的工序
-								process_woop($("#woop_num").val(),id,include_reject_wo_val);
-							}
-						}
-					});
+																				//save($("input[name='record']").val(),$("#wo_status").val());
+																				//console.log($("#woop_num").val());
+																				//获取选择要驳回到哪一笔的工序
+																				process_woop($("#woop_num").val(),id);
+																			}
+																		}
+																	});
 			},
 			error: function () { //失败
 				alert('Error loading document');
@@ -269,43 +249,14 @@ showWOLines();*/
 	 //checkEditRevenueACL
 	 checkEditRevenueACL($("input[name='record']").val());
 //end 
-$("#list_subpanel_wo_line table tr:gt(3)").each(function(i){
-	console.log("i="+i);
-	var first_td = $(this).find("td:first");
-	var last_td = $(this).find("td:last");
-	console.log(first_td.find("a").text());
-	var contract_val = first_td.find("a").text();
-	if(contract_val!=""){
-		$("#wo_line_edit_"+(i+1)).removeAttr("href");
-		 /* $("#wo_line_remove_"+(i+1)).removeAttr("href");
-		 $("#wo_line_edit_"+(i+1)).parent().remove();
-		 $("#wo_line_remove_"+(i+1)).parent().remove();*/
-		 //console.log($("#wo_line_remove_"+(i+1)).parent().parent().attr("class"));
-		 $("#wo_line_remove_"+(i+1)).parent().remove();
-		 
 
-		 last_td.closest("td").attr("disabled","disabled");
-		}
-		
-	});
-
-
-var complete_btn=$("<input type='button' class='btn_detailview' id='btn_complete' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_COMPLETE_BUTTON_LABEL')+"'>");
-if($("#wo_status").val()=="APPROVED"){
-		 //add by yuan.chen 2016-12-06
-		 $("input[name^=HAM_WO_Lines_]").attr("disabled","disabled");
-		 $("input[name^=HAM_WOOP_新增_button]").attr("disabled","disabled");
-		 $("a[id^=wo_line_edit_]").removeAttr("href");
-		 $("a[id^=wo_line_remove_]").removeAttr("href");
-		 $("a[id^=wo_line_remove_]").parent().parent().remove();
-		 //end
-		 $("#btn_change_status").after(complete_btn);
-
+	var complete_btn=$("<input type='button' class='btn_detailview' id='btn_complete' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_COMPLETE_BUTTON_LABEL')+"'>");
+	if($("#wo_status").val()=="APPROVED"){
+		$("#btn_change_status").after(complete_btn);
 		//registe function cancel()
 		$("#btn_complete").click(function(){ //如果取消按钮 返回
 			complete_work_order($("input[name='record']").val());
 		});
-
 	}
 	//add by yuan.chen
 	var reject_woop_btn=$("<input type='button' class='btn_detailview' id='btn_woop_reject' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_WOOP_REJECT_BUTTON_LABEL')+"'>");
@@ -314,11 +265,11 @@ if($("#wo_status").val()=="APPROVED"){
 		reject_woop($("input[name='record']").val());
 	});
 
-	//add by osmond.liu 20161214
+	//add by osmond.liu 20161114
 	//等待前序的工序不能编辑
 	var woopEdit='';
 	var woopStatus='';
-	$("#list_subpanel_woop table tr:gt(3)").each(function(i){
+	$("#list_subpanel_woop table tbody tr:gt(3)").each(function(i){
 		woopEdit="#woop_edit_"+(i+1);
 		woopStatus=$(this).children().eq(2).text().trim();
 		/*if (woopStatus=='等待前序'){
@@ -328,32 +279,55 @@ if($("#wo_status").val()=="APPROVED"){
 		var url=$(this).children().eq(1).find('a').attr('href');
 		var wo_id=decodeURIComponent(url).split('=')[5];
 		var action_module=$(this).children().eq(8).text().trim();
-		switch (action_module) {
-			case '网络资源事务':
-			action_module='HIT_IP_TRANS_BATCH';
-			break;
-			case '设备/资产事务':
-			action_module='HAT_Asset_Trans_Batch';
-			break;
+		if (action_module=="网络资源事务") {
+			action_module='hit_ip_trans_batch';
+		}
+		if (action_module=="设备/资产事务") {
+			action_module='hat_asset_trans_batch';
+		}
+		if(action_module=="操作"){
+			var url=$(this).children().eq(8).find("a").attr("href");
+			if (url=="#") {
+				url=$(this).children().eq(8).find("a").attr("onclick");
+				var url_module=url.split("=")[2];
+				action_module=url_module.split("&")[0].toLowerCase();
+			}else{
+				var url_module=url.split("=")[1];
+				action_module=url_module.split("&")[0].toLowerCase();
+			}
 		}
 		switch(woopStatus){
 			case '等待前序':
-			$(woopEdit).removeAttr("href");
+				$(woopEdit).removeAttr("href");
 			break;
 			case '已批准':
-				//var res=getDealStatu(wo_id);HAT_Assets_Trans_Batch->
-				var res=getDealStatu(wo_id,action_module);
-				if (res=='DRAFT'||res=='APPROVED') {
+				var lead_url=$(this).children().eq(7).find("a").attr("href");
+				var courd=decodeURIComponent(lead_url).split("=")[5];
+				var res=getDealStatu(wo_id,action_module,courd);
+				if (res['trans_status']=='DRAFT') {
 					$(woopEdit).removeAttr("href");
-					if (res=='DRAFT'){
-						$(woopEdit).click(function(){
-							alert("请将功能模块的业务处理完，再编辑工序！");
-						});
-					}
+					$(woopEdit).click(function(){
+						alert("请将功能模块的业务处理完，再编辑工序！");
+					});
 				}
-				break;
+				if (res['leader']=="0") {
+					$(woopEdit).removeAttr("href");
+				}
+			break;
+		}
+	});
+
+	function getDealStatu(wo_id,module,leading){
+		var url_addr = "index.php?module=HAM_WO&action=getStatu&to_pdf=true";
+		$.ajax({
+			url:url_addr,
+			type:'POST',
+			async: false,
+			data:"&wo_id="+wo_id+"&module_name="+module+"&leading="+leading,
+			success:function(res){
+				res_date=JSON.parse(res);
 			}
 		});
-	//add by osmond.liu 20161214
-}
-);
+		return res_date;
+	}//end add 20161213
+});

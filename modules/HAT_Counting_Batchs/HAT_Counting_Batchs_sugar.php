@@ -76,7 +76,7 @@ class HAT_Counting_Batchs_sugar extends Basic {
 	var $oranization;
 	var $snapshot_date;
 	var $adjust_posted;
-	var $haa_frameworks_id_c;
+	var $hat_domains_id_c;
 	var $domain;
 	var $objects_type;
 	var $org_drilldown;

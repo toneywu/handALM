@@ -95,7 +95,7 @@ array (
     'label' => 'LBL_PRIMARY_CONTACT',
     'width' => '3%',
   ),*/
-  'EMAIL1' => 
+/*  'EMAIL1' => 
   array (
     'width' => '15%',
     'label' => 'LBL_LIST_EMAIL_ADDRESS',
@@ -103,7 +103,7 @@ array (
     'link' => true,
     'customCode' => '{$EMAIL1_LINK}{$EMAIL1}</a>',
     'default' => true,
-  ),
+  ),*/
 /*  'LINKED_USER_C' => 
   array (
     'type' => 'relate',

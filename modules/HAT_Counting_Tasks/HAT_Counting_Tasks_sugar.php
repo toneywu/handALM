@@ -68,6 +68,14 @@ class HAT_Counting_Tasks_sugar extends Basic {
 	var $assigned_user_name;
 	var $assigned_user_link;
 	var $SecurityGroups;
+	var $haa_frameworks_id_c;
+	var $frameworks;
+	var $task_number;
+	var $objects_type;
+	var $planed_start_date;
+	var $planed_complete_date;
+	var $snapshot_date;
+	var $adjust_posted;
 	
 	function __construct(){
 		parent::__construct();

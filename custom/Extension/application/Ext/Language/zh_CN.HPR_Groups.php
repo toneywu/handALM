@@ -40,4 +40,5 @@
 
 $app_list_strings['moduleList']['HPR_Groups'] = '权限管理';
 $app_list_strings['moduleList']['HPR_Group_Members'] = '权限对象';
+$app_list_strings['moduleList']['HPR_Group_PopupModules'] = '策略适用模块';
 $app_list_strings['moduleList']['HPR_Group_Priviliges'] = '权限策略';

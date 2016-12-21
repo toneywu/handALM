@@ -1,5 +1,5 @@
 <?php
-// created: 2016-03-31 19:25:17
+// created: 2016-12-21 10:11:54
 $dictionary["HAT_Counting_Lines"]["fields"]["hat_counting_lines_hat_counting_batchs"] = array (
   'name' => 'hat_counting_lines_hat_counting_batchs',
   'type' => 'link',
@@ -18,7 +18,7 @@ $dictionary["HAT_Counting_Lines"]["fields"]["hat_counting_lines_hat_counting_bat
   'save' => true,
   'id_name' => 'hat_counting_lines_hat_counting_batchshat_counting_batchs_ida',
   'link' => 'hat_counting_lines_hat_counting_batchs',
-  'table' => NULL,
+  'table' => 'hat_counting_batchs',
   'module' => 'HAT_Counting_Batchs',
   'rname' => 'name',
 );

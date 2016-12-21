@@ -1,5 +1,5 @@
 <?php
-// created: 2016-11-18 15:23:20
+// created: 2016-12-20 20:44:33
 $dictionary["hpr_groups_hpr_group_priviliges"] = array (
   'true_relationship_type' => 'one-to-many',
   'relationships' => 
