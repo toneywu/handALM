@@ -1,6 +1,6 @@
 <?php
-// created: 2016-03-31 19:25:17
-$dictionary[""]["fields"]["hat_counting_lines_hat_counting_batchs"] = array (
+// created: 2016-12-21 10:11:54
+$dictionary["HAT_Counting_Batchs"]["fields"]["hat_counting_lines_hat_counting_batchs"] = array (
   'name' => 'hat_counting_lines_hat_counting_batchs',
   'type' => 'link',
   'relationship' => 'hat_counting_lines_hat_counting_batchs',

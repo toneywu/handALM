@@ -128,8 +128,20 @@ class ContactsViewDetail extends ViewDetail
                 echo $subpanel->display();
             }
         }
-		
-		  function Display() {
+	
+	function Display() {
+		//*********************处理FF界面 START********************
+		//Add by zengchen 20161221
+		$ff_id="";
+		if(isset($this->bean->haa_codes_id_c) && ($this->bean->haa_codes_id_c)!=""){
+			$haa_codes_id_c = $this->bean->haa_codes_id_c;
+			$bean_business_type = BeanFactory::getBean('HAA_Codes',$haa_codes_id_c);
+			$ff_id = $bean_business_type->haa_ff_id;
+            //如果分类有对应的FlexForm，些建立一个对象去存储FF_ID
+            //需要注意的是在Metadata中是不包括这个ID的，如果这里没有加载则在后续的JS文件中加载
+		}
+		echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="'.$ff_id.'">';
+		//*********************处理FF界面 END********************
 		parent :: Display();      //ff 在DetailView显示之前中进行初始化数据的加载 
 		$user_id = $this->bean->id;
 		$user_name = $this->bean->last_name;

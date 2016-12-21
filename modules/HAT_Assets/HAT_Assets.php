@@ -111,7 +111,7 @@ class HAT_Assets extends HAT_Assets_sugar {
 					$bean_numbering->nextval = $prefix . $newCurrentNumStr;
 					$bean_numbering->save();
 				}
-				if(empty($this->bean->name)){
+				if(empty($this->name)){
 					$this->name=$this->asset_group.$this->asset_number;
 				}
 			}

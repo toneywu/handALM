@@ -38,19 +38,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
-/*********************************************************************************
-
- * Description:  TODO To be written.
- * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
- * All Rights Reserved.
- * Contributor(s): ______________________________________..
- ********************************************************************************/
 
 global $mod_strings, $app_strings, $sugar_config;
-
-		
-if(ACLController::checkAccess('HAT_Counting_Batchs', 'edit', true))$module_menu[]=Array("index.php?module=HAT_Counting_Batchs&action=EditView&return_module=HAT_Counting_Batchs&return_action=index", $mod_strings['LNK_NEW_RECORD'],"Create", 'HAT_Counting_Batchs');
-
-if(ACLController::checkAccess('HAT_Counting_Batchs', 'list', true))$module_menu[]=Array("index.php?module=HAT_Counting_Batchs&action=index&return_module=HAT_Counting_Batchs&return_action=DetailView", $mod_strings['LBL_LIST_FORM_TITLE'],"List", 'HAT_Counting_Batchs');
-
-?>
+ 
+if(ACLController::checkAccess('HAT_Counting_Batchs', 'edit', true))$module_menu[]=Array("index.php?module=HAT_Counting_Batchs&action=EditView&return_module=HAT_Counting_Batchs&return_action=DetailView", $mod_strings['LNK_NEW_RECORD'],"Add", 'HAT_Counting_Batchs');
+if(ACLController::checkAccess('HAT_Counting_Batchs', 'list', true))$module_menu[]=Array("index.php?module=HAT_Counting_Batchs&action=index&return_module=HAT_Counting_Batchs&return_action=DetailView", $mod_strings['LNK_LIST'],"View", 'HAT_Counting_Batchs');

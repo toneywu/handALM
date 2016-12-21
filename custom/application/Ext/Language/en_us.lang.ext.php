@@ -190,6 +190,7 @@ $app_list_strings['haa_code_type_list']=array (
   'insurance_type' => 'insurance_type',
   'insurance_subtype' => 'insurance_subtype',
   'asset_counting_obj_type' => 'asset_counting_obj_type',
+  'asset_counting_major_type'=>'asset_counting_major_type'
   );
 
 
@@ -1824,18 +1825,73 @@ $app_list_strings['moduleList']['HAT_Asset_Sources'] = 'Asset Sources';
  ********************************************************************************/
 
 
+$app_list_strings['moduleList']['HAT_Counting_Rules1'] = '盘点规则';
 $app_list_strings['moduleList']['HAT_Counting_Batchs'] = 'Counting';
-$app_list_strings['moduleList']['HAT_Counting_Lines'] = 'Counting Lines';
-$app_list_strings['moduleList']['HAT_Counting_Results'] = 'Counting Results';
-$app_list_strings['moduleList']['HAT_Counting_Tasks'] = 'Counting Tasks';
+$app_list_strings['moduleList']['HAT_Counting_Lines'] = '盘点明细';
+$app_list_strings['moduleList']['HAT_Counting_Results'] = '盘点结果';
+$app_list_strings['moduleList']['HAT_Counting_Rules'] = '盘点规则';
+$app_list_strings['moduleList']['HAT_Counting_Rule_Dtls'] = '规则明细';
+$app_list_strings['moduleList']['HAT_Counting_Tasks'] = '盘点任务';
 $app_list_strings['hat_counting_objects_type_list']['ASSETS'] = 'Physical Assets';
 $app_list_strings['hat_counting_objects_type_list']['FA'] = 'Financial Assets (Fixed Assets)';
 $app_list_strings['hat_counting_objects_type_list']['INV'] = 'Inventory Items';
-$app_list_strings['hat_counting_split_accord']=array (
-  'Organization' => '组织',
-  'Location' => '位置',
-  'Item' => '产品',
+$app_list_strings['aow_status_list']['Active'] = '活动';
+$app_list_strings['aow_status_list']['Inactive'] = '停用';
+$app_list_strings['hat_counting_split_accord']['Organization'] = '组织';
+$app_list_strings['hat_counting_split_accord']['Location'] = '位置';
+$app_list_strings['hat_counting_split_accord']['Item'] = '产品';
+$app_list_strings['hat_counting_status_list']['New'] = '拟定';
+$app_list_strings['hat_counting_status_list']['Counting'] = '盘点中';
+$app_list_strings['hat_counting_status_list']['Counted'] = '已盘点';
+$app_list_strings['hat_counting_mode_list']['Manual'] = '手工盘点';
+$app_list_strings['hat_counting_mode_list']['Mobile'] = '移动盘点';
+$app_list_strings['hat_counting_scene_list']['Year'] = '年度';
+$app_list_strings['hat_counting_scene_list']['Temp'] = '临时';
+$app_list_strings['hat_asset_status_list'][''] = '';
+$app_list_strings['hat_asset_status_list']['Ordered'] = '购置未交付';
+$app_list_strings['hat_asset_status_list']['Received'] = '已收货未启用';
+$app_list_strings['hat_asset_status_list']['Stocked'] = '空闲/库存';
+$app_list_strings['hat_asset_status_list']['Idle'] = '空闲/可用';
+$app_list_strings['hat_asset_status_list']['PreAssigned'] = '预分配启用';
+$app_list_strings['hat_asset_status_list']['InService'] = '在用';
+$app_list_strings['hat_asset_status_list']['TempOut'] = '外部';
+$app_list_strings['hat_asset_status_list']['OutOfService'] = '已退役';
+$app_list_strings['hat_asset_status_list']['Discard'] = '已处置/迁出';
+$app_list_strings['hat_counting_line_result_list']['Matched'] = '帐实相符';
+$app_list_strings['hat_counting_line_result_list']['Different'] = '盘点差异';
+$app_list_strings['hat_counting_adjust_method_list']['Retire'] = '资产报废';
+$app_list_strings['hat_counting_adjust_method_list']['attrAdjust'] = '资产属性变更';
+$app_list_strings['hat_counting_adjust_method_list']['Add'] = '资产新增';
+$app_list_strings['hat_counting_adjust_status_list']['Init'] = '未调整';
+$app_list_strings['hat_counting_adjust_status_list']['Adjusting'] = '差异调整中';
+$app_list_strings['hat_counting_adjust_status_list']['Processed'] = '已调整';
+$app_list_strings['hat_counting_line_status_list']=array (
+  'New' => '拟定',
+  'Counting' => '盘点中',
+  'Counted' => '已盘点',
 );
+
+$app_list_strings['hat_counting_task_status_list']=array (
+  'New' => '拟定',
+  'Counting' => '盘点中',
+  'Counted' => '已盘点',
+);
+
+$app_list_strings['hat_counting_adjust_posted']=array (
+  'Y' => '是',
+  'P' => '部分',
+  'N' => '否',
+);
+
+$app_list_strings['hat_counting_diff_type_list']=array (
+  'Overage' => '盘盈',
+  'Loss' => '盘亏',
+  'Tag' => '标签损缺',
+   'Other' => '其他',  
+);
+
+
+
 
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
@@ -2913,6 +2969,11 @@ $app_list_strings['moduleList']['HMM_Trans_History'] = 'INV Transaction History'
 
 $app_list_strings['moduleList']['HPR_Groups'] = '权限管理';
 $app_list_strings['moduleList']['HPR_Group_Members'] = '权限对象';
+$app_list_strings['moduleList']['HPR_Group_PopupModules'] = '策略适用模块';
 $app_list_strings['moduleList']['HPR_Group_Priviliges'] = '权限策略';
 
+$app_list_strings['hpr_group_logic_list']=array (
+  'Include' => '包含',
+  'Ruleout' => '排除',
+  );
 ?>

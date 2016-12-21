@@ -1,5 +1,6 @@
 <?php
-// created: 2016-06-12 21:16:30
+// created: 2016-12-15 14:48:14
 $mod_strings = array (
-  'LBL_ASSET' => '设备/资产',
+  'LBL_EDITVIEW_PANEL1' => '盘点结果',
+  'LBL_EDITVIEW_PANEL2' => '附件',
 );

@@ -46,6 +46,34 @@ class HAT_Counting_Batchs extends HAT_Counting_Batchs_sugar {
 	function __construct(){
 		parent::__construct();
 	}
+
+
+	function save($check_notify = FALSE){
+		global $sugar_config;
+
+		if ($this->batch_number == '') {
+			$bean_frameworks = BeanFactory :: getBean('HAA_Frameworks', $this->haa_frameworks_id_c);//以参数传值时只能传ID值，否则发创建Bean，因此用以下方法创建。
+			$bean_numbering = BeanFactory :: getBean('HAA_Numbering_Rule',$bean_frameworks->haa_asset_counting_rule_id);
+			if (!empty($bean_numbering)) {
+					//取得当前的编号
+				$this->batch_number = $bean_numbering->nextval;
+					//预生成下一个编号，并保存在$bean_numbering中
+				$current_number = ($bean_numbering->current_number) + 1;
+				$current_numberstr = "" . $current_number;
+				$padding_str = "";
+				for ($i = 0; $i < ($bean_numbering->min_num_strlength); $i++) {
+					$padding_str = $padding_str +"0";
+				}
+				$padding_str = substr($padding_str, 0, strlen($padding_str) - strlen($current_numberstr)) + $current_numberstr;
+				$nextval_str = ($bean_numbering->perfix) . $padding_str;
+				$bean_numbering->current_number = $current_number;
+				$bean_numbering->nextval = $nextval_str;
+				$bean_numbering->save();
+			}
+		}
+		parent::save($check_notify);
+		
+	}
 	
 }
 ?>

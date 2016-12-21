@@ -47,5 +47,60 @@ class HAT_Counting_Lines extends HAT_Counting_Lines_sugar {
 		parent::__construct();
 	}
 	
+	function save($check_notify = FALSE){
+		$this->id=parent::save($check_notify);
+		$post_data=$_POST;
+
+		$line_count = isset($post_data['line_deleted']) ? count($post_data['line_deleted']) : 0;
+		$line_count1 = isset($post_data['line_doc_deleted']) ? count($post_data['line_doc_deleted']) : 0;
+		
+        for ($i = 0; $i < $line_count; ++$i) {
+        	$key="line_";
+        	$lines = new HAT_Counting_Results();
+            if ($post_data[$key . 'deleted'][$i] == 1) {
+                $lines->mark_deleted($post_data[$key . 'id'][$i]);
+            } else {
+                foreach ($lines->field_defs as $field_def) {
+                    $field_name = $field_def['name'];
+                    if (isset($post_data[$key . $field_name][$i])) {
+                        $lines->$field_name = $post_data[$key . $field_name][$i];
+                    }
+                }
+	            $lines->save($check_notify);
+	            if (!$post_data['line_id'][$i]) {//新建才加关联关系
+	            	$table='hat_counting_lines_hat_counting_results_c';
+	            	$relate_values = array(
+            		'deleted' =>0 ,
+	            	'hat_counting_lines_hat_counting_resultshat_counting_lines_ida'=>$this->id,
+	            	'hat_counting_lines_hat_counting_resultshat_counting_results_idb'=>$lines->id 
+	            	);
+	            }
+	            parent::set_relationship($table,$relate_values);
+	        }
+	    }
+
+	    for ($i = 0; $i < $line_count1; ++$i) {
+        	$key="line_doc_";
+        	$lines = new Documents();
+            if ($post_data[$key . 'deleted'][$i] == 1) {
+                $lines->mark_deleted($post_data[$key . 'id'][$i]);
+            } else {
+                foreach ($lines->field_defs as $field_def) {
+                    $field_name = $field_def['name'];
+                    if (isset($post_data[$key . $field_name][$i])) {
+                        $lines->$field_name = $post_data[$key . $field_name][$i];
+                    }
+                }
+	            $lines->save($check_notify);
+	            if (!$post_data['line_id'][$i]) {//新建才加关联关系
+	            	$table='hat_counting_lines_documents_c';
+	            	$relate_values = array('deleted' =>0 ,
+	            	'hat_counting_lines_documentshat_counting_lines_ida'=>$this->id,
+	            	'hat_counting_lines_documentsdocuments_idb'=>$lines->id );
+	            }
+	            parent::set_relationship($table,$relate_values);
+	        }
+	    }
+	}
 }
 ?>

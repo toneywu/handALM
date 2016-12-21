@@ -87,6 +87,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_EDITVIEW_PANEL_CT' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
       ),
       'syncDetailEditViews' => false,
     ),
@@ -677,6 +682,52 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_MAP_DISPLAY_AREA',
             'customCode' => '<div id="cuxMap" style="background-color: #efefef; ">map will be loaded here</div>',
+          ),
+        ),
+      ),
+      'LBL_EDITVIEW_PANEL_CT'=>
+      array(
+        0 =>
+        array(
+          0 => 
+          array(
+            'name' => 'counting_dept',
+            'studio' => 'visible',
+            'label' => 'LBL_COUNTING_DEPT',
+          ),
+          1 =>
+          array(
+            'name' => 'counting_location',
+            'studio' => 'visible',
+            'label' => 'LBL_COUNTING_LOCATION',
+          ),
+        ),
+        1 =>
+        array(
+          0 => 
+          array(
+            'name' => 'counting_major',
+            'studio' => 'visible',
+            'label' => 'LBL_COUNTING_MAJOR',
+            'displayParams'=>
+            array (
+              'initial_filter' => '&code_type_advanced=asset_counting_major_type',
+            ),
+          ),
+          1 =>
+          array(
+            'name' => 'counting_catogery',
+            'studio' => 'visible',
+            'label' => 'LBL_COUNTING_CATOGERY',
+          ),
+        ),
+        2 => 
+        array(
+          0 => 
+          array(
+            'name' => 'default_counting_person',
+            'studio' => 'visible',
+            'label' => 'LBL_DEFAULT_COUNTING_PERSON',
           ),
         ),
       ),

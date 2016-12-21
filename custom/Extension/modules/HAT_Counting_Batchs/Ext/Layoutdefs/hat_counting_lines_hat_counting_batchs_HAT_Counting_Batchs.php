@@ -1,6 +1,6 @@
 <?php
- // created: 2016-03-31 19:25:17
-$layout_defs["HAT_Counting_Batchs"]["subpanel_setup"]['hat_counting_lines_hat_counting_batchs'] = array (
+ // created: 2016-12-14 14:36:38
+/*$layout_defs["HAT_Counting_Batchs"]["subpanel_setup"]['hat_counting_lines_hat_counting_batchs'] = array (
   'order' => 100,
   'module' => 'HAT_Counting_Lines',
   'subpanel_name' => 'default',
@@ -20,4 +20,4 @@ $layout_defs["HAT_Counting_Batchs"]["subpanel_setup"]['hat_counting_lines_hat_co
       'mode' => 'MultiSelect',
     ),
   ),
-);
+);*/

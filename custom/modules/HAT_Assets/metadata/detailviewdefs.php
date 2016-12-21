@@ -312,6 +312,41 @@ array (
           1 => '',
         ),
       ),
+      'LBL_EDITVIEW_PANEL_CT' =>
+      array(
+        0 => 
+        array(
+          0 => 
+          array(
+            'name' => 'counting_dept',
+            'label' => 'LBL_COUNTING_DEPT',
+          ),
+          1 =>array(
+            'name' => 'counting_location',
+            'label' => 'LBL_COUNTING_LOCATION',
+          ),
+        ),
+        1 => 
+        array(
+          0 => 
+          array(
+            'name' => 'counting_major',
+            'label' => 'LBL_COUNTING_MAJOR',
+          ),
+          1 =>array(
+            'name' => 'counting_catogery',
+            'label' => 'LBL_COUNTING_CATOGERY',
+          ),
+        ),
+        2 => 
+        array(
+          0 => 
+          array(
+            'name' => 'default_counting_person',
+            'label' => 'LBL_DEFAULT_COUNTING_PERSON',
+          ),
+        ),
+      ),
       'lbl_detailview_panel2' => 
       array (
         0 => 
@@ -529,8 +564,7 @@ array (
             'label' => 'LBL_ATTRIBUTE12',
           ),
         ),
-
-        10 => 
+        13 => 
         array (
           0 => 'description',
           1 => '',
