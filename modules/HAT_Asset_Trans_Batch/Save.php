@@ -237,14 +237,8 @@ function save_rack_elements_from_rack($focus, $beanRack) {
 
                 //清空设备的机柜分配
                 $beanRackAllocations = BeanFactory::getBean('HIT_Rack_Allocations',$record->id);
-		        if(empty($focus->inactive_using) || $focus->inactive_using!= 1) {//正常保存使用信息
-		            //$beanRackAllocations->using_org_id = $focus->target_using_org;
-		        }else{//清空使用信息
 
-		        }
-		        $beanRackAllocations->save();
 
-                
             }
 
             $beanAsset->asset_status = $focus->target_asset_status;

@@ -1611,6 +1611,29 @@ $dictionary['HAT_EventType'] = array (
 			'studio' => 'visible',
 			'dependency' => false,
 		),
+		
+		'allocation_flag' => array (
+			'required' => false,
+			'name' => 'allocation_flag',
+			'vname' => 'LBL_ALLOCATION_FLAG',
+			'type' => 'bool',
+			'massupdate' => 0,
+			'default' => '0',
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => false,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+		),
+		
+		
+		
 	),
 	'relationships' => array (),
 	'optimistic_locking' => true,

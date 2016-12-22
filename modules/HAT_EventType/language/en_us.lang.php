@@ -135,4 +135,5 @@ $mod_strings = array (
   'LBL_CHANGE_ASSET_ATTRIBUTE11'=>'链路(cux)',
   'LBL_CHANGE_ASSET_ATTRIBUTE12'=>'波道(cux)',
   'LBL_CHANGE_COSt_CENTER'=>'Cost Center',
+  'LBL_ALLOCATION_FLAG'=>'Is Asset Allocation',
 );

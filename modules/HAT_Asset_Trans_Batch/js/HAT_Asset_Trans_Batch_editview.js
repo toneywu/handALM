@@ -11,7 +11,6 @@ function call_ff() {
 var prodln = 0;
 var global_eventOptions;
 
-
 function setEventTypePopupReturn(popupReplyData){
 	set_return(popupReplyData);
 	console.log(popupReplyData);
@@ -251,47 +250,6 @@ function check_repeat(ip_array)
 }
 
 
-
-function erp_allocations(){
-		var json_obj={};
-		var i=0;
-		$("input[id^='line_asset_id']").each(function(){
-			var id_name=$(this).attr("id");
-			var id_index = id_name.split("line_asset_id")[1];
-			if($("#line_deleted"+id_index).val()=="0"){
-				json_obj[id_name]=$(this).val();
-				i=i+1;
-				json_obj["line_target_cost_center"+id_index]=$("#line_target_cost_center"+id_index).val();
-				json_obj["line_target_cost_center_id"+id_index]=$("#line_target_cost_center_id"+id_index).val();
-				json_obj["line_target_location"+id_index]=$("#line_target_location"+id_index).val();
-				json_obj["line_target_location_id"+id_index]=$("#line_target_location_id"+id_index).val();
-				json_obj["line_target_asset_attribute10"+id_index]=$("#line_target_asset_attribute10"+id_index).val();
-				json_obj["line_target_location_desc"+id_index]=$("#line_target_location_desc"+id_index).val();
-			}
-			});
-			
-		var json_data ={};
-		json_data['asset_trans_status']=$("#asset_trans_status").val();
-		json_data['line_cnt']=i;
-		json_data['record']=$("input[name=record]").val();
-		json_data["line_asset_infos"]=json_obj;
-		
-		$.ajax({
-			type:"POST",
-			url: "index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=ebs_fa_allocations",
-			data: json_data,
-			cache:false,  
-            async:false,//重要的关健点在于同步和异步的参数，  
-			success: function(msg){ 
-					console.log(msg);
-					},
-			error: function(XMLHttpRequest, textStatus, errorThrown) {
-				 //alert('Error loading document');
-				 console.log(textStatus+errorThrown);
-			},
-		});
-			
-}
 function check_quantity(){
 		var error_msg="";
 		var formData=$("#EditView");
@@ -343,9 +301,14 @@ function check_quantity(){
 
 
 
+/*function erp_allocations(){
+		var json_obj={};
+		var i=0;
+*/
 function erp_allocations(){
 		var json_obj={};
 		var i=0;
+		var return_status="S";
 		$("input[id^='line_asset_id']").each(function(){
 			var id_name=$(this).attr("id");
 			var id_index = id_name.split("line_asset_id")[1];
@@ -360,13 +323,14 @@ function erp_allocations(){
 				json_obj["line_target_location_desc"+id_index]=$("#line_target_location_desc"+id_index).val();
 			}
 			});
-			
+
 		var json_data ={};
 		json_data['asset_trans_status']=$("#asset_trans_status").val();
 		json_data['line_cnt']=i;
+		json_data['event_type_id']=$("#hat_eventtype_id").val();
 		json_data['record']=$("input[name=record]").val();
 		json_data["line_asset_infos"]=json_obj;
-		
+
 		$.ajax({
 			type:"POST",
 			url: "index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=ebs_fa_allocations",
@@ -375,13 +339,27 @@ function erp_allocations(){
             async:false,//重要的关健点在于同步和异步的参数，  
 			success: function(msg){ 
 					console.log(msg);
+
+					$result_json=jQuery.parseJSON(msg);
+					console.log($result_json.status);
+					console.log($result_json.msg);
+					return_status=$result_json.status;
+					if($result_json.status!='S'){
+						BootstrapDialog.alert({
+							type : BootstrapDialog.TYPE_DANGER,
+							title : SUGAR.language.get('app_strings',
+									'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+							message : $result_json.msg
+						});
+					}
 					},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
 				 //alert('Error loading document');
 				 console.log(textStatus+errorThrown);
 			},
 		});
-			
+		return return_status;
+
 }
 /**
 * 保存前验证
@@ -389,7 +367,12 @@ function erp_allocations(){
 function preValidateFunction(async_bool = false) {
 		var result = true;
 		var error_msg="S";
+
 		erp_allocations();
+		var return_status = erp_allocations();
+		if(return_status!=="S"&&return_status!=""){
+			return;
+		}
 		//return;
 		//toney.wu 仅针对有来源的工作单进行数据验证
 		if ($("#source_woop_id").val()!="") {
@@ -397,12 +380,9 @@ function preValidateFunction(async_bool = false) {
 			var error_msg = check_quantity(); //如果验证有误会返回错误信息
 			//console.log("preValidateFunction = "+error_msg);
 		}
-
 		if(error_msg!=="S"&&error_msg!=""){
 			return;
 		}
-		
-		
 		//欠费
 		var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());
 
@@ -424,12 +404,12 @@ function preValidateFunction(async_bool = false) {
 
 		}
 		//End欠费
-		console.log("End..preValidateFunction");
+
 		return result
 }
-	
+
 $(document).ready(function(){
-	
+
 	SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
 		OverwriteSaveBtn(preValidateFunction);//注意引用时不加（）
 	});
@@ -438,8 +418,8 @@ $(document).ready(function(){
         $("#asset_trans_status option[value='CANCELED']").remove();
         $("#asset_trans_status option[value='CLOSED']").remove();
         $("#asset_trans_status option[value='TRANSACTED']").remove();
-	
-	
+
+
 	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
 		$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');
 	}

@@ -246,6 +246,10 @@ array (
         array(
           0=>"change_asset_attribute11",
           1=>"change_asset_attribute12"
+        ),
+		7=>
+        array(
+          0=>"allocation_flag",
         )
       ),
       'lbl_editview_panel3' => 
