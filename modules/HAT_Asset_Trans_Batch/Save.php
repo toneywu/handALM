@@ -173,7 +173,7 @@ function save_lines($post_data, $parent, $key = '',$need_allocation){
                     echo ("\nChecking Rack inofrmation: beanRack->enable_partial_allocation = ".$beanRack->enable_partial_allocation);
                     if(isset($beanRack) && $beanRack->enable_partial_allocation == false) {
                     //如果当前设备是IT机柜并且机柜非整U分配，则将机柜上的位置、使用组织与人员信息、或失效信息提供到机柜分配行上
-                        echo "\nRack is not partial allocation, assets information should be set as parent Rack-Asset.";
+                        echo "<br/>Rack is not partial allocation, assets information should be set as parent Rack-Asset.";
                         save_rack_elements_from_rack($trans_line, $beanRack);
                     }
 
@@ -198,16 +198,16 @@ function save_rack_elements_from_rack($focus, $beanRack) {
      $RackAllocations = BeanFactory::getBean('HIT_Rack_Allocations')->get_full_list(
              '', "hit_rack_allocations.hit_racks_id = '".$beanRack->id."'"
              );
-
+     echo "start to save rack elements";
     foreach ($RackAllocations as $record ) {
-        //更新机柜上的分配信息
+/*        //更新机柜上的分配信息
         $beanRackAllocations = BeanFactory::getBean('HIT_Rack_Allocations',$record->id);
         if(empty($focus->inactive_using) || $focus->inactive_using!= 1) {//正常保存使用信息
             //$beanRackAllocations->using_org_id = $focus->target_using_org;
         }else{//清空使用信息
 
         }
-        $beanRackAllocations->save();
+        $beanRackAllocations->save();*/
 
         //更新机柜上的分配的资产的具体属性
         if (!empty($record->hat_assets_id)) {
@@ -219,6 +219,7 @@ function save_rack_elements_from_rack($focus, $beanRack) {
                 $beanAsset->parent_asset_id = $beanRack->hat_assets_id;
                 $beanAsset->hat_asset_locations_hat_assetshat_asset_locations_ida = $focus->target_location_id;
                 echo "<br/>Asset[".($beanAsset->name)."] located on Rack has been set according to the Rack information";
+                echo "<br/>Asset[".($beanAsset->name)."] using org is set to ".($beanAsset->using_org_id);
             }else{//如果当前为失效，则清空使用信息
                 $beanAsset->using_org_id = "";
                 $beanAsset->using_person_id = "";
@@ -226,13 +227,24 @@ function save_rack_elements_from_rack($focus, $beanRack) {
                 $beanAsset->parent_asset_id ="";
                 $beanAsset->hat_asset_locations_hat_assetshat_asset_locations_ida = "";
 
-
+                //将资产的位置还原为地点上的默认位置
                 $beanLocation = BeanFactory::getBean('HAT_Asset_Locations',$focus->target_location_id);
                 $beanSite = BeanFactory::getBean('HAM_Maint_Sites',$beanLocation->ham_maint_sites_id);
                 $beanAsset->hat_asset_locations_hat_assetshat_asset_locations_ida = $beanSite->deft_unassigned_location_id;
 
                 echo "location=".$beanAsset->hat_asset_locations_hat_assetshat_asset_locations_ida;
                 echo "<br/>Asset[".($beanAsset->name)."] located on Rack has been set removed.";
+
+                //清空设备的机柜分配
+                $beanRackAllocations = BeanFactory::getBean('HIT_Rack_Allocations',$record->id);
+		        if(empty($focus->inactive_using) || $focus->inactive_using!= 1) {//正常保存使用信息
+		            //$beanRackAllocations->using_org_id = $focus->target_using_org;
+		        }else{//清空使用信息
+
+		        }
+		        $beanRackAllocations->save();
+
+                
             }
 
             $beanAsset->asset_status = $focus->target_asset_status;
@@ -342,27 +354,7 @@ function save_rack_allocations($focus, $parent){
                 }elseif ($key->id!="") {
                     $RackAllocation = BeanFactory::getBean('HIT_Rack_Allocations', $key->id);
                 }
-/*
-                $Rack = BeanFactory::getBean('HIT_Racks') ->retrieve_by_string_fields(array('hit_racks.`hat_assets_id'=> $focus->asset_id));
 
-                $RackAllocation->hit_racks_id = $Rack->id;
-                $RackAllocation->name = $key->asset_name;
-                $RackAllocation->hat_assets_id = $key->asset_id;
-                $RackAllocation->rack_pos_top = $key->rack_pos_top;
-                $RackAllocation->height = $key->height;
-                $RackAllocation->rack_pos_depth = $key->rack_pos_depth;
-                $RackAllocation->sync_parent_enabled = true;
-                $RackAllocation->placeholder = false;
-                $RackAllocation->description = $parent->name;
-                $RackAllocation->save();
-
-                echo "\nrack saved";
-            }//END IF非删除
-        }//END FOR 循环下一行机柜信息
-    }
-
-}
-*/
                 $Rack = BeanFactory::getBean('HIT_Racks') ->retrieve_by_string_fields(array('hit_racks.`hat_assets_id'=> $focus->asset_id));
 
                 $RackAllocation->hit_racks_id = $Rack->id;
