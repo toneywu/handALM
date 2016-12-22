@@ -1,7 +1,7 @@
 <?php
 // created: 2016-12-22 09:38:59
 $GLOBALS['tabStructure'] = array (
-  'LBL_TABGROUP_SALES' => 
+/*  'LBL_TABGROUP_SALES' => 
   array (
     'label' => 'LBL_TABGROUP_SALES',
     'modules' => 
@@ -18,8 +18,8 @@ $GLOBALS['tabStructure'] = array (
       9 => 'HAT_Meters',
       10 => 'HAT_Meter_Types',
       11 => 'HAT_Asset_Sources',
-      ),
     ),
+  ),
   'LBL_GROUPTAB1_1454774981' => 
   array (
     'label' => 'LBL_GROUPTAB1_1454774981',
@@ -34,8 +34,8 @@ $GLOBALS['tabStructure'] = array (
       6 => 'HAT_Asset_Trans_Batch',
       7 => 'HAT_Counting_Batchs',
       8 => 'HAA_Maps',
-      ),
     ),
+  ),
   'LBL_GROUPTAB2_1466152419' => 
   array (
     'label' => 'LBL_GROUPTAB2_1466152419',
@@ -47,8 +47,8 @@ $GLOBALS['tabStructure'] = array (
       3 => 'HIT_VLAN_LIST',
       4 => 'HIT_VNI_LIST',
       5 => 'HIT_ODF_REL',
-      ),
     ),
+  ),
   'LBL_TABGROUP_SUPPORT' => 
   array (
     'label' => 'LBL_TABGROUP_SUPPORT',
@@ -61,8 +61,8 @@ $GLOBALS['tabStructure'] = array (
       4 => 'HAT_Incidents',
       5 => 'HAM_WO',
       6 => 'HAM_WOOP',
-      ),
     ),
+  ),
   'LBL_TABGROUP_ACTIVITIES' => 
   array (
     'label' => 'LBL_TABGROUP_ACTIVITIES',
@@ -73,8 +73,8 @@ $GLOBALS['tabStructure'] = array (
       2 => 'Tasks',
       3 => 'Notes',
       4 => 'Bugs',
-      ),
     ),
+  ),
   'LBL_GROUPTAB6_1467782279' => 
   array (
     'label' => 'LBL_GROUPTAB6_1467782279',
@@ -83,8 +83,8 @@ $GLOBALS['tabStructure'] = array (
       0 => 'AOS_Quotes',
       1 => 'AOS_Contracts',
       2 => 'AOS_Invoices',
-      ),
     ),
+  ),
   'LBL_GROUPTAB5_1455067721' => 
   array (
     'label' => 'LBL_GROUPTAB5_1455067721',
@@ -95,8 +95,8 @@ $GLOBALS['tabStructure'] = array (
       2 => 'HMM_Trans_Batch',
       3 => 'HMM_Trans_Lines',
       4 => 'HMM_Trans_History',
-      ),
     ),
+  ),
   'LBL_TABGROUP_MARKETING' => 
   array (
     'label' => 'LBL_TABGROUP_MARKETING',
@@ -118,12 +118,6 @@ $GLOBALS['tabStructure'] = array (
       13 => 'AOS_PDF_Templates',
       14 => 'HAA_FF',
       15 => 'HAA_FSQL',
-      ),
     ),
-  );
-if(isset($_SESSION["current_framework_code"])){
-  $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
-}
-if(file_exists($instance_loc.'include/tabConfig.php')){
-  require $instance_loc.'include/tabConfig.php';
-}
+  ),*/
+);
