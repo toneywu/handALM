@@ -58,11 +58,32 @@ function display_lines($focus, $field, $value, $view){
 					  p_asset_c.name current_parent_asset,
 					  p_asset_t.id target_parent_asset_id,
 					  p_asset_t.name target_parent_asset,
-					  hat.date_start, 		
-					  hat.date_end,		
-					  hat.status
+					  hat.inactive_using,
+					  hat.date_start,
+					  hat.date_end,
+					  hat.status,
+					  hat.current_asset_attribute10,
+					  hat.target_asset_attribute10,
+					  hat.current_asset_attribute11,
+					  hat.target_asset_attribute11,
+					  hat.current_asset_attribute12,
+					  hat.target_asset_attribute12,
+					  code_cc_c.name current_cost_center,
+					  code_cc_c.id current_cost_center_id,
+					  code_cc_t.name target_cost_center,
+					  code_cc_t.id target_cost_center_id
 					FROM
-					  hat_asset_trans hat 
+					  hat_asset_trans hat
+					  LEFT JOIN haa_codes code_cc_c
+					    ON (
+					    	hat.current_cost_center_id = code_cc_c.id
+					    	AND code_cc_c.deleted=0
+					    )
+					  LEFT JOIN haa_codes code_cc_t
+					    ON (
+					    	hat.target_cost_center_id = code_cc_t.id
+					    	AND code_cc_t.deleted=0
+					    )
 					  LEFT JOIN hat_asset_locations location_c 
 					    ON (
 					      location_c.id = hat.`current_location_id` 
@@ -126,7 +147,7 @@ function display_lines($focus, $field, $value, $view){
 					  hat_assets ha
 					WHERE hat.deleted = 0 
 					  AND ha.`id`=hat.`asset_id`
-					  AND hat.batch_id = '".$focus->id."'";
+					  AND hat.batch_id = '".$focus->id."'"." order by hat.name";
 
             $result = $focus->db->query($sql);
 

@@ -9,29 +9,12 @@
  */
 class UpdateAsset {
 
-	function update_fix_asset($record, $cost_cetner, $location,$production) {
-		//echo '\n'.'record = ' . $record . "\n";
-		//echo 'cost_cetner = ' . $cost_cetner."\n";
-		//echo 'location = ' . $location .  "\n";
-		//echo 'production = ' . $production .  "\n";
-		$result_array =array();
-		$username = "sysadmin";
-		$password = "welcome8";
-		$url = "http://111.200.33.205:1574/8020/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";
+	function update_fix_asset($parameters_array) {
 
-		$asset_bean = BeanFactory :: getBean('HAT_Assets')->retrieve_by_string_fields(array (
-			'id' => $record
-		));
-		//echo 'fixed_asset_id = '.$asset_bean->fixed_asset_id.'<br>';
-		//echo 'asset_bean_number = '.$asset_bean->fixed_asset.'<br>';
-		if (!empty ($asset_bean->fixed_asset_id)) {
-			$fix_asset_bean = BeanFactory :: getBean('HFA_Fixed_Assets')->retrieve_by_string_fields(array (
-				'id' => $asset_bean->fixed_asset_id
-			));
-			
-			//$asset_number = $fix_asset_bean->asset_num;
-			$book_code= $fix_asset_bean->book_name;
-			$postAllString = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+	
+		$assets_line_array = $parameters_array['line_asset_infos'];
+		$line_cnt = $parameters_array['line_cnt'];
+		$postAllString = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
 										    <soap:Header xmlns:ns1="http://xmlns.oracle.com/apps/cux/soaprovider/plsql/cux_ws_fa_transfer_pkg/">
 										        <ns1:SOAHeader>
 										            <ns1:Responsibility>CUX_SUPER_RESPKEY</ns1:Responsibility>
@@ -43,37 +26,73 @@ class UpdateAsset {
 										    <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" soap:mustUnderstand="1"><wsse:UsernameToken xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"><wsse:Username>sysadmin</wsse:Username><wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">welcome8</wsse:Password></wsse:UsernameToken></wsse:Security></soap:Header>
 										    <soap:Body xmlns:ns2="http://xmlns.oracle.com/apps/cux/soaprovider/plsql/cux_ws_fa_transfer_pkg/do_transfer/">
 										        <ns2:InputParameters>
-										            <ns2:P_TRANSFER_DATA>
-										                <ns2:P_TRANSFER_DATA_ITEM><ns2:LINE_ID>1</ns2:LINE_ID>
-										                    <ns2:ASSET_NUM>' . $fix_asset_bean->name . '</ns2:ASSET_NUM>
-										                    <ns2:BOOK_CODE>'.$book_code.'</ns2:BOOK_CODE>
-										                    <ns2:OUT_QTY>1</ns2:OUT_QTY>
-										                    <ns2:IN_QTY>1</ns2:IN_QTY>
-										                    <ns2:ACCOUNT_ID_IN>' . $cost_cetner . '</ns2:ACCOUNT_ID_IN>
-										                    <ns2:SITE_IN>'.$location.'</ns2:SITE_IN>
-										                    <ns2:SOURCE_NUM/>
-										                    <ns2:ATTRIBUTE_CATEGORY/>
-										                    <ns2:ATTRIBUTE1>'.$production.'</ns2:ATTRIBUTE1>
-										                    <ns2:ATTRIBUTE2/>
-										                    <ns2:ATTRIBUTE3/>
-										                    <ns2:ATTRIBUTE4/>
-										                    <ns2:ATTRIBUTE5/>
-										                    <ns2:ATTRIBUTE6/>
-										                    <ns2:ATTRIBUTE7/>
-										                    <ns2:ATTRIBUTE8/>
-										                    <ns2:ATTRIBUTE9/>
-										                    <ns2:ATTRIBUTE10/>
-										                    <ns2:ATTRIBUTE11/>
-										                    <ns2:ATTRIBUTE12/>
-										                    <ns2:ATTRIBUTE13/>
-										                    <ns2:ATTRIBUTE14/>
-										                    <ns2:ATTRIBUTE15/>
-										                </ns2:P_TRANSFER_DATA_ITEM>
-										            </ns2:P_TRANSFER_DATA>
-										        </ns2:InputParameters>
-										    </soap:Body>
-										</soap:Envelope>';
+										            <ns2:P_TRANSFER_DATA>';
+													
+		$loopInput = "";
+		
+		for($i=0;$i<$line_cnt;$i++){
+				$line_target_cost_center = $assets_line_array["line_target_cost_center".$i];
+				$line_target_cost_center_id = $assets_line_array["line_target_cost_center_id".$i];
+				$line_target_location = $assets_line_array["line_target_location".$i];
+				$line_target_location_id = $assets_line_array["line_target_location_id".$i];
+				$line_target_asset_attribute10 = $assets_line_array["line_target_asset_attribute10".$i];
+				$line_target_location_desc = $assets_line_array["line_target_location_desc".$i];
+				
+				$bean_location = BeanFactory :: getBean('HAT_Asset_Locations', $line_target_location_id);
+				$mait_sites_bean = BeanFactory :: getBean('HAM_Maint_Sites', $bean_location->ham_maint_sites_id);
+				
+				$asset_id = $assets_line_array["line_asset_id".$i];
+				
+				$asset_bean = BeanFactory :: getBean('HAT_Assets')->retrieve_by_string_fields(array (
+													'id' => $asset_id
+												));
+				$fix_asset_bean = BeanFactory :: getBean('HFA_Fixed_Assets')->retrieve_by_string_fields(array (
+													'id' => $asset_bean->fixed_asset_id
+												));
+				$book_code= $fix_asset_bean->book_name;
+				
+			if(!empty($fix_asset_bean)&&$asset_bean->enable_fa==1){
+				$loopInput = $loopInput .'<ns2:P_TRANSFER_DATA_ITEM>';
+				$loopInput = $loopInput .'<ns2:LINE_ID>1</ns2:LINE_ID>';
+				$loopInput = $loopInput .'<ns2:ASSET_NUM>'.$fix_asset_bean->name.'</ns2:ASSET_NUM>';
+				$loopInput = $loopInput .'<ns2:BOOK_CODE>'.$book_code.'</ns2:BOOK_CODE>';
+				$loopInput = $loopInput .'<ns2:OUT_QTY>1</ns2:OUT_QTY>';		
+				$loopInput = $loopInput .'<ns2:IN_QTY>1</ns2:IN_QTY>';
+				$loopInput = $loopInput .'<ns2:ACCOUNT_ID_IN>'.$line_target_cost_center.'</ns2:ACCOUNT_ID_IN>';
+				$loopInput = $loopInput .'<ns2:SITE_IN>'.$mait_sites_bean->name.'</ns2:SITE_IN>';
+				$loopInput = $loopInput .'<ns2:SOURCE_NUM/>';
+				$loopInput = $loopInput .'<ns2:ATTRIBUTE_CATEGORY/>';
+				$loopInput = $loopInput .'<ns2:ATTRIBUTE1>'.$line_target_asset_attribute10.'</ns2:ATTRIBUTE1>';
+				$loopInput = $loopInput .'<ns2:ATTRIBUTE2/>';
+				$loopInput = $loopInput .'<ns2:ATTRIBUTE3/>';
+				$loopInput = $loopInput .'<ns2:ATTRIBUTE4/>';
+				$loopInput = $loopInput .'<ns2:ATTRIBUTE5/>';
+				$loopInput = $loopInput .'<ns2:ATTRIBUTE6/>';
+				$loopInput = $loopInput .'<ns2:ATTRIBUTE7/>';
+				$loopInput = $loopInput .'<ns2:ATTRIBUTE8/>';
+				$loopInput = $loopInput .'<ns2:ATTRIBUTE9/>';
+				$loopInput = $loopInput .'<ns2:ATTRIBUTE10/>';
+				$loopInput = $loopInput .'<ns2:ATTRIBUTE11/>';
+				$loopInput = $loopInput .'<ns2:ATTRIBUTE12/>';
+				$loopInput = $loopInput .'<ns2:ATTRIBUTE13/>';
+				$loopInput = $loopInput .'<ns2:ATTRIBUTE14/>';
+				$loopInput = $loopInput .'<ns2:ATTRIBUTE15/>';		
+				$loopInput = $loopInput.'</ns2:P_TRANSFER_DATA_ITEM>';		
+			}
 		}
+		
+		$loopInput = $loopInput . "</ns2:P_TRANSFER_DATA></ns2:InputParameters></soap:Body></soap:Envelope>";
+		$postAllString = $postAllString . '' . "$loopInput";
+		//echo '\n'.'record = ' . $record . "\n";
+		//echo 'cost_cetner = ' . $cost_cetner."\n";
+		//echo 'location = ' . $location .  "\n";
+		//echo 'production = ' . $production .  "\n";
+		$result_array =array();
+		$username = "sysadmin";
+		$password = "welcome8";
+		$url = "http://111.200.33.205:1574/8020/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";
+		
+		
 		//echo "postAllString=" . $postAllString . "<br>";
 		//创建一个新cURL资源 
 		$soap_do = curl_init();
@@ -102,7 +121,6 @@ class UpdateAsset {
 		//抓取URL并把它传递给浏览器
 		$result = curl_exec($soap_do);
 		if (curl_errno($soap_do)) {
-			//echo 'Curl error: ' . curl_error($soap_do);
 			$result_array[0]='E';
 			$result_array[1]='Curl error: ' . curl_error($soap_do);
 		}
