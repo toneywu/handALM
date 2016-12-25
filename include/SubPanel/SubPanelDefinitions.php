@@ -1,4 +1,4 @@
-<?php
+zengc<?php
 if (! defined ( 'sugarEntry' ) || ! sugarEntry) die ( 'Not A Valid Entry Point' ) ;
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
@@ -84,7 +84,12 @@ class aSubPanel
     function __construct ($name , $instance_properties , $parent_bean , $reload = false , $original_only = false, $search_query = '', $collections = array() ){
 
     	$this->_instance_properties = $instance_properties ;
-    	$instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+    	  //Add instance by zengchen 20161214 
+        $instance_loc='';
+        if(isset($_SESSION["current_framework_code"])){
+        $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+    }
+    //End zengchen 20161214
     	if(isset($instance_properties['collection_list' ])) $this->base_collection_list = $instance_properties['collection_list' ];
 
     	if(!empty($collections) && isset($instance_properties['collection_list' ])){
@@ -741,7 +746,12 @@ class SubPanelDefinitions
 	{
 		$layout_defs [ $this->_focus->module_dir ] = array ( ) ;
 		$layout_defs [ $layout_def_key ] = array ( ) ;
-		$instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+		  //Add instance by zengchen 20161214 
+        $instance_loc='';
+        if(isset($_SESSION["current_framework_code"])){
+        $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+    }
+    //End  zengchen 20161214 
 		if (empty ( $this->layout_defs ) || $reload || (! empty ( $layout_def_key ) && ! isset ( $layout_defs [ $layout_def_key ] )))
 		{
 			if (file_exists ( 'modules/' . $this->_focus->module_dir . '/metadata/subpaneldefs.php' ))

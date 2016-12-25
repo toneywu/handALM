@@ -69,7 +69,9 @@ function populateLineCountInfo(){
 	WHERE
 	hct.id = hcl.hat_counting_tasks_id_c
 	AND hct.id ='".$this->bean->id."'
-	AND hcl.deleted = 0";
+	AND hcl.deleted = 0
+	AND hct.deleted = 0";
+
 	$result_line=$db->query($sql_line);
 
 	while($row_line=$db->fetchByAssoc($result_line)){
@@ -84,7 +86,7 @@ function populateLineCountInfo(){
 		AND hcr.deleted = 0
 		AND hcl.hat_counting_lines_hat_counting_resultshat_counting_lines_ida ='".$row_line['id']."'
 		ORDER BY
-		hcr.cycle_number
+		hcr.cycle_number desc
 		LIMIT 1";
 		$result_detail=$db->query($sql_detail);
 
@@ -96,10 +98,10 @@ function populateLineCountInfo(){
 			if($row_detail["counting_result"]='Different'){
 				$different_count=$different_count+1;
 			}
-			if($row_detail["counting_result"]='Different' && $row_detail["count_diff_type"]='Overage'){
+			if($row_detail["counting_result"]='Overage'){
 				$overage_count=$overage_count+1;
 			}
-			if($row_detail["counting_result"]='Different' && $row_detail["count_diff_type"]='Loss'){
+			if($row_detail["counting_result"]='Loss'){
 				$loss_count=$loss_count+1;
 			}
 			if($row_detail["adjust_status"]='Processed'){

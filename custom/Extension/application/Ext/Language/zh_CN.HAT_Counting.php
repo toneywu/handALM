@@ -38,12 +38,13 @@
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['HAT_Counting_Batchs'] = 'Counting';
-$app_list_strings['moduleList']['HAT_Counting_Lines'] = 'Counting Lines';
+$app_list_strings['moduleList']['HAT_Counting_Batchs'] = '盘点批';
+$app_list_strings['moduleList']['HAT_Counting_Batch_Rules'] = '盘点批规则';
+$app_list_strings['moduleList']['HAT_Counting_Lines'] = '盘点清单';
 $app_list_strings['moduleList']['HAT_Counting_Results'] = '盘点结果';
 $app_list_strings['moduleList']['HAT_Counting_Rules'] = '盘点规则';
 $app_list_strings['moduleList']['HAT_Counting_Rule_Dtls'] = '盘点规则明细';
 $app_list_strings['moduleList']['HAT_Counting_Tasks'] = '盘点任务';
-$app_list_strings['hat_counting_objects_type_list']['ASSETS'] = 'Physical Assets';
-$app_list_strings['hat_counting_objects_type_list']['FA'] = 'Financial Assets (Fixed Assets)';
-$app_list_strings['hat_counting_objects_type_list']['INV'] = 'Inventory Items';
+$app_list_strings['hat_counting_objects_type_list']['ASSETS'] = '实物资产';
+$app_list_strings['hat_counting_objects_type_list']['FA'] = '固定资产';
+$app_list_strings['hat_counting_objects_type_list']['INV'] = '库存物资';

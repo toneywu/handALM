@@ -54,6 +54,14 @@ $subpanel_layout = array(
 			'widget_class' => 'SubPanelDetailViewLink',
 	 		'width' => '45%',
 		),
+		  'counting_task_status' => 
+  array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'vname' => 'LBL_COUNTING_TASK_STATUS',
+    'width' => '10%',
+    'default' => true,
+  ),
 		'date_modified'=>array(
 	 		'vname' => 'LBL_DATE_MODIFIED',
 	 		'width' => '45%',

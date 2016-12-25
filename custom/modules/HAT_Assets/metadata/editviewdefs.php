@@ -82,12 +82,12 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_EDITVIEW_PANEL1' => 
+        'LBL_EDITVIEW_PANEL_CT' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_EDITVIEW_PANEL_CT' => 
+        'LBL_EDITVIEW_PANEL1' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
@@ -581,6 +581,16 @@ array (
               'initial_filter' => '&account_name_advanced="+encodeURIComponent($("#owning_org").val())+"',
             ),
           ),
+          1 => 
+          array (
+            'name' => 'owning_major',
+            'studio' => 'visible',
+            'label' => 'LBL_OWNING_MAJOR',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&code_type_advanced=asset_counting_major_type',
+            ),
+          ),
         ),
         6 => 
         array (
@@ -685,46 +695,46 @@ array (
           ),
         ),
       ),
-      'LBL_EDITVIEW_PANEL_CT'=>
-      array(
-        0 =>
-        array(
+      'LBL_EDITVIEW_PANEL_CT' => 
+      array (
+        0 => 
+        array (
           0 => 
-          array(
+          array (
             'name' => 'counting_dept',
             'studio' => 'visible',
             'label' => 'LBL_COUNTING_DEPT',
           ),
-          1 =>
-          array(
+          1 => 
+          array (
             'name' => 'counting_location',
             'studio' => 'visible',
             'label' => 'LBL_COUNTING_LOCATION',
           ),
         ),
-        1 =>
-        array(
+        1 => 
+        array (
           0 => 
-          array(
+          array (
             'name' => 'counting_major',
             'studio' => 'visible',
             'label' => 'LBL_COUNTING_MAJOR',
-            'displayParams'=>
+            'displayParams' => 
             array (
               'initial_filter' => '&code_type_advanced=asset_counting_major_type',
             ),
           ),
-          1 =>
-          array(
+          1 => 
+          array (
             'name' => 'counting_catogery',
             'studio' => 'visible',
             'label' => 'LBL_COUNTING_CATOGERY',
           ),
         ),
         2 => 
-        array(
+        array (
           0 => 
-          array(
+          array (
             'name' => 'default_counting_person',
             'studio' => 'visible',
             'label' => 'LBL_DEFAULT_COUNTING_PERSON',

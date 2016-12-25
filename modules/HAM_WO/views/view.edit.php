@@ -10,7 +10,7 @@ class HAM_WOViewEdit extends ViewEdit {
 
 		global $current_user, $mod_strings;
 		global $db;
-
+		global $currentModule;
 		//1、初始化Framework-Site信息
 		//2、如果当前数据来源于SR（有参数sr_id）则从对应的SR上复制信息
 		//3、判断是否来自合同的，如果来源于合同则显示合同字段信息

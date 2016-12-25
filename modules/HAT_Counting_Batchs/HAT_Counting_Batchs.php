@@ -71,6 +71,37 @@ class HAT_Counting_Batchs extends HAT_Counting_Batchs_sugar {
 				$bean_numbering->save();
 			}
 		}
+
+		$this->id=parent::save($check_notify);
+		$post_data=$_POST;
+
+		$line_count = isset($post_data['line_deleted']) ? count($post_data['line_deleted']) : 0;
+		
+        for ($i = 0; $i < $line_count; ++$i) {
+        	$key="line_";
+        	$lines = new HAT_Counting_Batch_Rules();
+            if ($post_data[$key . 'deleted'][$i] == 1) {
+                $lines->mark_deleted($post_data[$key . 'id'][$i]);
+            } else {
+                foreach ($lines->field_defs as $field_def) {
+                    $field_name = $field_def['name'];
+                    if (isset($post_data[$key . $field_name][$i])) {
+                        $lines->$field_name = $post_data[$key . $field_name][$i];
+                    }
+                }
+	            $lines->save($check_notify);
+	            if (!$post_data['line_id'][$i]) {//新建才加关联关系
+	            	$table='hat_counting_batchs_hat_counting_batch_rules_c';
+	            	$relate_values = array(
+            		'deleted' =>0 ,
+	            	'hat_counti9a14_batchs_ida'=>$this->id,
+	            	'hat_counti8f01h_rules_idb'=>$lines->id 
+	            	);
+	            }
+	            parent::set_relationship($table,$relate_values);
+	        }
+	    }
+
 		parent::save($check_notify);
 		
 	}
