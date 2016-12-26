@@ -3,6 +3,11 @@
 $beanList['HAT_Counting_Batchs'] = 'HAT_Counting_Batchs';
 $beanFiles['HAT_Counting_Batchs'] = 'modules/HAT_Counting_Batchs/HAT_Counting_Batchs.php';
 $moduleList[] = 'HAT_Counting_Batchs';
+$beanList['HAT_Counting_Batch_Rules'] = 'HAT_Counting_Batch_Rules';
+$beanFiles['HAT_Counting_Batch_Rules'] = 'modules/HAT_Counting_Batch_Rules/HAT_Counting_Batch_Rules.php';
+$modules_exempt_from_availability_check['HAT_Counting_Batch_Rules'] = 'HAT_Counting_Batch_Rules';
+$report_include_modules['HAT_Counting_Batch_Rules'] = 'HAT_Counting_Batch_Rules';
+$modInvisList[] = 'HAT_Counting_Batch_Rules';
 $beanList['HAT_Counting_Lines'] = 'HAT_Counting_Lines';
 $beanFiles['HAT_Counting_Lines'] = 'modules/HAT_Counting_Lines/HAT_Counting_Lines.php';
 $moduleList[] = 'HAT_Counting_Lines';

@@ -34,7 +34,7 @@ array (
           'panelDefault' => 'expanded',
         ),
       ),
-      'syncDetailEditViews' => true,
+      'syncDetailEditViews' => false,
     ),
     'panels' => 
     array (
@@ -47,14 +47,14 @@ array (
             'name' => 'frameworks',
             'studio' => 'visible',
             'label' => 'LBL_FRAMEWORKS',
-            'customCode'=>'{$FRAMEWORK_C}',
+            'customCode' => '{$FRAMEWORK_C}',
           ),
           1 => 
           array (
             'name' => 'batch_number',
             'label' => 'LBL_BATCH_NUMBER',
             'customCode' => '{$fields.batch_number.value}',
-          ),  
+          ),
         ),
         1 => 
         array (
@@ -100,6 +100,7 @@ array (
           array (
             'name' => 'snapshot_date',
             'label' => 'LBL_SNAPSHOT_DATE',
+            'customCode' => '<input class="date_input" autocomplete="off" name="snapshot_date" id="snapshot_date" value="" title="" tabindex="0" type="text" readonly>',
           ),
           1 => 
           array (
@@ -139,83 +140,10 @@ array (
         array (
           0 => 
           array (
-            'name' => 'location',
+            'name' => 'line_items',
             'studio' => 'visible',
-            'label' => 'LBL_LOCATION',
-            'displayParams' =>
-            array (
-              'initial_filter' => '&module_name=HAT_Counting_Batchs',
-            ),
+            'label' => 'LBL_LINE_ITEMS',
           ),
-          1 => 
-          array (
-            'name' => 'location_drilldown',
-            'label' => 'LBL_LOCATION_DRILLDOWN',
-          ),
-        ),
-        1 => 
-        array (
-          0 => 
-          array (
-            'name' => 'oranization',
-            'studio' => 'visible',
-            'label' => 'LBL_ORANIZATION',
-            'displayParams' =>
-            array (
-              'initial_filter' => '&module_name=HAT_Counting_Batchs',
-            ),
-          ),
-          1 => 
-          array (
-            'name' => 'org_drilldown',
-            'label' => 'LBL_ORG_DRILLDOWN',
-          ),
-        ),
-        2 => 
-        array (
-          0 => 
-          array (
-            'name' => 'major',
-            'studio' => 'visible',
-            'label' => 'LBL_MAJOR',
-            'displayParams' =>
-            array (
-              'initial_filter' => '&module_name=HAT_Counting_Batchs',
-            ),
-          ),
-          1 => 
-          array (
-            'name' => 'major_drilldown',
-            'label' => 'LBL_MAJOR_DRILLDOWN',
-          ),
-        ),
-        3 => 
-        array (
-          0 => 
-          array (
-            'name' => 'category',
-            'studio' => 'visible',
-            'label' => 'LBL_CATEGORY',
-            'displayParams' =>
-            array (
-              'initial_filter' => '&module_name=HAT_Counting_Batchs',
-            ),
-          ),
-          1 => 
-          array (
-            'name' => 'category_drilldown',
-            'label' => 'LBL_CATEGORY_DRILLDOWN',
-          ),
-        ),
-        4 => 
-        array (
-          0 => 
-          array (
-            'name' => 'counting_rule',
-            'studio' => 'visible',
-            'label' => 'LBL_COUNTING_RULE',
-          ),
-          1 => '',
         ),
       ),
     ),

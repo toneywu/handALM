@@ -108,5 +108,7 @@ $mod_strings = array (
   'LBL_LOSS_COUNTING' => '盘亏总数',
   'LBL_DIFF_COUNTING' => '差异总数',
   'LBL_ACTUAL_ADJUST_COUNT' => '已完成调整数量',
+  'LBL_ASSET_MAJOR' => '专业',
+  'LBL_ASSET_MAJOR_HAA_CODES_ID' => '专业',
 
 );

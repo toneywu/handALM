@@ -141,6 +141,10 @@ class EditView
                 fclose($fp);
             }
 //Modefy instance by osmond.liu 20161219
+            $instance_loc='';
+if(isset($_SESSION["current_framework_code"])){
+  $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+}
         $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
         if(file_exists($instance_loc."modules/$this->module/metadata/editviewdefs.php")) {
             require($instance_loc."modules/$this->module/metadata/editviewdefs.php");

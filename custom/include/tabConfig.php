@@ -121,6 +121,7 @@ $GLOBALS['tabStructure'] = array (
       ),
     ),
   );
+$instance_loc='';
 if(isset($_SESSION["current_framework_code"])){
   $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
 }

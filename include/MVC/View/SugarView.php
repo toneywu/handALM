@@ -1039,6 +1039,7 @@ EOHTML;
     protected function _displaySubPanels()
     {
         //Modefy instance by zengchen 20161214 
+        $instance_loc='';
         if(isset($_SESSION["current_framework_code"])){
         $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
     }
@@ -1236,10 +1237,12 @@ EOHTML;
         if (file_exists('custom/modules/' . $module . '/Ext/Menus/menu.ext.php')) {
             require('custom/modules/' . $module . '/Ext/Menus/menu.ext.php');
         }
+      
+        //Add instance by 20161214 
+          $instance_loc='';
         if(isset($_SESSION["current_framework_code"])){
         $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
         }
-        //Add instance by 20161214 
         if (file_exists($instance_loc.'modules/'. $module . '/Ext/Menus/menu.ext.php')) {
             require($instance_loc.'modules/'. $module . '/Ext/Menus/menu.ext.php');
         }
@@ -1401,7 +1404,10 @@ EOHTML;
                 }
             }
         }*/
-         $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+           $instance_loc='';
+        if(isset($_SESSION["current_framework_code"])){
+        $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+        }
         $coreMetaPath = 'modules/'.$this->module.'/metadata/'.$viewDef.'.php';
         if (file_exists($instance_loc.$coreMetaPath)) {
             $metadataFile=$instance_loc.$coreMetaPath;

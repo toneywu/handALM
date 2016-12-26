@@ -1,5 +1,5 @@
 <?php
- // created: 2016-12-21 10:11:54
+ // created: 2016-12-24 15:08:39
 $layout_defs["Documents"]["subpanel_setup"]['hat_counting_lines_documents'] = array (
   'order' => 100,
   'module' => 'HAT_Counting_Lines',
