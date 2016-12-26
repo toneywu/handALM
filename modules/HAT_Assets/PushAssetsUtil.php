@@ -155,10 +155,10 @@ class PushAssetsUtil {
 			//echo 'RESOURCE_NUM =' . $tmp->RESOURCE_NUM . "<br>";
 			//echo 'RETURN_STATUS =' . $tmp->RETURN_STATUS . "<br>";
 			//echo 'ERROR_MESSAGE =' . $tmp->ERROR_MESSAGE . "<br>";
-			if($tmp->RETURN_STATUS=="S"){
+			if($tmp->RETURN_STATUS=="S"||$tmp->RETURN_STATUS==""){
 				$error_message=$error_message."资产编号:".$tmp->RESOURCE_NUM."创建EBS资产成功;";
 			}else{
-				$error_message=$error_message."资产编号:".$tmp->RESOURCE_NUM."创建EBS资产出现问题:".$tmp->ERROR_MESSAGE.";  ";
+				$error_message=$error_message."资产编号:".$tmp->RESOURCE_NUM."创建EBS资产出现问题:".$tmp->ERROR_MESSAGE.";";
 			}
 			
 			//成功后怎么办
