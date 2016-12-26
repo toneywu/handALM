@@ -117,6 +117,22 @@ $layout_defs['HAT_Assets'] = array(
                 'return_as_array' => 'true'
                 ),
             ),
+        'hat_incidents' => array(
+          'order' => 30,
+          'module' => 'HAT_Incidents',
+          'sort_order' => 'asc',
+          'sort_by' => 'event_number',
+          'subpanel_name' => 'HAT_Assets_subpanel_hat_incidents',
+            'get_subpanel_data' => 'function:get_hat_incidents',//这里没有指向传统的link，而是指向了一个function
+            'generate_select' => true,
+            'title_key' => 'LBL_HAT_INCIDENT_SUBPANEL_TITLE',
+            'top_buttons'  => array (),
+            'function_parameters' => array(
+                'import_function_file' => 'modules/HAT_Incidents/IncidentsSubpanel.php',//指向特定的文件
+                'asset_id' => $this->_focus->id,
+                'return_as_array' => 'true'
+                ),
+            ),
         ),
-  );
-  ?>
+);
+?>

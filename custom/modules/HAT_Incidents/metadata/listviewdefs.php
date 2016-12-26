@@ -2,13 +2,13 @@
 $module_name = 'HAT_Incidents';
 $listViewDefs [$module_name] = 
 array (
-  'EVENT_NUMBER' => 
+  /*'EVENT_NUMBER' => 
   array (
     'label' => 'LBL_EVENT_NUMBER',
     'link' => true,
     'width' => '10%',
     'default' => true,
-  ),
+  ),*/
   'EVENT_TYPE' => 
   array (
     'type' => 'relate',
@@ -19,7 +19,7 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-  'EVENT_SUBTYPE' => 
+/*  'EVENT_SUBTYPE' => 
   array (
     'type' => 'relate',
     'studio' => 'visible',
@@ -28,7 +28,7 @@ array (
     'link' => true,
     'width' => '10%',
     'default' => true,
-  ),
+  ),*/
   'NAME' => 
   array (
     'width' => '32%',
@@ -46,13 +46,13 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-  'EVENT_OBJECT' => 
+/*  'EVENT_OBJECT' => 
   array (
     'type' => 'varchar',
     'label' => 'LBL_EVENT_OBJECT',
     'width' => '10%',
     'default' => true,
-  ),
+  ),*/
   'EVENT_RESP_PARTY' => 
   array (
     'type' => 'varchar',

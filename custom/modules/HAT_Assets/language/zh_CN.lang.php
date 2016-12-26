@@ -1,5 +1,5 @@
 <?php
-// created: 2016-12-20 10:13:09
+// created: 2016-12-26 20:43:25
 $mod_strings = array (
   'LBL_EDITVIEW_PANEL4' => '标识与属性',
   'LBL_DETAILVIEW_PANEL5' => '结构与关联',
@@ -18,4 +18,5 @@ $mod_strings = array (
   'LBL_COUNTING_MAJOR' => '专业',
   'LBL_COUNTING_CATOGERY' => '类别',
   'LBL_DEFAULT_COUNTING_PERSON' => '默认盘点员',
+  'LBL_HAT_INCIDENT_SUBPANEL_TITLE' => '事件管理',
 );
