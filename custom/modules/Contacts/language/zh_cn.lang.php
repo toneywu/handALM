@@ -56,4 +56,7 @@ $mod_strings = array (
   'LBL_DETAILVIEW_PANEL_ASSETS' => '设备/资产及相关事务',
   'LBL_SEX' => '性别',
   'LBL_COUNTRIES' => '国籍/区域',
+  'LBL_ASSETS_USING_SUBPANEL'=>'正在使用中的',
+  'LBL_ASSETS_OWNING_SUBPANEL'=>'拥有所属权的',
+  'LBL_ASSETS_TRANS_SUBPANEL'=>'历史记录'
 );

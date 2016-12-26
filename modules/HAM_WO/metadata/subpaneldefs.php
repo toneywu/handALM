@@ -53,11 +53,6 @@ $layout_defs['HAM_WO'] = array (
             'get_subpanel_data' => 'sr_link',
             'title_key' => 'LBL_SR_SUBPANEL_TITLE',
             'top_buttons'  => array (
-                //array('widget_class' => 'SubPanelTopCreateButton'),
-/*                0 => array (
-                    'widget_class' => 'SubPanelTopSelectButton',
-                    'mode'         => 'MultiSelect',
-                    ),*/
                 ),
             ),
 

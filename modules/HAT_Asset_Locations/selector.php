@@ -278,7 +278,7 @@
 
 <?php
 		require_once('modules/HAA_Frameworks/orgSelector_class.php');
-		$current_site_id = empty($this->bean->ham_maint_sites_id)?"":$this->bean->ham_maint_sites_id;
+		$current_site_id = empty($_REQUEST['site_id'])?"":$_REQUEST['site_id'];
 		echo set_site_selector($current_site_id,$current_module,$current_action);
 ?>
 				</span>

@@ -177,7 +177,11 @@ class LanguageManager
 	static function refreshLanguage($module, $lang, $loaded_mod_strings = array(), $additional_search_paths = null){
 		// Some of the vardefs do not correctly define dictionary as global.  Declare it first.
 		// Add By osmond.liu 20161219
-		$instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+		if(isset($_SESSION["current_framework_code"])) {
+			$instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+		} else {
+			$instance_loc='instance/PUBLIC/';
+		}
 		$lang_paths = array(
 			'modules/'.$module.'/language/'.$lang.'.lang.php',
 			'modules/'.$module.'/language/'.$lang.'.lang.override.php',

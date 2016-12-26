@@ -214,13 +214,13 @@ array (
         ),
         3 => 
         array (
-          0 => 
+          0 => 'keep_seperated_allc_rack_using_org',
+          1 => 
           array (
             'name' => 'change_location',
             'studio' => 'visible',
             'label' => 'LBL_CHANGE_LOCATION',
           ),
-          1 => '',
         ),
         4 => 
         array (

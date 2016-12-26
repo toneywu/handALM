@@ -40,6 +40,7 @@ function get_label_name ($field_name,$mod_name) {
 function get_jason_field ($haa_ff_id, $label_field_name, $mod_name,  $val_field,  $val_type='varchar', $val_field_id='', $relate_mod_name='') {
     //Add by zengchen 20161221
   global $db;
+  $return_text="";
   //$haa_ff_id='75ee1d0a-41ae-3b96-bd06-5799b9d8c9af';
   if(isset($haa_ff_id) && $haa_ff_id!=""){
     //从如果这条记录中有haa_ff_id获取FF获取字段的定义
@@ -177,15 +178,25 @@ if($_GET['type']=="location") { //如果是Locationg来源，需要读取子位�
                     contacts_o.`last_name` owning_person,
                     hat_assets.parent_asset_id,
                     hat_assets_p.name parent_asset,
-                    aos_products_cstm.haa_ff_id_c
+                    aos_products_cstm.haa_ff_id_c,
+                    hat_assets.attribute10,
+                    hat_assets.attribute11,
+                    hat_assets.attribute12,
+                    hat_assets.cost_center_id cost_center_id,
+                    haa_codes_cost_center.name cost_center,
+                    hit_racks.enable_partial_allocation
                 FROM
                     aos_products,
                     aos_products_cstm,
                     aos_product_categories,
                     haa_frameworks,
                     hat_assets
-      LEFT JOIN
-      (hat_assets hat_assets_p) ON (hat_assets.`parent_asset_id` = hat_assets_p.id) 
+                      LEFT JOIN
+                    (hit_racks) ON (hit_racks.`hat_assets_id` =hat_assets.id)
+                         LEFT JOIN
+                    (haa_codes haa_codes_cost_center) ON (hat_assets.`cost_center_id` = haa_codes_cost_center.id)
+                         LEFT JOIN
+                    (hat_assets hat_assets_p) ON (hat_assets.`parent_asset_id` = hat_assets_p.id) 
                         LEFT JOIN
                     accounts accounts_u ON (hat_assets.`using_org_id` = accounts_u.id
                         AND accounts_u.deleted = 0)

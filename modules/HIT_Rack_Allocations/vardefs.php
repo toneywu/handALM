@@ -167,6 +167,57 @@ $dictionary['HIT_Rack_Allocations'] = array(
         'dbType' => 'non-db',
         'studio' => 'visible',
         ),
+
+      'using_org_id' => 
+      array (
+        'required' => false,
+        'name' => 'using_org_id',
+        'vname' => 'LBL_USING_ORG_ID',
+        'type' => 'id',
+        'massupdate' => 0,
+        'no_default' => false,
+        'comments' => '',
+        'help' => '',
+        'importable' => 'true',
+        'duplicate_merge' => 'disabled',
+        'duplicate_merge_dom_value' => 0,
+        'audited' => false,
+        'inline_edit' => true,
+        'reportable' => false,
+        'unified_search' => false,
+        'merge_filter' => 'disabled',
+        'len' => 36,
+        'size' => '20',
+        ),
+      'using_org' =>
+      array (
+        'required' => true,
+        'source' => 'non-db',
+        'name' => 'using_org',
+        'vname' => 'LBL_USING_ORG',
+        'type' => 'relate',
+        'massupdate' => 0,
+        'no_default' => false,
+        'comments' => '',
+        'help' => '',
+        'importable' => 'true',
+        'duplicate_merge' => 'disabled',
+        'duplicate_merge_dom_value' => '0',
+        'audited' => false,
+        'inline_edit' => true,
+        'reportable' => true,
+        'unified_search' => false,
+        'merge_filter' => 'disabled',
+        'len' => '255',
+        'size' => '20',
+        'id_name' => 'using_org_id',
+        'ext2' => 'Accounts',
+        'module' => 'Accounts',
+        'rname' => 'name',
+        'quicksearch' => 'enabled',
+        'studio' => 'visible',
+        ),
+
       'hat_assets_accounts_name' => 
       array (
           'name' => 'hat_assets_accounts_name',
@@ -175,10 +226,7 @@ $dictionary['HIT_Rack_Allocations'] = array(
           'vname' => 'LBL_HAT_ASSETS_ACCOUNTS_FROM_ACCOUNTS_TITLE',
           'save' => true,
           'id_name' => 'hat_assets_accounts_id',
-          //'link' => 'hat_assets_accounts',
-          //'table' => 'accounts',
           'module' => 'Accounts',
-          //'rname' => 'name',
           ),
       'hat_assets_accounts_id' => 
       array (
@@ -191,7 +239,7 @@ $dictionary['HIT_Rack_Allocations'] = array(
           //'table' => 'accounts',
           'module' => 'Accounts',
           //'rname' => 'name',
-          ),      
+          ),
       'rack_pos_top' => 
       array (
         'required' => true,
@@ -306,6 +354,25 @@ $dictionary['HIT_Rack_Allocations'] = array(
       'unified_search' => false,
       'merge_filter' => 'disabled',
       ),
+    'allocation_status' => 
+    array (
+      'required' => false,
+      'name' => 'allocation_status',
+      'vname' => 'LBL_ALLOCATION_STATUS',
+      'type' => 'varchar',
+      'massupdate' => 0,
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'duplicate_merge_dom_value' => '0',
+      'audited' => false,
+      'inline_edit' => true,
+      'reportable' => true,
+      'unified_search' => false,
+      'merge_filter' => 'disabled',
+      ),
       'asset_link' =>
       array(
         'name' => 'asset_link',
@@ -319,6 +386,37 @@ $dictionary['HIT_Rack_Allocations'] = array(
         ),
 
       ),
+
+
+'indices'=>array (
+    array (
+      'name' => 'hit_rack_allocationspk',
+      'type' => 'primary',
+      'fields' =>
+      array (
+        0 => 'id',
+      ),
+    ),
+    array (
+      'name' => 'idx_hit_rack_allocations_rackid',
+      'type' => 'index',
+      'fields' =>
+      array (
+        0 =>'hit_racks_id',
+        2 => 'deleted',
+      ),
+    ),
+    array (
+      'name' => 'idx_hit_rack_allocations_assetid',
+      'type' => 'index',
+      'fields' =>
+      array (
+        0 => 'hat_assets_id',
+        2 => 'deleted',
+      ),
+    ),
+),
+
 'relationships'=>array (
  'hit_rack_allocations_hat_assets' => 
  array (

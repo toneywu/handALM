@@ -12,7 +12,7 @@ class HAA_FrameworksController extends SugarController
 				$_SESSION["current_framework_code"]=$bean_framework->code;
 			}
 			$Bean_list = BeanFactory::getBean('HAM_Maint_Sites')->get_full_list("name","ham_maint_sites.haa_frameworks_id='".$_REQUEST['framework_id']."'");
-			$site_field = "";
+			$site_field = "<option value=''></option>";
 
 	        if (isset($Bean_list)) { //如果当前列表中有值才进行加载
 	            $current_site=isset($_SESSION["current_site"])?$_SESSION["current_site"]:''; //获取当前的业务框架，如果已经设置，应当为ID

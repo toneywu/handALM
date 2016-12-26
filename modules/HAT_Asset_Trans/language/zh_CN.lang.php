@@ -77,5 +77,6 @@ $mod_strings = array (
   'LBL_TARGET_ASSET_ATTRIBUTE11'=>'目标链路',
   'LBL_CURRENT_ASSET_ATTRIBUTE12'=>'当前波道',
   'LBL_TARGET_ASSET_ATTRIBUTE12'=>'目标波道',
-
+  'LBL_ASSET'=>'资产编号',
+  'LBL_HEADER'=>'事务处理单',
 );

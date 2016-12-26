@@ -1039,9 +1039,13 @@ EOHTML;
     protected function _displaySubPanels()
     {
         //Modefy instance by zengchen 20161214 
-        if(isset($_SESSION["current_framework_code"])){
-        $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
-    }
+        //20161223 modified by toney.wu , seesion my be null
+        if (isset($_SESSION["current_framework_code"])) {
+            $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+        }else{
+            $instance_loc='instance/PUBlIC/';
+        }
+
         if (isset($this->bean) && !empty($this->bean->id) && (file_exists('modules/' . $this->module . '/metadata/subpaneldefs.php') || file_exists('custom/modules/' . $this->module . '/metadata/subpaneldefs.php') || file_exists('custom/modules/' . $this->module . '/Ext/Layoutdefs/layoutdefs.ext.php')||file_exists($instance_loc.'modules/'. $this->module . '/metadata/subpaneldefs.php')||file_exists($instance_loc.'modules/' . $this->module . '/Ext/Layoutdefs/layoutdefs.ext.php'))) {
             //Modefy instance by zengchen 20161214 End
             $GLOBALS['focus'] = $this->bean;
@@ -1236,10 +1240,13 @@ EOHTML;
         if (file_exists('custom/modules/' . $module . '/Ext/Menus/menu.ext.php')) {
             require('custom/modules/' . $module . '/Ext/Menus/menu.ext.php');
         }
-        if(isset($_SESSION["current_framework_code"])){
-        $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+        //20161243by toney.wu
+        if (isset($_SESSION["current_framework_code"])) {
+            $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+        } else {
+            $instance_loc='instance/PUBLIC';
         }
-        //Add instance by 20161214 
+        //Add instance by zengchen 20161214
         if (file_exists($instance_loc.'modules/'. $module . '/Ext/Menus/menu.ext.php')) {
             require($instance_loc.'modules/'. $module . '/Ext/Menus/menu.ext.php');
         }
@@ -1401,7 +1408,14 @@ EOHTML;
                 }
             }
         }*/
-         $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+        /*20161224 session maybe null*/
+        if (isset($_SESSION["current_framework_code"])) {
+            $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+        }else{
+            $instance_loc="instance/PUBLIC/";
+        }
+        /*20161224 session maybe null - END*/
+
         $coreMetaPath = 'modules/'.$this->module.'/metadata/'.$viewDef.'.php';
         if (file_exists($instance_loc.$coreMetaPath)) {
             $metadataFile=$instance_loc.$coreMetaPath;

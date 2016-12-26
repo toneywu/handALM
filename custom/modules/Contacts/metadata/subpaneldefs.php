@@ -82,7 +82,7 @@ $layout_defs['Contacts'] = array(
             )
         ),
 
-       /* 'history' => array(
+        'history' => array(
             'order' => 20,
             'sort_order' => 'desc',
             'sort_by' => 'date_entered',
@@ -168,7 +168,7 @@ $layout_defs['Contacts'] = array(
                         'width' => '10%',
                     ),
             ),
-        ),*/
+        ),
         'documents' => array(
             'order' => 25,
             'module' => 'Documents',
@@ -249,7 +249,7 @@ $layout_defs['Contacts'] = array(
                 array('widget_class' => 'SubPanelTopSelectButton', 'mode' => 'MultiSelect')
             ),
         ),
-     /*   'contacts' => array(
+        'contacts' => array(
             'order' => 100,
             'module' => 'Contacts',
             'sort_order' => 'asc',
@@ -262,7 +262,7 @@ $layout_defs['Contacts'] = array(
                 array('widget_class' => 'SubPanelTopButtonQuickCreate'),
                 array('widget_class' => 'SubPanelTopSelectButton', 'mode' => 'MultiSelect')
             ),
-        ),*/
+        ),
         'project' => array(
             'order' => 110,
             'module' => 'Project',
@@ -285,7 +285,7 @@ $layout_defs['Contacts'] = array(
             'subpanel_name' => 'ForTargets',
             'title_key' => 'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE',
         ),
-     /*   'contact_aos_quotes' => array(
+        'contact_aos_quotes' => array(
             'order' => 101,
             'module' => 'AOS_Quotes',
             'subpanel_name' => 'default',
@@ -293,7 +293,7 @@ $layout_defs['Contacts'] = array(
             'sort_by' => 'id',
             'title_key' => 'AOS_Quotes',
             'get_subpanel_data' => 'aos_quotes',
-        ),*/
+        ),
 
         'contact_aos_invoices' => array(
             'order' => 102,
@@ -336,7 +336,7 @@ $layout_defs['Contacts'] = array(
                         ),
                 ),
         ),
-        /*'securitygroups' => array(
+/*        'securitygroups' => array(
             'top_buttons' => array(array('widget_class' => 'SubPanelTopSelectButton', 'popup_module' => 'SecurityGroups', 'mode' => 'MultiSelect'),),
             'order' => 900,
             'sort_by' => 'name',

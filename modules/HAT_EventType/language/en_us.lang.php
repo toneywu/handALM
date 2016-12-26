@@ -136,4 +136,5 @@ $mod_strings = array (
   'LBL_CHANGE_ASSET_ATTRIBUTE12'=>'波道(cux)',
   'LBL_CHANGE_COSt_CENTER'=>'Cost Center',
   'LBL_ALLOCATION_FLAG'=>'Is Asset Allocation',
+  'LBL_KEEP_SEPERATD_ALLC_RACK_USING_ORG'=>'Do not change using org for IT Rack allowing seperate allocation',
 );

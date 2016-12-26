@@ -10,17 +10,9 @@ $(document).ready(function() {
   //´¥·¢FF
   SUGAR.util.doWhen("typeof setFF == 'function'", function(){
     call_ff();
-    //alert("hh");
   });
 
     //将Subpanel的内容前移到上方TAB中
-/*    $("#LBL_DETAILVIEW_PANEL_DOC").after("<div class='tab_subpanel'>"+$("#subpanel_title_documents").html()+"</div>");
-    $("#whole_subpanel_documents").replaceWith("");
-*/
-/*    $("#LBL_DETAILVIEW_PANEL_ASSETS").after("<div class='tab_subpanel'>"+$("#subpanel_title_hat_assets_contacts_owningperson").html()+"</div>");
-    $("#subpanel_title_hat_assets_contacts_owningperson").replaceWith("");
-    $("#LBL_DETAILVIEW_PANEL_ASSETS").after("<div class='tab_subpanel'>"+$("#whole_subpanel_hat_assets_contacts_usingperson").html()+"</div>");
-    $("#whole_subpanel_hat_assets_contacts_usingperson").replaceWith("");*/
 
     $("#LBL_DETAILVIEW_PANEL_ORG").after("<div class='tab_subpanel'>"+$("#whole_subpanel_contacts").html()+"</div>");
     $("#whole_subpanel_contacts").replaceWith("");
@@ -42,5 +34,9 @@ $(document).ready(function() {
     $("#whole_subpanel_hat_assets_contacts_owningperson").replaceWith("");
     $("#LBL_DETAILVIEW_PANEL_ASSETS").after("<div class='tab_subpanel'>"+$("#whole_subpanel_hat_assets_contacts_usingperson").html()+"</div>");
     $("#whole_subpanel_hat_assets_contacts_usingperson").replaceWith("");
+
+    $("#LBL_DETAILVIEW_PANEL_ASSETS").after("<div class='tab_subpanel'>"+$("#whole_subpanel_hat_assets_trans_contacts").html()+"</div>");
+    $("#whole_subpanel_hat_assets_trans_contacts").replaceWith("");
+
 
 });

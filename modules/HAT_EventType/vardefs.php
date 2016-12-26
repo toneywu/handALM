@@ -1632,7 +1632,25 @@ $dictionary['HAT_EventType'] = array (
 			'merge_filter' => 'disabled',
 		),
 		
-		
+		'keep_seperated_allc_rack_using_org' => array (
+			'required' => false,
+			'name' => 'keep_seperated_allc_rack_using_org',
+			'vname' => 'LBL_KEEP_SEPERATD_ALLC_RACK_USING_ORG',
+			'type' => 'bool',
+			'massupdate' => 0,
+			'default' => '1',
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => false,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+		),
 		
 	),
 	'relationships' => array (),

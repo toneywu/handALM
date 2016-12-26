@@ -14,7 +14,7 @@ var global_eventOptions;
 function setEventTypePopupReturn(popupReplyData){
 	set_return(popupReplyData);
 	console.log(popupReplyData);
-	
+
 	setEventTypeFields();
 	$("#haa_ff_id").val(popupReplyData.name_to_value_array.haa_ff_id);
 	triger_setFF($("#haa_ff_id").val(),"HAT_Asset_Trans_Batch");

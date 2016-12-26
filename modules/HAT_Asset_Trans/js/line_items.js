@@ -41,6 +41,7 @@ function openAssetPopup(ln){//本文件为行上选择资产的按钮
       "attribute10":"line_current_asset_attribute10"+ln,
       "attribute11":"line_current_asset_attribute11"+ln,
       "attribute12":"line_current_asset_attribute12"+ln,
+      "enable_partial_allocation":"line_enable_partial_allocation"+ln,
     }
   };
 
@@ -54,10 +55,16 @@ function openAssetPopup(ln){//本文件为行上选择资产的按钮
   +'&site_id='+$("#ham_maint_sites_id").val()
   ;
 
+/*  if (eventOptions.keep_seperated_allc_rack_using_org=="0" || $("#line_enable_partial_allocation"+ln).val()!="1") {
+  	//如果按规则不需要变更资产的使用组织（本语句不一定有用）
+  	popupFilter +="&keep_asset_using_org=true";
+  }
+*/
   if ($("#target_using_org_id").val()!="") {
     popupFilter +="&target_using_org="+$("#target_using_org").val()
     +"&target_using_org_id="+$("#target_using_org_id").val();
   }
+
   console.log(popupFilter);
   open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
 
@@ -305,7 +312,10 @@ function insertLineData(asset_trans_line, current_view){ //将数据写入到对
           document.getElementById("line_"+propertyName.concat(String(ln))).checked = true;
           document.getElementById("line_"+propertyName.concat(String(ln))).value = 1;
         }
-      }else {
+      } else if(propertyName=="target_rack_position_data"){
+        //有个特殊字段需要处理
+         $("#line_"+propertyName.concat(String(ln))).val(asset_trans_line[propertyName].replace(/&quot;/g, '"'));
+      } else {
         //如果当前字段不是checkbox，就以val的形式赋值
         $("#line_"+propertyName.concat(String(ln))).val(asset_trans_line[propertyName]);
       }
@@ -550,6 +560,13 @@ if (document.getElementById(tableid + '_head') !== null) {
         // "<input style='float:right;' type='button' id='btn_LineEditorClose" + prodln + "' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE') + "'onclick='LineEditorClose(" + prodln + ")>"+
         "<button type='button' id='btn_LineEditorClose" + prodln + "' class='button btn_save' value='" + SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE') + "' tabindex='116' onclick='LineEditorClose(" + prodln + ",\"line_\")'>"+SUGAR.language.get('app_strings', 'LBL_SAVE_BUTTON_LABEL')+" & "+SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE')+" <img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button>"+
 
+        "<input type='hidden' name='line_current_cost_center[" + prodln + "]' id='line_current_cost_center" + prodln + "'  value='' title='' >"+
+        "<input type='hidden' name='line_current_cost_center_id[" + prodln + "]' id='line_current_cost_center_id" + prodln + "'  value='' title='' >"+
+        "<input type='hidden' name='line_current_asset_attribute10[" + prodln + "]' id='line_current_asset_attribute10" + prodln + "'  value='' title='' >"+
+        "<input type='hidden' name='line_current_asset_attribute11[" + prodln + "]' id='line_current_asset_attribute11" + prodln + "'  value='' title='' >"+
+        "<input type='hidden' name='line_current_asset_attribute12[" + prodln + "]' id='line_current_asset_attribute12" + prodln + "'  value='' title='' >"+
+        "<input type='hidden' name='line_enable_partial_allocation[" + prodln + "]' id='line_enable_partial_allocation" + prodln + "'  value='' title='' >"+
+
         "<input type='hidden' name='line_current_parent_asset[" + prodln + "]' id='line_current_parent_asset" + prodln + "'  value='' title='' >"+
         "<input type='hidden' name='line_current_parent_asset_id[" + prodln + "]' id='line_current_parent_asset_id" + prodln + "'  value='' title='' >"+
         "<input type='hidden' name='line_current_using_org_id[" + prodln + "]' id='line_current_using_org_id" + prodln + "'  value='' title='' >"+
@@ -610,7 +627,7 @@ function generateLineDesc(ln){
   LineDesc += LineDescElement("line_","target_location_desc","current_location_desc","LBL_LOCATION_DESC",ln,"target_location_desc","current_location_desc");
   LineDesc += LineDescElement("line_","target_rack_position_desc","","LBL_RACK",ln,"target_rack_position_desc","");
 
-  LineDesc += LineDescElement("line_","target_cost_center_id","current_cost_center_id","LBL_COST_CENTER",ln,"target__cost_center","current_cost_center");
+  LineDesc += LineDescElement("line_","target_cost_center_id","current_cost_center_id","LBL_COST_CENTER",ln,"target_cost_center","current_cost_center");
   LineDesc += LineDescElement("line_","target_asset_attribute10","current_asset_attribute10","LBL_ATTRIBUTE10",ln,"target_asset_attribute10","current_asset_attribute10");
   LineDesc += LineDescElement("line_","target_asset_attribute11","current_asset_attribute11","LBL_ATTRIBUTE11",ln,"target_asset_attribute11","current_asset_attribute11");
   LineDesc += LineDescElement("line_","target_asset_attribute12","current_asset_attribute12","LBL_ATTRIBUTE12",ln,"target_asset_attribute12","current_asset_attribute12");
@@ -718,7 +735,7 @@ function resetEditorFields(ln) {
       }
     }
 
-    if ($("#target_using_org_id").val()!="" && (eventOptions.change_using_org == "REQUIRED" ||eventOptions.change_using_org == "OPTIONAL")){
+    if ($("#target_using_org_id").val()!="" && (eventOptions.change_using_org == "REQUIRED" ||eventOptions.change_using_org == "OPTIONAL")) {
       //如果需要变更或必须变更使用组织，并且头上有值，则将头上的使用组织复制到行上
       $("#line_target_using_org"+ln).val($("#target_using_org").val());
       $("#line_target_using_org_id"+ln).val($("#target_using_org_id").val());
@@ -727,20 +744,30 @@ function resetEditorFields(ln) {
       $("#line_target_using_org"+ln).val($("#line_current_using_org"+ln).val());
       $("#line_target_using_org_id"+ln).val($("#line_current_using_org_id"+ln).val());
     }
+    if (eventOptions.keep_seperated_allc_rack_using_org=="1" && $("#line_enable_partial_allocation"+ln).val()=="1") {
+    	//当前为散U机柜且EventType定义散U机柜不变使用组织
+      $("#line_target_using_org"+ln).val($("#line_current_using_org"+ln).val());
+      $("#line_target_using_org_id"+ln).val($("#line_current_using_org_id"+ln).val());
+    }
 
-    if (eventOptions.change_cost_center == "REQUIRED" ||eventOptions.change_cost_center == "OPTIONAL") {
+
+    if ($("#line_target_cost_center_id"+ln).val()==""
+      && (eventOptions.change_cost_center == "REQUIRED" ||eventOptions.change_cost_center == "OPTIONAL")) {
       //将当前的成本中心复制到目标上
       $("#line_target_cost_center"+ln).val($("#line_current_cost_center"+ln).val());
       $("#line_target_cost_center_id"+ln).val($("#line_current_cost_center_id"+ln).val());
     }
 
-    if (eventOptions.change_asset_attribute10 == "REQUIRED" ||eventOptions.change_asset_attribute10 == "OPTIONAL") {
+    if ($("#line_target_asset_attribute10"+ln).val()==""
+      && (eventOptions.change_asset_attribute10 == "REQUIRED" ||eventOptions.change_asset_attribute10 == "OPTIONAL")) {
       $("#line_target_asset_attribute10"+ln).val($("#line_current_asset_attribute10"+ln).val());
     }
-    if (eventOptions.change_asset_attribute11 == "REQUIRED" ||eventOptions.change_asset_attribute11 == "OPTIONAL") {
+    if ($("#line_target_asset_attribute11"+ln).val()==""
+      && (eventOptions.change_asset_attribute11 == "REQUIRED" ||eventOptions.change_asset_attribute11 == "OPTIONAL")) {
       $("#line_target_asset_attribute11"+ln).val($("#line_current_asset_attribute11"+ln).val());
     }
-    if (eventOptions.change_asset_attribute12 == "REQUIRED" ||eventOptions.change_asset_attribute12 == "OPTIONAL") {
+    if  ($("#line_target_asset_attribute12"+ln).val()==""
+      && (eventOptions.change_asset_attribute12 == "REQUIRED" ||eventOptions.change_asset_attribute12 == "OPTIONAL")) {
       $("#line_target_asset_attribute12"+ln).val($("#line_current_asset_attribute12"+ln).val());
     }
 
@@ -810,6 +837,11 @@ var eventOptions = $("#eventOptions").val()!=""?jQuery.parseJSON($("#eventOption
   $("#line_target_location_desc"+ln).val($("#line_current_location_desc"+ln).val());
   $("#line_target_parent_asset"+ln).val($("#line_current_parent_asset"+ln).val());
   $("#line_target_parent_asset_id"+ln).val($("#line_current_parent_asset_id"+ln).val());
+  $("#line_target_cost_center"+ln).val($("#line_current_cost_center"+ln).val());
+  $("#line_target_cost_center_id"+ln).val($("#line_current_cost_center_id"+ln).val());
+  $("#line_target_asset_attribute10"+ln).val($("#line_current_asset_attribute10"+ln).val());
+  $("#line_target_asset_attribute11"+ln).val($("#line_current_asset_attribute11"+ln).val());
+  $("#line_target_asset_attribute12"+ln).val($("#line_current_asset_attribute12"+ln).val());
 
   resetEditorFields(ln);//本章节完成资产选择后目标与当前字段的值判断，依据事件类型上的设置点不同，有些内容是将目标设定为当前值，有些是从头上进行复制。
 

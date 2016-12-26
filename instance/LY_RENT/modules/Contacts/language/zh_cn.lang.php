@@ -3,4 +3,6 @@
 $mod_strings = array (
   'LBL_STATUS' => '是否已入职',
   'LBL_AOS_INVOICES_SUBPANEL_TITLE'=>'结算',
+    'LBL_DETAILVIEW_PANEL_ASSETS' => '车辆及相关事务',
+
 );

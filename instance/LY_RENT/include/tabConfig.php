@@ -1,7 +1,7 @@
 <?php
 // created: 2016-12-22 09:38:59
 $GLOBALS['tabStructure'] = array (
-/*  'LBL_TABGROUP_SALES' => 
+  'LBL_TABGROUP_SALES' => 
   array (
     'label' => 'LBL_TABGROUP_SALES',
     'modules' => 
@@ -26,8 +26,8 @@ $GLOBALS['tabStructure'] = array (
     'modules' => 
     array (
       0 => 'HAT_Assets',
-      1 => 'HAT_Properties',
-      2 => 'HIT_Racks',
+/*      1 => 'HAT_Properties',
+      2 => 'HIT_Racks',*/
       3 => 'HAT_Asset_QUAL',
       4 => 'HAT_Asset_QUAL_Details',
       5 => 'HAT_Meter_Readings',
@@ -36,7 +36,7 @@ $GLOBALS['tabStructure'] = array (
       8 => 'HAA_Maps',
     ),
   ),
-  'LBL_GROUPTAB2_1466152419' => 
+/*  'LBL_GROUPTAB2_1466152419' => 
   array (
     'label' => 'LBL_GROUPTAB2_1466152419',
     'modules' => 
@@ -48,7 +48,7 @@ $GLOBALS['tabStructure'] = array (
       4 => 'HIT_VNI_LIST',
       5 => 'HIT_ODF_REL',
     ),
-  ),
+  ),*/
   'LBL_TABGROUP_SUPPORT' => 
   array (
     'label' => 'LBL_TABGROUP_SUPPORT',
@@ -119,5 +119,5 @@ $GLOBALS['tabStructure'] = array (
       14 => 'HAA_FF',
       15 => 'HAA_FSQL',
     ),
-  ),*/
+  ),
 );

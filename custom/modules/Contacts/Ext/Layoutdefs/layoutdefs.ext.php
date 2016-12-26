@@ -11,7 +11,7 @@ $layout_defs["Contacts"]["subpanel_setup"]['hat_assets_contacts_owningperson'] =
             //'sort_order' => 'asc',
             'sort_by' => 'name asc',
             'subpanel_name' => 'forContacts',
-            'title_key' => 'LBL_HAT_ASSETS_CONTACTS_FROM_HAT_ASSETS_TITLE',
+            'title_key' => 'LBL_ASSETS_OWNING_SUBPANEL',
             'get_subpanel_data' => 'function:get_assets_by_owningperson',
             'generate_select' => true,
 /*            'top_buttons'  => array (
@@ -37,7 +37,7 @@ $layout_defs["Contacts"]["subpanel_setup"]['hat_assets_contacts_usingperson'] = 
             //'sort_order' => 'asc',
             'sort_by' => 'name asc',
             'subpanel_name' => 'forContacts',
-            'title_key' => 'LBL_HAT_ASSETS_CONTACTS_FROM_HAT_ASSETS_TITLE',
+            'title_key' => 'LBL_ASSETS_USING_SUBPANEL',
             'get_subpanel_data' => 'function:get_assets_by_usingperson',
             'generate_select' => true,
 /*            'top_buttons'  => array (
@@ -48,6 +48,26 @@ $layout_defs["Contacts"]["subpanel_setup"]['hat_assets_contacts_usingperson'] = 
             ),*/
             'function_parameters' => array(
                 'import_function_file' => 'modules/HAT_Assets/ContactsAssetsSubpanel.php',
+                'contact_id' => $this->_focus->id,
+                'return_as_array' => 'true'
+            ),
+);
+
+
+ // created: 2016-02-08 10:53:31
+
+//人员上显示的资产相关Subpanel
+$layout_defs["Contacts"]["subpanel_setup"]['hat_assets_trans_contacts'] = array (
+            'order' => 100,
+            'module' => 'HAT_Asset_Trans',
+            //'sort_order' => 'asc',
+            'sort_by' => 'name asc',
+            'subpanel_name' => 'forContact',
+            'title_key' => 'LBL_ASSETS_TRANS_SUBPANEL',
+            'get_subpanel_data' => 'function:get_asset_trans',
+            'generate_select' => true,
+            'function_parameters' => array(
+                'import_function_file' => 'modules/HAT_Asset_Trans/TransAssetsSubpanel.php',
                 'contact_id' => $this->_focus->id,
                 'return_as_array' => 'true'
             ),

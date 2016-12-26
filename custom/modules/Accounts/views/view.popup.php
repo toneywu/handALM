@@ -16,12 +16,12 @@ class AccountsViewPopup extends ViewPopup
           	$_REQUEST['haa_frameworks_id_c_advanced']=$haa_frameworks_id;
           }
 
-          if($_GET['module_name'] =='HAT_Counting_Tasks' || $_GET['module_name'] =='HAT_Counting_Batchs'){
+          if (isset($_GET['module_name']) && ($_GET['module_name'] =='HAT_Counting_Tasks' || $_GET['module_name'] =='HAT_Counting_Batchs')){
 /*        if(($this->bean instanceOf SugarBean) && !$this->bean->ACLAccess('list')){
             ACLController::displayNoAccess();
             sugar_cleanup(true);
         }
-*/      
+*/
         //var_dump($_REQUEST['allnodes']);
       /*  if (isset($_REQUEST['allnodes']) &&($_REQUEST['allnodes']=='1'||$_REQUEST['allnodes']=='true')){
         echo "<script>var allnodes=true;</script>";

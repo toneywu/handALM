@@ -135,4 +135,5 @@ $mod_strings = array (
   'LBL_CHANGE_ASSET_ATTRIBUTE12'=>'可修改波道(attr12)',
   'LBL_CHANGE_COSt_CENTER'=>'可修改成本中心',
   'LBL_ALLOCATION_FLAG'=>'是否进行资产调拨',
+  'LBL_KEEP_SEPERATD_ALLC_RACK_USING_ORG'=>'散U分配的机柜使用组织不变',
 );

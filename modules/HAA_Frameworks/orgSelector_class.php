@@ -76,7 +76,7 @@ function set_site_selector($bean_site_id,$current_module,$current_action,$vardef
                 $bean_site_id=empty($_SESSION['current_site'])?"":$_SESSION['current_site'];
 
                 $html = "<select id='site_select' name='site_select'>";
-
+                $html .= "<option value=''></option>";
                 for($i=0; $i<count($beanSiteList); $i++) {
                     $the_site = $beanSiteList[$i];
                     if ($_SESSION['current_site']==$the_site->id) {

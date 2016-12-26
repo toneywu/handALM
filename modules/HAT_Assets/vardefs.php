@@ -2551,7 +2551,14 @@ $dictionary['HAT_Assets'] = array(
         2 => 'deleted',
       ),
     ),
-
+    array (
+      'name' => 'idx_enable_it_ports',
+      'type' => 'index',
+      'fields' => 
+      array (
+        0 => 'enable_it_ports',
+      ),
+    ),
 ),
 
 

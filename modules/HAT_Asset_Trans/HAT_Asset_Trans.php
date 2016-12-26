@@ -43,6 +43,28 @@
 require_once('modules/HAT_Asset_Trans/HAT_Asset_Trans_sugar.php');
 class HAT_Asset_Trans extends HAT_Asset_Trans_sugar {
 
+	function get_list_view_data() {
+
+		//refer to the task module as an example
+		//or refer to the asset module as the first customzation module with this feature
+		global $app_list_strings, $timedate;
+		$line_fields = $this->get_list_view_array();
+		$line_fields['DESCRIPTION'] =html_entity_decode($this->description);
+
+		$current_bean = BeanFactory::getBean("HAT_Asset_Trans", $this->id);
+		$HATB_bean = BeanFactory::getBean("HAT_Asset_Trans_Batch", $current_bean->batch_id);
+		$HA_bean = BeanFactory::getBean("HAT_Assets", $current_bean->asset_id);
+
+		if (!empty($HATB_bean->tracking_number)){
+			$line_fields['HEADER'] ="[".$HATB_bean->tracking_number."]";
+		}
+		$line_fields['ASSET'] = '<a href="index.php?module=HAT_Assets&action=DetailView&record='.$HA_bean->id.'">'.$HA_bean->name."</a>";
+		$line_fields['HEADER'] .= '<a href="index.php?module=HAT_Asset_Trans_Batch&action=DetailView&record='.$HATB_bean->id.'">'.$HATB_bean->name."</a>";
+
+		return $line_fields;
+	}
+
+
 	function __construct(){
 		parent::__construct();
 	}

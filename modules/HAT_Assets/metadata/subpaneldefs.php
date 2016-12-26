@@ -75,13 +75,20 @@ $layout_defs['HAT_Assets'] = array(
     'hat_assets_hat_asset_trans' => array(
       'order' => 20,
       'module' => 'HAT_Asset_Trans',
-      'subpanel_name' => 'default',
+      'subpanel_name' => 'forAssets',
       'sort_order' => 'asc',
       'sort_by' => 'id',
       'title_key' => 'LBL_TRANSATION_SUBPANEL',
-      'get_subpanel_data' => 'hat_assets_hat_asset_trans',
+      'get_subpanel_data' => 'function:get_asset_trans_by_asset',
       'top_buttons' => array (),
+      'generate_select' => true,
+            'function_parameters' => array(
+                'import_function_file' => 'modules/HAT_Asset_Trans/TransAssetsSubpanel.php',//指向特定的文件
+                'parent_id' => $this->_focus->id,
+                'return_as_array' => 'true'
+                ),
       ),
+
      'haos_insurances' => array(
           'order' => 25,
           'module' => 'HAOS_Insurances',
@@ -101,6 +108,7 @@ $layout_defs['HAT_Assets'] = array(
                 'return_as_array' => 'true'
                 ),
             ),
+
     'haos_insurance_claims' => array(
       'order' => 30,
       'module' => 'HAOS_Insurance_Claims',

@@ -140,7 +140,8 @@ function openAssetPopup(ln){//本文件为行上选择资产的按钮
       "using_person_desc" : "line_current_using_person_desc",
 */    }
   };
-  open_popup('HAT_Assets', 1200, 850, "", true, true, popupRequestData);
+  var popupFilter ='&avaliable_it_equipments=true';
+  open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
 }
 function setAssetReturn(popupReplyData){
   //popupReplyData中lineno会做为行号一并返回
@@ -497,8 +498,8 @@ function savePlaceHolder(i) {
 	}
 	asset_desc = (typeof($('#rack_pos_asset_desc').val())!="undefined")?$('#rack_pos_asset_desc').val():"";
 	asset_status = (typeof($('#rack_pos_asset_status').val())!="undefined")?$('#rack_pos_asset_status').val():"";
-	asset_using_org = (typeof($('#rack_pos_hat_assets_accounts_name').val())!="undefined")?$('#rack_pos_hat_assets_accounts_name').val():"";
-	asset_using_org_id = (typeof($('#rack_pos_hat_assets_accounts_id').val())!="undefined")?$('#rack_pos_hat_assets_accounts_id').val():"";
+	asset_using_org = (typeof($('#rack_poshat_assets_accounts_name').val())!="undefined")?$('#rack_poshat_assets_accounts_name').val():"";
+	asset_using_org_id = (typeof($('#rack_poshat_assets_accounts_id').val())!="undefined")?$('#rack_poshat_assets_accounts_id').val():"";
 	id = (typeof($('#rack_pos_id').val())!="undefined")?$('#rack_pos_id').val():"";
 	desc = (typeof($('#rack_pos_desc').val())!="undefined")?$('#rack_pos_desc').val():"";
 
@@ -531,25 +532,8 @@ function savePlaceHolder(i) {
 	}else{
 		globalServerData.server[i]=Blocker;
 	}
-	//console.log('index.php?to_pdf=true&module=HIT_Rack_Allocations&action=SaveDynamicAllocation&rack_id=' + globalServerData.rackid,)
-/*	$.ajax({
-		url: 'index.php?to_pdf=true&module=HIT_Rack_Allocations&action=SaveDynamicAllocation&hit_rack_id=' + globalServerData.rackid,
-		//data: {alldata:}
-		type: 'POST',
-		data: {jsonData: JSON.stringify(Blocker)},
-		success: function (data) {
-			if (data!="") {
-				globalServerData.server[i].id = data;
-			}
 
-			//console.log(data)
-		},
-		error: function () { //失败
-			alert('Error loading document');
-		}
-	});
-*/
-	console.log(Blocker.inactive_using+":"+Blocker.inactive_using!=1)
+	//console.log(Blocker.inactive_using+":"+Blocker.inactive_using!=0)
 	if(Blocker.inactive_using!=1) {
 		drawBlocker(i);//绘制图形在界面中
 	}//如果失效就不再画了

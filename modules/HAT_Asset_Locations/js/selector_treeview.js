@@ -139,7 +139,7 @@ var setting = {
 	function onClick(event, treeId, treeNode, clickFlag) {
 		if(treeNode.pId!=0) { //非根结点点击后的作用
 			zTreeObj= $.fn.zTree.getZTreeObj(treeId);
-			//console.log(treeNode);
+			console.log(treeNode);
 			loadDataForNodeDetail(zTreeObj, treeNode, $("#node_details"));
 		}
 	}
@@ -260,14 +260,31 @@ var setting = {
 
 
 function btn_search_clicked() {
-	alert("search clicked")
+	//点击了搜索框进行数据搜索
+	//
+	var dialog = new BootstrapDialog({
+        		//message: "<img src='"+SUGAR.themes.loading_image+"'/> "+SUGAR.language.get('app_strings', 'LBL_LOADING_PAGE'),
+        		message: "<img src='themes/default/images/img_loading.gif'/> "+SUGAR.language.get('app_strings', 'LBL_LOADING_PAGE'),
+        		//
+    		});
+	dialog.open();
 	$.ajax({
 	  	url: 'index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeviewSearch',
 	  	type: 'POST',
 	  	data: { 'asset_status' : $('#asset_status').val(), 'asset_name' : $('#asset_name').val(), 'site_select': $('#site_select').val()},
 	  	success: function (rtn_data) {
-			console.log(rtn_data);
+			//console.log(jQuery.parseJSON(rtn_data));
+			var zTreeObj = $.fn.zTree.getZTreeObj("treeview_selector");
+			var RootNode = [{name: "Search Results"}];//默认的根节点
+			zTreeObj = $.fn.zTree.init($("#treeview_selector"), setting, RootNode);//初始化根节点
+
+			var Nodes = filter(null, null, jQuery.parseJSON(rtn_data));//搜索结果节点
+			zTreeObj.addNodes(zTreeObj.getNodeByTId("treeview_selector_1"), Nodes);//加载搜索结果
+			dialog.close();
 		},
+		error: function () { //失败
+            alert('Error loading document');
+        },
 	});
 
 }
@@ -377,11 +394,11 @@ function returnRackData() {//返回机柜相关的信息
 						+ '"hat_assets_accounts_name":"'+globalServerData.server[i].hat_assets_accounts_name+'",'
 						+ '"hat_assets_accounts_id":"'+globalServerData.server[i].hat_assets_accounts_id+'",'
 						+ '"desc":"'+globalServerData.server[i].desc+'",'
-						+ '"inactive_using":"1"';//最后一个没有","结束
+						+ '"inactive_using":"0"';//最后一个没有","结束
 				varRackDESC += "["+globalServerData.server[i].rack_pos_top+"/"+globalServerData.server[i].height+"]"+globalServerData.server[i].asset_name+"|"+globalServerData.server[i].hat_assets_accounts_name+", "
 			}else {
 				varRackJASON += '"id":"'+globalServerData.server[i].id+'",'
-						+ '"inactive_using":"0"';//最后一个没有","结束
+						+ '"inactive_using":"1"';//最后一个没有","结束
 				varRackDESC += "["+globalServerData.server[i].rack_pos_top+"/"+globalServerData.server[i].height+"]"+globalServerData.server[i].asset_name+" "+SUGAR.language.get('HAT_Asset_Locations', 'LBL_INACTIVED');+", "
 			}
 			varRackJASON += '},'
@@ -426,7 +443,11 @@ function initTree(treeView, default_list, p3) {
 	if (treeView=='LIST') {
 		var zNodes = [{name:framework_title+$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0, type:default_list, query_id:p3, current_mode: current_mode}];
 		console.log(zNodes);
-	} else if (treeView=='TREE_LOCATON') {
+	} else if (treeView=='SEARCH') {
+		var zNodes = [p3];
+		console.log(zNodes);
+	}
+	else if (treeView=='TREE_LOCATON') {
 		var zNodes = [{name:framework_title+$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0,type:"location"}];
 	} else if (treeView=='OWNING_ORG') {
 		var zNodes = [
