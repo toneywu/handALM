@@ -40,7 +40,6 @@ function get_label_name ($field_name,$mod_name) {
 function get_jason_field ($haa_ff_id, $label_field_name, $mod_name,  $val_field,  $val_type='varchar', $val_field_id='', $relate_mod_name='') {
     //Add by zengchen 20161221
   global $db;
-  //$haa_ff_id='75ee1d0a-41ae-3b96-bd06-5799b9d8c9af';
   if(isset($haa_ff_id) && $haa_ff_id!=""){
     //从如果这条记录中有haa_ff_id获取FF获取字段的定义
     $sql="SELECT
@@ -66,14 +65,18 @@ function get_jason_field ($haa_ff_id, $label_field_name, $mod_name,  $val_field,
       $field_arr[$arr_num]['label_name']=$row['name'];
       $arr_num++;
     }
+  }
+  if (isset($field_arr)) {
     foreach ($field_arr as $k => $v) {
       if($label_field_name==$v['field']&&$v['fieldtype']=='HIDE'){
         $return_text ='{"lab":"","val":""},';
+        return $return_text;
       }else if($label_field_name==$v['field']&&$v['fieldtype']!='HIDE'){
         $return_text ='{"lab":"'.$v['label_name'].'","val":"'.$val_field.'"},';
+        return $return_text;
       }
     }
-  }else{
+  }
       //End add 20161221
     if ($val_type=="bool") {
       $val_field = ($val_field==0)?'<input type=\"checkbox\">':'<input type=\"checkbox\" checked=\"checked\">';
@@ -85,7 +88,6 @@ function get_jason_field ($haa_ff_id, $label_field_name, $mod_name,  $val_field,
     } else {
       $return_text ='';
     }
-  }
   return $return_text;
 }
 
