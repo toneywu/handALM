@@ -116,5 +116,5 @@ $mod_strings = array (
   'LBL_CATEGORY_VALUE' => '类别',
   'LBL_DOC_STATUS' => '状态',
   'LBL_NEW_LINE' => '新增',
-  'LBL_DOC_ACTIVE_DATE' => '公布日期'
+  'LBL_DOC_ACTIVE_DATE' => '公布日期',
 );

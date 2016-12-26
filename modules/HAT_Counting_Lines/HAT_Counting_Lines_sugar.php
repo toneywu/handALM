@@ -76,6 +76,11 @@ class HAT_Counting_Lines_sugar extends Basic {
 	var $hat_asset_locations_id_c;
 	var $asset_location;
 	var $is_correct;
+	var $asset_desc;
+	var $asset_status;
+	var $asset_major;
+	var $haa_codes_id_c;
+	
 	
 	function __construct(){
 		parent::__construct();

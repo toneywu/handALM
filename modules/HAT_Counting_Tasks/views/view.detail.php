@@ -64,19 +64,17 @@ function populateLineCountInfo(){
 	$sql_line="SELECT
 	hcl.*
 	FROM
-	hat_counting_tasks hct,
 	hat_counting_lines hcl
 	WHERE
-	hct.id = hcl.hat_counting_tasks_id_c
-	AND hct.id ='".$this->bean->id."'
-	AND hcl.deleted = 0
-	AND hct.deleted = 0";
+	1=1
+	AND hcl.hat_counting_tasks_id_c ='".$this->bean->id."'
+	AND hcl.deleted = 0";
 
 	$result_line=$db->query($sql_line);
 
 	while($row_line=$db->fetchByAssoc($result_line)){
 		$total_counting=$total_counting+1;
-		$sql_detail="SELECT
+		$sql_count="SELECT
 		hcr.*
 		FROM
 		hat_counting_lines_hat_counting_results_c hcl,
@@ -85,26 +83,41 @@ function populateLineCountInfo(){
 		hcl.hat_counting_lines_hat_counting_resultshat_counting_results_idb = hcr.id
 		AND hcr.deleted = 0
 		AND hcl.hat_counting_lines_hat_counting_resultshat_counting_lines_ida ='".$row_line['id']."'
+		and hcl.deleted = 0";
+		$result_count=$db->query($sql_count);
+		while($row_count=$db->fetchByAssoc($result_count)){
+			$actual_counting=$actual_counting+1;
+		}
+
+		$sql_detail="SELECT
+		hcr.*
+		FROM
+		hat_counting_lines_hat_counting_results_c hcl,
+		hat_counting_results hcr
+		WHERE
+		hcl.hat_counting_lines_hat_counting_resultshat_counting_results_idb = hcr.id
+		AND hcr.deleted = 0
+		and hcl.deleted = 0
+		AND hcl.hat_counting_lines_hat_counting_resultshat_counting_lines_ida ='".$row_line['id']."'
 		ORDER BY
 		hcr.cycle_number desc
 		LIMIT 1";
 		$result_detail=$db->query($sql_detail);
 
 		while($row_detail=$db->fetchByAssoc($result_detail)){
-			$actual_counting=$actual_counting+1;
-			if($row_detail["counting_result"]='Matched'){
+			if($row_detail["counting_result"]=='Matched'){
 				$matched_count=$matched_count+1;
 			}
-			if($row_detail["counting_result"]='Different'){
+			if($row_detail["counting_result"]=='Different'){
 				$different_count=$different_count+1;
 			}
-			if($row_detail["counting_result"]='Overage'){
+			if($row_detail["counting_result"]=='Overage'){
 				$overage_count=$overage_count+1;
 			}
-			if($row_detail["counting_result"]='Loss'){
+			if($row_detail["counting_result"]=='Loss'){
 				$loss_count=$loss_count+1;
 			}
-			if($row_detail["adjust_status"]='Processed'){
+			if($row_detail["adjust_status"]=='Processed'){
 				$processed_count=$processed_count+1;
 			}
 		}

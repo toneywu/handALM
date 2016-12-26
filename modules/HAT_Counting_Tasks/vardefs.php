@@ -487,6 +487,28 @@ $dictionary['HAT_Counting_Tasks'] = array(
         'len' => '255',
         'size' => '20',
         ),
+      'manual_add_flag' => 
+      array (
+        'required' => false,
+        'name' => 'manual_add_flag',
+        'vname' => 'LBL_MANUAL_ADD_FLAG',
+        'type' => 'bool',
+        'massupdate' => 0,
+        'default' => '1',
+        'no_default' => false,
+        'comments' => '',
+        'help' => '',
+        'importable' => 'true',
+        'duplicate_merge' => 'disabled',
+        'duplicate_merge_dom_value' => '0',
+        'audited' => false,
+        'inline_edit' => '',
+        'reportable' => true,
+        'unified_search' => false,
+        'merge_filter' => 'disabled',
+        'len' => '255',
+        'size' => '20',
+        ),
       'account_id_c' => 
       array (
         'required' => false,

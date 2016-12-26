@@ -56,4 +56,5 @@ $mod_strings = array (
   'LBL_DETAILVIEW_PANEL_ASSETS' => '设备/资产及相关事务',
   'LBL_SEX' => '性别',
   'LBL_COUNTRIES' => '国籍/区域',
-);
+  'LBL_HAT_INCIDENT_SUBPANEL_TITLE'=>'事件管理'
+  );

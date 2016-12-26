@@ -152,8 +152,12 @@ array (
         ),
         7 => 
         array (
-          0 => 'description',
-          1 => '',
+          0 => 
+          array (
+            'name' => 'manual_add_flag',
+            'label' => 'LBL_MANUAL_ADD_FLAG',
+          ),
+          1 => 'description',
         ),
       ),
       'lbl_editview_panel1' => 
@@ -168,25 +172,12 @@ array (
           ),
           1 => 
           array (
-            'name' => 'location_drilldown',
-            'label' => 'LBL_LOCATION_DRILLDOWN',
-          ),
-        ),
-        1 => 
-        array (
-          0 => 
-          array (
             'name' => 'oranization',
             'studio' => 'visible',
             'label' => 'LBL_ORANIZATION',
           ),
-          1 => 
-          array (
-            'name' => 'org_drilldown',
-            'label' => 'LBL_ORG_DRILLDOWN',
-          ),
         ),
-        2 => 
+        1 => 
         array (
           0 => 
           array (
@@ -196,22 +187,9 @@ array (
           ),
           1 => 
           array (
-            'name' => 'major_drilldown',
-            'label' => 'LBL_MAJOR_DRILLDOWN',
-          ),
-        ),
-        3 => 
-        array (
-          0 => 
-          array (
             'name' => 'category',
             'studio' => 'visible',
             'label' => 'LBL_CATEGORY',
-          ),
-          1 => 
-          array (
-            'name' => 'category_drilldown',
-            'label' => 'LBL_CATEGORY_DRILLDOWN',
           ),
         ),
       ),

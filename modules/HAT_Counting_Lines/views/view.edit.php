@@ -25,6 +25,7 @@ class HAT_Counting_LinesViewEdit extends ViewEdit
 
 		   $modules=array(
 			'HAT_Counting_Results',
+			'Documents',
 			);	
 		foreach($modules as $module){
 			if(!is_file($GLOBALS['sugar_config']['cache_dir'].'jsLanguage/'.$module.'/'.$GLOBALS['current_language'].'.js')){
@@ -34,6 +35,21 @@ class HAT_Counting_LinesViewEdit extends ViewEdit
 			echo'<script type="text/javascript"src="'.$GLOBALS['sugar_config']['cache_dir'].'jsLanguage/'.$module.'/'.$GLOBALS['current_language'].'.js?s='.$GLOBALS['js_version_key'].'&c='.$GLOBALS['sugar_config']['js_custom_version'].'&j='.$GLOBALS['sugar_config']['js_lang_version'].'"></script>';
 		}
 		parent::display();
+
+		echo '<script>
+		$(function(){
+			$("#EditView").attr("enctype","multipart/form-data");
+			$("#asset_desc").val("'.$this->bean->asset_desc.'");
+			$("#asset_location").val("'.$this->bean->asset_location.'");
+			$("#hat_asset_locations_id_c").val("'.$this->bean->hat_asset_locations_id_c.'");
+			$("#oranization").val("'.$this->bean->oranization.'");
+			$("#account_id_c").val("'.$this->bean->account_id_c.'");
+			$("#asset_major").val("'.$this->bean->asset_major.'");
+			$("#haa_codes_id_c").val("'.$this->bean->haa_codes_id_c.'");
+			$("#asset_status_d").val("'.$this->bean->asset_status.'");
+			$("#asset_status").val("'.$this->bean->asset_status.'");
+		})
+		</script>';
 		
 	}
 }

@@ -6,16 +6,15 @@ require_once('include/MVC/View/views/view.popup.php');
 class HAA_CodesViewPopup extends ViewPopup
 {
 
-	function Display() {
-		global $mod_strings, $app_strings, $app_list_strings;
-		global $db;
+    function Display() {
+        global $mod_strings, $app_strings, $app_list_strings;
+        global $db;
 
-		if (empty($_REQUEST['haa_frameworks_id_advanced'])) {		//如果界面没有供出对应的值，此仅列出当前Session选定组织的Framework
-			$haa_frameworks_id=$_SESSION["current_framework"];
-			$_REQUEST['haa_frameworks_id_advanced']=$haa_frameworks_id;
-		}
-
-		if($_GET['module_name'] =='HAT_Counting_Tasks'|| $_GET['module_name'] =='HAT_Counting_Batchs'){
+        if (empty($_REQUEST['haa_frameworks_id_advanced'])) {       //如果界面没有供出对应的值，此仅列出当前Session选定组织的Framework
+            $haa_frameworks_id=$_SESSION["current_framework"];
+            $_REQUEST['haa_frameworks_id_advanced']=$haa_frameworks_id;
+        }
+        if(/*$_GET['module_name'] =='HAT_Counting_Tasks'||*/ $_GET['module_name'] =='HAT_Counting_Batchs'){
 /*        if(($this->bean instanceOf SugarBean) && !$this->bean->ACLAccess('list')){
             ACLController::displayNoAccess();
             sugar_cleanup(true);
@@ -23,8 +22,9 @@ class HAA_CodesViewPopup extends ViewPopup
 */     /* if (isset($_REQUEST['allnodes']) &&($_REQUEST['allnodes']=='1'||$_REQUEST['allnodes']=='true')){
         echo "<script>var allnodes=true;</script>";
     }else {
-    	echo "<script>var allnodes=false;</script>";
+        echo "<script>var allnodes=false;</script>";
     }*/
+    
     echo "<script>var allnodes=true;</script>";
     /***************************************************************/
         /* 以下为自定义的界面 
@@ -58,19 +58,19 @@ class HAA_CodesViewPopup extends ViewPopup
             //var_dump($app_list_strings);
         $txt_jason='{name:"'.$mod_strings['LBL_MODULE_NAME'].'", open:false, isParent:true,pId:0,id:"ROOT"},';
         if (isset($beanEventTypes)) {
-        	foreach ($beanEventTypes as $beanEventType) {
-        		$txt_jason.="{";
-        		foreach ($beanEventType->field_name_map as $key => $value) {
+            foreach ($beanEventTypes as $beanEventType) {
+                $txt_jason.="{";
+                foreach ($beanEventType->field_name_map as $key => $value) {
                         //echo $key."=".(gettype($value)).":"."<br/>";
-        			if ($key == 'parent_type_value_id'){
+                    if ($key == 'parent_type_value_id'){
                             //Parent_eventtype_id需要特别处理
-        				$txt_jason .='pId:"'.(($beanEventType->parent_eventtype_id=="")?"ROOT":$beanEventType->parent_eventtype_id).'",';
-        			}else {
-        				if (isset($beanEventType->$key)) {
-        					$txt_jason .=$key.':"'.$beanEventType->$key.'",';
-        				}
-        			}
-        		}
+                        $txt_jason .='pId:"'.(($beanEventType->parent_eventtype_id=="")?"ROOT":$beanEventType->parent_eventtype_id).'",';
+                    }else {
+                        if (isset($beanEventType->$key)) {
+                            $txt_jason .=$key.':"'.$beanEventType->$key.'",';
+                        }
+                    }
+                }
                     $txt_jason  = substr($txt_jason,0,strlen($txt_jason)-1);//去除最后一个,
                     $txt_jason.="},";
                 }
@@ -86,9 +86,9 @@ class HAA_CodesViewPopup extends ViewPopup
             echo('<script>var zNodes = '.$txt_jason.'</script>');
             echo ('<script type="text/javascript" src="modules/HAA_Codes/js/Codes_popupview.js"></script>');//
         }else{
-        	parent::Display();
-        	echo'<script>$("#code_type_advanced").closest("td").hide()</script>';
-        	echo'<script>$("#code_type_advanced").closest("td").prev("td").hide()</script>';
+            parent::Display();
+            echo'<script>$("#code_type_advanced").closest("td").hide()</script>';
+            echo'<script>$("#code_type_advanced").closest("td").prev("td").hide()</script>';
         }
     }
 

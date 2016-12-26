@@ -9,22 +9,12 @@ array (
     'default' => true,
     'link' => true,
   ),
-  'PRODUCT' => 
-  array (
-    'type' => 'relate',
-    'studio' => 'visible',
-    'label' => 'LBL_PRODUCT',
-    'id' => 'AOS_PRODUCTS_ID_C',
-    'link' => true,
-    'width' => '10%',
-    'default' => true,
-  ),
-  'PART_NUMBER' => 
+  'COUNTING_PERSON' => 
   array (
     'type' => 'varchar',
     'default' => true,
     'studio' => 'visible',
-    'label' => 'LBL_PART_NUMBER',
+    'label' => 'LBL_COUNTING_PERSON',
     'width' => '10%',
   ),
   'ASSET' => 
@@ -34,6 +24,44 @@ array (
     'label' => 'LBL_ASSET',
     'id' => 'HAT_ASSETS_ID_C',
     'link' => true,
+    'width' => '10%',
+    'default' => true,
+  ),
+  'ASSET_LOCATION' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'label' => 'LBL_ASSET_LOCATION',
+    'id' => 'HAT_ASSET_LOCATIONS_ID_C',
+    'link' => true,
+    'width' => '10%',
+    'default' => true,
+  ),
+  'ORANIZATION' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'label' => 'LBL_ORANIZATION',
+    'id' => 'ACCOUNT_ID_C',
+    'link' => true,
+    'width' => '10%',
+    'default' => true,
+  ),
+  'ASSET_MAJOR' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'label' => 'LBL_ASSET_MAJOR',
+    'id' => 'HAA_CODES_ID_C',
+    'link' => true,
+    'width' => '10%',
+    'default' => true,
+  ),
+  'ASSET_STATUS' => 
+  array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'label' => 'LBL_ASSET_STATUS',
     'width' => '10%',
     'default' => true,
   ),
@@ -53,19 +81,37 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-  'SNAPSHOT_QUANTITY' => 
-  array (
-    'type' => 'int',
-    'label' => 'LBL_SNAPSHOT_QUANTITY',
-    'width' => '10%',
-    'default' => true,
-  ),
   'ASSIGNED_USER_NAME' => 
   array (
     'width' => '9%',
     'label' => 'LBL_ASSIGNED_TO_NAME',
     'module' => 'Employees',
     'id' => 'ASSIGNED_USER_ID',
+    'default' => false,
+  ),
+  'PRODUCT' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'label' => 'LBL_PRODUCT',
+    'id' => 'AOS_PRODUCTS_ID_C',
+    'link' => true,
+    'width' => '10%',
+    'default' => false,
+  ),
+  'PART_NUMBER' => 
+  array (
+    'type' => 'varchar',
+    'default' => false,
+    'studio' => 'visible',
+    'label' => 'LBL_PART_NUMBER',
+    'width' => '10%',
+  ),
+  'SNAPSHOT_QUANTITY' => 
+  array (
+    'type' => 'int',
+    'label' => 'LBL_SNAPSHOT_QUANTITY',
+    'width' => '10%',
     'default' => false,
   ),
 );

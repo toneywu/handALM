@@ -333,7 +333,8 @@ function openLocPopup(ln){
     }
   };
   //var frame='&frame_c_advanced='+$("#haa_framework").val();
-  open_popup('HAT_Asset_Locations', 800, 850,'', true, true, popupRequestData);
+  var module_name='&module_name=HAT_Counting_Batchs';
+  open_popup('HAT_Asset_Locations', 800, 850,module_name, true, true, popupRequestData);
 }
 
 function setLocReturn(popupReplyData){
@@ -351,7 +352,7 @@ function openOrgPopup(ln){
       //"insurance_type":"line_insurance_type"+ln,
     }
   };
-  var frame='&frame_c_advanced='+$("#haa_framework").val();
+  var frame='&module_name=HAT_Counting_Batchs&frame_c_advanced='+$("#haa_framework").val();
   open_popup('Accounts', 800, 850,frame, true, true, popupRequestData);
 }
 
@@ -370,7 +371,7 @@ function openCodePopup(ln){
       //"insurance_type":"line_insurance_type"+ln,
     }
   };
-  var contact='&code_type_advanced=asset_counting_major_type';
+  var contact='&module_name=HAT_Counting_Batchs&code_type_advanced=asset_counting_major_type';
   open_popup('HAA_Codes', 800, 850, contact, true, true, popupRequestData);
 }
 
@@ -390,7 +391,8 @@ function openCatePopup(ln){
     }
   };
   //var frame='&frame_c_advanced='+$("#haa_framework").val();
-  open_popup('AOS_Product_Categories', 800, 850,'', true, true, popupRequestData);
+  var module_name='&module_name=HAT_Counting_Batchs';
+  open_popup('AOS_Product_Categories', 800, 850,module_name, true, true, popupRequestData);
 }
 
 function setCateReturn(popupReplyData){

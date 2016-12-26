@@ -34,10 +34,11 @@ FROM
 WHERE
 	doc.id = hid.hat_counting_lines_documentsdocuments_idb
 AND doc.deleted = 0
+AND hid.deleted = 0
 AND doc.document_revision_id = dr.id
 AND hid.hat_counting_lines_documentshat_counting_lines_ida='".$focus->id."'";
 
-
+	
 	$result=$focus->db->query($sql);
 
 	while($row=$focus->db->fetchByAssoc($result)){

@@ -175,7 +175,6 @@ $dictionary['HAT_Counting_Lines'] = array(
         ),
   'asset_desc' =>
         array (
-        'source' => 'non-db', 
         'name' => 'asset_desc',
         'vname' => 'LBL_ASSET_DESC',
         'type' => 'varchar',
@@ -299,7 +298,7 @@ $dictionary['HAT_Counting_Lines'] = array(
   ),
   'asset_status' => 
   array (
-    'required' => true,
+    'required' => false,
     'name' => 'asset_status',
     'vname' => 'LBL_ASSET_STATUS',
     'type' => 'enum',

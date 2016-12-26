@@ -164,7 +164,7 @@ z1.innerHTML  =
     "</td>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_LOCT_DIFF_FLAG')+"</td>"+
     "<input type='hidden' name='line_loct_diff_flag["+prodln+"]' value='0'> "+
-    "<td><input name='line_loct_diff_flag["+prodln+"]' id='line_loct_diff_flag"+prodln+"' title='' value='1' type='checkbox' ></td>"+
+    "<td><input name='line_loct_diff_flag["+prodln+"]' id='line_loct_diff_flag"+prodln+"' title='' value='1' type='checkbox' onclick='return false'></td>"+
     /*"<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_QTY_DIFF_FLAG')+"</td>"+
     "<input type='hidden' name='line_qty_diff_flag["+prodln+"]' value='0'> "+
     "<td><input name='line_qty_diff_flag["+prodln+"]' id='line_qty_diff_flag"+prodln+"' title='' value='1' type='checkbox' ></td>"+*/
@@ -172,15 +172,15 @@ z1.innerHTML  =
   "<tr>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_ORG_DIFF_FLAG')+"</td>"+
     "<input type='hidden' name='line_org_diff_flag["+prodln+"]' value='0'> "+
-    "<td><input name='line_org_diff_flag["+prodln+"]' id='line_org_diff_flag"+prodln+"' title='' value='1' type='checkbox' ></td>"+
+    "<td><input name='line_org_diff_flag["+prodln+"]' id='line_org_diff_flag"+prodln+"' title='' value='1' type='checkbox' onclick='return false'></td>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_STATUS_DIFF_FLAG')+"</td>"+
     "<input type='hidden' name='line_status_diff_flag["+prodln+"]' value='0'> "+
-    "<td><input name='line_status_diff_flag["+prodln+"]' id='line_status_diff_flag"+prodln+"' title='' value='1' type='checkbox' ></td>"+  
+    "<td><input name='line_status_diff_flag["+prodln+"]' id='line_status_diff_flag"+prodln+"' title='' value='1' type='checkbox' onclick='return false'></td>"+  
   "</tr>"+
   "<tr>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_MAJOR_DIFF_FLAG')+"</td>"+
     "<input type='hidden' name='line_major_diff_flag["+prodln+"]' value='0'> "+
-    "<td><input name='line_major_diff_flag["+prodln+"]' id='line_major_diff_flag"+prodln+"' title='' value='1' type='checkbox' ></td>"+
+    "<td><input name='line_major_diff_flag["+prodln+"]' id='line_major_diff_flag"+prodln+"' title='' value='1' type='checkbox' onclick='return false'></td>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_COUNTING_RESULT')+"</td>"+
     "<td><select tabindex='116' name='line_counting_result[" + prodln + "]' id='line_counting_result" + prodln + "' onchange='setadjustneed("+prodln+")'>" + line_res_type_option +"</select></td>"+
   "</tr>"+
@@ -392,6 +392,15 @@ function clr_value(attr_name,attr_id,ln){
       $(this).val("");
       var line_num=$(this).attr("id").replace(/[^0-9]/ig,"");
       $(attr_id+line_num).val("");
+      if(attr_name=='#line_organization_name'){
+        setdefaultorg(ln);
+      }
+      if(attr_name=='#line_location_name'){
+        setdefaultloc(ln);
+      }
+      if(attr_name=='#line_code_name'){
+        setdefaultcode(ln);
+      }
     }
   });
 
@@ -406,7 +415,7 @@ function setdefaultqty(ln){
     setcountingres(ln,'#line_qty_diff_flag');
   }else{
    // $('#line_qty_diff_flag'+ln).attr('checked',false);
-    document.getElementById("line_qty_diff_flag"+ln).checked=true;
+    document.getElementById("line_qty_diff_flag"+ln).checked=false;
     $('#line_qty_diff_flag'+ln).val('0');
   }
 }
@@ -414,27 +423,22 @@ function setdefaultqty(ln){
 function setdefaultloc(ln){
   var h_loc =$("#asset_location").val();
   if(h_loc != $('#line_location_name'+ln).val()){
-    //$('#line_loct_diff_flag'+ln).attr('checked',true);
     document.getElementById("line_loct_diff_flag"+ln).checked=true;
     $('#line_loct_diff_flag'+ln).val('1');
     setcountingres(ln,'#line_loct_diff_flag');
   }else{
-   // $('#line_loct_diff_flag'+ln).attr('checked',false);
-    document.getElementById("line_loct_diff_flag"+ln).checked=true;
+    document.getElementById("line_loct_diff_flag"+ln).checked=false;
     $('#line_loct_diff_flag'+ln).val('0');
   }
 }
 function setdefaultcode(ln){
   var h_loc =$("#asset_major").val();
   if(h_loc != $('#line_code_name'+ln).val()){
-   // $('#line_major_diff_flag'+ln).attr('checked',true);
     document.getElementById("line_major_diff_flag"+ln).checked=true;
     $('#line_major_diff_flag'+ln).val('1');
-    console.log(ln);
     setcountingres(ln,'#line_major_diff_flag');
   }else{
-   // $('#line_major_diff_flag'+ln).attr('checked',false);
-    document.getElementById("line_major_diff_flag"+ln).checked=true;
+    document.getElementById("line_major_diff_flag"+ln).checked=false;
     $('#line_major_diff_flag'+ln).val('0');
   }
 }
@@ -442,13 +446,13 @@ function setdefaultcode(ln){
 function setdefaultorg(ln){
   var h_org =$("#oranization").val();
   if(h_org != $('#line_organization_name'+ln).val()){
-   // $('#line_org_diff_flag'+ln).attr('checked',true);
+    console.log("true");
     document.getElementById("line_org_diff_flag"+ln).checked=true;
     $('#line_org_diff_flag'+ln).val('1');
     setcountingres(ln,'#line_org_diff_flag');
   }else{
-    //$('#line_org_diff_flag'+ln).attr('checked',false);
-    document.getElementById("line_org_diff_flag"+ln).checked=true;
+    console.log("false");
+    document.getElementById("line_org_diff_flag"+ln).checked=false;
     $('#line_org_diff_flag'+ln).val('0');
   }
 }
@@ -456,13 +460,11 @@ function setdefaultorg(ln){
 function setdefaultsta(ln){
   var h_sta =$("#asset_status").find('option:selected').val();
   if(h_sta != $('#line_actual_asset_status'+ln).find('option:selected').val()){
-    //$('#line_status_diff_flag'+ln).attr('checked',true);
     document.getElementById("line_status_diff_flag"+ln).checked=true;
     $('#line_status_diff_flag'+ln).val('1');
     setcountingres(ln,'#line_status_diff_flag');
   }else{
-   // $('#line_status_diff_flag'+ln).attr('checked',false);
-    document.getElementById("line_status_diff_flag"+ln).checked=true;
+    document.getElementById("line_status_diff_flag"+ln).checked=false;
     $('#line_status_diff_flag'+ln).val('0');
   }
 }
@@ -470,15 +472,17 @@ function setdefaultsta(ln){
 function setcountingres(ln,field_name){
   if( $(field_name+ln).is(':checked')){
     $('#line_counting_result'+ln).children().each(function(){
-      if($(this).text().trim()=="盘点差异")
+      if($(this).text().trim()=="盘点差异"){
         $(this).attr('selected',true);
+      }
         setadjustneed(ln);
+
     });
   }
 }
 
 function setadjustneed(ln){
-  if($('#line_counting_result'+ln).find('option:selected').val()=='Different'){
+  if($('#line_counting_result'+ln).find('option:selected').val()!='Matched'){
     document.getElementById("line_adjust_needed"+ln).checked=true;
     $('#line_adjust_needed'+ln).val('1');
   }else{
