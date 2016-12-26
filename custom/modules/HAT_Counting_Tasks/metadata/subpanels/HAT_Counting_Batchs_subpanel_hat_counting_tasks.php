@@ -1,78 +1,103 @@
 <?php
-// created: 2016-12-19 20:25:24
+// created: 2016-12-24 16:14:57
 $subpanel_layout['list_fields'] = array (
-  'name' => 
-  array (
-    'type' => 'name',
-    'link' => true,
-    'vname' => 'LBL_NAME',
-    'width' => '10%',
-    'default' => true,
-    'widget_class' => 'SubPanelDetailViewLink',
-    'target_module' => NULL,
-    'target_record_key' => NULL,
-  ),
   'task_number' => 
   array (
     'type' => 'varchar',
     'vname' => 'LBL_TASK_NUMBER',
-    'width' => '10%',
+    'width' => '8%',
     'default' => true,
   ),
-'task_status' => 
+  'name' => 
+  array (
+    'vname' => 'LBL_NAME',
+    'widget_class' => 'SubPanelDetailViewLink',
+    'width' => '12%',
+    'default' => true,
+  ),
+  'counting_person' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'vname' => 'LBL_COUNTING_PERSON',
+    'id' => 'CONTACTS_ID_C',
+    'link' => true,
+    'width' => '8%',
+    'default' => true,
+    'widget_class' => 'SubPanelDetailViewLink',
+    'target_module' => 'Contacts',
+    'target_record_key' => 'contacts_id_c',
+  ),
+  'counting_task_status' => 
   array (
     'type' => 'enum',
-    'default' => true,
     'studio' => 'visible',
-    'vname' => 'LBL_TASK_STATUS',
-    'width' => '10%',
+    'vname' => 'LBL_COUNTING_TASK_STATUS',
+    'width' => '7%',
+    'default' => true,
   ),
   'total_counting' => 
   array (
     'type' => 'int',
+    'studio' => 'visible',
     'vname' => 'LBL_TOTAL_COUNTING',
-    'width' => '10%',
+    'width' => '8%',
     'default' => true,
   ),
   'actual_counting' => 
   array (
     'type' => 'int',
+    'studio' => 'visible',
     'vname' => 'LBL_ACTUAL_COUNTING',
-    'width' => '10%',
+    'width' => '8%',
+    'default' => true,
+  ),
+  'amt_actual_counting' => 
+  array (
+    'type' => 'int',
+    'studio' => 'visible',
+    'vname' => 'LBL_AMT_ACTUAL_COUNTING',
+    'width' => '8%',
     'default' => true,
   ),
   'diff_counting' => 
   array (
     'type' => 'int',
-    'vname' => 'LBL_DIFF_COUNTING',
-    'width' => '10%',
-    'default' => true,
-  ),
-  'actual_adjust' => 
-  array (
-    'type' => 'bool',
-    'vname' => 'LBL_ACTUAL_ADJUST',
-    'width' => '10%',
-    'default' => true,
-  ),
-    'adjust_posted' => 
-  array (
-    'type' => 'enum',
-    'default' => true,
     'studio' => 'visible',
-    'vname' => 'LBL_ADJUST_POSTED',
-    'width' => '10%',
+    'vname' => 'LBL_DIFF_COUNTING',
+    'width' => '8%',
+    'default' => true,
   ),
-  'hand_add_flag' => 
+  'profit_counting' => 
   array (
-    'type' => 'bool',
-    'vname' => 'LBL_HAND_ADD_FLAG',
+    'type' => 'int',
+    'studio' => 'visible',
+    'vname' => 'LBL_PROFIT_COUNTING',
+    'width' => '8%',
+    'default' => true,
+  ),
+  'loss_counting' => 
+  array (
+    'type' => 'int',
+    'studio' => 'visible',
+    'vname' => 'LBL_LOSS_COUNTING',
+    'width' => '8%',
+    'default' => true,
+  ),
+  'actual_adjust_count' => 
+  array (
+    'type' => 'int',
+    'studio' => 'visible',
+    'vname' => 'LBL_ACTUAL_ADJUST_COUNT',
     'width' => '10%',
     'default' => true,
   ),
-  'edit_button'=>array(
-     'widget_class' => 'SubPanelEditButton',
-     'module' => $module_name,
-     'width' => '4%',
-   ),
+  'edit_button' => 
+  array (
+    'vname' => 'LBL_EDIT_BUTTON',
+    'widget_class' => 'SubPanelEditButton',
+    'module' => 'HAT_Counting_Tasks',
+    'width' => '4%',
+    'default' => true,
+  ),
 );

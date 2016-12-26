@@ -38,11 +38,6 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_EDITVIEW_PANEL1' => 
-        array (
-          'newTab' => false,
-          'panelDefault' => 'expanded',
-        ),
       ),
       'syncDetailEditViews' => true,
     ),
@@ -133,75 +128,6 @@ array (
             'label' => 'LBL_COUNTING_SCENE',
           ),
           1 => 'description',
-        ),
-      ),
-      'lbl_editview_panel1' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            'name' => 'location',
-            'studio' => 'visible',
-            'label' => 'LBL_LOCATION',
-          ),
-          1 => 
-          array (
-            'name' => 'location_drilldown',
-            'label' => 'LBL_LOCATION_DRILLDOWN',
-          ),
-        ),
-        1 => 
-        array (
-          0 => 
-          array (
-            'name' => 'oranization',
-            'studio' => 'visible',
-            'label' => 'LBL_ORANIZATION',
-          ),
-          1 => 
-          array (
-            'name' => 'org_drilldown',
-            'label' => 'LBL_ORG_DRILLDOWN',
-          ),
-        ),
-        2 => 
-        array (
-          0 => 
-          array (
-            'name' => 'major',
-            'studio' => 'visible',
-            'label' => 'LBL_MAJOR',
-          ),
-          1 => 
-          array (
-            'name' => 'major_drilldown',
-            'label' => 'LBL_MAJOR_DRILLDOWN',
-          ),
-        ),
-        3 => 
-        array (
-          0 => 
-          array (
-            'name' => 'category',
-            'studio' => 'visible',
-            'label' => 'LBL_CATEGORY',
-          ),
-          1 => 
-          array (
-            'name' => 'category_drilldown',
-            'label' => 'LBL_CATEGORY_DRILLDOWN',
-          ),
-        ),
-        4 => 
-        array (
-          0 => 
-          array (
-            'name' => 'counting_rule',
-            'studio' => 'visible',
-            'label' => 'LBL_COUNTING_RULE',
-          ),
-          1 => '',
         ),
       ),
     ),

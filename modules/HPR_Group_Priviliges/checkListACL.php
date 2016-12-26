@@ -1,4 +1,4 @@
-<?php
+ <?php
 //根据用户匹配权限策略
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
@@ -38,7 +38,7 @@ function getListViewSQLStatement($current_module,$user_id,$framework_id,$paraArr
         "and hgm.account_id_c='".$account_id_c."'".
         "and hgp.privilige_module='".$current_module."'".
         "and (hgm.user_id_c='' or hgm.user_id_c='".$user_id."')
-        order by hgm.user_id_c,hgm.account_id_c";
+        order by hgm.user_id_c desc,hgm.account_id_c desc";
 
         $privilige_result = $db->query($privilige_sql);
         $pre_user_id='-1';
@@ -64,7 +64,6 @@ function getListViewSQLStatement($current_module,$user_id,$framework_id,$paraArr
 function checkPopupModule($effect_module,$privilige_id,$logic_type) {
    global $db;
    $result = false;
-
    $checksql = "SELECT
    count(*) cnt
    FROM
@@ -124,7 +123,7 @@ function getPopupSQLStatement($popup_module,$current_module='',$user_id,$framewo
         "and hgm.account_id_c='".$account_id_c."'".
         "and hgp.privilige_module='".$popup_module."'".
         "and (hgm.user_id_c='' or hgm.user_id_c='".$user_id."')
-        order by hgm.user_id_c,hgm.account_id_c";
+        order by hgm.user_id_c desc,hgm.account_id_c desc";
 
         $privilige_result = $db->query($privilige_sql);
         $pre_user_id='-1';
@@ -132,6 +131,7 @@ function getPopupSQLStatement($popup_module,$current_module='',$user_id,$framewo
             if ($pre_user_id!='-1'&&$pre_user_id!=$privilige_row['user_id_c']){
                 break;
             }
+
             if($privilige_row['popup_global_flag']=='1'){
                 $condition_flag=checkPopupModule($current_module,$privilige_row['privilige_id'],'Ruleout');
                 if((!$condition_flag)&&$privilige_row['sql_statement_for_popup']!=''){
@@ -140,6 +140,7 @@ function getPopupSQLStatement($popup_module,$current_module='',$user_id,$framewo
             } 
             elseif($privilige_row['popup_global_flag']=='0'){
                 $condition_flag=checkPopupModule($current_module,$privilige_row['privilige_id'],'Include');
+
                 if($condition_flag&&$privilige_row['sql_statement_for_popup']!=''){
                     $popupSQLStatement = empty($popupSQLStatement)?$privilige_row['sql_statement_for_popup']:($popupSQLStatement." AND ".$privilige_row['sql_statement_for_popup']);
                 }

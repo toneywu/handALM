@@ -139,4 +139,6 @@ $mod_strings = array (
   'LBL_RACK'=>'所在机柜U位',
   'LBL_LINEAR_ELEMENTS_SUBPANEL'=>'线性资产要素',
   'LBL_COST_CENTER'=>'成本中心',
+
+  'LBL_OWNING_MAJOR'=> '所属专业',
 );

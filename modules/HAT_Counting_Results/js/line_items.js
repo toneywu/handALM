@@ -14,22 +14,26 @@ function insertLineHeader(tableid){
   x.id='Line_head';
   var a=x.insertCell(0);
   a.innerHTML=SUGAR.language.get('HAT_Counting_Results', 'LBL_CYCLE_NUMBER');
-  var b=x.insertCell(1);
-  b.innerHTML=SUGAR.language.get('HAT_Counting_Results', 'LBL_ACTUAL_QUANTITY');
-  var c=x.insertCell(2);
+/*  var b=x.insertCell(1);
+  b.innerHTML=SUGAR.language.get('HAT_Counting_Results', 'LBL_ACTUAL_QUANTITY');*/
+  var c=x.insertCell(1);
   c.innerHTML=SUGAR.language.get('HAT_Counting_Results', 'LBL_ACTUAL_LOCATION');
-  var b1=x.insertCell(3);
+  var b1=x.insertCell(2);
   b1.innerHTML=SUGAR.language.get('HAT_Counting_Results', 'LBL_ACTUAL_ORANIZATION');
-  var d=x.insertCell(4);
+  var d=x.insertCell(3);
   d.innerHTML=SUGAR.language.get('HAT_Counting_Results', 'LBL_ACTUAL_ASSET_STATUS');
+  var b=x.insertCell(4);
+  b.innerHTML=SUGAR.language.get('HAT_Counting_Results', 'LBL_ACTUAL_ASSET_MAJOR');
+  /*var e=x.insertCell(5);
+  e.innerHTML=SUGAR.language.get('HAT_Counting_Results', 'LBL_QTY_DIFF_FLAG');*/
   var e=x.insertCell(5);
-  e.innerHTML=SUGAR.language.get('HAT_Counting_Results', 'LBL_QTY_DIFF_FLAG');
-  var e=x.insertCell(6);
   e.innerHTML=SUGAR.language.get('HAT_Counting_Results', 'LBL_LOCT_DIFF_FLAG');
-  var g=x.insertCell(7);
+  var g=x.insertCell(6);
   g.innerHTML=SUGAR.language.get('HAT_Counting_Results', 'LBL_ORG_DIFF_FLAG');
-  var h=x.insertCell(8);
+  var h=x.insertCell(7);
   h.innerHTML=SUGAR.language.get('HAT_Counting_Results', 'LBL_STATUS_DIFF_FLAG');
+  var h=x.insertCell(8);
+  h.innerHTML=SUGAR.language.get('HAT_Counting_Results', 'LBL_MAJOR_DIFF_FLAG');
   var i=x.insertCell(9);
   i.innerHTML=SUGAR.language.get('HAT_Counting_Results', 'LBL_COUNTING_RESULT');
   var j=x.insertCell(10);
@@ -51,22 +55,26 @@ function insertLineData(line_data ){ //将数据写入到对应的行字段中
     $("#line_cycle_number".concat(String(ln))).val(line_data.cycle_number);
     $("#line_organization_name".concat(String(ln))).val(line_data.account_name);
     $("#line_account_id_c".concat(String(ln))).val(line_data.account_id_c);
+    $("#line_code_name".concat(String(ln))).val(line_data.code_name);
+    $("#line_haa_codes_id_c".concat(String(ln))).val(line_data.haa_codes_id_c);
     $("#line_actual_asset_status".concat(String(ln))).val(line_data.actual_asset_status);
-    $("#line_actual_quantity".concat(String(ln))).val(line_data.actual_quantity);
-    $("#line_location_name".concat(String(ln))).val(line_data.location_name);
+/*    $("#line_actual_quantity".concat(String(ln))).val(line_data.actual_quantity);
+*/    $("#line_location_name".concat(String(ln))).val(line_data.location_name);
     $("#line_hat_asset_locations_id_c".concat(String(ln))).val(line_data.hat_asset_locations_id_c);
-    $("#line_qty_diff_flag".concat(String(ln))).attr('checked',line_data.enabled_flag==1?true:false);
-    $("#line_qty_diff_flag".concat(String(ln))).val(line_data.qty_diff_flag);
-    $("#line_loct_diff_flag".concat(String(ln))).attr('checked',line_data.enabled_flag==1?true:false);
+    /*$("#line_qty_diff_flag".concat(String(ln))).attr('checked',line_data.qty_diff_flag==1?true:false);
+    $("#line_qty_diff_flag".concat(String(ln))).val(line_data.qty_diff_flag);*/
+    $("#line_loct_diff_flag".concat(String(ln))).attr('checked',line_data.loct_diff_flag==1?true:false);
     $("#line_loct_diff_flag".concat(String(ln))).val(line_data.loct_diff_flag);
-    $("#line_org_diff_flag".concat(String(ln))).attr('checked',line_data.enabled_flag==1?true:false);
+    $("#line_org_diff_flag".concat(String(ln))).attr('checked',line_data.org_diff_flag==1?true:false);
     $("#line_org_diff_flag".concat(String(ln))).val(line_data.org_diff_flag);
-    $("#line_status_diff_flag".concat(String(ln))).attr('checked',line_data.enabled_flag==1?true:false);
+    $("#line_status_diff_flag".concat(String(ln))).attr('checked',line_data.status_diff_flag==1?true:false);
     $("#line_status_diff_flag".concat(String(ln))).val(line_data.status_diff_flag);
     $("#line_counting_result".concat(String(ln))).val(line_data.counting_result);
     $("#line_adjust_method".concat(String(ln))).val(line_data.adjust_method);
-    $("#line_adjust_needed".concat(String(ln))).attr('checked',line_data.enabled_flag==1?true:false);
+    $("#line_adjust_needed".concat(String(ln))).attr('checked',line_data.adjust_needed==1?true:false);
     $("#line_adjust_needed".concat(String(ln))).val(line_data.adjust_needed);
+    $("#line_major_diff_flag".concat(String(ln))).attr('checked',line_data.major_diff_flag==1?true:false);
+    $("#line_major_diff_flag".concat(String(ln))).val(line_data.major_diff_flag);
     $("#line_adjust_status".concat(String(ln))).val(line_data.adjust_status);
     
     renderLine(ln);
@@ -93,17 +101,19 @@ z1.id = 'line_displayed' + prodln;
 z1.className = 'oddListRowS1';
 z1.innerHTML  =
 "<td><span name='displayed_line_cycle_number[" + prodln + "]' id='displayed_line_cycle_number" + prodln + "'></span></td>" +
+"<td><span name='displayed_line_location_name[" + prodln + "]' id='displayed_line_location_name" + prodln + "'></span></td>"+
 "<td><span name='displayed_line_organization_name[" + prodln + "]' id='displayed_line_organization_name" + prodln + "'></span></td>"+
 "<td><span name='displayed_line_actual_asset_status[" + prodln + "]' id='displayed_line_actual_asset_status" + prodln + "'></span></td>"+
-"<td><span name='displayed_line_actual_quantity[" + prodln + "]' id='displayed_line_actual_quantity" + prodln + "'></span></td>"+
-"<td><span name='displayed_line_location_name[" + prodln + "]' id='displayed_line_location_name" + prodln + "'></span></td>"+
-"<td><span name='displayed_line_qty_diff_flag[" + prodln + "]' id='displayed_line_qty_diff_flag" + prodln + "'></span></td>"+
+/*"<td><span name='displayed_line_actual_quantity[" + prodln + "]' id='displayed_line_actual_quantity" + prodln + "'></span></td>"+*/
+"<td><span name='displayed_line_code_name[" + prodln + "]' id='displayed_line_code_name" + prodln + "'></span></td>"+
+/*"<td><span name='displayed_line_qty_diff_flag[" + prodln + "]' id='displayed_line_qty_diff_flag" + prodln + "'></span></td>"+*/
 "<td><span name='displayed_line_loct_diff_flag[" + prodln + "]' id='displayed_line_loct_diff_flag" + prodln + "'></span></td>"+
 "<td><span name='displayed_line_org_diff_flag[" + prodln + "]' id='displayed_line_org_diff_flag" + prodln + "'></span></td>"+
 "<td><span name='displayed_line_status_diff_flag[" + prodln + "]' id='displayed_line_status_diff_flag" + prodln + "'></span></td>"+
+"<td><span name='displayed_line_major_diff_flag[" + prodln + "]' id='displayed_line_major_diff_flag" + prodln + "'></span></td>"+
 "<td><span name='displayed_line_counting_result[" + prodln + "]' id='displayed_line_counting_result" + prodln + "'></span></td>"+
-"<td><span name='displayed_line_adjust_method[" + prodln + "]' id='displayed_line_adjust_method" + prodln + "'></span></td>"+
 "<td><span name='displayed_line_adjust_needed[" + prodln + "]' id='displayed_line_adjust_needed" + prodln + "'></span></td>"+
+"<td><span name='displayed_line_adjust_method[" + prodln + "]' id='displayed_line_adjust_method" + prodln + "'></span></td>"+
 "<td><span name='displayed_line_adjust_status[" + prodln + "]' id='displayed_line_adjust_status" + prodln + "'></span></td>"+
 "<td><input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'></td>";
 
@@ -125,54 +135,63 @@ z1.innerHTML  =
   "<tr>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_CYCLE_NUMBER')+"<span class='required'>*</span></td>"+
     "<td><input id='line_cycle_number"+prodln+"' name='line_cycle_number["+prodln+"]'  type='text' value='1'></td>"+
-    "<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_ACTUAL_QUANTITY')+"</td>"+
-    "<td><input id='line_actual_quantity"+prodln+"' name='line_actual_quantity["+prodln+"]'  type='text' value='' onblur='setdefaultqty("+prodln+")'></td>"+
-  "</tr>"+
-  "<tr>"+
-    "<input name='line_id["+prodln+"]' id='line_id"+prodln+"' value='' type='hidden'>"+
+    /*"<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_ACTUAL_QUANTITY')+"</td>"+
+    "<td><input id='line_actual_quantity"+prodln+"' name='line_actual_quantity["+prodln+"]'  type='text' value='' onblur='setdefaultqty("+prodln+")'></td>"+*/
     "<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_ACTUAL_ORANIZATION')+"</td>"+
     "<td><input name='line_organization_name["+prodln+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='line_organization_name"+prodln+"' size='' value='' title='' autocomplete='off' accesskey='7' type='text'>"+
     "<input name='line_account_id_c["+prodln+"]' id='line_account_id_c"+prodln+"' type='hidden' value=''>"+
     "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openOrgPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
     "<button type='button' name='btn_clr_orgname' id='btn_clr_orgname' tabindex='0' title='清除选择' class='button lastChild' onclick='SUGAR.clearRelateField(this.form, \"line_organization_name"+prodln+"\", \"line_account_id_c"+prodln+"\");' value='清除选择'><img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button>"+
     "</td>"+
+  "</tr>"+
+  "<tr>"+
+    "<input name='line_id["+prodln+"]' id='line_id"+prodln+"' value='' type='hidden'>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_ACTUAL_LOCATION')+"</td>"+
     "<td><input name='line_location_name["+prodln+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='line_location_name"+prodln+"' size='' value='' title='' autocomplete='off' accesskey='7' type='text'>"+
     "<input name='line_hat_asset_locations_id_c["+prodln+"]' id='line_hat_asset_locations_id_c"+prodln+"' type='hidden' value=''>"+
     "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openLocPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
     "<button type='button' name='btn_clr_locname' id='btn_clr_locname' tabindex='0' title='清除选择' class='button lastChild' onclick='SUGAR.clearRelateField(this.form, \"line_location_name"+prodln+"\", \"line_hat_asset_locations_id_c"+prodln+"\");' value='清除选择'><img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button>"+
     "</td>"+
-  "</tr>"+
-  "<tr>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_ACTUAL_ASSET_STATUS')+"</td>"+
     "<td><select tabindex='116' name='line_actual_asset_status[" + prodln + "]' id='line_actual_asset_status" + prodln + "' onchange='setdefaultsta("+prodln+")'>" + line_act_type_option +" </select></td>"+
-    "<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_QTY_DIFF_FLAG')+"</td>"+
-    "<input type='hidden' name='line_qty_diff_flag["+prodln+"]' value='0'> "+
-    "<td><input name='line_qty_diff_flag["+prodln+"]' id='line_qty_diff_flag"+prodln+"' title='' value='1' type='checkbox' ></td>"+
   "</tr>"+
   "<tr>"+
+    "<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_ACTUAL_ASSET_MAJOR')+"</td>"+
+    "<td><input name='line_code_name["+prodln+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='line_code_name"+prodln+"' size='' value='' title='' autocomplete='off' accesskey='7' type='text'>"+
+    "<input name='line_haa_codes_id_c["+prodln+"]' id='line_haa_codes_id_c"+prodln+"' type='hidden' value=''>"+
+    "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openCodePopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+    "<button type='button' name='btn_clr_codename' id='btn_clr_codename' tabindex='0' title='清除选择' class='button lastChild' onclick='SUGAR.clearRelateField(this.form, \"line_code_name"+prodln+"\", \"line_haa_codes_id_c"+prodln+"\");' value='清除选择'><img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button>"+
+    "</td>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_LOCT_DIFF_FLAG')+"</td>"+
     "<input type='hidden' name='line_loct_diff_flag["+prodln+"]' value='0'> "+
     "<td><input name='line_loct_diff_flag["+prodln+"]' id='line_loct_diff_flag"+prodln+"' title='' value='1' type='checkbox' ></td>"+
+    /*"<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_QTY_DIFF_FLAG')+"</td>"+
+    "<input type='hidden' name='line_qty_diff_flag["+prodln+"]' value='0'> "+
+    "<td><input name='line_qty_diff_flag["+prodln+"]' id='line_qty_diff_flag"+prodln+"' title='' value='1' type='checkbox' ></td>"+*/
+  "</tr>"+
+  "<tr>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_ORG_DIFF_FLAG')+"</td>"+
     "<input type='hidden' name='line_org_diff_flag["+prodln+"]' value='0'> "+
     "<td><input name='line_org_diff_flag["+prodln+"]' id='line_org_diff_flag"+prodln+"' title='' value='1' type='checkbox' ></td>"+
-  "</tr>"+
-  "<tr>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_STATUS_DIFF_FLAG')+"</td>"+
     "<input type='hidden' name='line_status_diff_flag["+prodln+"]' value='0'> "+
-    "<td><input name='line_status_diff_flag["+prodln+"]' id='line_status_diff_flag"+prodln+"' title='' value='1' type='checkbox' ></td>"+
+    "<td><input name='line_status_diff_flag["+prodln+"]' id='line_status_diff_flag"+prodln+"' title='' value='1' type='checkbox' ></td>"+  
+  "</tr>"+
+  "<tr>"+
+    "<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_MAJOR_DIFF_FLAG')+"</td>"+
+    "<input type='hidden' name='line_major_diff_flag["+prodln+"]' value='0'> "+
+    "<td><input name='line_major_diff_flag["+prodln+"]' id='line_major_diff_flag"+prodln+"' title='' value='1' type='checkbox' ></td>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_COUNTING_RESULT')+"</td>"+
     "<td><select tabindex='116' name='line_counting_result[" + prodln + "]' id='line_counting_result" + prodln + "' onchange='setadjustneed("+prodln+")'>" + line_res_type_option +"</select></td>"+
-   "</tr>"+
-   "<tr>"+
+  "</tr>"+
+  "<tr>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_ADJUST_NEEDED')+"</td>"+
     "<input type='hidden' name='line_adjust_needed["+prodln+"]' value='0'> "+
     "<td><input name='line_adjust_needed["+prodln+"]' id='line_adjust_needed"+prodln+"' title='' value='1' type='checkbox' ></td>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_ADJUST_METHOD')+"</td>"+
-    "<td><select tabindex='116' name='line_adjust_method[" + prodln + "]' id='line_adjust_method" + prodln + "'>" + line_adj_type_option +"</select></td>"+
-   "</tr>"+
-   "<tr>"+
+    "<td><select tabindex='116' name='line_adjust_method[" + prodln + "]' id='line_adjust_method" + prodln + "'>" + line_adj_type_option +"</select></td>"+   
+  "</tr>"+
+  "<tr>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_ADJUST_STATUS')+"</td>"+
     "<td><select tabindex='116' name='line_adjust_status[" + prodln + "]' id='line_adjust_status" + prodln + "'>" + line_adj_stas_option +"</select></td>"+
     "<td><input type='hidden' id='line_deleted"+prodln+"' name='line_deleted["+prodln+"]' value='0'></td>"+
@@ -185,6 +204,7 @@ z1.innerHTML  =
 
     clr_value('#line_organization_name','#line_account_id_c',prodln);
     clr_value('#line_location_name','#line_hat_asset_locations_id_c',prodln);
+    clr_value('#line_code_name','#line_haa_codes_id_c',prodln);
 
     renderLine(prodln);
     prodln++;
@@ -197,6 +217,7 @@ function renderLine(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_line_actual_asset_status"+ln).html($("#line_actual_asset_status"+ln).find("option:selected").html());
   $("#displayed_line_actual_quantity"+ln).html($("#line_actual_quantity"+ln).val());
   $("#displayed_line_location_name"+ln).html($("#line_location_name"+ln).val());
+  $("#displayed_line_code_name"+ln).html($("#line_code_name"+ln).val());
   var flag=$("#line_qty_diff_flag"+ln).is(':checked')?"是":"否";
   $("#displayed_line_qty_diff_flag"+ln).html(flag);
   var flag=$("#line_loct_diff_flag"+ln).is(':checked')?"是":"否";
@@ -205,6 +226,8 @@ function renderLine(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_line_org_diff_flag"+ln).html(flag);
   var flag=$("#line_status_diff_flag"+ln).is(':checked')?"是":"否";
   $("#displayed_line_status_diff_flag"+ln).html(flag);
+  var flag=$("#line_major_diff_flag"+ln).is(':checked')?"是":"否";
+  $("#displayed_line_major_diff_flag"+ln).html(flag);
   $("#displayed_line_counting_result"+ln).html($("#line_counting_result"+ln).find("option:selected").html());
   $("#displayed_line_adjust_method"+ln).html($("#line_adjust_method"+ln).find("option:selected").html());
   $("#displayed_line_adjust_status"+ln).html($("#line_adjust_status"+ln).find("option:selected").html());
@@ -252,7 +275,7 @@ function markLineDeleted(ln, key) {//删除当前行
   document.getElementById(key + 'delete_line' + ln).onclick = '';
 
   if (typeof validate != "undefined" && typeof validate['EditView'] != "undefined") {
-    removeFromValidate('EditView','line_split_accord'+ ln);
+    removeFromValidate('EditView','line_cycle_number'+ ln);
   }
   resetLineNum_Bold();
 
@@ -301,13 +324,14 @@ function openOrgPopup(ln){
       //"insurance_type":"line_insurance_type"+ln,
     }
   };
-  //var frame='&frame_c_advanced='+$("#haa_framework").val();
-  open_popup('Accounts', 800, 850,'', true, true, popupRequestData);
-  setdefaultorg(lineno);
+  var frame='&frame_c_advanced='+$("#line_framework").val();
+  open_popup('Accounts', 800, 850,frame, true, true, popupRequestData);
+  
 }
 
 function setOrgReturn(popupReplyData){
   set_return(popupReplyData);
+  setdefaultorg(lineno);
 }
 
 function openLocPopup(ln){
@@ -321,12 +345,33 @@ function openLocPopup(ln){
     }
   };
   //var contact='&code_type_advanced=asset_counting_obj_type';
-  open_popup('HAT_Asset_Locations', 800, 850, '', true, true, popupRequestData);
+  var frame='&frame_c_advanced='+$("#line_framework").val();
+  open_popup('HAT_Asset_Locations', 800, 850,frame, true, true, popupRequestData);
 }
 
 function setLocReturn(popupReplyData){
   set_return(popupReplyData);
   setdefaultloc(lineno);
+}
+
+function openCodePopup(ln){
+  lineno=ln;
+  var popupRequestData = {
+    "call_back_function" : "setCodeReturn",
+    "form_name" : "EditView",
+    "field_to_name_array" : {
+      "id":"line_haa_codes_id_c"+ln,
+      "name" : "line_code_name" + ln,
+    }
+  };
+  //var contact='&code_type_advanced=asset_counting_obj_type';
+  var frame='&frame_c_advanced='+$("#line_framework").val();
+  open_popup('HAA_Codes', 800, 850, frame, true, true, popupRequestData);
+}
+
+function setCodeReturn(popupReplyData){
+  set_return(popupReplyData);
+  setdefaultcode(lineno);
 }
 
 
@@ -355,11 +400,13 @@ function clr_value(attr_name,attr_id,ln){
 function setdefaultqty(ln){
   var h_qty =$("#snapshot_quantity").val();
   if(h_qty != $('#line_actual_quantity'+ln).val()){
-    $('#line_qty_diff_flag'+ln).attr('checked',true);
+    //$('#line_qty_diff_flag'+ln).attr('checked',true);
+    document.getElementById("line_qty_diff_flag"+ln).checked=true;
     $('#line_qty_diff_flag'+ln).val('1');
     setcountingres(ln,'#line_qty_diff_flag');
   }else{
-    $('#line_qty_diff_flag'+ln).attr('checked',false);
+   // $('#line_qty_diff_flag'+ln).attr('checked',false);
+    document.getElementById("line_qty_diff_flag"+ln).checked=true;
     $('#line_qty_diff_flag'+ln).val('0');
   }
 }
@@ -367,23 +414,41 @@ function setdefaultqty(ln){
 function setdefaultloc(ln){
   var h_loc =$("#asset_location").val();
   if(h_loc != $('#line_location_name'+ln).val()){
-    $('#line_loct_diff_flag'+ln).attr('checked',true);
+    //$('#line_loct_diff_flag'+ln).attr('checked',true);
+    document.getElementById("line_loct_diff_flag"+ln).checked=true;
     $('#line_loct_diff_flag'+ln).val('1');
     setcountingres(ln,'#line_loct_diff_flag');
   }else{
-    $('#line_loct_diff_flag'+ln).attr('checked',false);
+   // $('#line_loct_diff_flag'+ln).attr('checked',false);
+    document.getElementById("line_loct_diff_flag"+ln).checked=true;
     $('#line_loct_diff_flag'+ln).val('0');
+  }
+}
+function setdefaultcode(ln){
+  var h_loc =$("#asset_major").val();
+  if(h_loc != $('#line_code_name'+ln).val()){
+   // $('#line_major_diff_flag'+ln).attr('checked',true);
+    document.getElementById("line_major_diff_flag"+ln).checked=true;
+    $('#line_major_diff_flag'+ln).val('1');
+    console.log(ln);
+    setcountingres(ln,'#line_major_diff_flag');
+  }else{
+   // $('#line_major_diff_flag'+ln).attr('checked',false);
+    document.getElementById("line_major_diff_flag"+ln).checked=true;
+    $('#line_major_diff_flag'+ln).val('0');
   }
 }
 
 function setdefaultorg(ln){
   var h_org =$("#oranization").val();
   if(h_org != $('#line_organization_name'+ln).val()){
-    $('#line_org_diff_flag'+ln).attr('checked',true);
+   // $('#line_org_diff_flag'+ln).attr('checked',true);
+    document.getElementById("line_org_diff_flag"+ln).checked=true;
     $('#line_org_diff_flag'+ln).val('1');
     setcountingres(ln,'#line_org_diff_flag');
   }else{
-    $('#line_org_diff_flag'+ln).attr('checked',false);
+    //$('#line_org_diff_flag'+ln).attr('checked',false);
+    document.getElementById("line_org_diff_flag"+ln).checked=true;
     $('#line_org_diff_flag'+ln).val('0');
   }
 }
@@ -391,11 +456,13 @@ function setdefaultorg(ln){
 function setdefaultsta(ln){
   var h_sta =$("#asset_status").find('option:selected').val();
   if(h_sta != $('#line_actual_asset_status'+ln).find('option:selected').val()){
-    $('#line_status_diff_flag'+ln).attr('checked',true);
+    //$('#line_status_diff_flag'+ln).attr('checked',true);
+    document.getElementById("line_status_diff_flag"+ln).checked=true;
     $('#line_status_diff_flag'+ln).val('1');
     setcountingres(ln,'#line_status_diff_flag');
   }else{
-    $('#line_status_diff_flag'+ln).attr('checked',false);
+   // $('#line_status_diff_flag'+ln).attr('checked',false);
+    document.getElementById("line_status_diff_flag"+ln).checked=true;
     $('#line_status_diff_flag'+ln).val('0');
   }
 }
@@ -411,13 +478,11 @@ function setcountingres(ln,field_name){
 }
 
 function setadjustneed(ln){
-  console.log('111   '+ln);
   if($('#line_counting_result'+ln).find('option:selected').val()=='Different'){
-    $('#line_adjust_needed'+ln).attr('checked',true);
+    document.getElementById("line_adjust_needed"+ln).checked=true;
     $('#line_adjust_needed'+ln).val('1');
-    console.log($('#line_adjust_needed'+ln));
   }else{
-    $('#line_adjust_needed'+ln).attr('checked',false);
+    document.getElementById("line_adjust_needed"+ln).checked=false;
     $('#line_adjust_needed'+ln).val('0');
   }
 }

@@ -48,12 +48,12 @@ include('custom/metadata/hat_asset_trans_batch_hat_asset_transMetaData.php');
 
  
  //WARNING: The contents of this file are auto-generated
-include('custom/metadata/hat_counting_lines_documentsMetaData.php');
+include('custom/metadata/hat_counting_batchs_hat_counting_batch_rulesMetaData.php');
 
 
  
  //WARNING: The contents of this file are auto-generated
-include('custom/metadata/hat_counting_lines_hat_counting_batchsMetaData.php');
+include('custom/metadata/hat_counting_lines_documentsMetaData.php');
 
 
  
@@ -64,6 +64,11 @@ include('custom/metadata/hat_counting_lines_hat_counting_resultsMetaData.php');
  
  //WARNING: The contents of this file are auto-generated
 include('custom/metadata/hat_counting_rules_hat_counting_rule_dtlsMetaData.php');
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+include('custom/metadata/hat_counting_tasks_hat_counting_linesMetaData.php');
 
 
  

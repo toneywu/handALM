@@ -1,6 +1,7 @@
 <?php
-// created: 2016-12-15 14:48:14
+// created: 2016-12-24 20:50:40
 $mod_strings = array (
   'LBL_EDITVIEW_PANEL1' => '盘点结果',
   'LBL_EDITVIEW_PANEL2' => '附件',
+  'LBL_HAT_COUNTING_LINES_HAT_COUNTING_RESULTS_FROM_HAT_COUNTING_RESULTS_TITLE' => '盘点结果',
 );

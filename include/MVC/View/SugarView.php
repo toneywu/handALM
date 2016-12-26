@@ -1039,6 +1039,7 @@ EOHTML;
     protected function _displaySubPanels()
     {
         //Modefy instance by zengchen 20161214 
+
         //20161223 modified by toney.wu , seesion my be null
         if (isset($_SESSION["current_framework_code"])) {
             $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
@@ -1240,6 +1241,7 @@ EOHTML;
         if (file_exists('custom/modules/' . $module . '/Ext/Menus/menu.ext.php')) {
             require('custom/modules/' . $module . '/Ext/Menus/menu.ext.php');
         }
+
         //20161243by toney.wu
         if (isset($_SESSION["current_framework_code"])) {
             $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
@@ -1247,6 +1249,7 @@ EOHTML;
             $instance_loc='instance/PUBLIC';
         }
         //Add instance by zengchen 20161214
+
         if (file_exists($instance_loc.'modules/'. $module . '/Ext/Menus/menu.ext.php')) {
             require($instance_loc.'modules/'. $module . '/Ext/Menus/menu.ext.php');
         }
@@ -1408,6 +1411,7 @@ EOHTML;
                 }
             }
         }*/
+
         /*20161224 session maybe null*/
         if (isset($_SESSION["current_framework_code"])) {
             $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';

@@ -31,12 +31,16 @@ function display_lines($focus, $field, $value, $view){
 	hcr.adjust_needed,
 	hcr.adjust_status,
 	hcr.id,
-	hcr.cycle_number
+	hcr.cycle_number,
+	hcr.haa_codes_id_c,
+	hc.`name` code_name,
+	hcr.major_diff_flag
 FROM
 	hat_counting_lines_hat_counting_results_c hcl,
 	hat_counting_results hcr
 LEFT JOIN hat_asset_locations hal ON hcr.hat_asset_locations_id_c = hal.id
 LEFT JOIN accounts a ON hcr.account_id_c = a.id
+LEFT JOIN haa_codes hc on hc.id = hcr.haa_codes_id_c
 WHERE
 	hcr.id = hcl.hat_counting_lines_hat_counting_resultshat_counting_results_idb
 AND hcr.deleted = 0

@@ -1,5 +1,5 @@
 <?php
-// created: 2016-12-21 10:11:56
+// created: 2016-12-24 15:08:40
 $dictionary["hat_counting_rules_hat_counting_rule_dtls"] = array (
   'true_relationship_type' => 'one-to-many',
   'relationships' => 

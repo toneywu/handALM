@@ -38,11 +38,11 @@
  ********************************************************************************/
 
 $dictionary['HAT_Counting_Batchs'] = array(
-	'table'=>'hat_counting_batchs',
-	'audited'=>true,
+    'table'=>'hat_counting_batchs',
+    'audited'=>true,
     'inline_edit'=>true,
-		'duplicate_merge'=>true,
-		'fields'=>array (
+        'duplicate_merge'=>true,
+        'fields'=>array (
   'planed_start_date' => 
   array (
     'required' => true,
@@ -67,7 +67,7 @@ $dictionary['HAT_Counting_Batchs'] = array(
   ),
   'planed_complete_date' => 
   array (
-    'required' => false,
+    'required' => true,
     'name' => 'planed_complete_date',
     'vname' => 'LBL_PLANED_COMPLETE_DATE',
     'type' => 'date',
@@ -87,6 +87,26 @@ $dictionary['HAT_Counting_Batchs'] = array(
     'enable_range_search' => true,
     'options' => 'date_range_search_dom',
   ),
+  'line_items' =>
+            array(
+                'required' => false,
+                'name' => 'line_items',
+                'vname' => 'LBL_LINE_ITEMS',
+                'type' => 'function',
+                'source' => 'non-db',
+                'massupdate' => 0,
+                'importable' => 'false',
+                'duplicate_merge' => 'disabled',
+                'duplicate_merge_dom_value' => 0,
+                'audited' => false,
+                'reportable' => false,
+                'function' =>
+                    array(
+                        'name' => 'display_lines',
+                        'returns' => 'html',
+                        'include' => 'modules/HAT_Counting_Batch_Rules/Line_Items.php'
+                    ),
+            ),
   'hat_asset_locations_id_c' => 
   array (
     'required' => false,
@@ -754,11 +774,11 @@ $dictionary['HAT_Counting_Batchs'] = array(
     'size' => '20',
   ),
 ),
-	'relationships'=>array (
+    'relationships'=>array (
 ),
-	'optimistic_locking'=>true,
-		'unified_search'=>true,
-	);
+    'optimistic_locking'=>true,
+        'unified_search'=>true,
+    );
 if (!class_exists('VardefManager')){
         require_once('include/SugarObjects/VardefManager.php');
 }

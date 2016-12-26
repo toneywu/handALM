@@ -164,7 +164,7 @@ array (
             'name' => 'account',
             'displayParams' => 
             array (
-              'initial_filter' =>'&asset_using_org=Y',
+              'initial_filter' =>'&asset_using_org=Y&module_name=HAM_WO',
             ),
           ),
           1 => 

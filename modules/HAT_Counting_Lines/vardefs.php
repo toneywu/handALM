@@ -38,11 +38,11 @@
  ********************************************************************************/
 
 $dictionary['HAT_Counting_Lines'] = array(
-	'table'=>'hat_counting_lines',
-	'audited'=>true,
+    'table'=>'hat_counting_lines',
+    'audited'=>true,
     'inline_edit'=>true,
-		'duplicate_merge'=>true,
-		'fields'=>array (
+        'duplicate_merge'=>true,
+        'fields'=>array (
   'hat_assets_id_c' => 
   array (
     'required' => false,
@@ -370,6 +370,55 @@ $dictionary['HAT_Counting_Lines'] = array(
     'quicksearch' => 'enabled',
     'studio' => 'visible',
   ),
+    'haa_codes_id_c' => 
+  array (
+    'required' => false,
+    'name' => 'haa_codes_id_c',
+    'vname' => 'LBL_ASSET_MAJOR_HAA_CODES_ID',
+    'type' => 'id',
+    'massupdate' => 0,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'true',
+    'duplicate_merge' => 'disabled',
+    'duplicate_merge_dom_value' => 0,
+    'audited' => false,
+    'inline_edit' => true,
+    'reportable' => false,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'len' => 36,
+    'size' => '20',
+  ),
+  'asset_major' => 
+  array (
+    'required' => false,
+    'source' => 'non-db',
+    'name' => 'asset_major',
+    'vname' => 'LBL_ASSET_MAJOR',
+    'type' => 'relate',
+    'massupdate' => 0,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'true',
+    'duplicate_merge' => 'disabled',
+    'duplicate_merge_dom_value' => '0',
+    'audited' => false,
+    'inline_edit' => true,
+    'reportable' => true,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'len' => '255',
+    'size' => '20',
+    'id_name' => 'haa_codes_id_c',
+    'ext2' => 'HAA_Codes',
+    'module' => 'HAA_Codes',
+    'rname' => 'name',
+    'quicksearch' => 'enabled',
+    'studio' => 'visible',
+  ),
   'account_id_c' => 
   array (
     'required' => false,
@@ -557,11 +606,11 @@ $dictionary['HAT_Counting_Lines'] = array(
     'size' => '20',
   ),
 ),
-	'relationships'=>array (
+    'relationships'=>array (
 ),
-	'optimistic_locking'=>true,
-		'unified_search'=>true,
-	);
+    'optimistic_locking'=>true,
+        'unified_search'=>true,
+    );
 if (!class_exists('VardefManager')){
         require_once('include/SugarObjects/VardefManager.php');
 }

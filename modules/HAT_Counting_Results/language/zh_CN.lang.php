@@ -107,6 +107,9 @@ $mod_strings = array (
   'LBL_ADJUST_STATUS' => '调整完成状态',
   'LBL_BTN_ADD_LINE' => '新增',
   'LBL_COUNT_DIFF_TYPE' => '差异类型',
+  'LBL_ACTUAL_ASSET_MAJOR' => '实盘专业',
+  'LBL_ACTUAL_ASSET_MAJOR_HAA_CODES_ID' => '实盘专业',
+  'LBL_MAJOR_DIFF_FLAG' => '是否有专业差异',
 
   'LBL_DOC_NAME' => '文档名称',
   'LBL_FILENAME' => '文件名称',
