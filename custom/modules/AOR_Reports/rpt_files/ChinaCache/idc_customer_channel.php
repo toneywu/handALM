@@ -5,6 +5,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 */
 function custom_report_main($paraArray=array()){
     //echo '---------------------1-------------------------';
+
     global $db,$bean_module;
     ini_set('zlib.output_compression', 'Off');
     require_once('include/export_utils.php');
@@ -54,8 +55,10 @@ function custom_report_main($paraArray=array()){
 
     ob_clean();
     header("Pragma: cache");
-    header("Content-type: text/comma-separated-values; charset=".$GLOBALS['locale']->getExportCharset());
-    header("Content-Disposition: attachment; filename=\"{$name}.csv\"");
+    /*header("Content-type: text/comma-separated-values; charset=".$GLOBALS['locale']->getExportCharset());
+    header("Content-Disposition: attachment; filename=\"{$name}.csv\"");*/
+    header("Content-type: text/comma-separated-values; charset=GBK");
+    header("Content-Disposition: attachment; filename=\"test.csv\"");
     header("Content-transfer-encoding: binary");
     header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
     header("Last-Modified: " . TimeDate::httpTime() );
@@ -64,8 +67,12 @@ function custom_report_main($paraArray=array()){
     if (!empty($sugar_config['export_excel_compatible'])) {
         $csv = chr(255) . chr(254) . mb_convert_encoding($csv, 'UTF-16LE', 'UTF-8');
     }
-
-    print $csv;
+    //$name = mb_convert_encoding($name,'BUC-CN');
+    $name= $GLOBALS['locale']->translateCharset($name, 'UTF-8', $GLOBALS['locale']->getExportCharset());
+    $myfile = fopen("custom/modules/AOR_Reports/rpt_data_files/".$name.".csv", "w") or die("Unable to open file!");
+    fwrite($myfile, $csv);
+    fclose($myfile);
+    print $name.'.csv';
 
     sugar_cleanup(true);
 }
