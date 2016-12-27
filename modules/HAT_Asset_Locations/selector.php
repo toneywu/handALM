@@ -113,6 +113,11 @@
 		background-color:#efefef;
 		border: 1px solid #ccc;
 	}
+	.input_group {
+		display: inline-block;
+		padding-right: 1em;
+		padding-left: 1em;
+	}
 .treeview_location {
 	font-weight: bolder;
 	background-color: #F3EEDF;
@@ -295,7 +300,18 @@
 					<label id="assetName_label">资产名称</label>
 					<input name="asset_name" id="asset_name">
 				</span>
-
+				<span class="input_group">
+					<label id="serial_number_label">S/N号</label>
+					<input name="serial_number" id="serial_number">
+				</span>
+				<span class="input_group">
+					<label id="owning_org_name_label">所属组织</label>
+					<input name="owning_org_name" id="owning_org_name">
+				</span>
+				<span class="input_group">
+					<label id="using_org_name_label">使用组织</label>
+					<input name="using_org_name" id="using_org_name">
+				</span>
 		    <input type="button" id="btn_search" onclick="btn_search_clicked()" value="搜索">
 	</div>
 </form>

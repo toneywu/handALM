@@ -2,21 +2,41 @@
 global $db;
 global $mod_strings, $app_strings, $app_list_strings,$dictionary;
 
+//print_r ($_POST);
 
-$select_from = "SELECT
-                        hat_assets.id, hat_assets.name, hat_assets.asset_desc,  hat_assets.asset_icon, hat_assets.asset_status, hit_racks.id rack_id
+$select_from = "SELECT hat_assets.id, hat_assets.name, hat_assets.asset_desc,  hat_assets.asset_icon, hat_assets.asset_status, hit_racks.id rack_id
 					FROM hat_assets LEFT JOIN
-                        hit_racks ON (hit_racks.`deleted`=0 AND hit_racks.`hat_assets_id`=hat_assets.id)
-                    WHERE hat_assets.deleted=0";
+                        hit_racks ON (hit_racks.`deleted`=0 AND hit_racks.`hat_assets_id`=hat_assets.id)";
 
-$where_status  = " AND HAT_Assets.asset_status ='". $_POST['asset_status']."'";
+if (isset($_SESSION["current_framework"]) && $_SESSION["current_framework"]!="") {
+  $where_framework = " AND hat_assets.haa_frameworks_id = '".$_SESSION["current_framework"]."'";
+}else {
+  $where_framework = "";
+}
 
+/*资产状态*/
+if (!empty($_POST['asset_status'])) {
+  $where_status  = " AND hat_assets.asset_status ='". $_POST['asset_status']."'";
+}else{
+  $where_status  = "";
+}
+
+/*资产名称*/
 if (!empty($_POST['asset_name'])) {
-	$where_asset_name = " AND HAT_Assets.name LIKE '". $_POST['asset_name']."'";
+	$where_asset_name = " AND hat_assets.name LIKE '". $_POST['asset_name']."'";
 } else {
 	$where_asset_name ="";
 }
 
+/*SN*/
+if (!empty($_POST['serial_number'])) {
+  $where_asset_name = " AND hat_assets.serial_number LIKE '". $_POST['serial_number']."'";
+} else {
+  $where_asset_name ="";
+}
+
+
+/*地点*/
 if (!empty($_POST['site_select'])) {
 	$where_site_select = " AND EXISTS (SELECT 1
 		FROM
@@ -30,16 +50,37 @@ if (!empty($_POST['site_select'])) {
 	$where_site_select="";
 }
 
+/*资产使用组织*/
+if (!empty($_POST['using_org_name'])) {
+  $join_using_org = " JOIN accounts account_u ON (hat_assets.using_org_id = account_u.id AND account_u.name like '".$_POST['using_org_name']."')";
+}else{
+  $join_using_org="";
+}
+
+/*资产使用组织*/
+if (!empty($_POST['owning_org_name'])) {
+  $join_owning_org = " JOIN accounts account_o ON (hat_assets.using_org_id = account_o.id AND account_o.name like '".$_POST['owning_org_name']."')";
+}else{
+  $join_owning_org="";
+}
+
+
 $where_limit  = " LIMIT 0,200";
 //echo $select_from.$where_status.$where_asset_name.$where_site_select;
 //
-$SQL_Query = $select_from.$where_status.$where_asset_name.$where_site_select.$where_limit;
+$SQL_Query = $select_from.$where_framework.$join_using_org.$join_owning_org." WHERE hat_assets.deleted=0 ".$where_status.$where_asset_name.$where_site_select.$where_limit;
+//echo $SQL_Query;
+
+
+
 $txt_jason = "";
 
 if (isset($SQL_Query)) {
     $bean_assets = $db->query($SQL_Query); //无如是Location还是asset来源，都可以显示子资产
-    //if(is_array($bean_assets)) {
+
+
         while ( $asset = $db->fetchByAssoc($bean_assets) ) {
+
            $txt_jason .='{"id":"'.$asset['id'].'",';
            //$txt_jason .='name:"<i class=\'zmdi '.$asset['asset_icon'].' icon-hc-lg \'></i> <span class=\'treeview_asset\'>'.$asset['name'].'</span>: '.$asset['asset_desc'].'",';
            $txt_jason .='"img":"'.$asset['asset_icon'].'",';
@@ -54,7 +95,6 @@ if (isset($SQL_Query)) {
            $txt_jason .='"status":"'.$app_list_strings['hat_asset_status_list'][$asset['asset_status']].'",';
            $txt_jason .='"type":"asset"},';
         }
-    //}
 }
 
 $txt_jason=substr($txt_jason,0,strlen($txt_jason)-1);
