@@ -73,7 +73,7 @@ class SoapUtil{
 									<ns2:InputParameters>
 										<ns2:P_START_DATE>2015-01-01</ns2:P_START_DATE>
 										<ns2:P_END_DATE>2016-12-31</ns2:P_END_DATE>
-										<ns2:P_TYPE_CODE>CONTRACT</ns2:P_TYPE_CODE>
+										<ns2:P_TYPE_CODE>'.$ws_type_code.'</ns2:P_TYPE_CODE>
 									</ns2:InputParameters>
 								</soap:Body>
 							</soap:Envelope>';

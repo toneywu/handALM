@@ -313,14 +313,14 @@ function erp_allocations(){
 			var id_name=$(this).attr("id");
 			var id_index = id_name.split("line_asset_id")[1];
 			if($("#line_deleted"+id_index).val()=="0"){
-				json_obj[id_name]=$(this).val();
+				json_obj["line_asset_id"+i]=$(this).val();
+				json_obj["line_target_cost_center"+i]=$("#line_target_cost_center"+id_index).val();
+				json_obj["line_target_cost_center_id"+i]=$("#line_target_cost_center_id"+id_index).val();
+				json_obj["line_target_location"+i]=$("#line_target_location"+id_index).val();
+				json_obj["line_target_location_id"+i]=$("#line_target_location_id"+id_index).val();
+				json_obj["line_target_asset_attribute10"+i]=$("#line_target_asset_attribute10"+id_index).val();
+				json_obj["line_target_location_desc"+i]=$("#line_target_location_desc"+id_index).val();
 				i=i+1;
-				json_obj["line_target_cost_center"+id_index]=$("#line_target_cost_center"+id_index).val();
-				json_obj["line_target_cost_center_id"+id_index]=$("#line_target_cost_center_id"+id_index).val();
-				json_obj["line_target_location"+id_index]=$("#line_target_location"+id_index).val();
-				json_obj["line_target_location_id"+id_index]=$("#line_target_location_id"+id_index).val();
-				json_obj["line_target_asset_attribute10"+id_index]=$("#line_target_asset_attribute10"+id_index).val();
-				json_obj["line_target_location_desc"+id_index]=$("#line_target_location_desc"+id_index).val();
 			}
 			});
 
@@ -368,11 +368,11 @@ function preValidateFunction(async_bool = false) {
 		var result = true;
 		var error_msg="S";
 
-		erp_allocations();
 		var return_status = erp_allocations();
-		if(return_status!=="S"&&return_status!=""){
+		if(return_status!="S"){
 			return;
 		}
+		console.log("end erp_allocations");
 		//return;
 		//toney.wu 仅针对有来源的工作单进行数据验证
 		if ($("#source_woop_id").val()!="") {
@@ -383,6 +383,8 @@ function preValidateFunction(async_bool = false) {
 		if(error_msg!=="S"&&error_msg!=""){
 			return;
 		}
+
+		console.log("end check_quantity");
 		//欠费
 		var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());
 
@@ -405,7 +407,7 @@ function preValidateFunction(async_bool = false) {
 		}
 		//End欠费
 
-		return result
+		return result;
 }
 
 $(document).ready(function(){

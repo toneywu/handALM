@@ -82,7 +82,7 @@ function display_lines($focus, $field, $value, $view){
 					  LEFT JOIN haa_codes code_cc_t
 					    ON (
 					    	hat.target_cost_center_id = code_cc_t.id
-					    	AND code_cc_c.deleted=0
+					    	AND code_cc_t.deleted=0
 					    )
 					  LEFT JOIN hat_asset_locations location_c 
 					    ON (
@@ -147,7 +147,7 @@ function display_lines($focus, $field, $value, $view){
 					  hat_assets ha
 					WHERE hat.deleted = 0 
 					  AND ha.`id`=hat.`asset_id`
-					  AND hat.batch_id = '".$focus->id."'";
+					  AND hat.batch_id = '".$focus->id."'"." order by hat.name";
 
             $result = $focus->db->query($sql);
 

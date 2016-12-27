@@ -55,11 +55,7 @@ function openAssetPopup(ln){//本文件为行上选择资产的按钮
   +'&site_id='+$("#ham_maint_sites_id").val()
   ;
 
-/*  if (eventOptions.keep_seperated_allc_rack_using_org=="0" || $("#line_enable_partial_allocation"+ln).val()!="1") {
-  	//如果按规则不需要变更资产的使用组织（本语句不一定有用）
-  	popupFilter +="&keep_asset_using_org=true";
-  }
-*/
+
   if ($("#target_using_org_id").val()!="") {
     popupFilter +="&target_using_org="+$("#target_using_org").val()
     +"&target_using_org_id="+$("#target_using_org_id").val();
@@ -215,6 +211,7 @@ function addNewAssetLine(){
    "field_to_name_array" : {
    }};
 
+
    var eventOptions = $("#eventOptions").val()!=""?jQuery.parseJSON($("#eventOptions").val()):"";
   //console.log(eventOptions);
   var popupFilter = '&current_mode='+eventOptions.asset_scope.toLowerCase()
@@ -244,6 +241,7 @@ function addNewAssetLine(){
       popupFilter += '&enable_it_ports=1';
     }
 */
+
 
 
     open_popup('HAT_Assets', 1200, 850,popupFilter, true, true, popupRequestData, "MultiSelect", true);
@@ -297,11 +295,10 @@ function insertTransLineHeader(tableid){
 /* 加载表行数据，将具体的数据写入到insertTransLineElements创建出的界面要素中
 /*******************************/
 function insertLineData(asset_trans_line, current_view){ //将数据写入到对应的行字段中
-  console.log(asset_trans_line);
   var ln = 0;
   //if(asset_trans_line.id != '0' && asset_trans_line.id !== ''){
     ln = insertTransLineElements("lineItems", current_view);
-
+	console.log(asset_trans_line);
     for(var propertyName in asset_trans_line) {
       //这里直接遍历所有的属性（因此需要建立与Bean属性同名的各个字段）
       //console.log(propertyName+"="+asset_trans_line[propertyName]);
@@ -322,6 +319,9 @@ function insertLineData(asset_trans_line, current_view){ //将数据写入到对
     }
 
     renderTransLine(ln);
+	//$("#line_target_cost_center"+ln).val(asset_trans_line.target_cost_center);
+	//$("#line_target_cost_center_id"+ln).val(asset_trans_line.target_cost_center_id);
+	//console.log(asset_trans_line.target_cost_center);
   //}
 }
 
@@ -560,6 +560,7 @@ if (document.getElementById(tableid + '_head') !== null) {
         // "<input style='float:right;' type='button' id='btn_LineEditorClose" + prodln + "' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE') + "'onclick='LineEditorClose(" + prodln + ")>"+
         "<button type='button' id='btn_LineEditorClose" + prodln + "' class='button btn_save' value='" + SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE') + "' tabindex='116' onclick='LineEditorClose(" + prodln + ",\"line_\")'>"+SUGAR.language.get('app_strings', 'LBL_SAVE_BUTTON_LABEL')+" & "+SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE')+" <img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button>"+
 
+
         "<input type='hidden' name='line_current_cost_center[" + prodln + "]' id='line_current_cost_center" + prodln + "'  value='' title='' >"+
         "<input type='hidden' name='line_current_cost_center_id[" + prodln + "]' id='line_current_cost_center_id" + prodln + "'  value='' title='' >"+
         "<input type='hidden' name='line_current_asset_attribute10[" + prodln + "]' id='line_current_asset_attribute10" + prodln + "'  value='' title='' >"+
@@ -769,6 +770,7 @@ function resetEditorFields(ln) {
     if  ($("#line_target_asset_attribute12"+ln).val()==""
       && (eventOptions.change_asset_attribute12 == "REQUIRED" ||eventOptions.change_asset_attribute12 == "OPTIONAL")) {
       $("#line_target_asset_attribute12"+ln).val($("#line_current_asset_attribute12"+ln).val());
+
     }
 
 

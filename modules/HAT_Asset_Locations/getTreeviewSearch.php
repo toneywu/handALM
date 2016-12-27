@@ -30,9 +30,10 @@ if (!empty($_POST['site_select'])) {
 	$where_site_select="";
 }
 
+$where_limit  = " LIMIT 0,200";
 //echo $select_from.$where_status.$where_asset_name.$where_site_select;
 //
-$SQL_Query = $select_from.$where_status.$where_asset_name.$where_site_select;
+$SQL_Query = $select_from.$where_status.$where_asset_name.$where_site_select.$where_limit;
 $txt_jason = "";
 
 if (isset($SQL_Query)) {
@@ -42,8 +43,8 @@ if (isset($SQL_Query)) {
            $txt_jason .='{"id":"'.$asset['id'].'",';
            //$txt_jason .='name:"<i class=\'zmdi '.$asset['asset_icon'].' icon-hc-lg \'></i> <span class=\'treeview_asset\'>'.$asset['name'].'</span>: '.$asset['asset_desc'].'",';
            $txt_jason .='"img":"'.$asset['asset_icon'].'",';
-           $txt_jason .='"code":"'.$asset['name'].'",';
-           $txt_jason .='"desc":"'.$asset['asset_desc'].'",';
+           $txt_jason .='"code":'.json_encode($asset['name']).',';
+           $txt_jason .='"desc":'.json_encode($asset['asset_desc']).',';
 
            if (isset($asset['rack_id'])) {
             $txt_jason .='"rack_id":"'.$asset['rack_id'].'",';

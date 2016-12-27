@@ -43,49 +43,50 @@ class PushAssetsUtil {
 			$locationsIds = $assetBean->hat_asset_locations_hat_assets->get();
 			$bean_location = BeanFactory :: getBean('HAT_Asset_Locations', $locationsIds[0]);
 			$mait_sites_bean = BeanFactory :: getBean('HAM_Maint_Sites', $bean_location->ham_maint_sites_id);
-			
-			$loopInput = '<HEADER>';
-			$guid = create_guid();
-			$loopInput = $loopInput . '<IF_ID>' . $guid . '</IF_ID>';
-			$loopInput = $loopInput . '<FRAMEWORK_CODE>' . $assetBean->framework . '</FRAMEWORK_CODE>';
-			$loopInput = $loopInput . '<ASSET_GROUP_NAME>' . $assetBean->asset_group . '</ASSET_GROUP_NAME>';
-			$loopInput = $loopInput . '<NAME>' . $assetBean->name . '</NAME>';
-			$loopInput = $loopInput . '<ASSET_NUMBER>' . $assetBean->asset_number . '</ASSET_NUMBER>';
-			$loopInput = $loopInput . '<SERIAL_NUMBER>' . $assetBean->serial_number . '</SERIAL_NUMBER>';
-			$loopInput = $loopInput . '<ASSET_DESC>' . $assetBean->asset_desc . '</ASSET_DESC>';
-			$loopInput = $loopInput . '<ASSET_CATEGORY>' . $assetBean->asset_category . '</ASSET_CATEGORY>';
-			$loopInput = $loopInput . '<ASSET_NAME>' . $assetBean->asset_name . '</ASSET_NAME>';
-			$loopInput = $loopInput . '<ASSET_BRAND>' . $assetBean->brand . '</ASSET_BRAND>';
-			$loopInput = $loopInput . '<ASSET_MODEL>' . $assetBean->model . '</ASSET_MODEL>';
-			$loopInput = $loopInput . '<ASSET_OWNING_ORG_NAME>' . $assetBean->cost_center . '</ASSET_OWNING_ORG_NAME>';
-			$loopInput = $loopInput . '<ASSET_LOCATION_NAME>' . $mait_sites_bean->name . '</ASSET_LOCATION_NAME>';
-			$loopInput = $loopInput . '<ASSET_SOURCE_TYPE>' . $assetBean->source_type . '</ASSET_SOURCE_TYPE>';
-			$loopInput = $loopInput . '<ASSET_SOURCE_ORDER></ASSET_SOURCE_ORDER>';
-			$loopInput = $loopInput . '<ASSET_SOURCE_LINE></ASSET_SOURCE_LINE>';
-			$loopInput = $loopInput . '<ASSET_SOURCE_REFERENCE>' . $assetBean->source_ref . '</ASSET_SOURCE_REFERENCE>';
-			$loopInput = $loopInput . '<ASSET_SOURCE_SUPPLIER>' . $assetBean->supplier_org . '</ASSET_SOURCE_SUPPLIER>';
-			$loopInput = $loopInput . '<ASSET_SOURCE_PRICE>' . $assetBean->original_cost . '</ASSET_SOURCE_PRICE>';
-			$loopInput = $loopInput . '<FA_CATEGORY></FA_CATEGORY>';
-			$loopInput = $loopInput . '<FA_BOOK_CODE></FA_BOOK_CODE>';
-			$loopInput = $loopInput . '<FA_ASSET_NUMBER></FA_ASSET_NUMBER>';
-			$loopInput = $loopInput . '<ASSET_DATE_IN_SERVICE>' . $assetBean->start_date . '</ASSET_DATE_IN_SERVICE>';
-			$loopInput = $loopInput . '<ATTRIBUTE1>' . $assetBean->attribute1 . '</ATTRIBUTE1>';
-			$loopInput = $loopInput . '<ATTRIBUTE2>' . $assetBean->attribute2 . '</ATTRIBUTE2>';
-			$loopInput = $loopInput . '<ATTRIBUTE3>' . $assetBean->attribute3 . '</ATTRIBUTE3>';
-			$loopInput = $loopInput . '<ATTRIBUTE4>' . $assetBean->attribute4 . '</ATTRIBUTE4>';
-			$loopInput = $loopInput . '<ATTRIBUTE5>' . $assetBean->attribute5 . '</ATTRIBUTE5>';
-			$loopInput = $loopInput . '<ATTRIBUTE6>' . $assetBean->attribute6 . '</ATTRIBUTE6>';
-			$loopInput = $loopInput . '<ATTRIBUTE7>' . $assetBean->attribute7 . '</ATTRIBUTE7>';
-			$loopInput = $loopInput . '<ATTRIBUTE8>' . $assetBean->attribute8 . '</ATTRIBUTE8>';
-			$loopInput = $loopInput . '<ATTRIBUTE9>' . $assetBean->attribute9 . '</ATTRIBUTE9>';
-			$loopInput = $loopInput . '<ATTRIBUTE10>' . $assetBean->attribute10 . '</ATTRIBUTE10>';
-			$loopInput = $loopInput . '<DATA_STATUS>N</DATA_STATUS>';
-			$loopInput = $loopInput . '<DATA_SOURCE_CODE>handALM</DATA_SOURCE_CODE>';
-			$loopInput = $loopInput . '<DATA_SOURCE_REFERENCE>' . $assetBean->asset_desc . '</DATA_SOURCE_REFERENCE>';
-			$loopInput = $loopInput . '<DATA_SOURCE_ID>' . $assetBean->id . '</DATA_SOURCE_ID>';
-			$loopInput = $loopInput . '</HEADER>';
-			$postAllString = $postAllString . '' . "$loopInput";
-			$loopInput = "";
+			if(empty($assetBean->fixed_asset_id)){
+				$loopInput = '<HEADER>';
+				$guid = create_guid();
+				$loopInput = $loopInput . '<IF_ID>' . $guid . '</IF_ID>';
+				$loopInput = $loopInput . '<FRAMEWORK_CODE>' . $assetBean->framework . '</FRAMEWORK_CODE>';
+				$loopInput = $loopInput . '<ASSET_GROUP_NAME>' . $assetBean->asset_group . '</ASSET_GROUP_NAME>';
+				$loopInput = $loopInput . '<NAME>' . $assetBean->name . '</NAME>';
+				$loopInput = $loopInput . '<ASSET_NUMBER>' . $assetBean->asset_number . '</ASSET_NUMBER>';
+				$loopInput = $loopInput . '<SERIAL_NUMBER>' . $assetBean->serial_number . '</SERIAL_NUMBER>';
+				$loopInput = $loopInput . '<ASSET_DESC>' . $assetBean->asset_desc . '</ASSET_DESC>';
+				$loopInput = $loopInput . '<ASSET_CATEGORY>' . $assetBean->asset_category . '</ASSET_CATEGORY>';
+				$loopInput = $loopInput . '<ASSET_NAME>' . $assetBean->asset_name . '</ASSET_NAME>';
+				$loopInput = $loopInput . '<ASSET_BRAND>' . $assetBean->brand . '</ASSET_BRAND>';
+				$loopInput = $loopInput . '<ASSET_MODEL>' . $assetBean->model . '</ASSET_MODEL>';
+				$loopInput = $loopInput . '<ASSET_OWNING_ORG_NAME>' . $assetBean->cost_center . '</ASSET_OWNING_ORG_NAME>';
+				$loopInput = $loopInput . '<ASSET_LOCATION_NAME>' . $mait_sites_bean->name . '</ASSET_LOCATION_NAME>';
+				$loopInput = $loopInput . '<ASSET_SOURCE_TYPE>' . $assetBean->source_type . '</ASSET_SOURCE_TYPE>';
+				$loopInput = $loopInput . '<ASSET_SOURCE_ORDER></ASSET_SOURCE_ORDER>';
+				$loopInput = $loopInput . '<ASSET_SOURCE_LINE></ASSET_SOURCE_LINE>';
+				$loopInput = $loopInput . '<ASSET_SOURCE_REFERENCE>' . $assetBean->source_ref . '</ASSET_SOURCE_REFERENCE>';
+				$loopInput = $loopInput . '<ASSET_SOURCE_SUPPLIER>' . $assetBean->supplier_org . '</ASSET_SOURCE_SUPPLIER>';
+				$loopInput = $loopInput . '<ASSET_SOURCE_PRICE>' . $assetBean->original_cost . '</ASSET_SOURCE_PRICE>';
+				$loopInput = $loopInput . '<FA_CATEGORY></FA_CATEGORY>';
+				$loopInput = $loopInput . '<FA_BOOK_CODE></FA_BOOK_CODE>';
+				$loopInput = $loopInput . '<FA_ASSET_NUMBER></FA_ASSET_NUMBER>';
+				$loopInput = $loopInput . '<ASSET_DATE_IN_SERVICE>' . $assetBean->start_date . '</ASSET_DATE_IN_SERVICE>';
+				$loopInput = $loopInput . '<ATTRIBUTE1>' . $assetBean->attribute1 . '</ATTRIBUTE1>';
+				$loopInput = $loopInput . '<ATTRIBUTE2>' . $assetBean->attribute2 . '</ATTRIBUTE2>';
+				$loopInput = $loopInput . '<ATTRIBUTE3>' . $assetBean->attribute3 . '</ATTRIBUTE3>';
+				$loopInput = $loopInput . '<ATTRIBUTE4>' . $assetBean->attribute4 . '</ATTRIBUTE4>';
+				$loopInput = $loopInput . '<ATTRIBUTE5>' . $assetBean->attribute5 . '</ATTRIBUTE5>';
+				$loopInput = $loopInput . '<ATTRIBUTE6>' . $assetBean->attribute6 . '</ATTRIBUTE6>';
+				$loopInput = $loopInput . '<ATTRIBUTE7>' . $assetBean->attribute7 . '</ATTRIBUTE7>';
+				$loopInput = $loopInput . '<ATTRIBUTE8>' . $assetBean->attribute8 . '</ATTRIBUTE8>';
+				$loopInput = $loopInput . '<ATTRIBUTE9>' . $assetBean->attribute9 . '</ATTRIBUTE9>';
+				$loopInput = $loopInput . '<ATTRIBUTE10>' . $assetBean->attribute10 . '</ATTRIBUTE10>';
+				$loopInput = $loopInput . '<DATA_STATUS>N</DATA_STATUS>';
+				$loopInput = $loopInput . '<DATA_SOURCE_CODE>handALM</DATA_SOURCE_CODE>';
+				$loopInput = $loopInput . '<DATA_SOURCE_REFERENCE>' . $assetBean->asset_desc . '</DATA_SOURCE_REFERENCE>';
+				$loopInput = $loopInput . '<DATA_SOURCE_ID>' . $assetBean->id . '</DATA_SOURCE_ID>';
+				$loopInput = $loopInput . '</HEADER>';
+				$postAllString = $postAllString . '' . "$loopInput";
+				$loopInput = "";
+			}
 		}
 		$loopInput = $loopInput . "</HEADERS></ROOT></ns2:P_ASSET_INFO_DATA></ns2:InputParameters></soap:Body></soap:Envelope>";
 		$postAllString = $postAllString . '' . "$loopInput";
@@ -147,15 +148,22 @@ class PushAssetsUtil {
 		echo "x_return_status = " . $x_return_status->item(0)->nodeValue . "<br>";
 		//echo "x_msg_data = " . $x_msg_data->item(0)->nodeValue . "<br>";
 		//echo "x_asset_out_data = " . $x_asset_out_data->item(0)->nodeValue . "<br>";
-
+		$error_message = '';
 		$xml_array = new SimpleXMLElement($x_asset_out_data->item(0)->nodeValue);
 		foreach ($xml_array as $tmp) {
-			echo 'RESOURCE_TYPE =' . $tmp->RESOURCE_TYPE . "<br>";
-			echo 'RESOURCE_NUM =' . $tmp->RESOURCE_NUM . "<br>";
-			echo 'RETURN_STATUS =' . $tmp->RETURN_STATUS . "<br>";
-			echo 'ERROR_MESSAGE =' . $tmp->ERROR_MESSAGE . "<br>";
+			//echo 'RESOURCE_TYPE =' . $tmp->RESOURCE_TYPE . "<br>";
+			//echo 'RESOURCE_NUM =' . $tmp->RESOURCE_NUM . "<br>";
+			//echo 'RETURN_STATUS =' . $tmp->RETURN_STATUS . "<br>";
+			//echo 'ERROR_MESSAGE =' . $tmp->ERROR_MESSAGE . "<br>";
+			if($tmp->RETURN_STATUS=="S"||$tmp->RETURN_STATUS==""){
+				$error_message=$error_message."资产编号:".$tmp->RESOURCE_NUM."创建EBS资产成功;";
+			}else{
+				$error_message=$error_message."资产编号:".$tmp->RESOURCE_NUM."创建EBS资产出现问题:".$tmp->ERROR_MESSAGE.";";
+			}
+			
 			//成功后怎么办
 		}
+		return $error_message;
 	}
 
 }

@@ -273,7 +273,7 @@ function btn_search_clicked() {
 	  	type: 'POST',
 	  	data: { 'asset_status' : $('#asset_status').val(), 'asset_name' : $('#asset_name').val(), 'site_select': $('#site_select').val()},
 	  	success: function (rtn_data) {
-			//console.log(jQuery.parseJSON(rtn_data));
+			console.log(rtn_data);
 			var zTreeObj = $.fn.zTree.getZTreeObj("treeview_selector");
 			var RootNode = [{name: "Search Results"}];//默认的根节点
 			zTreeObj = $.fn.zTree.init($("#treeview_selector"), setting, RootNode);//初始化根节点
