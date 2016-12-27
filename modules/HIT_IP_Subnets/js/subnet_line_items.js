@@ -546,8 +546,12 @@ function insertLineData(hit_ip_subnets, current_view) { // 将数据写入到对
 		$("#line_ip_type_val".concat(String(ln))).val(hit_ip_subnets.ip_type);
 		$("#line_hat_asset_locations_id".concat(String(ln))).val(hit_ip_subnets.hat_asset_locations_id);
 
-		$("#line_status".concat(String(ln))).val(hit_ip_subnets.hiaa_id);
+
+		//$("#line_status".concat(String(ln))).val(hit_ip_subnets.hiaa_id);
 		$("#line_source_id".concat(String(ln))).val(hit_ip_subnets.source_id);
+
+		$("#line_status".concat(String(ln))).val(hit_ip_subnets.allo_qty);
+
 
 		renderTransLine(ln);
 
@@ -930,7 +934,10 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 		$("#displayed_line_name"+ln).text("");
 	}
 
+
 	if($("#line_status"+ln).val()!="") {
+
+	//if($("#line_status"+ln).val()>0) {
 		$("#displayed_line_status"+ln).html("<span class='color_tag color_asset_status_InService'>"+SUGAR.language.get('HIT_IP', 'LBL_ASSIGNED')+"</span>");
 	} else {
 		$("#displayed_line_status"+ln).html("<span class='color_tag color_asset_status_Idle'>"+SUGAR.language.get('HIT_IP', 'LBL_UNASSIGNED')+"</span>");
@@ -939,7 +946,6 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 	if($("#line_source_id"+ln).val()!="") {
 		$("#displayed_line_source_link"+ln).html("<a href='index.php?module=HAM_WO&action=DetailView&record="+$("#line_source_id"+ln).val()+"'>"+SUGAR.language.get('HIT_IP', 'LBL_DETAILS')+"</a>");
 	}
-
 }
 
 function resetItem(ln) { // 在用户重新选择IP之后，会连带的更新相关的字段信息。

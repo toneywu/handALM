@@ -14,7 +14,13 @@ function custom_report_main($paraArray){
     $parameterOperatorArray=$_REQUEST['parameter_operator'];
     $parameterTypeArray=$_REQUEST['parameter_type'];
     $parameterValueArray=$_REQUEST['parameter_value'];
-    
+    /*$str = '<html><body>
+    <div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+    60%
+  </div>
+</div></body></html>';
+echo $str;*/
     /*echo $parameterValueArray[0].$parameterValueArray[1];
     echo end($parameterValueArray);*/
 
@@ -278,13 +284,14 @@ function custom_report_main($paraArray){
         $csv .= encloseForCSV($row['attribute8_c']);
 
     }
-    //print $csv;
+    
     //echo '---------------------3-------------------------';
     $csv= $GLOBALS['locale']->translateCharset($csv, 'UTF-8', $GLOBALS['locale']->getExportCharset());
 
     ob_clean();
     header("Pragma: cache");
-    header("Content-type: text/comma-separated-values; charset=".$GLOBALS['locale']->getExportCharset());
+    header("Content-type: text/comma-separated-values; charset=GBK");
+   /* header("Content-type: text/comma-separated-values; charset=".$GLOBALS['locale']->getExportCharset());*/
     header("Content-Disposition: attachment; filename=\"{$name}.csv\"");
     header("Content-transfer-encoding: binary");
     header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
@@ -295,7 +302,13 @@ function custom_report_main($paraArray){
         $csv = chr(255) . chr(254) . mb_convert_encoding($csv, 'UTF-16LE', 'UTF-8');
     }
 
-    print $csv;
+
+    $name= $GLOBALS['locale']->translateCharset($name, 'UTF-8', $GLOBALS['locale']->getExportCharset());
+    $myfile = fopen("custom/modules/AOR_Reports/rpt_data_files/".$name.".csv", "w") or die("Unable to open file!");
+    fwrite($myfile, $csv);
+    fclose($myfile);
+    print $name.'.csv';
+    //print $csv;
 
     sugar_cleanup(true);
 }

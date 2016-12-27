@@ -106,7 +106,11 @@ array (
           array (
             'name' => 'adjust_posted',
             'label' => 'LBL_ADJUST_POSTED',
-            'customCode' => '<input id="adjust_posted" name="adjust_posted" value="1" title="" tabindex="0" type="checkbox" readonly>',
+            'customCode' => '<select name="adjust_posted[]" id="adjust_posted" title="" disabled="disabled">
+<option label="是" value="Y">是</option>
+<option label="部分" value="P">部分</option>
+<option label="否" value="N">否</option>
+</select><input type="hidden" name="adjust_posted[]" value="Y" />',
           ),
         ),
         5 => 

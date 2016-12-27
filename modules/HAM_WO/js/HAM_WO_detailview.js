@@ -286,9 +286,10 @@ showWOLines();*/
 			action_module='hat_asset_trans_batch';
 		}
 		if(action_module=="操作"){
-			var url=$(this).children().eq(8).find("a").attr("href");
+			var label_a_url=$(this).children().eq(8).find("a");
+			var url=label_a_url.attr("href");
 			if (url=="#") {
-				url=$(this).children().eq(8).find("a").attr("onclick");
+				url=label_a_url.attr("onclick");
 				var url_module=url.split("=")[2];
 				action_module=url_module.split("&")[0].toLowerCase();
 			}else{
@@ -296,24 +297,33 @@ showWOLines();*/
 				action_module=url_module.split("&")[0].toLowerCase();
 			}
 		}
-		switch(woopStatus){
-			case '等待前序':
+		var label_a=$(this).children().eq(7).find("a");
+		var lead_url=label_a.attr("href");
+		var url_arr=decodeURIComponent(lead_url).split("=");
+		var leading=url_arr[5];//负责人
+		var uname=label_a.text().trim();
+		if(woopStatus=="等待前序"){
+			$(woopEdit).removeAttr("href");
+		}
+		if (uname!="认领任务"&&woopStatus=="已批准") {
+			var res=getDealStatu(wo_id,action_module,leading);
+			if (res['leader']=="0") {
+				$(this).children().eq(8).find("a").removeAttr("onclick");
+				$(this).children().eq(8).find("a").removeAttr("href");
+			}
+			if (woopStatus=="已批准"&&res['leader']!="0"&&res['trans_status']=="APPROVED"){
+				return false;//什么都不做
+			}else if(woopStatus=="已批准"&&res['leader']!="0"&&res['trans_status']==null){
+				return false;//什么都不做
+			}else{//其他情况都移除并加上提示
 				$(woopEdit).removeAttr("href");
-			break;
-			case '已批准':
-				var lead_url=$(this).children().eq(7).find("a").attr("href");
-				var courd=decodeURIComponent(lead_url).split("=")[5];
-				var res=getDealStatu(wo_id,action_module,courd);
-				if (res['trans_status']=='DRAFT') {
+				if(res['trans_status']=="DRAFT"){
 					$(woopEdit).removeAttr("href");
 					$(woopEdit).click(function(){
 						alert("请将功能模块的业务处理完，再编辑工序！");
 					});
 				}
-				if (res['leader']=="0") {
-					$(woopEdit).removeAttr("href");
-				}
-			break;
+			}
 		}
 	});
 

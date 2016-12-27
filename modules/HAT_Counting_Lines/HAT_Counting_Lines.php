@@ -48,6 +48,7 @@ class HAT_Counting_Lines extends HAT_Counting_Lines_sugar {
 	}
 	
 	function save($check_notify = FALSE){
+		$this->name=$this->asset;
 		$this->id=parent::save($check_notify);
 		$post_data=$_POST;
 
@@ -66,6 +67,7 @@ class HAT_Counting_Lines extends HAT_Counting_Lines_sugar {
                         $lines->$field_name = $post_data[$key . $field_name][$i];
                     }
                 }
+                $lines->name=$lines->cycle_number;
 	            $lines->save($check_notify);
 	            if (!$post_data['line_id'][$i]) {//新建才加关联关系
 	            	$table='hat_counting_lines_hat_counting_results_c';
@@ -80,24 +82,28 @@ class HAT_Counting_Lines extends HAT_Counting_Lines_sugar {
 	    }
 
 	    for ($i = 0; $i < $line_count1; ++$i) {
-        	$key="line_doc_";
-        	$lines = new Documents();
+	    	$key="line_doc_";
+	    	$document = new Document();
             if ($post_data[$key . 'deleted'][$i] == 1) {
-                $lines->mark_deleted($post_data[$key . 'id'][$i]);
+                $document->mark_deleted($post_data[$key . 'id'][$i]);
             } else {
-                foreach ($lines->field_defs as $field_def) {
+            	
+                foreach ($document->field_defs as $field_def) {
                     $field_name = $field_def['name'];
                     if (isset($post_data[$key . $field_name][$i])) {
-                        $lines->$field_name = $post_data[$key . $field_name][$i];
+                        $document->$field_name = $post_data[$key . $field_name][$i];
                     }
                 }
-	            $lines->save($check_notify);
-	            if (!$post_data['line_id'][$i]) {//新建才加关联关系
-	            	$table='hat_counting_lines_documents_c';
-	            	$relate_values = array('deleted' =>0 ,
+                $file_arr=preg_split('/[.]/', $_FILES['filename_file']['name'][$i]);
+                $document->file_ext=$file_arr[sizeof($file_arr)-1];
+                $document->file_mime_type=$_FILES['filename_file']['type'][$i];
+                $document->filename=$_FILES['filename_file']['name'][$i];
+                
+	            $document->save($check_notify);
+	            $table='hat_counting_lines_documents_c';
+	            $relate_values = array('deleted' =>0 ,
 	            	'hat_counting_lines_documentshat_counting_lines_ida'=>$this->id,
-	            	'hat_counting_lines_documentsdocuments_idb'=>$lines->id );
-	            }
+	            	'hat_counting_lines_documentsdocuments_idb'=>$document->id );
 	            parent::set_relationship($table,$relate_values);
 	        }
 	    }

@@ -39,6 +39,7 @@ array (
           'panelDefault' => 'expanded',
         ),
       ),
+      'syncDetailEditViews' => true,
     ),
     'panels' => 
     array (
@@ -46,58 +47,20 @@ array (
       array (
         0 => 
         array (
-          0 => 'name',
-          1 => 
-          array (
-            'name' => 'product',
-            'studio' => 'visible',
-            'label' => 'LBL_PRODUCT',
-          ),
-        ),
-        1 => 
-        array (
           0 => 
-          array (
-            'name' => 'location',
-            'label' => 'LBL_LOCATION',
-          ),
-          1 => 
-          array (
-            'name' => 'snapshot_quantity',
-            'label' => 'LBL_SNAPSHOT_QUANTITY',
-          ),
-        ),
-        2 => 
-        array (
-          0 => 
-          array (
-            'name' => 'asset_status',
-            'studio' => 'visible',
-            'label' => 'LBL_ASSET_STATUS',
-          ),
-          1 => 
           array (
             'name' => 'counting_task',
             'studio' => 'visible',
             'label' => 'LBL_COUNTING_TASK',
           ),
-        ),
-        3 => 
-        array (
-          0 => 
+          1 => 
           array (
             'name' => 'counting_person',
             'studio' => 'visible',
             'label' => 'LBL_COUNTING_PERSON',
           ),
-          1 => 
-          array (
-            'name' => 'counting_status',
-            'studio' => 'visible',
-            'label' => 'LBL_COUNTING_STATUS',
-          ),
         ),
-        4 => 
+        1 => 
         array (
           0 => 
           array (
@@ -112,19 +75,43 @@ array (
             'label' => 'LBL_ASSET_DESC',
           ),
         ),
-        5 => 
+        2 => 
         array (
           0 => 
           array (
-            'name' => 'part_number',
+            'name' => 'counting_status',
             'studio' => 'visible',
-            'label' => 'LBL_PART_NUMBER',
+            'label' => 'LBL_COUNTING_STATUS',
           ),
           1 => 
+          array (
+            'name' => 'asset_location',
+            'studio' => 'visible',
+            'label' => 'LBL_ASSET_LOCATION',
+          ),
+        ),
+        3 => 
+        array (
+          0 => 
           array (
             'name' => 'oranization',
             'studio' => 'visible',
             'label' => 'LBL_ORANIZATION',
+          ),
+          1 => 
+          array (
+            'name' => 'asset_status',
+            'studio' => 'visible',
+            'label' => 'LBL_ASSET_STATUS',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'asset_major',
+            'studio' => 'visible',
+            'label' => 'LBL_ASSET_MAJOR',
           ),
         ),
       ),

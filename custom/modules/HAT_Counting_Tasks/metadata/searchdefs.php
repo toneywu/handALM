@@ -36,14 +36,6 @@ array (
         'default' => true,
         'name' => 'planed_complete_date',
       ),
-      'snapshot_date' => 
-      array (
-        'type' => 'datetimecombo',
-        'label' => 'LBL_SNAPSHOT_DATE',
-        'width' => '10%',
-        'default' => true,
-        'name' => 'snapshot_date',
-      ),
       'adjust_posted' => 
       array (
         'type' => 'enum',

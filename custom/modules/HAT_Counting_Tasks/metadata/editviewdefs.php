@@ -46,7 +46,7 @@ array (
           'panelDefault' => 'expanded',
         ),
       ),
-      'syncDetailEditViews' => true,
+      'syncDetailEditViews' => false,
     ),
     'panels' => 
     array (
@@ -77,7 +77,6 @@ array (
                 'planed_start_date' => 'planed_start_date',
                 'planed_complete_date' => 'planed_complete_date',
                 'snapshot_date' => 'snapshot_date',
-                'batch_number' => 'task_number',
                 'counting_by_location' => 'counting_by_location',
                 'counting_mode' => 'counting_mode',
                 'counting_scene' => 'counting_scene',
@@ -143,6 +142,11 @@ array (
             'name' => 'adjust_posted',
             'studio' => 'visible',
             'label' => 'LBL_ADJUST_POSTED',
+            'customCode' => '<select name="adjust_posted[]" id="adjust_posted" title="" disabled="disabled">
+<option label="是" value="Y">是</option>
+<option label="部分" value="P">部分</option>
+<option label="否" value="N">否</option>
+</select><input type="hidden" name="adjust_posted[]" value="Y" />',
           ),
         ),
         5 => 
@@ -176,8 +180,13 @@ array (
         ),
         7 => 
         array (
-          0 => 'description',
-          1 => '',
+          0 => 
+          array (
+            'name' => 'manual_add_flag',
+            'label' => 'LBL_MANUAL_ADD_FLAG',
+            'customCode' => '<input id="manual_add_flag" name="manual_add_flag" value="1" title="" tabindex="0" checked="checked" type="checkbox" onclick="return false">',
+          ),
+          1 => 'description',
         ),
       ),
       'lbl_editview_panel1' => 
@@ -191,7 +200,7 @@ array (
             'label' => 'LBL_LOCATION',
             'displayParams' => 
             array (
-              'initial_filter' => '&frame_c_advanced="+$("#haa_framework").val()+"&module_name=HAT_Counting_Tasks',
+              'initial_filter' => '&asset_node=1&frame_c_advanced="+$("#haa_framework").val()+"&module_name=HAT_Counting_Tasks',
             ),
           ),
           1 => 
@@ -201,7 +210,7 @@ array (
             'label' => 'LBL_ORANIZATION',
             'displayParams' => 
             array (
-              'initial_filter' => '&frame_c_advanced="+$("#haa_framework").val()+"&module_name=HAT_Counting_Tasks',
+              'initial_filter' => '&is_asset_org_c=1&org_type_c=INTERNAL&frame_c_advanced="+$("#haa_framework").val()+"&module_name=HAT_Counting_Tasks',
             ),
           ),
         ),
