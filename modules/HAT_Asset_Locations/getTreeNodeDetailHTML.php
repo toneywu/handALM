@@ -67,14 +67,18 @@ function get_jason_field ($haa_ff_id, $label_field_name, $mod_name,  $val_field,
       $field_arr[$arr_num]['label_name']=$row['name'];
       $arr_num++;
     }
+  }
+  if (isset($field_arr)) {
     foreach ($field_arr as $k => $v) {
       if($label_field_name==$v['field']&&$v['fieldtype']=='HIDE'){
         $return_text ='{"lab":"","val":""},';
+        return $return_text;
       }else if($label_field_name==$v['field']&&$v['fieldtype']!='HIDE'){
         $return_text ='{"lab":"'.$v['label_name'].'","val":"'.$val_field.'"},';
+        return $return_text;
       }
     }
-  }else{
+  }
       //End add 20161221
     if ($val_type=="bool") {
       $val_field = ($val_field==0)?'<input type=\"checkbox\">':'<input type=\"checkbox\" checked=\"checked\">';
@@ -86,7 +90,6 @@ function get_jason_field ($haa_ff_id, $label_field_name, $mod_name,  $val_field,
     } else {
       $return_text ='';
     }
-  }
   return $return_text;
 }
 
