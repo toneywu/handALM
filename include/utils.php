@@ -1019,17 +1019,7 @@ function return_application_language($language)
             include "custom/include/language/$lang.lang.php";
             $GLOBALS['log']->info("Found custom language file: $lang.lang.php");
         }
-                // Add By osmond.liu 20161225
-        $instance_loc='';
-        if(isset($_SESSION["current_framework_code"])){
-          $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
-      }
-      $instance_file=$instance_loc."include/language/$lang.lang.php";
-      if (file_exists($instance_file)) {
-        include $instance_file;
-        $GLOBALS['log']->info("Found custom language file: $lang.lang.php");
-    }
-    //End osmond.liu 20161225
+              
     $app_strings_array[] = $app_strings;
 }
 

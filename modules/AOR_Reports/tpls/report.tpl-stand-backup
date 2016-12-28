@@ -1,5 +1,4 @@
 <script src="modules/AOR_Conditions/conditionLines.js"></script>
-<script src="include/javascript/jquery/jquery.form.js"></script> 
 <script>
     report_module = '{$report_module}';
 </script>
@@ -7,16 +6,7 @@
 <div>
     {$charts_content}
 </div>
-<!--Add By ling.zhang01 20161227-->
- <div class="modal" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:100%">
-      <div class="modal-dialog">
-        <div class="modal-content" style="width: 250px; height:90px; margin:250px 50px 40px 250px ; ">
-          <img src="themes/SuiteR_HANDALM/images/img_loading.gif?v=6T2wqZkzRRtQXSbbOJRC2A" align="absmiddle" style="margin:40px 0px 40px 50px ; "> 
-                <b>数据生成中, 请等待...</b>
-        </div>
-      </div>
-</div>
-<!--Add Instance By ling.zhang01 20161227 End-->
+
 <div id='detailpanel_parameters' class='detail view  detail508 expanded hidden'>
     <form onsubmit="return false" id="EditView" name="EditView">
     <h4>
@@ -90,7 +80,7 @@
     <script type="text/javascript">SUGAR.util.doWhen("typeof initPanel == 'function'", function() {ldelim} initPanel('parameters', 'expanded'); {rdelim}); </script>
     </form>
 </div>
- 
+
 <div id='detailpanel_report' class='detail view  detail508 expanded'>
     {counter name="panelFieldCount" start=0 print=false assign="panelFieldCount"}
     <h4>

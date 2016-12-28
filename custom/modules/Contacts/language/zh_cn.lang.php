@@ -58,6 +58,6 @@ $mod_strings = array (
   'LBL_COUNTRIES' => '国籍/区域',
   'LBL_ASSETS_USING_SUBPANEL'=>'正在使用中的',
   'LBL_ASSETS_OWNING_SUBPANEL'=>'拥有所属权的',
-  'LBL_ASSETS_TRANS_SUBPANEL'=>'历史记录'
+  'LBL_ASSETS_TRANS_SUBPANEL'=>'历史记录',
   'LBL_HAT_INCIDENT_SUBPANEL_TITLE'=>'事件管理'
   );

@@ -985,20 +985,4 @@ function get_field_order_mapping($name='',$reorderArr = '', $exclude = true){
     }
 
 }
-//Add By ling.zhang01 20161227
-//生成报表导出数据文件
-function createRptDataFile($filename,$csvdata){
-    $myfile = fopen("custom/modules/AOR_Reports/rpt_data_files/".$filename.".csv", "w") or die("Unable to open file!");
-    fwrite($myfile, $csvdata);
-    fclose($myfile);
-}
-//获取毫秒数时间戳
-function getMillisecond(){ 
-    list($s1,$s2)=explode(' ',microtime()); 
-    return sprintf('%.0f',(floatval($s1)+floatval($s2))*1000); 
-} 
-function encloseForCSV($field,$delimiter =','){
-    return '"'.$field.'"'.$delimiter;
-}
-//Add Instance By ling.zhang01 20161227 End
 ?>

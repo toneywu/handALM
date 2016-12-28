@@ -20,7 +20,7 @@
  *
  * @author SalesAgility <info@salesagility.com>
  */
-
+var file_name='';
 $(document).ready(function() {
 
     $('#download_pdf_button_old').click(function() {
@@ -61,10 +61,15 @@ $(document).ready(function() {
     });
 
     $('#download_csv_button_old').click(function() {
+        //Add By ling.zhang01 20161227
+        $('#myModal1').modal('show');  
+        //Add Instance By ling.zhang01 20161227 End
+        
         //Update the Detail view form to have the parameter info and reload the page
         var _form = $('#formDetailView');
         $('#formDetailView :input[name="action"]').val("Export");
         //Add each parameter to the form in turn
+    
         $('.aor_conditions_id').each(function(index, elem){
             $elem = $(elem);
             var ln = $elem.attr('id').substr(17);
@@ -77,9 +82,50 @@ $(document).ready(function() {
             var fieldInput = $('#aor_conditions_value\\['+ln+'\\]').val();
             _form.append('<input type="hidden" name="parameter_value[]" value="'+fieldInput+'">');
         });
-        _form.submit();
+        
+        //Add By ling.zhang01 20161227
+        var options={  
+        //target : file_name,    // 把服务器返回的内容放入id为output的元素中  
+        //beforeSubmit : showRequest,    // 提交前的回调函数  
+        success : closeDialog,    // 提交后的回调函数  
+        // url : url,    //默认是form的action，如果申明，则会覆盖  
+        //type : 'GET',    // 默认值是form的method("GET" or "POST")，如果声明，则会覆盖  
+        //dataType : 'xml',    // html（默认）、xml、script、json接受服务器端返回的类型  
+        // clearForm : true,    // 成功提交后，清除所有表单元素的值  
+        // resetForm : true,    // 成功提交后，重置所有表单元素的值  
+        // timeout : 3000    // 限制请求的时间，当请求大于3秒后，跳出请求  
+        }  ;
+        // _form.submit();   //原form提交方式
+        _form.ajaxSubmit(options);  
+        //Add Instance By ling.zhang01 20161227 End
     });
 });
+/**
+* Add By ling.zhang01 20161227
+* 提交后的回调函数
+*/
+function closeDialog(data){
+    $('#myModal1').modal('hide');
+    file_name = encodeURIComponent(data) ;
+    download();
+}
+/**
+* 从服务器下载报表数据文件
+*/
+function download(){
+    if($('.ifrm')==null){   
+            var objIframe=document.createElement("IFRAME");   
+            document.body.appendChild(objIframe);
+            objIframe.outerHTML="<iframe name=ifrm style='width:0;hieght:0' ></iframe>";   
+            var re=setTimeout("download()",1);
+     }else{   
+            clearTimeout(re)   
+            files=window.open('custom/modules/AOR_Reports/rpt_data_files/'+file_name,"ifrm");
+            files.document.execCommand("SaveAs");
+            $('.ifrm').remove();
+    }
+}
+//Add Instance By ling.zhang01 20161227 End
 
 function openProspectPopup(){
 
