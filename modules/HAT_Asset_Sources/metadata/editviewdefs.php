@@ -113,8 +113,22 @@ array (
         array (
           0 => 
           array (
-            'name' => 'source_reference',
-            'label' => 'LBL_SOURCE_REFERENCE',
+            'name' => 'cost_center',
+            'label' => 'LBL_COST_CENTER',
+          ),
+          1 => 
+          array (
+            'name' => 'need_by',
+            'label' => 'LBL_NEED_BY',
+          ),
+        ),
+        7 => 
+        array (
+          0 => 
+          array (
+            'name' => 'uom',
+            'studio' => 'visible',
+            'label' => 'LBL_UOM',
           ),
           1 => '',
         ),

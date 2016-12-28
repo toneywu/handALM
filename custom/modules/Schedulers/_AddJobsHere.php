@@ -563,8 +563,10 @@ function sync_jt_po_infos() {
 				$category_name_val = $line_value['CATEGORY_NAME'];
 				$prod_code_val = $line_value['PROD_CODE'];
 				$prod_name_val = $line_value['PROD_NAME'];
+				$cost_center = $line_value['COST_CENTER'];
+				$need_by_val = $line_value['NEED_BY'];
 
-				$GLOBALS['log']->infor("header_id   = " . $po_header_id_val . ',line_number=' . $line_num_val . ",item_name=" . $line_num_val . ",line_id=" . $po_line_id_val);
+				$GLOBALS['log']->infor("header_id   = " . $po_header_id_val . ',line_number=' . $line_num_val . ",item_name=" . $line_num_val . ",line_id=" . $po_line_id_val."cost_center=".$cost_center);
 
 				$check_exists = BeanFactory :: getBean('HAT_Asset_Sources')->get_full_list('', "hat_asset_sources.source_id = '$po_line_id_val'");
 
@@ -573,7 +575,7 @@ function sync_jt_po_infos() {
 					$newLineBean->name = $po_number_val . ':' . $line_num_val;
 					$newLineBean->header_num = $po_number_val;
 					$newLineBean->supplier_desc = $vendor_name_val;
-					$newLineBean->description = $comments_val;
+					$newLineBean->description = $item_description_val;
 					$newLineBean->source_type = $instance_name_val;
 					$newLineBean->line_num = $line_num_val;
 					$newLineBean->item_num = $item_num_val;
@@ -583,6 +585,8 @@ function sync_jt_po_infos() {
 					$newLineBean->haa_frameworks_id = $frame_id;
 					$newLineBean->source_id = $po_line_id_val;
 					$newLineBean->haa_frameworks_id = $frame_bean->id;
+					$newLineBean->cost_center = $cost_center;
+					$newLineBean->need_by = $need_by_val;
 					$newLineBean->save();
 				}
 			}
@@ -1160,6 +1164,8 @@ function sync_xr_po_infos() {
 				$category_name_val = $line_value['CATEGORY_NAME'];
 				$prod_code_val = $line_value['PROD_CODE'];
 				$prod_name_val = $line_value['PROD_NAME'];
+				$cost_center = $line_value['COST_CENTER'];
+				$need_by_val = $line_value['NEED_BY'];
 
 				$GLOBALS['log']->infor("header_id   = " . $po_header_id_val . ',line_number=' . $line_num_val . ",item_name=" . $line_num_val . ",line_id=" . $po_line_id_val);
 
@@ -1170,7 +1176,7 @@ function sync_xr_po_infos() {
 					$newLineBean->name = $po_number_val . ':' . $line_num_val;
 					$newLineBean->header_num = $po_number_val;
 					$newLineBean->supplier_desc = $vendor_name_val;
-					$newLineBean->description = $comments_val;
+					$newLineBean->description = $item_description_val;
 					$newLineBean->source_type = $instance_name_val;
 					$newLineBean->line_num = $line_num_val;
 					$newLineBean->item_num = $item_num_val;
@@ -1180,6 +1186,8 @@ function sync_xr_po_infos() {
 					$newLineBean->haa_frameworks_id = $frame_id;
 					$newLineBean->source_id = $po_line_id_val;
 					$newLineBean->haa_frameworks_id = $frame_bean->id;
+					$newLineBean->cost_center = $cost_center;
+					$newLineBean->need_by = $need_by_val;
 					$newLineBean->save();
 				}
 			}
