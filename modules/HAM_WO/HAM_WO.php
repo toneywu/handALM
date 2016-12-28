@@ -43,6 +43,7 @@ class HAM_WO extends HAM_WO_sugar {
 			}
 		}
 
+		//history
 		// 在资产事务处理保存时判断，如果事务处理的行状态达标，则更新资产状态
 		$focus_wo_status = $this->wo_status;
 		if ($focus_wo_status == 'SUBMITTED') {
@@ -70,56 +71,8 @@ class HAM_WO extends HAM_WO_sugar {
 				}
 			}
 		}
-
-		//工作单审批通过时（APPROVED）会将工单下第一道工序状态变为已批准（APPROVED）。其余工序状态变为等待前序（WPREV）。
-		//这里的第一道工序、以及后序工序不包括已经删除、取消或结束的工序
-		if (($this->wo_status == "SUBMITTED" || $this->wo_status == "APPROVED")&&$db_bean[0]->wo_status!="APPROVED") {
-			//工作单审批后会判断计划时间如果没有填写，如果没有进行手工排程，按目标时间进行默认
-			if ($this->date_schedualed_start == "") { $this->date_schedualed_start = $this->date_target_start; }
-			if ($this->date_schedualed_finish == "") { $this->date_schedualed_finish = $this->date_target_finish; }
-			if ($this->plan_fixed == "") { $this->plan_fixed = true; }
-
-
-			//遍历工序
-
-			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('woop_number', "ham_woop.woop_status not in ('CLOSED','CANCELED') and ham_wo_id='" . $this->id . "'");
-
-			if (!empty ($ham_woops)) {
-
-				foreach ($ham_woops as $key => $value) {
-					if ($key == 0) {
-
-						$ham_woops[0]->woop_status = "APPROVED";
-
-					} else {
-						$ham_woops[$key]->woop_status = "WPREV";
-					}
-					$ham_woops[$key]->save();
-				}
-
-			}
-		}
-		elseif ($this->wo_status == "CANCELED"&&$db_bean[0]->wo_status!="CANCELED") {
-			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('WOOP_NUMBER', "ham_woop.woop_status not in ('COMPLETED','CLOSED') and ham_wo_id='" . $this->id . "'");
-			if (!empty ($ham_woops)) {
-
-				foreach ($ham_woops as $key => $value) {
-					$ham_woops[$key]->woop_status = "CANCELED";
-					$ham_woops[$key]->save();
-				}
-
-			}
-		}
-		elseif (($this->wo_status == "COMPLETED" || $this->wo_status == "CLOSED")&&($db_bean[0]->wo_status!="COMPLETED"&&$db_bean[0]->wo_status!="CLOSED")) {
-			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('WOOP_NUMBER', "ham_wo_id='" . $this->id . "'");
-			if (!empty ($ham_woops)) {
-
-				foreach ($ham_woops as $key => $value) {
-					$ham_woops[$key]->woop_status = $this->wo_status;
-					$ham_woops[$key]->save();
-				}
-			}
-		}
+		
+		
 		
 		if (isset ($this->source_type) && $this->source_type != "") {
 			//$this->source_type="";
@@ -155,7 +108,6 @@ class HAM_WO extends HAM_WO_sugar {
 
 		$checkBean = BeanFactory :: getBean("HAM_WOOP");
 		$ham_woops = $checkBean->get_full_list('', "ham_woop.ham_wo_id ='" . $this->id . "'");
-		//echo 'ham_woops='.count($ham_woops);
 		if (count($ham_woops) == 0) {
 			//<1>.引用标准作业动力
 			if (count($ham_act_ops) > 0 && $bean_id != null) {
@@ -222,6 +174,62 @@ class HAM_WO extends HAM_WO_sugar {
 				$ham_woop_bean->save();
 			}
 		}
+		
+		//modify start 
+		
+
+		//工作单审批通过时（APPROVED）会将工单下第一道工序状态变为已批准（APPROVED）。其余工序状态变为等待前序（WPREV）。
+		//这里的第一道工序、以及后序工序不包括已经删除、取消或结束的工序
+		if (($this->wo_status == "SUBMITTED" || $this->wo_status == "APPROVED")&&$db_bean[0]->wo_status!="APPROVED") {
+			$this->wo_status="APPROVED";
+			//工作单审批后会判断计划时间如果没有填写，如果没有进行手工排程，按目标时间进行默认
+			if ($this->date_schedualed_start == "") { $this->date_schedualed_start = $this->date_target_start; }
+			if ($this->date_schedualed_finish == "") { $this->date_schedualed_finish = $this->date_target_finish; }
+			if ($this->plan_fixed == "") { $this->plan_fixed = true; }
+			//遍历工序
+
+			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('woop_number', "ham_woop.woop_status not in ('CLOSED','CANCELED') and ham_wo_id='" . $this->id . "'");
+
+			if (!empty ($ham_woops)) {
+
+				foreach ($ham_woops as $key => $value) {
+					if ($key == 0) {
+
+						$ham_woops[0]->woop_status = "APPROVED";
+
+					} else {
+						$ham_woops[$key]->woop_status = "WPREV";
+					}
+					$ham_woops[$key]->save();
+				}
+
+			}
+		}
+		elseif ($this->wo_status == "CANCELED"&&$db_bean[0]->wo_status!="CANCELED") {
+			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('WOOP_NUMBER', "ham_woop.woop_status not in ('COMPLETED','CLOSED') and ham_wo_id='" . $this->id . "'");
+			if (!empty ($ham_woops)) {
+
+				foreach ($ham_woops as $key => $value) {
+					$ham_woops[$key]->woop_status = "CANCELED";
+					$ham_woops[$key]->save();
+				}
+
+			}
+		}
+		elseif (($this->wo_status == "COMPLETED" || $this->wo_status == "CLOSED")&&($db_bean[0]->wo_status!="COMPLETED"&&$db_bean[0]->wo_status!="CLOSED")) {
+			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('WOOP_NUMBER', "ham_wo_id='" . $this->id . "'");
+			if (!empty ($ham_woops)) {
+
+				foreach ($ham_woops as $key => $value) {
+					$ham_woops[$key]->woop_status = $this->wo_status;
+					$ham_woops[$key]->save();
+				}
+			}
+		}
+		//modify end 
+		
+		
+		
 
 		$contract_id = $this->contract_id;
 		//合同
@@ -286,12 +294,64 @@ class HAM_WO extends HAM_WO_sugar {
 	function get_list_view_data() {
 		//refer to the task module as an example
 		//or refer to the asset module as the first customzation module with this feature
-		global $app_list_strings, $timedate;
+		global $app_list_strings, $timedate, $db;
 
 		$WO_fields = $this->get_list_view_array();
 		//为工作单的状态着色
 		if (!empty ($this->wo_status))
 			$WO_fields['WO_STATUS_VAL'] = $this->wo_status;
+
+		
+
+		$sel = "SELECT 
+				  accounts.`name` account_name,
+				  accounts.id account_id,
+				   hat_asset_locations.name location_name,
+				   hat_asset_locations.id location_id,
+				   hat_assets.name asset_name,
+				   hat_assets.id asset_id,
+				   ham_work_centers.name work_center_name,
+				   ham_work_centers.id work_center_id,
+				   ham_work_center_people.`name` work_center_people_name,
+				   ham_work_center_people.id work_center_people_id
+				FROM
+				  ham_wo 
+				  LEFT JOIN accounts 
+				    ON ham_wo.`account_id` = accounts.`id` 
+				  LEFT JOIN hat_asset_locations 
+				    ON hat_asset_locations.id = ham_wo.`hat_asset_locations_id` 
+				  LEFT JOIN hat_assets 
+				    ON hat_assets.id = ham_wo.`hat_assets_id` 
+				  LEFT JOIN ham_work_centers
+				    ON ham_work_centers.id = ham_wo.`work_center_id`
+				  LEFT JOIN ham_work_center_people
+				  ON ham_work_center_people.id = ham_wo.`work_center_people_id`
+				WHERE ham_wo.id ='".$this->id."'";
+
+		$beanSEL = $db->query($sel); //无如是Location还是asset来源，都可以显示子资产
+
+		$WO_WORK_OBJECT = "";
+		$WO_OWNER = "";
+	    while ( $result = $db->fetchByAssoc($beanSEL) ) {
+	    	if (!empty ($result['account_name']))
+				$WO_WORK_OBJECT .= '<a href="index.php?module=Accounts&action=DetailView&record='.$result['account_id'].'">'
+									.$result['account_name'].'</a> ';
+
+			if (!empty ($result['location_name']))
+				$WO_WORK_OBJECT .= "@".'<a href="index.php?module=HAT_Asset_Locations&action=DetailView&record='.$result['location_id'].'">'.$result['location_name']." ";
+
+			if (!empty ($result['asset_name']))
+				$WO_WORK_OBJECT .= "[".'<a href="index.php?module=HAT_Assets&action=DetailView&record='.$result['asset_id'].'">'.$result['asset_name']."]";
+		
+			if (!empty ($result['work_center_people_name']))
+				$WO_OWNER .= $result['work_center_people_name'];
+			if (!empty ($result['work_center_name']))
+				$WO_OWNER .= "@".$result['work_center_name'];
+		}
+		$WO_fields['WO_WORK_OBJECT'] = $WO_WORK_OBJECT;
+		$WO_fields['WO_OWNER'] = $WO_OWNER;
+
+
 
 		return $WO_fields;
 	}
