@@ -50,22 +50,33 @@ class HAT_Counting_Tasks extends HAT_Counting_Tasks_sugar {
 	function save($check_notify = FALSE){
 		global $sugar_config;
 		global $db;
-		
-		if($this->task_number==''){
-			$sql_loc="SELECT
-			hal.`name` loc_name
+			//拼接盘点任务名称
+			$sql_cate="SELECT
+			hal.`name` cate_name
 			FROM
-			hat_asset_locations hal
+			aos_product_categories hal
 			WHERE
 			1 = 1
-			AND hal.id = '".$this->hat_asset_locations_id_c."'";
-			$result_loc=$db->query($sql_loc);
-			if($row_loc=$db->fetchByAssoc($result_loc)){
-				if($row_loc["loc_name"]){
-					$this->name=$row_loc["loc_name"].'-'.$this->name;
+			AND hal.id = '".$this->aos_product_categories_id_c."'";
+			$result_cate=$db->query($sql_cate);
+			if($row_cate=$db->fetchByAssoc($result_cate)){
+				if($row_cate["cate_name"]){
+					$this->name=$row_cate["cate_name"].'-'.$this->name;
 				}
 			}
-
+			$sql_code="SELECT
+			hal.`name` code_name
+			FROM
+			haa_codes hal
+			WHERE
+			1 = 1
+			AND hal.id = '".$this->haa_codes_id_c."'";
+			$result_code=$db->query($sql_code);
+			if($row_code=$db->fetchByAssoc($result_code)){
+				if($row_code["code_name"]){
+					$this->name=$row_code["code_name"].'-'.$this->name;
+				}
+			}
 			$sql_org="SELECT
 			hal.`name` org_name
 			FROM
@@ -80,32 +91,21 @@ class HAT_Counting_Tasks extends HAT_Counting_Tasks_sugar {
 				}
 			}
 
-			$sql_code="SELECT
-			hal.`name` code_name
+			$sql_loc="SELECT
+			hal.`name` loc_name
 			FROM
-			haa_codes hal
+			hat_asset_locations hal
 			WHERE
 			1 = 1
-			AND hal.id = '".$this->haa_codes_id_c."'";
-			$result_code=$db->query($sql_code);
-			if($row_code=$db->fetchByAssoc($result_code)){
-				if($row_code["code_name"]){
-					$this->name=$row_code["code_name"].'-'.$this->name;
+			AND hal.id = '".$this->hat_asset_locations_id_c."'";
+			$result_loc=$db->query($sql_loc);
+			if($row_loc=$db->fetchByAssoc($result_loc)){
+				if($row_loc["loc_name"]){
+					$this->name=$row_loc["loc_name"].'-'.$this->name;
 				}
 			}
-			$sql_cate="SELECT
-			hal.`name` cate_name
-			FROM
-			aos_product_categories hal
-			WHERE
-			1 = 1
-			AND hal.id = '".$this->aos_product_categories_id_c."'";
-			$result_cate=$db->query($sql_cate);
-			if($row_cate=$db->fetchByAssoc($result_cate)){
-				if($row_cate["cate_name"]){
-					$this->name=$row_cate["cate_name"].'-'.$this->name;
-				}
-			}
+
+		if($this->task_number==''){
 			
 			$sql="SELECT
 			MAX(hct.task_number) task_number_max,hcb.batch_number

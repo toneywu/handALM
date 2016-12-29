@@ -200,7 +200,7 @@ array (
             'label' => 'LBL_LOCATION',
             'displayParams' => 
             array (
-              'initial_filter' => '&asset_node=1&frame_c_advanced="+$("#haa_framework").val()+"&module_name=HAT_Counting_Tasks',
+              'initial_filter' => '&asset_node_advanced=1&frame_c_advanced="+$("#haa_framework").val()+"&module_name=HAT_Counting_Tasks',
             ),
           ),
           1 => 
@@ -210,7 +210,7 @@ array (
             'label' => 'LBL_ORANIZATION',
             'displayParams' => 
             array (
-              'initial_filter' => '&is_asset_org_c=1&org_type_c=INTERNAL&frame_c_advanced="+$("#haa_framework").val()+"&module_name=HAT_Counting_Tasks',
+              'initial_filter' => '&is_asset_org_c_advanced=1&org_type_c_advanced=INTERNAL&frame_c_advanced="+$("#haa_framework").val()+"&module_name=HAT_Counting_Tasks',
             ),
           ),
         ),

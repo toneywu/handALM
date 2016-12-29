@@ -10,6 +10,7 @@ $(document).ready(function() {
     //Add by zengchen 20161219
     setAmount_c();
     $("#status").change(function(){
+        $("#amount_c").val("");
     	setAmount_c();
     });
 
@@ -20,13 +21,17 @@ $(document).ready(function() {
     	$("#amount_c").removeAttr("placeholder");
     	switch(statu){
     		case "Paid":
+                $("#unpaied_amount_c").val("");
     			$("#amount_c").val($("#total_amount").val());
     		break;
     		case "Unpaid":
     			$("#amount_c").val("0.00");
+                $("#unpaied_amount_c").val($("#total_amount").val());
+                alert("以往租金包括未完全支付后剩余款项。");
     		break;
     		case "Cancelled":
     			$("#amount_c").val("");
+                $("#unpaied_amount_c").val("");
     		break;
     		case "PartedPaid":
     			$("#amount_c").removeAttr("readonly");
@@ -36,7 +41,9 @@ $(document).ready(function() {
                     var total_amount=$("#total_amount").val().replace(/,/g,"");//去除除千分符
     				if (parseFloat(amount_c)<=0||parseFloat(amount_c)>=parseFloat(total_amount)) {
     					$("#amount_c").val("");
-    				}
+    				}else{
+                        $("#unpaied_amount_c").val(parseFloat(total_amount)-parseFloat(amount_c));
+                    }
     			});
     		break;
     	}
@@ -92,7 +99,6 @@ function setCloseDate(){
     if ($("#closed_date_c").text()!="") {
         return false;
     }
-    console.log($("#closed_date_c"));
     var message="是否将未结金额转入后期结算?";
     var record=$("input[name='record']").val();
     var url="?module=AOS_Invoices&action=setCloseDate&to_pdf=true";

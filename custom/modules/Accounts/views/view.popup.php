@@ -10,19 +10,18 @@ class AccountsViewPopup extends ViewPopup
 
 
       global $mod_strings, $app_strings, $app_list_strings;
-        global $db;
+      global $db;
           if (empty($_REQUEST['haa_frameworks_id_c_advanced'])) {          //如果界面没有供出对应的值，此仅列出当前Session选定组织的Framework
             $haa_frameworks_id=$_SESSION["current_framework"];
             $_REQUEST['haa_frameworks_id_c_advanced']=$haa_frameworks_id;
-          }
+        }
 
-          if (isset($_GET['module_name']) && (/*$_GET['module_name'] =='HAT_Counting_Tasks' ||*/ $_GET['module_name'] =='HAT_Counting_Batchs')){
-
+        if(/*$_GET['module_name'] =='HAT_Counting_Tasks' ||*/ $_GET['module_name'] =='HAT_Counting_Batchs'){
 /*        if(($this->bean instanceOf SugarBean) && !$this->bean->ACLAccess('list')){
             ACLController::displayNoAccess();
             sugar_cleanup(true);
         }
-*/
+*/      
         //var_dump($_REQUEST['allnodes']);
       /*  if (isset($_REQUEST['allnodes']) &&($_REQUEST['allnodes']=='1'||$_REQUEST['allnodes']=='true')){
         echo "<script>var allnodes=true;</script>";
@@ -54,38 +53,39 @@ class AccountsViewPopup extends ViewPopup
         /***************************************************************/
         /* 以下为加载数据
         /*****************************************************************/
-        $beanEventTypes = BeanFactory::getBean('Accounts')->get_full_list($order_by = "",$where = "accounts_cstm.org_type_c='INTERNAL' and accounts_cstm.is_asset_org_c =1 and accounts_cstm.haa_frameworks_id_c='".$_SESSION["current_framework"]."'");
-            //var_dump($_SESSION["current_framework"]);
-           // $txt_jason="";
-          //  $txt_jason = '{name:"IP Addresses", open:true, isParent:true, pId:0, id:"ROOT"},';
-            //$beanEventTypes = BeanFactory::getBean('HAT_EventType')->get_full_list('name',"hat_eventtype.basic_type = '".$_REQUEST['basic_type_advanced']."' AND hat_eventtype.haa_frameworks_id= '".$_SESSION["current_framework"]."'");
-            //var_dump($app_list_strings);
         $txt_jason='{name:"'.$mod_strings['LBL_MODULE_NAME'].'", open:false, isParent:true,pId:0,id:"ROOT"},';
-       
-        if (isset($beanEventTypes)) {
-            foreach ($beanEventTypes as $beanEventType) {
-                $txt_jason.="{";
-                foreach ($beanEventType->field_name_map as $key => $value) {
-                        //echo $key."=".(gettype($value)).":"."<br/>";
-                    if ($key == 'parent_id'){
+        $sql="SELECT
+        a.*
+        FROM
+        accounts a,
+        accounts_cstm ac
+        WHERE
+        a.id = ac.id_c
+        AND a.deleted = 0
+        AND ac.haa_frameworks_id_c = '".$_SESSION["current_framework"]."'
+        AND ac.org_type_c = 'INTERNAL'
+        AND ac.is_asset_org_c = 1";
+        $result=$db->query($sql);
+        $resArr="";
+        while($row=$db->fetchByAssoc($result)){
+            $txt_jason.="{";
+            foreach ($row as $k => $v) {
+                if ($k == 'parent_id'){
                             //Parent_eventtype_id需要特别处理
-                        $txt_jason .='pId:"'.(($beanEventType->parent_eventtype_id=="")?"ROOT":$beanEventType->parent_eventtype_id).'",';
-                    }else {
-                        if (isset($beanEventType->$key)) {
-                            $txt_jason .=$key.':"'.$beanEventType->$key.'",';
-                        }
+                    $txt_jason .= 'pId:"'.($v==""?"ROOT":$v).'",';
+                }else {
+                    if (isset($k)) {
+                        $txt_jason .=$k.':"'.$v.'",';
                     }
                 }
-                    $txt_jason  = substr($txt_jason,0,strlen($txt_jason)-1);//去除最后一个,
-                    $txt_jason.="},";
-                }
             }
+            $txt_jason  = substr($txt_jason,0,strlen($txt_jason)-1);
+            $txt_jason.="},";
+        }
             $txt_jason  = substr($txt_jason,0,strlen($txt_jason)-1);//去除最后一个,
             $txt_jason .= "}";
             $txt_jason=substr($txt_jason,0,strlen($txt_jason)-1);
-            //$txt_jason='{"node":['.$txt_jason.']}';
             $txt_jason='['.$txt_jason.']';
-            //echo($txt_jason);
             echo('<script>var zNodes = '.$txt_jason.'</script>');
             echo ('<script type="text/javascript" src="custom/modules/Accounts/js/Accounts_popupview.js"></script>');//
         }else{

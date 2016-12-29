@@ -116,7 +116,12 @@ class AOS_InvoicesController extends SugarController {
 			global $timedate;
 			$this->bean->closed_date_c=date_format(date_create($timedate->nowDb()),"Y-m-d");
 		}
-
+		if ($this->bean->status=="PartedPaid") {
+			$total_amount=preg_replace("/,/", "", $this->bean->total_amount);
+			$amount_c =preg_replace("/,/", "", $this->bean->amount_c);
+			$this->bean->unpaied_amount_c=number_format(($total_amount-$amount_c),'2','.',',');
+		}
+		//$this->bean->unpaied_amount_c=($this->bean->total_amount)-($this->bean->amount_c);
 	}
 
 	public function post_save()

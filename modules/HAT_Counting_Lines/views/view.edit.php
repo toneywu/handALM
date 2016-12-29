@@ -11,6 +11,11 @@ class HAT_Counting_LinesViewEdit extends ViewEdit
 			$this->bean->counting_task=$bean_request->name ;
 			$this->bean->hat_counting_tasks_id_c=$bean_request->id ;
 			$this->bean->counting_person=$bean_request->counting_person ;
+			echo '<script>
+			$(function(){
+				$("#counting_person").val("'.$bean_request->counting_person.'");
+			})
+				</script>';
 		}
 		require_once('modules/HAA_Frameworks/orgSelector_class.php');
 		$current_framework_id = empty($this->bean->hat_framework_id)?"":$this->bean->hat_framework_id;
@@ -25,7 +30,6 @@ class HAT_Counting_LinesViewEdit extends ViewEdit
 
 		   $modules=array(
 			'HAT_Counting_Results',
-			'Documents',
 			);	
 		foreach($modules as $module){
 			if(!is_file($GLOBALS['sugar_config']['cache_dir'].'jsLanguage/'.$module.'/'.$GLOBALS['current_language'].'.js')){

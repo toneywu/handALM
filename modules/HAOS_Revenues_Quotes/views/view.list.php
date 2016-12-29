@@ -18,6 +18,14 @@ class HAOS_Revenues_QuotesViewList extends ViewList
 
 	function display(){
 		parent::display();
+		echo '<script>
+			$(function(){
+				$("button[name=btn_event_type_basic]").removeAttr("onclick");
+				$("button[name=btn_event_type_basic]").click(function(){
+					open_popup("HAT_EventType", 600, 400, "&basic_type_advanced=REVENUE", true, false, {"call_back_function":"set_return","form_name":"search_form","field_to_name_array":{"id":"hat_eventtype_id_c_basic","name":"event_type_basic"}}, "single", true);
+				});
+			});
+		</script>';
 		echo "<script>
 			if($(\"#createInvoiceBtn\").length==0){
 			var createInvBtn=$('<input id=\"createInvoiceBtn\" type=\"button\" value=\"创建发票\" onclick=\"createInvoices()\">');

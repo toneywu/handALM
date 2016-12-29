@@ -44,9 +44,10 @@ LEFT JOIN haa_codes hc on hc.id = hcr.haa_codes_id_c
 WHERE
 	hcr.id = hcl.hat_counting_lines_hat_counting_resultshat_counting_results_idb
 AND hcr.deleted = 0
+and hcl.deleted=0
 and hcl.hat_counting_lines_hat_counting_resultshat_counting_lines_ida ='".$focus->id."'";
 							
-				
+				var_dump($sql);
             $result = $focus->db->query($sql);
 				
 		while ($row = $focus->db->fetchByAssoc($result)) {

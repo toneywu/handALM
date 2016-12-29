@@ -92,12 +92,15 @@ class SearchForm {
         global $app_strings;
 
         $this->module = $module;
-        $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
         require_once('modules/' . $module . '/metadata/SearchFields.php');
         if(file_exists('custom/modules/' . $module . '/metadata/SearchFields.php')){
             require_once('custom/modules/' . $module . '/metadata/SearchFields.php');
         }
           // Add By osmond.liu 20161218
+                      $instance_loc='instance/PUBLIC/';
+if(isset($_SESSION["current_framework_code"])){
+  $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+}
         if(file_exists($instance_loc.'modules/' . $module . '/metadata/SearchFields.php')){
             require_once($instance_loc.'modules/' . $module . '/metadata/SearchFields.php');
         }

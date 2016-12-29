@@ -32,6 +32,10 @@ class AOS_InvoicesViewDetail extends ViewDetail {
 				echo '<script>call_ff()</script>';
 			}
 		}
+		$paid_amount=($this->bean->total_amount)-($this->bean->unpaied_amount_c);
+		echo "<script>
+			$('#status').parent().text($('#status').parent().text()+' ".$paid_amount."');
+		</script>";
 	}
 	
 	function populateInvoiceTemplates(){

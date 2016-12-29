@@ -83,4 +83,5 @@ $mod_strings = array (
   'LBL_SERVICE_URL' => '服务URL',
   'LBL_PARAMETER_INFO' => '请求参数',
   'LBL_REQUEST_SAMPLE' => '请求样例',
+  'LBL_EXECUTE_FUNC_FILES'=>'执行程序文件',
 );

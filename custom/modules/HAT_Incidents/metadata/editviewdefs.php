@@ -104,7 +104,11 @@ array (
               'asset_desc' => 'asset_name',
               'id' => 'hat_assets_id_c',
               'asset_number' => 'asset_number',
+              'using_person' => 'person_name',
+              'using_person_id' => 'contact_id_c',
+              'person_number' => 'person_number',
               ),
+            'call_back_function' => 'setHatAssetsRetuen',
             ),
           ),
         1 => 

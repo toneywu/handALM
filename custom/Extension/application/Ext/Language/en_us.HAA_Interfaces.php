@@ -39,3 +39,7 @@
 
 
 $app_list_strings['moduleList']['HAA_Interfaces'] = '接口管理';
+$app_list_strings['haa_interface_type_list']=array (
+  'WS' => 'WebService',
+  'TEXT' => '文本',
+);

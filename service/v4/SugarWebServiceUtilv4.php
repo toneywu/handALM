@@ -513,7 +513,12 @@ class SugarWebServiceUtilv4 extends SugarWebServiceUtilv3_1
 	{
 	    global $beanList, $beanFiles;
 	    $results = array();
-	    $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+	    // Add By osmond.liu 20161219
+	                  $instance_loc='instance/PUBLIC/';
+if(isset($_SESSION["current_framework_code"])){
+  $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+}
+//End Add By osmond.liu 20161219
 	    switch ($type)
 	    {
 	        case 'wireless':

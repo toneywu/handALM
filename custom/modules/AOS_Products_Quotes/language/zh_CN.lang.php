@@ -1,5 +1,5 @@
 <?php
-// created: 2016-12-02 00:29:17
+// created: 2016-12-27 10:27:35
 $mod_strings = array (
   'LBL_SETTLEMENT_PERIOD_C' => '结算周期',
   'LBL_INITIAL_ACCOUNT_DAY' => '首次结算日',
@@ -63,4 +63,5 @@ $mod_strings = array (
   'LBL_FINAL_ACCOUNT_DAY' => '最后结算日期',
   'LBL_REVENUE_QUOTE_HAOS_REVENUES_QUOTES_ID' => '收支计费项 (related  ID)',
   'LBL_REVENUE_QUOTE' => '收支计费项',
+  'LBL_NUMBER_OF_PERIODS' => '结算期数',
 );

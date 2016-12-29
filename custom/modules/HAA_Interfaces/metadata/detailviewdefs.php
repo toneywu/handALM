@@ -14,6 +14,10 @@ array (
           1 => 'DUPLICATE',
           2 => 'DELETE',
           3 => 'FIND_DUPLICATES',
+          4 => 
+          array (
+            'customCode' => '<input type="button" class="button" onClick="" value="执行同步">',
+            ),
         ),
       ),
       'maxColumns' => '2',
@@ -99,7 +103,12 @@ array (
         ),
         4 => 
         array (
-          0 => 'description',
+          0 => 
+          array (
+            'name' => 'execute_func_files',
+            'label' => 'LBL_EXECUTE_FUNC_FILES',
+          ),
+          1 => 'description',
         ),
       ),
       'lbl_detailview_panel1' => 

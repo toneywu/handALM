@@ -46,6 +46,7 @@ array (
             'name' => 'frameworks',
             'studio' => 'visible',
             'label' => 'LBL_FRAMEWORKS',
+            'customCode' => '{$FRAMEWORK_C}',
           ),
           1 => '',
         ),
@@ -93,7 +94,12 @@ array (
         ),
         4 => 
         array (
-          0 => 'description',
+          0 => 
+          array (
+            'name' => 'execute_func_files',
+            'label' => 'LBL_EXECUTE_FUNC_FILES',
+          ),
+          1 => 'description',
         ),
       ),
       'lbl_editview_panel1' => 

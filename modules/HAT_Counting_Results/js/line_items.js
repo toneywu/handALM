@@ -1,6 +1,7 @@
 var prodln = 0;
 var columnNum = 14;
 var lineno;
+var num=0;
 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
 
 function insertLineHeader(tableid){
@@ -134,7 +135,7 @@ z1.innerHTML  =
   x.innerHTML  = "<td colSpan='"+columnNum+"'><table id='member' width='100%'>"+
   "<tr>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_CYCLE_NUMBER')+"<span class='required'>*</span></td>"+
-    "<td><input id='line_cycle_number"+prodln+"' name='line_cycle_number["+prodln+"]'  type='text' value='1'></td>"+
+    "<td><input id='line_cycle_number"+prodln+"' name='line_cycle_number["+prodln+"]'  type='text' value=''></td>"+
     /*"<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_ACTUAL_QUANTITY')+"</td>"+
     "<td><input id='line_actual_quantity"+prodln+"' name='line_actual_quantity["+prodln+"]'  type='text' value='' onblur='setdefaultqty("+prodln+")'></td>"+*/
     "<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_ACTUAL_ORANIZATION')+"</td>"+
@@ -205,7 +206,7 @@ z1.innerHTML  =
     clr_value('#line_organization_name','#line_account_id_c',prodln);
     clr_value('#line_location_name','#line_hat_asset_locations_id_c',prodln);
     clr_value('#line_code_name','#line_haa_codes_id_c',prodln);
-
+    num=prodln;
     renderLine(prodln);
     prodln++;
     return prodln - 1;
@@ -251,8 +252,10 @@ function insertLineFootor(tableid)
 
 function addNewLine(tableid) {
   if (check_form('EditView')) {//只有必须填写的字段都填写了才可以新增
-    insertLineElements(tableid);//加入新行
-    LineEditorShow(prodln-1);       //打开行编辑器
+ 
+  insertLineElements(tableid);//加入新行
+    LineEditorShow(prodln-1);       //打开行编辑器 
+    setdefaultnum(num);  
   }
 }
 
@@ -365,7 +368,7 @@ function openCodePopup(ln){
     }
   };
   //var contact='&code_type_advanced=asset_counting_obj_type';
-  var frame='&frame_c_advanced='+$("#line_framework").val();
+  var frame='&code_type_advanced=asset_counting_major_type&frame_c_advanced='+$("#line_framework").val();
   open_popup('HAA_Codes', 800, 850, frame, true, true, popupRequestData);
 }
 
@@ -489,4 +492,9 @@ function setadjustneed(ln){
     document.getElementById("line_adjust_needed"+ln).checked=false;
     $('#line_adjust_needed'+ln).val('0');
   }
+}
+
+function setdefaultnum(ln){
+  var default_num =ln+1;
+  document.getElementById("line_cycle_number"+ln).value=default_num;
 }

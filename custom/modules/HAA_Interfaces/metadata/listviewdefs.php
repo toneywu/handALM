@@ -2,16 +2,6 @@
 $module_name = 'HAA_Interfaces';
 $listViewDefs [$module_name] = 
 array (
-  'FRAMEWORKS' => 
-  array (
-    'type' => 'relate',
-    'studio' => 'visible',
-    'label' => 'LBL_FRAMEWORKS',
-    'id' => 'HAA_FRAMEWORKS_ID_C',
-    'link' => true,
-    'width' => '10%',
-    'default' => true,
-  ),
   'NAME' => 
   array (
     'width' => '32%',
@@ -58,6 +48,13 @@ array (
     'default' => true,
     'label' => 'LBL_ENABLED_FLAG',
     'width' => '10%',
+  ),
+  'EXECUTE_FUNC_FILES' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_EXECUTE_FUNC_FILES',
+    'width' => '10%',
+    'default' => true,
   ),
   'DESCRIPTION' => 
   array (

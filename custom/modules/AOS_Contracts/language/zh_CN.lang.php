@@ -1,5 +1,5 @@
 <?php
-// created: 2016-10-20 17:56:24
+// created: 2016-12-27 10:52:48
 $mod_strings = array (
   'LBL_CONTACT' => '人员',
   'LBL_TYPE_HAA_CODES_ID' => '合同类型 (related  ID)',
@@ -28,11 +28,12 @@ $mod_strings = array (
   'LBL_ATTRIBUTE1_C' => '附加属性1',
   'LBL_SETTLEMENT_PERIOD_C' => '结算周期',
   'LBL_INITIAL_ACCOUNT_DAY' => '首次结算日',
-  'LBL_EFFECTIVE_START_C' =>'生效日期',
-  'LBL_EFFECTIVE_END_C' =>'终止日期',
-  'LBL_UOM_NAME_C'=>'单位',
-  'LBL_CREATE_REVENUE'=>'创建收支项',
-  'LBL_HAOS_REVENUES_QUOTES'=>'收支计费项',
-  'LBL_NEXT_ACCOUNT_DAY'=>'下次结算日期',
-  'LBL_FINAL_ACCOUNT_DAY'=>'最后结算日期',
+  'LBL_EFFECTIVE_START_C' => '生效日期',
+  'LBL_EFFECTIVE_END_C' => '终止日期',
+  'LBL_UOM_NAME_C' => '单位',
+  'LBL_CREATE_REVENUE' => '创建收支项',
+  'LBL_HAOS_REVENUES_QUOTES' => '收支计费项',
+  'LBL_NEXT_ACCOUNT_DAY' => '下次结算日期',
+  'LBL_FINAL_ACCOUNT_DAY' => '最后结算日期',
+  'LBL_NUMBER_OF_PERIODS' => '合同期数',
 );

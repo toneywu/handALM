@@ -394,6 +394,28 @@ $dictionary['HAA_Interfaces'] = array(
     'rows' => '4',
     'cols' => '20',
   ),
+  'execute_func_files' => 
+  array (
+    'required' => false,
+    'name' => 'execute_func_files',
+    'vname' => 'LBL_EXECUTE_FUNC_FILES',
+    'type' => 'varchar',
+    'massupdate' => 0,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'true',
+    'duplicate_merge' => 'disabled',
+    'duplicate_merge_dom_value' => '0',
+    'audited' => false,
+    'inline_edit' => true,
+    'reportable' => true,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'len' => '255',
+    'size' => '20',
+  ),
+
 ),
 	'relationships'=>array (
 ),
@@ -403,4 +425,4 @@ $dictionary['HAA_Interfaces'] = array(
 if (!class_exists('VardefManager')){
         require_once('include/SugarObjects/VardefManager.php');
 }
-VardefManager::createVardef('HAA_Interfaces','HAA_Interfaces', array('basic','assignable','security_groups'));
+VardefManager::createVardef('HAA_Interfaces','HAA_Interfaces', array('basic','assignable','security_groups'));

@@ -58,7 +58,7 @@
         ln = insertServiceLine('service_group'+current_group,current_group);
         type = 'service_';
     }
-
+    //console.log(product);
     for(var p in product){
         if(document.getElementById(type + p + ln) !== null){
             if(product[p] !== '' && isNumeric(product[p]) && p != 'vat'  && p != 'product_id' && p != 'name' && p != "part_number"){
@@ -74,6 +74,14 @@
                 if (type=='service_'){
                     setServiceSettlementPeriodChange(document.getElementById(type + p + ln),ln);
                 }
+            }
+            if (curent_module=='AOS_Contracts'&&p=='number_of_periods_c') {
+                $("#"+type+p+ln).children().each(function(){
+                    if($(this).text()==product[p]){
+                        $(this).attr("selected",true);
+                    }
+                    
+                });
             }
             //End Modefy osmond 20161023 
         }
@@ -100,14 +108,13 @@
 
     var vat_hidden = document.getElementById("vathidden").value;
     var discount_hidden = document.getElementById("discounthidden").value;
-
     sqs_objects["product_name[" + prodln + "]"] = {
         "form": "EditView",
         "method": "query",
         "modules": ["AOS_Products"],
         "group": "or",
-        "field_list": ["name", "id","part_number", "cost", "price","description","currency_id"],
-        "populate_list": ["product_name[" + prodln + "]", "product_product_id[" + prodln + "]", "product_part_number[" + prodln + "]", "product_product_cost_price[" + prodln + "]", "product_product_list_price[" + prodln + "]", "product_item_description[" + prodln + "]", "product_currency[" + prodln + "]"],
+        "field_list": ["name", "id","part_number", "cost", "price","description","currency_id","number_of_periods_c"],
+        "populate_list": ["product_name[" + prodln + "]", "product_product_id[" + prodln + "]", "product_part_number[" + prodln + "]", "product_product_cost_price[" + prodln + "]", "product_product_list_price[" + prodln + "]", "product_item_description[" + prodln + "]", "product_currency[" + prodln + "]","product_number_of_periods_c["+prodln+"]"],
         "required_list": ["product_id[" + prodln + "]"],
         "conditions": [{
             "name": "name",
@@ -125,8 +132,8 @@
         "method": "query",
         "modules": ["AOS_Products"],
         "group": "or",
-        "field_list": ["part_number", "name", "id","cost", "price","description","currency_id"],
-        "populate_list": ["product_part_number[" + prodln + "]", "product_name[" + prodln + "]", "product_product_id[" + prodln + "]",  "product_product_cost_price[" + prodln + "]", "product_product_list_price[" + prodln + "]", "product_item_description[" + prodln + "]", "product_currency[" + prodln + "]"],
+        "field_list": ["part_number", "name", "id","cost", "price","description","currency_id","number_of_periods_c"],
+        "populate_list": ["product_part_number[" + prodln + "]","product_name[" + prodln + "]", "product_product_id[" + prodln + "]",  "product_product_cost_price[" + prodln + "]", "product_product_list_price[" + prodln + "]", "product_item_description[" + prodln + "]", "product_currency[" + prodln + "]","product_number_of_periods_c["+prodln+"]"],
         "required_list": ["product_id[" + prodln + "]"],
         "conditions": [{
             "name": "part_number",
@@ -219,6 +226,7 @@ enableQS(true);
     //y.style.cssText="display:none";
 
 if (curent_module=="AOS_Contracts") {
+        var number_of_periods_c_hidden = document.getElementById("number_of_periods_list").value;
         h.innerHTML="<a style='float:left' title='隐藏' onclick='edit_show_more_product(this,"+prodln+")' href='javascript:;'><i class='glyphicon glyphicon-minus'></i></a>";
         var settlement_period_option=document.getElementById("settlementperiodhidden").value;
  
@@ -234,6 +242,7 @@ if (curent_module=="AOS_Contracts") {
         "</div>"+
         "<div class='pull-left'>"+
         "<select tabindex='0' name='product_settlement_period_c[" + prodln + "]' onchange='setProductSettlementPeriodChange(this,"+prodln+");'"+ " id='product_settlement_period_c" + prodln + "'>" + settlement_period_option +"</select>"+
+        "&nbsp;<select name='product_number_of_periods_c["+prodln+"]' id='product_number_of_periods_c"+prodln+"' onchange='calculateLine("+prodln+",\"product_\")'>"+number_of_periods_c_hidden+"</select>"+
         '<span id="span_product_initial_account_day_c'+prodln+'" class="input-group date" style="margin-top:5px" >'+
         '<input id="product_initial_account_day_c' + prodln + '" class="date_input pull-left" style="width:75px" autocomplete="off" name="product_initial_account_day_c[' + prodln + ']" value="" title="" tabindex="0" type="text" onchange="setNextDayVal(\'product_\','+prodln+',this)">'+
         '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span></span>'+
@@ -292,6 +301,10 @@ if (curent_module=="AOS_Contracts") {
         i.style.color = "rgb(68,68,68)";
         i.innerHTML = "<span style='vertical-align: top;'>"  + SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NOTE') + " :&nbsp;</span>";
         i.innerHTML += "<textarea tabindex='116' name='product_description[" + prodln + "]' id='product_description" + prodln + "' rows='2' cols='23'></textarea>&nbsp;&nbsp;";*/
+        /*$("#product_number_of_periods"+prodln).children().each(function(){
+            if($(this).val()==contract_periods_c)
+                $(this).attr("selected",true);
+        });*/
     }else{
         var h1 = y.insertCell(0);
         //h1.colSpan = "3";
@@ -397,7 +410,7 @@ function formatListPrice(ln){
 
     var vat_hidden = document.getElementById("vathidden").value;
     var discount_hidden = document.getElementById("discounthidden").value;
-
+    
     tablebody = document.createElement("tbody");
     tablebody.id = "service_body" + servln;
     document.getElementById(tableid).appendChild(tablebody);
@@ -443,6 +456,7 @@ function formatListPrice(ln){
     
     //modefy BY osmond.liu 20161022合同模块增加结算周期和日期
     if (curent_module=='AOS_Contracts') {
+        var number_of_periods_c_hidden=document.getElementById("number_of_periods_list").value;
         f.innerHTML = "<a style='float:left' title='隐藏' onclick='edit_show_more_service(this,"+servln+")' href='javascript:;'><i class='glyphicon glyphicon-minus'></i></a>";
         var settlement_period_option=document.getElementById("settlementperiodhidden").value;
 
@@ -464,6 +478,7 @@ function formatListPrice(ln){
             "</div>"+
             "<div class='pull-left'>"+
             "<select tabindex='0' name='service_settlement_period_c[" + servln + "]' onchange='setServiceSettlementPeriodChange(this,"+servln+");'"+ " id='service_settlement_period_c" + servln + "'>" + settlement_period_option +"</select>"+
+            "&nbsp;<select id='service_number_of_periods_c"+servln+"' name='service_number_of_periods_c["+servln+"]' onchange='calculateLine("+servln+",\"service_\")'>"+number_of_periods_c_hidden+"</select>"+
             '<span id="span_service_initial_account_day_c'+servln+'" class="input-group date"  style="padding-top:5px">'+
             '<input id="service_initial_account_day_c' + servln + '" class="date_input pull-left" readOnly="readOnly" style="width:75px" autocomplete="off" name="service_initial_account_day_c[' + servln + ']" value="" title="" tabindex="0" type="text" onchange="setNextDayVal(\'service_\','+servln+',this)"/>'+
             '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span></span>'+
@@ -965,7 +980,12 @@ function setGroupReturn(popupReplyData){
     if(total_tax){
         productTotalPrice=productTotalPrice + totalvat;
     }
-
+    var periods=1;
+    if (document.getElementById(key+'number_of_periods_c'+ln)!==null) {
+        periods= document.getElementById(key+'number_of_periods_c'+ln).value;
+        periods=periods==""?1:periods;
+        productTotalPrice=productTotalPrice*periods;
+    }
     document.getElementById(key + 'vat_amt' + ln).value = format2Number(totalvat);
 
     document.getElementById(key + 'product_unit_price' + ln).value = format2Number(productUnitPrice);
@@ -1016,7 +1036,7 @@ function calculateAllLines(){
         var deleted = 0;
         var dis_amt = 0;
         var product_vat_amt = 0;
-
+        var periods=1;
         var input = row[i].getElementsByTagName('input');
         for (j=0; j < input.length; j++) {
             if (input[j].id.indexOf('product_qty') != -1) {
@@ -1041,7 +1061,12 @@ function calculateAllLines(){
             if (input[j].id.indexOf('deleted') != -1) {
                 deleted = input[j].value;
             }
-
+        }
+        var select = row[i].getElementsByTagName('select');
+        for (var z = 0; z < select.length; z++) {
+            if (select[z].id.indexOf('number_of_periods_c')!=-1&&select[z].value!="") {
+                periods=select[z].value;
+            }
         }
 
         if(deleted != 1 && key !== ''){
@@ -1051,19 +1076,18 @@ function calculateAllLines(){
         }
 
         if (qty !== 0 && list !== null && deleted != 1) {
-            tot_amt += list * qty;
+            tot_amt += list * qty * periods;
         } else if (qty !== 0 && unit !== 0 && deleted != 1) {
-            tot_amt += unit * qty;
+            tot_amt += unit * qty * periods;
         }
 
         if (dis_amt !== 0 && deleted != 1) {
-            dis_tot += dis_amt * qty;
+            dis_tot += dis_amt * qty * periods;
         }
         if (product_vat_amt !== 0 && deleted != 1) {
-            tax += product_vat_amt;
+            tax += product_vat_amt * periods;
         }
     }
-
     for(var h in head){
         if (head[h] != 1 && document.getElementById(h + '_head') !== null) {
             document.getElementById(h + '_head').style.display = "none";
@@ -1266,6 +1290,8 @@ function setProductSettlementPeriodChange(field,prodlns) {
     }
     $("#product_next_account_day_c"+prodlns).attr('disabled',false);
     $("#product_next_account_day_c"+prodlns).next().show();
+    $("#product_number_of_periods_c"+prodlns).attr('disabled',true);
+    $("#product_number_of_periods_c"+prodlns).val("");
  }else{
      $("#product_initial_account_day_c"+prodlns).next().show();
      $("#product_initial_account_day_c"+prodlns).attr('disabled',false);
@@ -1281,9 +1307,23 @@ function setProductSettlementPeriodChange(field,prodlns) {
         $("#product_next_account_day_c"+prodlns).after(html);
         $("#product_next_account_day"+prodlns).val($("#product_initial_account_day_c"+prodlns).val());
      }
+     $("#product_number_of_periods_c"+prodlns).attr('disabled',false);
+     if ($("#product_number_of_periods_c"+prodlns).val()=="") {
+        $("#product_number_of_periods_c"+prodlns).val($("#number_of_periods_c").val());
+     }
  }
  //accountDay.innerHTML=html;
+ calculateLine(prodlns,"product_");
  CalendarShow();
+ //进行计算
+    var groupid = 0;
+    var key="product_";
+    if(enable_groups){
+        groupid = document.getElementById(key + 'group_number' + prodlns).value;
+    }
+    groupid = 'group' + groupid;
+    calculateTotal(groupid);
+    calculateTotal();
 }
 
 function setServiceSettlementPeriodChange(field,servln) {
@@ -1311,7 +1351,8 @@ function setServiceSettlementPeriodChange(field,servln) {
     }
     $("#service_next_account_day_c"+servln).attr('disabled',false);
     $("#service_next_account_day_c"+servln).next().show();
-    
+    $("#service_number_of_periods_c"+servln).attr("disabled",true);
+    $("#service_number_of_periods_c"+servln).val("");
     //$("#span_service_next_account_day_c"+servln).next().show();
  }else{
     /* html='<input class="date_input pull-left" autocomplete="off" style="width:75px" name="service_initial_account_day_c[' + servln + ']" id="service_initial_account_day_c' + servln + '" value="'+accountDayValue+'" title="" tabindex="0" type="text">'+
@@ -1332,9 +1373,22 @@ function setServiceSettlementPeriodChange(field,servln) {
         $("#service_next_account_day_c"+servln).after(html);
         $("#service_next_account_day"+servln).val($("#product_initial_account_day_c"+servln).val());
      }
+     $("#service_number_of_periods_c"+servln).attr("disabled",false);
+     if ($("#service_number_of_periods_c"+servln).val()=="") {
+        $("#service_number_of_periods_c"+servln).val($("#number_of_periods_c").val());
+     }
  }
  //accountDay.innerHTML=html;
+ calculateLine(prodlns,"service_");
  CalendarShow();
+    var groupid = 0;
+    var key="service_";
+    if(enable_groups){
+        groupid = document.getElementById(key + 'group_number' + servln).value;
+    }
+    groupid = 'group' + groupid;
+    calculateTotal(groupid);
+    calculateTotal();
 }
 
 function setNextDayVal(key,num,ipt) {

@@ -27,6 +27,7 @@ array (
         'width' => '10%',
         'default' => true,
         'name' => 'contract_number',
+
         ),
       'expense_group' => 
       array (
@@ -47,15 +48,6 @@ array (
         'width' => '10%',
         'default' => true,
         'name' => 'clear_status',
-        ),
-      'source_code' => 
-      array (
-        'type' => 'enum',
-        'studio' => 'visible',
-        'label' => 'LBL_SOURCE_CODE',
-        'width' => '10%',
-        'default' => true,
-        'name' => 'source_code',
         ),
       'source_code' => 
       array (

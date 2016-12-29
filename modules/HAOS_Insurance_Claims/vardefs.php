@@ -854,7 +854,7 @@ $dictionary['HAOS_Insurance_Claims'] = array(
       'location' => 
       array (
         'required' => false,
-        'source' => 'non-db',
+        //'source' => 'non-db',Modefied by zengchen 改为数据库字段20161227
         'name' => 'location',
         'vname' => 'LBL_LOCATION',
         'type' => 'varchar',
@@ -870,13 +870,13 @@ $dictionary['HAOS_Insurance_Claims'] = array(
         'reportable' => true,
         'unified_search' => false,
         'merge_filter' => 'disabled',
-        'len' => 25,
+        'len' => 255,
         'size' => '20',
         ),
       'comment' => 
       array (
         'required' => false,
-        'source' => 'non-db',
+        //'source' => 'non-db',Modefied by zengchen 改为数据库字段20161227
         'name' => 'comment',
         'vname' => 'LBL_COMMENT',
         'type' => 'varchar',
@@ -892,7 +892,7 @@ $dictionary['HAOS_Insurance_Claims'] = array(
         'reportable' => true,
         'unified_search' => false,
         'merge_filter' => 'disabled',
-        'len' => 25,
+        'len' => 255,
         'size' => '20',
         ),
       'wo_info' => 
@@ -920,7 +920,6 @@ $dictionary['HAOS_Insurance_Claims'] = array(
       'repair_cost' => 
       array (
         'required' => false,
-        'source' => 'non-db',
         'name' => 'repair_cost',
         'vname' => 'LBL_REPAIR_COST',
         'type' => 'currency',
@@ -936,13 +935,14 @@ $dictionary['HAOS_Insurance_Claims'] = array(
         'reportable' => true,
         'unified_search' => false,
         'merge_filter' => 'disabled',
-        'len' => 25,
+        'len' => 26,
         'size' => '20',
+        'enable_range_search' => false,
+        'precision' => 6,
         ),
       'other_repair_cost' => 
       array (
         'required' => false,
-        'source' => 'non-db',
         'name' => 'other_repair_cost',
         'vname' => 'LBL_OTHER_REPAIR_COST',
         'type' => 'currency',
@@ -958,8 +958,10 @@ $dictionary['HAOS_Insurance_Claims'] = array(
         'reportable' => true,
         'unified_search' => false,
         'merge_filter' => 'disabled',
-        'len' => 25,
+        'len' => 26,
         'size' => '20',
+        'enable_range_search' => false,
+        'precision' => 6,
         ),
       'line_items' =>
       array(

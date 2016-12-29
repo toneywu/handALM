@@ -121,12 +121,10 @@ $GLOBALS['tabStructure'] = array (
       ),
     ),
   );
-$instance_loc='';
+$instance_loc='instance/PUBLIC/';
 if(isset($_SESSION["current_framework_code"])){
   $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
-  } else {
-    $instance_loc='instance/PUBLIC';
-  }
+} 
 if(file_exists($instance_loc.'include/tabConfig.php')){
   require $instance_loc.'include/tabConfig.php';
 }
