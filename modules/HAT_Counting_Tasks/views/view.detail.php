@@ -2,7 +2,7 @@
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 require_once('include/MVC/View/views/view.detail.php');
-
+require_once('modules/HAT_Counting_Tasks/populateLineCountInfo.php');
 
 class HAT_Counting_TasksViewDetail extends ViewDetail  {
 	
@@ -20,8 +20,19 @@ function display()
 			$bean_framework_name = $beanFramework->name;
 		}
 		$this->ss->assign('FRAMEWORK_C',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id_c'));
+		
 		parent::display();
-		populateLineCountInfo("detail",$this->bean->id);
+		$countInfo= new CountInfo();
+		$count=$countInfo->populateLineCountInfo($this->bean->id);
+		echo "<script>
+			$('#total_counting').html('".$count['total_counting']."');
+			$('#actual_counting').html('".$count['actual_counting']."');
+			$('#amt_actual_counting').html('".$count['matched_count']."');
+			$('#profit_counting').html('".$count['overage_count']."');
+			$('#loss_counting').html('".$count['loss_count']."');
+			$('#diff_counting').html('".$count['different_count']."');
+			$('#actual_adjust_count').html('".$count['processed_count']."');
+		</script>";
 			echo "<script>
 			$('#task_number').val('".$this->bean->task_number."');
 			$('#planed_start_date').val('".$this->bean->planed_start_date."');

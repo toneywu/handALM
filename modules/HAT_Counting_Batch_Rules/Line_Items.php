@@ -32,7 +32,13 @@ function display_lines($focus, $field, $value, $view){
          	h.hat_counting_rules_id_c,
          	h.`name` rule_name,
          	h.org_drilldown,
-         	h.org_split_flag
+         	h.org_split_flag,
+            h.user_person_split_flag,
+            h.own_person_split_flag,
+            c1.last_name user_name,
+            h.user_contacts_id_c,
+            c2.last_name own_name,
+            h.own_contacts_id_c
          	FROM
          	hat_counting_batchs_hat_counting_batch_rules_c hcb,
          	hat_counting_batch_rules h
@@ -41,6 +47,8 @@ function display_lines($focus, $field, $value, $view){
          	LEFT JOIN haa_codes hc ON hc.id = h.haa_codes_id_c
          	LEFT JOIN aos_product_categories apc ON apc.id = h.aos_product_categories_id_c
          	LEFT JOIN hat_counting_rules hcr on hcr.id = h.hat_counting_rules_id_c
+            LEFT JOIN contacts c1 on c1.id = h.user_contacts_id_c
+            LEFT JOIN contacts c2 on c2.id = h.own_contacts_id_c
          	WHERE
          	h.id = hcb.hat_counti8f01h_rules_idb
          	AND h.deleted = 0

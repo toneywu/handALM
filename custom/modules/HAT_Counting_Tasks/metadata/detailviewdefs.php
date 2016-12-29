@@ -192,6 +192,21 @@ array (
             'label' => 'LBL_CATEGORY',
           ),
         ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'user_person',
+            'studio' => 'visible',
+            'label' => 'LBL_USER_PERSON',
+          ),
+          1 => 
+          array (
+            'name' => 'own_person',
+            'studio' => 'visible',
+            'label' => 'LBL_OWN_PERSON',
+          ),
+        ),
       ),
       'lbl_editview_panel2' => 
       array (

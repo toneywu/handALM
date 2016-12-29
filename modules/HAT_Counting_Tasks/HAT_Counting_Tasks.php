@@ -50,6 +50,9 @@ class HAT_Counting_Tasks extends HAT_Counting_Tasks_sugar {
 	function save($check_notify = FALSE){
 		global $sugar_config;
 		global $db;
+
+		$beanBatch = BeanFactory::getBean('HAT_Counting_Batchs', $this->hat_counting_batchs_id_c);
+		$this->name=$beanBatch->name;
 			//拼接盘点任务名称
 			$sql_cate="SELECT
 			hal.`name` cate_name

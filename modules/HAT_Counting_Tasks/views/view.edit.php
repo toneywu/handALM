@@ -23,7 +23,17 @@ class HAT_Counting_TasksViewEdit extends ViewEdit
 		}
 		$this->ss->assign('FRAMEWORK_C',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id_c'));
 		parent::display();
-		populateLineCountInfo("edit",$this->bean->id);
+		$countInfo= new CountInfo();
+		$count=$countInfo->populateLineCountInfo($this->bean->id);
+		echo "<script>
+			$('#total_counting').val('".$count['total_counting']."');
+			$('#actual_counting').val('".$count['actual_counting']."');
+			$('#amt_actual_counting').val('".$count['matched_count']."');
+			$('#profit_counting').val('".$count['overage_count']."');
+			$('#loss_counting').val('".$count['loss_count']."');
+			$('#diff_counting').val('".$count['different_count']."');
+			$('#actual_adjust_count').val('".$count['processed_count']."');
+		</script>";
 			echo "<script>
 			$('#task_number').val('".$this->bean->task_number."');
 			$('#planed_start_date').val('".$this->bean->planed_start_date."');

@@ -14,7 +14,7 @@ $subpanel_layout['list_fields'] = array (
     'target_module' => 'HAT_Assets',
     'target_record_key' => 'hat_assets_id_c',
   ),
-  'asset_desc' => 
+  /*'asset_desc' => 
   array (
     'type' => 'varchar',
     'default' => true,
@@ -76,7 +76,7 @@ $subpanel_layout['list_fields'] = array (
     'vname' => 'LBL_COUNTING_STATUS',
     'width' => '10%',
     'default' => true,
-  ),
+  ),*/
   'edit_button' => 
   array (
     'vname' => 'LBL_EDIT_BUTTON',

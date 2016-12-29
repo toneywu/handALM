@@ -924,6 +924,12 @@ function setGroupReturn(popupReplyData){
         document.getElementById(key + 'product_qty' + ln).value =1;
     }
 
+    var periods=1;
+    if (document.getElementById(key+'number_of_periods_c'+ln)!==null) {
+        periods= document.getElementById(key+'number_of_periods_c'+ln).value;
+        periods=periods==""?1:periods;
+    } 
+
     var productUnitPrice = unformat2Number(document.getElementById(key + 'product_unit_price' + ln).value);
 
     if(document.getElementById(key + 'product_list_price' + ln) !== null && document.getElementById(key + 'product_discount' + ln) !== null && document.getElementById(key + 'discount' + ln) !== null){
@@ -972,20 +978,14 @@ function setGroupReturn(popupReplyData){
 
     var vat = unformatNumber(document.getElementById(key + 'vat' + ln).value,',','.');
 
-    var productTotalPrice = productQty * productUnitPrice;
-
+    var productTotalPrice = productQty * productUnitPrice * periods;
 
     var totalvat=(productTotalPrice * vat) /100;
 
     if(total_tax){
         productTotalPrice=productTotalPrice + totalvat;
     }
-    var periods=1;
-    if (document.getElementById(key+'number_of_periods_c'+ln)!==null) {
-        periods= document.getElementById(key+'number_of_periods_c'+ln).value;
-        periods=periods==""?1:periods;
-        productTotalPrice=productTotalPrice*periods;
-    }
+    
     document.getElementById(key + 'vat_amt' + ln).value = format2Number(totalvat);
 
     document.getElementById(key + 'product_unit_price' + ln).value = format2Number(productUnitPrice);
@@ -1379,7 +1379,7 @@ function setServiceSettlementPeriodChange(field,servln) {
      }
  }
  //accountDay.innerHTML=html;
- calculateLine(prodlns,"service_");
+ calculateLine(servln,"service_");
  CalendarShow();
     var groupid = 0;
     var key="service_";

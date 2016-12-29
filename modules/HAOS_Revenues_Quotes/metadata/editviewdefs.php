@@ -314,15 +314,7 @@ array (
             'name' => 'contract_number',
             'studio' => 'visible',
             'label' => 'LBL_CONTRACT_NUMBER',
-            'displayParams' => 
-            array (
-              'field_to_name_array' => 
-              array (
-                'id' => 'contact_id_c',
-                'chinese_name_c' => 'contract_name',
-                'employee_number_c' => 'contract_number',
-                ),
-              ),
+            'customCode' => '<input type="text" readonly="readonly" name="contract_number" id="contract_number" value="{$fields.contract_number.value}">',
             ),
           ),
         1 => 
@@ -332,7 +324,15 @@ array (
             'name' => 'contract_name',
             'studio' => 'visible',
             'label' => 'LBL_CONTRACT_NAME',
-            'customCode' => '<input type="text" readonly="readonly" name="contract_name" id="contract_name" value="{$fields.contract_name.value}">',
+            'displayParams' => 
+            array (
+              'field_to_name_array' => 
+              array (
+                'id' => 'contact_id_c',
+                'chinese_name_c' => 'contract_name',
+                'employee_number_c' => 'contract_number',
+                ),
+              ),
             ),
           1 => '',
           ),

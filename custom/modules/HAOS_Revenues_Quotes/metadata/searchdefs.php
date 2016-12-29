@@ -17,16 +17,16 @@ array (
         'default' => true,
         'name' => 'account_name',
         ),
-      'contract_number' => 
+      'contract_name' => 
       array (
         'type' => 'relate',
         'studio' => 'visible',
-        'label' => 'LBL_CONTRACT_NUMBER',
+        'label' => 'LBL_CONTRACT_NAME',
         'id' => 'CONTACT_ID_C',
         'link' => true,
         'width' => '10%',
         'default' => true,
-        'name' => 'contract_number',
+        'name' => 'contract_name',
 
         ),
       'expense_group' => 

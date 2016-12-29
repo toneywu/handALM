@@ -39,7 +39,6 @@
         ln = insertProductLine();
         type = 'product_';
     //} 
-
     for(var p in product){
         if(document.getElementById(type + p + ln) !== null){
             if(product[p] !== '' && isNumeric(product[p]) && p != 'vat'  && p != 'product_id' && p != 'name' && p != "part_number" &&p!='id'){
@@ -49,7 +48,7 @@
             }
         }
     }
-     setLineTypeCtrl(document.getElementById("product_line_item_type_c"+ln),ln);
+     //setLineTypeCtrl(document.getElementById("product_line_item_type_c"+ln),ln);
 
 }
 
@@ -113,7 +112,7 @@
         "method": "query",
         "modules": ["AOS_Products"],
         "group": "or",
-        "field_list": ["part_number", "name", "id","cost", "price","description","currency_id"],
+        "field_list": ["part_number", "name", "id","cost", "price","description","currency_id","product_id"],
         "populate_list": ["product_part_number[" + prodln + "]", "product_name[" + prodln + "]", "product_product_id[" + prodln + "]",  "product_product_cost_price[" + prodln + "]", "product_product_list_price[" + prodln + "]", "product_item_description[" + prodln + "]", "product_currency[" + prodln + "]"],
         "required_list": ["product_id[" + prodln + "]"],
         "conditions": [{
@@ -135,7 +134,7 @@
     c.innerHTML = SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NAME')+"<span class='required'>&nbsp*</span>";
 
     var c1 = y.insertCell(1);
-    c1.innerHTML = "<input style='width:178px;'  type='text' name='product_name[" + prodln + "]' id='product_name" + prodln + "' maxlength='50' value='' title='' tabindex='116' value=''><input type='hidden' name='product_product_id[" + prodln + "]' id='product_product_id" + prodln + "' size='20' maxlength='50' value=''>";
+    c1.innerHTML = "<input style='width:178px;'  type='text' name='product_name[" + prodln + "]' id='product_name" + prodln + "' maxlength='50' value='' title='' tabindex='116' value=''><input type='hidden' name='product_product_id[" + prodln + "]' id='product_product_id" + prodln + "' value=''>";
 
 
     var d = y.insertCell(2);
@@ -234,7 +233,7 @@ function setLineTypeCtrl(field,ln){
         $('#product_product_list_price_label'+ln).html(SUGAR.language.get('HAOS_Revenues_Quotes', 'LBL_PRODUCT_LIST_PRICE')+"<span class='required'>&nbsp*</span>");
         $('#product_product_unit_price_label'+ln).html(SUGAR.language.get('HAOS_Revenues_Quotes', 'LBL_PRODUCT_UNIT_PRICE')+"<span class='required'>&nbsp*</span>"); 
    }else{
-        $('#product_product_id'+ln).val("0");
+        $('#product_product_id'+ln).val("");
         $('#product_product_qty'+ln).val("");
         $("#product_part_number_label"+ln).html("");
         $('#product_part_number'+ln).hide();

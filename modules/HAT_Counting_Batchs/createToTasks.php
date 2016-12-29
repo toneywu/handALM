@@ -28,7 +28,7 @@ $bean_batch = BeanFactory :: getBean('HAT_Counting_Batchs', $taskId);
 if ($bean_batch->snapshot_date !=''){
 	die('已生成盘点任务，不能重复操作!');
 }else{
-	$query = "call asset_info('".$_SESSION["current_framework"]."','".$taskId."'); ";
+	$query = "call HAT_Counting_asset_info('".$_SESSION["current_framework"]."','".$taskId."'); ";
 	$result = $this->bean->db->query($query, true);
 	$row = $this->bean->db->fetchByAssoc($result);
 }

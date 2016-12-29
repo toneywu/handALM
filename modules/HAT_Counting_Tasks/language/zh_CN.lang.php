@@ -112,4 +112,9 @@ $mod_strings = array (
   'LBL_ACTUAL_ADJUST_COUNT' => '已完成调整数量',
   'LBL_MANUAL_ADD_FLAG' => '是否手工增加',
 
+  'LBL_USER_PERSON' => '使用人',
+  'LBL_USER_PERSON_CONTACTS_ID' => '使用人',
+  'LBL_OWN_PERSON_CONTACTS_ID' => '管理人',
+  'LBL_OWN_PERSON' => '管理人',
+
 );

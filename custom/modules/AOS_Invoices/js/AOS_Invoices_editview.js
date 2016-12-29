@@ -17,6 +17,7 @@ $(document).ready(function() {
     function setAmount_c(){
     	var statu=$("#status option:selected").val();
     	$("#amount_c").unbind("blur");
+        $("#unpaied_amount_c").attr("readonly",true);
     	$("#amount_c").attr("readonly",true);
     	$("#amount_c").removeAttr("placeholder");
     	switch(statu){

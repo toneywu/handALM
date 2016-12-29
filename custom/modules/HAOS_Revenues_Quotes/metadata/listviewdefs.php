@@ -66,11 +66,11 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-  'CONTRACT_NUMBER' => 
+  'CONTRACT_NAME' => 
   array (
     'type' => 'relate',
     'studio' => 'visible',
-    'label' => 'LBL_CONTRACT_NUMBER',
+    'label' => 'LBL_CONTRACT_NAME',
     'id' => 'CONTACT_ID_C',
     'link' => true,
     'width' => '10%',
