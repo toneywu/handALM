@@ -6,11 +6,15 @@ array (
   array (
     'templateMeta' => 
     array (
-	   'includes' =>
+      'includes' => 
       array (
-        0 =>
+        0 => 
         array (
           'file' => 'modules/HIT_Link_PO/js/HIT_Link_PO_editview.js',
+        ),
+        1 => 
+        array (
+          'file' => 'modules/HAA_FF/ff_include.js',
         ),
       ),
       'maxColumns' => '2',
@@ -54,20 +58,17 @@ array (
             'name' => 'product_number',
             'studio' => 'visible',
             'label' => 'LBL_PRODUCT_NUMBER',
-			 'displayParams' =>           
-			 array (
-              //'initial_filter' => '&maint_site_advanced="+encodeURIComponent(document.getElementById("site").value)+"',
-              'field_to_name_array' => //这里是从Location选择之后，将Location中可以获取到的一些值复制到对应的字段（与本例主题无关）
-				  array (
-					'name' => 'product_number',
-					'id' => 'product_id',
-					'asset_group' => 'asset_group',
-					'tracking_number' => 'line_number',
-					'hat_asset_locations_hat_assets_name' => 'asset_location',
-				  ),
-              //'call_back_function' => 'setLocationPopupReturn', //在选择后会触发JS中的setLocationPopupReturn函数（与本例主题无关）
+            'displayParams' => 
+            array (
+              'field_to_name_array' => 
+              array (
+                'name' => 'product_number',
+                'id' => 'product_id',
+                'asset_group' => 'asset_group',
+                'tracking_number' => 'line_number',
+                'hat_asset_locations_hat_assets_name' => 'asset_location',
+              ),
             ),
-
           ),
           1 => 
           array (
@@ -101,16 +102,20 @@ array (
             'name' => 'asset_source',
             'studio' => 'visible',
             'label' => 'LBL_ASSET_SOURCE',
-			'displayParams' =>           
-			 array (
-              //'initial_filter' => '&maint_site_advanced="+encodeURIComponent(document.getElementById("site").value)+"',
-              'field_to_name_array' => //这里是从Location选择之后，将Location中可以获取到的一些值复制到对应的字段（与本例主题无关）
-				  array (
-					'name' => 'asset_source',
-					'id' => 'asset_source_id',
-					'supplier_desc' => 'vendor',
-				  ),
-              //'call_back_function' => 'setLocationPopupReturn', //在选择后会触发JS中的setLocationPopupReturn函数（与本例主题无关）
+            'displayParams' => 
+            array (
+              'field_to_name_array' => 
+              array (
+                'name' => 'asset_source',
+                'id' => 'asset_source_id',
+                'supplier_desc' => 'vendor',
+                'line_price' => 'unit_price',
+                'line_qty' => 'bill_quantity',
+                'currency_id' => 'currency_id',
+				'cost_center_dis' => 'cost_center_dis',
+				'cost_center' => 'cost_center',
+              ),
+              'call_back_function' => 'setAssetSourcePopupReturn',
             ),
           ),
           1 => 
@@ -144,9 +149,13 @@ array (
           ),
           1 => 
           array (
-            'name' => 'cost_center',
+            'name' => 'cost_center_dis',
             'studio' => 'visible',
             'label' => 'LBL_COST_CENTER',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&code_type_advanced=asset_main_cost_center',
+            ),
           ),
         ),
         3 => 

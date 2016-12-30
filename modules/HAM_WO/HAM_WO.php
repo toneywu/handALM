@@ -271,6 +271,12 @@ class HAM_WO extends HAM_WO_sugar {
 			$bean_sr->sr_status = "WORKING";
 			$bean_sr->save();
 		}
+		$queryParams = array(
+							'module' => 'HAM_WO',
+							'action' => 'DetailView',
+							'record' => $this->id,
+							);
+		SugarApplication::redirect('index.php?' . http_build_query($queryParams));
 	}
 
 	function get_finish_date($star_date, $duration) {

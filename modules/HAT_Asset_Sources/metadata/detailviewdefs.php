@@ -87,7 +87,7 @@ array (
           ),
           1 => 
           array (
-            'name' => 'supplier_desc',
+            'name' => 'supplier_org',
             'studio' => 'visible',
             'label' => 'LBL_SUPPLIER_ORG',
           ),
@@ -123,21 +123,23 @@ array (
         array (
           0 => 
           array (
-            'name' => 'source_type',
-            'label' => 'LBL_SOURCE_TYPE',
+            'name' => 'cost_center_dis',
+            'studio' => 'visible',
+            'label' => 'LBL_COST_CENTER',
           ),
           1 => 
           array (
-            'name' => 'source_reference',
-            'label' => 'LBL_SOURCE_REFERENCE',
+            'name' => 'need_by',
+            'label' => 'LBL_NEED_BY',
           ),
         ),
         7 => 
         array (
           0 => 
           array (
-            'name' => 'source_id',
-            'label' => 'LBL_SOURCE_ID',
+            'name' => 'uom',
+            'studio' => 'visible',
+            'label' => 'LBL_UOM',
           ),
           1 => '',
         ),

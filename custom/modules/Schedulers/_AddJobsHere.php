@@ -563,7 +563,12 @@ function sync_jt_po_infos() {
 				$category_name_val = $line_value['CATEGORY_NAME'];
 				$prod_code_val = $line_value['PROD_CODE'];
 				$prod_name_val = $line_value['PROD_NAME'];
-				$cost_center = $line_value['COST_CENTER'];
+				$cost_center_dis = $line_value['COST_CENTER'];
+				
+				$cost_center_bean = BeanFactory :: getBean('HAA_Codes')->retrieve_by_string_fields(array (
+													'code_type' => 'asset_main_cost_center',
+													'name' => cost_center_dis));
+				
 				$need_by_val = $line_value['NEED_BY'];
 
 				$GLOBALS['log']->infor("header_id   = " . $po_header_id_val . ',line_number=' . $line_num_val . ",item_name=" . $line_num_val . ",line_id=" . $po_line_id_val."cost_center=".$cost_center);
@@ -585,7 +590,7 @@ function sync_jt_po_infos() {
 					$newLineBean->haa_frameworks_id = $frame_id;
 					$newLineBean->source_id = $po_line_id_val;
 					$newLineBean->haa_frameworks_id = $frame_bean->id;
-					$newLineBean->cost_center = $cost_center;
+					$newLineBean->cost_center = $cost_center_bean->id;
 					$newLineBean->need_by = $need_by_val;
 					$newLineBean->save();
 				}
@@ -1164,8 +1169,12 @@ function sync_xr_po_infos() {
 				$category_name_val = $line_value['CATEGORY_NAME'];
 				$prod_code_val = $line_value['PROD_CODE'];
 				$prod_name_val = $line_value['PROD_NAME'];
-				$cost_center = $line_value['COST_CENTER'];
 				$need_by_val = $line_value['NEED_BY'];
+				$cost_center_dis = $line_value['COST_CENTER'];
+				
+				$cost_center_bean = BeanFactory :: getBean('HAA_Codes')->retrieve_by_string_fields(array (
+													'code_type' => 'asset_main_cost_center',
+													'name' => cost_center_dis));
 
 				$GLOBALS['log']->infor("header_id   = " . $po_header_id_val . ',line_number=' . $line_num_val . ",item_name=" . $line_num_val . ",line_id=" . $po_line_id_val);
 
@@ -1186,7 +1195,7 @@ function sync_xr_po_infos() {
 					$newLineBean->haa_frameworks_id = $frame_id;
 					$newLineBean->source_id = $po_line_id_val;
 					$newLineBean->haa_frameworks_id = $frame_bean->id;
-					$newLineBean->cost_center = $cost_center;
+					$newLineBean->cost_center = $cost_center_bean->id;
 					$newLineBean->need_by = $need_by_val;
 					$newLineBean->save();
 				}

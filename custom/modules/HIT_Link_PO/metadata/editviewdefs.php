@@ -12,6 +12,10 @@ array (
         array (
           'file' => 'modules/HIT_Link_PO/js/HIT_Link_PO_editview.js',
         ),
+		1 =>
+        array (
+          'file' => 'modules/HAA_FF/ff_include.js',
+        ),
       ),
       'maxColumns' => '2',
       'widths' => 
@@ -103,14 +107,16 @@ array (
             'label' => 'LBL_ASSET_SOURCE',
 			'displayParams' =>           
 			 array (
-              //'initial_filter' => '&maint_site_advanced="+encodeURIComponent(document.getElementById("site").value)+"',
-              'field_to_name_array' => //这里是从Location选择之后，将Location中可以获取到的一些值复制到对应的字段（与本例主题无关）
+              'field_to_name_array' =>
 				  array (
 					'name' => 'asset_source',
 					'id' => 'asset_source_id',
 					'supplier_desc' => 'vendor',
+					'line_price'=>'unit_price',
+					'line_qty'=>'bill_quantity',
+					'currency_id'=>'currency_id'
 				  ),
-              //'call_back_function' => 'setLocationPopupReturn', //在选择后会触发JS中的setLocationPopupReturn函数（与本例主题无关）
+              'call_back_function' => 'setAssetSourcePopupReturn', //在选择后会触发JS中的setLocationPopupReturn函数（与本例主题无关）
             ),
           ),
           1 => 
