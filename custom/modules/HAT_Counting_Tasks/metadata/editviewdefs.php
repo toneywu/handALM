@@ -210,7 +210,7 @@ array (
             'label' => 'LBL_ORANIZATION',
             'displayParams' => 
             array (
-              'initial_filter' => '&is_asset_org_c_advanced=1&org_type_c_advanced=INTERNAL&frame_c_advanced="+$("#haa_framework").val()+"&module_name=HAT_Counting_Tasks',
+              'initial_filter' => '&org_type_c_advanced=INTERNAL&frame_c_advanced="+$("#haa_framework").val()+"&module_name=HAT_Counting_Tasks',
             ),
           ),
         ),
@@ -276,10 +276,10 @@ array (
         array (
           0 => 
           array (
-            'name' => 'amt_actual_counting',
+            'name' => 'un_actual_counting',
             'studio' => 'visible',
-            'label' => 'LBL_AMT_ACTUAL_COUNTING',
-            'customCode' => '<input name="amt_actual_counting" id="amt_actual_counting" size="30" maxlength="255" value="" title="" tabindex="0" type="text" readonly>',
+            'label' => 'LBL_UN_ACTUAL_COUNTING',
+            'customCode' => '<input name="un_actual_counting" id="un_actual_counting" size="30" maxlength="255" value="" title="" tabindex="0" type="text" readonly>',
           ),
           1 => 
           array (
@@ -300,10 +300,10 @@ array (
           ),
           1 => 
           array (
-            'name' => 'diff_counting',
+            'name' => 'amt_actual_counting',
             'studio' => 'visible',
-            'label' => 'LBL_DIFF_COUNTING',
-            'customCode' => '<input name="diff_counting" id="diff_counting" size="30" maxlength="255" value="" title="" tabindex="0" type="text" readonly>',
+            'label' => 'LBL_AMT_ACTUAL_COUNTING',
+            'customCode' => '<input name="amt_actual_counting" id="amt_actual_counting" size="30" maxlength="255" value="" title="" tabindex="0" type="text" readonly>',
           ),
         ),
         3 => 
@@ -314,6 +314,13 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_ACTUAL_ADJUST_COUNT',
             'customCode' => '<input name="actual_adjust_count" id="actual_adjust_count" size="30" maxlength="255" value="" title="" tabindex="0" type="text" readonly>',
+          ),
+          1 => 
+          array (
+            'name' => 'diff_counting',
+            'studio' => 'visible',
+            'label' => 'LBL_DIFF_COUNTING',
+            'customCode' => '<input name="diff_counting" id="diff_counting" size="30" maxlength="255" value="" title="" tabindex="0" type="text" readonly>',
           ),
         ),
       ),

@@ -656,7 +656,8 @@ function insertLineData(hit_ip_subnets, current_view) { // 将数据写入到对
 		 * $("#line_ip_netmask".concat(String(ln))).val(hit_ip_subnets.ip_netmask);
 		 * $("#line_ip_highest".concat(String(ln))).val(hit_ip_subnets.ip_highest);
 		 * $("#line_ip_lowest".concat(String(ln))).val(hit_ip_subnets.ip_lowest);
-		 */$("#line_name".concat(String(ln))).val(hit_ip_subnets.name);
+		 */
+		$("#line_name".concat(String(ln))).val(hit_ip_subnets.name);
 		$("#line_vlan".concat(String(ln))).val(hit_ip_subnets.vlan);
 		$("#line_vlan_id".concat(String(ln))).val(hit_ip_subnets.vlan_id);
 
@@ -677,10 +678,11 @@ function insertLineData(hit_ip_subnets, current_view) { // 将数据写入到对
 
 
 		//$("#line_status".concat(String(ln))).val(hit_ip_subnets.hiaa_id);
+		console.log("--------------------------------------------------------------");
+		console.log($("#line_status".concat(String(ln))).val());
 		$("#line_source_id".concat(String(ln))).val(hit_ip_subnets.source_id);
 
 		$("#line_status".concat(String(ln))).val(hit_ip_subnets.allo_qty);
-
 
 		renderTransLine(ln);
 
@@ -1008,7 +1010,7 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 	// console.log("renderTransLine"+ln);
 	console.log("line_ip_type= " + $("#line_ip_type" + ln).val());
 	if ($("#line_ip_type_val" + ln).val() == "0") {
-		console.log("renderTransLine"+ln);
+		//console.log("renderTransLine"+ln);
 		$("#displayed_line_ip_type" + ln).attr("checked", true);
 		$("#displayed_line_ip_type" + ln).prop("checked", true);
 		document.getElementById("displayed_line_ip_type" + ln).checked = true;
@@ -1032,8 +1034,7 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 		$("#displayed_line_ip_netmask" + ln).html(ip_caled.prefixMaskStr);
 		$("#displayed_line_ip_lowest" + ln).html(ip_caled.ipLowStr);
 		$("#displayed_line_ip_highest" + ln).html(ip_caled.ipHighStr);
-		$("#displayed_line_ip_qty" + ln).html(Math
-				.pow(2, ip_caled.invertedSize));
+		$("#displayed_line_ip_qty" + ln).html(Math.pow(2, ip_caled.invertedSize));
 		// 对应的隐藏字段
 		$("#line_ip_netmask" + ln).val(ip_caled.prefixMaskStr);
 		$("#line_ip_lowest" + ln).val(ip_caled.ipLowStr);
@@ -1050,7 +1051,7 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 	$("#displayed_line_tunnel" + ln).html($("#line_tunnel" + ln).val());
 	$("#displayed_line_description" + ln).html($("#line_description" + ln).val());
 	$("#displayed_line_location" + ln).html($("#line_location" + ln).val());
-	$("#displayed_line_purpose" + ln).html($("#line_purpose" + ln).val());
+	$("#displayed_line_purpose" + ln).html($("#line_purpose" + ln).val());//displayed_line_name
 	//console.log(SUGAR.language.get("app_list_strings","hit_ip_purpose_list").INTERNET);
 	$meaning = SUGAR.language.get("app_list_strings","hit_ip_purpose_list");
 	var key = $("#line_purpose" + ln).val();
@@ -1067,24 +1068,52 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 	} else {
 		$("#displayed_line_organization" + ln).html($("#line_org" + ln).val());
 	}*/
-	console.log("displayed_line_ip_type = "+$("#displayed_line_ip_type"+ln).text());
+	//console.log("displayed_line_ip_type = "+$("#displayed_line_ip_type"+ln).text());
+	var is_assigned = 0;
 	if($("#displayed_line_ip_type"+ln).text()=="1"){
-		$("#displayed_line_name"+ln).text("");
+		//$("#displayed_line_name"+ln).text("");
+		$("#displayed_line_name" + ln).html($("#line_ip_subnet" + ln).val());
+	}
+	else{
+		$("#displayed_line_ip_qty" + ln).html("1");
+		$("#displayed_line_ip_lowest" + ln).html("");
+		$("#displayed_line_ip_highest" + ln).html("");
+		is_assigned = 1;
+		//console.log("11111111111111111111111111");
 	}
 	
+    //2016-12-26
+	if ($("#displayed_line_purpose" + ln).val() != "" ) {
+		is_assigned =1;
+		//console.log("22222222222222222222222");
+	}
+	/*else{
+		is_assigned =1;
+		console.log("22222222222222222222222");
+	}*/
+    if ($("#line_status"+ln).val()!="") {
+    	is_assigned =1;
+    	//console.log("33333333333333333333");
+    }
+    if(is_assigned == 1) {
 
-
-	if($("#line_status"+ln).val()!="") {
+		$("#displayed_line_status"+ln).html("<span class='color_tag color_asset_status_InService'>"+SUGAR.language.get('HIT_IP', 'LBL_ASSIGNED')+"</span>");
+	} else {
+		$("#displayed_line_status"+ln).html("<span class='color_tag color_asset_status_Idle'>"+SUGAR.language.get('HIT_IP', 'LBL_UNASSIGNED')+"</span>");
+	}
+    
+	/*if($("#line_status"+ln).val()!="") {
 
 	//if($("#line_status"+ln).val()>0) {
 		$("#displayed_line_status"+ln).html("<span class='color_tag color_asset_status_InService'>"+SUGAR.language.get('HIT_IP', 'LBL_ASSIGNED')+"</span>");
 	} else {
 		$("#displayed_line_status"+ln).html("<span class='color_tag color_asset_status_Idle'>"+SUGAR.language.get('HIT_IP', 'LBL_UNASSIGNED')+"</span>");
-	}
+	}*/
 
 	if($("#line_source_id"+ln).val()!="") {
 		$("#displayed_line_source_link"+ln).html("<a href='index.php?module=HAM_WO&action=DetailView&record="+$("#line_source_id"+ln).val()+"'>"+SUGAR.language.get('HIT_IP', 'LBL_DETAILS')+"</a>");
 	}
+
 }
 
 function resetItem(ln) { // 在用户重新选择IP之后，会连带的更新相关的字段信息。

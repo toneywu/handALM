@@ -1909,7 +1909,7 @@ $app_list_strings['hat_counting_task_status_list']=array (
   'Counted' => '已盘点',
 );
 $app_list_strings['hat_counting_adjust_method_list']=array (
-  ''=>'',
+  ''=>' ',
   'Retire' => '资产报废',
   'attrAdjust' => '资产属性变更',
   'Add' => '资产新增',
@@ -1920,6 +1920,7 @@ $app_list_strings['hat_counting_adjust_status_list']=array (
   'Processed' => '已调整',
 );
 $app_list_strings['hat_counting_line_result_list']=array (
+   ''=>' ',
   'Matched' => '帐实相符',
   'Different' => '盘点差异',
   'OverRage'=>'盘盈',

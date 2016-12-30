@@ -24,47 +24,37 @@
 
 
 
-$Id=$_REQUEST['record'];
-$instance_loc='iface_files/PUBLIC/';
-if(isset($_SESSION["current_framework_code"])){
-  $instance_loc='iface_files/'.$_SESSION["current_framework_code"].'/';
-} 
+$interfaceId=$_REQUEST['record'];
 //require_once('modules/HAA_Interfaces/'.$instance_loc.'createRevenueFromClaim.php');
-
-//WS安全信息
-$url = "http://stock.hand-china.com/hap/oauth/token?client_id=client2&client_secret=secret&grant_type=password&username=jessen&password=admin";
-//创建一个新cURL资源 
-$soap_do = curl_init();
-
-curl_setopt($soap_do, CURLOPT_URL, $url);
-
-curl_setopt($soap_do, CURLOPT_CONNECTTIMEOUT, 10);
-
-curl_setopt($soap_do, CURLOPT_TIMEOUT, 60);
-
-curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true);
-
-curl_setopt($soap_do, CURLOPT_SSL_VERIFYPEER, false);
-
-curl_setopt($soap_do, CURLOPT_SSL_VERIFYHOST, false);
-
-curl_setopt($soap_do, CURLOPT_POST, true);
-
-/*curl_setopt($soap_do, CURLOPT_POSTFIELDS, $postAllString);
-
-curl_setopt($soap_do, CURLOPT_HTTPHEADER, array (
-	'Content-Type: text/xml; charset=utf-8',
-	'Content-Length: ' . strlen($postAllString)
-));*/
-
-//抓取URL并把它传递给浏览器
-$result = curl_exec($soap_do);
-if (curl_errno($soap_do)) {
-	echo 'Curl error: ' . curl_error($soap_do);
+require_once('modules/HAA_Interfaces/syncCommonUtl.php');
+$interfaceInfo=getInterfaceInfo($interfaceId);
+$execute_func_files=$interfaceInfo ["execute_func_files"];
+$execute_func_name=$interfaceInfo ["execute_func_name"];
+$systemId=$interfaceInfo ["haa_codes_id_c"];
+$codeBean=BeanFactory::getBean('HAA_Codes',$systemId);
+if($codeBean){
+$systemCode=$codeBean->code_tag;
 }
+$instance_loc='';
+if(isset($_SESSION["current_framework_code"])){
+	$instance_loc='iface_files/'.$_SESSION["current_framework_code"].'/'.$systemCode.'/';
+	$include_file='modules/HAA_Interfaces/'.$instance_loc.$execute_func_files.'.php';
+} 
+if(!file_exists($include_file)){
+	$instance_loc='iface_files/PUBLIC/'.$systemCode.'/';
+	$include_file='modules/HAA_Interfaces/'.$instance_loc.$execute_func_files.'.php';
+}
+if(!file_exists($include_file)){
+	die('未能在服务器路径下找到接口执行文件，请联系技术运维人员。');
+}
+require_once($include_file);
 
-$result_array=json_decode($result);
-var_dump($result_array->access_token);
-//关闭cURL资源，并且释放系统资源
-curl_close($soap_do);
+$ifaceClass = new $execute_func_files();
+$return = $ifaceClass->$execute_func_name($interfaceId);
+if($return["error_code"]=='0'){
+	header('Location: index.php?module=HAA_Interfaces&action=DetailView&record='.$interfaceId);
+}
+else{
+	die('执行接口出错:'.$return["error_msg"]);
+}
 ?>

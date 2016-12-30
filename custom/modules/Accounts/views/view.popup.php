@@ -63,8 +63,7 @@ class AccountsViewPopup extends ViewPopup
         a.id = ac.id_c
         AND a.deleted = 0
         AND ac.haa_frameworks_id_c = '".$_SESSION["current_framework"]."'
-        AND ac.org_type_c = 'INTERNAL'
-        AND ac.is_asset_org_c = 1";
+        AND ac.org_type_c = 'INTERNAL'";
         $result=$db->query($sql);
         $resArr="";
         while($row=$db->fetchByAssoc($result)){

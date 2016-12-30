@@ -33,6 +33,7 @@ class HAT_Counting_TasksViewEdit extends ViewEdit
 			$('#loss_counting').val('".$count['loss_count']."');
 			$('#diff_counting').val('".$count['different_count']."');
 			$('#actual_adjust_count').val('".$count['processed_count']."');
+			$('#un_actual_counting').val('".$count['un_actual_counting']."');
 		</script>";
 			echo "<script>
 			$('#task_number').val('".$this->bean->task_number."');

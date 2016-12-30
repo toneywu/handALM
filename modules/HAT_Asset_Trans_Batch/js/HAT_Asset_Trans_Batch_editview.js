@@ -531,6 +531,7 @@ $(document).ready(function(){
 	$("#email").css("color","");
 	
 	$("#wo_lines").hide();
+	//$("#wo_lines").closest().hide();
     $("#wo_lines").after("<div id='wo_lines_display'></div>")
     if ($("#source_wo_id").val()!="") {
     	//如果来源于工作单则显示工作单对象行信息，否则直接隐藏行

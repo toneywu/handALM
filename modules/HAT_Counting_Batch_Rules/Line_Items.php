@@ -54,7 +54,6 @@ function display_lines($focus, $field, $value, $view){
          	AND h.deleted = 0
          	AND hcb.hat_counti9a14_batchs_ida ='".$focus->id."'";
 
-
          	$result = $focus->db->query($sql);
 
          	while ($row = $focus->db->fetchByAssoc($result)) {

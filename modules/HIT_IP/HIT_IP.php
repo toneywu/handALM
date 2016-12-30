@@ -54,24 +54,28 @@ class HIT_IP extends HIT_IP_sugar {
 		//计算当前IP子网的数量
 		$sel = "SELECT count(ip_qty) sum_ip_qty FROM hit_ip_subnets WHERE hit_ip_subnets.`deleted`=0 AND hit_ip_subnets.`parent_hit_ip_id` ='".$this->id."'";
 		$beanSEL = $db->query($sel);
-
+        $COUNT_SUBNET_QTY = 0;
 	    while ( $result = $db->fetchByAssoc($beanSEL) ) {
 	    	if (!empty ($result['sum_ip_qty']))
-				$SUM_IP_QTY .= $result['sum_ip_qty'];
+				$COUNT_SUBNET_QTY .= $result['sum_ip_qty'];
 
 		}
+        
+		//2016-12-30 
+        $SUM_IP_QTY = 256;
 
-		if (empty($SUM_IP_QTY)) {
+		if ($COUNT_SUBNET_QTY == 0 ) {
 			$IP_Fields['STATUS'] = translate('LBL_UNDEFINED','HIT_IP');
 			$IP_Fields['COLOR_TAG'] = 'OutOfService';
 
 		} else {
 			//计算当前子网已经分派的IP数量，
-			$sel = "SELECT COUNT(1) sum_ip_a_qty FROM hit_ip_subnets his WHERE his.deleted = 0 AND his.parent_hit_ip_id = '".$this->id."' AND EXISTS 
+			$sel = "SELECT sum(ip_qty) sum_ip_a_qty FROM hit_ip_subnets his WHERE his.deleted = 0 AND his.parent_hit_ip_id = '".$this->id."' AND his.ip_type != 0
+			AND (his.purpose != '' OR 
+			EXISTS 
 		(SELECT 1 FROM hit_ip_allocations hia WHERE (hia.accurate_ip = his.id  OR hia.hit_ip_subnets_id = his.id) AND hia.`deleted`=0
 		AND (hia.`date_from`='' OR hia.`date_from` IS NULL OR hia.date_from>=CURDATE())
-		AND (hia.`date_to`='' OR hia.`date_to` IS NULL OR hia.`date_to`<=CURDATE()))";
-
+		AND (hia.`date_to`='' OR hia.`date_to` IS NULL OR hia.`date_to`<=CURDATE())))";
 
 			$beanSEL = $db->query($sel);
 			$SUM_IP_ALLOCATED_QTY=0;
@@ -81,13 +85,25 @@ class HIT_IP extends HIT_IP_sugar {
 					$SUM_IP_ALLOCATED_QTY .= $result['sum_ip_a_qty'];
 
 			}
+			//var_dump($sel);
+			$sel1 = "SELECT COUNT(1) sum_ip_a_qty FROM hit_ip_subnets his WHERE his.deleted = 0 AND his.parent_hit_ip_id = '".$this->id."' AND his.ip_type = 0";
+            $beanSEL1 = $db->query($sel1);
+            $result1 = $db->fetchByAssoc($beanSEL1);
+            $SUM_IP_ALLOCATED_QTY  +=  $result1['sum_ip_a_qty'];
 
+            //var_dump($sel1);
+            /*$sel2 = "SELECT sum(ip_qty) sum_ip_a_qty FROM hit_ip_subnets his WHERE his.deleted = 0 AND his.parent_hit_ip_id = '".$this->id."' AND his.purpose != ''";
+            $beanSEL2 = $db->query($sel2);
+            $result2 = $db->fetchByAssoc($beanSEL2);
+            $SUM_IP_ALLOCATED_QTY  +=  $result2['sum_ip_a_qty'];
+            
+            var_dump($sel2);*/
 			if ($SUM_IP_ALLOCATED_QTY==0) {
 				$IP_Fields['STATUS'] = translate('LBL_UNASSIGNED','HIT_IP');
 				$IP_Fields['COLOR_TAG'] = 'Idle';
 
 			} else {
-				$IP_Fields['STATUS'] = round(($SUM_IP_ALLOCATED_QTY/$SUM_IP_QTY) * 100)."% ".translate('LBL_ASSIGNED','HIT_IP');
+				$IP_Fields['STATUS'] = (round(($SUM_IP_ALLOCATED_QTY/$SUM_IP_QTY),4) * 100)."% ".translate('LBL_ASSIGNED','HIT_IP');
 				$IP_Fields['COLOR_TAG'] = 'InService';
 			}
 		}

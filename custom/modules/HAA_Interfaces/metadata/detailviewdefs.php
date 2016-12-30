@@ -121,7 +121,14 @@ array (
             'name' => 'execute_func_files',
             'label' => 'LBL_EXECUTE_FUNC_FILES',
             ),
-          1 => 'description',
+          1 => array (
+            'name' => 'execute_func_name',
+            'label' => 'LBL_EXECUTE_FUNC_NAME',
+            ),
+          ),
+        5 => 
+        array (
+          0 => 'description',
           ),
         ),
       'lbl_detailview_panel1' => 
@@ -167,5 +174,5 @@ array (
         ),
       ),
     ),
-  );
-  ?>
+);
+?>

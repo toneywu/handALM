@@ -32,6 +32,7 @@ function display()
 			$('#loss_counting').html('".$count['loss_count']."');
 			$('#diff_counting').html('".$count['different_count']."');
 			$('#actual_adjust_count').html('".$count['processed_count']."');
+			$('#un_actual_counting').html('".$count['un_actual_counting']."');
 		</script>";
 			echo "<script>
 			$('#task_number').val('".$this->bean->task_number."');

@@ -24,47 +24,30 @@
 
 
 
-$Id=$_REQUEST['record'];
-$instance_loc='iface_files/PUBLIC/';
-if(isset($_SESSION["current_framework_code"])){
-  $instance_loc='iface_files/'.$_SESSION["current_framework_code"].'/';
-} 
-//require_once('modules/HAA_Interfaces/'.$instance_loc.'createRevenueFromClaim.php');
+function getInterfaceInfo($interfaceId) {
+	global $db;
+	$result = array();
+	$sql = "SELECT
+	a.auth_key,
+	a.auth_user_name,
+	a.execute_func_files,
+	a.execute_func_name,
+	a.interface_type,
+	a.interface_code,
+	a.own_module,
+	a.parameter_info,
+	a.haa_codes_id_c,
+	a.service_url
+	FROM
+	haa_interfaces a
+	WHERE
+	a.id ='" . $interfaceId . "'";
 
-//WS安全信息
-$url = "http://stock.hand-china.com/hap/oauth/token?client_id=client2&client_secret=secret&grant_type=password&username=jessen&password=admin";
-//创建一个新cURL资源 
-$soap_do = curl_init();
+	$sqlresult = $db->query($sql);
+	while ($resultrow = $db->fetchByAssoc($sqlresult)) {
 
-curl_setopt($soap_do, CURLOPT_URL, $url);
-
-curl_setopt($soap_do, CURLOPT_CONNECTTIMEOUT, 10);
-
-curl_setopt($soap_do, CURLOPT_TIMEOUT, 60);
-
-curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true);
-
-curl_setopt($soap_do, CURLOPT_SSL_VERIFYPEER, false);
-
-curl_setopt($soap_do, CURLOPT_SSL_VERIFYHOST, false);
-
-curl_setopt($soap_do, CURLOPT_POST, true);
-
-/*curl_setopt($soap_do, CURLOPT_POSTFIELDS, $postAllString);
-
-curl_setopt($soap_do, CURLOPT_HTTPHEADER, array (
-	'Content-Type: text/xml; charset=utf-8',
-	'Content-Length: ' . strlen($postAllString)
-));*/
-
-//抓取URL并把它传递给浏览器
-$result = curl_exec($soap_do);
-if (curl_errno($soap_do)) {
-	echo 'Curl error: ' . curl_error($soap_do);
+		$result=$resultrow;
+	}
+	return $result;
 }
-
-$result_array=json_decode($result);
-var_dump($result_array->access_token);
-//关闭cURL资源，并且释放系统资源
-curl_close($soap_do);
 ?>
