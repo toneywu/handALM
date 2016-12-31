@@ -779,6 +779,11 @@ function resetEditorFields(ln) {
      } else {
        $("#line_target_asset_status"+ln).val($("#line_current_asset_status"+ln).val());//目标状态=当前资产状态（保持不变）,以Value保存
      }
+    if (eventOptions.keep_seperated_allc_rack_using_org=="1" && $("#line_enable_partial_allocation"+ln).val()=="1") {
+      //当前为散U机柜且EventType定义散U机柜不变Status
+      $("#line_target_asset_status"+ln).val($("#line_current_asset_status"+ln).val());//目标状态=当前资产状态（保持不变）,以Value保存
+    }
+
      var target_status_value = $("#line_target_asset_status"+ln).val();
      var target_status_text = hat_asset_status_list.filter(function(obj) {
       return obj.name === target_status_value;

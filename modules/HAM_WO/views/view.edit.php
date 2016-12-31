@@ -22,9 +22,14 @@ class HAM_WOViewEdit extends ViewEdit {
 		$current_site_id = empty($this->bean->ham_maint_sites_id)?"":$this->bean->ham_maint_sites_id;
 		$current_module = $this->module;
 		$current_action = $this->action;
+
+		$haa_frameworks_id="";
 		$this->ss->assign('MAINT_SITE',set_site_selector($current_site_id,$current_module,$current_action));
-		$bean_site = BeanFactory :: getBean('HAM_Maint_Sites', $current_site_id);
-		$haa_frameworks_id=$bean_site->haa_frameworks_id;
+		if (!empty($current_site_id)) {
+			$bean_site = BeanFactory :: getBean('HAM_Maint_Sites', $current_site_id);
+			$haa_frameworks_id=$bean_site->haa_frameworks_id;
+		}
+
 		//2、如果当前数据来源于SR（有参数sr_id）则从对应的SR上复制信息
 		if (isset ($_GET['sr_id']) && $_GET['sr_id'] != "") {
 			//如果有SR关联(由SR创建 WO时)
@@ -283,20 +288,19 @@ class HAM_WOViewEdit extends ViewEdit {
 
         	//增加组织的安全性20161211
          //增加HPR权限控制逻辑
-		require_once('modules/HPR_Group_Priviliges/checkListACL.php');
+/*		require_once('modules/HPR_Group_Priviliges/checkListACL.php');
 		$current_user_id =$current_user->id;
 		$paraArray=array();
 		$paraArray[]=$current_user_id;
-		$aclSQLList=getListViewSQLStatement('Accounts',$current_user_id,$haa_frameworks_id,$paraArray);
-		echo '<input id="org_acl_sqllist" name="org_acl_sqllist" type="hidden" value="'.$aclSQLList.'">';
+		$aclSQLList=getListViewSQLStatement('Accounts', $current_user_id, $haa_frameworks_id, $paraArray);
+		echo '<input id="org_acl_sqllist" name="org_acl_sqllist" type="hidden" value="'.$aclSQLList.'">';*/
     //End HPR权限控制逻辑
         //
 
 		//2016-12-13 add by yuan.chen
 		$this->bean->work_order_access='OWNER';
 		$ham_wo_center_people_beans = BeanFactory :: getBean("HAM_Work_Center_People")->get_full_list('', "ham_work_center_people.contact_id ='" . $current_user->contact_id_c . "'");
-		//echo "count = ".count($ham_wo_center_people_beans);
-		//echo count($ham_wo_center_people_beans);
+
 		if(count($ham_wo_center_people_beans)==1){
 			$this->bean->work_center_people_id=$ham_wo_center_people_beans[0]->id;
 			$this->bean->work_center_people=$ham_wo_center_people_beans[0]->name;

@@ -23,16 +23,16 @@ if (!empty($_POST['asset_status'])) {
 
 /*资产名称*/
 if (!empty($_POST['asset_name'])) {
-	$where_asset_name = " AND hat_assets.name LIKE '". $_POST['asset_name']."'";
+	$where_asset_name = " AND hat_assets.name LIKE '%". $_POST['asset_name']."%'";
 } else {
 	$where_asset_name ="";
 }
 
 /*SN*/
 if (!empty($_POST['serial_number'])) {
-  $where_asset_name = " AND hat_assets.serial_number LIKE '". $_POST['serial_number']."'";
+  $where_asset_sn = " AND hat_assets.serial_number LIKE '%". $_POST['serial_number']."%'";
 } else {
-  $where_asset_name ="";
+  $where_asset_sn ="";
 }
 
 
@@ -52,14 +52,14 @@ if (!empty($_POST['site_select'])) {
 
 /*资产使用组织*/
 if (!empty($_POST['using_org_name'])) {
-  $join_using_org = " JOIN accounts account_u ON (hat_assets.using_org_id = account_u.id AND account_u.name like '".$_POST['using_org_name']."')";
+  $join_using_org = " JOIN accounts account_u ON (hat_assets.using_org_id = account_u.id AND account_u.name like '%".$_POST['using_org_name']."%')";
 }else{
   $join_using_org="";
 }
 
 /*资产使用组织*/
 if (!empty($_POST['owning_org_name'])) {
-  $join_owning_org = " JOIN accounts account_o ON (hat_assets.using_org_id = account_o.id AND account_o.name like '".$_POST['owning_org_name']."')";
+  $join_owning_org = " JOIN accounts account_o ON (hat_assets.using_org_id = account_o.id AND account_o.name like '%".$_POST['owning_org_name']."%')";
 }else{
   $join_owning_org="";
 }
@@ -68,8 +68,10 @@ if (!empty($_POST['owning_org_name'])) {
 $where_limit  = " LIMIT 0,200";
 //echo $select_from.$where_status.$where_asset_name.$where_site_select;
 //
-$SQL_Query = $select_from.$where_framework.$join_using_org.$join_owning_org." WHERE hat_assets.deleted=0 ".$where_status.$where_asset_name.$where_site_select.$where_limit;
+$SQL_Query = $select_from.$where_framework.$join_using_org.$join_owning_org." WHERE hat_assets.deleted=0 ".$where_status.$where_asset_name.$where_asset_sn.$where_site_select.$where_limit;
+
 //echo $SQL_Query;
+
 
 
 

@@ -242,32 +242,42 @@ function save_rack_elements_from_rack($allocation_id, $key, $focused_trans_line)
     $beanAssetOnRack->save();
 }
 
-function remove_rack_elements_from_rack($allocation_id) {
+function remove_rack_elements_from_rack($allocation_id, $focused_trans_line) {
     //清空机柜上的分配
-    $beanRackAllocation = BeanFactory::getBean('HIT_Rack_Allocations', $allocation_id );
-    echo "start to remove rack elements";
+    $beanRackAllocation = BeanFactory::getBean('HIT_Rack_Allocations', $allocation_id);
+    echo "<br/>start to remove rack elements, allocation_id=".$allocation_id;
+
     if ($beanRackAllocation) {
+
+        $AssetOnRackID=$beanRackAllocation->hat_assets_id;
+            echo "<br/>got asset id from allocation:".$beanRackAllocation->hat_assets_id;
+
         $beanRackAllocation->deleted=1;
         $beanRackAllocation->save();
-    }
-    //清空机柜上设备的信息
-    $beanAssetOnRack = BeanFactory::getBean('HAT_Assets',$RackAllocation->hat_assets_id);
-    if ($beanAssetOnRack) {
-        $beanAssetOnRack->using_org_id = "";
-        $beanAssetOnRack->using_person_id = "";
-        $beanAssetOnRack->using_person_desc = "";
-        $beanAssetOnRack->parent_asset_id ="";
-        //$beanAssetOnRack->hat_asset_locations_hat_assetshat_asset_locations_ida = "";
-        //将资产的位置还原为地点上的默认位置
-        $beanLocation = BeanFactory::getBean('HAT_Asset_Locations',$focused_trans_line->target_location_id);
-        $beanSite = BeanFactory::getBean('HAM_Maint_Sites',$beanLocation->ham_maint_sites_id);
-        $beanAssetOnRack->hat_asset_locations_hat_assetshat_asset_locations_ida = $beanSite->deft_unassigned_location_id;
+        //清空机柜上设备的信息
+        $beanAssetOnRack = BeanFactory::getBean('HAT_Assets', $AssetOnRackID);
+        if ($beanAssetOnRack) {
+            echo "<br/>got asset from HAT_Assets:".$beanRackAllocation->hat_assets_id;
+            $beanAssetOnRack->using_org_id = "";
+            $beanAssetOnRack->using_person_id = "";
+            $beanAssetOnRack->using_person_desc = "";
+            $beanAssetOnRack->parent_asset_id ="";
+            //$beanAssetOnRack->hat_asset_locations_hat_assetshat_asset_locations_ida = "";
+            //将资产的位置还原为地点上的默认位置
 
-        echo "location=".$beanAssetOnRack->hat_asset_locations_hat_assetshat_asset_locations_ida;
-        echo "<br/>Asset[".($beanAssetOnRack->name)."] located on Rack has been set removed.";
+            $beanLocation = BeanFactory::getBean('HAT_Asset_Locations',$focused_trans_line->current_location_id);
+            echo "<br/>get location = ".$focused_trans_line->current_location_id;
+            $beanSite = BeanFactory::getBean('HAM_Maint_Sites',$beanLocation->ham_maint_sites_id);
+            echo "<br/>get site = ".$beanLocation->ham_maint_sites_id;
+            $beanAssetOnRack->hat_asset_locations_hat_assetshat_asset_locations_ida = $beanSite->deft_unassigned_location_id;
+            echo "<br/>get locaton_id = ".$beanSite->deft_unassigned_location_id;
 
-        $beanAssetOnRack->asset_status = $focused_trans_line->target_asset_status;
-        $beanAssetOnRack->save();
+            echo "location=".$beanAssetOnRack->hat_asset_locations_hat_assetshat_asset_locations_ida;
+            echo "<br/>Asset[".($beanAssetOnRack->name)."] located on Rack has been set removed.";
+
+            $beanAssetOnRack->asset_status = $focused_trans_line->target_asset_status;
+            $beanAssetOnRack->save();
+        }
     }
 }
 
@@ -304,7 +314,7 @@ function save_asset_lines($focus){
                              );
                     if($beanRackAllocations) {
                         foreach ($beanRackAllocations as $RackAllocation) {
-                            remove_rack_elements_from_rack($RackAllocation->id);
+                            remove_rack_elements_from_rack($RackAllocation->id, $focus);
                         }
                     }
                 }
@@ -378,7 +388,7 @@ function save_rack_allocations($focused_trans_line, $header) {
             foreach($jsonData as $key) {
                 if ($key->id!="" && $key->inactive_using=='1') {
                     //如果机柜分配中的分配行有失效记录，则调用以下的函数，将机柜分配和设备信息进行清空
-                    remove_rack_elements_from_rack($key->id);
+                    remove_rack_elements_from_rack($key->id, $focused_trans_line);
                 } else {
                     save_rack_elements_from_rack($key->id, $key, $focused_trans_line);
                 }//END IF非删除
