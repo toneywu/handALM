@@ -60,28 +60,35 @@ $subpanel_layout['list_fields'] = array (
     'type' => 'bool',
     'default' => true,
     'vname' => 'LBL_LOCT_DIFF_FLAG',
-    'width' => '10%',
+    'width' => '8%',
   ),
   'org_diff_flag' => 
   array (
     'type' => 'bool',
     'default' => true,
     'vname' => 'LBL_ORG_DIFF_FLAG',
-    'width' => '10%',
+    'width' => '8%',
   ),
   'status_diff_flag' => 
   array (
     'type' => 'bool',
     'default' => true,
     'vname' => 'LBL_STATUS_DIFF_FLAG',
-    'width' => '10%',
+    'width' => '8%',
   ),
   'adjust_needed' => 
   array (
     'type' => 'bool',
     'default' => true,
     'vname' => 'LBL_ADJUST_NEEDED',
-    'width' => '10%',
+    'width' => '8%',
+  ),
+  'counting_result' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'vname' => 'LBL_COUNTING_RESULT',
+    'width' => '8%',
   ),
   'edit_button' => 
   array (

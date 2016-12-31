@@ -898,7 +898,7 @@ function return_app_list_strings_language($language)
             include "custom/include/language/$lang.lang.php";
             $GLOBALS['log']->info("Found custom language file: $lang.lang.php");
         }
-        // Add By osmond.liu 20161225
+      /*  // Add By osmond.liu 20161225
         $instance_loc='';
         if(isset($_SESSION["current_framework_code"])){
           $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
@@ -908,7 +908,7 @@ function return_app_list_strings_language($language)
         include $instance_file;
         $GLOBALS['log']->info("Found custom language file: $lang.lang.php");
     }
-    //End osmond.liu 20161225
+    //End osmond.liu 20161225*/
 }
 
 if (!isset($app_list_strings)) {
