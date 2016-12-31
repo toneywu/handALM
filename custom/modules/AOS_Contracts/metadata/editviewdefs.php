@@ -242,50 +242,59 @@ array (
           ),
           1 => 
           array (
-            'name' => 'attribute1_c',
+            'name' => 'number_of_periods_c',
             'studio' => 'visible',
-            'label' => 'LBL_ATTRIBUTE1_C',
+            'label' => 'LBL_NUMBER_OF_PERIODS',
           ),
         ),
         10 => 
         array (
           0 => 
           array (
-            'name' => 'attribute2_c',
+            'name' => 'attribute1_c',
             'studio' => 'visible',
-            'label' => 'LBL_ATTRIBUTE2_C',
+            'label' => 'LBL_ATTRIBUTE1_C',
           ),
           1 => 
           array (
-            'name' => 'attribute3_c',
+            'name' => 'attribute2_c',
             'studio' => 'visible',
-            'label' => 'LBL_ATTRIBUTE3_C',
+            'label' => 'LBL_ATTRIBUTE2_C',
           ),
         ),
         11 => 
         array (
           0 => 
           array (
+            'name' => 'attribute3_c',
+            'studio' => 'visible',
+            'label' => 'LBL_ATTRIBUTE3_C',
+          ),
+          1 => 
+          array (
             'name' => 'attribute4_c',
             'studio' => 'visible',
             'label' => 'LBL_ATTRIBUTE4_C',
           ),
-          1 => 
+        ),
+        12 => 
+        array (
+          0 => 
           array (
             'name' => 'attribute5_c',
             'studio' => 'visible',
             'label' => 'LBL_ATTRIBUTE5_C',
           ),
-        ),
-        12 => 
-        array (
-          0 => 'description',
           1 => 
           array (
             'name' => 'attribute6_c',
             'studio' => 'visible',
             'label' => 'LBL_ATTRIBUTE6_C',
           ),
+        ),
+        13 => 
+        array (
+          0 => 'description',
         ),
       ),
       'lbl_line_items' => 
@@ -307,7 +316,7 @@ array (
             'label' => 'LBL_LINE_ITEMS',
           ),
         ),
-        3 => 
+        2 => 
         array (
           0 => 
           array (
@@ -315,7 +324,7 @@ array (
             'label' => 'LBL_TOTAL_AMT',
           ),
         ),
-        4 => 
+        3 => 
         array (
           0 => 
           array (
@@ -323,7 +332,7 @@ array (
             'label' => 'LBL_DISCOUNT_AMOUNT',
           ),
         ),
-        5 => 
+        4 => 
         array (
           0 => 
           array (
@@ -331,7 +340,7 @@ array (
             'label' => 'LBL_SUBTOTAL_AMOUNT',
           ),
         ),
-        6 => 
+        5 => 
         array (
           0 => 
           array (
@@ -346,7 +355,7 @@ array (
             ),
           ),
         ),
-        7 => 
+        6 => 
         array (
           0 => 
           array (
@@ -354,7 +363,7 @@ array (
             'label' => 'LBL_SHIPPING_TAX_AMT',
           ),
         ),
-        8 => 
+        7 => 
         array (
           0 => 
           array (
@@ -362,7 +371,7 @@ array (
             'label' => 'LBL_TAX_AMOUNT',
           ),
         ),
-        9 => 
+        8 => 
         array (
           0 => 
           array (

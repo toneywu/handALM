@@ -178,11 +178,10 @@ class LanguageManager
 		// Some of the vardefs do not correctly define dictionary as global.  Declare it first.
 		// Add By osmond.liu 20161219
 
-		if(isset($_SESSION["current_framework_code"])) {
-			$instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
-		} else {
-			$instance_loc='instance/PUBLIC/';
-		}
+		              $instance_loc='instance/PUBLIC/';
+if(isset($_SESSION["current_framework_code"])){
+  $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+}
 
 		$lang_paths = array(
 			'modules/'.$module.'/language/'.$lang.'.lang.php',

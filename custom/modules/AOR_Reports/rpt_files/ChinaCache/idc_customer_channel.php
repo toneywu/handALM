@@ -57,8 +57,8 @@ function custom_report_main($paraArray=array()){
     header("Pragma: cache");
     /*header("Content-type: text/comma-separated-values; charset=".$GLOBALS['locale']->getExportCharset());
     header("Content-Disposition: attachment; filename=\"{$name}.csv\"");*/
-    header("Content-type: text/comma-separated-values; charset=GBK");
-    header("Content-Disposition: attachment; filename=\"test.csv\"");
+    header("Content-type: text/html; charset=GBK");
+    header("Content-Disposition: attachment; filename=\"{$name}.csv\"");
     header("Content-transfer-encoding: binary");
     header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
     header("Last-Modified: " . TimeDate::httpTime() );
@@ -69,14 +69,10 @@ function custom_report_main($paraArray=array()){
     }
     //$name = mb_convert_encoding($name,'BUC-CN');
     $name= $GLOBALS['locale']->translateCharset($name, 'UTF-8', $GLOBALS['locale']->getExportCharset());
-    $myfile = fopen("custom/modules/AOR_Reports/rpt_data_files/".$name.".csv", "w") or die("Unable to open file!");
-    fwrite($myfile, $csv);
-    fclose($myfile);
+    $name = $name.getMillisecond();
+    createRptDataFile($name,$csv);
     print $name.'.csv';
 
     sugar_cleanup(true);
-}
-function encloseForCSV($field,$delimiter =','){
-    return '"'.$field.'"'.$delimiter;
 }
 ?>

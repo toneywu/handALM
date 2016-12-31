@@ -14,6 +14,23 @@ array (
           1 => 'DUPLICATE',
           2 => 'DELETE',
           3 => 'FIND_DUPLICATES',
+          4 => 
+          array (
+            'customCode' => '<input type="submit" class="button" onClick="this.form.action.value=\'createToTasks\';" value="{$MOD.LBL_CREATE_TASK}">',
+               'sugar_html' => 
+            array (
+              'type' => 'submit',
+              'value' => '{$MOD.LBL_CREATE_TASK}',
+              'htmlOptions' => 
+              array (
+                'class' => 'button',
+                'id' => 'create_to_task_button',
+                'title' => '{$MOD.LBL_CREATE_TASK}',
+                'onclick' => 'this.form.action.value=\'createToTasks\';',
+                'name' => 'Create to Task',
+                ),
+              ),
+            ),
         ),
       ),
       'maxColumns' => '2',

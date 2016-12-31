@@ -121,7 +121,9 @@ z1.innerHTML  =
     "<input type='hidden' name='linepri_enabled_flag["+prodln+"]' value='0'> "+
     "<td><input name='linepri_enabled_flag["+prodln+"]'  id='linepri_enabled_flag"+prodln+"'  value='1' type='checkbox' checked></td>"+
     "<td>"+SUGAR.language.get('HPR_Groups','LBL_PRI_POPUP_GLOBAL_FLAG')+"</td>"+
-    "<td><input type='checkbox' id='linepri_popup_global_flag"+prodln+"' name='linepri_popup_global_flag["+prodln+"]' value=''/></td>"+
+    "<td>"+
+    "<input type='hidden' name='linepri_popup_global_flag["+prodln+"]' value='0'> "+
+    "<input type='checkbox' id='linepri_popup_global_flag"+prodln+"' name='linepri_popup_global_flag["+prodln+"]' value=''/></td>"+
   "</tr>"+
   "<tr>"+
     "<td>"+SUGAR.language.get('HPR_Groups','LBL_PRI_SQL_STATEMENT_FOR_POPUP')+"</td>"+
@@ -160,7 +162,7 @@ function renderLine_pri(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_linepri_sql_statement_for_listview"+ln).html($("#linepri_sql_statement_for_listview"+ln).val());
   var flag=$("#linepri_enabled_flag"+ln).is(':checked')?"是":"否";
   $("#linepri_enabled_flag"+ln).val($("#linepri_enabled_flag"+ln).is(':checked')?"1":"0");
-  $("#displayed_linepri_enabled_flag"+ln).html(flag);//linepri_popup_global_flag
+  $("#displayed_linepri_enabled_flag"+ln).html(flag);
   var popup_global_flag=$("#linepri_popup_global_flag"+ln).is(":checked")?"是":"否";
   $("#displayed_linepri_popup_global_flag"+ln).html(popup_global_flag);
   $("#linepri_popup_global_flag"+ln).val($("#linepri_popup_global_flag"+ln).is(':checked')?"1":"0");

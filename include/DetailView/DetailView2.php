@@ -102,11 +102,10 @@ class DetailView2 extends EditView
         	    fclose($fp);
         	}
 //Modefy instance by osmond.liu 20161219
-            $instance_loc='';
+            $instance_loc='instance/PUBLIC/';
 if(isset($_SESSION["current_framework_code"])){
   $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
 }
-        $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
         if(file_exists($instance_loc."modules/$this->module/metadata/detailviewdefs.php")) {
             require($instance_loc."modules/$this->module/metadata/detailviewdefs.php");
         }

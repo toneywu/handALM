@@ -28,7 +28,7 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        /*'LBL_EDITVIEW_PANEL1' => 
+        'LBL_EDITVIEW_PANEL1' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
@@ -37,7 +37,7 @@ array (
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
-        ),*/
+        ),
       ),
     ),
     'panels' => 
@@ -58,6 +58,30 @@ array (
           1 => 'assigned_user_name',
         ),
       ),
+       'lbl_editview_panel1' => 
+    array (
+      0 => 
+      array (
+        0 => 
+        array (
+          'name' => 'line_items',
+          'studio' => 'visible',
+          'label' => 'LBL_LINE_ITEMS',
+        ),
+      ),
+    ),
+     'lbl_editview_panel2' => 
+    array (
+      0 => 
+      array (
+        0 => 
+        array (
+          'name' => 'line_doc_items',
+          'studio' => 'visible',
+          'label' => 'LBL_LINE_DOC_ITEMS',
+        ),
+      ),
+    ),
       /*'lbl_editview_panel1' => 
       array (
         0 => 

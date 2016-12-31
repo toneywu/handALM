@@ -64,7 +64,7 @@ $dictionary['HAT_Counting_Lines'] = array(
     'len' => 36,
     'size' => '20',
   ),
-  'line_items' =>
+/*  'line_items' =>
             array(
                 'required' => false,
                 'name' => 'line_items',
@@ -83,8 +83,30 @@ $dictionary['HAT_Counting_Lines'] = array(
                         'returns' => 'html',
                         'include' => 'modules/HAT_Counting_Results/Line_Items.php'
                     ),
-            ),
-    'line_doc_items' =>
+            ),*/
+    'line_items' =>
+      array(
+        'required' => false,
+        'name' => 'line_items',
+        'vname' => 'LBL_LINE_ITEMS',
+        'type' => 'varchar',
+        'source' => 'non-db',
+        'massupdate' => 0,
+        'no_default' => false,
+        'comments' => '',
+        'help' => '',
+        'importable' => 'true',
+        'duplicate_merge' => 'disabled',
+        'duplicate_merge_dom_value' => '0',
+        'audited' => false,
+        'inline_edit' => true,
+        'reportable' => true,
+        'unified_search' => false,
+        'merge_filter' => 'disabled',
+        'len' => '255',
+        'size' => '20',
+        ),
+ /*   'line_doc_items' =>
             array(
                 'required' => false,
                 'name' => 'line_doc_items',
@@ -103,7 +125,29 @@ $dictionary['HAT_Counting_Lines'] = array(
                         'returns' => 'html',
                         'include' => 'modules/HAT_Counting_Results/Line_Doc_Items.php'
                     ),
-            ),
+            ),*/
+    'line_doc_items' =>
+      array(
+        'required' => false,
+        'name' => 'line_doc_items',
+        'vname' => 'LBL_LINE_DOC_ITEMS',
+        'type' => 'varchar',
+        'source' => 'non-db',
+        'massupdate' => 0,
+        'no_default' => false,
+        'comments' => '',
+        'help' => '',
+        'importable' => 'true',
+        'duplicate_merge' => 'disabled',
+        'duplicate_merge_dom_value' => '0',
+        'audited' => false,
+        'inline_edit' => true,
+        'reportable' => true,
+        'unified_search' => false,
+        'merge_filter' => 'disabled',
+        'len' => '255',
+        'size' => '20',
+        ),
   'asset' => 
   array (
     'required' => true,

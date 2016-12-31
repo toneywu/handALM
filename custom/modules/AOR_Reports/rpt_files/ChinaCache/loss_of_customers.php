@@ -220,7 +220,7 @@ function custom_report_main($paraArray){
 
     ob_clean();
     header("Pragma: cache");
-    header("Content-type: text/comma-separated-values; charset=GBK");
+    header("Content-type: text/html; charset=GBK");
    /* header("Content-type: text/comma-separated-values; charset=".$GLOBALS['locale']->getExportCharset());*/
     header("Content-Disposition: attachment; filename=\"{$name}.csv\"");
     header("Content-transfer-encoding: binary");
@@ -232,16 +232,11 @@ function custom_report_main($paraArray){
         $csv = chr(255) . chr(254) . mb_convert_encoding($csv, 'UTF-16LE', 'UTF-8');
     }
 
-
+    $name = $name.getMillisecond();
     $name= $GLOBALS['locale']->translateCharset($name, 'UTF-8', $GLOBALS['locale']->getExportCharset());
-    $myfile = fopen("custom/modules/AOR_Reports/rpt_data_files/".$name.".csv", "w") or die("Unable to open file!");
-    fwrite($myfile, $csv);
-    fclose($myfile);
+    createRptDataFile($name,$csv);
     print $name.'.csv';
 
     sugar_cleanup(true);
-}
-function encloseForCSV($field,$delimiter =','){
-    return '"'.$field.'"'.$delimiter;
 }
 ?>

@@ -109,8 +109,8 @@ array (
             'customCode' => '<select name="adjust_posted[]" id="adjust_posted" title="" disabled="disabled">
 <option label="是" value="Y">是</option>
 <option label="部分" value="P">部分</option>
-<option label="否" value="N">否</option>
-</select><input type="hidden" name="adjust_posted[]" value="Y" />',
+<option label="否" value="N" selected>否</option>
+</select><input type="hidden" name="adjust_posted[]" value="N" />',
           ),
         ),
         5 => 

@@ -91,7 +91,17 @@ class AOS_InvoicesViewEdit extends ViewEdit {
 		}*/
 
 		//*********************处理FF界面 END********************
-		echo "<script>$('#closed_date_c').val('".$this->bean->closed_date_c."')</script>";
+		$amount_c=$this->bean->amount_c;
+		$amount_c=preg_replace("/,/", "", $amount_c);
+		if ($this->bean->id) {
+			$this->bean->amount_c=number_format($amount_c,2,'.',',');
+			echo "<script>
+			$('#closed_date_c').val('".$this->bean->closed_date_c."');
+			$('#status').val('".$this->bean->status."');
+			$('#amount_c').val('".$this->bean->amount_c."');
+			$('#unpaied_amount_c').attr('readonly',true);
+			</script>";
+		}
 	}
 	
 	function populateInvoiceTemplates(){

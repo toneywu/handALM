@@ -75,3 +75,11 @@ $app_list_strings['haos_source_code_list']=array (
   'Others' => '其他事件',
   'Ref_System' => '外围系统',
   );
+
+$app_list_strings['haos_number_of_periods']=array (
+  ''   => ' ', 
+  '12' => '12',
+  '24' => '24',
+  '36' => '36',
+  '48' => '48',
+  );

@@ -1799,7 +1799,7 @@ $dictionary['HAT_Assets'] = array(
       'len' => '255',
       'size' => '20',
       ),
-    'using_person_desc' =>
+/*    'using_person_desc' =>
     array (
       'required' => false,
       'name' => 'using_person_desc',
@@ -1819,8 +1819,8 @@ $dictionary['HAT_Assets'] = array(
       'merge_filter' => 'disabled',
       'len' => '255',
       'size' => '20',
-      ),
-    'owning_person_desc' =>
+      ),*/
+/*    'owning_person_desc' =>
     array (
       'required' => false,
       'name' => 'owning_person_desc',
@@ -1840,12 +1840,12 @@ $dictionary['HAT_Assets'] = array(
       'merge_filter' => 'disabled',
       'len' => '255',
       'size' => '20',
-      ),    
-    'using_person' =>
+      ),  */  
+    'using_person_desc' =>
     array (
       'required' => false,
       'source' => 'non-db',
-      'name' => 'using_person',
+      'name' => 'using_person_desc',
       'vname' => 'LBL_USING_PERSON',
       'type' => 'relate',
       'massupdate' => 0,
@@ -1939,11 +1939,11 @@ $dictionary['HAT_Assets'] = array(
       'len' => 36,
       'size' => '20',
       ),
-    'owning_person' =>
+    'owning_person_desc' =>
     array (
       'required' => false,
       'source' => 'non-db',
-      'name' => 'owning_person',
+      'name' => 'owning_person_desc',
       'vname' => 'LBL_OWNING_PERSON',
       'type' => 'relate',
       'massupdate' => 0,
@@ -2374,8 +2374,8 @@ $dictionary['HAT_Assets'] = array(
     'counting_location' => array (
       'required' => false,
       'source' => 'non-db',
-      'name' => 'counting_dept',
-      'vname' => 'LBL_COUNTING_DEPT',
+      'name' => 'counting_location',
+      'vname' => 'LBL_COUNTING_LOCATION',
       'type' => 'relate',
       'massupdate' => 0,
       'no_default' => false,
@@ -2392,8 +2392,8 @@ $dictionary['HAT_Assets'] = array(
       'len' => '255',
       'size' => '20',
       'id_name' => 'counting_location_id',
-      'ext2' => 'HAT_Assets_Locations',
-      'module' => 'HAT_Assets_Locations',
+      'ext2' => 'HAT_Asset_Locations',
+      'module' => 'HAT_Asset_Locations',
       'rname' => 'name',
       'quicksearch' => 'enabled',
       'studio' => 'visible',

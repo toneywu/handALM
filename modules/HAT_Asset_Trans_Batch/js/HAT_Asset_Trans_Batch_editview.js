@@ -19,8 +19,34 @@ function setEventTypePopupReturn(popupReplyData){
 	$("#haa_ff_id").val(popupReplyData.name_to_value_array.haa_ff_id);
 	triger_setFF($("#haa_ff_id").val(),"HAT_Asset_Trans_Batch");
     $(".expandLink").click();
+    //Add By ling.zhang01 20161229
+    if($("#tracking_number").val()==''){
+    	createTrackNumber();
+    }
+    //Add Instance By ling.zhang01 20161229 End
 }
+//Add By ling.zhang01 20161229
+function createTrackNumber(){
+	var return_number;
+	var json_data ={};
+		json_data['haa_frameworks_id']=$("#haa_frameworks_id").val();
 
+		$.ajax({
+			type:"POST",
+			url: "index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=createTrackingNumber",
+			data: json_data,
+			success: function(msg){ 
+				return_number = msg;
+				console.log("msg = "+msg);
+				$("#tracking_number").val(return_number);
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				 alert('Error loading document');
+				 console.log(textStatus+errorThrown);
+			},
+		});
+}
+//Add Instance By ling.zhang01 20161229 End
 
 function showWOLines(wo_id) {
     console.log('index.php?to_pdf=true&module=HAM_WO&action=getWOLiness&id=' + wo_id);
@@ -505,6 +531,7 @@ $(document).ready(function(){
 	$("#email").css("color","");
 	
 	$("#wo_lines").hide();
+	//$("#wo_lines").closest().hide();
     $("#wo_lines").after("<div id='wo_lines_display'></div>")
     if ($("#source_wo_id").val()!="") {
     	//如果来源于工作单则显示工作单对象行信息，否则直接隐藏行

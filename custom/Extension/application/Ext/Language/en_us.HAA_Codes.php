@@ -54,6 +54,7 @@ $app_list_strings['haa_code_module_list']=array (
   'flexform'=>'FlexForm Extended Fields',
   'insurance' => 'Insurance',
   'asset_counting' => 'Asset Counting',
+  'interface'=>'Interface'
   );
 
 $app_list_strings['haa_code_type_list']=array (
@@ -82,5 +83,6 @@ $app_list_strings['haa_code_type_list']=array (
   'insurance_type' => 'insurance_type',
   'insurance_subtype' => 'insurance_subtype',
   'asset_counting_obj_type' => 'asset_counting_obj_type',
-  'asset_counting_major_type'=>'asset_counting_major_type'
+  'asset_counting_major_type'=>'asset_counting_major_type',
+  'interface_link_system'=>'interface_link_system'
   );

@@ -10,9 +10,9 @@ class HAT_Asset_LocationsViewPopup extends ViewPopup
 
       global $mod_strings, $app_strings, $app_list_strings;
         global $db;
-       //如果是HAT_Counting_Tasks模块，则做树形结构
+       //如果是HAT_Counting_Tasks模块，则做树形结构var module_current = $currentModule;
        if(/*$_GET['module_name'] =='HAT_Counting_Tasks'||*/ $_GET['module_name'] =='HAT_Counting_Batchs'){
-        //var_dump($_SESSION["location_attr_id"]);
+        
 /*        if(($this->bean instanceOf SugarBean) && !$this->bean->ACLAccess('list')){
             ACLController::displayNoAccess();
             sugar_cleanup(true);
@@ -48,7 +48,6 @@ class HAT_Asset_LocationsViewPopup extends ViewPopup
         /* 以下为加载数据 
         /*****************************************************************/
         $txt_jason='{name:"'.$mod_strings['LBL_MODULE_NAME'].'", open:false, isParent:true,pId:0,id:"ROOT"},';
-       /* $txt_jason='{name:"'.$_SESSION["location_attr_name"].'", open:false, isParent:true,pId:0,id:"'.$_SESSION["location_attr_id"].'"},';*/
         $sql="SELECT
         hms.haa_frameworks_id,
         hal.*
@@ -58,9 +57,9 @@ class HAT_Asset_LocationsViewPopup extends ViewPopup
         WHERE
         hal.ham_maint_sites_id = hms.id
         AND hms.haa_frameworks_id='".$_SESSION["current_framework"]."'
-        AND hal.asset_node=1
         AND hal.deleted = 0
-        AND hms.deleted = 0";
+        AND hms.deleted = 0
+        and hal.asset_node=1";
         $result=$db->query($sql);
         $resArr="";
         while($row=$db->fetchByAssoc($result)){
@@ -68,7 +67,7 @@ class HAT_Asset_LocationsViewPopup extends ViewPopup
             foreach ($row as $k => $v) {
                 if ($k == 'parent_location_id'){
                             //Parent_eventtype_id需要特别处理
-                    $txt_jason .= 'pId:"'.($v==""?"'ROOT'":$v).'",';
+                    $txt_jason .= 'pId:"'.($v==""?"ROOT":$v).'",';
                 }else {
                     if (isset($k)) {
                         $txt_jason .=$k.':"'.$v.'",';

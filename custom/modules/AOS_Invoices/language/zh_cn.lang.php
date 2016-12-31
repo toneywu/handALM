@@ -1,5 +1,5 @@
 <?php
-// created: 2016-12-19 11:03:03
+// created: 2016-12-26 22:12:58
 $mod_strings = array (
   'LBL_BILLING_ACCOUNT' => '组织',
   'LBL_NAME' => '名称',
@@ -20,6 +20,8 @@ $mod_strings = array (
   'LBL_PARENT_CLASS' => '来源分类',
   'LBL_PARENT_SUB_TYPE' => '来源子类',
   'LBL_PARENT_TYPE' => '来源类型',
-  'LBL_AMOUNT' => '金额',
-  'LBL_INVOICE_CLOSE'=>"关闭",
+  'LBL_AMOUNT' => '付款金额',
+  'LBL_STATUS' => '付款',
+  'LBL_INVOICE_CLOSE' => '关闭',
+  'LBL_UNPAIED_AMOUNT' => '未支付金额',
 );

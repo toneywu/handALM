@@ -285,7 +285,7 @@ array (
           ),
           1 => 
           array (
-            'name' => 'owning_person',
+            'name' => 'owning_person_desc',
             'studio' => 'visible',
             'label' => 'LBL_OWNING_PERSON',
           ),
@@ -309,7 +309,7 @@ array (
           ),
           1 => 
           array (
-            'name' => 'using_person',
+            'name' => 'using_person_desc',
             'studio' => 'visible',
             'label' => 'LBL_USING_PERSON',
           ),
