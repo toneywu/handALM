@@ -52,6 +52,13 @@ $moduleList[] = 'HAA_FSQL';
 
  
  //WARNING: The contents of this file are auto-generated
+$beanList['HAA_Interfaces'] = 'HAA_Interfaces';
+$beanFiles['HAA_Interfaces'] = 'modules/HAA_Interfaces/HAA_Interfaces.php';
+$moduleList[] = 'HAA_Interfaces';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
 $beanList['HAA_Maps'] = 'HAA_Maps';
 $beanFiles['HAA_Maps'] = 'modules/HAA_Maps/HAA_Maps.php';
 $moduleList[] = 'HAA_Maps';

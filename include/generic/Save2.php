@@ -137,7 +137,10 @@ else {
             require('modules/'.$module.'/metadata/metafiles.php');
         }
        // Add By osmond.liu 20161218
-       $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+                   $instance_loc='instance/PUBLIC/';
+if(isset($_SESSION["current_framework_code"])){
+  $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+}
        if(file_exists($instance_loc.'modules/'.$module.'/metadata/metafiles.php'))
        {
            require($instance_loc.'modules/'.$module.'/metadata/metafiles.php');

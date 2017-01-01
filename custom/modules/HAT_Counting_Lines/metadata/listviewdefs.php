@@ -9,20 +9,22 @@ array (
     'default' => true,
     'link' => true,
   ),
-  'COUNTING_PERSON' => 
-  array (
-    'type' => 'varchar',
-    'default' => true,
-    'studio' => 'visible',
-    'label' => 'LBL_COUNTING_PERSON',
-    'width' => '10%',
-  ),
   'ASSET' => 
   array (
     'type' => 'relate',
     'studio' => 'visible',
     'label' => 'LBL_ASSET',
     'id' => 'HAT_ASSETS_ID_C',
+    'link' => true,
+    'width' => '10%',
+    'default' => true,
+  ),
+  'COUNTING_TASK' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'label' => 'LBL_COUNTING_TASK',
+    'id' => 'HAT_COUNTING_TASKS_ID_C',
     'link' => true,
     'width' => '10%',
     'default' => true,
@@ -113,6 +115,14 @@ array (
     'label' => 'LBL_SNAPSHOT_QUANTITY',
     'width' => '10%',
     'default' => false,
+  ),
+  'COUNTING_PERSON' => 
+  array (
+    'type' => 'varchar',
+    'default' => false,
+    'studio' => 'visible',
+    'label' => 'LBL_COUNTING_PERSON',
+    'width' => '10%',
   ),
 );
 ?>

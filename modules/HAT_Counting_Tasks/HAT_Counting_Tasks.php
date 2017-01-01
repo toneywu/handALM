@@ -50,8 +50,10 @@ class HAT_Counting_Tasks extends HAT_Counting_Tasks_sugar {
 	function save($check_notify = FALSE){
 		global $sugar_config;
 		global $db;
-		
-		if($this->task_number==''){
+
+		$beanBatch = BeanFactory::getBean('HAT_Counting_Batchs', $this->hat_counting_batchs_id_c);
+		$this->name=$beanBatch->name;
+			//拼接盘点任务名称
 			$sql_loc="SELECT
 			hal.`name` loc_name
 			FROM
@@ -93,6 +95,7 @@ class HAT_Counting_Tasks extends HAT_Counting_Tasks_sugar {
 					$this->name=$row_code["code_name"].'-'.$this->name;
 				}
 			}
+
 			$sql_cate="SELECT
 			hal.`name` cate_name
 			FROM
@@ -106,6 +109,37 @@ class HAT_Counting_Tasks extends HAT_Counting_Tasks_sugar {
 					$this->name=$row_cate["cate_name"].'-'.$this->name;
 				}
 			}
+
+			$sql_user="SELECT
+			hal.last_name user_name
+			FROM
+			contacts hal
+			WHERE
+			1 = 1
+			AND hal.id = '".$this->user_contacts_id_c."'";
+			$result_user=$db->query($sql_user);
+			if($row_user=$db->fetchByAssoc($result_user)){
+				if($row_user["user_name"]){
+					$this->name=$row_user["user_name"].'-'.$this->name;
+				}
+			}
+
+			$sql_own="SELECT
+			hal.last_name own_name
+			FROM
+			contacts hal
+			WHERE
+			1 = 1
+			AND hal.id = '".$this->own_contacts_id_c."'";
+			$result_own=$db->query($sql_own);
+			if($row_own=$db->fetchByAssoc($result_own)){
+				if($row_own["own_name"]){
+					$this->name=$row_own["own_name"].'-'.$this->name;
+				}
+			}
+			
+
+		if($this->task_number==''){
 			
 			$sql="SELECT
 			MAX(hct.task_number) task_number_max,hcb.batch_number

@@ -192,6 +192,21 @@ array (
             'label' => 'LBL_CATEGORY',
           ),
         ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'user_person',
+            'studio' => 'visible',
+            'label' => 'LBL_USER_PERSON',
+          ),
+          1 => 
+          array (
+            'name' => 'own_person',
+            'studio' => 'visible',
+            'label' => 'LBL_OWN_PERSON',
+          ),
+        ),
       ),
       'lbl_editview_panel2' => 
       array (
@@ -214,9 +229,9 @@ array (
         array (
           0 => 
           array (
-            'name' => 'amt_actual_counting',
+            'name' => 'un_actual_counting',
             'studio' => 'visible',
-            'label' => 'LBL_AMT_ACTUAL_COUNTING',
+            'label' => 'LBL_UN_ACTUAL_COUNTING',
           ),
           1 => 
           array (
@@ -235,9 +250,9 @@ array (
           ),
           1 => 
           array (
-            'name' => 'diff_counting',
+            'name' => 'amt_actual_counting',
             'studio' => 'visible',
-            'label' => 'LBL_DIFF_COUNTING',
+            'label' => 'LBL_AMT_ACTUAL_COUNTING',
           ),
         ),
         3 => 
@@ -248,7 +263,12 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_ACTUAL_ADJUST_COUNT',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'diff_counting',
+            'studio' => 'visible',
+            'label' => 'LBL_DIFF_COUNTING',
+          ),
         ),
       ),
     ),

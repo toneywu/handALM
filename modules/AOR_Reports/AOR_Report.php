@@ -1028,13 +1028,19 @@ function standard_build_report_csv(){
             }
         }
     }
-
+    //Add By ling.zhang01 20161227
+    $name = $this->name;
+    //Add Instance By ling.zhang01 20161227 End
     $csv= $GLOBALS['locale']->translateCharset($csv, 'UTF-8', $GLOBALS['locale']->getExportCharset());
 
     ob_clean();
     header("Pragma: cache");
-    header("Content-type: text/comma-separated-values; charset=".$GLOBALS['locale']->getExportCharset());
-    header("Content-Disposition: attachment; filename=\"{$this->name}.csv\"");
+    //Add By ling.zhang01 20161227
+    /*header("Content-type: text/comma-separated-values; charset=".$GLOBALS['locale']->getExportCharset());
+    header("Content-Disposition: attachment; filename=\"{$this->name}.csv\"");*/
+    header("Content-type: text/html; charset=GBK");
+    header("Content-Disposition: attachment; filename=\"{$name}.csv\"");
+    //Add Instance By ling.zhang01 20161227 End
     header("Content-transfer-encoding: binary");
     header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
     header("Last-Modified: " . TimeDate::httpTime() );
@@ -1043,10 +1049,16 @@ function standard_build_report_csv(){
     if (!empty($sugar_config['export_excel_compatible'])) {
         $csv = chr(255) . chr(254) . mb_convert_encoding($csv, 'UTF-16LE', 'UTF-8');
     }
-    print $csv;
-
+    //Add By ling.zhang01 20161227
+    //print $csv;
+    $name = $name.getMillisecond();
+    $name= $GLOBALS['locale']->translateCharset($name, 'UTF-8', $GLOBALS['locale']->getExportCharset());
+    createRptDataFile($name,$csv);  //创建报表导出文件
+    print $name.'.csv'; //将创建的文件名返回前端
+    //Add Instance By ling.zhang01 20161227 End
     sugar_cleanup(true);
 }
+
 
 function build_report_csv(){
     $instance_code='';
@@ -1064,7 +1076,8 @@ else {
     if ($instance_code!=''){
         $report_file='custom/modules/AOR_Reports/rpt_files/'. $instance_code .'/'.$bean_report->custom_file_c;
     }
-    else{
+
+    if(!file_exists($report_file)){
         $report_file='custom/modules/AOR_Reports/rpt_files/'.$bean_report->custom_file_c;
     }
     if(file_exists($report_file)){

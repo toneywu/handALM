@@ -29,7 +29,7 @@
 		users_cstm a
 	WHERE
 		hwp.contact_id = a.contact_id_c 
-	AND hwp.id = '1a45caf4-34ca-8300-5f85-57d75d26af72'
+	AND hwp.id = '".$courd."'
 	AND a.id_c='".$current_user->id."'";
 	$result=$db->query($sql_user);
 	$row=$db->fetchByAssoc($result);

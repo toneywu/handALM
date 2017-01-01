@@ -110,6 +110,12 @@ $mod_strings = array (
   'LBL_PROFIT_COUNTING' => '盘盈总数',
   'LBL_LOSS_COUNTING' => '盘亏总数',
   'LBL_ACTUAL_ADJUST_COUNT' => '已完成调整数量',
+  'LBL_UN_ACTUAL_COUNTING' => '未盘总数',
   'LBL_MANUAL_ADD_FLAG' => '是否手工增加',
+
+  'LBL_USER_PERSON' => '使用人',
+  'LBL_USER_PERSON_CONTACTS_ID' => '使用人',
+  'LBL_OWN_PERSON_CONTACTS_ID' => '管理人',
+  'LBL_OWN_PERSON' => '管理人',
 
 );

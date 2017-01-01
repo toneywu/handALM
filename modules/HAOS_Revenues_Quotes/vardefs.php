@@ -858,12 +858,12 @@ $dictionary['HAOS_Revenues_Quotes'] = array(
         'len' => 36,
         'size' => '20',
         ),
-      'contract_number' => 
+      'contract_name' => 
       array (
         'required' => false,
         'source' => 'non-db',
-        'name' => 'contract_number',
-        'vname' => 'LBL_CONTRACT_NUMBER',
+        'name' => 'contract_name',
+        'vname' => 'LBL_CONTRACT_NAME',
         'type' => 'relate',
         'massupdate' => 0,
         'no_default' => false,
@@ -882,7 +882,7 @@ $dictionary['HAOS_Revenues_Quotes'] = array(
         'id_name' => 'contact_id_c',
         'ext2' => 'Contacts',
         'module' => 'Contacts',
-        'rname' => 'employee_number_c',
+        'rname' => 'name',
         'quicksearch' => 'enabled',
         'studio' => 'visible',
         ),
@@ -935,12 +935,12 @@ $dictionary['HAOS_Revenues_Quotes'] = array(
         'quicksearch' => 'enabled',
         'studio' => 'visible',
         ),
-      'contract_name'=>
+      'contract_number'=>
       array(
         'required' => false,
         'source' => 'non-db',
-        'name' => 'contract_name',
-        'vname' => 'LBL_CONTRACT_NAME',
+        'name' => 'contract_number',
+        'vname' => 'LBL_CONTRACT_NUMBER',
         'type' => 'varchar',
         'massupdate' => 0,
         'no_default' => false,

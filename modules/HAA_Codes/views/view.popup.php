@@ -6,15 +6,15 @@ require_once('include/MVC/View/views/view.popup.php');
 class HAA_CodesViewPopup extends ViewPopup
 {
 
-    function Display() {
-        global $mod_strings, $app_strings, $app_list_strings;
-        global $db;
+	function Display() {
+		global $mod_strings, $app_strings, $app_list_strings;
+		global $db;
 
-        if (empty($_REQUEST['haa_frameworks_id_advanced'])) {       //如果界面没有供出对应的值，此仅列出当前Session选定组织的Framework
-            $haa_frameworks_id=$_SESSION["current_framework"];
-            $_REQUEST['haa_frameworks_id_advanced']=$haa_frameworks_id;
-        }
-        if(/*$_GET['module_name'] =='HAT_Counting_Tasks'||*/ $_GET['module_name'] =='HAT_Counting_Batchs'){
+		if (empty($_REQUEST['haa_frameworks_id_advanced'])) {		//如果界面没有供出对应的值，此仅列出当前Session选定组织的Framework
+			$haa_frameworks_id=$_SESSION["current_framework"];
+			$_REQUEST['haa_frameworks_id_advanced']=$haa_frameworks_id;
+		}
+		if(/*$_GET['module_name'] =='HAT_Counting_Tasks'||*/ $_GET['module_name'] =='HAT_Counting_Batchs'){
 /*        if(($this->bean instanceOf SugarBean) && !$this->bean->ACLAccess('list')){
             ACLController::displayNoAccess();
             sugar_cleanup(true);
@@ -22,7 +22,7 @@ class HAA_CodesViewPopup extends ViewPopup
 */     /* if (isset($_REQUEST['allnodes']) &&($_REQUEST['allnodes']=='1'||$_REQUEST['allnodes']=='true')){
         echo "<script>var allnodes=true;</script>";
     }else {
-        echo "<script>var allnodes=false;</script>";
+    	echo "<script>var allnodes=false;</script>";
     }*/
     
     echo "<script>var allnodes=true;</script>";
@@ -50,45 +50,42 @@ class HAA_CodesViewPopup extends ViewPopup
         /***************************************************************/
         /* 以下为加载数据 
         /*****************************************************************/
-        $beanEventTypes = BeanFactory::getBean('HAA_Codes')->get_full_list($order_by = "",$where = "haa_codes.code_type='asset_counting_major_type' and haa_codes.haa_frameworks_id='".$_SESSION["current_framework"]."'");
-            //var_dump($_SESSION["current_framework"]);
-           // $txt_jason="";
-          //  $txt_jason = '{name:"IP Addresses", open:true, isParent:true, pId:0, id:"ROOT"},';
-            //$beanEventTypes = BeanFactory::getBean('HAT_EventType')->get_full_list('name',"hat_eventtype.basic_type = '".$_REQUEST['basic_type_advanced']."' AND hat_eventtype.haa_frameworks_id= '".$_SESSION["current_framework"]."'");
-            //var_dump($app_list_strings);
-        $txt_jason='{name:"'.$mod_strings['LBL_MODULE_NAME'].'", open:false, isParent:true,pId:0,id:"ROOT"},';
-        if (isset($beanEventTypes)) {
-            foreach ($beanEventTypes as $beanEventType) {
-                $txt_jason.="{";
-                foreach ($beanEventType->field_name_map as $key => $value) {
-                        //echo $key."=".(gettype($value)).":"."<br/>";
-                    if ($key == 'parent_type_value_id'){
+        $txt_jason='{name:"专业", open:false, isParent:true,pId:0,id:"ROOT"},';
+        $sql="SELECT
+        hc.*
+        FROM
+        haa_codes hc
+        WHERE
+        hc.deleted = 0
+        AND hc.haa_frameworks_id ='".$_SESSION["current_framework"]."'
+        AND hc.code_type = 'asset_counting_major_type'";
+        $result=$db->query($sql);
+        $resArr="";
+        while($row=$db->fetchByAssoc($result)){
+            $txt_jason.="{";
+            foreach ($row as $k => $v) {
+                if ($k == 'parent_type_value_id'){
                             //Parent_eventtype_id需要特别处理
-                        $txt_jason .='pId:"'.(($beanEventType->parent_eventtype_id=="")?"ROOT":$beanEventType->parent_eventtype_id).'",';
-                    }else {
-                        if (isset($beanEventType->$key)) {
-                            $txt_jason .=$key.':"'.$beanEventType->$key.'",';
-                        }
+                    $txt_jason .= 'pId:"'.($v==""?"ROOT":$v).'",';
+                }else {
+                    if (isset($k)) {
+                        $txt_jason .=$k.':"'.$v.'",';
                     }
                 }
-                    $txt_jason  = substr($txt_jason,0,strlen($txt_jason)-1);//去除最后一个,
-                    $txt_jason.="},";
-                }
             }
-
-
+            $txt_jason  = substr($txt_jason,0,strlen($txt_jason)-1);
+            $txt_jason.="},";
+        }
             $txt_jason  = substr($txt_jason,0,strlen($txt_jason)-1);//去除最后一个,
             $txt_jason .= "}";
             $txt_jason=substr($txt_jason,0,strlen($txt_jason)-1);
-            //$txt_jason='{"node":['.$txt_jason.']}';
             $txt_jason='['.$txt_jason.']';
-            //echo($txt_jason);
             echo('<script>var zNodes = '.$txt_jason.'</script>');
             echo ('<script type="text/javascript" src="modules/HAA_Codes/js/Codes_popupview.js"></script>');//
         }else{
-            parent::Display();
-            echo'<script>$("#code_type_advanced").closest("td").hide()</script>';
-            echo'<script>$("#code_type_advanced").closest("td").prev("td").hide()</script>';
+        	parent::Display();
+        	echo'<script>$("#code_type_advanced").closest("td").hide()</script>';
+        	echo'<script>$("#code_type_advanced").closest("td").prev("td").hide()</script>';
         }
     }
 

@@ -139,26 +139,26 @@ array (
         array (
           0 => 
           array (
-            'name' => 'clear_date_c',
-            'label' => 'LBL_CLEAR_DATE',
+            'name' => 'unpaied_amount_c',
+            'label' => 'LBL_UNPAIED_AMOUNT',
           ),
           1 => 
           array (
-            'name' => 'closed_date_c',
-            'label' => 'LBL_CLOSED_DATE',
+            'name' => 'clear_date_c',
+            'label' => 'LBL_CLEAR_DATE',
           ),
         ),
         5 => 
         array (
           0 => 
           array (
-            'name' => 'late_days_c',
-            'label' => 'LBL_LATE_DAYS',
+            'name' => 'closed_date_c',
+            'label' => 'LBL_CLOSED_DATE',
           ),
           1 => 
           array (
-            'name' => 'event_type_c',
-            'label' => 'LBL_EVENT_TYPE',
+            'name' => 'late_days_c',
+            'label' => 'LBL_LATE_DAYS',
           ),
         ),
         6 => 
@@ -170,13 +170,18 @@ array (
           ),
           1 => 
           array (
-            'name' => 'source_reference_c',
-            'label' => 'LBL_SOURCE_REFERENCE',
+            'name' => 'event_type_c',
+            'label' => 'LBL_EVENT_TYPE',
           ),
         ),
         7 => 
         array (
           0 => 
+          array (
+            'name' => 'source_reference_c',
+            'label' => 'LBL_SOURCE_REFERENCE',
+          ),
+          1 => 
           array (
             'name' => 'description',
             'label' => 'LBL_DESCRIPTION',
@@ -249,7 +254,7 @@ array (
             'label' => 'LBL_LINE_ITEMS',
           ),
         ),
-        3 => 
+        2 => 
         array (
           0 => 
           array (
@@ -257,7 +262,7 @@ array (
             'label' => 'LBL_TOTAL_AMT',
           ),
         ),
-        4 => 
+        3 => 
         array (
           0 => 
           array (
@@ -265,7 +270,7 @@ array (
             'label' => 'LBL_DISCOUNT_AMOUNT',
           ),
         ),
-        5 => 
+        4 => 
         array (
           0 => 
           array (
@@ -273,7 +278,7 @@ array (
             'label' => 'LBL_SUBTOTAL_AMOUNT',
           ),
         ),
-        6 => 
+        5 => 
         array (
           0 => 
           array (
@@ -281,7 +286,7 @@ array (
             'label' => 'LBL_SHIPPING_AMOUNT',
           ),
         ),
-        7 => 
+        6 => 
         array (
           0 => 
           array (
@@ -289,7 +294,7 @@ array (
             'label' => 'LBL_SHIPPING_TAX_AMT',
           ),
         ),
-        8 => 
+        7 => 
         array (
           0 => 
           array (
@@ -297,7 +302,7 @@ array (
             'label' => 'LBL_TAX_AMOUNT',
           ),
         ),
-        9 => 
+        8 => 
         array (
           0 => 
           array (

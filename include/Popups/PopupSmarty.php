@@ -437,7 +437,6 @@ class PopupSmarty extends ListViewSmarty{
 				//Add By osmond.liu 20161213
         	//增加权限控制
         		$current_module = $this->module;
-        	
         	require_once('modules/HPR_Group_Priviliges/checkListACL.php');
         	global $current_user;
         	$current_user_id =$current_user->id;
@@ -445,8 +444,10 @@ class PopupSmarty extends ListViewSmarty{
         	$paraArray=array();
         	$paraArray[]=$current_user_id;
         	$aclSQLList=getPopupSQLStatement($current_module,$_GET['module_name'],$current_user_id,$haa_frameworks_id,$paraArray);
+        	if ($aclSQLList!=''){
         	$searchWhere.=empty($searchWhere)?(empty($aclSQLList)?"":$aclSQLList):(empty($aclSQLList)?"":'  AND '.$aclSQLList);
         	$searchWhere='( '.$searchWhere.' )';
+        	}
         	//End Add By osmond.liu 20161213
 			$data = $this->lvd->getListViewData($this->seed, $searchWhere, 0, -1, $this->filter_fields, $params, 'id');
 		} else {

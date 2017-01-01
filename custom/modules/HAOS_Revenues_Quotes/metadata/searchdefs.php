@@ -17,16 +17,17 @@ array (
         'default' => true,
         'name' => 'account_name',
         ),
-      'contract_number' => 
+      'contract_name' => 
       array (
         'type' => 'relate',
         'studio' => 'visible',
-        'label' => 'LBL_CONTRACT_NUMBER',
+        'label' => 'LBL_CONTRACT_NAME',
         'id' => 'CONTACT_ID_C',
         'link' => true,
         'width' => '10%',
         'default' => true,
-        'name' => 'contract_number',
+        'name' => 'contract_name',
+
         ),
       'expense_group' => 
       array (
@@ -47,15 +48,6 @@ array (
         'width' => '10%',
         'default' => true,
         'name' => 'clear_status',
-        ),
-      'source_code' => 
-      array (
-        'type' => 'enum',
-        'studio' => 'visible',
-        'label' => 'LBL_SOURCE_CODE',
-        'width' => '10%',
-        'default' => true,
-        'name' => 'source_code',
         ),
       'source_code' => 
       array (

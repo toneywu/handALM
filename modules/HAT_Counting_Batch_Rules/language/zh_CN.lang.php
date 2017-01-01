@@ -90,4 +90,10 @@ $mod_strings = array (
   'LBL_COUNTING_RULE' => '任务拆分方式',
   'LBL_BTN_ADD_LINE' => '新增',
   'LBL_BATCH_RULE' => '拆分规则',
+  'LBL_USER_PERSON_SPLIT_FLAG' => '使用人',
+  'LBL_OWN_PERSON_SPLIT_FLAG' => '管理人',
+  'LBL_USER_PERSON' => '使用人',
+  'LBL_USER_PERSON_CONTACTS_ID' => '使用人',
+  'LBL_OWN_PERSON_CONTACTS_ID' => '管理人',
+  'LBL_OWN_PERSON' => '管理人',
 );

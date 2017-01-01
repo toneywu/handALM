@@ -169,7 +169,8 @@ array (
               'field_to_name_array' =>
               array (
                 'id' => 'ham_wo_id_c',
-                'name'=>'relate_wo_number',
+                'wo_number'=>'relate_wo_number',
+                'name' => 'wo_info',
                 ),
             ),
           ),
@@ -178,7 +179,6 @@ array (
             'name' => 'wo_info',
             'studio' => 'visible',
             'label' => 'LBL_WO_INFO',
-            'customCode'=>'<input name="wo_info" id="wo_info" size="30" maxlength="25" value="" title="" type="text" readonly>',
           ),
         ),
         5 => 
@@ -188,14 +188,12 @@ array (
             'name' => 'repair_cost',
             'studio' => 'visible',
             'label' => 'LBL_REPAIR_COST',
-            'customCode'=>'<input name="repair_cost" id="repair_cost" size="30" maxlength="25" value="" title="" tabindex="0" type="text" readonly>',
           ),
           1 => 
           array (
             'name' => 'other_repair_cost',
             'studio' => 'visible',
             'label' => 'LBL_OTHER_REPAIR_COST',
-            'customCode'=>'<input name="other_repair_cost" id="other_repair_cost" size="30" maxlength="25" value="" title="" tabindex="0" type="text" readonly>',
           ),
         ),
       ),

@@ -171,7 +171,7 @@ class AOS_ContractsViewDetail extends ViewDetail {
 				$product .= "<td width='20%' colspan='2' style='text-align: right;padding:2px;'>".$mod_strings['LBL_INITIAL_ACCOUNT_DAY'].":</td>";
 				$product .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$line_item->initial_account_day_c."</td>";
 				$product .= "<td width='20%' colspan='2' style='text-align: right;padding:2px;'>".$mod_strings['LBL_SETTLEMENT_PERIOD_C'].":</td>";
-				$product .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$app_list_strings['settlement_period_list'][$line_item->settlement_period_c]."</td>";
+				$product .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$app_list_strings['settlement_period_list'][$line_item->settlement_period_c]."&nbsp;&nbsp;".$line_item->number_of_periods_c."</td>";
 				$product .="</tr><tr class='showmore".$row_num."' style='display:none'>";
 				$product .= "<td width='12%' colspan='2' style='text-align: right;padding:2px;' >".$mod_strings['LBL_EFFECTIVE_START_C'].":</td>";
 				$product .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$line_item->effective_start_c."</td>";
@@ -219,7 +219,7 @@ class AOS_ContractsViewDetail extends ViewDetail {
 				$service .= "<td width='20%' colspan='2' style='text-align: right;padding:2px;'>".$mod_strings['LBL_INITIAL_ACCOUNT_DAY'].":</td>";
 				$service .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$line_item->initial_account_day_c."</td>";
 				$service .= "<td width='20%' colspan='2' style='text-align: right;padding:2px;'>".$mod_strings['LBL_SETTLEMENT_PERIOD_C'].":</td>";
-				$service .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$app_list_strings['settlement_period_list'][$line_item->settlement_period_c]."</td>";
+				$service .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$app_list_strings['settlement_period_list'][$line_item->settlement_period_c]."&nbsp;&nbsp;".$line_item->number_of_periods_c."</td>";
 				$service .="</tr><tr class='showmore".$row_num."' style='display:none'>";
 				$service .= "<td width='12%' colspan='2' style='text-align: right;padding:2px;' >".$mod_strings['LBL_EFFECTIVE_START_C'].":</td>";
 				$service .= "<td colspan='4' class='tabDetailViewDF' style='text-align: left; padding:2px;'>".$line_item->effective_start_c."</td>";

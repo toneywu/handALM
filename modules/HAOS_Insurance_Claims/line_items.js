@@ -473,10 +473,7 @@ $(function(){
 	$("#gap_amount").attr("readonly",true);
 	$("#act_claim_total_amt").attr("readonly",true);
 	//设置可用/不可用
-	setDefault();
-	$("#time").attr("readonly",true);
-	$("#location").attr("readonly",true);
-	$("#comment").attr("readonly",true);
+	var setime=setInterval("setDefault()",500);
 });
 
 
@@ -490,7 +487,6 @@ function setDefault() {
 		$("#btn_relate_event_number").attr("disabled",true);
 		$("#btn_relate_wo_number").attr("disabled",true);
 	}
-	var setime=setTimeout("setDefault()",500);
 }
 
 function replace_display_lines(linesHtml,elementId) {

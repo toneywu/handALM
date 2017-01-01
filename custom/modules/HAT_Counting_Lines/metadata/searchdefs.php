@@ -12,17 +12,6 @@ array (
         'default' => true,
         'width' => '10%',
       ),
-      'product' => 
-      array (
-        'type' => 'relate',
-        'studio' => 'visible',
-        'label' => 'LBL_PRODUCT',
-        'id' => 'AOS_PRODUCTS_ID_C',
-        'link' => true,
-        'width' => '10%',
-        'default' => true,
-        'name' => 'product',
-      ),
       'asset' => 
       array (
         'type' => 'relate',
@@ -34,54 +23,6 @@ array (
         'default' => true,
         'name' => 'asset',
       ),
-      'snapshot_quantity' => 
-      array (
-        'type' => 'int',
-        'label' => 'LBL_SNAPSHOT_QUANTITY',
-        'width' => '10%',
-        'default' => true,
-        'name' => 'snapshot_quantity',
-      ),
-      'oranization' => 
-      array (
-        'type' => 'relate',
-        'studio' => 'visible',
-        'label' => 'LBL_ORANIZATION',
-        'id' => 'ACCOUNT_ID_C',
-        'link' => true,
-        'width' => '10%',
-        'default' => true,
-        'name' => 'oranization',
-      ),
-      'part_number' => 
-      array (
-        'type' => 'varchar',
-        'default' => true,
-        'studio' => 'visible',
-        'label' => 'LBL_PART_NUMBER',
-        'width' => '10%',
-        'name' => 'part_number',
-      ),
-      'asset_status' => 
-      array (
-        'type' => 'enum',
-        'studio' => 'visible',
-        'label' => 'LBL_ASSET_STATUS',
-        'width' => '10%',
-        'default' => true,
-        'name' => 'asset_status',
-      ),
-      'asset_location' => 
-      array (
-        'type' => 'relate',
-        'studio' => 'visible',
-        'label' => 'LBL_ASSET_LOCATION',
-        'id' => 'HAT_ASSET_LOCATIONS_ID_C',
-        'link' => true,
-        'width' => '10%',
-        'default' => true,
-        'name' => 'asset_location',
-      ),
       'asset_desc' => 
       array (
         'type' => 'varchar',
@@ -90,6 +31,17 @@ array (
         'label' => 'LBL_ASSET_DESC',
         'width' => '10%',
         'name' => 'asset_desc',
+      ),
+      'counting_task' => 
+      array (
+        'type' => 'relate',
+        'studio' => 'visible',
+        'label' => 'LBL_COUNTING_TASK',
+        'id' => 'HAT_COUNTING_TASKS_ID_C',
+        'link' => true,
+        'width' => '10%',
+        'default' => true,
+        'name' => 'counting_task',
       ),
       'counting_status' => 
       array (

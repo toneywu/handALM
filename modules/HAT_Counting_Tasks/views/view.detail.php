@@ -2,7 +2,7 @@
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 require_once('include/MVC/View/views/view.detail.php');
-
+require_once('modules/HAT_Counting_Tasks/populateLineCountInfo.php');
 
 class HAT_Counting_TasksViewDetail extends ViewDetail  {
 	
@@ -20,8 +20,20 @@ function display()
 			$bean_framework_name = $beanFramework->name;
 		}
 		$this->ss->assign('FRAMEWORK_C',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id_c'));
+		
 		parent::display();
-		$this->populateLineCountInfo();
+		$countInfo= new CountInfo();
+		$count=$countInfo->populateLineCountInfo($this->bean->id);
+		echo "<script>
+			$('#total_counting').html('".$count['total_counting']."');
+			$('#actual_counting').html('".$count['actual_counting']."');
+			$('#amt_actual_counting').html('".$count['matched_count']."');
+			$('#profit_counting').html('".$count['overage_count']."');
+			$('#loss_counting').html('".$count['loss_count']."');
+			$('#diff_counting').html('".$count['different_count']."');
+			$('#actual_adjust_count').html('".$count['processed_count']."');
+			$('#un_actual_counting').html('".$count['un_actual_counting']."');
+		</script>";
 			echo "<script>
 			$('#task_number').val('".$this->bean->task_number."');
 			$('#planed_start_date').val('".$this->bean->planed_start_date."');
@@ -54,87 +66,6 @@ function populateBatchInfo(){
 		$this->bean->counting_scene=$bean_request->counting_scene ;
 	}
 }
-
-function populateLineCountInfo(){
-	global $db;
-	$total_counting=0;$actual_counting=0;$matched_count=0;
-	$overage_count=0;$processed_count=0;$different_count=0;
-	$loss_count=0;
-
-	$sql_line="SELECT
-	hcl.*
-	FROM
-	hat_counting_lines hcl
-	WHERE
-	1=1
-	AND hcl.hat_counting_tasks_id_c ='".$this->bean->id."'
-	AND hcl.deleted = 0";
-
-	$result_line=$db->query($sql_line);
-
-	while($row_line=$db->fetchByAssoc($result_line)){
-		$total_counting=$total_counting+1;
-		$sql_count="SELECT
-		hcr.*
-		FROM
-		hat_counting_lines_hat_counting_results_c hcl,
-		hat_counting_results hcr
-		WHERE
-		hcl.hat_counting_lines_hat_counting_resultshat_counting_results_idb = hcr.id
-		AND hcr.deleted = 0
-		AND hcl.hat_counting_lines_hat_counting_resultshat_counting_lines_ida ='".$row_line['id']."'
-		and hcl.deleted = 0";
-		$result_count=$db->query($sql_count);
-		while($row_count=$db->fetchByAssoc($result_count)){
-			$actual_counting=$actual_counting+1;
-		}
-
-		$sql_detail="SELECT
-		hcr.*
-		FROM
-		hat_counting_lines_hat_counting_results_c hcl,
-		hat_counting_results hcr
-		WHERE
-		hcl.hat_counting_lines_hat_counting_resultshat_counting_results_idb = hcr.id
-		AND hcr.deleted = 0
-		and hcl.deleted = 0
-		AND hcl.hat_counting_lines_hat_counting_resultshat_counting_lines_ida ='".$row_line['id']."'
-		ORDER BY
-		hcr.cycle_number desc
-		LIMIT 1";
-		$result_detail=$db->query($sql_detail);
-
-		while($row_detail=$db->fetchByAssoc($result_detail)){
-			if($row_detail["counting_result"]=='Matched'){
-				$matched_count=$matched_count+1;
-			}
-			if($row_detail["counting_result"]=='Different'){
-				$different_count=$different_count+1;
-			}
-			if($row_detail["counting_result"]=='Overage'){
-				$overage_count=$overage_count+1;
-			}
-			if($row_detail["counting_result"]=='Loss'){
-				$loss_count=$loss_count+1;
-			}
-			if($row_detail["adjust_status"]=='Processed'){
-				$processed_count=$processed_count+1;
-			}
-		}
-	}
-	//var_dump($total_counting);
-	echo "<script>
-			$('#total_counting').html('".$total_counting."');
-			$('#actual_counting').html('".$actual_counting."');
-			$('#amt_actual_counting').html('".$matched_count."');
-			$('#profit_counting').html('".$overage_count."');
-			$('#loss_counting').html('".$loss_count."');
-			$('#diff_counting').html('".$different_count."');
-			$('#actual_adjust_count').html('".$processed_count."');
-			</script>";
-
-	}
-
 
 }
 ?>

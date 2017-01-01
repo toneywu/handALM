@@ -50,6 +50,7 @@ class AOS_contractsViewEdit extends ViewEdit
   global $app_list_strings;
   echo "<input type='hidden' id='viewtype' value='AOS_Contracts'/>";
   echo '<input type="hidden" name="settlement_period_c" id="settlementperiodhidden" value="'.get_select_options_with_id($app_list_strings['settlement_period_list'], '').'">';
+  echo '<input type="hidden" id="number_of_periods_list" value="'.get_select_options_with_id($app_list_strings['haos_number_of_periods'], '').'"/>';
   parent::preDisplay();
 }
 

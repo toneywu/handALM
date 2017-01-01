@@ -174,7 +174,7 @@ array (
           array (
             'name' => 'closed_date_c',
             'label' => 'LBL_CLOSED_DATE',
-            'customCode'=>'<input class="date_input" autocomplete="off" name="closed_date_c" id="closed_date_c" value="" title="" tabindex="0" readonly="readonly" type="text">',
+            'customCode' => '<input class="date_input" autocomplete="off" name="closed_date_c" id="closed_date_c" value="" title="" tabindex="0" readonly="readonly" type="text">',
           ),
         ),
         4 => 
@@ -197,11 +197,17 @@ array (
           array (
             'name' => 'status',
             'label' => 'LBL_STATUS',
+            'customCode' => '<select name="status" id="status" title="">
+<option label="已付" value="Paid">已付</option>
+<option label="未付" value="Unpaid">未付</option>
+<option label="已取消" value="Cancelled">已取消</option>
+<option label="部分付款" value="PartedPaid">部分付款</option>
+</select>&nbsp;&nbsp;&nbsp;&nbsp;<input name="amount_c" id="amount_c" size="30" maxlength="26" value="" title="" tabindex="0" type="text">',
           ),
           1 => 
           array (
-            'name' => 'amount_c',
-            'label' => 'LBL_AMOUNT',
+            'name' => 'unpaied_amount_c',
+            'label' => 'LBL_UNPAIED_AMOUNT',
           ),
         ),
         6 => 
