@@ -47,9 +47,9 @@
 		font-size: small;
 	}
 
-	#node_details .detailed_fileds {
+	#node_details .detailed_fields {
 		float: left;
-		width: 300px;
+		width: 350px;
 		padding:1px 1em 1px 0px;
 	}
 	#node_details span.lab {

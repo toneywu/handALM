@@ -60,6 +60,7 @@ $mod_strings = array (
   'LBL_ACT_VIEW_RACK_DETAIL' => 'View Rack Details',
   'LBL_ACT_VIEW_ASSET' => 'View Asset/Equip.',
   'LBL_ACT_VIEW_LOCATION' => 'View Location',
+  'LBL_ACT_GIRD_RULE' => 'Grid-Position',
   'LBL_ACT_CREATE_SR' => 'Create SR',
   'LBL_ACT_CREATE_WO' => 'Create WO',
   'LBL_SERVICE_ORG' => 'Service Org.',
@@ -96,4 +97,5 @@ $mod_strings = array (
   'LBL_ADD_PLACEHOLDER'=>'Allocation Server-Rack Space',
   'LBL_INACTIVED'=>'removed',
   'LBL_NAV_MODE_GIRD'=>'Grid Position',
+  'LBL_ERR_DUPLICATED_EQUIP_ON_RACK'=>'Current Equipment has already been allocated on Rack. It cannot been allocated again.',
 );

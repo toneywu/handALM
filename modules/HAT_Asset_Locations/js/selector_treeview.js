@@ -137,7 +137,7 @@ var setting = {
 	}
 
 	function onClick(event, treeId, treeNode, clickFlag) {
-		if(treeNode.pId!=0) { //非根结点点击后的作用
+		if(treeNode.pId!=0) { //非根结点点击后的作用,如果是根结点，点击后无反应。
 			zTreeObj= $.fn.zTree.getZTreeObj(treeId);
 			console.log(treeNode);
 			loadDataForNodeDetail(zTreeObj, treeNode, $("#node_details"));
@@ -165,7 +165,8 @@ var setting = {
 			}
 		}
 
-	function setAllParentsCheckable(e, zTreeObj, treeNode) {//通过向上循环将同一个路径上的节点都标为可点击
+	function setAllParentsCheckable(e, zTreeObj, treeNode) {
+	//通过向上循环将同一个路径上的节点都标为可点击（在多选时使用，如果子节点可以选择，则通过这一方法将父结点变为可选择）
 		parentNode= treeNode.getParentNode();
 		while (parentNode.chkDisabled == true || parentNode.isFirstNode == false) { //如果父节点已经可以勾选，则不再循环
 		  zTreeObj.setChkDisabled(parentNode, false);
@@ -173,10 +174,8 @@ var setting = {
 		}
 	}
 
-	function checkNodeSelectable(e, zTreeObj, treeNode) { //依据当前节点属性以及当前的模式判断是否可以选中。
-		//if (treeNode.type == "asset" && current_mode=="asset") {
-	//console.log("treeNode will be listed here");
-	//console.log(treeNode);
+	function checkNodeSelectable(e, zTreeObj, treeNode) {
+	//依据当前节点属性以及当前的模式判断是否可以选中。
 	if ((current_mode=="asset" && treeNode.type=="asset") ||//选择所有资产
 		(current_mode=="it" && treeNode.type=="asset" && node.data.enable_it_ports=="1") ||//选择IT可联网设备
 		(current_mode=="rack" && treeNode.type=="asset" && typeof(treeNode.rack_id)!="undefined") //选择机柜 
@@ -193,8 +192,8 @@ var setting = {
 			zTreeObj.updateNode(treeNode);
 	}
 
-	function onCheck(e, treeId, treeNode) {//如果是多选模式，看触发OnCheck事件
-		//OnCheck事件依据树上选择的内容，显示在MultiSelectDiv区域中
+	function onCheck(e, treeId, treeNode) {//如果是多选模式，触发OnCheck事件
+	//OnCheck事件依据树上选择的内容，显示在MultiSelectDiv区域中
 			var zTree = $.fn.zTree.getZTreeObj(treeId),
 				checkedNodes = zTree.getCheckedNodes(true),
 				checkCount = 0,
@@ -315,7 +314,7 @@ function showNodeDetailHTML(node,targetDIV) {
 		//显示主要字段
 		varHTML+="<div class='detailed_data_table'>"
 		for (var index = 0; index < node.data.fields.length; ++index) {
-		    varHTML+="<div class='detailed_fileds'><span class='lab'>"+node.data.fields[index]['lab']+"</span><span class='detail_data'>"+node.data.fields[index]['val']+"</span></div>";
+		    varHTML+="<div class='detailed_fields'><span class='lab'>"+node.data.fields[index]['lab']+"</span><span class='detail_data'>"+node.data.fields[index]['val']+"</span></div>";
 		}
 
 		varHTML+="</div>"

@@ -63,6 +63,7 @@ $mod_strings = array (
   'LBL_ACT_VIEW_LOCATION' => '查看位置明细',
   'LBL_ACT_CREATE_SR' => '创建服务申请/报障单SR',
   'LBL_ACT_CREATE_WO' => '创建工作单WO',
+  'LBL_ACT_GIRD_RULE' => '查看网格定位图',
   'LBL_SERVICE_ORG' => '服务机构',
   'LBL_CONTACT1' => '主要联系方式',
   'LBL_PROVINCE' => '省/直辖市/自治区',
@@ -102,5 +103,6 @@ $mod_strings = array (
   'LBL_BTN_SELECT'=>'选中此项',
   'LBL_INACTIVED'=>'已失效',
   'LBL_NAV_MODE_GIRD'=>'网格定位',
+  'LBL_ERR_DUPLICATED_EQUIP_ON_RACK'=>'当前设备已经分配到当前机柜中，无法重复分配',
 
   );

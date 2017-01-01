@@ -125,6 +125,7 @@ function cleanBlocker(pos_x, pos_height, pos_y) {
 
 
 function openAssetPopup(ln){//本文件为行上选择资产的按钮
+  lineno=ln;
   var popupRequestData = {
     "call_back_function" : "setAssetReturn",
     "form_name" : "EditView",
@@ -135,22 +136,38 @@ function openAssetPopup(ln){//本文件为行上选择资产的按钮
       "asset_status" : "rack_pos_asset_status",//注意，这一条目写的是Current
       "using_org" : "rack_poshat_assets_accounts_name",
       "using_org_id" : "rack_poshat_assets_accounts_id",
-/*      "using_person" : "line_current_using_person",
-      "using_person_id" : "line_current_using_person_id",
-      "using_person_desc" : "line_current_using_person_desc",
-*/    }
+    }
   };
   var popupFilter ='&avaliable_it_equipments=true';
   open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
 }
+
 function setAssetReturn(popupReplyData){
   //popupReplyData中lineno会做为行号一并返回
+  console.log(popupReplyData);
+  console.log(globalServerData.server);
+  console.log("lineno="+lineno);
+
+  //检查当前机柜上的设备是否有重复
+	for(var i=0; i<globalServerData.server.length; i++){
+		//如果非当前的行号，有同样的资产ID，就报错
+		if (i!=lineno) {
+			if (globalServerData.server[i].asset_id == popupReplyData.name_to_value_array.rack_pos_asset_id) {
+				BootstrapDialog.alert({
+        			message: SUGAR.language.get('HAT_Asset_Locations', 'LBL_ERR_DUPLICATED_EQUIP_ON_RACK'),
+        			type:BootstrapDialog.TYPE_WARNING,
+    			});
+				return;//直接退出函数
+			}
+		}
+	}
+
   set_return(popupReplyData);
   if ($("#target_using_org_id").val()!="") {
   	$("#rack_poshat_assets_accounts_name").val($("#target_using_org").val());
   	$("#rack_poshat_assets_accounts_id").val($("#target_using_org_id").val())
   }
-  //console.log(popupReplyData);
+
 }
 
 function openUsingOrgPopup(ln){
@@ -167,9 +184,9 @@ function openUsingOrgPopup(ln){
   open_popup('Accounts', 1000, 850,popupFilter , true, true, popupRequestData);
 }
 
-/**********************
-/* 提供用于数据提交的字段
-/***************************/
+/***************************************************************************************
+/* 提供用于数据提交的字段，返回HTML显示一个表单，用于显示设备的单元格信息
+/***************************************************************************************/
 function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
 	var return_html="";
 	var numberingRule = globalServerData.numbering_rule;//获取是大编号在TOP还是小编号在TOP，影响Height的计算
@@ -197,7 +214,7 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
       "<input type='hidden' name='rack_pos_asset_id' id='rack_pos_asset_id' value=''>"+
       "<input type='hidden' name='rack_pos_asset_desc' id='rack_pos_asset_desc' value=''>"+
       "<input type='hidden' name='rack_pos_asset_status' id='rack_pos_asset_status' value=''>"+
-      "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openAssetPopup();'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+      "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openAssetPopup("+((i!=undefined)?i:null)+");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>";
 
 	return_html +=
@@ -278,8 +295,6 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
     }
 
 
-	//if (isPopup==false) {
-	//}
 	return_html += '</div>';
 	return return_html;
 }

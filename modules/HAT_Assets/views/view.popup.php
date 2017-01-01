@@ -23,12 +23,6 @@ class HAT_AssetsViewPopup extends ViewPopup
         	//如果当前没有current_mode就按常规的列表显示
         	echo '<script src="modules/HAT_Assets/js/popup_view.js"></script>';
             if (isset($_REQUEST['target_owning_org_id_advanced'])&&$_REQUEST['target_owning_org_id_advanced']!="") {
-/*			     echo 'owning_org_id= '.$_REQUEST['target_owning_org_id_advanced'];
-            }
-			//if (isset($_REQUEST['target_owning_org_id_advanced'])&&$_REQUEST['target_owning_org_id_advanced']!="") {
-				//echo '<script>var owning_org_id="'.$_REQUEST['target_owning_org_id_advanced'].'"</script>';
-			//}
-*/
 				 echo '<script> var owning_org_id="'.$_REQUEST["target_owning_org_id_advanced"].'";</script>';
             }
 			if (isset($_REQUEST['asset_type'])&&$_REQUEST['asset_type']!="") {
