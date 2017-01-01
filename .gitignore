@@ -76,3 +76,4 @@ public/
 test*.*
 downloaded/
 *.zip
+*.csv

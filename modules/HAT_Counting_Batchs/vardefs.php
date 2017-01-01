@@ -344,7 +344,7 @@ $dictionary['HAT_Counting_Batchs'] = array(
     'merge_filter' => 'disabled',
     'len' => 100,
     'size' => '20',
-    'options' => 'hat_counting_objects_type_list',
+    'options' => 'hat_counting_object_type_list',
     'studio' => 'visible',
     'dependency' => false,
   ),

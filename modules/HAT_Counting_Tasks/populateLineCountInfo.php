@@ -77,10 +77,9 @@ class CountInfo
 			and hcl.deleted = 0";
 			$result_ucount=$db->query($sql_ucount);
 			$row_ucount=$db->fetchByAssoc($result_ucount);
-			if($row_ucount["un_actual_counting"]!=0){
+			if($row_ucount["un_actual_counting"]==0){
 				$count['un_actual_counting']=$count['un_actual_counting']+1;
 			}
-
 			$sql_detail="SELECT
 			hcr.*
 			FROM

@@ -45,17 +45,15 @@ $app_list_strings['moduleList']['HAT_Counting_Results'] = '盘点结果';
 $app_list_strings['moduleList']['HAT_Counting_Rules'] = '盘点规则';
 $app_list_strings['moduleList']['HAT_Counting_Rule_Dtls'] = '盘点规则明细';
 $app_list_strings['moduleList']['HAT_Counting_Tasks'] = '盘点任务';
-$app_list_strings['hat_counting_objects_type_list']['ASSETS'] = 'Physical Assets';
-$app_list_strings['hat_counting_objects_type_list']['FA'] = 'Financial Assets (Fixed Assets)';
-$app_list_strings['hat_counting_objects_type_list']['INV'] = 'Inventory Items';
 $app_list_strings['hat_counting_status_list']=array (
   'New' => '未开始',
   'Counting' => '盘点中',
   'Counted' => '已盘点',
 );
 $app_list_strings['hat_counting_mode_list']=array (
-  'Manual' => '手工盘点',
-  'Mobile' => '移动盘点',
+  'Manual' => '手动粗盘',
+  'Recheck' => '单个详盘',
+  'Mobile' => '扫码群盘',
 );
 $app_list_strings['hat_counting_scene_list']=array (
   'Year' => '年度',
@@ -63,8 +61,8 @@ $app_list_strings['hat_counting_scene_list']=array (
 );
 $app_list_strings['hat_counting_task_status_list']=array (
   'New' => '未开始',
-  'Counting' => '盘点中',
-  'Counted' => '已盘点',
+  'Counting' => '进行中',
+  'Counted' => '已结束',
 );
 $app_list_strings['hat_counting_adjust_method_list']=array (
   ''=>' ',
@@ -91,6 +89,13 @@ $app_list_strings['hat_counting_adjust_posted']=array (
 );
 $app_list_strings['hat_counting_line_status_list']=array (
   'New' => '未开始',
-  'Counting' => '盘点中',
-  'Counted' => '已盘点',
+  'Counting' => '进行中',
+  'Counted' => '已结束',
+);
+$app_list_strings['hat_counting_object_type_list']=array (
+  'ASSETS' => '实物资产',
+  'EQM' => '生产设备设施',
+  'ADMIN' => '行政资产',
+  'GENERAL' => '通用物资',
+  'PRODUCT' => '生产物资',
 );
