@@ -21,6 +21,7 @@
 <script src="modules/HAT_Asset_Locations/js/selector_treeview_racks.js"></script>
 <script src="modules/HAT_Asset_Locations/js/selector_treeview.js"></script>
 <script src="modules/HAT_Asset_Locations/js/selector_mapview.js"></script>
+<script src="modules/HAA_FF/ff_include.js"></script>
 
 <style type="text/css">
 	#workbench_left {

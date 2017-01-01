@@ -204,11 +204,11 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
 	return_html +=  "<input type='hidden' name='rack_pos_id' id='rack_pos_id' value=''>";
 	return_html += "<span class='input_group'>"+
 			"<label>"+ SUGAR.language.get('HIT_Rack_Allocations', 'LBL_PLACEHOLDER')+"</label>"+
-			"<input name='rack_pos_placeholder'  type='checkbox' id='rack_pos_placeholder'  value='' title='"+SUGAR.language.get('HIT_Rack_Allocations', 'LBL_PLACEHOLDER')+"'></input>"+
+			"<input name='rack_pos_placeholder'  type='checkbox' id='rack_pos_placeholder'  value='' title='"+SUGAR.language.get('HIT_Rack_Allocations', 'LBL_PLACEHOLDER')+"' onchange='rack_pos_placeholder_changed()'></input>"+
       		"</span>";
 
 	return_html +=
-      "<span class='input_group'>"+
+      "<span class='input_group' id='input_group_asset'>"+
       "<label id='rack_pos_asset_label'>"+SUGAR.language.get('HIT_Rack_Allocations', 'LBL_ASSET')+"<span class='required'>*</span></label>"+
       "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='rack_pos_asset_name' id='rack_pos_asset_name' value='' title='' onblur=''>"+
       "<input type='hidden' name='rack_pos_asset_id' id='rack_pos_asset_id' value=''>"+
@@ -243,15 +243,7 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
 				"<label id='rack_pos_depth_label'>"+SUGAR.language.get('HIT_Rack_Allocations', 'LBL_RACK_POS_DEPTH')+"</label>" +
 	            '<select name="rack_pos_depth" id="rack_pos_depth">'+$('#hit_rack_pos_depth_list').html()+'</select>'+
       			"</span>";
-/*	return_html +=
-      "<span class='input_group ig_location'>"+
-      "<label id='rack_pos_date_start_label'>"+SUGAR.language.get('HIT_Rack_Allocations', 'LBL_DATE_START')+"</label>"+
-      "<input style='width:153px;' type='text' name='rack_pos_date_start' id='rack_pos_date_start' maxlength='50' value='' title=''>"+
-      "</span>"+
-      "<span class='input_group ig_location'>"+
-      "<label id='rack_pos_date_end_label'>"+SUGAR.language.get('HIT_Rack_Allocations', 'LBL_DATE_END')+"</label>"+
-      "<input style='width:153px;' type='text' name='rack_pos_date_end' id='rack_pos_date_end' maxlength='50' value='' title=''>"+
-      "</span>";*/
+
 	return_html += '</div><div class="lineEditor"><div class="bg-warning">';
 	return_html +=
       "<span class='input_group'>"+
@@ -269,14 +261,14 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
 		var desc = globalServerData.server[i].desc;
 
 		return_html += "<script>";
-	    for(var propertyName in globalServerData.server[i]) {
+	    for (var propertyName in globalServerData.server[i]) {
 	      //这里直接遍历所有的属性（因此需要建立与Bean属性同名的各个字段）
 	      if ($("#rack_pos_"+propertyName).is(':checkbox')) {
 	        if (globalServerData.server[i][propertyName]==true) {
 	          return_html += 'document.getElementById("rack_pos_'+propertyName+'").checked = true;'
 	        }
-	      }else {
-	        //如果当前字段不是checkbox，就以val的形式赋值
+	      } else {
+	       //如果当前字段不是checkbox，就以val的形式赋值
 	       //console.log("#rack_pos_"+propertyName+"="+globalServerData.server[i][propertyName]);
 	        return_html +='$("#rack_pos_'+propertyName+'").val("'+globalServerData.server[i][propertyName]+'");'
 	      }
@@ -294,12 +286,22 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
     	return_html +="</script>"
     }
 
-
+    return_html += '<script>rack_pos_placeholder_changed();</script>';
 	return_html += '</div>';
 	return return_html;
 }
 
-
+function rack_pos_placeholder_changed() {
+	//console.log("Checked="+$("#rack_pos_placeholder").is(':checked'));
+	if( $("#rack_pos_placeholder").is(':checked')) {
+	   $("#input_group_asset").hide();
+		addToValidate('EditView', 'rack_pos_asset_id','varchar', 'true', $("#rack_pos_asset_label").text());
+    	removeFromValidate('EditView','rack_pos_asset_id'); //去除必须验证
+	} else {
+	   $("#input_group_asset").show();
+		addToValidate('EditView', 'rack_pos_asset_id','varchar', 'true', $("#rack_pos_asset_label").text());
+	}
+};
 
 
 function btn_RackSelect_clicked() {
@@ -456,9 +458,13 @@ function selectServerArea() {
 		            if(result) {
 		                //Clicked YES
 		                //console.log($('rack_pos_depth').val()+",height="+ $('rack_pos_height').val()+", top="+$('rack_pos_top').val())
-						$("#rack_frame td").removeClass("rack_error");
-						$("#rack_frame td").removeClass("rack_highlighted");		                //
-		            	savePlaceHolder()
+						if (check_form('EditView')) {
+							$("#rack_frame td").removeClass("rack_error");
+							$("#rack_frame td").removeClass("rack_highlighted");		                //
+			            	savePlaceHolder();
+			            }else {
+			            	return false;
+			            }
 		            }else {
 		                //Clicked 'Nope.';
 		            }
