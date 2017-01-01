@@ -43,6 +43,7 @@ class HAM_WO extends HAM_WO_sugar {
 			}
 		}
 
+		//history
 		// 在资产事务处理保存时判断，如果事务处理的行状态达标，则更新资产状态
 		$focus_wo_status = $this->wo_status;
 		if ($focus_wo_status == 'SUBMITTED') {
@@ -70,56 +71,8 @@ class HAM_WO extends HAM_WO_sugar {
 				}
 			}
 		}
-
-		//工作单审批通过时（APPROVED）会将工单下第一道工序状态变为已批准（APPROVED）。其余工序状态变为等待前序（WPREV）。
-		//这里的第一道工序、以及后序工序不包括已经删除、取消或结束的工序
-		if (($this->wo_status == "SUBMITTED" || $this->wo_status == "APPROVED")&&$db_bean[0]->wo_status!="APPROVED") {
-			//工作单审批后会判断计划时间如果没有填写，如果没有进行手工排程，按目标时间进行默认
-			if ($this->date_schedualed_start == "") { $this->date_schedualed_start = $this->date_target_start; }
-			if ($this->date_schedualed_finish == "") { $this->date_schedualed_finish = $this->date_target_finish; }
-			if ($this->plan_fixed == "") { $this->plan_fixed = true; }
-
-
-			//遍历工序
-
-			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('woop_number', "ham_woop.woop_status not in ('CLOSED','CANCELED') and ham_wo_id='" . $this->id . "'");
-
-			if (!empty ($ham_woops)) {
-
-				foreach ($ham_woops as $key => $value) {
-					if ($key == 0) {
-
-						$ham_woops[0]->woop_status = "APPROVED";
-
-					} else {
-						$ham_woops[$key]->woop_status = "WPREV";
-					}
-					$ham_woops[$key]->save();
-				}
-
-			}
-		}
-		elseif ($this->wo_status == "CANCELED"&&$db_bean[0]->wo_status!="CANCELED") {
-			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('WOOP_NUMBER', "ham_woop.woop_status not in ('COMPLETED','CLOSED') and ham_wo_id='" . $this->id . "'");
-			if (!empty ($ham_woops)) {
-
-				foreach ($ham_woops as $key => $value) {
-					$ham_woops[$key]->woop_status = "CANCELED";
-					$ham_woops[$key]->save();
-				}
-
-			}
-		}
-		elseif (($this->wo_status == "COMPLETED" || $this->wo_status == "CLOSED")&&($db_bean[0]->wo_status!="COMPLETED"&&$db_bean[0]->wo_status!="CLOSED")) {
-			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('WOOP_NUMBER', "ham_wo_id='" . $this->id . "'");
-			if (!empty ($ham_woops)) {
-
-				foreach ($ham_woops as $key => $value) {
-					$ham_woops[$key]->woop_status = $this->wo_status;
-					$ham_woops[$key]->save();
-				}
-			}
-		}
+		
+		
 		
 		if (isset ($this->source_type) && $this->source_type != "") {
 			//$this->source_type="";
@@ -155,7 +108,6 @@ class HAM_WO extends HAM_WO_sugar {
 
 		$checkBean = BeanFactory :: getBean("HAM_WOOP");
 		$ham_woops = $checkBean->get_full_list('', "ham_woop.ham_wo_id ='" . $this->id . "'");
-		//echo 'ham_woops='.count($ham_woops);
 		if (count($ham_woops) == 0) {
 			//<1>.引用标准作业动力
 			if (count($ham_act_ops) > 0 && $bean_id != null) {
@@ -222,6 +174,62 @@ class HAM_WO extends HAM_WO_sugar {
 				$ham_woop_bean->save();
 			}
 		}
+		
+		//modify start 
+		
+
+		//工作单审批通过时（APPROVED）会将工单下第一道工序状态变为已批准（APPROVED）。其余工序状态变为等待前序（WPREV）。
+		//这里的第一道工序、以及后序工序不包括已经删除、取消或结束的工序
+		if (($this->wo_status == "SUBMITTED" || $this->wo_status == "APPROVED")&&$db_bean[0]->wo_status!="APPROVED") {
+			$this->wo_status="APPROVED";
+			//工作单审批后会判断计划时间如果没有填写，如果没有进行手工排程，按目标时间进行默认
+			if ($this->date_schedualed_start == "") { $this->date_schedualed_start = $this->date_target_start; }
+			if ($this->date_schedualed_finish == "") { $this->date_schedualed_finish = $this->date_target_finish; }
+			if ($this->plan_fixed == "") { $this->plan_fixed = true; }
+			//遍历工序
+
+			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('woop_number', "ham_woop.woop_status not in ('CLOSED','CANCELED') and ham_wo_id='" . $this->id . "'");
+
+			if (!empty ($ham_woops)) {
+
+				foreach ($ham_woops as $key => $value) {
+					if ($key == 0) {
+
+						$ham_woops[0]->woop_status = "APPROVED";
+
+					} else {
+						$ham_woops[$key]->woop_status = "WPREV";
+					}
+					$ham_woops[$key]->save();
+				}
+
+			}
+		}
+		elseif ($this->wo_status == "CANCELED"&&$db_bean[0]->wo_status!="CANCELED") {
+			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('WOOP_NUMBER', "ham_woop.woop_status not in ('COMPLETED','CLOSED') and ham_wo_id='" . $this->id . "'");
+			if (!empty ($ham_woops)) {
+
+				foreach ($ham_woops as $key => $value) {
+					$ham_woops[$key]->woop_status = "CANCELED";
+					$ham_woops[$key]->save();
+				}
+
+			}
+		}
+		elseif (($this->wo_status == "COMPLETED" || $this->wo_status == "CLOSED")&&($db_bean[0]->wo_status!="COMPLETED"&&$db_bean[0]->wo_status!="CLOSED")) {
+			$ham_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('WOOP_NUMBER', "ham_wo_id='" . $this->id . "'");
+			if (!empty ($ham_woops)) {
+
+				foreach ($ham_woops as $key => $value) {
+					$ham_woops[$key]->woop_status = $this->wo_status;
+					$ham_woops[$key]->save();
+				}
+			}
+		}
+		//modify end 
+		
+		
+		
 
 		$contract_id = $this->contract_id;
 		//合同

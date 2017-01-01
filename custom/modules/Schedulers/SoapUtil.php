@@ -52,6 +52,7 @@ class SoapUtil{
 					</soap:Envelope>';
 		}
 		else if($ws_env=='XR'){
+			
 				echo "XR"."<br>";
 				echo "ws_env=".$ws_type_code."<br>";
 				echo "ws_env=".$this->username_xr."<br>";
