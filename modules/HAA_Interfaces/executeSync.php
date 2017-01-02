@@ -23,38 +23,18 @@
  */
 
 
-
+require_once('modules/HAA_Interfaces/haaInterfaceBase.php');
 $interfaceId=$_REQUEST['record'];
-//require_once('modules/HAA_Interfaces/'.$instance_loc.'createRevenueFromClaim.php');
-require_once('modules/HAA_Interfaces/syncCommonUtl.php');
-$interfaceInfo=getInterfaceInfo($interfaceId);
-$execute_func_files=$interfaceInfo ["execute_func_files"];
-$execute_func_name=$interfaceInfo ["execute_func_name"];
-$systemId=$interfaceInfo ["haa_codes_id_c"];
-$codeBean=BeanFactory::getBean('HAA_Codes',$systemId);
-if($codeBean){
-$systemCode=$codeBean->code_tag;
-}
-$instance_loc='';
-if(isset($_SESSION["current_framework_code"])){
-	$instance_loc='iface_files/'.$_SESSION["current_framework_code"].'/'.$systemCode.'/';
-	$include_file='modules/HAA_Interfaces/'.$instance_loc.$execute_func_files.'.php';
-} 
-if(!file_exists($include_file)){
-	$instance_loc='iface_files/PUBLIC/'.$systemCode.'/';
-	$include_file='modules/HAA_Interfaces/'.$instance_loc.$execute_func_files.'.php';
-}
-if(!file_exists($include_file)){
-	die('未能在服务器路径下找到接口执行文件，请联系技术运维人员。');
-}
-require_once($include_file);
 
-$ifaceClass = new $execute_func_files();
-$return = $ifaceClass->$execute_func_name($interfaceId);
-if($return["error_code"]=='0'){
+$interfaceBaseClass= new haaInterfaceBase();
+
+$interfaceBaseClass->execute_Interface_Processor($interfaceId);
+$return=$interfaceBaseClass->interfaceProcessReturn;
+		var_dump($return);
+if($return["return_status"]=='0'){
 	header('Location: index.php?module=HAA_Interfaces&action=DetailView&record='.$interfaceId);
 }
 else{
-	die('执行接口出错:'.$return["error_msg"]);
+	die('执行接口出错:'.$return["msg_data"]);
 }
 ?>
