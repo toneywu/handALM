@@ -750,6 +750,11 @@ function resetEditorFields(ln) {
       $("#line_target_using_org"+ln).val($("#line_current_using_org"+ln).val());
       $("#line_target_using_org_id"+ln).val($("#line_current_using_org_id"+ln).val());
     }
+    if (eventOptions.keep_preassigned_status_using_org=="1" && $("#line_current_asset_status"+ln).val()=="PreAssigned") {
+      //当前状态为预分配的行使用组织不变
+      $("#line_target_using_org"+ln).val($("#line_current_using_org"+ln).val());
+      $("#line_target_using_org_id"+ln).val($("#line_current_using_org_id"+ln).val());
+    }
 
 
     if ($("#line_target_cost_center_id"+ln).val()==""

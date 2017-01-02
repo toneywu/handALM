@@ -49,7 +49,7 @@ class HAT_Asset_Trans_sugar extends Basic {
 	var $module_dir = 'HAT_Asset_Trans';
 	var $object_name = 'HAT_Asset_Trans';
 	var $table_name = 'hat_asset_trans';
-	var $importable = false;
+	var $importable = true;
 	var $disable_row_level_security = true ; // to ensure that modules created and deployed under CE will continue to function under team security if the instance is upgraded to PRO
 
 	var $id;

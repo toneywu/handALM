@@ -134,6 +134,7 @@ $mod_strings = array (
   'LBL_CHANGE_ASSET_ATTRIBUTE11'=>'可修改链路(attr11)',
   'LBL_CHANGE_ASSET_ATTRIBUTE12'=>'可修改波道(attr12)',
   'LBL_CHANGE_COSt_CENTER'=>'可修改成本中心',
-  'LBL_ALLOCATION_FLAG'=>'是否进行资产调拨',
+  'LBL_ALLOCATION_FLAG'=>'是否触发资产调拨接口程序',
   'LBL_KEEP_SEPERATD_ALLC_RACK_USING_ORG'=>'散U分配的机柜使用组织不变',
+  'LBL_KEEP_PREASSIGNED_STATUS_USING_ORG'=>'预分配状态下的设备/资产使用组织不变',
 );

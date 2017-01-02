@@ -135,6 +135,7 @@ $mod_strings = array (
   'LBL_CHANGE_ASSET_ATTRIBUTE11'=>'链路(cux)',
   'LBL_CHANGE_ASSET_ATTRIBUTE12'=>'波道(cux)',
   'LBL_CHANGE_COSt_CENTER'=>'Cost Center',
-  'LBL_ALLOCATION_FLAG'=>'Is Asset Allocation',
-  'LBL_KEEP_SEPERATD_ALLC_RACK_USING_ORG'=>'Do not change using org for IT Rack allowing seperate allocation',
+  'LBL_ALLOCATION_FLAG'=>'Triger Asset Allocation Interface',
+  'LBL_KEEP_SEPERATD_ALLC_RACK_USING_ORG'=>'Do not change using org for IT Racks allowing Partial-allocation',
+  'LBL_KEEP_PREASSIGNED_STATUS_USING_ORG'=>'Do not change using org for Euipments/Assets with Pre-Assigned Status',
 );

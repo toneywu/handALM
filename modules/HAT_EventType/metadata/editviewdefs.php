@@ -234,14 +234,14 @@ array (
         3 => 
         array (
           0 => 'keep_seperated_allc_rack_using_org',
-          1 => 
-          array (
-            'name' => 'change_location',
-            'studio' => 'visible',
-            'label' => 'LBL_CHANGE_LOCATION',
-          ),
+          1 => 'keep_preassigned_status_using_org',
         ),
-        4 => 
+        4=>
+        array(
+          0=>"change_location",
+          1=>""
+        ),
+        5 => 
         array (
           0 => 
           array (
@@ -256,17 +256,17 @@ array (
             'label' => 'LBL_CHANGE_RACK_POSITION',
           ),
         ),
-        5=>
+        6=>
         array(
           0=>"change_cost_center",
           1=>"change_asset_attribute10"
         ),
-        6=>
+        7=>
         array(
           0=>"change_asset_attribute11",
           1=>"change_asset_attribute12"
         ),
-		7=>
+		    8=>
         array(
           0=>"allocation_flag",
         )

@@ -49,7 +49,7 @@ class HIT_IP_TRANS_BATCH_sugar extends Basic {
 	var $module_dir = 'HIT_IP_TRANS_BATCH';
 	var $object_name = 'HIT_IP_TRANS_BATCH';
 	var $table_name = 'hit_ip_trans_batch';
-	var $importable = false;
+	var $importable = true;
 	var $disable_row_level_security = true ; // to ensure that modules created and deployed under CE will continue to function under team security if the instance is upgraded to PRO
 
 	var $id;
