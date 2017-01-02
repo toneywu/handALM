@@ -309,7 +309,7 @@ function insertLineData(asset_trans_line, current_view){ //将数据写入到对
           document.getElementById("line_"+propertyName.concat(String(ln))).checked = true;
           document.getElementById("line_"+propertyName.concat(String(ln))).value = 1;
         }
-      } else if(propertyName=="target_rack_position_data"){
+      } else if(propertyName=="target_rack_position_data" && asset_trans_line[propertyName]!=null){
         //有个特殊字段需要处理
          $("#line_"+propertyName.concat(String(ln))).val(asset_trans_line[propertyName].replace(/&quot;/g, '"'));
       } else {

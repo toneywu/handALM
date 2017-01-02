@@ -147,6 +147,7 @@ function display_lines($focus, $field, $value, $view){
 					  hat_assets ha
 					WHERE hat.deleted = 0 
 					  AND ha.`id`=hat.`asset_id`
+					  AND hat.trans_status != 'AUTO_TRANSACTED'
 					  AND hat.batch_id = '".$focus->id."'"." order by hat.name";
 
             $result = $focus->db->query($sql);

@@ -1,7 +1,6 @@
 <?php
 
 //global $current_user;
-
 global $db;
 
 $sugarbean = new HAT_Asset_Trans_Batch();
@@ -101,7 +100,7 @@ function check_hearder_status($sugarbean) {
 }
 
 
-function save_lines($post_data, $header, $key = '',$need_allocation){
+function save_lines($post_data, $header, $key = '', $need_allocation){
     $line_count = isset($post_data[$key.'asset_id']) ? count($post_data[$key.'asset_id']) : 0; //判断记录的行数
 
     echo '<br/>.line_count = '.$line_count;
@@ -113,8 +112,6 @@ function save_lines($post_data, $header, $key = '',$need_allocation){
         echo "<br/>target_owning_org_id=".$post_data[$key.'target_owning_org_id'][$i];
         echo "<br/>target_location_id=".$post_data[$key.'target_location_id'][$i];
 
-/*        echo "<pre>";
-        print_r($post_data);*/
 
         if ($post_data[$key.'asset_id'][$i]!='') {
             //只保存Asset、Account、Location不为空的记录，否则直接到下一循环
@@ -143,9 +140,6 @@ function save_lines($post_data, $header, $key = '',$need_allocation){
                 $trans_line->trans_status = $header->asset_trans_status;//父状态 LogicHook BeforeSave可能会改写
                 $trans_line->assigned_user_id = $header->assigned_user_id;
 
-
-
-
 				//触发ERP资产调拨
 				/*erp_asset_allocation($trans_line->asset_id,
 									 $trans_line->target_owning_org_id,
@@ -166,26 +160,7 @@ function save_lines($post_data, $header, $key = '',$need_allocation){
                         save_rack_allocations($trans_line, $header);
                     }
 
-
-
-                    //deleted 20161225 不在单独保存机柜分配信息
-
-                    //审批通过后直接更新资产信息
                     save_asset_lines($trans_line);
-
-/*                    //先保存事务处理行相关资产信息，再基于资产信息更新关于机柜上的设备信息
-                    //以下检查是否有机柜，如果是机柜就进一步判断是否需要更新机柜上具体的 
-                    $beanRack = BeanFactory::getBean('HIT_Racks')->
-                                            retrieve_by_string_fields(array('hat_assets_id'=>$post_data[$key.'asset_id'][$i])
-                                                );
-                    echo ("\nChecking Rack inofrmation: beanRack->enable_partial_allocation = ".$beanRack->enable_partial_allocation);
-                   // if(isset($beanRack) && $beanRack->enable_partial_allocation == false) {
-                   if(isset($beanRack)) {
-                    //如果当前设备是IT机柜，则将机柜上的位置、使用组织与人员信息、或失效信息提供到机柜分配行上
-                        echo "<br/>Rack is not partial allocation, assets information should be set as parent Rack-Asset.";
-                        save_rack_elements_from_rack($trans_line, $beanRack, $header);
-                    }
-*/
 
                 }
 
@@ -213,7 +188,6 @@ function save_rack_elements_from_rack($allocation_id, $key, $focused_trans_line)
     }
 
     $Rack = BeanFactory::getBean('HIT_Racks') ->retrieve_by_string_fields(array('hit_racks.`hat_assets_id'=> $focused_trans_line->asset_id));
-
     $RackAllocation->hit_racks_id = $Rack->id;
     $RackAllocation->name = $key->asset_name;
     $RackAllocation->hat_assets_id = $key->asset_id;
@@ -229,17 +203,33 @@ function save_rack_elements_from_rack($allocation_id, $key, $focused_trans_line)
 
     $beanAssetOnRack = BeanFactory::getBean('HAT_Assets',$RackAllocation->hat_assets_id);
     if($beanAssetOnRack) {
-        //当前当前事务处理行没有失效，就需要行一步判断，当前行上的分配是否有失效。
-            $beanAssetOnRack->using_org_id = $RackAllocation->using_org_id;
-            $beanAssetOnRack->using_person_id = $focused_trans_line->target_using_person_id;
-            $beanAssetOnRack->using_person_desc = $focused_trans_line->target_using_person_desc;
-            $beanAssetOnRack->parent_asset_id = $beanRack->hat_assets_id;
-            $beanAssetOnRack->hat_asset_locations_hat_assetshat_asset_locations_ida = $focused_trans_line->target_location_id;
-            echo "<br/>Asset[".($beanAssetOnRack->name)."] located on Rack has been set according to the Rack information";
-            echo "<br/>Asset[".($beanAssetOnRack->name)."] using org is set to ".($beanAssetOnRack->using_org_id);
+        //以下创建资产事务处理行（为了在资产上看到处理过程，以及为了可逆还原）
+        $subTrans_line = new HAT_Asset_Trans();
+        $subTrans_line = BeanFactory::getBean('HAT_Asset_Trans');
+        $subTrans_line->batch_id = $focused_trans_line->batch_id;
+        $subTrans_line->asset_id = $RackAllocation->hat_assets_id;
+        $subTrans_line->asset_id = $RackAllocation->hat_assets_id;
+        $subTrans_line->trans_status = 'AUTO_TRANSACTED';
+        $subTrans_line->name = "-".$focused_trans_line->name;
+        $subTrans_line->description -> $focused_trans_line->description;
+        //以下是记录资产目标状态
+        $subTrans_line->target_using_org_id = $RackAllocation->using_org_id;
+        $subTrans_line->target_using_person_id = $focused_trans_line->target_using_person_id;
+        $subTrans_line->target_using_person_desc =$focused_trans_line->target_using_person_desc;
+        $subTrans_line->target_parent_asset_id = $beanRack->hat_assets_id;
+        $subTrans_line->target_location_id = $focused_trans_line->target_location_id;
+        $subTrans_line->target_asset_status = $focused_trans_line->target_asset_status;//机柜上资产的状态与当前事务处理行的创建一致。
+        //以下是记录资产的当前状态
+        $subTrans_line->current_using_org_id = $beanAssetOnRack->using_org_id;
+        $subTrans_line->current_using_person_id = $beanAssetOnRack->using_person_id;
+        $subTrans_line->current_using_person_desc =$beanAssetOnRack->using_person_desc;
+        $subTrans_line->current_parent_asset_id = $beanAssetOnRack->parent_asset_id;
+        $subTrans_line->current_location_id = $beanAssetOnRack->hat_asset_locations_hat_assetshat_asset_locations_ida;
+        $subTrans_line->current_asset_status = $beanAssetOnRack->asset_status;//机柜上资产的状态与当前事务处理行的创建一致。
+
+        $subTrans_line->save();
+        save_asset_lines($subTrans_line);//基于新增的资产事务处理记录，变更资产状态
     }
-    $beanAssetOnRack->asset_status = $focused_trans_line->target_asset_status;
-    $beanAssetOnRack->save();
 }
 
 function remove_rack_elements_from_rack($allocation_id, $focused_trans_line) {
@@ -257,26 +247,34 @@ function remove_rack_elements_from_rack($allocation_id, $focused_trans_line) {
         //清空机柜上设备的信息
         $beanAssetOnRack = BeanFactory::getBean('HAT_Assets', $AssetOnRackID);
         if ($beanAssetOnRack) {
-            echo "<br/>got asset from HAT_Assets:".$beanRackAllocation->hat_assets_id;
-            $beanAssetOnRack->using_org_id = "";
-            $beanAssetOnRack->using_person_id = "";
-            $beanAssetOnRack->using_person_desc = "";
-            $beanAssetOnRack->parent_asset_id ="";
-            //$beanAssetOnRack->hat_asset_locations_hat_assetshat_asset_locations_ida = "";
-            //将资产的位置还原为地点上的默认位置
-
             $beanLocation = BeanFactory::getBean('HAT_Asset_Locations',$focused_trans_line->current_location_id);
-            echo "<br/>get location = ".$focused_trans_line->current_location_id;
             $beanSite = BeanFactory::getBean('HAM_Maint_Sites',$beanLocation->ham_maint_sites_id);
-            echo "<br/>get site = ".$beanLocation->ham_maint_sites_id;
-            $beanAssetOnRack->hat_asset_locations_hat_assetshat_asset_locations_ida = $beanSite->deft_unassigned_location_id;
-            echo "<br/>get locaton_id = ".$beanSite->deft_unassigned_location_id;
+            //以上为了获取默认的资产地点
+            $subTrans_line = new HAT_Asset_Trans();
+            $subTrans_line = BeanFactory::getBean('HAT_Asset_Trans');
+            $subTrans_line->batch_id = $focused_trans_line->batch_id;
+            $subTrans_line->asset_id = $RackAllocation->hat_assets_id;
+            $subTrans_line->asset_id = $RackAllocation->hat_assets_id;
+            $subTrans_line->trans_status = 'AUTO_TRANSACTED';
+            $subTrans_line->name = "-".$focused_trans_line->name;
+            $subTrans_line->description -> $focused_trans_line->description;
+            //以下是记录资产目标状态
+            $subTrans_line->target_using_org_id = "";
+            $subTrans_line->target_using_person_id = "";
+            $subTrans_line->target_using_person_desc ="";
+            $subTrans_line->target_parent_asset_id = "";
+            $subTrans_line->target_location_id = $beanSite->deft_unassigned_location_id;
+            $subTrans_line->target_asset_status = $focused_trans_line->target_asset_status;//机柜上资产的状态与当前事务处理行的创建一致。
+            //以下是记录资产的当前状态
+            $subTrans_line->current_using_org_id = $beanAssetOnRack->using_org_id;
+            $subTrans_line->current_using_person_id = $beanAssetOnRack->using_person_id;
+            $subTrans_line->current_using_person_desc =$beanAssetOnRack->using_person_desc;
+            $subTrans_line->current_parent_asset_id = $beanAssetOnRack->parent_asset_id;
+            $subTrans_line->current_location_id = $beanAssetOnRack->hat_asset_locations_hat_assetshat_asset_locations_ida;
+            $subTrans_line->current_asset_status = $beanAssetOnRack->asset_status;//机柜上资产的状态与当前事务处理行的创建一致。
 
-            echo "location=".$beanAssetOnRack->hat_asset_locations_hat_assetshat_asset_locations_ida;
-            echo "<br/>Asset[".($beanAssetOnRack->name)."] located on Rack has been set removed.";
-
-            $beanAssetOnRack->asset_status = $focused_trans_line->target_asset_status;
-            $beanAssetOnRack->save();
+            $subTrans_line->save();
+            save_asset_lines($subTrans_line);//基于新增的资产事务处理记录，变更资产状态
         }
     }
 }
@@ -285,9 +283,11 @@ function remove_rack_elements_from_rack($allocation_id, $focused_trans_line) {
 //********************************************************************
 //*本函数在处理Trans_line时，如果当前行是新增或是修改则变化资产信息*
 //********************************************************************//
-function save_asset_lines($focus){
+function save_asset_lines($focus, $beanAsset=null){
         //如果不出意外，应当由HAT_TransactionBatch/checkApprovalWorkflow.php先将头STATUS调整为APPROVED
-        $beanAsset = BeanFactory::getBean('HAT_Assets', $focus->asset_id);
+        //if (empty($beanAsset)) {//如果参数没有传递过来则直接加载
+            $beanAsset = BeanFactory::getBean('HAT_Assets', $focus->asset_id);
+        //}
         if ($beanAsset) { // test if $bean was loaded successfully
             $beanAsset->owning_org_id = $focus->target_owning_org_id;
             $beanAsset->owning_person_id = $focus->target_owning_person_id;
