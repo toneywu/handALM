@@ -6,13 +6,6 @@ array (
   array (
     'templateMeta' => 
     array (
-      'includes' => 
-      array (
-        0 => 
-        array (
-          'file' => 'modules/HAM_WO_Lines/js/WO_Lines_editview.js',
-        ),
-      ),
       'maxColumns' => '2',
       'widths' => 
       array (
@@ -49,36 +42,32 @@ array (
             'name' => 'wo_number',
             'studio' => 'visible',
             'label' => 'LBL_WO_NUMBER',
-            'customCode' => '<input type="hidden" name="ham_wo_id" id="ham_wo_id" value="{$fields.ham_wo_id.value}">{$fields.wo_number.value}',
+			'customCode' => '<input type="hidden" name="ham_wo_id" id="ham_wo_id" value="{$fields.ham_wo_id.value}">{$fields.wo_number.value}',
           ),
-          1 => 
-          array (
-            'name' => 'contract',
-            'studio' => 'visible',
-            'label' => 'LBL_CONTRACT',
-          ),
+          1 => 'name',
         ),
         1 => 
         array (
           0 => 
           array (
-            'name' => 'product',
+            'name' => 'contract',
             'studio' => 'visible',
-            'label' => 'LBL_PRODUCT',
+            'label' => 'LBL_CONTRACT',
           ),
           1 => 
           array (
-            'name' => 'asset',
+            'name' => 'product',
             'studio' => 'visible',
-            'label' => 'LBL_ASSET',
+            'label' => 'LBL_PRODUCT',
             'displayParams' => 
             array (
               'field_to_name_array' => 
               array (
-					'asset_number' => 'asset',
-					'id' => 'asset_id',
-                   ),
-			  'call_back_function' => 'setAssetReturn',
+                'name' => 'product',
+                'id' => 'product_id',
+                'haa_uom_id_c'=>'uom_id',
+                'primary_uom_c'=>'uom_code'
+              ),
             ),
           ),
         ),
@@ -86,23 +75,37 @@ array (
         array (
           0 => 
           array (
+            'name' => 'asset',
+            'studio' => 'visible',
+            'label' => 'LBL_ASSET',
+			'displayParams' => 
+            array (
+              'field_to_name_array' => 
+              array (
+                'asset_number' => 'asset',
+                'id' => 'asset_id',
+              ),
+            ),
+          ),
+          1 => 
+          array (
             'name' => 'quantity',
             'label' => 'LBL_QUANTITY',
           ),
-          1 => 
+        ),
+        3 => 
+        array (
+          0 => 
           array (
             'name' => 'uom_code',
             'studio' => 'visible',
             'label' => 'LBL_UOM_CODE',
           ),
-        ),
-        3 => 
-        array (
-          0 => 'description',
+          1 => '',
         ),
         4 => 
         array (
-          0 => '',
+          0 => 'description',
         ),
       ),
     ),

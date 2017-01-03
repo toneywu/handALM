@@ -122,7 +122,7 @@ array (
           ),
           1 => 
           array (
-            'name' => 'cost_center',
+            'name' => 'cost_center_dis',
             'studio' => 'visible',
             'label' => 'LBL_COST_CENTER',
           ),

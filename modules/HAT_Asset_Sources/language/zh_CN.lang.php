@@ -82,4 +82,7 @@ $mod_strings = array (
   'LBL_SOURCE_REFERENCE'=>'备注',
   'LBL_SOURCE_ID'=>'来源ID',
   'LBL_RECEIVED_DATE'=>'接收日期',
+  'LBL_COST_CENTER'=>'成本中心',
+  'LBL_NEED_BY'=>'需要日期',
+  'LBL_UOM'=>'单位',
 );

@@ -82,4 +82,7 @@ $mod_strings = array (
   'LBL_SOURCE_REFERENCE'=>'Comments',
   'LBL_SOURCE_ID'=>'Source ID',
   'LBL_RECEIVED_DATE'=>'Received Date',
+  'LBL_COST_CENTER'=>'Cost Center',
+  'LBL_NEED_BY'=>'Need Date',
+  'LBL_UOM'=>'Unit Of Measure',
 );

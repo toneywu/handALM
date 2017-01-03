@@ -30,6 +30,12 @@ class HAT_AssetsController extends SugarController {
 			$this->bean->asset_map_layer_id = "";
 		}
 		parent :: action_save();
+		$queryParams = array(
+							'module' => 'HAT_Assets',
+							'action' => 'DetailView',
+							'record' => $this->bean->id,
+							);
+		SugarApplication::redirect('index.php?' . http_build_query($queryParams));
 	}
 
 	public function action_displaypassedids() {

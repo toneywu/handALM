@@ -29,7 +29,7 @@ array (
           'panelDefault' => 'expanded',
         ),
       ),
-      'syncDetailEditViews' => false,
+      'syncDetailEditViews' => true,
     ),
     'panels' => 
     array (
@@ -113,8 +113,27 @@ array (
         array (
           0 => 
           array (
-            'name' => 'source_reference',
-            'label' => 'LBL_SOURCE_REFERENCE',
+            'name' => 'cost_center_dis',
+            'studio' => 'visible',
+            'label' => 'LBL_COST_CENTER',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&code_type_advanced=asset_main_cost_center',
+            ),
+          ),
+          1 => 
+          array (
+            'name' => 'need_by',
+            'label' => 'LBL_NEED_BY',
+          ),
+        ),
+        7 => 
+        array (
+          0 => 
+          array (
+            'name' => 'uom',
+            'studio' => 'visible',
+            'label' => 'LBL_UOM',
           ),
           1 => '',
         ),

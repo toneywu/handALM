@@ -66,7 +66,8 @@ class HAT_Assets extends HAT_Assets_sugar {
 
 	function save($check_notify = false) {
 
-		if ($this->bean->asset_number == null) {
+	//防止忘记更新 加个备注
+		if ($this->asset_number == null) {
 			//1 根据产品 获取产品的资产编号定义
 			//asset_group
 			$products_bean = BeanFactory :: getBean('AOS_Products')->retrieve_by_string_fields(array (

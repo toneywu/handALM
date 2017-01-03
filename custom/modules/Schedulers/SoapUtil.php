@@ -44,7 +44,7 @@ class SoapUtil{
 					    <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" soap:mustUnderstand="1"><wsse:UsernameToken xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"><wsse:Username>'.$this->username_jt.'</wsse:Username><wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">'.$this->password_jt.'</wsse:Password></wsse:UsernameToken></wsse:Security></soap:Header>
 					    <soap:Body xmlns:ns2="http://xmlns.oracle.com/apps/cux/soaprovider/plsql/cux_ws_eam_basic_info_pkg/get_basic_info/">
 					        <ns2:InputParameters>
-					            <ns2:P_START_DATE>2016-05-01</ns2:P_START_DATE>
+					            <ns2:P_START_DATE>2010-05-01</ns2:P_START_DATE>
 					            <ns2:P_END_DATE>2016-12-31</ns2:P_END_DATE>
 					            <ns2:P_TYPE_CODE>'.$ws_type_code.'</ns2:P_TYPE_CODE>
 					        </ns2:InputParameters>
