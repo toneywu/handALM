@@ -50,6 +50,7 @@ $rawRow['source_reference'] =  $event->event_number;
 $rawRow['contract_number'] = $event->person_number;
 $rawRow['contact_id_c'] = $event->contact_id_c;
 $rawRow['contract_name'] = $event->person_name;
+$rawRow['hat_assets_id'] = $event->hat_assets_id_c;
 
 $rawRow['expense_group'] = $event->event_type;
 $rawRow['event_type'] =$event->event_type;

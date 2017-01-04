@@ -30,7 +30,7 @@ $interfaceBaseClass= new haaInterfaceBase();
 
 $interfaceBaseClass->execute_Interface_Processor($interfaceId);
 $return=$interfaceBaseClass->interfaceProcessReturn;
-		var_dump($return);
+
 if($return["return_status"]=='0'){
 	header('Location: index.php?module=HAA_Interfaces&action=DetailView&record='.$interfaceId);
 }

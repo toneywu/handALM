@@ -496,10 +496,13 @@ $app_list_strings['moduleList']['HAA_FSQL'] = 'Flexible SQL Statement';
 
 
 $app_list_strings['moduleList']['HAA_Interfaces'] = '接口管理';
+$app_list_strings['moduleList']['HAA_Interface_Logs'] = '接口调用日志';
+
 $app_list_strings['haa_interface_type_list']=array (
-  'WS' => 'WebService',
-  'TEXT' => '文本',
-);
+	'WS' => 'WebService',
+	'TEXT' => '文本',
+	);
+
 
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by

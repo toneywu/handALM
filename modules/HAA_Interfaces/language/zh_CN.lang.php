@@ -84,5 +84,7 @@ $mod_strings = array (
   'LBL_PARAMETER_INFO' => '请求参数',
   'LBL_REQUEST_SAMPLE' => '请求样例',
   'LBL_EXECUTE_FUNC_FILES'=>'执行程序文件名',
-  'LBL_EXECUTE_FUNC_NAME'=>'入口函数'
+  'LBL_EXECUTE_FUNC_NAME'=>'入口函数',
+  'LBL_LAST_SYNC_DATE'=>'最后同步日期',
+  'LBL_HAA_INTERFACE_LOG_SUBPANEL_TITLE'=>'调用日志'
 );
