@@ -141,6 +141,7 @@ array (
           array (
             'name' => 'enable_it_ports',
             'label' => 'LBL_ENABLE_IT_PORTS',
+            'customCode' => '{$ENABLE_IT_PORTS_DETAILS}',
           ),
         ),
         5 => 
@@ -169,8 +170,9 @@ array (
         array (
           0 => 
           array (
-            'name' => 'hit_racks',
+            'name' => 'enable_it_rack',
             'label' => 'LBL_ENABLE_IT_RACK',
+            'customCode' => '{$ENABLE_IT_RACK_DETAILS}',
           ),
           1 => '',
         ),

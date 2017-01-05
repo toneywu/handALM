@@ -185,11 +185,7 @@ array (
         ),
         7 => 
         array (
-          0 => 
-          array (
-            'name' => 'hit_racks',
-            'label' => 'LBL_ENABLE_IT_RACK',
-          ),
+          0 => 'enable_it_rack',
           1 => '',
         ),
                 8=> array(

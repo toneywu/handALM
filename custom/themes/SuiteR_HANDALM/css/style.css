@@ -501,6 +501,7 @@ li.recentlinks_edit a {
 .color_tag {
 	padding:3px 10px 3px 10px;
 	border-radius:15px;
+	display: inline-flex;
 }
 .color_asset_status_Ordered {
 	background-color: #A2D4D7;/*蓝绿*/

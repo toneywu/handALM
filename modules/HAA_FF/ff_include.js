@@ -199,9 +199,9 @@ function mark_field_setcheckbox(fields){
 		$("#"+field_name).parent().append(html);
 	} else if(view=='DetailView'){
 		var checkval=$("#"+field_name).html();
-		html='<input id="'+field_name+'" name="'+field_name+'" type="checkbox" disabled value="1"/>';
+		html='<input id="'+field_name+'" name="'+field_name+'" type="checkbox" readonly value="1"/>';
 		if (checkval==1) {
-			html='<input id="'+field_name+'" name="'+field_name+'" type="checkbox" disabled value="1" checked/>';
+			html='<input id="'+field_name+'" name="'+field_name+'" type="checkbox" readonly value="1" checked/>';
 		}
 		$("#"+field_name).hide();
 		$("#"+field_name).parent().html(html);
@@ -325,19 +325,22 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false, donot_c
 function mark_field_readonly(field_name) {
 	  var view = action_sugar_grp1;
 	  if(view == 'EditView') {
-		mark_obj = ($("#"+field_name).length>0)?$("#"+field_name):$("[name='"+field_name+"'");
+		mark_obj = ($("#"+field_name).length>0)?$("#"+field_name):$("[name='"+field_name+"']");
 		mark_obj_lable = $("#"+field_name+"_label");
 		mark_obj_tr = $("#"+field_name).closest("tr");
 
-	   
 		mark_obj.closest('td').css({"display":""});
 		mark_obj_lable.css({"display":""});
-		mark_obj.attr("disabled","disabled");
-		
+		//mark_obj.attr("disabled","disabled");//deleted by toney.wu 不能用Disable否则数据不能正常保存
+		//Checkbox 的readonly无用，需要采用以下的方式
+		if(mark_obj.is(":checkbox")) {
+			mark_obj.click(function() { return false;});
+		}
+
 		mark_obj.css({"background-Color":"#efefef;"});
 		mark_obj.attr("readonly",true);
 		mark_obj_lable.css({"color":"#aaaaaa"});
-	    
+
 	    if (typeof validate != "undefined" && typeof validate['EditView'] != "undefined") {
 	      removeFromValidate('EditView',field_name); //去除必须验证
 	    }
@@ -354,14 +357,13 @@ function mark_field_readonly(field_name) {
 	    if  (typeof $("#"+field_name+"_id")!= 'undefined') {
 	      $("#"+field_name+"_id").val("");
 	    }
-		
+
 		if($("#"+field_name).attr("class")=="date_input"){
 		//console.log(field_name);
 		var next_dates_array =$("#"+field_name).nextAll();
 		next_dates_array.css({"visibility":"hidden"});
 		}
-		
-		
+
 	  }
 }
 

@@ -8,6 +8,14 @@ array (
     'default' => true,
     'link' => true,
   ),
+  'DESCRIPTION' => 
+  array (
+    'type' => 'text',
+    'label' => 'LBL_DESCRIPTION',
+    'sortable' => false,
+    'width' => '10%',
+    'default' => true,
+  ),
   'PART_NUMBER' => 
   array (
     'width' => '10%',

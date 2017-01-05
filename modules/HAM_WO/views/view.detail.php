@@ -28,6 +28,5 @@ class HAM_WOViewDetail extends ViewDetail {
 		}
 	}
 
-	
 
 }
