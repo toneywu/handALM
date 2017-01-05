@@ -46,7 +46,8 @@ function createRevenueFromWO($WOId){
 	$rawRow['source_id'] = $wo->id;
 
 	$rawRow['source_reference'] =  $wo->wo_number;
-	$rawRow['contact_id_c'] = $wo->work_center_people_id;
+	$rawRow['contact_id_c'] = $wo->contact_id1_c; 
+	$rawRow['hat_assets_id'] = $wo->hat_assets_id;
 
 	$rawRow['expense_group'] = $wo->event_type;
 

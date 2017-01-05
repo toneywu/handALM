@@ -39,3 +39,4 @@
 
 
 $app_list_strings['moduleList']['HAA_Interfaces'] = '接口管理';
+$app_list_strings['moduleList']['HAA_Interface_Logs'] = '接口调用日志';
