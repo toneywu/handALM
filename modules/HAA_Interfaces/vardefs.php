@@ -459,6 +459,26 @@ $dictionary['HAA_Interfaces'] = array(
         'dbType' => 'datetime',
         'display_default' => '',
         ),
+      'line_items' =>
+            array(
+                'required' => false,
+                'name' => 'line_items',
+                'vname' => 'LBL_LINE_ITEMS',
+                'type' => 'function',
+                'source' => 'non-db',
+                'massupdate' => 0,
+                'importable' => 'false',
+                'duplicate_merge' => 'disabled',
+                'duplicate_merge_dom_value' => 0,
+                'audited' => false,
+                'reportable' => false,
+                'function' =>
+                    array(
+                        'name' => 'display_lines',
+                        'returns' => 'html',
+                        'include' => 'modules/HAA_Interface_Logs/Line_Items.php'
+                    ),
+            ),
       ),
 'relationships'=>array (
     ),

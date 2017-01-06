@@ -33,6 +33,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
           ),
+        'LBL_EDITVIEW_PANEL2' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+          ),
         ),
       ),
     'panels' => 
@@ -99,14 +104,21 @@ array (
             'name' => 'execute_func_files',
             'label' => 'LBL_EXECUTE_FUNC_FILES',
             ),
-          1 => array (
+          1 => 
+          array (
             'name' => 'execute_func_name',
             'label' => 'LBL_EXECUTE_FUNC_NAME',
             ),
           ),
         5 => 
         array (
-          0 => 'description',
+          0 => 
+          array (
+            'name' => 'last_sync_date',
+            'label' => 'LBL_LAST_SYNC_DATE',
+            'customCode' => '{$fields.last_sync_date.value}',
+            ),
+          1 => 'description',
           ),
         ),
       'lbl_editview_panel1' => 
@@ -155,7 +167,20 @@ array (
           1 => '',
           ),
         ),
+      'lbl_editview_panel2' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'line_items',
+            'studio' => 'visible',
+            'label' => 'LBL_LINE_ITEMS',
+            ),
+          ),
+        ),
+
       ),
     ),
-  );
-  ?>
+);
+?>
