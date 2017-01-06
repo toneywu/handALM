@@ -1,5 +1,5 @@
 <?php
-// created: 2016-12-24 16:14:57
+// created: 2017-01-03 09:35:10
 $subpanel_layout['list_fields'] = array (
   'task_number' => 
   array (
@@ -49,6 +49,14 @@ $subpanel_layout['list_fields'] = array (
     'type' => 'int',
     'studio' => 'visible',
     'vname' => 'LBL_ACTUAL_COUNTING',
+    'width' => '8%',
+    'default' => true,
+  ),
+  'un_actual_counting' => 
+  array (
+    'type' => 'int',
+    'studio' => 'visible',
+    'vname' => 'LBL_UN_ACTUAL_COUNTING',
     'width' => '8%',
     'default' => true,
   ),

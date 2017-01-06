@@ -22,16 +22,44 @@
  */
 
 global $db;
-$taskId=$_REQUEST['record'];
-$bean_batch = BeanFactory :: getBean('HAT_Counting_Batchs', $taskId);
-
-if ($bean_batch->snapshot_date !=''){
-	die('已生成盘点任务，不能重复操作!');
+$isNew=$_POST['isNew'];
+$isClr=$_POST['isClr'];
+$batchId=$_POST['record'];
+$bean_batch = BeanFactory :: getBean('HAT_Counting_Batchs', $batchId);
+if ($isNew=="") {
+	
+	$sql="SELECT
+	count(*) counting_task_status
+	FROM
+	hat_counting_batchs hcb,
+	hat_counting_tasks hct
+	WHERE
+	1 = 1
+	AND hct.hat_counting_batchs_id_c = hcb.id
+	AND hct.counting_task_status = 'New'
+	and hcb.id='".$batchId."'";
+	$result=$db->query($sql);
+	$row=$db->fetchByAssoc($result);
+	if($bean_batch->status!='New' || $row["counting_task_status"]!=0){
+		echo "0";
+	}else{
+		echo "1";
+	}
 }else{
-	$query = "call HAT_Counting_asset_info('".$_SESSION["current_framework"]."','".$taskId."'); ";
-	$result = $this->bean->db->query($query, true);
-	$row = $this->bean->db->fetchByAssoc($result);
+	if ($bean_batch->snapshot_date ==''){
+		echo "2";
+		$query = "call HAT_Counting_asset_info('".$_SESSION["current_framework"]."','".$batchId."')";
+		$result = $this->bean->db->query($query, true);
+		//$row = $this->bean->db->fetchByAssoc($result);
+	}else{
+		echo "3";
+		if($isClr=="true"){
+			//先清除，再创建
+		$query_reset = "call HAT_Counting_reset('".$batchId."')";
+		$result_reset = $this->bean->db->query($query_reset, true);
+		$query = "call HAT_Counting_asset_info('".$_SESSION["current_framework"]."','".$batchId."')";
+		$result = $this->bean->db->query($query, true);
+		}
+	}
 }
-
-header('Location: index.php?module=HAT_Counting_Batchs&action=DetailView&record='.$taskId);
 ?>

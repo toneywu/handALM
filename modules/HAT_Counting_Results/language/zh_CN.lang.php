@@ -117,4 +117,10 @@ $mod_strings = array (
   'LBL_DOC_STATUS' => '状态',
   'LBL_NEW_LINE' => '新增',
   'LBL_DOC_ACTIVE_DATE' => '公布日期',
+  'LBL_USER_PERSON' => '使用人',
+  'LBL_USER_PERSON_CONTACTS_ID' => '使用人',
+  'LBL_OWN_PERSON_CONTACTS_ID' => '管理人',
+  'LBL_OWN_PERSON' => '管理人',
+  'LBL_USER_DIFF_FLAG' => '是否有使用人差异',
+  'LBL_OWN_DIFF_FLAG' => '是否有管理人差异',
 );

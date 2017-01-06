@@ -184,7 +184,7 @@ array (
           array (
             'name' => 'manual_add_flag',
             'label' => 'LBL_MANUAL_ADD_FLAG',
-            'customCode' => '<input id="manual_add_flag" name="manual_add_flag" value="1" title="" tabindex="0" checked="checked" type="checkbox" onclick="return false">',
+            'customCode' => '<input id="manual_add_flag" name="manual_add_flag" value="" title="" tabindex="0"  type="checkbox" onclick="return false">',
           ),
           1 => 'description',
         ),
