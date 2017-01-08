@@ -127,6 +127,7 @@ function displayLineItems(){
     }
     $html .= $groupStart.$product.$service.$groupEnd;
     $html .= "</table>";
+ 
     echo '<script src="modules/HAOS_Revenues_Quotes/line_items.js"></script>';
     echo "<script>replace_display_lines(" .json_encode($html).",'line_items'".");</script>";
 }

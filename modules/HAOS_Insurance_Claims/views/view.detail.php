@@ -21,9 +21,9 @@ class HAOS_Insurance_ClaimsViewDetail extends ViewDetail
         $event_id=$this->bean->hat_incidents_id_c;
         $event=BeanFactory::getBean('HAT_Incidents', $event_id);
         $this->bean->relate_event_number=$event->event_number;
-        $this->bean->time=$event->event_date;
-        $this->bean->location=$event->event_location;
-        $this->bean->comment=$event->name;
+        //$this->bean->time=$event->event_date;
+        //$this->bean->location=$event->event_location;
+        //$this->bean->comment=$event->name;
         $format_files=array("claim_total_amount","claim_total_amount_usdollar","gap_amount","gap_amount_usdollar","act_claim_total_amt","act_claim_total_amt_usdollar");
         $rmb=array();
         foreach ($this->bean as $k => $v) {

@@ -32,9 +32,9 @@ class HAOS_Insurance_ClaimsViewEdit extends ViewEdit
 		$event_id=$this->bean->hat_incidents_id_c;
 		$event=BeanFactory::getBean('HAT_Incidents', $event_id);
 		$this->bean->relate_event_number=$event->event_number;
-		$this->bean->time=$event->event_date;
-		$this->bean->location=$event->event_location;
-		$this->bean->comment=$event->name;
+		//$this->bean->time=$event->event_date;
+		//$this->bean->location=$event->event_location;
+		//$this->bean->comment=$event->name;
 		parent::display();
 		if(isset($this->bean->haa_codes_id_c) && ($this->bean->haa_codes_id_c)!=""){
 			$haa_codes_id_c = $this->bean->haa_codes_id_c;

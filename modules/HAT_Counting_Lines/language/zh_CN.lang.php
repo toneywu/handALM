@@ -110,5 +110,9 @@ $mod_strings = array (
   'LBL_ACTUAL_ADJUST_COUNT' => '已完成调整数量',
   'LBL_ASSET_MAJOR' => '专业',
   'LBL_ASSET_MAJOR_HAA_CODES_ID' => '专业',
+  'LBL_USER_PERSON' => '使用人',
+  'LBL_USER_PERSON_CONTACTS_ID' => '使用人',
+  'LBL_OWN_PERSON_CONTACTS_ID' => '管理人',
+  'LBL_OWN_PERSON' => '管理人',
 
 );

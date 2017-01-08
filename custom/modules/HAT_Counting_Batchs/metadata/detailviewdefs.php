@@ -6,6 +6,13 @@ array (
   array (
     'templateMeta' => 
     array (
+       'includes' => 
+      array (
+        0 => 
+        array (
+          'file' => 'modules/HAT_Counting_Batchs/js/HAT_Counting_Batchs_detailview.js',
+        ),
+      ),
       'form' => 
       array (
         'buttons' => 
@@ -16,7 +23,7 @@ array (
           3 => 'FIND_DUPLICATES',
           4 => 
           array (
-            'customCode' => '<input type="submit" class="button" onClick="this.form.action.value=\'createToTasks\';" value="{$MOD.LBL_CREATE_TASK}">',
+            'customCode' => '<input type="submit" class="button" onClick="createTask();" value="{$MOD.LBL_CREATE_TASK}">',
                'sugar_html' => 
             array (
               'type' => 'submit',
@@ -26,8 +33,42 @@ array (
                 'class' => 'button',
                 'id' => 'create_to_task_button',
                 'title' => '{$MOD.LBL_CREATE_TASK}',
-                'onclick' => 'this.form.action.value=\'createToTasks\';',
+                'onclick' => 'createTask();',
                 'name' => 'Create to Task',
+                ),
+              ),
+            ),
+          'TASK_TOAPP' =>
+          array (
+            'customCode' => '<input type="submit" class="button" onClick="taskToapp();" value="{$MOD.LBL_TASK_TOAPP}">',
+               'sugar_html' => 
+            array (
+              'type' => 'submit',
+              'value' => '{$MOD.LBL_TASK_TOAPP}',
+              'htmlOptions' => 
+              array (
+                'class' => 'button',
+                'id' => 'task_to_app_button',
+                'title' => '{$MOD.LBL_TASK_TOAPP}',
+                'onclick' => 'taskToapp();',
+                'name' => 'Task To App',
+                ),
+              ),
+            ),
+          'DATA_TOCOUNTING' =>
+          array (
+            'customCode' => '<input type="submit" class="button" onClick="datatocounting();" value="{$MOD.LBL_DATA_TOCOUNTING}">',
+               'sugar_html' => 
+            array (
+              'type' => 'submit',
+              'value' => '{$MOD.LBL_DATA_TOCOUNTING}',
+              'htmlOptions' => 
+              array (
+                'class' => 'button',
+                'id' => 'data_to_counting_button',
+                'title' => '{$MOD.LBL_DATA_TOCOUNTING}',
+                'onclick' => 'datatocounting();',
+                'name' =>'Data To Counting',
                 ),
               ),
             ),

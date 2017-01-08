@@ -113,6 +113,22 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_ASSET_MAJOR',
           ),
+          1 => 
+          array (
+            'name' => 'user_person',
+            'studio' => 'visible',
+            'label' => 'LBL_USER_PERSON',
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'own_person',
+            'studio' => 'visible',
+            'label' => 'LBL_OWN_PERSON',
+          ),
+          1 => '',
         ),
       ),
     ),

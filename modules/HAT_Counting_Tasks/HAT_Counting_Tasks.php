@@ -111,11 +111,13 @@ class HAT_Counting_Tasks extends HAT_Counting_Tasks_sugar {
 			}
 
 			$sql_user="SELECT
-			hal.last_name user_name
+			t.chinese_name_c user_name
 			FROM
-			contacts hal
+			contacts hal,
+			contacts_cstm t
 			WHERE
 			1 = 1
+			and hal.id = t.id_c
 			AND hal.id = '".$this->user_contacts_id_c."'";
 			$result_user=$db->query($sql_user);
 			if($row_user=$db->fetchByAssoc($result_user)){
@@ -125,11 +127,13 @@ class HAT_Counting_Tasks extends HAT_Counting_Tasks_sugar {
 			}
 
 			$sql_own="SELECT
-			hal.last_name own_name
+			t.chinese_name_c own_name
 			FROM
-			contacts hal
+			contacts hal,
+			contacts_cstm t
 			WHERE
 			1 = 1
+			and hal.id = t.id_c
 			AND hal.id = '".$this->own_contacts_id_c."'";
 			$result_own=$db->query($sql_own);
 			if($row_own=$db->fetchByAssoc($result_own)){

@@ -38,8 +38,18 @@ function display()
 			$("#haa_codes_id_c").val("'.$this->bean->haa_codes_id_c.'");
 			$("#asset_status_d").val("'.$this->bean->asset_status.'");
 			$("#asset_status").val("'.$this->bean->asset_status.'");
+			$("#user_person").val("'.$this->bean->user_person.'");
+			$("#user_contacts_id_c").val("'.$this->bean->user_contacts_id_c.'");
+			$("#own_person").val("'.$this->bean->own_person.'");
+			$("#own_contacts_id_c").val("'.$this->bean->own_contacts_id_c.'");
 		})
 		</script>';
+	echo '<input  id="loc_attr" value="" type="hidden">';
+	echo '<input  id="org_attr"  type="hidden" value="">';
+	echo '<input  id="major_attr"  type="hidden" value="">';
+	echo '<input  id="category_attr"  type="hidden" value="">';
+	echo '<input  id="user_attr" value="" type="hidden">';
+	echo '<input  id="own_attr"  type="hidden" value="">';
 		
 	}
 

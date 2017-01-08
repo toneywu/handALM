@@ -2,7 +2,6 @@ function setExtendValReturn(popupReplyData){
 	if(popupReplyData['name_to_value_array']['counting_by_location']==1){
 		$("#counting_by_location").attr('checked',true);
 	}
-	console.log(popupReplyData['name_to_value_array']['counting_batch_name']);
 
 	$("#name").val(popupReplyData['name_to_value_array']['counting_batch_name']);
 	$("#location_attr").val(popupReplyData['name_to_value_array']['location_attr']);

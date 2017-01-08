@@ -104,4 +104,5 @@ $mod_strings = array (
   'LBL_STATUS'=>'状态',
   'LBL_IP_SUBNET'=>'子网IP地址段',
   'LBL_DETAILS'=>'明细',
+  'LBL_IP_AUTOCREATE_IP'=>'自动生成单个地址'
 );

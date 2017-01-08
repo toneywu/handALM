@@ -52,17 +52,21 @@ class HIT_IP extends HIT_IP_sugar {
 		$IP_Fields = $this->get_list_view_array();
 
 		//计算当前IP子网的数量
-		$sel = "SELECT count(ip_qty) sum_ip_qty FROM hit_ip_subnets WHERE hit_ip_subnets.`deleted`=0 AND hit_ip_subnets.`parent_hit_ip_id` ='".$this->id."'";
+		$sel = "SELECT count(*) sum_ip_qty FROM hit_ip_subnets WHERE hit_ip_subnets.`deleted`=0 AND hit_ip_subnets.`parent_hit_ip_id` ='".$this->id."'";
 		$beanSEL = $db->query($sel);
         $COUNT_SUBNET_QTY = 0;
 	    while ( $result = $db->fetchByAssoc($beanSEL) ) {
 	    	if (!empty ($result['sum_ip_qty']))
-				$COUNT_SUBNET_QTY .= $result['sum_ip_qty'];
+				$COUNT_SUBNET_QTY = $result['sum_ip_qty'];
 
 		}
         
 		//2016-12-30 
         $SUM_IP_QTY = 256;
+
+        /*var_dump($sel);
+        var_dump($result['sum_ip_qty']);
+        var_dump($COUNT_SUBNET_QTY);*/
 
 		if ($COUNT_SUBNET_QTY == 0 ) {
 			$IP_Fields['STATUS'] = translate('LBL_UNDEFINED','HIT_IP');
@@ -86,7 +90,14 @@ class HIT_IP extends HIT_IP_sugar {
 
 			}
 			//var_dump($sel);
-			$sel1 = "SELECT COUNT(1) sum_ip_a_qty FROM hit_ip_subnets his WHERE his.deleted = 0 AND his.parent_hit_ip_id = '".$this->id."' AND his.ip_type = 0";
+			$sel1 = "SELECT COUNT(*) sum_ip_a_qty FROM hit_ip_subnets his WHERE his.deleted = 0 AND his.parent_hit_ip_id = '".$this->id."' AND his.ip_type != 1
+			AND (
+			EXISTS 
+		(SELECT 1 FROM hit_ip_allocations hia WHERE (hia.accurate_ip = his.id  OR hia.hit_ip_subnets_id = his.id) AND hia.`deleted`=0
+		AND (hia.`date_from`='' OR hia.`date_from` IS NULL OR hia.date_from>=CURDATE())
+		AND (hia.`date_to`='' OR hia.`date_to` IS NULL OR hia.`date_to`<=CURDATE())))";
+
+			/*$sel1 = "SELECT COUNT(*) sum_ip_a_qty FROM hit_ip_subnets his WHERE his.deleted = 0 AND his.parent_hit_ip_id = '".$this->id."' AND his.ip_type = 0";*/
             $beanSEL1 = $db->query($sel1);
             $result1 = $db->fetchByAssoc($beanSEL1);
             $SUM_IP_ALLOCATED_QTY  +=  $result1['sum_ip_a_qty'];
@@ -98,6 +109,7 @@ class HIT_IP extends HIT_IP_sugar {
             $SUM_IP_ALLOCATED_QTY  +=  $result2['sum_ip_a_qty'];
             
             var_dump($sel2);*/
+            //var_dump($SUM_IP_ALLOCATED_QTY);
 			if ($SUM_IP_ALLOCATED_QTY==0) {
 				$IP_Fields['STATUS'] = translate('LBL_UNASSIGNED','HIT_IP');
 				$IP_Fields['COLOR_TAG'] = 'Idle';

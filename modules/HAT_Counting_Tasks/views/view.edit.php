@@ -11,7 +11,6 @@ class HAT_Counting_TasksViewEdit extends ViewEdit
 	function display()
 	{	
 		$this->populateBatchInfo();
-		
 		require_once('modules/HAA_Frameworks/orgSelector_class.php');
 		$current_framework_id = empty($this->bean->hat_framework_id)?"":$this->bean->hat_framework_id;
 		$current_module = $this->module;
@@ -41,7 +40,12 @@ class HAT_Counting_TasksViewEdit extends ViewEdit
 			$('#planed_complete_date').val('".$this->bean->planed_complete_date."');
 			$('#snapshot_date').val('".$this->bean->snapshot_date."');
 			</script>";
-
+			if($this->bean->id==''){
+			echo "<script>
+				$('#manual_add_flag').val(1);
+				$('#manual_add_flag').attr('checked',true);
+			</script>";
+		}
 	echo '<input  id="location_attr" value="" type="hidden">';
 	echo '<input  id="oranization_attr"  type="hidden" value="">';
 	echo '<input  id="major_attr"  type="hidden" value="">';

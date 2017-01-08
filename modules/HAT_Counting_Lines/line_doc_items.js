@@ -197,7 +197,8 @@ function doc_LineEditorShow(ln){//显示行编辑器（先自动关闭所有的�
 		}
 	}
 	var now = new Date(); 
-	var nowStr=now.getFullYear()+"-"+now.getMonth()+"-"+now.getDate();
+	var nowStr=now.getFullYear()+"-"+now.getMonth()+1+"-"+now.getDate();
+	
 	$("#line_doc_active_date"+ln).val(nowStr);//默认当前日期
 	$("#line_doc_revision"+ln).val("1");//默认版本号为1
 	$("#line_doc_displayed"+ln).hide();

@@ -12,6 +12,10 @@ array (
         array (
           'file' => 'custom/modules/HAT_Counting_Lines/js/get_display.js',
         ),
+        1 => 
+        array (
+          'file' => 'modules/HAT_Counting_Lines/js/HAT_Counting_Lines_editview.js',
+        ),
       ),
       'maxColumns' => '2',
       'widths' => 
@@ -67,7 +71,14 @@ array (
                 'name' => 'counting_task',
                 'id' => 'hat_counting_tasks_id_c',
                 'counting_person' => 'counting_person',
+                'hat_asset_locations_id_c' => 'loc_attr',
+                'account_id_c' => 'org_attr',
+                'haa_codes_id_c' => 'major_attr',
+                'aos_product_categories_id_c' => 'category_attr',
+                'user_contacts_id_c' => 'user_attr',
+                'own_contacts_id_c' => 'own_attr',
               ),
+              'call_back_function' => 'setExtendValReturn',
             ),
           ),
           1 => 
@@ -87,6 +98,7 @@ array (
             'label' => 'LBL_ASSET',
             'displayParams' => 
             array (
+              'initial_filter' => '&counting_location_id_advanced="+$("#loc_attr").val()+"&counting_dept_id_advanced="+$("#org_attr").val()+"&counting_major_id_advanced="+$("#major_attr").val()+"&counting_catogery_id_advanced="+$("#category_attr").val()+"&using_person_id_advanced="+$("#user_attr").val()+"&owning_person_id_advanced="+$("#own_attr").val()+"',
               'field_to_name_array' => 
               array (
                 'name' => 'asset',
@@ -99,6 +111,10 @@ array (
                 'owning_major' => 'asset_major',
                 'owning_major_id' => 'haa_codes_id_c',
                 'asset_status' => 'asset_status_d',
+                'using_person_desc' =>'user_person',
+                'using_person_id' => 'user_contacts_id_c',
+                'owning_person_desc' => 'own_person',
+                'owning_person_id' => 'own_contacts_id_c',
               ),
               'call_back_function' => 'get_display',
             ),
@@ -167,6 +183,26 @@ array (
             'customCode' => '<input name="asset_major" class="sqsEnabled yui-ac-input" tabindex="0" id="asset_major" size="" value="" title="" autocomplete="off" type="text" readonly>
             <input name="haa_codes_id_c" id="haa_codes_id_c" value="" type="hidden">',
           ),
+          1 => 
+          array (
+            'name' => 'user_person',
+            'studio' => 'visible',
+            'label' => 'LBL_USER_PERSON',
+            'customCode' => '<input name="user_person" class="sqsEnabled yui-ac-input" tabindex="0" id="user_person" size="" value="" title="" autocomplete="off" type="text" readonly>
+              <input name="user_contacts_id_c" id="user_contacts_id_c" value="" type="hidden">',
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'own_person',
+            'studio' => 'visible',
+            'label' => 'LBL_OWN_PERSON',
+            'customCode' => '<input name="own_person" class="sqsEnabled yui-ac-input" tabindex="0" id="own_person" size="" value="" title="" autocomplete="off" type="text" readonly>
+            <input name="own_contacts_id_c" id="own_contacts_id_c" value="" type="hidden">',
+          ),
+          1 => '',
         ),
       ),
       'lbl_editview_panel1' => 
@@ -178,7 +214,7 @@ array (
             'name' => 'line_items',
             'studio' => 'visible',
             'label' => 'LBL_LINE_ITEMS',
-            'customCode'=>'<span id="line_items_span"></span>',
+            'customCode' => '<span id="line_items_span"></span>',
           ),
         ),
       ),
@@ -191,7 +227,7 @@ array (
             'name' => 'line_doc_items',
             'studio' => 'visible',
             'label' => 'LBL_LINE_DOC_ITEMS',
-            'customCode'=>'<span id="line_doc_items_span"></span>',
+            'customCode' => '<span id="line_doc_items_span"></span>',
           ),
         ),
       ),

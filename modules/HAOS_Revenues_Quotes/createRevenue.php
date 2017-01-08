@@ -88,6 +88,9 @@ function createRevenue($revenueRow,$quoteRow){
     $quoteRow['id'] = '';
     $quoteRow['parent_id']=$revenue_quote_id;
     $quoteRow['parent_type']='HAOS_Revenues_Quotes';
+    if($quoteRow['line_item_type_c']=='Service'){
+        $quoteRow['product_id']='0';
+    }
     $quote->populateFromRow($quoteRow);
     $quote->process_save_dates =false;
     $quote->save();
