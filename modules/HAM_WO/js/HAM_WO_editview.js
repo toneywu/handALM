@@ -262,8 +262,11 @@ function initTransHeaderStatus() {
         $("#wo_status option[value='WPREV']").remove();
         $("#wo_status option[value='REWORK']").remove(); 
 		console.log($("name[input=record]").val())
-		if(typeof $("name[input=record]").val()=="undefined"||$("name[input=record]").val()==''){
-			$("#site_select").append("<option selected ='selected' value=''></option>"); 
+
+        //如果当前WO没有生成（新建模式，也就是不是处于修改模式），则将当前LOV加上一个空值，让用户去选择。
+		if(typeof $("input[name='record']").val()=="undefined"||$("input[name='record']").val()==''){
+			//$("#site_select").append("<option selected ='selected' value=''></option>"); 
+            //deleted 20170107已经有空值了，不需要再插入
 			$("#site_select").val(""); 
 			addToValidate('EditView', "site_select",'varchar', 'true', $("#site_label").text());
 		}

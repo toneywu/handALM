@@ -23,8 +23,10 @@ class HAM_WOViewEdit extends ViewEdit {
 		$current_module = $this->module;
 		$current_action = $this->action;
 
-		$haa_frameworks_id="";
+
+		$haa_frameworks_id="";//先清空，后面再赋值
 		$this->ss->assign('MAINT_SITE',set_site_selector($current_site_id,$current_module,$current_action));
+		//将维护区域定义为当前站点（可能是已经保存的值）
 		if (!empty($current_site_id)) {
 			$bean_site = BeanFactory :: getBean('HAM_Maint_Sites', $current_site_id);
 			$haa_frameworks_id=$bean_site->haa_frameworks_id;

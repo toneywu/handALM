@@ -3,8 +3,8 @@
 //global $current_user;
 global $db;
 
-$sugarbean = new HAT_Asset_Trans_Batch();
-$sugarbean->retrieve($_POST['record']);
+$beanHeader = new HAT_Asset_Trans_Batch();
+$beanHeader->retrieve($_POST['record']);
 
 if (!empty($_POST['assigned_user_id']) && ($focus->assigned_user_id != $_POST['assigned_user_id']) && ($_POST['assigned_user_id'] != $current_user->id)) {
     $check_notify = TRUE; //如果指定了负责人，并且与当前录入人不同，就通知对应的人员进行处理。
@@ -36,45 +36,53 @@ require_once('include/formbase.php');
 
 //end by yuan.chen
 
-$save_header_status = $sugarbean->asset_trans_status;
+$save_header_status = $beanHeader->asset_trans_status;
 
-$return_id = save_header($sugarbean, $check_notify);//保存头
+$beanHeader = save_header($beanHeader, $check_notify);//保存头
+$return_id = $beanHeader->id;
 
-save_lines($_POST, $sugarbean, 'line_',$need_allocation);//保存行
+echo '<br/>$heanHeader->asset_trans_status'.$beanHeader->asset_trans_status;
+echo '<br/>$return_id ='.$return_id ;
+
+save_lines($_POST, $beanHeader, 'line_',$need_allocation);//保存行
 
 
 //目前在审批后立即就结束，但未来可以支持2步确认。
 //因此代码在此预留
-if ($sugarbean->asset_trans_status=="APPROVED") {
-    $sugarbean->asset_trans_status == "CLOSED";
-    $sugarbean->save();//再调用一次，为了触发AfterSave,确认是否需要将头彻底关闭
+if ($beanHeader->asset_trans_status=="APPROVED") {
+    $beanHeader->asset_trans_status == "CLOSED";
+    $beanHeader->save();//再调用一次，为了触发AfterSave,确认是否需要将头彻底关闭
 }
 
-	$sugarbean->asset_trans_status == $_POST['asset_trans_status'];
-    $sugarbean->save();//再调用一次，为了触发AfterSave,确认是否需要将头彻底关闭
+	$beanHeader->asset_trans_status == $_POST['asset_trans_status'];
+    $beanHeader->save();//再调用一次，为了触发AfterSave,确认是否需要将头彻底关闭
 
 handleRedirect($return_id, 'HAT_Asset_Trans_Batch');
+//handleRedirect(, 'HAT_Asset_Trans_Batch');
+
 
 //****************** END: Jump Back *************************************************************//
 
 //**************
 //**** START: Save the header normally 写入头信息****
 //**************//
-function save_header($sugarbean, $check_notify) {
+function save_header($beanHeader, $check_notify) {
 
 
-    if(!$sugarbean->ACLAccess('Save')){//确认访问权限
+    if(!$beanHeader->ACLAccess('Save')){//确认访问权限
         ACLController::displayNoAccess(true);
         sugar_cleanup(true);
     }
 
     $GLOBALS['log']->debug("OK.Header is Saving...");
 
-    $sugarbean = populateFromPost('', $sugarbean);//调用populateFromPost写入POST的数据
-    $sugarbean->asset_trans_status =  check_hearder_status($sugarbean);
+    $beanHeader = populateFromPost('', $beanHeader);//调用populateFromPost写入POST的数据
+    $beanHeader->asset_trans_status =  check_hearder_status($beanHeader);
 
-    $sugarbean->save($check_notify);
-    $return_id = $sugarbean->id;
+    //echo "header_status=".$beanHeader->asset_trans_status;
+
+    $beanHeader->save($check_notify);
+    $return_id = $beanHeader->id;
     $GLOBALS['log']->debug("OK.Saved HAT_Asset_Trans_Batch record with id of ".$return_id);
     echo("OK.Saved HAT_Asset_Trans_Batch record with id of ".$return_id);
 
@@ -83,19 +91,21 @@ function save_header($sugarbean, $check_notify) {
         $base_header_id = $_REQUEST['relate_id'];//复制一个记录
     }
     else{
-        $base_header_id = $sugarbean->id;
+        $base_header_id = $beanHeader->id;
     }
-    return $return_id;
+    return $beanHeader;
 
 }
 //****************** END: Save the header normally******************//
 
 
-function check_hearder_status($sugarbean) {
-	echo "status = ".$sugarbean->asset_trans_status."<br>";
+function check_hearder_status($beanHeader) {
+	echo "status = ".$beanHeader->asset_trans_status."<br>";
 	//modified  by yuan.chen 2016-12-17
-    if ($sugarbean->asset_trans_status == "SUBMITTED"||$sugarbean->asset_trans_status == "APPROVED") {
+    if ($beanHeader->asset_trans_status == "SUBMITTED"||$beanHeader->asset_trans_status == "APPROVED") {
         return "APPROVED"; //目前是直接返回值，未来可以在此处加工作流信息
+    } else {
+        return $beanHeader->asset_trans_status;
     }
 }
 
@@ -136,6 +146,10 @@ function save_lines($post_data, $header, $key = '', $need_allocation){
                     $trans_line->$field_def['name'] = $post_data[$key.$field_def['name']][$i];
                     echo "<br/>***".$field_def['name'].'='. $post_data[$key.$field_def['name']][$i];
                 }
+                echo '<br/>.$header.id = '.$header->id;
+                echo '<pre>';
+                print_r($header);
+
                 $trans_line->batch_id = $header->id;//父ID
                 $trans_line->trans_status = $header->asset_trans_status;//父状态 LogicHook BeforeSave可能会改写
                 $trans_line->assigned_user_id = $header->assigned_user_id;

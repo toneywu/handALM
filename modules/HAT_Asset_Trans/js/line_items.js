@@ -281,10 +281,11 @@ function insertTransLineHeader(tableid){
   $("#line_items_label").hide();//隐藏标签
   var head_html="<tr>";
   head_html +="<th width='3%'>#</th>";
-  head_html +="<th width='13%'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE')+"</th>";
-  head_html +="<th width='22%'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_NAME')+"</th>";
-  head_html +="<th width='55%'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_DESCRIPTION')+"</th>";
-  head_html +="<th width='8%'> </th>";
+  head_html +="<th width='15%'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE')+"</th>";
+  head_html +="<th width='15%'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_NAME')+"</th>";
+  head_html +="<th width='50%'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_DESCRIPTION')+"</th>";
+  head_html +="<th width='10%'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TRANS_STATUS')+"</th>";
+  head_html +="<th width='5%'> </th>";
   head_html +="<tr>";
 
   $("#lineItems").append(head_html)
@@ -423,7 +424,8 @@ if (document.getElementById(tableid + '_head') !== null) {
   "<td><span name='displayed_line_num[" + prodln + "]' id='displayed_line_num" + prodln + "'>1</span></td>" +
   "<td><span name='displayed_line_asset[" + prodln + "]' id='displayed_line_asset" + prodln + "'></span></td>"+
   "<td><span name='displayed_line_name[" + prodln + "]' id='displayed_line_name" + prodln + "'></span></td>"+
-  "<td><span name='displayed_line_description[" + prodln + "]' id='displayed_line_description" + prodln + "'></span></td>";
+  "<td><span name='displayed_line_description[" + prodln + "]' id='displayed_line_description" + prodln + "'></span></td>"+
+  "<td><span name='displayed_line_trans_status[" + prodln + "]' id='displayed_line_trans_status" + prodln + "'></span></td>";
 
   if(current_view == "EditView" && $("#asset_trans_status").val()=="DRAFT") {
     z1.innerHTML+="<input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'>";
@@ -585,6 +587,7 @@ if (document.getElementById(tableid + '_head') !== null) {
         "<input type='hidden' name='line_current_owning_person[" + prodln + "]' id='line_current_owning_person" + prodln + "'  value='' title='' >"+
         "<input type='hidden' name='line_current_owning_person_desc[" + prodln + "]' id='line_current_owning_person_desc" + prodln + "'  value='' title='' >"+
         "<input type='hidden' name='line_description[" + prodln + "]' id='line_description" + prodln + "'  value='' title='' >"+
+        "<input type='hidden' name='line_trans_status[" + prodln + "]' id='line_trans_status" + prodln + "'  value='' title='' >"+
         "</div></td>";
 
         addToValidate('EditView', 'line_asset'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Asset_Trans_Batch', 'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE'));
@@ -714,6 +717,7 @@ function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_line_asset"+ln).html("<a href='index.php?module=HAT_Assets&action=DetailView&record="+$("#line_asset_id"+ln).val()+"'>"+$("#line_asset"+ln).val()+"</a>");
   $("#displayed_line_name"+ln).html($("#line_name"+ln).val());
   $("#displayed_line_description"+ln).html($("#line_description"+ln).val());
+  $("#displayed_line_trans_status"+ln).html($("#line_trans_status"+ln).val());
 
 }
 

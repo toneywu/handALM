@@ -89,6 +89,7 @@ $app_list_strings['hat_asset_scope_list']=array (
 $app_list_strings['hat_default_asset_list']=array (
   'NONE' => 'None',
   'CURRENT_USING_ORG' => 'Current Using Org',
+  'CURRENT_USING_ORG_NONE' => 'Current Using Org and without Using Org',
   'WO_ASSET_TRANS' => 'WO/Asset Trans',
   'WO_IP_TRANS' => 'WO/Net Rescource Trans',
 );

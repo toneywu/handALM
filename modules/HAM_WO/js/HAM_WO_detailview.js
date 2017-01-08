@@ -156,10 +156,10 @@ function complete_work_order(record){
 	});
 };
 */
-function process_woop(woop_id,wo_id){
+function process_woop(woop_id,wo_id,include_reject_wo_val){
 	$.ajax({
 		
-		url: 'index.php?to_pdf=true&module=HAM_WOOP&action=process_woop&record=' + woop_id+"&ham_wo_id="+wo_id,
+		url: 'index.php?to_pdf=true&module=HAM_WOOP&action=process_woop&record=' + woop_id+"&ham_wo_id="+wo_id+"&include_reject_wo_val="+include_reject_wo_val,
 		success: function (data) {
 			console.log(data);
 			window.location.href = "index.php?module=HAM_WO&action=DetailView&record="+wo_id;
@@ -186,22 +186,37 @@ function process_woop(woop_id,wo_id){
 				//html+="<input type='button' class='btn_detailview' id='btn_save' value='"+SUGAR.language.get('app_strings', 'LBL_SAVE_BUTTON_LABEL')+"'>";
 				YAHOO.SUGAR.MessageBox.show({msg: html,title: title_txt, type: 'confirm',
 					fn: function(confirm) {
+						console.log("MessageBox");
+						 $("#include_reject_wo").click(function(){
+						 });
+						 
 						if (confirm == 'yes') {
-																				//save($("input[name='record']").val(),$("#wo_status").val());
-																				//console.log($("#woop_num").val());
-																				//获取选择要驳回到哪一笔的工序
-																				process_woop($("#woop_num").val(),id);
-																			}
-																		}
-																	});
+							if ($("#include_reject_wo").is(':checked')) {
+								$("#include_reject_wo").attr("checked", 'true');
+								$("#include_reject_wo").val("0");
+								$("#woop_num").attr("disabled",true);
+								$('#woop_num').attr("disabled","disabled");
+							} else {
+								$("#include_reject_wo").removeAttr("checked");
+								$("#include_reject_wo").removeAttr("disabled");
+								$("#include_reject_wo").val("1");
+							}
+							var include_reject_wo_val = $("#include_reject_wo").val();
+							
+							console.log("include_reject_wo_val = "+include_reject_wo_val);
+								//save($("input[name='record']").val(),$("#wo_status").val());
+								//console.log($("#woop_num").val());
+								//获取选择要驳回到哪一笔的工序
+								process_woop($("#woop_num").val(),id,include_reject_wo_val);
+							}
+						}
+					});
 			},
 			error: function () { //失败
 				alert('Error loading document');
 			}
 		});
- 	/*}*/
  };
-
 	/**
  * 调用Ajax请求 获取是否有创建收支项权限
  * @param name

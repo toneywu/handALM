@@ -90,6 +90,7 @@ $app_list_strings['hat_asset_scope_list']=array (
 $app_list_strings['hat_default_asset_list']=array (
   'NONE' => '无默认限制列表',
   'CURRENT_USING_ORG' => '当前使用组织',
+  'CURRENT_USING_ORG_NONE' => '当前使用组织和未分配使用的',
   'WO_ASSET_TRANS' => '当前工单/已有的资产事务',
   'WO_IP_TRANS' => '当前工单/网络资源事务',
 );

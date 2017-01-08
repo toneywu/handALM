@@ -15,7 +15,7 @@ $subpanel_layout['list_fields'] = array (
     'vname' => 'LBL_HIT_IP',
     'id' => 'HIT_IP_SUBNETS_ID',
     'link' => true,
-    'width' => '20%',
+    'width' => '15%',
     'default' => true,
     'widget_class' => 'SubPanelDetailViewLink',
     'target_module' => 'HIT_IP_Subnets',
@@ -25,21 +25,40 @@ $subpanel_layout['list_fields'] = array (
   array (
     'type' => 'varchar',
     'vname' => 'LBL_ASSOCIATED_IP',
-    'width' => '35%',
+    'width' => '15%',
     'default' => true,
   ),
+
+  'hat_asset_name' => 
+  array (
+    'type' => 'varchar',
+    'vname' => 'LBL_HAT_ASSET_NAME',
+    'width' => '15%',
+    'default' => true,
+  ),
+
+
+  'port' => 
+  array (
+    'type' => 'varchar',
+    'vname' => 'LBL_PORT',
+    'width' => '15%',
+    'default' => true,
+  ),
+
+
   'speed_limit' => 
   array (
     'type' => 'varchar',
     'vname' => 'LBL_SPEED_LIMIT',
-    'width' => '5%',
+    'width' => '10%',
     'default' => true,
   ),
   'bandwidth_type' => 
   array (
     'type' => 'varchar',
     'vname' => 'LBL_BANDWIDTH_TYPE',
-    'width' => '5%',
+    'width' => '10%',
     'default' => true,
   ),
   'date_start' => 

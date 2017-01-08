@@ -6,7 +6,7 @@ if (!defined('sugarEntry') || !sugarEntry)
 global $mod_strings;
 
 $current_id = (isset($wo_id))?$wo_id:$_REQUEST['id'];
-$lines_bean = BeanFactory::getBean('HAM_WO_Lines')->get_full_list('name',"and ham_wo_lines.ham_wo_id is not null and ham_wo_lines.ham_wo_id='".$current_id."'");;
+$lines_bean = BeanFactory::getBean('HAM_WO_Lines')->get_full_list('name',"ham_wo_lines.ham_wo_id is not null and ham_wo_lines.ham_wo_id='".$current_id."'");;
 //http://localhost/handALM/index.php?action=ajaxui#ajaxUILoc=index.php%3Fmodule%3DAOS_Contracts%26action%3DDetailView%26record%3D891e8fc8-b793-d4bd-25dd-57d10b94d4f7
 
 $current_module = $_REQUEST['module'];
@@ -35,6 +35,6 @@ if (isset($lines_bean)) {
        	echo '</tr>';
     }
 } else {
-	echo '<tr><td colspan="4">no-data</td></tr>';
+	echo '<tr><td colspan="4">'.$mod_strings["LBL_NO_DATA"].'</td></tr>';
 }
 echo '</table>';

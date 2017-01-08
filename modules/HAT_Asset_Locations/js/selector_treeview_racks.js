@@ -222,9 +222,6 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
 
 	return_html +=
       "<span class='input_group' id='input_group_asset'>"+
-			"<input name='rack_pos_placeholder'  type='checkbox' id='rack_pos_placeholder'  value='' title='"+SUGAR.language.get('HIT_Rack_Allocations', 'LBL_PLACEHOLDER')+"'></input>"+
-      		"</span>";
-
       "<label id='rack_pos_asset_label'>"+SUGAR.language.get('HIT_Rack_Allocations', 'LBL_ASSET')+"<span class='required'>*</span></label>"+
       "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='rack_pos_asset_name' id='rack_pos_asset_name' value='' title='' onblur=''>"+
       "<input type='hidden' name='rack_pos_asset_id' id='rack_pos_asset_id' value=''>"+
@@ -232,6 +229,7 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
       "<input type='hidden' name='rack_pos_asset_status' id='rack_pos_asset_status' value=''>"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openAssetPopup("+((i!=undefined)?i:null)+");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>";
+
 
 	return_html +=
       "<span class='input_group ig_using_org'>"+
