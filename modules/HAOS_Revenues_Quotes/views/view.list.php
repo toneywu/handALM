@@ -51,7 +51,10 @@ class HAOS_Revenues_QuotesViewList extends ViewList
 						type:'POST',
 						success:function(data){
 							var val=JSON.parse(data);
-							if(val['type']==0){
+							if(val['type']==-1){
+								alert('创建发票时不能勾选已结清的收支项。');
+							}
+							else if(val['type']==0){
 								alert('客户与人员信息必须一致！');
 							}else{
 								location.href='?module=AOS_Invoices&action=editview&data='+val['value']+'&cord='+val['cord'];

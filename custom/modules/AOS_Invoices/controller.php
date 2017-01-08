@@ -143,9 +143,11 @@ class AOS_InvoicesController extends SugarController {
 			$quote = new HAOS_Revenues_Quotes();
 			$quote->retrieve($quoteBean->haos_revenues_quotes_id_c);
 			$quote->aos_invoices_id_c=$this->bean->id;
+			$quote->due_date=$this->bean->due_date;
 			$quote->aos_products_quotes_id_c=$quoteBean->id;
 			$quote->clear_status="Cleared";
 			$quote->save();
+			$quoteBean->save();
 		}
 
 		parent::post_save();

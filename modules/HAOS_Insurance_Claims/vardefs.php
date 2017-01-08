@@ -831,11 +831,10 @@ $dictionary['HAOS_Insurance_Claims'] = array(
         ),
       'time' => 
       array (
-        'required' => false,
-        'source' => 'non-db',
+        'required' => true,
         'name' => 'time',
         'vname' => 'LBL_TIME',
-        'type' => 'varchar',
+        'type' => 'datetimecombo',
         'massupdate' => 0,
         'no_default' => false,
         'comments' => '',
@@ -848,8 +847,10 @@ $dictionary['HAOS_Insurance_Claims'] = array(
         'reportable' => true,
         'unified_search' => false,
         'merge_filter' => 'disabled',
-        'len' => 25,
         'size' => '20',
+        'enable_range_search' => false,
+        'dbType' => 'datetime',
+        'display_default' => '',
         ),
       'location' => 
       array (
@@ -898,7 +899,7 @@ $dictionary['HAOS_Insurance_Claims'] = array(
       'wo_info' => 
       array (
         'required' => false,
-        'source' => 'non-db',
+       // 'source' => 'non-db',
         'name' => 'wo_info',
         'vname' => 'LBL_WO_INFO',
         'type' => 'varchar',
