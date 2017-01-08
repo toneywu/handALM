@@ -51,7 +51,7 @@
         current_group = group_ids[gid];
     }
 
-    if(product.product_id != '0' && product.product_id !== ''){
+    if(product.product_id !== '0' && product.product_id !== ''){
         ln = insertProductLine('product_group'+current_group,current_group);
         type = 'product_';
     } else {
@@ -535,7 +535,7 @@ function formatListPrice(ln){
     }
     //End modefy 20161022增加结算周期和日期
     f.innerHTML += "<input type='hidden' name='service_deleted[" + servln + "]' id='service_deleted" + servln + "' value='0'><input type='hidden' name='service_id[" + servln + "]' id='service_id" + servln + "' value=''><button type='button' class='button' id='service_delete_line" + servln + "' value='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "' tabindex='116' onclick='markLineDeleted(" + servln + ",\"service_\")'><img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button><br>";
-        f.innerHTML +="<input type='hidden' name='service_haos_revenues_quotes_id_c[" + prodln + "]' id='service_haos_revenues_quotes_id_c" + prodln + "' value=''>";
+        f.innerHTML +="<input type='hidden' name='service_haos_revenues_quotes_id_c[" + servln + "]' id='service_haos_revenues_quotes_id_c" + servln + "' value=''>";
 
     //setServiceSettlementPeriodChange($("#service_settlement_period_c"+servln).find("option:selected").val(),servln);
     CalendarShow();

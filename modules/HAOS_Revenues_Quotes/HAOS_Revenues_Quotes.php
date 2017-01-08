@@ -49,7 +49,7 @@ class HAOS_Revenues_Quotes extends HAOS_Revenues_Quotes_sugar {
 	}
 
 
-	function save($check_notify = FALSE){
+	function save($check_notify = FALSE,$save_aos=TRUE){
 		global $sugar_config;
 
 		
@@ -97,9 +97,11 @@ class HAOS_Revenues_Quotes extends HAOS_Revenues_Quotes_sugar {
 		$product_quote_group->parent_id = $this->id;
 		$product_quote_group->parent_type = $this->object_name;
 		$product_quote_group->save();*/
-		require_once('modules/AOS_Products_Quotes/AOS_Products_Quotes.php');
-		$productQuote = new AOS_Products_Quotes();
-		$productQuote->save_lines($_POST, $this, $groups, 'product_');
+		if ($save_aos){
+			require_once('modules/AOS_Products_Quotes/AOS_Products_Quotes.php');
+			$productQuote = new AOS_Products_Quotes();
+			$productQuote->save_lines($_POST, $this, $groups, 'product_');
+		}
 	}
 
 

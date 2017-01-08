@@ -140,16 +140,20 @@ class AOS_InvoicesController extends SugarController {
 			);
 
 		foreach($quotesBeanList as $quoteBean){
-			$quote = new HAOS_Revenues_Quotes();
-			$quote->retrieve($quoteBean->haos_revenues_quotes_id_c);
+
+			$quote = BeanFactory::getBean('HAOS_Revenues_Quotes',$quoteBean->haos_revenues_quotes_id_c);
 			$quote->aos_invoices_id_c=$this->bean->id;
 			$quote->due_date=$this->bean->due_date;
 			$quote->aos_products_quotes_id_c=$quoteBean->id;
 			$quote->clear_status="Cleared";
-			$quote->save();
-			$quoteBean->save();
-		}
+			$quote->save(false,false);
+			
+			$aos_quoteBean= BeanFactory::getBean('AOS_Products_Quotes',$quoteBean->id);
+			$aos_quoteBean->parent_id=$this->bean->id;
+			$aos_quoteBean->parent_type=$this->bean->object_name;
+			$aos_quoteBean->save();
 
+		}
 		parent::post_save();
 	}
 
