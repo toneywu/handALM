@@ -162,7 +162,7 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 		url: 'index.php?to_pdf=true&module=HAM_WOOP&action=process_woop&record=' + woop_id+"&ham_wo_id="+wo_id+"&include_reject_wo_val="+include_reject_wo_val,
 		success: function (data) {
 			console.log(data);
-			//window.location.href = "index.php?module=HAM_WO&action=DetailView&record="+wo_id;
+			window.location.href = "index.php?module=HAM_WO&action=DetailView&record="+wo_id;
 		},
 			error: function () { //失败
 				alert('Error loading document');
@@ -180,7 +180,6 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
  	$.ajax({
  		url: 'index.php?to_pdf=true&module=HAM_WOOP&action=rejectWoop&id=' + id,
  		success: function (data) {
-			console.log("rejectWoop="+data);
  			var title_txt=SUGAR.language.get('HAM_WO', 'LBL_BTN_WOOP_REJECT_BUTTON_LABEL')
  			var html=""
  			html+=title_txt;
@@ -190,7 +189,6 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 					fn: function(confirm) {
 						console.log("MessageBox");
 						 $("#include_reject_wo").click(function(){
-							 alert("ddd");
 						 });
 						 
 						if (confirm == 'yes') {

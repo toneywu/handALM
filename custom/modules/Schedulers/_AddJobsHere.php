@@ -360,7 +360,7 @@ function sync_jt_contracts() {
 				,assigned_user_id)
 				 value(
 				 "' . $contact_id . 
-				 '","' . $sales_document_name_val . 
+				 '","' . $newBean->name . 
 				 '","' . $status . 
 				 '","' . $newBean->opportunity_id . 
 				 '","' . $newBean->contract_account_id.'"';
@@ -745,7 +745,8 @@ function sync_xr_products() {
 	global $db;
 	$soap_util_bean = new SoapUtil();
 	$json_array = $soap_util_bean->call_soap_ws("PRODUCT", "XR");
-
+	$frame_bean = BeanFactory :: getBean('HAA_Frameworks')->retrieve_by_string_fields(array (
+		'code' => 'ChinaCache'));
 	$GLOBALS['log']->infor("begin to sync xr products data");
 		//$GLOBALS['log']->infor($json_array);
 	//处理数据

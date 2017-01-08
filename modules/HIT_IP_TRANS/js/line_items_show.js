@@ -90,15 +90,17 @@ function insertLineData(asset_trans_line ){ //将数据写入到对应的行字�
   if(asset_trans_line.id != '0' && asset_trans_line.id !== ''){
     ln = insertTransLineElements("lineItems");
     //alert(asset_trans_line.hit_ip_subnets);
-    ip_splited = asset_trans_line.hit_ip_subnets.split("/");
+    
 	
 	$.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js", function(data, status, jqxhr) {
+		ip_splited = asset_trans_line.hit_ip_subnets.split("/");
 		if (IpSubnetCalculator.isIp(ip_splited[0])) {
 		   var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1]);
 		   var associated_ip= ip_caled.ipLowStr+"~"+ip_caled.ipHighStr;
 		   //显示IP细节信息，由IpSubnetCalculator.js完成算法
 		   $("#line_associated_ip"+ln).html(associated_ip);
 		   $("#displayed_line_associated_ip"+ln).html(associated_ip);
+		   console.log("associated_ip = "+asset_trans_line.hit_ip_subnets);
 	  }
 
 	});

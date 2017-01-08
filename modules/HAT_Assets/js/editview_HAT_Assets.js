@@ -1,6 +1,8 @@
 $.getScript("modules/HAA_FF/ff_include.js");
-function trimStr(str){return str.replace(/(^\s*)|(\s*$)/g,"");}
-
+$.getScript("cache/include/javascript/sugar_grp_yui_widgets.js"); // MessageBox
+$.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
+$.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); // MessageBox
+$('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
 function setProductPopupReturn(popupReplyData){//选择完产品后的动作
 	set_return(popupReplyData);
 
@@ -33,9 +35,9 @@ function setUsingOrgPopupReturn(popupReplyData){//选择完使用组织的动作
 
 function generateAssetDesc() {//自动生成资产全名=名称+厂商+型号
 	var combined_asset_desc;
-	var trimed_name 	= trimStr($("#asset_name").val());
-	var trimed_brand	= trimStr($("#brand").val());
-	var trimed_model	= trimStr($("#model").val());
+	var trimed_name 	= $.trim($("#asset_name").val());
+	var trimed_brand	= $.trim($("#brand").val());
+	var trimed_model	= $.trim($("#model").val());
 	combined_asset_desc = trimed_name;
 	if (trimed_brand!="") {
 		combined_asset_desc +="."+trimed_brand;
@@ -79,10 +81,64 @@ function resetAssetName() { //自动生成资产铭牌号
 	}
 }
 
+function check_source_qty(){
+		var return_status="S";
+		var json_data={};
+		json_data['record']=$("input[name=record]").val();
+		json_data['asset_source_id']=$("#asset_source_id").val();
+		json_data['enable_it_ports']=$("#enable_it_ports").val();
+
+		$.ajax({
+			type:"POST",
+			url: "index.php?to_pdf=true&module=HAT_Assets&action=checkSourceCount",
+			data: json_data,
+			cache:false,  
+            async:false,//重要的关健点在于同步和异步的参数，  
+			success: function(msg){ 
+					console.log(msg);
+					if(msg!='S'){
+						return_status="E";
+						BootstrapDialog.alert({
+							type : BootstrapDialog.TYPE_DANGER,
+							title : SUGAR.language.get('app_strings',
+									'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+							message : msg
+						});
+					}
+					},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				 //alert('Error loading document');
+				 console.log(textStatus+errorThrown);
+			},
+		});
+		return return_status;
+}
+
+
+/**
+* 保存前验证
+*/
+function preValidateFunction(async_bool = false) {
+		var result = true;
+		var error_msg="S";
+		var return_status = check_source_qty();
+		if(return_status!="S"){
+			return;
+		}
+		//return;
+		return result;
+}
+
+
 
 $(document).ready(function(){
 
 	//加载图标选择器，从modules\HAT_Assets\js\editview_icon_picker.js
+	
+	SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
+		OverwriteSaveBtn(preValidateFunction);//注意引用时不加（）
+	});
+	
 
 	SUGAR.util.doWhen("typeof icon_edit_init == 'function'", function(){
 		icon_edit_init($("#asset_icon"));
@@ -137,7 +193,9 @@ $(document).ready(function(){
 		}
 	});
 
-	$('#enable_fa').change(function(){ //针对是否对固定资产进行同步，决定了是否必须要提供固定资产编号字段
+	//这里的代码于20161101进行屏蔽by tone.wu，
+	//原因是业务上会有需要FA关联，当前当前不存在FA编号的情况，这段代码暂时保留，是否会加入设置点后激活待定
+/*	$('#enable_fa').change(function(){ //针对是否对固定资产进行同步，决定了是否必须要提供固定资产编号字段
 		if( $(this).is(':checked')) {
 			//如果启用固定资产同步则必须有固定资产信息
 			mark_field_enabled('fixed_asset',false);
@@ -147,7 +205,7 @@ $(document).ready(function(){
 			mark_field_enabled('fixed_asset',true);
 		}
 	});
-
+*/
 	$("#linear_start_measure,#linear_end_measure").change(function(){ //自动计算线性长度
 		//if ($.isNumeric($("#linear_start_measure").val())&&$.isNumeric($("#linear_end_measure").val())) {
 			$("#linear_length").val($("#linear_end_measure").val()-$("#linear_start_measure").val())
