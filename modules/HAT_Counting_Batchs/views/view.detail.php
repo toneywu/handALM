@@ -8,7 +8,20 @@ class HAT_Counting_BatchsViewDetail extends ViewDetail
 	function display()
 	{
 		global $db;
+		$snapshot_date;
+		if($this->bean->id!=''){
+			$sql="SELECT 
+			hcb.snapshot_date
+			FROM hat_counting_batchs hcb
+			where hcb.id='".$this->bean->id."'";
+			$result=$this->bean->db->query($sql);
+			$row=$this->bean->db->fetchByAssoc($result);
+			$snapshot_date=$row["snapshot_date"];
+		}
 		parent::display();
+		echo '<script>
+			$("#snapshot_date").val("'.$snapshot_date.'");
+			</script>';
 		
 		echo '<script>
 		$(function(){

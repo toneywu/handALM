@@ -82,11 +82,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_EDITVIEW_PANEL_CT' => 
+      /*  'LBL_EDITVIEW_PANEL_CT' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
-        ),
+        ),*/
         'LBL_EDITVIEW_PANEL1' => 
         array (
           'newTab' => false,
@@ -695,7 +695,7 @@ array (
           ),
         ),
       ),
-      'LBL_EDITVIEW_PANEL_CT' => 
+   /*   'LBL_EDITVIEW_PANEL_CT' => 
       array (
         0 => 
         array (
@@ -740,7 +740,7 @@ array (
             'label' => 'LBL_DEFAULT_COUNTING_PERSON',
           ),
         ),
-      ),
+      ),*/
       'lbl_editview_panel1' => 
       array (
         0 => 

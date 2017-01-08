@@ -98,7 +98,7 @@ array (
             'label' => 'LBL_ASSET',
             'displayParams' => 
             array (
-              'initial_filter' => '&hat_asset_locations_hat_assetshat_asset_locations_ida_advanced="+$("#loc_attr").val()+"&owning_org_id_advanced="+$("#org_attr").val()+"&owning_major_id_advanced="+$("#major_attr").val()+"&aos_product_categories_id_advanced="+$("#category_attr").val()+"&using_person_id_advanced="+$("#user_attr").val()+"&owning_person_id_advanced="+$("#own_attr").val()+"',
+              'initial_filter' => '&counting_location_id_advanced="+$("#loc_attr").val()+"&counting_dept_id_advanced="+$("#org_attr").val()+"&counting_major_id_advanced="+$("#major_attr").val()+"&counting_catogery_id_advanced="+$("#category_attr").val()+"&using_person_id_advanced="+$("#user_attr").val()+"&owning_person_id_advanced="+$("#own_attr").val()+"',
               'field_to_name_array' => 
               array (
                 'name' => 'asset',

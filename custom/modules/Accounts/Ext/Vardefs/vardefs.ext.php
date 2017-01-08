@@ -43,6 +43,11 @@ $dictionary['Account']['fields']['account_id1_c']['inline_edit']=1;
 
  
 
+ // created: 2017-01-08 20:07:13
+$dictionary['Account']['fields']['account_id2_c']['inline_edit']=1;
+
+ 
+
  // created: 2016-06-16 16:59:36
 $dictionary['Account']['fields']['account_id_c']['inline_edit']=1;
 
@@ -115,6 +120,12 @@ $dictionary['Account']['fields']['contact_id1_c']['inline_edit']=1;
 
  // created: 2016-06-16 17:01:11
 $dictionary['Account']['fields']['contact_id_c']['inline_edit']=1;
+
+ 
+
+ // created: 2017-01-08 20:07:13
+$dictionary['Account']['fields']['counting_dept_c']['inline_edit']='1';
+$dictionary['Account']['fields']['counting_dept_c']['labelValue']='counting dept';
 
  
 

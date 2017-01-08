@@ -169,7 +169,11 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_ORGANIZATION_LEVEL',
           ),
-          1 => '',
+           1 => 
+          array (
+            'name' => 'counting_dept_c',
+            'label' => 'LBL_COUNTING_DEPT',
+          ),
         ),
         4 => 
         array (

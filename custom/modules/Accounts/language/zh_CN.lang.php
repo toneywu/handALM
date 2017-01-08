@@ -1,5 +1,5 @@
 <?php
-// created: 2016-11-06 20:01:33
+// created: 2017-01-08 20:07:13
 $mod_strings = array (
   'LNK_NEW_ACCOUNT' => '新增组织',
   'LNK_ACCOUNT_LIST' => '查看组织',
@@ -90,11 +90,13 @@ $mod_strings = array (
   'LBL_HAM_WO_TITLE' => '工单信息',
   'LBL_HAT_ASSETS_TITLE' => '资产/设备',
   'LBL_DETAILVIEW_PANEL_ASSET' => '设备/资产',
-  'LBL_DETAILVIEW_PANEL_IT' => 'IT资源',  
+  'LBL_DETAILVIEW_PANEL_IT' => 'IT资源',
   'LBL_DETAILVIEW_PANEL_MEMBER' => '下级组织及联系人',
   'LBL_DETAILVIEW_PANEL_QUAL' => '资质/许可证',
   'LBL_DETAILVIEW_PANEL_DOC' => '文档',
-  'LBL_DETAILVIEW_PANEL_BUSINESS'=>'业务往来',
-  'LBL_DETAILVIEW_PANEL_WORK'=>'服务及工作记录',
-  'LBL_CREDIT_HOLD'=>'应收款超限额（欠费）暂挂'
+  'LBL_DETAILVIEW_PANEL_BUSINESS' => '业务往来',
+  'LBL_DETAILVIEW_PANEL_WORK' => '服务及工作记录',
+  'LBL_CREDIT_HOLD' => '应收款超限额（欠费）暂挂',
+  'LBL_COUNTING_DEPT_ACCOUNT_ID' => 'counting dept (related 组织 ID)',
+  'LBL_COUNTING_DEPT' => '盘点所属部门',
 );

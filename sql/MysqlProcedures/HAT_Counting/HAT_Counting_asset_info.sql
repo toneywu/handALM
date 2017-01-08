@@ -1,25 +1,8 @@
-/*
-Navicat MySQL Data Transfer
+USE `suitecrm`;
+DROP procedure IF EXISTS `HAT_Counting_asset_info`;
 
-Source Server         : SuiteCRM
-Source Server Version : 50547
-Source Host           : localhost:3306
-Source Database       : suitecrm
-
-Target Server Type    : MYSQL
-Target Server Version : 50547
-File Encoding         : 65001
-
-Date: 2016-12-31 23:26:55
-*/
-
-SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Procedure structure for HAT_Counting_asset_info
--- ----------------------------
-DROP PROCEDURE IF EXISTS `HAT_Counting_asset_info`;
-DELIMITER ;;
+DELIMITER $$
+USE `suitecrm`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `HAT_Counting_asset_info`(IN p_framework_id varchar(100),
                              in p_batch_id varchar(100))
 BEGIN
@@ -176,7 +159,7 @@ call HAT_Counting_create_temp();
                     own_id);
                     
   #整理规则，动态给出分组条件，用空值列代替flag为0的情况
-     select a.asset_id from    counting_asset_info a;
+     #select a.asset_id from    counting_asset_info a;
     if location_flag =1 then
     set rule_sql =concat(rule_sql,',counting_location_id'); 
     else 
@@ -224,6 +207,7 @@ CLOSE  cur_rule;
 #回写快照时间
 update hat_counting_batchs a set a.snapshot_date=g_sysdate where a.id =p_batch_id;
 
-END
-;;
+END$$
+
 DELIMITER ;
+

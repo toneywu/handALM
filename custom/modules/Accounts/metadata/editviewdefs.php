@@ -160,6 +160,11 @@ array (
               'initial_filter' => '&code_type_advanced=accounts_level',
             ),
           ),
+           1 => 
+          array (
+            'name' => 'counting_dept_c',
+            'label' => 'LBL_COUNTING_DEPT',
+          ),
         ),
         3 => 
         array (

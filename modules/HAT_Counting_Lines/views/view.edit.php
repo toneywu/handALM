@@ -6,6 +6,7 @@ class HAT_Counting_LinesViewEdit extends ViewEdit
 {
 	function display()
 	{	
+		var_dump($this->bean->id);
 		echo '<input  id="loc_attr" value="" type="hidden">';
 		echo '<input  id="org_attr"  type="hidden" value="">';
 		echo '<input  id="major_attr"  type="hidden" value="">';
@@ -92,6 +93,7 @@ function displayLineItems(){
 
 
 	echo '<script>insertLineHeader(\'lineItems\');</script>';
+	var_dump($focus->id);
 		if($focus->id!=''){//如果不是新增（即如果是编辑已有记录）
 			$sql = "SELECT
 			hcr.account_id_c,
@@ -126,13 +128,11 @@ function displayLineItems(){
 			LEFT JOIN accounts a ON hcr.account_id_c = a.id
 			LEFT JOIN haa_codes hc ON hc.id = hcr.haa_codes_id_c
 			LEFT JOIN contacts c1 ON c1.id = hcr.user_contacts_id_c
-			LEFT JOIN contacts c2 ON c2.id = hcr.own_contacts_id_c,
-			contacts_cstm cc1,
-			contacts_cstm cc2
+			LEFT JOIN contacts_cstm cc1 ON cc1.id_c = c1.id
+			LEFT JOIN contacts c2 ON c2.id = hcr.own_contacts_id_c
+			LEFT JOIN contacts_cstm cc2 ON cc2.id_c = c2.id
 			WHERE
 			hcr.id = hcl.hat_counting_lines_hat_counting_resultshat_counting_results_idb
-			AND c1.id = cc2.id_c
-			AND c2.id = cc2.id_c
 			AND hcr.deleted = 0
 			AND hcl.deleted = 0
 			and hcl.hat_counting_lines_hat_counting_resultshat_counting_lines_ida ='".$focus->id."'";

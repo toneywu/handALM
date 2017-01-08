@@ -104,4 +104,7 @@ $mod_strings = array (
   'LBL_DIFF_COUNTING' =>'差异总数',
   'LBL_ACTUAL_COUNTING' =>'已盘总数',
   'LBL_TOTAL_COUNTING' =>'盘点总数',
+
+  'LBL_MESSAGE_STATUS' =>'盘点批状态必须为“未开始”，并且不存在非“未开始”状态的盘点任务',
+  'LBL_MESSAGE_TASK' =>'盘点批已创建任务快照，是否重新创建盘点任务？',
 );

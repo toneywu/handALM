@@ -36,11 +36,11 @@ if ($isNew=="") {
 	WHERE
 	1 = 1
 	AND hct.hat_counting_batchs_id_c = hcb.id
-	AND hct.counting_task_status = 'New'
+	AND hct.counting_task_status <> 'New'
 	and hcb.id='".$batchId."'";
 	$result=$db->query($sql);
 	$row=$db->fetchByAssoc($result);
-	if($bean_batch->status!='New' || $row["counting_task_status"]!=0){
+	if($bean_batch->status!='New' || $row["counting_task_status"]>0){
 		echo "0";
 	}else{
 		echo "1";
@@ -53,6 +53,7 @@ if ($isNew=="") {
 		//$row = $this->bean->db->fetchByAssoc($result);
 	}else{
 		echo "3";
+		//var_dump($isClr);
 		if($isClr=="true"){
 			//先清除，再创建
 		$query_reset = "call HAT_Counting_reset('".$batchId."')";

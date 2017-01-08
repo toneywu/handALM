@@ -5,7 +5,9 @@ require_once('include/MVC/View/views/view.Edit.php');
 class HAT_Counting_BatchsViewEdit extends ViewEdit
 {
 	function display()
+	
 	{	
+		$snapshot_date;
 		require_once('modules/HAA_Frameworks/orgSelector_class.php');
 		$current_framework_id = empty($this->bean->hat_framework_id)?"":$this->bean->hat_framework_id;
 		$current_module = $this->module;
@@ -17,7 +19,7 @@ class HAT_Counting_BatchsViewEdit extends ViewEdit
 		}
 		$this->ss->assign('FRAMEWORK_C',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id_c'));
 
-		 $modules=array(
+		$modules=array(
 			'HAT_Counting_Batch_Rules',
 			);	
 		foreach($modules as $module){
@@ -27,7 +29,18 @@ class HAT_Counting_BatchsViewEdit extends ViewEdit
 			}
 			echo'<script type="text/javascript"src="'.$GLOBALS['sugar_config']['cache_dir'].'jsLanguage/'.$module.'/'.$GLOBALS['current_language'].'.js?s='.$GLOBALS['js_version_key'].'&c='.$GLOBALS['sugar_config']['js_custom_version'].'&j='.$GLOBALS['sugar_config']['js_lang_version'].'"></script>';
 		}
-
+		if($this->bean->id!=''){
+			$sql="SELECT 
+			hcb.snapshot_date
+			FROM hat_counting_batchs hcb
+			where hcb.id='".$this->bean->id."'";
+			$result=$this->bean->db->query($sql);
+			$row=$this->bean->db->fetchByAssoc($result);
+			$snapshot_date=$row["snapshot_date"];
+		}
 		parent::display();
+		echo '<script>
+			$("#snapshot_date").val("'.$snapshot_date.'");
+			</script>';
 	}
 }

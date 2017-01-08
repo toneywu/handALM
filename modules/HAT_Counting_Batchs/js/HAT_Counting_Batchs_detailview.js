@@ -7,12 +7,12 @@ function createTask() {
 		url: 'index.php?to_pdf=true&module=HAT_Counting_Batchs&action=createToTasks', 
 		data:"&record="+record,
 		type:"POST",
-			success: function (data) {
-				if (data=="0"){
-					var title_txt='提示';
-					var html="";
-					html+='盘点批状态必须为“未开始”，并且不存在非“未开始”状态的盘点任务';
-					BootstrapDialog.confirm({
+		success: function (data) {
+			if (data=="0"){
+				var title_txt='提示';
+				var html="";
+				html+=SUGAR.language.get("HAT_Counting_Batchs", "LBL_MESSAGE_STATUS");
+				BootstrapDialog.confirm({
 		              //type: BootstrapDialog.TYPE_DANGER,
 		              title: title_txt,
 		              message: html,
@@ -20,11 +20,11 @@ function createTask() {
 		              		//createtoTask("true");
 		              	}
 		              });
-				}
-				else if(data=="1"){
-					createtoTask("true",record);
-				}
-			},
+			}
+			else if(data=="1"){
+				createtoTask("true",record);
+			}
+		},
 			error: function () { //失败
 				alert('Error loading');
 			}
@@ -42,13 +42,13 @@ function createtoTask(p,id) {
 				if(data=="3"){
 					var title_txt='提示';
 					var html="";
-					html+='盘点批已创建任务快照，是否重新创建盘点任务？';
+					html+=SUGAR.language.get("HAT_Counting_Batchs", "LBL_MESSAGE_TASK");
 					BootstrapDialog.confirm({
 		              //type: BootstrapDialog.TYPE_DANGER,
 		              title: title_txt,
 		              message: html,
 		              callback: function(result){
-		              	if(result=="true") {
+		              	if(result==true) {
 		              		clrtoTask("true",id);
 		              	}else {
 				            	//cancel
@@ -71,11 +71,11 @@ function createtoTask(p,id) {
 function clrtoTask(p,id) {
 	$.ajax({
 		url: 'index.php?to_pdf=true&module=HAT_Counting_Batchs&action=createToTasks', 
-		data:'&isClr='+p+'&record='+id,
+		data:'&isClr='+p+'&record='+id+'&isNew=true',
 		type:'POST',
 		success: function (data) {
-		window.location.reload();
-			},
+			window.location.reload();
+		},
 			error: function () { //失败
 				alert('Error loading');
 			}

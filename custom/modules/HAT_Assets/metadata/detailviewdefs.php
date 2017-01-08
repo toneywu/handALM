@@ -314,7 +314,7 @@ array (
           1 => '',
         ),
       ),
-      'LBL_EDITVIEW_PANEL_CT' =>
+     /* 'LBL_EDITVIEW_PANEL_CT' =>
       array(
         0 => 
         array(
@@ -348,7 +348,7 @@ array (
             'label' => 'LBL_DEFAULT_COUNTING_PERSON',
           ),
         ),
-      ),
+      ),*/
       'lbl_detailview_panel2' => 
       array (
         0 => 
