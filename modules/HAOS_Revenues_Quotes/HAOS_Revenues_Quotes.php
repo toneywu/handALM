@@ -42,7 +42,19 @@
  */
 require_once('modules/HAOS_Revenues_Quotes/HAOS_Revenues_Quotes_sugar.php');
 class HAOS_Revenues_Quotes extends HAOS_Revenues_Quotes_sugar {
-	
+	//获取收支项关联的发票的状态
+	function get_list_view_data(){
+		global $app_list_strings;
+		$revenue_fields = $this->get_list_view_array();
+
+		$revenueBean= BeanFactory::getBean('HAOS_Revenues_Quotes', $this->id);
+		$bean= BeanFactory::getBean('AOS_Invoices', $revenueBean->aos_invoices_id_c);
+		if ($bean) { 
+			$revenue_fields['CLEARED_STATUS']  =$app_list_strings['invoice_status_dom'][isset($bean->status)?$bean->status:''];
+		}
+
+		return $revenue_fields;
+	}
 
 	function __construct(){
 		parent::__construct();

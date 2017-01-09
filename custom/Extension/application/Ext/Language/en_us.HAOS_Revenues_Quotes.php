@@ -83,3 +83,9 @@ $app_list_strings['haos_number_of_periods']=array (
   '36' => '36',
   '48' => '48',
   );
+
+$app_list_strings['haos_revenue_clear_status_list']=array (
+  'Unclear' => '未结算',
+  'Cleared' => '已结算',
+  'Clearing' => '结算中',
+  );

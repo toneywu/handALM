@@ -8,14 +8,14 @@ array (
     'label' => 'LBL_REVENUE_QUOTE_NUMBER',
     'default' => true,
     'link' => true,
-  ),
+    ),
   'NAME' => 
   array (
     'width' => '32%',
     'label' => 'LBL_NAME',
     'default' => true,
     'link' => true,
-  ),
+    ),
   'EXPENSE_GROUP' => 
   array (
     'type' => 'relate',
@@ -25,7 +25,7 @@ array (
     'link' => true,
     'width' => '10%',
     'default' => true,
-  ),
+    ),
   'LINE_ITEM_TYPE_C' => 
   array (
     'type' => 'enum',
@@ -33,21 +33,21 @@ array (
     'studio' => 'visible',
     'label' => 'LBL_LINE_ITEM_TYPE',
     'width' => '10%',
-  ),
+    ),
   'EVENT_DATE' => 
   array (
     'type' => 'date',
     'label' => 'LBL_EVENT_DATE',
     'width' => '10%',
     'default' => true,
-  ),
+    ),
   'DUE_DATE' => 
   array (
     'type' => 'date',
     'label' => 'LBL_DUE_DATE',
     'width' => '10%',
     'default' => true,
-  ),
+    ),
   'CLEAR_STATUS' => 
   array (
     'type' => 'enum',
@@ -55,7 +55,14 @@ array (
     'label' => 'LBL_CLEAR_STATUS',
     'width' => '10%',
     'default' => true,
-  ),
+    ),
+  'CLEARED_STATUS' => 
+  array (
+    'studio' => 'visible',
+    'label' => 'LBL_CLEARED_STATUS',
+    'width' => '10%',
+    'default' => true,
+    ),
   'ACCOUNT_NAME' => 
   array (
     'type' => 'relate',
@@ -65,7 +72,7 @@ array (
     'link' => true,
     'width' => '10%',
     'default' => true,
-  ),
+    ),
   'CONTRACT_NAME' => 
   array (
     'type' => 'relate',
@@ -75,7 +82,7 @@ array (
     'link' => true,
     'width' => '10%',
     'default' => true,
-  ),
+    ),
   'ASSIGNED_USER_NAME' => 
   array (
     'width' => '9%',
@@ -83,6 +90,6 @@ array (
     'module' => 'Employees',
     'id' => 'ASSIGNED_USER_ID',
     'default' => false,
-  ),
-);
-?>
+    ),
+  );
+  ?>
