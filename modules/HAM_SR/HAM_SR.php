@@ -33,8 +33,12 @@ class HAM_SR extends HAM_SR_sugar {
 			$this->closed_by = "";
 			$this->closed_by_id="";
 		}
-
-
+		if(isset($_POST["account_id"])&&!empty($_POST["account_id"])){
+			$this->account_id=$_POST["account_id"];
+			$this->account_id_c=$_POST["account_id"];
+		}
+		
+		
 		if ($this->sr_number=='') {
 			    $bean_site = BeanFactory::getBean('HAM_Maint_Sites',$this->ham_maint_sites_id);
 				$bean_numbering = BeanFactory::getBean('HAA_Numbering_Rule',$bean_site->sr_haa_numbering_rule_id);
@@ -59,7 +63,7 @@ class HAM_SR extends HAM_SR_sugar {
 					$bean_numbering->save();
 				}
 		}
-
+		
 		parent :: save($check_notify); //保存WO主体
 	}
 
