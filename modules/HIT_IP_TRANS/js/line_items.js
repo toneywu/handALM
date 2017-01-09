@@ -272,7 +272,14 @@ function btnAddAllocLine(){
 	};
 	
   var target_owning_org_id = $("#target_owning_org_id").val();
-  var popupFilter = '&target_owning_org_id_advanced='+target_owning_org_id;
+  var popupFilter="";
+  if(global_eventOptions!=""&&global_eventOptions.need_limit_transaction_lines=="1"){
+	   popupFilter = '&target_owning_org_id_advanced='+target_owning_org_id;
+  }
+  else{
+	   popupFilter = '';
+  }
+  
   open_popup('HIT_IP_Allocations', 1200, 850,popupFilter, true, true, popupRequestData, "MultiSelect", true);
 }
 
