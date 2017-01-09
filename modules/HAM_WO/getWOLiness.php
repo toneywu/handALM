@@ -35,7 +35,8 @@ if (isset($lines_bean)) {
        	echo '</tr>';
     }
 } else {
-	///echo '<tr><td colspan="4">no-data and ham_wo_lines.ham_wo_id is not null and ham_wo_lines.ham_wo_id='.$current_id.'</td></tr>';
+	//echo '<tr><td colspan="4">no-data and ham_wo_lines.ham_wo_id is not null and ham_wo_lines.ham_wo_id='.$current_id.'</td></tr>';
+	
 	   echo '<tr><td colspan="4"></td></tr>';
 }
 echo '</table>';
