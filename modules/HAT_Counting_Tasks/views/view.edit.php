@@ -1,6 +1,6 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-require_once('include/MVC/View/views/view.Edit.php');
+require_once('include/MVC/View/views/view.edit.php');
 require_once('modules/HAT_Counting_Tasks/populateLineCountInfo.php');
 class HAT_Counting_TasksViewEdit extends ViewEdit
 {
@@ -69,6 +69,7 @@ function populateBatchInfo(){
 		$this->bean->counting_by_location=$bean_request->counting_by_location ;
 		$this->bean->counting_mode=$bean_request->counting_mode ;
 		$this->bean->counting_scene=$bean_request->counting_scene ;
+		$this->bean->offline_flag=$bean_request->offline_flag;
 	}
 }
 

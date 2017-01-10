@@ -64,6 +64,7 @@ function populateBatchInfo(){
 		$this->bean->counting_by_location=$bean_request->counting_by_location ;
 		$this->bean->counting_mode=$bean_request->counting_mode ;
 		$this->bean->counting_scene=$bean_request->counting_scene ;
+		$this->bean->offline_flag=$bean_request->offline_flag;
 	}
 }
 

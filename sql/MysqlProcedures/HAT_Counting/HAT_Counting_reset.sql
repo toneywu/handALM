@@ -101,6 +101,7 @@ WHERE
 DELETE FROM hat_counting_tasks 
 WHERE
     hat_counting_batchs_id_c = p_batch_id;
+    
 END$$
 
 DELIMITER ;

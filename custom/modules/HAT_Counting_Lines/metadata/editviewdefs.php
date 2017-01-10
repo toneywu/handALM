@@ -98,7 +98,7 @@ array (
             'label' => 'LBL_ASSET',
             'displayParams' => 
             array (
-              'initial_filter' => '&counting_location_id_advanced="+$("#loc_attr").val()+"&counting_dept_id_advanced="+$("#org_attr").val()+"&counting_major_id_advanced="+$("#major_attr").val()+"&counting_catogery_id_advanced="+$("#category_attr").val()+"&using_person_id_advanced="+$("#user_attr").val()+"&owning_person_id_advanced="+$("#own_attr").val()+"',
+              'initial_filter' => '&hat_asset_locations_hat_assetshat_asset_locations_ida_advanced="+$("#loc_attr").val()+"&owning_org_id_advanced="+$("#org_attr").val()+"&owning_major_id_advanced="+$("#major_attr").val()+"&aos_product_categories_id_advanced="+$("#category_attr").val()+"&using_person_id_advanced="+$("#user_attr").val()+"&owning_person_id_advanced="+$("#own_attr").val()+"',
               'field_to_name_array' => 
               array (
                 'name' => 'asset',
@@ -111,10 +111,12 @@ array (
                 'owning_major' => 'asset_major',
                 'owning_major_id' => 'haa_codes_id_c',
                 'asset_status' => 'asset_status_d',
-                'using_person_desc' =>'user_person',
+                'using_person_desc' => 'user_person',
                 'using_person_id' => 'user_contacts_id_c',
                 'owning_person_desc' => 'own_person',
                 'owning_person_id' => 'own_contacts_id_c',
+                'fixed_asset' => 'fixed_asset',
+                'fixed_asset_id' => 'fixed_asset_id',
               ),
               'call_back_function' => 'get_display',
             ),
@@ -131,30 +133,22 @@ array (
         array (
           0 => 
           array (
-            'name' => 'counting_status',
+            'name' => 'fixed_asset',
             'studio' => 'visible',
-            'label' => 'LBL_COUNTING_STATUS',
+            'label' => 'LBL_FIXED_ASSET',
+            'customCode' => '<input name="fixed_asset" class="sqsEnabled yui-ac-input" tabindex="0" id="fixed_asset" size="" value="" title="" autocomplete="off" type="text" readonly>
+            <input name="fixed_asset_id" id="fixed_asset_id" value="" type="hidden">',
           ),
           1 => 
           array (
-            'name' => 'asset_location',
+            'name' => 'counting_status',
             'studio' => 'visible',
-            'label' => 'LBL_ASSET_LOCATION',
-            'customCode' => '<input name="asset_location" class="sqsEnabled yui-ac-input" tabindex="0" id="asset_location" size="" value="" title="" autocomplete="off" type="text" readonly>
-              <input name="hat_asset_locations_id_c" id="hat_asset_locations_id_c" value="" type="hidden">',
+            'label' => 'LBL_COUNTING_STATUS',
           ),
         ),
         3 => 
         array (
           0 => 
-          array (
-            'name' => 'oranization',
-            'studio' => 'visible',
-            'label' => 'LBL_ORANIZATION',
-            'customCode' => '<input name="oranization" class="sqsEnabled yui-ac-input" tabindex="0" id="oranization" size="" value="" title="" autocomplete="off" type="text" readonly>
-            <input name="account_id_c" id="account_id_c" value="" type="hidden">',
-          ),
-          1 => 
           array (
             'name' => 'asset_status',
             'studio' => 'visible',
@@ -172,6 +166,14 @@ array (
 <option label="已处置/迁出" value="Discard">已处置/迁出</option>
 </select><input type="hidden" id="asset_status" name="asset_status" value=""/>',
           ),
+          1 => 
+          array (
+            'name' => 'asset_location',
+            'studio' => 'visible',
+            'label' => 'LBL_ASSET_LOCATION',
+            'customCode' => '<input name="asset_location" class="sqsEnabled yui-ac-input" tabindex="0" id="asset_location" size="" value="" title="" autocomplete="off" type="text" readonly>
+              <input name="hat_asset_locations_id_c" id="hat_asset_locations_id_c" value="" type="hidden">',
+          ),
         ),
         4 => 
         array (
@@ -185,16 +187,24 @@ array (
           ),
           1 => 
           array (
+            'name' => 'oranization',
+            'studio' => 'visible',
+            'label' => 'LBL_ORANIZATION',
+            'customCode' => '<input name="oranization" class="sqsEnabled yui-ac-input" tabindex="0" id="oranization" size="" value="" title="" autocomplete="off" type="text" readonly>
+            <input name="account_id_c" id="account_id_c" value="" type="hidden">',
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
             'name' => 'user_person',
             'studio' => 'visible',
             'label' => 'LBL_USER_PERSON',
             'customCode' => '<input name="user_person" class="sqsEnabled yui-ac-input" tabindex="0" id="user_person" size="" value="" title="" autocomplete="off" type="text" readonly>
               <input name="user_contacts_id_c" id="user_contacts_id_c" value="" type="hidden">',
           ),
-        ),
-        5 => 
-        array (
-          0 => 
+          1 => 
           array (
             'name' => 'own_person',
             'studio' => 'visible',
@@ -202,7 +212,6 @@ array (
             'customCode' => '<input name="own_person" class="sqsEnabled yui-ac-input" tabindex="0" id="own_person" size="" value="" title="" autocomplete="off" type="text" readonly>
             <input name="own_contacts_id_c" id="own_contacts_id_c" value="" type="hidden">',
           ),
-          1 => '',
         ),
       ),
       'lbl_editview_panel1' => 

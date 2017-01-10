@@ -79,30 +79,30 @@ array (
         array (
           0 => 
           array (
-            'name' => 'counting_status',
+            'name' => 'fixed_asset',
             'studio' => 'visible',
-            'label' => 'LBL_COUNTING_STATUS',
+            'label' => 'LBL_FIXED_ASSET',
           ),
           1 => 
           array (
-            'name' => 'asset_location',
+            'name' => 'counting_status',
             'studio' => 'visible',
-            'label' => 'LBL_ASSET_LOCATION',
+            'label' => 'LBL_COUNTING_STATUS',
           ),
         ),
         3 => 
         array (
           0 => 
           array (
-            'name' => 'oranization',
-            'studio' => 'visible',
-            'label' => 'LBL_ORANIZATION',
-          ),
-          1 => 
-          array (
             'name' => 'asset_status',
             'studio' => 'visible',
             'label' => 'LBL_ASSET_STATUS',
+          ),
+          1 => 
+          array (
+            'name' => 'asset_location',
+            'studio' => 'visible',
+            'label' => 'LBL_ASSET_LOCATION',
           ),
         ),
         4 => 
@@ -115,20 +115,25 @@ array (
           ),
           1 => 
           array (
-            'name' => 'user_person',
+            'name' => 'oranization',
             'studio' => 'visible',
-            'label' => 'LBL_USER_PERSON',
+            'label' => 'LBL_ORANIZATION',
           ),
         ),
         5 => 
         array (
           0 => 
           array (
+            'name' => 'user_person',
+            'studio' => 'visible',
+            'label' => 'LBL_USER_PERSON',
+          ),
+          1 => 
+          array (
             'name' => 'own_person',
             'studio' => 'visible',
             'label' => 'LBL_OWN_PERSON',
           ),
-          1 => '',
         ),
       ),
     ),

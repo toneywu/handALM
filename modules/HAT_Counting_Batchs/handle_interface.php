@@ -24,17 +24,13 @@
 
 
 require_once('modules/HAA_Interfaces/haaInterfaceBase.php');
-$interfaceId=$_REQUEST['record'];
-$paramsArray[0]=$interfaceId;//参数数组第一个固定传入接口ID
-$interfaceBaseClass= new haaInterfaceBase();
+$interfaceId=$_POST['interface_id'];
+$batch_id=$_POST['batch_id'];
 
+$interfaceBaseClass= new haaInterfaceBase();
+$paramsArray[0]=$interfaceId;
 $interfaceBaseClass->execute_Interface_Processor($paramsArray);
 $return=$interfaceBaseClass->interfaceProcessReturn;
 
-if($return["return_status"]=='0'){
-	header('Location: index.php?module=HAA_Interfaces&action=DetailView&record='.$interfaceId);
-}
-else{
-	die('执行接口出错:'.$return["msg_data"]);
-}
+echo json_encode($return);
 ?>

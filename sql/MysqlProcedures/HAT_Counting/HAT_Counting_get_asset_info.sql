@@ -1,25 +1,8 @@
-/*
-Navicat MySQL Data Transfer
+USE `suitecrm`;
+DROP procedure IF EXISTS `HAT_Counting_get_asset_info`;
 
-Source Server         : SuiteCRM
-Source Server Version : 50547
-Source Host           : localhost:3306
-Source Database       : suitecrm
-
-Target Server Type    : MYSQL
-Target Server Version : 50547
-File Encoding         : 65001
-
-Date: 2016-12-31 23:31:15
-*/
-
-SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Procedure structure for HAT_Counting_get_asset_info
--- ----------------------------
-DROP PROCEDURE IF EXISTS `HAT_Counting_get_asset_info`;
-DELIMITER ;;
+DELIMITER $$
+USE `suitecrm`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `HAT_Counting_get_asset_info`(in p_framework_id varchar(100),
                                    in p_batch_rule_id varchar(100),
                                    in p_location_id varchar(100),
@@ -132,9 +115,9 @@ FETCH  cur_asset INTO asset_id_c, owning_org_id_c,asset_location_id_c,owning_maj
 product_id_c,product_category_id_c,framework_id_c,counting_org_id_c,counting_location_id_c,
 counting_major_id_c,counting_catogery_id_c,person_id_c,asset_status_c,description_c,
 user_person_id_c,own_person_id_c;
-
 END WHILE;
 CLOSE  cur_asset;
-END
-;;
+END$$
+
 DELIMITER ;
+

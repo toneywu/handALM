@@ -1,6 +1,6 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-class AOS_contractsViewList extends ViewList
+class HAOS_InsurancesViewList extends ViewList
 {
     function processSearchForm()
     {

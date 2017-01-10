@@ -49,6 +49,13 @@ array (
     'label' => 'LBL_ENABLED_FLAG',
     'width' => '10%',
   ),
+   'BASED_FLAG' => 
+  array (
+    'type' => 'bool',
+    'default' => true,
+    'label' => 'LBL_BASED_FLAG',
+    'width' => '10%',
+  ),
   'EXECUTE_FUNC_FILES' => 
   array (
     'type' => 'varchar',

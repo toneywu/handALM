@@ -51,13 +51,13 @@ $app_list_strings['hat_counting_status_list']=array (
   'Counted' => '已盘点',
 );
 $app_list_strings['hat_counting_mode_list']=array (
-  'Manual' => '手动粗盘',
-  'Recheck' => '单个详盘',
-  'Mobile' => '扫码群盘',
+  'MANUAL' => '手动粗盘',
+  'RECHECK' => '单个详盘',
+  'SCAN' => '扫码群盘',
 );
 $app_list_strings['hat_counting_scene_list']=array (
-  'Year' => '年度',
-  'Temp' => '临时',
+  'Year' => '年度盘点',
+  'Temp' => '临时盘点',
 );
 $app_list_strings['hat_counting_task_status_list']=array (
   'New' => '未开始',
@@ -99,3 +99,9 @@ $app_list_strings['hat_counting_object_type_list']=array (
   'GENERAL' => '通用物资',
   'PRODUCT' => '生产物资',
 );
+
+$app_list_strings['hat_counting_split_type']=array (
+  'LOGIC' => '逻辑拆分',
+  'CUSTOM' => '自定义',
+);
+

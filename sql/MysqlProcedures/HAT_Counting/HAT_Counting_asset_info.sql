@@ -64,7 +64,6 @@ OPEN  cur_rule;
 FETCH  cur_rule INTO batch_rule_id,location_flag,location_id,location_son_flag,org_flag,org_id,org_son_flag,
            major_flag,major_id,major_son_flag,category_flag,category_id,category_son_flag,user_person_flag,
            user_id,own_person_flag,own_id;
-
 WHILE not_found != 1 DO
 #创建临时表
 call HAT_Counting_create_temp();
@@ -201,7 +200,6 @@ call HAT_Counting_create_temp();
 FETCH  cur_rule INTO batch_rule_id,location_flag,location_id,location_son_flag,org_flag,org_id,org_son_flag,
            major_flag,major_id,major_son_flag,category_flag,category_id,category_son_flag,user_person_flag,
            user_id,own_person_flag,own_id;
-
 END WHILE;
 CLOSE  cur_rule;
 #回写快照时间

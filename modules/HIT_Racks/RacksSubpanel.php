@@ -6,7 +6,7 @@ function get_current_asset($params) {
 
     $return_array['select'] = " SELECT *";
     $return_array['from'] = " FROM hat_assets ";
-    $return_array['where'] = " WHERE hat_assets.id = '" . $asset_id . "'";//浼氳嚜鍔ㄥ姞鍏eleted瀛楁
+    $return_array['where'] = " WHERE hat_assets.id = '" . $asset_id . "'";//会自动加入deleted字段
     $return_array['join'] = "";
     $return_array['join_tables'] = "";
     return $return_array;
@@ -32,7 +32,8 @@ function get_hit_racks($params) {
 
     $return_array['select'] = " SELECT hit_racks.*";
     $return_array['from'] = " FROM hit_racks";
-    $return_array['where'] = " WHERE hit_racks.hat_assets_id = hat_assets.id and hat_assets.using_org_id='" . $using_org_id . "'";//浼氳嚜鍔ㄥ姞鍏eleted瀛楁
+    //$return_array['where'] = " WHERE hit_racks.hat_assets_id = hat_assets.id and hat_assets.using_org_id='" . $using_org_id . "'";//会自动加入deleted字段z
+	$return_array['where'] = " WHERE hit_racks.hat_assets_id = hat_assets.id and hat_assets.using_org_id='" . $using_org_id . "' or exists (select 1 from hit_rack_allocations,hat_assets where hit_rack_allocations.hit_racks_id=hit_racks.id and hat_assets.id=hit_rack_allocations.hat_assets_id and hat_assets.using_org_id='".$using_org_id."' )";
     $return_array['join'] = ",hat_assets";
     $return_array['join_tables'] = "hit_racks.hat_assets_id = hat_assets.id";
     return $return_array;

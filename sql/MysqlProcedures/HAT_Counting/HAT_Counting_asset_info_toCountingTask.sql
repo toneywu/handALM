@@ -1,25 +1,8 @@
-/*
-Navicat MySQL Data Transfer
+USE `suitecrm`;
+DROP procedure IF EXISTS `HAT_Counting_asset_info_toCountingTask`;
 
-Source Server         : SuiteCRM
-Source Server Version : 50547
-Source Host           : localhost:3306
-Source Database       : suitecrm
-
-Target Server Type    : MYSQL
-Target Server Version : 50547
-File Encoding         : 65001
-
-Date: 2016-12-31 23:30:33
-*/
-
-SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Procedure structure for HAT_Counting_asset_info_toCountingTask
--- ----------------------------
-DROP PROCEDURE IF EXISTS `HAT_Counting_asset_info_toCountingTask`;
-DELIMITER ;;
+DELIMITER $$
+USE `suitecrm`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `HAT_Counting_asset_info_toCountingTask`(IN p_sql varchar(1000),
                                                                     in p_batch_id varchar(100),
                                                                     in p_location_flag int,
@@ -28,6 +11,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `HAT_Counting_asset_info_toCountingT
                                                                     in p_category_flag int,
                                                                     in p_user_person_flag int,
                                                                     in p_own_person_flag int)
+                                                                    
 BEGIN
     DECLARE  not_found INT DEFAULT 0;
     declare g_sysdate datetime default now();
@@ -96,7 +80,6 @@ WHERE
     OPEN  cur_info; 
     FETCH  cur_info INTO flag_param;
     WHILE not_found != 1 DO
-   
     #取出范围ID段，第一位为!拼接要去掉，最后一位不特殊处理,flag不为1时，将对应ID置空
     #set asset_id_c=substring_index(flag_param,',',1);
     set flag_param=substring(flag_param,3);
@@ -281,7 +264,9 @@ counting_scene,
 counting_by_location,
 manual_add_flag,
 user_contacts_id_c,
-own_contacts_id_c
+own_contacts_id_c,
+offline_flag,
+upinterface_flag
 ) 
 values(
 task_id, 
@@ -314,7 +299,9 @@ counting_scene,
 counting_by_location,
 0,
 if(user_id_c='@',null,if(user_id_c='$',null,user_id_c)),
-if(own_id_c='@',null,if(own_id_c='$',null,own_id_c)));
+if(own_id_c='@',null,if(own_id_c='$',null,own_id_c)),
+0,
+0);
 
      #插入盘点明细 
      
@@ -323,6 +310,7 @@ FETCH  cur_info INTO flag_param;
 
 END WHILE;
 CLOSE  cur_info;
-END
-;;
+END$$
+
 DELIMITER ;
+

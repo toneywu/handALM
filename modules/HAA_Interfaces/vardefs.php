@@ -259,6 +259,28 @@ $dictionary['HAA_Interfaces'] = array(
         'len' => '255',
         'size' => '20',
         ),
+      'based_flag' => 
+      array (
+        'required' => false,
+        'name' => 'based_flag',
+        'vname' => 'LBL_BASED_FLAG',
+        'type' => 'bool',
+        'massupdate' => 0,
+        'default' => '0',
+        'no_default' => false,
+        'comments' => '',
+        'help' => '',
+        'importable' => 'true',
+        'duplicate_merge' => 'disabled',
+        'duplicate_merge_dom_value' => '0',
+        'audited' => false,
+        'inline_edit' => true,
+        'reportable' => true,
+        'unified_search' => false,
+        'merge_filter' => 'disabled',
+        'len' => '255',
+        'size' => '20',
+        ),
       'description' => 
       array (
         'name' => 'description',
@@ -460,25 +482,25 @@ $dictionary['HAA_Interfaces'] = array(
         'display_default' => '',
         ),
       'line_items' =>
-            array(
-                'required' => false,
-                'name' => 'line_items',
-                'vname' => 'LBL_LINE_ITEMS',
-                'type' => 'function',
-                'source' => 'non-db',
-                'massupdate' => 0,
-                'importable' => 'false',
-                'duplicate_merge' => 'disabled',
-                'duplicate_merge_dom_value' => 0,
-                'audited' => false,
-                'reportable' => false,
-                'function' =>
-                    array(
-                        'name' => 'display_lines',
-                        'returns' => 'html',
-                        'include' => 'modules/HAA_Interface_Logs/Line_Items.php'
-                    ),
+      array(
+        'required' => false,
+        'name' => 'line_items',
+        'vname' => 'LBL_LINE_ITEMS',
+        'type' => 'function',
+        'source' => 'non-db',
+        'massupdate' => 0,
+        'importable' => 'false',
+        'duplicate_merge' => 'disabled',
+        'duplicate_merge_dom_value' => 0,
+        'audited' => false,
+        'reportable' => false,
+        'function' =>
+        array(
+            'name' => 'display_lines',
+            'returns' => 'html',
+            'include' => 'modules/HAA_Interface_Logs/Line_Items.php'
             ),
+        ),
       ),
 'relationships'=>array (
     ),

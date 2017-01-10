@@ -53,7 +53,10 @@ array (
             'label' => 'LBL_FRAMEWORKS',
             'customCode' => '{$FRAMEWORK_C}',
             ),
-          1 => '',
+          1 => array (
+            'name' => 'based_flag',
+            'label' => 'LBL_BASED_FLAG',
+            ),
           ),
         1 => 
         array (

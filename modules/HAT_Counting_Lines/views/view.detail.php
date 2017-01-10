@@ -42,6 +42,8 @@ function display()
 			$("#user_contacts_id_c").val("'.$this->bean->user_contacts_id_c.'");
 			$("#own_person").val("'.$this->bean->own_person.'");
 			$("#own_contacts_id_c").val("'.$this->bean->own_contacts_id_c.'");
+			$("#fixed_asset").val("'.$this->bean->fixed_asset.'");
+		$("#fixed_asset_id").val("'.$this->bean->fixed_asset_id.'");
 		})
 		</script>';
 	echo '<input  id="loc_attr" value="" type="hidden">';

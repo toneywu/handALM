@@ -19,20 +19,31 @@
  * or write to the Free Software Foundation,Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA 02110-1301  USA
  *
- * @author SalesAgility <info@salesagility.com>
  */
 
+global $db;
+$batchId=$_REQUEST['record'];
+$sql="SELECT
+a.id
+FROM
+haa_interfaces a
+WHERE
+a.interface_code = 'HAPCRTZTCOUNT'";
+
+$result=$db->query($sql);
+$row=$db->fetchByAssoc($result);
 
 require_once('modules/HAA_Interfaces/haaInterfaceBase.php');
-$interfaceId=$_REQUEST['record'];
-$paramsArray[0]=$interfaceId;//参数数组第一个固定传入接口ID
-$interfaceBaseClass= new haaInterfaceBase();
 
+$interfaceBaseClass= new haaInterfaceBase();
+$paramsArray[0]=$row["id"];
+$paramsArray[1]=$batchId;
+$paramsArray[2]='';
 $interfaceBaseClass->execute_Interface_Processor($paramsArray);
 $return=$interfaceBaseClass->interfaceProcessReturn;
 
 if($return["return_status"]=='0'){
-	header('Location: index.php?module=HAA_Interfaces&action=DetailView&record='.$interfaceId);
+	header('Location: index.php?module=HAT_Counting_Batchs&action=DetailView&record='.$batchId);
 }
 else{
 	die('执行接口出错:'.$return["msg_data"]);

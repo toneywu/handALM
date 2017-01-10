@@ -1,12 +1,14 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-require_once('include/MVC/View/views/view.Edit.php');
+
+require_once('include/MVC/View/views/view.edit.php');
 
 class HAT_Counting_BatchsViewEdit extends ViewEdit
 {
 	function display()
 	
 	{	
+
 		$snapshot_date;
 		require_once('modules/HAA_Frameworks/orgSelector_class.php');
 		$current_framework_id = empty($this->bean->hat_framework_id)?"":$this->bean->hat_framework_id;

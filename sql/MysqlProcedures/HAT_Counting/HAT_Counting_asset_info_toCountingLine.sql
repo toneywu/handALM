@@ -11,6 +11,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `HAT_Counting_asset_info_toCountingL
                                               in p_user_id_c varchar(100),
                                               in p_own_id_c varchar(100),
                                               in p_framework_id varchar(100))
+                                              
 BEGIN
   DECLARE  not_found_line INT DEFAULT 0;
     declare line_id varchar(100);
@@ -26,6 +27,7 @@ BEGIN
     declare g_sysdate datetime default now();
     declare relationship_id varchar(100); 
     declare result_id varchar(100); 
+    declare fixed_asset_id_c varchar(100);
   #根据规则筛选数据
   DECLARE  cur_info CURSOR FOR 
     select 
@@ -37,7 +39,8 @@ BEGIN
         cai.asset_status,
         cai.description,
         cai.user_person_id,
-        cai.owning_person_id
+        cai.owning_person_id,
+        cai.fixed_asset_id
     from counting_asset_info cai
     where 1=1
     and cai.framework_id =p_framework_id
@@ -61,7 +64,7 @@ BEGIN
         if(cai.owning_person_id='','$',if(cai.owning_person_id is null,'$',cai.owning_person_id)));
     DECLARE  CONTINUE HANDLER FOR NOT FOUND  SET  not_found_line = 1;
      OPEN  cur_info; 
-  FETCH  cur_info INTO asset_id_c,owning_org_id_c,asset_location_id_c,owning_major_id_c,product_category_id_c,asset_status_c,description_c,user_person_id_c,owning_person_id_c;
+  FETCH  cur_info INTO asset_id_c,owning_org_id_c,asset_location_id_c,owning_major_id_c,product_category_id_c,asset_status_c,description_c,user_person_id_c,owning_person_id_c,fixed_asset_id_c;
   
     WHILE not_found_line != 1 DO
     #插入盘点明细
@@ -80,7 +83,8 @@ aos_products_id_c,
 hat_counting_tasks_id_c,
 haa_codes_id_c,
 user_contacts_id_c,
-own_contacts_id_c
+own_contacts_id_c,
+fixed_asset_id
 ) values(
 line_id,
 description_c,
@@ -96,7 +100,8 @@ product_category_id_c,
 p_task_id,
 owning_major_id_c,
 user_person_id_c,
-owning_person_id_c);
+owning_person_id_c,
+fixed_asset_id_c);
   set relationship_id=uuid();
     set result_id=uuid();
     #插入关系表
@@ -149,8 +154,7 @@ null,
 null,
 0,
 0);
-    FETCH  cur_info INTO asset_id_c,owning_org_id_c,asset_location_id_c,owning_major_id_c,product_category_id_c,asset_status_c,description_c,user_person_id_c,owning_person_id_c;
-
+    FETCH  cur_info INTO asset_id_c,owning_org_id_c,asset_location_id_c,owning_major_id_c,product_category_id_c,asset_status_c,description_c,user_person_id_c,owning_person_id_c,fixed_asset_id_c;
 END WHILE;
 CLOSE  cur_info;
 END$$
