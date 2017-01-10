@@ -211,7 +211,7 @@ function remove_rack_elements_from_rack($allocation_id, $focused_trans_line) {
 //********************************************************************//
 function save_asset_lines($focus, $beanAsset=null){
         //if (empty($beanAsset)) {//如果参数没有传递过来则直接加载
-            $beanAsset = BeanFactory::getBean('HAT_Assets', $focus->asset_id);
+        $beanAsset = BeanFactory::getBean('HAT_Assets', $focus->asset_id);
         //}
         if ($beanAsset) { // test if $bean was loaded successfully
             $beanAsset->owning_org_id = $focus->target_owning_org_id;

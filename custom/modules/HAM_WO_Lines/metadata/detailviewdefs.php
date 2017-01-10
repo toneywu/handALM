@@ -53,26 +53,20 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_WO_NUMBER',
           ),
-          1 => 
-          array (
-            'name' => 'contract',
-            'studio' => 'visible',
-            'label' => 'LBL_CONTRACT',
-          ),
         ),
         1 => 
         array (
           0 => 
           array (
-            'name' => 'product',
+            'name' => 'contract',
             'studio' => 'visible',
-            'label' => 'LBL_PRODUCT',
+            'label' => 'LBL_CONTRACT',
           ),
           1 => 
           array (
-            'name' => 'asset',
+            'name' => 'product',
             'studio' => 'visible',
-            'label' => 'LBL_ASSET',
+            'label' => 'LBL_PRODUCT',
           ),
         ),
         2 => 
@@ -96,6 +90,7 @@ array (
         4 => 
         array (
           0 => '',
+          1 => '',
         ),
       ),
     ),

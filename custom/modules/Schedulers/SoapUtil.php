@@ -4,8 +4,9 @@ class SoapUtil{
 	*集团8031 WS-Security信息
 	*/
 	var $username_jt = "ERP_API";
-	var $password_jt = "qazwsx12345";
-	var $url_jt = "http://111.200.33.204:1574/8031/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";
+	var $password_jt = "erp123qwe";
+	//var $url_jt = "http://36.110.51.4:1574/8000/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";
+	var $url_jt = "http://111.200.33.204:1574/8000/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";
 	var $resp_key_jt="APPLICATION_DEVELOPER";
 	var $resp_appl_jt="FND";
 	var $security_jt="STANDARD";
@@ -32,7 +33,7 @@ class SoapUtil{
 			 echo $this->language_jt."<br>";*/
 			//集团模拟登陆的 报文
 			
-						$postAllString = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+						/*$postAllString = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
 					    <soap:Header xmlns:ns1="http://xmlns.oracle.com/apps/cux/soaprovider/plsql/cux_ws_eam_basic_info_pkg/">
 					        <ns1:SOAHeader>
 					            <ns1:Responsibility>'.$this->resp_key_jt.'</ns1:Responsibility>
@@ -49,7 +50,29 @@ class SoapUtil{
 					            <ns2:P_TYPE_CODE>'.$ws_type_code.'</ns2:P_TYPE_CODE>
 					        </ns2:InputParameters>
 					    </soap:Body>
-					</soap:Envelope>';
+					</soap:Envelope>';*/
+					
+					$postAllString = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+											<soap:Header xmlns:ns1="http://xmlns.oracle.com/apps/cux/soaprovider/plsql/cux_ws_eam_basic_info_pkg/">
+												<ns1:SOAHeader>
+													<ns1:Responsibility>'.$this->resp_key_jt.'</ns1:Responsibility>
+													<ns1:RespApplication>'.$this->resp_appl_jt.'</ns1:RespApplication>
+													<ns1:SecurityGroup>'.$this->security_jt.'</ns1:SecurityGroup>
+													<ns1:NLSLanguage>'.$this->language_jt.'</ns1:NLSLanguage>
+													<ns1:Org_Id>81</ns1:Org_Id>
+												</ns1:SOAHeader>
+											<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" soap:mustUnderstand="1"><wsse:UsernameToken xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"><wsse:Username>ERP_API</wsse:Username><wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">erp123qwe</wsse:Password></wsse:UsernameToken></wsse:Security></soap:Header>
+											<soap:Body xmlns:ns2="http://xmlns.oracle.com/apps/cux/soaprovider/plsql/cux_ws_eam_basic_info_pkg/get_basic_info/">
+												<ns2:InputParameters>
+													  <ns2:P_START_DATE>2010-01-01</ns2:P_START_DATE>
+													<ns2:P_END_DATE>2016-12-31</ns2:P_END_DATE>
+													<ns2:P_TYPE_CODE>'.$ws_type_code.'</ns2:P_TYPE_CODE>
+												</ns2:InputParameters>
+											</soap:Body>
+										</soap:Envelope>';
+					
+					
+					
 		}
 		else if($ws_env=='XR'){
 			
@@ -88,6 +111,9 @@ class SoapUtil{
 				}else{
 					$url=$this->url_xr;
 				}
+				
+				$GLOBALS['log']->infor($postAllString);
+				
 				curl_setopt($soap_do, CURLOPT_URL, $url);
 
 				curl_setopt($soap_do, CURLOPT_CONNECTTIMEOUT, 10);
@@ -124,10 +150,10 @@ class SoapUtil{
 					$result_clob_dom = $xml->getElementsByTagName("X_RESULT_CLOB");
 					$x_return_status = $xml->getElementsByTagName("X_RETURN_STATUS");
 					$x_msg_data = $xml->getElementsByTagName("X_MSG_DATA");
-
 					echo "x_return_status = " . $x_return_status->item(0)->nodeValue . "<br>";
 					echo "x_msg_data = " . $x_msg_data->item(0)->nodeValue . "<br>";
-					
+					$GLOBALS['log']->infor("x_return_status=".$x_return_status->item(0)->nodeValue);
+					$GLOBALS['log']->infor("x_msg_data=".$x_msg_data->item(0)->nodeValue);
 					$xml_array = simplexml_load_string($result);
 					$json_array = json_decode($result_clob_dom->item(0)->nodeValue, true);
 					}

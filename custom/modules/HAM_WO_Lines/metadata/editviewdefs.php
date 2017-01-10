@@ -42,9 +42,8 @@ array (
             'name' => 'wo_number',
             'studio' => 'visible',
             'label' => 'LBL_WO_NUMBER',
-			'customCode' => '<input type="hidden" name="ham_wo_id" id="ham_wo_id" value="{$fields.ham_wo_id.value}">{$fields.wo_number.value}',
+            'customCode' => '<input type="hidden" name="ham_wo_id" id="ham_wo_id" value="{$fields.ham_wo_id.value}">{$fields.wo_number.value}',
           ),
-          1 => 'name',
         ),
         1 => 
         array (
@@ -65,8 +64,8 @@ array (
               array (
                 'name' => 'product',
                 'id' => 'product_id',
-                'haa_uom_id_c'=>'uom_id',
-                'primary_uom_c'=>'uom_code'
+                'haa_uom_id_c' => 'uom_id',
+                'primary_uom_c' => 'uom_code',
               ),
             ),
           ),
@@ -75,37 +74,24 @@ array (
         array (
           0 => 
           array (
-            'name' => 'asset',
-            'studio' => 'visible',
-            'label' => 'LBL_ASSET',
-			'displayParams' => 
-            array (
-              'field_to_name_array' => 
-              array (
-                'asset_number' => 'asset',
-                'id' => 'asset_id',
-              ),
-            ),
-          ),
-          1 => 
-          array (
             'name' => 'quantity',
             'label' => 'LBL_QUANTITY',
           ),
-        ),
-        3 => 
-        array (
-          0 => 
+          1 => 
           array (
             'name' => 'uom_code',
             'studio' => 'visible',
             'label' => 'LBL_UOM_CODE',
           ),
-          1 => '',
+        ),
+        3 => 
+        array (
+          0 => 'description',
         ),
         4 => 
         array (
-          0 => 'description',
+          0 => '',
+          1 => '',
         ),
       ),
     ),

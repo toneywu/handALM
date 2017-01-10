@@ -1,5 +1,10 @@
 $.getScript("modules/HAA_FF/ff_include.js");
 
+$.getScript("cache/include/javascript/sugar_grp_yui_widgets.js"); // MessageBox
+$.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
+$.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); // MessageBox
+$('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
+
 function setProductPopupReturn(popupReplyData){//选择完产品后的动作
 	set_return(popupReplyData);
 
@@ -78,10 +83,64 @@ function resetAssetName() { //自动生成资产铭牌号
 	}
 }
 
+function check_source_qty(){
+		var return_status="S";
+		var json_data={};
+		json_data['record']=$("input[name=record]").val();
+		json_data['asset_source_id']=$("#asset_source_id").val();
+		json_data['enable_it_ports']=$("#enable_it_ports").val();
+
+		$.ajax({
+			type:"POST",
+			url: "index.php?to_pdf=true&module=HAT_Assets&action=checkSourceCount",
+			data: json_data,
+			cache:false,  
+            async:false,//重要的关健点在于同步和异步的参数，  
+			success: function(msg){ 
+					console.log(msg);
+					if(msg!='S'){
+						return_status="E";
+						BootstrapDialog.alert({
+							type : BootstrapDialog.TYPE_DANGER,
+							title : SUGAR.language.get('app_strings',
+									'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+							message : msg
+						});
+					}
+					},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				 //alert('Error loading document');
+				 console.log(textStatus+errorThrown);
+			},
+		});
+		return return_status;
+}
+
+
+/**
+* 保存前验证
+*/
+function preValidateFunction(async_bool = false) {
+		var result = true;
+		var error_msg="S";
+		var return_status = check_source_qty();
+		if(return_status!="S"){
+			return;
+		}
+		//return;
+		return result;
+}
+
+
 
 $(document).ready(function(){
 
 	//加载图标选择器，从modules\HAT_Assets\js\editview_icon_picker.js
+	
+	SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
+		OverwriteSaveBtn(preValidateFunction);//注意引用时不加（）
+	});
+	
 
 	SUGAR.util.doWhen("typeof icon_edit_init == 'function'", function(){
 		icon_edit_init($("#asset_icon"));

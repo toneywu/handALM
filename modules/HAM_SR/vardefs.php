@@ -557,7 +557,7 @@ $dictionary['HAM_SR'] = array(
       'quicksearch' => 'enabled',
       'studio' => 'visible',
       ),
-     'reporter_org_id' => 
+     'account_id' => 
     array (
       'required' => false,
       'name' => 'account_id',

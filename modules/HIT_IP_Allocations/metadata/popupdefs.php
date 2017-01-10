@@ -11,7 +11,8 @@ $popupMeta = array (
  // 'access_assets_name' => 'hit_ip_allocations.access_assets_name',
   'target_owning_org_id' => 'hit_ip_allocations.target_owning_org_id',
 ),
-'whereStatement'=>'IFNULL(hit_ip_allocations.enable_action,"1")="1" and  (jt1.name="'.$_REQUEST["access_assets_name_advanced"].'" or jt2.name="'.$_REQUEST["access_assets_name_advanced"].'" or "'.$_REQUEST["access_assets_name_advanced"].'"="" ) OR  (jt2.name LIKE "'.$_REQUEST["access_assets_name_advanced"].'%" AND IFNULL(hit_ip_allocations.enable_action,"1") = "1") ',
+//'whereStatement'=>' IFNULL(hit_ip_allocations.enable_action,"1")="1" and  (jt1.name="'.$_REQUEST["access_assets_name_advanced"].'" or jt2.name="'.$_REQUEST["access_assets_name_advanced"].'" or "'.$_REQUEST["access_assets_name_advanced"].'"="" ) OR  (ifnull(jt2.name,"$") LIKE "'.$_REQUEST["access_assets_name_advanced"].'%" AND IFNULL(hit_ip_allocations.enable_action,"1") = "1") ',
+'whereStatement'=>' IFNULL(hit_ip_allocations.enable_action,"1")="1" ',
     'searchInputs' => array (
   4 => 'hit_ip_subnets',
   5 => 'bandwidth_type',

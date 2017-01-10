@@ -36,5 +36,6 @@ if (isset($lines_bean)) {
     }
 } else {
 	echo '<tr><td colspan="4">'.$app_strings["LBL_NO_DATA"].'</td></tr>';
+	//echo '<tr><td colspan="4">no-data and ham_wo_lines.ham_wo_id is not null and ham_wo_lines.ham_wo_id='.$current_id.'</td></tr>';
 }
 echo '</table>';

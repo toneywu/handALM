@@ -143,7 +143,6 @@ class HAM_SRViewEdit extends ViewEdit
             $this->bean->created_by_name = $current_user->name;
        }
 
-
         if (isset($this->bean->reporter) == false || $this->bean->reporter=="") { //如果没有Report就加载默认的用户为，初始化资产报告人
             $sel_current_contact ="SELECT 
                     contacts.last_name contact_name,
@@ -216,7 +215,8 @@ class HAM_SRViewEdit extends ViewEdit
 		}
 
         $sr_num_html="";
-        if(empty($this->bean->sr_number)||$_REQUEST['isDuplicate']==true){
+		
+        if(empty($this->bean->sr_number)||$_REQUEST['isDuplicate']=="true"){
             //如果当前工作单号为空，则返回自动编号标签
             $sr_num_html=$mod_strings['LBL_AUTONUM'].'<input type="hidden" value="" id="sr_number" name="sr_number">';
         } else {

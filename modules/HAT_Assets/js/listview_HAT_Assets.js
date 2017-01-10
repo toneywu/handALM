@@ -3,6 +3,8 @@ $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.
 $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
 var loaded = false; 
 $(document).ready(function(){
+	console.log("dddddddddd");
+	console.log("ddd"+$("error_message").val());
 if (!loaded) { 
 	if(typeof return_msg!="undefined" && return_msg!=""){
 		console.log(return_msg);

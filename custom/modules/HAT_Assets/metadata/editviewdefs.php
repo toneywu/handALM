@@ -413,6 +413,8 @@ array (
                 'supplier_org_id' => 'supplier_org_id',
                 'supplier_desc' => 'supplier_desc',
                 'source_reference' => 'attribute10',
+        				'cost_center_dis'=>'cost_center',
+        				'cost_center'=>'cost_center_id',
               ),
             ),
           ),
@@ -695,7 +697,7 @@ array (
           ),
         ),
       ),
-   /*   'LBL_EDITVIEW_PANEL_CT' => 
+/*      'LBL_EDITVIEW_PANEL_CT' => 
       array (
         0 => 
         array (
@@ -740,7 +742,8 @@ array (
             'label' => 'LBL_DEFAULT_COUNTING_PERSON',
           ),
         ),
-      ),*/
+*/
+      ),
       'lbl_editview_panel1' => 
       array (
         0 => 
