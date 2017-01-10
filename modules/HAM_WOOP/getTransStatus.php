@@ -26,7 +26,7 @@ if($act_module=="HAT_Asset_Trans_Batch"){
 	}else{
 		echo "Y";*/
 	if(count($trans_bean)>0){
-		if(empty($trans_bean) || $trans_bean[0]->asset_trans_status!='APPROVED'){
+		if(empty($trans_bean) || $trans_bean[0]->asset_trans_status!='CLOSED'){
 			echo "N";
 		}else{
 			echo "Y";
@@ -35,7 +35,7 @@ if($act_module=="HAT_Asset_Trans_Batch"){
 } else if($act_module=="HIT_IP_TRANS_BATCH"){
 	$trans_bean = BeanFactory :: getBean("HIT_IP_TRANS_BATCH")->get_full_list('', "hit_ip_trans_batch.source_woop_id='" . $woop_id . "' and hit_ip_trans_batch.source_wo_id='".$ham_wo_id."'");
 	if(count($trans_bean)>0){
-		if(empty($trans_bean) || $trans_bean[0]->asset_trans_status!="APPROVED"){
+		if(empty($trans_bean) || $trans_bean[0]->asset_trans_status!="CLOSED"){
 			echo "N";
 		}else{
 			echo "Y";

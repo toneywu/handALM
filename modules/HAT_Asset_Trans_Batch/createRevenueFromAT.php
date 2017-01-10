@@ -33,7 +33,7 @@ function createRevenueFromAT($ATId){
 	require_once('modules/HAOS_Revenues_Quotes/createRevenue.php');
 	$at = new HAT_Asset_Trans_Batch();
 	$at->retrieve($ATId);
-	if ($at->asset_trans_status!='APPROVED'){
+	if ($at->asset_trans_status=='DRAFT'||$at->asset_trans_status!='CANCELED'){
 		die('已批准的资产事务处理单才能创建收支计费项!');
 	}
 
