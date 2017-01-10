@@ -249,8 +249,6 @@ $dictionary['HAT_Asset_Trans_Batch'] = array(
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
-
-			
 			),
 		'site' => array (
 			'required' => false,

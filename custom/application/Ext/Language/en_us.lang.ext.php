@@ -1996,7 +1996,9 @@ $app_list_strings['asset_trans_status']=array (
   'CANCELED' => 'Canceled',
   'CLOSED' => 'Closed',
   'TRANSACTED' => 'Transacted',
+  'AUTO_TRANSACTED'=>'Auto-Transacted',
 );
+
 
 $app_list_strings['cux_event_type_option_list']=array (
   'LOCKED' => 'Locked/Not Available',
@@ -2012,6 +2014,13 @@ $app_list_strings['cux_event_type_option2_list']=array (
   'INVISIABLE' => 'Invisible',
   'EMPTY' => 'Empty',
 );
+
+$app_list_strings['cux_event_type_option3_list']=array (
+  'LOCKED' => 'Disabled',
+  'REQUIRED' => 'Required',
+  'OPTIONAL' => 'Optional',
+);
+
 
 $app_list_strings['hat_event_type_list']=array (
   'AT_MOVE' => 'Equip./Asset Trans.',
@@ -2036,6 +2045,7 @@ $app_list_strings['hat_asset_scope_list']=array (
 $app_list_strings['hat_default_asset_list']=array (
   'NONE' => 'None',
   'CURRENT_USING_ORG' => 'Current Using Org',
+  'CURRENT_USING_ORG_NONE' => 'Current Using Org and without Using Org',
   'WO_ASSET_TRANS' => 'WO/Asset Trans',
   'WO_IP_TRANS' => 'WO/Net Rescource Trans',
 );

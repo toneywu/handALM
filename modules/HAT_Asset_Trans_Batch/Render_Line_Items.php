@@ -72,7 +72,8 @@ function display_lines($focus, $field, $value, $view){
 					  code_cc_c.id current_cost_center_id,
 					  code_cc_t.name target_cost_center,
 					  code_cc_t.id target_cost_center_id,
-					  hat.trans_status
+					  hat.trans_status,
+					  hat.acctual_complete_date
 					FROM
 					  hat_asset_trans hat
 					  LEFT JOIN haa_codes code_cc_c

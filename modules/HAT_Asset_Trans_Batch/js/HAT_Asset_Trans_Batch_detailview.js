@@ -13,16 +13,15 @@ $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.
 var global_eventOptions;
  /**
  * 点击按钮 调用Ajax请求 保存
- * 
+ *
  * @param name
  */
- function save(id, status_code) {
+ function saveStatusChange(id, status_code) {
+
  	$.ajax({
- 		url : 'index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=saveBean&id='
- 		+ id + "&status_code=" + status_code,
+ 		url : 'index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=saveStatusChange&id='+ id + "&status_code=" + status_code,
  		success : function(data) {
- 			window.location.href = "index.php?module=HAT_Asset_Trans_Batch&action=DetailView&record="
- 			+ id;
+ 			window.location.href = "index.php?module=HAT_Asset_Trans_Batch&action=DetailView&record=" + id;
  		},
 		error : function() { // 失败
 			alert('Error loading document');
@@ -39,29 +38,25 @@ var global_eventOptions;
  function changeStatus(id) {
 
  	$.ajax({
- 		url : 'index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=getListFields&id='
- 		+ id,
+ 		url : 'index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=getAvaliableStatusList&id=' + id,//读当前状态可变为的状态
  		success : function(data) {
  			var title_txt = SUGAR.language.get('HAT_Asset_Trans_Batch',
  				'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL');
  			var html = ""
  			html += title_txt;
  			html += data;
-			// html+="<input type='button' class='btn_detailview' id='btn_save'
-			// value='"+SUGAR.language.get('app_strings',
-			// 'LBL_SAVE_BUTTON_LABEL')+"'>";
-			YAHOO.SUGAR.MessageBox.show({
-				msg : html,
-				title : title_txt,
-				type : 'confirm',
-				fn : function(confirm) {
-					if (confirm == 'yes') {
-						console.log($("input[name='record']").val());
-						save($("input[name='record']").val(),
-							$("#asset_trans_status").val());
-					}
-				}
-			});
+			BootstrapDialog.confirm({
+		        title: title_txt,
+		        message: html,
+		        callback: function(result) {
+		            if(result) {
+		                //Clicked YES
+		                saveStatusChange($("input[name='record']").val(), $("#change_asset_trans_status").val());
+		            }else {
+		                //Clicked 'Nope.';
+		            }
+		        }
+		    });
 		},
 		error : function() { // 失败
 			alert('Error loading document');
@@ -85,17 +80,24 @@ function setEventTypeFields() {
 		}
 	})
 }
- function check_quantity(){
+ function check_quantity(){ 
+	 //本段逻辑用于检查当前事务处理行的数据是否超出了合同约定的数量
+	 //本段逻辑在点状态变更时生效
+	 //本段是基于ChinaCache的需要进行定制，目前还不明确，对于其它用户需求是否可用
+	 //
+	 if ($("#source_wo_id_val").val()=="" || $("#source_wo_id_val").val()=="undefined") {
+	 	return 'S';
+	 } else {
 		var error_msg="";
 		var formData=$("#EditView");
 		var formData_str = formData.serialize();
-		
+
 		var json_obj={};
 		$("input[id^='line_asset_id']").each(function(){
 			var id_name=$(this).attr("id");
 			var id_index = id_name.split("line_asset_id")[1];
 			if($("#line_deleted"+id_index).val()=="0"){
-				json_obj[id_name]=$(this).val();	
+				json_obj[id_name]=$(this).val();
 			}
 		});
 
@@ -119,8 +121,8 @@ function setEventTypeFields() {
 				 console.log(textStatus+errorThrown);
 			},
 			});
-	return error_msg;
-	
+		return error_msg;
+	}
 }
 
 
@@ -129,49 +131,50 @@ function setEventTypeFields() {
 	 * //触发FF SUGAR.util.doWhen("typeof setFF == 'function'", function(){
 	 * call_ff(); });
 	 */
-	 
 	 if ($("#hat_eventtype_id").val() != "") {
 			setEventTypeFields();//初始化EventType，完成后会将EventType的值写入global_eventOptions
 	}
-	 
-	 
+
+
 	 if (typeof hideButtonFlag != "undefined") {
 	 	$(".action_buttons").hide();
 	 }
 
-	 $("#line_items_span").parent("td").prev("td").hide();
+	 $("#line_items_span").parent("td").prev("td").hide();//隐藏事务处理行上的标签
 
-	 if (typeof $("#source_wo_id").attr("data-id-value") != "undefined") {
+	 if ($("#source_wo_id").val() != "" && $("#source_wo_id").val() != 'undefined') {
 		// 如果来源于工作单则显示工作单对象行信息，否则直接隐藏行
 		$("#wo_lines").append("<div id='wo_lines_display'></div>");
 		showWOLines($("#source_wo_id").attr("data-id-value"));
 	} else {
-		$("#wo_lines").parent("tr").hide();
+		//如果当前工单号为空，直接隐藏行
+		$("#wo_lines").parent("td").parent("tr").hide();
 	}
 
 
-	if ($("#asset_trans_status").val() == "DRAFT") {
-		var btn = $("<input type='button' class='btn_detailview' id='btn_submit' value='"
-			+ SUGAR.language.get('app_strings', 'LBL_SUBMIT_BUTTON_LABEL')
-			+ "'>");
+	var currentHeaderStatus = $("#asset_trans_status").val();
 
-		// $("#asset_trans_status").parent().append(btn);
-		//$("#edit_button").after(btn);
-	}
-
-	$("#btn_submit").click(function() {
-		$("#btn_submit").hide('normal',
-			updateStatus($("input[name='record']").val()));
-	});
-
-	var change_btn = $("<input type='button' class='btn_detailview' id='btn_change_status' value='"
-		+ SUGAR.language.get('HAT_Asset_Trans_Batch',
-			'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL') + "'>");
-	//20161213toney.wu DRAFT也要吧改状态
-/*	if ($("#asset_trans_status").val() == "DRAFT") {
+	if (currentHeaderStatus != "CANCELED" && currentHeaderStatus != "CLOSED") {
+	//如果不是取消及关闭状态，则显示出状态变更的按钮
+		var change_btn = $("<input type='button' class='btn_detailview' id='btn_change_status' value='"
+			+ SUGAR.language.get('HAT_Asset_Trans_Batch',
+				'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL') + "'>");
 		$("#edit_button").after(change_btn);
 	}
-*/	$("#edit_button").after(change_btn);
+
+
+	if (currentHeaderStatus == "DRAFT") {
+		//如果当前为DRAFT状态，则显示提交按钮
+		var submit_btn = $("<input type='button' class='btn_detailview' id='btn_submit' value='"
+			+ SUGAR.language.get('app_strings', 'LBL_SUBMIT_BUTTON_LABEL')
+			+ "'>");
+		$("#edit_button").after(submit_btn);
+
+		$("#btn_submit").click(function() {
+			$("#btn_submit").hide('normal', updateStatus2Submit($("input[name='record']").val()));
+		});
+	}
+
 
 	$("#btn_change_status").click(function() {
 		var msg = check_quantity();
@@ -182,12 +185,11 @@ function setEventTypeFields() {
 							'LBL_EMAIL_ERROR_GENERAL_TITLE'),
 					message : msg
 				});
-		}else{		
-			
+		}else{
 			var result = true;
 			//欠费
 			console.log(global_eventOptions);
-				if ($("#asset_trans_status").val()=="SUBMITTED"||$("#asset_trans_status").val()=="APPROVED"||$("#asset_trans_status").val()=="DRAFT") {//如果是提交状态，进行客户信息检查
+				if (currentHeaderStatus=="SUBMITTED"||currentHeaderStatus=="APPROVED"||currentHeaderStatus=="DRAFT") {//如果是提交状态，进行客户信息检查
 					if (global_eventOptions.check_customer_hold_c_owning == "1"){
 					//针对当前使用组织进行信息检查，如在报废或移出资产前确认，当前资产的拥有方是否有欠费行为
 						var ajaxStr='mode=accounthold&val='+$("#name").val()+'&id=' + $("#current_owning_org_id").val();
@@ -245,7 +247,7 @@ function setEventTypeFields() {
 			});
  };
 
- function updateStatus(object_id) {
+ function updateStatus2Submit(object_id) {
  	if (object_id) {
 		// ajaxStatus.flashStatus(SUGAR.language.get('app_strings',
 		// 'LBL_LOADING'),800);为什么Ajax不能正常的被调用@！？

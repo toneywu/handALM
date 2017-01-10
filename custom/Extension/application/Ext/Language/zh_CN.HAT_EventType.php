@@ -44,11 +44,12 @@ $app_list_strings['moduleListSingular']['HAT_EventType']='事件类型';
 $app_list_strings['asset_trans_status']=array (
   'DRAFT' => '未提交',
   'SUBMITTED' => '提交',
-  'APPROVED' => '已批准',
+  'APPROVED' => '已批准/待执行',
   'REJECTED' => '已拒绝',
   'CANCELED' => '取消',
-  'CLOSED' => '结束',
-  'TRANSACTED' => '已完成事务处理',
+  'CLOSED' => '处理完毕',
+  'TRANSACTED' => '已完成处理',
+  'AUTO_TRANSACTED' => '已按关联调整',
 );
 
 $app_list_strings['cux_event_type_option_list']=array (
@@ -64,6 +65,12 @@ $app_list_strings['cux_event_type_option2_list']=array (
   'OPTIONAL' => '任意，可按业务场景需要修改',
   'INVISIABLE' => '不可见',
   'EMPTY' => '清空',
+);
+
+$app_list_strings['cux_event_type_option3_list']=array (
+  'LOCKED' => '不可用',
+  'REQUIRED' => '必须启用',
+  'OPTIONAL' => '可按需启用',
 );
 
 $app_list_strings['hat_event_type_list']=array (

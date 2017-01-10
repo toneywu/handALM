@@ -282,9 +282,9 @@ function insertTransLineHeader(tableid){
   var head_html="<tr>";
   head_html +="<th width='3%'>#</th>";
   head_html +="<th width='15%'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE')+"</th>";
-  head_html +="<th width='15%'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_NAME')+"</th>";
-  head_html +="<th width='50%'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_DESCRIPTION')+"</th>";
-  head_html +="<th width='10%'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TRANS_STATUS')+"</th>";
+  head_html +="<th width='17%'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_NAME')+"</th>";
+  head_html +="<th width='45%'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_DESCRIPTION')+"</th>";
+  head_html +="<th width='13%'>"+SUGAR.language.get('HAT_Asset_Trans', 'LBL_TRANS_STATUS')+"</th>";
   head_html +="<th width='5%'> </th>";
   head_html +="<tr>";
 
@@ -588,6 +588,8 @@ if (document.getElementById(tableid + '_head') !== null) {
         "<input type='hidden' name='line_current_owning_person_desc[" + prodln + "]' id='line_current_owning_person_desc" + prodln + "'  value='' title='' >"+
         "<input type='hidden' name='line_description[" + prodln + "]' id='line_description" + prodln + "'  value='' title='' >"+
         "<input type='hidden' name='line_trans_status[" + prodln + "]' id='line_trans_status" + prodln + "'  value='' title='' >"+
+        "<input type='hidden' name='line_acctual_complete_date[" + prodln + "]' id='line_acctual_complete_date" + prodln + "'  value='' title='' >"+
+
         "</div></td>";
 
         addToValidate('EditView', 'line_asset'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Asset_Trans_Batch', 'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE'));
@@ -717,10 +719,13 @@ function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_line_asset"+ln).html("<a href='index.php?module=HAT_Assets&action=DetailView&record="+$("#line_asset_id"+ln).val()+"'>"+$("#line_asset"+ln).val()+"</a>");
   $("#displayed_line_name"+ln).html($("#line_name"+ln).val());
   $("#displayed_line_description"+ln).html($("#line_description"+ln).val());
-  $("#displayed_line_trans_status"+ln).html($("#line_trans_status"+ln).val());
 
+  if($("#line_trans_status"+ln).val()!=""&& $("#line_trans_status"+ln).val()!='undefined') { //事务处理行状态
+    $("#displayed_line_trans_status"+ln).html("<span class='color_tag color_doc_status_"+$("#line_trans_status"+ln).val()+"'>"+SUGAR.language.get('app_list_strings', 'asset_trans_status')[$("#line_trans_status"+ln).val()]+"</span><br/>"+$("#line_acctual_complete_date"+ln).val());
+  } else {
+    $("#displayed_line_trans_status"+ln).html("");
+  }
 }
-
 
 function resetEditorFields(ln) {
   //生成编辑行中的字段样式，如锁定一些字段，以及加颜色的字段
