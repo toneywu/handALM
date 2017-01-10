@@ -163,7 +163,7 @@ function setEventTypeFields() {
 	}
 
 
-	if (currentHeaderStatus == "DRAFT") {
+/*	if (currentHeaderStatus == "DRAFT") {
 		//如果当前为DRAFT状态，则显示提交按钮
 		var submit_btn = $("<input type='button' class='btn_detailview' id='btn_submit' value='"
 			+ SUGAR.language.get('app_strings', 'LBL_SUBMIT_BUTTON_LABEL')
@@ -174,7 +174,7 @@ function setEventTypeFields() {
 			$("#btn_submit").hide('normal', updateStatus2Submit($("input[name='record']").val()));
 		});
 	}
-
+*/
 
 	$("#btn_change_status").click(function() {
 		var msg = check_quantity();
@@ -222,12 +222,10 @@ function setEventTypeFields() {
 					}
 
 				}
-				//End欠费			
+				//End欠费
 
-			
 			changeStatus($("input[name='record']").val());
 		}
-		
 	});
 
 });
