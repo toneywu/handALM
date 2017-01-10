@@ -45,7 +45,7 @@ $dictionary['HIT_ODF_REL'] = array (
 	'inline_edit' => true,
 	'duplicate_merge' => true,
 	'fields' => array (
-		//è·³æŽ¥ç¼–å·
+		//Ìø½Ó±àºÅ
 	'jump_number' => array (
 			'required' => false,
 			'name' => 'jump_number',
@@ -68,7 +68,7 @@ $dictionary['HIT_ODF_REL'] = array (
 
 			
 		),
-		//ä½¿ç”¨è€…
+		//Ê¹ÓÃÕß
 	'odf_user' => array (
 			'required' => false,
 			'name' => 'odf_user',
@@ -91,7 +91,7 @@ $dictionary['HIT_ODF_REL'] = array (
 
 			
 		),
-		//ä½¿ç”¨è€…å¤‡æ³¨
+		//Ê¹ÓÃÕß±¸×¢
 	'odf_user_content' => array (
 			'required' => false,
 			'name' => 'odf_user_content',
@@ -114,7 +114,7 @@ $dictionary['HIT_ODF_REL'] = array (
 
 			
 		),
-		//Aç«¯æœºæˆ¿
+		//A¶Ë»ú·¿
 	'a_hat_asset_locations_id' => array (
 			'required' => false,
 			'name' => 'a_hat_asset_locations_id',
@@ -166,7 +166,73 @@ $dictionary['HIT_ODF_REL'] = array (
 
 			
 		),
-		//Aç«¯æœºæŸœ
+		
+			//A¶Ë»ú·¿ new
+	'a_hat_asset_locations_dis' => array (
+			'required' => false,
+			'name' => 'a_hat_asset_locations_dis',
+			'vname' => 'LBL_A_HAT_ASSET_LOCATIONS',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+		),
+				//A¶Ë»ú¹ñ new
+	'a_hit_racks_dis' => array (
+			'required' => false,
+			'name' => 'a_hit_racks_dis',
+			'vname' => 'LBL_A_HIT_RACKS',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+		),
+		
+		'a_palte_num' => array (
+			'required' => false,
+			'name' => 'a_palte_num',
+			'vname' => 'LBL_A_PALTE_NUM',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+		),
+		
+		
+		//A¶Ë»ú¹ñ
 	'a_hit_racks_id' => array (
 			'required' => false,
 			'name' => 'a_hit_racks_id',
@@ -218,7 +284,7 @@ $dictionary['HIT_ODF_REL'] = array (
 
 			
 		),
-		//Aç«¯ODFæž¶æ ‡è¯†
+		//A¶ËODF¼Ü±êÊ¶
 		'a_odf_mark' => 
   array (
     'required' => false,
@@ -263,17 +329,17 @@ $dictionary['HIT_ODF_REL'] = array (
     'merge_filter' => 'disabled',
     'len' => '255',
     'size' => '20',
-    'id_name' => 'a_odf_mark',//è¿”å›žçš„å€¼ æ˜¾ç¤ºnameå­˜å‚¨id
+    'id_name' => 'a_odf_mark',//·µ»ØµÄÖµ ÏÔÊ¾name´æ´¢id
     'ext2' => 'HAT_Assets',
     'module' => 'HAT_Assets',
-    'rname' => 'attribute5',//åœ¨ç•Œé¢ä¸Šé¢æ˜¾ç¤ºå…¶ä»–æ¨¡å—çš„ HAT_Assetsçš„Nameå­—æ®µ ä¹Ÿå°±æ˜¯å‰å°æ˜¾ç¤º
+    'rname' => 'attribute5',//ÔÚ½çÃæÉÏÃæÏÔÊ¾ÆäËûÄ£¿éµÄ HAT_AssetsµÄName×Ö¶Î Ò²¾ÍÊÇÇ°Ì¨ÏÔÊ¾
     'quicksearch' => 'enabled',
     'studio' => 'visible',
 
   ),
 		
 		
-		//Aç«¯èŠ¯æ•°
+		//A¶ËÐ¾Êý
 	'a_odf_cores' => array (
 			'required' => false,
 			'name' => 'a_odf_cores',
@@ -296,7 +362,7 @@ $dictionary['HIT_ODF_REL'] = array (
 
 			
 		),
-		//Aç«¯ä¸‹è”-æœºæŸœç¼–å·
+		//A¶ËÏÂÁª-»ú¹ñ±àºÅ
 	'a_odf_rack_nums' => array (
 			'required' => false,
 			'name' => 'a_odf_rack_nums',
@@ -319,7 +385,7 @@ $dictionary['HIT_ODF_REL'] = array (
 
 			
 		),
-		//Aç«¯ä¸‹è”ODFæˆ–è®¾å¤‡
+		//A¶ËÏÂÁªODF»òÉè±¸
 	'a_odf_assets_id' => array (
 			'required' => false,
 			'name' => 'a_odf_assets_id',
@@ -371,7 +437,7 @@ $dictionary['HIT_ODF_REL'] = array (
 
 			
 		),
-		//Aç«¯ä¸‹è”ç«¯å£æˆ–èŠ¯æ•°
+		//A¶ËÏÂÁª¶Ë¿Ú»òÐ¾Êý
 	'a_odf_ports' => array (
 			'required' => false,
 			'name' => 'a_odf_ports',
@@ -394,7 +460,7 @@ $dictionary['HIT_ODF_REL'] = array (
 
 			
 		),
-		//Bç«¯æœºæˆ¿
+		//B¶Ë»ú·¿
 	'b_hat_asset_locations_id' => array (
 			'required' => false,
 			'name' => 'b_hat_asset_locations_id',
@@ -447,7 +513,7 @@ $dictionary['HIT_ODF_REL'] = array (
 			
 		),
 
-		//Bç«¯æœºæŸœ
+		//B¶Ë»ú¹ñ
 	'b_hit_racks_id' => array (
 			'required' => false,
 			'name' => 'b_hit_racks_id',
@@ -499,7 +565,75 @@ $dictionary['HIT_ODF_REL'] = array (
 
 			
 		),
-		//Bç«¯ODFæž¶æ ‡è¯†
+		
+		
+		//A¶Ë»ú·¿ new
+	'b_hat_asset_locations_dis' => array (
+			'required' => false,
+			'name' => 'b_hat_asset_locations_dis',
+			'vname' => 'LBL_B_HAT_ASSET_LOCATIONS',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+		),
+				//A¶Ë»ú¹ñ new
+	'b_hit_racks_dis' => array (
+			'required' => false,
+			'name' => 'b_hit_racks_dis',
+			'vname' => 'LBL_B_HIT_RACKS',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+		),
+		
+		'b_palte_num' => array (
+			'required' => false,
+			'name' => 'b_palte_num',
+			'vname' => 'LBL_B_PALTE_NUM',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+		),
+		
+		
+		
+		//B¶ËODF¼Ü±êÊ¶
 		'b_odf_mark' => 
   array (
     'required' => false,
@@ -544,15 +678,15 @@ $dictionary['HIT_ODF_REL'] = array (
     'merge_filter' => 'disabled',
     'len' => '255',
     'size' => '20',
-    'id_name' => 'b_odf_mark',//è¿”å›žçš„å€¼ æ˜¾ç¤ºnameå­˜å‚¨id
+    'id_name' => 'b_odf_mark',//·µ»ØµÄÖµ ÏÔÊ¾name´æ´¢id
     'ext2' => 'HAT_Assets',
     'module' => 'HAT_Assets',
-    'rname' => 'attribute9',//åœ¨ç•Œé¢ä¸Šé¢æ˜¾ç¤ºå…¶ä»–æ¨¡å—çš„ HAT_Assetsçš„Nameå­—æ®µ ä¹Ÿå°±æ˜¯å‰å°æ˜¾ç¤º
+    'rname' => 'attribute9',//ÔÚ½çÃæÉÏÃæÏÔÊ¾ÆäËûÄ£¿éµÄ HAT_AssetsµÄName×Ö¶Î Ò²¾ÍÊÇÇ°Ì¨ÏÔÊ¾
     'quicksearch' => 'enabled',
     'studio' => 'visible',
 
   ),
-		//Bç«¯èŠ¯æ•°
+		//B¶ËÐ¾Êý
 	'b_odf_cores' => array (
 			'required' => false,
 			'name' => 'b_odf_cores',
@@ -575,7 +709,7 @@ $dictionary['HIT_ODF_REL'] = array (
 
 			
 		),
-		//Bç«¯ä¸‹è”-æœºæŸœç¼–å·
+		//B¶ËÏÂÁª-»ú¹ñ±àºÅ
 	'b_odf_rack_nums' => array (
 			'required' => false,
 			'name' => 'b_odf_rack_nums',
@@ -598,7 +732,7 @@ $dictionary['HIT_ODF_REL'] = array (
 
 			
 		),
-		//Bç«¯ä¸‹è”ODFæˆ–è®¾å¤‡
+		//B¶ËÏÂÁªODF»òÉè±¸
 	'b_odf_assets_id' => array (
 			'required' => false,
 			'name' => 'b_odf_assets_id',
@@ -650,7 +784,7 @@ $dictionary['HIT_ODF_REL'] = array (
 
 			
 		),
-		//Bç«¯ä¸‹è”ç«¯å£æˆ–èŠ¯æ•°
+		//B¶ËÏÂÁª¶Ë¿Ú»òÐ¾Êý
 	'b_odf_ports' => array (
 			'required' => false,
 			'name' => 'b_odf_ports',

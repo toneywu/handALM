@@ -81,28 +81,13 @@ array (
         array (
           0 => 
           array (
-            'name' => 'a_hat_asset_locations',
-            'studio' => 'visible',
+            'name' => 'a_hat_asset_locations_dis',
             'label' => 'LBL_A_HAT_ASSET_LOCATIONS',
-            'displayParams' => 
-            array (
-              'initial_filter' => '&site_type=F',
-            ),
           ),
           1 => 
           array (
-            'name' => 'a_hit_racks',
-            'studio' => 'visible',
+            'name' => 'a_hit_racks_dis',
             'label' => 'LBL_A_HIT_RACKS',
-            'displayParams' => 
-            array (
-              'initial_filter' => '&current_mode=1&site_type=J',
-              'field_to_name_array' => 
-              array (
-                'name' => 'a_hit_racks',
-                'id' => 'a_hit_racks_id',
-              ),
-            ),
           ),
         ),
         1 => 
@@ -114,7 +99,7 @@ array (
             'label' => 'LBL_A_ODF_MARK_NAME',
             'displayParams' => 
             array (
-			  'initial_filter' => '&asset_type=ODF',
+              'initial_filter' => '&asset_type=ODF',
               'field_to_name_array' => 
               array (
                 'attribute5' => 'a_odf_mark_name',
@@ -126,27 +111,32 @@ array (
           ),
           1 => 
           array (
-            'name' => 'a_odf_cores',
-            'label' => 'LBL_A_ODF_CORES',
+            'name' => 'a_palte_num',
+            'label' => 'LBL_A_PALTE_NUM',
           ),
         ),
         2 => 
         array (
           0 => 
           array (
-            'name' => 'a_odf_rack_nums',
-            'label' => 'LBL_A_ODF_RACK_NUMS',
+            'name' => 'a_odf_cores',
+            'label' => 'LBL_A_ODF_CORES',
           ),
           1 => 
           array (
-            'name' => 'a_odf_assets',
-            'studio' => 'visible',
-            'label' => 'LBL_A_ODF_ASSETS',
+            'name' => 'a_odf_rack_nums',
+            'label' => 'LBL_A_ODF_RACK_NUMS',
           ),
         ),
         3 => 
         array (
           0 => 
+          array (
+            'name' => 'a_odf_assets',
+            'studio' => 'visible',
+            'label' => 'LBL_A_ODF_ASSETS',
+          ),
+          1 => 
           array (
             'name' => 'a_odf_ports',
             'label' => 'LBL_A_ODF_PORTS',
@@ -159,28 +149,13 @@ array (
         array (
           0 => 
           array (
-            'name' => 'b_hat_asset_locations',
-            'studio' => 'visible',
+            'name' => 'b_hat_asset_locations_dis',
             'label' => 'LBL_B_HAT_ASSET_LOCATIONS',
-            'displayParams' => 
-            array (
-              'initial_filter' => '&site_type=F',
-            ),
           ),
           1 => 
           array (
-            'name' => 'b_hit_racks',
-            'studio' => 'visible',
+            'name' => 'b_hit_racks_dis',
             'label' => 'LBL_B_HIT_RACKS',
-            'displayParams' => 
-            array (
-              'initial_filter' => '&current_mode=1&site_type=J',
-              'field_to_name_array' => 
-              array (
-                'name' => 'b_hit_racks',
-                'id' => 'b_hit_racks_id',
-              ),
-            ),
           ),
         ),
         1 => 
@@ -192,7 +167,7 @@ array (
             'label' => 'LBL_B_ODF_MARK_NAME',
             'displayParams' => 
             array (
-			  'initial_filter' => '&asset_type=ODF',
+              'initial_filter' => '&asset_type=ODF',
               'field_to_name_array' => 
               array (
                 'attribute9' => 'b_odf_mark_name',
@@ -204,27 +179,32 @@ array (
           ),
           1 => 
           array (
-            'name' => 'b_odf_cores',
-            'label' => 'LBL_B_ODF_CORES',
+            'name' => 'b_palte_num',
+            'label' => 'LBL_B_PALTE_NUM',
           ),
         ),
         2 => 
         array (
           0 => 
           array (
-            'name' => 'b_odf_rack_nums',
-            'label' => 'LBL_B_ODF_RACK_NUMS',
+            'name' => 'b_odf_cores',
+            'label' => 'LBL_B_ODF_CORES',
           ),
           1 => 
           array (
-            'name' => 'b_odf_assets',
-            'studio' => 'visible',
-            'label' => 'LBL_B_ODF_ASSETS',
+            'name' => 'b_odf_rack_nums',
+            'label' => 'LBL_B_ODF_RACK_NUMS',
           ),
         ),
         3 => 
         array (
           0 => 
+          array (
+            'name' => 'b_odf_assets',
+            'studio' => 'visible',
+            'label' => 'LBL_B_ODF_ASSETS',
+          ),
+          1 => 
           array (
             'name' => 'b_odf_ports',
             'label' => 'LBL_B_ODF_PORTS',

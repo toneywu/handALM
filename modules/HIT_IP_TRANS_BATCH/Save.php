@@ -109,7 +109,7 @@ function save_lines($post_data, $parent, $key = '') {
 			$trans_line->save();
 			$GLOBALS['log']->infor("transLine Saved");
 
-			if ($parent->asset_trans_status == "APPROVED") {
+			if ($parent->asset_trans_status == "CLOSED") {
 				$GLOBALS['log']->infor("allocation Lines Begin to process");
 				save_allocation_lines($trans_line, $parent, $prev_trans_batch_id);
 				$GLOBALS['log']->infor("End to process Allocation Lines");
@@ -187,7 +187,7 @@ function save_allocation_lines($trans_line_bean, $parent, $prev_trans_batch_id) 
 	echo "-----id = ".$trans_line_bean->port."<br>";
 	$sql ='SELECT h.id
 			FROM hit_ip_allocations h
-			WHERE (IFNULL(h.port,"$$$$$")=IFNULL("'.$trans_line_bean->port.'","$$$$$") or (h.port is null and "'.$trans_line_bean->port.'"="" ) )
+			WHERE IFNULL(h.port,"$$$$$")=IFNULL("'.$trans_line_bean->port.'","$$$$$")
 			and   h.enable_action=1
 			AND   IFNULL(h.hit_ip_subnets_id,"$$$$$")=IFNULL("'.$trans_line_bean->hit_ip_subnets_id.'","$$$$$")
 			AND   h.deleted=0';

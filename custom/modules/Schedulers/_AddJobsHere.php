@@ -87,7 +87,6 @@ function sync_jt_accounts() {
 	$json_array = $soap_util_bean->call_soap_ws("CUSTOMER", "JT");
 	$GLOBALS['log']->infor("begin to sync jt customer data");
 	//$GLOBALS['log']->infor($json_array);
-	//处理数据
 	$frame_bean = BeanFactory :: getBean('HAA_Frameworks')->retrieve_by_string_fields(array (
 		'code' => 'ChinaCache'
 	));
@@ -235,7 +234,6 @@ function sync_jt_contracts() {
 	
 	$frame_bean = BeanFactory :: getBean('HAA_Frameworks')->retrieve_by_string_fields(array (
 		'code' => 'ChinaCache'
-		
 	));
 	
 	$contract_fix_type = BeanFactory :: getBean('HAA_Codes')->retrieve_by_string_fields(array (
@@ -348,7 +346,6 @@ function sync_jt_contracts() {
 			$newBean->attribute6_c = $salesrep_name_val;
 			$newBean->haa_frameworks_id_c = $frame_bean->id;
 			$contact_id = create_guid();
-		    //$newBean->save();
 			$insert_sql = 'insert into aos_contracts(
 			     id
 				,name
@@ -419,7 +416,7 @@ function sync_jt_contracts() {
 			
 			$GLOBALS['log']->infor("insert_cstm_sql = " . $insert_cstm_sql);
 			
-			$GLOBALS['log']->infor("header_id = " . $newBean->id . ",header_name=" . $sales_document_name_val . ",org_name_val=" . $org_name_val . ",sold_to_org_name_val" . $sold_to_org_name_val . ",sale_unit_val=" . $sale_unit_val . ",salesrep_name_val=" . $salesrep_name_val . ",contract_type_val=" . $contract_type_val . ",order_type_name_val" . $order_type_name_val . ",frame_contract_num_val=" . $frame_contract_num_val . ",start_date=" . $h_start_date_active_val);
+			$GLOBALS['log']->infor("合同头标示 = " . $newBean->id . ",合同名称=" . $sales_document_name_val . ",org_name_val=" . $org_name_val . ",sold_to_org_name_val" . $sold_to_org_name_val . ",sale_unit_val=" . $sale_unit_val . ",salesrep_name_val=" . $salesrep_name_val . ",contract_type_val=" . $contract_type_val . ",order_type_name_val" . $order_type_name_val . ",frame_contract_num_val=" . $frame_contract_num_val . ",start_date=" . $h_start_date_active_val);
 			
 			foreach ($record['LINES'] as $line_key => $line_value) {
 				$contract_line_id_val = $line_value['CONTRACT_LINE_ID'];
@@ -435,7 +432,8 @@ function sync_jt_contracts() {
 				$start_date_active_val = $line_value['START_DATE_ACTIVE'];
 				$end_date_active_val = $line_value['END_DATE_ACTIVE'];
 				$formula_type_code_val = $line_value['FORMULA_TYPE_CODE'];
-				$GLOBALS['log']->infor("line_id= " . $contract_line_id_val . ",LINE_NUMBER=" . $line_num_val . ",item_number_val=" . $item_number_val . ",inventory_item_name_val=" . $inventory_item_name_val."producty_quantity= ".$quantity_val);
+				$product_code_val = $line_value['PRODUCT_CODE'];
+				$GLOBALS['log']->infor("合同行标示= " . $contract_line_id_val . ",合同行号=" . $line_num_val . ",物料编码=" . $item_number_val . ",物料名称=" . $inventory_item_name_val."产品数量= ".$quantity_val.'集团产品编码='.$product_code_val);
 				
 				$sql = 'SELECT count(1) cnt FROM aos_products_quotes INNER JOIN aos_products_quotes_cstm WHERE aos_products_quotes.id = aos_products_quotes_cstm.id_c and aos_products_quotes.deleted=0 AND aos_products_quotes_cstm.product_source_id_c ="' . $contract_line_id_val . '" and aos_products_quotes.parent_id="'.$contact_id.'"';
 				$result = $db->query($sql);
@@ -448,19 +446,19 @@ function sync_jt_contracts() {
 					$newLineBean->parent_id = $newBean->id;
 					$newLineBean->data_source_id_c = $contract_line_id_val;
 					$newLineBean->name = $inventory_item_name_val;
-					//INVENTORY_ITEM_name
-					$item_list_sql = 'SELECT aos_products.id  FROM aos_products  WHERE aos_products.deleted=0 and aos_products.part_number ="' . $item_number_val . '"';
+					//产品 集团的产品转换成欣润的产品 欣润的数据线导入 存在系统中的 update by yuan.chen 2017-1-10 10:01
+					$item_list_sql = 'SELECT aos_products.id  FROM aos_products  WHERE aos_products.deleted=0 and aos_products.attribute10_c ="' . $product_code_val . '"';
 					$item_list_result = $db->query($item_list_sql);
 					while ($item_list_record = $db->fetchByAssoc($item_list_result)) {
 						$record_val = $item_list_record['id'];
 						$newLineBean->product_id = $record_val;
 					}
-					
-					
+
 					$newLineBean->product_discount = $parent_description_val;
 					if(empty($parent_description_val)){
 						$newLineBean->product_discount =null;
 					}
+					
 					$newLineBean->vat_amt = $open_type_val;
 					$newLineBean->product_qty = $quantity_val;
 					$newLineBean->effective_start_c = $start_date_active_val;
@@ -762,6 +760,7 @@ function sync_xr_products() {
 				$item_number_val         = $record['ITEM_NUMBER'];
 				$parent_product          = $record['PARENT_PRODUCT'];
 				$primary_uom_code        = $record['PRIMARY_UOM_CODE'];
+				$attribute11             = $record['ATTRIBUTE11'];
 				
 				$check_product           = BeanFactory :: getBean('AOS_Products')->get_full_list('', "aos_products.part_number = '".$product_code_val."'");
 				
@@ -780,6 +779,7 @@ function sync_xr_products() {
 					$product_bean->data_source_reference_c = 'PRO_PRODUCT_BASE_INFO';
 					$product_bean->data_source_id_c = $product_id_val;
 					$product_bean->description = $parent_product;
+					$product_bean->attribute10_c = $attribute11;
 					//*********
 					$check_product_category = BeanFactory :: getBean('AOS_Product_Categories')->get_full_list('', "aos_product_categories.name = '{$item_category_val}'");
 					
@@ -830,7 +830,8 @@ function sync_xr_products() {
 									,haa_frameworks_id_c
 									,data_source_code_c
 									,data_source_reference_c
-									,data_source_id_c)
+									,data_source_id_c
+									,attribute10_c)
 									 value(
 									 "' . $product_id . 
 									 '","' . $product_bean->haa_uom_id_c . 
@@ -838,12 +839,14 @@ function sync_xr_products() {
 									 '","' . $product_bean->data_source_code_c . 
 									 '","' . $product_bean->data_source_reference_c . 
 									 '","' . $product_bean->data_source_id_c . 
+									 '","' . $product_bean->attribute10_c . 
 									 '") ';
 					$insert_cstm_result = $db->query($insert_cstm_sql);
 					$GLOBALS['log']->infor("product_cstm_ql  = ".insert_cstm_sql);
 				}else{
 					$product_bean = $check_product[0];
 					$product_bean->name=$product_name_val;
+					$product_bean->attribute10_c=$attribute11;
 					$product_bean->save();
 				}
 			}

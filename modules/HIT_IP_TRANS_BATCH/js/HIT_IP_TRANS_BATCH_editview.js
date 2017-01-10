@@ -140,7 +140,7 @@ $(document).ready(function(){
 	    $("#asset_trans_status option[value='SUBMITTED']").remove();
         $("#asset_trans_status option[value='REJECTED']").remove();
         $("#asset_trans_status option[value='CANCELED']").remove();
-        $("#asset_trans_status option[value='CLOSED']").remove();
+        //$("#asset_trans_status option[value='CLOSED']").remove();
         $("#asset_trans_status option[value='TRANSACTED']").remove();
         
 	
@@ -234,7 +234,7 @@ $(document).ready(function(){
     }
 	
 	//add by yuan.chen 2016-12-08
-	if($("#asset_trans_status").val()=="APPROVED"){
+	if($("#asset_trans_status").val()=="CLOSED"){
 	   //$("#EditView_tabs button").css("display","none");
 	   $("#EditView_tabs input").attr("readonly",true);
        $("#EditView_tabs input").attr("style","background-Color:#efefef");

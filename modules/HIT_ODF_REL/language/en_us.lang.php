@@ -92,4 +92,6 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL2' => 'B端',
   'LBL_AUTONUM' => '[Automatically Assigned after Saving]',
   'LBL_LINK_SELECTOR'=>'ODF跳接关系',
+  'LBL_A_PALTE_NUM'=>'A端盘号',
+  'LBL_B_PALTE_NUM'=>'B端盘号',
 );

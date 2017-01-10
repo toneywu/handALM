@@ -22,7 +22,7 @@ require_once ('modules/HAT_Assets/updateAssets.php');
 
 
 		//如果是新增 但是状态直接是提交 那么也当成需要完成资产调拨 满足条件1
-		if(empty($current_header_id)&&($_POST['asset_trans_status']=="APPROVED")){
+		if(empty($current_header_id)&&($_POST['asset_trans_status']=="CLOSED")){
 			$need_allocation="Y";
 		}else{
 			//如果有值 则通过数据库来判断
@@ -30,7 +30,7 @@ require_once ('modules/HAT_Assets/updateAssets.php');
 			$check_result = $db->query($check_sql);
 			while ($check_record = $db->fetchByAssoc($check_result)) {
 				$db_status = $check_record['asset_trans_status'];
-				if($db_status!="APPROVED"&&$_POST['asset_trans_status']=="APPROVED"){
+				if($db_status!="CLOSED"&&$_POST['asset_trans_status']=="CLOSED"){
 					$need_allocation="Y";
 				}
 			}
