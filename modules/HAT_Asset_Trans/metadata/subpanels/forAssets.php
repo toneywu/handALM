@@ -10,7 +10,7 @@ $subpanel_layout = array (
       'type' => 'enum',
       'studio' => 'visible',
       'vname' => 'LBL_TRANS_STATUS',
-      'width' => '5%',
+      'width' => '10%',
       'default' => true,
     ),
     'header' => 
@@ -19,19 +19,6 @@ $subpanel_layout = array (
       'width' => '15%',
       'default' => true,
     ),
-/*    'asset' => 
-    array (
-      'vname' => 'LBL_ASSET',
-      //'widget_class' => 'SubPanelDetailViewLink',
-      'width' => '13%',
-      'default' => true,
-    ),
-    'name' => 
-    array (
-      'vname' => 'LBL_NAME',
-      'width' => '15%',
-      'default' => true,
-    ),*/
     'date_modified' => 
     array (
       'vname' => 'LBL_DATE_MODIFIED',
@@ -42,7 +29,7 @@ $subpanel_layout = array (
     array (
       'studio' => 'visible',
       'vname' => 'LBL_DESCRIPTION',
-      'width' => '70%',
+      'width' => '65%',
       'default' => true,
     ),
   ),

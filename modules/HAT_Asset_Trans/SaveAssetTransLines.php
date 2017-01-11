@@ -50,9 +50,9 @@ function save_lines($post_data, $header, $key = '', $need_allocation){
                         save_rack_allocations($trans_line, $header);
                     }
                     save_asset_lines($trans_line);//保存行上的资产信息
-
-                    $trans_line->acctual_complete_date = $timedate->now();//将行上的事务处理时间标记为当时时间
-                    $trans_line->trans_status='CLOSED';
+                    //$trans_line->description = '$timedate->nowDB()='.$timedate->nowDB().' $timedate->now()='.$timedate->now();
+                    $trans_line->acctual_complete_date = $timedate->nowDB();//将行上的事务处理时间标记为当时时间
+                    $trans_line->trans_status = 'CLOSED';//将当前行标记为结束
                 } else {
                     $trans_line->trans_status = $header->asset_trans_status;//父状态
                 }

@@ -14,19 +14,28 @@ function setEventTypeReturn(popupReplyData){
 	call_ff();
 }
 
-function setHatAssetsRetuen(popupReplyData){
+function setHatAssetsReturn(popupReplyData){
     var contact_id=popupReplyData['name_to_value_array']['contact_id_c'];
+    var asset_id=popupReplyData['name_to_value_array']['hat_assets_id_c'];
+    console.log(popupReplyData);
     var person_number="";
     $.ajax({
-        url:"?module=HAT_Incidents&action=getPersonNumber&to_pdf=true",
+        url:"?module=HAT_Incidents&action=getTimebasedPersonInfor&to_pdf=true",
         type:"GET",
         async: false,
-        data:"&contact_id="+contact_id,
+        data:"&asset_id="+asset_id+"&event_time="+$("#event_date").val(),
         success:function(data){
-            person_number=data;
+
+            //console.log ("?module=HAT_Incidents&action=getTimebasedPersonInfor&to_pdf=true&asset_id="+asset_id+"&event_time="+$("#event_date").val())
+            data = JSON.parse(data);
+            console.log(popupReplyData);
+
+            person_id=data.id;
+            person_name=data.name;
         }
     });
-    popupReplyData['name_to_value_array']['person_number']=person_number;
+    popupReplyData['name_to_value_array']['person_number']=person_name;
+    popupReplyData['name_to_value_array']['contact_id_c']=person_id;
     set_return(popupReplyData);
 
 }
@@ -35,4 +44,3 @@ function call_ff() {
 	triger_setFF($("#haa_ff_id").val(),"HAT_Incidents");
 	$(".expandLink").click();
 }
-

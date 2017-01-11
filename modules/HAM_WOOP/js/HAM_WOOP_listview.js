@@ -18,7 +18,6 @@
 
 
 $(document).ready(function(){
-		    
 	        $("#woop_status option[value='REJECTED']").remove();
 	        $("#woop_status option[value='WORKING']").remove();
 	        $("#woop_status option[value='TRANSACTED']").remove();
