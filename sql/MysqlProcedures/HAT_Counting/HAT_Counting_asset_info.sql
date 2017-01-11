@@ -4,7 +4,8 @@ DROP procedure IF EXISTS `HAT_Counting_asset_info`;
 DELIMITER $$
 USE `suitecrm`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `HAT_Counting_asset_info`(IN p_framework_id varchar(100),
-                             in p_batch_id varchar(100))
+                             in p_batch_id varchar(100),
+                             in p_user_id varchar(100))
 BEGIN
 
 DECLARE  not_found INT DEFAULT 0;
@@ -195,7 +196,7 @@ call HAT_Counting_create_temp();
     set rule_sql =concat(rule_sql ,',\'$\'');
     end if;
     #插入盘点任务
-    call HAT_Counting_asset_info_toCountingTask(rule_sql,p_batch_id,location_flag,org_flag,major_flag,category_flag,user_person_flag,own_person_flag);
+    call HAT_Counting_asset_info_toCountingTask(rule_sql,p_batch_id,location_flag,org_flag,major_flag,category_flag,user_person_flag,own_person_flag,p_user_id);
   set rule_sql = '\'!\'';
 FETCH  cur_rule INTO batch_rule_id,location_flag,location_id,location_son_flag,org_flag,org_id,org_son_flag,
            major_flag,major_id,major_son_flag,category_flag,category_id,category_son_flag,user_person_flag,

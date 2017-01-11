@@ -23,7 +23,7 @@ class HAT_Counting_BatchsViewEdit extends ViewEdit
 
 		$modules=array(
 			'HAT_Counting_Batch_Rules',
-			);	
+			);
 		foreach($modules as $module){
 			if(!is_file($GLOBALS['sugar_config']['cache_dir'].'jsLanguage/'.$module.'/'.$GLOBALS['current_language'].'.js')){
 				require_once'include/language/jsLanguage.php';
@@ -31,6 +31,7 @@ class HAT_Counting_BatchsViewEdit extends ViewEdit
 			}
 			echo'<script type="text/javascript"src="'.$GLOBALS['sugar_config']['cache_dir'].'jsLanguage/'.$module.'/'.$GLOBALS['current_language'].'.js?s='.$GLOBALS['js_version_key'].'&c='.$GLOBALS['sugar_config']['js_custom_version'].'&j='.$GLOBALS['sugar_config']['js_lang_version'].'"></script>';
 		}
+
 		if($this->bean->id!=''){
 			$sql="SELECT 
 			hcb.snapshot_date

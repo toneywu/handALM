@@ -10,7 +10,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `HAT_Counting_asset_info_toCountingL
                                               in p_category_id_c varchar(100),
                                               in p_user_id_c varchar(100),
                                               in p_own_id_c varchar(100),
-                                              in p_framework_id varchar(100))
+                                              in p_framework_id varchar(100),
+                                              in p_user_id varchar(100))
                                               
 BEGIN
   DECLARE  not_found_line INT DEFAULT 0;
@@ -84,7 +85,9 @@ hat_counting_tasks_id_c,
 haa_codes_id_c,
 user_contacts_id_c,
 own_contacts_id_c,
-fixed_asset_id
+fixed_asset_id,
+modified_user_id,
+created_by
 ) values(
 line_id,
 description_c,
@@ -101,7 +104,9 @@ p_task_id,
 owning_major_id_c,
 user_person_id_c,
 owning_person_id_c,
-fixed_asset_id_c);
+fixed_asset_id_c,
+p_user_id,
+p_user_id);
   set relationship_id=uuid();
     set result_id=uuid();
     #插入关系表
@@ -131,14 +136,16 @@ major_diff_flag,
 user_contacts_id_c,
 own_contacts_id_c,
 user_diff_flag,
-own_diff_flag
+own_diff_flag,
+modified_user_id,
+created_by
 ) 
 values(
 result_id,
 '1',
 g_sysdate,
 g_sysdate,
-'Matched',
+null,
 null,
 null,
 '1',
@@ -146,14 +153,14 @@ null,
 0,
 0,
 0,
-'Retire',
+null,
 'Init',
 null,
 0,
 null,
 null,
 0,
-0);
+0,p_user_id,p_user_id);
     FETCH  cur_info INTO asset_id_c,owning_org_id_c,asset_location_id_c,owning_major_id_c,product_category_id_c,asset_status_c,description_c,user_person_id_c,owning_person_id_c,fixed_asset_id_c;
 END WHILE;
 CLOSE  cur_info;

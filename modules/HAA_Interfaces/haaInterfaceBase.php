@@ -89,14 +89,16 @@ class haaInterfaceBase {
 		require_once($include_file);
 
 		$this->interfaceProcessClass = new $execute_func_files();
-		
+
 		$this->interfaceProcessReturn = $this->interfaceProcessClass->$execute_func_name($paramsArray);
-	
+		
 		if($this->interfaceProcessReturn["return_status"]=='0'){
 			$interfaceLog = BeanFactory::getBean('HAA_Interface_Logs');
 			$interfaceLog->haa_interface_id_c =$ifaceId;
-			$interfaceLog->seq = $db->getOne("SELECT ifnull(MAX(seq),0)+1 FROM HAA_Interface_Logs where haa_interface_id_c='".$ifaceId."'");
+			$interfaceLog->seq = $db->getOne("SELECT ifnull(MAX(seq),0)+1 FROM haa_interface_logs where haa_interface_id_c='".$ifaceId."'");
+
 			$interfaceLog->save(false);
+				
 			$interface = BeanFactory::getBean('HAA_Interfaces',$ifaceId);
 			$interface ->last_sync_date=$timedate->nowDb();
 			$interface ->save(false);

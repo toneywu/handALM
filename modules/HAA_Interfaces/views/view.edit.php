@@ -7,7 +7,7 @@ class HAA_InterfacesViewEdit extends ViewEdit
 {
 
 	function Display(){
-		require_once('modules/HAA_Frameworks/orgSelector_class.php');
+        require_once('modules/HAA_Frameworks/orgSelector_class.php');
         $current_framework_id = empty($this->bean->hat_framework_id)?"":$this->bean->hat_framework_id;
         $current_module = $this->module;
         $current_action = $this->action;
@@ -19,5 +19,5 @@ class HAA_InterfacesViewEdit extends ViewEdit
         $this->ss->assign('FRAMEWORK_C',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id_c'));
         
         parent::Display();
-	}
+    }
 }
