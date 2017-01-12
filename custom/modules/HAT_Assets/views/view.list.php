@@ -8,6 +8,8 @@ class HAT_AssetsViewList extends ViewList
     global $app_list_strings;
     $this->ss->assign('APP_LIST', $app_list_strings);
 	
+	
+	
 	echo '<script src="modules/HAT_Assets/js/listview_HAT_Assets.js"></script>';
 	echo '<script src="cache/include/javascript/sugar_grp_yui_widgets.js"></script>';
 	echo '<script src="custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js"></script>';

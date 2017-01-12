@@ -137,12 +137,17 @@ $(document).ready(function(){
 		$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');
 	}
 	
-	    $("#asset_trans_status option[value='SUBMITTED']").remove();
-        $("#asset_trans_status option[value='REJECTED']").remove();
-        $("#asset_trans_status option[value='CANCELED']").remove();
-        //$("#asset_trans_status option[value='CLOSED']").remove();
-        $("#asset_trans_status option[value='TRANSACTED']").remove();
-        
+	    
+       var current_header_status = $("#asset_trans_status").val();
+       if (current_header_status=="DRAFT") {//可以DRAFT和SUBMIT
+			$("#asset_trans_status option[value='SUBMITTED']").remove();
+			$("#asset_trans_status option[value='REJECTED']").remove();
+			$("#asset_trans_status option[value='APPROVED']").remove();
+			$("#asset_trans_status option[value='CANCELED']").remove();
+			//$("#asset_trans_status option[value='CLOSED']").remove();
+			$("#asset_trans_status option[value='AUTO_TRANSACTED']").remove();
+			$("#asset_trans_status option[value='TRANSACTED']").remove();
+	   }
 	
 	
 	//触发FF

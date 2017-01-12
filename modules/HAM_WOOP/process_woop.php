@@ -25,7 +25,7 @@ $include_reject_wo=$_GET['include_reject_wo_val'];
 	while($latest_woop = $db->fetchByAssoc($latest_woop_result)) {
 		 $latest_woop_id= $latest_woop["id"];
 	}
-	echo $latest_woop_sql;
+	echo $latest_woop_sql."<br>";
 	$latest_woop_bean = BeanFactory :: getBean('HAM_WOOP')->retrieve_by_string_fields(array (
 													'id' => $latest_woop_id));	
 
@@ -104,6 +104,7 @@ if ($reject_woop_bean->act_module == 'HIT_IP_TRANS_BATCH') {
 				}
 				//事物处理单行行上面存历史表id
 				$trans_line->history_id = $allocation_line_bean->id;
+				$trans_line->deleted = 1;
 				$trans_line->save();
 				$allocation_line_bean->save();	
 			}
@@ -176,9 +177,7 @@ foreach ($between_woops as $between_woop) {
 }
 }else{
 	//做工单驳回
-	$reject_wo_bean = BeanFactory :: getBean('HAM_WO', $wo_id);
-	$reject_wo_bean->wo_status='RETURNED';
-	$reject_wo_bean->save();
+	
     $between_woops = BeanFactory :: getBean("HAM_WOOP")->get_full_list('', 'ham_woop.ham_wo_id ="' . $wo_id . '"');
 	//之间的工序 需要更新工序的状态为拟定 工单完成时间 清空  
 	foreach ($between_woops as $between_woop) {
@@ -187,6 +186,7 @@ foreach ($between_woops as $between_woop) {
 		$between_woop->date_actual_finish = '';
 		$between_woop->work_center_people_id = '';
 		$between_woop->work_center_people = '';
+		echo $between_woop->name."<br>";
 		$between_woop->save();
 		
 	//start	
@@ -248,6 +248,7 @@ foreach ($between_woops as $between_woop) {
 				}
 				//事物处理单行行上面存历史表id
 				$trans_line->history_id = $allocation_line_bean->id;
+				$trans_line->deleted = 1;
 				$trans_line->save();
 				$allocation_line_bean->save();	
 			}
@@ -283,6 +284,9 @@ foreach ($between_woops as $between_woop) {
 			}
 		}
 	}
+	$reject_wo_bean = BeanFactory :: getBean('HAM_WO', $wo_id);
+	$reject_wo_bean->wo_status='RETURNED';
+	$reject_wo_bean->save();
 }
 	
 ?>

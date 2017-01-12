@@ -77,9 +77,9 @@ function insertTransLineHeader(tableid){
   var e3=x.insertCell(25);
   e3.innerHTML="<span id='line_enable_action_title'>失效</span>";
   
-  var e2=x.insertCell(24);
+  var e2=x.insertCell(26);
   e2.innerHTML="<span id='line_status_title'>状态</span>";
-  var e3=x.insertCell(25);
+  var e3=x.insertCell(27);
   e3.innerHTML="<span id='line_broadband_type_title'>带宽变量</span>";
 }
 
@@ -383,7 +383,7 @@ function insertTransLineElements(tableid) { //创建界面要素
       //宽带类型
       "<span class='input_group'>"+
       "<label>"+"宽带类型"+"</label>"+
-      "<input style=' width:153px;' type='text' name='line_broadband_type[" + prodln + "]' id='line_broadband_type" + prodln + "' maxlength='50' value='' title=''>"+
+      "<input style=' width:153px;' type='text' name='line_bandwidth[" + prodln + "]' id='line_bandwidth" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
       //占用起始时间
       "<span class='input_group'>"+
