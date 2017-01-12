@@ -1,12 +1,11 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-require_once('include/MVC/View/views/view.Edit.php');
+require_once('include/MVC/View/views/view.edit.php');
 
 class HAT_Counting_LinesViewEdit extends ViewEdit
 {
 	function display()
 	{	
-		var_dump($this->bean->id);
 		echo '<input  id="loc_attr" value="" type="hidden">';
 		echo '<input  id="org_attr"  type="hidden" value="">';
 		echo '<input  id="major_attr"  type="hidden" value="">';
@@ -69,6 +68,8 @@ class HAT_Counting_LinesViewEdit extends ViewEdit
 		$("#user_contacts_id_c").val("'.$this->bean->user_contacts_id_c.'");
 		$("#own_person").val("'.$this->bean->own_person.'");
 		$("#own_contacts_id_c").val("'.$this->bean->own_contacts_id_c.'");
+		$("#fixed_asset").val("'.$this->bean->fixed_asset.'");
+		$("#fixed_asset_id").val("'.$this->bean->fixed_asset_id.'");
 	})
 </script>';
 
@@ -93,7 +94,6 @@ function displayLineItems(){
 
 
 	echo '<script>insertLineHeader(\'lineItems\');</script>';
-	var_dump($focus->id);
 		if($focus->id!=''){//如果不是新增（即如果是编辑已有记录）
 			$sql = "SELECT
 			hcr.account_id_c,

@@ -1,25 +1,8 @@
-/*
-Navicat MySQL Data Transfer
+USE `suitecrm`;
+DROP procedure IF EXISTS `HAT_Counting_create_temp`;
 
-Source Server         : SuiteCRM
-Source Server Version : 50547
-Source Host           : localhost:3306
-Source Database       : suitecrm
-
-Target Server Type    : MYSQL
-Target Server Version : 50547
-File Encoding         : 65001
-
-Date: 2016-12-31 23:30:56
-*/
-
-SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Procedure structure for HAT_Counting_create_temp
--- ----------------------------
-DROP PROCEDURE IF EXISTS `HAT_Counting_create_temp`;
-DELIMITER ;;
+DELIMITER $$
+USE `suitecrm`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `HAT_Counting_create_temp`()
 BEGIN
     drop table if exists lpid_temp;
@@ -56,7 +39,6 @@ CREATE TEMPORARY TABLE ownpid_temp(
     temp_ownpid varchar(100),
     ownpid_type varchar(100)
 );
-
 drop table if exists counting_asset_info;
 CREATE TEMPORARY TABLE counting_asset_info(
     asset_id varchar(100),
@@ -75,9 +57,10 @@ CREATE TEMPORARY TABLE counting_asset_info(
     asset_status varchar(100),
     description varchar(255),
     user_person_id varchar(100),
-    owning_person_id varchar(100)
+    owning_person_id varchar(100),
+    fixed_asset_id varchar(100)
 );
+END$$
 
-END
-;;
 DELIMITER ;
+

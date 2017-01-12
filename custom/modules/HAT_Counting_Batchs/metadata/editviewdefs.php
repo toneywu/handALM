@@ -122,9 +122,8 @@ array (
           ),
           1 => 
           array (
-            'name' => 'counting_mode',
-            'studio' => 'visible',
-            'label' => 'LBL_COUNTING_MODE',
+            'name' => 'offline_flag',
+            'label' => 'LBL_OFFLINE_FLAG',
           ),
         ),
         6 => 
@@ -134,6 +133,21 @@ array (
             'name' => 'counting_scene',
             'studio' => 'visible',
             'label' => 'LBL_COUNTING_SCENE',
+          ),
+          1 => 
+          array (
+            'name' => 'counting_mode',
+            'studio' => 'visible',
+            'label' => 'LBL_COUNTING_MODE',
+          ),
+        ),
+        7 => 
+        array (
+          0 => 
+          array (
+            'name' => 'upinterface_flag',
+            'label' => 'LBL_UPINTERFACE_FLAG',
+            'customCode' => '<input accesskey="" tabindex="0" id="upinterface_flag" name="upinterface_flag" value="1" title=""  type="checkbox" onclick="return false">',
           ),
           1 => 'description',
         ),

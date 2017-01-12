@@ -114,5 +114,6 @@ $mod_strings = array (
   'LBL_USER_PERSON_CONTACTS_ID' => '使用人',
   'LBL_OWN_PERSON_CONTACTS_ID' => '管理人',
   'LBL_OWN_PERSON' => '管理人',
+  'LBL_FIXED_ASSET'=>'财务固定资产',
 
 );

@@ -76,3 +76,9 @@ $app_list_strings['haos_source_code_list']=array (
   'Others' => '其他事件',
   'Ref_System' => '外围系统',
   );
+
+$app_list_strings['haos_revenue_clear_status_list']=array (
+  'Unclear' => '未结算',
+  'Cleared' => '已结算',
+  'Clearing' => '结算中',
+  );

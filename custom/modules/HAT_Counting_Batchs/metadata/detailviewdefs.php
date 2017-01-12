@@ -6,7 +6,7 @@ array (
   array (
     'templateMeta' => 
     array (
-       'includes' => 
+      'includes' => 
       array (
         0 => 
         array (
@@ -24,7 +24,7 @@ array (
           4 => 
           array (
             'customCode' => '<input type="submit" class="button" onClick="createTask();" value="{$MOD.LBL_CREATE_TASK}">',
-               'sugar_html' => 
+            'sugar_html' => 
             array (
               'type' => 'submit',
               'value' => '{$MOD.LBL_CREATE_TASK}',
@@ -35,13 +35,13 @@ array (
                 'title' => '{$MOD.LBL_CREATE_TASK}',
                 'onclick' => 'createTask();',
                 'name' => 'Create to Task',
-                ),
               ),
             ),
-          'TASK_TOAPP' =>
+          ),
+          'TASK_TOAPP' => 
           array (
-            'customCode' => '<input type="submit" class="button" onClick="taskToapp();" value="{$MOD.LBL_TASK_TOAPP}">',
-               'sugar_html' => 
+            'customCode' => '<input type="submit" class="button" onClick="this.form.action.value=\'taskToapp\';" value="{$MOD.LBL_TASK_TOAPP}">',
+            'sugar_html' => 
             array (
               'type' => 'submit',
               'value' => '{$MOD.LBL_TASK_TOAPP}',
@@ -50,15 +50,15 @@ array (
                 'class' => 'button',
                 'id' => 'task_to_app_button',
                 'title' => '{$MOD.LBL_TASK_TOAPP}',
-                'onclick' => 'taskToapp();',
+                'onclick' => 'this.form.action.value=\'taskToapp\';',
                 'name' => 'Task To App',
-                ),
               ),
             ),
-          'DATA_TOCOUNTING' =>
+          ),
+          'DATA_TOCOUNTING' => 
           array (
             'customCode' => '<input type="submit" class="button" onClick="datatocounting();" value="{$MOD.LBL_DATA_TOCOUNTING}">',
-               'sugar_html' => 
+            'sugar_html' => 
             array (
               'type' => 'submit',
               'value' => '{$MOD.LBL_DATA_TOCOUNTING}',
@@ -68,10 +68,10 @@ array (
                 'id' => 'data_to_counting_button',
                 'title' => '{$MOD.LBL_DATA_TOCOUNTING}',
                 'onclick' => 'datatocounting();',
-                'name' =>'Data To Counting',
-                ),
+                'name' => 'Data To Counting',
               ),
             ),
+          ),
         ),
       ),
       'maxColumns' => '2',
@@ -172,9 +172,8 @@ array (
           ),
           1 => 
           array (
-            'name' => 'counting_mode',
-            'studio' => 'visible',
-            'label' => 'LBL_COUNTING_MODE',
+            'name' => 'offline_flag',
+            'label' => 'LBL_OFFLINE_FLAG',
           ),
         ),
         6 => 
@@ -184,6 +183,20 @@ array (
             'name' => 'counting_scene',
             'studio' => 'visible',
             'label' => 'LBL_COUNTING_SCENE',
+          ),
+          1 => 
+          array (
+            'name' => 'counting_mode',
+            'studio' => 'visible',
+            'label' => 'LBL_COUNTING_MODE',
+          ),
+        ),
+        7 => 
+        array (
+          0 => 
+          array (
+            'name' => 'upinterface_flag',
+            'label' => 'LBL_UPINTERFACE_FLAG',
           ),
           1 => 'description',
         ),

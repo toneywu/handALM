@@ -117,5 +117,7 @@ $mod_strings = array (
   'LBL_USER_PERSON_CONTACTS_ID' => '使用人',
   'LBL_OWN_PERSON_CONTACTS_ID' => '管理人',
   'LBL_OWN_PERSON' => '管理人',
+  'LBL_OFFLINE_FLAG' =>'离线',
+  'LBL_UPINTERFACE_FLAG' => '已同步接口',
 
 );

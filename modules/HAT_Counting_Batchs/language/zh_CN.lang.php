@@ -107,4 +107,7 @@ $mod_strings = array (
 
   'LBL_MESSAGE_STATUS' =>'盘点批状态必须为“未开始”，并且不存在非“未开始”状态的盘点任务',
   'LBL_MESSAGE_TASK' =>'盘点批已创建任务快照，是否重新创建盘点任务？',
+  'LBL_OFFLINE_FLAG' =>'离线',
+  'LBL_UPINTERFACE_FLAG' => '已同步接口',
+  'LBL_INTERFACES'=> '接口',
 );

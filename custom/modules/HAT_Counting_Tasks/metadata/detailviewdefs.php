@@ -157,6 +157,19 @@ array (
             'name' => 'manual_add_flag',
             'label' => 'LBL_MANUAL_ADD_FLAG',
           ),
+          1 => 
+          array (
+            'name' => 'offline_flag',
+            'label' => 'LBL_OFFLINE_FLAG',
+          ),
+        ),
+        8 => 
+        array (
+          0 => 
+          array (
+            'name' => 'upinterface_flag',
+            'label' => 'LBL_UPINTERFACE_FLAG',
+          ),
           1 => 'description',
         ),
       ),

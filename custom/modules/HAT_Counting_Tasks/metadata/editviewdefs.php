@@ -84,6 +84,7 @@ array (
                 'oranization' => 'oranization_attr',
                 'major' => 'major_attr',
                 'category' => 'category_attr',
+                'offline_flag' => 'offline_flag',
               ),
               'call_back_function' => 'setExtendValReturn',
             ),
@@ -185,6 +186,20 @@ array (
             'name' => 'manual_add_flag',
             'label' => 'LBL_MANUAL_ADD_FLAG',
             'customCode' => '<input id="manual_add_flag" name="manual_add_flag" value="" title="" tabindex="0"  type="checkbox" onclick="return false">',
+          ),
+          1 => 
+          array (
+            'name' => 'offline_flag',
+            'label' => 'LBL_OFFLINE_FLAG',
+          ),
+        ),
+        8 => 
+        array (
+          0 => 
+          array (
+            'name' => 'upinterface_flag',
+            'label' => 'LBL_UPINTERFACE_FLAG',
+            'customCode' => '<input accesskey="" tabindex="0" id="upinterface_flag" name="upinterface_flag" value="1" title=""  type="checkbox" onclick="return false">',
           ),
           1 => 'description',
         ),

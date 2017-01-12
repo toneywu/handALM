@@ -326,7 +326,7 @@ showWOLines();*/
 				$(this).children().eq(8).find("a").removeAttr("onclick");
 				$(this).children().eq(8).find("a").removeAttr("href");
 			}
-			if (woopStatus=="已批准"&&res['leader']!="0"&&res['trans_status']=="APPROVED"){
+			if (woopStatus=="已批准"&&res['leader']!="0"&&res['trans_status']=="CLOSED"){
 				return false;//什么都不做
 			}else if(woopStatus=="已批准"&&res['leader']!="0"&&res['trans_status']==null){
 				return false;//什么都不做

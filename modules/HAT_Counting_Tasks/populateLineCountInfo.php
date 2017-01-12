@@ -100,7 +100,7 @@ class CountInfo
 				if($row_detail["counting_result"]=='Different'){
 					$count['different_count']=$count['different_count']+1;
 				}
-				if($row_detail["counting_result"]=='Overage'){
+				if($row_detail["counting_result"]=='OverRage'){
 					$count['overage_count']=$count['overage_count']+1;
 				}
 				if($row_detail["counting_result"]=='Loss'){
@@ -113,7 +113,6 @@ class CountInfo
 					$count['un_actual_counting']=$count['un_actual_counting']+1;
 				}
 			}
-
 		}
 		return $count;
 	}

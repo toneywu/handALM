@@ -1,25 +1,8 @@
-/*
-Navicat MySQL Data Transfer
+USE `suitecrm`;
+DROP procedure IF EXISTS `HAT_Counting_get_sons`;
 
-Source Server         : SuiteCRM
-Source Server Version : 50547
-Source Host           : localhost:3306
-Source Database       : suitecrm
-
-Target Server Type    : MYSQL
-Target Server Version : 50547
-File Encoding         : 65001
-
-Date: 2016-12-31 23:31:34
-*/
-
-SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Procedure structure for HAT_Counting_get_sons
--- ----------------------------
-DROP PROCEDURE IF EXISTS `HAT_Counting_get_sons`;
-DELIMITER ;;
+DELIMITER $$
+USE `suitecrm`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `HAT_Counting_get_sons`(in lpid varchar(100),
                              in opid varchar(100),
                              in mpid varchar(100),
@@ -97,7 +80,6 @@ end if;
 end if;
 set not_found=0;
 #包括子专业
-
 if  mpid is not null and mpid <> '' then
     insert into mpid_temp values(mpid,'major',ndepth);
     if p_major_son_flag =1 then 
@@ -137,6 +119,7 @@ if  upid is not null and upid <> '' then
 if  ownpid is not null and ownpid <> '' then
 insert into upid_temp values(ownpid,'own');
 end if;
-END
-;;
+END$$
+
 DELIMITER ;
+

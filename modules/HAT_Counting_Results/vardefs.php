@@ -775,7 +775,7 @@ $dictionary['HAT_Counting_Results'] = array(
         'vname' => 'LBL_COUNTING_RESULT',
         'type' => 'enum',
         'massupdate' => 0,
-        'default' => 'ASSETS',
+        'default' => '',
         'no_default' => false,
         'comments' => '',
         'help' => '',
@@ -1082,7 +1082,7 @@ $dictionary['HAT_Counting_Results'] = array(
       'len' => '255',
       'size' => '20',
       ),
-    'counting_result' => 
+   /* 'counting_result' => 
     array (
       'required' => true,
       'name' => 'counting_result',
@@ -1106,7 +1106,7 @@ $dictionary['HAT_Counting_Results'] = array(
       'options' => 'hat_counting_result_list',
       'studio' => 'visible',
       'dependency' => false,
-      ),
+      ),*/
     'account_id_c' => 
     array (
       'required' => false,

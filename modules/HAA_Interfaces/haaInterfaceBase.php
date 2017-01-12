@@ -57,9 +57,10 @@ class haaInterfaceBase {
 		}
 	}
 
-	function execute_Interface_Processor($ifaceId) {
+	function execute_Interface_Processor($paramsArray) {
 		global $db;
 		global $timedate;
+		$ifaceId=$paramsArray[0];
 		if ($this->interfaceId==''){
 			$this->initInterfaceSetup($ifaceId);
 		}
@@ -82,19 +83,22 @@ class haaInterfaceBase {
 			$include_file='modules/HAA_Interfaces/'.$instance_loc.$execute_func_files.'.php';
 		}
 		if(!file_exists($include_file)){
-			var_dump($include_file);
 			die('未能在服务器路径下找到接口执行文件，请联系技术运维人员。');
 		}
 
 		require_once($include_file);
 
 		$this->interfaceProcessClass = new $execute_func_files();
-		$this->interfaceProcessReturn = $this->interfaceProcessClass->$execute_func_name($ifaceId);
+
+		$this->interfaceProcessReturn = $this->interfaceProcessClass->$execute_func_name($paramsArray);
+		
 		if($this->interfaceProcessReturn["return_status"]=='0'){
 			$interfaceLog = BeanFactory::getBean('HAA_Interface_Logs');
 			$interfaceLog->haa_interface_id_c =$ifaceId;
-			$interfaceLog->seq = $db->getOne("SELECT ifnull(MAX(seq),0)+1 FROM HAA_Interface_Logs where haa_interface_id_c='".$ifaceId."'");
+			$interfaceLog->seq = $db->getOne("SELECT ifnull(MAX(seq),0)+1 FROM haa_interface_logs where haa_interface_id_c='".$ifaceId."'");
+
 			$interfaceLog->save(false);
+				
 			$interface = BeanFactory::getBean('HAA_Interfaces',$ifaceId);
 			$interface ->last_sync_date=$timedate->nowDb();
 			$interface ->save(false);

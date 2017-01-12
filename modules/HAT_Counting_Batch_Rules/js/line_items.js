@@ -1,5 +1,5 @@
 var prodln = 0;
-var columnNum = 13;
+var columnNum = 12;
 var lineno;
 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
 
@@ -53,11 +53,11 @@ function insertLineHeader(tableid){
   m.innerHTML=SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_USER_PERSON');
   var i=x.insertCell(10);
   i.style="height: 40px;line-height: 40px";
-  i.innerHTML=SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_OWN_PERSON');
+  i.innerHTML=SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_OWN_PERSON');/*
   var j=x.insertCell(11);
   j.style="height: 40px;line-height: 40px";
-  j.innerHTML=SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_COUNTING_RULE');
-  var f=x.insertCell(12);
+  j.innerHTML=SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_COUNTING_RULE');*/
+  var f=x.insertCell(11);
   f.innerHTML='&nbsp;';
 }
 
@@ -68,17 +68,17 @@ function insertLineData(line_data ){ //将数据写入到对应的行字段中
     ln = insertLineElements("lineItems");
     $("#line_id".concat(String(ln))).val(line_data.id);
     $("#line_user_person_split_flag".concat(String(ln))).attr('checked',line_data.user_person_split_flag==1?true:false);
-    $("#line_user_person_split_flag".concat(String(ln))).val(line_data.user_person_split_flag);
+    //$("#line_user_person_split_flag".concat(String(ln))).val(line_data.user_person_split_flag);
     $("#line_own_person_split_flag".concat(String(ln))).attr('checked',line_data.own_person_split_flag==1?true:false);
-    $("#line_own_person_split_flag".concat(String(ln))).val(line_data.own_person_split_flag);
+    //$("#line_own_person_split_flag".concat(String(ln))).val(line_data.own_person_split_flag);
     $("#line_org_split_flag".concat(String(ln))).attr('checked',line_data.org_split_flag==1?true:false);
-    $("#line_org_split_flag".concat(String(ln))).val(line_data.org_split_flag);
+    //$("#line_org_split_flag".concat(String(ln))).val(line_data.org_split_flag);
     $("#line_loc_split_flag".concat(String(ln))).attr('checked',line_data.loc_split_flag==1?true:false);
-    $("#line_loc_split_flag".concat(String(ln))).val(line_data.loc_split_flag);
+    //$("#line_loc_split_flag".concat(String(ln))).val(line_data.loc_split_flag);
     $("#line_major_split_flag".concat(String(ln))).attr('checked',line_data.major_split_flag==1?true:false);
-    $("#line_major_split_flag".concat(String(ln))).val(line_data.major_split_flag);
+    //$("#line_major_split_flag".concat(String(ln))).val(line_data.major_split_flag);
     $("#line_category_split_flag".concat(String(ln))).attr('checked',line_data.category_split_flag==1?true:false);
-    $("#line_category_split_flag".concat(String(ln))).val(line_data.category_split_flag);
+    //$("#line_category_split_flag".concat(String(ln))).val(line_data.category_split_flag);
     $("#line_location_name".concat(String(ln))).val(line_data.location_name);
     $("#line_hat_asset_locations_id_c".concat(String(ln))).val(line_data.hat_asset_locations_id_c);
     $("#line_user_name".concat(String(ln))).val(line_data.user_name);
@@ -92,15 +92,15 @@ function insertLineData(line_data ){ //将数据写入到对应的行字段中
     $("#line_category_name".concat(String(ln))).val(line_data.category_name);
     $("#line_aos_product_categories_id_c".concat(String(ln))).val(line_data.aos_product_categories_id_c);
     $("#line_location_drilldown".concat(String(ln))).attr('checked',line_data.location_drilldown==1?true:false);
-    $("#line_location_drilldown".concat(String(ln))).val(line_data.location_drilldown);
+   // $("#line_location_drilldown".concat(String(ln))).val(line_data.location_drilldown);
     $("#line_org_drilldown".concat(String(ln))).attr('checked',line_data.org_drilldown==1?true:false);
-    $("#line_org_drilldown".concat(String(ln))).val(line_data.org_drilldown);
+    //$("#line_org_drilldown".concat(String(ln))).val(line_data.org_drilldown);
     $("#line_major_drilldown".concat(String(ln))).attr('checked',line_data.major_drilldown==1?true:false);
-    $("#line_major_drilldown".concat(String(ln))).val(line_data.major_drilldown);
+    //$("#line_major_drilldown".concat(String(ln))).val(line_data.major_drilldown);
     $("#line_category_drilldown".concat(String(ln))).attr('checked',line_data.category_drilldown==1?true:false);
-    $("#line_category_drilldown".concat(String(ln))).val(line_data.category_drilldown);
-    $("#line_rule_name".concat(String(ln))).val(line_data.rule_name);
-    $("#line_hat_counting_rules_id_c".concat(String(ln))).val(line_data.hat_counting_rules_id_c);
+    //$("#line_category_drilldown".concat(String(ln))).val(line_data.category_drilldown);
+   /* $("#line_rule_name".concat(String(ln))).val(line_data.rule_name);
+    $("#line_hat_counting_rules_id_c".concat(String(ln))).val(line_data.hat_counting_rules_id_c);*/
     
     renderLine(ln);
   }
@@ -141,7 +141,7 @@ z1.innerHTML  =
 "<td><span name='displayed_line_category_drilldown[" + prodln + "]' id='displayed_line_category_drilldown" + prodln + "'></span></td>"+
 "<td><span name='displayed_line_user_name[" + prodln + "]' id='displayed_line_user_name" + prodln + "'></span></td>"+
 "<td><span name='displayed_line_own_name[" + prodln + "]' id='displayed_line_own_name" + prodln + "'></span></td>"+
-"<td><span name='displayed_line_rule_name[" + prodln + "]' id='displayed_line_rule_name" + prodln + "'></span></td>"+
+/*"<td><span name='displayed_line_rule_name[" + prodln + "]' id='displayed_line_rule_name" + prodln + "'></span></td>"+*/
 "<td><input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'></td>";
 
   var x = tablebody.insertRow(-1); //以下生成的是Line Editor
@@ -230,8 +230,13 @@ z1.innerHTML  =
     "<input name='line_own_contacts_id_c["+prodln+"]' id='line_own_contacts_id_c"+prodln+"' type='hidden' value=''>"+
     "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openOwnPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
     "<button type='button' name='btn_clr_catename' id='btn_clr_catename' tabindex='0' title='清除选择' class='button lastChild' onclick='SUGAR.clearRelateField(this.form, \"line_own_name"+prodln+"\", \"line_own_contacts_id_c"+prodln+"\");' value='清除选择'><img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button>"+"</td>"+
+    //"<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openRulePopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+   //"<button type='button' name='btn_clr_rulename' id='btn_clr_rulename' tabindex='0' title='清除选择' class='button lastChild' onclick='SUGAR.clearRelateField(this.form, \"line_rule_name"+prodln+"\", \"line_hat_counting_rules_id_c"+prodln+"\");' value='清除选择'><img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button>"+"</td>"+
+    "<td><input type='hidden' id='line_deleted"+prodln+"' name='line_deleted["+prodln+"]' value='0'></td>"+
+    "<td><input type='button' id='line_delete_line" + prodln + "' class='button btn_del' value='" + SUGAR.language.get('app_strings', 'LBL_DELETE_INLINE') + "' tabindex='116' onclick='btnMarkLineDeleted(" + prodln + ",\"line_\")'>"+
+    "<button type='button' id='btn_LineEditorClose" + prodln + "' class='button btn_save' value='" + SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE') + "' tabindex='116' onclick='LineEditorClose(" + prodln + ",\"line_\")'>"+SUGAR.language.get('app_strings', 'LBL_SAVE_BUTTON_LABEL')+" & "+SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE')+" <img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button></td>"+
   "</tr>"+
-  "<tr>"+
+  /*"<tr>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_COUNTING_RULE')+"</td>"+
     "<td><input name='line_rule_name["+prodln+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='line_rule_name"+prodln+"' size='' value='' title='' autocomplete='off' accesskey='7' type='text'>"+
     "<input name='line_hat_counting_rules_id_c["+prodln+"]' id='line_hat_counting_rules_id_c"+prodln+"' type='hidden' value=''>"+
@@ -240,14 +245,14 @@ z1.innerHTML  =
     "<td><input type='hidden' id='line_deleted"+prodln+"' name='line_deleted["+prodln+"]' value='0'></td>"+
     "<td><input type='button' id='line_delete_line" + prodln + "' class='button btn_del' value='" + SUGAR.language.get('app_strings', 'LBL_DELETE_INLINE') + "' tabindex='116' onclick='btnMarkLineDeleted(" + prodln + ",\"line_\")'>"+
     "<button type='button' id='btn_LineEditorClose" + prodln + "' class='button btn_save' value='" + SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE') + "' tabindex='116' onclick='LineEditorClose(" + prodln + ",\"line_\")'>"+SUGAR.language.get('app_strings', 'LBL_SAVE_BUTTON_LABEL')+" & "+SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE')+" <img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button></td>"+
-  "</tr>"+
+  "</tr>"+*/
   "</table></td>";
    
     clr_value('#line_location_name','#line_hat_asset_locations_id_c',prodln);
     clr_value('#line_account_name','#line_account_id_c',prodln);
     clr_value('#line_code_name','#line_haa_codes_id_c',prodln);
     clr_value('#line_category_name','#line_aos_product_categories_id_c',prodln);
-    clr_value('#line_rule_name','#line_hat_counting_rules_id_c',prodln);
+    //clr_value('#line_rule_name','#line_hat_counting_rules_id_c',prodln);
     clr_value('#line_user_name','#line_user_contacts_id_c',prodln);
     clr_value('#line_own_name','#line_own_contacts_id_c',prodln);
 
@@ -284,7 +289,7 @@ function renderLine(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_line_category_drilldown"+ln).html(flag);
   $("#displayed_line_user_name"+ln).html($("#line_user_name"+ln).val());
   $("#displayed_line_own_name"+ln).html($("#line_own_name"+ln).val());
-  $("#displayed_line_rule_name"+ln).html($("#line_rule_name"+ln).val());
+  //$("#displayed_line_rule_name"+ln).html($("#line_rule_name"+ln).val());
 
 }
 

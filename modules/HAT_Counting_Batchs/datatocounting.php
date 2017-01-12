@@ -19,23 +19,26 @@
  * or write to the Free Software Foundation,Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA 02110-1301  USA
  *
- * @author SalesAgility <info@salesagility.com>
  */
 
-
-require_once('modules/HAA_Interfaces/haaInterfaceBase.php');
-$interfaceId=$_REQUEST['record'];
-$paramsArray[0]=$interfaceId;//参数数组第一个固定传入接口ID
-$interfaceBaseClass= new haaInterfaceBase();
-
-$interfaceBaseClass->execute_Interface_Processor($paramsArray);
-$return=$interfaceBaseClass->interfaceProcessReturn;
-
-if($return["return_status"]=='0'){
-
-	header('Location: index.php?module=HAA_Interfaces&action=DetailView&record='.$interfaceId);
-}
-else{
-	die('执行接口出错:'.$return["msg_data"]);
-}
+global $db;
+//$batchId=$_REQUEST['record'];
+$sql="SELECT
+	a.id,a.name,a.interface_code
+FROM
+	haa_interfaces a,
+	haa_codes hc
+WHERE
+	1 = 1
+AND a.haa_frameworks_id_c = '".$_SESSION["current_framework"]."'
+AND hc.id = a.haa_codes_id_c
+AND hc.code_tag = 'HAP'
+AND based_flag = 1";
+	$html="";
+	$result=$db->query($sql);
+	while($row=$db->fetchByAssoc($result)){
+		$interface_code=strtolower($row["interface_code"]);
+		$html.='<div class="col-md-12"><div class="col-md-5">'.$row["name"].'</div><div class="col-md-7"><input type="checkbox" name="'.$interface_code.'" id="'.$interface_code.'" value="'.$row["id"].'"/></div></div>';
+	}
+	echo $html;
 ?>

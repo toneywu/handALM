@@ -1,25 +1,8 @@
-/*
-Navicat MySQL Data Transfer
+USE `suitecrm`;
+DROP procedure IF EXISTS `HAT_Counting_asset_info_toCountingTask`;
 
-Source Server         : SuiteCRM
-Source Server Version : 50547
-Source Host           : localhost:3306
-Source Database       : suitecrm
-
-Target Server Type    : MYSQL
-Target Server Version : 50547
-File Encoding         : 65001
-
-Date: 2016-12-31 23:30:33
-*/
-
-SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Procedure structure for HAT_Counting_asset_info_toCountingTask
--- ----------------------------
-DROP PROCEDURE IF EXISTS `HAT_Counting_asset_info_toCountingTask`;
-DELIMITER ;;
+DELIMITER $$
+USE `suitecrm`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `HAT_Counting_asset_info_toCountingTask`(IN p_sql varchar(1000),
                                                                     in p_batch_id varchar(100),
                                                                     in p_location_flag int,
@@ -27,7 +10,9 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `HAT_Counting_asset_info_toCountingT
                                                                     in p_major_flag int,
                                                                     in p_category_flag int,
                                                                     in p_user_person_flag int,
-                                                                    in p_own_person_flag int)
+                                                                    in p_own_person_flag int,
+                                                                    in p_user_id varchar(100))
+                                                                    
 BEGIN
     DECLARE  not_found INT DEFAULT 0;
     declare g_sysdate datetime default now();
@@ -96,7 +81,6 @@ WHERE
     OPEN  cur_info; 
     FETCH  cur_info INTO flag_param;
     WHILE not_found != 1 DO
-   
     #取出范围ID段，第一位为!拼接要去掉，最后一位不特殊处理,flag不为1时，将对应ID置空
     #set asset_id_c=substring_index(flag_param,',',1);
     set flag_param=substring(flag_param,3);
@@ -195,7 +179,7 @@ WHERE
         if user_id_c <> '$' and user_id_c is not null and user_id_c <>'' then
         set flag_param=substring(flag_param,38);
 SELECT 
-    a.last_name
+    concat_ws(',',a.last_name,if(a.first_name='',null,a.first_name)) full_name
 INTO user_name FROM
     contacts a
 WHERE
@@ -216,7 +200,7 @@ WHERE
         set own_id_c=substring_index(flag_param,',',1);
         
         if own_id_c <> '$' and own_id_c is not null and own_id_c <>'' then
-        select a.last_name
+        select concat_ws(',',a.last_name,if(a.first_name='',null,a.first_name)) full_name
         into own_name
         from contacts a
         where a.id = own_id_c;
@@ -281,7 +265,11 @@ counting_scene,
 counting_by_location,
 manual_add_flag,
 user_contacts_id_c,
-own_contacts_id_c
+own_contacts_id_c,
+offline_flag,
+upinterface_flag,
+modified_user_id,
+created_by
 ) 
 values(
 task_id, 
@@ -314,15 +302,20 @@ counting_scene,
 counting_by_location,
 0,
 if(user_id_c='@',null,if(user_id_c='$',null,user_id_c)),
-if(own_id_c='@',null,if(own_id_c='$',null,own_id_c)));
+if(own_id_c='@',null,if(own_id_c='$',null,own_id_c)),
+0,
+0,
+p_user_id,
+p_user_id);
 
      #插入盘点明细 
      
-    call HAT_Counting_asset_info_toCountingLine(task_id,location_id_c,org_id_c,major_id_c,category_id_c,user_id_c,own_id_c,haa_frameworks_id_c);
+    call HAT_Counting_asset_info_toCountingLine(task_id,location_id_c,org_id_c,major_id_c,category_id_c,user_id_c,own_id_c,haa_frameworks_id_c,p_user_id);
 FETCH  cur_info INTO flag_param;
 
 END WHILE;
 CLOSE  cur_info;
-END
-;;
+END$$
+
 DELIMITER ;
+

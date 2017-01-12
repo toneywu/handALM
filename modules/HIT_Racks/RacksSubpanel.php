@@ -32,6 +32,7 @@ function get_hit_racks($params) {
 
     $return_array['select'] = " SELECT hit_racks.*";
     $return_array['from'] = " FROM hit_racks";
+
     $return_array['join'] = ", hat_assets";//是追加到where条件之后
     //$return_array['join_tables'] = "hit_racks.hat_assets_id = hat_assets.id";
 	$return_array['where'] = " WHERE hit_racks.hat_assets_id = hat_assets.id AND hat_assets.using_org_id='" . $using_org_id . "' OR exists (select 1 from hit_rack_allocations, hat_assets ha2 where hit_rack_allocations.hit_racks_id=hit_racks.id and ha2.id=hit_rack_allocations.hat_assets_id and ha2.using_org_id='".$using_org_id."' )";
