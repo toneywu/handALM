@@ -82,7 +82,7 @@ array (
             'label' => 'LBL_EVENT_TYPE',
             'displayParams' => 
             array (
-              'initial_filter' => '&basic_type_advanced=REVENUE',
+              'initial_filter' => '&basic_type_advanced=REVENUE&manual_create_enable_flag_advanced=1',
               'field_to_name_array' => 
               array (
                 'name' => 'event_type',
@@ -314,16 +314,6 @@ array (
             'name' => 'contract_number',
             'studio' => 'visible',
             'label' => 'LBL_CONTRACT_NUMBER',
-            'customCode' => '<input type="text" readonly="readonly" name="contract_number" id="contract_number" value="{$fields.contract_number.value}">',
-            ),
-          ),
-        1 => 
-        array (
-          0 => 
-          array (
-            'name' => 'contract_name',
-            'studio' => 'visible',
-            'label' => 'LBL_CONTRACT_NAME',
             'displayParams' => 
             array (
               'field_to_name_array' => 
@@ -333,6 +323,16 @@ array (
                 'employee_number_c' => 'contract_number',
                 ),
               ),
+            ),
+          ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'contract_name',
+            'studio' => 'visible',
+            'label' => 'LBL_CONTRACT_NAME',
+            'customCode' => '<input type="text" readonly="readonly" name="contract_name" id="contract_name" value="{$fields.contract_name.value}">',
             ),
           1 => '',
           ),

@@ -116,6 +116,10 @@ class AOR_Report extends Basic {
         require_once('modules/AOR_Charts/AOR_Chart.php');
         $chart = new AOR_Chart();
         $chart->save_lines($_POST, $this, 'aor_chart_');
+
+        require_once('modules/HAOR_Parameters/HAOR_Parameters.php');
+        $parameter = new HAOR_Parameters();
+        $parameter->save_lines($_POST, $this, 'aor_parameter_');
     }
 
     //$target_module 参数报错，暂时改为非必须-osmond 161205
@@ -1029,16 +1033,17 @@ function standard_build_report_csv(){
         }
     }
     //Add By ling.zhang01 20161227
-    $name = $this->name;
+    //$name = $this->name;
+    $name = getMillisecond();
     //Add Instance By ling.zhang01 20161227 End
     $csv= $GLOBALS['locale']->translateCharset($csv, 'UTF-8', $GLOBALS['locale']->getExportCharset());
-
+    $name= $GLOBALS['locale']->translateCharset($name, 'UTF-8', $GLOBALS['locale']->getExportCharset());
     ob_clean();
     header("Pragma: cache");
     //Add By ling.zhang01 20161227
     /*header("Content-type: text/comma-separated-values; charset=".$GLOBALS['locale']->getExportCharset());
     header("Content-Disposition: attachment; filename=\"{$this->name}.csv\"");*/
-    header("Content-type: text/html; charset=GBK");
+    header("Content-type: text/html; charset=".$GLOBALS['locale']->getExportCharset());
     header("Content-Disposition: attachment; filename=\"{$name}.csv\"");
     //Add Instance By ling.zhang01 20161227 End
     header("Content-transfer-encoding: binary");
@@ -1051,8 +1056,6 @@ function standard_build_report_csv(){
     }
     //Add By ling.zhang01 20161227
     //print $csv;
-    $name = $name.getMillisecond();
-    $name= $GLOBALS['locale']->translateCharset($name, 'UTF-8', $GLOBALS['locale']->getExportCharset());
     createRptDataFile($name,$csv);  //创建报表导出文件
     print $name.'.csv'; //将创建的文件名返回前端
     //Add Instance By ling.zhang01 20161227 End

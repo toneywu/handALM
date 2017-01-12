@@ -37,6 +37,17 @@ function createRevenueFromWO($WOId){
 		die('已批准的工单才能创建收支计费项!');
 	}
 
+	$beanWO = BeanFactory :: getBean('HAT_EventType',$wo->hat_eventtype_id);
+	if ($beanWO->revenue_eventtype_id_c!='') { 
+		$beanRevenue = BeanFactory :: getBean('HAT_EventType',$beanWO->revenue_eventtype_id_c);
+	}else{
+		die('事务单的事件类型未设置对应的收支计费项的事务类型，请联系运维人员!');
+	}
+	if ($beanRevenue){
+		$rawRow['event_type'] = $beanRevenue->name;
+	}
+
+
 	$rawRow['haa_frameworks_id_c'] = $rawRow['haa_frameworks_id_c'];
 	$rawRow['revenue_quote_number'] = '';
 	$rawRow['name'] = $wo->name.'收支';

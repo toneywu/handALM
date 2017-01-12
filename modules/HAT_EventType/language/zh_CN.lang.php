@@ -137,4 +137,6 @@ $mod_strings = array (
   'LBL_ALLOCATION_FLAG'=>'是否触发资产调拨接口程序',
   'LBL_KEEP_SEPERATD_ALLC_RACK_USING_ORG'=>'散U分配的机柜使用组织及状态不变',
   'LBL_KEEP_PREASSIGNED_STATUS_USING_ORG'=>'预分配状态下的设备/资产使用组织不变',
+  'LBL_MANUAL_CREATE_ENABLE_FLAG' => '允许直接手工创建当前类型',
+  'LBL_REVENUE_EVENTTYPE' => '自动创建收支项事件类型',
 );

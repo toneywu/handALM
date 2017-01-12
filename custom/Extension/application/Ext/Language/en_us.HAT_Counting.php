@@ -49,59 +49,90 @@ $app_list_strings['hat_counting_status_list']=array (
   'New' => '未开始',
   'Counting' => '盘点中',
   'Counted' => '已盘点',
-);
+  );
 $app_list_strings['hat_counting_mode_list']=array (
+  'SCAN' => '扫码群盘',
   'MANUAL' => '手动粗盘',
   'RECHECK' => '单个详盘',
-  'SCAN' => '扫码群盘',
-);
+  );
 $app_list_strings['hat_counting_scene_list']=array (
   'Year' => '年度盘点',
   'Temp' => '临时盘点',
-);
+  );
 $app_list_strings['hat_counting_task_status_list']=array (
   'New' => '未开始',
   'Counting' => '进行中',
   'Counted' => '已结束',
-);
+  );
 $app_list_strings['hat_counting_adjust_method_list']=array (
   ''=>' ',
   'Retire' => '资产报废',
   'attrAdjust' => '资产属性变更',
   'Add' => '资产新增',
-);
+  );
 $app_list_strings['hat_counting_adjust_status_list']=array (
   'Init' => '未处理',
   'Adjusting' => '差异调整中',
   'Processed' => '已调整',
-);
+  );
 $app_list_strings['hat_counting_line_result_list']=array (
-   ''=>' ',
-  'Matched' => '帐实相符',
-  'Different' => '盘点差异',
-  'OverRage'=>'盘盈',
-  'Loss'=>'盘亏'
-);
+ ''=>' ',
+ 'Matched' => '帐实相符',
+ 'Different' => '盘点差异',
+ 'OverRage'=>'盘盈',
+ 'Loss'=>'盘亏'
+ );
 $app_list_strings['hat_counting_adjust_posted']=array (
   'N' => '否',
   'P' => '部分',
   'Y'=>'是',
-);
+  );
 $app_list_strings['hat_counting_line_status_list']=array (
   'New' => '未开始',
   'Counting' => '进行中',
   'Counted' => '已结束',
-);
+  );
 $app_list_strings['hat_counting_object_type_list']=array (
   'ASSETS' => '实物资产',
   'EQM' => '生产设备设施',
   'ADMIN' => '行政资产',
   'GENERAL' => '通用物资',
   'PRODUCT' => '生产物资',
-);
+  );
 
 $app_list_strings['hat_counting_split_type']=array (
   'LOGIC' => '逻辑拆分',
   'CUSTOM' => '自定义',
-);
+  );
+
+$app_list_strings['hat_counting_field_type']=array (
+  'VARCHAR' => '字符',
+  'NUMBER' => '数字',
+  'DATE' => '日期',
+  'LOV' => '值列表',
+  'LIST' => '下拉框',
+  );
+
+$app_list_strings['hat_counting_table_name']=array (
+  'INV_TASKS' => '任务',
+  'INV_TASK_DETAILS' => '清单',
+  );
+
+$app_list_strings['hat_counting_column_name']=array (
+  'attribute1' => 'Attribute1',
+  'attribute2' => 'Attribute2',
+  'attribute3' => 'Attribute3',
+  'attribute4' => 'Attribute4',
+  'attribute5' => 'Attribute5',
+  'attribute6' => 'Attribute6',
+  'attribute7' => 'Attribute7',
+  'attribute8' => 'Attribute8',
+  'attribute9' => 'Attribute9',
+  'attribute10' => 'Attribute10',
+  'attribute11' => 'Attribute11',
+  'attribute12' => 'Attribute12',
+  'attribute13' => 'Attribute13',
+  'attribute14' => 'Attribute14',
+  'attribute15' => 'Attribute15',
+  );
 

@@ -12,9 +12,12 @@
     <script src="modules/AOR_Fields/fieldLines.js"></script>
     <script src="modules/AOR_Conditions/conditionLines.js"></script>
     <script src="modules/AOR_Charts/chartLines.js"></script>
+    <script src="modules/HAOR_Parameters/parameterLines.js"></script>
 
     <link rel="stylesheet" href="include/javascript/jquery/themes/base/jquery-ui.min.css">
     <script src="include/javascript/jquery/jquery-ui-min.js"></script>
+    <script src="custom/resources/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script> 
+<link rel="stylesheet" type="text/css" href="custom/resources/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
 
 <script>
     $(document).ready(function(){
@@ -260,6 +263,9 @@
             clearFieldLines();
             clearConditionLines();
             clearChartLines();
+            //Add By ling.zhang01 20170110
+            clearParameterLines();
+            //Add Instance By ling.zhang01 20170110 End
         });
 
 
@@ -268,7 +274,11 @@
             updateChartDimensionSelects();
 
         });
-
+        //Add By ling.zhang01 20170110
+        $('#addParameterButton').click(function(){
+            insertParameterLine({});
+        });
+        //Add Instance By ling.zhang01 20170110 End
         report_module = $('#report_module').val();
         loadTreeData($('#report_module').val());
 
@@ -282,6 +292,11 @@
             loadChartLine(val);
         });
         updateChartDimensionSelects();
+        //Add By ling.zhang01 20170110
+        $.each(cparameterLines,function(key,val){
+            insertParameterLine(val);
+        });
+        //Add Instance By ling.zhang01 20170110 End
         });
     });
 </script>
@@ -299,6 +314,11 @@
     <div class="tab-toggler toggle-detailpanel_charts ">
         <h4 class="button">{$MOD.LBL_AOR_CHARTS_SUBPANEL_TITLE}</h4>
     </div>
+    <!-- Add By ling.zhang01 20170110 -->
+    <div class="tab-toggler toggle-detailpanel_cparameters ">
+        <h4 class="button">{$MOD.LBL_AOR_PARAMETERS_SUBPANEL_TITLE}</h4>
+    </div>
+    <!-- Add Instance By ling.zhang01 20170110 End -->
 </div>
 <div class="clear"></div>
 
@@ -372,6 +392,26 @@
         </div>
         <button id="addChartButton" type="button">{$MOD.LBL_ADD_CHART}</button>
     </div>
+    <!-- Add By ling.zhang01 20170110 -->
+    <div class="edit view edit508 hidden" id="detailpanel_cparameters">
+        <div id="cparameterLines">
+            <table>
+                <thead id="cparameterHead" style="display: none;">
+                    <tr>
+                        <td></td>
+                        <td>{$MOD.LBL_PARAMETER_NAME}</td>
+                        <td>{$MOD.LBL_PARAMETER_DES}</td>
+                        <td>{$MOD.LBL_PARAMETER_TYPE}</td>
+                        <td>{$MOD.LBL_PARAMETER_FIELD_RELEVANCE}</td>
+                        <td>{$MOD.LBL_PARAMETER_VALUE}</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <button id="addParameterButton" type="button">{$MOD.LBL_ADD_PARAMETER}</button>
+    </div>
+    <!-- Add Instance By ling.zhang01 20170110 End -->
 </div>
 {literal}
 <script type="text/javascript">

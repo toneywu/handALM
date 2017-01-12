@@ -101,10 +101,9 @@ SELECT
   if(ac.account_id2_c='',a.id,if(ac.account_id2_c is null,a.id,ac.account_id2_c))
     into counting_org_id_c
 FROM
-  accounts a,
-  accounts_cstm ac
+  accounts a LEFT JOIN accounts_cstm ac on a.id = ac.id_c
 WHERE
-  a.id = ac.id_c
+  1=1
 AND a.id =counting_org_id_c;
   #将数据放入临时表
   insert into counting_asset_info values(asset_id_c, 

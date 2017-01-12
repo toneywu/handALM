@@ -31,6 +31,17 @@ class AOR_ReportsViewDetail extends ViewDetail {
         if(!$this->bean->id){
             return array();
         }
+        /**Add By ling.zhang01 20170110
+         * 当报表类型为自定义类型时，获取自定义参数*/
+        if($this->bean->report_type_c == 'Custom'){
+             $parameters = array();
+            foreach($this->bean->get_linked_beans('haor_parameters','HAOR_Parameters') as $parameter){
+                $parameters[] = $parameter->toArray();
+            }
+            //var_dump($parameters);
+            return $parameters;
+        }
+        //Add Instance By ling.zhang01 20170110 End
         $conditions = $this->bean->get_linked_beans('aor_conditions','AOR_Conditions', 'condition_order');
         $parameters = array();
         foreach($conditions as $condition){
@@ -60,7 +71,8 @@ class AOR_ReportsViewDetail extends ViewDetail {
         }
         return $parameters;
     }
-
+ 
+ 
     public function preDisplay() {
         global $app_list_strings;
         parent::preDisplay();
@@ -87,7 +99,10 @@ class AOR_ReportsViewDetail extends ViewDetail {
             jsLanguage::createModuleStringsCache('AOR_Conditions', $GLOBALS['current_language']);
         }
         echo '<script src="cache/jsLanguage/AOR_Conditions/'. $GLOBALS['current_language'] . '.js"></script>';
-
+        //add by zhangling
+        $report_type = $this->bean->report_type_c;
+        echo "<script>var reportType = '".$report_type."';</script>";
+        //end
         $params = $this->getReportParameters();
         echo "<script>var reportParameters = ".json_encode($params).";</script>";
 
