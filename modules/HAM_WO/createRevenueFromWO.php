@@ -37,7 +37,7 @@ function createRevenueFromWO($WOId){
 		die('已批准的工单才能创建收支计费项!');
 	}
 
-	$beanWO = BeanFactory :: getBean('HAT_EventType',$wo->hat_eventtype_id);
+	$beanWO = BeanFactory :: getBean('HAT_EventType',$wo->hat_event_type_id);
 	if ($beanWO->revenue_eventtype_id_c!='') { 
 		$beanRevenue = BeanFactory :: getBean('HAT_EventType',$beanWO->revenue_eventtype_id_c);
 	}else{
