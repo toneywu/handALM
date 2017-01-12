@@ -33,4 +33,10 @@ foreach($app_list_strings['asset_trans_status'] as $key=>$value){
 }
 
 echo '</select>';
+
+
+
 ?>
+
+<!-- <span id="span_product_initial_account_day_c'+prodln+'" class="input-group date" style="margin-top:5px" > -->
+<input id="product_initial_account_day_c' + prodln + '" class="date_input pull-left" style="width:75px" autocomplete="off" name="trans_date" value="" title="" tabindex="0" type="text" onchange=""><!-- <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span> -->

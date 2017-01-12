@@ -58,7 +58,7 @@ array (
           'name' => 'frameworks',
           'studio' => 'visible',
           'label' => 'LBL_FRAMEWORKS',
-          'customCode' => '{$FRAMEWORK_C}',
+          'customCode' => '{$FRAMEWORK}',
           ),
         1 => 
         array (
