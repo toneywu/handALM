@@ -7,19 +7,16 @@
      //需要事先判断 当前头状态是否从非已批准变为已批准 如果是的话 做后续erp资产调拨操作
 	$need_allocation="N";
 	//如果是新增 但是状态直接是提交 那么也当成需要完成资产调拨 满足条件1
-	if(empty($current_header_id)&&($display_status=="SUBMITTED")){
-		$need_allocation="Y";
-	}else{
-		//如果有值 则通过数据库来判断
-		$check_sql =  'select hat_asset_trans_batch.asset_trans_status from hat_asset_trans_batch where hat_asset_trans_batch.deleted=0 and hat_asset_trans_batch.id="'.$current_header_id.'"';
-	    $check_result = $db->query($check_sql);
-		while ($check_record = $db->fetchByAssoc($check_result)) {
-			$db_status = $check_record['asset_trans_status'];
-			if($db_status!="APPROVED"&&($_POST['asset_trans_status']=="APPROVED"||$_POST['asset_trans_status']=="SUBMITTED")){
-				$need_allocation="Y";
-			}
+	//如果有值 则通过数据库来判断
+	$check_sql =  'select hat_asset_trans_batch.asset_trans_status from hat_asset_trans_batch where hat_asset_trans_batch.deleted=0 and hat_asset_trans_batch.id="'.$current_header_id.'"';
+	$check_result = $db->query($check_sql);
+	while ($check_record = $db->fetchByAssoc($check_result)) {
+		$db_status = $check_record['asset_trans_status'];
+		if($db_status!="CLOSED"&&($_POST['asset_trans_status']=="CLOSED")){
+			$need_allocation="Y";
 		}
-    }
+	}
+	
 	$assets_line_array = $_POST['line_asset_id'];
 	//当前事物处理单的数量
 	$current_display_quantity = 0;

@@ -73,7 +73,16 @@ function display_lines($focus, $field, $value, $view){
 						  ha_mont.name mont_asset_name,
 						  hiaa.`port`,
 						  hiaa.`speed_limit`,
-						  hiaa.`source_wo_id` source_id
+						  hiaa.`source_wo_id` source_id,
+						  IFNULL((SELECT 
+								a.name
+							  FROM
+								hit_ip_allocations hi,
+								accounts a 
+							  WHERE hi.target_owning_org_id = a.`id` 
+								AND hi.hit_ip_subnets_id = his.id 
+								AND hi.`deleted` = 0 
+							  LIMIT 0, 1),'')using_org 
 						FROM
 						  `hit_ip_subnets` his
 						  LEFT JOIN hit_vlan hv

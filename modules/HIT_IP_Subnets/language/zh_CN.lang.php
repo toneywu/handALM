@@ -105,4 +105,5 @@ $mod_strings = array (
   'LBL_IP_SUBNET'=>'子网IP地址段',
   'LBL_DETAILS'=>'明细',
   'LBL_IP_AUTOCREATE_IP'=>'自动生成单个地址'
+  'LBL_USING_ORG'=>'使用组织',
 );

@@ -158,6 +158,7 @@ function loopField(fieldName,type){
 		    mark_field_enabled_mine(fieldName+i,false);
 		}
 	}else if(type=="INVISIABLE"){
+		console.log("fieldName = "+fieldName);
 		for (var i=0;i<prodln;i++) {
 			// hide_field_disabled(fieldName+i,true,false)
 		    $("#"+fieldName+i).css({"visibility":"hidden"});
@@ -206,6 +207,7 @@ function changeRequired(lineRecord){
 	loopField("line_status",lineRecord.change_status);
 	loopField("line_access_assets_backup_name",lineRecord.change_access_assets_backup_name);
 	loopField("line_enable_action",lineRecord.change_enable_action);
+	loopField("line_broadband_type",lineRecord.change_broadband_type);
 }
 
 //delted by toney.wu 20161007

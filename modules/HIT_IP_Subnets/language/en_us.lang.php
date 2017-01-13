@@ -109,4 +109,5 @@ $mod_strings = array (
   'LBL_ALREADY_EXISTS_IN_SYSTEM'=>'C Segment Already Exists In System',
   'LBL_STATUS'=>'Status',
   'LBL_DETAILS'=>'Details',
+  'LBL_USING_ORG'=>'Using Organization',
 );

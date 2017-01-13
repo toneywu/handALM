@@ -95,4 +95,6 @@ $mod_strings = array (
   'LBL_AUTONUM' => '保存后自动分配',
   'LBL_HOMEPAGE_TITLE' => '我的 ODF跳接关系',
   'LBL_LINK_SELECTOR'=>'ODF跳接关系',
+  'LBL_A_PALTE_NUM'=>'A端盘号',
+  'LBL_B_PALTE_NUM'=>'B端盘号',
 );

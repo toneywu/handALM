@@ -639,8 +639,10 @@ function insertTransLineHeader(tableid) {
 
 	var l = x.insertCell(14);
 	l.innerHTML = SUGAR.language.get('HIT_IP_Subnets', 'LBL_DETAILS');
+	var l1 = x.insertCell(15);
+	l1.innerHTML = SUGAR.language.get('HIT_IP_Subnets', 'LBL_USING_ORG');
 
-	var l = x.insertCell(15);
+	var l = x.insertCell(16);
 	l.innerHTML = " ";
 
 }
@@ -675,6 +677,12 @@ function insertLineData(hit_ip_subnets, current_view) { // 将数据写入到对
 		$("#line_gateway".concat(String(ln))).val(hit_ip_subnets.gateway);
 		$("#line_ip_type_val".concat(String(ln))).val(hit_ip_subnets.ip_type);
 		$("#line_hat_asset_locations_id".concat(String(ln))).val(hit_ip_subnets.hat_asset_locations_id);
+		$("#line_using_org".concat(String(ln))).val(hit_ip_subnets.using_org);
+
+		//$("#line_status".concat(String(ln))).val(hit_ip_subnets.hiaa_id);
+		console.log("--------------------------------------------------------------");
+		console.log($("#line_status".concat(String(ln))).val());
+		$("#line_source_id".concat(String(ln))).val(hit_ip_subnets.source_id);
 
 
 		//$("#line_status".concat(String(ln))).val(hit_ip_subnets.hiaa_id);
@@ -770,8 +778,10 @@ function insertTransLineElements(tableid, current_view) { // 创建界面要素
 			/*+ "<td><span name='displayed_line_organization[" + prodln + "]' id='displayed_line_organization" + prodln + "'></span></td>"*/
 			+ "<td><span name='displayed_line_status[" + prodln+ "]' id='displayed_line_status" + prodln + "'></span></td>"
 			+ "<td><span name='displayed_line_source_link[" + prodln+ "]' id='displayed_line_source_link" + prodln + "'></span></td>"
-			;
-    //console.log("displayed_line_ip_type   " + $("#displayed_line_ip_type" + prodln).text());
+			//2017-1-11 by yuan.chen
+			+ "<td><span name='displayed_line_using_org[" + prodln+ "]' id='displayed_line_using_org" + prodln + "'></span></td>"
+			+ "<td>"
+
 	if (current_view == "EditView") {
 		z1.innerHTML += "<td>"
 		        + "<input type='button' value='"
@@ -993,7 +1003,8 @@ function insertTransLineElements(tableid, current_view) { // 创建界面要素
 			+ "<input style='width:153px;'  autocomplete='off' type='text' name='line_gateway["
 			+ prodln + "]' id='line_gateway" + prodln
 			+ "' maxlength='50' value='' title=''>" + "</span>" 
-
+			//add by yuan.chen 2017-1-11
+			+ "<input type='hidden' name='line_using_org[" + prodln + "]' id='line_using_org" + prodln + "' value='0'>"
 			+ "<input type='hidden' name='line_deleted[" + prodln + "]' id='line_deleted" + prodln + "' value='0'>"
 			+ "<input type='hidden' name='line_id[" + prodln + "]' id='line_id" + prodln + "' value=''>"
 			+ "<input type='hidden' name='line_ip_type_val[" + prodln + "]' id='line_ip_type_val" + prodln + "' value=''>"
@@ -1086,7 +1097,7 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 	$("#displayed_line_gateway" + ln).html($("#line_gateway" + ln).val());
 	$("#displayed_line_ip_type" + ln).html($("#line_ip_type" + ln).val());
 	$("#displayed_line_location" + ln).html($("#line_location" + ln).val());
-    
+	$("#displayed_line_using_org" + ln).html($("#line_using_org" + ln).val());
     //2016-12-26
 	/*if ($("#line_org" + ln).val() == "") {
 		$("#displayed_line_organization" + ln).html(SUGAR.language.get(
@@ -1104,15 +1115,22 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 		$("#displayed_line_ip_qty" + ln).html("1");
 		$("#displayed_line_ip_lowest" + ln).html("");
 		$("#displayed_line_ip_highest" + ln).html("");
-		//is_assigned = 1;
+		is_assigned = 1;
+		//console.log("11111111111111111111111111");
 	}
-	
+
     //2016-12-26
-	if ($("#displayed_line_purpose" + ln).html() != "" ) {
+	if ($("#displayed_line_purpose" + ln).val() != "" ) {
 		is_assigned =1;
+		//console.log("22222222222222222222222");
 	}
+	/*else{
+		is_assigned =1;
+		console.log("22222222222222222222222");
+	}*/
     if ($("#line_status"+ln).val()!="") {
     	is_assigned =1;
+    	//console.log("33333333333333333333");
     }
     if(is_assigned == 1) {
 

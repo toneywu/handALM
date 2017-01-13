@@ -84,5 +84,6 @@ $mod_strings = array (
     'LBL_ASSIGNED'=>'已分配',
     'LBL_UNASSIGNED'=>'未分配',
     'LBL_UNDEFINED'=>'无子网段',
+	'LBL_DETAILS'=>'明细',
 
 );
