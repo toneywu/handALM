@@ -33,8 +33,18 @@ function createRevenueFromAT($ATId){
 	require_once('modules/HAOS_Revenues_Quotes/createRevenue.php');
 	$at = new HAT_Asset_Trans_Batch();
 	$at->retrieve($ATId);
-	if ($at->asset_trans_status=='DRAFT'||$at->asset_trans_status!='CANCELED'){
+	if ($at->asset_trans_status=='DRAFT'||$at->asset_trans_status=='CANCELED'){
 		die('已批准的资产事务处理单才能创建收支计费项!');
+	}
+
+	$beanAT = BeanFactory :: getBean('HAT_EventType',$at->hat_eventtype_id);
+	if ($beanAT->revenue_eventtype_id_c!='') { 
+		$beanRevenue = BeanFactory :: getBean('HAT_EventType',$beanAT->revenue_eventtype_id_c);
+	}else{
+		die('事务单的事件类型未设置对应的收支计费项的事务类型，请联系运维人员!');
+	}
+	if ($beanRevenue){
+		$rawRow['event_type'] = $beanRevenue->name;
 	}
 
 	$rawRow['haa_frameworks_id_c'] = $rawRow['haa_frameworks_id_c'];
@@ -44,6 +54,7 @@ function createRevenueFromAT($ATId){
 	$rawRow['event_date'] = '' ;
 	$rawRow['source_code'] = 'HAT_Asset_Trans_Batch';
 	$rawRow['source_id'] = $at->id;
+
 
 	$rawRow['source_reference'] =  $at->tracking_number;
 	$rawRow['contact_id_c'] = $at->owner_id;

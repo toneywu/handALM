@@ -28,9 +28,7 @@ class HAT_Asset_Trans_BatchViewDetail extends ViewDetail
         if(isset($_REQUEST["woop_id"])){
            echo '<script>var hideButtonFlag="Y";</script>';
        }
-
        parent::Display();
-
 
         //ff 在DetailView显示之前中进行初始化数据的加载
        if (isset ($this->bean->hat_eventtype_id) && ($this->bean->hat_eventtype_id) != "") {
@@ -78,6 +76,9 @@ class HAT_Asset_Trans_BatchViewDetail extends ViewDetail
             //END Modefy zeng 20161110
             echo '<script>var template_id="'.$aos_pdf_templates_id.'"</script>';
         }
-
+        //设置权限
+        if(!(ACLController::checkAccess('HAT_Asset_Trans_Batch', 'detail', true))){
+            echo '<script>$("#create_to_revenue_button").remove();</script>';
+        }
     }
 }

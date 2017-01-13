@@ -155,7 +155,6 @@ function mark_field_setlist(fields) {
 	var field_name=fields.field;
 	
 	var pre_val = $("#"+field_name).val();
-	console.log("pre_val = "+pre_val);
 	if (view=='EditView') {
 //		var html="<select id='"+field_name+"' name='"+field_name+"'></select>";
 		var html="<select id='"+field_name+"' class='"+field_name+"' name='"+field_name+"'></select>";
@@ -168,13 +167,12 @@ function mark_field_setlist(fields) {
 				var fields = jQuery.parseJSON(data);
 				var option="";
 				for (var i = 0; i < fields.length; i++) {
-					option+="<option value='"+fields[i]+"'>"+fields[i]+"</option>";
+					//option+="<option value='"+fields[i]+"'>"+fields[i]+"</option>";
 					if(fields[i]==pre_val){
 						option+="<option selected ='selected' value='"+fields[i]+"'>"+fields[i]+"</option>";
 					}else{
 						option+="<option value='"+fields[i]+"'>"+fields[i]+"</option>";
 					}
-					
 				}
 				$("#"+field_name).append(option);
 			}

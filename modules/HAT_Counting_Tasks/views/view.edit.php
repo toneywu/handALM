@@ -24,32 +24,37 @@ class HAT_Counting_TasksViewEdit extends ViewEdit
 		parent::display();
 		$countInfo= new CountInfo();
 		$count=$countInfo->populateLineCountInfo($this->bean->id);
+		$flag=$this->bean->upinterface_flag==1?"true":"false";
 		echo "<script>
-			$('#total_counting').val('".$count['total_counting']."');
-			$('#actual_counting').val('".$count['actual_counting']."');
-			$('#amt_actual_counting').val('".$count['matched_count']."');
-			$('#profit_counting').val('".$count['overage_count']."');
-			$('#loss_counting').val('".$count['loss_count']."');
-			$('#diff_counting').val('".$count['different_count']."');
-			$('#actual_adjust_count').val('".$count['processed_count']."');
-			$('#un_actual_counting').val('".$count['un_actual_counting']."');
-		</script>";
-			echo "<script>
-			$('#task_number').val('".$this->bean->task_number."');
-			$('#planed_start_date').val('".$this->bean->planed_start_date."');
-			$('#planed_complete_date').val('".$this->bean->planed_complete_date."');
-			$('#snapshot_date').val('".$this->bean->snapshot_date."');
-			</script>";
-			if($this->bean->id==''){
-			echo "<script>
-				$('#manual_add_flag').val(1);
-				$('#manual_add_flag').attr('checked',true);
-			</script>";
-		}
-	echo '<input  id="location_attr" value="" type="hidden">';
-	echo '<input  id="oranization_attr"  type="hidden" value="">';
-	echo '<input  id="major_attr"  type="hidden" value="">';
-	echo '<input  id="category_attr"  type="hidden" value="">';
+		$('#total_counting').val('".$count['total_counting']."');
+		$('#actual_counting').val('".$count['actual_counting']."');
+		$('#amt_actual_counting').val('".$count['matched_count']."');
+		$('#profit_counting').val('".$count['overage_count']."');
+		$('#loss_counting').val('".$count['loss_count']."');
+		$('#diff_counting').val('".$count['different_count']."');
+		$('#actual_adjust_count').val('".$count['processed_count']."');
+		$('#un_actual_counting').val('".$count['un_actual_counting']."');
+	</script>";
+	echo "<script>
+	$('#task_number').val('".$this->bean->task_number."');
+	$('#planed_start_date').val('".$this->bean->planed_start_date."');
+	$('#planed_complete_date').val('".$this->bean->planed_complete_date."');
+	$('#snapshot_date').val('".$this->bean->snapshot_date."');
+</script>";
+if($this->bean->id==''){
+	echo "<script>
+	$('#manual_add_flag').val(1);
+	$('#manual_add_flag').attr('checked',true);
+	</script>";
+}
+echo '<script>
+	$("#upinterface_flag").val("'.$this->bean->upinterface_flag.'");
+	$("#upinterface_flag").attr("checked",'.$flag.');
+</script>';
+echo '<input  id="location_attr" value="" type="hidden">';
+echo '<input  id="oranization_attr"  type="hidden" value="">';
+echo '<input  id="major_attr"  type="hidden" value="">';
+echo '<input  id="category_attr"  type="hidden" value="">';
 
 }
 

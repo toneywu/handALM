@@ -65,7 +65,10 @@ class AOR_ReportsViewEdit extends ViewEdit {
 
         $charts = $this->getChartLines();
         echo "<script>var chartLines = ".json_encode($charts).";</script>";
-
+        //Add By ling.zhang01 20170110
+        $cparameters = $this->getParameterLines();
+        echo "<script>var cparameterLines = ".json_encode($cparameters).";</script>";
+        //Add Instance By ling.zhang01 20170110 End
         parent::preDisplay();
     }
 
@@ -137,6 +140,19 @@ class AOR_ReportsViewEdit extends ViewEdit {
         }
         return $charts;
     }
+    /**Add By ling.zhang01 20170110
+    * 当报表类型为自定义类型时，获取自定义参数*/
+    private function getParameterLines(){
+        $parameters = array();
+        if(!$this->bean->id){
+            return array();
+        }
+        foreach($this->bean->get_linked_beans('haor_parameters','HAOR_Parameters') as $parameter){
+            $parameters[] = $parameter->toArray();
+        }
+        return $parameters;
+    }
+
 
     public function getDisplayForField($modulePath, $field, $reportModule){
         $modulePathDisplay = array();
