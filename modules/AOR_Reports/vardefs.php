@@ -118,6 +118,7 @@ $dictionary['AOR_Report'] = array(
             'include' => 'modules/AOR_Conditions/conditionLines.php'
         ),
     ),
+  
   'aor_fields' =>
   array (
     'name' => 'aor_fields',
@@ -135,6 +136,15 @@ $dictionary['AOR_Report'] = array(
      'relationship' => 'aor_reports_aor_conditions',
      'module'=>'AOR_Conditions',
      'bean_name'=>'AOR_Condition',
+     'source'=>'non-db',
+  ),
+  'haor_parameters' =>
+  array (
+     'name' => 'haor_parameters',
+     'type' => 'link',
+     'relationship' => 'aor_reports_haor_parameters',
+     'module'=>'HAOR_Parameters',
+     'bean_name'=>'HAOR_Parameters',
      'source'=>'non-db',
   ),
   'aor_charts' =>
@@ -175,6 +185,16 @@ $dictionary['AOR_Report'] = array(
         'lhs_key' => 'id',
         'rhs_module'=> 'AOR_Conditions',
         'rhs_table'=> 'aor_conditions',
+        'rhs_key' => 'aor_report_id',
+        'relationship_type'=>'one-to-many',
+    ),
+    'aor_reports_haor_parameters' =>
+    array(
+        'lhs_module'=> 'AOR_Reports',
+        'lhs_table'=> 'aor_reports',
+        'lhs_key' => 'id',
+        'rhs_module'=> 'HAOR_Parameters',
+        'rhs_table'=> 'haor_parameters',
         'rhs_key' => 'aor_report_id',
         'relationship_type'=>'one-to-many',
     ),

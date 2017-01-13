@@ -26,6 +26,9 @@ class HAM_WOViewDetail extends ViewDetail {
 				echo '<script>call_ff()</script>';
 			}
 		}
+		if(!(ACLController::checkAccess('HAM_WO', 'detail', true))){
+            echo '<script>$("#create_to_revenue_button").remove();</script>';
+        }
 	}
 
 

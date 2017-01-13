@@ -69,20 +69,37 @@ $(document).ready(function() {
         var _form = $('#formDetailView');
         $('#formDetailView :input[name="action"]').val("Export");
         //Add each parameter to the form in turn
-    
-        $('.aor_conditions_id').each(function(index, elem){
-            $elem = $(elem);
-            var ln = $elem.attr('id').substr(17);
-            var id = $elem.val();
-            _form.append('<input type="hidden" name="parameter_id[]" value="'+id+'">');
-            var operator = $("#aor_conditions_operator\\["+ln+"\\]").val();
-            _form.append('<input type="hidden" name="parameter_operator[]" value="'+operator+'">');
-            var fieldType = $('#aor_conditions_value_type\\['+ln+'\\]').val();
-            _form.append('<input type="hidden" name="parameter_type[]" value="'+fieldType+'">');
-            var fieldInput = $('#aor_conditions_value\\['+ln+'\\]').val();
-            _form.append('<input type="hidden" name="parameter_value[]" value="'+fieldInput+'">');
-        });
-        
+        //Update By ling.zhang01 20170110
+        if($('#report_type').val()=='Custom'){
+             $('.aor_parameters_id').each(function(index, elem){
+                $elem = $(elem);
+                var ln = $elem.attr('id').substr(16);
+                var id = $elem.val();
+                _form.append('<input type="hidden" class="parameter" name="parameter_id[]" value="'+id+'">');
+               
+                var fieldInput="";
+                var file_type = $('#aor_parameter_type'+ln).val();
+                if (file_type == 'lov'||file_type == 'sql'){
+                    fieldInput = $('#aor_parameter_lov_id'+ln).val();
+                } else {
+                    fieldInput = $('#aor_parameter_value'+ln).val();
+                }
+                _form.append('<input type="hidden" class="parameter" name="parameter_value[]" value="'+fieldInput+'">');
+            });
+        }else{
+            $('.aor_conditions_id').each(function(index, elem){
+                $elem = $(elem);
+                var ln = $elem.attr('id').substr(17);
+                var id = $elem.val();
+                _form.append('<input type="hidden" class="parameter" name="parameter_id[]" value="'+id+'">');
+                var operator = $("#aor_conditions_operator\\["+ln+"\\]").val();
+                _form.append('<input type="hidden" class="parameter" name="parameter_operator[]" value="'+operator+'">');
+                var fieldType = $('#aor_conditions_value_type\\['+ln+'\\]').val();
+                _form.append('<input type="hidden" class="parameter" name="parameter_type[]" value="'+fieldType+'">');
+                var fieldInput = $('#aor_conditions_value\\['+ln+'\\]').val();
+                _form.append('<input type="hidden" class="parameter" name="parameter_value[]" value="'+fieldInput+'">');
+            });
+        }
         //Add By ling.zhang01 20161227
         var options={  
         //target : file_name,    // 把服务器返回的内容放入id为output的元素中  
@@ -97,6 +114,7 @@ $(document).ready(function() {
         }  ;
         // _form.submit();   //原form提交方式
         _form.ajaxSubmit(options);  
+        $(".parameter").remove();
         //Add Instance By ling.zhang01 20161227 End
     });
 });

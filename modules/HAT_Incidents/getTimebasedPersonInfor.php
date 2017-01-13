@@ -1,9 +1,16 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-global $db;
+global $db, $timedate;
 
 $asset_id=$_GET['asset_id'];
 $event_time=$_GET['event_time'];//这里需要注意的是，从前段传来的是用户系统的时间，这个时间需要转为DB时间进行后台比较
+
+//Add by zengchen 20170112
+/*require_once("include/TimeDate.php");
+$timedate= new TimeDate();
+$event_time=new DateTime($event_time);	//将获取到的时间转为对象
+$event_time=$timedate->asDb($event_time);//将对象传入TimeDate，转为+0时区时间
+*///End add 20170112
 
 //先假设没有做过事务处理，取出当前的资产记录
 $sql="SELECT c.`last_name`, c.`id` FROM hat_assets ha, contacts c WHERE ha.`using_person_id`=c.`id` AND c.`deleted`=0 AND ha.id='".$asset_id."'";
@@ -66,6 +73,7 @@ if (!empty($event_time)) {
 	}
 }
 
+//把数组转为json格式可以使用json_encode(array);
 echo '{"id":"'.$person_id.'","name":"'.$person_name.'"}';
 //echo $res['employee_number_c'];
 

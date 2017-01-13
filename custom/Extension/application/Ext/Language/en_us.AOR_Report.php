@@ -40,6 +40,14 @@
 
 
 $app_list_strings['haor_report_type']=array (
-  'Standard' => '标准',
-  'Custom' => '自定义',
-  );
+	'Standard' => '标准',
+	'Custom' => '自定义',
+	);
+
+$app_list_strings['aor_parameter_type_list']=array (
+	'varchar' => '字符型',
+	'list' => '下拉列表',
+	'date' => '日期型',
+	'lov' => '关联型-Module',
+	'sql' => '关联型-SQL',
+	);

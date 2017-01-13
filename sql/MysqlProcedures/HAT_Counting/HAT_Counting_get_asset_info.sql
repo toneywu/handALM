@@ -62,6 +62,8 @@ left join hat_asset_locations_hat_assets_c halha on ha.id = halha.hat_asset_loca
 WHERE
 1=1
 AND ha.haa_frameworks_id = p_framework_id
+and halha.deleted=0
+and ha.deleted=0
 and (p_location_id is null or p_location_id ='' 
   or exists(select * 
         from lpid_temp l 
@@ -96,13 +98,12 @@ user_person_id_c,own_person_id_c,fixed_asset_id_c;
 
 WHILE not_found_asset != 1 DO
 SELECT
-  if(ac.account_id2_c,a.id,ac.account_id2_c)
+  if(ac.account_id2_c='',a.id,if(ac.account_id2_c is null,a.id,ac.account_id2_c))
     into counting_org_id_c
 FROM
-  accounts a,
-  accounts_cstm ac
+  accounts a LEFT JOIN accounts_cstm ac on a.id = ac.id_c
 WHERE
-  a.id = ac.id_c
+  1=1
 AND a.id =counting_org_id_c;
   #将数据放入临时表
   insert into counting_asset_info values(asset_id_c, 

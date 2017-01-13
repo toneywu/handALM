@@ -951,9 +951,7 @@ $app_list_strings['ham_work_orders_resolution_dom']['Invalid'] = '无效';
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['HPR_AM_Users'] = '资产管理用户';
-$app_list_strings['moduleList']['HPR_AM_Catelog'] = '资产目录';
-$app_list_strings['moduleList']['HPR_AM_Roles'] = '资产管理角色';
+$app_list_strings['moduleList']['HAOR_Parameters'] = '报表自定义参数';
 
 
 /*********************************************************************************

@@ -164,6 +164,19 @@ array (
             'label' => 'LBL_PROCESSING_ASSET_STATUS',
           ),
         ),
+        2 => 
+        array(
+          0 => array(
+            'name' => 'manual_create_enable_flag',
+            'studio' => 'visible',
+            'label' => 'LBL_MANUAL_CREATE_ENABLE_FLAG',
+          ),
+          1 => array(
+            'name' => 'revenue_eventtype',
+            'studio' => 'visible',
+            'label' => 'LBL_REVENUE_EVENTTYPE',
+          ),
+        ),
       ),
       'lbl_editview_panel2' => 
       array (

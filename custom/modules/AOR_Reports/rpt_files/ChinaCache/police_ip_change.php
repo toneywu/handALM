@@ -125,12 +125,14 @@ function custom_report_main($paraArray=array()){
     }
     //print $csv;
     //echo '---------------------3-------------------------';
-    $csv= $GLOBALS['locale']->translateCharset($csv, 'UTF-8', $GLOBALS['locale']->getExportCharset());
-
+   $csv= $GLOBALS['locale']->translateCharset($csv, 'UTF-8', $GLOBALS['locale']->getExportCharset());
+    $name= $GLOBALS['locale']->translateCharset($name, 'UTF-8', $GLOBALS['locale']->getExportCharset());
     ob_clean();
     header("Pragma: cache");
-    header("Content-type: text/html; charset=GBK");
-   /* header("Content-type: text/comma-separated-values; charset=".$GLOBALS['locale']->getExportCharset());*/
+    /*header("Content-type: text/comma-separated-values; charset=".$GLOBALS['locale']->getExportCharset());
+    header("Content-Disposition: attachment; filename=\"{$name}.csv\"");*/
+    //header("Content-type: text/html; charset=GBK");
+    header("Content-type: text/html; charset=".$GLOBALS['locale']->getExportCharset());
     header("Content-Disposition: attachment; filename=\"{$name}.csv\"");
     header("Content-transfer-encoding: binary");
     header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
@@ -140,9 +142,8 @@ function custom_report_main($paraArray=array()){
     if (!empty($sugar_config['export_excel_compatible'])) {
         $csv = chr(255) . chr(254) . mb_convert_encoding($csv, 'UTF-16LE', 'UTF-8');
     }
-
-    $name = $name.getMillisecond();
-    $name= $GLOBALS['locale']->translateCharset($name, 'UTF-8', $GLOBALS['locale']->getExportCharset());
+    $name = getMillisecond();
+    
     createRptDataFile($name,$csv);
     print $name.'.csv';
 
