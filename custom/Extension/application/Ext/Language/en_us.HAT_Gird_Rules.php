@@ -39,3 +39,13 @@
 
 
 $app_list_strings['moduleList']['HAT_Gird_Rules'] = 'Gird_Rules';
+
+$GLOBALS['app_list_strings']['hat_gird_line_layout_list']=array (
+    'Vetical' => 'Vetical',
+    'Horizontal' => 'Horizontal',
+);
+
+$GLOBALS['app_list_strings']['haa_order_list']=array (
+    'ASC' => 'ASC',
+    'DESC' => 'DESC',
+);

@@ -75,7 +75,7 @@ Datetimepicker.datetimepicker({ldelim}
 	language: '{$current_lang}',
 	format: dateformat,
 	showMeridian: true,
-	minView: 0,
+	minView: 0,//hour-minute
 	todayBtn: true,
 	autoclose: true,
 {rdelim});

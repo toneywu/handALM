@@ -3,6 +3,7 @@
 function display_lines($focus, $field, $value, $view){
 
     global $sugar_config, $locale, $app_list_strings, $mod_strings;
+    global $timedate;
 
     //加载资产状态对应的LOV值列表
     echo '<script>var hat_asset_status_list = [';
@@ -156,6 +157,7 @@ function display_lines($focus, $field, $value, $view){
 
         $html .= "<script>$(document).ready(function(){";
 		while ($row = $focus->db->fetchByAssoc($result)) {
+			$row['acctual_complete_date']=$timedate->to_display_date_time($row['acctual_complete_date']);//将DB时间转为显示时间
 			$line_data = json_encode($row);
 			$html .= "insertLineData(" . $line_data .",'".$view."');";
 			$html .= 'resetLineNum();';

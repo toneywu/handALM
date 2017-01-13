@@ -98,4 +98,5 @@ $mod_strings = array (
   'LBL_PDF_TEMPLATES'=>'PDF模板',
   'LBL_EDITVIEW_PANEL2'=>'题头',
   'LBL_CREATE_REVENUE'=>'创建收支项',
+  'LBL_DEFAULT_DATE'=>'默认记录为当前日期与时间',
 );

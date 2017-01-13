@@ -1,15 +1,16 @@
 // $.getScript("modules/HAA_FF/ff_include.js");//load triger_setFF()
 
-/*
- * function call_ff() {
- * triger_setFF($("#haa_ff_id").val(),"HAT_Asset_Trans_Batch","DetailView");
- * $(".expandLink").click();
- *  }
- */
-$.getScript("cache/include/javascript/sugar_grp_yui_widgets.js"); // MessageBox
+//Load JS
+//$.getScript("cache/include/javascript/sugar_grp_yui_widgets.js"); // MessageBox(已经无效)
 $.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
 $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); // MessageBox
- $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
+$.getScript("custom/resources/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"); // MessageBox
+
+//Load additional CSS files
+$('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
+$('head').append('<link rel="stylesheet" href="custom/resources/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" type="text/css" />');
+
+
 var global_eventOptions;
  /**
  * 点击按钮 调用Ajax请求 保存
@@ -36,19 +37,18 @@ var global_eventOptions;
  * @param name
  */
  function changeStatus(id) {
+	BootstrapDialog.confirm({
+		message: function(dialog) {
+                var $message = $('<div></div>');
+                var pageToLoad = dialog.getData('pageToLoad');
+                $message.load(pageToLoad);
 
- 	$.ajax({
- 		url : 'index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=getAvaliableStatusList&id=' + id,//读当前状态可变为的状态
- 		success : function(data) {
- 			var title_txt = SUGAR.language.get('HAT_Asset_Trans_Batch',
- 				'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL');
- 			var html = ""
- 			html += title_txt;
- 			html += data;
-			BootstrapDialog.confirm({
-		        title: title_txt,
-		        message: html,
-		        callback: function(result) {
+                return $message;
+            },
+            data: { //load remote pages
+                'pageToLoad': 'index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=getAvaliableStatusList&id=' + id
+            },
+            callback: function(result) {
 		            if(result) {
 		                //Clicked YES
 		                saveStatusChange($("input[name='record']").val(), $("#change_asset_trans_status").val());
@@ -57,12 +57,7 @@ var global_eventOptions;
 		            }
 		        }
 		    });
-		},
-		error : function() { // 失败
-			alert('Error loading document');
-		}
-	});
- 	/* } */
+
  };
 
 function setEventTypeFields() {
