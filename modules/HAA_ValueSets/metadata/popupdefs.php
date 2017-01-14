@@ -1,4 +1,5 @@
 <?php
+if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
@@ -37,54 +38,18 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
-
-$app_list_strings['moduleList']['HAA_Codes'] = 'Codes';
-
-$app_list_strings['haa_code_module_list']=array (
-  'accounts' => 'Organizations',
-  'tasks' => 'Tasks',
-  'contact' => 'People',
-  'contract' => 'Contracts',
-  'asset_location' => 'Asset Locations',
-  'asset_main'=>'Equip./Asset Main',
-  'asset_qualification'=>'Asset Qualifications',
-  'qualification'=>'Qualifications',
-  'wo'=>'Activities/Work Orders',
-  'revenue' => 'Revenue/Expenditure Trans',
-  'flexform'=>'FlexForm Extended Fields',
-  'insurance' => 'Insurance',
-  'asset_counting' => 'Asset Counting',
-  'interface'=>'Interface',
-  'sso'=>'SSO'
-  );
-
-$app_list_strings['haa_code_type_list']=array (
-  '' => '',
-  'asset_main_cost_center'=>'asset_main_cost_center',
-  'accounts_level' => 'accounts_level',
-  'accounts_business_type' => 'accounts_business_type',
-  'accounts_nature' => 'accounts_nature',
-  'accounts_org_type' => 'accounts_org_type',
-  'accounts_customer_class' => 'accounts_customer_class',
-  'contact_business_type'=>'contact_business_type',
-  'contact_id_type'=>'contact_id_type',
-  'contract_business_type' => 'contract_business_type',
-  'contract_media_type' => 'contract_media_type',
-  'contract_revision' => 'contract_revision',
-  'contract_type' => 'contract_type',
-  'asset_location_type' => 'asset_location_type',
-  'asset_qualification_type'=>'asset_qualification_type',
-  'qualification_type'=>'qualification_type',
-  'flexform_extended_list'=>'flexform_extended_list',
-  'tasks_type'=>'tasks_type',
-  'wo_activity_type'=>'wo_activity_type',
-  'revenue_expense_group' => 'revenue_expense_group',
-  'revenue_expense_type' => 'revenue_expense_type',
-  'insurance_claim_type' => 'insurance_claim_type',
-  'insurance_type' => 'insurance_type',
-  'insurance_subtype' => 'insurance_subtype',
-  'asset_counting_obj_type' => 'asset_counting_obj_type',
-  'asset_counting_major_type'=>'asset_counting_major_type',
-  'interface_link_system'=>'interface_link_system',
-  'sso_link_system'=>'sso_link_system'
-  );
+$module_name = 'HAA_ValueSets';
+$object_name = 'HAA_ValueSets';
+$_module_name = 'haa_valuesets';
+$popupMeta = array('moduleMain' => $module_name,
+						'varName' => $object_name,
+						'orderBy' => $_module_name.'.name',
+						'whereClauses' => 
+							array('name' => $_module_name . '.name', 
+								),
+						    'searchInputs'=> array($_module_name. '_number', 'name', 'priority','status'),
+							
+						);
+?>
+ 
+ 
