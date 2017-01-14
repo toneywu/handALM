@@ -37,51 +37,17 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
-/**
- * THIS CLASS IS FOR DEVELOPERS TO MAKE CUSTOMIZATIONS IN
- */
-require_once('modules/HAA_ValueSets/HAA_ValueSets_sugar.php');
-class HAA_ValueSets extends HAA_ValueSets_sugar {
-	
-	function __construct(){
-		parent::__construct();
-	}
 
-	function save($check_notify = FALSE){
-		$this->id=parent::save($check_notify);
-		$post_data=$_POST;
-		$key="line_";
-		$line_count = isset($post_data[$key . 'deleted']) ? count($post_data[$key . 'deleted']) : 0;
-        $j = 0;
-        for ($i = 0; $i < $line_count; ++$i) {
-            if ($post_data[$key . 'deleted'][$i] == 1) {
-                $haa_values->mark_deleted($post_data[$key . 'id'][$i]);
-            } else {
-            	$haa_values = new HAA_Values();
-                foreach ($haa_values->field_defs as $field_def) {
-                    $field_name = $field_def['name'];
-                    if (isset($post_data[$key . $field_name][$i])) {
-                        $haa_values->$field_name = $post_data[$key . $field_name][$i];
-                    }
-                }
-	            $haa_values->save($check_notify);
-	            $table='haa_valuesets_haa_values_c';//关系表
-	            $relate_values = array('deleted' =>0 ,
-	            	'haa_valuesets_haa_valueshaa_valuesets_ida'=>$this->id,
-	            	'haa_valuesets_haa_valueshaa_values_idb'=>$haa_values->id );
-	            parent::set_relationship($table,$relate_values);
-	        }
-	    }
-	}
+$app_list_strings['moduleList']['HAA_Values'] = '值集段值';
+$app_list_strings['moduleList']['HAA_ValueSets'] = '值集定义';
 
-
-	function mark_deleted($id)
-	{
-		/*$haa_values = new HAA_Values();
-		$haa_values->mark_lines_deleted($this);
-		$haa_values->mark_relationships_deleted($this);*/
-		parent::mark_deleted($id);
-	}
-	
-}
-?>
+$app_list_strings['haa_valueset_format_type_list']=array (
+	'C' => '字符',
+	'N' => '数字',
+	'D' => '日期',
+	);
+$app_list_strings['haa_valueset_type_list']=array (
+	'F' => '表',
+	'D' => '从属',
+	'I' => '独立',
+	);

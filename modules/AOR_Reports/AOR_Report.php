@@ -1062,7 +1062,89 @@ function standard_build_report_csv(){
     sugar_cleanup(true);
 }
 
+//Add By ling.zhang01 20161227
+function standard_build_report_excel(){
+    global $beanList;
+    ini_set('zlib.output_compression', 'Off');
 
+    ob_start();
+    require_once('include/export_utils.php');
+    require_once('custom/modules/AOR_Reports/ExcelUtil.php');
+    $eu = new ExcelUtil();
+    $eu -> setActiveSheet(0);
+    $columnNameArray=array();
+    
+    $sql = "SELECT id FROM aor_fields WHERE aor_report_id = '".$this->id."' AND deleted = 0 ORDER BY field_order ASC";
+    $result = $this->db->query($sql);
+
+    $fields = array();
+    $i = 0;
+    while ($row = $this->db->fetchByAssoc($result)) {
+
+        $field = new AOR_Field();
+        $field->retrieve($row['id']);
+
+        $path = unserialize(base64_decode($field->module_path));
+        $field_bean = new $beanList[$this->report_module]();
+        $field_module = $this->report_module;
+        $field_alias = $field_bean->table_name;
+
+        if($path[0] != $this->report_module){
+            foreach($path as $rel){
+                if(empty($rel)){
+                    continue;
+                }
+                $field_module = getRelatedModule($field_module,$rel);
+                $field_alias = $field_alias . ':'.$rel;
+            }
+        }
+        $label = str_replace(' ','_',$field->label).$i;
+        $fields[$label]['field'] = $field->field;
+        $fields[$label]['display'] = $field->display;
+        $fields[$label]['function'] = $field->field_function;
+        $fields[$label]['module'] = $field_module;
+        $fields[$label]['alias'] = $field_alias;
+        $fields[$label]['params'] = $field->format;
+
+        if($field->display){
+            $columnNameArray[]=$field->label;
+        }
+        ++$i;
+    }
+    $eu -> buildColumnName($columnNameArray);
+    $sql = $this->build_report_query();
+    $result = $this->db->query($sql);
+    $datas=array();
+    while ($row = $this->db->fetchByAssoc($result)) {
+        $rowData = array();
+        foreach($fields as $name => $att){
+            $currency_id = isset($row[$att['alias'].'_currency_id']) ? $row[$att['alias'].'_currency_id'] : '';
+            if($att['display']){
+                if($att['function'] != '' ||  $att['params'] != '')
+                    $rowData[] = $row[$name];
+                else
+                    $rowData[] = trim(strip_tags(getModuleField($att['module'], $att['field'], $att['field'], 'DetailView',$row[$name],'',$currency_id)));
+            }
+        }
+        $datas[]=$rowData;
+    }
+
+    $eu -> buildExcelContent($datas);
+    $name = $eu -> createExcelFile('custom/modules/AOR_Reports/rpt_data_files/');
+    $name= $GLOBALS['locale']->translateCharset($name, 'UTF-8', $GLOBALS['locale']->getExportCharset());
+    ob_clean();
+    header("Pragma: cache");
+    header("Content-type: text/html; charset=".$GLOBALS['locale']->getExportCharset());
+    header("Content-Disposition: attachment; filename=\"{$name}.csv\"");
+    header("Content-transfer-encoding: binary");
+    header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
+    header("Last-Modified: " . TimeDate::httpTime() );
+    header("Cache-Control: post-check=0, pre-check=0", false );
+    
+    print $name;
+
+    sugar_cleanup(true);
+}
 function build_report_csv(){
     $instance_code='';
     $bean_report=BeanFactory::getBean('AOR_Reports',$this->id);
@@ -1073,7 +1155,13 @@ function build_report_csv(){
     }
 }
 if ($bean_report->report_type_c=='Standard'){
-    $this->standard_build_report_csv();
+    //Update By ling.zhang01 20170113
+    if($bean_report->export_type=='excel'){
+        $this->standard_build_report_excel();
+    }else{
+        $this->standard_build_report_csv();
+    }
+    //Update Instance By ling.zhang01 20170113 End
 }
 else {
     if ($instance_code!=''){
