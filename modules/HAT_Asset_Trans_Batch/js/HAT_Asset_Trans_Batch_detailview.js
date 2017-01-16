@@ -18,10 +18,15 @@ var global_eventOptions;
  * @param name
  */
  function saveStatusChange(id, status_code) {
-
+ 	var accutral_execution_date = $("#accutral_execution_date").val();
+ 	if ($("#accutral_execution_date").val() == undefined) {
+ 		accutral_execution_date="";
+ 	};
+ 	//console.log('index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=saveStatusChange&id='+ id + "&status_code=" + status_code + "&accutral_execution_date=" + accutral_execution_date);
  	$.ajax({
- 		url : 'index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=saveStatusChange&id='+ id + "&status_code=" + status_code,
+ 		url : 'index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=saveStatusChange&id='+ id + "&status_code=" + status_code + "&accutral_execution_date=" + accutral_execution_date,
  		success : function(data) {
+ 			//console.log(data);
  			window.location.href = "index.php?module=HAT_Asset_Trans_Batch&action=DetailView&record=" + id;
  		},
 		error : function() { // 失败

@@ -398,21 +398,30 @@ $dictionary['HIT_Rack_Allocations'] = array(
       ),
     ),
     array (
-      'name' => 'idx_hit_rack_allocations_rackid',
+      'name' => 'idx_hit_rack_alloc_rackid',
       'type' => 'index',
       'fields' =>
       array (
         0 =>'hit_racks_id',
-        2 => 'deleted',
+        1 => 'deleted',
       ),
     ),
     array (
-      'name' => 'idx_hit_rack_allocations_assetid',
+      'name' => 'idx_hit_rack_allo_assetid',
       'type' => 'index',
       'fields' =>
       array (
         0 => 'hat_assets_id',
-        2 => 'deleted',
+        1 => 'deleted',
+      ),
+    ),
+    array (
+      'name' => 'idx_hit_rack_allo_using_org_id',
+      'type' => 'index',
+      'fields' =>
+      array (
+        0 => 'using_org_id',
+        1 => 'deleted',
       ),
     ),
 ),

@@ -78,7 +78,7 @@ dateformat = dateformat.replace(/M/,"ii");
 
 $('#span_accutral_execution_date').datetimepicker({
     format: dateformat,
-    language: '<?php echo $GLOBALS['current_language'];?>';,
+    language: '<?php echo $GLOBALS['current_language'];?>',
 	showMeridian: true,
 	minView: 0,
 	todayBtn: true,

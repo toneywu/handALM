@@ -119,11 +119,28 @@ array (
           ),
         ),
         4 => 
+        array(
+          0 => array(
+            'name' => 'manual_create_enable_flag',
+            'studio' => 'visible',
+            'label' => 'LBL_MANUAL_CREATE_ENABLE_FLAG',
+          ),
+          1 => array(
+            'name' => 'revenue_eventtype',
+            'studio' => 'visible',
+            'label' => 'LBL_REVENUE_EVENTTYPE',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&basic_type_advanced=REVENUE&module_name=HAT_EventType',
+            ),
+          ),
+        ),
+        5 => 
         array (
           0 => 'asset_scope',
           1 => 'default_asset_list',
         ),
-        5=>
+        6=>
         array(
           0=> 
           array (
@@ -132,7 +149,7 @@ array (
           ),
           1=>""
         ),
-        6 => 
+        7 => 
         array (
           0 => 
           array (
@@ -147,7 +164,7 @@ array (
             'label' => 'LBL_REQUIRE_CONFIRMATION',
           ),
         ),
-        7=>
+        8=>
         array(
           0=>'check_customer_hold_t_using',
           1=>'check_customer_hold_c_owning',
@@ -181,23 +198,6 @@ array (
             'name' => 'processing_asset_status',
             'studio' => 'visible',
             'label' => 'LBL_PROCESSING_ASSET_STATUS',
-          ),
-        ),
-        2 => 
-        array(
-          0 => array(
-            'name' => 'manual_create_enable_flag',
-            'studio' => 'visible',
-            'label' => 'LBL_MANUAL_CREATE_ENABLE_FLAG',
-          ),
-          1 => array(
-            'name' => 'revenue_eventtype',
-            'studio' => 'visible',
-            'label' => 'LBL_REVENUE_EVENTTYPE',
-            'displayParams' => 
-            array (
-              'initial_filter' => '&basic_type_advanced=REVENUE&module_name=HAT_EventType',
-            ),
           ),
         ),
       ),

@@ -220,12 +220,16 @@ $dictionary['HAA_FF_Fields'] = array(
 	'relationships'=>array (
 		),
 	'indices' => array(
-		array(
-			'name' => 'haa_ff_fields_index_ff_id',
-			'type' => 'index',
-			'fields' => array('haa_ff_id'),
-			),
-		),
+		array (
+	      'name' => 'idx_ff_fields_haa_ff_id_del',
+	      'type' => 'index',
+	      'fields' => 
+	      array (
+	        0 => 'haa_ff_id',
+	        1 => 'deleted',
+	      ),
+	    ),
+	),
 	'optimistic_locking'=>true,
 	'unified_search'=>false,
 	);

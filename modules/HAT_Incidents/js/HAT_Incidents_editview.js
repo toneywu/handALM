@@ -7,6 +7,9 @@ $(document).ready(function() {
     SUGAR.util.doWhen("typeof setFF == 'function'", function(){
     	call_ff();
     })
+
+    $("#event_date").change(function(){resetPersonByDate()})
+
 });
 //选择事件类型的回调函数
 function setEventTypeReturn(popupReplyData){
@@ -25,7 +28,6 @@ function setHatAssetsReturn(popupReplyData){
         async: false,
         data:"&asset_id="+asset_id+"&event_time="+$("#event_date").val(),
         success:function(data){
-
             //console.log ("?module=HAT_Incidents&action=getTimebasedPersonInfor&to_pdf=true&asset_id="+asset_id+"&event_time="+$("#event_date").val())
             data = JSON.parse(data);
             console.log(popupReplyData);
@@ -39,7 +41,27 @@ function setHatAssetsReturn(popupReplyData){
     set_return(popupReplyData);
 
 }
- 
+
+function resetPersonByDate() {
+    var asset_id = $("#hat_assets_id_c").val();
+    if(asset_id != ""){
+        //如果资产编号不为空，则可以进行基于资产的人员重新处理
+        //console.log("&asset_id="+asset_id+"&event_time="+$("#event_date").val());
+    $.ajax({
+        url:"?module=HAT_Incidents&action=getTimebasedPersonInfor&to_pdf=true",
+        type:"GET",
+        async: false,
+        data:"&asset_id="+asset_id+"&event_time="+$("#event_date").val(),
+        success:function(data){
+            data = JSON.parse(data);
+            //console.log(data);
+            $("#contact_id_c").val(data.id);
+            $("#person_number").val(data.name);
+        }
+    });
+    }
+}
+
 function call_ff() {
 	triger_setFF($("#haa_ff_id").val(),"HAT_Incidents");
 	$(".expandLink").click();

@@ -122,6 +122,16 @@ $dictionary['HAA_FF_Labels'] = array(
             'type' => 'index',
             'fields' => array('haa_ff_field_id'),
             ),
+        array (
+          'name' => 'idx_ff_fields_label_field_id_lang_del',
+          'type' => 'index',
+          'fields' => 
+          array (
+            0 => 'haa_ff_field_id',
+            1 => 'lang',
+            2 => 'deleted',
+          ),
+        ),
         ),
     'optimistic_locking'=>false,
     'unified_search'=>false,

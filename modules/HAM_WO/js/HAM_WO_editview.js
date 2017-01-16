@@ -11,12 +11,12 @@ function call_ff() {
 function setAssetPopupReturn(popupReplyData){
 	set_return(popupReplyData);
 	$("#asset_desc_text").text($("#asset_desc").val());
+    resetPersonByDate();
 }
 
 function setLocationPopupReturn(popupReplyData){
 	set_return(popupReplyData);
 	$("#location_desc_text").text($("#location_desc").val());
-	
 	if($("#location_map_enabled").val()=="1") {
 		$("#location_map_enabled_text").show();
 	} else {
@@ -71,6 +71,33 @@ function setWorkCenterResPopupReturn(popupReplyData){
 	set_return(popupReplyData);
 }
 
+function resetPersonByDate() {
+    var asset_id = $("#hat_assets_id").val();
+    var event_time = "";
+
+    if ($("#date_schedualed_start").val()=="") {
+        event_time = $("#date_target_start").val();
+    } else {
+        event_time = $("#date_schedualed_start").val();
+    }
+
+    if(asset_id != "" && event_time !=""){
+        //如果资产编号不为空，则可以进行基于资产的人员重新处理
+    console.log("&asset_id="+asset_id+"&event_time="+event_time);
+    $.ajax({
+        url:"?module=HAT_Incidents&action=getTimebasedPersonInfor&to_pdf=true",
+        type:"GET",
+        async: false,
+        data:"&asset_id="+asset_id+"&event_time="+event_time,
+        success:function(data){
+            data = JSON.parse(data);
+            //console.log(data);
+            $("#contact_id1_c").val(data.id);
+            $("#contract_name").val(data.name);
+        }
+    });
+    }
+}
 
 function require_field(){
 	var wo_status = $("#wo_status").val();
@@ -153,8 +180,8 @@ function showWOLines() {
 };
 
 $(document).ready(function(){
-	
-	
+
+
 	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
 		$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');
 	}
@@ -163,12 +190,15 @@ $(document).ready(function(){
 	SUGAR.util.doWhen("typeof setFF == 'function'", function(){
 		call_ff();
 	});
-	
+
 	$("#event_type").change(function(){
 		SUGAR.util.doWhen("typeof setFF == 'function'", function(){
 			call_ff();
 		});
 	});
+
+    $("#date_schedualed_start").change(function(){resetPersonByDate()})
+    $("#date_target_start").change(function(){resetPersonByDate()})
 
 	/**
 	 * checkAccess 

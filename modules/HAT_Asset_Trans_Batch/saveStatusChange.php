@@ -20,15 +20,19 @@ if (!empty($_POST['assigned_user_id']) && ($focus->assigned_user_id != $_POST['a
 $current_id = $_GET['id'];
 $status_code = $_GET['status_code'];
 
+echo('accutral_execution_date='.$_GET['accutral_execution_date']);
+
 $beanHeader = BeanFactory :: getBean('HAT_Asset_Trans_Batch', $current_id);
 
-if($beanHeader) {
+if($beanHeader) { //如果可以正确的读到数据，就可以继续开始修改
 
+	//修改头数据
 	require_once('modules/HAT_Asset_Trans_Batch/saveTransHeader.php');
 	$beanHeader->asset_trans_status = $status_code;//先初始化为表单上选中的状态
-	$beanHeader->asset_trans_status =check_hearder_status($beanHeader);//再新新为函数判断后的状态
+	$beanHeader->asset_trans_status = check_hearder_status($beanHeader);//再更新为函数判断后的状态
 	$beanHeader->save();
 
+	//修改行数据，必要时对行上的资产及连锁的内容进行更新。
 	require_once('modules/HAT_Asset_Trans/SaveAssetTransLines.php');
 	save_lines_status($beanHeader);
 

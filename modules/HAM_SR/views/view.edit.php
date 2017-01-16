@@ -224,7 +224,7 @@ class HAM_SRViewEdit extends ViewEdit
         }
         $this->ss->assign('SR_NUMBER',$sr_num_html);
         
-        if($_REQUEST['idDuplicate']==true){
+        if(isset($_REQUEST['idDuplicate']) && $_REQUEST['idDuplicate']==true){
         	$this->sr_status='DRAFT';
         }
 

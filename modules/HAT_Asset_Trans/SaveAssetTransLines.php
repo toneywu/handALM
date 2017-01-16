@@ -51,7 +51,13 @@ function save_lines($post_data, $header, $key = '', $need_allocation){
                     }
                     save_asset_lines($trans_line);//保存行上的资产信息
                     //$trans_line->description = '$timedate->nowDB()='.$timedate->nowDB().' $timedate->now()='.$timedate->now();
-                    $trans_line->acctual_complete_date = $timedate->nowDB();//将行上的事务处理时间标记为当时时间
+                    //
+                    if (empty($_GET['accutral_execution_date'])) {
+                        $trans_line->acctual_complete_date = $timedate->nowDB();//将行上的事务处理时间标记为当时时间
+                    } else {
+                        $trans_line->acctual_complete_date = $_GET['accutral_execution_date'];
+                    }
+
                     $trans_line->trans_status = 'CLOSED';//将当前行标记为结束
                 } else {
                     $trans_line->trans_status = $header->asset_trans_status;//父状态
@@ -84,7 +90,19 @@ function save_lines_status($header, $key = ''){
             }
             save_asset_lines($trans_line);//保存行上的资产信息
 
-            $trans_line->acctual_complete_date = $timedate->now();//将行上的事务处理时间标记为当时时间
+            if (empty($_GET['accutral_execution_date'])) {
+                $trans_line->acctual_complete_date = $timedate->nowDB();//将行上的事务处理时间标记为当时时间
+            } else {
+                //进行比较后判断按什么日期进行操作
+                $acctual_complete_date = $timedate->to_db_date_time($_GET['accutral_execution_date'],$_GET['accutral_execution_date']);
+                //$trans_line->acctual_complete_date = $_GET['accutral_execution_date'];
+                if (strtotime($acctual_complete_date)>strtotime($timedate->nowDB())) {
+                    //如果是未来时间 ，则以当前时间代替
+                    $trans_line->acctual_complete_date = $timedate->nowDB();//将行上的事务处理时间标记为当时时间
+                } else {
+                    $trans_line->acctual_complete_date = $_GET['accutral_execution_date'];
+                }
+            }
             $trans_line->trans_status='CLOSED';
         } else {
             $trans_line->trans_status = $header->asset_trans_status;//父状态

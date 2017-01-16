@@ -14,13 +14,13 @@ class HAT_EventTypeViewPopup extends ViewPopup
 
         //由于资产事务处理界面与EventType定义界面类型名称有些不统一，因此在此进行一个转化
        if ($_REQUEST['basic_type_advanced']=='HAT_Asset_Trans_Batch'){
-        $_REQUEST['basic_type_advanced']='AT_MOVE';
-    } else if ($_REQUEST['basic_type_advanced']=='HIT_IP_TRANS_BATCH') {
-        $_REQUEST['basic_type_advanced']='NETWORK';
-    }
+            $_REQUEST['basic_type_advanced']='AT_MOVE';
+        } else if ($_REQUEST['basic_type_advanced']=='HIT_IP_TRANS_BATCH') {
+            $_REQUEST['basic_type_advanced']='NETWORK';
+        }
 
-    if( $_GET['module_name'] =='HAT_EventType'){
-      parent::Display();
+if( isset($_GET['module_name']) && $_GET['module_name'] =='HAT_EventType'){
+      parent::Display();//如果是当前模块自己，就不显示
   }
   else{
         //在定义EventType时需要选择父结点，因此需要点选到所有的节点。因此在此基于PHP端的参数，传入到JS中
@@ -64,9 +64,12 @@ class HAT_EventTypeViewPopup extends ViewPopup
         /* 以下为加载数据 by toney.wu
         /*****************************************************************/
 
-        $beanEventTypes = BeanFactory::getBean('HAT_EventType')->get_full_list('name',"hat_eventtype.basic_type = '".$_REQUEST['basic_type_advanced']."' AND manual_create_enable_flag=1 AND hat_eventtype.haa_frameworks_id= '".$_SESSION["current_framework"]."'");
+        $beanEventTypes = BeanFactory::getBean('HAT_EventType')->get_full_list('name',"hat_eventtype.basic_type = '".$_REQUEST['basic_type_advanced']."' AND hat_eventtype.manual_create_enable_flag=1 AND hat_eventtype.haa_frameworks_id= '".$_SESSION["current_framework"]."'");
+
+        //echo ("hat_eventtype.basic_type = '".$_REQUEST['basic_type_advanced']."' AND manual_create_enable_flag=1 AND hat_eventtype.haa_frameworks_id= '".$_SESSION["current_framework"]."'");
 
         $txt_jason='{name:"'.$app_list_strings['hat_event_type_list'][$_REQUEST['basic_type_advanced']].'", open:true, isParent:true,pId:0,id:"ROOT"},';
+        //以当前应用名称做为根结点的名称
 
         if (isset($beanEventTypes)) {
             foreach ($beanEventTypes as $beanEventType) {
