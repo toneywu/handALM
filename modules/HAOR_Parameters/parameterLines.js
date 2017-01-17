@@ -100,6 +100,7 @@ function typeOnChange(n){
         pr = "<input type='text' id='aor_parameter_relevance_list"+n+"' onchange='listOnChange("+n+")' name='aor_parameter_relevance_list[]' placeholder='列表型参数须填写' value=''>";  
 
         pl = $("<select id='aor_parameter_value"+n+"' name='aor_parameter_value[]' style='width:178px;'></select>");
+        pl.append('<option value=""></option>');
         var options_name = $('#aor_parameter_relevance_list'+n).val();
         var options_list = SUGAR.language.languages['app_list_strings'][options_name];
         if(typeof(options_list)!='undefined'){
@@ -277,6 +278,7 @@ function loadCParameterLine(parameter){
         var listcell = $('<td style="width: 30%;"></td>');
         var listselect = $("<select id='aor_parameter_value"+ln+"' name='aor_parameter_value"+ln+"' style='width:178px;'></select>");
         var options_name = parameter['list_options_name'];
+        listselect.append('<option value=""></option>');
         //alert("name:"+options_name);
         $.each(SUGAR.language.languages['app_list_strings'][options_name],function(key,value){
             var listoption = $('<option></option>');
