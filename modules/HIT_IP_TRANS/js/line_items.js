@@ -10,6 +10,14 @@ if (typeof(YAHOO.SUGAR) == 'undefined') {
 }
 $.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
 
+
+$(document).ready(function(){
+	
+	if(typeof line_data=="undefined"){
+		var line_data="";
+	}
+});
+
 //补齐两位数  
 function padleft0(obj) {  
 	return obj.toString().replace(/^[0-9]{1}$/, "0" + obj);  
@@ -294,7 +302,7 @@ function setAddLineBtnReturn(popupReplyData) {
 			//data:JSON.stringify(popupReplyData.selection_list),
 			//type:"POST",
 			success: function (msg) {
-				//console.log($.parseJSON(msg));
+				console.log($.parseJSON(msg));
 				insertLineData($.parseJSON(msg));
 			},
 			error: function () { //失败
@@ -302,7 +310,6 @@ function setAddLineBtnReturn(popupReplyData) {
 			}
 		});
 	};
-	
 	// 设置行号
 	resetLineNum_Bold();
 	
@@ -333,26 +340,7 @@ function setHitIpReturn(popupReplyData) {
 	   $("#Trans_line_head").show();
 	   LineEditorClose(currentLine);
 	}
-	set_return(popupReplyData);
-	
-	/*
-	ip_splited = $("#line_hit_ip_subnets" + ln).val().split("/");
-	if (IpSubnetCalculator.isIp(ip_splited[0]) && ip_splited[1] <= 32
-			&& ip_splited[1] >= 0) {
-		var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],
-				ip_splited[1]);
-		var associated_ip = ip_caled.ipLowStr + "~" + ip_caled.ipHighStr;
-		// 显示IP细节信息，由IpSubnetCalculator.js完成算法
-		$("#displayed_line_associated_ip" + ln).html(associated_ip);
-		$("#line_associated_ip" + ln).val(associated_ip);
-		//console.log(associated_ip);
-	}
-	
-	
-	
-	*/
-	
-	
+	set_return(popupReplyData);	
 }
 
 
@@ -605,6 +593,7 @@ function insertLineData(asset_trans_line) { // 将数据写入到对应的行字
 		//modified by yuan.chen 2016-12-18
 		$("#line_child_port".concat(String(ln))).val(asset_trans_line.child_port);
 		$("#line_vlan_channel".concat(String(ln))).val(asset_trans_line.vlan_channel);
+		$("#line_history_id".concat(String(ln))).val(asset_trans_line.history_id);
 
 		if(asset_trans_line.enable_action==null||asset_trans_line.enable_action==""){
 			$("#line_enable_action".concat(String(ln))).val(1);
@@ -627,10 +616,8 @@ function insertLineData(asset_trans_line) { // 将数据写入到对应的行字
  		 }else{
   			 $("#line_enable_action"+ln).removeAttr("checked");
  		 } 
-	    
-	    
 		renderTransLine(ln);
-		single_changeRequired(lineData,ln);	
+		single_changeRequired(line_data,ln);	
 	}
 }
 
@@ -1276,7 +1263,7 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			+ "<label id='line_broadband_type"+ prodln+ "_label'>"+ "带宽变量"+ "</label>"
 			+ "<input style=' width:153px;' type='text' name='line_broadband_type["+ prodln+ "]' id='line_broadband_type"+ prodln+ "' maxlength='50' value='' title=''>"
 			+ "</span>"
-			
+			+ "<input type='hidden' name='line_history_id[" + prodln+ "]' id='line_history_id" + prodln + "' >"
 			+ "<input type='hidden' name='line_deleted[" + prodln+ "]' id='line_deleted" + prodln + "' value='0'>"
 			+ "<input type='hidden' name='line_status[" + prodln+ "]' id='line_status" + prodln + "'>"
 			+ "<input type='hidden' name='line_enable_action_val[" + prodln+ "]' id='line_enable_action_val" + prodln + "' value='1'>"
@@ -1489,9 +1476,7 @@ function insertTransLineFootor(tableid) {
  */
 function addNewLine(tableid) {
 	
-	var line_data = "";
-	//if (check_form('EditView')) {// 只有必须填写的字段都填写了才可以新增
-
+		var line_data = "";
 		var event_id = $("#hat_eventtype_id").val();
 		$.ajax({//
 			url : 'index.php?to_pdf=true&module=HIT_IP_TRANS_BATCH&action=getEventJsonData&hat_eventtype_id='
@@ -1508,8 +1493,6 @@ function addNewLine(tableid) {
 
 		insertTransLineElements(tableid);// 加入新行
 		LineEditorShow(prodln - 1); // 打开行编辑器
-		//single_changeRequired(line_data,(prodln - 1));
-	//}
 }
 
 function btnMarkLineDeleted(ln, key) {// 删除当前行
@@ -1764,7 +1747,7 @@ function dulicateTranLine(ln) {// 关闭行编辑器（显示为正常行）
 		// 清除id
 		$("#line_id" + (prodln - 1)).val(null);
 		$("#line_source_ref" + (prodln - 1)).val(null);
-		single_changeRequired(lineData,(prodln - 1));
+		single_changeRequired(line_data,(prodln - 1));
 		// 设置行号
 		resetLineNum_Bold();
 		

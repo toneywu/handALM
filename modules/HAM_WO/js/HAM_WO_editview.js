@@ -262,11 +262,32 @@ function initTransHeaderStatus() {
         $("#wo_status option[value='WPREV']").remove();
         $("#wo_status option[value='REWORK']").remove(); 
 		console.log($("name[input=record]").val())
-		if(typeof $("name[input=record]").val()=="undefined"||$("name[input=record]").val()==''){
-			$("#site_select").append("<option selected ='selected' value=''></option>"); 
+
+        //如果当前WO没有生成（新建模式，也就是不是处于修改模式），则将当前LOV加上一个空值，让用户去选择。
+		if(typeof $("input[name='record']").val()=="undefined"||$("input[name='record']").val()==''){
+			//$("#site_select").append("<option selected ='selected' value=''></option>"); 
+            //deleted 20170107已经有空值了，不需要再插入
 			$("#site_select").val(""); 
 			addToValidate('EditView', "site_select",'varchar', 'true', $("#site_label").text());
 		}
+		
+        //end 
+    }else if (current_header_status=="RETURNED") {//可以DRAFT和SUBMIT
+        $("#wo_status option[value='APPROVED']").remove();
+        $("#wo_status option[value='RELEASED']").remove();
+        $("#wo_status option[value='REJECTED']").remove();
+        $("#wo_status option[value='CANCELED']").remove();
+         $("#wo_status option[value='COMPLETED']").remove();
+        //$("#wo_status option[value='CLOSED']").remove();
+        $("#wo_status option[value='TRANSACTED']").remove();
+        //add by yuan.chen 2016-08-11
+        $("#wo_status option[value='WSCH']").remove();
+        $("#wo_status option[value='WMATL']").remove();
+        $("#wo_status option[value='WPCOND']").remove();
+        $("#wo_status option[value='INPRG']").remove();
+        $("#wo_status option[value='WPREV']").remove();
+        $("#wo_status option[value='REWORK']").remove(); 
+		$("#wo_status option[value='CLOSED']").remove(); 
 		
         //end 
     } else if (current_header_status=="SUBMITTED") { //可以CANCEL和SUBMIT

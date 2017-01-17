@@ -12,10 +12,6 @@ array (
         array (
           'file' => 'modules/HAM_WO/js/editview_map_point.js',
         ),
-        1 => 
-        array (
-          'file' => 'modules/HAA_FF/HAA_FF.php',
-        ),
         2 => 
         array (
           'file' => 'modules/HAA_FF/ff_include.js',
@@ -57,7 +53,12 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_EDITVIEW_PANEL5' => 
+        'LBL_EDITVIEW_PANEL_DESC' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_EDITVIEW_PANEL_CONTRL' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
@@ -147,20 +148,6 @@ array (
         3 => 
         array (
           0 => 'description',
-          1 => 
-          array (
-            'name' => 'work_order_access',
-            'studio' => 'visible',
-            'label' => 'LBL_WORK_ORDER_ACCESS',
-          ),
-        ),
-        4 => 
-        array (
-          0 => 
-          array (
-            'name' => 'complete_by_last_woop',
-            'label' => 'LBL_COMPLETE_BY_LAST_WOOP',
-          ),
           1 => '',
         ),
       ),
@@ -173,7 +160,7 @@ array (
             'name' => 'account',
             'displayParams' => 
             array (
-              'initial_filter' =>'&asset_using_org=Y',
+              'initial_filter' => '&asset_using_org=Y&module_name=HAM_WO',
             ),
           ),
           1 => 
@@ -224,7 +211,11 @@ array (
               'call_back_function' => 'setLocationPopupReturn',
             ),
           ),
-          1 => 
+          1 => '',
+        ),
+        3 => 
+        array (
+          0 => 
           array (
             'name' => 'asset',
             'displayParams' => 
@@ -240,8 +231,14 @@ array (
               'call_back_function' => 'setAssetPopupReturn',
             ),
           ),
+          1 => 
+          array (
+            'name' => 'contract_name',
+            'studio' => 'visible',
+            'label' => 'LBL_CONTRACT_NAME',
+          ),
         ),
-        3 => 
+        4 => 
         array (
           0 => 
           array (
@@ -309,7 +306,7 @@ array (
           ),
         ),
       ),
-      'lbl_editview_panel5' => 
+      'lbl_editview_panel_desc' => 
       array (
         0 => 
         array (
@@ -348,6 +345,63 @@ array (
           array (
             'name' => 'attribute6',
             'label' => 'LBL_ATTRIBUTE6',
+          ),
+        ),
+      ),
+      'lbl_editview_panel_contrl' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'work_center',
+            'studio' => 'visible',
+            'label' => 'LBL_WORK_CENTER',
+			'displayParams' =>array (
+              'initial_filter' => '&ham_work_center_res_name_advanced="+encodeURIComponent($("#work_center_res").val())+"',
+			  'call_back_function' => 'setWorkCenterReturn',
+            ),
+          ),
+          1 => 
+          array (
+            'name' => 'work_center_res',
+            'studio' => 'visible',
+            'label' => 'LBL_WORK_CENTER_RES',
+			'displayParams' =>array (
+              'initial_filter' => '&ham_work_center_name_advanced="+encodeURIComponent($("#work_center").val())+"',
+			  'call_back_function' => 'setWorkCenterResReturn',
+            ),
+          ),
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'work_center_people',
+            'studio' => 'visible',
+            'label' => 'LBL_WORK_CENTER_PEOPLE',
+			'displayParams' =>array (
+              'initial_filter' => '&ham_work_center_res_name_advanced="+encodeURIComponent($("#work_center_res").val())+"',
+            ),
+          ),
+          1 => 
+          array (
+            'name' => 'work_order_access',
+            'studio' => 'visible',
+            'label' => 'LBL_WORK_ORDER_ACCESS',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'complete_by_last_woop',
+            'label' => 'LBL_COMPLETE_BY_LAST_WOOP',
+          ),
+          1 => 
+          array (
+            'name' => 'next_woop_assignment',
+            'label' => 'LBL_NEXT_WOOP_ASSIGNMENT',
           ),
         ),
       ),

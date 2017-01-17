@@ -10,8 +10,7 @@ $ham_wo_bean = BeanFactory::getBean('HAM_WO',$current_id);
 $current_status = $ham_wo_bean->wo_status;
 echo '<select name="target_wo_status" id="target_wo_status"'.'>';
 foreach($app_list_strings['ham_wo_status_list'] as $key=>$value){
-	
-if($current_status=="DRAFT"||$current_status=="RETURNED"){
+if($current_status=="DRAFT"){
 	if($key=="SUBMITTED"||$key=="CLOSED"){
 		echo '<option value="'.$key.'">'.$value.'</option>';
 	}
@@ -49,6 +48,11 @@ if($current_status=="DRAFT"||$current_status=="RETURNED"){
 	}
 }elseif ( $current_status=="INPRG" ) {
 	if($key=="WSCH"||$key=="WMATL"||$key=="WPCOND"||$key=="INPRG"||$key=="CANCELED"){
+		echo '<option value="'.$key.'">'.$value.'</option>';
+	}
+}
+elseif ( $current_status=="RETURNED" ) {
+	if($key=="DRAFT"||$key=="APPROVED"){
 		echo '<option value="'.$key.'">'.$value.'</option>';
 	}
 }	

@@ -3,4 +3,6 @@ $(document).ready(function(){
 	$html='<input id="site_type" name="site_type" type="hidden" value="'+site_type+'"/>';
 	$("#maint_site_advanced").after($html);
    }
+   
+   $("#popup_query_form").attr("action",window.location.href);
 });
