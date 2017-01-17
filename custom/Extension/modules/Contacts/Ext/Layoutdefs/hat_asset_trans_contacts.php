@@ -5,8 +5,8 @@
 $layout_defs["Contacts"]["subpanel_setup"]['hat_assets_trans_contacts'] = array (
             'order' => 100,
             'module' => 'HAT_Asset_Trans',
-            //'sort_order' => 'asc',
-            'sort_by' => 'name asc',
+            'sort_order' => 'desc',
+            'sort_by' => 'acctual_complete_date',
             'subpanel_name' => 'forContact',
             'title_key' => 'LBL_ASSETS_TRANS_SUBPANEL',
             'get_subpanel_data' => 'function:get_asset_trans',

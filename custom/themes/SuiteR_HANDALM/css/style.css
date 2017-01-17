@@ -29,7 +29,7 @@ ul.dropdown-menu.All li {
 		width:180px;float:left;margin: 0 5px; overflow:hidden;
 }
 ul.dropdown-menu.All {
-		width:800px;left:-600px;
+		width:800px;/*left:-600px;*/
 }
 
 #layoutEditor .le_panel {/*FIX：Stuido开发时会有宽度不正确*/

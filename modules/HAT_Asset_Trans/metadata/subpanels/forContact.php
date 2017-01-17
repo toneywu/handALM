@@ -26,9 +26,9 @@ $subpanel_layout = array (
       'width' => '15%',
       'default' => true,
     ),
-    'date_modified' => 
+    'acctual_complete_date' => 
     array (
-      'vname' => 'LBL_DATE_MODIFIED',
+      'vname' => 'LBL_ACCTUAL_COMPLETE_DATE',
       'width' => '10%',
       'default' => true,
     ),
