@@ -57,5 +57,5 @@ $(document).ready(function() {
 	if(typeof current_framework!="undefined"){
 		$("#haa_frameworks_id_advanced").val(current_framework);
 	}
-	$("#popup_query_form").attr("action",window.location.href)
+	$("#popup_query_form").attr("action",window.location.href);
 });

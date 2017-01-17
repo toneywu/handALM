@@ -38,10 +38,10 @@
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['HIT_IP_Subnets'] = 'IT IP Subnets';
+$app_list_strings['moduleList']['HIT_IP_Subnets'] = 'IP子网';
 
 $app_list_strings['hit_ip_type_list']=array (  
-  1 => 'Whole',
-  0 => 'Seperated',
+  1 => '整柜',
+  0 => '散U',
 );
 

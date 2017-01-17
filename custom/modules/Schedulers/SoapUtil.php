@@ -1,28 +1,28 @@
 <?php 
 class SoapUtil{
 	/*
-	*¼¯ÍÅ8031 WS-SecurityÐÅÏ¢
+	*ï¿½ï¿½ï¿½ï¿½8031 WS-Securityï¿½ï¿½Ï¢
 	*/
-	var $username_jt = "ERP_API";
-	var $password_jt = "erp123qwe";
+	 $username_jt = "ERP_API";
+	 $password_jt = "erp123qwe";
 	//var $url_jt = "http://36.110.51.4:1574/8000/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";
-	var $url_jt = "http://111.200.33.204:1574/8000/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";
-	var $resp_key_jt="APPLICATION_DEVELOPER";
-	var $resp_appl_jt="FND";
-	var $security_jt="STANDARD";
-	var $language_jt="SIMPLIFIED CHINESE";
-	var $org_id_jt="81";
+	 $url_jt = "http://111.200.33.204:1574/8000/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";
+	 $resp_key_jt="APPLICATION_DEVELOPER";
+	 $resp_appl_jt="FND";
+	 $security_jt="STANDARD";
+	 $language_jt="SIMPLIFIED CHINESE";
+	 $org_id_jt="81";
 	/*
-	*ÐÀÈóÕýÊ½»·¾³ WS-SecurityÐÅÏ¢
+	*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ WS-Securityï¿½ï¿½Ï¢
 	*/
-	var $username_xr = "XR_API";
-	var $password_xr = "asdf1234";
-	var $url_xr      = "http://111.200.33.204:1574/80000/webservices/SOAProvider/plsql/cux_ws_eam_get_infos_pkg/";
-	var $resp_key_xr ="CUX_SUPER_RESPKEY";
-	var $resp_appl_xr="CUX";
-	var $security_xr ="STANDARD";
-	var $language_xr ="SIMPLIFIED CHINESE";
-	var $org_id_xr   ="81";
+	 $username_xr = "XR_API";
+	 $password_xr = "asdf1234";
+	 $url_xr      = "http://111.200.33.204:1574/80000/webservices/SOAProvider/plsql/cux_ws_eam_get_infos_pkg/";
+	 $resp_key_xr ="CUX_SUPER_RESPKEY";
+	 $resp_appl_xr="CUX";
+	 $security_xr ="STANDARD";
+	 $language_xr ="SIMPLIFIED CHINESE";
+	 $org_id_xr   ="81";
 	
 	function call_soap_ws($ws_type_code,$ws_env){
 		if($ws_env=='JT'){
@@ -31,7 +31,7 @@ class SoapUtil{
 			 echo $this->resp_appl_jt."<br>";
 			 echo $this->security_jt."<br>";
 			 echo $this->language_jt."<br>";*/
-			//¼¯ÍÅÄ£ÄâµÇÂ½µÄ ±¨ÎÄ
+			//ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½Â½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			
 						/*$postAllString = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
 					    <soap:Header xmlns:ns1="http://xmlns.oracle.com/apps/cux/soaprovider/plsql/cux_ws_eam_basic_info_pkg/">
@@ -81,7 +81,6 @@ class SoapUtil{
 				echo "ws_env=".$this->username_xr."<br>";
 				echo "url = ".$this->password_xr."<br>";
 		        curl_setopt($soap_do, CURLOPT_URL, $url_xr);
-			//ÐÀÈóÄ£ÄâµÇÂ½µÄ ±¨ÎÄ
 			$postAllString = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
 								<soap:Header xmlns:ns1="http://xmlns.oracle.com/apps/cux/soaprovider/plsql/cux_ws_eam_get_infos_pkg/">
 									<ns1:SOAHeader>

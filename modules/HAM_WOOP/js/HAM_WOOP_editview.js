@@ -409,6 +409,7 @@ function date_finish_change(){
 	function initTransHeaderStatus() {
 
 	    var current_header_status = $("#woop_status").val();
+		console.log("current_header_status = "+current_header_status);
 	    if (current_header_status=="DRAFT") {//可以DRAFT和SUBMIT
 	        //$("#woop_status option[value='APPROVED']").remove();
 	        $("#woop_status option[value='RELEASED']").remove();
@@ -424,6 +425,7 @@ function date_finish_change(){
 	        $("#woop_status option[value='SUBMITTED']").remove();
 	        $("#woop_status option[value='WPREV']").remove();
 	        $("#woop_status option[value='RETURNED']").remove();
+			$("#woop_status option[value='WSCH']").remove();
 
 	    } else if (current_header_status=="SUBMITTED") { //可以CANCEL和SUBMIT
 	        $("#woop_status option[value='APPROVED']").remove();
@@ -529,6 +531,8 @@ function date_finish_change(){
 	        $("#woop_status option[value='REWORK']").remove();
 	        $("#woop_status option[value='WPREV']").remove();
 	        $("#woop_status option[value='RETURNED']").remove();
+			$("#woop_status option[value='CLOSED']").remove();
+
 
 	        //$("#SAVE_HEADER,#save_and_continue,#SAVE_FOOTER").hide();
 	        $("#wo_status option[value='WSCH']").remove();
@@ -576,7 +580,7 @@ function date_finish_change(){
 	    	$("#woop_status option[value='REWORK']").remove(); 
 	        $("#woop_status option[value='RETURNED']").remove();
 	    }else if((current_header_status=="WPREV")){//正在执行中 WMATL WSCH WPCOND INPRG CANCELED
-	    	$("#woop_status option[value='DRAFT']").remove();
+	    	$("#woop_status option[value='COMPLETED']").remove();
 	    	$("#woop_status option[value='SUBMITTED']").remove();
 	    	$("#woop_status option[value='APPROVED']").remove();
 	    	$("#woop_status option[value='CLOSED']").remove();
@@ -584,6 +588,11 @@ function date_finish_change(){
 	    	$("#woop_status option[value='RELEASED']").remove(); 
 	    	$("#woop_status option[value='REWORK']").remove();  
 	        $("#woop_status option[value='RETURNED']").remove();
+			$("#woop_status option[value='WMATL']").remove();
+	    	$("#woop_status option[value='WPCOND']").remove(); 
+	    	$("#woop_status option[value='INPRG']").remove(); 
+	        $("#woop_status option[value='CANCELED']").remove();
+			$("#woop_status option[value='WSCH']").remove();
 	    }else if((current_header_status=="REWORK")){//正在执行中 WMATL WSCH WPCOND INPRG CANCELED
 	    	$("#woop_status option[value='DRAFT']").remove();
 	    	$("#woop_status option[value='SUBMITTED']").remove();

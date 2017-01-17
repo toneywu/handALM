@@ -10,7 +10,10 @@
 class UpdateAsset {
 
 	function update_fix_asset($parameters_array) {
-
+		$username = "sysadmin";
+		$password = "welcome8";
+		//$url = "http://111.200.33.205:1574/8020/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";
+		$url = "http://111.200.33.204:1574/8020/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";
 	
 		$assets_line_array = $parameters_array['line_asset_infos'];
 		$line_cnt = $parameters_array['line_cnt'];
@@ -83,16 +86,7 @@ class UpdateAsset {
 		
 		$loopInput = $loopInput . "</ns2:P_TRANSFER_DATA></ns2:InputParameters></soap:Body></soap:Envelope>";
 		$postAllString = $postAllString . '' . "$loopInput";
-		//echo '\n'.'record = ' . $record . "\n";
-		//echo 'cost_cetner = ' . $cost_cetner."\n";
-		//echo 'location = ' . $location .  "\n";
-		//echo 'production = ' . $production .  "\n";
 		$result_array =array();
-		$username = "sysadmin";
-		$password = "welcome8";
-		$url = "http://111.200.33.205:1574/8020/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";
-		
-		
 		//echo "postAllString=" . $postAllString . "<br>";
 		//创建一个新cURL资源 
 		$soap_do = curl_init();

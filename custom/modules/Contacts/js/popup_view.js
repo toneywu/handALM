@@ -3,4 +3,5 @@ $(document).ready(function(){
 	$html='<input id="contract_type" name="contract_type" type="hidden" value="'+contract_type+'"/>';
 	$("#people_type_c_advanced").after($html);
    }
+   $("#popup_query_form").attr("action",window.location.href);
 });

@@ -31,5 +31,5 @@ $(document).ready(function() {
 		$("button[name='btn_clr_location_advanced']").css({"visibility":"hidden"});
 		}
 	 }
-	
+	$("#popup_query_form").attr("action",window.location.href);
 });

@@ -302,6 +302,24 @@ function initTransHeaderStatus() {
 		}
 		
         //end 
+    }else if (current_header_status=="RETURNED") {//可以DRAFT和SUBMIT
+        $("#wo_status option[value='APPROVED']").remove();
+        $("#wo_status option[value='RELEASED']").remove();
+        $("#wo_status option[value='REJECTED']").remove();
+        $("#wo_status option[value='CANCELED']").remove();
+         $("#wo_status option[value='COMPLETED']").remove();
+        //$("#wo_status option[value='CLOSED']").remove();
+        $("#wo_status option[value='TRANSACTED']").remove();
+        //add by yuan.chen 2016-08-11
+        $("#wo_status option[value='WSCH']").remove();
+        $("#wo_status option[value='WMATL']").remove();
+        $("#wo_status option[value='WPCOND']").remove();
+        $("#wo_status option[value='INPRG']").remove();
+        $("#wo_status option[value='WPREV']").remove();
+        $("#wo_status option[value='REWORK']").remove(); 
+		$("#wo_status option[value='CLOSED']").remove(); 
+		
+        //end 
     } else if (current_header_status=="SUBMITTED") { //可以CANCEL和SUBMIT
         $("#wo_status option[value='APPROVED']").remove();
         $("#wo_status option[value='REJECTED']").remove();

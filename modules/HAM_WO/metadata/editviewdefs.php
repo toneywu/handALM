@@ -12,15 +12,11 @@ array (
         array (
           'file' => 'modules/HAM_WO/js/editview_map_point.js',
         ),
-/*        1 => 
-        array (
-          'file' => 'modules/HAA_FF/HAA_FF.php',
-        ),*/
-        2 => 
+        1 => 
         array (
           'file' => 'modules/HAA_FF/ff_include.js',
         ),
-        3 => 
+        2 => 
         array (
           'file' => 'modules/HAM_WO/js/HAM_WO_editview.js',
         ),
@@ -164,7 +160,7 @@ array (
             'name' => 'account',
             'displayParams' => 
             array (
-              'initial_filter' =>'&asset_using_org=Y&module_name=HAM_WO',
+              'initial_filter' => '&asset_using_org=Y&module_name=HAM_WO',
             ),
           ),
           1 => 
@@ -215,7 +211,11 @@ array (
               'call_back_function' => 'setLocationPopupReturn',
             ),
           ),
-          1 => 
+          1 => '',
+        ),
+        3 => 
+        array (
+          0 => 
           array (
             'name' => 'asset',
             'displayParams' => 
@@ -231,8 +231,14 @@ array (
               'call_back_function' => 'setAssetPopupReturn',
             ),
           ),
+          1 => 
+          array (
+            'name' => 'contract_name',
+            'studio' => 'visible',
+            'label' => 'LBL_CONTRACT_NAME',
+          ),
         ),
-        3 => 
+        4 => 
         array (
           0 => 
           array (
@@ -351,12 +357,20 @@ array (
             'name' => 'work_center',
             'studio' => 'visible',
             'label' => 'LBL_WORK_CENTER',
+			'displayParams' =>array (
+              'initial_filter' => '&ham_work_center_res_name_advanced="+encodeURIComponent($("#work_center_res").val())+"',
+			  'call_back_function' => 'setWorkCenterReturn',
+            ),
           ),
           1 => 
           array (
             'name' => 'work_center_res',
             'studio' => 'visible',
             'label' => 'LBL_WORK_CENTER_RES',
+			'displayParams' =>array (
+              'initial_filter' => '&ham_work_center_name_advanced="+encodeURIComponent($("#work_center").val())+"',
+			  'call_back_function' => 'setWorkCenterResReturn',
+            ),
           ),
         ),
         1 => 
@@ -366,6 +380,11 @@ array (
             'name' => 'work_center_people',
             'studio' => 'visible',
             'label' => 'LBL_WORK_CENTER_PEOPLE',
+
+			'displayParams' =>array (
+              'initial_filter' => '&ham_work_center_res_name_advanced="+encodeURIComponent($("#work_center_res").val())+"',
+            ),
+
           ),
           1 => 
           array (

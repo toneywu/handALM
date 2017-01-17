@@ -116,7 +116,7 @@ $dictionary['HAM_Work_Center_People'] = array(
 
 'ham_work_center_res_name' => 
   array (
-    'required' => false,
+    'required' => true,
     'source' => 'non-db',
     'name' => 'ham_work_center_res_name',
     'vname' => 'LBL_HAM_WORK_CENTER_RES_NAME',
