@@ -1,0 +1,6 @@
+<?php
+// created: 2017-01-11 15:01:16
+$mod_strings = array (
+  'LBL_HAT_COUNTING_POLICIES_HAT_COUNTING_POLICY_LINES_FROM_HAT_COUNTING_POLICY_LINES_TITLE' => '盘点自定义分组',
+  'LBL_EDITVIEW_PANEL1' => '自定义分组',
+);

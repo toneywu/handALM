@@ -1,0 +1,6 @@
+<?php
+// created: 2017-01-11 09:37:15
+$mod_strings = array (
+  'LBL_EDITVIEW_PANEL1' => '盘点策略',
+  'LBL_HAT_COUNTING_POLICY_GROUPS_HAT_COUNTING_POLICIES_FROM_HAT_COUNTING_POLICIES_TITLE' => '盘点策略',
+);
