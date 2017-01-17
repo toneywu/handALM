@@ -40,7 +40,8 @@ $(document).ready(function(){
 	$("#parent_flex_value_set_desc").text($("#description0").val());
 	//将Subpanel的内容前移到上方TAB中
 	//$("#LBL_DETAILVIEW_PANEL3").after("<div class='tab_subpanel'>"+$("#whole_subpanel_haa_valuesets_haa_values").html()+"</div>");
-	//$("#whole_subpanel_haa_valuesets_haa_values").replaceWith("");
+	//隐藏通过关系自动建的行的面板
+	$("#whole_subpanel_haa_valuesets_haa_values").replaceWith("");
 
 	
 

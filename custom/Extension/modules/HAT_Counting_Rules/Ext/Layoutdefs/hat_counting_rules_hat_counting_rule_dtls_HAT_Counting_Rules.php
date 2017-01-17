@@ -1,5 +1,5 @@
 <?php
- // created: 2016-12-24 15:08:40
+ // created: 2017-01-15 21:32:19
 $layout_defs["HAT_Counting_Rules"]["subpanel_setup"]['hat_counting_rules_hat_counting_rule_dtls'] = array (
   'order' => 100,
   'module' => 'HAT_Counting_Rule_Dtls',

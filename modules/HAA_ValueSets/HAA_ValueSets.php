@@ -52,19 +52,19 @@ class HAA_ValueSets extends HAA_ValueSets_sugar {
 		$post_data=$_POST;
 		$key="line_";
 		$line_count = isset($post_data[$key . 'deleted']) ? count($post_data[$key . 'deleted']) : 0;
-        $j = 0;
-        for ($i = 0; $i < $line_count; ++$i) {
-            if ($post_data[$key . 'deleted'][$i] == 1) {
-                $haa_values->mark_deleted($post_data[$key . 'id'][$i]);
-            } else {
-            	$haa_values = new HAA_Values();
-                foreach ($haa_values->field_defs as $field_def) {
-                    $field_name = $field_def['name'];
-                    if (isset($post_data[$key . $field_name][$i])) {
-                        $haa_values->$field_name = $post_data[$key . $field_name][$i];
-                    }
-                }
-	            $haa_values->save($check_notify);
+		$j = 0;
+		for ($i = 0; $i < $line_count; ++$i) {
+			$haa_values = new HAA_Values();
+			if ($post_data[$key . 'deleted'][$i] == 1) {
+				$haa_values->mark_deleted($post_data[$key . 'id'][$i]);
+			} else {
+				foreach ($haa_values->field_defs as $field_def) {
+					$field_name = $field_def['name'];
+					if (isset($post_data[$key . $field_name][$i])) {
+						$haa_values->$field_name = $post_data[$key . $field_name][$i];
+					}
+				}
+				$haa_values->save($check_notify);
 	            $table='haa_valuesets_haa_values_c';//关系表
 	            $relate_values = array('deleted' =>0 ,
 	            	'haa_valuesets_haa_valueshaa_valuesets_ida'=>$this->id,

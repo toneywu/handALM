@@ -24,7 +24,7 @@ function processSearchForm(){
   if ($haa_frameworks_id != ''){
     if ($this->where) {
      $this->where.=" and  IF (
-     haa_frameworks_id_c != NULL,
+     haa_frameworks_id_c is not NULL,
      haa_frameworks_id_c,
      '".$haa_frameworks_id."'
      )='".$haa_frameworks_id."'";
@@ -32,7 +32,7 @@ function processSearchForm(){
     }
     else{
     $this->where.=" IF (
-    haa_frameworks_id_c != NULL,
+    haa_frameworks_id_c is not NULL,
     haa_frameworks_id_c,
     '".$haa_frameworks_id."'
     )='".$haa_frameworks_id."'";

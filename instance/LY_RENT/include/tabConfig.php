@@ -1,7 +1,7 @@
 <?php
 // created: 2016-12-22 09:38:59
 $GLOBALS['tabStructure'] = array (
-  'LBL_TABGROUP_SALES' => 
+ /* 'LBL_TABGROUP_SALES' => 
   array (
     'label' => 'LBL_TABGROUP_SALES',
     'modules' => 
@@ -19,15 +19,15 @@ $GLOBALS['tabStructure'] = array (
       10 => 'HAT_Meter_Types',
       11 => 'HAT_Asset_Sources',
     ),
-  ),
-  'LBL_GROUPTAB1_1454774981' => 
+  ),*/
+ /* 'LBL_GROUPTAB1_1454774981' => 
   array (
     'label' => 'LBL_GROUPTAB1_1454774981',
     'modules' => 
     array (
       0 => 'HAT_Assets',
-/*      1 => 'HAT_Properties',
-      2 => 'HIT_Racks',*/
+      1 => 'HAT_Properties',
+      2 => 'HIT_Racks',
       3 => 'HAT_Asset_QUAL',
       4 => 'HAT_Asset_QUAL_Details',
       5 => 'HAT_Meter_Readings',
@@ -35,7 +35,7 @@ $GLOBALS['tabStructure'] = array (
       7 => 'HAT_Counting_Batchs',
       8 => 'HAA_Maps',
     ),
-  ),
+  ),*/
 /*  'LBL_GROUPTAB2_1466152419' => 
   array (
     'label' => 'LBL_GROUPTAB2_1466152419',
@@ -49,7 +49,7 @@ $GLOBALS['tabStructure'] = array (
       5 => 'HIT_ODF_REL',
     ),
   ),*/
-  'LBL_TABGROUP_SUPPORT' => 
+/*  'LBL_TABGROUP_SUPPORT' => 
   array (
     'label' => 'LBL_TABGROUP_SUPPORT',
     'modules' => 
@@ -119,5 +119,5 @@ $GLOBALS['tabStructure'] = array (
       14 => 'HAA_FF',
       15 => 'HAA_FSQL',
     ),
-  ),
+  ),*/
 );

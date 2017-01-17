@@ -73,12 +73,27 @@ include('custom/metadata/hat_counting_lines_hat_counting_resultsMetaData.php');
 
  
  //WARNING: The contents of this file are auto-generated
+include('custom/metadata/hat_counting_policies_hat_counting_policy_linesMetaData.php');
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+include('custom/metadata/hat_counting_policy_groups_hat_counting_policiesMetaData.php');
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
 include('custom/metadata/hat_counting_rules_hat_counting_rule_dtlsMetaData.php');
 
 
  
  //WARNING: The contents of this file are auto-generated
 include('custom/metadata/hat_counting_tasks_hat_counting_linesMetaData.php');
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+include('custom/metadata/hat_counting_task_templates_hat_counting_template_detailsMetaData.php');
 
 
  

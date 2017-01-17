@@ -64,7 +64,7 @@ array (
       ),
     'panels' => 
     array (
-      'LBL_EDITVIEW_PANEL0' => 
+      'lbl_editview_panel0' => 
       array (
         0 => 
         array (

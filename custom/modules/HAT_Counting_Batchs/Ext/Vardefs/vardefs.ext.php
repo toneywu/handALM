@@ -2,7 +2,7 @@
  //WARNING: The contents of this file are auto-generated
 
 
-// created: 2016-12-24 15:08:38
+// created: 2017-01-15 21:32:15
 $dictionary["HAT_Counting_Batchs"]["fields"]["hat_counting_batchs_hat_counting_batch_rules"] = array (
   'name' => 'hat_counting_batchs_hat_counting_batch_rules',
   'type' => 'link',

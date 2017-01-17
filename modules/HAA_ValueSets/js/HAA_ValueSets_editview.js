@@ -97,6 +97,25 @@ function checkMeaningColumn()
 $(document).ready(function(){
 
     console.log("------------------------------------------------------------------------------------");
+    $("#name").change(function(){
+		var val=$(this).val();
+		var record=$("input[name='record']").val();
+		if (val=="") {
+			return false;
+		}
+		$.ajax({
+			url:"index.php?module=HAA_ValueSets&action=check_name&to_pdf=true",
+			data:"&name="+val+"&record="+record,
+			type:"POST",//PUT
+			success:function(result){
+				if (result == '0') {
+					$("#name").val("");
+				   $("#name").attr("placeholder","值集代码已存在");
+				}
+			}
+
+		});
+    });
 	$("#SAVE_FOOTER").hide();
 	$("#CANCEL_FOOTER").hide();
 	
@@ -117,6 +136,7 @@ $(document).ready(function(){
 	});
 	$("#parent_flex_value_set_desc").val($("#description0").val());
 	$("#parent_flex_value_set_desc").attr('disabled',true);
+	
 	
 
 });
