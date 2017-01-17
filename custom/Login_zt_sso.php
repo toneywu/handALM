@@ -15,7 +15,8 @@ if (isset($_SERVER['HTTP_OAM_REMOTE_USER'])&&$_SERVER['HTTP_OAM_REMOTE_USER']!="
 	if ($res['user']==1) {
 		session_start();
 		$_SESSION['authenticated_user_id']=$res['id'];
-		$user_hash=crypt(strtolower(MD5('admin')));
+		$rand_time=time().mt_rand();//时间+随机数作为登陆密码
+		$user_hash=crypt(strtolower(MD5($rand_time)));
 		$pre_sql="update users set user_hash='".$user_hash."' where user_name='".$user_name."' and status='Active' and employee_status='Active' and deleted=0";
 		$result=$db->query($pre_sql);
  		$_SESSION['unique_key'] = $sugar_config['unique_key'];
@@ -25,9 +26,11 @@ if (isset($_SERVER['HTTP_OAM_REMOTE_USER'])&&$_SERVER['HTTP_OAM_REMOTE_USER']!="
  		$_REQUEST["ck_login_language_20"]= "zh_CN";
  		$_REQUEST["ck_login_id_20"]= $res['id'];
  		$_REQUEST['default_user_name']=$user_name;
- 		$_SESSION['login_password']=MD5('admin');
- 		login_api($user_name,'admin');
-		$after_sql="update users set user_hash='".$res['user_hash']."' where user_name='".$user_name."' and status='Active' and employee_status='Active'";
+ 		$_SESSION['login_password']=MD5($rand_time);
+ 		//如果是从这里登录的，设置登出地址
+		SugarApplication::setCookie('logout_url', 'http://testidm.zzmetro.cn:7777/webcenter/', time()+3600*12, '/');
+ 		login_api($user_name,$rand_time);
+		$after_sql="update users set user_hash='".$res['user_hash']."' where user_name='".$user_name."' and status='Active' and employee_status='Active' and deleted=0";
 		$db->query($after_sql);
 	}
 }else{
@@ -83,6 +86,10 @@ function login_api($user_name,$password){
 	    $GLOBALS['app']->headerDisplayed = true;
 	}
 	if (!defined('SUITE_PHPUNIT_RUNNER')) {
+	    sugar_cleanup();
+	    header($url);
+	}
+}')) {
 	    sugar_cleanup();
 	    header($url);
 	}
