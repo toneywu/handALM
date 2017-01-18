@@ -2634,6 +2634,12 @@ $app_list_strings['moduleList']['HIT_VLAN'] = 'IT VLAN';
 
 $app_list_strings['moduleList']['HIT_IP_Subnets'] = 'IT IP Subnets';
 
+$app_list_strings['hit_ip_type_list']=array (  
+  1 => 'Whole',
+  0 => 'Seperated',
+);
+
+
 
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
