@@ -22,6 +22,8 @@ function setEventTypePopupReturn(popupReplyData){
     //Add By ling.zhang01 20161229
     if($("#tracking_number").val()==''){
     	createTrackNumber();
+    }else{
+    	$("#name").val($("#tracking_number").val()+":"+$("#name").val());
     }
     //Add Instance By ling.zhang01 20161229 End
 }
@@ -39,6 +41,7 @@ function createTrackNumber(){
 				return_number = msg;
 				console.log("msg = "+msg);
 				$("#tracking_number").val(return_number);
+				$("#name").val(return_number+":"+$("#name").val());
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
 				 alert('Error loading document');
@@ -93,18 +96,7 @@ function setEventTypeFields() {
 }
 
 function resetEventType(){
-
-	var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());
-
-	//如果不需要2步确认，或是必须要2步确认，则不可以直接变化到TRANSACTED状态
-	if (global_eventOptions.require_confirmation != "OPTIONAL") {
-		if ($("#asset_trans_status").val=='TRANSACTED') {
-			$("#asset_trans_status").val("SUBMITTED");
-		}
-        $("#asset_trans_status option[value='TRANSACTED']").remove();
-	}
-
-
+		var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());
 
 	if (global_eventOptions.check_customer_hold == "1"){
 	 	$("#asset_trans_status").change(); //对客户的信息状态进行验证
@@ -163,6 +155,13 @@ function resetEventType(){
 	loopField("line_target_cost_center",global_eventOptions.change_cost_center);
 	loopField("line_target_cost_center_id",global_eventOptions.change_cost_center);
 
+//end modefy osmond.liu 20161123
+	//开始与结束时间根据使用组织及人员进行显示，不单独进行处理 deleted toney.wu 改到Using_org中
+/*	loopField("line_date_start",global_eventOptions.change_asset_date_end);
+	loopField("line_date_end",global_eventOptions.change_asset_date_start);
+*/	//状态不单独进行处理，已经有了 deleted toney.wu
+/*	loopField("line_status",global_eventOptions.change_asset_status);
+*/	//end 
 
    if (global_eventOptions.change_owning_person=="INVISIABLE") {
 		loopField("line_target_owning_person","INVISIABLE");
@@ -445,47 +444,11 @@ $(document).ready(function(){
 	SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
 		OverwriteSaveBtn(preValidateFunction);//注意引用时不加（）
 	});
-
-	//基于当前状态变化相关的状态值
-    var current_header_status = $("#asset_trans_status").val();
-    if (current_header_status=="DRAFT") {//可以DRAFT和SUBMIT
-        $("#asset_trans_status option[value='APPROVED']").remove();
+	   $("#asset_trans_status option[value='SUBMITTED']").remove();
         $("#asset_trans_status option[value='REJECTED']").remove();
-        $("#asset_trans_status option[value='CLOSED']").remove();
-        $("#asset_trans_status option[value='AUTO_TRANSACTED']").remove();
-        //end
-    } else if (current_header_status=="APPROVED") { //可以CANCEL和TRANSACTED
-        $("#asset_trans_status option[value='DRAFT']").remove();
-        $("#asset_trans_status option[value='SUBMITTED']").remove();
-        $("#asset_trans_status option[value='REJECTED']").remove();
-        $("#asset_trans_status option[value='CLOSED']").remove();
-        $("#asset_trans_status option[value='AUTO_TRANSACTED']").remove();
-        setFormReadonly();
-    } else if (current_header_status=="REJECTED") { //可以CANCEL和SUBMIT
-        $("#asset_trans_status option[value='DRAFT']").remove();
-        $("#asset_trans_status option[value='APPROVED']").remove();
-        $("#asset_trans_status option[value='REJECTED']").remove();
+        $("#asset_trans_status option[value='CANCELED']").remove();
         $("#asset_trans_status option[value='CLOSED']").remove();
         $("#asset_trans_status option[value='TRANSACTED']").remove();
-        $("#asset_trans_status option[value='AUTO_TRANSACTED']").remove();
-        setFormReadonly();
-    } else {
-        $("#asset_trans_status option[value='DRAFT']").remove();
-        $("#asset_trans_status option[value='APPROVED']").remove();
-        $("#asset_trans_status option[value='REJECTED']").remove();
-        $("#asset_trans_status option[value='TRANSACTED']").remove();
-        $("#asset_trans_status option[value='AUTO_TRANSACTED']").remove();
-        if (current_header_status!="SUBMITTED") {
-	        $("#asset_trans_status option[value='SUBMITTED']").remove();
-        }
-        if (current_header_status!="CLOSED") {
-	        $("#asset_trans_status option[value='CLOSED']").remove();
-        }
-        if (current_header_status!="CANCELED") {
-	        $("#asset_trans_status option[value='CANCELED']").remove();
-        }
-        setFormReadonly();
-    }
 
 
 	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
@@ -506,8 +469,9 @@ $(document).ready(function(){
 	if(typeof source_wo_id_tt!="undefined"){
 		$("#CANCEL_HEADER").bind("click",function(){
 			SUGAR.ajaxUI.loadContent('index.php?action=DetailView&module=HAM_WO&record='+source_wo_id_tt)
-		});
+		});	
 	};
+	
 
 
 	mark_field_disabled("email",false);
@@ -517,15 +481,15 @@ $(document).ready(function(){
 	if($("#source_wo").val()=="") {
 		mark_field_disabled("source_woop",false);
 	}
-
+	
 	$("#source_wo").change(function(){
 		if($("#source_wo").val()=="") {
 			$("#source_woop").val("");
 			$("#source_woop_id").val("");
 			mark_field_disabled("source_woop",false);
 		}
-	});
-
+	});	
+	
 	$("#btn_clr_source_wo").click(function(){
 		if($("#source_wo").val()=="") {
 			$("#source_woop").val("");
@@ -580,13 +544,13 @@ $(document).ready(function(){
     }
 	
 	//add by yuan.chen 2016-12-08
-	function setFormReadonly() {
+	if($("#asset_trans_status").val()=="APPROVED"){
 	   //$("#EditView_tabs button").css("display","none");
 	   $("#EditView_tabs input").attr("readonly",true);
        $("#EditView_tabs input").attr("style","background-Color:#efefef");
 	   $("#EditView_tabs textarea").attr("readonly",true);
-	   $("#EditView_tabs select[name!='asset_trans_status']").attr("disabled","disabled");
-	   $("#EditView_tabs select[name!='asset_trans_status']").css("background-Color","#efefef");
+	   $("#EditView_tabs select").attr("disabled","disabled");
+	   $("#EditView_tabs select").css("background-Color","#efefef");
 	   $("#EditView_tabs input").attr("disabled","disabled");
 	   $("#EditView_tabs .dateTime").hide();
 		$(".input-group-addon").hide();

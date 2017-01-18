@@ -51,3 +51,7 @@ $app_list_strings['aor_parameter_type_list']=array (
 	'lov' => '关联型-Module',
 	'sql' => '关联型-SQL',
 	);
+$app_list_strings['haor_export_report_type_list']=array (
+	'csv' => 'CSV',
+	'excel' => 'EXCEL',
+	);

@@ -65,7 +65,6 @@ class SugarAuthenticate{
         elseif (file_exists('modules/Users/authentication/'.$this->authenticationDir.'/' . $this->userAuthenticateClass . '.php')) {
             require_once('modules/Users/authentication/'.$this->authenticationDir.'/' . $this->userAuthenticateClass . '.php');
         }
-
         $this->userAuthenticate = new $this->userAuthenticateClass();
 	}
 
@@ -311,11 +310,18 @@ class SugarAuthenticate{
 	 *
 	 */
 	function logout(){
-			session_start();
-			session_destroy();
-			ob_clean();
-			header('Location: index.php?module=Users&action=Login');
-			sugar_cleanup(true);
+		session_start();
+		//Modified by zengchen 20170113
+		if(isset($_COOKIE["logout_url"])&&$_COOKIE["logout_url"]!=""){
+			$logout_url=$_COOKIE["logout_url"];
+		}else{
+			$logout_url="index.php?module=Users&action=Login";
+		}
+		//End modified 20170117
+		session_destroy();
+		ob_clean();
+		header('Location:'.$logout_url);
+		sugar_cleanup(true);
 	}
 
 

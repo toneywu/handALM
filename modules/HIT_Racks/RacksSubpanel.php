@@ -15,7 +15,9 @@ function get_current_asset($params) {
 function get_hit_racks($params) {
     $args = func_get_args();
 	$using_org_id = $args[0]['using_org_id'];
-
+    if ($using_org_id==''){
+        $using_org_id = $_REQUEST['record'];
+    }
     $return_array['select'] = " SELECT hit_racks.*";
     $return_array['from'] = " FROM hit_racks";
 

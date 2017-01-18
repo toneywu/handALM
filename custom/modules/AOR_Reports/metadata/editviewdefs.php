@@ -81,6 +81,15 @@ array (
             'label' => 'LBL_GRAPHS_PER_ROW',
           ),
         ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'export_type_c',
+            'label' => 'LBL_EXPORT_TYPE',
+          ),
+          1 => '',
+        ),
       ),
     ),
   ),
