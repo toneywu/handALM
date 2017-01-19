@@ -169,7 +169,7 @@ array (
         array (
           0 => 
           array (
-            'name' => 'hit_racks',
+            'name' => 'enable_it_rack',
             'label' => 'LBL_ENABLE_IT_RACK',
           ),
           1 => '',

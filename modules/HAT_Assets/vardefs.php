@@ -1799,7 +1799,7 @@ $dictionary['HAT_Assets'] = array(
       'len' => '255',
       'size' => '20',
       ),
-/*    'using_person_desc' =>
+    'using_person_desc' =>
     array (
       'required' => false,
       'name' => 'using_person_desc',
@@ -1819,8 +1819,8 @@ $dictionary['HAT_Assets'] = array(
       'merge_filter' => 'disabled',
       'len' => '255',
       'size' => '20',
-      ),*/
-/*    'owning_person_desc' =>
+      ),
+   'owning_person_desc' =>
     array (
       'required' => false,
       'name' => 'owning_person_desc',
@@ -1840,12 +1840,12 @@ $dictionary['HAT_Assets'] = array(
       'merge_filter' => 'disabled',
       'len' => '255',
       'size' => '20',
-      ),  */  
-    'using_person_desc' =>
+      ),  
+    'using_person' =>
     array (
       'required' => false,
       'source' => 'non-db',
-      'name' => 'using_person_desc',
+      'name' => 'using_person',
       'vname' => 'LBL_USING_PERSON',
       'type' => 'relate',
       'massupdate' => 0,
@@ -1939,11 +1939,11 @@ $dictionary['HAT_Assets'] = array(
       'len' => 36,
       'size' => '20',
       ),
-    'owning_person_desc' =>
+    'owning_person' =>
     array (
       'required' => false,
       'source' => 'non-db',
-      'name' => 'owning_person_desc',
+      'name' => 'owning_person',
       'vname' => 'LBL_OWNING_PERSON',
       'type' => 'relate',
       'massupdate' => 0,

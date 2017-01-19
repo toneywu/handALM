@@ -43,5 +43,6 @@ class HAA_ValueSetsViewEdit extends ViewEdit
             
         }
         echo '>';
+
 	}
 }
