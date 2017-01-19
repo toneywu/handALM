@@ -91,9 +91,9 @@ class HAT_AssetsViewEdit extends ViewEdit
             }
         }
 
-	    //如果已经选择产品，无论是否产品对应的FlexForm有值，值将界面展开。
+	    //如果已经选择产品，无论是否产品对应的FlexForm有值，都将界面展开。
 	    //（如果没有产品，则界面保持折叠状态。）
-        
+
 		if(isset($this->bean->aos_products_id) && ($this->bean->aos_products_id)!=""){
             echo '<script>$(".collapsed").switchClass("collapsed","expanded");</script>';
          } else {

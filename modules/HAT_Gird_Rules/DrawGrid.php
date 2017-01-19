@@ -67,7 +67,7 @@
 		$lresult['sign'] = 1;
 		$data[$lresult['id']][] = $lresult;
 		//设备信息
-		$assetsql = "SELECT hat_assets.`id` AS asid, hat_assets.`name` AS asname,hat_assets.`asset_status`,accounts.`name` as acname FROM hat_asset_locations_hat_assets_c c LEFT join hat_assets on hat_assets.id = c.`hat_asset_locations_hat_assetshat_assets_idb`  LEFT JOIN accounts ON hat_assets.`using_org_id` = accounts.`id`  WHERE c.`hat_asset_locations_hat_assetshat_asset_locations_ida` = '".$lresult['id']."' AND hat_assets.`deleted`=0  AND accounts.`deleted` = 0 order by hat_assets.`name` ASC";
+		$assetsql = "SELECT hat_assets.`id` AS asid, hat_assets.`name` AS asname,hat_assets.`asset_status`,accounts.`name` as acname FROM hat_asset_locations_hat_assets_c c LEFT join hat_assets on hat_assets.id = c.`hat_asset_locations_hat_assetshat_assets_idb`  LEFT JOIN accounts ON hat_assets.`using_org_id` = accounts.`id`  WHERE c.`hat_asset_locations_hat_assetshat_asset_locations_ida` = '".$lresult['id']."' AND hat_assets.`deleted`=0  order by hat_assets.`name` ASC";
 			$beanasset = $db->query($assetsql);
 			if($beanasset->num_rows > $xcount){
 				$xcount = $beanasset->num_rows;
@@ -75,7 +75,7 @@
 			while ( $result = $db->fetchByAssoc($beanasset) ) {
 				$result['sign'] = 0;
 				$result['racks'] = getOccupationCnt($result['asid']);
-				//var_dump($result['racks']);
+				//echo($result['asname']."<br/>");
 				$data[$lresult['id']][] = $result;
 			}
 	}
@@ -93,38 +93,25 @@
 	table
 	{
 		border-collapse:separate;
-		border-spacing:10px 50px;
+		border-spacing:10px 10px;
 	}
 	.table_box{width:90%;}
-	.table_box tr,.table_box tr td{
-		height: 80px;
+	.table_box tr,.table_box tr td div{
+		width: 80px;
+		height: 60px;
+		overflow: hidden;
 	}
-	<?php
-	if($tabtype == 1){
-	?>
-	td:nth-child(odd) {
-		border:1px solid #ECEAE7;
+	.table_box tr,.table_box tr td div:hover{
+		overflow: inherit;
+		height: 100%;
 	}
-
-	td:nth-child(even) {
-		border:1px solid #807D7D;
-	}
-	<?php
-	}else{
-	?>
-		tr:nth-child(odd){border:1px solid #ECEAE7;}
-		tr:nth-child(even){border:1px solid #807D7D;}
-	<?php
-	}
-	?>
 	.table_box tr td{
 		padding: 5px;
 		cursor: pointer;
 	}
 	.table_box tr td.frist{
-		background: #FBF8F8;
-		color: #C50A0A;
-		border-right: 1px solid #D82222;
+		background: #efefef;
+		color: #000;
 	}
 </style>
 <script>
@@ -170,8 +157,10 @@
 				<?php
 			} else {
 				?>
-				<td onclick="openAssetPopup(<?php echo "'".$v['asid']."'";?>)" <?php if($v['asset_status'] == 'Idle'){ echo "class='color_asset_status_Idle'";} ?>>
+				<td onclick="openAssetPopup(<?php echo "'".$v['asid']."'";?>)"   class="<?php echo 'color_asset_status_'.$v[asset_status]; ?>">
+					<div>
 					<?php echo $v['asname'] . "<br>" . $v['acname'] . "<br>" .$v['racks']; ?>
+					</div>
 				</td>
 				<?php
 			}
