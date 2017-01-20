@@ -29,7 +29,9 @@ function setEventTypePopupReturn(popupReplyData){
 			error : function() { // 失败
 				alert('Error loading document');
 			}
-		});	
+		});
+	
+	
 }
 
 
@@ -38,10 +40,10 @@ function showWOLines(wo_id) {
         $.ajax({
             url: 'index.php?to_pdf=true&module=HAM_WO&action=getWOLiness&id=' + wo_id,
             success: function (data) {
-                // console.log(data);
+                //console.log(data);
                 $("#wo_lines_display").html(data);
             },
-            error: function () { // 失败
+            error: function () { //失败
                 alert('Error loading document');
             }
         });
@@ -63,20 +65,20 @@ function setTargetOwningOrgPopupReturn(popupReplyData){
 function setEventTypeFields() {
 	console.log("setEventTypeFields = "+$("#hat_eventtype_id").val());
 	$.ajax({//
-		url: 'index.php?to_pdf=true&module=HAT_EventType&action=getTransSetting&id=' + $("#hat_eventtype_id").val(),// e74a5e34-906f-0590-d914-57cbe0e5ae89
+		url: 'index.php?to_pdf=true&module=HAT_EventType&action=getTransSetting&id=' + $("#hat_eventtype_id").val(),//e74a5e34-906f-0590-d914-57cbe0e5ae89
 		async: false,
 		success: function (data) {
 			global_eventOptions = jQuery.parseJSON(data);
 			console.log(global_eventOptions);
 
 			var obj = jQuery.parseJSON(data);
-			// console.log(obj);
+			//console.log(obj);
 			for(var i in obj) {
-				$("#"+i).val(obj[i]);// 向隐藏的字段中复制值，从而所有的EventType值都会提供到隐藏的字段中
+				$("#"+i).val(obj[i]);//向隐藏的字段中复制值，从而所有的EventType值都会提供到隐藏的字段中
 			}
 			resetEventType();
 		},
-		error: function () { // 失败
+		error: function () { //失败
 			alert('Error loading document');
 		}
 	})
@@ -87,9 +89,9 @@ function resetEventType(){
 
 function setWoPopupReturn(popupReplyData){
 	set_return(popupReplyData);
-	// console.log(popupReplyData);
+	//console.log(popupReplyData);
 	$("location_id").val(popupReplyData.name_to_value_array.location_id);
-	// console.log(popupReplyData.name_to_value_array.location_id);
+	//console.log(popupReplyData.name_to_value_array.location_id);
 	if($("#source_wo").val()=="") {
 		$("#source_woop").val("");
 		$("#source_woop_id").val("");
@@ -99,8 +101,25 @@ function setWoPopupReturn(popupReplyData){
 	}
 }
 
+function validate_form_message(){
+	$(".validation-message").each(function(){
+		console.log("error_message = "+$(this).text());
+		if($(this).text()!=""){
+			BootstrapDialog.alert({
+						type : BootstrapDialog.TYPE_DANGER,
+						title : SUGAR.language.get('app_strings',
+								'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+						message : $(this).text()
+					});
+		}
+	});	
+}
+
 function preValidateFunction(async_bool = false) {
-	// 但如果是SAVE按钮的触发，一定要async=false(保持默认)
+	//但如果是SAVE按钮的触发，一定要async=false(保持默认)
+	
+	//console.log("checkForm="+check_form('EditView'));
+	validate_form_message();
 	var return_flag=true;
 
 	for(var i=0;i<prodln;i++){
@@ -109,7 +128,7 @@ function preValidateFunction(async_bool = false) {
 		var pre_deleted = $("#line_deleted"+i).val();
 		var pre_port = $("#line_port"+i).val();
 		
-		console.log("第i行 "+(i+1)+",ip="+pre_ip_id+"~"+pre_port);
+		//console.log("第i行 "+(i+1)+",ip="+pre_ip_id+"~"+pre_port);
 
 			for(var j=i+1;j<prodln-1;j++){
 				var current_ip_id=$("#line_hit_ip_subnets_id"+j).val();
@@ -125,8 +144,7 @@ function preValidateFunction(async_bool = false) {
 						type : BootstrapDialog.TYPE_DANGER,
 						title : SUGAR.language.get('app_strings',
 								'LBL_EMAIL_ERROR_GENERAL_TITLE'),
-						// message :
-						// "第"+$("#displayed_line_num"+i).text()+"行和第"+$("#displayed_line_num"+j).text()+"行存在重复的IP值"
+						//message : "第"+$("#displayed_line_num"+i).text()+"行和第"+$("#displayed_line_num"+j).text()+"行存在重复的IP值"
 						message : "IP存在重复"
 					});
 					break;
@@ -137,49 +155,48 @@ function preValidateFunction(async_bool = false) {
 				break;
 		}
 	}
-	// return_flag=false;
+	//return_flag=false;
 	return return_flag;
 }
 
 
 $(document).ready(function(){
 	
-	// 改写Save事件，在Save之前加入数据校验
+	//改写Save事件，在Save之前加入数据校验
 	SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
-		OverwriteSaveBtn(preValidateFunction);// ff_include.js
-												// 注意preValidateFunction是一个Function，在此引用时不加（）
+		OverwriteSaveBtn(preValidateFunction);//ff_include.js 注意preValidateFunction是一个Function，在此引用时不加（）
 	});
 	
 
-	if($('#haa_ff_id').length==0) {// 如果对象不存在就添加一个
+	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
 		$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');
 	}
 	
 	    
        var current_header_status = $("#asset_trans_status").val();
-       if (current_header_status=="DRAFT") {// 可以DRAFT和SUBMIT
+       if (current_header_status=="DRAFT") {//可以DRAFT和SUBMIT
 			$("#asset_trans_status option[value='SUBMITTED']").remove();
 			$("#asset_trans_status option[value='REJECTED']").remove();
 			$("#asset_trans_status option[value='APPROVED']").remove();
 			$("#asset_trans_status option[value='CANCELED']").remove();
-			// $("#asset_trans_status option[value='CLOSED']").remove();
+			//$("#asset_trans_status option[value='CLOSED']").remove();
 			$("#asset_trans_status option[value='AUTO_TRANSACTED']").remove();
 			$("#asset_trans_status option[value='TRANSACTED']").remove();
 	   }
 	
 	
-	// 触发FF
+	//触发FF
 	SUGAR.util.doWhen("typeof setFF == 'function'", function(){
 		call_ff();
 	});
 
 	SUGAR.util.doWhen("typeof mark_field_disabled != 'undefined'", function(){
 		if ($("#hat_eventtype_id").val() != "") {
-			setEventTypeFields();// 初始化EventType，完成后会将EventType的值写入global_eventOptions
+			setEventTypeFields();//初始化EventType，完成后会将EventType的值写入global_eventOptions
 		}
 	});
 
-	// add by yuan.chen
+	//add by yuan.chen
 	if(typeof source_wo_id_tt!="undefined"){
 		$("#CANCEL_HEADER").bind("click",function(){
 			SUGAR.ajaxUI.loadContent('index.php?action=DetailView&module=HAM_WO&record='+source_wo_id_tt)
@@ -250,15 +267,15 @@ $(document).ready(function(){
 	$("#wo_lines").hide();
     $("#wo_lines").after("<div id='wo_lines_display'></div>")
     if ($("#source_wo_id").val()!="") {
-    	// 如果来源于工作单则显示工作单对象行信息，否则直接隐藏行
+    	//如果来源于工作单则显示工作单对象行信息，否则直接隐藏行
     	showWOLines($("#source_wo_id").val());
     } else {
 		$("#wo_lines").parent("td").prev("td").hide();
     }
 	
-	// add by yuan.chen 2016-12-08
+	//add by yuan.chen 2016-12-08
 	if($("#asset_trans_status").val()=="CLOSED"){
-	   // $("#EditView_tabs button").css("display","none");
+	   //$("#EditView_tabs button").css("display","none");
 	   $("#EditView_tabs input").attr("readonly",true);
        $("#EditView_tabs input").attr("style","background-Color:#efefef");
 	   $("#EditView_tabs textarea").attr("readonly",true);

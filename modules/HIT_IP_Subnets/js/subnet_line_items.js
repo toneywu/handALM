@@ -975,7 +975,7 @@ function insertTransLineElements(tableid, current_view) { // 创建界面要素
 			+ prodln + "]' id='line_gateway" + prodln
 			+ "' maxlength='50' value='' title=''>" + "</span>" 
 			//add by yuan.chen 2017-1-11
-			+ "<input type='hidden' name='line_using_org[" + prodln + "]' id='line_using_org" + prodln + "' value='0'>"
+			+ "<input type='hidden' name='line_using_org[" + prodln + "]' id='line_using_org" + prodln + "' value=''>"
 			+ "<input type='hidden' name='line_deleted[" + prodln + "]' id='line_deleted" + prodln + "' value='0'>"
 			+ "<input type='hidden' name='line_id[" + prodln + "]' id='line_id" + prodln + "' value=''>"
 			+ "<input type='hidden' name='line_ip_type_val[" + prodln + "]' id='line_ip_type_val" + prodln + "' value=''>"

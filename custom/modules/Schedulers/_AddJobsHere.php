@@ -118,7 +118,8 @@ function sync_jt_accounts() {
 		$salers_email_val = $record['SALERS_EMAIL'];
 		$customer_business_val = $record['CUSTOMER_BUSINESS'];
 		$organization_class_val = $record['ORGANIZATION_CLASS'];
-		$sql = 'SELECT count(1) cnt FROM accounts INNER JOIN accounts_cstm WHERE accounts.id = accounts_cstm.id_c and accounts.deleted=0 AND accounts_cstm.organization_number_c ="' . $customer_id_val . '"';
+		//$sql = 'SELECT count(1) cnt FROM accounts INNER JOIN accounts_cstm WHERE accounts.id = accounts_cstm.id_c and accounts.deleted=0 AND accounts_cstm.organization_number_c ="' . $customer_id_val . '"';
+		$sql = 'SELECT count(1) cnt FROM accounts INNER JOIN accounts_cstm WHERE accounts.id = accounts_cstm.id_c and accounts.deleted=0 AND accounts_cstm.full_name_c ="' . $customer_name_val . '"';
 		$result = $db->query($sql);
 		$rows = 0;
 		while ($resule_asset = $db->fetchByAssoc($result)) {
@@ -241,6 +242,7 @@ function sync_jt_contracts() {
 		'code_tag'=>'JT'
 	));
 	$GLOBALS['log']->infor(count($json_array));
+	$GLOBALS['log']->infor("contract_fix_type=".$contract_fix_type);
 	//处理数据
 	foreach ($json_array as $key => $record) {
 		$h_contract_header_id_val = $record['CONTRACT_HEADER_ID'];
@@ -396,7 +398,7 @@ function sync_jt_contracts() {
 				 "' . $contact_id . 
 				 '","' . $newBean->haa_codes_id1_c . 
 				 '","' . $newBean->haa_codes_id2_c . 
-				 '","' . $newBean->haa_codes_id_c.'"';
+				 '","' . $contract_fix_type->id.'"';
 			if($newBean->revision_c==""||empty($newBean->revision_c)){
 				$insert_cstm_sql=$insert_cstm_sql.',NULL';
 			}else{
@@ -447,11 +449,13 @@ function sync_jt_contracts() {
 					$newLineBean->data_source_id_c = $contract_line_id_val;
 					$newLineBean->name = $inventory_item_name_val;
 					//产品 集团的产品转换成欣润的产品 欣润的数据线导入 存在系统中的 update by yuan.chen 2017-1-10 10:01
-					$item_list_sql = 'SELECT aos_products.id  FROM aos_products  WHERE aos_products.deleted=0 and aos_products.attribute10_c ="' . $product_code_val . '"';
+					$item_list_sql = 'SELECT aos_products.id,aos_products.part_number  FROM aos_products,aos_products_cstm  WHERE  aos_products.id=aos_products_cstm.id_c and  aos_products.deleted=0 AND aos_products_cstm.attribute10_c !="" and aos_products_cstm.attribute10_c is not null and aos_products_cstm.attribute10_c ="' . $product_code_val . '"';
 					$item_list_result = $db->query($item_list_sql);
 					while ($item_list_record = $db->fetchByAssoc($item_list_result)) {
 						$record_val = $item_list_record['id'];
+						$part_number= $item_list_record['part_number'];
 						$newLineBean->product_id = $record_val;
+						$newLineBean->part_number = $part_number;
 					}
 
 					$newLineBean->product_discount = $parent_description_val;
@@ -475,7 +479,8 @@ function sync_jt_contracts() {
 									,product_qty
 									,item_description
 									,parent_id
-									,parent_type)
+									,parent_type
+									,part_number)
 									 value(
 									 "' . $aos_products_quotes_id . 
 									 '","' . $inventory_item_name_val . 
@@ -486,6 +491,7 @@ function sync_jt_contracts() {
 									  '","' . $formula_type_code_val . 
 									  '","' . $contact_id . 
 									  '","' . $newLineBean->parent_type .
+									  '","' . $newLineBean->part_number .
 									 '") ';
 						$insert_result = $db->query($insert_sql);
 						$GLOBALS['log']->infor("effective_end_c=".$newLineBean->effective_end_c);
@@ -631,7 +637,8 @@ function sync_xr_accounts() {
 		$salers_email_val = $record['SALERS_EMAIL'];
 		$customer_business_val = $record['CUSTOMER_BUSINESS'];
 		$organization_class_val = $record['ORGANIZATION_CLASS'];
-		$sql = 'SELECT count(1) cnt FROM accounts INNER JOIN accounts_cstm WHERE accounts.id = accounts_cstm.id_c and accounts.deleted=0 AND accounts_cstm.organization_number_c ="' . $customer_id_val . '"';
+		//$sql = 'SELECT count(1) cnt FROM accounts INNER JOIN accounts_cstm WHERE accounts.id = accounts_cstm.id_c and accounts.deleted=0 AND accounts_cstm.organization_number_c ="' . $customer_id_val . '"';
+		$sql = 'SELECT count(1) cnt FROM accounts INNER JOIN accounts_cstm WHERE accounts.id = accounts_cstm.id_c and accounts.deleted=0 AND accounts_cstm.full_name_c ="' . $customer_name_val . '"';
 		$result = $db->query($sql);
 		$rows = 0;
 		while ($resule_asset = $db->fetchByAssoc($result)) {
@@ -1011,7 +1018,7 @@ function sync_xr_contracts() {
 				 "' . $contact_id . 
 				 '","' . $newBean->haa_codes_id1_c . 
 				 '","' . $newBean->haa_codes_id2_c . 
-				 '","' . $newBean->haa_codes_id_c . 
+				 '","' . $contract_fix_type->id . 
 				 '","' . $newBean->revision_c . 
 				 '","' . $order_number_val . 
 				 '","' . $newBean->data_source_id_c . 
@@ -1060,11 +1067,13 @@ function sync_xr_contracts() {
 					if (count($item_list) != 0) {
 						$newLineBean->product_id = $item_list[0]->id;
 					}*/
-					$item_list_sql = 'SELECT aos_products.id  FROM aos_products  WHERE aos_products.deleted=0 and aos_products.part_number ="' . $item_number_val . '"';
+					$item_list_sql = 'SELECT aos_products.id ,aos_contracts.part_number FROM aos_products  WHERE aos_products.deleted=0 and aos_products.part_number ="' . $item_number_val . '"';
 					$item_list_result = $db->query($item_list_sql);
 					while ($item_list_record = $db->fetchByAssoc($item_list_result)) {
 						$record_val = $item_list_record['id'];
+						$part_number = $item_list_record['part_number'];
 						$newLineBean->product_id = $record_val;
+						$newLineBean->part_number = $part_number;
 					}
 					
 					
@@ -1088,7 +1097,7 @@ function sync_xr_contracts() {
 									,product_qty
 									,item_description
 									,parent_id
-									,parent_type)
+									,parent_type,part_number)
 									 value(
 									 "' . $aos_products_quotes_id . 
 									 '","' . $inventory_item_name_val . 
@@ -1098,6 +1107,7 @@ function sync_xr_contracts() {
 									  '","' . $formula_type_code_val . 
 									  '","' . $contact_id . 
 									 '","' . $newLineBean->parent_type .
+									 '","' . $newLineBean->part_number .
 									 '") ';
 						$insert_result = $db->query($insert_sql);
 						$GLOBALS['log']->infor("insert_aos_products_quotes_sql=".$insert_sql);
