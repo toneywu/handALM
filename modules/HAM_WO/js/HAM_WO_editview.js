@@ -1,3 +1,5 @@
+var global_event_options="";
+
 function setEventTypeReturn(popupReplyData){//选择地点类型后
     set_return(popupReplyData);
     call_ff();
@@ -11,12 +13,12 @@ function call_ff() {
 function setAssetPopupReturn(popupReplyData){
 	set_return(popupReplyData);
 	$("#asset_desc_text").text($("#asset_desc").val());
+    resetPersonByDate();
 }
 
 function setLocationPopupReturn(popupReplyData){
 	set_return(popupReplyData);
 	$("#location_desc_text").text($("#location_desc").val());
-	
 	if($("#location_map_enabled").val()=="1") {
 		$("#location_map_enabled_text").show();
 	} else {
@@ -71,6 +73,33 @@ function setWorkCenterResPopupReturn(popupReplyData){
 	set_return(popupReplyData);
 }
 
+function resetPersonByDate() {
+    var asset_id = $("#hat_assets_id").val();
+    var event_time = "";
+
+    if ($("#date_schedualed_start").val()=="") {
+        event_time = $("#date_target_start").val();
+    } else {
+        event_time = $("#date_schedualed_start").val();
+    }
+
+    if(asset_id != "" && event_time !=""){
+        //如果资产编号不为空，则可以进行基于资产的人员重新处理
+    console.log("&asset_id="+asset_id+"&event_time="+event_time);
+    $.ajax({
+        url:"?module=HAT_Incidents&action=getTimebasedPersonInfor&to_pdf=true",
+        type:"GET",
+        async: false,
+        data:"&asset_id="+asset_id+"&event_time="+event_time,
+        success:function(data){
+            data = JSON.parse(data);
+            //console.log(data);
+            $("#contact_id1_c").val(data.id);
+            $("#contract_name").val(data.name);
+        }
+    });
+    }
+}
 
 function require_field(){
 	var wo_status = $("#wo_status").val();
@@ -152,7 +181,50 @@ function showWOLines() {
         });
 };
 
+
+function preValidateFunction(async_bool = false) {
+
+	var return_flag=true;
+	$wo_status=$("#wo_status").val();
+	
+	console.log(global_event_options);
+	if($wo_status=="SUBMITTED"&&global_event_options.contract_completed!=""&&global_event_options.contract_completed=="SUBMITTED"&&$("#contract_id").val()==""){
+		console.log(global_event_options.contract_completed);
+		return_flag=false;
+		BootstrapDialog.alert({
+						type : BootstrapDialog.TYPE_DANGER,
+						title : SUGAR.language.get('app_strings',
+								'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+						message : "提交工单之前请关联合同！"
+					});
+	}
+	
+	return return_flag;
+}
+
+
+
 $(document).ready(function(){
+	    var event_id = $("#hat_event_type_id").val();
+		$.ajax({//
+			url : 'index.php?to_pdf=true&module=HIT_IP_TRANS_BATCH&action=getEventJsonData&hat_eventtype_id='
+					+ event_id,
+			async : false,
+			success : function(data) {
+			    global_event_options = jQuery.parseJSON(data);
+				
+			},
+			error : function() { // 失败
+				alert('Error loading document');
+			}
+		});
+	
+
+	//改写Save事件，在Save之前加入数据校验
+	SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
+		OverwriteSaveBtn(preValidateFunction);//ff_include.js 注意preValidateFunction是一个Function，在此引用时不加（）
+	});
+	
 	
 	
 	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
@@ -163,12 +235,15 @@ $(document).ready(function(){
 	SUGAR.util.doWhen("typeof setFF == 'function'", function(){
 		call_ff();
 	});
-	
+
 	$("#event_type").change(function(){
 		SUGAR.util.doWhen("typeof setFF == 'function'", function(){
 			call_ff();
 		});
 	});
+
+    $("#date_schedualed_start").change(function(){resetPersonByDate()})
+    $("#date_target_start").change(function(){resetPersonByDate()})
 
 	/**
 	 * checkAccess 
@@ -261,7 +336,6 @@ function initTransHeaderStatus() {
         $("#wo_status option[value='INPRG']").remove();
         $("#wo_status option[value='WPREV']").remove();
         $("#wo_status option[value='REWORK']").remove(); 
-		console.log($("name[input=record]").val())
 
         //如果当前WO没有生成（新建模式，也就是不是处于修改模式），则将当前LOV加上一个空值，让用户去选择。
 		if(typeof $("input[name='record']").val()=="undefined"||$("input[name='record']").val()==''){
@@ -317,7 +391,7 @@ function initTransHeaderStatus() {
     	$("#wo_status option[value='REJECTED']").remove();
     	$("#wo_status option[value='DRAFT']").remove();
     	$("#wo_status option[value='SUBMITTED']").remove();
-    	$("#wo_status option[value='COMPLETED']").remove();
+    	//$("#wo_status option[value='COMPLETED']").remove();
     	$("#wo_status option[value='CLOSED']").remove();
     	$("#wo_status option[value='WPREV']").remove();
         setEditViewReadonly ();

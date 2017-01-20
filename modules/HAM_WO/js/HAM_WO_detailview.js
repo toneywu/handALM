@@ -7,7 +7,7 @@ $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialo
 
 
 $.getScript("modules/HAA_FF/ff_include.js");//load triger_setFF()
-
+var global_eventOptions;
 function call_ff() {
 	triger_setFF($("#haa_ff_id").val(),"HAM_WO","DetailView");
 	$(".expandLink").click();
@@ -88,8 +88,31 @@ function assignWoop(id,record){
 
 
 function complete_work_order(record){
-	//alert(record);
-	window.location.href = "index.php?module=HAM_WO&action=EditView&record="+record+"&fromWoop=Y";
+	
+	var event_id = $("#hat_event_type_id").data("id-value");
+		$.ajax({//
+			url : 'index.php?to_pdf=true&module=HIT_IP_TRANS_BATCH&action=getEventJsonData&hat_eventtype_id='
+					+ event_id,
+			async : false,
+			success : function(data) {
+				line_data = jQuery.parseJSON(data);
+				console.log(line_data);
+			},
+			error : function() { // 失败
+				alert('Error loading document');
+			}
+		});
+	if(line_data.contract_completed!=""&&line_data.contract_completed=="COMPLETED"&&$("#contract_id").val()==""){
+		console.log(line_data.contract_completed);
+		BootstrapDialog.alert({
+						type : BootstrapDialog.TYPE_DANGER,
+						title : SUGAR.language.get('app_strings',
+								'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+						message : "完成工单之前请关联合同！"
+					});
+	}else{
+		window.location.href = "index.php?module=HAM_WO&action=EditView&record="+record+"&fromWoop=Y";
+	}
 }
 
 /**
@@ -98,7 +121,19 @@ function complete_work_order(record){
  */
  function saveStatus(id,status_code){
 	//console.log('index.php?to_pdf=true&module=HAM_WO&action=saveStatusBean&id=' + id+"&status_code="+status_code);
-	$.ajax({
+	console.log(status_code);
+	console.log(global_event_options.contract_completed);
+	if(status_code=="SUBMITTED"&&global_event_options.contract_completed!=""&&global_event_options.contract_completed=="SUBMITTED"&&$("#contract_id").val()==""){
+		console.log(global_event_options.contract_completed);
+		return_flag=false;
+		BootstrapDialog.alert({
+						type : BootstrapDialog.TYPE_DANGER,
+						title : SUGAR.language.get('app_strings',
+								'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+						message : "提交工单之前请关联合同！"
+					});
+	}else{
+		$.ajax({
 		url: 'index.php?to_pdf=true&module=HAM_WO&action=saveStatus&id=' + id+"&status_code="+status_code,
 		success: function (data) {
 			window.location.href = "index.php?module=HAM_WO&action=DetailView&record="+id;
@@ -107,6 +142,7 @@ function complete_work_order(record){
 				alert('Error loading document');
 			}
 		});
+	}
 };
 
 /**
@@ -170,7 +206,6 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 		});
 };
 
-
 /**
  * 点击按钮 工序驳回
  * @param name
@@ -217,9 +252,7 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 				alert('Error loading document');
 			}
 		});
- 	/*}*/
  };
-
 	/**
  * 调用Ajax请求 获取是否有创建收支项权限
  * @param name
@@ -243,6 +276,20 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
  * document 页面加载 入口函数
  */
  $(document).ready(function(){
+	 
+	 var event_id = $("#hat_event_type_id").data("id-value");
+		$.ajax({//
+			url : 'index.php?to_pdf=true&module=HIT_IP_TRANS_BATCH&action=getEventJsonData&hat_eventtype_id='
+					+ event_id,
+			async : false,
+			success : function(data) {
+			    global_event_options = jQuery.parseJSON(data);
+				
+			},
+			error : function() { // 失败
+				alert('Error loading document');
+			}
+		});
 
 	//将Subpanel的内容前移到上方TAB中
 	$("#LBL_EDITVIEW_PANEL_WOLINES").after("<div class='tab_subpanel'>"+$("#whole_subpanel_wo_line").html()+"</div>");
@@ -267,44 +314,14 @@ showWOLines();*/
 	 //checkEditRevenueACL
 	 checkEditRevenueACL($("input[name='record']").val());
 //end 
-	$("#list_subpanel_wo_line table tr:gt(3)").each(function(i){
-		console.log("i="+i);
-		var first_td = $(this).find("td:first");
-		var last_td = $(this).find("td:last");
-		console.log(first_td.find("a").text());
-		var contract_val = first_td.find("a").text();
-		if(contract_val!=""){
-		$("#wo_line_edit_"+(i+1)).removeAttr("href");
-		 /* $("#wo_line_remove_"+(i+1)).removeAttr("href");
-		 $("#wo_line_edit_"+(i+1)).parent().remove();
-		 $("#wo_line_remove_"+(i+1)).parent().remove();*/
-		 //console.log($("#wo_line_remove_"+(i+1)).parent().parent().attr("class"));
-		 $("#wo_line_remove_"+(i+1)).parent().remove();
-		 
-		
-		last_td.closest("td").attr("disabled","disabled");
-		}
-		
-	});
 
-
-
-var complete_btn=$("<input type='button' class='btn_detailview' id='btn_complete' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_COMPLETE_BUTTON_LABEL')+"'>");
-if($("#wo_status").val()=="APPROVED"){
-		 //add by yuan.chen 2016-12-06
-		 $("input[name^=HAM_WO_Lines_]").attr("disabled","disabled");
-		 $("input[name^=HAM_WOOP_新增_button]").attr("disabled","disabled");
-		 $("a[id^=wo_line_edit_]").removeAttr("href");
-		 $("a[id^=wo_line_remove_]").removeAttr("href");
-		 $("a[id^=wo_line_remove_]").parent().parent().remove();
-		 //end
-		 $("#btn_change_status").after(complete_btn);
-
+	var complete_btn=$("<input type='button' class='btn_detailview' id='btn_complete' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_COMPLETE_BUTTON_LABEL')+"'>");
+	if($("#wo_status").val()=="APPROVED"){
+		$("#btn_change_status").after(complete_btn);
 		//registe function cancel()
 		$("#btn_complete").click(function(){ //如果取消按钮 返回
 			complete_work_order($("input[name='record']").val());
 		});
-
 	}
 	//add by yuan.chen
 	var reject_woop_btn=$("<input type='button' class='btn_detailview' id='btn_woop_reject' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_WOOP_REJECT_BUTTON_LABEL')+"'>");
@@ -317,14 +334,75 @@ if($("#wo_status").val()=="APPROVED"){
 	//等待前序的工序不能编辑
 	var woopEdit='';
 	var woopStatus='';
-	$("#list_subpanel_woop table tr:gt(3)").each(function(i){
+	$("#list_subpanel_woop table tbody tr:gt(3)").each(function(i){
 		woopEdit="#woop_edit_"+(i+1);
 		woopStatus=$(this).children().eq(2).text().trim();
-		woopHref=$(woopEdit).attr("href");
-		if (woopStatus=='等待前序'){
+		/*if (woopStatus=='等待前序'){
 			$(woopEdit).removeAttr("href"); 
+		}*/
+		//add by zengchen 20161213
+		var url=$(this).children().eq(1).find('a').attr('href');
+		var wo_id=decodeURIComponent(url).split('=')[5];
+		var action_module=$(this).children().eq(8).text().trim();
+		if (action_module=="网络资源事务") {
+			action_module='hit_ip_trans_batch';
+		}
+		if (action_module=="设备/资产事务") {
+			action_module='hat_asset_trans_batch';
+		}
+		if(action_module=="操作"){
+			var label_a_url=$(this).children().eq(8).find("a");
+			var url=label_a_url.attr("href");
+			if (url=="#") {
+				url=label_a_url.attr("onclick");
+				var url_module=url.split("=")[2];
+				action_module=url_module.split("&")[0].toLowerCase();
+			}else{
+				var url_module=url.split("=")[1];
+				action_module=url_module.split("&")[0].toLowerCase();
+			}
+		}
+		var label_a=$(this).children().eq(7).find("a");
+		var lead_url=label_a.attr("href");
+		var url_arr=decodeURIComponent(lead_url).split("=");
+		var leading=url_arr[5];//负责人
+		var uname=label_a.text().trim();
+		if(woopStatus=="等待前序"){
+			$(woopEdit).removeAttr("href");
+		}
+		if (uname!="认领任务"&&woopStatus=="已批准") {
+			var res=getDealStatu(wo_id,action_module,leading);
+			if (res['leader']=="0") {
+				$(this).children().eq(8).find("a").removeAttr("onclick");
+				$(this).children().eq(8).find("a").removeAttr("href");
+			}
+			if (woopStatus=="已批准"&&res['leader']!="0"&&res['trans_status']=="CLOSED"){
+				return false;//什么都不做
+			}else if(woopStatus=="已批准"&&res['leader']!="0"&&res['trans_status']==null){
+				return false;//什么都不做
+			}else{//其他情况都移除并加上提示
+				$(woopEdit).removeAttr("href");
+				if(res['trans_status']=="DRAFT"){
+					$(woopEdit).removeAttr("href");
+					$(woopEdit).click(function(){
+						alert("请将功能模块的业务处理完，再编辑工序！");
+					});
+				}
+			}
 		}
 	});
-	//
-}
-);
+
+	function getDealStatu(wo_id,module,leading){
+		var url_addr = "index.php?module=HAM_WO&action=getStatu&to_pdf=true";
+		$.ajax({
+			url:url_addr,
+			type:'POST',
+			async: false,
+			data:"&wo_id="+wo_id+"&module_name="+module+"&leading="+leading,
+			success:function(res){
+				res_date=JSON.parse(res);
+			}
+		});
+		return res_date;
+	}//end add 20161213
+});

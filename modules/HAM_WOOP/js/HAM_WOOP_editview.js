@@ -1,4 +1,6 @@
 ﻿$.getScript("modules/HAA_FF/ff_include.js");
+$.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); //MessageBox
+$('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
 
 function require_field(){
 
@@ -27,16 +29,42 @@ function require_field(){
 	}
 }
 
-
+function validate_woop(){
+	var return_flag=true;
+	$.ajax({//
+			url:'index.php?to_pdf=true&module=HAM_WOOP&action=validate_woop&ham_wo_id='+$("#ham_wo_id").val()+'&woop_number='+$("#woop_number").val(),
+			async : false,
+			success : function(data) {
+				if(data=="E"){
+					BootstrapDialog.alert({
+						type : BootstrapDialog.TYPE_DANGER,
+						title : SUGAR.language.get('app_strings',
+								'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+						message : "完成工单之前请关联合同！"
+					});
+					return_flag=false;
+				}
+			},
+			error : function() { // 失败
+				alert('Error loading document');
+			}
+		});
+	return return_flag;
+}
 
 
 
 function preValidateFunction(async_bool = false) {
 		//但如果是SAVE按钮的触发，一定要async=false(保持默认)
 	//console.log('index.php?to_pdf=true&module=HAM_WOOP&action=getTransStatus&ham_wo_id='+$("#ham_wo_id").val()+'&act_module='+$("#act_module").val()+"&woop_number="+$("#woop_number").val());
+	var return_result=validate_woop();
+	if(return_result==false){
+		return;
+	}
 	var return_flag=true;
 	$.ajax({
 			url:'index.php?to_pdf=true&module=HAM_WOOP&action=getTransStatus&ham_wo_id='+$("#ham_wo_id").val()+'&act_module='+$("#act_module").val()+"&woop_number="+$("#woop_number").val(),
+			async : false,
 			success: function (data) {
 				if(data=="N"){
 				    var error_msg = SUGAR.language.get('HAM_WOOP', 'LBL_ERROR_STATUS_ERR');
