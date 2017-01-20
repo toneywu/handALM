@@ -112,14 +112,14 @@ function display_lines($focus, $field, $value, $view){
          	$result = $focus->db->query($sql);
          	while ($row = $focus->db->fetchByAssoc($result)) {
          		/*$line_sql = "SELECT count(*) num FROM hit_ip_allocations h WHERE h.hit_ip_subnets_id = '".$row['id']."'";*/
-         		$line_sql = "SELECT count(*) num FROM hit_ip_allocations hia WHERE (hia.accurate_ip = '".$row['id']."' OR hia.hit_ip_subnets_id = '".$row['id']."') AND hia.`deleted`=0 AND (hia.`date_from`='' OR hia.`date_from` IS NULL OR hia.date_from>=CURDATE()) AND (hia.`date_to`='' OR hia.`date_to` IS NULL OR hia.`date_to`<=CURDATE())";
+         		$line_sql = "SELECT count(*) num FROM hit_ip_allocations hia WHERE (hia.accurate_ip = '".$row['id']."' OR hia.hit_ip_subnets_id = '".$row['id']."') AND hia.`deleted`=0 AND hia.enable_action=1 AND (hia.`date_from`='' OR hia.`date_from` IS NULL OR hia.date_from>=CURDATE()) AND (hia.`date_to`='' OR hia.`date_to` IS NULL OR hia.`date_to`<=CURDATE())";
          		//var_dump($line_sql);
          		$res = $focus->db->query($line_sql);
          		$row_res = $focus->db->fetchByAssoc($res);
          		if ($row_res['num']>0) {
          			$row['allo_qty']='1';
          		}else{
-         			$row['allo_qty']='';
+         			$row['allo_qty']='0';
          		}
          		//var_dump($row['allo_qty']);
          		$line_data = json_encode($row);

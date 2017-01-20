@@ -680,14 +680,14 @@ function insertLineData(hit_ip_subnets, current_view) { // 将数据写入到对
 		$("#line_using_org".concat(String(ln))).val(hit_ip_subnets.using_org);
 
 		//$("#line_status".concat(String(ln))).val(hit_ip_subnets.hiaa_id);
-		console.log("--------------------------------------------------------------");
-		console.log($("#line_status".concat(String(ln))).val());
+		//console.log("--------------------------------------------------------------");
+		//console.log($("#line_status".concat(String(ln))).val());
 		$("#line_source_id".concat(String(ln))).val(hit_ip_subnets.source_id);
 
 
 		//$("#line_status".concat(String(ln))).val(hit_ip_subnets.hiaa_id);
-		console.log("--------------------------------------------------------------");
-		console.log($("#line_status".concat(String(ln))).val());
+		//console.log("--------------------------------------------------------------");
+		//console.log($("#line_status".concat(String(ln))).val());
 		$("#line_source_id".concat(String(ln))).val(hit_ip_subnets.source_id);
 
 		$("#line_status".concat(String(ln))).val(hit_ip_subnets.allo_qty);
@@ -1115,30 +1115,25 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 		$("#displayed_line_ip_qty" + ln).html("1");
 		$("#displayed_line_ip_lowest" + ln).html("");
 		$("#displayed_line_ip_highest" + ln).html("");
-		is_assigned = 1;
+		//is_assigned = 1;
 		//console.log("11111111111111111111111111");
 	}
 
     //2016-12-26
-	if ($("#displayed_line_purpose" + ln).val() != "" ) {
+/*	if ($("#displayed_line_purpose" + ln).val() != "" ) {
 		is_assigned =1;
 		//console.log("22222222222222222222222");
 	}
-	/*else{
-		is_assigned =1;
-		console.log("22222222222222222222222");
-	}*/
-    if ($("#line_status"+ln).val()!="") {
-    	is_assigned =1;
-    	//console.log("33333333333333333333");
+*/
+    if ($("#line_status"+ln).val()=="1") {
+    	is_assigned = 1;
     }
     if(is_assigned == 1) {
-
 		$("#displayed_line_status"+ln).html("<span class='color_tag color_asset_status_InService'>"+SUGAR.language.get('HIT_IP', 'LBL_ASSIGNED')+"</span>");
 	} else {
 		$("#displayed_line_status"+ln).html("<span class='color_tag color_asset_status_Idle'>"+SUGAR.language.get('HIT_IP', 'LBL_UNASSIGNED')+"</span>");
 	}
-    
+
 	/*if($("#line_status"+ln).val()!="") {
 
 	//if($("#line_status"+ln).val()>0) {

@@ -100,7 +100,7 @@ function set_site_selector($bean_site_id,$current_module,$current_action,$vardef
             $html .=$beanSite->name;
 			if($current_module=="HAM_WO"&&$current_action=="EditView"){
 				$html="";
-				
+
 				//add by yuan.chen 2016-12-16
 				//从Session加载Business Framework字段的值
                 $beanSite = BeanFactory::getBean('HAM_Maint_Sites');
@@ -109,15 +109,10 @@ function set_site_selector($bean_site_id,$current_module,$current_action,$vardef
                     $beanSiteList = array();
                     $html = "ERROR: Site list not found";
                 }
-				
-				
-                //$bean_site_id=empty($_SESSION['current_site'])?"":$_SESSION['current_site'];
-				
                 $html = "<select id='site_select' name='site_select'>";
 
                 for($i=0; $i<count($beanSiteList); $i++) {
                     $the_site = $beanSiteList[$i];
-					
                     if ($bean_site_id==$the_site->id) {
                         $html .= "<option value='".$the_site->id."' selected='selected'>".$the_site->name."</option>";
                     } else {
@@ -132,11 +127,6 @@ function set_site_selector($bean_site_id,$current_module,$current_action,$vardef
 				$html .='<input type="hidden" name="'.$vardef_site_id_name.'" id="'.$vardef_site_id_name.'" value="'.$bean_site_id .'">';
                 $html .='<script>$("#site_select").change(function(){$("#'.$vardef_site_id_name.'").val($(this).val())})</script>';
 				//end
-				
-				
-				
-				
-				
 			}
         }
 
