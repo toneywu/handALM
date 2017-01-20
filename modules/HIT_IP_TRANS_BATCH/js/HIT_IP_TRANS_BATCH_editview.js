@@ -119,7 +119,7 @@ function preValidateFunction(async_bool = false) {
 	//但如果是SAVE按钮的触发，一定要async=false(保持默认)
 	
 	//console.log("checkForm="+check_form('EditView'));
-	validate_form_message();
+	//validate_form_message();
 	var return_flag=true;
 
 	for(var i=0;i<prodln;i++){
