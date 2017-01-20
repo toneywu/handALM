@@ -108,6 +108,7 @@ if($include_reject_wo=='1'){
 				$allocation_line_bean->date_start = $trans_line->date_start;
 				$allocation_line_bean->date_end = $trans_line->date_end;
 				$allocation_line_bean->access_assets_backup_id = $trans_line->access_assets_backup_id;
+				
 				//$allocation_line_bean->target_owning_org_id = $parent->target_owning_org_id;
 				//$allocation_line_bean->target_owning_org = $parent->target_owning_org;
 				$allocation_line_bean->enable_action = $trans_line->enable_action;
