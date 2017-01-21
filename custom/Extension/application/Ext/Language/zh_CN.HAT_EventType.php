@@ -52,6 +52,12 @@ $app_list_strings['asset_trans_status']=array (
   'AUTO_TRANSACTED' => '已按关联调整',
 );
 
+$app_list_strings['cux_event_contract_list']=array (
+  'NO_NEED' => '非必须',
+  'SUBMITTED' => '在提交前必须提供',
+  'COMPLETED' => '在完成前必须提供',
+);
+
 $app_list_strings['cux_event_type_option_list']=array (
   'LOCKED' => '禁止使用或修改此字段',
   'REQUIRED' => '必须修改',

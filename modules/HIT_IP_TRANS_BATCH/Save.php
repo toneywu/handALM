@@ -184,25 +184,12 @@ function save_allocation_lines($trans_line_bean, $parent, $prev_trans_batch_id) 
 	echo "然后通过 ip和端口去找历史表 看是否存在 如果不存在需要新建  "."<br>";
 	echo "subnets_id = ".$trans_line_bean->hit_ip_subnets_id."<br>";
 	*/
-	echo "-----id = ".$trans_line_bean->port."<br>";
-	$sql ='SELECT h.id
-			FROM hit_ip_allocations h
-			WHERE IFNULL(h.port,"$$$$$")=IFNULL("'.$trans_line_bean->port.'","$$$$$")
-			and   h.enable_action=1
-			AND   IFNULL(h.hit_ip_subnets_id,"$$$$$")=IFNULL("'.$trans_line_bean->hit_ip_subnets_id.'","$$$$$")
-			AND   h.deleted=0';
-		echo $sql;
-		$result = $db->query($sql);
-		while($row = $GLOBALS['db']->fetchByAssoc($result))
-		{
-			$id = $row['id'];
-		}
-	if(!empty($trans_line->hit_ip_subnets_id)){
-		if (count($id)> 0&&$id!="0") {
+	
+		if (!empty($trans_line->history_id)) {
 			//更新
 			echo "allocation update";
 			   $allocation_line_bean = BeanFactory :: getBean('HIT_IP_Allocations')->retrieve_by_string_fields(array (
-												'id' => $id));		
+												'id' => $trans_line->history_id));		
 				echo "allocation_line_bean = ".$id."<br>";
 				$allocation_line_bean->name = $trans_line->name;
 				$allocation_line_bean->hit_ip_subnets_id = $trans_line->hit_ip_subnets_id;
@@ -232,8 +219,8 @@ function save_allocation_lines($trans_line_bean, $parent, $prev_trans_batch_id) 
 				$allocation_line_bean->date_start = $trans_line->date_start;
 				$allocation_line_bean->date_end = $trans_line->date_end;
 				$allocation_line_bean->access_assets_backup_id = $trans_line->access_assets_backup_id;
-				$allocation_line_bean->target_owning_org_id = $parent->target_owning_org_id;
-				$allocation_line_bean->target_owning_org = $parent->target_owning_org;
+				//$allocation_line_bean->target_owning_org_id = $parent->target_owning_org_id;
+				//$allocation_line_bean->target_owning_org = $parent->target_owning_org;
 				$allocation_line_bean->enable_action = $trans_line->enable_action;
 				$allocation_line_bean->broadband_type = $trans_line->broadband_type;
 				$allocation_line_bean->child_port = $trans_line->child_port;
@@ -245,12 +232,12 @@ function save_allocation_lines($trans_line_bean, $parent, $prev_trans_batch_id) 
 					$allocation_line_bean->source_wo_id = $parent->source_wo_id;
 					$allocation_line_bean->source_woop_id = $parent->source_woop_id;
 				}
-				
+				$allocation_line_bean->save();	
 				//事物处理单行行上面存历史表id
 				$trans_line->history_id = $allocation_line_bean->id;
 				$trans_line->save();
 				
-				$allocation_line_bean->save();												
+															
 		} else {
 			//新增行
 			$allocation_line_bean = BeanFactory :: newBean("HIT_IP_Allocations");
@@ -295,13 +282,13 @@ function save_allocation_lines($trans_line_bean, $parent, $prev_trans_batch_id) 
 				$allocation_line_bean->source_wo_id = $parent->source_wo_id;
 				$allocation_line_bean->source_woop_id = $parent->source_woop_id;
 			}
-			
+			$allocation_line_bean->save();
 			//事物处理单行行上面存历史表id
 			$trans_line->history_id = $allocation_line_bean->id;
 			$trans_line->save();
 			
-			$allocation_line_bean->save();
+			
 		}
-	}
+
 }
 ?>

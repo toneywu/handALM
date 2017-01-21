@@ -15,6 +15,22 @@ $(document).ready(function(){
 	
 	if(typeof line_data=="undefined"){
 		var line_data="";
+		var event_id = $("#hat_eventtype_id").val();
+		$.ajax({//
+			url : 'index.php?to_pdf=true&module=HIT_IP_TRANS_BATCH&action=getEventJsonData&hat_eventtype_id='
+					+ event_id,
+			async : false,
+			success : function(data) {
+				line_data = jQuery.parseJSON(data);
+				console.log("ddd"+line_data.change_access_assets_name);
+
+			},
+			error : function() { // 失败
+				alert('Error loading document');
+			}
+		});
+		
+		
 	}
 });
 
@@ -617,6 +633,25 @@ function insertLineData(asset_trans_line) { // 将数据写入到对应的行字
   			 $("#line_enable_action"+ln).removeAttr("checked");
  		 } 
 		renderTransLine(ln);
+		
+		if(typeof line_data=="undefined"){
+		var event_id = $("#hat_eventtype_id").val();
+		$.ajax({//
+			url : 'index.php?to_pdf=true&module=HIT_IP_TRANS_BATCH&action=getEventJsonData&hat_eventtype_id='
+					+ event_id,
+			async : false,
+			success : function(data) {
+				line_data = jQuery.parseJSON(data);
+				console.log("ddd"+line_data.change_access_assets_name);
+
+			},
+			error : function() { // 失败
+				alert('Error loading document');
+			}
+		});
+		
+		
+	}
 		single_changeRequired(line_data,ln);	
 	}
 }
@@ -1614,7 +1649,7 @@ function LineEditorClose(ln) {// 关闭行编辑器（显示为正常行）
 		$("#asset_trans_line1_displayed" + ln).show();
 		$("#asset_trans_line2_displayed" + ln).show();
 		renderTransLine(ln);
-		console.log("line_type = "+$("#line_enable_action"+ln).val());
+		//console.log("line_type = "+$("#line_enable_action"+ln).val());
 		resetLineNum_Bold();
 	}else{
 		return;

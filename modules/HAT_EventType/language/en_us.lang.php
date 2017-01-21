@@ -138,4 +138,5 @@ $mod_strings = array (
   'LBL_ALLOCATION_FLAG'=>'Triger Asset Allocation Interface',
   'LBL_KEEP_SEPERATD_ALLC_RACK_USING_ORG'=>'Do not change Using org & Status for IT Racks allowing Partial-allocation',
   'LBL_KEEP_PREASSIGNED_STATUS_USING_ORG'=>'Do not change using org for Euipments/Assets with Pre-Assigned Status',
+  'LBL_CONTRACT_COMPLETED'=>'Contract information is required',
 );

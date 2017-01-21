@@ -3,23 +3,23 @@ $.getScript("cache/include/javascript/sugar_grp_yui_widgets.js"); // MessageBox
 $.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
 $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); // MessageBox
 $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
-function setOwningOrgPopupReturn(popupReplyData){//é€‰æ‹©å®Œæ‰€å±ç»„ç»‡çš„åŠ¨ä½œ
+function setOwningOrgPopupReturn(popupReplyData){//Ñ¡ÔñÍêËùÊô×éÖ¯µÄ¶¯×÷
 	set_return(popupReplyData);
-	$("#owning_person").val("");//å› ä¸ºç»„ç»‡å˜åŒ–äº†ï¼Œå¯¹åº”çš„äººå‘˜ä¹Ÿä¸€å®šä¼šå˜åŒ–ï¼Œå› æ­¤å°†äººå‘˜å­—æ®µæ¸…ç©ºåï¼Œæ‰‹å·¥é‡æ–°é€‰æ‹©ã€‚
+	$("#owning_person").val("");//ÒòÎª×éÖ¯±ä»¯ÁË£¬¶ÔÓ¦µÄÈËÔ±Ò²Ò»¶¨»á±ä»¯£¬Òò´Ë½«ÈËÔ±×Ö¶ÎÇå¿Õºó£¬ÊÖ¹¤ÖØĞÂÑ¡Ôñ¡£
 	$("#owning_person_id").val("");
 }
-function setUsingOrgPopupReturn(popupReplyData){//é€‰æ‹©å®Œä½¿ç”¨ç»„ç»‡çš„åŠ¨ä½œ
+function setUsingOrgPopupReturn(popupReplyData){//Ñ¡ÔñÍêÊ¹ÓÃ×éÖ¯µÄ¶¯×÷
 	set_return(popupReplyData);
-	$("#using_person").val("");//å› ä¸ºç»„ç»‡å˜åŒ–äº†ï¼Œå¯¹åº”çš„äººå‘˜ä¹Ÿä¸€å®šä¼šå˜åŒ–ï¼Œå› æ­¤å°†äººå‘˜å­—æ®µæ¸…ç©ºåï¼Œæ‰‹å·¥é‡æ–°é€‰æ‹©ã€‚
+	$("#using_person").val("");//ÒòÎª×éÖ¯±ä»¯ÁË£¬¶ÔÓ¦µÄÈËÔ±Ò²Ò»¶¨»á±ä»¯£¬Òò´Ë½«ÈËÔ±×Ö¶ÎÇå¿Õºó£¬ÊÖ¹¤ÖØĞÂÑ¡Ôñ¡£
 	$("#using_person_id").val("");
 }
 
 
-function setAssetGroupPopupReturn(popupReplyData){//é€‰æ‹©åœ°ç‚¹ç±»å‹å
+function setAssetGroupPopupReturn(popupReplyData){//Ñ¡ÔñµØµãÀàĞÍºó
     set_return(popupReplyData);
     call_ff();
 }
-Â 
+
 function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"HIT_Racks");
     $(".expandLink").click();
@@ -37,7 +37,7 @@ function check_source_qty(){
 			url: "index.php?to_pdf=true&module=HIT_Racks&action=checkSourceCount",
 			data: json_data,
 			cache:false,  
-            async:false,//é‡è¦çš„å…³å¥ç‚¹åœ¨äºåŒæ­¥å’Œå¼‚æ­¥çš„å‚æ•°ï¼Œ  
+            async:false,//ÖØÒªµÄ¹Ø½¡µãÔÚÓÚÍ¬²½ºÍÒì²½µÄ²ÎÊı£¬  
 			success: function(msg){ 
 					console.log(msg);
 
@@ -62,15 +62,54 @@ function check_source_qty(){
 		return return_status;
 }
 
+function check_unique_name(){
+		var return_status="S";
+		var json_data={};
+		json_data['record']=$("input[name=record]").val();
+		json_data['name']=$("#name").val();
+		json_data['asset_number']=$("#asset_number").val();
+
+		$.ajax({
+			type:"POST",
+			url: "index.php?to_pdf=true&module=HIT_Racks&action=checkUniqueName",
+			data: json_data,
+			cache:false,  
+            async:false,//ÖØÒªµÄ¹Ø½¡µãÔÚÓÚÍ¬²½ºÍÒì²½µÄ²ÎÊı£¬  
+			success: function(msg){ 
+					console.log("check_unique_name="+msg);
+					$result_json=jQuery.parseJSON(msg);
+					return_status=$result_json.status;
+					if($result_json.status!='S'){
+						BootstrapDialog.alert({
+							type : BootstrapDialog.TYPE_DANGER,
+							title : SUGAR.language.get('app_strings',
+									'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+							message : $result_json.msg
+						});
+					}
+					},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				 //alert('Error loading document');
+				 console.log(textStatus+errorThrown);
+			},
+		});
+		return return_status;
+}
+
 
 /**
-* ä¿å­˜å‰éªŒè¯
+* ±£´æÇ°ÑéÖ¤
 */
+
 function preValidateFunction(async_bool = false) {
 		var result = true;
 		var error_msg="S";
 		var return_status = check_source_qty();
 		if(return_status!="S"){
+			return;
+		}
+	    var return_status_name = check_unique_name();
+		if(return_status_name!="S"){
 			return;
 		}
 		return result;
@@ -79,17 +118,17 @@ function preValidateFunction(async_bool = false) {
 $(document).ready(function() {
 	
 	SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
-		OverwriteSaveBtn(preValidateFunction);//æ³¨æ„å¼•ç”¨æ—¶ä¸åŠ ï¼ˆï¼‰
+		OverwriteSaveBtn(preValidateFunction);//×¢ÒâÒıÓÃÊ±²»¼Ó£¨£©
 	});
 	
 	
 	
-    //è¿™é‡Œå¯ä»¥æœ‰å…¶å®ƒä»£ç ;
-		if($('#haa_ff_id').length==0) {//å¦‚æœå¯¹è±¡ä¸å­˜åœ¨å°±æ·»åŠ ä¸€ä¸ª
+    //ÕâÀï¿ÉÒÔÓĞÆäËü´úÂë;
+		if($('#haa_ff_id').length==0) {//Èç¹û¶ÔÏó²»´æÔÚ¾ÍÌí¼ÓÒ»¸ö
 				$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');
 		}
 
-    //è§¦å‘FF
+    //´¥·¢FF
     SUGAR.util.doWhen("typeof setFF == 'function'", function(){
         call_ff();
     });

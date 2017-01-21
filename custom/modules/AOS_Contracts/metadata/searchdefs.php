@@ -47,15 +47,65 @@ array (
     ),
     'advanced_search' => 
     array (
-      0 => 'name',
-      1 => 'contract_account',
-      2 => 'opportunity',
-      3 => 'start_date',
-      4 => 'end_date',
-      5 => 'total_contract_value',
-      6 => 'status',
-      7 => 'contract_type',
-      8 => 
+
+      'name' => 
+      array (
+        'name' => 'name',
+        'default' => true,
+        'width' => '10%',
+      ),
+      'contract_account' => 
+      array (
+        'name' => 'contract_account',
+        'default' => true,
+        'width' => '10%',
+      ),
+      'opportunity' => 
+      array (
+        'name' => 'opportunity',
+        'default' => true,
+        'width' => '10%',
+      ),
+      'start_date' => 
+      array (
+        'name' => 'start_date',
+        'default' => true,
+        'width' => '10%',
+      ),
+      'end_date' => 
+      array (
+        'name' => 'end_date',
+        'default' => true,
+        'width' => '10%',
+      ),
+      'total_contract_value' => 
+      array (
+        'name' => 'total_contract_value',
+        'default' => true,
+        'width' => '10%',
+      ),
+      'status' => 
+      array (
+        'name' => 'status',
+        'default' => true,
+        'width' => '10%',
+      ),
+      'type_c' => 
+      array (
+        'type' => 'relate',
+        'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_TYPE',
+        'id' => 'HAA_CODES_ID_C',
+        'link' => true,
+        'width' => '10%',
+        'name' => 'type_c',
+		'displayParams' => 
+            array (
+              'initial_filter' => '&code_type_advanced=contract_type',
+            ),
+      ),
+      'assigned_user_id' => 
       array (
         'name' => 'assigned_user_id',
         'label' => 'LBL_ASSIGNED_TO_NAME',
@@ -68,6 +118,8 @@ array (
             0 => false,
           ),
         ),
+        'default' => true,
+        'width' => '10%',
       ),
     ),
   ),

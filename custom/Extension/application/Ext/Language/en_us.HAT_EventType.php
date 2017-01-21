@@ -52,6 +52,11 @@ $app_list_strings['asset_trans_status']=array (
   'AUTO_TRANSACTED'=>'Auto-Transacted',
 );
 
+$app_list_strings['cux_event_contract_list']=array (
+  'NO_NEED' => 'Not Required',
+  'SUBMITTED' => 'Reuired before sumbit',
+  'COMPLETED' => 'Reuired before complete',
+);
 
 $app_list_strings['cux_event_type_option_list']=array (
   'LOCKED' => 'Locked/Not Available',

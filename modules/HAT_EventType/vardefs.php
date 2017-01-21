@@ -633,6 +633,7 @@ $dictionary['HAT_EventType'] = array (
 			'type' => 'bool',
 			'massupdate' => 0,
 			'default' => false,
+
 			'no_default' => false,
 			'comments' => '',
 			'help' => '',
@@ -671,6 +672,7 @@ $dictionary['HAT_EventType'] = array (
 			'studio' => 'visible',
 			'dependency' => false,
 		),
+
 		'revenue_eventtype_id_c' =>
     array (
       'required' => false,
@@ -1737,11 +1739,35 @@ $dictionary['HAT_EventType'] = array (
 			'unified_search' => false,
 			'merge_filter' => 'disabled',
 		),
+
+		'contract_completed' => array (
+			'required' => false,
+			'name' => 'contract_completed',
+			'vname' => 'LBL_CONTRACT_COMPLETED',
+			'type' => 'enum',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => 100,
+			'size' => '20',
+			'options' => 'cux_event_contract_list',
+			'studio' => 'visible',
+			'dependency' => false,
+
+			),
 	),
 	'relationships' => array (),
 	'optimistic_locking' => true,
 	'unified_search' => true,
-	
 );
 if (!class_exists('VardefManager')) {
 	require_once ('include/SugarObjects/VardefManager.php');

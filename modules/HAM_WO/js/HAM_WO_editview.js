@@ -1,3 +1,5 @@
+var global_event_options="";
+
 function setEventTypeReturn(popupReplyData){//选择地点类型后
     set_return(popupReplyData);
     call_ff();
@@ -179,8 +181,48 @@ function showWOLines() {
         });
 };
 
+
+function preValidateFunction(async_bool = false) {
+
+	var return_flag=true;
+	$wo_status=$("#wo_status").val();
+	
+	console.log(global_event_options);
+	if($wo_status=="SUBMITTED"&&global_event_options.contract_completed!=""&&global_event_options.contract_completed=="SUBMITTED"&&$("#contract_id").val()==""){
+		console.log(global_event_options.contract_completed);
+		return_flag=false;
+		BootstrapDialog.alert({
+						type : BootstrapDialog.TYPE_DANGER,
+						title : SUGAR.language.get('app_strings',
+								'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+						message : "提交工单之前请关联合同！"
+					});
+	}
+	
+	return return_flag;
+}
+
+
+
 $(document).ready(function(){
 
+	    var event_id = $("#hat_event_type_id").val();
+		$.ajax({//
+			url : 'index.php?to_pdf=true&module=HIT_IP_TRANS_BATCH&action=getEventJsonData&hat_eventtype_id='
+					+ event_id,
+			async : false,
+			success : function(data) {
+			    global_event_options = jQuery.parseJSON(data);
+			},
+			error : function() { // 失败
+				alert('Error loading document');
+			}
+		});
+
+	//改写Save事件，在Save之前加入数据校验
+	SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
+		OverwriteSaveBtn(preValidateFunction);//ff_include.js 注意preValidateFunction是一个Function，在此引用时不加（）
+	});
 
 	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
 		$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');
@@ -291,7 +333,6 @@ function initTransHeaderStatus() {
         $("#wo_status option[value='INPRG']").remove();
         $("#wo_status option[value='WPREV']").remove();
         $("#wo_status option[value='REWORK']").remove(); 
-		console.log($("name[input=record]").val())
 
         //如果当前WO没有生成（新建模式，也就是不是处于修改模式），则将当前LOV加上一个空值，让用户去选择。
 		if(typeof $("input[name='record']").val()=="undefined"||$("input[name='record']").val()==''){
@@ -347,7 +388,7 @@ function initTransHeaderStatus() {
     	$("#wo_status option[value='REJECTED']").remove();
     	$("#wo_status option[value='DRAFT']").remove();
     	$("#wo_status option[value='SUBMITTED']").remove();
-    	$("#wo_status option[value='COMPLETED']").remove();
+    	//$("#wo_status option[value='COMPLETED']").remove();
     	$("#wo_status option[value='CLOSED']").remove();
     	$("#wo_status option[value='WPREV']").remove();
         setEditViewReadonly ();

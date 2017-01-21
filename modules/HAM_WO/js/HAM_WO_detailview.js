@@ -7,7 +7,7 @@ $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialo
 
 
 $.getScript("modules/HAA_FF/ff_include.js");//load triger_setFF()
-
+var global_eventOptions;
 function call_ff() {
 	triger_setFF($("#haa_ff_id").val(),"HAM_WO","DetailView");
 	$(".expandLink").click();
@@ -88,8 +88,31 @@ function assignWoop(id,record){
 
 
 function complete_work_order(record){
-	//alert(record);
-	window.location.href = "index.php?module=HAM_WO&action=EditView&record="+record+"&fromWoop=Y";
+	
+	var event_id = $("#hat_event_type_id").data("id-value");
+		$.ajax({//
+			url : 'index.php?to_pdf=true&module=HIT_IP_TRANS_BATCH&action=getEventJsonData&hat_eventtype_id='
+					+ event_id,
+			async : false,
+			success : function(data) {
+				line_data = jQuery.parseJSON(data);
+				console.log(line_data);
+			},
+			error : function() { // 失败
+				alert('Error loading document');
+			}
+		});
+	if(line_data.contract_completed!=""&&line_data.contract_completed=="COMPLETED"&&$("#contract_id").val()==""){
+		console.log(line_data.contract_completed);
+		BootstrapDialog.alert({
+						type : BootstrapDialog.TYPE_DANGER,
+						title : SUGAR.language.get('app_strings',
+								'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+						message : "完成工单之前请关联合同！"
+					});
+	}else{
+		window.location.href = "index.php?module=HAM_WO&action=EditView&record="+record+"&fromWoop=Y";
+	}
 }
 
 /**
@@ -98,7 +121,19 @@ function complete_work_order(record){
  */
  function saveStatus(id,status_code){
 	//console.log('index.php?to_pdf=true&module=HAM_WO&action=saveStatusBean&id=' + id+"&status_code="+status_code);
-	$.ajax({
+	console.log(status_code);
+	console.log(global_event_options.contract_completed);
+	if(status_code=="SUBMITTED"&&global_event_options.contract_completed!=""&&global_event_options.contract_completed=="SUBMITTED"&&$("#contract_id").val()==""){
+		console.log(global_event_options.contract_completed);
+		return_flag=false;
+		BootstrapDialog.alert({
+						type : BootstrapDialog.TYPE_DANGER,
+						title : SUGAR.language.get('app_strings',
+								'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+						message : "提交工单之前请关联合同！"
+					});
+	}else{
+		$.ajax({
 		url: 'index.php?to_pdf=true&module=HAM_WO&action=saveStatus&id=' + id+"&status_code="+status_code,
 		success: function (data) {
 			window.location.href = "index.php?module=HAM_WO&action=DetailView&record="+id;
@@ -107,6 +142,7 @@ function complete_work_order(record){
 				alert('Error loading document');
 			}
 		});
+	}
 };
 
 /**
@@ -240,6 +276,20 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
  * document 页面加载 入口函数
  */
  $(document).ready(function(){
+	 
+	 var event_id = $("#hat_event_type_id").data("id-value");
+		$.ajax({//
+			url : 'index.php?to_pdf=true&module=HIT_IP_TRANS_BATCH&action=getEventJsonData&hat_eventtype_id='
+					+ event_id,
+			async : false,
+			success : function(data) {
+			    global_event_options = jQuery.parseJSON(data);
+				
+			},
+			error : function() { // 失败
+				alert('Error loading document');
+			}
+		});
 
 	//将Subpanel的内容前移到上方TAB中
 	$("#LBL_EDITVIEW_PANEL_WOLINES").after("<div class='tab_subpanel'>"+$("#whole_subpanel_wo_line").html()+"</div>");

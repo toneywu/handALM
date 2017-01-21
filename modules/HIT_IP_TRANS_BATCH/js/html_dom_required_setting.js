@@ -116,7 +116,7 @@ function mark_field_enabled_mine(field_name,not_required_bool) {
   $("#"+field_name+"_label").css({"color":"#000000"})
 
   if(typeof not_required_bool == "undefined" || not_required_bool==false || not_required_bool=="") {
-	  console.log("fieldName = "+field_name);
+	  //console.log("fieldName = "+field_name);
       addToValidate('EditView', field_name,'varchar', 'true', $("#"+field_name+"_label").text());// 将当前字段标记为必须验证
       // 打上必须星标
       if  ($("#"+field_name+"_label .required").text()!='*') {// 如果没有星标，则打上星标
@@ -158,7 +158,7 @@ function loopField(fieldName,type){
 		    mark_field_enabled_mine(fieldName+i,false);
 		}
 	}else if(type=="INVISIABLE"){
-		console.log("fieldName = "+fieldName);
+		//console.log("fieldName = "+fieldName);
 		for (var i=0;i<prodln;i++) {
 			// hide_field_disabled(fieldName+i,true,false)
 		    $("#"+fieldName+i).css({"visibility":"hidden"});

@@ -82,6 +82,7 @@ function display_lines($focus, $field, $value, $view){
 							  WHERE hi.target_owning_org_id = a.`id` 
 								AND hi.hit_ip_subnets_id = his.id 
 								AND hi.`deleted` = 0 
+								and hi.enable_action=1
 							  LIMIT 0, 1),'')using_org 
 						FROM
 						  `hit_ip_subnets` his

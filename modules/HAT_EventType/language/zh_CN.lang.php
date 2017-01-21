@@ -139,4 +139,5 @@ $mod_strings = array (
   'LBL_KEEP_PREASSIGNED_STATUS_USING_ORG'=>'预分配状态下的设备/资产使用组织不变',
   'LBL_MANUAL_CREATE_ENABLE_FLAG' => '允许直接手工创建当前类型',
   'LBL_REVENUE_EVENTTYPE' => '自动创建收支项事件类型',
+  'LBL_CONTRACT_COMPLETED'=>'请提供合同信息',
 );
