@@ -102,7 +102,8 @@ function complete_work_order(record){
 				alert('Error loading document');
 			}
 		});
-	if(line_data.contract_completed!=""&&line_data.contract_completed=="COMPLETED"&&$("#contract_id").val()==""){
+	var contract_id = $("#contract_id").data("id-value");
+	if(line_data.contract_completed!=""&&line_data.contract_completed=="COMPLETED"&&contract_id==""){
 		console.log(line_data.contract_completed);
 		BootstrapDialog.alert({
 						type : BootstrapDialog.TYPE_DANGER,
