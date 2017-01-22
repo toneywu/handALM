@@ -12,5 +12,6 @@ foreach($ham_woop_beans as $woop_bean){
 	echo '<option value="'.$woop_bean->id.'">'.$woop_bean->woop_number.'</option>';
 }
 echo '</select>';
+
 echo '<div><p><input id="include_reject_wo" name="include_reject_wo" type="checkbox" value="1">退回至工单下达人</input></p></div>';
 ?>
