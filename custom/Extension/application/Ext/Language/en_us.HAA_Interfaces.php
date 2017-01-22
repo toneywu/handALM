@@ -45,3 +45,8 @@ $app_list_strings['haa_interface_type_list']=array (
 	'WS' => 'WebService',
 	'TEXT' => '文本',
 	);
+
+$app_list_strings['haa_interface_policy_list']=array (
+	'Push' => '推式',
+	'Pull' => '拉式',
+	);

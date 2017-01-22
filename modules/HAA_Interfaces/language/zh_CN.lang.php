@@ -87,5 +87,6 @@ $mod_strings = array (
   'LBL_EXECUTE_FUNC_NAME'=>'入口函数',
   'LBL_LAST_SYNC_DATE'=>'最后同步日期',
   'LBL_HAA_INTERFACE_LOG_SUBPANEL_TITLE'=>'调用日志',
-  'LBL_BASED_FLAG'=>'基础数据'
+  'LBL_BASED_FLAG'=>'基础数据',
+  'LBL_INTERFACE_POLICY'=>'接口策略'
 );

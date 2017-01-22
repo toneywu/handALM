@@ -44,6 +44,16 @@ array (
       array (
         0 => 
         array (
+          0 => 
+          array (
+            'name' => 'framework',
+            'studio' => 'visible',
+            'label' => 'LBL_FRAMEWORK',
+            'customCode' => '{$FRAMEWORK_C}',
+            ),
+          ),
+        1 => 
+        array (
           0 => 'name',
           1 => 
           array (
@@ -52,7 +62,7 @@ array (
             'label' => 'LBL_DOCUMENT_TYPE',
             ),
           ),
-        1 => 
+        2 => 
         array (
           0 => 
           array (
@@ -64,7 +74,7 @@ array (
             'label' => 'LBL_CURRENT_NUMBER',
             ),
           ),
-        2 => 
+        3 => 
         array (
           0 => 
           array (
@@ -81,4 +91,4 @@ array (
       ),
     ),
   );
-?>
+  ?>

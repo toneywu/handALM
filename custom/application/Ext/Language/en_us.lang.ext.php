@@ -517,6 +517,11 @@ $app_list_strings['haa_interface_type_list']=array (
 	'TEXT' => '文本',
 	);
 
+$app_list_strings['haa_interface_policy_list']=array (
+	'Push' => '推式',
+	'Pull' => '拉式',
+	);
+
 
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
@@ -2114,11 +2119,13 @@ $app_list_strings['hat_counting_field_type']=array (
   'DATE' => '日期',
   'LOV' => '值列表',
   'LIST' => '下拉框',
+  'CHECKBOX' => '复选框',
   );
 
 $app_list_strings['hat_counting_table_name']=array (
   'INV_TASKS' => '任务',
   'INV_TASK_DETAILS' => '清单',
+  'INV_DETAIL_RESULTS' => '结果',
   );
 
 $app_list_strings['hat_counting_column_name']=array (
@@ -2137,6 +2144,21 @@ $app_list_strings['hat_counting_column_name']=array (
   'attribute13' => 'Attribute13',
   'attribute14' => 'Attribute14',
   'attribute15' => 'Attribute15',
+  'diff_flag1' => 'diffFlag1',
+  'diff_flag2' => 'diffFlag2',
+  'diff_flag3' => 'diffFlag3',
+  'diff_flag4' => 'diffFlag4',
+  'diff_flag5' => 'diffFlag5',
+  'diff_flag6' => 'diffFlag6',
+  'diff_flag7' => 'diffFlag7',
+  'diff_flag8' => 'diffFlag8',
+  'diff_flag9' => 'diffFlag9',
+  'diff_flag10' => 'diffFlag10',
+  'diff_flag11' => 'diffFlag11',
+  'diff_flag12' => 'diffFlag12',
+  'diff_flag13' => 'diffFlag13',
+  'diff_flag14' => 'diffFlag14',
+  'diff_flag15' => 'diffFlag15',
   );
 
 

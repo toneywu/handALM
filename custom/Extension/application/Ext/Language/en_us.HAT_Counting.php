@@ -111,6 +111,7 @@ $app_list_strings['hat_counting_field_type']=array (
   'DATE' => '日期',
   'LOV' => '值列表',
   'LIST' => '下拉框',
+  'CHECKBOX' => '复选框',
   );
 
 $app_list_strings['hat_counting_table_name']=array (

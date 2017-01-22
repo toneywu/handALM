@@ -73,4 +73,5 @@ $mod_strings = array (
   'LBL_MIN_NUM_STRLENGTH' => '流水位数（不足补0）',
   'LBL_NEXTVAL' => 'NextVal',
   'LBL_DOCUMENT_TYPE' => '用于单据类型',
+  'LBL_FRAMEWORK'=>'业务框架',
 );
