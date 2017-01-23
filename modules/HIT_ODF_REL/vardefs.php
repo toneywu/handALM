@@ -137,35 +137,6 @@ $dictionary['HIT_ODF_REL'] = array (
 			
 		),
 
-		'a_hat_asset_locations' => array (
-			'required' => false,
-			'source' => 'non-db',
-			'name' => 'a_hat_asset_locations',
-			'vname' => 'LBL_A_HAT_ASSET_LOCATIONS',
-			'type' => 'relate',
-			'massupdate' => 0,
-			'no_default' => false,
-			'comments' => '',
-			'help' => '',
-			'importable' => 'true',
-			'duplicate_merge' => 'disabled',
-			'duplicate_merge_dom_value' => '0',
-			'audited' => false,
-			'inline_edit' => true,
-			'reportable' => true,
-			'unified_search' => false,
-			'merge_filter' => 'disabled',
-			'len' => '255',
-			'size' => '20',
-			'id_name' => 'a_hat_asset_locations_id',
-			'ext2' => 'HAT_Asset_Locations',
-			'module' => 'HAT_Asset_Locations',
-			'rname' => 'name',
-			'quicksearch' => 'enabled',
-			'studio' => 'visible',
-
-			
-		),
 		
 			//A端机房 new
 	'a_hat_asset_locations_dis' => array (
@@ -255,35 +226,7 @@ $dictionary['HIT_ODF_REL'] = array (
 			
 		),
 
-		'a_hit_racks' => array (
-			'required' => false,
-			'source' => 'non-db',
-			'name' => 'a_hit_racks',
-			'vname' => 'LBL_A_HIT_RACKS',
-			'type' => 'relate',
-			'massupdate' => 0,
-			'no_default' => false,
-			'comments' => '',
-			'help' => '',
-			'importable' => 'true',
-			'duplicate_merge' => 'disabled',
-			'duplicate_merge_dom_value' => '0',
-			'audited' => false,
-			'inline_edit' => true,
-			'reportable' => true,
-			'unified_search' => false,
-			'merge_filter' => 'disabled',
-			'len' => '255',
-			'size' => '20',
-			'id_name' => 'a_hit_racks_id',
-			'ext2' => 'HIT_Racks',
-			'module' => 'HIT_Racks',
-			'rname' => 'name',
-			'quicksearch' => 'enabled',
-			'studio' => 'visible',
-
-			
-		),
+		
 		//A端ODF架标识
 		'a_odf_mark' => 
   array (
@@ -408,12 +351,12 @@ $dictionary['HIT_ODF_REL'] = array (
 			
 		),
 
-		'a_odf_assets' => array (
+		
+		'a_odf_assets_dis' => array (
 			'required' => false,
-			'source' => 'non-db',
-			'name' => 'a_odf_assets',
+			'name' => 'a_odf_assets_dis',
 			'vname' => 'LBL_A_ODF_ASSETS',
-			'type' => 'relate',
+			'type' => 'varchar',
 			'massupdate' => 0,
 			'no_default' => false,
 			'comments' => '',
@@ -428,15 +371,30 @@ $dictionary['HIT_ODF_REL'] = array (
 			'merge_filter' => 'disabled',
 			'len' => '255',
 			'size' => '20',
-			'id_name' => 'a_odf_assets_id',
-			'ext2' => 'HAT_Assets',
-			'module' => 'HAT_Assets',
-			'rname' => 'name',
-			'quicksearch' => 'enabled',
-			'studio' => 'visible',
-
-			
 		),
+		
+		'b_odf_assets_dis' => array (
+			'required' => false,
+			'name' => 'b_odf_assets_dis',
+			'vname' => 'LBL_B_ODF_ASSETS',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+		),
+		
+		
 		//A端下联端口或芯数
 	'a_odf_ports' => array (
 			'required' => false,
@@ -483,35 +441,6 @@ $dictionary['HIT_ODF_REL'] = array (
 			
 		),
 
-		'b_hat_asset_locations' => array (
-			'required' => false,
-			'source' => 'non-db',
-			'name' => 'b_hat_asset_locations',
-			'vname' => 'LBL_B_HAT_ASSET_LOCATIONS',
-			'type' => 'relate',
-			'massupdate' => 0,
-			'no_default' => false,
-			'comments' => '',
-			'help' => '',
-			'importable' => 'true',
-			'duplicate_merge' => 'disabled',
-			'duplicate_merge_dom_value' => '0',
-			'audited' => false,
-			'inline_edit' => true,
-			'reportable' => true,
-			'unified_search' => false,
-			'merge_filter' => 'disabled',
-			'len' => '255',
-			'size' => '20',
-			'id_name' => 'b_hat_asset_locations_id',
-			'ext2' => 'HAT_Asset_Locations',
-			'module' => 'HAT_Asset_Locations',
-			'rname' => 'name',
-			'quicksearch' => 'enabled',
-			'studio' => 'visible',
-
-			
-		),
 
 		//B端机柜
 	'b_hit_racks_id' => array (
@@ -536,36 +465,6 @@ $dictionary['HIT_ODF_REL'] = array (
 			
 		),
 
-		'b_hit_racks' => array (
-			'required' => false,
-			'source' => 'non-db',
-			'name' => 'b_hit_racks',
-			'vname' => 'LBL_B_HIT_RACKS',
-			'type' => 'relate',
-			'massupdate' => 0,
-			'no_default' => false,
-			'comments' => '',
-			'help' => '',
-			'importable' => 'true',
-			'duplicate_merge' => 'disabled',
-			'duplicate_merge_dom_value' => '0',
-			'audited' => false,
-			'inline_edit' => true,
-			'reportable' => true,
-			'unified_search' => false,
-			'merge_filter' => 'disabled',
-			'len' => '255',
-			'size' => '20',
-			'id_name' => 'b_hit_racks_id',
-			'ext2' => 'HIT_Racks',
-			'module' => 'HIT_Racks',
-			'rname' => 'name',
-			'quicksearch' => 'enabled',
-			'studio' => 'visible',
-
-			
-		),
-		
 		
 		//A端机房 new
 	'b_hat_asset_locations_dis' => array (
@@ -755,35 +654,7 @@ $dictionary['HIT_ODF_REL'] = array (
 			
 		),
 
-		'b_odf_assets' => array (
-			'required' => false,
-			'source' => 'non-db',
-			'name' => 'b_odf_assets',
-			'vname' => 'LBL_B_ODF_ASSETS',
-			'type' => 'relate',
-			'massupdate' => 0,
-			'no_default' => false,
-			'comments' => '',
-			'help' => '',
-			'importable' => 'true',
-			'duplicate_merge' => 'disabled',
-			'duplicate_merge_dom_value' => '0',
-			'audited' => false,
-			'inline_edit' => true,
-			'reportable' => true,
-			'unified_search' => false,
-			'merge_filter' => 'disabled',
-			'len' => '255',
-			'size' => '20',
-			'id_name' => 'b_odf_assets_id',
-			'ext2' => 'HAT_Assets',
-			'module' => 'HAT_Assets',
-			'rname' => 'name',
-			'quicksearch' => 'enabled',
-			'studio' => 'visible',
-
-			
-		),
+		
 		//B端下联端口或芯数
 	'b_odf_ports' => array (
 			'required' => false,

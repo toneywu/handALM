@@ -123,8 +123,7 @@ array (
         array (
           0 => 
           array (
-            'name' => 'a_odf_assets',
-            'studio' => 'visible',
+            'name' => 'a_odf_assets_dis',
             'label' => 'LBL_A_ODF_ASSETS',
           ),
           1 => 
@@ -180,8 +179,7 @@ array (
         array (
           0 => 
           array (
-            'name' => 'b_odf_assets',
-            'studio' => 'visible',
+            'name' => 'b_odf_assets_dis',
             'label' => 'LBL_B_ODF_ASSETS',
           ),
           1 => 
