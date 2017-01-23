@@ -78,6 +78,26 @@ class HIT_ODF_REL extends HIT_ODF_REL_sugar {
 		parent :: save($check_notify); //保存WO主体
 
 	}
+	
+	
+	function get_list_view_data() {
+		global $app_list_strings, $timedate, $db;
+
+		$ODF_fields = $this->get_list_view_array();
+		//为工作单的状态着色
+		if (!empty ($this->a_odf_mark)){
+			$asset_bean = BeanFactory :: getBean('HAT_Assets',$this->a_odf_mark);
+			$ODF_fields['A_ODF_MARK_NAME'] = $asset_bean->attribute5;
+		}
+		if (!empty ($this->b_odf_mark)){
+			$asset_bean = BeanFactory :: getBean('HAT_Assets',$this->b_odf_mark);
+			$ODF_fields['B_ODF_MARK_NAME'] = $asset_bean->attribute9;
+		}	
+
+
+
+		return $ODF_fields;
+	}
 
 }
 ?>
