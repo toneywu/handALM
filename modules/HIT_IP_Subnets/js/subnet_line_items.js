@@ -1128,6 +1128,11 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
     if ($("#line_status"+ln).val()=="1") {
     	is_assigned = 1;
     }
+	//行上有用途 就应该显示为已分配 
+	if ($("#line_purpose"+ln).val()!="") {
+    	is_assigned = 1;
+    }	
+	
     if(is_assigned == 1) {
 		$("#displayed_line_status"+ln).html("<span class='color_tag color_asset_status_InService'>"+SUGAR.language.get('HIT_IP', 'LBL_ASSIGNED')+"</span>");
 	} else {

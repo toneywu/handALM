@@ -8,7 +8,7 @@
 	$need_allocation="N";
 	//echo $_POST['asset_trans_status'];
 	//如果是新增 但是状态直接是提交 那么也当成需要完成资产调拨 满足条件1
-	if(empty($current_header_id)&&($display_status=="CLOSED")){
+	if(empty($current_header_id)&&($display_status=="CLOSED"||$display_status=="SUBMITTED")){
 		$need_allocation="Y";
 	}else{
 		//如果有值 则通过数据库来判断

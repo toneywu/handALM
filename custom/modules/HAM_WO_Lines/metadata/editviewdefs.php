@@ -52,6 +52,9 @@ array (
             'name' => 'contract',
             'studio' => 'visible',
             'label' => 'LBL_CONTRACT',
+			'displayParams' =>array (
+              'initial_filter' => '&contract_account_id_advanced="+encodeURIComponent($("#account_id").val())+"',
+            ),
           ),
           1 => 
           array (
