@@ -17,6 +17,7 @@ class HAM_WO_LinesViewEdit extends ViewEdit
 			$bean_wo = BeanFactory::getBean('HAM_WO',$wo_id);
 			$this->bean->wo_number = "[".$bean_wo->wo_number."] ".$bean_wo->name;
             $this->bean->ham_wo_id = $wo_id;
+			echo '<input id="account_id" name="account_id" type="hidden" value="'.$bean_wo->account_id.'">';
         }
         parent::Display();
     }
