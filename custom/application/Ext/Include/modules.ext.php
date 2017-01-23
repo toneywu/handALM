@@ -52,6 +52,13 @@ $moduleList[] = 'HAA_FSQL';
 
  
  //WARNING: The contents of this file are auto-generated
+$beanList['HAA_Functions'] = 'HAA_Functions';
+$beanFiles['HAA_Functions'] = 'modules/HAA_Functions/HAA_Functions.php';
+$moduleList[] = 'HAA_Functions';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
 $beanList['HAA_Import_Datas'] = 'HAA_Import_Datas';
 $beanFiles['HAA_Import_Datas'] = 'modules/HAA_Import_Datas/HAA_Import_Datas.php';
 $modules_exempt_from_availability_check['HAA_Import_Datas'] = 'HAA_Import_Datas';

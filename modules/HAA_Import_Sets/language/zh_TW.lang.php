@@ -70,4 +70,13 @@ $mod_strings = array (
   'LBL_ACTIVITIES_SUBPANEL_TITLE' => '銷售活動',
   'LBL_HAA_IMPORT_SETS_SUBPANEL_TITLE' => '通用导入设置',
   'LBL_NEW_FORM_TITLE' => '新建 通用导入设置',
+  'LBL_FRAMEWORKS_HAA_FRAMEWORKS_ID' => '业务框架 (related Business Framework ID)',
+  'LBL_FRAMEWORKS' => '业务框架',
+  'LBL_IMP_FUNC_CODE' => '功能代码',
+  'LBL_EXEC_FILE_NAME' => '执行程序文件名',
+  'LBL_VALIDATE_FUNC_NAME' => '验证函数',
+  'LBL_IMPORT_FUNC_NAME' => '导入函数',
+  'LBL_BACKUP_FLAG' => '是否存档',
+  'LBL_ENABLED_FLAG' => '是否启用',
+  'LBL_DOCUMENT_ID_C' => '文档ID',
 );

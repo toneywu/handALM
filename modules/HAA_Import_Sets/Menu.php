@@ -43,3 +43,4 @@ global $mod_strings, $app_strings, $sugar_config;
  
 if(ACLController::checkAccess('HAA_Import_Sets', 'edit', true))$module_menu[]=Array("index.php?module=HAA_Import_Sets&action=EditView&return_module=HAA_Import_Sets&return_action=DetailView", $mod_strings['LNK_NEW_RECORD'],"Add", 'HAA_Import_Sets');
 if(ACLController::checkAccess('HAA_Import_Sets', 'list', true))$module_menu[]=Array("index.php?module=HAA_Import_Sets&action=index&return_module=HAA_Import_Sets&return_action=DetailView", $mod_strings['LNK_LIST'],"View", 'HAA_Import_Sets');
+if(ACLController::checkAccess('HAA_Import_Sets', 'import', true))$module_menu[]=Array("index.php?module=Import&action=Step1&import_module=HAA_Import_Sets&return_module=HAA_Import_Sets&return_action=index", $app_strings['LBL_IMPORT'],"Import", 'HAA_Import_Sets');

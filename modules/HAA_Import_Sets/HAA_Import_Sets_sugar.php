@@ -49,7 +49,7 @@ class HAA_Import_Sets_sugar extends Basic {
 	var $module_dir = 'HAA_Import_Sets';
 	var $object_name = 'HAA_Import_Sets';
 	var $table_name = 'haa_import_sets';
-	var $importable = false;
+	var $importable = true;
 	var $disable_row_level_security = true ; // to ensure that modules created and deployed under CE will continue to function under team security if the instance is upgraded to PRO
 
 	var $id;
@@ -68,6 +68,15 @@ class HAA_Import_Sets_sugar extends Basic {
 	var $assigned_user_name;
 	var $assigned_user_link;
 	var $SecurityGroups;
+	var $haa_frameworks_id_c;
+	var $frameworks;
+	var $imp_func_code;
+	var $exec_file_name;
+	var $validate_func_name;
+	var $import_func_name;
+	var $backup_flag;
+	var $enabled_flag;
+	var $document_id_c;
 	
 	function __construct(){
 		parent::__construct();

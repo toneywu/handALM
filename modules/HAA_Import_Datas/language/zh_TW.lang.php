@@ -70,4 +70,9 @@ $mod_strings = array (
   'LBL_ACTIVITIES_SUBPANEL_TITLE' => '銷售活動',
   'LBL_HAA_IMPORT_DATAS_SUBPANEL_TITLE' => '通用导入内容',
   'LBL_NEW_FORM_TITLE' => '新建 通用导入内容',
+  'LBL_DOCUMENT_ID_C' => '文档ID',
+  'LBL_LINE_NUMBER' => '行号',
+  'LBL_IMPORT_STATUS' => '导入状态',
+  'LBL_ERROR_MESSAGE' => '错误消息',
+  'LBL_WARNING_MESSAGE' => '警告消息',
 );

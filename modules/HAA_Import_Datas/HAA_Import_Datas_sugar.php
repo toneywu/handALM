@@ -49,7 +49,7 @@ class HAA_Import_Datas_sugar extends Basic {
 	var $module_dir = 'HAA_Import_Datas';
 	var $object_name = 'HAA_Import_Datas';
 	var $table_name = 'haa_import_datas';
-	var $importable = true;
+	var $importable = false;
 	var $disable_row_level_security = true ; // to ensure that modules created and deployed under CE will continue to function under team security if the instance is upgraded to PRO
 
 	var $id;
@@ -68,6 +68,11 @@ class HAA_Import_Datas_sugar extends Basic {
 	var $assigned_user_name;
 	var $assigned_user_link;
 	var $SecurityGroups;
+	var $document_id_c;
+	var $line_number;
+	var $import_status;
+	var $error_message;
+	var $warning_message;
 	
 	function __construct(){
 		parent::__construct();

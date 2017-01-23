@@ -67,7 +67,7 @@ $html='<head>
 <link href="themes/SuiteR/css/colourSelector.php" rel="stylesheet">
 <link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css">
 </head>';
-$html.='<body class="popupBody"><script src="modules/AOR_Parameters/sqlPopup.js"></script>';
+$html.='<body class="popupBody"><script src="modules/HAOR_Parameters/sqlPopup.js"></script>';
 $html.='<table class="formHeader h3Row" width="100%" cellspacing="0" cellpadding="0" border="0">
 <tbody><tr>
 	<td nowrap="">
