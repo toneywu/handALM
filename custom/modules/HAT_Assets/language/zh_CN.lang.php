@@ -19,4 +19,5 @@ $mod_strings = array (
   'LBL_COUNTING_CATOGERY' => '类别',
   'LBL_DEFAULT_COUNTING_PERSON' => '默认盘点员',
   'LBL_HAT_INCIDENT_SUBPANEL_TITLE' => '事件管理',
+  'LBL_MAJOR_OWNING_DEPT'=> '专业归口部门',
 );

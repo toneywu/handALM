@@ -8,14 +8,14 @@ array (
     'label' => 'LBL_NAME',
     'default' => true,
     'link' => true,
-  ),
+    ),
   'INTERFACE_CODE' => 
   array (
     'type' => 'varchar',
     'label' => 'LBL_INTERFACE_CODE',
     'width' => '10%',
     'default' => true,
-  ),
+    ),
   'LINK_SYSTEM' => 
   array (
     'type' => 'relate',
@@ -25,7 +25,7 @@ array (
     'link' => true,
     'width' => '10%',
     'default' => true,
-  ),
+    ),
   'INTERFACE_TYPE' => 
   array (
     'type' => 'enum',
@@ -33,7 +33,15 @@ array (
     'label' => 'LBL_INTERFACE_TYPE',
     'width' => '10%',
     'default' => true,
-  ),
+    ),
+  'INTERFACE_POLICY' => 
+  array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'label' => 'LBL_INTERFACE_POLICY',
+    'width' => '10%',
+    'default' => true,
+    ),
   'OWN_MODULE' => 
   array (
     'type' => 'enum',
@@ -41,28 +49,28 @@ array (
     'label' => 'LBL_OWN_MODULE',
     'width' => '10%',
     'default' => true,
-  ),
+    ),
   'ENABLED_FLAG' => 
   array (
     'type' => 'bool',
     'default' => true,
     'label' => 'LBL_ENABLED_FLAG',
     'width' => '10%',
-  ),
-   'BASED_FLAG' => 
+    ),
+  'BASED_FLAG' => 
   array (
     'type' => 'bool',
     'default' => true,
     'label' => 'LBL_BASED_FLAG',
     'width' => '10%',
-  ),
+    ),
   'EXECUTE_FUNC_FILES' => 
   array (
     'type' => 'varchar',
     'label' => 'LBL_EXECUTE_FUNC_FILES',
     'width' => '10%',
     'default' => true,
-  ),
+    ),
   'DESCRIPTION' => 
   array (
     'type' => 'text',
@@ -71,6 +79,6 @@ array (
     'sortable' => false,
     'width' => '10%',
     'default' => true,
-  ),
-);
-?>
+    ),
+  );
+  ?>

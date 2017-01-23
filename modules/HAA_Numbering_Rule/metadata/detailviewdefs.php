@@ -14,8 +14,8 @@ array (
           1 => 'DUPLICATE',
           2 => 'DELETE',
           3 => 'FIND_DUPLICATES',
+          ),
         ),
-      ),
       'maxColumns' => '2',
       'widths' => 
       array (
@@ -23,13 +23,13 @@ array (
         array (
           'label' => '10',
           'field' => '30',
-        ),
+          ),
         1 => 
         array (
           'label' => '10',
           'field' => '30',
+          ),
         ),
-      ),
       'useTabs' => false,
       'tabDefs' => 
       array (
@@ -37,48 +37,52 @@ array (
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
+          ),
         ),
-      ),
       'syncDetailEditViews' => true,
-    ),
+      ),
     'panels' => 
     array (
       'default' => 
       array (
-        0 => 
-        array (
-          0 => 'name',
-          1 => 
-          array (
-            'name' => 'document_type',
-            'studio' => 'visible',
-            'label' => 'LBL_DOCUMENT_TYPE',
-          ),
+       0 => 
+       array (
+        0 => 'framework',
         ),
+       1 => 
+       array (
+        0 => 'name',
         1 => 
         array (
-          0 => 
-          array (
-            'name' => 'perfix',
-            'label' => 'LBL_PERFIX',
+          'name' => 'document_type',
+          'studio' => 'visible',
+          'label' => 'LBL_DOCUMENT_TYPE',
           ),
-          1 => '',
         ),
-        2 => 
+       2 => 
+       array (
+        0 => 
         array (
-          0 => 
-          array (
-            'name' => 'min_num_strlength',
-            'label' => 'LBL_MIN_NUM_STRLENGTH',
+          'name' => 'perfix',
+          'label' => 'LBL_PERFIX',
           ),
-          1 => 
-          array (
-            'name' => 'nextval',
-            'label' => 'LBL_NEXTVAL',
+        1 => '',
+        ),
+       3 => 
+       array (
+        0 => 
+        array (
+          'name' => 'min_num_strlength',
+          'label' => 'LBL_MIN_NUM_STRLENGTH',
+          ),
+        1 => 
+        array (
+          'name' => 'nextval',
+          'label' => 'LBL_NEXTVAL',
           ),
         ),
+       ),
       ),
     ),
-  ),
-);
-?>
+  );
+  ?>

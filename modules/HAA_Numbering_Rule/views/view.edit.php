@@ -3,7 +3,7 @@ if(!defined('sugarEntry')||!sugarEntry)die('NotAValidEntryPoint');
 
 require_once('include/MVC/View/views/view.edit.php');
 
-class HAA_InterfacesViewEdit extends ViewEdit
+class HAA_Numbering_RuleViewEdit extends ViewEdit
 {
 
 	function Display(){
@@ -16,15 +16,8 @@ class HAA_InterfacesViewEdit extends ViewEdit
             $bean_framework_id = $_SESSION["current_framework"];
             $bean_framework_name = $beanFramework->name;
         }
-        $this->ss->assign('FRAMEWORK_C',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id_c'));
+        $this->ss->assign('FRAMEWORK_C',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id'));
         
         parent::Display();
-        if(isset($this->bean->haa_codes_id_c) && ($this->bean->haa_codes_id_c)!=""){
-            $haa_codes_id_c = $this->bean->haa_codes_id_c;
-            $bean_business_type = BeanFactory::getBean('HAA_Codes',$haa_codes_id_c);
-            $ff_id = $bean_business_type->haa_ff_id;
-        }
-        $ff_id_field = '<input id=haa_ff_id name=haa_ff_id type=hidden '.(isset($ff_id)?'value='.$ff_id:'').'>';
-        echo '<script>if($("#haa_ff_id").length==0) {  $("#EditView").append("'.$ff_id_field.'");}</script>';
     }
 }

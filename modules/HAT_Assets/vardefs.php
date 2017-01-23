@@ -1820,7 +1820,7 @@ $dictionary['HAT_Assets'] = array(
       'len' => '255',
       'size' => '20',
       ),
-   'owning_person_desc' =>
+    'owning_person_desc' =>
     array (
       'required' => false,
       'name' => 'owning_person_desc',
@@ -1869,7 +1869,7 @@ $dictionary['HAT_Assets'] = array(
       'quicksearch' => 'enabled',
       'studio' => 'visible',
       ),
-     'owning_major_id' =>
+    'owning_major_id' =>
     array (
       'required' => false,
       'name' => 'owning_major_id',
@@ -1914,6 +1914,55 @@ $dictionary['HAT_Assets'] = array(
       'id_name' => 'owning_major_id',
       'ext2' => 'HAA_Codes',
       'module' => 'HAA_Codes',
+      'rname' => 'name',
+      'quicksearch' => 'enabled',
+      'studio' => 'visible',
+      ),
+    'major_owning_dept_id' =>
+    array (
+      'required' => false,
+      'name' => 'major_owning_dept_id',
+      'vname' => 'LBL_MAJOR_OWNING_DEPT_ID',
+      'type' => 'id',
+      'massupdate' => 0,
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'duplicate_merge_dom_value' => 0,
+      'audited' => false,
+      'inline_edit' => true,
+      'reportable' => false,
+      'unified_search' => false,
+      'merge_filter' => 'disabled',
+      'len' => 36,
+      'size' => '20',
+      ),
+    'major_owning_dept' =>
+    array (
+      'required' => false,
+      'source' => 'non-db',
+      'name' => 'major_owning_dept',
+      'vname' => 'LBL_MAJOR_OWNING_DEPT',
+      'type' => 'relate',
+      'massupdate' => 0,
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'duplicate_merge_dom_value' => '0',
+      'audited' => false,
+      'inline_edit' => true,
+      'reportable' => true,
+      'unified_search' => false,
+      'merge_filter' => 'disabled',
+      'len' => '255',
+      'size' => '20',
+      'id_name' => 'major_owning_dept_id',
+      'ext2' => 'Accounts',
+      'module' => 'Accounts',
       'rname' => 'name',
       'quicksearch' => 'enabled',
       'studio' => 'visible',
@@ -2163,8 +2212,8 @@ $dictionary['HAT_Assets'] = array(
       'quicksearch' => 'enabled',
       'studio' => 'visible',
       ),
-	  
-	  'cost_center_id' =>
+    
+    'cost_center_id' =>
     array (
       'required' => false,
       'name' => 'cost_center_id',
@@ -2252,7 +2301,7 @@ $dictionary['HAT_Assets'] = array(
       'len' => 36,
       'size' => '20',
 
-    ),
+      ),
     'fixed_asset' => array (
       'required' => false,
       'source' => 'non-db',
@@ -2279,7 +2328,7 @@ $dictionary['HAT_Assets'] = array(
       'rname' => 'name',
       'quicksearch' => 'enabled',
       'studio' => 'visible',
-    ),
+      ),
     'ham_sr_link' =>
     array(
       'name' => 'ham_sr_link',
@@ -2347,7 +2396,7 @@ $dictionary['HAT_Assets'] = array(
       'rname' => 'name',
       'quicksearch' => 'enabled',
       'studio' => 'visible',
-    ),
+      ),
     'counting_dept_id'=> array (
       'required' => false,
       'name' => 'counting_dept_id',
@@ -2367,7 +2416,7 @@ $dictionary['HAT_Assets'] = array(
       'merge_filter' => 'disabled',
       'len' => 36,
       'size' => '20',
-    ),
+      ),
 
 
 
@@ -2397,7 +2446,7 @@ $dictionary['HAT_Assets'] = array(
       'rname' => 'name',
       'quicksearch' => 'enabled',
       'studio' => 'visible',
-    ),
+      ),
     'counting_location_id'=> array (
       'required' => false,
       'name' => 'counting_location_id',
@@ -2417,7 +2466,7 @@ $dictionary['HAT_Assets'] = array(
       'merge_filter' => 'disabled',
       'len' => 36,
       'size' => '20',
-    ),
+      ),
     'counting_major' => array (
       'required' => false,
       'source' => 'non-db',
@@ -2444,7 +2493,7 @@ $dictionary['HAT_Assets'] = array(
       'rname' => 'name',
       'quicksearch' => 'enabled',
       'studio' => 'visible',
-    ),
+      ),
     'counting_major_id'=> array (
       'required' => false,
       'name' => 'counting_major_id',
@@ -2464,7 +2513,7 @@ $dictionary['HAT_Assets'] = array(
       'merge_filter' => 'disabled',
       'len' => 36,
       'size' => '20',
-    ),
+      ),
     'counting_catogery' => array (
       'required' => false,
       'source' => 'non-db',
@@ -2491,7 +2540,7 @@ $dictionary['HAT_Assets'] = array(
       'rname' => 'name',
       'quicksearch' => 'enabled',
       'studio' => 'visible',
-    ),
+      ),
     'counting_catogery_id'=> array (
       'required' => false,
       'name' => 'counting_catogery_id',
@@ -2511,7 +2560,7 @@ $dictionary['HAT_Assets'] = array(
       'merge_filter' => 'disabled',
       'len' => 36,
       'size' => '20',
-    ),
+      ),
     'default_counting_person' => array (
       'required' => false,
       'source' => 'non-db',
@@ -2538,7 +2587,7 @@ $dictionary['HAT_Assets'] = array(
       'rname' => 'name',
       'quicksearch' => 'enabled',
       'studio' => 'visible',
-    ),
+      ),
     'default_counting_person_id'=> array (
       'required' => false,
       'name' => 'default_counting_person_id',
@@ -2558,57 +2607,57 @@ $dictionary['HAT_Assets'] = array(
       'merge_filter' => 'disabled',
       'len' => 36,
       'size' => '20',
+      ),
     ),
-  ),
 
 'indices'=>array (
+  array (
+    'name' => 'hat_assetspk',
+    'type' => 'primary',
+    'fields' => 
     array (
-      'name' => 'hat_assetspk',
-      'type' => 'primary',
-      'fields' => 
-      array (
-        0 => 'id',
+      0 => 'id',
       ),
     ),
+  array (
+    'name' => 'idx_asset_framework_id_del',
+    'type' => 'index',
+    'fields' => 
     array (
-      'name' => 'idx_asset_framework_id_del',
-      'type' => 'index',
-      'fields' => 
-      array (
-        0 => 'id',
-        1 => 'deleted',
-        2 =>'haa_frameworks_id'
+      0 => 'id',
+      1 => 'deleted',
+      2 =>'haa_frameworks_id'
       ),
     ),
+  array (
+    'name' => 'idx_asset_framework_name_del',
+    'type' => 'index',
+    'fields' => 
     array (
-      'name' => 'idx_asset_framework_name_del',
-      'type' => 'index',
-      'fields' => 
-      array (
-        0 => 'name',
-        1 => 'deleted',
-        2 =>'haa_frameworks_id',
+      0 => 'name',
+      1 => 'deleted',
+      2 =>'haa_frameworks_id',
       ),
     ),
+  array (
+    'name' => 'idx_asset_framework_parent_del',
+    'type' => 'index',
+    'fields' => 
     array (
-      'name' => 'idx_asset_framework_parent_del',
-      'type' => 'index',
-      'fields' => 
-      array (
-        0 =>'parent_asset_id',
-        1 =>'haa_frameworks_id',
-        2 => 'deleted',
+      0 =>'parent_asset_id',
+      1 =>'haa_frameworks_id',
+      2 => 'deleted',
       ),
     ),
+  array (
+    'name' => 'idx_enable_it_ports',
+    'type' => 'index',
+    'fields' => 
     array (
-      'name' => 'idx_enable_it_ports',
-      'type' => 'index',
-      'fields' => 
-      array (
-        0 => 'enable_it_ports',
+      0 => 'enable_it_ports',
       ),
     ),
-),
+  ),
 
 
 'relationships'=>array (

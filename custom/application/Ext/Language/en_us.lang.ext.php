@@ -517,6 +517,11 @@ $app_list_strings['haa_interface_type_list']=array (
 	'TEXT' => '文本',
 	);
 
+$app_list_strings['haa_interface_policy_list']=array (
+	'Push' => '推式',
+	'Pull' => '拉式',
+	);
+
 
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
@@ -2114,6 +2119,7 @@ $app_list_strings['hat_counting_field_type']=array (
   'DATE' => '日期',
   'LOV' => '值列表',
   'LIST' => '下拉框',
+  'CHECKBOX' => '复选框',
   );
 
 $app_list_strings['hat_counting_table_name']=array (

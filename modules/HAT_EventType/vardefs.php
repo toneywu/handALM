@@ -718,7 +718,7 @@ $dictionary['HAT_EventType'] = array (
       'id_name' => 'revenue_eventtype_id_c',
       'ext2' => 'HAT_EventType',
       'module' => 'HAT_EventType',
-      'rname' => 'basic_type',
+      'rname' => 'name',
       'quicksearch' => 'enabled',
       'studio' => 'visible',
       ),

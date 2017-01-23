@@ -6,6 +6,13 @@ array (
   array (
     'templateMeta' => 
     array (
+        'includes'=>
+      array(
+        0=>
+        array(
+          'file'=>'modules/HAA_Interfaces/js/HAA_Interfaces.js',
+        ),
+      ),
       'maxColumns' => '2',
       'widths' => 
       array (
@@ -34,6 +41,11 @@ array (
           'panelDefault' => 'expanded',
           ),
         'LBL_EDITVIEW_PANEL2' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+          ),
+         'LBL_EDITVIEW_PANEL3' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
@@ -117,12 +129,22 @@ array (
         array (
           0 => 
           array (
+            'name' => 'interface_policy',
+            'studio' => 'visible',
+            'label' => 'LBL_INTERFACE_POLICY',
+            ),
+          1 => 
+          array (
             'name' => 'last_sync_date',
             'label' => 'LBL_LAST_SYNC_DATE',
             'customCode' => '{$fields.last_sync_date.value}',
             ),
-          1 => 'description',
           ),
+        6 => 
+        array (
+         0 => 'description',
+         ),
+
         ),
       'lbl_editview_panel1' => 
       array (
@@ -168,6 +190,61 @@ array (
             'label' => 'LBL_REQUEST_SAMPLE',
             ),
           1 => '',
+          ),
+        ),
+        'LBL_EDITVIEW_PANEL3' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute1',
+            'label' => 'LBL_ATTRIBUTE1',
+            ),
+          1 => 
+          array (
+            'name' => 'attribute2',
+            'label' => 'LBL_ATTRIBUTE2',
+            ),
+          ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute3',
+            'label' => 'LBL_ATTRIBUTE3',
+            ),
+          1 => 
+          array (
+            'name' => 'attribute4',
+            'label' => 'LBL_ATTRIBUTE4',
+            ),
+          ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute5',
+            'label' => 'LBL_ATTRIBUTE5',
+            ),
+          1 => 
+          array (
+            'name' => 'attribute6',
+            'label' => 'LBL_ATTRIBUTE6',
+            ),
+          ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'attribute7',
+            'label' => 'LBL_ATTRIBUTE7',
+            ),
+          1 => 
+          array (
+            'name' => 'attribute8',
+            'label' => 'LBL_ATTRIBUTE8',
+            ),
           ),
         ),
       'lbl_editview_panel2' => 
