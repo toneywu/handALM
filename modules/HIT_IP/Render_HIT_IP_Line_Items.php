@@ -50,6 +50,7 @@ function display_lines($focus, $field, $value, $view){
 					  AND hi.`deleted` = 0
 					  AND his.`deleted` = 0
 					ORDER BY INET_ATON(his.`name`) ";//INET_ATON是为了让IP有正确的排序*/
+					
 					//20161214 Replaced by toney.wu
 		$sql = "SELECT
 						  his.id,

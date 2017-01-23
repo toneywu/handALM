@@ -639,7 +639,6 @@ function insertTransLineHeader(tableid) {
 
 	var l = x.insertCell(14);
 	l.innerHTML = SUGAR.language.get('HIT_IP_Subnets', 'LBL_DETAILS');
-	
 	var l1 = x.insertCell(15);
 	l1.innerHTML = SUGAR.language.get('HIT_IP_Subnets', 'LBL_USING_ORG');
 
@@ -681,8 +680,14 @@ function insertLineData(hit_ip_subnets, current_view) { // 将数据写入到对
 		$("#line_using_org".concat(String(ln))).val(hit_ip_subnets.using_org);
 
 		//$("#line_status".concat(String(ln))).val(hit_ip_subnets.hiaa_id);
-		console.log("--------------------------------------------------------------");
-		console.log($("#line_status".concat(String(ln))).val());
+		//console.log("--------------------------------------------------------------");
+		//console.log($("#line_status".concat(String(ln))).val());
+		$("#line_source_id".concat(String(ln))).val(hit_ip_subnets.source_id);
+
+
+		//$("#line_status".concat(String(ln))).val(hit_ip_subnets.hiaa_id);
+		//console.log("--------------------------------------------------------------");
+		//console.log($("#line_status".concat(String(ln))).val());
 		$("#line_source_id".concat(String(ln))).val(hit_ip_subnets.source_id);
 
 		$("#line_status".concat(String(ln))).val(hit_ip_subnets.allo_qty);
@@ -772,20 +777,44 @@ function insertTransLineElements(tableid, current_view) { // 创建界面要素
 			//2016-12-26
 			/*+ "<td><span name='displayed_line_organization[" + prodln + "]' id='displayed_line_organization" + prodln + "'></span></td>"*/
 			+ "<td><span name='displayed_line_status[" + prodln+ "]' id='displayed_line_status" + prodln + "'></span></td>"
-			
 			+ "<td><span name='displayed_line_source_link[" + prodln+ "]' id='displayed_line_source_link" + prodln + "'></span></td>"
 			//2017-1-11 by yuan.chen
 			+ "<td><span name='displayed_line_using_org[" + prodln+ "]' id='displayed_line_using_org" + prodln + "'></span></td>"
 			+ "<td>"
 
 	if (current_view == "EditView") {
-		z1.innerHTML += "<input type='button' value='"
+		z1.innerHTML += "<td>"
+		        + "<input type='button' value='"
 				+ SUGAR.language.get('app_strings', 'LBL_EDITINLINE')
 				+ "' class='button'  id='btn_edit_line" + prodln
-				+ "' onclick='LineEditorShow(" + prodln + ")'>";
+				+ "' onclick='LineEditorShow(" + prodln + ")'>"
+				+ "</td>";
+		/*
+        console.log("line_ip_type     val " + "displayed_line_ip_type"+prodln +" ---"+prodln);
+	    if(document.getElementById("displayed_line_ip_type"+prodln).innerHTML != 1){
+	    	z1.innerHTML += "<td>"
+		        + "<input type='button' value='"
+				+ SUGAR.language.get('HIT_IP', 'LBL_RESOLVE_BUTTON')
+				+ "' class='button'  id='btn_resolve_line" + prodln
+				+ "' disabled = 'disabled"
+				+ "' onclick='LineResolve(" + prodln + ")'>"
+				+ "</td>";
+	    }
+	    else{
+            z1.innerHTML += "<td>"
+		        + "<input type='button' value='"
+				+ SUGAR.language.get('HIT_IP', 'LBL_RESOLVE_BUTTON')
+				+ "' class='button'  id='btn_resolve_line" + prodln
+				+ "' onclick='LineResolve(" + prodln + ")'>"
+				+ "</td>";
+	    }*/
+	    z1.innerHTML += "<td>"
+		        + "<input type='button' value='"
+				+ SUGAR.language.get('HIT_IP_Subnets', 'LBL_IP_AUTOCREATE_IP')
+				+ "' class='button'  id='btn_resolve_line" + prodln
+				+ "' onclick='LineResolve(" + prodln + ")'>"
+				+ "</td>";
 	}
-	"</td>";
-
 	var x = tablebody.insertRow(-1); // 以下生成的是Line Editor
 	x.id = 'trans_editor' + prodln;
 	x.style = "display:none";
@@ -1015,7 +1044,7 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 	// $("#displayed_line_num"+ln).html());
 	//
 	// console.log("renderTransLine"+ln);
-	console.log("line_ip_type= " + $("#line_ip_type" + ln).val());
+	//console.log("line_ip_type= " + $("#line_ip_type" + ln).val());
 	if ($("#line_ip_type_val" + ln).val() == "0") {
 		//console.log("renderTransLine"+ln);
 		$("#displayed_line_ip_type" + ln).attr("checked", true);
@@ -1025,6 +1054,7 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 		$("#line_ip_type" + ln).attr("checked", true);
 		$("#line_ip_type" + ln).prop("checked", true);
 		document.getElementById("line_ip_type" + ln).checked = true;
+		$("#btn_resolve_line"+ln).attr("disabled",true);
 	} else {
 		$("#displayed_line_ip_type" + ln).removeAttr("checked");
 		$("#line_ip_type" + ln).removeAttr("checked");
@@ -1068,7 +1098,6 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 	$("#displayed_line_ip_type" + ln).html($("#line_ip_type" + ln).val());
 	$("#displayed_line_location" + ln).html($("#line_location" + ln).val());
 	$("#displayed_line_using_org" + ln).html($("#line_using_org" + ln).val());
-    
     //2016-12-26
 	/*if ($("#line_org" + ln).val() == "") {
 		$("#displayed_line_organization" + ln).html(SUGAR.language.get(
@@ -1086,30 +1115,30 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 		$("#displayed_line_ip_qty" + ln).html("1");
 		$("#displayed_line_ip_lowest" + ln).html("");
 		$("#displayed_line_ip_highest" + ln).html("");
-		is_assigned = 1;
+		//is_assigned = 1;
 		//console.log("11111111111111111111111111");
 	}
-	
+
     //2016-12-26
-	if ($("#displayed_line_purpose" + ln).val() != "" ) {
+/*	if ($("#displayed_line_purpose" + ln).val() != "" ) {
 		is_assigned =1;
 		//console.log("22222222222222222222222");
 	}
-	/*else{
-		is_assigned =1;
-		console.log("22222222222222222222222");
-	}*/
-    if ($("#line_status"+ln).val()!="") {
-    	is_assigned =1;
-    	//console.log("33333333333333333333");
+*/
+    if ($("#line_status"+ln).val()=="1") {
+    	is_assigned = 1;
     }
+	//行上有用途 就应该显示为已分配 
+	if ($("#line_purpose"+ln).val()!="") {
+    	is_assigned = 1;
+    }	
+	
     if(is_assigned == 1) {
-
 		$("#displayed_line_status"+ln).html("<span class='color_tag color_asset_status_InService'>"+SUGAR.language.get('HIT_IP', 'LBL_ASSIGNED')+"</span>");
 	} else {
 		$("#displayed_line_status"+ln).html("<span class='color_tag color_asset_status_Idle'>"+SUGAR.language.get('HIT_IP', 'LBL_UNASSIGNED')+"</span>");
 	}
-    
+
 	/*if($("#line_status"+ln).val()!="") {
 
 	//if($("#line_status"+ln).val()>0) {
@@ -1218,6 +1247,7 @@ function btnMarkLineDeleted(ln, key) {// 删除当前行
 function markLineDeleted(ln, key) {// 删除当前行
 
 	// collapse line; update deleted value
+    console.log("markLineDeleted");
 	document.getElementById(key + 'body' + ln).style.display = 'none';
 	document.getElementById(key + 'deleted' + ln).value = '1';
 	document.getElementById(key + 'delete_line' + ln).onclick = '';
@@ -1227,6 +1257,62 @@ function markLineDeleted(ln, key) {// 删除当前行
 		removeFromValidate('EditView', key + 'name' + ln);
 	}
 	// resetLineNum();
+
+}
+
+
+function LineResolve(ln) { // 自动生成单个地址
+	
+
+
+	//新增单个地址行
+    var ip_subnet_splited = $("#line_ip_subnet" + ln).val().split("/");
+    var ip_subnet_caled = IpSubnetCalculator.calculateSubnetMask(
+					ip_subnet_splited[0], ip_subnet_splited[1]);
+    var ip_name =	ip_subnet_caled.ipLowStr ;
+    var ip_name_splited = ip_name.split(".");
+    var ip_name_last = parseInt(ip_name_splited[3]);
+    var qty=$("#displayed_line_ip_qty"+ln).html().trim();
+    var count = prodln;
+    console.log("count:   " +count);
+    for (var i = 1; i <= qty; i++) {
+    	//如果不存在精确IP
+    	ip_name = ip_name.split(".")[0] +"." + ip_name.split(".")[1] +"." + ip_name.split(".")[2] +"." + ip_name_last;
+    	for (var k = 0; k < count; k++) {
+    		if ($("#line_ip_type_val"+ k).val() == '0') {
+    			if ($("#line_name"+ k).val() == ip_name) {
+    				break;
+    			}
+    		}
+    	}
+    	console.log("ip_name_last:   " +ip_name_last);
+    	if (k == count) {
+			var j=insertTransLineElements("lineItems", 'EditView');
+			document.getElementById("line_ip_subnet"+j).value=$("#line_ip_subnet"+ ln).val();
+			$("#line_ip_type"+ j).attr("checked",true);
+			$("#line_ip_type_val"+ j).val('0');
+			$("#line_ip_type"+ j).val('0');
+			$("#line_location"+ j).val($("#line_location"+ ln).val());
+		    $("#line_gateway"+ j).val($("#line_gateway"+ ln).val());
+			$("#line_name"+ j).val(ip_name);
+			$("#line_hat_asset_locations_id"+ j).val($("#line_hat_asset_locations_id"+ ln).val());
+        }
+        renderTransLine(j);
+		ip_name_last = ip_name_last + 1;
+
+    }
+	//删除现有行
+	//console.log("LineResolve");
+	markLineDeleted(ln,'line_');
+	$("#subnets_line_displayed" + ln).hide();
+
+	console.log(prodln);
+
+	resetLineNum_Bold();
+
+
+	//显示到list
+
 
 }
 

@@ -6,8 +6,18 @@ class HAM_WOViewList extends ViewList
 {
   function Display() {
     global $app_list_strings;
+	echo '<script src="cache/include/javascript/sugar_grp_yui_widgets.js"></script>';
+	echo '<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />';
     $this->ss->assign('APP_LIST', $app_list_strings);
+
 	echo '<script src="modules/HAM_WO/js/HAM_WO_listview.js"></script>';
+	
+	if(isset($_GET['error_message'])&&!empty($_GET['error_message'])){
+		echo '<script>var return_msg="'.$_GET['error_message'].'"</script>';
+		//echo '<script>alert('.$_GET['error_message'].');</script>';
+		
+	}
+	
 	
     parent::Display();
   }

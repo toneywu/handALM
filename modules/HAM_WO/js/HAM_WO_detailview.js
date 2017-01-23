@@ -277,6 +277,11 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
  * document 页面加载 入口函数
  */
  $(document).ready(function(){
+	 var wo_status = $("#wo_status").val();
+	 if(wo_status!="DRAFT"&&wo_status!="RETURNED"){
+		 $("#delete_button").hide();
+	 }
+	 
 	 
 	 var event_id = $("#hat_event_type_id").data("id-value");
 		$.ajax({//
