@@ -261,6 +261,28 @@ $dictionary['HAA_Codes'] = array(
       'studio' => 'visible',
       ),
     ),
+
+
+'indices'=>array (
+  array (
+    'name' => 'haa_codesspk',
+    'type' => 'primary',
+    'fields' => 
+    array (
+      0 => 'id',
+      ),
+    ),
+  array (
+    'name' => 'idx_id_del',
+    'type' => 'index',
+    'fields' => 
+    array (
+      0 => 'id',
+      1 => 'deleted',
+      ),
+    ),
+  ),
+
 'relationships'=>array (
   ),
 'optimistic_locking'=>true,

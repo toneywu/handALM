@@ -160,7 +160,7 @@ function save_rack_elements_from_rack($allocation_id, $key, $focused_trans_line)
         $subTrans_line->target_using_org_id = $RackAllocation->using_org_id;
         $subTrans_line->target_using_person_id = $focused_trans_line->target_using_person_id;
         $subTrans_line->target_using_person_desc =$focused_trans_line->target_using_person_desc;
-        $subTrans_line->target_parent_asset_id = $beanRack->hat_assets_id;
+        $subTrans_line->target_parent_asset_id = $RackAllocation->hit_racks_id;
         $subTrans_line->target_location_id = $focused_trans_line->target_location_id;
         $subTrans_line->target_asset_status = $focused_trans_line->target_asset_status;//机柜上资产的状态与当前事务处理行的创建一致。
         //以下是记录资产的当前状态

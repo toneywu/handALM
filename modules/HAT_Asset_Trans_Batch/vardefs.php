@@ -831,6 +831,35 @@ $dictionary['HAT_Asset_Trans_Batch'] = array(
 			'vname' => 'LBL_HAT_ASSET_TRANS_BATCH_HAT_ASSET_TRANS_FROM_HAT_ASSET_TRANS_TITLE',
 			),
 		),
+'indices'=>array (
+  array (
+    'name' => 'haa_codesspk',
+    'type' => 'primary',
+    'fields' => 
+    array (
+      0 => 'id',
+      ),
+    ),
+  array (
+    'name' => 'idx_id_del',
+    'type' => 'index',
+    'fields' => 
+    array (
+      0 => 'id',
+      1 => 'deleted',
+      ),
+    ),
+  array (
+    'name' => 'idx_haa_frameworks_id_del',
+    'type' => 'index',
+    'fields' => 
+    array (
+      0 => 'haa_frameworks_id',
+      1 => 'deleted',
+      ),
+    ),
+  ),
+
 'relationships'=>array (
 
 	),

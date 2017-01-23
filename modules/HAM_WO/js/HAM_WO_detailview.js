@@ -194,8 +194,8 @@ function complete_work_order(record){
 };
 */
 function process_woop(woop_id,wo_id,include_reject_wo_val){
+	console.log('index.php?to_pdf=true&module=HAM_WOOP&action=process_woop&record=' + woop_id+"&ham_wo_id="+wo_id+"&include_reject_wo_val="+include_reject_wo_val);
 	$.ajax({
-		
 		url: 'index.php?to_pdf=true&module=HAM_WOOP&action=process_woop&record=' + woop_id+"&ham_wo_id="+wo_id+"&include_reject_wo_val="+include_reject_wo_val,
 		success: function (data) {
 			console.log(data);
@@ -208,7 +208,7 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 };
 
 /**
- * 点击按钮 工序驳回
+ * 点击按钮 工序驳回,弹出POP对话框，要求选择退回的明细内容
  * @param name
  */
  function reject_woop(id){
@@ -277,6 +277,11 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
  * document 页面加载 入口函数
  */
  $(document).ready(function(){
+	 var wo_status = $("#wo_status").val();
+	 if(wo_status!="DRAFT"&&wo_status!="RETURNED"){
+		 $("#delete_button").hide();
+	 }
+	 
 	 
 	 var event_id = $("#hat_event_type_id").data("id-value");
 		$.ajax({//

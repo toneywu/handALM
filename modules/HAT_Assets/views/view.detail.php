@@ -24,8 +24,10 @@ class HAT_AssetsViewDetail extends ViewDetail
     	$this->ss->assign('ENABLE_IT_PORTS_DETAILS','<input type="checkbox" class="checkbox" id="enable_it_ports" disabled="true">');
     	if($this->bean->enable_it_ports==1) {
     		$bean_rack_allocation = BeanFactory::getBean('HIT_Rack_Allocations')->retrieve_by_string_fields(array('hat_assets_id'=>$this->bean->id));
-    		$bean_rack = BeanFactory::getBean('HIT_Racks')->retrieve_by_string_fields(array('id'=>$bean_rack_allocation->hit_racks_id));
-    		if ($bean_rack_allocation && $bean_rack) {
+            if ($bean_rack_allocation) {
+                $bean_rack = BeanFactory::getBean('HIT_Racks')->retrieve_by_string_fields(array('id'=>$bean_rack_allocation->hit_racks_id));
+    		}
+            if ($bean_rack_allocation && $bean_rack) {
 
     			$this->ss->assign('ENABLE_IT_PORTS_DETAILS','<input type="checkbox" class="checkbox" id="enable_it_ports" checked="checked">@<a href="index.php?module=HIT_Racks&action=DetailView&record='.$bean_rack_allocation->hit_racks_id.'">'.$bean_rack->name.'</a>
     				['.$bean_rack_allocation->rack_pos_top.' U]');

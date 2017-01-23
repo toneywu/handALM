@@ -42,7 +42,7 @@ $include_reject_wo=$_GET['include_reject_wo_val'];
 	}
 	$latest_woop_bean = BeanFactory :: getBean('HAM_WOOP')->retrieve_by_string_fields(array (
 													'id' => $latest_woop_id));
-//有工单回退 和工序回退 分别在if分支和 else分支里面
+//有和工序回退 工单回退  分别在if分支和 else分支里面
 if($include_reject_wo=='1'){
 	//找到要驳回和当前最大的工序之间的工序
 	$reject_woop_bean = BeanFactory :: getBean('HAM_WOOP', $woop_id);
@@ -219,9 +219,8 @@ if($include_reject_wo=='1'){
 		}
 	}
 	// end
-	// 有工单回退 和工序回退 分别在if分支和 else分支里面,以下为else的分支
+	// 有工序回退 和 工单回退 分别在if分支和 else分支里面,以下为else的分支
 }else{
-	//做工单驳回
 
 	reverse_asset($woop_id, $wo_id, $include_reject_wo);
 
@@ -397,30 +396,31 @@ if($include_reject_wo=='1'){
 
 
 function reverse_asset($woop_id, $wo_id, $include_reject_wo) {
+	global $db;
 	//判断需要回退的资产事务处理
-	if ($include_reject_wo==1) {//整个单据回退
-		$changed_assets =  'SELECT
+	if ($include_reject_wo==0) {//退回到固定工序
+		$changed_assets_sql =  'SELECT
 							  hat.id hat_id, hat.*,
-							  GROUP_CONCAT(DISTINCT hat.`asset_id`) asset_id
+							  GROUP_CONCAT(DISTINCT hat.asset_id) asset_id_group
 							FROM
 							  hat_asset_trans hat,
 							  hat_asset_trans_batch hatb,
 							  ham_wo hw,
 							  ham_woop hwoop
-							WHERE hatb.id = hat.`batch_id`
-							  AND hwoop.`ham_wo_id` = hw.id
-							  AND hwoop.id = hatb.`source_woop_id`
+							WHERE hatb.id = hat.batch_id
+							  AND hwoop.ham_wo_id = hw.id
+							  AND hwoop.id = hatb.source_woop_id
 							  AND (
-							    hat.`trans_status` = "CLOSED"
-							    OR hat.`trans_status` = "AUTO_TRANSACTED"
+							    hat.trans_status = "CLOSED"
+							    OR hat.trans_status = "AUTO_TRANSACTED"
 							  )
 							  AND hw.id = "'.$wo_id.'"
-							GROUP BY hat.`asset_id`
-							ORDER BY hat.`acctual_complete_date` ASC ';
-	} else { //退回到固定工序
-		$changed_assets =  'SELECT
+							GROUP BY hat.asset_id
+							ORDER BY hat.acctual_complete_date ASC ';
+	} else { //整个单据回退
+		$changed_assets_sql =  'SELECT
 							  hat.id hat_id, hat.*,
-							  GROUP_CONCAT(DISTINCT hat.`asset_id`) asset_id
+							  GROUP_CONCAT(DISTINCT hat.`asset_id`) asset_id_group
 							FROM
 							  hat_asset_trans hat,
 							  hat_asset_trans_batch hatb,
@@ -443,9 +443,11 @@ function reverse_asset($woop_id, $wo_id, $include_reject_wo) {
 
 	//基于工序，找到所有变化的资产，注意：不同资产可能来源于多个工序，同一资产也可能在同一工序中发生变化，因此是找到最早的一个资产事务处理记录
 
-		$changed_assets_result = $db->query($changed_assets);
-		while($changed_asset_line = $db->fetchByAssoc($changed_assets_result)) {
-/*			$changed_asset_bean = BeanFactory :: getBean('HAT_Assets', $changed_asset_line["asset_id"]);
+
+		$changed_assets_result = $db->query($changed_assets_sql);
+
+		while ($changed_asset_line = $db->fetchByAssoc($changed_assets_result)) {
+			$changed_asset_bean = BeanFactory :: getBean('HAT_Assets', $changed_asset_line["asset_id"]);
 			if ($changed_asset_bean) {
 				$changed_asset_bean->using_org_id = $changed_asset_line['current_using_org_id'];
 				$changed_asset_bean->using_person_id = $changed_asset_line['current_using_person_id'];
@@ -459,9 +461,10 @@ function reverse_asset($woop_id, $wo_id, $include_reject_wo) {
 	            $changed_asset_bean->attribute12 = $changed_asset_line['current_asset_attribute12'];
 	            $changed_asset_bean->parent_asset_id = $changed_asset_line['current_parent_asset_id'];
 
-				$changed_asset_bean->save;
-			}*/
+				$changed_asset_bean->save();
+			}
 
 		}
+		//echo $changed_assets_sql."<hr/>";
  }
 ?>

@@ -1421,6 +1421,46 @@ $dictionary['HAT_Asset_Trans'] = array(
 			'size' => '20',
 			),
 		),
+
+
+'indices'=>array (
+  array (
+    'name' => 'hat_asset_transspk',
+    'type' => 'primary',
+    'fields' => 
+    array (
+      0 => 'id',
+      ),
+    ),
+  array (
+    'name' => 'idx_batch_id_del',
+    'type' => 'index',
+    'fields' => 
+    array (
+      0 => 'batch_id',
+      1 => 'deleted',
+      ),
+    ),
+    array (
+    'name' => 'idx_asset_id_del',
+    'type' => 'index',
+    'fields' => 
+    array (
+      0 => 'asset_id',
+      1 => 'deleted',
+      ),
+    ),
+    array (
+    'name' => 'idx_trans_status_del',
+    'type' => 'index',
+    'fields' => 
+    array (
+      0 => 'trans_status',
+      1 => 'deleted',
+      ),
+    ),
+  ),
+
 'relationships'=>array (
 
 
