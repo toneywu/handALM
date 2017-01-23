@@ -361,7 +361,7 @@ $dictionary['HIT_IP_TRANS_BATCH'] = array (
 			
 		),
 		'target_owning_org' => array (
-			'required' => true,
+			'required' => false,
 			'source' => 'non-db',
 			'name' => 'target_owning_org',
 			'vname' => 'LBL_TARGET_OWNING_ORG',

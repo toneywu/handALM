@@ -392,13 +392,13 @@ function initTransHeaderStatus() {
     	$("#wo_status option[value='CLOSED']").remove();
     	$("#wo_status option[value='WPREV']").remove();
         setEditViewReadonly ();
-		$("#pagecontent button").css("display","none");
+	   $("#pagecontent button").css("display","none");
 	   $("#pagecontent input").attr("readonly",true);
        $("#pagecontent input").attr("style","background-Color:#efefef");
 	   $("#pagecontent textarea").attr("readonly",true);
 	   $("#pagecontent select").attr("disabled","disabled");
 	   $("#pagecontent select").css("background-Color","#efefef");
-	   $("#pagecontent input").attr("disabled","disabled");
+	   //$("#pagecontent input").attr("disabled","disabled");
 	   $("#pagecontent .dateTime").hide();
 	   $("#CANCEL_HEADER").removeAttr("readonly");
 	   $("#CANCEL_HEADER").removeAttr("disabled");
@@ -513,8 +513,21 @@ function initTransHeaderStatus() {
 $("#wo_status").change(function(){
 		require_field();
 });
-
-
+if(global_event_options.contract_completed=="SUBMITTED"||global_event_options.contract_completed=="COMPLETED"){
+	$("#contract").removeAttr("readonly");
+	$("#contract").removeAttr("disabled");
+	$("#contract").removeAttr("style");
+	$("#btn_contract").removeAttr("style");
+	$("#btn_contract").removeAttr("disabled");
+	$("#btn_clr_contract").removeAttr("style");
+	$("#btn_clr_contract").removeAttr("disabled");
+	$("#SAVE_HEADER,#save_and_continue,#SAVE_FOOTER").removeAttr("disabled");
+	$("#SAVE_HEADER,#save_and_continue,#SAVE_FOOTER").removeAttr("readonly");
+	$("#SAVE_HEADER,#save_and_continue,#SAVE_FOOTER").removeAttr("style");
+	$("#contract_id").removeAttr("readonly");
+	$("#contract_id").removeAttr("disabled");
+	$("#contract_id").removeAttr("style");
+}
     
     
 function setEditViewReadonly () { //如果当前头状态为Submitted、Approved、Canceled、Closed需要将字段变为只读

@@ -7,12 +7,18 @@ $popupMeta = array (
   'hit_ip_subnets' => 'hit_ip_allocations.hit_ip_subnets',
   'bandwidth_type' => 'hit_ip_allocations.bandwidth_type',
   'cabinet' => 'hit_ip_allocations.cabinet',
+  //'hat_asset_name' => 'hit_ip_allocations.hat_asset_name',
+ // 'access_assets_name' => 'hit_ip_allocations.access_assets_name',
   'target_owning_org_id' => 'hit_ip_allocations.target_owning_org_id',
 ),
+//'whereStatement'=>' IFNULL(hit_ip_allocations.enable_action,"1")="1" and  (jt1.name="'.$_REQUEST["access_assets_name_advanced"].'" or jt2.name="'.$_REQUEST["access_assets_name_advanced"].'" or "'.$_REQUEST["access_assets_name_advanced"].'"="" ) OR  (ifnull(jt2.name,"$") LIKE "'.$_REQUEST["access_assets_name_advanced"].'%" AND IFNULL(hit_ip_allocations.enable_action,"1") = "1") ',
+'whereStatement'=>' IFNULL(hit_ip_allocations.enable_action,"1")="1" ',
     'searchInputs' => array (
   4 => 'hit_ip_subnets',
   5 => 'bandwidth_type',
   6 => 'cabinet',
+ // 7 => 'hat_asset_name',
+ // 8 => 'access_assets_name',
   9 => 'target_owning_org_id',
 ),
     'searchdefs' => array (
@@ -63,80 +69,13 @@ $popupMeta = array (
     'width' => '10%',
     'name' => 'access_assets_name',
   ),
-  'target_owning_org_id' => 
+   'target_owning_org_id' => 
   array (
     'type' => 'varchar',
     'studio' => 'visible',
     'label' => '',
     'width' => '10%',
     'name' => 'target_owning_org_id',
-  ),
-),
-    'listviewdefs' => array (
-  'HIT_IP_SUBNETS' => 
-  array (
-    'type' => 'relate',
-    'studio' => 'visible',
-    'label' => 'LBL_HIT_IP',
-    'id' => 'HIT_IP_SUBNETS_ID',
-    'link' => true,
-    'width' => '10%',
-    'default' => true,
-    'name' => 'hit_ip_subnets',
-  ),
-  'BANDWIDTH_TYPE' => 
-  array (
-    'type' => 'varchar',
-    'label' => 'LBL_BANDWIDTH_TYPE',
-    'width' => '10%',
-    'default' => true,
-    'name' => 'bandwidth_type',
-  ),
-  'ACCESS_ASSETS_NAME' => 
-  array (
-    'type' => 'relate',
-    'studio' => 'visible',
-    'label' => 'LBL_ACCESS_ASSETS_NAME',
-    'id' => 'HAT_ASSETS_ID',
-    'link' => true,
-    'width' => '10%',
-    'default' => true,
-    'name' => 'access_assets_name',
-  ),
-  'HAT_ASSET_NAME' => 
-  array (
-    'type' => 'relate',
-    'studio' => 'visible',
-    'label' => 'LBL_HAT_ASSET_NAME',
-    'id' => 'HAT_ASSETS_ID',
-    'link' => true,
-    'width' => '10%',
-    'default' => true,
-    'name' => 'hat_asset_name',
-  ),
-  'PORT' => 
-  array (
-    'type' => 'varchar',
-    'label' => 'LBL_PORT',
-    'width' => '10%',
-    'default' => true,
-    'name' => 'port',
-  ),
-  'SPEED_LIMIT' => 
-  array (
-    'type' => 'varchar',
-    'label' => 'LBL_SPEED_LIMIT',
-    'width' => '10%',
-    'default' => true,
-    'name' => 'speed_limit',
-  ),
-  'BROADBAND_TYPE' => 
-  array (
-    'type' => 'varchar',
-    'label' => 'LBL_BROADBAND_TYPE',
-    'width' => '10%',
-    'default' => true,
-    'name' => 'broadband_type',
   ),
 ),
 );
