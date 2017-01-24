@@ -6,6 +6,13 @@ array (
   array (
     'templateMeta' => 
     array (
+      'includes' => 
+      array (
+        0 => 
+        array (
+          'file' => 'modules/HAT_Counting_Tasks/js/HAT_Counting_Tasks_detailview.js',
+          ),
+        ),
       'form' => 
       array (
         'buttons' => 
@@ -145,32 +152,41 @@ array (
           ),
           1 => 
           array (
-            'name' => 'counting_person',
+            'name' => 'task_templates',
             'studio' => 'visible',
-            'label' => 'LBL_COUNTING_PERSON',
+            'label' => 'LBL_TASK_TEMPLATES',
           ),
         ),
         7 => 
         array (
           0 => 
           array (
-            'name' => 'manual_add_flag',
-            'label' => 'LBL_MANUAL_ADD_FLAG',
+            'name' => 'counting_person',
+            'studio' => 'visible',
+            'label' => 'LBL_COUNTING_PERSON',
           ),
           1 => 
           array (
-            'name' => 'offline_flag',
-            'label' => 'LBL_OFFLINE_FLAG',
+            'name' => 'manual_add_flag',
+            'label' => 'LBL_MANUAL_ADD_FLAG',
           ),
         ),
         8 => 
         array (
           0 => 
           array (
+            'name' => 'offline_flag',
+            'label' => 'LBL_OFFLINE_FLAG',
+          ),
+          1 => 
+          array (
             'name' => 'upinterface_flag',
             'label' => 'LBL_UPINTERFACE_FLAG',
           ),
-          1 => 'description',
+        ),
+        9 => 
+        array (
+          0 => 'description',
         ),
       ),
       'lbl_editview_panel1' => 

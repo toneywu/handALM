@@ -1,6 +1,6 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-require_once('include/MVC/View/views/view.edit.php');
+require_once('include/MVC/View/views/view.Edit.php');
 
 class HAT_Counting_LinesViewEdit extends ViewEdit
 {
@@ -12,6 +12,7 @@ class HAT_Counting_LinesViewEdit extends ViewEdit
 		echo '<input  id="category_attr"  type="hidden" value="">';
 		echo '<input  id="user_attr" value="" type="hidden">';
 		echo '<input  id="own_attr"  type="hidden" value="">';
+		echo '<input  id="task_template_attr"  type="hidden" value="">';
 		if($_REQUEST['hat_counting_tasks_id']){
 			$bean_request=BeanFactory::getBean("HAT_Counting_Tasks",$_REQUEST['hat_counting_tasks_id']);
 			$this->bean->counting_task=$bean_request->name ;
@@ -23,6 +24,9 @@ class HAT_Counting_LinesViewEdit extends ViewEdit
 			$this->getTaskinfo($this->bean->hat_counting_tasks_id_c);
 			$bean_task=BeanFactory::getBean("HAT_Counting_Tasks",$this->bean->hat_counting_tasks_id_c);
 			$this->bean->counting_person=$bean_task->counting_person ;
+			echo "<script>
+				$('#task_template_attr').val('".$bean_task->hat_counting_task_templates_id_c."');
+				</script>";
 		}
 		require_once('modules/HAA_Frameworks/orgSelector_class.php');
 		$current_framework_id = empty($this->bean->hat_framework_id)?"":$this->bean->hat_framework_id;
@@ -202,7 +206,8 @@ function displayLineItems(){
 		t.hat_asset_locations_id_c,
 		t.haa_codes_id_c,
 		t.user_contacts_id_c,
-		t.own_contacts_id_c
+		t.own_contacts_id_c,
+		t.hat_counting_task_templates_id_c
 		FROM
 		hat_counting_tasks t
 		WHERE
@@ -217,6 +222,7 @@ function displayLineItems(){
 		$("#category_attr").val("'.$row["aos_product_categories_id_c"].'");
 		$("#user_attr").val("'.$row["user_contacts_id_c"].'");
 		$("#own_attr").val("'.$row["own_contacts_id_c"].'");
+		$("#task_template_attr").val("'.$row["hat_counting_task_templates_id_c"].'");
 	})
 </script>';
 		

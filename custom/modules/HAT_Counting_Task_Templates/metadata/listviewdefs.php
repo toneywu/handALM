@@ -2,11 +2,11 @@
 $module_name = 'HAT_Counting_Task_Templates';
 $listViewDefs [$module_name] = 
 array (
-  'TEMPLATECODE' => 
+  'TEMPLATE_CODE' => 
   array (
     'type' => 'varchar',
     'studio' => 'visible',
-    'label' => 'LBL_TEMPLATECODE',
+    'label' => 'LBL_TEMPLATE_CODE',
     'width' => '10%',
     'default' => true,
   ),
@@ -38,6 +38,14 @@ array (
     'label' => 'LBL_ASSIGNED_TO_NAME',
     'module' => 'Employees',
     'id' => 'ASSIGNED_USER_ID',
+    'default' => false,
+  ),
+  'TEMPLATECODE' => 
+  array (
+    'type' => 'varchar',
+    'studio' => 'visible',
+    'label' => 'LBL_TEMPLATECODE',
+    'width' => '10%',
     'default' => false,
   ),
 );

@@ -96,4 +96,7 @@ $mod_strings = array (
   'LBL_USER_PERSON_CONTACTS_ID' => '使用人',
   'LBL_OWN_PERSON_CONTACTS_ID' => '管理人',
   'LBL_OWN_PERSON' => '管理人',
+  
+  'LBL_COUNTING_POLICIES' => '盘点拆分策略',
+  'LBL_COUNTING_POLICY_GROUPS' => '盘点策略组',
 );

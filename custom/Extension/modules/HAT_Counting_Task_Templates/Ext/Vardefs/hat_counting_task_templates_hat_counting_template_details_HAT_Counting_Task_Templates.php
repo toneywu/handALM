@@ -1,5 +1,5 @@
 <?php
-// created: 2017-01-15 21:32:22
+// created: 2017-01-13 16:43:19
 $dictionary["HAT_Counting_Task_Templates"]["fields"]["hat_counting_task_templates_hat_counting_template_details"] = array (
   'name' => 'hat_counting_task_templates_hat_counting_template_details',
   'type' => 'link',

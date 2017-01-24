@@ -119,5 +119,22 @@ $mod_strings = array (
   'LBL_OWN_PERSON' => '管理人',
   'LBL_OFFLINE_FLAG' =>'离线',
   'LBL_UPINTERFACE_FLAG' => '已同步接口',
+  'LBL_TASK_TEMPLATES' => '盘点任务模版',
+
+  'LBL_ATTRIBUTE1' => '备用字段1',
+  'LBL_ATTRIBUTE2' => '备用字段2',
+  'LBL_ATTRIBUTE3' => '备用字段3',
+  'LBL_ATTRIBUTE4' => '备用字段4',
+  'LBL_ATTRIBUTE5' => '备用字段5',
+  'LBL_ATTRIBUTE6' => '备用字段6',
+  'LBL_ATTRIBUTE7' => '备用字段7',
+  'LBL_ATTRIBUTE8' => '备用字段8',
+  'LBL_ATTRIBUTE9' => '备用字段9',
+  'LBL_ATTRIBUTE10' => '备用字段10',
+  'LBL_ATTRIBUTE11' => '备用字段11',
+  'LBL_ATTRIBUTE12' => '备用字段12',
+  'LBL_ATTRIBUTE13' => '备用字段13',
+  'LBL_ATTRIBUTE14' => '备用字段14',
+  'LBL_ATTRIBUTE15' => '备用字段15',
 
 );

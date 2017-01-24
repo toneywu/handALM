@@ -27,6 +27,7 @@ class HAT_Counting_Policy_GroupsViewEdit extends ViewEdit
 			}
 			echo'<script type="text/javascript"src="'.$GLOBALS['sugar_config']['cache_dir'].'jsLanguage/'.$module.'/'.$GLOBALS['current_language'].'.js?s='.$GLOBALS['js_version_key'].'&c='.$GLOBALS['sugar_config']['js_custom_version'].'&j='.$GLOBALS['sugar_config']['js_lang_version'].'"></script>';
 		}
+		
 		parent::display();
 	$this->displayLineItems();
 
@@ -53,12 +54,20 @@ function displayLineItems(){
             hcp.data_populate_sql,
             hcp.description,
             hcp.split_type,
-            hcp.enabled_flag
+            hcp.enabled_flag,
+            hcp.hat_counting_policy_groups_id_c,
+            hcpg.name group_name,
+            hcp.hat_counting_task_templates_id_c,
+            hctt.name template_name
             FROM
             hat_counting_policies hcp,
-            hat_counting_policy_groups_hat_counting_policies_c h
+            hat_counting_policy_groups hcpg,
+            hat_counting_policy_groups_hat_counting_policies_c h,
+            hat_counting_task_templates hctt
             WHERE
             hcp.id = h.hat_counti9da1olicies_idb
+            and hcpg.id = h.hat_counti1658_groups_ida
+            and hctt.id=hcp.hat_counting_task_templates_id_c
             AND hcp.deleted = 0
             AND h.deleted = 0
             AND h.hat_counti1658_groups_ida ='".$focus->id."'";

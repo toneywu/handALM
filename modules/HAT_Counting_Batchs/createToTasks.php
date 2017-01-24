@@ -27,7 +27,6 @@ $isNew=$_POST['isNew'];
 $isClr=$_POST['isClr'];
 $batchId=$_POST['record'];
 $bean_batch = BeanFactory :: getBean('HAT_Counting_Batchs', $batchId);
-
 if ($isNew=="") {
 	
 	$sql="SELECT
@@ -48,12 +47,9 @@ if ($isNew=="") {
 		echo "1";
 	}
 }else{
-
 	if ($bean_batch->snapshot_date ==''){
 		echo "2";
-
 		$query = "call HAT_Counting_asset_info('".$_SESSION["current_framework"]."','".$batchId."','".$current_user->id."')";
-
 		$result = $this->bean->db->query($query, true);
 		//$row = $this->bean->db->fetchByAssoc($result);
 	}else{

@@ -1,7 +1,8 @@
 <?php
-// created: 2017-01-13 11:59:25
+// created: 2017-01-16 10:58:22
 $mod_strings = array (
   'LBL_DESCRIPTION' => '说明',
   'LBL_NAME' => '模版名称',
   'LBL_EDITVIEW_PANEL1' => '盘点任务模板明细',
+  'LBL_HAT_COUNTING_TASK_TEMPLATES_HAT_COUNTING_TEMPLATE_DETAILS_FROM_HAT_COUNTING_TEMPLATE_DETAILS_TITLE' => '盘点任务模板明细',
 );

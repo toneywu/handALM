@@ -39,6 +39,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_EDITVIEW_PANEL3' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
         'LBL_EDITVIEW_PANEL1' => 
         array (
           'newTab' => false,
@@ -77,6 +82,7 @@ array (
                 'aos_product_categories_id_c' => 'category_attr',
                 'user_contacts_id_c' => 'user_attr',
                 'own_contacts_id_c' => 'own_attr',
+                'hat_counting_task_templates_id_c' => 'task_template_attr',
               ),
               'call_back_function' => 'setExtendValReturn',
             ),
@@ -146,71 +152,17 @@ array (
             'label' => 'LBL_COUNTING_STATUS',
           ),
         ),
-        3 => 
+      ),
+      'lbl_editview_panel3' => 
+      array (
+        0 => 
         array (
           0 => 
           array (
-            'name' => 'asset_status',
+            'name' => 'line_asset_items',
             'studio' => 'visible',
-            'label' => 'LBL_ASSET_STATUS',
-            'customCode' => '<select id="asset_status_d" name="asset_status_d" title="" disabled="disabled">
-<option label="" value=""></option>
-<option label="购置未交付" value="Ordered">购置未交付</option>
-<option label="已收货未启用" value="Received">已收货未启用</option>
-<option label="空闲/库存" value="Stocked" >空闲/库存</option>
-<option label="空闲/可用" value="Idle">空闲/可用</option>
-<option label="预分配启用" value="PreAssigned">预分配启用</option>
-<option label="在用" value="InService">在用</option>
-<option label="外部" value="TempOut">外部</option>
-<option label="已退役" value="OutOfService">已退役</option>
-<option label="已处置/迁出" value="Discard">已处置/迁出</option>
-</select><input type="hidden" id="asset_status" name="asset_status" value=""/>',
-          ),
-          1 => 
-          array (
-            'name' => 'asset_location',
-            'studio' => 'visible',
-            'label' => 'LBL_ASSET_LOCATION',
-            'customCode' => '<input name="asset_location" class="sqsEnabled yui-ac-input" tabindex="0" id="asset_location" size="" value="" title="" autocomplete="off" type="text" readonly>
-              <input name="hat_asset_locations_id_c" id="hat_asset_locations_id_c" value="" type="hidden">',
-          ),
-        ),
-        4 => 
-        array (
-          0 => 
-          array (
-            'name' => 'asset_major',
-            'studio' => 'visible',
-            'label' => 'LBL_ASSET_MAJOR',
-            'customCode' => '<input name="asset_major" class="sqsEnabled yui-ac-input" tabindex="0" id="asset_major" size="" value="" title="" autocomplete="off" type="text" readonly>
-            <input name="haa_codes_id_c" id="haa_codes_id_c" value="" type="hidden">',
-          ),
-          1 => 
-          array (
-            'name' => 'oranization',
-            'studio' => 'visible',
-            'label' => 'LBL_ORANIZATION',
-            'customCode' => '<input name="oranization" class="sqsEnabled yui-ac-input" tabindex="0" id="oranization" size="" value="" title="" autocomplete="off" type="text" readonly>
-            <input name="account_id_c" id="account_id_c" value="" type="hidden">',
-          ),
-        ),
-        5 => 
-        array (
-          0 => 
-          array (
-            'name' => 'user_person',
-            'studio' => 'visible',
-            'label' => 'LBL_USER_PERSON',
-            'customCode' => '<input name="user_person" class="sqsEnabled yui-ac-input" tabindex="0" id="user_person" size="" value="" title="" autocomplete="off" type="text" readonly>
-              <input name="user_contacts_id_c" id="user_contacts_id_c" value="" type="hidden">',
-          ),
-          1 => 
-          array (
-            'name' => 'own_person',
-            'studio' => 'visible',
-            'label' => 'LBL_OWN_PERSON',
-            'customCode' => '<input name="own_person" class="sqsEnabled yui-ac-input" tabindex="0" id="own_person" size="" value="" title="" autocomplete="off" type="text" readonly>
-            <input name="own_contacts_id_c" id="own_contacts_id_c" value="" type="hidden">',
+            'label' => 'LBL_LINE_ASSET_ITEMS',
+            'customCode' => '<span id="line_asset_items_span"></span>',
           ),
         ),
       ),

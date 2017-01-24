@@ -21,7 +21,7 @@ function display_lines($focus, $field, $value, $view){
             hctt.`name` template_name,
             hctd.sort_order,
             hctd.field_lable,
-            hctd.table_name,
+            hctd.table_names,
             hctd.column_name,
             hctd.field_type,
             hctd.relate_module,
@@ -31,10 +31,16 @@ function display_lines($focus, $field, $value, $view){
             hctd.can_edit_flag,
             hctd.lookup_type,
             hctd.enabled_flag,
-            hctd.description
+            hctd.description,
+            hctd.haa_valuesets_id_c,
+            hv.`name` valueset_name,
+            hctd.asset_options,
+            hctd.module_dsp,
+            hctd.on_diff_flag
             FROM
             hat_counting_task_templates_hat_counting_template_details_c h,
-            hat_counting_template_details hctd,
+            hat_counting_template_details hctd
+            LEFT JOIN haa_valuesets hv ON hv.id = hctd.haa_valuesets_id_c,
             hat_counting_task_templates hctt
             WHERE
             1 = 1

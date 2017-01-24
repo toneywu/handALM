@@ -77,4 +77,7 @@ $mod_strings = array (
   'LBL_DESCRIPTION' => '说明',
   'LBL_GROUP_CLAUSE' => '分组条件',
   'LBL_BTN_ADD_LINE' => '新增',
+  'LBL_COUNTING_POLICY' => '盘点策略',
+  'LBL_ADDITIONAL_LOGIC' => '附加逻辑',
+  'LBL_TASK_TEMPLATES' => '盘点任务模版',
 );

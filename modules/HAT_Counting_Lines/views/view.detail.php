@@ -8,10 +8,11 @@ class HAT_Counting_LinesViewDetail extends ViewDetail  {
 	
 function display()
 	{	
-		
+		$task_template_attr='';
 		if($this->bean->hat_counting_tasks_id_c){
 			$bean_task=BeanFactory::getBean("HAT_Counting_Tasks",$this->bean->hat_counting_tasks_id_c);
 			$this->bean->counting_person=$bean_task->counting_person ;
+			$task_template_attr=$bean_task->hat_counting_task_templates_id_c;
 		}
 		require_once('modules/HAA_Frameworks/orgSelector_class.php');
 		$current_framework_id = empty($this->bean->hat_framework_id)?"":$this->bean->hat_framework_id;
@@ -52,7 +53,7 @@ function display()
 	echo '<input  id="category_attr"  type="hidden" value="">';
 	echo '<input  id="user_attr" value="" type="hidden">';
 	echo '<input  id="own_attr"  type="hidden" value="">';
-		
+	echo '<input  id="task_template_attr"  type="hidden" value="'.$task_template_attr.'">';
 	}
 
 

@@ -1,5 +1,5 @@
 <?php
-// created: 2017-01-11 09:37:15
+// created: 2017-01-17 09:43:26
 $subpanel_layout['list_fields'] = array (
   'split_type' => 
   array (
@@ -13,7 +13,7 @@ $subpanel_layout['list_fields'] = array (
   array (
     'vname' => 'LBL_NAME',
     'widget_class' => 'SubPanelDetailViewLink',
-    'width' => '20%',
+    'width' => '15%',
     'default' => true,
   ),
   'data_populate_sql' => 
@@ -22,7 +22,7 @@ $subpanel_layout['list_fields'] = array (
     'studio' => 'visible',
     'vname' => 'LBL_DATA_POPULATE_SQL',
     'sortable' => false,
-    'width' => '35%',
+    'width' => '10%',
     'default' => true,
   ),
   'enabled_flag' => 
@@ -32,15 +32,6 @@ $subpanel_layout['list_fields'] = array (
     'vname' => 'LBL_ENABLED_FLAG',
     'width' => '10%',
   ),
-  'description' => 
-  array (
-    'type' => 'text',
-    'studio' => 'visible',
-    'vname' => 'LBL_DESCRIPTION',
-    'sortable' => false,
-    'width' => '10%',
-    'default' => true,
-  ),
   'edit_button' => 
   array (
     'vname' => 'LBL_EDIT_BUTTON',
@@ -49,12 +40,12 @@ $subpanel_layout['list_fields'] = array (
     'width' => '4%',
     'default' => true,
   ),
-/*  'remove_button' => 
+  'remove_button' => 
   array (
     'vname' => 'LBL_REMOVE',
     'widget_class' => 'SubPanelRemoveButton',
     'module' => 'HAT_Counting_Policies',
     'width' => '5%',
     'default' => true,
-  ),*/
+  ),
 );

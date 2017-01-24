@@ -1,6 +1,6 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-require_once('include/MVC/View/views/view.edit.php');
+require_once('include/MVC/View/views/view.Edit.php');
 
 class HAT_Counting_BatchsViewEdit extends ViewEdit
 {
@@ -19,6 +19,8 @@ class HAT_Counting_BatchsViewEdit extends ViewEdit
 			$bean_framework_name = $beanFramework->name;
 		}
 		$this->ss->assign('FRAMEWORK_C',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id_c'));
+
+		echo "<input id='line_framework' type='hidden' value='".$beanFramework->name."'/>";
 
 		$modules=array(
 			'HAT_Counting_Batch_Rules',
