@@ -65,6 +65,7 @@ function save($check_notify = FALSE){
                         $lines->$field_name = $post_data[$key . $field_name][$i];
                     }
                 }
+                $lines->hat_counting_policy_groups_id_c=$this->id;
 	            $lines->save($check_notify);
 	            if (!$post_data['line_id'][$i]) {//新建才加关联关系
 	            	$table='hat_counting_policy_groups_hat_counting_policies_c';

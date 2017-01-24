@@ -91,6 +91,27 @@ $dictionary['HAA_Interfaces'] = array(
         'len' => 36,
         'size' => '20',
         ),
+      'document_id_c' => 
+      array (
+        'required' => false,
+        'name' => 'document_id_c',
+        'vname' => 'LBL_DOCUMENT_ID_C',
+        'type' => 'varchar',
+        'massupdate' => 0,
+        'no_default' => false,
+        'comments' => '',
+        'help' => '',
+        'importable' => 'true',
+        'duplicate_merge' => 'disabled',
+        'duplicate_merge_dom_value' => '0',
+        'audited' => false,
+        'inline_edit' => true,
+        'reportable' => true,
+        'unified_search' => false,
+        'merge_filter' => 'disabled',
+        'len' => '255',
+        'size' => '20',
+        ),
       'frameworks' => 
       array (
         'required' => true,

@@ -55,10 +55,10 @@ array (
           ),
           1 => 
           array (
-            'name' => 'templateCode',
+            'name' => 'template_code',
             'comment' => '',
             'studio' => 'visible',
-            'label' => 'LBL_TEMPLATECODE',
+            'label' => 'LBL_TEMPLATE_CODE',
           ),
         ),
         1 => 

@@ -6,6 +6,13 @@ array (
   array (
     'templateMeta' => 
     array (
+      'includes' => 
+      array (
+        0 => 
+        array (
+          'file' => 'modules/HAT_Counting_Lines/js/HAT_Counting_Lines_detailview.js',
+        ),
+      ),
       'form' => 
       array (
         'buttons' => 
@@ -38,6 +45,21 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_EDITVIEW_PANEL3' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+      /*  'LBL_EDITVIEW_PANEL1' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_EDITVIEW_PANEL2' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),*/
       ),
       'syncDetailEditViews' => true,
     ),
@@ -90,52 +112,40 @@ array (
             'label' => 'LBL_COUNTING_STATUS',
           ),
         ),
-        3 => 
+      ),
+      'lbl_editview_panel3' => 
+      array (
+        0 => 
         array (
           0 => 
           array (
-            'name' => 'asset_status',
-            'studio' => 'visible',
-            'label' => 'LBL_ASSET_STATUS',
-          ),
-          1 => 
-          array (
-            'name' => 'asset_location',
-            'studio' => 'visible',
-            'label' => 'LBL_ASSET_LOCATION',
-          ),
-        ),
-        4 => 
-        array (
-          0 => 
-          array (
-            'name' => 'asset_major',
-            'studio' => 'visible',
-            'label' => 'LBL_ASSET_MAJOR',
-          ),
-          1 => 
-          array (
-            'name' => 'oranization',
-            'studio' => 'visible',
-            'label' => 'LBL_ORANIZATION',
-          ),
-        ),
-        5 => 
-        array (
-          0 => 
-          array (
-            'name' => 'user_person',
-            'studio' => 'visible',
-            'label' => 'LBL_USER_PERSON',
-          ),
-          1 => 
-          array (
-            'name' => 'own_person',
-            'studio' => 'visible',
-            'label' => 'LBL_OWN_PERSON',
+            'name' => 'line_asset_items',
+            'label' => 'LBL_LINE_ASSET_ITEMS',
           ),
         ),
       ),
+  /*    'lbl_editview_panel1' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'line_items',
+            'label' => 'LBL_LINE_ITEMS',
+          ),
+        ),
+      ),
+      'lbl_editview_panel2' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'line_doc_items',
+            'label' => 'LBL_LINE_DOC_ITEMS',
+          ),
+        ),
+      ),*/
     ),
   ),
 );

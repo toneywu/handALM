@@ -18,12 +18,20 @@ function display_lines($focus, $field, $value, $view){
             hcp.data_populate_sql,
             hcp.description,
             hcp.split_type,
-            hcp.enabled_flag
+            hcp.enabled_flag,
+            hcp.hat_counting_policy_groups_id_c,
+            hcpg.name group_name,
+            hcp.hat_counting_task_templates_id_c,
+            hctt.name template_name
             FROM
             hat_counting_policies hcp,
-            hat_counting_policy_groups_hat_counting_policies_c h
+            hat_counting_policy_groups hcpg,
+            hat_counting_policy_groups_hat_counting_policies_c h,
+            hat_counting_task_templates hctt
             WHERE
             hcp.id = h.hat_counti9da1olicies_idb
+            and hcpg.id = h.hat_counti1658_groups_ida
+            and hctt.id=hcp.hat_counting_task_templates_id_c
             AND hcp.deleted = 0
             AND h.deleted = 0
             AND h.hat_counti1658_groups_ida ='".$focus->id."'";

@@ -6,31 +6,20 @@ array (
   array (
     'basic_search' => 
     array (
-      'templatecode' => 
+      'template_code' => 
       array (
         'type' => 'varchar',
         'studio' => 'visible',
-        'label' => 'LBL_TEMPLATECODE',
+        'label' => 'LBL_TEMPLATE_CODE',
         'width' => '10%',
         'default' => true,
-        'name' => 'templatecode',
+        'name' => 'template_code',
       ),
       'name' => 
       array (
         'name' => 'name',
         'default' => true,
         'width' => '10%',
-      ),
-      'relate_interface' => 
-      array (
-        'type' => 'relate',
-        'studio' => 'visible',
-        'label' => 'LBL_RELATE_INTERFACE',
-        'id' => 'HAA_INTERFACES_ID_C',
-        'link' => true,
-        'width' => '10%',
-        'default' => true,
-        'name' => 'relate_interface',
       ),
       'enabled_flag' => 
       array (
@@ -39,15 +28,6 @@ array (
         'label' => 'LBL_ENABLED_FLAG',
         'width' => '10%',
         'name' => 'enabled_flag',
-      ),
-      'description' => 
-      array (
-        'type' => 'text',
-        'label' => 'LBL_DESCRIPTION',
-        'sortable' => false,
-        'width' => '10%',
-        'default' => true,
-        'name' => 'description',
       ),
     ),
     'advanced_search' => 

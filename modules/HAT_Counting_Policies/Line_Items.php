@@ -20,13 +20,18 @@ function display_lines($focus, $field, $value, $view){
             hcp.group_clause,
             hcp.hat_counting_policies_id_c,
             hcp.seq,
-            hcps.name policy_name
+            hcps.name policy_name,
+            hcp.additional_logic,
+            hcp.hat_counting_task_templates_id_c,
+            hctt.name template_name
             FROM
             hat_counting_policy_lines hcp,
             hat_counting_policies hcps,
-            hat_counting_policies_hat_counting_policy_lines_c h
+            hat_counting_policies_hat_counting_policy_lines_c h,
+            hat_counting_task_templates hctt
             WHERE
             hcp.id = h.hat_countifea6y_lines_idb
+            and hcp.hat_counting_task_templates_id_c= hctt.id
             and hcps.id = h.hat_counti5649olicies_ida
             AND hcp.deleted = 0
             AND h.deleted = 0

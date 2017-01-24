@@ -52,7 +52,8 @@ class HAT_Counting_Task_Templates extends HAT_Counting_Task_Templates_sugar {
 		$this->id=parent::save($check_notify);
 		$post_data=$_POST;
 		$key="line_";
-
+		//var_dump($post_data);
+		
 		$line_count = isset($post_data[$key . 'deleted']) ? count($post_data[$key . 'deleted']) : 0;
         $j = 0;
         for ($i = 0; $i < $line_count; ++$i) {
@@ -62,9 +63,7 @@ class HAT_Counting_Task_Templates extends HAT_Counting_Task_Templates_sugar {
             } else {
                 foreach ($lines->field_defs as $field_def) {
                     $field_name = $field_def['name'];
-              print_r($field_name);
                     if (isset($post_data[$key . $field_name][$i])) {
-                    	print_r($post_data[$key . $field_name][$i]);
                         $lines->$field_name = $post_data[$key . $field_name][$i];
                     }
                 }

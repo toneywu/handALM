@@ -88,4 +88,7 @@ $mod_strings = array (
   'LBL_LOOKUP_TYPE' => '接口值类型',
   'LBL_ENABLED_FLAG' => '是否启用',
   'LBL_BTN_ADD_LINE' => '新增',
+  'LBL_ASSET_OPTIONS' => '映射资产字段',
+  'LBL_MODULE_DSP' => '模块描述',
+  'LBL_ON_DIFF_FLAG' => '是否计入差异',
 );

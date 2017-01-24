@@ -1,5 +1,5 @@
 <?php
-// created: 2017-01-03 09:35:10
+// created: 2017-01-11 10:02:17
 $subpanel_layout['list_fields'] = array (
   'task_number' => 
   array (
@@ -12,7 +12,7 @@ $subpanel_layout['list_fields'] = array (
   array (
     'vname' => 'LBL_NAME',
     'widget_class' => 'SubPanelDetailViewLink',
-    'width' => '12%',
+    'width' => '8%',
     'default' => true,
   ),
   'counting_person' => 
@@ -33,7 +33,7 @@ $subpanel_layout['list_fields'] = array (
     'type' => 'enum',
     'studio' => 'visible',
     'vname' => 'LBL_COUNTING_TASK_STATUS',
-    'width' => '7%',
+    'width' => '8%',
     'default' => true,
   ),
   'total_counting' => 
@@ -97,7 +97,7 @@ $subpanel_layout['list_fields'] = array (
     'type' => 'int',
     'studio' => 'visible',
     'vname' => 'LBL_ACTUAL_ADJUST_COUNT',
-    'width' => '10%',
+    'width' => '8%',
     'default' => true,
   ),
   'edit_button' => 
@@ -106,6 +106,14 @@ $subpanel_layout['list_fields'] = array (
     'widget_class' => 'SubPanelEditButton',
     'module' => 'HAT_Counting_Tasks',
     'width' => '4%',
+    'default' => true,
+  ),
+  'remove_button' => 
+  array (
+    'vname' => 'LBL_REMOVE',
+    'widget_class' => 'SubPanelRemoveButton',
+    'module' => 'HAT_Counting_Tasks',
+    'width' => '5%',
     'default' => true,
   ),
 );

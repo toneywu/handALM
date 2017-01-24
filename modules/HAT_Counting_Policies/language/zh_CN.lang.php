@@ -76,4 +76,6 @@ $mod_strings = array (
   'LBL_DATA_POPULATE_SQL' => '数据抽取逻辑',
   'LBL_ENABLED_FLAG' => '是否启用',
   'LBL_BTN_ADD_LINE' => '新增',
+  'LBL_POLICY_GROUP' => '盘点策略组',
+  'LBL_TASK_TEMPLATES' => '盘点任务模版',
 );

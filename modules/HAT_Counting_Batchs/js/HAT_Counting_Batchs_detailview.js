@@ -3,13 +3,11 @@ $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialo
 
 function createTask() {
 	var record=$("input[name='record']").val();
-
 	$.ajax({
 		url: 'index.php?to_pdf=true&module=HAT_Counting_Batchs&action=createToTasks', 
 		data:"&record="+record,
 		type:"POST",
 		success: function (data) {
-
 			if (data=="0"){
 				var title_txt='提示';
 				var html="";

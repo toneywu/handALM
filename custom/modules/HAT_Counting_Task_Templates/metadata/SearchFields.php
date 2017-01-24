@@ -1,5 +1,5 @@
 <?php
-// created: 2017-01-12 16:36:48
+// created: 2017-01-16 10:51:26
 $searchFields['HAT_Counting_Task_Templates'] = array (
   'name' => 
   array (

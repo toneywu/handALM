@@ -1,6 +1,6 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-require_once('include/MVC/View/views/view.edit.php');
+require_once('include/MVC/View/views/view.Edit.php');
 require_once('modules/HAT_Counting_Tasks/populateLineCountInfo.php');
 class HAT_Counting_TasksViewEdit extends ViewEdit
 {
@@ -21,7 +21,12 @@ class HAT_Counting_TasksViewEdit extends ViewEdit
 			$bean_framework_name = $beanFramework->name;
 		}
 		$this->ss->assign('FRAMEWORK_C',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id_c'));
+		
 		parent::display();
+		/*if($this->bean->id){
+			var_dump("expression");
+			$this->getAttrValue($this->bean->id);
+		}*/
 		$countInfo= new CountInfo();
 		$count=$countInfo->populateLineCountInfo($this->bean->id);
 		$flag=$this->bean->upinterface_flag==1?"true":"false";
@@ -45,11 +50,11 @@ if($this->bean->id==''){
 	echo "<script>
 	$('#manual_add_flag').val(1);
 	$('#manual_add_flag').attr('checked',true);
-	</script>";
+</script>";
 }
 echo '<script>
-	$("#upinterface_flag").val("'.$this->bean->upinterface_flag.'");
-	$("#upinterface_flag").attr("checked",'.$flag.');
+$("#upinterface_flag").val("'.$this->bean->upinterface_flag.'");
+$("#upinterface_flag").attr("checked",'.$flag.');
 </script>';
 echo '<input  id="location_attr" value="" type="hidden">';
 echo '<input  id="oranization_attr"  type="hidden" value="">';
@@ -77,5 +82,16 @@ function populateBatchInfo(){
 		$this->bean->offline_flag=$bean_request->offline_flag;
 	}
 }
+
+/*function getAttrValue($id){
+	$bean_task=BeanFactory::getBean("HAT_Counting_Tasks",$id);
+	for ($i=1; $i<16 ; $i++) { 
+		$att="attribute".$i;
+		$attr=$bean_task->$att;
+		echo '<script>
+		$("#attribute'.$i.'").val("'.$attr.'");
+	</script>';
+}
+}*/
 
 }

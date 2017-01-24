@@ -74,7 +74,6 @@ $mod_strings = array (
   'LBL_FRAMEWORKS_HAA_FRAMEWORKS_ID' => '业务框架',
   'LBL_FRAMEWORKS' => '业务框架',
   'LBL_TEMPLATE_CODE' => '模板代码',
-  'LBL_TEMPLATECODE' => '模板代码',
   'LBL_RELATE_INTERFACE_HAA_INTERFACES_ID' => '关联接口',
   'LBL_RELATE_INTERFACE' => '关联接口',
   'LBL_ENABLED_FLAG' => '是否启用',

@@ -1,5 +1,5 @@
 <?php
- // created: 2017-01-15 21:32:22
+ // created: 2017-01-13 16:43:18
 $layout_defs["HAT_Counting_Task_Templates"]["subpanel_setup"]['hat_counting_task_templates_hat_counting_template_details'] = array (
   'order' => 100,
   'module' => 'HAT_Counting_Template_Details',
@@ -10,7 +10,7 @@ $layout_defs["HAT_Counting_Task_Templates"]["subpanel_setup"]['hat_counting_task
   'get_subpanel_data' => 'hat_counting_task_templates_hat_counting_template_details',
   'top_buttons' => 
   array (
-    0 => 
+    /*0 => 
     array (
       'widget_class' => 'SubPanelTopButtonQuickCreate',
     ),
@@ -18,6 +18,6 @@ $layout_defs["HAT_Counting_Task_Templates"]["subpanel_setup"]['hat_counting_task
     array (
       'widget_class' => 'SubPanelTopSelectButton',
       'mode' => 'MultiSelect',
-    ),
+    ),*/
   ),
 );
