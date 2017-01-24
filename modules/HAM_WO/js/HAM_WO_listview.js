@@ -7,10 +7,8 @@ function getUrlParam(name) {
 $(document).ready(function(){
 	var loaded = false; 
 	if (!loaded) { 
-		//var return_msg_json=$("input[name=current_query_by_page]").val();
-		//var  json_obj = $.parseJSON(return_msg_json);
 		var return_message=getUrlParam("error_message");
-			if(typeof return_message!="undefined" && return_message!=""){
+			if(typeof return_message!="undefined" && return_message!=""&return_message!=null){
 				loaded=true;
 				jQuery.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js").done(function() {
 					BootstrapDialog.show({
@@ -22,7 +20,7 @@ $(document).ready(function(){
 											dialogItself.close();
 											return_message="";
 											$("input[name=error_message]").val("");
-											//window.location.href="index.php?module=HAM_WO&action=index";
+											window.location.href="index.php?module=HAM_WO&action=index";
 										}
 									}]
 								});
