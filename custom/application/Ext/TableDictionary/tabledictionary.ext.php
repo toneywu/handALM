@@ -8,6 +8,16 @@ include('custom/metadata/aos_products_haa_uom_conversions_1MetaData.php');
 
  
  //WARNING: The contents of this file are auto-generated
+include('custom/metadata/haa_integration_mapping_def_headers_haa_integration_mapping_def_linesMetaData.php');
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
+include('custom/metadata/haa_integration_system_def_headers_haa_integration_system_def_linesMetaData.php');
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
 include('custom/metadata/haa_interfaces_haa_interface_logsMetaData.php');
 
 

@@ -1,0 +1,6 @@
+<?php
+// created: 2017-01-19 17:24:00
+$mod_strings = array (
+  'LBL_EDITVIEW_PANEL1' => '通用接口-接入源系统接口列',
+  'LBL_HAA_INTEGRATION_SYSTEM_DEF_HEADERS_HAA_INTEGRATION_SYSTEM_DEF_LINES_FROM_HAA_INTEGRATION_SYSTEM_DEF_LINES_TITLE' => '通用接口-接入源系统接口列		',
+);
