@@ -18,10 +18,6 @@ if($sql==''&&$id!=''){
 	}
 }
 $psql=$sql;
-/*$rt=strstr($sql,'from');         
-if($rt == false){
-	$rt=strstr($sql,'FROM');    
-}*/
 $ln = 0;
 $rt = 'select count(*) data_count from ('.$sql.') dc';
 //echo $rt;
@@ -35,6 +31,10 @@ if($offsetT > $ln){
 }
 if($offsetF < 1){
 	$offsetF = 1;
+}
+$end_offset = intval($ln/25)*25;
+if($ln%25==0){
+	$end_offset = $end_offset-25;
 }
 $sql .=' limit '.$offset.',25';
 $result=$db->query($sql);
@@ -122,7 +122,7 @@ $html.='<table class="list view" width="100%" cellspacing="0" cellpadding="0" bo
 			.'						<button type="button" title="下页" class="button" onclick="onJumpPage('.($offset+25).')">'
 			.'							<img src="themes/SuiteR_HANDALM/images/next.gif?v=6T2wqZkzRRtQXSbbOJRC2A" alt="下页" border="0" align="absmiddle">'
 			.'						</button>'
-			.'						<button type="button" title="末页" class="button" onclick="onJumpPage('.(intval($ln/25)*25).')">'
+			.'						<button type="button" title="末页" class="button" onclick="onJumpPage('.$end_offset.')">'
 			.'							<img src="themes/SuiteR_HANDALM/images/end.gif?v=6T2wqZkzRRtQXSbbOJRC2A" alt="末页" border="0" align="absmiddle">'
 			.'						</button>';
 		}else if ($offsetT==$ln) {
@@ -150,7 +150,7 @@ $html.='<table class="list view" width="100%" cellspacing="0" cellpadding="0" bo
 			.'						<button type="button" title="下页" class="button" onclick="onJumpPage('.($offset+25).')">'
 			.'							<img src="themes/SuiteR_HANDALM/images/next.gif?v=6T2wqZkzRRtQXSbbOJRC2A" alt="下页" border="0" align="absmiddle">'
 			.'						</button>'
-			.'						<button type="button" title="末页" class="button" onclick="onJumpPage('.(intval($ln/25)*25).')">'
+			.'						<button type="button" title="末页" class="button" onclick="onJumpPage('.$end_offset.')">'
 			.'							<img src="themes/SuiteR_HANDALM/images/end.gif?v=6T2wqZkzRRtQXSbbOJRC2A" alt="末页" border="0" align="absmiddle">'
 			.'						</button>';
 		}

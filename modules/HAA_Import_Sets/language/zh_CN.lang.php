@@ -81,4 +81,5 @@ $mod_strings = array (
   'LBL_DOCUMENT_ID_C' => '文档ID',
   'LBL_VALIDATE' => '验证',
   'LBL_IMPORT' => '导入',
+  'LBL_DATAS_PAGE_NUM_LIMIT' => '条数限制',
 );

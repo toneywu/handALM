@@ -59,24 +59,6 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-       /* 'useTabs' => true,
-      'tabDefs' => 
-      array(*/
-        /*'LBL_IMPORT_DATAS1' => 
-        array (
-          'newTab' => true,
-          'panelDefault' => 'expanded',
-        ),
-        'LBL_IMPORT_DATAS2' => 
-        array (
-          'newTab' => true,
-          'panelDefault' => 'expanded',
-        ),*/
-       /* 'LBL_IMPORT_DATAS3' => 
-        array (
-          'newTab' => true,
-          'panelDefault' => 'expanded',
-        ),*//*),*/
       ),
     ),
     'panels' => 
@@ -136,8 +118,8 @@ array (
         array (
           0 => 
           array (
-            'name' => 'document_id_c',
-            'label' => 'LBL_DOCUMENT_ID_C',
+            'name' => 'datas_page_num_limit',
+            'label' => 'LBL_DATAS_PAGE_NUM_LIMIT',
           ),
           1 => 'description',
         ),
@@ -153,39 +135,6 @@ array (
           ),
         ),
       ),
-      /*'lbl_import_datas1' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            'name' => 'import_datas',
-            'label' => 'LBL_IMPORT_DATAS',
-          ),
-        ),
-      ),
-      'lbl_import_datas2' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            'name' => 'import_datas',
-            'label' => 'LBL_IMPORT_DATAS',
-          ),
-        ),
-      ),*/
-      /*'lbl_import_datas3' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            'name' => 'import_datas',
-            'label' => 'LBL_IMPORT_DATAS',
-          ),
-        ),
-      ),*/
     ),
   ),
 );

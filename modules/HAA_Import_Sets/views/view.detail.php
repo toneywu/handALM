@@ -42,47 +42,54 @@ class HAA_Import_SetsViewDetail extends ViewDetail {
 
     function displayDocument(){
         $document = BeanFactory::getBean('Documents', $this->bean->document_id_c);
-        echo "<script>setDocName('".$document->document_name."');</script>";
+        echo "<script>setDocId('".$this->bean->document_id_c."');
+                      setDocName('".$document->document_name."');</script>";
     }
 
     function displayTabsHtml(){
         echo '<script src="modules/HAA_Import_Sets/js/detail_import_datas.js"></script>	
         <div id="HAA_Import_Datas_detailview_tabs" class="yui-navset detailview_tabs yui-navset-top">
             <ul class="yui-nav">
-                <li id="litab0" title="active" class="selected">
-                    <a id="tab0" href="javascript:void(0)" onclick="tabChange(0)"><em>全部内容</em></a>
-                </li>
-                <li id="litab1" title="">
-                    <a id="tab1" href="javascript:void(0)" onclick="tabChange(1)"><em>错误数据</em></a>
+                <li id="litab1" title="active" class="selected">
+                    <a id="tab1" href="javascript:void(0)" onclick="tabChange(1)"><em>全部内容</em></a>
                 </li>
                 <li id="litab2" title="">
-                    <a id="tab2" href="javascript:void(0)" onclick="tabChange(2)"><em>警告数据</em></a>
+                    <a id="tab2" href="javascript:void(0)" onclick="tabChange(2)"><em>错误数据</em></a>
+                </li>
+                <li id="litab3" title="">
+                    <a id="tab3" href="javascript:void(0)" onclick="tabChange(3)"><em>警告数据</em></a>
                 </li>
             </ul>
             <div class="yui-content">
-                <div id="tabcontent0">
+                <div id="tabcontent1">
                     <div id="detailpanel_1" class="detail view  detail508 expanded">
                         <table id="LBL_IMPORT_DATAS1" class="panelContainer" cellspacing="0">
                             <thead id="tab_thead1"></thead>
+                            '.$this->displayPagingHtml(1).'
                             <tbody id="tab_tbody1"></tbody>
+                            '.$this->displayPagingHtml(1).'
                         </table>
                     </div>
                 </div>
-                <div id="tabcontent1" class="yui-hidden">
+                <div id="tabcontent2" class="yui-hidden">
                     <div id="detailpanel_2" class="detail view  detail508 expanded">
                     <!-- PANEL CONTAINER HERE.. -->
                     <table id="LBL_IMPORT_DATAS2" class="panelContainer" cellspacing="0">
                             <thead id="tab_thead2"></thead>
+                            '.$this->displayPagingHtml(2).'
                             <tbody id="tab_tbody2"></tbody>
+                            '.$this->displayPagingHtml(2).'
                     </table>
                     </div>
                 </div>
-                <div id="tabcontent2" class="yui-hidden">
+                <div id="tabcontent3" class="yui-hidden">
                     <div id="detailpanel_3" class="detail view  detail508 expanded">
                     <!-- PANEL CONTAINER HERE.. -->
                     <table id="LBL_IMPORT_DATAS3" class="panelContainer" cellspacing="0">
                             <thead id="tab_thead3"></thead>
+                            '.$this->displayPagingHtml(3).'
                             <tbody id="tab_tbody3"></tbody>
+                            '.$this->displayPagingHtml(3).'
                     </table>
                     </div>
                 </div>
@@ -91,8 +98,30 @@ class HAA_Import_SetsViewDetail extends ViewDetail {
         ';
         if($this->bean->document_id_c){
             echo '<script>var datas ='. getImportDatas($this->bean->document_id_c) .';</script>';
-            echo '<script>setTabHead(1);setTabHead(2,"ERROR");setTabHead(3,"WARN");</script>';
+            echo '<script>setTabHead(1);setTabHead(2);setTabHead(3);</script>';
+        }else{
+            echo '<script>hidePageHtml();</script>';
         }
+    }
+
+    function displayPagingHtml($n){
+        $html = "<tr  class='pagination' role='presentation'>"
+                .'  <td class="paging" colspan="1" align="right">';
+        $html .='                   <button type="button" title="首页" class="s_button'.$n.'" disabled="">'
+            .'                          <img src="themes/SuiteR_HANDALM/images/start_off.gif?v=6T2wqZkzRRtQXSbbOJRC2A" alt="首页" border="0" align="absmiddle">'
+            .'                      </button>'
+            .'                      <button type="button" title="上页" class="p_button'.$n.'" disabled="">'
+            .'                          <img src="themes/SuiteR_HANDALM/images/previous_off.gif?v=6T2wqZkzRRtQXSbbOJRC2A" alt="上页" border="0" align="absmiddle">'
+            .'                      </button>'
+            .'                      <span class="pageNumbers'.$n.'"></span>'  
+            .'                      <button type="button" title="下页" class="n_button'.$n.'" disabled="">'
+            .'                          <img src="themes/SuiteR_HANDALM/images/next_off.gif?v=6T2wqZkzRRtQXSbbOJRC2A" alt="下页" border="0" align="absmiddle">'
+            .'                      </button>'
+            .'                      <button type="button" title="末页" class="e_button'.$n.'" disabled="">'
+            .'                          <img src="themes/SuiteR_HANDALM/images/end_off.gif?v=6T2wqZkzRRtQXSbbOJRC2A" alt="末页" border="0" align="absmiddle">'
+            .'                      </button>';
+        $html.='</td></tr>';   
+        return $html;    
     }
 
     /*function getImportDatas($doc_id){

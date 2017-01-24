@@ -9,7 +9,6 @@ function file_change(){
   $("#document_name").val($("#filename_file").val());
 }
 function upload_file(){
-  $("#document_id1").val($("#document_id_c").html());
   if(!$("#document_name").val()){
     alert("请先选择文件！");
     return;
@@ -18,7 +17,7 @@ function upload_file(){
   var _form = $("#upload_form");
   var options={  
         //target : file_name,    // 把服务器返回的内容放入id为output的元素中  
-        //beforeSubmit : showRequest,    // 提交前的回调函数  
+        //beforeSubmit : check_file,    // 提交前的回调函数  
         success : write_back_document_id,    // 提交后的回调函数  
         url : 'index.php?to_pdf=true&module=HAA_Import_Sets&action=save_document&id='+$("input[name='record']").val(),    //默认是form的action，如果申明，则会覆盖  
         //type : 'GET',    // 默认值是form的method("GET" or "POST")，如果声明，则会覆盖  
@@ -37,7 +36,8 @@ function write_back_document_id(data){
     var result_data = $.parseJSON(data);
     //var doc_id = data.substring(data.indexOf("document_id:")+12);
     if(result_data["result_status"]=='S'){
-      $("#document_id_c").html(result_data["document_id"]);
+      $("#document_id1").val(result_data["document_id"]);
+      $(".pagination").show();
       refresh_import_datas();
     }else if(result_data["result_status"]=='W'){
       alert(result_data["msg_data"]);

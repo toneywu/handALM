@@ -88,8 +88,8 @@ array (
         array (
           0 => 
           array (
-            'name' => 'document_id_c',
-            'label' => 'LBL_DOCUMENT_ID_C',
+            'name' => 'datas_page_num_limit',
+            'label' => 'LBL_DATAS_PAGE_NUM_LIMIT',
           ),
           1 => 'description',
         ),
