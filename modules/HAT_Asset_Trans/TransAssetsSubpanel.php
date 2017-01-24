@@ -18,7 +18,7 @@ function get_asset_trans_by_asset($params) {
 
     $return_array['select'] = "SELECT hat_asset_trans.*";
     $return_array['from'] = " FROM hat_asset_trans";
-    $return_array['where'] = " WHERE 1=1 AND (hat_asset_trans.asset_id='".$parent_id."')";
+    $return_array['where'] = " WHERE (hat_asset_trans.trans_status='CLOSED' OR trans_status='AUTO_TRANSACTED') AND (hat_asset_trans.asset_id='".$parent_id."')";
 							  //会自动加入deleted字段
     $return_array['join'] = "";
     $return_array['join_tables'] = "";

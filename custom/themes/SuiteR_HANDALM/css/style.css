@@ -1,5 +1,10 @@
 .navbar-inverse {
-	background-color: #245a86 !important;
+	background-color: #0079bf !important;
+}
+
+.moduleTitle h2 {
+	font-size: 2em; 
+	font-weight: 100;
 }
 
 /*Start of Cuxtomization*/
@@ -68,7 +73,8 @@ li.topnav:hover{
 }
 [id^=list_subpanel_] button[disabled] {
 	border: 1px none;
-	background-color: #F3F9FF;
+	/*background-color: #F3F9FF;*/
+	background-color: none;
 	cursor: auto;
 }
 .edit h4 {
@@ -83,33 +89,48 @@ li.topnav:hover{
 	margin: 0.5em 0;
 }
 
-#CANCEL_HEADER, #search_form_clear, #CANCEL_FOOTER{
+
+
+/*将按钮变轻便*/
+.button, input[type=submit], input[type=button] {
+	background-color:#f8faff;
+	border:#3C8DBC 1px solid;
+	color:#3C8DBC;
+	border-radius:5px;
+/*	background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(40%, #fff), color-stop(90%, #e0e0e0), color-stop(100%, #fff))
+*/}
+/*突出提交按钮*/
+#SAVE_HEADER,#SAVE_FOOTER,#search_form_submit,#save_and_continue,#Login{
+	background-color:#00A2FF;
+	color:#fff;
+/*	background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #75bbf7), color-stop(40%, #3da8fd), color-stop(90%, #2b8ad6), color-stop(100%, #2196F3));
+*/}
+#SAVE_HEADER:hover,#SAVE_FOOTER:hover,#search_form_submit:hover,#save_and_continue:hover,#Login:hover{
+	/*突出提交按钮(绿色）另btn_save为客户化标签*/
+	background-color:#00b359;
+	color:#fff;
+}
+#SAVE_HEADER.disabled,#SAVE_FOOTER.disabled,#search_form_submit.disabled,#save_and_continue.disabled,#Login.disabled{
+	/*突出提交按钮(绿色）另btn_save为客户化标签*/
+	color:#ccc;
+	border:#ccc 1px solid;
+}
+
+/*#CANCEL_HEADER, #search_form_clear, #CANCEL_FOOTER{
 	background-color:#8bbfde;
 }
 #CANCEL_HEADER:hover, #search_form_clear:hover, #CANCEL_FOOTER:hover{
 	background-color:#286090;
-}
-
-/*突出提交按钮*/
-#SAVE_HEADER,#SAVE_FOOTER,#search_form_submit,#save_and_continue,#Login{
-	background-color:#00A2FF;
-}
-#SAVE_HEADER:hover,#SAVE_FOOTER:hover,#search_form_submit:hover,#save_and_continue:hover,#Login:hover{
-	/*突出提交按钮(绿色）另btn_save为客户化标签*/
-	background-color:#00b359;
-}
-#SAVE_HEADER.disabled,#SAVE_FOOTER.disabled,#search_form_submit.disabled,#save_and_continue.disabled,#Login.disabled{
-	/*突出提交按钮(绿色）另btn_save为客户化标签*/
-	background-color:#ccc;
-}
-
+}*/
 
 
 .paginationActionButtons .button[disabled], .paginationChangeButtons button[disabled],.paginationChangeButtons  input[type="submit"][disabled],.paginationChangeButtons  input[type="reset"][disabled],.paginationChangeButtons  input[type="button"][disabled] {
 	background-color:#fdfdff;/*换页按钮：无效的*/
+	background-color:none;
 }
 .paginationActionButtons .button[disabled]:hover .paginationChangeButtons button[disabled]:hover,.paginationChangeButtons  input[type="submit"][disabled]:hover,.paginationChangeButtons  input[type="reset"][disabled],.paginationChangeButtons  input[type="button"][disabled]:hover {
 	background-color:#fdfdff;/*换页按钮：无效的*/
+	background-color:none;
 }
 
 .paginationActionButtons .button,.paginationChangeButtons .button, .paginationChangeButtons input[type=submit], .paginationChangeButtons input[type=button] {
@@ -127,6 +148,7 @@ input[type=text], select{
 
 .id-ff .button { /*popup button*/
 	background-color: #eeeeee;
+	border: none;
 }
 
 /*.button, input[type=submit], input[type=button] {
@@ -179,20 +201,24 @@ input[type=text], select{
 	background-color: #EDF6FF;padding:10px;
 }
 
-.lineEditor .button, .lineEditor input[type=button]{
-	background-color:#eee;
-	padding: 4px 8px;
-}
+
 
 .lineEditor .button, .lineEditor input[type=button] {
-	background-color:#8BBFDE;
-	padding: 4px 8px;
+/*	background-color:#8BBFDE;
+*/	padding: 4px 8px;
 }
+
+.lineEditor .input_group .button, .lineEditor .input_group input[type=button] {
+	background-color:#8BBFDE;
+	border: none;
+}
+
 .lineEditor input[readonly] {
 	background-color: #efefef;
 }
 .lineEditor .btn_save {
-	background-color: #3C8DBC;
+	background-color: #00a2ff;
+	color:#fff;
 }
 .lineEditor .btn_save:hover{
 	background-color: #00b359;
@@ -214,12 +240,12 @@ input[type=text], select{
 	min-width:220px;
 }
 .currentTab {/*頂部菜单，突出当前的模块*/
-	/*background-color:#609DC1;
-	padding:12px 10px 12px 10px;
-	margin:0px 5px 0 3px;*/
-	background: linear-gradient(rgb(138, 196, 255) 1%,rgb(0, 139, 206) 80%, rgb(54, 127, 202));
+/*	background: linear-gradient(rgb(138, 196, 255) 1%,rgb(0, 139, 206) 80%, rgb(54, 127, 202));
     padding: 11px 11px 17px 11px;
-    border-radius: 10px 10px 0 0;
+    border-radius: 10px 10px 0 0;*/
+    background-color:rgba(92, 166, 226, 0.59);
+    border-radius:10px;
+    padding:11px;
 }
 .datetimecombo_time, .datetimecombo_time { /*默认的时间显示选择框上下不对齐*/
 	margin:-5px 0 0 0;

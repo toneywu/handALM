@@ -52,14 +52,16 @@ class HAT_Asset_Trans extends HAT_Asset_Trans_sugar {
 		$line_fields['DESCRIPTION'] =html_entity_decode($this->description);
 
 		$current_bean = BeanFactory::getBean("HAT_Asset_Trans", $this->id);
-		$HATB_bean = BeanFactory::getBean("HAT_Asset_Trans_Batch", $current_bean->batch_id);
-		$HA_bean = BeanFactory::getBean("HAT_Assets", $current_bean->asset_id);
 
+		$HA_bean = BeanFactory::getBean("HAT_Assets", $current_bean->asset_id);
+		$line_fields['ASSET'] = '<a href="index.php?module=HAT_Assets&action=DetailView&record='.$HA_bean->id.'">'.$HA_bean->name."</a>";
+
+		$HATB_bean = BeanFactory::getBean("HAT_Asset_Trans_Batch", $current_bean->batch_id,array(),false);//显示已经删除的头，以防找不到头
+		$line_fields['HEADER'] = "";
 		if (!empty($HATB_bean->tracking_number)){
 			$line_fields['HEADER'] ="[".$HATB_bean->tracking_number."]";
 		}
-		$line_fields['ASSET'] = '<a href="index.php?module=HAT_Assets&action=DetailView&record='.$HA_bean->id.'">'.$HA_bean->name."</a>";
-		$line_fields['HEADER'] .= '<a href="index.php?module=HAT_Asset_Trans_Batch&action=DetailView&record='.$HATB_bean->id.'">'.$HATB_bean->name."</a>";
+		$line_fields['HEADER'] = '<a href="index.php?module=HAT_Asset_Trans_Batch&action=DetailView&record='.$HATB_bean->id.'">'.$HATB_bean->name."</a>";
 
 		return $line_fields;
 	}

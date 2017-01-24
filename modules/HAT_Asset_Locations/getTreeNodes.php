@@ -36,8 +36,9 @@ require_once('modules/HAT_Asset_Locations/getTreeNodeList.php');//所有的默�
 //require_once('modules/HAT_Asset_Locations/getTreeviewSearch.php');//所有附加的搜索这个文件进行处理
 
 
-if($_REQUEST['type']=="location") { //如果是Locationg来源，需要读取子位置和子资产（Asset来源只需要子资产）
-        $sel_sub_location ="SELECT 
+if($_REQUEST['type']=="location") { //如果是Location来源，需要读取子位置和子资产（Asset来源只需要子资产）
+    //先加载所有的Location列表
+        $sel_sub_location ="SELECT
                             `hat_asset_locations`.id,
                             `hat_asset_locations`.name,
                             `hat_asset_locations`.location_title,
@@ -46,12 +47,16 @@ if($_REQUEST['type']=="location") { //如果是Locationg来源，需要读取子
                             hat_asset_locations,
                             ham_maint_sites
                           WHERE hat_asset_locations.deleted = 0";
+          //SQL Statement没有加载完成，下面继续拼接SQL,包括以下可能的场景
+          //ham_maint_sites_id
+          //haa_frameworks_id
+          //parent_location_id
         if (isset($_REQUEST['site_id'])&&$_REQUEST['site_id']!="undefined"&&$_REQUEST['site_id']!="") {
-          //只列出当前Site下的地点
+          //如果限制SITE_ID，只列出当前Site下的地点
           $sel_sub_location .= " AND hat_asset_locations.`ham_maint_sites_id` = `ham_maint_sites`.id AND hat_asset_locations.`ham_maint_sites_id` = '".$_REQUEST['site_id']."'";
         } else {
-         //取出当前业务框架下的所有地点+所有没有Site的地点
-          $sel_sub_location .= " AND (hat_asset_locations.`ham_maint_sites_id`= '' OR (hat_asset_locations.`ham_maint_sites_id` = `ham_maint_sites`.id AND ham_maint_sites.`haa_frameworks_id`='".$current_framework."'))";
+         //如果没有限制SITE_ID则，取出当前业务框架下的所有地点+所有没有Site的地点
+          $sel_sub_location .= " AND (hat_asset_locations.`ham_maint_sites_id`= '' OR hat_asset_locations.`ham_maint_sites_id` is NULL OR (hat_asset_locations.`ham_maint_sites_id` = `ham_maint_sites`.id AND ham_maint_sites.`haa_frameworks_id`='".$current_framework."'))";
         }
 
         if (isset($_REQUEST['id'])) {//如果指明了当前的ID
