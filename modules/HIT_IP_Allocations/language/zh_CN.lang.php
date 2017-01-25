@@ -104,5 +104,5 @@ $mod_strings = array (
   'LBL_STATUS'=>'状态',
   'LBL_ENABLE_ACTION'=>'失效?',
   'LBL_BROADBAND_TYPE'=>'带宽变量',
-  
+  'LBL_TRANS_DATE'=>'事务处理日期',
 );

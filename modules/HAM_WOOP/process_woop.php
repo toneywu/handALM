@@ -42,7 +42,7 @@ $include_reject_wo=$_GET['include_reject_wo_val'];
 	}
 	$latest_woop_bean = BeanFactory :: getBean('HAM_WOOP')->retrieve_by_string_fields(array (
 													'id' => $latest_woop_id));
-//有和工序回退 工单回退  分别在if分支和 else分支里面
+//工序回退 工单回退  分别在if分支和 else分支里面
 if($include_reject_wo=='1'){
 	//找到要驳回和当前最大的工序之间的工序
 	$reject_woop_bean = BeanFactory :: getBean('HAM_WOOP', $woop_id);
@@ -398,7 +398,9 @@ if($include_reject_wo=='1'){
 function reverse_asset($woop_id, $wo_id, $include_reject_wo) {
 	global $db;
 	//判断需要回退的资产事务处理
+	//1 工序退回，0工单退回
 	if ($include_reject_wo==0) {//退回到固定工序
+		//搜索当前
 		$changed_assets_sql =  'SELECT
 							  hat.id hat_id, hat.*,
 							  GROUP_CONCAT(DISTINCT hat.asset_id) asset_id_group
@@ -443,12 +445,12 @@ function reverse_asset($woop_id, $wo_id, $include_reject_wo) {
 
 	//基于工序，找到所有变化的资产，注意：不同资产可能来源于多个工序，同一资产也可能在同一工序中发生变化，因此是找到最早的一个资产事务处理记录
 
-
 		$changed_assets_result = $db->query($changed_assets_sql);
 
 		while ($changed_asset_line = $db->fetchByAssoc($changed_assets_result)) {
 			$changed_asset_bean = BeanFactory :: getBean('HAT_Assets', $changed_asset_line["asset_id"]);
 			if ($changed_asset_bean) {
+				//将资产用事务处理行中的Current信息进行还原
 				$changed_asset_bean->using_org_id = $changed_asset_line['current_using_org_id'];
 				$changed_asset_bean->using_person_id = $changed_asset_line['current_using_person_id'];
 				$changed_asset_bean->using_person_desc = $changed_asset_line['current_using_person_desc'];
@@ -462,6 +464,13 @@ function reverse_asset($woop_id, $wo_id, $include_reject_wo) {
 	            $changed_asset_bean->parent_asset_id = $changed_asset_line['current_parent_asset_id'];
 
 				$changed_asset_bean->save();
+
+				if ($changed_asset_bean->enable_it_ports==1) {
+					//如果当前资产为IT设备则进一步判断当前IT设备对应的机柜分配信息
+					//基于当前设备找到事务处理日期之前的机柜分配
+
+				}
+
 			}
 
 		}

@@ -66,23 +66,7 @@ function save_lines($post_data, $header, $key = ''){
                         save_rack_allocations($trans_line, $header);
                     }
                     save_asset_lines($trans_line);//保存行上的资产信息
-
-                    //下面这个分支从save_lines_status直接COPY过来的，但其实有些多余，因为目前在EditView信息不能控制accutral_execution_date字段，也就是肯定走的是Else这个分支，不过这条语句继续保留。在后面Enhancement中可能会在EditView可控制时间
-                    if (empty($_GET['accutral_execution_date'])) {
-                        //大多数情况下是没有指定日期的，那就记录为实时的时间
-                        $trans_line->acctual_complete_date = $timedate->nowDB();//将行上的事务处理时间标记为当时时间
-                    } else {
-                        //如果指定了日期那就需按指定日期进行记录，但如果指定了未来时间，仍然记录的是当前时间。也就是用户只能指定过去或是现在。
-                        //进行比较后判断按什么日期进行操作
-                        $acctual_complete_date = $timedate->to_db_date_time($_GET['accutral_execution_date'],$_GET['accutral_execution_date']);
-                        if (strtotime($acctual_complete_date)>strtotime($timedate->nowDB())) {
-                            //如果是未来时间 ，则以当前时间代替
-                            $trans_line->acctual_complete_date = $timedate->nowDB();//将行上的事务处理时间标记为当时时间
-                        } else {
-                            $trans_line->acctual_complete_date = $_GET['accutral_execution_date'];
-                        }
-                    }
-
+                    $trans_line->acctual_complete_date = getTransactionDate();
                     $trans_line->trans_status = 'CLOSED';//将当前行标记为结束
                 } else {
                     $trans_line->trans_status = $header->asset_trans_status;//父状态
@@ -98,6 +82,27 @@ function save_lines($post_data, $header, $key = ''){
     }
 }
 
+function getTransactionDate() {
+    global $timedate, $transacton_date;
+    if (empty($transacton_date)) {
+        //如果当前处理时间还没有衩判断过
+        if (empty($_GET['accutral_execution_date'])) {
+            //大多数情况下是没有指定日期的，那就记录为实时的时间
+            $transacton_date = $timedate->nowDB();//将行上的事务处理时间标记为当时时间
+        } else {
+            //如果指定了日期那就需按指定日期进行记录，但如果指定了未来时间，仍然记录的是当前时间。也就是用户只能指定过去或是现在。
+            //进行比较后判断按什么日期进行操作
+            $transacton_date = $timedate->to_db_date_time($_GET['accutral_execution_date'],$_GET['accutral_execution_date']);
+            if (strtotime($transacton_date)>strtotime($timedate->nowDB())) {
+                //如果是未来时间 ，则以当前时间代替
+                $transacton_date = $timedate->nowDB();//将行上的事务处理时间标记为当时时间
+            } else {
+                $transacton_date= $_GET['accutral_execution_date'];
+            }
+        }
+    }
+    return $transacton_date;
+}
 /************************************************/
 //save_lines_status保存事务行
 //本函数被 HAT_Asset_Trans_Batch/saveStatusChange.php 直接调用(是本文件的主入口2)
@@ -124,21 +129,8 @@ function save_lines_status($header, $key = ''){
             }
             save_asset_lines($trans_line);//保存行上的资产信息（对资产信息进行修改）
 
-            //判断从用户界面是否有指定具体的事务处理日期
-            if (empty($_GET['accutral_execution_date'])) {
-                //大多数情况下是没有指定日期的，那就记录为实时的时间
-                $trans_line->acctual_complete_date = $timedate->nowDB();//将行上的事务处理时间标记为当时时间
-            } else {
-                //如果指定了日期那就需按指定日期进行记录，但如果指定了未来时间，仍然记录的是当前时间。也就是用户只能指定过去或是现在。
-                //进行比较后判断按什么日期进行操作
-                $acctual_complete_date = $timedate->to_db_date_time($_GET['accutral_execution_date'],$_GET['accutral_execution_date']);
-                if (strtotime($acctual_complete_date)>strtotime($timedate->nowDB())) {
-                    //如果是未来时间 ，则以当前时间代替
-                    $trans_line->acctual_complete_date = $timedate->nowDB();//将行上的事务处理时间标记为当时时间
-                } else {
-                    $trans_line->acctual_complete_date = $_GET['accutral_execution_date'];
-                }
-            }
+            //获取当前的事务处理日期（可能是指定日期，也可能是默认当前日期）
+            $trans_line->acctual_complete_date = getTransactionDate();
             //将当前行状态标记为结束
             $trans_line->trans_status='CLOSED';
         } else {
@@ -163,18 +155,18 @@ function save_lines_status($header, $key = ''){
 /***********************************************/
 function save_rack_elements_from_rack($allocation_id, $key, $focused_trans_line) {
 
-    global $timedate;
+    $tran_line_id = create_guid();
 
-    if (empty($allocation_id) || $allocation_id==""){
-        //如果没有记录，则需要创建新分配记录
-        $RackAllocation = new HIT_Rack_Allocations();
-        $RackAllocation = BeanFactory::getBean('HIT_Rack_Allocations');
-        //创建一个新分配信息
-    } elseif ($allocation_id!="") {
-        //如果有Allocation_ID，则试图读取
-        $RackAllocation = BeanFactory::getBean('HIT_Rack_Allocations', $allocation_id);
-    }
-
+    if (isset($allocation_id) && $allocation_id!="") {
+        //如果有Allocation_ID，将之前的Allocation记录失效，再后续建立新记录
+        $RackAllocationOld = BeanFactory::getBean('HIT_Rack_Allocations', $allocation_id);
+        $RackAllocationOld->del_by_hat_asset_trans_id = $tran_line_id;//在之前已经生成了事务处理行的ID，记录下是哪次失效的，以便于回流
+        $RackAllocationOld->deleted=1;
+        $RackAllocationOld->save();
+    } //如果没有Allocation_ID，将不需要删除之前的，直接对新的记录进行创建
+    //创建新分配记录
+    $RackAllocation = new HIT_Rack_Allocations();
+    $RackAllocation = BeanFactory::getBean('HIT_Rack_Allocations');
 
     //更新机柜分配表
     $Rack = BeanFactory::getBean('HIT_Racks') ->retrieve_by_string_fields(array('hit_racks.`hat_assets_id'=> $focused_trans_line->asset_id));
@@ -190,11 +182,11 @@ function save_rack_elements_from_rack($allocation_id, $key, $focused_trans_line)
     $RackAllocation->placeholder = false;
     $RackAllocation->description = $header->name;
     $RackAllocation->using_org_id = $key->hat_assets_accounts_id;
+    $RackAllocation->trans_date = getTransactionDate();//获取事务处理行上的执行日期（可能是默认当前，也可能是人工指定的日期）
     $RackAllocation->save();
     //通过测试发现，系统调用了HIT_Rack_Allocations\HIT_Rack_Allocations.php中的Save函数
     //因此还执行了函数中对Assets及Rack的变更
     echo "<br>rack allocation saved";
-
 
 
     //创建后台的资产事务处理行
@@ -203,10 +195,13 @@ function save_rack_elements_from_rack($allocation_id, $key, $focused_trans_line)
         //以下创建资产事务处理行（为了在资产上看到处理过程，以及为了可逆还原）
         $subTrans_line = new HAT_Asset_Trans();
         $subTrans_line = BeanFactory::getBean('HAT_Asset_Trans');
+        $subTrans_line->new_with_id = true;
+        $subTrans_line->id = $tran_line_id;
+        //用之前定义的ID进行保存
         $subTrans_line->batch_id = $focused_trans_line->batch_id;
         $subTrans_line->asset_id = $RackAllocation->hat_assets_id;
         $subTrans_line->trans_status = 'AUTO_TRANSACTED';
-        $subTrans_line->acctual_complete_date = $timedate->now();//将行上的事务处理时间标记为当时时间
+        $subTrans_line->acctual_complete_date = getTransactionDate();
 
         $subTrans_line->name = "-".$focused_trans_line->name;
         $subTrans_line->description -> $focused_trans_line->description;
@@ -237,15 +232,18 @@ function save_rack_elements_from_rack($allocation_id, $key, $focused_trans_line)
 //本函数被 save_rack_allocations 的Foreach循环中调用
 //*****************************************//
 function remove_rack_elements_from_rack($allocation_id, $focused_trans_line) {
+
+    $tran_line_id = create_guid();
+
     //清空机柜上的分配
     $beanRackAllocation = BeanFactory::getBean('HIT_Rack_Allocations', $allocation_id);
-    echo "<br/>start to remove rack elements, allocation_id=".$allocation_id;
+    //echo "<br/>start to remove rack elements, allocation_id=".$allocation_id;
 
     if ($beanRackAllocation) {
 
         $AssetOnRackID=$beanRackAllocation->hat_assets_id;
-            //echo "<br/>got asset id from allocation:".$beanRackAllocation->hat_assets_id;
 
+        $beanRackAllocation->del_by_hat_asset_trans_id = $tran_line_id;//在之前已经生成了事务处理行的ID，记录下是哪次失效的，以便于回流
         $beanRackAllocation->deleted=1;
         $beanRackAllocation->save();
 
@@ -262,9 +260,13 @@ function remove_rack_elements_from_rack($allocation_id, $focused_trans_line) {
             //通过这种自动创建的事务处理行记录，资产的每次变化都可以可追溯的进行记录
             $subTrans_line = new HAT_Asset_Trans();
             $subTrans_line = BeanFactory::getBean('HAT_Asset_Trans');
+            $subTrans_line->new_with_id = true;
+            $subTrans_line->id = $tran_line_id;
+             //用之前定义的ID进行保存
             $subTrans_line->batch_id = $focused_trans_line->batch_id;
             $subTrans_line->asset_id = $AssetOnRackID;//之前的Bean已经删除，所以只能从变更上调用
             $subTrans_line->trans_status = 'AUTO_TRANSACTED';
+            $subTrans_line->acctual_complete_date = getTransactionDate();
             $subTrans_line->name = "-".$focused_trans_line->name;
             $subTrans_line->description -> $focused_trans_line->description;
             //以下是记录资产目标状态

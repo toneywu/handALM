@@ -107,4 +107,5 @@ $mod_strings = array (
   'LBL_STATUS'=>'Status',
   'LBL_ENABLE_ACTION'=>'Enable?',
   'LBL_BROADBAND_TYPE'=>'Broadband Type',
+  'LBL_TRANS_DATE'=>'Transaction Date'
 );
