@@ -579,7 +579,7 @@ class SugarView
 
   //Add by zengchen 20170123
             //加入topMenu
-            require_once('modules/HAA_Functions/HAA_Functions.php');
+/*            require_once('modules/HAA_Functions/HAA_Functions.php');
             $haa_function=new HAA_Functions();
             $url_info=$haa_function->getExtMenu();
             $position = sizeof($groupTabs)-1;
@@ -601,7 +601,7 @@ class SugarView
                     $return_arr[$key] = $value;
                 }
             }
-            $groupTabs=$return_arr;
+            $groupTabs=$return_arr;*/
             //End add by zengchen 20170123
 
             $topTabList = array();
@@ -677,7 +677,7 @@ class SugarView
                 }
             }
             // Add by zengchen 20170123
-             $groupTabs[$url_info['topMenuName']]['extra']=$url_info[0];
+            // $groupTabs[$url_info['topMenuName']]['extra']=$url_info[0];
             //End Add By zengchen 20170123
             if(!empty($sugar_config['lock_homepage']) && $sugar_config['lock_homepage'] == true) $ss->assign('lock_homepage', true);
             $ss->assign("groupTabs",$groupTabs);

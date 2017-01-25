@@ -7,6 +7,10 @@
 	font-weight: 100;
 }
 
+.paginationWrapper,.paginationWrapper { /*将保存并继续，以及翻页按钮进行精减*/
+	visibility: hidden;
+}
+
 /*Start of Cuxtomization*/
 /*打印时不显示HREF中的内容*/
 @media print {
@@ -170,6 +174,10 @@ input[type=text], select{
 .oddListRowS1,.evenListRowS1{
 	line-height:14px;
 }
+.evenListRowS1:hover,.evenListRowS1:hover, .oddListRowS1:hover {
+    background: #f6f6f6;
+}
+
 
 .list tr.pagination td table td {
 	background-color:#f3f9ff;

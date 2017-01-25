@@ -202,7 +202,7 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
 				$event_line_data = json_encode($event_row);
 				echo "<script> var event_line_data=".$event_line_data."</script>";
 			}*/
-	
+
         parent::Display();
 
         //如果已经选择EventType，值将界面展开。

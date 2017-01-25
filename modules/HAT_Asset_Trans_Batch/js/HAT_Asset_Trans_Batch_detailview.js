@@ -156,7 +156,7 @@ function setEventTypeFields() {
 
 	if (currentHeaderStatus != "CANCELED" && currentHeaderStatus != "CLOSED") {
 	//如果不是取消及关闭状态，则显示出状态变更的按钮
-		var change_btn = $("<input type='button' class='btn_detailview' id='btn_change_status' value='"
+		var change_btn = $("<input type='button' class='button' id='btn_change_status' value='"
 			+ SUGAR.language.get('HAT_Asset_Trans_Batch',
 				'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL') + "'>");
 		$("#edit_button").after(change_btn);

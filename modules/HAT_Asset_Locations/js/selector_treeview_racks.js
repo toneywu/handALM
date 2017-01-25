@@ -55,7 +55,7 @@ function drawBlocker(i) {//绘制设备占位或空占位
 	if(asset_id!=""&&asset_id!=undefined) {
 		//提供了资产编号的都是正常的设备
 		element_obj.append("<span class='color_asset_status_"+asset_status+
-						"' style='width:12px;height:12px;border:#ccc 1px solid;display:inline-block'>&nbsp</span> <a href='?action=ajaxui#ajaxUILoc=index.php%3Fmodule%3DHAT_Assets%26action%3DDetailView%26record="+asset_id+"'>"+ 
+						"' style='width:12px;height:12px;border:#ccc 1px solid;display:inline-block'>&nbsp</span> <a href='?action=ajaxui#ajaxUILoc=index.php?module=HAT_Assets&action=DetailView&record="+asset_id+"'>"+ 
 						asset_name+"</a> "+asset_desc+
 						" | "+asset_using_org);
 		element_obj.css({

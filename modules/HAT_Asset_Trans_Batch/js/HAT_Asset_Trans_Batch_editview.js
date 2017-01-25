@@ -444,12 +444,47 @@ $(document).ready(function(){
 	SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
 		OverwriteSaveBtn(preValidateFunction);//注意引用时不加（）
 	});
-	   $("#asset_trans_status option[value='SUBMITTED']").remove();
+
+	//基于当前状态变化相关的状态值
+    var current_header_status = $("#asset_trans_status").val();
+    if (current_header_status=="DRAFT") {//可以DRAFT和SUBMIT
+        $("#asset_trans_status option[value='APPROVED']").remove();
         $("#asset_trans_status option[value='REJECTED']").remove();
-        $("#asset_trans_status option[value='CANCELED']").remove();
+        $("#asset_trans_status option[value='CLOSED']").remove();
+        $("#asset_trans_status option[value='AUTO_TRANSACTED']").remove();
+        //end
+    } else if (current_header_status=="APPROVED") { //可以CANCEL和TRANSACTED
+        $("#asset_trans_status option[value='DRAFT']").remove();
+        $("#asset_trans_status option[value='SUBMITTED']").remove();
+        $("#asset_trans_status option[value='REJECTED']").remove();
+        $("#asset_trans_status option[value='CLOSED']").remove();
+        $("#asset_trans_status option[value='AUTO_TRANSACTED']").remove();
+        setFormReadonly();
+    } else if (current_header_status=="REJECTED") { //可以CANCEL和SUBMIT
+        $("#asset_trans_status option[value='DRAFT']").remove();
+        $("#asset_trans_status option[value='APPROVED']").remove();
+        $("#asset_trans_status option[value='REJECTED']").remove();
         $("#asset_trans_status option[value='CLOSED']").remove();
         $("#asset_trans_status option[value='TRANSACTED']").remove();
-
+        $("#asset_trans_status option[value='AUTO_TRANSACTED']").remove();
+        setFormReadonly();
+    } else {
+        $("#asset_trans_status option[value='DRAFT']").remove();
+        $("#asset_trans_status option[value='APPROVED']").remove();
+        $("#asset_trans_status option[value='REJECTED']").remove();
+        $("#asset_trans_status option[value='TRANSACTED']").remove();
+        $("#asset_trans_status option[value='AUTO_TRANSACTED']").remove();
+        if (current_header_status!="SUBMITTED") {
+	        $("#asset_trans_status option[value='SUBMITTED']").remove();
+        }
+        if (current_header_status!="CLOSED") {
+	        $("#asset_trans_status option[value='CLOSED']").remove();
+        }
+        if (current_header_status!="CANCELED") {
+	        $("#asset_trans_status option[value='CANCELED']").remove();
+        }
+        setFormReadonly();
+    }
 
 	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
 		$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');

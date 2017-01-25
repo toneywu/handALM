@@ -42,12 +42,12 @@
  */
 require_once('modules/HIT_Rack_Allocations/HIT_Rack_Allocations_sugar.php');
 class HIT_Rack_Allocations extends HIT_Rack_Allocations_sugar {
-	
+
 	function get_list_view_data(){
 	//refer to the task module as an example
 	//or refer to the asset module as the first customzation module with this feature
 	//global $action, $currentModule, $focus, $current_module_strings, $app_list_strings, $timedate;
-	
+
 	global $app_list_strings;
 		$asset_fields = $this->get_list_view_array();
 
@@ -81,15 +81,15 @@ class HIT_Rack_Allocations extends HIT_Rack_Allocations_sugar {
 
 	function save($check_notify=false){
 		//如果启用了同步更新父资产，则自动同步父资产
-		//注意：这种方式直接更新了资产数据，没有资产事务处理记录。
+		//注意：这种方式直接更新了资产数据，没有资产事务处理记录。目前先将这种模式暂停了。要求所有变更都通过资产事务处理单
 
-    	if ($this->sync_parent_enabled==1) {
+/*    	if ($this->sync_parent_enabled==1) {
     		$bean_asset = BeanFactory::getBean('HAT_Assets',$this->hat_assets_id);
     		$bean_rack  = BeanFactory::getBean('HIT_Racks',$this->hit_racks_id);
 			$bean_asset ->parent_asset_id = $bean_rack->hat_assets_id;
 			$bean_asset->save();
 	    }
-
+*/
 		parent::save($check_notify); //保存主体
 
 	}
