@@ -5,7 +5,7 @@ $layout_defs["HAA_Integration_System_Def_Headers"]["subpanel_setup"]['haa_integr
   'module' => 'HAA_Integration_System_Def_Lines',
   'subpanel_name' => 'HAA_Integration_System_Def_Headers_subpanel_haa_integr7f04m_def_lines',
   'sort_order' => 'asc',
-  'sort_by' => 'id',
+  'sort_by' => 'line_number',
   'title_key' => 'LBL_HAA_INTEGRATION_SYSTEM_DEF_HEADERS_HAA_INTEGRATION_SYSTEM_DEF_LINES_FROM_HAA_INTEGRATION_SYSTEM_DEF_LINES_TITLE',
   'get_subpanel_data' => 'haa_integr7f04m_def_lines',
   'top_buttons' => 

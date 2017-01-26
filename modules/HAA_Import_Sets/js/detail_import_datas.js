@@ -93,7 +93,7 @@ function setPageButton(n,offset){
   if(data_num%num_limit==0){
     e_offset-=num_limit;
   }
-  if(data_num==0) {
+  if(data_num==0||data_num<=num_limit) {
     $(".s_button"+n+" img").attr("src","themes/SuiteR_HANDALM/images/start_off.gif?v=6T2wqZkzRRtQXSbbOJRC2A");
     $(".p_button"+n+" img").attr("src","themes/SuiteR_HANDALM/images/previous_off.gif?v=6T2wqZkzRRtQXSbbOJRC2A");
     $(".n_button"+n+" img").attr("src","themes/SuiteR_HANDALM/images/next_off.gif?v=6T2wqZkzRRtQXSbbOJRC2A");

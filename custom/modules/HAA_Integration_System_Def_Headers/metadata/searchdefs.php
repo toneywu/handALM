@@ -17,7 +17,7 @@ array (
         'default' => true,
         'name' => 'own_interface',
       ),
-      'link_system' => 
+      /*'link_system' => 
       array (
         'type' => 'varchar',
         'studio' => 'visible',
@@ -34,7 +34,7 @@ array (
         'width' => '10%',
         'default' => true,
         'name' => 'interface_type',
-      ),
+      ),*/
       'effected_flag' => 
       array (
         'type' => 'bool',

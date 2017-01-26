@@ -7,6 +7,7 @@ class HAA_Integration_System_Def_HeadersViewEdit extends ViewEdit
 {
 
     function Display() {
+        global $app_list_strings;
         require_once('modules/HAA_Frameworks/orgSelector_class.php');
         $current_framework_id = empty($this->bean->hat_framework_id)?"":$this->bean->hat_framework_id;
         $current_module = $this->module;
@@ -87,11 +88,15 @@ class HAA_Integration_System_Def_HeadersViewEdit extends ViewEdit
             </script>";
          
          $this->bean->interface_type = isset($bean_interface->interface_type)?$bean_interface->interface_type:'';
-         if($this->bean->interface_type =="WS"){
-            $this->bean->interface_type ="WebService";
-         }else if($this->bean->interface_type =="TEXT"){
-            $this->bean->interface_type ="文本";
-         }
+         foreach ($app_list_strings['haa_interface_type_list'] as $key => $value) {
+            if($this->bean->interface_type==$key)
+            {   
+                //var_dump($this->bean->interface_type);
+                $this->bean->interface_type=$value;
+            }
+        }
+
+        
          echo "<script>
             $('#interface_type').val('".$this->bean->interface_type."');
             </script>";

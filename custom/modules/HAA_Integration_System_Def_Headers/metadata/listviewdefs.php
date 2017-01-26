@@ -2,7 +2,7 @@
 $module_name = 'HAA_Integration_System_Def_Headers';
 $listViewDefs [$module_name] = 
 array (
-  'FRAMEWORKS' => 
+ /* 'FRAMEWORKS' => 
   array (
     'type' => 'relate',
     'studio' => 'visible',
@@ -11,7 +11,7 @@ array (
     'link' => true,
     'width' => '10%',
     'default' => true,
-  ),
+  ),*/
   'OWN_INTERFACE' => 
   array (
     'type' => 'relate',

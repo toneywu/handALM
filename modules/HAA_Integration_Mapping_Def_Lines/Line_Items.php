@@ -23,7 +23,7 @@ function display_lines($focus, $field, $value, $view){
          	imdl.required_flag,
          	imdl.description,
          	imdl.haa_integration_system_def_lines_id_c,
-         	isdl.column_name,
+         	isdl.column_title column_name,
          	imdh.id header_id
          	FROM
          	haa_integration_mapping_def_lines imdl,

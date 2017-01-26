@@ -262,13 +262,20 @@ function openValueset(ln){
     "form_name" : "EditView",
     "field_to_name_array" : {
       "id":"line_haa_integration_system_def_lines_id_c"+ln,
-      "column_name" : "line_column_name" + ln,
+      "column_title" : "line_column_name" + ln,
       //"insurance_type":"line_insurance_type"+ln,
     }
   };
   /*var frame='&haa_interfaces_id_c_advanced='+$("#haa_interfaces_id_c").val()+'&column_type="S"';*/
   //alert($("#system_header_id").val());
-  var frame='&column_type_advanced=S&haa_integration_system_def_headers_id_c_advanced='+$("#system_header_id").val();
+  var segment_type=$("#line_segment_type"+ln).val();
+  var frame="";
+  if (segment_type=="S") {
+  frame='&column_type_advanced=S&haa_integration_system_def_headers_id_c_advanced='+$("#system_header_id").val();
+  }
+  else if (segment_type=="D") {
+  frame='&column_type_advanced=T&haa_integration_system_def_headers_id_c_advanced='+$("#system_header_id").val();
+  }
   open_popup('HAA_Integration_System_Def_Lines', 800, 850,frame, true, true, popupRequestData);
 }
 
