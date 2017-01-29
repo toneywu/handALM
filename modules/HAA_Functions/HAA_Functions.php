@@ -47,7 +47,7 @@ class HAA_Functions extends HAA_Functions_sugar {
 		parent::__construct();
 	}
 	
-	function save($check_notify = FALSE){
+	/*function save($check_notify = FALSE){
 		global $current_user;
 		$this->id=parent::save($check_notify);
 		$post_data=$_POST;
@@ -76,11 +76,11 @@ class HAA_Functions extends HAA_Functions_sugar {
 	            parent::set_relationship($table,$relate_values);
 	        }
 	    }
-	}
+	}*/
 
 	function getExtMenu(){
 		global $db,$current_user;
-		/*$level_sql="SELECT
+		$level_sql="SELECT
 		l.user_group_id,
 		users.id user_name_id
 		FROM(
@@ -115,7 +115,7 @@ class HAA_Functions extends HAA_Functions_sugar {
 				$users[]=$line['user_id'];
 			}
 		}//将用户、权限组、权限组-用户全部转化为用户
-		array_unique($users);//去除重复用户*/
+		array_unique($users);//去除重复用户
 		$sql="SELECT
 			haa_functions.id,
 			haa_functions.function_module,
@@ -142,8 +142,7 @@ class HAA_Functions extends HAA_Functions_sugar {
 				$modules[0][$url]=$row['name'];
 			}
 		}
-
-		$modules['topMenuName']="功能导航";
+		$modules['topMenuName']="自定义功能";
 		return $modules;
 	}
 }

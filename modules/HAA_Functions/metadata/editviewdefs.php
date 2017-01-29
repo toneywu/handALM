@@ -80,10 +80,9 @@ $viewdefs[$module_name]=
           array(
             0 =>
             array(
-              'name' => 'frameworks',
-              'label' => 'LBL_FRAMEWORKS',
+              'name' => 'function_code',
+              'label' => 'LBL_FUNCTION_CODE',
               'studio' => 'visible',
-              'customCode' => '{$FRAMEWORK}',
             ),
             1 => 'name',
           ),
@@ -91,14 +90,14 @@ $viewdefs[$module_name]=
           array(
             0 =>
             array(
-              'name' => 'function_code',
-              'label' => 'LBL_FUNCTION_CODE',
+              'name' => 'function_type',
+              'label' => 'LBL_FUNCTION_TYPE',
               'studio' => 'visible',
             ),
             1 =>
             array(
-              'name' => 'function_module',
-              'label' => 'LBL_FUNCTION_MODULE',
+              'name' => 'func_module',
+              'label' => 'LBL_FUNC_MODULE',
               'studio' => 'visible',
             ),
           ),
@@ -106,30 +105,33 @@ $viewdefs[$module_name]=
           array(
             0=>
             array(
+              'name' => 'frameworks',
+              'label' => 'LBL_FRAMEWORKS',
+              'studio' => 'visible',
+            ),
+            1 => 
+            array(
               'name' => 'haa_ff',
               'label' => 'LBL_HAA_FF',
               'studio' => 'visible',
             ),
-            1 => 
+          ),
+          3 => 
+          array(
+            0=>
             array(
               'name' => 'parameters',
               'label' => 'LBL_PARAMETERS',
               'studio' => 'visible',
             ),
-          ),
-        ),
-/*        'LBL_PANEL1' =>array(
-          0 => 
-          array(
-            0 =>
+            1 => 
             array(
-              'name' => 'line_items',
-              'label' => 'LBL_LINE_ITEMS',
+              'name' => 'func_icon',
+              'label' => 'LBL_FUNC_ICON',
               'studio' => 'visible',
-              'customCode' => '<span id="line_items_span"></span>',
             ),
           ),
-        ),*/
+        ),
       ),
     ),
   );

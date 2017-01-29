@@ -577,33 +577,6 @@ class SugarView
 
             }
 
-  //Add by zengchen 20170123
-            //加入topMenu
-/*            require_once('modules/HAA_Functions/HAA_Functions.php');
-            $haa_function=new HAA_Functions();
-            $url_info=$haa_function->getExtMenu();
-            $position = sizeof($groupTabs)-1;
-            $insertArray = array(
-                $url_info['topMenuName']=>array(
-                    'modules'=>array(),
-                    'extra'=>array()
-                )
-            );
-            $return_arr=array();
-            if ( $position == count($groupTabs)) {
-                 $groupTab = $groupTab + $insertArray;
-            }else{
-                $i = 0;
-                foreach($groupTabs as $key => $value) {
-                    if ($position == $i++) {
-                        $return_arr += $insertArray;
-                    }
-                    $return_arr[$key] = $value;
-                }
-            }
-            $groupTabs=$return_arr;*/
-            //End add by zengchen 20170123
-
             $topTabList = array();
 
             // Now time to go through each of the tab sets and fix them up.
@@ -676,9 +649,7 @@ class SugarView
                         );
                 }
             }
-            // Add by zengchen 20170123
-            // $groupTabs[$url_info['topMenuName']]['extra']=$url_info[0];
-            //End Add By zengchen 20170123
+    
             if(!empty($sugar_config['lock_homepage']) && $sugar_config['lock_homepage'] == true) $ss->assign('lock_homepage', true);
             $ss->assign("groupTabs",$groupTabs);
             $ss->assign("shortcutTopMenu",$shortcutTopMenu);
@@ -724,7 +695,14 @@ class SugarView
         $headerTpl = $themeObject->getTemplate('header.tpl');
         if (inDeveloperMode() )
             $ss->clear_compiled_tpl($headerTpl);
-
+// Add by zengchen 20170125
+        require_once("modules/HAA_Menus/HAA_Menus.php");
+        $menus=new HAA_Menus();
+        $ss->assign("all_menus","全部功能");
+        $ss->assign("lead_label","导航栏");
+        $ss->assign("exthead",$menus->menuHeadData());
+        $ss->assign("extmenus",$menus->menusData());
+ //End Add By zengchen 20170125
         if ($retModTabs)
         {
             return $ss->fetch($themeObject->getTemplate('_headerModuleList.tpl'));
