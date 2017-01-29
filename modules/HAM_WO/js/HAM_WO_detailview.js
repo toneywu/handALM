@@ -306,7 +306,7 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 showWOLines();*/
 
 	//明细页面添加一个按钮
-	var change_btn=$("<input type='button' class='btn_detailview' id='btn_change_status' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL')+"'>");
+	var change_btn=$("<input type='button' class='button' id='btn_change_status' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL')+"'>");
 	$("#merge_duplicate_button").after(change_btn);
 	$("#btn_change_status").click(function(){ //如果点了修改状态按钮，调用Ajax修改状态
 		changeStatus($("input[name='record']").val());
@@ -321,7 +321,7 @@ showWOLines();*/
 	 checkEditRevenueACL($("input[name='record']").val());
 //end 
 
-	var complete_btn=$("<input type='button' class='btn_detailview' id='btn_complete' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_COMPLETE_BUTTON_LABEL')+"'>");
+	var complete_btn=$("<input type='button' class='button' id='btn_complete' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_COMPLETE_BUTTON_LABEL')+"'>");
 	if($("#wo_status").val()=="APPROVED"){
 		$("#btn_change_status").after(complete_btn);
 		//registe function cancel()

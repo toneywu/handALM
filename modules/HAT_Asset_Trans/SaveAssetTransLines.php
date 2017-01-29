@@ -160,6 +160,7 @@ function save_rack_elements_from_rack($allocation_id, $key, $focused_trans_line)
     if (isset($allocation_id) && $allocation_id!="") {
         //如果有Allocation_ID，将之前的Allocation记录失效，再后续建立新记录
         $RackAllocationOld = BeanFactory::getBean('HIT_Rack_Allocations', $allocation_id);
+        $RackAllocationOld->date_end = getTransactionDate();
         $RackAllocationOld->del_by_hat_asset_trans_id = $tran_line_id;//在之前已经生成了事务处理行的ID，记录下是哪次失效的，以便于回流
         $RackAllocationOld->deleted=1;
         $RackAllocationOld->save();
@@ -182,7 +183,7 @@ function save_rack_elements_from_rack($allocation_id, $key, $focused_trans_line)
     $RackAllocation->placeholder = false;
     $RackAllocation->description = $header->name;
     $RackAllocation->using_org_id = $key->hat_assets_accounts_id;
-    $RackAllocation->trans_date = getTransactionDate();//获取事务处理行上的执行日期（可能是默认当前，也可能是人工指定的日期）
+    $RackAllocation->date_start = getTransactionDate();//获取事务处理行上的执行日期（可能是默认当前，也可能是人工指定的日期）
     $RackAllocation->save();
     //通过测试发现，系统调用了HIT_Rack_Allocations\HIT_Rack_Allocations.php中的Save函数
     //因此还执行了函数中对Assets及Rack的变更
@@ -244,6 +245,7 @@ function remove_rack_elements_from_rack($allocation_id, $focused_trans_line) {
         $AssetOnRackID=$beanRackAllocation->hat_assets_id;
 
         $beanRackAllocation->del_by_hat_asset_trans_id = $tran_line_id;//在之前已经生成了事务处理行的ID，记录下是哪次失效的，以便于回流
+        $beanRackAllocation->date_end = getTransactionDate();//记录下失效的时间
         $beanRackAllocation->deleted=1;
         $beanRackAllocation->save();
 

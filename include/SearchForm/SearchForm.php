@@ -48,7 +48,7 @@ class SearchForm {
      * SearchForm Template to use (xtpl)
      * @var string
      */
-   var $tpl;
+    var $tpl;
     /**
      * SearchField meta data array to use. Populated from moduleDir/metadata/SearchFields
      * @var array
@@ -96,45 +96,45 @@ class SearchForm {
         if(file_exists('custom/modules/' . $module . '/metadata/SearchFields.php')){
             require_once('custom/modules/' . $module . '/metadata/SearchFields.php');
         }
-          // Add By osmond.liu 20161218
-                      $instance_loc='instance/PUBLIC/';
-if(isset($_SESSION["current_framework_code"])){
-  $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
-}
+        // Add By osmond.liu 20161218
+        $instance_loc='instance/PUBLIC/';
+        if(isset($_SESSION["current_framework_code"])){
+          $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+        }
         if(file_exists($instance_loc.'modules/' . $module . '/metadata/SearchFields.php')){
             require_once($instance_loc.'modules/' . $module . '/metadata/SearchFields.php');
         }
-  // end Add By osmond.liu 20161218
+        // end Add By osmond.liu 20161218
 
         //require_once('modules/' . $module . '/metadata/SearchFields.php');
         $this->searchFields = $searchFields[$module];
         if(empty($tpl)) {
             if(!empty($GLOBALS['layout_edit_mode'])){
-              $this->tpl = sugar_cached('studio/custom/working/modules/' . $module . '/SearchForm.html');
-          }
-          else {
-             $this->tpl = get_custom_file_if_exists('modules/' . $module . '/SearchForm.html');
-         }
-     }
-     else {
-        $this->tpl = $tpl;
-    }
+            	 $this->tpl = sugar_cached('studio/custom/working/modules/' . $module . '/SearchForm.html');
+            }
+            else {
+             	 $this->tpl = get_custom_file_if_exists('modules/' . $module . '/SearchForm.html');
+            }
+        }
+        else {
+            $this->tpl = $tpl;
+        }
 
-    $this->bean = $seedBean;
-    $this->tabs = array(array('title'  => $app_strings['LNK_BASIC_SEARCH'],
-      'link'   => $module . '|basic_search',
-      'key'    => $module . '|basic_search'),
-    array('title'  => $app_strings['LNK_ADVANCED_SEARCH'],
-      'link'   => $module . '|advanced_search',
-      'key'    => $module . '|advanced_search'));
+        $this->bean = $seedBean;
+        $this->tabs = array(array('title'  => $app_strings['LNK_BASIC_SEARCH'],
+                                  'link'   => $module . '|basic_search',
+                                  'key'    => $module . '|basic_search'),
+                            array('title'  => $app_strings['LNK_ADVANCED_SEARCH'],
+                                  'link'   => $module . '|advanced_search',
+                                  'key'    => $module . '|advanced_search'));
 
-    if(file_exists('modules/'.$this->module.'/index.php')){
-        $this->tabs[] = array('title'  => $app_strings['LNK_SAVED_VIEWS'],
-          'link'   => $module . '|saved_views',
-          'key'    => $module . '|saved_views');
-    }
+        if(file_exists('modules/'.$this->module.'/index.php')){
+            $this->tabs[] = array('title'  => $app_strings['LNK_SAVED_VIEWS'],
+                                  'link'   => $module . '|saved_views',
+                                  'key'    => $module . '|saved_views');
+        }
 
-}
+        }
 
     /**
      * @deprecated deprecated since version 7.6, PHP4 Style Constructors are deprecated and will be remove in 7.8, please update your code, use __construct instead
@@ -160,49 +160,49 @@ if(isset($_SESSION["current_framework_code"])){
     function populateFromArray(&$array, $switchVar = null, $addAllBeanFields = true) {
 
        //CL Bug:33176
-     if(empty($array['searchFormTab']) && empty($switchVar)) {
-      $array['searchFormTab'] = 'advanced_search';
-  }
+       if(empty($array['searchFormTab']) && empty($switchVar)) {
+       	  $array['searchFormTab'] = 'advanced_search';
+       }
 
-  if(!empty($array['searchFormTab']) || !empty($switchVar)) {
-    $arrayKeys = array_keys($array);
-    $searchFieldsKeys = array_keys($this->searchFields);
-    if(empty($switchVar)) $switchVar = $array['searchFormTab'];
-    switch($switchVar) {
-        case 'basic_search':
-        foreach($this->searchFields as $name => $params) {
-            if(isset($array[$name . '_basic'])) {
-                $this->searchFields[$name]['value'] =
-                is_string($array[$name . '_basic'])?trim($array[$name . '_basic']):$array[$name . '_basic'];
-            }
-        }
-        if($addAllBeanFields) {
-            foreach($this->bean->field_name_map as $key => $params) {
-                if(in_array($key . '_basic' , $arrayKeys) && !in_array($key, $searchFieldsKeys)) {
+       if(!empty($array['searchFormTab']) || !empty($switchVar)) {
+            $arrayKeys = array_keys($array);
+            $searchFieldsKeys = array_keys($this->searchFields);
+            if(empty($switchVar)) $switchVar = $array['searchFormTab'];
+            switch($switchVar) {
+                case 'basic_search':
+                    foreach($this->searchFields as $name => $params) {
+                        if(isset($array[$name . '_basic'])) {
+                            $this->searchFields[$name]['value'] =
+                                is_string($array[$name . '_basic'])?trim($array[$name . '_basic']):$array[$name . '_basic'];
+                        }
+                    }
+                    if($addAllBeanFields) {
+                        foreach($this->bean->field_name_map as $key => $params) {
+                            if(in_array($key . '_basic' , $arrayKeys) && !in_array($key, $searchFieldsKeys)) {
 
-                    $this->searchFields[$key] = array('query_type' => 'default',
-                      'value'      => $array[$key . '_basic']);
-                }
-            }
-        }
-        break;
-        case 'advanced_search':
-        foreach($this->searchFields as $name => $params) {
-            if(isset($array[$name])) {
-                $this->searchFields[$name]['value'] = is_string($array[$name])?trim($array[$name]):$array[$name];
-            }
-        }
-        if((empty($array['massupdate']) || $array['massupdate'] == 'false') && $addAllBeanFields) {
-            foreach($this->bean->field_name_map as $key => $params) {
-                if(in_array($key, $arrayKeys) && !in_array($key, $searchFieldsKeys)) {
-                    $this->searchFields[$key] = array('query_type' => 'default',
-                      'value'      => $array[$key]);
-                }
-            }
-        }
-        break;
-        case 'saved_views':
-        foreach($this->searchFields as $name => $params) {
+                                $this->searchFields[$key] = array('query_type' => 'default',
+                                                                  'value'      => $array[$key . '_basic']);
+                            }
+                        }
+                    }
+                    break;
+                case 'advanced_search':
+                   foreach($this->searchFields as $name => $params) {
+                        if(isset($array[$name])) {
+                            $this->searchFields[$name]['value'] = is_string($array[$name])?trim($array[$name]):$array[$name];
+                        }
+                    }
+                    if((empty($array['massupdate']) || $array['massupdate'] == 'false') && $addAllBeanFields) {
+                        foreach($this->bean->field_name_map as $key => $params) {
+                            if(in_array($key, $arrayKeys) && !in_array($key, $searchFieldsKeys)) {
+                                $this->searchFields[$key] = array('query_type' => 'default',
+                                                                  'value'      => $array[$key]);
+                            }
+                        }
+                    }
+                    break;
+                case 'saved_views':
+                    foreach($this->searchFields as $name => $params) {
                         if(isset($array[$name . '_basic'])) {  // save basic first
                             $this->searchFields[$name]['value'] = $array[$name . '_basic'];
                         }
@@ -215,18 +215,18 @@ if(isset($_SESSION["current_framework_code"])){
                             if(!in_array($key, $searchFieldsKeys)) {
                                 if(in_array($key . '_basic', $arrayKeys) ) {
                                     $this->searchFields[$key] = array('query_type' => 'default',
-                                      'value'      => $array[$key . '_basic']);
+                                                                      'value'      => $array[$key . '_basic']);
                                 }
                                 if(in_array($key, $arrayKeys)) {
                                     $this->searchFields[$key] = array('query_type' => 'default',
-                                      'value'      => $array[$key]);
+                                                                      'value'      => $array[$key]);
                                 }
                             }
                         }
                     }
-                }
             }
         }
+    }
 
     /**
      * Populate the searchFields from $_REQUEST
@@ -252,196 +252,196 @@ if(isset($_SESSION["current_framework_code"])){
         $table_name = $this->bean->object_name;
 
         foreach($this->searchFields as $field=>$parms) {
-         $customField = false;
+			$customField = false;
             // Jenny - Bug 7462: We need a type check here to avoid database errors
             // when searching for numeric fields. This is a temporary fix until we have
             // a generic search form validation mechanism.
-         $type = (!empty($this->bean->field_name_map[$field]['type']))?$this->bean->field_name_map[$field]['type']:'';
-         if(!empty($this->bean->field_name_map[$field]['source']) && $this->bean->field_name_map[$field]['source'] == 'custom_fields'){
-            $customField = true;
-        }
+            $type = (!empty($this->bean->field_name_map[$field]['type']))?$this->bean->field_name_map[$field]['type']:'';
+        	if(!empty($this->bean->field_name_map[$field]['source']) && $this->bean->field_name_map[$field]['source'] == 'custom_fields'){
+                $customField = true;
+              }
 
-        if ($type == 'int') {
-            if (!empty($parms['value'])) {
-                $tempVal = explode(',', $parms['value']);
-                $newVal = '';
-                foreach($tempVal as $key => $val) {
-                    if (!empty($newVal))
-                        $newVal .= ',';
-                    if(!empty($val) && !(is_numeric($val)))
-                        $newVal .= -1;
-                    else
-                        $newVal .= $val;
+            if ($type == 'int') {
+                if (!empty($parms['value'])) {
+                    $tempVal = explode(',', $parms['value']);
+                    $newVal = '';
+                    foreach($tempVal as $key => $val) {
+                        if (!empty($newVal))
+                            $newVal .= ',';
+                        if(!empty($val) && !(is_numeric($val)))
+                            $newVal .= -1;
+                        else
+                            $newVal .= $val;
+                    }
+                    $parms['value'] = $newVal;
                 }
-                $parms['value'] = $newVal;
             }
-        }
             // do not include where clause for custom fields with checkboxes that are unchecked
-        elseif($type == 'bool' && empty($parms['value']) && $customField) {
-            continue;
-        }
-        elseif($type == 'bool' && !empty($parms['value'])){
-           if ($parms['value'] == 'on'){
-              $parms['value'] = 1;
-          }
-      }
+            elseif($type == 'bool' && empty($parms['value']) && $customField) {
+                continue;
+            }
+            elseif($type == 'bool' && !empty($parms['value'])){
+            	if ($parms['value'] == 'on'){
+            		$parms['value'] = 1;
+            	}
+            }
 
-      if(isset($parms['value']) && $parms['value'] != "") {
-        $operator = 'like';
-        if(!empty($parms['operator'])) {
-            $operator = strtolower($parms['operator']);
-        }
+            if(isset($parms['value']) && $parms['value'] != "") {
+                $operator = 'like';
+                if(!empty($parms['operator'])) {
+                    $operator = strtolower($parms['operator']);
+                }
 
-        if(is_array($parms['value'])) {
-            $field_value = '';
+                if(is_array($parms['value'])) {
+                    $field_value = '';
 
                     // If it is a custom field of multiselect we have to do some special processing
-            if($customField && !empty($this->bean->field_name_map[$field]['isMultiSelect']) && $this->bean->field_name_map[$field]['isMultiSelect']) {
-               $operator = 'custom_enum';
-               $db_field = $this->bean->table_name .  "_cstm." . $field;
-               foreach($parms['value'] as $key => $val) {
-                   if($val != ' ' and $val != '') {
-                    $qVal = $GLOBALS['db']->quote($val);
-                    if (!empty($field_value)) {
-                        $field_value .= ' or ';
+                    if($customField && !empty($this->bean->field_name_map[$field]['isMultiSelect']) && $this->bean->field_name_map[$field]['isMultiSelect']) {
+	                    $operator = 'custom_enum';
+	                    $db_field = $this->bean->table_name .  "_cstm." . $field;
+	                    foreach($parms['value'] as $key => $val) {
+	                        if($val != ' ' and $val != '') {
+	                               $qVal = $GLOBALS['db']->quote($val);
+	                               if (!empty($field_value)) {
+	                                   $field_value .= ' or ';
+	                               }
+	                               $field_value .= "$db_field like '$qVal' or $db_field like '%$qVal^%' or $db_field like '%^$qVal%' or $db_field like '%^$qVal^%'";
+	                        }
+	                    }
+                    } else {
+                        $operator = $operator != 'subquery' ? 'in' : $operator;
+	                    foreach($parms['value'] as $key => $val) {
+	                        if($val != ' ' and $val != '') {
+	                            if (!empty($field_value)) {
+	                                $field_value .= ',';
+	                            }
+	                            $field_value .= "'" . $GLOBALS['db']->quote($val) . "'";
+	                        }
+	                    }
                     }
-                    $field_value .= "$db_field like '$qVal' or $db_field like '%$qVal^%' or $db_field like '%^$qVal%' or $db_field like '%^$qVal^%'";
                 }
-            }
-        } else {
-            $operator = $operator != 'subquery' ? 'in' : $operator;
-            foreach($parms['value'] as $key => $val) {
-               if($val != ' ' and $val != '') {
-                   if (!empty($field_value)) {
-                       $field_value .= ',';
-                   }
-                   $field_value .= "'" . $GLOBALS['db']->quote($val) . "'";
-               }
-           }
-       }
-   }
-   else {
-    $field_value = $GLOBALS['db']->quote($parms['value']);
-}
+                else {
+                    $field_value = $GLOBALS['db']->quote($parms['value']);
+                }
 
                 //set db_fields array.
-if(!isset($parms['db_field'])) {
-    $parms['db_field'] = array($field);
-}
+                if(!isset($parms['db_field'])) {
+                    $parms['db_field'] = array($field);
+                }
 
-if(isset($parms['my_items']) and $parms['my_items'] == true) {
-    global $current_user;
-    $field_value = $GLOBALS['db']->quote($current_user->id);
-    $operator = '=';
-}
+                if(isset($parms['my_items']) and $parms['my_items'] == true) {
+                    global $current_user;
+                    $field_value = $GLOBALS['db']->quote($current_user->id);
+                    $operator = '=';
+                }
 
-$where = '';
-$itr = 0;
-if($field_value != '') {
-    foreach ($parms['db_field'] as $db_field) {
+                $where = '';
+                $itr = 0;
+                if($field_value != '') {
+                    foreach ($parms['db_field'] as $db_field) {
 
-        if (strstr($db_field, '.') === false) {
-           if(!$customField){
-               $db_field = $this->bean->table_name .  "." . $db_field;
-           }else{
-              $db_field = $this->bean->table_name .  "_cstm." . $db_field;
-          }
+                        if (strstr($db_field, '.') === false) {
+                        	if(!$customField){
+                            	$db_field = $this->bean->table_name .  "." . $db_field;
+                        	}else{
+                        		$db_field = $this->bean->table_name .  "_cstm." . $db_field;
+                        	}
 
-      }
+                        }
 
-      if($type == 'date') {
+                        if($type == 'date') {
                            // The regular expression check is to circumvent special case YYYY-MM
-        $operator = '=';
-        if(preg_match('/^\d{4}.\d{1,2}$/', $field_value) == 0) {
-         $db_field = $this->bean->db->convert($db_field, "date_format", "%Y-%m");
-     } else {
-         $field_value = $timedate->to_db_date($field_value, false);
-         $db_field = $this->bean->db->convert($db_field, "date_format", "%Y-%m-%d");
-     }
- }
+                            $operator = '=';
+                            if(preg_match('/^\d{4}.\d{1,2}$/', $field_value) == 0) {
+                               $db_field = $this->bean->db->convert($db_field, "date_format", "%Y-%m");
+                           } else {
+                               $field_value = $timedate->to_db_date($field_value, false);
+                               $db_field = $this->bean->db->convert($db_field, "date_format", "%Y-%m-%d");
+                           }
+                        }
 
- if($type == 'datetime'|| $type == 'datetimecombo') {
-    $dates = $timedate->getDayStartEndGMT($field_value);
-    $field_value = array($this->bean->db->convert($dates["start"], "datetime"),
-        $this->bean->db->convert($dates["end"], "datetime"));
-    $operator = 'between';
-}
+                        if($type == 'datetime'|| $type == 'datetimecombo') {
+                            $dates = $timedate->getDayStartEndGMT($field_value);
+                            $field_value = array($this->bean->db->convert($dates["start"], "datetime"),
+                                $this->bean->db->convert($dates["end"], "datetime"));
+                            $operator = 'between';
+                        }
 
-if($this->bean->db->supports('case_sensitive') && isset($parms['query_type']) && $parms['query_type'] == 'case_insensitive') {
-  $db_field = 'upper(' . $db_field . ")";
-  $field_value = strtoupper($field_value);
-}
+                        if($this->bean->db->supports('case_sensitive') && isset($parms['query_type']) && $parms['query_type'] == 'case_insensitive') {
+                              $db_field = 'upper(' . $db_field . ")";
+                              $field_value = strtoupper($field_value);
+                        }
 
-$itr++;
-if(!empty($where)) {
-    $where .= " OR ";
-}
-switch($operator) {
-   case 'subquery':
-   $in = 'IN';
-   if ( isset($parms['subquery_in_clause']) ) {
-    if ( !is_array($parms['subquery_in_clause']) ) {
-        $in = $parms['subquery_in_clause'];
-    }
-    elseif ( isset($parms['subquery_in_clause'][$field_value]) ) {
-        $in = $parms['subquery_in_clause'][$field_value];
-    }
-}
-$sq = $parms['subquery'];
-if(is_array($sq)){
-    $and_or = ' AND ';
-    if (isset($sq['OR'])){
-        $and_or = ' OR ';
-    }
-    $first = true;
-    foreach($sq as $q){
-        if(empty($q) || strlen($q)<2) continue;
-        if(!$first){
-            $where .= $and_or;
+                        $itr++;
+                        if(!empty($where)) {
+                            $where .= " OR ";
+                        }
+                        switch($operator) {
+                        	case 'subquery':
+                                $in = 'IN';
+                                if ( isset($parms['subquery_in_clause']) ) {
+                                    if ( !is_array($parms['subquery_in_clause']) ) {
+                                        $in = $parms['subquery_in_clause'];
+                                    }
+                                    elseif ( isset($parms['subquery_in_clause'][$field_value]) ) {
+                                        $in = $parms['subquery_in_clause'][$field_value];
+                                    }
+                                }
+                                $sq = $parms['subquery'];
+                                if(is_array($sq)){
+                                    $and_or = ' AND ';
+                                    if (isset($sq['OR'])){
+                                        $and_or = ' OR ';
+                                    }
+                                    $first = true;
+                                    foreach($sq as $q){
+                                        if(empty($q) || strlen($q)<2) continue;
+                                        if(!$first){
+                                            $where .= $and_or;
+                                        }
+                                        $where .= " {$db_field} $in ({$q} '{$field_value}%') ";
+                                        $first = false;
+                                    }
+                                }elseif(!empty($parms['query_type']) && $parms['query_type'] == 'format'){
+                                    $stringFormatParams = array(0 => $field_value, 1 => $GLOBALS['current_user']->id);
+                                    $where .= "{$db_field} $in (".string_format($parms['subquery'], $stringFormatParams).")";
+                                }else{
+                                    $where .= "{$db_field} $in ({$parms['subquery']} '{$field_value}%')";
+                                }
+
+    	                    	break;
+                            case 'like':
+                                $where .=  $db_field . " like ".$this->bean->db->quoted($field_value.'%');
+                                break;
+                            case 'in':
+                                $where .=  $db_field . " in (".$field_value.')';
+                                break;
+                            case '=':
+                                $where .=  $db_field . " = ".$this->bean->db->quoted($field_value);
+                                break;
+                            case 'between':
+                                if(!is_array($field_value)) {
+                                    $field_value = explode('<>', $field_value);
+                                }
+                                $where .= "(". $db_field . " >= ".$this->bean->db->quoted($field_value[0]) .
+                                	" AND " .$db_field . " <= ".$this->bean->db->quoted($field_value[1]).")";
+                                break;
+                        }
+                    }
+                }
+                if(!empty($where)) {
+                    if($itr > 1) {
+                        array_push($where_clauses, '( '.$where.' )');
+                    }
+                    else {
+                        array_push($where_clauses, $where);
+                    }
+                }
+            }
         }
-        $where .= " {$db_field} $in ({$q} '{$field_value}%') ";
-        $first = false;
-    }
-}elseif(!empty($parms['query_type']) && $parms['query_type'] == 'format'){
-    $stringFormatParams = array(0 => $field_value, 1 => $GLOBALS['current_user']->id);
-    $where .= "{$db_field} $in (".string_format($parms['subquery'], $stringFormatParams).")";
-}else{
-    $where .= "{$db_field} $in ({$parms['subquery']} '{$field_value}%')";
-}
 
-break;
-case 'like':
-$where .=  $db_field . " like ".$this->bean->db->quoted($field_value.'%');
-break;
-case 'in':
-$where .=  $db_field . " in (".$field_value.')';
-break;
-case '=':
-$where .=  $db_field . " = ".$this->bean->db->quoted($field_value);
-break;
-case 'between':
-if(!is_array($field_value)) {
-    $field_value = explode('<>', $field_value);
-}
-$where .= "(". $db_field . " >= ".$this->bean->db->quoted($field_value[0]) .
-" AND " .$db_field . " <= ".$this->bean->db->quoted($field_value[1]).")";
-break;
-}
-}
-}
-if(!empty($where)) {
-    if($itr > 1) {
-        array_push($where_clauses, '( '.$where.' )');
+        return $where_clauses;
     }
-    else {
-        array_push($where_clauses, $where);
-    }
-}
-}
-}
-
-return $where_clauses;
-}
 
     /**
      * displays the tabs (top of the search form)
@@ -511,9 +511,9 @@ return $where_clauses;
                     if(isset($params['input_type'])) {
                         switch($params['input_type']) {
                             case 'checkbox': // checkbox input
-                            if($params['value'] == 'on' || $params['value'])
-                                $this->xtpl->assign($templateVar, 'checked');
-                            break;
+                                if($params['value'] == 'on' || $params['value'])
+                                    $this->xtpl->assign($templateVar, 'checked');
+                                break;
                         }
                     }
                     else {// regular text input
@@ -553,10 +553,10 @@ return $where_clauses;
 
         echo $header_text . $this->displayTabs($this->module . '|' . $view);
         echo "<form name='search_form' class='search_form'>" .
-        "<input type='hidden' name='searchFormTab' value='{$view}'/>" .
-        "<input type='hidden' name='module' value='{$_REQUEST['module']}'/>" .
-        "<input type='hidden' name='action' value='{$_REQUEST['action']}'/>" .
-        "<input type='hidden' name='query' value='true'/>";
+             "<input type='hidden' name='searchFormTab' value='{$view}'/>" .
+             "<input type='hidden' name='module' value='{$_REQUEST['module']}'/>" .
+             "<input type='hidden' name='action' value='{$_REQUEST['action']}'/>" .
+             "<input type='hidden' name='query' value='true'/>";
     }
 
     /**
@@ -594,20 +594,20 @@ return $where_clauses;
         $this->bean->custom_fields->populateAllXTPL($this->xtpl, 'search' );
         $this->xtpl->parse("main");
         if(!empty($GLOBALS['layout_edit_mode'])){
-           $this->xtpl->parse("advanced");
-       }
-       $text = $this->xtpl->text("main");
-       if(!empty($GLOBALS['layout_edit_mode'])){
-           $text .= $this->xtpl->text("advanced");
-       }
-       if($header && empty($GLOBALS['layout_edit_mode'])) {
-        $this->displayWithHeaders('basic_search', $text);
+         $this->xtpl->parse("advanced");
+        }
+        $text = $this->xtpl->text("main");
+        if(!empty($GLOBALS['layout_edit_mode'])){
+        	$text .= $this->xtpl->text("advanced");
+        }
+        if($header && empty($GLOBALS['layout_edit_mode'])) {
+            $this->displayWithHeaders('basic_search', $text);
+        }
+        else {
+            if($return) return $text;
+            else echo $text;
+        }
     }
-    else {
-        if($return) return $text;
-        else echo $text;
-    }
-}
 
     /**
      * displays the advanced search form body
@@ -686,36 +686,36 @@ return $where_clauses;
 
         if(!empty($SAVED_SEARCHES_OPTIONS) && $this->showSavedSearchOptions){
             $str .= "   <span class='white-space'>
-            &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<b>{$app_strings['LBL_SAVED_SEARCH_SHORTCUT']}</b>&nbsp;
-            {$SAVED_SEARCHES_OPTIONS}
-            <span id='go_btn_span' style='display:none'><input tabindex='2' title='go_select' id='go_select'  onclick='SUGAR.searchForm.clear_form(this.form);' class='button' type='button' name='go_select' value=' {$app_strings['LBL_GO_BUTTON_LABEL']} '/></span>
-        </span>
-    </form>";
-}
-$str .= "
-<script>
-    function toggleInlineSearch(){
-        if (document.getElementById('inlineSavedSearch').style.display == 'none'){
-            document.getElementById('showSSDIV').value = 'yes'
-            document.getElementById('inlineSavedSearch').style.display = '';
-
-            document.getElementById('up_down_img').src='".SugarThemeRegistry::current()->getImageURL('basic_search.gif')."';
-            document.getElementById('up_down_img').setAttribute('alt','".$GLOBALS['app_strings']['LBL_ALT_HIDE_OPTIONS']."');
-
-        }else{
-
-            document.getElementById('up_down_img').src='".SugarThemeRegistry::current()->getImageURL('advanced_search.gif')."';
-            document.getElementById('up_down_img').setAttribute('alt','".$GLOBALS['app_strings']['LBL_ALT_SHOW_OPTIONS']."');
-            document.getElementById('showSSDIV').value = 'no';
-            document.getElementById('inlineSavedSearch').style.display = 'none';
+                        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<b>{$app_strings['LBL_SAVED_SEARCH_SHORTCUT']}</b>&nbsp;
+                        {$SAVED_SEARCHES_OPTIONS}
+                        <span id='go_btn_span' style='display:none'><input tabindex='2' title='go_select' id='go_select'  onclick='SUGAR.searchForm.clear_form(this.form);' class='button' type='button' name='go_select' value=' {$app_strings['LBL_GO_BUTTON_LABEL']} '/></span>
+                    </span>
+                    </form>";
         }
+        $str .= "
+                <script>
+                    function toggleInlineSearch(){
+                        if (document.getElementById('inlineSavedSearch').style.display == 'none'){
+                            document.getElementById('showSSDIV').value = 'yes'
+                            document.getElementById('inlineSavedSearch').style.display = '';
+
+                            document.getElementById('up_down_img').src='".SugarThemeRegistry::current()->getImageURL('basic_search.gif')."';
+                            document.getElementById('up_down_img').setAttribute('alt','".$GLOBALS['app_strings']['LBL_ALT_HIDE_OPTIONS']."');
+
+                        }else{
+
+                            document.getElementById('up_down_img').src='".SugarThemeRegistry::current()->getImageURL('advanced_search.gif')."';
+                            document.getElementById('up_down_img').setAttribute('alt','".$GLOBALS['app_strings']['LBL_ALT_SHOW_OPTIONS']."');
+                            document.getElementById('showSSDIV').value = 'no';
+                            document.getElementById('inlineSavedSearch').style.display = 'none';
+                        }
+                    }
+
+
+                </script>
+            ";
+        return $str;
     }
-
-
-</script>
-";
-return $str;
-}
 }
 
 ?>

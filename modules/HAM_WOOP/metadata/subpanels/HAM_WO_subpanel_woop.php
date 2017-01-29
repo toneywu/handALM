@@ -5,7 +5,7 @@ $subpanel_layout['list_fields'] = array (
   array (
     'type' => 'varchar',
     'vname' => 'LBL_WOOP_NUMBER',
-    'width' => '5%',
+    'width' => '6%',
     'default' => true,
   ),
   'name' => 
@@ -81,7 +81,7 @@ $subpanel_layout['list_fields'] = array (
     'type' => 'enum',
     'studio' => 'visible',
     'vname' => 'LBL_ACT_MODULE',
-    'width' => '15%',
+    'width' => '14%',
     'default' => true,
     'sortable' => false,
   ),

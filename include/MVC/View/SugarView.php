@@ -577,32 +577,6 @@ class SugarView
 
             }
 
-  //Add by zengchen 20170123
-            //加入topMenu
-/*            require_once('modules/HAA_Functions/HAA_Functions.php');
-            $haa_function=new HAA_Functions();
-            $url_info=$haa_function->getExtMenu();
-            $position = sizeof($groupTabs)-1;
-            $insertArray = array(
-                $url_info['topMenuName']=>array(
-                    'modules'=>array(),
-                    'extra'=>array()
-                )
-            );
-            $return_arr=array();
-            if ( $position == count($groupTabs)) {
-                 $groupTab = $groupTab + $insertArray;
-            }else{
-                $i = 0;
-                foreach($groupTabs as $key => $value) {
-                    if ($position == $i++) {
-                        $return_arr += $insertArray;
-                    }
-                    $return_arr[$key] = $value;
-                }
-            }
-            $groupTabs=$return_arr;*/
-            //End add by zengchen 20170123
 
             $topTabList = array();
 
@@ -615,7 +589,7 @@ class SugarView
                 $extraTabs = array();
 
                 // Split it in to the tabs that go across the top, and the ones that are on the extra menu.
-/*                if ( count($topTabs) > $max_tabs ) {
+                if ( count($topTabs) > $max_tabs ) {
                     $extraTabs = array_splice($topTabs,$max_tabs);
                 }
                 // Make sure the current module is accessable through one of the top tabs
@@ -634,7 +608,7 @@ class SugarView
                     if ( !empty($moduleTab) ) {
                         $topTabs[$moduleTab] = $app_list_strings['moduleList'][$moduleTab];
                     }
-                }*/
+                }
 
 
                 /*
@@ -676,9 +650,6 @@ class SugarView
                         );
                 }
             }
-            // Add by zengchen 20170123
-            // $groupTabs[$url_info['topMenuName']]['extra']=$url_info[0];
-            //End Add By zengchen 20170123
             if(!empty($sugar_config['lock_homepage']) && $sugar_config['lock_homepage'] == true) $ss->assign('lock_homepage', true);
             $ss->assign("groupTabs",$groupTabs);
             $ss->assign("shortcutTopMenu",$shortcutTopMenu);
@@ -1067,16 +1038,7 @@ EOHTML;
      */
     protected function _displaySubPanels()
     {
-        //Modefy instance by zengchen 20161214 
-
-        //20161223 modified by toney.wu , seesion my be null
-                      $instance_loc='instance/PUBLIC/';
-if(isset($_SESSION["current_framework_code"])){
-  $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
-}
-
-        if (isset($this->bean) && !empty($this->bean->id) && (file_exists('modules/' . $this->module . '/metadata/subpaneldefs.php') || file_exists('custom/modules/' . $this->module . '/metadata/subpaneldefs.php') || file_exists('custom/modules/' . $this->module . '/Ext/Layoutdefs/layoutdefs.ext.php')||file_exists($instance_loc.'modules/'. $this->module . '/metadata/subpaneldefs.php')||file_exists($instance_loc.'modules/' . $this->module . '/Ext/Layoutdefs/layoutdefs.ext.php'))) {
-            //Modefy instance by zengchen 20161214 End
+        if (isset($this->bean) && !empty($this->bean->id) && (file_exists('modules/' . $this->module . '/metadata/subpaneldefs.php') || file_exists('custom/modules/' . $this->module . '/metadata/subpaneldefs.php') || file_exists('custom/modules/' . $this->module . '/Ext/Layoutdefs/layoutdefs.ext.php'))) {
             $GLOBALS['focus'] = $this->bean;
             require_once ('include/SubPanel/SubPanelTiles.php');
             $subpanel = new SubPanelTiles($this->bean, $this->module);
@@ -1271,20 +1233,20 @@ if(isset($_SESSION["current_framework_code"])){
         }
 
         //20161243by toney.wu
-                     $instance_loc='instance/PUBLIC/';
-if(isset($_SESSION["current_framework_code"])){
-  $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
-}
+        $instance_loc='instance/PUBLIC/';
+        if(isset($_SESSION["current_framework_code"])){
+          $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+        }
         //Add instance by zengchen 20161214
 
         if (file_exists($instance_loc.'modules/'. $module . '/Ext/Menus/menu.ext.php')) {
             require($instance_loc.'modules/'. $module . '/Ext/Menus/menu.ext.php');
         }
         //Add instance by zengchen 20161214 End
+
         if (!file_exists('modules/' . $module . '/Menu.php')
                 && !file_exists('custom/modules/' . $module . '/Ext/Menus/menu.ext.php')
-                && !empty($GLOBALS['mod_strings']['LNK_NEW_RECORD'])
-                && !file_exists('custom/modules/' . $module . '/Ext/Menus/menu.ext.php')) {
+                && !empty($GLOBALS['mod_strings']['LNK_NEW_RECORD'])) {
             $module_menu[] = array("index.php?module=$module&action=EditView&return_module=$module&return_action=DetailView",
                 $GLOBALS['mod_strings']['LNK_NEW_RECORD'],"{$GLOBALS['app_strings']['LBL_CREATE_BUTTON_LABEL']}$module" ,$module );
             $module_menu[] = array("index.php?module=$module&action=index", $GLOBALS['mod_strings']['LNK_LIST'],
@@ -1304,7 +1266,7 @@ if(isset($_SESSION["current_framework_code"])){
         if (file_exists($instance_loc.'application/Ext/Menus/menu.ext.php')) {
             require($instance_loc.'application/Ext/Menus/menu.ext.php');
         }
-  //Add instance by zengchen 20161214 End
+        //Add instance by zengchen 20161214 End
         $mod_strings = $curr_mod_strings;
         $builtModuleMenu = $module_menu;
         unset($module_menu);
@@ -1378,7 +1340,7 @@ if(isset($_SESSION["current_framework_code"])){
         }
 
         if(!empty($paramString)){
-               $theTitle .= "<h2> $paramString </h2>";
+               $theTitle .= "<h2 class='module-title-text'> $paramString </h2>";
 
             if($this->type == "detail"){
                 $theTitle .= "<div class='favorite' record_id='" . $this->bean->id . "' module='" . $this->bean->module_dir . "'><div class='favorite_icon_outline'>" . SugarThemeRegistry::current()->getImage('favorite-star-outline','title="' . translate('LBL_DASHLET_EDIT', 'Home') . '" border="0"  align="absmiddle"', null,null,'.gif',translate('LBL_DASHLET_EDIT', 'Home')) . "</div>
@@ -1418,7 +1380,7 @@ EOHTML;
         $metadataFile = null;
         $foundViewDefs = false;
         $viewDef = strtolower($this->type) . 'viewdefs';
-           //Modefied by zengchen 20161214
+        //Modefied by zengchen 20161214
         /*$coreMetaPath = 'modules/'.$this->module.'/metadata/' . $viewDef . '.php';
         if(file_exists('custom/' .$coreMetaPath )){
             $metadataFile = 'custom/' . $coreMetaPath;
@@ -1437,13 +1399,13 @@ EOHTML;
                     $foundViewDefs = true;
                 }
             }
-        }*/
+        */
 
         /*20161224 session maybe null*/
-                     $instance_loc='instance/PUBLIC/';
-if(isset($_SESSION["current_framework_code"])){
-  $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
-}
+        $instance_loc='instance/PUBLIC/';
+        if(isset($_SESSION["current_framework_code"])){
+          $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+        }
         /*20161224 session maybe null - END*/
 
         $coreMetaPath = 'modules/'.$this->module.'/metadata/'.$viewDef.'.php';
@@ -1478,6 +1440,7 @@ if(isset($_SESSION["current_framework_code"])){
             }
         }
         //End modefied by zengchen 20161214
+
         if(!$foundViewDefs && file_exists($coreMetaPath)){
                 $metadataFile = $coreMetaPath;
         }

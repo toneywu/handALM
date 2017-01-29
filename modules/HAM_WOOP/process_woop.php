@@ -398,9 +398,9 @@ if($include_reject_wo=='1'){
 function reverse_asset($woop_id, $wo_id, $include_reject_wo) {
 	global $db;
 	//判断需要回退的资产事务处理
-	//1 工序退回，0工单退回
+	//1 工序退回，0工单退回，通过SQL选出当前工单/工序涉及到最早的事务处理行记录，然后通过事务处理行记录的Current_XXX字段还原当前资产的信息。
 	if ($include_reject_wo==0) {//退回到固定工序
-		//搜索当前
+		//0=工单退回，指到当前工单涉及到的所有资产，以及最早的事务处理行记录
 		$changed_assets_sql =  'SELECT
 							  hat.id hat_id, hat.*,
 							  GROUP_CONCAT(DISTINCT hat.asset_id) asset_id_group
@@ -418,8 +418,8 @@ function reverse_asset($woop_id, $wo_id, $include_reject_wo) {
 							  )
 							  AND hw.id = "'.$wo_id.'"
 							GROUP BY hat.asset_id
-							ORDER BY hat.acctual_complete_date ASC ';
-	} else { //整个单据回退
+							ORDER BY hat.acctual_complete_date ASC';
+	} else { ///1=工序退回，指到当前工单工序为止所涉及到的所有资产，以及最早的事务处理行记录
 		$changed_assets_sql =  'SELECT
 							  hat.id hat_id, hat.*,
 							  GROUP_CONCAT(DISTINCT hat.`asset_id`) asset_id_group
@@ -467,8 +467,43 @@ function reverse_asset($woop_id, $wo_id, $include_reject_wo) {
 
 				if ($changed_asset_bean->enable_it_ports==1) {
 					//如果当前资产为IT设备则进一步判断当前IT设备对应的机柜分配信息
-					//基于当前设备找到事务处理日期之前的机柜分配
+					//处理过程如下
+					//1、将当前资产的分配标记为失效
+					//2、获取时间范围中的分配记录
+					//3、将第2步骤中获取的记录，创建为当前的新记录（也可能还原到没有分配的状态）
 
+					//1/3：将当前资产的分配标记为失效
+					//这里有个假设就是每个设备资产只能被分配一次，只有一个有效的记录（暂时不考虑可预定的情况），否则关有asset_id还不行，还需要有时间 判断，或者有状态判断才行
+					$oldRackAllocation = BeanFactory::getBean('HIT_Rack_Allocations') ->retrieve_by_string_fields(array('hat_assets_id'=>$changed_asset_line["asset_id"]));
+					if ($oldRackAllocation) {
+						$oldRackAllocation->date_end = $timedate->nowDB();
+						$oldRackAllocation->deleted = 1;
+						$oldRackAllocation->save();
+					}
+
+					//2/3、获取时间范围中的分配记录
+					$to_be_allocation_sql =  'SELECT * FROM hit_rack_allocations hra WHERE hra.date_start<"'.$changed_asset_line['acctual_complete_date'].'" AND (hra.date_end IS NULL OR hra.date_start> "'.$changed_asset_line['acctual_complete_date'].'" ) ORDER BY hra.date_start DESC LIMIT 0,1';
+						//找到最靠近事务处理时间的一行记录。注意这里搜索时并没有限制是否已经删除。因为之前的失效记录可能被删除
+						$to_be_allocation_result = $db->query($to_be_allocation_sql);
+
+						while ($to_be_allocation = $db->fetchByAssoc($to_be_allocation_result)) {
+							//3/3、将第2步骤中获取的记录，创建为当前的新记录
+							//如果没有找到第2步中的有效记录，则说明没有分配，不再创建新记录。
+							$newRackAllocation = new HIT_Rack_Allocations();
+    						$newRackAllocation = BeanFactory::getBean('HIT_Rack_Allocations');
+						    $newRackAllocation->hit_racks_id = $Rack->id;
+						    $newRackAllocation->name = $key->asset_name;
+						    $newRackAllocation->hat_assets_id = $key->asset_id;
+						    $newRackAllocation->rack_pos_top = $key->rack_pos_top;
+						    $newRackAllocation->height = $key->height;
+						    $newRackAllocation->rack_pos_depth = $key->rack_pos_depth;
+						    $newRackAllocation->sync_parent_enabled = true;
+						    $newRackAllocation->placeholder = false;
+						    $newRackAllocation->description = $header->name;
+						    $newRackAllocation->using_org_id = $key->hat_assets_accounts_id;
+						    $newRackAllocation->date_start = $timedate->nowDB();//同样这里也没有考虑按时间Book的情况，也就是没有时间重叠
+						    $newRackAllocation->save();
+						}
 				}
 
 			}

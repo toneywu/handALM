@@ -241,12 +241,14 @@ input[type=text], select{
 	background:#F7F7F7;
 }*/
 
-.dropdown-menu li a, .dropdown-menu li a:hover{ /*默认的顶部下拉菜单太小，加宽*/
+/*默认的顶部下拉菜单太小，加宽*/
+/*.dropdown-menu li a, .dropdown-menu li a:hover{
 	padding:2px 0px 2px 5px;
-}
-.dropdown-menu{/*默认的顶部下拉菜单太小，加宽*/
+}*/
+/*默认的顶部下拉菜单太小，加宽*/
+/*.dropdown-menu{
 	min-width:220px;
-}
+}*/
 .currentTab {/*頂部菜单，突出当前的模块*/
 /*	background: linear-gradient(rgb(138, 196, 255) 1%,rgb(0, 139, 206) 80%, rgb(54, 127, 202));
     padding: 11px 11px 17px 11px;
@@ -255,9 +257,7 @@ input[type=text], select{
     border-radius:10px;
     padding:11px;
 }
-.datetimecombo_time, .datetimecombo_time { /*默认的时间显示选择框上下不对齐*/
-	margin:-5px 0 0 0;
-}
+
 
 #btn_submit, #btn_create_wo {
 	margin: 0 0 0 15px;
@@ -412,43 +412,6 @@ li.recentlinks_edit a {
     height: 2em;
 }
 
-/*Datapicker*/
-.edit .bootstrap-datetimepicker-widget.dropdown-menu li a {
-	padding: 6px 0;
-}
-.edit .bootstrap-datetimepicker-widget.dropdown-menu li a:hover {
-	background-color:inherit;
-	color:#000000;
-}
-.edit .bootstrap-datetimepicker-widget.dropdown-menu {
-	text-align: center;;
-}
-.edit .bootstrap-datetimepicker-widget.dropdown-menu li tr {
-	padding:0px;
-}
-.edit .bootstrap-datetimepicker-widget.dropdown-menu li.collapse {
-	display:none;
-}
-.edit .bootstrap-datetimepicker-widget.dropdown-menu li.collapse.in {
-	display:block;
-}
-.edit .bootstrap-datetimepicker-widget.dropdown-menu li table th,
-.edit .bootstrap-datetimepicker-widget.dropdown-menu li table td {
-	display: table-cell;
-}
-.edit .bootstrap-datetimepicker-widget.dropdown-menu li table th,
-.edit .bootstrap-datetimepicker-widget.dropdown-menu li table td.day {
-  height: 26px;
-  line-height: 20px;
-  width: 54px;
-}
-.edit .bootstrap-datetimepicker-widget.dropdown-menu li table th.picker-switch {
-  width: 145px;
-  height: 26px;
-}
-.edit .bootstrap-datetimepicker-widget.dropdown-menu .picker-switch .table-condensed td {
-  width: 54px;
-}
 
 /**********************************/
 /*以下是完全自定义的一些对象	  */
@@ -510,25 +473,6 @@ li.recentlinks_edit a {
 	display: block;
 	color:#999999;
 	margin:2px 0 0px 4px;
-}
-.edit .input-group-addon { /*Datepicker*/
-	float:right;
-	margin: 0 0 0 -9px;
-	padding:5px 20px 5px 6px;
-	color:#999999;
-	border:0;
-	-moz-border-radius: 0;
-    -webkit-border-radius: 0;
-    border-radius:0;
-    cursor:pointer;
-}
-.edit .date  {
-	font-weight:normal;
-	border-bottom:0;
-	font-size:inherit;
-}
-.input_group input[type=checkbox], input[type=radio]{
-	vertical-align:middle;
 }
 
 /*动态着色标签*/

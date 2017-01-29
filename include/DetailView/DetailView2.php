@@ -101,15 +101,15 @@ class DetailView2 extends EditView
         	    fwrite($fp, $parser->parse($htmlFile, $dictionary[$focus->object_name]['fields'], $this->module));
         	    fclose($fp);
         	}
-//Modefy instance by osmond.liu 20161219
+            //Modefy instance by osmond.liu 20161219
             $instance_loc='instance/PUBLIC/';
-if(isset($_SESSION["current_framework_code"])){
-  $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
-}
-        if(file_exists($instance_loc."modules/$this->module/metadata/detailviewdefs.php")) {
-            require($instance_loc."modules/$this->module/metadata/detailviewdefs.php");
-        }
-        else{
+            if(isset($_SESSION["current_framework_code"])){
+              $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+            }
+            if(file_exists($instance_loc."modules/$this->module/metadata/detailviewdefs.php")) {
+                require($instance_loc."modules/$this->module/metadata/detailviewdefs.php");
+            }
+            else{
         	//Flag an error... we couldn't create the best guess meta-data file
         	if(!file_exists("modules/$this->module/metadata/detailviewdefs.php")) {
         	   global $app_strings;
@@ -119,8 +119,8 @@ if(isset($_SESSION["current_framework_code"])){
         	   die();
         	}
             require("modules/$this->module/metadata/detailviewdefs.php");
-        }
-        //End osmond.liu 20161219
+            }
+            //End osmond.liu 20161219
         }
 
         $this->defs = $viewdefs[$this->module][$this->view];
