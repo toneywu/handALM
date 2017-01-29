@@ -13,22 +13,24 @@ function insertLineHeader(tableid){
 
   var x=tablehead.insertRow(-1);
   x.id='Line_head';
-  var a=x.insertCell(0);
-  a.innerHTML=SUGAR.language.get('HAT_Counting_Policies', 'LBL_POLICY_GROUP');
-  var a=x.insertCell(1);
-  a.innerHTML=SUGAR.language.get('HAT_Counting_Policies', 'LBL_SPLIT_TYPE');
-  var b=x.insertCell(2);
-  b.innerHTML=SUGAR.language.get('HAT_Counting_Policies', 'LBL_NAME');
-  var c=x.insertCell(3);
-  c.innerHTML=SUGAR.language.get('HAT_Counting_Policies', 'LBL_DATA_POPULATE_SQL');
-  var c1=x.insertCell(4);
-  c1.innerHTML=SUGAR.language.get('HAT_Counting_Policies', 'LBL_TASK_TEMPLATES');
-  var b1=x.insertCell(5);
-  b1.innerHTML=SUGAR.language.get('HAT_Counting_Policies', 'LBL_ENABLED_FLAG');
-  var d=x.insertCell(6);
-  d.innerHTML=SUGAR.language.get('HAT_Counting_Policies', 'LBL_DESCRIPTION');
-  var f=x.insertCell(7);
-  f.innerHTML='&nbsp;';
+ /* var a=x.insertCell(0);
+ a.innerHTML=SUGAR.language.get('HAT_Counting_Policies', 'LBL_POLICY_GROUP');*/
+ var a=x.insertCell(0);
+ a.innerHTML=SUGAR.language.get('HAT_Counting_Policies', 'LBL_SPLIT_TYPE');
+ var b=x.insertCell(1);
+ b.innerHTML=SUGAR.language.get('HAT_Counting_Policies', 'LBL_NAME');
+ var c=x.insertCell(2);
+ c.innerHTML=SUGAR.language.get('HAT_Counting_Policies', 'LBL_DATA_POPULATE_SQL');
+ var c2=x.insertCell(3);
+ c2.innerHTML=SUGAR.language.get('HAT_Counting_Policies', 'LBL_ADDITIONAL_LOGIC');
+ var c1=x.insertCell(4);
+ c1.innerHTML=SUGAR.language.get('HAT_Counting_Policies', 'LBL_TASK_TEMPLATES');
+ var b1=x.insertCell(5);
+ b1.innerHTML=SUGAR.language.get('HAT_Counting_Policies', 'LBL_ENABLED_FLAG');
+ var d=x.insertCell(6);
+ d.innerHTML=SUGAR.language.get('HAT_Counting_Policies', 'LBL_DESCRIPTION');
+ var f=x.insertCell(7);
+ f.innerHTML='&nbsp;';
 }
 
 
@@ -45,9 +47,10 @@ function insertLineData(line_data ){ //将数据写入到对应的行字段中
     $("#line_enabled_flag".concat(String(ln))).val(line_data.enabled_flag);
     $("#line_split_type".concat(String(ln))).val(line_data.split_type);
     $("#line_hat_counting_policy_groups_id_c".concat(String(ln))).val(line_data.hat_counting_policy_groups_id_c);
-    $("#line_group_name".concat(String(ln))).val(line_data.group_name);
+    //$("#line_group_name".concat(String(ln))).val(line_data.group_name);
     $("#line_hat_counting_task_templates_id_c".concat(String(ln))).val(line_data.hat_counting_task_templates_id_c);
     $("#line_template_name".concat(String(ln))).val(line_data.template_name);
+    $("#line_additional_logic".concat(String(ln))).val(line_data.additional_logic);
 
     renderLine(ln);
     $("#line_editor"+ln).hide();
@@ -70,10 +73,11 @@ var z1 = tablebody.insertRow(-1);
 z1.id = 'line_displayed' + prodln;
 z1.className = 'oddListRowS1';
 z1.innerHTML  =
-"<td><span name='displayed_line_group_name[" + prodln + "]' id='displayed_line_group_name" + prodln + "'></span></td>" +
+//"<td><span name='displayed_line_group_name[" + prodln + "]' id='displayed_line_group_name" + prodln + "'></span></td>" +
 "<td><span name='displayed_line_split_type[" + prodln + "]' id='displayed_line_split_type" + prodln + "'></span></td>" +
 "<td><span name='displayed_line_name[" + prodln + "]' id='displayed_line_name" + prodln + "'></span></td>"+
 "<td><span name='displayed_line_data_populate_sql[" + prodln + "]' id='displayed_line_data_populate_sql" + prodln + "'></span></td>"+
+"<td><span name='displayed_line_additional_logic[" + prodln + "]' id='displayed_line_additional_logic" + prodln + "'></span></td>"+
 "<td><span name='displayed_line_template_name[" + prodln + "]' id='displayed_line_template_name" + prodln + "'></span></td>"+
 "<td><span name='displayed_line_enabled_flag[" + prodln + "]' id='displayed_line_enabled_flag" + prodln + "'></span></td>"+
 "<td><span name='displayed_line_description[" + prodln + "]' id='displayed_line_description" + prodln + "'></span></td>"+
@@ -90,49 +94,51 @@ z1.innerHTML  =
 
   "<tr>"+
   "<input name='line_id["+prodln+"]' id='line_id"+prodln+"' value='' type='hidden'>"+
-  "<td>"+SUGAR.language.get('HAT_Counting_Policies', 'LBL_POLICY_GROUP')+"<span class='required'>*</span></td>"+
-  "<td><input name='line_group_name["+prodln+"]'  id='line_group_name"+prodln+"'  value=''  type='text' readonly>"+
-  "<input name='line_hat_counting_policy_groups_id_c["+prodln+"]' id='line_hat_counting_policy_groups_id_c"+prodln+"' type='hidden' value=''>"+
-  "<td>"+SUGAR.language.get('HAT_Counting_Policies', 'LBL_SPLIT_TYPE')+"<span class='required'>*</span></td>"+
-  "<td><select tabindex='116' name='line_split_type[" + prodln + "]' id='line_split_type" + prodln + "'>" + line_item_type_option +"</select></td>"+
-  "</tr>"+
-  "<tr>"+
-  "<td>"+SUGAR.language.get('HAT_Counting_Policies', 'LBL_NAME')+"<span class='required'>*</span></td>"+
-  "<td><input name='line_name["+prodln+"]' id='line_name"+prodln+"' size='30' maxlength='255' type='text'></td>"+
-  "<td>"+SUGAR.language.get('HAT_Counting_Policies', 'LBL_DATA_POPULATE_SQL')+"<span class='required'>*</span></td>"+
-  "<td><textarea id='line_data_populate_sql"+prodln+"' name='line_data_populate_sql["+prodln+"]' rows='2' cols='50' title='' tabindex='0' style='overflow: hidden;'></textarea></td>"+
-  "<tr>"+
-  "<td>"+SUGAR.language.get('HAT_Counting_Policies', 'LBL_TASK_TEMPLATES')+"<span class='required'>*</span></td>"+
-  "<td><input name='line_template_name["+prodln+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='line_template_name"+prodln+"' size='' value='' title='' autocomplete='off' accesskey='7' type='text' >"+
-  "<input name='line_hat_counting_task_templates_id_c["+prodln+"]' id='line_hat_counting_task_templates_id_c"+prodln+"' type='hidden' value=''>"+
-  "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn_value' id='btn_value' onclick='openTemplatePopup(" + prodln + ");' ><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' ></button>"+
-  "<button type='button' name='btn_clr_templatename' id='btn_clr_templatename' tabindex='0' title='清除选择' class='button lastChild' onclick='SUGAR.clearRelateField(this.form, \"line_template_name\", \"line_hat_counting_task_templates_id_c\","+prodln+");' value='清除选择'><img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button>"+
-  "<td>"+SUGAR.language.get('HAT_Counting_Policies', 'LBL_ENABLED_FLAG')+"<span class='required'>*</span></td>"+
-  "<input type='hidden' name='line_enabled_flag["+prodln+"]' value='0'> "+
-  "<td><input name='line_enabled_flag["+prodln+"]' id='line_enabled_flag"+prodln+"' title='' value='1' type='checkbox' checked></td>"+
-  "</tr>"+
-  "<tr>"+
-  "<td>"+SUGAR.language.get('HAT_Counting_Policies', 'LBL_DESCRIPTION')+"</td>"+
-  "<td><textarea id='line_description"+prodln+"' name='line_description["+prodln+"]' rows='2' cols='50' title='' tabindex='0' style='overflow: hidden;'></textarea></td>"+
-  "<td><input type='hidden' id='line_deleted"+prodln+"' name='line_deleted["+prodln+"]' value='0'></td>"+
-  "<td><input type='button' id='line_delete_line" + prodln + "' class='button btn_del' value='" + SUGAR.language.get('app_strings', 'LBL_DELETE_INLINE') + "' tabindex='116' onclick='btnMarkLineDeleted(" + prodln + ",\"line_\")'>"+
-  "<button type='button' id='btn_LineEditorClose" + prodln + "' class='button btn_save' value='" + SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE') + "' tabindex='116' onclick='LineEditorClose(" + prodln + ",\"line_\")'>"+SUGAR.language.get('app_strings', 'LBL_SAVE_BUTTON_LABEL')+" & "+SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE')+" <img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button></td>"+
-  "</tr>"+
-  "</table></td>";
-    addToValidate('EditView', 'line_group_name'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Counting_Policies', 'LBL_POLICY_GROUP'));
-    addToValidate('EditView', 'line_split_type'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Counting_Policies', 'LBL_SPLIT_TYPE'));
-    addToValidate('EditView', 'line_name'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Counting_Policies', 'LBL_NAME'));
-    addToValidate('EditView', 'line_data_populate_sql'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Counting_Policies', 'LBL_DATA_POPULATE_SQL'));
-    addToValidate('EditView', 'line_enabled_flag'+ prodln,'int', 'true',SUGAR.language.get('HAT_Counting_Policies', 'LBL_ENABLED_FLAG'));
-    addToValidate('EditView', 'line_hat_counting_task_templates_id_c'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Counting_Policies', 'LBL_TASK_TEMPLATES'));
+ // "<td>"+SUGAR.language.get('HAT_Counting_Policies', 'LBL_POLICY_GROUP')+"<span class='required'>*</span></td>"+
+ // "<td><input name='line_group_name["+prodln+"]'  id='line_group_name"+prodln+"'  value=''  type='text' readonly>"+
+ "<input name='line_hat_counting_policy_groups_id_c["+prodln+"]' id='line_hat_counting_policy_groups_id_c"+prodln+"' type='hidden' value=''>"+
+ "<td>"+SUGAR.language.get('HAT_Counting_Policies', 'LBL_SPLIT_TYPE')+"<span class='required'>*</span></td>"+
+ "<td><select tabindex='116' name='line_split_type[" + prodln + "]' id='line_split_type" + prodln + "'>" + line_item_type_option +"</select></td>"+
+ "<td>"+SUGAR.language.get('HAT_Counting_Policies', 'LBL_NAME')+"<span class='required'>*</span></td>"+
+ "<td><input name='line_name["+prodln+"]' id='line_name"+prodln+"' size='30' maxlength='255' type='text'></td>"+
+ "</tr>"+
+ "<tr>"+
+ "<td>"+SUGAR.language.get('HAT_Counting_Policies', 'LBL_DATA_POPULATE_SQL')+"<span class='required'>*</span></td>"+
+ "<td><textarea id='line_data_populate_sql"+prodln+"' name='line_data_populate_sql["+prodln+"]' rows='2' cols='50' title='' tabindex='0' style='overflow: hidden;'></textarea></td>"+
+ "<td>"+SUGAR.language.get('HAT_Counting_Policies', 'LBL_ADDITIONAL_LOGIC')+"</td>"+
+ "<td><textarea id='line_additional_logic"+prodln+"' name='line_additional_logic["+prodln+"]' rows='2' cols='50' title='' tabindex='0' style='overflow: hidden;'></textarea></td>"+
+ "<tr>"+
+ "<td>"+SUGAR.language.get('HAT_Counting_Policies', 'LBL_TASK_TEMPLATES')+"<span class='required'>*</span></td>"+
+ "<td><input name='line_template_name["+prodln+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='line_template_name"+prodln+"' size='' value='' title='' autocomplete='off' accesskey='7' type='text' >"+
+ "<input name='line_hat_counting_task_templates_id_c["+prodln+"]' id='line_hat_counting_task_templates_id_c"+prodln+"' type='hidden' value=''>"+
+ "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn_value' id='btn_value' onclick='openTemplatePopup(" + prodln + ");' ><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' ></button>"+
+ "<button type='button' name='btn_clr_templatename' id='btn_clr_templatename' tabindex='0' title='清除选择' class='button lastChild' onclick='SUGAR.clearRelateField(this.form, \"line_template_name\", \"line_hat_counting_task_templates_id_c\","+prodln+");' value='清除选择'><img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button>"+
+ "<td>"+SUGAR.language.get('HAT_Counting_Policies', 'LBL_ENABLED_FLAG')+"<span class='required'>*</span></td>"+
+ "<input type='hidden' name='line_enabled_flag["+prodln+"]' value='0'> "+
+ "<td><input name='line_enabled_flag["+prodln+"]' id='line_enabled_flag"+prodln+"' title='' value='1' type='checkbox' checked></td>"+
+ "</tr>"+
+ "<tr>"+
+ "<td>"+SUGAR.language.get('HAT_Counting_Policies', 'LBL_DESCRIPTION')+"</td>"+
+ "<td><textarea id='line_description"+prodln+"' name='line_description["+prodln+"]' rows='2' cols='50' title='' tabindex='0' style='overflow: hidden;'></textarea></td>"+
+ "<td><input type='hidden' id='line_deleted"+prodln+"' name='line_deleted["+prodln+"]' value='0'></td>"+
+ "<td><input type='button' id='line_delete_line" + prodln + "' class='button btn_del' value='" + SUGAR.language.get('app_strings', 'LBL_DELETE_INLINE') + "' tabindex='116' onclick='btnMarkLineDeleted(" + prodln + ",\"line_\")'>"+
+ "<button type='button' id='btn_LineEditorClose" + prodln + "' class='button btn_save' value='" + SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE') + "' tabindex='116' onclick='LineEditorClose(" + prodln + ",\"line_\")'>"+SUGAR.language.get('app_strings', 'LBL_SAVE_BUTTON_LABEL')+" & "+SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE')+" <img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button></td>"+
+ "</tr>"+
+ "</table></td>";
+ //addToValidate('EditView', 'line_group_name'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Counting_Policies', 'LBL_POLICY_GROUP'));
+ addToValidate('EditView', 'line_split_type'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Counting_Policies', 'LBL_SPLIT_TYPE'));
+ addToValidate('EditView', 'line_name'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Counting_Policies', 'LBL_NAME'));
+ addToValidate('EditView', 'line_data_populate_sql'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Counting_Policies', 'LBL_DATA_POPULATE_SQL'));
+ addToValidate('EditView', 'line_enabled_flag'+ prodln,'int', 'true',SUGAR.language.get('HAT_Counting_Policies', 'LBL_ENABLED_FLAG'));
+ addToValidate('EditView', 'line_hat_counting_task_templates_id_c'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Counting_Policies', 'LBL_TASK_TEMPLATES'));
 
-    clr_value('#line_template_name','#line_hat_counting_task_templates_id_c',prodln);
+ clr_value('#line_template_name','#line_hat_counting_task_templates_id_c',prodln);
 
-    renderLine(prodln);
-    num=prodln;
-    prodln++;
-    return prodln - 1;
-  }
+ renderLine(prodln);
+ num=prodln;
+ prodln++;
+ return prodln - 1;
+}
 
 function renderLine(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_line_name"+ln).html($("#line_name"+ln).val());
@@ -141,8 +147,9 @@ function renderLine(ln) { //将编辑器中的内容显示于正常行中
   var flag=$("#line_enabled_flag"+ln).is(':checked')?"是":"否";
   $("#displayed_line_enabled_flag"+ln).html(flag);
   $("#displayed_line_description"+ln).html($("#line_description"+ln).val());
-  $("#displayed_line_group_name"+ln).html($("#line_group_name"+ln).val());
+  //$("#displayed_line_group_name"+ln).html($("#line_group_name"+ln).val());
   $("#displayed_line_template_name"+ln).html($("#line_template_name"+ln).val());
+  $("#displayed_line_additional_logic"+ln).html($("#line_additional_logic"+ln).val());
 
   $("#lineItems tr td").each(function(){
     $(this).css('vertical-align','middle');
@@ -193,7 +200,7 @@ function markLineDeleted(ln, key) {//删除当前行
     removeFromValidate('EditView','line_name'+ ln);
     removeFromValidate('EditView','line_data_populate_sql'+ ln);
     removeFromValidate('EditView','line_split_accord'+ ln);
-    removeFromValidate('EditView','line_group_name'+ ln);
+    //removeFromValidate('EditView','line_group_name'+ ln);
     removeFromValidate('EditView','line_hat_counting_task_templates_id_c'+ ln);
   }
   resetLineNum_Bold();
@@ -233,7 +240,7 @@ function resetLineNum_Bold() {//数行号
 }
 
 function validate(ln){
-  addToValidate('EditView', 'line_policy_group_name'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Counting_Policies', 'LBL_POLICY_GROUP'));
+  //addToValidate('EditView', 'line_policy_group_name'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Counting_Policies', 'LBL_POLICY_GROUP'));
   addToValidate('EditView', 'line_split_type'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Counting_Policies', 'LBL_SPLIT_TYPE'));
   addToValidate('EditView', 'line_name'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Counting_Policies', 'LBL_NAME'));
   addToValidate('EditView', 'line_data_populate_sql'+ prodln,'varchar', 'true',SUGAR.language.get('HAT_Counting_Policies', 'LBL_DATA_POPULATE_SQL'));
@@ -259,8 +266,8 @@ function replace_display_lines(linesHtml,elementId) {
 }
 
 function setdefaultvalue(ln){
-var group_name =$("#name").val();
-$("#line_group_name"+ln).val(group_name);
+  var group_name =$("#name").val();
+  $("#line_group_name"+ln).val(group_name);
 }
 
 function clr_value(attr_name,attr_id,ln){

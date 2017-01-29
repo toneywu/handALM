@@ -1,5 +1,5 @@
 <?php
-// created: 2017-01-16 22:27:05
+// created: 2017-01-22 16:54:03
 $subpanel_layout['list_fields'] = array (
   'location' => 
   array (
@@ -8,7 +8,7 @@ $subpanel_layout['list_fields'] = array (
     'vname' => 'LBL_LOCATION',
     'id' => 'HAT_ASSET_LOCATIONS_ID_C',
     'link' => true,
-    'width' => '10%',
+    'width' => '8%',
     'default' => true,
     'widget_class' => 'SubPanelDetailViewLink',
     'target_module' => 'HAT_Asset_Locations',
@@ -28,7 +28,7 @@ $subpanel_layout['list_fields'] = array (
     'vname' => 'LBL_ORANIZATION',
     'id' => 'ACCOUNT_ID_C',
     'link' => true,
-    'width' => '10%',
+    'width' => '8%',
     'default' => true,
     'widget_class' => 'SubPanelDetailViewLink',
     'target_module' => 'Accounts',
@@ -41,6 +41,26 @@ $subpanel_layout['list_fields'] = array (
     'vname' => 'LBL_ORG_DRILLDOWN',
     'width' => '7%',
   ),
+  'using_organization' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'vname' => 'LBL_USING_ORGANIZATION',
+    'id' => 'ACCOUNT_ID_C1',
+    'link' => true,
+    'width' => '8%',
+    'default' => true,
+    'widget_class' => 'SubPanelDetailViewLink',
+    'target_module' => 'Accounts',
+    'target_record_key' => 'account_id_c1',
+  ),
+  'using_org_drilldown' => 
+  array (
+    'type' => 'bool',
+    'default' => true,
+    'vname' => 'LBL_USING_ORG_DRILLDOWN',
+    'width' => '7%',
+  ),
   'major' => 
   array (
     'type' => 'relate',
@@ -48,7 +68,7 @@ $subpanel_layout['list_fields'] = array (
     'vname' => 'LBL_MAJOR',
     'id' => 'HAA_CODES_ID_C',
     'link' => true,
-    'width' => '10%',
+    'width' => '8%',
     'default' => true,
     'widget_class' => 'SubPanelDetailViewLink',
     'target_module' => 'HAA_Codes',
@@ -68,7 +88,7 @@ $subpanel_layout['list_fields'] = array (
     'vname' => 'LBL_CATEGORY',
     'id' => 'AOS_PRODUCT_CATEGORIES_ID_C',
     'link' => true,
-    'width' => '10%',
+    'width' => '8%',
     'default' => true,
     'widget_class' => 'SubPanelDetailViewLink',
     'target_module' => 'AOS_Product_Categories',
@@ -88,7 +108,7 @@ $subpanel_layout['list_fields'] = array (
     'vname' => 'LBL_USER_PERSON',
     'id' => 'USER_CONTACTS_ID_C',
     'link' => true,
-    'width' => '7%',
+    'width' => '8%',
     'default' => true,
     'widget_class' => 'SubPanelDetailViewLink',
     'target_module' => 'Contacts',
@@ -101,24 +121,11 @@ $subpanel_layout['list_fields'] = array (
     'vname' => 'LBL_OWN_PERSON',
     'id' => 'OWN_CONTACTS_ID_C',
     'link' => true,
-    'width' => '7%',
+    'width' => '8%',
     'default' => true,
     'widget_class' => 'SubPanelDetailViewLink',
     'target_module' => 'Contacts',
     'target_record_key' => 'own_contacts_id_c',
-  ),
-  'counting_policy_groups' => 
-  array (
-    'type' => 'relate',
-    'studio' => 'visible',
-    'vname' => 'LBL_COUNTING_POLICY_GROUPS',
-    'id' => 'HAT_COUNTING_POLICY_GROUPS_ID_C',
-    'link' => true,
-    'width' => '10%',
-    'default' => true,
-    'widget_class' => 'SubPanelDetailViewLink',
-    'target_module' => 'HAT_Counting_Policy_Groups',
-    'target_record_key' => 'hat_counting_policy_groups_id_c',
   ),
   'counting_policies' => 
   array (
@@ -133,14 +140,14 @@ $subpanel_layout['list_fields'] = array (
     'target_module' => 'HAT_Counting_Policies',
     'target_record_key' => 'hat_counting_policies_id_c',
   ),
-/*  'edit_button' => 
+  'edit_button' => 
   array (
     'vname' => 'LBL_EDIT_BUTTON',
     'widget_class' => 'SubPanelEditButton',
     'module' => 'HAT_Counting_Batch_Rules',
     'width' => '4%',
     'default' => true,
-  ),*/
+  ),
   'remove_button' => 
   array (
     'vname' => 'LBL_REMOVE',

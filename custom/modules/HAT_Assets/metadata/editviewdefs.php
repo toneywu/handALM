@@ -575,7 +575,7 @@ array (
         array (
           0 => 
           array (
-            'name' => 'owning_person_desc',
+            'name' => 'owning_person',
             'studio' => 'visible',
             'label' => 'LBL_OWNING_PERSON',
             'displayParams' => 
@@ -617,7 +617,7 @@ array (
         array (
           0 => 
           array (
-            'name' => 'using_person_desc',
+            'name' => 'using_person',
             'studio' => 'visible',
             'label' => 'LBL_USING_PERSON',
             'displayParams' => 

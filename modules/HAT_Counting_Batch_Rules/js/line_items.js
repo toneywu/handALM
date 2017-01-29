@@ -1,6 +1,7 @@
 var prodln = 0;
-var columnNum = 13;
+var columnNum = 15;
 var lineno;
+var num;
 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
 
 function insertLineHeader(tableid){
@@ -36,35 +37,41 @@ function insertLineHeader(tableid){
   var h=x.insertCell(3);
   h.style="height: 40px;line-height: 40px";
   h.innerHTML=SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_ORG_DRILLDOWN');
-  var i=x.insertCell(4);
+   var g1=x.insertCell(4);
+  g1.style="height: 40px;line-height: 40px";
+  g1.innerHTML=SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_USING_ORGANIZATION');
+  var h1=x.insertCell(5);
+  h1.style="height: 40px;line-height: 40px";
+  h1.innerHTML=SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_USING_ORG_DRILLDOWN');
+  var i=x.insertCell(6);
   i.style="height: 40px;line-height: 40px";
   i.innerHTML=SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_MAJOR');
-  var j=x.insertCell(5);
+  var j=x.insertCell(7);
   j.style="height: 40px;line-height: 40px";
   j.innerHTML=SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_MAJOR_DRILLDOWN');
-  var k=x.insertCell(6);
+  var k=x.insertCell(8);
   k.style="height: 40px;line-height: 40px";
   k.innerHTML=SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_CATEGORY');
-  var l=x.insertCell(7);
+  var l=x.insertCell(9);
   l.style="height: 40px;line-height: 40px";
   l.innerHTML=SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_CATEGORY_DRILLDOWN');
-  var m=x.insertCell(8);
+  var m=x.insertCell(10);
   m.style="height: 40px;line-height: 40px";
   m.innerHTML=SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_USER_PERSON');
-  var i=x.insertCell(9);
+  var i=x.insertCell(11);
   i.style="height: 40px;line-height: 40px";
   i.innerHTML=SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_OWN_PERSON');
-  var n1=x.insertCell(10);
+  var n1=x.insertCell(12);
   n1.style="height: 40px;line-height: 40px";
   n1.innerHTML=SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_COUNTING_POLICY_GROUPS');
-  var n=x.insertCell(11);
+  var n=x.insertCell(13);
   n.style="height: 40px;line-height: 40px";
   n.innerHTML=SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_COUNTING_POLICIES');
   /*
   var j=x.insertCell(11);
   j.style="height: 40px;line-height: 40px";
   j.innerHTML=SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_COUNTING_RULE');*/
-  var f=x.insertCell(12);
+  var f=x.insertCell(14);
   f.innerHTML='&nbsp;';
 }
 
@@ -92,6 +99,8 @@ function insertLineData(line_data ){ //将数据写入到对应的行字段中
     $("#line_user_contacts_id_c".concat(String(ln))).val(line_data.user_contacts_id_c);
     $("#line_own_name".concat(String(ln))).val(line_data.own_name);
     $("#line_own_contacts_id_c".concat(String(ln))).val(line_data.own_contacts_id_c);
+    $("#line_using_org_name".concat(String(ln))).val(line_data.using_org_name);
+    $("#line_account_id_c1".concat(String(ln))).val(line_data.account_id_c1);
     $("#line_account_name".concat(String(ln))).val(line_data.account_name);
     $("#line_account_id_c".concat(String(ln))).val(line_data.account_id_c);
     $("#line_code_name".concat(String(ln))).val(line_data.code_name);
@@ -102,6 +111,8 @@ function insertLineData(line_data ){ //将数据写入到对应的行字段中
     $("#line_location_drilldown".concat(String(ln))).val(line_data.location_drilldown);
     $("#line_org_drilldown".concat(String(ln))).attr('checked',line_data.org_drilldown==1?true:false);
     $("#line_org_drilldown".concat(String(ln))).val(line_data.org_drilldown);
+    $("#line_using_org_drilldown".concat(String(ln))).attr('checked',line_data.using_org_drilldown==1?true:false);
+    $("#line_using_org_drilldown".concat(String(ln))).val(line_data.using_org_drilldown);
     $("#line_major_drilldown".concat(String(ln))).attr('checked',line_data.major_drilldown==1?true:false);
     $("#line_major_drilldown".concat(String(ln))).val(line_data.major_drilldown);
     $("#line_category_drilldown".concat(String(ln))).attr('checked',line_data.category_drilldown==1?true:false);
@@ -146,6 +157,8 @@ z1.innerHTML  =
 "<td><span name='displayed_line_location_drilldown[" + prodln + "]' id='displayed_line_location_drilldown" + prodln + "'></span></td>"+
 "<td><span name='displayed_line_account_name[" + prodln + "]' id='displayed_line_account_name" + prodln + "'></span></td>" +
 "<td><span name='displayed_line_org_drilldown[" + prodln + "]' id='displayed_line_org_drilldown" + prodln + "'></span></td>"+
+"<td><span name='displayed_line_using_org_name[" + prodln + "]' id='displayed_line_using_org_name" + prodln + "'></span></td>" +
+"<td><span name='displayed_line_using_org_drilldown[" + prodln + "]' id='displayed_line_using_org_drilldown" + prodln + "'></span></td>"+
 "<td><span name='displayed_line_code_name[" + prodln + "]' id='displayed_line_code_name" + prodln + "'></span></td>" +
 "<td><span name='displayed_line_major_drilldown[" + prodln + "]' id='displayed_line_major_drilldown" + prodln + "'></span></td>"+
 "<td><span name='displayed_line_category_name[" + prodln + "]' id='displayed_line_category_name" + prodln + "'></span></td>" +
@@ -210,6 +223,17 @@ z1.innerHTML  =
     "</td>"+
   "</tr>"+
   "<tr>"+
+    "<td>"+SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_USING_ORGANIZATION')+"</td>"+
+    "<td><input name='line_using_org_name["+prodln+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='line_using_org_name"+prodln+"' size='' value='' title='' autocomplete='off' accesskey='7' type='text'>"+
+    "<input name='line_account_id_c1["+prodln+"]' id='line_account_id_c1"+prodln+"' type='hidden' value=''>"+
+    "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openUsingOrgPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+    "<button type='button' name='btn_clr_usingorgname' id='btn_clr_usingorgname' tabindex='0' title='清除选择' class='button lastChild' onclick='SUGAR.clearRelateField(this.form, \"line_using_org_name"+prodln+"\", \"line_account_id_c1"+prodln+"\");' value='清除选择'><img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button>"+"</td>"+
+    "<td>"+SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_USING_ORG_DRILLDOWN')+"</td>"+
+    "<input type='hidden' name='line_using_org_drilldown["+prodln+"]' value='0'> "+
+    "<td><input name='line_using_org_drilldown["+prodln+"]' id='line_using_org_drilldown"+prodln+"' title='' value='1' type='checkbox' checked></td>"+
+    "</td>"+
+  "</tr>"+
+  "<tr>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_MAJOR')+"</td>"+
     "<td><input name='line_code_name["+prodln+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='line_code_name"+prodln+"' size='' value='' title='' autocomplete='off' accesskey='7' type='text'>"+
     "<input name='line_haa_codes_id_c["+prodln+"]' id='line_haa_codes_id_c"+prodln+"' type='hidden' value=''>"+
@@ -258,9 +282,9 @@ z1.innerHTML  =
     "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openPolicyGroupPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
     "<button type='button' name='btn_clr_policygroupname' id='btn_clr_policygroupname' tabindex='0' title='清除选择' class='button lastChild' onclick='setpolicyval(this.form, \"line_policy_group_name\", \"line_hat_counting_policy_groups_id_c\","+prodln+");' value='清除选择'><img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button>"+"</td>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_COUNTING_POLICIES')+"</td>"+
-    "<td><input name='line_policy_name["+prodln+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='line_policy_name"+prodln+"' size='' value='' title='' autocomplete='off' accesskey='7' type='text'>"+
+    "<td><input name='line_policy_name["+prodln+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='line_policy_name"+prodln+"' size='' value='' title='' autocomplete='off' accesskey='7' type='text' disabled='disabled' >"+
     "<input name='line_hat_counting_policies_id_c["+prodln+"]' id='line_hat_counting_policies_id_c"+prodln+"' type='hidden' value=''>"+
-    "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openPolicyPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+    "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn_policy["+prodln+"]' id='btn_policy"+prodln+"' onclick='openPolicyPopup(" + prodln + ");' disabled='disabled' ><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
     "<button type='button' name='btn_clr_policyname' id='btn_clr_policyname' tabindex='0' title='清除选择' class='button lastChild' onclick='SUGAR.clearRelateField(this.form, \"line_policy_name"+prodln+"\", \"line_hat_counting_policies_id_c"+prodln+"\");' value='清除选择'><img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button>"+"</td>"+
     "<td><input type='hidden' id='line_deleted"+prodln+"' name='line_deleted["+prodln+"]' value='0'></td>"+
     "<td><input type='button' id='line_delete_line" + prodln + "' class='button btn_del' value='" + SUGAR.language.get('app_strings', 'LBL_DELETE_INLINE') + "' tabindex='116' onclick='btnMarkLineDeleted(" + prodln + ",\"line_\")'>"+
@@ -276,9 +300,11 @@ z1.innerHTML  =
     clr_value('#line_user_name','#line_user_contacts_id_c',prodln);
     clr_value('#line_own_name','#line_own_contacts_id_c',prodln);
     clr_value('#line_policy_group_name','#line_hat_counting_policy_groups_id_c',prodln);
+    clr_value('#line_using_org_name','#line_account_id_c1',prodln);
 
 
     renderLine(prodln);
+    num =prodln;
     prodln++;
     return prodln - 1;
   }
@@ -312,6 +338,9 @@ function renderLine(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_line_own_name"+ln).html($("#line_own_name"+ln).val());
   $("#displayed_line_policy_name"+ln).html($("#line_policy_name"+ln).val());
   $("#displayed_line_policy_group_name"+ln).html($("#line_policy_group_name"+ln).val());
+  $("#displayed_line_using_org_name"+ln).html($("#line_using_org_name"+ln).val());
+  var flag=$("#line_using_org_drilldown"+ln).is(':checked')?"是":"否";
+  $("#displayed_line_using_org_drilldown"+ln).html(flag);
   //$("#displayed_line_rule_name"+ln).html($("#line_rule_name"+ln).val());
 
 }
@@ -428,6 +457,25 @@ function openOrgPopup(ln){
 }
 
 function setOrgReturn(popupReplyData){
+  set_return(popupReplyData);
+}
+
+function openUsingOrgPopup(ln){
+  lineno=ln;
+  var popupRequestData = {
+    "call_back_function" : "setUsingOrgReturn",
+    "form_name" : "EditView",
+    "field_to_name_array" : {
+      "id":"line_account_id_c1"+ln,
+      "name" : "line_using_org_name" + ln,
+      //"insurance_type":"line_insurance_type"+ln,
+    }
+  };
+  var frame='&module_name=HAT_Counting_Batchs&frame_c_advanced='+$("#haa_framework").val();
+  open_popup('Accounts', 800, 850,frame, true, true, popupRequestData);
+}
+
+function setUsingOrgReturn(popupReplyData){
   set_return(popupReplyData);
 }
 
@@ -576,6 +624,14 @@ function setpolicyval(form,name,id,ln){
 function setnullpolicy(ln){
   $("#line_policy_name"+ln).val("");
   $("#line_hat_counting_policies_id_c"+ln).val("");
+  if(document.getElementById("line_hat_counting_policy_groups_id_c"+ln).value!=''){
+    document.getElementById("line_policy_name"+ln).disabled=false;
+    document.getElementById("btn_policy"+ln).disabled=false;
+  }else
+  {
+    document.getElementById("line_policy_name"+ln).disabled=true;
+    document.getElementById("btn_policy"+ln).disabled=true;
+  }
 }
 /*function validate(ln){
  

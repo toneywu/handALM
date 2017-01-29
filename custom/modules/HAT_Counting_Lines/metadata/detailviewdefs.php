@@ -50,16 +50,6 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-      /*  'LBL_EDITVIEW_PANEL1' => 
-        array (
-          'newTab' => false,
-          'panelDefault' => 'expanded',
-        ),
-        'LBL_EDITVIEW_PANEL2' => 
-        array (
-          'newTab' => false,
-          'panelDefault' => 'expanded',
-        ),*/
       ),
       'syncDetailEditViews' => true,
     ),
@@ -101,16 +91,11 @@ array (
         array (
           0 => 
           array (
-            'name' => 'fixed_asset',
-            'studio' => 'visible',
-            'label' => 'LBL_FIXED_ASSET',
-          ),
-          1 => 
-          array (
             'name' => 'counting_status',
             'studio' => 'visible',
             'label' => 'LBL_COUNTING_STATUS',
           ),
+          1 => '',
         ),
       ),
       'lbl_editview_panel3' => 
@@ -124,28 +109,6 @@ array (
           ),
         ),
       ),
-  /*    'lbl_editview_panel1' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            'name' => 'line_items',
-            'label' => 'LBL_LINE_ITEMS',
-          ),
-        ),
-      ),
-      'lbl_editview_panel2' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            'name' => 'line_doc_items',
-            'label' => 'LBL_LINE_DOC_ITEMS',
-          ),
-        ),
-      ),*/
     ),
   ),
 );

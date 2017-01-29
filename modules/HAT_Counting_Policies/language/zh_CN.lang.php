@@ -78,4 +78,5 @@ $mod_strings = array (
   'LBL_BTN_ADD_LINE' => '新增',
   'LBL_POLICY_GROUP' => '盘点策略组',
   'LBL_TASK_TEMPLATES' => '盘点任务模版',
+  'LBL_ADDITIONAL_LOGIC' => '附加逻辑',
 );
