@@ -695,14 +695,17 @@ class SugarView
         $headerTpl = $themeObject->getTemplate('header.tpl');
         if (inDeveloperMode() )
             $ss->clear_compiled_tpl($headerTpl);
+
 // Add by zengchen 20170125
+//增加客户化菜单导航
         require_once("modules/HAA_Menus/HAA_Menus.php");
         $menus=new HAA_Menus();
-        $ss->assign("all_menus","全部功能");
+        $ss->assign("all_menus","菜单导航");
         $ss->assign("lead_label","导航栏");
         $ss->assign("exthead",$menus->menuHeadData());
         $ss->assign("extmenus",$menus->menusData());
  //End Add By zengchen 20170125
+
         if ($retModTabs)
         {
             return $ss->fetch($themeObject->getTemplate('_headerModuleList.tpl'));

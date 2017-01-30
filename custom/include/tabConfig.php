@@ -1,5 +1,5 @@
 <?php
-// created: 2017-01-20 13:56:39
+// created: 2017-01-30 17:24:33
 $GLOBALS['tabStructure'] = array (
   'LBL_TABGROUP_SALES' => 
   array (
@@ -93,8 +93,9 @@ $GLOBALS['tabStructure'] = array (
       0 => 'AOS_Products',
       1 => 'HMM_MO_Requests',
       2 => 'HMM_Trans_Batch',
-      3 => 'HMM_Trans_Lines',
-      4 => 'HMM_Trans_History',
+      3 => 'HAT_Counting_Rules',
+      4 => 'HMM_Trans_Lines',
+      5 => 'HMM_Trans_History',
     ),
   ),
   'LBL_TABGROUP_MARKETING' => 
@@ -120,7 +121,11 @@ $GLOBALS['tabStructure'] = array (
       15 => 'HAA_FSQL',
       16 => 'HAA_ValueSets',
       17 => 'HAA_SSOSets',
-      18 => 'HAA_Interfaces',
+      18 => 'HAA_Functions',
+      19 => 'HAA_Menus',
+      20 => 'HPR_Groups',
+      21 => 'HAA_Interfaces',
+      22 => 'HAA_Import_Sets',
     ),
   ),
   'LBL_GROUPTAB8_1484891799' => 
@@ -128,12 +133,11 @@ $GLOBALS['tabStructure'] = array (
     'label' => 'LBL_GROUPTAB8_1484891799',
     'modules' => 
     array (
-      0 => 'HAT_Counting_Rules',
-      1 => 'HAT_Counting_Policy_Groups',
-      2 => 'HAT_Counting_Task_Templates',
-      3 => 'HAT_Counting_Batchs',
-      4 => 'HAT_Counting_Tasks',
-      5 => 'HAT_Counting_Lines',
+      0 => 'HAT_Counting_Policy_Groups',
+      1 => 'HAT_Counting_Task_Templates',
+      2 => 'HAT_Counting_Batchs',
+      3 => 'HAT_Counting_Tasks',
+      4 => 'HAT_Counting_Lines',
     ),
   ),
 );
