@@ -50,27 +50,67 @@ $viewdefs[$module_name]['DetailView'] = array(
 
 'panels' =>array (
 
-  array (
-    'name',
-    'assigned_user_name',
-  ),
-
-  array (
-	array (
-      'name' => 'date_entered',
-      'customCode' => '{$fields.date_entered.value} {$APP.LBL_BY} {$fields.created_by_name.value}',
-      'label' => 'LBL_DATE_ENTERED',
-    ),
-    array (
-      'name' => 'date_modified',
-      'customCode' => '{$fields.date_modified.value} {$APP.LBL_BY} {$fields.modified_by_name.value}',
-      'label' => 'LBL_DATE_MODIFIED',
-    ),
-  ),
-
-  array (
-    'description',
-  ),
+'default' => 
+      array (
+        0 =>
+        array (
+          0 => 
+          array (
+            'name' => 'menu_code',
+            'studio' => 'visible',
+            'label' => 'LBL_MENU_CODE',
+          ),
+          1 => 
+          array(
+            'name' => 'name',
+          ),
+        ),
+        1 =>
+        array(
+          0 => array(
+            'name' => 'menu_type',
+            'studio' => 'visible',
+            'label' => 'LBL_MENU_TYPE',
+          ),
+          1 => array(
+            'name' => 'frameworks',
+            'studio' => 'visible',
+            'label' => 'LBL_FRAMEWORKS',
+            'displayParams' =>
+            array(
+              'initial_filter'=>'&deleted_advanced=0',
+            ),
+          ),
+        ),
+        2 =>
+        array(
+          0 => array(
+            'name' => 'navigate_display_flag',
+            'studio' => 'visible',
+            'label' => 'LBL_NAVIGATE_DISPLAY_FLAG',
+          ),
+          1 => array(
+            'name' => 'sort_order',
+            'studio' => 'visible',
+            'label' => 'LBL_SORT_ORDER',
+          ),
+        ),
+        3 =>
+        array (
+          0 =>
+          array(
+            'name' => 'enabled_flag',
+            'studio' => 'visible',
+            'label' => 'LBL_ENABLED_FLAG',
+          ),
+          1 =>
+          array(
+            'name' => 'description',
+            'studio' => 'visible',
+            'label' => 'LBL_DESCRIPTION',
+          ),
+        ),
+      ), 
 )
 );
 ?>
