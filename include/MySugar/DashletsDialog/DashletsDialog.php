@@ -42,18 +42,18 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 
 class DashletsDialog {
-	var $dashlets = array();
+    var $dashlets = array();
 
     function getDashlets($category='') {
         global $app_strings, $current_language, $mod_strings;
 
         require_once($GLOBALS['sugar_config']['cache_dir'].'dashlets/dashlets.php');
 
-        $categories = array( 'module' 	=> 'Module Views',
-            'portal' 	=> 'Portal',
-            'charts'	=> 'Charts',
-            'tools'	=> 'Tools',
-            'misc'		=> 'Miscellaneous',
+        $categories = array( 'module'   => 'Module Views',
+            'portal'    => 'Portal',
+            'charts'    => 'Charts',
+            'tools' => 'Tools',
+            'misc'      => 'Miscellaneous',
             'web'      => 'Web');
 
         $dashletStrings = array();
@@ -63,6 +63,7 @@ class DashletsDialog {
             $dashletsList[$categories[$category]] = array();
         }
         else{
+
             $dashletsList['Module Views'] = array();
             $dashletsList['Charts'] = array();
             $dashletsList['Tools'] = array();
@@ -176,6 +177,12 @@ class DashletsDialog {
                         array_push($dashletsList[$categories[$category]], $cell);
                     }
                     else if (empty($category)){
+                        //Modefy By osmond.liu 170131
+                        //避免因为数组未初始化报错
+                        if (count($dashletsList[$dashletMeta[$files['class']]['category']])==0){
+                         $dashletsList[$dashletMeta[$files['class']]['category']]=array();
+                        }
+                        //End 170131
                         array_push($dashletsList[$dashletMeta[$files['class']]['category']], $cell);
                     }
                 }

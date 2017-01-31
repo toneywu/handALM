@@ -837,6 +837,10 @@ $app_list_strings['haa_listview_align_code']=array (
 	'C' => '居中',
 	'R' => '右对齐',
 	);
+$app_list_strings['haa_listview_window_type']=array (
+	'dashlet' => 'Dashlet',
+	'popup' => '值列表',
+	);
 
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by

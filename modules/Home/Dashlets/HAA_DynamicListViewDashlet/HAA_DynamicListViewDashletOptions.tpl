@@ -1,4 +1,5 @@
-<?php
+{*
+
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
@@ -37,80 +38,37 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
-$module_name = 'HAA_Menus';
-$viewdefs[$module_name]['DetailView'] = array(
-'templateMeta' => array('form' => array('buttons'=>array('EDIT', 'DUPLICATE', 'DELETE', 'FIND_DUPLICATES',
-                                                         )),
-                        'maxColumns' => '2',
-                        'widths' => array(
-                                        array('label' => '10', 'field' => '30'),
-                                        array('label' => '10', 'field' => '30')
-                                        ),
-                        ),
 
-'panels' =>array (
 
-'default' => 
-      array (
-        0 =>
-        array (
-          0 => 
-          array (
-            'name' => 'menu_code',
-            'studio' => 'visible',
-            'label' => 'LBL_MENU_CODE',
-          ),
-          1 => 
-          array(
-            'name' => 'name',
-          ),
-        ),
-        1 =>
-        array(
-          0 => array(
-            'name' => 'menu_type',
-            'studio' => 'visible',
-            'label' => 'LBL_MENU_TYPE',
-          ),
-          1 => array(
-            'name' => 'frameworks',
-            'studio' => 'visible',
-            'label' => 'LBL_FRAMEWORKS',
-            'displayParams' =>
-            array(
-              'initial_filter'=>'&deleted_advanced=0',
-            ),
-          ),
-        ),
-        2 =>
-        array(
-          0 => array(
-            'name' => 'navigate_display_flag',
-            'studio' => 'visible',
-            'label' => 'LBL_NAVIGATE_DISPLAY_FLAG',
-          ),
-          1 => array(
-            'name' => 'sort_order',
-            'studio' => 'visible',
-            'label' => 'LBL_SORT_ORDER',
-          ),
-        ),
-        3 =>
-        array (
-          0 =>
-          array(
-            'name' => 'enabled_flag',
-            'studio' => 'visible',
-            'label' => 'LBL_ENABLED_FLAG',
-          ),
-          1 =>
-          array(
-            'name' => 'description',
-            'studio' => 'visible',
-            'label' => 'LBL_DESCRIPTION',
-          ),
-        ),
-      ), 
-)
-);
-?>
+
+*}
+
+
+<div style='width: 500px'>
+<form name='configure_{$id}' action="index.php" method="post" onSubmit='return SUGAR.dashlets.postForm("configure_{$id}", SUGAR.mySugar.uncoverPage);'>
+<input type='hidden' name='id' value='{$id}'>
+<input type='hidden' name='module' value='Home'>
+<input type='hidden' name='action' value='ConfigureDashlet'>
+<input type='hidden' name='to_pdf' value='true'>
+<input type='hidden' name='configure' value='true'>
+<table width="400" cellpadding="0" cellspacing="0" border="0" class="edit view" align="center">
+<tr>
+    <td valign='top' nowrap class='dataLabel'>{$titleLbl}</td>
+    <td valign='top' class='dataField'>
+    	<input class="text" name="title" size='20' value='{$title}'>
+    </td>
+</tr>
+<tr>
+    <td valign='top' nowrap class='dataLabel'>{$heightLbl}</td>
+    <td valign='top' class='dataField'>
+    	<input class="text" name="height" size='3' value='{$height}'>
+    </td>
+</tr>
+<tr>
+    <td align="right" colspan="2">
+        <input type='submit' class='button' value='{$saveLbl}'>
+   	</td>
+</tr>
+</table>
+</form>
+</div>

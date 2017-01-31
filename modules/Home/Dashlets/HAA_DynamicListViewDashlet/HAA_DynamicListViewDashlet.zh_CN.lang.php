@@ -1,4 +1,5 @@
 <?php
+if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
@@ -37,80 +38,17 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
-$module_name = 'HAA_Menus';
-$viewdefs[$module_name]['DetailView'] = array(
-'templateMeta' => array('form' => array('buttons'=>array('EDIT', 'DUPLICATE', 'DELETE', 'FIND_DUPLICATES',
-                                                         )),
-                        'maxColumns' => '2',
-                        'widths' => array(
-                                        array('label' => '10', 'field' => '30'),
-                                        array('label' => '10', 'field' => '30')
-                                        ),
-                        ),
 
-'panels' =>array (
 
-'default' => 
-      array (
-        0 =>
-        array (
-          0 => 
-          array (
-            'name' => 'menu_code',
-            'studio' => 'visible',
-            'label' => 'LBL_MENU_CODE',
-          ),
-          1 => 
-          array(
-            'name' => 'name',
-          ),
-        ),
-        1 =>
-        array(
-          0 => array(
-            'name' => 'menu_type',
-            'studio' => 'visible',
-            'label' => 'LBL_MENU_TYPE',
-          ),
-          1 => array(
-            'name' => 'frameworks',
-            'studio' => 'visible',
-            'label' => 'LBL_FRAMEWORKS',
-            'displayParams' =>
-            array(
-              'initial_filter'=>'&deleted_advanced=0',
-            ),
-          ),
-        ),
-        2 =>
-        array(
-          0 => array(
-            'name' => 'navigate_display_flag',
-            'studio' => 'visible',
-            'label' => 'LBL_NAVIGATE_DISPLAY_FLAG',
-          ),
-          1 => array(
-            'name' => 'sort_order',
-            'studio' => 'visible',
-            'label' => 'LBL_SORT_ORDER',
-          ),
-        ),
-        3 =>
-        array (
-          0 =>
-          array(
-            'name' => 'enabled_flag',
-            'studio' => 'visible',
-            'label' => 'LBL_ENABLED_FLAG',
-          ),
-          1 =>
-          array(
-            'name' => 'description',
-            'studio' => 'visible',
-            'label' => 'LBL_DESCRIPTION',
-          ),
-        ),
-      ), 
-)
+
+$defaultText = "";
+$dashletStrings['HAA_DynamicListViewDashlet'] = array('LBL_TITLE'            => '动态列表视图',
+                                         'LBL_DESCRIPTION'      => '用于快速定义所需的动态视图',
+                                         'LBL_SAVING'           => '保存中…',
+                                         'LBL_SAVED'            => '已保存',
+                                         'LBL_CONFIGURE_TITLE'  => '标题',
+                                         'LBL_CONFIGURE_HEIGHT' => '高度 (1 - 300)',
+                                         'LBL_DBLCLICK_HELP'    => '双击下面进行编辑',
+                                         'LBL_DEFAULT_TEXT'     => $defaultText,
 );
 ?>

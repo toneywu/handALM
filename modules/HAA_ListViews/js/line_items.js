@@ -32,7 +32,6 @@ if (t_name !="") {
 	});
 }*/
 if (columList =="") {
-	//console.log("-------------------------------------11111" + $("#linecolumnhidden").val());
 	columList = $("#linecolumnhidden").val();
 }
 $("#sort_column1").after("<select id='s_sort_column1' name='s_sort_column1' title='' onchange='changeColumn1();'> "+ columList + " </select>");
@@ -63,10 +62,10 @@ $("#s_sort_column4").val($("#sort_column4").val());
 			success:function(result){
 				if (result !="") {
 					var list = $.parseJSON(result);
-					$("#s_sort_column1").replaceWith("<select id='s_sort_column1' name='s_sort_column1' title='' onchange='changeColumn1();> "+ list[0] + " </select>");
-					$("#s_sort_column2").replaceWith("<select id='s_sort_column2' name='s_sort_column2' title='' onchange='changeColumn2();> "+ list[0] + " </select>");
-					$("#s_sort_column3").replaceWith("<select id='s_sort_column3' name='s_sort_column3' title='' onchange='changeColumn3();> "+ list[0] + " </select>");
-					$("#s_sort_column4").replaceWith("<select id='s_sort_column4' name='s_sort_column4' title='' onchange='changeColumn4();> "+ list[0] + " </select>");
+					$("#s_sort_column1").replaceWith("<select id='s_sort_column1' name='s_sort_column1' title='' onchange='changeColumn1();'> "+ list[0] + " </select>");
+					$("#s_sort_column2").replaceWith("<select id='s_sort_column2' name='s_sort_column2' title='' onchange='changeColumn2();'> "+ list[0] + " </select>");
+					$("#s_sort_column3").replaceWith("<select id='s_sort_column3' name='s_sort_column3' title='' onchange='changeColumn3();'> "+ list[0] + " </select>");
+					$("#s_sort_column4").replaceWith("<select id='s_sort_column4' name='s_sort_column4' title='' onchange='changeColumn4();'> "+ list[0] + " </select>");
 					columList = list[0];
 				}
 			}
