@@ -48,10 +48,10 @@ function loadMapScript() {
 
 $(document).ready(function(){
 		if($("#map_enabled").is(':checked')) {
-			$("#LBL_EDITVIEW_PANEL_GIS").parent("div").show();
+			$("#map_type").closest("div.panel").show();
 			loadMapScript();
 			//alert(document.getElementById("map_lat").innerHTML);
 		} else {
-			$("#LBL_EDITVIEW_PANEL_GIS").parent("div").hide();
+			$("#map_type").closest("div.panel").hide();
 		}
 	});

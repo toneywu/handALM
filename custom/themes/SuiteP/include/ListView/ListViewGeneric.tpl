@@ -112,7 +112,6 @@
 		{assign var="actionsLink" value=$actionsLinkTop}
 		{assign var="selectLink" value=$selectLinkTop}
 		{assign var="action_menu_location" value="top"}
-		<!--toney.wu20170130 将筛选框旋放置在Head之前-->
 		{include file='themes/SuiteP/include/ListView/ListViewPaginationTop.tpl'}
 		<tr height='20'>
 			{if $prerow}

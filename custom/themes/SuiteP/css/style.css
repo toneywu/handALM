@@ -7,52 +7,97 @@
 /*颜色调整：color theme*/
 /***************************************************/
 
-
+a {
+	color:#0079bf;
+}
 .required {
 	padding:0;
 	border:none;
 	font-size: 16px;
 }
-
-/*tables and list*/
-
-div.list-view-rounded-corners > table, tr.pagination-unique {
-	border: 1px solid #ccc;
-}
+.form-control:focus{box-shadow:none;border:1px solid #ccc}
 
 
-a,.table-responsive.list > tbody > tr > td > a {color:#0079bf;}
-.table-responsive.list > tbody > tr > td > a {
-	font-weight: 400; border:none;
-}
-.table-responsive.list > tbody > tr > td {
-	border-bottom:1px solid #e1e1e1;
-	padding: 5px;
-}
+/****************** Data Tables **************************/
+/*colors and style for data table*/
 
-.list .pagination td table td {
+.list, .evenListRowS1 td {
 	background-color: #fff;
+	border-bottom: 1px #ccc solid;
 }
-/*list pagenation background*/
+
 .list-view-rounded-corners .list #pagination td .paginationTable td.paginationActionButtons, 
 .list #pagination td .paginationTable .paginationActionButtons {
 	background-color:#fff;
 }
+.evenListRowS1:hover td,
+.oddListRowS1:hover td {
+	background-color: #eee;
+}
+/* text for pagination */
+#selectLinkTop li.sugar_action_button,
+.list #pagination a {
+	color:rgba(0,0,0,0.56);
+}
 
+#selectLinkTop li.sugar_action_button,
+.paginationTable .button,
+.paginationTable .button:disabled,
+.paginationTable button[disabled],
+.selectActionsDisabled,
+.listViewLinkButton li.sugar_action_button,
+.list #pagination {
+	background-color: #fff;
+	box-shadow:none;
+	border: none;
+}
+
+.paginationTable button {
+	box-shadow: none;
+}
+
+#selectLinkTop li.sugar_action_button:hover
+.paginationTable button:hover,
+{
+	background-color: #efefef
+}
+
+.tab-content .list tr th, .list tr th,
+.subpanel-table.list tr.pagination span.pageNumbers,
+.list #pagination td .paginationTable .pageNumbers {
+	color:rgba(0,0,0,0.54);
+}
+.evenListRowS1 td, .oddListRowS1 td {
+	color:rgba(0,0,0,0.87);
+}
+.list .pagination td table td {
+	background-color: #fff;
+}
+div.list-view-rounded-corners > table, tr.pagination-unique {
+	border: 1px solid #ccc;
+}
+
+.list thead .paginationTable {
+	border-bottom: 1px solid #ccc;
+}
+
+.table-responsive.list > tbody > tr > td {
+	border-bottom:1px solid #e1e1e1;
+	padding: 5px;
+}
+.table-responsive.list > tbody > tr > td > a {color:#0079bf;}
+.table-responsive.list > tbody > tr > td > a {
+	font-weight: 400; border:none;
+}
 
 div#content div#pagecontent form#MassUpdate table.list.view tbody tr td {
 	font-weight: 400;
 }
 
-/* data tables */
-.evenListRowS1:hover td,
-.oddListRowS1:hover td {
-	background-color: #eee;
+.list thead .paginationTable {
+	height:56px;
 }
 
-.list #pagination td .paginationTable .pageNumbers {
-	color:rgba(0,0,0,0.54);
-}
 /*list view selector*/
 .selectedRecords {
 	font-weight: 400px;
@@ -62,54 +107,8 @@ div#content div#pagecontent form#MassUpdate table.list.view tbody tr td {
 	padding:0 4px;
 }
 
-/*subpanel*/
-.list tr th a:link, .list tr th {
-	font-size:15px;
-	font-weight: 400;
-	color:#94a6b5;
-}
 
-.list tr th {
-	border-bottom: 1px solid #aaa;
-	border-top:1px solid #aaa;
-	padding: 5px;
-}
 
-.list tr.oddListRowS1 td, .list tr.evenListRowS1 td {
-	padding: 0;
-	border-bottom: 1px solid #ccc;
-	line-height: 1.1em;
-	min-height: 35px;
-}
-
-.list thead th {
-	background-color:#fff;
-	border-top:none;
-	height: 36px;
-}
-
-/*.list thead .paginationActionButtons {
-	visibility: hide;
-}
-*/
-
-.list tr th a:link, .list tr th {
-	color:#4d6171;
-}
-
-a#basic_search_link:hover,
-input[type=submit].button:hover,
-input[type=button]:hover,
-.buttons .pagination .btn-pagination:hover,
-div.action_buttons .button:hover,
-.buttons .button:hover {
-	background-color: #efefef;
-	/*border:#004771 1px solid;*/
-	color:#00a2ff;
-	font-size: 14px;
-	margin: 4px;
-	background-image: none;
-}
 
 button[disabled], html input[disabled],
 .button:disabled {
@@ -133,7 +132,15 @@ button[disabled], html input[disabled],
 a#basic_search_link,
 .datetimepicker th.today,
 .buttons .button,
-.button, input[type=submit], input[type=button], div.action_buttons .button {
+.button, 
+#subpanel_list .tab-content .list.view.subpanel-table .pagination div.action_buttons .button,
+.subpanel-table input[type=button],
+table.subpanel-table li.sugar_action_button,
+input[type=submit], input[type=button],
+.edit-view-pagination .btn-pagination,
+#EditView div.action_buttons .button,
+#save_and_continue.button,
+div.action_buttons .button {
 	background-color:#f8faff;
 	font-size: 14px;
 	color:#3C8DBC;
@@ -142,6 +149,24 @@ a#basic_search_link,
     margin: 4px;
 	border-radius:4px;
 }
+
+a#basic_search_link:hover,
+input[type=submit].button:hover,
+input[type=button]:hover,
+.buttons .pagination .btn-pagination:hover,
+div.action_buttons .button:hover,
+.edit-view-pagination .btn-pagination:hover,
+#EditView div.action_buttons .button:hover,
+#save_and_continue.button:hover,
+.buttons .button:hover {
+	background-color: #efefef;
+	color:#00a2ff;
+	font-size: 14px;
+	margin: 4px;
+	background-image: none;
+}
+
+
 /*具有突出效果的Button*/
 a#basic_search_link,
 .buttons .button,
@@ -164,11 +189,12 @@ a#basic_search_link,
 }
 
 span.id-ff button {
-	height:24px;
-	width: 24px;
+	height:32px;
+	width: 32px;
 	background-color: #ccc;
-	border: 1px solid #a8a8a8;
+	/*border: 1px solid #a8a8a8;*/
 	box-shadow: none;
+	margin: 0 4px;
 }
 
 
@@ -221,11 +247,11 @@ span.id-ff button {
 }
 /*导航的Search*/
 .navbar-form.searchform .input-group-btn {
-    background:#01507e;
+    background:#7ebbdf;
     border-radius: 0 15px 15px 0px;
 }
 .searchform .query_string {
-    background:#01507e !important;
+    background:#7ebbdf !important;
     -webkit-box-shadow:none;
     border-radius: 15px 0 0 15px;
 }
@@ -262,16 +288,96 @@ span.id-ff button {
     border:none;
 }
 
+/******************************subpanel******************************/
+/*color for subpanel*/
 /*subpanel*/
-.list tr th {
-	color:#7e7e7e;
+
+.list tr th a:link, .list tr th {
+	color:rgba(0,0,0,0.54);
 }
 
-/*list and table*/
-.list, .evenListRowS1 td {
-	background-color: #fff;
-	border-bottom: 1px #ccc solid;
+.list tr th a:link, .list tr th {
+	font-size:15px;
+	font-weight: 400;
+	color:#94a6b5;
 }
+
+.list tr th {
+	padding: 5px;
+}
+
+.list tr.oddListRowS1 td, .list tr.evenListRowS1 td {
+	padding: 0;
+	border-bottom: 1px solid #ccc;
+	line-height: 1.1em;
+	min-height: 35px;
+}
+
+.list thead th {
+	background-color:#fff;
+	border-top:none;
+	height: 36px;
+}
+
+div.sub-panel {
+	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.17);
+	margin-bottom:14px;
+}
+
+/*表头颜色*/
+.tab-content .list tr th,
+.list tr th {
+	color:#7e7e7e;
+	border-bottom: 1px solid #efefef;
+}
+.tab-content thead tr.pagination td {
+	border-bottom: 1px solid #ccc;
+}
+table.footable, table.footable-details {
+	border: none;
+}
+table.subpanel-table.list > tbody > tr > td {
+	border-top:1px solid #eee;
+	border-bottom: none;
+	padding: 2px;
+}
+.subpanel-table.list tr.pagination button.button[name="listViewStartButton"], .subpanel-table.list tr.pagination button.button[name="listViewPrevButton"], .subpanel-table.list tr.pagination button.button[name="listViewNextButton"], .subpanel-table.list tr.pagination button.button[name="listViewEndButton"], .subpanel-table.list tr.pagination button.button[name="listViewStartButton"][disabled]:hover, .subpanel-table.list tr.pagination button.button[name="listViewPrevButton"][disabled]:hover, .subpanel-table.list tr.pagination button.button[name="listViewNextButton"][disabled]:hover, .subpanel-table.list tr.pagination button.button[name="listViewEndButton"][disabled]:hover {
+	border: none;
+	background-color: #fff;
+}
+
+#subpanel_list .tab-content .list.view.subpanel-table .pagination div.action_buttons .button,
+.subpanel-table input[type=button] {
+	box-shadow: none;
+}
+
+/*buttons on subpanel lines*/
+.subpanel-table .SugarActionMenu .sugar_action_button,
+table.subpanel-table li.sugar_action_button {
+	line-height: 14px;
+	color:#3C8DBC;
+	height: 24px;
+	min-height:24px;
+	vertical-align: middle;
+	padding: 0px;
+}
+input.sqsEnabled {
+	margin-top: 0px
+}
+
+.sub-panel tbody tr td .sugar_action_button > a:link,
+.subpanel-table .SugarActionMenu .sugar_action_button a,
+table.subpanel-table li.sugar_action_button a{
+	color:#3C8DBC;
+	text-align: center;
+}
+
+table.subpanel-table li.sugar_action_button, input[type=submit], input[type=button], div.action_buttons .button,
+.sub-panel tbody tr td ul.clickMenu > li > span {
+	margin: 6px 0 0 0;
+	padding: 0px;
+}
+
 /***************************************************/
 /*结构调整：compact structure*/
 /***************************************************/
@@ -397,11 +503,11 @@ select,
 input[type=text],
 div.edit-view-field[type=bool] {
 	line-height: 22px;
-	min-height: 24px;
-	height: 30px;
+	min-height: 30px;
+	height: 32px;
 	max-width: 300px;
+	vertical-align: top;
 }
-
 
 /*detail view label and fields*/
 .edit-view-row .label {
@@ -409,7 +515,7 @@ div.edit-view-field[type=bool] {
 	font-size: 14px;
 	vertical-align: top;
 	text-align: right;
-	padding: 0.5em 2em 0 0;
+	padding: 0 2em 0 0;
 	line-height: 20px;
 	color:#778591;
 }

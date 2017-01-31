@@ -224,22 +224,28 @@ $(document).ready(function() {ldelim}
 
         $('a[data-toggle="collapse"]').click(function(e){
             var content;
-            if($(this).hasClass('collapsed')) {
+            if($(this).hasClass('collapsed')) {//展开
                 $(this).removeClass('collapsed');
-                if($(this).closest('.panel-content').length) {
+/*                if($(this).closest('.panel-content').length) {
                     content = $(this).closest('.panel-content').find('.panel-body.panel-collapse.collapse');
                 }
                 else if($(this).closest('.panel.panel-default').length){
                     content = $(this).closest('.panel.panel-default').next();
+                }*/
+                if($(this).closest('.panel.panel-default').length){
+                    content = $(this).closest('.panel.panel-default').find('.panel-body.panel-collapse.collapse');
                 }
                 content.addClass('in');
             } else {
-                $(this).addClass('collapsed');
-                if($(this).closest('.panel-content').length) {
+                $(this).addClass('collapsed');//收缩
+/*                if($(this).closest('.panel-content').length) {
                     content = $(this).closest('.panel-content').find('.panel-body.panel-collapse.collapse');
                 }
                 else if($(this).closest('.panel.panel-default').length){
                     content = $(this).closest('.panel.panel-default').next();
+                }*/
+                if($(this).closest('.panel.panel-default').length){
+                    content = $(this).closest('.panel.panel-default').find('.panel-body.panel-collapse.collapse');
                 }
                 content.removeClass('in');
             }

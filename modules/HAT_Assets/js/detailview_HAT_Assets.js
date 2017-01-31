@@ -16,14 +16,14 @@ $(document).ready(function(){
 	if($('#enable_vehicle_mgmt').length!=0){
 		if (!document.getElementById('enable_vehicle_mgmt').checked) {
 		//如果没有选中车辆管理，将车辆相关的字段隐藏。
-		$("#vin").parents("tr").hide();
+		$("#vin").parents("div.detail-view-row-item").hide();
 		}
 	}
 
 	if($('#enable_linear').length!=0){
 		if (!document.getElementById('enable_linear').checked) {
-		//如果没有选中车辆管理，将车辆相关的字段隐藏。
-			$("#detailpanel_2").hide();
+		//如果没有选Linear管理，将相关的字段隐藏。
+			$("#top-panel-0").closest("div.panel").hide();
 		}
 	}
 

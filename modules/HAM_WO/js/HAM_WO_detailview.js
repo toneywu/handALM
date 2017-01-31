@@ -278,11 +278,11 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
  */
  $(document).ready(function(){
 	 var wo_status = $("#wo_status").val();
-	 if(wo_status!="DRAFT"&&wo_status!="RETURNED"){
+	 if(wo_status!="DRAFT"&&wo_status!="RETURNED"){//工作单只有在拟定或退回时可以删除
 		 $("#delete_button").hide();
 	 }
-	 
-	 
+
+	 //加载EventType规则
 	 var event_id = $("#hat_event_type_id").data("id-value");
 		$.ajax({//
 			url : 'index.php?to_pdf=true&module=HIT_IP_TRANS_BATCH&action=getEventJsonData&hat_eventtype_id='
@@ -290,7 +290,6 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 			async : false,
 			success : function(data) {
 			    global_event_options = jQuery.parseJSON(data);
-				
 			},
 			error : function() { // 失败
 				alert('Error loading document');
@@ -298,12 +297,13 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 		});
 
 	//将Subpanel的内容前移到上方TAB中
-	$("#LBL_EDITVIEW_PANEL_WOLINES").after("<div class='tab_subpanel'>"+$("#whole_subpanel_wo_line").html()+"</div>");
+	//工作对象行
+	$("#tab-content-7 div.detail-view-row").after("<div class='tab_subpanel'>"+$("#whole_subpanel_wo_line").html()+"</div>");
 	$("#whole_subpanel_wo_line").replaceWith("");
-	$("#LBL_EDITVIEW_PANEL_SOURCE").after("<div class='tab_subpanel'>"+$("#whole_subpanel_sr").html()+"</div>");
+	//来源与事件
+	$("#tab-content-8 div.detail-view-row").after("<div class='tab_subpanel'>"+$("#whole_subpanel_sr").html()+"</div>");
 	$("#whole_subpanel_sr").replaceWith("");
-/*	$("#wo_lines").parent("td").prev("td").hide();
-showWOLines();*/
+
 
 	//明细页面添加一个按钮
 	var change_btn=$("<input type='button' class='button' id='btn_change_status' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL')+"'>");

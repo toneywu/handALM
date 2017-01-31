@@ -44,7 +44,7 @@
 <div class="detail-view">
     <div class="mobile-pagination">{$PAGINATION}</div>
     {*display tabs*}
-    {{counter name="tabCount" start=-1 print=false assign="tabCount"}}
+    {{counter name="tabCount" start=-1 print=false assign="tabCount"}}、
     <ul class="nav nav-tabs">
         {{if $useTabs}}
         {{counter name="isection" start=0 print=false assign="isection"}}
@@ -73,6 +73,7 @@
                 For the mobile view, only show the first tab has a drop down when:
                 * There is more than one tab set
                 * When Acton Menu's are enabled
+                toney.wu备注：如果是手机视力，只显示出第一个TAB的内容，并在第一个TAB中显示下拉列表，其它TAB页可以通过这个下拉进行查看
             *}
             <a id="xstab{{$tabCount}}" href="#" class="visible-xs first-tab{{if $tabCountOnlyXS > 0}}-xs{{/if}} dropdown-toggle" data-toggle="dropdown">
                 {sugar_translate label='{{$label}}' module='{{$module}}'}
@@ -112,6 +113,7 @@
             When action menus are enabled and When there are only panels and there are not any tabs,
             make the first panel a tab so that the action menu looks correct. This is regardless of what the
             meta/studio defines the first panel should always be tab.
+            在7.8+模式下，如果界面全部是以Panel的形式定义的，没有任何TAB，那就需要把第一个Panel显示为一个TAB标签（无论在Studio或是Metadata中是怎么定义的），这样在其后面就可以旋转Action菜单了，否则下拉式的Action菜单没有合适的地方显示。
         *}
         {if $config.enable_action_menu and $config.enable_action_menu != false}
             {{foreach name=section from=$sectionPanels key=label item=panel}}
@@ -162,13 +164,16 @@
        *}
         {if $config.enable_action_menu and $config.enable_action_menu != false}
         {{if tabCount == 0}}
+        {*<!--如果启用了标签显示，并且只有一个标签，则只显示出一个不带Style的层-->*}
         {*<!-- TAB CONTENT USE TABS -->*}
         <div class="tab-content">
             {{else}}
+            {*<!--如果启用了标签显示，并且不止一个标签-->*}
             {*<!-- TAB CONTENT DOESN'T USE TABS -->*}
             <div class="tab-content" style="padding: 0; border: 0;">
                 {{/if}}
                 {else}
+                <!--如果没有启用标签显示-->
                 {*<!-- TAB CONTENT DOESN'T USE TABS -->*}
                 <div class="tab-content" style="padding: 0; border: 0;">
                     {/if}
@@ -179,6 +184,7 @@
                     {{capture name=label_upper assign=label_upper}}{{$label|upper}}{{/capture}}
                     {{if isset($tabDefs[$label_upper].newTab) && $tabDefs[$label_upper].newTab == true}}
                     {{if $tabCount == '0'}}
+                    {*<!--这里按原模板逻辑是需要显示tab-content-0-->*}
                     <div class="tab-pane-NOBOOTSTRAPTOGGLER active fade in" id='tab-content-{{$tabCount}}'>
                         {{include file='themes/SuiteP/include/DetailView/tab_panel_content.tpl'}}
                     </div>
@@ -196,6 +202,8 @@
                        When action menus are enabled and When there are only panels and there are not any tabs,
                        make the first panel a tab so that the action menu looks correct. This is regardless of what the
                        meta/studio defines the first panel should always be tab.
+                       在7.8+模式下，如果界面全部是以Panel的形式定义的，没有任何TAB，那就需要把第一个Panel显示为一个TAB标签（无论在Studio或是Metadata中是怎么定义的），这样在其后面就可以旋转Action菜单了，否则下拉式的Action菜单没有合适的地方显示。
+                       如果Admin中设置为不显示菜单，那就会跳过这一段，不显示任何的TAB。而Acton菜单也会以按钮的形式显示，不需要挂在TAB之后。
                    *}
                     {if $config.enable_action_menu and $config.enable_action_menu != false}
                         {{foreach name=section from=$sectionPanels key=label item=panel}}
