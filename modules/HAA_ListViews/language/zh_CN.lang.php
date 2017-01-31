@@ -86,5 +86,5 @@ $mod_strings = array (
   'LBL_SORT_COLUMN3_ORDER' => '排序规则',
   'LBL_SORT_COLUMN4_ORDER' => '排序规则',
   'LBL_NEW_LINE' => '新增行',
-  'LBL_GENERATE_DOC' => '视图预览',
+  'LBL_GENERATE_DOC' => '执行sql',
 );

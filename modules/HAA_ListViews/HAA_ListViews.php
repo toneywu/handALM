@@ -52,36 +52,36 @@ class HAA_ListViews extends HAA_ListViews_sugar {
 		$post_data=$_POST;
 		$key="line_";
 		$line_count = isset($post_data[$key . 'deleted']) ? count($post_data[$key . 'deleted']) : 0;
-		$j = 0;
-		for ($i = 0; $i < $line_count; ++$i) {
-			if ($post_data[$key . 'deleted'][$i] == 1) {
-				$haa_listView_columns->mark_deleted($post_data[$key . 'id'][$i]);
-			} else {
-				$haa_listView_columns = new HAA_ListView_Columns();
-				foreach ($haa_listView_columns->field_defs as $field_def) {
-					$field_name = $field_def['name'];
-					if (isset($post_data[$key . $field_name][$i])) {
-						$haa_listView_columns->$field_name = $post_data[$key . $field_name][$i];
-					}
-				}
-				$haa_listView_columns->haa_listviews_id_c=$this->id;
-				$haa_listView_columns->save($check_notify);
+        $j = 0;
+        for ($i = 0; $i < $line_count; ++$i) {
+            if ($post_data[$key . 'deleted'][$i] == 1) {
+                $haa_listView_columns->mark_deleted($post_data[$key . 'id'][$i]);
+            } else {
+            	$haa_listView_columns = new HAA_ListView_Columns();
+                foreach ($haa_listView_columns->field_defs as $field_def) {
+                    $field_name = $field_def['name'];
+                    if (isset($post_data[$key . $field_name][$i])) {
+                        $haa_listView_columns->$field_name = $post_data[$key . $field_name][$i];
+                    }
+                }
+	            $haa_listView_columns->save($check_notify);
 	            /*$table='haa_valuesets_haa_values_c';//关系表
 	            $relate_values = array('deleted' =>0 ,
 	            	'haa_valuesets_haa_valueshaa_valuesets_ida'=>$this->id,
 	            	'haa_valuesets_haa_valueshaa_values_idb'=>$haa_values->id );
-	            	parent::set_relationship($table,$relate_values);*/
-	            }
+	            parent::set_relationship($table,$relate_values);*/
 	        }
 	    }
-
-
-	    function mark_deleted($id)
-	    {
-	    	$haa_listView_columns = new HAA_ListView_Columns();
-	    	$haa_listView_columns->mark_lines_deleted($this);
-	    	parent::mark_deleted($id);
-	    }
-
 	}
-	?>
+
+
+	function mark_deleted($id)
+	{
+		$haa_listView_columns = new HAA_ListView_Columns();
+		$haa_listView_columns->mark_lines_deleted($this);
+		//$haa_sso_login_logs->mark_relationships_deleted($this);
+		parent::mark_deleted($id);
+	}
+	
+}
+?>

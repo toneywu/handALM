@@ -7,13 +7,12 @@
 			FROM information_schema.COLUMNS c
 			WHERE c.TABLE_NAME = '".$t_name."'";
 	$result=$db->query($sql);
-	$c_list[0].="<option value=''> </option>";
+	$c_list[0]="<option value=''> </option>";
 	while($row=$db->fetchByAssoc($result)){
 		if ($row['c_name'] != '') {
 			$c_list[0] .= " <option value='".$row['c_name']."'>".$row['c_name']."</option> ";
 	    }
     }
-
     if ($record != "") {
 	    $bean_v = BeanFactory::getBean('HAA_ListViews',$record);
 	    $c_list[1] = $bean_v->sort_column1;

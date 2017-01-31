@@ -140,28 +140,7 @@ $dictionary['HAA_ListViews'] = array(
     'reportable' => true,
     'size' => '20',
   ),
-    'data_source_view_name' => 
-  array (
-    'required' => true,
-    'name' => 'data_source_view_name',
-    'vname' => 'LBL_DATA_SOURCE_VIEW_NAME',
-    'type' => 'varchar',
-    'massupdate' => 0,
-    'no_default' => false,
-    'comments' => '',
-    'help' => '',
-    'importable' => 'true',
-    'duplicate_merge' => 'disabled',
-    'duplicate_merge_dom_value' => '0',
-    'audited' => false,
-    'inline_edit' => true,
-    'reportable' => true,
-    'unified_search' => false,
-    'merge_filter' => 'disabled',
-    'len' => '255',
-    'size' => '20',
-  ),
-/*  'data_source_view_name' => 
+  'data_source_view_name' => 
   array (
     'required' => true,
     'name' => 'data_source_view_name',
@@ -184,7 +163,7 @@ $dictionary['HAA_ListViews'] = array(
     'options' => 'haa_listview_view_name',
     'studio' => 'visible',
     'dependency' => false,
-  ),*/
+  ),
   'where_clause' => 
   array (
     'required' => false,
