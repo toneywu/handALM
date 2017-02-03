@@ -44,6 +44,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 $defaultText = "";
 $dashletStrings['HAA_DynamicListViewDashlet'] = array('LBL_TITLE'            => '动态列表视图',
                                          'LBL_DESCRIPTION'      => '用于快速定义所需的动态视图',
+                                         'LBL_LIST_VIEW'=>'动态列表视图名称',
                                          'LBL_SAVING'           => '保存中…',
                                          'LBL_SAVED'            => '已保存',
                                          'LBL_CONFIGURE_TITLE'  => '标题',

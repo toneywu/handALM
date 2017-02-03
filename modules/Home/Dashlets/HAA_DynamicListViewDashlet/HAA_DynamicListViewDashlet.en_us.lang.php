@@ -43,6 +43,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 $defaultText = "";
 $dashletStrings['HAA_DynamicListViewDashlet'] = array('LBL_TITLE'   => 'Dynamic ListView',
+	 'LBL_LIST_VIEW'=>'ListView Name',
                                          'LBL_DESCRIPTION'      => 'A dashlet to set your dynamic listview',
                                          'LBL_SAVING'           => 'Saving...',
                                          'LBL_SAVED'            => 'Saved',

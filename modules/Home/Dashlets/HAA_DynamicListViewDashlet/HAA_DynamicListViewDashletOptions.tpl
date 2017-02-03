@@ -65,6 +65,12 @@
     </td>
 </tr>
 <tr>
+    <td valign='top' nowrap class='dataLabel'>{$listviewCodeLbl}</td>
+    <td valign='top' class='dataField'>
+        <select name="listviewCode" size='3'>{$listviewCode}</select>>
+    </td>
+</tr>
+<tr>
     <td align="right" colspan="2">
         <input type='submit' class='button' value='{$saveLbl}'>
    	</td>
