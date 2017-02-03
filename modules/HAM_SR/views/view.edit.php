@@ -21,21 +21,11 @@ class HAM_SRViewEdit extends ViewEdit
         $current_module = $this->module;
         $current_action = $this->action;
         $this->ss->assign('MAINT_SITE',set_site_selector($current_site_id,$current_module,$current_action));
-		
+
 		//2、加载基于hat_event_type_id的动态界面模板（FF）
-        if(isset($this->bean->hat_event_type_id) && ($this->bean->hat_event_type_id)!=""){
-            //判断是否已经设置有位置分类，如果有分类，则进一步的加载分类对应的FlexForm
-            $event_type_id = $this->bean->hat_event_type_id;
-            $bean_code = BeanFactory::getBean('HAT_EventType',$event_type_id);
-            if (isset($bean_code->haa_ff_id)) {
-                $ff_id = $bean_code->haa_ff_id;
-            }
-            if (isset($ff_id) && $ff_id!="") {
-                //如果分类有对应的FlexForm，些建立一个对象去存储FF_ID
-                //需要注意的是在Metadata中是不包括这个ID的，如果这里没有加载则在后续的JS文件中加载
-                echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="'.$ff_id.'">';
-            }
-        }
+        require_once('modules/HAA_FF/ff_include_editview.php');
+        initEditViewByFF((!empty($this->bean->hat_event_type_id))?$this->bean->hat_event_type_id:"", 'HAT_EventType');
+
 
 
        if ((isset($this->bean->hat_asset_locationss_id)==false || $this->bean->hat_asset_locationss_id=="") && (isset($_REQUEST['location_id']) && $_REQUEST['location_id']!="")&& (isset($_REQUEST['hat_assets_id'])==false || $_REQUEST['hat_assets_id']!="")) { 
@@ -215,7 +205,7 @@ class HAM_SRViewEdit extends ViewEdit
 		}
 
         $sr_num_html="";
-		
+
         if(empty($this->bean->sr_number)||$_REQUEST['isDuplicate']=="true"){
             //如果当前工作单号为空，则返回自动编号标签
             $sr_num_html=$mod_strings['LBL_AUTONUM'].'<input type="hidden" value="" id="sr_number" name="sr_number">';
@@ -223,20 +213,13 @@ class HAM_SRViewEdit extends ViewEdit
             $sr_num_html=$this->bean->sr_number.'<input type="hidden" value="'.$this->bean->sr_number.'" id="sr_number" name="sr_number">';
         }
         $this->ss->assign('SR_NUMBER',$sr_num_html);
-        
+
         if(isset($_REQUEST['idDuplicate']) && $_REQUEST['idDuplicate']==true){
         	$this->sr_status='DRAFT';
         }
 
         parent::Display();
-        
-        //如果已经选择位置分类，无论是否位置分类对应的FlexForm有值，值将界面展开。
-        //（如果没有位置分类，则界面保持折叠状态。）
-        if(isset($this->bean->hat_event_type_id) && ($this->bean->hat_event_type_id)!=""){
-                    echo '<script>$(".collapsed").switchClass("collapsed","expanded");</script>';
-         } else {
-                echo '<script>$(".expanded").switchClass("expanded","collapsed");</script>';
-         }
-         
+
+
     }
 }

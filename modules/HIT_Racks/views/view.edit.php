@@ -52,23 +52,13 @@ class HIT_RacksViewEdit extends ViewEdit
             $products_bean = BeanFactory :: getBean('AOS_Products')->retrieve_by_string_fields(array ('id' => $this->bean->aos_products_id));
 		    $this->bean->asset_group     = $products_bean->name;
         }
-        
+
          //2、加载基于asset_group的动态界面模板（FF）
-        if(isset($this->bean->aos_products_id) && ($this->bean->aos_products_id)!=""){
-            //判断是否已经设置有位置分类，如果有分类，则进一步的加载分类对应的FlexForm
-            $products_id = $this->bean->aos_products_id;
-            $bean_code = BeanFactory::getBean('AOS_Products',$products_id);
-            if (isset($bean_code->haa_ff_id_c)) {
-                $ff_id = $bean_code->haa_ff_id_c;
-            }
-            if (isset($ff_id) && $ff_id!="") {
-                //如果分类有对应的FlexForm，些建立一个对象去存储FF_ID
-                //需要注意的是在Metadata中是不包括这个ID的，如果这里没有加载则在后续的JS文件中加载
-                echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="'.$ff_id.'">';
-            }
-        }
-        
-        
+
+        require_once('modules/HAA_FF/ff_include_editview.php');
+        initEditViewByFF((!empty($this->bean->aos_products_id))?$this->bean->aos_products_id:"",'AOS_Products');
+
+
         parent::Display();
 
 
@@ -105,16 +95,7 @@ class HIT_RacksViewEdit extends ViewEdit
             }
 
         }
-        
-         //如果已经选择位置分类，无论是否位置分类对应的FlexForm有值，值将界面展开。
-        //（如果没有位置分类，则界面保持折叠状态。）
-        if(isset($this->bean->aos_products_id) && ($this->bean->aos_products_id)!=""){
-                    echo '<script>$(".collapsed").switchClass("collapsed","expanded");</script>';
-         } else {
-                echo '<script>$(".expanded").switchClass("expanded","collapsed");</script>';
-         }
-        
-        
+
       }
 
 

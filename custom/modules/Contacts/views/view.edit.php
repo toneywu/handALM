@@ -23,7 +23,8 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * You should have received a copy of the GNU Affero General Public License along with
  * this program; if not, see http://www.gnu.org/licenses or write to the Free
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
- * 02110-1301 USA.
+ * 02110-1301 USA.bean->haa_codes_id_c)!=""){
+                	echo '<script>$(".collapsed").switc
  *
  * You can contact SugarCRM, Inc. headquarters at 10050 North Wolfe Road,
  * SW2-130, Cupertino, CA 95014, USA. or at email address contact@sugarcrm.com.
@@ -65,29 +66,12 @@ class ContactsViewEdit extends ViewEdit
 
 
 		//*********************处理FF界面 START********************
-		$ff_id="";
-		if(isset($this->bean->haa_codes_id_c) && ($this->bean->haa_codes_id_c)!=""){
-            //判断是否已经设置有组织的业务类型，如果有组织的业务类型，则进一步的加载产品对应的FlexForm
+	    require_once('modules/HAA_FF/ff_include_editview.php');
+    	initEditViewByFF((!empty($this->bean->haa_codes_id_c))?$this->bean->haa_codes_id_c:"", 'HAA_Codes');
 
-			$haa_codes_id_c = $this->bean->haa_codes_id_c;
-			$bean_business_type = BeanFactory::getBean('HAA_Codes',$haa_codes_id_c);
-
-			$ff_id = $bean_business_type->haa_ff_id;
-            //如果分类有对应的FlexForm，些建立一个对象去存储FF_ID
-            //需要注意的是在Metadata中是不包括这个ID的，如果这里没有加载则在后续的JS文件中加载
-		}
-		echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="'.$ff_id.'">';
-
+		//*********************处理FF界面 END********************
 		parent::Display();
 
-		//如果已经选择business_type，无论是否business_type对应的FlexForm有值，值将界面展开。
-	    //（如果没有产品，则界面保持折叠状态。）
-		if(isset($this->bean->haa_codes_id_c) && ($this->bean->haa_codes_id_c)!=""){
-                	echo '<script>$(".collapsed").switchClass("collapsed","expanded");</script>';
-         } else {
-            	echo '<script>$(".expanded").switchClass("expanded","collapsed");</script>';
-         }
-		//*********************处理FF界面 END********************
 }
 
 

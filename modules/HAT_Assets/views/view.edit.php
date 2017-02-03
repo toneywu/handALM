@@ -37,20 +37,10 @@ class HAT_AssetsViewEdit extends ViewEdit
         }
 
 
-		if(isset($this->bean->aos_products_id) && ($this->bean->aos_products_id)!=""){
-            //判断是否已经设置有产品，如果有产品，则进一步的加载产品对应的FlexForm
+            //3判断是否已经设置有产品，如果有产品，则进一步的加载产品对应的FlexForm
+        require_once('modules/HAA_FF/ff_include_editview.php');
+        initEditViewByFF((!empty($this->bean->aos_products_id))?$this->bean->aos_products_id:"",'AOS_Products');
 
-			$aos_products_id = $this->bean->aos_products_id;
-			$bean_product = BeanFactory::getBean('AOS_Products',$aos_products_id);
-
-			$ff_id = $bean_product->haa_ff_id_c;
-			echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="'.$ff_id.'">';
-            //如果分类有对应的FlexForm，些建立一个对象去存储FF_ID
-            //需要注意的是在Metadata中是不包括这个ID的，如果这里没有加载则在后续的JS文件中加载
-
-
-		}
-		
 		if(isset($_REQUEST['woop_id']) && !empty($_REQUEST['woop_id'])  ){
 			$woop_bean = BeanFactory :: getBean('HAM_WOOP')->retrieve_by_string_fields(array ('ID' => $_REQUEST['woop_id']));
 			echo '<script>var source_wo_id_tt="'.$woop_bean->ham_wo_id.'"</script>';
@@ -91,14 +81,6 @@ class HAT_AssetsViewEdit extends ViewEdit
             }
         }
 
-	    //如果已经选择产品，无论是否产品对应的FlexForm有值，都将界面展开。
-	    //（如果没有产品，则界面保持折叠状态。）
-
-		if(isset($this->bean->aos_products_id) && ($this->bean->aos_products_id)!=""){
-            echo '<script>$(".collapsed").switchClass("collapsed","expanded");</script>';
-         } else {
-            echo '<script>$(".expanded").switchClass("expanded","collapsed");</script>';
-         }
             /******************************
             我们尝试使用以下语句在Display之前进行Panel属性的变更，但无法生效。属性变更了，依然还是会展开，所有采用JS的方式在加载后进行批量处理。
 			可以尝试在TPL模板中进行优化。目前可以实现功能，但打开数据时会有先展开但收缩的过程

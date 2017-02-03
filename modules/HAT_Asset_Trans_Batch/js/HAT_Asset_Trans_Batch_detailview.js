@@ -148,7 +148,7 @@ function setEventTypeFields() {
 		showWOLines($("#source_wo_id").attr("data-id-value"));
 	} else {
 		//如果当前工单号为空，直接隐藏行
-		$("#wo_lines").parent("td").parent("tr").hide();
+		$("#wo_lines").closest(".detail-view-row-item").hide();
 	}
 
 

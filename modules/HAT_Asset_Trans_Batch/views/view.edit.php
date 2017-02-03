@@ -155,20 +155,8 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
             $this->bean->source_wo_id="";
         }
 		//2、加载基于hat_eventtype_id的动态界面模板（FF）
-        if(isset($this->bean->hat_eventtype_id) && ($this->bean->hat_eventtype_id)!=""){
-            //判断是否已经设置有位置分类，如果有分类，则进一步的加载分类对应的FlexForm
-            $event_type_id = $this->bean->hat_eventtype_id;
-            $bean_code = BeanFactory::getBean('HAT_EventType',$event_type_id);
-            if (isset($bean_code->haa_ff_id)) {
-                $ff_id = $bean_code->haa_ff_id;
-            }
-
-            if (isset($ff_id) && $ff_id!="") {
-                //如果分类有对应的FlexForm，些建立一个对象去存储FF_ID
-                //需要注意的是在Metadata中是不包括这个ID的，如果这里没有加载则在后续的JS文件中加载
-                echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="'.$ff_id.'">';
-            }
-        }
+        require_once('modules/HAA_FF/ff_include_editview.php');
+        initEditViewByFF((!empty($this->bean->hat_eventtype_id))?$this->bean->hat_eventtype_id:"", 'HAT_EventType');
 
 
         $beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
@@ -205,23 +193,5 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
 
         parent::Display();
 
-        //如果已经选择EventType，值将界面展开。
-        //（如果没有位置分类，则界面保持折叠状态。）
-        if(isset($this->bean->hat_eventtype_id) && ($this->bean->hat_eventtype_id)!=""){
-            //有EventType值，保持展开
-            //echo '<script>$(".collapsed").switchClass("collapsed","expanded");</script>';
-         } else {
-            //不有EventType值，保持通过模拟点击实现面板的关闭
-
-            echo '<script>$(document).ready(function(){SUGAR.util.doWhen("typeof $(\"a[data-toggle=\'collapse\']\").click == \'function\'", function(){
-                    $(".panel-content").find(".panel-heading a[data-toggle=\'collapse\']:not(.collapsed)").click();
-                })});</script>';
-
-            /*echo '<script>$(document).ready(function(){
-                    $(".panel-content").find(".panel-heading a:not(.collapsed)").click();
-                });</script>';*/
-
-            //echo '<script>$(document).ready(function(){$(".panel-content").find(".panel-heading a").not(".collapsed").css("backgroud",);});</script>';
-         }
     }
 }

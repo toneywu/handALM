@@ -22,11 +22,17 @@ class AOS_InvoicesViewEdit extends ViewEdit {
 		$this->populateParentInfo();
 
 		//*********************处理FF界面 START********************
-		if(isset($this->bean->hat_eventtype_id_c) && ($this->bean->hat_eventtype_id_c)!=""){
+/*		if(isset($this->bean->hat_eventtype_id_c) && ($this->bean->hat_eventtype_id_c)!=""){
 			$hat_eventtype_id_c = $this->bean->hat_eventtype_id_c;
 			$bean_event_type = BeanFactory::getBean('HAT_EventType',$hat_eventtype_id_c);
 			$ff_id = $bean_event_type->haa_ff_id;
 		}
+*/
+	//20170203toney.wu add start
+    require_once('modules/HAA_FF/ff_include_editview.php');
+    initEditViewByFF((!empty($this->bean->haa_codes_id_c))?$this->bean->haa_codes_id_c:"",'HAT_EventType');
+	//20170203toney.wu add end
+
 		parent::display();
 		$html="";
 		if (isset($_GET["data"])) {
@@ -81,14 +87,18 @@ class AOS_InvoicesViewEdit extends ViewEdit {
     </script>";
     echo $html;
 }
-$ff_id_field = '<input id=haa_ff_id name=haa_ff_id type=hidden '.(isset($ff_id)?'value='.$ff_id:'').'>';
+/*$ff_id_field = '<input id=haa_ff_id name=haa_ff_id type=hidden '.(isset($ff_id)?'value='.$ff_id:'').'>';
 echo '<script>if($("#haa_ff_id").length==0) {  $("#EditView").append("'.$ff_id_field.'");}</script>';
-		//如果已经选择事件类型，无论是否事件类型对应的FlexForm有值，值将界面展开。
+*/
+	//如果已经选择事件类型，无论是否事件类型对应的FlexForm有值，值将界面展开。
+/*20170203 toney.wu deleted
+
 if(isset($this->bean->hat_eventtype_id_c) && ($this->bean->hat_eventtype_id_c)!=""){
 	echo '<script>$(".collapsed").switchClass("collapsed","expanded");</script>';
 		} /*else {
 			echo '<script>$(".expanded").switchClass("expanded","collapsed");</script>';
-		}*/
+		}
+20170203 toney.wu deleted end*/
 
 		//*********************处理FF界面 END********************
 		$amount_c=$this->bean->amount_c;

@@ -252,6 +252,7 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false, donot_c
 		if(hide_bool==true) {
 			//如果当前字段涉及隐藏，则进一步判断，当前行是否是空白，如果当前区域也是空白，直接将当前区域清空
 			var hide_panel_bool=true;
+			console.log("field_name="+field_name);
 			$.each(mark_obj_row.children(".edit-view-row-item"), function() {
 			  	if ($(this).text().trim()!="" && !($(this).css("visibility")=="hidden" || $(this).css("display")=="none")) {
 			  		//如果当前字段有内容，并且有内容的字段没有隐藏，则认为当前行不为空

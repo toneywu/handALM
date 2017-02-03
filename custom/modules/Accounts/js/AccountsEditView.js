@@ -14,35 +14,30 @@ function setBusinessTypePopupReturn(popupReplyData){//选择完产品后的动�
 
 
 function DocumentReady() {
-	
-	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
-				$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');
-	}
 
     //触发FF
     SUGAR.util.doWhen("typeof setFF == 'function'", function(){
         call_ff();
       });
 
-   
     $('#is_le_c').change(function(){ //是否是法人组织
         //如果=Y，则显示公司法人单位信息的面板，并且将法人单位信息中的统一注册号置为必须。否则隐藏，法人单位信息中所有字段为非必须。
         if( $(this).is(':checked')) {
-            $("#detailpanel_5").show();
+            $("#registration_id_c").closest(".panel").show();
             mark_field_enabled("registration_id_c",false);
         } else {
-            $("#detailpanel_5").hide();
+            $("#registration_id_c").closest(".panel").hide();
             mark_field_disabled("registration_id_c")
         }
     });
     $('#is_customer_c').change(function(){ //是否是客户，如果是显示客服信息
         if( $(this).is(':checked')) {
-            $("#detailpanel_4").show();
+            $("#customer_classs_c").closest(".panel").show();
         } else {
-            $("#detailpanel_4").hide();
+            $("#customer_classs_c").closest(".panel").hide();
         }
     });
-    $('#is_cooperation_group_c').change(function(){ //是否是客户，如果是显示客服信息
+    $('#is_cooperation_group_c').change(function(){ //
         if( $(this).is(':checked')) {
             mark_field_disabled("parent_name")
         } else {
