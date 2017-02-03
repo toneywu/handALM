@@ -226,24 +226,32 @@ $(document).ready(function() {ldelim}
             var content;
             if($(this).hasClass('collapsed')) {//展开
                 $(this).removeClass('collapsed');
-/*                if($(this).closest('.panel-content').length) {
+/*
+                //20170131 removed by toney for fix coolapse bug in edit view
+                 if($(this).closest('.panel-content').length) {
                     content = $(this).closest('.panel-content').find('.panel-body.panel-collapse.collapse');
                 }
                 else if($(this).closest('.panel.panel-default').length){
                     content = $(this).closest('.panel.panel-default').next();
-                }*/
+                }
+                //removed end toney.wu
+                */
                 if($(this).closest('.panel.panel-default').length){
                     content = $(this).closest('.panel.panel-default').find('.panel-body.panel-collapse.collapse');
                 }
                 content.addClass('in');
             } else {
                 $(this).addClass('collapsed');//收缩
-/*                if($(this).closest('.panel-content').length) {
+/*
+                //20170131 removed by toney for fix coolapse bug in edit view
+                if($(this).closest('.panel-content').length) {
                     content = $(this).closest('.panel-content').find('.panel-body.panel-collapse.collapse');
                 }
                 else if($(this).closest('.panel.panel-default').length){
                     content = $(this).closest('.panel.panel-default').next();
-                }*/
+                }
+                //removed end toney.wu
+                */
                 if($(this).closest('.panel.panel-default').length){
                     content = $(this).closest('.panel.panel-default').find('.panel-body.panel-collapse.collapse');
                 }
@@ -252,6 +260,11 @@ $(document).ready(function() {ldelim}
         });
     });
 
+    //added 20170131 add to rebuild the editView structure
+    $(document).ready(function(){
+        $("#detailpanel_-1").closest(".panel").appendTo($("#EditView_tabs").find(".tab-content").first());
+    });
+    //add end
     </script>
 
 {/literal}

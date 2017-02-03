@@ -4,7 +4,8 @@ $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.
 $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
 function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"HAT_Asset_Trans_Batch");
-    $(".expandLink").click();
+    //$(".expandLink").click();
+    //$(".panel-content a.collapsed").click();
 	//console.log($("#haa_ff_id").val());
 }
 
@@ -13,19 +14,19 @@ var global_eventOptions;
 
 function setEventTypePopupReturn(popupReplyData){
 	set_return(popupReplyData);
-	console.log(popupReplyData);
-
+	//console.log(popupReplyData);
 	setEventTypeFields();
 	$("#haa_ff_id").val(popupReplyData.name_to_value_array.haa_ff_id);
 	triger_setFF($("#haa_ff_id").val(),"HAT_Asset_Trans_Batch");
-    $(".expandLink").click();
+    //console.log("panel should be expanded");
+    $(".panel-content a.collapsed").click();//20170131 toney.wu for v7.8
+
     //Add By ling.zhang01 20161229
     if($("#tracking_number").val()==''){
     	createTrackNumber();
     }else{
     	$("#name").val($("#tracking_number").val()+":"+$("#name").val());
     }
-    //Add Instance By ling.zhang01 20161229 End
 }
 //Add By ling.zhang01 20161229
 function createTrackNumber(){
@@ -96,7 +97,7 @@ function setEventTypeFields() {
 }
 
 function resetEventType(){
-		var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());
+	var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());
 
 	if (global_eventOptions.check_customer_hold == "1"){
 	 	$("#asset_trans_status").change(); //对客户的信息状态进行验证
@@ -156,12 +157,6 @@ function resetEventType(){
 	loopField("line_target_cost_center_id",global_eventOptions.change_cost_center);
 
 //end modefy osmond.liu 20161123
-	//开始与结束时间根据使用组织及人员进行显示，不单独进行处理 deleted toney.wu 改到Using_org中
-/*	loopField("line_date_start",global_eventOptions.change_asset_date_end);
-	loopField("line_date_end",global_eventOptions.change_asset_date_start);
-*/	//状态不单独进行处理，已经有了 deleted toney.wu
-/*	loopField("line_status",global_eventOptions.change_asset_status);
-*/	//end 
 
    if (global_eventOptions.change_owning_person=="INVISIABLE") {
 		loopField("line_target_owning_person","INVISIABLE");
@@ -486,6 +481,8 @@ $(document).ready(function(){
         setFormReadonly();
     }
 
+    $(".edit-view-field[field='line_items']").prev(".label").hide();
+
 	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
 		$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');
 	}
@@ -493,7 +490,6 @@ $(document).ready(function(){
 	SUGAR.util.doWhen("typeof setFF == 'function'", function(){
 		call_ff();
 	});
-
 	SUGAR.util.doWhen("typeof mark_field_disabled != 'undefined'", function(){
 		if ($("#hat_eventtype_id").val() != "") {
 			setEventTypeFields();//初始化EventType，完成后会将EventType的值写入global_eventOptions
@@ -508,6 +504,10 @@ $(document).ready(function(){
 	};
 	
 
+
+	function setFormReadonly() {
+
+	};
 
 	mark_field_disabled("email",false);
 	if($("target_owning_org").val()==""){

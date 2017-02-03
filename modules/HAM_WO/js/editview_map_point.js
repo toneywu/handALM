@@ -110,10 +110,10 @@ $(document).ready(function(){
 	//$("#map_c_label").hide();
 	$('#map_enabled').change(function(){
 		if( $(this).is(':checked')) {
-			$("#LBL_EDITVIEW_PANEL_GIS").parent("div").show();
+			$("#map_type").closest("div.panel").show();
 			loadMapScript();
 		} else {
-			$("#LBL_EDITVIEW_PANEL_GIS").parent("div").hide();
+			$("#map_type").closest("div.panel").hide();
 		}
 	});
 

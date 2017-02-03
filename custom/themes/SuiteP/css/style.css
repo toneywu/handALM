@@ -3,13 +3,21 @@
 	-webkit-appearance:checkbox;
 }
 
+/*查看历史记录，在POPUP时快速新增的功能关闭*/
+.buttons input#btn_view_change_log,
+#addformlink {
+	display: none;
+}
+
+
 /***************************************************/
 /*颜色调整：color theme*/
 /***************************************************/
-
+.popupBody .list tbody > tr > td a,
 a {
 	color:#0079bf;
 }
+
 .required {
 	padding:0;
 	border:none;
@@ -40,9 +48,26 @@ a {
 	color:rgba(0,0,0,0.56);
 }
 
+/*将按钮扁平化*/
+#tab-actions .button,
+#EditView .panel .button,
+.modal-body .button {
+	box-shadow:none;
+	border: none;
+}
+
+.content #tab-actions > .dropdown-menu .button{
+	color:#fff;
+}
+.content #tab-actions > .dropdown-menu .button:hover{
+	color:#fff;
+}
+
+/*失效的按钮以及在List上白色不明显的按钮*/
 #selectLinkTop li.sugar_action_button,
 .paginationTable .button,
 .paginationTable .button:disabled,
+.edit-view-pagination .btn-pagination[disabled],
 .paginationTable button[disabled],
 .selectActionsDisabled,
 .listViewLinkButton li.sugar_action_button,
@@ -50,6 +75,7 @@ a {
 	background-color: #fff;
 	box-shadow:none;
 	border: none;
+	color:#efefef;
 }
 
 .paginationTable button {
@@ -61,6 +87,7 @@ a {
 {
 	background-color: #efefef
 }
+
 
 .tab-content .list tr th, .list tr th,
 .subpanel-table.list tr.pagination span.pageNumbers,
@@ -125,9 +152,6 @@ button[disabled], html input[disabled],
 	color:#fff;
 /*	background-image:-webkit-gradient(top, rgba(122,188,255,1) 0%, rgba(96,171,248,1) 44%, rgba(64,150,238,1) 100%);
 */}
-.buttons input#btn_view_change_log {
-	display: none;
-}
 /*将按钮变轻便*/
 a#basic_search_link,
 .datetimepicker th.today,
@@ -136,12 +160,14 @@ a#basic_search_link,
 #subpanel_list .tab-content .list.view.subpanel-table .pagination div.action_buttons .button,
 .subpanel-table input[type=button],
 table.subpanel-table li.sugar_action_button,
-input[type=submit], input[type=button],
+input[type=submit],
+input[type=reset],
+input[type=button],
 .edit-view-pagination .btn-pagination,
 #EditView div.action_buttons .button,
 #save_and_continue.button,
 div.action_buttons .button {
-	background-color:#f8faff;
+	background-color:#f1f5ff;
 	font-size: 14px;
 	color:#3C8DBC;
     line-height: 36px; height: 36px;
@@ -216,6 +242,10 @@ span.id-ff button {
 	border:#ccc 1px solid;
 }
 
+/*modal**/
+.modal-content {
+	display: table;
+}
 
 /* panel*/
 .tab-content
@@ -241,6 +271,12 @@ span.id-ff button {
 	background-image: linear-gradient(to top, rgb(245, 245, 245) 0%,rgb(255, 255, 255) 100%);
 	height: 3em;
 }
+
+.panel-default > .panel-heading > a,
+.panel-default > .panel-heading > a:not(.collapsed) {
+	height: 38px;
+}
+
 /*navagation bar*/
 .navbar-inverse, .globalLinks-desktop .with-label, .desktop-bar .navbar-search.open .dropdown-menu { 
     background-color: #0079bf !important;
@@ -305,6 +341,7 @@ span.id-ff button {
 .list tr th {
 	padding: 5px;
 }
+
 
 .list tr.oddListRowS1 td, .list tr.evenListRowS1 td {
 	padding: 0;
@@ -372,7 +409,7 @@ table.subpanel-table li.sugar_action_button a{
 	text-align: center;
 }
 
-table.subpanel-table li.sugar_action_button, input[type=submit], input[type=button], div.action_buttons .button,
+table.subpanel-table li.sugar_action_button, div.action_buttons .button,
 .sub-panel tbody tr td ul.clickMenu > li > span {
 	margin: 6px 0 0 0;
 	padding: 0px;
@@ -390,6 +427,17 @@ div#loadingPage {
 }
 div#loadingPage b{ 
 	font-weight: 400;
+}
+
+.content #EditView_tabs .tab-content {
+	margin:14px 0 -5px 0;
+}
+
+#EditView_tabs .table {
+	display: inline-table;
+}
+#EditView_tabs .table th td {
+	border: 1px solid #ccc;
 }
 
 @media(min-width: 1561px) {
@@ -428,7 +476,7 @@ div#loadingPage b{
 	box-shadow: none;
 }
 .navbar-fixed-top .topnav .dropdown-menu {
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    box-shadow: 0 13px 25px 0 rgba(0, 0, 0, 0.3), 0 11px 7px 0 rgba(0, 0, 0, 0.19);
 }
 
 .navbar-inverse .nav > .topnav {
@@ -475,15 +523,18 @@ ul.dropdown-menu.All {
 	width:600px;
 }
 
-
-
-#copyrightbuttons {display:none;}
+.p_login_top,
+.p_login_bottom,
+#copyrightbuttons {
+	display:none;
+}
 
 #desktop_notifications {display:none;}
 
 /* color of input*/
 textarea,
 select,
+input:not([type]),
 input[type=text] {
 	border:1px solid #ccc;
 	background-color: #fff;
@@ -500,6 +551,7 @@ input[type=text] {
 /* sturcture of input widgets */
 textarea,
 select,
+input:not([type]),
 input[type=text],
 div.edit-view-field[type=bool] {
 	line-height: 22px;
@@ -507,6 +559,10 @@ div.edit-view-field[type=bool] {
 	height: 32px;
 	max-width: 300px;
 	vertical-align: top;
+}
+
+input.yui-ac-input {
+	max-width: 230px;
 }
 
 /*detail view label and fields*/
@@ -551,19 +607,22 @@ div.edit-view-field[type=bool] {
 	font-weight: 500px;
 }
 
+.lineEditor {
+	display: inline-block;
+}
+
 .lineEditor .input_group {
 	width: 38em;
-	display: inline-block;
-	vertical-align: top
+	display: flex;
+	vertical-align: top;
+	float:left;
 }
 .lineEditor label {
-	width: 12em; vertical-align: middle;
+	width: 12em;
 }
 .lineEditor {
 	background-color: #EDF6FF;padding:10px;
 }
-
-
 
 .lineEditor .button, .lineEditor input[type=button] {
 /*	background-color:#8BBFDE;
@@ -588,6 +647,7 @@ div.edit-view-field[type=bool] {
 .lineEditor .btn_del:hover {
 	/*突出删除按钮(红色）另btn_del为客户化标签*/
 	background-color:#c43c35;
+	color:#fff;
 }
 
 
@@ -644,6 +704,10 @@ div.edit-view-field[type=bool] {
 /**********************************/
 /*以下是完全自定义的一些对象	  */
 /**********************************/
+
+#treeview_selector .button{
+	box-shadow: none;
+}
 
 .detailed_data_table {
 	display:  table;

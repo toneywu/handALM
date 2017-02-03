@@ -208,9 +208,20 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
         //如果已经选择EventType，值将界面展开。
         //（如果没有位置分类，则界面保持折叠状态。）
         if(isset($this->bean->hat_eventtype_id) && ($this->bean->hat_eventtype_id)!=""){
-                    echo '<script>$(".collapsed").switchClass("collapsed","expanded");</script>';
+            //有EventType值，保持展开
+            //echo '<script>$(".collapsed").switchClass("collapsed","expanded");</script>';
          } else {
-                echo '<script>$(".expanded").switchClass("expanded","collapsed");</script>';
+            //不有EventType值，保持通过模拟点击实现面板的关闭
+
+            echo '<script>$(document).ready(function(){SUGAR.util.doWhen("typeof $(\"a[data-toggle=\'collapse\']\").click == \'function\'", function(){
+                    $(".panel-content").find(".panel-heading a[data-toggle=\'collapse\']:not(.collapsed)").click();
+                })});</script>';
+
+            /*echo '<script>$(document).ready(function(){
+                    $(".panel-content").find(".panel-heading a:not(.collapsed)").click();
+                });</script>';*/
+
+            //echo '<script>$(document).ready(function(){$(".panel-content").find(".panel-heading a").not(".collapsed").css("backgroud",);});</script>';
          }
     }
 }

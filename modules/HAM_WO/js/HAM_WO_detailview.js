@@ -298,12 +298,14 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 
 	//将Subpanel的内容前移到上方TAB中
 	//工作对象行
-	$("#tab-content-7 div.detail-view-row").after("<div class='tab_subpanel'>"+$("#whole_subpanel_wo_line").html()+"</div>");
-	$("#whole_subpanel_wo_line").replaceWith("");
+/*	$("#tab-content-7 div.detail-view-row").after("<div class='tab_subpanel'>"+$("#whole_subpanel_wo_line").html()+"</div>");
+	$("#whole_subpanel_wo_line").replaceWith("");*/
+	$("#whole_subpanel_wo_line").appendTo($("#tab-content-7 div.detail-view-row"))
 	//来源与事件
-	$("#tab-content-8 div.detail-view-row").after("<div class='tab_subpanel'>"+$("#whole_subpanel_sr").html()+"</div>");
+/*	$("#tab-content-8 div.detail-view-row").after("<div class='tab_subpanel'>"+$("#whole_subpanel_sr").html()+"</div>");
 	$("#whole_subpanel_sr").replaceWith("");
-
+*/
+	$("#whole_subpanel_sr").appendTo($("#tab-content-8 div.detail-view-row"));
 
 	//明细页面添加一个按钮
 	var change_btn=$("<input type='button' class='button' id='btn_change_status' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL')+"'>");
