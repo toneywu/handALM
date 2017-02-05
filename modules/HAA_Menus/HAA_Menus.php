@@ -75,13 +75,19 @@ class HAA_Menus extends HAA_Menus_sugar {
 
 	function menuHeadData(){
 		global $db;
+		$haa_frameworks_id=$_SESSION["current_framework"];
         $menu_sql="SELECT
             haa_menus.id,
             haa_menus.name
         FROM
             haa_menus
         WHERE
-            haa_menus.deleted = 0";
+            haa_menus.deleted = 0
+            AND haa_menus.navigate_display_flag=1
+            AND haa_menus.enabled_flag=1"." 
+            AND (haa_menus.haa_frameworks_id_c='' or haa_menus.haa_frameworks_id_c is null  ".
+            	" OR haa_menus.haa_frameworks_id_c= '".$haa_frameworks_id."') 
+             ORDER BY haa_menus.sort_order";
         $result=$db->query($menu_sql);
         $labelnum=0;
         while($row=$db->fetchByAssoc($result)){
@@ -94,13 +100,12 @@ class HAA_Menus extends HAA_Menus_sugar {
 
 	function menusData(){
 		global $db;
+		$haa_frameworks_id=$_SESSION["current_framework"];
 		$menus_sql="SELECT
 			haa_menus.id,
-			haa_menus_lists.func_module,
+			IFNULL(haa_functions.func_module,haa_menus_lists.func_module) func_module,
 			haa_menus_lists.field_lable_zhs,
 			haa_menus_lists.func_icon,
-			#haa_functions.`name` function_name,
-			haa_functions.function_module,
 			haa_functions.function_code,
 			haa_functions.haa_ff_id_c,
 			haa_functions.parameters
@@ -113,17 +118,23 @@ class HAA_Menus extends HAA_Menus_sugar {
 		AND haa_menus.deleted=0
 		AND haa_menus.enabled_flag=1
 		AND haa_menus.navigate_display_flag=1
+		AND haa_menus_lists.deleted=0
+		AND haa_menus_lists.enabled_flag=1
 		AND (haa_menus_lists.deleted IS NULL OR haa_menus_lists.deleted=0)
 		AND (haa_menus_lists.enabled_flag IS NULL OR haa_menus_lists.enabled_flag=1)
-		AND (haa_functions.deleted IS NULL OR haa_functions.deleted=0)";
+		AND (haa_functions.deleted IS NULL OR haa_functions.deleted=0)
+		AND (haa_menus.haa_frameworks_id_c='' or haa_menus.haa_frameworks_id_c is null  ".
+            	" OR haa_menus.haa_frameworks_id_c= '".$haa_frameworks_id."') 
+		 ORDER BY haa_menus_lists.sort_order ASC";
 		$result=$db->query($menus_sql);
 		$menus_num=0;
         while($row=$db->fetchByAssoc($result)){
-        	if ($row['func_module']) {
-        		$url="index.php?module=".$row['func_module']."&action=index";
+        	$url="index.php?module=".$row['func_module']."&action=index";
+        	if ($row['haa_ff_id_c']) {
+        		$url.="&function_code=".$row['function_code']."&haa_ff_id=".$row['haa_ff_id_c'];
         	}
-        	if ($row['function_module']) {
-        		$url="index.php?module=".$row['function_module']."&action=index"."&function_code=".$row['function_code']."&haa_ff_id=".$row['haa_ff_id_c'].$row['parameters'];
+        	if ($row['parameters']) {
+        		$url.="&".$row['parameters'];
         	}
         	$menus[$menus_num]['parent_id']=$row['id'];
             $menus[$menus_num]['url']=$url;

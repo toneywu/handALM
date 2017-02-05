@@ -22,7 +22,13 @@ class HAA_MenusViewEdit extends ViewEdit
 		$options.=get_select_options_with_id($app_list_strings['moduleList'], '');
 		echo '<input type="hidden" id="hiddenlist" value="'.$options.'"/>';
 		parent::display();
-		
+		//echo '<input type="hidden" id="frameworks_id" value="'.$_SESSION["current_framework"].'"/>';
+		if ($this->bean->id=="") {
+			echo '<script>
+			$("#navigate_display_flag").attr("checked",true);
+			$("#enabled_flag").attr("checked",true);
+			</script>';
+		}
 		$this->displayLineItems();
 	}
 
@@ -58,7 +64,8 @@ class HAA_MenusViewEdit extends ViewEdit
 			1=1
 			AND haa_menus.deleted=0
 			AND haa_menus_lists.deleted=0
-			AND haa_menus.id='".$focus->id."'";
+			AND haa_menus.id='".$focus->id."'
+			ORDER BY haa_menus_lists.sort_order ASC";
 			$result=$focus->db->query($sql);
 			while($row=$focus->db->fetchByAssoc($result)){
 				$line_data=json_encode($row);

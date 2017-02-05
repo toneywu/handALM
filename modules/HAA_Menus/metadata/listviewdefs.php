@@ -43,17 +43,35 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 $module_name = 'HAA_Menus';
 $listViewDefs[$module_name] = array(
-	'NAME' => array(
+    'MENU_CODE' => array(
+    	'width' => '32',
+    	'label' => 'LBL_MENU_CODE',
+    	'default' => true),
+    'NAME' => array(
 		'width' => '32', 
 		'label' => 'LBL_NAME', 
 		'default' => true,
-        'link' => true),         
-	'ASSIGNED_USER_NAME' => array(
-		'width' => '9', 
-		'label' => 'LBL_ASSIGNED_TO_NAME',
-		'module' => 'Employees',
-        'id' => 'ASSIGNED_USER_ID',
-        'default' => true),
+        'link' => true),
+    'MENU_TYPE' => array(
+    	'width' => '32',
+    	'label' => 'LBL_MENU_TYPE',
+    	'default' => true),
+    'FRAMEWORKS' => array(
+    	'width' => '32',
+    	'label' => 'LBL_FRAMEWORKS',
+    	'default' => true),
+    'NAVIGATE_DISPLAY_FLAG' => array(
+    	'width' => '32',
+    	'label' => 'LBL_NAVIGATE_DISPLAY_FLAG',
+    	'default' => true),
+    'ENABLED_FLAG' => array(
+    	'width' => '32',
+    	'label' => 'LBL_ENABLED_FLAG',
+    	'default' => true),   
+	'DESCRIPTION' => array(
+		'width' => '32',
+		'label' => 'LBL_DESCRIPTION'
+		),
 	
 );
 ?>

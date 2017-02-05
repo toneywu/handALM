@@ -57,9 +57,18 @@ function insertLineData(line_data){//将数据写入到对应的行字段中
 	}
 }
 
-function insertLineElements(tableid){
+function insertLineElements(tableid,btnadd){
 	if(document.getElementById(tableid+'_head')!==null){
 		document.getElementById(tableid+'_head').style.display="";
+	}
+	var pre_val=0;
+	if (btnadd==true) {//如果是新增
+		var pro=prodln-1;
+		if (typeof $("#line_sort_order"+pro).val()=="undefined") {
+			pre_val=1;
+		}else{
+			pre_val=parseInt($("#line_sort_order"+pro).val())+1;
+		}
 	}
 	var modulelist=$("#hiddenlist").val();
 	tablebody=document.createElement("tbody");
@@ -70,10 +79,10 @@ function insertLineElements(tableid){
 	z1.className='oddListRowS1';
 	z1.innerHTML="<td id='displayed_sort_order"+prodln+"'></td>"+
 	"<td id='displayed_field_lable_zhs"+prodln+"'></td>"+
-	"<td id='displayed_func_module"+prodln+"'></td>"+
-	"<td id='displayed_function_name"+prodln+"'></td>"+
-	"<td id='displayed_func_icon"+prodln+"'></td>"+
-	"<td id='displayed_enabled_flag"+prodln+"'></td>"+
+	"<td id='displayed_func_module"+prodln+"' align='center'></td>"+
+	"<td id='displayed_function_name"+prodln+"' align='center'></td>"+
+	"<td align='center'><span id='displayed_func_icon"+prodln+"' ></span></td>"+
+	"<td id='displayed_enabled_flag"+prodln+"' align='center'></td>"+
 	"<td id='displayed_description"+prodln+"'></td>"+
 	"<td><input type='button'value='"+SUGAR.language.get('app_strings','LBL_EDITINLINE')+"'class='button'id='btn_edit_line"+prodln+"'onclick='LineEditorShow("+prodln+")'></td>";
 	var x=tablebody.insertRow(-1);//以下生成的是LineEditor
@@ -84,19 +93,23 @@ function insertLineElements(tableid){
 	"<table border='0' class='lineEditor' width='100%'>"+
 	"<tr>"+
 		"<td>"+SUGAR.language.get('HAA_Menus_Lists','LBL_SORT_ORDER')+":<span class='required'>*</span></td>"+
-		"<td><input name='line_sort_order["+prodln+"]'id='line_sort_order"+prodln+"' type='text' tabindex='0' class='sqsEnabled yui-ac-input' autocomplete='off' maxlength='255' size='24' value=''/>"+
+		"<td><input name='line_sort_order["+prodln+"]'id='line_sort_order"+prodln+"' type='text' tabindex='0' class='sqsEnabled yui-ac-input' autocomplete='off' maxlength='255' size='24' value='"+pre_val+"'/>"+
 		"</td>"+
-		"<td>"+SUGAR.language.get('HAA_Menus_Lists','LBL_FIELD_LABLE_ZHS')+"</td>"+
+		"<td>"+SUGAR.language.get('HAA_Menus_Lists','LBL_FIELD_LABLE_ZHS')+":<span class='required'>*</span></td>"+
 		"<td><input type='text' id='line_field_lable_zhs"+prodln+"' name='line_field_lable_zhs["+prodln+"]' value=''/>"+
 		"</td>"+
 	"</tr>"+
 	"<tr>"+
-		"<td>"+SUGAR.language.get('HAA_Menus_Lists','LBL_FUNC_MODULE')+"</td>"+
+		"<td>"+SUGAR.language.get('HAA_Menus_Lists','LBL_FUNC_MODULE')+":<span class='required'>*</span></td>"+
 		"<td><select type='text' name='line_func_module["+prodln+"]' id='line_func_module"+prodln+"'>"+modulelist+"</select></td>"+
 		"<td>"+SUGAR.language.get('HAA_Menus_Lists','LBL_FUNCTION_NAME')+"</td>"+
 		"<td><input type='text' id='line_function_name"+prodln+"' name='line_function_name["+prodln+"]' value='' maxlength='255' size='30'/>"+
 		"<input type='hidden' id='line_function_id"+prodln+"' name='line_function_id["+prodln+"]' value='' maxlength='255' size='30'/>"+
-		"<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openFuncPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+		"<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "'"+
+		"accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + 
+		"' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') +
+		"' name='btn1' onclick='openFuncPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" +
+		SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
  		"<button type='button' name='btn_clr_locname' id='btn_clr_locname' tabindex='0' title='清除选择' class='button lastChild' onclick='setlocval(this.form, \"line_function_name\", \"line_function_id\","+prodln+");' value='清除选择'>"+
  		"<img src='themes/default/images/id-ff-clear.png'></button>"+
 		"</td>"+
@@ -104,7 +117,7 @@ function insertLineElements(tableid){
 	"<tr>"+
 		"<td>"+SUGAR.language.get('HAA_Menus_Lists','LBL_ENABLED_FLAG')+":</td>"+
 		"<td><input type='hidden' name='line_enabled_flag["+prodln+"]' value='0'/>"+
-		"<input type='checkbox' id='line_enabled_flag"+prodln+"' name='line_enabled_flag["+prodln+"]' value='1'/></td>"+
+		"<input type='checkbox' id='line_enabled_flag"+prodln+"' name='line_enabled_flag["+prodln+"]' value='1' checked/></td>"+
 		"<td>"+SUGAR.language.get('HAA_Menus_Lists','LBL_FUNC_ICON')+"</td>"+
 		'<td><input type="hidden" id="line_func_icon'+prodln+'" name="line_func_icon['+prodln+']" value=""/>'+
 		"</td>"+
@@ -133,9 +146,8 @@ function insertLineElements(tableid){
 
 function checkValues(ln){
 	addToValidate('EditView','line_sort_order'+ln,'varchar','true',SUGAR.language.get('HAA_Menus_Lists','LBL_SORT_ORDER'));
-	addToValidate('EditView','line_field_Lable_zhs'+ln,'varchar','true',SUGAR.language.get('HAA_Menus_Lists','LBL_FIELD_LABLE_ZHS'));
-	//addToValidate('EditView','line_field_Lable_zhs'+ln,'varchar','true',SUGAR.language.get('HAA_Menus_Lists','LBL_FIELD_LABLE_ZHS'));
-	//addToValidateBinaryDependency('EditView', 'line_relate_insurance_number'+prodln, 'varchar', false,'没有匹配字段: 保险单号', 'line_haos_insurances_id_c'+prodln );
+	addToValidate('EditView','line_field_lable_zhs'+ln,'varchar','true',SUGAR.language.get('HAA_Menus_Lists','LBL_FIELD_LABLE_ZHS'));
+	addToValidate('EditView','line_func_module'+ln,'varchar','true',SUGAR.language.get('HAA_Menus_Lists','LBL_FUNC_MODULE'));
 }
 
 function renderLine(ln){//将编辑器中的内容显示于正常行中
@@ -143,7 +155,8 @@ function renderLine(ln){//将编辑器中的内容显示于正常行中
 	$("#displayed_field_lable_zhs"+ln).html($("#line_field_lable_zhs"+ln).val());
 	$("#displayed_func_module"+ln).html($("#line_func_module"+ln).find("option:selected").text());
 	$("#displayed_function_name"+ln).html($("#line_function_name"+ln).val());
-	$("#displayed_func_icon"+ln).html($("#line_func_icon"+ln).val());
+	$("#displayed_func_icon"+ln).removeClass();
+	$("#displayed_func_icon"+ln).addClass($("#line_func_icon"+ln).val());
 	$("#displayed_enabled_flag"+ln).html($("#line_enabled_flag"+ln).is(":checked")?"是":"否");
 	$("#displayed_description"+ln).html($("#line_description"+ln).val());
 	$("#lineItems tr td").each(function(){
@@ -151,31 +164,46 @@ function renderLine(ln){//将编辑器中的内容显示于正常行中
 	});
 }
 
+var pronum;
 function openFuncPopup(ln){
+	pronum=ln;
 	var popupRequestData = {
 		"call_back_function" : "setFuncReturn",
 		"form_name" : "EditView",
 		"field_to_name_array" : {
 			"id":"line_function_id"+ln,
-			"name" : "line_function_name" + ln,
+			"name":"line_function_name" + ln,
+			"func_icon":"line_func_icon"+ln,
+			//"haa_frameworks_id_c":"line_frameworks_id_c"+ln,
 		}
 	};
-	var data="&function_module_advanced="+$("#line_func_module"+ln).val();
+	var func_module=$("#line_func_module"+ln).val();
+	var data="&deleted_advanced=0";
+	//var frameworks=$("#frameworks_id").val();
+	if (func_module!="") {
+		data="&func_module_advanced="+func_module/*+"&haa_frameworks_id_c_advanced="+frameworks*/;
+	}
 	open_popup('HAA_Functions', 800, 850, data, true, true, popupRequestData);
 }
 
 function setFuncReturn(popupReplyData){
 	set_return(popupReplyData);
+	$.getScript("custom/resources/bootstrap-iconpicker/bootstrap-iconpicker/js/bootstrap-iconpicker.min.js",
+	function () {
+		$('#target_iconpicker'+pronum).iconpicker();
+		$('#target_iconpicker'+pronum).iconpicker('setCols', 9);
+		$('#target_iconpicker'+pronum).iconpicker('setIconset', 'materialdesign');
+		$('#target_iconpicker'+pronum).iconpicker('setSearch', false);
+		$('#target_iconpicker'+pronum).iconpicker('setIcon', $("#line_func_icon"+pronum).val());
+		$("#asset_icon").hide();
+	});
 }
 
-function insertLineFootor(tableid)
-{
+function insertLineFootor(tableid){
 	tablefooter=document.createElement("tfoot");
 	document.getElementById(tableid).appendChild(tablefooter);
-
 	var footer_row=tablefooter.insertRow(-1);
 	var footer_cell=footer_row.insertCell(0);
-
 	footer_cell.scope="row";
 	footer_cell.colSpan=columnNum;
 	footer_cell.innerHTML="<input id='btnAddNewLine'type='button'class='buttonbtn_del'onclick='addNewLine(\""+tableid+"\")'value='+"+SUGAR.language.get('app_strings','LBL_ADD_BUTTON_TITLE')+"'/>";
@@ -183,7 +211,7 @@ function insertLineFootor(tableid)
 
 function addNewLine(tableid){
 	if(check_form('EditView')){//只有必须填写的字段都填写了才可以新增
-		insertLineElements(tableid);//加入新行
+		insertLineElements(tableid,true);//加入新行
 		LineEditorShow(prodln-1);//打开行编辑器
 	}
 }
@@ -198,22 +226,22 @@ function btnMarkLineDeleted(ln,key){//删除当前行
 }
 
 function markLineDeleted(ln,key){//删除当前行
-
 	document.getElementById(key+'editor'+ln).style.display='none';
 	document.getElementById(key+'deleted'+ln).value='1';
 	document.getElementById(key+'delete_line'+ln).onclick='';
 	if(typeof validate!="undefined"&&typeof validate['EditView']!="undefined"){
 		removeFromValidate('EditView','line_sort_order'+ln);
 		removeFromValidate('EditView','line_field_Lable_zhs'+ln);
+		removeFromValidate('EditView','line_func_module'+ln);
 	}
 	resetLineNum_Bold();
 }
 
 function LineEditorShow(ln){//显示行编辑器（先自动关闭所有的行编辑器，再打开当前行）
-	if(!checkValidate('EditView','line_relate_insurance_number'+ln))
-	addToValidate('EditView','line_relate_insurance_number'+ln,'varchar','true',SUGAR.language.get('HAA_Menus_Lists','LBL_RELATE_INSURANCE_NUMBER'));
-	if(!checkValidate('EditView','line_claim_amount'+ln))
-	addToValidate('EditView','line_claim_amount'+ln,'varchar','true',SUGAR.language.get('HAA_Menus_Lists','LBL_CLAIM_AMOUNT'));
+	if(!checkValidate('EditView','line_field_lable_zhs'+ln))
+		addToValidate('EditView','line_field_lable_zhs'+ln,'varchar','true',SUGAR.language.get('HAA_Menus_Lists','LBL_FIELD_LABLE_ZHS'));
+	if(!checkValidate('EditView','line_func_module'+ln))
+		addToValidate('EditView','line_func_module'+ln,'varchar','true',SUGAR.language.get('HAA_Menus_Lists','LBL_FUNC_MODULE'));
 	if(prodln>1){
 		for(vari=0;i<prodln;i++){
 			LineEditorClose(i);
@@ -270,4 +298,29 @@ function icon_edit(icon_field_obj,ln) {
 	});
 };
 
-
+//function sort_order(sort_attr){
+	/*sort_attr排序字段*/
+	/*var r_thead = $('#lineItems thead').html();
+	var r_head_id=$('#lineItems thead').attr("id");
+	var r_foot = $('#lineItems tfoot').html();
+	var sort_arr = new Array;
+	$('#lineItems').children('tbody').each(function (i) {
+	  var sort_num = $('#line_sort_order' + i).val();
+	  sort_arr.push(sort_num);
+	});
+	sort_arr.sort(function compare(a, b) {
+	  return a - b
+	});
+	var html="";
+	for (var i = 0; i < sort_arr.length; i++) {
+	  $('#lineItems').children('tbody').each(function (j) {
+	    var old_order=$("#line_sort_order"+j).val();
+	    if(sort_arr[i]==old_order){
+	      var line_id=$(this).attr("id");
+	      html+='<tbody id="'+line_id+'">'+$(this).html()+'</tbody>';
+	    }
+	  });
+	}
+	var res_html='<thead id="'+r_head_id+'">'+r_thead+'</thead>'+html+'<tfoot>'+r_foot+'</tfoot>';
+	$("#lineItems").html(html);*/
+//}
