@@ -189,12 +189,6 @@ class generateDynamicListHtml {
 		}
 
 		$columns = $this->listviewSet["column"];
-		$elementId=$element;
-		if ($this->listviewSet["elementId"]==''){
-			$this->listviewSet["elementId"]=$elementId;
-		}else{
-			$elementId=$this->listviewSet["elementId"];
-		}
 		
 		$popup_visible = $this->listviewSet["popup_visible"];
 		$dashlet_visible = $this->listviewSet["dashlet_visible"];

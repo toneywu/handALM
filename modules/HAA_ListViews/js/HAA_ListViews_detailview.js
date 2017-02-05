@@ -33,7 +33,7 @@ function generatePreviewHtml(listviewHtml,title){
 function listPagePreview(listviewCode,type,frameworkId='',nowpage=1,elementId=''){
     $.ajax({
         url:"index.php?module=HAA_ListViews&action=GenerateDoc&to_pdf=true",
-        data:"&listviewCode="+listviewCode+"&frameworkId="+frameworkId+"&nowpage="+nowpage+"&pageType="+type,
+        data:"&listviewCode="+listviewCode+"&frameworkId="+frameworkId+"&nowpage="+nowpage+"&pageType="+type+"&elementId="+elementId,
                 type:"POST",//PUT
                 success:function(result){
                     if (result !="") {
