@@ -54,10 +54,26 @@ array (
         array (
           0 => 
           array (
+            'name' => 'task_templates',
+            'studio' => 'visible',
+            'label' => 'LBL_TASK_TEMPLATES',
+          ),
+          1 => 
+          array (
             'name' => 'data_populate_sql',
             'comment' => 'Full text of the note',
             'studio' => 'visible',
             'label' => 'LBL_DATA_POPULATE_SQL',
+          ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'additional_logic',
+            'comment' => 'Full text of the note',
+            'studio' => 'visible',
+            'label' => 'LBL_ADDITIONAL_LOGIC',
           ),
           1 => 
           array (
@@ -65,7 +81,7 @@ array (
             'label' => 'LBL_ENABLED_FLAG',
           ),
         ),
-        2 => 
+        3 => 
         array (
           0 => 'description',
         ),

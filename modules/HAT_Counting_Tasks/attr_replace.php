@@ -4,7 +4,7 @@
 */
 class Attr_Replace
 {
-	/*参数
+	/*参数 $template_arr=array();
 	module_id：attr对应模块的ID
 	module_name：attr对应模块的名称
 	template_type：模版类型
@@ -122,10 +122,13 @@ class Attr_Replace
 			$template_data.=$num%2==0?"<tr>":"";
 			if($template_arr["module_action"]=='EditView'){
 				$template_data.='<td id="'.$row['column_name'].'_label" data-total-columns="2" scope="col" width="12.5%" valign="top">'.$row['field_lable'].':';
+				$addToValidate='';
 				if ($row['required_flag']==1) {
 					$template_data.='<span class="required">*</span>';
+					$addToValidate="<script>addToValidate('EditView', '".$row['column_name']."','varchar', 'true','".$row['field_lable']."');</script>";
+					echo "<script>addToValidate('EditView', '".$row['column_name']."','varchar', 'true','".$row['field_lable']."');</script>";
 				}
-				$template_data.='</td>';
+				$template_data.='</td>'.$addToValidate;
 			}else if ($template_arr["module_action"]=='DetailView') {
 				$template_data.='<td scope="col" width="12.5%">'.$field_info["field_lable"].':</td>';
 
@@ -182,6 +185,7 @@ class Attr_Replace
 		global $db;
 		$row_name='';
 		$id='';
+
 		if($field_info["column_id"]!=''){
 			$sql_id="SELECT ".$field_info["module_dsp"]." module_dsp from ".$field_info["relate_module"]."  where id='".$field_info["column_id"]."'";
 			$result_id = $db->query($sql_id);
@@ -202,10 +206,12 @@ class Attr_Replace
 		}else{
 			$lov_name=$field_info["prefix"].$field_info["column_name"]."_name[".$field_info["prodln"]."]";
 		}
+		$function_html='';
+		$function_html=$this->getControlHtml($field_info);
 		$return_html="<td><input name='".$lov_name."' class='sqsEnabled yui-ac-input' tabindex='0' id='".$field_info["prefix"].$field_info["column_name"]."_name".$field_info["prodln"]."' size='' value='".$row_name."' title='' autocomplete='off' accesskey='7' type='text'";
 		$return_html.=$field_info['can_edit_flag']==0?"disabled='disabled'":"";
-		$return_html.="><input name='".$lov_name."' id='".$field_info["prefix"].$field_info["column_name"].$field_info["prodln"]."' type='hidden' value='".$id."'>".
-		"<button title='选择[Alt+T]' accessKey='T' type='button' tabindex='116' class='button' value='选择' name='btn1' onclick='open_popup(\"".$field_info["relate_module"]."\", 600, 400, \"".$field_info["module_filter"]."\", true, false, {\"call_back_function\":\"set_return\",\"form_name\":\"EditView\",\"field_to_name_array\":{\"id\":\"".$field_info["prefix"].$field_info["column_name"].$field_info["prodln"]."\",\"name\":\"".$lov_name."\"}}, \"single\", true );'";
+		$return_html.="><input name='".$field_info["prefix"].$field_info["column_name"].$field_info["prodln"]."' id='".$field_info["prefix"].$field_info["column_name"].$field_info["prodln"]."' type='hidden' value='".$id."'>".
+		"<button title='选择[Alt+T]' accessKey='T' type='button' tabindex='116' class='button' value='选择' name='btn1' onclick='open_popup(\"".$field_info["relate_module"]."\", 600, 400, \"".$field_info["module_filter"]."\", true, false, {\"call_back_function\":\"set_return\",\"form_name\":\"EditView\",\"field_to_name_array\":{\"id\":\"".$field_info["prefix"].$field_info["column_name"].$field_info["prodln"]."\",\"name\":\"".$lov_name."\"}}, \"single\", true );".$function_html."'";
 		$return_html.=$field_info['can_edit_flag']==0?"disabled='disabled'":"";
 		$return_html.="><img src='themes/default/images/id-ff-select.png' alt=''></button>".
 		"<button type='button' name='btn_clr_".$field_info["column_name"]."' id='btn_clr_".$field_info["column_name"]."' tabindex='0' title='清除选择' class='button lastChild' onclick='SUGAR.clearRelateField(this.form, \"".$lov_name."\", \"".$field_info["prefix"].$field_info["column_name"].$field_info["prodln"]."\");' value='清除选择'><img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button>";
@@ -323,7 +329,7 @@ class Attr_Replace
 
 function setList($field_info){
 	global $app_list_strings;
-	$str = "";
+	$str = "<option value='' selected> </option>";
 	$list_data=$app_list_strings[$field_info['list_name']];
 	if(is_array($list_data)){
 		foreach ($list_data as $key => $value) {
@@ -385,6 +391,7 @@ function setCheckbox($field_info){
 	$return_html.='<td data-total-columns="2" width="37.5%" valign="top">
 	<input name="'.$lov_name.'" value="0" type="hidden"><input id="'.$field_info["prefix"].$field_info["column_name"].$field_info["prodln"].'" name="'.$lov_name.'" value="1" title="" tabindex="0" type="checkbox"';
 	$return_html.=$field_info["column_id"]==1?'checked="checked"':'';
+	$return_html.=$field_info['can_edit_flag']==0?"disabled='disabled'":"";
 	$function_html=$this->getControlHtml($field_info);
 	$return_html.="onclick='".$function_html."'";
 	$return_html.='></td>';
@@ -424,7 +431,6 @@ function setCheckbox($field_info){
 					bool=bool|document.getElementById(diff_flag).checked;
 				}
 			}
-			console.log(bool);
 			if(bool==1){
 				document.getElementById("line_counting_result'.$field_info["prodln"].'").value="Different";
 			}else{

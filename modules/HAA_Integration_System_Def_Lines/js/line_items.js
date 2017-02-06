@@ -104,6 +104,7 @@ z1.innerHTML  =
  x.innerHTML  = "<td colSpan='"+columnNum1+"'>"+
   "<table border='0' class='lineEditor' width='100%'>"+
   "<tr>"+
+    "<input name='line_name["+prodln+"]' id='line_name"+prodln+"' value='' type='hidden'>"+
   "<input name='line_id["+prodln+"]' id='line_id"+prodln+"' value='' type='hidden'>"+
   "<input name='line_header_id["+prodln+"]' id='line_header_id"+prodln+"' value='' type='hidden' >"+
  "<td>"+SUGAR.language.get('HAA_Integration_System_Def_Lines', 'LBL_LINE_NUMBER')+"<span class='required'>*</span></td>"+
@@ -288,8 +289,8 @@ function openValueset(ln){
       //"insurance_type":"line_insurance_type"+ln,
     }
   };
-  //var frame='&frame_c_advanced='+$("#haa_framework").val();
-  open_popup('HAA_ValueSets', 800, 850,'', true, true, popupRequestData);
+  var frame='&valueset_type_advanced=F';
+  open_popup('HAA_ValueSets', 800, 850,frame, true, true, popupRequestData);
 }
 
 function setValReturn(popupReplyData){
@@ -336,7 +337,7 @@ function changeColumnName(ln){
 function changeValueset(ln){
   var column_name =$("#line_column_name"+ln).val();
 var button1 = document.getElementById("btn_choose_valueset"); 
-
+$("#line_name"+ln).val(column_name);
   if (column_name.substring(0,7)=="SEGMENT") {
     $("#line_valueset_name"+ln).attr("readOnly",false);
     addToValidate('EditView', 'line_valueset_name'+ ln,'varchar', 'true',SUGAR.language.get('HAA_Integration_System_Def_Lines', 'LBL_VALIDATE_VALUESET'));

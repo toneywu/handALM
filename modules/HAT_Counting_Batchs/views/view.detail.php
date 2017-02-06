@@ -18,13 +18,21 @@ class HAT_Counting_BatchsViewDetail extends ViewDetail
 			$row=$this->bean->db->fetchByAssoc($result);
 			$snapshot_date=$row["snapshot_date"];
 		}
+		/*require_once('modules/HAT_Counting_Batchs/auto_create_task.php');
+
+		$param=array(
+			'current_framework' => '450e732f-63e9-8cb9-0b12-57ad79663c1d',
+			'batch_id' => '4dd8b0ff-e300-9939-21ae-58844db33ed6',
+			);
+		$auto_create_task = new Auto_Create_Task();
+		$auto_create_task->hat_counting($param);*/
 		parent::display();
 		echo '<script>
-			$("#snapshot_date").val("'.$snapshot_date.'");
-			</script>';
-		
-		echo '<script>
-		$(function(){
+		$("#snapshot_date").val("'.$snapshot_date.'");
+	</script>';
+
+	echo '<script>
+	$(function(){
 		$("#hat_counting_tasks_search").nextAll().each(function(i){
 			if(i>0){
 				var tds=$(this).children();
@@ -49,7 +57,7 @@ class HAT_Counting_BatchsViewDetail extends ViewDetail
 				});
 			}
 		});
-		});
-		</script>';
-	}
+	});
+</script>';
+}
 }

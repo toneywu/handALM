@@ -36,6 +36,8 @@
 
 *}
 <!--Start Responsive Top Navigation Menu -->
+<link rel="stylesheet" href="custom/resources/bootstrap-iconpicker/bootstrap-iconpicker/css/bootstrap-iconpicker.min.css"/>
+<link rel="stylesheet" href="custom/resources/bootstrap-iconpicker/icon-fonts/icomoon/css/style.css"/>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -289,6 +291,38 @@
                     {/if}
                 </ul>
             {/if}
+                <ul class="nav navbar-nav">
+                    <li class="topnav">
+                        <span class="notCurrentTabLeft"></span>
+                        <span class="notCurrentTab">
+                            <a class="dropdown-toggle" id="grouptab_0" data-toggle="dropdown" href="#">{$all_menus}</a>
+                            <span class="notCurrentTabRight"></span>
+                            <ul class="dropdown-menu All" role="menu">
+                                <li style="width: 100%">
+                                    <h4>{$lead_label}</h4>
+                                    {foreach from=$exthead item=itemhead name=foo}
+                                    {if $smarty.foreach.foo.iteration%6 eq 0}
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                    {/if}
+                                            <div style="width: 20%;float: left;">
+                                                <h5>{$itemhead.label}</h5>
+                                                {foreach from=$extmenus item=menus}
+                                                    {if $itemhead.id eq $menus.parent_id}
+                                                    <a href="{$menus.url}"><i class="{$menus.img}"></i>{$menus.label}</a>
+                                                    {/if}
+                                                {/foreach}
+                                            </div>
+                                    {if $smarty.foreach.foo.iteration%6 eq 0}
+                                        </div>
+                                    </div>
+                                    {/if}
+                                    {/foreach}
+                                </li>
+                            </ul>
+                        </span>
+                    </li>
+                </ul>
             <div id="globalLinks" class="dropdown nav navbar-nav navbar-right">
                 <li id="usermenu" class="dropdown-toggle" aria-expanded="true">
                     <a href='index.php?module=Users&action=EditView&record={$CURRENT_USER_ID}'><span class="glyphicon glyphicon-user"> </span> {$CURRENT_USER}

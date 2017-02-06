@@ -26,6 +26,8 @@ global $current_user;
 $isNew=$_POST['isNew'];
 $isClr=$_POST['isClr'];
 $batchId=$_POST['record'];
+require_once('modules/HAT_Counting_Batchs/auto_create_task.php');
+$auto_create_task = new Auto_Create_Task();
 $bean_batch = BeanFactory :: getBean('HAT_Counting_Batchs', $batchId);
 if ($isNew=="") {
 	
@@ -49,18 +51,29 @@ if ($isNew=="") {
 }else{
 	if ($bean_batch->snapshot_date ==''){
 		echo "2";
-		$query = "call HAT_Counting_asset_info('".$_SESSION["current_framework"]."','".$batchId."','".$current_user->id."')";
-		$result = $this->bean->db->query($query, true);
-		//$row = $this->bean->db->fetchByAssoc($result);
+
+		$param=array(
+			'current_framework' => $_SESSION["current_framework"],
+			'batch_id' => $batchId,
+			);
+		
+		$auto_create_task->hat_counting($param);
 	}else{
 		echo "3";
 		//var_dump($isClr);
 		if($isClr=="true"){
 			//先清除，再创建
 		$query_reset = "call HAT_Counting_reset('".$batchId."')";
-		$result_reset = $this->bean->db->query($query_reset, true);
-		$query = "call HAT_Counting_asset_info('".$_SESSION["current_framework"]."','".$batchId."','".$current_user->id."')";
-		$result = $this->bean->db->query($query, true);
+		$result_reset = $this->bean->db->query($query_reset);
+		if(!$result_reset){
+			die("清除当前批下已有任务失败");
+		}
+		$param=array(
+			'current_framework' => $_SESSION["current_framework"],
+			'batch_id' => $batchId,
+			);
+		
+		$auto_create_task->hat_counting($param);
 		}
 	}
 }

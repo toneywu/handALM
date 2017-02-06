@@ -42,12 +42,16 @@ function display_lines($focus, $field, $value, $view){
             h.hat_counting_policies_id_c,
             hcp.`name` policy_name,
             h.hat_counting_policy_groups_id_c,
-            hcpg.name policy_group_name
+            hcpg.name policy_group_name,
+            h.account_id_c1,
+            a1.name using_org_name,
+            h.using_org_drilldown
             FROM
             hat_counting_batchs_hat_counting_batch_rules_c hcb,
             hat_counting_batch_rules h
             LEFT JOIN hat_asset_locations hal ON hal.id = h.hat_asset_locations_id_c
             LEFT JOIN accounts a ON a.id = h.account_id_c
+            LEFT JOIN accounts a1 ON a1.id = h.account_id_c1
             LEFT JOIN haa_codes hc ON hc.id = h.haa_codes_id_c
             LEFT JOIN aos_product_categories apc ON apc.id = h.aos_product_categories_id_c
             LEFT JOIN hat_counting_rules hcr ON hcr.id = h.hat_counting_rules_id_c

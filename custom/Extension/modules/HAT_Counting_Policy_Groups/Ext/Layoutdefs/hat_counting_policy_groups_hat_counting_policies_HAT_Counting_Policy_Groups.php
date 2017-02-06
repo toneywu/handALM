@@ -10,7 +10,7 @@ $layout_defs["HAT_Counting_Policy_Groups"]["subpanel_setup"]['hat_counting_polic
   'get_subpanel_data' => 'hat_counting_policy_groups_hat_counting_policies',
   'top_buttons' => 
   array (
-    0 => 
+   /* 0 => 
     array (
       'widget_class' => 'SubPanelTopButtonQuickCreate',
     ),
@@ -18,6 +18,6 @@ $layout_defs["HAT_Counting_Policy_Groups"]["subpanel_setup"]['hat_counting_polic
     array (
       'widget_class' => 'SubPanelTopSelectButton',
       'mode' => 'MultiSelect',
-    ),
+    ),*/
   ),
 );

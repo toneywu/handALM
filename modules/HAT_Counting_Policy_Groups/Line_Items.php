@@ -22,7 +22,8 @@ function display_lines($focus, $field, $value, $view){
             hcp.hat_counting_policy_groups_id_c,
             hcpg.name group_name,
             hcp.hat_counting_task_templates_id_c,
-            hctt.name template_name
+            hctt.name template_name,
+            hcp.additional_logic
             FROM
             hat_counting_policies hcp,
             hat_counting_policy_groups hcpg,

@@ -169,6 +169,7 @@ $dictionary['HAA_Integration_System_Def_Lines'] = array(
     'name' => 'column_name',
     'vname' => 'LBL_COLUMN_NAME',
     'type' => 'enum',
+    'link' => true,
     'massupdate' => 0,
     'no_default' => false,
     'comments' => '',

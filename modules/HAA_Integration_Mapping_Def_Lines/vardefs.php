@@ -210,7 +210,7 @@ $dictionary['HAA_Integration_Mapping_Def_Lines'] = array(
     'id_name' => 'haa_integration_system_def_lines_id_c',
     'ext2' => 'HAA_Integration_System_Def_Lines',
     'module' => 'HAA_Integration_System_Def_Lines',
-    'rname' => 'name',
+    'rname' => 'column_title',
     'quicksearch' => 'enabled',
     'studio' => 'visible',
   ),

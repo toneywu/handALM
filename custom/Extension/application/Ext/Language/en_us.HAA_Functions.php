@@ -39,3 +39,6 @@
 
 
 $app_list_strings['moduleList']['HAA_Functions'] = '功能定义';
+$app_list_strings['haa_function_type']=array (
+	'stand' => '标准',
+	);

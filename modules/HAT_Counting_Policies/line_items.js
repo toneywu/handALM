@@ -73,7 +73,7 @@ var z1 = tablebody.insertRow(-1);
 z1.id = 'line_displayed' + prodln;
 z1.className = 'oddListRowS1';
 z1.innerHTML  =
-"<td><span name='displayed_line_policy_name[" + prodln + "]' id='displayed_line_policy_name" + prodln + "'></span></td>" +
+//"<td><span name='displayed_line_policy_name[" + prodln + "]' id='displayed_line_policy_name" + prodln + "'></span></td>" +
 "<td><span name='displayed_line_seq[" + prodln + "]' id='displayed_line_seq" + prodln + "'></span></td>"+
 "<td><span name='displayed_line_name[" + prodln + "]' id='displayed_line_name" + prodln + "'></span></td>"+
 "<td><span name='displayed_line_template_name[" + prodln + "]' id='displayed_line_template_name" + prodln + "'></span></td>"+
@@ -268,10 +268,14 @@ function replace_display_lines(linesHtml,elementId) {
 function setdefaltpolicy(ln){
   var policy_name=$("#name").val();
   var record_id = $("input[name*='record']").val();
+  var task_templates= $("#task_templates").val();
+  var templates_id = $("#hat_counting_task_templates_id_c").val();
   document.getElementById("line_policy_name"+ln).value=policy_name;
   document.getElementById("line_hat_counting_policies_id_c"+ln).value=record_id;
+  document.getElementById("line_template_name"+ln).value=task_templates;
+  document.getElementById("line_hat_counting_task_templates_id_c"+ln).value=templates_id;
 
-  var default_num =ln;
+  var default_num =ln+1;
   document.getElementById("line_seq"+ln).value=default_num;
 }
 

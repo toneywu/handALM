@@ -1,5 +1,5 @@
 <?php
-// created: 2017-01-16 10:58:22
+// created: 2017-01-25 11:17:31
 $subpanel_layout['list_fields'] = array (
   'sort_order' => 
   array (
@@ -41,11 +41,19 @@ $subpanel_layout['list_fields'] = array (
     'width' => '10%',
     'default' => true,
   ),
-  'lookup_type' => 
+  'relate_module' => 
+  array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'vname' => 'LBL_RELATE_MODULE',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'list_name' => 
   array (
     'type' => 'varchar',
     'studio' => 'visible',
-    'vname' => 'LBL_LOOKUP_TYPE',
+    'vname' => 'LBL_LIST_NAME',
     'width' => '10%',
     'default' => true,
   ),
@@ -70,14 +78,6 @@ $subpanel_layout['list_fields'] = array (
     'vname' => 'LBL_ENABLED_FLAG',
     'width' => '10%',
   ),
-  /*'edit_button' => 
-  array (
-    'vname' => 'LBL_EDIT_BUTTON',
-    'widget_class' => 'SubPanelEditButton',
-    'module' => 'HAT_Counting_Template_Details',
-    'width' => '4%',
-    'default' => true,
-  ),*/
   'remove_button' => 
   array (
     'vname' => 'LBL_REMOVE',

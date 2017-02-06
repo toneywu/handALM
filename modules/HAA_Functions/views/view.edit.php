@@ -7,28 +7,11 @@ class HAA_FunctionsViewEdit extends ViewEdit
 {
 
 	function Display(){
-		require_once('modules/HAA_Frameworks/orgSelector_class.php');
-        $current_framework_id = empty($this->bean->hat_framework_id)?"":$this->bean->hat_framework_id;
-        $current_module = $this->module;
-        $current_action = $this->action;
-        $beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
-        if (isset($beanFramework)) {
-            $bean_framework_id = $_SESSION["current_framework"];
-            $bean_framework_name = $beanFramework->name;
-        }
-        $this->ss->assign('FRAMEWORK',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id_c'));
-
-        $modules=array(
-            'HAA_Functions_lines',
-            );
-        foreach($modules as $module){
-            if(!is_file($GLOBALS['sugar_config']['cache_dir'].'jsLanguage/'.$module.'/'.$GLOBALS['current_language'].'.js')){
-                require_once'include/language/jsLanguage.php';
-                jsLanguage::createModuleStringsCache($module,$GLOBALS['current_language']);
-            }
-            echo'<script type="text/javascript"src="'.$GLOBALS['sugar_config']['cache_dir'].'jsLanguage/'.$module.'/'.$GLOBALS['current_language'].'.js?s='.$GLOBALS['js_version_key'].'&c='.$GLOBALS['sugar_config']['js_custom_version'].'&j='.$GLOBALS['sugar_config']['js_lang_version'].'"></script>';
-        }
-
+        echo '<link rel="stylesheet" href="custom/resources/bootstrap-iconpicker/bootstrap-iconpicker/css/bootstrap-iconpicker.min.css"/>
+<link rel="stylesheet" href="custom/resources/bootstrap-iconpicker/icon-fonts/icomoon/css/style.css"/>';
+        echo '<script src="modules/HAA_Functions/js/editview_icon_picker.js"></script>';
         parent::Display();
+        
+        echo '<script>console.log($("#func_icon"));icon_edit_init($("#func_icon"));</script>';
     }
 }

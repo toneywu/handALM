@@ -78,7 +78,7 @@ $mod_strings = array (
   'LBL_LOCATION' => '位置',
   'LBL_LOCATION_DRILLDOWN' => '包括子位置',
   'LBL_ORANIZATION_ACCOUNT_ID' => '组织 (related 组织 ID)',
-  'LBL_ORANIZATION' => '组织',
+  'LBL_ORANIZATION' => '所属组织',
   'LBL_ORG_DRILLDOWN' => '包括子组织',
   'LBL_MAJOR_HAA_CODES_ID' => '专业 (related 列表代码 ID)',
   'LBL_MAJOR' => '专业',
@@ -99,4 +99,6 @@ $mod_strings = array (
   
   'LBL_COUNTING_POLICIES' => '盘点拆分策略',
   'LBL_COUNTING_POLICY_GROUPS' => '盘点策略组',
+  'LBL_USING_ORGANIZATION' => '使用组织',
+  'LBL_USING_ORG_DRILLDOWN' => '包括子组织',
 );

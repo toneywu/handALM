@@ -139,18 +139,11 @@ array (
         array (
           0 => 
           array (
-            'name' => 'fixed_asset',
-            'studio' => 'visible',
-            'label' => 'LBL_FIXED_ASSET',
-            'customCode' => '<input name="fixed_asset" class="sqsEnabled yui-ac-input" tabindex="0" id="fixed_asset" size="" value="" title="" autocomplete="off" type="text" readonly>
-            <input name="fixed_asset_id" id="fixed_asset_id" value="" type="hidden">',
-          ),
-          1 => 
-          array (
             'name' => 'counting_status',
             'studio' => 'visible',
             'label' => 'LBL_COUNTING_STATUS',
           ),
+          1 => '',
         ),
       ),
       'lbl_editview_panel3' => 

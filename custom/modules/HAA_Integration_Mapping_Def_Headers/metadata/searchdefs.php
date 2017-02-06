@@ -39,7 +39,7 @@ array (
         'width' => '10%',
         'name' => 'enabled_flag',
       ),
-      'description' => 
+      /*'description' => 
       array (
         'type' => 'text',
         'studio' => 'visible',
@@ -48,7 +48,7 @@ array (
         'width' => '10%',
         'default' => true,
         'name' => 'description',
-      ),
+      ),*/
     ),
     'advanced_search' => 
     array (

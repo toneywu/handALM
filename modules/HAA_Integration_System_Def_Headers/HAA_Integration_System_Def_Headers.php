@@ -47,7 +47,7 @@ class HAA_Integration_System_Def_Headers extends HAA_Integration_System_Def_Head
 		parent::__construct();
 	}
 	function get_list_view_data(){
-        global $app_list_string;
+        global $app_list_strings;
 		$fields = $this->get_list_view_array();
         $bean_header=BeanFactory::getBean('HAA_Integration_System_Def_Headers', $this->id);
 		$bean_interface= BeanFactory::getBean('HAA_Interfaces', $bean_header->haa_interfaces_id_c);
@@ -57,11 +57,15 @@ class HAA_Integration_System_Def_Headers extends HAA_Integration_System_Def_Head
             
            $this->interface_type=isset($bean_interface->interface_type)?$bean_interface->interface_type:''; 
 		 
-          if($this->interface_type =="WS"){
-		 	$this->interface_type ="WebService";
-		 }else if($this->interface_type =="TEXT"){
-		 	$this->interface_type ="文本";
-		 }
+          foreach ($app_list_strings['haa_interface_type_list'] as $key => $value) {
+
+            if($this->interface_type==$key)
+            {   
+                //var_dump($this->bean->interface_type);
+                $this->interface_type=$value;
+            }
+        }
+
           $fields['INTERFACE_TYPE'] = $this->interface_type;
 		}
 		return $fields;
@@ -90,23 +94,10 @@ class HAA_Integration_System_Def_Headers extends HAA_Integration_System_Def_Head
                 }
                 $lines->currency_id=$this->currency_id;
                 $lines->assigned_user_id=$current_user->id;
+                $lines->name=$lines->column_title;
                 
                 $lines->haa_integration_system_def_headers_id_c=$this->id;
-
-                /*if($this->enabled_flag==true){
-                $lines->enabled_flag=1;
-             	}
-                else
-                {
-                	$lines->enabled_flag=0;
-                }
-                if($this->required_flag==true){
-                $lines->required_flag=1;
-            }
-            else
-            {
-            	 $lines->required_flag=0;
-            }*/
+                
                 $lines->save($check_notify);
                 if (!$post_data['line_id'][$i]) {//新建才加关联关系
 	            	$table='haa_integrbaeddef_lines_c';

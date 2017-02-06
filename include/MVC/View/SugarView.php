@@ -577,7 +577,6 @@ class SugarView
 
             }
 
-
             $topTabList = array();
 
             // Now time to go through each of the tab sets and fix them up.
@@ -650,6 +649,7 @@ class SugarView
                         );
                 }
             }
+
             if(!empty($sugar_config['lock_homepage']) && $sugar_config['lock_homepage'] == true) $ss->assign('lock_homepage', true);
             $ss->assign("groupTabs",$groupTabs);
             $ss->assign("shortcutTopMenu",$shortcutTopMenu);
@@ -695,6 +695,16 @@ class SugarView
         $headerTpl = $themeObject->getTemplate('header.tpl');
         if (inDeveloperMode() )
             $ss->clear_compiled_tpl($headerTpl);
+
+// Add by zengchen 20170125
+//增加客户化菜单导航
+        require_once("modules/HAA_Menus/HAA_Menus.php");
+        $menus=new HAA_Menus();
+        $ss->assign("all_menus","菜单导航");
+        $ss->assign("lead_label","导航栏");
+        $ss->assign("exthead",$menus->menuHeadData());
+        $ss->assign("extmenus",$menus->menusData());
+ //End Add By zengchen 20170125
 
         if ($retModTabs)
         {

@@ -46,6 +46,7 @@ class HAA_Integration_Mapping_Def_Headers extends HAA_Integration_Mapping_Def_He
 	function __construct(){
 		parent::__construct();
 	}
+	
 	function save($check_notify = FALSE){
 		global $current_user;/*
 		require_once('modules/AOS_Products_Quotes/AOS_Utils.php');

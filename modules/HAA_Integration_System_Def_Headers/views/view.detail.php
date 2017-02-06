@@ -14,15 +14,18 @@ class HAA_Integration_System_Def_HeadersViewDetail extends ViewDetail {
 		parent::display();
 	}
 	function populateInterface(){
+		global $app_list_strings;
 		 $bean_interface= BeanFactory::getBean('HAA_Interfaces', $this->bean->haa_interfaces_id_c);
 		 if ($bean_interface) { 
 		 $this->bean->link_system = isset($bean_interface->link_system)?$bean_interface->link_system:'';
 		 $this->bean->interface_type = isset($bean_interface->interface_type)?$bean_interface->interface_type:'';
-		 if($this->bean->interface_type =="WS"){
-		 	$this->bean->interface_type ="WebService";
-		 }else if($this->bean->interface_type =="TEXT"){
-		 	$this->bean->interface_type ="文本";
-		 }
+		 foreach ($app_list_strings['haa_interface_type_list'] as $key => $value) {
+            if($this->bean->interface_type==$key)
+            {   
+                //var_dump($this->bean->interface_type);
+                $this->bean->interface_type=$value;
+            }
+        }
      }
 	}
 	

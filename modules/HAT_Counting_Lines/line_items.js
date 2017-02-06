@@ -240,7 +240,7 @@ function setadjustneed(ln){
 function setdefaultnum(ln){
   var default_num =ln+1;
   document.getElementById("line_cycle_number"+ln).value=default_num;
-  document.getElementById("line_counting_result"+ln).value='Matched';
+  document.getElementById("line_counting_result"+ln).value='';
 }
 
 $("#LBL_EDITVIEW_PANEL1 tr").each(function(i){

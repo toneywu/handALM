@@ -1,5 +1,5 @@
 var prodln = 0;
-var columnNum1 = 18;
+var columnNum1 = 12;
 var lineno;
 var num;
 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
@@ -27,29 +27,29 @@ function insertLineHeader(tableid){
  e.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_FIELD_TYPE');
  var g=x.insertCell(5);
  g.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_RELATE_MODULE');
- var g1=x.insertCell(6);
+/* var g1=x.insertCell(6);
  g1.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_MODULE_DSP');
  var h=x.insertCell(7);
- h.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_MODULE_FILTER');
- var l=x.insertCell(8);
+ h.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_MODULE_FILTER');*/
+ var l=x.insertCell(6);
  l.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_VALUE_SET_NAME');
- var i=x.insertCell(9);
+ var i=x.insertCell(7);
  i.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_LIST_NAME');
- var j=x.insertCell(10);
+ var j=x.insertCell(8);
  j.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_REQUIRED_FLAG');
- var k=x.insertCell(11);
+ var k=x.insertCell(9);
  k.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_CAN_EDIT_FLAG');
- var k1=x.insertCell(12);
- k1.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_ON_DIFF_FLAG');
- var m=x.insertCell(13);
- m.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_ASSET_OPTIONS');
- var m=x.insertCell(14);
- m.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_LOOKUP_TYPE');
- var n=x.insertCell(15);
+/* var k1=x.insertCell(12);
+ k1.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_ON_DIFF_FLAG');*/
+ /*var m=x.insertCell(13);
+ m.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_ASSET_OPTIONS');*/
+ /*var m=x.insertCell(10);
+ m.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_LOOKUP_TYPE');*/
+ var n=x.insertCell(10);
  n.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_ENABLED_FLAG');
- var o=x.insertCell(16);
- o.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_DESCRIPTION');
- var f=x.insertCell(17);
+/* var o=x.insertCell(16);
+ o.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_DESCRIPTION');*/
+ var f=x.insertCell(11);
  f.innerHTML='&nbsp;';
 }
 
@@ -114,17 +114,17 @@ z1.innerHTML  =
 "<td><span name='displayed_line_column_name[" + prodln + "]' id='displayed_line_column_name" + prodln + "'></span></td>"+
 "<td><span name='displayed_line_field_type[" + prodln + "]' id='displayed_line_field_type" + prodln + "'></span></td>"+
 "<td><span name='displayed_line_relate_module[" + prodln + "]' id='displayed_line_relate_module" + prodln + "'></span></td>" +
-"<td><span name='displayed_line_module_dsp[" + prodln + "]' id='displayed_line_module_dsp" + prodln + "'></span></td>"+
-"<td><span name='displayed_line_module_filter[" + prodln + "]' id='displayed_line_module_filter" + prodln + "'></span></td>"+
+//"<td><span name='displayed_line_module_dsp[" + prodln + "]' id='displayed_line_module_dsp" + prodln + "'></span></td>"+
+//"<td><span name='displayed_line_module_filter[" + prodln + "]' id='displayed_line_module_filter" + prodln + "'></span></td>"+
 "<td><span name='displayed_line_valueset_name[" + prodln + "]' id='displayed_line_valueset_name" + prodln + "'></span></td>"+
-"<td><span name='displayed_line_list_name[" + prodln + "]' id='displayed_line_list_name" + prodln + "'></span></td>"+
+"<td><span name='displayed_line_list_name[" + prodln + "]' id='displayed_line_list_name" + prodln + "' style='word-wrap:break-word'></span></td>"+
 "<td><span name='displayed_line_required_flag[" + prodln + "]' id='displayed_line_required_flag" + prodln + "'></span></td>"+
 "<td><span name='displayed_line_can_edit_flag[" + prodln + "]' id='displayed_line_can_edit_flag" + prodln + "'></span></td>"+
-"<td><span name='displayed_line_on_diff_flag[" + prodln + "]' id='displayed_line_on_diff_flag" + prodln + "'></span></td>"+
-"<td><span name='displayed_line_asset_options[" + prodln + "]' id='displayed_line_asset_options" + prodln + "'></span></td>"+
-"<td><span name='displayed_line_lookup_type[" + prodln + "]' id='displayed_line_lookup_type" + prodln + "'></span></td>"+
+//"<td><span name='displayed_line_on_diff_flag[" + prodln + "]' id='displayed_line_on_diff_flag" + prodln + "'></span></td>"+
+//"<td><span name='displayed_line_asset_options[" + prodln + "]' id='displayed_line_asset_options" + prodln + "'></span></td>"+
+//"<td><span name='displayed_line_lookup_type[" + prodln + "]' id='displayed_line_lookup_type" + prodln + "' style='word-wrap:break-word'></span></td>"+
 "<td><span name='displayed_line_enabled_flag[" + prodln + "]' id='displayed_line_enabled_flag" + prodln + "'></span></td>"+
-"<td><span name='displayed_line_description[" + prodln + "]' id='displayed_line_description" + prodln + "'></span></td>"+
+//"<td><span name='displayed_line_description[" + prodln + "]' id='displayed_line_description" + prodln + "'></span></td>"+
 "<td><input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'></td>";
 
   var x = tablebody.insertRow(-1); //以下生成的是Line Editor
@@ -168,7 +168,7 @@ z1.innerHTML  =
   "<td>"+SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_VALUE_SET_NAME')+"</td>"+
   "<td><input name='line_valueset_name["+prodln+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='line_valueset_name"+prodln+"' size='' value='' title='' autocomplete='off' accesskey='7' type='text' disabled='disabled'>"+
   "<input name='line_haa_valuesets_id_c["+prodln+"]' id='line_haa_valuesets_id_c"+prodln+"' type='hidden' value=''>"+
-  "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn_value' id='btn_value' onclick='openValuePopup(" + prodln + ");' disabled='disabled'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' ></button>"+
+  "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn_value[" + prodln + "]' id='btn_value" + prodln + "' onclick='openValuePopup(" + prodln + ");' disabled='disabled'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' ></button>"+
   "<button type='button' name='btn_clr_valuename' id='btn_clr_valuename' tabindex='0' title='清除选择' class='button lastChild' onclick='SUGAR.clearRelateField(this.form, \"line_valueset_name\", \"line_haa_valuesets_id_c\","+prodln+");' value='清除选择'><img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button>"+
   "<td>"+SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_LIST_NAME')+"</td>"+
   "<td><select tabindex='116' name='line_list_name[" + prodln + "]' id='line_list_name" + prodln + "' disabled='disabled'>" + line_app_list_string +"</select></td>"+
@@ -382,7 +382,7 @@ function setReadtype_field_type(ln){
     document.getElementById("line_module_filter"+ln).disabled=false;
     document.getElementById("line_valueset_name"+ln).disabled=false;
     document.getElementById("line_module_dsp"+ln).disabled=false;
-    document.getElementById("btn_value").disabled=false;
+    document.getElementById("btn_value"+ln).disabled=false;
     document.getElementById("line_list_name"+ln).disabled=true;
     removeFromValidate('EditView','line_list_name'+ ln);
     addToValidate('EditView', 'line_relate_module'+ ln,'varchar', 'true',SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_RELATE_MODULE'));
@@ -392,7 +392,7 @@ function setReadtype_field_type(ln){
     document.getElementById("line_relate_module"+ln).disabled=true;
     document.getElementById("line_module_filter"+ln).disabled=true;
     document.getElementById("line_valueset_name"+ln).disabled=true;
-    document.getElementById("btn_value").disabled=true;
+    document.getElementById("btn_value"+ln).disabled=true;
     document.getElementById("line_module_dsp"+ln).disabled=true;
     removeFromValidate('EditView','line_relate_module'+ ln);
   }else{
@@ -401,7 +401,7 @@ function setReadtype_field_type(ln){
     document.getElementById("line_list_name"+ln).disabled=true;
     document.getElementById("line_valueset_name"+ln).disabled=true;
     document.getElementById("line_module_dsp"+ln).disabled=true;
-    document.getElementById("btn_value").disabled=true;
+    document.getElementById("btn_value"+ln).disabled=true;
     removeFromValidate('EditView','line_relate_module'+ ln);
     removeFromValidate('EditView','line_list_name'+ ln);
   }
