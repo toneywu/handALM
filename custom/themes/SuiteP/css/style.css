@@ -177,12 +177,13 @@ div.action_buttons .button {
 	background-color:#fff;
 	font-size: 14px;
 	color:#3C8DBC;
-    line-height: 32px; height: 32dpx;
+    line-height: 32px; height: 32px;
     padding: 0px 16px;
     margin: 0 4px 4px 0;
 	border-radius:4px;
 	border: 1px solid #0d8ad4;
 }
+
 
 a#basic_search_link:hover,
 input[type=submit].button:hover,
@@ -392,7 +393,7 @@ div.sub-panel {
 }
 .detail-view .tab-content .panel-default > .panel-heading {
 	border-top: 1px solid #e8e8e8;
-	height: 26px;
+	height: 36px;
 }
 
 /*表头颜色*/
@@ -437,8 +438,17 @@ table.subpanel-table li.sugar_action_button {
 	padding: 0px;
 	margin-top:0px;
 	box-shadow: none;
-	border: 1px solid #3C8DBC;
+	border: 1px solid #c4c4c4;
 }
+.table-responsive.list > tbody > tr > td > a.button:hover,
+.subpanel-table a.button:hover,
+.subpanel-table .SugarActionMenu .sugar_action_button:hover,
+table.subpanel-table li.sugar_action_button:hover {
+	background-color: #00a2ff;
+	color:#fff;
+}
+
+
 .table-responsive.list > tbody > tr > td > a.button {
 	padding: 4px;
 }
@@ -640,7 +650,7 @@ input.yui-ac-input {
 	color:#778591;
 }
 
-.detail-view table,
+/*.detail-view table,*/
 .detail-view .detail-view-field {
 	line-height:26px;
 	min-height:26px;
@@ -649,6 +659,7 @@ input.yui-ac-input {
 	border-bottom:1px solid #efefef;
 	background-color: transparent;
 }
+
 .detail-view .detail-view-field a {
 	font-weight: 500;
 	font-size: 16px;
@@ -802,6 +813,7 @@ input.yui-ac-input {
 .moduleTitle .module-title-text {
 	margin: 0 0 30px 30px;
 	font-size: 30px;font-weight: 400;
+	max-width: 580px;
 }
 
 
