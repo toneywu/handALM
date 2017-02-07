@@ -25,7 +25,23 @@ function DocumentReady() {
 
 
     //将Subpanel的内容前移到上方TAB中
-    $("#LBL_DETAILVIEW_PANEL_DOC").after("<div class='tab_subpanel'>"+$("#whole_subpanel_documents").html()+"</div>");
+
+    $("#whole_subpanel_accounts").appendTo($("#tab-content-8 div.detail-view-row").first());
+    $("#whole_subpanel_contacts").appendTo($("#tab-content-8 div.detail-view-row").first());
+
+    $("#whole_subpanel_haa_qual_accounts").appendTo($("#tab-content-9 div.detail-view-row"))
+
+    $("#whole_subpanel_documents").appendTo($("#tab-content-10 div.detail-view-row"))
+    $("#whole_subpanel_ham_wo").appendTo($("#tab-content-12 div.detail-view-row"))
+
+    $("#whole_subpanel_hit_racks").appendTo($("#tab-content-6 div.detail-view-row"))
+    $("#whole_subpanel_hit_ip_allocations").appendTo($("#tab-content-6 div.detail-view-row"))
+
+    $("#whole_subpanel_hat_assets").appendTo($("#tab-content-7 div.detail-view-row"))
+
+    $("#whole_subpanel_account_aos_contracts").appendTo($("#tab-content-11 div.detail-view-row"))
+
+/*    $("#LBL_DETAILVIEW_PANEL_DOC").after("<div class='tab_subpanel'>"+$("#whole_subpanel_documents").html()+"</div>");
     $("#whole_subpanel_documents").replaceWith("");
 
     $("#LBL_DETAILVIEW_PANEL_QUAL").after("<div class='tab_subpanel'>"+$("#whole_subpanel_haa_qual_accounts").html()+"</div>");
@@ -53,7 +69,7 @@ function DocumentReady() {
 
     $("#LBL_DETAILVIEW_PANEL_BUSINESS").after("<div class='tab_subpanel'>"+$("#whole_subpanel_account_aos_contracts").html()+"</div>");
     $("#whole_subpanel_account_aos_contracts").replaceWith("");
-}
+*/}
 
 
 $(document).ready(DocumentReady);

@@ -46,23 +46,23 @@ if($_REQUEST['type']=="location") { //如果是Location来源，需要读取子�
                           FROM
                             hat_asset_locations,
                             ham_maint_sites
-                          WHERE hat_asset_locations.deleted = 0";
+                          WHERE hat_asset_locations.deleted = 0 AND hat_asset_locations.`ham_maint_sites_id` = `ham_maint_sites`.id ";
           //SQL Statement没有加载完成，下面继续拼接SQL,包括以下可能的场景
           //ham_maint_sites_id
           //haa_frameworks_id
           //parent_location_id
         if (isset($_REQUEST['site_id'])&&$_REQUEST['site_id']!="undefined"&&$_REQUEST['site_id']!="") {
           //如果限制SITE_ID，只列出当前Site下的地点
-          $sel_sub_location .= " AND hat_asset_locations.`ham_maint_sites_id` = `ham_maint_sites`.id AND hat_asset_locations.`ham_maint_sites_id` = '".$_REQUEST['site_id']."'";
+          $sel_sub_location .= " AND hat_asset_locations.`ham_maint_sites_id` = '".$_REQUEST['site_id']."'";
         } else {
          //如果没有限制SITE_ID则，取出当前业务框架下的所有地点+所有没有Site的地点
-          $sel_sub_location .= " AND (hat_asset_locations.`ham_maint_sites_id`= '' OR hat_asset_locations.`ham_maint_sites_id` is NULL OR (hat_asset_locations.`ham_maint_sites_id` = `ham_maint_sites`.id AND ham_maint_sites.`haa_frameworks_id`='".$current_framework."'))";
+          $sel_sub_location .= " AND (hat_asset_locations.`ham_maint_sites_id`= '' OR hat_asset_locations.`ham_maint_sites_id` is NULL OR  ham_maint_sites.`haa_frameworks_id`='".$current_framework."')";
         }
 
         if (isset($_REQUEST['id'])) {//如果指明了当前的ID
             $sel_sub_location .= " AND parent_location_id = '".$_REQUEST['id']."'";
         } else {
-            $sel_sub_location .= " AND (parent_location_id = '' || parent_location_id IS NULL)";
+            $sel_sub_location .= " AND (parent_location_id = '' OR parent_location_id IS NULL)";
         }
 
         $sel_sub_location .= " ORDER BY name";
