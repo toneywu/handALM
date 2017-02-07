@@ -145,13 +145,19 @@ if($include_reject_wo=='1'){
 
 	} else if ($reject_woop_bean->act_module == 'HAT_Asset_Trans_Batch') {
 		$reject_asset_trans_headers = BeanFactory :: getBean('HAT_Asset_Trans_Batch')->get_full_list('', "hat_asset_trans_batch.source_wo_id ='" . $wo_id . "' and hat_asset_trans_batch.source_woop_id='" . $reject_woop_bean->id . "'");
-		foreach ($reject_asset_trans_headers as $trans_header_bean) {
-			$trans_header_bean->deleted = 1;
-			$trans_header_bean->save();
-			$reject_asset_trans_lines = BeanFactory :: getBean("HAT_Asset_Trans")->get_full_list('', "hat_asset_trans.hit_ip_trans_batch_id ='" . $trans_header_bean->id . "'");
-			foreach ($reject_asset_trans_lines as $trans_line_bean) {
-				$trans_line_bean->deleted = 1;
-				$trans_line_bean->save();
+
+		if (isset($reject_asset_trans_headers)) {
+			foreach ($reject_asset_trans_headers as $trans_header_bean) {
+				$trans_header_bean->deleted = 1;
+				$trans_header_bean->save();
+				$reject_asset_trans_lines = BeanFactory :: getBean("HAT_Asset_Trans")->get_full_list('', "hat_asset_trans.hit_ip_trans_batch_id ='" . $trans_header_bean->id . "'");
+
+				if (isset($reject_asset_trans_lines)) {
+					foreach ($reject_asset_trans_lines as $trans_line_bean) {
+						$trans_line_bean->deleted = 1;
+						$trans_line_bean->save();
+					}
+				}
 			}
 		}
 	}
@@ -170,25 +176,31 @@ if($include_reject_wo=='1'){
 			//可能有多个事物处理单头
 			$trans_headers = BeanFactory :: getBean('HIT_IP_TRANS_BATCH')->get_full_list('', "hit_ip_trans_batch.source_wo_id ='" . $wo_id . "' and hit_ip_trans_batch.source_woop_id='" . $between_woop->id . "'");
 			//通过头找事物处理单行和分配行
-			foreach ($trans_headers as $trans_header_bean) {
-				$trans_header_bean->deleted = 1;
-				$trans_header_bean->save();
-				$trans_lines = BeanFactory :: getBean("HIT_IP_TRANS")->get_full_list('', "hit_ip_trans.hit_ip_trans_batch_id ='" . $trans_header_bean->id . "'");
-				foreach ($trans_lines as $trans_line_bean) {
-					$trans_line_bean->deleted = 1;
-					$trans_line_bean->save();
+			if (isset($trans_headers)) {
+				foreach ($trans_headers as $trans_header_bean) {
+					$trans_header_bean->deleted = 1;
+					$trans_header_bean->save();
+					$trans_lines = BeanFactory :: getBean("HIT_IP_TRANS")->get_full_list('', "hit_ip_trans.hit_ip_trans_batch_id ='" . $trans_header_bean->id . "'");
+					foreach ($trans_lines as $trans_line_bean) {
+						$trans_line_bean->deleted = 1;
+						$trans_line_bean->save();
+					}
 				}
 			}
 
 			//可能有多个事物处理单头
 			$asset_trans_headers = BeanFactory :: getBean('HAT_Asset_Trans_Batch')->get_full_list('', "hat_asset_trans_batch.source_wo_id ='" . $wo_id . "' and hat_asset_trans_batch.source_woop_id='" . $between_woop->id . "'");
-			foreach ($asset_trans_headers as $trans_header_bean) {
-				$trans_header_bean->deleted = 1;
-				$trans_header_bean->save();
-				$asset_trans_lines = BeanFactory :: getBean("HAT_Asset_Trans")->get_full_list('', "hat_asset_trans.hit_ip_trans_batch_id ='" . $trans_header_bean->id . "'");
-				foreach ($asset_trans_lines as $trans_line_bean) {
-					$trans_line_bean->deleted = 1;
-					$trans_line_bean->save();
+			if (isset($asset_trans_headers)) {
+				foreach ($asset_trans_headers as $trans_header_bean) {
+					$trans_header_bean->deleted = 1;
+					$trans_header_bean->save();
+					$asset_trans_lines = BeanFactory :: getBean("HAT_Asset_Trans")->get_full_list('', "hat_asset_trans.hit_ip_trans_batch_id ='" . $trans_header_bean->id . "'");
+					if (isset($asset_trans_lines)) {
+						foreach ($asset_trans_lines as $trans_line_bean) {
+							$trans_line_bean->deleted = 1;
+							$trans_line_bean->save();
+						}
+					}
 				}
 			}
 		}
@@ -203,7 +215,7 @@ if($include_reject_wo=='1'){
 			  AND h.deleted = 1 
 			  AND hit.deleted = 1 
 			  AND hit.source_woop_id ='".$latest_woop_bean->id."'";
-	echo $sql;
+	//echo $sql;
 	$hit_ip_allocation_result = $db->query($sql);
 	while ($hit_ip_allocation = $db->fetchByAssoc($hit_ip_allocation_result)) {
 		$history_id= $hit_ip_allocation["history_id"];
@@ -396,7 +408,7 @@ if($include_reject_wo=='1'){
 
 
 function reverse_asset($woop_id, $wo_id, $include_reject_wo) {
-	global $db;
+	global $db,$timedate;
 	//判断需要回退的资产事务处理
 	//1 工序退回，0工单退回，通过SQL选出当前工单/工序涉及到最早的事务处理行记录，然后通过事务处理行记录的Current_XXX字段还原当前资产的信息。
 	if ($include_reject_wo==0) {//退回到固定工序
