@@ -6,9 +6,8 @@ $listviewCode = $_POST['listviewCode'];
 $elementId=$_POST['elementId'];
 $result=array();
 
-require_once("modules\HAA_ListViews\generateDynamicListHtml.php");
+require_once("modules/HAA_ListViews/generateDynamicListHtml.php");
 $dynamicListHtml =new generateDynamicListHtml();
-$dynamicListHtml->listviewSet=array();
 $html=$dynamicListHtml->generateListviewHtml($listviewCode,$type,$frameworkId,$nowpage,$elementId);
 $result["html"]=$html;
 $result["title"]=$dynamicListHtml->listviewSet["title"];

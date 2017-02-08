@@ -59,7 +59,7 @@ class HAA_DynamicListViewDashlet extends Dashlet {
 
 
         echo '<script type="text/javascript"src="modules/HAA_ListViews/js/HAA_ListViews_detailview.js"></script>';
-        require_once("modules\HAA_ListViews\generateDynamicListHtml.php");
+        require_once("modules/HAA_ListViews/generateDynamicListHtml.php");
         $elementId='listview_'.$this->id;
         $dynamicListHtml =new generateDynamicListHtml();
         $dynamicListHtml->listviewSet=array();
