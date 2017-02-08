@@ -75,6 +75,7 @@ class HAA_Menus extends HAA_Menus_sugar {
 
 	function menuHeadData(){
 		global $db;
+        $menuheaddata=array();
 		$haa_frameworks_id=$_SESSION["current_framework"];
         $menu_sql="SELECT
             haa_menus.id,
@@ -101,6 +102,7 @@ class HAA_Menus extends HAA_Menus_sugar {
 	function menusData(){
 		global $db;
 		$haa_frameworks_id=$_SESSION["current_framework"];
+        $menus=array();
 		$menus_sql="SELECT
 			haa_menus.id,
 			IFNULL(haa_functions.func_module,haa_menus_lists.func_module) func_module,
