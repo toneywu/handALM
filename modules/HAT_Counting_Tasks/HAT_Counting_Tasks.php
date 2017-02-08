@@ -53,92 +53,7 @@ class HAT_Counting_Tasks extends HAT_Counting_Tasks_sugar {
 
 		$beanBatch = BeanFactory::getBean('HAT_Counting_Batchs', $this->hat_counting_batchs_id_c);
 		$this->name=$beanBatch->name;
-			//拼接盘点任务名称
-		$sql_loc="SELECT
-		hal.`name` loc_name
-		FROM
-		hat_asset_locations hal
-		WHERE
-		1 = 1
-		AND hal.id = '".$this->hat_asset_locations_id_c."'";
-		$result_loc=$db->query($sql_loc);
-		if($row_loc=$db->fetchByAssoc($result_loc)){
-			if($row_loc["loc_name"]){
-				$this->name=$row_loc["loc_name"].'-'.$this->name;
-			}
-		}
-
-		$sql_org="SELECT
-		hal.`name` org_name
-		FROM
-		accounts hal
-		WHERE
-		1 = 1
-		AND hal.id = '".$this->account_id_c."'";
-		$result_org=$db->query($sql_org);
-		if($row_org=$db->fetchByAssoc($result_org)){
-			if($row_org["org_name"]){
-				$this->name=$row_org["org_name"].'-'.$this->name;
-			}
-		}
-
-		$sql_code="SELECT
-		hal.`name` code_name
-		FROM
-		haa_codes hal
-		WHERE
-		1 = 1
-		AND hal.id = '".$this->haa_codes_id_c."'";
-		$result_code=$db->query($sql_code);
-		if($row_code=$db->fetchByAssoc($result_code)){
-			if($row_code["code_name"]){
-				$this->name=$row_code["code_name"].'-'.$this->name;
-			}
-		}
-
-		$sql_cate="SELECT
-		hal.`name` cate_name
-		FROM
-		aos_product_categories hal
-		WHERE
-		1 = 1
-		AND hal.id = '".$this->aos_product_categories_id_c."'";
-		$result_cate=$db->query($sql_cate);
-		if($row_cate=$db->fetchByAssoc($result_cate)){
-			if($row_cate["cate_name"]){
-				$this->name=$row_cate["cate_name"].'-'.$this->name;
-			}
-		}
-
-		$sql_user="SELECT
-		(CONCAT_WS(',',hal.last_name,IF (hal.first_name = '',NULL,hal.first_name))) full_name
-		FROM
-		contacts hal
-		WHERE
-		1 = 1
-		AND hal.id = '".$this->user_contacts_id_c."'";
-		$result_user=$db->query($sql_user);
-		if($row_user=$db->fetchByAssoc($result_user)){
-			if($row_user["full_name"]){
-				$this->name=$row_user["full_name"].'-'.$this->name;
-			}
-		}
-
-		$sql_own="SELECT
-		(CONCAT_WS(',',hal.last_name,IF (hal.first_name = '',NULL,hal.first_name))) full_name
-		FROM
-		contacts hal
-		WHERE
-		1 = 1
-		AND hal.id = '".$this->own_contacts_id_c."'";
-		$result_own=$db->query($sql_own);
-		if($row_own=$db->fetchByAssoc($result_own)){
-			if($row_own["full_name"]){
-				$this->name=$row_own["full_name"].'-'.$this->name;
-			}
-		}
-
-
+		
 		if($this->task_number==''){
 			
 			$sql="SELECT
@@ -162,8 +77,33 @@ class HAT_Counting_Tasks extends HAT_Counting_Tasks_sugar {
 				}
 			}
 		}
+		
 
 		parent::save($check_notify);
+		require_once('modules/HAT_Counting_Batchs/auto_create_task.php');
+		$auto_create_task = new Auto_Create_Task();
+		$sql_group="SELECT
+		a.*
+		FROM
+		hat_counting_tasks a
+		WHERE
+		1 = 1
+		AND a.id='".$this->id."'";
+		$result_group = $db->query($sql_group);
+		if(!$result_group){
+			die("处理任务名称时出错！");
+		}
+		$row_group = $db->fetchByAssoc($result_group);
+		$this->name=$auto_create_task->setTaskname($row_group,$this->hat_counting_task_templates_id_c,$this->name);
+		//更新盘点任务名称
+			$query_update_name="UPDATE hat_counting_tasks
+			SET hat_counting_tasks.name = '".$this->name."'
+			WHERE
+			id ='".$this->id."'";
+			$result_update_name = $db->query($query_update_name);
+			if(!$result_update_name){
+				die("更新盘点任务名称失败");
+			}
 	}
 	
 }

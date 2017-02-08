@@ -184,6 +184,26 @@ $dictionary['HAT_Counting_Lines'] = array(
         'len' => '255',
         'size' => '20',
         ),
+      'line_items_detail' =>
+              array (
+                'required' => false,
+                'name' => 'line_items_detail',
+                'vname' => 'LBL_LINE_ITEMS_DETAIL',
+                'type' => 'function',
+                'source' => 'non-db',
+                'massupdate' => 0,
+                'importable' => 'false',
+                'duplicate_merge' => 'disabled',
+                'duplicate_merge_dom_value' => 0,
+                'audited' => false,
+                'reportable' => false,
+                'function' =>
+                array(
+                    'name' => 'display_lines',
+                    'returns' => 'html',
+                    'include' => 'modules/HAT_Counting_Lines/Line_Items.php'
+                    ),
+                ),
       'line_items' =>
       array(
         'required' => false,

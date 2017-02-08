@@ -50,6 +50,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_EDITVIEW_PANEL1' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
       ),
       'syncDetailEditViews' => true,
     ),
@@ -106,6 +111,17 @@ array (
           array (
             'name' => 'line_asset_items',
             'label' => 'LBL_LINE_ASSET_ITEMS',
+          ),
+        ),
+      ),
+      'lbl_editview_panel1' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'line_items_detail',
+            'label' => 'LBL_LINE_ITEMS_DETAIL',
           ),
         ),
       ),

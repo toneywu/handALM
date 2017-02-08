@@ -11,8 +11,8 @@ array (
         0 => 
         array (
           'file' => 'modules/HAT_Counting_Tasks/js/HAT_Counting_Tasks_detailview.js',
-          ),
         ),
+      ),
       'form' => 
       array (
         'buttons' => 
@@ -51,6 +51,11 @@ array (
           'panelDefault' => 'expanded',
         ),
         'LBL_EDITVIEW_PANEL2' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_EDITVIEW_PANEL3' => 
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
@@ -297,6 +302,19 @@ array (
             'name' => 'diff_counting',
             'studio' => 'visible',
             'label' => 'LBL_DIFF_COUNTING',
+          ),
+        ),
+      ),
+      'lbl_editview_panel3' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'line_items_detail',
+            'studio' => 'visible',
+            'label' => 'LBL_LINE_ITEMS_DETAIL',
+            'customCode' => '<span id="line_items_detail_span"></span>',
           ),
         ),
       ),

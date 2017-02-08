@@ -29,52 +29,6 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-  'ASSET_LOCATION' => 
-  array (
-    'type' => 'relate',
-    'studio' => 'visible',
-    'label' => 'LBL_ASSET_LOCATION',
-    'id' => 'HAT_ASSET_LOCATIONS_ID_C',
-    'link' => true,
-    'width' => '10%',
-    'default' => true,
-  ),
-  'ORANIZATION' => 
-  array (
-    'type' => 'relate',
-    'studio' => 'visible',
-    'label' => 'LBL_ORANIZATION',
-    'id' => 'ACCOUNT_ID_C',
-    'link' => true,
-    'width' => '10%',
-    'default' => true,
-  ),
-  'ASSET_MAJOR' => 
-  array (
-    'type' => 'relate',
-    'studio' => 'visible',
-    'label' => 'LBL_ASSET_MAJOR',
-    'id' => 'HAA_CODES_ID_C',
-    'link' => true,
-    'width' => '10%',
-    'default' => true,
-  ),
-  'ASSET_STATUS' => 
-  array (
-    'type' => 'enum',
-    'studio' => 'visible',
-    'label' => 'LBL_ASSET_STATUS',
-    'width' => '10%',
-    'default' => true,
-  ),
-  'ASSET_DESC' => 
-  array (
-    'type' => 'varchar',
-    'default' => true,
-    'studio' => 'visible',
-    'label' => 'LBL_ASSET_DESC',
-    'width' => '10%',
-  ),
   'COUNTING_STATUS' => 
   array (
     'type' => 'enum',
@@ -101,6 +55,14 @@ array (
     'width' => '10%',
     'default' => false,
   ),
+  'ASSET_DESC' => 
+  array (
+    'type' => 'varchar',
+    'default' => false,
+    'studio' => 'visible',
+    'label' => 'LBL_ASSET_DESC',
+    'width' => '10%',
+  ),
   'PART_NUMBER' => 
   array (
     'type' => 'varchar',
@@ -108,6 +70,44 @@ array (
     'studio' => 'visible',
     'label' => 'LBL_PART_NUMBER',
     'width' => '10%',
+  ),
+  'ASSET_STATUS' => 
+  array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'label' => 'LBL_ASSET_STATUS',
+    'width' => '10%',
+    'default' => false,
+  ),
+  'ASSET_MAJOR' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'label' => 'LBL_ASSET_MAJOR',
+    'id' => 'HAA_CODES_ID_C',
+    'link' => true,
+    'width' => '10%',
+    'default' => false,
+  ),
+  'ASSET_LOCATION' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'label' => 'LBL_ASSET_LOCATION',
+    'id' => 'HAT_ASSET_LOCATIONS_ID_C',
+    'link' => true,
+    'width' => '10%',
+    'default' => false,
+  ),
+  'ORANIZATION' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'label' => 'LBL_ORANIZATION',
+    'id' => 'ACCOUNT_ID_C',
+    'link' => true,
+    'width' => '10%',
+    'default' => false,
   ),
   'SNAPSHOT_QUANTITY' => 
   array (

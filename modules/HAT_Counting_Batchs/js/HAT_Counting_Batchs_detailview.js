@@ -8,7 +8,8 @@ function createTask() {
 		data:"&record="+record,
 		type:"POST",
 		success: function (data) {
-			if (data=="0"){
+			var dataArray=JSON.parse(data);
+			if (dataArray["code"]=="0"){
 				var title_txt='提示';
 				var html="";
 				html+=SUGAR.language.get("HAT_Counting_Batchs", "LBL_MESSAGE_STATUS");
@@ -21,7 +22,7 @@ function createTask() {
 		              	}
 		              });
 			}
-			else if(data=="1"){
+			else if(dataArray["code"]=="1"){
 				createtoTask("true",record);
 			}
 		},
@@ -38,8 +39,8 @@ function createtoTask(p,id) {
 		data:'&isNew='+p+'&record='+id,
 		type:"POST",
 		success: function (data) {
-				//如果成功的通过Ajax读取了状态列表，则显示出状态列表，并通过Dialog确认是否修改状态
-				if(data=="3"){
+			var dataArray=JSON.parse(data);
+				if(dataArray["code"]=="3"){
 					var title_txt='提示';
 					var html="";
 					html+=SUGAR.language.get("HAT_Counting_Batchs", "LBL_MESSAGE_TASK");
@@ -56,7 +57,8 @@ function createtoTask(p,id) {
 				        }
 				    });
 				}
-				else if(data=="2"){
+				else if(dataArray["code"]=="2"){
+					alert(dataArray["msg"]);
 					window.location.reload();
 				}
 			},
@@ -74,6 +76,8 @@ function clrtoTask(p,id) {
 		data:'&isClr='+p+'&record='+id+'&isNew=true',
 		type:'POST',
 		success: function (data) {
+			var dataArray=JSON.parse(data);
+			alert(dataArray["msg"]);
 			window.location.reload();
 		},
 			error: function () { //失败

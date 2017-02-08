@@ -29,6 +29,8 @@ $batchId=$_POST['record'];
 require_once('modules/HAT_Counting_Batchs/auto_create_task.php');
 $auto_create_task = new Auto_Create_Task();
 $bean_batch = BeanFactory :: getBean('HAT_Counting_Batchs', $batchId);
+$return_msg="";
+$code="";
 if ($isNew=="") {
 	
 	$sql="SELECT
@@ -44,37 +46,42 @@ if ($isNew=="") {
 	$result=$db->query($sql);
 	$row=$db->fetchByAssoc($result);
 	if($bean_batch->status!='New' || $row["counting_task_status"]>0){
-		echo "0";
+		//echo "0";
+		$code="0";
 	}else{
-		echo "1";
+		//echo "1";
+		$code="1";
 	}
 }else{
 	if ($bean_batch->snapshot_date ==''){
-		echo "2";
-
+		//echo "2";
+		$code="2";
 		$param=array(
 			'current_framework' => $_SESSION["current_framework"],
 			'batch_id' => $batchId,
 			);
 		
-		$auto_create_task->hat_counting($param);
+		$return_msg=$auto_create_task->hat_counting($param);
 	}else{
-		echo "3";
+		//echo "3";
+		$code="3";
 		//var_dump($isClr);
 		if($isClr=="true"){
 			//先清除，再创建
 		$query_reset = "call HAT_Counting_reset('".$batchId."')";
 		$result_reset = $this->bean->db->query($query_reset);
 		if(!$result_reset){
-			die("清除当前批下已有任务失败");
+			$return_msg="清除当前批下已有任务失败";
 		}
 		$param=array(
 			'current_framework' => $_SESSION["current_framework"],
 			'batch_id' => $batchId,
 			);
 		
-		$auto_create_task->hat_counting($param);
+		$return_msg=$auto_create_task->hat_counting($param);
+		
 		}
 	}
 }
+echo json_encode(array('code'=>$code,'msg'=>$return_msg));
 ?>

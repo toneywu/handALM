@@ -10,10 +10,6 @@ array (
       array (
         0 => 
         array (
-          'file' => 'custom/modules/HAT_Counting_Lines/js/get_display.js',
-        ),
-        1 => 
-        array (
           'file' => 'modules/HAT_Counting_Lines/js/HAT_Counting_Lines_editview.js',
         ),
       ),
