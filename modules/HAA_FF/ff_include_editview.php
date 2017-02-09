@@ -29,7 +29,12 @@ function initEditViewByFF($ff_obj_id, $module_name) {
         //如果分类有对应的FlexForm，些建立一个对象去存储FF_ID
         //需要注意的是在Metadata中是不包括这个ID的，如果这里没有加载则在后续的JS文件中加载
         $ff_id_field = '<input id=haa_ff_id name=haa_ff_id type=hidden '.(isset($ff_id)?'value='.$ff_id:'').'>';
-        echo '<script>if($("#haa_ff_id").length==0) { $("#EditView").append("'.$ff_id_field.'");}else{$("#haa_ff_id").val("'.$ff_id.'")}</script>';
+        echo '<script>$(document).ready(function(){if($("#haa_ff_id").length==0) { $("#EditView").append("'.$ff_id_field.'");}else{$("#haa_ff_id").val("'.$ff_id.'")};SUGAR.util.doWhen("typeof setFF == \'function\'", function(){
+        call_ff();
+      });});</script>';
+    } else {
+        $ff_id_field = '<input id=haa_ff_id name=haa_ff_id type=hidden>';
+        echo '<script>$(document).ready(function(){if($("#haa_ff_id").length==0) { $("#EditView").append("'.$ff_id_field.'");}});</script>';
     }
 
 }

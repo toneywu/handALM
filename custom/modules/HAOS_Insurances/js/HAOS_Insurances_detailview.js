@@ -16,7 +16,7 @@ function setInsuranceTypePopupReturn(popupReplyData){
  
 function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"HAOS_Insurances");
-    $(".expandLink").click();
+    $("a.collapsed").click();
 }
 
 function setPreInsuranceTypePopupReturn(popupReplyData) {

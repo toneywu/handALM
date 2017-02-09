@@ -17,7 +17,7 @@ function triger_setFF(id_value, module_name) {
         url: "index.php?to_pdf=true&module=HAA_FF&action=setFF&ff_module="+module_name+"&ff_id="+id_value,
         success: function (result) {
              var ff_fields = jQuery.parseJSON(result);
-
+             alert("herer");
 			 hideAllAttributes(ff_fields)//将所有的Attribute先变空，如果Attribute在FF中有设置，在后续的SetFF过程中会自动显示出来，否则这些扩展字段默认都不显示
              $.each(ff_fields.FF, function () { //针对读取到的FF模板，针对每个设置的条目进行处理
                 setFF(this)
@@ -218,15 +218,19 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false, donot_c
 
 	  	if(hide_bool==true) {
 	  		//隐藏字段
-	    	if (keep_position==false) {
-	        	mark_obj_item.css({"display":"none"});
+	  		//console.log(field_name);
+	  		mark_obj_item.hide();
+
+/*	    	if (keep_position==false) {
+	        	mark_obj_item.hide()
 				//toney.wu 20161007修改为通过display控制，否则界面上会大面积留下
 	      	}else{
-	        	mark_obj_item.css({"visibility":"hidden"});
-	      	}
+	      		mark_obj_item.hide()
+	        	//mark_obj_item.css({"visibility":"hidden"});
+	      	}*/
 	    }else{
 	    	//不隐藏只是不可用
-	        mark_obj_item.css({"display":""});//还原Display状态
+	        mark_obj_item.show();//还原Display状态
 	        //Modefy By osmond.liu 20161123 更改字体颜色
 	        //mark_obj.css({"color":"#efefef","background-Color":"#efefef;"});
 	        mark_obj.css({"color":"#aaaaaa","background-Color":"#efefef;"});
@@ -254,7 +258,7 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false, donot_c
 			var hide_panel_bool=true;
 			console.log("field_name="+field_name);
 			$.each(mark_obj_row.children(".edit-view-row-item"), function() {
-			  	if ($(this).text().trim()!="" && !($(this).css("visibility")=="hidden" || $(this).css("display")=="none")) {
+			  	if ($(this).text().trim()!="" && $(this).is(":visible")) {
 			  		//如果当前字段有内容，并且有内容的字段没有隐藏，则认为当前行不为空
 			  		//note:这里尝试过使用Visible判断，但是折叠的Panel可能会使没有隐藏的字段在CSS中表示为HIDE，所以还是通过循环来判断最准备
 			  		hide_panel_bool=false;
@@ -286,7 +290,7 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false, donot_c
 	        }else{
 		    	mark_obj_item.hide();
 		    }*/
-		    mark_obj_item.css({"display":"none"});
+		    mark_obj_item.hide();
 
 /*  	    	//如果当前字段涉及隐藏，则进一步判断，当前行是否是空白，如果当前区域也是空白，直接将当前区域清空
 			if (mark_obj_row.children(".detail-view-row-item").length ==mark_obj_row.children(".detail-view-row-item:hidden").length) {
@@ -298,8 +302,10 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false, donot_c
 			}*/
 
 			var hide_row_bool=true;
+			var hide_panel_bool=true;
+
 			$.each(mark_obj_row.children(".detail-view-row-item"), function() {
-			  	if ($(this).text().trim()!="" && !($(this).css("visibility")=="hidden" || $(this).css("display")=="none")) {
+			  	if ($(this).text().trim()!="" && $(this).is(":visible")) {
 			  		//如果当前字段有内容，并且有内容的字段没有隐藏，则认为当前行不为空
 			  		hide_row_bool=false;
 			  		return false;//break for jquery each;
@@ -309,14 +315,13 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false, donot_c
 
 			if (hide_row_bool==true) {//如果确定当前行已经完全为空了，则将当前行直接隐去。
 				mark_obj_row.hide();
-				var hide_panel_bool=true;
 				//如果当前行可以直接隐去，则进一步判断是否当前行所在的整个区块都可以直接隐去
 				$.each(mark_obj_tab.children(".detail-view-row"), function() {
 				  	//if ($(this).text()!="" && !($(this).css("visibility")=="hidden" || $(this).css("display")=="none")) {
-				  	if ($(this).text().trim()!="" && !($(this).css("visibility")=="hidden" || $(this).css("display")=="none")) {
+				  	if ($(this).text().trim()!="" && $(this).is(":visible")) {
 				  		//如果当前字段有内容，并且有内容的字段没有隐藏，则认为当前行不为空
 				  		hide_panel_bool=false;
-				  		return false;//break for jquery each;
+				  		//return false;//break for jquery each;
 				  	};
 				});
 

@@ -4,7 +4,7 @@ $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.
 $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
 function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"HAT_Asset_Trans_Batch");
-    //$(".expandLink").click();
+    //$("a.collapsed").click();
     //$(".panel-content a.collapsed").click();
 	//console.log($("#haa_ff_id").val());
 }

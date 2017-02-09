@@ -5,7 +5,7 @@ if(typeof(YAHOO.SUGAR) == 'undefined') {
 
 function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"HIT_IP_TRANS_BATCH","DetailView");
-    $(".expandLink").click();
+    $("a.collapsed").click();
 }
 
 

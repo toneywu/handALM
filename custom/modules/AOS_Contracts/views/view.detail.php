@@ -26,7 +26,7 @@ class AOS_ContractsViewDetail extends ViewDetail {
 				echo '<script> 
 					function call_ff() {
 						triger_setFF($("#haa_ff_id").val(),"AOS_Contracts");
-						$(".expandLink").click();
+						$("a.collapsed").click();
 					}
 				</script>';
 				echo '<script>call_ff();</script>';

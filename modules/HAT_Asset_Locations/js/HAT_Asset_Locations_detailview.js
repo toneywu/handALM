@@ -3,7 +3,7 @@ $.getScript("modules/HAA_FF/ff_include.js");
 
 function call_ff() {
 	triger_setFF($("#haa_ff_id").val(),"HAT_Asset_Locations","DetailView");
-    $(".expandLink").click();
+    $("a.collapsed").click();
 }
 
 

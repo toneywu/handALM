@@ -5,6 +5,12 @@ $.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
 $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); // MessageBox
 $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
 
+
+function call_ff() {
+    triger_setFF($("#haa_ff_id").val(),"HAT_Assets")
+	$("a.collapsed").click();
+}
+
 function setProductPopupReturn(popupReplyData){//选择完产品后的动作
 	set_return(popupReplyData);
 
@@ -19,7 +25,7 @@ function setProductPopupReturn(popupReplyData){//选择完产品后的动作
 
 	//开始建立flexFields
 	triger_setFF($("#haa_ff_id").val(),"HAT_Assets")
-	$(".expandLink").click();
+	$("a.collapsed").click();
 	$('#target_iconpicker').iconpicker('setIcon', $("#asset_icon"));
 	//图标显示
 
@@ -136,25 +142,14 @@ function preValidateFunction(async_bool = false) {
 $(document).ready(function(){
 
 	//加载图标选择器，从modules\HAT_Assets\js\editview_icon_picker.js
-	
 	SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
 		OverwriteSaveBtn(preValidateFunction);//注意引用时不加（）
 	});
-	
 
 	SUGAR.util.doWhen("typeof icon_edit_init == 'function'", function(){
 		icon_edit_init($("#asset_icon"));
 	});
-	
-	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
-		$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');
-	};
 
-    //触发FF
-    SUGAR.util.doWhen("typeof setFF == 'function'", function(){
-        triger_setFF($("#haa_ff_id").val(),"HAT_Assets")
-		$(".expandLink").click();
-     });
 
 
 	$("#asset_desc").css("background-color","#efefef");
@@ -186,12 +181,12 @@ $(document).ready(function(){
 			mark_field_enabled('linear_unit')
 			mark_field_enabled('linear_start_measure')
 			mark_field_enabled('linear_end_measure')
-			$("#detailpanel_4").show();
+			$("#linear_unit").closest(".panel").hide();
 		} else {
 			mark_field_disabled('linear_unit')
 			mark_field_disabled('linear_start_measure')
 			mark_field_disabled('linear_end_measure')
-			$("#detailpanel_4").hide();
+			$("#linear_unit").closest(".panel").hide();
 		}
 	});
 

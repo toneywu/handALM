@@ -20,7 +20,7 @@ function setTasksTypePopupReturn(popupReplyData){
  
 function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"Tasks");
-    $(".expandLink").click();
+    $("a.collapsed").click();
     if($("#parent_name_label").next().css('display')=="none"){
         $("#parent_name_label").hide();
     }

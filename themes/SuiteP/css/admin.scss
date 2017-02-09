@@ -73,18 +73,18 @@
   display: block;
   background-color: $main-alternate-bg;
   float: left;
-  width: 20%;
+  width: 100%;
   text-wrap: normal;
 
 }
 .other.view td:nth-of-type(2) {
   display: block;
-  background-color: $main-bg;
+  background-color: $main-alternate-bg;
   padding-bottom: 10px;
   padding-left: 52px;
-  float: left;
+  float: right;
   line-height: 24px;
-  width: 30%;
+  width: 100%;
   height: auto;
 }
 
@@ -93,18 +93,18 @@
 }
 .other.view td:nth-of-type(3) {
   display: block;
-  background-color: $main-alternate-bg;
+  background-color: $main-bg;
   float: left;
-  width: 20%;
+  width: 100%;
 }
 .other.view td:nth-of-type(4) {
   display: block;
   background-color: $main-bg;
   padding-bottom: 10px;
   padding-left: 52px;
-  float: left;
+  float: right;
   line-height: 24px;
-  width: 30%;
+  width: 100%;
   height: auto;
 }
 

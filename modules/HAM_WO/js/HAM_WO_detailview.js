@@ -10,7 +10,7 @@ $.getScript("modules/HAA_FF/ff_include.js");//load triger_setFF()
 var global_eventOptions;
 function call_ff() {
 	triger_setFF($("#haa_ff_id").val(),"HAM_WO","DetailView");
-	$(".expandLink").click();
+	$("a.collapsed").click();
 }
 
 /**

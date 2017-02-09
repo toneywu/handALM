@@ -2,11 +2,7 @@ $.getScript("modules/HAA_FF/ff_include.js");
 
 $(document).ready(function() {
     //这里可以有其它代码;
-     
-    //触发FF
-    SUGAR.util.doWhen("typeof setFF == 'function'", function(){
-    	call_ff();
-    });
+
     //Add by zengchen 20161219
     setAmount_c();
     $("#status").change(function(){
@@ -59,7 +55,7 @@ function setEventTypeReturn(popupReplyData){
  
 function call_ff() {
 	triger_setFF($("#haa_ff_id").val(),"AOS_Invoices");
-	$(".expandLink").click();
+	$("a.collapsed").click();
 }
 //选择来源类型的回调函数
 function openParentPopup(){

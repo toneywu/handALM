@@ -37,7 +37,7 @@ function setEventTypeReturn(popupReplyData){
  
 function call_ff() {
 	triger_setFF($("#haa_ff_id").val(),"HAOS_Revenues_Quotes");
-	$(".expandLink").click();
+	$("a.collapsed").click();
 }
 
 

@@ -2,7 +2,7 @@ $.getScript("modules/HAA_FF/ff_include.js");//load triger_setFF()
 
 function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"HAA_QUAL","DetailView");
-    $(".expandLink").click();
+    $("a.collapsed").click();
  
 }
 

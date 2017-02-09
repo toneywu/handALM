@@ -21,7 +21,7 @@ class HAM_WOViewDetail extends ViewDetail {
 				echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="' . $ff_id . '">';
 				echo '<script> function call_ff() {
 								    triger_setFF($("#haa_ff_id").val(),"HAM_WO","DetailView");
-								    //$(".expandLink").click();
+								    //$("a.collapsed").click();
 								}</script>';
 				echo '<script>call_ff()</script>';
 			}

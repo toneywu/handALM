@@ -50,18 +50,7 @@
     {/literal}
 </script>
 
-<!--
-<div id="DetailViewPagination">{$ADMIN_EDIT}
-        {{if $panelCount == 0}}
-        {{* Render tag for VCR control if SHOW_VCR_CONTROL is true *}}
-        {{if $SHOW_VCR_CONTROL and $config.enable_action_menu == false}}
-        {$PAGINATION}
-        {{/if}}
-        {{counter name="panelCount" print=false}}
-        {{/if}}
-</div>
--->
-<table cellpadding="0" cellspacing="0" border="0" width="100%" id="DetailViewBtnGroups">
+<table cellpadding="0" cellspacing="0" border="0" width="100%" id="">
     <tr>
         <td class="buttons" align="left" NOWRAP width="80%">
             <div class="actionsContainer">
@@ -91,7 +80,15 @@
         </td>
 
 
-
+        <td align="right" width="20%" class="buttons">{$ADMIN_EDIT}
+            {{if $panelCount == 0}}
+            {{* Render tag for VCR control if SHOW_VCR_CONTROL is true *}}
+            {{if $SHOW_VCR_CONTROL and $config.enable_action_menu == false}}
+            {$PAGINATION}
+            {{/if}}
+            {{counter name="panelCount" print=false}}
+            {{/if}}
+        </td>
         {{* Add $form.links if they are defined *}}
         {{if !empty($form) && isset($form.links)}}
         <td align="right" width="10%">&nbsp;</td>
@@ -105,5 +102,3 @@
         {{/if}}
     </tr>
 </table>
-
-{{include file='themes/SuiteP/include/DetailView/tab_panel_content.tpl'}}

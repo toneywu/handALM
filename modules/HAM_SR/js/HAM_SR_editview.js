@@ -12,7 +12,7 @@ function setEventTypePopupReturn(popupReplyData){
 
 function call_ff() {
 	triger_setFF($("#haa_ff_id").val(),"HAM_SR",'EditView');
-    $(".expandLink").click();
+    $("a.collapsed").click();
 }
 
 

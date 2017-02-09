@@ -22,7 +22,7 @@ function setAssetGroupPopupReturn(popupReplyData){//选择地点类型后
 
 function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"HIT_Racks");
-    $(".expandLink").click();
+    $("a.collapsed").click();
 }
 
 

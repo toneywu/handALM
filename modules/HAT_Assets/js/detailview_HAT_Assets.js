@@ -6,7 +6,7 @@ $(document).ready(function(){
     //触发FF
     SUGAR.util.doWhen("typeof setFF == 'function'", function(){
         triger_setFF($("#haa_ff_id").val(),"HAT_Assets")
-		$(".expandLink").click();
+		$("a.collapsed").click();
      });
 
 	$("#asset_desc").css("font-weight","bold");

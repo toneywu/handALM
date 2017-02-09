@@ -4,7 +4,7 @@ $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.
 $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
 function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"HIT_IP_TRANS_BATCH");
-    $(".expandLink").click();
+    $("a.collapsed").click();
 }
 
 var prodln = 0;

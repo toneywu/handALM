@@ -4,7 +4,7 @@ $.getScript("modules/HAA_FF/ff_include.js");//load triger_setFF()
 function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"Contacts","EditView");
 	
-    $(".expandLink").click();
+    $("a.collapsed").click();
  
 }
 function setBusinessTypePopupReturn(popupReplyData){//选择完产品后的动作
@@ -13,7 +13,7 @@ function setBusinessTypePopupReturn(popupReplyData){//选择完产品后的动�
     //开始建立flexFields
     triger_setFF(popupReplyData.name_to_value_array.haa_ff_id,"Contacts");
 	console.log($("#haa_ff_id").val());
-    $(".expandLink").click();
+    $("a.collapsed").click();
 }
 
 

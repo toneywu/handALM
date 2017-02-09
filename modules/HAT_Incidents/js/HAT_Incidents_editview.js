@@ -64,5 +64,5 @@ function resetPersonByDate() {
 
 function call_ff() {
 	triger_setFF($("#haa_ff_id").val(),"HAT_Incidents");
-	$(".expandLink").click();
+	$("a.collapsed").click();
 }

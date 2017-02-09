@@ -15,5 +15,5 @@ function setClaimTypePopupReturn(popupReplyData){
  
 function call_ff() {
 	triger_setFF($("#haa_ff_id").val(),"HAOS_Insurance_Claims");
-	$(".expandLink").click();
+	$("a.collapsed").click();
 }

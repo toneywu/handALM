@@ -224,47 +224,28 @@ $(document).ready(function() {ldelim}
 
         $('a[data-toggle="collapse"]').click(function(e){
             var content;
-            if($(this).hasClass('collapsed')) {//展开
+            if($(this).hasClass('collapsed')) {
                 $(this).removeClass('collapsed');
-/*
-                //20170131 removed by toney for fix coolapse bug in edit view
-                 if($(this).closest('.panel-content').length) {
-                    content = $(this).closest('.panel-content').find('.panel-body.panel-collapse.collapse');
-                }
-                else if($(this).closest('.panel.panel-default').length){
-                    content = $(this).closest('.panel.panel-default').next();
-                }
-                //removed end toney.wu
-                */
-                if($(this).closest('.panel.panel-default').length){
-                    content = $(this).closest('.panel.panel-default').find('.panel-body.panel-collapse.collapse');
-                }
-                content.addClass('in');
-            } else {
-                $(this).addClass('collapsed');//收缩
-/*
-                //20170131 removed by toney for fix coolapse bug in edit view
                 if($(this).closest('.panel-content').length) {
                     content = $(this).closest('.panel-content').find('.panel-body.panel-collapse.collapse');
                 }
                 else if($(this).closest('.panel.panel-default').length){
                     content = $(this).closest('.panel.panel-default').next();
                 }
-                //removed end toney.wu
-                */
-                if($(this).closest('.panel.panel-default').length){
-                    content = $(this).closest('.panel.panel-default').find('.panel-body.panel-collapse.collapse');
+                content.addClass('in');
+            } else {
+                $(this).addClass('collapsed');
+                if($(this).closest('.panel-content').length) {
+                    content = $(this).closest('.panel-content').find('.panel-body.panel-collapse.collapse');
+                }
+                else if($(this).closest('.panel.panel-default').length){
+                    content = $(this).closest('.panel.panel-default').next();
                 }
                 content.removeClass('in');
             }
         });
     });
 
-    //added 20170131 add to rebuild the editView structure
-    $(document).ready(function(){
-        $("#detailpanel_-1").closest(".panel").appendTo($("#EditView_tabs").find(".tab-content").first());
-    });
-    //add end
     </script>
 
 {/literal}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+<title>acc_security_groups</title>
+<desc>Created with Sketch.</desc>
+<g id="Page-1_1_">
+	<g id="acc_security_groups">
+		<g id="Page-1" transform="translate(6.000000, 3.000000)">
+			<g id="Clip-2">
+			</g>
+			<defs>
+				<filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="0" y="0" width="17.943" height="24.349">
+					<feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+				</filter>
+			</defs>
+			<mask maskUnits="userSpaceOnUse" x="0" y="0" width="17.943" height="24.349" id="mask-2">
+				<g filter="url(#Adobe_OpacityMaskFilter)">
+					<polygon id="path-1" fill="#FFFFFF" points="17.943,0 0,0 0,24.349 17.943,24.349 					"/>
+				</g>
+			</mask>
+			<path id="Fill-1" mask="url(#mask-2)" fill="#999999" d="M12.52,7.262v4.271H5.424V7.262h0.012
+				C5.433,7.19,5.424,7.12,5.424,7.048c0-2.005,1.588-3.63,3.546-3.63c1.959,0,3.549,1.625,3.549,3.63
+				c0,0.072-0.006,0.143-0.01,0.214H12.52z M16.691,11.534h-0.834V7.262h-0.01c0.002-0.072,0.01-0.142,0.01-0.214
+				C15.857,3.156,12.775,0,8.971,0c-3.8,0-6.883,3.156-6.883,7.048c0,0.072,0.006,0.143,0.008,0.214H2.087v4.271H1.251
+				C0.561,11.534,0,12.107,0,12.814v10.253c0,0.708,0.56,1.281,1.251,1.281h15.44c0.691,0,1.252-0.573,1.252-1.281V12.814
+				C17.943,12.107,17.383,11.534,16.691,11.534L16.691,11.534z"/>
+		</g>
+	</g>
+</g>
+</svg>

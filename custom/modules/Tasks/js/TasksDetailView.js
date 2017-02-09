@@ -17,5 +17,5 @@ function setTasksTypePopupReturn(popupReplyData){
  
 function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"Tasks","DetailView");
-    $(".expandLink").click();
+    $("a.collapsed").click();
 }

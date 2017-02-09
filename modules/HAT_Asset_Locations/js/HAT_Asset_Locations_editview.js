@@ -11,7 +11,7 @@ function setLocationTypePopupReturn(popupReplyData){//选择地点类型后
 
 function call_ff() {
 	triger_setFF($("#haa_ff_id").val(),"HAT_Asset_Locations");
-	$(".expandLink").click();
+	$("a.collapsed").click();
 }
 
 function setParentLocationPopupReturn(popupReplyData){//选择地点类型后

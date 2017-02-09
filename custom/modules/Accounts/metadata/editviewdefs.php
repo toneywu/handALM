@@ -73,7 +73,7 @@ array (
         'LBL_PANEL_ADVANCED' => 
         array (
           'newTab' => false,
-          'panelDefault' => 'collapsed',
+          'panelDefault' => 'expanded',
         ),
         'LBL_EDITVIEW_PANEL4' => 
         array (

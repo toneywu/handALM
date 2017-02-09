@@ -42,7 +42,7 @@ class HAT_Asset_Trans_BatchViewDetail extends ViewDetail
                 echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="' . $ff_id . '">';
                 echo '<script> function call_ff() {
                     triger_setFF($("#haa_ff_id").val(),"HAM_SR","DetailView");
-                    $(".expandLink").click();*/
+                    $("a.collapsed").click();*/
 
 			//add by yuan.chen
 			echo "<input type='hidden' id='hat_eventtype_id' name='hat_eventtype_id' value='".$this->bean->hat_eventtype_id."'/>";
@@ -53,7 +53,7 @@ class HAT_Asset_Trans_BatchViewDetail extends ViewDetail
                 echo '<input id="haa_ff_id" name="haa_ff_id" type="hidden" value="' . $ff_id . '">';
                 echo '<script> function call_ff() {
                     triger_setFF($("#haa_ff_id").val(),"HAM_SR","DetailView");
-                    $(".expandLink").click();
+                    $("a.collapsed").click();
                 }</script>';
                 echo '<script>call_ff()</script>';
             }

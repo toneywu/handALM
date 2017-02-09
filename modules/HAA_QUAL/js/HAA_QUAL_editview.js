@@ -3,13 +3,13 @@ function setTypePopupReturn(popupReplyData){
 	set_return(popupReplyData);
 	console.log("index.php?to_pdf=true&module=HAA_FF&action=setFF&ff_module=HAA_Codes&ff_id="+$("#haa_ff_id").val())
 	triger_setFF($("#haa_ff_id").val(),"HAA_Codes")
-	$(".expandLink").click();
+	$("a.collapsed").click();
 }
 
 
 function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"HAM_WO");
-    $(".expandLink").click();
+    $("a.collapsed").click();
 }
 $(document).ready(function(){
 

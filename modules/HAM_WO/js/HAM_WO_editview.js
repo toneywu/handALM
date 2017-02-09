@@ -7,7 +7,7 @@ function setEventTypeReturn(popupReplyData){//选择地点类型后
 
 function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"HAM_WO");
-    $(".expandLink").click();
+    $("a.collapsed").click();
 }
 
 function setAssetPopupReturn(popupReplyData){
@@ -136,7 +136,7 @@ function checkAccess(id){
 ///**
 //* 设置必输
 //
-function mark_field_enabled(field_name,not_required_bool) {
+/*function mark_field_enabled(field_name,not_required_bool) {
 //field_name = 字段名，不需要jquery select标志，直接写名字
 //not_required_bool如果为空或没有明确定义为true的话，字段为必须输入。如果=true则为非必须
 //alert(not_required_bool);
@@ -166,7 +166,7 @@ function mark_field_enabled(field_name,not_required_bool) {
 	 $("#btn_clr_"+field_name).css({"visibility":"visible"});
 	}
 }
-
+*/
 function showWOLines() {
     console.log('index.php?to_pdf=true&module=HAM_WO&action=getWOLiness&id=' + $("input[name=record]").val());
         $.ajax({
@@ -224,14 +224,6 @@ $(document).ready(function(){
 		OverwriteSaveBtn(preValidateFunction);//ff_include.js 注意preValidateFunction是一个Function，在此引用时不加（）
 	});
 
-	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
-		$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');
-	}
-
-	//触发FF
-	SUGAR.util.doWhen("typeof setFF == 'function'", function(){
-		call_ff();
-	});
 
 	$("#event_type").change(function(){
 		SUGAR.util.doWhen("typeof setFF == 'function'", function(){
