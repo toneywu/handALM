@@ -37,7 +37,37 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
-
-$app_list_strings['moduleList']['HAA_Menus'] = '菜单定义';
-$app_list_strings['moduleList']['HAA_Menus_Lists'] = '菜单项清单';
-$app_list_strings['moduleList']['HAA_Menu_Groups'] = '菜单组定义';
+$mod_strings = array (
+  'LBL_ASSIGNED_TO_ID' => 'Assigned User Id',
+  'LBL_ASSIGNED_TO_NAME' => 'Assigned to',
+  'LBL_SECURITYGROUPS' => 'Security Groups',
+  'LBL_SECURITYGROUPS_SUBPANEL_TITLE' => 'Security Groups',
+  'LBL_ID' => 'ID',
+  'LBL_DATE_ENTERED' => 'Date Created',
+  'LBL_DATE_MODIFIED' => 'Date Modified',
+  'LBL_MODIFIED' => 'Modified By',
+  'LBL_MODIFIED_ID' => 'Modified By Id',
+  'LBL_MODIFIED_NAME' => 'Modified By Name',
+  'LBL_CREATED' => 'Created By',
+  'LBL_CREATED_ID' => 'Created By Id',
+  'LBL_DESCRIPTION' => 'Description',
+  'LBL_DELETED' => 'Deleted',
+  'LBL_NAME' => 'Name',
+  'LBL_CREATED_USER' => 'Created by User',
+  'LBL_MODIFIED_USER' => 'Modified by User',
+  'LBL_LIST_NAME' => 'Name',
+  'LBL_EDIT_BUTTON' => 'Edit',
+  'LBL_REMOVE' => 'Remove',
+  'LBL_LIST_FORM_TITLE' => '菜单组定义 List',
+  'LBL_MODULE_NAME' => '菜单组定义',
+  'LBL_MODULE_TITLE' => '菜单组定义',
+  'LBL_HOMEPAGE_TITLE' => 'My 菜单组定义',
+  'LNK_NEW_RECORD' => 'Create 菜单组定义',
+  'LNK_LIST' => 'View 菜单组定义',
+  'LNK_IMPORT_HAA_MENU_GROUPS' => '导入 菜单组定义',
+  'LBL_SEARCH_FORM_TITLE' => 'Search 菜单组定义',
+  'LBL_HISTORY_SUBPANEL_TITLE' => 'View History',
+  'LBL_ACTIVITIES_SUBPANEL_TITLE' => 'Activities',
+  'LBL_HAA_MENU_GROUPS_SUBPANEL_TITLE' => '菜单组定义',
+  'LBL_NEW_FORM_TITLE' => 'New 菜单组定义',
+);

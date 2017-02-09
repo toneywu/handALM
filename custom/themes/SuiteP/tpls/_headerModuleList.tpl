@@ -39,6 +39,8 @@
  */
 *}
 <!--Start Responsive Top Navigation Menu -->
+<link rel="stylesheet" href="custom/resources/bootstrap-iconpicker/bootstrap-iconpicker/css/bootstrap-iconpicker.min.css"/>
+<link rel="stylesheet" href="custom/resources/bootstrap-iconpicker/icon-fonts/icomoon/css/style.css"/>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -75,6 +77,13 @@
                         {/foreach}
                     {/if}
                 {/foreach}
+                {*Add by zengchen 20170209*}
+                {foreach from=$extmenus item=menus}
+                <li role="presentation">
+                    <a href="{$menus.url}">{$menus.label}<span class="glyphicon glyphicon-plus"  onclick="window.location.href = 'index.php?action=EditView&module={$menus.module}'"></span></a>
+                </li>
+                {/foreach}
+                {*End add 20170209*}
             </ul>
             <div id="mobileheader" class="mobileheader">
                 <div id="modulelinks" class="modulelinks">
@@ -264,6 +273,30 @@
 
                         {/if}
                     {/foreach}
+                    {*Add by zengchen 20170209*}
+                    <li class="topnav">
+                        <span class="notCurrentTabLeft"></span>
+                        <span class="notCurrentTab">
+                            <a class="dropdown-toggle" id="grouptab_0" data-toggle="dropdown" href="#" style="padding-top: 10px;">{$all_menus}</a>
+                            <span class="notCurrentTabRight"></span>
+                            <ul class="dropdown-menu" role="menu" style="max-width: 700px; width: 700px; min-width: 185px">
+                                <li style="width: 100%">
+                                    <h4>{$lead_label}</h4>
+                                    {foreach from=$exthead item=itemhead name=foo}
+                                    <div class="col-md-3">
+                                        <h5>{$itemhead.label}</h5>
+                                        {foreach from=$extmenus item=menus}
+                                        {if $itemhead.id eq $menus.parent_id}
+                                        <a href="{$menus.url}"><i class="{$menus.img}"></i> {$menus.label}</a>
+                                        {/if}
+                                        {/foreach}
+                                    </div>
+                                    {/foreach}
+                                </li>
+                            </ul>
+                        </span>
+                    </li>
+                    {*End add 20170209*}
                     {foreach from=$groupTabs item=modules key=group name=groupList}
                         {capture name=extraparams assign=extraparams}parentTab={$group}{/capture}
                         <li class="topnav {if $smarty.foreach.groupList.last}all{/if}">

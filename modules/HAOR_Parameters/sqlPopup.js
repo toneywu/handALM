@@ -13,7 +13,7 @@ function send_back(id_file,name_file,id, name) {
 	closePopup();
 
 }
-
+var psql;
 function onJumpPage(offset){
 	var form = document.getElementById("p_form");
 	var hideInput = document.createElement("input");  
@@ -21,5 +21,10 @@ function onJumpPage(offset){
 		hideInput.name= "next_offset"
 		hideInput.value= offset;
 		form.appendChild(hideInput);
+	var hideInput = document.createElement("input");  
+        hideInput.type="hidden";  
+        hideInput.name= "sql"
+        hideInput.value= psql;
+        form.appendChild(hideInput);    		
 	form.submit();
 }

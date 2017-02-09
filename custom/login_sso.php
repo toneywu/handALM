@@ -18,10 +18,10 @@ $set_config=array(
 	"default_login_url"=>$user_row["default_login_url"],
 	"default_module"=>$module,
 	"default_action"=>strtolower($action),
-	"user_name"=>$user_row["certificate_key"],
+	"certificate_key"=>$user_row["certificate_key"],
 );
-if (isset($_SERVER[$set_config["user_name"]])&&$_SERVER[$set_config["user_name"]]!="") {
-	$user_name=$set_config["user_name"];
+if (isset($_SERVER[$set_config["certificate_key"]])&&$_SERVER[$set_config["certificate_key"]]!="") {
+	$user_name=$_SERVER[$set_config["certificate_key"]];
 	$sso_url=$set_config["sso_url"];
 	$sql="select count(*) user,id,user_hash from users where user_name='".$user_name."' and status='Active' and employee_status='Active'";
 	$result=$db->query($sql);
@@ -44,7 +44,8 @@ if (isset($_SERVER[$set_config["user_name"]])&&$_SERVER[$set_config["user_name"]
  		$_REQUEST['default_user_name']=$user_name;
  		$_SESSION['login_password']=MD5($user_pwd);
  		$timeout=time()+$sugar_config['jobs']['timeout'];
- 		SugarApplication::setCookie('logout_url',$sso_url,$timeout,'/');
+ 		//SugarApplication::setCookie('logout_url',$sso_url,$timeout,'/');
+ 		setcookie('logout_url',$sso_url,$timeout,'/');
  		login_api($user_name,$user_pwd,$set_config);
 		$after_sql="update users set user_hash='".$res['user_hash']."' where user_name='".$user_name."' and status='Active' and employee_status='Active'";
 		$db->query($after_sql);

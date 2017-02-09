@@ -37,7 +37,15 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
-
-$app_list_strings['moduleList']['HAA_Menus'] = '菜单定义';
-$app_list_strings['moduleList']['HAA_Menus_Lists'] = '菜单项清单';
-$app_list_strings['moduleList']['HAA_Menu_Groups'] = '菜单组定义';
+/**
+ * THIS CLASS IS FOR DEVELOPERS TO MAKE CUSTOMIZATIONS IN
+ */
+require_once('modules/HAA_Menu_Groups/HAA_Menu_Groups_sugar.php');
+class HAA_Menu_Groups extends HAA_Menu_Groups_sugar {
+	
+	function __construct(){
+		parent::__construct();
+	}
+	
+}
+?>

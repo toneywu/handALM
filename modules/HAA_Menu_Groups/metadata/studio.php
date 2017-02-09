@@ -37,7 +37,8 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
+/**
+ * This file adds support for studio
+ */
 
-$app_list_strings['moduleList']['HAA_Menus'] = '菜单定义';
-$app_list_strings['moduleList']['HAA_Menus_Lists'] = '菜单项清单';
-$app_list_strings['moduleList']['HAA_Menu_Groups'] = '菜单组定义';
+?>

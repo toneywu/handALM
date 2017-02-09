@@ -1,4 +1,5 @@
 <?php
+if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point'); 
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
@@ -38,6 +39,8 @@
  ********************************************************************************/
 
 
-$app_list_strings['moduleList']['HAA_Menus'] = '菜单定义';
-$app_list_strings['moduleList']['HAA_Menus_Lists'] = '菜单项清单';
-$app_list_strings['moduleList']['HAA_Menu_Groups'] = '菜单组定义';
+global $mod_strings, $app_strings, $sugar_config;
+ 
+if(ACLController::checkAccess('HAA_Menu_Groups', 'edit', true))$module_menu[]=Array("index.php?module=HAA_Menu_Groups&action=EditView&return_module=HAA_Menu_Groups&return_action=DetailView", $mod_strings['LNK_NEW_RECORD'],"Add", 'HAA_Menu_Groups');
+if(ACLController::checkAccess('HAA_Menu_Groups', 'list', true))$module_menu[]=Array("index.php?module=HAA_Menu_Groups&action=index&return_module=HAA_Menu_Groups&return_action=DetailView", $mod_strings['LNK_LIST'],"View", 'HAA_Menu_Groups');
+if(ACLController::checkAccess('HAA_Menu_Groups', 'import', true))$module_menu[]=Array("index.php?module=Import&action=Step1&import_module=HAA_Menu_Groups&return_module=HAA_Menu_Groups&return_action=index", $app_strings['LBL_IMPORT'],"Import", 'HAA_Menu_Groups');

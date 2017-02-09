@@ -140,7 +140,8 @@ function setEventTypeFields() {
 	 	$(".action_buttons").hide();
 	 }
 
-	 $("#line_items_span").parent("td").prev("td").hide();//隐藏事务处理行上的标签
+	 //$("#line_items_span").parent("td").prev("td").hide();//隐藏事务处理行上的标签
+	 $("#line_items_span").parent().prev().hide();//现在的主题,隐藏事务处理行上的标签
 
 	 if ($("#source_wo_id").val() != "" && $("#source_wo_id").val() != 'undefined') {
 		// 如果来源于工作单则显示工作单对象行信息，否则直接隐藏行

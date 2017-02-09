@@ -22,12 +22,11 @@
  * @author SalesAgility <info@salesagility.com>
  */
 
-
 class generateDynamicListHtml {
 
-	var $listviewSet = array();
-	var $popup_line = array();
-	var $listViewId='';
+	var $listviewSet=array();
+	var $popup_line=array();
+	var $listViewId="";
 
 	function parseListViewSet($listviewCode,$frameworkId='',$nowpage=1) {
 		global $current_user,$current_language,$db;
@@ -103,6 +102,7 @@ class generateDynamicListHtml {
 
 		$row1=$db->fetchByAssoc($result1);
 		$this->listviewSet["sumpage"] = ceil($row1["sumpage"]/$page_rows);
+		$this->listviewSet["sum"] = $row1["sumpage"];
 
 		if ($nowpage > $this->listviewSet["sumpage"]) {
 			$nowpage = $this->listviewSet["sumpage"];
@@ -198,6 +198,7 @@ class generateDynamicListHtml {
 		$datas = $this->listviewSet["data"];
 		$nowpage = $this->listviewSet["nowpage"];
 		$sumpage = $this->listviewSet["sumpage"];
+		$sum = $this->listviewSet["sum"];
 		$page_rows=$this->listviewSet["page_rows"];
 		$is_correct = $this->listviewSet["is_correct"];
 		$error_msg = $this->listviewSet["error_msg"];
@@ -207,6 +208,7 @@ class generateDynamicListHtml {
 		$html = "<head>".
 		"</head>";
 		if ($is_correct) {
+			
 			$html .= '<table class="list view table footable-loaded footable default" id="html_table" width="100%" cellspacing="0" cellpadding="0" border="0">'.
 			'<thead>'.
 			'<tr id="pagination" role="presentation">'.
@@ -215,7 +217,7 @@ class generateDynamicListHtml {
 			'<tbody>'.
 			'<tr>'.
 			'<td class="paginationChangeButtons" width="1%" nowrap="nowrap" align="right">'.
-			'<button id="listViewStartButton_top" class="button" type="button" name="listViewStartButton" title="首页" onclick=listPagePreview("'.$listviewCode.'","'.$type.'","'.$frameworkId.'",'.(1).',"'.$elementId.'")>'.
+			'<button id="listViewStartButton_top" class="button" name="listViewStartButton" title="首页" onclick=listPagePreview("'.$listviewCode.'","'.$type.'","'.$frameworkId.'",'.(1).',"'.$elementId.'")>'.
 			'<img src="themes/SuiteR_HANDALM/images/start_off.gif?v=6-oABrRk-DYgrmsAywj82w" alt="首页" border="0" align="absmiddle">'.
 			'</button>'.
 			'<button id="listViewPrevButton_top" class="button" type="button" name="listViewPrevButton" title="上页" onclick=listPagePreview("'.$listviewCode.'","'.$type.'","'.$frameworkId.'",'.($nowpage-1).',"'.$elementId.'")>'.
@@ -223,7 +225,7 @@ class generateDynamicListHtml {
 			'</button>'.
 			'</td>'.
 			'<td class="paginationActionButtons" width="1%" nowrap="nowrap">'.
-			'<div class="pageNumbers">( 1 - '.$sumpage.' 的 '.$nowpage.' )</div>'.
+			'<div class="pageNumbers">(1 - '.$sumpage.' / 总记录条目数： '.$sum.')</div>'.
 			'</td>'.
 			'<td class="paginationActionButtons" width="1%" nowrap="nowrap" align="right">'.
 			'<button id="listViewNextButton_top" class="button" type="button" name="listViewNextButton" title="下页" onclick=listPagePreview("'.$listviewCode.'","'.$type.'","'.$frameworkId.'",'.($nowpage+1).',"'.$elementId.'")>'.
@@ -239,7 +241,6 @@ class generateDynamicListHtml {
 			'</table>'.
 			'</td>'.
 			'</tr>';
-			
 			if ($type == "popup") {
 				$html .= '<td class="nowrap" width="1%"></td>';
 			}
@@ -275,11 +276,11 @@ class generateDynamicListHtml {
 				$html .= "</tr>";
 			}
 			$html .="</thead></table>";
-		}
-		else{
+		}else{
 			$html .= "<span>执行出错：".$error_msg."</span>";
 		}
 		return $html;
+		return "testhtml";
 	}
 }
 ?>
