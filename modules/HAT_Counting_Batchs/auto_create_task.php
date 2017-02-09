@@ -153,8 +153,8 @@ class Auto_Create_Task
 						);
 					$custom_return=$this->custom_type($custom);
 					if($custom_return!=''){
-				return $custom_return;
-			}
+						return $custom_return;
+					}
 					//var_dump("自定义分组循环结束");
 				}
 
@@ -231,18 +231,13 @@ class Auto_Create_Task
 				}
 				if($attr==$row_template["column_name"]){
 					if($row_template["field_type"]=='LOV'){
-						$sql_attr="SELECT
-						".$row_template["module_dsp"]." name
-						FROM ".$row_template["relate_module"]." 
-						WHERE
-						id = '".$value."'";
-						$result_attr = $db->query($sql_attr);
-						if(!$result_attr){
+						$beanAttr = BeanFactory::getBean($row_template["relate_module"], $value);
+						$row_name = $beanAttr->$row_template["module_dsp"];
+						/*if(!$result_attr){
 							return  array('task_name' => $task_name,'msg' => "字段类型为LOV时,任务名称拼接失败");
-						}
-						$row_attr = $db->fetchByAssoc($result_attr);
-						if($row_attr["name"]){
-							$task_name=$row_attr["name"].'-'.$task_name;
+						}*/
+						if($row_name){
+							$task_name=$row_name.'-'.$task_name;
 						}
 					}else if ($row_template["field_type"]=='LIST') {
 						foreach ($app_list_strings[$row_template["list_name"]] as $key_list => $value_list) {

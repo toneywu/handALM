@@ -87,7 +87,7 @@ function displayLineItems(){
 	$html = '';
 	$html .= '<script src="modules/HAT_Counting_Lines/line_items.js"></script>';
 	echo $html;
-	$html .="<table border='0' cellspacing='4' width='100%' id='lineItems' class='listviewtable' style='table-layout: fixed;'></table>";
+	$html .="<table border='0' cellspacing='4' width='100%' id='lineItems_result' class='listviewtable' style='table-layout: fixed;'></table>";
 	echo "<script>replace_display_lines(" .json_encode($html).",'line_items_span'".");</script>";
 	echo '
 	<input type="hidden" name="resactastidden" id="resactastidden" value="'.get_select_options_with_id($app_list_strings['hat_asset_status_list'], '').'"> 
@@ -161,7 +161,7 @@ function displayLineItems(){
 			$attr_column= json_encode($attr_data);
 			$column_type= json_encode($attr_type);
 			//echo "string";
-			echo '<script>var attr_label=\''.$attr_label.'\';var attr_data=\''.$attr_column.'\';var attr_type=\''.$column_type.'\';insertLineHeader(\'lineItems\',\'EditView\',attr_label,attr_data,attr_type,false);</script>';
+			echo '<script>var attr_label=\''.$attr_label.'\';var attr_data=\''.$attr_column.'\';var attr_type=\''.$column_type.'\';insertLineHeader(\'lineItems_result\',\'EditView\',attr_label,attr_data,attr_type,false);</script>';
 			$column_name=array();
 			while($row=$focus->db->fetchByAssoc($result)){
 				for($i=0;$i<$num;$i++){
@@ -187,7 +187,7 @@ function displayLineItems(){
 			echo '<script>insertLineHeader("lineItems","EditView","","");</script>';
 		}*/
 
-		echo "<script>insertLineFootor('lineItems');</script>";
+		echo "<script>insertLineFootor('lineItems_result');</script>";
 
 	}
 

@@ -2,10 +2,11 @@ var prodln = 0;
 var columnNum1 = 12;
 var lineno;
 var num;
+var module_dsp_list='';
 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
 
 function insertLineHeader(tableid){
-  $("#line_items_label").hide();//隐藏SugarCRM字段
+  $("#line_items_span").parent().prev().hide();//隐藏SugarCRM字段
 
   tablehead = document.createElement("thead");
   tablehead.id = tableid +"_head";
@@ -16,49 +17,60 @@ function insertLineHeader(tableid){
  /* var a=x.insertCell(0);
  a.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_TASK_TEMPLATE');*/
  var b=x.insertCell(0);
+ b.width="6%";
  b.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_SORT_ORDER');
  var c=x.insertCell(1);
+ c.width="10%";
  c.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_FIELD_LABLE');
  var b1=x.insertCell(2);
+ b1.width="10%";
  b1.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_TABLE_NAME');
  var d=x.insertCell(3);
+ d.width="10%";
  d.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_COLUMN_NAME');
  var e=x.insertCell(4);
+ e.width="10%";
  e.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_FIELD_TYPE');
  var g=x.insertCell(5);
+ g.width="10%";
  g.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_RELATE_MODULE');
 /* var g1=x.insertCell(6);
  g1.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_MODULE_DSP');
  var h=x.insertCell(7);
  h.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_MODULE_FILTER');*/
  var l=x.insertCell(6);
+ l.width="10%";
  l.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_VALUE_SET_NAME');
  var i=x.insertCell(7);
+ i.width="10%";
  i.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_LIST_NAME');
  var j=x.insertCell(8);
+ j.width="6%";
  j.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_REQUIRED_FLAG');
  var k=x.insertCell(9);
+ k.width="8%";
  k.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_CAN_EDIT_FLAG');
 /* var k1=x.insertCell(12);
- k1.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_ON_DIFF_FLAG');*/
+k1.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_ON_DIFF_FLAG');*/
  /*var m=x.insertCell(13);
  m.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_ASSET_OPTIONS');*/
  /*var m=x.insertCell(10);
  m.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_LOOKUP_TYPE');*/
  var n=x.insertCell(10);
+ n.width="6%";
  n.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_ENABLED_FLAG');
 /* var o=x.insertCell(16);
- o.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_DESCRIPTION');*/
- var f=x.insertCell(11);
- f.innerHTML='&nbsp;';
+o.innerHTML=SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_DESCRIPTION');*/
+var f=x.insertCell(11);
+f.width="6%";
+f.innerHTML='&nbsp;';
 }
 
 
 function insertLineData(line_data ){ //将数据写入到对应的行字段中
   var ln = 0;
   if(line_data.id != '0' && line_data.id !== ''){
-
-    ln = insertLineElements("lineItems");
+    ln = insertLineElements("lineItems_tem");
     $("#line_id".concat(String(ln))).val(line_data.id);
     $("#line_hat_counting_task_templates_id_c".concat(String(ln))).val(line_data.hat_counting_task_templates_id_c);
     $("#line_template_name".concat(String(ln))).val(line_data.template_name);
@@ -80,6 +92,7 @@ function insertLineData(line_data ){ //将数据写入到对应的行字段中
     $("#line_asset_options".concat(String(ln))).val(line_data.asset_options);
     $("#line_module_dsp".concat(String(ln))).val(line_data.module_dsp);
     $("#line_on_diff_flag".concat(String(ln))).attr('checked',line_data.on_diff_flag==1?true:false);
+    $("#line_dsp".concat(String(ln))).val(line_data.module_dsp);
 
     renderLine(ln);
     $("#line_editor"+ln).hide();
@@ -108,22 +121,22 @@ z1.id = 'line_displayed' + prodln;
 z1.className = 'oddListRowS1';
 z1.innerHTML  =
 //"<td><span name='displayed_line_template_name[" + prodln + "]' id='displayed_line_template_name" + prodln + "'></span></td>" +
-"<td><span name='displayed_line_sort_order[" + prodln + "]' id='displayed_line_sort_order" + prodln + "'></span></td>"+
-"<td><span name='displayed_line_field_lable[" + prodln + "]' id='displayed_line_field_lable" + prodln + "'></span></td>"+
-"<td><span name='displayed_line_table_names[" + prodln + "]' id='displayed_line_table_names" + prodln + "'></span></td>"+
-"<td><span name='displayed_line_column_name[" + prodln + "]' id='displayed_line_column_name" + prodln + "'></span></td>"+
-"<td><span name='displayed_line_field_type[" + prodln + "]' id='displayed_line_field_type" + prodln + "'></span></td>"+
-"<td><span name='displayed_line_relate_module[" + prodln + "]' id='displayed_line_relate_module" + prodln + "'></span></td>" +
+"<td><span name='displayed_line_sort_order[" + prodln + "]' id='displayed_line_sort_order" + prodln + "'style='word-wrap:break-word'></span></td>"+
+"<td><span name='displayed_line_field_lable[" + prodln + "]' id='displayed_line_field_lable" + prodln + "'style='word-wrap:break-word'></span></td>"+
+"<td><span name='displayed_line_table_names[" + prodln + "]' id='displayed_line_table_names" + prodln + "'style='word-wrap:break-word'></span></td>"+
+"<td><span name='displayed_line_column_name[" + prodln + "]' id='displayed_line_column_name" + prodln + "'style='word-wrap:break-word'></span></td>"+
+"<td><span name='displayed_line_field_type[" + prodln + "]' id='displayed_line_field_type" + prodln + "'style='word-wrap:break-word'></span></td>"+
+"<td><span name='displayed_line_relate_module[" + prodln + "]' id='displayed_line_relate_module" + prodln + "'style='word-wrap:break-word'></span></td>" +
 //"<td><span name='displayed_line_module_dsp[" + prodln + "]' id='displayed_line_module_dsp" + prodln + "'></span></td>"+
 //"<td><span name='displayed_line_module_filter[" + prodln + "]' id='displayed_line_module_filter" + prodln + "'></span></td>"+
-"<td><span name='displayed_line_valueset_name[" + prodln + "]' id='displayed_line_valueset_name" + prodln + "'></span></td>"+
+"<td><span name='displayed_line_valueset_name[" + prodln + "]' id='displayed_line_valueset_name" + prodln + "'style='word-wrap:break-word'></span></td>"+
 "<td><span name='displayed_line_list_name[" + prodln + "]' id='displayed_line_list_name" + prodln + "' style='word-wrap:break-word'></span></td>"+
-"<td><span name='displayed_line_required_flag[" + prodln + "]' id='displayed_line_required_flag" + prodln + "'></span></td>"+
-"<td><span name='displayed_line_can_edit_flag[" + prodln + "]' id='displayed_line_can_edit_flag" + prodln + "'></span></td>"+
+"<td><span name='displayed_line_required_flag[" + prodln + "]' id='displayed_line_required_flag" + prodln + "'style='word-wrap:break-word'></span></td>"+
+"<td><span name='displayed_line_can_edit_flag[" + prodln + "]' id='displayed_line_can_edit_flag" + prodln + "'style='word-wrap:break-word'></span></td>"+
 //"<td><span name='displayed_line_on_diff_flag[" + prodln + "]' id='displayed_line_on_diff_flag" + prodln + "'></span></td>"+
 //"<td><span name='displayed_line_asset_options[" + prodln + "]' id='displayed_line_asset_options" + prodln + "'></span></td>"+
 //"<td><span name='displayed_line_lookup_type[" + prodln + "]' id='displayed_line_lookup_type" + prodln + "' style='word-wrap:break-word'></span></td>"+
-"<td><span name='displayed_line_enabled_flag[" + prodln + "]' id='displayed_line_enabled_flag" + prodln + "'></span></td>"+
+"<td><span name='displayed_line_enabled_flag[" + prodln + "]' id='displayed_line_enabled_flag" + prodln + "'style='word-wrap:break-word'></span></td>"+
 //"<td><span name='displayed_line_description[" + prodln + "]' id='displayed_line_description" + prodln + "'></span></td>"+
 "<td><input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'></td>";
 
@@ -134,10 +147,11 @@ z1.innerHTML  =
 
   x.innerHTML  = "<td colSpan='"+columnNum1+"'>"+
   "<link rel='stylesheet' type='text/css' href='custom/resources/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css'>"+
-  "<table border='0' class='lineEditor' width='100%'>"+
+  "<table border='0' class='lineEditor' width='100%' style='display:table'>"+
 
   "<tr>"+
   "<input name='line_id["+prodln+"]' id='line_id"+prodln+"' value='' type='hidden'>"+
+  "<input name='line_dsp["+prodln+"]' id='line_dsp"+prodln+"' value='' type='hidden'>"+
   //"<td>"+SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_TASK_TEMPLATE')+"<span class='required'>*</span></td>"+
   "<input name='line_template_name["+prodln+"]' id='line_template_name"+prodln+"' value='' type='hidden' >"+
   "<input name='line_hat_counting_task_templates_id_c["+prodln+"]' id='line_hat_counting_task_templates_id_c"+prodln+"' type='hidden' value=''>"+
@@ -156,11 +170,12 @@ z1.innerHTML  =
   "<td>"+SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_FIELD_TYPE')+"<span class='required'>*</span></td>"+
   "<td><select tabindex='116' name='line_field_type[" + prodln + "]' id='line_field_type" + prodln + "' onchange='setReadtype_field_type("+prodln+")'>" + line_field_type_option +"</select></td>"+
   "<td>"+SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_RELATE_MODULE')+"</td>"+
-  "<td><select tabindex='116' name='line_relate_module[" + prodln + "]' id='line_relate_module" + prodln + "' disabled='disabled' >" + line_list_type_option +"</select></td>"+
+  "<td><select tabindex='116' name='line_relate_module[" + prodln + "]' id='line_relate_module" + prodln + "' disabled='disabled' onchange='get_module_dsp_list(this.value,"+prodln+")'>" + line_list_type_option +"</select></td>"+
   "</tr>"+
   "<tr>"+
   "<td>"+SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_MODULE_DSP')+"</td>"+
-  "<td><input name='line_module_dsp["+prodln+"]' id='line_module_dsp"+prodln+"' size='30' maxlength='255' type='text'></td>"+
+  "<td><select tabindex='116' name='line_module_dsp[" + prodln + "]' id='line_module_dsp" + prodln + "' disabled='disabled' onchange='get_dsp_val(this.value,"+prodln+")'>" + module_dsp_list +"</select></td>"+
+  //"<td><input name='line_module_dsp["+prodln+"]' id='line_module_dsp"+prodln+"' size='30' maxlength='255' type='text'></td>"+
   "<td>"+SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_MODULE_FILTER')+"</td>"+
   "<td><textarea id='line_module_filter"+prodln+"' name='line_module_filter["+prodln+"]' rows='2' cols='50' title='' tabindex='0' style='overflow: hidden;' disabled='disabled'></textarea></td>"+
   "</tr>"+
@@ -172,7 +187,7 @@ z1.innerHTML  =
   "<button type='button' name='btn_clr_valuename' id='btn_clr_valuename' tabindex='0' title='清除选择' class='button lastChild' onclick='SUGAR.clearRelateField(this.form, \"line_valueset_name\", \"line_haa_valuesets_id_c\","+prodln+");' value='清除选择'><img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button>"+
   "<td>"+SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_LIST_NAME')+"</td>"+
   "<td><select tabindex='116' name='line_list_name[" + prodln + "]' id='line_list_name" + prodln + "' disabled='disabled'>" + line_app_list_string +"</select></td>"+
- "</tr>"+
+  "</tr>"+
   "<tr>"+
   "<td>"+SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_REQUIRED_FLAG')+"<span class='required'>*</span></td>"+
   "<input type='hidden' name='line_required_flag["+prodln+"]' value='0'> "+
@@ -182,20 +197,20 @@ z1.innerHTML  =
   "<td><input name='line_can_edit_flag["+prodln+"]' id='line_can_edit_flag"+prodln+"' title='' value='1' type='checkbox' checked></td>"+
   "</tr>"+
   "<tr>"+
-   "<td>"+SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_ON_DIFF_FLAG')+"</td>"+
+  "<td>"+SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_ON_DIFF_FLAG')+"</td>"+
   "<input type='hidden' name='line_on_diff_flag["+prodln+"]' value='0'> "+
   "<td><input name='line_on_diff_flag["+prodln+"]' id='line_on_diff_flag"+prodln+"' title='' value='1' type='checkbox' disabled='disabled'></td>"+
   "<td>"+SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_ASSET_OPTIONS')+"</td>"+
   "<td><select tabindex='116' name='line_asset_options[" + prodln + "]' id='line_asset_options" + prodln + "' disabled='disabled'>" + line_asset_list_string +"</select></td>"+
- "</tr>"+
+  "</tr>"+
   "<tr>"+
-   "<td>"+SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_LOOKUP_TYPE')+"</td>"+
+  "<td>"+SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_LOOKUP_TYPE')+"</td>"+
   "<td><input name='line_lookup_type["+prodln+"]' id='line_lookup_type"+prodln+"' size='30' maxlength='255' type='text'></td>"+
-   "<td>"+SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_ENABLED_FLAG')+"<span class='required'>*</span></td>"+
+  "<td>"+SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_ENABLED_FLAG')+"<span class='required'>*</span></td>"+
   "<input type='hidden' name='line_enabled_flag["+prodln+"]' value='0'> "+
   "<td><input name='line_enabled_flag["+prodln+"]' id='line_enabled_flag"+prodln+"' title='' value='1' type='checkbox' checked></td>"+
   "</tr>"+
-   "<tr>"+
+  "<tr>"+
   "<td>"+SUGAR.language.get('HAT_Counting_Template_Details', 'LBL_DESCRIPTION')+"</td>"+
   "<td><textarea id='line_description"+prodln+"' name='line_description["+prodln+"]' rows='2' cols='50' title='' tabindex='0' style='overflow: hidden;'></textarea></td>"+
   "<td><input type='hidden' id='line_deleted"+prodln+"' name='line_deleted["+prodln+"]' value='0'></td>"+
@@ -241,11 +256,12 @@ function renderLine(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_line_enabled_flag"+ln).html(flag);
   $("#displayed_line_description"+ln).html($("#line_description"+ln).val());
   $("#displayed_line_asset_options"+ln).html($("#line_asset_options"+ln).val());
-  $("#displayed_line_module_dsp"+ln).html($("#line_module_dsp"+ln).val());
+  //$("#displayed_line_module_dsp"+ln).html($("#line_module_dsp"+ln).val());
+  $("#displayed_line_module_dsp"+ln).html($("#line_module_dsp"+ln).find("option:selected").html());
   var flag=$("#line_on_diff_flag"+ln).is(':checked')?"是":"否";
   $("#displayed_line_on_diff_flag"+ln).html(flag);
 
-  $("#lineItems tr td").each(function(){
+  $("#lineItems_tem tr td").each(function(){
     $(this).css('vertical-align','middle');
   });
 }
@@ -269,6 +285,7 @@ function addNewLine(tableid) {
     LineEditorShow(prodln-1);       //打开行编辑器
     setdefalttask(num);
     addoptions(num);
+
   }
 }
 
@@ -309,6 +326,10 @@ function markLineDeleted(ln, key) {//删除当前行
 
 function LineEditorShow(ln){ //显示行编辑器（先自动关闭所有的行编辑器，再打开当前行）
   validate(ln);
+  var module_name=document.getElementById("line_relate_module"+ln).value;
+    if(module_name){
+      get_module_dsp_list(module_name,ln);
+    }
   setReadtype_field_type(ln);
   setReadtype_table_names(ln);
   if (prodln>1) {
@@ -461,4 +482,43 @@ function setReadtype_table_names(ln){
     document.getElementById("line_asset_options"+ln).disabled=true;
     document.getElementById("line_on_diff_flag"+ln).disabled=true;
   }
+}
+
+function setSelectChecked(selectId, checkValue){  
+    var select = document.getElementById(selectId);
+
+    for(var i=0; i<select.options.length; i++){  
+        if(select.options[i].value == checkValue){
+            select.options[i].selected = true;  
+            break;  
+        }  
+    }  
+};
+
+function get_module_dsp_list(module,ln){
+  $.ajax({
+    url:'index.php?to_pdf=true&module=HAT_Counting_Task_Templates&action=get_module_dsp_list',
+    data:'&module_name='+module,
+    type:'POST',
+    async:false,
+    success:function(data){
+      module_dsp_list=JSON.parse(data);
+      var sel = document.getElementById("line_module_dsp"+ln);
+      sel.options.length=0;
+      for(var key in module_dsp_list){
+        var option = new Option(module_dsp_list[key],key);      
+       sel.options.add(option);
+       var dsp=document.getElementById("line_dsp"+ln).value;
+       //console.log(dsp);
+       if(dsp){
+        setSelectChecked(("line_module_dsp"+ln),dsp);
+       }
+     }
+
+      //module_dsp_list=JSON.parse(data);
+    }
+  });
+}
+function get_dsp_val(value,ln){
+  document.getElementById("line_dsp"+ln).value=value;
 }

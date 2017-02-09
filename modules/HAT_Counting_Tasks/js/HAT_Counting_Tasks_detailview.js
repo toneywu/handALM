@@ -6,14 +6,16 @@ function attr_info(id){
 		+'&prodln='+''+'&asset_id='+'',
 		type:'POST',
 		success:function(result){
+			//console.log(result);
 			get_html(result);
 		}
 	});
 }
 
 function get_html(result){
-	var lineItems=document.getElementById('LBL_EDITVIEW_PANEL1');
-  	lineItems.innerHTML=result;
+  	$("#line_items").parent().prev().hide();
+  	$("#line_items").parent().toggleClass("col-sm-10","col-sm-12");
+  	$("#line_items").replaceWith(result);
 }
 
 $(function(){
@@ -22,6 +24,6 @@ $(function(){
 		attr_info(id);
 	}
 	else{
-		$("#detailpanel_2").hide();
+		$("#detailpanel_0").hide();
 	}
 })

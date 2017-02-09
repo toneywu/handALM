@@ -12,8 +12,9 @@ function attr_info(id){
 }
 
 function get_html(result){
-	var lineItems=document.getElementById('LBL_EDITVIEW_PANEL3');
-  	lineItems.innerHTML=result;
+  	$("#line_asset_items").parent().prev().hide();
+  	$("#line_asset_items").parent().toggleClass("col-sm-10","col-sm-12");
+  	$("#line_asset_items").replaceWith(result);
 }
 
 $(function(){

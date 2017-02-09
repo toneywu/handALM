@@ -8,7 +8,7 @@ function display_lines($focus, $field, $value, $view){
    $html = '';
    if($view == 'EditView' || $view == 'DetailView'){
       $html .= '<script src="modules/HAT_Counting_Lines/line_items.js"></script>';
-      $html .= "<table border='0' cellspacing='4' width='37.5%' id='lineItems' class='list view table'></table>";
+      $html .= "<table border='0' cellspacing='4' width='37.5%' id='lineItems_result' class='list view table'></table>";
       $html .='<input type="hidden" name="resactastidden" id="resactastidden" value="'.get_select_options_with_id($app_list_strings['hat_asset_status_list'], '').'">';
       $html .='<input type="hidden" name="rescountresidden" id="rescountresidden" value="'.get_select_options_with_id($app_list_strings['hat_counting_line_result_list'], '').'">';
       $html .='<input type="hidden" name="resadjmetidden" id="resadjmetidden" value="'.get_select_options_with_id($app_list_strings['hat_counting_adjust_method_list'], '').'">';
@@ -78,7 +78,7 @@ function display_lines($focus, $field, $value, $view){
       $column_type= json_encode($attr_type);
       $html .= '<script>
       var attr_label=\''.$attr_label.'\';var attr_data=\''.$attr_column.'\';var attr_type=\''.$column_type.'\';
-      insertLineHeader("lineItems","DetailView",attr_label,attr_data,attr_type,false);</script>';
+      insertLineHeader("lineItems_result","DetailView",attr_label,attr_data,attr_type,false);</script>';
       $html .= "<script>$(document).ready(function(){";
       $column_name=array();
       while ($row = $focus->db->fetchByAssoc($result)) {

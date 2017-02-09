@@ -85,7 +85,7 @@ z1.innerHTML  =
   // '</span>'+
   // '</span>';
 
-  x.innerHTML  = "<td colSpan='"+columnNum1+"'><table id='member' width='100%'>"+
+  x.innerHTML  = "<td colSpan='"+columnNum1+"'><table id='member' width='100%' style='display:table'>"+
   "<tr>"+
     "<input name='line_id["+prodln+"]' id='line_id"+prodln+"' value='' type='hidden'>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Rule_Dtls', 'LBL_ORGANIZATION_NAME')+"</td>"+

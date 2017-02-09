@@ -200,45 +200,10 @@ array (
         array (
           0 => 
           array (
-            'name' => 'location',
+            'name' => 'line_items',
             'studio' => 'visible',
-            'label' => 'LBL_LOCATION',
-          ),
-          1 => 
-          array (
-            'name' => 'oranization',
-            'studio' => 'visible',
-            'label' => 'LBL_ORANIZATION',
-          ),
-        ),
-        1 => 
-        array (
-          0 => 
-          array (
-            'name' => 'major',
-            'studio' => 'visible',
-            'label' => 'LBL_MAJOR',
-          ),
-          1 => 
-          array (
-            'name' => 'category',
-            'studio' => 'visible',
-            'label' => 'LBL_CATEGORY',
-          ),
-        ),
-        2 => 
-        array (
-          0 => 
-          array (
-            'name' => 'user_person',
-            'studio' => 'visible',
-            'label' => 'LBL_USER_PERSON',
-          ),
-          1 => 
-          array (
-            'name' => 'own_person',
-            'studio' => 'visible',
-            'label' => 'LBL_OWN_PERSON',
+            'label' => 'LBL_LINE_ITEMS',
+            'customCode' => '<span id="line_items_span"></span>',
           ),
         ),
       ),

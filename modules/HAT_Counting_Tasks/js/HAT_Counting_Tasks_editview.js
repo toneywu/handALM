@@ -32,8 +32,13 @@ function attr_info(id){
 }
 
 function get_html(result){
-	var lineItems=document.getElementById('LBL_EDITVIEW_PANEL1');
+	/*var lineItems=document.getElementById('line_items_span');
   	lineItems.innerHTML=result;
+  	$("#line_items_span").parent().prev().hide();*/
+  	$("#detailpanel_0").show();
+  	$("#line_items_span").parent().prev().hide();
+  	$("#line_items_span").parent().toggleClass("col-sm-8","col-sm-12");
+  	$("#line_items_span").replaceWith(result);
 }
 
 $(function(){
@@ -42,7 +47,7 @@ $(function(){
 		attr_info(id);
 	}
 	else{
-		$("#detailpanel_2").hide();
+		$("#detailpanel_0").hide();
 	}
 })
 

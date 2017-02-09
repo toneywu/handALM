@@ -17,7 +17,7 @@ if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
 function insertLineHeader(tableid,current_view ,attr_label,attr_data,attr_type,status){
   view=current_view;
   if(current_view=='EditView'){
-      $("#line_items_label").hide();//隐藏标签
+      $("#line_items_span").parent().prev().hide();//隐藏标签
     }else{
       $('#line_items_detail_span').parent().prev().hide();
     }
@@ -34,17 +34,18 @@ function insertLineHeader(tableid,current_view ,attr_label,attr_data,attr_type,s
         type=JSON.parse(attr_type);
       }
     }else flag='yes';
-    head_html +="<th >"+SUGAR.language.get('HAT_Counting_Results', 'LBL_CYCLE_NUMBER')+"</th>";
-    head_html +="<th >"+SUGAR.language.get('HAT_Counting_Results', 'LBL_COUNTING_RESULT')+"</th>";
+    var wi=100/16;
+    head_html +="<th width="+wi+"%>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_CYCLE_NUMBER')+"</th>";
+    head_html +="<th width="+wi+"%>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_COUNTING_RESULT')+"</th>";
     if(flag='no'){
       for(var i=0;i<label.length;i++){
         var n_attr=data[i].split("e");
         if(n_attr[0]!='attribut'){ break;}
-        head_html +="<th >"+label[i]+"</th>";
+        head_html +="<th width="+wi+"%>"+label[i]+"</th>";
         for(var j=0;j<data.length;j++){
           var n_flag=data[j].split("g");
           if(n_flag[1]==n_attr[1] &&n_flag[0]=='diff_fla'){
-           head_html +="<th >"+label[j]+"</th>";
+           head_html +="<th width="+wi+"%>"+label[j]+"</th>";
          }
        }
      }
@@ -57,7 +58,7 @@ function insertLineHeader(tableid,current_view ,attr_label,attr_data,attr_type,s
   head_html +="<th > </th>";
   head_html +="<tr>";
 
-  $("#lineItems").append(head_html);
+  $("#lineItems_result").append(head_html);
 }
 
 function insertLineData(line_data,current_view,column_name){ //将数据写入到对应的行字段中
@@ -69,7 +70,7 @@ function insertLineData(line_data,current_view,column_name){ //将数据写入�
       lov_name=JSON.parse(column_name);
     }else flag='yes';
     
-    ln = insertLineElements("lineItems",current_view,line_data);
+    ln = insertLineElements("lineItems_result",current_view,line_data);
     for(var propertyName in line_data) {
       if ($("#line_"+propertyName.concat(String(ln))).is(':checkbox')) {
         if (line_data[propertyName]==true) {
@@ -155,7 +156,7 @@ if(current_view == "DetailView"){
  // x.style = "display:none";
  x.innerHTML  = "<td colSpan='"+columnNum+"'>"+
  "<link rel='stylesheet' type='text/css' href='custom/resources/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css'>"+
- "<table border='0' class='lineEditor' width='100%'>"+
+ "<table border='0' class='lineEditor' width='100%' style='display:table'>"+
  "<tr>"+
  "<input name='line_id["+prodln+"]' id='line_id"+prodln+"' value='' type='hidden'>"+
  "<td>"+SUGAR.language.get('HAT_Counting_Results', 'LBL_CYCLE_NUMBER')+"<span class='required'>*</span></td>"+
@@ -178,7 +179,7 @@ if(current_view == "DetailView"){
  "<td><input type='hidden' id='line_deleted"+prodln+"' name='line_deleted["+prodln+"]' value='0'></td>"+
  "<td><input type='button' id='line_delete_line" + prodln + "' class='button btn_del' value='" + SUGAR.language.get('app_strings', 'LBL_DELETE_INLINE') + "' tabindex='116' onclick='btnMarkLineDeleted(" + prodln + ",\"line_\")'>"+
  "<button type='button' id='btn_LineEditorClose" + prodln + "' class='button btn_save' value='" + SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE') + "' tabindex='116' onclick='LineEditorClose(" + prodln + ",\"line_\")'>"+SUGAR.language.get('app_strings', 'LBL_SAVE_BUTTON_LABEL')+" & "+SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE')+" <img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button></td>"+
- "</tr>"+
+ "</tr></tbody>"+
  "</table></td>";
 
  validate(prodln);
@@ -212,7 +213,7 @@ function renderLine(ln) { //将编辑器中的内容显示于正常行中
 }
 }
 
-$("#lineItems tr td").each(function(){
+$("#lineItems_result tr td").each(function(){
   $(this).css('vertical-align','middle');
 });
 

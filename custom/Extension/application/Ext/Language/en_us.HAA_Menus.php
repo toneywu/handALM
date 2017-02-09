@@ -40,4 +40,6 @@
 
 $app_list_strings['moduleList']['HAA_Menus'] = '菜单定义';
 $app_list_strings['moduleList']['HAA_Menus_Lists'] = '菜单项清单';
-$app_list_strings['moduleList']['HAA_Menu_Groups'] = '菜单组定义';
+$app_list_strings['haa_menu_type']=array (
+  'stand' => '标准',
+  );
