@@ -312,10 +312,12 @@
                     ti.each(calcTiw);
 
                     while (tiw > tw) {
+                      //FIX TIA by HandALM
                       ti = $('.desktop-toolbar ul.navbar-nav > li').not('.hidden').not('.all');
+                      tia = $('.desktop-toolbar ul.navbar-nav > li').not('.hidden');
                       $(ti).last().addClass('hidden');
                       tiw = 0;
-                      ti.each(calcTiw);
+                      tia.each(calcTiw);
                     }
 
                     $('.desktop-toolbar ul.navbar-nav > li.all').removeClass('hidden');
