@@ -7,7 +7,7 @@ function setMapLayerPopupReturn(popupReplyData){
 
 function LoadMapType() { //根据不同地图类型，加载
 	var map_type = $("#map_type");
-	var map_suppanel=$("#LBL_EDITVIEW_PANEL_GIS").closest('div')
+	var map_suppanel=$("#map_search_text").closest('.panel')
 
 	if( map_type.val()=='TENCENT') {
 		map_suppanel.show();

@@ -17,7 +17,7 @@ function triger_setFF(id_value, module_name) {
         url: "index.php?to_pdf=true&module=HAA_FF&action=setFF&ff_module="+module_name+"&ff_id="+id_value,
         success: function (result) {
              var ff_fields = jQuery.parseJSON(result);
-             alert("herer");
+
 			 hideAllAttributes(ff_fields)//将所有的Attribute先变空，如果Attribute在FF中有设置，在后续的SetFF过程中会自动显示出来，否则这些扩展字段默认都不显示
              $.each(ff_fields.FF, function () { //针对读取到的FF模板，针对每个设置的条目进行处理
                 setFF(this)
@@ -205,6 +205,7 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false, donot_c
 		mark_obj_label = mark_obj.parent().prev(".label");//V7.8+
 		mark_obj_item = mark_obj.closest(".edit-view-row-item");
 		mark_obj_row = mark_obj_item.closest(".edit-view-row");//注意DetailView和EditView的结构不同，DetailView一个Row可能已经包括多个item字段
+		mark_obj_tab = mark_obj_row.closest(".tab-content");
 
 		if (donot_clean==false) {
 		    //消除已经填写的数据
@@ -220,7 +221,7 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false, donot_c
 	  		//隐藏字段
 	  		//console.log(field_name);
 	  		mark_obj_item.hide();
-
+	  		//注意Keep_Position参数已经不再有效
 /*	    	if (keep_position==false) {
 	        	mark_obj_item.hide()
 				//toney.wu 20161007修改为通过display控制，否则界面上会大面积留下
@@ -252,13 +253,15 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false, donot_c
 	      $("#btn_clr_"+field_name).css({"visibility":"hidden"});
 	    }
 
+
   	    //如果当前字段涉及隐藏，则进一步判断，当前区域是否是空白，如果当前区域也是空白，直接将当前区域清空
 		if(hide_bool==true) {
 			//如果当前字段涉及隐藏，则进一步判断，当前行是否是空白，如果当前区域也是空白，直接将当前区域清空
+			var hide_row_bool=true;
 			var hide_panel_bool=true;
-			console.log("field_name="+field_name);
-			$.each(mark_obj_row.children(".edit-view-row-item"), function() {
-			  	if ($(this).text().trim()!="" && $(this).is(":visible")) {
+
+			$.each(mark_obj_tab.find(".edit-view-row-item"), function() {
+			  	if ($(this).text().trim()!="" && $(this).css("display")!="none") {
 			  		//如果当前字段有内容，并且有内容的字段没有隐藏，则认为当前行不为空
 			  		//note:这里尝试过使用Visible判断，但是折叠的Panel可能会使没有隐藏的字段在CSS中表示为HIDE，所以还是通过循环来判断最准备
 			  		hide_panel_bool=false;
@@ -267,7 +270,7 @@ function mark_field_disabled(field_name, hide_bool, keep_position=false, donot_c
 			});
 
 			if (hide_panel_bool==true) {
-				mark_obj_row.closest(".panel").hide();//将当前行所在区块隐去
+				mark_obj_tab.closest(".panel").hide();//将当前行所在区块隐去
 			}
 		}
 
@@ -387,9 +390,10 @@ function mark_field_enabled(field_name, not_required_bool) {
   // not_required_bool = ture = 非必须，可选
   // not_required_bool = false = 必须
   // alert(not_required_bool);
-  $("#"+field_name).css({"color":"#000000","background-Color":"#ffffff"});
+  $("#"+field_name).closest('.edit-view-row-item').show();
+  $("#"+field_name).css({"color":"","background-Color":""});
   $("#"+field_name).attr("readonly",false);
-  $("#"+field_name).parent().prev(".label").css({"color":"#000000"})
+  $("#"+field_name).parent().prev(".label").css({"color":""})
 
 
 

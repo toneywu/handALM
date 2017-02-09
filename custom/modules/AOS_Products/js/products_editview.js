@@ -11,14 +11,15 @@ $("#price").change(function(){	//将市场价自动带到成本价
 });
 
 $('#is_asset_group_c').click(function() { //选择是否为资产组
+	alert("a");
 	if ($('#type').val()=='Good') {
 	    //只有Good类时，才可以选择此选项
 	    var $this = $(this);
 	    // $this will contain a reference to the checkbox
 	    if ($this.is(':checked')) {
-	       $("#detailpanel_3").show('fast');
+	       $("#asset_name_rule_c").closest(".panel").show('fast');
 	    } else {
-	        $("#detailpanel_3").hide();
+	        $("#asset_name_rule_c").closest(".panel").hide();
 	    }
 	} else {
 		return false;
