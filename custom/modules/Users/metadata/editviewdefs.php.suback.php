@@ -136,7 +136,12 @@ array (
             'name' => 'photo',
             'label' => 'LBL_PHOTO',
           ),
-          1 => 'last_name',
+          1 => 
+          array (
+            'name' => 'framewrok_c',
+            'studio' => 'visible',
+            'label' => 'LBL_FRAMEWORK',
+          ),
         ),
       ),
       'lbl_editview_panel1' => 
@@ -238,6 +243,7 @@ array (
         array (
           0 => 'description',
         ),
+        11=>array(0=>'last_name')
       ),
     ),
   ),

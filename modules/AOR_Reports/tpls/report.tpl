@@ -1,9 +1,4 @@
 <script src="modules/AOR_Conditions/conditionLines.js"></script>
-<script src="modules/HAOR_Parameters/parameterLines.js"></script>
-<script src="include/javascript/jquery/jquery.form.js"></script> 
-<script src="custom/resources/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script> 
-<link rel="stylesheet" type="text/css" href="custom/resources/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
-
 <script>
     report_module = '{$report_module}';
 </script>
@@ -11,17 +6,7 @@
 <div>
     {$charts_content}
 </div>
-<!--Add By ling.zhang01 20161227-->
- <input type="hidden" id="report_type" name="report_type" value="">
- <div class="modal" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:100%">
-      <div class="modal-dialog">
-        <div class="modal-content" style="width: 250px; height:90px; margin:250px 50px 40px 250px ; ">
-          <img src="themes/SuiteR_HANDALM/images/img_loading.gif?v=6T2wqZkzRRtQXSbbOJRC2A" align="absmiddle" style="margin:40px 0px 40px 50px ; "> 
-                <b>数据生成中, 请等待...</b>
-        </div>
-      </div>
-</div>
-<!--Add Instance By ling.zhang01 20161227 End-->
+
 <div id='detailpanel_parameters' class='detail view  detail508 expanded hidden'>
     <form onsubmit="return false" id="EditView" name="EditView">
     <h4>
@@ -39,19 +24,10 @@
     <input id='updateParametersButton' class="panelContainer" type="button" value="{sugar_translate label='LBL_UPDATE_PARAMETERS' module='AOR_Reports'}"/>
         <script>
             {literal}
-            $("#report_type").val(reportType);
-            //Update By ling.zhang01 20170110
-            if (reportType == 'Custom'){
-                loadCParameterHead();
-                $.each(reportParameters,function(key,val){
-                   loadCParameterLine(val);
-                });
-            }else{
-                $.each(reportParameters,function(key,val){
-                  loadConditionLine(val, 'EditView');
-                });
-            }
-            //Update Instance By ling.zhang01 20161227 End
+            $.each(reportParameters,function(key,val){
+                loadConditionLine(val, 'EditView');
+            });
+
             $(document).ready(function() {
                 $('#updateParametersButton').click(function(){
                     //Update the Detail view form to have the parameter info and reload the page
@@ -104,7 +80,7 @@
     <script type="text/javascript">SUGAR.util.doWhen("typeof initPanel == 'function'", function() {ldelim} initPanel('parameters', 'expanded'); {rdelim}); </script>
     </form>
 </div>
- 
+
 <div id='detailpanel_report' class='detail view  detail508 expanded'>
     {counter name="panelFieldCount" start=0 print=false assign="panelFieldCount"}
     <h4>

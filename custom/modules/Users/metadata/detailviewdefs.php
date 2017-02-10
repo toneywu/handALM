@@ -1,5 +1,5 @@
 <?php
-// created: 2016-11-20 16:29:52
+// created: 2017-02-10 10:32:54
 $viewdefs['Users']['DetailView'] = array (
   'templateMeta' => 
   array (
@@ -35,6 +35,20 @@ $viewdefs['Users']['DetailView'] = array (
         'newTab' => false,
         'panelDefault' => 'expanded',
       ),
+    ),
+  ),
+  'useTabs' => true,
+  'tabDefs' => 
+  array (
+    'LBL_USER_INFORMATION' => 
+    array (
+      'newTab' => true,
+      'panelDefault' => 'expanded',
+    ),
+    'LBL_EMPLOYEE_INFORMATION' => 
+    array (
+      'newTab' => true,
+      'panelDefault' => 'expanded',
     ),
   ),
   'panels' => 

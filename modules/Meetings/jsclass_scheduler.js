@@ -1,7 +1,7 @@
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
- 
+
  * SuiteCRM is an extension to SugarCRM Community Edition developed by Salesagility Ltd.
  * Copyright (C) 2011 - 2014 Salesagility Ltd.
  *
@@ -144,12 +144,12 @@ return nTopPos;}
 SugarWidgetScheduleRow.prototype.add_freebusy_nodes=function(tr,attendee){var hours=9;var segments=4;var html='';var is_loaded=false;if(typeof GLOBAL_REGISTRY['freebusy_adjusted']!='undefined'&&typeof GLOBAL_REGISTRY['freebusy_adjusted'][this.focus_bean.fields.id]!='undefined'){is_loaded=true;}
 for(var i=0;i<this.timeslots.length;i++){var td=document.createElement('td');tr.appendChild(td);td.innerHTML='&nbsp;';if(typeof(this.timeslots[i]['is_start'])!='undefined'){td.className='schedulerSlotCellStartTime';}
 if(typeof(this.timeslots[i]['is_end'])!='undefined'){td.className='schedulerSlotCellEndTime';}
-if(is_loaded){if(typeof(GLOBAL_REGISTRY['freebusy_adjusted'][this.focus_bean.fields.id][this.timeslots[i].hash])!='undefined'){td.style.backgroundColor="#4D5EAA";var dataid='',module='';$.each(GLOBAL_REGISTRY['freebusy_adjusted'][this.focus_bean.fields.id][this.timeslots[i].hash]['records'],function(index,value){if(dataid=='')
+if(is_loaded){if(typeof(GLOBAL_REGISTRY['freebusy_adjusted'][this.focus_bean.fields.id][this.timeslots[i].hash])!='undefined'){$(td).addClass('free');var dataid='',module='';$.each(GLOBAL_REGISTRY['freebusy_adjusted'][this.focus_bean.fields.id][this.timeslots[i].hash]['records'],function(index,value){if(dataid=='')
 dataid=index;else
 dataid+=','+index;if(module=='')
 module=value+'s';else
-module+=','+value+'s';});$(td).attr('data-id',dataid);$(td).attr('data-module',module);if((dataid.split(',').length)>1){td.style.backgroundColor="#AA4D4D";}}}
-$(td).hover(function(e){var domElement=$(this);if(domElement.css("background-color")||domElement.hasClass('schedulerSlotCellStartTime')){if(domElement.attr('data-id')!=null){var id=domElement.attr('data-id').split(',');var module=domElement.attr('data-module').split(',');if(module=="undefined"||module==null){module='Meetings';}
+module+=','+value+'s';});$(td).attr('data-id',dataid);$(td).attr('data-module',module);if((dataid.split(',').length)>1){$(td).addClass('busy');}}}
+$(td).hover(function(e){var domElement=$(this);if($(domElement).hasClass('free')||domElement.hasClass('schedulerSlotCellStartTime')){if(domElement.attr('data-id')!=null){var id=domElement.attr('data-id').split(',');var module=domElement.attr('data-module').split(',');if(module=="undefined"||module==null){module='Meetings';}
 setTimeout(function(){if($(domElement).is(":hover")){SugarWidgetScheduler.getScheduleDetails(module,id);}},SugarWidgetScheduler.popupControlDelayTime);}}},function(e){});}
 $(tr).find('td').first().hover(function(e){var domElement=$(this);var module=domElement.closest('tr').attr('data-module').split(','),id=domElement.closest('tr').attr('data-id').split(',');if(id!='undefined'||id!=null){setTimeout(function(){if($(domElement).is(":hover")){SugarWidgetScheduler.getScheduleDetails(module,id);}},SugarWidgetScheduler.popupControlDelayTime);}},function(e){});}
 $().ready(function(e){$(document).on("mousemove",function(event){SugarWidgetScheduler.mouseX=event.pageX;SugarWidgetScheduler.mouseY=event.pageY;});});
