@@ -235,10 +235,10 @@ class HAM_WOViewEdit extends ViewEdit {
 		$this->ss->assign('WO_NUMBER',$wo_num_html);
 
 		//初始化目标开始与结束日期
-		if(empty($this->bean->id)){
+		/*if(empty($this->bean->id)){
 			$this->bean->date_target_start = date('Y-m-d H:i:s');
 			$this->bean->date_target_finish = date('Y-m-d H:i:s');
-		}
+		}*/
 		//如果是工单复制的情况如何
 		if(isset ($_REQUEST['isDuplicate'])&&$_REQUEST['isDuplicate']=="true"){
 			$this->bean->wo_status='DRAFT';	

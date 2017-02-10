@@ -3,8 +3,8 @@ var columnNumdoc=6;
 if(typeof sqs_objects=='undefined'){var sqs_objects=new Array;}
 
 function doc_insertLineHeader(tableid){
-$("#line_doc_items_label").remove();//隐藏SugarCRM字段
-
+$('#line_doc_items_span').parent().prev().hide();//隐藏SugarCRM字段
+$("#line_doc_items_span").parent().toggleClass("col-sm-8","col-sm-12");
 tablehead=document.createElement("thead");
 tablehead.id=tableid+"_head";
 //tablehead.style.display="none";
@@ -82,7 +82,7 @@ z1.innerHTML=
 var x=tablebody.insertRow(-1);//以下生成的是LineEditor
 x.id='line_doc_editor'+prodlndoc;
 
-x.innerHTML="<td colSpan='"+columnNumdoc+"'><table border='0' class='linedocEditor' width='100%'>"+
+x.innerHTML="<td colSpan='"+columnNumdoc+"'><table border='0' class='linedocEditor' width='100%' style='display:table'>"+
 "<tr>"+
 	"<td id='doc_status_label'>"+SUGAR.language.get('HAT_Counting_Results','LBL_DOC_STATUS')+":</td>"+
 	"<td><select tabindex='116' name='line_doc_status_id["+prodlndoc+"]'id='line_doc_status_id"+prodlndoc+"'>"+line_status_option+"</select></td>"+

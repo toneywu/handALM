@@ -37,7 +37,7 @@ function insertLineHeader(tableid){
   var h=x.insertCell(3);
   h.style="height: 40px;line-height: 40px";
   h.innerHTML=SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_ORG_DRILLDOWN');
-   var g1=x.insertCell(4);
+  var g1=x.insertCell(4);
   g1.style="height: 40px;line-height: 40px";
   g1.innerHTML=SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_USING_ORGANIZATION');
   var h1=x.insertCell(5);
@@ -122,10 +122,10 @@ function insertLineData(line_data ){ //将数据写入到对应的行字段中
     $("#line_policy_group_name".concat(String(ln))).val(line_data.policy_group_name);
     $("#line_hat_counting_policy_groups_id_c".concat(String(ln))).val(line_data.hat_counting_policy_groups_id_c);
    /* $("#line_rule_name".concat(String(ln))).val(line_data.rule_name);
-    $("#line_hat_counting_rules_id_c".concat(String(ln))).val(line_data.hat_counting_rules_id_c);*/
-    
-    renderLine(ln);
-  }
+   $("#line_hat_counting_rules_id_c".concat(String(ln))).val(line_data.hat_counting_rules_id_c);*/
+
+   renderLine(ln);
+ }
 }
 
 function insertLineElements(tableid) { //创建界面要素
@@ -176,10 +176,10 @@ z1.innerHTML  =
 
 
 
-  x.innerHTML  = "<td colSpan='"+columnNum+"'><table id='rule' width='100%'>"+
+  x.innerHTML  = "<td colSpan='"+columnNum+"'><table id='rule' width='100%' style='display:table'>"+
   "<tr>"+
-    "<input name='line_id["+prodln+"]' id='line_id"+prodln+"' value='' type='hidden'>"+
-    "<td>"+
+  "<input name='line_id["+prodln+"]' id='line_id"+prodln+"' value='' type='hidden'>"+
+  "<td>"+
    /* "<span>"+SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_ORG_SPLIT_FLAG')+
     "<input type='hidden' name='line_org_split_flag["+prodln+"]' value='0'>"+
     "<input name='line_org_split_flag["+prodln+"]' id='line_org_split_flag"+prodln+"' title='' value='1' type='checkbox'></span>&nbsp;&nbsp;&nbsp;"+
@@ -199,8 +199,8 @@ z1.innerHTML  =
     "<input type='hidden' name='line_own_person_split_flag["+prodln+"]' value='0'>"+
     "<input name='line_own_person_split_flag["+prodln+"]' id='line_own_person_split_flag"+prodln+"' title='' value='1' type='checkbox'></span>"+*/
     "</td>"+
-  "</tr>"+
-  "<tr>"+
+    "</tr>"+
+    "<tr>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_LOCATION')+"</td>"+
     "<td><input name='line_location_name["+prodln+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='line_location_name"+prodln+"' size='' value='' title='' autocomplete='off' accesskey='7' type='text'>"+
     "<input name='line_hat_asset_locations_id_c["+prodln+"]' id='line_hat_asset_locations_id_c"+prodln+"' type='hidden' value=''>"+
@@ -208,10 +208,10 @@ z1.innerHTML  =
     "<button type='button' name='btn_clr_locname' id='btn_clr_locname' tabindex='0' title='清除选择' class='button lastChild' onclick='SUGAR.clearRelateField(this.form, \"line_location_name"+prodln+"\", \"line_hat_asset_locations_id_c"+prodln+"\");' value='清除选择'><img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button>"+"</td>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_LOCATION_DRILLDOWN')+"</td>"+
     "<input type='hidden' name='line_location_drilldown["+prodln+"]' value='0'> "+
-    "<td><input name='line_location_drilldown["+prodln+"]' id='line_location_drilldown"+prodln+"' title='' value='1' type='checkbox' checked></td>"+
+    "<td><input name='line_location_drilldown["+prodln+"]' id='line_location_drilldown"+prodln+"' title='' value='1' type='checkbox'></td>"+
     "</td>"+
-  "</tr>"+
-  "<tr>"+
+    "</tr>"+
+    "<tr>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_ORANIZATION')+"</td>"+
     "<td><input name='line_account_name["+prodln+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='line_account_name"+prodln+"' size='' value='' title='' autocomplete='off' accesskey='7' type='text'>"+
     "<input name='line_account_id_c["+prodln+"]' id='line_account_id_c"+prodln+"' type='hidden' value=''>"+
@@ -219,10 +219,10 @@ z1.innerHTML  =
     "<button type='button' name='btn_clr_orgname' id='btn_clr_orgname' tabindex='0' title='清除选择' class='button lastChild' onclick='SUGAR.clearRelateField(this.form, \"line_account_name"+prodln+"\", \"line_account_id_c"+prodln+"\");' value='清除选择'><img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button>"+"</td>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_ORG_DRILLDOWN')+"</td>"+
     "<input type='hidden' name='line_org_drilldown["+prodln+"]' value='0'> "+
-    "<td><input name='line_org_drilldown["+prodln+"]' id='line_org_drilldown"+prodln+"' title='' value='1' type='checkbox' checked></td>"+
+    "<td><input name='line_org_drilldown["+prodln+"]' id='line_org_drilldown"+prodln+"' title='' value='1' type='checkbox' ></td>"+
     "</td>"+
-  "</tr>"+
-  "<tr>"+
+    "</tr>"+
+    "<tr>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_USING_ORGANIZATION')+"</td>"+
     "<td><input name='line_using_org_name["+prodln+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='line_using_org_name"+prodln+"' size='' value='' title='' autocomplete='off' accesskey='7' type='text'>"+
     "<input name='line_account_id_c1["+prodln+"]' id='line_account_id_c1"+prodln+"' type='hidden' value=''>"+
@@ -230,10 +230,10 @@ z1.innerHTML  =
     "<button type='button' name='btn_clr_usingorgname' id='btn_clr_usingorgname' tabindex='0' title='清除选择' class='button lastChild' onclick='SUGAR.clearRelateField(this.form, \"line_using_org_name"+prodln+"\", \"line_account_id_c1"+prodln+"\");' value='清除选择'><img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button>"+"</td>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_USING_ORG_DRILLDOWN')+"</td>"+
     "<input type='hidden' name='line_using_org_drilldown["+prodln+"]' value='0'> "+
-    "<td><input name='line_using_org_drilldown["+prodln+"]' id='line_using_org_drilldown"+prodln+"' title='' value='1' type='checkbox' checked></td>"+
+    "<td><input name='line_using_org_drilldown["+prodln+"]' id='line_using_org_drilldown"+prodln+"' title='' value='1' type='checkbox' ></td>"+
     "</td>"+
-  "</tr>"+
-  "<tr>"+
+    "</tr>"+
+    "<tr>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_MAJOR')+"</td>"+
     "<td><input name='line_code_name["+prodln+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='line_code_name"+prodln+"' size='' value='' title='' autocomplete='off' accesskey='7' type='text'>"+
     "<input name='line_haa_codes_id_c["+prodln+"]' id='line_haa_codes_id_c"+prodln+"' type='hidden' value=''>"+
@@ -241,10 +241,10 @@ z1.innerHTML  =
     "<button type='button' name='btn_clr_codename' id='btn_clr_codename' tabindex='0' title='清除选择' class='button lastChild' onclick='SUGAR.clearRelateField(this.form, \"line_code_name"+prodln+"\", \"line_haa_codes_id_c"+prodln+"\");' value='清除选择'><img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button>"+"</td>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_MAJOR_DRILLDOWN')+"</td>"+
     "<input type='hidden' name='line_major_drilldown["+prodln+"]' value='0'> "+
-    "<td><input name='line_major_drilldown["+prodln+"]' id='line_major_drilldown"+prodln+"' title='' value='1' type='checkbox' checked></td>"+
+    "<td><input name='line_major_drilldown["+prodln+"]' id='line_major_drilldown"+prodln+"' title='' value='1' type='checkbox' ></td>"+
     "</td>"+
-  "</tr>"+
-  "<tr>"+
+    "</tr>"+
+    "<tr>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_CATEGORY')+"</td>"+
     "<td><input name='line_category_name["+prodln+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='line_category_name"+prodln+"' size='' value='' title='' autocomplete='off' accesskey='7' type='text'>"+
     "<input name='line_aos_product_categories_id_c["+prodln+"]' id='line_aos_product_categories_id_c"+prodln+"' type='hidden' value=''>"+
@@ -252,10 +252,10 @@ z1.innerHTML  =
     "<button type='button' name='btn_clr_catename' id='btn_clr_catename' tabindex='0' title='清除选择' class='button lastChild' onclick='SUGAR.clearRelateField(this.form, \"line_category_name"+prodln+"\", \"line_aos_product_categories_id_c"+prodln+"\");' value='清除选择'><img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button>"+"</td>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_CATEGORY_DRILLDOWN')+"</td>"+
     "<input type='hidden' name='line_category_drilldown["+prodln+"]' value='0'> "+
-    "<td><input name='line_category_drilldown["+prodln+"]' id='line_category_drilldown"+prodln+"' title='' value='1' type='checkbox' checked></td>"+
+    "<td><input name='line_category_drilldown["+prodln+"]' id='line_category_drilldown"+prodln+"' title='' value='1' type='checkbox' ></td>"+
     "</td>"+
-  "</tr>"+
-   "<tr>"+
+    "</tr>"+
+    "<tr>"+
     "<td>"+SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_USER_PERSON')+"</td>"+
     "<td><input name='line_user_name["+prodln+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='line_user_name"+prodln+"' size='' value='' title='' autocomplete='off' accesskey='7' type='text'>"+
     "<input name='line_user_contacts_id_c["+prodln+"]' id='line_user_contacts_id_c"+prodln+"' type='hidden' value=''>"+
@@ -269,29 +269,33 @@ z1.innerHTML  =
 /*    "<td><input type='hidden' id='line_deleted"+prodln+"' name='line_deleted["+prodln+"]' value='0'></td>"+
     "<td><input type='button' id='line_delete_line" + prodln + "' class='button btn_del' value='" + SUGAR.language.get('app_strings', 'LBL_DELETE_INLINE') + "' tabindex='116' onclick='btnMarkLineDeleted(" + prodln + ",\"line_\")'>"+
     "<button type='button' id='btn_LineEditorClose" + prodln + "' class='button btn_save' value='" + SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE') + "' tabindex='116' onclick='LineEditorClose(" + prodln + ",\"line_\")'>"+SUGAR.language.get('app_strings', 'LBL_SAVE_BUTTON_LABEL')+" & "+SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE')+" <img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button></td>"+*/
-  "</tr>"+
-  "<tr>"+
+    "</tr>"+
+    "<tr>"+
     /*"<td>"+SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_COUNTING_RULE')+"</td>"+
     "<td><input name='line_rule_name["+prodln+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='line_rule_name"+prodln+"' size='' value='' title='' autocomplete='off' accesskey='7' type='text'>"+
     "<input name='line_hat_counting_rules_id_c["+prodln+"]' id='line_hat_counting_rules_id_c"+prodln+"' type='hidden' value=''>"+
     "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openRulePopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
     "<button type='button' name='btn_clr_rulename' id='btn_clr_rulename' tabindex='0' title='清除选择' class='button lastChild' onclick='SUGAR.clearRelateField(this.form, \"line_rule_name"+prodln+"\", \"line_hat_counting_rules_id_c"+prodln+"\");' value='清除选择'><img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button>"+"</td>"+*/
-    "<td>"+SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_COUNTING_POLICY_GROUPS')+"</td>"+
+    "<td>"+SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_COUNTING_POLICY_GROUPS')+"<span class='required'>*</span></td>"+
     "<td><input name='line_policy_group_name["+prodln+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='line_policy_group_name"+prodln+"' size='' value='' title='' autocomplete='off' accesskey='7' type='text'>"+
     "<input name='line_hat_counting_policy_groups_id_c["+prodln+"]' id='line_hat_counting_policy_groups_id_c"+prodln+"' type='hidden' value=''>"+
     "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openPolicyGroupPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
     "<button type='button' name='btn_clr_policygroupname' id='btn_clr_policygroupname' tabindex='0' title='清除选择' class='button lastChild' onclick='setpolicyval(this.form, \"line_policy_group_name\", \"line_hat_counting_policy_groups_id_c\","+prodln+");' value='清除选择'><img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button>"+"</td>"+
-    "<td>"+SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_COUNTING_POLICIES')+"</td>"+
+    "<td>"+SUGAR.language.get('HAT_Counting_Batch_Rules', 'LBL_COUNTING_POLICIES')+"<span class='required'>*</span></td>"+
     "<td><input name='line_policy_name["+prodln+"]' class='sqsEnabled yui-ac-input' tabindex='0' id='line_policy_name"+prodln+"' size='' value='' title='' autocomplete='off' accesskey='7' type='text' disabled='disabled' >"+
     "<input name='line_hat_counting_policies_id_c["+prodln+"]' id='line_hat_counting_policies_id_c"+prodln+"' type='hidden' value=''>"+
     "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn_policy["+prodln+"]' id='btn_policy"+prodln+"' onclick='openPolicyPopup(" + prodln + ");' disabled='disabled' ><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
     "<button type='button' name='btn_clr_policyname' id='btn_clr_policyname' tabindex='0' title='清除选择' class='button lastChild' onclick='SUGAR.clearRelateField(this.form, \"line_policy_name"+prodln+"\", \"line_hat_counting_policies_id_c"+prodln+"\");' value='清除选择'><img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button>"+"</td>"+
+    "</tr><tr><td></td><td></td>"+
     "<td><input type='hidden' id='line_deleted"+prodln+"' name='line_deleted["+prodln+"]' value='0'></td>"+
     "<td><input type='button' id='line_delete_line" + prodln + "' class='button btn_del' value='" + SUGAR.language.get('app_strings', 'LBL_DELETE_INLINE') + "' tabindex='116' onclick='btnMarkLineDeleted(" + prodln + ",\"line_\")'>"+
     "<button type='button' id='btn_LineEditorClose" + prodln + "' class='button btn_save' value='" + SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE') + "' tabindex='116' onclick='LineEditorClose(" + prodln + ",\"line_\")'>"+SUGAR.language.get('app_strings', 'LBL_SAVE_BUTTON_LABEL')+" & "+SUGAR.language.get('app_strings', 'LBL_CLOSEINLINE')+" <img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button></td>"+
-  "</tr>"+
-  "</table></td>";
-   
+    "</tr>"+
+    "</table></td>";
+
+    addToValidate('EditView','line_hat_counting_policy_groups_id_c'+prodln,'varchar','true',SUGAR.language.get('HAT_Counting_Batch_Rules','LBL_COUNTING_POLICY_GROUPS'));
+    addToValidate('EditView','line_hat_counting_policies_id_c'+prodln,'varchar','true',SUGAR.language.get('HAT_Counting_Batch_Rules','LBL_COUNTING_POLICIES'));
+
     clr_value('#line_location_name','#line_hat_asset_locations_id_c',prodln);
     clr_value('#line_account_name','#line_account_id_c',prodln);
     clr_value('#line_code_name','#line_haa_codes_id_c',prodln);
@@ -384,21 +388,24 @@ function markLineDeleted(ln, key) {//删除当前行
   document.getElementById(key + 'delete_line' + ln).onclick = '';
 
   if (typeof validate != "undefined" && typeof validate['EditView'] != "undefined") {
+    removeFromValidate('EditView','line_hat_counting_policy_groups_id_c'+ln);
+    removeFromValidate('EditView','line_hat_counting_policies_id_c'+ln);
   }
   resetLineNum_Bold();
 
 }
 
 function LineEditorShow(ln){ //显示行编辑器（先自动关闭所有的行编辑器，再打开当前行）
-  //validate(ln);
+  
+  validate(ln);
   if (prodln>1) {
     for (var i=0;i<prodln;i++) {
       LineEditorClose(i);
     }
   }
+  setdisabled(ln);
   $("#line_displayed"+ln).hide();
   $("#line_editor"+ln).show();
-
 }
 
 function LineEditorClose(ln) {//关闭行编辑器（显示为正常行）
@@ -407,7 +414,7 @@ function LineEditorClose(ln) {//关闭行编辑器（显示为正常行）
     $("#line_displayed"+ln).show();
     renderLine(ln);
     resetLineNum_Bold();
-  
+
   }
 }
 
@@ -439,6 +446,25 @@ function openLocPopup(ln){
 
 function setLocReturn(popupReplyData){
   set_return(popupReplyData);
+  setCheck(num);
+}
+
+function setCheck(ln){
+  if(document.getElementById("line_location_name"+ln).value != ''){
+    document.getElementById("line_location_drilldown"+ln).checked=true;
+  }
+  if(document.getElementById("line_account_name"+ln).value != ''){
+    document.getElementById("line_org_drilldown"+ln).checked=true;
+  }
+  if(document.getElementById("line_using_org_name"+ln).value != ''){
+    document.getElementById("line_using_org_drilldown"+ln).checked=true;
+  }
+  if(document.getElementById("line_code_name"+ln).value != ''){
+    document.getElementById("line_major_drilldown"+ln).checked=true;
+  }
+  if(document.getElementById("line_category_name"+ln).value != ''){
+    document.getElementById("line_category_drilldown"+ln).checked=true;
+  }
 }
 
 function openOrgPopup(ln){
@@ -458,6 +484,7 @@ function openOrgPopup(ln){
 
 function setOrgReturn(popupReplyData){
   set_return(popupReplyData);
+  setCheck(num);
 }
 
 function openUsingOrgPopup(ln){
@@ -477,6 +504,7 @@ function openUsingOrgPopup(ln){
 
 function setUsingOrgReturn(popupReplyData){
   set_return(popupReplyData);
+  setCheck(num);
 }
 
 function openUserPopup(ln){
@@ -496,6 +524,7 @@ function openUserPopup(ln){
 
 function setUserReturn(popupReplyData){
   set_return(popupReplyData);
+  setCheck(num);
 }
 
 function openOwnPopup(ln){
@@ -515,6 +544,7 @@ function openOwnPopup(ln){
 
 function setOwnReturn(popupReplyData){
   set_return(popupReplyData);
+  setCheck(num);
 }
 
 function openCodePopup(ln){
@@ -534,6 +564,7 @@ function openCodePopup(ln){
 
 function setCodeNameReturn(popupReplyData){
   set_return(popupReplyData);
+  setCheck(num);
 }
 
 function openCatePopup(ln){
@@ -554,6 +585,7 @@ function openCatePopup(ln){
 
 function setCateReturn(popupReplyData){
   set_return(popupReplyData);
+  setCheck(num);
 }
 
 function openRulePopup(ln){
@@ -633,10 +665,11 @@ function setnullpolicy(ln){
     document.getElementById("btn_policy"+ln).disabled=true;
   }
 }
-/*function validate(ln){
- 
- }
-*/
+function validate(ln){
+  addToValidate('EditView','line_hat_counting_policy_groups_id_c'+ln,'varchar','true',SUGAR.language.get('HAT_Counting_Batch_Rules','LBL_COUNTING_POLICY_GROUPS'));
+  addToValidate('EditView','line_hat_counting_policies_id_c'+ln,'varchar','true',SUGAR.language.get('HAT_Counting_Batch_Rules','LBL_COUNTING_POLICIES'));
+}
+
 
 function clr_value(attr_name,attr_id,ln){
   var old_val="";
@@ -652,4 +685,15 @@ function clr_value(attr_name,attr_id,ln){
     }
   });
 
+}
+
+function setdisabled(ln){
+  if (document.getElementById('line_hat_counting_policies_id_c'+ln).value==''){
+   document.getElementById('line_policy_name'+ln).disabled=true;
+   document.getElementById('btn_policy'+ln).disabled=true;
+ }
+ else{
+  document.getElementById('line_policy_name'+ln).disabled=false;
+  document.getElementById('btn_policy'+ln).disabled=false;
+}
 }

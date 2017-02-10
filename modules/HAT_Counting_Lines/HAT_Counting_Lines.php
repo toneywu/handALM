@@ -68,6 +68,8 @@ class HAT_Counting_Lines extends HAT_Counting_Lines_sugar {
                     }
                 }
                 $lines->name=$lines->cycle_number;
+                /*var_dump($lines);
+                exit();*/
 	            $lines->save($check_notify);
 	            if (!$post_data['line_id'][$i]) {//新建才加关联关系
 	            	$table='hat_counting_lines_hat_counting_results_c';

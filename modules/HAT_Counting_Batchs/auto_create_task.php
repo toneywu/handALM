@@ -11,6 +11,7 @@ class Auto_Create_Task
 
 	function hat_counting($param=array()){
 		global $db,$app_list_strings,$current_user;
+		$return_msg='执行成功';
 		$time='';
 		$sql_batch_rule="SELECT
 		a.id,
@@ -34,7 +35,7 @@ class Auto_Create_Task
 		and b.hat_counti9a14_batchs_ida ='".$param["batch_id"]."'";
 		$result_batch_rule = $db->query($sql_batch_rule);
 		if(!$result_batch_rule){
-			die("盘点范围及拆分策略信息拉取失败");
+			return "盘点范围及拆分策略信息拉取失败";
 		}
 		//循环盘点当前批拆分规则及策略
 		//var_dump("循环盘点当前批拆分规则及策略");
@@ -42,10 +43,9 @@ class Auto_Create_Task
 			//调用HAT_Counting_asset_info过程，通过拆分范围筛选资产数据放入临时表
 			//var_dump("开始循环");
 			$query_asset_info = "call HAT_Counting_asset_info('".$param["current_framework"]."','".$row_batch_rule["id"]."','".$row_batch_rule["hat_asset_locations_id_c"]."','".$row_batch_rule["location_drilldown"]."','".$row_batch_rule["account_id_c"]."','".$row_batch_rule["org_drilldown"]."','".$row_batch_rule["account_id_c1"]."','".$row_batch_rule["using_org_drilldown"]."','".$row_batch_rule["haa_codes_id_c"]."','".$row_batch_rule["major_drilldown"]."','".$row_batch_rule["aos_product_categories_id_c"]."','".$row_batch_rule["category_drilldown"]."','".$row_batch_rule["user_contacts_id_c"]."','".$row_batch_rule["own_contacts_id_c"]."',@time);";
-			//var_dump($query_asset_info);
 			$result_asset_info = $db->query($query_asset_info);
 			if(!$result_asset_info){
-				die("通过拆分范围筛选资产数据失败");
+				return "通过拆分范围筛选资产数据失败";
 			}
 			$return_time=$db->query("select @time");
 			$row_time = $db->fetchByAssoc($return_time);
@@ -64,15 +64,14 @@ class Auto_Create_Task
 			//var_dump($sql_policy_info);
 			$result_policy_info = $db->query($sql_policy_info);
 			if(!$result_policy_info){
-				die("盘点策略信息拉取失败");
+				return "盘点策略信息拉取失败";
 			}
 			$row_policy_info = $db->fetchByAssoc($result_policy_info);
 			//解析抽数SQL,将数据放入临时表
 			$sql_counting_info=$row_policy_info["data_populate_sql"];
-			//var_dump($sql_counting_info);
 			$result_counting_info = $db->query($sql_counting_info);
 			if(!$result_counting_info){
-				die("数据抽取逻辑执行失败");
+				return "数据抽取逻辑执行失败";
 			}
 			//$times=0;
 			while ($row_counting_info = $db->fetchByAssoc($result_counting_info)){
@@ -105,7 +104,7 @@ class Auto_Create_Task
 				'".$row_counting_info["line_attribute15"]."')";
 				$result_data_populate_sql = $db->query($query_data_populate_sql);
 				if(!$result_data_populate_sql){
-					die("数据导入hat_counting_task_dtl_tmp表时出错");
+					return "数据导入hat_counting_task_dtl_tmp表时出错";
 				}
 		}//取数结束
 			//var_dump("取数结束");
@@ -116,7 +115,10 @@ class Auto_Create_Task
 				'hat_counting_task_templates_id_c' => $row_policy_info["hat_counting_task_templates_id_c"],
 				'batch_id' => $param["batch_id"],
 				);
-			$this->logic_type($logic);
+			$logic_return=$this->logic_type($logic);
+			if($logic_return!=''){
+				return $logic_return;
+			}
 			//var_dump("逻辑拆分处理结束");
 			}//逻辑拆分处理结束
 			
@@ -135,12 +137,13 @@ class Auto_Create_Task
 				AND h.hat_counti5649olicies_ida ='".$row_batch_rule["hat_counting_policies_id_c"]."'";
 				$result_custom = $db->query($sql_custom);
 				if(!$result_custom){
-					die("自定义分组信息拉取失败");
+					return "自定义分组信息拉取失败";
 				}
 				//循环每一个自定义分组
 
 				while($row_custom = $db->fetchByAssoc($result_custom)){
 					//var_dump("进入自定义分组循环");
+					//var_dump($row_custom["group_clause"]);
 					$custom=array(
 						'batch_id' => $param["batch_id"],
 						'additional_logic' => $row_custom["additional_logic"],
@@ -148,7 +151,10 @@ class Auto_Create_Task
 						'group_clause' => $row_custom["group_clause"],
 						'counting_batch_rule_id' => $row_batch_rule["id"],
 						);
-					$this->custom_type($custom);
+					$custom_return=$this->custom_type($custom);
+					if($custom_return!=''){
+						return $custom_return;
+					}
 					//var_dump("自定义分组循环结束");
 				}
 
@@ -161,7 +167,7 @@ class Auto_Create_Task
 				where a.grouped_flag='N'";
 				$result_if_n = $db->query($sql_if_n);
 				if(!$result_custom){
-					die("判断是否有未分组数据时失败");
+					return "判断是否有未分组数据时失败";
 				}
 				$row_if_n = $db->fetchByAssoc($result_if_n);
 				if($row_if_n["count"]>0){
@@ -183,10 +189,73 @@ class Auto_Create_Task
 		SET a.snapshot_date = '".$time."'
 		WHERE
 		a.id = '".$param["batch_id"]."'";
+		//var_dump($time);
 		$result_time = $db->query($query_time, true);
 		if(!$result_time){
-					die("回写快照时间失败");
+			return "回写快照时间失败";
+
+		}
+		return $return_msg;
+	}
+
+	function setTaskname($row_task,$task_templates_id,$task_name){
+		global $app_list_strings,$db;
+		$msg="";
+		$sql_template="SELECT
+		hctd.*
+		FROM
+		hat_counting_task_templates_hat_counting_template_details_c h,
+		hat_counting_template_details hctd
+		WHERE
+		1 = 1
+		AND h.deleted = 0
+		AND hctd.deleted = 0
+		AND hctd.table_names='INV_TASKS'
+		AND h.hat_countib27cdetails_idb = hctd.id
+		AND h.hat_countid917mplates_ida = '".$task_templates_id."'";
+
+		$result_template = $db->query($sql_template);
+		if(!$result_template){
+			return  array('task_name' => $task_name,'msg' => "盘点任务模版信息拉取失败");
+		}
+
+		//循环任务模版明细 获取对应attribute转化的名称拼接到任务名称
+		while($row_template = $db->fetchByAssoc($result_template)){
+			foreach ($row_task as $key => $value) {
+				$attr_tmp=split('_', $key);
+				if($attr_tmp[1]){
+					$attr=$attr_tmp[1];
 				}
+				else{
+					$attr=$attr_tmp[0];
+				}
+				if($attr==$row_template["column_name"]){
+					if($row_template["field_type"]=='LOV'){
+						$beanAttr = BeanFactory::getBean($row_template["relate_module"], $value);
+						$row_name = $beanAttr->$row_template["module_dsp"];
+						/*if(!$result_attr){
+							return  array('task_name' => $task_name,'msg' => "字段类型为LOV时,任务名称拼接失败");
+						}*/
+						if($row_name){
+							$task_name=$row_name.'-'.$task_name;
+						}
+					}else if ($row_template["field_type"]=='LIST') {
+						foreach ($app_list_strings[$row_template["list_name"]] as $key_list => $value_list) {
+							if($key_list==$value){
+								if($value_list){
+									$task_name=$value_list.'-'.$task_name;
+								}
+							}
+						}
+					}else{
+						if($value){
+							$task_name=$value.'-'.$task_name;
+						}
+					}
+				}
+			}
+		}//任务名称拼接完成
+		return array('task_name' => $task_name,'msg' => '');
 	}
 
 	function logic_type($logic=array()){
@@ -233,71 +302,23 @@ class Auto_Create_Task
 		a.task_attribute15";
 		$result_group = $db->query($sql_group);
 		if(!$result_group){
-			die("逻辑拆分时分组失败");
+			return "逻辑拆分时分组失败";
 		}
 		//循环每一个分组
 		while($row_group = $db->fetchByAssoc($result_group)){
 			//找出对应任务模版维护的atrribute信息
 			$task_name='';
-			$sql_template="SELECT
-			hctd.*
-			FROM
-			hat_counting_task_templates_hat_counting_template_details_c h,
-			hat_counting_template_details hctd
-			WHERE
-			1 = 1
-			AND h.deleted = 0
-			AND hctd.deleted = 0
-			AND hctd.table_names='INV_TASKS'
-			AND h.hat_countib27cdetails_idb = hctd.id
-			AND h.hat_countid917mplates_ida = '".$logic["hat_counting_task_templates_id_c"]."'";
-			
-			$result_template = $db->query($sql_template);
-			if(!$result_template){
-				die("任务模版信息拉取失败");
+			$task_return=$this->setTaskname($row_group,$logic["hat_counting_task_templates_id_c"],$task_name);
+			if($task_return['msg']!=''){
+				return $task_return['msg'];
 			}
-			//循环任务模版明细 获取对应attribute转化的名称拼接到任务名称
-			while($row_template = $db->fetchByAssoc($result_template)){
-
-				foreach ($row_group as $key => $value) {
-					$attr=split('_', $key);
-					if($attr[1]==$row_template["column_name"]){
-						if($row_template["field_type"]=='LOV'){
-							$sql_attr="SELECT
-							".$row_template["module_dsp"]." name
-							FROM ".$row_template["relate_module"]." 
-							WHERE
-							id = '".$value."'";
-							$result_attr = $db->query($sql_attr);
-							if(!$result_attr){
-								die("字段类型为LOV时,任务名称拼接失败");
-							}
-							$row_attr = $db->fetchByAssoc($result_attr);
-							if($row_attr["name"]){
-								$task_name=$row_attr["name"].'-'.$task_name;
-							}
-						}else if ($row_template["field_type"]=='LIST') {
-							foreach ($app_list_strings[$row_template["list_name"]] as $key_list => $value_list) {
-								if($key_list==$value){
-									if($value_list){
-										$task_name=$value_list.'-'.$task_name;
-									}
-								}
-							}
-						}else{
-							if($value){
-								$task_name=$value.'-'.$task_name;
-							}
-						}
-					}
-				}
-			}//任务名称拼接完成 其中不包括盘点批名称
+			$task_name=$task_return['task_name'];
 			//调用HAT_Counting_asset_info_toCountingTask创建盘点任务
 			$query_insert_task = "call HAT_Counting_asset_info_toCountingTask('".$logic["batch_id"]."','".$row_group["counting_batch_rule_id"]."','".$current_user->id."','".$task_name."','".$row_group["task_attribute1"]."','".$row_group["task_attribute2"]."','".$row_group["task_attribute3"]."','".$row_group["task_attribute4"]."','".$row_group["task_attribute5"]."','".$row_group["task_attribute6"]."','".$row_group["task_attribute7"]."','".$row_group["task_attribute8"]."','".$row_group["task_attribute9"]."','".$row_group["task_attribute10"]."','".$row_group["task_attribute11"]."','".$row_group["task_attribute12"]."','".$row_group["task_attribute13"]."','".$row_group["task_attribute14"]."','".$row_group["task_attribute15"]."',@task_id)";
 			//var_dump($query_insert_task);
 			$result_insert_task = $db->query($query_insert_task);
 			if(!$result_insert_task){
-				die("创建盘点任务失败");
+				return "创建盘点任务失败";
 			}
 			$return_task_id=$db->query("select @task_id");
 			$row_task_id = $db->fetchByAssoc($return_task_id);
@@ -308,10 +329,11 @@ class Auto_Create_Task
 			//var_dump($query_insert_line);
 			$result_insert_line = $db->query($query_insert_line);
 			if(!$result_insert_line){
-				die("创建盘点明细失败");
+				return "创建盘点明细失败";
 			}
 
 		}//分组循环结束
+		return "";
 	}
 
 	function custom_type($custom){
@@ -319,9 +341,10 @@ class Auto_Create_Task
 			//调用HAT_Counting_asset_info_toCountingTask创建盘点任务
 		$query_insert_task = "call HAT_Counting_asset_info_toCountingTask('".$custom["batch_id"]."','".$custom["counting_batch_rule_id"]."',
 		'".$current_user->id."','','','','','','','','','','','','','','','','',@task_id)";
+		//var_dump($query_insert_task);
 		$result_insert_task = $db->query($query_insert_task);
 		if(!$result_insert_task){
-			die("自定义分组创建盘点任务失败");
+			return "自定义分组创建盘点任务失败";
 		}
 		$return_task_id=$db->query("select @task_id");
 		$row_task_id = $db->fetchByAssoc($return_task_id);
@@ -337,7 +360,7 @@ class Auto_Create_Task
 			//var_dump($query_update);
 			$result_update = $db->query($query_update);
 			if(!$result_update){
-				die("附加逻辑更新盘点任务信息失败");
+				return  "附加逻辑更新盘点任务信息失败";
 			}
 			//对新插入的盘点任务重新查询以便整理attribute信息
 
@@ -349,11 +372,11 @@ class Auto_Create_Task
 			a.id ='".$task_id."'";
 			$result_task = $db->query($sql_task);
 			if(!$result_task){
-				die("盘点任务信息拉取失败");
+				return  "盘点任务信息拉取失败";
 			}
 			$row_task = $db->fetchByAssoc($result_task);
-				//找出对应任务模版维护的atrribute信息
-				//获取盘点批名称
+			//找出对应任务模版维护的atrribute信息
+			//获取盘点批名称
 			$sql_batch="SELECT
 			a.name
 			FROM
@@ -362,101 +385,85 @@ class Auto_Create_Task
 			a.id='".$custom["batch_id"]."'";
 			$result_batch = $db->query($sql_batch);
 			if(!$result_batch){
-				die("盘点批信息拉取失败");
+				return "盘点批信息拉取失败";
 			}
 			$row_batch = $db->fetchByAssoc($result_batch);
 			$task_name=$row_batch["name"];
-			$sql_template="SELECT
-			hctd.*
+			$task_return=$this->setTaskname($row_task,$custom["hat_counting_task_templates_id_c"],$task_name);
+			if($task_return['msg']!=''){
+				return $task_return['msg'];
+			}
+			$task_name=$task_return["task_name"];
+			//更新盘点任务名称
+			$query_update_name="UPDATE hat_counting_tasks
+			SET hat_counting_tasks.name = '".$task_name."'
+			WHERE
+			id ='".$task_id."'";
+			$result_update_name = $db->query($query_update_name);
+			if(!$result_update_name){
+				return "更新盘点任务名称失败";
+			}
+			//分组条件处理
+			$group_clause='';
+			if($custom["group_clause"]){
+				$group_clause=str_replace("&#039;","'",$custom["group_clause"]);
+			}else{
+				$group_clause='1=1 and hat_counting_task_dtl_tmp.grouped_flag="N"';
+			}
+			//获取分组 创建盘点明细
+			$sql_group="SELECT
+			*
 			FROM
-			hat_counting_task_templates_hat_counting_template_details_c h,
-			hat_counting_template_details hctd
+			hat_counting_task_dtl_tmp
+			WHERE
+			".$group_clause."";
+			//var_dump($sql_group);
+			$result_group = $db->query($sql_group);
+			if(!$result_group){
+				return "分组条件出错";
+			}
+			while($row_group = $db->fetchByAssoc($result_group)){
+				//调用HAT_Counting_custom_to_line创建盘点明细
+				$query_insert_line = "call HAT_Counting_custom_to_line('".$task_id."',
+				'".$current_user->id."','".$row_group["asset_id"]."','".$row_group["line_attribute1"]."','".$row_group["line_attribute2"]."','".$row_group["line_attribute3"]."','".$row_group["line_attribute4"]."','".$row_group["line_attribute5"]."','".$row_group["line_attribute6"]."','".$row_group["line_attribute7"]."','".$row_group["line_attribute8"]."','".$row_group["line_attribute9"]."','".$row_group["line_attribute10"]."','".$row_group["line_attribute11"]."','".$row_group["line_attribute12"]."','".$row_group["line_attribute13"]."','".$row_group["line_attribute14"]."','".$row_group["line_attribute15"]."')";
+					//var_dump($query_insert_line);
+				$result_insert_line = $db->query($query_insert_line);
+				if(!$result_insert_line){
+					return "创建盘点明细失败";
+				}
+
+			}
+			$sql_count="SELECT
+			count(*) counting
+			FROM
+			hat_counting_tasks a
 			WHERE
 			1 = 1
-			AND h.deleted = 0
-			AND hctd.deleted = 0
-			AND hctd.table_names='INV_TASKS'
-			AND h.hat_countib27cdetails_idb = hctd.id
-			AND h.hat_countid917mplates_ida = '".$custom["hat_counting_task_templates_id_c"]."'";
-			$result_template = $db->query($sql_template);
-			if(!$result_template){
-				die("盘点任务模版信息拉取失败");
+			AND a.id='".$task_id."'
+			AND NOT EXISTS (
+			SELECT
+			*
+			FROM
+			hat_counting_lines b
+			WHERE
+			a.id = b.hat_counting_tasks_id_c
+			)";
+			$result_count = $db->query($sql_count);
+			if(!$result_count){
+				return "查询未包含明细记录的任务时出错";
 			}
-				//循环任务模版明细 获取对应attribute转化的名称拼接到任务名称
-			while($row_template = $db->fetchByAssoc($result_template)){
-				foreach ($row_task as $key => $value) {
-					if($key==$row_template["column_name"]){
-						if($row_template["field_type"]=='LOV'){
-							$sql_attr="SELECT
-							".$row_template["module_dsp"]." name
-							FROM ".$row_template["relate_module"]." 
-							WHERE
-							id = '".$value."'";
-							$result_attr = $db->query($sql_attr);
-							if(!$result_attr){
-								die("字段类型为LOV时,任务名称拼接失败");
-							}
-							$row_attr = $db->fetchByAssoc($result_attr);
-							if($row_attr["name"]){
-								$task_name=$row_attr["name"].'-'.$task_name;
-							}
-						}else if ($row_template["field_type"]=='LIST') {
-							foreach ($app_list_strings[$row_template["list_name"]] as $key_list => $value_list) {
-								if($key_list==$value){
-									if($value_list){
-										$task_name=$value_list.'-'.$task_name;
-									}
-								}
-							}
-						}else{
-							if($value){
-								$task_name=$value.'-'.$task_name;
-							}
-						}
-					}
-				}
-				}//任务名称拼接完成
-				//更新盘点任务名称
-				$query_update_name="UPDATE hat_counting_tasks
-				SET hat_counting_tasks.name = '".$task_name."'
-				WHERE
-				id ='".$task_id."'";
-				$result_update_name = $db->query($query_update_name);
-				if(!$result_update_name){
-					die("更新盘点任务名称失败");
-				}
-				//分组条件处理
-				$group_clause='';
-				if($custom["group_clause"]){
-					$group_clause=str_replace("&#039;","'",$custom["group_clause"]);
-				}else{
-					$group_clause='1=1 and hat_counting_task_dtl_tmp.grouped_flag="N"';
-				}
-				//获取分组 创建盘点明细
-				$sql_group="SELECT
-				*
+			$row_count = $db->fetchByAssoc($result_count);
+			if($row_count["counting"]>0){
+				$query_delete_task="DELETE
 				FROM
-				hat_counting_task_dtl_tmp
+				hat_counting_tasks
 				WHERE
-				".$group_clause."";
-				//var_dump($sql_group);
-				$result_group = $db->query($sql_group);
-				if(!$result_group){
-					die("分组条件出错");
+				id = '".$task_id."'";
+				$result_delete_task = $db->query($query_delete_task);
+				if(!$result_delete_task){
+					return "删除任务失败";
 				}
-				while($row_group = $db->fetchByAssoc($result_group)){
-					//调用HAT_Counting_custom_to_line创建盘点明细
-					$query_insert_line = "call HAT_Counting_custom_to_line('".$task_id."',
-					'".$current_user->id."','".$row_group["asset_id"]."','".$row_group["line_attribute1"]."','".$row_group["line_attribute2"]."','".$row_group["line_attribute3"]."','".$row_group["line_attribute4"]."','".$row_group["line_attribute5"]."','".$row_group["line_attribute6"]."','".$row_group["line_attribute7"]."','".$row_group["line_attribute8"]."','".$row_group["line_attribute9"]."','".$row_group["line_attribute10"]."','".$row_group["line_attribute11"]."','".$row_group["line_attribute12"]."','".$row_group["line_attribute13"]."','".$row_group["line_attribute14"]."','".$row_group["line_attribute15"]."')";
-					//var_dump($query_insert_line);
-					$result_insert_line = $db->query($query_insert_line);
-					if(!$result_insert_line){
-						die("创建盘点明细失败");
-					}
-					/*$return_num=$db->query("select @num");
-					$row_num = $db->fetchByAssoc($return_num);
-					var_dump($row_num["@num"]);*/
-				}
+			}
 			}//附加逻辑不为空处理结束
 		}
 	}

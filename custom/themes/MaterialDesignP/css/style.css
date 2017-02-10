@@ -30,6 +30,11 @@ tfoot .paginationActionButtons {
 	display: none;
 }
 
+.list-view-rounded-corners .list #pagination td .paginationTable td.paginationActionButtons, 
+.list #pagination td .paginationTable .paginationActionButtons {
+	background-color:#fff;
+}
+
 
 .evenListRowS1:hover td,
 .oddListRowS1:hover td {
@@ -305,7 +310,7 @@ div.sub-panel {
 }
 .detail-view .tab-content .panel-default > .panel-heading {
 	border-top: 1px solid #e8e8e8;
-	height: 36px;
+	height: 34px;
 }
 
 /*表头颜色*/
@@ -352,6 +357,7 @@ table.subpanel-table li.sugar_action_button {
 	box-shadow: none;
 	border: 1px solid #c4c4c4;
 }
+
 .table-responsive.list > tbody > tr > td > a.button:hover,
 .subpanel-table a.button:hover,
 .subpanel-table .SugarActionMenu .sugar_action_button:hover,
@@ -425,17 +431,16 @@ div#loadingPage b{
 /*overall structure*/
 .content .detail-view .tab-content {
 	padding: 0;
-
+}
+.content #EditView_tabs .tab-content {
+	padding: 0.5em 1em;
 }
 
 .detail-view-row-item {
 	min-height: 0px;
 }
 
-.content #EditView_tabs .tab-content {
-	padding: 0.5em 1em;
 
-}
 
 /*Start of Cuxtomization*/
 /*打印时不显示HREF中的内容*/

@@ -140,6 +140,7 @@ function setEventTypeFields() {
 	 	$(".action_buttons").hide();
 	 }
 
+
 	 $("#line_items_span").parent("div").prev("div.label").hide();//隐藏事务处理行上的标签
 
 	 if ($("#source_wo_id").val() != "" && $("#source_wo_id").val() != 'undefined') {

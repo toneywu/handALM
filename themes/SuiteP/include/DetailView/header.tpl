@@ -50,7 +50,18 @@
     {/literal}
 </script>
 
-<table cellpadding="0" cellspacing="0" border="0" width="100%" id="">
+<!--
+<div id="DetailViewPagination">{$ADMIN_EDIT}
+        {{if $panelCount == 0}}
+        {{* Render tag for VCR control if SHOW_VCR_CONTROL is true *}}
+        {{if $SHOW_VCR_CONTROL and $config.enable_action_menu == false}}
+        {$PAGINATION}
+        {{/if}}
+        {{counter name="panelCount" print=false}}
+        {{/if}}
+</div>
+-->
+<table cellpadding="0" cellspacing="0" border="0" width="100%" id="DetailViewBtnGroups">
     <tr>
         <td class="buttons" align="left" NOWRAP width="80%">
             <div class="actionsContainer">

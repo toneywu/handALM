@@ -311,11 +311,20 @@ class SugarAuthenticate{
 	 *
 	 */
 	function logout(){
-			session_start();
-			session_destroy();
-			ob_clean();
-			header('Location: index.php?module=Users&action=Login');
-			sugar_cleanup(true);
+		global $db;
+		session_start();
+		if(isset($_COOKIE["logout_url"])&&$_COOKIE["logout_url"]!=""){
+			$logout_url=$_COOKIE["logout_url"];
+			$user_id=$_COOKIE['ck_login_id_20'];
+			$sql="UPDATE haa_sso_login_logs SET login_secs = (UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(login_time)) WHERE user_id_c = '".$user_id."' AND seq = (SELECT s.seq FROM (SELECT MAX(seq) seq FROM haa_sso_login_logs WHERE user_id_c = '".$user_id."') s)";
+			$db->query($sql);//单点登录时，记录单点登录时间
+		}else{
+			$logout_url="index.php?module=Users&action=Login";
+		}
+		session_destroy();
+		ob_clean();
+		header('Location: index.php?module=Users&action=Login');
+		sugar_cleanup(true);
 	}
 
 

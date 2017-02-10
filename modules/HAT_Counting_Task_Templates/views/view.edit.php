@@ -36,8 +36,31 @@ class HAT_Counting_Task_TemplatesViewEdit extends ViewEdit
 
 	}
 
+	function getBeanList($module){
+		global $app_strings, $beanList;
+		$fields = array(''=>$app_strings['LBL_NONE']);
+
+		if ($module != '') {
+			if(isset($beanList[$module]) && $beanList[$module]){
+				$mod = new $beanList[$module]();
+				foreach($mod->field_defs as $name => $arr){
+					if(ACLController::checkAccess($mod->module_dir, 'list', true)) {
+						if(isset($arr['vname']) && $arr['vname'] != ''){
+							$fields[$name] = rtrim(translate($arr['vname'],$mod->module_dir), ':');
+						} else {
+							$fields[$name] = $name;
+						}
+					}
+            } //End loop.
+
+        }
+    }
+    //var_dump(get_select_options_with_id($fields, ''));
+    return (get_select_options_with_id($fields, ''));
+	}
+
 	function displayLineItems(){
-		global $sugar_config, $locale, $app_list_strings, $mod_strings;
+		global $sugar_config, $locale, $app_list_strings, $mod_strings, $beanList;
 		$focus=$this->bean;
 		$str = "<option value =''> </option>";
 		$str_asset = "<option value =''> </option>";
@@ -45,28 +68,31 @@ class HAT_Counting_Task_TemplatesViewEdit extends ViewEdit
 		foreach ($app_list_strings as $key => $value) {
 			$str =$str.'<option value='.$key.'>'.$key.'</option>';
 		}
-		$sql_asset_list="select ha.* from hat_assets ha LIMIT 1";
+		/*$sql_asset_list="select ha.* from hat_assets ha LIMIT 1";
 		$result_asset_list=$focus->db->query($sql_asset_list);
 		
 		$row_asset_list=$focus->db->fetchByAssoc($result_asset_list);
 		foreach ($row_asset_list as $key => $value) {
 			$str_asset =$str_asset.'<option value='.$key.'>'.$key.'</option>';
-		}
+		}*/
+	$str_asset=$this->getBeanList('HAT_Assets');
+	//var_dump($str_asset);
+    //var_dump(get_select_options_with_id($fields, ''));
 		//var_dump($str_asset);
-		$html = '';
-		$html .= '<script src="modules/HAT_Counting_Task_Templates/line_items.js"></script>';
-		echo $html;
-		$html .="<table border='0' cellspacing='4' width='100%' id='lineItems' class='listviewtable' style='table-layout: fixed;'></table>";
-		echo "<script>replace_display_lines(" .json_encode($html).",'line_items_span'".");</script>";
-		echo '
-		<input type="hidden" name="tablenamedden" id="tablenamedden" value="'.get_select_options_with_id($app_list_strings['hat_counting_table_name'], '').'">
-		<input type="hidden" name="columnnamedden" id="columnnamedden" value="'.get_select_options_with_id($app_list_strings['hat_counting_column_name'], '').'">
-		<input type="hidden" name="fieldtypedden" id="fieldtypedden" value="'.get_select_options_with_id($app_list_strings['hat_counting_field_type'], '').'">
-		<input type="hidden" name="listtypedden" id="listtypedden" value="'.get_select_options_with_id($app_list_strings['moduleList'], '').'">
-		<input type="hidden" name="appliststrings" id="appliststrings" value="'.$str.'">
-		<input type="hidden" name="assetliststrings" id="assetliststrings" value="'.$str_asset.'">';
-		
-		echo '<script>insertLineHeader(\'lineItems\');</script>';
+    $html = '';
+    $html .= '<script src="modules/HAT_Counting_Task_Templates/line_items.js"></script>';
+    echo $html;
+    $html .="<table border='0' cellspacing='4' width='100%' id='lineItems_tem' class='listviewtable' style='table-layout: fixed;'></table>";
+    echo "<script>replace_display_lines(" .json_encode($html).",'line_items_span'".");</script>";
+    echo '
+    <input type="hidden" name="tablenamedden" id="tablenamedden" value="'.get_select_options_with_id($app_list_strings['hat_counting_table_name'], '').'">
+    <input type="hidden" name="columnnamedden" id="columnnamedden" value="'.get_select_options_with_id($app_list_strings['hat_counting_column_name'], '').'">
+    <input type="hidden" name="fieldtypedden" id="fieldtypedden" value="'.get_select_options_with_id($app_list_strings['hat_counting_field_type'], '').'">
+    <input type="hidden" name="listtypedden" id="listtypedden" value="'.get_select_options_with_id($app_list_strings['moduleList'], '').'">
+    <input type="hidden" name="appliststrings" id="appliststrings" value="'.$str.'">
+    <input type="hidden" name="assetliststrings" id="assetliststrings" value="'.$str_asset.'">';
+
+    echo '<script>insertLineHeader(\'lineItems_tem\');</script>';
 		if($focus->id!=''){//如果不是新增（即如果是编辑已有记录）
 			$sql = "SELECT
 			hctd.id,
@@ -110,7 +136,7 @@ class HAT_Counting_Task_TemplatesViewEdit extends ViewEdit
 			}
 		}
 
-		echo "<script>insertLineFootor('lineItems');</script>";
+		echo "<script>insertLineFootor('lineItems_tem');</script>";
 
 	}
 

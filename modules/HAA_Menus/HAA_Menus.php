@@ -76,7 +76,6 @@ class HAA_Menus extends HAA_Menus_sugar {
 	function menuHeadData(){
 		global $db;
         $menuheaddata=array();
-
         $haa_frameworks_id=isset($_SESSION["current_framework"])?$_SESSION["current_framework"]:"";
         $menu_sql="SELECT
             haa_menus.id,
@@ -126,8 +125,7 @@ class HAA_Menus extends HAA_Menus_sugar {
 		AND (haa_menus_lists.deleted IS NULL OR haa_menus_lists.deleted=0)
 		AND (haa_menus_lists.enabled_flag IS NULL OR haa_menus_lists.enabled_flag=1)
 		AND (haa_functions.deleted IS NULL OR haa_functions.deleted=0)
-		AND (haa_menus.haa_frameworks_id_c='' or haa_menus.haa_frameworks_id_c is null  ".
-            	" OR haa_menus.haa_frameworks_id_c= '".$haa_frameworks_id."') 
+		AND (haa_menus.haa_frameworks_id_c='' OR haa_menus.haa_frameworks_id_c is null "."OR haa_menus.haa_frameworks_id_c= '".$haa_frameworks_id."') 
 		 ORDER BY haa_menus_lists.sort_order ASC";
 		$result=$db->query($menus_sql);
 		$menus_num=0;
@@ -139,6 +137,7 @@ class HAA_Menus extends HAA_Menus_sugar {
         	if ($row['parameters']) {
         		$url.="&".$row['parameters'];
         	}
+            $menus[$menus_num]['module']=$row['func_module'];
         	$menus[$menus_num]['parent_id']=$row['id'];
             $menus[$menus_num]['url']=$url;
             $menus[$menus_num]['label']=$row['field_lable_zhs'];

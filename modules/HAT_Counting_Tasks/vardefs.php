@@ -85,6 +85,48 @@ $dictionary['HAT_Counting_Tasks'] = array(
             'len' => 36,
             'size' => '20',
             ),
+        'line_items_detail' =>
+      array(
+        'required' => false,
+        'name' => 'line_items_detail',
+        'vname' => 'LBL_LINE_ITEMS_DETAIL',
+        'type' => 'varchar',
+        'source' => 'non-db',
+        'massupdate' => 0,
+        'no_default' => false,
+        'comments' => '',
+        'help' => '',
+        'importable' => 'true',
+        'duplicate_merge' => 'disabled',
+        'duplicate_merge_dom_value' => '0',
+        'audited' => false,
+        'inline_edit' => true,
+        'reportable' => true,
+        'unified_search' => false,
+        'merge_filter' => 'disabled',
+        'len' => '255',
+        'size' => '20',
+        ),
+       /* 'line_items_detail' =>
+              array (
+                'required' => false,
+                'name' => 'line_items_detail',
+                'vname' => 'LBL_LINE_ITEMS_DETAIL',
+                'type' => 'function',
+                'source' => 'non-db',
+                'massupdate' => 0,
+                'importable' => 'false',
+                'duplicate_merge' => 'disabled',
+                'duplicate_merge_dom_value' => 0,
+                'audited' => false,
+                'reportable' => false,
+                'function' =>
+                array(
+                    'name' => 'display_lines',
+                    'returns' => 'html',
+                    'include' => 'modules/HAT_Counting_Tasks/Render_Line_Items.php'
+                    ),
+                ),*/
         'line_items' =>
         array(
             'required' => false,

@@ -60,10 +60,8 @@ array (
           ),
           1 => 
           array (
-            'name' => 'data_populate_sql',
-            'comment' => 'Full text of the note',
-            'studio' => 'visible',
-            'label' => 'LBL_DATA_POPULATE_SQL',
+            'name' => 'enabled_flag',
+            'label' => 'LBL_ENABLED_FLAG',
           ),
         ),
         2 => 
@@ -77,8 +75,10 @@ array (
           ),
           1 => 
           array (
-            'name' => 'enabled_flag',
-            'label' => 'LBL_ENABLED_FLAG',
+            'name' => 'data_populate_sql',
+            'comment' => 'Full text of the note',
+            'studio' => 'visible',
+            'label' => 'LBL_DATA_POPULATE_SQL',
           ),
         ),
         3 => 

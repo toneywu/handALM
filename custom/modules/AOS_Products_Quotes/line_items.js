@@ -105,7 +105,7 @@
     if (document.getElementById(tableid + '_head') !== null) {
         document.getElementById(tableid + '_head').style.display = "";
     }
-
+    document.getElementById(tableid).setAttribute("style","width:100%"); 
     var vat_hidden = document.getElementById("vathidden").value;
     var discount_hidden = document.getElementById("discounthidden").value;
     sqs_objects["product_name[" + prodln + "]"] = {
@@ -233,18 +233,18 @@ if (curent_module=="AOS_Contracts") {
         var r2=y.insertCell(0);
         r2.colSpan="11";
         //结算周期
-        r2.innerHTML="<div class='pull-left col-md-7' style='padding: 0px'>"+
+        r2.innerHTML="<div class='pull-left col-md-8' style='padding: 0px'>"+
         //结算周期  首次结算日
         "<div class='col-md-4' style='padding:0px'>"+
         "<div class='pull-left'>"+
         "<div style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_SETTLEMENT_PERIOD_C')+":</div>"+
         "<div style='height:25px; line-height:25px; margin-top:10px'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_INITIAL_ACCOUNT_DAY')+":</div>"+
         "</div>"+
-        "<div class='pull-left'>"+
+        "<div class='pull-left' style='width:100px'>"+
         "<select tabindex='0' name='product_settlement_period_c[" + prodln + "]' onchange='setProductSettlementPeriodChange(this,"+prodln+");'"+ " id='product_settlement_period_c" + prodln + "'>" + settlement_period_option +"</select>"+
         "&nbsp;<select name='product_number_of_periods_c["+prodln+"]' id='product_number_of_periods_c"+prodln+"' onchange='calculateLine("+prodln+",\"product_\")'>"+number_of_periods_c_hidden+"</select>"+
         '<span id="span_product_initial_account_day_c'+prodln+'" class="input-group date" style="margin-top:5px" >'+
-        '<input id="product_initial_account_day_c' + prodln + '" class="date_input pull-left" style="width:75px" autocomplete="off" name="product_initial_account_day_c[' + prodln + ']" value="" title="" tabindex="0" type="text" onchange="setNextDayVal(\'product_\','+prodln+',this)">'+
+        '<input id="product_initial_account_day_c' + prodln + '" class="date_input pull-left" style="width:120px" autocomplete="off" name="product_initial_account_day_c[' + prodln + ']" value="" title="" tabindex="0" type="text" onchange="setNextDayVal(\'product_\','+prodln+',this)">'+
         '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span></span>'+
         "</div>"+
         "</div>"+
@@ -254,12 +254,12 @@ if (curent_module=="AOS_Contracts") {
         "<div style='height:25px; line-height:25px;' >"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_START_C')+":</div>"+
         "<div style='height:25px; line-height:25px; margin-top:10px'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_NEXT_ACCOUNT_DAY')+":</div>"+
         "</div>"+
-        "<div class='pull-left'>"+
+        "<div class='pull-left' style='width:100px'>"+
         '<span id="span_product_effective_start_c'+prodln+'" class="input-group date show_calendar" style="margin-top:5px">'+
-        '<input id="product_effective_start_c' + prodln + '" class="date_input pull-left" style="width:75px" autocomplete="off" name="product_effective_start_c[' + prodln + ']" value="" title="" tabindex="0" type="text"><span class="input-group-addon">'+
+        '<input id="product_effective_start_c' + prodln + '" class="date_input pull-left" style="width:120px" autocomplete="off" name="product_effective_start_c[' + prodln + ']" value="" title="" tabindex="0" type="text"><span class="input-group-addon">'+
         '<span class="glyphicon glyphicon-calendar"></span></span></span>'+
         "<span id='span_product_next_account_day_c"+prodln+"' class='input-group date' style='margin-top:5px'>"+
-        "<input type='text' class='date_input pull-left' style='width:75px' id='product_next_account_day_c"+prodln+"' name='product_next_account_day_c["+prodln+"]'/>"+
+        "<input type='text' class='date_input pull-left' style='width:120px' id='product_next_account_day_c"+prodln+"' name='product_next_account_day_c["+prodln+"]'/>"+
         "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></span>"+
         "</div>"+
         "</div>"+
@@ -269,12 +269,12 @@ if (curent_module=="AOS_Contracts") {
         "<div style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_END_C')+":</div>"+
         "<div style='height:25px; line-height:25px;margin-top:10px'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_FINAL_ACCOUNT_DAY')+":</div>"+
         "</div>"+
-        "<div class='pull-left'>"+
+        "<div class='pull-left' style='width:100px'>"+
         '<span id="span_product_effective_end_c'+prodln+'" class="input-group date show_calendar" style="margin-top:5px">'+
-        '<input id="product_effective_end_c' + prodln + '" class="date_input  pull-left" style="width:75px" autocomplete="off" name="product_effective_end_c[' + prodln + ']" value="" title="" tabindex="0" type="text"><span class="input-group-addon">'+
+        '<input id="product_effective_end_c' + prodln + '" class="date_input  pull-left" style="width:120px" autocomplete="off" name="product_effective_end_c[' + prodln + ']" value="" title="" tabindex="0" type="text"><span class="input-group-addon">'+
         '<span class="glyphicon glyphicon-calendar"></span></span></span>'+
         "<span id='span_product_final_account_day_c"+prodln+"' class='input-group date' style='margin-top:5px'>"+
-        "<input type='text' class='date_input pull-left' style='width:75px' id='product_final_account_day_c"+prodln+"' name='product_final_account_day_c["+prodln+"]' disabled/>"+
+        "<input type='text' class='date_input pull-left' style='width:120px' id='product_final_account_day_c"+prodln+"' name='product_final_account_day_c["+prodln+"]' disabled/>"+
         "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></span>"+
         "</div></div></div>";
         //首次结算日\
@@ -283,10 +283,10 @@ if (curent_module=="AOS_Contracts") {
         
         //说明
         r2.innerHTML +="<div class='pull-left'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_DESCRIPTION')+":</div>"+
-                "<textarea tabindex='116' name='product_item_description[" + prodln + "]' id='product_item_description" + prodln + "' rows='2' cols='23'></textarea></div>";
+                "<textarea tabindex='116' name='product_item_description[" + prodln + "]' id='product_item_description" + prodln + "' rows='2' cols='19' style='padding-top:0px'></textarea></div>";
         //备注
         r2.innerHTML +="<div class='pull-left' style='margin-left:10px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NOTE')+":</div>"+
-                "<textarea tabindex='116' name='product_description[" + prodln + "]' id='product_description" + prodln + "' rows='2' cols='23'></textarea></div>";
+                "<textarea tabindex='116' name='product_description[" + prodln + "]' id='product_description" + prodln + "' rows='2' cols='19' style='padding-top:0px'></textarea></div>";
         setProductSettlementPeriodChange(document.getElementById('product_settlement_period_c'+prodln),prodln);
         /*var y1 = tablebody.insertRow(-1);
         //y1.style.cssText="display:none";
@@ -407,7 +407,7 @@ function formatListPrice(ln){
     if (document.getElementById(tableid + '_head') !== null) {
         document.getElementById(tableid + '_head').style.display = "";
     }
-
+    document.getElementById(tableid).setAttribute("style","width:100%"); 
     var vat_hidden = document.getElementById("vathidden").value;
     var discount_hidden = document.getElementById("discounthidden").value;
     
@@ -420,7 +420,7 @@ function formatListPrice(ln){
 
     var a = x.insertCell(0);
     a.colSpan = "4";
-    a.innerHTML = "<textarea name='service_name[" + servln + "]' id='service_name" + servln + "' size='16' cols='64' title='' tabindex='116'></textarea><input type='hidden' name='service_product_id[" + servln + "]' id='service_product_id" + servln + "' size='20' maxlength='50' value='0'>";
+    a.innerHTML = "<textarea name='service_name[" + servln + "]' id='service_name" + servln + "' size='16' cols='64' title='' tabindex='116' style='padding-top:0px'></textarea><input type='hidden' name='service_product_id[" + servln + "]' id='service_product_id" + servln + "' size='20' maxlength='50' value='0'>";
 
     var a1 = x.insertCell(1);
     a1.innerHTML = "<input type='text' style='text-align: right; width:115px;' name='service_product_list_price[" + servln + "]' id='service_product_list_price" + servln + "' size='11' maxlength='50' value='' title='' tabindex='116'   onblur='calculateLine(" + servln + ",\"service_\");'>";
@@ -470,17 +470,17 @@ function formatListPrice(ln){
         r.colSpan="11";
 
         //结算周期 首次结算日
-        r.innerHTML="<div class='pull-left col-md-7' style='padding: 0px'>"+
+        r.innerHTML="<div class='pull-left col-md-8' style='padding: 0px'>"+
         "<div class='col-md-4' style='padding:0px'>"+
             "<div class='pull-left'>"+
             "<div style='height:30px; line-height:30px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_SETTLEMENT_PERIOD_C')+":</div>"+
             "<div style='padding-top:10px'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_INITIAL_ACCOUNT_DAY')+":</div>"+
             "</div>"+
-            "<div class='pull-left'>"+
+            "<div class='pull-left' style='width:100px'>"+
             "<select tabindex='0' name='service_settlement_period_c[" + servln + "]' onchange='setServiceSettlementPeriodChange(this,"+servln+");'"+ " id='service_settlement_period_c" + servln + "'>" + settlement_period_option +"</select>"+
             "&nbsp;<select id='service_number_of_periods_c"+servln+"' name='service_number_of_periods_c["+servln+"]' onchange='calculateLine("+servln+",\"service_\")'>"+number_of_periods_c_hidden+"</select>"+
             '<span id="span_service_initial_account_day_c'+servln+'" class="input-group date"  style="padding-top:5px">'+
-            '<input id="service_initial_account_day_c' + servln + '" class="date_input pull-left" readOnly="readOnly" style="width:75px" autocomplete="off" name="service_initial_account_day_c[' + servln + ']" value="" title="" tabindex="0" type="text" onchange="setNextDayVal(\'service_\','+servln+',this)"/>'+
+            '<input id="service_initial_account_day_c' + servln + '" class="date_input pull-left" readOnly="readOnly" style="width:120px" autocomplete="off" name="service_initial_account_day_c[' + servln + ']" value="" title="" tabindex="0" type="text" onchange="setNextDayVal(\'service_\','+servln+',this)"/>'+
             '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span></span>'+
             "</div>"+
         "</div>"+
@@ -489,12 +489,12 @@ function formatListPrice(ln){
             "<div style='height:30px; line-height:30px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_START_C')+":</div>"+
             "<div style='padding-top:10px'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_NEXT_ACCOUNT_DAY')+":</div>"+
             "</div>"+
-            "<div class='pull-left'>"+
+            "<div class='pull-left' style='width:100px'>"+
             '<span id="span_service_effective_start_c' + servln + '" class="input-group date show_calendar pull-left">'+
-            '<input id="service_effective_start_c' + servln + '" class="date_input pull-left" style="width:75px" autocomplete="off" name="service_effective_start_c[' + servln + ']" value="" title="" tabindex="0" type="text"><span class="input-group-addon">'+
+            '<input id="service_effective_start_c' + servln + '" class="date_input pull-left" style="width:120px" autocomplete="off" name="service_effective_start_c[' + servln + ']" value="" title="" tabindex="0" type="text"><span class="input-group-addon">'+
             '<span class="glyphicon glyphicon-calendar"></span></span></span>'+
             "<span id='span_service_next_account_day_c"+servln+"' class='input-group date'  style='padding-top:5px'>"+
-            "<input type='text' class='date_input pull-left' id='service_next_account_day_c"+servln+"' name='service_next_account_day_c["+servln+"]' style='width:75px'/>"+
+            "<input type='text' class='date_input pull-left' id='service_next_account_day_c"+servln+"' name='service_next_account_day_c["+servln+"]' style='width:120px'/>"+
             "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></span>"+
             "</div>"+
         "</div>"+
@@ -503,22 +503,22 @@ function formatListPrice(ln){
             "<div style='height:30px; line-height:30px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_END_C')+":</div>"+
             "<div style='padding-top:10px'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_FINAL_ACCOUNT_DAY')+":</div>"+
             "</div>"+
-            "<div class='pull-left'>"+
+            "<div class='pull-left' style='width:100px'>"+
             '<span id="span_service_effective_end_c'+ servln +'" class="input-group date show_calendar">'+
-            '<input id="service_effective_end_c' + servln + '" class="date_input pull-left" style="width:75px" autocomplete="off" name="service_effective_end_c[' + servln + ']" value="" title="" tabindex="0" type="text"><span class="input-group-addon">'+
+            '<input id="service_effective_end_c' + servln + '" class="date_input pull-left" style="width:120px" autocomplete="off" name="service_effective_end_c[' + servln + ']" value="" title="" tabindex="0" type="text"><span class="input-group-addon">'+
             '<span class="glyphicon glyphicon-calendar"></span></span></span>'+
             "<span id='span_service_final_account_day_c"+servln+"' class='input-group date' style='padding-top:5px'>"+
-            "<input type='text' class='date_input pull-left' id='service_final_account_day_c"+servln+"' name='service_final_account_day_c["+servln+"]' disabled  style='width:75px'/>"+
+            "<input type='text' class='date_input pull-left' id='service_final_account_day_c"+servln+"' name='service_final_account_day_c["+servln+"]' disabled  style='width:120px'/>"+
             "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></span>"+
             "</div>"+
         "</div></div>";
         //终止日期
         //说明
         r.innerHTML +="<div class='pull-left'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_DESCRIPTION')+":</div>"+
-                "<textarea tabindex='116' name='service_item_description[" + servln + "]' id='product_item_description" + servln + "' rows='2' cols='23'></textarea></div>";
+                "<textarea tabindex='116' name='service_item_description[" + servln + "]' id='product_item_description" + servln + "' rows='2' cols='20' style='padding-top:0px'></textarea></div>";
         //备注
         r.innerHTML +="<div class='pull-left' style='margin-left:10px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NOTE')+":</div>"+
-                "<textarea tabindex='116' name='service_description[" + servln + "]' id='product_description" + servln + "' rows='2' cols='23'></textarea></div>";
+                "<textarea tabindex='116' name='service_description[" + servln + "]' id='product_description" + servln + "' rows='2' cols='20' style='padding-top:0px'></textarea></div>";
         setServiceSettlementPeriodChange(document.getElementById('service_settlement_period_c'+servln),servln);
     }else{
         var row=tablebody.insertRow(-1);
@@ -708,7 +708,7 @@ function formatListPrice(ln){
     }
     table.style.whiteSpace = 'nowrap';
 
-    table.width = '950';
+    table.width = '100%';
     a.appendChild(table);
 
 
@@ -794,32 +794,32 @@ insertServiceHeader(serviceTable.id);
     footer_cell.innerHTML="<input type='button' tabindex='116' class='button' value='"+SUGAR.language.get(module_sugar_grp1, 'LBL_ADD_PRODUCT_LINE')+"' id='"+productTable.id+"addProductLine' onclick='insertProductLine(\""+productTable.id+"\",\""+groupn+"\")' />";
     footer_cell.innerHTML+=" <input type='button' tabindex='116' class='button' value='"+SUGAR.language.get(module_sugar_grp1, 'LBL_ADD_SERVICE_LINE')+"' id='"+serviceTable.id+"addServiceLine' onclick='insertServiceLine(\""+serviceTable.id+"\",\""+groupn+"\")' />";
     if(enable_groups){
-        footer_cell.innerHTML+="<span style='float: right;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_TOTAL_AMT')+":&nbsp;&nbsp;<input name='group_total_amt[]' id='"+ table.id +"total_amt' size='21' maxlength='26' value='' title='' tabindex='120' type='text' readonly></span>";
+        footer_cell.innerHTML+="<span style='float: right;'><div>"+SUGAR.language.get(module_sugar_grp1, 'LBL_TOTAL_AMT')+":&nbsp;&nbsp;</div><div><input name='group_total_amt[]' id='"+ table.id +"total_amt' size='21' maxlength='26' value='' title='' tabindex='120' type='text' readonly></div></span>";
 
         var footer_row2=tablefooter.insertRow(-1);
         var footer_cell2 = footer_row2.insertCell(0);
         footer_cell2.scope="row";
         footer_cell2.colSpan="20";
-        footer_cell2.innerHTML="<span style='float: right;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_DISCOUNT_AMOUNT')+":&nbsp;&nbsp;<input name='group_discount_amount[]' id='"+ table.id +"discount_amount' size='21' maxlength='26' value='' title='' tabindex='120' type='text' readonly></span>";
+        footer_cell2.innerHTML="<span style='float: right;'><div>"+SUGAR.language.get(module_sugar_grp1, 'LBL_DISCOUNT_AMOUNT')+":&nbsp;&nbsp;</div><div><input name='group_discount_amount[]' id='"+ table.id +"discount_amount' size='21' maxlength='26' value='' title='' tabindex='120' type='text' readonly></div></span>";
 
         var footer_row3=tablefooter.insertRow(-1);
         var footer_cell3 = footer_row3.insertCell(0);
         footer_cell3.scope="row";
         footer_cell3.colSpan="20";
-        footer_cell3.innerHTML="<span style='float: right;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_SUBTOTAL_AMOUNT')+":&nbsp;&nbsp;<input name='group_subtotal_amount[]' id='"+ table.id +"subtotal_amount' size='21' maxlength='26' value='' title='' tabindex='120' type='text' readonly></span>";
+        footer_cell3.innerHTML="<span style='float: right;'><div>"+SUGAR.language.get(module_sugar_grp1, 'LBL_SUBTOTAL_AMOUNT')+":&nbsp;&nbsp;</div><div><input name='group_subtotal_amount[]' id='"+ table.id +"subtotal_amount' size='21' maxlength='26' value='' title='' tabindex='120' type='text' readonly></div></span>";
 
         var footer_row4=tablefooter.insertRow(-1);
         var footer_cell4 = footer_row4.insertCell(0);
         footer_cell4.scope="row";
         footer_cell4.colSpan="20";
-        footer_cell4.innerHTML="<span style='float: right;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_TAX_AMOUNT')+":&nbsp;&nbsp;<input name='group_tax_amount[]' id='"+ table.id +"tax_amount' size='21' maxlength='26' value='' title='' tabindex='120' type='text' readonly></span>";
+        footer_cell4.innerHTML="<span style='float: right;'><div>"+SUGAR.language.get(module_sugar_grp1, 'LBL_TAX_AMOUNT')+":&nbsp;&nbsp;</div><div><input name='group_tax_amount[]' id='"+ table.id +"tax_amount' size='21' maxlength='26' value='' title='' tabindex='120' type='text' readonly></div></span>";
 
         if(document.getElementById('subtotal_tax_amount') !== null){
             var footer_row5=tablefooter.insertRow(-1);
             var footer_cell5 = footer_row5.insertCell(0);
             footer_cell5.scope="row";
             footer_cell5.colSpan="20";
-            footer_cell5.innerHTML="<span style='float: right;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_SUBTOTAL_TAX_AMOUNT')+":&nbsp;&nbsp;<input name='group_subtotal_tax_amount[]' id='"+ table.id +"subtotal_tax_amount' size='21' maxlength='26' value='' title='' tabindex='120' type='text' readonly></span>";
+            footer_cell5.innerHTML="<span style='float: right;'><div>"+SUGAR.language.get(module_sugar_grp1, 'LBL_SUBTOTAL_TAX_AMOUNT')+":&nbsp;&nbsp;</div><div><input name='group_subtotal_tax_amount[]' id='"+ table.id +"subtotal_tax_amount' size='21' maxlength='26' value='' title='' tabindex='120' type='text' readonly></div></span>";
 
             if (typeof currencyFields !== 'undefined'){
                 currencyFields.push("" + table.id+ 'subtotal_tax_amount');
@@ -830,7 +830,7 @@ insertServiceHeader(serviceTable.id);
         var footer_cell6 = footer_row6.insertCell(0);
         footer_cell6.scope="row";
         footer_cell6.colSpan="20";
-        footer_cell6.innerHTML="<span style='float: right;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_GROUP_TOTAL')+":&nbsp;&nbsp;<input name='group_total_amount[]' id='"+ table.id +"total_amount' size='21' maxlength='26' value='' title='' tabindex='120' type='text' readonly></span>";
+        footer_cell6.innerHTML="<span style='float: right;'><div>"+SUGAR.language.get(module_sugar_grp1, 'LBL_GROUP_TOTAL')+":&nbsp;&nbsp;</div><div><input name='group_total_amount[]' id='"+ table.id +"total_amount' size='21' maxlength='26' value='' title='' tabindex='120' type='text' readonly></div></span>";
 
         if (typeof currencyFields !== 'undefined'){
             currencyFields.push("" + table.id+ 'total_amt');

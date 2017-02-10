@@ -3,17 +3,19 @@ function attr_info(id){
 	$.ajax({
 		url:'index.php?to_pdf=true&module=HAT_Counting_Tasks&action=counting_task_attr',
 		data:'&id='+id+'&type=INV_TASKS&module_action=DetailView&module_name=HAT_Counting_Tasks&module_id='+record_id+'&prefix='+''
-		+'&prodln='+'',
+		+'&prodln='+''+'&asset_id='+'',
 		type:'POST',
 		success:function(result){
+			//console.log(result);
 			get_html(result);
 		}
 	});
 }
 
 function get_html(result){
-	var lineItems=document.getElementById('LBL_EDITVIEW_PANEL1');
-  	lineItems.innerHTML=result;
+  	$("#line_items").parent().prev().hide();
+  	$("#line_items").parent().toggleClass("col-sm-10","col-sm-12");
+  	$("#line_items").replaceWith(result);
 }
 
 $(function(){
@@ -22,6 +24,6 @@ $(function(){
 		attr_info(id);
 	}
 	else{
-		$("#detailpanel_2").hide();
+		$("#detailpanel_0").hide();
 	}
 })

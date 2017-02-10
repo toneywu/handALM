@@ -23,10 +23,10 @@ array (
           3 => 'FIND_DUPLICATES',
           4 => 
           array (
-            'customCode' => '<input type="submit" class="button" onClick="createTask();" value="{$MOD.LBL_CREATE_TASK}">',
+            'customCode' => '<input type="button" class="button" onClick="createTask();" value="{$MOD.LBL_CREATE_TASK}">',
             'sugar_html' => 
             array (
-              'type' => 'submit',
+              'type' => 'button',
               'value' => '{$MOD.LBL_CREATE_TASK}',
               'htmlOptions' => 
               array (
@@ -40,10 +40,10 @@ array (
           ),
           'TASK_TOAPP' => 
           array (
-            'customCode' => '<input type="submit" class="button" onClick="this.form.action.value=\'taskToapp\';" value="{$MOD.LBL_TASK_TOAPP}">',
+            'customCode' => '<input type="button" class="button" onClick="this.form.action.value=\'taskToapp\';" value="{$MOD.LBL_TASK_TOAPP}">',
             'sugar_html' => 
             array (
-              'type' => 'submit',
+              'type' => 'button',
               'value' => '{$MOD.LBL_TASK_TOAPP}',
               'htmlOptions' => 
               array (
@@ -57,10 +57,10 @@ array (
           ),
           'DATA_TOCOUNTING' => 
           array (
-            'customCode' => '<input type="submit" class="button" onClick="datatocounting();" value="{$MOD.LBL_DATA_TOCOUNTING}">',
+            'customCode' => '<input type="button" class="button" onClick="datatocounting();" value="{$MOD.LBL_DATA_TOCOUNTING}">',
             'sugar_html' => 
             array (
-              'type' => 'submit',
+              'type' => 'button',
               'value' => '{$MOD.LBL_DATA_TOCOUNTING}',
               'htmlOptions' => 
               array (

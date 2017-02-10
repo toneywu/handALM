@@ -22,7 +22,7 @@ class HAT_Counting_BatchsViewDetail extends ViewDetail
 
 		$param=array(
 			'current_framework' => '450e732f-63e9-8cb9-0b12-57ad79663c1d',
-			'batch_id' => '4dd8b0ff-e300-9939-21ae-58844db33ed6',
+			'batch_id' => 'd9868a35-621d-6549-7774-588de8e86cb5',
 			);
 		$auto_create_task = new Auto_Create_Task();
 		$auto_create_task->hat_counting($param);*/
@@ -45,14 +45,14 @@ class HAT_Counting_BatchsViewDetail extends ViewDetail
 					async:false,
 					success:function(data){
 						data=JSON.parse(data);
-						tds.eq(4).find("span").html(data["total_counting"]);
-						tds.eq(5).find("span").html(data["actual_counting"]);
-						tds.eq(6).find("span").html(data["un_actual_counting"]);
-						tds.eq(7).find("span").html(data["matched_count"]);
-						tds.eq(8).find("span").html(data["different_count"]);
-						tds.eq(9).find("span").html(data["overage_count"]);
-						tds.eq(10).find("span").html(data["loss_count"]);
-						tds.eq(11).find("span").html(data["processed_count"]);
+						tds.eq(3).find("span").html(data["total_counting"]);
+						tds.eq(4).find("span").html(data["actual_counting"]);
+						tds.eq(5).find("span").html(data["un_actual_counting"]);
+						tds.eq(6).find("span").html(data["matched_count"]);
+						tds.eq(7).find("span").html(data["different_count"]);
+						tds.eq(8).find("span").html(data["overage_count"]);
+						tds.eq(9).find("span").html(data["loss_count"]);
+						tds.eq(10).find("span").html(data["processed_count"]);
 					}
 				});
 			}

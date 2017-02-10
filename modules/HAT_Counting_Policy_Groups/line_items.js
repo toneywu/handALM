@@ -5,7 +5,7 @@ var num;
 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
 
 function insertLineHeader(tableid){
-  $("#line_items_label").hide();//隐藏SugarCRM字段
+  $("#line_items_span").parent().prev().hide();//隐藏SugarCRM字段
 
   tablehead = document.createElement("thead");
   tablehead.id = tableid +"_head";
@@ -16,18 +16,25 @@ function insertLineHeader(tableid){
  /* var a=x.insertCell(0);
  a.innerHTML=SUGAR.language.get('HAT_Counting_Policies', 'LBL_POLICY_GROUP');*/
  var a=x.insertCell(0);
+ a.width="10%";
  a.innerHTML=SUGAR.language.get('HAT_Counting_Policies', 'LBL_SPLIT_TYPE');
  var b=x.insertCell(1);
+ b.width="10%";
  b.innerHTML=SUGAR.language.get('HAT_Counting_Policies', 'LBL_NAME');
  var c=x.insertCell(2);
+ c.width="20%";
  c.innerHTML=SUGAR.language.get('HAT_Counting_Policies', 'LBL_DATA_POPULATE_SQL');
  var c2=x.insertCell(3);
+ c2.width="20%";
  c2.innerHTML=SUGAR.language.get('HAT_Counting_Policies', 'LBL_ADDITIONAL_LOGIC');
  var c1=x.insertCell(4);
+ c1.width="15%";
  c1.innerHTML=SUGAR.language.get('HAT_Counting_Policies', 'LBL_TASK_TEMPLATES');
  var b1=x.insertCell(5);
+ b1.width="15%";
  b1.innerHTML=SUGAR.language.get('HAT_Counting_Policies', 'LBL_ENABLED_FLAG');
  var d=x.insertCell(6);
+ d.width="10%";
  d.innerHTML=SUGAR.language.get('HAT_Counting_Policies', 'LBL_DESCRIPTION');
  var f=x.insertCell(7);
  f.innerHTML='&nbsp;';
@@ -38,7 +45,7 @@ function insertLineData(line_data ){ //将数据写入到对应的行字段中
   var ln = 0;
   if(line_data.id != '0' && line_data.id !== ''){
 
-    ln = insertLineElements("lineItems");
+    ln = insertLineElements("lineItems_policy");
     $("#line_id".concat(String(ln))).val(line_data.id);
     $("#line_name".concat(String(ln))).val(line_data.name);
     $("#line_data_populate_sql".concat(String(ln))).val(line_data.data_populate_sql);
@@ -73,13 +80,13 @@ var z1 = tablebody.insertRow(-1);
 z1.id = 'line_displayed' + prodln;
 z1.className = 'oddListRowS1';
 z1.innerHTML  =
-//"<td><span name='displayed_line_group_name[" + prodln + "]' id='displayed_line_group_name" + prodln + "'></span></td>" +
-"<td><span name='displayed_line_split_type[" + prodln + "]' id='displayed_line_split_type" + prodln + "'></span></td>" +
-"<td><span name='displayed_line_name[" + prodln + "]' id='displayed_line_name" + prodln + "'></span></td>"+
-"<td><span name='displayed_line_data_populate_sql[" + prodln + "]' id='displayed_line_data_populate_sql" + prodln + "'></span></td>"+
-"<td><span name='displayed_line_additional_logic[" + prodln + "]' id='displayed_line_additional_logic" + prodln + "'></span></td>"+
-"<td><span name='displayed_line_template_name[" + prodln + "]' id='displayed_line_template_name" + prodln + "'></span></td>"+
-"<td><span name='displayed_line_enabled_flag[" + prodln + "]' id='displayed_line_enabled_flag" + prodln + "'></span></td>"+
+//"<td><span name='displayed_line_group_name[" + prodln + "]' id='displayed_line_group_name" + prodln + "'></span></td>" +style='word-wrap:break-word'
+"<td><span name='displayed_line_split_type[" + prodln + "]' id='displayed_line_split_type" + prodln + "' ></span></td>" +
+"<td><span name='displayed_line_name[" + prodln + "]' id='displayed_line_name" + prodln + "' ></span></td>"+
+"<td><span name='displayed_line_data_populate_sql[" + prodln + "]' id='displayed_line_data_populate_sql" + prodln + "' ></span></td>"+
+"<td><span name='displayed_line_additional_logic[" + prodln + "]' id='displayed_line_additional_logic" + prodln + "' ></span></td>"+
+"<td><span name='displayed_line_template_name[" + prodln + "]' id='displayed_line_template_name" + prodln + "' ></span></td>"+
+"<td><span name='displayed_line_enabled_flag[" + prodln + "]' id='displayed_line_enabled_flag" + prodln + "' ></span></td>"+
 "<td><span name='displayed_line_description[" + prodln + "]' id='displayed_line_description" + prodln + "'></span></td>"+
 "<td><input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'></td>";
 
@@ -90,7 +97,7 @@ z1.innerHTML  =
 
   x.innerHTML  = "<td colSpan='"+columnNum1+"'>"+
   "<link rel='stylesheet' type='text/css' href='custom/resources/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css'>"+
-  "<table border='0' class='lineEditor' width='100%'>"+
+  "<table border='0' class='lineEditor' width='100%' style='display:table'>"+
 
   "<tr>"+
   "<input name='line_id["+prodln+"]' id='line_id"+prodln+"' value='' type='hidden'>"+
@@ -151,7 +158,7 @@ function renderLine(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_line_template_name"+ln).html($("#line_template_name"+ln).val());
   $("#displayed_line_additional_logic"+ln).html($("#line_additional_logic"+ln).val());
 
-  $("#lineItems tr td").each(function(){
+  $("#lineItems_policy tr td").each(function(){
     $(this).css('vertical-align','middle');
   });
 }

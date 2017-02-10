@@ -3,7 +3,7 @@ function attr_info(id){
 	$.ajax({
 		url:'index.php?to_pdf=true&module=HAT_Counting_Tasks&action=counting_task_attr',
 		data:'&id='+id+'&type=INV_TASK_DETAILS&module_action=DetailView&module_name=HAT_Counting_Lines&module_id='+record_id+'&prefix='+''
-		+'&prodln='+'',
+		+'&prodln='+''+'&asset_id='+'',
 		type:'POST',
 		success:function(result){
 			get_html(result);
@@ -12,8 +12,9 @@ function attr_info(id){
 }
 
 function get_html(result){
-	var lineItems=document.getElementById('LBL_EDITVIEW_PANEL3');
-  	lineItems.innerHTML=result;
+  	$("#line_asset_items").parent().prev().hide();
+  	$("#line_asset_items").parent().toggleClass("col-sm-10","col-sm-12");
+  	$("#line_asset_items").replaceWith(result);
 }
 
 $(function(){

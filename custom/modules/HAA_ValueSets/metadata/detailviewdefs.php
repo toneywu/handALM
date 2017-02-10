@@ -14,6 +14,9 @@ array (
           1 => 'DUPLICATE',
           2 => 'DELETE',
           3 => 'FIND_DUPLICATES',
+          4 => array (
+                'customCode' => '<input type="button" class="button" onClick="openValueSetPopup(\'ACCOUNT\',\'value\',\'id\');" value="打开窗口">',
+            ),
           ),
         ),
       'includes' => 
@@ -21,6 +24,10 @@ array (
         0 => 
         array (
           'file' => 'modules/HAA_ValueSets/js/HAA_ValueSets_detailview.js',
+          ),
+        1 => 
+        array (
+          'file' => 'modules/HAA_ValueSets/js/invoke_value_set.js',
           ),
         ),
       'maxColumns' => '2',

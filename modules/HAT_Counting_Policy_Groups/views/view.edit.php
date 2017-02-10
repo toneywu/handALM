@@ -40,13 +40,13 @@ function displayLineItems(){
 	$html = '';
 	$html .= '<script src="modules/HAT_Counting_Policy_Groups/line_items.js"></script>';
 	echo $html;
-	$html .="<table border='0' cellspacing='4' width='100%' id='lineItems' class='listviewtable' style='table-layout: fixed;'></table>";
+	$html .="<table border='0' cellspacing='4' id='lineItems_policy' class='listviewtable'></table>";
 	echo "<script>replace_display_lines(" .json_encode($html).",'line_items_span'".");</script>";
 	echo '
 	<input type="hidden" name="splittypeidden" id="splittypeidden" value="'.get_select_options_with_id($app_list_strings['hat_counting_split_type'], '').'">';
 
 
-	echo '<script>insertLineHeader(\'lineItems\');</script>';
+	echo '<script>insertLineHeader(\'lineItems_policy\');</script>';
 		if($focus->id!=''){//如果不是新增（即如果是编辑已有记录）
 			$sql = "SELECT
             hcp.id,
@@ -79,7 +79,7 @@ function displayLineItems(){
 			}
 		}
 
-		echo "<script>insertLineFootor('lineItems');</script>";
+		echo "<script>insertLineFootor('lineItems_policy');</script>";
 
 	}
 

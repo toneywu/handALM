@@ -4,7 +4,7 @@ if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 $layout_defs['HAT_Counting_Lines'] = array(
     // list of what Subpanels to show in the DetailView
   'subpanel_setup' => array(
-    'hat_counting_lines_hat_counting_results' => array(
+    /*'hat_counting_lines_hat_counting_results' => array(
       'order' => 10,
       'module' => 'HAT_Counting_Results',
       'sort_order' => 'asc',
@@ -14,7 +14,7 @@ $layout_defs['HAT_Counting_Lines'] = array(
       'get_subpanel_data' => 'hat_counting_lines_hat_counting_results',
       'top_buttons' => 
       array (),
-      ),  
+      ), */ 
     'hat_counting_lines_documents'=> array (
       'order' => 20,
       'module' => 'Documents',

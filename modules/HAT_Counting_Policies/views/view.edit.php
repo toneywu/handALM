@@ -19,7 +19,7 @@ class HAT_Counting_PoliciesViewEdit extends ViewEdit
 		parent::display();
 		if($this->bean->split_type!='CUSTOM'){
 		echo '<script>
-      			$("#detailpanel_2").hide();
+      			$("#detailpanel_0").hide();
 			</script>';
 		}
 		$this->displayLineItems();
@@ -32,12 +32,12 @@ class HAT_Counting_PoliciesViewEdit extends ViewEdit
 		$html = '';
 		$html .= '<script src="modules/HAT_Counting_Policies/line_items.js"></script>';
 		echo $html;
-		$html .="<table border='0' cellspacing='4' width='100%' id='lineItems' class='listviewtable' style='table-layout: fixed;'></table>";
+		$html .="<table border='0' cellspacing='4' width='100%' id='lineItems_line' class='listviewtable' style='table-layout: fixed;'></table>";
 		echo "<script>replace_display_lines(" .json_encode($html).",'line_items_span'".");</script>";
 		/*echo '
 		<input type="hidden" name="splittypeidden" id="splittypeidden" value="'.get_select_options_with_id($app_list_strings['	'], '').'">';*/
 		
-		echo '<script>insertLineHeader(\'lineItems\');</script>';
+		echo '<script>insertLineHeader(\'lineItems_line\');</script>';
 		if($focus->id!=''){//如果不是新增（即如果是编辑已有记录）
 			$sql = "SELECT
             hcp.id,
@@ -70,7 +70,7 @@ class HAT_Counting_PoliciesViewEdit extends ViewEdit
 			}
 		}
 
-		echo "<script>insertLineFootor('lineItems');</script>";
+		echo "<script>insertLineFootor('lineItems_line');</script>";
 
 	}
 

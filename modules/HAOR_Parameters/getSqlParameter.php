@@ -17,6 +17,8 @@ if($sql==''&&$id!=''){
 		$sql=$row0['sql_statement'];
 	}
 }
+$sql = str_replace("&quot;","'",$sql,$count);
+$sql = str_replace("&#039;","'",$sql,$count);
 $psql=$sql;
 $ln = 0;
 $rt = 'select count(*) data_count from ('.$sql.') dc';
@@ -97,7 +99,7 @@ $html.='<table class="list view" width="100%" cellspacing="0" cellpadding="0" bo
 		.'					<td align="left">&nbsp;</td>'
 		.'					<td nowrap="nowrap" align="right">';
 
-		if($ln==0) {
+		if($ln==0||$ln<=25) {
 			$html .='					<button type="button" title="首页" class="button" disabled="">'
 			.'							<img src="themes/SuiteR_HANDALM/images/start_off.gif?v=6T2wqZkzRRtQXSbbOJRC2A" alt="首页" border="0" align="absmiddle">'
 			.'						</button>'
@@ -165,12 +167,11 @@ $html.='<table class="list view" width="100%" cellspacing="0" cellpadding="0" bo
 		$html.='</tbody></table>';
 		$html.="<form id='p_form' action='index.php?to_pdf=true&module=HAOR_Parameters&action=getSqlParameter' method='POST' target='".$form_name."'>
 		<input type='hidden' name='id' value='".$id."'>
-		<input type='hidden' name='sql' value='".$psql."'>
 		<input type='hidden' name='id_file' value='".$id_file."'>
 		<input type='hidden' name='name_file' value='".$name_file."'>
 		<input type='hidden' name='form_name' value='".$form_name."'>
 		<input type='hidden' id='offset' name='offset' value='".$offset."'>
 	</form></body>";
 	echo $html;
-
+	echo "<script>psql=\"".$psql."\";</script>";
 	?>
