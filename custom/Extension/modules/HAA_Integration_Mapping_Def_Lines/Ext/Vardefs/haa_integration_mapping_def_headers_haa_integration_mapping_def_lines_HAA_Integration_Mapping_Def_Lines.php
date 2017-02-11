@@ -1,5 +1,5 @@
 <?php
-// created: 2017-01-24 17:29:09
+// created: 2017-02-11 16:24:02
 $dictionary["HAA_Integration_Mapping_Def_Lines"]["fields"]["haa_integr105ag_def_lines"] = array (
   'name' => 'haa_integr105ag_def_lines',
   'type' => 'link',

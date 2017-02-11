@@ -77,6 +77,8 @@ class HAT_Counting_Tasks extends HAT_Counting_Tasks_sugar {
 				}
 			}
 		}
+
+		parent::save($check_notify);
 		require_once('modules/HAT_Counting_Batchs/auto_create_task.php');
 		$auto_create_task = new Auto_Create_Task();
 		$sql_group="SELECT
@@ -92,18 +94,18 @@ class HAT_Counting_Tasks extends HAT_Counting_Tasks_sugar {
 		}
 		$row_group = $db->fetchByAssoc($result_group);
 		$return_name=$auto_create_task->setTaskname($row_group,$this->hat_counting_task_templates_id_c,$this->name);
+		/*var_dump($return_name);
+		exit();*/
 		$this->name=$return_name["task_name"];
-		parent::save($check_notify);
-		
 		//更新盘点任务名称
-			/*$query_update_name="UPDATE hat_counting_tasks
-			SET hat_counting_tasks.name = '".$this->name."'
-			WHERE
-			id ='".$this->id."'";
-			$result_update_name = $db->query($query_update_name);
-			if(!$result_update_name){
-				die("更新盘点任务名称失败");
-			}*/
+		$query_update_name="UPDATE hat_counting_tasks
+		SET hat_counting_tasks.name = '".$this->name."'
+		WHERE
+		id ='".$this->id."'";
+		$result_update_name = $db->query($query_update_name);
+		if(!$result_update_name){
+			die("更新盘点任务名称失败");
+		}
 	}
 	
 }

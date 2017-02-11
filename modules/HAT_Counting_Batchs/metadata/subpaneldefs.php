@@ -17,7 +17,7 @@ $layout_defs['HAT_Counting_Batchs'] = array(
       ),
     ),
    'hat_counting_tasks' => array(
-    'order' => 20,
+    'order' => 10,
     'module' => 'HAT_Counting_Tasks',
     'sort_order' => 'asc',
     'sort_by' => 'task_number',

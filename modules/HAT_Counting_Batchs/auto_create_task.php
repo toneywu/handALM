@@ -35,7 +35,7 @@ class Auto_Create_Task
 		and b.hat_counti9a14_batchs_ida ='".$param["batch_id"]."'";
 		$result_batch_rule = $db->query($sql_batch_rule);
 		if(!$result_batch_rule){
-			return "盘点范围及拆分策略信息拉取失败";
+			return "盘点范围及拆分策略信息拉取失败SQL=".$sql_batch_rule;
 		}
 		//循环盘点当前批拆分规则及策略
 		//var_dump("循环盘点当前批拆分规则及策略");
@@ -45,7 +45,7 @@ class Auto_Create_Task
 			$query_asset_info = "call HAT_Counting_asset_info('".$param["current_framework"]."','".$row_batch_rule["id"]."','".$row_batch_rule["hat_asset_locations_id_c"]."','".$row_batch_rule["location_drilldown"]."','".$row_batch_rule["account_id_c"]."','".$row_batch_rule["org_drilldown"]."','".$row_batch_rule["account_id_c1"]."','".$row_batch_rule["using_org_drilldown"]."','".$row_batch_rule["haa_codes_id_c"]."','".$row_batch_rule["major_drilldown"]."','".$row_batch_rule["aos_product_categories_id_c"]."','".$row_batch_rule["category_drilldown"]."','".$row_batch_rule["user_contacts_id_c"]."','".$row_batch_rule["own_contacts_id_c"]."',@time);";
 			$result_asset_info = $db->query($query_asset_info);
 			if(!$result_asset_info){
-				return "通过拆分范围筛选资产数据失败";
+				return "通过拆分范围筛选资产数据失败SQL=".$query_asset_info;
 			}
 			$return_time=$db->query("select @time");
 			$row_time = $db->fetchByAssoc($return_time);
@@ -64,14 +64,15 @@ class Auto_Create_Task
 			//var_dump($sql_policy_info);
 			$result_policy_info = $db->query($sql_policy_info);
 			if(!$result_policy_info){
-				return "盘点策略信息拉取失败";
+				return "盘点策略信息拉取失败SQL=".$sql_policy_info;
 			}
 			$row_policy_info = $db->fetchByAssoc($result_policy_info);
 			//解析抽数SQL,将数据放入临时表
 			$sql_counting_info=$row_policy_info["data_populate_sql"];
+			//var_dump($sql_counting_info);
 			$result_counting_info = $db->query($sql_counting_info);
 			if(!$result_counting_info){
-				return "数据抽取逻辑执行失败";
+				return "数据抽取逻辑执行失败SQL=".$sql_counting_info;
 			}
 			//$times=0;
 			while ($row_counting_info = $db->fetchByAssoc($result_counting_info)){
@@ -104,7 +105,7 @@ class Auto_Create_Task
 				'".$row_counting_info["line_attribute15"]."')";
 				$result_data_populate_sql = $db->query($query_data_populate_sql);
 				if(!$result_data_populate_sql){
-					return "数据导入hat_counting_task_dtl_tmp表时出错";
+					return "数据导入hat_counting_task_dtl_tmp表时出错SQL=".$query_data_populate_sql;
 				}
 		}//取数结束
 			//var_dump("取数结束");
@@ -137,7 +138,7 @@ class Auto_Create_Task
 				AND h.hat_counti5649olicies_ida ='".$row_batch_rule["hat_counting_policies_id_c"]."'";
 				$result_custom = $db->query($sql_custom);
 				if(!$result_custom){
-					return "自定义分组信息拉取失败";
+					return "自定义分组信息拉取失败SQL=".$sql_custom;
 				}
 				//循环每一个自定义分组
 
@@ -167,9 +168,10 @@ class Auto_Create_Task
 				where a.grouped_flag='N'";
 				$result_if_n = $db->query($sql_if_n);
 				if(!$result_custom){
-					return "判断是否有未分组数据时失败";
+					return "判断是否有未分组数据时失败SQL=".$sql_if_n;
 				}
 				$row_if_n = $db->fetchByAssoc($result_if_n);
+				//var_dump($row_if_n["count"]);
 				if($row_if_n["count"]>0){
 					//var_dump("处理未分组数据");
 					$if_n=array(
@@ -190,11 +192,12 @@ class Auto_Create_Task
 		WHERE
 		a.id = '".$param["batch_id"]."'";
 		//var_dump($time);
-		$result_time = $db->query($query_time, true);
+		$result_time = $db->query($query_time);
 		if(!$result_time){
-			return "回写快照时间失败";
+			return "回写快照时间失败SQL=".$query_time;
 
 		}
+		//var_dump($return_msg);
 		return $return_msg;
 	}
 
@@ -216,7 +219,7 @@ class Auto_Create_Task
 
 		$result_template = $db->query($sql_template);
 		if(!$result_template){
-			return  array('task_name' => $task_name,'msg' => "盘点任务模版信息拉取失败");
+			return  array('task_name' => $task_name,'msg' => "盘点任务模版信息拉取失败SQL=".$sql_template);
 		}
 
 		//循环任务模版明细 获取对应attribute转化的名称拼接到任务名称
@@ -302,7 +305,7 @@ class Auto_Create_Task
 		a.task_attribute15";
 		$result_group = $db->query($sql_group);
 		if(!$result_group){
-			return "逻辑拆分时分组失败";
+			return "逻辑拆分时分组失败SQL=".$sql_group;
 		}
 		//循环每一个分组
 		while($row_group = $db->fetchByAssoc($result_group)){
@@ -318,7 +321,7 @@ class Auto_Create_Task
 			//var_dump($query_insert_task);
 			$result_insert_task = $db->query($query_insert_task);
 			if(!$result_insert_task){
-				return "创建盘点任务失败";
+				return "创建盘点任务失败SQL=".$query_insert_task;
 			}
 			$return_task_id=$db->query("select @task_id");
 			$row_task_id = $db->fetchByAssoc($return_task_id);
@@ -329,7 +332,7 @@ class Auto_Create_Task
 			//var_dump($query_insert_line);
 			$result_insert_line = $db->query($query_insert_line);
 			if(!$result_insert_line){
-				return "创建盘点明细失败";
+				return "创建盘点明细失败SQL=".$query_insert_line;
 			}
 
 		}//分组循环结束
@@ -344,7 +347,7 @@ class Auto_Create_Task
 		//var_dump($query_insert_task);
 		$result_insert_task = $db->query($query_insert_task);
 		if(!$result_insert_task){
-			return "自定义分组创建盘点任务失败";
+			return "自定义分组创建盘点任务失败SQL=".$query_insert_task;
 		}
 		$return_task_id=$db->query("select @task_id");
 		$row_task_id = $db->fetchByAssoc($return_task_id);
@@ -360,7 +363,7 @@ class Auto_Create_Task
 			//var_dump($query_update);
 			$result_update = $db->query($query_update);
 			if(!$result_update){
-				return  "附加逻辑更新盘点任务信息失败";
+				return  "附加逻辑更新盘点任务信息失败SQL=".$query_update;
 			}
 			//对新插入的盘点任务重新查询以便整理attribute信息
 
@@ -372,7 +375,7 @@ class Auto_Create_Task
 			a.id ='".$task_id."'";
 			$result_task = $db->query($sql_task);
 			if(!$result_task){
-				return  "盘点任务信息拉取失败";
+				return  "盘点任务信息拉取失败SQL=".$sql_task;
 			}
 			$row_task = $db->fetchByAssoc($result_task);
 			//找出对应任务模版维护的atrribute信息
@@ -385,7 +388,7 @@ class Auto_Create_Task
 			a.id='".$custom["batch_id"]."'";
 			$result_batch = $db->query($sql_batch);
 			if(!$result_batch){
-				return "盘点批信息拉取失败";
+				return "盘点批信息拉取失败SQL=".$sql_batch;
 			}
 			$row_batch = $db->fetchByAssoc($result_batch);
 			$task_name=$row_batch["name"];
@@ -401,7 +404,7 @@ class Auto_Create_Task
 			id ='".$task_id."'";
 			$result_update_name = $db->query($query_update_name);
 			if(!$result_update_name){
-				return "更新盘点任务名称失败";
+				return "更新盘点任务名称失败SQL=".$query_update_name;
 			}
 			//分组条件处理
 			$group_clause='';
@@ -420,7 +423,7 @@ class Auto_Create_Task
 			//var_dump($sql_group);
 			$result_group = $db->query($sql_group);
 			if(!$result_group){
-				return "分组条件出错";
+				return "分组条件出错SQL=".$sql_group;
 			}
 			while($row_group = $db->fetchByAssoc($result_group)){
 				//调用HAT_Counting_custom_to_line创建盘点明细
@@ -429,7 +432,7 @@ class Auto_Create_Task
 					//var_dump($query_insert_line);
 				$result_insert_line = $db->query($query_insert_line);
 				if(!$result_insert_line){
-					return "创建盘点明细失败";
+					return "创建盘点明细失败SQL=".$query_insert_line;
 				}
 
 			}
@@ -450,7 +453,7 @@ class Auto_Create_Task
 			)";
 			$result_count = $db->query($sql_count);
 			if(!$result_count){
-				return "查询未包含明细记录的任务时出错";
+				return "查询未包含明细记录的任务时出错SQL=".$sql_count;
 			}
 			$row_count = $db->fetchByAssoc($result_count);
 			if($row_count["counting"]>0){
@@ -461,7 +464,7 @@ class Auto_Create_Task
 				id = '".$task_id."'";
 				$result_delete_task = $db->query($query_delete_task);
 				if(!$result_delete_task){
-					return "删除任务失败";
+					return "删除任务失败SQL=".$query_delete_task;
 				}
 			}
 			}//附加逻辑不为空处理结束

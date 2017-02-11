@@ -88,7 +88,7 @@ function display_lines(){
 		echo '<link rel="stylesheet" type="text/css" href="custom/resources/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">';
       $html .= '<script src="modules/HAT_Counting_Tasks/js/line_items.js"></script>';
       echo $html;
-      $html .= "<table border='0' cellspacing='4' width='37.5%' id='lineItems' class='list view table'></table>";
+      $html .= "<table border='0' cellspacing='4'  id='lineItems_line' class='list view table'></table>";
       echo "<script>replace_display_lines(" .json_encode($html).",'line_items_detail_span'".");</script>";
 
       $sql = "SELECT
@@ -148,8 +148,9 @@ function display_lines(){
       $attr_column= json_encode($attr_data);
       $html1 = '<script>
       var attr_label=\''.$attr_label.'\';
-      insertLineHeader("lineItems",attr_label);</script>';
+      insertLineHeader("lineItems_line",attr_label);</script>';
       echo $html1;
+      //echo "<script>insertLineFootor('lineItems_line');</script>";
       $html .= "<script>$(document).ready(function(){";
       while ($row = $focus->db->fetchByAssoc($result)) {
          $row["counting_status"]=$app_list_strings["hat_counting_line_status_list"][$row["counting_status"]];
@@ -174,8 +175,10 @@ function display_lines(){
          $html .= "insertLineData(" . $line_data .",'DetailView',attr_data,'".$focus->id."');";
          $html .= 'resetLineNum();';
       }
+      $html .= "goPagefist();";
       $html .= "})</script>";
       echo $html;
+
 }
 
 }

@@ -94,7 +94,6 @@ class HAA_Integration_System_Def_Headers extends HAA_Integration_System_Def_Head
                 }
                 $lines->currency_id=$this->currency_id;
                 $lines->assigned_user_id=$current_user->id;
-                $lines->name=$lines->column_title;
                 
                 $lines->haa_integration_system_def_headers_id_c=$this->id;
                 

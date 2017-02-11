@@ -41,6 +41,8 @@
 $app_list_strings['moduleList']['HAA_Integration_Mapping_Def_Headers'] = '通用接口-映射结构定义';
 $app_list_strings['moduleList']['HAA_Integration_Mapping_Def_Lines'] = '通用接口-映射结构列';
 $app_list_strings['moduleList']['HAA_Integration_System_Def_Headers'] = '通用接口-接入源系统定义';
+$app_list_strings['moduleList']['HAA_Integration_Mapping_Lines'] = '通用接口-映射段值维护';
+$app_list_strings['moduleList']['HAA_Integration_Mapping_Headers'] = '通用接口-映射维护';
 $app_list_strings['moduleList']['HAA_Integration_System_Def_Lines'] = '通用接口-接入源系统接口列		';
 $app_list_strings['haa_integration_sys_column_name'][''] = ' ';
 $app_list_strings['haa_integration_sys_column_name']['SEGMENT1'] = 'SEGMENT1';

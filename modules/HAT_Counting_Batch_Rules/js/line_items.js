@@ -5,10 +5,11 @@ var num;
 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
 
 function insertLineHeader(tableid){
-  $("#line_items_label").hide();//隐藏SugarCRM字段
+  $("#line_items_span").parent().prev().hide();//隐藏SugarCRM字段
 
   tablehead = document.createElement("thead");
   tablehead.id = tableid +"_head";
+  tablehead.style="background:white;";
   document.getElementById(tableid).appendChild(tablehead);
 
   var x=tablehead.insertRow(-1);

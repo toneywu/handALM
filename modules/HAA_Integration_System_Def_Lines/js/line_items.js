@@ -4,7 +4,7 @@ var columnNum1 = 11;
 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
 
 function insertLineHeader(tableid){
-  $("#line_items_label").hide();//隐藏SugarCRM字段
+  $("#line_items_span").parent().prev().hide();//隐藏SugarCRM字段
 
   tablehead = document.createElement("thead");
   tablehead.id = tableid +"_head";
@@ -35,6 +35,10 @@ function insertLineHeader(tableid){
   g.innerHTML=SUGAR.language.get('HAA_Integration_System_Def_Lines', 'LBL_ENABLED_FLAG');
 var j=x.insertCell(10);
   j.innerHTML='&nbsp;';
+  var tr_header=document.getElementById(tablehead.id);
+  tr_header.style.backgroundColor="white";
+  tr_header.align="center";
+  
 }
 
 
@@ -84,17 +88,20 @@ var z1 = tablebody.insertRow(-1);
 z1.id = 'line1_displayed' + prodln;
 z1.className = 'oddListRowS1';
 z1.innerHTML  =
-"<td><span name='displayed_line_number[" + prodln + "]' id='displayed_line_number" + prodln + "'></span></td>" +
-"<td><span name='displayed_column_title[" + prodln + "]' id='displayed_column_title" + prodln + "'></span></td>" +
-"<td><select disabled='disabled' tabindex='116' name='displayed_column_type[" + prodln + "]' id='displayed_column_type" + prodln + "'>" + sys_clomn_type +"</select></td>"+
-"<td><select disabled='disabled' tabindex='116' name='displayed_column_name[" + prodln + "]' id='displayed_column_name" + prodln + "'>" + sys_clomn_name +"</select></td>"+
-"<td><select disabled='disabled' tabindex='116' name='displayed_column_data_type[" + prodln + "]' id='displayed_column_data_type" + prodln + "'>" + integration_date_type +"</select></td>"+
-"<td><span name='displayed_column_length[" + prodln + "]' id='displayed_column_length" + prodln + "'></span></td>" +
-"<td><span name='displayed_column_mask[" + prodln + "]' id='displayed_column_mask" + prodln + "'></span></td>" +
-"<td><span name='displayed_valueset_name[" + prodln + "]' id='displayed_valueset_name" + prodln + "'></span></td>"+
-"<td><span name='displayed_required_flag[" + prodln + "]' id='displayed_required_flag" + prodln + "'></span></td>"+
-"<td><span name='displayed_enabled_flag[" + prodln + "]' id='displayed_enabled_flag" + prodln + "'></span></td>"+
-"<td><input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'></td>";
+"<td style='vertical-align: middle;'><span name='displayed_line_number[" + prodln + "]' id='displayed_line_number" + prodln + "'></span></td>" +
+"<td style='vertical-align: middle;'><span name='displayed_column_title[" + prodln + "]' id='displayed_column_title" + prodln + "'></span></td>" +
+"<td style='vertical-align: middle;'><select disabled='disabled' tabindex='116' name='displayed_column_type[" + prodln + "]' id='displayed_column_type" + prodln + "'>" + sys_clomn_type +"</select></td>"+
+"<td style='vertical-align: middle;'><select disabled='disabled' tabindex='116' name='displayed_column_name[" + prodln + "]' id='displayed_column_name" + prodln + "'>" + sys_clomn_name +"</select></td>"+
+"<td style='vertical-align: middle;'><select disabled='disabled' tabindex='116' name='displayed_column_data_type[" + prodln + "]' id='displayed_column_data_type" + prodln + "'>" + integration_date_type +"</select></td>"+
+"<td style='vertical-align: middle;'><span name='displayed_column_length[" + prodln + "]' id='displayed_column_length" + prodln + "'></span></td>" +
+"<td style='vertical-align: middle;'><span name='displayed_column_mask[" + prodln + "]' id='displayed_column_mask" + prodln + "'></span></td>" +
+"<td style='vertical-align: middle;'><span name='displayed_valueset_name[" + prodln + "]' id='displayed_valueset_name" + prodln + "'></span></td>"+
+"<td style='vertical-align: middle;'><span name='displayed_required_flag[" + prodln + "]' id='displayed_required_flag" + prodln + "'></span></td>"+
+"<td style='vertical-align: middle;'><span name='displayed_enabled_flag[" + prodln + "]' id='displayed_enabled_flag" + prodln + "'></span></td>"+
+"<td style='vertical-align: middle;'><input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'></td>";
+ //设置tr的align属性为center 
+  var tr_dis=document.getElementById(z1.id);
+  tr_dis.align="center";
 
   var x = tablebody.insertRow(-1); //以下生成的是Line Editor
   x.id = 'line_editor' + prodln;
@@ -102,7 +109,7 @@ z1.innerHTML  =
   
   /*l_prodln=prodln+1;*/
  x.innerHTML  = "<td colSpan='"+columnNum1+"'>"+
-  "<table border='0' class='lineEditor' width='100%'>"+
+  "<table border='0' class='lineEditor' width='100%' style='display:table'>"+
   "<tr>"+
     "<input name='line_name["+prodln+"]' id='line_name"+prodln+"' value='' type='hidden'>"+
   "<input name='line_id["+prodln+"]' id='line_id"+prodln+"' value='' type='hidden'>"+

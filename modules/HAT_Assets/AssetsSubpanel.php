@@ -10,5 +10,6 @@ function get_assets($params) {
     $return_array['where'] = " WHERE hat_assets.using_org_id='" . $using_org_id . "'"." or hat_assets.owning_org_id='".$using_org_id."'";//会自动加入deleted字段
     $return_array['join'] = "";
     $return_array['join_tables'] = "";
+    $_SESSION['last_sub' . 'hat_assets' . '_order'] = 'desc';
     return $return_array;
 }
