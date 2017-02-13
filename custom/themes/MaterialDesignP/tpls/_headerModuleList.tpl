@@ -794,13 +794,13 @@
     <div id='sidebar_container' class="container-fluid sidebar_container">
 
         <a id="buttontoggle" class="buttontoggle"><span></span></a>
-                
+
         <!--<div class="row">-->
             <!--<div {if $smarty.cookies.sidebartoggle == 'collapsed'}style="display:none"{/if}
                  class="col-sm-3 col-md-2 sidebar">-->
              <div {if $smarty.cookies.sidebartoggle == 'collapsed'}style="display:none"{/if}
              class="sidebar">
-                
+
                 <div id="actionMenuSidebar" class="actionMenuSidebar">
                     {foreach from=$moduleTopMenu item=module key=name name=moduleList}
                         {if $name == $MODULE_TAB}
@@ -824,7 +824,7 @@
                         {/if}
                     {/foreach}
                 </div>
-                
+
                 <div id="recentlyViewedSidebar" class="recentlyViewedSidebar">
                 {if count($recentRecords) > 0}
                     <h2 class="recent_h3">{$APP.LBL_LAST_VIEWED}</h2>
@@ -867,4 +867,30 @@
     </div>
     <!--End Responsive Sidebar -->
 {/if}
+
+               <div id="preload_menu" class="buttons">
+                    {foreach from=$moduleTopMenu item=module key=name name=moduleList}
+                        {if $name == $MODULE_TAB}
+                            <ul>
+                                {if count($shortcutTopMenu.$name) > 0}
+                                    {foreach from=$shortcutTopMenu.$name item=item}
+                                        {if $item.URL == "-"}
+                                            <li><a></a><span>&nbsp;</span></li>
+                                        {else}
+                                            <li class="actionmenulinks button" role="presentation">
+                                                <a href="{$item.URL}" >
+                                                    <div class="icon-{$item.MODULE_NAME} side-bar-action-icon"></div>
+                                                    <div class="actionmenulink">{$item.LABEL}</div>
+                                                </a>
+                                            </li>
+                                        {/if}
+                                    {/foreach}
+                                {/if}
+                            </ul>
+                        {/if}
+                    {/foreach}
+                </div>
+
+<script type='text/javascript' src='{sugar_getjspath file='themes/MaterialDesignP/tpls/Restruct_ListView.js'}'></script>
+
 <!--Start Page content -->

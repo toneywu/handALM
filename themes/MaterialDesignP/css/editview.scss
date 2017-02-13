@@ -1253,14 +1253,6 @@ input.sqsEnabled {
   clear: both;
 }
 
-.pageNumbers {
-  position: static;
-  font-weight: bold;
-  color: $default-btn-color;
-  padding: 0 8px 0 0;
-  margin: 0 0 0 0;
-}
-
 .contentBox {
   padding: 0 10px 0 0;
   margin: 10px 0 10px 0;
@@ -1790,11 +1782,11 @@ a.tabFormAdvLink:hover {
 }
 
 .evenListRowS1:hover td {
-  background: #FAF7CF;
+  background: #eee;
 }
 
 .oddListRowS1:hover td {
-  background: #FAF7CF;
+  background: #eee;
 }
 
 .detail table {
@@ -1938,11 +1930,28 @@ span#selectedRecordsTop {
 ul.clickMenu {
   display: inline-block;
   color: $default-btn-color;
+  font-weight: normal;
+  border: 1px solid $default-btn-border;
   padding: 0;
   margin: 0;
   border-radius: 3px;
-  vertical-align: bottom;
+  vertical-align: middle;
   list-style: none;
+}
+
+.list thead .button,
+.list tfoot .button,
+.list thead ul.clickMenu,
+.list tfoot ul.clickMenu {
+  border:none;
+  font-size: 15px;
+}
+
+.list thead ul.clickMenu li,
+.list tfoot ul.clickMenu li,
+.list thead ul.clickMenu a,
+.list tfoot ul.clickMenu a {
+  color: $list-view-header-btn-color;
 }
 
 ul.clickMenu form {
@@ -2019,7 +2028,7 @@ ul.SugarActionMenuIESub li {
 ul.clickMenu li a {
   display: block;
   color: $default-btn-color;
-  margin: 0 5px 0 0;
+  margin: 0;
   float: left;
   text-decoration: none;
 }
@@ -2042,8 +2051,6 @@ ul.clickMenu > li > span {
   margin-top: 9px;
   width: 16px;
   height: 16px;
-
-
 }
 
 .inlineButtons ul.clickMenu > li > span {
@@ -2087,7 +2094,7 @@ ul#detailViewActions.clickMenu {
 
 .selectActionsDisabled {
   display: inline-block;
-  background-color: #94A6B5;
+  background-color: $list-view-toolbar-bg;
   border-radius: 3px;
   vertical-align: bottom;
 }
@@ -3258,7 +3265,7 @@ ul::-webkit-scrollbar-thumb { /* 5 */
 }
 
 .btn-success {
-  background: $danger-btn-bg;
+  background: $default-btn-bg;
   border: none;
 }
 
@@ -4205,17 +4212,41 @@ tr:hover img.info {
   margin: 0;
 }
 
+#EditView div.action_buttons input[type=button],
 #EditView div.action_buttons .button {
-  background-color: $danger-btn-bg;
+  background-color: $default-btn-bg;
+  border: 1px solid $default-btn-border;
+}
+
+#EditView div.action_buttons input[type=button]:hover,
+#EditView div.action_buttons .button:hover {
+  background-color: $default-btn-bg-hover;
+  color: $default-btn-hover-color;
+}
+
+#search_form input[type=submit],
+#SAVE.button {
+  background-color: $primary;
+  color: #fff;
+}
+
+#search_form input[type=submit]:hover,
+#SAVE.button:hover {
+  background-color: $success;
+}
+
+#CANCEL,
+#search_form input[name=clear]:hover {
+  background-color: $danger-hover;
+  color: #fff;
 }
 
 #save_and_continue.button {
-  background-color: $danger-btn-bg;
+  background-color: $default-btn-bg;
 }
 
-#EditView div.action_buttons .button:hover,
 #save_and_continue.button:hover {
-  background-color: $danger-btn-bg-hover;
+  background-color: $success;
 }
 
 .paginationWrapper {
@@ -4268,6 +4299,7 @@ h3 span {
 #dlg {
   top: 75px;
   left: 300px;
+  max-width: 700px;
 }
 
 #themePreview {
@@ -5236,7 +5268,7 @@ object {
   }
 
   #dlg {
-    left: 40%;
+    left: 10%;
   }
 
   #dlg_c {

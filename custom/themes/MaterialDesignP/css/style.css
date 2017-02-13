@@ -26,152 +26,16 @@
 /*colors and style for data table*/
 
 
-tfoot .paginationActionButtons {
-	display: none;
+tfoot .paginationActionButtons ul, tfoot .paginationActionButtons .selectActionsDisabled {
+	visibility: hidden;
 }
-
-.list-view-rounded-corners .list #pagination td .paginationTable td.paginationActionButtons, 
-.list #pagination td .paginationTable .paginationActionButtons {
-	background-color:#fff;
-}
-
-
-.evenListRowS1:hover td,
-.oddListRowS1:hover td {
-	background-color: #eee;
-}
-
-/* text for pagination */
-#selectLinkTop li.sugar_action_button,
-.list #pagination a {
-	color:rgba(0,0,0,0.56);
-}
-
-/*将按钮扁平化*/
-#tab-actions .button,
-#EditView .panel .button,
-.modal-body .button {
-	box-shadow:none;
-	/*border: none;*/
-}
-
-.content #tab-actions > .dropdown-menu .button{
-	color:#fff;
-}
-.content #tab-actions > .dropdown-menu .button:hover{
-	color:#fff;
-}
-
-/*失效的按钮以及在List上白色不明显的按钮*/
-#selectLinkTop li.sugar_action_button,
-.paginationTable .button,
-.paginationTable .button:disabled,
-.edit-view-pagination .btn-pagination[disabled],
-.paginationTable button[disabled],
-.selectActionsDisabled,
-.listViewLinkButton li.sugar_action_button,
-.list #pagination {
-	background-color: #fff;
-	box-shadow:none;
-	border: none;
-	color:#efefef;
-}
-
-.paginationTable button {
-	box-shadow: none;
-}
-
-#selectLinkTop li.sugar_action_button:hover
-.paginationTable button:hover,
-{
-	background-color: #efefef
-}
-
-
-.list thead .paginationTable {
-	height:56px;
-}
-
-/*list view selector*/
-.selectedRecords {
-	font-weight: 400px;
-}
-.selectedRecords.value{
-	font-size: 18px;
-	padding:0 4px;
-}
-
-
-
-
-button[disabled],
-html input[disabled],
-.button:disabled {
-	background-color: #f7f7f7;
-	border:#ccc 1px solid;
-	color:#ccc;
-	pointer-events: none;
-	box-shadow: none;
-}
-
-.buttons input.primary,
-.buttons .primary {
-	background-color: #0d8ad4;
-	border:#0d8ad4 1px solid;
-	color:#fff;
-/*	background-image:-webkit-gradient(top, rgba(122,188,255,1) 0%, rgba(96,171,248,1) 44%, rgba(64,150,238,1) 100%);
-*/}
-
-/*将按钮变轻便*/
-a#basic_search_link,
-.datetimepicker th.today,
-.buttons .button,
-.button, 
-#subpanel_list .tab-content .list.view.subpanel-table .pagination div.action_buttons .button,
-.subpanel-table input[type=button],
-table.subpanel-table li.sugar_action_button,
-input[type=submit],
-input[type=reset],
-input[type=button],
-.edit-view-pagination .btn-pagination,
-#EditView div.action_buttons .button,
-#save_and_continue.button,
-div.action_buttons .button {
-	background-color:#fff;
-	font-size: 14px;
-	color:#3C8DBC;
-    line-height: 32px; height: 32px;
-    padding: 0px 16px;
-    margin: 0 4px 4px 0;
-	border-radius:4px;
-	border: 1px solid #0d8ad4;
-}
-
-
-a#basic_search_link:hover,
-input[type=submit].button:hover,
-input[type=button]:hover,
-.button, #subpanel_list .tab-content .list.view.subpanel-table .pagination div.action_buttons .button:hover,
-.buttons .pagination .btn-pagination:hover,
-div.action_buttons .button:hover,
-.edit-view-pagination .btn-pagination:hover,
-#EditView div.action_buttons .button:hover,
-#save_and_continue.button:hover,
-.buttons .button:hover {
-	background-color: #00a2ff;
-	color:#fff;
-	font-size: 14px;
-	margin: 0 4px 4px 0;
-	background-image: none;
-}
-
 
 /*具有突出效果的Button*/
-a#basic_search_link,
+/*a#basic_search_link,
 .buttons .button,
 .button, input[type=submit], input[type=button], div.action_buttons .button {
 	box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
-}
+}*/
 
 .datetimepicker td.active {
 	border-radius: 30px
@@ -179,12 +43,6 @@ a#basic_search_link,
 	height:30px;
 	background-image: none;
 	background-color: #00A2FF;
-}
-
-.list #pagination td .paginationTable .paginationChangeButtons,
-.buttons .pagination .btn-pagination {
-	background-color:#fff;
-	font-weight: 500;
 }
 
 span.id-ff button {
@@ -199,31 +57,7 @@ span.id-ff button {
 	top:0px;
 }
 
-/*突出提交按钮*/
-#SAVE,#SAVE_HEADER,#SAVE_FOOTER,#search_form_submit,#save_and_continue,#search_form_submit_advanced,#Login{
-	background-color:#00A2FF;
-	color:#fff;
-/*	background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #75bbf7), color-stop(40%, #3da8fd), color-stop(90%, #2b8ad6), color-stop(100%, #2196F3));
-*/}
 
-#SAVE:hover, #SAVE_HEADER:hover,#SAVE_FOOTER:hover,#search_form_submit:hover,#save_and_continue:hover,#search_form_submit_advanced:hover, #Login:hover{
-	/*突出提交按钮(绿色）另btn_save为客户化标签*/
-	background-color:#009047;
-	color:#fff;
-}
-#SAVE_HEADER.disabled,#SAVE_FOOTER.disabled,#search_form_submit.disabled,#save_and_continue.disabled,#Login.disabled{
-	/*突出提交按钮(绿色）另btn_save为客户化标签*/
-	color:#ccc;
-	border:#ccc 1px solid;
-}
-
-/*modal**/
-.modal-content {
-	display: table;
-}
-.modal-search div.modal-content {
-	min-width: 580px;
-}
 /* panel*/
 .tab-content
 .content .detail-view .tab-content {
@@ -241,11 +75,12 @@ span.id-ff button {
 	padding: 5px 0 0 20px;
 	font-size: 18px;
 }
-.panel-default.sub-panel > .panel-heading,
+
+.panel-default.sub-panel > .panel-heading {
+	height: 39px;
+}
 .panel-default > .panel-heading {
-	border-top:1px solid #ccc;
-	background-image: linear-gradient(to top, rgb(245, 245, 245) 0%,rgb(255, 255, 255) 100%);
-	height: 3em;
+	height: 35px;
 }
 
 .panel-default > .panel-heading > a,
@@ -258,33 +93,6 @@ span.id-ff button {
 /*color for subpanel*/
 /*subpanel*/
 
-.list tr th a:link, .list tr th {
-	color:rgba(0,0,0,0.54);
-}
-
-.list tr th a:link, .list tr th {
-	font-size:15px;
-	font-weight: 400;
-	color:#94a6b5;
-}
-
-.list tr th {
-	padding: 5px;
-}
-
-
-.list tr.oddListRowS1 td, .list tr.evenListRowS1 td {
-	padding: 0;
-	border-bottom: 1px solid #ccc;
-	line-height: 1.1em;
-	min-height: 35px;
-}
-
-.list thead th {
-	background-color:#fff;
-	border-top:none;
-	height: 36px;
-}
 
 div.sub-panel {
 	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.17);
@@ -305,105 +113,25 @@ div.sub-panel {
 .detail-view .tab-content .panel-default.sub-panel > .panel-heading > a {
 	font-size: 16px;
 }
-.subpanel-table.list tr.pagination span.pageNumbers {
-	font-size: 13px;
-}
 .detail-view .tab-content .panel-default > .panel-heading {
 	border-top: 1px solid #e8e8e8;
 	height: 34px;
-}
-
-/*表头颜色*/
-.tab-content .list tr th,
-.list tr th {
-	color:#7e7e7e;
-	border-bottom: 1px solid #efefef;
-}
-.tab-content thead tr.pagination td {
-	border-bottom: 1px solid #ccc;
-}
-table.footable, table.footable-details {
-	border: none;
-}
-table.subpanel-table.list > tbody > tr > td {
-	border-top:1px solid #eee;
-	border-bottom: none;
-	padding: 2px;
-}
-.subpanel-table.list tr.pagination button.button[name="listViewStartButton"], .subpanel-table.list tr.pagination button.button[name="listViewPrevButton"], .subpanel-table.list tr.pagination button.button[name="listViewNextButton"], .subpanel-table.list tr.pagination button.button[name="listViewEndButton"], .subpanel-table.list tr.pagination button.button[name="listViewStartButton"][disabled]:hover, .subpanel-table.list tr.pagination button.button[name="listViewPrevButton"][disabled]:hover, .subpanel-table.list tr.pagination button.button[name="listViewNextButton"][disabled]:hover, .subpanel-table.list tr.pagination button.button[name="listViewEndButton"][disabled]:hover {
-	border: none;
-	background-color: #fff;
-}
-
-
-#subpanel_list .tab-content .list.view.subpanel-table .pagination div.action_buttons .button,
-.subpanel-table input[type=button] {
-	box-shadow: none;
-}
-
-/*buttons on subpanel lines*/
-.table-responsive.list > tbody > tr > td > a.button,
-.subpanel-table a.button,
-.subpanel-table .SugarActionMenu .sugar_action_button,
-table.subpanel-table li.sugar_action_button {
-	line-height: 14px;
-	color:#3C8DBC;
-	background-color: #fff;
-	height: 26px;
-	min-height:24px;
-	vertical-align: middle;
-	padding: 0px;
-	margin-top:0px;
-	box-shadow: none;
-	border: 1px solid #c4c4c4;
-}
-
-.table-responsive.list > tbody > tr > td > a.button:hover,
-.subpanel-table a.button:hover,
-.subpanel-table .SugarActionMenu .sugar_action_button:hover,
-table.subpanel-table li.sugar_action_button:hover {
-	background-color: #00a2ff;
-	color:#fff;
-}
-
-
-.table-responsive.list > tbody > tr > td > a.button {
-	padding: 4px;
 }
 
 input.sqsEnabled {
 	margin-top: 0px
 }
 
-.sub-panel tbody tr td .sugar_action_button > a:link,
-.subpanel-table .SugarActionMenu .sugar_action_button a,
-table.subpanel-table li.sugar_action_button a{
-	color:#3C8DBC;
-	text-align: center;
-}
-
-table.subpanel-table li.sugar_action_button,
-.sub-panel tbody tr td ul.clickMenu > li > span {
-	margin: 6px 0 0 0;
-	padding: 0px;
-}
-
 /***************************************************/
 /*结构调整：compact structure*/
 /***************************************************/
-.list {
-	font-size: 14px;
-}
+
 div#loadingPage {
 	font-size: 20px;
 	padding: 50px 0;
 }
 div#loadingPage b{ 
 	font-weight: 400;
-}
-
-.content #EditView_tabs .tab-content {
-	margin:14px 0 -5px 0;
 }
 
 #EditView_tabs .table {
@@ -646,54 +374,6 @@ input.yui-ac-input {
 }
 
 
-/*Detailview 的TAB标签*/
-
-.content .nav-tabs {
-	margin: 0;
-	background-color: #fff;
-	display: flex;
-}
-
-.content .nav-tabs > li.active > a:hover,
-.content .nav-tabs > li > a:focus,
-.content .nav-tabs > li > a:hover,
-.content .nav-tabs > li.active > a,
-.content .nav-tabs > li >a,
-.content .nav-tabs a {
-	font-size: 16px;
-	color: rgba(0,0,0,0.54);
-	border: none;
-	background-color: #fff;
-	text-align: center;
-	min-width: 6em;
-}
-
-.content .nav-tabs > li.active > a:hover,
-.content .nav-tabs > li > a:hover {
-	color:#0079bf;
-	border-bottom:5px solid #0079bf;
-}
-
-.content .nav-tabs > li.active > a:focus,
-.content .nav-tabs > li.active > a {
-	font-size: 18px;
-	color: rgba(0,0,0,0.80);
-	border-bottom:5px solid #0079bf;
-}
-
-#DetailViewBtnGroups .buttons{
-	float: right;
-	margin-top: -30px;
-}
-#DetailViewBtnGroups .buttons input{
-	box-shadow: none;
-}
-.moduleTitle .module-title-text {
-	margin: 0 0 30px 30px;
-	font-size: 30px;font-weight: 400;
-	max-width: 580px;
-}
-
 
 /**********************************/
 /*以下是完全自定义的一些对象	  */
@@ -702,8 +382,8 @@ input.yui-ac-input {
 /*header_content*/
 #header_content {
 	 background: #fffcf6; /*#f1fff9;*/
-    padding: 12em 0 2em 0;
-    margin: -12em -1em 0 -1em;
+    padding: 12em 10em 2em 2em;
+    margin: -10em -1em 0 -1em;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 }
 

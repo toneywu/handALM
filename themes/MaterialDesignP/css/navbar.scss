@@ -126,6 +126,11 @@
       }
 
       > span.currentTab {
+
+        background-color: $navbar-main-menu-bg;
+        padding: 8px 10px;
+        border-radius: 10px;
+
         > a {
           display: inline-block;
           border-top: 3px solid $navbar-menu-current-seperator;

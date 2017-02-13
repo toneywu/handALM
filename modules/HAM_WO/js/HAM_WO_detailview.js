@@ -351,7 +351,7 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 		});
 	}
 	//add by yuan.chen
-	var reject_woop_btn=$("<input type='button' class='btn_detailview' id='btn_woop_reject' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_WOOP_REJECT_BUTTON_LABEL')+"'>");
+	var reject_woop_btn=$("<input type='button' class='button' id='btn_woop_reject' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_WOOP_REJECT_BUTTON_LABEL')+"'>");
 	$("#formgetWOOPQuery").append(reject_woop_btn);
 	$("#btn_woop_reject").click(function(){
 		reject_woop($("input[name='record']").val());

@@ -3,15 +3,12 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
-<title>acc_products</title>
+<title>acc_default_module</title>
 <desc>Created with Sketch.</desc>
-<g id="Page-1">
-	<g id="acc_products">
-		<g id="Group-28" transform="translate(5.000000, 8.000000)">
-			<rect id="Rectangle-157" y="4.126" fill="#999999" width="5.263" height="9.284"/>
-			<rect id="Rectangle-157_1_" x="7.369" y="2.063" fill="#999999" width="5.262" height="11.347"/>
-			<rect id="Rectangle-157_2_" x="14.736" fill="#999999" width="5.264" height="13.41"/>
-		</g>
-	</g>
-</g>
+<title>acc_default_module</title>
+<desc>Created with Sketch.</desc>
+<title>acc_default_module</title>
+<desc>Created with Sketch.</desc>
+<polygon fill="#999999" points="8.676,12.78 8.66,17.477 19.65,17.477 19.65,21.313 8.661,21.264 8.676,25.643 2.244,19.211 "/>
+<polygon fill="#999999" points="21.324,15.793 21.34,11.098 10.35,11.098 10.35,7.26 21.339,7.309 21.324,2.931 27.756,9.362 "/>
 </svg>

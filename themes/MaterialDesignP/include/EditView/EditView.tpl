@@ -118,7 +118,7 @@
         </div>
         {*display panels*}
         <div class="panel-content">
-            <div>&nbsp;</div>
+            <div style="display: none">&nbsp;</div>
             {{counter name="panelCount" start=-1 print=false assign="panelCount"}}
             {{foreach name=section from=$sectionPanels key=label item=panel}}
             {{capture name=label_upper assign=label_upper}}{{$label|upper}}{{/capture}}

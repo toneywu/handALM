@@ -108,7 +108,9 @@
   margin-left: 0px;
 }
 
-
+.panel-content {
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.17);
+}
 
 @media (max-width: 750px) {
 
@@ -216,7 +218,7 @@
 
 // Fix subpanel button
 .subpanel-table .SugarActionMenu .sugar_action_button {
-  min-height: 32px;
+  min-height: 26px;
 }
 
 .subpanel-table .SugarActionMenu .single a {

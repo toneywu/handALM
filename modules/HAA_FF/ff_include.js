@@ -353,9 +353,7 @@ function mark_field_readonly(field_name) {
 			mark_obj.click(function() { return false;});
 		}
 
-		mark_obj.css({"background-Color":"#efefef;"});
 		mark_obj.attr("readonly",true);
-		mark_obj_label.css({"color":"#aaaaaa"});
 
 	    if (typeof validate != "undefined" && typeof validate['EditView'] != "undefined") {
 	      removeFromValidate('EditView',field_name); //去除必须验证

@@ -116,7 +116,7 @@
 
 
 .sub-panel > .panel-body > .tab-content > div {
-  margin-bottom: 25px ;
+  margin-bottom: 15px ;
   border: none;
 }
 
@@ -136,16 +136,17 @@ div.action_buttons form {
 
 div.action_buttons .button {
   background-color: $default-btn-bg;
+  border: 1px solid $default-btn-border;
 }
 div.action_buttons .button:hover {
   background-color: $default-btn-bg-hover;
+  color: $default-btn-hover-color;
 }
 
 #subpanel_list .tab-content .list.view.subpanel-table .pagination div.action_buttons .button {
-  padding: 5px 13px;
   line-height: initial;
   height: initial;
-  text-transform: capitalize;
+  box-shadow: none;
 }
 
 div.sub-panel {
@@ -169,17 +170,19 @@ div.sub-panel {
 .table-responsive.list .pagination  th {
     border: 0;
 }
+.table-responsive.list .pagination td {
+  border-bottom:1px solid #efefef;
+}
 
-.sub-panel tbody tr td .sugar_action_button > a:link {
+.sub-panel tbody tr td .sugar_action_button > a {
   border-bottom: none;
-  color: $list-view-button-color;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  color: $list-view-link-color;
+  padding: 0 5px;
 }
 
 .sub-panel .sugar_action_button > a:hover {
   border-bottom: none;
-  color: $list-view-button-color;
+  color: $list-view-link-hover-color;
 }
 
 
@@ -192,11 +195,6 @@ div.sub-panel {
   color: $list-view-button-color;
   width: 100%;
 }
-
-.sub-panel tbody tr td ul.clickMenu > li > span {
-  margin-top: 12px;
-}
-
 
 .footable-details.table-responsive.list th {
   font-weight: bold;
@@ -314,7 +312,7 @@ div.sub-panel {
 .subpanel-table.list tr.pagination button.button[name="listViewPrevButton"]:hover,
 .subpanel-table.list tr.pagination button.button[name="listViewNextButton"]:hover,
 .subpanel-table.list tr.pagination button.button[name="listViewEndButton"]:hover {
-  background-color: #808F9C;
+  background-color: $list-view-button-hover-color;
 }
 
 .subpanel-table.list tr.pagination button.button[name="listViewStartButton"] {
@@ -338,7 +336,7 @@ div.sub-panel {
 .subpanel-table.list tr.pagination button.button[name="listViewNextButton"][disabled],
 .subpanel-table.list tr.pagination button.button[name="listViewEndButton"][disabled] {
   cursor: default;
-  opacity: .5;
+  opacity: .3;
 }
 
 .subpanel-table.list tr.pagination button.button[name="listViewStartButton"],
@@ -349,7 +347,7 @@ div.sub-panel {
 .subpanel-table.list tr.pagination button.button[name="listViewPrevButton"][disabled]:hover,
 .subpanel-table.list tr.pagination button.button[name="listViewNextButton"][disabled]:hover,
 .subpanel-table.list tr.pagination button.button[name="listViewEndButton"][disabled]:hover {
-  background-color: #94A6B5;
+  background-color: $list-view-toolbar-bg;
 }
 
 #actionLinkTop li.sugar_action_button:hover,

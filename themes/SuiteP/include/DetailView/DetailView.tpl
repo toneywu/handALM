@@ -341,7 +341,12 @@
     $(document).ready(function(){
         //将BASIC提前
         $(".detail-view").prepend("<div id='header_content'></div>");
-        $("#tab-content-0 .detail-view-row").appendTo($("#header_content"));
+        if ($("#tab-content-0").length>0) {
+            $("#tab-content-0 .detail-view-row").appendTo($("#header_content"));
+        } else {
+            $("#top-panel--1 .detail-view-row").appendTo($("#header_content"));
+        }
+
         //将下方的向上提
         $(".panel-content .panel").appendTo($("#tab-content-0"));
     });

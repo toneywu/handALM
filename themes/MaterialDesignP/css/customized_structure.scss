@@ -1,0 +1,113 @@
+#preload_menu ul {
+
+	float: right;
+	margin: -40px 0 0 0;
+	list-style-type: none;
+	text-align: center;
+
+	li {
+		float: left;
+		margin: 0 4px 4px 4px;
+		box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+		border: none;
+	}
+
+	li .side-bar-action-icon {
+		width: 24px;
+		min-width: 24px;
+		display: inline-block;
+	}
+
+	li .actionmenulink {
+		display: inline-block;
+	}
+
+	li a:hover {
+		background-color: $default-btn-bg-hover;
+		color: $default-btn-hover-color;
+	}
+
+}
+
+#formDetailView #preload_menu ul {
+	margin: 23px 0 0 2em;
+
+	li {
+		box-shadow:none;
+		margin: 0 4px 4px 0px;
+		border: 1px solid $default-btn-border;
+	}
+
+	li .actionmenulink {
+		display: none;
+	}
+
+	li:hover .actionmenulink {
+		display: inline-block;
+	}
+
+}
+
+#DetailViewBtnGroups .buttons{
+	float: right;
+	margin-top: -23px;
+}
+
+.moduleTitle .module-title-text {
+	font-size: 30px;
+	font-weight: 300;
+	max-width: 580px;
+}
+
+/* move addtional actions into Detailview more buttons*/
+#formDetailView .buttons .dropdown-menu {
+	background-color: #fff;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+	min-width: 80px;
+}
+
+#formDetailView .buttons .dropdown-menu .button {
+	padding: 2px;
+	margin: 0px;
+	width: 100%;
+	border: none;
+}
+
+#header_content .detail-view-row-item  {
+	padding: 10px;
+
+	.label {
+		text-align: left;
+		font-weight: 300;
+		padding: 0 0 0 5px;
+		font-size: $page-font-size - 1;
+	}
+	.detail-view-field {
+		height: 32px;
+		display: block;
+
+		.sugar_field {
+			height: inherit;
+			vertical-align: middle;
+			display: table-cell;
+		}
+
+	}
+}
+
+.module_img {
+    float: left;
+    width: 64px;
+    height: 64px;
+/*     background: #009688;
+ */    margin: -2px 15px 0 15px;
+    border-radius: 15px;
+
+    	img {
+    		width: 58px;
+    	}
+}
+
+#module_label {
+	color: $danger;
+}

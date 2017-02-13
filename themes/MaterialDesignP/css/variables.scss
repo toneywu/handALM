@@ -6,10 +6,10 @@ $lg-breakpoint: 1200px;
 
 
 // Page
-$primary: #778591;
+$primary: #00a2ff;
 $danger: #F08377;
 $danger-hover: #F08377;
-$success: #BBE6A5;
+$success: #009688;
 $info: #AA9DCC;
 $warning: #E6D5A5;
 
@@ -45,16 +45,21 @@ $login-top-bar-bg: #534D64;
 
 
 // Buttons
-$default-btn-color: #94a6b5;
+$default-btn-color: #3C8DBC;
+$default-btn-border-color: #3C8DBC;
+$default-btn-hover-color: #fff;
 $default-text-disabled-bg: #F8F8F8;
 $default-text-disabled-color: #F8F8F8;
 $default-text-disabled-border-color: #E2E7EB;
 $default-input-group-color: #C4C3C7;
-$default-btn-bg: #94A6B5;
-$default-btn-bg-hover: #94A6B5;
+$default-btn-bg: #fff; /* #94A6B5; */
+$default-btn-bg-hover: #00a2ff;
+$default-btn-border: #bbb;
 
-$primary-btn-bg: $primary;
-$primary-btn-bg-hover: #778591;
+$primary-btn-bg: $default-btn-bg;
+$primary-btn-bg-hover: #00a2ff;
+$primary-btn-bg-hover-color: #fff;
+$primary-btn-border: $default-btn-color;
 
 $info-btn-bg: $info;
 $info-btn-bg-hover: #9589B3;
@@ -117,17 +122,19 @@ $side-bar-link-color-hover: $sidebar-bg;
 $side-bar-link-color-hover: #677785;
 
 // Tabs
-$active-tab-bg: #778591;
-$active-tab-bg-hover:#778591;
-$default-tab-bg: #BFCAD3;
-$default-tab-bg-hover: #BFCAD3;
-$default-tab-color: #FFFFFF;
-$action-tab-bg: #F08377;
-$action-tab-bg-hover: #F08377;
-$action-tab-seperator: #FA988D;
-$action-tab-color: #FFFFFF;
+$active-tab-bg: #fff;
+$active-tab-color: $default-btn-color;
+$default-tab-bg: #fff; /* #BFCAD3; */
+$default-tab-bg-hover: #fff;
+$default-tab-hover-color: $default-btn-bg-hover;
+$default-tab-color: rgba(0,0,0,0.6);
+$action-tab-bg: $default-btn-bg;
+$action-tab-bg-hover: $default-btn-bg-hover;
+$action-tab-seperator: #ccc;
+$action-tab-color: $default-btn-color;
 $tab-height: 28px; // 32p normal 24px small
 $tab-margin-bottom: 5px;
+
 
 // Panels
 $panel-collapsed-bg: #BFCAD3;
@@ -140,9 +147,12 @@ $detail-view-module-title-space: 12px;
 
 // List View
 $list-view-toolbar-bg: #fff; /* #BFCAD3; */
+$list-view-padding: 8px;
 $list-view-header-bg: #fff;
-$list-view-button-color: #FFFFFF;
-$list-view-button-hover-color: #ccc;
+$list-view-header-color: rgba(0,0,0,0.56);
+$list-view-header-btn-color: rgba(0,0,0,0.67);
+$list-view-button-color: $list-view-header-color;
+$list-view-button-hover-color: #eee;
 $list-view-link-color: $link-color;/*normal blue*/
 $list-view-link-hover-color: $link-color-hover;/*bright blue*/
 $list-view-action-button-disabled-bg: #fff;/* #C9D2DA; */
@@ -159,7 +169,7 @@ $filters-input-bg: #FFFFFF;
 
 // Form Elements
 $input-line-height: 24px;
-$button-line-height: 32px;
+$button-line-height: 30px;
 
 $input-bg: #D8F5EE;
 $input-select-option: #FFFFFF;
@@ -176,10 +186,10 @@ $table-alternate-row-bg: #FFFFFF;
 
 
 // Dashlets
-$dashlet-title-bg: #66727D;
-$dashlet-toolbar-bg: #BFCAD3;
-$dashlet-pagination-bg: #94A6B5;
-$dashlet-header-bg: #778591;
+$dashlet-title-bg: #f5f5f5;
+$dashlet-toolbar-bg: #ffffff;
+$dashlet-pagination-bg: #ffffff;
+$dashlet-header-bg: #f5f5f5;
 
 $dashlet-title-height: 40px; // 48px normal 40px small
 $dashlet-header-height: 32px; // 32px normal 24px small

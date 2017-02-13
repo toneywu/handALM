@@ -4,8 +4,13 @@
 .content {
 
   .nav-tabs {
-    margin: ($tab-height/2) 0 ($tab-height/2) 0;
+    margin: 0;/* ($tab-height/2) 0 ($tab-height/2) 0; */
     border: hidden;
+    display: table;
+    width: 100%;
+    background-color: $default-tab-bg;
+    vertical-align: middle;
+    border-bottom: 1px solid #ddd;
   }
 
   .dropdown-menu {
@@ -29,35 +34,45 @@
     line-height: $tab-height;
   }
 
-  .nav-tabs > li > a,
-  .nav-tabs > li > a:focus,
-  .nav-tabs > li > a:hover {
-    font-size: $page-font-size;
+  .nav-tabs > li > a {
+    font-size: $page-font-size + 2;
     font-weight: 400;
     background-color: $default-tab-bg;
     color: $default-tab-color;
     cursor: pointer;
     margin: 0 2px 0 2px;
-    border-color: #eee #eee #fff;
+    border: none;
     letter-spacing: 2px;
     line-height: $tab-height;
+    text-align: center;
+    min-width: 6em;
+  }
+
+
+  .nav-tabs > li > a:hover {
+    font-size: $page-font-size + 2;
+    background-color: $default-tab-bg-hover;
+    color: $default-tab-hover-color;
+    cursor: pointer;
+    border: none;
+    border-bottom: 5px solid $default-tab-hover-color;
+  }
+
+  .nav-tabs > li.active > a:hover {
+    font-size: $page-font-size + 5;
+    background-color: $default-tab-bg-hover;
+    color: $default-tab-hover-color;
+    cursor: pointer;
+    border: none;
+    border-bottom: 5px solid $default-tab-hover-color;
   }
 
   .nav-tabs > li.active > a,
-  .nav-tabs > li.active > a:focus,
-  .nav-tabs > li.active > a:hover {
-    font-size: $page-font-size;
-    font-weight: 400;
-    background-color: $active-tab-bg;
-    color: $default-tab-color;
-    cursor: pointer;
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-left: 2px;
-    margin-right: 2px;
-    border-color: #eee #eee #fff;
-    letter-spacing: 2px;
-    line-height: $tab-height;
+  .nav-tabs > li.active > a:focus {
+    font-size: $page-font-size + 5;
+    background-color: $default-tab-bg;
+    color: $main-font-color;
+    border-bottom: 5px solid $active-tab-color;
   }
 
   .nav-tabs > li.active:nth-of-type(1) > a,
@@ -140,21 +155,29 @@
     color: $action-tab-color;
     text-decoration: none;
   }
+  #tab-actions {
+    float: right;
+  }
 
   #tab-actions > a {
+    color: $action-tab-color;
     background-color: $action-tab-bg;
     background-image: url("../../../../index.php?entryPoint=getImage&themeName=MaterialDesignP&imageName=p_generic_arrow.svg"), url("../../../../index.php?entryPoint=getImage&themeName=MaterialDesignP&imageName=p_generic_arrow.png");
-    background-position: right ($tab-height/2) top (($tab-height/4)*3);
+    background-position: 90% 50%; /* right ($tab-height/2) top (($tab-height/4)*2); */
     background-repeat: no-repeat;
     cursor: pointer;
-    padding-right: $tab-height;
-    border-color: $action-tab-bg;
-    border-bottom: $action-tab-seperator;
+    font-size: $page-font-size;
+    margin: 10px;
+    /* border-bottom: $action-tab-seperator; */
+    border-radius: 5px;
+    line-height: 24px;
+    border: 1px solid $default-btn-border-color;
+    padding: 4px 24px 4px 10px;
   }
 
   #tab-actions > a:hover {
     background-color: $action-tab-bg-hover;
-    color: $action-tab-color;
+    color: $default-btn-hover-color;
     cursor: pointer;
   }
 
@@ -167,11 +190,13 @@
     left: auto;
     right: 0;
     background-color: $action-tab-bg;
-    margin-right: 2px;
+    margin-right: 10px;
+    margin-top: -10px;
     border-top-left-radius: 4px;
     border-top-right-radius: 0;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
+    box-shadow: 0 13px 25px 0 rgba(0,0,0,0.3),0 11px 7px 0 rgba(0,0,0,0.19);
   }
 
   #tab-actions > .dropdown-menu li {
@@ -194,10 +219,13 @@
 
   #tab-actions > .dropdown-menu .button {
     background-color: $action-tab-bg;
+    border: none;
+    color: $action-tab-color;
   }
 
   #tab-actions > .dropdown-menu .button:hover {
     background-color: $action-tab-bg;
+    color: $link-color-hover;
   }
 
   #tab-actions > .dropdown-menu .button:focus {
@@ -206,6 +234,7 @@
 
   #tab-actions > .dropdown-menu .button:active {
     background-color: $action-tab-bg;
+    color: $action-tab-color;
   }
 
   #tab-actions > .dropdown-menu .open > .dropdown-toggle.btn-primary {
@@ -239,8 +268,8 @@
 }
 
 .dashboard .tab-content {
-  background-color: #ffffff;
-  padding: 24px;
+  /* background-color: #ffffff; */
+  padding: 0 0 24px 14px;
   margin-bottom: 30px;
   border: 1px solid transparent;
   border-top-right-radius: 4px;

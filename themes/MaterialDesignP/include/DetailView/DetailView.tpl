@@ -225,7 +225,7 @@
                 </div>
                 {*display panels*}
                 <div class="panel-content">
-                    <div>&nbsp;</div>
+                    <div style="display: none">&nbsp;</div>
                     {{counter name="panelCount" start=-1 print=false assign="panelCount"}}
                     {{foreach name=section from=$sectionPanels key=label item=panel}}
 
@@ -346,16 +346,10 @@
                         });
                     });
     //added 20170131 add to rebuild the editView structure
-    $(document).ready(function(){
-        //将BASIC提前
-        $(".detail-view").prepend("<div id='header_content'></div>");
-        $("#tab-content-0 .detail-view-row").appendTo($("#header_content"));
-        //将下方的向上提
-        $(".panel-content .panel").appendTo($("#tab-content-0"));
-    });
+
     //add end
 
                 </script>
-
+            <script type="text/javascript" src="themes/MaterialDesignP/include/DetailView/Restruct_DetailView.js"></script>
             {/literal}
 

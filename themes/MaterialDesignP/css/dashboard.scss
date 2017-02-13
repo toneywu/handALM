@@ -62,6 +62,15 @@
   fill: $default-btn-color;
 }
 
+.dashletPanel {
+  background-color: $dashlet-pagination-bg;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.17)
+}
+
+.dashletPanel:hover {
+  box-shadow:0 13px 25px 0 rgba(0, 0, 0, 0.1), 0 11px 7px 0 rgba(0, 0, 0, 0.09);
+}
+
 .dashletPanel thead {
   background-color: $dashlet-header-bg;
 }
@@ -297,7 +306,8 @@ div#chartDashlets {
 
 
 .dashletPanel {
-  padding: 0;
+  padding: 8px;
+  border-radius: 5px;
   margin: 15px 15px 15px 0;
 }
 
@@ -456,8 +466,8 @@ td.dashlet-title > h3 > span {
 }
 
 .dashletPanel .list tr th {
-  padding-top: $dashlet-header-height/2;
-  padding-bottom: $dashlet-header-height/2;
+  padding-top: $list-view-padding;
+  padding-bottom: $list-view-padding;
   padding-left: $dashlet-header-padding;
   padding-right: $dashlet-header-padding;
 }

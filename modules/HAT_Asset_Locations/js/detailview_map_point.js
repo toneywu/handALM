@@ -243,7 +243,8 @@ function loadHeightHandle() {
 
 $(document).ready(function(){
 	//var map_type = $("#map_type");
-    var map_suppanel=$("#LBL_EDITVIEW_PANEL_GIS").closest('div');
+	var map_suppanel=$("#map_marker_type").closest('.panel')
+
 	if( $("#map_type").val()=="TENCENT" || $("#map_type").val()=="CUX") {
 		map_suppanel.show();
 		loadMapScript();

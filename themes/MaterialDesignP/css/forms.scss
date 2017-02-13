@@ -328,20 +328,25 @@ fieldset[disabled] .btn-primary.active {
 }
 
 /** EditView action buttons ***/
-.buttons .primary {
-  background-color: $danger-btn-bg;
-}
-
-.buttons .primary:hover {
-  background-color: $danger-btn-bg-hover;
-}
 
 .buttons .button {
-  background-color: $danger-btn-bg;
+  background-color: $default-btn-bg;
+  border: 1px solid $default-btn-border;
 }
 
 .buttons .button:hover {
-  background-color: $danger-btn-bg-hover;
+  background-color: $default-btn-bg-hover;
+  color: $default-btn-hover-color;
+}
+
+.buttons .button.primary {
+  background-color: $primary-btn-bg;
+  border: 1px solid $primary-btn-border;
+}
+
+.buttons .button.primary:hover {
+  background-color: $primary-btn-bg-hover;
+  color: $primary-btn-bg-hover-color;
 }
 
 .removeFileButton {
@@ -510,16 +515,17 @@ input[type=button].btn-info:focus {
   border: 1px solid $success-btn-bg;
 }
 
-
+input[type=button],
+input[type=submit],
 .button {
   font-size: $page-font-size;
   font-weight: 500;
-  background: $danger-btn-bg;
+  background: $default-btn-bg;
   color: $default-btn-color;
+  border: 1px solid $default-btn-border;
   cursor: pointer;
-  padding: 0 20px 0 20px;
+  padding: 0 $button-line-height/3;
   margin: 0 0 0 0;
-  border: none;
   border-radius: 3px;
   letter-spacing: 1px;
   line-height: $button-line-height;
@@ -527,41 +533,6 @@ input[type=button].btn-info:focus {
   text-transform: uppercase;
 }
 
-input[type=submit].button:hover {
-  background: $danger-btn-bg-hover;
-}
-
-input[type=submit] {
-  font-size: $page-font-size;
-  font-weight: 500;
-  background: $danger-btn-bg;
-  color: $default-btn-color;
-  cursor: pointer;
-  padding: 0 20px 0 20px;
-  margin: 0 0 0 0;
-  border: none;
-  border-radius: 3px;
-  letter-spacing: 1px;
-  line-height: $button-line-height;
-  height: $button-line-height;
-  text-transform: uppercase;
-}
-
-input[type=button] {
-  font-size: $page-font-size;
-  font-weight: 500;
-  background: $danger-btn-bg;
-  color: $default-btn-color;
-  cursor: pointer;
-  padding: 0 20px 0 20px;
-  margin: 0 0 0 0;
-  border: none;
-  border-radius: 3px;
-  letter-spacing: 1px;
-  line-height: $button-line-height;
-  height: $button-line-height;
-  text-transform: uppercase;
-}
 
 input[type=reset] {
   font-size: $page-font-size;
@@ -584,54 +555,22 @@ input[type=reset] {
 }
 
 button {
-  margin-bottom: 4px;
   margin-right: 4px;
 }
 
 html input[type=button] {
-  margin-bottom: 4px;
   margin-right: 4px;
 }
 
 input[type=reset]{
-  margin-bottom: 4px;
   margin-right: 4px;
 }
 
 input[type=submit] {
-  margin-bottom: 4px;
   margin-right: 4px;
 }
 
-.button {
-  margin-bottom: 4px;
-}
 
-input[type=button] {
-  margin-bottom: 4px;
-}
-
-input[type=reset] {
-  margin-bottom: 4px;
-}
-
-input[type=submit]:hover, input[type=button]:hover, input[type=reset]:hover {
-  font-size: $page-font-size;
-  color: $default-btn-color;
-  cursor: pointer;
-}
-
-input[type=submit]:active, input[type=button]:active, input[type=reset]:active {
-  font-size: $page-font-size;
-  color: $default-btn-color;
-  cursor: pointer;
-}
-
-input[type=submit]:focus, input[type=button] {
-  font-size: $page-font-size;
-  color: $default-btn-color;
-  cursor: pointer;
-}
 
 .moremenu a {
   font-size: $page-font-size;
@@ -708,7 +647,7 @@ form[name=DetailView] input[type=reset] {
 }
 
 td.submitButtons .button:hover {
-  background-color: $danger-btn-bg-hover;
+  background-color: $default-btn-bg-hover;
 }
 
 button[disabled] {
@@ -808,35 +747,6 @@ input[type="button"][disabled] {
 }
 
 
-.button:hover {
-  background-color: $disabled-btn-color;
-  color: $default-btn-color;
-  border-color: $disabled-btn-color;
-}
-
-.button:focus {
-  background-color: $disabled-btn-color;
-  color: $default-btn-color;
-  border-color: $disabled-btn-color;
-}
-
-.button.focus {
-  background-color: $disabled-btn-color;
-  color: $default-btn-color;
-  border-color: $disabled-btn-color;
-}
-
-.button:active {
-  background-color: $disabled-btn-color;
-  color: $default-btn-color;
-  border-color: $disabled-btn-color;
-}
-
-.button.active {
-  background-color: $disabled-btn-color;
-  color: $default-btn-color;
-  border-color: $disabled-btn-color;
-}
 
 .open > .dropdown-toggle.btn-primary {
   background-color: $disabled-btn-color;
@@ -953,6 +863,7 @@ select[size] {
   line-height: $input-line-height + 8;
   outline: 0;
   height: $input-line-height + 8;
+  min-height: 72px;
   -webkit-appearance: none;
   appearance: none;
   scrollbar-base-color: $input-select-bg;

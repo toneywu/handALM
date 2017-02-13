@@ -1521,8 +1521,9 @@ EOHTML;
     {
         $metadataFile = null;
         $foundViewDefs = false;
+        $viewDef = strtolower($this->type) . 'viewdefs';
 //Modefied by zengchen 20161214
-        /*        $viewDef = strtolower($this->type) . 'viewdefs';
+        /*
         $coreMetaPath = 'modules/' . $this->module . '/metadata/' . $viewDef . '.php';
         if (file_exists('custom/' . $coreMetaPath)) {
             $metadataFile = 'custom/' . $coreMetaPath;

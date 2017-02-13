@@ -1,20 +1,33 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
-    <title>acc_member</title>
-    <desc>Created with Sketch.</desc>
-    <defs>
-        <polygon id="path-1" points="21.9733859 7.38255039e-06 21.9733859 21.9734228 0 21.9734228 0 7.38255039e-06 21.9733859 7.3825504e-06"></polygon>
-    </defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="acc_member">
-            <g id="Page-1" transform="translate(4.000000, 4.000000)">
-                <mask id="mask-2" fill="white">
-                    <use xlink:href="#path-1"></use>
-                </mask>
-                <g id="Clip-2"></g>
-                <path d="M10.9866966,7.38255039e-06 C10.9866966,7.38255039e-06 5.49334094,5.49336309 -1.47651008e-05,5.49336309 C-1.47651008e-05,5.49336309 -1.47651008e-05,19.4128664 10.9866966,21.9734302 C21.9734081,19.4128664 21.9734081,5.49336309 21.9734081,5.49336309 C16.4800523,5.49336309 10.9866966,7.38255039e-06 10.9866966,7.38255039e-06" id="Fill-1" fill="#FFFFFF" mask="url(#mask-2)"></path>
-            </g>
-        </g>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+<polygon fill="none" stroke="#999999" stroke-miterlimit="10" points="24.006,26.069 17.006,26.069 17.006,8.867 24.006,11.694 "/>
+<title>acc_member</title>
+<desc>Created with Sketch.</desc>
+<rect x="2.833" y="2" fill="none" stroke="#999999" stroke-miterlimit="10" width="13.833" height="24.069"/>
+<g id="Page-1">
+	<g id="acc_contacts">
+		<g id="Group" transform="translate(5.000000, 5.000000)">
+			<ellipse id="Oval-1" fill="#999999" stroke="#FFFFFF" cx="17.979" cy="15.421" rx="2.605" ry="2.569"/>
+			<path id="Oval-1_1_" fill="#999999" stroke="#FFFFFF" d="M22.668,22.615c1.267,0-2.1-4.625-4.689-4.625s-6.71,4.216-4.689,4.625
+				C15.309,23.024,21.403,22.615,22.668,22.615z"/>
+		</g>
+	</g>
+</g>
+<rect x="8.052" y="19.765" fill="none" stroke="#999999" stroke-miterlimit="10" width="3.948" height="6.118"/>
+<rect x="19.562" y="14.701" fill="#999999" width="1.888" height="1.668"/>
+<rect x="5.4" y="5.249" fill="#999999" width="1.888" height="1.668"/>
+<rect x="8.979" y="5.248" fill="#999999" width="1.887" height="1.668"/>
+<rect x="12.484" y="5.248" fill="#999999" width="1.887" height="1.668"/>
+<rect x="5.541" y="8.034" fill="#999999" width="1.887" height="1.667"/>
+<rect x="9.119" y="8.033" fill="#999999" width="1.887" height="1.668"/>
+<rect x="12.625" y="8.033" fill="#999999" width="1.887" height="1.668"/>
+<rect x="5.577" y="10.915" fill="#999999" width="1.887" height="1.667"/>
+<rect x="9.156" y="10.915" fill="#999999" width="1.887" height="1.668"/>
+<rect x="12.662" y="10.914" fill="#999999" width="1.887" height="1.668"/>
+<rect x="5.577" y="13.868" fill="#999999" width="1.887" height="1.667"/>
+<rect x="9.156" y="13.867" fill="#999999" width="1.887" height="1.668"/>
+<rect x="12.662" y="13.867" fill="#999999" width="1.887" height="1.668"/>
 </svg>

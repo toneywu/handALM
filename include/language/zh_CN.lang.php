@@ -1141,14 +1141,13 @@ $app_strings = array (
   'LBL_MOREDETAIL' => '详细信息' /*for 508 compliance fix*/,
   'LBL_EDIT_INLINE' => '内联编辑' /*for 508 compliance fix*/,
   'LBL_VIEW_INLINE' => '查看' /*for 508 compliance fix*/,
-  'LBL_BASIC_SEARCH' => '搜索' /*for 508 compliance fix*/,
+  'LBL_BASIC_SEARCH' => '筛选' /*for 508 compliance fix*/,
   'LBL_PROJECT_MINUS' => '移除' /*for 508 compliance fix*/,
   'LBL_PROJECT_PLUS' => '添加' /*for 508 compliance fix*/,
   'LBL_Blank' => ' ' /*for 508 compliance fix*/,
   'LBL_ICON_COLUMN_1' => '1 列' /*for 508 compliance fix*/,
   'LBL_ICON_COLUMN_2' => '2 列' /*for 508 compliance fix*/,
   'LBL_ICON_COLUMN_3' => '3 列' /*for 508 compliance fix*/,
-  'LBL_ADVANCED_SEARCH' => '高级搜索' /*for 508 compliance fix*/,
   'LBL_ID_FF_ADD' => '添加' /*for 508 compliance fix*/,
   'LBL_HIDE_SHOW' => '隐藏/显示' /*for 508 compliance fix*/,
   'LBL_DELETE_INLINE' => '删除' /*for 508 compliance fix*/,
@@ -2056,12 +2055,14 @@ $app_strings = array (
 
 
     'LNK_ABOUT' => '关于',
-    'LNK_ADVANCED_SEARCH' => '高级查找',
-    'LNK_BASIC_SEARCH' => '基本查找',
+    'LNK_ADVANCED_FILTER' => '高级筛选',
+    'LNK_BASIC_FILTER' => '快速筛选',
+    'LBL_ADVANCED_SEARCH' => '高级筛选',
+    'LBL_QUICK_FILTER' => '快速筛选',
     'LNK_SEARCH_FTS_VIEW_ALL' => '查看所有结果',
     'LNK_SEARCH_NONFTS_VIEW_ALL' => '显示所有',
     'LNK_CLOSE' => '关闭',
-    'LBL_MODIFY_CURRENT_SEARCH'=> '修改当前查询',
+    'LBL_MODIFY_CURRENT_SEARCH'=> '修改当前筛选条件',
     'LNK_SAVED_VIEWS' => '保存查找和布局',
     'LNK_DELETE_ALL' => '删除所有记录',
     'LNK_DELETE' => '删除',
@@ -2130,7 +2131,8 @@ $app_strings = array (
     'LBL_REQUEST_PROCESSED'=>'完成',
     'LBL_AJAX_FAILURE' => 'Ajax调用失败',
     'LBL_MERGE_DUPLICATES'  => '合并重复',
-    'LBL_SAVED_SEARCH_SHORTCUT' => '已保存的查询结果',
+    'LBL_SAVED_SEARCH_SHORTCUT' => '预存的筛选条件',
+    'LBL_FILTER_HEADER_TITLE'=> '筛选条件',
     'LBL_SEARCH_POPULATE_ONLY'=> '用上面的查找表单进行查找',
     'LBL_DETAILVIEW'=>'详情视图',
     'LBL_LISTVIEW'=>'列表视图',
@@ -2516,9 +2518,20 @@ $app_strings = array (
 
     'ERR_A_REMINDER_IS_EMPTY_OR_INCORRECT' => '提醒是空的或不正确。',
     'ERR_REMINDER_IS_NOT_SET_POPUP_OR_EMAIL' => '未设置自动弹出式视窗或电子邮件提醒。',
-    'ERR_NO_INVITEES_FOR_REMINDER' => '未设置自动提醒的受邀者。'
+    'ERR_NO_INVITEES_FOR_REMINDER' => '未设置自动提醒的受邀者。',
 
+    'LBL_COLUMNS_FILTER_HEADER_TITLE' => '挑选列表字段',
+    'LBL_SAVE_CHANGES_BUTTON_TITLE' => '保存',
+    'LBL_DISPLAYED' => '显示列',
+    'LBL_HIDDEN' => '隐藏列',
+    'ERR_EMPTY_COLUMNS_LIST' => '必须至少选择1列',
+
+    'LBL_AOP_INTERNAL' => '内部的',
+    'LBL_SAVED_FILTER_SHORTCUT' => '我预存的筛选条件',
     );
+
+
+
 
 $app_list_strings['moduleList']['Library'] = '图书馆';
 $app_list_strings['library_type'] = array('Books'=>'书籍', 'Music'=>'音乐', 'DVD'=>'DVD', 'Magazines'=>'杂志');

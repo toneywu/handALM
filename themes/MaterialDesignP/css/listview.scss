@@ -51,15 +51,13 @@ tr#pagination {
   padding: 5px 0 5px 0;
 }
 
-.list #pagination td .paginationTable .paginationChangeButtons {
-  background-color: $list-view-toolbar-bg;
-  padding: 5px 5px 5px 0;
+.list #pagination td .paginationTable .paginationChangeButtons button:hover {
+  background-color: $list-view-button-hover-color;
 }
 
 .list #pagination td .paginationTable .pageNumbers {
   position: static;
-  font-weight: bold;
-  color: $default-btn-color;
+  color: $list-view-header-color;
   padding: 0 8px 0 0;
   margin: 0 0 0 0;
 }
@@ -263,6 +261,8 @@ tr#pagination {
 
 .selectedRecords.value {
   margin-right: 8px;
+  font-size: $page-font-size + 4;
+  color: $danger;
 }
 
 @media (max-width: 480px) {
@@ -283,12 +283,13 @@ tr#pagination {
 
 .list tr th {
   font-size: 13px;
-  padding: 16px 10px 16px 10px;
+  padding: $list-view-padding 10px;
   border-left: none;
   border-right: none;
   text-align: left;
   white-space: nowrap;
-  color: $default-btn-color;
+  color: $list-view-header-color;
+  font-weight: normal;
 }
 
 .list tr td[scope=col] {
@@ -304,7 +305,6 @@ tr#pagination {
 
 .edit .list tr th {
   font-size: 13px;
-  font-weight: 800;
   padding: 16px 10px 16px 10px;
   border-left: none;
   border-right: none;
@@ -337,22 +337,18 @@ tr#pagination {
 }
 
 .list th a:link {
-  font-weight: bold;
   text-decoration: none;
 }
 
 .list th a:visited {
-  font-weight: bold;
   text-decoration: none;
 }
 
 .list td[scope=col] a:link {
-  font-weight: bold;
   text-decoration: none;
 }
 
 .list td[scope=col] a:visited {
-  font-weight: bold;
   text-decoration: none;
 }
 
@@ -375,7 +371,7 @@ tr#pagination {
 }
 
 .list thead {
-  background-color: $list-view-button-hover-color;
+  background-color: $list-view-toolbar-bg;
 }
 
 .list .oddListRowS1 td[nowrap] {
@@ -424,9 +420,9 @@ a.listViewTdToolsS1 {
 
 .list tr th a:link {
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 400;
   padding-right: 10px;
-  color: $default-btn-color;
+  color: $list-view-header-color;
 }
 
 .list {
@@ -519,10 +515,7 @@ a.listViewTdToolsS1 {
 }
 
 .table-responsive.list > tbody > tr > td {
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 0 10px;
 }
 
 .table-responsive.list > tbody > tr > td > a {
@@ -531,6 +524,19 @@ a.listViewTdToolsS1 {
   border-bottom-color: #ccc;/* $list-view-link-color */
   border-bottom-style: dashed;
   border-bottom-width: 1px;
+}
+
+.table-responsive.list > tbody > tr > td > a.button {
+  font-weight: normal;
+  color: $default-btn-color;
+  background: $default-btn-bg;
+  border: 1px solid $default-btn-border;
+  box-shadow: none;
+  padding: 2px 10px;
+}
+.table-responsive.list > tbody > tr > td > a.button:hover {
+  color: $primary-btn-bg-hover-color;
+  background: $primary-btn-bg-hover;
 }
 
 .table-responsive.list > tbody > tr > td a:hover {
@@ -690,7 +696,7 @@ a.listViewTdToolsS1 {
 }
 
 .list .pagination td table td span.pageNumbers {
-  color: $default-btn-color;
+  color: $list-view-header-color;
 }
 
 .list tr.pagination td.buttons ul.clickMenu > li > a:link {
@@ -803,7 +809,7 @@ a.listViewTdToolsS1 {
 .action-link-top {
   position: relative;
   font-size: 14px;
-  line-height: 11px;
+  line-height: 16px;
   min-height: 16px;
 }
 
@@ -1701,7 +1707,7 @@ ul.chooserList.red.ui-sortable > li {
 }
 
 div.modal-header {
-  padding: 25px;
+  padding: 25px 25px 0 25px;
 }
 
 #columnsFilterList {
@@ -1914,6 +1920,7 @@ ul.clickMenu.selectmenu.SugarActionMenu.listViewLinkButton > li.mobileOnly {
 
 ul.clickMenu.selectmenu.SugarActionMenu.listViewLinkButton > li > a.glyphicon-remove {
   background-color: $navbar-alert-count-bg;
+  z-index: 3;
 }
 
 ul.clickMenu.selectmenu.SugarActionMenu.listViewLinkButton > li.desktopOnly > a.glyphicon-remove {
@@ -2022,7 +2029,7 @@ ul.clickMenu.selectmenu.SugarActionMenu.listViewLinkButton > li.desktopOnly > a.
 }
 
 .popupBody .list.view > thead > tr > th {
-  border: 1px solid transparent;
+  border-top: 1px solid #ccc;
   border-bottom-color: #778591;
 }
 
@@ -2691,7 +2698,7 @@ ul.clickMenu.selectmenu.SugarActionMenu.listViewLinkButton > li.desktopOnly > a.
   }
 
   .pageNumbers {
-    font-size: 10px;
+    font-size: $page-font-size - 1;
   }
 
 }
@@ -2932,6 +2939,7 @@ ul#selectLink.clickMenu > li > a {
   border-bottom: 1px solid #ccc;
   vertical-align: middle;
   min-height: 35px;
+  height: 38px;
   line-height: 1.1em;
 }
 
@@ -2940,6 +2948,7 @@ ul#selectLink.clickMenu > li > a {
   border-bottom: 1px solid #ccc;
   vertical-align: middle;
   min-height: 35px;
+  height: 38px;
   line-height: 1.1em;
 }
 
@@ -3492,7 +3501,7 @@ ul.clickMenu > li > span.searchAppliedAlert {
 }
 
 .content .modal-search .nav-tabs {
-  margin: 16px 0 28px 0;
+  margin: 16px 0 0 0;
 }
 
 .list .pagination-unique td table.paginationTable td.paginationActionButtons:first-child {

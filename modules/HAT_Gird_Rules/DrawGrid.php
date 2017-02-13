@@ -95,8 +95,8 @@
 		border-collapse:separate;
 		border-spacing:10px 10px;
 	}
-	.table_box{width:90%;}
-	.table_box tr,.table_box tr td div{
+	.table_box{max-width:90%;}
+	.table_box tr td,.table_box tr td div{
 		width: 80px;
 		height: 60px;
 		overflow: hidden;
@@ -109,9 +109,11 @@
 		padding: 5px;
 		cursor: pointer;
 	}
-	.table_box tr td.frist{
+	.table_box tr td.frist,.table_box tr td.frist div{
 		background: #efefef;
 		color: #000;
+		overflow: inherit;
+		height: 100%;
 	}
 </style>
 <script>
@@ -152,7 +154,7 @@
 			if ($v['sign'] == 1) {
 				?>
 				<td class="frist">
-					(<?php echo $j; ?>)<?php echo $v['name']; ?>
+					<div>(<?php echo $j; ?>)<?php echo $v['name']; ?></div>
 				</td>
 				<?php
 			} else {
