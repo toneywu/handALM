@@ -6,6 +6,13 @@ class HAT_Counting_LinesViewEdit extends ViewEdit
 {
 	function display()
 	{	
+		$parent_id=$_GET["parent_id"];
+		if($parent_id){
+			$bean_panel=BeanFactory::getBean("HAT_Counting_Tasks",$parent_id);
+			$this->bean->counting_task=$bean_panel->name ;
+			$this->bean->hat_counting_tasks_id_c=$bean_panel->id ;
+			$this->bean->counting_person=$bean_panel->counting_person ;
+		}
 		echo '<input  id="loc_attr" value="" type="hidden">';
 		echo '<input  id="org_attr"  type="hidden" value="">';
 		echo '<input  id="major_attr"  type="hidden" value="">';
@@ -50,7 +57,16 @@ class HAT_Counting_LinesViewEdit extends ViewEdit
 			echo'<script type="text/javascript"src="'.$GLOBALS['sugar_config']['cache_dir'].'jsLanguage/'.$module.'/'.$GLOBALS['current_language'].'.js?s='.$GLOBALS['js_version_key'].'&c='.$GLOBALS['sugar_config']['js_custom_version'].'&j='.$GLOBALS['sugar_config']['js_lang_version'].'"></script>';
 		}
 		parent::display();
-		
+		if($parent_id){
+			
+		echo '<script>
+				
+				$("input[name=\'return_id\']").val("'.$parent_id.'");
+				$("input[name=\'relate_to\']").val("'.$parent_id.'");
+				$("#CANCEL").removeAttr("onclick");
+				$("#CANCEL").attr("onclick","SUGAR.ajaxUI.loadContent(\'index.php?action=DetailView&module=HAT_Counting_Tasks&record='.$parent_id.'\'); return false;");
+			  </script>';
+			}
 		echo '<script>
 		$("#counting_person").val("'.$this->bean->counting_person.'");
 	</script>';
@@ -182,7 +198,7 @@ function displayLineItems(){
 				$line_data=json_encode($row);
 				echo '<script>var column_name=\''.$column_name.'\';insertLineData(' . $line_data . ',"EditView",column_name);</script>';
 			}
-		}else
+		}
 		/*{
 			echo '<script>insertLineHeader("lineItems","EditView","","");</script>';
 		}*/

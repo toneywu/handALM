@@ -1,6 +1,6 @@
 
 var arr_temp='';
-var flag=true;
+var temp_flag='';
 function setExtendValReturn(popupReplyData){
 	$("#loc_attr").val(popupReplyData['name_to_value_array']['loc_attr']);
 	$("#org_attr").val(popupReplyData['name_to_value_array']['org_attr']);
@@ -11,7 +11,7 @@ function setExtendValReturn(popupReplyData){
 	template_id=popupReplyData["name_to_value_array"]["task_template_attr"]
 	attr_info(template_id,'');
 	$("#task_template_attr").val(template_id);
-	get_attr_info(template_id);
+	//get_attr_info(template_id);
 	$("#detailpanel_0").show();
 	$("#detailpanel_1").show();
 	set_return(popupReplyData);//标准Popup-Return函数
@@ -35,15 +35,19 @@ function attr_info(id,asset_id){
 		+'&prodln='+''+'&asset_id='+asset_id,
 		type:'POST',
 		success:function(result){
+			//if(temp_flag==true){
+				get_attr_info(id);
+			//}
 			get_html(result);
 			load_script(result);
+
 		}
 	});
 }
 
 function attr_info_asset(id,asset_id){
 	var module_id = $("input[name*='record']").val();
-	console.log("id:"+id+"asset_id:"+asset_id+"module_id:"+module_id);
+	//console.log("id:"+id+"asset_id:"+asset_id+"module_id:"+module_id);
 	//var module_id =document.getElementByTagName("name")
 	$.ajax({
 		url:'index.php?to_pdf=true&module=HAT_Counting_Tasks&action=counting_task_attr',
@@ -72,18 +76,20 @@ function get_attr_info(id){
 
 function get_html(result){
   	$("#line_asset_items_span").parent().prev().hide();
-  	if(flag){
+  	if(temp_flag==true){
+
   	$("#line_asset_items_span").parent().toggleClass("col-sm-8","col-sm-12");
   	}
   	//$("#line_asset_items_span").replaceWith(result);
   	var lineItems=document.getElementById('line_asset_items_span');
   	lineItems.innerHTML=result;
-  	flag=false;
+  	temp_flag=false;
 }
 
 $(function(){
 	var id=$("#task_template_attr").val();
 	var asset_id=$("#hat_assets_id_c").val();
+	temp_flag=true;
 	if (id!="") {
 		attr_info(id,asset_id);
 	}

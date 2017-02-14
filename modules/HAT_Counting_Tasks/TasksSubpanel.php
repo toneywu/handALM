@@ -21,5 +21,7 @@
     $return_array['where'] = " WHERE hat_counting_tasks.hat_counting_batchs_id_c=hat_counting_batchs.id and hat_counting_batchs.id='" . $batch_id . "'";//会自动加入deleted字段
     $return_array['join'] = ",hat_counting_batchs";
     $return_array['join_tables'] = "";
+    //$_SESSION["HAT_Counting_Batchs_hat_counting_tasks_CELL_ORDER_BY"]="task_number";
+    //var_dump($_SESSION);
     return $return_array;
 }

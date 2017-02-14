@@ -23,13 +23,7 @@
  */
 class zzmPullPersonInfo {
 
-	function pullPerson($interfaceId,&$funcReturn,&$wsResult) {
-		$funcReturn["return_status"]='0';
-		$funcReturn["msg_data"]='';
-
-	}
-
-	function pullPerson($paramsArray){
+	function pullPersonInfo($paramsArray){
 		global $db,$app_list_strings;
 		$return=array();
 
@@ -54,7 +48,9 @@ class zzmPullPersonInfo {
 		if ($interfaceBean) { 
 			$url =isset($interfaceBean->service_url)?$interfaceBean->service_url:'';
 			$lastSyncDate=isset($interfaceBean->last_sync_date)?$interfaceBean->last_sync_date:'';
-			$lastSyncDate=date_format(date_create($lastSyncDate),"yyyy-MM-ddTHH:mm:ss.SSSZ");
+			if ($lastSyncDate!=''){
+				$lastSyncDate=date_format(date_create($lastSyncDate),"yyyy-MM-ddTHH:mm:ss.SSSZ");
+			}
 		}
 
 		$postAllString = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://www.zzmetro.com/pcbpel/adapter/db/top/CustomSoapHeader" xmlns:ex="http://xmlns.oracle.com/pcbpel/adapter/db/sp/ex_GetEmployeeInfo">
@@ -69,12 +65,13 @@ class zzmPullPersonInfo {
 <soapenv:Body>
 <ex:InputParameters>
 <ex:P_START_DATE>';
-
+print_r($postAllString);
 $postAllString .=$lastSyncDate.'</ex:P_START_DATE>
 <ex:P_END_DATA></ex:P_END_DATA>
 </ex:InputParameters>
 </soapenv:Body>
 </soapenv:Envelope>';
+print_r($postAllString);
 
 		//创建一个新cURL资源 
 $soap_do = curl_init();
@@ -110,7 +107,7 @@ if (curl_errno($soap_do)) {
 		//关闭cURL资源，并且释放系统资源
 curl_close($soap_do);
 if ($return["return_status"]=='1'){
-return $return;
+	return $return;
 }
 
 	//生成XML解析对象
@@ -122,26 +119,17 @@ xml_parser_free($p);
 //生成XML DOM解析对象
 $xml = new DOMDocument();
 //加载DOM
-$xml->loadXML($result);
-//获取报文节点   X_RETURN_STATUS
-$x_return_status = $xml->getElementsByTagName("X_RETURN_STATUS");
-//获取报文节点   X_MSG_DATA
-$x_msg_data = $xml->getElementsByTagName("X_MSG_DATA");
+$xml->loadXML($wsResult);
+//获取报文节点   X_ASSET_OUT_DATA
+$x_ws_out_data = $xml->getElementsByTagName("GET_EMPLOYEE_INFO_ITEM");
 
-if($x_return_status!='S'){
-	$return["return_status"]='1';
-	$return["msg_data"]=$x_msg_data;
-	return $return;
-}
 
-$xml_array = new SimpleXMLElement($x_asset_out_data->item(0)->nodeValue);
+$xml_array = new SimpleXMLElement($x_ws_out_data->item(0)->nodeValue);
 foreach ($xml_array as $tmp) {
-	echo 'RESOURCE_TYPE =' . $tmp->RESOURCE_TYPE . "<br>";
-	echo 'RESOURCE_NUM =' . $tmp->RESOURCE_NUM . "<br>";
-	echo 'RETURN_STATUS =' . $tmp->RETURN_STATUS . "<br>";
-	echo 'ERROR_MESSAGE =' . $tmp->ERROR_MESSAGE . "<br>";
+	echo 'PERSON_TYPE =' . $tmp->PERSON_TYPE . "<br>";
 	//改为通过Bean保存到人员数据中
 }
 return $return;
+}
 }
 ?>

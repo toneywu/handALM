@@ -62,6 +62,7 @@ if ($isNew=="") {
 			);
 		
 		$return_msg=$auto_create_task->hat_counting($param);
+		
 	}else{
 		//echo "3";
 		$code="3";

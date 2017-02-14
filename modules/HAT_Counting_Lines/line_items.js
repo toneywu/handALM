@@ -57,8 +57,11 @@ function insertLineHeader(tableid,current_view ,attr_label,attr_data,attr_type,s
   }
   head_html +="<th > </th>";
   head_html +="<tr>";
-
+  if(first_flag==true){
   $("#lineItems_result").append(head_html);
+  first_flag=false;
+  }
+  $("#lineItems_result").find("tbody:eq(0)").find("tr:eq(0)").replaceWith(head_html);
 }
 
 function insertLineData(line_data,current_view,column_name){ //将数据写入到对应的行字段中
@@ -149,7 +152,7 @@ if(current_view == "EditView" ) {
 }
 if(current_view == "DetailView"){
 
-  z1.innerHTML  +="<td><input type='button' value='移除' class='button'  id='btn_delete_line" + prodln +"' onclick='btnMarkLineDeleted(" + prodln + ",\"line_\")'></td>";
+  z1.innerHTML  +="<td><input type='button' value='移除' class='button'  id='btn_delete_line" + prodln +"' onclick='line_delete(" + prodln + ")'></td>";
 }
   var x = tablebody.insertRow(-1); //以下生成的是Line Editor
   x.id = 'line_editor' + prodln;
@@ -246,9 +249,17 @@ function btnMarkLineDeleted(ln, key) {//删除当前行
   if(confirm(SUGAR.language.get('app_strings','NTC_DELETE_CONFIRMATION'))) {
     markLineDeleted(ln, key);
     LineEditorClose(ln); 
-    if(view=='DetailView'){
-      updateDeleted(result_id);
-    }
+  }
+  else
+  {
+    return false;
+  }
+}
+
+function line_delete(ln){
+  if(confirm(SUGAR.language.get('app_strings','NTC_DELETE_CONFIRMATION'))) {
+  $("#line_body"+ln).hide();
+  updateDeleted(result_id);
   }
   else
   {

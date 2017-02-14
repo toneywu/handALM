@@ -4,10 +4,11 @@ var columnNum1 = 8;
 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
 
 function insertLineHeader(tableid){
-  $("#line_items_label").hide();//隐藏SugarCRM字段
+  $("#line_items_span").parent().prev().hide();//隐藏SugarCRM字段
 
   tablehead = document.createElement("thead");
   tablehead.id = tableid +"_head";
+  
   document.getElementById(tableid).appendChild(tablehead);
 
   var x=tablehead.insertRow(-1);
@@ -29,6 +30,11 @@ function insertLineHeader(tableid){
   var i=x.insertCell(7);
 
   i.innerHTML='&nbsp;';
+  var tr_header=document.getElementById(tablehead.id);
+  tr_header.style.backgroundColor="white";
+  tr_header.align="center";
+  
+
 }
 
 
@@ -72,21 +78,23 @@ var z1 = tablebody.insertRow(-1);
 z1.id = 'line1_displayed' + prodln;
 z1.className = 'oddListRowS1';
 z1.innerHTML  =
-"<td><span name='displayed_line_number[" + prodln + "]' id='displayed_line_number" + prodln + "'></span></td>" +
-"<td><select disabled='disabled' tabindex='116' name='displayed_segment_type[" + prodln + "]' id='displayed_segment_type" + prodln + "'>" + segment_type +"</select></td>"+
-"<td><select disabled='disabled' tabindex='116' name='displayed_map_segment_name[" + prodln + "]' id='displayed_map_segment_name" + prodln + "'>" + segment_name +"</select></td>"+
-"<td><span name='displayed_column_name[" + prodln + "]' id='displayed_column_name" + prodln + "'></span></td>" +
-"<td><span name='displayed_maping_segment_title[" + prodln + "]' id='displayed_maping_segment_title" + prodln + "'></span></td>"+
-"<td><span name='displayed_required_flag[" + prodln + "]' id='displayed_required_flag" + prodln + "'></span></td>"+
-"<td><span name='displayed_description[" + prodln + "]' id='displayed_description" + prodln + "'></span></td>"+
-"<td><input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'></td>";
+"<td style='vertical-align: middle;'><span name='displayed_line_number[" + prodln + "]' id='displayed_line_number" + prodln + "'></span></td>" +
+"<td style='vertical-align: middle;'><select disabled='disabled' tabindex='116' name='displayed_segment_type[" + prodln + "]' id='displayed_segment_type" + prodln + "'>" + segment_type +"</select></td>"+
+"<td style='vertical-align: middle;'><select disabled='disabled' tabindex='116' name='displayed_map_segment_name[" + prodln + "]' id='displayed_map_segment_name" + prodln + "'>" + segment_name +"</select></td>"+
+"<td style='vertical-align: middle;'><span name='displayed_column_name[" + prodln + "]' id='displayed_column_name" + prodln + "'></span></td>" +
+"<td style='vertical-align: middle;'><span name='displayed_maping_segment_title[" + prodln + "]' id='displayed_maping_segment_title" + prodln + "'></span></td>"+
+"<td style='vertical-align: middle;'<span name='displayed_required_flag[" + prodln + "]' id='displayed_required_flag" + prodln + "'></span></td>"+
+"<td style='vertical-align: middle;'><span name='displayed_description[" + prodln + "]' id='displayed_description" + prodln + "'></span></td>"+
+"<td style='vertical-align: middle;'><input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'></td>";
 
+var tr_dis=document.getElementById(z1.id);
+  tr_dis.align="center";
   var x = tablebody.insertRow(-1); //以下生成的是Line Editor
   x.id = 'line_editor' + prodln;
   x.style = "display:none";
   /*l_prodln=prodln+1;*/
  x.innerHTML  = "<td colSpan='"+columnNum1+"'>"+
-  "<table border='0' class='lineEditor' width='100%'>"+
+  "<table border='0' class='lineEditor' width='100%' style='display:table'>"+
   "<tr>"+
   "<input name='line_id["+prodln+"]' id='line_id"+prodln+"' value='' type='hidden'>"+
   "<input name='line_header_id["+prodln+"]' id='line_header_id"+prodln+"' value='' type='hidden' >"+
@@ -204,11 +212,13 @@ function LineEditorShow(ln){ //显示行编辑器（先自动关闭所有的行�
   $("#line1_displayed"+ln).hide();
   $("#line_editor"+ln).show();
 
+
 }
 
 function LineEditorClose(ln) {//关闭行编辑器（显示为正常行）
   if (check_form('EditView')) {
     $("#line_editor"+ln).hide();
+    
     $("#line1_displayed"+ln).show();
     renderLine(ln);
     resetLineNum_Bold();
