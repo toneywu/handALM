@@ -138,6 +138,9 @@ class HAT_Asset_Trans_BatchViewEdit extends ViewEdit
 						$account_bean = BeanFactory :: getBean('Accounts')->retrieve_by_string_fields(array ('ID' => $wo_bean->account_id));
 						if(!empty($account_bean)){
 							$this->bean->target_using_org=$account_bean->name;
+                            echo '<input id="target_using_org_id_v" name="target_using_org_id_v" type="hidden" value="'.$wo_bean->account_id.'">';
+                            echo '<input id="target_using_org_v" name="target_using_org_v" type="hidden" value="'.$account_bean->name.'">';
+                            //echo "-------------------------------------------";
 						}
 					}
 

@@ -35,7 +35,7 @@ function display_lines($focus, $field, $value, $view){
          	and imdh.deleted=0
          	AND imdl.id = imdh.haa_integr6553f_lines_idb
          	AND imdl.haa_integration_system_def_lines_id_c = isdl.id
-			AND imdh.haa_integr33edheaders_ida='".$focus->id."'";
+			AND imdh.haa_integr33edheaders_ida='".$focus->id."'"."order by line_number";
 
 
          	$result = $focus->db->query($sql);

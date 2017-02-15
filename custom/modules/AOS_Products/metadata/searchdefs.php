@@ -11,6 +11,11 @@ array (
         'name' => 'name',
         'default' => true,
       ),
+      'description' => 
+      array (
+        'name' => 'description',
+        'default' => true,
+      ),
       'current_user_only' => 
       array (
         'name' => 'current_user_only',
@@ -31,6 +36,12 @@ array (
       'name' => 
       array (
         'name' => 'name',
+        'default' => true,
+        'width' => '10%',
+      ),
+      'description' => 
+      array (
+        'name' => 'description',
         'default' => true,
         'width' => '10%',
       ),

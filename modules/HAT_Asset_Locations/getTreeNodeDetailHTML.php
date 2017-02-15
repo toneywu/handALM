@@ -223,12 +223,13 @@ if($_GET['type']=="location") { //如果是Locationg来源，需要读取子位�
                         AND hat_assets.aos_product_categories_id = aos_product_categories.id
                         AND hat_assets.haa_frameworks_id = haa_frameworks.id
                         AND hat_assets.deleted = 0
+                        AND hat_assets.asset_status != 'Discard'
                         AND haa_frameworks.deleted = 0
                         AND aos_products.deleted = 0
                         AND aos_product_categories.deleted = 0
                         AND hat_assets.id = '".$_GET['id']."'";
 
-
+    
     $bean_assets = $db->query($sel_asset); //无如是Location还是asset来源，都可以显示子资产
     while ($asset = $db->fetchByAssoc($bean_assets)) {
       $haa_ff_id=$asset['haa_ff_id_c'];

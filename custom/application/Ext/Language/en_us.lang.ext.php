@@ -176,7 +176,6 @@ $app_list_strings['haa_code_module_list']=array (
   'asset_counting' => 'Asset Counting',
   'interface'=>'Interface',
   'sso'=>'SSO',
-  'calendar'=>'Calendar'
   );
 
 $app_list_strings['haa_code_type_list']=array (
@@ -208,7 +207,6 @@ $app_list_strings['haa_code_type_list']=array (
   'asset_counting_major_type'=>'asset_counting_major_type',
   'interface_link_system'=>'interface_link_system',
   'sso_link_system'=>'sso_link_system',
-  'calendar_type'=>'calendar_type'
   );
 
 
@@ -602,12 +600,14 @@ $app_list_strings['haa_import_process_status']['WARN'] = '警告';
  ********************************************************************************/
 
 
+$app_list_strings['moduleList']['HAA_Integration_Interface_Headers'] = '通用接口-接口数据查询';
+$app_list_strings['moduleList']['HAA_Integration_Interface_Lines'] = '通用接口-接口明细数据';
 $app_list_strings['moduleList']['HAA_Integration_Mapping_Def_Headers'] = '通用接口-映射结构定义';
 $app_list_strings['moduleList']['HAA_Integration_Mapping_Def_Lines'] = '通用接口-映射结构列';
-$app_list_strings['moduleList']['HAA_Integration_System_Def_Headers'] = '通用接口-接入源系统定义';
-$app_list_strings['moduleList']['HAA_Integration_Mapping_Lines'] = '通用接口-映射段值维护';
 $app_list_strings['moduleList']['HAA_Integration_Mapping_Headers'] = '通用接口-映射维护';
-$app_list_strings['moduleList']['HAA_Integration_System_Def_Lines'] = '通用接口-接入源系统接口列		';
+$app_list_strings['moduleList']['HAA_Integration_Mapping_Lines'] = '通用接口-映射段值维护';
+$app_list_strings['moduleList']['HAA_Integration_System_Def_Headers'] = '通用接口-接入源系统定义';
+$app_list_strings['moduleList']['HAA_Integration_System_Def_Lines'] = '通用接口-接入源系统接口列';
 $app_list_strings['haa_integration_sys_column_name'][''] = ' ';
 $app_list_strings['haa_integration_sys_column_name']['SEGMENT1'] = 'SEGMENT1';
 $app_list_strings['haa_integration_sys_column_name']['SEGMENT2'] = 'SEGMENT2';
@@ -731,6 +731,14 @@ $app_list_strings['haa_integration_map_segment_name']['TARGET7'] = 'TARGET8';
 $app_list_strings['haa_integration_sys_column_type']=array (
   'S' => '源数据列',
   'T' => '映射数据列',
+  );
+$app_list_strings['haa_integration_process_status']=array (
+  'N' => '初始',
+  'S' => '已导入','TE' => '转换错误','IE' => '导入错误',
+  );
+$app_list_strings['haa_integration_line_status']=array (
+  'N' => '初始',
+  'S' => '已导入','E' => '错误',
   );
 
 /*********************************************************************************

@@ -497,6 +497,11 @@ function FFCheckField( field_idStr, ajaxStr, errMsg, async_bool=false) {
 ***************************************/
 function OverwriteSaveBtn(preValidateFunction) {
 	SaveBtn = $('#SAVE_HEADER, #SAVE_FOOTER');
+	//Add by zhangling 20170215
+	if (SaveBtn !== null || SaveBtn !== undefined || SaveBtn !== '') {
+		SaveBtn = $('.button.primary');
+	} 
+	//End add on 20170215
 	SaveBtn.removeAttr('onclick');
 	SaveBtn.attr("type","button"); //防止有Submit类的Button会自动提交，因此将类型变为Button
 

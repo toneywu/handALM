@@ -76,4 +76,5 @@ $mod_strings = array (
   'LBL_SOURCE1_8' => '映射维字段（动态）',
   'LBL_TARGET1_8' => '映射目标字段(动态)',
   'LBL_REQUIRED_FLAG' => '是否必须*',
+  'LBL_ENABLED_FLAG' => '是否启用*',
 );

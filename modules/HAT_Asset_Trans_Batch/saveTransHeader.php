@@ -16,7 +16,16 @@ function save_header($beanHeader, $check_notify) {
     $GLOBALS['log']->debug("OK.Header is Saving...");
 
     $beanHeader = populateFromPost('', $beanHeader);//调用populateFromPost写入POST的数据
+
+    //如果是自用,则保存自用的id
     $beanHeader->asset_trans_status =  check_hearder_status($beanHeader);
+    $bean_account = BeanFactory :: getBean('Accounts')->retrieve_by_string_fields(array (
+            'name' =>  $beanHeader->current_owning_org,
+            'haa_frameworks_id_c' => $beanHeader->haa_frameworks_id
+            ));
+    if ($bean_account) { 
+        $beanHeader->current_owning_org_id = isset($bean_account->id)?$bean_account->id:'';
+    }
 
     $beanHeader->save($check_notify);
     $return_id = $beanHeader->id;

@@ -35,7 +35,7 @@ $current_framework=(isset($_SESSION["current_framework"]))?$_SESSION["current_fr
 require_once('modules/HAT_Asset_Locations/getTreeNodeList.php');//所有的默认搜索都从这个文件进行处理
 //require_once('modules/HAT_Asset_Locations/getTreeviewSearch.php');//所有附加的搜索这个文件进行处理
 
-
+//echo($_REQUEST['type']."  bbbbbbbbb");
 if($_REQUEST['type']=="location") { //如果是Location来源，需要读取子位置和子资产（Asset来源只需要子资产）
     //先加载所有的Location列表
         $sel_sub_location ="SELECT
@@ -46,7 +46,8 @@ if($_REQUEST['type']=="location") { //如果是Location来源，需要读取子�
                           FROM
                             hat_asset_locations,
                             ham_maint_sites
-                          WHERE hat_asset_locations.deleted = 0 AND hat_asset_locations.`ham_maint_sites_id` = `ham_maint_sites`.id ";
+                          WHERE hat_asset_locations.deleted = 0 
+                          AND hat_asset_locations.`ham_maint_sites_id` = `ham_maint_sites`.id ";
           //SQL Statement没有加载完成，下面继续拼接SQL,包括以下可能的场景
           //ham_maint_sites_id
           //haa_frameworks_id
@@ -67,7 +68,6 @@ if($_REQUEST['type']=="location") { //如果是Location来源，需要读取子�
 
         $sel_sub_location .= " ORDER BY name";
 
-    //echo($sel_sub_location);
 
     $bean_locations =  $db-> query($sel_sub_location);
 
@@ -93,9 +93,14 @@ if($_REQUEST['type']=="location") { //如果是Location来源，需要读取子�
                         hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_assets_idb = hat_assets.id
                             AND hat_asset_locations_hat_assets_c.deleted = 0
                             AND hat_assets.deleted = 0
+                            AND hat_assets.asset_status != 'Discard'
                             AND (hat_assets.parent_asset_id = '' OR hat_assets.parent_asset_id IS NULL)
                             AND hat_assets.haa_frameworks_id='".$current_framework."'
-                            AND hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_asset_locations_ida ='".$_REQUEST['id']."' ORDER by hat_assets.name ASC";
+                            AND hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_asset_locations_ida ='".$_REQUEST['id']."' ".$where_sql." ORDER by hat_assets.name ASC";
+        /*if($_REQUEST['id'] == '44c3f40e-53c6-1631-d88a-5817fb969836'){
+          echo $sel_sub_asset;
+        }*/
+      
     }
 
 } elseif ($_REQUEST['type']=="owning_org_business_type"||$_REQUEST['type']=="using_org_business_type") {
@@ -172,6 +177,7 @@ if($_REQUEST['type']=="location") { //如果是Location来源，需要读取子�
                         WHERE accounts.id = hat_assets.owning_org_id 
                           AND accounts.deleted = 0 
                           AND hat_assets.deleted = 0 
+                          AND hat_assets.asset_status != 'Discard'
                           AND hat_assets.parent_asset_id = '' 
                                       AND hat_assets.owning_org_id ='".$_REQUEST['id']."'
                         GROUP BY hat_assets.owning_person_id)
@@ -189,19 +195,20 @@ if($_REQUEST['type']=="location") { //如果是Location来源，需要读取子�
 	                        accounts.id = hat_assets.".$_REQUEST['type']."_id
 	                            AND accounts.deleted = 0
 	                            AND hat_assets.deleted = 0
+                              AND hat_assets.asset_status != 'Discard'
 	                            AND hat_assets.parent_asset_id = ''
-	                            AND accounts.id ='".$_REQUEST['id']."'
+	                            AND accounts.id ='".$_REQUEST['id']."' ".$where_sql."
 	                    ORDER BY hat_assets.name";
+                    
     	} else {
     		//显示组织下挂接的资产
 	        $sel_sub_asset ="SELECT  hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status
 	        					FROM hat_assets 
 	        					WHERE hat_assets.`deleted`=0 
+                      AND hat_assets.asset_status != 'Discard'
                       AND hat_assets.haa_frameworks_id='".$current_framework."'
                       AND hat_assets.".$_REQUEST['type']."_id=''
 	                    ORDER BY hat_assets.name";
-
-
 
 	    }
     }
@@ -248,8 +255,9 @@ if($_REQUEST['type']=="location") { //如果是Location来源，需要读取子�
   					hat_assets.id, hat_assets.name, hat_assets.asset_desc,  hat_assets.asset_icon
   					FROM hat_assets
   					WHERE hat_assets.`deleted`=0 
+              AND hat_assets.asset_status != 'Discard'
               AND hat_assets.haa_frameworks_id='".$current_framework."'
-              AND hat_assets.`aos_products_id` = '".$_REQUEST['id']."'
+              AND hat_assets.`aos_products_id` = '".$_REQUEST['id']."' ".$where_sql."
 					 ORDER BY name";
     $sel_sub_asset =$sql_string;
 
@@ -261,13 +269,13 @@ if($_REQUEST['type']=="location") { //如果是Location来源，需要读取子�
                         hit_racks ON (hit_racks.`deleted`=0 AND hit_racks.`hat_assets_id`=hat_assets.id)
                     WHERE 
                         hat_assets.deleted=0 
+                        AND hat_assets.asset_status != 'Discard'
                         AND hat_assets.haa_frameworks_id='".$current_framework."'
-                        AND hat_assets.parent_asset_id = '".$_REQUEST['id']."'";
+                        AND hat_assets.parent_asset_id = '".$_REQUEST['id']."' ".$where_sql;
 
 }
-//echo($sel_sub_asset);
-
-
+//echo $sel_sub_asset;
+//echo($_REQUEST['type']."  asssasas");
 
 if (isset($sel_asset_grouped_by_contact)) {
     $get_sql_results = $db->query($sel_asset_grouped_by_contact); //无如是Location还是asset来源，都可以显示子资产
@@ -280,7 +288,6 @@ if (isset($sel_asset_grouped_by_contact)) {
         }
     //}
 }
-
 
 if (isset($sel_sub_asset)) {
     $bean_assets = $db->query($sel_sub_asset); //无如是Location还是asset来源，都可以显示子资产
