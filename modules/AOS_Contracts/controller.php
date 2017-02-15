@@ -77,6 +77,42 @@ class AOS_ContractsController extends SugarController {
         }
         
     }
+
+    public function action_MassUpdate() {
+        $action=$_POST["action"];
+        $delete_flag=$_POST["delete"];
+        $occur_error=0;
+        if($action=="MassUpdate"&&$delete_flag==true){
+            
+            $recordIds = explode(',', $_REQUEST['uid']);
+            foreach ($recordIds as $recordId) {
+                $aos_contract_bean = BeanFactory::getBean("AOS_Contracts",$recordId);
+                
+                if($occur_error==0){
+                    if($aos_contract_bean->status=="Signed"){
+                        $occur_error=1;
+                    }
+                }
+            }
+            if($occur_error==1){
+                $queryParams = array(
+                                'module' => 'AOS_Contracts',
+                                'action' => 'index',
+                                'error_message' => "勾选合同中存在状态等于签约的不可删除",
+                                );
+                SugarApplication::redirect('index.php?' . http_build_query($queryParams));
+            }
+        }
+        parent :: action_MassUpdate();
+        if($occur_error==0){
+                $queryParams = array(
+                                'module' => 'AOS_Contracts',
+                                'action' => 'index',
+                                'error_message' => "",
+                                );
+                SugarApplication::redirect('index.php?' . http_build_query($queryParams));
+            }
+    }
 }
 
 ?> 

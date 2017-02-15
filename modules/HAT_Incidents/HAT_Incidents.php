@@ -53,9 +53,9 @@ class HAT_Incidents extends HAT_Incidents_sugar {
 		if ($this->event_number==''){
 			
 			if($sugar_config['dbconfig']['db_type'] == 'mssql'){
-				$this->event_number = $this->db->getOne("SELECT MAX(CAST(event_number as INT))+1 FROM HAT_Incidents");
+				$this->event_number = $this->db->getOne("SELECT MAX(CAST(event_number as INT))+1 FROM hat_incidents");
 			} else {
-				$this->event_number = $this->db->getOne("SELECT MAX(CAST(event_number as UNSIGNED))+1 FROM HAT_Incidents");
+				$this->event_number = $this->db->getOne("SELECT MAX(CAST(event_number as UNSIGNED))+1 FROM hat_incidents");
 			}
 
 			if($this->event_number < 1||$this->event_number==''){

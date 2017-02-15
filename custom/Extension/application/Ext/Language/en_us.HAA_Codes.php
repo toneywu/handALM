@@ -55,7 +55,7 @@ $app_list_strings['haa_code_module_list']=array (
   'insurance' => 'Insurance',
   'asset_counting' => 'Asset Counting',
   'interface'=>'Interface',
-  'sso'=>'SSO'
+  'sso'=>'SSO',
   );
 
 $app_list_strings['haa_code_type_list']=array (
@@ -86,5 +86,5 @@ $app_list_strings['haa_code_type_list']=array (
   'asset_counting_obj_type' => 'asset_counting_obj_type',
   'asset_counting_major_type'=>'asset_counting_major_type',
   'interface_link_system'=>'interface_link_system',
-  'sso_link_system'=>'sso_link_system'
+  'sso_link_system'=>'sso_link_system',
   );

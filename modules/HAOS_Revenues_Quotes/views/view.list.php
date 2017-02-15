@@ -17,6 +17,7 @@ class HAOS_Revenues_QuotesViewList extends ViewList
     }
 
 	function display(){
+		echo '<script src="modules/HAOS_Revenues_Quotes/js/HAOS_Revenues_Quotes_listview.js"></script>';
 		parent::display();
 		echo '<script>
 			$(function(){

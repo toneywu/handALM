@@ -8,7 +8,22 @@ $(document).ready(function() {
     	call_ff();
     })
 
-    $("#event_date").change(function(){resetPersonByDate()})
+    $("#event_date").change(function(){resetPersonByDate()});
+
+    if($("#treatment_status").val()=="Completed"){
+       $("#EditView_tabs input").attr("readonly",true);
+       $("#EditView_tabs input").css("background-Color","#efefef");
+       $("#EditView_tabs textarea").attr("readonly",true);
+       $("#EditView_tabs textarea").css("background-Color","#efefef");
+       $("#EditView_tabs select").attr("disabled","disabled");
+       $("#EditView_tabs select").css("background-Color","#efefef");
+       $("#EditView_tabs input").attr("disabled","disabled");
+       $("#EditView_tabs .dateTime").hide();
+       $(".input-group-addon").hide();
+       $("#EditView_tabs button").addClass("button");
+       $("#EditView_tabs button").removeAttr("style");
+       $("#EditView_tabs button").remove();
+    }
 
 });
 //选择事件类型的回调函数

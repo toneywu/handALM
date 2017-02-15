@@ -55,14 +55,14 @@ array (
     'width' => '10%',
     'default' => true,
   ),*/
-  'DATE_SCHEDUALED_START' => 
+  'DATE_TARGET_START' => 
   array (
     'type' => 'datetimecombo',
     'label' => 'LBL_SCHEDUALED_START_DATE',
     'width' => '10%',
     'default' => true,
   ),
-  'DATE_SCHEDUALED_FINISH' => 
+  'DATE_TARGET_FINISH' => 
   array (
     'type' => 'datetimecombo',
     'label' => 'LBL_SCHEDUALED_FINISH_DATE',

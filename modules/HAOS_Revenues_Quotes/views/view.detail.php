@@ -13,8 +13,8 @@ class HAOS_Revenues_QuotesViewDetail extends ViewDetail  {
 		$this->populateBillContactInfo();
 		$this->populateParentInfo();
 		$this->populateInvoicesInfo();
-        $this->displayLineItems();
-        parent::display();
+    parent::display();
+    $this->displayLineItems();
 		//ff 在DetailView显示之前中进行初始化数据的加载 
         if(isset($this->bean->hat_eventtype_id_c) && ($this->bean->hat_eventtype_id_c)!=""){
          $hat_eventtype_id = $this->bean->hat_eventtype_id_c;
@@ -34,6 +34,10 @@ class HAOS_Revenues_QuotesViewDetail extends ViewDetail  {
            echo '<script>call_ff()</script>';
        }
    }
+
+   echo '<script>if($("#clear_status").val()=="Cleared"){
+              $("#delete_button").css("display","none");
+   }</script>';
 }
 
 function populateBillContactInfo(){
@@ -54,15 +58,33 @@ function populateInvoicesInfo(){
 function populateParentInfo(){
 		//需要根据来源类型模块分别设置返回值
 		//如果有新的模块来源需要在这里增加分支，这里不适合用弹性关联
-  if($this->bean->source_code=="AOS_Contracts"){
-   $parent_bean= BeanFactory::getBean('AOS_Contracts', $this->bean->source_id);
-   if ($parent_bean) { 
-    $this->bean->source_name = isset($parent_bean->name)?$parent_bean->name:'';
-    $this->bean->source_number = isset($parent_bean->contract_number_c)?$parent_bean->contract_number_c:'';
-    $this->bean->source_type = isset($parent_bean->type_c)?$parent_bean->type_c:'';
-    $this->bean->source_class = isset($parent_bean->contract_subtype_c)?$parent_bean->contract_subtype_c:'';
-}
-}
+    if($this->bean->source_code=="AOS_Contracts"){
+        $parent_bean= BeanFactory::getBean('AOS_Contracts', $this->bean->source_id);
+        if ($parent_bean) { 
+            $this->bean->source_name = isset($parent_bean->name)?$parent_bean->name:'';
+            $this->bean->source_number = isset($parent_bean->contract_number_c)?$parent_bean->contract_number_c:'';
+            $this->bean->source_type = isset($parent_bean->type_c)?$parent_bean->type_c:'';
+            $this->bean->source_class = isset($parent_bean->contract_subtype_c)?$parent_bean->contract_subtype_c:'';
+        }
+    }
+    else if($this->bean->source_code=="HAT_Incidents"){
+        $parent_bean= BeanFactory::getBean('HAT_Incidents', $this->bean->source_id);
+        if ($parent_bean) { 
+            $this->bean->source_name = isset($parent_bean->name)?$parent_bean->name:'';
+            $this->bean->source_number = isset($parent_bean->event_number)?$parent_bean->event_number:'';
+            $this->bean->source_type = isset($parent_bean->event_type)?$parent_bean->event_type:'';
+            //$this->bean->source_class = '';
+        }
+    }
+    else if($this->bean->source_code=="HAT_Asset_Trans_Batch"){
+        $parent_bean= BeanFactory::getBean('HAT_Asset_Trans_Batch', $this->bean->source_id);
+        if ($parent_bean) { 
+            $this->bean->source_name = isset($parent_bean->name)?$parent_bean->name:'';
+            $this->bean->source_number = isset($parent_bean->tracking_number)?$parent_bean->tracking_number:'';
+            $this->bean->source_type = isset($parent_bean->event_type)?$parent_bean->event_type:'';
+            //$this->bean->source_class = '';
+        }
+    }
 }
 
 function displayLineItems(){

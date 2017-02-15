@@ -36,6 +36,15 @@ class AOS_InvoicesViewDetail extends ViewDetail {
 		echo "<script>
 			$('#status').parent().text($('#status').parent().text()+' ".$paid_amount."');
 		</script>";
+		echo '<script src="custom/modules/AOS_Invoices/js/AOS_Invoices_detailview.js"></script>';
+		echo "<script>
+		$('#delete_button').attr('onclick','deleteButtonClick(\"".$this->bean->id."\")');
+		</script>";
+		echo '<script>
+		if(("'.$this->bean->status.'"=="Paid"||"'.$this->bean->status.'"=="PartedPaid")&&'.$this->bean->amount_c.'!=0){
+			$("#delete_button").css("display","none");
+		}
+		</script>';
 	}
 	
 	function populateInvoiceTemplates(){
