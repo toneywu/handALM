@@ -99,5 +99,7 @@ $mod_strings = array (
   'LBL_EDITVIEW_PANEL3'=>'客户信息跟踪规则',
   'LBL_LOCATION_DISPLAY_RULE'=>'位置显示方式',
   'LBL_ASSET_DISPLAY_RULE'=>'设备/资产显示方式',
-  'LBL_ASSET_COUNTING_RULE'=>'资产盘点批编号规则'
+  'LBL_ASSET_COUNTING_RULE'=>'资产盘点批编号规则',
+  'LBL_COUNTING_POLICY_GROUPS' => '盘点策略组',
+  'LBL_TASK_TEMPLATES' => '盘点任务模版',
   );

@@ -275,6 +275,10 @@ function replace_display_lines(linesHtml,elementId) {
 function setdefaultvalue(ln){
   var group_name =$("#name").val();
   $("#line_group_name"+ln).val(group_name);
+   var task_templates_id=$('#task_templates_id').val();
+  var task_templates_name=$('#task_templates_name').val();
+  document.getElementById('line_hat_counting_task_templates_id_c'+ln).value=task_templates_id;
+  document.getElementById('line_template_name'+ln).value=task_templates_name;
 }
 
 function clr_value(attr_name,attr_id,ln){

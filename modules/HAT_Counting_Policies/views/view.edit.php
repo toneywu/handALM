@@ -16,6 +16,11 @@ class HAT_Counting_PoliciesViewEdit extends ViewEdit
 			}
 			echo'<script type="text/javascript"src="'.$GLOBALS['sugar_config']['cache_dir'].'jsLanguage/'.$module.'/'.$GLOBALS['current_language'].'.js?s='.$GLOBALS['js_version_key'].'&c='.$GLOBALS['sugar_config']['js_custom_version'].'&j='.$GLOBALS['sugar_config']['js_lang_version'].'"></script>';
 		}
+		$beanFramework = BeanFactory::getBean('HAA_Frameworks', $_SESSION["current_framework"]);
+		if (isset($beanFramework)) {
+			echo "<input id='task_templates_id' type='hidden' value='".$beanFramework->hat_counting_task_templates_id_c."'/>";
+		echo "<input id='task_templates_name' type='hidden' value='".$beanFramework->task_templates."'/>";
+		}
 		parent::display();
 		if($this->bean->split_type!='CUSTOM'){
 		echo '<script>

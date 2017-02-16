@@ -70,4 +70,5 @@ $mod_strings = array (
   'LBL_ACTIVITIES_SUBPANEL_TITLE' => 'Activities',
   'LBL_HAA_INTEGRATION_INTERFACE_HEADERS_SUBPANEL_TITLE' => '通用接口-接口批数据',
   'LBL_NEW_FORM_TITLE' => 'New 通用接口-接口批数据',
-);
+  'LBL_OWN_INTERFACE'=>'所属接口',
+  );

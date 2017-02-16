@@ -43,6 +43,7 @@ if($interface_code && $haa_frameworks_id){
             and isdh.haa_interfaces_id_c=inter.id
             and ihlc.haa_integrc471headers_ida=isdh.id
             and ihlc.haa_integrd80ef_lines_idb=isdl.id
+            and isdl.column_type='S'
             and isdl.enabled_flag=1
             AND inter.interface_code='".$interface_code."'".
             "and inter.haa_frameworks_id_c='".$haa_frameworks_id."'".

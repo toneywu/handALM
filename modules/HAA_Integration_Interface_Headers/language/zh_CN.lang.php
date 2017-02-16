@@ -83,4 +83,5 @@ $mod_strings = array (
   'LBL_REFERENCE3' => '参考字段3',
   'LBL_REFERENCE4' => '参考字段4',
   'LBL_EXECUTE_FILE'=>'执行文件',
+  'LBL_OWN_INTERFACE'=>'所属接口',
 );

@@ -94,10 +94,14 @@ function insertLineData(mapping_line, current_view){ //将数据写入到对应�
       //console.log("#line_"+propertyName.concat(String(ln)) +"=="+ mapping_line[propertyName] );
         //如果当前字段不是checkbox，就以val的形式赋值
         //display 用html赋值
+        if(propertyName.concat(String(ln))=="line_status"+ln){
+          $("#displayed_line_"+propertyName.toLowerCase().concat(String(ln))).val(mapping_line[propertyName]);
+        }else{
         var  strHTML=    "<input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_DELETE_INLINE') + "' tabindex='116' onclick='delete_line("+ "\""+mapping_line["id"]+"\"" +","+ln+")'/>";
-        console.log(propertyName.concat(String(ln)).toLowerCase());
+        /*console.log(propertyName.concat(String(ln)).toLowerCase());*/
         $("#displayed_line_"+propertyName.toLowerCase().concat(String(ln))).html(mapping_line[propertyName]);
         $("#displayed_line_remove"+ln).html(strHTML);
+      }
       }
     }
     function goPage(pno,psize){//数据分页方法
@@ -176,7 +180,7 @@ function insertTransLineElements(tableid, current_view) { //创建界面要素
 if (document.getElementById(tableid + '_head') !== null) {
   document.getElementById(tableid + '_head').style.display = "";
 }
-
+var InterLineStatus = document.getElementById("InterLineStatus").value;
 tablebody = document.createElement("tbody");
 tablebody.id = "line_body" + prodln;
 document.getElementById(tableid).appendChild(tablebody);
@@ -190,7 +194,7 @@ for(var i=0;i<lineName.length;i++){
   html+="<td style='font-size:14px;vertical-align: middle;'><span name='displayed_line_"+linename+"[" + prodln + "]' id='displayed_line_"+linename + prodln + "'></span></td>";
 
 }
-html+="<td style='font-size:14px;vertical-align: middle;'><span name='displayed_line_line_status[" + prodln + "]' id='displayed_line_line_status" + prodln + "'></span></td>"+
+html+="<td style='font-size:14px;vertical-align: middle;'><select name='displayed_line_line_status[" + prodln + "]' id='displayed_line_line_status" + prodln + "'>"+InterLineStatus+"</select></td>"+
 "<td style='font-size:14px;vertical-align: middle;'><span name='displayed_line_process_message[" + prodln + "]' id='displayed_line_process_message" + prodln + "'></span></td>"+
 "<td style='font-size:14px;vertical-align: middle;'><span name='displayed_line_description[" + prodln + "]' id='displayed_line_description" + prodln + "'></span></td>"+
 "<td style='font-size:14px;vertical-align: middle;'><span name='displayed_line_remove[" + prodln + "]' id='displayed_line_remove" + prodln + "'></span></td>";

@@ -41,7 +41,7 @@ class zzmImportEmployee {
 		$return["rtn_attr8"]='';
 
 		//todo
-		$beanLines = BeanFactory::getBean('HAA_Integration_Interface_Lines')->get_full_list('id',"haa_integration_interface_lines.haa_integration_interface_headers_id_c='".$interfaceHeaderId."'");
+		$beanLines = BeanFactory::getBean('HAA_Integration_Interface_Lines')->get_full_list('id',"haa_integration_interface_lines.haa_integration_interface_headers_id_c='".$interfaceHeaderId."' and haa_integration_interface_lines.line_status!='S'");
 		$beanHeaders =  BeanFactory::getBean('HAA_Integration_Interface_Headers',$interfaceHeaderId);
 		$status_cnt=0;
 		$msg_header='';
@@ -114,6 +114,7 @@ class zzmImportEmployee {
 		$beanModules->last_name=$modulesArray['value2'];
 		$beanModules->employee_number_c=$modulesArray['value1'];
 		$beanModules->save();
+		var_dump($beanModules->id);
 		$status_return='S';
 		$msg='';
 		

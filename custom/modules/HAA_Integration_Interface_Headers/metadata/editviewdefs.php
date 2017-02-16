@@ -76,58 +76,53 @@ array (
           ),
           1 => 
           array (
-            'name' => 'execute_file',
-            'label' => 'LBL_EXECUTE_FILE',
+            'name' => 'process_status',
+            'studio' => 'visible',
+            'label' => 'LBL_PROCESS_STATUS',
           ),
         ),
         3 => 
         array (
           0 => 
           array (
-            'name' => 'process_status',
-            'studio' => 'visible',
-            'label' => 'LBL_PROCESS_STATUS',
+            'name' => 'process_date',
+            'label' => 'LBL_PROCESS_DATE',
           ),
           1 => 
           array (
-            'name' => 'process_date',
-            'label' => 'LBL_PROCESS_DATE',
+            'name' => 'process_message',
+            'label' => 'LBL_PROCESS_MESSAGE',
           ),
         ),
         4 => 
         array (
           0 => 
           array (
-            'name' => 'process_message',
-            'label' => 'LBL_PROCESS_MESSAGE',
+            'name' => 'reference1',
+            'label' => 'LBL_REFERENCE1',
           ),
           1 => 
           array (
-            'name' => 'reference1',
-            'label' => 'LBL_REFERENCE1',
+            'name' => 'reference2',
+            'label' => 'LBL_REFERENCE2',
           ),
         ),
         5 => 
         array (
           0 => 
           array (
-            'name' => 'reference2',
-            'label' => 'LBL_REFERENCE2',
-          ),
-          1 => 
-          array (
             'name' => 'reference3',
             'label' => 'LBL_REFERENCE3',
           ),
-        ),
-        6 => 
-        array (
-          0 => 
+          1 => 
           array (
             'name' => 'reference4',
             'label' => 'LBL_REFERENCE4',
           ),
-          1 => 'description',
+        ),
+        6 => 
+        array (
+          0 => 'description',
         ),
       ),
       'lbl_editview_panel1' => 

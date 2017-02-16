@@ -8,6 +8,6 @@
     $webservice_impl_class = 'interfacePublicEntry';
     $registry_class = 'registry_v4_1_custom';
     $registry_path = 'custom/service/v4_1_custom/registry.php';
-    $location = 'custom/service/v4_1_custom/soap.php';
+    $location = '/custom/service/v4_1_custom/soap.php';
     require_once('service/core/webservice.php');    
 ?>

@@ -7,6 +7,8 @@ function display_lines_info($focus, $field, $value, $view){
   if($view == 'EditView' || $view == 'DetailView'){
     $html .= '<script src="modules/HAA_Integration_Interface_Lines/js/line_infos.js"></script>';
     $html .= "<table border='0' cellspacing='4' width='37.5%' id='lineInfos' class='list view table'></table>";
+    $html .='<input type="hidden" name="InterLineStatus" id="InterLineStatus" value="'.get_select_options_with_id($app_list_strings['haa_integration_line_status'], '').'">';
+    
     /*$html .= '<script>insertTransLineHeader(\'lineInfos\');</script>';*/
 
          if($focus->id != '') { //如果不是新增（即如果是编辑已有记录）
@@ -31,6 +33,7 @@ function display_lines_info($focus, $field, $value, $view){
            and isdh.haa_interfaces_id_c=inter.id
            and ihlc.haa_integrc471headers_ida=isdh.id
            and ihlc.haa_integrd80ef_lines_idb=isdl.id
+           and isdl.column_type='S'
            and isdl.enabled_flag=1
            AND iih.id='".$focus->id."'"."order by isdl.line_number";
            $result1 = $focus->db->query($sql1);

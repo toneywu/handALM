@@ -8,6 +8,7 @@ class HAT_Counting_LinesViewDetail extends ViewDetail  {
 	
 function display()
 	{	
+		
 		$task_template_attr='';
 		if($this->bean->hat_counting_tasks_id_c){
 			$bean_task=BeanFactory::getBean("HAT_Counting_Tasks",$this->bean->hat_counting_tasks_id_c);

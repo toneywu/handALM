@@ -34,9 +34,9 @@ function display_lines($focus, $field, $value, $view){
             and isdh.haa_interfaces_id_c=inter.id
             and ihlc.haa_integrc471headers_ida=isdh.id
             and ihlc.haa_integrd80ef_lines_idb=isdl.id
+            and isdl.column_type='S'
             and isdl.enabled_flag=1
             AND iih.id='".$focus->id."'"."order by isdl.line_number";
-
             $result1 = $focus->db->query($sql1);
             $sql = "SELECT
             iil.id,

@@ -53,6 +53,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_EDITVIEW_PANEL4' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
       ),
       'syncDetailEditViews' => true,
     ),
@@ -175,7 +180,6 @@ array (
         5 => 
         array (
           0 => 'itrack_asset_group',
-          1 => 'asset_counting_rule',
         ),
       ),
       'lbl_editview_panel3' => 
@@ -194,6 +198,28 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_SERVICE_PERSON_FIELD_RULE',
           ),
+        ),
+      ),
+      'lbl_editview_panel4' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'task_templates',
+            'studio' => 'visible',
+            'label' => 'LBL_TASK_TEMPLATES',
+          ),
+          1 => 
+          array (
+            'name' => 'counting_policy_groups',
+            'studio' => 'visible',
+            'label' => 'LBL_COUNTING_POLICY_GROUPS',
+          ),
+        ),
+        1 => 
+        array (
+          0 => 'asset_counting_rule',
         ),
       ),
     ),
