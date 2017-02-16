@@ -73,6 +73,24 @@ function populateParentInfo(){
 			$this->bean->source_class = isset($parent_bean->contract_subtype_c)?$parent_bean->contract_subtype_c:'';
 		}
 	}
+	else if($this->bean->source_code=="HAT_Incidents"){
+		$parent_bean= BeanFactory::getBean('HAT_Incidents', $this->bean->source_id);
+		if ($parent_bean) { 
+			$this->bean->source_name = isset($parent_bean->name)?$parent_bean->name:'';
+			$this->bean->source_number = isset($parent_bean->event_number)?$parent_bean->event_number:'';
+			$this->bean->source_type = isset($parent_bean->event_type)?$parent_bean->event_type:'';
+			$this->bean->source_class = '';
+		}
+	}
+	else if($this->bean->source_code=="HAT_Asset_Trans_Batch"){
+        $parent_bean= BeanFactory::getBean('HAT_Asset_Trans_Batch', $this->bean->source_id);
+        if ($parent_bean) { 
+            $this->bean->source_name = isset($parent_bean->name)?$parent_bean->name:'';
+            $this->bean->source_number = isset($parent_bean->tracking_number)?$parent_bean->tracking_number:'';
+            $this->bean->source_type = isset($parent_bean->event_type)?$parent_bean->event_type:'';
+            $this->bean->source_class = '';
+        }
+    }
 }
 
 function displayLineItems(){

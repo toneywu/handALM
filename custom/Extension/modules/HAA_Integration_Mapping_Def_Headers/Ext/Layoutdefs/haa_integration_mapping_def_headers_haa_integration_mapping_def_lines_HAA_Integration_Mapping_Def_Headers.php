@@ -1,5 +1,5 @@
 <?php
- // created: 2017-02-11 16:24:02
+ // created: 2017-02-15 16:55:57
 $layout_defs["HAA_Integration_Mapping_Def_Headers"]["subpanel_setup"]['haa_integr105ag_def_lines'] = array (
   'order' => 100,
   'module' => 'HAA_Integration_Mapping_Def_Lines',
@@ -10,7 +10,7 @@ $layout_defs["HAA_Integration_Mapping_Def_Headers"]["subpanel_setup"]['haa_integ
   'get_subpanel_data' => 'haa_integr105ag_def_lines',
   'top_buttons' => 
   array (
-   /* 0 => 
+  /*  0 => 
     array (
       'widget_class' => 'SubPanelTopButtonQuickCreate',
     ),

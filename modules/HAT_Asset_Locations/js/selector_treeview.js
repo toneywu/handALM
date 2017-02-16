@@ -446,8 +446,11 @@ function initTree(treeView, default_list, p3) {
 	console.log(treeView);
 
 	if (treeView=='LIST') {
+		//alert(p3);
+		console.log("p3");
 		var zNodes = [{name:framework_title+$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0, type:default_list, query_id:p3, current_mode: current_mode}];
 		console.log(zNodes);
+
 	} else if (treeView=='SEARCH') {
 		var zNodes = [p3];
 		console.log(zNodes);

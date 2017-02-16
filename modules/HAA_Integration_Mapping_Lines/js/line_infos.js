@@ -30,7 +30,7 @@ function insertTransLineHeader(tableid){
   for(var i=0;i<lineTile.length;i++){
     head_html +="<th width='15%' style='font-size:14px;border-right:none;border-left:none;text-align: center;'>"+lineTile[i]+"</th>";
   }
-  head_html +="<th width='13%' style='font-size:14px;border-right:none;border-left:none;text-align: center;'>"+SUGAR.language.get('HAA_Integration_Mapping_Lines', 'LBL_REQUIRED_FLAG')+"</th>";
+  head_html +="<th width='13%' style='font-size:14px;border-right:none;border-left:none;text-align: center;'>"+SUGAR.language.get('HAA_Integration_Mapping_Lines', 'LBL_ENABLED_FLAG')+"</th>";
   head_html +="<th width='5%' style='font-size:14px;border-right:none;border-left:none;text-align: center;'> </th>";
   head_html +="</tr></thead>";
 head_html +='<tr class="pagination" role="presentation">'+
@@ -89,7 +89,7 @@ function insertLineData(mapping_line, current_view){ //将数据写入到对应�
       //这里直接遍历所有的属性（因此需要建立与Bean属性同名的各个字段）
       //console.log(propertyName+"="+mapping_line[propertyName]);
       //console.log("#line_"+propertyName.concat(String(ln)) +"=="+ mapping_line[propertyName] );
-      if (propertyName.concat(String(ln))=="required_flag"+ln) {
+      if (propertyName.concat(String(ln))=="enabled_flag"+ln) {
         if (mapping_line[propertyName]==1) {
           $("#displayed_line_"+propertyName.toLowerCase().concat(String(ln))).html("是");
         }else{
@@ -125,7 +125,7 @@ function goPage(pno,psize){
     var currentPage = pno;//当前页数
     var startRow = (currentPage - 1) * pageSize+1;//开始显示的行  31 
        var endRow = currentPage * pageSize;//结束显示的行   40
-       endRow = (endRow > num)? num : endRow;    //40
+       endRow = (endRow >(num-2))? (num-2) : endRow;    //40
        /*console.log(endRow);*/
        //遍历显示数据实现分页
 
@@ -148,7 +148,7 @@ function goPage(pno,psize){
       }
     }
 
-    var l_pagenum="("+pno+" - "+totalPage+" / 总记录条目数："+linenum+")";
+    var l_pagenum="("+startRow+" - "+endRow+" / 总记录条目数："+linenum+")";
     document.getElementById("pageNumbers").innerHTML=l_pagenum;
 }
 
@@ -200,7 +200,7 @@ for(var i=0;i<lineName.length;i++){
   html+="<td style='font-size:14px;vertical-align: middle;'><span name='displayed_line_"+linename+"[" + prodln + "]' id='displayed_line_"+linename + prodln + "'></span></td>";
 
 }
-html+="<td style='font-size:14px;vertical-align: middle;'><span name='displayed_line_required_flag[" + prodln + "]' id='displayed_line_required_flag" + prodln + "'></span></td>"+
+html+="<td style='font-size:14px;vertical-align: middle;'><span name='displayed_line_enabled_flag[" + prodln + "]' id='displayed_line_enabled_flag" + prodln + "'></span></td>"+
 "<td style='font-size:14px;vertical-align: middle;'><span name='displayed_line_remove[" + prodln + "]' id='displayed_line_remove" + prodln + "'></span></td>";
 z1.innerHTML  =html;
 var tr_dis=document.getElementById(z1.id);

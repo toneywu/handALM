@@ -23,10 +23,14 @@ function processSearchForm(){
 	$this->where.=empty($this->where)?(empty($aclSQLList)?"":$aclSQLList):(empty($aclSQLList)?"":'  AND '.$aclSQLList);
 	//End HPR权限控制逻辑
 } 
-/*function display()
+function display()
 {
-	global $db;
+	//global $db;
+	echo '<script src="modules/AOS_Contracts/js/AOS_Contracts_listview.js"></script>';
+	/*if(isset($_GET['error_message'])&&!empty($_GET['error_message'])){
+		echo '<script>var return_msg="'.$_GET['error_message'].'"</script>';
+	}*/
 	parent::display();
-	var_dump($db->lastsql);
-}*/
+	//var_dump($db->lastsql);
+}
 }

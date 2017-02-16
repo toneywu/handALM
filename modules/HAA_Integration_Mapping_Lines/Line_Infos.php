@@ -17,14 +17,17 @@ function display_lines_info($focus, $field, $value, $view){
            FROM
            haa_integration_mapping_headers imh,
            haa_integration_mapping_def_headers imdh,
+           haa_integra718def_lines_c hidl,
            haa_integration_mapping_def_lines imdl
            WHERE
            1 = 1
            AND imh.deleted = 0
            AND imdh.deleted = 0
            AND imdl.deleted = 0
+           and hidl.deleted=0
            AND imh.haa_integration_mapping_def_headers_id_c = imdh.id
            AND imdl.haa_integration_mapping_def_headers_id_c = imdh.id
+           and hidl.haa_integr6553f_lines_idb=imdl.id
            AND imh.id = '".$focus->id."'"."order by imdl.line_number";
            $result1 = $focus->db->query($sql1);
            /*var_dump($sql1);*/
@@ -41,7 +44,7 @@ function display_lines_info($focus, $field, $value, $view){
              $sql.="IML.".$row1["map_segment_name"].",";
            }
 
-           $sql.="IML.required_flag,
+           $sql.="IML.enabled_flag,
            IML.description,
            IML.haa_integration_mapping_headers_id_c header_id
            FROM

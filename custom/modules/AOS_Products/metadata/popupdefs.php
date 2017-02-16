@@ -4,20 +4,12 @@ $popupMeta = array (
     'varName' => 'AOS_Products',
     'orderBy' => 'aos_products.name',
     'whereClauses' => array (
-      'name' => 'aos_products.name',
-      'part_number' => 'aos_products.part_number',
-      'type' => 'aos_products.type',
-      'is_asset_group_c' => 'aos_products_cstm.is_asset_group_c',
-  ),
-
-'whereStatement'=>'(aos_products_cstm.`haa_frameworks_id_c` = "'.$_SESSION["current_framework"].'")',
-
-
+  'name' => 'aos_products.name',
+  'description' => 'aos_products.description',
+),
     'searchInputs' => array (
   1 => 'name',
-  4 => 'part_number',
-  8 => 'type',
-  9 => 'is_asset_group_c',
+  10 => 'description',
 ),
     'searchdefs' => array (
   'name' => 
@@ -25,25 +17,13 @@ $popupMeta = array (
     'name' => 'name',
     'width' => '10%',
   ),
-  'part_number' => 
+  'description' => 
   array (
-    'name' => 'part_number',
+    'type' => 'text',
+    'label' => 'LBL_DESCRIPTION',
+    'sortable' => false,
     'width' => '10%',
-  ),
-  'type' => 
-  array (
-    'type' => 'enum',
-    'studio' => 'visible',
-    'label' => 'LBL_TYPE',
-    'width' => '10%',
-    'name' => 'type',
-  ),
-  'is_asset_group_c' => 
-  array (
-    'type' => 'bool',
-    'label' => 'LBL_IS_ASSET_GROUP',
-    'width' => '10%',
-    'name' => 'is_asset_group_c',
+    'name' => 'description',
   ),
 ),
     'listviewdefs' => array (
@@ -55,35 +35,22 @@ $popupMeta = array (
     'link' => true,
     'name' => 'name',
   ),
-  'PART_NUMBER' => 
+  'DESCRIPTION' => 
   array (
+    'type' => 'text',
+    'label' => 'LBL_DESCRIPTION',
+    'sortable' => false,
     'width' => '10%',
-    'label' => 'LBL_PART_NUMBER',
     'default' => true,
-    'name' => 'part_number',
+    'name' => 'description',
   ),
-  'COST' => 
+  'CATEGORY' => 
   array (
-    'width' => '10%',
-    'label' => 'LBL_COST',
-    'default' => true,
-    'name' => 'cost',
-  ),
-  'PRICE' => 
-  array (
-    'width' => '10%',
-    'label' => 'LBL_PRICE',
-    'default' => true,
-    'name' => 'price',
-  ),
-  'CURRENCY_ID' => 
-  array (
-    'type' => 'id',
+    'type' => 'enum',
     'studio' => 'visible',
-    'label' => 'LBL_CURRENCY',
+    'label' => 'LBL_CATEGORY',
     'width' => '10%',
-    'default' => false,
-    'name' => 'currency_id',
+    'default' => true,
   ),
 ),
 );

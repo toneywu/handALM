@@ -56,9 +56,16 @@ function openAssetPopup(ln){//本文件为行上选择资产的按钮
   ;
 
 
-  if ($("#target_using_org_id").val()!="") {
+  if ($("#target_using_org").val()!="") {
     popupFilter +="&target_using_org="+$("#target_using_org").val()
     +"&target_using_org_id="+$("#target_using_org_id").val();
+  }else{
+    popupFilter +="&target_using_org="+$("#target_using_org_v").val()
+    +"&target_using_org_id="+$("#target_using_org_id_v").val();
+  }
+  if ($("#current_owning_org").val()!="") {
+    popupFilter +="&current_owning_org="+$("#current_owning_org").val()
+    +"&current_owning_org_id="+$("#current_owning_org_id").val();
   }
 
   console.log(popupFilter);
@@ -213,7 +220,7 @@ function addNewAssetLine(){
 
 
    var eventOptions = $("#eventOptions").val()!=""?jQuery.parseJSON($("#eventOptions").val()):"";
-  //console.log(eventOptions);
+  console.log(eventOptions);
   var popupFilter = '&current_mode='+eventOptions.asset_scope.toLowerCase()
                 +'&defualt_list='+eventOptions.default_asset_list.toLowerCase()
                 +'&wo_id='+source_wo_id
@@ -223,6 +230,13 @@ function addNewAssetLine(){
   if ($("#target_using_org_id").val()!="") {
     popupFilter +="&target_using_org="+$("#target_using_org").val()
     +"&target_using_org_id="+$("#target_using_org_id").val();
+  }else{
+    popupFilter +="&target_using_org="+$("#target_using_org_v").val()
+    +"&target_using_org_id="+$("#target_using_org_id_v").val();
+  }
+  if ($("#current_owning_org_id").val()!="") {
+    popupFilter +="&current_owning_org="+$("#current_owning_org").val()
+    +"&current_owning_org_id="+$("#current_owning_org_id").val();
   }
 
 //20161130 toney.wu relpace popup list with tree selection.

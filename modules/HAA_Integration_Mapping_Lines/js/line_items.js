@@ -24,7 +24,7 @@ function insertLineHeader(tableid){
   b.innerHTML=linetite[i];
     } 
   var c=x.insertCell(1+i);
-  c.innerHTML=SUGAR.language.get('HAA_Integration_Mapping_Lines', 'LBL_REQUIRED_FLAG');
+  c.innerHTML=SUGAR.language.get('HAA_Integration_Mapping_Lines', 'LBL_ENABLED_FLAG');
   var b1=x.insertCell(2+i);
   b1.innerHTML=SUGAR.language.get('HAA_Integration_Mapping_Lines', 'LBL_DESCRIPTION');
   var d=x.insertCell(3+i);
@@ -73,35 +73,35 @@ function insertLineData(line_data ){ //将数据写入到对应的行字段中
     else if(linename[i]=="SOURCE8"){
       $("#line_source8".concat(String(ln))).val(line_data.SOURCE8);
     } 
-    else if(linename[i]=="TRAGET1"){
-      $("#line_target1".concat(String(ln))).val(line_data.TRAGET1);
+    else if(linename[i]=="TARGET1"){
+      $("#line_target1".concat(String(ln))).val(line_data.TARGET1);
     } 
-    else if(linename[i]=="TRAGET2"){
-      $("#line_target2".concat(String(ln))).val(line_data.TRAGET2);
+    else if(linename[i]=="TARGET2"){
+      $("#line_target2".concat(String(ln))).val(line_data.TARGET2);
     } 
-    else if(linename[i]=="TRAGET3"){
-      $("#line_target3".concat(String(ln))).val(line_data.TRAGET3);
+    else if(linename[i]=="TARGET3"){
+      $("#line_target3".concat(String(ln))).val(line_data.TARGET3);
     } 
-    else if(linename[i]=="TRAGET4"){
-      $("#line_target4".concat(String(ln))).val(line_data.TRAGET4);
+    else if(linename[i]=="TARGET4"){
+      $("#line_target4".concat(String(ln))).val(line_data.TARGET4);
     } 
-    else if(linename[i]=="TRAGET5"){
-      $("#line_target5".concat(String(ln))).val(line_data.TRAGET5);
+    else if(linename[i]=="TARGET5"){
+      $("#line_target5".concat(String(ln))).val(line_data.TARGET5);
     } 
-    else if(linename[i]=="TRAGET6"){
-      $("#line_target6".concat(String(ln))).val(line_data.TRAGET6);
+    else if(linename[i]=="TARGET6"){
+      $("#line_target6".concat(String(ln))).val(line_data.TARGET6);
     } 
-    else if(linename[i]=="TRAGET7"){
-      $("#line_target7".concat(String(ln))).val(line_data.TRAGET7);
+    else if(linename[i]=="TARGET7"){
+      $("#line_target7".concat(String(ln))).val(line_data.TARGET7);
     } 
-    else if(linename[i]=="TRAGET8"){
-      $("#line_target8".concat(String(ln))).val(line_data.TRAGET8);
+    else if(linename[i]=="TARGET8"){
+      $("#line_target8".concat(String(ln))).val(line_data.TARGET8);
     } 
 
     }
     /*$("#line_source1_8".concat(String(ln))).val(line_data.source1_8);
     $("#line_target1_8".concat(String(ln))).val(line_data.target1_8);*/
-    $("#line_required_flag".concat(String(ln))).attr('checked',line_data.required_flag==1?true:false);
+    $("#line_enabled_flag".concat(String(ln))).attr('checked',line_data.enabled_flag==1?true:false);
     $("#line_description".concat(String(ln))).val(line_data.description);
     $("#line_header_id".concat(String(ln))).val(line_data.header_id);
     renderLine(ln);
@@ -136,7 +136,7 @@ var j=linename[i].substring(6,7);
   z1.innerHTML=z1.innerHTML+"<td style='vertical-align: middle;'><span name='displayed_target"+j+"[" + prodln + "]' id='displayed_target"+j+ prodln + "'></span></td>" ;
  }
 }
-z1.innerHTML=z1.innerHTML+"<td style='vertical-align: middle;'><span name='displayed_required_flag[" + prodln + "]' id='displayed_required_flag" + prodln + "'></span></td>"+
+z1.innerHTML=z1.innerHTML+"<td style='vertical-align: middle;'><span name='displayed_enabled_flag[" + prodln + "]' id='displayed_enabled_flag" + prodln + "'></span></td>"+
 "<td style='vertical-align: middle;'><span name='displayed_description[" + prodln + "]' id='displayed_description" + prodln + "'></span></td>"+
 "<td style='vertical-align: middle;'><input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'></td>";
 
@@ -156,51 +156,58 @@ var tr_dis=document.getElementById(z1.id);
   "<input name='line_id["+prodln+"]' id='line_id"+prodln+"' value='' type='hidden'>"+
   "<input name='line_header_id["+prodln+"]' id='line_header_id"+prodln+"' value='' type='hidden' >"+
  "<td>"+SUGAR.language.get('HAA_Integration_Mapping_Lines', 'LBL_LINE_NUMBER')+"</td>"+
-  "<td><input name='line_line_number["+prodln+"]' id='line_line_number"+prodln+"' size='30' maxlength='255' type='text' ></td>"+
-  "<td>"+SUGAR.language.get('HAA_Integration_Mapping_Lines', 'LBL_REQUIRED_FLAG')+"</td>"+
-    "<td><input name='line_required_flag[" + prodln + "]' id='line_required_flag" + prodln + "' size='30' maxlength='255' type='checkbox'></td>"+
-  "</tr>";
+  "<td><input name='line_line_number["+prodln+"]' id='line_line_number"+prodln+"' size='30' maxlength='255' type='text' ></td>";
   for(var i=0;i<linename.length;i++){
+     
     if(lineRequired[i]==1){
          req="*";
 
         }else{
           req="";
         }
-    if(i%2==0){
+    
       if(linename[i].substring(0,6)=='SOURCE'){
-        
-    var l=linename[i].substring(6,7);
-  html=html+"<tr>"+
-  "<td>"+linetite[i]+req+"</td>"+
-    "<td><input name='line_source"+l+"["+prodln+"]' id='line_source"+l+prodln+"' size='30' maxlength='255' type='text' ></td>";
-}
-else if(linename[i].substring(0,6)=='TRAGET'){
-    var j=linename[i].substring(6,7);
-  html=html+"<tr>"+
-  "<td>"+linetite[i]+req+"</td>"+
-    "<td><input name='line_target"+j+"["+prodln+"]' id='line_target"+j+prodln+"' size='30' maxlength='255' type='text' ></td>";
-}
-}
-else if (i%2==1)
-{
-if(linename[i].substring(0,6)=='SOURCE'){
+        if(i%2==0){
+
     var l=linename[i].substring(6,7);
   html=html+
   "<td>"+linetite[i]+req+"</td>"+
+    "<td><input name='line_source"+l+"["+prodln+"]' id='line_source"+l+prodln+"' size='30' maxlength='255' type='text' ></td>"+
+    "</tr>";
+}
+else if (i%2==1)
+{
+  var l=linename[i].substring(6,7);
+  html=html+"<tr>"+
+  "<td>"+linetite[i]+req+"</td>"+
     "<td><input name='line_source"+l+"["+prodln+"]' id='line_source"+l+prodln+"' size='30' maxlength='255' type='text' ></td>"
-+"</tr>";
-}else if(linename[i].substring(0,6)=='TRAGET'){
+;
+}
+}
+else if(linename[i].substring(0,6)=='TARGET'){
+ if(i%2==0){
+  
     var j=linename[i].substring(6,7);
   html=html+
   "<td>"+linetite[i]+req+"</td>"+
     "<td><input name='line_target"+j+"["+prodln+"]' id='line_target"+j+prodln+"' size='30' maxlength='255' type='text' ></td>"
-    +"<tr>";
++ "</tr>";
+}else if (i%2==1)
+{
+var j=linename[i].substring(6,7);
+  html=html+"<tr>"+
+  "<td>"+linetite[i]+req+"</td>"+
+    "<td><input name='line_target"+j+"["+prodln+"]' id='line_target"+j+prodln+"' size='30' maxlength='255' type='text' ></td>"
+    ;
 }
-    }
-  }
-   if(linename.length%2==1) {
+}
+}
+    
+   if(linename.length%2==0) {
     html=html+
+    "<td>"+SUGAR.language.get('HAA_Integration_Mapping_Lines', 'LBL_ENABLED_FLAG')+"</td>"+
+    "<td><input name='line_enabled_flag[" + prodln + "]' id='line_enabled_flag" + prodln + "' size='30' maxlength='255' type='checkbox'></td>"+
+    "</tr>"+"<tr>"+
     "<td>"+SUGAR.language.get('HAA_Integration_Mapping_Lines', 'LBL_DESCRIPTION')+"</td>"+
     "<td><textarea id='line_description"+prodln+"' name='line_description["+prodln+"]' rows='2' cols='50' title='' tabindex='0' style='overflow: hidden;'></textarea></td>"+
     "<td><input type='hidden' id='line_deleted"+prodln+"' name='line_deleted["+prodln+"]' value='0'></td>"+
@@ -209,8 +216,10 @@ if(linename[i].substring(0,6)=='SOURCE'){
   "</tr>"+
   "</table></td>";
    }
-  else if(linename.length%2==0){
+  else if(linename.length%2==1){
   html=html+"<tr>"+
+  "<td>"+SUGAR.language.get('HAA_Integration_Mapping_Lines', 'LBL_ENABLED_FLAG')+"</td>"+
+    "<td><input name='line_enabled_flag[" + prodln + "]' id='line_enabled_flag" + prodln + "' size='30' maxlength='255' type='checkbox'></td>"+
     "<td>"+SUGAR.language.get('HAA_Integration_Mapping_Lines', 'LBL_DESCRIPTION')+"</td>"+
     "<td><textarea id='line_description"+prodln+"' name='line_description["+prodln+"]' rows='2' cols='50' title='' tabindex='0' style='overflow: hidden;'></textarea></td>"+
     "<td><input type='hidden' id='line_deleted"+prodln+"' name='line_deleted["+prodln+"]' value='0'></td>"+
@@ -246,8 +255,8 @@ function renderLine(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_target"+j+ln).html($("#line_target"+j+ln).val());
 }
 }
-  var flag=$("#line_required_flag"+ln).is(':checked')?"是":"否";
-  $("#displayed_required_flag"+ln).html(flag);
+  var flag=$("#line_enabled_flag"+ln).is(':checked')?"是":"否";
+  $("#displayed_enabled_flag"+ln).html(flag);
   $("#displayed_description"+ln).html($("#line_description"+ln).val());
   LineEditorClose(ln);
 }
@@ -267,6 +276,7 @@ function insertLineFootor(tableid)
 
 function addNewLine(tableid) {
   if (check_form('EditView')) {//只有必须填写的字段都填写了才可以新增
+    
     insertLineElements(tableid);//加入新行
     LineEditorShow(prodln - 1);       //打开行编辑器
     setLineNum(prodln);
@@ -341,6 +351,7 @@ function resetLineNum_Bold() {//数行号
     if ($("#line_deleted"+i).val()!=1) {//跳过已经删除的行（实际数据还没有删除，只是从界面隐藏）
       j=j+1;
       $("#displayed_line_number" + i).text(j);
+      $("#line_line_number"+i).val(j);
     }
   }
 }
@@ -348,10 +359,10 @@ function resetLineNum_Bold() {//数行号
 function setLineNum(ln){
   var j=0;
   for (var i=0;i<ln;i++) {
-    /*if ($("#line_deleted"+i).val()!=1) {*///跳过已经删除的行（实际数据还没有删除，只是从界面隐藏）
+    if ($("#line_deleted"+i).val()!=1) {//跳过已经删除的行（实际数据还没有删除，只是从界面隐藏）
       j=j+1;
       $("#line_line_number"+i).val(j);
-    //}
+    }
   }
 }
 function valitems(ln){
@@ -401,5 +412,5 @@ function setExtendValReturn(popupReplyData){
 }
 function hidesubpanl(){
 
-  $("#line_items_label").hide();//隐藏SugarCRM字段
+  $("#line_items_span").parent().prev().hide();//隐藏SugarCRM字段
 }

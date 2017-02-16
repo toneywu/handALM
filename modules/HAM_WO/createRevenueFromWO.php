@@ -46,9 +46,11 @@ function createRevenueFromWO($WOId){
 	if ($beanRevenue){
 		$rawRow['event_type'] = $beanRevenue->name;
 	}
-
-
-	$rawRow['haa_frameworks_id_c'] = $rawRow['haa_frameworks_id_c'];
+	//updated by zhangling 2017-2-14
+	$siteBean =BeanFactory :: getBean('HAM_Maint_Sites',$wo->ham_maint_sites_id);
+	//$rawRow['haa_frameworks_id_c'] = $rawRow['haa_frameworks_id_c'];
+	$rawRow['haa_frameworks_id_c'] = $siteBean->haa_frameworks_id;
+	//end by zhangling 2017-2-14
 	$rawRow['revenue_quote_number'] = '';
 	$rawRow['name'] = $wo->name.'收支';
 	$rawRow['clear_status'] = 'Unclear';

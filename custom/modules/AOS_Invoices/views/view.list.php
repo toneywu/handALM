@@ -16,4 +16,10 @@ class AOS_InvoicesViewList extends ViewList
      $this->where.=" where haa_frameworks_id_c ='".$haa_frameworks_id."'";
    }
  } 
+
+ function display()
+{
+	echo '<script src="custom/modules/AOS_Invoices/js/AOS_Invoices_listview.js"></script>';
+	parent::display();
+}
 }

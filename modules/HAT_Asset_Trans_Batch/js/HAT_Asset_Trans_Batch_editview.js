@@ -4,7 +4,7 @@ $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.
 $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
 function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"HAT_Asset_Trans_Batch");
-    //$("a.collapsed").click();
+    //$(".expandLink").click();
     //$(".panel-content a.collapsed").click();
 	//console.log($("#haa_ff_id").val());
 }
@@ -20,7 +20,8 @@ function setEventTypePopupReturn(popupReplyData){
 	triger_setFF($("#haa_ff_id").val(),"HAT_Asset_Trans_Batch");
     //console.log("panel should be expanded");
     $(".panel-content a.collapsed").click();//20170131 toney.wu for v7.8
-
+    //获取所有组织
+    getOwningOrgId();
     //Add By ling.zhang01 20161229
     if($("#tracking_number").val()==''){
     	createTrackNumber();
@@ -78,6 +79,18 @@ function setTargetOwningOrgPopupReturn(popupReplyData){
 	}
 }
 
+function getOwningOrgId(){
+	$.ajax({//
+		url: 'index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=getOwningOrgId&orgname=' + $("#current_owning_org").val()+'&haa_frameworks_id='+$("#haa_frameworks_id").val(),
+		async: false,
+		success: function (data) {
+			$("#current_owning_org_id").val(data);
+		},
+		error: function () { //失败
+			alert('Error loading document');
+		}
+	});
+}
 
 function setEventTypeFields() {
 	$.ajax({//
@@ -93,7 +106,7 @@ function setEventTypeFields() {
 		error: function () { //失败
 			alert('Error loading document');
 		}
-	})
+	});
 }
 
 function resetEventType(){
@@ -114,19 +127,20 @@ function resetEventType(){
 		if ($("#target_owning_org_id").val()=="" && $("#source_wo_account_id").val()!="") {
 			//如果当前的目标所属组织没有值，就从工单来源中复制
 			//如果已经有值了，就保持不变
-			$("#target_owning_org").val($("#source_wo_account").val())
-			$("#target_owning_org_id").val($("#source_wo_account_id").val())
+			$("#target_owning_org").val($("#source_wo_account").val());
+			$("#target_owning_org_id").val($("#source_wo_account_id").val());
 		}
 	}
 
 	//依据事件类型，确认是否需要变化使用组织
-	//console.log(global_eventOptions.change_using_org);
+	console.log("---------------------------------");
+	console.log(global_eventOptions.change_using_org);
 	if (global_eventOptions.change_using_org == "REQUIRED"){ //必须提供使用组织及日期范围
 		mark_field_enabled('target_using_org',false);
 	} else if (global_eventOptions.change_using_org == "OPTIONAL"){
 		mark_field_enabled('target_using_org',true);
 	} else {
-		mark_field_disabled('target_using_org',false,false,false); //使用组织字段不可见,并清空当前值
+		mark_field_disabled('target_using_org',false,false,true); //使用组织字段不可见,并清空当前值
 	}
 
 	//如果需要变化（包括必须变化和可以变化2种场景，就从工作单上进行默认）

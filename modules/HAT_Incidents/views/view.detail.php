@@ -30,6 +30,11 @@ class HAT_IncidentsViewDetail extends ViewDetail  {
 				echo '<script>call_ff()</script>';
 			}
 		}
+		echo '<script>
+		if($("#treatment_status").val()=="Completed"){
+			$("#delete_button").css("display","none");
+		}
+		</script>';
 	}
 
 	function populateRelateInfo(){

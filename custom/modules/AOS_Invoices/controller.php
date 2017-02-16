@@ -161,6 +161,51 @@ class AOS_InvoicesController extends SugarController {
 		$Days= date_diff(date_create($Date2),date_create($Date1))->format("%R%a");
 		return $Days;
 	}
+
+	public function action_MassUpdate() {
+		$action=$_POST["action"];
+		$delete_flag=$_POST["delete"];
+		$occur_error=0;
+		$invoice_ids=array();
+		global $db;
+		if($action=="MassUpdate"&&$delete_flag==true){
+			$recordIds = explode(',', $_REQUEST['uid']);
+
+			foreach ($recordIds as $recordId) {
+				$invoices_bean = BeanFactory::getBean("AOS_Invoices",$recordId);
+
+				if($occur_error==0){
+					if(($invoices_bean->status=="Paid"||$invoices_bean->status=="PartedPaid")&&$invoices_bean->amount_c!=0){
+						$occur_error=1;
+					}
+				}
+			}
+			if($occur_error==1){
+				$queryParams = array(
+					'module' => 'AOS_Invoices',
+					'action' => 'index',
+					'error_message' => "勾选发票中存在状态等于已付或部分付款的不可删除",
+					);
+                SugarApplication::redirect('index.php?' . http_build_query($queryParams));
+			}
+			$invoice_ids = $recordIds;
+		}
+		parent :: action_MassUpdate();
+		if($occur_error==0){
+			$queryParams = array(
+				'module' => 'AOS_Invoices',
+				'action' => 'index',
+				'error_message' => "",
+				);
+			foreach ($invoice_ids as $invoiceId) {
+				$sql = 'update haos_revenues_quotes
+							set clear_status="Unclear"
+							where aos_invoices_id_c="'.$invoiceId.'"';
+				$db->query($sql);
+			}
+            SugarApplication::redirect('index.php?' . http_build_query($queryParams));
+		}
+	}
 }
 
 ?> 

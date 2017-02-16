@@ -164,6 +164,7 @@ function display_lines($focus, $field, $value, $view){
 			//REF:custom/modules/HAT_Asset_Trans/js/line_items.js
             //通过insertLineData向已经完成初始化的页面要素中，写入值
 		}
+		//echo $sql;
         $html .= "})</script>";
       	//deleted by toney.wu 20161007
       	//以下代码没有调用的意义，在EditView对应的JS文件中$(document).ready(function()中调用了setEventTypeFields，之个函数会通过Ajax读取EventType对应的选项值，并写入到HiddenFields当中.

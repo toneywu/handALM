@@ -14,7 +14,7 @@ function insertLineHeader(tableid){
   var x=tablehead.insertRow(-1);
   x.id='Line_head';
   var a=x.insertCell(0);
-  a.innerHTML=SUGAR.language.get('HAA_Integration_Mapping_Def_Lines', 'LBL_LINE_NUMBER');;
+  a.innerHTML=SUGAR.language.get('HAA_Integration_Mapping_Def_Lines', 'LBL_LINE_NUMBER');
   var b=x.insertCell(1);
   b.innerHTML=SUGAR.language.get('HAA_Integration_Mapping_Def_Lines', 'LBL_SEGMENT_TYPE');
   var c=x.insertCell(2);
@@ -42,6 +42,7 @@ function insertLineData(line_data ){ //将数据写入到对应的行字段中
   var ln = 0;
   if(line_data.id != '0' && line_data.id !== ''){
     ln = insertLineElements("lineItems");
+
     $("#line_id".concat(String(ln))).val(line_data.id);
     $("#line_line_number".concat(String(ln))).val(line_data.line_number);
     $("#line_segment_type".concat(String(ln))).val(line_data.segment_type);
@@ -55,6 +56,10 @@ function insertLineData(line_data ){ //将数据写入到对应的行字段中
 
     
     renderLine(ln);
+    setSelectVal(ln);
+    $("#line_segment_type".concat(String(ln))).val(line_data.segment_type);
+    $("#line_map_segment_name".concat(String(ln))).val(line_data.map_segment_name);
+
   }
 }
 
@@ -132,7 +137,6 @@ var tr_dis=document.getElementById(z1.id);
     // console.log(x.innerHTML);
     valitems(prodln);
     renderLine(prodln);
-     setSelectVal(prodln);
     prodln++;
 
     return prodln - 1;
@@ -168,8 +172,10 @@ function addNewLine(tableid) {
   if (check_form('EditView')) {//只有必须填写的字段都填写了才可以新增
     insertLineElements(tableid);//加入新行
     LineEditorShow(prodln - 1);       //打开行编辑器
+    /*$("#line_segment_type"+(prodln-1)).val("S");
+    alert($("#line_segment_type"+(prodln-1)).val());*/
     setLineNum(prodln);
-   
+   setSelectVal(prodln-1);
   }
 }
 
@@ -231,30 +237,35 @@ function resetLineNum_Bold() {//数行号
     if ($("#line_deleted"+i).val()!=1) {//跳过已经删除的行（实际数据还没有删除，只是从界面隐藏）
       j=j+1;
       $("#displayed_line_number" + i).text(j);
+      $("#line_line_number"+i).val(j);
     }
   }
 }
 function setLineNum(ln){
   var j=0;
   for (var i=0;i<ln;i++) {
-    /*if ($("#line_deleted"+i).val()!=1) {*///跳过已经删除的行（实际数据还没有删除，只是从界面隐藏）
+    if ($("#line_deleted"+i).val()!=1) {//跳过已经删除的行（实际数据还没有删除，只是从界面隐藏）
       j=j+1;
       $("#line_line_number"+i).val(j);
-    //}
+    }
   }
 }
 
 function setSelectVal(ln){
+  
   var segment_typ = $("#line_segment_type"+ln).val();
   var segment_name=document.getElementById("line_map_segment_name"+ln); 
+  
     segment_name.options.length=0; 
   if(segment_typ=="S"){
+    
     var varItem="SOURCE";
     for(var j=0;j<8;j++){
       var f=j+1;
       segment_name.options.add(new Option(varItem+f,varItem+f)); 
     }
   }else if(segment_typ=="D"){
+    
     var varItem="TARGET";
     for(var h=0;h<8;h++){
       var g=h+1;
