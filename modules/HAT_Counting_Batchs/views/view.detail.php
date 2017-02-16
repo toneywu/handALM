@@ -18,6 +18,7 @@ class HAT_Counting_BatchsViewDetail extends ViewDetail
 			$row=$this->bean->db->fetchByAssoc($result);
 			$snapshot_date=$row["snapshot_date"];
 		}
+	
 		/*require_once('modules/HAT_Counting_Batchs/auto_create_task.php');
 
 		$param=array(
@@ -28,6 +29,15 @@ class HAT_Counting_BatchsViewDetail extends ViewDetail
 		$return_msg=$auto_create_task->hat_counting($param);*/
 		
 		parent::display();
+		require_once('modules\HAA_Interfaces\iface_files\ZZM\EBS\zzmImportEmployee.php');
+		$testEmployee= new zzmImportEmployee();
+		$paramsArray=array(
+			0 => '3abec48e-f3fa-11e6-a4f4-00163e000299',
+			);
+		$return_test=$testEmployee->importMain($paramsArray);
+
+		var_dump($return_test['return_status'].'-------'.$return_test['msg_data']);
+		
 		echo '<script>
 		$("#snapshot_date").val("'.$snapshot_date.'");
 	</script>';

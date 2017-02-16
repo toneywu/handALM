@@ -210,10 +210,10 @@ function addNewLine(tableid) {
     var l_record=document.getElementsByName("record")[0].value;
   if (check_form('EditView')) {//只有必须填写的字段都填写了才可以新增
 
-    if (addbutton==0 && l_record==""){
+    /*if (addbutton==0 && l_record==""){
     getInterfaceInfo();
     addbutton++;
-  }
+  }*/
     insertLineElements(tableid);//加入新行
     LineEditorShow(prodln - 1);       //打开行编辑器
     setLineNum(prodln);
@@ -221,7 +221,7 @@ function addNewLine(tableid) {
 
 }
 
-function getInterfaceInfo(){
+/*function getInterfaceInfo(){
   var interface_code=$("#interface_code").val();
   var haa_frameworks_id=$("#haa_frameworks_id_c").val();
   $.ajax({
@@ -234,16 +234,18 @@ function getInterfaceInfo(){
                 //data=JSON.parse(data);
                 
                 var res=JSON.parse(data);
+                if (res!=null){
                 for (var i=0;i<res.length;i++){
                   linetite[i]=res[i]['column_title'];
                   linename[i]=res[i]['column_name'];
                   lineRequired[i]=res[i]['required_flag'];
                 }
+              }
                 //$("#lineItems_head").hide();
                 insertLineHeader("lineItems");
               }
             });
-}
+}*/
 
 function btnMarkLineDeleted(ln, key) {//删除当前行
   if(confirm(SUGAR.language.get('app_strings','NTC_DELETE_CONFIRMATION'))) {

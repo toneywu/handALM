@@ -1,6 +1,6 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-require_once('include/MVC/View/views/view.Edit.php');
+require_once('include/MVC/View/views/view.edit.php');
 require_once('modules/HAT_Counting_Tasks/populateLineCountInfo.php');
 class HAT_Counting_TasksViewEdit extends ViewEdit
 {
@@ -19,6 +19,10 @@ class HAT_Counting_TasksViewEdit extends ViewEdit
 		if (isset($beanFramework)) {
 			$bean_framework_id = $_SESSION["current_framework"];
 			$bean_framework_name = $beanFramework->name;
+			if($this->bean->id==''){
+				$this->bean->hat_counting_task_templates_id_c=$beanFramework->hat_counting_task_templates_id_c;
+				$this->bean->task_templates=$beanFramework->task_templates;
+			}
 		}
 		$this->ss->assign('FRAMEWORK_C',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id_c'));
 		

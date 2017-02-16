@@ -50,6 +50,7 @@ class interfacePublicEntry extends SugarWebServiceImplv4_1 {
 			$beanHeader=BeanFactory::newBean('HAA_Integration_Interface_Headers');
 
 			$beanHeader->haa_frameworks_id_c=$ifcBean->haa_frameworks_id_c;
+			$beanHeader->haa_interfaces_id_c=$ifcBean->id;
 			$beanHeader->interface_code=$interface_code;
 			$beanHeader->ext_batch_number=$ifc_header_list['ext_batch_number'];
 			$beanHeader->received_date=$timedate->nowDb();

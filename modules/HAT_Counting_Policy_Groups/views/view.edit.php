@@ -16,7 +16,8 @@ class HAT_Counting_Policy_GroupsViewEdit extends ViewEdit
 			$bean_framework_name = $beanFramework->name;
 		}
 		$this->ss->assign('FRAMEWORK_C',set_framework_selector($current_framework_id,$current_module,$current_action,'haa_frameworks_id_c'));
-		
+		echo "<input id='task_templates_id' type='hidden' value='".$beanFramework->hat_counting_task_templates_id_c."'/>";
+		echo "<input id='task_templates_name' type='hidden' value='".$beanFramework->task_templates."'/>";
 		$modules=array(
 			'HAT_Counting_Policies',
 			);	

@@ -367,6 +367,8 @@ function addNewLine(tableid) {
   if (check_form('EditView')) {//只有必须填写的字段都填写了才可以新增
     insertLineElements(tableid);//加入新行
     LineEditorShow(prodln-1);       //打开行编辑器
+    setdefault(num);
+    //setdisabled(num);
   }
 }
 
@@ -397,7 +399,7 @@ function markLineDeleted(ln, key) {//删除当前行
 }
 
 function LineEditorShow(ln){ //显示行编辑器（先自动关闭所有的行编辑器，再打开当前行）
-  
+
   validate(ln);
   if (prodln>1) {
     for (var i=0;i<prodln;i++) {
@@ -697,4 +699,12 @@ function setdisabled(ln){
   document.getElementById('line_policy_name'+ln).disabled=false;
   document.getElementById('btn_policy'+ln).disabled=false;
 }
+}
+
+function setdefault(ln){
+  var policy_groups_id=$('#policy_groups_id').val();
+  var policy_groups_name=$('#policy_groups_name').val();
+  document.getElementById('line_hat_counting_policy_groups_id_c'+ln).value=policy_groups_id;
+  document.getElementById('line_policy_group_name'+ln).value=policy_groups_name;
+  setnullpolicy(ln);
 }
