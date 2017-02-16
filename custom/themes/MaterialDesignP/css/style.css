@@ -141,19 +141,7 @@ div#loadingPage b{
 	border: 1px solid #ccc;
 }
 
-@media(min-width: 1561px) {
-    .desktop-bar {width: 30%;}
-    .desktop-toolbar {width: 68%}
-}
 
-@media(min-width: 1201px) {
-    .desktop-bar {width: 25%;}
-    .desktop-toolbar {width: 74%}
-}
-@media(min-width: 751px) {
-    .desktop-bar {width: 30%;}
-    .desktop-toolbar {width: 68%}
-}
 
 
 /*overall structure*/

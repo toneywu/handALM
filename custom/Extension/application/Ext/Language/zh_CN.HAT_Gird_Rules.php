@@ -41,11 +41,11 @@
 $app_list_strings['moduleList']['HAT_Gird_Rules'] = 'Gird_Rules';
 
 $app_list_strings['hat_gird_line_layout_list']=array (
-    'Vetical' => 'Vetical',
-    'Horizontal' => 'Horizontal',
+    'Vetical' => '直线',
+    'Horizontal' => '水平',
 );
 
 $app_list_strings['haa_order_list']=array (
-    'ASC' => 'ASC',
-    'DESC' => 'DESC',
+    'ASC' => '递增',
+    'DESC' => '递减',
 );

@@ -76,7 +76,7 @@ $(document).ready(function() {
     call_ff();
   });
 
-  $("#line_items_span").parent("td").prev("td").hide();
+  $(".detail-view-field[field=line_items]").prev(".label").hide();
   //去除行前的标签
   
    if (typeof $("#source_wo_id").attr("data-id-value") != "undefined") {

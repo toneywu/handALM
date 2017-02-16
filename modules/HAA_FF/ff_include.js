@@ -47,7 +47,7 @@ function htmlUnescape(str){
 function setFF(FFObj) {
 	//设置FlexFORM，基于triger_setFF函数读取到的Ajax结果，动态的调整界面字段
 	//其中FFObj是FF_Fields中定义的需要变化的各个字段及属性
-	//console.log(FFObj);//<-------------------如果你需要调试，可以将这一行的内容输出
+	console.log(FFObj);//<-------------------如果你需要调试，可以将这一行的内容输出
 
 	var view = action_sugar_grp1;
 	//有些界面在EditView和DetailView中处理有所不同，因此先读取出当前界面是哪些，保存在View中
@@ -79,7 +79,7 @@ function setFF(FFObj) {
 				mark_obj_label.html(FFObj.label+":"); //V7.8-
 			} else if(view =="DetailView") {
 				//$("td[field='"+FFObj.field+"']").prev("td").html(FFObj.label+":");//V7.8-
-				$("div[field='"+FFObj.field+"']").parent().prev(".label").html(FFObj.label+":");//V7.8+
+				$("#"+FFObj.field).parent().prev(".label").html(FFObj.label+":");//V7.8+
 			}
 		}
 	}

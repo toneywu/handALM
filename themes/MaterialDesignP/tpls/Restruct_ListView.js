@@ -18,6 +18,7 @@ $(document).ready(function(){
 	var btn_icon = {}
 	btn_icon["icon-Create"] = "plus";
 	btn_icon["icon-List"] = "list";
+	btn_icon["icon-View"] = "list";
 	btn_icon["icon-Import"] = "import";
 	btn_icon["icon-Create_Contact_Vcard"] = "file";
 	btn_icon["icon-TreeView"] = "eye-open";
