@@ -123,7 +123,7 @@ if ($_REQUEST['type']=="current_using_org" ) {
                                                     AND accounts.id='".$_REQUEST['query_id']."'
                             AND ".$current_mode_sql.$current_site_sql.$where_sql. " ORDER by hat_assets.name ASC";
 
-  echo $sel_sub_asset;
+  //echo $sel_sub_asset;
 }
 
 if ($_REQUEST['type']=="current_using_org_none" && isset($_REQUEST['query_id'])) {
@@ -303,6 +303,7 @@ if ($_REQUEST['type']=="current_owning_org") {
                             AND ".$current_mode_sql.$current_site_sql.$where_sql. " ORDER by hat_assets.name ASC";
         /*if($_REQUEST['id'] == 'a26e1f5b-7ed9-fede-9a8b-5868c24c6b3e'){
           echo $sel_sub_asset;
+          echo($_SESSION['query_id']);
         }*/
 
       

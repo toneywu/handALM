@@ -272,7 +272,7 @@ function btn_search_clicked() {
 	  	type: 'POST',
 	  	data: { 'asset_status' : $('#asset_status').val(), 
 	  			'asset_name' : $('#asset_name').val(), 
-	  			'site_select': $('#site_select').val(),
+	  			'site_select': $('#ham_maint_sites_id').val(),
 	  			'serial_number': $('#serial_number').val(),
 	  			'using_org_name':$('#using_org_name').val(),
 	  			'owning_org_name':$('#owning_org_name').val()
@@ -447,7 +447,7 @@ function initTree(treeView, default_list, p3) {
 
 	if (treeView=='LIST') {
 		//alert(p3);
-		console.log("p3");
+		console.log(p3);
 		var zNodes = [{name:framework_title+$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0, type:default_list, query_id:p3, current_mode: current_mode}];
 		console.log(zNodes);
 

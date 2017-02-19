@@ -20,7 +20,8 @@ if($current_status=="DRAFT"){
 		echo '<option value="'.$key.'">'.$value.'</option>';
 	}
 }elseif ( $current_status=="APPROVED" ||$current_status=="RELEASED"||$current_status=="REWORK") {
-	if($key=="APPROVED"||$key=="WSCH"||$key=="WMATL"||$key=="WPCOND"||$key=="INPRG"||$key=="CANCELED"||$key=="REWORK"||$key=="RELEASED"){
+	/*if($key=="APPROVED"||$key=="WSCH"||$key=="WMATL"||$key=="WPCOND"||$key=="INPRG"||$key=="CANCELED"||$key=="REWORK"||$key=="RELEASED"){*/
+	if($key=="APPROVED"||$key=="CANCELED"||$key=="CLOSED"){
 		echo '<option value="'.$key.'">'.$value.'</option>';
 	}
 }elseif ( $current_status=="CANCELED" ) {

@@ -37,6 +37,25 @@ class HAA_Integration_Interface_HeadersViewEdit extends ViewEdit
         };
 
         parent::Display();
+        if($this->bean->id){
+        echo '<script>
+  $("#interface_code").attr("readOnly",true);
+  $("#own_interface").attr("readOnly",true);
+  document.getElementById("btn_own_interface").disabled=true;
+  document.getElementById("btn_clr_own_interface").disabled=true;
+  $("#ext_batch_number").attr("readOnly",true);
+  $("#received_date").attr("disabled",true);
+  $("#line_cnt").attr("readOnly",true);
+  $("#process_status").attr("readOnly",true);
+  $("#process_date").attr("disabled",true);
+  $("#process_message").attr("readOnly",true);
+  $("#reference1").attr("readOnly",true);
+  $("#reference2").attr("readOnly",true);
+  $("#reference3").attr("readOnly",true);
+  $("#reference4").attr("readOnly",true);
+  $("#description").attr("readOnly",true);
+</script>';
+}
         //if($this->bean->haa_interfaces_id_c){
         /*$sql="SELECT
         a.id

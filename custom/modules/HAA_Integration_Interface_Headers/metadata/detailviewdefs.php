@@ -67,40 +67,41 @@ array (
         array (
           0 => 
           array (
-            'name' => 'ext_batch_number',
-            'label' => 'LBL_EXT_BATCH_NUMBER',
+            'name' => 'own_interface',
+            'studio' => 'visible',
+            'label' => 'LBL_OWN_INTERFACE',
           ),
           1 => 
           array (
-            'name' => 'received_date',
-            'label' => 'LBL_RECEIVED_DATE',
+            'name' => 'ext_batch_number',
+            'label' => 'LBL_EXT_BATCH_NUMBER',
           ),
         ),
         2 => 
         array (
           0 => 
           array (
-            'name' => 'line_cnt',
-            'label' => 'LBL_LINE_CNT',
+            'name' => 'received_date',
+            'label' => 'LBL_RECEIVED_DATE',
           ),
           1 => 
           array (
-            'name' => 'process_status',
-            'studio' => 'visible',
-            'label' => 'LBL_PROCESS_STATUS',
+            'name' => 'line_cnt',
+            'label' => 'LBL_LINE_CNT',
           ),
         ),
         3 => 
         array (
           0 => 
           array (
-            'name' => 'process_date',
-            'label' => 'LBL_PROCESS_DATE',
+            'name' => 'process_status',
+            'studio' => 'visible',
+            'label' => 'LBL_PROCESS_STATUS',
           ),
           1 => 
           array (
-            'name' => 'process_message',
-            'label' => 'LBL_PROCESS_MESSAGE',
+            'name' => 'process_date',
+            'label' => 'LBL_PROCESS_DATE',
           ),
         ),
         4 => 
@@ -131,7 +132,12 @@ array (
         ),
         6 => 
         array (
-          0 => 'description',
+          0 => 
+          array (
+            'name' => 'process_message',
+            'label' => 'LBL_PROCESS_MESSAGE',
+          ),
+          1 => 'description',
         ),
       ),
       'lbl_detailview_panel1' => 

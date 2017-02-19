@@ -70,17 +70,34 @@ class ViewPopup extends SugarView{
 
 		if(isset($_REQUEST['metadata']) && strpos($_REQUEST['metadata'], "..") !== false)
 			die("Directory navigation attack denied.");
+        //Modefy instance by zhangling 20170216
+        $instance_loc='instance/PUBLIC/';
+        if(isset($_SESSION["current_framework_code"])){
+            $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+        }
+        //End 
         if (!empty($_REQUEST['metadata']) && $_REQUEST['metadata'] != 'undefined'
             && file_exists('custom/modules/' . $this->module . '/metadata/' . $_REQUEST['metadata'] . '.php')) {
             require 'custom/modules/' . $this->module . '/metadata/' . $_REQUEST['metadata'] . '.php';
         } elseif (!empty($_REQUEST['metadata']) && $_REQUEST['metadata'] != 'undefined'
             && file_exists('modules/' . $this->module . '/metadata/' . $_REQUEST['metadata'] . '.php')) {
             require 'modules/' . $this->module . '/metadata/' . $_REQUEST['metadata'] . '.php';
-        } elseif (file_exists('custom/modules/' . $this->module . '/metadata/popupdefs.php')) {
+        } 
+        //Modefy instance by zhangling 20170216
+        elseif(file_exists($instance_loc.'modules/' . $this->module . '/metadata/popupdefs.php')) {
+                require($instance_loc.'modules/' . $this->module . '/metadata/popupdefs.php');
+        }
+        //End
+        elseif (file_exists('custom/modules/' . $this->module . '/metadata/popupdefs.php')) {
             require 'custom/modules/' . $this->module . '/metadata/popupdefs.php';
         } elseif (file_exists('modules/' . $this->module . '/metadata/popupdefs.php')) {
             require 'modules/' . $this->module . '/metadata/popupdefs.php';
         }
+
+            
+            
+            
+
 
 	    if(!empty($popupMeta) && !empty($popupMeta['listviewdefs'])){
 	    	if(is_array($popupMeta['listviewdefs'])){

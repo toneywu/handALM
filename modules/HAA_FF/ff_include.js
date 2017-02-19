@@ -513,7 +513,10 @@ function OverwriteSaveBtn(preValidateFunction) {
   		//SaveBtn.addClass("disabled").attr("disabled",true);
 		var validateResult = preValidateFunction();
 
-		if ($(".validation-message").length==0 && validateResult) {//如果验证没有问题
+		//Updated by zhangling 20170215
+		//if ($(".validation-message").length==0 && validateResult) {//如果验证没有问题
+		if (validateResult) {//如果验证没有问题
+		//End Updated on 20170215
 			//执行Save按钮正常执行的内容
 			validateResult = check_form('EditView');//通过标准的check_form再做一次校验
 			if (validateResult) {
