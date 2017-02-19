@@ -272,7 +272,7 @@ function btn_search_clicked() {
 	  	type: 'POST',
 	  	data: { 'asset_status' : $('#asset_status').val(), 
 	  			'asset_name' : $('#asset_name').val(), 
-	  			'site_select': $('#site_select').val(),
+	  			'site_select': $('#ham_maint_sites_id').val(),
 	  			'serial_number': $('#serial_number').val(),
 	  			'using_org_name':$('#using_org_name').val(),
 	  			'owning_org_name':$('#owning_org_name').val()
