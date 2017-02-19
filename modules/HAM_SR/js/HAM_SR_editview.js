@@ -5,6 +5,26 @@ function setAssetPopupReturn(popupReplyData){
 	$("#asset_desc_text").text($("#asset_desc").val());
 }
 
+function setReporterOrgPopupReturn(popupReplyData){
+    set_return(popupReplyData);
+    console.log(popupReplyData);
+    $("#reporter_org").val(popupReplyData.name_to_value_array['reporter_org']);
+    $("#account_id").val(popupReplyData.name_to_value_array['account_id']);
+}
+
+function setReporterPopupReturn(popupReplyData){
+    set_return(popupReplyData);
+    console.log(popupReplyData);contact_id
+    $("#reporter_org").val(popupReplyData.name_to_value_array['reporter_org']);
+    $("#account_id").val(popupReplyData.name_to_value_array['account_id']);
+    $("#contact_id").val(popupReplyData.name_to_value_array['contact_id']);
+    $("#reporter").val(popupReplyData.name_to_value_array['reporter']);
+    $("#work_phone").val(popupReplyData.name_to_value_array['work_phone']);
+    $("#mobile").val(popupReplyData.name_to_value_array['mobile']);
+    $("#email").val(popupReplyData.name_to_value_array['email']);
+
+}
+
 function setEventTypePopupReturn(popupReplyData){
 	set_return(popupReplyData);
     call_ff();
@@ -12,7 +32,7 @@ function setEventTypePopupReturn(popupReplyData){
 
 function call_ff() {
 	triger_setFF($("#haa_ff_id").val(),"HAM_SR",'EditView');
-    $("a.collapsed").click();
+    $(".expandLink").click();
 }
 
 

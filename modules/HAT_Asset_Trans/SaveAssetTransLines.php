@@ -73,7 +73,8 @@ function save_lines($post_data, $header, $key = ''){
                 }
 
             }
-            //echo("\ntransLine Saved");
+            //echo("\ntransLine Saved");line_asset_id
+            //echo $trans_line;
             $trans_line->save();//保存行信息
             $GLOBALS['log']->debug("OK.transLines are Saved");
         } else {
@@ -347,9 +348,15 @@ function save_asset_lines($focus, $beanAsset=null){
             $beanAsset->attribute12 = $focus->target_asset_attribute12;
             $beanAsset->asset_status = $focus->target_asset_status;
             $beanAsset->parent_asset_id = $focus->target_parent_asset_id;
-
-            $beanAsset->save();
-            //以上为常规保存了所有的设备
+            if ( empty($beanAsset->id)) {
+                echo "alert('--------------------------------------------');";
+                echo "alert('++++++++++++++++++++++++++++++++++++++++++++');";
+                echo  "alert('".$beanAsset->id."');";
+            }else{
+                $beanAsset->save();
+                //以上为常规保存了所有的设备
+            }
+            
         }
 }
 

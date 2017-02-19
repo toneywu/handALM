@@ -96,12 +96,12 @@ class SearchForm
         $this->seed = $seed;
         $this->module = $module;
         $this->action = $action;
-        $this->tabs = array(array('title' => $GLOBALS['app_strings']['LNK_BASIC_FILTER'],
+        $this->tabs = array(array('title' => $GLOBALS['app_strings']['LNK_BASIC_SEARCH'],
             'link' => $module . '|basic_search',
             'key' => $module . '|basic_search',
             'name' => 'basic',
             'displayDiv' => ''),
-            array('title' => $GLOBALS['app_strings']['LNK_ADVANCED_FILTER'],
+            array('title' => $GLOBALS['app_strings']['LNK_ADVANCED_SEARCH'],
                 'link' => $module . '|advanced_search',
                 'key' => $module . '|advanced_search',
                 'name' => 'advanced',
@@ -141,7 +141,7 @@ class SearchForm
         $this->tabs = array();
         if ($this->showBasic) {
             $this->nbTabs++;
-            $this->tabs[] = array('title' => $GLOBALS['app_strings']['LNK_BASIC_FILTER'],
+            $this->tabs[] = array('title' => $GLOBALS['app_strings']['LNK_BASIC_SEARCH'],
                 'link' => $this->module . '|basic_search',
                 'key' => $this->module . '|basic_search',
                 'name' => 'basic',
@@ -149,7 +149,7 @@ class SearchForm
         }
         if ($this->showAdvanced) {
             $this->nbTabs++;
-            $this->tabs[] = array('title' => $GLOBALS['app_strings']['LNK_ADVANCED_FILTER'],
+            $this->tabs[] = array('title' => $GLOBALS['app_strings']['LNK_ADVANCED_SEARCH'],
                 'link' => $this->module . '|advanced_search',
                 'key' => $this->module . '|advanced_search',
                 'name' => 'advanced',
@@ -1381,7 +1381,16 @@ class SearchForm
             require('modules/' . $module . '/metadata/metafiles.php');
         }
 
-        if (file_exists('custom/modules/' . $module . '/metadata/searchdefs.php')) {
+        // Add By zhangling 20170217
+        $instance_loc='instance/PUBLIC/';
+        if(isset($_SESSION["current_framework_code"])){
+          $instance_loc='instance/'.$_SESSION["current_framework_code"].'/';
+        }
+        if(file_exists($instance_loc.'modules/' . $module . '/metadata/searchdefs.php')){
+            require_once($instance_loc.'modules/' . $module . '/metadata/searchdefs.php');
+        }
+        // end Add By zhangling 20170217
+        elseif (file_exists('custom/modules/' . $module . '/metadata/searchdefs.php')) {
             require('custom/modules/' . $module . '/metadata/searchdefs.php');
         } elseif (!empty($metafiles[$module]['searchdefs'])) {
             require($metafiles[$module]['searchdefs']);
@@ -1389,16 +1398,25 @@ class SearchForm
             require('modules/' . $module . '/metadata/searchdefs.php');
         }
 
-
-        if (!empty($metafiles[$module]['searchfields'])) {
+        // Update By zhangling 20170217
+        /*if (!empty($metafiles[$module]['searchfields'])) {
             require($metafiles[$module]['searchfields']);
         } elseif (file_exists('modules/' . $module . '/metadata/SearchFields.php')) {
             require('modules/' . $module . '/metadata/SearchFields.php');
         }
         if (file_exists('custom/modules/' . $module . '/metadata/SearchFields.php')) {
             require('custom/modules/' . $module . '/metadata/SearchFields.php');
+        }*/
+        if (!empty($metafiles[$module]['searchfields'])) {
+            require($metafiles[$module]['searchfields']);
+        } elseif(file_exists($instance_loc.'modules/' . $module . '/metadata/SearchFields.php')){
+            require_once($instance_loc.'modules/' . $module . '/metadata/SearchFields.php');
+        }elseif (file_exists('custom/modules/' . $module . '/metadata/SearchFields.php')) {
+            require('custom/modules/' . $module . '/metadata/SearchFields.php');
+        } elseif (file_exists('modules/' . $module . '/metadata/SearchFields.php')) {
+            require('modules/' . $module . '/metadata/SearchFields.php');
         }
-
+        // end Update By zhangling 20170217
         return array('searchdefs' => $searchdefs, 'searchFields' => $searchFields);
     }
 

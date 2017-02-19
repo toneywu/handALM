@@ -251,6 +251,12 @@ array (
             'displayParams' => 
             array (
               'initial_filter' => '&asset_using_org=Y',
+              'field_to_name_array' => 
+              array (
+                'name' => 'reporter_org',
+                'id' => 'account_id',
+              ),
+              'call_back_function' => 'setReporterOrgPopupReturn',
             ),
           ),
           1 => 
@@ -271,6 +277,7 @@ array (
                 'phone_mobile' => 'mobile',
                 'email1' => 'email',
               ),
+              'call_back_function' => 'setReporterPopupReturn',
             ),
           ),
         ),

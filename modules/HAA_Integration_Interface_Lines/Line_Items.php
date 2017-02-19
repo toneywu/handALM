@@ -55,10 +55,12 @@ function display_lines($focus, $field, $value, $view){
             haa_integration_interface_headers iih
             where 1=1
             and iil.deleted=0
+            and iil.haa_integration_interface_headers_id_c=iih.id
             AND iih.id='".$focus->id."'" ;
 
             $result = $focus->db->query($sql);
             $html .= '<script>insertLineHeader(\'lineItems\');</script>';
+            // $html .= "<script>setHeaderItem();</script>";
             while ($row = $focus->db->fetchByAssoc($result)) {
                $line_data = json_encode($row);
                $html .= "<script>insertLineData(" . $line_data . ");</script>";

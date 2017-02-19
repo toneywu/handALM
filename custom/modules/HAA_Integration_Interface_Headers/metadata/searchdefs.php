@@ -14,6 +14,17 @@ array (
         'default' => true,
         'name' => 'interface_code',
       ),
+      'own_interface' => 
+      array (
+        'type' => 'relate',
+        'studio' => 'visible',
+        'label' => 'LBL_OWN_INTERFACE',
+        'id' => 'HAA_INTERFACES_ID_C',
+        'link' => true,
+        'width' => '10%',
+        'default' => true,
+        'name' => 'own_interface',
+      ),
       'ext_batch_number' => 
       array (
         'type' => 'name',
@@ -30,14 +41,6 @@ array (
         'width' => '10%',
         'default' => true,
         'name' => 'received_date',
-      ),
-      'line_cnt' => 
-      array (
-        'type' => 'int',
-        'label' => 'LBL_LINE_CNT',
-        'width' => '10%',
-        'default' => true,
-        'name' => 'line_cnt',
       ),
       'process_status' => 
       array (

@@ -1002,6 +1002,11 @@ $dictionary['HIT_IP_Allocations'] = array (
 	'unified_search' => true,
 	
 );
+$dictionary["HIT_IP_Allocations"]["indices"][] = array (
+  'name' =>'idx_allocations_subnets_id',
+  'type' =>'index',
+  'fields'=>array('deleted','hit_ip_subnets_id','enable_action'),
+);
 if (!class_exists('VardefManager')) {
 	require_once ('include/SugarObjects/VardefManager.php');
 }

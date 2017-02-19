@@ -9,6 +9,16 @@ array (
     'width' => '10%',
     'default' => true,
   ),
+  'OWN_INTERFACE' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'label' => 'LBL_OWN_INTERFACE',
+    'id' => 'HAA_INTERFACES_ID_C',
+    'link' => true,
+    'width' => '10%',
+    'default' => true,
+  ),
   'EXT_BATCH_NUMBER' => 
   array (
     'type' => 'name',

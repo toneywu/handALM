@@ -99,8 +99,10 @@ for(var i =0;i<linename.length;i++)
 }
 innerhtml+="<td style='vertical-align: middle;'><select disabled='disabled' tabindex='116' name='displayed_line_status[" + prodln + "]' id='displayed_line_status" + prodln + "'>" + InterLineStatus +"</select></td>"+
 "<td style='vertical-align: middle;'><span name='displayed_process_message[" + prodln + "]' id='displayed_process_message" + prodln + "'></span></td>"+
-"<td style='vertical-align: middle;'<span name='displayed_description[" + prodln + "]' id='displayed_description" + prodln + "'></span></td>"+
-"<td style='vertical-align: middle;'><input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'></td>";
+"<td style='vertical-align: middle;'<span name='displayed_description[" + prodln + "]' id='displayed_description" + prodln + "'></span></td>";
+
+innerhtml+="<td style='vertical-align: middle;'><input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'></td>";
+
 z1.innerHTML  =innerhtml;
 var tr_dis=document.getElementById(z1.id);
 tr_dis.align="center";
@@ -191,6 +193,12 @@ function renderLine(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_line_status"+ln).val($("#line_line_status"+ln).val());
   $("#displayed_process_message"+ln).html($("#line_process_message"+ln).val());
   $("#displayed_description"+ln).html($("#line_description"+ln).val());
+  if($("#displayed_line_status"+ln).val()=='E'){
+    document.getElementById("btn_edit_line"+ln).disabled=false;
+  }else
+  {
+    document.getElementById("btn_edit_line"+ln).disabled=true;
+  }
 }
 
 function insertLineFootor(tableid)
@@ -203,7 +211,7 @@ function insertLineFootor(tableid)
 
   footer_cell.scope="row";
   footer_cell.colSpan=columnNum1;
-  footer_cell.innerHTML="<input id='btnAddNewLine' type='button' class='button btn_del' onclick='addNewLine(\"" +tableid+ "\")' value='+新增' />";
+  //footer_cell.innerHTML="<input id='btnAddNewLine' type='button' class='button btn_del' onclick='addNewLine(\"" +tableid+ "\")' value='+新增' />";
 }
 
 function addNewLine(tableid) {

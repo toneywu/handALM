@@ -351,7 +351,7 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 		});
 	}
 	//add by yuan.chen
-	var reject_woop_btn=$("<input type='button' class='button' id='btn_woop_reject' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_WOOP_REJECT_BUTTON_LABEL')+"'>");
+	var reject_woop_btn=$("<input type='button' class='btn_detailview' id='btn_woop_reject' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_WOOP_REJECT_BUTTON_LABEL')+"'>");
 	$("#formgetWOOPQuery").append(reject_woop_btn);
 	$("#btn_woop_reject").click(function(){
 		reject_woop($("input[name='record']").val());
@@ -361,16 +361,14 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 	//等待前序的工序不能编辑
 	var woopEdit='';
 	var woopStatus='';
-	$("#list_subpanel_woop table tbody tr:gt(3)").each(function(i){
+	
+	$("#list_subpanel_woop>table tbody tr:gt(0)").each(function(i){
 		woopEdit="#woop_edit_"+(i+1);
-		woopStatus=$(this).children().eq(2).text().trim();
-		/*if (woopStatus=='等待前序'){
-			$(woopEdit).removeAttr("href"); 
-		}*/
+		woopStatus=$(this).children().eq(3).text().trim();
 		//add by zengchen 20161213
-		var url=$(this).children().eq(1).find('a').attr('href');
+		var url=$(this).children().eq(2).find('a').attr('href');
 		var wo_id=decodeURIComponent(url).split('=')[5];
-		var action_module=$(this).children().eq(8).text().trim();
+		var action_module=$(this).children().eq(9).text().trim();
 		if (action_module=="网络资源事务") {
 			action_module='hit_ip_trans_batch';
 		}
@@ -378,7 +376,7 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 			action_module='hat_asset_trans_batch';
 		}
 		if(action_module=="操作"){
-			var label_a_url=$(this).children().eq(8).find("a");
+			var label_a_url=$(this).children().eq(9).find("a");
 			var url=label_a_url.attr("href");
 			if (url=="#") {
 				url=label_a_url.attr("onclick");
@@ -389,7 +387,7 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 				action_module=url_module.split("&")[0].toLowerCase();
 			}
 		}
-		var label_a=$(this).children().eq(7).find("a");
+		var label_a=$(this).children().eq(8).find("a");
 		var lead_url=label_a.attr("href");
 		var url_arr=decodeURIComponent(lead_url).split("=");
 		var leading=url_arr[5];//负责人
@@ -400,8 +398,8 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 		if (uname!="认领任务"&&woopStatus=="已批准") {
 			var res=getDealStatu(wo_id,action_module,leading);
 			if (res['leader']=="0") {
-				$(this).children().eq(8).find("a").removeAttr("onclick");
-				$(this).children().eq(8).find("a").removeAttr("href");
+				$(this).children().eq(9).find("a").removeAttr("onclick");
+				$(this).children().eq(9).find("a").removeAttr("href");
 			}
 			if (woopStatus=="已批准"&&res['leader']!="0"&&res['trans_status']=="CLOSED"){
 				return false;//什么都不做
