@@ -272,7 +272,7 @@ $dictionary['HAM_WO_Lines'] = array(
             ),
 'uom_code' => 
   array (
-		'required' => true,
+		'required' => false,
 		'source' => 'non-db',
 		'name' => 'uom_code',
 		'vname' => 'LBL_UOM_CODE',

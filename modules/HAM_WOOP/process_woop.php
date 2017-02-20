@@ -51,9 +51,10 @@ if($include_reject_wo=='1'){
 	$reject_woop_bean->date_actual_finish = '';
 	$reject_woop_bean->date_actual_start = '';
 	$reject_woop_bean->woop_status = 'APPROVED';
-	$reject_woop_bean->work_center_people_id = '';
+//20170220将马丁在CC项目的要求，负责人在回时不清空
+/*	$reject_woop_bean->work_center_people_id = '';
 	$reject_woop_bean->work_center_people = '';
-	$reject_woop_bean->save();
+*/	$reject_woop_bean->save();
 
 	//驳回的工序对于的事物处理单
 	if ($reject_woop_bean->act_module == 'HIT_IP_TRANS_BATCH') {
@@ -79,7 +80,7 @@ if($include_reject_wo=='1'){
 			$trans_line = BeanFactory :: getBean('HIT_IP_TRANS')->retrieve_by_string_fields(array (
 													    'id' => $really_trans_id));
 			echo "really_trans_id = ".$trans_line->id."<br>";
-			if($allocation_id!=""){
+			if ($allocation_id != "") {
 				$allocation_line_bean = BeanFactory :: getBean('HIT_IP_Allocations')->retrieve_by_string_fields(array (
 													'id' => $allocation_id));
 				$allocation_line_bean->name = transfer_string($trans_line->name);
@@ -126,7 +127,7 @@ if($include_reject_wo=='1'){
 				$trans_line->history_id = $allocation_line_bean->id;
 				$trans_line->save();
 				$allocation_line_bean->save();
-			}
+			}//end if ($allocation_id != "")
 		}
 	}
 	//end

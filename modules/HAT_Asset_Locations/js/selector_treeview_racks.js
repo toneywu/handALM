@@ -143,7 +143,8 @@ function openAssetPopup(ln){//本文件为行上选择资产的按钮
 */    }
   };
   //var popupFilter ='&avaliable_it_equipments=true';
-  var popupFilter ='&avaliable_it_equipments=true&asset_status_advanced=Idle&owning_org_id_advanced='+$("#rack_pos_hat_assets_accounts_id").val();
+//  var popupFilter ='&avaliable_it_equipments=true&asset_status_advanced=Idle&owning_org_id_advanced='+$("#rack_pos_hat_assets_accounts_id").val();
+  var popupFilter ='&avaliable_it_equipments=true&asset_status1=Idle&asset_status2=Stocked&owning_org_id_advanced='+$("#rack_poshat_assets_accounts_id").val();
   open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
 }
 

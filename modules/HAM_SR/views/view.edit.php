@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 require_once('include/MVC/View/views/view.edit.php');
@@ -167,7 +167,7 @@ class HAM_SRViewEdit extends ViewEdit
                 $this->bean->reporter_org = $resule_contact['account_name'];
                 $this->bean->account_id_c = $resule_contact['account_id'];
             }
-           $this->bean->email = $current_user->email1;//用的是User的不是Contact，没有什么理由
+           //$this->bean->email = $current_user->email1;//用的是User的不是Contact，没有什么理由
         }
 
         //自动填写当前的记录创建人

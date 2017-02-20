@@ -1,5 +1,5 @@
 <?php
-// created: 2017-02-13 14:37:27
+// created: 2017-02-16 19:07:32
 $searchFields['HAA_Integration_Interface_Headers'] = array (
   'name' => 
   array (
@@ -51,6 +51,24 @@ $searchFields['HAA_Integration_Interface_Headers'] = array (
     'is_date_field' => true,
   ),
   'end_range_date_modified' => 
+  array (
+    'query_type' => 'default',
+    'enable_range_search' => true,
+    'is_date_field' => true,
+  ),
+  'range_received_date' => 
+  array (
+    'query_type' => 'default',
+    'enable_range_search' => true,
+    'is_date_field' => true,
+  ),
+  'start_range_received_date' => 
+  array (
+    'query_type' => 'default',
+    'enable_range_search' => true,
+    'is_date_field' => true,
+  ),
+  'end_range_received_date' => 
   array (
     'query_type' => 'default',
     'enable_range_search' => true,

@@ -86,6 +86,7 @@ function goPagelast(){//末页
 function insertLineData(mapping_line, current_view){ //将数据写入到对应的行字段中
   var ln = 0;
   //if(mapping_line.id != '0' && mapping_line.id !== ''){
+
     ln = insertTransLineElements("lineInfos", current_view);
     mapping_line=JSON.parse(mapping_line);
     for(var propertyName in mapping_line) {
@@ -95,13 +96,17 @@ function insertLineData(mapping_line, current_view){ //将数据写入到对应�
         //如果当前字段不是checkbox，就以val的形式赋值
         //display 用html赋值
         if(propertyName.concat(String(ln))=="line_status"+ln){
-          $("#displayed_line_"+propertyName.toLowerCase().concat(String(ln))).val(mapping_line[propertyName]);
-        }else{
-        var  strHTML=    "<input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_DELETE_INLINE') + "' tabindex='116' onclick='delete_line("+ "\""+mapping_line["id"]+"\"" +","+ln+")'/>";
-        /*console.log(propertyName.concat(String(ln)).toLowerCase());*/
+          var l_linestatus=document.getElementById("displayed_line_line_status_list"+ln);
+
+        for(var i =0 ;i<l_linestatus.length;i++){
+          if(mapping_line[propertyName]==l_linestatus[i].value){
+                  $("#displayed_line_"+propertyName.toLowerCase().concat(String(ln))).html(l_linestatus[i].text);
+}
+        }
+      }else{
+        console.log(propertyName.concat(String(ln)).toLowerCase());
         $("#displayed_line_"+propertyName.toLowerCase().concat(String(ln))).html(mapping_line[propertyName]);
-        $("#displayed_line_remove"+ln).html(strHTML);
-      }
+        }
       }
     }
     function goPage(pno,psize){//数据分页方法
@@ -148,30 +153,7 @@ function insertLineData(mapping_line, current_view){ //将数据写入到对应�
       document.getElementById("pageNumbers").innerHTML=l_pagenum;//替换页数信息
     }
 
-    function delete_line(line_id,ln){//删除按钮
-      if(confirm("您确认要移除这个关系吗？"))//弹出确定/取消对话框
-      {
-        $.ajax({//使用ajax调用PHP文件与数据库交互
-          async:false,
-          url: 'index.php?to_pdf=true&module=HAA_Integration_Interface_Lines&action=delete_mapping_line',
-          data: '&line_id='+line_id,
-          type:'POST',
-            success: function (data) {//调用方法。
-                //data=$.parseJSON(data);
-                //data=JSON.parse(data);
-                //alert(data);
-
-              }
-            });
-        var tr_id=document.getElementById("asset_trans_line1_displayed"+ln);
-        tr_id.parentNode.removeChild(tr_id);//从table中删除的当前行
-        goPage(tabNumber,l_psize);//刷新分页数据
-      }else
-      {
-        return false;
-      }
-    }
-
+    
 /******************************
 /* 创建出界面的字段要素（不包括填写值，填写值通过insertLineData完成
 /*******************************/
@@ -187,17 +169,18 @@ document.getElementById(tableid).appendChild(tablebody);
 var z1 = tablebody.insertRow(-1);
 z1.id = 'asset_trans_line1_displayed' + prodln;
 z1.className = 'oddListRowS1';
-var html="<td style='font-size:14px;vertical-align: middle;'><span name='displayed_line_ext_line_id[" + prodln + "]' id='displayed_line_ext_line_id" + prodln + "'>1</span></td>" ;
+var html="<td style='font-size:14px;vertical-align: middle;height: 40px;'><span name='displayed_line_ext_line_id[" + prodln + "]' id='displayed_line_ext_line_id" + prodln + "'>1</span></td>" ;
 for(var i=0;i<lineName.length;i++){
 
   var linename=lineName[i].toLowerCase();
-  html+="<td style='font-size:14px;vertical-align: middle;'><span name='displayed_line_"+linename+"[" + prodln + "]' id='displayed_line_"+linename + prodln + "'></span></td>";
+  html+="<td style='font-size:14px;vertical-align: middle;height: 40px;'><span name='displayed_line_"+linename+"[" + prodln + "]' id='displayed_line_"+linename + prodln + "'></span></td>";
 
 }
-html+="<td style='font-size:14px;vertical-align: middle;'><select name='displayed_line_line_status[" + prodln + "]' id='displayed_line_line_status" + prodln + "'>"+InterLineStatus+"</select></td>"+
-"<td style='font-size:14px;vertical-align: middle;'><span name='displayed_line_process_message[" + prodln + "]' id='displayed_line_process_message" + prodln + "'></span></td>"+
-"<td style='font-size:14px;vertical-align: middle;'><span name='displayed_line_description[" + prodln + "]' id='displayed_line_description" + prodln + "'></span></td>"+
-"<td style='font-size:14px;vertical-align: middle;'><span name='displayed_line_remove[" + prodln + "]' id='displayed_line_remove" + prodln + "'></span></td>";
+html+="<td style='display:none;'><select  name='displayed_line_line_status_list[" + prodln + "]' id='displayed_line_line_status_list" + prodln + "'>"+InterLineStatus+"</select></td>"+
+"<td style='font-size:14px;vertical-align: middle;height: 40px;'><span name='displayed_line_line_status[" + prodln + "]' id='displayed_line_line_status" + prodln + "'></span></td>"+
+"<td style='font-size:14px;vertical-align: middle;height: 40px;'><span name='displayed_line_process_message[" + prodln + "]' id='displayed_line_process_message" + prodln + "'></span></td>"+
+"<td style='font-size:14px;vertical-align: middle;height: 40px;'><span name='displayed_line_description[" + prodln + "]' id='displayed_line_description" + prodln + "'></span></td>"+
+"<td style='font-size:14px;vertical-align: middle;height: 40px;'><span name='displayed_line_remove[" + prodln + "]' id='displayed_line_remove" + prodln + "'></span></td>";
 z1.innerHTML  =html;
 var tr_dis=document.getElementById(z1.id);
 tr_dis.align="center";
