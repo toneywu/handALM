@@ -2143,12 +2143,13 @@ ul#detailViewActions.clickMenu {
 }
 
 ul.clickMenu.SugarActionMenu li.single a {
-  background-color: #94A6B5;
+  background-color: $list-view-action-button-bg;
   padding: 0 8px;
 }
 
 ul.clickMenu.SugarActionMenu li.single a:hover {
-  background-color: #778591;
+  background-color:$default-btn-bg-hover;
+  color: $default-btn-hover-color;
 }
 
 .view {
@@ -4236,7 +4237,7 @@ tr:hover img.info {
   background-color: $success;
 }
 
-#CANCEL,
+#CANCEL:hover,
 #search_form input[name=clear]:hover {
   background-color: $danger-hover;
   color: #fff;

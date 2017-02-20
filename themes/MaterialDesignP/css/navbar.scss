@@ -258,11 +258,11 @@
 }
 
 .navbar-fixed-bottom {
-  z-index: 15030;
+  z-index: 1000; /* 15030; */
 }
 
 .navbar-fixed-top {
-  z-index: 15030;
+  z-index: 1000;/* 15030; */
 }
 
 /* fakes the space the icon takes */

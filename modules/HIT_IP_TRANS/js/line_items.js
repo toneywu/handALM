@@ -459,9 +459,6 @@ function openLocationPopup(ln) {
 }
 
 function insertTransLineHeader(tableid) {
-	$("#line_items_label").hide();// 隐藏SugarCRM字段
-	// alert(SUGAR.language.get('HAT_Asset_Trans',
-	// 'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE'));
 
 	tablehead = document.createElement("thead");
 	tablehead.id = tableid + "_head";

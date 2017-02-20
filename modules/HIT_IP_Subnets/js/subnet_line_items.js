@@ -782,50 +782,34 @@ function insertTransLineElements(tableid, current_view) { // 创建界面要素
 			+ "<td><span name='displayed_line_using_org[" + prodln+ "]' id='displayed_line_using_org" + prodln + "'></span></td>"
 			+ "<td>"
 
+	//如果是EditView，则进一步显示Edit按钮
+	//TODO: 可以变为下拉菜单
 	if (current_view == "EditView") {
-		z1.innerHTML += "<td>"
-		        + "<input type='button' value='"
+		//如果还没有分配，就可以修改
+
+			z1.innerHTML += "<td>"
+				+ "<input type='button' value='"
 				+ SUGAR.language.get('app_strings', 'LBL_EDITINLINE')
-				+ "' class='button'  id='btn_edit_line" + prodln
-				+ "' onclick='LineEditorShow(" + prodln + ")'>"
-				+ "</td>";
-		/*
-        console.log("line_ip_type     val " + "displayed_line_ip_type"+prodln +" ---"+prodln);
-	    if(document.getElementById("displayed_line_ip_type"+prodln).innerHTML != 1){
-	    	z1.innerHTML += "<td>"
-		        + "<input type='button' value='"
-				+ SUGAR.language.get('HIT_IP', 'LBL_RESOLVE_BUTTON')
-				+ "' class='button'  id='btn_resolve_line" + prodln
-				+ "' disabled = 'disabled"
-				+ "' onclick='LineResolve(" + prodln + ")'>"
-				+ "</td>";
-	    }
-	    else{
-            z1.innerHTML += "<td>"
-		        + "<input type='button' value='"
-				+ SUGAR.language.get('HIT_IP', 'LBL_RESOLVE_BUTTON')
-				+ "' class='button'  id='btn_resolve_line" + prodln
-				+ "' onclick='LineResolve(" + prodln + ")'>"
-				+ "</td>";
-	    }*/
-	    z1.innerHTML += "<td>"
-		        + "<input type='button' value='"
+				+ "' class='button' id='btn_edit_line" + prodln + "' onclick='LineEditorShow(" + prodln + ")'>"
+
+				+ "<input type='button' value='"
 				+ SUGAR.language.get('HIT_IP_Subnets', 'LBL_IP_AUTOCREATE_IP')
-				+ "' class='button'  id='btn_resolve_line" + prodln
-				+ "' onclick='LineResolve(" + prodln + ")'>"
+				+ "' class='button' id='btn_resolve_line" + prodln + "' onclick='LineResolve(" + prodln + ")'>"
+
 				+ "</td>";
 	}
+
 	var x = tablebody.insertRow(-1); // 以下生成的是Line Editor
 	x.id = 'trans_editor' + prodln;
 	x.style = "display:none";
-   
+
 
 	x.innerHTML = "<td colSpan='18'><div class='lineEditor'>"
 			+ "<span class='input_group'>"
 			+ "<label>"
 			+ SUGAR.language.get('HIT_IP_Subnets', 'LBL_IP_SUBNET')
 			+ "<span class='required'>*</span></label>"
-			+ "<input class='sqsEnabled' autocomplete='off' type='text' style='width:113px;' name='line_ip_subnet["
+			+ "<input class='sqsEnabled' autocomplete='off' type='text' style='width:143px;' name='line_ip_subnet["
 			+ prodln
 			+ "]' id='line_ip_subnet"
 			+ prodln
@@ -1046,7 +1030,7 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 	// console.log("renderTransLine"+ln);
 	//console.log("line_ip_type= " + $("#line_ip_type" + ln).val());
 	if ($("#line_ip_type_val" + ln).val() == "0") {
-		//console.log("renderTransLine"+ln);
+		//如果是散U，则不可以再拆分（按钮不可再点）
 		$("#displayed_line_ip_type" + ln).attr("checked", true);
 		$("#displayed_line_ip_type" + ln).prop("checked", true);
 		document.getElementById("displayed_line_ip_type" + ln).checked = true;
@@ -1128,15 +1112,20 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
     if ($("#line_status"+ln).val()=="1") {
     	is_assigned = 1;
     }
-	//行上有用途 就应该显示为已分配 
+	//行上有用途 就应该显示为已分配
 	if ($("#line_purpose"+ln).val()!="") {
     	is_assigned = 1;
-    }	
-	
+    }
+
     if(is_assigned == 1) {
 		$("#displayed_line_status"+ln).html("<span class='color_tag color_asset_status_InService'>"+SUGAR.language.get('HIT_IP', 'LBL_ASSIGNED')+"</span>");
+		//已经分配的行不可以编辑
+		$("#btn_edit_line"+ln).attr("disabled",true);
+		$("#btn_resolve_line"+ln).hide();
 	} else {
 		$("#displayed_line_status"+ln).html("<span class='color_tag color_asset_status_Idle'>"+SUGAR.language.get('HIT_IP', 'LBL_UNASSIGNED')+"</span>");
+		$("#btn_edit_line"+ln).attr("disabled",false)
+		$("#btn_resolve_line"+ln).show();
 	}
 
 	/*if($("#line_status"+ln).val()!="") {

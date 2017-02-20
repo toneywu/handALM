@@ -21,5 +21,6 @@ function show_ip_desc(ip_val,desc_obj) {
 };
 
 $(document).ready(function(){
-	$('#LBL_DETAILVIEW_PANEL1 td:first').hide();
+	//隐藏行上的标签
+	$('div[field="line_items"').prev("div.label").hide();
 });

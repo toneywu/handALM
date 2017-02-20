@@ -703,7 +703,7 @@ input[type="button"][disabled] {
   font-weight: 500;
   background-color: $disabled-btn-bg;
   color: $main-bg;
-  cursor: pointer;
+  cursor: inherit;
   margin: 0 0 0 0;
   border: none;
   border-radius: 3px;

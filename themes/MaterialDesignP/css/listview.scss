@@ -13,7 +13,7 @@
 }
 
 tr#pagination {
-  background: $main-bg;
+  background: $table-header-bg;
 }
 
 .list .pagination td {
@@ -1662,9 +1662,9 @@ label.selected-actions-label {
 }
 
 div.modal-content {
-  width: 450px;
+ /*  width: 450px; */
   margin: 0 auto;
-  max-width: 100%;
+  max-width: 800px;
 }
 
 .modal-search div.modal-content {
@@ -1742,9 +1742,9 @@ ul.clickMenu.selectmenu.SugarActionMenu.columnsFilterLink.listViewLinkButton > l
   height: 48px;
 }
 
-#columnsFilterDialog div.modal-content {
+/* #columnsFilterDialog div.modal-content {
   width: 450px;
-}
+} */
 
 /***/
 
@@ -2017,6 +2017,24 @@ ul.clickMenu.selectmenu.SugarActionMenu.listViewLinkButton > li.desktopOnly > a.
   width: 95%;
 }
 
+
+.popupBody input[type=submit] {
+  background-color: $default-btn-color;
+  color: $default-btn-bg;
+}
+.popupBody input[type=submit]:hover {
+  background-color: $primary-btn-bg-hover;
+  color: $primary-btn-bg-hover-color;
+}
+.popupBody input[type=reset] {
+  background-color:$default-btn-bg;
+  color: $default-btn-color;
+}
+.popupBody input[type=reset]:hover {
+  background-color:$danger-btn-bg-hover;
+  color: $default-btn-hover-color;
+}
+
 .popupBody textarea {
   width: 95%;
 }
@@ -2025,7 +2043,7 @@ ul.clickMenu.selectmenu.SugarActionMenu.listViewLinkButton > li.desktopOnly > a.
   font-size: $page-list-view-font-size;
   margin-bottom: 20px;
   overflow: scroll;
-  width: 95%;
+  /* width: 95%; */
 }
 
 .popupBody .list.view > thead > tr > th {
@@ -2134,7 +2152,7 @@ ul.clickMenu.selectmenu.SugarActionMenu.listViewLinkButton > li.desktopOnly > a.
 
 .popupBody .list tbody > tr > td a {
   font-size: $page-list-view-font-size;
-  font-weight: bold;
+  /* font-weight: bold; */
   color: $list-view-link-color;
   border-bottom-color: $list-view-link-color;
   border-bottom-style: dashed;
@@ -2158,8 +2176,8 @@ ul.clickMenu.selectmenu.SugarActionMenu.listViewLinkButton > li.desktopOnly > a.
 }
 
 .popupBody .list tbody > tr > td {
-  padding-top: 15px;
-  padding-bottom: 12px;
+  padding-top: 5px;
+  padding-bottom: 3px;
   padding-left: 10px;
   padding-right: 10px;
   vertical-align: middle;

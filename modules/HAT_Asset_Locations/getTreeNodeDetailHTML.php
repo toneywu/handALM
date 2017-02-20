@@ -11,6 +11,7 @@ if (!defined('sugarEntry') || !sugarEntry)
 
 global $db;
 global $mod_strings, $app_strings, $app_list_strings,$dictionary;
+
 require_once('cache/modules/HAT_Assets/HAT_Assetsvardefs.php');
 require_once('cache/modules/HAT_Asset_Locations/HAT_Asset_Locationsvardefs.php');
 
@@ -35,49 +36,10 @@ function get_label_name ($field_name,$mod_name) {
     $val_type='varchar', 数据项类型
     $con_string='',  连接符号，如JASON字段之间通过','关联
     $val_field_id='' 如果是ID字段，提供链接
-    $haa_ff_id 加载FF 字段定义内容
 ****************************************************/
-function get_jason_field ($haa_ff_id, $label_field_name, $mod_name,  $val_field,  $val_type='varchar', $val_field_id='', $relate_mod_name='') {
-    //Add by zengchen 20161221
-  global $db;
-  $return_text="";
-  //$haa_ff_id='75ee1d0a-41ae-3b96-bd06-5799b9d8c9af';
-  if(isset($haa_ff_id) && $haa_ff_id!=""){
-    //从如果这条记录中有haa_ff_id获取FF获取字段的定义
-    $sql="SELECT
-      haa_ff_fields.fieldtype,
-      haa_ff_fields.field,
-      haa_ff_labels.name
-    FROM
-      haa_ff_fields
-    LEFT JOIN haa_ff ON haa_ff_fields.haa_ff_id = haa_ff.id
-    LEFT JOIN haa_ff_labels ON haa_ff_labels.haa_ff_field_id = haa_ff_fields.id
-    WHERE
-      haa_ff_fields.deleted=0
-    AND haa_ff.deleted=0
-    AND haa_ff_fields.deleted=0
-    AND haa_ff.id = '".$haa_ff_id."'";
-    $result=$db->query($sql);
-    $arr_num=0;
-    while ($row=$db->fetchByAssoc($result)) {
-      $field_arr[$arr_num]['field']=$row['field'];
-      $field_arr[$arr_num]['fieldtype']=$row['fieldtype'];
-      $field_arr[$arr_num]['label_name']=$row['name'];
-      $arr_num++;
-    }
-  }
-  if (isset($field_arr)) {
-    foreach ($field_arr as $k => $v) {
-      if($label_field_name==$v['field']&&$v['fieldtype']=='HIDE'){
-        $return_text ='{"lab":"","val":""},';
-        return $return_text;
-      }else if($label_field_name==$v['field']&&$v['fieldtype']!='HIDE'){
-        $return_text ='{"lab":"'.$v['label_name'].'","val":"'.$val_field.'"},';
-        return $return_text;
-      }
-    }
-  }
-      //End add 20161221
+function get_jason_field ($label_field_name, $mod_name,  $val_field,  $val_type='varchar', $val_field_id='', $relate_mod_name='') {
+
+
     if ($val_type=="bool") {
       $val_field = ($val_field==0)?'<input type=\"checkbox\">':'<input type=\"checkbox\" checked=\"checked\">';
     } elseif ($val_type=="relate" && isset($val_field_id)) {
@@ -88,7 +50,7 @@ function get_jason_field ($haa_ff_id, $label_field_name, $mod_name,  $val_field,
     } else {
       $return_text ='';
     }
-  return $return_text;
+    return $return_text;
 }
 
 
@@ -104,7 +66,8 @@ if($_GET['type']=="location") { //如果是Locationg来源，需要读取子位�
                         hat_asset_locations.inventory_mode,
                         hat_asset_locations.asset_node,
                         hat_asset_locations.maint_node,
-                        hat_asset_locations.map_type
+                        hat_asset_locations.map_type,
+                        hat_asset_locations.code_asset_location_type_id
                     FROM
                         hat_asset_locations,ham_maint_sites
                     where
@@ -118,15 +81,25 @@ if($_GET['type']=="location") { //如果是Locationg来源，需要读取子位�
   $bean_locations = $db->query($sel_location); //无如是Location还是asset来源，都可以显示子资产
   //if(is_array($bean_assets)) {
     while ( $location = $db->fetchByAssoc($bean_locations) ) {
+        $hasGirdRule = false; //是否有网络定位
+        if(!empty($location['code_asset_location_type_id'])){
+            $bean_grid = $db->query("SELECT * FROM hat_gird_rules WHERE code_asset_location_type_id='".$location['code_asset_location_type_id'] . "' LIMIT 1");
+            while($resrule = $db->fetchByAssoc($bean_grid)){
+                if(!empty($resrule['id'])){
+                    $hasGirdRule = true;
+                    $girdRule = $resrule;
+                }
+            }
+        }
        //$txt_jason .='"type":"location"';
        $txt_jason .='"fields":[';
-       $txt_jason .=get_jason_field('','name','HAT_Asset_Locations',$location['location_name']);
-       $txt_jason .=get_jason_field('','maint_site','HAT_Asset_Locations',$location['site_name']);
-       $txt_jason .=get_jason_field('','map_address','HAT_Asset_Locations',$location['map_address']);
-       $txt_jason .=get_jason_field('','inventory_mode','HAT_Asset_Locations',$app_list_strings['hat_inventory_node_list'][$location['inventory_mode']]);
-       $txt_jason .=get_jason_field('','asset_node','HAT_Asset_Locations',$location['asset_node'],'bool');
-       $txt_jason .=get_jason_field('','maint_node','HAT_Asset_Locations',$location['maint_node'],'bool');
-       $txt_jason .=get_jason_field('','map_type','HAT_Asset_Locations',$app_list_strings['cux_map_type_list'][$location['map_type']]); //最后一个没有,
+       $txt_jason .=get_jason_field('name','HAT_Asset_Locations',$location['location_name']);
+       $txt_jason .=get_jason_field('maint_site','HAT_Asset_Locations',$location['site_name']);
+       $txt_jason .=get_jason_field('map_address','HAT_Asset_Locations',$location['map_address']);
+       $txt_jason .=get_jason_field('inventory_mode','HAT_Asset_Locations',$app_list_strings['hat_inventory_node_list'][$location['inventory_mode']]);
+       $txt_jason .=get_jason_field('asset_node','HAT_Asset_Locations',$location['asset_node'],'bool');
+       $txt_jason .=get_jason_field('maint_node','HAT_Asset_Locations',$location['maint_node'],'bool');
+       $txt_jason .=get_jason_field('map_type','HAT_Asset_Locations',$app_list_strings['cux_map_type_list'][$location['map_type']]); //最后一个没有,
        $txt_jason=substr($txt_jason,0,strlen($txt_jason)-1);//最后一个没有,
        $txt_jason .='],';
 
@@ -134,6 +107,13 @@ if($_GET['type']=="location") { //如果是Locationg来源，需要读取子位�
          $txt_jason .='"btn":[{"link":"module=HAT_Asset_Locations&action=DetailView&record='.$location['id'].'","lab":"'.translate('LBL_ACT_VIEW_LOCATION','HAT_Asset_Locations').'"}';
          $txt_jason .=',{"link":"module=HAM_SRs&action=EditView&location_id='.$location['id'].'","lab":"'.translate('LBL_ACT_CREATE_SR','HAT_Asset_Locations').'"}';
          $txt_jason .=',{"link":"module=HAM_WO&action=EditView&location_id='.$location['id'].'","lab":"'.translate('LBL_ACT_CREATE_WO','HAT_Asset_Locations').'"}';
+
+          //网络导图
+           if($hasGirdRule){
+               $tabtype = 0;
+               $tabtype =  $girdRule['line_layout'] == 'Vetical'?1:0;
+               $txt_jason .=',{"link":"module=HAT_Gird_Rules&action=DrawGrid&location_id='.$location['id'].'&tabtype=' .$tabtype. '","lab":"'.translate('LBL_ACT_GIRD_RULE','HAT_Asset_Locations').'"}';
+           }
          $txt_jason .='],';
        }
 
@@ -177,27 +157,15 @@ if($_GET['type']=="location") { //如果是Locationg来源，需要读取子位�
                     accounts_o.name owning_org,
                     contacts_o.id owning_person_id,
                     contacts_o.`last_name` owning_person,
-                    hat_assets.parent_asset_id,
-                    hat_assets_p.name parent_asset,
-                    aos_products_cstm.haa_ff_id_c,
-                    hat_assets.attribute10,
-                    hat_assets.attribute11,
-                    hat_assets.attribute12,
-                    hat_assets.cost_center_id cost_center_id,
-                    haa_codes_cost_center.name cost_center,
-                    hit_racks.enable_partial_allocation
+                    hat_assets.`parent_asset_id`,
+                    hat_assets_p.name parent_asset
                 FROM
                     aos_products,
-                    aos_products_cstm,
                     aos_product_categories,
                     haa_frameworks,
                     hat_assets
-                      LEFT JOIN
-                    (hit_racks) ON (hit_racks.`hat_assets_id` =hat_assets.id)
-                         LEFT JOIN
-                    (haa_codes haa_codes_cost_center) ON (hat_assets.`cost_center_id` = haa_codes_cost_center.id)
-                         LEFT JOIN
-                    (hat_assets hat_assets_p) ON (hat_assets.`parent_asset_id` = hat_assets_p.id) 
+      LEFT JOIN
+      (hat_assets hat_assets_p) ON (hat_assets.`parent_asset_id` = hat_assets_p.id) 
                         LEFT JOIN
                     accounts accounts_u ON (hat_assets.`using_org_id` = accounts_u.id
                         AND accounts_u.deleted = 0)
@@ -219,35 +187,33 @@ if($_GET['type']=="location") { //如果是Locationg来源，需要读取子位�
                         AND ham_maint_sites.deleted = 0)
                 WHERE
                     hat_assets.aos_products_id = aos_products.id
-                        AND aos_products.id=aos_products_cstm.id_c
                         AND hat_assets.aos_product_categories_id = aos_product_categories.id
                         AND hat_assets.haa_frameworks_id = haa_frameworks.id
                         AND hat_assets.deleted = 0
-                        AND hat_assets.asset_status != 'Discard'
                         AND haa_frameworks.deleted = 0
                         AND aos_products.deleted = 0
                         AND aos_product_categories.deleted = 0
                         AND hat_assets.id = '".$_GET['id']."'";
 
-    
+
     $bean_assets = $db->query($sel_asset); //无如是Location还是asset来源，都可以显示子资产
     while ($asset = $db->fetchByAssoc($bean_assets)) {
-      $haa_ff_id=$asset['haa_ff_id_c'];
+
       $txt_rack_jason = "";
       $txt_rack_allocation_jason="";
       //如果当前资产是IT机柜，则加载机柜相关的文字内容（定义在机柜模块中），合并到展示区域中
       if ($asset['enable_it_rack']==true) {
         $beanRack = BeanFactory::getBean('HIT_Racks') ->retrieve_by_string_fields(array('hit_racks.hat_assets_id'=>$asset['id']));
-        $txt_rack_jason .=get_jason_field($asset['haa_ff_id_c'],'height','HIT_Racks',$beanRack->height);
-        $txt_rack_jason .=get_jason_field($asset['haa_ff_id_c'],'dimension_external','HIT_Racks',$beanRack->dimension_external);
-        $txt_rack_jason .=get_jason_field($asset['haa_ff_id_c'],'dimension_internal','HIT_Racks',$beanRack->dimension_internal);
-        $txt_rack_jason .=get_jason_field($asset['haa_ff_id_c'],'rated_current','HIT_Racks',$beanRack->rated_current);
-        $txt_rack_jason .=get_jason_field($asset['haa_ff_id_c'],'standard_power','HIT_Racks',$beanRack->standard_power);
-        $txt_rack_jason .=get_jason_field($asset['haa_ff_id_c'],'stock_number','HIT_Racks',$beanRack->stock_number);
-        $txt_rack_jason .=get_jason_field($asset['haa_ff_id_c'],'enable_partial_allocation','HIT_Racks',$beanRack->enable_partial_allocation,'bool');
+        $txt_rack_jason .=get_jason_field('height','HIT_Racks',$beanRack->height);
+        $txt_rack_jason .=get_jason_field('dimension_external','HIT_Racks',$beanRack->dimension_external);
+        $txt_rack_jason .=get_jason_field('dimension_internal','HIT_Racks',$beanRack->dimension_internal);
+        $txt_rack_jason .=get_jason_field('rated_current','HIT_Racks',$beanRack->rated_current);
+        $txt_rack_jason .=get_jason_field('standard_power','HIT_Racks',$beanRack->standard_power);
+        $txt_rack_jason .=get_jason_field('stock_number','HIT_Racks',$beanRack->stock_number);
+        $txt_rack_jason .=get_jason_field('enable_partial_allocation','HIT_Racks',$beanRack->enable_partial_allocation,'bool');
 
         require_once('modules/HIT_Racks/ServerChart.php');
-        $txt_rack_jason .= get_jason_field($asset['haa_ff_id_c'],'occupation','HIT_Racks', getOccupationCnt($beanRack));
+        $txt_rack_jason .= get_jason_field('occupation','HIT_Racks', getOccupationCnt($beanRack));
         //$txt_rack_jason .= get_jason_field('position_display_area','HIT_Racks', getServerChart($beanRack,"RackFrame"));
         //以上是机柜图，20161030将机柜图从文字区域转到下方，单独处理
         //从下内容都来源于modules/HIT_Racks/ServerChart.php
@@ -258,34 +224,35 @@ if($_GET['type']=="location") { //如果是Locationg来源，需要读取子位�
       //以下是正常的资产信息，所以有资产都按以下进行加载
       //机柜会在最后进行合并
        $txt_jason .='"fields":[';
-       $txt_jason .=get_jason_field($asset['haa_ff_id_c'],'name','HAT_Assets',$asset['name']);
-       $txt_jason .=get_jason_field($asset['haa_ff_id_c'],'asset_desc','HAT_Assets',$asset['asset_desc']);
-       $txt_jason .=get_jason_field($asset['haa_ff_id_c'],'asset_category','HAT_Assets',$asset['asset_category']);
-       $txt_jason .=get_jason_field($asset['haa_ff_id_c'],'asset_group','HAT_Assets',$asset['asset_group']);
-       $txt_jason .=get_jason_field($asset['haa_ff_id_c'],'asset_status','HAT_Assets','<span class=\"color_tag color_asset_status_'.$asset['asset_status'].'\">'.$app_list_strings['hat_asset_status_list'][$asset['asset_status']].'</span>');
-       $txt_jason .=get_jason_field($asset['haa_ff_id_c'],'asset_number','HAT_Assets',$asset['asset_number']);
-       $txt_jason .=get_jason_field($asset['haa_ff_id_c'],'serial_number','HAT_Assets',$asset['serial_number']);
-       $txt_jason .=get_jason_field($asset['haa_ff_id_c'],'vin','HAT_Assets',$asset['vin']);
-       $txt_jason .=get_jason_field($asset['haa_ff_id_c'],'engine_num','HAT_Assets',$asset['engine_num']);
-       $txt_jason .=get_jason_field($asset['haa_ff_id_c'],'tracking_number','HAT_Assets',$asset['tracking_number']);
-       $txt_jason .=get_jason_field($asset['haa_ff_id_c'],'asset_name','HAT_Assets',$asset['asset_name']);
-       $txt_jason .=get_jason_field($asset['haa_ff_id_c'],'brand','HAT_Assets',$asset['brand']);
-       $txt_jason .=get_jason_field($asset['haa_ff_id_c'],'model','HAT_Assets',$asset['model']);
-       $txt_jason .=get_jason_field($asset['haa_ff_id_c'],'maintainable','HAT_Assets',$asset['maintainable'],'bool');
-       $txt_jason .=get_jason_field($asset['haa_ff_id_c'],'enable_it_rack','HAT_Assets',$asset['enable_it_rack'],'bool');
-       $txt_jason .=get_jason_field($asset['haa_ff_id_c'],'enable_it_ports','HAT_Assets',$asset['enable_it_ports'],'bool');
-       $txt_jason .=get_jason_field($asset['haa_ff_id_c'],'hat_asset_locations_hat_assets_name','HAT_Assets',$asset['hat_asset_locations_hat_assets_name'],'relate',$asset['hat_asset_locations_hat_assetshat_asset_locations_ida'],'HAT_Asset_Locations');
-       $txt_jason .=get_jason_field($asset['haa_ff_id_c'],'location_desc','HAT_Assets',$asset['location_desc']);
-       $txt_jason .=get_jason_field($asset['haa_ff_id_c'],'maint_site','HAT_Asset_Locations',$asset['site_name']);
-       $txt_jason .=get_jason_field($asset['haa_ff_id_c'],'owning_org','HAT_Assets',$asset['owning_org'],'relate',$asset['owning_org_id'],'Accounts');
-       $txt_jason .=get_jason_field($asset['haa_ff_id_c'],'owning_person','HAT_Assets',$asset['owning_person_id'],'relate',$asset['owning_person_id'],'Contacts');
-       $txt_jason .=get_jason_field($asset['haa_ff_id_c'],'using_org','HAT_Assets',$asset['using_org'],'relate',$asset['using_org_id'],'Accounts');
-       $txt_jason .=get_jason_field($asset['haa_ff_id_c'],'using_person','HAT_Assets',$asset['using_person_id'],'relate',$asset['using_person_id'],'Contacts');
+       $txt_jason .=get_jason_field('name','HAT_Assets',$asset['name']);
+       $txt_jason .=get_jason_field('asset_desc','HAT_Assets',$asset['asset_desc']);
+       $txt_jason .=get_jason_field('asset_category','HAT_Assets',$asset['asset_category']);
+       $txt_jason .=get_jason_field('asset_group','HAT_Assets',$asset['asset_group']);
+       $txt_jason .=get_jason_field('asset_status','HAT_Assets','<span class=\"color_tag color_asset_status_'.$asset['asset_status'].'\">'.$app_list_strings['hat_asset_status_list'][$asset['asset_status']].'</span>');
+       $txt_jason .=get_jason_field('asset_number','HAT_Assets',$asset['asset_number']);
+       $txt_jason .=get_jason_field('serial_number','HAT_Assets',$asset['serial_number']);
+       $txt_jason .=get_jason_field('vin','HAT_Assets',$asset['vin']);
+       $txt_jason .=get_jason_field('engine_num','HAT_Assets',$asset['engine_num']);
+       $txt_jason .=get_jason_field('tracking_number','HAT_Assets',$asset['tracking_number']);
+       $txt_jason .=get_jason_field('asset_name','HAT_Assets',$asset['asset_name']);
+       $txt_jason .=get_jason_field('brand','HAT_Assets',$asset['brand']);
+       $txt_jason .=get_jason_field('model','HAT_Assets',$asset['model']);
+       $txt_jason .=get_jason_field('maintainable','HAT_Assets',$asset['maintainable'],'bool');
+       $txt_jason .=get_jason_field('enable_it_rack','HAT_Assets',$asset['enable_it_rack'],'bool');
+       $txt_jason .=get_jason_field('enable_it_ports','HAT_Assets',$asset['enable_it_ports'],'bool');
+       $txt_jason .=get_jason_field('hat_asset_locations_hat_assets_name','HAT_Assets',$asset['hat_asset_locations_hat_assets_name'],'relate',$asset['hat_asset_locations_hat_assetshat_asset_locations_ida'],'HAT_Asset_Locations');
+       $txt_jason .=get_jason_field('location_desc','HAT_Assets',$asset['location_desc']);
+       $txt_jason .=get_jason_field('maint_site','HAT_Asset_Locations',$asset['site_name']);
+       $txt_jason .=get_jason_field('owning_org','HAT_Assets',$asset['owning_org'],'relate',$asset['owning_org_id'],'Accounts');
+       $txt_jason .=get_jason_field('owning_person','HAT_Assets',$asset['owning_person_id'],'relate',$asset['owning_person_id'],'Contacts');
+       $txt_jason .=get_jason_field('using_org','HAT_Assets',$asset['using_org'],'relate',$asset['using_org_id'],'Accounts');
+       $txt_jason .=get_jason_field('using_person','HAT_Assets',$asset['using_person_id'],'relate',$asset['using_person_id'],'Contacts');
        //资产的常规信息显示完成后，钭机柜的信息合并进来，注意最后还要合并一次机柜的分配信息
        $txt_jason .=$txt_rack_jason;
 
        $txt_jason=substr($txt_jason,0,strlen($txt_jason)-1);//最后一个没有
        $txt_jason .='],';
+
        if ($current_mode=="view") {
          $txt_jason .='"btn":[{"link":"module=HAT_Asset_Locations&action=DetailView&record='.$asset['hat_asset_locations_hat_assetshat_asset_locations_ida'].'","lab":"'.translate('LBL_ACT_VIEW_LOCATION','HAT_Asset_Locations').'"}';
          $txt_jason .=',{"link":"module=HAT_Assets&action=DetailView&record='.$asset['id'].'","lab":"'.translate('LBL_ACT_VIEW_ASSET','HAT_Asset_Locations').'"}';

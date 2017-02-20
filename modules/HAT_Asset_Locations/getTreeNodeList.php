@@ -303,6 +303,7 @@ if ($_REQUEST['type']=="current_owning_org") {
                             AND ".$current_mode_sql.$current_site_sql.$where_sql. " ORDER by hat_assets.name ASC";
         /*if($_REQUEST['id'] == 'a26e1f5b-7ed9-fede-9a8b-5868c24c6b3e'){
           echo $sel_sub_asset;
+          echo($_SESSION['query_id']);
         }*/
 
       

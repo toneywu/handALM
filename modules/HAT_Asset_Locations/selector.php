@@ -34,7 +34,6 @@
 	}
 	#node_details {
 		padding: 20px;
-		width: auto;
 		overflow:auto;
 	}
 
@@ -50,18 +49,24 @@
 
 	#node_details .detailed_fields {
 		float: left;
-		width: 350px;
-		padding:1px 1em 1px 0px;
+		width: 220px;
+		padding:1px 2em 0.25em 0px;
 	}
 	#node_details span.lab {
-		width:135px;
-		margin: 0 1em 0 0;
+		width:100%;
+		float: left;
+		margin: 0 0 2px 0;
 		display: table-cell;
+		color: rgba(0, 0, 0, 0.55);
+		font-size: 0.85em;
 	}
-	#node_details span.detail_data,#node_details span.detail_data a {
+	#node_details span.detail_data {
 		/*width:170px;*/
-		font-weight:bold;
+		/*font-weight:bold;*/
+		float: left;
 		font-size: 1em;
+		min-height: 2.5em;
+		line-height: 1.2em;
 		display: table-cell;
 	}
 
@@ -418,7 +423,7 @@ $(document).ready(function(){
 						echo 'initTree("LIST","unallocated","'.$_REQUEST["target_using_org_id"].'");';
 					}else if ($_REQUEST['defualt_list']=="current_owning_org" && isset($_REQUEST['current_owning_org_id'])) {
 						echo 'initTree("LIST","current_owning_org","'.$_REQUEST["current_owning_org_id"].'");';
-						//echo "alert ('".$_REQUEST["current_owning_org_id"]."');";
+						echo "console.log ('".$_REQUEST["current_owning_org_id"]."');";
 					}else{
 						echo 'initTree("LIST","'.$_REQUEST["defualt_list"].'");';
 					}

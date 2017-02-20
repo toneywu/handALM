@@ -1606,13 +1606,13 @@ $app_strings = array (
     'LBL_LINK_ALL'=> '全部',
     'LBL_LINK_RECORDS'=> '记录',
     'LBL_LINK_SELECT'=> '选择',
-    'LBL_LINK_ACTIONS'=> '行动',
+    'LBL_LINK_ACTIONS'=> '操作',
     'LBL_LINK_MORE'=> '更多',
     'LBL_CLOSE_ACTIVITY_HEADER' => "确定",
     'LBL_CLOSE_ACTIVITY_CONFIRM' => "您确定要关闭 #module# 吗？",
     'LBL_CLOSE_ACTIVITY_REMEMBER' => "以后不要再显示这条信息: &nbsp;",
     'LBL_INVALID_FILE_EXTENSION' => '文件扩展名无效',
-
+    'LBL_SUITE_DASHBOARD_ACTIONS' => '面板设置',
 
     'ERR_AJAX_LOAD'     => '发生错误:',
     'ERR_AJAX_LOAD_FAILURE'     => '处理过程中出现错误，请稍候重试。',

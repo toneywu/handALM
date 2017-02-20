@@ -115,18 +115,17 @@ $(document).ready(function(){
 			$.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); // MessageBox
 	}
 
-	$("#SAVE_FOOTER").hide();
-	$("#CANCEL_FOOTER").hide();
-	
+	$("div[field='line_items']").prev("div.label").hide();//隐藏行标签
+
 	if($("#name").val()!=""){
 		check_name();
 	}
-	
+
 	//改写Save事件，在Save之前加入数据校验
 	SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
 		OverwriteSaveBtn(check_name);//ff_include.js 注意preValidateFunction是一个Function，在此引用时不加（）
 	});
-	
+
 
 	$("#name_desc").html(SUGAR.language.get('HIT_IP', 'LBL_NAME_DESC'));
 	show_ip_desc($("#name").val(),$("#name_ip_desc"));

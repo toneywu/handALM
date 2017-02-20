@@ -197,15 +197,36 @@ input[type=text] {
 	border:1px solid #ccc;
 	background-color: #fff;
 }
-.btn-default {
-	border:1px solid #ccc;
-	background-color: #fff;
-	color:#000;
+
+/*modal buttons*/
+.bootstrap-dialog-footer-buttons .btn{
+	border: 1px solid #ccc;
 }
+.bootstrap-dialog-footer-buttons .btn-default {
+	background-color: #fff;
+	color:#3C8DBC;
+	margin-bottom: 0;
+}
+.bootstrap-dialog-footer-buttons .btn-default:hover {
+	background-color: #efefef;
+	color: #2196F3;
+}
+.bootstrap-dialog-footer-buttons .btn-primary {
+	background-color: #3C8DBC;
+	color:#fff;
+}
+.bootstrap-dialog-footer-buttons .btn-primary:hover {
+	background-color: #009688;
+	color:#fff;
+}
+
+
 .popover .btn-default:hover {
 	background-color: #efefef;
 	color:#fff;
 }
+
+
 /* sturcture of input widgets */
 textarea,
 select,
@@ -220,7 +241,8 @@ div.edit-view-field[type=bool] {
 }
 
 input.yui-ac-input {
-	max-width: 230px;
+	max-width: 220px;
+	margin-right: 0px;
 }
 
 /*detail view label and fields*/
@@ -272,7 +294,7 @@ input.yui-ac-input {
 
 .lineEditor .input_group {
 	width: 38em;
-	display: flex;
+	display: block;
 	vertical-align: top;
 	float:left;
 }
@@ -324,6 +346,20 @@ input.yui-ac-input {
 .email-address-options-container .email-address-option label{
 	font-weight:normal;
 }
+
+/******************************************************/
+/*  modal  */
+/******************************************************/
+.bootstrap-dialog.type-primary .modal-header {
+	background-color: #fff;
+}
+
+.bootstrap-dialog.type-primary .modal-header {
+	color: rgba(0,0,0,0.87);
+	font-size: 19px;
+	font-weight: 300;
+}
+
 
 /******************************************************/
 /*  Dropdown-time-picker  */
@@ -432,6 +468,14 @@ input.yui-ac-input {
 #lineItems {
 	border-style: none;
 }
+
+#lineItems.list tr.oddListRowS1 td,
+#lineItems.list tr.EvenListRowS1 td,
+#lineItems.list thead tr td {
+	padding:2px 5px;
+}
+
+
 .input_mask {
 	display: block;
 	color: #8BBFDE;
