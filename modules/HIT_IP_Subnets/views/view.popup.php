@@ -143,5 +143,11 @@ class HIT_IP_SubnetsViewPopup extends ViewPopup {
 			//echo "REQUEST".var_dump($_SESSION["HIT_IP_Subnets2_QUERY"]);
 
 		}
+
+		echo '<script>
+		$("#location_advanced").attr("disabled","disabled");
+		$("button[name=\'btn_location_advanced\']").remove();
+		$("button[name=\'btn_clr_location_advanced\']").remove();
+		 </script>';
 	}
 }

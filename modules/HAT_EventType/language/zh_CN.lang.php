@@ -140,4 +140,6 @@ $mod_strings = array (
   'LBL_MANUAL_CREATE_ENABLE_FLAG' => '允许直接手工创建当前类型',
   'LBL_REVENUE_EVENTTYPE' => '自动创建收支项事件类型',
   'LBL_CONTRACT_COMPLETED'=>'请提供合同信息',
+  'LBL_NO_ADD_ASSET_LINES_FLAG'=>'是否不可添加资产事务处理行',
+  'LBL_NO_ADD_IP_LINES_FLAG'=>'是否不可添加网络事务处理行',
 );

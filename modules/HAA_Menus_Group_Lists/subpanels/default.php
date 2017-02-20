@@ -1,4 +1,5 @@
 <?php
+if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 /*********************************************************************************
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
@@ -37,42 +38,46 @@
  * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
-$mod_strings = array (
-  'LBL_ASSIGNED_TO_ID' => '分配用户编号',
-  'LBL_ASSIGNED_TO_NAME' => '分配用户',
-  'LBL_SECURITYGROUPS' => '查看用户组',
-  'LBL_SECURITYGROUPS_SUBPANEL_TITLE' => '查看用户组',
-  'LBL_ID' => '编号',
-  'LBL_DATE_ENTERED' => '创建日期',
-  'LBL_DATE_MODIFIED' => '修改日期',
-  'LBL_MODIFIED' => '修改人',
-  'LBL_MODIFIED_ID' => '修改人编号',
-  'LBL_MODIFIED_NAME' => '修改人姓名',
-  'LBL_CREATED' => '创建人',
-  'LBL_CREATED_ID' => '创建人编号',
-  'LBL_DESCRIPTION' => '描述',
-  'LBL_DELETED' => '已删除',
-  'LBL_NAME' => '名称',
-  'LBL_CREATED_USER' => '用户创建',
-  'LBL_MODIFIED_USER' => '用户修改',
-  'LBL_LIST_NAME' => '名称',
-  'LBL_EDIT_BUTTON' => '编辑',
-  'LBL_REMOVE' => '移除',
-  'LBL_LIST_FORM_TITLE' => '代码 列表',
-  'LBL_MODULE_NAME' => '代码',
-  'LBL_MODULE_TITLE' => '代码',
-  'LBL_HOMEPAGE_TITLE' => '我的 代码',
-  'LNK_NEW_RECORD' => '创建 代码',
-  'LNK_LIST' => '查看 代码',
-  'LNK_IMPORT_HAA_CODES' => '导入 代码',
-  'LBL_SEARCH_FORM_TITLE' => '查找 代码',
-  'LBL_HISTORY_SUBPANEL_TITLE' => '历史',
-  'LBL_ACTIVITIES_SUBPANEL_TITLE' => '销售活动',
-  'LBL_HAA_CODES_SUBPANEL_TITLE' => '代码',
-  'LBL_NEW_FORM_TITLE' => '新建 代码',
-  'LBL_CODE_TYPE' => '代码类型',
-  'LBL_CODE_MODULE'=>'代码所属模块',
-  'LBL_PARENT_TYPE_VALUE_ID'=>'父类名称Id',
-  'LBL_PARENT_TYPE_VALUE'=>'父类名称',
-  'LBL_LOOKUP_CODE'=>'代码',
-  );
+
+$module_name='HAA_Menu_Group_Lists';
+$subpanel_layout = array(
+	'top_buttons' => array(
+		array('widget_class' => 'SubPanelTopCreateButton'),
+		array('widget_class' => 'SubPanelTopSelectButton', 'popup_module' => $module_name),
+	),
+
+	'where' => '',
+
+	'list_fields' => array(
+		'sort_order'=>array(
+			'vname' => 'LBL_SORT_ORDER',
+			'width' => '20%',
+		),
+		'menu_name'=>array(
+			'vname' => 'LBL_MENU_NAME',
+			'width' => '20%',
+		),
+		'enabled_flag'=>array(
+			'vname' => 'LBL_ENABLED_FLAG',
+			'width' => '10%',
+		),
+		'description'=>array(
+			'vname' => 'LBL_DESCRIPTION',
+			'width' => '20%',
+		),
+		'edit_button'=>array(
+            'vname' => 'LBL_EDIT_BUTTON',
+			'widget_class' => 'SubPanelEditButton',
+		 	'module' => $module_name,
+	 		'width' => '4%',
+		),
+		'remove_button'=>array(
+            'vname' => 'LBL_REMOVE',
+			'widget_class' => 'SubPanelRemoveButton',
+		 	'module' => $module_name,
+			'width' => '5%',
+		),
+	),
+);
+
+?>

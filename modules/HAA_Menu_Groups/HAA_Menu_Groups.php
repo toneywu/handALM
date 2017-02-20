@@ -64,6 +64,7 @@ class HAA_Menu_Groups extends HAA_Menu_Groups_sugar {
 						$lines->$field_name = $post_data[$key . $field_name][$i];
 					}
 				}
+				$lines->haa_menu_groups_id_c=$this->id;
 				$lines->currency_id=$this->currency_id;
 				$lines->assigned_user_id=$current_user->id;
 				$lines->save($check_notify);

@@ -7,36 +7,35 @@ function insertLineHeader(tableid){
 	tablehead.id=tableid+"_head";
 	document.getElementById(tableid).appendChild(tablehead);
 	var x=tablehead.insertRow(-1);
-	x.id='Line_head';
+	/*x.id='Line_head';
 	var a=x.insertCell(0);
 	a.width="17%";
-	a.innerHTML=SUGAR.language.get('HAA_Menu_Group_Lists','LBL_MENU_GROUP_NAME');;
-	var b=x.insertCell(1);
-	b.width="10%";
+	a.innerHTML=SUGAR.language.get('HAA_Menu_Group_Lists','LBL_MENU_GROUP_NAME');*/
+	var b=x.insertCell(0);
+	b.width="12%";
 	b.innerHTML=SUGAR.language.get('HAA_Menu_Group_Lists','LBL_SORT_ORDER');
-	var b1=x.insertCell(2);
-	b1.width="20%";
+	var b1=x.insertCell(1);
+	b1.width="22%";
 	b1.innerHTML=SUGAR.language.get('HAA_Menu_Group_Lists','LBL_MENU_NAME');
-	var c=x.insertCell(3);
-	c.width="10%";
+	var c=x.insertCell(2);
+	c.width="12%";
 	c.innerHTML=SUGAR.language.get('HAA_Menu_Group_Lists','LBL_ENABLED_FLAG');
-	var d=x.insertCell(4);
+	var d=x.insertCell(3);
 	d.width="35%";
 	d.innerHTML=SUGAR.language.get('HAA_Menu_Group_Lists','LBL_DESCRIPTION');
-	var f=x.insertCell(5);
-	f.width="8%";
+	var f=x.insertCell(4);
+	f.width="9%";
 	f.innerHTML='&nbsp;';
 }
 
 
 function insertLineData(line_data){//将数据写入到对应的行字段中
 	var ln=0;
-	console.log(line_data);
 	if(line_data.id!='0'&&line_data.id!==''){
 		ln=insertLineElements("lineItems_menus");
 		$("#line_id"+ln).val(line_data.id);
-		$("#line_haa_menu_groups_id_c"+ln).val(line_data.haa_menu_groups_id_c);
-		$("#line_menu_group_name"+ln).val(line_data.menu_group_name);
+		//$("#line_haa_menu_groups_id_c"+ln).val(line_data.haa_menu_groups_id_c);
+		//$("#line_menu_group_name"+ln).html(line_data.menu_group_name);
 		$("#line_sort_order"+ln).val(line_data.sort_order);
 		$("#line_haa_menus_id_c"+ln).val(line_data.haa_menus_id_c);
 		$("#line_menu_name"+ln).val(line_data.menu_name);
@@ -60,7 +59,7 @@ var z1=tablebody.insertRow(-1);
 z1.id='line1_displayed'+prodln;
 z1.className='oddListRowS1';
 z1.innerHTML=
-"<td><span name='displayed_line_menu_group_name["+prodln+"]'id='displayed_line_menu_group_name"+prodln+"'></span></td>"+
+//"<td><span name='displayed_line_menu_group_name["+prodln+"]'id='displayed_line_menu_group_name"+prodln+"'></span></td>"+
 "<td><span name='displayed_line_sort_order["+prodln+"]'id='displayed_line_sort_order"+prodln+"'></span></td>"+
 "<td><span name='displayed_line_menu_name["+prodln+"]'id='displayed_line_menu_name"+prodln+"'></span></td>"+
 "<td><span name='displayed_line_enabled_flag["+prodln+"]'id='displayed_line_enabled_flag"+prodln+"'></span></td>"+
@@ -70,34 +69,27 @@ z1.innerHTML=
 var x=tablebody.insertRow(-1);//以下生成的是LineEditor
 x.id='line_editor'+prodln;
 x.style="display:none";
+//var group_name=$("#name").val();
+//var group_id=$("input[name='record']").val();
 x.innerHTML="<td colSpan='"+columnNum+"'>"+
 	"<table border='0' class='lineEditors' width='80%' align='center'>"+
 	"<tr>"+
-		"<td id='menu_group_name_label' style='padding-right:30px;text-align:right'>"+SUGAR.language.get('HAA_Menu_Group_Lists','LBL_MENU_GROUP_NAME')+":<span class='required'>*</span></td>"+
-		"<td><input type='hidden' id='line_haa_menu_groups_id_c"+prodln+"' name='line_haa_menu_groups_id_c["+prodln+"]' value=''/>"+
-		"<input name='line_menu_group_name["+prodln+"]'id='line_menu_group_name"+prodln+"' type='text' maxlength='255' size='24' value='' onblur='if(this.form.line_haa_menu_groups_id_c"+prodln+".value==\"\")this.value=\"\";'/>"+
-		"<button title=''" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openMenusGroupPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
-		"<button value='清除' onclick='this.form.line_menu_group_name"+prodln+".value = \"\"; this.form.line_haa_menu_groups_id_c"+prodln+".value = \"\";' class='button lastChild' title='清除[Alt+C]' tabindex='0' id='btn_clr_parent_name' name='btn_clr_parent_name' type='button'><img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button>"+
-		"</td>"+
 		"<td id='sort_order_label' style='padding-right:30px;text-align:right'>"+SUGAR.language.get('HAA_Menu_Group_Lists','LBL_SORT_ORDER')+":<span class='required'>*</span></td>"+
 		"<td><input type='text' id='line_sort_order"+prodln+"' name='line_sort_order["+prodln+"]'maxlength='255' size='24' value=''/></td>"+
-	"</tr>"+
-	"<tr>"+
 		"<td id='menu_name_label' style='padding-right:30px;text-align:right'>"+SUGAR.language.get('HAA_Menu_Group_Lists','LBL_MENU_NAME')+":<span class='required'>*</span></td>"+
 		"<td><input type='hidden' id='line_haa_menus_id_c"+prodln+"' name='line_haa_menus_id_c["+prodln+"]' value=''/>"+
 		"<input type='text' name='line_menu_name["+prodln+"]' id='line_menu_name"+prodln+"' maxlength='50' size='30' value='' onblur='if(this.form.line_haa_menus_id_c"+prodln+".value==\"\")this.value=\"\";'/>"+
 		"<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openMenusPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
 		"<button value='清除' onclick='this.form.line_menu_name"+prodln+".value = \"\"; this.form.line_haa_menus_id_c"+prodln+".value = \"\";' class='button lastChild' title='清除[Alt+C]' tabindex='0' id='btn_clr_menus_name' name='btn_clr_menus_name' type='button'>"+
 		"<img src='themes/default/images/id-ff-clear.png?v=ehf-FkQ5ENVuqzsrdphKxQ'></button></td>"+
+	"</tr>"+
+	"<tr>"+
+		
 		"<td id='line_enabled_flag_label' style='padding-right:30px;text-align:right'>"+SUGAR.language.get('HAA_Menu_Group_Lists','LBL_ENABLED_FLAG')+":<span class='required'>*</span></td>"+
 		"<td><input type='hidden' name='line_enabled_flag["+prodln+"]' value='0'/>"+
 		"<input type='checkbox' id='line_enabled_flag"+prodln+"' name='line_enabled_flag["+prodln+"]' checked value='1'/></td>"+
-	"</tr>"+
-	"<tr>"+
 		"<td id='description_label' style='padding-right:30px;text-align:right'>"+SUGAR.language.get('HAA_Menu_Group_Lists','LBL_DESCRIPTION')+":</td>"+
 		"<td><textarea name='line_description["+prodln+"]'id='line_description"+prodln+"' rows='2' cols='35' ></textarea></td>"+
-		"<td></td>"+
-		"<td></td>"+
 	"</tr>"+
 	"<tr>"+
 		"<td colSpan='2'><input type='hidden' id='line_id"+prodln+"' name='line_id["+prodln+"]' value=''/></td>"+
@@ -120,7 +112,7 @@ function addCheckInvalidate(ln) {
 }
 
 function renderLine(ln){//将编辑器中的内容显示于正常行中
-	$("#displayed_line_menu_group_name"+ln).html($("#line_menu_group_name"+ln).val());
+	//$("#displayed_line_menu_group_name"+ln).html($("#line_menu_group_name"+ln).html());
 	$("#displayed_line_sort_order"+ln).html($("#line_sort_order"+ln).val());
 	$("#displayed_line_menu_name"+ln).html($("#line_menu_name"+ln).val());
 	$("#displayed_line_enabled_flag"+ln).html($("#line_enabled_flag"+ln).is(":checked")?"是":"否");
@@ -157,7 +149,7 @@ function markLineDeleted(ln,key){//删除当前行
 	document.getElementById(key+'body'+ln).style.display='none';
 	document.getElementById(key+'deleted'+ln).value='1';
 	if(typeof validate!="undefined"&&typeof validate['EditView']!="undefined"){
-		removeFromValidate('EditView','line_menu_group_name'+ln);
+		//removeFromValidate('EditView','line_menu_group_name'+ln);
 		removeFromValidate('EditView','line_sort_order'+ln);
 		removeFromValidate('EditView','line_menu_name'+ln);
 	}
@@ -194,23 +186,6 @@ function resetLineNum_Bold(){//数行号
 			$("#displayed_line_num"+i).text(j);
 		}
 	}
-}
-
-function openMenusGroupPopup(ln){
-	lineno=ln;
-	var popupRequestData = {
-		"call_back_function" : "setMenusGroupReturn",
-		"form_name" : "EditView",
-		"field_to_name_array" : {
-			"id":"line_haa_menu_groups_id_c"+ln,
-			"name" : "line_menu_group_name" + ln,
-		}
-	};
-	open_popup('HAA_Menu_Groups', 800, 850, '', true, true, popupRequestData);
-}
-
-function setMenusGroupReturn(popupReplyData){
-	set_return(popupReplyData);
 }
 
 function openMenusPopup(ln){

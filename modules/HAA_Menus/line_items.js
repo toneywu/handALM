@@ -2,7 +2,7 @@ var prodln=0;
 var columnNum=12;
 if(typeof sqs_objects=='undefined'){var sqs_objects=new Array;}
 function insertLineHeader(tableid){
-	$("#line_items_label").remove();
+	
 	tablehead=document.createElement("thead");
 	tablehead.id=tableid+"_head";
 	document.getElementById(tableid).appendChild(tablehead);
@@ -271,6 +271,7 @@ function resetLineNum_Bold(){//数行号
 }
 
 function replace_display_lines(linesHtml,elementId) {
+	$("#"+elementId).parent().prev().hide();
   var lineItems=document.getElementById(elementId);
   lineItems.innerHTML=linesHtml;
 }
