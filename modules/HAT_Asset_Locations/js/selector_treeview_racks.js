@@ -287,7 +287,7 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
     //处理特殊的默认值(有参数传递来的)
     if($("#target_using_org_id").length && $("#target_using_org_id").val()!="") {
     	return_html +="<script>"
-        return_html +='$_("#rack_pos_hat_assets_accounts_name").val($("#target_using_org").val());'
+        return_html +='$("#rack_pos_hat_assets_accounts_name").val($("#target_using_org").val());'
         return_html +='$("#rack_pos_hat_assets_accounts_id").val($("#target_using_org_id").val());'
     	return_html +="</script>"
     }

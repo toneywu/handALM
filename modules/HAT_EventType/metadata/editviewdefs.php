@@ -286,6 +286,7 @@ array (
 		    8=>
         array(
           0=>"allocation_flag",
+          1=>"no_add_asset_lines_flag",
         )
       ),
       'lbl_editview_panel3' => 
@@ -480,7 +481,7 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_CHANGE_VLAN_CHANNEL',
           ),
-          1 => '',
+          1 => 'no_add_ip_lines_flag',
         ),
       ),
     ),

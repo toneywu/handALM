@@ -115,20 +115,28 @@ function resetEventType(){
 	if (global_eventOptions.check_customer_hold == "1"){
 	 	$("#asset_trans_status").change(); //对客户的信息状态进行验证
 	}
+	/*if (global_eventOptions.no_add_asset_lines_flag == "1"){
+	 	$("#btnAddNewLine").attr("disabled","disabled"); 
+	 	$("#btnNewLine").attr("disabled","disabled");
+	}else{
+		$("#btnAddNewLine").removeAttr("disabled"); 
+	 	$("#btnNewLine").removeAttr("disabled");
+	}*/
 
 	if (global_eventOptions.change_owning_org == "REQUIRED"){
 		mark_field_enabled('target_owning_org',false);
 	} else if (global_eventOptions.change_owning_org == "OPTIONAL"){
 		mark_field_enabled('target_owning_org',true);
 	} else {
-		mark_field_disabled('target_owning_org',false,false,false); //所属组织字段不可见,并清空当前值
+		mark_field_disabled('target_owning_org',false);
+		//mark_field_disabled('target_owning_org',false,false,false); //所属组织字段不可见,并清空当前值
 	}
 	if (global_eventOptions.change_owning_org == "REQUIRED"||global_eventOptions.change_owning_org == "OPTIONAL"){
 		if ($("#target_owning_org_id").val()=="" && $("#source_wo_account_id").val()!="") {
 			//如果当前的目标所属组织没有值，就从工单来源中复制
 			//如果已经有值了，就保持不变
-			$("#target_owning_org").val($("#source_wo_account").val());
-			$("#target_owning_org_id").val($("#source_wo_account_id").val());
+			$("#target_owning_org").val($("#source_wo_account").val())
+			$("#target_owning_org_id").val($("#source_wo_account_id").val())
 		}
 	}
 
@@ -140,7 +148,7 @@ function resetEventType(){
 	} else if (global_eventOptions.change_using_org == "OPTIONAL"){
 		mark_field_enabled('target_using_org',true);
 	} else {
-		mark_field_disabled('target_using_org',false,false,true); //使用组织字段不可见,并清空当前值
+		mark_field_disabled('target_using_org',false,false,false); //使用组织字段不可见,并清空当前值
 	}
 
 	//如果需要变化（包括必须变化和可以变化2种场景，就从工作单上进行默认）

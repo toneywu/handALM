@@ -123,7 +123,7 @@ if ($_REQUEST['type']=="current_using_org" ) {
                                                     AND accounts.id='".$_REQUEST['query_id']."'
                             AND ".$current_mode_sql.$current_site_sql.$where_sql. " ORDER by hat_assets.name ASC";
 
-  echo $sel_sub_asset;
+  //echo $sel_sub_asset;
 }
 
 if ($_REQUEST['type']=="current_using_org_none" && isset($_REQUEST['query_id'])) {
