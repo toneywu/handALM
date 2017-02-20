@@ -11,6 +11,11 @@ if (isset($_REQUEST["asset_type"])) {
 } else {
   $asset_type="";
 }
+if (isset($_REQUEST["asset_status2"])&&$_REQUEST["asset_status2"]!=""&&isset($_REQUEST["asset_status1"])&&$_REQUEST["asset_status1"]!="") {
+  $where_asset_status=' AND hat_assets.asset_status IN ("'.$_REQUEST["asset_status2"].'","'.$_REQUEST["asset_status1"].'") ';
+} else {
+  $where_asset_status="";
+}
 if(isset($_REQUEST["asset_type_advanced"])&&$_REQUEST["asset_type_advanced"]!=""){
 	$asset_type=$_REQUEST["asset_type_advanced"];
 }
@@ -40,7 +45,7 @@ $popupMeta = array (
 //  'whereStatement'=>'hat_assets.haa_frameworks_id = "'.$_SESSION["current_framework"].'"',//限制了Framework
                     /*.' AND (("'.$target_using_org_id_advanced. '"!="" and EXISTS (SELECT 1 FROM hit_racks r,hit_rack_allocations ra WHERE hat_assets.id = r.hat_assets_id AND r.id = ra.hit_racks_id AND ra.deleted = 0 AND hat_assets.using_org_id = "'.$target_using_org_id_advanced.'")) or ""="'.$target_using_org_id_advanced.'")',*/
   'whereStatement'=>'hat_assets.haa_frameworks_id = "'.$_SESSION["current_framework"].'"'
-                    .' AND (("'.$target_using_org_id_advanced. '"!="" and EXISTS (SELECT 1 FROM hit_racks r,hit_rack_allocations ra WHERE hat_assets.id = r.hat_assets_id AND r.id = ra.hit_racks_id AND ra.deleted = 0 AND hat_assets.using_org_id = "'.$target_using_org_id_advanced.'"))  or ""="'.$target_using_org_id_advanced.'") and ("'.$asset_type.'" ="" or( "'.$asset_type.'"="ODF" and exists (select 1 from aos_products where aos_products.name="ODF" and aos_products.deleted=0 and aos_products.id=hat_assets.aos_products_id) )) '
+                    .$where_asset_status.' AND (("'.$target_using_org_id_advanced. '"!="" and EXISTS (SELECT 1 FROM hit_racks r,hit_rack_allocations ra WHERE hat_assets.id = r.hat_assets_id AND r.id = ra.hit_racks_id AND ra.deleted = 0 AND hat_assets.using_org_id = "'.$target_using_org_id_advanced.'"))  or ""="'.$target_using_org_id_advanced.'") and ("'.$asset_type.'" ="" or( "'.$asset_type.'"="ODF" and exists (select 1 from aos_products where aos_products.name="ODF" and aos_products.deleted=0 and aos_products.id=hat_assets.aos_products_id) )) '
                     .$where_avaliable_it_equipments,
   //下面的SQL是有问题的，不知道什么业务场景会用到toney.wu
   //似乎是需要实现，如果当前使用部门不为空，则如果机柜分配的使用部门为当前部门时，也列出

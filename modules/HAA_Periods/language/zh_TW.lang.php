@@ -81,4 +81,5 @@ $mod_strings = array (
   'LBL_ENABLED_FLAG' => '调整',
   'LBL_PERIOD_NAME' => '名称',
   'LBL_BTN_ADD_LINE' => '新增',
+    'LBL_PERIOD_STATUS'=> '状态',
 );

@@ -10,10 +10,10 @@ function display_lines($focus, $field, $value, $view){
 	if($view == 'EditView'){
 		$html .= '<script src="modules/HAA_Periods/js/line_items.js"></script>';
 		$html .= "<table border='0' cellspacing='4' width='37.5%' id='lineItems' class='list view table'></table>";
-		// $html .='<input type="hidden" name="explinetypeidden" id="explinetypeidden" value="'.get_select_options_with_id($app_list_strings['hie_exp_line_type_list'], '').'">';
+		$html .='<input type="hidden" name="period_status_type" id="period_status_type" value="'.get_select_options_with_id($app_list_strings['haa_period_status'], '').'">';
 
 		$html .= '<script>insertLineHeader(\'lineItems\');</script>';
-
+ 
          if($focus->id != '') { //如果不是新增（即如果是编辑已有记录）
          	$sql = "SELECT
          	hl.id,
@@ -26,6 +26,7 @@ function display_lines($focus, $field, $value, $view){
          	hl.start_date,
          	hl.end_date,
          	hl.enabled_flag,
+            hl.period_status,
          	hl.description,
             (
             SELECT

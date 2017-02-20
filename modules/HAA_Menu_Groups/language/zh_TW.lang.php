@@ -70,4 +70,8 @@ $mod_strings = array (
   'LBL_ACTIVITIES_SUBPANEL_TITLE' => '銷售活動',
   'LBL_HAA_MENU_GROUPS_SUBPANEL_TITLE' => '菜单组定义',
   'LBL_NEW_FORM_TITLE' => '新建 菜单组定义',
+  'LBL_FRAMEWORKS_HAA_FRAMEWORKS_ID' => '业务框架 (related Business Framework ID)',
+  'LBL_FRAMEWORKS' => '业务框架',
+  'LBL_MENU_GROUP_CODE' => '代码',
+  'LBL_ENABLED_FLAG' => '是否启用',
 );

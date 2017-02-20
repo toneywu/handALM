@@ -77,13 +77,13 @@
                         {/foreach}
                     {/if}
                 {/foreach}
-                {*Add by zengchen 20170216*}
+                {*Add by zengchen 20170220*}
                 {foreach from=$extmenus item=menus}
                 <li role="presentation">
                     <a href="{$menus.url}">{$menus.label}<span class="glyphicon glyphicon-plus"  onclick="window.location.href = 'index.php?action=EditView&module={$menus.module}'"></span></a>
                 </li>
                 {/foreach}
-                {*End add 20170216*}
+                {*End add 20170220*}
             </ul>
             <div id="mobileheader" class="mobileheader">
                 <div id="modulelinks" class="modulelinks">
@@ -273,30 +273,56 @@
 
                         {/if}
                     {/foreach}
-                    {*Add by zengchen 20170216*}
+                    {*Add by zengchen 20170209*}
                     <li class="topnav">
                         <span class="notCurrentTabLeft"></span>
                         <span class="notCurrentTab">
                             <a class="dropdown-toggle" id="grouptab_0" data-toggle="dropdown" href="#">{$all_menus}</a>
                             <span class="notCurrentTabRight"></span>
-                            <ul class="dropdown-menu" role="menu" style="max-width: 700px; width: 700px; min-width: 185px">
-                                <li style="width: 100%">
-                                    <h4>{$lead_label}</h4>
-                                    {foreach from=$exthead item=itemhead name=foo}
-                                    <div class="col-md-3">
-                                        <h5>{$itemhead.label}</h5>
-                                        {foreach from=$extmenus item=menus}
-                                        {if $itemhead.id eq $menus.parent_id}
-                                        <a href="{$menus.url}"><i class="{$menus.img}"></i> {$menus.label}</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li style="width: 785px;">
+                                    <div class="row" style="margin: 0">
+                                    <ul class="nav nav-tabs" style="border: 0;">
+                                    <li class="active" style="border:0;"><a href="#home" data-toggle="tab" style="background: #0d8ad4;color: #FFF"><strong>导航栏</strong></a></li>
+                                        <li style="border:0"><a href="#ios" data-toggle="tab" style="background: #0d8ad4;color: #FFF"><strong>所有功能</strong></a></li>
+                                    </ul>
+                                    </div>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active" id="home">
+                                            {foreach from=$exthead item=itemhead name=foo}
+                                            <div class="col-md-3">
+                                                <p>{$itemhead.label}</p>
+                                                {foreach from=$extmenus item=menus}
+                                                {if $itemhead.id eq $menus.parent_id}
+                                                <a href="{$menus.url}"><i class="{$menus.img}"></i> {$menus.label}</a>
+                                                {/if}
+                                                {/foreach}
+                                            </div>
+                                            {/foreach}
+                                        </div>
+                                        <div class="tab-pane fade" id="ios">
+                                        {foreach from=$groupTabs item=modules key=group name=groupList}{capture name=extraparams assign=extraparams}parentTab={$group}{/capture}
+                                        {if $smarty.foreach.groupList.last}
+                                                {foreach from=$modules.modules item=module key=modulekey}
+                                            <div class="col-md-3" style="margin: 0">
+                                        {capture name=moduleTabId assign=moduleTabId}moduleTab_{$smarty.foreach.moduleList.index}_{$module}{/capture}
+                                        {sugar_link id=$moduleTabId module=$modulekey data=$module extraparams=$extraparams}
+                                            </div>
+                                {/foreach}
+                                {foreach from=$modules.extra item=submodulename key=submodule}
+                                            <div class="col-md-3" style="margin: 0">
+                                                <a href="{sugar_link module=$submodule link_only=1 extraparams=$extraparams}">{$submodulename}</a>
+                                            </div>
+                                {/foreach}
                                         {/if}
                                         {/foreach}
+                                        </div>
                                     </div>
-                                    {/foreach}
                                 </li>
                             </ul>
                         </span>
                     </li>
-                    {*End add 20170216*}
+                    {*End add 20170209*}
                     {foreach from=$groupTabs item=modules key=group name=groupList}
                         {capture name=extraparams assign=extraparams}parentTab={$group}{/capture}
                         <li class="topnav {if $smarty.foreach.groupList.last}all{/if}">

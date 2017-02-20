@@ -1,6 +1,6 @@
 var prodln = 0;
 var sort_order_num = 0;
-var columnNum = 10;
+var columnNum = 11;
 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
 
 function insertLineHeader(tableid){
@@ -14,25 +14,27 @@ function insertLineHeader(tableid){
   var x=tablehead.insertRow(-1);
   x.id='Line_head';
   var a=x.insertCell(0);
-  a.innerHTML=SUGAR.language.get('HAA_Periods', 'LBL_SORT_ORDER');;
-  var b=x.insertCell(1);
-  b.innerHTML=SUGAR.language.get('HAA_Periods', 'LBL_PERIOD_NAME');
-  var c=x.insertCell(2);
+  a.innerHTML=SUGAR.language.get('HAA_Periods', 'LBL_SORT_ORDER');
+  var c=x.insertCell(1);
   c.innerHTML=SUGAR.language.get('HAA_Periods', 'LBL_PERIOD_YEAR');
-  var b1=x.insertCell(3);
+  var b1=x.insertCell(2);
   b1.innerHTML=SUGAR.language.get('HAA_Periods', 'LBL_QUARTER_NUM');
-  var d=x.insertCell(4);
+  var d=x.insertCell(3);
   d.innerHTML=SUGAR.language.get('HAA_Periods', 'LBL_PERIOD_NUM');
-  var e=x.insertCell(5);
+  var e=x.insertCell(4);
   e.innerHTML=SUGAR.language.get('HAA_Periods', 'LBL_START_DATE');
-  var f=x.insertCell(6);
-  f.innerHTML=SUGAR.language.get('HAA_Periods', 'LBL_END_DATE');
-  var g=x.insertCell(7);
+  var f=x.insertCell(5);
+  f.innerHTML=SUGAR.language.get('HAA_Periods', 'LBL_END_DATE');   
+  var b=x.insertCell(6);
+  b.innerHTML=SUGAR.language.get('HAA_Periods', 'LBL_PERIOD_NAME');
+  var i=x.insertCell(7);
+  i.innerHTML=SUGAR.language.get('HAA_Periods', 'LBL_PERIOD_STATUS');
+  var g=x.insertCell(8);
   g.innerHTML=SUGAR.language.get('HAA_Periods', 'LBL_ENABLED_FLAG');
-  var h=x.insertCell(8);
-  h.innerHTML=SUGAR.language.get('HAA_Periods', 'LBL_DESCRIPTION');
-  var i=x.insertCell(9);
-  i.innerHTML='&nbsp;';
+  var h=x.insertCell(9);
+  h.innerHTML=SUGAR.language.get('HAA_Periods', 'LBL_DESCRIPTION'); 
+  var j=x.insertCell(10);
+  j.innerHTML='&nbsp;';
 }
 
 
@@ -53,6 +55,7 @@ function insertLineData(line_data ){ //将数据写入到对应的行字段中
     $("#line_period_num".concat(String(ln))).val(line_data.period_num);
     $("#line_start_date".concat(String(ln))).val(line_data.start_date);
     $("#line_end_date".concat(String(ln))).val(line_data.end_date);
+    $("#line_period_status".concat(String(ln))).val(line_data.period_status);
 
     $("#line_enabled_flag".concat(String(ln))).attr('checked',line_data.enabled_flag==1?true:false);
     $("#line_enabled_flag".concat(String(ln))).val(line_data.enabled_flag);
@@ -74,20 +77,20 @@ tablebody = document.createElement("tbody");
 tablebody.id = "line_body" + prodln;
 document.getElementById(tableid).appendChild(tablebody);
 
-//var line_item_type_option = document.getElementById("explinetypeidden").value;
+var line_period_status_option = document.getElementById("period_status_type").value;
 
 var z1 = tablebody.insertRow(-1);
 z1.id = 'line1_displayed' + prodln;
 z1.className = 'oddListRowS1';
 z1.innerHTML  =
 "<td><span name='displayed_line_sort_order[" + prodln + "]' id='displayed_line_sort_order" + prodln + "'></span></td>" +
-"<td><span name='displayed_line_period_name[" + prodln + "]' id='displayed_line_period_name" + prodln + "'></span></td>" +
 "<td><span name='displayed_line_period_year[" + prodln + "]' id='displayed_line_period_year" + prodln + "'></span></td>" +
 "<td><span name='displayed_line_quarter_num[" + prodln + "]' id='displayed_line_quarter_num" + prodln + "'></span></td>" +
 "<td><span name='displayed_line_period_num[" + prodln + "]' id='displayed_line_period_num" + prodln + "'></span></td>" +
 "<td><span name='displayed_line_start_date[" + prodln + "]' id='displayed_line_start_date" + prodln + "'></span></td>"+
 "<td><span name='displayed_line_end_date[" + prodln + "]' id='displayed_line_end_date" + prodln + "'></span></td>"+
-
+"<td><span name='displayed_line_period_name[" + prodln + "]' id='displayed_line_period_name" + prodln + "'></span></td>" +
+"<td><select disabled='disabled' tabindex='116' name='displayed_line_period_status[" + prodln + "]' id='displayed_line_period_status" + prodln + "'>" + line_period_status_option +"</select></td>"+
 //"<td><span><input name='displayed_line_enabled_flag[" + prodln + "]' type='checkbox' value='' title='' id='displayed_line_enabled_flag" + prodln + "'  onclick='CheckBoxChang(this.id)'></input></span></td>"+
 
 "<td><span name='displayed_line_enabled_flag[" + prodln + "]'  value='' title='' id='displayed_line_enabled_flag" + prodln + "' ></span></td>"+
@@ -108,23 +111,25 @@ z1.innerHTML  =
   x.style = "display:none";
 
   var startDateHTML='<link rel="stylesheet" type="text/css" href="custom/resources/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">'+  
-  '<span class="input-group date calender" id="span_line_exp_date'+prodln+'" >'+
+  '<span class="input_group"><span class="input-group date calender" id="span_line_exp_date'+prodln+'" >'+
   "<label>"+SUGAR.language.get('HAA_Periods', 'LBL_START_DATE')+" <span class='required'>*</span></label>"+
-  '<input class="date_input" autocomplete="off" name="line_start_date[' + prodln + ']" id="line_start_date' + prodln + '" value="" title="" tabindex="116" type="text" onblur="validateStartAndEndDate(this.id,' + prodln + ')">'+
+  '<input class="date_input" autocomplete="off" style="width:180px;"  name="line_start_date[' + prodln + ']" id="line_start_date' + prodln + '" value="" title="" tabindex="116" type="text" onblur="validateStartAndEndDate(this.id,' + prodln + ')">'+
   '<span class="input-group-addon">'+
   '<span class="glyphicon glyphicon-calendar"></span>'+
   '</span>'+
   '<span style="color:red;font-size:15px;display:none"  type="text" name="validate_line_start_date[' + prodln + ']" id="validate_line_start_date' + prodln + '" maxlength="50"  value="" title="">日期从大于日期至</span>'+
+  '</span>'+
   '</span>';
 
-  var endDateHTML= '<span class="input-group date calender" id="span_end_date'+prodln+'" >'+
+  var endDateHTML= '<span class="input_group"><span class="input-group date calender" id="span_end_date'+prodln+'" >'+
   "<label>"+SUGAR.language.get('HAA_Periods', 'LBL_END_DATE')+" <span class='required'>*</span></label>"+
-  '<input class="date_input" autocomplete="off" name="line_end_date[' + prodln + ']" id="line_end_date' + prodln + '" value="" title="" tabindex="116" type="text" onblur="validateStartAndEndDate(this.id,' + prodln + ')">'+
+  '<input class="date_input" autocomplete="off" style="width:180px;" name="line_end_date[' + prodln + ']" id="line_end_date' + prodln + '" value="" title="" tabindex="116" type="text" onblur="validateStartAndEndDate(this.id,' + prodln + ')">'+
   
   '<span class="input-group-addon">'+
   '<span class="glyphicon glyphicon-calendar"></span>'+
   '</span>'+
   '<span style="color:red;font-size:15px;display:none"  type="text" name="validate_line_end_date[' + prodln + ']" id="validate_line_end_date' + prodln + '" maxlength="50"  value="" title="">日期从大于日期至</span>'+
+  '</span>'+
   '</span>';
 
   x.innerHTML  = "<td colSpan='"+columnNum+"'><div class='lineEditor'>"+
@@ -134,40 +139,44 @@ z1.innerHTML  =
   "<input style='width:180px;display:none;' autocomplete='off' type='text' name='line_sort_order[" + prodln + "]' id='line_sort_order" + prodln + "' maxlength='50' value='"+sort_order_num+"' title=''>"+
   "</span>"+
 
-   "<span class='input_group'>"+
-  "<label>"+SUGAR.language.get('HAA_Periods', 'LBL_PERIOD_NAME')+" <span class='required'>*</span></label>"+
-  "<input style='width:180px;'  autocomplete='off' type='text' name='line_period_name[" + prodln + "]' id='line_period_name" + prodln + "' maxlength='50' value='' title=''>"+
-  "</span>"+
-   "<span class='input_group'>"+
+  "<span class='input_group'>"+
   "<label>"+SUGAR.language.get('HAA_Periods', 'LBL_PERIOD_YEAR')+" <span class='required'>*</span></label>"+
-  "<input style='width:180px;'  autocomplete='off' type='text' name='line_period_year[" + prodln + "]' id='line_period_year" + prodln + "' maxlength='50' value='' title='' onblur='validatePeriodYear(this.id)'>"+
+  "<input style='width:180px;'  autocomplete='off' type='text' name='line_period_year[" + prodln + "]' id='line_period_year" + prodln + "' maxlength='50' value='' title='' onblur='onblurLinePeriodYear(this.id,"+prodln+")'>"+
   "<span style='color:red;font-size:15px;display:none'  type='text' name='validate_line_period_year[" + prodln + "]' id='validate_line_period_year" + prodln + "' maxlength='50'  value='' title=''>限制值在1900-9999之间</span>"+
   "</span>"+
-   "<span class='input_group'>"+
+  "<span class='input_group'>"+
   "<label>"+SUGAR.language.get('HAA_Periods', 'LBL_QUARTER_NUM')+" <span class='required'>*</span></label>"+
   "<input style='width:180px;'  autocomplete='off' type='text' name='line_quarter_num[" + prodln + "]' id='line_quarter_num" + prodln + "' maxlength='50' value='' title='' onblur='validateQuarterNum(this.id)'>"+
   "<span style='color:red;font-size:15px;display:none'  type='text' name='validate_line_quarter_num[" + prodln + "]' id='validate_line_quarter_num" + prodln + "' maxlength='50'  value='' title=''>限制值在1-4之间</span>"+
   "</span>"+
-   "<span class='input_group'>"+
+  "<span class='input_group'>"+
   "<label>"+SUGAR.language.get('HAA_Periods', 'LBL_PERIOD_NUM')+" <span class='required'>*</span></label>"+
-  "<input style='width:180px;'  autocomplete='off' type='text' name='line_period_num[" + prodln + "]' id='line_period_num" + prodln + "' maxlength='50' value='' title=''onblur='validatePeriodNum(this.id)'>"+
+  "<input style='width:180px;'  autocomplete='off' type='text' name='line_period_num[" + prodln + "]' id='line_period_num" + prodln + "' maxlength='50' value='' title=''onblur='onblurLinePeriodNum(this.id,"+prodln+")'>"+
   "<span style='color:red;font-size:15px;display:none'  type='text' name='validate_line_period_num[" + prodln + "]' id='validate_line_period_num" + prodln + "' maxlength='50'  value='' title=''>限制值在1-12之间</span>"+
   "</span>"+
 
-   "<span class='input_group' style='height:32px;'>"+
-  "<label>"+SUGAR.language.get('HAA_Periods', 'LBL_ENABLED_FLAG')+" <span class='required'>*</span></label>"+
-  "<input style=' width:120px;' type='checkbox' name='line_enabled_flag[" + prodln + "]' id='line_enabled_flag" + prodln + "' maxlength='50' value=''  title='' >"+
-  "</span>"+
-  // "<span class='input_group'>"+
-  // "<label>"+SUGAR.language.get('HAA_Periods', 'LBL_ITEM_TYPE_CODE')+" <span class='required'>*</span></label>"+
-  // "<select tabindex='116' name='period_name[" + prodln + "]' id='line_item_type_code" + prodln + "'>" + line_item_type_option + "</select>"+
-  // "</span>"+
+
   startDateHTML+
   endDateHTML+
+
+  "<span class='input_group'>"+
+  "<label>"+SUGAR.language.get('HAA_Periods', 'LBL_PERIOD_NAME')+" <span class='required'>*</span></label>"+
+  "<input style='width:180px;'  autocomplete='off' type='text' name='line_period_name[" + prodln + "]' id='line_period_name" + prodln + "' maxlength='50' value='' title=''>"+
+  "</span>"+
   // "<span class='input_group'>"+
   // "<label>"+SUGAR.language.get('HAA_Periods', 'LBL_ENABLED_FLAG')+" <span class='required'>*</span></label>"+
   // "<input style=' width:153px;' type='checkbox' name='line_enabled_flag[" + prodln + "]' id='line_enabled_flag" + prodln + "' maxlength='50' value='' checked='checked' title='' >"+
   // "</span>"+
+
+  "<span class='input_group'>"+
+  "<label>"+SUGAR.language.get('HAA_Periods', 'LBL_PERIOD_STATUS')+" <span class='required'>*</span></label>"+
+  "<select tabindex='116' name='line_period_status[" + prodln + "]' id='line_period_status" + prodln + "'>" + line_period_status_option + "</select>"+
+  "</span>"+
+
+  "<span class='input_group' style='height:32px;'>"+
+  "<label>"+SUGAR.language.get('HAA_Periods', 'LBL_ENABLED_FLAG')+" <span class='required'>*</span></label>"+
+  "<input style=' width:120px;' type='checkbox' name='line_enabled_flag[" + prodln + "]' id='line_enabled_flag" + prodln + "' maxlength='50' value=''  title='' >"+
+  "</span>"+
 
   "<span class='input_group'>"+
   "<label>"+SUGAR.language.get('HAA_Periods', 'LBL_DESCRIPTION')+"</label>"+
@@ -203,7 +212,7 @@ z1.innerHTML  =
     return prodln - 1;
   }
 
-function validateRequired(ln){
+  function validateRequired(ln){
     //addToValidate('EditView', 'line_period_set'+ ln,'int', 'true',SUGAR.language.get('HAA_Periods', 'LBL_PERIOD_SET'));
     addToValidate('EditView', 'line_sort_order'+ ln,'int', 'true',SUGAR.language.get('HAA_Periods', 'LBL_SORT_ORDER'));
     addToValidate('EditView', 'line_period_name'+ ln,'varchar', 'true',SUGAR.language.get('HAA_Periods', 'LBL_PERIOD_NAME'));
@@ -212,10 +221,11 @@ function validateRequired(ln){
     addToValidate('EditView', 'line_period_num'+ ln,'int', 'true',SUGAR.language.get('HAA_Periods', 'LBL_PERIOD_NUM'));
     addToValidate('EditView', 'line_start_date'+ ln,'date', 'true',SUGAR.language.get('HAA_Periods', 'LBL_START_DATE'));
     addToValidate('EditView', 'line_end_date'+ ln,'date', 'true',SUGAR.language.get('HAA_Periods', 'LBL_END_DATE'));
+    addToValidate('EditView', 'line_period_status'+ ln,'varchar', 'true',SUGAR.language.get('HAA_Periods', 'LBL_PERIOD_STATUS'));
     //addToValidate('EditView', 'enabled_flag'+ prodln,'int', 'true',SUGAR.language.get('HAA_Periods', 'LBL_ENABLED_FLAG'));
     //addToValidate('EditView', 'line_amount'+ prodln,'float', 'true',SUGAR.language.get('HAA_Periods', 'LBL_AMOUNT'));
 
- }
+  }
 
 function renderLine(ln) { //将编辑器中的内容显示于正常行中
 
@@ -224,13 +234,16 @@ function renderLine(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_line_period_year"+ln).html($("#line_period_year"+ln).val());
   $("#displayed_line_quarter_num"+ln).html($("#line_quarter_num"+ln).val());
   $("#displayed_line_period_num"+ln).html($("#line_period_num"+ln).val());
+  $("#displayed_line_period_status"+ln).val($("#line_period_status"+ln).val());
+
+  $("#displayed_line_start_date"+ln).html($("#line_start_date"+ln).val());
   $("#displayed_line_start_date"+ln).html($("#line_start_date"+ln).val());
   $("#displayed_line_end_date"+ln).html($("#line_end_date"+ln).val());
   var flag=$("#line_enabled_flag"+ln).is(':checked')?"是":"否";
   $("#line_enabled_flag"+ln).val($("#line_enabled_flag"+ln).is(':checked')?"1":"0");
   $("#displayed_line_enabled_flag"+ln).html(flag);
  //$("#displayed_line_enabled_flag"+ln).html($("#line_enabled_flag"+ln).val());
-  $("#displayed_line_description"+ln).html($("#line_description"+ln).val());
+ $("#displayed_line_description"+ln).html($("#line_description"+ln).val());
 }
 
 function insertLineFootor(tableid)
@@ -328,6 +341,7 @@ function markLineDeleted(ln, key) {//删除当前行
     removeFromValidate('EditView','line_period_num'+ ln);
     removeFromValidate('EditView','line_start_date'+ ln);
     removeFromValidate('EditView','line_end_date'+ ln);
+    removeFromValidate('EditView','line_period_status'+ ln);
 
   }
   resetLineNum_Bold();
@@ -343,7 +357,7 @@ function LineEditorShow(ln){ //显示行编辑器（先自动关闭所有的行�
   }
   $("#line1_displayed"+ln).hide();
   $("#line_editor"+ln).show();
- 
+
 }
 
 function LineEditorClose(ln) {//关闭行编辑器（显示为正常行）
@@ -366,46 +380,64 @@ function resetLineNum_Bold() {//数行号
 }
 
 function validatePeriodYear(thisid){
-    if($('#'+thisid).val() > 9999 || $('#'+thisid).val() <1900){
-      $('#'+thisid).val('');
-      $('#validate_'+thisid).show();
-    }else{
-      $('#validate_'+thisid).hide();
-    }
+  if($('#'+thisid).val() > 9999 || $('#'+thisid).val() <1900){
+    $('#'+thisid).val('');
+    $('#validate_'+thisid).show();
+  }else{
+    $('#validate_'+thisid).hide();
+  }
 
 }
 
 function validateQuarterNum(thisid){
-    if($('#'+thisid).val() > 4 || $('#'+thisid).val() <1){
-      $('#'+thisid).val('');
-      $('#validate_'+thisid).show();
-    }else{
-      $('#validate_'+thisid).hide();
-    }
+  if($('#'+thisid).val() > 4 || $('#'+thisid).val() <1){
+    $('#'+thisid).val('');
+    $('#validate_'+thisid).show();
+  }else{
+    $('#validate_'+thisid).hide();
+  }
 
 }
 
 function validatePeriodNum(thisid){
-    if($('#'+thisid).val() > 12 || $('#'+thisid).val() <1){
-      $('#'+thisid).val('');
-      $('#validate_'+thisid).show();
-    }else{
-      $('#validate_'+thisid).hide();
-    }
+  if($('#'+thisid).val() > 12 || $('#'+thisid).val() <1){
+    $('#'+thisid).val('');
+    $('#validate_'+thisid).show();
+  }else{
+    $('#validate_'+thisid).hide();
+  }
 
 }
 
 function validateStartAndEndDate(thisid,ln){
-    var minid = 'line_start_date'+ln;
-    var maxid = 'line_end_date'+ln;
-    if(!(typeof($('#'+ minid).val()) == "undefined") && !(typeof($('#'+ maxid).val()) == "undefined")){
-      if($('#'+minid).val() > $('#'+maxid).val()){
-         $('#'+thisid).val('');
-         $('#validate_'+thisid).show();
-      }else{
-         $('#validate_'+thisid).hide();
-      }
-    }
+  var minid = 'line_start_date'+ln;
+  var maxid = 'line_end_date'+ln;
+  if(!(typeof($('#'+ minid).val()) == "undefined") && !(typeof($('#'+ maxid).val()) == "undefined")){
+    if($('#'+minid).val() > $('#'+maxid).val()){
+     $('#'+thisid).val('');
+     $('#validate_'+thisid).show();
+   }else{
+     $('#validate_'+thisid).hide();
+   }
+ }
+}
+
+function getPeriodName(ln){
+   //$('#line_period_name').val('dsfsdfdsfds');
+ 
+ if(!(typeof($('#line_period_year'+ln).val()) == "undefined") && !(typeof($('#line_period_num'+ln).val()) == "undefined")){
+     var name = $('#line_period_year'+ln).val()+'-'+$('#line_period_num'+ln).val();
+    $('#line_period_name'+ln).val(name);
+ }
 }
 
 
+function onblurLinePeriodYear(thisid,ln){
+ validatePeriodYear(thisid);
+ getPeriodName(ln);
+}
+
+function onblurLinePeriodNum(thisid,ln){
+ validatePeriodNum(thisid);
+ getPeriodName(ln);
+}

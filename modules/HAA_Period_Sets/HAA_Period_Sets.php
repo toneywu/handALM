@@ -71,7 +71,7 @@ class HAA_Period_Sets extends HAA_Period_Sets_sugar {
 		// 		$bean_numbering->save();
 		// 	}
 		// }
-
+        $this->name =  $this->calendar_name;
 		$this->id=parent::save($check_notify);
 		$post_data=$_POST;
 		$line_count = isset($post_data['line_deleted']) ? count($post_data['line_deleted']) : 0;
@@ -91,6 +91,7 @@ class HAA_Period_Sets extends HAA_Period_Sets_sugar {
                 }
 
 	             $lines->haa_period_sets_id_c = $this->id;
+	             $lines->name = $post_data[$key .'period_name'][$i];;
 	            // var_dump($lines->sort_order);
 	             
 	             $lines->save($check_notify);

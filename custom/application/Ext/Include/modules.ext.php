@@ -149,6 +149,11 @@ $modInvisList[] = 'HAA_Menus_Lists';
 $beanList['HAA_Menu_Groups'] = 'HAA_Menu_Groups';
 $beanFiles['HAA_Menu_Groups'] = 'modules/HAA_Menu_Groups/HAA_Menu_Groups.php';
 $moduleList[] = 'HAA_Menu_Groups';
+$beanList['HAA_Menu_Group_Lists'] = 'HAA_Menu_Group_Lists';
+$beanFiles['HAA_Menu_Group_Lists'] = 'modules/HAA_Menu_Group_Lists/HAA_Menu_Group_Lists.php';
+$modules_exempt_from_availability_check['HAA_Menu_Group_Lists'] = 'HAA_Menu_Group_Lists';
+$report_include_modules['HAA_Menu_Group_Lists'] = 'HAA_Menu_Group_Lists';
+$modInvisList[] = 'HAA_Menu_Group_Lists';
 
 
  

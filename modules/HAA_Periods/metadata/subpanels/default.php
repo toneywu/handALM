@@ -61,11 +61,7 @@ $subpanel_layout = array(
             'vname' => 'LBL_SORT_ORDER',
             'width' => '10%',
         ),
-        'period_name' => array(
-            'vname' => 'LBL_PERIOD_NAME',
-            'width' => '10%',
-        ),
-        'period_year' => array(
+               'period_year' => array(
             'vname' => 'LBL_PERIOD_YEAR',
             'width' => '10%',
         ),
@@ -83,6 +79,14 @@ $subpanel_layout = array(
         ),
         'end_date' => array(
             'vname' => 'LBL_END_DATE',
+            'width' => '10%',
+        ),
+         'period_name' => array(
+            'vname' => 'LBL_PERIOD_NAME',
+            'width' => '10%',
+        ),
+        'period_status' => array(
+            'vname' => 'LBL_PERIOD_STATUS',
             'width' => '10%',
         ),
         'enabled_flag' => array(
