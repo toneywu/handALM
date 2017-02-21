@@ -33,6 +33,8 @@ function showITRacks(node){ //渲染机柜，在首次加载时被调用
 
 function drawBlocker(i) {//绘制设备占位或空占位
 //显示当前服务器
+	console.log("--------------------hrere----------");
+	console.log(globalServerData.server[i]);
 
   	var pos_y = globalServerData.server[i].rack_pos_top;
   	var pos_height = globalServerData.server[i].height;
@@ -64,7 +66,7 @@ function drawBlocker(i) {//绘制设备占位或空占位
 			"border":"#000 2px solid", 
 		});
 
-	}else{
+	} else {
 		//没有提供资产编号的就是按占位处理
 		element_obj.append(SUGAR.language.get('HAT_Asset_Locations', 'LBL_PLACEHOLDER')+"|"+asset_using_org+" "+desc);
 		element_obj.css({
@@ -230,7 +232,7 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
       "<span class='input_group ig_using_org'>"+
       "<label id='rack_pos_hat_assets_accounts_name_label'>"+SUGAR.language.get('HIT_Rack_Allocations', 'LBL_ASSET_ACCOUNT')+" <span class='required'>*</span></label>"+
       "<input class='sqsEnabled' style='width:153px;' autocomplete='off' type='text' name='rack_pos_hat_assets_accounts_name' id='rack_pos_hat_assets_accounts_name' value='' title='' >"+
-      "<input type='hidden' name='rack_poshat_assets_ac_counts_id' id='rack_poshat_assets_acco_unts_id' value='' />"+
+      "<input type='hidden' name='rack_pos_hat_assets_accounts_id' id='rack_pos_hat_assets_accounts_id' value='' />"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openUsingOrgPopup();'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>";
 
@@ -286,12 +288,19 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
 	}
 
     //处理特殊的默认值(有参数传递来的)
-    if($("#target_using_org_id").length && $("#target_using_org_id").val()!="") {
+    if($("#target_using_org_id").length && $("#target_using_org_id").val()!="" && $("#target_using_org_id").val()!="undefined") {
     	return_html +="<script>"
         return_html +='$("#rack_pos_hat_assets_accounts_name").val($("#target_using_org").val());'
         return_html +='$("#rack_pos_hat_assets_accounts_id").val($("#target_using_org_id").val());'
     	return_html +="</script>"
     }
+
+    if( typeof(globalServerData.server[i])!= 'undefined' && globalServerData.server[i].placeholder=="1") {
+    	return_html +="<script>"
+        return_html +='$("#rack_pos_placeholder").attr("checked", true);'
+    	return_html +="</script>"
+    }
+
 
     return_html += '<script>rack_pos_placeholder_changed();</script>';
 	return_html += '</div>';
@@ -528,7 +537,7 @@ function savePlaceHolder(i) {
 	asset_desc = (typeof($('#rack_pos_asset_desc').val())!="undefined")?$('#rack_pos_asset_desc').val():"";
 	asset_status = (typeof($('#rack_pos_asset_status').val())!="undefined")?$('#rack_pos_asset_status').val():"";
 	asset_using_org = (typeof($('#rack_pos_hat_assets_accounts_name').val())!="undefined")?$('#rack_pos_hat_assets_accounts_name').val():"";
-	asset_using_org_id = (typeof($('#rack_poshat_assets_ac_counts_id').val())!="undefined")?$('#rack_pos_hat_assets_accounts_id').val():"";
+	asset_using_org_id = (typeof($('#rack_pos_hat_assets_accounts_id').val())!="undefined")?$('#rack_pos_hat_assets_accounts_id').val():"";
 	id = (typeof($('#rack_pos_id').val())!="undefined")?$('#rack_pos_id').val():"";
 	desc = (typeof($('#rack_pos_desc').val())!="undefined")?$('#rack_pos_desc').val():"";
 

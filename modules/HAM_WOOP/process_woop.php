@@ -49,88 +49,88 @@ if($include_reject_wo=='1'){
 	//要驳回到哪个工序 它的工序编号
 	$reject_woop_number = $reject_woop_bean->woop_number;
 	$reject_woop_bean->date_actual_finish = '';
-	$reject_woop_bean->date_actual_start = '';
+	//$reject_woop_bean->date_actual_start = '';
 	$reject_woop_bean->woop_status = 'APPROVED';
-//20170220将马丁在CC项目的要求，负责人在回时不清空
-/*	$reject_woop_bean->work_center_people_id = '';
-	$reject_woop_bean->work_center_people = '';
-*/	$reject_woop_bean->save();
+	//20170220将马丁在CC项目的要求，负责人在回时不清空
+	/*	$reject_woop_bean->work_center_people_id = '';
+		$reject_woop_bean->work_center_people = '';
+	*/
+	$reject_woop_bean->save();
 
 	//驳回的工序对于的事物处理单
 	if ($reject_woop_bean->act_module == 'HIT_IP_TRANS_BATCH') {
-	echo "最新的工序id=".$latest_woop_bean->id."<br>";
-	echo "本次处理的工单 = ".$wo_id."<br>";
-	//start
-	$reject_trans_headers = BeanFactory :: getBean('HIT_IP_TRANS_BATCH')->get_full_list('', "hit_ip_trans_batch.source_wo_id ='" . $wo_id . "' and hit_ip_trans_batch.source_woop_id='" . $latest_woop_bean->id . "'");
-	foreach ($reject_trans_headers as $trans_header_bean) {
-		$reject_trans_lines = BeanFactory :: getBean("HIT_IP_TRANS")->get_full_list('', "hit_ip_trans.hit_ip_trans_batch_id ='" . $trans_header_bean->id . "'");
-		foreach ($reject_trans_lines as $trans_line) {
-			$allocation_id=$trans_line->history_id;
-			echo "用哪一个trans行表去更新allocation=".$trans_line->id."<br>";
-			echo "找到的allocationID=              =".$allocation_id."<br>";
-			$really_trans_sql =    'SELECT  h.id 
-			                        FROM hit_ip_trans h WHERE h.history_id = "'.$allocation_id.'" 
-							        AND h.deleted=0
-									ORDER BY h.date_modified asc 
-									LIMIT 0, 1';
-			$really_trans_result = $db->query($really_trans_sql);
-			while($really_trans =  $db->fetchByAssoc($really_trans_result)) {
-				 $really_trans_id= $really_trans["id"];
-			}
-			$trans_line = BeanFactory :: getBean('HIT_IP_TRANS')->retrieve_by_string_fields(array (
-													    'id' => $really_trans_id));
-			echo "really_trans_id = ".$trans_line->id."<br>";
-			if ($allocation_id != "") {
-				$allocation_line_bean = BeanFactory :: getBean('HIT_IP_Allocations')->retrieve_by_string_fields(array (
-													'id' => $allocation_id));
-				$allocation_line_bean->name = transfer_string($trans_line->name);
-				$allocation_line_bean->hit_ip_subnets_id = $trans_line->hit_ip_subnets_id;
-				$allocation_line_bean->hit_ip_subnets = $trans_line->hit_ip_subnets;
-				$allocation_line_bean->associated_ip = $trans_line->associated_ip;
-				$allocation_line_bean->mask = transfer_string($trans_line->mask);
-				$allocation_line_bean->gateway = transfer_string($trans_line->gateway);
-				$allocation_line_bean->bandwidth_type = transfer_string($trans_line->bandwidth_type);
-				$allocation_line_bean->port = transfer_string($trans_line->port);
-				$allocation_line_bean->speed_limit = transfer_string($trans_line->speed_limit);
-				$allocation_line_bean->hat_assets_id = $trans_line->hat_assets_id;
-				$allocation_line_bean->hat_asset_name = $trans_line->hat_asset_name;
-				$allocation_line_bean->hat_assets_cabinet_id = $trans_line->hat_assets_cabinet_id;
-				$allocation_line_bean->cabinet = transfer_string($trans_line->cabinet);
-				$allocation_line_bean->monitoring = transfer_string($trans_line->monitoring);
-				$allocation_line_bean->channel_num = transfer_string($trans_line->channel_num);
-				$allocation_line_bean->channel_content = transfer_string($trans_line->channel_content);
-				$allocation_line_bean->mrtg_link = transfer_string($trans_line->mrtg_link);
-				$allocation_line_bean->line_parent_ip = $trans_line->line_parent_ip;
-				$allocation_line_bean->access_asset_name = $trans_line->access_asset_name;
-				$allocation_line_bean->access_assets_id = $trans_line->access_assets_id;
-				$allocation_line_bean->status = $trans_line->status;
-				$allocation_line_bean->port_backup = transfer_string($trans_line->port_backup);
-				$allocation_line_bean->monitoring_backup = transfer_string($trans_line->monitoring_backup);
-				$allocation_line_bean->channel_content_backup = transfer_string($trans_line->channel_content_backup);
-				$allocation_line_bean->channel_num_backup = transfer_string($trans_line->channel_num_backup);
-				$allocation_line_bean->date_start = $trans_line->date_start;
-				$allocation_line_bean->date_end = $trans_line->date_end;
-				$allocation_line_bean->access_assets_backup_id = $trans_line->access_assets_backup_id;
-				//$allocation_line_bean->target_owning_org_id = $parent->target_owning_org_id;
-				//$allocation_line_bean->target_owning_org = $parent->target_owning_org;
-				$allocation_line_bean->enable_action = $trans_line->enable_action;
-				$allocation_line_bean->broadband_type = transfer_string($trans_line->broadband_type);
-				$allocation_line_bean->child_port = $trans_line->child_port;
-				$allocation_line_bean->vlan_channel = transfer_string($trans_line->vlan_channel);
-				if ($allocation_line_bean->source_trans_id == null) {
-					$allocation_line_bean->hit_ip_trans_batch_id = $trans_line->hit_ip_trans_batch_id;
-					$allocation_line_bean->source_trans_id = $trans_line->id;
-					$allocation_line_bean->source_wo_id = $parent->source_wo_id;
-					$allocation_line_bean->source_woop_id = $parent->source_woop_id;
+		echo "最新的工序id=".$latest_woop_bean->id."<br>";
+		echo "本次处理的工单 = ".$wo_id."<br>";
+		//start
+		$reject_trans_headers = BeanFactory :: getBean('HIT_IP_TRANS_BATCH')->get_full_list('', "hit_ip_trans_batch.source_wo_id ='" . $wo_id . "' and hit_ip_trans_batch.source_woop_id='" . $latest_woop_bean->id . "'");
+		foreach ($reject_trans_headers as $trans_header_bean) {
+			$reject_trans_lines = BeanFactory :: getBean("HIT_IP_TRANS")->get_full_list('', "hit_ip_trans.hit_ip_trans_batch_id ='" . $trans_header_bean->id . "'");
+			foreach ($reject_trans_lines as $trans_line) {
+				$allocation_id=$trans_line->history_id;
+				echo "用哪一个trans行表去更新allocation=".$trans_line->id."<br>";
+				echo "找到的allocationID=              =".$allocation_id."<br>";
+				$really_trans_sql =    'SELECT  h.id 
+				                        FROM hit_ip_trans h WHERE h.history_id = "'.$allocation_id.'" 
+								        AND h.deleted=0
+										ORDER BY h.date_modified asc 
+										LIMIT 0, 1';
+				$really_trans_result = $db->query($really_trans_sql);
+				while($really_trans =  $db->fetchByAssoc($really_trans_result)) {
+					 $really_trans_id= $really_trans["id"];
 				}
-				//事物处理单行行上面存历史表id
-				$trans_line->history_id = $allocation_line_bean->id;
-				$trans_line->save();
-				$allocation_line_bean->save();
-			}//end if ($allocation_id != "")
-		}
-	}
-	//end
+				$trans_line = BeanFactory :: getBean('HIT_IP_TRANS')->retrieve_by_string_fields(array (
+														    'id' => $really_trans_id));
+				echo "really_trans_id = ".$trans_line->id."<br>";
+				if ($allocation_id != "") {
+					$allocation_line_bean = BeanFactory :: getBean('HIT_IP_Allocations')->retrieve_by_string_fields(array (
+														'id' => $allocation_id));
+					$allocation_line_bean->name = transfer_string($trans_line->name);
+					$allocation_line_bean->hit_ip_subnets_id = $trans_line->hit_ip_subnets_id;
+					$allocation_line_bean->hit_ip_subnets = $trans_line->hit_ip_subnets;
+					$allocation_line_bean->associated_ip = $trans_line->associated_ip;
+					$allocation_line_bean->mask = transfer_string($trans_line->mask);
+					$allocation_line_bean->gateway = transfer_string($trans_line->gateway);
+					$allocation_line_bean->bandwidth_type = transfer_string($trans_line->bandwidth_type);
+					$allocation_line_bean->port = transfer_string($trans_line->port);
+					$allocation_line_bean->speed_limit = transfer_string($trans_line->speed_limit);
+					$allocation_line_bean->hat_assets_id = $trans_line->hat_assets_id;
+					$allocation_line_bean->hat_asset_name = $trans_line->hat_asset_name;
+					$allocation_line_bean->hat_assets_cabinet_id = $trans_line->hat_assets_cabinet_id;
+					$allocation_line_bean->cabinet = transfer_string($trans_line->cabinet);
+					$allocation_line_bean->monitoring = transfer_string($trans_line->monitoring);
+					$allocation_line_bean->channel_num = transfer_string($trans_line->channel_num);
+					$allocation_line_bean->channel_content = transfer_string($trans_line->channel_content);
+					$allocation_line_bean->mrtg_link = transfer_string($trans_line->mrtg_link);
+					$allocation_line_bean->line_parent_ip = $trans_line->line_parent_ip;
+					$allocation_line_bean->access_asset_name = $trans_line->access_asset_name;
+					$allocation_line_bean->access_assets_id = $trans_line->access_assets_id;
+					$allocation_line_bean->status = $trans_line->status;
+					$allocation_line_bean->port_backup = transfer_string($trans_line->port_backup);
+					$allocation_line_bean->monitoring_backup = transfer_string($trans_line->monitoring_backup);
+					$allocation_line_bean->channel_content_backup = transfer_string($trans_line->channel_content_backup);
+					$allocation_line_bean->channel_num_backup = transfer_string($trans_line->channel_num_backup);
+					$allocation_line_bean->date_start = $trans_line->date_start;
+					$allocation_line_bean->date_end = $trans_line->date_end;
+					$allocation_line_bean->access_assets_backup_id = $trans_line->access_assets_backup_id;
+					//$allocation_line_bean->target_owning_org_id = $parent->target_owning_org_id;
+					//$allocation_line_bean->target_owning_org = $parent->target_owning_org;
+					$allocation_line_bean->enable_action = $trans_line->enable_action;
+					$allocation_line_bean->broadband_type = transfer_string($trans_line->broadband_type);
+					$allocation_line_bean->child_port = $trans_line->child_port;
+					$allocation_line_bean->vlan_channel = transfer_string($trans_line->vlan_channel);
+					if ($allocation_line_bean->source_trans_id == null) {
+						$allocation_line_bean->hit_ip_trans_batch_id = $trans_line->hit_ip_trans_batch_id;
+						$allocation_line_bean->source_trans_id = $trans_line->id;
+						$allocation_line_bean->source_wo_id = $parent->source_wo_id;
+						$allocation_line_bean->source_woop_id = $parent->source_woop_id;
+					}
+					//事物处理单行行上面存历史表id
+					$trans_line->history_id = $allocation_line_bean->id;
+					$trans_line->save();
+					$allocation_line_bean->save();
+				}//end if ($allocation_id != "")
+			} //end foreach ($reject_trans_lines as $trans_line)
+		}//end foreach ($reject_trans_headers as $trans_header_bean)
 
 		$reject_trans_headers = BeanFactory :: getBean('HIT_IP_TRANS_BATCH')->get_full_list('', "hit_ip_trans_batch.source_wo_id ='" . $wo_id . "' and hit_ip_trans_batch.source_woop_id='" . $reject_woop_bean->id . "'");
 		foreach ($reject_trans_headers as $trans_header_bean) {
@@ -142,20 +142,36 @@ if($include_reject_wo=='1'){
 				$trans_line->deleted = 1;
 				$trans_line->save();
 			}
-		}
-
+		}//end foreach ($reject_trans_headers as $trans_header_bean) {
+	//end if 当前事务=HIT_IP_TRANS_BATCH
 	} else if ($reject_woop_bean->act_module == 'HAT_Asset_Trans_Batch') {
+		//如果当前回退到的工序是资产事务处理单，则需要把当前资产事务单还原到DRAFT
 		$reject_asset_trans_headers = BeanFactory :: getBean('HAT_Asset_Trans_Batch')->get_full_list('', "hat_asset_trans_batch.source_wo_id ='" . $wo_id . "' and hat_asset_trans_batch.source_woop_id='" . $reject_woop_bean->id . "'");
 
 		if (isset($reject_asset_trans_headers)) {
 			foreach ($reject_asset_trans_headers as $trans_header_bean) {
-				$trans_header_bean->deleted = 1;
+				//toney.wu 20170220 deleted - start
+				//$trans_header_bean->deleted = 1;
+				//toney.wu 20170220 deleted - end
+				//toney.wu 20170220 added - start 原本是删除当前单据，需要需要变为将当前单据还原到DRAFT
+				$trans_header_bean->asset_trans_status = 'DRAFT';
+				//toney.wu 20170220 added - end
 				$trans_header_bean->save();
-				$reject_asset_trans_lines = BeanFactory :: getBean("HAT_Asset_Trans")->get_full_list('', "hat_asset_trans.hit_ip_trans_batch_id ='" . $trans_header_bean->id . "'");
+				$reject_asset_trans_lines = BeanFactory :: getBean("HAT_Asset_Trans")->get_full_list('', "hat_asset_trans.batch_id ='" . $trans_header_bean->id . "'");
 
 				if (isset($reject_asset_trans_lines)) {
 					foreach ($reject_asset_trans_lines as $trans_line_bean) {
-						$trans_line_bean->deleted = 1;
+						//toney.wu 20170220 deleted - start
+						//$trans_line_bean->deleted = 1;
+						//toney.wu 20170220 deleted - end
+						//toney.wu 20170220 added - start 原本是删除当前单据，需要需要变为将当前单据还原到DRAFT
+						if ($trans_line_bean->trans_status == 'AUTO_TRANSACTED') {
+							$trans_line_bean->deleted = 1;
+						} else {
+							$trans_line_bean->trans_status = 'DRAFT';
+							$trans_line_bean->acctual_complete_date = null;
+						}
+						//toney.wu 20170220 added - end
 						$trans_line_bean->save();
 					}
 				}
@@ -480,28 +496,32 @@ function reverse_asset($woop_id, $wo_id, $include_reject_wo) {
 
 				if ($changed_asset_bean->enable_it_ports==1) {
 					//如果当前资产为IT设备则进一步判断当前IT设备对应的机柜分配信息
+					//TODO：20170220 目前有一个BUG，就是只针对IT设备进行了还原，如果当前行不是IT设备只是占位，是无法将占位还原到没占之前的状态的。
+
 					//处理过程如下
 					//1、将当前资产的分配标记为失效
-					//2、获取时间范围中的分配记录
-					//3、将第2步骤中获取的记录，创建为当前的新记录（也可能还原到没有分配的状态）
+					//2、针对当前U位，看当前U位是否有预留的分配记录，并且不是针对当前资产的。
+					//3、获取时间范围中的当前资产的最接近还原点的之前的分配记录
+					//4、将第2步骤中获取的记录，创建为当前的新记录（也可能还原到没有分配的状态，也就是不创建新分配记录）
 
-					//1/3：将当前资产的分配标记为失效
-					//这里有个假设就是每个设备资产只能被分配一次，只有一个有效的记录（暂时不考虑可预定的情况），否则关有asset_id还不行，还需要有时间 判断，或者有状态判断才行
+					//1/4：将当前资产的分配标记为失效
+					//这里有个假设就是每个设备资产只能被分配一次，只有一个有效的记录（暂时不考虑可预定的情况），否则光有asset_id还不行，还需要有时间 判断，或者有状态判断才行
 					$oldRackAllocation = BeanFactory::getBean('HIT_Rack_Allocations') ->retrieve_by_string_fields(array('hat_assets_id'=>$changed_asset_line["asset_id"]));
 					if ($oldRackAllocation) {
+						$oldRackPosTOP = $oldRackAllocation->rack_pos_top;
+						$oldRackID = $oldRackAllocation->hit_racks_id;
+
 						$oldRackAllocation->date_end = $timedate->nowDB();
 						$oldRackAllocation->deleted = 1;
 						$oldRackAllocation->save();
-					}
 
-					//2/3、获取时间范围中的分配记录
-					$to_be_allocation_sql =  'SELECT * FROM hit_rack_allocations hra WHERE hra.date_start<"'.$changed_asset_line['acctual_complete_date'].'" AND (hra.date_end IS NULL OR hra.date_start> "'.$changed_asset_line['acctual_complete_date'].'" ) ORDER BY hra.date_start DESC LIMIT 0,1';
+
+						//2/4、之前是针对当前资产，还需要再针对当前U位，看当前U位是否有预留的分配记录，并且不是针对当前资产的。
+						$to_be_allocation_sql =  'SELECT * FROM hit_rack_allocations hra WHERE hra.hat_assets_id !="'.$changed_asset_line["asset_id"].'" AND har.hit_racks_id = "'.$oldRackID.'" AND har.rack_pos_top = "'.$oldRackPosTOP.'" AND hra.date_start<"'.$changed_asset_line['acctual_complete_date'].'" AND (hra.date_end IS NULL OR hra.date_end> "'.$changed_asset_line['acctual_complete_date'].'" ) ORDER BY hra.date_start DESC LIMIT 0,1';
 						//找到最靠近事务处理时间的一行记录。注意这里搜索时并没有限制是否已经删除。因为之前的失效记录可能被删除
 						$to_be_allocation_result = $db->query($to_be_allocation_sql);
 
 						while ($to_be_allocation = $db->fetchByAssoc($to_be_allocation_result)) {
-							//3/3、将第2步骤中获取的记录，创建为当前的新记录
-							//如果没有找到第2步中的有效记录，则说明没有分配，不再创建新记录。
 							$newRackAllocation = new HIT_Rack_Allocations();
     						$newRackAllocation = BeanFactory::getBean('HIT_Rack_Allocations');
 						    $newRackAllocation->hit_racks_id = $Rack->id;
@@ -511,12 +531,39 @@ function reverse_asset($woop_id, $wo_id, $include_reject_wo) {
 						    $newRackAllocation->height = $key->height;
 						    $newRackAllocation->rack_pos_depth = $key->rack_pos_depth;
 						    $newRackAllocation->sync_parent_enabled = true;
-						    $newRackAllocation->placeholder = false;
+						    $newRackAllocation->placeholder = $key->placeholder;
 						    $newRackAllocation->description = $header->name;
 						    $newRackAllocation->using_org_id = $key->hat_assets_accounts_id;
 						    $newRackAllocation->date_start = $timedate->nowDB();//同样这里也没有考虑按时间Book的情况，也就是没有时间重叠
 						    $newRackAllocation->save();
 						}
+
+					} //end if ($oldRackAllocation)
+
+					//3/4、获取时间范围中的分配记录
+					$to_be_allocation_sql =  'SELECT * FROM hit_rack_allocations hra WHERE hra.hat_assets_id="'.$changed_asset_line["asset_id"].'" AND hra.date_start<="'.$changed_asset_line['acctual_complete_date'].'" AND (hra.date_end IS NULL OR hra.date_end> "'.$changed_asset_line['acctual_complete_date'].'" ) ORDER BY hra.date_start DESC LIMIT 0,1';
+					//找到最靠近事务处理时间的一行记录。注意这里搜索时并没有限制是否已经删除。因为之前的失效记录可能被删除
+					$to_be_allocation_result = $db->query($to_be_allocation_sql);
+
+					while ($to_be_allocation = $db->fetchByAssoc($to_be_allocation_result)) {
+						//4/4、将第2步骤中获取的记录，创建为当前的新记录
+						//如果没有找到第2步中的有效记录，则说明没有分配，不再创建新记录。
+						$newRackAllocation = new HIT_Rack_Allocations();
+						$newRackAllocation = BeanFactory::getBean('HIT_Rack_Allocations');
+					    $newRackAllocation->hit_racks_id = $Rack->id;
+					    $newRackAllocation->name = $key->asset_name;
+					    $newRackAllocation->hat_assets_id = $key->asset_id;
+					    $newRackAllocation->rack_pos_top = $key->rack_pos_top;
+					    $newRackAllocation->height = $key->height;
+					    $newRackAllocation->rack_pos_depth = $key->rack_pos_depth;
+					    $newRackAllocation->sync_parent_enabled = true;
+					    $newRackAllocation->placeholder = false;
+					    $newRackAllocation->description = $header->name;
+					    $newRackAllocation->using_org_id = $key->hat_assets_accounts_id;
+					    $newRackAllocation->date_start = $timedate->nowDB();//同样这里也没有考虑按时间Book的情况，也就是没有时间重叠
+					    $newRackAllocation->save();
+					}
+
 				}
 
 			}

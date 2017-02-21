@@ -126,6 +126,9 @@ input.sqsEnabled {
 /*结构调整：compact structure*/
 /***************************************************/
 
+div#ajaxloading {/*解决不居中的问题*/
+	margin-left:-80px;
+}
 div#loadingPage {
 	font-size: 20px;
 	padding: 50px 0;

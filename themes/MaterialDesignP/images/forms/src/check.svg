@@ -1,108 +1,28 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="148"
-   height="40"
-   id="svg2985"
-   version="1.1"
-   inkscape:version="0.48.4 r9939"
-   sodipodi:docname="check.svg"
-   inkscape:export-filename="/var/www/html/sdk/instances/suitecrm-development-mysql/themes/MaterialDesignP/images/forms/check.png"
-   inkscape:export-xdpi="35.87838"
-   inkscape:export-ydpi="35.87838">
-  <defs
-     id="defs2987" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="11.418919"
-     inkscape:cx="58.586982"
-     inkscape:cy="14.985234"
-     inkscape:current-layer="layer1"
-     showgrid="true"
-     inkscape:grid-bbox="true"
-     inkscape:document-units="px"
-     inkscape:window-width="1920"
-     inkscape:window-height="1056"
-     inkscape:window-x="1920"
-     inkscape:window-y="24"
-     inkscape:window-maximized="1" />
-  <metadata
-     id="metadata2990">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     id="layer1"
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     transform="translate(0,8)">
-    <rect
-       style="fill:#ffffff;stroke:#a1b1be;stroke-width:1;stroke-miterlimit:1;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;fill-opacity:1;stroke-linejoin:round"
-       id="rect2993"
-       width="31.093168"
-       height="31.093168"
-       x="4.4534159"
-       y="-3.5465841" />
-    <rect
-       y="-3.5465841"
-       x="40.453415"
-       height="31.093168"
-       width="31.093168"
-       id="rect4337"
-       style="fill:#ffffff;stroke:#a1b1be;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;fill-opacity:1;stroke-linejoin:round" />
-    <g
-       transform="matrix(0.80735872,0.80735872,-0.80735872,0.80735872,37.221733,-6.3704057)"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:100%;letter-spacing:0px;word-spacing:0px;fill:#f08377;fill-opacity:1;stroke:none;font-family:Sans"
-       id="text3782">
-      <path
-         d="m 25.330518,-12.791652 0,10.2343753 10.195312,0 0,4.609375 -10.195312,0 0,10.2343747 -4.648438,0 0,-10.2343747 -10.195312,0 0,-4.609375 10.195312,0 0,-10.2343753 4.648438,0"
-         style="font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#f08377;fill-opacity:1;font-family:Sans;-inkscape-font-specification:Sans Bold"
-         id="path4344"
-         inkscape:connector-curvature="0" />
-    </g>
-    <rect
-       style="fill:#f6f6f6;stroke:#a1b1be;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;fill-opacity:1;stroke-linejoin:round"
-       id="rect4339"
-       width="31.093168"
-       height="31.093168"
-       x="76.453415"
-       y="-3.5465841" />
-    <rect
-       y="-3.5465841"
-       x="112.45341"
-       height="31.093168"
-       width="31.093168"
-       id="rect4341"
-       style="fill:#f6f6f6;stroke:#a1b1be;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;fill-opacity:1;stroke-linejoin:round" />
-    <g
-       id="g4354"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:100%;letter-spacing:0px;word-spacing:0px;fill:#f08377;fill-opacity:0.33333334;stroke:none;font-family:Sans"
-       transform="matrix(0.80735872,0.80735872,-0.80735872,0.80735872,111.60165,-6.0704057)">
-      <path
-         inkscape:connector-curvature="0"
-         id="path4356"
-         style="font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#f08377;fill-opacity:0.33333334;font-family:Sans;-inkscape-font-specification:Sans Bold"
-         d="m 23.856625,-11.317759 0,10.2343755 10.195312,0 0,4.609375 -10.195312,0 0,10.2343745 -4.648438,0 0,-10.2343745 -10.1953122,0 0,-4.609375 10.1953122,0 0,-10.2343755 4.648438,0" />
-    </g>
-  </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+	 id="svg2985" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:dc="http://purl.org/dc/elements/1.1/" inkscape:version="0.48.4 r9939" sodipodi:docname="check.svg" inkscape:export-ydpi="35.87838" inkscape:export-xdpi="35.87838" inkscape:export-filename="/var/www/html/sdk/instances/suitecrm-development-mysql/themes/MaterialDesignP/images/forms/check.png"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="148px" height="40px"
+	 viewBox="0 0 148 40" enable-background="new 0 0 148 40" xml:space="preserve">
+<sodipodi:namedview  borderopacity="1.0" bordercolor="#666666" showgrid="true" pagecolor="#ffffff" inkscape:cy="14.985234" inkscape:cx="58.586982" inkscape:zoom="11.418919" inkscape:window-y="24" inkscape:window-x="1920" inkscape:window-height="1056" inkscape:window-width="1920" inkscape:document-units="px" inkscape:grid-bbox="true" inkscape:current-layer="layer1" inkscape:pageshadow="2" inkscape:pageopacity="0.0" id="base" inkscape:window-maximized="1">
+	</sodipodi:namedview>
+<g id="layer1" transform="translate(0,8)" inkscape:label="Layer 1" inkscape:groupmode="layer">
+	
+		<rect id="rect2993" x="4.454" y="-3.546" fill="#FFFFFF" stroke="#A1B1BE" stroke-linejoin="round" stroke-miterlimit="1" width="31.093" height="31.093"/>
+	
+		<rect id="rect4337" x="40.454" y="-3.546" fill="#FFFFFF" stroke="#A1B1BE" stroke-linejoin="round" width="31.093" height="31.093"/>
+	<g id="text3782" transform="matrix(0.80735872,0.80735872,-0.80735872,0.80735872,37.221733,-6.3704057)">
+		<path id="path4344" inkscape:connector-curvature="0" fill="#1E2C5B" d="M28.154-13.064l0.041,16.932l0.001,4.61l-4.649-0.001
+			l-10.195,0l1.72-2.112l8.476-2.498l0.195-21.345L28.154-13.064"/>
+	</g>
+	
+		<rect id="rect4339" x="76.453" y="-3.546" fill="#F6F6F6" stroke="#A1B1BE" stroke-linejoin="round" width="31.094" height="31.093"/>
+	
+		<rect id="rect4341" x="112.453" y="-3.546" fill="#F6F6F6" stroke="#A1B1BE" stroke-linejoin="round" width="31.094" height="31.093"/>
+	<g id="text3782_1_" transform="matrix(0.80735872,0.80735872,-0.80735872,0.80735872,37.221733,-6.3704057)" opacity="0.26">
+		<path id="path4344_1_" inkscape:connector-curvature="0" fill="#1E2C5B" d="M72.57-57.48l0.041,16.932l0.001,4.61l-4.649-0.001
+			l-10.195,0.001l1.72-2.112l8.476-2.498l0.195-21.345L72.57-57.48"/>
+	</g>
+</g>
 </svg>
