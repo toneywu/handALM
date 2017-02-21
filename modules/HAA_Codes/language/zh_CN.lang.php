@@ -74,4 +74,5 @@ $mod_strings = array (
   'LBL_CODE_MODULE'=>'代码所属模块',
   'LBL_PARENT_TYPE_VALUE_ID'=>'父类名称Id',
   'LBL_PARENT_TYPE_VALUE'=>'父类名称',
+  'LBL_LOOKUP_CODE'=>'代码',
   );

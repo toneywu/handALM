@@ -48,7 +48,7 @@ array (
         0=>
         array(
           0=>'framework',
-          1=>''
+          1=>'',
         ),
         1 => 
         array (
@@ -62,8 +62,8 @@ array (
         ),
         2 => 
         array (
-          0 => 'name',
-          1 => 'description',
+          0 => 'lookup_code',
+          1 => 'name',
         ),
         3 => 
         array (
@@ -90,7 +90,7 @@ array (
               'initial_filter' => '&code_type_advanced="+this.form.{$fields.code_type.name}.value+"',
             )
           ),
-          1 => '',
+          1 => 'description',
         ),
       ),
     ),

@@ -68,6 +68,10 @@ class HAA_Menu_Groups_sugar extends Basic {
 	var $assigned_user_name;
 	var $assigned_user_link;
 	var $SecurityGroups;
+	var $haa_frameworks_id_c;
+	var $frameworks;
+	var $menu_group_code;
+	var $enabled_flag;
 	
 	function __construct(){
 		parent::__construct();

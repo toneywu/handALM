@@ -40,5 +40,12 @@
 
 
 
-$app_list_strings['moduleList']['HAA_Periods'] = '会计期间		';
+$app_list_strings['moduleList']['HAA_Periods'] = '会计期间';
 $app_list_strings['moduleList']['HAA_Period_Sets'] = '会计期管理';
+
+$app_list_strings['haa_period_status']=array (
+	'F' => '将来', 
+	'O' => '打开', 
+	'C' => '关闭',
+	);
+

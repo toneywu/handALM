@@ -162,6 +162,24 @@ $dictionary['HAA_Codes'] = array(
       'unified_search' => false,
       'merge_filter' => 'disabled',
       ),
+    'lookup_code' =>
+    array (
+      'required' => true,
+      'name' => 'lookup_code',
+      'vname' => 'LBL_LOOKUP_CODE',
+      'type' => 'varchar',
+      'massupdate' => 0,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'duplicate_merge_dom_value' => '0',
+      'audited' => false,
+      'inline_edit' => false,
+      'reportable' => true,
+      'unified_search' => false,
+      'merge_filter' => 'disabled',
+      ),
     'code_module' =>
     array (
       'required' => true,

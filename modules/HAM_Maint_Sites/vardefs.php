@@ -282,7 +282,7 @@ $dictionary['HAM_Maint_Sites'] = array(
       ),
     'hmm_trans_lines_haa_numbering_rule' => 
     array (
-      'required' => true,
+      'required' => false,
       'source' => 'non-db',
       'name' => 'hmm_trans_lines_haa_numbering_rule',
       'vname' => 'LBL_HMM_TRANS_LINES_HAA_NUMBERING_RULE',
@@ -331,7 +331,7 @@ $dictionary['HAM_Maint_Sites'] = array(
       ),
     'hmm_trans_batch_haa_numbering_rule' => 
     array (
-      'required' => true,
+      'required' => false,
       'source' => 'non-db',
       'name' => 'hmm_trans_batch_haa_numbering_rule',
       'vname' => 'LBL_HMM_TRANS_BATCH_HAA_NUMBERING_RULE',
@@ -380,7 +380,7 @@ $dictionary['HAM_Maint_Sites'] = array(
       ),
     'hmm_mo_haa_numbering_rule' =>
     array (
-      'required' => true,
+      'required' => false,
       'source' => 'non-db',
       'name' => 'hmm_mo_haa_numbering_rule',
       'vname' => 'LBL_HMM_MO_HAA_NUMBERING_RULE',
@@ -408,7 +408,7 @@ $dictionary['HAM_Maint_Sites'] = array(
       ),
     'locator_coding_mask' =>
     array (
-      'required' => true,
+      'required' => false,
       'name' => 'locator_coding_mask',
       'vname' => 'LBL_LOCATOR_CODING_MASK',
       'type' => 'varchar',
@@ -450,7 +450,7 @@ $dictionary['HAM_Maint_Sites'] = array(
       ),
     'hmm_mo_lines_haa_numbering_rule' => 
     array (
-      'required' => true,
+      'required' => false,
       'source' => 'non-db',
       'name' => 'hmm_mo_lines_haa_numbering_rule',
       'vname' => 'LBL_HMM_MO_LINES_HAA_NUMBERING_RULE',
@@ -478,7 +478,7 @@ $dictionary['HAM_Maint_Sites'] = array(
       ),    
     'locator_coding_mask_desc' => 
     array (
-      'required' => true,
+      'required' => false,
       'name' => 'locator_coding_mask_desc',
       'vname' => 'LBL_LOCATOR_CODING_MASK_DESC',
       'type' => 'varchar',

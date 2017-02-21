@@ -47,5 +47,29 @@ class HAA_Menu_Groups extends HAA_Menu_Groups_sugar {
 		parent::__construct();
 	}
 	
+	function save($check_notify = false){
+		global $current_user;
+		$this->id=parent::save($check_notify);
+		$post_data=$_POST;
+		$key="line_";
+		$line_count = isset($post_data[$key . 'deleted']) ? count($post_data[$key . 'deleted']) : 0;
+		for ($i = 0; $i < $line_count; ++$i) {
+			$lines = new HAA_Menu_Group_Lists();
+			if ($post_data[$key . 'deleted'][$i] == 1) {
+				$lines->mark_deleted($post_data[$key . 'id'][$i]);
+			} else {
+				foreach ($lines->field_defs as $field_def) {
+					$field_name = $field_def['name'];
+					if (isset($post_data[$key . $field_name][$i])) {
+						$lines->$field_name = $post_data[$key . $field_name][$i];
+					}
+				}
+				$lines->haa_menu_groups_id_c=$this->id;
+				$lines->currency_id=$this->currency_id;
+				$lines->assigned_user_id=$current_user->id;
+				$lines->save($check_notify);
+			}
+		}
+	}
 }
 ?>
