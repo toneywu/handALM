@@ -62,7 +62,10 @@ function save_lines($post_data, $header, $key = ''){
 
                 if ($header->asset_trans_status=='TRANSACTED') {
                     //针对机柜，在Attribute上记录合同号
-                    save_contract_on_rack_for_cc($trans_line);//这是针对CC特殊的业务场景，规范的应当写了AfterSave中，但时间紧就不管了。
+                    $trans_line = save_contract_on_rack_for_cc($trans_line);
+
+
+                    //这是针对CC特殊的业务场景，规范的应当写了AfterSave中，但时间紧就不管了。
 
                     //在新增或修改模式下，对机柜的分配进行处理
                     if (isset($trans_line->target_rack_position_data) && $trans_line->target_rack_position_data!="") {
@@ -91,18 +94,21 @@ function save_lines($post_data, $header, $key = ''){
 这是针对CC特殊的业务场景，规范的应当写了AfterSave LogicHook中，但时间紧就不管了。后续有时间再整理
 *****************************************************/
 function save_contract_on_rack_for_cc($trans_line) {//这是针对CC特殊的业务场景，规范的应当写了AfterSave中，但时间紧就不管了。
-    global $db;
+    global $db,$timedate;
 
-    $sql="SELECT ha.id, ha.attribute11 FROM hat_assets ha, hit_racks hr WHERE ha.id  = hr.`hat_assets_id` AND hr.deleted= 0 AND hr.enable_partial_allocation = 0 AND hat.`asset_id` = '".$trans_line->asset_id."' AND ha.`enable_it_rack` = '1' AND ha.deleted = 0";
+    $sql="SELECT ha.id, ha.attribute9 attribute9 FROM hat_assets ha, hit_racks hr WHERE ha.id  = hr.`hat_assets_id` AND hr.deleted= 0 AND hr.enable_partial_allocation = 0 AND ha.id = '".$trans_line->asset_id."' AND ha.`enable_it_rack` = '1' AND ha.deleted = 0";
     $result=$db->query($sql);
+
     //如果有值说明当前为机柜，需要在机柜对应的Attribute11上进行处理
     while ($row=$db->fetchByAssoc($result)) {
-        $trans_line->current_asset_attribute11 = $row['attribute11'];
+        $trans_line->current_asset_attribute9 = $row['attribute9'];
 
-        if empty($trans_line -> target_using_org_id) {
+
+        if (empty($trans_line -> target_using_org_id) || ($trans_line->inactive_using = 1 && $trans_line->date_end <= $timedate->nowDB())) {
             //如果当前使用组织为空，则将应当的Attribute11清空
-            $trans_line->target_asset_attribute11 = '';
+            $trans_line->target_asset_attribute9 = '';
         } else {
+
             $sql2="SELECT 
                   hwl.`contract_id`
                 FROM
@@ -115,14 +121,19 @@ function save_contract_on_rack_for_cc($trans_line) {//这是针对CC特殊的业
                   AND ap_cstm.`id_c` = hwl.`product_id`
                   AND ap_cstm.`asset_criticality_c` = 'A'
                   AND hat.`asset_id` = '".$trans_line->asset_id."'
+                  AND hwl.deleted= 0 
                 LIMIT 0,1";
+
             $result2=$db->query($sql2);
             //读取出当前Header对应的所有行记录
             while ($row2=$db->fetchByAssoc($result2)) {
-                $trans_line->target_asset_attribute11 = $row2['contract_id'];
+
+                $trans_line->target_asset_attribute9 = $row2['contract_id'];
             }
         } // end if
     }// end while
+    //$trans_line->target_asset_attribute9 = 'test';
+    return $trans_line;
 }
 
 function getTransactionDate() {

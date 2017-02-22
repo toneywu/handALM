@@ -36,7 +36,14 @@ array (
         'default' => true,
         'name' => 'serial_number',
       ),
-
+      'vin' => 
+      array (
+        'type' => 'varchar',
+        'label' => 'LBL_VIN',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'vin',
+      ),
       'hat_asset_locations_hat_assets_name' => 
       array (
         'type' => 'relate',
@@ -46,6 +53,14 @@ array (
         'width' => '10%',
         'default' => true,
         'name' => 'hat_asset_locations_hat_assets_name',
+      ),
+      'location_desc' => 
+      array (
+        'type' => 'varchar',
+        'label' => 'LBL_LOCATION_DESC',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'location_desc',
       ),
     ),
     'advanced_search' => 
@@ -163,6 +178,7 @@ array (
     'maxColumnsBasic' => '4',
     'widths' => 
     array (
+      'label' => '10',
       'field' => '30',
     ),
   ),

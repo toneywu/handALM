@@ -232,11 +232,7 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
       "<span class='input_group ig_using_org'>"+
       "<label id='rack_pos_hat_assets_accounts_name_label'>"+SUGAR.language.get('HIT_Rack_Allocations', 'LBL_ASSET_ACCOUNT')+" <span class='required'>*</span></label>"+
       "<input class='sqsEnabled' style='width:153px;' autocomplete='off' type='text' name='rack_pos_hat_assets_accounts_name' id='rack_pos_hat_assets_accounts_name' value='' title='' >"+
-<<<<<<< HEAD
       "<input type='hidden' name='rack_pos_hat_assets_accounts_id' id='rack_pos_hat_assets_accounts_id' value='' />"+
-=======
-      "<input type='hidden' name='rack_poshat_assets_ac_counts_id' id='rack_poshat_assets_acco_unts_id' value='' />"+
->>>>>>> ecff7d296671ea51b0adb91f577905d950b5956b
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openUsingOrgPopup();'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>";
 
@@ -292,7 +288,6 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
 	}
 
     //处理特殊的默认值(有参数传递来的)
-<<<<<<< HEAD
     if($("#target_using_org_id").length && $("#target_using_org_id").val()!="" && $("#target_using_org_id").val()!="undefined") {
     	return_html +="<script>"
         return_html +='$("#rack_pos_hat_assets_accounts_name").val($("#target_using_org").val());'
@@ -303,12 +298,6 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
     if( typeof(globalServerData.server[i])!= 'undefined' && globalServerData.server[i].placeholder=="1") {
     	return_html +="<script>"
         return_html +='$("#rack_pos_placeholder").attr("checked", true);'
-=======
-    if($("#target_using_org_id").length && $("#target_using_org_id").val()!="") {
-    	return_html +="<script>"
-        return_html +='$("#rack_pos_hat_assets_accounts_name").val($("#target_using_org").val());'
-        return_html +='$("#rack_pos_hat_assets_accounts_id").val($("#target_using_org_id").val());'
->>>>>>> ecff7d296671ea51b0adb91f577905d950b5956b
     	return_html +="</script>"
     }
 
@@ -548,11 +537,7 @@ function savePlaceHolder(i) {
 	asset_desc = (typeof($('#rack_pos_asset_desc').val())!="undefined")?$('#rack_pos_asset_desc').val():"";
 	asset_status = (typeof($('#rack_pos_asset_status').val())!="undefined")?$('#rack_pos_asset_status').val():"";
 	asset_using_org = (typeof($('#rack_pos_hat_assets_accounts_name').val())!="undefined")?$('#rack_pos_hat_assets_accounts_name').val():"";
-<<<<<<< HEAD
 	asset_using_org_id = (typeof($('#rack_pos_hat_assets_accounts_id').val())!="undefined")?$('#rack_pos_hat_assets_accounts_id').val():"";
-=======
-	asset_using_org_id = (typeof($('#rack_poshat_assets_ac_counts_id').val())!="undefined")?$('#rack_pos_hat_assets_accounts_id').val():"";
->>>>>>> ecff7d296671ea51b0adb91f577905d950b5956b
 	id = (typeof($('#rack_pos_id').val())!="undefined")?$('#rack_pos_id').val():"";
 	desc = (typeof($('#rack_pos_desc').val())!="undefined")?$('#rack_pos_desc').val():"";
 
