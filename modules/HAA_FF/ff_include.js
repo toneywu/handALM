@@ -75,11 +75,18 @@ function setFF(FFObj) {
 		//console.log(FFObj.field + " lab:"+FFObj.label+" "+(FFObj.label!=null))
 		if (FFObj.label!=null && FFObj.label!="") {
 			if (view=="EditView") {
+				//alert("#"+FFObj.field+" should be rename to "+FFObj.label);
 				console.log("#"+FFObj.field+" should be rename to "+FFObj.label);
 				mark_obj_label.html(FFObj.label+":"); //V7.8-
+				if($("#span_"+FFObj.field)){
+					$("#span_"+FFObj.field).parent().prev(".label").html(FFObj.label+":");
+				}
 			} else if(view =="DetailView") {
 				//$("td[field='"+FFObj.field+"']").prev("td").html(FFObj.label+":");//V7.8-
 				$("#"+FFObj.field).parent().prev(".label").html(FFObj.label+":");//V7.8+
+				if($("#span_"+FFObj.field)){
+					$("#span_"+FFObj.field).parent().prev(".label").html(FFObj.label+":");
+				}
 			}
 		}
 	}

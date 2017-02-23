@@ -395,6 +395,13 @@ $moduleList[] = 'HAOS_Revenues_Quotes';
 
  
  //WARNING: The contents of this file are auto-generated
+$beanList['HAOS_Contract_Templates'] = 'HAOS_Contract_Templates';
+$beanFiles['HAOS_Contract_Templates'] = 'modules/HAOS_Contract_Templates/HAOS_Contract_Templates.php';
+$moduleList[] = 'HAOS_Contract_Templates';
+
+
+ 
+ //WARNING: The contents of this file are auto-generated
 $beanList['HAOS_Insurances'] = 'HAOS_Insurances';
 $beanFiles['HAOS_Insurances'] = 'modules/HAOS_Insurances/HAOS_Insurances.php';
 $moduleList[] = 'HAOS_Insurances';

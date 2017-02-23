@@ -3,7 +3,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 require_once('include/MVC/View/views/view.popup.php');
 
-class AccountsViewPopup extends ViewPopup
+class AOS_ProductsViewPopup extends ViewPopup
 {
 
     function Display() {
@@ -12,8 +12,9 @@ class AccountsViewPopup extends ViewPopup
                $haa_frameworks_id=$_SESSION["current_framework"];
                $_REQUEST['haa_frameworks_id_c_advanced']=$haa_frameworks_id;
           }
-
+       //var_dump($_SESSION['AOS_Products2_QUERY']);
        parent::Display();
+       
 
     }
 

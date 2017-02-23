@@ -49,3 +49,38 @@ function setPreContractPopupReturn(popupReplyData) {
 
 //alert(1);
 //});
+
+
+function setContractTempPopupReturn(popupReplyData){
+	var contract_temp_id= popupReplyData["name_to_value_array"]["haos_contract_templates_id_c"];
+	
+	get_contract_temp_info(contract_temp_id);
+	set_return(popupReplyData);
+	
+
+}
+
+function get_contract_temp_info(id){
+
+	$.ajax({
+            async:false,
+            url: 'index.php?to_pdf=true&module=AOS_Contracts&action=getContractTempInfo',
+            data: '&contr_temp_id='+id,
+            type:'POST',
+            success: function (data) {//调用方法。
+                //data=$.parseJSON(data);
+                //data_line_item=eval(data.line_item);
+                data=JSON.parse(data);
+
+                for (var i = 0; i < data.line_item.length; i++) {
+                	insertLineItems(data.line_item[i], data.group_item[i]);
+                }
+
+                /*for(var i =0;i<data.line_item.length;i++){
+                	insertLineItems(data.line_item, data.group_item);
+                }*/
+                
+            }
+    });
+
+}

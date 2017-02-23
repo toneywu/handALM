@@ -57,9 +57,9 @@ if (!empty($_POST['using_org_name'])) {
   $join_using_org="";
 }
 
-/*资产使用组织*/
+/*资产所属组织*/
 if (!empty($_POST['owning_org_name'])) {
-  $join_owning_org = " JOIN accounts account_o ON (hat_assets.using_org_id = account_o.id AND account_o.name like '%".$_POST['owning_org_name']."%')";
+  $join_owning_org = " JOIN accounts account_o ON (hat_assets.owning_org_id = account_o.id AND account_o.name like '%".$_POST['owning_org_name']."%')";
 }else{
   $join_owning_org="";
 }

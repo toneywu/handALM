@@ -1,4 +1,16 @@
 <?php
+$where_popup = "";
+if(isset($_REQUEST["ham_wo_contract_id"])&&!empty($_REQUEST["ham_wo_contract_id"])){
+    $where_popup.="aos_products.id IN (
+                    SELECT
+                      l.product_id
+                    FROM
+                      aos_contracts h,
+                      aos_products_quotes l
+                    WHERE h.id = l.parent_id
+                       AND  h.id = '".$_REQUEST["ham_wo_contract_id"]."')";
+}
+
 $popupMeta = array (
     'moduleMain' => 'AOS_Products',
     'varName' => 'AOS_Products',
@@ -7,6 +19,8 @@ $popupMeta = array (
   'name' => 'aos_products.name',
   'description' => 'aos_products.description',
 ),
+    'whereStatement'=>$where_popup,
+
     'searchInputs' => array (
   1 => 'name',
   10 => 'description',

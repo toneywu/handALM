@@ -83,7 +83,11 @@ class HAM_WO extends HAM_WO_sugar {
 				$ham_wo_line_bean = BeanFactory :: newBean("HAM_WO_Lines");
 				$ham_wo_line_bean->ham_wo_id = $this->id;
 				$ham_wo_line_bean->product_id = $contract_product_bean->product_id;
-				$ham_wo_line_bean->quantity = $contract_product_bean->product_qty;
+				if ($contract_product_bean->product_qty >= 9999999999) {
+					$ham_wo_line_bean->quantity = 9999999999;
+				}else{
+					$ham_wo_line_bean->quantity = $contract_product_bean->product_qty;
+				}
 				$ham_wo_line_bean->contract_id = $this->contract_id;
 				$ham_wo_line_bean->description = $contract_product_bean->description;
 				$ham_wo_line_bean->save();
@@ -250,7 +254,12 @@ class HAM_WO extends HAM_WO_sugar {
 					$ham_wo_line->contract_id = $this->contract_id;
 					$ham_wo_line->ham_wo_id = $this->id;
 					$ham_wo_line->product_id = $contact_products_bean->product_id;
-					$ham_wo_line->quantity = $contact_products_bean->product_qty;
+					if ($contact_products_bean->product_qty >= 9999999999) {
+						$ham_wo_line->quantity = 9999999999;
+					}else{
+						$ham_wo_line->quantity = $contact_products_bean->product_qty;
+					}
+					//$ham_wo_line->quantity = $contact_products_bean->product_qty;
 					$ham_wo_line->uom_id = $contact_products_bean->product_qty;
 					//通过产品 找到 单位 
 					$product_bean = BeanFactory :: getBean("AOS_Products", $contact_products_bean->product_id);
@@ -376,7 +385,12 @@ class HAM_WO extends HAM_WO_sugar {
 			$ham_wo_line_bean = BeanFactory :: newBean("HAM_WO_Lines");
 			$ham_wo_line_bean->ham_wo_id = $this->id;
 			$ham_wo_line_bean->product_id = $contract_product_beans->product_id;
-			$ham_wo_line_bean->quantity = $contract_product_beans->product_qty;
+			if ($contract_product_beans->product_qty >= 9999999999) {
+					$ham_wo_line_bean->quantity = 9999999999;
+				}else{
+					$ham_wo_line_bean->quantity = $contract_product_beans->product_qty;
+				}
+			//$ham_wo_line_bean->quantity = $contract_product_beans->product_qty;
 			$ham_wo_line_bean->contract_id = $this->contract_id;
 			$ham_wo_line_bean->save();
 		}

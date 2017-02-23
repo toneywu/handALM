@@ -55,6 +55,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_EDITVIEW_PANEL5' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
       ),
       'syncDetailEditViews' => true,
     ),
@@ -220,6 +225,19 @@ array (
               'initial_filter' => '&document_type_advanced=COUNT',
             ),
           ),
+        ),
+      ),
+      'lbl_editview_panel5' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'period_sets_name',
+            'studio' => 'visible',
+            'label' => 'LBL_PERIOD_SETS_NAME',
+          ),
+          1 => '',
         ),
       ),
     ),
