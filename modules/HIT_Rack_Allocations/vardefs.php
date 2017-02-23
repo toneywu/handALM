@@ -338,7 +338,7 @@ $dictionary['HIT_Rack_Allocations'] = array(
       'required' => false,
       'name' => 'date_start',
       'vname' => 'LBL_TRANS_DATE_STRAT',
-      'type' => 'date',
+      'type' => 'datetimecombo',
       'massupdate' => 0,
       'no_default' => true,
       'comments' => '',
@@ -360,7 +360,7 @@ $dictionary['HIT_Rack_Allocations'] = array(
       'required' => false,
       'name' => 'date_end',
       'vname' => 'LBL_TRANS_DATE_END',
-      'type' => 'date',
+      'type' => 'datetimecombo',
       'massupdate' => 0,
       'no_default' => true,
       'comments' => '',
@@ -378,6 +378,27 @@ $dictionary['HIT_Rack_Allocations'] = array(
       'dbType' => 'datetime',
       //'display_default' => 'now&12:00am',
     ),
+    'create_by_hat_asset_trans_id' =>
+      array (
+        'required' => false,
+        'name' => 'create_by_hat_asset_trans_id',
+        'vname' => 'LBL_CREATE_BY_HAT_ASSET_TRANS_ID',
+        'type' => 'id',
+        'massupdate' => 0,
+        'no_default' => false,
+        'comments' => '',
+        'help' => '',
+        'importable' => 'false',
+        'duplicate_merge' => 'disabled',
+        'duplicate_merge_dom_value' => 0,
+        'audited' => false,
+        'inline_edit' => false,
+        'reportable' => false,
+        'unified_search' => false,
+        'merge_filter' => 'disabled',
+        'len' => 36,
+        'size' => '20',
+        ),
     'del_by_hat_asset_trans_id' =>
       array (
         'required' => false,
@@ -497,6 +518,22 @@ $dictionary['HIT_Rack_Allocations'] = array(
         0 => 'date_start',
         1 => 'date_end',
         2 => 'deleted',
+      ),
+    ),
+    array (
+      'name' => 'idx_del_by_hat_asset_trans_id',
+      'type' => 'index',
+      'fields' =>
+      array (
+        0 => 'del_by_hat_asset_trans_id',
+      ),
+    ),
+    array (
+      'name' => 'idx_create_by_hat_asset_trans_id',
+      'type' => 'index',
+      'fields' =>
+      array (
+        0 => 'create_by_hat_asset_trans_id',
       ),
     ),
 ),

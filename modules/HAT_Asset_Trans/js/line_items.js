@@ -632,12 +632,12 @@ function generateLineDesc(ln){
   LineDesc += LineDescElement("line_","target_owning_org_id","current_owning_org_id","LBL_OWING_ORG",ln,"target_owning_org","current_owning_org");
   LineDesc += LineDescElement("line_","target_owning_person_id","current_owning_person_id","LBL_OWNING_PERSON",ln,"target_owning_person","current_owning_person");
 
-  if($("#line_inactive_using"+ln).is(':checked')){ //如果失效的Checkbox=Y，则显示已经清空组织
-    console.log('inactive checked');
+  if ($("#line_inactive_using"+ln).is(':checked')) { //如果失效的Checkbox=Y，则显示已经清空组织
+    //console.log('inactive checked');
     LineDesc += SUGAR.language.get('HAT_Asset_Trans', 'LBL_INACTIVE_USING')+" ";
     LineDesc += LineDescElement("line_","","current_using_org_id","LBL_USING_ORG",ln,"","current_using_org");
     LineDesc += LineDescElement("line_","","current_using_person_id","LBL_USING_PERSON",ln,"","current_using_person");
-  }else{
+  } else {
     //否则的话，继续对组织数据进行对比
     LineDesc += LineDescElement("line_","target_using_org_id","current_using_org_id","LBL_USING_ORG",ln,"target_using_org","current_using_org");
     LineDesc += LineDescElement("line_","target_using_person_id","current_using_person_id","LBL_USING_PERSON",ln,"target_using_person","current_using_person");

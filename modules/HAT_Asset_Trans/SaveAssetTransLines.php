@@ -62,9 +62,7 @@ function save_lines($post_data, $header, $key = ''){
 
                 if ($header->asset_trans_status=='TRANSACTED') {
                     //针对机柜，在Attribute上记录合同号
-                    $trans_line = save_contract_on_rack_for_cc($trans_line);
-
-
+                   // $trans_line = save_contract_on_rack_for_cc($trans_line);
                     //这是针对CC特殊的业务场景，规范的应当写了AfterSave中，但时间紧就不管了。
 
                     //在新增或修改模式下，对机柜的分配进行处理
@@ -93,21 +91,28 @@ function save_lines($post_data, $header, $key = ''){
 /*****************************************************
 这是针对CC特殊的业务场景，规范的应当写了AfterSave LogicHook中，但时间紧就不管了。后续有时间再整理
 *****************************************************/
-function save_contract_on_rack_for_cc($trans_line) {//这是针对CC特殊的业务场景，规范的应当写了AfterSave中，但时间紧就不管了。
-    global $db,$timedate;
+/*function save_contract_on_rack_for_cc($trans_line) {//这是针对CC特殊的业务场景，规范的应当写了AfterSave中，但时间紧就不管了。
+    global $db, $timedate;
 
     $sql="SELECT ha.id, ha.attribute9 attribute9 FROM hat_assets ha, hit_racks hr WHERE ha.id  = hr.`hat_assets_id` AND hr.deleted= 0 AND hr.enable_partial_allocation = 0 AND ha.id = '".$trans_line->asset_id."' AND ha.`enable_it_rack` = '1' AND ha.deleted = 0";
     $result=$db->query($sql);
 
+    echo "1111111111111111111";
+    echo $sql;
+
     //如果有值说明当前为机柜，需要在机柜对应的Attribute11上进行处理
     while ($row=$db->fetchByAssoc($result)) {
         $trans_line->current_asset_attribute9 = $row['attribute9'];
-
-
-        if (empty($trans_line -> target_using_org_id) || ($trans_line->inactive_using = 1 && $trans_line->date_end <= $timedate->nowDB())) {
+        echo "22222222222222";
+        //echo "<br/>".$trans_line->target_asset_attribute9;
+        if (empty($trans_line -> target_using_org_id) || ($trans_line->inactive_using == 1 && $trans_line->date_end <= $timedate->nowDB())) {
             //如果当前使用组织为空，则将应当的Attribute11清空
             $trans_line->target_asset_attribute9 = '';
+        echo "333333333333333";
+        echo "<br/>".$trans_line->target_asset_attribute9;
+
         } else {
+
 
             $sql2="SELECT 
                   hwl.`contract_id`
@@ -129,16 +134,20 @@ function save_contract_on_rack_for_cc($trans_line) {//这是针对CC特殊的业
             while ($row2=$db->fetchByAssoc($result2)) {
 
                 $trans_line->target_asset_attribute9 = $row2['contract_id'];
+            echo "444444444444444";
+            echo "<br/>".$trans_line->target_asset_attribute9;
+
             }
+
+            echo "<br/>sql2=".$sql2;
         } // end if
     }// end while
-    //$trans_line->target_asset_attribute9 = 'test';
     return $trans_line;
 }
-
+*/
 function getTransactionDate() {
     global $timedate, $transacton_date;
-    if (empty($transacton_date)) {
+    if ($transacton_date=="") {
         //如果当前处理时间还没有衩判断过
         if (empty($_GET['accutral_execution_date'])) {
             //大多数情况下是没有指定日期的，那就记录为实时的时间
@@ -215,8 +224,9 @@ function save_rack_elements_from_rack($allocation_id, $key, $focused_trans_line)
         //如果有Allocation_ID，将之前的Allocation记录失效，再后续建立新记录
         $RackAllocationOld = BeanFactory::getBean('HIT_Rack_Allocations', $allocation_id);
         $RackAllocationOld->date_end = getTransactionDate();
+
         $RackAllocationOld->del_by_hat_asset_trans_id = $tran_line_id;//在之前已经生成了事务处理行的ID，记录下是哪次失效的，以便于回流
-        $RackAllocationOld->deleted=1;
+        $RackAllocationOld->deleted = 1;
         $RackAllocationOld->save();
     } //如果没有Allocation_ID，将不需要删除之前的，直接对新的记录进行创建
     //创建新分配记录
@@ -241,7 +251,9 @@ function save_rack_elements_from_rack($allocation_id, $key, $focused_trans_line)
     }
     $RackAllocation->description = $header->name;
     $RackAllocation->using_org_id = $key->hat_assets_accounts_id;
+    $RackAllocation->create_by_hat_asset_trans_id = $tran_line_id;
     $RackAllocation->date_start = getTransactionDate();//获取事务处理行上的执行日期（可能是默认当前，也可能是人工指定的日期）
+
     $RackAllocation->save();
     //通过测试发现，系统调用了HIT_Rack_Allocations\HIT_Rack_Allocations.php中的Save函数
     //因此还执行了函数中对Assets及Rack的变更
@@ -372,7 +384,7 @@ function save_asset_lines($focus, $beanAsset=null){
             $beanAsset->owning_person_desc = $focus->target_owning_person_desc;
             $beanAsset->cost_center_id = $focus->target_cost_center_id;
 
-            if(empty($focus->inactive_using) || $focus->inactive_using!= 1) {//正常保存使用信息
+            if(empty($focus->inactive_using) || $focus->inactive_using != 1) {//正常保存使用信息
                 $beanAsset->using_org_id = $focus->target_using_org_id;
                 $beanAsset->using_person_id = $focus->target_using_person_id;
                 $beanAsset->using_person_desc = $focus->target_using_person_desc;

@@ -111,3 +111,11 @@
 #module_label {
 	color: $danger;
 }
+
+#EditView button.iconpicker {
+	margin: 0px;
+	padding: 0px;
+	border: 1px solid $input-select-bg;
+	font-size: 1.1em
+}
+

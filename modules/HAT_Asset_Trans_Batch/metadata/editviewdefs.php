@@ -10,8 +10,6 @@ array (
       array (
         'hidden' => 
         array (
-          0 => '<input type="hidden" name="source_woop_id" id="source_woop_id" value="{$SOURCE_WOOP_ID}">',
-          1 => '<input type="hidden" name="source_wo_id"  id="source_wo_id" value="{$SOURCE_WO_ID}">',
           2 => '<input type="hidden" name="source_wo_org"  id="source_wo_org" value="{$SOURCE_WO_ORG}">',
           3 => '<input type="hidden" name="source_wo_account"  id="source_wo_account" value="{$SOURCE_WO_ACCOUNT}">',
           4 => '<input type="hidden" name="source_wo_account_id"  id="source_wo_account_id" value="{$SOURCE_WO_ACCOUNT_ID}">',
@@ -87,7 +85,7 @@ array (
             'label' => 'LBL_EVENT_TYPE',
             'displayParams' => 
             array (
-              'initial_filter' => '&basic_type_advanced=AT_MOVE&manual_create_enable_flag_advanced=1',
+              'initial_filter' => '&basic_type_advanced=AT_MOVE',
               'field_to_name_array' => 
               array (
                 'name' => 'event_type',
@@ -208,10 +206,25 @@ array (
         ),
         8 => 
         array (
+          0 => 
+          array (
+            'name' => 'source_wo',
+            'studio' => 'visible',
+            'label' => 'LBL_SOURCE_WO',
+          ),
+          1 => 
+          array (
+            'name' => 'source_woop',
+            'studio' => 'visible',
+            'label' => 'LBL_SOURCE_WOOP',
+          ),
+        ),
+        9 => 
+        array (
           0 => 'description',
           1 => '',
         ),
-        9 => 
+        10 => 
         array (
           0 => 'wo_lines',
         ),
