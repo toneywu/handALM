@@ -162,6 +162,58 @@
         </div>
         <div class="desktop-toolbar" id="toolbar">
             {if $USE_GROUP_TABS}
+                {*Add by zengchen 20170209*}
+                    <ul class="nav navbar-nav" style="margin-left: 10px">
+                    <li class="topnav all">
+                        <span class="notCurrentTabLeft"></span>
+                        <span class="notCurrentTab">
+                            <a class="dropdown-toggle" id="grouptab_0" data-toggle="dropdown" href="#">{$all_menus}</a>
+                            <span class="notCurrentTabRight"></span>
+                            <ul class="dropdown-menu" role="menu text">
+                                <li style="width: 785px;">
+                                    <div class="row" style="margin: 0">
+                                    <ul class="nav nav-tabs" style="border: 0;" >
+                                    <li class="active" style="border:0;width: 100px;"><a href="#home" data-toggle="tab" style="background: #0d8ad4;color: #FFF;"><strong>导航栏</strong></a></li>
+                                        <li style="border:0;width: 100px;"><a href="#ios" data-toggle="tab" style="background: #0d8ad4;color: #FFF"><strong>所有功能</strong></a></li>
+                                    </ul>
+                                    </div>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active" id="home">
+                                            {foreach from=$exthead item=itemhead name=foo}
+                                            <div class="col-md-3">
+                                                <p>{$itemhead.label}</p>
+                                                {foreach from=$extmenus item=menus}
+                                                {if $itemhead.id eq $menus.parent_id}
+                                                <a href="{$menus.url}"><i class="{$menus.img}"></i> {$menus.label}</a>
+                                                {/if}
+                                                {/foreach}
+                                            </div>
+                                            {/foreach}
+                                        </div>
+                                        <div class="tab-pane fade" id="ios">
+                                        {foreach from=$groupTabs item=modules key=group name=groupList}{capture name=extraparams assign=extraparams}parentTab={$group}{/capture}
+                                        {if $smarty.foreach.groupList.last}
+                                                {foreach from=$modules.modules item=module key=modulekey}
+                                            <div class="col-md-3" style="margin: 0">
+                                        {capture name=moduleTabId assign=moduleTabId}moduleTab_{$smarty.foreach.moduleList.index}_{$module}{/capture}
+                                        {sugar_link id=$moduleTabId module=$modulekey data=$module extraparams=$extraparams}
+                                            </div>
+                                {/foreach}
+                                {foreach from=$modules.extra item=submodulename key=submodule}
+                                            <div class="col-md-3" style="margin: 0">
+                                                <a href="{sugar_link module=$submodule link_only=1 extraparams=$extraparams}">{$submodulename}</a>
+                                            </div>
+                                {/foreach}
+                                        {/if}
+                                        {/foreach}
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </span>
+                    </li>
+                    </ul>
+                    {*End add 20170209*}
                 <ul class="nav navbar-nav">
                     <li class="navbar-brand-container">
                             <a class="navbar-brand with-home-icon" href="index.php?module=Home&action=index">{$APP.LBL_BROWSER_TITLE}</a>
@@ -273,64 +325,15 @@
 
                         {/if}
                     {/foreach}
-                    {*Add by zengchen 20170209*}
-                    <li class="topnav">
-                        <span class="notCurrentTabLeft"></span>
-                        <span class="notCurrentTab">
-                            <a class="dropdown-toggle" id="grouptab_0" data-toggle="dropdown" href="#">{$all_menus}</a>
-                            <span class="notCurrentTabRight"></span>
-                            <ul class="dropdown-menu" role="menu">
-                                <li style="width: 785px;">
-                                    <div class="row" style="margin: 0">
-                                    <ul class="nav nav-tabs" style="border: 0;">
-                                    <li class="active" style="border:0;"><a href="#home" data-toggle="tab" style="background: #0d8ad4;color: #FFF"><strong>导航栏</strong></a></li>
-                                        <li style="border:0"><a href="#ios" data-toggle="tab" style="background: #0d8ad4;color: #FFF"><strong>所有功能</strong></a></li>
-                                    </ul>
-                                    </div>
-                                    <div class="tab-content">
-                                        <div class="tab-pane fade in active" id="home">
-                                            {foreach from=$exthead item=itemhead name=foo}
-                                            <div class="col-md-3">
-                                                <p>{$itemhead.label}</p>
-                                                {foreach from=$extmenus item=menus}
-                                                {if $itemhead.id eq $menus.parent_id}
-                                                <a href="{$menus.url}"><i class="{$menus.img}"></i> {$menus.label}</a>
-                                                {/if}
-                                                {/foreach}
-                                            </div>
-                                            {/foreach}
-                                        </div>
-                                        <div class="tab-pane fade" id="ios">
-                                        {foreach from=$groupTabs item=modules key=group name=groupList}{capture name=extraparams assign=extraparams}parentTab={$group}{/capture}
-                                        {if $smarty.foreach.groupList.last}
-                                                {foreach from=$modules.modules item=module key=modulekey}
-                                            <div class="col-md-3" style="margin: 0">
-                                        {capture name=moduleTabId assign=moduleTabId}moduleTab_{$smarty.foreach.moduleList.index}_{$module}{/capture}
-                                        {sugar_link id=$moduleTabId module=$modulekey data=$module extraparams=$extraparams}
-                                            </div>
-                                {/foreach}
-                                {foreach from=$modules.extra item=submodulename key=submodule}
-                                            <div class="col-md-3" style="margin: 0">
-                                                <a href="{sugar_link module=$submodule link_only=1 extraparams=$extraparams}">{$submodulename}</a>
-                                            </div>
-                                {/foreach}
-                                        {/if}
-                                        {/foreach}
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </span>
-                    </li>
-                    {*End add 20170209*}
+                    
                     {foreach from=$groupTabs item=modules key=group name=groupList}
-                        {capture name=extraparams assign=extraparams}parentTab={$group}{/capture}
-                        <li class="topnav {if $smarty.foreach.groupList.last}all{/if}">
+                        {capture name=extraparams assign=extraparams}parentTab={$group}{/capture}{if $smarty.foreach.groupList.last neq $smarty.foreach.groupList.index}
+                        <li class="topnav">
                             <span class="notCurrentTabLeft">&nbsp;</span><span class="notCurrentTab">
                             <a href="#" id="grouptab_{$smarty.foreach.groupList.index}" class="dropdown-toggle grouptab"
                                data-toggle="dropdown">{$group}</a>
                             <span class="notCurrentTabRight">&nbsp;</span>
-                            <ul class="dropdown-menu" role="menu" {if $smarty.foreach.groupList.last} class="All"{/if}>
+                            <ul class="dropdown-menu" role="menu">
                                 {foreach from=$modules.modules item=module key=modulekey}
                                     <li>
                                         {capture name=moduleTabId assign=moduleTabId}moduleTab_{$smarty.foreach.moduleList.index}_{$module}{/capture}
@@ -343,7 +346,7 @@
                                     </li>
                                 {/foreach}
                             </ul>
-                        </li>
+                        </li>{/if}
                     {/foreach}
                 </ul>
                 {* 7.8 Hide filter menu items when the windows is too small to display them *}
@@ -381,8 +384,8 @@
 
                     $('.desktop-toolbar ul.navbar-nav > li.all').removeClass('hidden');
                     //HandALM如果All菜单非常靠左，就以最左为准，否则以居中
-                    $(".topnav.all .dropdown-menu").css("left", -Math.min($(".topnav.all").position().left, ($(".topnav.all ul.dropdown-menu").width()/2 - $(".topnav.all").width()/2))+100);
-
+                    //$(".topnav.all .dropdown-menu").css("left", -Math.min($(".topnav.all").position().left, ($(".topnav.all ul.dropdown-menu").width()/2 - $(".topnav.all").width()/2))+100);
+                    //modified by zeng 20170222 class=all的标签发生改变
                   };
                 $(document).ready(function() {
                     $(window).resize(windowResize);

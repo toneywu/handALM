@@ -6,6 +6,13 @@ array (
   array (
     'templateMeta' => 
     array (
+      'includes' => 
+      array (
+        0 => 
+        array (
+          'file' => 'modules/HAM_WO_Lines/js/WO_Lines_editview.js',
+        ),
+      ),
       'maxColumns' => '2',
       'widths' => 
       array (
@@ -52,8 +59,9 @@ array (
             'name' => 'contract',
             'studio' => 'visible',
             'label' => 'LBL_CONTRACT',
-			'displayParams' =>array (
+      'displayParams' =>array (
               'initial_filter' => '&contract_account_id_advanced="+encodeURIComponent($("#account_id").val())+"',
+              'call_back_function' => 'getContract',
             ),
           ),
           1 => 
@@ -63,6 +71,7 @@ array (
             'label' => 'LBL_PRODUCT',
             'displayParams' => 
             array (
+              'initial_filter' => '&ham_wo_contract_id="+encodeURIComponent($("#contract_id").val())+"',
               'field_to_name_array' => 
               array (
                 'name' => 'product',
@@ -70,6 +79,7 @@ array (
                 'haa_uom_id_c' => 'uom_id',
                 'primary_uom_c' => 'uom_code',
               ),
+              'call_back_function' => 'getQuantity',
             ),
           ),
         ),

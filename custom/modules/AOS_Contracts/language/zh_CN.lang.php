@@ -1,5 +1,5 @@
 <?php
-// created: 2016-12-27 10:52:48
+// created: 2017-02-22 19:05:40
 $mod_strings = array (
   'LBL_CONTACT' => '人员',
   'LBL_TYPE_HAA_CODES_ID' => '合同类型 (related  ID)',
@@ -36,4 +36,6 @@ $mod_strings = array (
   'LBL_NEXT_ACCOUNT_DAY' => '下次结算日期',
   'LBL_FINAL_ACCOUNT_DAY' => '最后结算日期',
   'LBL_NUMBER_OF_PERIODS' => '合同期数',
+  'LBL_CONTRACT_TEMPLATES_C_HAOS_CONTRACT_TEMPLATES_ID' => '合同模板 (related  ID)',
+  'LBL_CONTRACT_TEMPLATES_C' => '合同模板',
 );

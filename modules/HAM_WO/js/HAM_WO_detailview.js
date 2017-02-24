@@ -55,6 +55,7 @@ function call_ff() {
 		              callback: function(result){
 		              	if(result) {
 				            	//alert('Yup.');
+				            	console.log("saveStatus");
 				                saveStatus($("input[name='record']").val(),$("#target_wo_status").val()); //
 				            }else {
 				                //alert('Nope.');
@@ -124,6 +125,7 @@ function complete_work_order(record){
 	//console.log('index.php?to_pdf=true&module=HAM_WO&action=saveStatusBean&id=' + id+"&status_code="+status_code);
 	console.log(status_code);
 	console.log(global_event_options.contract_completed);
+	console.log("---------------------------");
 	if(status_code=="SUBMITTED"&&global_event_options.contract_completed!=""&&global_event_options.contract_completed=="SUBMITTED"&&$("#contract_id").val()==""){
 		console.log(global_event_options.contract_completed);
 		return_flag=false;
@@ -175,8 +177,28 @@ function complete_work_order(record){
  		}
  	});
  };
-
-
+function checkWoopStatus(wo_id){
+	//alert(record);
+	console.log("checkWoopStatus-----"+wo_id);
+	$.ajax({
+		url: 'index.php?to_pdf=true&module=HAM_WO&action=checkWoopStatus&wo_id=' + wo_id,
+		success: function (data) {
+			//alert("Success");
+			if (data == "1" || data == 1) {
+				console.log("hide");
+				$("#btn_complete").hide();
+			}else{
+				console.log("show");
+				$("#btn_complete").show();
+			}
+			console.log(data);
+		
+		},
+		error: function () { //失败
+			alert('Error loading document');
+		}
+	});
+};
 /*function process_woop(woop_id,wo_id){
 	//alert(record);
 	console.log(woop_id+"-----"+wo_id);
@@ -323,9 +345,20 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
     	if (val!="") {
     		$(this).children().last().find(".listViewTdToolsS1").remove();
     	}
+    	//Add by zhangling 20170222 
+    	if($("#wo_status").val()!="DRAFT"&&$("#wo_status").val()!="RETURNED"){//工单行只有在拟定或退回时可以编辑
+			$(this).children().last().find(".sugar_action_button").remove();
+		}
+		// end Add zhangling 20170222
     });
     //$("#list_subpanel_wo_line table tbody").find("tr:gt(2)").find(".inlineButtons").remove();
     
+    //Add by zhangling 20170222 
+    if($("#wo_status").val()!="DRAFT"&&$("#wo_status").val()!="RETURNED"){//工单行只有在拟定或退回时可以新增
+		 $("#HAM_WO_Lines_新增_button").hide();
+	}
+	 // end Add zhangling 20170222
+
 	//明细页面添加一个按钮
 	var change_btn=$("<input type='button' class='button' id='btn_change_status' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL')+"'>");
 	$("#duplicate_button").after(change_btn);
@@ -350,6 +383,10 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 			complete_work_order($("input[name='record']").val());
 		});
 	}
+
+	//add by liu 2017-2-23 10:33:32 
+     checkWoopStatus($("input[name='record']").val());
+     
 	//add by yuan.chen
 	var reject_woop_btn=$("<input type='button' class='btn_detailview' id='btn_woop_reject' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_WOOP_REJECT_BUTTON_LABEL')+"'>");
 	$("#formgetWOOPQuery").append(reject_woop_btn);

@@ -5,9 +5,34 @@ function setEventTypeReturn(popupReplyData){//选择地点类型后
     call_ff();
 }
 
+function getNowDatetime(){
+   var myDate = new Date();
+   var Y = myDate.getFullYear(); 
+   var M = myDate.getMonth()+1; 
+   var D = myDate.getDate(); 
+   var H = myDate.getHours();
+   var MIN = myDate.getMinutes();
+   var S = myDate.getSeconds();
+   var now = Y
+            +'-'
+            +(M>9?M:'0'+M)
+            +'-'
+            +(D>9?D:'0'+D)
+            +' '
+            +(H>9?H:'0'+H)
+            +':'
+            +(MIN>9?MIN:'0'+MIN)
+            /*+':'
+            +(S>9?S:'0'+S)*/;
+   return now;
+}
 function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"HAM_WO");
     $("a.collapsed").click();
+    if($("#date_actual_start").val()==''){
+        var nowDate = getNowDatetime();
+        $("#date_actual_start").val(nowDate);
+    }
 }
 
 function setAssetPopupReturn(popupReplyData){
