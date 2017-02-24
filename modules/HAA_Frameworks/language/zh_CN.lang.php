@@ -102,4 +102,5 @@ $mod_strings = array (
   'LBL_ASSET_COUNTING_RULE'=>'资产盘点批编号规则',
   'LBL_COUNTING_POLICY_GROUPS' => '盘点策略组',
   'LBL_TASK_TEMPLATES' => '盘点任务模版',
+    'LBL_PERIOD_SETS_NAME' => '会计期日历',
   );

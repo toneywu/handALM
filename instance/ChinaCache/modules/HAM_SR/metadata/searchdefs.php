@@ -6,6 +6,23 @@ array (
   array (
     'basic_search' => 
     array (
+      'sr_number' => 
+      array (
+        'name' => 'sr_number',
+        'default' => true,
+        'label' => 'LBL_SR_NUMBER',
+        'type' => 'varchar',
+        'width' => '10%',
+      ),
+      'sr_status' => 
+      array (
+        'type' => 'enum',
+        'studio' => 'visible',
+        'label' => 'LBL_SR_STATUS',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'sr_status',
+      ),
       'name' => 
       array (
         'name' => 'name',
@@ -34,7 +51,7 @@ array (
         'width' => '10%',
         'name' => 'reporter_org',
         ),
-      'reporter' => 
+     /* 'reporter' => 
       array (
         'type' => 'relate',
         'default' => true,
@@ -44,7 +61,7 @@ array (
         'link' => true,
         'width' => '10%',
         'name' => 'reporter',
-        ),
+        ),*/
       'owned_org' => 
       array (
         'type' => 'relate',
@@ -56,7 +73,7 @@ array (
         'width' => '10%',
         'name' => 'owned_org',
         ),
-      'owned_by' => 
+      /*'owned_by' => 
       array (
         'type' => 'relate',
         'default' => true,
@@ -67,10 +84,27 @@ array (
         'width' => '10%',
         'name' => 'owned_by',
         ),
-   
+   */
     ),
     'advanced_search' => 
     array (
+      'sr_number' => 
+      array (
+        'name' => 'sr_number',
+        'default' => true,
+        'label' => 'LBL_SR_NUMBER',
+        'type' => 'varchar',
+        'width' => '10%',
+      ),
+      'sr_status' => 
+      array (
+        'type' => 'enum',
+        'studio' => 'visible',
+        'label' => 'LBL_SR_STATUS',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'sr_status',
+      ),
       'name' => 
       array (
         'name' => 'name',
@@ -99,7 +133,7 @@ array (
         'width' => '10%',
         'name' => 'reporter_org',
         ),
-      'reporter' => 
+      /*'reporter' => 
       array (
         'type' => 'relate',
         'default' => true,
@@ -109,7 +143,7 @@ array (
         'link' => true,
         'width' => '10%',
         'name' => 'reporter',
-        ),
+        ),*/
       'owned_org' => 
       array (
         'type' => 'relate',
@@ -121,7 +155,7 @@ array (
         'width' => '10%',
         'name' => 'owned_org',
         ),
-      'owned_by' => 
+      /*'owned_by' => 
       array (
         'type' => 'relate',
         'default' => true,
@@ -131,7 +165,7 @@ array (
         'link' => true,
         'width' => '10%',
         'name' => 'owned_by',
-        ),
+        ),*/
       
       /*1 => 
       array (

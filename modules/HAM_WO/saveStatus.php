@@ -15,10 +15,12 @@ if (!defined('sugarEntry') || !sugarEntry)
 $current_id = $_GET['id'];
 $status_code = $_GET['status_code'];
 $ham_wo_bean = BeanFactory :: getBean('HAM_WO', $current_id);
-$ham_wo_bean->wo_status = $status_code;
+//$ham_wo_bean->wo_status = $status_code;
+$wo_status = $status_code;
 //请务必pull request
 if ($status_code == "SUBMITTED" || $status_code == "APPROVED") {
-	$ham_wo_bean->wo_status="APPROVED";
+	//$ham_wo_bean->wo_status="APPROVED";
+	$wo_status = "APPROVED";
 	//工作单审批后会判断计划时间如果没有填写，如果没有进行手工排程，按目标时间进行默认
 	if ($ham_wo_bean->date_schedualed_start == "") { 
 		$ham_wo_bean->date_schedualed_start = $ham_wo_bean->date_target_start; 
@@ -67,6 +69,9 @@ if ($status_code == "SUBMITTED" || $status_code == "APPROVED") {
 	}
 }
 
-$ham_wo_bean->save();
+//$ham_wo_bean->save();
+//$ham_wo_bean->description = "test";
+//这儿调用只保存工单的逻辑,不能用save
+$ham_wo_bean->saveWO(false,"O",$wo_status);
 
 ?>

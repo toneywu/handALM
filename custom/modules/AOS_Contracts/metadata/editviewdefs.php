@@ -235,66 +235,81 @@ array (
         array (
           0 => 
           array (
+            'name' => 'contract_templates_c',
+            'studio' => 'visible',
+            'label' => 'LBL_CONTRACT_TEMPLATES_C',
+            'displayParams' => 
+            array (
+              'field_to_name_array' => 
+              array (
+                'id' => 'haos_contract_templates_id_c',
+                'name' => 'contract_templates_c',
+              ),
+              'call_back_function' => 'setContractTempPopupReturn',
+            ),
+          ),
+          1 => 
+          array (
             'name' => 'contract_revision_c',
             'studio' => 'visible',
             'label' => 'LBL_CONTRACT_REVISION',
             'customCode' => '<input name="contract_revision_c" readonly="readonly" id="contract_revision_c" value="{$contract_revision}"  type="text">',
-          ),
-          1 => 
-          array (
-            'name' => 'number_of_periods_c',
-            'studio' => 'visible',
-            'label' => 'LBL_NUMBER_OF_PERIODS',
           ),
         ),
         10 => 
         array (
           0 => 
           array (
-            'name' => 'attribute1_c',
+            'name' => 'number_of_periods_c',
             'studio' => 'visible',
-            'label' => 'LBL_ATTRIBUTE1_C',
+            'label' => 'LBL_NUMBER_OF_PERIODS',
           ),
           1 => 
           array (
-            'name' => 'attribute2_c',
+            'name' => 'attribute1_c',
             'studio' => 'visible',
-            'label' => 'LBL_ATTRIBUTE2_C',
+            'label' => 'LBL_ATTRIBUTE1_C',
           ),
         ),
         11 => 
         array (
           0 => 
           array (
-            'name' => 'attribute3_c',
+            'name' => 'attribute2_c',
             'studio' => 'visible',
-            'label' => 'LBL_ATTRIBUTE3_C',
+            'label' => 'LBL_ATTRIBUTE2_C',
           ),
           1 => 
           array (
-            'name' => 'attribute4_c',
+            'name' => 'attribute3_c',
             'studio' => 'visible',
-            'label' => 'LBL_ATTRIBUTE4_C',
+            'label' => 'LBL_ATTRIBUTE3_C',
           ),
         ),
         12 => 
         array (
           0 => 
           array (
+            'name' => 'attribute4_c',
+            'studio' => 'visible',
+            'label' => 'LBL_ATTRIBUTE4_C',
+          ),
+          1 => 
+          array (
             'name' => 'attribute5_c',
             'studio' => 'visible',
             'label' => 'LBL_ATTRIBUTE5_C',
           ),
-          1 => 
+        ),
+        13 => 
+        array (
+          0 => 
           array (
             'name' => 'attribute6_c',
             'studio' => 'visible',
             'label' => 'LBL_ATTRIBUTE6_C',
           ),
-        ),
-        13 => 
-        array (
-          0 => 'description',
+          1 => 'description',
         ),
       ),
       'lbl_line_items' => 

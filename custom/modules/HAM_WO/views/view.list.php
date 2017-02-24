@@ -18,8 +18,8 @@ class HAM_WOViewList extends ViewList
 		//echo '<script>alert('.$_GET['error_message'].');</script>';
 	}
     parent::Display();
-    global $db;
-    var_dump($db->lastsql);
+   /* global $db;
+    var_dump($db->lastsql);*/
   }
 
   function processSearchForm(){
