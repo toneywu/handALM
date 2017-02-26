@@ -74,7 +74,7 @@ class HAM_WO extends HAM_WO_sugar {
 		
 		
 		
-		/*if (isset ($this->source_type) && $this->source_type != "") {
+		if (isset ($this->source_type) && $this->source_type != "") {
 			//$this->source_type="";
 			//1 通过合同找合同条目 
 			//2将合同条目插入到工单对象行里面去
@@ -92,7 +92,7 @@ class HAM_WO extends HAM_WO_sugar {
 				$ham_wo_line_bean->description = $contract_product_bean->description;
 				$ham_wo_line_bean->save();
 			}
-		}*/
+		}
 		//当前工单的合同和工单对象行中的合同不匹配的都要删除
 		$woop_beans = BeanFactory :: getBean('HAM_WO_Lines')->get_full_list('', "ham_wo_lines.ham_wo_id = '{$this->id}' and ham_wo_lines.contract_id<>'".$this->contract_id."'");
 		foreach ($woop_beans as $woop_bean) {

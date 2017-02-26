@@ -87,6 +87,37 @@ function assignWoop(id,record){
 }
 
 
+/*function canEditWoop(wo_id){
+	//alert(record);
+	console.log("canEditWoop----------------------");
+	$.ajax({
+		url: 'index.php?to_pdf=true&module=HAM_WO&action=canEditWoop&id=' + wo_id,
+		async:false,
+		success: function (data) {
+			//alert(data);
+			console.log(data);
+			if(data!="0"){
+				var id_list = $.parseJSON(data);
+				console.log(id_list);
+				for(var id in id_list) {
+					
+					$("#"+id).find("a").removeAttr("onclick");
+					//$("#"+id).children('a').attr("disabled","disabled");
+					$("#"+id).find("a").removeAttr("href");
+					$("#"+id).hide();
+					console.log($("#8274c194-b479-fcd1-53e9-58af00f3d425").find("a"));
+				}
+			}else{
+				console.log("++++++++++++======");
+			}
+		},
+		error: function () { //失败
+			alert('Error loading document');
+		}
+	});
+}*/
+
+
 
 function complete_work_order(record){
 	
@@ -179,19 +210,19 @@ function complete_work_order(record){
  };
 function checkWoopStatus(wo_id){
 	//alert(record);
-	console.log("checkWoopStatus-----"+wo_id);
+	//console.log("checkWoopStatus-----"+wo_id);
 	$.ajax({
 		url: 'index.php?to_pdf=true&module=HAM_WO&action=checkWoopStatus&wo_id=' + wo_id,
 		success: function (data) {
 			//alert("Success");
 			if (data == "1" || data == 1) {
-				console.log("hide");
+				//console.log("hide");
 				$("#btn_complete").hide();
 			}else{
 				console.log("show");
 				$("#btn_complete").show();
 			}
-			console.log(data);
+			//console.log(data);
 		
 		},
 		error: function () { //失败
@@ -303,6 +334,7 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 	 if(wo_status!="DRAFT"&&wo_status!="RETURNED"){//工作单只有在拟定或退回时可以删除
 		 $("#delete_button").hide();
 	 }
+     
 
 	 //加载EventType规则
 	 var event_id = $("#hat_event_type_id").data("id-value");
@@ -387,6 +419,7 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 	//add by liu 2017-2-23 10:33:32 
      checkWoopStatus($("input[name='record']").val());
      
+
 	//add by yuan.chen
 	var reject_woop_btn=$("<input type='button' class='btn_detailview' id='btn_woop_reject' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_WOOP_REJECT_BUTTON_LABEL')+"'>");
 	$("#formgetWOOPQuery").append(reject_woop_btn);
@@ -432,6 +465,13 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 		if(woopStatus=="等待前序"){
 			$(woopEdit).removeAttr("href");
 		}
+		//add by liu
+		if(woopStatus=="拟定"){
+			$(woopEdit).removeAttr("href");
+		}
+		if(uname =="认领任务"){
+			$(woopEdit).removeAttr("href");
+		}
 		if (uname!="认领任务"&&woopStatus=="已批准") {
 			var res=getDealStatu(wo_id,action_module,leading);
 			if (res['leader']=="0") {
@@ -453,6 +493,7 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 			}
 		}
 	});
+	//canEditWoop($("input[name='record']").val());
 
 	function getDealStatu(wo_id,module,leading){
 		var url_addr = "index.php?module=HAM_WO&action=getStatu&to_pdf=true";

@@ -1,14 +1,15 @@
 /*********************
 /* 基于U位明细进行绘图
 /***************************/
-
+//$.getScript("custom/resources/JSON/json2.js"); //JASON2
+//$.getScript("cache/include/javascript/sugar_grp_yui_widgets.js"); //old MessageBox
 $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); //MessageBox
 $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
 
 
 var globalServerData;
 
-function showITRacks(node) { //渲染机柜，在首次加载时被调用
+function showITRacks(node){ //渲染机柜，在首次加载时被调用
 	if(typeof node.data.server != "undefined") {
 		//console.log(node.data.server);
 		globalServerData = node.data;
@@ -141,8 +142,7 @@ function openAssetPopup(ln){//本文件为行上选择资产的按钮
       "using_person_desc" : "line_current_using_person_desc",
 */    }
   };
-  //var popupFilter ='&avaliable_it_equipments=true';
-  var popupFilter ='&avaliable_it_equipments=true&asset_status1=Idle&asset_status2=Stocked&owning_org_id_advanced='+$("#rack_poshat_assets_accounts_id").val();
+  var popupFilter ='&avaliable_it_equipments=true';
   open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
 }
 
@@ -169,8 +169,8 @@ function setAssetReturn(popupReplyData){
 
   set_return(popupReplyData);
   if ($("#target_using_org_id").val()!="") {
-  	$("#rack_poshat_assets_accounts_name").val($("#target_using_org").val());
-  	$("#rack_poshat_assets_accounts_id").val($("#target_using_org_id").val())
+  	$("#rack_pos_hat_assets_accounts_name").val($("#target_using_org").val());
+  	$("#rack_pos_hat_assets_accounts_id").val($("#target_using_org_id").val())
   }
 }
 
@@ -233,11 +233,9 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
 
 	return_html +=
       "<span class='input_group ig_using_org'>"+
-
-      "<label id='rack_pos_hat_assets_accounts_name_label'>"+SUGAR.language.get('HIT_Rack_Allocations', 'LBL_ASSET_ACCOUNT')+" <span class='required'>*</span></label>"+
-      "<input class='sqsEnabled' style='width:153px;' autocomplete='off' type='text' name='rack_pos_hat_assets_accounts_name' id='rack_pos_hat_assets_accounts_name' value='' title='' >"+
-      "<input type='hidden' name='rack_pos_hat_assets_accounts_id' id='rack_pos_hat_assets_accounts_id' value='' />"+
-
+      "<label id='rack_poshat_assets_accounts_name_label'>"+SUGAR.language.get('HIT_Rack_Allocations', 'LBL_ASSET_ACCOUNT')+" <span class='required'>*</span></label>"+
+      "<input class='sqsEnabled' style='width:153px;' autocomplete='off' type='text' name='rack_poshat_assets_accounts_name' id='rack_poshat_assets_accounts_name' value='' title='' >"+
+      "<input type='hidden' name='rack_poshat_assets_accounts_id' id='rack_poshat_assets_accounts_id' value='' />"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openUsingOrgPopup();'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>";
 
@@ -289,19 +287,16 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
 	        return_html +='$("#rack_pos_'+propertyName+'").val("'+globalServerData.server[i][propertyName]+'");'
 	      }
 	    }
-	    return_html += "</script>";
+
+		return_html += "</script>";
+
 	}
-    //处理特殊的默认值(有参数传递来的)
-    if($("#target_using_org_id").length && $("#target_using_org_id").val()!="" && $("#target_using_org_id").val()!="undefined") {
+
+    //处理特殊的默认值
+    if($("#target_using_org_id").val()!="") {
     	return_html +="<script>"
         return_html +='$("#rack_pos_hat_assets_accounts_name").val($("#target_using_org").val());'
         return_html +='$("#rack_pos_hat_assets_accounts_id").val($("#target_using_org_id").val());'
-    	return_html +="</script>"
-    }
-
-    if( typeof(globalServerData.server[i])!= 'undefined' && globalServerData.server[i].placeholder=="1") {
-    	return_html +="<script>"
-        return_html +='$("#rack_pos_placeholder").attr("checked", true);'
     	return_html +="</script>"
     }
 
@@ -568,7 +563,7 @@ function savePlaceHolder(i) {
 	    allc_status: "DRAFT",
 	};
 
-	if (i=="undefined") { //插入或更新到当前对象数列中
+	if (i==undefined) { //插入或更新到当前对象数列中
   		globalServerData.server.push(Blocker);
   		i=globalServerData.server.length-1;
 	}else{

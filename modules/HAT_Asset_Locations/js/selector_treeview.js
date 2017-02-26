@@ -345,7 +345,6 @@ function showNodeDetailHTML(node,targetDIV) {
 
 
 function DrawGridPosition(location_id) {
-	console.log("url: 'index.php?to_pdf=true&module=HAT_Gird_Rules&action=DrawGrid&location_id='+location_id+'&tabtype=1',")
 	$.ajax({//读取子地点
 		url: 'index.php?to_pdf=true&module=HAT_Gird_Rules&action=DrawGrid&location_id='+location_id+'&tabtype=1',
 		success: function (data) {

@@ -426,44 +426,7 @@ function save_asset_lines($focus, $beanAsset=null){
                 $beanAsset->save();
                 //以上为常规保存了所有的设备
             }
-            //Add by zhangling 20170224
-            //若当前设备为机柜，重新检查机柜的状态，进行验证，
-            //如果检查的机柜状态与trans行目标资产状态不符，则对trans及当前资产进行重写状态
-            if($beanAsset->enable_it_rack==1&&$focus->target_asset_status=='Idle'){
-               $return_status = checkRackStatus($beanAsset->id);
-               if($return_status!=''&&$return_status!=$focus->target_asset_status){
-                   $beanAsset->asset_status=$return_status;
-                   $focus->target_asset_status=$return_status;
-                   
-               }
-               /*if($return_status=='Idle'){
-                   $beanAsset->using_org_id='';
-                   $focus->target_using_org_id='';
-               }*/
-               $beanAsset->save();
-               $focus->save();
-            }
-            //END Add by zhangling 20170224
         }
-}
-//*****************************************
-//****           检查机柜状态          ****
-//本函数被save_asset_lines调用
-//Add by zhangling 20170224
-//*****************************************//
-function checkRackStatus($asset_id){
-    global $timedate, $db;
-    $sql = 'SELECT count(hra.id) rack_allo_count FROM hit_rack_allocations hra LEFT JOIN hit_racks hr ON hra.hit_racks_id = hr.id WHERE hra.deleted = 0 AND hr.hat_assets_id="'.$asset_id.'"';
-    $result=$db->query($sql);
-    $return_status='';
-    while ($row=$db->fetchByAssoc($result)) { 
-        if($row['rack_allo_count']==0){
-            $return_status='Idle';
-        }else{
-            $return_status='InService';
-        }
-    }
-    return $return_status;
 }
 
 //*****************************************

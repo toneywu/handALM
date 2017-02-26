@@ -99,8 +99,9 @@ $(document).ready(function(){
 	    parseInt(t[2], 10) || null
 	    )).getTime();
 	}
-
-
+    //隐藏实际时长
+    $("#duration_actual").hide();
+    $("#duration_actual").parent().parent().hide();
 /*	SUGAR.util.doWhen("typeof mark_field_disabled == 'function'", function(){
 		mark_field_disabled("next_woop_name",false);
 		mark_field_disabled("next_woop",false);

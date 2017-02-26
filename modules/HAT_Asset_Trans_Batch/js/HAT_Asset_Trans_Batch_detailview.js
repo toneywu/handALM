@@ -96,7 +96,8 @@ function setEventTypeFields() {
 		$("input[id^='line_asset_id']").each(function(){
 			var id_name=$(this).attr("id");
 			var id_index = id_name.split("line_asset_id")[1];
-			if($("#line_deleted"+id_index).val()=="0"){
+			//add by liu 终止使用分配不勾选
+			if($("#line_deleted"+id_index).val()=="0"&&$("#line_inactive_using"+id_index).val()!="1"){
 				json_obj[id_name]=$(this).val();
 			}
 		});
@@ -107,6 +108,8 @@ function setEventTypeFields() {
 		json_data['record']=$("input[name=record]").val();
 		json_data['source_wo_id']=$("#source_wo_id_val").val();
 		json_data['source_woop_id']=$("#source_woop_id_val").val();
+		//add by liu
+		json_data['hat_eventtype_id']=$("#hat_eventtype_id").val();
 		json_data["line_asset_id"]=json_obj;
 		$.ajax({
 			type:"POST",
@@ -142,11 +145,24 @@ function setEventTypeFields() {
 
 
 	 $("#line_items_span").parent("div").prev("div.label").hide();//隐藏事务处理行上的标签
-
-	 if ($("#source_wo_id").val() != "" && $("#source_wo_id").val() != 'undefined') {
+     
+     //update by liu
+     console.log("--source_wo_id:"+$("#source_wo_id").attr("data-id-value"));
+	 console.log("--source_wo_id_val:"+$("#source_wo_id_val").val());
+	 var source_wo_id = '';
+     if ($("#source_wo_id_val").val()!=''&& $("#source_wo_id_val").val() != 'undefined') {
+	 	source_wo_id = $("#source_wo_id_val").val();
+	 }
+	 if (source_wo_id==''&&$("#source_wo_id").text()!=''&& $("#source_wo_id").text() != 'undefined') {
+	 	source_wo_id = $("#source_wo_id").attr("data-id-value");
+	 }
+     //source_wo_id 是一个span标签,没有val,用text
+	 //if ($("#source_wo_id").text() != "" && $("#source_wo_id").text() != 'undefined') {
+	 if (source_wo_id != "" && source_wo_id != 'undefined') {
 		// 如果来源于工作单则显示工作单对象行信息，否则直接隐藏行
 		$("#wo_lines").append("<div id='wo_lines_display'></div>");
-		showWOLines($("#source_wo_id").attr("data-id-value"));
+		//showWOLines($("#source_wo_id").attr("data-id-value"));
+		showWOLines(source_wo_id);
 	} else {
 		//如果当前工单号为空，直接隐藏行
 		$("#wo_lines").closest(".detail-view-row-item").hide();

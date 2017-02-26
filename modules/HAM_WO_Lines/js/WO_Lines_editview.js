@@ -47,8 +47,29 @@ function getContract(popupReplyData){
 	$("#uom_id").val("");
 	
 }
+/**
+* 保存前验证
+*/
+function preValidateFunction(async_bool = false) {
+		var result = true;
+		var quantity_val=$("#quantity").val();
+		if (quantity_val==''||parseInt(quantity_val)==0){
+			result=false;
+			var error_msg='数量不可为空并且不能为0';
+			BootstrapDialog.alert({
+								type : BootstrapDialog.TYPE_DANGER,
+								title : SUGAR.language.get('app_strings',
+										'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+								message : error_msg
+							});
+		}
+		return result;
+}
 
 $(document).ready(function(){
+	SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
+                OverwriteSaveBtn(preValidateFunction);
+            });
 
 	$("#contract").blur(function(){
 		if ($("#contract").val()=="") {
