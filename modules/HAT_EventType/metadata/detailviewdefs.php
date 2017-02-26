@@ -260,11 +260,15 @@ array (
           0=>"change_asset_attribute11",
           1=>"change_asset_attribute12"
         ),
-		7=>
+		    7=>
         array(
           0=>"allocation_flag",
           1=>"no_add_asset_lines_flag",
-        )
+        ),
+        8=>
+        array(
+          0=>"no_lines_inactive_using_flag",
+        ),
       ),
       'lbl_editview_panel3' => 
       array (

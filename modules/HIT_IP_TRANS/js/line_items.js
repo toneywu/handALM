@@ -121,6 +121,46 @@ function selectedLine(selectIn){
 	
 }
 
+//add by liu
+function selectedAll(){
+	//0 代表失效
+	console.log("selectedAll");
+	if($("#all_enable_action").is(':checked')){
+		console.log("checked");
+		//头的状态不为处理完毕
+		if ($("#asset_trans_status").val()!="CLOSED") {
+			for (var i = 0; i < prodln; i++) {
+				$("#line_enable_action"+i).prop("checked",'true');
+				$("#line_status"+i).val("UNEFFECTIVE");
+				$("#line_status_dis"+i).val(SUGAR.language.get('HIT_IP_TRANS', 'LBL_EFFICACY'));
+				var mydate = new Date();
+				var currentDate=mydate.toLocaleString();
+				$("#line_date_end"+i).val(getnowtime());
+				$("#line_enable_action"+i).val('0');
+				$("#line_enable_action_val"+i).val('0');
+				$("#displayed_line_enable_action"+i).attr("checked",true);
+				$("#displayed_line_enable_action"+i).prop("checked",true);
+				document.getElementById("displayed_line_enable_action"+i).checked = true;
+			}
+		}
+	}else{
+		console.log("unchecked");
+		if ($("#asset_trans_status").val()!="CLOSED") {
+			for (var i = 0; i < prodln; i++) {
+				$("#line_enable_action"+i).removeAttr("checked");
+				$("#line_date_end"+i).val(null);
+				$("#line_status"+i).val("EFFECTIVE");
+				$("#line_status_dis"+i).val(SUGAR.language.get('HIT_IP_TRANS', 'LBL_EFFECTIVE'));
+
+				$("#displayed_line_enable_action"+i).removeAttr("checked");
+				$("#line_enable_action"+i).val('1');
+				$("#line_enable_action_val"+i).val('1');
+			}
+		}
+	}
+	
+}
+
 
 function openHitIpPopup(ln) {// 本文件为行上选择IP按钮
 	lineno = ln;
@@ -459,6 +499,9 @@ function openLocationPopup(ln) {
 }
 
 function insertTransLineHeader(tableid) {
+	$("#line_items_label").hide();// 隐藏SugarCRM字段
+	// alert(SUGAR.language.get('HAT_Asset_Trans',
+	// 'LBL_HAT_ASSETS_HAT_ASSET_TRANS_FROM_HAT_ASSETS_TITLE'));
 
 	tablehead = document.createElement("thead");
 	tablehead.id = tableid + "_head";
@@ -1483,7 +1526,6 @@ function insertTransLineFootor(tableid) {
 
 	var footer_row = tablefooter.insertRow(-1);
 	var footer_cell = footer_row.insertCell(0);
-
 	footer_cell.scope = "row";
 	footer_cell.colSpan = "21";
 	footer_cell.innerHTML = "<input id='btnAddNewLine' type='button' class='button btn_del' onclick='addNewLine(\""
@@ -1498,9 +1540,12 @@ function insertTransLineFootor(tableid) {
 			+ "' />"
 			+ "<input id='btnAddLine' type='button' class='button btn_del' onclick='btnAddAllocLine()' value='+ "
 			+ SUGAR.language.get('HIT_IP_TRANS', 'LBL_BTN_ADD_ALLOC_TRANS_LINE')
-			+ "' />";
+			+ "' />"
+			+ "<span class='button btn_del'>所有行失效 <input id='all_enable_action'  value='' title='全部失效' onclick='selectedAll()' type='checkbox'></span>";
 	// TODO:添加一个Checkbox用于显示和隐藏当前组织、人员、地点……
 }
+
+
 /**
  * 添加事务处理行
  * 

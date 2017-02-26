@@ -142,4 +142,5 @@ $mod_strings = array (
   'LBL_CONTRACT_COMPLETED'=>'请提供合同信息',
   'LBL_NO_ADD_ASSET_LINES_FLAG'=>'是否不可添加资产事务处理行',
   'LBL_NO_ADD_IP_LINES_FLAG'=>'是否不可添加网络事务处理行',
+  'LBL_NO_LINES_INACTIVE_USING_FLAG'=>'是否可批量终止使用分配',
 );

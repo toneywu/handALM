@@ -45,7 +45,7 @@ function openAssetPopup(ln){//本文件为行上选择资产的按钮
     }
   };
 
-  var global_eventOptions = jQuery.parseJSON($("#eventOptions").val()); 
+  var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());	
 
 
   var popupFilter = '&current_mode='+global_eventOptions.asset_scope.toLowerCase()
@@ -81,8 +81,7 @@ function setAssetReturn(popupReplyData){
       data:{idArray:popupReplyData},
       type:"POST",
       success: function (msg) {
-
-        var returnData=JSON.parse(msg);
+        var returnData = JSON.parse(msg);
         $("#line_enable_partial_allocation"+returnData['ln']).val(returnData['enable_partial_allocation']);
       },
       error: function () { //失败
@@ -225,7 +224,7 @@ function openRackPopup(ln){
 }
 
 function addNewAssetLine(){
-  var popupRequestData = {
+	var popupRequestData = {
    "call_back_function" : "setAddNewLineBtnReturn",
    "form_name" : "EditView",
    "field_to_name_array" : {
@@ -276,8 +275,8 @@ function addNewAssetLine(){
 
 
 function setAddNewLineBtnReturn(popupReplyData) { //批量添加资产的POPUP返回处理
-  set_return(popupReplyData);
-  var idJson = popupReplyData.selection_list;
+	set_return(popupReplyData);
+	var idJson = popupReplyData.selection_list;
     $.ajax({
       url:'index.php?to_pdf=true&module=HAT_Asset_Trans&action=LoadSelectedAssets',
       data:{idArray:idJson},
@@ -296,8 +295,8 @@ function setAddNewLineBtnReturn(popupReplyData) { //批量添加资产的POPUP�
         alert('Error loading document');
       }
     });
-  // 设置行号
-  resetLineNum();
+	// 设置行号
+	resetLineNum();
 }
 
 
@@ -326,7 +325,7 @@ function insertLineData(asset_trans_line, current_view){ //将数据写入到对
   var ln = 0;
   //if(asset_trans_line.id != '0' && asset_trans_line.id !== ''){
     ln = insertTransLineElements("lineItems", current_view);
-  console.log(asset_trans_line);
+	console.log(asset_trans_line);
     for(var propertyName in asset_trans_line) {
       //这里直接遍历所有的属性（因此需要建立与Bean属性同名的各个字段）
       //console.log(propertyName+"="+asset_trans_line[propertyName]);
@@ -347,9 +346,9 @@ function insertLineData(asset_trans_line, current_view){ //将数据写入到对
     }
 
     renderTransLine(ln);
-  //$("#line_target_cost_center"+ln).val(asset_trans_line.target_cost_center);
-  //$("#line_target_cost_center_id"+ln).val(asset_trans_line.target_cost_center_id);
-  //console.log(asset_trans_line.target_cost_center);
+	//$("#line_target_cost_center"+ln).val(asset_trans_line.target_cost_center);
+	//$("#line_target_cost_center_id"+ln).val(asset_trans_line.target_cost_center_id);
+	//console.log(asset_trans_line.target_cost_center);
   //}
 }
 
@@ -637,7 +636,7 @@ return prodln - 1;
 }
 
 function generateLineDesc(ln){
-  //用于生成说明文字
+	//用于生成说明文字
   //例如XXX字段由XX变更为XXX
   var LineDesc="";
   LineDesc += LineDescElement("line_","target_asset_status","current_asset_status","LBL_ASSET_STATUS",ln,"target_asset_status","current_asset_status");
@@ -726,8 +725,8 @@ if(target_objval_name=="target_asset_status"){
       }
     }
   } else if ( $("#"+prefix_name+target_objval_name+ln).val()!="") {
-    //如果当前对象为空，并且目标不为空
-    //将显示为XXX字段变更为XXX
+  	//如果当前对象为空，并且目标不为空
+  	//将显示为XXX字段变更为XXX
     result  = SUGAR.language.get('HAT_Assets', obj_label);
       result += SUGAR.language.get('HAT_Asset_Trans', 'LBL_CHANGE_TO');//" is changed to "
       if (target_obj_val=="") {
@@ -782,7 +781,7 @@ function resetEditorFields(ln) {
       $("#line_target_using_org_id"+ln).val($("#line_current_using_org_id"+ln).val());
     }
     if (eventOptions.keep_seperated_allc_rack_using_org=="1" && $("#line_enable_partial_allocation"+ln).val()=="1") {
-      //当前为散U机柜且EventType定义散U机柜不变使用组织
+    	//当前为散U机柜且EventType定义散U机柜不变使用组织
       $("#line_target_using_org"+ln).val($("#line_current_using_org"+ln).val());
       $("#line_target_using_org_id"+ln).val($("#line_current_using_org_id"+ln).val());
     }
@@ -906,33 +905,55 @@ function insertTransLineFootor(tableid) {
 
     footer_cell.scope="row";
     footer_cell.colSpan="5";
+    var all_inactive_using_html ="";
+    if(checkLinesInactiveUsingFlag()==1){
+      all_inactive_using_html="<span class='button btn_del'>终止所有行使用分配 <input id='all_inactive_using'  value='' title='终止使用分配' onclick='inactiveUsingAllLine()' type='checkbox'></span>";
+    }
 
     footer_cell.innerHTML="<input id='btnAddNewLine' type='button' class='button btn_del' onclick='addNewLine(\"" +tableid+ "\")' value='+ "+SUGAR.language.get('HAT_Asset_Trans', 'LBL_BTN_ADD_TRANS_LINE')+"' />"
     +"<input id='btnNewLine' type='button' class='button btn_del' onclick='addNewAssetLine()' value='+ "+SUGAR.language.get('HAT_Asset_Trans', 'LBL_BTN_ADD_NEW_LINE')+"' />"
-    +"<span class='button btn_del'>终止所有行使用分配 <input id='all_inactive_using'  value='' title='终止使用分配' onclick='inactiveUsingAllLine()' type='checkbox'></span>";
-    
+    +all_inactive_using_html;
   }
+}
+
+//add by liu
+function checkLinesInactiveUsingFlag(){
+  $hat_eventtype_id = $("#hat_eventtype_id").val();
+  console.log("hat_eventtype_id="+$hat_eventtype_id);
+  $.ajax({
+   url:'index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=checkLinesInactiveUsingFlag&hat_eventtype_id='+$hat_eventtype_id,
+   success: function (data) {
+    if (data == "1") {
+      return 1;
+    }else{
+      return 0;
+    }
+      },
+      error: function () { //失败
+        alert('Error loading document');
+      }
+    });
 }
 
 function getWOTargetDate(ln){
   $wo_id = $("#source_wo_id").val();
   console.log("wo_id="+$wo_id);
   console.log('index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=getWOInfos&ham_wo_id='+$wo_id);
-  $.ajax({
+	$.ajax({
    url:'index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=getWOInfos&ham_wo_id='+$wo_id,
    success: function (data) {
     console.log(data);
     var obj = $.parseJSON(data);
-        //console.log("which Line number = "+ln);
-        //console.log(obj);
-        //console.log(obj.date_target_finish);
-        $("#line_date_start"+ln).val(obj.date_target_start);
-        $("#line_date_end"+ln).val(obj.date_target_finish);
-      },
-      error: function () { //失败
-        alert('Error loading document');
-      }
-    });
+				//console.log("which Line number = "+ln);
+				//console.log(obj);
+				//console.log(obj.date_target_finish);
+				$("#line_date_start"+ln).val(obj.date_target_start);
+				$("#line_date_end"+ln).val(obj.date_target_finish);
+			},
+			error: function () { //失败
+				alert('Error loading document');
+			}
+		});
 }
 
 function addNewLine(tableid) {
@@ -992,9 +1013,9 @@ function LineEditorShow(ln){ //显示行编辑器（先自动关闭所有的行�
   $("#asset_trans_line1_displayed"+ln).hide();
   $("#asset_trans_editor"+ln).show();
   if($("#target_using_org_id").val()!=null){
-    //console.log($("#target_using_org_id").val());
-    $("#line_target_using_org_id"+ln).val($("#target_using_org_id").val());
-    $("#line_target_using_org"+ln).val($("#target_using_org").val());
+	  //console.log($("#target_using_org_id").val());
+	  $("#line_target_using_org_id"+ln).val($("#target_using_org_id").val());
+	  $("#line_target_using_org"+ln).val($("#target_using_org").val());
   }
 
 }
@@ -1041,23 +1062,20 @@ function getnowtime() {//TODO 和hit_ip_trans中的一样，移动到公共函�
     if($("#all_inactive_using").is(':checked')){
       console.log("checked");
       for (var i = 0; i < prodln; i++) {
-        //行的状态不为已完成才修改
-        if ($("#line_trans_status"+i).val()!='CLOSED') {
-          document.getElementById("line_inactive_using"+i).checked = true;
-          var mydate = new Date();
-          var currentDate=mydate.toLocaleString();
-          $("#line_date_end"+i).val(getnowtime());
-          $("#line_inactive_using"+i).val('1');
-        }
+
+        document.getElementById("line_inactive_using"+i).checked = true;
+        var mydate = new Date();
+        var currentDate=mydate.toLocaleString();
+        $("#line_date_end"+i).val(getnowtime());
+        $("#line_inactive_using"+i).val('1');
       }
     }else{
       console.log("unchecked");
       for (var i = 0; i <= prodln; i++) {
-        if ($("#line_trans_status"+i).val()!='CLOSED') {
-          $("#line_inactive_using"+i).removeAttr("checked");
-          $("#line_date_end"+i).val("");
-          $("#line_inactive_using"+i).val('0');
-        }
+
+        $("#line_inactive_using"+i).removeAttr("checked");
+        $("#line_date_end"+i).val("");
+        $("#line_inactive_using"+i).val('0');
       }
     }
     

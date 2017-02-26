@@ -4,7 +4,7 @@ $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.
 $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
 function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"HIT_IP_TRANS_BATCH");
-    $(".expandLink").click();
+    $("a.collapsed").click();
 }
 
 var prodln = 0;
@@ -34,6 +34,25 @@ function setEventTypePopupReturn(popupReplyData){
 	
 }
 
+//add by liu 是否允许批量失效
+function checkLinesInactiveUsingFlag(){
+  $hat_eventtype_id = $("#hat_eventtype_id").val();
+  console.log("hat_eventtype_id="+$hat_eventtype_id);
+  $.ajax({
+   url:'index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=checkLinesInactiveUsingFlag&hat_eventtype_id='+$hat_eventtype_id,
+   async:false,
+   success: function (data) {
+    if (data == "1") {
+      $("#all_enable_action").parent().show();
+    }else{
+      $("#all_enable_action").parent().hide();
+    }
+      },
+  error: function () { //失败
+    alert('Error loading document');
+  }
+  });
+}
 
 function showWOLines(wo_id) {
     console.log('index.php?to_pdf=true&module=HAM_WO&action=getWOLiness&id=' + wo_id);
@@ -64,6 +83,7 @@ function setTargetOwningOrgPopupReturn(popupReplyData){
 
 function setEventTypeFields() {
 	console.log("setEventTypeFields = "+$("#hat_eventtype_id").val());
+	checkLinesInactiveUsingFlag();
 	$.ajax({//
 		url: 'index.php?to_pdf=true&module=HAT_EventType&action=getTransSetting&id=' + $("#hat_eventtype_id").val(),//e74a5e34-906f-0590-d914-57cbe0e5ae89
 		async: false,
@@ -76,7 +96,7 @@ function setEventTypeFields() {
 			for(var i in obj) {
 				$("#"+i).val(obj[i]);//向隐藏的字段中复制值，从而所有的EventType值都会提供到隐藏的字段中
 			}
-			resetEventType(data);
+			resetEventType();
 		},
 		error: function () { //失败
 			alert('Error loading document');
@@ -84,20 +104,8 @@ function setEventTypeFields() {
 	})
 }
 
-function resetEventType(data){
-	var global_eventOptions = jQuery.parseJSON(data);
-
-	if (global_eventOptions.no_add_ip_lines_flag == "1"){
-	 	$("#btnAddNewLine").attr("disabled","disabled"); 
-	 	$("#btnCopyLine").attr("disabled","disabled");
-	 	$("#btnAddLine").attr("disabled","disabled");
-	 	
-	}else{
-		$("#btnAddNewLine").removeAttr("disabled"); 
-	 	$("#btnCopyLine").removeAttr("disabled");
-	 	$("#btnAddLine").removeAttr("disabled");
-	}
-}
+function resetEventType(){
+};
 
 function setWoPopupReturn(popupReplyData){
 	set_return(popupReplyData);
@@ -174,7 +182,6 @@ function preValidateFunction(async_bool = false) {
 
 $(document).ready(function(){
 	
-	$("#line_items_span").parent().prev().hide();//现在的主题,隐藏事务处理行上的标签
 	//改写Save事件，在Save之前加入数据校验
 	SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
 		OverwriteSaveBtn(preValidateFunction);//ff_include.js 注意preValidateFunction是一个Function，在此引用时不加（）

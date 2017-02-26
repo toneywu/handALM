@@ -1,15 +1,14 @@
 /*********************
 /* 基于U位明细进行绘图
 /***************************/
-//$.getScript("custom/resources/JSON/json2.js"); //JASON2
-//$.getScript("cache/include/javascript/sugar_grp_yui_widgets.js"); //old MessageBox
+
 $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); //MessageBox
 $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
 
 
 var globalServerData;
 
-function showITRacks(node){ //渲染机柜，在首次加载时被调用
+function showITRacks(node) { //渲染机柜，在首次加载时被调用
 	if(typeof node.data.server != "undefined") {
 		//console.log(node.data.server);
 		globalServerData = node.data;
@@ -290,7 +289,8 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
 	        return_html +='$("#rack_pos_'+propertyName+'").val("'+globalServerData.server[i][propertyName]+'");'
 	      }
 	    }
-
+	    return_html += "</script>";
+	}
     //处理特殊的默认值(有参数传递来的)
     if($("#target_using_org_id").length && $("#target_using_org_id").val()!="" && $("#target_using_org_id").val()!="undefined") {
     	return_html +="<script>"
@@ -568,7 +568,7 @@ function savePlaceHolder(i) {
 	    allc_status: "DRAFT",
 	};
 
-	if (i==undefined) { //插入或更新到当前对象数列中
+	if (i=="undefined") { //插入或更新到当前对象数列中
   		globalServerData.server.push(Blocker);
   		i=globalServerData.server.length-1;
 	}else{

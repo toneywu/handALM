@@ -227,16 +227,27 @@ class HAM_WOOP extends HAM_WOOP_sugar {
 					$hit_ip_trans_batch_bean = BeanFactory :: getBean('HIT_IP_TRANS_BATCH')->get_full_list("date_entered desc", "hit_ip_trans_batch.source_woop_id='" . $this->id . "'");
 					if (count($hit_ip_trans_batch_bean) != 0) {
 						$it_trans_batch_id = $hit_ip_trans_batch_bean[0]->id;
-						$woop_fields['ACT_MODULE'] = '<a href="index.php?module=' . $this->act_module . '&record=' . $it_trans_batch_id . '&action=EditView&woop_id=' . $this->id . '">' .  translate('LBL_TAKE_ACTION', 'HAM_WOOP')  . '</a>';
+						//updated by zhangling 20170226
+						if($woop_status == "COMPLETED"){
+							$woop_fields['ACT_MODULE'] = '<a href="index.php?module=' . $this->act_module . '&record=' . $it_trans_batch_id . '&action=DetailView&woop_id=' . $this->id . '">' .  translate('LBL_TAKE_ACTION', 'HAM_WOOP')  . '</a>';
+						}else{
+							$woop_fields['ACT_MODULE'] = '<a href="index.php?module=' . $this->act_module . '&record=' . $it_trans_batch_id . '&action=EditView&woop_id=' . $this->id . '">' .  translate('LBL_TAKE_ACTION', 'HAM_WOOP')  . '</a>';
+						}
+						//End updated by zhangling 20170226
 					}
-				} else
-					if (strtoupper($this->act_module) == 'HAT_ASSET_TRANS_BATCH') {
-						$asset_trans_beans = BeanFactory :: getBean('HAT_Asset_Trans_Batch')->get_full_list("date_entered desc", "hat_asset_trans_batch.source_woop_id='" . $this->id . "'");
-						if (count($asset_trans_beans) != 0) {
-							$asset_trans_id = $asset_trans_beans[0]->id;
+				} else if (strtoupper($this->act_module) == 'HAT_ASSET_TRANS_BATCH') {
+					$asset_trans_beans = BeanFactory :: getBean('HAT_Asset_Trans_Batch')->get_full_list("date_entered desc", "hat_asset_trans_batch.source_woop_id='" . $this->id . "'");
+					if (count($asset_trans_beans) != 0) {
+						$asset_trans_id = $asset_trans_beans[0]->id;
+						//updated by zhangling 20170226
+						if($woop_status == "COMPLETED"){
+							$woop_fields['ACT_MODULE'] = '<a href=index.php?module=' . $this->act_module . '&record=' . $asset_trans_id . '&action=DetailView&woop_id=' . $this->id . '">' . translate('LBL_TAKE_ACTION', 'HAM_WOOP') . '</a>';
+						}else{
 							$woop_fields['ACT_MODULE'] = '<a href=index.php?module=' . $this->act_module . '&record=' . $asset_trans_id . '&action=EditView&woop_id=' . $this->id . '">' . translate('LBL_TAKE_ACTION', 'HAM_WOOP') . '</a>';
 						}
+						//End updated by zhangling 20170226
 					}
+				}
 			}
 			if($this->act_module=="HIT_IP_Trans_Batch"){
 				$woop_fields['ACT_MODULE'] =$app_list_strings['ham_woop_moduleList']["HIT_IP_TRANS_BATCH"];

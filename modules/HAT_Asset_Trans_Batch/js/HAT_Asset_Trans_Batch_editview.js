@@ -93,6 +93,7 @@ function getOwningOrgId(){
 }
 
 function setEventTypeFields() {
+	checkLinesInactiveUsingFlag();
 	$.ajax({//
 		url: 'index.php?to_pdf=true&module=HAT_EventType&action=getTransSetting&id=' + $("#hat_eventtype_id").val(),//e74a5e34-906f-0590-d914-57cbe0e5ae89
 		async: false,
@@ -295,6 +296,25 @@ function check_repeat(ip_array)
    return /(\x0f[^\x0f]+)\x0f[\s\S]*\1/.test("\x0f"+ip_array.join("\x0f\x0f") +"\x0f");
 }
 
+//add by liu 是否允许批量失效
+function checkLinesInactiveUsingFlag(){
+  $hat_eventtype_id = $("#hat_eventtype_id").val();
+  console.log("hat_eventtype_id="+$hat_eventtype_id);
+  $.ajax({
+   url:'index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=checkLinesInactiveUsingFlag&hat_eventtype_id='+$hat_eventtype_id,
+   async:false,
+   success: function (data) {
+    if (data == "1") {
+      $("#all_inactive_using").parent().show();
+    }else{
+      $("#all_inactive_using").parent().hide();
+    }
+      },
+  error: function () { //失败
+    alert('Error loading document');
+  }
+  });
+}
 
 function check_quantity(){
 		var error_msg="";
@@ -305,17 +325,25 @@ function check_quantity(){
 		$("input[id^='line_asset_id']").each(function(){
 			var id_name=$(this).attr("id");
 			var id_index = id_name.split("line_asset_id")[1];
-			if($("#line_deleted"+id_index).val()=="0"){
+			//3)终止使用分配不勾选
+			console.log(id_name);
+			if($("#line_deleted"+id_index).val()=="0" && $("#line_inactive_using"+id_index).val()!="1"){
 				json_obj[id_name]=$(this).val();
+				console.log($(this).val());
 			}
 		});
 
 		var json_data ={};
 
 		json_data['asset_trans_status']=$("#asset_trans_status").val();
-		json_data['record']=$("input[name=record]").val();
+		json_data['record']=$("input[name='record']").val();
 		json_data['source_wo_id']=$("#source_wo_id").val();
 		json_data['source_woop_id']=$("#source_woop_id").val();
+		json_data['hat_eventtype_id']=$("#hat_eventtype_id").val();
+		//json_data['fromview']="EditView";
+        console.log($("input[name=record]").val()+"=============================");
+		console.log(json_obj);
+		console.log("++++++++++++++++++++++++++++++++++++");
 		json_data["line_asset_id"]=json_obj;
 		$.ajax({
 			type:"POST",
