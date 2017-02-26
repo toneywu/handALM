@@ -17,6 +17,7 @@ class HAOS_Revenues_QuotesViewList extends ViewList
     }
 
 	function display(){
+
 		echo '<script src="modules/HAOS_Revenues_Quotes/js/HAOS_Revenues_Quotes_listview.js"></script>';
 		parent::display();
 		echo '<script>
@@ -30,15 +31,16 @@ class HAOS_Revenues_QuotesViewList extends ViewList
 		echo "<script>
 			if($(\"#createInvoiceBtn\").length==0){
 			var createInvBtn=$('<input id=\"createInvoiceBtn\" type=\"button\" value=\"创建发票\" onclick=\"createInvoices()\">');
-			createInvBtn.insertBefore('#selectedRecordsTop');
+			createInvBtn.insertBefore('#select_actions_disabled_top');
 			}
 		</script>";
+
 		echo "<script>
 			function createInvoices(){
 				var bool=false;//是否有选择，默认没有
 				var num=0;
 				var data_array=new Array();
-				$('.footable tbody').find(':checkbox').each(function(){
+				$('table.list').find(':checkbox').each(function(){
 					if($(this).is(':checked')){
 						data_array[num]=$(this).val();
 						bool=true;
@@ -58,7 +60,7 @@ class HAOS_Revenues_QuotesViewList extends ViewList
 							else if(val['type']==0){
 								alert('客户与人员信息必须一致！');
 							}else{
-								location.href='?module=AOS_Invoices&action=editview&data='+val['value']+'&cord='+val['cord'];
+								location.href='?module=AOS_Invoices&action=editview&data='+val['value']+'&cord='+val['cord']+'&amount_c=0&source_code_c=HAOS_Revenues_Quotes';
 							}
 						}
 					});

@@ -32,9 +32,12 @@ function createRevenue($revenueRow,$quoteRow){
     $revenue = new HAOS_Revenues_Quotes();
     $revenueRow['id'] = '';
     $revenueRow['haa_frameworks_id_c'] = $revenueRow['haa_frameworks_id_c'];
+    $revenueRow['prepay_flag'] = $revenueRow['prepay_flag'];
+    $revenueRow['deposit_flag'] = $revenueRow['deposit_flag'];
     $revenueRow['revenue_quote_number'] = '';
     $revenueRow['date_entered'] = '';
     $revenueRow['date_modified'] = '';
+    $revenueRow['period_name'] = $revenueRow['period_name'];
     //处理事件类型
     if ($revenueRow['event_type']!=''){
         $bean_types = BeanFactory :: getBean('HAT_EventType')->retrieve_by_string_fields(array (

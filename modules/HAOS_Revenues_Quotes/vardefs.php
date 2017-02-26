@@ -141,6 +141,27 @@ $dictionary['HAOS_Revenues_Quotes'] = array(
         'quicksearch' => 'enabled',
         'studio' => 'visible',
         ),
+      'period_name' => 
+  array (
+    'required' => false,
+    'name' => 'period_name',
+    'vname' => 'LBL_PERIOD_NAME',
+    'type' => 'varchar',
+    'massupdate' => 0,
+    'no_default' => false,
+    'comments' => '',
+    'help' => '',
+    'importable' => 'true',
+    'duplicate_merge' => 'disabled',
+    'duplicate_merge_dom_value' => '0',
+    'audited' => false,
+    'inline_edit' => true,
+    'reportable' => true,
+    'unified_search' => false,
+    'merge_filter' => 'disabled',
+    'len' => '255',
+    'size' => '20',
+  ),
       'source_code' => 
       array (
         'required' => true,

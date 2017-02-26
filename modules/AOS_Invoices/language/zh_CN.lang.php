@@ -202,6 +202,8 @@ $mod_strings = array (
     'LBL_SHIPPING_TAX_USDOLLAR' => '物流税点(默认货币)',
     'LBL_SHIPPING_TAX_AMT_USDOLLAR' => '物流税费(默认货币)',
     'LBL_GRAND_TOTAL_USDOLLAR' => '总计(默认货币)',
-    'LBL_INVOICE_TO' => '发票给'
+    'LBL_INVOICE_TO' => '发票给',
+      'LBL_DEPOSIT_FLAG_C'=>'是否押金',
+  'LBL_PREPAY_FLAG_C'=>'是否预付',
 );
 ?>

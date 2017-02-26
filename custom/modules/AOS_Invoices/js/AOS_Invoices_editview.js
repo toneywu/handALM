@@ -47,7 +47,7 @@ $(document).ready(function() {
     }
     //End add 20161219
     //Add by zhangling 20170214
-    if(($("#status").val()=="Paid"||$("#status").val()=="PartedPaid")&& parseInt($("#amount_c").val())!=0){
+    if(document.getElementsByName("record")[0].value!=""&&($("#status").val()=="Paid"||$("#status").val()=="PartedPaid")&& parseInt($("#amount_c").val())!=0){
        $("#EditView_tabs input").attr("readonly",true);
        $("#EditView_tabs input").css("background-Color","#efefef");
        $("#EditView_tabs textarea").attr("readonly",true);
@@ -162,4 +162,42 @@ function getAjaxData(recordId,urlStr) {
         }
     });
 }
-//End add 20161219
+//End add 20161219 
+
+//add by tangqi 20170224
+function returnDeposit(){
+  /*  if ($("#closed_date_c").text()!="") {
+        return false;
+    }*/
+    var record=$("input[name='record']").val();
+    var url="?module=AOS_Invoices&action=returnDeposit&to_pdf=true";
+    if(confirm("是否退回押金?"))//弹出确定/取消对话框
+      {
+        getAjaxData(record,url);
+        window.location.reload();//不管是与否，都刷新页面
+      }else
+      {
+        return false;
+      }
+}
+
+function getPeriod(){
+    var dateTime=document.getElementById("invoice_date").value;
+    var frame_id=document.getElementById("haa_frameworks_id_c").value;
+    if(dateTime)
+    {
+        $.ajax({
+            async:false,
+            url: 'index.php?to_pdf=true&module=AOS_Invoices&action=getPeriod',
+            data: '&dateTime='+dateTime+'&frame_id='+frame_id,
+            type:'POST',
+            success: function (data) {//调用方法。
+                //data=$.parseJSON(data);
+                //data=JSON.parse(data);
+                $("#period_name_c").val(data); //将取出来的头ID字段放到页面上的一个隐藏文本框中。
+            }
+    });
+
+    }
+}
+//end add by tangqi 20170224

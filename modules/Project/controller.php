@@ -23,8 +23,49 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 class ProjectController extends SugarController {
     //Loads the gantt view
-    function action_view_GanttChart() {
+    /*function action_view_GanttChart() {
         $this->view = 'GanttChart';
+    }*/
+
+    function action_view_GanttChart(){
+        $this->view ="Gantt";
+    }
+
+    function action_view_SaveGantt(){
+        $this->pre_gantt();
+        $gantt = new JSONGanttConnector($res);
+        $gantt->render_links("gantt_links","id","source,target,type");
+        $tasks_fields="start_date,text,duration,progress,sortorder,parent,assigned,milestone,project_id";
+        $sql_tasks="SELECT ".$tasks_fields." FROM gantt_tasks WHERE project_id='".$_GET['project_id']."'";
+        $gantt->render_sql(
+            $sql_tasks,
+            "id",
+            $tasks_fields
+        );
+        mysql_close();
+    }
+
+    function action_view_GanttData(){
+        $this->pre_gantt();
+        $gantt = new JSONGanttConnector($res);
+        $gantt->mix("open", 1);
+        $gantt->render_links("gantt_links","id","source,target,type");
+        $tasks_fields="start_date,id,text,duration,progress,sortorder,parent,assigned,milestone,project_id";
+        $sql_tasks="SELECT ".$tasks_fields." FROM gantt_tasks WHERE project_id='".$_GET['project_id']."'";
+        $gantt->render_sql(
+            $sql_tasks,
+            "id",
+            $tasks_fields
+        );
+        mysql_close();
+    }
+
+    private function pre_gantt(){
+        include 'modules/Project/codebase/connector/gantt_connector.php';
+        include 'config.php';
+        $res=mysql_connect($sugar_config["dbconfig"]["db_host_name"],$sugar_config["dbconfig"]["db_user_name"],$sugar_config["dbconfig"]["db_password"]);
+        mysql_select_db($sugar_config["dbconfig"]["db_name"]);
+        mysql_query("set names 'utf8'");
     }
 
     function action_generate_chart(){

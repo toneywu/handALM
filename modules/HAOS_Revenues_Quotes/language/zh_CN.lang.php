@@ -138,4 +138,5 @@ $mod_strings = array (
   'LBL_SOURCE_CLASS' => '来源子类',
   'LBL_REVENUE_QUOTE_NAME' => '收支名称备用',
   'LBL_CREATE'=>'创建发票',
+    'LBL_PERIOD_NAME' => '期间',
   );

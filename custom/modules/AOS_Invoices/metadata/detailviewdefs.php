@@ -38,6 +38,10 @@ array (
           array (
             'customCode' => '<input type="button" class="button" onClick="setCloseDate();" value="{$MOD.LBL_INVOICE_CLOSE}">',
           ),
+          8 => 
+          array (
+            'customCode' => '<input type="button" class="button" onClick="returnDeposit();" value="{$MOD.LBL_RETURN_DEPOSIT}">',
+          ),
         ),
       ),
       'maxColumns' => '2',
@@ -126,60 +130,73 @@ array (
         array (
           0 => 
           array (
-            'name' => 'assigned_user_name',
-            'label' => 'LBL_ASSIGNED_TO_NAME',
+            'name' => 'period_name_c',
+            'label' => 'LBL_PERIOD_NAME_C',
           ),
           1 => 
           array (
-            'name' => 'status',
-            'label' => 'LBL_STATUS',
+            'name' => 'assigned_user_name',
+            'label' => 'LBL_ASSIGNED_TO_NAME',
           ),
         ),
         4 => 
         array (
           0 => 
           array (
-            'name' => 'unpaied_amount_c',
-            'label' => 'LBL_UNPAIED_AMOUNT',
+            'name' => 'status',
+            'label' => 'LBL_STATUS',
           ),
           1 => 
           array (
-            'name' => 'clear_date_c',
-            'label' => 'LBL_CLEAR_DATE',
+            'name' => 'unpaied_amount_c',
+            'label' => 'LBL_UNPAIED_AMOUNT',
           ),
         ),
         5 => 
         array (
           0 => 
           array (
-            'name' => 'closed_date_c',
-            'label' => 'LBL_CLOSED_DATE',
+            'name' => 'clear_date_c',
+            'label' => 'LBL_CLEAR_DATE',
           ),
           1 => 
           array (
-            'name' => 'late_days_c',
-            'label' => 'LBL_LATE_DAYS',
+            'name' => 'closed_date_c',
+            'label' => 'LBL_CLOSED_DATE',
           ),
         ),
         6 => 
         array (
           0 => 
           array (
-            'name' => 'source_code_c',
-            'label' => 'LBL_SOURCE_CODE',
+            'name' => 'late_days_c',
+            'label' => 'LBL_LATE_DAYS',
           ),
           1 => 
           array (
-            'name' => 'event_type_c',
-            'label' => 'LBL_EVENT_TYPE',
+            'name' => 'source_code_c',
+            'label' => 'LBL_SOURCE_CODE',
           ),
         ),
         7 => 
         array (
           0 => 
           array (
+            'name' => 'event_type_c',
+            'label' => 'LBL_EVENT_TYPE',
+          ),
+          1 => 
+          array (
             'name' => 'source_reference_c',
             'label' => 'LBL_SOURCE_REFERENCE',
+          ),
+        ),
+        8 => 
+        array (
+          0 => 
+          array (
+            'name' => 'return_deposit_date_c',
+            'label' => 'LBL_RETURN_DEPOSIT_DATE_C',
           ),
           1 => 
           array (

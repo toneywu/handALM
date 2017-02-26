@@ -31,7 +31,7 @@
  */
 
  function insertLineItems(product){
-    $('#line_items_label').hide();
+    $("#line_items_span").parent().prev().hide();//隐藏SugarCRM字段
     var type = 'product_';
     var ln = 0;
     var gid = product.group_id;

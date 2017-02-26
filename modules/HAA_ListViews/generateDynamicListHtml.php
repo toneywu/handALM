@@ -37,12 +37,25 @@ class generateDynamicListHtml {
 		if ($frameworkId==''){
 			$frameworkId=$_SESSION["current_framework"];
 		}
+		if ($frameworkId==''){
+			$frameworkId=$current_user->haa_frameworks_id1_c;
+		}
+		
 		$this->listviewSet["is_correct"]= true;
 		$this->listviewSet["error_msg"]='';
-		$beanListview = BeanFactory :: getBean('HAA_ListViews')->retrieve_by_string_fields(array (
-			'listview_code' => $listviewCode,
-			'haa_frameworks_id_c' => $frameworkId
-			));
+		if ($frameworkId!=''){
+			$beanListview = BeanFactory :: getBean('HAA_ListViews')->retrieve_by_string_fields(array (
+				'listview_code' => $listviewCode,
+				'haa_frameworks_id_c' => $frameworkId
+				));
+		}
+		else
+		{
+			$beanListview = BeanFactory :: getBean('HAA_ListViews')->retrieve_by_string_fields(array (
+				'listview_code' => $listviewCode,
+				));
+		}
+
 		if ($beanListview) { 
 			$this->listViewId=isset($beanListview->id)?$beanListview->id:'';
 		}

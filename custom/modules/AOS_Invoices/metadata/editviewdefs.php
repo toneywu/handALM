@@ -167,28 +167,29 @@ array (
         array (
           0 => 
           array (
-            'name' => 'clear_date_c',
-            'label' => 'LBL_CLEAR_DATE',
+            'name' => 'period_name_c',
+            'label' => 'LBL_PERIOD_NAME_C',
+            'customCode' => '<input id="period_name_c" name="period_name_c" onclick="getPeriod()" size="30" maxlength="255" value="" title="" type="text" readonly>',
           ),
           1 => 
           array (
-            'name' => 'closed_date_c',
-            'label' => 'LBL_CLOSED_DATE',
-            'customCode' => '<input class="date_input" autocomplete="off" name="closed_date_c" id="closed_date_c" value="" title="" tabindex="0" readonly="readonly" type="text">',
+            'name' => 'clear_date_c',
+            'label' => 'LBL_CLEAR_DATE',
           ),
         ),
         4 => 
         array (
           0 => 
           array (
-            'name' => 'late_days_c',
-            'label' => 'LBL_LATE_DAYS',
-            'customCode' => '{$fields.late_days_c.value}',
+            'name' => 'closed_date_c',
+            'label' => 'LBL_CLOSED_DATE',
+            'customCode' => '<input class="date_input" autocomplete="off" name="closed_date_c" id="closed_date_c" value="" title="" tabindex="0" readonly="readonly" type="text">',
           ),
           1 => 
           array (
-            'name' => 'assigned_user_name',
-            'label' => 'LBL_ASSIGNED_TO_NAME',
+            'name' => 'late_days_c',
+            'label' => 'LBL_LATE_DAYS',
+            'customCode' => '{$fields.late_days_c.value}',
           ),
         ),
         5 => 
@@ -198,19 +199,34 @@ array (
             'name' => 'status',
             'label' => 'LBL_STATUS',
             'customCode' => '<select name="status" id="status" title="">
-<option label="已付" value="Paid">已付</option>
 <option label="未付" value="Unpaid">未付</option>
+<option label="已付" value="Paid">已付</option>
 <option label="已取消" value="Cancelled">已取消</option>
 <option label="部分付款" value="PartedPaid">部分付款</option>
+<option label="已退回" value="Returned">已退回</option>
 </select>&nbsp;&nbsp;&nbsp;&nbsp;<input name="amount_c" id="amount_c" size="30" maxlength="26" value="" title="" tabindex="0" type="text">',
           ),
           1 => 
           array (
-            'name' => 'unpaied_amount_c',
-            'label' => 'LBL_UNPAIED_AMOUNT',
+            'name' => 'assigned_user_name',
+            'label' => 'LBL_ASSIGNED_TO_NAME',
           ),
         ),
         6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'unpaied_amount_c',
+            'label' => 'LBL_UNPAIED_AMOUNT',
+          ),
+          1 => 
+          array (
+            'name' => 'return_deposit_date_c',
+            'label' => 'LBL_RETURN_DEPOSIT_DATE_C',
+            'customCode' => '<span id="span_return_deposit_date_c" class="input-group date"><input readonly id="return_deposit_date_c" class="date_input" autocomplete="off" name="return_deposit_date_c" value="" title="" tabindex="" type="text"><span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>',
+          ),
+        ),
+        7 => 
         array (
           0 => 
           array (

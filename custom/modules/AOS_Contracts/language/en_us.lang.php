@@ -31,4 +31,8 @@ $mod_strings = array (
    'LBL_HAOS_REVENUES_QUOTES'=>'收支计费项',
   'LBL_NEXT_ACCOUNT_DAY'=>'下次结算日期',
   'LBL_FINAL_ACCOUNT_DAY'=>'最后结算日期',
+    'LBL_COLLECT_DEPOSIT'=>'收取押金',
+  'LBL_COLLECT_PREPAY'=>'收取预付款',
+  'LBL_DEPOSIT_FLAG_C'=>'是否押金',
+  'LBL_PREPAY_FLAG_C'=>'是否预付',
   );

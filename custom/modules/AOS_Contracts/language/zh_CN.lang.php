@@ -38,4 +38,8 @@ $mod_strings = array (
   'LBL_NUMBER_OF_PERIODS' => '合同期数',
   'LBL_CONTRACT_TEMPLATES_C_HAOS_CONTRACT_TEMPLATES_ID' => '合同模板 (related  ID)',
   'LBL_CONTRACT_TEMPLATES_C' => '合同模板',
+  'LBL_COLLECT_DEPOSIT'=>'收取押金',
+  'LBL_COLLECT_PREPAY'=>'收取预付款',
+  'LBL_DEPOSIT_FLAG_C'=>'是否押金',
+  'LBL_PREPAY_FLAG_C'=>'是否预付',
 );

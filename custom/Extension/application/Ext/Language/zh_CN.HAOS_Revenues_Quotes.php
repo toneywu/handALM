@@ -52,8 +52,9 @@ $app_list_strings['contract_status_list']=array (
 
 
 $app_list_strings['settlement_period_list']=array (
-  'Once' => '一次结清',
+  'Once' => '一次性',
   'Monthly' => '按月',
+  'Year' => '按年',
   );
 
 

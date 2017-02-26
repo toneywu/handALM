@@ -40,7 +40,9 @@ class HAOS_Revenues_QuotesViewEdit extends ViewEdit {
 		addToValidate("EditView", "product_product_list_price0","float", true,SUGAR.language.get(module_sugar_grp1, "LBL_PRODUCT_LIST_PRICE"));
 		addToValidate("EditView", "product_product_unit_price0","float", true,SUGAR.language.get(module_sugar_grp1, "LBL_PRODUCT_UNIT_PRICE"));
 		addToValidate("EditView", "product_product_total_price0","float", true,SUGAR.language.get(module_sugar_grp1, "LBL_PRODUCT_TOTAL_PRICE"));
+		document.getElementById("period_name").value="'.$this->bean->period_name.'";
 	</script>';
+	
 }
 
 

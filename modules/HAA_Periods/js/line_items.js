@@ -113,7 +113,7 @@ z1.innerHTML  =
   var startDateHTML='<link rel="stylesheet" type="text/css" href="custom/resources/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">'+  
   '<span class="input_group"><span class="input-group date calender" id="span_line_exp_date'+prodln+'" >'+
   "<label>"+SUGAR.language.get('HAA_Periods', 'LBL_START_DATE')+" <span class='required'>*</span></label>"+
-  '<input class="date_input" autocomplete="off" style="width:180px;"  name="line_start_date[' + prodln + ']" id="line_start_date' + prodln + '" value="" title="" tabindex="116" type="text" onblur="validateStartAndEndDate(this.id,' + prodln + ')">'+
+  '<input class="date_input" autocomplete="off" style="width:180px;"  name="line_start_date[' + prodln + ']" id="line_start_date' + prodln + '" value="" title="" tabindex="116" type="text" >'+
   '<span class="input-group-addon">'+
   '<span class="glyphicon glyphicon-calendar"></span>'+
   '</span>'+
@@ -123,7 +123,7 @@ z1.innerHTML  =
 
   var endDateHTML= '<span class="input_group"><span class="input-group date calender" id="span_end_date'+prodln+'" >'+
   "<label>"+SUGAR.language.get('HAA_Periods', 'LBL_END_DATE')+" <span class='required'>*</span></label>"+
-  '<input class="date_input" autocomplete="off" style="width:180px;" name="line_end_date[' + prodln + ']" id="line_end_date' + prodln + '" value="" title="" tabindex="116" type="text" onblur="validateStartAndEndDate(this.id,' + prodln + ')">'+
+  '<input class="date_input" autocomplete="off" style="width:180px;" name="line_end_date[' + prodln + ']" id="line_end_date' + prodln + '" value="" title="" tabindex="116" type="text" >'+
   
   '<span class="input-group-addon">'+
   '<span class="glyphicon glyphicon-calendar"></span>'+

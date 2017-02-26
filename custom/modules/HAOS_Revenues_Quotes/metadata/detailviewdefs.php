@@ -138,60 +138,64 @@ array (
           ),
           1 => 
           array (
-            'name' => 'due_date',
-            'label' => 'LBL_DUE_DATE',
+            'name' => 'period_name',
+            'label' => 'LBL_PERIOD_NAME',
           ),
         ),
         3 => 
         array (
           0 => 
           array (
-            'name' => 'clear_status',
-            'studio' => 'visible',
-            'label' => 'LBL_CLEAR_STATUS',
+            'name' => 'due_date',
+            'label' => 'LBL_DUE_DATE',
           ),
           1 => 
           array (
-            'name' => 'cleared_status',
-            'label' => 'LBL_CLEARED_STATUS',
+            'name' => 'clear_status',
+            'studio' => 'visible',
+            'label' => 'LBL_CLEAR_STATUS',
           ),
         ),
         4 => 
         array (
           0 => 
           array (
-            'name' => 'deposit_flag',
-            'label' => 'LBL_DEPOSIT_FLAG',
+            'name' => 'cleared_status',
+            'label' => 'LBL_CLEARED_STATUS',
           ),
           1 => 
           array (
-            'name' => 'prepay_flag',
-            'label' => 'LBL_PREPAY_FLAG',
+            'name' => 'deposit_flag',
+            'label' => 'LBL_DEPOSIT_FLAG',
           ),
         ),
         5 => 
         array (
           0 => 
           array (
-            'name' => 'bill_id',
-            'label' => 'LBL_BILL_ID',
+            'name' => 'prepay_flag',
+            'label' => 'LBL_PREPAY_FLAG',
           ),
           1 => 
           array (
-            'name' => 'invoice_number',
-            'studio' => 'visible',
-            'label' => 'LBL_INVOICE_NUMBER',
+            'name' => 'bill_id',
+            'label' => 'LBL_BILL_ID',
           ),
         ),
         6 => 
         array (
           0 => 
           array (
+            'name' => 'invoice_number',
+            'studio' => 'visible',
+            'label' => 'LBL_INVOICE_NUMBER',
+          ),
+          1 => 
+          array (
             'name' => 'invoice_line_number',
             'studio' => 'visible',
             'label' => 'LBL_INVOICE_LINE_NUMBER',
           ),
-          1 => '',
         ),
       ),
       'lbl_line_items_panel1' => 
