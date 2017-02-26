@@ -2,7 +2,7 @@
 
 	if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
-    class ChinaCache_CUX {//这是针对CC特殊的业务场景
+    class ChinaCache_CUX_HAT_Asset_Trans {//这是针对CC特殊的业务场景
         /**
          * @param $bean
          * @param $event
@@ -12,14 +12,13 @@
 	   public function cc_FillAttr9($bean, $event, $arguments) {
 
 		    global $db, $timedate;
-echo "111111111111";
+
 		    if ($bean->trans_status=='CLOSED') {
 
 			    $sql="SELECT ha.id, ha.attribute9 attribute9 FROM hat_assets ha, hit_racks hr WHERE ha.id  = hr.`hat_assets_id` AND hr.deleted= 0 AND hr.enable_partial_allocation = 0 AND ha.id = '".$bean->asset_id."' AND ha.`enable_it_rack` = '1' AND ha.deleted = 0";
 			    //如果存在非散U的机柜，则需要进一步处理
 			    $result=$db->query($sql);
 
-			    echo "2222222222222".$sql;
 			    //如果有值说明当前为机柜，需要在机柜对应的Attribute9上进行处理
 			    while ($row=$db->fetchByAssoc($result)) {
 			        $bean->current_asset_attribute9 = $row['attribute9'];
@@ -27,8 +26,6 @@ echo "111111111111";
 			        if (empty($bean -> target_using_org_id) || ($bean->inactive_using == 1 && $bean->date_end <= $timedate->nowDB())) {
 			            //如果当前使用组织为空，则将应当的Attribute9清空
 			            $bean->target_asset_attribute9 = '';
-
-echo "333333333333";
 
 			        } else {
 			        	//如果当前使用组织不为空，则试图取出事务单对应的WO上的合同信息
@@ -46,8 +43,6 @@ echo "333333333333";
 			                  AND hat.`asset_id` = '".$bean->asset_id."'
 			                  AND hwl.deleted= 0 
 			                LIMIT 0,1";
-
-				    echo "444444444444444".$sql2;
 
 			            $result2=$db->query($sql2);
 			            //读取出当前Header对应的所有行记录

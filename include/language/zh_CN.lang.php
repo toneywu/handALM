@@ -1603,7 +1603,7 @@ $app_strings = array (
     'LBL_EMAIL_IMPORT_FAIL'                 => '导入失败，该消息已导入或已从服务器删除',
 
     'LBL_LINK_NONE'=> '无',
-    'LBL_LINK_ALL'=> '全部',
+    'LBL_LINK_ALL'=> '全部功能',
     'LBL_LINK_RECORDS'=> '记录',
     'LBL_LINK_SELECT'=> '选择',
     'LBL_LINK_ACTIONS'=> '操作',

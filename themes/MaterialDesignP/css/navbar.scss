@@ -36,7 +36,7 @@
   .dropdown-menu {
     font-size: 10px;
     background: $navbar-main-menu-bg;
-    padding: 4px 10px 4px 10px;
+    padding: 8px 10px 4px 10px;
     margin-top: 0;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
@@ -50,10 +50,10 @@
 
       a {
         display: block;
-        font-size: $navbar-topnav-font-size;
-        background-color: $navbar-main-menu-bg;
+        font-size: $navbar-topnav-font-size - 1;
+        background-color: transparent;
         color: $navbar-menu-link-color;
-        padding: 12px 15px 12px 15px;
+        padding: 9px 7px;/* 12px 15px 12px 15px; */
         margin: 0;
         /* border-bottom: 1px solid $navbar-menu-seperator; */
         letter-spacing: 0;
@@ -2053,6 +2053,7 @@
 
   .desktop-toolbar {
     width: 70%;
+    margin-left: 15px;
   }
 
   .desktop-bar {
@@ -2061,10 +2062,6 @@
     text-align: right;
     float: right;
     width: 28%;
-  }
-
-  .desktop-toolbar .navbar-brand-container {
-    margin-left: 30px;
   }
 
   .desktop-bar > .toolbar {
@@ -2133,6 +2130,18 @@
     background-image: none, url("../../../../index.php?entryPoint=getImage&themeName=MaterialDesignP&imageName=p_user_icon.svg"), url("../../../../index.php?entryPoint=getImage&themeName=MaterialDesignP&imageName=p_user_icon.png");
 
   }
+}
+
+.navbar-nav .topnav .navbar-brand {
+  line-height: 60px;
+  color: #efefef;
+  height: 60px;
+  padding: 20px 10px 5px 10px;
+  display: inline-flex;
+}
+.navbar-nav .topnav.all .navbar-brand {
+  font-size:22px;
+  padding: 17px 10px 5px 10px;
 }
 
 .topnav #overflow-menu > li.with-actions .dropdown-menu {

@@ -9,7 +9,7 @@
         //如果没有TAB页就把第1个Panel添加到最上方
             basic_ojb = $("#top-panel--1 .detail-view-row .detail-view-row-item");
             $(".panel-content").find('.panel').first().hide();
-            $(".nav-tabs").hide();
+            $(".detail-view .nav-tabs").hide();
         }
 
         $(".detail-view").prepend("<div id='header_content' class='row'></div>");

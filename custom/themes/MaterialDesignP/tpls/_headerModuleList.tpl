@@ -161,27 +161,25 @@
             </div>
         </div>
         <div class="desktop-toolbar" id="toolbar">
+            <ul class="nav navbar-nav">
             {if $USE_GROUP_TABS}
-                {*Add by zengchen 20170209*}
-                    <ul class="nav navbar-nav" style="margin-left: 10px">
+                {*Add by zengchen 20170209 HANDALM式的菜单导航栏*}
                     <li class="topnav all">
-                        <span class="notCurrentTabLeft"></span>
-                        <span class="notCurrentTab">
-                            <a class="dropdown-toggle" id="grouptab_0" data-toggle="dropdown" href="#">{$all_menus}</a>
+                            <a class="dropdown-toggle navbar-brand btn-lg" id="grouptab_0" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-th"></i></a>
                             <span class="notCurrentTabRight"></span>
                             <ul class="dropdown-menu" role="menu text">
-                                <li style="width: 785px;">
-                                    <div class="row" style="margin: 0">
-                                    <ul class="nav nav-tabs" style="border: 0;" >
-                                    <li class="active" style="border:0;width: 100px;"><a href="#home" data-toggle="tab" style="background: #0d8ad4;color: #FFF;"><strong>导航栏</strong></a></li>
-                                        <li style="border:0;width: 100px;"><a href="#ios" data-toggle="tab" style="background: #0d8ad4;color: #FFF"><strong>所有功能</strong></a></li>
+                                <li>
+                                    <div class="row">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#navigation_menu" data-toggle="tab">{$APP.LBL_NAV_MENU}</a></li>
+                                        <li><a href="#ios" data-toggle="tab">{$APP.LBL_LINK_ALL}</a></li>
                                     </ul>
                                     </div>
                                     <div class="tab-content">
-                                        <div class="tab-pane fade in active" id="home">
+                                        <div class="tab-pane fade in active" id="navigation_menu">
                                             {foreach from=$exthead item=itemhead name=foo}
                                             <div class="col-md-3">
-                                                <p>{$itemhead.label}</p>
+                                                <h2>{$itemhead.label}</h2>
                                                 {foreach from=$extmenus item=menus}
                                                 {if $itemhead.id eq $menus.parent_id}
                                                 <a href="{$menus.url}"><i class="{$menus.img}"></i> {$menus.label}</a>
@@ -212,11 +210,10 @@
                             </ul>
                         </span>
                     </li>
-                    </ul>
                     {*End add 20170209*}
-                <ul class="nav navbar-nav">
-                    <li class="navbar-brand-container">
-                            <a class="navbar-brand with-home-icon" href="index.php?module=Home&action=index">{$APP.LBL_BROWSER_TITLE}</a>
+
+                    <li class="topnav">
+                            <a class="navbar-brand" href="index.php?module=Home&action=index"><i class="glyphicon glyphicon-home"></i></a>
                     </li>
                     {assign var="groupSelected" value=false}
                     {foreach from=$moduleTopMenu item=module key=name name=moduleList}

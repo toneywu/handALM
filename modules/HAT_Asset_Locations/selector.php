@@ -32,6 +32,19 @@
 		overflow: scroll;
 		display: block;
 	}
+	#workbench_mid {
+		height:600px;
+		float:left;
+		background-color:#efefef;
+		overflow: scroll;
+		display: none;
+	}
+
+	#workbench_mid .table_box tr td, #workbench_mid .table_box tr td div {
+		font-size: 10px;
+		width: 100px;
+	}
+
 	#node_details {
 		padding: 20px;
 		overflow:auto;
@@ -329,6 +342,8 @@
 			a tree
 		</ul>
 		<div id="cuxMap"></div>
+	</div>
+	<div id="workbench_mid" style="float:left;">
 	</div>
 	<div id="node_details" style="float:left;">
 	</div>

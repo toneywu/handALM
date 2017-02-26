@@ -293,17 +293,26 @@ function btn_search_clicked() {
 	});
 
 }
+
 function showNodeDetailHTML(node,targetDIV) {
+
+	if (typeof(node.data.special_mode)!='undefined') {
+		showGridPanel();
+		DrawGridPosition(node.id)
+	} else {
+		hideGridPanel();
+	}
+
 	//加载每个节点的详细内容
 	var varHTML = "";
 	varHTML ="<h3>"+(node.detailed_name)+"</h3>";
 	if (node.type=='location'||node.type=='asset') {
-		//显示主要动作按钮
 
+		//显示主要动作按钮
 		if (current_mode=="view") {
 			varHTML+="<div class='detail_action_panel'>";
 			for (index = 0; index < node.data.btn.length; ++index) {
-			    varHTML+="<a href='index.php?"+node.data.btn[index]['link']+"' class='button'>"+node.data.btn[index]['lab']+"</a>";
+			    varHTML+="<a href='"+node.data.btn[index]['link']+"' class='button'>"+node.data.btn[index]['lab']+"</a>";
 			}
 		} else {
 			varHTML+=showNodeDetailBtn(node);
@@ -325,12 +334,30 @@ function showNodeDetailHTML(node,targetDIV) {
 	}
 	targetDIV.html(varHTML);
 	//读取机柜信息
-	showITRacks(node);
+	if( typeof (node.data.rackid) != "undefined") {
+		showITRacks(node);
+	}
 
 	if (current_mode=="rackposition") {//如果当前模式是选择U位，则出现U位选择的按钮
 		$("#rack_frame").after(showITRacksForm(node));
 	}
 }
+
+
+function DrawGridPosition(location_id) {
+	console.log("url: 'index.php?to_pdf=true&module=HAT_Gird_Rules&action=DrawGrid&location_id='+location_id+'&tabtype=1',")
+	$.ajax({//读取子地点
+		url: 'index.php?to_pdf=true&module=HAT_Gird_Rules&action=DrawGrid&location_id='+location_id+'&tabtype=1',
+		success: function (data) {
+			$("#workbench_mid").html(data);
+		},
+		error: function () { //失败
+			alert('Error loading document');
+		}
+	})
+}
+
+
 
 function showNodeDetailBtn(node) {
 	//如果是在选择模块下（参数current_mode!="view")。Ajax不会返回HTML形式的Buttons

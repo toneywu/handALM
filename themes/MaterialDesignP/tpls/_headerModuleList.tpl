@@ -280,7 +280,7 @@
                     <li class="topnav">
                         <span class="notCurrentTabLeft"></span>
                         <span class="notCurrentTab">
-                            <a class="dropdown-toggle" id="grouptab_0" data-toggle="dropdown" href="#" style="padding-top: 10px;">{$all_menus}</a>
+                            <a class="dropdown-toggle" id="grouptab_0" data-toggle="dropdown" href="#">{$all_menus}</a>
                             <span class="notCurrentTabRight"></span>
                             <ul class="dropdown-menu" role="menu" style="max-width: 700px; width: 700px; min-width: 185px">
                                 <li style="width: 100%">
