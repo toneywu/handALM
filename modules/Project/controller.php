@@ -32,7 +32,11 @@ class ProjectController extends SugarController {
     }
 
     function action_view_SaveGantt(){
-        $this->pre_gantt();
+        include 'modules/Project/codebase/connector/gantt_connector.php';
+        include 'config.php';
+        $res=mysql_connect($sugar_config["dbconfig"]["db_host_name"],$sugar_config["dbconfig"]["db_user_name"],$sugar_config["dbconfig"]["db_password"]);
+        mysql_select_db("gantt");
+        mysql_query("set names 'utf8'");
         $gantt = new JSONGanttConnector($res);
         $gantt->render_links("gantt_links","id","source,target,type");
         $tasks_fields="start_date,text,duration,progress,sortorder,parent,assigned,milestone,project_id";
@@ -46,7 +50,11 @@ class ProjectController extends SugarController {
     }
 
     function action_view_GanttData(){
-        $this->pre_gantt();
+        include 'modules/Project/codebase/connector/gantt_connector.php';
+        include 'config.php';
+        $res=mysql_connect($sugar_config["dbconfig"]["db_host_name"],$sugar_config["dbconfig"]["db_user_name"],$sugar_config["dbconfig"]["db_password"]);
+        mysql_select_db("gantt");
+        mysql_query("set names 'utf8'");
         $gantt = new JSONGanttConnector($res);
         $gantt->mix("open", 1);
         $gantt->render_links("gantt_links","id","source,target,type");
@@ -58,14 +66,6 @@ class ProjectController extends SugarController {
             $tasks_fields
         );
         mysql_close();
-    }
-
-    private function pre_gantt(){
-        include 'modules/Project/codebase/connector/gantt_connector.php';
-        include 'config.php';
-        $res=mysql_connect($sugar_config["dbconfig"]["db_host_name"],$sugar_config["dbconfig"]["db_user_name"],$sugar_config["dbconfig"]["db_password"]);
-        mysql_select_db($sugar_config["dbconfig"]["db_name"]);
-        mysql_query("set names 'utf8'");
     }
 
     function action_generate_chart(){
