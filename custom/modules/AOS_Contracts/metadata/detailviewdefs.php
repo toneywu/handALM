@@ -23,18 +23,18 @@ array (
           3 => 'FIND_DUPLICATES',
           4 => 
           array (
-            'customCode' => '<input type="hidden" class="button" onClick="showPopup(\'pdf\');" value="{$MOD.LBL_PRINT_AS_PDF}">',
+            'customCode' => '<input type="button" class="button" onClick="showPopup(\'pdf\');" value="{$MOD.LBL_PRINT_AS_PDF}">',
           ),
           5 => 
           array (
-            'customCode' => '<input type="hidden" class="button" onClick="showPopup(\'emailpdf\');" value="{$MOD.LBL_EMAIL_PDF}">',
+            'customCode' => '<input type="button" class="button" onClick="showPopup(\'emailpdf\');" value="{$MOD.LBL_EMAIL_PDF}">',
           ),
-          /*6 => 
+          6 => 
           array (
-            'customCode' => '<input type="hidden" class="button" onClick="this.form.action.value=\'createToRevenues\';" value="{$MOD.LBL_CREATE_REVENUE}">',
+            'customCode' => '<input type="submit" class="button" onClick="this.form.action.value=\'createToRevenues\';" value="{$MOD.LBL_CREATE_REVENUE}">',
             'sugar_html' => 
             array (
-              'type' => 'hidden',
+              'type' => 'submit',
               'value' => '{$MOD.LBL_CREATE_REVENUE}',
               'htmlOptions' => 
               array (
@@ -45,7 +45,41 @@ array (
                 'name' => 'Create to Revenue',
               ),
             ),
-          ),*/
+          ),
+          7=> 
+          array (
+            'customCode' => '<input type="submit" class="button" onClick="this.form.action.value=\'collectDeposit \';" value="{$MOD.LBL_COLLECT_DEPOSIT}">',
+            'sugar_html' => 
+            array (
+              'type' => 'submit',
+              'value' => '{$MOD.LBL_COLLECT_DEPOSIT}',
+              'htmlOptions' => 
+              array (
+                'class' => 'button',
+                'id' => 'collect_deposit_button',
+                'title' => '{$MOD.LBL_COLLECT_DEPOSIT}',
+                'onclick' => 'this.form.action.value=\'collectDeposit\';',
+                'name' => 'Collect Deposit',
+              ),
+            ),
+          ),
+          8=> 
+          array (
+            'customCode' => '<input type="submit" class="button" onClick="this.form.action.value=\'collectPrepay \';" value="{$MOD.LBL_COLLECT_PREPAY}">',
+            'sugar_html' => 
+            array (
+              'type' => 'submit',
+              'value' => '{$MOD.LBL_COLLECT_PREPAY}',
+              'htmlOptions' => 
+              array (
+                'class' => 'button',
+                'id' => 'collect_prepay_button',
+                'title' => '{$MOD.LBL_COLLECT_PREPAY}',
+                'onclick' => 'this.form.action.value=\'collectPrepay\';',
+                'name' => 'Collect Prepay',
+              ),
+            ),
+          ),
         ),
       ),
       'maxColumns' => '2',
@@ -229,65 +263,71 @@ array (
         array (
           0 => 
           array (
-            'name' => 'contract_revision_c',
+            'name' => 'contract_templates_c',
             'studio' => 'visible',
-            'label' => 'LBL_CONTRACT_REVISION',
+            'label' => 'LBL_CONTRACT_TEMPLATES_C',
           ),
           1 => 
           array (
-            'name' => 'number_of_periods_c',
+            'name' => 'contract_revision_c',
             'studio' => 'visible',
-            'label' => 'LBL_NUMBER_OF_PERIODS',
+            'label' => 'LBL_CONTRACT_REVISION',
           ),
         ),
         10 => 
         array (
           0 => 
           array (
-            'name' => 'attribute1_c',
+            'name' => 'number_of_periods_c',
             'studio' => 'visible',
-            'label' => 'LBL_ATTRIBUTE1_C',
+            'label' => 'LBL_NUMBER_OF_PERIODS',
           ),
           1 => 
           array (
-            'name' => 'attribute2_c',
+            'name' => 'attribute1_c',
             'studio' => 'visible',
-            'label' => 'LBL_ATTRIBUTE2_C',
+            'label' => 'LBL_ATTRIBUTE1_C',
           ),
         ),
         11 => 
         array (
           0 => 
           array (
-            'name' => 'attribute3_c',
+            'name' => 'attribute2_c',
             'studio' => 'visible',
-            'label' => 'LBL_ATTRIBUTE3_C',
+            'label' => 'LBL_ATTRIBUTE2_C',
           ),
           1 => 
           array (
-            'name' => 'attribute4_c',
+            'name' => 'attribute3_c',
             'studio' => 'visible',
-            'label' => 'LBL_ATTRIBUTE4_C',
+            'label' => 'LBL_ATTRIBUTE3_C',
           ),
         ),
         12 => 
         array (
           0 => 
           array (
+            'name' => 'attribute4_c',
+            'studio' => 'visible',
+            'label' => 'LBL_ATTRIBUTE4_C',
+          ),
+          1 => 
+          array (
             'name' => 'attribute5_c',
             'studio' => 'visible',
             'label' => 'LBL_ATTRIBUTE5_C',
           ),
-          1 => 
+        ),
+        13 => 
+        array (
+          0 => 
           array (
             'name' => 'attribute6_c',
             'studio' => 'visible',
             'label' => 'LBL_ATTRIBUTE6_C',
           ),
-        ),
-        13 => 
-        array (
-          0 => 'description',
+          1 => 'description',
         ),
       ),
       'lbl_line_items' => 

@@ -18,11 +18,6 @@ $(document).ready(function(){
 		btn_create_wo_order($("input[name='record']").val());
 	   }
 	);
-    
-    //这两种状态,不能创建工单
-	if ($("#attribute4_c").text()=="已取消" || $("#attribute4_c").text()=="已到期") {
-		$("#btn_create_wo_order").hide();
-	}
 
 }
 );

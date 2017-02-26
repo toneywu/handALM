@@ -27,7 +27,7 @@ require_once('modules/AOS_Contracts/createRevenueFromContract.php');
 
 $contractId=$_REQUEST['record'];
 
-createRevenueFromContract($contractId);
+$revenues_id=createRevenueFromContract($contractId,'0');
 
 header('Location: index.php?module=AOS_Contracts&action=DetailView&record='.$contractId);
 ?>

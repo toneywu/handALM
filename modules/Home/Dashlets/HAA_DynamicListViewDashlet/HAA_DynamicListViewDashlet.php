@@ -63,6 +63,7 @@ class HAA_DynamicListViewDashlet extends Dashlet {
         $elementId='listview_'.$this->id;
         $dynamicListHtml =new generateDynamicListHtml();
         $dynamicListHtml->listviewSet=array();
+
         $html=$dynamicListHtml->generateListviewHtml($this->listviewCode,'dashlet','',1,$elementId);
         $ss->assign('listview_field', $html);
 

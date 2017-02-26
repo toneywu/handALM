@@ -88,3 +88,23 @@ function resetParentInfo(){
 	$("#source_type").val("");
 	$("#source_name").val("");
 }
+
+function getPeriod(){
+	var dateTime=document.getElementById("event_date").value;
+	var frame_id=document.getElementById("haa_frameworks_id_c").value;
+	if(dateTime)
+	{
+		$.ajax({
+            async:false,
+            url: 'index.php?to_pdf=true&module=HAOS_Revenues_Quotes&action=getPeriod',
+            data: '&dateTime='+dateTime+'&frame_id='+frame_id,
+            type:'POST',
+            success: function (data) {//调用方法。
+                //data=$.parseJSON(data);
+                //data=JSON.parse(data);
+                $("#period_name").val(data); //将取出来的头ID字段放到页面上的一个隐藏文本框中。
+            }
+    });
+
+	}
+}

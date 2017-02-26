@@ -324,8 +324,9 @@
                     {/foreach}
                     
                     {foreach from=$groupTabs item=modules key=group name=groupList}
-                        {capture name=extraparams assign=extraparams}parentTab={$group}{/capture}{if $smarty.foreach.groupList.last neq $smarty.foreach.groupList.index}
-                        <li class="topnav">
+                        {capture name=extraparams assign=extraparams}parentTab={$group}{/capture}
+                        <li class="topnav" 
+                        {if $smarty.foreach.groupList.index eq $smarty.foreach.groupList.last} id="allfunc" {/if} >
                             <span class="notCurrentTabLeft">&nbsp;</span><span class="notCurrentTab">
                             <a href="#" id="grouptab_{$smarty.foreach.groupList.index}" class="dropdown-toggle grouptab"
                                data-toggle="dropdown">{$group}</a>
@@ -343,7 +344,7 @@
                                     </li>
                                 {/foreach}
                             </ul>
-                        </li>{/if}
+                        </li>
                     {/foreach}
                 </ul>
                 {* 7.8 Hide filter menu items when the windows is too small to display them *}
@@ -380,6 +381,7 @@
                     }
 
                     $('.desktop-toolbar ul.navbar-nav > li.all').removeClass('hidden');
+                    
                     //HandALM如果All菜单非常靠左，就以最左为准，否则以居中
                     //$(".topnav.all .dropdown-menu").css("left", -Math.min($(".topnav.all").position().left, ($(".topnav.all ul.dropdown-menu").width()/2 - $(".topnav.all").width()/2))+100);
                     //modified by zeng 20170222 class=all的标签发生改变
@@ -387,6 +389,7 @@
                 $(document).ready(function() {
                     $(window).resize(windowResize);
                     windowResize();
+                    $('#allfunc.topnav.hidden').remove();
                 });
                 </script>
             {/literal}

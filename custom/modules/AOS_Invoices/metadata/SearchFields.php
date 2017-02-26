@@ -1,5 +1,5 @@
 <?php
-// created: 2016-12-26 22:12:56
+// created: 2017-02-24 14:30:38
 $searchFields['AOS_Invoices'] = array (
   'name' => 
   array (

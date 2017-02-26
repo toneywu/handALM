@@ -23,7 +23,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * @author SalesAgility <info@salesagility.com>
  */
 
-function createRevenueFromContract($contractId){
+function createRevenueFromContract($contractId,$type){
 	if(!(ACLController::checkAccess('HAOS_Revenues_Quotes', 'edit', true))){
 		ACLController::displayNoAccess();
 		die;
@@ -32,18 +32,39 @@ function createRevenueFromContract($contractId){
 	require_once('modules/HAOS_Revenues_Quotes/createRevenue.php');
 	$contract = new AOS_Contracts();
 	$contract->retrieve($contractId);
-	if ($contract->status!='Signed'){
+	if ($contract->status!='Signed' and $type==0){
 		die('已签约的合同才能创建收支计费项!');
+	}else if ($contract->status!='Signed' and $type==1){
+		die('已签约的合同才能收取预付款!');
+	}else if ($contract->status!='Signed' and $type==2){
+		die('已签约的合同才能收取押金!');
 	}
 
 	$productQuoteBean=BeanFactory::getBean('AOS_Products_Quotes');
+	if($type==0){
 	$quotesBeanList=$productQuoteBean->get_full_list(
 //Order by
 		'group_id',
 //where Clause
-		"aos_products_quotes.parent_type='AOS_Contracts' and aos_products_quotes.parent_id='".$contract->id."'"
+		"aos_products_quotes.parent_type='AOS_Contracts' and aos_products_quotes.parent_id='".$contract->id."'and aos_products_quotes_cstm.deposit_flag_c=0 and aos_products_quotes_cstm.prepay_flag_c=0"
 		);
-
+	}else if($type==1){ //add by tagnqi 20170224
+	$quotesBeanList=$productQuoteBean->get_full_list(
+//Order by
+		'group_id',
+//where Clause
+		"aos_products_quotes.parent_type='AOS_Contracts' and aos_products_quotes.parent_id='".$contract->id."'and aos_products_quotes_cstm.deposit_flag_c=0 and aos_products_quotes_cstm.prepay_flag_c=1"
+		);
+	}else if($type==2){
+		
+	$quotesBeanList=$productQuoteBean->get_full_list(
+//Order by
+		'group_id',
+//where Clause
+		"aos_products_quotes.parent_type='AOS_Contracts' and aos_products_quotes.parent_id='".$contract->id."'and aos_products_quotes_cstm.deposit_flag_c=1 and aos_products_quotes_cstm.prepay_flag_c=0"
+		);
+	}
+	//end add by tagnqi 20170224
 	$rawRow['haa_frameworks_id_c'] = $contract->haa_frameworks_id_c;
 	$rawRow['revenue_quote_number'] = '';
 	$rawRow['clear_status'] = 'Unclear';
@@ -54,7 +75,7 @@ function createRevenueFromContract($contractId){
 	$rawRow['contact_id_c'] = $contract->contact_id;
 	$rawRow['account_id_c'] = $contract->contract_account_id;
 
-
+if($quotesBeanList){
 	foreach($quotesBeanList as $quoteBean){
 		if ($quoteBean->settlement_period_c=='Once'&&$quoteBean->final_account_day_c!='') {
 			continue;
@@ -72,8 +93,31 @@ function createRevenueFromContract($contractId){
 		}
 		$groupBean=BeanFactory::getBean('AOS_Line_Item_Groups',$quoteBean->group_id);
 		$rawRow['expense_group'] = $groupBean->name;
+		$rawRow['prepay_flag'] = $quoteBean->prepay_flag_c;
+		$rawRow['deposit_flag'] = $quoteBean->deposit_flag_c;
 		$rawRow['name'] = $contract->name.'-'.$groupBean->name.'-收支';
 		$rawRow['event_date'] = $next_account_day_old;
+		//add by tangqi 20172024 获取期间字段
+		global $db;
+		$sql="SELECT
+		hp.`name`
+		FROM
+		haa_frameworks hf,
+		haa_period_sets hps,
+		haa_periods hp
+		WHERE 1=1
+		and hf.deleted=0
+		and hps.deleted=0
+		and hp.deleted=0
+		and hf.haa_period_sets_id_c=hps.id
+		and hps.id=hp.haa_period_sets_id_c
+		and hp.start_date<='".$next_account_day_old."'".
+		"and hp.end_date>='".$next_account_day_old."'".
+		"and hf.id='".$contract->haa_frameworks_id_c."'";
+		$result=$db->query($sql);
+		$row=$db->fetchByAssoc($result); 
+		$rawRow['period_name']=$row['name'];
+		//end add by tangqi 20172024
 		$quoteBean->final_account_day_c=$rawRow['event_date'];
 		$quoteRow=$quoteBean->fetched_row;
 		if ($quoteRow['product_id']!=''&&$quoteRow['product_id']!='0'){
@@ -84,7 +128,93 @@ function createRevenueFromContract($contractId){
 		}
 		$haos_revenues_quotes_id=createRevenue($rawRow,$quoteRow);
 		$quoteBean->save();
+		$idArray[]=$haos_revenues_quotes_id;
 	}
+	}
+	return $idArray;
 }
 
+function getSourceReference($contractId){
+ 	$contract = new AOS_Contracts();
+    $contract->retrieve($contractId);
+    $source_reference = $contract->contract_number_c;
+    return $source_reference;
+}
+function getName($contractId,$type){
+	global $app_list_strings;
+    if($type==1){ //add by tagnqi 20170224
+		$act_name="预付";
+	
+	}else if($type==2){
+		$act_name="押金";
+	
+	}
+    $contract = new AOS_Contracts();
+    $contract->retrieve($contractId);
+    $source_code = 'AOS_Contracts';
+	$source_reference = $contract->contract_number_c;
+
+	$productQuoteBean=BeanFactory::getBean('AOS_Products_Quotes');
+	if($type==0){
+	$quotesBeanList=$productQuoteBean->get_full_list(
+//Order by
+		'group_id',
+//where Clause
+		"aos_products_quotes.parent_type='AOS_Contracts' and aos_products_quotes.parent_id='".$contract->id."'and aos_products_quotes_cstm.deposit_flag_c=0 and aos_products_quotes_cstm.prepay_flag_c=0"
+		);
+	}else if($type==1){ //add by tagnqi 20170224
+	$quotesBeanList=$productQuoteBean->get_full_list(
+//Order by
+		'group_id',
+//where Clause
+		"aos_products_quotes.parent_type='AOS_Contracts' and aos_products_quotes.parent_id='".$contract->id."'and aos_products_quotes_cstm.deposit_flag_c=0 and aos_products_quotes_cstm.prepay_flag_c=1"
+		);
+	}else if($type==2){
+		
+	$quotesBeanList=$productQuoteBean->get_full_list(
+//Order by
+		'group_id',
+//where Clause
+		"aos_products_quotes.parent_type='AOS_Contracts' and aos_products_quotes.parent_id='".$contract->id."'and aos_products_quotes_cstm.deposit_flag_c=1 and aos_products_quotes_cstm.prepay_flag_c=0"
+		);
+	}
+foreach($quotesBeanList as $quoteBean){
+		$next_account_day_old=date_format(date_create($quoteBean->next_account_day_c),"Y-m-d");
+		}
+	$name = $app_list_strings['haos_source_code_list']['AOS_Contracts'].'-'.$source_reference.'-'.$act_name.'-'.$next_account_day_old;
+
+	return $name;
+}
+
+function getCord($revenues_id){
+	global $db;
+
+		foreach ($revenues_id as $k => $v) {
+			$revenues_id[$k]="'".$revenues_id[$k]."'";
+		}
+$str=implode(',', $revenues_id);
+			$sql="select count(*) result,contact_id_c,account_id_c  from haos_revenues_quotes where id in(".$str.")";
+			$result=$db->query($sql);
+			$account=array();
+			while ($result_record = $db->fetchByAssoc($result)) {
+				$cord[]=$result_record["result"];
+				$account[]=$result_record["contact_id_c"];
+				$account[]=$result_record["account_id_c"];
+			}
+			if (sizeof($cord)>1) {
+				echo json_encode(array('type'=>0));
+			}else{
+				$sqlstr="select pg.id from aos_products_quotes pg LEFT JOIN aos_line_item_groups lig ON pg.group_id = lig.id WHERE pg.deleted = 0 and pg.parent_id in(".$str.") ORDER BY lig.number ASC,pg.number ASC";
+				$results=$db->query($sqlstr);
+				$re_cords=array();
+				while ($record = $db->fetchByAssoc($results)) {
+					$re_cords[]=$record["id"];
+				}
+				$list=array('value'=>$re_cords,'cord'=>$account);
+				return $list;
+			}
+		
+}
+
+//end add by tangqi 20172024
 ?>

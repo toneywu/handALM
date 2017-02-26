@@ -1,5 +1,5 @@
 <?php
-// created: 2016-12-26 22:12:58
+// created: 2017-02-24 14:35:41
 $mod_strings = array (
   'LBL_BILLING_ACCOUNT' => '组织',
   'LBL_NAME' => '名称',
@@ -24,4 +24,9 @@ $mod_strings = array (
   'LBL_STATUS' => '付款',
   'LBL_INVOICE_CLOSE' => '关闭',
   'LBL_UNPAIED_AMOUNT' => '未支付金额',
+  'LBL_RETURN_DEPOSIT' => '退回押金',
+  'LBL_DEPOSIT_FLAG_C' => '是否押金',
+  'LBL_PREPAY_FLAG_C' => '是否预付',
+  'LBL_RETURN_DEPOSIT_DATE_C' => '退回日期',
+  'LBL_PERIOD_NAME_C' => '期间',
 );

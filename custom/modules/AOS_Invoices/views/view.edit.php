@@ -32,7 +32,6 @@ class AOS_InvoicesViewEdit extends ViewEdit {
     require_once('modules/HAA_FF/ff_include_editview.php');
     initEditViewByFF((!empty($this->bean->haa_codes_id_c))?$this->bean->haa_codes_id_c:"",'HAT_EventType');
 	//20170203toney.wu add end
-
 		parent::display();
 		$html="";
 		if (isset($_GET["data"])) {
@@ -83,7 +82,26 @@ class AOS_InvoicesViewEdit extends ViewEdit {
         document.getElementById('billing_contact').value='".$contacts->name."';
         document.getElementById('billing_contact_id').value='".$cord_array[0]."';
         document.getElementById('billing_contact_number').value='".$contacts->employee_number_c."';
-        document.getElementById('source_code_c').value='HAOS_Revenues_Quotes';
+    </script>";
+    $name=$_GET['name'];
+     echo "<script>
+        document.getElementById('name').value='".$name."';
+        
+    </script>";
+    $period_name_c=$_GET['period_name_c'];
+     echo "<script>
+        document.getElementById('period_name_c').value='".$period_name_c."';
+        
+    </script>";
+    $status=$_GET['status'];
+     echo "<script>
+        document.getElementById('status').value='".$status."';
+        
+    </script>";
+     $amount_c=$_GET['amount_c'];
+     echo "<script>
+        document.getElementById('amount_c').value='".$amount_c."';
+        
     </script>";
     echo $html;
 }
@@ -110,6 +128,7 @@ if(isset($this->bean->hat_eventtype_id_c) && ($this->bean->hat_eventtype_id_c)!=
 			$('#status').val('".$this->bean->status."');
 			$('#amount_c').val('".$this->bean->amount_c."');
 			$('#unpaied_amount_c').attr('readonly',true);
+			document.getElementById('period_name_c').value='".$this->bean->period_name_c."';
 		</script>";
 	}
 }
