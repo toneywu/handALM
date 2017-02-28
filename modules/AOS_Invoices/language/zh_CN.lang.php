@@ -68,7 +68,7 @@ $mod_strings = array (
     'LBL_DESCRIPTION_INFORMATION' => ' ',
     'LBL_DUPLICATE' => '可能重复的客户',
     'LBL_EMAIL' => '邮箱',
-    'LBL_EMPLOYEES' => '员工数',
+    'LBL_EMPLOYEES' => '员工数', 
     'LBL_FAX' => '传真',
     'LBL_INDUSTRY' => '行业',
     'LBL_LIST_ACCOUNT_NAME' => '客户名称',
@@ -205,5 +205,6 @@ $mod_strings = array (
     'LBL_INVOICE_TO' => '发票给',
       'LBL_DEPOSIT_FLAG_C'=>'是否押金',
   'LBL_PREPAY_FLAG_C'=>'是否预付',
+
 );
 ?>

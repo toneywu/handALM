@@ -91,6 +91,6 @@ $mod_strings = array (
   'LBL_PARENT_FLEX_VALUE_SET_HAA_VALUESETS_ID' => '父值集 (related  ID)',
   'LBL_PARENT_FLEX_VALUE_SET' => '父值集',
   'LBL_PARENT_FLEX_VALUE_SET_DESC' => '父值集说明',
-  'LBL_DEPENDANT_DEFAULT_VALUE' => '从属默认值',
-  'LBL_DEPENDANT_DEFAULT_VALUE_DESC' => '从属默认值说明',
+  'LBL_DEPENDANT_DEFAULT_VALUE' => '父值默认值',
+  'LBL_DEPENDANT_DEFAULT_VALUE_DESC' => '父值默认值说明',
 );

@@ -2,12 +2,12 @@ var prodln=0;
 var columnNum=6;
 if(typeof sqs_objects=='undefined'){var sqs_objects=new Array;}
 
-function insertLineHeader(tableid){
-$("#line_items_label").hide();//隐藏SugarCRM字段
 
+function insertLineHeader(tableid){
+$("#line_items_span").parent().prev().hide();//隐藏SugarCRM字段
+document.getElementById("lineItems").style.display="table";
 tablehead=document.createElement("thead");
 tablehead.id=tableid+"_head";
-//tablehead.style.display="none";
 document.getElementById(tableid).appendChild(tablehead);
 
 var x=tablehead.insertRow(-1);
@@ -16,7 +16,7 @@ x.id='Line_head';
 /*var a=x.insertCell(0);
 a.width="25%";
 a.innerHTML=SUGAR.language.get('HAA_Values','LBL_FLEX_VALUE_SET');*/
-if($("#valueset_type").val() == 'I'){
+if($("#valueset_type").val() == 'D'){
 	var b=x.insertCell(0);
 	b.width="30%";
 	b.innerHTML=SUGAR.language.get('HAA_Values','LBL_FLEX_VALUE');
@@ -49,9 +49,18 @@ if($("#valueset_type").val() == 'I'){
 tablebody=document.createElement("tbody");
 tablebody.id="lines";
 document.getElementById(tableid).appendChild(tablebody);
+ var tr_header=document.getElementById(tablehead.id);
+  tr_header.align="center";
 }
 
-
+function parentDesc(line_data){
+	//document.getElementById ("dependant_default_value_desc").innerHTML=line_data.parent_desc;
+	$("#dependant_default_value_desc").val(line_data.parent_desc);
+}
+function parentDescD(line_data){
+	document.getElementById ("dependant_default_value_desc").innerHTML=line_data.parent_desc;
+	//$("#dependant_default_value_desc").val(line_data.parent_desc);
+}
 function insertLineData(line_data,current_view){//将数据写入到对应的行字段中  
 	var ln=0;
 	if(line_data.id!='0'&&line_data.id!==''){
@@ -98,11 +107,13 @@ var z1=tablebody.insertRow(-1);
 z1.id='line1_displayed'+prodln;
 z1.className='oddListRowS1';
 z1.innerHTML=
-"<td id='displayed_line_parent_flex_value"+prodln+"'></td>"+
-"<td id='displayed_line_flex_value"+prodln+"'></td>"+
-"<td id='displayed_line_flex_meaning"+prodln+"'></td>"+
-"<td id='displayed_line_description"+prodln+"'></td>"+
-"<td id='displayed_line_enabled_flag"+prodln+"'></td>";
+"<td style='vertical-align: middle;'><span name='displayed_line_parent_flex_value[" + prodln + "]' id='displayed_line_parent_flex_value" + prodln + "'></span></td>" +
+"<td style='vertical-align: middle;'><span name='displayed_line_flex_value[" + prodln + "]' id='displayed_line_flex_value" + prodln + "'></span></td>" +
+"<td style='vertical-align: middle;'><span name='displayed_line_flex_meaning[" + prodln + "]' id='displayed_line_flex_meaning" + prodln + "'></span></td>"+
+"<td style='vertical-align: middle;'><span name='displayed_line_description[" + prodln + "]' id='displayed_line_description" + prodln + "'></span></td>" +
+"<td style='vertical-align: middle;'><span name='displayed_line_enabled_flag[" + prodln + "]' id='displayed_line_enabled_flag" + prodln + "'></span></td>";
+var tr_dis=document.getElementById(z1.id);
+  tr_dis.align="center";
 //console.log("current_view : " +current_view);
 if (current_view == "EditView") {//current_view == "EditView"
 		z1.innerHTML += "<td><input type='button'value='"+SUGAR.language.get('app_strings','LBL_EDITINLINE')+"'class='button'id='btn_edit_line"+prodln+"'onclick='LineEditorShow("+prodln+")'></td>";
@@ -110,7 +121,7 @@ if (current_view == "EditView") {//current_view == "EditView"
 
 var x=tablebody.insertRow(-1);//以下生成的是LineEditor  
 x.id='line_editor'+prodln;
-
+x.style = "display:none";
 /*"<td id='flex_value_set_label'>"+SUGAR.language.get('HAA_Values','LBL_FLEX_VALUE_SET')+":</td>"+
 	"<td><input style='width:153px;'type='hidden'name='line_flex_value_set["+prodln+"]'id='line_flex_value_set"+prodln+"'maxlength='50'value=''title=''/>"+
 	"<input id='line_haa_valuesets_id_c"+prodln+"' name='line_haa_valuesets_id_c["+prodln+"]' type='hidden' value=''/>"+
@@ -120,7 +131,7 @@ x.id='line_editor'+prodln;
 var r_html="";
 if ($("#valueset_type").val()=='D') {
 	r_html = "<tr>"+
-	"<td id='parent_flex_value_label'>"+SUGAR.language.get('HAA_Values','LBL_PARENT_FLEX_VALUE')+":</td>"+
+	"<td id='parent_flex_value_label' style='text-align:right'>"+SUGAR.language.get('HAA_Values','LBL_PARENT_FLEX_VALUE')+":</td>"+
 	"<td><input style='width:153px;'type='text'name='line_parent_flex_value["+prodln+"]'id='line_parent_flex_value"+prodln+"'maxlength='50'value=''title=''/>"+
 	"<input id='line_haa_values_id_c"+prodln+"' name='line_haa_values_id_c["+prodln+"]' type='hidden' value=''/>"+
 	"<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openValuePopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
@@ -128,12 +139,12 @@ if ($("#valueset_type").val()=='D') {
 "</tr>";
 }
 
-x.innerHTML="<td colSpan='"+columnNum+"'><table border='0' class='lineEditor' width='100%'>"+
+x.innerHTML="<td colSpan='"+columnNum+"'><table border='0' class='lineEditor' width='100%' style='display:table'>"+
 r_html+
 "<tr>"+
-	"<td id='flex_value_label'>"+SUGAR.language.get('HAA_Values','LBL_FLEX_VALUE')+":<span class='required'>*</span></td>"+
+	"<td id='flex_value_label' style='text-align:right'>"+SUGAR.language.get('HAA_Values','LBL_FLEX_VALUE')+":<span class='required'>*</span></td>"+
 	"<td><input style='width:153px;'type='text'name='line_flex_value["+prodln+"]'id='line_flex_value"+prodln+"'maxlength='50'value=''title=''></td>"+
-	"<td id='flex_meaning_label'>"+SUGAR.language.get('HAA_Values','LBL_FLEX_MEANING')+":<span class='required'>*</span></td>"+
+	"<td id='flex_meaning_label' style='text-align:right'>"+SUGAR.language.get('HAA_Values','LBL_FLEX_MEANING')+":<span class='required'>*</span></td>"+
 	"<td><input style='width:153px;'type='text'name='line_flex_meaning["+prodln+"]'id='line_flex_meaning"+prodln+"'maxlength='50'value=''title=''onkeyup='changeName(" + prodln + ");'>"+
 	"<input id='line_id"+prodln+"' name='line_id["+prodln+"]' type='hidden' value=''/>"+
 	"<input type='hidden'name='line_flex_value_set["+prodln+"]'id='line_flex_value_set"+prodln+"'maxlength='50'value=''title=''/>"+
@@ -141,9 +152,9 @@ r_html+
 	"<input id='line_name"+prodln+"' name='line_name["+prodln+"]' type='hidden' value=''/></td>"+
 "</tr>"+
 "<tr>"+
-	"<td id='description_label'>"+SUGAR.language.get('HAA_Values','LBL_DESCRIPTION')+":</td>"+
+	"<td id='description_label' style='text-align:right'>"+SUGAR.language.get('HAA_Values','LBL_DESCRIPTION')+":</td>"+
 	"<td><input style='width:153px;'type='text'name='line_description["+prodln+"]'id='line_description"+prodln+"'maxlength='50'value=''title=''></td>"+
-	"<td id='enabled_flag_label'>"+SUGAR.language.get('HAA_Values','LBL_ENABLED_FLAG')+":<span class='required'>*</span></td>"+
+	"<td id='enabled_flag_label' style='text-align:right'>"+SUGAR.language.get('HAA_Values','LBL_ENABLED_FLAG')+":<span class='required'>*</span></td>"+
 	"<td><input type='hidden' name='line_enabled_flag["+prodln+"]'value='0'title='' >"+
 	"<input style='width:153px;'type='checkbox' onclick='changeValue(" + prodln + ");'name='line_enabled_flag["+prodln+"]'id='line_enabled_flag"+prodln+"'maxlength='50'value='1'title='' ></td>"+
 "<tr>"+
@@ -201,6 +212,8 @@ function addNewLine(tableid){
 		//console.log($("input[name='record']").val());
 		$("#line_haa_valuesets_id_c" + x).val($("input[name='record']").val());
 		LineEditorShow(prodln-1);//打开行编辑器
+		$("#line_parent_flex_value"+x).val($("#dependant_default_value").val());
+		$("#line_haa_values_id_c"+x).val($("#haa_values_id_c").val());
 	}
 }
 

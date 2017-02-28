@@ -473,3 +473,9 @@ function valitems(ln){
     addToValidate('EditView', 'line_column_type'+ ln,'varchar', 'true',SUGAR.language.get('HAA_Integration_System_Def_Lines', 'LBL_COLUMN_TYPE'));
     
 }
+
+
+function replace_display_lines(linesHtml,elementId) {
+  var lineItems=document.getElementById(elementId);
+  lineItems.innerHTML=linesHtml;
+}

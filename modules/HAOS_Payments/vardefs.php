@@ -493,46 +493,50 @@ $dictionary['HAOS_Payments'] = array(
           ),
 
       'line_items' =>
-            array(
-                'required' => false,
-                'name' => 'line_items',
-                'vname' => 'LBL_LINE_ITEMS',
-                'type' => 'function',
-                'source' => 'non-db',
-                'massupdate' => 0,
-                'importable' => 'false',
-                'duplicate_merge' => 'disabled',
-                'duplicate_merge_dom_value' => 0,
-                'audited' => false,
-                'reportable' => false,
-                'function' =>
-                    array(
-                        'name' => 'display_lines',
-                        'returns' => 'html',
-                        'include' => 'modules/HAOS_Payment_Invoices/Line_Items.php'
-                    ),
-            ),
+      array(
+        'required' => false,
+        'name' => 'line_items',
+        'vname' => 'LBL_LINE_ITEMS',
+        'type' => 'varchar',
+        'source' => 'non-db',
+        'massupdate' => 0,
+        'no_default' => false,
+        'comments' => '',
+        'help' => '',
+        'importable' => 'true',
+        'duplicate_merge' => 'disabled',
+        'duplicate_merge_dom_value' => '0',
+        'audited' => false,
+        'inline_edit' => true,
+        'reportable' => true,
+        'unified_search' => false,
+        'merge_filter' => 'disabled',
+        'len' => '255',
+        'size' => '20',
+        ),
 
-            'line_subitems' =>
-            array(
-                'required' => false,
-                'name' => 'line_subitems',
-                'vname' => 'LBL_LINE_SUBITEMS',
-                'type' => 'function',
-                'source' => 'non-db',
-                'massupdate' => 0,
-                'importable' => 'false',
-                'duplicate_merge' => 'disabled',
-                'duplicate_merge_dom_value' => 0,
-                'audited' => false,
-                'reportable' => false,
-                'function' =>
-                    array(
-                        'name' => 'display_sublines',
-                        'returns' => 'html',
-                        'include' => 'modules/HAOS_Payment_Invoices/Line_SubItems.php'
-                    ),
-            ),
+      'line_subitems' =>
+      array(
+        'required' => false,
+        'name' => 'line_items',
+        'vname' => 'LBL_LINE_SUBITEMS',
+        'type' => 'varchar',
+        'source' => 'non-db',
+        'massupdate' => 0,
+        'no_default' => false,
+        'comments' => '',
+        'help' => '',
+        'importable' => 'true',
+        'duplicate_merge' => 'disabled',
+        'duplicate_merge_dom_value' => '0',
+        'audited' => false,
+        'inline_edit' => true,
+        'reportable' => true,
+        'unified_search' => false,
+        'merge_filter' => 'disabled',
+        'len' => '255',
+        'size' => '20',
+        ),
 
 
       ),

@@ -224,6 +224,16 @@ array (
           array (
             'name' => 'dependant_default_value',
             'label' => 'LBL_DEPENDANT_DEFAULT_VALUE',
+            'displayParams' => 
+            array (
+              'initial_filter' => '&haa_valuesets_id_c_advanced="+this.form.{$fields.haa_valuesets_id_c.name}.value+"',
+              'field_to_name_array' => 
+              array (
+                'name' => 'dependant_default_value',
+                'id' => 'haa_values_id_c',
+                'description' => 'dependant_default_value_desc',
+                ),
+              ),
             ),
           1 => 
           array (

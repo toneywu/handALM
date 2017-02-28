@@ -39,10 +39,9 @@ class ProjectController extends SugarController {
         mysql_query("set names 'utf8'");
         $gantt = new JSONGanttConnector($res);
         $gantt->render_links("gantt_links","id","source,target,type");
-        $tasks_fields="start_date,text,duration,progress,sortorder,parent,assigned,milestone,project_id";
-        $sql_tasks="SELECT ".$tasks_fields." FROM gantt_tasks WHERE project_id='".$_GET['project_id']."'";
-        $gantt->render_sql(
-            $sql_tasks,
+        $tasks_fields="start_date,duration,text,progress,sortorder,parent,assigned,milestone,project_id";
+        $gantt->render_table(
+            "gantt_tasks",
             "id",
             $tasks_fields
         );
@@ -58,7 +57,7 @@ class ProjectController extends SugarController {
         $gantt = new JSONGanttConnector($res);
         $gantt->mix("open", 1);
         $gantt->render_links("gantt_links","id","source,target,type");
-        $tasks_fields="start_date,id,text,duration,progress,sortorder,parent,assigned,milestone,project_id";
+        $tasks_fields="id,start_date,duration,text,progress,sortorder,parent,assigned,milestone,project_id";
         $sql_tasks="SELECT ".$tasks_fields." FROM gantt_tasks WHERE project_id='".$_GET['project_id']."'";
         $gantt->render_sql(
             $sql_tasks,

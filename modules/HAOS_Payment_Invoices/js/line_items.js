@@ -59,6 +59,31 @@ function insertLineData(line_data ){ //将数据写入到对应的行字段中
   }
 }
 
+function insertInvLineData(line_data ){ //将数据写入到对应的行字段中
+  var ln = 0;
+  //if(line_data.id != '0' && line_data.id !== ''){
+    //sort_order_num = line_data.max_sort_order;
+
+    ln = insertLineElements("lineItems");
+    $("#line_id".concat(String(ln))).val(line_data.id);
+    $("#line_payment_name".concat(String(ln))).val(line_data.payment_name);
+    $("#line_invoice_id".concat(String(ln))).val(line_data.invoice_id);
+    $("#line_invoice_number".concat(String(ln))).val(line_data.invoice_number);
+    //$("#disabled_line_sort_order".concat(String(ln))).val(line_data.sort_order);
+    $("#line_invoice_name".concat(String(ln))).val(line_data.invoice_name);
+    $("#line_invoice_date".concat(String(ln))).val(line_data.invoice_date);
+    $("#line_invoice_due_date".concat(String(ln))).val(line_data.invoice_due_date);
+    $("#line_invoice_overdue_days".concat(String(ln))).val(line_data.invoice_overdue_days);
+    $("#line_invoice_unpaid_amount".concat(String(ln))).val(format2Number(line_data.invoice_unpaid_amount,2));
+    $("#line_amount".concat(String(ln))).val(format2Number(line_data.amount,2));
+    $("#line_amount_usdollar".concat(String(ln))).val(format2Number(line_data.amount_usdollar,2));
+    //$("#line_enabled_flag".concat(String(ln))).val(line_data.enabled_flag);
+    $("#line_description".concat(String(ln))).val(line_data.description);
+
+    renderLine(ln);
+  
+}
+
 function insertLineElements(tableid) { //创建界面要素
 //包括以下内容：1）显示头，2）定义SQS对象，3）定义界面显示的可见字段，4）界面行编辑器界面
 if (document.getElementById(tableid + '_head') !== null) {
@@ -542,4 +567,11 @@ function formatNumber(n, num_grp_sep, dec_sep, round, precision) {
         n[0] = n[0].toString().replace(regex, "$1" + num_grp_sep + "$2");
     }
     return n[0] + (n.length > 1 && n[1] !== "" ? dec_sep + n[1] : "");
+}
+
+
+
+function replace_display_lines(linesHtml,elementId) {
+  var lineItems=document.getElementById(elementId);
+  lineItems.innerHTML=linesHtml;
 }

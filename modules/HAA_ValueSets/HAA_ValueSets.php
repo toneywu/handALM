@@ -64,6 +64,7 @@ class HAA_ValueSets extends HAA_ValueSets_sugar {
 						$haa_values->$field_name = $post_data[$key . $field_name][$i];
 					}
 				}
+				$haa_values->haa_valuesets_id_c=$this->id;
 				$haa_values->save($check_notify);
 	            $table='haa_valuesets_haa_values_c';//关系表
 	            $relate_values = array('deleted' =>0 ,

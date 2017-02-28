@@ -30,27 +30,44 @@ $layout_defs['AOS_Invoices'] = array(
 	'subpanel_setup' => array(
 		'aos_quotes_aos_invoices' => 
 		array (
-  			'order' => 100,
-  			'module' => 'AOS_Quotes',
-  			'subpanel_name' => 'default',
-  			'sort_order' => 'asc',
-  			'sort_by' => 'id',
-  			'title_key' => 'AOS_Quotes',
-  			'get_subpanel_data' => 'aos_quotes_aos_invoices',
-  			'top_buttons' => 
-  			array (
-    				0 => 
-    				array (
-      					'widget_class' => 'SubPanelTopCreateButton',
-    				),
-    				1 => 
-    				array (
-      					'widget_class' => 'SubPanelTopSelectButton',
-      					'popup_module' => 'AOS_Quotes',
-      					'mode' => 'MultiSelect',
-    				),
-  			),
-		),
-	),
-);
-?>
+     'order' => 100,
+     'module' => 'AOS_Quotes',
+     'subpanel_name' => 'default',
+     'sort_order' => 'asc',
+     'sort_by' => 'id',
+     'title_key' => 'AOS_Quotes',
+     'get_subpanel_data' => 'aos_quotes_aos_invoices',
+     'top_buttons' => 
+     array (
+      0 => 
+      array (
+       'widget_class' => 'SubPanelTopCreateButton',
+       ),
+      1 => 
+      array (
+       'widget_class' => 'SubPanelTopSelectButton',
+       'popup_module' => 'AOS_Quotes',
+       'mode' => 'MultiSelect',
+       ),
+      ),
+     ),
+    
+    'HAOS_Payments_aos_invoices' => array(
+      'order' => 30,
+      'module' => 'HAOS_Payments',
+      'sort_order' => 'asc',
+      'sort_by' => 'id',
+      'subpanel_name' => 'default',
+      'get_subpanel_data' => 'function:get_invoice_payments',
+      'title_key' => 'LBL_HAOS_PAYMENTS_SUBPANEL1',
+      'generate_select' => true,
+      'function_parameters' => array(
+        'import_function_file' => 'modules/AOS_Invoices/Subpanel/HAOS_PaymentsSubpanel.php',
+        'header_id' => $this->_focus->id,
+        'return_as_array' => 'true',
+        ),
+      ),
+
+    ),
+  );
+  ?>

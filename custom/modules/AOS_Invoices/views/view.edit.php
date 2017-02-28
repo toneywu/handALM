@@ -82,27 +82,47 @@ class AOS_InvoicesViewEdit extends ViewEdit {
         document.getElementById('billing_contact').value='".$contacts->name."';
         document.getElementById('billing_contact_id').value='".$cord_array[0]."';
         document.getElementById('billing_contact_number').value='".$contacts->employee_number_c."';
+       
     </script>";
+                if (isset($_GET["name"])) {
     $name=$_GET['name'];
      echo "<script>
         document.getElementById('name').value='".$name."';
         
     </script>";
+}
+            if (isset($_GET["period_name_c"])) {
     $period_name_c=$_GET['period_name_c'];
      echo "<script>
         document.getElementById('period_name_c').value='".$period_name_c."';
         
     </script>";
+}
+        if (isset($_GET["status"])) {
     $status=$_GET['status'];
      echo "<script>
         document.getElementById('status').value='".$status."';
         
     </script>";
+}
+    if (isset($_GET["amount_c"])) {
      $amount_c=$_GET['amount_c'];
      echo "<script>
         document.getElementById('amount_c').value='".$amount_c."';
-        
     </script>";
+}
+if (isset($_GET["source_code_c"])) {
+    $source_code_c=$_GET['source_code_c'];
+     echo "<script>
+        document.getElementById('source_code_c').value='".$source_code_c."';
+    </script>";
+}    
+if (isset($_GET["source_reference_c"])) {
+      $source_reference_c=$_GET['source_reference_c'];
+     echo "<script>
+        document.getElementById('source_reference_c').value='".$source_reference_c."';
+    </script>";
+}
     echo $html;
 }
 /*$ff_id_field = '<input id=haa_ff_id name=haa_ff_id type=hidden '.(isset($ff_id)?'value='.$ff_id:'').'>';

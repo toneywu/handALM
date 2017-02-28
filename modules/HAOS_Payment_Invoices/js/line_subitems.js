@@ -9,7 +9,7 @@ if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
 
 function insertLineHeader(tableid){
   //console.log(234324324324324);
-  $("#line_subitems_span").parent().prev().hide();//隐藏SugarCRM字段
+  $("#line_subitems").parent().prev().hide();//隐藏SugarCRM字段
  // $("#line_subitems_span").parent().style.width='100%';
 
   tablehead = document.createElement("thead");
@@ -57,7 +57,7 @@ function insertLineHeader(tableid){
   $("#lineSubItems").append(head_html_fy);
 
   $('#Line_head').css('backgroundColor','#fff');
-  $("#line_subitems_span").parent().css('width','100%');
+  $("#line_items_span").parent().css('width','100%');
 }
 //画分页
 function goPageNumre()//上一页
@@ -567,4 +567,9 @@ function formatNumber(n, num_grp_sep, dec_sep, round, precision) {
 
 function hiddenLine(ln){
   $('#line_body'+ln).hide();
+}
+
+function replace_display_lines(linesHtml,elementId) {
+  var lineItems=document.getElementById(elementId);
+  lineItems.innerHTML=linesHtml;
 }

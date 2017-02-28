@@ -13,4 +13,6 @@ $mod_strings = array (
 	'LBL_PARENT_TYPE' => '来源类型',
 	'LBL_INVOICE_CLOSE' =>'CLOSE',
 	'LBL_NAME' => '名称',
+	'LBL_DETAIL_PAYMENTS' =>'收付款',
+	'LBL_AOS_INVOICES_SUBPANEL1'=>'收付款',
 	);

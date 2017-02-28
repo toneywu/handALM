@@ -29,7 +29,7 @@ class HAT_Counting_BatchsViewDetail extends ViewDetail
 		$return_msg=$auto_create_task->hat_counting($param);*/
 		
 		parent::display();
-	/*	require_once('modules\HAA_Interfaces\iface_files\ZZM\EBS\zzmImportEmployee.php');
+		/*require_once('modules\HAA_Interfaces\iface_files\ZZM\EBS\zzmImportEmployee.php');
 		$testEmployee= new zzmImportEmployee();
 		$paramsArray=array(
 			0 => '3abec48e-f3fa-11e6-a4f4-00163e000299',

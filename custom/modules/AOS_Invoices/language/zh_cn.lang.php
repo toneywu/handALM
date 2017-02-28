@@ -29,4 +29,6 @@ $mod_strings = array (
   'LBL_PREPAY_FLAG_C' => '是否预付',
   'LBL_RETURN_DEPOSIT_DATE_C' => '退回日期',
   'LBL_PERIOD_NAME_C' => '期间',
+  'LBL_DETAIL_PAYMENTS' =>'收付款',
+  'LBL_AOS_INVOICES_SUBPANEL1'=>'收付款',
 );
