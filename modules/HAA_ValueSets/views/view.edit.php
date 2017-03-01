@@ -43,6 +43,20 @@ class HAA_ValueSetsViewEdit extends ViewEdit
             
         }
         echo '>';
-
+        echo '<script>
+                if($("#valueset_type").val()=="F"){
+                    document.getElementById("detailpanel_0").parentNode.style.display="block";
+                    document.getElementById("detailpanel_1").parentNode.style.display="none";
+                    document.getElementById("detailpanel_2").parentNode.style.display="none";
+                }else if($("#valueset_type").val()=="D"){
+                    document.getElementById("detailpanel_0").parentNode.style.display="none";
+                    document.getElementById("detailpanel_1").parentNode.style.display="block";
+                    document.getElementById("detailpanel_2").parentNode.style.display="block";
+                }else if($("#valueset_type").val()=="I"){
+                    document.getElementById("detailpanel_0").parentNode.style.display="none";
+                    document.getElementById("detailpanel_1").parentNode.style.display="none";
+                    document.getElementById("detailpanel_2").parentNode.style.display="block";
+                }
+        </script>';
 	}
 }

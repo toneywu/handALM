@@ -13,6 +13,10 @@ array (
         array (
           'file' => 'custom/modules/AOS_Invoices/js/AOS_Invoices_editview.js',
         ),
+        1 => 
+        array (
+          'file' => 'custom/modules/AOS_Invoices/js/AOS_Invoices_HAOS_Payments.js',
+        ),
       ),
       'form' => 
       array (
@@ -41,6 +45,10 @@ array (
           8 => 
           array (
             'customCode' => '<input type="button" class="button" onClick="returnDeposit();" value="{$MOD.LBL_RETURN_DEPOSIT}">',
+          ),
+           9 => 
+          array (
+            'customCode' => '<input type="button" class="button" onClick="createPayments();" value="{$MOD.LBL_DETAIL_PAYMENTS}">',
           ),
         ),
       ),

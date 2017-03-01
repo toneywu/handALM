@@ -1,3 +1,7 @@
+$.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
+$.getScript("modules/HAA_FF/ff_include.js");
+$.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); // MessageBox
+
 function setContactValReturn(popupReplyData){
 	// if(popupReplyData['name_to_value_array']['counting_by_location']==1){
 	// 	$("#counting_by_location").attr('checked',true);
@@ -9,39 +13,61 @@ function setContactValReturn(popupReplyData){
 	set_return(popupReplyData);//标准Popup-Return函数
 } 
 
-function getPeriods(){
-	var frm_id = $("#haa_frameworks_id_c").val();
-	var pay_date = $("#payment_date").val();
-}
 
 function validateHeaderAmountAndLineAmount(){ 
+	var result = true;
 	var sum_line_amount = 0;
-	var header_amount = $('#payment_amount').val();
+	var header_amount = unformatNumber($('#payment_amount').val().trim(),',','.');
 
 	$("input[id^=line_amount]").each(function(){
 		if($('#line_body'+i).css("display")!="none"){
-			sum_line_amount = eval(sum_line_amount + $(this).val());
+			sum_line_amount = sum_line_amount + unformatNumber($(this).val().trim(),',','.');
 		}
 	});
 
    if(sum_line_amount == header_amount){
-   	  return true;
+   	  result = true;
    	}else{
-      return false;
+      result = false;
    	}
+   	return result;
 }
 
 
-// $(function(){
-// 	$("#SAVE").unbind("click");
-// 	$("#SAVE").bind('click',function(){
-// 		if(validateHeaderAmountAndLineAmount()){
-// 			var _form = document.getElementById('EditView'); 
-// 			_form.action.value='Save'; if(check_form('EditView'))SUGAR.ajaxUI.submitForm(_form);
-// 			return false;
-// 		}else{
-// 			alert('行金额总和必须等于头金额');
-// 		}
-		
-// 	})
-// });
+
+function check_amount(){
+	//alert('234324');
+	var result = true;
+	var check_from_flag = check_form('EditView');
+	var check_amount_flag = validateHeaderAmountAndLineAmount();
+	if(check_from_flag){
+		if(check_amount_flag){
+			result = true;
+		}else{
+			BootstrapDialog.alert({
+					type : BootstrapDialog.TYPE_DANGER,
+					title : '验证失败',
+					message : '行金额总和必须等于头金额'
+				});
+			result = false;
+		}
+    }else{
+	 	result = false;
+	}
+	return result;
+}
+
+$(document).ready(function(){
+    //alert('23432');
+
+	//改写Save事件，在Save之前加入数据校验
+	SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
+		OverwriteSaveBtn(check_amount);//ff_include.js 注意preValidateFunction是一个Function，在此引用时不加（）
+	});
+
+
+	
+});
+
+
+

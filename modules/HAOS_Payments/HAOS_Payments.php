@@ -170,12 +170,62 @@ class HAOS_Payments extends Basic
                 $lines->haos_payments_id_c = $this->id;
                  //$lines->name = $post_data[$key .'period_name'][$i];;
                 // var_dump($lines->sort_order);
-                 perform_aos_save($lines);
+                perform_aos_save($lines);
                 $lines->save($check_notify);
+
+               $this->updateInvPayStatus($post_data['line_invoice_id'][$i]);
             }
         }
         
     }
+
+
+    function updateInvPayStatus($id){
+   
+        $result = array(
+                'return_status'=>'S',
+                'return_msg'=>'',
+                'return_data'=>array(),
+                );
+        $err_msg = '';
+
+        $Bean = BeanFactory::getBean('AOS_Invoices',$id);
+       //发票金额？
+        $InvAmount = $Bean->total_amount;
+        $payAmount = 0;
+        $sql="SELECT
+        sum(payl.amount) amount
+        from 
+        haos_payment_invoices payl,
+        aos_invoices ainv
+        where 1=1
+        and payl.deleted = 0
+        and ainv.deleted = 0
+        and payl.aos_invoices_id_c = ainv.id
+        and ainv.id='".$id."'";
+
+        $result = $this->db->query($sql);
+        while ($row = $this->db->fetchByAssoc($result)) {
+            $payAmount = $row['amount'];
+        }
+
+        if($payAmount==$InvAmount){
+            $Bean->status = 'Paid';
+        }
+        if($payAmount == 0){
+            $Bean->status = 'Unpaid';
+        }
+        if($payAmount>0 && $payAmount<$InvAmount){
+            $Bean->status = 'PartedPaid';
+        }
+        $Bean->unpaied_amount_c = $InvAmount-$payAmount;
+        $Bean->amount_c = $payAmount;
+        $Bean->save();
+
+        return $result;
+    }
+  
+
 
 
     function get_list_view_data(){
@@ -186,7 +236,8 @@ class HAOS_Payments extends Basic
         if ($bean_contact) {
             $sql = "SELECT
              cc.employee_number_c,
-             cc.chinese_name_c
+             cc.chinese_name_c,
+             ct.name
            from contacts_cstm cc,
                 contacts ct
            where 1=1
@@ -202,7 +253,7 @@ class HAOS_Payments extends Basic
            while ($row = $this->db->fetchByAssoc($result)) {
              //$line_data = json_encode($row);
              $fields['CONTACT_NUMBER'] = $this->bean->contact_number = $row['employee_number_c']; 
-             $fields['CONTACT_NAME'] = $this->bean->contact_name =$row['chinese_name_c'];
+             $fields['CONTACT_NAME'] = $this->bean->contact_name =$row['name'];
              //
              }
 

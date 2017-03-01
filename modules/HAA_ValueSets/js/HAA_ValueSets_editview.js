@@ -11,32 +11,31 @@ function check_type() {
  	removeFromValidate('EditView','value_column_size');
  	removeFromValidate('EditView','parent_flex_value_set');
  	removeFromValidate('EditView','dependant_default_value');
- 	removeFromValidate('EditView','dependant_default_value_desc');
+ 	//removeFromValidate('EditView','dependant_default_value_desc');
+ 	// modify by tangqi 20170227
 	if (valueset_type == 'F') {
-		$("#detailpanel_2").show();
-		$("#detailpanel_4").hide();//值集段值定义
+		document.getElementById("detailpanel_0").parentNode.style.display="block";
+        document.getElementById("detailpanel_1").parentNode.style.display="none";
+        document.getElementById("detailpanel_2").parentNode.style.display="none";
 		addToValidate('EditView','application_table_name','varchar','true',SUGAR.language.get('HAA_ValueSets','LBL_APPLICATION_TABLE_NAME'));
 		addToValidate('EditView','value_column_name','varchar','true',SUGAR.language.get('HAA_ValueSets','LBL_VALUE_COLUMN_NAME'));
 		addToValidate('EditView','value_column_size','varchar','true',SUGAR.language.get('HAA_ValueSets','LBL_VALUE_COLUMN_SIZE'));
-	 } else {
-	 	$("#detailpanel_2").hide();
+	 } else if (valueset_type == 'I') {
+	 	document.getElementById("detailpanel_0").parentNode.style.display="none";
+     	document.getElementById("detailpanel_1").parentNode.style.display="none";
+     	document.getElementById("detailpanel_2").parentNode.style.display="block";
 	 	removeFromValidate('EditView','application_table_name');
 	 	removeFromValidate('EditView','value_column_name');
 	 	removeFromValidate('EditView','value_column_size');
-	 	$("#detailpanel_4").show();//值集段值定义
-	 }
-	 if (valueset_type == 'D') {
-		$("#detailpanel_3").show();
+	 }else if (valueset_type == 'D') {
+		document.getElementById("detailpanel_0").parentNode.style.display="none";
+     	document.getElementById("detailpanel_1").parentNode.style.display="block";
+     	document.getElementById("detailpanel_2").parentNode.style.display="block";
 		addToValidate('EditView','parent_flex_value_set','varchar','true',SUGAR.language.get('HAA_ValueSets','LBL_PARENT_FLEX_VALUE_SET'));
 		addToValidate('EditView','dependant_default_value','varchar','true',SUGAR.language.get('HAA_ValueSets','LBL_DEPENDANT_DEFAULT_VALUE'));
-		addToValidate('EditView','dependant_default_value_desc','varchar','true',SUGAR.language.get('HAA_ValueSets','LBL_DEPENDANT_DEFAULT_VALUE_DESC'));
-	 } else {
-	 	$("#detailpanel_3").hide();
-	 	removeFromValidate('EditView','parent_flex_value_set');
-	 	removeFromValidate('EditView','haa_valuesets_id_c');
-	 	removeFromValidate('EditView','dependant_default_value');
-	 	removeFromValidate('EditView','dependant_default_value_desc');
-	 }
+		//addToValidate('EditView','dependant_default_value_desc','varchar','true',SUGAR.language.get('HAA_ValueSets','LBL_DEPENDANT_DEFAULT_VALUE_DESC'));
+	 } 
+	 // end modify by tangqi 20170227
 };
 
 function checkFormatType()

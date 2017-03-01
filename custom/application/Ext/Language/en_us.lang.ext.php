@@ -2357,8 +2357,9 @@ $app_list_strings['contract_status_list']=array (
 
 
 $app_list_strings['settlement_period_list']=array (
-  'Once' => '一次结清',
+  'Once' => '一次性',
   'Monthly' => '按月',
+  'Year' => '按年',
   );
 
 
@@ -2384,10 +2385,19 @@ $app_list_strings['haos_source_code_list']=array (
 
 $app_list_strings['haos_number_of_periods']=array (
   ''   => ' ', 
+  '1'   => '1', 
+  '2'   => '2', 
+  '3'   => '3', 
+  '4'   => '4', 
+  '5'   => '5', 
+  '6'   => '6', 
+  '7'   => '7', 
+  '10'   => '10', 
   '12' => '12',
-  '24' => '24',
-  '36' => '36',
-  '48' => '48',
+  '25' => '25',
+  '26' => '26',
+  '37' => '37',
+  '60' => '60',
   );
 
 $app_list_strings['haos_revenue_clear_status_list']=array (

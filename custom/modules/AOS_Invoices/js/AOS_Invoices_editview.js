@@ -181,6 +181,7 @@ function returnDeposit(){
       }
 }
 
+
 function getPeriod(){
     var dateTime=document.getElementById("invoice_date").value;
     var frame_id=document.getElementById("haa_frameworks_id_c").value;
@@ -201,3 +202,5 @@ function getPeriod(){
     }
 }
 //end add by tangqi 20170224
+
+

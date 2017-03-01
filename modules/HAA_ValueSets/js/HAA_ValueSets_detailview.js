@@ -9,25 +9,27 @@ function check_type() {
 	
 	//类型为表验证时,隐藏值集段值定义
 	if (valueset_type == 'F') {
+		$("#detailpanel_0").show();
+		$("#tab0").parent().next().show()
+		$("#detailpanel_1").hide();//
+		$("#detailpanel_2").hide();
+	 	$("#tab0").parent().next().next().hide()
+	 	$("#tab0").parent().next().next().next().hide()
+	 } else if(valueset_type == 'D'){
+	 	$("#detailpanel_0").hide();
+	 	$("#detailpanel_1").show();//
+	 	$("#detailpanel_2").show();//
+	 	$("#tab0").parent().next().hide()
+	 	$("#tab0").parent().next().next().show()
+	 	$("#tab0").parent().next().next().next().show()
+	 }else if (valueset_type == 'I') {
+	 	$("#detailpanel_0").hide();
+	 	$("#detailpanel_1").hide();
 		$("#detailpanel_2").show();
-		$("#tab1").show();
-		$("#detailpanel_4").hide();//
-	 	$("#tab3").hide();
-	 } else {
-	 	$("#detailpanel_2").hide();
-	 	$("#tab1").hide();
-	 	$("#detailpanel_4").show();//
-	 	$("#tab3").show();
-	 }
-	 if (valueset_type == 'D') {
-		$("#detailpanel_3").show();
-		$("#tab2").show();
-	 } else {
-	 	$("#detailpanel_3").hide();
-	 	$("#tab2").hide();
-	 	
-	 }
-	 if (valueset_type == 'T') {
+		$("#tab0").parent().next().hide()
+	 	$("#tab0").parent().next().next().hide()
+	 	$("#tab0").parent().next().next().next().show()
+	 } else if (valueset_type == 'T') {
 	 	
 	 }
 };

@@ -74,9 +74,12 @@ class HAA_Menus extends HAA_Menus_sugar {
 	}
 
 	function menuHeadData(){
-		global $db;
+		global $db,$current_user;
         $menuheaddata=array();
         $haa_frameworks_id=isset($_SESSION["current_framework"])?$_SESSION["current_framework"]:"";
+        if ($haa_frameworks_id==''){
+            $haa_frameworks_id=$current_user->haa_frameworks_id1_c;
+        }
         $menu_sql="SELECT
             haa_menus.id,
             haa_menus.name
@@ -100,8 +103,11 @@ class HAA_Menus extends HAA_Menus_sugar {
 	}
 
 	function menusData(){
-		global $db;
+		global $db,$current_user;
 		$haa_frameworks_id=isset($_SESSION["current_framework"])?$_SESSION["current_framework"]:"";
+        if ($haa_frameworks_id==''){
+            $haa_frameworks_id=$current_user->haa_frameworks_id1_c;
+        }
         $menus=array();
 		$menus_sql="SELECT
 			haa_menus.id,

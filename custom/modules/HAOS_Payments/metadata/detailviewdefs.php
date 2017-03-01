@@ -149,11 +149,11 @@ array (
           array (
             'name' => 'line_subitems',
             'studio' => 'visible',
-            'label' => 'LBL_LINE_SUBITEMS',
+            'label' => 'LBL_LINE_SUBITEMS', 
+            'customCode' =>'<span id="line_items_span">',
           ),
         ),
         ),
-
     ),
   ),
 );

@@ -198,13 +198,13 @@ array (
           array (
             'name' => 'status',
             'label' => 'LBL_STATUS',
-            'customCode' => '<select name="status" id="status" title="">
-<option label="未付" value="Unpaid">未付</option>
+            'customCode' => '<select name="status" id="status" title="" disabled=true>
+<option label="未付" value="Unpaid" selected = "selected">未付</option>
 <option label="已付" value="Paid">已付</option>
 <option label="已取消" value="Cancelled">已取消</option>
 <option label="部分付款" value="PartedPaid">部分付款</option>
 <option label="已退回" value="Returned">已退回</option>
-</select>&nbsp;&nbsp;&nbsp;&nbsp;<input name="amount_c" id="amount_c" size="30" maxlength="26" value="" title="" tabindex="0" type="text">',
+</select>&nbsp;&nbsp;&nbsp;&nbsp;<input name="amount_c" style="width:180px;" id="amount_c" size="30" maxlength="26" value="" title="" tabindex="0" type="text" disabled=true>',
           ),
           1 => 
           array (
