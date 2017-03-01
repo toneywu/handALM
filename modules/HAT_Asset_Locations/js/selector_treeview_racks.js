@@ -1,15 +1,14 @@
 /*********************
 /* 基于U位明细进行绘图
 /***************************/
-//$.getScript("custom/resources/JSON/json2.js"); //JASON2
-//$.getScript("cache/include/javascript/sugar_grp_yui_widgets.js"); //old MessageBox
+
 $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); //MessageBox
 $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
 
 
 var globalServerData;
 
-function showITRacks(node){ //渲染机柜，在首次加载时被调用
+function showITRacks(node) { //渲染机柜，在首次加载时被调用
 	if(typeof node.data.server != "undefined") {
 		//console.log(node.data.server);
 		globalServerData = node.data;
@@ -33,6 +32,7 @@ function showITRacks(node){ //渲染机柜，在首次加载时被调用
 
 function drawBlocker(i) {//绘制设备占位或空占位
 //显示当前服务器
+	//console.log(globalServerData.server[i]);
 
   	var pos_y = globalServerData.server[i].rack_pos_top;
   	var pos_height = globalServerData.server[i].height;
@@ -50,7 +50,7 @@ function drawBlocker(i) {//绘制设备占位或空占位
   	var pos_obj = $("#position_"+pos_x.substring(0,1)+"_"+pos_y)//定位上左上角的td对象
   	pos_obj.after("<td id='element_"+pos_x.substring(0,1)+"_"+pos_y+"'></td>");
   	var element_obj = $("#element_"+pos_x.substring(0,1)+"_"+pos_y)
-	//console.log(globalServerData.server[i]);
+	console.log(globalServerData.server[i]);
 
 	if(asset_id!=""&&asset_id!=undefined) {
 		//提供了资产编号的都是正常的设备
@@ -66,7 +66,8 @@ function drawBlocker(i) {//绘制设备占位或空占位
 
 	}else{
 		//没有提供资产编号的就是按占位处理
-		element_obj.append(SUGAR.language.get('HAT_Asset_Locations', 'LBL_PLACEHOLDER')+"|"+desc);
+		element_obj.append(SUGAR.language.get('HAT_Asset_Locations', 'LBL_PLACEHOLDER')+asset_desc+
+						" | "+asset_using_org);
 		element_obj.css({
 			"background-color":"#efefef",
 			"vertical-align":"middle",
@@ -135,23 +136,24 @@ function openAssetPopup(ln){//本文件为行上选择资产的按钮
       "name" : "rack_pos_asset_name",
       "asset_desc" : "rack_pos_asset_desc",
       "asset_status" : "rack_pos_asset_status",//注意，这一条目写的是Current
-      "using_org" : "rack_poshat_assets_accounts_name",
-      "using_org_id" : "rack_poshat_assets_accounts_id",
+      "using_org" : "rack_pos_hat_assets_accounts_name",
+      "using_org_id" : "rack_pos_hat_assets_accounts_id",
 /*      "using_person" : "line_current_using_person",
       "using_person_id" : "line_current_using_person_id",
       "using_person_desc" : "line_current_using_person_desc",
 */    }
   };
-  var popupFilter ='&avaliable_it_equipments=true';
+  //var popupFilter ='&avaliable_it_equipments=true';
+  var popupFilter ='&avaliable_it_equipments=true&asset_status1=Idle&asset_status2=Stocked&owning_org_id_advanced='+$("#rack_pos_hat_assets_accounts_id").val();
   open_popup('HAT_Assets', 1200, 850, popupFilter, true, true, popupRequestData);
 }
 
 
 function setAssetReturn(popupReplyData){
   //popupReplyData中lineno会做为行号一并返回
-  console.log(popupReplyData);
+/*  console.log(popupReplyData);
   console.log(globalServerData.server);
-  console.log("lineno="+lineno);
+  console.log("lineno="+lineno);*/
 
   //检查当前机柜上的设备是否有重复
 	for(var i=0; i<globalServerData.server.length; i++){
@@ -176,23 +178,15 @@ function setAssetReturn(popupReplyData){
 
 function openUsingOrgPopup(ln){
   lineno=ln;
-  /*var popupRequestData = {
-    "call_back_function" : "set_return",
-    "form_name" : "EditView",
-    "field_to_name_array" : {
-      "name" : "line_target_using_org" + ln,
-      "id" : "line_target_using_org_id" + ln,
-    },
-  };*/
   var popupRequestData = {
     "call_back_function" : "set_return",
     "form_name" : "EditView",
     "field_to_name_array" : {
-      "name" : "rack_poshat_assets_accounts_name",
-      "id" : "rack_poshat_assets_accounts_id",
+      "name" : "rack_pos_hat_assets_accounts_name",
+      "id" : "rack_pos_hat_assets_accounts_id",
     },
   };
-  
+
   var popupFilter = '&frame_c_advanced='+$("#haa_framework").val();
   open_popup('Accounts', 1000, 850,popupFilter , true, true, popupRequestData);
 }
@@ -201,6 +195,7 @@ function openUsingOrgPopup(ln){
 /* 提供用于数据提交的字段，返回HTML显示一个表单，用于显示设备的单元格信息
 /***************************************************************************************/
 function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
+
 	var return_html="";
 	var numberingRule = globalServerData.numbering_rule;//获取是大编号在TOP还是小编号在TOP，影响Height的计算
 
@@ -233,9 +228,11 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
 
 	return_html +=
       "<span class='input_group ig_using_org'>"+
-      "<label id='rack_poshat_assets_accounts_name_label'>"+SUGAR.language.get('HIT_Rack_Allocations', 'LBL_ASSET_ACCOUNT')+" <span class='required'>*</span></label>"+
-      "<input class='sqsEnabled' style='width:153px;' autocomplete='off' type='text' name='rack_poshat_assets_accounts_name' id='rack_poshat_assets_accounts_name' value='' title='' >"+
-      "<input type='hidden' name='rack_poshat_assets_accounts_id' id='rack_poshat_assets_accounts_id' value='' />"+
+
+      "<label id='rack_pos_hat_assets_accounts_name_label'>"+SUGAR.language.get('HIT_Rack_Allocations', 'LBL_ASSET_ACCOUNT')+" <span class='required'>*</span></label>"+
+      "<input class='sqsEnabled' style='width:153px;' autocomplete='off' type='text' name='rack_pos_hat_assets_accounts_name' id='rack_pos_hat_assets_accounts_name' value='' title='' >"+
+      "<input type='hidden' name='rack_pos_hat_assets_accounts_id' id='rack_pos_hat_assets_accounts_id' value='' />"+
+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openUsingOrgPopup();'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>";
 
@@ -274,7 +271,6 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
 		var desc = globalServerData.server[i].desc;
 
 		return_html += "<script>";
-
 	    for (var propertyName in globalServerData.server[i]) {
 	      //这里直接遍历所有的属性（因此需要建立与Bean属性同名的各个字段）
 	      if ($("#rack_pos_"+propertyName).is(':checkbox')) {
@@ -283,20 +279,23 @@ function showITRacksForm(isPopup, varDeepth, varHeight, varTopmost , i) {
 	        }
 	      } else {
 	       //如果当前字段不是checkbox，就以val的形式赋值
-	       //console.log("#rack_pos_"+propertyName+"="+globalServerData.server[i][propertyName]);
+	        console.log("#rack_pos_"+propertyName+"="+globalServerData.server[i][propertyName]);
 	        return_html +='$("#rack_pos_'+propertyName+'").val("'+globalServerData.server[i][propertyName]+'");'
 	      }
 	    }
-
-		return_html += "</script>";
-
+	    return_html += "</script>";
 	}
-
-    //处理特殊的默认值
-    if($("#target_using_org_id").val()!="") {
+    //处理特殊的默认值(有参数传递来的)
+    if($("#target_using_org_id").length && $("#target_using_org_id").val()!="" && $("#target_using_org_id").val()!="undefined") {
     	return_html +="<script>"
         return_html +='$("#rack_pos_hat_assets_accounts_name").val($("#target_using_org").val());'
         return_html +='$("#rack_pos_hat_assets_accounts_id").val($("#target_using_org_id").val());'
+    	return_html +="</script>"
+    }
+
+    if( typeof(globalServerData.server[i])!= 'undefined' && globalServerData.server[i].placeholder=="1") {
+    	return_html +="<script>"
+        return_html +='$("#rack_pos_placeholder").attr("checked", true);'
     	return_html +="</script>"
     }
 
@@ -530,8 +529,10 @@ function savePlaceHolder(i) {
 	asset_id = (typeof($('#rack_pos_asset_id').val())!="undefined")?$('#rack_pos_asset_id').val():"";
 	if (asset_id=="") {//ID为空时当前字段为占位符号，否则正常显示设备名
 		asset_name = SUGAR.language.get('HAT_Asset_Locations', 'LBL_PLACEHOLDER');
+		placeholder = 1;
 	}else{
 		asset_name = (typeof($('#rack_pos_asset_name').val())!="undefined")?$('#rack_pos_asset_name').val():"";
+		placeholder = 0;
 	}
 	asset_desc = (typeof($('#rack_pos_asset_desc').val())!="undefined")?$('#rack_pos_asset_desc').val():"";
 	asset_status = (typeof($('#rack_pos_asset_status').val())!="undefined")?$('#rack_pos_asset_status').val():"";
@@ -559,6 +560,7 @@ function savePlaceHolder(i) {
 	    hat_assets_accounts_name : asset_using_org,
 	    hat_assets_accounts_id : asset_using_org_id,
 	    desc: desc,
+	    placeholder: placeholder,
 	    inactive_using: inactive_using,
 	    allc_status: "DRAFT",
 	};
@@ -566,9 +568,10 @@ function savePlaceHolder(i) {
 	if (i==undefined) { //插入或更新到当前对象数列中
   		globalServerData.server.push(Blocker);
   		i=globalServerData.server.length-1;
-	}else{
+	} else {
 		globalServerData.server[i]=Blocker;
 	}
+
 
 	//console.log(Blocker.inactive_using+":"+Blocker.inactive_using!=0)
 	if(Blocker.inactive_using!=1) {

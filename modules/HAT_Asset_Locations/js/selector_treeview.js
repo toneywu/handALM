@@ -38,12 +38,12 @@ var setting = {
 			}
 		},
 	};
-
+var loadNextLevel = false;
 
 
 	function filter(treeId, parentNode, childNodes) {//对加载后的结果进行处理,这一段是树结点数据展示的关键字段
 	if (!childNodes) return null;
-		console.log(childNodes);
+		//console.log(childNodes);
 		for (var i=0, l=childNodes.length; i<l; i++) {
 			//childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
 			//name是会在Tree中展示的名称
@@ -145,16 +145,27 @@ var setting = {
 	}
 
 	function onAsyncSuccess(e, treeId, treeNode) {
-			//if (!treeNode) return;
-			zTreeObj= $.fn.zTree.getZTreeObj(treeId);
-			if (treeNode.children.length==0) { //如果尝试加载后发现没有子节点，就将当前节点标记为末节点
-				treeNode.isParent = false;
-				zTreeObj.updateNode(treeNode);
-			}
+		//if (!treeNode) return;
+		//标记是否为最后一个节点
+		zTreeObj= $.fn.zTree.getZTreeObj(treeId);
+		if (treeNode.children.length==0) { //如果尝试加载后发现没有子节点，就将当前节点标记为末节点
+			treeNode.isParent = false;
+			zTreeObj.updateNode(treeNode);
+		}
 
-			//zTreeObj.setChkDisabled(treeNode, true);//先标记当前结点Checkbox状态为不可点，如果有子节点，当前节点有可能被标记为可点
+		//判断是否需要再打开一层子节点
+		if (loadNextLevel) {
+			for (var i=0, l=treeNode.children.length; i<l; i++) {
+				zTreeObj.reAsyncChildNodes(treeNode.children[i], "refresh", true);
+			}
+			loadNextLevel=false
+		}
+
+		//以下是针对多选的情况进行处理
+		if (zTreeObj.setting.check.enable == true) {
+			//del:zTreeObj.setChkDisabled(treeNode, true);//先标记当前结点Checkbox状态为不可点，如果有子节点，当前节点有可能被标记为可点
 			for (var i=0, l=treeNode.children.length; i<l; i++) {//标记Checkbox状态
-				//markNodeCheckable(e, treeId, treeNode.children[i]);
+				//del:markNodeCheckable(e, treeId, treeNode.children[i]);
 				//如果当前某个子结点满足要求
 				if (checkNodeSelectable(e, zTreeObj, treeNode.children[i])) {
 					zTreeObj.setChkDisabled(treeNode.children[i], false);//如果满足条件，当前字段为可勾选
@@ -162,8 +173,9 @@ var setting = {
 				}else{
 					zTreeObj.setChkDisabled(treeNode.children[i], true);//如果不满足条件，当前字段为不可勾选
 				};
-			}
-		}
+			}//end for
+		}//end if
+	}
 
 	function setAllParentsCheckable(e, zTreeObj, treeNode) {
 	//通过向上循环将同一个路径上的节点都标为可点击（在多选时使用，如果子节点可以选择，则通过这一方法将父结点变为可选择）
@@ -222,14 +234,22 @@ var setting = {
 
 
 
-	function ajaxGetNodes(treeNode, type) {
+	function ajaxGetNodes(treeNode, type, silent = false) {
 			zTree.reAsyncChildNodes(treeNode, type, false);
 	};
 
-	function loadDataForNodeDetail(treeObj, node, targetDIV) {//通过Ajax加载当前节点明细
+
+	function openGridDetail(asset_id) {
+		var zTreeObj = $.fn.zTree.getZTreeObj("treeview_selector");
+		var treeNode = zTreeObj.getNodeByParam("id",asset_id,null);
+		loadDataForNodeDetail(zTreeObj, treeNode, $("#node_details"), true);
+	}
+
+
+	function loadDataForNodeDetail(treeObj, node, targetDIV, keepMidPanel = false) {//通过Ajax加载当前节点明细
 		var id = node.id;
 		var type = node.type;
-		console.log('index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeNodeDetailHTML&id=' + id+"&type="+ type);
+		//console.log('index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeNodeDetailHTML&id=' + id+"&type="+ type);
 		if ( typeof(node.data)== 'undefined') {
 			//undefined说明当前的结点没有明细信息，所以需要通过Ajax加载数据
 			targetDIV.html('<img align="absmiddle" src="custom/resources/zTree/css/metroStyle/img/loading.gif"></span> '+SUGAR.language.get('app_strings', 'LBL_LOADING'));
@@ -245,7 +265,7 @@ var setting = {
 						treeObj.updateNode(node);
 						console.log(node);
 						//node.setNodesProperty("NodeLoaded", "true" , true);
-						showNodeDetailHTML(node,targetDIV);
+						showNodeDetailHTML(treeObj, node, targetDIV, keepMidPanel);
 					},
 					error: function () { //失败
 						alert('Error loading document');
@@ -253,7 +273,7 @@ var setting = {
 				})
 		}else{
 			//如果当前节点已有明细数据，则不通过Ajax加载，直接进行显示
-			showNodeDetailHTML(node,targetDIV);
+			showNodeDetailHTML(treeObj, node, targetDIV, keepMidPanel);
 		}
 	}
 
@@ -294,32 +314,40 @@ function btn_search_clicked() {
 
 }
 
-function showNodeDetailHTML(node,targetDIV) {
+/************************************/
+/*加载最右侧的详细信息内容          */
+/************************************/
+function showNodeDetailHTML(treeObj, node, targetDIV, keepMidPanel = false ) {
 
+	//如果当前节点是Gird模式，则展开当前界面的中间界面，并绘制布局图
 	if (typeof(node.data.special_mode)!='undefined') {
-		showGridPanel();
-		DrawGridPosition(node.id)
+		showGridPanel();//展开界面
+		DrawGridPosition(treeObj, node)//绘制布局图
+		//TODO：这里有一个优化点，每次点击房间结点都会刷新界面，应当基于Node缓存进行绘制
+	} else if(keepMidPanel==true) {
+		showGridPanel();//展开界面但不加载布局图
 	} else {
-		hideGridPanel();
+		hideGridPanel();//不显示展开的界面
 	}
+
 
 	//加载每个节点的详细内容
 	var varHTML = "";
 	varHTML ="<h3>"+(node.detailed_name)+"</h3>";
-	if (node.type=='location'||node.type=='asset') {
+	if (node.type=='location' || node.type=='asset') {
 
 		//显示主要动作按钮
 		if (current_mode=="view") {
-			varHTML+="<div class='detail_action_panel'>";
+			varHTML+="<div class='detail_action_panel'><ul>";
 			for (index = 0; index < node.data.btn.length; ++index) {
-			    varHTML+="<a href='"+node.data.btn[index]['link']+"' class='button'>"+node.data.btn[index]['lab']+"</a>";
+			    varHTML+="<li><a href='"+node.data.btn[index]['link']+"' class='button'>"+node.data.btn[index]['lab']+"</a></li>";
 			}
 		} else {
 			varHTML+=showNodeDetailBtn(node);
 		}
-
-
 		varHTML+="</div>";
+
+
 		//显示主要字段
 		varHTML+="<div class='detailed_data_table'>"
 		for (var index = 0; index < node.data.fields.length; ++index) {
@@ -336,6 +364,8 @@ function showNodeDetailHTML(node,targetDIV) {
 	//读取机柜信息
 	if( typeof (node.data.rackid) != "undefined") {
 		showITRacks(node);
+		//显示布局调整，机柜之前是画到机柜信息之后，现在将此图前移
+		$("#rack_frame").prependTo($(".detailed_data_table"));
 	}
 
 	if (current_mode=="rackposition") {//如果当前模式是选择U位，则出现U位选择的按钮
@@ -344,9 +374,28 @@ function showNodeDetailHTML(node,targetDIV) {
 }
 
 
-function DrawGridPosition(location_id) {
+/************************************/
+/*在中间的图层进行Gird布局图的绘制 */
+/************************************/
+function DrawGridPosition(treeObj, location_node) {
+
+	//预先加载2层节点（用于直接点击）
+	if (location_node.zAsync == false) {
+		//加载第1层节点
+		loadNextLevel=true; //需要加载后再加载一层
+		treeObj.reAsyncChildNodes(location_node, "refresh", true);
+	} else {//检查子节点是否都已经加载，如果没有加载则补充
+		for (var i=0, l=location_node.children.length; i<l; i++) {
+			if (location_node.children[i].zAsync == false) {
+				zTreeObj.reAsyncChildNodes(location_node.children[i], "refresh", true);
+			}
+		}
+	}
+
+	//加载中间页的内容
+	$("#workbench_mid").html('<div style="padding:20px"><img align="absmiddle" src="custom/resources/zTree/css/metroStyle/img/loading.gif"></span> '+SUGAR.language.get('app_strings', 'LBL_LOADING'))+"</div>";
 	$.ajax({//读取子地点
-		url: 'index.php?to_pdf=true&module=HAT_Gird_Rules&action=DrawGrid&location_id='+location_id+'&tabtype=1',
+		url: 'index.php?to_pdf=true&module=HAT_Gird_Rules&action=DrawGrid&location_id='+location_node.id+'&tabtype=1',
 		success: function (data) {
 			$("#workbench_mid").html(data);
 		},
@@ -362,9 +411,9 @@ function showNodeDetailBtn(node) {
 	//如果是在选择模块下（参数current_mode!="view")。Ajax不会返回HTML形式的Buttons
 	//因此在JS中生成按钮。
 	//
-	console.log("current_mode="+current_mode);
+/*	console.log("current_mode="+current_mode);
 	console.log("node.type="+node.type);
-	console.log("node.data.rackid="+node.data.rackid);
+	console.log("node.data.rackid="+node.data.rackid);*/
 	if 
 	($("#mode").val()!="MultiSelect" &&
 	((current_mode=="asset" && node.type=="asset") ||//选择所有资产
@@ -372,30 +421,30 @@ function showNodeDetailBtn(node) {
 		(current_mode=="rack" && node.type=="asset" && typeof(node.data.rackid)!="undefined") //选择机柜
 		))
 		 {
-		 return "<a href='#' class='button' onclick='btn_select_clicked()'>"+SUGAR.language.get('HAT_Asset_Locations', 'LBL_BTN_SELECT')+"</a>";
+		 return "<a href='#' id='singleSelectBtn' class='button' onclick='btn_select_clicked(\""+node.id+"\")'>"+SUGAR.language.get('HAT_Asset_Locations', 'LBL_BTN_SELECT')+"</a>";
 	} else {
 		return "";
 	}
 }
 
 
-function btn_select_clicked() {
+function btn_select_clicked(node_id) {
 	//在选择模式下返回值
 	var treeObj = $.fn.zTree.getZTreeObj("treeview_selector");
-	var nodes = treeObj.getSelectedNodes();
-	var id = nodes[0].id;
+	var node = treeObj.getNodeByParam("id", node_id, null);//treeObj.getSelectedNodes();
+	var id = node.id;
 
 	data="";
-	for(var fields in nodes[0]['data']['rdata']) {
-	   data += '"'+ fields.toUpperCase()+'":"'+nodes[0]['data']['rdata'][fields]+'",';
+	for(var fields in node['data']['rdata']) {
+	   data += '"'+ fields.toUpperCase()+'":"'+node['data']['rdata'][fields]+'",';
 
 	}
 	data = data.slice(0, -1);//cut last char
 
-	if (nodes[0]['data']['rdata']['enable_it_rack']=="1") {
-		data='{"'+nodes[0]['data']['rdata']['id']+'":{'+data+returnRackData()+'}}';
+	if (node['data']['rdata']['enable_it_rack']=="1") {
+		data='{"'+node['data']['rdata']['id']+'":{'+data+returnRackData()+'}}';
 	} else {
-		data='{"'+nodes[0]['data']['rdata']['id']+'":{'+data+'}}';
+		data='{"'+node['data']['rdata']['id']+'":{'+data+'}}';
 	}
 
 	//console.log(jQuery.parseJSON(data));

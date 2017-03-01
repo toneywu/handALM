@@ -26,7 +26,7 @@
 <style type="text/css">
 	#workbench_left {
 		width:250px;
-		height:600px;
+		height:700px;
 		float:left;
 		background-color:#efefef;
 		overflow: scroll;
@@ -46,15 +46,20 @@
 	}
 
 	#node_details {
-		padding: 20px;
+		padding: 10px 20px;
 		overflow:auto;
 	}
-
+	#node_details #singleSelectBtn {
+		float: right;
+		margin-top: -60px;
+	}
 	#node_details h3 {
 		padding: 10px 5px 15px 5px;
 		font-size:medium;
 		border-bottom: 1px solid #000;
 		margin:0 0 20px 0;
+		letter-spacing: 2px;
+		line-height: 1.25em
 	}
 	#node_details p span,#node_details p span a {
 		font-size: small;
@@ -91,51 +96,37 @@
 		margin:5px;
 		padding: 2px 5px;
 		font-size: small;
+		min-width: 265px;
 	}
 
 	.field_span {
 		padding: 0px;
 	}
-	.top_label,.top_filter_label {
+	.top_label, .top_filter_label {
 		width:80px;
 		display: inline-flex;
 		text-align: right;
 	}
-	#selector_top_view {
+	#workbench_toolbar .input_group {
+		padding: 5px;
+		display: inline-block;
+	}
+	#workbench_toolbar {
+		clear: both;
 		background-color:aliceblue;
 		padding: 10px 5px;
-		margin: -2px 0 0 0;
+		margin: 0;
 		border: 1px solid #ccc;
+		height: 15px;
 	}
-
-	#selctor_top_view_details {
-		border-right:1px dashed #ccc;
+	#workbench_toolbar>div {
+		display: none;
 	}
-
-	#select_mode .tab_label {
-		margin: 0 1em 0 0;
-		vertical-align:middle;
-		font-size: medium;
+	#workbench_toolbar:hover {
+		height:100%;
 	}
-	#select_mode .tabFocused, #select_mode .tabUnfocused {
-		border-radius: 5px 5px 0 0;
-		display: inline-flex;
-		vertical-align:middle;
-		padding: 10px 15px;
-	}
-	#select_mode .tabFocused {
-		background-color:aliceblue;
-		border: 1px solid #ccc;
-		border-bottom: 0;
-	}
-	#select_mode .tabUnfocused {
-		background-color:#efefef;
-		border: 1px solid #ccc;
-	}
-	.input_group {
-		display: inline-block;
-		padding-right: 1em;
-		padding-left: 1em;
+	#workbench_toolbar:hover>div {
+		display: block;
 	}
 .treeview_location {
 	font-weight: bolder;
@@ -153,25 +144,94 @@
 	/*padding:1px 15px 2px 10px;*/
 }
 .detail_action_panel {
-	margin: 25px 0;
+	display: inline-block;
+}
+.detail_action_panel li {
+	float: left;
+	list-style: none;
+	margin-right: 4px;
+}
+.detailed_data_table {
+	clear:left;
+	padding-top: 0.5em;
 }
 #MultiSelectDiv {
 	float: right;
 	padding:5px;
+	min-width: 280px
+}
+#MultiSelectDiv>input[type='button']{
+	float: right;
 }
 #MultiSelectCount {
     font-weight: bold;
     font-size: large;
     background-color: #c5efff;
-    padding: 5px 12px;
+    padding: 3px 10px;
+    margin: 0 0.5em 0 3em;
     border-radius: 15px;
 }
-#MultiSelectDiv ul {
-	padding: 20px;
+
+#MultiSelectList {
+	color:#000;
+	background-color: #fff;
+	padding:0;
+	box-shadow: 0 13px 25px 0 rgba(0,0,0,0.3), 0 11px 7px 0 rgba(0,0,0,0.19);
+}
+#MultiSelectList ul {
+	padding: 10px;
     list-style-type: none;
     max-height: 400px;
     overflow-y: scroll;
 }
+
+#MultiSelectDiv #MultiSelectList li{
+	padding:4px;
+}
+
+	.GridTable
+	{
+		border-collapse:separate;
+		border-spacing:8px;
+		max-width:90%;
+	}
+
+	.GridTable tr td,.GridTable tr td div{
+		width: 80px;
+		height: 60px;
+		overflow: hidden;
+		font-size: 10px;
+		padding: 0;
+	}
+	.GridTable tr td div{
+		border: 1px solid #ccc;
+		padding: 4px;
+		cursor: pointer;
+	}
+	.GridTable tr td div.empty{
+		border: 1px dashed #ddd;
+	}
+	.GridTable tr td.frist,.GridTable tr td.frist div{
+		background: #f3eedf;
+		color: #000;
+		overflow: inherit;
+		height: 100%;
+	}
+
+	.GridTable tr td div span {
+		line-height: 1.1em;
+		display: inline-block;
+	}
+
+	.GridTable tr td div .asset_name {
+		font-weight:bold;
+	}
+
+	.GridTable tr,.GridTable tr td div:hover{
+		overflow: inherit;
+		height: 100%;
+		border: 1px solid #000;
+	}
 
 </style>
 
@@ -227,11 +287,11 @@
  			echo '<input type="hidden" id="target_using_org_id" name="target_using_org_id" value="">';
  		}
 
-		if (isset($_REQUEST['mode'])&&$_REQUEST['mode']=='MultiSelect'){//如果有值就多选模式
+		if (isset($_REQUEST['mode'])&&$_REQUEST['mode']=='MultiSelect') {//如果有值就多选模式
  			echo '<input type="hidden" id="mode" name="mode" value="MultiSelect">';
     			//多选区
 			echo '<div id="MultiSelectDiv" class="dropdown">
-					<span id="MultiSelectCount">0</span><span> Object(s) has been selected.</span>
+					<span id="MultiSelectCount">0</span><span>'. translate('LBL_SELECTOR_LABEL','HAT_Asset_Locations').' </span>
 					<input class="button" type="button" id="MassUpdate_select_button" value="选择" onclick="send_back_selected(\'HAT_Assets\',document.popup_query_form,\'mass[]\',\'继续之前请选择。\');">
 					<div id="MultiSelectList" class="dropdown-menu"></div>
 				</div>';
@@ -266,17 +326,14 @@
 
 <div id="selector_top">
 <!--顶部的TAB标签-->
-	<div id="select_mode">
-		 <div id="selectorType_Tree" class="tabFocused">
+	<ul class="nav nav-tabs">
+		<li id="selectorType_Tree" class="active"><a href="#tree_toolbar" data-toggle="tab">
 	         <span class="tab_label"><i class="icon-sitemap"></i> <?php echo translate('LBL_NAV_MODE_TREE','HAT_Asset_Locations');?> </span>
-		     <select id="selector_view_tree" class="form-horizontal">
-		     <?php foreach ($app_list_strings['hat_navigator_tree_type_list'] as $key => $value) {
-		     	echo '<option value="'.$key.'">'.$value.'</option>';
-		     }?>
-			</select>
-			<input type="hidden" id="current_view">
-			<button id="btn_switch_tree_view"><?php echo  translate('LBL_BTN_SWITCH_VIEW','HAT_Asset_Locations');?></button>
-	    </div>
+			</a>
+	    </li>
+	    <li id="selectorType_Search"><a href="#search_toolbar" data-toggle="tab">
+	    	<span class="tab_label"><i class="glyphicon glyphicon-filter"></i> <?php echo translate('LBL_NAV_MODE_SEARCH','HAT_Asset_Locations');?> </span></a>
+	    </li>
 <!-- 		<div id="selectorType_Grid" class="tabUnfocused">
 	        <span class="tab_label"><i class="icon-map-o"></i> <?php echo  translate('LBL_NAV_MODE_GIRD','HAT_Asset_Locations')?> </span>
 			<button id="btn_switch_grid_view"><?php echo translate('LBL_BTN_SWITCH_VIEW','HAT_Asset_Locations');?></button>
@@ -290,52 +347,62 @@
 			</select>
 			<button id="btn_switch_map_view"><?php echo translate('LBL_BTN_SWITCH_VIEW','HAT_Asset_Locations');?></button>
 	    </div>-->
+	</ul>
 
+	<!--Search area-->
+	<div id="workbench_toolbar" class="tab-content clearfix">
+		<div class="tab-pane active" id="tree_toolbar">
+		     <select id="selector_view_tree" class="form-horizontal">
+		     <?php foreach ($app_list_strings['hat_navigator_tree_type_list'] as $key => $value) {
+		     	echo '<option value="'.$key.'">'.$value.'</option>';
+		     }?>
+			</select>
+			<input type="hidden" id="current_view">
+			<button id="btn_switch_tree_view"><?php echo  translate('LBL_BTN_SWITCH_VIEW','HAT_Asset_Locations');?></button>
+		</div>
+		<div class="tab-pane active" id="search_toolbar">
+			<form id="search_form" name="search_form" method="post">
+				<div id="selector_top_view">
+							<span class="input_group">  
+								<label id="assetStatus_label">维护地点/区域</label>
 
+					<?php
+					require_once('modules/HAA_Frameworks/orgSelector_class.php');
+					$current_site_id = empty($_REQUEST['site_id'])?"":$_REQUEST['site_id'];
+					echo set_site_selector($current_site_id,$current_module,$current_action);
+					?>
+							</span>
+
+							<span class="input_group">  
+								<label id="assetStatus_label">资产状态</label>
+								<select name="asset_status" id="asset_status" class="form-horizontal">
+							     <?php foreach ($app_list_strings['hat_asset_status_list'] as $key => $value) {
+							     	echo '<option value="'.$key.'">'.$value.'</option>';
+							     }?>
+								</select>
+							</span>
+							<span class="input_group">
+								<label id="assetName_label">资产名称</label>
+								<input name="asset_name" id="asset_name">
+							</span>
+							<span class="input_group">
+								<label id="serial_number_label">S/N号</label>
+								<input name="serial_number" id="serial_number">
+							</span>
+							<span class="input_group">
+								<label id="owning_org_name_label">所属组织</label>
+								<input name="owning_org_name" id="owning_org_name">
+							</span>
+							<span class="input_group">
+								<label id="using_org_name_label">使用组织</label>
+								<input name="using_org_name" id="using_org_name">
+							</span>
+					    <input type="button" id="btn_search" onclick="btn_search_clicked()" value="搜索">
+				</div>
+			</form>
+		</div>
 	</div>
-
-<!--Search area-->
-<form id="search_form" name="search_form" method="post">
-	<div id="selector_top_view" class="row">
-				<span class="input_group">  
-					<label id="assetStatus_label">维护地点/区域</label>
-
-<?php
-		require_once('modules/HAA_Frameworks/orgSelector_class.php');
-		$current_site_id = empty($_REQUEST['site_id'])?"":$_REQUEST['site_id'];
-		echo set_site_selector($current_site_id,$current_module,$current_action);
-?>
-				</span>
-
-				<span class="input_group">  
-					<label id="assetStatus_label">资产状态</label>
-					<select name="asset_status" id="asset_status" class="form-horizontal">
-				     <?php foreach ($app_list_strings['hat_asset_status_list'] as $key => $value) {
-				     	echo '<option value="'.$key.'">'.$value.'</option>';
-				     }?>
-					</select>
-				</span>
-				<span class="input_group">
-					<label id="assetName_label">资产名称</label>
-					<input name="asset_name" id="asset_name">
-				</span>
-				<span class="input_group">
-					<label id="serial_number_label">S/N号</label>
-					<input name="serial_number" id="serial_number">
-				</span>
-				<span class="input_group">
-					<label id="owning_org_name_label">所属组织</label>
-					<input name="owning_org_name" id="owning_org_name">
-				</span>
-				<span class="input_group">
-					<label id="using_org_name_label">使用组织</label>
-					<input name="using_org_name" id="using_org_name">
-				</span>
-		    <input type="button" id="btn_search" onclick="btn_search_clicked()" value="搜索">
-	</div>
-</form>
-
-
+</div>
 <div id="workbench" style="margin:0;display:flex;border:1px solid #ccc">
 	<div id="workbench_left">
 		<ul id="treeview_selector" class="overflow: scroll">
@@ -377,15 +444,35 @@ $(document).ready(function(){
 	$("#selectorType_Tree").click(function(){
 		$("#selectorType_Tree").addClass("tabFocused");
 		$("#selectorType_Tree").removeClass("tabUnfocused");
+		$("#selectorType_Search").addClass("tabUnfocused");
+		$("#selectorType_Search").removeClass("tabFocused");
 		$("#selectorType_Grid").addClass("tabUnfocused");
 		$("#selectorType_Grid").removeClass("tabFocused");
 		$("#selectorType_Map").addClass("tabUnfocused");
 		$("#selectorType_Map").removeClass("tabFocused");
+		$("#search_form").hide()
 		$("#selector_map_type").hide();
 		$("#selector_view_tree").show();
 		$("#btn_switch_map_view").hide();
 		$("#btn_switch_grid_view").hide();
 		$("#btn_switch_tree_view").show();
+	});
+
+	$("#selectorType_Search").click(function(){
+		$("#selectorType_Tree").addClass("tabUnfocused");
+		$("#selectorType_Tree").removeClass("tabFocused");
+		$("#selectorType_Search").addClass("tabFocused");
+		$("#selectorType_Search").removeClass("tabUnfocused");
+		$("#selectorType_Grid").addClass("tabUnfocused");
+		$("#selectorType_Grid").removeClass("tabFocused");
+		$("#selectorType_Map").addClass("tabUnfocused");
+		$("#selectorType_Map").removeClass("tabFocused");
+		$("#search_form").show()
+		$("#selector_map_type").hide();
+		$("#selector_view_tree").hide();
+		$("#btn_switch_map_view").hide();
+		$("#btn_switch_grid_view").hide();
+		$("#btn_switch_tree_view").hide();
 	});
 
 	$("#selectorType_Map").click(function(){

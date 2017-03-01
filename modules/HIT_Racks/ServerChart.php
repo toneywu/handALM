@@ -11,7 +11,7 @@ function getServerChart($RackBean, $mode) {
   $total_hight = $RackBean->height;
   $numbering_rule = $RackBean->numbering_rule;
 
-  $position_html .="<table id='rack_frame' class='rack_frame' style='width:450px'>";
+  $position_html .="<table id='rack_frame' class='rack_frame'>";
   $position_html_header = "<tr><th id='position_label_title' class='rack_title' style='width:10%'>RU</th><th id='position_f_title' class='rack_title' style='width:35%'>".translate('LBL_RACK_POS_F','HIT_Racks')."</th><th id='position_m_title' class='rack_title' style='width:35%'>".translate('LBL_RACK_POS_M','HIT_Racks')."</th><th id='position_b_title' class='rack_title'style='width:20%'>".translate('LBL_RACK_POS_B','HIT_Racks')."</th></tr>";
   $position_html .= $position_html_header;
   //画出机架框

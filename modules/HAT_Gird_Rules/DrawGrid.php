@@ -11,7 +11,7 @@
 //index.php?module=HAT_Gird_Rules&action=DrawGrid&location_id=8fe32ae3-116b-ff2c-2cab-584a5e3ed2b5&tabtype=1
 	global $app_list_strings, $timedate, $db;
 	$location_id = $_REQUEST['location_id'];
-
+	$current_framework=(isset($_SESSION["current_framework"]))?$_SESSION["current_framework"]:"";
 	function rotate($a) {
 		$b = array();
 		foreach ($a as $val) {
@@ -67,17 +67,23 @@
 		$lresult['sign'] = 1;
 		$data[$lresult['id']][] = $lresult;
 		//设备信息
-		$assetsql = "SELECT hat_assets.`id` AS asid, hat_assets.`name` AS asname,hat_assets.`asset_status`,accounts.`name` as acname FROM hat_asset_locations_hat_assets_c c LEFT join hat_assets on hat_assets.id = c.`hat_asset_locations_hat_assetshat_assets_idb`  LEFT JOIN accounts ON hat_assets.`using_org_id` = accounts.`id`  WHERE c.`hat_asset_locations_hat_assetshat_asset_locations_ida` = '".$lresult['id']."' AND hat_assets.`deleted`=0  order by hat_assets.`name` ASC";
+		//
+		$rackOnly = " AND hat_assets.enable_it_rack = 1 ";
+		$assetsql = "SELECT hat_assets.`id` AS asid, hat_assets.`name` AS asname,hat_assets.`asset_status`,accounts.`name` as acname FROM  hat_assets LEFT JOIN hat_asset_locations_hat_assets_c c on hat_assets.id = c.`hat_asset_locations_hat_assetshat_assets_idb`  LEFT JOIN accounts ON hat_assets.`using_org_id` = accounts.`id` WHERE c.`hat_asset_locations_hat_assetshat_asset_locations_ida` = '".$lresult['id']."' AND hat_assets.`deleted`=0  and c.`deleted`=0 AND hat_assets.haa_frameworks_id='".$current_framework."' AND (hat_assets.parent_asset_id = '' OR hat_assets.parent_asset_id IS NULL) ".$rackOnly." order by hat_assets.`name` ASC";
 			$beanasset = $db->query($assetsql);
 			if($beanasset->num_rows > $xcount){
 				$xcount = $beanasset->num_rows;
 			}
-			while ( $result = $db->fetchByAssoc($beanasset) ) {
-				$result['sign'] = 0;
-				$result['racks'] = getOccupationCnt($result['asid']);
+			while ( $aresult = $db->fetchByAssoc($beanasset) ) {
+				$aresult['sign'] = 0;
+				$aresult['racks'] = getOccupationCnt($aresult['asid']);
 				//echo($result['asname']."<br/>");
-				$data[$lresult['id']][] = $result;
+				$data[$lresult['id']][] = $aresult;
 			}
+	}
+	//自动补充数组
+	foreach ($data as $ak => $av){
+		$data[$ak] = array_pad($av, $xcount+1, 0);
 	}
 	$tabtype = !empty($_GET['tabtype'])?1:0;
 	//表格重排
@@ -89,40 +95,14 @@
 	}
 	//dump($data);
 	?>
-<style>
-	table
-	{
-		border-collapse:separate;
-		border-spacing:10px 10px;
-	}
-	.table_box{max-width:90%;}
-	.table_box tr td,.table_box tr td div{
-		width: 80px;
-		height: 60px;
-		overflow: hidden;
-	}
-	.table_box tr,.table_box tr td div:hover{
-		overflow: inherit;
-		height: 100%;
-	}
-	.table_box tr td{
-		padding: 5px;
-		cursor: pointer;
-	}
-	.table_box tr td.frist,.table_box tr td.frist div{
-		background: #efefef;
-		color: #000;
-		overflow: inherit;
-		height: 100%;
-	}
-</style>
+
 <script>
 	function openAssetPopup(id){
 		popupFilter = '&action=DetailView&record='+id;
 		open_popup('HAT_Assets', 1000, 750, popupFilter, true, true,'{}');
 	}
 </script>
-<table class="table_box">
+<table class="GridTable">
 	<?php
 		if($tabtype == 0) {
 			?>
@@ -144,27 +124,19 @@
 	<tr>
 	<?php
 		if($tabtype == 1){
-			?>
-			<td class="frist">
-				<?php echo $j-1; ?>
-			</td>
-			<?php
+			echo '<td class="frist col"><div>'. ($j-1) .'</div></td>';
 		}
 		foreach($av as $k => $v) {
 			if ($v['sign'] == 1) {
-				?>
-				<td class="frist">
-					<div>(<?php echo $j; ?>)<?php echo $v['name']; ?></div>
-				</td>
-				<?php
+				echo '<td class="frist"><div>'. $v['name'] .'</div></td>';
 			} else {
-				?>
-				<td onclick="openAssetPopup(<?php echo "'".$v['asid']."'";?>)"   class="<?php echo 'color_asset_status_'.$v[asset_status]; ?>">
-					<div>
-					<?php echo $v['asname'] . "<br>" . $v['acname'] . "<br>" .$v['racks']; ?>
-					</div>
-				</td>
-				<?php
+				if($v == 0){
+					echo "<td><div class='empty'></div></td>";
+				}else {
+					echo "<td onclick='openGridDetail(\"".$v['asid']."\")' class='color_asset_status_". $v['asset_status']."'><div><span class='asset_name'>";
+				    echo $v['asname'] . "</span><span class='using_org'>". $v['acname'] . "</span><span class='rack_all'>" . $v['racks'] . "</span>";
+				    echo "</div></td>";
+				}
 			}
 		}
 	?>

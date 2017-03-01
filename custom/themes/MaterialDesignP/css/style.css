@@ -127,7 +127,7 @@ input.sqsEnabled {
 /***************************************************/
 
 div#ajaxloading {/*解决不居中的问题*/
-	margin-left:-180px;
+	margin-left:-100px;
 }
 div#loadingPage {
 	font-size: 20px;
@@ -418,16 +418,6 @@ input.yui-ac-input {
 	width: 60em;
 }*/
 
-/*TREEVIEW*/
-
-#treeview_selector .button{
-	box-shadow: none;
-}
-
-.detailed_data_table {
-	display:  table;
-	margin:0 0 2em 0;
-}
 
 /*机柜管理中显示机柜中的设备*/
 .Rack_Elements {
@@ -435,6 +425,13 @@ input.yui-ac-input {
 }
 .Rack_Elements:hover{
 	border-width:3px;
+}
+.rack_frame {
+	border-spacing: 0;
+	border-collapse: collapse;
+	width: 298px;
+	float: left;
+	margin: 0 3em 3em 0;
 }
 .rack_frame tr td.rack_highlighted {
 	background-color: blue;

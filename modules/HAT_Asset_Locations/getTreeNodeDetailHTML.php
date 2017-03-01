@@ -88,7 +88,7 @@ if($_GET['type']=="location") { //如果是Locationg来源，需要读取子位�
                 if(!empty($resrule['id'])){
                     $hasGirdRule = true;
                     $girdRule = $resrule;
-                    $txt_jason .= '"special_mode":"gird",';
+                    $txt_jason .= '"special_mode":"gird",';  //网络导图
                 }
             }
         }
@@ -109,12 +109,12 @@ if($_GET['type']=="location") { //如果是Locationg来源，需要读取子位�
          $txt_jason .=',{"link":"index.php?module=HAM_SRs&action=EditView&location_id='.$location['id'].'","lab":"'.translate('LBL_ACT_CREATE_SR','HAT_Asset_Locations').'"}';
          $txt_jason .=',{"link":"index.php?module=HAM_WO&action=EditView&location_id='.$location['id'].'","lab":"'.translate('LBL_ACT_CREATE_WO','HAT_Asset_Locations').'"}';
 
-          //网络导图
+/*          //网络导图
            if($hasGirdRule){
                $tabtype = 0;
                $tabtype =  $girdRule['line_layout'] == 'Vetical'?1:0;
                $txt_jason .=',{"link":"module=HAT_Gird_Rules&action=DrawGrid&location_id='.$location['id'].'&tabtype=' .$tabtype. '","lab":"'.translate('LBL_ACT_GIRD_RULE','HAT_Asset_Locations').'"}';
-           }
+           }*/
          $txt_jason .='],';
        }
 

@@ -147,35 +147,57 @@
 }
 
 .topnav.all .dropdown-menu .tab-pane {
+		a [class^="icon-"],
+		a [class*=" icon-"] {
+			font-size: 1.5em;
+			color: rgba(255,255,255,0.52);
+			margin: 0 5px 0 0;
+		}
 
-	a [class^="icon-"],
-	a [class*=" icon-"] {
-		font-size: 1.5em;
-		color: rgba(255,255,255,0.52);
-		margin: 0 5px 0 0;
-	}
+		a {
+				width: 180px;
+				overflow: hidden;
+				text-overflow:ellipsis;
+				white-space: nowrap;
+		}
 }
 
 .topnav.all .tab-content {
 	border-top: 1px solid rgba(255,255,255,0.32);
 
+	.tab-pane {
+		height: 500px;
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
+
 	#navigation_menu {
 		column-count: 4;
     	column-gap: 1em;
-		margin-top: -2em;
+		-moz-column-count: 4;
+		-moz-column-gap: 1em;
+		-webkit-column-count: 4;
+		-webkit-column-gap: 1em;
+		white-space: normal;
+		width: 780px;
 
     	>div {
     		display: inline-block;
     		width: 100%;
     		break-inside: avoid;
+    		page-break-inside: avoid;
+    		margin: 0.5em 0 2em 0;
 
 			h2 {
 				font-weight: 300;
 				font-size: 19px;
 				padding: 0 0 0 5px;
-				margin: 2.5em 0 0.5em 0;
+				margin: 0.5em 0;
 				color: rgba(255,255,255,0.72);
 			} //end h2
+
+
+
     	} //end div
 	}//end navigation_menu
 

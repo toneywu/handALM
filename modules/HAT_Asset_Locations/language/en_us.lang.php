@@ -97,5 +97,7 @@ $mod_strings = array (
   'LBL_ADD_PLACEHOLDER'=>'Allocation Server-Rack Space',
   'LBL_INACTIVED'=>'removed',
   'LBL_NAV_MODE_GIRD'=>'Grid Position',
+  'LBL_NAV_MODE_SEARCH'=>'Filter',
   'LBL_ERR_DUPLICATED_EQUIP_ON_RACK'=>'Current Equipment has already been allocated on Rack. It cannot been allocated again.',
+  'LBL_SELECTOR_LABEL'=>' Object(s) has been selected.'
 );

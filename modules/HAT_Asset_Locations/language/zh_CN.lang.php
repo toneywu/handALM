@@ -103,6 +103,7 @@ $mod_strings = array (
   'LBL_BTN_SELECT'=>'选中此项',
   'LBL_INACTIVED'=>'已失效',
   'LBL_NAV_MODE_GIRD'=>'网格定位',
+  'LBL_NAV_MODE_SEARCH'=>'过滤查询',
   'LBL_ERR_DUPLICATED_EQUIP_ON_RACK'=>'当前设备已经分配到当前机柜中，无法重复分配',
-
+  'LBL_SELECTOR_LABEL'=>'项被选中。'
   );
