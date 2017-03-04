@@ -52,7 +52,6 @@ function setFF(FFObj) {
 	var view = action_sugar_grp1;
 	//有些界面在EditView和DetailView中处理有所不同，因此先读取出当前界面是哪些，保存在View中
 	//另外如果当前界面不是EditView或DetailView可能会有错误
-
 	if (FFObj.fieldtype=="HIDE") { //将字段进行隐藏
 		mark_field_disabled(FFObj.field,true,false);
 	} else if(FFObj.fieldtype=="LIST"){
@@ -65,8 +64,9 @@ function setFF(FFObj) {
 		//write annother function to control
 		//add by yuan.chen
 		mark_field_readonly(FFObj.field,false);
+		//console.log(FFObj.field);
 	}
-
+    
 	mark_obj_label = $("#"+FFObj.field).parent().prev(".label");
 
 	//修改标签名称
@@ -76,7 +76,7 @@ function setFF(FFObj) {
 		if (FFObj.label!=null && FFObj.label!="") {
 			if (view=="EditView") {
 				//alert("#"+FFObj.field+" should be rename to "+FFObj.label);
-				console.log("#"+FFObj.field+" should be rename to "+FFObj.label);
+				//console.log("#"+FFObj.field+" should be rename to "+FFObj.label);
 				mark_obj_label.html(FFObj.label+":"); //V7.8-
 				if($("#span_"+FFObj.field)){
 					$("#span_"+FFObj.field).parent().prev(".label").html(FFObj.label+":");
@@ -114,6 +114,7 @@ function setFF(FFObj) {
 			thisObj.val(FFObj.default_val);//针对其它input以及select对象
 			$("#"+FFObj.field).trigger('change');//触发设置了默认值之后的chanage事件
 		}
+		
 	}
 }
 
@@ -375,9 +376,10 @@ function mark_field_readonly(field_name) {
 	    }
 	    //消除已经填写的数据
 	    //$("#"+field_name).val("");
-	    if  (typeof $("#"+field_name+"_id")!= 'undefined') {
+	    //暂时不清楚为什么要消除数据,所以注释掉
+	    /*if  (typeof $("#"+field_name+"_id")!= 'undefined') {
 	      $("#"+field_name+"_id").val("");
-	    }
+	    }*/
 
 		if($("#"+field_name).attr("class")=="date_input"){
 		//console.log(field_name);

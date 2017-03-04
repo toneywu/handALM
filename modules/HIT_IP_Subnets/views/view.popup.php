@@ -7,7 +7,7 @@ require_once ('include/MVC/View/views/view.popup.php');
 class HIT_IP_SubnetsViewPopup extends ViewPopup {
 
 	function Display() {
-
+        //var_dump($_SESSION['HIT_IP_Subnets2_QUERY']);
 		global $mod_strings, $app_strings, $app_list_strings;
 		global $db;
 		if (isset($_REQUEST['current_mode']) && $_REQUEST['current_mode'] == "TREE") {
@@ -139,6 +139,7 @@ class HIT_IP_SubnetsViewPopup extends ViewPopup {
 			
 			 if(!empty($_REQUEST["location_id"])){
 				echo '<script> var location_id="'.$_REQUEST["location_id"].'";</script>';
+				$_SESSION['location_id']=$_REQUEST["location_id"];
 			 }
 			//echo "REQUEST".var_dump($_SESSION["HIT_IP_Subnets2_QUERY"]);
 

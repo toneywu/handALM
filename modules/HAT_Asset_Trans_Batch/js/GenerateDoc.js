@@ -28,7 +28,7 @@ function SaveAsPDF(task, module, uid, templateID){
   document.getElementById('GenerateDocForm').action = "index.php?module="+module+"&action=GenerateDoc&uid="+uid+"&templateID="+templateID+"&task="+task;
   document.getElementById('GenerateDocForm').submit();
   if(module=="HIT_IP_TRANS_BATCH"){
-	SUGAR.ajaxUI.loadContent('index.php?module='+module+'&action=DetailView&record='+uid);
+	//SUGAR.ajaxUI.loadContent('index.php?module='+module+'&action=DetailView&record='+uid);
   }
 }
 

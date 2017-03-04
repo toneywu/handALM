@@ -119,7 +119,7 @@ $dictionary['AOS_Products_Quotes'] = array(
             'len' => '18',
             'size' => '20',
             'enable_range_search' => false,
-            'precision' => '4',
+            'precision' => '2',
          ),
         'product_cost_price' => array(
             'required' => false,

@@ -23,6 +23,7 @@ $event_sql = "SELECT
 			  h.change_channel_num,
 			  h.change_channel_content,
 			  h.change_mrtg_link,
+			  h.change_mrtg_link_backup,
 			  h.change_access_assets_name ,
 			  h.change_date_end
 			  ,h.change_date_start

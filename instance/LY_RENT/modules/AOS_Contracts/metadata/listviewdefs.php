@@ -64,13 +64,13 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-  'BUSINESS_TYPE_C' => 
+   'CONTACT' => 
   array (
     'type' => 'relate',
     'default' => true,
     'studio' => 'visible',
-    'label' => 'LBL_BUSINESS_TYPE',
-    'id' => 'HAA_CODES_ID1_C',
+    'label' => 'LBL_CONTACT',
+    'id' => 'CONTACT_ID',
     'link' => true,
     'width' => '10%',
   ),

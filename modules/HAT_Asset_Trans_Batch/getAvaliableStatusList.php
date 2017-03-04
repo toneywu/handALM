@@ -30,10 +30,12 @@ echo '<select name='.'"change_asset_trans_status"'.' id="change_asset_trans_stat
 foreach($app_list_strings['asset_trans_status'] as $key=>$value){
 	//加载除DRAFT、CLOSED、AUTO_TRANSACTED
 	if($key!="DRAFT" && $key!="CLOSED" && $key!="AUTO_TRANSACTED" && $key!="APPROVED") {
-		if ($keys!="TRANSACTED" || ($require_confirmation =="OPTIONAL" && $key=="TRANSACTED")) {
+		if ($key!="TRANSACTED" || ($require_confirmation =="OPTIONAL" && $key=="TRANSACTED")) {
 			//如果可以选择2步确认，则显示可以切换到“TRANSACTED”的状态
 			//如果不可以2步确认，或是必须2步确认，都没有此状态
-			echo '<option value="'.$key.'">'.$value.'</option>';
+			if($key!="TRANSACTED"&&$key!="REJECTED"){
+				echo '<option value="'.$key.'">'.$value.'</option>';
+			}
 		}
 	}
 

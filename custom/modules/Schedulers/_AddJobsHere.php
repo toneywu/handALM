@@ -282,7 +282,7 @@ function sync_jt_contracts() {
 				$newBean->opportunity_id = $record_val;
 			}
 			//通过客户名称找客户的relatedId
-			$contract_account_sql = 'SELECT accounts.id  FROM accounts  WHERE accounts.deleted=0 and accounts.name ="' . $sold_to_org_name_val . '"';
+			$contract_account_sql = "SELECT accounts.id  FROM accounts  WHERE accounts.deleted=0 and REPLACE(REPLACE(accounts. NAME,'（','('),'）',')')= REPLACE(REPLACE('" . $sold_to_org_name_val . "','（','('),'）',')')";
 			$contract_account_result = $db->query($contract_account_sql);
 			while ($contract_account_record = $db->fetchByAssoc($contract_account_result)) {
 				$record_val = $contract_account_record['id'];
@@ -433,7 +433,7 @@ function sync_jt_contracts() {
 				$quantity_val = $line_value['QUANTITY'];
 				$start_date_active_val = $line_value['START_DATE_ACTIVE'];
 				$end_date_active_val = $line_value['END_DATE_ACTIVE'];
-				$formula_type_code_val = $line_value['FORMULA_TYPE_CODE'];
+				$formula_type_code_val = $line_value['FORMULA_TYPE'];
 				$product_code_val = $line_value['PRODUCT_CODE'];
 				$GLOBALS['log']->infor("合同行标示= " . $contract_line_id_val . ",合同行号=" . $line_num_val . ",物料编码=" . $item_number_val . ",物料名称=" . $inventory_item_name_val."产品数量= ".$quantity_val.'集团产品编码='.$product_code_val);
 				
@@ -571,13 +571,13 @@ function sync_jt_po_infos() {
 				
 				$cost_center_bean = BeanFactory :: getBean('HAA_Codes')->retrieve_by_string_fields(array (
 													'code_type' => 'asset_main_cost_center',
-													'name' => cost_center_dis));
+													'name' => $cost_center_dis));
 				
 				$need_by_val = $line_value['NEED_BY'];
 
 				$GLOBALS['log']->infor("header_id   = " . $po_header_id_val . ',line_number=' . $line_num_val . ",item_name=" . $line_num_val . ",line_id=" . $po_line_id_val."cost_center=".$cost_center);
 
-				$check_exists = BeanFactory :: getBean('HAT_Asset_Sources')->get_full_list('', "hat_asset_sources.source_id = '$po_line_id_val'");
+				$check_exists = BeanFactory :: getBean('HAT_Asset_Sources')->get_full_list('', "hat_asset_sources.source_id = '".$po_line_id_val."'");
 
 				if ($check_exists == 0) {
 					$newLineBean = BeanFactory :: newBean('HAT_Asset_Sources');
@@ -589,6 +589,7 @@ function sync_jt_po_infos() {
 					$newLineBean->line_num = $line_num_val;
 					$newLineBean->item_num = $item_num_val;
 					$newLineBean->line_qty = $quantity_val;
+					$newLineBean->uom = $unit_val;
 					$newLineBean->line_price = $unit_price_val;
 					$newLineBean->source_reference = $prod_name_val;
 					$newLineBean->haa_frameworks_id = $frame_id;
@@ -752,7 +753,9 @@ function sync_xr_products() {
 	$json_array = $soap_util_bean->call_soap_ws("PRODUCT", "XR");
 	$frame_bean = BeanFactory :: getBean('HAA_Frameworks')->retrieve_by_string_fields(array (
 		'code' => 'ChinaCache'));
+	$GLOBALS['log']->infor("------------------------------111111");
 	$GLOBALS['log']->infor("begin to sync xr products data");
+
 	//处理数据
 	foreach ($json_array as $key => $record) {	
 			
@@ -916,7 +919,7 @@ function sync_xr_contracts() {
 			}
 
 			//通过客户名称找客户的relatedId
-			$contract_account_sql = 'SELECT accounts.id  FROM accounts  WHERE accounts.deleted=0 and accounts.name ="' . $sold_to_org_name_val . '"';
+			$contract_account_sql = "SELECT accounts.id  FROM accounts  WHERE accounts.deleted=0 and REPLACE(REPLACE(accounts. NAME,'（','('),'）',')')= REPLACE(REPLACE('" . $sold_to_org_name_val . "','（','('),'）',')')";
 			$contract_account_result = $db->query($contract_account_sql);
 			while ($contract_account_record = $db->fetchByAssoc($contract_account_result)) {
 				$record_val = $contract_account_record['id'];
@@ -1065,7 +1068,8 @@ function sync_xr_contracts() {
 					if (count($item_list) != 0) {
 						$newLineBean->product_id = $item_list[0]->id;
 					}*/
-					$item_list_sql = 'SELECT aos_products.id ,aos_contracts.part_number FROM aos_products  WHERE aos_products.deleted=0 and aos_products.part_number ="' . $item_number_val . '"';
+					//以前弄成了aos_contracts.part_number
+					$item_list_sql = 'SELECT aos_products.id ,aos_products.part_number FROM aos_products  WHERE aos_products.deleted=0 and aos_products.part_number ="' . $item_number_val . '"';
 					$item_list_result = $db->query($item_list_sql);
 					while ($item_list_record = $db->fetchByAssoc($item_list_result)) {
 						$record_val = $item_list_record['id'];
@@ -1186,11 +1190,11 @@ function sync_xr_po_infos() {
 				
 				$cost_center_bean = BeanFactory :: getBean('HAA_Codes')->retrieve_by_string_fields(array (
 													'code_type' => 'asset_main_cost_center',
-													'name' => cost_center_dis));
+													'name' => $cost_center_dis));
 
 				$GLOBALS['log']->infor("header_id   = " . $po_header_id_val . ',line_number=' . $line_num_val . ",item_name=" . $line_num_val . ",line_id=" . $po_line_id_val);
 
-				$check_exists = BeanFactory :: getBean('HAT_Asset_Sources')->get_full_list('', "hat_asset_sources.source_id = '$po_line_id_val'");
+				$check_exists = BeanFactory :: getBean('HAT_Asset_Sources')->get_full_list('', "hat_asset_sources.source_id = '".$po_line_id_val."'");
 
 				if ($check_exists == 0) {
 					$newLineBean = BeanFactory :: newBean('HAT_Asset_Sources');
@@ -1201,6 +1205,7 @@ function sync_xr_po_infos() {
 					$newLineBean->source_type = $instance_name_val;
 					$newLineBean->line_num = $line_num_val;
 					$newLineBean->item_num = $item_num_val;
+					$newLineBean->uom = $unit_val;
 					$newLineBean->line_qty = $quantity_val;
 					$newLineBean->line_price = $unit_price_val;
 					$newLineBean->source_reference = $prod_name_val;

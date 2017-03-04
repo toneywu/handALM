@@ -100,7 +100,7 @@ array (
             'name' => 'period_name',
             'studio' => 'visible',
             'label' => 'LBL_PERIOD_NAME',
-            'customCode'=>'<input name="period_name" class="sqsEnabled yui-ac-input" tabindex="" id="period_name" size="" value="" title="" autocomplete="off" type="text" readonly="readonly">',
+            // 'customCode'=>'<input name="period_name" class="sqsEnabled yui-ac-input" tabindex="" id="period_name" size="" value="" title="" autocomplete="off" type="text" readonly="readonly">',
           ),
         ),
         2 => 

@@ -33,6 +33,8 @@ function createRevenueFromAT($ATId){
 	require_once('modules/HAOS_Revenues_Quotes/createRevenue.php');
 	$at = new HAT_Asset_Trans_Batch();
 	$at->retrieve($ATId);
+
+	
 	if ($at->asset_trans_status=='DRAFT'||$at->asset_trans_status=='CANCELED'){
 		die('已批准的资产事务处理单才能创建收支计费项!');
 	}
@@ -43,6 +45,7 @@ function createRevenueFromAT($ATId){
 	}else{
 		die('事务单的事件类型未设置对应的收支计费项的事务类型，请联系运维人员!');
 	}
+	
 	if ($beanRevenue){
 		$rawRow['event_type'] = $beanRevenue->name;
 	}
@@ -57,7 +60,10 @@ function createRevenueFromAT($ATId){
 
 
 	$rawRow['source_reference'] =  $at->tracking_number;
-	$rawRow['contact_id_c'] = $at->owner_id;
+
+	//drop by hq 201731 人员留空
+	//$rawRow['contact_id_c'] = $at->owner_id; //
+	//end drop 
 
 	$rawRow['expense_group'] = $at->event_type;
 
@@ -71,7 +77,7 @@ function createRevenueFromAT($ATId){
 	$at->haos_revenues_quotes_id=createRevenue($rawRow,$quoteRow);
 	$at->save();
 	return $at->haos_revenues_quotes_id;
-
+ 
 }
 
 ?>

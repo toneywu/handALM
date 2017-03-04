@@ -401,7 +401,6 @@ $dictionary['HAT_Asset_Sources'] = array(
         'returns' => 'html',
         ),
       ),
-	  
 	  'cost_center' =>
     array (
       'required' => false,
@@ -426,6 +425,24 @@ $dictionary['HAT_Asset_Sources'] = array(
 	  
 	  'cost_center_dis' =>
     array (
+      /*'required' => false,
+      'name' => 'cost_center_dis',
+      'vname' => 'LBL_COST_CENTER',
+      'type' => 'varchar',
+      'massupdate' => 0,
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'duplicate_merge_dom_value' => '0',
+      'audited' => false,
+      'inline_edit' => true,
+      'reportable' => true,
+      'unified_search' => false,
+      'merge_filter' => 'disabled',
+      'len' => '255',
+      'size' => '20',*/
       'required' => false,
       'source' => 'non-db',
       'name' => 'cost_center_dis',
@@ -475,8 +492,6 @@ $dictionary['HAT_Asset_Sources'] = array(
       'enable_range_search' => false,
       ),
 	  
-	  
-	  
 	  'uom_id' =>
     array (
       'inline_edit' => 1,
@@ -504,7 +519,25 @@ $dictionary['HAT_Asset_Sources'] = array(
       ),
     'uom' =>
     array (
-      'inline_edit' => '1',
+      'required' => false,
+      'name' => 'uom',
+      'vname' => 'LBL_UOM',
+      'type' => 'varchar',
+      'massupdate' => 0,
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'duplicate_merge_dom_value' => '0',
+      'audited' => false,
+      'inline_edit' => true,
+      'reportable' => true,
+      'unified_search' => false,
+      'merge_filter' => 'disabled',
+      'len' => '255',
+      'size' => '20',
+      /*'inline_edit' => '1',
       'required' => false,
       'source' => 'non-db',
       'name' => 'uom',
@@ -530,7 +563,7 @@ $dictionary['HAT_Asset_Sources'] = array(
       'rname' => 'name',
       'quicksearch' => 'enabled',
       'studio' => 'visible',
-      'id' => 'HAT_Assetssupplier',
+      'id' => 'HAT_Assetssupplier',*/
       //'custom_module' => 'HAT_Assets',
       ),
 	

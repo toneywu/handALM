@@ -124,7 +124,16 @@ class HAOS_PaymentsViewEdit extends ViewEdit
  //        document.getElementById('source_code_c').value='HAOS_Revenues_Quotes';
      
 
-
+       //end add 170301
+    //add by hq 20170301 自动带出期间
+    echo "<script> 
+      
+        $('.datetimepicker.datetimepicker-dropdown-bottom-right.dropdown-menu').click(function(){
+          getPeriod();
+        });
+          
+    </script>";
+    //end 20170301
 
 
     }

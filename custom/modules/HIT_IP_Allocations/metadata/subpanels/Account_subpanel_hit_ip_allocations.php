@@ -69,4 +69,18 @@ $subpanel_layout['list_fields'] = array (
     'width' => '10%',
     'default' => true,
   ),
+  'channel_num' => 
+  array ( 
+    'type' => 'varchar',
+    'vname' => 'LBL_CHANNEL_NUM',
+    'width' => '10%',
+    'default' => true,     
+  ),
+  'channel_content' =>
+  array (
+    'type' => 'varchar',
+    'vname' => 'LBL_CHANNEL_CONTENT',
+    'width' => '10%',
+    'default' => true,    
+    ),
 );

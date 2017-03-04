@@ -84,6 +84,7 @@ $mod_strings = array (
   'LBL_CHANNEL_NUM'=>'频道号',
   'LBL_CHANNEL_CONTENT'=>'频道内容',
   'LBL_MRTG_LINK'=>'MRTG链接',
+  'LBL_MRTG_LINK_BACKUP'=>'MRTG链接(备)',
   'LBL_BTN_COPY_TRANS_LINE'=>'复制行',
   'LBL_PARENT_IP'=>'C段',
   'LBL_ASSOCIATED_IP'=>'可用IP',

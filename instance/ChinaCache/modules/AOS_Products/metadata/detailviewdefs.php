@@ -17,6 +17,7 @@ array (
       array (
         'buttons' => 
         array (
+          0 => 'EDIT',
           1 => 'DUPLICATE',
           2 => 'DELETE',
         ),

@@ -741,8 +741,8 @@ return result;
 }
 
 function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
-  generateLineDesc(ln);//去生成Description
   resetEditorFields(ln);//初始化编辑状态下的一些字段
+  generateLineDesc(ln);//去生成Description
   $("#displayed_line_asset"+ln).html("<a href='index.php?module=HAT_Assets&action=DetailView&record="+$("#line_asset_id"+ln).val()+"'>"+$("#line_asset"+ln).val()+"</a>");
   $("#displayed_line_name"+ln).html($("#line_name"+ln).val());
   $("#displayed_line_description"+ln).html($("#line_description"+ln).val());

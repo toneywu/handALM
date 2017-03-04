@@ -287,6 +287,7 @@ function btn_search_clicked() {
         		//
     		});
 	dialog.open();
+
 	$.ajax({
 	  	url: 'index.php?to_pdf=true&module=HAT_Asset_Locations&action=getTreeviewSearch',
 	  	type: 'POST',
@@ -295,6 +296,11 @@ function btn_search_clicked() {
 	  			'site_select': $('#ham_maint_sites_id').val(),
 	  			'serial_number': $('#serial_number').val(),
 	  			'using_org_name':$('#using_org_name').val(),
+	  			'wo_id':$('#wo_id').val(),
+	  			'current_owning_org_id':$('#current_owning_org_id').val(),
+	  			'target_using_org_id':$('#target_using_org_id').val(),
+	  			'current_mode':$('#current_mode').val(),
+	  			'defualt_list':$('#defualt_list').val(),
 	  			'owning_org_name':$('#owning_org_name').val()
 	  		},
 	  	success: function (rtn_data) {
@@ -422,6 +428,7 @@ function showNodeDetailBtn(node) {
 		))
 		 {
 		 return "<a href='#' id='singleSelectBtn' class='button' onclick='btn_select_clicked(\""+node.id+"\")'>"+SUGAR.language.get('HAT_Asset_Locations', 'LBL_BTN_SELECT')+"</a>";
+		 //return "<a href='#' class='button' onclick='btn_select_clicked(\""+node.id+"\")'>"+SUGAR.language.get('HAT_Asset_Locations', 'LBL_BTN_SELECT')+"</a>";
 	} else {
 		return "";
 	}

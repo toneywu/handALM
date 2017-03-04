@@ -32,7 +32,7 @@ array (
     'width' => '10%',
     'default' => false,
   ),
-  'SUPPLIER_ORG' => 
+  /*'SUPPLIER_ORG' => 
   array (
     'type' => 'relate',
     'default' => false,
@@ -41,11 +41,11 @@ array (
     'id' => 'SUPPLIER_ORG_ID',
     'link' => true,
     'width' => '10%',
-  ),
+  ),*/
   'SUPPLIER_DESC' => 
   array (
     'type' => 'varchar',
-    'label' => 'LBL_SUPPLIER_DESC',
+    'label' => 'LBL_SUPPLIER_ORG',
     'width' => '10%',
     'default' => false,
   ),

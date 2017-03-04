@@ -169,16 +169,119 @@ function returnDeposit(){
   /*  if ($("#closed_date_c").text()!="") {
         return false;
     }*/
-    var record=$("input[name='record']").val();
-    var url="?module=AOS_Invoices&action=returnDeposit&to_pdf=true";
-    if(confirm("是否退回押金?"))//弹出确定/取消对话框
-      {
-        getAjaxData(record,url);
-        window.location.reload();//不管是与否，都刷新页面
-      }else
-      {
-        return false;
-      }
+    $.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
+    $.getScript("modules/HAA_FF/ff_include.js");
+    $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js");
+
+   
+        var invoice_id =$("input[name=record]").val(); 
+        $.ajax({
+          url:'index.php?module=AOS_Invoices&action=returnDeposit&to_pdf=true',
+          data:{"invoice_id":invoice_id,"function":"getInvStatus"},
+          type:'POST',
+          dataType: "json",
+          success:function(data){
+            if(data.return_status=='S'){
+                if(data.return_data.return_date!=''){
+                     BootstrapDialog.alert({
+                    type : BootstrapDialog.TYPE_DANGER,
+                    title : '提示',
+                    message : '押金已退回！'
+                });
+            }
+                else if(data.return_data.invStatus=='Returned'){//发票已退回
+                     BootstrapDialog.alert({
+                    type : BootstrapDialog.TYPE_DANGER,
+                    title : '提示',
+                    message : '发票已退回！'
+                    });
+
+                }else{//发票退回押金
+                  //获取时间HTMl
+                  $dateHTML = getDateHtml();
+                 BootstrapDialog.confirm({
+                size: BootstrapDialog.SIZE_NORMAL,
+                title:"退回押金",
+                message:$dateHTML,
+                callback: function(result){
+                    if(result) {
+                    var return_date = $('#return_date').val();  
+                    //console.log(return_date);
+                    $.ajax({
+                    url:'index.php?module=AOS_Invoices&action=returnDeposit&to_pdf=true',
+                    data:{"invoice_id":invoice_id,"function":"returnDeposit","return_date":return_date},
+                    type:'POST',
+                     dataType: "json",
+                    success:function(data2){
+                         if(data2.return_status=='S'){
+                            console.log(data2.return_msg);
+                            window.location.reload();
+                         }
+                        }
+                     });
+                     }else{
+                    //alert($('#pay_date').val());
+                    }
+                  }
+                 });
+
+                 }
+
+            }else{
+                alert('发生错误！');
+            }
+          }
+      });
+
+   
+}
+
+function getDateHtml(){
+  var $html = '<script type="text/javascript" src="custom/resources/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>'+
+  '<link rel="stylesheet" type="text/css" href="custom/resources/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">'+  
+  '<span class="input-group"><span style="width:350px;" class="input-group date calender" id="span_pay_date" >'+
+  " <label  style=]display:inline-block;width:120px;' >退回押金日期<span class='required'>*</span>: </label>"+
+  ' <input class="date_input" style="width:170px;height:32px;" autocomplete="off"  name="return_date" id="return_date" value="" title="" tabindex="116" type="text" >'+
+  ' <span class="input-group-addon">'+
+  '     <span class="glyphicon glyphicon-calendar"></span>'+
+  ' </span>'+
+  '</span></span><br>'+
+  '<script type="text/javascript">'+
+  'var Datetimepicker=$(".calender");'+
+  //var dateformat="Y-m-d H:M";
+  'var dateformat = "yyyy-mm-dd";'+
+  'Datetimepicker.datetimepicker({'+
+  'language:"zh_CN",'+
+  'format:dateformat,'+
+  'showMeridian:true,'+
+  'minView:2,'+
+  'todayBtn:true,'+
+  'autoclose:true,'+
+  '});'+
+  '</script>'; 
+
+   var $jsHTML = "<script type='text/javascript'>"+
+  " $(function(){"+
+  "     $('#return_date').val(getSysdate());"+
+  " });"+ 
+  "function getSysdate(){"+
+  "     var date = new Date();"+
+  "     var year = date.getFullYear();"+
+  "     var month = date.getMonth()+1;"+
+  "     var day = date.getDate();"+
+  "     if (month < 10) {"+
+  "         month = \"0\" + month;"+
+  "     }"+
+  "     if (day < 10) {"+
+  "         day = \"0\" + day;"+
+  "     }"+
+  "     var datastr = year+\"-\"+month+\"-\"+day;"+
+  "     return datastr;"+
+  //$("#shfsStartDate").val();
+  "}"+ 
+  "</script>";
+
+  return $html+$jsHTML;
 }
 
 

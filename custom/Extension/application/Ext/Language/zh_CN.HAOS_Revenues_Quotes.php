@@ -58,7 +58,22 @@ $app_list_strings['settlement_period_list']=array (
   );
 
 
-
+$app_list_strings['haos_number_of_periods']=array (
+  ''   => ' ', 
+  '1'   => '1', 
+  '2'   => '2', 
+  '3'   => '3', 
+  '4'   => '4', 
+  '5'   => '5', 
+  '6'   => '6', 
+  '7'   => '7', 
+  '10'   => '10', 
+  '12' => '12',
+  '25' => '25',
+  '26' => '26',
+  '37' => '37',
+  '60' => '60',
+  );
 
 $app_list_strings['haos_line_item_type_list']=array (
   'Product' => '产品',

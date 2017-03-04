@@ -10,6 +10,12 @@ if(isset($_REQUEST["ham_wo_contract_id"])&&!empty($_REQUEST["ham_wo_contract_id"
                     WHERE h.id = l.parent_id
                        AND  h.id = '".$_REQUEST["ham_wo_contract_id"]."')";
 }
+if(isset($_REQUEST["contract_flag_c"])&&!empty($_REQUEST["contract_flag_c"])){
+   if($where_popup!=''){
+      $where_popup .= ' and ';
+   }
+    $where_popup.="aos_products_cstm.contract_flag_c = '".$_REQUEST["contract_flag_c"]."'";
+}
 
 $popupMeta = array (
     'moduleMain' => 'AOS_Products',

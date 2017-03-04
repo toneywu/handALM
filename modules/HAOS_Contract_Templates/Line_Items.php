@@ -29,13 +29,16 @@ function display_lines($focus, $field, $value, $view){
     $enable_groups = (int)$sugar_config['aos']['lineItems']['enableGroups'];
     $total_tax = (int)$sugar_config['aos']['lineItems']['totalTax'];
 
-    $html = '';
+    $html = ''; 
 
     if($view == 'EditView'){
 
         $html .= '<script src="modules/AOS_Products_Quotes/line_items.js"></script>';
         if(file_exists('modules/HAOS_Contract_Templates/line_items.js')){
             $html .= '<script src="modules/HAOS_Contract_Templates/line_items.js"></script>';
+        }         
+        if(file_exists('custom/modules/HAOS_Contract_Templates/line_items.js')){         
+            $html .= '<script src="custom/modules/HAOS_Contract_Templates/line_items.js"></script>';
         }
         $html .= '<script language="javascript">var sig_digits = '.$locale->getPrecision().';';
         $html .= 'var module_sugar_grp1 = "'.$focus->module_dir.'";';

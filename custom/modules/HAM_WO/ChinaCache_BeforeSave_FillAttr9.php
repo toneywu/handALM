@@ -33,11 +33,16 @@
 			    //如果存在非散U的机柜，则需要进一步处理
 			    $result=$db->query($sql);
 
-
+			    
 			    //如果有值说明当前为机柜，需要在机柜对应的Attribute9上进行处理
 			    while ($row=$db->fetchByAssoc($result)) {
-				        $BeanHAT = BeanFactory::getBean('HAT_Asset_Trans', $row[id]);
-	        			$BeanHAT->save();//触发一次LogicHook
+			    		$trans_sql = 'update hat_asset_trans set target_asset_attribute9="'.$bean->contract_id.'" where id="'.$row['id'].'"';
+			    		$db->query($trans_sql);
+				        $BeanHAT = BeanFactory::getBean('HAT_Asset_Trans', $row['id']);
+	        			//$BeanHAT->save();//触发一次LogicHook
+	        			$BeanAsset = BeanFactory::getBean('HAT_Assets', $BeanHAT->asset_id);
+				        $BeanAsset->attribute9 = $bean->contract_id;
+	        			$BeanAsset->save();
 			    }
 		    }
 

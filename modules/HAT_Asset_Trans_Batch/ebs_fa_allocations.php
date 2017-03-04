@@ -13,6 +13,8 @@ require_once ('modules/HAT_Assets/updateAssets.php');
     $current_header_id = $_POST['record'];
 	$need_allocation="N";
 	$assets_line_array = $_POST['line_asset_infos'];
+	/*echo "assets_line_array".$assets_line_array."====".$_POST['asset_trans_status']."111";
+	exit();*/
 	$result="";
 	$hat_event_id = $_POST['event_type_id'];
 	$event_bean = BeanFactory::getBean("HAT_EventType",$hat_event_id);
@@ -22,7 +24,7 @@ require_once ('modules/HAT_Assets/updateAssets.php');
 
 
 		//如果是新增 但是状态直接是提交 那么也当成需要完成资产调拨 满足条件1
-		if(empty($current_header_id)&&($_POST['asset_trans_status']=="CLOSED")){
+		if(empty($current_header_id)&&($_POST['asset_trans_status']=="SUBMITTED")){
 			$need_allocation="Y";
 		}else{
 			//如果有值 则通过数据库来判断
@@ -35,7 +37,7 @@ require_once ('modules/HAT_Assets/updateAssets.php');
 				}
 			}
 		}
-		
+		$need_allocation="Y";
 		if($need_allocation=="Y"){
 			$need_call_allocation_flag = "Y";
 				for($i=0;$i<$_POST['line_cnt'];$i++){
@@ -60,30 +62,38 @@ require_once ('modules/HAT_Assets/updateAssets.php');
 							$result->status = $result_array[0];
 							$result->msg = $result_array[1];
 							$need_call_allocation_flag="N";
+							$result->msg .= "11111111111".$need_call_allocation_flag;
 							echo json_encode($result);
 							break;
 						}else{
 							$result->status = $result_array[0];
 							$result->msg = $result_array[1];
 							$need_call_allocation_flag="Y";
+							$result->msg .= "222222222222222".$need_call_allocation_flag;
 						}
 				}
 			if($need_call_allocation_flag=="Y"){
 					//调用资产调拨
+				    
 					$result_array =  $update_asset_bean->update_fix_asset($_POST);
 					$result->status = $result_array[0];
-					$result->msg = $result_array[1];
+					$result->msg = $_POST;
+					$result->msg .= "++++++++++++++++++++++";
 					echo json_encode($result);
 				}
 
 		}else{
+			
 			$result->status = 'S';
 			$result->msg = '';
+			$result->msg = "--------------------".$need_call_allocation_flag;
 			echo json_encode($result);
 		}	
 	}else{
+		
 		$result->status = 'S';
 		$result->msg = '';
+		$result->msg = "=================".$need_call_allocation_flag;
 		echo json_encode($result);
 		
 	}

@@ -520,7 +520,7 @@ $(document).ready(function(){
 					} else if ($_REQUEST['defualt_list']=="current_using_org" && isset($_REQUEST['target_using_org_id'])) {
 						echo 'initTree("LIST","current_using_org","'.$_REQUEST["target_using_org_id"].'");';
 					} else if ($_REQUEST['defualt_list']=="current_using_org_none" && isset($_REQUEST['target_using_org_id'])) {
-						echo 'initTree("LIST","current_using_org","'.$_REQUEST["target_using_org_id"].'");';
+						echo 'initTree("LIST","current_using_org_none","'.$_REQUEST["target_using_org_id"].'");';
 					} else if ($_REQUEST['defualt_list']=="unallocated" && isset($_REQUEST['target_using_org_id'])) {
 						echo 'initTree("LIST","unallocated","'.$_REQUEST["target_using_org_id"].'");';
 					}else if ($_REQUEST['defualt_list']=="current_owning_org" && isset($_REQUEST['current_owning_org_id'])) {

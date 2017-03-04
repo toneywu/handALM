@@ -106,4 +106,6 @@ $app_list_strings['hat_default_asset_list']=array (
   'CURRENT_USING_ORG_NONE' => '当前使用组织和未分配使用的',
   'WO_ASSET_TRANS' => '当前工单/已有的资产事务',
   'WO_IP_TRANS' => '当前工单/网络资源事务',
+  'Unallocated' => '未分配使用的',
+  'CURRENT_OWNING_ORG' => '当前所属组织',
 );

@@ -584,6 +584,28 @@ function selectLineClicked(obj) {
 		$(obj).parent().css("background-Color", "");
 	}
 }
+function deleteSelected(){
+	var json_obj={};
+	var json_data ={};
+	for (var i = 0; i < prodln; i++) {
+		if($("#selectLineClicked" + i).prop("checked")==true){
+			json_obj[i]=$("#line_id"+i).val();
+		}
+	}
+	json_data["line_ids"]=json_obj;
+	$.ajax({
+			type:"POST",
+            url: 'index.php?to_pdf=true&module=HIT_IP_Subnets&action=deleteSelectedLines',
+            data: json_data,
+            success: function (data) {
+                console.log(data);
+                window.location.href = "index.php?action=DetailView&module=HIT_IP&record=" +$('input[name="record"]').val();
+            },
+            error: function () { //失败
+                alert('Error loading document');
+            }
+ 	});
+}
 
 function insertTransLineHeader(tableid) {
 	$("#line_items_label").hide();// 隐藏SugarCRM字段
@@ -596,7 +618,8 @@ function insertTransLineHeader(tableid) {
 	var x = tablehead.insertRow(-1);
 	x.id = 'Trans_line_head';
 	var aa = x.insertCell(0);
-	aa.innerHTML = '<input type="checkbox" id="selectAll" onclick="selectAllClicked(this)">';
+	var atext = '<input title="删除[Alt+D]" accesskey="D" class="button" onclick="deleteSelected()" name="Delete" value="删除" id="delete_selects" type="button">';
+	aa.innerHTML = '<input type="checkbox" id="selectAll" onclick="selectAllClicked(this)">'+atext;
 	var a = x.insertCell(1);
 	a.innerHTML = '#';
 	var b = x.insertCell(2);

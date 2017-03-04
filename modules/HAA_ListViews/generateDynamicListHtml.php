@@ -238,7 +238,7 @@ class generateDynamicListHtml {
 			'</button>'.
 			'</td>'.
 			'<td class="paginationActionButtons" width="1%" nowrap="nowrap">'.
-			'<div class="pageNumbers">(1 - '.$sumpage.' / 总记录条目数： '.$sum.')</div>'.
+			'<div class="pageNumbers">('.$nowpage.' - '.$sumpage.' / 总记录条目数： '.$sum.')</div>'.
 			'</td>'.
 			'<td class="paginationActionButtons" width="1%" nowrap="nowrap" align="right">'.
 			'<button id="listViewNextButton_top" class="button" type="button" name="listViewNextButton" title="下页" onclick=listPagePreview("'.$listviewCode.'","'.$type.'","'.$frameworkId.'",'.($nowpage+1).',"'.$elementId.'")>'.

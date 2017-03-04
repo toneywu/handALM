@@ -419,25 +419,40 @@ array (
         ),
         6 => 
         array (
+          0 => 
+          array (
+            'name' => 'change_mrtg_link_backup',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_MRTG_LINK_BACKUP',
+          ),
+          1 => 
+          array (
+            'name' => 'change_vlan_channel',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_VLAN_CHANNEL',
+          ),
+        ),
+        7 => 
+        array (
           0 => 'change_main_asset',
           1 => 'change_backup_asset',
         ),
-        7 => 
+        8 => 
         array (
           0 => 'change_port_backup',
           1 => 'change_monitoring_backup',
         ),
-        8 => 
+        9 => 
         array (
           0 => 'change_channel_content_backup',
           1 => 'change_channel_num_backup',
         ),
-        9 => 
+        10 => 
         array (
           0 => 'change_date_end',
           1 => 'change_date_start',
         ),
-        10 => 
+        11 => 
         array (
           0 => 
           array (
@@ -452,7 +467,7 @@ array (
             'label' => 'LBL_CHANGE_ACCESS_ASSETS_BACKUP_NAME',
             ),
         ),
-        11 => 
+        12 => 
         array (
           0 => 'change_status',
           1 => 
@@ -462,7 +477,7 @@ array (
             'label' => 'LBL_CHANGE_ENABLE_ACTION',
           ),
         ),
-        12 => 
+        13 => 
         array (
           0 => 
           array (
@@ -477,15 +492,9 @@ array (
             'label' => 'LBL_CHANGE_CHILD_PORT',
           ),
         ),
-        13 => 
+        14 => 
         array (
-          0 => 
-          array (
-            'name' => 'change_vlan_channel',
-            'studio' => 'visible',
-            'label' => 'LBL_CHANGE_VLAN_CHANNEL',
-          ),
-          1 => 'no_add_ip_lines_flag',
+          0 => 'no_add_ip_lines_flag',
         ),
       ),
     ),

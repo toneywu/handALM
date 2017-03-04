@@ -43,6 +43,14 @@ class HAOS_Revenues_QuotesViewEdit extends ViewEdit {
 		document.getElementById("period_name").value="'.$this->bean->period_name.'";
 	</script>';
 	
+
+		//add by hq 20170301 自动带出期间
+		echo "<script>			
+				$('.datetimepicker.datetimepicker-dropdown-bottom-right.dropdown-menu').click(function(){
+					getPeriod();
+				});					
+		</script>";
+		//end 20170301
 }
 
 

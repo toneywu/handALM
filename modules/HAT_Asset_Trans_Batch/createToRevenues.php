@@ -29,6 +29,6 @@ $ATId=$_REQUEST['record'];
 require_once('modules/HAT_Asset_Trans_Batch/createRevenueFromAT.php');
 
 $haos_revenues_quotes_id=createRevenueFromAT($ATId);
-ob_clean();
+ob_clean(); 
 header('Location: index.php?module=HAOS_Revenues_Quotes&action=EditView&record='.$haos_revenues_quotes_id);
 ?>

@@ -178,12 +178,24 @@ function openHitIpPopup(ln) {// 本文件为行上选择IP按钮
 			"ip_highest" : "line_high_associated_ip" + ln
 		}
 	};
+
+	//以前的location_id都是从$("#location_id").val()取值
+	var location_id ="";
+	if($("#ham_maint_sites_id").val() != ""){
+		console.log($("#ham_maint_sites_id").val()+"location_id:"+location_id);
+		location_id = $("#ham_maint_sites_id").val();
+	}
+	if (location_id ==""&&$("#location_id").val() != "") {
+		location_id = $("#location_id").val();
+	}
+	console.log("-----------------------------------");
+	console.log($("#ham_maint_sites_id").val()+"location_id:"+location_id);
 	if($("#line_hit_ip_subnets"+ln).val()==""){
-	    var popupFilter = '&current_mode=rack&location_id='+$("#location_id").val()+"&location_advanced="+$("#site").val();
+	    var popupFilter = '&current_mode=rack&location_id='+location_id+"&location_advanced="+$("#site").val();
 	   open_popup('HIT_IP_Subnets', 600, 850, popupFilter, true, true, popupRequestData, "MultiSelect", true);
 	
 	}else{
-	    var popupFilter = '&current_mode=rrack&location_id='+$("#location_id").val()+"&location_advanced="+$("#site").val();
+	    var popupFilter = '&current_mode=rrack&location_id='+location_id+"&location_advanced="+$("#site").val();
 	    open_popup('HIT_IP_Subnets', 600, 850, popupFilter, true, true, popupRequestData);
 	}
 }
@@ -554,23 +566,26 @@ function insertTransLineHeader(tableid) {
 	l2.innerHTML = "<span id='line_monitoring_backup_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_MONITORING_BACKUP')+"</span>";
 	var o = x.insertCell(18);
 	o.innerHTML = "<span id='line_mrtg_link_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_MRTG_LINK')+"</span>";
-	var m = x.insertCell(19);
+	//modified by liu
+	var o2 = x.insertCell(19);
+	o2.innerHTML = "<span id='line_mrtg_link_backup_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_MRTG_LINK_BACKUP')+"</span>";
+	var m = x.insertCell(20);
 	m.innerHTML = "<span id='line_channel_num_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_CHANNEL_NUM')+"</span>";
-	var m2 = x.insertCell(20);
+	var m2 = x.insertCell(21);
 	m2.innerHTML = "<span id='line_channel_num_backup_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_CHANNEL_NUM_BACKUP')+"</span>";
-	var n = x.insertCell(21);
-	n.innerHTML = "<span id='line_channel_content_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_CHANNEL_CONTENT')+"</span>";
 	var n = x.insertCell(22);
+	n.innerHTML = "<span id='line_channel_content_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_CHANNEL_CONTENT')+"</span>";
+	var n = x.insertCell(23);
 	n.innerHTML = "<span id='line_channel_content_backup_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_CHANNEL_CONTENT_BACKUP')+"</span>";
-	var n3 = x.insertCell(23);
+	var n3 = x.insertCell(24);
 	n3.innerHTML = "<span id='line_date_start_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_DATE_START')+"</span>";
-	var n4 = x.insertCell(24);
+	var n4 = x.insertCell(25);
 	n4.innerHTML = "<span id='line_date_end_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_DATE_END')+"</span>";
-	var n3 = x.insertCell(25);
+	var n3 = x.insertCell(26);
 	n3.innerHTML = "<span id='line_enable_action_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_ENABLE_ACTION')+"</span>";
-	var n2 = x.insertCell(26);
+	var n2 = x.insertCell(27);
 	n2.innerHTML = "<span id='line_status_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_STATUS')+"</span>";
-	var n3 = x.insertCell(27);
+	var n3 = x.insertCell(28);
 	n3.innerHTML = "<span id='line_broadband_type_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_BROADBAND_TYPE')+"</span>";
 
 }
@@ -626,6 +641,7 @@ function insertLineData(asset_trans_line) { // 将数据写入到对应的行字
 		$("#line_monitoring".concat(String(ln)))
 				.val(asset_trans_line.monitoring);
 		$("#line_mrtg_link".concat(String(ln))).val(asset_trans_line.mrtg_link);
+		$("#line_mrtg_link_backup".concat(String(ln))).val(asset_trans_line.mrtg_link_backup);
 		$("#line_access_assets_name".concat(String(ln)))
 				.val(asset_trans_line.access_assets_name);
 		$("#line_source_ref".concat(String(ln)))
@@ -806,6 +822,7 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			+ "<td><span name='displayed_line_monitoring["+ prodln + "]' id='displayed_line_monitoring" + prodln+ "'></span></td>"
 			+ "<td><span name='displayed_line_monitoring_backup["+ prodln + "]' id='displayed_line_monitoring_backup" + prodln+ "'></span></td>"
 			+ "<td><span name='displayed_line_mrtg_link["+ prodln+ "]' id='displayed_line_mrtg_link"+ prodln+ "'></span></td>"
+			+ "<td><span name='displayed_line_mrtg_link_backup["+ prodln+ "]' id='displayed_line_mrtg_link_backup"+ prodln+ "'></span></td>"
 			+ "<td><span name='displayed_line_channel_num["+ prodln+ "]' id='displayed_line_channel_num"+ prodln+ "'></span></td>"
 			+ "<td><span name='displayed_line_channel_num_backup["+ prodln+ "]' id='displayed_line_channel_num_backup"+ prodln+ "'></span></td>"
 			+ "<td><span name='displayed_line_channel_content["+ prodln+ "]' id='displayed_line_channel_content"+ prodln+ "'></span></td>"
@@ -1186,6 +1203,20 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			+ "' maxlength='50' value='' title=''>"
 			+ "</span>"
 			+
+			// mrtg_link_backup
+			"<span class='input_group'>"
+			+ "<label id='line_mrtg_link_backup"
+			+ prodln
+			+ "_label'>"
+			+ "MRTG Link(备)"
+			+ "</label>"
+			+ "<input style=' width:153px;' type='text' name='line_mrtg_link_backup["
+			+ prodln
+			+ "]' id='line_mrtg_link_backup"
+			+ prodln
+			+ "' maxlength='50' value='' title=''>"
+			+ "</span>"
+			+
 			// 频道号(主)
 			"<span class='input_group'>"
 			+ "<label id='line_channel_num"
@@ -1396,6 +1427,7 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 			.val());
 	// $("#displayed_line_associated_ip"+ln).html($("#line_associated_ip"+ln).val());
 	$("#displayed_line_mrtg_link" + ln).html($("#line_mrtg_link" + ln).val());
+	$("#displayed_line_mrtg_link_backup" + ln).html($("#line_mrtg_link_backup" + ln).val());
 	$("#displayed_line_access_assets_name" + ln)
 			.html($("#line_access_assets_name" + ln).val());
 	$("#displayed_line_access_assets_id" + ln).html($("#line_access_assets_id"
@@ -1603,7 +1635,6 @@ function markLineDeleted(ln, key) {// 删除当前行
 	document.getElementById(key + 'delete_line' + ln).onclick = '';
 
 	$("#line_*"+ ln).children().remove(".required");
-
 	//用新的删除验证方式代替老的，toney.wu20161111
 	if (typeof validate != "undefined"
 			&& typeof validate['EditView'] != "undefined") {
@@ -1615,7 +1646,7 @@ function markLineDeleted(ln, key) {// 删除当前行
 		removeFromValidate('EditView', 'line_access_assets_name' + ln);
 		removeFromValidate('EditView', 'line_hat_asset_name' + ln);
 		removeFromValidate('EditView', 'line_hit_ip_subnets_id' + ln);
-
+		removeFromValidate('EditView', 'line_gateway' + ln);
 		removeFromValidate('EditView','line_asset'+ ln);
 	    removeFromValidate('EditView','line_name'+ ln);
 	    removeFromValidate('EditView','line_target_organization'+ ln);
@@ -1635,10 +1666,11 @@ function markLineDeleted(ln, key) {// 删除当前行
 	    removeFromValidate('EditView','line_date_end'+ ln);
 	    removeFromValidate('EditView','line_broadband_type'+ ln);
 		removeFromValidate('EditView','line_mrtg_link'+ ln);
+		removeFromValidate('EditView','line_mrtg_link_backup'+ ln);
 		removeFromValidate('EditView','line_child_port'+ ln);
 		removeFromValidate('EditView','line_vlan_channel'+ ln);
 	}
-
+	
 	if ($("#line_hit_ip_subnets" + ln).val() == "") {
 		$("#line_hit_ip_subnets" + ln).val("deleted");
 	}
@@ -1700,6 +1732,11 @@ function LineEditorClose(ln) {// 关闭行编辑器（显示为正常行）
 }
 
 function single_Field(fieldName,type,i){
+	if (fieldName == 'line_mrtg_link' || fieldName == 'line_mrtg_link_backup') {
+		console.log("fieldName:"+fieldName);
+		console.log("type:"+type);
+		console.log("i:"+i);
+	}
 	if(type=="OPTIONAL"){
 			mark_field_enabled_mine(fieldName+i,true);
 	}else if(type=="LOCKED"){
@@ -1731,6 +1768,7 @@ function single_changeRequired(lineRecord,i){
 	single_Field("line_channel_num",lineRecord.change_channel_num,i);
 	single_Field("line_channel_content",lineRecord.change_channel_content,i);
 	single_Field("line_mrtg_link",lineRecord.change_mrtg_link,i);
+	single_Field("line_mrtg_link_backup",lineRecord.change_mrtg_link_backup,i);
 	single_Field("line_access_assets_name",lineRecord.change_access_assets_name,i);
 	single_Field("line_parent_ip",lineRecord.change_parent,i);
 	single_Field("line_associated_ip",lineRecord.change_associated_ip,i);
@@ -1786,6 +1824,7 @@ function dulicateTranLine(ln) {// 关闭行编辑器（显示为正常行）
 				ip_netmask:"",
 				associated_ip:"",
 				mrtg_link:"",
+				mrtg_link_backup:"",
 				access_assets_id:"",
 				access_assets_name:"",
 				source_ref:"",

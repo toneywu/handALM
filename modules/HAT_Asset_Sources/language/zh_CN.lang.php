@@ -76,6 +76,7 @@ $mod_strings = array (
   'LBL_LINE_NUM'=>'行编号',
   'LBL_ITEM_NUM'=>'物料编码',
   'LBL_SUPPLIER_ORG'=>'供应商',
+  'LBL_SUPPLIER_DESC'=>'供应商',
   'LBL_LINE_QTY'=>'数量',
   'LBL_LINE_PRICE'=>'单价',
   'LBL_SOURCE_TYPE'=>'来源类型',

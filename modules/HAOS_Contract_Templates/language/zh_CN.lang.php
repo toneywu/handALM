@@ -123,5 +123,12 @@ $mod_strings = array (
     'LBL_SERVICE_PRICE' => '实际服务费',
     'LBL_SERVICE_DISCOUNT' => '优惠',
     'LBL_LINE_ITEMS' => '条目',
-    'LBL_UOM_NAME_C'=>'单位'
+    'LBL_UOM_NAME_C'=>'单位',
+    'LBL_NEXT_ACCOUNT_DAY' => '下次结算日期',
+  'LBL_FINAL_ACCOUNT_DAY' => '最后结算日期',
+  'LBL_NUMBER_OF_PERIODS' => '结算期数',
+  'LBL_SETTLEMENT_PERIOD_C' => '结算周期',
+  'LBL_INITIAL_ACCOUNT_DAY' => '首次结算日',
+  'LBL_EFFECTIVE_START_C' => '生效日期',
+  'LBL_EFFECTIVE_END_C' => '终止日期',
 );

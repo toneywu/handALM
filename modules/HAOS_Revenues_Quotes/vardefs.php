@@ -251,8 +251,8 @@ $dictionary['HAOS_Revenues_Quotes'] = array(
         ),
       'expense_group' => 
       array (
-        'required' => true,
-        'source' => 'non-db',
+        'required' => false,
+        'source' => 'non-db', 
         'name' => 'expense_group',
         'vname' => 'LBL_EXPENSE_GROUP',
         'type' => 'relate',
@@ -392,7 +392,7 @@ $dictionary['HAOS_Revenues_Quotes'] = array(
         ),
       'due_date' => 
       array (
-        'required' => true,
+        'required' => false,
         'name' => 'due_date',
         'vname' => 'LBL_DUE_DATE',
         'type' => 'date',

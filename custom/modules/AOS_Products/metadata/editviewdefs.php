@@ -79,8 +79,8 @@ array (
               array (
                 'name' => 'product',
                 'id' => 'product_id',
-                'haa_uom_id_c'=>'uom_id',
-                'primary_uom_c'=>'uom_code'
+                'haa_uom_id_c' => 'uom_id',
+                'primary_uom_c' => 'uom_code',
               ),
             ),
           ),
@@ -157,6 +157,11 @@ array (
           array (
             'name' => 'product_image',
             'customCode' => '{$PRODUCT_IMAGE}',
+          ),
+          1 => 
+          array (
+            'name' => 'contract_flag_c',
+            'label' => 'LBL_CONTRACT_FLAG',
           ),
         ),
       ),

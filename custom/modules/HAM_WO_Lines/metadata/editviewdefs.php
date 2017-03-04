@@ -10,6 +10,10 @@ array (
       array (
         0 => 
         array (
+          'file' => 'modules/HAA_FF/ff_include.js',
+        ),
+        1 => 
+        array (
           'file' => 'modules/HAM_WO_Lines/js/WO_Lines_editview.js',
         ),
       ),
