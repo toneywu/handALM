@@ -9,7 +9,8 @@ class AOS_InvoicesViewEdit extends ViewEdit {
 	}
 
 	function display(){
-		global $db;
+		 global $db,$app_list_strings;
+		// global $sugar_config, $locale, $app_list_strings, $mod_strings;
 		require_once('modules/HAA_Frameworks/orgSelector_class.php');
 		$current_framework_id = empty($this->bean->hat_framework_id)?"":$this->bean->hat_framework_id;
 		$current_module = $this->module;
@@ -90,7 +91,10 @@ class AOS_InvoicesViewEdit extends ViewEdit {
         document.getElementById('name').value='".$name."';
         
     </script>";
-}
+	}
+
+
+
             if (isset($_GET["period_name_c"])) {
     $period_name_c=$_GET['period_name_c'];
      echo "<script>
@@ -150,7 +154,35 @@ if(isset($this->bean->hat_eventtype_id_c) && ($this->bean->hat_eventtype_id_c)!=
 			$('#unpaied_amount_c').attr('readonly',true);
 			document.getElementById('period_name_c').value='".$this->bean->period_name_c."';
 		</script>";
+		}
+
+		
+		//add by hq 170301 发票名字	
+	if(!isset($_GET["name"]) && isset($_GET["source_code_c"])){
+		if(($_GET["source_code_c"])=='HAOS_Revenues_Quotes'){
+		//var_dump('23434');
+		//$source_code_name = $app_list_strings['AOS_Invoices'][$_GET["source_code_c"]];
+		var_dump($source_code_name);
+		echo "<script>
+		var invoice_date_for_name = document.getElementById(\"invoice_date\").value;
+		var name = '收支计费项 ' + invoice_date_for_name;
+		$('#name').val(name);
+      
+    	</script>";
+    }
+
 	}
+
+    //end add 170301
+    //add by hq 20170301 自动带出期间
+		echo "<script> 
+			
+				$('.datetimepicker.datetimepicker-dropdown-bottom-right.dropdown-menu').click(function(){
+					getPeriod();
+				});
+					
+		</script>";
+		//end 20170301
 }
 
 function populateInvoiceTemplates(){

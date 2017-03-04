@@ -63,7 +63,8 @@ function display_lines($focus, $field, $value, $view) {
 									hit_ip_trans_batch hitb 
 								  WHERE hitb.source_wo_id = "'.$focus->source_wo_id.'"
 								  and   hitb.source_woop_id!="'.$focus->source_woop_id.'"
-								  ORDER BY hitb.date_entered asc
+								  and   hitb.deleted = 0
+								  ORDER BY hitb.date_entered desc
 								  limit 0,1';
 			$last_trans_result = $focus->db->query($last_trans_sql);
 
@@ -92,6 +93,7 @@ function display_lines($focus, $field, $value, $view) {
 									,s.ip_netmask
 									,s.ip_lowest+'~'+ s.ip_highest associated_ip
 									,hat.mrtg_link
+									,hat.mrtg_link_backup
 									,hat.access_assets_id
 									,c.name access_assets_name 	
 									,'OTHER_WOOP' source_ref,
@@ -136,6 +138,7 @@ function display_lines($focus, $field, $value, $view) {
 							,s.ip_netmask
 							,s.ip_lowest + '~' + s.ip_highest associated_ip
 							,hat.mrtg_link
+							,hat.mrtg_link_backup
 							,hat.access_assets_id
 							,c.name access_assets_name
 							,'CURRENT_WOOP' source_ref
@@ -158,7 +161,7 @@ function display_lines($focus, $field, $value, $view) {
 					WHERE hat.deleted=0 and hat.hit_ip_trans_batch_id ='" . $focus->id . "')";
 			//$sql = $sql1 . " union all (" . $sql2 . ") order by date_entered asc";
 			$result = $focus->db->query($sql1);
-
+            //var_dump($sql1);
 			while ($row = $focus->db->fetchByAssoc($result)) {
 				//echo var_dump($row);;
 				$line_data = json_encode($row);
@@ -169,7 +172,7 @@ function display_lines($focus, $field, $value, $view) {
 		} else {
 
 			$result = $focus->db->query($sql2);
-
+            //var_dump($sql2);
 			while ($row = $focus->db->fetchByAssoc($result)) {
 				$line_data = json_encode($row);
 				$html .= "<script>var lineDataTemp=" . $line_data . ";</script>";
@@ -210,6 +213,7 @@ function display_lines($focus, $field, $value, $view) {
 								,s.ip_netmask
 								,s.ip_lowest+'~'+ s.ip_highest associated_ip
 								,hat.mrtg_link
+								,hat.mrtg_link_backup
 								,hat.access_assets_id
 								,c.name access_assets_name
 								,hat.date_entered
@@ -302,6 +306,7 @@ function display_lines($focus, $field, $value, $view) {
 			  h.change_channel_num,
 			  h.change_channel_content,
 			  h.change_mrtg_link,
+			  h.change_mrtg_link_backup,
 			  h.change_access_assets_name ,
 			  h.change_date_end
 			  ,h.change_date_start
@@ -320,7 +325,9 @@ function display_lines($focus, $field, $value, $view) {
 			$html .= "<script> var lineData=" . $event_line_data . ";</script>";
 			$html .= "<script>changeRequired(" . $event_line_data . ");</script>";
 
+
 		}
 	}
+
 	return $html;
 }

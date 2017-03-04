@@ -33,14 +33,36 @@ function validateHeaderAmountAndLineAmount(){
    	return result;
 }
 
+function getPeriod(){
+    var dateTime=document.getElementById("payment_date").value;
+     console.log(dateTime);
+    var frame_id=document.getElementById("haa_frameworks_id_c").value;
+    if(dateTime)
+    {
+        $.ajax({
+            //async:false,
+            url: 'index.php?to_pdf=true&module=HAOS_Payments&action=getPeriod',
+            data: {'dateTime':dateTime,'frame_id':frame_id},
+            type:'POST',
+           	dataType: "json",
+            success: function (data) {//调用方法。
+                //data=$.parseJSON(data);
+                //data=JSON.parse(data);
+                console.log(data);
+                $("#haa_periods_id_c").val(data.id); 
+                $("#period_name").val(data.name);
 
+   			 }
+   			});
+    }
+}
 
 function check_amount(){
 	//alert('234324');
 	var result = true;
-	var check_from_flag = check_form('EditView');
+	//var check_from_flag = check_form('EditView');
 	var check_amount_flag = validateHeaderAmountAndLineAmount();
-	if(check_from_flag){
+	//if(check_from_flag){
 		if(check_amount_flag){
 			result = true;
 		}else{
@@ -51,9 +73,9 @@ function check_amount(){
 				});
 			result = false;
 		}
-    }else{
-	 	result = false;
-	}
+ //    }else{
+	//  	result = false;
+	// }
 	return result;
 }
 

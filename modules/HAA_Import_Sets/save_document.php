@@ -114,8 +114,8 @@ else
 			}
 			$row_id = create_guid();
         	$insert_data="('".$row_id."','"
-        		.date("Y-m-d H:i:sa")."','"
-        		.date("Y-m-d H:i:sa")."','"
+        		.date("Y-m-d H:i:s")."','"
+        		.date("Y-m-d H:i:s")."','"
         		.$user_id."','"
         		.$user_id."','"
         		.$document->id."',"
@@ -132,6 +132,7 @@ else
             if($insert_limit == 100){
             	$insert_limit = 0;
             	$result = $db->query($insert_sql100);
+            	//$result_data['insert_sql'.($row_num+1)] = $result; 
             	$result_data['insert_sql_result'.($row_num+1)] = $result; 
             	$insert_sql100 = $insert_sql;
             	$insert_flag = 0;
@@ -142,6 +143,7 @@ else
 		fclose($myfile);
 		if ($insert_flag!=0){
         	$result = $db->query($insert_sql100);
+        	$result_data['insert_sql'] = $insert_sql100; 
         	$result_data['insert_sql_result'] = $result; 
     	}
 		// 输出单行直到 end-of-file
@@ -191,8 +193,8 @@ else
     		//$row_id = getMillisecond().$row;
     		$row_id = create_guid();
         	$insert_data="('".$row_id."','"
-        		.date("Y-m-d H:i:sa")."','"
-        		.date("Y-m-d H:i:sa")."','"
+        		.date("Y-m-d H:i:s")."','"
+        		.date("Y-m-d H:i:s")."','"
         		.$user_id."','"
         		.$user_id."','"
         		.$document->id."',"

@@ -1,4 +1,4 @@
-$("#cost").change(function(){	//将成本价自动变为市场价
+/*$("#cost").change(function(){	//将成本价自动变为市场价
   if ($("#price").val()=='') {
   	$("#price").val($("#cost").val())
   }
@@ -50,7 +50,7 @@ $('#type').on('change', function (e) { //选择产品类型后处理字段
 		mark_field_disabled("secondary_unit_defaulting_c");
 	}
 });
-
+*/
 
 $(document).ready(function () {
 
@@ -58,7 +58,7 @@ $(document).ready(function () {
     icon_edit_init($("#icon_c"));
   });
 
-	$('#is_asset_group_c').click()//根据是否是资产组的状态，显示资产相关字段。
+	//$('#is_asset_group_c').click()//根据是否是资产组的状态，显示资产相关字段。
 });
 
 

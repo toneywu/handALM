@@ -18,6 +18,21 @@ $(document).ready(function(){
 		btn_create_wo_order($("input[name='record']").val());
 	   }
 	);
+    //隐藏编辑按钮
+    $("#edit_button").hide();
+    console.log("1111111111111111111111111");
+    //$("#detailview_more_actions").hide();
+    $("#duplicate_button").hide();
+    $("#delete_button").hide();
+    $("#merge_duplicate_button").hide();
+    $("#dropdownMenu1").hide();
+    $("#dropdownMenu1").html("");
+    $("#detailview_more_actions").find("button").hide();
+    $("#btn_create_wo_order").prev().hide();
+    //这两种状态,不能创建工单
+	if ($("#attribute4_c").text()=="已取消" || $("#attribute4_c").text()=="已到期") {
+		$("#btn_create_wo_order").hide();
+	}
 
 }
 );

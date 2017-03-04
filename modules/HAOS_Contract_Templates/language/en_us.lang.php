@@ -78,4 +78,11 @@ $mod_strings = array (
   'LBL_INACTIVE_DATE' => '有效期至',
   'LBL_CONTRACT_TYPE_HAA_CODES_ID' => '合同类型 (related 列表代码 ID)',
   'LBL_CONTRACT_TYPE' => '合同类型',
+   'LBL_NEXT_ACCOUNT_DAY' => '下次结算日期',
+  'LBL_FINAL_ACCOUNT_DAY' => '最后结算日期',
+  'LBL_NUMBER_OF_PERIODS' => '结算期数',
+  'LBL_SETTLEMENT_PERIOD_C' => '结算周期',
+  'LBL_INITIAL_ACCOUNT_DAY' => '首次结算日',
+  'LBL_EFFECTIVE_START_C' => '生效日期',
+  'LBL_EFFECTIVE_END_C' => '终止日期',
 );

@@ -60,6 +60,14 @@ $subpanel_layout['list_fields'] = array (
     'target_module' => 'HAA_UOM',
     'target_record_key' => 'uom_id',
   ),
+  'description' => 
+  array (
+    'type' => 'text',
+    'vname' => 'LBL_DESCRIPTION',
+    'sortable' => false,
+    'width' => '10%',
+    'default' => true,
+  ),
   'edit_button' => 
   array (
     'vname' => 'LBL_EDIT_BUTTON',

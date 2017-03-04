@@ -47,7 +47,8 @@
 			}
 		}
     }
-	$assets_line_array = $_POST['line_asset_id'];
+    
+	/*$assets_line_array = $_POST['line_asset_id'];
 	//echo "assets_line_array".$assets_line_array;
 	//当前事物处理单的数量,因为行可能是新加的,只有通过产品来计量行的数量
 	$current_display_quantity = 0;
@@ -65,70 +66,12 @@
 		}
 		//$i =$i +1;
 		
-	}
-
-	/*//当前事物处理单的数量,1)trans的asset为机柜 2)机柜为整柜 3)终止使用分配不勾选add by liu
-	$current_display_quantity = 0;
-	$trans_qty_sql="SELECT
-						count(*) trans_qty
-					FROM
-						hat_asset_trans line
-					INNER JOIN hat_asset_trans_batch batch ON (
-						batch.id = line.batch_id
-						AND batch.deleted = 0
-					)
-					INNER JOIN hit_racks hr ON (
-						line.asset_id = hr.hat_assets_id
-						AND hr.deleted = 0
-					)
-					INNER JOIN hat_assets ha ON (
-						ha.id = hr.hat_assets_id
-						AND ha.deleted = 0
-					)
-					WHERE
-						hr.enable_partial_allocation != 1
-					AND ha.enable_it_rack = 1
-					AND line.deleted = 0
-					AND line.inactive_using = 0
-					AND batch.id ='".$current_header_id."'";
-	$trans_qty_result=$db->query($trans_qty_sql);
-	while($trans_qty_row=$db->fetchByAssoc($trans_qty_result)){
-		if ($trans_qty_row['trans_qty'] != "") {
-			$current_display_quantity = $trans_qty_row['trans_qty'];
-		}else{
-			$current_display_quantity = 0;
-		}
 	}*/
 
 	//下面那段sql是不等于资产事物处理单的id,以前是获取其他事务处理单的行的数量
 	$wo_bean = BeanFactory :: getBean('HAM_WO')->retrieve_by_string_fields(array (
 										    'id' => $source_wo_id));
-	
-	/*$history_qty=0;
-	//这个现在不需要了
-	$history_sql =  'SELECT COUNT(1) cnt
-					FROM   hat_asset_trans line
-					INNER  JOIN hat_asset_trans_batch batch
-					ON     (batch.id = line.batch_id AND batch.deleted = 0)
-					INNER  JOIN ham_wo hw
-					ON     (batch.source_wo_id = hw.id AND hw.deleted = 0)
-					INNER  JOIN ham_woop hwoop
-					ON     (batch.source_woop_id = hwoop.id AND hwoop.deleted = 0)
-					INNER  JOIN hit_racks hr
-					ON     (line.asset_id = hr.hat_assets_id AND hr.deleted = 0)
-					INNER  JOIN hat_assets ha
-					ON     (ha.id = hr.hat_assets_id AND ha.deleted = 0)
-					WHERE  hr.enable_partial_allocation != "1"
-					AND    ha.enable_it_rack = "1"
-					AND    line.deleted=0 and hw.contract_id="'.$wo_bean->contract_id.'" and batch.id!="'.$current_header_id.'"';
-	$history_result = $db->query($history_sql);
-	while ($history_record = $db->fetchByAssoc($history_result)) {
-		$history_qty = $history_record['cnt'];
-	}*/
-	//echo "history_sql=".$history_sql;
-	//$display_quantity=$current_display_quantity+$history_qty;
-	$display_quantity=$current_display_quantity;
-	//echo "current_display_quantity = ".$current_display_quantity."-history_qty=".$history_qty;
+	//$display_quantity=$current_display_quantity;
 	if($need_allocation=="Y"){
 			
 			
@@ -167,14 +110,39 @@
 						}
 					}
 				}
+                
+                $assets_line_array = $_POST['line_asset_id'];
+				//echo "assets_line_array".$assets_line_array;
+				//当前事物处理单的数量,因为行可能是新加的,只有通过产品来计量行的数量
+				$current_display_quantity = 0;
+				//$i=0;
+				foreach($assets_line_array as $key =>$value){
+					$assets_bean =  BeanFactory :: getBean('HAT_Assets',$value);
+					//$assets_line_id[$i]=$value;
+					if (!empty($assets_bean)){
+						$racks_beans = BeanFactory :: getBean("HIT_Racks")->get_full_list('', "hit_racks.hat_assets_id ='" . $assets_bean->id . "'");
+						$racks_bean=$racks_beans[0];
+						
+						//资产为机柜且为整柜,并且为该合同未处理过的
+						if($racks_bean->enable_partial_allocation!="1"&&$assets_bean->enable_it_rack=="1"&&$assets_bean->attribute9 != $line_contract_id){
+							$current_display_quantity=$current_display_quantity+1;
+						}
+					}
+					//$i =$i +1;
+					
+				}
+
 
 				$contract_bean = BeanFactory :: getBean('AOS_Contracts')->retrieve_by_string_fields(array ('id' => $line_contract_id));
 				$asset_qty_sql="";
-				if ($contract_bean->haa_codes_id_c == 'f1168478-cb96-7903-ab48-584ffdaf87d9') {
+				//add by liu 如果合同来源为集团则不获取已用数量
+				$code_bean = BeanFactory :: getBean('HAA_Codes')->retrieve_by_string_fields(array (
+										    'id' => $contract_bean->haa_codes_id_c));
+				if ($code_bean->name == '集团') {
 					$asset_qty = 0;
 				}else{
 					//已用数量:asset 的 A9 字段 统计数量,a9为合同id
-                //global $db;
+                    //global $db;
 					$asset_qty_sql="SELECT COUNT(*) asset_qty
 									from hat_assets 
 									WHERE hat_assets.deleted = 0
@@ -190,13 +158,13 @@
 				
 				/*echo "asset_qty_sql:".$asset_qty_sql."<br/>";
 					echo "asset_qty:".$asset_qty."<br/>";
-				    echo "display_quantity:".$display_quantity."<br/>";
+				    echo "current_display_quantity:".$current_display_quantity."<br/>";
 				    echo "contract_qty:".$contract_qty."<br/>";*/
-				if($display_quantity+$asset_qty>$contract_qty){
-					echo "asset_qty_sql:".$asset_qty_sql."<br/>";
+				if($current_display_quantity+$asset_qty>$contract_qty&&$contract_qty != 0&&$current_display_quantity != 0){
+					/*echo "asset_qty_sql:".$asset_qty_sql."<br/>";
 					echo "已用数量:".$asset_qty."<br/>";
-				    echo "当前数量:".$display_quantity."<br/>";
-				    echo "合同数量:".$contract_qty."<br/>";
+				    echo "当前数量:".$current_display_quantity."<br/>";
+				    echo "合同数量:".$contract_qty."<br/>";*/
 				    //echo "assets_line_id:".$assets_line_id."<br/>";
 					echo '分配数量已经超过约定数量！  不能将资产事务处理单状态更改为“已批准”';
 				}else{
@@ -204,6 +172,27 @@
 				}
 			}	
 		}else{
+ 
+			$assets_line_array = $_POST['line_asset_id'];
+	        //echo "assets_line_array".$assets_line_array;
+	        //当前事物处理单的数量,因为行可能是新加的,只有通过产品来计量行的数量
+			$current_display_quantity = 0;
+	        //$i=0;
+			foreach($assets_line_array as $key =>$value){
+				$assets_bean =  BeanFactory :: getBean('HAT_Assets',$value);
+		        //$assets_line_id[$i]=$value;
+				if (!empty($assets_bean)){
+					$racks_beans = BeanFactory :: getBean("HIT_Racks")->get_full_list('', "hit_racks.hat_assets_id ='" . $assets_bean->id . "'");
+					$racks_bean=$racks_beans[0];
+
+					if($racks_bean->enable_partial_allocation!="1"&&$assets_bean->enable_it_rack=="1"){
+						$current_display_quantity=$current_display_quantity+1;
+					}
+				}
+		        //$i =$i +1;
+
+			}
+
 			//echo count($ham_woop_lines);
 			if(count($ham_woop_lines)!=0){
 				foreach($ham_woop_lines as $ham_woop_line){
@@ -217,7 +206,7 @@
 						}	
 				}
 				
-				if($current_display_quantity>$product_quantity){
+				if($current_display_quantity>$product_quantity&&$current_display_quantity != 0&&$product_quantity != 0){
 					echo '分配数量已经超过约定数量！  不能将资产事务处理单状态更改为“已批准”';
 				}else{
 					echo "S";

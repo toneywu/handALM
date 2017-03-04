@@ -5,6 +5,7 @@
 *当REQUST(defualt_list)不为空，或不为NONE时进行默认查询的处理
 * ************************************************************/
 $current_mode_sql="1=1";
+
 if (isset($_REQUEST['current_mode'])) {
     if($_REQUEST['current_mode']=="rack"||$_REQUEST['current_mode']=="rackposition") {
         $current_mode_sql = "hat_assets.enable_it_rack = 1 ";
@@ -141,7 +142,9 @@ if ($_REQUEST['type']=="current_using_org_none" && isset($_REQUEST['query_id']))
                           AND accounts.id ='".$_REQUEST['query_id']."')
                         WHERE hat_assets.`deleted` = 0
                             AND hat_assets.asset_status != 'Discard'
+                            AND hat_assets.asset_status IN ('PreAssigned','Idle','Stocked')
                             AND ".$current_mode_sql.$current_site_sql.$where_sql. " ORDER by hat_assets.name ASC";
+        //echo $sel_sub_asset;
 
 
 }

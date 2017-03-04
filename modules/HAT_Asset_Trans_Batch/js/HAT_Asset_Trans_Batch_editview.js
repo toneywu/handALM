@@ -316,6 +316,36 @@ function checkLinesInactiveUsingFlag(){
   });
 }
 
+//add by zhangling 20170227
+function check_inactive_using(){
+		var error_msg="S";
+		var index_inactive='请检查第 ';
+		var i=1;
+		$("input[id^='line_asset_id']").each(function(){
+			var id_name=$(this).attr("id");
+			var id_index = id_name.split("line_asset_id")[1];
+			//3)终止使用分配不勾选
+			console.log(id_name);
+			if(($("#line_inactive_using"+id_index).val()!="1")&&$("#line_deleted"+id_index).val()!="1"){
+				error_msg='E';
+				index_inactive += i+',';
+			}
+			if($("#line_deleted"+id_index).val()!="1"){
+				i++;
+			}
+			
+		});
+		if (error_msg=='E'){
+			index_inactive += ' 行,确认是否终止分配?';
+			BootstrapDialog.alert({
+							type : BootstrapDialog.TYPE_DANGER,
+							title : SUGAR.language.get('app_strings',
+									'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+							message : index_inactive
+						});
+		}
+		return error_msg;
+}
 function check_quantity(){
 		var error_msg="";
 		var formData=$("#EditView");
@@ -373,6 +403,58 @@ function check_quantity(){
 	
 }
 
+//add by liu
+function check_wo_lines(){
+		var error_msg="";
+		var formData=$("#EditView");
+		var formData_str = formData.serialize();
+
+		var json_obj={};
+		$("input[id^='line_asset_id']").each(function(){
+			var id_name=$(this).attr("id");
+			var id_index = id_name.split("line_asset_id")[1];
+			//3)终止使用分配不勾选
+			console.log(id_name);
+			if($("#line_deleted"+id_index).val()=="0" && $("#line_inactive_using"+id_index).val()!="1"){
+				json_obj[id_name]=$(this).val();
+				console.log($(this).val());
+			}
+		});
+
+		var json_data ={};
+
+		json_data['source_wo_id']=$("#source_wo_id").val();
+        console.log($("#source_wo_id").val()+"++++++++++++++++++++++++++++++++++++");
+		console.log(json_obj);
+		console.log("-------------------------------");
+		json_data["line_asset_id"]=json_obj;
+		$.ajax({
+			type:"POST",
+			url: "index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=checkWoLines",
+			data: json_data,
+			cache:false,
+            async:false,//重要的关健点在于同步和异步的参数，
+			success: function(msg){
+				error_msg=msg;
+				console.log("check_wo_lines = "+error_msg);
+				if(error_msg!="S"){
+
+					BootstrapDialog.alert({
+							type : BootstrapDialog.TYPE_DANGER,
+							title : SUGAR.language.get('app_strings',
+									'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+							message : error_msg
+						});
+			}
+		},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				 //alert('Error loading document');
+				 console.log(textStatus+errorThrown);
+			},
+			});
+	return error_msg;
+	
+}
 
 
 /*function erp_allocations(){
@@ -404,7 +486,7 @@ function erp_allocations(){
 		json_data['event_type_id']=$("#hat_eventtype_id").val();
 		json_data['record']=$("input[name=record]").val();
 		json_data["line_asset_infos"]=json_obj;
-
+        console.log("line_asset_infos:"+json_data);
 		$.ajax({
 			type:"POST",
 			url: "index.php?to_pdf=true&module=HAT_Asset_Trans_Batch&action=ebs_fa_allocations",
@@ -425,7 +507,14 @@ function erp_allocations(){
 									'LBL_EMAIL_ERROR_GENERAL_TITLE'),
 							message : $result_json.msg
 						});
-					}
+					}/*else{
+						BootstrapDialog.alert({
+							type : BootstrapDialog.TYPE_DANGER,
+							title : SUGAR.language.get('app_strings',
+									'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+							message : msg
+						});
+					}*/
 					},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
 				 //alert('Error loading document');
@@ -446,7 +535,18 @@ function preValidateFunction(async_bool = false) {
 		if(return_status!="S"){
 			return;
 		}
-		console.log("end erp_allocations");
+		console.log("end erp_allocations return_status:"+return_status);
+		//return;
+        //add by liu 
+        if ($("#source_wo_id").val()!="") {
+			//console.log("preValidateFunction");
+			var error_msg = check_wo_lines(); //如果验证有误会返回错误信息
+			//console.log("preValidateFunction = "+error_msg);
+		}
+		if(error_msg!=="S"&&error_msg!=""){
+			return;
+		}
+
 		//return;
 		//toney.wu 仅针对有来源的工作单进行数据验证
 		if ($("#source_woop_id").val()!="") {
@@ -461,6 +561,14 @@ function preValidateFunction(async_bool = false) {
 		console.log("end check_quantity");
 		//欠费
 		var global_eventOptions = jQuery.parseJSON($("#eventOptions").val());
+        //add by zhangling 20170227
+		if (global_eventOptions.target_asset_status=='Idle'){
+			error_msg = check_inactive_using(); 
+		}
+		if(error_msg!=="S"&&error_msg!=""){
+			return;
+		}
+		//end add by zhangling 20170227
 
 		if ($("#asset_trans_status").val()=="SUBMITTED"||$("#asset_trans_status").val()=="APPROVED") {//如果是提交状态，进行客户信息检查
 			if (global_eventOptions.check_customer_hold_c_owning == "1"){
@@ -496,6 +604,7 @@ $(document).ready(function(){
         $("#asset_trans_status option[value='APPROVED']").remove();
         $("#asset_trans_status option[value='REJECTED']").remove();
         $("#asset_trans_status option[value='CLOSED']").remove();
+        $("#asset_trans_status option[value='TRANSACTED']").remove();
         $("#asset_trans_status option[value='AUTO_TRANSACTED']").remove();
         //end
     } else if (current_header_status=="APPROVED") { //可以CANCEL和TRANSACTED
@@ -503,6 +612,7 @@ $(document).ready(function(){
         $("#asset_trans_status option[value='SUBMITTED']").remove();
         $("#asset_trans_status option[value='REJECTED']").remove();
         $("#asset_trans_status option[value='CLOSED']").remove();
+        $("#asset_trans_status option[value='TRANSACTED']").remove();
         $("#asset_trans_status option[value='AUTO_TRANSACTED']").remove();
         setFormReadonly();
     } else if (current_header_status=="REJECTED") { //可以CANCEL和SUBMIT
@@ -629,7 +739,7 @@ $(document).ready(function(){
     }
 	
 	//add by yuan.chen 2016-12-08
-	if($("#asset_trans_status").val()=="APPROVED"){
+	if($("#asset_trans_status").val()=="APPROVED"||$("#asset_trans_status").val()=="CLOSED"){
 	   //$("#EditView_tabs button").css("display","none");
 	   $("#EditView_tabs input").attr("readonly",true);
        $("#EditView_tabs input").attr("style","background-Color:#efefef");

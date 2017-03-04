@@ -55,6 +55,8 @@
 		font-size:medium;
 		border-bottom: 1px solid #000;
 		margin:0 0 20px 0;
+		letter-spacing: 2px;
+		line-height: 1.25em
 	}
 	#node_details p span,#node_details p span a {
 		font-size: small;
@@ -153,7 +155,16 @@
 	/*padding:1px 15px 2px 10px;*/
 }
 .detail_action_panel {
-	margin: 25px 0;
+	display: inline-block;
+}
+.detail_action_panel li {
+	float: left;
+	list-style: none;
+	margin-right: 4px;
+}
+.detailed_data_table {
+	clear:left;
+	padding-top: 0.5em;
 }
 #MultiSelectDiv {
 	float: right;
@@ -172,6 +183,51 @@
     max-height: 400px;
     overflow-y: scroll;
 }
+
+
+	.GridTable
+	{
+		border-collapse:separate;
+		border-spacing:8px;
+		max-width:90%;
+	}
+
+	.GridTable tr td,.GridTable tr td div{
+		width: 80px;
+		height: 60px;
+		overflow: hidden;
+		font-size: 10px;
+		padding: 0;
+	}
+	.GridTable tr td div{
+		border: 1px solid #ccc;
+		padding: 4px;
+		cursor: pointer;
+	}
+	.GridTable tr td div.empty{
+		border: 1px dashed #ddd;
+	}
+	.GridTable tr td.frist,.GridTable tr td.frist div{
+		background: #f3eedf;
+		color: #000;
+		overflow: inherit;
+		height: 100%;
+	}
+
+	.GridTable tr td div span {
+		line-height: 1.1em;
+		display: inline-block;
+	}
+
+	.GridTable tr td div .asset_name {
+		font-weight:bold;
+	}
+
+	.GridTable tr,.GridTable tr td div:hover{
+		overflow: inherit;
+		height: 100%;
+		border: 1px solid #000;
+	}
 
 </style>
 
@@ -433,7 +489,7 @@ $(document).ready(function(){
 					} else if ($_REQUEST['defualt_list']=="current_using_org" && isset($_REQUEST['target_using_org_id'])) {
 						echo 'initTree("LIST","current_using_org","'.$_REQUEST["target_using_org_id"].'");';
 					} else if ($_REQUEST['defualt_list']=="current_using_org_none" && isset($_REQUEST['target_using_org_id'])) {
-						echo 'initTree("LIST","current_using_org","'.$_REQUEST["target_using_org_id"].'");';
+						echo 'initTree("LIST","current_using_org_none","'.$_REQUEST["target_using_org_id"].'");';
 					} else if ($_REQUEST['defualt_list']=="unallocated" && isset($_REQUEST['target_using_org_id'])) {
 						echo 'initTree("LIST","unallocated","'.$_REQUEST["target_using_org_id"].'");';
 					}else if ($_REQUEST['defualt_list']=="current_owning_org" && isset($_REQUEST['current_owning_org_id'])) {

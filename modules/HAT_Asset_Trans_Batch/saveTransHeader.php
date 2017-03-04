@@ -74,12 +74,14 @@ function checkHeaderClose($beanHeader) {
 
     global $timedate, $db;
     //add by zhangling 20170220
-    //检查资产事务处理头下是否有处理行，如果没有则不改变头状态
-    $sqlc = 'select hat.id from hat_asset_trans hat WHERE hat.deleted=0 AND hat.batch_id="'.$beanHeader->id.'"';
-    $resultc=$db->query($sqlc);
-    $line_count = $resultc->num_rows;
-    if($line_count==0){
-        return;
+    if($beanHeader->asset_trans_status=='DRAFT'){
+        //检查资产事务处理头下是否有处理行，如果没有则不改变头状态
+        $sqlc = 'select hat.id from hat_asset_trans hat WHERE hat.deleted=0 AND hat.batch_id="'.$beanHeader->id.'"';
+        $resultc=$db->query($sqlc);
+        $line_count = $resultc->num_rows;
+        if($line_count==0){
+            return;
+        }
     }
     //end add zhangling 20170220
     $sql="SELECT hat.id, hat.trans_status FROM hat_asset_trans hat WHERE hat.deleted=0 

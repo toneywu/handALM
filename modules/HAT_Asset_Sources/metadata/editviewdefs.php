@@ -6,6 +6,13 @@ array (
   array (
     'templateMeta' => 
     array (
+      'includes' => 
+      array (
+        0 => 
+        array (
+          'file' => 'modules/HAT_Asset_Sources/js/HAT_Asset_Sources_editview.js',
+        ),
+      ),
       'maxColumns' => '2',
       'widths' => 
       array (

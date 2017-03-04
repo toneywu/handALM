@@ -58,19 +58,20 @@ array (
             'name' => 'product_number',
             'studio' => 'visible',
             'label' => 'LBL_PRODUCT_NUMBER',
-			 'displayParams' =>           
-			 array (
-              //'initial_filter' => '&maint_site_advanced="+encodeURIComponent(document.getElementById("site").value)+"',
-              'field_to_name_array' => //这里是从Location选择之后，将Location中可以获取到的一些值复制到对应的字段（与本例主题无关）
-				  array (
-					'name' => 'product_number',
-					'id' => 'product_id',
-					'asset_group' => 'asset_group',
-					'tracking_number' => 'line_number',
-					'hat_asset_locations_hat_assets_name' => 'asset_location',
-				  ),
-              //'call_back_function' => 'setLocationPopupReturn', //在选择后会触发JS中的setLocationPopupReturn函数（与本例主题无关）
-            ),
+			      'displayParams' =>           
+      			array (
+                  'initial_filter' => '&asset_group_limit=link',
+                    //'initial_filter' => '&maint_site_advanced="+encodeURIComponent(document.getElementById("site").value)+"',
+                  'field_to_name_array' => //这里是从Location选择之后，将Location中可以获取到的一些值复制到对应的字段（与本例主题无关）
+            				  array (
+            					'name' => 'product_number',
+            					'id' => 'product_id',
+            					'asset_group' => 'asset_group',
+            					'tracking_number' => 'line_number',
+            					'hat_asset_locations_hat_assets_name' => 'asset_location',
+            				  ),
+                    //'call_back_function' => 'setLocationPopupReturn', //在选择后会触发JS中的setLocationPopupReturn函数（与本例主题无关）
+                  ),
 
           ),
           1 => 

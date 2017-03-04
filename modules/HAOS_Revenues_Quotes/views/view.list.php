@@ -12,7 +12,7 @@ class HAOS_Revenues_QuotesViewList extends ViewList
             $this->where.=" AND EXISTS ( SELECT 1 FROM haos_revenues_quotes tc WHERE haos_revenues_quotes.id=tc.id AND tc.haa_frameworks_id_c='".$haa_frameworks_id."')";
         }else{//没有其他查询条件时
             $this->where=" EXISTS ( SELECT 1 FROM haos_revenues_quotes tc WHERE haos_revenues_quotes.id=tc.id AND tc.haa_frameworks_id_c='".$haa_frameworks_id."')";
-        }
+        } 
        
     }
 

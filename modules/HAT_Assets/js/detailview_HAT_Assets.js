@@ -1,4 +1,23 @@
+function createLinearElement(){
+	window.location.href = "index.php?module=HAT_Linear_Elements&action=EditView&asset_id=" + $("input[name='record']").val();
+
+}
+
 $(document).ready(function(){
+	
+	if ($("#asset_status").val()== 'InService') {
+		//隐藏编辑按钮
+		$("#edit_button").hide();
+		console.log("1111111111111111111111111");
+	    //$("#detailview_more_actions").hide();
+	    $("#duplicate_button").hide();
+	    $("#delete_button").hide();
+	    $("#merge_duplicate_button").hide();
+	    $("#dropdownMenu1").hide();
+	    $("#dropdownMenu1").html("");
+	    $("#detailview_more_actions").find("button").hide();
+    }
+
 	if($('#haa_ff_id').length==0) {//如果对象不存在就添加一个
 		$("#EditView").append('<input id="haa_ff_id" name="haa_ff_id" type=hidden>');
 	};
@@ -6,7 +25,7 @@ $(document).ready(function(){
     //触发FF
     SUGAR.util.doWhen("typeof setFF == 'function'", function(){
         triger_setFF($("#haa_ff_id").val(),"HAT_Assets")
-		$("a.collapsed").click();
+		$(".expandLink").click();
      });
 
 	$("#asset_desc").css("font-weight","bold");
@@ -27,6 +46,7 @@ $(document).ready(function(){
 		}
 	}
 
+	$("#HAT_Linear_Elements_新增_button").attr('type','button').attr('onclick','createLinearElement()');
 
 });
 

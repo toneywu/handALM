@@ -34,7 +34,7 @@ class HAT_Asset_SourcesViewEdit extends ViewEdit
             }
 
         }
-
+        echo ('<script>$("#uom").after(\'<input type="hidden" name="source_type_val" id="source_type_val" value="'.$this->bean->source_type.'"/>\');</script>');
 
     }
 

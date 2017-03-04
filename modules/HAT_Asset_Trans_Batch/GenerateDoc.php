@@ -144,7 +144,7 @@ if(!isset($_REQUEST['uid']) || empty($_REQUEST['uid']) || !isset($_REQUEST['temp
         }
         $text = populate_template_lines($text, $lineItems,'tr','HAM_WO_Lines');//完成行字段的覆盖
     }
-
+    $text = populate_template_others($text);
 	$converted = templateParser::parse_template($text, $object_arr);//这里完成了字段的替换
     $header = templateParser::parse_template($header, $object_arr);
     $footer = templateParser::parse_template($footer, $object_arr);
@@ -287,6 +287,64 @@ function populate_template_lines($text, $lineItems, $element = 'tr', $module){
             $text .= $linePart;
         }
         $text .= $parts[1];
+    }
+    return $text;
+}
+function populate_template_others($text){
+    global $db;
+    if(strpos($text, '$CUX_DATA_CENTER') !== false){
+        $sql = 'SELECT
+                    name,map_address
+                FROM
+                    hat_asset_locations
+                WHERE
+                    ham_maint_sites_id = (
+                        SELECT
+                            ham_maint_sites_id
+                        FROM
+                            hit_ip_trans_batch
+                        WHERE
+                            id = "'.$_REQUEST['uid'].'"
+                    )
+                AND parent_location_id IS NULL';
+        $result = $db->query($sql);    
+        while($row = $db->fetchByAssoc($result)){
+            $text = str_replace('$CUX_DATA_CENTER',$row['name'],$text);
+            $text = str_replace('$CUX_DC_LOCATION',$row['map_address'],$text);
+        }    
+    }
+    if(strpos($text, '$CUX_CABINET_LOCATION') !== false){
+        $sql2 = 'SELECT
+                        *
+                    FROM
+                        hat_assets
+                    WHERE
+                        enable_it_rack = 1
+                    AND id IN (
+                        SELECT DISTINCT
+                            hat.asset_id
+                        FROM
+                            hat_asset_trans hat,
+                            hat_asset_trans_batch hatb
+                        WHERE
+                            hat.batch_id = hatb.id
+                        AND hat.deleted = 0
+                        AND hatb.source_wo_id = (
+                            SELECT
+                                hitb.source_wo_id
+                            FROM
+                                hit_ip_trans_batch hitb
+                            WHERE
+                                id = "'.$_REQUEST['uid'].'"
+                        )
+                    )
+                    ORDER BY name';
+        $result2 = $db->query($sql2);  
+        $rack_asset='';  
+        while($row2 = $db->fetchByAssoc($result2)){
+            $rack_asset.='</p><p>'.$row2['name'];
+        }      
+        $text = str_replace('$CUX_CABINET_LOCATION',$rack_asset,$text);       
     }
     return $text;
 }

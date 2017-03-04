@@ -215,7 +215,7 @@ $dictionary['HAOS_Payments'] = array(
             'name' => 'getCurrencyDropDown',
             'returns' => 'html',
             ),
-        ),
+         ),
       'payment_amount' => 
       array (
         'required' => true,

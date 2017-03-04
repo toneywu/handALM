@@ -6,6 +6,11 @@ class HAM_WOViewList extends ViewList
 {
   function Display() {
     global $app_list_strings;
+    if (empty($_REQUEST['orderBy'])) {
+      $_REQUEST['orderBy'] = 'date_entered';
+      $_REQUEST['sortOrder'] = 'desc';
+    }
+    
 	echo '<script src="cache/include/javascript/sugar_grp_yui_widgets.js"></script>';
 	echo '<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />';
     $this->ss->assign('APP_LIST', $app_list_strings);
@@ -18,7 +23,7 @@ class HAM_WOViewList extends ViewList
 		//echo '<script>alert('.$_GET['error_message'].');</script>';
 	}
     parent::Display();
-   /* global $db;
+    /*global $db;
     var_dump($db->lastsql);*/
   }
 

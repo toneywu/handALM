@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ini_set('max_input_vars',5000);
 //global $current_user;
 $beanHeader = new HAT_Asset_Trans_Batch();

@@ -179,7 +179,10 @@ function setEventTypeFields() {
 		$("#edit_button").after(change_btn);
 	}
 
-
+	if (currentHeaderStatus=="CLOSED"){
+		//如果当前为处理完成状态，则隐藏编辑按钮
+		$("#edit_button").hide();
+	}
 /*	if (currentHeaderStatus == "DRAFT") {
 		//如果当前为DRAFT状态，则显示提交按钮
 		var submit_btn = $("<input type='button' class='btn_detailview' id='btn_submit' value='"

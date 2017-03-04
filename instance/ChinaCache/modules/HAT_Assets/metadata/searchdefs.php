@@ -72,7 +72,7 @@ array (
         'default' => true,
         'name' => 'serial_number',
       ),
-      'asset_criticality' => 
+      /*'asset_criticality' => 
       array (
         'type' => 'enum',
         'studio' => 'visible',
@@ -80,6 +80,15 @@ array (
         'width' => '10%',
         'default' => true,
         'name' => 'asset_criticality',
+      ),*/
+      'owning_details' => 
+      array (
+        'type' => 'varchar',
+        'studio' => 'visible',
+        'label' => 'LBL_OWNING_DETAILS',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'owning_details',
       ),
       'asset_status' => 
       array (
@@ -96,6 +105,10 @@ array (
         'default' => true,
         'studio' => 'visible',
         'label' => 'LBL_ASSET_GROUP',
+        'displayParams' => 
+            array (
+              'initial_filter' => '&type_advanced=Good&is_asset_group_c_advanced=1',
+            ),
         'id' => 'AOS_PRODUCTS_ID',
         'link' => true,
         'width' => '10%',

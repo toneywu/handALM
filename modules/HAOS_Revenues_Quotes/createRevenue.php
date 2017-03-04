@@ -83,6 +83,7 @@ function createRevenue($revenueRow,$quoteRow){
 
     $revenue->populateFromRow($revenueRow);
     $revenue->process_save_dates =false;
+    $revenue->source_id = $revenueRow['source_id'];
     $revenue->save();
     $revenue_quote_id=$revenue->id;
 

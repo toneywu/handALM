@@ -29,6 +29,10 @@ array (
         'default' => true,
         'studio' => 'visible',
         'label' => 'LBL_ASSET_LOCATION_TYPE',
+        'displayParams' => 
+            array (
+              'initial_filter' => '&code_type_advanced=asset_location_type',
+              ),
         'id' => 'CODE_ASSET_LOCATION_TYPE_ID',
         'link' => true,
         'width' => '10%',
@@ -68,6 +72,10 @@ array (
         'default' => true,
         'studio' => 'visible',
         'label' => 'LBL_ASSET_LOCATION_TYPE',
+        'displayParams' => 
+            array (
+              'initial_filter' => '&code_type_advanced=asset_location_type',
+              ),
         'id' => 'CODE_ASSET_LOCATION_TYPE_ID',
         'link' => true,
         'width' => '10%',
