@@ -4,11 +4,12 @@ var lineno;
 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
 
 function insertLineHeader_pri(tableid){
-  $("#line_items2_label").hide();//隐藏SugarCRM字段
-
+ // $("#line_items2_label").hide();//隐藏SugarCRM字段
+  $("#line_items2_span").parent().prev().hide();//隐藏SugarCRM字段 modify by tangqi 20170228
+  document.getElementById("line_items2_span").parentElement.className="col-xs-12.col-sm-12.edit-view-field"
   tablehead = document.createElement("thead");
   tablehead.id = tableid +"_head";
-  tablehead.style.display="none";
+  tablehead.style.display="";
   document.getElementById(tableid).appendChild(tablehead);
 
   var x=tablehead.insertRow(-1);
@@ -32,6 +33,8 @@ function insertLineHeader_pri(tableid){
   d.innerHTML=SUGAR.language.get('HPR_Groups', 'LBL_PRI_DESCRIPTION');
   var f=x.insertCell(8);
   f.innerHTML='&nbsp;';
+   var tr_header=document.getElementById(tablehead.id);
+  tr_header.align="center";
 }
 
 
@@ -80,7 +83,8 @@ z1.innerHTML  =
 "<td><span name='displayed_linepri_sql_statement_for_popup[" + prodln + "]' id='displayed_linepri_sql_statement_for_popup" + prodln + "'></span></td>"+
 "<td><span name='displayed_linepri_description[" + prodln + "]' id='displayed_linepri_description" + prodln + "'></span></td>"+
 "<td><input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_linepri" + prodln +"' onclick='LineEditorShow_pri("+prodln+")'></td>";
-
+var tr_dis=document.getElementById(z1.id);
+  tr_dis.align="center";
   var x = tablebody.insertRow(-1); //以下生成的是Line Editor
   x.id = 'linepri_editor' + prodln;
   x.style = "display:none";
@@ -95,7 +99,7 @@ z1.innerHTML  =
   // '</span>'+
   // '</span>';
 
-  x.innerHTML  = "<td colSpan='"+columnNum+"'><table id='privilige' width='100%'>"+
+  x.innerHTML  = "<td colSpan='"+columnNum+"'><table id='privilige' width='100%' style='display:table'>"+
   "<tr>"+
     "<input name='linepri_id["+prodln+"]' id='linepri_id"+prodln+"' value='' type='hidden'>"+
     "<td>"+SUGAR.language.get('HPR_Groups', 'LBL_PRI_MODULE')+"<span class='required'>*</span></td>"+
