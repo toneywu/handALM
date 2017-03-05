@@ -30,5 +30,15 @@ require_once('modules/HAM_WO/createRevenueFromWO.php');
 
 $haos_revenues_quotes_id=createRevenueFromWO($WOId);
 ob_clean();
-header('Location: index.php?module=HAOS_Revenues_Quotes&action=EditView&record='.$haos_revenues_quotes_id);
+header('Location:index.php?module=HAOS_Revenues_Quotes&action=EditView&record='.$haos_revenues_quotes_id);
+//echo($haos_revenues_quotes_id);
+//if($haos_revenues_quotes_id){
+	//echo '<script></script>';
+	//$url = 'index.php?module=HAOS_Revenues_Quotes&action=EditView&record='.$haos_revenues_quotes_id;  
+	// echo "<script language='javascript' 
+	// type='text/javascript'>";  
+	// echo "window.location.href=index.php?module=HAOS_Revenues_Quotes&action=EditView&record=".$haos_revenues_quotes_id;  
+	// echo "</script>";  
+ // header('Location:index.php?module=HAOS_Revenues_Quotes&action=EditView&record='.$haos_revenues_quotes_id);
+//}
 ?>

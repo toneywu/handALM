@@ -252,5 +252,31 @@ array (
     'default' => false,
     'sortable' => false,
   ),
+//   'SEX_C'=>
+//   array (
+//     'type' => 'enum',
+//     'studio' => 'visible',
+//     'default' => false,
+//     'label' => 'LBL_ASSET_TRANS_STATUS',
+//     'width' => '5%',
+//     'customCode'=>'<span">{$SEX_C}</span>',
+//   ),
+// 'COUNTRIES_C'=>
+//   array (
+//     'type' => 'enum',
+//     'studio' => 'visible',
+//     'default' => false,
+//     'label' => 'LBL_COUNTRIES',
+//     'width' => '5%',
+//     'customCode'=>'<span">{$countries_c}</span>',
+//   ),
+
+  'EMPLOYEE_NUMBER_C'=>
+  array (
+    'width' => '10%',
+    'label' => 'LBL_EMPLOYEE_NUMBER',
+    'default' => false,
+  ),
+  
 );
 ?>

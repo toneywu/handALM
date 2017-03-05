@@ -2,7 +2,11 @@ var prodln=0;
 var columnNum=12;
 if(typeof sqs_objects=='undefined'){var sqs_objects=new Array;}
 function insertLineHeader(tableid){
-	$("#line_items_label").remove();//隐藏SugarCRM字段
+	//modify by tangqi 20170228
+	//$("#line_items_label").remove();//隐藏SugarCRM字段
+	$("#line_items_span").parent().prev().hide();//隐藏SugarCRM字段 
+	//end modify
+	document.getElementById("lineItems").style.display="table";
 	tablehead=document.createElement("thead");
 	tablehead.id=tableid+"_head";
 	document.getElementById(tableid).appendChild(tablehead);
@@ -62,7 +66,7 @@ function insertLineElements(tableid){
 	x.id='line_editor'+prodln;
 
 	x.innerHTML="<td colSpan='"+columnNum+"'>"+
-	"<table border='0' class='lineEditor' width='100%'>"+
+	"<table border='0' class='lineEditor' width='100%' style='display:table;'>"+
 	"<tr>"+
 		"<td id='popupmodule_label' width='12.5%'>"+SUGAR.language.get('HPR_Group_PopupModules','LBL_POPUPMODULE')+":<span class='required'>*</span></td>"+
 		"<td width='37.5%'><select tabindex='116' name='line_popupmodule[" + prodln + "]' id='line_popupmodule" + prodln + "'>" + vat_hidden + "</select>"+
@@ -88,7 +92,6 @@ function insertLineElements(tableid){
 	"</table></td>";
 	var old_val="";
 	renderLine(prodln);
-
 	prodln++;
 	return prodln-1;
 }
@@ -117,6 +120,7 @@ function insertLineFootor(tableid)
 }
 
 function addNewLine(tableid){
+	alert(11);
 	if(check_form('EditView')){//只有必须填写的字段都填写了才可以新增
 		insertLineElements(tableid);//加入新行
 		LineEditorShow(prodln-1);//打开行编辑器

@@ -4,11 +4,14 @@ var lineno;
 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
 
 function insertLineHeader(tableid){
-  $("#line_items1_label").hide();//隐藏SugarCRM字段
-
+  //modify by tangqi 20170228
+  //$("#line_items1_label").hide();//隐藏SugarCRM字段
+  $("#line_items1_span").parent().prev().hide();//隐藏SugarCRM字段 modify by tangqi 20170228
+  document.getElementById("line_items1_span").parentElement.className="col-xs-12.col-sm-12.edit-view-field"
+  //end modify
   tablehead = document.createElement("thead");
   tablehead.id = tableid +"_head";
-  tablehead.style.display="none";
+  tablehead.style.display="";
   document.getElementById(tableid).appendChild(tablehead);
 
   var x=tablehead.insertRow(-1);
@@ -25,6 +28,8 @@ function insertLineHeader(tableid){
   d.innerHTML=SUGAR.language.get('HPR_Groups', 'LBL_MEM_DESCRIPTION');
   var f=x.insertCell(5);
   f.innerHTML='&nbsp;';
+  var tr_header=document.getElementById(tablehead.id);
+  tr_header.align="center";
 }
 
 
@@ -62,14 +67,15 @@ var z1 = tablebody.insertRow(-1);
 z1.id = 'line_displayed' + prodln1;
 z1.className = 'oddListRowS1';
 z1.innerHTML  =
-"<td><span name='displayed_line_organization[" + prodln1 + "]' id='displayed_line_organization" + prodln1 + "'></span></td>" +
+"<td style='vertical-align: middle;'><span name='displayed_line_organization[" + prodln1 + "]' id='displayed_line_organization" + prodln1 + "'></span></td>" +
 //"<td><select disabled='disabled' tabindex='116' name='displayed_line_item_type_code[" + prodln + "]' id='displayed_line_item_type_code" + prodln + "'>" + line_item_type_option +"</select></td>"+
-"<td><span name='displayed_line_user_name[" + prodln1 + "]' id='displayed_line_user_name" + prodln1 + "'></span></td>"+
-"<td><span name='displayed_line_name[" + prodln1 + "]' id='displayed_line_name" + prodln1 + "'></span></td>"+
-"<td><span name='displayed_line_enabled_flag[" + prodln1 + "]' id='displayed_line_enabled_flag" + prodln1 + "'></span></td>"+
-"<td><span name='displayed_line_description[" + prodln1 + "]' id='displayed_line_description" + prodln1 + "'></span></td>"+
+"<td style='vertical-align: middle;'><span name='displayed_line_user_name[" + prodln1 + "]' id='displayed_line_user_name" + prodln1 + "'></span></td>"+
+"<td style='vertical-align: middle;'><span name='displayed_line_name[" + prodln1 + "]' id='displayed_line_name" + prodln1 + "'></span></td>"+
+"<td style='vertical-align: middle;'><span name='displayed_line_enabled_flag[" + prodln1 + "]' id='displayed_line_enabled_flag" + prodln1 + "'></span></td>"+
+"<td style='vertical-align: middle;'><span name='displayed_line_description[" + prodln1 + "]' id='displayed_line_description" + prodln1 + "'></span></td>"+
 "<td><input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln1 +"' onclick='LineEditorShow("+prodln1+")'></td>";
-
+var tr_dis=document.getElementById(z1.id);
+  tr_dis.align="center";
   var x = tablebody.insertRow(-1); //以下生成的是Line Editor
   x.id = 'line_editor' + prodln1;
   x.style = "display:none";
@@ -84,7 +90,7 @@ z1.innerHTML  =
   // '</span>'+
   // '</span>';
 
-  x.innerHTML  = "<td colSpan='"+columnNum1+"'><table id='member' width='100%'>"+
+  x.innerHTML  = "<td colSpan='"+columnNum1+"'><table id='member' width='100%' style='display:table'>"+
   "<tr>"+
     "<input name='line_id["+prodln1+"]' id='line_id"+prodln1+"' value='' type='hidden'>"+
     "<td>"+SUGAR.language.get('HPR_Groups', 'LBL_MEM_ORGANIZATION')+"<span class='required'>*</span></td>"+

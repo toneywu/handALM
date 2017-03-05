@@ -1737,7 +1737,22 @@ $app_list_strings['settlement_period_list']=array (
   );
 
 
-
+$app_list_strings['haos_number_of_periods']=array (
+  ''   => ' ', 
+  '1'   => '1', 
+  '2'   => '2', 
+  '3'   => '3', 
+  '4'   => '4', 
+  '5'   => '5', 
+  '6'   => '6', 
+  '7'   => '7', 
+  '10'   => '10', 
+  '12' => '12',
+  '25' => '25',
+  '26' => '26',
+  '37' => '37',
+  '60' => '60',
+  );
 
 $app_list_strings['haos_line_item_type_list']=array (
   'Product' => '产品',
@@ -2063,6 +2078,8 @@ $app_list_strings['hat_default_asset_list']=array (
   'CURRENT_USING_ORG_NONE' => '当前使用组织和未分配使用的',
   'WO_ASSET_TRANS' => '当前工单/已有的资产事务',
   'WO_IP_TRANS' => '当前工单/网络资源事务',
+  'Unallocated' => '未分配使用的',
+  'CURRENT_OWNING_ORG' => '当前所属组织',
 );
 
 /*********************************************************************************

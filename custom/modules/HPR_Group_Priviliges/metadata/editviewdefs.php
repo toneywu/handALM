@@ -40,6 +40,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+       /* 'LBL_EDITVIEW_PANEL2'=>
+        array(
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),*/
       ),
     ),
     'panels' => 
@@ -112,6 +117,19 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_LINE_ITEMS',
             'customCode'=>'<span id="line_items_span"></span>',
+          ),
+        ),
+      ),
+      'LBL_EDITVIEW_PANEL2'=>
+      array(
+        0 => 
+        array(
+          0 =>
+          array (
+            'name' => 'line_items2',
+            'studio' => 'visible',
+            'label' => 'LBL_LINE_ITEMS2',
+            'customCode'=>'<span id="line_items_span2"></span>',
           ),
         ),
       ),

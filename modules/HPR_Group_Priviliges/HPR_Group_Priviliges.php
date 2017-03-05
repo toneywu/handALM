@@ -54,8 +54,35 @@ class HPR_Group_Priviliges extends HPR_Group_Priviliges_sugar {
 		$post_data=$_POST;
 		$key="line_";
 		$line_count = isset($post_data[$key . 'deleted']) ? count($post_data[$key . 'deleted']) : 0;
+		$line_count1 = isset($post_data['linecl_deleted2']) ? count($post_data['linecl_deleted2']) : 0;
         $j = 0;
+        for ($i = 0; $i < $line_count1; ++$i) {	
+        	$key="linecl_";
+        	$lines = new HPR_Group_Columns();
+            if ($post_data['linecl_deleted2'][$i] == 1) {
+                $lines->mark_deleted($post_data[$key . 'id'][$i]);
+            } else {
+            	
+                foreach ($lines->field_defs as $field_def) {
+                    $field_name = $field_def['name'];
+                    if (isset($post_data[$key . $field_name][$i])) {
+                        $lines->$field_name = $post_data[$key . $field_name][$i];
+                    }
+
+                } 
+                $lines->hpr_group_priviliges_id_c=$this->id;   
+	            $lines->save($check_notify);
+	             if(!$post_data['linecl_id'][$i]){
+	            	$table='hpr_group_columns_hpr_group_priviliges_c';
+	            	$relate_values = array('deleted' =>0 ,
+	            	'hpr_group_columns_hpr_group_priviligeshpr_group_priviliges_ida'=>$this->id,
+	            	'hpr_group_columns_hpr_group_priviligeshpr_group_columns_idb'=>$lines->id );
+	            }
+				parent::set_relationship($table,$relate_values);
+	        }
+	    }
         for ($i = 0; $i < $line_count; ++$i) {
+        	$key="line_";
         	$lines = new HPR_Group_PopupModules();
             if ($post_data[$key . 'deleted'][$i] == 1) {
                 $lines->mark_deleted($post_data[$key . 'id'][$i]);

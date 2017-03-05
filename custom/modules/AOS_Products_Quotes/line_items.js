@@ -26,10 +26,8 @@
  var servln = 0;
  var groupn = 0;
  var group_ids = {};
- var pro_edit_name="product_body";
- var ser_edit_name="service_body";
- var flag=true;
- var serflag=true;
+ 
+
  /**
  * Load Line Items
  */
@@ -79,12 +77,14 @@
                 }
             }
             if (curent_module=='AOS_Contracts'&&p=='number_of_periods_c') {
-                $("#"+type+p+ln).children().each(function(){
-                    if($(this).text()==product[p]){
+                $("#"+type+p+ln).val(product[p]);
+                /*$("#"+type+p+ln).children().each(function(){
+                    if($(this).val()==product[p]){
+                        console.log($(this).text());
                         $(this).attr("selected",true);
                     }
                     
-                });
+                });*/
             }
             //End Modefy osmond 20161023 
             //add by tangqi 20170223
@@ -110,17 +110,12 @@
                 }
             }
              //END add by tangqi 20170223
-            if (curent_module=='AOS_Contracts') {
-                saveProToLineData(ln);
-                saveSerToLineData(ln);
-            }
+            
         }
     }
+
     calculateLine(ln,type);
-    if (curent_module=='AOS_Invoices') {
-        $("#product_body"+ln).show();
-        $("#service_body"+ln).show();//Notice
-    }
+
 }
 
 
@@ -178,199 +173,205 @@
         "post_onblur_function": "formatListPrice(" + prodln + ");",
         "no_match_text": "No Match"
     };
+
+    tablebody = document.createElement("tbody");
+    tablebody.id = "product_body" + prodln;
+    document.getElementById(tableid).appendChild(tablebody);
+
+
+    var x = tablebody.insertRow(-1);
+    x.id = 'product_line' + prodln;
+
+    var b = x.insertCell(0);
+    b.innerHTML = "<input style='width:178px;' class='sqsEnabled' autocomplete='off' type='text' name='product_name[" + prodln + "]' id='product_name" + prodln + "' maxlength='50' value='' title='' tabindex='116' value=''><input type='hidden' name='product_product_id[" + prodln + "]' id='product_product_id" + prodln + "' size='20' maxlength='50' value=''>";
+
+    var b1 = x.insertCell(1);
+    b1.innerHTML = "<input style='width:178px;' class='sqsEnabled' autocomplete='off' type='text' name='product_part_number[" + prodln + "]' id='product_part_number" + prodln + "' maxlength='50' value='' title='' tabindex='116' value=''>";
+
+    var b2 = x.insertCell(2);
+    b2.innerHTML = "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openProductPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>";
+
+     var a = x.insertCell(3);
+    a.innerHTML = "<input type='text' style='width:53px;' name='product_product_qty[" + prodln + "]' id='product_product_qty" + prodln + "' size='5' value='' title='' tabindex='116' onblur='Quantity_format2Number(" + prodln + ");calculateLine(" + prodln + ",\"product_\");'>";
+    
+    var a1 =x.insertCell(4);
+    if(curent_module=="AOS_Contracts"){
+        a1.innerHTML ="<input type='text' class='sqsEnabled' style='width:53px;' name='product_uom_name_c[" + prodln + "]' id='product_uom_name_c" + prodln + "' size='5' value='' title='' tabindex='116'>";
+        a1.innerHTML +="<input type='hidden' class='sqsEnabled' name='product_haa_uom_id_c["+prodln+"]' id='product_haa_uom_id_c"+prodln+"'/>"
+    }
+    
+    var a2 =x.insertCell(5);
     if (curent_module=="AOS_Contracts") {
-        if (flag) {//添加头
-            var tablehead = document.createElement("thead");
-            tablehead.id = tableid +"_head";
-            var thrw=tablehead.insertRow(-1);
-            thrw.innerHTML="<th id='span_name_h'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NAME')+"</th>"+
-            "<th id='span_product_qty_h'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_QUANITY')+"</th>"+
-            "<th id='span_product_list_price_h'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_LIST_PRICE')+"</th>"+
-            "<th id='span_settlement_period_c_h'>计价方式</th>"+
-            "<th id='span_periods_h'>期数</th>"+
-            "<th id='span_next_account_day_h'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_NEXT_ACCOUNT_DAY')+"</th>"+
-            "<th id='span_final_account_day_h'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_FINAL_ACCOUNT_DAY')+"</th>"+
-            '<th></th>';
-            document.getElementById(tableid).appendChild(tablehead);
-            flag=false;
-        }
-        var ln=prodln;
-        var vat_hidden = document.getElementById("vathidden").value;
-        var discount_hidden = document.getElementById("discounthidden").value;
-        var settlement_period_option=document.getElementById("settlementperiodhidden").value;
-        var number_of_periods_c_hidden=document.getElementById("number_of_periods_list").value;
-        var line_html="<tr id='product_line_data"+ln+"'><td id='span_name"+ln+"'></td>"+
-        "<td id='span_product_qty"+ln+"'></td>"+
-        "<td id='span_product_list_price"+ln+"'></td>"+
-        "<td id='span_settlement_period_c"+ln+"'></td>"+
-        "<td id='span_periods"+ln+"'></td>"+
-        "<td id='span_next_account_day"+ln+"'></td>"+
-        "<td id='span_final_account_day"+ln+"'></td>"+
-        "<td>"+
-        '<a href="javascript:;" onclick="showmoreinfo(this,'+ln+')"><i class="glyphicon glyphicon-plus"></i></a>'+
-        "&nbsp;&nbsp;<a href='javascript:;' onclick='openEdite(\"product_\","+ln+")'>编辑</a></td></tr>"+
-        "<tr class='showmore"+ln+" hidden'><td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PART_NUMBER')+"</td>"+
-        "<td id='span_part_number"+ln+"'></td>"+
-        "<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_UOM_NAME_C')+"</td>"+
-        "<td id='span_product_discount"+ln+"'></td></tr>"+
-        "<tr class='showmore"+ln+" hidden'><td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_DISCOUNT_AMT')+"</td>"+
-        "<td id='span_product_unit_price"+ln+"'></td>"+
-        "<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_UNIT_PRICE')+"</td>"+
-        "<td id='span_product_unit_price"+ln+"'></td></tr>"+
-        "<tr class='showmore"+ln+" hidden'><td>"+SUGAR.language.get(module_sugar_grp1,'LBL_VAT_AMT')+"</td>"+
-        "<td id='span_vat_amt"+ln+"'></td>"+
-        "<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_TOTAL_PRICE')+"</td>"+
-        "<td id='span_product_total_price"+ln+"'></td></tr>"+
-        "<tr class='showmore"+ln+" hidden'><td>"+SUGAR.language.get(module_sugar_grp1,'LBL_EFFECTIVE_START_C')+"</td>"+
-        "<td id='span_effective_start_c"+ln+"'></td>"+
-        "<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_END_C')+"</td>"+
-        "<td id='span_effective_end_c"+ln+"'></td></tr>"+
-        "<tr class='showmore"+ln+" hidden'><td>"+SUGAR.language.get(module_sugar_grp1,'LBL_INITIAL_ACCOUNT_DAY')+"</td>"+
-        "<td id='span_initial_account_day"+ln+"'></td>"+
-        "<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_DESCRIPTION')+"</td>"+
-        "<td id='span_item_description"+ln+"'></td></tr>"+
-        "<tr class='showmore"+ln+" hidden'><td>"+SUGAR.language.get(module_sugar_grp1,'LBL_PRODUCT_NOTE')+"</td>"+
-        "<td id='span_description"+ln+"'></td>"+
-        "<td></td>"+
-        "<td></td>"+
-        "</tr>";
-        $("#"+tableid+"_head").append(line_html);
-        var tbe=document.createElement("tbody");
-        tbe.id=pro_edit_name+ln;
-        var row1=tbe.insertRow(-1);
-        row1.innerHTML="<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NAME')+"</td>"+
-            "<td><input class='' id='product_name" + ln + "' name='product_name[" + ln + "]' type='text' value=''/></td>"+
-            "<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PART_NUMBER')+"</td>"+
-            "<td colSpan='4'><input class='sqsEnabled yui-ac-input' id='product_part_number" + ln + "' name='product_part_number[" + ln + "]' type='text' value='' style='width:185px'/>"+
-            "<input class='' id='product_product_id"+ln+"' name='product_product_id["+ln+"]' type='hidden' value=''/>"+
-            "<input class='' id='product_currency"+ln+"' name='product_currency["+ln+"]' type='hidden' value=''/>"+
-            "<button id='btn_part_number' title='"+SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE')+"' type='button' class='button firstChild' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn_type_c' onclick='openProductPopup(" + ln + ");'><img src='themes/MaterialDesignP/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
-            "<button id='btn_clr_part_number' title='"+SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE')+"' type='button' class='button lastChild' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn_clr_part_number'><img src='themes/MaterialDesignP/images/id-ff-clear.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button></td>";
-        var row2=tbe.insertRow(-1);
-        row2.innerHTML="<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_QUANITY')+"</td>"+
-            "<td><input class='' id='product_product_qty" + ln + "' name='product_product_qty[" + ln + "]' type='text' value=''/></td>"+
-            "<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_UOM_NAME_C')+"</td>"+
-            "<td><input class='' id='product_uom_name_c"+ln+"' name='product_uom_name_c["+ln+"]' type='text' value='' style='width:195px'/>"+
-            "<button class='button' name='btn1' title='' type='button' value='选择' onclick='openProductUomPopup("+ln+");'><img src='themes/MaterialDesignP/images/id-ff-select.png' alt='选择''></button>"+
-            "<input class='' name='product_haa_uom_id_c["+ln+"]' id='product_haa_uom_id_c"+ln+"' type='hidden'></td>";
-        var row3=tbe.insertRow(-1);
-        row3.innerHTML="<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_LIST_PRICE')+"</td>"+
-            "<td><input class='' id='product_product_list_price" + ln + "' name='product_product_list_price[" + ln + "]' type='text' value=''/>"+
-            "<input name='product_product_cost_price["+ln+"]' id='product_product_cost_price"+ln+"' value='' type='hidden'></td>"+
-            "<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_DISCOUNT_AMT')+"</td>"+
-            "<td><input class='' id='product_product_discount" + ln + "' name='product_product_discount[" + ln + "]' type='text' value='' style='width:195px' onblur='calculateLine(" + ln + ",\"product_\");'/>"+
-            "<input name='product_product_discount_amount["+ln+"]' id='product_product_discount_amount"+ln+"' value='' type='hidden'>"+
-            "<select tabindex='116' name='product_discount[" + ln + "]' id='product_discount" + ln + "' onchange='calculateLine(" + ln + ",\"product_\");'>" + discount_hidden + "</select></td>";
-        var row4=tbe.insertRow(-1);
-        row4.innerHTML="<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_UNIT_PRICE')+"</td>"+
-            "<td><input class='' id='product_product_unit_price" + ln + "' name='product_product_unit_price[" + ln + "]' type='text' value='' onblur='calculateLine(" + prodln + ",\"product_\");'/></td>"+
-            "<td>"+SUGAR.language.get(module_sugar_grp1,'LBL_VAT_AMT')+"</td>"+
-            "<td><input class='' id='product_vat_amt" + ln + "' name='product_vat_amt[" + ln + "]' type='text' value='' style='width:195px' readonly='readonly'/>"+
-            "<select tabindex='116' name='product_vat[" + ln + "]' id='product_vat" + ln + "' onchange='calculateLine(" + ln + ",\"product_\");'>" + vat_hidden + "</select></td>";
-        var row5=tbe.insertRow(-1);
-        row5.innerHTML="<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_TOTAL_PRICE')+"</td>"+
-            "<td><input class='' id='product_product_total_price" + ln + "' name='product_product_total_price[" + ln + "]' type='text' value='' readonly='readonly'/></td>"+
-            "<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_SETTLEMENT_PERIOD_C')+"</td>"+
-            "<td><select class='' id='product_settlement_period_c" + ln + "' name='product_settlement_period_c[" + ln + "]' onchange='setProductSettlementPeriodChange(this,"+ln+");'>"+settlement_period_option+"</select>"+
-            "<select class='' id='product_number_of_periods_c"+ln+"' name='product_number_of_periods_c["+ln+"]' onchange='calculateLine("+ln+",\"product_\")' disabled>"+number_of_periods_c_hidden+"</select></td>";
-        var row6=tbe.insertRow(-1);
-        row6.innerHTML="<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_INITIAL_ACCOUNT_DAY')+"</td>"+
-            "<td><input id='product_initial_account_day_c" + ln + "' class='date_input' name='product_initial_account_day_c[" + ln + "]' value='' title='' tabindex='0' type='text' onchange='setNextDayVal(\"product_\","+ln+",this)' disabled></td>"+
-            "<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_NEXT_ACCOUNT_DAY')+"</td>"+
-            "<td><span id='span_product_next_account_day_c"+ln+"' class='input-group date show_calendar' style='margin-top:5px'>"+
-            "<input type='text' class='date_input' id='product_next_account_day_c"+ln+"' name='product_next_account_day_c["+ln+"]'/>"+
-            "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></span></td>";
-        var row7=tbe.insertRow(-1);
-        row7.innerHTML="<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_START_C')+"</td>"+
-            "<td><span class='input-group date show_calendar'>"+
-            "<input class='date_input' id='product_effective_start_c" + ln + "' name='product_effective_start_c[" + ln + "]' type='text' value=''/>"+
-            "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></span></td>"+
-            "<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_END_C')+"</td>"+
-            "<td><span class='input-group date show_calendar'>"+
-            "<input class='date_input' id='product_effective_end_c" + ln + "' name='product_effective_end_c[" + ln + "]' type='text' value=''/>"+
-            "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></span></td>";
-        var row8=tbe.insertRow(-1);
-        row8.innerHTML="<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_FINAL_ACCOUNT_DAY')+"</td>"+
-            "<td><span class='input-group date show_calendar'>"+
-            "<input class='date_input' id='product_final_account_day_c" + ln + "' name='product_final_account_day_c[" + ln + "]' type='text' value=''/>"+
-            "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></span></td>"+
-            "<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_DESCRIPTION')+"</td>"+
-            "<td><textarea class='' id='product_item_description" + ln + "' name='product_item_description[" + ln + "]' rows='2' cols='20'></textarea></td>";
-        var row9=tbe.insertRow(-1);
-        row9.innerHTML="<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NOTE')+"</td>"+
-            "<td><textarea class='' id='product_product_note" + ln + "' name='product_product_note[" + ln + "]' rows='2' cols='20'></textarea></td>"+
-            "<td><input class='' id='product_group_number"+ln+"' name='product_group_number["+ln+"]' type='hidden' value='"+groupid+"'/></td>"+
-            "<td><input type='hidden' name='product_product_id[" + ln + "]' id='product_product_id" + ln + "' value=''>"+
-            "<input type='hidden' name='product_deleted["+ln+"]' id='product_deleted"+ln+"' value=''/></td>";
-        if (typeof currencyFields !== 'undefined'){
-            currencyFields.push("product_product_list_price" + ln);
-            currencyFields.push("product_product_cost_price" + ln);
-            currencyFields.push("product_product_unit_price" + ln);
-            currencyFields.push("product_product_total_price"+ln);
-        }
-        var row10=tbe.insertRow(-1);
-        row10.innerHTML="<td colSpan='16'><input class='btn btn-default' id='' name='' type='button' value='"+SUGAR.language.get("app_strings","LBL_SAVE_BUTTON_TITLE")+"' onclick='saveProToLineData("+ln+")'/>"+
-        "<input class='btn btn-danger' type='button' value='"+SUGAR.language.get("app_strings","LBL_DELETE")+"' onclick='removeEdite(\"product_\","+ln+")'/></td>";
-        document.getElementById(tableid).appendChild(tbe);
-        CalendarShow();
-    }else if(curent_module=='AOS_Invoices'||curent_module_in=='AOS_Invoices'){
-        if (flag) {
-            insertProductHeader(tableid);
-            flag=false;
-        }
-        tablebody = document.createElement("tbody");
-        tablebody.id = "product_body" + prodln;
-        document.getElementById(tableid).appendChild(tablebody);
-        var x = tablebody.insertRow(-1);
-        x.id = 'product_line' + prodln;
-        var b = x.insertCell(0);
-        b.innerHTML = "<input style='width:178px;' class='sqsEnabled' autocomplete='off' type='text' name='product_name[" + prodln + "]' id='product_name" + prodln + "' maxlength='50' value='' title='' tabindex='116' value=''><input type='hidden' name='product_product_id[" + prodln + "]' id='product_product_id" + prodln + "' size='20' maxlength='50' value=''>";
-        var b1 = x.insertCell(1);
-        b1.innerHTML = "<input style='width:178px;' class='sqsEnabled' autocomplete='off' type='text' name='product_part_number[" + prodln + "]' id='product_part_number" + prodln + "' maxlength='50' value='' title='' tabindex='116' value=''>";
-        var b2 = x.insertCell(2);
-        b2.innerHTML = "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openProductPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>";
-         var a = x.insertCell(3);
-        a.innerHTML = "<input type='text' style='width:53px;' name='product_product_qty[" + prodln + "]' id='product_product_qty" + prodln + "' size='5' value='' title='' tabindex='116' onblur='Quantity_format2Number(" + prodln + ");calculateLine(" + prodln + ",\"product_\");'>";
-        var c = x.insertCell(4);
-        c.innerHTML = "<input style='text-align: right; width:115px;' type='text' name='product_product_list_price[" + prodln + "]' id='product_product_list_price" + prodln + "' size='11' maxlength='50' value='' title='' tabindex='116' onblur='calculateLine(" + prodln + ",\"product_\");'><input type='hidden' name='product_product_cost_price[" + prodln + "]' id='product_product_cost_price" + prodln + "' value=''  />";
-        if (typeof currencyFields !== 'undefined'){
-            currencyFields.push("product_product_list_price" + prodln);
-            currencyFields.push("product_product_cost_price" + prodln);
-        }
-        var d = x.insertCell(5);
-        d.innerHTML = "<input type='text' style='text-align: right; width:90px;' name='product_product_discount[" + prodln + "]' id='product_product_discount" + prodln + "' size='12' maxlength='50' value='' title='' tabindex='116' onblur='calculateLine(" + prodln + ",\"product_\");' onblur='calculateLine(" + prodln + ",\"product_\");'><input type='hidden' name='product_product_discount_amount[" + prodln + "]' id='product_product_discount_amount" + prodln + "' value=''  />";
-        d.innerHTML += "<select tabindex='116' name='product_discount[" + prodln + "]' id='product_discount" + prodln + "' onchange='calculateLine(" + prodln + ",\"product_\");'>" + discount_hidden + "</select>";
-        var e = x.insertCell(6);
-        e.innerHTML = "<input type='text' style='text-align: right; width:90px;' name='product_product_unit_price[" + prodln + "]' id='product_product_unit_price" + prodln + "' size='11' maxlength='50' value='' title='' tabindex='116' readonly='readonly' onblur='calculateLine(" + prodln + ",\"product_\");' onblur='calculateLine(" + prodln + ",\"product_\");'>";
-        if (typeof currencyFields !== 'undefined'){
-            currencyFields.push("product_product_unit_price" + prodln);
-        }
-        var f = x.insertCell(7);
-        f.innerHTML = "<input type='text' style='text-align: right; width:50px;' name='product_vat_amt[" + prodln + "]' id='product_vat_amt" + prodln + "' size='11' maxlength='250' value='' title='' tabindex='116' readonly='readonly'>";
-        f.innerHTML += "<select tabindex='116' name='product_vat[" + prodln + "]' id='product_vat" + prodln + "' onchange='calculateLine(" + prodln + ",\"product_\");'>" + vat_hidden + "</select>";
-        if (typeof currencyFields !== 'undefined'){
-            currencyFields.push("product_vat_amt" + prodln);
-        }
-        var g = x.insertCell(8);
-        g.innerHTML = "<input type='text' style='text-align: right; width:115px;' name='product_product_total_price[" + prodln + "]' id='product_product_total_price" + prodln + "' size='11' maxlength='50' value='' title='' tabindex='116' readonly='readonly'><input type='hidden' name='product_group_number[" + prodln + "]' id='product_group_number" + prodln + "' value='"+groupid+"'>";
-        if (typeof currencyFields !== 'undefined'){
-            currencyFields.push("product_product_total_price" + prodln);
-        }
+        a2.innerHTML ="<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openProductUomPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>";
+    }
+    var c = x.insertCell(6);
+    c.innerHTML = "<input style='text-align: right; width:115px;' type='text' name='product_product_list_price[" + prodln + "]' id='product_product_list_price" + prodln + "' size='11' maxlength='50' value='' title='' tabindex='116' onblur='calculateLine(" + prodln + ",\"product_\");'><input type='hidden' name='product_product_cost_price[" + prodln + "]' id='product_product_cost_price" + prodln + "' value=''  />";
+
+    if (typeof currencyFields !== 'undefined'){
+
+        currencyFields.push("product_product_list_price" + prodln);
+        currencyFields.push("product_product_cost_price" + prodln);
+
+    }
+
+    var d = x.insertCell(7);
+    d.innerHTML = "<input type='text' style='text-align: right; width:90px;' name='product_product_discount[" + prodln + "]' id='product_product_discount" + prodln + "' size='12' maxlength='50' value='' title='' tabindex='116' onblur='calculateLine(" + prodln + ",\"product_\");' onblur='calculateLine(" + prodln + ",\"product_\");'><input type='hidden' name='product_product_discount_amount[" + prodln + "]' id='product_product_discount_amount" + prodln + "' value=''  />";
+    d.innerHTML += "<select tabindex='116' name='product_discount[" + prodln + "]' id='product_discount" + prodln + "' onchange='calculateLine(" + prodln + ",\"product_\");'>" + discount_hidden + "</select>";
+
+    var e = x.insertCell(8);
+    e.innerHTML = "<input type='text' style='text-align: right; width:90px;' name='product_product_unit_price[" + prodln + "]' id='product_product_unit_price" + prodln + "' size='11' maxlength='50' value='' title='' tabindex='116' readonly='readonly' onblur='calculateLine(" + prodln + ",\"product_\");' onblur='calculateLine(" + prodln + ",\"product_\");'>";
+
+    if (typeof currencyFields !== 'undefined'){
+        currencyFields.push("product_product_unit_price" + prodln);
+    }
+
+    var f = x.insertCell(9);
+    f.innerHTML = "<input type='text' style='text-align: right; width:50px;' name='product_vat_amt[" + prodln + "]' id='product_vat_amt" + prodln + "' size='11' maxlength='250' value='' title='' tabindex='116' readonly='readonly'>";
+    f.innerHTML += "<select tabindex='116' name='product_vat[" + prodln + "]' id='product_vat" + prodln + "' onchange='calculateLine(" + prodln + ",\"product_\");'>" + vat_hidden + "</select>";
+
+    if (typeof currencyFields !== 'undefined'){
+        currencyFields.push("product_vat_amt" + prodln);
+    }
+
+    var g = x.insertCell(10);
+    g.innerHTML = "<input type='text' style='text-align: right; width:115px;' name='product_product_total_price[" + prodln + "]' id='product_product_total_price" + prodln + "' size='11' maxlength='50' value='' title='' tabindex='116' readonly='readonly'><input type='hidden' name='product_group_number[" + prodln + "]' id='product_group_number" + prodln + "' value='"+groupid+"'>";
+
+    if (typeof currencyFields !== 'undefined'){
+        currencyFields.push("product_product_total_price" + prodln);
+    }
+
     //modefy BY osmond.liu 20161022合同模块增加结算周期和日期
-        var h = x.insertCell(9);
-        h.innerHTML += "<input type='hidden' name='product_currency[" + prodln + "]' id='product_currency" + prodln + "' value=''><input type='hidden' name='product_deleted[" + prodln + "]' id='product_deleted" + prodln + "' value='0'><input type='hidden' name='product_id[" + prodln + "]' id='product_id" + prodln + "' value=''><button type='button' id='product_delete_line" + prodln + "' class='button' value='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "' tabindex='116' onclick='markLineDeleted(" + prodln + ",\"product_\")'><img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button>";
-        h.innerHTML +="<input type='hidden' name='product_haos_revenues_quotes_id_c[" + prodln + "]' id='product_haos_revenues_quotes_id_c" + prodln + "' value=''>";
-        addToValidate('EditView','product_product_id'+prodln,'id',true,"Please choose a product");
-    //End modefy 20161022增加结算周期和日期
-        enableQS(true);
+    
+     var h = x.insertCell(11);
+     
+//End modefy 20161022增加结算周期和日期
+
+enableQS(true);
     //QSFieldsArray["EditView_product_name"+prodln].forceSelection = true;
-        var y = tablebody.insertRow(-1);
-        y.id = 'product_note_line' + prodln;
+    var y = tablebody.insertRow(-1);
+    y.id = 'product_note_line' + prodln;
+    //y.style.cssText="display:none";
+
+if (curent_module=="AOS_Contracts") {
+        var number_of_periods_c_hidden = document.getElementById("number_of_periods_list").value;
+        h.innerHTML="<a style='float:left' title='隐藏' onclick='edit_show_more_product(this,"+prodln+")' href='javascript:;'><i class='glyphicon glyphicon-minus'></i></a>";
+        var settlement_period_option=document.getElementById("settlementperiodhidden").value;
+ 
+        var r2=y.insertCell(0);
+        r2.colSpan="11";
+        //结算周期
+        r2.innerHTML="<div class='pull-left col-md-8' style='padding: 0px'>"+
+        //结算周期  首次结算日
+        "<div class='col-md-4' style='padding:0px'>"+
+        "<div class='pull-left'>"+
+        "<div style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_SETTLEMENT_PERIOD_C')+":</div>"+
+        "<div style='height:25px; line-height:25px; margin-top:10px'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_INITIAL_ACCOUNT_DAY')+":</div>"+
+        "</div>"+
+        "<div class='pull-left' style='width:100px'>"+
+        "<select tabindex='0' name='product_settlement_period_c[" + prodln + "]' onchange='setProductSettlementPeriodChange(this,"+prodln+");'"+ " id='product_settlement_period_c" + prodln + "'>" + settlement_period_option +"</select>"+
+        "&nbsp;<select name='product_number_of_periods_c["+prodln+"]' id='product_number_of_periods_c"+prodln+"' onchange='calculateLine("+prodln+",\"product_\")'>"+number_of_periods_c_hidden+"</select>"+
+        '<span id="span_product_initial_account_day_c'+prodln+'" class="input-group date" style="margin-top:5px" >'+
+        '<input id="product_initial_account_day_c' + prodln + '" class="date_input pull-left" style="width:120px" autocomplete="off" name="product_initial_account_day_c[' + prodln + ']" value="" title="" tabindex="0" type="text" onchange="setNextDayVal(\'product_\','+prodln+',this)">'+
+        '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span></span>'+
+        "</div>"+
+        "</div>"+
+        //生效日期  下一次结算日期
+        "<div  class='col-md-4' style='padding:0px'>"+
+        "<div class='pull-left'>"+
+        "<div style='height:25px; line-height:25px;' >"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_START_C')+":</div>"+
+        "<div style='height:25px; line-height:25px; margin-top:10px'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_NEXT_ACCOUNT_DAY')+":</div>"+
+        "</div>"+
+        "<div class='pull-left' style='width:100px'>"+
+        '<span id="span_product_effective_start_c'+prodln+'" class="input-group date show_calendar" style="margin-top:5px">'+
+        '<input id="product_effective_start_c' + prodln + '" class="date_input pull-left" style="width:120px" autocomplete="off" name="product_effective_start_c[' + prodln + ']" value="" title="" tabindex="0" type="text"><span class="input-group-addon">'+
+        '<span class="glyphicon glyphicon-calendar"></span></span></span>'+
+        "<span id='span_product_next_account_day_c"+prodln+"' class='input-group date' style='margin-top:5px'>"+
+        "<input type='text' class='date_input pull-left' style='width:120px' id='product_next_account_day_c"+prodln+"' name='product_next_account_day_c["+prodln+"]'/>"+
+        "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></span>"+
+        "</div>"+
+        "</div>"+
+        //MODIFY by tangqi 20170223
+        //终止日期  最后一次结算日期
+        "<div class='col-md-4' style='padding:0px'>"+
+        "<div class='pull-left'>"+
+        "<div style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_END_C')+":</div>"+
+        "<div style='height:25px; line-height:25px;margin-top:10px'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PREPAY_FLAG_C')+":</div>"+
+        "</div>"+
+        "<div class='pull-left' style='width:100px'>"+
+        '<span id="span_product_effective_end_c'+prodln+'" class="input-group date show_calendar" style="margin-top:5px">'+
+        '<input id="product_effective_end_c' + prodln + '" class="date_input  pull-left" style="width:120px" autocomplete="off" name="product_effective_end_c[' + prodln + ']" value="" title="" tabindex="0" type="text"><span class="input-group-addon">'+
+         '<span class="glyphicon glyphicon-calendar"></span></span></span>'+
+         "<div style='height:25px; line-height:25px; margin-top:10px'>"+
+        '<input  value="1" class="date_input pull-left" id="product_prepay_flag_c' + prodln + '" size="30" maxlength="255"  name="product_prepay_flag_c[' + prodln + ']" type="checkbox">'+
+/*        '<input  size="30" maxlength="255" value="1" name="product_prepay_flag_c[' + prodln + ']" type="hidden">'+
+*/
+        "</div>"+
+        "</div></div></div>"+
+        //首次结算日
+        //生效日期
+        //终止日期
+         "<div class='pull-left' style='padding:0px'>"+
+        "<div class='pull-left'>"+
+        "<div style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_DESCRIPTION')+":</div>"+
+        "<div style='height:25px; line-height:25px; margin-top:10px'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_DEPOSIT_FLAG_C')+":</div>"+
+        "</div>"+
+        "<div class='pull-left' style='width:100px'>"+
+        '<textarea tabindex="116" id="product_item_description' + prodln + '"  style="padding-top:0px" name="product_item_description[' + prodln + ']" rows="2" cols="19" ></textarea>'+
+         "<div style='height:25px; line-height:25px; margin-top:10px'>"+
+        '<input value="1" class="date_input pull-left" id="product_deposit_flag_c' + prodln + '" size="30" maxlength="255"  name="product_deposit_flag_c[' + prodln + ']" type="checkbox">'+
+/*         '<input  size="30" maxlength="255" value="1" name="product_deposit_flag_c[' + prodln + ']" type="hidden">'+
+*/        "</div>"+
+        "</div>"+
+        "</div>"+
+        "<div class='pull-left' style='padding:0px'>"+
+        "<div class='pull-left'>"+
+        "<div style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NOTE')+":</div>"+
+        "<div style='height:25px; line-height:25px; margin-top:10px'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_FINAL_ACCOUNT_DAY')+":</div>"+
+        "</div>"+
+        "<div class='pull-left' style='width:100px'>"+
+        '<textarea tabindex="116" id="product_description' + prodln + '"  style="padding-top:0px" name="product_description[' + prodln + ']" rows="2" cols="19" ></textarea>'+
+        "<span id='span_product_final_account_day_c"+prodln+"' class='input-group date' style='margin-top:5px'>"+
+        "<input type='text' class='date_input pull-left' style='width:120px' id='product_final_account_day_c"+prodln+"' name='product_final_account_day_c["+prodln+"]' disabled/>"+
+        "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></span>"+
+        "</div>"+
+        "</div>"+
+        "</div>";
+        //说明
+       /* r2.innerHTML +="<div class='pull-left'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_DESCRIPTION')+":</div>"+
+                "<textarea tabindex='116' name='product_item_description[" + prodln + "]' id='product_item_description" + prodln + "' rows='2' cols='19' style='padding-top:0px'></textarea></div>";
+        //备注
+        r2.innerHTML +="<div class='pull-left' style='margin-left:10px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NOTE')+":</div>"+
+                "<textarea tabindex='116' name='product_description[" + prodln + "]' id='product_description" + prodln + "' rows='2' cols='19' style='padding-top:0px'></textarea></div>";
+        */
+        // END MODIFY by tangqi 20170223
+        setProductSettlementPeriodChange(document.getElementById('product_settlement_period_c'+prodln),prodln);
+        /*var y1 = tablebody.insertRow(-1);
+        //y1.style.cssText="display:none";
+        var h1 = y1.insertCell(0);
+        h1.colSpan = "3";
+        h1.style.color = "rgb(68,68,68)";
+        h1.innerHTML = "<span style='vertical-align: top;'>" + SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_DESCRIPTION') + " :&nbsp;&nbsp;</span>";
+        h1.innerHTML += "<textarea tabindex='116' name='product_item_description[" + prodln + "]' id='product_item_description" + prodln + "' rows='2' cols='23'></textarea>&nbsp;&nbsp;";
+
+        var i = y1.insertCell(1);
+        i.colSpan = "3";
+        i.style.color = "rgb(68,68,68)";
+        i.innerHTML = "<span style='vertical-align: top;'>"  + SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NOTE') + " :&nbsp;</span>";
+        i.innerHTML += "<textarea tabindex='116' name='product_description[" + prodln + "]' id='product_description" + prodln + "' rows='2' cols='23'></textarea>&nbsp;&nbsp;";*/
+        /*$("#product_number_of_periods"+prodln).children().each(function(){
+            if($(this).val()==contract_periods_c)
+                $(this).attr("selected",true);
+        });*/
+    }else if(curent_module=='AOS_Invoices'||curent_module_in=='AOS_Invoices'){
+        /*alert(curent_module);*/
         var h2 = y.insertCell(0);
+        //h1.colSpan = "3";
         h2.style.color = "rgb(68,68,68)";
         h2.innerHTML = "<span style='vertical-align: top;'>"  + SUGAR.language.get(module_sugar_grp1, 'LBL_DEPOSIT_FLAG_C') + " :&nbsp;</span>";
         h2.innerHTML +='<input value="1" id="product_deposit_flag_c' + prodln + '" size="30" maxlength="255"  name="product_deposit_flag_c[' + prodln + ']" type="checkbox">';
+
         var j = y.insertCell(1);
+        //i.colSpan = "2";
         j.style.color = "rgb(68,68,68)";
         j.innerHTML = "<span style='vertical-align: top;'>"  + SUGAR.language.get(module_sugar_grp1, 'LBL_PREPAY_FLAG_C') + " :&nbsp;</span>";
         j.innerHTML += '<input value="1" id="product_prepay_flag_c' + prodln + '" size="30" maxlength="255"  name="product_prepay_flag_c[' + prodln + ']" type="checkbox">&nbsp;&nbsp;';
@@ -379,21 +380,29 @@
         h1.style.color = "rgb(68,68,68)";
         h1.innerHTML = "<span style='vertical-align: top;'>" + SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_DESCRIPTION') + " :&nbsp;&nbsp;</span>";
         h1.innerHTML += "<textarea tabindex='116' name='product_item_description[" + prodln + "]' id='product_item_description" + prodln + "' rows='2' cols='23'></textarea>&nbsp;&nbsp;";
+
         var i = y.insertCell(3);
         i.colSpan = "3";
         i.style.color = "rgb(68,68,68)";
         i.innerHTML = "<span style='vertical-align: top;'>"  + SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NOTE') + " :&nbsp;</span>";
         i.innerHTML += "<textarea tabindex='116' name='product_description[" + prodln + "]' id='product_description" + prodln + "' rows='2' cols='23'></textarea>&nbsp;&nbsp;";
-    }/*else{
+    
+    }else{
         var h1 = y.insertCell(0);
+        //h1.colSpan = "3";
         h1.style.color = "rgb(68,68,68)";
         h1.innerHTML = "<span style='vertical-align: top;'>" + SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_DESCRIPTION') + " :&nbsp;&nbsp;</span>";
         h1.innerHTML += "<textarea tabindex='116' name='product_item_description[" + prodln + "]' id='product_item_description" + prodln + "' rows='2' cols='23'></textarea>&nbsp;&nbsp;";
+
         var i = y.insertCell(1);
+        //i.colSpan = "2";
         i.style.color = "rgb(68,68,68)";
         i.innerHTML = "<span style='vertical-align: top;'>"  + SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NOTE') + " :&nbsp;</span>";
         i.innerHTML += "<textarea tabindex='116' name='product_description[" + prodln + "]' id='product_description" + prodln + "' rows='2' cols='23'></textarea>&nbsp;&nbsp;";
-    }*/
+    }
+    h.innerHTML += "<input type='hidden' name='product_currency[" + prodln + "]' id='product_currency" + prodln + "' value=''><input type='hidden' name='product_deleted[" + prodln + "]' id='product_deleted" + prodln + "' value='0'><input type='hidden' name='product_id[" + prodln + "]' id='product_id" + prodln + "' value=''><button type='button' id='product_delete_line" + prodln + "' class='button' value='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "' tabindex='116' onclick='markLineDeleted(" + prodln + ",\"product_\")'><img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button>";
+    h.innerHTML +="<input type='hidden' name='product_haos_revenues_quotes_id_c[" + prodln + "]' id='product_haos_revenues_quotes_id_c" + prodln + "' value=''>";
+    addToValidate('EditView','product_product_id'+prodln,'id',true,"Please choose a product");
     prodln++;
     CalendarShow();
     return prodln - 1;
@@ -447,6 +456,7 @@ function setProductUomReturn(popupReplyData){
 }
 
 function formatListPrice(ln){
+
     if (typeof currencyFields !== 'undefined'){
         var product_currency_id = document.getElementById('product_currency' + ln).value;
         product_currency_id = product_currency_id ? product_currency_id : -99;//Assume base currency if no id
@@ -455,7 +465,9 @@ function formatListPrice(ln){
         document.getElementById('product_product_list_price' + ln).value = format2Number(ConvertFromDollar(dollar_product_price, lastRate));
         var dollar_product_cost = ConvertToDollar(document.getElementById('product_product_cost_price' + ln).value, product_currency_rate);
         document.getElementById('product_product_cost_price' + ln).value = format2Number(ConvertFromDollar(dollar_product_cost, lastRate));
-    }else{
+    }
+    else
+    {
         document.getElementById('product_product_list_price' + ln).value = format2Number(document.getElementById('product_product_list_price' + ln).value);
         document.getElementById('product_product_cost_price' + ln).value = format2Number(document.getElementById('product_product_cost_price' + ln).value);
     }
@@ -481,172 +493,163 @@ function formatListPrice(ln){
     var vat_hidden = document.getElementById("vathidden").value;
     var discount_hidden = document.getElementById("discounthidden").value;
     
-    
+    tablebody = document.createElement("tbody");
+    tablebody.id = "service_body" + servln;
+    document.getElementById(tableid).appendChild(tablebody);
+
+    var x = tablebody.insertRow(-1);
+    x.id = 'service_line' + servln;
+
+    var a = x.insertCell(0);
+    a.colSpan = "4";
+    a.innerHTML = "<textarea name='service_name[" + servln + "]' id='service_name" + servln + "' size='16' cols='64' title='' tabindex='116' style='padding-top:0px'></textarea><input type='hidden' name='service_product_id[" + servln + "]' id='service_product_id" + servln + "' size='20' maxlength='50' value='0'>";
+
+    var a1 = x.insertCell(1);
+    a1.innerHTML = "<input type='text' style='text-align: right; width:115px;' name='service_product_list_price[" + servln + "]' id='service_product_list_price" + servln + "' size='11' maxlength='50' value='' title='' tabindex='116'   onblur='calculateLine(" + servln + ",\"service_\");'>";
+
+    if (typeof currencyFields !== 'undefined'){
+        currencyFields.push("service_product_list_price" + servln);
+    }
+
+    var a2 = x.insertCell(2);
+    a2.innerHTML = "<input type='text' style='text-align: right; width:90px;' name='service_product_discount[" + servln + "]' id='service_product_discount" + servln + "' size='12' maxlength='50' value='' title='' tabindex='116' onblur='calculateLine(" + servln + ",\"service_\");' onblur='calculateLine(" + servln + ",\"service_\");'><input type='hidden' name='service_product_discount_amount[" + servln + "]' id='service_product_discount_amount" + servln + "' value=''  />";
+    a2.innerHTML += "<select tabindex='116' name='service_discount[" + servln + "]' id='service_discount" + servln + "' onchange='calculateLine(" + servln + ",\"service_\");'>" + discount_hidden + "</select>";
+
+    var b = x.insertCell(3);
+    b.innerHTML = "<input type='text' style='text-align: right; width:115px;' name='service_product_unit_price[" + servln + "]' id='service_product_unit_price" + servln + "' size='11' maxlength='50' value='' title='' tabindex='116'   onblur='calculateLine(" + servln + ",\"service_\");'>";
+
+    if (typeof currencyFields !== 'undefined'){
+        currencyFields.push("service_product_unit_price" + servln);
+    }
+    var c = x.insertCell(4);
+    c.innerHTML = "<input type='text' style='text-align: right; width:90px;' name='service_vat_amt[" + servln + "]' id='service_vat_amt" + servln + "' size='11' maxlength='250' value='' title='' tabindex='116' readonly='readonly'>";
+    c.innerHTML += "<select tabindex='116' name='service_vat[" + servln + "]' id='service_vat" + servln + "' onchange='calculateLine(" + servln + ",\"service_\");'>" + vat_hidden + "</select>";
+    if (typeof currencyFields !== 'undefined'){
+        currencyFields.push("service_vat_amt" + servln);
+    }
+
+    var e = x.insertCell(5);
+    e.innerHTML = "<input type='text' style='text-align: right; width:115px;' name='service_product_total_price[" + servln + "]' id='service_product_total_price" + servln + "' size='11' maxlength='50' value='' title='' tabindex='116' readonly='readonly'><input type='hidden' name='service_group_number[" + servln + "]' id='service_group_number" + servln + "' value='"+ groupid +"'>";
+
+    if (typeof currencyFields !== 'undefined'){
+        currencyFields.push("service_product_total_price" + servln);
+    }
+    var f = x.insertCell(6);
     
     //modefy BY osmond.liu 20161022合同模块增加结算周期和日期
     if (curent_module=='AOS_Contracts') {
-        if (serflag) {//添加头
-            var tablehead = document.createElement("thead");
-            tablehead.id = tableid +"_head";
-            var thrw=tablehead.insertRow(-1);
-            thrw.innerHTML="<th>"+SUGAR.language.get(module_sugar_grp1, 'LBL_SERVICE_NAME')+"</th>"+
-                "<th>"+SUGAR.language.get(module_sugar_grp1, 'LBL_SERVICE_LIST_PRICE')+"</th>"+
-                "<th>"+SUGAR.language.get(module_sugar_grp1, 'LBL_DISCOUNT_AMOUNT')+"</th>"+
-                "<th>"+SUGAR.language.get(module_sugar_grp1, 'LBL_SERVICE_PRICE')+"</th>"+
-                "<th>"+SUGAR.language.get(module_sugar_grp1, 'LBL_VAT')+"</th>"+
-                "<th>"+SUGAR.language.get(module_sugar_grp1, 'LBL_VAT_AMT')+"</th>"+
-                "<th>"+SUGAR.language.get(module_sugar_grp1, 'LBL_TOTAL_PRICE')+"</th>"+
-                "<th></th>";
-            document.getElementById(tableid).appendChild(tablehead);
-            serflag=false;
-        }
-        var ln=servln;
-        var vat_hidden = document.getElementById("vathidden").value;
-        var discount_hidden = document.getElementById("discounthidden").value;
-        var settlement_period_option=document.getElementById("settlementperiodhidden").value;
         var number_of_periods_c_hidden=document.getElementById("number_of_periods_list").value;
-        var line_html="<tr id='service_line_data"+ln+"'><td id='span_service_name"+ln+"'></td>"+
-        "<td id='span_service_product_list_price"+ln+"'></td>"+
-        "<td id='span_service_product_discount"+ln+"'></td>"+
-        "<td id='span_service_product_unit_price"+ln+"'></td>"+
-        "<td id='span_service_vat"+ln+"'></td>"+
-        "<td id='span_service_vat_amt"+ln+"'></td>"+
-        "<td id='span_service_product_total_price"+ln+"'></td>"+
-        "<td>"+
-        '<a href="javascript:;" onclick="showmoreinfo(this,'+ln+')"><i class="glyphicon glyphicon-plus"></i></a>'+
-        "&nbsp;&nbsp;<a href='javascript:;' onclick='openEdite(\"service_\","+ln+")'>编辑</a></td></tr>"+
-        "<tr class='showmore"+ln+" hidden ser'><td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_INITIAL_ACCOUNT_DAY')+"</td>"+
-        "<td id='span_service_initial_account_day_c"+ln+"'></td>"+
-        "<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_SETTLEMENT_PERIOD_C')+"</td>"+
-        "<td id='span_service_settlement_period_c"+ln+"'></td></tr>"+
-        "<tr class='showmore"+ln+" hidden ser'><td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_INITIAL_ACCOUNT_DAY')+"</td>"+
-        "<td id='span_product_unit_price"+ln+"'></td>"+
-        "<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_END_C')+"</td>"+
-        "<td id='span_service_effective_end_c"+ln+"'></td></tr>"+
-        "<tr class='showmore"+ln+" hidden ser'><td>"+SUGAR.language.get(module_sugar_grp1,'LBL_NEXT_ACCOUNT_DAY')+"</td>"+
-        "<td id='span_vat_amt"+ln+"'></td>"+
-        "<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_FINAL_ACCOUNT_DAY')+"</td>"+
-        "<td id='span_service_effective_end_c"+ln+"'></td></tr>"+
-        "<tr class='showmore"+ln+" hidden ser'><td>"+SUGAR.language.get(module_sugar_grp1,'LBL_PRODUCT_NOTE')+"</td>"+
-        "<td id='span_description"+ln+"'></td>"+
-        "<td></td>"+
-        "<td></td>"+
-        "</tr>";
-        $("#"+tableid+"_head").append(line_html);
-        var tbe=document.createElement("tbody");
-        tbe.id=ser_edit_name+ln;
-        var row1=tbe.insertRow(-1);
-        row1.innerHTML="<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_SERVICE_NAME')+"</td>"+
-            "<td><input class='' id='service_name" + ln + "' name='service_name[" + ln + "]' type='text' value=''/></td>"+
-            "<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_SERVICE_LIST_PRICE')+"</td>"+
-            "<td><input class='' id='service_product_list_price" + ln + "' name='service_product_list_price[" + ln + "]' type='text' value='' "+'onblur="calculateLine('+ ln + ',\'service_\');"/>'+
-            "</td>";
-        var row2=tbe.insertRow(-1);
-        row2.innerHTML="<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_DISCOUNT_AMOUNT')+"</td>"+
-            "<td><input class='' id='service_product_discount" + ln + "' name='service_product_discount[" + ln + "]' type='text' value='' style='width:195px' "+'onblur="calculateLine('+ ln + ',\'service_\');"/>'+
-            "<select name='service_discount[" + ln + "]' id='service_discount" + ln + "' onchange='calculateLine(" + ln + ",\"service_\");'>" + discount_hidden + "</select>"+
-            "<input type='hidden' name='service_product_discount_amount[" + ln + "]' id='service_product_discount_amount" + ln + "' value=''  />"+
-            "</td>"+
-            "<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_SERVICE_PRICE')+"</td>"+
-            "<td><input class='' id='service_product_unit_price"+ln+"' name='service_product_unit_price["+ln+"]' type='text' value='' "+'onblur="calculateLine('+ ln + ',\'service_\');"/>'+
-            "</td>";
-        var row4=tbe.insertRow(-1);
-        row4.innerHTML="<td>"+SUGAR.language.get(module_sugar_grp1,'LBL_VAT')+"</td>"+
-            "<td><input class='' id='service_vat_amt" + ln + "' name='service_vat_amt[" + ln + "]' type='text' value='' style='width:195px' readonly='readonly'/>"+
-            "<select tabindex='116' name='service_vat[" + ln + "]' id='service_vat" + ln + "' "+'onchange="calculateLine('+ ln + ',\'service_\');"/>' + vat_hidden + "</select></td>"+
-            "<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_TOTAL_PRICE')+"</td>"+
-            "<td><input class='' id='service_product_total_price" + ln + "' name='service_product_total_price[" + ln + "]' type='text' value='' readonly='readonly'/></td>";
-        var row5=tbe.insertRow(-1);
-        row5.innerHTML="<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_SETTLEMENT_PERIOD_C')+"</td>"+
-            "<td><select class='' id='service_settlement_period_c" + ln + "' name='service_settlement_period_c[" + ln + "]' onchange='setServiceSettlementPeriodChange(this,"+ln+");'>"+settlement_period_option+"</select>"+
-            "<select class='' id='service_number_of_periods_c"+ln+"' name='service_number_of_periods_c["+ln+"]' "+'onchange="calculateLine('+ln+',\'service_\')"'+" disabled>"+number_of_periods_c_hidden+"</select></td>"+
-            "<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_INITIAL_ACCOUNT_DAY')+"</td>"+
-            "<td><input id='service_initial_account_day_c" + ln + "' class='date_input' name='service_initial_account_day_c[" + ln + "]' value='' title='' tabindex='0' type='text' "+'onchange="setNextDayVal(\'service_\','+ln+',this)"'+" disabled></td>";
-        var row6=tbe.insertRow(-1);
-        row6.innerHTML="<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_NEXT_ACCOUNT_DAY')+"</td>"+
-            "<td><span id='span_service_next_account_day_c"+ln+"' class='input-group date show_calendar' style='margin-top:5px'>"+
-            "<input type='text' class='date_input' id='service_next_account_day_c"+ln+"' name='service_next_account_day_c["+ln+"]'/>"+
-            "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></span></td>"+
-            "<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_START_C')+"</td>"+
-            "<td><span class='input-group date show_calendar'>"+
-            "<input class='date_input' id='service_effective_start_c" + ln + "' name='service_effective_start_c[" + ln + "]' type='text' value=''/>"+
-            "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></span></td>";
-        var row7=tbe.insertRow(-1);
-        row7.innerHTML="<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_END_C')+"</td>"+
-            "<td><span class='input-group date show_calendar'>"+
-            "<input class='date_input' id='service_effective_end_c" + ln + "' name='service_effective_end_c[" + ln + "]' type='text' value=''/>"+
-            "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></span></td>"+
-            "<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_FINAL_ACCOUNT_DAY')+"</td>"+
-            "<td><span class='input-group date show_calendar'>"+
-            "<input class='date_input' id='service_final_account_day_c" + ln + "' name='service_final_account_day_c[" + ln + "]' type='text' value=''/>"+
-            "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></span></td>";
-        var row8=tbe.insertRow(-1);
-        row8.innerHTML="<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_DESCRIPTION')+"</td>"+
-            "<td><textarea class='' id='service_item_description" + ln + "' name='service_item_description[" + ln + "]' rows='2' cols='20'></textarea></td>"+
-            "<td>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NOTE')+"</td>"+
-            "<td><textarea class='' id='service_product_note" + ln + "' name='service_product_note[" + ln + "]' rows='2' cols='20'></textarea></td>";
-        var row9=tbe.insertRow(-1);
-        row9.innerHTML="<td></td>"+
-            "<td></td>"+
-            "<td><input class='' id='service_group_number"+ln+"' name='service_group_number["+ln+"]' type='hidden' value='"+groupid+"'/></td>"+
-            "<td><input type='hidden' name='service_product_id[" + ln + "]' id='service_product_id" + ln + "' value=''>"+
-            "<input type='hidden' name='service_deleted["+ln+"]' id='service_deleted"+ln+"' value=''/></td>";
-        if (typeof currencyFields !== 'undefined'){
-            currencyFields.push("service_product_list_price" + ln);
-            currencyFields.push("service_product_total_price" + ln);
-            currencyFields.push("service_product_discount" + ln);
-            currencyFields.push("service_product_unit_price"+ln);
-        }
-        var row10=tbe.insertRow(-1);
-        row10.innerHTML="<td colSpan='16'><input class='btn btn-default' id='' name='' type='button' value='"+SUGAR.language.get("app_strings","LBL_SAVE_BUTTON_TITLE")+"' onclick='saveSerToLineData("+ln+")'/>"+
-        "<input class='btn btn-danger' type='button' value='"+SUGAR.language.get("app_strings","LBL_DELETE")+"' onclick='removeEdite(\"service_\","+ln+")'/></td>";
-        document.getElementById(tableid).appendChild(tbe);
-        CalendarShow();
-        //setServiceSettlementPeriodChange(document.getElementById('service_settlement_period_c'+servln),servln);
+        f.innerHTML = "<a style='float:left' title='隐藏' onclick='edit_show_more_service(this,"+servln+")' href='javascript:;'><i class='glyphicon glyphicon-minus'></i></a>";
+        var settlement_period_option=document.getElementById("settlementperiodhidden").value;
+
+        //var f = x.insertCell(6);
+        //f.innerHTML = "<input type='hidden' name='service_deleted[" + servln + "]' id='service_deleted" + servln + "' value='0'><input type='hidden' name='service_id[" + servln + "]' id='service_id" + servln + "' value=''><button type='button' class='button' id='service_delete_line" + servln + "' value='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "' tabindex='116' onclick='markLineDeleted(" + servln + ",\"service_\")'><img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button><br>";
+
+        //增加行
+        var y = tablebody.insertRow(-1);
+        var r = y.insertCell(0);
+        //r.id = 'service_line' + servln;
+        r.colSpan="11";
+
+        //结算周期 首次结算日
+        r.innerHTML="<div class='pull-left col-md-8' style='padding: 0px'>"+
+        "<div class='col-md-4' style='padding:0px'>"+
+            "<div class='pull-left'>"+
+            "<div style='height:30px; line-height:30px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_SETTLEMENT_PERIOD_C')+":</div>"+
+            "<div style='padding-top:10px'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_INITIAL_ACCOUNT_DAY')+":</div>"+
+            "</div>"+
+            "<div class='pull-left' style='width:100px'>"+
+            "<select tabindex='0' name='service_settlement_period_c[" + servln + "]' onchange='setServiceSettlementPeriodChange(this,"+servln+");'"+ " id='service_settlement_period_c" + servln + "'>" + settlement_period_option +"</select>"+
+            "&nbsp;<select id='service_number_of_periods_c"+servln+"' name='service_number_of_periods_c["+servln+"]' onchange='calculateLine("+servln+",\"service_\")'>"+number_of_periods_c_hidden+"</select>"+
+            '<span id="span_service_initial_account_day_c'+servln+'" class="input-group date"  style="padding-top:5px">'+
+            '<input id="service_initial_account_day_c' + servln + '" class="date_input pull-left" readOnly="readOnly" style="width:120px" autocomplete="off" name="service_initial_account_day_c[' + servln + ']" value="" title="" tabindex="0" type="text" onchange="setNextDayVal(\'service_\','+servln+',this)"/>'+
+            '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span></span>'+
+            "</div>"+
+        "</div>"+
+        "<div class='col-md-4' style='padding:0px'>"+
+            "<div class='pull-left'>"+
+            "<div style='height:30px; line-height:30px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_START_C')+":</div>"+
+            "<div style='padding-top:10px'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_NEXT_ACCOUNT_DAY')+":</div>"+
+            "</div>"+
+            "<div class='pull-left' style='width:100px'>"+
+            '<span id="span_service_effective_start_c' + servln + '" class="input-group date show_calendar pull-left">'+
+            '<input id="service_effective_start_c' + servln + '" class="date_input pull-left" style="width:120px" autocomplete="off" name="service_effective_start_c[' + servln + ']" value="" title="" tabindex="0" type="text"><span class="input-group-addon">'+
+            '<span class="glyphicon glyphicon-calendar"></span></span></span>'+
+            "<span id='span_service_next_account_day_c"+servln+"' class='input-group date'  style='padding-top:5px'>"+
+            "<input type='text' class='date_input pull-left' id='service_next_account_day_c"+servln+"' name='service_next_account_day_c["+servln+"]' style='width:120px'/>"+
+            "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></span>"+
+            "</div>"+
+        "</div>"+
+       /* "<div class='col-md-4' style='padding:0px'>"+
+            "<div class='pull-left'>"+
+            "<div style='height:30px; line-height:30px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_END_C')+":</div>"+
+            "<div style='padding-top:10px'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_FINAL_ACCOUNT_DAY')+":</div>"+
+            "</div>"+
+            "<div class='pull-left' style='width:100px'>"+
+            '<span id="span_service_effective_end_c'+ servln +'" class="input-group date show_calendar">'+
+            '<input id="service_effective_end_c' + servln + '" class="date_input pull-left" style="width:120px" autocomplete="off" name="service_effective_end_c[' + servln + ']" value="" title="" tabindex="0" type="text"><span class="input-group-addon">'+
+            '<span class="glyphicon glyphicon-calendar"></span></span></span>'+
+            "<span id='span_service_final_account_day_c"+servln+"' class='input-group date' style='padding-top:5px'>"+
+            "<input type='text' class='date_input pull-left' id='service_final_account_day_c"+servln+"' name='service_final_account_day_c["+servln+"]' disabled  style='width:120px'/>"+
+            "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></span>"+
+            "</div>"+
+        "</div></div>";*/
+         //MODIFY by tangqi 20170223
+        //终止日期  最后一次结算日期
+        "<div class='col-md-4' style='padding:0px'>"+
+        "<div class='pull-left'>"+
+        "<div style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_EFFECTIVE_END_C')+":</div>"+
+        "<div style='height:25px; line-height:25px;margin-top:10px'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PREPAY_FLAG_C')+":</div>"+
+        "</div>"+
+        "<div class='pull-left' style='width:100px'>"+
+        '<span id="span_service_effective_start_c'+prodln+'" class="input-group date show_calendar" style="margin-top:5px">'+
+        '<input id="service_effective_end_c' + prodln + '" class="date_input  pull-left" style="width:120px" autocomplete="off" name="service_effective_end_c[' + prodln + ']" value="" title="" tabindex="0" type="text"><span class="input-group-addon">'+
+         '<span class="glyphicon glyphicon-calendar"></span></span></span>'+
+         "<div style='height:25px; line-height:25px; margin-top:10px'>"+
+        '<input  value="1" class="date_input pull-left" id="service_prepay_flag_c' + prodln + '" size="30" maxlength="255"  name="service_prepay_flag_c[' + prodln + ']" type="checkbox">'+
+/*        '<input  size="30" maxlength="255" value="1" name="product_prepay_flag_c[' + prodln + ']" type="hidden">'+
+*/
+        "</div>"+
+        "</div></div></div>"+
+        //首次结算日
+        //生效日期
+        //终止日期
+         "<div class='pull-left' style='padding:0px'>"+
+        "<div class='pull-left'>"+
+        "<div style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_DESCRIPTION')+":</div>"+
+        "<div style='height:25px; line-height:25px; margin-top:10px'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_DEPOSIT_FLAG_C')+":</div>"+
+        "</div>"+
+        "<div class='pull-left' style='width:100px'>"+
+        '<textarea tabindex="116" id="service_item_description' + prodln + '"  style="padding-top:0px" name="service_item_description[' + prodln + ']" rows="2" cols="19" ></textarea>'+
+         "<div style='height:25px; line-height:25px; margin-top:10px'>"+
+        '<input value="1" class="date_input pull-left" id="service_deposit_flag_c' + prodln + '" size="30" maxlength="255"  name="service_deposit_flag_c[' + prodln + ']" type="checkbox">'+
+/*         '<input  size="30" maxlength="255" value="1" name="product_deposit_flag_c[' + prodln + ']" type="hidden">'+
+*/        "</div>"+
+        "</div>"+
+        "</div>"+
+        "<div class='pull-left' style='padding:0px'>"+
+        "<div class='pull-left'>"+
+        "<div style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NOTE')+":</div>"+
+        "<div style='height:25px; line-height:25px; margin-top:10px'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_FINAL_ACCOUNT_DAY')+":</div>"+
+        "</div>"+
+        "<div class='pull-left' style='width:100px'>"+
+        '<textarea tabindex="116" id="service_description' + prodln + '"  style="padding-top:0px" name="service_description[' + prodln + ']" rows="2" cols="19" ></textarea>'+
+        "<span id='span_service_final_account_day_c"+prodln+"' class='input-group date' style='margin-top:5px'>"+
+        "<input type='text' class='date_input pull-left' style='width:120px' id='service_final_account_day_c"+prodln+"' name='service_final_account_day_c["+prodln+"]' disabled/>"+
+        "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></span>"+
+        "</div>"+
+        "</div>"+
+        "</div>";
+        //终止日期
+        //说明
+        /*r.innerHTML +="<div class='pull-left'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_DESCRIPTION')+":</div>"+
+                "<textarea tabindex='116' name='service_item_description[" + servln + "]' id='product_item_description" + servln + "' rows='2' cols='20' style='padding-top:0px'></textarea></div>";
+        //备注
+        r.innerHTML +="<div class='pull-left' style='margin-left:10px;'><div class='pull-left' style='height:25px; line-height:25px;'>"+SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NOTE')+":</div>"+
+                "<textarea tabindex='116' name='service_description[" + servln + "]' id='product_description" + servln + "' rows='2' cols='20' style='padding-top:0px'></textarea></div>";
+        */setServiceSettlementPeriodChange(document.getElementById('service_settlement_period_c'+servln),servln);
     }else if(curent_module=='AOS_Invoices'||curent_module_in=='AOS_Invoices'){
-        tablebody = document.createElement("tbody");
-        tablebody.id = "service_body" + servln;
-        document.getElementById(tableid).appendChild(tablebody);
-
-        var x = tablebody.insertRow(-1);
-        x.id = 'service_line' + servln;
-
-        var a = x.insertCell(0);
-        a.colSpan = "4";
-        a.innerHTML = "<textarea name='service_name[" + servln + "]' id='service_name" + servln + "' size='16' cols='64' title='' tabindex='116' style='padding-top:0px'></textarea><input type='hidden' name='service_product_id[" + servln + "]' id='service_product_id" + servln + "' size='20' maxlength='50' value='0'>";
-
-        var a1 = x.insertCell(1);
-        a1.innerHTML = "<input type='text' style='text-align: right; width:115px;' name='service_product_list_price[" + servln + "]' id='service_product_list_price" + servln + "' size='11' maxlength='50' value='' title='' tabindex='116'   onblur='calculateLine(" + servln + ",\"service_\");'>";
-
-        if (typeof currencyFields !== 'undefined'){
-            currencyFields.push("service_product_list_price" + servln);
-        }
-
-        var a2 = x.insertCell(2);
-        a2.innerHTML = "<input type='text' style='text-align: right; width:90px;' name='service_product_discount[" + servln + "]' id='service_product_discount" + servln + "' size='12' maxlength='50' value='' title='' tabindex='116' onblur='calculateLine(" + servln + ",\"service_\");' onblur='calculateLine(" + servln + ",\"service_\");'><input type='hidden' name='service_product_discount_amount[" + servln + "]' id='service_product_discount_amount" + servln + "' value=''  />";
-        a2.innerHTML += "<select tabindex='116' name='service_discount[" + servln + "]' id='service_discount" + servln + "' onchange='calculateLine(" + servln + ",\"service_\");'>" + discount_hidden + "</select>";
-
-        var b = x.insertCell(3);
-        b.innerHTML = "<input type='text' style='text-align: right; width:115px;' name='service_product_unit_price[" + servln + "]' id='service_product_unit_price" + servln + "' size='11' maxlength='50' value='' title='' tabindex='116'   onblur='calculateLine(" + servln + ",\"service_\");'>";
-
-        if (typeof currencyFields !== 'undefined'){
-            currencyFields.push("service_product_unit_price" + servln);
-        }
-        var c = x.insertCell(4);
-        c.innerHTML = "<input type='text' style='text-align: right; width:90px;' name='service_vat_amt[" + servln + "]' id='service_vat_amt" + servln + "' size='11' maxlength='250' value='' title='' tabindex='116' readonly='readonly'>";
-        c.innerHTML += "<select tabindex='116' name='service_vat[" + servln + "]' id='service_vat" + servln + "' onchange='calculateLine(" + servln + ",\"service_\");'>" + vat_hidden + "</select>";
-        if (typeof currencyFields !== 'undefined'){
-            currencyFields.push("service_vat_amt" + servln);
-        }
-
-        var e = x.insertCell(5);
-        e.innerHTML = "<input type='text' style='text-align: right; width:115px;' name='service_product_total_price[" + servln + "]' id='service_product_total_price" + servln + "' size='11' maxlength='50' value='' title='' tabindex='116' readonly='readonly'><input type='hidden' name='service_group_number[" + servln + "]' id='service_group_number" + servln + "' value='"+ groupid +"'>";
-
-        if (typeof currencyFields !== 'undefined'){
-            currencyFields.push("service_product_total_price" + servln);
-        }
-        var f = x.insertCell(6);
-        insertServiceHeader(serviceTable.id);
+        /*alert(curent_module);*/
         var row=tablebody.insertRow(-1);
         var h2 = row.insertCell(0);
         //h1.colSpan = "3";
@@ -671,17 +674,31 @@ function formatListPrice(ln){
         i.innerHTML = "<span style='vertical-align: top;'>"  + SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NOTE') + " :&nbsp;</span>";
         i.innerHTML += "<textarea tabindex='116' name='service_description[" + prodln + "]' id='service_description" + prodln + "' rows='2' cols='23'></textarea>&nbsp;&nbsp;";
     
-        f.innerHTML += "<input type='hidden' name='service_deleted[" + servln + "]' id='service_deleted" + servln + "' value='0'><input type='hidden' name='service_id[" + servln + "]' id='service_id" + servln + "' value=''><button type='button' class='button' id='service_delete_line" + servln + "' value='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "' tabindex='116' onclick='markLineDeleted(" + servln + ",\"service_\")'><img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button><br>";
-        f.innerHTML +="<input type='hidden' name='service_haos_revenues_quotes_id_c[" + servln + "]' id='service_haos_revenues_quotes_id_c" + servln + "' value=''>";
+    }
+    else{
+        var row=tablebody.insertRow(-1);
+        var h1 = row.insertCell(0);
+        //h1.colSpan = "3";
+        h1.style.color = "rgb(68,68,68)";
+        h1.innerHTML = "<span style='vertical-align: top;'>" + SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_DESCRIPTION') + " :&nbsp;&nbsp;</span>";
+        h1.innerHTML += "<textarea tabindex='116' name='servicet_item_description[" + prodln + "]' id='service_item_description" + prodln + "' rows='2' cols='23'></textarea>&nbsp;&nbsp;";
+        var i = row.insertCell(1);
+        //i.colSpan = "2";
+        i.style.color = "rgb(68,68,68)";
+        i.innerHTML = "<span style='vertical-align: top;'>"  + SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NOTE') + " :&nbsp;</span>";
+        i.innerHTML += "<textarea tabindex='116' name='service_description[" + prodln + "]' id='service_description" + prodln + "' rows='2' cols='23'></textarea>&nbsp;&nbsp;";
     }
     //End modefy 20161022增加结算周期和日期
-       
+    f.innerHTML += "<input type='hidden' name='service_deleted[" + servln + "]' id='service_deleted" + servln + "' value='0'><input type='hidden' name='service_id[" + servln + "]' id='service_id" + servln + "' value=''><button type='button' class='button' id='service_delete_line" + servln + "' value='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "' tabindex='116' onclick='markLineDeleted(" + servln + ",\"service_\")'><img src='themes/default/images/id-ff-clear.png' alt='" + SUGAR.language.get(module_sugar_grp1, 'LBL_REMOVE_PRODUCT_LINE') + "'></button><br>";
+        f.innerHTML +="<input type='hidden' name='service_haos_revenues_quotes_id_c[" + servln + "]' id='service_haos_revenues_quotes_id_c" + servln + "' value=''>";
 
     //setServiceSettlementPeriodChange($("#service_settlement_period_c"+servln).find("option:selected").val(),servln);
     CalendarShow();
     servln++;
+
     return servln - 1;
 }
+
 
 /**
  * Insert product Header
@@ -691,148 +708,72 @@ function formatListPrice(ln){
     var curent_module=GetUrlParamString("module");
     tablehead = document.createElement("thead");
     tablehead.id = tableid +"_head";
+    tablehead.style.display="none";
     document.getElementById(tableid).appendChild(tablehead);
 
     var x=tablehead.insertRow(-1);
     x.id='product_head';
+
     var b=x.insertCell(0);
     b.style.color="rgb(68,68,68)";
     b.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_NAME');
 
     var b1=x.insertCell(1);
-    //b1.colSpan = "2";
+    b1.colSpan = "2";
     b1.style.color="rgb(68,68,68)";
     b1.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_PART_NUMBER');
-    var b1=x.insertCell(2);
-    var a=x.insertCell(3);
+
+    var a=x.insertCell(2);
     a.style.color="rgb(68,68,68)";
     a.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_PRODUCT_QUANITY');
 
-    /*var a1=x.insertCell(3);
+    var a1=x.insertCell(3);
     a1.style.color="rgb(68,68,68)";
     if (curent_module=="AOS_Contracts") {
         a1.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_UOM_NAME_C');
-    }*/
-    /*var a2=x.insertCell(4);
+    }
+    var a2=x.insertCell(4);
     a2.style.color="rgb(68,68,68)";
-    a2.innerHTML="";*/
+    a2.innerHTML="";
 
-    var c=x.insertCell(4);
+    var c=x.insertCell(5);
     c.style.color="rgb(68,68,68)";
     c.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_LIST_PRICE');
 
-    var d=x.insertCell(5);
+    var d=x.insertCell(6);
     d.style.color="rgb(68,68,68)";
     d.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_DISCOUNT_AMT');
 
-    var e=x.insertCell(6);
+    var e=x.insertCell(7);
     e.style.color="rgb(68,68,68)";
     e.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_UNIT_PRICE');
 
-    var f=x.insertCell(7);
+    var f=x.insertCell(8);
     f.style.color="rgb(68,68,68)";
     f.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_VAT_AMT');
 
-    var g=x.insertCell(8);
+    var g=x.insertCell(9);
     g.style.color="rgb(68,68,68)";
     g.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_TOTAL_PRICE');
     //Modefy BY osmond 20161022 合同模块增加结算周期
+    /*if (curent_module=='AOS_Contracts') {
+        var g1=x.insertCell(8);
+        g1.style.color="rgb(68,68,68)";
+        g1.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_SETTLEMENT_PERIOD_C');
 
-       var h=x.insertCell(9);
+        var g2=x.insertCell(9);
+        g2.style.color="rgb(68,68,68)";
+        g2.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_INITIAL_ACCOUNT_DAY');
+        var h=x.insertCell(10);
+        h.style.color="rgb(68,68,68)";
+        h.innerHTML='&nbsp;';
+    }else{*/
+       var h=x.insertCell(10);
        h.style.color="rgb(68,68,68)";
        h.innerHTML='&nbsp;';
+   //}
 //End Modefy BY osmond 20161022 合同模块增加结算周期
 
-}
-
-
-
-function saveProToLineData(ln){//编辑器显示于行中，并关闭编辑器
-    $("#span_name"+ln).html($("#product_name"+ln).val());
-    $("#span_part_number"+ln).html($("#product_part_number"+ln).val());
-    $("#span_product_qty"+ln).html($("#product_product_qty"+ln).val());
-    $("#span_uom_name_c"+ln).html($("#product_uom_name_c"+ln).val());
-    $("#span_product_list_price"+ln).html($("#product_product_list_price"+ln).val());
-    $("#span_product_discount"+ln).html($("#product_product_discount"+ln).val());
-    $("#span_product_unit_price"+ln).html($("#product_product_unit_price"+ln).val());
-    $("#span_vat_amt"+ln).html($("#product_vat_amt"+ln).val());
-    $("#span_product_total_price"+ln).html($("#product_product_total_price"+ln).val());
-    $("#span_settlement_period_c"+ln).html($("#product_settlement_period_c"+ln).find("option").html());
-    $("#span_initial_account_day"+ln).html($("#product_initial_account_day_c"+ln).val());
-    $("#span_periods"+ln).html($("#product_number_of_periods_c"+ln).find("option:selected").val());
-    $("#span_next_account_day"+ln).html($("#product_next_account_day_c"+ln).val());
-    $("#span_effective_start_c"+ln).html($("#product_effective_start_c"+ln).val());
-    $("#span_effective_end_c"+ln).html($("#product_effective_end_c"+ln).val());
-    $("#span_final_account_day"+ln).html($("#product_final_account_day_c"+ln).val());
-    $("#span_item_description"+ln).html($("#product_item_description"+ln).val());
-    $("#span_product_product_note"+ln).html($("#product_product_note"+ln).val());
-    var groupid = 0;
-    var key="product_";
-    if(enable_groups){
-        groupid = $("#"+key + 'group_number' + ln).value;
-    }
-    groupid = 'group' + groupid;
-    calculateTotal(groupid);
-    $("#"+pro_edit_name+ln).hide();
-}
-
-function  saveSerToLineData(ln){
-    $("#span_service_name"+ln).html($("#service_name"+ln).val());
-    $("#span_service_product_list_price"+ln).html($("#service_product_list_price"+ln).val());
-    $("#span_service_product_discount"+ln).html($("#service_product_discount"+ln).val());
-    $("#span_service_product_unit_price"+ln).html($("#service_product_unit_price"+ln).val());
-    $("#span_service_vat_amt"+ln).html($("#service_vat_amt"+ln).val());
-    $("#span_service_vat"+ln).html($("#service_vat"+ln).find("option:selected").val());
-    $("#span_service_product_total_price"+ln).html($("#service_product_total_price"+ln).val());
-    $("#span_service_initial_account_day_c"+ln).html($("#service_initial_account_day_c"+ln).val());
-    $("#span_service_next_account_day_c"+ln).html($("#service_next_account_day_c"+ln).val());
-    $("#span_service_effective_start_c"+ln).html($("#service_effective_start_c"+ln).val());
-    $("#span_service_effective_end_c"+ln).html($("#service_effective_end_c"+ln).val());
-    $("#span_service_final_account_day_c"+ln).html($("#service_final_account_day_c"+ln).val());
-    var groupid = 0;
-    var key="service_";
-    if(enable_groups){
-        groupid = $("#"+key + 'group_number' + ln).value;
-    }
-    groupid = 'group' + groupid;
-    calculateTotal(groupid);
-    $("#"+ser_edit_name+ln).hide();
-}
-
-function removeEdite(type,ln){
-    
-    if ($("#"+type+"deleted"+ln).val()=="") {
-        $("#"+type+"line_data"+ln).remove();
-        $("#"+type+"body"+ln).remove();
-    }else{
-        $("#"+type+"deleted"+ln).val("1");
-        $("#"+type+"line_data"+ln).hide();
-        if (type=="ser") {
-            $(".showmore"+ln+".ser").hide();
-        }else{
-            $(".showmore"+ln).hide();
-        }
-        $("#"+type+"body"+ln).hide();
-    }
-    var groupid = 0;
-    if(enable_groups){
-        groupid = $("#"+type + 'group_number' + ln).val();
-    }
-    groupid = 'group' + groupid;
-    calculateTotal(groupid);
-    calculateAllLines();
-}
-
-function openEdite(type,ln){
-    $("#"+type+"body"+ln).show();
-}
-
-function insertProductFooter(tableid){
-    var tablefoot = document.createElement("tfoot");
-    tablefoot.id = tableid +"_foot";
-    console.log(tableid);
-    tablefoot.innerHTML='<tr><td colSpan="9"><input type="button" name="addproduct" value="新增" onclick="openProductEdit(\''+tableid+'\',true)"></td></tr>';
-    document.getElementById(tableid).appendChild(tablefoot);
 }
 
 
@@ -844,6 +785,7 @@ function insertProductFooter(tableid){
     var curent_module=GetUrlParamString("module");
     tablehead = document.createElement("thead");
     tablehead.id = tableid +"_head";
+    tablehead.style.display="none";
     document.getElementById(tableid).appendChild(tablehead);
 
     var x=tablehead.insertRow(-1);
@@ -900,21 +842,20 @@ function insertProductFooter(tableid){
  * Insert Group
  */
 
-function insertGroup(){
+ function insertGroup()
+ {
     var curent_module=GetUrlParamString("module");
     if(!enable_groups && groupn > 0){
         return;
     }
     var tableBody = document.createElement("tr");
     tableBody.id = "group_body"+groupn;
-
     document.getElementById('lineItems').appendChild(tableBody);
 
     var a=tableBody.insertCell(0);
-
+    a.colSpan="100";
     var table = document.createElement("table");
     table.id = "group"+groupn;
-    table.className="table-striped";
     if(enable_groups){
         table.style.border = '1px grey solid';
         table.style.borderRadius = '4px';
@@ -922,8 +863,10 @@ function insertGroup(){
     }
     table.style.whiteSpace = 'nowrap';
 
-    table.width = '1256px';
+    table.width = '100%';
     a.appendChild(table);
+
+
 
     tableheader = document.createElement("thead");
     table.appendChild(tableheader);
@@ -949,44 +892,46 @@ function insertGroup(){
        };
    }
 
-    if(enable_groups){
-        var header_cell = header_row.insertCell(0);
-        header_cell.scope="row";
-        header_cell.colSpan="8";
-        if (curent_module=="AOS_Invoices"){
-            header_cell.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_GROUP_NAME')+":&nbsp;&nbsp;<input  class='sqsEnabled' autocomplete='off' type='text' name='group_name["+groupn+"]' id='"+ table.id +"name' size='30' maxlength='255'  title='' tabindex='120' >"+"<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openGroupPopup(" + groupn+ ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
-            "<input type='hidden' name='group_id["+groupn+"]' id='"+ table.id +"id' value=''><input type='hidden' name='group_group_number["+groupn+"]' id='"+ table.id +"group_number' value='"+groupn+"'>";
-        }else{
-            header_cell.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_GROUP_NAME')+":&nbsp;&nbsp;<input name='group_name[]' id='"+ table.id +"name' size='30' maxlength='255'  title='' tabindex='120' type='text'><input type='hidden' name='group_id[]' id='"+ table.id +"id' value=''><input type='hidden' name='group_group_number[]' id='"+ table.id +"group_number' value='"+groupn+"'>";
-        }
-        var header_cell_del = header_row.insertCell(1);
-        header_cell_del.scope="row";
-        header_cell_del.innerHTML="<span title='" + SUGAR.language.get(module_sugar_grp1, 'LBL_DELETE_GROUP') + "' style='float: right;'><a style='cursor: pointer;' id='deleteGroup' tabindex='116' onclick='markGroupDeleted("+groupn+")'><img src='themes/default/images/id-ff-clear.png' alt='X'></a></span><input type='hidden' name='group_deleted[]' id='"+ table.id +"deleted' value='0'>";
+   if(enable_groups){
+    var header_cell = header_row.insertCell(0);
+    header_cell.scope="row";
+    header_cell.colSpan="8";
+    if (curent_module=="AOS_Invoices"){
+        header_cell.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_GROUP_NAME')+":&nbsp;&nbsp;<input  class='sqsEnabled' autocomplete='off' type='text' name='group_name["+groupn+"]' id='"+ table.id +"name' size='30' maxlength='255'  title='' tabindex='120' >"+"<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openGroupPopup(" + groupn+ ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+        "<input type='hidden' name='group_id["+groupn+"]' id='"+ table.id +"id' value=''><input type='hidden' name='group_group_number["+groupn+"]' id='"+ table.id +"group_number' value='"+groupn+"'>";
     }
+    else{
+     header_cell.innerHTML=SUGAR.language.get(module_sugar_grp1, 'LBL_GROUP_NAME')+":&nbsp;&nbsp;<input name='group_name[]' id='"+ table.id +"name' size='30' maxlength='255'  title='' tabindex='120' type='text'><input type='hidden' name='group_id[]' id='"+ table.id +"id' value=''><input type='hidden' name='group_group_number[]' id='"+ table.id +"group_number' value='"+groupn+"'>";
+
+ }
+ var header_cell_del = header_row.insertCell(1);
+ header_cell_del.scope="row";
+ header_cell_del.innerHTML="<span title='" + SUGAR.language.get(module_sugar_grp1, 'LBL_DELETE_GROUP') + "' style='float: right;'><a style='cursor: pointer;' id='deleteGroup' tabindex='116' onclick='markGroupDeleted("+groupn+")'><img src='themes/default/images/id-ff-clear.png' alt='X'></a></span><input type='hidden' name='group_deleted[]' id='"+ table.id +"deleted' value='0'>";
+}
 
 
 
-    var productTableHeader = document.createElement("thead");
-    table.appendChild(productTableHeader);
-    var productHeader_row=productTableHeader.insertRow(-1);
-    var productHeader_cell = productHeader_row.insertCell(0);
-    productHeader_cell.colSpan="100";
-    var productTable = document.createElement("table");
-    productTable.id = "product_group"+groupn;
-    productTable.class ="table";
-    productHeader_cell.appendChild(productTable);
+var productTableHeader = document.createElement("thead");
+table.appendChild(productTableHeader);
+var productHeader_row=productTableHeader.insertRow(-1);
+var productHeader_cell = productHeader_row.insertCell(0);
+productHeader_cell.colSpan="100";
+var productTable = document.createElement("table");
+productTable.id = "product_group"+groupn;
+productHeader_cell.appendChild(productTable);
 
-    
-    var serviceTableHeader = document.createElement("thead");
-    table.appendChild(serviceTableHeader);
-    var serviceHeader_row=serviceTableHeader.insertRow(-1);
-    var serviceHeader_cell = serviceHeader_row.insertCell(0);
-    serviceHeader_cell.colSpan="100";
-    var serviceTable = document.createElement("table");
-    serviceTable.id = "service_group"+groupn;
-    serviceHeader_cell.appendChild(serviceTable);
+insertProductHeader(productTable.id);
 
-    //
+var serviceTableHeader = document.createElement("thead");
+table.appendChild(serviceTableHeader);
+var serviceHeader_row=serviceTableHeader.insertRow(-1);
+var serviceHeader_cell = serviceHeader_row.insertCell(0);
+serviceHeader_cell.colSpan="100";
+var serviceTable = document.createElement("table");
+serviceTable.id = "service_group"+groupn;
+serviceHeader_cell.appendChild(serviceTable);
+
+insertServiceHeader(serviceTable.id);
 
 
     /*tablebody = document.createElement("tbody");
@@ -1007,43 +952,40 @@ function insertGroup(){
         footer_cell.innerHTML+="<span style='float: right;'><div>"+SUGAR.language.get(module_sugar_grp1, 'LBL_TOTAL_AMT')+":&nbsp;&nbsp;</div><div><input name='group_total_amt[]' id='"+ table.id +"total_amt' size='21' maxlength='26' value='' title='' tabindex='120' type='text' readonly></div></span>";
 
         var footer_row2=tablefooter.insertRow(-1);
-        footer_row2.style.display="none";
         var footer_cell2 = footer_row2.insertCell(0);
         footer_cell2.scope="row";
         footer_cell2.colSpan="20";
         footer_cell2.innerHTML="<span style='float: right;'><div>"+SUGAR.language.get(module_sugar_grp1, 'LBL_DISCOUNT_AMOUNT')+":&nbsp;&nbsp;</div><div><input name='group_discount_amount[]' id='"+ table.id +"discount_amount' size='21' maxlength='26' value='' title='' tabindex='120' type='text' readonly></div></span>";
 
         var footer_row3=tablefooter.insertRow(-1);
-        footer_row3.style.display="none";
         var footer_cell3 = footer_row3.insertCell(0);
         footer_cell3.scope="row";
         footer_cell3.colSpan="20";
         footer_cell3.innerHTML="<span style='float: right;'><div>"+SUGAR.language.get(module_sugar_grp1, 'LBL_SUBTOTAL_AMOUNT')+":&nbsp;&nbsp;</div><div><input name='group_subtotal_amount[]' id='"+ table.id +"subtotal_amount' size='21' maxlength='26' value='' title='' tabindex='120' type='text' readonly></div></span>";
 
         var footer_row4=tablefooter.insertRow(-1);
-        footer_row4.style.display="none";
         var footer_cell4 = footer_row4.insertCell(0);
         footer_cell4.scope="row";
         footer_cell4.colSpan="20";
         footer_cell4.innerHTML="<span style='float: right;'><div>"+SUGAR.language.get(module_sugar_grp1, 'LBL_TAX_AMOUNT')+":&nbsp;&nbsp;</div><div><input name='group_tax_amount[]' id='"+ table.id +"tax_amount' size='21' maxlength='26' value='' title='' tabindex='120' type='text' readonly></div></span>";
+
         if(document.getElementById('subtotal_tax_amount') !== null){
             var footer_row5=tablefooter.insertRow(-1);
-            //footer_row5.display="none";
             var footer_cell5 = footer_row5.insertCell(0);
             footer_cell5.scope="row";
             footer_cell5.colSpan="20";
-            footer_cell5.innerHTML="<span style='float: right;'><div>"+SUGAR.language.get(module_sugar_grp1, 'LBL_SUBTOTAL_TAX_AMOUNT')+":&nbsp;&nbsp;</div><div><input name='group_subtotal_tax_amount[]' id='"+ table.id +"subtotal_tax_amount' size='21' maxlength='26' value='' title='' tabindex='120' type='text' readonly></div>";
+            footer_cell5.innerHTML="<span style='float: right;'><div>"+SUGAR.language.get(module_sugar_grp1, 'LBL_SUBTOTAL_TAX_AMOUNT')+":&nbsp;&nbsp;</div><div><input name='group_subtotal_tax_amount[]' id='"+ table.id +"subtotal_tax_amount' size='21' maxlength='26' value='' title='' tabindex='120' type='text' readonly></div></span>";
 
             if (typeof currencyFields !== 'undefined'){
                 currencyFields.push("" + table.id+ 'subtotal_tax_amount');
             }
         }
+
         var footer_row6=tablefooter.insertRow(-1);
         var footer_cell6 = footer_row6.insertCell(0);
         footer_cell6.scope="row";
         footer_cell6.colSpan="20";
-        footer_cell6.innerHTML="<span style='float: right;'><div>"+SUGAR.language.get(module_sugar_grp1, 'LBL_GROUP_TOTAL')+":&nbsp;&nbsp;</div><div><input name='group_total_amount[]' id='"+ table.id +"total_amount' size='21' maxlength='26' value='' title='' tabindex='120' type='text' readonly>"+
-        '<a href="javascript:;" onclick="showgmore(this,\''+groupn+'\')"><i class="glyphicon glyphicon-plus"></i></a></span></div></span>';
+        footer_cell6.innerHTML="<span style='float: right;'><div>"+SUGAR.language.get(module_sugar_grp1, 'LBL_GROUP_TOTAL')+":&nbsp;&nbsp;</div><div><input name='group_total_amount[]' id='"+ table.id +"total_amount' size='21' maxlength='26' value='' title='' tabindex='120' type='text' readonly></div></span>";
 
         if (typeof currencyFields !== 'undefined'){
             currencyFields.push("" + table.id+ 'total_amt');
@@ -1107,7 +1049,7 @@ function setGroupReturn(popupReplyData){
     document.getElementById(key + 'body' + ln).style.display = 'none';
     document.getElementById(key + 'deleted' + ln).value = '1';
     document.getElementById(key + 'delete_line' + ln).onclick = '';
-    var groupid = 'group' + $("#"+key + 'group_number' + ln).val();
+    var groupid = 'group' + document.getElementById(key + 'group_number' + ln).value;
 
     if(checkValidate('EditView',key+'product_id' +ln)){
         removeFromValidate('EditView',key+'product_id' +ln);
@@ -1128,6 +1070,7 @@ function setGroupReturn(popupReplyData){
     if(document.getElementById(key + required + ln) === null){
         required = 'product_unit_price';
     }
+
     if (document.getElementById(key + 'name' + ln).value === '' || document.getElementById(key + required + ln).value === ''){
         return;
     }
@@ -1204,9 +1147,10 @@ function setGroupReturn(popupReplyData){
     document.getElementById(key + 'product_total_price' + ln).value = format2Number(productTotalPrice);
     var groupid = 0;
     if(enable_groups){
-        groupid = $("#"+key + 'group_number' + ln).val();
+        groupid = document.getElementById(key + 'group_number' + ln).value;
     }
-    groupid = 'group'+groupid;
+    groupid = 'group' + groupid;
+
     calculateTotal(groupid);
     calculateTotal();
 
@@ -1229,12 +1173,9 @@ function calculateAllLines(){
  * Calculate totals
  */
  function calculateTotal(key)
- {  
+ {
     if (typeof key === 'undefined') {  key = 'lineItems'; }
-    var row=new Array;
-    if (document.getElementById(key)!=null) {
-        row = document.getElementById(key).getElementsByTagName('tbody');
-    }
+    var row = document.getElementById(key).getElementsByTagName('tbody');
     if(key == 'lineItems') key = '';
     var length = row.length;
     var head = {};
@@ -1308,9 +1249,9 @@ function calculateAllLines(){
         }
     }
 
-     subtotal = tot_amt + dis_tot;
+    subtotal = tot_amt + dis_tot;
 
-   set_value(key+'total_amt',tot_amt);
+    set_value(key+'total_amt',tot_amt);
     set_value(key+'subtotal_amount',subtotal);
     set_value(key+'discount_amount',dis_tot);
 
@@ -1533,7 +1474,7 @@ function setProductSettlementPeriodChange(field,prodlns) {
     var groupid = 0;
     var key="product_";
     if(enable_groups){
-        groupid = $("#"+key + 'group_number' + prodlns).val();
+        groupid = document.getElementById(key + 'group_number' + prodlns).value;
     }
     groupid = 'group' + groupid;
     calculateTotal(groupid);
@@ -1598,7 +1539,7 @@ function setServiceSettlementPeriodChange(field,servln) {
     var groupid = 0;
     var key="service_";
     if(enable_groups){
-        groupid = $("#"+key + 'group_number' + servln).val();
+        groupid = document.getElementById(key + 'group_number' + servln).value;
     }
     groupid = 'group' + groupid;
     calculateTotal(groupid);
@@ -1676,54 +1617,22 @@ function edit_show_more_service(btn,num){//编辑模式下的显示隐藏service
 }
 
 function showMore(btn,num){//btn和num确定点击哪个+
-    if($(".showmore"+num).css("display")=="none"){
-        $(".showmore"+num).show();
+    if($(".showmore"+num+"").css("display")=="none"){
+        $(".showmore"+num+"").show();
         $(btn).children().removeClass("glyphicon glyphicon-plus");
         $(btn).children().addClass("glyphicon glyphicon-minus");
     }else{
-        $(".showmore"+num).hide();
+        $(".showmore"+num+"").hide();
         $(btn).children().removeClass("glyphicon glyphicon-minus");
         $(btn).children().addClass("glyphicon glyphicon-plus");
     }
 }
 
-function showmoreinfo(btn,num){
-    if($(".showmore"+num).css("display")=="none"){
-        $(".showmore"+num).removeClass('hidden');
-        $(btn).children().removeClass("glyphicon glyphicon-plus");
-        $(btn).children().addClass("glyphicon glyphicon-minus");
-    }else{
-        $(".showmore"+num).addClass('hidden');
-        $(btn).children().removeClass("glyphicon glyphicon-minus");
-        $(btn).children().addClass("glyphicon glyphicon-plus");
-    }
-}
-
-function showgmore(btn,ln){
-    var type=true;
-    $("#group"+ln).find("tfoot").find("tr:gt(0)").not(":last-child").each(function(){
-        if ($(this).css("display")=="none") {
-            $(this).show();
-            type=false;
-        }else{
-            $(this).hide();
-            type=true;
-        }
-    });
-    if (type) {
-        $(btn).children().removeClass("glyphicon glyphicon-minus");
-        $(btn).children().addClass("glyphicon glyphicon-plus");
-    }else{
-        $(btn).children().removeClass("glyphicon glyphicon-plus");
-        $(btn).children().addClass("glyphicon glyphicon-minus");
-    }
-}
-
-$(function(){
+/*$(function(){
     if($("#edit_button").length>0){//判断是否在Detail中
         $("#LBL_LINE_ITEMS>tbody>tr>td").removeAttr("colspan");//清除colsan,因为只有两列
         $("#LBL_LINE_ITEMS>tbody>tr:lt(3)>td:eq(1)").attr("width","87.5%");//第一列已经是12.5%，只需设置第二列
         $("#LBL_LINE_ITEMS>tbody>tr>td").removeAttr("width");//行宽，无用设置，移除
         $("#LBL_LINE_ITEMS>tbody>tr:eq(7)>td:gt(1)").remove();
     }
-});
+});*/
