@@ -17,7 +17,7 @@ function CreateRevenuesFromContract()
 	$result = $db->query($sql);
 
 	while ($row = $db->fetchByAssoc($result)) {
-		createRevenueFromContract($row['id']);
+		createRevenueFromContract($row['id'],0,15);
 	}
 
 	return true;
