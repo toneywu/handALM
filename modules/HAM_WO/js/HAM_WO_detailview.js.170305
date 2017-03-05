@@ -1,4 +1,4 @@
-if(typeof(YAHOO.SUGAR) == 'undefined') {
+﻿if(typeof(YAHOO.SUGAR) == 'undefined') {
 	$.getScript("include/javascript/sugarwidgets/SugarYUIWidgets.js");
 }
 
@@ -28,7 +28,7 @@ function call_ff() {
 			error: function () { //失败
 				alert('Error loading document');
 			}
-		}); 
+		});
  };
 
 /**
@@ -373,10 +373,10 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
     var wo_tr=$("#list_subpanel_wo_line table tbody").find("tr");
     var flag=false;
     wo_tr.each(function(){
-    	var val=$(this).children().eq(1).find("a").text();
+    	/*var val=$(this).children().eq(1).find("a").text();
     	if (val!="") {
     		$(this).children().last().find(".listViewTdToolsS1").remove();
-    	}
+    	}*/
     	//Add by zhangling 20170222 
     	if($("#wo_status").val()!="DRAFT"&&$("#wo_status").val()!="RETURNED"){//工单行只有在拟定或退回时可以编辑
 			$(this).children().last().find(".sugar_action_button").remove();
@@ -386,18 +386,22 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
     //$("#list_subpanel_wo_line table tbody").find("tr:gt(2)").find(".inlineButtons").remove();
     
     //Add by zhangling 20170222 
-    if($("#wo_status").val()!="DRAFT"&&$("#wo_status").val()!="RETURNED"){//工单行只有在拟定或退回时可以新增
+    if($("#wo_status").val()!="DRAFT"&&$("#wo_status").val()!="RETURNED"&&$("#wo_status").val()!="APPROVED"){//工单行只有在拟定,已批准或退回时可以新增
 		 $("#HAM_WO_Lines_新增_button").hide();
 	}
 	 // end Add zhangling 20170222
-
+	
 	//明细页面添加一个按钮
 	var change_btn=$("<input type='button' class='button' id='btn_change_status' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL')+"'>");
 	$("#duplicate_button").after(change_btn);
 	$("#btn_change_status").click(function(){ //如果点了修改状态按钮，调用Ajax修改状态
 		changeStatus($("input[name='record']").val());
 	});
-
+	//Add by zhangling 20170228 
+	if($("#wo_status").val()=="APPROVED"){//工单在已批准状态下 ，隐藏状态修改按钮
+		 $("#btn_change_status").hide();
+	}
+	// end Add zhangling 20170228
 	/**
 	 * checkAccess
 	 */
