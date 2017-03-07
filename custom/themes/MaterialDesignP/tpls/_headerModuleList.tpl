@@ -211,7 +211,6 @@
                         </span>
                     </li>
                     {*End add 20170209*}
-
                     <li class="topnav">
                             <a class="navbar-brand" href="index.php?module=Home&action=index"><i class="glyphicon glyphicon-home"></i></a>
                     </li>
@@ -322,7 +321,7 @@
 
                         {/if}
                     {/foreach}
-                    
+
                     {foreach from=$groupTabs item=modules key=group name=groupList}
                         {capture name=extraparams assign=extraparams}parentTab={$group}{/capture}
                         <li class="topnav" 
@@ -346,6 +345,23 @@
                             </ul>
                         </li>
                     {/foreach}
+                    {*Add by zengchen 20170307*}
+                    {foreach from=$exthead item=itemhead name=foo}
+                        <li class="topnav">
+                            <span class="notCurrentTabLeft">&nbsp;</span>
+                            <span class="notCurrentTab"><a href="#" id="extab_{$smarty.foreach.groupList.index}" class="dropdown-toggle grouptab"
+                                   data-toggle="dropdown">{$itemhead.label}</a>
+                            <span class="notCurrentTabRight">&nbsp;</span>
+                            <ul class="dropdown-menu" role="menu">
+                            {foreach from=$extmenus item=menus}
+                            {if $itemhead.id eq $menus.parent_id}
+                                <li><a href="{$menus.url}"><i class="{$menus.img}"></i> {$menus.label}</a></li>
+                            {/if}
+                            {/foreach}
+                            </ul>
+                        </li>
+                    {/foreach}
+                    {*End add 20170307*}
                 </ul>
                 {* 7.8 Hide filter menu items when the windows is too small to display them *}
             {literal}
@@ -375,7 +391,6 @@
                       //FIX TIA by HandALM
                       ti = $('.desktop-toolbar ul.navbar-nav > li').not('.hidden').not('.all');
                       tia = $('.desktop-toolbar ul.navbar-nav > li').not('.hidden');
-                      $(ti).last().addClass('hidden');
                       tiw = 0;
                       tia.each(calcTiw);
                     }
@@ -386,10 +401,15 @@
                     //$(".topnav.all .dropdown-menu").css("left", -Math.min($(".topnav.all").position().left, ($(".topnav.all ul.dropdown-menu").width()/2 - $(".topnav.all").width()/2))+100);
                     //modified by zeng 20170222 class=all的标签发生改变
                   };
+
                 $(document).ready(function() {
                     $(window).resize(windowResize);
                     windowResize();
-                    $('#allfunc.topnav.hidden').remove();
+                    $("#allfunc span>a[id^=grouptab]").each(function(){
+                        if ($(this).html()=="[全部功能]") {
+                            $(this).parent().parent().addClass("hidden");
+                        }
+                    });
                 });
                 </script>
             {/literal}

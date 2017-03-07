@@ -2,9 +2,10 @@ var _height=$("body").height()-150;
 $("#gantt_map").css("height",_height);
 $("#gantt_map").css("background","#fff");
 gantt.config.subscales = [
+	{unit:"year", step:1, date:"%Y" },
 	{unit:"month", step:1, date:"%M" }
 ];
-gantt.config.date_scale = "%d,%D";
+gantt.config.date_scale = "%d,%M";
 gantt.config.columns=[
 	{name:"text", label:"任务名称", align:"left", tree:true, width:130,
 		template:function(item){
@@ -17,7 +18,6 @@ gantt.config.columns=[
 	{name:"start_date", label:"开始",align:"center", width:90},
 	{name:"progress", label:"%完成", width:50, align: "center",
 		template: function(item) {
-			console.log(item.progress);
 		if (item.progress >= 1)
 			return "完成";
 		if (item.progress == 0||typeof(item.progress)=="undefined")
@@ -36,17 +36,16 @@ gantt.config.columns=[
 	}},
 	{name:"milestone",label:"里程碑",align:"center",width:80,
 		template:function(item){
-		if(!item.milestone)
-			return "";
-		return item.milestone;
+		return item.milestone=="1"?"是":"否";
 	}},
 	{name:'add',width:30}
 ];
 gantt.config.lightbox.sections=[
 	{name:"description",type:"textarea",map_to:"text",height:70,focus:true},
 	{name:"assigned",type:"select",map_to:"assigned",height:35,options:users},
-	{name:"milestone",type:"textarea",map_to:"milestone",height:35},
-	{name:"time",type:"duration",map_to:"auto",height:35},
-	{name:"projects",type:"select",map_to:"project_id",height:1,options:[{"key":prj_id,"value":""}]},
+	{name:"milestone",type:"select",map_to:"milestone",height:35,options:[{"key":"0","label":"否"},{"key":"1","label":"是"}]},
+	{name:"time",type:"duration",map_to:"auto",height:35,time_format:["%Y","%m","%d"]},
+	{name:"projects",type:"select",map_to:"project_id",height:1,options:[{"key":prj_id,"label":""}]},
 ];
+gantt.config.task_date = "%Y年%m月%d日";
 gantt.config.xml_date = "%Y-%m-%d %H:%i:%s";

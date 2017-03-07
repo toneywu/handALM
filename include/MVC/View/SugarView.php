@@ -670,6 +670,9 @@ class SugarView
             if (!empty($sugar_config['lock_homepage']) && $sugar_config['lock_homepage'] == true) {
                 $ss->assign('lock_homepage', true);
             }
+            /*modified by zengchen 20170307 
+            移除原有全部功能菜单，转至HANDALM式的菜单导航栏*/
+            unset($groupTabs["[全部功能]"]);
             $ss->assign("groupTabs", $groupTabs);
             $ss->assign("shortcutTopMenu", $shortcutTopMenu);
             $ss->assign('USE_GROUP_TABS', $usingGroupTabs);
