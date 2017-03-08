@@ -324,8 +324,8 @@
 
                     {foreach from=$groupTabs item=modules key=group name=groupList}
                         {capture name=extraparams assign=extraparams}parentTab={$group}{/capture}
-                        <li class="topnav" 
-                        {if $smarty.foreach.groupList.index eq $smarty.foreach.groupList.last} id="allfunc" {/if} >
+                        {if $group neq "[全部功能]"}
+                        <li class="topnav">
                             <span class="notCurrentTabLeft">&nbsp;</span><span class="notCurrentTab">
                             <a href="#" id="grouptab_{$smarty.foreach.groupList.index}" class="dropdown-toggle grouptab"
                                data-toggle="dropdown">{$group}</a>
@@ -344,6 +344,7 @@
                                 {/foreach}
                             </ul>
                         </li>
+                        {/if}
                     {/foreach}
                     {*Add by zengchen 20170307*}
                     {foreach from=$exthead item=itemhead name=foo}
@@ -405,11 +406,6 @@
                 $(document).ready(function() {
                     $(window).resize(windowResize);
                     windowResize();
-                    $("#allfunc span>a[id^=grouptab]").each(function(){
-                        if ($(this).html()=="[全部功能]") {
-                            $(this).parent().parent().addClass("hidden");
-                        }
-                    });
                 });
                 </script>
             {/literal}
