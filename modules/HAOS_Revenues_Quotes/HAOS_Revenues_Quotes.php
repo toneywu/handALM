@@ -53,6 +53,29 @@ class HAOS_Revenues_Quotes extends HAOS_Revenues_Quotes_sugar {
 			$revenue_fields['CLEARED_STATUS']  =$app_list_strings['invoice_status_dom'][isset($bean->status)?$bean->status:''];
 		}
 
+		if($revenueBean->source_code=="AOS_Contracts"){
+			$parent_bean= BeanFactory::getBean('AOS_Contracts', $revenueBean->source_id);
+			if ($parent_bean) { 
+				$revenue_fields['SOURCE_NAME'] = isset($parent_bean->name)?$parent_bean->name:'';
+			}
+		}else if($revenueBean->source_code=="HAT_Incidents"){
+			$parent_bean= BeanFactory::getBean('HAT_Incidents', $revenueBean->source_id);
+			if ($parent_bean) { 
+				$revenue_fields['SOURCE_NAME'] = isset($parent_bean->name)?$parent_bean->name:'';
+			}
+		}else if($revenueBean->source_code=="HAT_Asset_Trans_Batch"){
+			$parent_bean= BeanFactory::getBean('HAT_Asset_Trans_Batch',$revenueBean->source_id);
+			if ($parent_bean) { 
+				$revenue_fields['SOURCE_NAME'] = isset($parent_bean->name)?$parent_bean->name:'';
+			}
+		}else if($revenueBean->source_code=="HAM_WO"){
+			$parent_bean= BeanFactory::getBean('HAM_WO',$revenueBean->source_id);
+			if ($parent_bean) { 
+				$revenue_fields['SOURCE_NAME'] = isset($parent_bean->name)?$parent_bean->name:'';
+			}
+		}
+
+
 		return $revenue_fields;
 	}
 

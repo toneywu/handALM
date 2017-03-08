@@ -1,5 +1,5 @@
 <?php
-// created: 2017-01-30 17:24:33
+// created: 2017-03-07 16:47:39
 $GLOBALS['tabStructure'] = array (
   'LBL_TABGROUP_SALES' => 
   array (
@@ -63,18 +63,6 @@ $GLOBALS['tabStructure'] = array (
       6 => 'HAM_WOOP',
     ),
   ),
-  'LBL_TABGROUP_ACTIVITIES' => 
-  array (
-    'label' => 'LBL_TABGROUP_ACTIVITIES',
-    'modules' => 
-    array (
-      0 => 'Meetings',
-      1 => 'Calendar',
-      2 => 'Tasks',
-      3 => 'Notes',
-      4 => 'Bugs',
-    ),
-  ),
   'LBL_GROUPTAB6_1467782279' => 
   array (
     'label' => 'LBL_GROUPTAB6_1467782279',
@@ -83,19 +71,6 @@ $GLOBALS['tabStructure'] = array (
       0 => 'AOS_Quotes',
       1 => 'AOS_Contracts',
       2 => 'AOS_Invoices',
-    ),
-  ),
-  'LBL_GROUPTAB5_1455067721' => 
-  array (
-    'label' => 'LBL_GROUPTAB5_1455067721',
-    'modules' => 
-    array (
-      0 => 'AOS_Products',
-      1 => 'HMM_MO_Requests',
-      2 => 'HMM_Trans_Batch',
-      3 => 'HAT_Counting_Rules',
-      4 => 'HMM_Trans_Lines',
-      5 => 'HMM_Trans_History',
     ),
   ),
   'LBL_TABGROUP_MARKETING' => 

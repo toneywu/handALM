@@ -673,7 +673,6 @@ class SugarView
             $ss->assign("groupTabs", $groupTabs);
             $ss->assign("shortcutTopMenu", $shortcutTopMenu);
             $ss->assign('USE_GROUP_TABS', $usingGroupTabs);
-
             // This is here for backwards compatibility, someday, somewhere, it will be able to be removed
             $ss->assign("moduleTopMenu", $groupTabs[$app_strings['LBL_TABGROUP_ALL']]['modules']);
             $ss->assign("moduleExtraMenu", $groupTabs[$app_strings['LBL_TABGROUP_ALL']]['extra']);

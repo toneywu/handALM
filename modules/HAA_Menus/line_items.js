@@ -101,7 +101,7 @@ function insertLineElements(tableid,btnadd){
 	"</tr>"+
 	"<tr>"+
 		"<td>"+SUGAR.language.get('HAA_Menus_Lists','LBL_FUNC_MODULE')+":<span class='required'>*</span></td>"+
-		"<td><select type='text' name='line_func_module["+prodln+"]' id='line_func_module"+prodln+"'>"+modulelist+"</select></td>"+
+		"<td><select type='text' name='line_func_module["+prodln+"]' id='line_func_module"+prodln+"' onchange='setLabel(this,"+prodln+")'>"+modulelist+"</select></td>"+
 		"<td>"+SUGAR.language.get('HAA_Menus_Lists','LBL_FUNCTION_NAME')+"</td>"+
 		"<td><input type='text' id='line_function_name"+prodln+"' name='line_function_name["+prodln+"]' value='' maxlength='255' size='30'/>"+
 		"<input type='hidden' id='line_function_id"+prodln+"' name='line_function_id["+prodln+"]' value='' maxlength='255' size='30'/>"+
@@ -188,6 +188,8 @@ function openFuncPopup(ln){
 
 function setFuncReturn(popupReplyData){
 	set_return(popupReplyData);
+	var label=popupReplyData['name_to_value_array']['line_function_name'+pronum];
+	$("#line_field_lable_zhs"+pronum).val(label);
 	$.getScript("custom/resources/bootstrap-iconpicker/bootstrap-iconpicker/js/bootstrap-iconpicker.min.js",
 	function () {
 		$('#target_iconpicker'+pronum).iconpicker();
@@ -297,7 +299,13 @@ function icon_edit(icon_field_obj,ln) {
 	$('#target_iconpicker'+ln).on('change', function(e) {
 		icon_field_obj.val(e.icon);
 	});
-};
+}
+
+function setLabel(obj,ln){
+	var line_function_id=document.getElementById('line_function_id'+ln).value;
+	if (line_function_id=="")
+		document.getElementById('line_field_lable_zhs'+ln).value=obj.options[obj.selectedIndex].text;
+}
 
 //function sort_order(sort_attr){
 	/*sort_attr排序字段*/
