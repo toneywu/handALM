@@ -41,7 +41,7 @@ class zzmImportAsset {
 		$return["rtn_attr8"]='';
 
 		//todo
-		$beanLines = BeanFactory::getBean('HAA_Integration_Interface_Lines')->get_full_list('id',"haa_integration_interface_lines.haa_integration_interface_headers_id_c='".$interfaceHeaderId."' and haa_integration_interface_lines.line_status!='S'");
+		$beanLines = BeanFactory::getBean('HAA_Integration_Interface_Lines')->get_full_list('(ext_line_id+0)',"haa_integration_interface_lines.haa_integration_interface_headers_id_c='".$interfaceHeaderId."' and haa_integration_interface_lines.line_status!='S'");
 		$beanHeaders =  BeanFactory::getBean('HAA_Integration_Interface_Headers',$interfaceHeaderId);
 		$status_cnt=0;
 		$msg_header='';
@@ -126,7 +126,7 @@ class zzmImportAsset {
 				$aos_products_id=$beanParent->id;
 			}else{
 				$module_return['status_return']='E';
-				$module_return['msg']='无法匹配产品资产组';
+				$module_return['msg']='资产编号:'.$modulesArray['value3'].'无法匹配产品资产组:'.$modulesArray['value1'];
 				return $module_return;
 			}
 		}else{
@@ -143,7 +143,7 @@ class zzmImportAsset {
 				$aos_product_categories_id=$beanParent->id;
 			}else{
 				$module_return['status_return']='E';
-				$module_return['msg']='无法匹配资产类别';
+				$module_return['msg']='资产编号:'.$modulesArray['value3'].'无法匹配资产类别:'.$modulesArray['value2'];
 				return $module_return;
 			}
 		}
@@ -169,42 +169,42 @@ class zzmImportAsset {
 		$using_org_id='';
 		if($modulesArray['value6']){
 			$beanParent = BeanFactory::getBean('Accounts')->retrieve_by_string_fields(array (
-				'name' => $modulesArray['value6'],
+				'organization_number_c' => $modulesArray['value6'],
 				'haa_frameworks_id_c' => $modulesArray['frameworks'],
 				));
 			if($beanParent){
 				$using_org_id=$beanParent->id;
 			}else{
 				$module_return['status_return']='E';
-				$module_return['msg']='无法匹配使用部门或使用组织';
+				$module_return['msg']='资产编号:'.$modulesArray['value3'].'无法匹配使用部门或使用组织:'.$modulesArray['value6'];
 				return $module_return;
 			}
 		}
 		$major_owning_dept_id='';
 		if($modulesArray['value7']){
 			$beanParent = BeanFactory::getBean('Accounts')->retrieve_by_string_fields(array (
-				'name' => $modulesArray['value7'],
+				'organization_number_c' => $modulesArray['value7'],
 				'haa_frameworks_id_c' => $modulesArray['frameworks'],
 				));
 			if($beanParent){
 				$major_owning_dept_id=$beanParent->id;
 			}else{
 				$module_return['status_return']='E';
-				$module_return['msg']='无法匹配归口管理部门或专业归口组织';
+				$module_return['msg']='资产编号:'.$modulesArray['value3'].'无法匹配归口管理部门或专业归口组织:'.$modulesArray['value7'];
 				return $module_return;
 			}
 		}
 		$owning_org_id='';
 		if($modulesArray['value8']){
 			$beanParent = BeanFactory::getBean('Accounts')->retrieve_by_string_fields(array (
-				'name' => $modulesArray['value8'],
+				'organization_number_c' => $modulesArray['value8'],
 				'haa_frameworks_id_c' => $modulesArray['frameworks'],
 				));
 			if($beanParent){
 				$owning_org_id=$beanParent->id;
 			}else{
 				$module_return['status_return']='E';
-				$module_return['msg']='无法匹配所属组织';
+				$module_return['msg']='资产编号:'.$modulesArray['value3'].'无法匹配所属组织:'.$modulesArray['value8'];
 				return $module_return;
 			}
 		}
@@ -224,7 +224,7 @@ class zzmImportAsset {
 				}
 			}else{
 				$module_return['status_return']='E';
-				$module_return['msg']='无法匹配地点或资产位置';
+				$module_return['msg']='资产编号:'.$modulesArray['value3'].'无法匹配地点或资产位置:'.$modulesArray['value9'];
 				return $module_return;
 			}
 		}
@@ -232,14 +232,15 @@ class zzmImportAsset {
 		if($modulesArray['value10']){
 			$match_value=0;
 			foreach ($app_list_strings['hat_asset_status_list'] as $key => $value) {
-				if($value==$modulesArray['value10']){
+				if($key==$modulesArray['value10']){
 					$asset_status=$key;
 					$match_value=1;
+					break;
 				}
 			}
 			if($match_value==0){
 				$module_return['status_return']='E';
-				$module_return['msg']='无法匹配状态或使用状态';
+				$module_return['msg']='资产编号:'.$modulesArray['value3'].'无法匹配状态或使用状态:'.$modulesArray['value10'];
 				return $module_return;
 			}
 		}
@@ -253,7 +254,7 @@ class zzmImportAsset {
 				$using_person_id=$beanParent->id;
 			}else{
 				$module_return['status_return']='E';
-				$module_return['msg']='无法匹配使用人';
+				$module_return['msg']='资产编号:'.$modulesArray['value3'].'无法匹配使用人:'.$modulesArray['value11'];
 				return $module_return;
 			}
 		}
@@ -267,7 +268,7 @@ class zzmImportAsset {
 				$owning_person_id=$beanParent->id;
 			}else{
 				$module_return['status_return']='E';
-				$module_return['msg']='无法匹配管理人或所属人';
+				$module_return['msg']='资产编号:'.$modulesArray['value3'].'无法匹配管理人或所属人:'.$modulesArray['value12'];
 				return $module_return;
 			}
 		}

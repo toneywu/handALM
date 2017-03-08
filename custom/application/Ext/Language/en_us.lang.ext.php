@@ -2461,6 +2461,7 @@ $app_list_strings['hat_asset_status_list']=array (
   'TempOut' => 'Outside',
   'OutOfService' => 'Decom.',
   'Discard' => 'Decom. & Removed',
+  'Pending' => 'Pending',
 );
 
 $app_list_strings['hat_asset_source_type_list']=array (  
