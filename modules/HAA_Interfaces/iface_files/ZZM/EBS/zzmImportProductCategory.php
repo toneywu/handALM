@@ -41,7 +41,7 @@ class zzmImportProductCategory {
 		$return["rtn_attr8"]='';
 
 		//todo
-		$beanLines = BeanFactory::getBean('HAA_Integration_Interface_Lines')->get_full_list('id',"haa_integration_interface_lines.haa_integration_interface_headers_id_c='".$interfaceHeaderId."' and haa_integration_interface_lines.line_status!='S'");
+		$beanLines = BeanFactory::getBean('HAA_Integration_Interface_Lines')->get_full_list('(ext_line_id+0)',"haa_integration_interface_lines.haa_integration_interface_headers_id_c='".$interfaceHeaderId."' and haa_integration_interface_lines.line_status!='S'");
 		$beanHeaders =  BeanFactory::getBean('HAA_Integration_Interface_Headers',$interfaceHeaderId);
 		$status_cnt=0;
 		$msg_header='';
@@ -123,7 +123,7 @@ class zzmImportProductCategory {
 				$parent_category_id=$beanParent->id;
 			}else{
 				$module_return['status_return']='E';
-				$module_return['msg']='无法匹配上层类别';
+				$module_return['msg']='产品类别:'.$modulesArray['value1'].'无法匹配上层类别:'.$modulesArray['value4'];
 				return $module_return;
 			}
 		}

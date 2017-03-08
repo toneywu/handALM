@@ -40,7 +40,7 @@ class zzmImportUser {
 		$return["rtn_attr7"]='';
 		$return["rtn_attr8"]='';
 		//todo
-		$beanLines = BeanFactory::getBean('HAA_Integration_Interface_Lines')->get_full_list('id',"haa_integration_interface_lines.haa_integration_interface_headers_id_c='".$interfaceHeaderId."' and haa_integration_interface_lines.line_status!='S'");
+		$beanLines = BeanFactory::getBean('HAA_Integration_Interface_Lines')->get_full_list('(ext_line_id+0)',"haa_integration_interface_lines.haa_integration_interface_headers_id_c='".$interfaceHeaderId."' and haa_integration_interface_lines.line_status!='S'");
 		$beanHeaders =  BeanFactory::getBean('HAA_Integration_Interface_Headers',$interfaceHeaderId);
 		$status_cnt=0;
 		$msg_header='';
@@ -127,21 +127,21 @@ class zzmImportUser {
 				$contact_id_c=$beanParent->id;
 			}else{
 				$module_return['status_return']='E';
-				$module_return['msg']='无法关联至人员';
+				$module_return['msg']='用户名:'.$modulesArray['value1'].'无法关联至人员:'.$modulesArray['value6'];
 				return $module_return;
 			}
 		}
 		$account_id_c='';
 		if($modulesArray['value7']){
 			$beanParent = BeanFactory::getBean('Accounts')->retrieve_by_string_fields(array (
-				'name' => $modulesArray['value7'],
+				'organization_number_c' => $modulesArray['value7'],
 				'haa_frameworks_id_c' => $modulesArray['frameworks'],
 				));
 			if($beanParent){
 				$account_id_c=$beanParent->id;
 			}else{
 				$module_return['status_return']='E';
-				$module_return['msg']='无法匹配人员所在组织';
+				$module_return['msg']='用户名:'.$modulesArray['value1'].'无法匹配人员所在组织:'.$modulesArray['value7'];
 				return $module_return;
 			}
 		}
