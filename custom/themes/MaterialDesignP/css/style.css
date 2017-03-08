@@ -542,7 +542,7 @@ input.yui-ac-input {
 }
 
 /*动态着色标签-单据状态，包括SR、WO*/
-.color_doc_status_DRAFT { 
+.color_doc_status_DRAFT {
 	background-color: #f2efe6;/*灰偏土黄*/
 }
 .color_doc_status_SUBMITTED {

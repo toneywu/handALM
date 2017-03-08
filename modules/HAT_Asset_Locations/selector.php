@@ -117,17 +117,8 @@
 		padding: 10px 5px;
 		margin: 0;
 		border: 1px solid #ccc;
-		height: 15px;
 	}
-	#workbench_toolbar>div {
-		display: none;
-	}
-	#workbench_toolbar:hover {
-		height:100%;
-	}
-	#workbench_toolbar:hover>div {
-		display: block;
-	}
+
 .treeview_location {
 	font-weight: bolder;
 	background-color: #F3EEDF;

@@ -1,0 +1,9 @@
+    BootstrapDialog.DEFAULT_TEXTS['OK'] = SUGAR.language.get('app_strings', 'LBL_DIALOG_TYPE_OK');
+    BootstrapDialog.DEFAULT_TEXTS['CANCEL'] = SUGAR.language.get('app_strings', 'LBL_DIALOG_TYPE_CANCEL');
+    BootstrapDialog.DEFAULT_TEXTS['CONFIRM'] = SUGAR.language.get('app_strings', 'LBL_DIALOG_TYPE_CONFIRM');
+    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_DEFAULT] = SUGAR.language.get('app_strings', 'LBL_DIALOG_TYPE_DEFAULT');
+    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_INFO] = SUGAR.language.get('app_strings', 'LBL_DIALOG_TYPE_DEFAULT');
+    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_PRIMARY] = SUGAR.language.get('app_strings', 'LBL_DIALOG_TYPE_DEFAULT');
+    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_SUCCESS] = SUGAR.language.get('app_strings', 'LBL_DIALOG_TYPE_SUCCESS');
+    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_WARNING] = SUGAR.language.get('app_strings', 'LBL_DIALOG_TYPE_WARNING');
+    BootstrapDialog.DEFAULT_TEXTS[BootstrapDialog.TYPE_DANGER] = SUGAR.language.get('app_strings', 'LBL_DIALOG_TYPE_DANGER');

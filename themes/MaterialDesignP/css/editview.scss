@@ -4226,6 +4226,10 @@ tr:hover img.info {
   color: $default-btn-hover-color;
 }
 
+#save_and_continue {
+  display: none;
+}
+
 #search_form input[type=submit],
 #SAVE.button {
   background-color: $primary;

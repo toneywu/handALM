@@ -346,7 +346,7 @@ function showNodeDetailHTML(treeObj, node, targetDIV, keepMidPanel = false ) {
 		if (current_mode=="view") {
 			varHTML+="<div class='detail_action_panel'><ul>";
 			for (index = 0; index < node.data.btn.length; ++index) {
-			    varHTML+="<li><a href='"+node.data.btn[index]['link']+"' class='button'>"+node.data.btn[index]['lab']+"</a></li>";
+			    varHTML+="<li><a href='index.php?"+node.data.btn[index]['link']+"' class='button'>"+node.data.btn[index]['lab']+"</a></li>";
 			}
 		} else {
 			varHTML+=showNodeDetailBtn(node);
