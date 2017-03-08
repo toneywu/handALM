@@ -85,7 +85,7 @@ array (
             'label' => 'LBL_EVENT_TYPE',
             'displayParams' => 
             array (
-              'initial_filter' => '&basic_type_advanced=AT_MOVE',
+              'initial_filter' => '&basic_type_advanced=AT_MOVE&tag_advanced={$EVENTTYPE_TAG}',
               'field_to_name_array' => 
               array (
                 'name' => 'event_type',

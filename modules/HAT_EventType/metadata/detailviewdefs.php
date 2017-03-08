@@ -111,7 +111,10 @@ array (
             'name' => 'need_limit_transaction_lines',
             'label' => 'LBL_NEED_LIMIT_TRANSACTION_LINES',
           ),
-          1=>""
+          1=> array (
+            'name' => 'tag',
+            'label' => 'LBL_TAG',
+            ),
         ),
         6 => 
         array (
