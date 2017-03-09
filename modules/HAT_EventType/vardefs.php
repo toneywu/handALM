@@ -45,55 +45,55 @@ $dictionary['HAT_EventType'] = array (
 	'duplicate_merge' => true,
 	'fields' => array (
 
-    'haa_frameworks_id' =>
-    array (
-      'required' => false,
-      'name' => 'haa_frameworks_id',
-      'vname' => 'LBL_FRAMEWORK_ID',
-      'type' => 'id',
-      'massupdate' => 0,
-      'no_default' => false,
-      'comments' => '',
-      'help' => '',
-      'importable' => 'true',
-      'duplicate_merge' => 'disabled',
-      'duplicate_merge_dom_value' => 0,
-      'audited' => false,
-      'inline_edit' => true,
-      'reportable' => false,
-      'unified_search' => false,
-      'merge_filter' => 'disabled',
-      'len' => 36,
-      'size' => '20',
-      ),
-    'framework' =>
-    array (
-      'required' => true,
-      'source' => 'non-db',
-      'name' => 'framework',
-      'vname' => 'LBL_FRAMEWORK',
-      'type' => 'relate',
-      'massupdate' => 0,
-      'no_default' => false,
-      'comments' => '',
-      'help' => '',
-      'importable' => 'true',
-      'duplicate_merge' => 'disabled',
-      'duplicate_merge_dom_value' => '0',
-      'audited' => false,
-      'inline_edit' => true,
-      'reportable' => true,
-      'unified_search' => false,
-      'merge_filter' => 'disabled',
-      'len' => '255',
-      'size' => '20',
-      'id_name' => 'haa_frameworks_id',
-      'ext2' => 'HAA_Frameworks',
-      'module' => 'HAA_Frameworks',
-      'rname' => 'name',
-      'quicksearch' => 'enabled',
-      'studio' => 'visible',
-      ),
+		'haa_frameworks_id' =>
+		array (
+			'required' => false,
+			'name' => 'haa_frameworks_id',
+			'vname' => 'LBL_FRAMEWORK_ID',
+			'type' => 'id',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => 0,
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => false,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => 36,
+			'size' => '20',
+			),
+		'framework' =>
+		array (
+			'required' => true,
+			'source' => 'non-db',
+			'name' => 'framework',
+			'vname' => 'LBL_FRAMEWORK',
+			'type' => 'relate',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+			'id_name' => 'haa_frameworks_id',
+			'ext2' => 'HAA_Frameworks',
+			'module' => 'HAA_Frameworks',
+			'rname' => 'name',
+			'quicksearch' => 'enabled',
+			'studio' => 'visible',
+			),
 		'basic_type' => array (
 			'required' => true,
 			'name' => 'basic_type',
@@ -117,7 +117,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'hat_event_type_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 
 		'parent_eventtype_id' => array (
 			'inline_edit' => 1,
@@ -140,7 +140,7 @@ $dictionary['HAT_EventType'] = array (
 			'len' => '36',
 			'size' => '20',
 			'id' => 'parent_eventtype_id',
-		),
+			),
 		'parent_eventtype' => array (
 			'inline_edit' => '',
 			'required' => false,
@@ -168,7 +168,7 @@ $dictionary['HAT_EventType'] = array (
 			'rname' => 'name',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
-		),
+			),
 		'aos_pdf_templates_id' => array (
 			'inline_edit' => 1,
 			'required' => false,
@@ -190,7 +190,7 @@ $dictionary['HAT_EventType'] = array (
 			'len' => '36',
 			'size' => '20',
 			'id' => 'aos_pdf_templates_id',
-		),
+			),
 		'aos_pdf_template' => array (
 			'inline_edit' => '',
 			'required' => false,
@@ -218,7 +218,7 @@ $dictionary['HAT_EventType'] = array (
 			'rname' => 'name',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
-		),
+			),
 		'haa_ff_id' => array (
 			'inline_edit' => 1,
 			'required' => false,
@@ -240,7 +240,7 @@ $dictionary['HAT_EventType'] = array (
 			'len' => '36',
 			'size' => '20',
 			'id' => 'code_asset_location_type_id',
-		),
+			),
 		'haa_ff' => array (
 			'inline_edit' => '',
 			'required' => false,
@@ -268,7 +268,7 @@ $dictionary['HAT_EventType'] = array (
 			'rname' => 'name',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
-		),
+			),
 		'target_asset_status' => array (
 			'required' => true,
 			'name' => 'target_asset_status',
@@ -291,7 +291,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'hat_asset_status_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		'change_parent' => array (
 			'required' => true,
 			'name' => 'change_parent',
@@ -315,7 +315,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option2_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		'change_location' => array (
 			'required' => true,
 			'name' => 'change_location',
@@ -339,7 +339,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		'processing_asset_status' => array (
 			'required' => true,
 			'name' => 'processing_asset_status',
@@ -362,7 +362,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'hat_asset_status_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		'change_rack_position' => array (
 			'required' => true,
 			'name' => 'change_rack_position',
@@ -386,7 +386,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option2_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		'change_asset_attribute10' => array (
 			'required' => true,
 			'name' => 'change_asset_attribute10',
@@ -410,7 +410,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option2_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		'change_asset_attribute11' => array (
 			'required' => true,
 			'name' => 'change_asset_attribute11',
@@ -434,7 +434,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option2_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		'change_asset_attribute12' => array (
 			'required' => true,
 			'name' => 'change_asset_attribute12',
@@ -458,7 +458,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option2_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		'change_cost_center' => array (
 			'required' => true,
 			'name' => 'change_cost_center',
@@ -482,7 +482,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option2_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		'change_owning_org' => array (
 			'required' => true,
 			'name' => 'change_owning_org',
@@ -506,7 +506,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option2_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		'change_owning_person' => array (
 			'required' => true,
 			'name' => 'change_owning_person',
@@ -530,7 +530,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option2_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		'change_using_org' => array (
 			'required' => true,
 			'name' => 'change_using_org',
@@ -554,7 +554,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option2_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		'change_using_person' => array (
 			'required' => true,
 			'name' => 'change_using_person',
@@ -578,7 +578,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option2_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		'change_oranization_le' => array (
 			'required' => true,
 			'name' => 'change_oranization_le',
@@ -602,7 +602,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		'change_location_desc' => array (
 			'required' => true,
 			'name' => 'change_location_desc',
@@ -626,7 +626,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		'require_approval_workflow' => array (
 			'name' => 'require_approval_workflow',
 			'vname' => 'LBL_REQUIRE_APPROVAL_WORKFLOW',
@@ -649,7 +649,7 @@ $dictionary['HAT_EventType'] = array (
 			'size' => '20',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		'manual_create_enable_flag' => array (
 			'name' => 'manual_create_enable_flag',
 			'vname' => 'LBL_MANUAL_CREATE_ENABLE_FLAG',
@@ -671,57 +671,57 @@ $dictionary['HAT_EventType'] = array (
 			'size' => '20',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 
 		'revenue_eventtype_id_c' =>
-    array (
-      'required' => false,
-      'name' => 'revenue_eventtype_id_c',
-      'vname' => 'LBL_REVENUE_EVENTTYPE',
-      'type' => 'id',
-      'massupdate' => 0,
-      'no_default' => false,
-      'comments' => '',
-      'help' => '',
-      'importable' => 'true',
-      'duplicate_merge' => 'disabled',
-      'duplicate_merge_dom_value' => 0,
-      'audited' => false,
-      'inline_edit' => true,
-      'reportable' => false,
-      'unified_search' => false,
-      'merge_filter' => 'disabled',
-      'len' => 36,
-      'size' => '20',
-      ),
-    'revenue_eventtype' =>
-    array (
-      'required' => false,
-      'source' => 'non-db',
-      'name' => 'revenue_eventtype',
-      'vname' => 'LBL_REVENUE_EVENTTYPE',
-      'type' => 'relate',
-      'massupdate' => 0,
-      'no_default' => false,
-      'comments' => '',
-      'help' => '',
-      'importable' => 'true',
-      'duplicate_merge' => 'disabled',
-      'duplicate_merge_dom_value' => '0',
-      'audited' => false,
-      'inline_edit' => true,
-      'reportable' => true,
-      'unified_search' => false,
-      'merge_filter' => 'disabled',
-      'len' => '255',
-      'size' => '20',
-      'id_name' => 'revenue_eventtype_id_c',
-      'ext2' => 'HAT_EventType',
-      'module' => 'HAT_EventType',
-      'rname' => 'name',
-      'quicksearch' => 'enabled',
-      'studio' => 'visible',
-      ),
+		array (
+			'required' => false,
+			'name' => 'revenue_eventtype_id_c',
+			'vname' => 'LBL_REVENUE_EVENTTYPE',
+			'type' => 'id',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => 0,
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => false,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => 36,
+			'size' => '20',
+			),
+		'revenue_eventtype' =>
+		array (
+			'required' => false,
+			'source' => 'non-db',
+			'name' => 'revenue_eventtype',
+			'vname' => 'LBL_REVENUE_EVENTTYPE',
+			'type' => 'relate',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+			'id_name' => 'revenue_eventtype_id_c',
+			'ext2' => 'HAT_EventType',
+			'module' => 'HAT_EventType',
+			'rname' => 'name',
+			'quicksearch' => 'enabled',
+			'studio' => 'visible',
+			),
 		'require_confirmation' => array (
 			'name' => 'require_confirmation',
 			'vname' => 'LBL_REQUIRE_CONFIRMATION',
@@ -743,7 +743,7 @@ $dictionary['HAT_EventType'] = array (
 			'studio' => 'visible',
 			'options'=>'cux_event_type_option3_list',
 			'dependency' => false,
-		),
+			),
 		'check_customer_hold_c_owning' => array (
 			'required' => false,
 			'name' => 'check_customer_hold_c_owning',
@@ -763,7 +763,7 @@ $dictionary['HAT_EventType'] = array (
 			'unified_search' => false,
 			'merge_filter' => 'disabled',
 			//'options' => 'dom_int_bool',
-		),
+			),
 		'check_customer_hold_t_using' => array (
 			'required' => false,
 			'name' => 'check_customer_hold_t_using',
@@ -782,7 +782,7 @@ $dictionary['HAT_EventType'] = array (
 			'reportable' => true,
 			'unified_search' => false,
 			'merge_filter' => 'disabled',
-		),
+			),
 		'change_target_status' => array (
 			'required' => false,
 			'name' => 'change_target_status',
@@ -802,8 +802,8 @@ $dictionary['HAT_EventType'] = array (
 			'unified_search' => false,
 			'merge_filter' => 'disabled',
 			//'options' => 'dom_int_bool',
-	
-		),
+
+			),
 		'change_processing_status' => array (
 			'required' => false,
 			'name' => 'change_processing_status',
@@ -823,8 +823,8 @@ $dictionary['HAT_EventType'] = array (
 			'unified_search' => false,
 			'merge_filter' => 'disabled',
 			//'options' => 'dom_int_bool',
-	
-		),
+
+			),
 		'concat_name' => array (
 			'required' => false,
 			'name' => 'concat_name',
@@ -844,7 +844,7 @@ $dictionary['HAT_EventType'] = array (
 			'merge_filter' => 'disabled',
 			'len' => '140',
 			'size' => '20',
-		),
+			),
 		'event_short_desc' => array (
 			'required' => true,
 			'name' => 'event_short_desc',
@@ -864,7 +864,27 @@ $dictionary['HAT_EventType'] = array (
 			'merge_filter' => 'disabled',
 			'len' => '140',
 			'size' => '20',
-		),
+			),
+		'tag' => array (
+			'required' => false,
+			'name' => 'tag',
+			'vname' => 'LBL_TAG',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '140',
+			'size' => '20',
+			),
 		'change_ip_subnets' => array (
 			'required' => false,
 			'name' => 'change_ip_subnets',
@@ -888,7 +908,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 
 		'change_associated_ip' => array (
 			'required' => false,
@@ -913,7 +933,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 
 		'change_gateway' => array (
 			'required' => false,
@@ -938,7 +958,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		'change_bandwidth_type' => array (
 			'required' => false,
 			'name' => 'change_bandwidth_type',
@@ -962,7 +982,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 
 		'change_port' => array (
 			'required' => false,
@@ -987,7 +1007,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 
 		'change_speed_limit' => array (
 			'required' => false,
@@ -1012,7 +1032,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 
 		'change_asset' => array (
 			'required' => true,
@@ -1037,7 +1057,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 
 		'change_cabinet' => array (
 			'required' => false,
@@ -1062,7 +1082,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 
 		'change_monitoring' => array (
 			'required' => false,
@@ -1087,7 +1107,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 
 		'change_channel_num' => array (
 			'required' => false,
@@ -1112,7 +1132,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 
 		'change_channel_content' => array (
 			'required' => false,
@@ -1137,7 +1157,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		'change_mrtg_link' => array (
 			'required' => false,
 			'name' => 'change_mrtg_link',
@@ -1161,7 +1181,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		
 		'change_mrtg_link_backup' => array (
 			'required' => false,
@@ -1186,7 +1206,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 
 		'change_access_assets_name' => array (
 			'required' => false,
@@ -1211,7 +1231,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		
 		'change_main_asset' => array (
 			'required' => false,
@@ -1236,7 +1256,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		
 		'change_backup_asset' => array (
 			'required' => false,
@@ -1261,7 +1281,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		
 		'change_status' => array (
 			'required' => false,
@@ -1286,7 +1306,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		
 		'change_port_backup' => array (
 			'required' => false,
@@ -1311,7 +1331,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		
 		'change_monitoring_backup' => array (
 			'required' => false,
@@ -1336,7 +1356,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		
 		'change_channel_content_backup' => array (
 			'required' => false,
@@ -1361,7 +1381,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		
 		
 		'change_channel_num_backup' => array (
@@ -1387,7 +1407,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		
 		'change_access_assets_backup_name' => array (
 			'required' => false,
@@ -1412,7 +1432,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		
 		'change_date_start' => array (
 			'required' => false,
@@ -1437,7 +1457,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		
 		'change_date_end' => array (
 			'required' => false,
@@ -1462,7 +1482,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		
 		
 		
@@ -1490,7 +1510,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		
 		'change_asset_date_end' => array (
 			'required' => false,
@@ -1515,7 +1535,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		
 		
 		'change_asset_status' => array (
@@ -1541,7 +1561,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		
 		
 		'asset_scope' => array (
@@ -1567,7 +1587,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'hat_asset_scope_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		
 		'change_enable_action' => array (
 			'required' => false,
@@ -1592,7 +1612,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		
 		'need_limit_transaction_lines' => array (
 			'required' => false,
@@ -1626,7 +1646,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		
 		//子端口
 		'change_child_port' => array (
@@ -1652,7 +1672,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		
 		//vlan通道
 		'change_vlan_channel' => array (
@@ -1678,7 +1698,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'cux_event_type_option_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		
 		'default_asset_list' => array (
 			'required' => false,
@@ -1703,7 +1723,7 @@ $dictionary['HAT_EventType'] = array (
 			'options' => 'hat_default_asset_list',
 			'studio' => 'visible',
 			'dependency' => false,
-		),
+			),
 		
 		'allocation_flag' => array (
 			'required' => false,
@@ -1723,7 +1743,7 @@ $dictionary['HAT_EventType'] = array (
 			'reportable' => true,
 			'unified_search' => false,
 			'merge_filter' => 'disabled',
-		),
+			),
 		
 		'keep_seperated_allc_rack_using_org' => array (
 			'required' => false,
@@ -1743,7 +1763,7 @@ $dictionary['HAT_EventType'] = array (
 			'reportable' => true,
 			'unified_search' => false,
 			'merge_filter' => 'disabled',
-		),
+			),
 		'keep_preassigned_status_using_org' => array (
 			'required' => false,
 			'name' => 'keep_preassigned_status_using_org',
@@ -1762,7 +1782,7 @@ $dictionary['HAT_EventType'] = array (
 			'reportable' => true,
 			'unified_search' => false,
 			'merge_filter' => 'disabled',
-		),
+			),
 
 		'contract_completed' => array (
 			'required' => false,
@@ -1806,7 +1826,7 @@ $dictionary['HAT_EventType'] = array (
 			'reportable' => true,
 			'unified_search' => false,
 			'merge_filter' => 'disabled',
-		),
+			),
 		'no_add_ip_lines_flag' => array (
 			'required' => false,
 			'name' => 'no_add_ip_lines_flag',
@@ -1825,7 +1845,7 @@ $dictionary['HAT_EventType'] = array (
 			'reportable' => true,
 			'unified_search' => false,
 			'merge_filter' => 'disabled',
-		),
+			),
 		'no_lines_inactive_using_flag' => array (
 			'required' => false,
 			'name' => 'no_lines_inactive_using_flag',
@@ -1844,11 +1864,11 @@ $dictionary['HAT_EventType'] = array (
 			'reportable' => true,
 			'unified_search' => false,
 			'merge_filter' => 'disabled',
+			),
 		),
-	),
-	'relationships' => array (),
-	'optimistic_locking' => true,
-	'unified_search' => true,
+'relationships' => array (),
+'optimistic_locking' => true,
+'unified_search' => true,
 );
 if (!class_exists('VardefManager')) {
 	require_once ('include/SugarObjects/VardefManager.php');
@@ -1857,4 +1877,4 @@ VardefManager :: createVardef('HAT_EventType', 'HAT_EventType', array (
 	'basic',
 	'assignable',
 	'security_groups'
-));
+	));

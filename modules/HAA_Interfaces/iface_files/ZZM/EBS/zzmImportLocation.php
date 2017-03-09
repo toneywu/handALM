@@ -41,7 +41,7 @@ class zzmImportLocation {
 		$return["rtn_attr8"]='';
 
 		//todo
-		$beanLines = BeanFactory::getBean('HAA_Integration_Interface_Lines')->get_full_list('id',"haa_integration_interface_lines.haa_integration_interface_headers_id_c='".$interfaceHeaderId."' and haa_integration_interface_lines.line_status!='S'");
+		$beanLines = BeanFactory::getBean('HAA_Integration_Interface_Lines')->get_full_list('(ext_line_id+0)',"haa_integration_interface_lines.haa_integration_interface_headers_id_c='".$interfaceHeaderId."' and haa_integration_interface_lines.line_status!='S'");
 		$beanHeaders =  BeanFactory::getBean('HAA_Integration_Interface_Headers',$interfaceHeaderId);
 		$status_cnt=0;
 		$msg_header='';
@@ -127,7 +127,7 @@ class zzmImportLocation {
 				}
 			}else{
 				$module_return['status_return']='E';
-				$module_return['msg']='无法匹配父位置节点';
+				$module_return['msg']='位置:'.$modulesArray['value2'].'无法匹配父位置节点:'.$modulesArray['value1'];
 				return $module_return;
 			}
 		}
@@ -144,7 +144,7 @@ class zzmImportLocation {
 			}else
 			{
 				$module_return['status_return']='E';
-				$module_return['msg']='无法匹配维护地点/区域';
+				$module_return['msg']='新建时，无法匹配维护地点/区域';
 				return $module_return;
 			}
 			$beanCode = BeanFactory::getBean('HAA_Codes')->retrieve_by_string_fields(array (
@@ -156,7 +156,7 @@ class zzmImportLocation {
 				$beanModules->code_asset_location_type=$beanCode->id;
 			}else{
 				$module_return['status_return']='E';
-				$module_return['msg']='无法匹配位置类型';
+				$module_return['msg']='新建时，无法匹配位置类型';
 				return $module_return;
 			}
 			$beanModules->asset_node=1;
@@ -164,7 +164,7 @@ class zzmImportLocation {
 			$beanModules->inventory_mode='NONE';
 		}
 		$beanModules->parent_location_id=$parent_location_id;
-		$beanModules->name=$accountsArray['value2'];
+		$beanModules->name=$modulesArray['value2'];
 		$beanModules->save();
 		$module_return['status_return']='S';
 		$module_return['msg']='';

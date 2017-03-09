@@ -64,7 +64,7 @@ if( isset($_GET['module_name']) && $_GET['module_name'] =='HAT_EventType'){
         /* 以下为加载数据 by toney.wu
         /*****************************************************************/
 
-        $beanEventTypes = BeanFactory::getBean('HAT_EventType')->get_full_list('name',"hat_eventtype.basic_type = '".$_REQUEST['basic_type_advanced']."' AND hat_eventtype.manual_create_enable_flag=1 AND hat_eventtype.haa_frameworks_id= '".$_SESSION["current_framework"]."'");
+        $beanEventTypes = BeanFactory::getBean('HAT_EventType')->get_full_list('name',"hat_eventtype.basic_type = '".$_REQUEST['basic_type_advanced']."' AND hat_eventtype.manual_create_enable_flag=1 AND hat_eventtype.haa_frameworks_id= '".$_SESSION["current_framework"]."' and hat_eventtype.tag_advanced='".$_REQUEST['tag']."'");
 
         //echo ("hat_eventtype.basic_type = '".$_REQUEST['basic_type_advanced']."' AND manual_create_enable_flag=1 AND hat_eventtype.haa_frameworks_id= '".$_SESSION["current_framework"]."'");
 

@@ -41,7 +41,7 @@ class zzmImportAccount {
 		$return["rtn_attr8"]='';
 
 		//todo
-		$beanLines = BeanFactory::getBean('HAA_Integration_Interface_Lines')->get_full_list('id',"haa_integration_interface_lines.haa_integration_interface_headers_id_c='".$interfaceHeaderId."' and haa_integration_interface_lines.line_status!='S'");
+		$beanLines = BeanFactory::getBean('HAA_Integration_Interface_Lines')->get_full_list('(ext_line_id+0)',"haa_integration_interface_lines.haa_integration_interface_headers_id_c='".$interfaceHeaderId."' and haa_integration_interface_lines.line_status!='S'");
 		$beanHeaders =  BeanFactory::getBean('HAA_Integration_Interface_Headers',$interfaceHeaderId);
 		$status_cnt=0;
 		$msg_header='';
@@ -119,29 +119,29 @@ class zzmImportAccount {
 		$parent_id='';
 		if($modulesArray['value4']){
 			$beanParent = BeanFactory::getBean('Accounts')->retrieve_by_string_fields(array (
-				'name' => $modulesArray['value4'],
+				'organization_number_c' => $modulesArray['value4'],
 				'haa_frameworks_id_c' => $modulesArray['frameworks'],
 				));
 			if($beanParent){
 				$parent_id=$beanParent->id;
 			}else{
 				$module_return['status_return']='E';
-				$module_return['msg']='无法匹配上级单位';
+				$module_return['msg']='组织简称:'.$modulesArray['value2'].'无法匹配上级单位:'.$modulesArray['value4'];
 				return $module_return;
 			}
 
 		}
 		$account_id2_c='';
-		if($modulesArray['value5']){
+		if(($modulesArray['id']=='' && $modulesArray['value5']!=$modulesArray['value2'])||($modulesArray['id']!='' && $modulesArray['value5']!='')){
 			$beanParent = BeanFactory::getBean('Accounts')->retrieve_by_string_fields(array (
-				'name' => $modulesArray['value5'],
+				'organization_number_c' => $modulesArray['value5'],
 				'haa_frameworks_id_c' => $modulesArray['frameworks'],
 				));
 			if($beanParent){
 				$account_id2_c=$beanParent->id;
 			}else{
 				$module_return['status_return']='E';
-				$module_return['msg']='无法匹配盘点所属部门';
+				$module_return['msg']='组织简称:'.$modulesArray['value2'].'无法匹配盘点所属部门:'.$modulesArray['value5'];
 				return $module_return;
 			}
 		}
@@ -154,11 +154,16 @@ class zzmImportAccount {
 			$beanModules->org_type_c='INTERNAL';
 		}
 			$beanModules->full_name_c=$modulesArray['value1'];
-			$beanModules->name=$modulesArray['value2'];
+			$beanModules->name=$modulesArray['value1'];
+			$beanModules->organization_number_c=$modulesArray['value2'];
 			$beanModules->is_cooperation_group_c=$is_cooperation_group_c;
 			$beanModules->parent_id=$parent_id;
 			$beanModules->account_id2_c=$account_id2_c;
 			$beanModules->save();
+			if($modulesArray['id']=='' && $modulesArray['value5']==$modulesArray['value2']){
+				$beanModules->account_id2_c=$beanModules->id;
+				$beanModules->save();
+			}
 			$module_return['status_return']='S';
 			$module_return['msg']='';
 

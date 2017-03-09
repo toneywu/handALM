@@ -1835,6 +1835,7 @@ $app_list_strings['hat_asset_status_list']=array (
   'TempOut' => '外部',
   'OutOfService' => '已退役',
   'Discard' => '已处置/迁出',
+  'Pending' => '待处理',
 );
 
 $app_list_strings['hat_asset_source_type_list']=array (
