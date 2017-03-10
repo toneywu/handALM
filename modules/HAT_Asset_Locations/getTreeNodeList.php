@@ -7,15 +7,19 @@
 $current_mode_sql="1=1";
 
 if (isset($_REQUEST['current_mode'])) {
-    if($_REQUEST['current_mode']=="rack"||$_REQUEST['current_mode']=="rackposition") {
+  $_SESSION['current_mode'] = $_REQUEST['current_mode'];
+}
+if (isset($_SESSION['current_mode'])) {
+  $_SESSION['current_mode'] = $_SESSION['current_mode'];
+    if($_SESSION['current_mode']=="rack"||$_SESSION['current_mode']=="rackposition"||$_SESSION['current_mode']=="rackasset") {
         $current_mode_sql = "hat_assets.enable_it_rack = 1 ";
-    } elseif ($_REQUEST['current_mode']=="it") {
+    } elseif ($_SESSION['current_mode']=="it") {
         $current_mode_sql = "hat_assets.enable_it_ports = 1 ";
     }
 }
 
 if (isset($_REQUEST['site_id'])&&$_REQUEST['site_id']!="undefined" && $_REQUEST['site_id']!="") {
-    $current_site_sql = " AND hat_assets.id IN (SELECT halhac.`hat_asset_locations_hat_assetshat_assets_idb` FROM hat_asset_locations_hat_assets_c halhac, hat_asset_locations WHERE halhac.`hat_asset_locations_hat_assetshat_asset_locations_ida`= hat_asset_locations.id AND halhac.deleted=0 AND hat_asset_locations.deleted = 0 AND hat_asset_locations.`ham_maint_sites_id` = '".$_REQUEST['site_id']."')";
+    $current_site_sql = " AND hat_assets.id IN (SELECT halhac.hat_asset_locations_hat_assetshat_assets_idb FROM hat_asset_locations_hat_assets_c halhac, hat_asset_locations WHERE halhac.hat_asset_locations_hat_assetshat_asset_locations_ida = hat_asset_locations.id AND halhac.deleted=0 AND hat_asset_locations.deleted = 0 AND hat_asset_locations.`ham_maint_sites_id` = '".$_REQUEST['site_id']."')";
 } else {
     $current_site_sql = "";
 }
@@ -34,7 +38,7 @@ if ($_REQUEST['type']=="rack" && isset($_REQUEST['query_id'])) {
 
     //因为存在多个资产事务处理行处理了同一个资产的情况（比如不同资产事务单），因此在结果中需要DISTINCT
         $sel_sub_asset ="SELECT 
-                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status
+                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status,hat_assets.enable_linear,hat_assets.enable_it_rack,hat_assets.enable_it_ports
                         FROM
                           hat_assets
                         WHERE hat_assets.`deleted`=0
@@ -50,7 +54,7 @@ if ($_REQUEST['type']=="wo_asset_trans" && isset($_REQUEST['query_id'])) {
 
     //因为存在多个资产事务处理行处理了同一个资产的情况（比如不同资产事务单），因此在结果中需要DISTINCT
         $sel_sub_asset ="SELECT DISTINCT
-                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status,hit_racks.id rack_id
+                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status,hit_racks.id rack_id,hat_assets.enable_linear,hat_assets.enable_it_rack,hat_assets.enable_it_ports
                         FROM
                           hat_assets
                           LEFT JOIN hit_racks ON (hit_racks.`hat_assets_id`=hat_assets.id AND hit_racks.`deleted`=0),
@@ -74,7 +78,7 @@ if ($_REQUEST['type']=="wo_ip_trans" ) {
 
     //因为存在多个资产事务处理行处理了同一个资产的情况（比如不同资产事务单），因此在结果中需要DISTINCT
         $sel_sub_asset ="SELECT DISTINCT 
-                          hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status 
+                          hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status,hat_assets.enable_linear,hat_assets.enable_it_rack,hat_assets.enable_it_ports
                         FROM
                           hat_assets 
                         WHERE hat_assets.`deleted` = 0 
@@ -113,7 +117,7 @@ if ($_REQUEST['type']=="current_using_org" ) {
 
     //因为存在多个资产事务处理行处理了同一个资产的情况（比如不同资产事务单），因此在结果中需要DISTINCT
         $sel_sub_asset ="SELECT
-                          hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status
+                          hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status,hat_assets.enable_linear,hat_assets.enable_it_rack,hat_assets.enable_it_ports
                         FROM
                           hat_assets,
                           accounts
@@ -127,11 +131,80 @@ if ($_REQUEST['type']=="current_using_org" ) {
   //echo $sel_sub_asset;
 }
 
-if ($_REQUEST['type']=="current_using_org_none" && isset($_REQUEST['query_id'])) {
+if ($_REQUEST['type']=="current_using_org_none" ) {
     //wo_ip_trans 显示当前工作单的所有网络资源事务处理行中出现的内容
+    if(isset($_REQUEST['query_id']) && $_REQUEST['query_id'] != ''){
+      $_SESSION['query_id'] = $_REQUEST['query_id'];
+    }else{
+      //echo "abcd ".$_REQUEST['query_id'];
+    } 
+    $sel_sub_location ="SELECT
+                            `hat_asset_locations`.id,
+                            `hat_asset_locations`.name,
+                            `hat_asset_locations`.location_title,
+                            `hat_asset_locations`.location_icon
+                          FROM
+                            hat_asset_locations,
+                            ham_maint_sites
+                          WHERE hat_asset_locations.deleted = 0 
+                          AND hat_asset_locations.`ham_maint_sites_id` = `ham_maint_sites`.id ";
+          
+        if (isset($_REQUEST['site_id'])&&$_REQUEST['site_id']!="undefined"&&$_REQUEST['site_id']!="") {
+          //如果限制SITE_ID，只列出当前Site下的地点
+          $sel_sub_location .= " AND hat_asset_locations.`ham_maint_sites_id` = '".$_REQUEST['site_id']."'";
+        } else {
+         //如果没有限制SITE_ID则，取出当前业务框架下的所有地点+所有没有Site的地点
+          $sel_sub_location .= " AND (hat_asset_locations.`ham_maint_sites_id`= '' OR hat_asset_locations.`ham_maint_sites_id` is NULL OR  ham_maint_sites.`haa_frameworks_id`='".$current_framework."')";
+        }
 
-    //因为存在多个资产事务处理行处理了同一个资产的情况（比如不同资产事务单），因此在结果中需要DISTINCT
+        if (isset($_REQUEST['id'])) {//如果指明了当前的ID
+            $sel_sub_location .= " AND parent_location_id = '".$_REQUEST['id']."'";
+        } else {
+            $sel_sub_location .= " AND (parent_location_id = '' OR parent_location_id IS NULL)";
+        }
+
+        $sel_sub_location .= " ORDER BY name";
+    //echo $sel_sub_location;
+    $bean_locations =  $db-> query($sel_sub_location);
+
+    while ( $location = $db->fetchByAssoc($bean_locations) ) {
+           $txt_jason .='{id:"'.$location['id'].'",';
+           $txt_jason .='img:"'.$location['location_icon'].'",';
+           $txt_jason .='code:"'.$location['name'].'",';
+           $txt_jason .='desc:"'.$location['location_title'].'",';
+            $txt_jason .='type:"current_using_org_none"},';
+    }
+
+    if (isset($_REQUEST['id'])) {
+      $account_id = $_SESSION['query_id'];
         $sel_sub_asset ="SELECT
+                          hat_assets.id,
+                          hat_assets.name,
+                          hat_assets.asset_desc,
+                          hat_assets.asset_icon,
+                          hat_assets.asset_status,
+                          hat_assets.enable_linear,
+                          hat_assets.enable_it_rack,
+                          hat_assets.enable_it_ports
+                        FROM
+                          hat_assets
+                        LEFT JOIN
+                          accounts
+                        ON (accounts.deleted=0
+                          AND accounts.id = hat_assets.`using_org_id`
+                          AND accounts.id ='".$account_id."')
+                        ,
+                        hat_asset_locations_hat_assets_c
+                        WHERE
+                          hat_assets.`deleted` = 0
+                        AND hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_assets_idb = hat_assets.id
+                        AND hat_asset_locations_hat_assets_c.deleted = 0
+                        AND hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_asset_locations_ida ='".$_REQUEST['id']."' "."
+                        AND hat_assets.asset_status != 'Discard'
+                        AND hat_assets.asset_status IN ('PreAssigned','Idle','Stocked')
+                        AND ".$current_mode_sql.$current_site_sql.$where_sql. " ORDER by hat_assets.name ASC";
+  }
+        /*$sel_sub_asset ="SELECT
                           hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status
                         FROM
                           hat_assets
@@ -143,7 +216,7 @@ if ($_REQUEST['type']=="current_using_org_none" && isset($_REQUEST['query_id']))
                         WHERE hat_assets.`deleted` = 0
                             AND hat_assets.asset_status != 'Discard'
                             AND hat_assets.asset_status IN ('PreAssigned','Idle','Stocked')
-                            AND ".$current_mode_sql.$current_site_sql.$where_sql. " ORDER by hat_assets.name ASC";
+                            AND ".$current_mode_sql.$current_site_sql.$where_sql. " ORDER by hat_assets.name ASC";*/
         //echo $sel_sub_asset;
 
 
@@ -196,12 +269,16 @@ if ($_REQUEST['type']=="unallocated") {
     }
 
     if (isset($_REQUEST['id'])) {
+      
         $sel_sub_asset ="SELECT
                           hat_assets.id,
                           hat_assets.name,
                           hat_assets.asset_desc,
                           hat_assets.asset_icon,
-                          hat_assets.asset_status
+                          hat_assets.asset_status,
+                          hat_assets.enable_linear,
+                          hat_assets.enable_it_rack,
+                          hat_assets.enable_it_ports
                         FROM
                           hat_assets
                         LEFT JOIN hit_racks ON (
@@ -213,7 +290,7 @@ if ($_REQUEST['type']=="unallocated") {
                           hat_assets.`deleted` = 0
                         AND hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_assets_idb = hat_assets.id
                         AND hat_asset_locations_hat_assets_c.deleted = 0
-                        AND hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_asset_locations_ida ='".$_REQUEST['id']."' "."
+                        AND hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_asset_locations_ida = '".$_REQUEST['id']."' "."
                         AND hat_assets.asset_status != 'Discard'
                         AND (
                           hat_assets.asset_status IN ('Idle', 'Stocked')
@@ -290,7 +367,7 @@ if ($_REQUEST['type']=="current_owning_org") {
         $account_id = $_SESSION['query_id'];
 
         $sel_sub_asset ="SELECT
-                          hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status
+                          hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status,hat_assets.enable_linear,hat_assets.enable_it_rack,hat_assets.enable_it_ports
                         FROM
                           hat_assets,
                           accounts,

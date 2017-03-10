@@ -21,32 +21,14 @@ class ProjectPlanner
  	 *	@param $ajaxUrl 数据交互地址
  	 */
 	public function loadGantt($get,$post,$ajaxUrl){
-		$editing=$get['editing'];
+		$editing=isset($get['editing'])?$get['editing']:"";
 		if(isset($get['to_pdf'])&&$get['to_pdf']=="true"&&$editing=="true"){
 			echo $this->inUpTask($get,$post);
 		}elseif(isset($get['project_id'])&&$get['project_id']){
 			$prj_id=$get['project_id'];
 			$users=$this->loadAssigned();
 			echo $this->loadBaseInfo("dhtmlxgantt_meadow");
-			echo '<style type="text/css">
-				.gantt_cal_light select{
-					max-width:100%;
-				}
-				.gantt_cal_light textarea{
-					max-width:100%;
-				}
-				.gantt_time_selects select{
-					width:60px;
-				}
-				.gantt_duration input{
-					line-height:0px;
-					margin:0 3px;
-				}
-				.gantt_duration [type=button]{
-					margin-top:3px;
-				}
-			</style>';
-			echo '<div id="gantt_map" style="width:99%"></div>';
+			include('include\gantt\ProjectPlannerLayout.html');
 			echo '<script> var users='.json_encode($users).';var prj_id="'.$prj_id.'";var taskData='.$this->loadGanttData($prj_id).'</script>';
 			echo $this->loadExtConfig();
 			echo '<script type="text/javascript">
@@ -97,7 +79,9 @@ class ProjectPlanner
 		while ($row=$this->db->fetchByAssoc($result)) {
 			$links['links'][]=$row;
 		}
-		$resData['collections']=$links;
+		if (isset($links)) {
+		 $resData['collections']=$links;
+		}
 		return json_encode($resData);
 	}
 

@@ -187,6 +187,7 @@
 		max-width:90%;
 	}
 
+
 	.GridTable tr td,.GridTable tr td div{
 		width: 80px;
 		height: 60px;
@@ -202,13 +203,15 @@
 	.GridTable tr td div.empty{
 		border: 1px dashed #ddd;
 	}
-	.GridTable tr td.frist,.GridTable tr td.frist div{
+	.GridTable tr td.first,.GridTable tr td.first div{
 		background: #f3eedf;
 		color: #000;
 		overflow: inherit;
 		height: 100%;
 	}
-
+	.GridTable .first.col div, .GridTable .first.col {
+		width: 4em;
+	}
 	.GridTable tr td div span {
 		line-height: 1.1em;
 		display: inline-block;
@@ -505,17 +508,17 @@ $(document).ready(function(){
 				if (isset($_REQUEST['defualt_list']) && $_REQUEST['defualt_list']!="none") {
 					//默认搜索模式
 					if ($_REQUEST['defualt_list']=="wo_asset_trans" && isset($_REQUEST['wo_id'])) {
-						echo 'initTree("LIST","'.$_REQUEST["defualt_list"].'","'.$_REQUEST["wo_id"].'");';
+						echo 'initTree($("#current_view").val(),"'.$_REQUEST["defualt_list"].'","'.$_REQUEST["wo_id"].'");';
 					} else if ($_REQUEST['defualt_list']=="rack" && isset($_REQUEST['asset_id'])) {
-						echo 'initTree("LIST","'.$_REQUEST["defualt_list"].'","'.$_REQUEST["asset_id"].'");';
+						echo 'initTree($("#current_view").val(),"'.$_REQUEST["defualt_list"].'","'.$_REQUEST["asset_id"].'");';
 					} else if ($_REQUEST['defualt_list']=="current_using_org" && isset($_REQUEST['target_using_org_id'])) {
-						echo 'initTree("LIST","current_using_org","'.$_REQUEST["target_using_org_id"].'");';
+						echo 'initTree($("#current_view").val(),"current_using_org","'.$_REQUEST["target_using_org_id"].'");';
 					} else if ($_REQUEST['defualt_list']=="current_using_org_none" && isset($_REQUEST['target_using_org_id'])) {
-						echo 'initTree("LIST","current_using_org_none","'.$_REQUEST["target_using_org_id"].'");';
+						echo 'initTree($("#current_view").val(),"current_using_org_none","'.$_REQUEST["target_using_org_id"].'");';
 					} else if ($_REQUEST['defualt_list']=="unallocated" && isset($_REQUEST['target_using_org_id'])) {
-						echo 'initTree("LIST","unallocated","'.$_REQUEST["target_using_org_id"].'");';
+						echo 'initTree($("#current_view").val(),"unallocated","'.$_REQUEST["target_using_org_id"].'");';
 					}else if ($_REQUEST['defualt_list']=="current_owning_org" && isset($_REQUEST['current_owning_org_id'])) {
-						echo 'initTree("LIST","current_owning_org","'.$_REQUEST["current_owning_org_id"].'");';
+						echo 'initTree($("#current_view").val(),"current_owning_org","'.$_REQUEST["current_owning_org_id"].'");';
 						echo "console.log ('".$_REQUEST["current_owning_org_id"]."');";
 					}else{
 						echo 'initTree("LIST","'.$_REQUEST["defualt_list"].'");';

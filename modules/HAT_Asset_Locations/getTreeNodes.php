@@ -70,7 +70,7 @@ if($_REQUEST['type']=="location") { //如果是Location来源，需要读取子�
 
 
     $bean_locations =  $db-> query($sel_sub_location);
-
+    //echo($sel_sub_location);
     while ( $location = $db->fetchByAssoc($bean_locations) ) {
            $txt_jason .='{id:"'.$location['id'].'",';
            $txt_jason .='img:"'.$location['location_icon'].'",';
@@ -83,7 +83,7 @@ if($_REQUEST['type']=="location") { //如果是Location来源，需要读取子�
 
     if (isset($_REQUEST['id'])) {
         $sel_sub_asset ="SELECT 
-                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status, hit_racks.id rack_id
+                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status, hit_racks.id rack_id,hat_assets.enable_linear,hat_assets.enable_it_rack,hat_assets.enable_it_ports
                     FROM
                         hat_assets
                         LEFT JOIN
@@ -185,7 +185,7 @@ if($_REQUEST['type']=="location") { //如果是Location来源，需要读取子�
             //echo $sel_asset_grouped_by_contact;
 
 	        $sel_sub_asset ="SELECT
-	                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status,hit_racks.id rack_id
+	                        hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status,hit_racks.id rack_id,hat_assets.enable_linear,hat_assets.enable_it_rack,hat_assets.enable_it_ports
 	                    FROM
 	                        hat_assets
                         LEFT JOIN
@@ -202,7 +202,7 @@ if($_REQUEST['type']=="location") { //如果是Location来源，需要读取子�
                     
     	} else {
     		//显示组织下挂接的资产
-	        $sel_sub_asset ="SELECT  hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status
+	        $sel_sub_asset ="SELECT  hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status,hat_assets.enable_linear,hat_assets.enable_it_rack,hat_assets.enable_it_ports
 	        					FROM hat_assets 
 	        					WHERE hat_assets.`deleted`=0 
                       AND hat_assets.asset_status != 'Discard'
@@ -252,7 +252,7 @@ if($_REQUEST['type']=="location") { //如果是Location来源，需要读取子�
     }
 } elseif ($_REQUEST['type']=="product"&&isset($_REQUEST['id'])) {
   $sql_string ="SELECT 
-  					hat_assets.id, hat_assets.name, hat_assets.asset_desc,  hat_assets.asset_icon
+  					hat_assets.id, hat_assets.name, hat_assets.asset_desc,  hat_assets.asset_icon,hat_assets.enable_linear,hat_assets.enable_it_rack,hat_assets.enable_it_ports
   					FROM hat_assets
   					WHERE hat_assets.`deleted`=0 
               AND hat_assets.asset_status != 'Discard'
@@ -263,7 +263,7 @@ if($_REQUEST['type']=="location") { //如果是Location来源，需要读取子�
 
 } elseif ($_REQUEST['type']=="asset") { //如果是Asset来源，只要读取下面的子资产,以Asset的ID检索
     $sel_sub_asset ="SELECT 
-                        hat_assets.id, hat_assets.name, hat_assets.asset_desc,  hat_assets.asset_icon, hat_assets.asset_status, hit_racks.id rack_id
+                        hat_assets.id, hat_assets.name, hat_assets.asset_desc,  hat_assets.asset_icon, hat_assets.asset_status, hit_racks.id rack_id,hat_assets.enable_linear,hat_assets.enable_it_rack,hat_assets.enable_it_ports
                     FROM 
                         hat_assets LEFT JOIN
                         hit_racks ON (hit_racks.`deleted`=0 AND hit_racks.`hat_assets_id`=hat_assets.id)
@@ -298,7 +298,10 @@ if (isset($sel_sub_asset)) {
            $txt_jason .='img:"'.$asset['asset_icon'].'",';
            $txt_jason .='code:"'.$asset['name'].'",';
            $txt_jason .='desc:"'.$asset['asset_desc'].'",';
-
+           //add by liu
+           $txt_jason .='enable_linear:"'.$asset['enable_linear'].'",';
+           $txt_jason .='enable_it_rack:"'.$asset['enable_it_rack'].'",';
+           $txt_jason .='enable_it_ports:"'.$asset['enable_it_ports'].'",';
            if (isset($asset['rack_id'])) {
             $txt_jason .='rack_id:"'.$asset['rack_id'].'",';
            }

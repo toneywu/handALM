@@ -188,8 +188,10 @@ var loadNextLevel = false;
 
 	function checkNodeSelectable(e, zTreeObj, treeNode) {
 	//依据当前节点属性以及当前的模式判断是否可以选中。
+	
 	if ((current_mode=="asset" && treeNode.type=="asset") ||//选择所有资产
-		(current_mode=="it" && treeNode.type=="asset" && node.data.enable_it_ports=="1") ||//选择IT可联网设备
+		(current_mode=="rackasset" && treeNode.type=="asset" && (treeNode.enable_it_rack=="1"||treeNode.enable_linear=="1")) ||//选择IT可联网设备
+		(current_mode=="it" && treeNode.type=="asset" &&  treeNode.enable_it_ports=="1") ||//选择IT可联网设备
 		(current_mode=="rack" && treeNode.type=="asset" && typeof(treeNode.rack_id)!="undefined") //选择机柜 
 		){
 			return true;
@@ -346,7 +348,7 @@ function showNodeDetailHTML(treeObj, node, targetDIV, keepMidPanel = false ) {
 		if (current_mode=="view") {
 			varHTML+="<div class='detail_action_panel'><ul>";
 			for (index = 0; index < node.data.btn.length; ++index) {
-			    varHTML+="<li><a href='index.php?"+node.data.btn[index]['link']+"' class='button'>"+node.data.btn[index]['lab']+"</a></li>";
+			    varHTML+="<li><a href='"+node.data.btn[index]['link']+"' class='button'>"+node.data.btn[index]['lab']+"</a></li>";
 			}
 		} else {
 			varHTML+=showNodeDetailBtn(node);
@@ -417,12 +419,13 @@ function showNodeDetailBtn(node) {
 	//如果是在选择模块下（参数current_mode!="view")。Ajax不会返回HTML形式的Buttons
 	//因此在JS中生成按钮。
 	//
-/*	console.log("current_mode="+current_mode);
+	console.log("current_mode="+current_mode);
 	console.log("node.type="+node.type);
-	console.log("node.data.rackid="+node.data.rackid);*/
+	console.log("node.data.rackid="+node.data.rackid);
 	if 
 	($("#mode").val()!="MultiSelect" &&
 	((current_mode=="asset" && node.type=="asset") ||//选择所有资产
+		(current_mode=="rackasset" && node.type=="asset" && (node.data.enable_it_rack=="1"||node.data.enable_linear=="1")) ||//选择IT可联网设备
 		(current_mode=="it" && node.type=="asset" && node.data.enable_it_ports=="1") ||//选择IT可联网设备
 		(current_mode=="rack" && node.type=="asset" && typeof(node.data.rackid)!="undefined") //选择机柜
 		))
@@ -538,7 +541,13 @@ function initTree(treeView, default_list, p3) {
 		console.log(zNodes);
 	}
 	else if (treeView=='TREE_LOCATON') {
-		var zNodes = [{name:framework_title+$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0,type:"location"}];
+		console.log("default_list:"+default_list);
+		if(default_list =='none'||default_list==''||default_list == null){
+			var zNodes = [{name:framework_title+$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0,type:"location"}];
+		}else{
+			var zNodes = [{name:framework_title+$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0, type:default_list, query_id:p3, current_mode: current_mode}];
+		}
+		//var zNodes = [{name:framework_title+$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0,type:"location"}];
 	} else if (treeView=='OWNING_ORG') {
 		var zNodes = [
 			{name:framework_title+$("#selector_view_tree option[value='"+$("#current_view").val()+"']").text(), open:true, isParent:true,pId: 0,type:"owning_org_business_type"},

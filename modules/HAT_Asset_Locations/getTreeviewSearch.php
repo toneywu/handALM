@@ -4,7 +4,9 @@ global $mod_strings, $app_strings, $app_list_strings,$dictionary;
 
 //print_r ($_POST);
 
-$select_from = "SELECT hat_assets.id, hat_assets.name, hat_assets.asset_desc,  hat_assets.asset_icon, hat_assets.asset_status, hit_racks.id rack_id
+$select_from = "SELECT hat_assets.id, hat_assets.name, hat_assets.asset_desc,  hat_assets.asset_icon, hat_assets.asset_status, hit_racks.id rack_id,hat_assets.enable_linear,
+                          hat_assets.enable_it_rack,
+                          hat_assets.enable_it_ports
           FROM hat_assets LEFT JOIN
                         hit_racks ON (hit_racks.`deleted`=0 AND hit_racks.`hat_assets_id`=hat_assets.id)";
 
@@ -78,30 +80,34 @@ if (!empty($_POST['current_owning_org_id'])&&$_POST['current_owning_org_id']!="u
 }*/
 //update by liu
 /*资产使用组织*/
+$where_using_org ="";
 if (!empty($_POST['using_org_name'])||(!empty($_POST['target_using_org_id'])&&$_POST['target_using_org_id']!="undefined")) {
-  $join_using_org = " LEFT JOIN accounts account_u ON (hat_assets.using_org_id = account_u.id";
+  $join_using_org = " LEFT JOIN accounts account_u ON (hat_assets.using_org_id = account_u.id )";
   if (!empty($_POST['using_org_name'])) {
-    $join_using_org .= " AND account_u.name like '%".$_POST['using_org_name']."%'";
+    $where_using_org .= " AND account_u.name like '%".$_POST['using_org_name']."%'";
   }
   if (!empty($_POST['target_using_org_id'])&&$_POST['target_using_org_id']!="undefined"&&($_POST['defualt_list']=="current_using_org"||$_POST['defualt_list']=="current_using_org_none")) {
-    $join_using_org .= " AND account_u.id = '".$_POST['target_using_org_id']."'";
+    $where_using_org .= " AND account_u.id = '".$_POST['target_using_org_id']."'";
   }
-  $join_using_org .= ")";
 }else{
   $join_using_org="";
+  $where_using_org="";
 }
 /*资产所属组织*/
-if (!empty($_POST['owning_org_name'])||(!empty($_POST['current_owning_org_id'])&&$_POST['current_owning_org_id']!="undefined")) {
-  $join_owning_org = " LEFT JOIN accounts account_o ON (hat_assets.owning_org_id = account_o.id";
+$where_owning_org ="";
+if (!empty($_POST['owning_org_name'])||($_POST['defualt_list']=="current_owning_org")) {
+  $join_owning_org = " LEFT JOIN accounts account_o ON (hat_assets.owning_org_id = account_o.id )";
   if (!empty($_POST['owning_org_name'])) {
-    $join_owning_org = " AND account_o.name like '%".$_POST['owning_org_name']."%'";
+    $where_owning_org .= " AND account_o.name like '%".$_POST['owning_org_name']."%'";
   }
-  if (!empty($_POST['current_owning_org_id'])&&$_POST['current_owning_org_id']!="undefined"&&($_POST['defualt_list']=="current_owning_org")) {
-    $join_owning_org .= " AND account_o.id = '".$_POST['current_owning_org_id']."'";
+  if (!empty($_POST['current_owning_org_id']) && 
+    $_POST['current_owning_org_id']!="undefined" &&
+    ($_POST['defualt_list']=="current_owning_org")  ) {
+    $where_owning_org .= " AND account_o.id = '".$_POST['current_owning_org_id']."'";
   }
-  $join_owning_org .= ")";
 }else{
   $join_owning_org="";
+  $where_owning_org="";
 }
 
 //add by liu
@@ -178,7 +184,7 @@ if (isset($_POST['defualt_list'])&&$_POST['defualt_list']!="none") {
 $where_limit  = " LIMIT 0,200";
 //echo $select_from.$where_status.$where_asset_name.$where_site_select;
 //
-$SQL_Query = $select_from.$where_framework.$join_using_org.$join_owning_org." WHERE hat_assets.deleted=0 ".$where_status.$where_asset_name.$where_asset_sn.$where_site_select.$where_sql.$current_mode_sql.$where_limit;
+$SQL_Query = $select_from.$join_using_org.$join_owning_org." WHERE hat_assets.deleted=0 ".$where_status.$where_asset_name.$where_asset_sn.$where_framework.$where_site_select.$where_owning_org.$where_using_org.$where_sql.$current_mode_sql.$where_limit;
 
 //echo $SQL_Query;
 
