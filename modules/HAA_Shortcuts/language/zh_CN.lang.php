@@ -76,5 +76,5 @@ $mod_strings = array (
     'LBL_SCENARIO'=>'场景分类',
   'LBL_SHORTCUT_ACTION'=>'模块动作',
   'LBL_URL'=>'高级URL链接 (用于特殊参数传递，自定义动作及外部链接)',
-
+'LBL_PRRAMS'=>'参数'
 );

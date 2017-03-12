@@ -28,7 +28,12 @@ $Id=$_REQUEST['record'];
 
 require_once('modules/HAOS_Insurance_Claims/createRevenueFromClaim.php');
 
-$haos_revenues_quotes_id=createRevenueFromClaim($Id);
-ob_clean();
-header('Location: index.php?module=HAOS_Revenues_Quotes&action=EditView&record='.$haos_revenues_quotes_id);
+//modify by hq 20170309
+$result = createRevenueFromClaim($Id);
+echo json_encode($result);
+//$haos_revenues_quotes_id=createRevenueFromClaim($Id);
+
+// ob_clean();
+// header('Location: index.php?module=HAOS_Revenues_Quotes&action=EditView&record='.$haos_revenues_quotes_id);
+//end modify 20170309
 ?>

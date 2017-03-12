@@ -1,4 +1,4 @@
-if(typeof(YAHOO.SUGAR) == 'undefined') {
+﻿if(typeof(YAHOO.SUGAR) == 'undefined') {
 	$.getScript("include/javascript/sugarwidgets/SugarYUIWidgets.js");
 }
 
@@ -28,7 +28,7 @@ function call_ff() {
 			error: function () { //失败
 				alert('Error loading document');
 			}
-		}); 
+		});
  };
 
 /**
@@ -86,36 +86,25 @@ function assignWoop(id,record){
 	});
 }
 
-
-/*function canEditWoop(wo_id){
-	//alert(record);
-	console.log("canEditWoop----------------------");
+//add by liu
+function canRejectWoop(wo_id){
+	console.log("canRejectWoop----------------------");
 	$.ajax({
-		url: 'index.php?to_pdf=true&module=HAM_WO&action=canEditWoop&id=' + wo_id,
+		url: 'index.php?to_pdf=true&module=HAM_WO&action=canRejectWoop&wo_id=' + wo_id,
 		async:false,
 		success: function (data) {
 			//alert(data);
 			console.log(data);
-			if(data!="0"){
-				var id_list = $.parseJSON(data);
-				console.log(id_list);
-				for(var id in id_list) {
-					
-					$("#"+id).find("a").removeAttr("onclick");
-					//$("#"+id).children('a').attr("disabled","disabled");
-					$("#"+id).find("a").removeAttr("href");
-					$("#"+id).hide();
-					console.log($("#8274c194-b479-fcd1-53e9-58af00f3d425").find("a"));
-				}
-			}else{
-				console.log("++++++++++++======");
+			if(data!="1"){
+				$("#btn_woop_reject").hide();
+				//console.log("btn_woop_reject is hidden");
 			}
 		},
 		error: function () { //失败
 			alert('Error loading document');
 		}
 	});
-}*/
+}
 
 
 
@@ -208,9 +197,12 @@ function complete_work_order(record){
  		}
  	});
  };
+
+ //add by liu
 function checkWoopStatus(wo_id){
 	//alert(record);
 	//console.log("checkWoopStatus-----"+wo_id);
+	var show;
 	$.ajax({
 		url: 'index.php?to_pdf=true&module=HAM_WO&action=checkWoopStatus&wo_id=' + wo_id,
 		success: function (data) {
@@ -218,9 +210,16 @@ function checkWoopStatus(wo_id){
 			if (data == "1" || data == 1) {
 				//console.log("hide");
 				$("#btn_complete").hide();
+				show =0;
 			}else{
 				console.log("show");
 				$("#btn_complete").show();
+				show =1;
+			}
+			if ($("#wo_status").val()=='DRAFT'||$("#wo_status").val()=='RETURNED'||show==1) {
+				$("#HAM_WO_Lines_新增_button").attr("type","submit");
+			}else{
+				$("#HAM_WO_Lines_新增_button").attr("type","hidden");
 			}
 			//console.log(data);
 		
@@ -349,7 +348,8 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 				alert('Error loading document');
 			}
 		});
-
+    //暂时不需要新增工序按钮 add by liu
+    $("#HAM_WOOP_新增_button").hide();
 	//将Subpanel的内容前移到上方TAB中
 	//工作对象行
 /*	$("#tab-content-7 div.detail-view-row").after("<div class='tab_subpanel'>"+$("#whole_subpanel_wo_line").html()+"</div>");
@@ -373,10 +373,10 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
     var wo_tr=$("#list_subpanel_wo_line table tbody").find("tr");
     var flag=false;
     wo_tr.each(function(){
-    	var val=$(this).children().eq(1).find("a").text();
+    	/*var val=$(this).children().eq(1).find("a").text();
     	if (val!="") {
     		$(this).children().last().find(".listViewTdToolsS1").remove();
-    	}
+    	}*/
     	//Add by zhangling 20170222 
     	if($("#wo_status").val()!="DRAFT"&&$("#wo_status").val()!="RETURNED"){//工单行只有在拟定或退回时可以编辑
 			$(this).children().last().find(".sugar_action_button").remove();
@@ -386,18 +386,22 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
     //$("#list_subpanel_wo_line table tbody").find("tr:gt(2)").find(".inlineButtons").remove();
     
     //Add by zhangling 20170222 
-    if($("#wo_status").val()!="DRAFT"&&$("#wo_status").val()!="RETURNED"){//工单行只有在拟定或退回时可以新增
+    if($("#wo_status").val()!="DRAFT"&&$("#wo_status").val()!="RETURNED"&&$("#wo_status").val()!="APPROVED"){//工单行只有在拟定,已批准或退回时可以新增
 		 $("#HAM_WO_Lines_新增_button").hide();
 	}
 	 // end Add zhangling 20170222
-
+	
 	//明细页面添加一个按钮
 	var change_btn=$("<input type='button' class='button' id='btn_change_status' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL')+"'>");
 	$("#duplicate_button").after(change_btn);
 	$("#btn_change_status").click(function(){ //如果点了修改状态按钮，调用Ajax修改状态
 		changeStatus($("input[name='record']").val());
 	});
-
+	//Add by zhangling 20170228 
+	if($("#wo_status").val()=="APPROVED"){//工单在已批准状态下 ，隐藏状态修改按钮
+		 $("#btn_change_status").hide();
+	}
+	// end Add zhangling 20170228
 	/**
 	 * checkAccess
 	 */
@@ -423,6 +427,8 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 	//add by yuan.chen
 	var reject_woop_btn=$("<input type='button' class='btn_detailview' id='btn_woop_reject' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_WOOP_REJECT_BUTTON_LABEL')+"'>");
 	$("#formgetWOOPQuery").append(reject_woop_btn);
+	//add by liu
+	canRejectWoop($("input[name='record']").val());
 	$("#btn_woop_reject").click(function(){
 		reject_woop($("input[name='record']").val());
 	});
@@ -493,7 +499,6 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 			}
 		}
 	});
-	//canEditWoop($("input[name='record']").val());
 
 	function getDealStatu(wo_id,module,leading){
 		var url_addr = "index.php?module=HAM_WO&action=getStatu&to_pdf=true";

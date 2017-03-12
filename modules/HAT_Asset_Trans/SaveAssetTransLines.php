@@ -69,17 +69,20 @@ function save_lines($post_data, $header, $key = ''){
                     if (isset($trans_line->target_rack_position_data) && $trans_line->target_rack_position_data!="") {
                         save_rack_allocations($trans_line, $header);
                     }
-                    save_asset_lines($trans_line);//保存行上的资产信息
+                    //update liu
                     $trans_line->acctual_complete_date = getTransactionDate();
                     $trans_line->trans_status = 'CLOSED';//将当前行标记为结束
+                    $trans_line->save();//保存行信息
+                    save_asset_lines($trans_line);//保存行上的资产信息
                 } else {
                     $trans_line->trans_status = $header->asset_trans_status;//父状态
+                    $trans_line->save();//保存行信息
                 }
 
             }
             //echo("\ntransLine Saved");line_asset_id
             //echo $trans_line;
-            $trans_line->save();//保存行信息
+            //$trans_line->save();//保存行信息
             $GLOBALS['log']->debug("OK.transLines are Saved");
         } else {
             //empty line jumped

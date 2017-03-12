@@ -30,7 +30,7 @@ function getImportDatas($doc_id){
             $titles = $row_datas;
         }else{
             for($i=1;$i<=$cv_n;$i++){
-                $row_datas['column_value'.$i]=$row['column_value'.$i];
+                $row_datas['column_value'.$i]=is_null($row['column_value'.$i])?'':$row['column_value'.$i];
             }
             $row_datas['import_status']=$row['import_status'];
             $row_datas['error_message']=$row['error_message'];

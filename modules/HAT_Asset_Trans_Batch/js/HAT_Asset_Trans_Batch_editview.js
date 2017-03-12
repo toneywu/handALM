@@ -4,6 +4,9 @@ $.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.
 $('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
 function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"HAT_Asset_Trans_Batch");
+    if($("#event_type").val()!=''){
+		 $(".panel-content a.collapsed").click();
+	}
     //$(".expandLink").click();
     //$(".panel-content a.collapsed").click();
 	//console.log($("#haa_ff_id").val());
@@ -171,8 +174,9 @@ function resetEventType(){
 	loopField("line_target_parent_asset",global_eventOptions.change_parent);
 	//add by  osmond.liu 20161123 增加资产地点的限制
 	loopField("line_target_location",global_eventOptions.change_location);
-	loopField("line_target_location_desc",global_eventOptions.change_location);
-
+	//update by liu 
+	loopField("line_target_location_desc",global_eventOptions.change_location_desc);
+    
 	loopField("line_target_asset_attribute10",global_eventOptions.change_asset_attribute10);
 	loopField("line_target_asset_attribute11",global_eventOptions.change_asset_attribute11);
 	loopField("line_target_asset_attribute12",global_eventOptions.change_asset_attribute12);

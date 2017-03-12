@@ -62,14 +62,25 @@ array (
         'default' => true,
         'width' => '10%',
       ),
-      'current_user_only' => 
+      'work_center_people' => 
+      array (
+        'type' => 'relate',
+        'studio' => 'visible',
+        'label' => 'LBL_WORK_CENTER_PEOPLE',
+        'id' => 'work_center_people_id',
+        'link' => true,
+        'width' => '10%',
+        'default' => true,
+        'name' => 'work_center_people',
+      ),
+      /*'current_user_only' => 
       array (
         'name' => 'current_user_only',
         'label' => 'LBL_CURRENT_USER_FILTER',
         'type' => 'bool',
         'default' => true,
         'width' => '10%',
-      ),
+      ),*/
     ),
     'advanced_search' => 
     array (

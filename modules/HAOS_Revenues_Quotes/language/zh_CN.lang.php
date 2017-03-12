@@ -139,4 +139,5 @@ $mod_strings = array (
   'LBL_REVENUE_QUOTE_NAME' => '收支名称备用',
   'LBL_CREATE'=>'创建发票',
     'LBL_PERIOD_NAME' => '期间',
+    'LBL_TOTAL_PRICE'=>'金额',
   );

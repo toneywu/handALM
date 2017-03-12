@@ -6,6 +6,13 @@ array (
   array (
     'templateMeta' => 
     array (
+      'includes' => 
+      array (
+        0 => 
+        array (
+          'file' => 'modules/HAT_Incidents/js/createToRevenues.js',
+        ),
+      ),
       'form' => 
       array (
         'buttons' => 
@@ -16,21 +23,25 @@ array (
           3 => 'FIND_DUPLICATES',
           4 => 
           array (
-            'customCode' => '<input type="submit" class="button" onClick="this.form.action.value=\'converToRevenue\';" value="{$MOD.LBL_CONVERT_TO_REVENUE}">',
-            'sugar_html' => 
-            array (
-              'type' => 'submit',
-              'value' => '{$MOD.LBL_CONVERT_TO_REVENUE}',
-              'htmlOptions' => 
-              array (
-                'class' => 'button',
-                'id' => 'convert_to_revenue_button',
-                'title' => '{$MOD.LBL_CONVERT_TO_REVENUE}',
-                'onclick' => 'this.form.action.value=\'converToRevenue\';',
-                'name' => 'Convert to Revenue',
-              ),
-            ),
-          ),
+            'customCode' => '<input type="button" class="button" onClick="createRevenues();" value="{$MOD.LBL_CONVERT_TO_REVENUE}">',
+          ),    
+          // 4 => 
+          // array (
+          //   'customCode' => '<input type="submit" class="button" onClick="this.form.action.value=\'converToRevenue\';" value="{$MOD.LBL_CONVERT_TO_REVENUE}">',
+          //   'sugar_html' => 
+          //   array ( 
+          //     'type' => 'submit',
+          //     'value' => '{$MOD.LBL_CONVERT_TO_REVENUE}',
+          //     'htmlOptions' => 
+          //     array (
+          //       'class' => 'button',
+          //       'id' => 'convert_to_revenue_button',
+          //       'title' => '{$MOD.LBL_CONVERT_TO_REVENUE}',
+          //       'onclick' => 'this.form.action.value=\'converToRevenue\';',
+          //       'name' => 'Convert to Revenue',
+          //     ),
+          //   ),
+          // ),
         ),
       ),
       'maxColumns' => '2',

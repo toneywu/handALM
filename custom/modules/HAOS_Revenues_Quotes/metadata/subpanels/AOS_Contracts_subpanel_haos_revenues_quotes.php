@@ -22,6 +22,14 @@ $subpanel_layout['list_fields'] = array (
     'width' => '10%',
     'default' => true,
   ),
+  'total_price'=>
+  array (
+    'type' => 'varchar',
+    'studio' => 'visible',
+    'vname' => 'LBL_TOTAL_PRICE',
+    'width' => '10%',
+    'default' => true,
+  ),
   'clear_status' => 
   array (
     'type' => 'enum',
@@ -30,13 +38,21 @@ $subpanel_layout['list_fields'] = array (
     'width' => '10%',
     'default' => true,
   ),
-  'due_date' => 
+  'CLEARED_STATUS'=>
   array (
-    'type' => 'date',
-    'vname' => 'LBL_DUE_DATE',
+    'type' => 'varchar',
+    'studio' => 'visible',
+    'vname' => 'LBL_CLEARED_STATUS',
     'width' => '10%',
     'default' => true,
   ),
+  // 'due_date' => 
+  // array (
+  //   'type' => 'date',
+  //   'vname' => 'LBL_DUE_DATE',
+  //   'width' => '10%',
+  //   'default' => true,
+  // ),
 /*  'product_total_price' => 
   array (
     'type' => 'relate',

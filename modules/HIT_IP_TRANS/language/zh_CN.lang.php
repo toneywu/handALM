@@ -78,6 +78,7 @@ $mod_strings = array (
   'LBL_PORT'=>'端口',
   'LBL_SPEED_LIMIT'=>'限速',
   'LBL_HAT_ASSET_NAME'=>'网关设备',
+  'LBL_BACKUP_ASSET_NAME'=>'网关设备(备)',
   'LBL_NAME'=>'Name',
   'LBL_CABINET'=>'机柜',
   'LBL_MONITORING'=>'监控链接',

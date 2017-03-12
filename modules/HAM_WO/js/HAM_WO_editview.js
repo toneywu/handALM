@@ -206,23 +206,68 @@ function showWOLines() {
         });
 };
 
+//add by liu
+function check_quantity(){
+        var error_msg="";
+
+        //json_data['fromview']="EditView";
+        console.log($("input[name=record]").val()+"=============================");
+        var wo_id=$("input[name='record']").val();
+        var contract_id=$("#contract_id").val();
+        $.ajax({
+            type:"POST",
+            url: "index.php?to_pdf=true&module=HAM_WO&action=checkQuantity",
+            data: "&contract_id="+contract_id+"&wo_id="+wo_id,
+            cache:false,
+            async:false,//重要的关健点在于同步和异步的参数，
+            success: function(msg){
+                error_msg=msg;
+                console.log("check_quantity = "+error_msg);
+                if(error_msg!="S"){
+
+                    BootstrapDialog.alert({
+                            type : BootstrapDialog.TYPE_DANGER,
+                            title : SUGAR.language.get('app_strings',
+                                    'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+                            message : error_msg
+                        });
+            }
+        },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                 //alert('Error loading document');
+                 console.log(textStatus+errorThrown);
+            },
+            });
+    return error_msg;
+    
+}
 
 function preValidateFunction(async_bool = false) {
 
 	var return_flag=true;
+    var error_msg="S";
 	$wo_status=$("#wo_status").val();
-	
+	console.log("preValidateFunction preValidateFunction preValidateFunction");
+    if($wo_status=="SUBMITTED"&&global_event_options.contract_completed!=""&&global_event_options.contract_completed=="SUBMITTED"&&$("#contract_id").val()==""){
+        console.log(global_event_options.contract_completed);
+        return_flag=false;
+        BootstrapDialog.alert({
+                        type : BootstrapDialog.TYPE_DANGER,
+                        title : SUGAR.language.get('app_strings',
+                                'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+                        message : "提交工单之前请关联合同！"
+                    });
+    }
+
 	console.log(global_event_options);
-	if($wo_status=="SUBMITTED"&&global_event_options.contract_completed!=""&&global_event_options.contract_completed=="SUBMITTED"&&$("#contract_id").val()==""){
-		console.log(global_event_options.contract_completed);
-		return_flag=false;
-		BootstrapDialog.alert({
-						type : BootstrapDialog.TYPE_DANGER,
-						title : SUGAR.language.get('app_strings',
-								'LBL_EMAIL_ERROR_GENERAL_TITLE'),
-						message : "提交工单之前请关联合同！"
-					});
+
+	if($wo_status=="APPROVED"&&$("#contract_id").val()!=""){
+        console.log("check_quantity1");
+		var error_msg = check_quantity(); //如果验证有误会返回错误信息
 	}
+    if(error_msg!="S"&&error_msg!=""){
+            return;
+    }
 	
 	return return_flag;
 }

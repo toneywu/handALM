@@ -46,24 +46,26 @@ class HAOS_Revenues_QuotesViewList extends ViewList
 						bool=true;
 						num++;
 					}
-				});
+				});  
 				if(bool==true){
 					$.ajax({
 						url:'?module=HAOS_Revenues_Quotes&action=checkInfo&to_pdf=1',
 						data:'&data='+data_array,
 						type:'POST',
 						success:function(data){
-							var val=JSON.parse(data);
+							var val=JSON.parse(data); 
 							if(val['type']==-1){
 								alert('创建发票时不能勾选已结清的收支项。');
 							}
 							else if(val['type']==0){
 								alert('客户与人员信息必须一致！');
 							}else{
-								location.href='?module=AOS_Invoices&action=editview&data='+val['value']+'&cord='+val['cord']+'&amount_c=0&source_code_c=HAOS_Revenues_Quotes';
+								
+								location.href='?module=AOS_Invoices&action=editview&data='+val['value']+'&cord='+val['cord']+'&amount_c=0&source_code_c=HAOS_Revenues_Quotes&name='+val['name']+'&due_date='+val['event_date'];
+								
 							}
 						}
-					});
+					}); 
 				}else{
 					alert('请勾选记录');
 				}

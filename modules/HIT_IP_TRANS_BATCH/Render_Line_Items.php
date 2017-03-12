@@ -76,6 +76,7 @@ function display_lines($focus, $field, $value, $view) {
 			
 			$sql2 = "(SELECT   '1' id
 							        ,a.name hat_asset_name,a.id hat_assets_id
+							        ,f.name backup_asset,f.id backup_asset_id
 							        ,s.name hit_ip_subnets
 							        ,s.id   hit_ip_subnets_id
 							        ,hi.name parent_ip
@@ -106,13 +107,17 @@ function display_lines($focus, $field, $value, $view) {
 									,hat.channel_num_backup
 									,ifnull(hat.date_start,'') date_start
 									,ifnull(hat.date_end,'') date_end,hat.status,hat.enable_action,hat.broadband_type,hat.child_port,hat.vlan_channel,hat.history_id
+									,acs.name using_org
 							FROM   hit_ip_trans hat
 							LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
+							LEFT JOIN hat_assets f ON (hat.backup_asset_id=f.id)
 							LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
 							LEFT JOIN hit_ip_subnets s ON (hat.hit_ip_subnets_id=s.id)
 							LEFT JOIN hit_ip hi ON (s.parent_hit_ip_id=hi.id)
 							LEFT JOIN hat_assets c ON (hat.access_assets_id=c.id)
 							LEFT JOIN hat_assets d ON (hat.access_assets_backup_id=d.id)
+							LEFT JOIN hit_ip_allocations hia ON (hat.history_id=hia.id)
+							LEFT JOIN accounts acs on (hia.target_owning_org_id=acs.id)
 							LEFT JOIN hit_ip_trans_batch h ON (h.id = hat.hit_ip_trans_batch_id) 
 							WHERE hat.deleted=0 and hat.hit_ip_trans_batch_id !='" . $focus->id . "' and h.source_wo_id='" .
 								$focus->source_wo_id . "' and h.source_woop_id!='" .
@@ -121,6 +126,7 @@ function display_lines($focus, $field, $value, $view) {
 		if ($focus->id != '') { //如果不是新增（即如果是编辑已有记录）
 			$sql1 = "(SELECT   hat.id
 					        ,a.name hat_asset_name,a.id hat_assets_id
+					        ,f.name backup_asset,f.id backup_asset_id
 					        ,s.name hit_ip_subnets
 					        ,s.id   hit_ip_subnets_id
 					        ,hi.name parent_ip
@@ -151,13 +157,17 @@ function display_lines($focus, $field, $value, $view) {
 							,hat.channel_num_backup
 							,ifnull(hat.date_start,'') date_start
 							,ifnull(hat.date_end,'') date_end ,hat.status,hat.enable_action,hat.broadband_type,hat.child_port,hat.vlan_channel,hat.history_id
+							,acs.name using_org
 					FROM   hit_ip_trans hat
 					LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
+					LEFT JOIN hat_assets f ON (hat.backup_asset_id=f.id)
 					LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
 					LEFT JOIN hit_ip_subnets s ON (hat.hit_ip_subnets_id=s.id)
 					LEFT JOIN hit_ip hi ON (s.parent_hit_ip_id=hi.id)
 					LEFT JOIN hat_assets c ON (hat.access_assets_id=c.id)
 					LEFT JOIN hat_assets d ON (hat.access_assets_backup_id=d.id)
+					LEFT JOIN hit_ip_allocations hia ON (hat.history_id=hia.id)
+					LEFT JOIN accounts acs on (hia.target_owning_org_id=acs.id)
 					WHERE hat.deleted=0 and hat.hit_ip_trans_batch_id ='" . $focus->id . "')";
 			//$sql = $sql1 . " union all (" . $sql2 . ") order by date_entered asc";
 			$result = $focus->db->query($sql1);
@@ -196,6 +206,7 @@ function display_lines($focus, $field, $value, $view) {
 			if ($focus->id != '') { //如果不是新增（即如果是编辑已有记录）
 				$sql1 = "(SELECT   hat.id
 						        ,a.name hat_asset_name
+						        ,f.name backup_asset,f.id backup_asset_id
 						        ,s.name hit_ip_subnets
 						        ,s.id   hit_ip_subnets_id
 						        ,hi.name parent_ip
@@ -225,13 +236,17 @@ function display_lines($focus, $field, $value, $view) {
 								,hat.channel_num_backup
 								,ifnull(hat.date_start,'') date_start
 								,ifnull(hat.date_end,'') date_end,hat.status,hat.enable_action,hat.broadband_type,hat.child_port,hat.vlan_channel,hat.history_id
+								,acs.name using_org
 						FROM   hit_ip_trans hat
 						LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
+						LEFT JOIN hat_assets f ON (hat.backup_asset_id=f.id)
 						LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
 						LEFT JOIN hit_ip_subnets s ON (hat.hit_ip_subnets_id=s.id)
 						LEFT JOIN hit_ip hi ON (s.parent_hit_ip_id=hi.id)
 						LEFT JOIN hat_assets c ON (hat.access_assets_id=c.id)
 						LEFT JOIN hat_assets d ON (hat.access_assets_backup_id=d.id)
+						LEFT JOIN hit_ip_allocations hia ON (hat.history_id=hia.id)
+						LEFT JOIN accounts acs on (hia.target_owning_org_id=acs.id)
 						WHERE hat.deleted=0 and  hat.hit_ip_trans_batch_id ='" . $focus->id . "')";
 				/**add by yuan.chen 2016-09-12
 					* 来源于网络事务处理分配行
@@ -315,6 +330,8 @@ function display_lines($focus, $field, $value, $view) {
 			  ,h.change_channel_content_backup
 			  ,h.change_channel_num_backup
 			  ,h.change_status,h.change_access_assets_backup_name,h.change_enable_action,h.change_broadband_type,h.change_child_port,h.change_vlan_channel
+			  ,h.change_backup_asset
+			  ,h.show_lines_using_org_flag
 			FROM
 			  hat_eventtype h 
 			WHERE h.deleted = 0 

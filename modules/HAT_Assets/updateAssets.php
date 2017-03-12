@@ -10,10 +10,11 @@
 class UpdateAsset {
 
 	function update_fix_asset($parameters_array) {
-		$username = "sysadmin";
-		$password = "welcome8";
+		$username = "XR_API";
+		$password = "asdf1234";
 		//$url = "http://111.200.33.205:1574/8020/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";
-		$url = "http://111.200.33.204:1574/8020/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";
+		/*$url = "http://111.200.33.204:1574/8020/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";*/
+		$url = "http://111.200.33.204:1574/XR_8034/webservices/SOAProvider/plsql/cux_ws_fa_transfer_pkg/";
 	
 		$assets_line_array = $parameters_array['line_asset_infos'];
 		$line_cnt = $parameters_array['line_cnt'];
@@ -26,7 +27,7 @@ class UpdateAsset {
 										            <ns1:NLSLanguage>AMERICAN</ns1:NLSLanguage>
 										            <ns1:Org_Id>81</ns1:Org_Id>
 										        </ns1:SOAHeader>
-										    <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" soap:mustUnderstand="1"><wsse:UsernameToken xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"><wsse:Username>sysadmin</wsse:Username><wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">welcome8</wsse:Password></wsse:UsernameToken></wsse:Security></soap:Header>
+										    <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" soap:mustUnderstand="1"><wsse:UsernameToken xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"><wsse:Username>XR_API</wsse:Username><wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">asdf1234</wsse:Password></wsse:UsernameToken></wsse:Security></soap:Header>
 										    <soap:Body xmlns:ns2="http://xmlns.oracle.com/apps/cux/soaprovider/plsql/cux_ws_fa_transfer_pkg/do_transfer/">
 										        <ns2:InputParameters>
 										            <ns2:P_TRANSFER_DATA>';
@@ -52,6 +53,18 @@ class UpdateAsset {
 				$fix_asset_bean = BeanFactory :: getBean('HFA_Fixed_Assets')->retrieve_by_string_fields(array (
 													'id' => $asset_bean->fixed_asset_id
 												));
+				$asset_source_bean = BeanFactory :: getBean('HAT_Asset_Sources')->retrieve_by_string_fields(array (
+													'id' => $asset_bean->asset_source_id
+												));
+				$flag = strpos($asset_source_bean->name, ':');
+				$line_source_num ="";
+	            if($flag !== FALSE){
+	                $arr = explode(':', $asset_source_bean->name);
+	                $line_source_num = $arr[0];
+	            }else{
+	                $line_source_num = $asset_source_bean->name;
+	            }
+	            //$line_source_num = $asset_source_bean->name;
 				$book_code= $fix_asset_bean->book_name;
 				
 			if(!empty($fix_asset_bean)&&$asset_bean->enable_fa==1){
@@ -63,7 +76,7 @@ class UpdateAsset {
 				$loopInput = $loopInput .'<ns2:IN_QTY>1</ns2:IN_QTY>';
 				$loopInput = $loopInput .'<ns2:ACCOUNT_ID_IN>'.$line_target_cost_center.'</ns2:ACCOUNT_ID_IN>';
 				$loopInput = $loopInput .'<ns2:SITE_IN>'.$mait_sites_bean->name.'</ns2:SITE_IN>';
-				$loopInput = $loopInput .'<ns2:SOURCE_NUM/>';
+				$loopInput = $loopInput .'<ns2:SOURCE_NUM>'.$line_source_num.'</ns2:SOURCE_NUM>';
 				$loopInput = $loopInput .'<ns2:ATTRIBUTE_CATEGORY/>';
 				$loopInput = $loopInput .'<ns2:ATTRIBUTE1>'.$line_target_asset_attribute10.'</ns2:ATTRIBUTE1>';
 				$loopInput = $loopInput .'<ns2:ATTRIBUTE2/>';
@@ -145,7 +158,7 @@ class UpdateAsset {
 		
 		
 		$result_array[0]=$x_return_status->item(0)->nodeValue;
-		$result_array[1]="Product Segment=".$production."~".$x_msg_data->item(0)->nodeValue;
+		$result_array[1]=$postAllString."Product Segment=".$production."~".$x_msg_data->item(0)->nodeValue;
 		return $result_array;
 		//$xml_array = new SimpleXMLElement($x_asset_out_data->item(0)->nodeValue);
 		/*foreach ($xml_array as $tmp) {

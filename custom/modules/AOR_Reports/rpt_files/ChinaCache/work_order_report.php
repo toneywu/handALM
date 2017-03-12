@@ -43,7 +43,6 @@ function custom_report_main($paraArray=array()){
     if ($frame_id != '' ) {
         $sql = $sql.' AND EXISTS (SELECT 1 FROM ham_maint_sites hms WHERE hms.id = hw.ham_maint_sites_id AND hms.haa_frameworks_id = "'.$frame_id.'")';
     }
-    echo $sql;
     $result = $db->query($sql);
     while ($row = $db->fetchByAssoc($result)) {
         $csv .= "\r\n";
@@ -110,16 +109,19 @@ function custom_report_main($paraArray=array()){
         }
 
     }
+    $name = getMillisecond();
+    createRptDataFile($name,$csv);
+    print $name.'.csv';
     //print $csv;
     //echo '---------------------3-------------------------';
-    $csv= $GLOBALS['locale']->translateCharset($csv, 'UTF-8', $GLOBALS['locale']->getExportCharset());
+    /*$csv= $GLOBALS['locale']->translateCharset($csv, 'UTF-8', $GLOBALS['locale']->getExportCharset());
     $name= $GLOBALS['locale']->translateCharset($name, 'UTF-8', $GLOBALS['locale']->getExportCharset());
     ob_clean();
-    header("Pragma: cache");
+    header("Pragma: cache");*/
     /*header("Content-type: text/comma-separated-values; charset=".$GLOBALS['locale']->getExportCharset());
     header("Content-Disposition: attachment; filename=\"{$name}.csv\"");*/
     //header("Content-type: text/html; charset=GBK");
-    header("Content-type: text/html; charset=".$GLOBALS['locale']->getExportCharset());
+    /*header("Content-type: text/html; charset=".$GLOBALS['locale']->getExportCharset());
     header("Content-Disposition: attachment; filename=\"{$name}.csv\"");
     header("Content-transfer-encoding: binary");
     header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
@@ -134,6 +136,6 @@ function custom_report_main($paraArray=array()){
     createRptDataFile($name,$csv);
     print $name.'.csv';
 
-    sugar_cleanup(true);
+    sugar_cleanup(true);*/
 }
 ?>

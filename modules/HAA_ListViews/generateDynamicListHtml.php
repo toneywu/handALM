@@ -76,6 +76,10 @@ class generateDynamicListHtml {
     //处理默认关键字
 		$where_clause=str_replace("%CURR_FRAME_ID%", "'".$frameworkId."'", $where_clause);
 		$where_clause=str_replace("%CURR_USER_ID%", "'".$current_user_id."'", $where_clause);
+		$where_clause = str_replace("&quot;","'",$where_clause);
+        $where_clause = str_replace("&#039;","'",$where_clause);
+        $where_clause = str_replace("&lt;","<",$where_clause);
+        $where_clause = str_replace("&gt;",">",$where_clause);
 
 		$sort_order = "";
 		$sort_column1 = $bean_v->sort_column1;
@@ -107,13 +111,18 @@ class generateDynamicListHtml {
 
 		$result1=$db->query($sql1);
 
-		if ($result1 == false) {
+		/*if ($result1 == false) {
 			$this->listviewSet["is_correct"]= false;
-			$this->listviewSet["error_msg"]= $sql1;
+			$this->listviewSet["error_msg"]= $sql1."1234".$result1;
 			return;
-		}
+		}*/
 
 		$row1=$db->fetchByAssoc($result1);
+		if ($result1 == false) {
+			$this->listviewSet["is_correct"]= false;
+			$this->listviewSet["error_msg"]= $sql1." 123 ".$where_clause;
+			return;
+		}
 		$this->listviewSet["sumpage"] = ceil($row1["sumpage"]/$page_rows);
 		$this->listviewSet["sum"] = $row1["sumpage"];
 

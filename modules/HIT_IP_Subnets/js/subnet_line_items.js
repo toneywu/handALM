@@ -19,8 +19,15 @@ function check_subnet_ip(ln) { // 检查子网IP是否合规
 	}
 
 	var ip_subnet_splited = $("#line_ip_subnet" + ln).val().split("/");// 当前行的IP
-    
 
+    //add by liu
+    //console.log(ip_subnet_splited[1]);
+    if ( typeof(ip_subnet_splited[1]) =="undefined" ) {
+    	err_msg = "子网IP地址段格式不正确!";
+    	occur_error(err_msg,ln);
+		return;
+    }
+    
 	var spilit_str = $("#line_name" + ln).val();
 	if ($("#line_ip_type" + ln).val() == 1) {
 		console.log("unchecked");
@@ -274,7 +281,8 @@ function occur_error(err_msg,ln){
 						'LBL_EMAIL_ERROR_GENERAL_TITLE')
 						+ ": " + err_msg);
 		$("#btn_LineEditorClose" + ln).prop('disabled', true);
-		$("#btn_LineEditorClose" + ln).hide();
+		//按钮不隐藏
+		//$("#btn_LineEditorClose" + ln).hide();
 
 		BootstrapDialog.alert({
 					type : BootstrapDialog.TYPE_DANGER,
@@ -587,24 +595,38 @@ function selectLineClicked(obj) {
 function deleteSelected(){
 	var json_obj={};
 	var json_data ={};
+	var check_flag = 0;
 	for (var i = 0; i < prodln; i++) {
 		if($("#selectLineClicked" + i).prop("checked")==true){
 			json_obj[i]=$("#line_id"+i).val();
+			//alert($("#displayed_line_status"+i).children("span").html());
+			if($("#displayed_line_status"+i).children("span").html()=='已分配'){
+				check_flag=1;
+			}
 		}
 	}
 	json_data["line_ids"]=json_obj;
-	$.ajax({
-			type:"POST",
-            url: 'index.php?to_pdf=true&module=HIT_IP_Subnets&action=deleteSelectedLines',
-            data: json_data,
-            success: function (data) {
-                console.log(data);
-                window.location.href = "index.php?action=DetailView&module=HIT_IP&record=" +$('input[name="record"]').val();
-            },
-            error: function () { //失败
-                alert('Error loading document');
-            }
- 	});
+	if(check_flag==0){
+		$.ajax({
+				type:"POST",
+	            url: 'index.php?to_pdf=true&module=HIT_IP_Subnets&action=deleteSelectedLines',
+	            data: json_data,
+	            success: function (data) {
+	                console.log(data);
+	                window.location.href = "index.php?action=DetailView&module=HIT_IP&record=" +$('input[name="record"]').val();
+	            },
+	            error: function () { //失败
+	                alert('Error loading document');
+	            }
+	 	});
+	}else{
+		BootstrapDialog.alert({
+							type : BootstrapDialog.TYPE_DANGER,
+							title : SUGAR.language.get('app_strings',
+									'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+							message : '选择项中存在已分配的行不可删除'
+						});
+ 	}
 }
 
 function insertTransLineHeader(tableid) {

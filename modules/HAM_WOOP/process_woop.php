@@ -188,6 +188,11 @@ while($between_woop = $db->fetchByAssoc($between_woop_result)) {
 						}
 						//toney.wu 20170220 added - end
 						$trans_line_bean->save();
+						$casset_bean = BeanFactory::getBean('HAT_Assets', $trans_line_bean->asset_id);
+						if ($casset_bean) {
+							$casset_bean->attribute9=$trans_line_bean->current_asset_attribute9;
+							$casset_bean->save();
+						}
 						//查找当前trans创建的rack_allocation，将其失效
 						$dsql='SELECT * FROM hit_rack_allocations 
 							WHERE create_by_hat_asset_trans_id ="'.$trans_line_bean->id.'"
@@ -347,9 +352,7 @@ function reverse_asset($woop_id, $wo_id, $include_reject_wo) {
 	            $changed_asset_bean->attribute11 = $changed_asset_line['current_asset_attribute11'];
 	            $changed_asset_bean->attribute12 = $changed_asset_line['current_asset_attribute12'];
 	            $changed_asset_bean->parent_asset_id = $changed_asset_line['current_parent_asset_id'];
-
 				$changed_asset_bean->save();
-
 				if ($changed_asset_bean->enable_it_ports==1) {
 
 					//如果当前资产为IT设备则进一步判断当前IT设备对应的机柜分配信息

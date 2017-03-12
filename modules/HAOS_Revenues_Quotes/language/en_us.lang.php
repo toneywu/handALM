@@ -137,4 +137,5 @@ $mod_strings = array (
   'LBL_SOURCE_TYPE' => '来源类型',
   'LBL_SOURCE_CLASS' => '来源子类',
   'LBL_REVENUE_QUOTE_NAME' => '收支名称备用',
+   'LBL_TOTAL_PRICE'=>'金额',
   );

@@ -74,16 +74,22 @@ function openAssetPopup(ln){//本文件为行上选择资产的按钮
 }
 
 function setAssetReturn(popupReplyData){
+  console.log(popupReplyData);
   //popupReplyData中lineno会做为行号一并返回
   set_return(popupReplyData);
   $.ajax({
       url:'index.php?to_pdf=true&module=HAT_Asset_Trans&action=LoadSelectedRackAsset',
       data:{idArray:popupReplyData},
+      async:false,//同步
       type:"POST",
       success: function (msg) {
 
         var returnData=JSON.parse(msg);
         $("#line_enable_partial_allocation"+returnData['ln']).val(returnData['enable_partial_allocation']);
+        $("#line_current_asset_attribute10"+returnData['ln']).val(returnData['attribute10']);
+        $("#line_current_asset_attribute11"+returnData['ln']).val(returnData['attribute11']);
+        $("#line_current_cost_center_id"+returnData['ln']).val(returnData['cost_center_id']);
+        $("#line_current_cost_center"+returnData['ln']).val(returnData['cost_center']);
       },
       error: function () { //失败
         alert('Error loading document');
@@ -741,8 +747,8 @@ return result;
 }
 
 function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
-  resetEditorFields(ln);//初始化编辑状态下的一些字段
   generateLineDesc(ln);//去生成Description
+  resetEditorFields(ln);//初始化编辑状态下的一些字段
   $("#displayed_line_asset"+ln).html("<a href='index.php?module=HAT_Assets&action=DetailView&record="+$("#line_asset_id"+ln).val()+"'>"+$("#line_asset"+ln).val()+"</a>");
   $("#displayed_line_name"+ln).html($("#line_name"+ln).val());
   $("#displayed_line_description"+ln).html($("#line_description"+ln).val());

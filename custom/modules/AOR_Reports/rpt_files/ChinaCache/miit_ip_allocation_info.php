@@ -6,6 +6,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 function custom_report_main($paraArray=array()){
     //echo '---------------------1-------------------------';
     global $db,$bean_module;
+    $info='begin ';
     ini_set('zlib.output_compression', 'Off');
     require_once('include/export_utils.php');
     $delimiter = getDelimiter();
@@ -23,12 +24,12 @@ function custom_report_main($paraArray=array()){
     hw.ham_maint_sites_id,
 
     IF (
-    his.ip_type = 0,
+    his.ip_type = 1,
     his.ip_lowest,
     his.ip_subnet) start_ip,
 
     IF (
-    his.ip_type = 0,
+    his.ip_type = 1,
     his.ip_highest,
     "") end_ip,
     his.gateway
@@ -38,7 +39,8 @@ function custom_report_main($paraArray=array()){
     LEFT JOIN hit_ip_allocations hia ON hw.id = hia.source_wo_id
     LEFT JOIN hit_ip_subnets his ON hia.hit_ip_subnets_id = his.id
     WHERE
-    hw.wo_status = "CLOSED"
+    hw.deleted = 0
+    and hw.wo_status = "COMPLETED"
     AND (
     ha. NAME LIKE "标准%"
     OR ha. NAME LIKE "绿通%"
@@ -140,15 +142,15 @@ function custom_report_main($paraArray=array()){
         $csv .= encloseForCSV($val3);
         
     }
+    $name = getMillisecond();
+    createRptDataFile($name,$csv);
+    print $name.'.csv';
     //print $csv;
     //echo '---------------------3-------------------------';
-    $csv= $GLOBALS['locale']->translateCharset($csv, 'UTF-8', $GLOBALS['locale']->getExportCharset());
+  /*  $csv= $GLOBALS['locale']->translateCharset($csv, 'UTF-8', $GLOBALS['locale']->getExportCharset());
     $name= $GLOBALS['locale']->translateCharset($name, 'UTF-8', $GLOBALS['locale']->getExportCharset());
     ob_clean();
     header("Pragma: cache");
-    /*header("Content-type: text/comma-separated-values; charset=".$GLOBALS['locale']->getExportCharset());
-    header("Content-Disposition: attachment; filename=\"{$name}.csv\"");*/
-    //header("Content-type: text/html; charset=GBK");
     header("Content-type: text/html; charset=".$GLOBALS['locale']->getExportCharset());
     header("Content-Disposition: attachment; filename=\"{$name}.csv\"");
     header("Content-transfer-encoding: binary");
@@ -164,6 +166,6 @@ function custom_report_main($paraArray=array()){
     createRptDataFile($name,$csv);
     print $name.'.csv';
 
-    sugar_cleanup(true);
+    sugar_cleanup(true);*/
 }
 ?>

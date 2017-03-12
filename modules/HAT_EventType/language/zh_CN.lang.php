@@ -144,5 +144,6 @@ $mod_strings = array (
   'LBL_NO_ADD_ASSET_LINES_FLAG'=>'是否不可添加资产事务处理行',
   'LBL_NO_ADD_IP_LINES_FLAG'=>'是否不可添加网络事务处理行',
   'LBL_NO_LINES_INACTIVE_USING_FLAG'=>'是否可批量终止使用分配',
+  'LBL_SHOW_LINES_USING_ORG_FLAG'=>'是否显示处理行中分配使用组织',
   'LBL_TAG'=>'Tag',
 );

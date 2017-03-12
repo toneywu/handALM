@@ -252,24 +252,24 @@ array (
     'default' => false,
     'sortable' => false,
   ),
-//   'SEX_C'=>
-//   array (
-//     'type' => 'enum',
-//     'studio' => 'visible',
-//     'default' => false,
-//     'label' => 'LBL_ASSET_TRANS_STATUS',
-//     'width' => '5%',
-//     'customCode'=>'<span">{$SEX_C}</span>',
-//   ),
-// 'COUNTRIES_C'=>
-//   array (
-//     'type' => 'enum',
-//     'studio' => 'visible',
-//     'default' => false,
-//     'label' => 'LBL_COUNTRIES',
-//     'width' => '5%',
-//     'customCode'=>'<span">{$countries_c}</span>',
-//   ),
+  'SEX_C'=>
+  array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'default' => false,
+    'label' => 'LBL_SEX',
+    'width' => '5%',
+    'customCode'=>'<span">{$SEX_C}</span>',
+  ), 
+'COUNTRIES_C'=>
+  array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'default' => false,
+    'label' => 'LBL_COUNTRIES',
+    'width' => '5%',
+    'customCode'=>'<span">{$countries_c}</span>',
+  ),
 
   'EMPLOYEE_NUMBER_C'=>
   array (
@@ -277,6 +277,56 @@ array (
     'label' => 'LBL_EMPLOYEE_NUMBER',
     'default' => false,
   ),
-  
+  'CHINESE_NAME_C'=>
+  array (
+    'width' => '10%',
+    'label' => 'LBL_CHINESE_NAME',
+    'default' => false,
+  ),
+  'ID_TYPE_C'=>
+   array (
+    'type' => 'enum',
+    'studio' => 'visible',
+    'default' => false,
+    'label' => 'LBL_ID_TYPE',
+    'width' => '10%',
+    'customCode'=>'<span">{$id_type_c}</span>',
+  ),
+   'ID_NUMBER_C'=>
+    array (
+    'width' => '10%',
+    'label' => 'LBL_ID_NUMBER',
+    'default' => false,
+  ),
+    'PRIMARY_ADDRESS_COUNTRY'=>
+ array (
+    'width' => '10%',
+    'label' => 'LBL_PRIMARY_ADDRESS_COUNTRY',
+    'default' => false,
+  ),
+ 'ALT_ADDRESS_COUNTRY'=>
+ array (
+    'width' => '10%',
+    'label' => 'LBL_ALT_ADDRESS_COUNTRY',
+    'default' => false,
+  ),
+  'REPORT_TO_NAME'=>
+  array (
+    'type' => 'relate',
+    'default' => false,
+    'studio' => 'visible',
+    'label' => 'LBL_REPORTS_TO',
+    'id' => 'REPORTS_TO_ID',
+    'link' => true,
+    'width' => '10%',
+  ),
+  'BIRTHDATE'=>
+  array (
+    'width' => '8%',
+    'label' => 'LBL_BIRTHDATE',
+    'default' => false,
+  ),
+ 
+
 );
 ?>

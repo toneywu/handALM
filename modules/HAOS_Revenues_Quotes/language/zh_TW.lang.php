@@ -105,4 +105,5 @@ $mod_strings = array (
   'LBL_CONTRACT_NUMBER_CONTACT_ID' => '人员工号 (related 人员 ID)',
   'LBL_SOURCE_NUMBER_AOS_CONTRACTS_ID' => '来源编号 (related  ID)',
   'LBL_SOURCE_NUMBER' => '来源编号',
+   'LBL_TOTAL_PRICE'=>'金额',
 );

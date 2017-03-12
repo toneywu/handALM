@@ -35,7 +35,7 @@ function createRevenue($revenueRow,$quoteRow){
     $revenueRow['prepay_flag'] = $revenueRow['prepay_flag'];
     $revenueRow['deposit_flag'] = $revenueRow['deposit_flag'];
     $revenueRow['revenue_quote_number'] = '';
-    $revenueRow['date_entered'] = '';
+    $revenueRow['date_entered'] = ''; 
     $revenueRow['date_modified'] = '';
     $revenueRow['period_name'] = $revenueRow['period_name'];
     //处理事件类型
@@ -53,11 +53,11 @@ function createRevenue($revenueRow,$quoteRow){
             $revenueRow['hat_eventtype_id_c']= '';
         }
     }
-    else {
+    else { 
         $bean_types = BeanFactory :: getBean('HAT_EventType')->retrieve_by_string_fields(array (
             'event_short_desc' => 'default',
             'basic_type' => 'REVENUE'
-            ));
+            )); 
         if ($bean_types) { 
             $revenueRow['hat_eventtype_id_c']= isset($bean_types->id)?$bean_types->id:'';
             $revenueRow['event_type'] = isset($bean_types->name)?$bean_types->name:'' ;
@@ -82,7 +82,8 @@ function createRevenue($revenueRow,$quoteRow){
     }
 
     $revenue->populateFromRow($revenueRow);
-    $revenue->process_save_dates =false;
+    $revenue->process_save_dates =false; 
+    $revenue->hat_eventtype_id_c =$revenueRow['hat_eventtype_id_c'];
     $revenue->source_id = $revenueRow['source_id'];
     $revenue->save();
     $revenue_quote_id=$revenue->id;

@@ -15,17 +15,17 @@ if (isset($Bean_list)) {
 		if ($Bean_list[$x]->shortcut_action=="Edit") {
     		if(ACLController::checkAccess($Bean_list[$x]->shortcut_module, 'edit', true)) {
     			if (empty($Bean_list[$x]->url)) { //如果没有指定特殊的URL，按Module和Action进行指向
-    				$html_str_url = "<a href='index.php?module=".$Bean_list[$x]->shortcut_module."&action=EditView' title='".$Bean_list[$x]->shortcut_module."'>";
+    				$html_str_url = "<a href='index.php?module=".$Bean_list[$x]->shortcut_module."&action=EditView".$Bean_list[$x]->parameters."' title='".$Bean_list[$x]->shortcut_module."'>";
 				} else {//如果有指定URL，则按指定进行导向
-					$html_str_url = "<a href='".$Bean_list[$x]->url."'>";
+					$html_str_url = "<a href='".$Bean_list[$x]->url.$Bean_list[$x]->parameters."'>";
 				}
     		}//end if for access check
 		}else {
     		if(ACLController::checkAccess($Bean_list[$x]->shortcut_module, 'list', true)) {
     			if (empty($Bean_list[$x]->url)) { //如果没有指定特殊的URL，按Module和Action进行指向
-    				$html_str_url = "<a href='index.php?module=".$Bean_list[$x]->shortcut_module."&action=index' title='".$Bean_list[$x]->shortcut_module."'>";
+    				$html_str_url = "<a href='index.php?module=".$Bean_list[$x]->shortcut_module."&action=index".$Bean_list[$x]->parameters."' title='".$Bean_list[$x]->shortcut_module."'>";
 				} else {//如果有指定URL，则按指定进行导向
-					$html_str_url = "<a href='".$Bean_list[$x]->url."'>";
+					$html_str_url = "<a href='".$Bean_list[$x]->url.$Bean_list[$x]->parameters."'>";
 				}
     		}//end if for access check
 		}//end if for Edit/List action check

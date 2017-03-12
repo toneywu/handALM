@@ -10,11 +10,12 @@
 //soapWS安全信息
 $record = $_GET["record"];
 echo 'record = ' . $record . "<br>";
-$username = "sysadmin";
-$password = "welcome8";
+$username = "XR_API";
+$password = "asdf1234";
 $startdate = "2015-05-06";
 $enddate = "2016-07-26";
-$url = "http://111.200.33.205:1574/8020/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";
+/*$url = "http://111.200.33.205:1574/8020/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";*/
+$url = "http://111.200.33.204:1574/XR_8034/webservices/SOAProvider/plsql/cux_ws_transfer_asset_pkg/";
 //echo "mdf password = " . md5($password);
 
 $postAllString = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
@@ -26,7 +27,7 @@ $postAllString = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/env
 							            <ns1:NLSLanguage>AMERICAN</ns1:NLSLanguage>
 							            <ns1:Org_Id>81</ns1:Org_Id>
 							        </ns1:SOAHeader>
-							    <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" soap:mustUnderstand="1"><wsse:UsernameToken xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"><wsse:Username>sysadmin</wsse:Username><wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">welcome8</wsse:Password></wsse:UsernameToken></wsse:Security></soap:Header>
+							    <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" soap:mustUnderstand="1"><wsse:UsernameToken xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"><wsse:Username>XR_API</wsse:Username><wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">asdf1234</wsse:Password></wsse:UsernameToken></wsse:Security></soap:Header>
 							    <soap:Body xmlns:ns2="http://xmlns.oracle.com/apps/cux/soaprovider/plsql/cux_ws_transfer_asset_pkg/push_asset/">
 							        <ns2:InputParameters>
 							            <ns2:P_ASSET_INFO_DATA><ROOT LANG="CHS" SECURITY="TRUE" VERSION="100"><HEADERS>';

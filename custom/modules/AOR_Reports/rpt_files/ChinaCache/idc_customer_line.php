@@ -27,18 +27,18 @@ function custom_report_main($paraArray=array()){
     ha.size,
     ha.weight
     FROM
-    hat_assets ha
+        hat_assets ha
     LEFT JOIN accounts a ON ha.owning_org_id = a.id
     LEFT JOIN aos_products ap ON ha.aos_products_id = ap.id
     LEFT JOIN aos_product_categories apc ON ha.aos_product_categories_id = apc.id
     WHERE
-    a. NAME <> "自用"
+        ha.deleted = 0
     AND (
-    ap.`name` = "专线"
-    OR (
-    ap.`name` = "裸光纤"
-    AND apc.`name` = "ADSL"
-    )
+        ap.`name` = "裸光纤"
+        OR (
+            ap.`name` = "专线"
+            AND apc.`name` = "ADSL"
+        )
     )
     AND ha.haa_frameworks_id ="'.$parameterValueArray[0].'"';
 
@@ -72,16 +72,19 @@ function custom_report_main($paraArray=array()){
         $csv .= encloseForCSV($row['size'].$row['weight']);
         
     }
+    $name = getMillisecond();
+    createRptDataFile($name,$csv);
+    print $name.'.csv';
     //print $csv;
     //echo '---------------------3-------------------------';
-    $csv= $GLOBALS['locale']->translateCharset($csv, 'UTF-8', $GLOBALS['locale']->getExportCharset());
+    /*$csv= $GLOBALS['locale']->translateCharset($csv, 'UTF-8', $GLOBALS['locale']->getExportCharset());
     $name= $GLOBALS['locale']->translateCharset($name, 'UTF-8', $GLOBALS['locale']->getExportCharset());
     ob_clean();
-    header("Pragma: cache");
+    header("Pragma: cache");*/
     /*header("Content-type: text/comma-separated-values; charset=".$GLOBALS['locale']->getExportCharset());
     header("Content-Disposition: attachment; filename=\"{$name}.csv\"");*/
     //header("Content-type: text/html; charset=GBK");
-    header("Content-type: text/html; charset=".$GLOBALS['locale']->getExportCharset());
+    /*header("Content-type: text/html; charset=".$GLOBALS['locale']->getExportCharset());
     header("Content-Disposition: attachment; filename=\"{$name}.csv\"");
     header("Content-transfer-encoding: binary");
     header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
@@ -96,6 +99,6 @@ function custom_report_main($paraArray=array()){
     createRptDataFile($name,$csv);
     print $name.'.csv';
 
-    sugar_cleanup(true);
+    sugar_cleanup(true);*/
 }
 ?>

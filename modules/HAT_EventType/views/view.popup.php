@@ -9,17 +9,17 @@ class HAT_EventTypeViewPopup extends ViewPopup
 
     function Display() {
 
-       global $mod_strings, $app_strings, $app_list_strings;
-       global $db;
+     global $mod_strings, $app_strings, $app_list_strings;
+     global $db;
 
         //由于资产事务处理界面与EventType定义界面类型名称有些不统一，因此在此进行一个转化
-       if ($_REQUEST['basic_type_advanced']=='HAT_Asset_Trans_Batch'){
-            $_REQUEST['basic_type_advanced']='AT_MOVE';
-        } else if ($_REQUEST['basic_type_advanced']=='HIT_IP_TRANS_BATCH') {
-            $_REQUEST['basic_type_advanced']='NETWORK';
-        }
+     if ($_REQUEST['basic_type_advanced']=='HAT_Asset_Trans_Batch'){
+        $_REQUEST['basic_type_advanced']='AT_MOVE';
+    } else if ($_REQUEST['basic_type_advanced']=='HIT_IP_TRANS_BATCH') {
+        $_REQUEST['basic_type_advanced']='NETWORK';
+    }
 
-if( isset($_GET['module_name']) && $_GET['module_name'] =='HAT_EventType'){
+    if( isset($_GET['module_name']) && $_GET['module_name'] =='HAT_EventType'){
       parent::Display();//如果是当前模块自己，就不显示
   }
   else{
@@ -40,7 +40,7 @@ if( isset($_GET['module_name']) && $_GET['module_name'] =='HAT_EventType'){
 		/* 以下为自定义的界面 by toney.wu
 		/*****************************************************************/
 
-     echo ('<script type="text/javascript" src="include/javascript/popup_helper.js"></script>');
+       echo ('<script type="text/javascript" src="include/javascript/popup_helper.js"></script>');
     	echo ('<script type="text/javascript" src="modules/HAT_EventType/js/EventType_popupview.js"></script>');//
 
     	echo '<form id="popup_query_form" name="popup_query_form">';
@@ -63,28 +63,32 @@ if( isset($_GET['module_name']) && $_GET['module_name'] =='HAT_EventType'){
         /***************************************************************/
         /* 以下为加载数据 by toney.wu
         /*****************************************************************/
-
-        $beanEventTypes = BeanFactory::getBean('HAT_EventType')->get_full_list('name',"hat_eventtype.basic_type = '".$_REQUEST['basic_type_advanced']."' AND hat_eventtype.manual_create_enable_flag=1 AND hat_eventtype.haa_frameworks_id= '".$_SESSION["current_framework"]."' and hat_eventtype.tag_advanced='".$_REQUEST['tag']."'");
+        if ($_REQUEST['tag_advanced']!=''){
+         $beanEventTypes = BeanFactory::getBean('HAT_EventType')->get_full_list('name',"hat_eventtype.basic_type = '".$_REQUEST['basic_type_advanced']."' AND hat_eventtype.manual_create_enable_flag=1 AND hat_eventtype.haa_frameworks_id= '".$_SESSION["current_framework"]."' and hat_eventtype.tag='".$_REQUEST['tag_advanced']."'");  
+     }
+     else{
+        $beanEventTypes = BeanFactory::getBean('HAT_EventType')->get_full_list('name',"hat_eventtype.basic_type = '".$_REQUEST['basic_type_advanced']."' AND hat_eventtype.manual_create_enable_flag=1 AND hat_eventtype.haa_frameworks_id= '".$_SESSION["current_framework"]."'");  
+    }
 
         //echo ("hat_eventtype.basic_type = '".$_REQUEST['basic_type_advanced']."' AND manual_create_enable_flag=1 AND hat_eventtype.haa_frameworks_id= '".$_SESSION["current_framework"]."'");
 
-        $txt_jason='{name:"'.$app_list_strings['hat_event_type_list'][$_REQUEST['basic_type_advanced']].'", open:true, isParent:true,pId:0,id:"ROOT"},';
+    $txt_jason='{name:"'.$app_list_strings['hat_event_type_list'][$_REQUEST['basic_type_advanced']].'", open:true, isParent:true,pId:0,id:"ROOT"},';
         //以当前应用名称做为根结点的名称
 
-        if (isset($beanEventTypes)) {
-            foreach ($beanEventTypes as $beanEventType) {
-                $txt_jason.="{";
-                foreach ($beanEventType->field_name_map as $key => $value) {
+    if (isset($beanEventTypes)) {
+        foreach ($beanEventTypes as $beanEventType) {
+            $txt_jason.="{";
+            foreach ($beanEventType->field_name_map as $key => $value) {
                         //echo $key."=".(gettype($value)).":"."<br/>";
-                    if ($key == 'parent_eventtype_id'){
+                if ($key == 'parent_eventtype_id'){
                             //Parent_eventtype_id需要特别处理
-                        $txt_jason .='pId:"'.(($beanEventType->parent_eventtype_id=="")?"ROOT":$beanEventType->parent_eventtype_id).'",';
-                    }else {
-                        if (isset($beanEventType->$key)) {
-                            $txt_jason .=$key.':"'.$beanEventType->$key.'",';
-                        }
+                    $txt_jason .='pId:"'.(($beanEventType->parent_eventtype_id=="")?"ROOT":$beanEventType->parent_eventtype_id).'",';
+                }else {
+                    if (isset($beanEventType->$key)) {
+                        $txt_jason .=$key.':"'.$beanEventType->$key.'",';
                     }
                 }
+            }
                     $txt_jason  = substr($txt_jason,0,strlen($txt_jason)-1);//去除最后一个,
                     $txt_jason.="},";
                 }

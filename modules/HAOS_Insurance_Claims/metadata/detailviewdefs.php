@@ -12,6 +12,10 @@ array (
         array (
           'file' => 'modules/HAOS_Insurance_Claims/js/HAOS_Insurance_Claims.js',
           ),
+         1 => 
+        array (
+          'file' => 'modules/HAOS_Insurance_Claims/js/createToRevenues.js',
+        ),
         ),
       'form' => 
       array (
@@ -21,23 +25,27 @@ array (
           1 => 'DUPLICATE',
           2 => 'DELETE',
           3 => 'FIND_DUPLICATES',
-          4 => 
+            2 => 
           array (
-            'customCode' => '<input type="submit" class="button" onClick="this.form.action.value=\'createToRevenues\';" value="{$MOD.LBL_CREATE_REVENUE}">',
-            'sugar_html' => 
-            array (
-              'type' => 'submit',
-              'value' => '{$MOD.LBL_CREATE_REVENUE}',
-              'htmlOptions' => 
-              array (
-                'class' => 'button',
-                'id' => 'create_to_revenue_button',
-                'title' => '{$MOD.LBL_CREATE_REVENUE}',
-                'onclick' => 'this.form.action.value=\'createToRevenues\';',
-                'name' => 'Create to Revenue',
-                ),
-              ),
-            ),
+            'customCode' => '<input type="button" class="button" onClick="createRevenues();" value="{$MOD.LBL_CREATE_REVENUE}">',
+          ),   
+          // 4 => 
+          // array (
+          //   'customCode' => '<input type="submit" class="button" onClick="this.form.action.value=\'createToRevenues\';" value="{$MOD.LBL_CREATE_REVENUE}">',
+          //   'sugar_html' => 
+          //   array (
+          //     'type' => 'submit',
+          //     'value' => '{$MOD.LBL_CREATE_REVENUE}',
+          //     'htmlOptions' => 
+          //     array (
+          //       'class' => 'button',
+          //       'id' => 'create_to_revenue_button',
+          //       'title' => '{$MOD.LBL_CREATE_REVENUE}',
+          //       'onclick' => 'this.form.action.value=\'createToRevenues\';',
+          //       'name' => 'Create to Revenue',
+          //       ),
+          //     ),
+          //   ),
           ),
         ),
       'maxColumns' => '2',

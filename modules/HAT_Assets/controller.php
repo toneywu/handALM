@@ -47,8 +47,9 @@ class HAT_AssetsController extends SugarController {
 				echo "Sent Record ID {$bean->id}</br>";
 			}*/
 			$assetUtil = new PushAssetsUtil();
-			$postAllString = $assetUtil->gernerat_xml_str($recordIds, 'sysadmin', 'welcome8', '2015-05-06', '2016-07-26');
-			$url = "http://111.200.33.205:1574/8020/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";
+			$postAllString = $assetUtil->gernerat_xml_str($recordIds, 'XR_API', 'asdf1234', '2015-05-06', '2016-07-26');
+			/*$url = "http://111.200.33.205:1574/8020/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";*/
+			$url = "http://111.200.33.204:1574/XR_8034/webservices/SOAProvider/plsql/cux_ws_transfer_asset_pkg/";
 			$error_message=$assetUtil->call_ws($postAllString, $url);
 			$queryParams = array(
 							'module' => 'HAT_Assets',

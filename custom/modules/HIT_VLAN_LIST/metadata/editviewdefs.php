@@ -6,6 +6,13 @@ array (
   array (
     'templateMeta' => 
     array (
+      'includes' => 
+      array (
+        1 => 
+        array (
+          'file' => 'modules/HIT_VLAN_LIST/js/HIT_VLAN_LIST_editview.js',
+        ),
+      ),
       'maxColumns' => '2',
       'widths' => 
       array (

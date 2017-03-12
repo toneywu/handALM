@@ -76,4 +76,5 @@ $mod_strings = array (
   'LBL_SCENARIO'=>'Scenario Code',
   'LBL_SHORTCUT_ACTION'=>'Module Action',
   'LBL_URL'=>'Advanced URL (for addtional parameters, customized actions or external site)',
+  'LBL_PRRAMS'=>'Parameters',
 );
