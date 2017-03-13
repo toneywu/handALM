@@ -181,6 +181,10 @@ array (
           0 => 'enable_fa',
           1 => 'fixed_asset',
           ),
+        9 => 
+        array (
+          0 => 'enable_ebs',
+          ),
         ),
       'lbl_detailview_panel7' => 
       array (

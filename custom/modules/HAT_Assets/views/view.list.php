@@ -31,9 +31,9 @@ function processSearchForm(){
   parent::processSearchForm();
   $haa_frameworks_id=$_SESSION["current_framework"];
   if ($this->where) {
-    $this->where.=" and haa_frameworks_id='".$haa_frameworks_id."'";
+    $this->where.=" and hat_assets.haa_frameworks_id='".$haa_frameworks_id."'";
   }else{
-    $this->where="haa_frameworks_id='".$haa_frameworks_id."'";
+    $this->where=" hat_assets.haa_frameworks_id='".$haa_frameworks_id."'";
   }
 }
 

@@ -7,4 +7,6 @@ $mod_strings = array (
   'LBL_ASSET_STATUS' => '状态',
   'LBL_USING_PERSON'=>'使用人',
   'LBL_WO_SUBPANEL' => '工作单',
+  'LBL_ENABLE_EBS' => '已传入到新增资产界面',
+  'LBL_ASSET_SOURCE1' => '采购订单编号/行号',
 );

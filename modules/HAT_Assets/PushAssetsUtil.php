@@ -61,6 +61,7 @@ class PushAssetsUtil {
 				$loopInput = '<HEADER>';
 				$guid = create_guid();
 				$loopInput = $loopInput . '<IF_ID>' . $guid . '</IF_ID>';
+				$loopInput = $loopInput . '<ASSET_ID>' . $record . '</ASSET_ID>';
 				$loopInput = $loopInput . '<FRAMEWORK_CODE>' . $assetBean->framework . '</FRAMEWORK_CODE>';
 				$loopInput = $loopInput . '<ASSET_GROUP_NAME>' . $assetBean->asset_group . '</ASSET_GROUP_NAME>';
 				$loopInput = $loopInput . '<NAME>' . $assetBean->name . '</NAME>';
@@ -172,6 +173,12 @@ class PushAssetsUtil {
 			//echo 'ERROR_MESSAGE =' . $tmp->ERROR_MESSAGE . "<br>";
 			if($tmp->RETURN_STATUS=="S"||$tmp->RETURN_STATUS==""){
 				$error_message=$error_message."资产编号:".$tmp->RESOURCE_NUM."创建EBS资产成功;";
+				//add by liu
+			$asset_bean = BeanFactory :: getBean('HAT_Assets')->retrieve_by_string_fields(array (
+													'id' => $tmp->RESOURCE_ID
+												));
+			$asset_bean->enable_ebs = 1;
+			$asset_bean->save();
 			}else{
 				$error_message=$error_message."资产编号:".$tmp->RESOURCE_NUM."创建EBS资产出现问题:".$tmp->ERROR_MESSAGE.";";
 			}

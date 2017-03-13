@@ -324,7 +324,38 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
  		}
  	});
  };
+//add by liu
+function check_lines(){
+        var error_msg="";
 
+        var wo_id=$("input[name='record']").val();
+        $.ajax({
+            type:"POST",
+            url: "index.php?to_pdf=true&module=HAM_WO&action=checkLines",
+            data: "&wo_id="+wo_id,
+            cache:false,
+            async:false,//重要的关健点在于同步和异步的参数，
+            success: function(msg){
+                error_msg=msg;
+                console.log("check_lines = "+error_msg);
+                if(error_msg!="S"){
+
+                    BootstrapDialog.alert({
+                            type : BootstrapDialog.TYPE_DANGER,
+                            title : SUGAR.language.get('app_strings',
+                                    'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+                            message : error_msg
+                        });
+            }
+        },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                 //alert('Error loading document');
+                 console.log(textStatus+errorThrown);
+            },
+            });
+    return error_msg;
+    
+}
 /**
  * document 页面加载 入口函数
  */
@@ -395,7 +426,12 @@ function process_woop(woop_id,wo_id,include_reject_wo_val){
 	var change_btn=$("<input type='button' class='button' id='btn_change_status' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL')+"'>");
 	$("#duplicate_button").after(change_btn);
 	$("#btn_change_status").click(function(){ //如果点了修改状态按钮，调用Ajax修改状态
-		changeStatus($("input[name='record']").val());
+		//状态改为已提交审批的时候,保存工单必须要有工作对像行 by liu
+		var error_msg = check_lines();
+		if (error_msg == "S" ||error_msg =="") {
+			changeStatus($("input[name='record']").val());
+		}
+
 	});
 	//Add by zhangling 20170228 
 	if($("#wo_status").val()=="APPROVED"){//工单在已批准状态下 ，隐藏状态修改按钮

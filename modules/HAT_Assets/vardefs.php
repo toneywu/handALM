@@ -1055,6 +1055,26 @@ $dictionary['HAT_Assets'] = array(
       'reportable' => true,
       'unified_search' => false,
       'merge_filter' => 'disabled',
+      ),
+      'enable_ebs' =>
+    array (
+      'required' => false,
+      'name' => 'enable_ebs',
+      'vname' => 'LBL_ENABLE_EBS',
+      'type' => 'bool',
+      'massupdate' => 0,
+      'default' => '0',
+      'no_default' => false,
+      'comments' => '',
+      'help' => '',
+      'importable' => 'true',
+      'duplicate_merge' => 'disabled',
+      'duplicate_merge_dom_value' => '0',
+      'audited' => false,
+      'inline_edit' => true,
+      'reportable' => true,
+      'unified_search' => false,
+      'merge_filter' => 'disabled',
       ),    
     'use_location_gis' =>
     array (

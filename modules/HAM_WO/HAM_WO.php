@@ -246,8 +246,10 @@ class HAM_WO extends HAM_WO_sugar {
 		$check_wo_line = BeanFactory :: getBean("HAM_WO_Lines");
 		//importantent
 		$check_wo_lines = BeanFactory :: getBean('HAM_WO_Lines')->get_full_list('', "ham_wo_lines.contract_id = '{$this->contract_id}' AND ham_wo_lines.ham_wo_id = '{$this->id}'");
-
-		if (count($check_wo_lines) == 0) {
+        
+        //绿通的时候不把合同行保存到工作对像行,如果状态为拟定和已退回或id为空的时候,暂时定为绿通
+		if (count($check_wo_lines) == 0
+			&&(($this->id=='')||($this->wo_status=='DRAFT'||$this->wo_status=='RETURNED'))) {
 
 			if ($contact_products_beans != null) {
 				foreach ($contact_products_beans as $contact_products_bean) {
