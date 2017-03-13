@@ -11,12 +11,36 @@ array (
         'name' => 'name',
         'default' => true,
       ),
-      'current_user_only' => 
+      'asset_trans_status' => 
       array (
-        'name' => 'current_user_only',
-        'label' => 'LBL_CURRENT_USER_FILTER',
-        'type' => 'bool',
+        'type' => 'enum',
         'default' => true,
+        'studio' => 'visible',
+        'label' => 'LBL_ASSET_TRANS_STATUS',
+        'width' => '10%',
+        'name' => 'asset_trans_status',
+      ),
+      'current_owning_org' => 
+      array (
+        'type' => 'relate',
+        'studio' => 'visible',
+        'label' => 'LBL_CURRENT_OWNING_ORG',
+        'id' => 'CURRENT_OWNING_ORG_ID',
+        'link' => true,
+        'width' => '10%',
+        'default' => true,
+        'name' => 'current_owning_org',
+      ),
+      'owner_contacts' => 
+      array (
+        'type' => 'relate',
+        'studio' => 'visible',
+        'label' => 'LBL_OWNER',
+        'id' => 'owner_id',
+        'link' => true,
+        'width' => '10%',
+        'default' => true,
+        'name' => 'owner_contacts',
       ),
     ),
     'advanced_search' => 
@@ -26,20 +50,16 @@ array (
         'name' => 'name',
         'default' => true,
       ),
-      'assigned_user_id' => 
+      'owner_contacts' => 
       array (
-        'name' => 'assigned_user_id',
-        'label' => 'LBL_ASSIGNED_TO',
-        'type' => 'enum',
-        'function' => 
-        array (
-          'name' => 'get_user_array',
-          'params' => 
-          array (
-            0 => false,
-          ),
-        ),
+        'type' => 'relate',
+        'studio' => 'visible',
+        'label' => 'LBL_OWNER',
+        'id' => 'owner_id',
+        'link' => true,
+        'width' => '10%',
         'default' => true,
+        'name' => 'owner_contacts',
       ),
     ),
   ),

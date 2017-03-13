@@ -43,3 +43,4 @@ $app_list_strings['moduleList']['HAA_Import_Sets'] = '通用导入设置';
 $app_list_strings['haa_import_process_status']['VALID'] = '有效';
 $app_list_strings['haa_import_process_status']['ERROR'] = '错误';
 $app_list_strings['haa_import_process_status']['WARN'] = '警告';
+$app_list_strings['haa_import_process_status']['SUCCESS'] = '成功';

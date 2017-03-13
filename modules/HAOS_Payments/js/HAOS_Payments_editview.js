@@ -18,13 +18,14 @@ function validateHeaderAmountAndLineAmount(){
 	var result = true;
 	var sum_line_amount = 0;
 	var header_amount = unformatNumber($('#payment_amount').val().trim(),',','.');
-
+   
 	$("input[id^=line_amount]").each(function(){
 		if($('#line_body'+i).css("display")!="none"){
-			sum_line_amount = sum_line_amount + unformatNumber($(this).val().trim(),',','.');
+			sum_line_amount = eval(sum_line_amount + unformatNumber($(this).val().trim(),',','.'));
 		}
 	});
-
+	 console.log('h::'+header_amount);
+	 console.log('l::'+sum_line_amount);
    if(sum_line_amount == header_amount){
    	  result = true;
    	}else{

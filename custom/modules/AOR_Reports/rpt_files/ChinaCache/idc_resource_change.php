@@ -21,14 +21,18 @@ function custom_report_main($paraArray=array()){
     ha. NAME activity_name,
     hw.*
     FROM
-    ham_wo hw
+        ham_wo hw
     LEFT JOIN ham_act ha ON hw.activity = ha.id
+    LEFT JOIN accounts a ON hw.account_id = a.id
+    LEFT JOIN accounts_cstm ac ON a.id = ac.id_c
     WHERE
-    hw.wo_status = "CLOSED"
+        hw.deleted = 0
+    AND hw.wo_status = "COMPLETED"
     AND (
-    ha. NAME LIKE "标准%"
-    OR ha. NAME LIKE "绿通%"
-    )';
+        ha. NAME LIKE "标准%"
+        OR ha. NAME LIKE "绿通%"
+    )
+    AND ac.org_type_c = "EXTERNAL"';
 
     if ($parameterValueArray[0] != '' ) {
         $sql = $sql.' AND hw.account_id = "'.$parameterValueArray[0].'"';
@@ -65,7 +69,14 @@ function custom_report_main($paraArray=array()){
         $csv .= encloseForCSV($val3);
         $csv .= encloseForCSV($val4);
         
-        $sql3 = 'select count(*) rack_count from hit_racks hr where hr.enable_partial_allocation=0 and hr.hat_assets_id ="'.$row['hat_assets_id'].'"';
+        $sql3 = '   SELECT count(hr.id) rack_count
+                    FROM hit_racks hr 
+                    LEFT JOIN hat_assets ha ON (hr.hat_assets_id=ha.id AND ha.deleted=0)
+                    LEFT JOIN hat_asset_trans hat ON (hat.asset_id=ha.id AND hat.deleted=0)
+                    LEFT JOIN hat_asset_trans_batch hatb ON (hat.batch_id = hatb.id AND hatb.deleted=0)
+                    WHERE hr.deleted = 0
+                    AND hr.enable_partial_allocation=1
+                    AND hatb.source_wo_id = "'.$row['id'].'"';
         $val = '';
         $result3 = $db->query($sql3);
         while ($row3 = $db->fetchByAssoc($result3)) {
@@ -75,12 +86,16 @@ function custom_report_main($paraArray=array()){
         $sql4 = 'SELECT
         sum(hia.speed_limit) hia_bandwidth_count
         FROM
-        hit_ip_trans_batch hitb,
-        hit_ip_allocations hia
+        hit_ip_allocations hia 
+        LEFT JOIN hit_ip_trans_batch hitb ON  hia.hit_ip_trans_batch_id = hitb.id
         WHERE
-        hia.hit_ip_trans_batch_id = hitb.id
+        hia.deleted=0
         AND hitb.source_wo_id ="'.$row['id'].'"
-        AND hia. STATUS = "EFFECTIVE"';
+        AND (
+            hia. STATUS = "EFFECTIVE"
+            OR hia. STATUS = ""
+            OR hia. STATUS IS NULL
+        )';
         //echo '-------sql4:'.$sql4;
         $val = '';
         $result4 = $db->query($sql4);
@@ -96,10 +111,11 @@ function custom_report_main($paraArray=array()){
         hit_ip_allocations hia,
         hit_ip_subnets his
         WHERE
-        hia.hit_ip_trans_batch_id = hitb.id
+        his.deleted=0
+        AND hia.hit_ip_trans_batch_id = hitb.id
         AND hitb.source_wo_id = "'.$row['id'].'"
         AND hia.hit_ip_subnets_id = his.id
-        AND his.ip_type = 0';
+        AND his.ip_type = 1';
         //echo '-------sql5:'.$sql5;    
         $val='';
         $val_0 = '';
@@ -115,10 +131,11 @@ function custom_report_main($paraArray=array()){
         hit_ip_allocations hia,
         hit_ip_subnets his
         WHERE
-        hia.hit_ip_trans_batch_id = hitb.id
+        his.deleted=0
+        AND hia.hit_ip_trans_batch_id = hitb.id
         AND hitb.source_wo_id = "'.$row['id'].'"
         AND hia.hit_ip_subnets_id = his.id
-        AND his.ip_type = 1';
+        AND his.ip_type = 0';
         $val_1 = '';
         $result5 = $db->query($sql5_2);
         while ($row5 = $db->fetchByAssoc($result5)) {
@@ -129,12 +146,16 @@ function custom_report_main($paraArray=array()){
         $sql6 = 'SELECT
         count(distinct hia.port) hia_port_count
         FROM
-        hit_ip_trans_batch hitb,
-        hit_ip_allocations hia
+        hit_ip_allocations hia 
+        LEFT JOIN hit_ip_trans_batch hitb ON  hia.hit_ip_trans_batch_id = hitb.id
         WHERE
-        hia.hit_ip_trans_batch_id = hitb.id
+        hia.deleted=0
         AND hitb.source_wo_id ="'.$row['id'].'"
-        AND hia. STATUS = "EFFECTIVE"';
+        AND (
+            hia. STATUS = "EFFECTIVE"
+            OR hia. STATUS = ""
+            OR hia. STATUS IS NULL
+        )';
         //echo '-------sql6:'.$sql6;    
         $val = '';
         $result6 = $db->query($sql6);
@@ -168,16 +189,19 @@ function custom_report_main($paraArray=array()){
         $csv .= encloseForCSV('');
         $csv .= encloseForCSV('');
     }
+    $name = getMillisecond();
+    createRptDataFile($name,$csv);
+    print $name.'.csv';
     //print $csv;
     //echo '---------------------3-------------------------';
-    $csv= $GLOBALS['locale']->translateCharset($csv, 'UTF-8', $GLOBALS['locale']->getExportCharset());
+    /*$csv= $GLOBALS['locale']->translateCharset($csv, 'UTF-8', $GLOBALS['locale']->getExportCharset());
     $name= $GLOBALS['locale']->translateCharset($name, 'UTF-8', $GLOBALS['locale']->getExportCharset());
     ob_clean();
-    header("Pragma: cache");
+    header("Pragma: cache");*/
     /*header("Content-type: text/comma-separated-values; charset=".$GLOBALS['locale']->getExportCharset());
     header("Content-Disposition: attachment; filename=\"{$name}.csv\"");*/
     //header("Content-type: text/html; charset=GBK");
-    header("Content-type: text/html; charset=".$GLOBALS['locale']->getExportCharset());
+   /* header("Content-type: text/html; charset=".$GLOBALS['locale']->getExportCharset());
     header("Content-Disposition: attachment; filename=\"{$name}.csv\"");
     header("Content-transfer-encoding: binary");
     header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
@@ -192,6 +216,6 @@ function custom_report_main($paraArray=array()){
     createRptDataFile($name,$csv);
     print $name.'.csv';
 
-    sugar_cleanup(true);
+    sugar_cleanup(true);*/
 }
 ?>

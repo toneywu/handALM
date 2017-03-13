@@ -23,17 +23,13 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * @author SalesAgility <info@salesagility.com>
  */
 
-function CalDaysBetweenDate($Date1,$Date2){
-	$Days= date_diff(date_create($Date2),date_create($Date1))->format("%R%a");
-	return $Days;
-}
-
-function createRevenueFromContract($contractId,$type,$ahead_days=''){
+function createRevenueFromContract($contractId,$type){
+	global $db;
 	if(!(ACLController::checkAccess('HAOS_Revenues_Quotes', 'edit', true))){
 		ACLController::displayNoAccess();
 		die;
 	}
-
+ 
 	require_once('modules/HAOS_Revenues_Quotes/createRevenue.php');
 	$contract = new AOS_Contracts();
 	$contract->retrieve($contractId);
@@ -47,27 +43,27 @@ function createRevenueFromContract($contractId,$type,$ahead_days=''){
 
 	$productQuoteBean=BeanFactory::getBean('AOS_Products_Quotes');
 	if($type==0){
-		$quotesBeanList=$productQuoteBean->get_full_list(
+	$quotesBeanList=$productQuoteBean->get_full_list(
 //Order by
-			'group_id',
+		'group_id',
 //where Clause
-			"aos_products_quotes.parent_type='AOS_Contracts' and aos_products_quotes.parent_id='".$contract->id."'and aos_products_quotes_cstm.deposit_flag_c=0 and aos_products_quotes_cstm.prepay_flag_c=0"
-			);
+		"aos_products_quotes.parent_type='AOS_Contracts' and aos_products_quotes.parent_id='".$contract->id."'and aos_products_quotes_cstm.deposit_flag_c=0 and aos_products_quotes_cstm.prepay_flag_c=0"
+		);
 	}else if($type==1){ //add by tagnqi 20170224
-		$quotesBeanList=$productQuoteBean->get_full_list(
+	$quotesBeanList=$productQuoteBean->get_full_list(
 //Order by
-			'group_id',
+		'group_id',
 //where Clause
-			"aos_products_quotes.parent_type='AOS_Contracts' and aos_products_quotes.parent_id='".$contract->id."'and aos_products_quotes_cstm.deposit_flag_c=0 and aos_products_quotes_cstm.prepay_flag_c=1"
-			);
+		"aos_products_quotes.parent_type='AOS_Contracts' and aos_products_quotes.parent_id='".$contract->id."'and aos_products_quotes_cstm.deposit_flag_c=0 and aos_products_quotes_cstm.prepay_flag_c=1"
+		);
 	}else if($type==2){
 		
-		$quotesBeanList=$productQuoteBean->get_full_list(
+	$quotesBeanList=$productQuoteBean->get_full_list(
 //Order by
-			'group_id',
+		'group_id',
 //where Clause
-			"aos_products_quotes.parent_type='AOS_Contracts' and aos_products_quotes.parent_id='".$contract->id."'and aos_products_quotes_cstm.deposit_flag_c=1 and aos_products_quotes_cstm.prepay_flag_c=0"
-			);
+		"aos_products_quotes.parent_type='AOS_Contracts' and aos_products_quotes.parent_id='".$contract->id."'and aos_products_quotes_cstm.deposit_flag_c=1 and aos_products_quotes_cstm.prepay_flag_c=0"
+		);
 	}
 	//end add by tagnqi 20170224
 	$rawRow['haa_frameworks_id_c'] = $contract->haa_frameworks_id_c;
@@ -80,121 +76,123 @@ function createRevenueFromContract($contractId,$type,$ahead_days=''){
 	$rawRow['contact_id_c'] = $contract->contact_id;
 	$rawRow['account_id_c'] = $contract->contract_account_id;
 
-	if($quotesBeanList){
-		foreach($quotesBeanList as $quoteBean){
-			if ($quoteBean->settlement_period_c=='Once'&&$quoteBean->final_account_day_c!='') {
+if($quotesBeanList){
+	foreach($quotesBeanList as $quoteBean){
+		if ($quoteBean->settlement_period_c=='Once'&&$quoteBean->final_account_day_c!='') {
+			continue;
+		}
+		$next_account_day_old=date_format(date_create($quoteBean->next_account_day_c),"Y-m-d");
+		if ($quoteBean->settlement_period_c=='Monthly') {
+			if ($quoteBean->effective_end_c!=''&&$quoteBean->effective_end_c<$next_account_day_old){
 				continue;
 			}
-			$next_account_day_old=date_format(date_create($quoteBean->next_account_day_c),"Y-m-d");
-			if ($quoteBean->settlement_period_c=='Monthly') {
-				if ($quoteBean->effective_end_c!=''&&$quoteBean->effective_end_c<$next_account_day_old){
-					continue;
-				}
-				else{
-					$next_account_day_new=date('Y-m-d',strtotime("{$next_account_day_old} +1 month"));
-					$quoteBean->next_account_day_c=$next_account_day_new;
-
-				}
-			}
-
-//计划请求只创建未来15天的
-			if ($ahead_days!=''){
-				global $timedate;
-				$days=$this->CalDaysBetweenDate($next_account_day_old,$timedate->nowDb());
-				if ($days>$ahead_days){
-					continue;
-				}
-			}
-			$groupBean=BeanFactory::getBean('AOS_Line_Item_Groups',$quoteBean->group_id);
-			$rawRow['expense_group'] = $groupBean->name;
-			$rawRow['prepay_flag'] = $quoteBean->prepay_flag_c;
-			$rawRow['deposit_flag'] = $quoteBean->deposit_flag_c;
-			$rawRow['name'] = $contract->name.'-'.$groupBean->name.'-收支';
-			$rawRow['event_date'] = $next_account_day_old;
-		//add by tangqi 20172024 获取期间字段
-			global $db;
-			$sql="SELECT
-			hp.`name`
-			FROM
-			haa_frameworks hf,
-			haa_period_sets hps,
-			haa_periods hp
-			WHERE 1=1
-			and hf.deleted=0
-			and hps.deleted=0
-			and hp.deleted=0
-			and hf.haa_period_sets_id_c=hps.id
-			and hps.id=hp.haa_period_sets_id_c
-			and hp.start_date<='".$next_account_day_old."'".
-			"and hp.end_date>='".$next_account_day_old."'".
-			"and hf.id='".$contract->haa_frameworks_id_c."'";
-			$result=$db->query($sql);
-			$row=$db->fetchByAssoc($result); 
-			$rawRow['period_name']=$row['name'];
-		//end add by tangqi 20172024
-			$quoteBean->final_account_day_c=$rawRow['event_date'];
-			$quoteRow=$quoteBean->fetched_row;
-			if ($quoteRow['product_id']!=''&&$quoteRow['product_id']!='0'){
-				$quoteRow['line_item_type_c']='Product';
-			}
 			else{
-				$quoteRow['line_item_type_c']='Service';
+				$next_account_day_new=date('Y-m-d',strtotime("{$next_account_day_old} +1 month"));
+				$quoteBean->next_account_day_c=$next_account_day_new;
 			}
-			$haos_revenues_quotes_id=createRevenue($rawRow,$quoteRow);
-			$quoteBean->save();
-			$idArray[]=$haos_revenues_quotes_id;
+			$revenues_count = $db->getOne("select count(*) cnt from haos_revenues_quotes where 1=1 and aos_source_products_quotes_id_c='".$quoteBean->id."' and source_code='AOS_Contracts' and source_id='".$contract->id."'");
+			if($revenues_count>=$quoteBean->number_of_periods_c){
+				continue;
+			}
 		}
+		//add by hq 20170310
+		
+
+
+		$rawRow['aos_source_products_quotes_id_c'] = $quoteBean->id;
+		
+		//end 20170310
+
+		$groupBean=BeanFactory::getBean('AOS_Line_Item_Groups',$quoteBean->group_id);
+		$rawRow['expense_group'] = $groupBean->name;
+		$rawRow['prepay_flag'] = $quoteBean->prepay_flag_c;
+		$rawRow['deposit_flag'] = $quoteBean->deposit_flag_c;
+		$rawRow['name'] = $contract->name.'-'.$groupBean->name.'-收支';
+		$rawRow['event_date'] = $next_account_day_old;
+		//add by tangqi 20172024 获取期间字段
+		
+		$sql="SELECT
+		hp.`name`
+		FROM
+		haa_frameworks hf,
+		haa_period_sets hps,
+		haa_periods hp
+		WHERE 1=1
+		and hf.deleted=0
+		and hps.deleted=0
+		and hp.deleted=0
+		and hf.haa_period_sets_id_c=hps.id
+		and hps.id=hp.haa_period_sets_id_c
+		and hp.start_date<='".$next_account_day_old."'".
+		"and hp.end_date>='".$next_account_day_old."'".
+		"and hf.id='".$contract->haa_frameworks_id_c."'";
+		$result=$db->query($sql);
+		$row=$db->fetchByAssoc($result); 
+		$rawRow['period_name']=$row['name']; 
+		//end add by tangqi 20172024
+		$quoteBean->final_account_day_c=$rawRow['event_date'];
+		$quoteRow=$quoteBean->fetched_row;
+		if ($quoteRow['product_id']!=''&&$quoteRow['product_id']!='0'){
+			$quoteRow['line_item_type_c']='Product';
+		}
+		else{
+			$quoteRow['line_item_type_c']='Service';
+		}
+		$haos_revenues_quotes_id=createRevenue($rawRow,$quoteRow);
+		$quoteBean->save();
+		$idArray[]=$haos_revenues_quotes_id;
+	}
 	}
 	return $idArray;
 }
 
 function getSourceReference($contractId){
-	$contract = new AOS_Contracts();
-	$contract->retrieve($contractId);
-	$source_reference = $contract->contract_number_c;
-	return $source_reference;
+ 	$contract = new AOS_Contracts();
+    $contract->retrieve($contractId);
+    $source_reference = $contract->contract_number_c;
+    return $source_reference;
 }
 function getName($contractId,$type){
 	global $app_list_strings;
     if($type==1){ //add by tagnqi 20170224
-    	$act_name="预付";
-
-    }else if($type==2){
-    	$act_name="押金";
-
-    }
+		$act_name="预付";
+	
+	}else if($type==2){
+		$act_name="押金";
+	
+	}
     $contract = new AOS_Contracts();
     $contract->retrieve($contractId);
     $source_code = 'AOS_Contracts';
-    $source_reference = $contract->contract_number_c;
+	$source_reference = $contract->contract_number_c;
 
-    $productQuoteBean=BeanFactory::getBean('AOS_Products_Quotes');
-    if($type==0){
-    	$quotesBeanList=$productQuoteBean->get_full_list(
+	$productQuoteBean=BeanFactory::getBean('AOS_Products_Quotes');
+	if($type==0){
+	$quotesBeanList=$productQuoteBean->get_full_list(
 //Order by
-    		'group_id',
+		'group_id',
 //where Clause
-    		"aos_products_quotes.parent_type='AOS_Contracts' and aos_products_quotes.parent_id='".$contract->id."'and aos_products_quotes_cstm.deposit_flag_c=0 and aos_products_quotes_cstm.prepay_flag_c=0"
-    		);
+		"aos_products_quotes.parent_type='AOS_Contracts' and aos_products_quotes.parent_id='".$contract->id."'and aos_products_quotes_cstm.deposit_flag_c=0 and aos_products_quotes_cstm.prepay_flag_c=0"
+		);
 	}else if($type==1){ //add by tagnqi 20170224
-		$quotesBeanList=$productQuoteBean->get_full_list(
+	$quotesBeanList=$productQuoteBean->get_full_list(
 //Order by
-			'group_id',
+		'group_id',
 //where Clause
-			"aos_products_quotes.parent_type='AOS_Contracts' and aos_products_quotes.parent_id='".$contract->id."'and aos_products_quotes_cstm.deposit_flag_c=0 and aos_products_quotes_cstm.prepay_flag_c=1"
-			);
+		"aos_products_quotes.parent_type='AOS_Contracts' and aos_products_quotes.parent_id='".$contract->id."'and aos_products_quotes_cstm.deposit_flag_c=0 and aos_products_quotes_cstm.prepay_flag_c=1"
+		);
 	}else if($type==2){
 		
-		$quotesBeanList=$productQuoteBean->get_full_list(
+	$quotesBeanList=$productQuoteBean->get_full_list(
 //Order by
-			'group_id',
+		'group_id',
 //where Clause
-			"aos_products_quotes.parent_type='AOS_Contracts' and aos_products_quotes.parent_id='".$contract->id."'and aos_products_quotes_cstm.deposit_flag_c=1 and aos_products_quotes_cstm.prepay_flag_c=0"
-			);
+		"aos_products_quotes.parent_type='AOS_Contracts' and aos_products_quotes.parent_id='".$contract->id."'and aos_products_quotes_cstm.deposit_flag_c=1 and aos_products_quotes_cstm.prepay_flag_c=0"
+		);
 	}
-	foreach($quotesBeanList as $quoteBean){
+foreach($quotesBeanList as $quoteBean){
 		$next_account_day_old=date_format(date_create($quoteBean->next_account_day_c),"Y-m-d");
-	}
+		}
 	$name = $app_list_strings['haos_source_code_list']['AOS_Contracts'].'-'.$source_reference.'-'.$act_name.'-'.$next_account_day_old;
 
 	return $name;
@@ -203,31 +201,31 @@ function getName($contractId,$type){
 function getCord($revenues_id){
 	global $db;
 
-	foreach ($revenues_id as $k => $v) {
-		$revenues_id[$k]="'".$revenues_id[$k]."'";
-	}
-	$str=implode(',', $revenues_id);
-	$sql="select count(*) result,contact_id_c,account_id_c  from haos_revenues_quotes where id in(".$str.")";
-	$result=$db->query($sql);
-	$account=array();
-	while ($result_record = $db->fetchByAssoc($result)) {
-		$cord[]=$result_record["result"];
-		$account[]=$result_record["contact_id_c"];
-		$account[]=$result_record["account_id_c"];
-	}
-	if (sizeof($cord)>1) {
-		echo json_encode(array('type'=>0));
-	}else{
-		$sqlstr="select pg.id from aos_products_quotes pg LEFT JOIN aos_line_item_groups lig ON pg.group_id = lig.id WHERE pg.deleted = 0 and pg.parent_id in(".$str.") ORDER BY lig.number ASC,pg.number ASC";
-		$results=$db->query($sqlstr);
-		$re_cords=array();
-		while ($record = $db->fetchByAssoc($results)) {
-			$re_cords[]=$record["id"];
+		foreach ($revenues_id as $k => $v) {
+			$revenues_id[$k]="'".$revenues_id[$k]."'";
 		}
-		$list=array('value'=>$re_cords,'cord'=>$account);
-		return $list;
-	}
-
+$str=implode(',', $revenues_id);
+			$sql="select count(*) result,contact_id_c,account_id_c  from haos_revenues_quotes where id in(".$str.")";
+			$result=$db->query($sql);
+			$account=array();
+			while ($result_record = $db->fetchByAssoc($result)) {
+				$cord[]=$result_record["result"];
+				$account[]=$result_record["contact_id_c"];
+				$account[]=$result_record["account_id_c"];
+			}
+			if (sizeof($cord)>1) {
+				echo json_encode(array('type'=>0));
+			}else{
+				$sqlstr="select pg.id from aos_products_quotes pg LEFT JOIN aos_line_item_groups lig ON pg.group_id = lig.id WHERE pg.deleted = 0 and pg.parent_id in(".$str.") ORDER BY lig.number ASC,pg.number ASC";
+				$results=$db->query($sqlstr);
+				$re_cords=array();
+				while ($record = $db->fetchByAssoc($results)) {
+					$re_cords[]=$record["id"];
+				}
+				$list=array('value'=>$re_cords,'cord'=>$account);
+				return $list;
+			}
+		
 }
 
 //end add by tangqi 20172024

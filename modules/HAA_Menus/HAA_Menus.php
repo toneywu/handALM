@@ -137,8 +137,9 @@ class HAA_Menus extends HAA_Menus_sugar {
 		$menus_num=0;
         while($row=$db->fetchByAssoc($result)){
         	$url="index.php?module=".$row['func_module']."&action=index";
+            $url.="&function_code=".$row['function_code'];
         	if ($row['haa_ff_id_c']) {
-        		$url.="&function_code=".$row['function_code']."&haa_ff_id=".$row['haa_ff_id_c'];
+        		$url.="&haa_ff_id=".$row['haa_ff_id_c'];
         	}
         	if ($row['parameters']) {
         		$url.="&".$row['parameters'];

@@ -1,10 +1,11 @@
 <?php
 class PushAssetsUtil {
-	var $username = "sysadmin";
-	var $password = "welcome8";
+	var $username = "XR_API";
+	var $password = "asdf1234";
 	var $startdate = "2015-05-06";
 	var $enddate = "2016-07-26";
-	var $url = "http://111.200.33.205:1574/8020/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";
+	/*var $url = "http://111.200.33.205:1574/8020/webservices/SOAProvider/plsql/cux_ws_eam_basic_info_pkg/";*/
+	var $url = "http://111.200.33.204:1574/XR_8034/webservices/SOAProvider/plsql/cux_ws_transfer_asset_pkg/";
 
 	public function gernerat_xml_str($records, $username, $password, $startdate, $enddate) {
 		$postAllString = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
@@ -43,6 +44,19 @@ class PushAssetsUtil {
 			$locationsIds = $assetBean->hat_asset_locations_hat_assets->get();
 			$bean_location = BeanFactory :: getBean('HAT_Asset_Locations', $locationsIds[0]);
 			$mait_sites_bean = BeanFactory :: getBean('HAM_Maint_Sites', $bean_location->ham_maint_sites_id);
+			//add by liu
+			$asset_source_bean = BeanFactory :: getBean('HAT_Asset_Sources')->retrieve_by_string_fields(array (
+													'id' => $assetBean->asset_source_id
+												));
+			$flag = strpos($asset_source_bean->name, ':');
+			$line_source_num ="";
+            if($flag !== FALSE){
+                $arr = explode(':', $asset_source_bean->name);
+                $line_source_num = $arr[0];
+                $line_source_line = $arr[1];
+            }else{
+                $line_source_num = $asset_source_bean->name;
+            }
 			if(empty($assetBean->fixed_asset_id)){
 				$loopInput = '<HEADER>';
 				$guid = create_guid();
@@ -60,8 +74,8 @@ class PushAssetsUtil {
 				$loopInput = $loopInput . '<ASSET_OWNING_ORG_NAME>' . $assetBean->cost_center . '</ASSET_OWNING_ORG_NAME>';
 				$loopInput = $loopInput . '<ASSET_LOCATION_NAME>' . $mait_sites_bean->name . '</ASSET_LOCATION_NAME>';
 				$loopInput = $loopInput . '<ASSET_SOURCE_TYPE>' . $assetBean->source_type . '</ASSET_SOURCE_TYPE>';
-				$loopInput = $loopInput . '<ASSET_SOURCE_ORDER></ASSET_SOURCE_ORDER>';
-				$loopInput = $loopInput . '<ASSET_SOURCE_LINE></ASSET_SOURCE_LINE>';
+				$loopInput = $loopInput . '<ASSET_SOURCE_ORDER>'.$line_source_num.'</ASSET_SOURCE_ORDER>';
+				$loopInput = $loopInput . '<ASSET_SOURCE_LINE>'.$line_source_line.'</ASSET_SOURCE_LINE>';
 				$loopInput = $loopInput . '<ASSET_SOURCE_REFERENCE>' . $assetBean->source_ref . '</ASSET_SOURCE_REFERENCE>';
 				$loopInput = $loopInput . '<ASSET_SOURCE_SUPPLIER>' . $assetBean->supplier_org . '</ASSET_SOURCE_SUPPLIER>';
 				$loopInput = $loopInput . '<ASSET_SOURCE_PRICE>' . $assetBean->original_cost . '</ASSET_SOURCE_PRICE>';
@@ -84,17 +98,18 @@ class PushAssetsUtil {
 				$loopInput = $loopInput . '<DATA_SOURCE_REFERENCE>' . $assetBean->asset_desc . '</DATA_SOURCE_REFERENCE>';
 				$loopInput = $loopInput . '<DATA_SOURCE_ID>' . $assetBean->id . '</DATA_SOURCE_ID>';
 				$loopInput = $loopInput . '</HEADER>';
-				$postAllString = $postAllString . '' . "$loopInput";
+				$postAllString = $postAllString . '' . $loopInput;
 				$loopInput = "";
 			}
 		}
 		$loopInput = $loopInput . "</HEADERS></ROOT></ns2:P_ASSET_INFO_DATA></ns2:InputParameters></soap:Body></soap:Envelope>";
-		$postAllString = $postAllString . '' . "$loopInput";
+		$postAllString = $postAllString . '' . $loopInput;
 
 		return $postAllString;
 	}
 
 	public function call_ws($postAllString,$url) {
+		//echo $postAllString;
 		$resultArray="";
 		//创建一个新cURL资源 
 		$soap_do = curl_init();
@@ -145,7 +160,7 @@ class PushAssetsUtil {
 		//获取报文节点   X_ASSET_OUT_DATA
 		$x_asset_out_data = $xml->getElementsByTagName("X_ASSET_OUT_DATA");
 		//输出
-		echo "x_return_status = " . $x_return_status->item(0)->nodeValue . "<br>";
+		//echo "x_return_status = " . $x_return_status->item(0)->nodeValue . "<br>";
 		//echo "x_msg_data = " . $x_msg_data->item(0)->nodeValue . "<br>";
 		//echo "x_asset_out_data = " . $x_asset_out_data->item(0)->nodeValue . "<br>";
 		$error_message = '';

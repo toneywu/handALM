@@ -77,7 +77,7 @@ class HAOS_PaymentsViewEdit extends ViewEdit
           $currency_id_get = $_GET['currency_id'];  
           $period_info = $this->getPeriodName($_GET["haa_frameworks_id_c"],$payment_date_get);
           $period_name = $period_info['periods_name'];
-        
+          $period_id = $period_info['periods_id'];
         $bean_contact= BeanFactory::getBean('Contacts', $contact_id_get);
        //var_dump($bean_contact);
         if ($bean_contact) {  
@@ -107,7 +107,7 @@ class HAOS_PaymentsViewEdit extends ViewEdit
         document.getElementById('payment_method_type').value='".$method_type_get."';
         document.getElementById('description').value='".$description_get."';
         document.getElementById('period_name').value='".$period_name."';
- 
+        document.getElementById('haa_periods_id_c').value='".$period_id."';
        </script>";
         $cord_array = array();
         if (isset($_GET["cordArr"])){          

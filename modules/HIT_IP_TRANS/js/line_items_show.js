@@ -36,51 +36,55 @@ function insertTransLineHeader(tableid){
   
   var j=x.insertCell(6);
   j.innerHTML="<span id='line_hat_asset_name_title'>网关设备</span>";
-  var p=x.insertCell(7);
+  var j1=x.insertCell(7);
+  j1.innerHTML="<span id='line_backup_asset_title'>网关设备(备)</span>";
+  var p=x.insertCell(8);
   p.innerHTML="<span id='line_access_assets_name_title'>接入设备(主)</span>";
-  var p2=x.insertCell(8);
+  var p2=x.insertCell(9);
   p2.innerHTML="<span id='line_access_assets_backup_name_title'>接入设备(备)</span>";
-  var g=x.insertCell(9);
+  var g=x.insertCell(10);
   g.innerHTML="<span id='line_port_title'>端口(主)</span>";
-  var g2=x.insertCell(10);
+  var g2=x.insertCell(11);
   g2.innerHTML="<span id='line_port_backup_title'>端口(备)</span>";
   //add by yuan.chen
-  var g3=x.insertCell(11);
+  var g3=x.insertCell(12);
   g3.innerHTML="<span id='line_child_port_title'>子端口</span>";
-  var g4=x.insertCell(12);
+  var g4=x.insertCell(13);
   g4.innerHTML="<span id='line_vlan_channel_title'>VLAN通道</span>";
   
-  var f=x.insertCell(13);
+  var f=x.insertCell(14);
   f.innerHTML="<span id='line_bandwidth_type_title'>带宽类型</span>"; 
-  var i=x.insertCell(14);
+  var i=x.insertCell(15);
   i.innerHTML="<span id='line_speed_limit_title'>限速</span>";
-  var k=x.insertCell(15);
+  var k=x.insertCell(16);
   k.innerHTML="<span id='line_hat_assets_cabinet_title'>机柜</span>";
-  var l=x.insertCell(16);
+  var l=x.insertCell(17);
   l.innerHTML="<span id='line_monitoring_title'>监控链接(主)</span>";
-  var l2=x.insertCell(17);
+  var l2=x.insertCell(18);
   l2.innerHTML="<span id='line_monitoring_backup_title'>监控链接(备)</span>";
-  var o=x.insertCell(18);
+  var o=x.insertCell(19);
   o.innerHTML="<span id='line_mrtg_link_title'>MRTG 链接</span>";
-  var m=x.insertCell(19);
+  var m=x.insertCell(20);
   m.innerHTML="<span id='line_channel_num_title'>频道号(主)</span>";
-  var m2=x.insertCell(20);
+  var m2=x.insertCell(21);
   m2.innerHTML="<span id='line_channel_num_backup_title'>频道号(备)</span>";
-  var n=x.insertCell(21);
+  var n=x.insertCell(22);
   n.innerHTML="<span id='line_channel_content_title'>频道内容(主)</span>";
-  var n2=x.insertCell(22);
+  var n2=x.insertCell(23);
   n2.innerHTML="<span id='line_channel_content_backup_title'>频道内容(备)</span>"
-  var n3=x.insertCell(23);
+  var n3=x.insertCell(24);
   n3.innerHTML="<span id='line_date_start_title'>占用起始时间</span>"
-  var n4=x.insertCell(24);
+  var n4=x.insertCell(25);
   n4.innerHTML="<span id='line_date_end_title'>占用终止时间</span>";
-  var e3=x.insertCell(25);
+  var e3=x.insertCell(26);
   e3.innerHTML="<span id='line_enable_action_title'>失效</span>";
   
-  var e2=x.insertCell(26);
+  var e2=x.insertCell(27);
   e2.innerHTML="<span id='line_status_title'>状态</span>";
-  var e3=x.insertCell(27);
+  var e3=x.insertCell(28);
   e3.innerHTML="<span id='line_broadband_type_title'>带宽变量</span>";
+  var e4 = x.insertCell(29);
+  e4.innerHTML = "<span id='line_using_org_title'>使用组织</span>";
 }
 
 function insertLineData(asset_trans_line ){ //将数据写入到对应的行字段中
@@ -122,11 +126,13 @@ function insertLineData(asset_trans_line ){ //将数据写入到对应的行字�
     $("#line_hit_ip_subnets".concat(String(ln))).val(asset_trans_line.hit_ip_subnets);
     //$("#line_associated_ip".concat(String(ln))).val(asset_trans_line.associated_ip);
     $("#line_mask".concat(String(ln))).val(asset_trans_line.ip_netmask);
+    $("#line_using_org".concat(String(ln))).val(asset_trans_line.using_org);
     $("#line_gateway".concat(String(ln))).val(asset_trans_line.gateway);
     $("#line_bandwidth_type".concat(String(ln))).val(asset_trans_line.bandwidth_type);
     $("#line_port".concat(String(ln))).val(asset_trans_line.port);
     $("#line_speed_limit".concat(String(ln))).val(asset_trans_line.speed_limit);
     $("#line_hat_asset_name".concat(String(ln))).val(asset_trans_line.hat_asset_name);
+    $("#line_backup_asset".concat(String(ln))).val(asset_trans_line.backup_asset);
     $("#line_hit_ip_subnets_id".concat(String(ln))).val(asset_trans_line.hit_ip_subnets_id);
     $("#line_id".concat(String(ln))).val(asset_trans_line.id);
     $("#line_hat_assets_cabinet_id".concat(String(ln))).val(asset_trans_line.hat_assets_cabinet_id);
@@ -213,6 +219,8 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<td><span name='displayed_line_mask[" + prodln + "]' id='displayed_line_mask" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_gateway[" + prodln + "]' id='displayed_line_gateway" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_hat_asset_name[" + prodln + "]' id='displayed_line_hat_asset_name" + prodln + "'></span></td>"+
+      "<td><span name='displayed_line_backup_asset[" + prodln+ "]' id='displayed_line_backup_asset" + prodln+ "'></span></td>"+
+      
       "<td><span name='displayed_line_access_assets_name[" + prodln + "]' id='displayed_line_access_assets_name" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_access_assets_backup_name[" + prodln + "]' id='displayed_line_access_assets_backup_name" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_port[" + prodln + "]' id='displayed_line_port" + prodln + "'></span></td>"+
@@ -233,7 +241,8 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<td><span name='displayed_line_date_end[" + prodln + "]' id='displayed_line_date_end" + prodln + "'></span></td>" +
       "<td><input type='checkbox' disabled='true'  name='displayed_line_enable_action[" + prodln + "]' id='displayed_line_enable_action" + prodln + "'></input></td>" +
       "<td><span name='displayed_line_status[" + prodln + "]' id='displayed_line_status" + prodln + "'></span></td>"+
-      "<td><span name='displayed_line_broadband_type[" + prodln + "]' id='displayed_line_broadband_type" + prodln + "'></span></td>";
+      "<td><span name='displayed_line_broadband_type[" + prodln + "]' id='displayed_line_broadband_type" + prodln + "'></span></td>" +
+      "<td><span name='displayed_line_using_org[" + prodln+ "]' id='displayed_line_using_org" + prodln + "'></span></td>";
       
       //"<td><span name='displayed_line_hit_ip_subnets_id[" + prodln + "]' id='displayed_line_hit_ip_subnets_id" + prodln + "''></span></td>"+
       //"<td><input type='button' value='" + SUGAR.language.get('app_strings', 'LBL_EDITINLINE') + "' class='button'  id='btn_edit_line" + prodln +"' onclick='LineEditorShow("+prodln+")'></td>";
@@ -317,6 +326,12 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<input type='hidden' name='line_hat_assets_id[" + prodln + "]' id='line_hat_assets_id" + prodln + "' value=''>"+
       "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openAssetPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
+      //网关设备(备)
+      "<label>"+"网关设备(备)"+"</label>"+
+      "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_backup_asset[" + prodln + "]' id='line_backup_asset" + prodln + "' value='' title='' >"+
+      "<input type='hidden' name='line_backup_asset_id[" + prodln + "]' id='line_backup_asset_id" + prodln + "' value=''>"+
+      "<button title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openAssetPopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
+      "</span>"+
       //机柜lov
       "<label>"+"机柜"+"<span class='required'>*</span></label>"+
       "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_hat_assets_cabinet[" + prodln + "]' id='line_hat_assets_cabinet" + prodln + "' value='' title='' onblur='resetAsset("+prodln+")'>"+
@@ -395,6 +410,12 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<label>"+"占用终止时间"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_date_end[" + prodln + "]' id='line_date_end" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
+      //使用组织
+      "<span class='input_group'>" + 
+      "<label>"+ "使用组织"+ "</label>"+ 
+      "<input style=' width:153px;' type='text' name='line_using_org["+ prodln+ "]' id='line_using_org"+
+      prodln+ "' readonly='readonly' maxlength='50' value='' title=''>"+ 
+      "</span>"+ 
       //主
       /*"<label>"+"主"+"<span class='required'>*</span></label>"+
       "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_main_asset[" + prodln + "]' id='line_main_asset" + prodln + "' value='' title='' onblur='resetAsset("+prodln+")'>"+
@@ -438,11 +459,13 @@ function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_line_parent_ip"+ln).html($("#line_parent_ip"+ln).val());
   $("#displayed_line_hit_ip_subnets"+ln).html($("#line_hit_ip_subnets"+ln).val());
   $("#displayed_line_mask"+ln).html($("#line_mask"+ln).val());
+  $("#displayed_line_using_org" + ln).html($("#line_using_org" + ln).val());
   $("#displayed_line_gateway"+ln).html($("#line_gateway"+ln).val());
   $("#displayed_line_bandwidth_type"+ln).html($("#line_bandwidth_type"+ln).val());
   $("#displayed_line_port"+ln).html($("#line_port"+ln).val());
   $("#displayed_line_speed_limit"+ln).html($("#line_speed_limit"+ln).val());
   $("#displayed_line_hat_asset_name"+ln).html($("#line_hat_asset_name"+ln).val());
+  $("#displayed_line_backup_asset" + ln).html($("#line_backup_asset" + ln).val());
   $("#displayed_line_hit_ip_subnets_id"+ln).html($("#line_hit_ip_subnets_id"+ln).val());
   $("#displayed_line_id"+ln).html($("#line_id"+ln).val());
   $("#displayed_line_monitoring"+ln).html($("#line_monitoring"+ln).val());

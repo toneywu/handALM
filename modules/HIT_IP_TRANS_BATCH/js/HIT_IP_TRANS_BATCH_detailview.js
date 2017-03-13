@@ -28,6 +28,29 @@ function showWOLines(wo_id) {
  * @param name
  */
 function save(id,status_code){
+	var return_flag = true;
+	$.ajax({
+		    type:"POST",
+	        url: 'index.php?to_pdf=true&module=HIT_IP_TRANS_BATCH&action=checkLinesIpSubnet&batch_id='+id,
+	        async: false,
+	        success: function (data) {
+	            var resultJson = JSON.parse(data);
+	            if(resultJson['err_count']!=0){
+ 					return_flag=false;
+ 					var	err_message = '该网络事物处理单行中存在已失效的IP';
+ 					BootstrapDialog.alert({
+						type : BootstrapDialog.TYPE_DANGER,
+						title : SUGAR.language.get('app_strings',
+									'LBL_EMAIL_ERROR_GENERAL_TITLE'),
+						message : err_message
+						});
+	            	}
+	            },
+	        error: function () { //失败
+	                alert('Error loading document');
+	        }
+	});
+	if(return_flag==true){
 		$.ajax({
 			url: 'index.php?to_pdf=true&module=HIT_IP_TRANS_BATCH&action=saveBean&id=' + id+"&status_code="+status_code,
 			success: function (data) {
@@ -38,6 +61,7 @@ function save(id,status_code){
 				
 			}
 		});
+	}
 };
 
 /**

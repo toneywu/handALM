@@ -136,6 +136,10 @@ array (
           0=>'check_customer_hold_t_using',
           1=>'check_customer_hold_c_owning',
         ),
+        8=>
+        array(
+          0=>'contract_completed',
+          ),
       ),
       'lbl_editview_panel1' => 
       array (
@@ -445,6 +449,7 @@ array (
         14 => 
         array (
           0 => 'no_add_ip_lines_flag',
+          1 => 'show_lines_using_org_flag',
         ),
       ),
     ),

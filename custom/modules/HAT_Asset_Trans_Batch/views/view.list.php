@@ -9,21 +9,19 @@ class HAT_Asset_Trans_BatchViewList extends ViewList
     $this->ss->assign('APP_LIST', $app_list_strings);
 
     parent::Display();
-        //功能拆分：参数存在SESSION中
-    if($_GET['function_code']!=''){
-      $_SESSION['halm_function_parameter']=$_GET;
-    }
-    //End 功能拆分
   }
 
   function processSearchForm(){
     parent::processSearchForm();
     $haa_frameworks_id=$_SESSION["current_framework"];
     $this->where=empty($this->where)?' 1=1 ':$this->where;
-      $this->where.=" and hat_asset_trans_batch.haa_frameworks_id='".$haa_frameworks_id."'";
+    $this->where.=" and hat_asset_trans_batch.haa_frameworks_id='".$haa_frameworks_id."'";
 
 
     //根据功能拆分过滤数据
+    if($_GET['function_code']!=''){
+      $_SESSION['halm_function_parameter']=$_GET;
+    }
     if (!empty($_SESSION['halm_function_parameter']['function_code'])){
       $eventTypeString='';
       //功能代码匹配事件类型的TAG-》过滤资产事务处理

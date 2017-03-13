@@ -7,6 +7,16 @@ if ($_SESSION['location_id'] != "") {
 if ($_REQUEST['location_id'] != "" && $location_id == "") {
   $location_id = $_REQUEST['location_id'];
 }
+$alloc_history="";
+if(isset($_REQUEST['alloc_history'])&&$_REQUEST['alloc_history']!=''){
+  $alloc_history=$_REQUEST['alloc_history'];
+}
+$wheres='';
+if($alloc_history=='1'){
+  $wheres=' (exists(select 1 from hit_ip_allocations h where h.deleted=0 and h.hit_ip_subnets_id=hit_ip_subnets.id and (h.enable_action is null or h.enable_action="1"))) ';
+}else{
+  $wheres= '((1=1 and "'.$location_id.'" ="" and (not exists (select 1 from hit_ip_allocations h where h.deleted=0 and h.hit_ip_subnets_id=hit_ip_subnets.id and (h.status !="UNEFFECTIVE" or h.status is null )) and hit_ip_subnets.purpose="" )) or ("'.$location_id.'" !="" and hit_ip_subnets.hat_asset_locations_id="'.$location_id.'" and (hit_ip_subnets.purpose is null or hit_ip_subnets.purpose not in ("NETWORK_ADDRESS","BROADCAST_ADDRESS","GATEWAY","Management_IP","NON_OUR_RESOURCES") ) and (not exists (select 1 from hit_ip_allocations h where h.deleted=0 and h.hit_ip_subnets_id=hit_ip_subnets.id and (h.status !="UNEFFECTIVE" or h.status is null )) or not exists(select 1 from hit_ip_allocations h where h.deleted=0 and h.hit_ip_subnets_id=hit_ip_subnets.id  )) ) )';   
+}
 //var_dump($_REQUEST['location_id']);
 $popupMeta = array (
     'moduleMain' => 'HIT_IP_Subnets',
@@ -23,7 +33,9 @@ $popupMeta = array (
 
 
 //'whereStatement'=>' (1=1 or ("'.$_REQUEST['location_advanced'].'" !=null and (hit_ip_subnets.purpose is null or  hit_ip_subnets.purpose not in ('INTERNET','BROADCASE','GATEWAY','MANAGERMENT','OTHERS')  ))) ',
-'whereStatement'=>'((1=1 and "'.$location_id.'" ="" and (not exists (select 1 from hit_ip_allocations h where h.deleted=0 and h.hit_ip_subnets_id=hit_ip_subnets.id and (h.status !="UNEFFECTIVE" or h.status is null )) and hit_ip_subnets.purpose="" )) or ("'.$location_id.'" !="" and hit_ip_subnets.hat_asset_locations_id="'.$location_id.'" and (hit_ip_subnets.purpose is null or hit_ip_subnets.purpose not in ("NETWORK_ADDRESS","BROADCAST_ADDRESS","GATEWAY","Management_IP","NON_OUR_RESOURCES") ) and (not exists (select 1 from hit_ip_allocations h where h.deleted=0 and h.hit_ip_subnets_id=hit_ip_subnets.id and (h.status !="UNEFFECTIVE" or h.status is null )) or not exists(select 1 from hit_ip_allocations h where h.deleted=0 and h.hit_ip_subnets_id=hit_ip_subnets.id  )) ) )',
+
+
+'whereStatement'=>$wheres,
     'searchInputs' => array (
   1 => 'name',
   2 => 'parent_hit_ip',

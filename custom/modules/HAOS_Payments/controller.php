@@ -33,37 +33,7 @@ class HAOS_PaymentsController extends SugarController {
 
 	public function pre_save()
 	{
-		 $prevHeaderAmount = 0;
-	     $prevLineAmount = 0;
-
-		$paymentsFocus = new HAOS_Payments;
-		$paymentsFocus->retrieve($_REQUEST['record']);
-       		
-
-	    $post_data=$_POST;
-	    $prevHeaderAmount=$_POST['payment_amount'];
-        $line_count = isset($post_data['line_deleted']) ? count($post_data['line_deleted']) : 0;
-        
-        for ($i = 0; $i < $line_count; ++$i) {
-            $key="line_";
-            $lines = new HAOS_Payment_Invoices();
-            if ($post_data[$key . 'deleted'][$i] == 1) {
-                $lines->mark_deleted($post_data[$key . 'id'][$i]);
-            } else {
-                $prevLineAmount =$prevLineAmount + $post_data['line_amount'][$i];   
-            }
-        }
-        // var_dump($prevHeaderAmount);
-        // var_dump($prevLineAmount);
-        // exit();
-        // $prevHeaderAmount_num = unformatNumber($prevHeaderAmount,',','.');
-        // $prevLineAmount_num = unformatNumber($prevLineAmount,',','.');
-        if($prevHeaderAmount != $prevLineAmount){
-			die('头付款金额必须等于行付款金额之和');
-        }else{
-        	parent::pre_save();
-        } 
-
+        parent::pre_save();
 	}
 
 

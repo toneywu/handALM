@@ -175,6 +175,18 @@ function loopField(fieldName,type){
 		    mark_field_disabled_mine(fieldName+i,false);
 		    $("#"+fieldName+i).val("");
 		}
+	}else if (fieldName=="line_using_org"&&type=='0'){
+		for (var i=0;i<prodln;i++) {
+			// hide_field_disabled(fieldName+i,true,false)
+		    $("#"+fieldName+i).css({"visibility":"hidden"});
+		    $("#"+fieldName+i+"_label").css({"visibility":"hidden"});
+		    $("#btn_"+fieldName+i).css({"visibility":"hidden"});
+		    $("#"+fieldName+i).parents('.input_group').hide();//remove(); 
+		    $("#"+fieldName+"_title").hide();//remove(); 
+		    $("#displayed_"+fieldName+i).hide();//remove(); 
+		    $("#span_"+fieldName+i).hide();//remove(); 
+		    mark_field_disabled_mine(fieldName+i,false);
+		}
 	}
 }
 /**
@@ -208,6 +220,8 @@ function changeRequired(lineRecord){
 	loopField("line_access_assets_backup_name",lineRecord.change_access_assets_backup_name);
 	loopField("line_enable_action",lineRecord.change_enable_action);
 	loopField("line_broadband_type",lineRecord.change_broadband_type);
+	loopField("line_backup_asset",lineRecord.change_backup_asset);
+	loopField("line_using_org",lineRecord.show_lines_using_org_flag);
 }
 
 //delted by toney.wu 20161007

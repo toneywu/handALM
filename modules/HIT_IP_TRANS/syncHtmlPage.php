@@ -45,6 +45,7 @@ $sql = "SELECT   null id
 									,hat.channel_num_backup
 									,hat.date_start
 									,hat.date_end,hat.status,ifnull(hat.enable_action,1) enable_action,hat.broadband_type,hat.id history_id
+									,ac.name using_org
 							FROM   hit_ip_allocations hat
 							LEFT JOIN hat_assets a ON (hat.hat_assets_id=a.id)
 							LEFT JOIN hat_assets b ON (hat.hat_assets_cabinet_id=b.id)
@@ -52,6 +53,7 @@ $sql = "SELECT   null id
 							LEFT JOIN hit_ip hi ON (s.parent_hit_ip_id=hi.id)
 							LEFT JOIN hat_assets c ON (hat.access_assets_id=c.id)
 							LEFT JOIN hat_assets d ON (hat.access_assets_backup_id=d.id)
+							LEFT JOIN accounts ac on (hat.target_owning_org_id=ac.id)
 							WHERE hat.deleted=0 and hat.id='" . $current_id . "'";
 
 

@@ -24,17 +24,26 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  */
 
 function createRevenueFromClaim($Id){
+	$return_result = array(
+                  'return_status'=>'S',
+                  'return_msg'=>'',
+                  'return_data'=>array(),
+                  );
+              $err_msg = '';
+
 
 	if(!(ACLController::checkAccess('HAOS_Revenues_Quotes', 'edit', true))){
 		ACLController::displayNoAccess();
 		die;
-	}
+	} 
 
 	require_once('modules/HAOS_Revenues_Quotes/createRevenue.php');
 	$at = new HAOS_Insurance_Claims();
 	$at->retrieve($Id);
 	if ($at->claim_treated_status!='Treated'){
-		die('已处理的保险理赔才能创建收支计费项!');
+		//die('已处理的保险理赔才能创建收支计费项!');
+		$return_result['return_status']='E';
+		$err_msg.='已处理的保险理赔才能创建收支计费项!';
 	}
 
 	$rawRow['haa_frameworks_id_c'] = $rawRow['haa_frameworks_id_c'];
@@ -64,7 +73,12 @@ function createRevenueFromClaim($Id){
 
 	$at->haos_revenues_quotes_id=createRevenue($rawRow,$quoteRow);
 	$at->save();
-	return $at->haos_revenues_quotes_id;
+
+
+	$return_result['return_data']['haos_revenues_quotes_id']=$at->haos_revenues_quotes_id;
+	$return_result['return_msg']=$err_msg;
+	return $return_result;
+	//return $at->haos_revenues_quotes_id;
 
 }
 

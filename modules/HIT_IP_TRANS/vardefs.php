@@ -728,7 +728,7 @@ $dictionary['HIT_IP_TRANS'] = array (
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
 		),
-		
+		*/
 		
 		'backup_asset_id' => array (
 			'required' => false,
@@ -779,7 +779,7 @@ $dictionary['HIT_IP_TRANS'] = array (
 			'studio' => 'visible',
 		),
   
-  */
+  
   
   'date_start' => array (
 			'required' => false,

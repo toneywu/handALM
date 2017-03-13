@@ -32,6 +32,13 @@ $subpanel_layout['list_fields'] = array (
     'vname' => 'LBL_ASSET_STATUS',
     'width' => '15%',
   ),
+  'enable_partial_allocation' => 
+  array (
+    'type' => 'bool',
+    'default' => true,
+    'label' => '允许散U分配',
+    'width' => '5%',
+  ),
   'edit_button' => 
   array (
     'vname' => 'LBL_EDIT_BUTTON',

@@ -33,7 +33,7 @@ class AOS_InvoicesViewEdit extends ViewEdit {
     require_once('modules/HAA_FF/ff_include_editview.php');
     initEditViewByFF((!empty($this->bean->haa_codes_id_c))?$this->bean->haa_codes_id_c:"",'HAT_EventType');
 	//20170203toney.wu add end
-		parent::display();
+		parent::display(); 
 		$html="";
 		if (isset($_GET["data"])) {
 			$cord_array=preg_split('/,/', $_GET["data"]);
@@ -72,7 +72,7 @@ class AOS_InvoicesViewEdit extends ViewEdit {
             	</script>";
             }
         }
-
+ 
         $cord=$_GET['cord'];
         $cord_array=preg_split('/,/', $cord);
         $accounts=BeanFactory::getBean('Accounts',$cord_array[1]);
@@ -156,24 +156,31 @@ if(isset($this->bean->hat_eventtype_id_c) && ($this->bean->hat_eventtype_id_c)!=
 		</script>";
 		}
 
-		
+	
 		//add by hq 170301 发票名字	
-	if(!isset($_GET["name"]) && isset($_GET["source_code_c"])){
+	if(isset($_GET["name"]) && !empty($_GET["name"]) && isset($_GET["source_code_c"])){
 		if(($_GET["source_code_c"])=='HAOS_Revenues_Quotes'){
-		//var_dump('23434');
+		var_dump($_GET["name"]);
 		//$source_code_name = $app_list_strings['AOS_Invoices'][$_GET["source_code_c"]];
-		var_dump($source_code_name);
+		//var_dump($source_code_name);
 		echo "<script>
-		var invoice_date_for_name = document.getElementById(\"invoice_date\").value;
-		var name = '收支计费项 ' + invoice_date_for_name;
+		var invoice_date_for_name = $(\"#invoice_date\").val();
+		var name = '".$_GET["name"]."'+' '+invoice_date_for_name;
 		$('#name').val(name);
       
-    	</script>";
+    	</script>"; 
     }
 
 	}
-
     //end add 170301
+    //add by hq 20170309 发票到期日期
+    if(isset($_GET["due_date"])){
+    	echo "<script>
+		var dueDate = '".$_GET["due_date"]."';
+		$('#due_date').val(dueDate);
+      
+    	</script>"; 
+    }
     //add by hq 20170301 自动带出期间
 		echo "<script> 
 			

@@ -1,20 +1,17 @@
 <?php
-$where_popup = "";
+$where_popup = " 1=1 ";
 if(isset($_REQUEST["ham_wo_contract_id"])&&!empty($_REQUEST["ham_wo_contract_id"])){
-    $where_popup.="aos_products.id IN (
+    $where_popup.="and aos_products.id IN (
                     SELECT
                       l.product_id
                     FROM
                       aos_contracts h,
-                      aos_products_quotes l
+                      aos_products_quotes l 
                     WHERE h.id = l.parent_id
                        AND  h.id = '".$_REQUEST["ham_wo_contract_id"]."')";
 }
-if(isset($_REQUEST["contract_flag_c"])&&!empty($_REQUEST["contract_flag_c"])){
-   if($where_popup!=''){
-      $where_popup .= ' and ';
-   }
-    $where_popup.="aos_products_cstm.contract_flag_c = '".$_REQUEST["contract_flag_c"]."'";
+if(isset($_REQUEST["contract_flag_c_advanced"])&&!empty($_REQUEST["contract_flag_c_advanced"])){
+    $where_popup.="and aos_products_cstm.contract_flag_c = '".$_REQUEST["contract_flag_c_advanced"]."'";
 }
 
 $popupMeta = array (
