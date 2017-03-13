@@ -2115,6 +2115,7 @@ $app_list_strings['hat_asset_scope_list']=array (
   'ASSET' => '所有设备/资产',
   'IT' => 'IT设备',
   'RACK' => 'IT机柜',
+  'RACKASSET' => 'IT机柜及线性资产',
 );
 
 $app_list_strings['hat_default_asset_list']=array (

@@ -366,6 +366,43 @@
                 </ul>
                 {* 7.8 Hide filter menu items when the windows is too small to display them *}
             {literal}
+                <script>
+                  var windowResize = function() {
+
+                    // only run if the desktop toolbar is in view
+                    if($(window).width() < 1201) { return true; }
+
+                    $('.desktop-toolbar ul.navbar-nav > li.hidden').removeClass('hidden');
+
+                    var tw = ($(window).width()) - $('.desktop-bar').width() - ($(window).width() * 0.05);
+                    var ti = $('.desktop-toolbar ul.navbar-nav > li');
+                    var tiw = 0;
+
+                    var calcTiw = function() {
+                      var paddingLeft = parseInt( $(this).css('padding-left').replace('px', '') );
+                      var paddingRight = parseInt( $(this).css('padding-right').replace('px', '') );
+                      var marginLeft = parseInt( $(this).css('margin-left').replace('px', '') );
+                      var marginRight = parseInt( $(this).css('margin-right').replace('px', '') );
+                      tiw += $(this).width() + paddingLeft + paddingRight + marginLeft + marginRight;
+                    }
+
+                    ti.each(calcTiw);
+
+                    while (tiw > tw) {
+                      ti = $('.desktop-toolbar ul.navbar-nav > li').not('.hidden').not('.all');
+                      $(ti).last().addClass('hidden');
+                      tiw = 0;
+                      ti.each(calcTiw);
+                    }
+
+                    $('.desktop-toolbar ul.navbar-nav > li.all').removeClass('hidden');
+                  };
+
+                $(document).ready(function() {
+                    $(window).resize(windowResize);
+                    windowResize();
+                });
+                </script>
                 <!-- <script>
                   var windowResize = function() {
                 
