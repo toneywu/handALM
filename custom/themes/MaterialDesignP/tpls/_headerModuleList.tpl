@@ -164,7 +164,7 @@
             <ul class="nav navbar-nav">
             {if $USE_GROUP_TABS}
                 {*Add by zengchen 20170209 HANDALM式的菜单导航栏*}
-                    <li class="topnav all">
+                    <li class="topnav">
                             <a class="dropdown-toggle navbar-brand btn-lg" id="grouptab_0" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-th"></i></a>
                             <span class="notCurrentTabRight"></span>
                             <ul class="dropdown-menu" role="menu text">
@@ -368,43 +368,6 @@
             {literal}
                 <script>
                   var windowResize = function() {
-
-                    // only run if the desktop toolbar is in view
-                    if($(window).width() < 1201) { return true; }
-
-                    $('.desktop-toolbar ul.navbar-nav > li.hidden').removeClass('hidden');
-
-                    var tw = ($(window).width()) - $('.desktop-bar').width() - ($(window).width() * 0.05);
-                    var ti = $('.desktop-toolbar ul.navbar-nav > li');
-                    var tiw = 0;
-
-                    var calcTiw = function() {
-                      var paddingLeft = parseInt( $(this).css('padding-left').replace('px', '') );
-                      var paddingRight = parseInt( $(this).css('padding-right').replace('px', '') );
-                      var marginLeft = parseInt( $(this).css('margin-left').replace('px', '') );
-                      var marginRight = parseInt( $(this).css('margin-right').replace('px', '') );
-                      tiw += $(this).width() + paddingLeft + paddingRight + marginLeft + marginRight;
-                    }
-
-                    ti.each(calcTiw);
-
-                    while (tiw > tw) {
-                      ti = $('.desktop-toolbar ul.navbar-nav > li').not('.hidden').not('.all');
-                      $(ti).last().addClass('hidden');
-                      tiw = 0;
-                      ti.each(calcTiw);
-                    }
-
-                    $('.desktop-toolbar ul.navbar-nav > li.all').removeClass('hidden');
-                  };
-
-                $(document).ready(function() {
-                    $(window).resize(windowResize);
-                    windowResize();
-                });
-                </script>
-                <!-- <script>
-                  var windowResize = function() {
                 
                     // only run if the desktop toolbar is in view
                     if($(window).width() < 1201) { return true; }
@@ -412,24 +375,23 @@
                     $('.desktop-toolbar ul.navbar-nav > li.hidden').removeClass('hidden');
                 
                     var tw = ($(window).width()) - $('.desktop-bar').width() - ($(window).width() * 0.05);
-                    var ti = $('.desktop-toolbar ul.navbar-nav > li');
+                    var ti = $('.desktop-toolbar ul.navbar-nav>li');
                     var tiw = 0;
-                
+                    //console.log(ti);
                     var calcTiw = function() {
-                      var paddingLeft = parseInt( $(this).css('padding-left').replace('px', '') );
-                      var paddingRight = parseInt( $(this).css('padding-right').replace('px', '') );
-                      var marginLeft = parseInt( $(this).css('margin-left').replace('px', '') );
-                      var marginRight = parseInt( $(this).css('margin-right').replace('px', '') );
+                      var paddingLeft = parseInt( $(this).css('padding-left').replace('px', ''));
+                      var paddingRight = parseInt( $(this).css('padding-right').replace('px', ''));
+                      var marginLeft = parseInt( $(this).css('margin-left').replace('px', ''));
+                      var marginRight = parseInt( $(this).css('margin-right').replace('px', ''));
                       tiw += $(this).width() + paddingLeft + paddingRight + marginLeft + marginRight;
                     }
-                
                     ti.each(calcTiw);
-                
                     while (tiw > tw) {
                       //FIX TIA by HandALM
-                      ti = $('.desktop-toolbar ul.navbar-nav > li').not('.hidden').not('.all');
+                      ti =  $('.desktop-toolbar ul.navbar-nav > li').not('.hidden').not('.all');
                       tia = $('.desktop-toolbar ul.navbar-nav > li').not('.hidden');
                       tiw = 0;
+                      $(ti).last().addClass('hidden');
                       tia.each(calcTiw);
                     }
                 
@@ -444,7 +406,7 @@
                     $(window).resize(windowResize);
                     windowResize();
                 });
-                </script> -->
+                </script>
             {/literal}
             {else}
 
