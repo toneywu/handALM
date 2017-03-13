@@ -13,7 +13,7 @@ array (
   array (
     'type' => 'varchar',
     'label' => 'LBL_ASSET_DESC',
-    'width' => '20%',
+    'width' => '10%',
     'default' => true,
   ),
   'ASSET_STATUS' => 
@@ -68,6 +68,34 @@ array (
     'studio' => 'visible',
     'label' => 'LBL_USING_ORG',
     'id' => 'USING_ORG_ID',
+    'link' => true,
+    'width' => '10%',
+    'default' => true,
+  ),
+  'ENABLE_EBS' => 
+  array (
+    'type' => 'bool',
+    'studio' => 'visible',
+    'label' => 'LBL_ENABLE_EBS',
+    'width' => '5%',
+    'default' => true,
+  ),
+  'FIXED_ASSET' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'label' => 'LBL_FIXED_ASSET',
+    'id' => 'FIXED_ASSET_ID',
+    'link' => true,
+    'width' => '10%',
+    'default' => true,
+  ),
+  'asset_source' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'label' => 'LBL_ASSET_SOURCE1',
+    'id' => 'asset_source_id',
     'link' => true,
     'width' => '10%',
     'default' => true,

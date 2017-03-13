@@ -164,7 +164,7 @@
             <ul class="nav navbar-nav">
             {if $USE_GROUP_TABS}
                 {*Add by zengchen 20170209 HANDALM式的菜单导航栏*}
-                    <li class="topnav all">
+                    <li class="topnav">
                             <a class="dropdown-toggle navbar-brand btn-lg" id="grouptab_0" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-th"></i></a>
                             <span class="notCurrentTabRight"></span>
                             <ul class="dropdown-menu" role="menu text">
@@ -367,6 +367,7 @@
                 {* 7.8 Hide filter menu items when the windows is too small to display them *}
             {literal}
                 <script>
+
                   var windowResize = function() {
 
                     // only run if the desktop toolbar is in view
@@ -404,6 +405,7 @@
                 });
                 </script>
                 <!-- <script>
+
                   var windowResize = function() {
                 
                     // only run if the desktop toolbar is in view
@@ -412,24 +414,23 @@
                     $('.desktop-toolbar ul.navbar-nav > li.hidden').removeClass('hidden');
                 
                     var tw = ($(window).width()) - $('.desktop-bar').width() - ($(window).width() * 0.05);
-                    var ti = $('.desktop-toolbar ul.navbar-nav > li');
+                    var ti = $('.desktop-toolbar ul.navbar-nav>li');
                     var tiw = 0;
-                
+                    //console.log(ti);
                     var calcTiw = function() {
-                      var paddingLeft = parseInt( $(this).css('padding-left').replace('px', '') );
-                      var paddingRight = parseInt( $(this).css('padding-right').replace('px', '') );
-                      var marginLeft = parseInt( $(this).css('margin-left').replace('px', '') );
-                      var marginRight = parseInt( $(this).css('margin-right').replace('px', '') );
+                      var paddingLeft = parseInt( $(this).css('padding-left').replace('px', ''));
+                      var paddingRight = parseInt( $(this).css('padding-right').replace('px', ''));
+                      var marginLeft = parseInt( $(this).css('margin-left').replace('px', ''));
+                      var marginRight = parseInt( $(this).css('margin-right').replace('px', ''));
                       tiw += $(this).width() + paddingLeft + paddingRight + marginLeft + marginRight;
                     }
-                
                     ti.each(calcTiw);
-                
                     while (tiw > tw) {
                       //FIX TIA by HandALM
-                      ti = $('.desktop-toolbar ul.navbar-nav > li').not('.hidden').not('.all');
+                      ti =  $('.desktop-toolbar ul.navbar-nav > li').not('.hidden').not('.all');
                       tia = $('.desktop-toolbar ul.navbar-nav > li').not('.hidden');
                       tiw = 0;
+                      $(ti).last().addClass('hidden');
                       tia.each(calcTiw);
                     }
                 
@@ -444,7 +445,7 @@
                     $(window).resize(windowResize);
                     windowResize();
                 });
-                </script> -->
+                </script>
             {/literal}
             {else}
 

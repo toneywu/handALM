@@ -29,7 +29,7 @@ class ProjectPlanner
 			$users=$this->loadAssigned();
 			echo $this->loadBaseInfo("dhtmlxgantt_meadow");
 			include('include\gantt\ProjectPlannerLayout.html');
-			echo '<script> var users='.json_encode($users).';var prj_id="'.$prj_id.'";var taskData='.$this->loadGanttData($prj_id).'</script>';
+			echo '<script> var users='.json_encode($users).';var prj_id="'.$prj_id.'";var taskData='.$this->loadGanttData($prj_id).';var priority='.$this->loadPriority().'</script>';
 			echo $this->loadExtConfig();
 			echo '<script type="text/javascript">
 				gantt.init("gantt_map");
@@ -54,7 +54,9 @@ class ProjectPlanner
 			project_task.duration duration,
 			project_task.milestone_flag milestone,
 			project_task.assigned_user_id assigned,
+			/*project_task.order_number order,*/
 			project_task.parent_task_id parent,
+			project_task.priority priority,
 			project_task.project_id project_id
 		FROM
 			project_task
@@ -89,6 +91,15 @@ class ProjectPlanner
 		$sql ="SELECT id `key`,IFNULL(last_name,first_name) `label` FROM contacts WHERE deleted = 0";
 		return $this->ExcuteDQL($sql);
 	}
+
+	protected function loadPriority(){
+		global $app_list_strings;
+		$priority_list=array();
+		foreach ($app_list_strings['project_task_priority_options'] as $k => $v) {
+			$priority_list[]=array("key"=>$k,"label"=>$v);
+		}
+		return json_encode($priority_list);
+	}
 	/**
 	 * @param  $postData 默认gantt POST传入的数据
 	 * @return XML 返回gantt XML格式信息
@@ -97,8 +108,8 @@ class ProjectPlanner
 		$type="";		//执行操作方式
 		$fields="";		//表字段
 		$values="";		//字段=值
-		$dbType=array('inserted','updated','deleted');
-		$fieldMap=array('id'=>'project_task_id','text'=>'name','progress'=>'percent_complete','start_date'=>'date_start','duration'=>'duration','milestone'=>'milestone_flag','assigned'=>'assigned_user_id','parent'=>'parent_task_id','project_id'=>'project_id');//字段映射Map
+		$dbType=array('inserted','updated','deleted','order');
+		$fieldMap=array('id'=>'project_task_id','text'=>'name','progress'=>'percent_complete','start_date'=>'date_start','duration'=>'duration','milestone'=>'milestone_flag','assigned'=>'assigned_user_id','parent'=>'parent_task_id','project_id'=>'project_id','priority'=>'priority');//字段映射Map
 		$fields_link=array('source','target','type');
 		foreach ($postData as $k => $v) {
 			$key=preg_split("/[0-9]_/", $k);
@@ -125,8 +136,13 @@ class ProjectPlanner
 				$tid=$result[0]['task_id'];
 			}
 		}
+		if ($type=="order"&&$get['gantt_mode']=="tasks") {
+			$queryType=$this->updateTask($fields,$values);
+			$tid=$queryType?$sid:'';
+		}
 		if ($type=="inserted"&&$get['gantt_mode']=="links") {
 			$queryType=$this->insertLinks($fields,$values);
+			$tid=$queryType?$sid:'';
 		}
 		if ($type=="deleted") {
 			$queryType=$this->deletedTask($values);
@@ -144,13 +160,20 @@ class ProjectPlanner
 	 *  @return html 返回gantt JS文件及CSS文件
 	 */
 	protected function loadBaseInfo($theme='',$langue='locale_cn'){
-		$infoHtml='<script type="text/javascript" src="include/gantt/codebase/dhtmlxgantt.js"></script>';
-		$infoHtml.='<script type="text/javascript" src="include/gantt/codebase/locale/'.$langue.'.js"></script>';
+		$infoHtml='<script src="include/gantt/codebase/dhtmlxSuite/dhtmlx.js" type="text/javascript"></script>';
+		$infoHtml.='<script src="include/gantt/codebase/dhtmlxgantt.js" type="text/javascript"></script>';
+		$infoHtml.='<script src="include/gantt/codebase/locale/'.$langue.'.js" type="text/javascript" charset="utf-8"></script>';
+		$infoHtml.='<script src="include/gantt/codebase/ext/dhtmlxgantt_undo.js" type="text/javascript" charset="utf-8"></script>';
+		$infoHtml.='<script src="include/gantt/codebase/ext/dhtmlxgantt_marker.js" type="text/javascript" charset="utf-8"></script>';
+		$infoHtml.='<script src="include/gantt/codebase/ext/dhtmlxgantt_tooltip.js" type="text/javascript" charset="utf-8"></script>';
+		$infoHtml.='<script src="include/gantt/codebase/ext/dhtmlxgantt_fullscreen.js" type="text/javascript" charset="utf-8"></script>';
+		$infoHtml.='<script src="include/gantt/codebase/ext/dhtmlxgantt_multiselect.js" type="text/javascript" charset="utf-8"></script>';
+		$infoHtml.='<script src="include/gantt/codebase/ext/dhtmlxgantt_keyboard_navigation.js" charset="utf-8"></script>';
+		$infoHtml.='<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">';
 		if ($theme) {
-			$infoHtml.='<link rel="stylesheet" type="text/css" href="include/gantt/codebase/dhtmlxgantt.css">';
-			$infoHtml.='<link rel="stylesheet" type="text/css" href="include/gantt/codebase/skins/'.$theme.'.css">';
+			$infoHtml.='<link id="skin" rel="stylesheet" type="text/css" href="include/gantt/codebase/skins/'.$theme.'.css">';
 		}else{
-			$infoHtml.='<link rel="stylesheet" type="text/css" href="include/gantt/codebase/dhtmlxgantt.css">';
+			$infoHtml.='<link id="skin" rel="stylesheet" type="text/css" href="include/gantt/codebase/dhtmlxgantt.css">';
 		}
 		return $infoHtml;
 	}
@@ -169,19 +192,23 @@ class ProjectPlanner
 
 	protected function updateTask($fields,$values){
 		$setStr=array();
-		$project_task_id="";
-		for($i=0;$i<count($fields);$i++) {
-			if ($fields[$i]=="percent_complete") {
-				$values[$i]=round($values[$i]*100);
+		$i=1;
+		while (($i-1) <= count($fields)) {
+			if ($fields[$i-1]=="percent_complete") {
+				$values[$i-1]=round($values[$i-1]*100);
 			}
-			if (is_numeric($values[$i])) {
-				$setStr[]=$fields[$i]."=".$values[$i];
+			if (is_numeric($values[$i-1])) {
+				$setStr[]=$fields[$i-1]."=".$values[$i-1];
 			}else{
-				$setStr[]=$fields[$i]."='".$values[$i]."'";
+				$setStr[]=$fields[$i-1]."='".$values[$i-1]."'";
 			}
+			if ($i%10==0) {
+				$sql="UPDATE project_task SET ".implode(",", $setStr)." WHERE project_task_id=".$values[$i-10];
+				$setStr=array();
+				$result=$this->ExcuteDML($sql);
+			}
+			$i++;
 		}
-		$sql="UPDATE project_task SET ".implode(",", $setStr)." WHERE project_task_id=".$values[0];
-		$result=$this->ExcuteDML($sql);
 		return $result;
 	}
 
@@ -250,7 +277,16 @@ class ProjectPlanner
 	 *	@return XML   
 	 */
 	protected function ganttXML($type,$sid,$tid){
-		$xml="<?xml version='1.0' ?><data><action type='".$type."' sid='".$sid."' tid='".$tid."' ></action></data>";
+		$xml="<?xml version='1.0' ?><data>";
+		if (is_numeric($sid)) {
+			$xml.="<action type='".$type."' sid='".$sid."' tid='".$tid."' ></action>";
+		}else{
+			$sids=preg_split('/,/', $sid);
+			foreach ($sids as $k => $v) {
+				$xml.="<action type='".$type."' sid='".$v."' tid='".$v."'></action>";
+			}
+		}
+		$xml.="</data>";
 		return $xml;
 	}
 }

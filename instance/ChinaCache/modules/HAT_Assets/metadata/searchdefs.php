@@ -47,6 +47,26 @@ array (
         'default' => true,
         'name' => 'hat_asset_locations_hat_assets_name',
       ),
+      'asset_source' => 
+      array (
+        'type' => 'relate',
+        'studio' => 'visible',
+        'label' => 'LBL_ASSET_SOURCE1',
+        'id' => 'asset_source_id',
+        'link' => true,
+        'width' => '10%',
+        'default' => true,
+        'name' => 'asset_source',
+      ),
+      'enable_ebs' => 
+      array (
+        'type' => 'bool',
+        'studio' => 'visible',
+        'label' => 'LBL_ENABLE_EBS',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'enable_ebs',
+      ),
     ),
     'advanced_search' => 
     array (

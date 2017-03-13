@@ -320,7 +320,7 @@ $dictionary['HAM_WO_Lines'] = array(
     'len' => '18',
     'size' => '20',
     'enable_range_search' => false,
-    'precision' => '8',
+    'precision' => '2',
   ),
 		
 		

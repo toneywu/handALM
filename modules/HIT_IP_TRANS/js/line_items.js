@@ -188,17 +188,22 @@ function openHitIpPopup(ln) {// 本文件为行上选择IP按钮
 	if (location_id ==""&&$("#location_id").val() != "") {
 		location_id = $("#location_id").val();
 	}
-	console.log("-----------------------------------");
+	
 	console.log($("#ham_maint_sites_id").val()+"location_id:"+location_id);
 	if($("#line_hit_ip_subnets"+ln).val()==""){
+		console.log("-----------------------------------");
 	    var popupFilter = '&current_mode=rack&location_id='+location_id+"&location_advanced="+$("#site").val();
 	   open_popup('HIT_IP_Subnets', 600, 850, popupFilter, true, true, popupRequestData, "MultiSelect", true);
 	
 	}else{
+		console.log("++++++++++++++++++++++++++++++++++++");
 	    var popupFilter = '&current_mode=rrack&location_id='+location_id+"&location_advanced="+$("#site").val();
 	    open_popup('HIT_IP_Subnets', 600, 850, popupFilter, true, true, popupRequestData);
 	}
+	//console.log("popupRequestData:"+popupRequestData);
 }
+
+
 
 function openCabinetPopup(ln) {// 本文件为行上选择机柜的按钮
 	lineno = ln;
@@ -403,13 +408,17 @@ function setAccessAssetBackupNameReturn(popupReplyData) {
 
 
 function setHitIpReturn(popupReplyData) {
+	console.log(popupReplyData);
 	if($("#line_hit_ip_subnets"+currentLine).val()==""){
 	    generate_ip_line(popupReplyData);
 		markLineDeleted(currentLine, "line_");
 	   $("#Trans_line_head").show();
 	   LineEditorClose(currentLine);
+	}else{
+		set_return(popupReplyData);	
 	}
-	set_return(popupReplyData);	
+	
+	//console.log("popupReplyData:"+popupReplyData);
 }
 
 
@@ -618,8 +627,9 @@ function insertLineData(asset_trans_line) { // 将数据写入到对应的行字
 		$("#line_hit_ip_subnets".concat(String(ln)))
 				.val(asset_trans_line.hit_ip_subnets);
 		// $("#line_associated_ip".concat(String(ln))).val(asset_trans_line.associated_ip);
-
-		$("#line_mask".concat(String(ln))).val(asset_trans_line.ip_netmask);
+        //update by liu
+		//$("#line_mask".concat(String(ln))).val(asset_trans_line.ip_netmask);
+		$("#line_mask".concat(String(ln))).val(asset_trans_line.mask);
 		$("#line_using_org".concat(String(ln))).val(asset_trans_line.using_org);
 		$("#line_gateway".concat(String(ln))).val(asset_trans_line.gateway);
 		$("#line_bandwidth_type".concat(String(ln)))
