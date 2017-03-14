@@ -164,7 +164,7 @@
             <ul class="nav navbar-nav">
             {if $USE_GROUP_TABS}
                 {*Add by zengchen 20170209 HANDALM式的菜单导航栏*}
-                    <li class="topnav">
+                    <li class="topnav all">
                             <a class="dropdown-toggle navbar-brand btn-lg" id="grouptab_0" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-th"></i></a>
                             <span class="notCurrentTabRight"></span>
                             <ul class="dropdown-menu" role="menu text">
@@ -445,7 +445,7 @@
                     $(window).resize(windowResize);
                     windowResize();
                 });
-                </script>
+                </script>-->
             {/literal}
             {else}
 
