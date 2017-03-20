@@ -104,7 +104,10 @@ array (
             'name' => 'height',
             'label' => 'LBL_HEIGHT',
           ),
-          1 => '',
+          1 => array (
+            'name' => 'location_desc',
+            'label' => 'LBL_LOCATION_DESC',
+          ),
         ),
         4 => 
         array (

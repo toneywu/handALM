@@ -45,12 +45,17 @@ function createRevenueFromClaim($Id){
 		$return_result['return_status']='E';
 		$err_msg.='已处理的保险理赔才能创建收支计费项!';
 	}
-
-	$rawRow['haa_frameworks_id_c'] = $rawRow['haa_frameworks_id_c'];
+    
+    //modify by hq 20170312
+	//$rawRow['haa_frameworks_id_c'] = $rawRow['haa_frameworks_id_c'];
+	$rawRow['haa_frameworks_id_c'] = $at->haa_frameworks_id_c;
+	//end modify 20170312
 	$rawRow['revenue_quote_number'] = '';
 	$rawRow['name'] = $at->name.'收支';
 	$rawRow['clear_status'] = 'Unclear';
 	$rawRow['event_date'] = date_format(date_create($at->time),"Y-m-d") ;
+	require_once('modules/HAOS_Revenues_Quotes/getPeriodForPHP.php');
+	$rawRow['period_name'] = getPeriod($rawRow['event_date'],$rawRow['haa_frameworks_id_c']);
 	$rawRow['source_code'] = 'HAOS_Insurance_Claims';
 	$rawRow['source_id'] = $at->id;
 

@@ -332,7 +332,7 @@ array (
         array (
           0 => 
           array (
-            'name' => 'supplier_org',
+            'name' => 'supplier_desc',
             'studio' => 'visible',
             'label' => 'LBL_SUPPLIER_ORG',
           ),

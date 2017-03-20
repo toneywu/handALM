@@ -45,7 +45,7 @@ class AOS_InvoicesViewDetail extends ViewDetail {
 			$("#delete_button").css("display","none");
 		}
 		</script>';
-	}
+	} 
 	
 	function populateInvoiceTemplates(){
 		global $app_list_strings;

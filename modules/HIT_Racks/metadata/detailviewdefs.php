@@ -126,7 +126,10 @@ array (
             'name' => 'using_target',
             'label' => 'LBL_USING_TARGET',
           ),
-          1 => '',
+          1 => array (
+            'name' => 'location_desc',
+            'label' => 'LBL_LOCATION_DESC',
+          ),
         ),
       ),
       'lbl_detailview_panel1' => 

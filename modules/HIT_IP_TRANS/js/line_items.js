@@ -601,6 +601,8 @@ function insertTransLineHeader(tableid) {
 	n3.innerHTML = "<span id='line_broadband_type_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_BROADBAND_TYPE')+"</span>";
 	var n4 = x.insertCell(30);
 	n4.innerHTML = "<span id='line_using_org_title'>使用组织</span>";
+	var n5 = x.insertCell(31);
+	n4.innerHTML = "<span id='line_comment_title'>备注</span>";
 
 }
 
@@ -673,6 +675,7 @@ function insertLineData(asset_trans_line) { // 将数据写入到对应的行字
 	    $("#line_status".concat(String(ln))).val(asset_trans_line.status);
 	    $("#line_port_backup".concat(String(ln))).val(asset_trans_line.port_backup);
 	    $("#line_monitoring_backup".concat(String(ln))).val(asset_trans_line.monitoring_backup);
+	    $("#line_comment".concat(String(ln))).val(asset_trans_line.comment);
 	    $("#line_channel_content_backup".concat(String(ln))).val(asset_trans_line.channel_content_backup);
 	    $("#line_channel_num_backup".concat(String(ln))).val(asset_trans_line.channel_num_backup);
 	    $("#line_date_start".concat(String(ln))).val(asset_trans_line.date_start);
@@ -852,6 +855,7 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			+ "<td><span name='displayed_line_status["+ prodln+ "]' id='displayed_line_status"+ prodln+ "'></span></td>"
 			+ "<td><span name='displayed_line_broadband_type["+ prodln+ "]' id='displayed_line_broadband_type"+ prodln+ "'></span></td>"
 			+ "<td><span name='displayed_line_using_org[" + prodln+ "]' id='displayed_line_using_org" + prodln + "'></span></td>"
+			+ "<td><span name='displayed_line_comment[" + prodln+ "]' id='displayed_line_comment" + prodln + "'></span></td>"
 			+"<td><input type='button' value='"+ SUGAR.language.get('app_strings', 'LBL_EDITINLINE')
 			+"' class='button'  id='btn_edit_line" + prodln+ "' onclick='LineEditorShow(" + prodln + ")'></td>";
 	var z2 = tablebody.insertRow(-1);
@@ -1426,6 +1430,16 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			+ "<input style=' width:153px;' type='text' name='line_using_org["+ prodln+ "]' id='line_using_org"
 			+ prodln+ "' readonly='readonly' maxlength='50' value='' title=''>"
 			+ "</span>"
+			// 备注
+			+"<span class='input_group'>"
+			+ "<label id='line_comment"
+			+ prodln
+			+ "_label'>"
+			+ "备注"
+			+ "</label>"
+			+ "<input style=' width:153px;' type='text' name='line_comment["
+			+ prodln + "]' id='line_comment" + prodln
+			+ "' maxlength='50' value='' title=''>" + "</span>"
 
 			+ "<input type='hidden' name='line_history_id[" + prodln+ "]' id='line_history_id" + prodln + "' >"
 			+ "<input type='hidden' name='line_deleted[" + prodln+ "]' id='line_deleted" + prodln + "' value='0'>"
@@ -1464,6 +1478,7 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
 			.html($("#line_hit_ip_subnets" + ln).val());
 	$("#displayed_line_mask" + ln).html($("#line_mask" + ln).val());
 	$("#displayed_line_using_org" + ln).html($("#line_using_org" + ln).val());
+	
 	$("#displayed_line_gateway" + ln).html($("#line_gateway" + ln).val());
 	$("#displayed_line_bandwidth_type" + ln)
 			.html($("#line_bandwidth_type" + ln).val());
@@ -1505,6 +1520,7 @@ function renderTransLine(ln) { // 将编辑器中的内容显示于正常行中
   }  
   $("#displayed_line_port_backup"+ln).html($("#line_port_backup"+ln).val());
   $("#displayed_line_monitoring_backup"+ln).html($("#line_monitoring_backup"+ln).val());
+  $("#displayed_line_comment" + ln).html($("#line_comment" + ln).val());
   $("#displayed_line_channel_content_backup"+ln).html($("#line_channel_content_backup"+ln).val());
   $("#displayed_line_channel_num_backup"+ln).html($("#line_channel_num_backup"+ln).val());
   $("#displayed_line_access_assets_backup_name"+ln).html($("#line_access_assets_backup_name"+ln).val());
@@ -1724,6 +1740,7 @@ function markLineDeleted(ln, key) {// 删除当前行
 	    removeFromValidate('EditView','line_monitoring_backup'+ ln);
 	    removeFromValidate('EditView','line_channel_num_backup'+ ln);
 	    removeFromValidate('EditView','line_channel_content_backup'+ ln);
+	    removeFromValidate('EditView','line_comment'+ ln);
 	    removeFromValidate('EditView','line_date_start'+ ln);
 	    removeFromValidate('EditView','line_date_end'+ ln);
 	    removeFromValidate('EditView','line_broadband_type'+ ln);
@@ -1794,7 +1811,7 @@ function LineEditorClose(ln) {// 关闭行编辑器（显示为正常行）
 }
 
 function single_Field(fieldName,type,i){
-	if (fieldName == 'line_mrtg_link' || fieldName == 'line_mrtg_link_backup') {
+	if (fieldName == 'line_comment' || fieldName == 'line_mrtg_link_backup') {
 		console.log("fieldName:"+fieldName);
 		console.log("type:"+type);
 		console.log("i:"+i);
@@ -1839,6 +1856,7 @@ function single_changeRequired(lineRecord,i){
 	single_Field("line_port_backup",lineRecord.change_port_backup,i);
 	single_Field("line_monitoring_backup",lineRecord.change_monitoring_backup,i);
 	single_Field("line_channel_content_backup",lineRecord.change_channel_content_backup,i);
+	single_Field("line_comment",lineRecord.change_comment,i);
 	single_Field("line_channel_num_backup",lineRecord.change_channel_num_backup,i);
 	single_Field("line_status",lineRecord.change_status,i);
 	single_Field("line_status_dis",lineRecord.change_status,i);
@@ -1897,6 +1915,7 @@ function dulicateTranLine(ln) {// 关闭行编辑器（显示为正常行）
 				port_backup:"",
 				monitoring_backup:"",
 				channel_content_backup:"",
+				comment:"",
 				channel_num_backup:"",
 				date_start:"",
 				date_end:"",

@@ -18,34 +18,34 @@ function validateHeaderAmountAndLineAmount(){
 	var result = true;
 	var sum_line_amount = 0;
 	var header_amount = unformatNumber($('#payment_amount').val().trim(),',','.');
-   
+
 	$("input[id^=line_amount]").each(function(){
 		if($('#line_body'+i).css("display")!="none"){
 			sum_line_amount = eval(sum_line_amount + unformatNumber($(this).val().trim(),',','.'));
 		}
 	});
-	 console.log('h::'+header_amount);
-	 console.log('l::'+sum_line_amount);
-   if(sum_line_amount == header_amount){
-   	  result = true;
-   	}else{
-      result = false;
-   	}
-   	return result;
+	console.log('h::'+header_amount);
+	console.log('l::'+sum_line_amount);
+	if(sum_line_amount == header_amount){
+		result = true;
+	}else{
+		result = false;
+	}
+	return result;
 }
 
 function getPeriod(){
-    var dateTime=document.getElementById("payment_date").value;
-     console.log(dateTime);
-    var frame_id=document.getElementById("haa_frameworks_id_c").value;
-    if(dateTime)
-    {
-        $.ajax({
+	var dateTime=document.getElementById("payment_date").value;
+	console.log(dateTime);
+	var frame_id=document.getElementById("haa_frameworks_id_c").value;
+	if(dateTime)
+	{
+		$.ajax({
             //async:false,
             url: 'index.php?to_pdf=true&module=HAOS_Payments&action=getPeriod',
             data: {'dateTime':dateTime,'frame_id':frame_id},
             type:'POST',
-           	dataType: "json",
+            dataType: "json",
             success: function (data) {//调用方法。
                 //data=$.parseJSON(data);
                 //data=JSON.parse(data);
@@ -53,9 +53,9 @@ function getPeriod(){
                 $("#haa_periods_id_c").val(data.id); 
                 $("#period_name").val(data.name);
 
-   			 }
-   			});
-    }
+            }
+        });
+	}
 }
 
 function check_amount(){
@@ -68,10 +68,10 @@ function check_amount(){
 			result = true;
 		}else{
 			BootstrapDialog.alert({
-					type : BootstrapDialog.TYPE_DANGER,
-					title : '验证失败',
-					message : '行金额总和必须等于头金额'
-				});
+				type : BootstrapDialog.TYPE_DANGER,
+				title : '验证失败',
+				message : '行金额总和必须等于头金额'
+			});
 			result = false;
 		}
  //    }else{
@@ -80,9 +80,53 @@ function check_amount(){
 	return result;
 }
 
-$(document).ready(function(){
-    //alert('23432');
+function editControl(){
 
+	//document.getElementsByTagName('input').disabled=true;
+	if($('input[name=record]').val()){
+		
+		var inputArr=$('#EditView_tabs input');
+		var inputArrLength=inputArr.length;
+		for(var i=0;i<inputArrLength;i++){
+			inputArr[i].disabled=true;
+		}
+
+		var selectArr=$('#EditView_tabs select');
+		var selectArrLength=selectArr.length;
+		for(var i=0;i<selectArrLength;i++){
+			selectArr[i].disabled=true;
+		}
+
+		var buttonArr=$('#EditView_tabs button');
+		var buttonArrLength=buttonArr.length;
+		for(var i=0;i<buttonArrLength;i++){
+			buttonArr[i].disabled=true;
+		}
+
+		var textareaArr=$('#EditView_tabs textarea');
+		var textareaArrLength=textareaArr.length;
+		for(var i=0;i<textareaArrLength;i++){
+			textareaArr[i].disabled=true;
+		}
+
+		// var spanArr=$('.datetimepicker.datetimepicker-dropdown-bottom-right.dropdown-menu');
+		// var spanArrLength=spanArr.length;
+		// for(var i=0;i<spanArrLength;i++){
+		// 	spanArr[i].disabled=true;
+		// }
+
+		if($('#payment_status').val()=='P'){
+			document.getElementById('payment_status').removeAttribute('disabled');
+			//$('#payment_status').removeAttribute('disabled');
+		}
+
+		
+	}
+}
+
+$(document).ready(function(){
+	//alert('23432');
+	editControl();
 	//改写Save事件，在Save之前加入数据校验
 	SUGAR.util.doWhen("typeof OverwriteSaveBtn == 'function'", function(){
 		OverwriteSaveBtn(check_amount);//ff_include.js 注意preValidateFunction是一个Function，在此引用时不加（）

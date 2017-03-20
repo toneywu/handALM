@@ -66,4 +66,5 @@ $mod_strings = array (
   'LBL_NUMBER_OF_PERIODS' => '结算期数',
   'LBL_DEPOSIT_FLAG_C' => '是否押金',
   'LBL_PREPAY_FLAG_C' => '是否预付',
+  'LBL_CONTRACT_PRICE' => '价格说明',
 );

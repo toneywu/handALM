@@ -1,5 +1,6 @@
 <?php
 // created: 2016-10-19 10:22:12
+
 $subpanel_layout['list_fields'] = array (
   'name' => 
   array (
@@ -36,7 +37,8 @@ $subpanel_layout['list_fields'] = array (
     'width' => '10%',
     'default' => true,
   ),
-  'asset_status_taged' => 
+  //asset_status_taged
+  'asset_status' => 
   array (
     'type' => 'varchar',
     'default' => true,
@@ -45,7 +47,7 @@ $subpanel_layout['list_fields'] = array (
     'width' => '10%',
   ),
   
-  'hat_asset_locations_hat_assets_name' => 
+  /*'hat_asset_locations_hat_assets_name' => 
   array (
     'type' => 'relate',
     'link' => true,
@@ -56,6 +58,23 @@ $subpanel_layout['list_fields'] = array (
     'widget_class' => 'SubPanelDetailViewLink',
     'target_module' => 'HAT_Asset_Locations',
     'target_record_key' => 'hat_asset_locations_hat_assetshat_asset_locations_ida',
+  ),*/
+  //add bu liu
+  'location_name' => 
+  array (
+    'type' => 'varchar',
+    'default' => true,
+    'studio' => 'visible',
+    'vname' => 'LBL_LOCATION',
+    'width' => '10%',
+  ),
+  'rack_name' => 
+  array (
+    'type' => 'varchar',
+    'default' => true,
+    'studio' => 'visible',
+    'vname' => '所在U位',
+    'width' => '10%',
   ),
   'edit_button' => 
   array (

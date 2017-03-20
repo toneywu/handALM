@@ -184,7 +184,28 @@ class Account extends Company {
 		return $this->get_linked_beans('contacts','Contact');
 	}
 
-
+    //ADD BY liu
+    function get_assets2() {
+    
+	    $query = "SELECT
+					hat_asset_locations. NAME location_name,
+					hat_asset_locations.id locations_id,
+					hit_racks. NAME rack_name,
+					hit_racks.id hit_rack_id,
+					'hat_assets' panel_name,
+					hat_assets.*
+				FROM
+					hat_assets
+				LEFT JOIN hit_rack_allocations ON hit_rack_allocations.hat_assets_id = hat_assets.id
+				LEFT JOIN hit_racks ON hit_rack_allocations.hit_racks_id = hit_racks.id
+				LEFT JOIN hat_asset_locations_hat_assets_c ON hat_assets.id = hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_assets_idb
+				LEFT JOIN hat_asset_locations ON hat_asset_locations_hat_assets_c.hat_asset_locations_hat_assetshat_asset_locations_ida = hat_asset_locations.id
+				WHERE 1=1
+				AND (hat_assets.owning_org_id = '".$this->id."' OR hat_assets.using_org_id ='".$this->id."')
+				AND hat_assets.deleted = 0
+				AND hat_asset_locations_hat_assets_c.deleted = 0";
+		return $query;
+    }
 
 	function clear_account_case_relationship($account_id='', $case_id='')
 	{

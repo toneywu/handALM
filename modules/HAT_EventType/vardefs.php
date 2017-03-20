@@ -1673,6 +1673,31 @@ $dictionary['HAT_EventType'] = array (
 			'studio' => 'visible',
 			'dependency' => false,
 			),
+		//备注
+		'change_comment' => array (
+			'required' => false,
+			'name' => 'change_comment',
+			'vname' => 'LBL_CHANGE_COMMENT',
+			'type' => 'enum',
+			'massupdate' => 0,
+			'default' => 'LOCKED',
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => 100,
+			'size' => '20',
+			'options' => 'cux_event_type_option_list',
+			'studio' => 'visible',
+			'dependency' => false,
+			),
 		
 		//vlan通道
 		'change_vlan_channel' => array (

@@ -87,7 +87,7 @@ class AOS_Contracts extends AOS_Contracts_sugar {
         require_once('modules/AOS_Products_Quotes/AOS_Utils.php');
 
         perform_aos_save($this);
-
+ 
 		parent::save($check_notify);
 
         require_once('modules/AOS_Line_Item_Groups/AOS_Line_Item_Groups.php');
@@ -102,7 +102,7 @@ class AOS_Contracts extends AOS_Contracts_sugar {
 
 	function mark_deleted($id)
 	{
-        $productQuote = new AOS_Products_Quotes();
+        $productQuote = new AOS_Products_Quotes(); 
         $productQuote->mark_lines_deleted($this);
         $this->deleteCall();
 		parent::mark_deleted($id);

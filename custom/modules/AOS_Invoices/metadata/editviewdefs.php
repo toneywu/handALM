@@ -204,8 +204,11 @@ array (
 <option label="已取消" value="Cancelled">已取消</option>
 <option label="部分付款" value="PartedPaid">部分付款</option>
 <option label="已退回" value="Returned">已退回</option>
-</select>&nbsp;&nbsp;&nbsp;&nbsp;<input name="amount_c" style="width:180px;" id="amount_c" size="30" maxlength="26" value="" title="" tabindex="0" type="text" disabled=true>',
-          ),
+</select>&nbsp;&nbsp;&nbsp;&nbsp;
+ <input name="status_hide" value="Unpaid" id="status_hide" title="" style="display:none;">
+ <input name="amount_c_hide" style="width:180px;display:none;" id="amount_c_hide" size="30" maxlength="26" value="0" title="" tabindex="0" type="text">
+<input name="amount_c" style="width:180px;" id="amount_c" size="30" maxlength="26" value="" title="" tabindex="0" type="text" disabled=true>',
+          ), 
           1 => 
           array (
             'name' => 'assigned_user_name',

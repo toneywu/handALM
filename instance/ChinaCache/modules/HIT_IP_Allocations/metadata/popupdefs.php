@@ -183,5 +183,12 @@ $popupMeta = array (
     'width' => '10%',
     'default' => true,
   ),
+  'COMMENT' => 
+  array (
+    'type' => 'varchar',
+    'label' => 'LBL_COMMENT',
+    'width' => '10%',
+    'default' => true,
+  ),
 ),
 );

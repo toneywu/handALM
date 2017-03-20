@@ -27,18 +27,35 @@ require_once('modules/AOS_Contracts/createRevenueFromContract.php');
 
 $contractId=$_REQUEST['record'];
 
-$revenues_id=createRevenueFromContract($contractId,'2');
-if ($revenues_id==""){
-	die('当前没有押金需要收取！');
+$list=getInfoToInvoice($contractId,'2');
+//die($list['value']);
+if ($list['value']==""){
+	die('当前没有押金需要收取！'); 
 }
-$name=getName($contractId,'2');
-$list=getCord($revenues_id);
+$name=getName($contractId,'2');  
+// $list=getCord($revenues_id); 
 $status='Paid';
 $value_str=implode(',', $list['value']);
 $cord_str=implode(',', $list['cord']);
 $source_reference=getSourceReference($contractId);
-/*$aos_invoices_id=createInvoiceFromContract($haos_revenues_quotes_id,'1');*/
+//$aos_invoices_id=createInvoiceFromContract($haos_revenues_quotes_id,'1');
 //?module=AOS_Invoices&action=editview&data='+val['value']+'&cord='+val['cord']
-header('Location: index.php?module=AOS_Invoices&action=EditView&status='.$status.'&name='.$name.'&data='.$value_str.'&cord='.$cord_str.'&amount_c=0&source_code_c=AOS_Contracts&source_reference_c='.$source_reference);
+header('Location: index.php?module=AOS_Invoices&action=EditView&status='.$status.'&name='.$name.'&data='.$value_str.'&cord='.$cord_str.'&amount_c=0&source_code_c=AOS_Contracts&source_reference_c='.$source_reference.'&revenues_source_code_c=AOS_Contracts&revenues_source_code_id='.$contractId);
+
+
+
+// $revenues_id=createRevenueFromContract($contractId,'2');
+// if ($revenues_id==""){
+// 	die('当前没有押金需要收取！');
+// }
+// $name=getName($contractId,'2');  
+// $list=getCord($revenues_id); 
+// $status='Paid';
+// $value_str=implode(',', $list['value']);
+// $cord_str=implode(',', $list['cord']);
+// $source_reference=getSourceReference($contractId);
+// //$aos_invoices_id=createInvoiceFromContract($haos_revenues_quotes_id,'1');
+// //?module=AOS_Invoices&action=editview&data='+val['value']+'&cord='+val['cord']
+// header('Location: index.php?module=AOS_Invoices&action=EditView&status='.$status.'&name='.$name.'&data='.$value_str.'&cord='.$cord_str.'&amount_c=0&source_code_c=AOS_Contracts&source_reference_c='.$source_reference);
 
 ?>

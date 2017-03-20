@@ -26,6 +26,7 @@ $event_sql = "SELECT
 			  h.change_mrtg_link_backup,
 			  h.change_access_assets_name ,
 			  h.change_date_end
+			  ,h.change_comment
 			  ,h.change_date_start
 			  ,h.change_port_backup
 			  ,h.change_monitoring_backup

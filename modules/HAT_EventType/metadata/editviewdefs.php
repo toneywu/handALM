@@ -501,8 +501,18 @@ array (
           ),
         14 => 
         array (
-          0 => 'no_add_ip_lines_flag',
-          1 => 'show_lines_using_org_flag',
+          0 => 
+          array (
+            'name' => 'change_comment',
+            'studio' => 'visible',
+            'label' => 'LBL_CHANGE_COMMENT',
+            ),
+          1 => 'no_add_ip_lines_flag',
+          ),
+        15 => 
+        array (
+          0 => 'show_lines_using_org_flag',
+          1 => '',
           ),
         ),
 ),

@@ -1,18 +1,24 @@
 $.getScript("modules/HAA_FF/ff_include.js");
-
 function call_ff() {
     triger_setFF($("#haa_ff_id").val(),"Accounts");
-    $("a.collapsed").click();
+    $(".expandLink").click();
 }
 
 function setBusinessTypePopupReturn(popupReplyData){//选择完产品后的动作
     set_return(popupReplyData);
 	call_ff();
+    //开始建立flexFields
+    //triger_setFF($("#haa_ff_id").val(),"Accounts")
+    //$(".expandLink").click();
 }
 
 
 function DocumentReady() {
 
+    //触发FF
+    SUGAR.util.doWhen("typeof setFF == 'function'", function(){
+        call_ff();
+      });
 
     $('#is_le_c').change(function(){ //是否是法人组织
         //如果=Y，则显示公司法人单位信息的面板，并且将法人单位信息中的统一注册号置为必须。否则隐藏，法人单位信息中所有字段为非必须。
@@ -47,4 +53,12 @@ function DocumentReady() {
 }
 
 
-$(document).ready(DocumentReady);
+$(document).ready(function(){
+    //add  by liu
+    var full_name_html =$("#full_name_c").parent().prev().html();
+    full_name_html +='<span class="required">*</span>';
+    $("#full_name_c").parent().prev().html(full_name_html);
+    addToValidate('EditView','full_name_c','varchar','true',SUGAR.language.get('Accounts','LBL_FULL_NAME'));
+    removeFromValidate('EditView','name');
+    $("#name").parent().prev().find("span").html("");
+});

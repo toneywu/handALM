@@ -89,6 +89,7 @@ function createRevenue($revenueRow,$quoteRow){
     $revenue_quote_id=$revenue->id;
 
 //Setting Quote Items
+   
     $quote = new AOS_Products_Quotes();
     $quoteRow['id'] = '';
     $quoteRow['parent_id']=$revenue_quote_id;
@@ -98,6 +99,8 @@ function createRevenue($revenueRow,$quoteRow){
     }
     $quote->populateFromRow($quoteRow);
     $quote->process_save_dates =false;
+
     $quote->save();
+
     return $revenue_quote_id;
 }

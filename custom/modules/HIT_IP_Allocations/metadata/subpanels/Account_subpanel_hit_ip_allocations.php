@@ -41,10 +41,30 @@ $subpanel_layout['list_fields'] = array (
     'target_module' => 'HAT_Assets',
     'target_record_key' => 'access_assets_id',
   ),
+  'access_assets_backup_name' => 
+  array (
+    'type' => 'relate',
+    'studio' => 'visible',
+    'vname' => 'LBL_ACCESS_ASSETS_BACKUP_NAME',
+    'id' => 'ACCESS_ASSETS_BACKUP_ID',
+    'link' => true,
+    'width' => '10%',
+    'default' => true,
+    'widget_class' => 'SubPanelDetailViewLink',
+    'target_module' => 'HAT_Assets',
+    'target_record_key' => 'access_assets_backup_id',
+  ),
   'port' => 
   array (
     'type' => 'varchar',
     'vname' => 'LBL_PORT',
+    'width' => '15%',
+    'default' => true,
+  ),
+  'port_backup' => 
+  array (
+    'type' => 'varchar',
+    'vname' => 'LBL_PORT_BACKUP',
     'width' => '15%',
     'default' => true,
   ),
@@ -76,10 +96,31 @@ $subpanel_layout['list_fields'] = array (
     'width' => '10%',
     'default' => true,     
   ),
+  'channel_num_backup' => 
+  array ( 
+    'type' => 'varchar',
+    'vname' => 'LBL_CHANNEL_NUM_BACKUP',
+    'width' => '10%',
+    'default' => true,     
+  ),
   'channel_content' =>
   array (
     'type' => 'varchar',
     'vname' => 'LBL_CHANNEL_CONTENT',
+    'width' => '10%',
+    'default' => true,    
+    ),
+  'channel_content_backup' =>
+  array (
+    'type' => 'varchar',
+    'vname' => 'LBL_CHANNEL_CONTENT_BACKUP',
+    'width' => '10%',
+    'default' => true,    
+    ),
+  'comment' =>
+  array (
+    'type' => 'varchar',
+    'vname' => 'LBL_COMMENT',
     'width' => '10%',
     'default' => true,    
     ),

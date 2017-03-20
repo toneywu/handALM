@@ -24,7 +24,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * @author Salesagility Ltd <info@salesagility.com>
  */
-//创建收支项公用函数
+//创建发票项公用函数
     require_once('modules/AOS_Invoices/AOS_Invoices.php');
     require_once('modules/AOS_Products_Quotes/AOS_Products_Quotes.php');
 function createInvoices($invoiceRow,$quoteRow){
@@ -77,8 +77,8 @@ function createInvoices($invoiceRow,$quoteRow){
 //Setting Quote Items
     $quote = new AOS_Products_Quotes();
     $quoteRow['id'] = '';
-    $quoteRow['parent_id']=$invoice_id;
-    $quoteRow['parent_type']='AOS_Invoices';
+    $quoteRow['parent_id']=$invoice_id; 
+    $quoteRow['parent_type']='AOS_Invoices'; 
     if($quoteRow['line_item_type_c']=='Service'){
         $quoteRow['product_id']='0';
     }

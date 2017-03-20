@@ -188,11 +188,17 @@ var loadNextLevel = false;
 
 	function checkNodeSelectable(e, zTreeObj, treeNode) {
 	//依据当前节点属性以及当前的模式判断是否可以选中。
-	
+	console.log("============================");
+	console.log(treeNode);
+	console.log(current_mode);
+	console.log(treeNode.type);
+	console.log(treeNode.enable_it_rack);
+
+
 	if ((current_mode=="asset" && treeNode.type=="asset") ||//选择所有资产
 		(current_mode=="rackasset" && treeNode.type=="asset" && (treeNode.enable_it_rack=="1"||treeNode.enable_linear=="1")) ||//选择IT可联网设备
 		(current_mode=="it" && treeNode.type=="asset" &&  treeNode.enable_it_ports=="1") ||//选择IT可联网设备
-		(current_mode=="rack" && treeNode.type=="asset" && typeof(treeNode.rack_id)!="undefined") //选择机柜 
+		(current_mode=="rack" && treeNode.type=="asset" && (typeof(treeNode.rack_id)!="undefined"||treeNode.enable_it_rack=="1")) //选择机柜 
 		){
 			return true;
 		} else {
@@ -427,7 +433,7 @@ function showNodeDetailBtn(node) {
 	((current_mode=="asset" && node.type=="asset") ||//选择所有资产
 		(current_mode=="rackasset" && node.type=="asset" && (node.data.enable_it_rack=="1"||node.data.enable_linear=="1")) ||//选择IT可联网设备
 		(current_mode=="it" && node.type=="asset" && node.data.enable_it_ports=="1") ||//选择IT可联网设备
-		(current_mode=="rack" && node.type=="asset" && typeof(node.data.rackid)!="undefined") //选择机柜
+		(current_mode=="rack" && node.type=="asset" && (typeof(node.data.rackid)!="undefined"||node.data.enable_it_rack=="1") )//选择机柜
 		))
 		 {
 		 return "<a href='#' id='singleSelectBtn' class='button' onclick='btn_select_clicked(\""+node.id+"\")'>"+SUGAR.language.get('HAT_Asset_Locations', 'LBL_BTN_SELECT')+"</a>";

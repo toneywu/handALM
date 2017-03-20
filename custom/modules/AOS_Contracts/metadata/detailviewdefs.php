@@ -12,6 +12,10 @@ array (
         array (
           'file' => 'modules/AOS_Contracts/js/AOS_Contracts_detailview.js',
         ),
+        1 => 
+        array (
+          'file' => 'custom/modules/AOS_Contracts/js/updateStatus.js',
+        ),
       ),
       'form' => 
       array (
@@ -80,6 +84,11 @@ array (
               ),
             ),
           ),
+          9 => 
+          array (
+            'customCode' => '<input type="button" class="button" onClick="updateStatus();" value="状态修改">',
+          ),
+
         ),
       ),
       'maxColumns' => '2',

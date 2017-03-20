@@ -104,6 +104,7 @@ function display_lines($focus, $field, $value, $view) {
 									,hat.status,hat.port_backup
 									,hat.monitoring_backup
 									,hat.channel_content_backup
+									,hat.comment
 									,hat.channel_num_backup
 									,ifnull(hat.date_start,'') date_start
 									,ifnull(hat.date_end,'') date_end,hat.status,hat.enable_action,hat.broadband_type,hat.child_port,hat.vlan_channel,hat.history_id
@@ -154,6 +155,7 @@ function display_lines($focus, $field, $value, $view) {
 							,hat.status,hat.port_backup
 							,hat.monitoring_backup
 							,hat.channel_content_backup
+							,hat.comment
 							,hat.channel_num_backup
 							,ifnull(hat.date_start,'') date_start
 							,ifnull(hat.date_end,'') date_end ,hat.status,hat.enable_action,hat.broadband_type,hat.child_port,hat.vlan_channel,hat.history_id
@@ -233,6 +235,7 @@ function display_lines($focus, $field, $value, $view) {
 								,hat.status,hat.port_backup
 								,hat.monitoring_backup
 								,hat.channel_content_backup
+								,hat.comment
 								,hat.channel_num_backup
 								,ifnull(hat.date_start,'') date_start
 								,ifnull(hat.date_end,'') date_end,hat.status,hat.enable_action,hat.broadband_type,hat.child_port,hat.vlan_channel,hat.history_id
@@ -277,6 +280,7 @@ function display_lines($focus, $field, $value, $view) {
 								,hat.status,hat.port_backup
 								,hat.monitoring_backup
 								,hat.channel_content_backup
+								,hat.comment
 								,hat.channel_num_backup
 								,ifnull(hat.date_start,null) date_start,hat.enable_action
 								,ifnull(hat.date_end,'') date_end,hat.status,hat.broadband_type
@@ -328,6 +332,7 @@ function display_lines($focus, $field, $value, $view) {
 			  ,h.change_port_backup
 			  ,h.change_monitoring_backup
 			  ,h.change_channel_content_backup
+			  ,h.change_comment
 			  ,h.change_channel_num_backup
 			  ,h.change_status,h.change_access_assets_backup_name,h.change_enable_action,h.change_broadband_type,h.change_child_port,h.change_vlan_channel
 			  ,h.change_backup_asset

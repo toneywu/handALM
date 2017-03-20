@@ -22,6 +22,27 @@ $subpanel_layout['list_fields'] = array (
     'width' => '10%',
     'default' => true,
   ),
+  'due_date'=>
+  array (
+    'type' => 'date',
+    'vname' => 'LBL_DUE_DATE',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'deposit_flag'=>
+  array (
+    'type' => 'bool',
+    'vname' => 'LBL_DEPOSIT_FLAG',
+    'width' => '10%',
+    'default' => true,
+  ),
+  'prepay_flag'=>
+  array (
+    'type' => 'bool',
+    'vname' => 'LBL_PREPAY_FLAG',
+    'width' => '10%',
+    'default' => true,
+  ),
   'total_price'=>
   array (
     'type' => 'varchar',

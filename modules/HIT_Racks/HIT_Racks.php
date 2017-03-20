@@ -109,6 +109,7 @@ class HIT_Racks extends HIT_Racks_sugar {
         $asset->name = $this->asset_number;//asset_tag
         $asset->asset_number = $this->asset_number;//asset_number
         $asset->asset_desc = $this->name;
+        $asset->location_desc = $this->location_desc;//add by liu
         $asset->aos_products_id = $this->aos_products_id;
 
         $asset->hat_asset_locations_hat_assetshat_asset_locations_ida = $this->asset_location_id;

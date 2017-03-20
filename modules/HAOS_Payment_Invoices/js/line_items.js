@@ -81,8 +81,8 @@ function insertInvLineData(line_data ){ //将数据写入到对应的行字段�
     $("#line_description".concat(String(ln))).val(line_data.description);
 
     renderLine(ln);
-  
-}
+
+  }
 
 function insertLineElements(tableid) { //创建界面要素
 //包括以下内容：1）显示头，2）定义SQS对象，3）定义界面显示的可见字段，4）界面行编辑器界面
@@ -244,7 +244,7 @@ z1.innerHTML  =
     //addToValidate('EditView', 'line_payment_name'+ ln,'varchar', 'true',SUGAR.language.get('HAOS_Payment_Invoices', 'LBL_SORT_ORDER'));
     addToValidate('EditView', 'line_invoice_number'+ ln,'int', 'true',SUGAR.language.get('HAOS_Payment_Invoices', 'LBL_INVOICE_NUMBER'));
     addToValidate('EditView', 'line_amount'+ ln,'decimal', 'true',SUGAR.language.get('HAOS_Payment_Invoices', 'LBL_AMOUNT'));
-    }
+  }
 
 function renderLine(ln) { //将编辑器中的内容显示于正常行中
   $("#displayed_line_payment_name"+ln).html($("#line_payment_name"+ln).val());
@@ -275,7 +275,7 @@ function insertLineFootor(tableid)
 
 function addNewLine(tableid) {
   if (check_form('EditView')) {//只有必须填写的字段都填写了才可以新增
-    
+
     insertLineElements(tableid);//加入新行
     LineEditorShow(prodln - 1);       //打开行编辑器
   }
@@ -420,35 +420,43 @@ function setProductReturn(popupReplyData){
 function resetProduct(ln){  
 //如果产品字段为空，则将所有关联的字段全部清空
 if ($("#line_invoice_number"+ln).val()=== '') { 
-    $("#line_invoice_id"+ln).val("");
-    $("#line_invoice_name"+ln).val("");
-    $("#line_invoice_date"+ln).val("");
-    $("#line_invoice_due_date"+ln).val("");
-    $("#line_invoice_overdue_days"+ln).val("");
-    $("#line_invoice_unpaid_amount"+ln).val("");
-  }
-  if ($("#line_invoice_unpaid_amount"+ln).val() != '') {
-    validateAmountFormat(ln);
-  }
- 
+  $("#line_invoice_id"+ln).val("");
+  $("#line_invoice_name"+ln).val("");
+  $("#line_invoice_date"+ln).val("");
+  $("#line_invoice_due_date"+ln).val("");
+  $("#line_invoice_overdue_days"+ln).val("");
+  $("#line_invoice_unpaid_amount"+ln).val("");
+}
+if ($("#line_invoice_unpaid_amount"+ln).val() != '') {
+  validateAmountFormat(ln);
+}
+
 
 }
 
+
+var validateLineAmountFlag = true;
 function getDefaultAmount(ln){
   //if($('#line_invoice_unpaid_amount').val()!=''){
-    var unpaid_amount = unformatNumber($("#line_invoice_unpaid_amount"+ln).val().trim(),',','.'); 
-    var unpaid_amount_num = format2Number(unpaid_amount,2);
-    var p_amount = unformatNumber($("#payment_amount").val().trim(),',','.'); 
-    var p_amount_num =  format2Number(p_amount,2);
-    if(unpaid_amount > p_amount){
-      $('#line_amount'+ln).val(p_amount_num);
-    }else{
-      $('#line_amount'+ln).val(unpaid_amount_num);
-    }
+    if($('#line_amount'+ln).val()==''){
+      validateLineAmountFlag = true;
+      var unpaid_amount = unformatNumber($("#line_invoice_unpaid_amount"+ln).val().trim(),',','.'); 
+      var unpaid_amount_num = format2Number(unpaid_amount,2);
+      var p_amount = unformatNumber($("#payment_amount").val().trim(),',','.'); 
+      var p_amount_num =  format2Number(p_amount,2);
+      if(unpaid_amount > p_amount){
+        $('#line_amount'+ln).val(p_amount_num);
+      }else{
+        $('#line_amount'+ln).val(unpaid_amount_num);
+      }
   //}
+}else{
+  validateLineAmountFlag=false;
+}
 }
 
 function validateLineAmount(ln){
+  if(validateLineAmountFlag){
   if(unformatNumber($("#line_amount"+ln).val().trim(),',','.')<=0){
     $("#line_amount"+ln).val('');
     $('#validate_line_amount_min'+ln).show();
@@ -457,14 +465,15 @@ function validateLineAmount(ln){
   }
   if(unformatNumber($("#line_amount"+ln).val().trim(),',','.')>unformatNumber($("#line_invoice_unpaid_amount"+ln).val().trim(),',','.')){
     $("#line_amount"+ln).val('');
-     $('#validate_line_amount_max'+ln).show();
+    $('#validate_line_amount_max'+ln).show();
   }else{
     $('#validate_line_amount_max'+ln).hide();
   }
 
   validateAmountFormat(ln);
-
+  }
 }
+
 function validateAmountFormat(ln){
   var line_invoice_unpaid_amount=unformatNumber($("#line_invoice_unpaid_amount"+ln).val().trim(),',','.');
   $("#line_invoice_unpaid_amount"+ln).val(format2Number(line_invoice_unpaid_amount,2));
@@ -486,87 +495,87 @@ function validateAmountFormat(ln){
 
 function format2Number(str, sig)
 {
-    if (typeof sig === 'undefined') { sig = sig_digits; }
-      num = Number(str);
-    if(sig == 2){
-        str = formatCurrency(num);
-    }
-    else{
-        str = num.toFixed(sig);
-    }
+  if (typeof sig === 'undefined') { sig = sig_digits; }
+  num = Number(str);
+  if(sig == 2){
+    str = formatCurrency(num);
+  }
+  else{
+    str = num.toFixed(sig);
+  }
 
-    str = str.split(/,/).join('{,}').split(/\./).join('{.}');
-    str = str.split('{,}').join(num_grp_sep).split('{.}').join(dec_sep);
+  str = str.split(/,/).join('{,}').split(/\./).join('{.}');
+  str = str.split('{,}').join(num_grp_sep).split('{.}').join(dec_sep);
 
-    return str;
+  return str;
 }
 
 function unformat2Number(num)
 {
-    return unformatNumber(num, num_grp_sep, dec_sep);
+  return unformatNumber(num, num_grp_sep, dec_sep);
 }
 
 function formatCurrency(strValue)
 {
-    strValue = strValue.toString().replace(/\$|\,/g,'');
-    dblValue = parseFloat(strValue);
+  strValue = strValue.toString().replace(/\$|\,/g,'');
+  dblValue = parseFloat(strValue);
 
-    blnSign = (dblValue == (dblValue = Math.abs(dblValue)));
-    dblValue = Math.floor(dblValue*100+0.50000000001);
-    intCents = dblValue%100;
-    strCents = intCents.toString();
-    dblValue = Math.floor(dblValue/100).toString();
-    if(intCents<10)
-        strCents = "0" + strCents;
-    for (var i = 0; i < Math.floor((dblValue.length-(1+i))/3); i++)
-        dblValue = dblValue.substring(0,dblValue.length-(4*i+3))+','+
-            dblValue.substring(dblValue.length-(4*i+3));
-    return (((blnSign)?'':'-') + dblValue + '.' + strCents);
+  blnSign = (dblValue == (dblValue = Math.abs(dblValue)));
+  dblValue = Math.floor(dblValue*100+0.50000000001);
+  intCents = dblValue%100;
+  strCents = intCents.toString();
+  dblValue = Math.floor(dblValue/100).toString();
+  if(intCents<10)
+    strCents = "0" + strCents;
+  for (var i = 0; i < Math.floor((dblValue.length-(1+i))/3); i++)
+    dblValue = dblValue.substring(0,dblValue.length-(4*i+3))+','+
+  dblValue.substring(dblValue.length-(4*i+3));
+  return (((blnSign)?'':'-') + dblValue + '.' + strCents);
 }
 
 function formatNumber(n, num_grp_sep, dec_sep, round, precision) {
-    if (typeof num_grp_sep == "undefined" || typeof dec_sep == "undefined") {
-        return n;
-    }
-    if(n === 0) n = '0';
+  if (typeof num_grp_sep == "undefined" || typeof dec_sep == "undefined") {
+    return n;
+  }
+  if(n === 0) n = '0';
 
-    n = n ? n.toString() : "";
-    if (n.split) {
-        n = n.split(".");
+  n = n ? n.toString() : "";
+  if (n.split) {
+    n = n.split(".");
+  } else {
+    return n;
+  }
+  if (n.length > 2) {
+    return n.join(".");
+  }
+  if (typeof round != "undefined") {
+    if (round > 0 && n.length > 1) {
+      n[1] = parseFloat("0." + n[1]);
+      n[1] = Math.round(n[1] * Math.pow(10, round)) / Math.pow(10, round);
+      n[1] = n[1].toString().split(".")[1];
+    }
+    if (round <= 0) {
+      n[0] = Math.round(parseInt(n[0], 10) * Math.pow(10, round)) / Math.pow(10, round);
+      n[1] = "";
+    }
+  }
+  if (typeof precision != "undefined" && precision >= 0) {
+    if (n.length > 1 && typeof n[1] != "undefined") {
+      n[1] = n[1].substring(0, precision);
     } else {
-        return n;
+      n[1] = "";
     }
-    if (n.length > 2) {
-        return n.join(".");
+    if (n[1].length < precision) {
+      for (var wp = n[1].length; wp < precision; wp++) {
+        n[1] += "0";
+      }
     }
-    if (typeof round != "undefined") {
-        if (round > 0 && n.length > 1) {
-            n[1] = parseFloat("0." + n[1]);
-            n[1] = Math.round(n[1] * Math.pow(10, round)) / Math.pow(10, round);
-            n[1] = n[1].toString().split(".")[1];
-        }
-        if (round <= 0) {
-            n[0] = Math.round(parseInt(n[0], 10) * Math.pow(10, round)) / Math.pow(10, round);
-            n[1] = "";
-        }
-    }
-    if (typeof precision != "undefined" && precision >= 0) {
-        if (n.length > 1 && typeof n[1] != "undefined") {
-            n[1] = n[1].substring(0, precision);
-        } else {
-            n[1] = "";
-        }
-        if (n[1].length < precision) {
-            for (var wp = n[1].length; wp < precision; wp++) {
-                n[1] += "0";
-            }
-        }
-    }
-    regex = /(\d+)(\d{3})/;
-    while (num_grp_sep !== "" && regex.test(n[0])) {
-        n[0] = n[0].toString().replace(regex, "$1" + num_grp_sep + "$2");
-    }
-    return n[0] + (n.length > 1 && n[1] !== "" ? dec_sep + n[1] : "");
+  }
+  regex = /(\d+)(\d{3})/;
+  while (num_grp_sep !== "" && regex.test(n[0])) {
+    n[0] = n[0].toString().replace(regex, "$1" + num_grp_sep + "$2");
+  }
+  return n[0] + (n.length > 1 && n[1] !== "" ? dec_sep + n[1] : "");
 }
 
 

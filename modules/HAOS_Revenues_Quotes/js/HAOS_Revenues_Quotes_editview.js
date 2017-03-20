@@ -103,6 +103,7 @@ function getPeriod(){
                 //data=$.parseJSON(data);
                 //data=JSON.parse(data);
                 $("#period_name").val(data); //将取出来的头ID字段放到页面上的一个隐藏文本框中。
+                //$("#period_name").val(data['id']);
             }
     });
 

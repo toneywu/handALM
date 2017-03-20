@@ -52,12 +52,12 @@ $layout_defs['AOS_Invoices'] = array(
       ),
      ),
     
-    'HAOS_Payments_aos_invoices' => array(
+    'haos_payments_aos_invoices' => array(
       'order' => 30,
       'module' => 'HAOS_Payments',
       'sort_order' => 'asc',
       'sort_by' => 'id',
-      'subpanel_name' => 'default',
+      'subpanel_name' => 'AosInvoicesSubpanel',
       'get_subpanel_data' => 'function:get_invoice_payments',
       'title_key' => 'LBL_HAOS_PAYMENTS_SUBPANEL1',
       'generate_select' => true,

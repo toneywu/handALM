@@ -80,6 +80,7 @@ $mod_strings = array (
   'LBL_HAT_ASSETS_ACCOUNTS_FROM_ACCOUNTS_TITLE'=>'使用单位',
   'LBL_ASSET_STATUS'=>'资产状态',
   'LBL_HAT_ASSET_LOCATIONS'=>'资产位置',
+  'LBL_LOCATION_DESC' => '位置详细说明',
   'LBL_POSITION_DISPLAY_AREA' =>'机柜布局',
   'LBL_OCCUPATION'=>'占用率',
   'LBL_DETAILVIEW_PANEL1' => '布局图',
