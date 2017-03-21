@@ -24,7 +24,7 @@ $(document).ready(function() {
     		case "Unpaid":
     			$("#amount_c").val("0.00");
                 $("#unpaied_amount_c").val($("#total_amount").val());
-                alert("以往租金包括未完全支付后剩余款项。");
+                //alert("以往租金包括未完全支付后剩余款项。");
     		break;
     		case "Cancelled":
     			$("#amount_c").val("");
@@ -164,7 +164,7 @@ function getAjaxData(recordId,urlStr) {
 }
 //End add 20161219 
 
-//add by tangqi 20170224
+//add  20170224
 function returnDeposit(){
   /*  if ($("#closed_date_c").text()!="") {
         return false;
@@ -304,6 +304,6 @@ function getPeriod(){
 
     }
 }
-//end add by tangqi 20170224
+//end add 20170224
 
 

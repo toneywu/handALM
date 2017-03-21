@@ -21,13 +21,20 @@
  *
  * @author SalesAgility <info@salesagility.com>
  */
-global $db;
 $dateTime=$_POST['dateTime'];
 $frame_id=$_POST['frame_id'];
+$rowArr = getPeriod($dateTime,$frame_id);
+echo $rowArr;
 
+function getPeriod($dateTime,$frame_id){
+global $db;
+
+
+$rowArr = array();
 if($dateTime){
         $sql="SELECT
-	hp.`name`
+	hp.`name`,
+	hp.id
 FROM
 	haa_frameworks hf,
 	haa_period_sets hps,
@@ -36,13 +43,16 @@ WHERE 1=1
 and hf.deleted=0
 and hps.deleted=0
 and hp.deleted=0
-and hf.id=hps.haa_frameworks_id_c
+and hf.id=hps.haa_frameworks_id_c 
 and hps.id=hp.haa_period_sets_id_c
 and hp.start_date<='".$dateTime."'".
 "and hp.end_date>='".$dateTime."'".
 "and hf.id='".$frame_id."'";
         $result=$db->query($sql);
         $row=$db->fetchByAssoc($result);
-        echo  $row['name'];   
+        $rowArr['name'] = $row['name'];  
+        $rowArr['id'] =$row['id'];  
+        return  $row['name'];   
     }
+}
 ?>

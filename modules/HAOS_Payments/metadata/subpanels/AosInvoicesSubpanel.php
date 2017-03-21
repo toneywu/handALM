@@ -66,22 +66,22 @@ $subpanel_layout = array(
             'vname' => 'LBL_PAYMENT_DATE',
             'width' => '10%',
         ),
-        //  'period_name' => array(
-        //     'vname' => 'LBL_PERIOD_NAME',
-        //     'width' => '10%',
-        // ),
-        //  'payment_amount' => array(
-        //     'vname' => 'LBL_PAYMENT_AMOUNT',
-        //     'width' => '10%',
-        // ),
-        //  'payment_method_type' => array(
-        //     'vname' => 'LBL_PAYMENT_METHOD_TYPE',
-        //     'width' => '10%',
-        // ),
-        //  'payment_status' => array(
-        //     'vname' => 'LBL_PAYMENT_STATUS',
-        //     'width' => '10%',
-        // ),
+         'period_name' => array(
+            'vname' => 'LBL_PERIOD_NAME',
+            'width' => '10%',
+        ),
+         'payment_amount' => array(
+            'vname' => 'LBL_PAYMENT_AMOUNT',
+            'width' => '10%',
+        ),
+         'payment_method_type' => array(
+            'vname' => 'LBL_PAYMENT_METHOD_TYPE',
+            'width' => '10%',
+        ),
+         'payment_status' => array(
+            'vname' => 'LBL_PAYMENT_STATUS',
+            'width' => '10%',
+        ),
          'description' => array(
             'vname' => 'LBL_DESCRIPTION',
             'width' => '10%',

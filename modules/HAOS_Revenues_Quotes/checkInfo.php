@@ -19,7 +19,7 @@ $cord_array=$_POST["data"];
 		if ($cleared_cnt>0){
 			echo json_encode(array('type'=>-1));
 		}
-		else{
+		else{ 
 //End Add 170108			
 
 			$sql="select count(*) result,contact_id_c,account_id_c  from haos_revenues_quotes where id in(".$str.") group by contact_id_c,account_id_c";

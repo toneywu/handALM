@@ -22,73 +22,13 @@
  * @author SalesAgility <info@salesagility.com>
  */
 
-if(!(ACLController::checkAccess('HAOS_Revenues_Quotes', 'edit', true))){
-	ACLController::displayNoAccess();
-	die;
-}
 
-require_once('modules/HAT_Incidents/HAT_Incidents.php');
-require_once('modules/HAOS_Revenues_Quotes/createRevenue.php');
-global $timedate;
 
-//Setting values in EventManager
-$event = new HAT_Incidents();
-$event->retrieve($_REQUEST['record']);
-$event->save();
+require_once('modules/HAT_Incidents/createRevenueFromHI.php');
 
-	$beanAT = BeanFactory :: getBean('HAT_EventType',$event->hat_eventtype_id);
-	if ($beanAT->revenue_eventtype_id_c!='') { 
-		$beanRevenue = BeanFactory :: getBean('HAT_EventType',$beanAT->revenue_eventtype_id_c);
+$Id = $_REQUEST['record'];
+$return_result= createRevenueFromHI($Id);
 
-		if ($beanRevenue){
-			$rawRow['event_type'] = $beanRevenue->name;
-		}
-	}else{
-		//die('事务单的事件类型未设置对应的收支计费项的事务类型，请联系运维人员!'.$ATId);
-		$return_result['return_status']='E';
-		$err_msg .= '事务单的事件类型未设置对应的收支计费项的事务类型，请联系运维人员!';
-	}
-
-	//Setting Invoice Values
-$rawRow = $event->fetched_row;
-$rawRow['id'] = '';
-$rawRow['haa_frameworks_id_c'] = $rawRow['haa_frameworks_id_c'];
-$rawRow['revenue_quote_number'] = '';
-$rawRow['clear_status'] = 'Unclear';
-$rawRow['event_date'] = date_format(date_create($event->event_date),"Y-m-d");
-$rawRow['source_code'] = 'HAT_Incidents';
-$rawRow['source_id'] = $event->id;
-
-$rawRow['source_reference'] =  $event->event_number;
-$rawRow['contract_number'] = $event->person_number;
-$rawRow['contact_id_c'] = $event->contact_id_c;
-$rawRow['contract_name'] = $event->person_name;
-$rawRow['hat_assets_id'] = $event->hat_assets_id_c;
-
-$rawRow['expense_group'] = $event->event_type;
-//$rawRow['event_type'] =$event->event_type;
-$rawRow['name']=$event->name.'收支';
-  
-//Setting Line Items
-$quoteRow['line_item_type_c']='Service';
-$quoteRow['vat']="0.0";
-$quoteRow['product_total_price']=$event->fine;
-$quoteRow['product_list_price']=$event->fine;
-$quoteRow['product_unit_price']=$event->fine;
-$quoteRow['name']=$event->name;
-//die($rawRow);
-
-$event->haos_revenues_quotes_id=createRevenue($rawRow,$quoteRow);
-$event->save();
-
-$return_result = array(
-                  'return_status'=>'S',
-                  'return_msg'=>'',
-                  'return_data'=>array(),
-                  );
-              $err_msg = ''; 
-
-$return_result['return_data']['haos_revenues_quotes_id']=$event->haos_revenues_quotes_id;
 echo json_encode($return_result);
 // ob_clean();
 // header('Location: index.php?module=HAOS_Revenues_Quotes&action=EditView&record='.$event->haos_revenues_quotes_id);

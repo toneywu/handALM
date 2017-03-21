@@ -105,4 +105,5 @@ $mod_strings = array (
   'LBL_ATTRIBUTE8' => 'Attribute8',
   'LBL_EDITVIEW_PANEL3' => '详细信息',
   'LBL_EDITVIEW_PANEL1' => '收支管理',
+  'LBL_HAOS_REVENUES_QUOTES' => '收支计费项',
   );

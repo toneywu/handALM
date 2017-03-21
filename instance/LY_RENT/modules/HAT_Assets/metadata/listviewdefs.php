@@ -84,7 +84,7 @@ array (
   ),
   'OWNING_PERSON' => 
   array (
-    'type' => 'relate',
+    'type' => 'relate', 
     'studio' => 'visible',
     'label' => 'LBL_OWNING_PERSON',
     'id' => 'OWNING_PERSON_ID',

@@ -12,6 +12,10 @@ array (
         array (
           'file' => 'modules/HAT_Incidents/js/createToRevenues.js',
         ),
+        1=> 
+        array (
+          'file' => 'modules/HAT_Incidents/js/HAT_Incidents_detailview.js',
+        ),
       ),
       'form' => 
       array (

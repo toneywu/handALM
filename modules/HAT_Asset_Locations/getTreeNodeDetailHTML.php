@@ -257,10 +257,17 @@ if($_GET['type']=="location") { //如果是Locationg来源，需要读取子位�
        $txt_jason .='],';
 
        if ($current_mode=="view") {
-         $txt_jason .='"btn":[{"link":"module=HAT_Asset_Locations&action=DetailView&record='.$asset['hat_asset_locations_hat_assetshat_asset_locations_ida'].'","lab":"'.translate('LBL_ACT_VIEW_LOCATION','HAT_Asset_Locations').'"}';
-         $txt_jason .=',{"link":"module=HAT_Assets&action=DetailView&record='.$asset['id'].'","lab":"'.translate('LBL_ACT_VIEW_ASSET','HAT_Asset_Locations').'"}';
-         $txt_jason .=',{"link":"module=HAM_SRs&action=EditView&hat_assets_id='.$asset['id'].'","lab":"'.translate('LBL_ACT_CREATE_SR','HAT_Asset_Locations').'"}';
-         $txt_jason .=',{"link":"module=HAM_WO&action=EditView&hat_assets_id='.$asset['id'].'","lab":"'.translate('LBL_ACT_CREATE_WO','HAT_Asset_Locations').'"}';
+         $txt_jason .='"btn":[{"link":"index.php?module=HAT_Asset_Locations&action=DetailView&record='.$asset['hat_asset_locations_hat_assetshat_asset_locations_ida'].'","lab":"'.translate('LBL_ACT_VIEW_LOCATION','HAT_Asset_Locations').'"}';
+         
+         //update by liu 如果是机柜就跳转机柜界面
+         if ($asset['enable_it_rack'] == '1') {
+           $bean_rack = BeanFactory::getBean('HIT_Racks')->retrieve_by_string_fields(array('hat_assets_id'=>$asset['id']));
+           $txt_jason .=',{"link":"index.php?module=HIT_Racks&action=DetailView&record='.$bean_rack->id.'","lab":"'.translate('LBL_ACT_VIEW_ASSET','HAT_Asset_Locations').'"}';
+         }else{
+          $txt_jason .=',{"link":"index.php?module=HAT_Assets&action=DetailView&record='.$asset['id'].'","lab":"'.translate('LBL_ACT_VIEW_ASSET','HAT_Asset_Locations').'"}';
+         }
+         $txt_jason .=',{"link":"index.php?module=HAM_SR&action=EditView&hat_assets_id='.$asset['id'].'","lab":"'.translate('LBL_ACT_CREATE_SR','HAT_Asset_Locations').'"}';
+         $txt_jason .=',{"link":"index.php?module=HAM_WO&action=EditView&hat_assets_id='.$asset['id'].'","lab":"'.translate('LBL_ACT_CREATE_WO','HAT_Asset_Locations').'"}';
          $txt_jason .='],';
        } else {
           $txt_jason .= '"rdata":{';

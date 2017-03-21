@@ -23,8 +23,6 @@ class AOS_ProductsViewPopup extends ViewPopup
        parent::Display();
       
    
-     var_dump($_SESSION['AOS_Products2_QUERY']);
-
     }
 
 

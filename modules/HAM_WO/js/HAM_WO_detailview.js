@@ -56,7 +56,15 @@ function call_ff() {
 		              	if(result) {
 				            	//alert('Yup.');
 				            	console.log("saveStatus");
-				                saveStatus($("input[name='record']").val(),$("#target_wo_status").val()); //
+				            	//状态改为已审批的时候,保存工单必须要有工作对像行 by liu
+				            	if($("#target_wo_status").val()=="APPROVED"){
+				            		var error_msg = check_lines();
+				            		if (error_msg == "S" ||error_msg ==""){
+				            			saveStatus($("input[name='record']").val(),$("#target_wo_status").val()); //
+				            		}
+				            	}else{
+				            		saveStatus($("input[name='record']").val(),$("#target_wo_status").val()); //
+				            	}
 				            }else {
 				                //alert('Nope.');
 				            }
@@ -426,11 +434,9 @@ function check_lines(){
 	var change_btn=$("<input type='button' class='button' id='btn_change_status' value='"+SUGAR.language.get('HAM_WO', 'LBL_BTN_CHANGE_STATUS_BUTTON_LABEL')+"'>");
 	$("#duplicate_button").after(change_btn);
 	$("#btn_change_status").click(function(){ //如果点了修改状态按钮，调用Ajax修改状态
-		//状态改为已提交审批的时候,保存工单必须要有工作对像行 by liu
-		var error_msg = check_lines();
-		if (error_msg == "S" ||error_msg =="") {
-			changeStatus($("input[name='record']").val());
-		}
+		
+		changeStatus($("input[name='record']").val());
+		
 
 	});
 	//Add by zhangling 20170228 

@@ -13,61 +13,84 @@ function createPayments(){
 }
 
 function createPaymentsForManyInv(){
-
-        var bool=false;//是否有选择，默认没有
-        var num=0;
-        var data_array=new Array();
-        $('.list.view.table-responsive tbody').find(':checkbox').each(function(){
-          if($(this).is(':checked')){
-            data_array.push($(this).val());
+  var bool=false;//是否有选择，默认没有
+  var num=0;
+  var data_array=new Array();
+  $('.list.view.table-responsive tbody').find(':checkbox').each(function(){
+    if($(this).is(':checked')){
+      data_array.push($(this).val());
             //alert('data_array[num]:'+data_array[num]);
             bool=true;
             num++;
           }
         });
 
-        if(bool==true){
-          createPaymentsAjax('ListView',data_array);          
-        }else{
-          jQuery.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js").done(function(){
-           BootstrapDialog.alert({
-            type : BootstrapDialog.TYPE_DANGER,
-            title : '警告',
-            message : '请勾选记录！'
-          });
-         });
-        }
-      }
+  if(bool==true){
+    createPaymentsAjax('ListView',data_array);          
+  }else{
+    jQuery.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js").done(function(){
+     BootstrapDialog.alert({
+      type : BootstrapDialog.TYPE_DANGER,
+      title : '警告',
+      message : '请勾选记录！'
+    });
+   });
+  }
+}
 
 
-      function createPaymentsAjax(p_view,p_InvIdArr){
-        $.ajax({
-          url:'index.php?module=AOS_Invoices&action=createPayments&to_pdf=true',
-          data:{"view":p_view,"type":"check","data":p_InvIdArr},
-          type:'POST',
-          dataType: "json",
-          success:function(data){
-            console.log(data);  
-              //var val = jQuery.parseJSON(data);
-              //alert(data);
-              var val=data;
-              var result_data = data.return_data;
-              if(val.return_status=='S'){
-                var unpaidamo = data.return_data.unpaiedAllAmount;
-                $html = getAlertHtml(unpaidamo);
-                jQuery.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js").done(function(){
-                  BootstrapDialog.confirm({
-                    size: BootstrapDialog.SIZE_NORMAL,
-                    title:"收付款",
-                    message:$html,
-                    callback: function(result){
-                      if(result) {
+function createPaymentsAjax(p_view,p_InvIdArr){
+  $.getScript("custom/modules/AOS_Invoices/js/validateAmount.js");
+  $.ajax({
+    url:'index.php?module=AOS_Invoices&action=createPayments&to_pdf=true',
+    data:{"view":p_view,"type":"check","data":p_InvIdArr},
+    type:'POST',
+    dataType: "json",
+    success:function(data){ 
+     
+      var val=data;
+      var result_data = data.return_data;
+           //add 20170313 以往租金包括未完全支付后剩余款项\
+            // console.log(result_data.billing_account_id,result_data.billing_contact_id);
+            //validateAmount(result_data.billing_account_id,result_data.billing_contact_id);
+            $.ajax({
+              url:'index.php?module=AOS_Invoices&action=validateWhetherPayOff&to_pdf=true',
+              data:{"accountId":result_data.billing_account_id,"contactId":result_data.billing_contact_id,"invoiceIdArr":p_InvIdArr,"frameworksId":result_data.haa_frameworks_id_c},
+              type:'POST',
+              dataType:"json",
+              success:function(data22){
+                 //alert(data22.return_data.sqlq);
+                if(data22.return_status == 'E'){
+                 //  BootstrapDialog.alert({
+                 //   type:BootstrapDialog.TYPE_DANGER,
+                 //   title:'提示',
+                 //   message:data22.return_msg
+                 // });
+
+                  alert(data22.return_msg);
+                }
+                
+
+                if(val.return_status=='S'){
+                  var unpaidamo = data.return_data.unpaiedAllAmount;
+                  $html = getAlertHtml(unpaidamo);
+                  jQuery.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js").done(function(){
+                    BootstrapDialog.confirm({
+                      size: BootstrapDialog.SIZE_NORMAL,
+                      title:"收付款",
+                      message:$html,
+                      callback: function(result){
+                        if(result){
                         var pay_date_r = $('#pay_date').val();//付款日期
                         var PayAmount_r =$('#NoAllPayAmount').val();//付款金额
                         var pay_method_type_r = $('#pay_method_type').val();
                         var description_r = $('#line_description').val();//说明
-                        var all_pay_flag = 'Y';//全部付款
-
+                        var all_pay_flag = 'N';//全部付款
+                        if($('#all_pay_flag').is(':checked')){
+                          all_pay_flag = 'Y';
+                        }else{
+                          all_pay_flag = 'N';
+                        }
                         result_data['payment_date']=pay_date_r;
                         result_data['payment_amount']=PayAmount_r;
                         result_data['payment_method_type']=pay_method_type_r;
@@ -77,101 +100,93 @@ function createPaymentsForManyInv(){
                         if($('#pay_date').val() != '' 
                           && $('#NoAllPayAmount').val()!=''
                           && $('#pay_method_type').val()!=''){
-                        //全额付款
-                        //alert(result);
-                        if($('#all_pay_flag').is(':checked') || p_view == 'DetailView'){
-                          console.log('进入'); 
-                          
+                            //全额付款
+                            //alert(result);
+                            if($('#all_pay_flag').is(':checked') || p_view == 'DetailView'){
 
-                          $.ajax({
-                            url:"index.php?module=AOS_Invoices&action=createPayments&to_pdf=true",
-                            data:{"view":p_view,"type":"create","data":result_data},
-                            type:"POST",
-                            dataType: "json",
-                            success:function(data2){
-                              //console.log('进'); 
-                              console.log(data2);                        
-                              if(data2.return_status=='S'){
-                                window.location.reload();
-                              }else{
 
-                                jQuery.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js").done(function(){
-                                  BootstrapDialog.alert({
-                                    type : BootstrapDialog.TYPE_DANGER,
-                                    title : '警告',
-                                    message : data2.return_msg
-                                  });
+                              $.ajax({
+                                url:"index.php?module=AOS_Invoices&action=createPayments&to_pdf=true",
+                                data:{"view":p_view,"type":"create","data":result_data},
+                                type:"POST",
+                                dataType: "json",
+                                success:function(data2){                  
+                                  if(data2.return_status=='S'){
+
+                                    window.location.reload();
+                                  }else{
+
+                                    jQuery.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js").done(function(){
+                                      BootstrapDialog.alert({
+                                        type : BootstrapDialog.TYPE_DANGER,
+                                        title : '警告',
+                                        message : data2.return_msg
+                                      });
+                                    });
+                                  }
+                                }
+                              });
+                            }else{//非全额付款
+
+                              if(p_view='ListView'){
+                                var num=0;
+                                var cord_array=new Array();
+                                $('.list.view.table-responsive tbody').find(':checkbox').each(function(){
+                                  if($(this).is(':checked')){
+                                    cord_array.push($(this).val());
+                                    num++;
+                                  }
                                 });
-
                               }
-                            }
-                          });
-                        }else{//非全额付款
+                              var getReqStr = "&payment_date="+pay_date_r+
+                              "&payment_amount="+PayAmount_r+
+                              "&payment_method_type="+pay_method_type_r+
+                              "&description="+description_r+
+                              "&haa_frameworks_id_c="+result_data.haa_frameworks_id_c+
+                              "&billing_contact_id="+result_data.billing_contact_id+
+                              "&billing_account_id="+result_data.billing_account_id+
+                              "&currency_id="+result_data.currency_id;
 
-                         if(p_view='ListView'){
-                          var num=0;
-                          var cord_array=new Array();
-                          $('.list.view.table-responsive tbody').find(':checkbox').each(function(){
-                            if($(this).is(':checked')){
-                              cord_array.push($(this).val());
-                              num++;
+                              window.location.href='index.php?module=HAOS_Payments&action=EditView&return_module=HAOS_Payments&return_action=DetailView'+getReqStr+'&cordArr='+cord_array+'&requestSourceModules=AOS_Invoices';
                             }
-                           });
+
+                          }else{
+                            var validateErrmsg = '';
+                            if( $('#pay_date').val() == ''){
+                              validateErrmsg = validateErrmsg+'"付款时间"';
+                            }
+                            if($('#pay_method_type').val()==''){
+                              validateErrmsg = validateErrmsg+'"付款方式"';
+                            }
+                            if($('#NoAllPayAmount').val()==''){
+                              validateErrmsg = validateErrmsg+'"付款金额"';
+                            }
+                            validateErrmsg = validateErrmsg+"不能为空！";
+                            BootstrapDialog.alert({
+                              type : BootstrapDialog.TYPE_DANGER,
+                              title : '警告',
+                              message:validateErrmsg 
+                            });
                           }
-                          var getReqStr = "&payment_date="+pay_date_r+
-                          "&payment_amount="+PayAmount_r+
-                          "&payment_method_type="+pay_method_type_r+
-                          "&description="+description_r+
-                          "&haa_frameworks_id_c="+result_data.haa_frameworks_id_c+
-                          "&billing_contact_id="+result_data.billing_contact_id+
-                          "&billing_account_id="+result_data.billing_account_id+
-                          "&currency_id="+result_data.currency_id;
-                        
-                        window.location.href='index.php?module=HAOS_Payments&action=EditView&return_module=HAOS_Payments&return_action=DetailView'+getReqStr+'&cordArr='+cord_array+'&requestSourceModules=AOS_Invoices';
+                        }else{
+                        }
                       }
-
-                    }else{
-                      var validateErrmsg = '';
-                      if( $('#pay_date').val() == ''){
-                        validateErrmsg = validateErrmsg+'"付款时间"';
-                      }
-                      if($('#pay_method_type').val()==''){
-                        validateErrmsg = validateErrmsg+'"付款方式"';
-                      }
-                      if($('#NoAllPayAmount').val()==''){
-                        validateErrmsg = validateErrmsg+'"付款金额"';
-                      }
-                      validateErrmsg = validateErrmsg+"不能为空！";
-                      BootstrapDialog.alert({
-                        type : BootstrapDialog.TYPE_DANGER,
-                        title : '警告',
-                        message:validateErrmsg 
-                      });
-
-
-                    }
-
-                  }else{
-                        //alert('有错误');
-                      }
-                    }
-                  });
+                    });
 });
-
-
 }else{
-
-  jQuery.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js").done(function(){
-    BootstrapDialog.alert({
-      type : BootstrapDialog.TYPE_DANGER,
-      title : '警告',
-      message : val.return_msg
-    });
+  BootstrapDialog.alert({
+    type : BootstrapDialog.TYPE_DANGER,
+    title : '警告',
+    message : val.return_msg
   });
-
-}             
+}  
+ //-----------------------
 }
 });
+//end add
+
+          }
+        });
 
 }
 
@@ -213,7 +228,7 @@ function getAlertHtml(unpaidAmount){
 
 
   var $AllPayHTML ="<span class='input_group' style='height:32px;'>"+
-  "<label style=]display:inline-block;width:120px;'>是否全额付款<span class='required'>*</span>: </label>"+
+  "<label style='display:inline-block;width:120px;'>是否全额付款<span class='required'>*</span>: </label>"+
   "<input  type='checkbox' onchange='getAllPayAmount()' name='all_pay_flag' id='all_pay_flag' maxlength='50' value=''  title='' >"+
   "</span><br>"+
   "<script type='text/javascript'>"+

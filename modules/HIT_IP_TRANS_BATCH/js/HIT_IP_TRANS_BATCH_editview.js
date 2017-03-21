@@ -141,16 +141,13 @@ function preValidateFunction(async_bool = false) {
 	//console.log("checkForm="+check_form('EditView'));
 	//validate_form_message();
 	var return_flag=true;
-	var json_obj={};
-	var json_data ={};
+
 	for(var i=0;i<prodln;i++){
 		console.log("prodln = "+prodln);
 		var pre_ip_id = $("#line_hit_ip_subnets_id"+i).val();
 		var pre_deleted = $("#line_deleted"+i).val();
 		var pre_port = $("#line_port"+i).val();
-		if(pre_deleted!='1'){
-			json_obj[i]=$("#line_hit_ip_subnets_id"+i).val();
-		}
+		
 		//console.log("第i行 "+(i+1)+",ip="+pre_ip_id+"~"+pre_port);
 
 			for(var j=i+1;j<prodln-1;j++){
@@ -178,29 +175,6 @@ function preValidateFunction(async_bool = false) {
 				break;
 		}
 	}
-	json_data["line_ips"]=json_obj;
-	$.ajax({
-				type:"POST",
-	            url: 'index.php?to_pdf=true&module=HIT_IP_TRANS_BATCH&action=checkLinesIpSubnet',
-	            async: false,
-	            data: json_data,
-	            success: function (data) {
-	            	var resultJson = JSON.parse(data);
-	            	if(resultJson['err_count']!=0){
- 						return_flag=false;
- 						var	err_message = '网络事物处理行第'+resultJson['err_id']+'行中IP已失效';
- 						BootstrapDialog.alert({
-							type : BootstrapDialog.TYPE_DANGER,
-							title : SUGAR.language.get('app_strings',
-									'LBL_EMAIL_ERROR_GENERAL_TITLE'),
-							message : err_message
-						});
-	            	}
-	            },
-	            error: function () { //失败
-	                alert('Error loading document');
-	            }
-	 	});
 	//return_flag=false;
 	return return_flag;
 }

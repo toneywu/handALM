@@ -107,4 +107,5 @@ $mod_strings = array (
   'LBL_BROADBAND_TYPE'=>'带宽变量',
   'LBL_CHILD_PORT'=>'子端口',
   'LBL_VLAN_CHANNEL'=>'VLAN通道',
+  'LBL_COMMENTS'=>'备注',
 );
