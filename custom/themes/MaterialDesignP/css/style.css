@@ -69,12 +69,6 @@ span.id-ff button {
 .panel-heading a.collapsed {
 	background-color: #f8f8f8;
 }
-.panel-default.sub-panel > .panel-heading > a,
-.panel-default > .panel-heading > a {
-	color:#778591;
-	padding: 5px 0 0 20px;
-	font-size: 18px;
-}
 
 .panel-default.sub-panel > .panel-heading {
 	height: 39px;
@@ -148,9 +142,6 @@ div#loadingPage b{
 
 
 /*overall structure*/
-.content .detail-view .tab-content {
-	padding: 0;
-}
 .content #EditView_tabs .tab-content {
 	padding: 0.5em 1em;
 }
@@ -259,21 +250,11 @@ input.yui-ac-input {
 	color:#778591;
 }
 
-.detail-view-row .label {
-	font-weight: 400;
-	font-size: 12px;
-	vertical-align: top;
-	text-align: right;
-	padding: 0 2em 0 0;
-	line-height: 20px;
-	color:#778591;
-}
 
 /*.detail-view table,*/
 .detail-view .detail-view-field {
-	line-height:26px;
-	min-height:26px;
-	padding: 0 3px 3px 5px;
+	min-height:28px;
+	padding: 0 5px;
 	font-size: 16px;
 	border-bottom:1px solid #efefef;
 	background-color: transparent;
@@ -407,12 +388,6 @@ input.yui-ac-input {
 /**********************************/
 
 /*header_content*/
-#header_content {
-	 background: #fffcf6; /*#f1fff9;*/
-    padding: 12em 10em 2em 2em;
-    margin: -10em -1em 0 -1em;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-}
 
 /*#header_content .detail-view-row {
 	width: 60em;

@@ -71,9 +71,8 @@
 }
 
 .pagination-range-label {
-  color: $default-btn-bg;
+  color: $default-btn-color;
   font-size: 13px;
-  font-weight: bold;
 }
 
 
@@ -159,6 +158,7 @@
     float: none;
     margin-bottom: 0;
     display: inline-block;
+    color: #fff;
   }
 
   .tab-inline-pagination .pagination-range-label {

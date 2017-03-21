@@ -27,10 +27,10 @@
 .panel-default > .panel-heading > div {
   font-size: 14px ;
   font-weight: 500;
-  background-color: $panel-expanded-bg;
+  //background-color: $panel-expanded-bg;
   color: $default-btn-color;
-  line-height: 52px/$panel-height-divisor;
-  height: 52px/$panel-height-divisor;
+  //line-height: 52px/$panel-height-divisor;
+  //height: 52px/$panel-height-divisor;
 }
 
 .panel-default > .panel-body {
@@ -39,6 +39,7 @@
 
 .panel-default > .panel-heading-collapse {
   background: $panel-collapsed-bg;
+  border-bottom: none;
 }
 
 .collapse, .collapsing, .collapse.in {
@@ -54,9 +55,9 @@
 .panel-default > .panel-heading > a {
   display: block;
   font-size: 14px ;
-  font-weight: 500;
-  color: $default-btn-color;
-  padding: 15px/$panel-height-divisor 10px 0 10px/$panel-height-divisor;
+  font-weight: bold;
+  color: rgba(0,0,0,0.56);
+  padding: 5px 10px 0 25px;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   height: 52px;
@@ -67,9 +68,9 @@
 
 .panel-default.sub-panel > .panel-heading  > a {
   display: block;
-  font-size: 14px ;
-  font-weight: 500;
-  color: $default-btn-color;
+  font-size: 20px ;
+  font-weight: 200;
+  color: $panel-title-color;
   padding: 10px/$panel-height-divisor 10px 0 10px/$panel-height-divisor;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
@@ -90,7 +91,8 @@
 
 
 .panel-default > .panel-heading > a img {
-  margin-right: 15px;
+  margin-right: 2px 5px 5px 5px;
+  width: 30px;
 }
 
 .panel-default > .panel-body {
@@ -178,6 +180,7 @@ div.sub-panel {
   border-bottom: none;
   color: $list-view-link-color;
   padding: 0 5px;
+  margin-right: -12px;
 }
 
 .sub-panel .sugar_action_button > a:hover {
@@ -370,7 +373,7 @@ div.sub-panel {
 .subpanel-table .pagination .sugar_action_button:hover > form > a,
 .subpanel-table .pagination a,
 .subpanel-table .subnav {
-  background-color: #778591;
+  background-color: $list-view-button-hover-color;
 }
 
 .subpanel-table .pagination a {

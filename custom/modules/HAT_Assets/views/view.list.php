@@ -7,22 +7,17 @@ class HAT_AssetsViewList extends ViewList
   function Display() {
     global $app_list_strings;
     $this->ss->assign('APP_LIST', $app_list_strings);
-	
-	
-	
+
 	echo '<script src="modules/HAT_Assets/js/listview_HAT_Assets.js"></script>';
 	echo '<script src="cache/include/javascript/sugar_grp_yui_widgets.js"></script>';
 	echo '<script src="custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js"></script>';
 	echo '<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />';
-	echo '<script src="modules/HAT_Assets/js/listview_HAT_Assets.js"></script>;';
     parent::Display();
 
 	if(isset($_GET['error_message'])&&!empty($_GET['error_message'])){
 		echo '<script>var return_msg="'.$_GET['error_message'].'"</script>';
 		//echo '<script>alert('.$_GET['error_message'].');</script>';
-		
 	}
-	
   }
 /*
  *  重写方法，添加where条件

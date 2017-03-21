@@ -15,7 +15,7 @@ $warning: #E6D5A5;
 
 $page-content-spacing: 20px;
 
-$main-bg: #F5F5F5;
+$main-bg: #eeeeee;
 $main-alternate-bg: #FFFFFF;
 
 $selection-color: #FFFFFF;
@@ -71,14 +71,14 @@ $success-btn-bg: $success;
 $success-btn-bg-hover: #6EA674;
 
 $disabled-btn-color: #808F9C;
-$disabled-btn-bg: #F5F5F5;
+$disabled-btn-bg: transparent;//#F5F5F5;
 
 
 // Navbar
-$navbar-bg: #0079bf; /*normal blue*/
+$navbar-bg: #01579b;//#0079bf; /*normal blue*/
 $navbar-link-color: #efefef;
 $navbar-link-color-hover: #FFFFFF;
-$navbar-main-menu-bg: #0d8ad4;
+$navbar-main-menu-bg: #0288d1;//#0d8ad4;
 $navbar-main-menu-bg-hover: rgba(96, 179, 229, 0.61);
 $navbar-menu-link-color: #efefef;
 $navbar-menu-link-color-hover: #FFFFFF;/* #F08377 ;*/
@@ -112,6 +112,10 @@ $navbar-topnav-font-size: 16px; /// 13px normal
 $navbar-links-padding: 8px; /// 14px normal or 8px small
 $home-icon-bg-pos-y:  ($navbar-height / 2.571428571);
 
+//Title Header
+$listview-header-bg: #0091ea;
+//$detailview-header-bg
+
 // Sidebar
 $sidebar-bg: #778591;
 $sidebar-btn-bg: #94A6B5;
@@ -123,7 +127,7 @@ $side-bar-link-color-hover: #677785;
 
 // Tabs
 $active-tab-bg: #fff;
-$active-tab-color: $default-btn-color;
+$active-tab-color: $navbar-bg;
 $default-tab-bg: #fff; /* #BFCAD3; */
 $default-tab-bg-hover: #fff;
 $default-tab-hover-color: $default-btn-bg-hover;
@@ -137,7 +141,8 @@ $tab-margin-bottom: 5px;
 
 
 // Panels
-$panel-collapsed-bg: #BFCAD3;
+$panel-title-color: rgba(0,0,0,0.87);
+$panel-collapsed-bg: transparent;//#BFCAD3;
 $panel-expanded-bg: #66727D;
 $panel-height-divisor: 1; // 1 normal  1.25 small
 
@@ -157,7 +162,7 @@ $list-view-link-color: $link-color;/*normal blue*/
 $list-view-link-hover-color: $link-color-hover;/*bright blue*/
 $list-view-action-button-disabled-bg: #fff;/* #C9D2DA; */
 $list-view-action-button-bg: #fff;/* #94A6B5; */
-$list-view-action-menu-bg: #ddd;/* #778591; */
+$list-view-action-menu-bg: #f9f9f9;/* #778591; */
 $list-view-action-menu-link-bg: #677785;
 $list-view-action-menu-separator: #93A0AB;
 $list-view-choose-columns-displayed: #CCE8E2;

@@ -264,6 +264,7 @@ $(document).ready(function() {ldelim}
     $(document).ready(function(){
         $("#detailpanel_-1").closest(".panel").appendTo($("#EditView_tabs").find(".tab-content").first());
     });
+    $(".moduleTitle").addClass("EditViewTitle");
     //add end
     </script>
 

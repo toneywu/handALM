@@ -1,73 +1,39 @@
-<style type="text/css">
-	.gantt_cal_light select{
-		max-width:100%;
-	}
-	.gantt_cal_light textarea{
-		max-width:100%;
-	}
-	.gantt_time_selects select{
-		width:60px;
-	}
-	.gantt_duration input{
-		line-height:0px;
-		margin:0 3px;
-	}
-	.gantt_duration [type=button]{
-		margin-top:3px;
-	}
-	.btn-toolbar .btn {
-		background-color: #fff;
-		border:1px solid #ccc;
-		padding: 4px 7px 3px 7px;
-	}
-	.btn-toolbar .btn:hover {
-		background-color:#e9f6ff;
-	}
-	.btn-toolbar .btn i {
-		margin-right: 5px;
-	}
-	 .btn-group-dropdown:hover .dropdown-menu {
-	 	display: block;
-	 	color: #000;
-	 }
-	.dropdown-menu {
-		background-color: #fff;
-		margin: -4px 0 0 0;
-		border: 1px solid #ccc;
-	}
-	.gantt-fullscreen{
-		position: absolute;
-		bottom: 20px;
-		right: 20px;
-		width: 30px;
-		height: 30px;
-		padding: 2px;
-		font-size: 32px;
-		background: transparent;
-		cursor: pointer;
-		opacity: 0.5;
-		text-align: center;
-		-webkit-transition:background-color 0.5s, opacity 0.5s;
-		transition:background-color 0.5s, opacity 0.5s;
-	}
-	.gantt-fullscreen:hover{
-		background: rgba(150, 150, 150, 0.5);
-		opacity: 1;
-	}
-	.gantt_cal_larea>div:last-child{
-		display: none;
-	}
-	.gantt_cal_larea>div:nth-last-of-type(2){
-		display: none;
-	}
-</style>
+<script type="text/javascript">
+	$.getScript("custom/resources/bootstrap3-dialog-master/dist/js/bootstrap-dialog.min.js"); //MessageBox
+	$('head').append('<link rel="stylesheet" href="custom/resources/bootstrap3-dialog-master/dist/css/bootstrap-dialog.min.css" type="text/css" />');
+
+
+	$( document ).ready(function() {
+
+		/*$('#toolbar-btn-import').click(function(event){
+			//Import/Export button
+			var dialog = new BootstrapDialog({
+		        		title: 'Improt/Export',
+		        		message: $('<div></div>').load('include/gantt/import_export.html')
+		        		//
+		    		});
+			dialog.open();*/
+
+		$("#toolbar-btn-help").click(function(event){
+			//Help button
+			var dialog = new BootstrapDialog({
+		        		title: 'HELP',
+		        		message: $('<div></div>').load('include/gantt/help.html')
+		        		//
+		    		});
+			dialog.open();
+		})
+	});
+
+</script>
+
 <div class="btn-toolbar">
   <div class="btn-group">
-      <button class="btn" id='toolbar-btn-new' data-original-title="New Project" onclick=""><i class="glyphicon glyphicon-file"></i>新项目</button>
+      <!--<button class="btn" id='toolbar-btn-new' data-original-title="New Project" onclick=""><i class="glyphicon glyphicon-file"></i>新项目</button>
       <button class="btn" id='toolbar-btn-list' data-original-title="My Project"><i class="glyphicon glyphicon-folder-open"></i>我的项目</button>
-      <button class="btn" id='toolbar-btn-setting' data-original-title="Setting"><i class="glyphicon glyphicon-cog"></i>项目设置</button>
+      <button class="btn" id='toolbar-btn-setting' data-original-title="Setting"><i class="glyphicon glyphicon-cog"></i>项目设置</button>-->
       <!--<button class="btn" data-original-title="Save"><i class="glyphicon glyphicon-cloud-upload"></i>保存项目</button>-->
-      <button class="btn" id='toolbar-btn-import' data-original-title="Import"><i class="glyphicon glyphicon-save"></i>导入/导出</button>
+      <button class="btn" id='toolbar-btn-import' data-original-title="Import" data-toggle="modal" data-target="#import_export"><i class="glyphicon glyphicon-save"></i>导入/导出</button>
   </div>
 
   <div class="btn-group">
@@ -79,35 +45,43 @@
   <div class="btn-group" role="group">
       <button class="btn" id='toolbar-btn-filter' data-original-title="Filter"><i class="glyphicon glyphicon-filter"></i>筛选任务</button>
       <div class="btn-group btn-group-dropdown" role="group">
-	    <button id="btnGroupDrop1" id='toolbar-btn-scale' data-original-title="Scope" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-calendar"></i>显示刻度 <b class="caret"></b></button>
+	    <button id="btnGroupDrop1" id='toolbar-btn-scale' data-original-title="Scope" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-zoom-in"></i>刻度缩放 <b class="caret"></b></button>
 
 	    <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-	      <li><input type="radio" name="scale" value="Day" id="scale-day"/> 日</li>
-	      <li><input type="radio" name="scale" value="Week" id="scale-week"/> 周</li>
-	      <li><input type="radio" name="scale" value="Month" id="scale-month"/> 月</li>
-	      <li><input type="radio" name="scale" value="Year" id="scale-year"/> 年</li>
 	      <li><input type="radio" name="scale" value="Auto" id="scale-auto"/> 自动全局</li>
+	      <hr/>
+	      <li><input type="radio" name="scale" value="Month" id="scale-month"/> 月</li>
+	      <li><input type="radio" name="scale" value="Week" id="scale-week"/> 周</li>
+	      <li><input type="radio" name="scale" value="Day" id="scale-day"/> 日（较大）</li>
+	      <li><input type="radio" name="scale" value="Day-Mid" id="scale-day-mid"/> 日（适中）</li>
+	      <li><input type="radio" name="scale" value="Day-Compact" id="scale-day-compact"/> 日（紧密）</li>
+	      <li><input type="radio" name="scale" value="Hour" id="scale-hour"/> 小时</li>
+	      <li><input type="radio" name="scale" value="Quarter" id="scale-quarter"/> 15分钟</li>
 	    </ul>
 	  </div>
 	  <div class="btn-group btn-group-dropdown" role="group">
      	 <button class="btn" id='toolbar-btn-view' data-original-title="View"><i class="glyphicon glyphicon-eye-open"></i>显示设置 <b class="caret"></b></button>
 
 	    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-	      <li><input type="checkbox" name="show-workday" value="Workday" checked="checked" /> 仅显示工作日</li>
+	      <!-- <li><input type="checkbox" name="show-workday" value="Workday" /> 仅显示工作日</li> -->
 	      <li><input type="checkbox" name="show-today" value="Today" checked="checked" /> 标注当前日期</li>
-	      <li><input type="checkbox" name="show-CP" value="CP" checked="checked" /> 标注关键路径</li>
+	      <li><input type="checkbox" name="show-progress" value="Progress" checked="checked" /> 显示完成进度</li>
+	      <li><input type="checkbox" name="show-weekends" value="Weekends" checked="checked" /> 区分周末背景</li>
+	      <li><input type="checkbox" name="show-text-position" value="Text-Position" checked="checked" /> 自动调整图中文字位置</li>
+	      <!--http://www.handalm.com/dhtml/samples/08_api/12_fit_task_text.html-->
+	      	      <!--<li><input type="checkbox" name="show-CP" value="CP" checked="checked" /> 标注关键路径</li>-->
 	    </div>
 
       </div>
       <div class="btn-group btn-group-dropdown" role="group">
       	<button class="btn" id='toolbar-btn-theme' data-original-title="Theme"><i class="glyphicon glyphicon-blackboard"></i>样式主题 <b class="caret"></b></button>
 	    <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-	      <li><input type="radio" name="theme" value="Classical" id="theme-classical" onclick="changeSkin('broadway')" /> broadway</li>
+	      <li><input type="radio" name="theme" value="Default" id="theme-default" onclick="changeSkin('meadow')" /> meadow</li>
+	      <li><input type="radio" name="theme" value="Default" id="theme-default" onclick="changeSkin('terrace')" /> terrace</li>
 	      <li><input type="radio" name="theme" value="Default" id="theme-default" onclick="changeSkin('skyblue')" /> skyblue</li>
+	      <li><input type="radio" name="theme" value="Classical" id="theme-classical" onclick="changeSkin('broadway')" /> broadway</li>
 	      <li><input type="radio" name="theme" value="Default" id="theme-default" onclick="changeSkin('contrast_black')" /> contrast_black</li>
 	      <li><input type="radio" name="theme" value="Default" id="theme-default" onclick="changeSkin('contrast_white')" /> contrast_white</li>
-	      <li><input type="radio" name="theme" value="Default" id="theme-default" onclick="changeSkin('terrace')" /> terrace</li>
-	      <li><input type="radio" name="theme" value="Default" id="theme-default" onclick="changeSkin('meadow')" /> meadow</li>
 	    </ul>
       </div>
   </div>	
@@ -115,6 +89,74 @@
       <button class="btn" id='toolbar-btn-print' data-original-title="Print"><i class="glyphicon glyphicon-print"></i>打印</button>
       <button class="btn" id='toolbar-btn-share' data-original-title="Share"><i class="glyphicon glyphicon-share-alt"></i>分享</button>
   </div>
+  <div class="btn-group pull-right">
+	  <button class="btn" type="button" id='toolbar-btn-help' aria-haspopup="true" aria-expanded="true"><i class="glyphicon glyphicon-question-sign"></i>帮助</button>
+  </div>
 
 </div>
+<div class="modal fade" id="import_export" tabindex="-1" role="dialog" aria-labelledby="import_export_tittle" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="import_export_tittle">&nbsp;</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-6">
+						<h2>导出</h2>
+						<ul>
+					      <li><a id="export_project" href="javascript:void(0);" onclick="gantt.exportToMSProject();">导出为微软 MS Project</a></li>
+					      <li><a id="export_excel" href="javascript:void(0);" onclick="gantt.exportToExcel();">导出为 Excel</a></li>
+					      <li><a id="export_ical" href="javascript:void(0);" onclick="gantt.exportToICal()">导出为 iCal</a></li>
+						</ul>
+					</div>
+					<div class="col-md-6">
+						<h2>导入</h2>
+						<form id="mspImport" action="" enctype="multipart/form-data" method="POST">
+							<input name="file" id="mspFile" type="file">
+							<button id="mspImportBtn" type="submit" onclick="$('#identifier').modal('hide');">Load from MPP</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 <div id="gantt_map" style="width:100%"></div>
+<script type="text/javascript">
+	function upload(file, callback){
+		gantt.importFromMSProject({
+			data: file,
+			callback: function(project){
+			if(project){
+				gantt.clearAll();
+				if(project.config.duration_unit){
+					gantt.config.duration_unit = project.config.duration_unit;
+				}
+				gantt.parse(project.data);
+			}
+			if(callback)
+				callback(project);
+			}
+		});
+	}
+	gantt.config.row_height = 24;
+	gantt.config.xml_date = "%Y-%m-%d %H:%i";
+	gantt.attachEvent("onParse", function(){
+		gantt.eachTask(function(task){
+			if(gantt.hasChild(task.id)){
+				task.type = gantt.config.types.project;
+				gantt.updateTask(task.id);
+			}else if(task.duration === 0){
+				task.type = gantt.config.types.milestone;
+				gantt.updateTask(task.id);
+			}
+		});
+	});
+	gantt.message("Upload <b>MPP</b> or <b>XML</b> Project file using 'Choose File' button or simply drag-and-drop it into the page");
+	if(!window.FormData){
+		gantt.error("Your browsers does not support Ajax File upload, please open this demo in modern browser");
+	}
+</script>
+<div class="gantt_message_area dhtmlx_message_area" style="top: 5px;"></div>

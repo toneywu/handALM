@@ -10,7 +10,9 @@
 class ProjectPlanner
 {	
 	private $db;
-
+	/**
+	 *  初始化数据库查询DB
+	 */
 	function __construct(){
  		global $db;
 		$this->db=$db;
@@ -33,6 +35,21 @@ class ProjectPlanner
 			echo $this->loadExtConfig();
 			echo '<script type="text/javascript">
 				gantt.init("gantt_map");
+				var fileDnD = fileDragAndDrop();
+				fileDnD.init(gantt.$container);
+				function sendFile(file){
+					fileDnD.showUpload();
+					upload(file, function(){
+						fileDnD.hideOverlay();
+					})
+				}
+				fileDnD.onDrop(sendFile);
+				var form = document.getElementById("mspImport");
+				form.onsubmit = function(event) {
+					event.preventDefault();
+					var fileInput = document.getElementById("mspFile");
+					sendFile(fileInput.files[0]);
+				};
 				gantt.parse(taskData);
 				var dp=new gantt.dataProcessor("'.$ajaxUrl.'&project_id='.$prj_id.'");
 				dp.init(gantt);
@@ -54,7 +71,7 @@ class ProjectPlanner
 			project_task.duration duration,
 			project_task.milestone_flag milestone,
 			project_task.assigned_user_id assigned,
-			/*project_task.order_number order,*/
+			/*project_task.date_finish end_date,*/
 			project_task.parent_task_id parent,
 			project_task.priority priority,
 			project_task.project_id project_id
@@ -86,12 +103,16 @@ class ProjectPlanner
 		}
 		return json_encode($resData);
 	}
-
+	/**
+	 *  加载人员
+	 */
 	protected function loadAssigned(){
 		$sql ="SELECT id `key`,IFNULL(last_name,first_name) `label` FROM contacts WHERE deleted = 0";
 		return $this->ExcuteDQL($sql);
 	}
-
+	/**
+	 *  加载优先级字段
+	 */
 	protected function loadPriority(){
 		global $app_list_strings;
 		$priority_list=array();
@@ -109,8 +130,8 @@ class ProjectPlanner
 		$fields="";		//表字段
 		$values="";		//字段=值
 		$dbType=array('inserted','updated','deleted','order');
-		$fieldMap=array('id'=>'project_task_id','text'=>'name','progress'=>'percent_complete','start_date'=>'date_start','duration'=>'duration','milestone'=>'milestone_flag','assigned'=>'assigned_user_id','parent'=>'parent_task_id','project_id'=>'project_id','priority'=>'priority');//字段映射Map
-		$fields_link=array('source','target','type');
+		$fieldMap=array('id'=>'project_task_id','text'=>'name','progress'=>'percent_complete','start_date'=>'date_start','duration'=>'duration','milestone'=>'milestone_flag','assigned'=>'assigned_user_id','parent'=>'parent_task_id','project_id'=>'project_id','priority'=>'priority','end_date'=>'date_finish');//字段映射Map
+		$fields_link=array('id','source','target','type');
 		foreach ($postData as $k => $v) {
 			$key=preg_split("/[0-9]_/", $k);
 			if (!in_array($v, $dbType)&&array_key_exists($key[1], $fieldMap)&&$get['gantt_mode']=="tasks") {
@@ -144,8 +165,12 @@ class ProjectPlanner
 			$queryType=$this->insertLinks($fields,$values);
 			$tid=$queryType?$sid:'';
 		}
-		if ($type=="deleted") {
+		if ($type=="deleted"&&$get['gantt_mode']=="tasks") {
 			$queryType=$this->deletedTask($values);
+			$tid=$queryType?$sid:'';
+		}
+		if ($type=="deleted"&&$get['gantt_mode']=="links") {
+			$queryType=$this->deletedLinks($values);
 			$tid=$queryType?$sid:'';
 		}
 		if ($queryType) {
@@ -160,21 +185,24 @@ class ProjectPlanner
 	 *  @return html 返回gantt JS文件及CSS文件
 	 */
 	protected function loadBaseInfo($theme='',$langue='locale_cn'){
-		$infoHtml='<script src="include/gantt/codebase/dhtmlxSuite/dhtmlx.js" type="text/javascript"></script>';
-		$infoHtml.='<script src="include/gantt/codebase/dhtmlxgantt.js" type="text/javascript"></script>';
+		$infoHtml='<script src="include/gantt/codebase/dhtmlxSuite/dhtmlx.js" type="text/javascript" charset="utf-8"></script>';
+		$infoHtml.='<script src="include/gantt/codebase/dhtmlxgantt.js" type="text/javascript"  charset="utf-8"></script>';
 		$infoHtml.='<script src="include/gantt/codebase/locale/'.$langue.'.js" type="text/javascript" charset="utf-8"></script>';
 		$infoHtml.='<script src="include/gantt/codebase/ext/dhtmlxgantt_undo.js" type="text/javascript" charset="utf-8"></script>';
 		$infoHtml.='<script src="include/gantt/codebase/ext/dhtmlxgantt_marker.js" type="text/javascript" charset="utf-8"></script>';
 		$infoHtml.='<script src="include/gantt/codebase/ext/dhtmlxgantt_tooltip.js" type="text/javascript" charset="utf-8"></script>';
 		$infoHtml.='<script src="include/gantt/codebase/ext/dhtmlxgantt_fullscreen.js" type="text/javascript" charset="utf-8"></script>';
 		$infoHtml.='<script src="include/gantt/codebase/ext/dhtmlxgantt_multiselect.js" type="text/javascript" charset="utf-8"></script>';
-		$infoHtml.='<script src="include/gantt/codebase/ext/dhtmlxgantt_keyboard_navigation.js" charset="utf-8"></script>';
+		$infoHtml.='<script src="include/gantt/codebase/ext/dhtmlxgantt_keyboard_navigation.js" type="text/javascript" charset="utf-8"></script>';
+		$infoHtml.='<script src="http://export.dhtmlx.com/gantt/api.js" type="text/javascript" charset="utf-8"></script>';
+		$infoHtml.='<script src="include/gantt/codebase/ext/dhx_file_dnd.js" type="text/javascript" charset="utf-8"></script>';
 		$infoHtml.='<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">';
 		if ($theme) {
 			$infoHtml.='<link id="skin" rel="stylesheet" type="text/css" href="include/gantt/codebase/skins/'.$theme.'.css">';
 		}else{
 			$infoHtml.='<link id="skin" rel="stylesheet" type="text/css" href="include/gantt/codebase/dhtmlxgantt.css">';
 		}
+		$infoHtml.='<link rel="stylesheet" href="include/gantt/style.css">';
 		return $infoHtml;
 	}
 	/**
@@ -189,7 +217,10 @@ class ProjectPlanner
 		}
 		return $JSConfig;
 	}
-
+	/**
+	 *  @param  array字段名称
+	 *	@param  array字段对应的值
+	 */
 	protected function updateTask($fields,$values){
 		$setStr=array();
 		$i=1;
@@ -202,8 +233,13 @@ class ProjectPlanner
 			}else{
 				$setStr[]=$fields[$i-1]."='".$values[$i-1]."'";
 			}
-			if ($i%10==0) {
-				$sql="UPDATE project_task SET ".implode(",", $setStr)." WHERE project_task_id=".$values[$i-10];
+			if ($i%11==0) {
+				$sql="UPDATE project_task SET ".implode(",", $setStr)." WHERE project_task_id=".$values[$i-11];
+				$setStr=array();
+				$result=$this->ExcuteDML($sql);
+			}
+			if (count($fields)<11&&$i==count($fields)) {
+				$sql="UPDATE project_task SET ".implode(",", $setStr)." WHERE project_task_id=".$values[$i-11];
 				$setStr=array();
 				$result=$this->ExcuteDML($sql);
 			}
@@ -211,7 +247,10 @@ class ProjectPlanner
 		}
 		return $result;
 	}
-
+	/**
+	 *  @param  array字段名称
+	 *	@param  array字段对应的值
+	 */
 	protected function insertTask($fields,$values){
 		for($i=0;$i<count($fields);$i++) {
 			if($fields[$i]=="project_task_id"){
@@ -222,7 +261,10 @@ class ProjectPlanner
 		$sql="INSERT INTO project_task(id,project_task_id,".implode(',', $fields).")VALUES(UUID(),(SELECT id FROM (SELECT MAX(project_task_id)+1 id FROM project_task) maxid),'".implode("','",$values)."')";
 		return $this->ExcuteDML($sql);
 	}
-
+	/**
+	 *  @param  array字段名称
+	 *	@param  array字段对应的值
+	 */
 	protected function insertLinks($fields,$values){
 		for($i=0;$i<=count($fields);$i++) {
 			if($fields[$i]=="id"||$fields[$i]=="ids"||$fields[$i]=="project_task_id"){
@@ -244,12 +286,21 @@ class ProjectPlanner
 		}
 		return $type;
 	}
-
+	/**
+	 * 	@param $values 传入id值
+	 */
 	protected function deletedTask($values){
 		$sql="UPDATE project_task SET deleted=1 WHERE project_task_id=".$values[0];
 		$del_sql="DELETE FROM gantt_links WHERE source=".$values[0];
 		$this->ExcuteDML($del_sql);
 		return $this->ExcuteDML($sql);
+	}
+	/**
+	 * 	@param $values 传入id值
+	 */
+	protected function deletedLinks($values){
+		$del_sql="DELETE FROM gantt_links WHERE id=".$values[0];
+		$this->ExcuteDML($del_sql);
 	}
 	/**
 	 * 	@param  $sql  sql字符串

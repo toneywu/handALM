@@ -77,13 +77,13 @@
                         {/foreach}
                     {/if}
                 {/foreach}
-                {*Add by zengchen 20170209*}
+                {*Add by zengchen 20170220*}
                 {foreach from=$extmenus item=menus}
                 <li role="presentation">
                     <a href="{$menus.url}">{$menus.label}<span class="glyphicon glyphicon-plus"  onclick="window.location.href = 'index.php?action=EditView&module={$menus.module}'"></span></a>
                 </li>
                 {/foreach}
-                {*End add 20170209*}
+                {*End add 20170220*}
             </ul>
             <div id="mobileheader" class="mobileheader">
                 <div id="modulelinks" class="modulelinks">
@@ -161,19 +161,64 @@
             </div>
         </div>
         <div class="desktop-toolbar" id="toolbar">
+            <ul class="nav navbar-nav">
             {if $USE_GROUP_TABS}
-                <ul class="nav navbar-nav">
-                    <li class="navbar-brand-container">
-                            <a class="navbar-brand with-home-icon" href="index.php?module=Home&action=index">All</a>
+                {*Add by zengchen 20170209 HANDALM式的菜单导航栏*}
+                    <li class="topnav all">
+                            <a class="dropdown-toggle navbar-brand btn-lg" id="grouptab_0" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-th"></i></a>
+                            <span class="notCurrentTabRight"></span>
+                            <ul class="dropdown-menu" role="menu text">
+                                <li>
+                                    <div class="row">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#navigation_menu" data-toggle="tab">{$APP.LBL_NAV_MENU}</a></li>
+                                        <li><a href="#ios" data-toggle="tab">{$APP.LBL_LINK_ALL}</a></li>
+                                    </ul>
+                                    </div>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active" id="navigation_menu">
+                                            {foreach from=$exthead item=itemhead name=foo}
+                                            <div class="col-md-3">
+                                                <h2>{$itemhead.label}</h2>
+                                                {foreach from=$extmenus item=menus}
+                                                {if $itemhead.id eq $menus.parent_id}
+                                                <a href="{$menus.url}"><i class="{$menus.img}"></i> {$menus.label}</a>
+                                                {/if}
+                                                {/foreach}
+                                            </div>
+                                            {/foreach}
+                                        </div>
+                                        <div class="tab-pane fade" id="ios">
+                                        {foreach from=$groupTabs item=modules key=group name=groupList}{capture name=extraparams assign=extraparams}parentTab={$group}{/capture}
+                                        {if $smarty.foreach.groupList.last}
+                                                {foreach from=$modules.modules item=module key=modulekey}
+                                            <div class="col-md-3" style="margin: 0">
+                                        {capture name=moduleTabId assign=moduleTabId}moduleTab_{$smarty.foreach.moduleList.index}_{$module}{/capture}
+                                        {sugar_link id=$moduleTabId module=$modulekey data=$module extraparams=$extraparams}
+                                            </div>
+                                {/foreach}
+                                {foreach from=$modules.extra item=submodulename key=submodule}
+                                            <div class="col-md-3" style="margin: 0">
+                                                <a href="{sugar_link module=$submodule link_only=1 extraparams=$extraparams}">{$submodulename}</a>
+                                            </div>
+                                {/foreach}
+                                        {/if}
+                                        {/foreach}
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </span>
                     </li>
-                    <li class="navbar-brand-container">
-                            <a class="navbar-brand with-home-icon" href="index.php?module=Home&action=index">{$APP.LBL_BROWSER_TITLE}</a>
+                    {*End add 20170209*}
+                    <li class="topnav">
+                            <a class="navbar-brand" href="index.php?module=Home&action=index"><i class="glyphicon glyphicon-home"></i></a>
                     </li>
                     {assign var="groupSelected" value=false}
                     {foreach from=$moduleTopMenu item=module key=name name=moduleList}
                         {if $name == $MODULE_TAB}
                             {if $name != 'Home'}
-                                <li class="topnav">
+                                <li class="topnav" id="currentTabNav">
                                     <span class="currentTabLeft">&nbsp;</span>
                                     <span class="currentTab">{sugar_link id="moduleTab_$name" module=$name data=$module}</span>
                                     <span>&nbsp;</span>
@@ -276,38 +321,16 @@
 
                         {/if}
                     {/foreach}
-                    {*Add by zengchen 20170209*}
-                    <li class="topnav">
-                        <span class="notCurrentTabLeft"></span>
-                        <span class="notCurrentTab">
-                            <a class="dropdown-toggle" id="grouptab_0" data-toggle="dropdown" href="#">{$all_menus}</a>
-                            <span class="notCurrentTabRight"></span>
-                            <ul class="dropdown-menu" role="menu" style="max-width: 700px; width: 700px; min-width: 185px">
-                                <li style="width: 100%">
-                                    <h4>{$lead_label}</h4>
-                                    {foreach from=$exthead item=itemhead name=foo}
-                                    <div class="col-md-3">
-                                        <h5>{$itemhead.label}</h5>
-                                        {foreach from=$extmenus item=menus}
-                                        {if $itemhead.id eq $menus.parent_id}
-                                        <a href="{$menus.url}"><i class="{$menus.img}"></i> {$menus.label}</a>
-                                        {/if}
-                                        {/foreach}
-                                    </div>
-                                    {/foreach}
-                                </li>
-                            </ul>
-                        </span>
-                    </li>
-                    {*End add 20170209*}
+
                     {foreach from=$groupTabs item=modules key=group name=groupList}
                         {capture name=extraparams assign=extraparams}parentTab={$group}{/capture}
-                        <li class="topnav {if $smarty.foreach.groupList.last}all{/if}">
+                        {if $group neq "[全部功能]"}
+                        <li class="topnav">
                             <span class="notCurrentTabLeft">&nbsp;</span><span class="notCurrentTab">
                             <a href="#" id="grouptab_{$smarty.foreach.groupList.index}" class="dropdown-toggle grouptab"
                                data-toggle="dropdown">{$group}</a>
                             <span class="notCurrentTabRight">&nbsp;</span>
-                            <ul class="dropdown-menu" role="menu" {if $smarty.foreach.groupList.last} class="All"{/if}>
+                            <ul class="dropdown-menu" role="menu">
                                 {foreach from=$modules.modules item=module key=modulekey}
                                     <li>
                                         {capture name=moduleTabId assign=moduleTabId}moduleTab_{$smarty.foreach.moduleList.index}_{$module}{/capture}
@@ -321,11 +344,30 @@
                                 {/foreach}
                             </ul>
                         </li>
+                        {/if}
                     {/foreach}
+                    {*Add by zengchen 20170307*}
+                    {foreach from=$exthead item=itemhead key=menukey name=foo}
+                        <li class="topnav">
+                            <span class="notCurrentTabLeft">&nbsp;</span>
+                            <span class="notCurrentTab"><a href="#" id="extab_{$smarty.foreach.foo.index}" class="dropdown-toggle grouptab"
+                                   data-toggle="dropdown">{$itemhead.label}</a>
+                            <span class="notCurrentTabRight">&nbsp;</span>
+                            <ul class="dropdown-menu" role="menu">
+                            {foreach from=$extmenus item=menus}
+                            {if $itemhead.id eq $menus.parent_id}
+                                <li><a href="{$menus.url}"><i class="{$menus.img}"></i> {$menus.label}</a></li>
+                            {/if}
+                            {/foreach}
+                            </ul>
+                        </li>
+                    {/foreach}
+                    {*End add 20170307*}
                 </ul>
                 {* 7.8 Hide filter menu items when the windows is too small to display them *}
             {literal}
                 <script>
+
                   var windowResize = function() {
 
                     // only run if the desktop toolbar is in view
@@ -333,7 +375,7 @@
 
                     $('.desktop-toolbar ul.navbar-nav > li.hidden').removeClass('hidden');
 
-                    var tw = ($(window).width()) - $('.desktop-bar').width() - ($(window).width() * 0.1);
+                    var tw = ($(window).width()) - $('.desktop-bar').width() - ($(window).width() * 0.05);
                     var ti = $('.desktop-toolbar ul.navbar-nav > li');
                     var tiw = 0;
 
@@ -343,7 +385,6 @@
                       var marginLeft = parseInt( $(this).css('margin-left').replace('px', '') );
                       var marginRight = parseInt( $(this).css('margin-right').replace('px', '') );
                       tiw += $(this).width() + paddingLeft + paddingRight + marginLeft + marginRight;
-                      console.log($(this));
                     }
 
                     ti.each(calcTiw);
@@ -353,7 +394,6 @@
                       $(ti).last().addClass('hidden');
                       tiw = 0;
                       ti.each(calcTiw);
-                      console.log("tw="+tw+" tiw="+tiw);
                     }
 
                     $('.desktop-toolbar ul.navbar-nav > li.all').removeClass('hidden');
@@ -362,8 +402,50 @@
                 $(document).ready(function() {
                     $(window).resize(windowResize);
                     windowResize();
-                };
+                });
                 </script>
+                <!-- <script>
+
+                  var windowResize = function() {
+                
+                    // only run if the desktop toolbar is in view
+                    if($(window).width() < 1201) { return true; }
+                
+                    $('.desktop-toolbar ul.navbar-nav > li.hidden').removeClass('hidden');
+                
+                    var tw = ($(window).width()) - $('.desktop-bar').width() - ($(window).width() * 0.05);
+                    var ti = $('.desktop-toolbar ul.navbar-nav>li');
+                    var tiw = 0;
+                    //console.log(ti);
+                    var calcTiw = function() {
+                      var paddingLeft = parseInt( $(this).css('padding-left').replace('px', ''));
+                      var paddingRight = parseInt( $(this).css('padding-right').replace('px', ''));
+                      var marginLeft = parseInt( $(this).css('margin-left').replace('px', ''));
+                      var marginRight = parseInt( $(this).css('margin-right').replace('px', ''));
+                      tiw += $(this).width() + paddingLeft + paddingRight + marginLeft + marginRight;
+                    }
+                    ti.each(calcTiw);
+                    while (tiw > tw) {
+                      //FIX TIA by HandALM
+                      ti =  $('.desktop-toolbar ul.navbar-nav > li').not('.hidden').not('.all');
+                      tia = $('.desktop-toolbar ul.navbar-nav > li').not('.hidden');
+                      tiw = 0;
+                      $(ti).last().addClass('hidden');
+                      tia.each(calcTiw);
+                    }
+                
+                    $('.desktop-toolbar ul.navbar-nav > li.all').removeClass('hidden');
+                    
+                    //HandALM如果All菜单非常靠左，就以最左为准，否则以居中
+                    //$(".topnav.all .dropdown-menu").css("left", -Math.min($(".topnav.all").position().left, ($(".topnav.all ul.dropdown-menu").width()/2 - $(".topnav.all").width()/2))+100);
+                    //modified by zeng 20170222 class=all的标签发生改变
+                  };
+                
+                $(document).ready(function() {
+                    $(window).resize(windowResize);
+                    windowResize();
+                });
+                </script>-->
             {/literal}
             {else}
 
@@ -828,13 +910,13 @@
     <div id='sidebar_container' class="container-fluid sidebar_container">
 
         <a id="buttontoggle" class="buttontoggle"><span></span></a>
-                
+
         <!--<div class="row">-->
             <!--<div {if $smarty.cookies.sidebartoggle == 'collapsed'}style="display:none"{/if}
                  class="col-sm-3 col-md-2 sidebar">-->
              <div {if $smarty.cookies.sidebartoggle == 'collapsed'}style="display:none"{/if}
              class="sidebar">
-                
+
                 <div id="actionMenuSidebar" class="actionMenuSidebar">
                     {foreach from=$moduleTopMenu item=module key=name name=moduleList}
                         {if $name == $MODULE_TAB}
@@ -858,7 +940,7 @@
                         {/if}
                     {/foreach}
                 </div>
-                
+
                 <div id="recentlyViewedSidebar" class="recentlyViewedSidebar">
                 {if count($recentRecords) > 0}
                     <h2 class="recent_h3">{$APP.LBL_LAST_VIEWED}</h2>
@@ -901,4 +983,29 @@
     </div>
     <!--End Responsive Sidebar -->
 {/if}
+
+               <div id="preload_menu" class="buttons">
+                    {foreach from=$moduleTopMenu item=module key=name name=moduleList}
+                        {if $name == $MODULE_TAB}
+                            <ul>
+                                {if count($shortcutTopMenu.$name) > 0}
+                                    {foreach from=$shortcutTopMenu.$name item=item}
+                                        {if $item.URL == "-"}
+                                            <li><a></a><span>&nbsp;</span></li>
+                                        {else}
+                                            <li class="actionmenulinks button" role="presentation">
+                                                <a href="{$item.URL}" >
+                                                    <div class="icon-{$item.MODULE_NAME} side-bar-action-icon"></div>
+                                                    <div class="actionmenulink">{$item.LABEL}</div>
+                                                </a>
+                                            </li>
+                                        {/if}
+                                    {/foreach}
+                                {/if}
+                            </ul>
+                        {/if}
+                    {/foreach}
+                </div>
+
+<script type='text/javascript' src='{sugar_getjspath file='themes/MaterialDesignP/tpls/Restruct_ListView.js'}'></script>
 <!--Start Page content -->

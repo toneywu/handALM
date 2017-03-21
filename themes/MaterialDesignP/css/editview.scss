@@ -532,13 +532,13 @@ table.view {
 
 .detail-view-row .label {
   display: inline;
-  font-size: 14px;
-  font-weight: 700;
-  color: $main-font-color;
+  font-size: 12px;
+  font-weight: 400;
+  color: #9E9E9E;
   padding: 0 0 0 8px;
-  line-height: 48px;
+  line-height: 20px;
   text-align: left;
-  vertical-align: baseline;
+  vertical-align: top;
   white-space: nowrap;
 }
 
@@ -601,7 +601,7 @@ slot {
   padding: 12px;
   border: 1px solid transparent;
   border-radius: 4px;
-  line-height: 20px;
+  line-height: 14px;
   text-align: left;
   min-height: 48px;
   vertical-align: baseline;
@@ -1587,6 +1587,10 @@ div.confirmTable {
 /*// MODULE TITLE */
 
 .moduleTitle {
+  margin: -20px -20px -35px -20px;
+  background: $listview-header-bg;//rgb(48, 160, 224);
+  padding: 40px 40px 35px 40px;
+  //box-shadow: 0 1px 4px rgba(0,0,0,0.2);
 }
 
 .moduleTitle span.utils {
@@ -2001,7 +2005,7 @@ ul.clickMenu > li {
   color: $default-btn-color;
   cursor: pointer;
   padding: 5px;
-  margin: 0 5px 0 0;
+  margin: 0; //0 5px 0 0;
   border-radius: 3px;
   float: left;
   list-style: none;
@@ -3158,7 +3162,7 @@ table#lineItems tr td table tfoot tr td span {
 }
 
 .detail-view-row .label.col-2-label {
-  padding-left: 32px;
+  //padding-left: 32px;
 }
 
 /**** Scrollbars ****/
@@ -3478,7 +3482,7 @@ select#sales_stage_advanced {
   }
 
   .detail-view-row .label.col-2-label {
-    padding-left: 8px;
+    //padding-left: 8px;
   }
 
   .col-xs-12 [field=first_name].edit-view-field input[type="text"]#first_name {

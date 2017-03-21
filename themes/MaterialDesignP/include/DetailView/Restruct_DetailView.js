@@ -1,6 +1,5 @@
    function move_basic_to_top() {
         //将BASIC提前
-
         //如果有TAB页
         if ($("#tab-content-0").length>0) {
             basic_ojb = $("#tab-content-0 .detail-view-row .detail-view-row-item");
@@ -16,29 +15,66 @@
         basic_ojb.each(function(){
             if($(this).children().length>0) {
                 //console.log($(this).children().length);
-                $(this).switchClass("col-sm-6","col-sm-3");/*两排变四*/
-
+                /*两排变四*/
+/*                $(this).switchClass("col-sm-6","col-sm-3");
                 $(this).children(".label").removeClass("col-sm-4");
                 $(this).children(".label").removeClass("col-sm-2");
                 $(this).children(".label").addClass("col-sm-12");
                 $(this).children(".detail-view-field").removeClass("col-sm-8");
                 $(this).children(".detail-view-field").removeClass("col-sm-10");
                 $(this).children(".detail-view-field").addClass("col-sm-12");
-
+*/
                 $(this).appendTo($("#header_content"));
             }
         });
    }
+
+/******************************************************/
+/* 标题加图标，加背景                                 */
+/******************************************************/
+   function renderHeader() {
+        objModuleTitle=$("#content .moduleTitle");
+        objContent = $("#content");
+        //为标题加入模块的名称
+        //objModuleTitle.prependTo(objHeader)
+        //objHeader.prepend(objModuleTitle.html());
+        //objModuleTitle.html("");
+        objModuleTitle.prepend("<div id='module_label'>"+$(".currentTab").text()+"<div/>");
+        //为标题加入图标
+        objModuleTitle.prepend("<div class='module_img'><img src='themes/MaterialDesignP/images/sub_panel/"+$(".currentTab a").attr("module")+".svg' onerror='this.src=\"themes/MaterialDesignP/images/sub_panel/basic.svg\"'><div/>");
+        objContent.prepend("<div class='moduleTitle'></div><div id='detailviewFixedHeader'></div>");
+        objFixedHeader = objContent.children("#detailviewFixedHeader");
+        $("#DetailViewBtnGroups").prependTo(objFixedHeader);
+        objModuleTitle.prependTo(objFixedHeader)
+
+   }
+
+/******************************************************/
+/* Subpanel调整                                       */
+/******************************************************/
+   function renderSubpanel() {
+        var subpanel_obj = $(".subpanel-table");
+        subpanel_obj.each(function(){
+            var subpanel_header = $(this).children("thead");
+            var objPagination = subpanel_header.children(".pagination").find("td[align='right']");
+
+            //subpanel_header.children(".pagination").find(".action_buttons").appendTo( $(this).closest(".sub-panel").children("div").children("a").children("div:first"));
+            //subpanel_header.children(".pagination").find(".action_buttons").appendTo( $(this).closest(".sub-panel").children("div:first"));
+            //将分页由表头调整到下方。
+            $(this).after("<div class='SubpanelFoot'>"+objPagination.html()+"</div>");
+            objPagination.hide();
+
+            //subpanel_header.children(".pagination").find("td[align='right']").appendTo(subpanel_footer);
+        });
+   }
+
+
 
     $(document).ready(function(){
 
         /*******************面板结构调整*************************/
         move_basic_to_top()
         /*******************面板细节优化*************************/
-
-/*       $("#header_content .detail-view-row-item .label ").switchClass("col-sm-3","col-sm-12");
-       $("#header_content .detail-view-row-item .detail-view-field ").switchClass("col-sm-4","col-sm-12");*/
-
 
         /*******************菜单调整*************************/
         //将非常用的按钮进行缩减
@@ -50,21 +86,14 @@
 
         $("#formDetailView .buttons").children(".button").last().after(dropdown_html);
         //将复制、删除、合并按钮转到下拉菜单中
-        $("#duplicate_button").appendTo($("#detailview_more_actions .dropdown-menu"));
-        $("#delete_button").appendTo($("#detailview_more_actions .dropdown-menu"));
-        $("#merge_duplicate_button").appendTo($("#detailview_more_actions .dropdown-menu"));
+        objHeaderDropdown = $("#detailview_more_actions .dropdown-menu");
+        $("#duplicate_button").appendTo(objHeaderDropdown);
+        $("#delete_button").appendTo(objHeaderDropdown);
+        $("#merge_duplicate_button").appendTo(objHeaderDropdown);
         //将模块总体菜单显示到当前数据之后
         $(".panel-content .panel").appendTo($("#tab-content-0"));
 
+        renderHeader();// 重新绘制标题样式
+        renderSubpanel();//重新绘制Subpanel
 
-        $("#content .moduleTitle").prepend("<div id='module_label'>"+$(".currentTab").text()+"<div/>");
-        $("#content .moduleTitle").prepend("<div class='module_img'><img src='themes/MaterialDesignP/images/sub_panel/"+$(".currentTab a").attr("module")+".svg' onerror='this.src=\"themes/MaterialDesignP/images/sub_panel/basic.svg\"'><div/>");
-
-        /*******************Subpanel调整*************************/
-        var subpanel_obj = $(".subpanel-table");
-/*        subpanel_obj.each(function(){
-            var subpanel_header = $(this).children("thead");
-            subpanel_header.children(".pagination").prependTo(subpanel_header);
-        });
-*/
     });

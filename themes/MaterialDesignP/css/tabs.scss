@@ -42,7 +42,7 @@
     cursor: pointer;
     margin: 0 2px 0 2px;
     border: none;
-    letter-spacing: 2px;
+    //letter-spacing: 2px;
     line-height: $tab-height;
     text-align: center;
     min-width: 6em;
@@ -190,6 +190,7 @@
     left: auto;
     right: 0;
     background-color: $action-tab-bg;
+    border: 1px solid #efefef;
     margin-right: 10px;
     margin-top: -10px;
     border-top-left-radius: 4px;
@@ -200,7 +201,7 @@
   }
 
   #tab-actions > .dropdown-menu li {
-    background-color: $action-tab-bg;
+    //background-color: $action-tab-bg;
     border-bottom: 1px solid $action-tab-seperator;
   }
 
@@ -218,13 +219,13 @@
   }
 
   #tab-actions > .dropdown-menu .button {
-    background-color: $action-tab-bg;
+    //background-color: $action-tab-bg;
     border: none;
     color: $action-tab-color;
   }
 
   #tab-actions > .dropdown-menu .button:hover {
-    background-color: $action-tab-bg;
+    //background-color: $action-tab-bg;
     color: $link-color-hover;
   }
 
@@ -258,8 +259,9 @@
 
   .detail-view .tab-content {
     background-color: #ffffff;
-    padding: 24px;
+    padding: 10px 0 0 0;
     margin-bottom: $tab-margin-bottom;
+    margin-top: -10px;
     border: 1px solid transparent;
     border-top-right-radius: 4px;
     border-bottom-left-radius: 4px;

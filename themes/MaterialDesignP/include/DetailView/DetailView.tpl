@@ -1,4 +1,4 @@
-{*
+ {*
 /**
  *
  * SugarCRM Community Edition is a customer relationship management program developed by
@@ -44,7 +44,8 @@
 <div class="detail-view">
     <div class="mobile-pagination">{$PAGINATION}</div>
     {*display tabs*}
-    {{counter name="tabCount" start=-1 print=false assign="tabCount"}}、
+    {{counter name="tabCount" start=-1 print=false assign="tabCount"}}
+    <div class="main-view">
     <ul class="nav nav-tabs">
         {{if $useTabs}}
         {{counter name="isection" start=0 print=false assign="isection"}}
@@ -150,6 +151,7 @@
         </li>
         {/if}
     </ul>
+
     {{counter name="tabCount" start=0 print=false assign="tabCount"}}
     <div class="clearfix"></div>
     {{if $useTabs}}
@@ -307,7 +309,8 @@
                     {{/foreach}}
                 </div>
             </div>
-
+    </div>{* end main-view by handALM*}
+    
             {{include file=$footerTpl}}
             <script type="text/javascript" src="include/InlineEditing/inlineEditing.js"></script>
             <script type="text/javascript" src="modules/Favorites/favorites.js"></script>

@@ -1,4 +1,8 @@
-#preload_menu ul {
+#currentTabNav {
+	display: none; //Remove Current Tab from the menu
+}
+
+#preload_menu ul { //Buttons for current Module on ListView & DetailView
 
 	float: right;
 	margin: -40px 0 0 0;
@@ -8,34 +12,61 @@
 	li {
 		float: left;
 		margin: 0 4px 4px 4px;
+		background: rgba(255,255,255,0.2);//transparent;
 		box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
-		border: none;
+		border: none;//1px solid #fff;
+
+		a {
+			color: #fff;
+			font-size: 16px;
+		}
+
+		a:hover {
+			color: $danger;
+			background-color: $default-btn-hover-color;
+		}
 	}
 
 	li .side-bar-action-icon {
-		width: 24px;
-		min-width: 24px;
+		width: 25px;
+		min-width: 25px;
 		display: inline-block;
 	}
 
 	li .actionmenulink {
 		display: inline-block;
+		margin-left: -0.4em
 	}
 
-	li a:hover {
-		background-color: $default-btn-bg-hover;
-		color: $default-btn-hover-color;
+	li:hover a,
+	li:hover {
+		color: $danger;
+		background-color: $default-btn-hover-color;
 	}
 
 }
 
+.EditViewTitle.moduleTitle {
+	background-color:transparent;
+}
+
+.EditViewTitle.moduleTitle .module-title-text,
+#detailviewFixedHeader .moduleTitle .module-title-text {
+	color: rgba(0,0,0,0.8);
+}
+
 #formDetailView #preload_menu ul {
-	margin: 23px 0 0 2em;
+	margin: 23px 2em 0 2em;
 
 	li {
 		box-shadow:none;
 		margin: 0 4px 4px 0px;
+		background-color: #fff;
 		border: 1px solid $default-btn-border;
+
+		a {
+			color: $default-btn-color;
+		}
 	}
 
 	li .actionmenulink {
@@ -50,13 +81,15 @@
 
 #DetailViewBtnGroups .buttons{
 	float: right;
-	margin-top: -23px;
+	margin-top: -26px;
 }
 
 .moduleTitle .module-title-text {
 	font-size: 30px;
 	font-weight: 300;
 	max-width: 580px;
+	color: #fff;
+	border-bottom: 2px solid rgba(255, 255, 255, 0.32);
 }
 
 /* move addtional actions into Detailview more buttons*/
@@ -73,6 +106,23 @@
 	border: none;
 }
 
+#detailviewFixedHeader .moduleTitle {
+	margin: -45px -0.5em 0 -0.5em;
+	background: #fffcf6;
+	padding: 25px 40px 10px 40px;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
+}
+
+#header_content {
+	background: #fffcf6; /*#f1fff9;*/
+    padding: 1em 10em 2em 2em;
+    position: relative;
+    top: 0;
+    margin: -2em -0.5em 1em -0.5em;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+
+
 #header_content .detail-view-row-item  {
 	padding: 10px;
 
@@ -83,7 +133,7 @@
 		font-size: $page-font-size - 1;
 	}
 	.detail-view-field {
-		height: 32px;
+		height: 28px;
 		display: block;
 
 		.sugar_field {
@@ -93,6 +143,18 @@
 		}
 
 	}
+}
+
+.tab-content .detail-view-row-item {
+	padding: 5px 20px 0 20px;
+}
+
+.main-view {
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
+}
+
+#subpanel_list {
+	margin-top:-10px;
 }
 
 .module_img {
@@ -195,10 +257,36 @@
 				margin: 0.5em 0;
 				color: rgba(255,255,255,0.72);
 			} //end h2
-
-
-
     	} //end div
 	}//end navigation_menu
 
+}
+
+//Subpanel
+//Subpanel - header
+
+#subpanel_list li:hover {
+	box-shadow: 0 13px 25px 0 rgba(0,0,0,0.1), 0 11px 7px 0 rgba(0,0,0,0.09);
+}
+.action_buttons {
+	//margin: 10px 0 0px 15px;
+	width: auto;
+	float: left;
+	background-color: transparent;
+
+		input[type=button],
+		input.button {
+			border:none
+		}
+}
+
+.footable-last-visible {
+	text-align: right;
+}
+//Subpanel - foot
+.SubpanelFoot {
+	padding: 5px 20px 0 20px;
+	margin-bottom: -10px;
+	border-top: 1px solid #ddd;
+	color: rgba(0,0,0,0.54);
 }

@@ -41,14 +41,18 @@
 {*<!-- tab_panel_content.tpl START -->*}
 
 {*<!-- tab panel main div -->*}
+{*added by HandALM -Start*}
+<div class="row detail-view-row">
+{*added by HandALM -end*}
 
 {{foreach name=rowIteration from=$panel key=row item=rowData}}
 
     {*row*}
 
     {*<!-- ROW -->*}
-<div class="row detail-view-row">
-
+{*removed by HandALM -Start*}
+{*<!--<div class="row detail-view-row">-->*}
+{*removed by HandALM -end*}
     {{counter name="columnCount" start=0 print=false assign="columnCount"}}
 
     {{foreach name=colIteration from=$rowData key=col item=colData}}
@@ -59,10 +63,10 @@
 
         {{if $smarty.foreach.colIteration.total > 1 && $colData.colspan != 3}}
             {*<!-- DIV column - colspan != 3 -->*}
-            <div class="col-xs-12 col-sm-6 detail-view-row-item">
+            <div class="col-xs-12 col-sm-3 detail-view-row-item">
         {{else}}
             {*<!-- DIV column - colspan = 3 -->*}
-            <div class="col-xs-12 col-sm-12 detail-view-row-item">
+            <div class="col-xs-12 col-sm-3 detail-view-row-item">
         {{/if}}
 
 
@@ -79,13 +83,13 @@
                         {*<!-- DIV inside - colspan != 3 -->*}
 
                     {{if $smarty.foreach.colIteration.index == 0}}
-                        <div class="col-xs-12 col-sm-4 label col-1-label">
+                        <div class="col-xs-12 col-sm-12 label col-1-label">
                     {{else}}
-                        <div class="col-xs-12 col-sm-4 label col-2-label">
+                        <div class="col-xs-12 col-sm-12 label col-2-label">
                     {{/if}}
                     {{else}}
                         {*<!-- DIV inside - colspan = 3 -->*}
-                        <div class="col-xs-12 col-sm-2 label col-1-label">
+                        <div class="col-xs-12 col-sm-12 label col-1-label">
                     {{/if}}
 
                     {*label*}
@@ -121,10 +125,10 @@
 
                     {{if $smarty.foreach.colIteration.total > 1 && $colData.colspan != 3}}
                         {*<!-- phone (version 1) -->*}
-                        <div class="col-xs-12 col-sm-8 detail-view-field {{if $inline_edit && !empty($colData.field.name) && ($fields[$colData.field.name].inline_edit == 1 || !isset($fields[$colData.field.name].inline_edit))}}inlineEdit{{/if}}" type="{{$fields[$colData.field.name].type}}" field="{{$fields[$colData.field.name].name}}" {{if $colData.colspan}}colspan='{{$colData.colspan}}'{{/if}} {{if isset($fields[$colData.field.name].type) && $fields[$colData.field.name].type == 'phone'}}class="phone"{{/if}}>
+                        <div class="col-xs-12 col-sm-12 detail-view-field {{if $inline_edit && !empty($colData.field.name) && ($fields[$colData.field.name].inline_edit == 1 || !isset($fields[$colData.field.name].inline_edit))}}inlineEdit{{/if}}" type="{{$fields[$colData.field.name].type}}" field="{{$fields[$colData.field.name].name}}" {{if $colData.colspan}}colspan='{{$colData.colspan}}'{{/if}} {{if isset($fields[$colData.field.name].type) && $fields[$colData.field.name].type == 'phone'}}class="phone"{{/if}}>
                     {{else}}
                         {*<!-- phone (version 2) -->*}
-                        <div class="col-xs-12 col-sm-10 detail-view-field {{if $inline_edit && !empty($colData.field.name) && ($fields[$colData.field.name].inline_edit == 1 || !isset($fields[$colData.field.name].inline_edit))}}inlineEdit{{/if}}" type="{{$fields[$colData.field.name].type}}" field="{{$fields[$colData.field.name].name}}" {{if $colData.colspan}}colspan='{{$colData.colspan}}'{{/if}} {{if isset($fields[$colData.field.name].type) && $fields[$colData.field.name].type == 'phone'}}class="phone"{{/if}}>
+                        <div class="col-xs-12 col-sm-12 detail-view-field {{if $inline_edit && !empty($colData.field.name) && ($fields[$colData.field.name].inline_edit == 1 || !isset($fields[$colData.field.name].inline_edit))}}inlineEdit{{/if}}" type="{{$fields[$colData.field.name].type}}" field="{{$fields[$colData.field.name].name}}" {{if $colData.colspan}}colspan='{{$colData.colspan}}'{{/if}} {{if isset($fields[$colData.field.name].type) && $fields[$colData.field.name].type == 'phone'}}class="phone"{{/if}}>
                     {{/if}}
 
                     {{if !empty($colData.field.name)}}
@@ -200,14 +204,20 @@
         </div>
         {*<!-- /DIV column -->*}
         {{if $fieldCount==0}}
-        <div class="clear"></div>
+        {*<!-- <div class="clear"></div>--> removed by HandALM*}
         {{/if}}
 
 
     {{/foreach}}
     {{counter name="columnCount" print=false}}
 
-</div>
+{*removed by HandALM -start*}
+{*</div>*}
+{*removed by HandALM -end*}
 {{/foreach}}
+
+{*added by HandALM -start*}
+</div>
+{*added by HandALM -end*}
 
 {*<!-- /tab panel main div -->*}

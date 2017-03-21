@@ -1,6 +1,9 @@
 /**** Dashboard ***/
 @import 'variables';
 
+#pageContainer {
+  margin: -12px 0 0 0;
+}
 
 .dashletcontainer.col-33 {
   width: 33.333%;
@@ -495,7 +498,8 @@ td.dashlet-title > h3 > span {
 }
 
 .dashletPanel .h3Row h3 span {
-  font-weight: normal;
+  font-weight: 200;
+  font-size: 16px;
 }
 
 #dashletbuttons {
