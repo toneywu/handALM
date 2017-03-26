@@ -32,6 +32,7 @@ $(document).ready(function(){
 		
 		
 	}
+
 });
 
 //补齐两位数  
@@ -536,10 +537,12 @@ function insertTransLineHeader(tableid) {
 	a.innerHTML = '#';// SUGAR.language.get('HAT_Asset_Trans',
 	// 'LBL_TRANS_STATUS');
 	var b = x.insertCell(1);
+	//b.width="120";
 	b.innerHTML = "<span id='line_parent_ip_title'>"
 			+ SUGAR.language.get('HIT_IP_TRANS', 'LBL_PARENT_IP')
 			+ "</span>";
 	var b1 = x.insertCell(2);
+	//b1.width="120";
 	b1.innerHTML = "<span id='line_hit_ip_subnets_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_HIT_IP')+"</span>";
 	var c = x.insertCell(3);
 	c.innerHTML = "<span id='line_associated_ip_title'>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_ASSOCIATED_IP')+"</span>";
@@ -609,7 +612,7 @@ function insertTransLineHeader(tableid) {
 function insertLineData(asset_trans_line) { // 将数据写入到对应的行字段中
 	var ln = 0;
 	if (asset_trans_line.id != '0' && asset_trans_line.id !== '') {
-		ln = insertTransLineElements("lineItems");
+		ln = insertTransLineElements("lineItems1");
 		// alert(asset_trans_line.hit_ip_subnets);
 		var ip_splited = asset_trans_line.hit_ip_subnets.split("/");
 		SUGAR.util.doWhen("typeof IpSubnetCalculator != 'undefined'",
@@ -760,9 +763,15 @@ $(document).ready(function(){
 		startDate:new Date(t),
 	});
 	
-	
+	resizeContent();
 	
 });
+//add liu
+function resizeContent() {
+    $width = $(window).width() ;
+    $('#lineItems1').width($width);
+}
+
 function insertTransLineElements(tableid) { // 创建界面要素
 // 包括以下内容：1）显示头，2）定义SQS对象，3）定义界面显示的可见字段，4）界面行编辑器界面
 	if (document.getElementById(tableid + '_head') !== null) {
@@ -1162,11 +1171,16 @@ function insertTransLineElements(tableid) { // 创建界面要素
 			+ "_label'>"
 			+ "带宽类型"
 			+ "</label>"
-			+ "<input style=' width:153px;' type='text' name='line_bandwidth_type["
-			+ prodln
-			+ "]' id='line_bandwidth_type"
-			+ prodln
-			+ "' maxlength='50' value='' title=''>"
+			+"<select name='line_bandwidth_type["+ prodln+ "]' id='line_bandwidth_type"+ prodln+ "' title=''>"
+			    +"<option label='' value='' ></option>"
+				+"<option label='八线BGP' value='八线BGP' >八线BGP</option>"
+				+"<option label='四线BGP' value='四线BGP' >四线BGP</option>"
+				+"<option label='双线BGP' value='双线BGP' >双线BGP</option>"
+				+"<option label='单联通' value='单联通' >单联通</option>"
+				+"<option label='单电信' value='单电信' >单电信</option>"
+				+"<option label='移动' value='移动' >移动</option>"
+				+"<option label='海外带宽' value='海外带宽' >海外带宽</option>"
+			+"</select>"
 			+ "</span>"
 			+
 			// 限速
@@ -1828,7 +1842,12 @@ function single_Field(fieldName,type,i){
 		    $("#btn_"+fieldName+i).css({"visibility":"hidden"});
 		    $("#"+fieldName+i).parents('.input_group').hide();//remove(); 
 		    $("#"+fieldName+"_title").hide();//remove(); 
+		    /*$("#"+fieldName+"_title").html("");
+		    $("#"+fieldName+"_title").hide();*/
+		    //add liu
+		    $("#"+fieldName+"_title").parent().remove();
 		    $("#displayed_"+fieldName+i).hide();//remove(); 
+		    $("#displayed_"+fieldName+i).parent().remove();
 		    $("#span_"+fieldName+i).hide();//remove(); 
 		    mark_field_disabled_mine(fieldName+i,false);		
 	}
@@ -1881,7 +1900,7 @@ function dulicateTranLine(ln) {// 关闭行编辑器（显示为正常行）
 			}
 		}
 		// 加入新行
-		insertTransLineElements("lineItems");
+		insertTransLineElements("lineItems1");
 		if(typeof lineDataTemp  =="undefined"){
 			var lineDataTemp={
 				id:"",
@@ -1950,3 +1969,5 @@ function dulicateTranLine(ln) {// 关闭行编辑器（显示为正常行）
 		
 	//}
 }
+
+resizeContent();

@@ -39,12 +39,6 @@ $dictionary['AOS_Products']['fields']['asset_num_perfix_c']['labelValue']='Asset
 
  
 
- // created: 2017-03-16 10:18:22
-$dictionary['AOS_Products']['fields']['contract_flag_c']['inline_edit']='1';
-$dictionary['AOS_Products']['fields']['contract_flag_c']['labelValue']='是否合同';
-
- 
-
  // created: 2016-08-02 14:09:20
 $dictionary['AOS_Products']['fields']['data_source_code_c']['inline_edit']='';
 $dictionary['AOS_Products']['fields']['data_source_code_c']['labelValue']='Source Code';

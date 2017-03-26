@@ -11,11 +11,13 @@ if (isset($_REQUEST['current_mode'])) {
 }
 if (isset($_SESSION['current_mode'])) {
   $_SESSION['current_mode'] = $_SESSION['current_mode'];
-    if($_SESSION['current_mode']=="rack"||$_SESSION['current_mode']=="rackposition"||$_SESSION['current_mode']=="rackasset") {
+    if($_SESSION['current_mode']=="rack"||$_SESSION['current_mode']=="rackposition") {
         $current_mode_sql = "hat_assets.enable_it_rack = 1 ";
     } elseif ($_SESSION['current_mode']=="it") {
         $current_mode_sql = "hat_assets.enable_it_ports = 1 ";
-    }
+    }elseif ($_SESSION['current_mode']=="rackasset") {
+    $current_mode_sql = " (hat_assets.enable_it_rack = 1 OR hat_assets.enable_linear = 1)";
+  }
 }
 
 if (isset($_REQUEST['site_id'])&&$_REQUEST['site_id']!="undefined" && $_REQUEST['site_id']!="") {
@@ -176,6 +178,7 @@ if ($_REQUEST['type']=="current_using_org_none" ) {
     }
 
     if (isset($_REQUEST['id'])) {
+
       $account_id = $_SESSION['query_id'];
         $sel_sub_asset ="SELECT
                           hat_assets.id,
@@ -203,6 +206,7 @@ if ($_REQUEST['type']=="current_using_org_none" ) {
                         AND hat_assets.asset_status != 'Discard'
                         AND hat_assets.asset_status IN ('PreAssigned','Idle','Stocked')
                         AND ".$current_mode_sql.$current_site_sql.$where_sql. " ORDER by hat_assets.name ASC";
+      
   }
         /*$sel_sub_asset ="SELECT
                           hat_assets.id, hat_assets.name, hat_assets.asset_desc, hat_assets.asset_icon, hat_assets.asset_status

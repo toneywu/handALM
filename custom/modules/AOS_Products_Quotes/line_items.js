@@ -1927,7 +1927,7 @@ productTable.id = "product_group"+groupn;
 productHeader_cell.appendChild(productTable);
 
 insertProductHeader(productTable.id);
-
+ 
 var serviceTableHeader = document.createElement("thead");
 table.appendChild(serviceTableHeader);
 var serviceHeader_row=serviceTableHeader.insertRow(-1);
@@ -2718,10 +2718,12 @@ function showMore(btn,num){//btn和num确定点击哪个+
 }
 
 $(function(){
-    if($("#edit_button").length>0){//判断是否在Detail中
+    /*if($("#edit_button").length>0){//判断是否在Detail中
         $("#LBL_LINE_ITEMS>tbody>tr>td").removeAttr("colspan");//清除colsan,因为只有两列
         $("#LBL_LINE_ITEMS>tbody>tr:lt(3)>td:eq(1)").attr("width","87.5%");//第一列已经是12.5%，只需设置第二列
         $("#LBL_LINE_ITEMS>tbody>tr>td").removeAttr("width");//行宽，无用设置，移除
         $("#LBL_LINE_ITEMS>tbody>tr:eq(7)>td:gt(1)").remove();
-    }
+    }*/
+    $('#line_items_span').parent().parent().removeClass('col-sm-3');
+    $('#line_items_span').parent().parent().addClass('col-sm-12');
 });

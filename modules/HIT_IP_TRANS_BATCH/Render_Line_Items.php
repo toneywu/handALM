@@ -10,8 +10,8 @@ function display_lines($focus, $field, $value, $view) {
 		$html .= '<script src="modules/HIT_IP_TRANS/js/line_items.js"></script>';
 		//$html .= '<script src="modules/HAA_FF/ff_include.js"></script>';
 		$html .= '<script src="custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js"></script>';
-		$html .= "<table border='0' id='lineItems' class='list view table'></table>";
-		$html .= '<script>insertTransLineHeader(\'lineItems\');</script>';
+		$html .= "<table border='0' id='lineItems1' class='list view table'></table>";
+		$html .= '<script>insertTransLineHeader(\'lineItems1\');</script>';
 		$html .= "<script> var lineData='';</script>";
 
 		
@@ -194,7 +194,7 @@ function display_lines($focus, $field, $value, $view) {
 
 		}
 
-		$html .= '<script>insertTransLineFootor(\'lineItems\');</script>';
+		$html .= '<script>insertTransLineFootor(\'lineItems1\');</script>';
 		$html .= '<script>resetLineNum_Bold();</script>';
 
 	} else
@@ -202,8 +202,8 @@ function display_lines($focus, $field, $value, $view) {
 
 			$html .= '<script src="modules/HIT_IP_TRANS/js/line_items_show.js"></script>';
 			$html .= '<script src="custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js"></script>';
-			$html .= "<table border='0' cellspacing='16' width='37.5%' id='lineItems' class='list view table'></table>";
-			$html .= '<script>insertTransLineHeader(\'lineItems\');</script>';
+			$html .= "<table border='0' cellspacing='16' width='37.5%' id='lineItems1' class='list view table'></table>";
+			$html .= '<script>insertTransLineHeader(\'lineItems1\');</script>';
 
 			if ($focus->id != '') { //如果不是新增（即如果是编辑已有记录）
 				$sql1 = "(SELECT   hat.id
@@ -305,7 +305,7 @@ function display_lines($focus, $field, $value, $view) {
 				}
 				//end by yuan.chen	
 			}
-			$html .= '<script>insertTransLineFootor(\'lineItems\');</script>';
+			$html .= '<script>insertTransLineFootor(\'lineItems1\');</script>';
 			$html .= '<script>resetLineNum_Bold();</script>';
 
 		}

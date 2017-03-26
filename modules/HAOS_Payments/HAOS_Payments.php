@@ -96,7 +96,26 @@ class HAOS_Payments extends Basic
     parent::__construct();
   }
 
+function getMaxPaymentsNum($frm_id){
+   
+    $maxnum = 1;
+      $sql="SELECT
+          max(hp.name+0) maxnum
+        from haos_payments hp
+        where hp.deleted = 0
+        and hp.haa_frameworks_id_c='".$frm_id."'";
 
+     $result = $this->db->query($sql);
+    while ($row =  $this->db->fetchByAssoc($result)) {
+      if($row['maxnum']){
+        $maxnum = $row['maxnum']+1;
+      }else{
+        $maxnum=1;
+      }
+    }
+    return $maxnum;
+
+  }
 
   function save($check_notify = FALSE){
     global $sugar_config;
@@ -146,19 +165,23 @@ class HAOS_Payments extends Basic
       $this->haa_periods_id_c = $row['id'];
       $this->period_name = $row['name'];
     }
-
-
-        //$this->name =  $this->calendar_name;
+    if($this->name==''){
+      $this->name=getMaxPaymentsNum($this->haa_frameworks_id_c);
+    }
+       
     $this->id=parent::save($check_notify);
     $post_data=$_POST;
+    //var_dump($_POST['line_id']);
     $line_count = isset($post_data['line_deleted']) ? count($post_data['line_deleted']) : 0;
-
+    //var_dump($line_count);
+    //exit();
     for ($i = 0; $i < $line_count; ++$i) {
       $key="line_";
-      $lines = new HAOS_Payment_Invoices();
+     
       if ($post_data[$key . 'deleted'][$i] == 1) {
         $lines->mark_deleted($post_data[$key . 'id'][$i]);
       } else {
+        $lines = new HAOS_Payment_Invoices();
         foreach ($lines->field_defs as $field_def) {
           $field_name = $field_def['name'];
           if (isset($post_data[$key . $field_name][$i])) {
@@ -168,16 +191,16 @@ class HAOS_Payments extends Basic
         $lines->currency_id=$this->currency_id;
         $lines->aos_invoices_id_c = $post_data['line_invoice_id'][$i];
         $lines->haos_payments_id_c = $this->id;
-                 //$lines->name = $post_data[$key .'period_name'][$i];;
-                // var_dump($lines->sort_order);
+
         perform_aos_save($lines);
         $lines->save($check_notify);
 
 
       }
-      $this->updateInvPayStatus($post_data['line_invoice_id'][$i]);
+    $this->updateInvPayStatus($post_data['line_invoice_id'][$i]);
+    
     }
-
+   
   }
 
 
@@ -227,7 +250,14 @@ class HAOS_Payments extends Basic
     $Bean->unpaied_amount_c = $InvAmount-$payAmount;
     $Bean->amount_c = $payAmount;
     $Bean->save();
-
+    // var_dump($sql);
+    // var_dump('$payAmount:'.$payAmount);
+    // var_dump('$InvAmount:'.$InvAmount);
+    // var_dump('$amount_c:'.$Bean->amount_c);
+   // $result['return_data']['payAmount']=$payAmount;
+   //  $result['return_data']['sql']=$sql;
+   //   $result['return_data']['InvAmount']=$InvAmount;
+   //    $result['return_data']['amount_c']=$Bean->amount_c;
     return $result;
   }
   

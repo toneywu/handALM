@@ -13,7 +13,7 @@
     	$result = returnDeposit($predata['invoice_id'],$predata['return_date']);
 		echo json_encode($result);
     }
-
+ 
 
    //获取状态
     function getInvStatus($invid){
@@ -42,10 +42,13 @@
   	    $err_msg = '';
   	   
 
-    	$bean=BeanFactory::getBean('AOS_Invoices', $invid);
-    	$bean->return_deposit_date_c=$returnDate;
-		$bean->status='Returned';
-		$bean->save();
+    	$bean=BeanFactory::getBean('AOS_Invoices',$invid);
+      //$bean->return_deposit_date_c='';
+    	//$bean->return_deposit_date_c=strtotime($returnDate);
+      $bean->return_deposit_date_c=date_format(date_create($returnDate),'Y/m/d');
+		  $bean->status='Returned';
+		  $bean->save();
+      //$result['return_msg']=$returnDate;
     	return $result;
     }
 	

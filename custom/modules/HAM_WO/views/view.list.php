@@ -72,6 +72,34 @@ class HAM_WOViewList extends ViewList
     }else{
       $this->where=" EXISTS (SELECT 1 FROM ham_maint_sites hms WHERE hms.id = ham_wo.ham_maint_sites_id AND hms.haa_frameworks_id ='".$haa_frameworks_id."')";
     }
+    //add liu
+    if ($_REQUEST['date_actual_finish1_basic'] != '') {
+      //echo("date_actual_finish1_basic".$_REQUEST['date_actual_finish1_basic']);
+      $this->where.= " AND date_format(ham_wo.date_actual_start,'%Y-%m-%d') = '".$_REQUEST['date_actual_finish1_basic']."'";
+      echo "<script>$('#date_actual_finish1_basic').val('".$_REQUEST['date_actual_finish1_basic']."');</script>";
+    }
+    if ($_REQUEST['processing_date_basic'] != '') {
+      //echo("date_actual_finish1_basic".$_REQUEST['date_actual_finish1_basic']);
+      echo "<script>$('#processing_date_basic').val('".$_REQUEST['processing_date_basic']."');</script>";
+      $this->where.= " AND ('".$_REQUEST['processing_date_basic']."' = (SELECT date_format(ham_woop.date_actual_finish,'%Y-%m-%d')
+                                                  FROM ham_woop
+                                                  WHERE ham_woop.ham_wo_id = ham_wo.id
+                                                  AND ham_woop.woop_status = 'COMPLETED'
+                                                  AND ham_woop.deleted = 0
+                                                  ORDER BY
+                                                    ham_woop.woop_number DESC
+                                                  LIMIT 0,1) 
+                OR (not EXISTS (SELECT date_format(ham_woop.date_actual_finish,'%Y-%m-%d')
+                                                  FROM ham_woop
+                                                  WHERE ham_woop.ham_wo_id = ham_wo.id
+                                                  AND ham_woop.woop_status = 'COMPLETED'
+                                                  AND ham_woop.deleted = 0
+                                                  ORDER BY
+                                                    ham_woop.woop_number DESC
+                                                  LIMIT 0,1) 
+                   AND date_format(ham_wo.date_modified,'%Y-%m-%d') = '".$_REQUEST['processing_date_basic']."')
+               )";
+    }
     //echo $this->where;
     //增加HPR权限控制逻辑
     require_once('modules/HPR_Group_Priviliges/checkListACL.php');

@@ -88,6 +88,21 @@ function setFF(FFObj) {
 					$("#span_"+FFObj.field).parent().prev(".label").html(FFObj.label+":");
 				}
 			}
+			//Add by zhangling 20170316 
+			else if(view == 'index' || view == 'ListView'){
+				$("#list_"+FFObj.field).html(FFObj.label);
+				/*var table_head = $(".table-responsive thead tr th div a");
+		  		$.each(table_head,function(){
+		  			var href = $(this).attr('href');
+		  			if(href.indexOf(FFObj.field)>=0){
+		  				//alert($(this).text());
+		  				var aImg = $(this).children("img");
+						$(this).html(" "+FFObj.label+" &nbsp;&nbsp; ");
+						$(this).append(aImg);
+		  			}
+		  		});*/
+			}
+			//End add 20170316
 		}
 	}
 

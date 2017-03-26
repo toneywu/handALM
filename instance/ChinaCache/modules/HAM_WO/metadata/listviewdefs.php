@@ -53,7 +53,7 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-  'DATE_TARGET_START' => 
+  /*'DATE_TARGET_START' => 
   array (
     'type' => 'datetimecombo',
     'label' => 'LBL_TARGET_START_DATE',
@@ -66,6 +66,26 @@ array (
     'label' => 'LBL_TARGET_FINISH_DATE',
     'width' => '10%',
     'default' => true,
+  ),*/
+  'PROCESSING_DATE' => 
+  array (
+    'type' => 'varchar',
+    'studio' => 'visible',
+    'label' => 'LBL_PROCESSING_DATE',
+    'link' => false,
+    'width' => '10%',
+    'default' => true,
+    'customCode'=>'{$PROCESSING_DATE}',
+  ),
+  'PROCESSING_PEOPLE' => 
+  array (
+    'type' => 'varchar',
+    'studio' => 'visible',
+    'label' => 'LBL_PROCESSING_PEOPLE',
+    'link' => false,
+    'width' => '10%',
+    'default' => true,
+    'customCode'=>'{$PROCESSING_PEOPLE}',
   ),
   'WO_OWNER' => 
   array (

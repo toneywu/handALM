@@ -45,6 +45,22 @@ array (
         'default' => true,
         'name' => 'account',
       ),
+      'DATE_ACTUAL_START1' => 
+      array (
+        'type' => 'date',
+        'label' => 'LBL_ACTUAL_START_DATE',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'date_actual_finish1',
+      ),
+      'PROCESSING_DATE' => 
+      array (
+        'type' => 'date',
+        'label' => 'LBL_PROCESSING_DATE',
+        'width' => '10%',
+        'default' => true,
+        'name' => 'processing_date',
+      ),
       'location' => 
       array (
         'type' => 'relate',

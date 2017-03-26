@@ -2462,7 +2462,6 @@ $app_list_strings['hat_asset_status_list']=array (
   'TempOut' => 'Outside',
   'OutOfService' => 'Decom.',
   'Discard' => 'Decom. & Removed',
-  'Pending' => 'Pending',
 );
 
 $app_list_strings['hat_asset_source_type_list']=array (  
@@ -2475,7 +2474,13 @@ $app_list_strings['hat_asset_source_type_list']=array (
     'LEASE' => 'Leased',
     'BORROW' => 'Borrowed',
 );
-
+$app_list_strings['hat_asset_type_list']=array (
+  ''=>'',
+  'IT_PORT' => 'IT可联网设备',
+  'RACK_ALL' => '机柜（全部）',
+  'RACK_NOT_ENABLE_PARTIAL' => '机柜（整柜）',
+  'RACK_ENABLE_PARTIAL' => '机柜（散U）',
+);
 
 $app_list_strings['asset_criticality_list']=array (
   '' => '',

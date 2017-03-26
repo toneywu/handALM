@@ -4,6 +4,215 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 *客户流失表
 */
 function custom_report_main($paraArray){
+    global $db,$bean_module,$app_list_strings;
+    ini_set('zlib.output_compression', 'Off');
+    require_once('include/export_utils.php');
+    require_once('include/utils.php');
+    require_once('custom/modules/AOR_Reports/ExcelUtil.php');
+    ob_start();
+    $parameterValueArray=$_REQUEST['parameter_value'];
+    $eu = new ExcelUtil();
+    $eu -> setActiveSheet(0);
+    $columnNameArray=array("客户ID","公司名称","曾用名","客户类型","销售代表","销售单元","客服代表","散U托管（U）","整柜托管(R)","预留托管(R）","带宽类型","带宽数量（M）","IP   （个）","端口","所在机房","流失时间","流失原因");
+    $eu -> buildColumnName($columnNameArray);
+    
+    $excel_data=array();
+    $report_bean = BeanFactory::getBean('AOR_Reports',$_REQUEST['record']);
+    $name = $report_bean->name;
+    $frame_id = $report_bean->haa_frameworks_id_c;
+    
+    $sql = 'SELECT DISTINCT
+                (hms.id) site_id,
+                hms. NAME site_name,
+                a.*,ac.*
+            FROM
+                accounts a
+            LEFT JOIN accounts_cstm ac ON a.id = ac.id_c
+            LEFT JOIN hit_ip_allocations hia ON (
+                a.id = hia.target_owning_org_id
+                AND hia.deleted = 0
+            )
+            LEFT JOIN hit_ip_subnets his ON (
+                hia.hit_ip_subnets_id = his.id
+            )
+            LEFT JOIN ham_maint_sites hms ON (
+                his.hat_asset_locations_id = hms.id
+            )
+            WHERE
+                ac.org_type_c = "EXTERNAL"
+            AND ac.is_asset_org_c = 1
+            AND (
+                ac.attribute7_c IS NOT NULL
+                OR ac.attribute8_c IS NOT NULL
+            )
+            AND (
+                ac.attribute7_c != ""
+                OR ac.attribute8_c != ""
+            )
+            AND ac.haa_frameworks_id_c ="'.$parameterValueArray[0].'"';
+
+    if ($parameterValueArray[1] != '' ) {
+        $sql = $sql.' AND a.id = "'.$parameterValueArray[1].'"';
+    }
+
+    if ($frame_id != '' ) {
+        $sql = $sql.' AND ac.haa_frameworks_id_c = "'.$frame_id.'"';
+    }
+    $result = $db->query($sql);
+    while ($row = $db->fetchByAssoc($result)) {
+        $rowData = array();
+        $rowData[]= $row['organization_number_c'];
+        $rowData[]= $row['full_name_c'];
+        $rowData[]= $row['name'];
+        $rowData[]= $row['attribute9_c'];
+        $rowData[]= $row['attribute2_c'];
+        $rowData[]= $row['attribute1_c'];
+        $sql0 ='select last_name from contacts where id ="'.$row['contact_id_c'].'"';
+        $val = '';
+        $result0 = $db->query($sql0);
+        while ($row0 = $db->fetchByAssoc($result0)) {
+            $val = $row0['last_name'];
+        }
+        $rowData[]= $val;
+        $sql1 = 'SELECT
+                    sum(hra.height) hra_height
+                FROM
+                    hit_rack_allocations hra
+                LEFT JOIN hat_assets ha ON ha.id = hra.hat_assets_id
+                LEFT JOIN hit_racks hr ON hra.hit_racks_id = hr.id
+                WHERE
+                    hra.deleted = 0
+                AND hr.enable_partial_allocation = 1
+                AND ha.using_org_id = "'.$row['id'].'"';
+       // echo '-------sql1:'.$sql1;
+        $val = '';
+        $result1 = $db->query($sql1);
+        while ($row1 = $db->fetchByAssoc($result1)) {
+            $val = $row1['hra_height'];
+        }
+        $rowData[]= $val;
+        $sql2 = 'SELECT
+                    count(hr.id) hr_count
+                FROM
+                    hit_racks hr
+                LEFT JOIN hat_assets ha ON hr.hat_assets_id = ha.id
+                WHERE
+                    hr.deleted = 0
+                AND ha.using_org_id ="'.$row['id'].'"';
+        //echo '-------sql2:'.$sql2;
+        $val = '';
+        $result2 = $db->query($sql2);
+        while ($row2 = $db->fetchByAssoc($result2)) {
+            $val = $row2['hr_count'];
+        }
+        $rowData[]= $val;
+        $sql3 = 'SELECT
+                    count(hr.id) hr_p_count
+                FROM
+                    hit_racks hr
+                LEFT JOIN hat_assets ha ON hr.hat_assets_id = ha.id
+                WHERE
+                    hr.deleted = 0
+                AND ha.asset_status = "PreAssigned"
+                AND ha.using_org_id = "'.$row['id'].'"';
+        //echo '-------sql3:'.$sql3;
+        $val = '';
+        $result3 = $db->query($sql3);
+        while ($row3 = $db->fetchByAssoc($result3)) {
+            $val = $row3['hr_p_count'];
+        }
+        $rowData[]= $val;
+        $sql4 = 'SELECT
+                    his.hat_asset_locations_id,
+                    hia.bandwidth_type hia_bandwidth_type,
+                    sum(hia.speed_limit) hia_bandwidth_count,
+                    count(DISTINCT hia. PORT) hia_port_count
+                FROM
+                    hit_ip_allocations hia
+                LEFT JOIN hit_ip_subnets his ON hia.hit_ip_subnets_id = his.id
+                WHERE
+                    hia.deleted = 0
+                AND hia.target_owning_org_id = "'.$row['id'].'"
+                AND (
+                    hia. STATUS = "EFFECTIVE"
+                    OR hia. STATUS = ""
+                    OR hia. STATUS IS NULL
+                )
+                GROUP BY
+                    his.hat_asset_locations_id
+                HAVING
+                    his.hat_asset_locations_id ="'.$row['site_id'].'"';
+        //echo '-------sql4:'.$sql4;
+        $val_hia_bandwidth_type = '';
+        $val_hia_bandwidth_count = '';
+        $val_hia_port_count = '';
+        $result4 = $db->query($sql4);
+        while ($row4 = $db->fetchByAssoc($result4)) {
+            $val_hia_bandwidth_type = $row4['hia_bandwidth_type'];
+            $val_hia_bandwidth_count = $row4['hia_bandwidth_count'];
+            $val_hia_port_count = $row4['hia_port_count'];
+        }
+        $rowData[]= $val_hia_bandwidth_type;
+        $rowData[]= $val_hia_bandwidth_count;
+        
+        $sql5_1 = 'SELECT 
+                    sum(his.ip_qty) ip_count0
+                    FROM
+                    hit_ip_allocations hia,
+                    hit_ip_subnets his
+                    WHERE
+                    hia.deleted=0
+                    AND hia.target_owning_org_id = "'.$row['id'].'"
+                    AND hia.hit_ip_subnets_id = his.id
+                    AND his.ip_type = 1';  
+        $val='';
+        $val_0 = '';
+        $result5 = $db->query($sql5_1);
+        while ($row5 = $db->fetchByAssoc($result5)) {
+            $val_0 = $row5['ip_count0'];
+        }
+        $sql5_2 = 'SELECT 
+                    count(his.id) ip_count1
+                    FROM
+                    hit_ip_allocations hia,
+                    hit_ip_subnets his
+                    WHERE
+                    hia.deleted=0
+                    AND hia.target_owning_org_id = "'.$row['id'].'"
+                    AND hia.hit_ip_subnets_id = his.id
+                    AND his.ip_type = 0';
+        $val_1 = '';
+        $result5 = $db->query($sql5_2);
+        while ($row5 = $db->fetchByAssoc($result5)) {
+            $val_1 = $row5['ip_count1'];
+        }
+        $val = $val_0 + $val_1;
+        $rowData[]= $val;
+        $rowData[]= $val_hia_port_count;
+        $rowData[]= $row['site_name'];
+        $rowData[]= $row['attribute8_c'];
+        $rowData[]= $row['attribute7_c'];
+        $excel_data[]=$rowData;
+
+    }
+    $eu -> buildExcelContent($excel_data);
+    $name = $eu -> createExcelFile('custom/modules/AOR_Reports/rpt_data_files/','客户流失表');
+    /*$name= $GLOBALS['locale']->translateCharset($name, 'UTF-8', $GLOBALS['locale']->getExportCharset());*/
+    ob_clean();
+    header("Pragma: cache");
+    header("Content-type: text/html; charset=".$GLOBALS['locale']->getExportCharset());
+    header("Content-Disposition: attachment; filename=\"{$name}\"");
+    header("Content-transfer-encoding: binary");
+    header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
+    header("Last-Modified: " . TimeDate::httpTime() );
+    header("Cache-Control: post-check=0, pre-check=0", false );
+    
+    print $name;
+
+    sugar_cleanup(true);
+}
+//不使用
+function custom_report_main_CSV($paraArray){
     //echo '---------------------1-------------------------';
     global $db,$bean_module;
     ini_set('zlib.output_compression', 'Off');
@@ -75,8 +284,10 @@ function custom_report_main($paraArray){
                 FROM
                     hit_rack_allocations hra
                 LEFT JOIN hat_assets ha ON ha.id = hra.hat_assets_id
+                LEFT JOIN hit_racks hr ON hra.hit_racks_id = hr.id
                 WHERE
                     hra.deleted = 0
+                AND hr.enable_partial_allocation = 1
                 AND ha.using_org_id = "'.$row['id'].'"';
        // echo '-------sql1:'.$sql1;
         $val = '';
@@ -97,7 +308,7 @@ function custom_report_main($paraArray){
         $val = '';
         $result2 = $db->query($sql2);
         while ($row2 = $db->fetchByAssoc($result2)) {
-            $val = $row2['hra_count'];
+            $val = $row2['hr_count'];
         }
         $csv .= encloseForCSV($val);
         $sql3 = 'SELECT
@@ -113,7 +324,7 @@ function custom_report_main($paraArray){
         $val = '';
         $result3 = $db->query($sql3);
         while ($row3 = $db->fetchByAssoc($result3)) {
-            $val = $row3['hra_r_count'];
+            $val = $row3['hr_p_count'];
         }
         $csv .= encloseForCSV($val);
         $sql4 = 'SELECT

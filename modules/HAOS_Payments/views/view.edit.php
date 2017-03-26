@@ -155,7 +155,7 @@ class HAOS_PaymentsViewEdit extends ViewEdit
     $focus=$this->bean;
     $maxnum = 1;
       $sql="SELECT
-          max(hp.name) maxnum
+          max(hp.name+0) maxnum
         from haos_payments hp
         where hp.deleted = 0
         and hp.haa_frameworks_id_c='".$frm_id."'";

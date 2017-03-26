@@ -11,10 +11,12 @@ class AOS_InvoicesViewList extends ViewList
     parent::processSearchForm();
     $haa_frameworks_id=$_SESSION["current_framework"];
     if ($this->where) { 
-      $this->where.=" AND haa_frameworks_id_c ='".$haa_frameworks_id."'";
+     $this->where.=" AND aos_invoices_cstm.haa_frameworks_id_c ='".$haa_frameworks_id."'";
     }else{
-     $this->where.=" where haa_frameworks_id_c ='".$haa_frameworks_id."'";
+     $this->where.=" aos_invoices_cstm.haa_frameworks_id_c ='".$haa_frameworks_id."'";
    }
+
+   //var_dump($_SESSION['AOS_Invoices2_QUERY']);
  } 
 
  function display()
