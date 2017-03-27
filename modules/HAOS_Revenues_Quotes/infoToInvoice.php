@@ -27,7 +27,7 @@ while ($record = $db->fetchByAssoc($results)) {
 			$sourceTypeResult=$db->query($sourceTypeSql);
 
 			$sourceCount=array();
-			$name='';
+			$name=''; 
 			$source_id = '';
 			$isOneContracts = 'N';
 			while ($countResult = $db->fetchByAssoc($sourceTypeResult)) {
@@ -61,9 +61,8 @@ while ($record = $db->fetchByAssoc($results)) {
 				$event_date=$eventDateLine["event_date"];			
 			}
 			//end add
-			//修改收支状态为 已结清
-			updateRenenuesStatus($RevenueId);
-$return_result = array(
+		
+		$return_result = array(
                   'type'=>1,
                   'value'=>$re_cords,
                   'cord'=>$account,
@@ -74,13 +73,5 @@ echo json_encode($return_result);
 //echo json_encode(array('type'=>1,'value'=>$re_cords,'cord'=>$account));
 
 
-function updateRenenuesStatus($RevenueId){
-
-	require_once('modules/AOS_Invoices/createInvoices.php');
-	$Revenues =BeanFactory::getBean("HAOS_Revenues_Quotes",$RevenueId);
-	$Revenues->status='Cleared';
-	$Revenues->save();
-
-}
 
 ?>

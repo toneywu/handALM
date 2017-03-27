@@ -87,6 +87,14 @@ $dictionary['AOS_Products_Quotes'] = array(
             'rows' => 6,
             'cols' => 80,
          ),
+        'contract_price' => array(
+            'name' => 'contract_price',
+            'vname' => 'LBL_CONTRACT_PRICE',
+            'type' => 'text',
+            'comment' => '',
+            'rows' => 6,
+            'cols' => 80,
+         ),
         'number' => array(
             'required' => false,
             'name' => 'number',

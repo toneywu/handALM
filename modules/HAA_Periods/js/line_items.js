@@ -224,7 +224,6 @@ z1.innerHTML  =
     addToValidate('EditView', 'line_period_status'+ ln,'varchar', 'true',SUGAR.language.get('HAA_Periods', 'LBL_PERIOD_STATUS'));
     //addToValidate('EditView', 'enabled_flag'+ prodln,'int', 'true',SUGAR.language.get('HAA_Periods', 'LBL_ENABLED_FLAG'));
     //addToValidate('EditView', 'line_amount'+ prodln,'float', 'true',SUGAR.language.get('HAA_Periods', 'LBL_AMOUNT'));
-
   }
 
 function renderLine(ln) { //将编辑器中的内容显示于正常行中
@@ -242,8 +241,8 @@ function renderLine(ln) { //将编辑器中的内容显示于正常行中
   var flag=$("#line_enabled_flag"+ln).is(':checked')?"是":"否";
   $("#line_enabled_flag"+ln).val($("#line_enabled_flag"+ln).is(':checked')?"1":"0");
   $("#displayed_line_enabled_flag"+ln).html(flag);
- //$("#displayed_line_enabled_flag"+ln).html($("#line_enabled_flag"+ln).val());
- $("#displayed_line_description"+ln).html($("#line_description"+ln).val());
+   //$("#displayed_line_enabled_flag"+ln).html($("#line_enabled_flag"+ln).val());
+  $("#displayed_line_description"+ln).html($("#line_description"+ln).val());
 }
 
 function insertLineFootor(tableid)

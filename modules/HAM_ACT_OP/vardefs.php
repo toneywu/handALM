@@ -541,9 +541,112 @@ $dictionary['HAM_ACT_OP'] = array(
       'studio' => 'visible',
       ),
 
-	  
+	     'ham_act_checklists_link' => array (
+      'name' => 'ham_act_checklists_link',
+      'type' => 'link',
+      'relationship' => 'ham_act_checklists',
+      'vname' => 'LBL_ACT_CHECKLISTS_SUBPANEL_TITLE',
+      'link_type' => 'many',
+      'module' => 'HAM_ACT_Checklists',
+      'bean_name' => 'HAM_ACT_Checklists',
+      'source' => 'non-db',
+      ),
+
+       'ham_act_labors_link' => array (
+      'name' => 'ham_act_labors_link',
+      'type' => 'link',
+      'relationship' => 'ham_act_labors',
+      'vname' => 'LBL_ACT_LABORS_SUBPANEL_TITLE',
+      'link_type' => 'many',
+      'module' => 'HAM_ACT_Labors',
+      'bean_name' => 'HAM_ACT_Labors',
+      'source' => 'non-db',
+      ),
+             'ham_act_materials_link' => array (
+      'name' => 'ham_act_materials_link',
+      'type' => 'link',
+      'relationship' => 'ham_act_materials',
+      'vname' => 'LBL_ACT_MATERIALS_SUBPANEL_TITLE',
+      'link_type' => 'many',
+      'module' => 'HAM_ACT_Materials',
+      'bean_name' => 'HAM_ACT_Materials',
+      'source' => 'non-db',
+      ),
+                   'ham_act_subcontracts_link' => array (
+      'name' => 'ham_act_checklists_link',
+      'type' => 'link',
+      'relationship' => 'ham_act_subcontracts',
+      'vname' => 'LBL_ACT_CHECKLISTS_SUBPANEL_TITLE',
+      'link_type' => 'many',
+      'module' => 'HAM_ACT_Subcontracts',
+      'bean_name' => 'HAM_ACT_Subcontracts',
+      'source' => 'non-db',
+      ),
+                         'ham_act_tools_link' => array (
+      'name' => 'ham_act_tools_link',
+      'type' => 'link',
+      'relationship' => 'ham_act_tools',
+      'vname' => 'LBL_ACT_TOOLS_SUBPANEL_TITLE',
+      'link_type' => 'many',
+      'module' => 'HAM_ACT_Tools',
+      'bean_name' => 'HAM_ACT_Tools',
+      'source' => 'non-db',
+      ),
+
 ),
 	'relationships'=>array (
+
+  'ham_act_checklists' => array (
+    'lhs_module' => 'HAM_ACT_OP',
+    'lhs_table' => 'ham_act_op',
+    'lhs_key' => 'id',
+    'rhs_module' => 'HAM_ACT_Checklists',
+    'rhs_table' => 'ham_act_checklists',
+    'rhs_key' => 'ham_act_op_id',
+    'relationship_type' => 'one-to-many',
+    ),
+
+  'ham_act_labors' => array (
+    'lhs_module' => 'HAM_ACT_OP',
+    'lhs_table' => 'ham_act_op',
+    'lhs_key' => 'id',
+    'rhs_module' => 'HAM_ACT_Labors',
+    'rhs_table' => 'ham_act_labors',
+    'rhs_key' => 'ham_act_op_id',
+    'relationship_type' => 'one-to-many',
+    ),
+
+  'ham_act_materials' => array (
+    'lhs_module' => 'HAM_ACT_OP',
+    'lhs_table' => 'ham_act_op',
+    'lhs_key' => 'id',
+    'rhs_module' => 'HAM_ACT_Materials',
+    'rhs_table' => 'ham_act_materials',
+    'rhs_key' => 'ham_act_op_id',
+    'relationship_type' => 'one-to-many',
+    ),
+
+  'ham_act_subcontracts' => array (
+    'lhs_module' => 'HAM_ACT_OP',
+    'lhs_table' => 'ham_act_op',
+    'lhs_key' => 'id',
+    'rhs_module' => 'HAM_ACT_Subcontracts',
+    'rhs_table' => 'ham_act_subcontracts',
+    'rhs_key' => 'ham_act_op_id',
+    'relationship_type' => 'one-to-many',
+    ),
+
+  'ham_act_tools' => array (
+    'lhs_module' => 'HAM_ACT_OP',
+    'lhs_table' => 'ham_act_op',
+    'lhs_key' => 'id',
+    'rhs_module' => 'HAM_ACT_Tools',
+    'rhs_table' => 'ham_act_tools',
+    'rhs_key' => 'ham_act_op_id',
+    'relationship_type' => 'one-to-many',
+    ),
+
+
 ),
 	'optimistic_locking'=>true,
 		'unified_search'=>true,

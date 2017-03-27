@@ -1,0 +1,7 @@
+<?php
+// created: 2017-03-23 13:25:10
+$mod_strings = array (
+  'LBL_EDITVIEW_PANEL1' => 'New Panel 1',
+  'LBL_EDITVIEW_PANEL2' => 'New Panel 2',
+  'LBL_HAM_PACKAGE_RULES_SUBPANEL_TITLE' => 'LBL_HAM_PACKAGE_RULES_SUBPANEL_TITLE',
+);

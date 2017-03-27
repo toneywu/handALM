@@ -71,7 +71,8 @@
   	    	$PaymentBean->contact_id1_c =$arr['billing_contact_id']; 
   	    	$PaymentBean->account_id_c = $arr['billing_account_id'];
   	    	$PaymentBean->currency_id= $arr['currency_id'];
-  	    	$PaymentBean->payment_date = $arr['payment_date']; 
+  	    	//$PaymentBean->payment_date = $arr['payment_date']; 
+          $PaymentBean->payment_date = date_format(date_create($arr['payment_date']),"Y-m-d");
   	    	$PaymentBean->payment_amount = $arr['payment_amount']; 
 
   	    	$PaymentBean->name = getMaxPaymentsNum($arr['haa_frameworks_id_c']);
@@ -95,7 +96,7 @@
 				$PaymentInvoiceBean->haos_payments_id_c = $PaymentBean->id;
 				$PaymentInvoiceBean->aos_invoices_id_c = $AosInvoicesBean->id; 
 				$PaymentInvoiceBean->currency_id= $AosInvoicesBean->currency_id;
-        if($arr['all_pay_flag']='Y'){
+        if($arr['all_pay_flag']=='Y'){
 				  $PaymentInvoiceBean->amount = $line['line_amount'];
         }else{
           $PaymentInvoiceBean->amount = $arr['payment_amount'];
@@ -104,9 +105,9 @@
 
         updateInvPayStatus($line['invoices_id']);
 			}
+ 
 
-
-			$result['return_status'] = 'S';
+			$result['return_status'] = 'S'; 
 		}else{
 			$result['return_status'] = 'E';
 		}
@@ -130,10 +131,14 @@
 		payl.amount
 		from 
 		haos_payment_invoices payl,
-		aos_invoices ainv
+		aos_invoices ainv,
+    haos_payments payh
 		where 1=1
+    and payh.deleted = 0
 		and payl.deleted = 0
 		and ainv.deleted = 0
+    and payh.id = payl.haos_payments_id_c
+    and payh.payment_status = 'P'
 		and payl.aos_invoices_id_c = ainv.id
 		and ainv.id='".$id."'";
 

@@ -52,7 +52,30 @@ class HAT_Assets extends HAT_Assets_sugar {
 		//global $action, $currentModule, $focus, $current_module_strings, $app_list_strings, $timedate;
 		global $app_list_strings;
 		$asset_fields = $this->get_list_view_array();
-
+		//add by liu
+		$current_bean = BeanFactory::getBean("HAT_Assets",$this->id);
+		$allocation_bean = BeanFactory :: getBean('HIT_Rack_Allocations')->retrieve_by_string_fields(array (
+										    'hat_assets_id' => $this->id));
+		if ($current_bean->hat_asset_locations_hat_assets_name !="") {
+			$asset_fields['LOCATION_NAME'] = '<a href="index.php?module=HAT_Asset_Locations&record=' . $current_bean->hat_asset_locations_hat_assetshat_asset_locations_ida . '&action=DetailView">' .$current_bean->hat_asset_locations_hat_assets_name. '</a>';
+		}
+		//$asset_fields['HAT_ASSET_LOCATIONS_HAT_ASSETS_NAME'] =
+		if (!empty($allocation_bean)) {
+			$rack_bean = BeanFactory :: getBean('HIT_Racks')->retrieve_by_string_fields(array (
+										    'id' => $allocation_bean->hit_racks_id));
+			if (!empty($rack_bean)) {
+				$arr = explode("_",$rack_bean->name);
+				if ($arr[3] !=""&&$arr[4] !="") {
+					$rack_bean_name = $arr[3]."_".$arr[4];
+				}else{
+					$rack_bean_name = $arr[3];
+				}
+				
+				
+				$asset_fields['RACK_NAME'] = '<a href="index.php?module=HIT_Racks&record=' . $rack_bean->id . '&action=DetailView">' .$rack_bean_name. '</a>['.$allocation_bean->rack_pos_top.' U]';
+			}
+		}
+        //echo print_r($asset_fields);
 		if (!empty ($this->asset_status)) {
 			$asset_fields['ASSET_STATUS_VAL'] = $this->asset_status;
 		}
@@ -117,7 +140,6 @@ class HAT_Assets extends HAT_Assets_sugar {
 				}
 			}
 		}
-
 		parent :: save($check_notify); //保存Assets主体
 	}
 

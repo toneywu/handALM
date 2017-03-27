@@ -24,8 +24,6 @@ $dictionary['HAM_WO'] = array (
 			'merge_filter' => 'disabled',
 			'len' => 36,
 			'size' => '20',
-
-			
 			),
 		'site' => array (
 			'required' => true,
@@ -777,6 +775,55 @@ $dictionary['HAM_WO'] = array (
 
 			
 			),
+
+		'ham_asset_routes_id' => array (
+			'required' => false,
+			'name' => 'ham_asset_routes_id',
+			'vname' => 'LBL_HAT_ASSET_ROUTES_ID',
+			'type' => 'id',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => 0,
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => false,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => 36,
+			'size' => '20',
+			),
+		'ham_asset_routes' => array (
+			'required' => false,
+			'source' => 'non-db',
+			'name' => 'ham_asset_routes',
+			'vname' => 'LBL_ASSET',
+			'type' => 'relate',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+			'id_name' => 'ham_asset_routes_id',
+			'ext2' => 'HAT_Asset_Rules',
+			'module' => 'HAT_Asset_Rules',
+			'rname' => 'name',
+			'quicksearch' => 'enabled',
+			'studio' => 'visible',
+			),
+
 		'hat_assets_id' => array (
 			'required' => false,
 			'name' => 'hat_assets_id',
@@ -823,8 +870,6 @@ $dictionary['HAM_WO'] = array (
 			'rname' => 'name',
 			'quicksearch' => 'enabled',
 			'studio' => 'visible',
-
-			
 			),
 		'asset_desc' => array (
 			'source' => 'non-db', //显示当前资产的说明

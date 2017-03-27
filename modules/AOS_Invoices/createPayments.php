@@ -32,7 +32,7 @@
 		$data = $predata['data'];
 		$result = validateAosInvoices($data);
 		if($result['return_status']=='S'){
-			$result = createPayment($data);
+			$result = createPayment($data); 
 			echo json_encode($result);
 		}else{
 			echo json_encode($result);

@@ -61,6 +61,7 @@
     }
     //console.log(product);
     for(var p in product){
+       // console.log(p);
         if(document.getElementById(type + p + ln) !== null){
             if(product[p] !== '' && isNumeric(product[p]) && p != 'vat'  && p != 'product_id' && p != 'name' && p != "part_number"){
                 document.getElementById(type + p + ln).value = format2Number(product[p]);
@@ -1472,6 +1473,7 @@ function addServiceLine(tableid, groupid){
     tablehead.id = tableid +"_head";
     tablehead.style.display="none";
     tablehead.style.backgroundColor='#aaa';
+    tablehead.style.fontSize = '16px';
     document.getElementById(tableid).appendChild(tablehead);
 
     var x=tablehead.insertRow(-1);
@@ -1665,6 +1667,7 @@ function addServiceLine(tableid, groupid){
     tablehead.id = tableid +"_head";
     tablehead.style.display="none";
     tablehead.style.backgroundColor='#aaa';
+    tablehead.style.fontSize = '16px';
     document.getElementById(tableid).appendChild(tablehead);
 
     var x=tablehead.insertRow(-1);

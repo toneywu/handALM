@@ -85,6 +85,15 @@ function populateParentInfo(){
             //$this->bean->source_class = '';
         }
     }
+     else if($this->bean->source_code=="HAM_WO"){
+        $parent_bean= BeanFactory::getBean('HAM_WO', $this->bean->source_id);
+        if ($parent_bean) { 
+            $this->bean->source_name = isset($parent_bean->name)?$parent_bean->name:'';
+            $this->bean->source_number = isset($parent_bean->wo_number)?$parent_bean->wo_number:'';
+            $this->bean->source_type = isset($parent_bean->event_type)?$parent_bean->event_type:'';
+            $this->bean->source_class = '';
+        }
+    }
 }
 
 function displayLineItems(){

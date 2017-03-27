@@ -56,7 +56,7 @@ function createRevenueFromContract($contractId,$type){
 //where Clause
 		"aos_products_quotes.parent_type='AOS_Contracts' and aos_products_quotes.parent_id='".$contract->id."'and aos_products_quotes_cstm.deposit_flag_c=0 and aos_products_quotes_cstm.prepay_flag_c=1"
 		);
-	}else if($type==2){
+	}else if($type==2){ 
 		
 	$quotesBeanList=$productQuoteBean->get_full_list(
 //Order by
@@ -76,7 +76,7 @@ function createRevenueFromContract($contractId,$type){
 	$rawRow['contact_id_c'] = $contract->contact_id;
 	$rawRow['account_id_c'] = $contract->contract_account_id;
 
-if($quotesBeanList){
+   if($quotesBeanList){
 	foreach($quotesBeanList as $quoteBean){
 		if ($quoteBean->settlement_period_c=='Once'&&$quoteBean->final_account_day_c!='') {
 			continue;
@@ -96,8 +96,6 @@ if($quotesBeanList){
 			}
 		}
 		//add by hq 20170310
-		
-
 
 		$rawRow['aos_source_products_quotes_id_c'] = $quoteBean->id;
 		
@@ -127,7 +125,7 @@ if($quotesBeanList){
 		"and hp.end_date>='".$next_account_day_old."'".
 		"and hf.id='".$contract->haa_frameworks_id_c."'";
 		$result=$db->query($sql);
-		$row=$db->fetchByAssoc($result); 
+		$row=$db->fetchByAssoc($result);  
 		$rawRow['period_name']=$row['name']; 
 		//end add by tangqi 20172024
 		$quoteBean->final_account_day_c=$rawRow['event_date'];
@@ -229,4 +227,96 @@ $str=implode(',', $revenues_id);
 }
 
 //end add by tangqi 20172024
+
+
+function getInfoToInvoice($contractId,$type){
+	global $db,$app_list_strings;
+
+    $contract = new AOS_Contracts();
+	$contract->retrieve($contractId);
+	if ($contract->status!='Signed' and $type==0){
+		die('已签约的合同才能创建收支计费项!');
+	}else if ($contract->status!='Signed' and $type==1){
+		die('已签约的合同才能收取预付款!');
+	}else if ($contract->status!='Signed' and $type==2){
+		die('已签约的合同才能收取押金!');
+	}
+	$account=array();
+    $account[]=$contract->contact_id;
+	$account[]=$contract->contract_account_id;
+
+	$productQuoteBean=BeanFactory::getBean('AOS_Products_Quotes');
+	if($type==0){
+	$quotesBeanList=$productQuoteBean->get_full_list(
+//Order by
+		'group_id',
+//where Clause
+		"aos_products_quotes.parent_type='AOS_Contracts' and aos_products_quotes.parent_id='".$contract->id."'and aos_products_quotes_cstm.deposit_flag_c=0 and aos_products_quotes_cstm.prepay_flag_c=0"
+		);
+	}else if($type==1){ //add by tagnqi 20170224
+	$quotesBeanList=$productQuoteBean->get_full_list(
+//Order by
+		'group_id',
+//where Clause
+		"aos_products_quotes.parent_type='AOS_Contracts' and aos_products_quotes.parent_id='".$contract->id."'and aos_products_quotes_cstm.deposit_flag_c=0 and aos_products_quotes_cstm.prepay_flag_c=1"
+		);
+	}else if($type==2){ 
+		
+	$quotesBeanList=$productQuoteBean->get_full_list(
+//Order by
+		'group_id',
+//where Clause
+		"aos_products_quotes.parent_type='AOS_Contracts' and aos_products_quotes.parent_id='".$contract->id."'and aos_products_quotes_cstm.deposit_flag_c=1 and aos_products_quotes_cstm.prepay_flag_c=0"
+		);
+	}
+
+	if($quotesBeanList){
+	foreach($quotesBeanList as $quoteBean){
+		if ($quoteBean->settlement_period_c=='Once'&&$quoteBean->final_account_day_c!='') {
+			continue;
+		}
+		$next_account_day_old=date_format(date_create($quoteBean->next_account_day_c),"Y-m-d");
+		if ($quoteBean->settlement_period_c=='Monthly') {
+			if ($quoteBean->effective_end_c!=''&&$quoteBean->effective_end_c<$next_account_day_old){
+				continue;
+			}
+			else{
+				$next_account_day_new=date('Y-m-d',strtotime("{$next_account_day_old} +1 month"));
+				$quoteBean->next_account_day_c=$next_account_day_new;
+			}
+			$revenues_count = $db->getOne("select count(*) cnt from haos_revenues_quotes where 1=1 and aos_source_products_quotes_id_c='".$quoteBean->id."' and source_code='AOS_Contracts' and source_id='".$contract->id."'");
+			if($revenues_count>=$quoteBean->number_of_periods_c){
+				continue;
+			}
+		}
+		
+		$idArray[]=$quoteBean->id;
+	}
+	}
+	$list=array('value'=>$idArray,'cord'=>$account);
+	return $list;	
+}
+
+
+//add by hq 20170316
+function getMoreInfo($contractId){
+    $return_result = array(
+                  'return_status'=>'S',
+                  'return_msg'=>'',
+                  'return_data'=>array(),
+                  );
+              $err_msg = '';
+
+	require_once('modules/HAOS_Revenues_Quotes/createRevenue.php');
+	$contract = new AOS_Contracts();
+	$contract->retrieve($contractId);
+	 // $return_result['return_data']['cord']=
+	 // $return_result['return_data']['']=
+	 $AccountAndContact = array();
+	 $AccountAndContact[]=$contract->contact_id;
+	 $AccountAndContact[]=$contract->contract_account_id;
+	 $return_result['return_data']['cord']=$AccountAndContact;
+	return  $return_result;
+}
+//end add 20170316
 ?>

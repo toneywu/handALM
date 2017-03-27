@@ -436,7 +436,13 @@ function sync_jt_contracts() {
 				$formula_type_code_val = $line_value['FORMULA_TYPE'];
 				$product_code_val = $line_value['PRODUCT_CODE'];
 				$GLOBALS['log']->infor("合同行标示= " . $contract_line_id_val . ",合同行号=" . $line_num_val . ",物料编码=" . $item_number_val . ",物料名称=" . $inventory_item_name_val."产品数量= ".$quantity_val.'集团产品编码='.$product_code_val);
-				
+
+				//add by liu
+				$contract_price ="";
+				foreach ($line_value['PRICE'] as $price_key => $price_value) {
+					$contract_price.= $price_value['PRICING_ATTR_VALUE_FROM'].'~'.$price_value['PRICING_ATTR_VALUE_TO'].' 合同单价:'.$price_value['OPERAND'].'; ';
+				}
+
 				$sql = 'SELECT count(1) cnt FROM aos_products_quotes INNER JOIN aos_products_quotes_cstm WHERE aos_products_quotes.id = aos_products_quotes_cstm.id_c and aos_products_quotes.deleted=0 AND aos_products_quotes_cstm.product_source_id_c ="' . $contract_line_id_val . '" and aos_products_quotes.parent_id="'.$contact_id.'"';
 				$result = $db->query($sql);
 				$rows = 0;
@@ -470,6 +476,7 @@ function sync_jt_contracts() {
 					$newLineBean->parent_type = 'AOS_Contracts';
 					$newLineBean->product_source_id_c = $contract_line_id_val;
 					$aos_products_quotes_id = create_guid();
+					$newLineBean->contract_price = $contract_price;//add by liu
 					$insert_sql = 'insert into aos_products_quotes(
 									 id
 									,name
@@ -480,7 +487,7 @@ function sync_jt_contracts() {
 									,item_description
 									,parent_id
 									,parent_type
-									,part_number)
+									,part_number,contract_price)
 									 value(
 									 "' . $aos_products_quotes_id . 
 									 '","' . $inventory_item_name_val . 
@@ -492,6 +499,7 @@ function sync_jt_contracts() {
 									  '","' . $contact_id . 
 									  '","' . $newLineBean->parent_type .
 									  '","' . $newLineBean->part_number .
+									  '","' . $newLineBean->contract_price .
 									 '") ';
 						$insert_result = $db->query($insert_sql);
 						$GLOBALS['log']->infor("effective_end_c=".$newLineBean->effective_end_c);
@@ -1048,6 +1056,13 @@ function sync_xr_contracts() {
 				$start_date_active_val = $line_value['START_DATE_ACTIVE'];
 				$end_date_active_val = $line_value['END_DATE_ACTIVE'];
 				$formula_type_code_val = $line_value['FORMULA_TYPE_CODE'];
+
+				//add by liu
+				$contract_price ="";
+				foreach ($line_value['PRICE'] as $price_key => $price_value) {
+					$contract_price.= $price_value['PRICING_ATTR_VALUE_FROM'].'~'.$price_value['PRICING_ATTR_VALUE_TO'].' 合同单价:'.$price_value['OPERAND'].'; ';
+				}
+
 				$GLOBALS['log']->infor("line_id= " . $contract_line_id_val . ",LINE_NUMBER=" . $line_num_val . ",item_number_val=" . $item_number_val . ",inventory_item_name_val=" . $inventory_item_name_val."producty_quantity= ".$quantity_val);
 				//$check_line_exists = BeanFactory :: getBean('AOS_Products_Quotes')->get_full_list('', "aos_products_quotes.product_source_id_c = '$contract_line_id_val'");
 				
@@ -1089,6 +1104,7 @@ function sync_xr_contracts() {
 					$newLineBean->effective_end_c = $end_date_active_val;
 					$newLineBean->parent_type = 'AOS_Contracts';
 					$newLineBean->product_source_id_c = $contract_line_id_val;
+					$newLineBean->contract_price = $contract_price;//add by liu
 					//$newLineBean->save();
 					$aos_products_quotes_id = create_guid();
 					$insert_sql = 'insert into aos_products_quotes(
@@ -1099,7 +1115,7 @@ function sync_xr_contracts() {
 									,product_qty
 									,item_description
 									,parent_id
-									,parent_type,part_number)
+									,parent_type,part_number,contract_price)
 									 value(
 									 "' . $aos_products_quotes_id . 
 									 '","' . $inventory_item_name_val . 
@@ -1110,6 +1126,7 @@ function sync_xr_contracts() {
 									  '","' . $contact_id . 
 									 '","' . $newLineBean->parent_type .
 									 '","' . $newLineBean->part_number .
+									 '","' . $newLineBean->contract_price .
 									 '") ';
 						$insert_result = $db->query($insert_sql);
 						$GLOBALS['log']->infor("insert_aos_products_quotes_sql=".$insert_sql);

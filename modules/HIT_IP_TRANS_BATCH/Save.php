@@ -192,6 +192,7 @@ function save_allocation_lines($trans_line_bean, $parent, $prev_trans_batch_id) 
 												'id' => $trans_line->history_id));		
 				echo "allocation_line_bean = ".$id."<br>";
 				$allocation_line_bean->name = $trans_line->name;
+				$allocation_line_bean->comment = $trans_line->comment;//add by liu
 				$allocation_line_bean->hit_ip_subnets_id = $trans_line->hit_ip_subnets_id;
 				$allocation_line_bean->hit_ip_subnets = $trans_line->hit_ip_subnets;
 				$allocation_line_bean->associated_ip = $trans_line->associated_ip;
@@ -243,6 +244,7 @@ function save_allocation_lines($trans_line_bean, $parent, $prev_trans_batch_id) 
 			//新增行
 			$allocation_line_bean = BeanFactory :: newBean("HIT_IP_Allocations");
 			$allocation_line_bean->name = $trans_line->name;
+			$allocation_line_bean->comment = $trans_line->comment;//add by liu
 			$allocation_line_bean->hit_ip_subnets_id = $trans_line->hit_ip_subnets_id;
 			$allocation_line_bean->hit_ip_subnets = $trans_line->hit_ip_subnets;
 			$allocation_line_bean->associated_ip = $trans_line->associated_ip;

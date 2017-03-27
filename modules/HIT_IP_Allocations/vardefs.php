@@ -674,6 +674,29 @@ $dictionary['HIT_IP_Allocations'] = array (
 			'studio' => 'visible',
 		),
 		
+		'comment' => array (
+			'required' => false,
+			'name' => 'comment',
+			'vname' => 'LBL_COMMENT',
+			'type' => 'varchar',
+			'massupdate' => 0,
+			'no_default' => false,
+			'comments' => '',
+			'help' => '',
+			'importable' => 'true',
+			'duplicate_merge' => 'disabled',
+			'duplicate_merge_dom_value' => '0',
+			'audited' => false,
+			'inline_edit' => true,
+			'reportable' => true,
+			'unified_search' => false,
+			'merge_filter' => 'disabled',
+			'len' => '255',
+			'size' => '20',
+
+			
+		),
+
 		'date_start' => array (
 			'required' => false,
 			'name' => 'date_start',

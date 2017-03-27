@@ -1,12 +1,13 @@
 function initGantt(gantt){
-	var _height=$("body").height()-150;
-	$("#gantt_map").css("height",_height);
+	$height = $(window).height() - $("#gantt_map").offset().top;
+    $('#gantt_map').height($height);
 	$("#gantt_map").css("background","#fff");
 	gantt.config.subscales = [
 		{unit:"year", step:1, date:"%Y" },
 		{unit:"month", step:1, date:"%M" }
 	];
 	gantt.config.date_scale = "%M,%d";
+	gantt.config.scale_height = 50;
 	gantt.config.columns=[
 		{name:"text", label:"任务名称", align:"left", tree:true, width:130,resize:true,
 			template:function(item){
@@ -81,11 +82,10 @@ function initGantt(gantt){
 	gantt.config.grid_resize = true;
 	gantt.config.undo = true;
 	gantt.config.redo = true;
-	if ($("input[name=show-today]").is(":checked")) {
-		var date_to_str = gantt.date.date_to_str(gantt.config.task_date);
-		var dateNow=new Date();
-		var today = new Date(dateNow.getFullYear(),dateNow.getMonth(),dateNow.getDate());
-		gantt.addMarker({
+	var date_to_str = gantt.date.date_to_str(gantt.config.task_date);
+	var dateNow=new Date();
+	var today = new Date(dateNow.getFullYear(),dateNow.getMonth(),dateNow.getDate());
+	if ($("input[name=show-today]").is(":checked")) {gantt.addMarker({
 			start_date: today,
 			css: "today",
 			text: "今天",
@@ -94,21 +94,18 @@ function initGantt(gantt){
 	}
 	$("input[name=show-today]").click(function(){
 		if ($("input[name=show-today]").is(":checked")) {
-			$(".gantt_marker.today").show();
+			gantt.config.show_markers=true;
 		}else{
-			$(".gantt_marker.today").hide();
+			gantt.config.show_markers=false;
 		}
+		gantt.render();
 	});
 
 	$("input[name=show-progress]").click(function(){
 		if ($("input[name=show-progress]").is(":checked")) {
-			gantt.templates.progress_text = function(start, end, task){
-				return "<span style='float:left;'>"+Math.round(task.progress*100)+ "% </span>";
-			};
+			gantt.config.show_progress=true;
 		}else{
-			gantt.templates.progress_text = function(start, end, task){
-				return "";
-			}
+			gantt.config.show_progress=false;
 		}
 		gantt.render();
 	});
@@ -153,27 +150,33 @@ function initGantt(gantt){
 		if(gantt.getPrev(task.id)==null){
 			return "the_top";
 		}
+		if (task.milestone=='1') {
+			return "gantt_milestone";
+		}
 		if (gantt.hasChild(task.id)) {
 			return "has_child";
 		}else{
 			return "not_has_child";
 		}
 	};
-	gantt.attachEvent("onBeforeTaskAdd", function(id,item){
-	   gantt.message("正在保存……请稍后");
-	});
+	
 	gantt.attachEvent("onAfterTaskAdd", function(id,item){
 	    gantt.message("保存成功.");
 	});
-	/*gantt.attachEvent("onBeforeTaskUpdate", function(id,new_item){
-		if (id!="")
-	    	gantt.message("正在更新……请稍后");
-	});
-	gantt.attachEvent("onAfterTaskUpdate", function(id,new_item){
-		if (id!="") {}
-	    	gantt.message("更新成功.");
-	});*/
 }
+
+/*function setMilestone(){
+	$(".gantt_milestone").css("width",30);
+	$(".gantt_milestone").css("height",30);
+	$(".gantt_milestone").css("line-height",30);
+	$(".gantt_milestone.gantt_task_progress").remove();
+	$(".gantt_milestone.gantt_task_progress_drag").remove();
+	$(".gantt_task_drag.task_right").remove();
+	$(".gantt_task_drag.task_left").remove();
+	$(".gantt_link_control.task_right").css("height",30);
+	$(".gantt_link_control.task_left").css("height",30);
+}*/
+
 
 function getTaskFitValue(task){
 	gantt.config.font_width_ratio = 7;
@@ -202,30 +205,7 @@ function getTaskFitValue(task){
 	}
 }
 initGantt(gantt);
-/*工作日*/
-/*$("input[name=show-workday]").click(function(){
-	if($("input[name=show-workday]").is(":checked")){
-		gantt.config.xml_date = "%Y-%m-%d %H:%i:%s";
-		gantt.config.scale_unit = "month";
-		gantt.config.step = 1;
-		gantt.config.date_scale = "%Y , %M";
-		var weekScaleTemplate = function(date){
-			var dateToStr = gantt.date.date_to_str("%d %M");
-			var endDate = gantt.date.add(gantt.date.add(date, 1, "week"), -1, "day");
-			return dateToStr(date) + " - " + dateToStr(endDate);
-		};
-		gantt.config.subscales = [
-			{unit:"week", step:1, template:weekScaleTemplate},
-			{unit:"day", step:1, date:"%D" }
-		];
-		gantt.ignore_time = function(date){//ignore_time没有这个算法
-			if(date.getDay() == 0 || date.getDay() == 6)
-				return true;
-			return false;
-		};
-		gantt.render();
-	}
-});*/
+
 /*主题切换*/
 function changeSkin(name){
 	var link = document.createElement("link");
@@ -242,15 +222,17 @@ function changeSkin(name){
 
 /*年月日切换*/
 function setScaleConfig(value){
+	if(value=="Month")unSetWeekend();
+	else setWeekend();
+	gantt.config.scale_height = 50;
+	gantt.config.step = 1;
 	switch (value) {
 		case "Quarter":
 			gantt.config.scale_unit = "hour";
-			gantt.config.step = 1;
 			gantt.config.date_scale = "%G";
 			gantt.config.min_column_width = 17;
 			gantt.config.duration_unit = "minute";
 			gantt.config.duration_step = 60;
-			gantt.config.scale_height = 50;
 			gantt.config.subscales = [
 				{unit:"day", step:1, date : "%Y年%M%d日"},
 				{unit:"minute", step:15, date : "%i"}
@@ -260,7 +242,6 @@ function setScaleConfig(value){
 			gantt.config.scale_unit = "day";
 			gantt.config.date_scale = "%Y年%M%d日";
 			gantt.config.min_column_width = 50;
-			gantt.config.scale_height = 50;
 			gantt.config.subscales = [
 				{unit:"hour", step:1, date:"%H"}//%i
 			];
@@ -269,8 +250,6 @@ function setScaleConfig(value){
 		break;
 		case "Day-Compact":
 			gantt.config.scale_unit = "day";
-			gantt.config.scale_height = 50;
-			gantt.config.step = 1;
 			gantt.config.date_scale = "%d";
 			gantt.config.subscales = [
 			{unit:"month", step:1, date:"%Y年%M" },
@@ -280,8 +259,6 @@ function setScaleConfig(value){
 		break;
 		case "Day-Mid":
 			gantt.config.scale_unit = "day";
-			gantt.config.scale_height = 50;
-			gantt.config.step = 1;
 			gantt.config.date_scale = "%d";
 			gantt.config.subscales = [
 			{unit:"month", step:1, date:"%Y年%M" },
@@ -291,8 +268,6 @@ function setScaleConfig(value){
 		break;
 		case "Day":
 			gantt.config.scale_unit = "day";
-			gantt.config.scale_height = 50;
-			gantt.config.step = 1;
 			gantt.config.date_scale = "%d";
 			gantt.config.subscales = [
 			{unit:"month", step:1, date:"%Y年%M" },
@@ -307,22 +282,18 @@ function setScaleConfig(value){
 				return dateToStr(date) + " - " + dateToStr(endDate);
 			};
 			gantt.config.scale_unit = "week";
-			gantt.config.step = 1;
 			gantt.templates.date_scale = weekScaleTemplate;
 			gantt.config.subscales = [
 			{unit:"day", step:1, date:"%D" }];
-			gantt.config.scale_height = 50;
 		break;
 		case "Month":
+			restoreConfig();
 			gantt.config.scale_unit = "year";
-			gantt.config.step = 1;
 			gantt.config.date_scale = "%Y年";
 			gantt.config.min_column_width = 50;
-			gantt.config.scale_height = 50;
 			gantt.templates.date_scale = null;
 			gantt.config.subscales = [
 			{unit:"month", step:1, date:"%M" }];
-			restoreConfig();
 		break;
 		case "Auto":
 			zoomToFit();
@@ -350,9 +321,11 @@ gantt.attachEvent("onTemplatesReady", function(){
 	toggle.onclick = function() {
 		if (!gantt.getState().fullscreen) {
 			gantt.expand();
+			gantt.getState().fullscreen=false;
 			$("#ajaxHeader").addClass("hidden");
 		}else {
 			gantt.collapse();
+			gantt.getState().fullscreen=true;
 			$("#ajaxHeader").removeClass("hidden");
 		}
 	};
@@ -384,7 +357,7 @@ $("#toolbar-btn-movedown").click(function(){
 		gantt.updateTask(task.id);
 	}
 	var actions = {
-		"toolbar-btn-moveup": function indent(task_id){
+		"toolbar-btn-movedown": function indent(task_id){
 			var prev_id = gantt.getPrevSibling(task_id);
 			while(gantt.isSelectedTask(prev_id)){
 				var prev = gantt.getPrevSibling(prev_id);
@@ -402,7 +375,7 @@ $("#toolbar-btn-movedown").click(function(){
 			}
 			return null;
 		},
-		"toolbar-btn-movedown": function outdent(task_id){
+		"toolbar-btn-moveup": function outdent(task_id){
 			var cur_task = gantt.getTask(task_id);
 			var old_parent = cur_task.parent;
 			if (gantt.isTaskExists(old_parent) && old_parent != gantt.config.root_id){
@@ -442,16 +415,16 @@ $("#toolbar-btn-movedown").click(function(){
 	};
 })();
 
-gantt.config.highlight_critical_path = true;
+//gantt.config.highlight_critical_path = true;
 /*关键路径*/
-$("input[name=show-CP]").click(function(){
+/*$("input[name=show-CP]").click(function(){
 	if ($("input[name=show-CP]").is(":checked")) {
 		gantt.config.highlight_critical_path = true;
 	}else{
 		gantt.config.highlight_critical_path = false;
 	}
 	gantt.render();
-});
+});*/
 
 var cachedSettings = {};
 function saveConfig() {
@@ -587,14 +560,14 @@ function setWeekend(){
 
 function unSetWeekend(){
 	gantt.templates.scale_cell_class = function(date){
-		return "";
+		return "hidden";
 	}
 	gantt.templates.task_cell_class = function(item,date){
-		return "";
+		return "hidden";
 	};
 }
 $("input[name=show-weekends]").click(function(){
-	if ($("input[name=show-weekends]").is(":checked")) {
+	if ($("input[name=show-weekends]").is(":checked")&&gantt.config.scale_unit!="year") {
 		setWeekend();
 	}else{
 		unSetWeekend();
@@ -633,6 +606,17 @@ gantt.attachEvent("onParse", function(){
 	
 $(function(){
 	saveConfig();
-	zoomToFit();
+	if (taskData.data!="") {
+		zoomToFit();
+	}
 	$(".gantt_task_cell.weekend").removeClass("weekend");
+	resizeContent();
+	$(window).resize(function() {
+        resizeContent();
+    });
 });
+	
+function resizeContent() {
+    $height = $(window).height() - $("#gantt_map").offset().top;
+    $('#gantt_map').height($height);
+}

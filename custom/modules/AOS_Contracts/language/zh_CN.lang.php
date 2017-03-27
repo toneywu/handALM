@@ -42,4 +42,5 @@ $mod_strings = array (
   'LBL_COLLECT_PREPAY'=>'收取预付款',
   'LBL_DEPOSIT_FLAG_C'=>'是否押金',
   'LBL_PREPAY_FLAG_C'=>'是否预付',
+  'LBL_CONTRACT_PRICE' => '价格说明',
 );
