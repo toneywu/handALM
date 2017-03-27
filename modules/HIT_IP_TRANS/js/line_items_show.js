@@ -1,10 +1,13 @@
 //必须要这个
 if(typeof IPSubnetCalculator=="undefined"){
-$.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");	
+$.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js"); 
 }
 
 var prodln = 0;
 if(typeof sqs_objects == 'undefined'){var sqs_objects = new Array;}
+//add liu
+resizeContent();
+
 
 function insertTransLineHeader(tableid){
   $("#line_items_label").hide();//隐藏SugarCRM字段
@@ -92,35 +95,35 @@ function insertLineData(asset_trans_line ){ //将数据写入到对应的行字�
   console.log(asset_trans_line);
   var ln = 0;
   if(asset_trans_line.id != '0' && asset_trans_line.id !== ''){
-    ln = insertTransLineElements("lineItems");
+    ln = insertTransLineElements("lineItems1");
     //alert(asset_trans_line.hit_ip_subnets);
     
-	
-	$.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js", function(data, status, jqxhr) {
-		ip_splited = asset_trans_line.hit_ip_subnets.split("/");
-		if (IpSubnetCalculator.isIp(ip_splited[0])) {
-		   var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1]);
-		   var associated_ip= ip_caled.ipLowStr+"~"+ip_caled.ipHighStr;
-		   //显示IP细节信息，由IpSubnetCalculator.js完成算法
-		   $("#line_associated_ip"+ln).html(associated_ip);
-		   $("#displayed_line_associated_ip"+ln).html(associated_ip);
-		   console.log("associated_ip = "+asset_trans_line.hit_ip_subnets);
-	  }
+  
+  $.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js", function(data, status, jqxhr) {
+    ip_splited = asset_trans_line.hit_ip_subnets.split("/");
+    if (IpSubnetCalculator.isIp(ip_splited[0])) {
+       var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1]);
+       var associated_ip= ip_caled.ipLowStr+"~"+ip_caled.ipHighStr;
+       //显示IP细节信息，由IpSubnetCalculator.js完成算法
+       $("#line_associated_ip"+ln).html(associated_ip);
+       $("#displayed_line_associated_ip"+ln).html(associated_ip);
+       console.log("associated_ip = "+asset_trans_line.hit_ip_subnets);
+    }
 
-	});
-	
-	
-	/*if(typeof IpSubnetCalculator=="undefined"){
-		$.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
-		if (IpSubnetCalculator.isIp(ip_splited[0])) {
-		   var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1]);
-		   var associated_ip= ip_caled.ipLowStr+"~"+ip_caled.ipHighStr;
-		   //显示IP细节信息，由IpSubnetCalculator.js完成算法
-		   $("#line_associated_ip"+ln).html(associated_ip);
-		   $("#displayed_line_associated_ip"+ln).html(associated_ip);
-	  }
-	}*/
-	
+  });
+  
+  
+  /*if(typeof IpSubnetCalculator=="undefined"){
+    $.getScript("custom/resources/IPSubnetCalculator/lib/ip-subnet-calculator.js");
+    if (IpSubnetCalculator.isIp(ip_splited[0])) {
+       var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1]);
+       var associated_ip= ip_caled.ipLowStr+"~"+ip_caled.ipHighStr;
+       //显示IP细节信息，由IpSubnetCalculator.js完成算法
+       $("#line_associated_ip"+ln).html(associated_ip);
+       $("#displayed_line_associated_ip"+ln).html(associated_ip);
+    }
+  }*/
+  
     
     $("#line_parent_ip".concat(String(ln))).val(asset_trans_line.parent_ip);
     $("#line_hit_ip_subnets".concat(String(ln))).val(asset_trans_line.hit_ip_subnets);
@@ -152,8 +155,8 @@ function insertLineData(asset_trans_line ){ //将数据写入到对应的行字�
     $("#line_date_end".concat(String(ln))).val(asset_trans_line.date_end);
     $("#line_enable_action".concat(String(ln))).val(asset_trans_line.enable_action);
     $("#line_broadband_type".concat(String(ln))).val(asset_trans_line.broadband_type);
-	$("#line_child_port".concat(String(ln))).val(asset_trans_line.child_port);
-	$("#line_vlan_channel".concat(String(ln))).val(asset_trans_line.vlan_channel);
+  $("#line_child_port".concat(String(ln))).val(asset_trans_line.child_port);
+  $("#line_vlan_channel".concat(String(ln))).val(asset_trans_line.vlan_channel);
     renderTransLine(ln);
   }
 }
@@ -225,8 +228,8 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<td><span name='displayed_line_access_assets_backup_name[" + prodln + "]' id='displayed_line_access_assets_backup_name" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_port[" + prodln + "]' id='displayed_line_port" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_port_backup[" + prodln + "]' id='displayed_line_port_backup" + prodln + "'></span></td>"+
-	  "<td><span name='displayed_line_child_port[" + prodln + "]' id='displayed_line_child_port" + prodln + "'></span></td>"+
-	  "<td><span name='displayed_line_vlan_channel[" + prodln + "]' id='displayed_line_vlan_channel" + prodln + "'></span></td>"+
+    "<td><span name='displayed_line_child_port[" + prodln + "]' id='displayed_line_child_port" + prodln + "'></span></td>"+
+    "<td><span name='displayed_line_vlan_channel[" + prodln + "]' id='displayed_line_vlan_channel" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_bandwidth_type[" + prodln + "]' id='displayed_line_bandwidth_type" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_speed_limit[" + prodln + "]' id='displayed_line_speed_limit" + prodln + "'></span></td>"+
       "<td><span name='displayed_line_hat_assets_cabinet[" + prodln + "]' id='displayed_line_hat_assets_cabinet" + prodln + "'></span></td>"+
@@ -254,13 +257,13 @@ function insertTransLineElements(tableid) { //创建界面要素
   x.id = 'asset_trans_editor' + prodln;
   x.style = "display:none";
   x.innerHTML  = "<td colSpan='19'><div class='lineEditor'>"+
-	  //C段
-	  "<label>"+"C段"+"</label>"+
-	  "<input style='width:78px;' type='hidden' readonly='readonly' name='line_parent_ip[" + prodln + "]' id='line_parent_ip" + prodln + "'  value='' title=''>"+
-	  "<span id='line_parent_ip_displayed" + prodln + "' ></span>"+
-	  "</span>"+
-	  
-  	  //网段
+    //C段
+    "<label>"+"C段"+"</label>"+
+    "<input style='width:78px;' type='hidden' readonly='readonly' name='line_parent_ip[" + prodln + "]' id='line_parent_ip" + prodln + "'  value='' title=''>"+
+    "<span id='line_parent_ip_displayed" + prodln + "' ></span>"+
+    "</span>"+
+    
+      //网段
       "<span class='input_group'>"+
       "<label>"+"网段"+"<span class='required'>*</span></label>"+
       //Lov描述
@@ -277,7 +280,7 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<span id='line_associated_ip_displayed" + prodln + "' ></span>"+
       "</span>"+
 
-  	   //掩码
+       //掩码
       "<span class='input_group'>"+
       "<label>"+"掩码"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_mask[" + prodln + "]' id='line_mask" + prodln + "' maxlength='50' value='' title=''>"+
@@ -299,17 +302,17 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<label>"+"端口"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_port[" + prodln + "]' id='line_port" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
-	  //端口(备)
+    //端口(备)
       "<span class='input_group'>"+
       "<label>"+"端口(备)"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_port_backup[" + prodln + "]' id='line_port_backup" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
-	  //子端口
+    //子端口
       "<span class='input_group'>"+
       "<label>"+"子端口"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_child_port[" + prodln + "]' id='line_child_port" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
-	  //vlan通道
+    //vlan通道
       "<span class='input_group'>"+
       "<label>"+"VLAN通道"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_vlan_channel[" + prodln + "]' id='line_vlan_channel" + prodln + "' maxlength='50' value='' title=''>"+
@@ -343,7 +346,7 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<label>"+"监控链接(主)"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_monitoring[" + prodln + "]' id='line_monitoring" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
-	  //监控链接(备)
+    //监控链接(备)
       "<span class='input_group'>"+
       "<label>"+"监控链接(备)"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_monitoring_backup[" + prodln + "]' id='line_monitoring_backup" + prodln + "' maxlength='50' value='' title=''>"+
@@ -353,7 +356,7 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<label>"+"频道号(主)"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_channel_num[" + prodln + "]' id='line_channel_num" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
-	  //频道号(备)
+    //频道号(备)
       "<span class='input_group'>"+
       "<label>"+"频道号(备)"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_channel_num_backup[" + prodln + "]' id='line_channel_num_backup" + prodln + "' maxlength='50' value='' title=''>"+
@@ -363,7 +366,7 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<label>"+"频道内容(主)"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_channel_content[" + prodln + "]' id='line_channel_content" + prodln + "' maxlength='50' value='' title=''>"+
       "</span>"+
-	  //频道内容(备)
+    //频道内容(备)
       "<span class='input_group'>"+
       "<label>"+"频道内容(备)"+"</label>"+
       "<input style=' width:153px;' type='text' name='line_channel_content_backup[" + prodln + "]' id='line_channel_content_backup" + prodln + "' maxlength='50' value='' title=''>"+
@@ -379,7 +382,7 @@ function insertTransLineElements(tableid) { //创建界面要素
       "<input type='hidden' name='line_access_assets_id[" + prodln + "]' id='line_access_assets_id" + prodln + "' value=''>"+
       "<button id='btn_line_access_assets_name" + prodln + "' title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='button' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openAccessAssetNamePopup(" + prodln + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>"+
       "</span>"+
-	  //接入设备(备)
+    //接入设备(备)
       "<span class='input_group'><label>"+"接入设备(备)"+"</label>"+
       "<input class='sqsEnabled' autocomplete='off' type='text' style='width:153px;' name='line_access_assets_backup_name[" + prodln + "]' id='line_access_assets_backup_name" + prodln + "' value='' title='' onblur='resetAsset("+prodln+")'>"+
       "<input type='hidden' name='line_access_assets_backup_id[" + prodln + "]' id='line_access_assets_backup_id" + prodln + "' value=''>"+
@@ -387,9 +390,9 @@ function insertTransLineElements(tableid) { //创建界面要素
       "</span>"+
       //失效
       "<span class='input_group'>"+
-	 	 "<label>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_ENABLE_ACTION')+" </label>"+
-	  	"<input name='line_enable_action[" + prodln + "]'  type='checkbox' id='line_enable_action" + prodln + "'  value='' title='"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_IP_TYPE')+"' onclick=selectedLine("+prodln+")></input>"+
-	  "</span>"+
+     "<label>"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_ENABLE_ACTION')+" </label>"+
+      "<input name='line_enable_action[" + prodln + "]'  type='checkbox' id='line_enable_action" + prodln + "'  value='' title='"+SUGAR.language.get('HIT_IP_TRANS', 'LBL_IP_TYPE')+"' onclick=selectedLine("+prodln+")></input>"+
+    "</span>"+
       //状态
       "<span class='input_group'>"+
       "<label>"+"状态"+"</label>"+
@@ -445,16 +448,16 @@ function insertTransLineElements(tableid) { //创建界面要素
 }
 
 function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
-	ip_splited = $("#line_hit_ip_subnets"+ln).val().split("/");
-	SUGAR.util.doWhen("typeof IpSubnetCalculator != 'undefined'", function(){
-		  if (IpSubnetCalculator.isIp(ip_splited[0])&&ip_splited[1]<=32&&ip_splited[1]>=0) {
-			   var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1]);
-			   var associated_ip= ip_caled.ipLowStr+"~"+ip_caled.ipHighStr;
-			   //显示IP细节信息，由IpSubnetCalculator.js完成算法
-			   //$("#displayed_line_associated_ip"+ln).html(associated_ip);
-			   $("#line_associated_ip"+ln).val(associated_ip);
-		  }
-		});
+  ip_splited = $("#line_hit_ip_subnets"+ln).val().split("/");
+  SUGAR.util.doWhen("typeof IpSubnetCalculator != 'undefined'", function(){
+      if (IpSubnetCalculator.isIp(ip_splited[0])&&ip_splited[1]<=32&&ip_splited[1]>=0) {
+         var ip_caled = IpSubnetCalculator.calculateSubnetMask(ip_splited[0],ip_splited[1]);
+         var associated_ip= ip_caled.ipLowStr+"~"+ip_caled.ipHighStr;
+         //显示IP细节信息，由IpSubnetCalculator.js完成算法
+         //$("#displayed_line_associated_ip"+ln).html(associated_ip);
+         $("#line_associated_ip"+ln).val(associated_ip);
+      }
+    });
 
   $("#displayed_line_parent_ip"+ln).html($("#line_parent_ip"+ln).val());
   $("#displayed_line_hit_ip_subnets"+ln).html($("#line_hit_ip_subnets"+ln).val());
@@ -496,10 +499,10 @@ function renderTransLine(ln) { //将编辑器中的内容显示于正常行中
   }
 
   if($("#line_status"+ln).val()==""||$("#line_status"+ln).val()=="EFFECTIVE"){
-  	  $("#displayed_line_status"+ln).html(SUGAR.language.get('HIT_IP_TRANS','LBL_EFFECTIVE'));
+      $("#displayed_line_status"+ln).html(SUGAR.language.get('HIT_IP_TRANS','LBL_EFFECTIVE'));
   }else{
-  	 $("#displayed_line_status"+ln).html(SUGAR.language.get('HIT_IP_TRANS','LBL_EFFICACY'));
-  	
+     $("#displayed_line_status"+ln).html(SUGAR.language.get('HIT_IP_TRANS','LBL_EFFICACY'));
+    
   } 
   
 }
@@ -648,8 +651,8 @@ function markLineDeleted(ln, key) {//删除当前行
     removeFromValidate('EditView','line_date_start'+ ln);
     removeFromValidate('EditView','line_date_end'+ ln);
     removeFromValidate('EditView','line_broadband_type'+ ln);
-	removeFromValidate('EditView','line_child_port'+ ln);
-	removeFromValidate('EditView','line_vlan_channel'+ ln);
+  removeFromValidate('EditView','line_child_port'+ ln);
+  removeFromValidate('EditView','line_vlan_channel'+ ln);
   }
   resetLineNum();
 
@@ -675,6 +678,11 @@ function LineEditorClose(ln) {//关闭行编辑器（显示为正常行）
     renderTransLine(ln);
     resetLineNum_Bold();
   }
+}
+//add liu
+function resizeContent() {
+    $width = $(window).width() ;
+    $('#lineItems1').width($width);
 }
 
 function resetLineNum_Bold() {//数行号

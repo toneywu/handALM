@@ -166,7 +166,9 @@ function loopField(fieldName,type){
 		    $("#btn_"+fieldName+i).css({"visibility":"hidden"});
 		    $("#"+fieldName+i).parents('.input_group').hide();//remove(); 
 		    $("#"+fieldName+"_title").hide();//remove(); 
+		    $("#"+fieldName+"_title").parent().remove();
 		    $("#displayed_"+fieldName+i).hide();//remove(); 
+		    $("#displayed_"+fieldName+i).parent().remove();
 		    $("#span_"+fieldName+i).hide();//remove(); 
 		    mark_field_disabled_mine(fieldName+i,false);
 		}

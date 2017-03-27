@@ -34,7 +34,9 @@ class HAA_MenusViewEdit extends ViewEdit
 
 	function displayLineItems(){
 		$focus=$this->bean;
-		$html='<script src="modules/HAA_Menus/line_items.js"></script>
+		$html='
+		<script src="include/javascript/select/bootstrap-select.js"></script>
+		<script src="modules/HAA_Menus/line_items.js"></script>
 		<script src="modules/HAT_Assets/js/editview_icon_picker.js"></script>';
 		echo $html;
 		$html="<table border='0' cellspacing='4' width='100%' id='lineItems' class='listviewtable' style='table-layout: fixed;'></table>";

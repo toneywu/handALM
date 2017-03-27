@@ -153,11 +153,11 @@ function getInfoToInvoice(id,module){
   dataType: "json",
   success:function(data){
           if(data.return_status=='S'){
-            //alert(data.value+';;;'+data.cord); &data='+data.return_data+'
+            //alert(data.value+';;;'+data.cord); &data='+data.return_data+'$rawRow['period_name']
           
             location.href='?module=AOS_Invoices&action=editview&cord='+data.return_data.cord+
             '&amount_c=0&source_code_c=HAOS_Revenues_Quotes&due_date='+data.return_data.event_date+
-            '&name='+data.return_data.name+'&status=Unpaid&revenues_source_code_c='+module+'&revenues_source_code_id='+id;
+            '&period_name_c='+data.return_data.period_name+'&name='+data.return_data.name+'&status=Unpaid&revenues_source_code_c='+module+'&revenues_source_code_id='+id;
           }else{
             BootstrapDialog.alert({
                     type : BootstrapDialog.TYPE_DANGER,

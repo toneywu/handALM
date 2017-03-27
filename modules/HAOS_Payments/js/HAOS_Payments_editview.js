@@ -108,7 +108,24 @@ function editControl(){
 		for(var i=0;i<textareaArrLength;i++){
 			textareaArr[i].disabled=true;
 		}
+		//
+		var invInputArr=$('input[id^="line_invoice_id"]');
+		var invInputArrLength=invInputArr.length;
+		for(var i=0;i<invInputArrLength;i++){
+			invInputArr[i].disabled=false;
+		}
 
+		var lineIdInputArr=$('input[id^="line_id"]');
+		var lineIdInputArrLength=lineIdInputArr.length;
+		for(var i=0;i<lineIdInputArrLength;i++){
+			lineIdInputArr[i].disabled=false;
+		}
+
+		var lineDelInputArr=$('input[id^="line_deleted"]');
+		var lineDelInputArrLength=lineDelInputArr.length;
+		for(var i=0;i<lineDelInputArrLength;i++){
+			lineDelInputArr[i].disabled=false;
+		}
 		// var spanArr=$('.datetimepicker.datetimepicker-dropdown-bottom-right.dropdown-menu');
 		// var spanArrLength=spanArr.length;
 		// for(var i=0;i<spanArrLength;i++){

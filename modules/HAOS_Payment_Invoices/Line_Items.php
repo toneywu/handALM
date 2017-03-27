@@ -18,7 +18,7 @@ function display_lines($focus, $field, $value, $view){
 
          if($focus->id != '') { //如果不是新增（即如果是编辑已有记录）
          	$sql = "SELECT
-         	payl.id,
+         	 payl.id,
            payl.haos_payments_id_c payment_name,
            payl.aos_invoices_id_c invoice_id,
            ainv.number invoice_number,

@@ -21,6 +21,20 @@ $subpanel_layout['list_fields'] = array (
     'width' => '15%',
     'default' => true,
   ),
+  'gateway' => 
+  array (
+    'type' => 'varchar',
+    'vname' => 'LBL_GATEWAY',
+    'width' => '7%',
+    'default' => true,
+  ),
+  'mask' => 
+  array (
+    'type' => 'varchar',
+    'vname' => 'LBL_MASK',
+    'width' => '7%',
+    'default' => true,
+  ),
   'hat_asset_name' => 
   array (
     'type' => 'varchar',

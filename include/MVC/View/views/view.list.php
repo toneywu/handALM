@@ -153,7 +153,20 @@ class ViewList extends SugarView
         }
 
         $this->seed = $this->bean;
-
+        global $db;
+        //Add by zhangling 20170323
+        //echo $_REQUEST['haa_ff_id'];
+        if(!empty($_REQUEST['haa_ff_id'])){
+            //$ff_bean = BeanFactory::getBean('HAA_FF',$_REQUEST['haa_ff_id']);
+            $sql='select field,fieldtype from haa_ff_fields where haa_ff_id = "'.$_REQUEST['haa_ff_id'].'" and deleted=0;';
+            $db->query($sql);
+            $result = $db->query($sql);
+            $fields = array();
+            while ($row = $db->fetchByAssoc($result)) {
+                $fields[$row['field']]=$row['fieldtype'];
+            }
+        }
+        //End Add by zhangling 20170323
         $displayColumns = array();
         if (!empty($_REQUEST['displayColumns'])) {
             foreach (explode('|', $_REQUEST['displayColumns']) as $num => $col) {
@@ -162,8 +175,15 @@ class ViewList extends SugarView
             }
         } else {
             foreach ($this->listViewDefs[$module] as $col => $this->params) {
-                if (!empty($this->params['default']) && $this->params['default'])
-                    $displayColumns[$col] = $this->params;
+                //Modified by zhangling 20170323
+                if (!empty($this->params['default']) && $this->params['default']){
+                    if(isset($fields[strtolower($col)])&&$fields[strtolower($col)]=='HIDE'){
+                        $this->params['default']=false;
+                    }else{
+                        $displayColumns[$col] = $this->params;
+                    }
+                }
+                //End modified by zhangling 20170323
             }
         }
         $this->params = array('massupdate' => true);

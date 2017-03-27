@@ -266,8 +266,7 @@ class AOS_InvoicesViewEdit extends ViewEdit {
    		}//end add 20170317 同步结算   	
    		
    		$cord=$_GET['cord'];
-        //var_dump( $cord);
-        //var_dump($_GET["data"]);
+        if(isset($cord)){
    		$cord_array=preg_split('/,/', $cord);
         //var_dump($cord_array);
    		$accounts=BeanFactory::getBean('Accounts',$cord_array[1]);
@@ -277,8 +276,8 @@ class AOS_InvoicesViewEdit extends ViewEdit {
    		document.getElementById('billing_account_id').value='".$cord_array[1]."';
    		document.getElementById('billing_contact').value='".$contacts->name."';
    		document.getElementById('billing_contact_id').value='".$cord_array[0]."';
-   		document.getElementById('billing_contact_number').value='".$contacts->employee_number_c."';
-   	</script>";
+   		document.getElementById('billing_contact_number').value='".$contacts->employee_number_c."';</script>";
+   		}
    	if (isset($_GET["name"])) {
    		$name=$_GET['name'];
    		echo "<script>
@@ -345,17 +344,32 @@ if (isset($_GET["source_reference_c"])) {
 			$('#status').val('".$this->bean->status."');
 			$('#amount_c').val('".$this->bean->amount_c."');
 			$('#unpaied_amount_c').attr('readonly',true);
+			$('#return_deposit_date_c').val('".$this->bean->return_deposit_date_c."');
 			document.getElementById('period_name_c').value='".$this->bean->period_name_c."';
 		</script>";
+		echo '<script type="text/javascript">
+
+		var Datetimepicker=$("#span_return_deposit_date_c");
+		var dateformat="Y-m-d H:M";
+		dateformat = dateformat.replace(/Y/,"yyyy");
+		dateformat = dateformat.replace(/m/,"mm");
+		dateformat = dateformat.replace(/d/,"dd");
+		dateformat = dateformat.split(" ",1);
+		Datetimepicker.datetimepicker({
+			language: "zh_CN",
+			format: dateformat[0],
+			showMeridian: true,
+			minView: 4,
+			todayBtn: true,
+			autoclose: true,
+		});
+	</script>';
 	}
 
 	
 		//add by hq 170301 发票名字	
 	if(isset($_GET["name"]) && !empty($_GET["name"]) && isset($_GET["source_code_c"])){
 		if(($_GET["source_code_c"])=='HAOS_Revenues_Quotes'){
-
-		//$source_code_name = $app_list_strings['AOS_Invoices'][$_GET["source_code_c"]];
-		//var_dump($source_code_name);
 			echo "<script>
 			var invoice_date_for_name = $(\"#invoice_date\").val();
 			var name = '".$_GET["name"]."'+' '+invoice_date_for_name;
@@ -380,12 +394,11 @@ echo "<script>
 $('.datetimepicker.datetimepicker-dropdown-bottom-right.dropdown-menu').click(function(){
 	getPeriod();
 });
-
 </script>";
 		//end 20170301
 
 	//add by hq 20170313 事件类型
-if(isset($_GET["source_code_c"])){
+if(isset($_GET["source_code_c"])){ 
 	$eventtypeInfo = $this->getEventTypeInfo($_GET["source_code_c"]);
 	echo "<script> 
 	$('#event_type_c').val('".$eventtypeInfo['eventTypeName']."');

@@ -46,6 +46,21 @@ function insertLineData(line_data){//将数据写入到对应的行字段中
 		$("#line_id".concat(String(ln))).val(line_data.id);
 		$("#line_field_lable_zhs".concat(String(ln))).val(line_data.field_lable_zhs);
 		$("#line_func_module".concat(String(ln))).val(line_data.func_module);
+		/*var allOptions = $("#line_func_module".concat(String(ln))).children();
+		$(allOptions).each(function(i){
+			//alert($(allOptions[i]).val());
+
+			if($(allOptions[i]).val()==line_data.func_module){
+				$(allOptions[i]).attr('selected', 'true');
+			}
+		});
+		$("#line_func_module"+ln).comboSelect();*/
+		$("#line_func_module".concat(String(ln))).attr('value',line_data.func_module);
+		$("#line_func_module".concat(String(ln))).bootstrapSelect({
+    		downBorder:true,
+    		multiple:false,
+    	}); 
+
 		$("#line_function_name".concat(String(ln))).val(line_data.function_name);//
 		$("#line_function_id".concat(String(ln))).val(line_data.function_id);
 		$("#line_func_icon".concat(String(ln))).val(line_data.func_icon);
@@ -101,7 +116,7 @@ function insertLineElements(tableid,btnadd){
 	"</tr>"+
 	"<tr>"+
 		"<td>"+SUGAR.language.get('HAA_Menus_Lists','LBL_FUNC_MODULE')+":<span class='required'>*</span></td>"+
-		"<td><select type='text' name='line_func_module["+prodln+"]' id='line_func_module"+prodln+"' onchange='setLabel(this,"+prodln+")'>"+modulelist+"</select></td>"+
+		"<td><select type='text' name='line_func_module["+prodln+"]' id='line_func_module"+prodln+"'  class='selectpicker' data-live-search='true' onchange='setLabel(this,"+prodln+")'>"+modulelist+"</select></td>"+
 		"<td>"+SUGAR.language.get('HAA_Menus_Lists','LBL_FUNCTION_NAME')+"</td>"+
 		"<td><input type='text' id='line_function_name"+prodln+"' name='line_function_name["+prodln+"]' value='' maxlength='255' size='30'/>"+
 		"<input type='hidden' id='line_function_id"+prodln+"' name='line_function_id["+prodln+"]' value='' maxlength='255' size='30'/>"+
@@ -153,7 +168,8 @@ function checkValues(ln){
 function renderLine(ln){//将编辑器中的内容显示于正常行中
 	$("#displayed_sort_order"+ln).html($("#line_sort_order"+ln).val());
 	$("#displayed_field_lable_zhs"+ln).html($("#line_field_lable_zhs"+ln).val());
-	$("#displayed_func_module"+ln).html($("#line_func_module"+ln).find("option:selected").text());
+	//$("#displayed_func_module"+ln).html($("#line_func_module"+ln).find("option:selected").text());
+	$("#displayed_func_module"+ln).html($("#line_func_module"+ln).val());
 	$("#displayed_function_name"+ln).html($("#line_function_name"+ln).val());
 	$("#displayed_func_icon"+ln).removeClass();
 	$("#displayed_func_icon"+ln).addClass($("#line_func_icon"+ln).val());
@@ -174,6 +190,7 @@ function openFuncPopup(ln){
 			"id":"line_function_id"+ln,
 			"name":"line_function_name" + ln,
 			"func_icon":"line_func_icon"+ln,
+			"func_module":"line_func_module"+ln,
 			//"haa_frameworks_id_c":"line_frameworks_id_c"+ln,
 		}
 	};
@@ -190,6 +207,14 @@ function setFuncReturn(popupReplyData){
 	set_return(popupReplyData);
 	var label=popupReplyData['name_to_value_array']['line_function_name'+pronum];
 	$("#line_field_lable_zhs"+pronum).val(label);
+	var module_val = popupReplyData['name_to_value_array']['line_func_module'+pronum];
+	$.each(SUGAR.language.languages['app_list_strings']['moduleList'],function(key,value){
+        if(module_val === value){
+            //$("#line_func_module"+pronum).val(key);
+            $('input[name="line_func_module['+pronum+']"]').val(key);
+        }
+      });
+	
 	$.getScript("custom/resources/bootstrap-iconpicker/bootstrap-iconpicker/js/bootstrap-iconpicker.min.js",
 	function () {
 		$('#target_iconpicker'+pronum).iconpicker();

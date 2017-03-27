@@ -331,7 +331,8 @@ class HAM_WO extends HAM_WO_sugar {
 				   ham_work_centers.name work_center_name,
 				   ham_work_centers.id work_center_id,
 				   ham_work_center_people.`name` work_center_people_name,
-				   ham_work_center_people.id work_center_people_id
+				   ham_work_center_people.id work_center_people_id,
+				   ham_wo.date_modified
 				FROM
 				  ham_wo 
 				  LEFT JOIN accounts 
@@ -350,6 +351,7 @@ class HAM_WO extends HAM_WO_sugar {
 
 		$WO_WORK_OBJECT = "";
 		$WO_OWNER = "";
+		$PROCESSING_DATE_STR = "";
 	    while ( $result = $db->fetchByAssoc($beanSEL) ) {
 	    	if (!empty ($result['account_name']))
 				$WO_WORK_OBJECT .= '<a href="index.php?module=Accounts&action=DetailView&record='.$result['account_id'].'">'
@@ -365,11 +367,57 @@ class HAM_WO extends HAM_WO_sugar {
 				$WO_OWNER .= $result['work_center_people_name'];
 			if (!empty ($result['work_center_name']))
 				$WO_OWNER .= "@".$result['work_center_name'];
+
+			//add liu
+			if (!empty ($result['date_modified'])){
+				$PROCESSING_DATE_STR .= $result['date_modified'];
+			}
 		}
 		$WO_fields['WO_WORK_OBJECT'] = $WO_WORK_OBJECT;
 		$WO_fields['WO_OWNER'] = $WO_OWNER;
 
-
+		//add by liu 取最后一道有认领人的工序的认领人 否则取工单下达人
+		$PROCESSING_PEOPLE = "";
+		$sql = "SELECT
+					ham_woop.work_center_people_id,
+					ham_work_center_people.name processing_people
+				FROM
+					ham_woop
+				LEFT JOIN ham_work_center_people ON ham_work_center_people.id = ham_woop.work_center_people_id
+				WHERE
+					ham_woop.ham_wo_id = '".$this->id."'
+				AND ham_woop.work_center_people_id != ''
+				AND ham_woop.deleted = 0
+				ORDER BY
+					ham_woop.woop_number DESC
+				LIMIT 0,1";
+        $result1=$db->query($sql);
+		while($row=$db->fetchByAssoc($result1)){
+			if (!empty ($row['processing_people'])){
+				$PROCESSING_PEOPLE .= $row['processing_people'];
+			}else{
+				$PROCESSING_PEOPLE .= $WO_OWNER;
+			}
+        }
+        $WO_fields['PROCESSING_PEOPLE'] = $PROCESSING_PEOPLE;
+        
+        $sql1 = "SELECT ham_woop.date_actual_finish
+				FROM ham_woop
+				WHERE ham_woop.ham_wo_id ='".$this->id."'
+				AND ham_woop.woop_status = 'COMPLETED'
+				AND ham_woop.deleted = 0
+				ORDER BY
+					ham_woop.woop_number DESC
+				LIMIT 0,1";
+        $result2=$db->query($sql1);
+		while($row1=$db->fetchByAssoc($result2)){
+			if (!empty ($row1['date_actual_finish'])){
+				$PROCESSING_DATE_STR = $row1['date_actual_finish'];
+			}
+        }
+        ; 
+        $PROCESSING_DATE = date("Y-m-d H:i:s",strtotime($PROCESSING_DATE_STR)+8*3600);
+        $WO_fields['PROCESSING_DATE'] = $PROCESSING_DATE;
 
 		return $WO_fields;
 	}

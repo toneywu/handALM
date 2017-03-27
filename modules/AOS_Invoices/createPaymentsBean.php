@@ -171,7 +171,7 @@
   function getMaxPaymentsNum($frm_id){
     global $db;
       $sql="SELECT
-          max(hp.name) maxnum
+          max(hp.name+0) maxnum
         from haos_payments hp
         where hp.deleted = 0
         and hp.haa_frameworks_id_c='".$frm_id."'";

@@ -88,12 +88,11 @@ function createRevenue($revenueRow,$quoteRow){
     $revenue->save();
     $revenue_quote_id=$revenue->id;
 
-//Setting Quote Items
-   
+    //Setting Quote Items
     $quote = new AOS_Products_Quotes();
     $quoteRow['id'] = '';
     $quoteRow['parent_id']=$revenue_quote_id;
-    $quoteRow['parent_type']='HAOS_Revenues_Quotes';
+    $quoteRow['parent_type']='HAOS_Revenues_Quotes';    
     if($quoteRow['line_item_type_c']=='Service'){
         $quoteRow['product_id']='0';
     }

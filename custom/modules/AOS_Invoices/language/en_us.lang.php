@@ -16,4 +16,5 @@ $mod_strings = array (
 	'LBL_DETAIL_PAYMENTS' =>'收付款',
 	'LBL_AOS_INVOICES_SUBPANEL1'=>'收付款',
 	'LBL_HAOS_PAYMENTS_SUBPANEL1'=>'付款明细',
+	 'LBL_RETURN_DEPOSIT' => '退回押金',
 	);

@@ -116,9 +116,27 @@ if (isset($_POST['current_mode'])) {
     $current_mode_sql = " AND hat_assets.enable_it_rack = 1 ";
   } elseif ($_POST['current_mode']=="it") {
     $current_mode_sql = " AND hat_assets.enable_it_ports = 1 ";
+  }elseif ($_POST['current_mode']=="rackasset") {
+    $current_mode_sql = " AND (hat_assets.enable_it_rack = 1 OR hat_assets.enable_linear = 1)";
   }
 }else{
   $current_mode_sql = "";
+}
+//add by liu
+if (isset($_POST['asset_type'])) {
+  if($_POST['asset_type']=="IT_PORT") {
+    $where_asset_type = " AND hat_assets.enable_it_ports = 1 ";
+  } elseif ($_POST['asset_type']=="RACK_ALL") {
+    $where_asset_type = " AND hat_assets.enable_it_rack = 1 ";
+  }elseif ($_POST['asset_type']=="RACK_NOT_ENABLE_PARTIAL") {
+    $where_asset_type = " AND hat_assets.enable_it_rack = 1 
+                          AND hit_racks.enable_partial_allocation = 0";
+  }elseif ($_POST['asset_type']=="RACK_ENABLE_PARTIAL") {
+    $where_asset_type = " AND hat_assets.enable_it_rack = 1 
+                          AND hit_racks.enable_partial_allocation = 1";
+  }
+}else{
+  $where_asset_type = "";
 }
 //add by liu
 if (isset($_POST['defualt_list'])&&$_POST['defualt_list']!="none") {
@@ -184,7 +202,7 @@ if (isset($_POST['defualt_list'])&&$_POST['defualt_list']!="none") {
 $where_limit  = " LIMIT 0,200";
 //echo $select_from.$where_status.$where_asset_name.$where_site_select;
 //
-$SQL_Query = $select_from.$join_using_org.$join_owning_org." WHERE hat_assets.deleted=0 ".$where_status.$where_asset_name.$where_asset_sn.$where_framework.$where_site_select.$where_owning_org.$where_using_org.$where_sql.$current_mode_sql.$where_limit;
+$SQL_Query = $select_from.$join_using_org.$join_owning_org." WHERE hat_assets.deleted=0 ".$where_status.$where_asset_name.$where_asset_sn.$where_framework.$where_site_select.$where_owning_org.$where_using_org.$where_asset_type.$where_sql.$current_mode_sql.$where_limit;
 
 //echo $SQL_Query;
 

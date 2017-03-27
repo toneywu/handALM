@@ -84,9 +84,13 @@ class ProjectPlanner
 		$resData['collections']['links']="";
 		while ($row=$this->db->fetchByAssoc($result)) {
 			$row['open']=$open;
-			if ($row['milestone']=='1') {
+
+/*			if ($row['milestone']=='1') {
 				$row['type']='milestone';
 			}
+*/
+			$row['type']=$row['milestone']=='1'?'milestone':'task';
+
 			$resData['data'][]=$row;
 		}
 		$link_sql="SELECT

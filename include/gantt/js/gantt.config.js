@@ -164,6 +164,8 @@ function initGantt(gantt){
 	    gantt.message("保存成功.");
 	});
 }
+gantt.config.highlight_critical_path=true;
+
 
 /*function setMilestone(){
 	$(".gantt_milestone").css("width",30);

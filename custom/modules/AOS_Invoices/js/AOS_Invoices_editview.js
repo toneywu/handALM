@@ -198,7 +198,7 @@ function returnDeposit(){
 
                 }else{//发票退回押金
                   //获取时间HTMl
-                  $dateHTML = getDateHtml();
+                 $dateHTML = getDateHtml();
                  BootstrapDialog.confirm({
                 size: BootstrapDialog.SIZE_NORMAL,
                 title:"退回押金",
@@ -206,7 +206,7 @@ function returnDeposit(){
                 callback: function(result){
                     if(result) {
                     var return_date = $('#return_date').val();  
-                    //console.log(return_date);
+                    console.log(return_date);
                     $.ajax({
                     url:'index.php?module=AOS_Invoices&action=returnDeposit&to_pdf=true',
                     data:{"invoice_id":invoice_id,"function":"returnDeposit","return_date":return_date},
@@ -216,6 +216,8 @@ function returnDeposit(){
                          if(data2.return_status=='S'){
                             console.log(data2.return_msg);
                             window.location.reload();
+                         }else{
+                          alert(data2.return_msg);
                          }
                         }
                      });
@@ -240,7 +242,7 @@ function getDateHtml(){
   var $html = '<script type="text/javascript" src="custom/resources/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>'+
   '<link rel="stylesheet" type="text/css" href="custom/resources/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">'+  
   '<span class="input-group"><span style="width:350px;" class="input-group date calender" id="span_pay_date" >'+
-  " <label  style=]display:inline-block;width:120px;' >退回押金日期<span class='required'>*</span>: </label>"+
+  " <label  style='display:inline-block;width:120px;' >退回押金日期<span class='required'>*</span>: </label>"+
   ' <input class="date_input" style="width:170px;height:32px;" autocomplete="off"  name="return_date" id="return_date" value="" title="" tabindex="116" type="text" >'+
   ' <span class="input-group-addon">'+
   '     <span class="glyphicon glyphicon-calendar"></span>'+
