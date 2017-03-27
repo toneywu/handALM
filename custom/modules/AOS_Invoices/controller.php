@@ -126,6 +126,7 @@ class AOS_InvoicesController extends SugarController {
 
 	public function post_save()
 	{
+		global $db;
 		//判断状态为未付或部分付款，是否手工录入了关闭日期
 		if ($this->_prevCloseDate==""&&$this->bean->closed_date_c!=""){
 			if ($this->bean->status=="Unpaid"||$this->bean->status=="PartedPaid") {
@@ -152,6 +153,35 @@ class AOS_InvoicesController extends SugarController {
 			$aos_quoteBean->parent_id=$this->bean->id;
 			$aos_quoteBean->parent_type=$this->bean->object_name;
 			$aos_quoteBean->save();
+
+			$sql='select apq.id from aos_products_quotes apq where apq.deleted=0 and apq.parent_id="'.$quote->id.'"';
+			$result = $db->query($sql);
+			$ProductId ='';
+			while ($row =$db->fetchByAssoc($result)) {
+				$ProductId =$row['id'];
+			}
+			if($ProductId){
+			//$product_quote = new AOS_Products_Quotes();
+			// $product_quote->retrieve($ProductId);
+			$product_quote=BeanFactory::getBean('AOS_Products_Quotes',$ProductId);		
+
+			$product_quote->haos_revenues_quotes_id_c=$quote->id;
+			$product_quote->vat=$quoteBean->vat;
+			$product_quote->product_total_price=$quoteBean->product_total_price;
+			$product_quote->product_list_price=$quoteBean->product_list_price;
+			$product_quote->product_unit_price=$quoteBean->product_unit_price;
+			$product_quote->vat_amt=$quoteBean->vat_amt;
+			$product_quote->product_discount=$quoteBean->product_discount;
+			$product_quote->discount=$quoteBean->discount;
+			$product_quote->product_discount_amount=$quoteBean->product_discount_amount;
+			$product_quote->deposit_flag_c=$quoteBean->deposit_flag_c;
+			$product_quote->prepay_flag_c=$quoteBean->prepay_flag_c;
+			$product_quote->item_description=$quoteBean->item_description;
+			$product_quote->description=$quoteBean->description;
+
+			$product_quote->currency_id=$quoteBean->currency_id;
+			$product_quote->save();
+			}
 
 		}
 		parent::post_save();
@@ -186,7 +216,7 @@ class AOS_InvoicesController extends SugarController {
 					'action' => 'index',
 					'error_message' => "勾选发票中存在状态等于已付或部分付款的不可删除",
 					);
-                SugarApplication::redirect('index.php?' . http_build_query($queryParams));
+				SugarApplication::redirect('index.php?' . http_build_query($queryParams));
 			}
 			$invoice_ids = $recordIds;
 		}
@@ -199,11 +229,11 @@ class AOS_InvoicesController extends SugarController {
 				);
 			foreach ($invoice_ids as $invoiceId) {
 				$sql = 'update haos_revenues_quotes
-							set clear_status="Unclear"
-							where aos_invoices_id_c="'.$invoiceId.'"';
+				set clear_status="Unclear"
+				where aos_invoices_id_c="'.$invoiceId.'"';
 				$db->query($sql);
 			}
-            SugarApplication::redirect('index.php?' . http_build_query($queryParams));
+			SugarApplication::redirect('index.php?' . http_build_query($queryParams));
 		}
 	}
 }

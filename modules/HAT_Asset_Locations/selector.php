@@ -391,6 +391,14 @@
 								<label id="using_org_name_label">使用组织</label>
 								<input name="using_org_name" id="using_org_name">
 							</span>
+							<span class="input_group">  
+								<label id="assetType_label">资产类型</label>
+								<select name="asset_type" id="asset_type" class="form-horizontal">
+							     <?php foreach ($app_list_strings['hat_asset_type_list'] as $key => $value) {
+							     	echo '<option value="'.$key.'">'.$value.'</option>';
+							     }?>
+								</select>
+							</span>
 					    <input type="button" id="btn_search" onclick="btn_search_clicked()" value="搜索">
 				</div>
 			</form>

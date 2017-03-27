@@ -113,7 +113,7 @@
 		{assign var="action_menu_location" value="top"}
 		<!--toney.wu20170130 将筛选框旋放置在Head之前-->
 		{include file='themes/MaterialDesignP/include/ListView/ListViewPaginationTop.tpl'}
-		<tr height='20'>
+		<tr height='25'>
 			{if $prerow}
 				<th class="td_alt">&nbsp;</th>
 			{/if}
@@ -155,7 +155,11 @@
 									<a href='javascript:sListView.order_checks("ASC", "{$params.orderBy|default:$colHeader|lower}" , "{$pageData.bean.moduleDir}{"2_"}{$pageData.bean.objectName|upper}{"_ORDER_BY"}")' class='listViewThLinkS1'>
 								{/if}
 							{/if}
+							<!--zhangling 20170322-->
+							<span id="list_{$params.orderBy|default:$colHeader|lower}">
 							{sugar_translate label=$params.label module=$pageData.bean.moduleDir}
+							</span>
+							<!--end zhangling 20170322-->
 							&nbsp;&nbsp;
 							{if $params.orderBy|default:$colHeader|lower == $pageData.ordering.orderBy}
 								{if $pageData.ordering.sortOrder == 'ASC'}

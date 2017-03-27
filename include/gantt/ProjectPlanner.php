@@ -30,7 +30,7 @@ class ProjectPlanner
 			$prj_id=$get['project_id'];
 			$users=$this->loadAssigned();
 			echo $this->loadBaseInfo("dhtmlxgantt_meadow");
-			include('include\gantt\ProjectPlannerLayout.html');
+			include 'include/gantt/ProjectPlannerLayout.html';
 			echo '<script> var users='.json_encode($users).';var prj_id="'.$prj_id.'";var taskData='.$this->loadGanttData($prj_id).';var priority='.$this->loadPriority().'</script>';
 			echo $this->loadExtConfig();
 			echo '<script type="text/javascript">
@@ -80,9 +80,11 @@ class ProjectPlanner
 		WHERE project_task.project_id='".$project_id."'
 			AND project_task.deleted=0";		//sql设置别名映射名称
 		$result=$this->db->query($sql);
-		$resData=array();
+		$resData['data']="";
+		$resData['collections']['links']="";
 		while ($row=$this->db->fetchByAssoc($result)) {
 			$row['open']=$open;
+			$row['type']=$row['milestone']=='1'?'milestone':'task';
 			$resData['data'][]=$row;
 		}
 		$link_sql="SELECT
@@ -95,11 +97,12 @@ class ProjectPlanner
 		LEFT JOIN project_task ON gantt_links.source = project_task.project_task_id 
 			WHERE project_task.project_id ='".$project_id."'";
 		$result=$this->db->query($link_sql);
+		//$links['links']="";
 		while ($row=$this->db->fetchByAssoc($result)) {
 			$links['links'][]=$row;
 		}
 		if (isset($links)) {
-		 $resData['collections']=$links;
+		 	$resData['collections']=$links;
 		}
 		return json_encode($resData);
 	}
@@ -194,7 +197,7 @@ class ProjectPlanner
 		$infoHtml.='<script src="include/gantt/codebase/ext/dhtmlxgantt_fullscreen.js" type="text/javascript" charset="utf-8"></script>';
 		$infoHtml.='<script src="include/gantt/codebase/ext/dhtmlxgantt_multiselect.js" type="text/javascript" charset="utf-8"></script>';
 		$infoHtml.='<script src="include/gantt/codebase/ext/dhtmlxgantt_keyboard_navigation.js" type="text/javascript" charset="utf-8"></script>';
-		$infoHtml.='<script src="http://export.dhtmlx.com/gantt/api.js" type="text/javascript" charset="utf-8"></script>';
+		$infoHtml.='<script src="include/gantt/js/api.js" type="text/javascript" charset="utf-8"></script>';
 		$infoHtml.='<script src="include/gantt/codebase/ext/dhx_file_dnd.js" type="text/javascript" charset="utf-8"></script>';
 		$infoHtml.='<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">';
 		if ($theme) {

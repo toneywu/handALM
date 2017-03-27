@@ -309,6 +309,7 @@ function btn_search_clicked() {
 	  			'target_using_org_id':$('#target_using_org_id').val(),
 	  			'current_mode':$('#current_mode').val(),
 	  			'defualt_list':$('#defualt_list').val(),
+	  			'asset_type':$('#asset_type').val(),
 	  			'owning_org_name':$('#owning_org_name').val()
 	  		},
 	  	success: function (rtn_data) {
